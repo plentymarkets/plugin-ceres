@@ -20,6 +20,11 @@ const TranslationService = (function($)
 
         for (let i = 0; i < tags.length; i++)
         {
+            if (!tags[i].dataset || !tags[i].dataset.translation)
+            {
+                continue;
+            }
+
             const identifier = tags[i].dataset.translation;
 
             if (!identifier || !identifierPattern.test(identifier))

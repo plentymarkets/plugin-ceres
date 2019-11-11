@@ -143,7 +143,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createOrderTotalsWidget()
     {
         $this->twoColumnWidget->createChild("second", "Ceres::OrderTotalsWidget")
-                              ->withSetting("visibleFields", ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
+                              ->withSetting("visibleFields", ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
     }
 
     private function createSeparatorWidget()

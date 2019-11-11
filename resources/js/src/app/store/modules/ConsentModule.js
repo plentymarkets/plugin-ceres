@@ -44,25 +44,25 @@ const mutations =
                 });
             });
 
-            if (window.PlentyConsent)
+            if (window.ConsentManager)
             {
-                window.PlentyConsent.setResponse(state.consents);
+                window.ConsentManager.setResponse(state.consents);
                 state.hasResponse = true;
             }
         },
         initConsents(state)
         {
-            if (window.PlentyConsent)
+            if (window.ConsentManager)
             {
-                state.consents = window.PlentyConsent.getConsents();
-                state.hasResponse = window.PlentyConsent.hasResponse();
+                state.consents = window.ConsentManager.getConsents();
+                state.hasResponse = window.ConsentManager.hasResponse();
             }
         },
         storeConsents(state)
         {
-            if (window.PlentyConsent)
+            if (window.ConsentManager)
             {
-                window.PlentyConsent.setResponse(state.consents);
+                window.ConsentManager.setResponse(state.consents);
                 state.hasResponse = true;
             }
         }
