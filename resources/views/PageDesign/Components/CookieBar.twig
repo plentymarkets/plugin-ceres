@@ -3,7 +3,25 @@
         <div class="container-max" v-if="isVisible">
             <div class="row py-3" v-show="!isExpanded" :class="classes" :style="styles">
                 <div class="col-12 col-md-8">
-                    <p>{{ trans("Ceres::Template.cookieBarHintText") }}</p>
+                    {% autoescape false %}
+                        {% set gtcContent -%}
+                            <a class="text-appearance" href="{{ urls.gtc }}" target="_blank">{{ trans("Ceres::Template.checkoutGtc") }}</a>
+                        {%- endset %}
+
+                        {% set cancellationContent -%}
+                            <a class="text-appearance" href="{{ urls.cancellationRights }}" target="_blank">{{ trans("Ceres::Template.checkoutCancellationRight", {"hyphen": "&shy;"}) }}</a>
+                        {%- endset %}
+
+                        {% set policyContent -%}
+                            <a class="text-appearance" href="{{ urls.privacyPolicy }}" target="_blank">{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
+                        {%- endset %}
+
+                        {% set legalDisclosureContent -%}
+                            <a class="text-appearance" href="{{ urls.legalDisclosure }}" target="_blank">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
+                        {%- endset %}
+
+                        <p>{{ trans("Ceres::Template.cookieBarHintText", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent, "legal": legalDisclosureContent}) }}</p>
+                    {% endautoescape %}
 
                     <div>
                         {% for consentGroup in get_consent_groups() if consentGroup.consents | length > 0 %}
