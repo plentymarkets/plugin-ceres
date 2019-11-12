@@ -4,6 +4,7 @@ const AutoFocusService = require("./services/AutoFocusService");
 
 import { debounce } from "./helper/debounce";
 import Vue from "vue";
+import { getStyle } from "./helper/dom";
 
 // Frontend end scripts
 // eslint-disable-next-line
@@ -199,6 +200,8 @@ function CeresMain()
             $("#searchBox").collapse("hide");
             $("#currencySelect").collapse("hide");
         });
+
+        fixPopperZIndexes();
     });
 }
 
@@ -397,3 +400,21 @@ $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", functi
         window.dispatchEvent(new Event("resize"));
     });
 });
+
+function fixPopperZIndexes()
+{
+    const elements = document.querySelectorAll(".popover.d-none");
+    let counter = elements.length;
+
+    elements.forEach(el =>
+    {
+        let zIndex = parseInt(getStyle(el, "z-index"));
+
+        if (!isNaN(zIndex))
+        {
+            zIndex += --counter;
+
+            el.style.zIndex = zIndex;
+        }
+    });
+}
