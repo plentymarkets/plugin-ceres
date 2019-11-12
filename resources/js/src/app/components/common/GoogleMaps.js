@@ -89,11 +89,6 @@ Vue.component("google-maps-widget",
         {
             createScript()
             {
-                if (document.querySelector("#google-maps-api"))
-                {
-                    return Promise.resolve();
-                }
-
                 return new Promise((resolve, reject) =>
                 {
                     const script = document.querySelector("script#google-maps-api");

@@ -8,6 +8,12 @@ function _call(callback)
 
 export function whenConsented(key, onConsent, onDecline)
 {
+    if (!App.config.global.blockCookies || App.isShopBuilder)
+    {
+        _call(onConsent);
+        return;
+    }
+
     if (window.ConsentManager)
     {
         if (window.ConsentManager.hasResponse())
