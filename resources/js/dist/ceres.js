@@ -55795,12 +55795,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helper_whenConsented__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/whenConsented */ "./resources/js/src/app/helper/whenConsented.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
 
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
-  template: "<div :class=\"aspectRatio\" class=\"maps-component\" ref=\"googleMapsContainer\"></div>",
+  template: "<div :class=\"aspectRatio\" class=\"maps-component position-relative\" ref=\"googleMapsContainer\"><div v-if=\"scriptBlocked\"><slot></slot></div></div>",
   props: {
     googleApiKey: {
       type: String,
@@ -55829,6 +55833,11 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
       default: "prop-xs-3-1"
     }
   },
+  data: function data() {
+    return {
+      scriptBlocked: true
+    };
+  },
   computed: {
     coordinates: function coordinates() {
       var isLatValid = !isNaN(this.lat) && this.lat > -90 && this.lat < 90;
@@ -55848,13 +55857,10 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
     var _this = this;
 
     this.$nextTick(function () {
-      if (!document.querySelector("#google-maps-api")) {
-        _this.createScript().then(function () {
-          return _this.initializeMap();
-        });
-      } else {
-        _this.listenToExistingScript();
-      }
+      _this.createScript().then(function () {
+        _this.initializeMap();
+      }).catch(function () {// Do nothing
+      });
     });
   },
   methods: {
@@ -55862,50 +55868,59 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
       var _this2 = this;
 
       return new Promise(function (resolve, reject) {
-        var script = document.createElement("script");
-        var scriptSource = "https://maps.googleapis.com/maps/api/js?key=".concat(_this2.googleApiKey);
-        script.type = "text/javascript";
-        script.id = "google-maps-api";
-        script.src = scriptSource;
-        script.addEventListener("load", function () {
-          return resolve(script);
-        }, false);
-        script.addEventListener("error", function () {
-          return reject(script);
-        }, false);
-        document.body.appendChild(script);
+        var script = document.querySelector("script#google-maps-api");
+
+        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(script)) {
+          // script already injected...
+          _this2.scriptBlocked = false;
+
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(google)) {
+            // ...but not loaded yet
+            script.addEventListener("load", function () {
+              return resolve(script);
+            }, false);
+          } else {
+            // ..and fully loaded
+            resolve(script);
+          }
+        } else {
+          // script not loaded
+          Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_4__["whenConsented"])("media.googleMaps", function () {
+            _this2.scriptBlocked = false;
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.id = "google-maps-api";
+            script.src = "https://maps.googleapis.com/maps/api/js?key=".concat(_this2.googleApiKey);
+            script.addEventListener("load", function () {
+              return resolve(script);
+            }, false);
+            script.addEventListener("error", function () {
+              return reject(script);
+            }, false);
+            document.body.appendChild(script);
+          }, function () {
+            _this2.scriptBlocked = true;
+          });
+        }
       });
     },
-    listenToExistingScript: function listenToExistingScript() {
-      var _this3 = this;
-
-      var script = document.querySelector("script#google-maps-api");
-
-      if (typeof google === "undefined") {
-        script.addEventListener("load", function () {
-          return _this3.initializeMap();
-        }, false);
-      } else {
-        this.initializeMap();
-      }
-    },
     initializeMap: function initializeMap() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this.coordinates) {
         this.renderMap(this.coordinates);
       } else {
         this.geocodeAddress().then(function (coordinates) {
-          _this4.renderMap(coordinates);
+          _this3.renderMap(coordinates);
         });
       }
     },
     geocodeAddress: function geocodeAddress() {
-      var _this5 = this;
+      var _this4 = this;
 
       return new Promise(function (resolve, reject) {
         new google.maps.Geocoder().geocode({
-          address: _this5.address
+          address: _this4.address
         }, function (results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             resolve({
@@ -69446,6 +69461,46 @@ function orderArrayByKey(array, key, desc) {
 
 /***/ }),
 
+/***/ "./resources/js/src/app/helper/whenConsented.js":
+/*!******************************************************!*\
+  !*** ./resources/js/src/app/helper/whenConsented.js ***!
+  \******************************************************/
+/*! exports provided: whenConsented */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "whenConsented", function() { return whenConsented; });
+function _call(callback) {
+  if (!!callback && typeof callback === "function") {
+    callback();
+  }
+}
+
+function whenConsented(key, onConsent, onDecline) {
+  if (!App.config.global.blockCookies || App.isShopBuilder) {
+    _call(onConsent);
+
+    return;
+  }
+
+  if (window.ConsentManager) {
+    if (window.ConsentManager.hasResponse()) {
+      _call(window.ConsentManager.isConsented(key) ? onConsent : onDecline);
+    } else {
+      document.addEventListener("consent-change", function () {
+        whenConsented(key, onConsent, onDecline);
+      }, {
+        once: true
+      });
+    }
+  } else {
+    _call(onConsent);
+  }
+}
+
+/***/ }),
+
 /***/ "./resources/js/src/app/index.js":
 /*!***************************************!*\
   !*** ./resources/js/src/app/index.js ***!
@@ -73117,17 +73172,14 @@ var getters = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__);
-
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -73197,16 +73249,7 @@ var actions = {};
 var getters = {
   isConsented: function isConsented(state) {
     return function (key) {
-      var groupKey = key.split(".")[0];
-      var consentKey = key.split(".")[1];
-
-      if (consentKey === "*") {
-        return Object.keys(state.consents[groupKey] || {}).some(function (consentKey) {
-          return (state.consents[groupKey] || {})[consentKey];
-        });
-      }
-
-      return (state.consents[groupKey] || {})[consentKey];
+      return !!window.ConsentManager && window.ConsentManager.isConsented(key);
     };
   }
 };
