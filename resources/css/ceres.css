@@ -13646,6 +13646,8 @@ html.ie #thumb-carousel .owl-stage {
 
 .cookie-bar .privacy-settings {
   max-height: 50vh; }
+  .cookie-bar .privacy-settings table tr td:first-child {
+    width: 200px; }
 
 .cookie-bar.out {
   left: 15px;

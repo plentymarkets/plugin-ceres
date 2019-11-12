@@ -13097,6 +13097,11 @@ html.ie {
     .privacy-settings
     {
         max-height: 50vh;
+
+        table tr td:first-child 
+        {
+            width: 200px;
+        }
     }
 
     &.out
@@ -13105,6 +13110,7 @@ html.ie {
         right: auto;
     }
 }
+
 .tooltip {
     pointer-events: none;
 }
