@@ -1,5 +1,5 @@
 {
-    "version"           : "4.3.3",
+    "version"           : "4.3.4",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -14,7 +14,9 @@
     "categories"        : ["3885"],
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
-    "require"           : ["IO"],
+    "require"           : {
+        "IO": ">= 4.3.3"
+    },
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],

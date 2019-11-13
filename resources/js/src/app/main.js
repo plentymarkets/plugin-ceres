@@ -4,6 +4,7 @@ const AutoFocusService = require("./services/AutoFocusService");
 
 import { debounce } from "./helper/debounce";
 import Vue from "vue";
+import { getStyle } from "./helper/dom";
 
 // Frontend end scripts
 // eslint-disable-next-line
@@ -199,6 +200,8 @@ function CeresMain()
             $("#searchBox").collapse("hide");
             $("#currencySelect").collapse("hide");
         });
+
+        fixPopperZIndexes();
     });
 }
 
@@ -327,7 +330,10 @@ if ( headerParent )
         scrollHeaderElements();
     }, 50));
 
-    $(window).scroll(scrollHeaderElements);
+    window.addEventListener("scroll", debounce(function()
+    {
+        scrollHeaderElements();
+    }, 10));
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
@@ -394,3 +400,21 @@ $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", functi
         window.dispatchEvent(new Event("resize"));
     });
 });
+
+function fixPopperZIndexes()
+{
+    const elements = document.querySelectorAll(".popover.d-none");
+    let counter = elements.length;
+
+    elements.forEach(el =>
+    {
+        let zIndex = parseInt(getStyle(el, "z-index"));
+
+        if (!isNaN(zIndex))
+        {
+            zIndex += --counter;
+
+            el.style.zIndex = zIndex;
+        }
+    });
+}

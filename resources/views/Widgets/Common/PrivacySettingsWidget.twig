@@ -1,0 +1,24 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set paddingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set marginClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{{ Twig.component("Ceres::PageDesign.Components.PrivacySettings") }}
+
+<div class="widget widget-privacy-settings widget-{{ appearance }}
+        {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+        {% if marginClasses | length > 0 %} {{ marginClasses }}{% endif %}"
+        {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner">
+        <privacy-settings
+                {% if paddingClasses | length > 0 %} card-class="{{ paddingClasses }}"{% endif %}
+                {% if inlinePadding | length > 0 %} card-style="{{ inlinePadding }}"{% endif %}>
+        </privacy-settings>
+    </div>
+</div>

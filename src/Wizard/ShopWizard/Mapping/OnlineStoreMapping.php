@@ -33,6 +33,12 @@ class OnlineStoreMapping
             "global"   => false,
             "optional" => false,
         ],
+        "onlineStore_categoryTreeDepth" => [
+            "field"    => "header.menu_levels",
+            "type"     => "integer",
+            "global"   => false,
+            "optional" => false,
+        ],
         "onlineStore_toTopButton" => [
             "field"    => "footer.to_top_button",
             "type"     => "string",
@@ -103,6 +109,12 @@ class OnlineStoreMapping
             "field"     => "sessionLifetime",
             "type"      => "integer",
             "global"    => true,
+            "optional"  => false
+        ],
+        "onlineStore_blockCookies" => [
+            "field"     => "global.block_cookies",
+            "type"      => "boolean",
+            "global"    => false,
             "optional"  => false
         ],
         "onlineStore_shippingProfiles" => [

@@ -1,5 +1,21 @@
 # Release Notes for Ceres
 
+## v4.3.4 (2019-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.3...4.3.4" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- In order to use Ceres version 4.3.4, you need to update the plugin IO to its current version 4.3.3.
+
+### Fixed
+
+- The value of order characteristics of the type "selection" is now displayed correctly in the shopping cart.
+- Obsolete settings regarding button sizes are now interpreted correctly.
+- Guest accounts could not access order documents. This has been fixed.
+- After adding items with order characteristics to the shopping cart, the confirmation overlay is now displayed correctly.
+- The assistant stored an invalid value for the setting regarding the position of the shopping cart preview. This has been fixed.
+- The default settings are now correctly loaded in the assistant.
+- The components of item bundles were displayed incorrectly. This has been fixed.
+
 ## v4.3.3 (2019-10-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.2...4.3.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed

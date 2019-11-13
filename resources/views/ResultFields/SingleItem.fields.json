@@ -83,6 +83,7 @@
     "variation.position",
     "variation.releasedAt",
     "variation.unitCombinationId",
+    "variation.unitsContained",
     "variation.weightG",
     "variation.weightNetG",
     "variation.widthMM",
