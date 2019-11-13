@@ -60973,20 +60973,23 @@ vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("tags", {
   methods: {
     getFontColorBasedOnBackground: function getFontColorBasedOnBackground(bgColor) {
       var color = bgColor.charAt(0) === "#" ? bgColor.substring(1, 7) : bgColor;
-      var r = parseInt(color.substring(0, 2), 16);
-      var g = parseInt(color.substring(2, 4), 16);
-      var b = parseInt(color.substring(4, 6), 16);
-      return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? "#000000" : "#FFFFFF";
+      var red = parseInt(color.substring(0, 2), 16);
+      var green = parseInt(color.substring(2, 4), 16);
+      var blue = parseInt(color.substring(4, 6), 16);
+      return red * 0.299 + green * 0.587 + blue * 0.114 > 186 ? "#000000" : "#FFFFFF";
     },
     getStyles: function getStyles(tag) {
-      if (!tag.color) return;
-      return {
-        backgroundColor: tag.color,
-        color: this.getFontColorBasedOnBackground(tag.color)
-      };
+      if (tag.color) {
+        return {
+          backgroundColor: tag.color,
+          color: this.getFontColorBasedOnBackground(tag.color)
+        };
+      }
+
+      return null;
     },
     navigateToSearch: function navigateToSearch(tag) {
-      Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_13__["navigateTo"])('/' + tag.names.name + '_t' + tag.id);
+      Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_13__["navigateTo"])("/" + tag.names.name + "_t" + tag.id);
     }
   }
 });
