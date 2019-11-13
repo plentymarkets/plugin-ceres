@@ -65607,7 +65607,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
           document.body.appendChild(node);
         }
 
-        _this.popper = new popper_js__WEBPACK_IMPORTED_MODULE_3__["default"](_this.$refs.handle, node, {
+        _this.popper = new popper_js__WEBPACK_IMPORTED_MODULE_3__["default"](_this.$refs.handle.firstElementChild || _this.$refs.handle, node, {
           placement: _this.placement,
           modifiers: {
             arrow: {
