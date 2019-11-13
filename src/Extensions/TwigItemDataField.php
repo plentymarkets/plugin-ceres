@@ -3,8 +3,7 @@ namespace Ceres\Extensions;
 
 use IO\Helper\Utils;
 use IO\Helper\SafeGetter;
-use Plenty\Modules\Property\Services\PropertyFileService;
-use Plenty\Plugin\Application;
+use IO\Services\PropertyFileService;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
 use Plenty\Plugin\Templates\Twig;
@@ -80,7 +79,7 @@ class TwigItemDataField extends Twig_Extension
      * @param null $filter
      * @return string
      */
-    public function getDataField($field, $filter = null, $directiveType = "text", $htmlTagType = "span")
+    public function getDataField($field, $filter = null, $directiveType = "text", $htmlTagType = "span", $linkType = "")
     {
         $twigPrint = SafeGetter::get($this->itemData, $field);
         if(!is_null($filter))
@@ -114,14 +113,10 @@ class TwigItemDataField extends Twig_Extension
         {
             $html = '<img src="'.$twigPrint.'" alt="'.$field.'">';
         }
-        elseif ($htmlTagType == 'a')
+        elseif ($htmlTagType == 'a' && $linkType === 'file')
         {
-            /**
-             * @var Application $application
-             */
-            $application = pluginApp(Application::class);
-
-            $html = '<a href="'. $application->getCdnDomain().$application->getPlentyHash().'/'. PropertyFileService::STORAGE .'/'.$twigPrint.'">'. $twigPrint .'</a>';
+            $propertyFileService = pluginApp(PropertyFileService::class);
+            $html = '<a href="'. $propertyFileService->getPropertyFileUrl() . $twigPrint .'" target="_blank">'. $twigPrint .'</a>';
         }
         else
         {

@@ -22,7 +22,7 @@ class PropertyDataFieldProvider extends DataFieldProvider
 
         if($this->property->cast === 'file')
         {
-            $this->addField("value_$propertyId", "Ceres::Widget.dataFieldPropertyValue", "item_data_field('variationProperties.{propertyId, $propertyId}.values.value', null, 'href', 'a')");
+            $this->addField("value_$propertyId", "Ceres::Widget.dataFieldPropertyValue", "item_data_field('variationProperties.{propertyId, $propertyId}.values.value', null, 'href', 'a', 'file')");
         }
         else
         {
