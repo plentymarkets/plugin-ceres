@@ -76,7 +76,18 @@ const getters =
     {
         isConsented: state => (key) =>
         {
-            return !!window.ConsentManager && window.ConsentManager.isConsented(key);
+            const groupKey = key.split(".")[0];
+            const consentKey = key.split(".")[1];
+
+            if (consentKey === "*")
+            {
+                return Object.keys(state.consents[groupKey] || {}).some((consentKey) =>
+                {
+                    return (state.consents[groupKey] || {})[consentKey];
+                });
+            }
+
+            return (state.consents[groupKey] || {})[consentKey];
         }
     };
 

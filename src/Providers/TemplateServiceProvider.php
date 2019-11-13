@@ -285,8 +285,7 @@ class TemplateServiceProvider extends ServiceProvider
                 'provider'      => 'Ceres::Template.consentGoogleMapsProvider',
                 'lifespan'      => 'Ceres::Template.consentGoogleMapsLifespan',
                 'policyUrl'     => 'Ceres::Template.consentGoogleMapsPolicyUrl',
-                'group'         => 'media',
-                'isOptOut'      => true
+                'group'         => 'media'
             ]
         );
     }
