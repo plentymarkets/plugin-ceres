@@ -1,5 +1,58 @@
 # Release Notes für Ceres
 
+## v4.4.0 (2019-11-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.4...4.4.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Der Standardwert für die Einstellung "Kategorieebenen des Kategoriebaums" wurde auf 4 Ebenen festgelegt. Um weiterhin alle 6 Ebenen zu laden, muss die Einstellung angepasst werden. Dies hat unter Umständen negative Auswirkungen auf die Performance des Webshops.
+
+### Hinzugefügt
+
+- Es wurde ein CookieBar-Widget zum ShopBuilder hinzugefügt.
+- Es wurde ein Datenschutzeinstellungen-Widget zum ShopBuilder hinzugefügt.
+- Mit dem Widget "Weitere Informationen" wurde ein neues Strukturelement hinzugefügt, um Inhalte in einem Popover darstellen zu können.
+- Es wurde eine Ceres-Einstellung hinzugefügt, um nicht notwendige Cookies zu blockieren, bis der Benutzer der Verwendung zugestimmt hat.
+- Es wurde eine Ceres-Einstellung hinzugefügt, um die Anzahl der Ebenen für die Kategorie-Navigation festzulegen.
+- Die CSS-Klasse .widget-fw wurde hinzugefügt. Mit dieser Klasse können ShopBuilder-Widgets über die gesamte Bildschirmbreite skaliert werden.
+- Die CSS-Klasse .unfixed wurde hinzugefügt. Mit dieser Klasse können ShopBuilder-Widgets im Header gelöst werden, sodass diese beim Scrollen mitlaufen.
+- Es wurde ein abgesicherter Modus eingeführt, um Ceres ohne Änderungen durch Themes oder externe Plugins anzuzeigen.
+- Die Sprachdateien des Webshops sind nun in den Sprachen Französisch, Niederländisch und Polnisch verfügbar.
+- Das Datenfeld "Einheit" wurde zum Datenfeldpicker im ShopBuilder hinzugefügt.
+- Über den ShopBuilder ist es nun möglich, Eigenschaften vom Typ Datei in der Artikelansicht anzuzeigen.
+
+### Geändert
+- In der Lieferlandauswahl wurden die Flaggen für die kanarischen Inseln, die niederländischen Antillen und Ceuta ergänzt.
+- Der **Mehr**-Button in der Auflistung einzelner Artikel im Warenkorb wird nun wieder dargestellt.
+- In den Summen im Warenkorb und Checkout werden Verkaufsgutscheine jetzt oberhalb der Gesammtsumme (Netto) angezeigt.
+- GoogleMaps wird nun erst nach Zustimmung durch den Seitenbesucher geladen.
+- Das Logging von Twig-Fehlern wurde verbessert.
+- Die Layout des Headers wird nun unabhängig von Breakpoints berechnet.
+- Die Standardeinstellung für das Scroll-Verhalten des Sticky-Widgets wurde auf **Scrollt nur innerhalb des Strukturelements** gesetzt.
+- Für die ShopBuilder-Kategorie "Startseite" wird nun bevorzugt der Meta-Titel als Tab-Titel verwendet, sofern dieser hinterlegt ist.
+- Nicht ausgefüllte Felder im Registrierungsformular werden nun in einer Fehlermeldung ausgegeben.
+
+### Behoben
+
+- Durch Änderungen an Filter-, Sortier- oder Artikel pro Seite-Einstellungen auf der mobilen Kategorieansicht wurde das Länderkürzel aus der URL entfernt. Dieses Verhalten wurde behoben.
+- Artikel, für die die Einstellung **Aktionsgutschein/POS-Rabatt: Nur mit Gutschein kaufbar** aktiv ist, können nun nicht mehr gekauft werden, wenn kein Aktionsgutschein eingelöst wurde.
+- Die Artikel-ID von Artikeln im Warenkorb wird nun korrekt ausgegeben.
+- Struktur-Widgets wurden im Header unter bestimmten Umständen nicht korrekt dargestellt. Dieses Verhalten wurde behoben.
+- Bestellmerkmale wurden nach einem Seitenwechsel nicht mehr im Warenkorb angezeigt. Dies wurde behoben.
+- Es wurden Rundungsfehler bei der Preisformatierung behoben.
+- Durch einen Fehler wurde der Preis am Artikel im Warenkorb beim Wechsel zwischen Brutto- und Nettopreis nicht aktualisiert. Dies wurde behoben.
+- Beim Generieren von Artikel- und Varianten-URLs kam es zu Fehlern, wenn die Kategorie des Artikels nicht mehr existierte. Dieses Verhalten wurde behoben.
+- Bei der Verwendung von mehreren FAQ-Widgets auf einer Seite werden die strukturierten Daten nun korrekt zusammengefasst.
+- Durch einen Fehler funktionierte die Weiterleitung des Registrieren-Widgets nicht korrekt. Dies wurde behoben.
+- Beim Hinzufügen eines Artikels aus der Wunschliste zum Warenkorb funktioniert die Mengenangabe nun korrekt.
+- Für Artikelpakete wurde in der Kategorie- und Listenansicht eine prozentuale Ersparnis anstelle des Artikepaket-Badges angezeigt. Dies wurde behoben.
+- Die Preise von Live-Shopping-Artikeln werden nun wieder korrekt angezeigt, wenn weder Angebotspreis noch UVP hinterlegt sind.
+- Auf der Bestellbestätigungsseite kam es teilweise zu falschen Berechnungen. Dies wurde behoben.
+- Durch einen Fehler wurde das TopBar-Widget nicht mehr angezeigt, wenn alle Bestandteile in den Widget-Einstellungen ausgeblendet wurden. Dies wurde behoben.
+- Durch einen Fehler wurden prozentuale Bestellmerkmale nicht richtig ausgegeben. Dies wurde behoben.
+- Der Button zur Anlage einer Retoure wurde im Mein Konto-Bereich nicht angezeigt, wenn dieser nicht mit dem ShopBuilder erstellt wurde. Das Verhalten wurde behoben.
+- Beim AddToBasketOverlay konnte es zu JavaScript-Fehlern kommen. Dieses Verhalten wurde behoben.
+- Bei einem Lieferlandwechsel öffnete sich die Warenkorbvorschau, auch wenn sich der Nutzer bereits im Warenkorb befand. Dieses Verhalten wurde behoben.
+
 ## v4.3.4 (2019-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.3...4.3.4" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO 
