@@ -67681,6 +67681,27 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.filter("numberFormat", function (numb
 
 /***/ }),
 
+/***/ "./resources/js/src/app/filters/propertyFileUrl.filter.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/src/app/filters/propertyFileUrl.filter.js ***!
+  \****************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+
+
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("propertyFileUrl", function (value) {
+  return App.propertyFileUrl + value;
+});
+
+/***/ }),
+
 /***/ "./resources/js/src/app/filters/propertySurcharge.filter.js":
 /*!******************************************************************!*\
   !*** ./resources/js/src/app/filters/propertySurcharge.filter.js ***!
@@ -69656,12 +69677,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_127__ = __webpack_require__(/*! ./filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
 /* harmony import */ var _filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_128__ = __webpack_require__(/*! ./filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
 /* harmony import */ var _filters_propertySurchargeSum_filter__WEBPACK_IMPORTED_MODULE_129__ = __webpack_require__(/*! ./filters/propertySurchargeSum.filter */ "./resources/js/src/app/filters/propertySurchargeSum.filter.js");
-/* harmony import */ var _filters_translate_filter__WEBPACK_IMPORTED_MODULE_130__ = __webpack_require__(/*! ./filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
-/* harmony import */ var _filters_truncate_filter__WEBPACK_IMPORTED_MODULE_131__ = __webpack_require__(/*! ./filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
-/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_132__ = __webpack_require__(/*! ./mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
-/* harmony import */ var _mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_133__ = __webpack_require__(/*! ./mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
-/* harmony import */ var _mixins_template_mixin__WEBPACK_IMPORTED_MODULE_134__ = __webpack_require__(/*! ./mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
-/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_135__ = __webpack_require__(/*! ./main */ "./resources/js/src/app/main.js");
+/* harmony import */ var _filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_130__ = __webpack_require__(/*! ./filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
+/* harmony import */ var _filters_translate_filter__WEBPACK_IMPORTED_MODULE_131__ = __webpack_require__(/*! ./filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
+/* harmony import */ var _filters_truncate_filter__WEBPACK_IMPORTED_MODULE_132__ = __webpack_require__(/*! ./filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
+/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_133__ = __webpack_require__(/*! ./mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
+/* harmony import */ var _mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_134__ = __webpack_require__(/*! ./mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
+/* harmony import */ var _mixins_template_mixin__WEBPACK_IMPORTED_MODULE_135__ = __webpack_require__(/*! ./mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_136__ = __webpack_require__(/*! ./main */ "./resources/js/src/app/main.js");
 // =========================
 // Polyfill's
 // =========================
@@ -69798,6 +69820,7 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_3___default.a;
  // =========================
 // FILTERS
 // =========================
+
 
 
 
