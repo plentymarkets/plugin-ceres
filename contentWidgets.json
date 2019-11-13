@@ -27,8 +27,8 @@
                     "rebate",
                     "shippingCostsNet",
                     "shippingCostsGross",
-                    "totalSumNet",
                     "promotionCoupon",
+                    "totalSumNet",
                     "vats",
                     "totalSumGross",
                     "salesCoupon",
@@ -58,12 +58,12 @@
                             "caption": "Widget.showBasketShippingCostsGross"
                         },
                         {
-                            "value": "totalSumNet",
-                            "caption": "Widget.showBasketTotalSumNet"
-                        },
-                        {
                             "value": "promotionCoupon",
                             "caption": "Widget.showBasketPromotionCoupon"
+                        },
+                        {
+                            "value": "totalSumNet",
+                            "caption": "Widget.showBasketTotalSumNet"
                         },
                         {
                             "value": "vats",
@@ -2393,6 +2393,11 @@
                             "position": 1
                         },
                         {
+                            "value": "fa-info",
+                            "caption": "Widget.widgetIconInfo",
+                            "position": 1
+                        },
+                        {
                             "value": "fa-circle",
                             "caption": "Widget.widgetIconCircle",
                             "position": 1
@@ -2659,6 +2664,11 @@
                             "position": 1
                         },
                         {
+                            "value": "fa-info",
+                            "caption": "Widget.widgetIconInfo",
+                            "position": 1
+                        },
+                        {
                             "value": "fa-circle",
                             "caption": "Widget.widgetIconCircle",
                             "position": 1
@@ -2851,6 +2861,11 @@
                         {
                             "value": "fa-check",
                             "caption": "Widget.widgetIconCheck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-info",
+                            "caption": "Widget.widgetIconInfo",
                             "position": 1
                         },
                         {
@@ -3576,6 +3591,114 @@
                             "value": "btn-lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::PrivacySettingsWidget",
+        "label": "Widget.privacySettingsLabel",
+        "previewImageURL": "/images/widgets/privacy-settings.svg",
+        "type": "static",
+        "categories": [],
+        "position": 1200,
+        "widgetClass": "Ceres\\Widgets\\Common\\PrivacySettingsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
                         }
                     ]
                 }
@@ -4746,6 +4869,91 @@
         }
     },
     {
+        "identifier": "Ceres::CookieBarWidget",
+        "label": "Widget.cookieBarLabel",
+        "previewImageURL": "/images/widgets/cookie-bar.svg",
+        "type": "footer",
+        "categories": [
+            "footer"
+        ],
+        "position": 1200,
+        "widgetClass": "Ceres\\Widgets\\Footer\\CookieBarWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::LegalInformationWidget",
         "label": "Widget.legalInformationLabel",
         "previewImageURL": "/images/widgets/legal-information.svg",
@@ -5503,6 +5711,284 @@
                     "margin": {
                         "type": "spacing",
                         "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::AdditionalInformationWidget",
+        "label": "Widget.additionalInformationLabel",
+        "previewImageURL": "/images/widgets/additional-information.svg",
+        "type": "structure",
+        "categories": [
+            "structure"
+        ],
+        "position": 600,
+        "widgetClass": "Ceres\\Widgets\\Grid\\AdditionalInformationWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "title": {
+                "type": "text",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.additionalInformationTitleLabel"
+                }
+            },
+            "placement": {
+                "type": "select",
+                "defaultValue": "auto",
+                "options": {
+                    "name": "Widget.additionalInformationPlacementLabel",
+                    "tooltipText": "Widget.additionalInformationPlacementTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "auto",
+                            "caption": "Widget.additionalInformationPlacementAuto",
+                            "position": 0
+                        },
+                        {
+                            "value": "top",
+                            "caption": "Widget.additionalInformationPlacementTop",
+                            "position": 1
+                        },
+                        {
+                            "value": "bottom",
+                            "caption": "Widget.additionalInformationPlacementBottom",
+                            "position": 2
+                        },
+                        {
+                            "value": "left",
+                            "caption": "Widget.additionalInformationPlacementLeft",
+                            "position": 3
+                        },
+                        {
+                            "value": "right",
+                            "caption": "Widget.additionalInformationPlacementRight",
+                            "position": 4
+                        }
+                    ]
+                }
+            },
+            "size": {
+                "type": "select",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.additionalInformationSizeLabel",
+                    "tooltipText": "Widget.additionalInformationSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "",
+                            "caption": "Widget.additionalInformationSizeSmall",
+                            "position": 0
+                        },
+                        {
+                            "value": "popover-md",
+                            "caption": "Widget.additionalInformationSizeMedium",
+                            "position": 1
+                        },
+                        {
+                            "value": "popover-lg",
+                            "caption": "Widget.additionalInformationSizeLarge",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
+            "icon": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetIconLabel",
+                    "tooltipText": "Widget.widgetIconTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetIconNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "fa-check",
+                            "caption": "Widget.widgetIconCheck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-info",
+                            "caption": "Widget.widgetIconInfo",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-circle",
+                            "caption": "Widget.widgetIconCircle",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-circle-thin",
+                            "caption": "Widget.widgetIconCircleThin",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-comment-o",
+                            "caption": "Widget.widgetIconComment",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-credit-card",
+                            "caption": "Widget.widgetIconCreditcard",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-envelope-o",
+                            "caption": "Widget.widgetIconEnvelope",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-heart",
+                            "caption": "Widget.widgetIconHeart",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-thumbs-o-up",
+                            "caption": "Widget.widgetIconThumbsUp",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-euro",
+                            "caption": "Widget.widgetIconEuro",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-dollar",
+                            "caption": "Widget.widgetIconDollar",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-percent",
+                            "caption": "Widget.widgetIconPercent",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-gift",
+                            "caption": "Widget.widgetIconGift",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-truck",
+                            "caption": "Widget.widgetIconTruck",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-phone",
+                            "caption": "Widget.widgetIconPhone",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-copyright",
+                            "caption": "Widget.widgetIconCopyright",
+                            "position": 1
+                        },
+                        {
+                            "value": "fa-registered",
+                            "caption": "Widget.widgetIconRegistered",
+                            "position": 1
+                        }
+                    ]
+                }
+            },
+            "buttonSize": {
+                "type": "select",
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.widgetButtonSizeLabel",
+                    "tooltipText": "Widget.widgetButtonSizeTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "btn-sm",
+                            "caption": "Widget.widgetButtonSizeSm",
+                            "position": 0
+                        },
+                        {
+                            "value": "",
+                            "caption": "Widget.widgetButtonSizeNormal",
+                            "position": 1
+                        },
+                        {
+                            "value": "btn-lg",
+                            "caption": "Widget.widgetButtonSizeLg",
+                            "position": 2
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
                         "options": {
                             "units": [
                                 "px",
@@ -9250,8 +9736,8 @@
                     "rebate",
                     "shippingCostsNet",
                     "shippingCostsGross",
-                    "totalSumNet",
                     "promotionCoupon",
+                    "totalSumNet",
                     "vats",
                     "totalSumGross",
                     "salesCoupon",
@@ -9281,12 +9767,12 @@
                             "caption": "Widget.showBasketShippingCostsGross"
                         },
                         {
-                            "value": "totalSumNet",
-                            "caption": "Widget.showBasketTotalSumNet"
-                        },
-                        {
                             "value": "promotionCoupon",
                             "caption": "Widget.showBasketPromotionCoupon"
+                        },
+                        {
+                            "value": "totalSumNet",
+                            "caption": "Widget.showBasketTotalSumNet"
                         },
                         {
                             "value": "vats",

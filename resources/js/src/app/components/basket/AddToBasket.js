@@ -88,6 +88,11 @@ Vue.component("add-to-basket", {
         {
             type: String,
             default: "false"
+        },
+        propQuantity:
+        {
+            type: Number,
+            default: null
         }
     },
     computed:
@@ -251,6 +256,14 @@ Vue.component("add-to-basket", {
         variationOrderQuantity(value)
         {
             if (this.quantity !== value)
+            {
+                this.quantity = value;
+            }
+        },
+
+        propQuantity(value)
+        {
+            if (!isNaN(value))
             {
                 this.quantity = value;
             }

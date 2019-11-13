@@ -24,9 +24,26 @@
 {{ Twig.set("defaultLanguage", Twig.call("services.webstoreConfig.getDefaultLanguage")) }}
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
-<div class="widget-fw top-bar{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
+<div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
         <div class="row mx-0">
+            {% if isPreview and not 
+                enableLogin and not
+                enableRegistration and not
+                enableLanguageSelect and not
+                enableShippingCountrySelect and not
+                enableCurrencySelect and not
+                enableWishList and not
+                enableBasketPreview and
+                searchStyle == "hidden"
+            %}
+                <div class="widget-placeholder w-100 text-dark">
+                    <div>
+                        <p class="title">{{ Twig.trans("Ceres::Widget.topBarPlaceholderTitle") }}</p>
+                        <p class="description">{{ Twig.trans("Ceres::Widget.topBarPlaceholderDescription") }}</p>
+                    </div>
+                </div>
+            {% endif %}
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Header.LeftSide"])) }}
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-shown{% endif %}">
                 {% if searchStyle == "permanent" %}

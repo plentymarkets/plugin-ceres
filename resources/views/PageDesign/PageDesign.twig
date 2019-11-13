@@ -32,6 +32,8 @@
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
 <head>
+    {{ get_consent_scripts(ceresConfig.global.blockCookies) }}
+
     {% include getPartial('head') %}
 
     {% block PartialHead %}

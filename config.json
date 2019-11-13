@@ -136,6 +136,14 @@
                     "options": {
                         "defaultValue": "true"
                     }
+                },
+                "global.block_cookies": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalBlockCookies",
+                    "options": {
+                        "defaultValue": "false"
+                    }
                 }
             }
         },
@@ -351,6 +359,40 @@
                             {
                                 "value": "both",
                                 "caption": "Config.headerBasketValuesBoth"
+                            }
+                        ]
+                    }
+                },
+                "header.menu_levels": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.headerMenuLevelsLabel",
+                    "options": {
+                        "defaultValue": 4,
+                        "selectBoxValues": [
+                            {
+                                "value": 1,
+                                "caption": "Config.headerMenuLevels1"
+                            },
+                            {
+                                "value": 2,
+                                "caption": "Config.headerMenuLevels2"
+                            },
+                            {
+                                "value": 3,
+                                "caption": "Config.headerMenuLevels3"
+                            },
+                            {
+                                "value": 4,
+                                "caption": "Config.headerMenuLevels4"
+                            },
+                            {
+                                "value": 5,
+                                "caption": "Config.headerMenuLevels5"
+                            },
+                            {
+                                "value": 6,
+                                "caption": "Config.headerMenuLevels6"
                             }
                         ]
                     }

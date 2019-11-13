@@ -29,7 +29,7 @@
         <div class="widget-inner">
             <registration
                 template="#vue-registration"
-                backlink="{{ request.get("backlink") | url_encode }}"
+                backlink="{{ Twig.print("request.get('backlink') | url_encode") }}"
                 :shown-fields="{{ shownFields | json_encode }}"
                 :button-size="{{ buttonSize | json_encode }}"
                 :required-fields="{{ requiredFields | json_encode }}">

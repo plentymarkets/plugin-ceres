@@ -340,6 +340,9 @@ $nav-tabs-border-color:             #ddd !default;
 
 
 // Popovers
+$popover-max-width:                 276px !default;
+$popover-max-width-md:              414px !default;
+$popover-max-width-lg:              552px !default;
 $popover-inner-padding:             1px !default;
 
 // Padding applied to the modal body
@@ -11196,6 +11199,11 @@ a:active {
     }
 }
 
+.fa.none {
+    @extend .fa-circle;
+    color: transparent !important;
+}
+
 html {
 	font-size: $font-size-root;
 }
@@ -11574,22 +11582,20 @@ button:focus {
 
 .btn-icon
 {
-	padding: .5rem;
-	
+	padding: .6rem;
 	.fa
 	{
-		width: 14px;
 		text-align: center;
 	}
-	
+
 	&.btn-sm
 	{
-		padding: .2rem;
-		
-		.fa
-		{
-			width: 12px;
-		}
+		padding: .4rem;
+	}
+
+	&.btn-lg
+	{
+		padding: .95rem;
 	}
 
 	&.btn-circle
@@ -13065,6 +13071,46 @@ html.ie {
         border-bottom-color: $popover-header-bg;
     }
 }
+
+.popover .popover-body > [data-builder-child-container]
+{
+    min-width: 190px;
+}
+
+.popover
+{
+    &.popover-md
+    {
+        width: $popover-max-width-md;
+        max-width: $popover-max-width-md;
+    }
+
+    &.popover-lg
+    {
+        width: $popover-max-width-lg;
+        max-width: $popover-max-width-lg;
+    }
+}
+
+.cookie-bar
+{
+    .privacy-settings
+    {
+        max-height: 50vh;
+
+        table tr td:first-child 
+        {
+            width: 200px;
+        }
+    }
+
+    &.out
+    {
+        left: 15px;
+        right: auto;
+    }
+}
+
 .tooltip {
     pointer-events: none;
 }
@@ -13498,18 +13544,11 @@ $border-width: 1px;
 }
 
 // Page Design / Global components
-.unfixed
-{
-	left: 0;
-	right: 0;
-}
-
 .top-bar{
 	@media print {
 		display: none;
 	}
 
-	width: 100%;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
 
@@ -13817,9 +13856,10 @@ $border-width: 1px;
 		}
 	}
 
-	.navbar{
+	.navbar {
 		font-family:$font-family-heading;
 		border-bottom:1px solid darken($gray-lighter2, 2%);
+
 		a {
 			color: $gray-dark;
 			&:hover {
@@ -14387,6 +14427,18 @@ div:not(.top-bar) {
 
 .flag-icon-nn {
 	background-image: url(../images/flags/4x3/no.svg);
+}
+
+.flag-icon-ic {
+	background-image: url(../images/flags/ic.svg);
+}
+
+.flag-icon-ea {
+	background-image: url(../images/flags/ea.svg);
+}
+
+.flag-icon-an {
+	background-image: url(../images/flags/an.svg);
 }
 
 .fixed-top .cmp-country-settings,
@@ -15090,10 +15142,9 @@ html.ie {
 			background: $breadcrumb-bg;
 		}
 		.breadcrumb{
-			max-width: 1200px;
 		    margin: 0 auto;
 		    background: transparent;
-		    padding: .5rem 15px;
+		    padding: .5rem 15px !important;
 		}
 	}
 }
@@ -20573,7 +20624,6 @@ html.ie .widget-grid .widget-inner-stacked {
             margin-bottom: 0;
         }
     }
-
 }
 
 @include media-breakpoint-down(sm)
@@ -20595,6 +20645,11 @@ html.ie .widget-grid .widget-inner-stacked {
             }
         }
     }
+
+    .widget-grid .widget-inner.col-12.widget-stacked-mobile
+    {
+        padding-bottom: 1rem;
+    }
 }
 
 @include media-breakpoint-down(xs)
@@ -20613,26 +20668,73 @@ html.ie .widget-grid .widget-inner-stacked {
     }
 }
 
-#page-header-parent > .widget {
-    max-width: 1200px;
-    width: 100%;
-    background-color: $gray-lightest;
-    
-    &:not(.widget-grid) {
-        max-width: 1170px;
+#page-header-parent {
+
+    > .widget {
+        max-width: 1200px;
+        min-width: 100%;
+        background-color: $gray-lightest;
+        left: 15px;
+        right: 15px;
+
+        &:not(.widget-grid) {
+            max-width: 1170px;
+            min-width: inherit;
+        }
+    }
+}
+
+.header-fw {
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2) !important;
+}
+
+.widget-fw {
+    position: relative;
+    width: 100vw;
+    left: calc(-1 * (100vw - 100%) / 2) !important;
+    right: 0 !important;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none !important;
+
+    &.header-fw {
+        .container-max {
+            max-width: none;
+        }
+    }
+
+    &.top-bar {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+
+    &.widget-grid {
+        width: calc(100vw + 30px) !important;
+        margin-left: -15px;
+    }
+}
+.widget .widget-fw {
+    position: unset;
+    width: unset;
+    left: unset !important;
+    right: unset !important;
+    margin-left: unset;
+    margin-right: unset;
+    max-width: unset !important;
+
+    &.widget-grid {
+        width: unset !important;
+        margin-left: unset;
     }
 }
 
 header .widget
 {
     margin-bottom: 0;
-}
-
-.widget-fw
-{
-    position: relative;
-    width: 100vw;
-    left: calc(-1 * (100vw - 100%) / 2);
 }
 
 .widget-proportional
@@ -20650,7 +20752,6 @@ header .widget
         bottom: 0;
     }
 }
-
 
 @each $breakpoint in map-keys($grid-breakpoints)
 {
@@ -20684,14 +20785,6 @@ header .widget
             padding-bottom: 0;
             min-height: 100%;
         }
-    }
-}
-
-@include media-breakpoint-down(sm)
-{
-    .widget-grid .widget-inner.col-12.widget-stacked-mobile
-    {
-        padding-bottom: 1rem;
     }
 }
 
@@ -20765,6 +20858,7 @@ header .widget
 {
     text-align: justify;
 }
+
 @each $color, $value in $shop-builder-colors
 {
     .widget-#{$color}

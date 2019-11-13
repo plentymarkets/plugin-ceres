@@ -1,0 +1,112 @@
+{
+    "identifier": "Ceres::AdditionalInformationWidget",
+    "label": "Widget.additionalInformationLabel",
+    "previewImageURL": "/images/widgets/additional-information.svg",
+    "type": "structure",
+    "categories": ["structure"],
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Grid\\AdditionalInformationWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "title": {
+            "type": "text",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.additionalInformationTitleLabel"
+            }
+        },
+        "placement": {
+            "type": "select",
+            "defaultValue": "auto",
+            "options": {
+                "name": "Widget.additionalInformationPlacementLabel",
+                "tooltipText": "Widget.additionalInformationPlacementTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "auto",
+                        "caption": "Widget.additionalInformationPlacementAuto",
+                        "position": 0
+                    },
+                    {
+                        "value": "top",
+                        "caption": "Widget.additionalInformationPlacementTop",
+                        "position": 1
+                    },
+                    {
+                        "value": "bottom",
+                        "caption": "Widget.additionalInformationPlacementBottom",
+                        "position": 2
+                    },
+                    {
+                        "value": "left",
+                        "caption": "Widget.additionalInformationPlacementLeft",
+                        "position": 3
+                    },
+                    {
+                        "value": "right",
+                        "caption": "Widget.additionalInformationPlacementRight",
+                        "position": 4
+                    }
+                ]
+            }
+        },
+        "size": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.additionalInformationSizeLabel",
+                "tooltipText": "Widget.additionalInformationSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "",
+                        "caption": "Widget.additionalInformationSizeSmall",
+                        "position": 0
+                    },
+                    {
+                        "value": "popover-md",
+                        "caption": "Widget.additionalInformationSizeMedium",
+                        "position": 1
+                    },
+                    {
+                        "value": "popover-lg",
+                        "caption": "Widget.additionalInformationSizeLarge",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "icon": "@include(icon)",
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacingPadding)"
+    }
+}

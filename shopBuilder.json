@@ -581,6 +581,7 @@
     "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
     "supportedFeatures": {
         "singleItemContent": true,
-        "globalElementsOverride": true
+        "globalElementsOverride": true,
+        "safeMode" : true
     }
 }

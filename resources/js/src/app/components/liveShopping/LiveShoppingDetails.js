@@ -101,7 +101,7 @@ Vue.component("live-shopping-details", {
         setItemPriceRebatePercentage()
         {
             const specialOfferPrice = this.prices.price.price.value;
-            const defaultPrice      = this.prices.rrp.price.value;
+            const defaultPrice      = this.prices.rrp && this.prices.rrp.price.value || 0;
 
             if (defaultPrice === 0)
             {
