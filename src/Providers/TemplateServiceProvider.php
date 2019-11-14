@@ -272,7 +272,8 @@ class TemplateServiceProvider extends ServiceProvider
                     $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
                     return $urlQuery->toAbsoluteUrl();
                 },
-                'group' => 'necessary'
+                'group' => 'necessary',
+                'cookieNames' => ['XSRF-TOKEN']
             ]
         );
 
