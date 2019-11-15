@@ -12,6 +12,13 @@ use Ceres\Widgets\Helper\Factories\Settings\DoubleSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\EditorSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\FileSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\GenericSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\AppearanceSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\OptionalAppearanceSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingMarginSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingPaddingSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingSetting;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SliderSettingFactory;
@@ -290,6 +297,83 @@ class WidgetSettingsFactory
         /** @var EditorSettingFactory $setting */
         $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('codeEditor');
+        return $setting;
+    }
+
+    /**
+     * @return CustomClassSetting
+     */
+    public function createCustomClass()
+    {
+        /** @var CustomClassSetting $setting */
+        $setting = pluginApp(CustomClassSetting::class);
+        $this->settings['customClass'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return AppearanceSetting
+     */
+    public function createAppearance()
+    {
+        /** @var AppearanceSetting $setting */
+        $setting = pluginApp(AppearanceSetting::class);
+        $this->settings['appearance'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return OptionalAppearanceSetting
+     */
+    public function createOptionalAppearance()
+    {
+        /** @var OptionalAppearanceSetting $setting */
+        $setting = pluginApp(OptionalAppearanceSetting::class);
+        $this->settings['appearance'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return IconSetting
+     */
+    public function createIcon()
+    {
+        /** @var IconSetting $setting */
+        $setting = pluginApp(IconSetting::class);
+        $this->settings['icon'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return SpacingSetting
+     */
+    public function createSpacing()
+    {
+        /** @var SpacingSetting $setting */
+        $setting = pluginApp(SpacingSetting::class);
+        $this->settings['spacing'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return SpacingPaddingSetting
+     */
+    public function createSpacingPadding()
+    {
+        /** @var SpacingPaddingSetting $setting */
+        $setting = pluginApp(SpacingPaddingSetting::class);
+        $this->settings['spacing'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return SpacingMarginSetting
+     */
+    public function createSpacingMargin()
+    {
+        /** @var SpacingMarginSetting $setting */
+        $setting = pluginApp(SpacingMarginSetting::class);
+        $this->settings['spacing'] = $setting;
         return $setting;
     }
 
