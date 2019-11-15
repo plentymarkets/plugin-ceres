@@ -12,8 +12,9 @@
 {% set pageLimit     = widget.settings.pageLimit.mobile | default(1) %}
 {% set showFirstPage = widget.settings.showFirstPage.mobile %}
 {% set showLastPage  = widget.settings.showLastPage.mobile %}
+{% set alignment     = widget.settings.alignment.mobile | default("left") %}
 
-<div class="widget widget-pagination widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+<div class="widget widget-pagination widget-{{ appearance }} widget-alignment-{{ alignment }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div>
         {% if isPreview %}
