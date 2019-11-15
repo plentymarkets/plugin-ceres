@@ -30,7 +30,7 @@ class BaseSettingFactory
      * Set an option for the setting.
      *
      * @param string    $key        The option key
-     * @param string    $value      The option value
+     * @param mixed     $value      The option value
      * @return $this
      */
     protected function withOption($key, $value)
