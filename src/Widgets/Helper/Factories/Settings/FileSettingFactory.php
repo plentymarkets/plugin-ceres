@@ -14,7 +14,7 @@ class FileSettingFactory extends BaseSettingFactory
     /**
      * @param boolean $showPreview
      */
-    public function withPreview($showPreview)
+    public function withShowPreview($showPreview)
     {
         $this->withOption('showPreview', $showPreview);
     }
@@ -30,7 +30,7 @@ class FileSettingFactory extends BaseSettingFactory
     /**
      * @param boolean $foldersAllowed
      */
-    public function withFolders($foldersAllowed)
+    public function withFoldersAllowed($foldersAllowed)
     {
         $this->withOption('allowedFolders', $foldersAllowed);
     }

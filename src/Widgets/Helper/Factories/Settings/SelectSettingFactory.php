@@ -20,10 +20,10 @@ class SelectSettingFactory extends BaseSettingFactory
     }
 
     /**
-     * @param ValueCaptionFactory $listBoxValues
+     * @param array $listBoxValues
      */
     public function withListBoxValues($listBoxValues)
     {
-        $this->withOption('listBoxValues', $listBoxValues->toArray());
+        $this->withOption('listBoxValues', $listBoxValues);
     }
 }

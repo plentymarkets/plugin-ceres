@@ -4,13 +4,13 @@
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
 
-class ValueCaptionFactory
+class ValueListFactory
 {
     private $valueList;
 
-    public function addEntry($key, $value)
+    public function addEntry($key, $caption)
     {
-        $this->valueList[] = [$key => $value];
+        $this->valueList[] = [$key => $caption];
         return $this;
     }
 

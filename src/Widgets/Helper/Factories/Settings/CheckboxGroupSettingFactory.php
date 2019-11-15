@@ -20,11 +20,11 @@ class CheckboxGroupSettingFactory extends BaseSettingFactory
     }
 
     /**
-     * @param ValueCaptionFactory $checkboxValues
+     * @param array $checkboxValues
      */
     public function withCheckboxValues($checkboxValues)
     {
-        $this->withOption('checkboxValues', $checkboxValues->toArray());
+        $this->withOption('checkboxValues', $checkboxValues);
     }
 
 }
