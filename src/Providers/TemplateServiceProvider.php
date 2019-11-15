@@ -18,6 +18,7 @@ use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
+use Ceres\Widgets\WidgetCollection;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\ShopWizard;
 use IO\Extensions\Constants\ShopUrls;
@@ -27,6 +28,7 @@ use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use IO\Services\UrlBuilder\UrlQuery;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
+use Plenty\Modules\ShopBuilder\Repositories\ContentWidgetRepository;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
@@ -42,6 +44,8 @@ use Plenty\Plugin\ConfigRepository;
 class TemplateServiceProvider extends ServiceProvider
 {
     const EVENT_LISTENER_PRIORITY = 100;
+
+
 
     private static $templateKeyToViewMap =
     [
@@ -90,6 +94,14 @@ class TemplateServiceProvider extends ServiceProvider
         /** @var WizardContainerContract $wizardContainer */
         $wizardContainer = pluginApp(WizardContainerContract::class);
         $wizardContainer->register('shopCeres-assistant', ShopWizard::class);
+
+        // register shop builder widgets
+        /** @var ContentWidgetRepository $widgetRepository */
+        $widgetRepository = pluginApp(ContentWidgetRepository::class);
+        foreach(WidgetCollection::all() as $widgetClass)
+        {
+            $widgetRepository->registerWidget($widgetClass);
+        }
 
         $this->registerConsents();
 
