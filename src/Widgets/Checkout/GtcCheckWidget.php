@@ -48,12 +48,13 @@ class GtcCheckWidget extends BaseWidget
             ->withName("Widget.gtcCheckIsRequiredLabel");
         // missing tooltip
 
-        $settings->createCodeEditor()
+        $settings->createCodeEditor("customText")
             ->withDefaultValue("")
             ->withName("Widget.gtcCheckCustomTextLabel");
         // missing tooltip
 
         $settings->createSpacing(false, true);
 
+        return $settings->toArray();
     }
 }
