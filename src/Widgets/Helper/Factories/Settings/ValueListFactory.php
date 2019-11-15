@@ -8,9 +8,12 @@ class ValueListFactory
 {
     private $valueList;
 
-    public function addEntry($key, $caption)
+    public function addEntry($value, $caption)
     {
-        $this->valueList[] = [$key => $caption];
+        $this->valueList[] = [
+            "value" => $value,
+            "caption" => $caption
+        ];
         return $this;
     }
 
