@@ -8,4 +8,28 @@ class TextSettingFactory extends SettingFactory
     {
         $this->withType("text");
     }
+
+    /**
+     * @param boolean $isPassword
+     */
+    public function withPassword($isPassword)
+    {
+        $this->withOption('isPassword', $isPassword);
+    }
+
+    /**
+     * @param boolean $isIBAN
+     */
+    public function withIBAN($isIBAN)
+    {
+        $this->withOption('isIban', $isIBAN);
+    }
+
+    /**
+     * @param boolean $isReadonly
+     */
+    public function withReadonly($isReadonly)
+    {
+        $this->withOption('isReadonly', $isReadonly);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories;
 
+use Ceres\Widgets\Helper\Factories\Settings\CheckboxSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CustomSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\TextSettingFactory;
@@ -26,6 +27,11 @@ class WidgetSettingsFactory
     public function createText($key)
     {
         return $this->create($key, TextSettingFactory::class);
+    }
+
+    public function createCheckbox($key)
+    {
+        return $this->ceate($key, CheckboxSettingFactory::class);
     }
 
     private function create($key, $class)
