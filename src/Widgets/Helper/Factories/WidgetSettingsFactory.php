@@ -312,23 +312,13 @@ class WidgetSettingsFactory
     }
 
     /**
+     * @param $optional
      * @return AppearanceSetting
      */
-    public function createAppearance()
+    public function createAppearance($optional)
     {
         /** @var AppearanceSetting $setting */
-        $setting = pluginApp(AppearanceSetting::class);
-        $this->settings['appearance'] = $setting;
-        return $setting;
-    }
-
-    /**
-     * @return OptionalAppearanceSetting
-     */
-    public function createOptionalAppearance()
-    {
-        /** @var OptionalAppearanceSetting $setting */
-        $setting = pluginApp(OptionalAppearanceSetting::class);
+        $setting = pluginApp(AppearanceSetting::class, [$optional]);
         $this->settings['appearance'] = $setting;
         return $setting;
     }

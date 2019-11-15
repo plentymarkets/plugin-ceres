@@ -7,7 +7,7 @@ use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 
 class AppearanceSetting extends BaseSettingFactory
 {
-    public function __construct()
+    public function __construct($optional)
     {
         $this->withType('select')
             ->withDefaultValue('primary')
@@ -16,6 +16,12 @@ class AppearanceSetting extends BaseSettingFactory
 
         /** @var ValueListFactory $valueListFactory */
         $valueListFactory = pluginApp(ValueListFactory::class);
+
+        if($optional)
+        {
+            $valueListFactory->addEntry('none', 'Widget.widgetAppearanceNone');
+        }
+
         $valueListFactory->addEntry('primary', 'Widget.widgetAppearancePrimary')
             ->addEntry('secondary', 'Widget.widgetAppearanceSecondary')
             ->addEntry('success', 'Widget.widgetAppearanceSuccess')
