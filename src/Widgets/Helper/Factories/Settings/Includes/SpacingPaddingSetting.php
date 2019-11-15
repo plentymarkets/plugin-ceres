@@ -12,8 +12,7 @@ class SpacingPaddingSetting extends ContainerSettingFactory
 
         $this->withType('vertical');
 
-        $this->children->createSetting('customPadding')
-            ->withType('checkbox')
+        $this->children->createCheckbox('customPadding')
             ->withName('Widget.widgetCustomPadding');
 
         $this->children->createSetting('padding')

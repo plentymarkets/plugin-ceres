@@ -12,8 +12,7 @@ class SpacingMarginSetting extends ContainerSettingFactory
 
         $this->withType('vertical');
 
-        $this->children->createSetting('customMargin')
-            ->withType('checkbox')
+        $this->children->createCheckbox('customMargin')
             ->withName('Widget.widgetCustomMargin');
 
         $this->children->createSetting('margin')

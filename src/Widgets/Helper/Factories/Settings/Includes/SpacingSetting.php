@@ -12,8 +12,7 @@ class SpacingSetting extends ContainerSettingFactory
 
         $this->withType('vertical');
 
-        $this->children->createSetting('customPadding')
-            ->withType('checkbox')
+        $this->children->createCheckbox('customPadding')
             ->withName('Widget.widgetCustomPadding');
 
         $this->children->createSetting('padding')
@@ -22,8 +21,7 @@ class SpacingSetting extends ContainerSettingFactory
             ->withOption('units', ['px', 'rem'])
             ->withOption('direction', 'all');
 
-        $this->children->createSetting('customMargin')
-            ->withType('checkbox')
+        $this->children->createCheckbox('customMargin')
             ->withName('Widget.widgetCustomMargin');
 
         $this->children->createSetting('margin')
