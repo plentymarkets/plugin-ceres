@@ -12,7 +12,10 @@ use Ceres\Widgets\Helper\Factories\Settings\DoubleSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\EditorSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\FileSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\GenericSettingFactory;
-use Ceres\Widgets\Helper\Factories\Settings\NumberSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\AppearanceSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingSetting;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SliderSettingFactory;
@@ -291,6 +294,53 @@ class WidgetSettingsFactory
         /** @var EditorSettingFactory $setting */
         $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('codeEditor');
+        return $setting;
+    }
+
+    /**
+     * @return CustomClassSetting
+     */
+    public function createCustomClass()
+    {
+        /** @var CustomClassSetting $setting */
+        $setting = pluginApp(CustomClassSetting::class);
+        $this->settings['customClass'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @param $optional
+     * @return AppearanceSetting
+     */
+    public function createAppearance($optional = false)
+    {
+        /** @var AppearanceSetting $setting */
+        $setting = pluginApp(AppearanceSetting::class, ['optional' => $optional]);
+        $this->settings['appearance'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return IconSetting
+     */
+    public function createIcon()
+    {
+        /** @var IconSetting $setting */
+        $setting = pluginApp(IconSetting::class);
+        $this->settings['icon'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @param $usePadding
+     * @param $useMargin
+     * @return SpacingSetting
+     */
+    public function createSpacing($usePadding = true, $useMargin = true)
+    {
+        /** @var SpacingSetting $setting */
+        $setting = pluginApp(SpacingSetting::class, ['usePadding' => $usePadding, 'useMargin' => $useMargin]);
+        $this->settings['spacing'] = $setting;
         return $setting;
     }
 
