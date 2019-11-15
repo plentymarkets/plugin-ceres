@@ -315,7 +315,7 @@ class WidgetSettingsFactory
     public function createAppearance($optional = false)
     {
         /** @var AppearanceSetting $setting */
-        $setting = pluginApp(AppearanceSetting::class, [$optional]);
+        $setting = pluginApp(AppearanceSetting::class, ['optional' => $optional]);
         $this->settings['appearance'] = $setting;
         return $setting;
     }
@@ -336,10 +336,10 @@ class WidgetSettingsFactory
      * @param $useMargin
      * @return SpacingSetting
      */
-    public function createSpacing($usePadding, $useMargin)
+    public function createSpacing($usePadding = true, $useMargin = true)
     {
         /** @var SpacingSetting $setting */
-        $setting = pluginApp(SpacingSetting::class, [$usePadding, $useMargin]);
+        $setting = pluginApp(SpacingSetting::class, ['usePadding' => $usePadding, 'useMargin' => $useMargin]);
         $this->settings['spacing'] = $setting;
         return $setting;
     }
