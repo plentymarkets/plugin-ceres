@@ -45,8 +45,6 @@ class TemplateServiceProvider extends ServiceProvider
 {
     const EVENT_LISTENER_PRIORITY = 100;
 
-
-
     private static $templateKeyToViewMap =
     [
         'tpl.home'                          => ['Homepage.Homepage',                      GlobalContext::class],
