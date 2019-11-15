@@ -14,57 +14,73 @@ class WidgetSettingsFactory
     private $settings = [];
 
     /**
-     * @param $key
+     * Create a generic widget settings entry.
+     *
+     * @param string    $key    The key of the new settings entry. If key already exists, previous entry will be overridden.
+     *
      * @return GenericSettingFactory
      */
     public function createSetting($key)
     {
-        return $this->create($key, GenericSettingFactory::class);
+        /** @var GenericSettingFactory $setting */
+        $setting = pluginApp(GenericSettingFactory::class);
+        $this->settings[$key] = $setting;
+        return $setting;
     }
 
     /**
-     * @param $key
+     * Create a container entry which may contain nested settings.
+     * @param string $key
      * @return ContainerSettingFactory
      */
     public function createContainer($key)
     {
-        return $this->create($key, ContainerSettingFactory::class);
+        /** @var ContainerSettingFactory $setting */
+        $setting = pluginApp(ContainerSettingFactory::class);
+        $this->settings[$key] = $setting;
+        return $setting;
     }
 
     /**
-     * @param $key
+     * Create a vertical container
+     *
+     * @param string $key
      * @return ContainerSettingFactory
      */
     public function createVerticalContainer($key)
     {
-        return $this->createContainer($key)->withType("vertical");
+        /** @var ContainerSettingFactory $setting */
+        $setting = pluginApp(ContainerSettingFactory::class);
+        $this->settings[$key] = $setting->withType("vertical");
+        return $setting;
     }
 
     /**
-     * @param $key
+     * Create a horizontal container
+     *
+     * @param string $key
      * @return ContainerSettingFactory
      */
     public function createHorizontalContainer($key)
     {
-        return $this->createContainer($key)->withType("horizontal");
+        /** @var ContainerSettingFactory $setting */
+        $setting = pluginApp(ContainerSettingFactory::class);
+        $this->settings[$key] = $setting->withType("horizontal");
+        return $setting;
     }
 
     /**
-     * @param $key
+     * Create a text input setting
+     *
+     * @param string $key
      * @return TextSettingFactory
      */
     public function createText($key)
     {
-        return $this->create($key, TextSettingFactory::class);
-    }
-
-    /**
-     * @param string $key
-     * @return CheckboxSettingFactory
-     */
-    public function createCheckbox($key)
-    {
-        return $this->create($key, CheckboxSettingFactory::class);
+        /** @var TextSettingFactory $setting */
+        $setting = pluginApp(TextSettingFactory::class);
+        $this->settings[$key] = $setting;
+        return $setting;
     }
 
     /**
@@ -95,7 +111,8 @@ class WidgetSettingsFactory
      */
     public function createNoteEditor($key)
     {
-        $setting = $this->create($key, EditorSettingFactory::class);
+        /** @var EditorSettingFactory $setting */
+        $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('noteEditor');
         return $setting;
     }
@@ -106,15 +123,9 @@ class WidgetSettingsFactory
      */
     public function createCodeEditor($key)
     {
-        $setting = $this->create($key, EditorSettingFactory::class);
+        /** @var EditorSettingFactory $setting */
+        $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('codeEditor');
-        return $setting;
-    }
-
-    private function create($key, $class)
-    {
-        $setting = pluginApp($class);
-        $this->settings[$key] = $setting;
         return $setting;
     }
 

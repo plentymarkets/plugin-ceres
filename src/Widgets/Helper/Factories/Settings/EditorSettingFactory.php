@@ -4,7 +4,7 @@
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
 
-class EditorSettingFactory extends BaseSettingFactory
+class EditorSettingFactory extends GenericSettingFactory
 {
     /**
      * @param string $placeholder
