@@ -13,11 +13,11 @@ class WidgetSettingsFactory
 
     /**
      * @param $key
-     * @return CustomSettingFactory
+     * @return SettingFactory
      */
     public function createSetting($key)
     {
-        return $this->create($key, CustomSettingFactory::class);
+        return $this->create($key, SettingFactory::class);
     }
 
     /**
