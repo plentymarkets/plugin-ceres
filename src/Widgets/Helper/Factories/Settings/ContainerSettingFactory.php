@@ -2,10 +2,22 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class ContainerSettingFactory extends SettingFactory
+use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
+
+class ContainerSettingFactory extends GenericSettingFactory
 {
-    public function createChild($key)
+    /** @var WidgetSettingsFactory $children */
+    public $children;
+
+    public function __construct()
     {
-        // TODO: return new instance of WidgetSettingsFactory
+        parent::__construct();
+        $this->children = pluginApp(WidgetSettingsFactory::class);
+    }
+
+    public function toArray()
+    {
+        $data = parent::toArray();
+        $data['children'] = $this->children->toArray();
     }
 }

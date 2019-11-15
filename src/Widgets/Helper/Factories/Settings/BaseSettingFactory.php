@@ -2,7 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class SettingFactory
+class BaseSettingFactory
 {
     protected $data = [];
 
