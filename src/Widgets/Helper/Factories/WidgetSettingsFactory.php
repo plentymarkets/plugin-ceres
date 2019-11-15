@@ -15,9 +15,6 @@ use Ceres\Widgets\Helper\Factories\Settings\GenericSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\AppearanceSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
-use Ceres\Widgets\Helper\Factories\Settings\Includes\OptionalAppearanceSetting;
-use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingMarginSetting;
-use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingPaddingSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingSetting;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
@@ -315,7 +312,7 @@ class WidgetSettingsFactory
      * @param $optional
      * @return AppearanceSetting
      */
-    public function createAppearance($optional)
+    public function createAppearance($optional = false)
     {
         /** @var AppearanceSetting $setting */
         $setting = pluginApp(AppearanceSetting::class, [$optional]);
@@ -335,34 +332,14 @@ class WidgetSettingsFactory
     }
 
     /**
+     * @param $usePadding
+     * @param $useMargin
      * @return SpacingSetting
      */
-    public function createSpacing()
+    public function createSpacing($usePadding, $useMargin)
     {
         /** @var SpacingSetting $setting */
-        $setting = pluginApp(SpacingSetting::class);
-        $this->settings['spacing'] = $setting;
-        return $setting;
-    }
-
-    /**
-     * @return SpacingPaddingSetting
-     */
-    public function createSpacingPadding()
-    {
-        /** @var SpacingPaddingSetting $setting */
-        $setting = pluginApp(SpacingPaddingSetting::class);
-        $this->settings['spacing'] = $setting;
-        return $setting;
-    }
-
-    /**
-     * @return SpacingMarginSetting
-     */
-    public function createSpacingMargin()
-    {
-        /** @var SpacingMarginSetting $setting */
-        $setting = pluginApp(SpacingMarginSetting::class);
+        $setting = pluginApp(SpacingSetting::class, [$usePadding, $useMargin]);
         $this->settings['spacing'] = $setting;
         return $setting;
     }
