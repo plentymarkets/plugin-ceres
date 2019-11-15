@@ -8,6 +8,13 @@ class ValueListFactory
 {
     private $valueList;
 
+    public static function make()
+    {
+        /** @var ValueListFactory $instance */
+        $instance = pluginApp(ValueListFactory::class);
+        return $instance;
+    }
+
     public function addEntry($value, $caption)
     {
         $this->valueList[] = [
