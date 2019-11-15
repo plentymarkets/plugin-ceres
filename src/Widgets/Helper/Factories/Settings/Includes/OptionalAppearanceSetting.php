@@ -4,9 +4,13 @@ namespace Ceres\Widgets\Helper\Factories\Settings\Includes;
 
 use Ceres\Widgets\Helper\Factories\Settings\BaseSettingFactory;
 
-class AppearanceSetting extends BaseSettingFactory
+class OptionalAppearanceSetting extends BaseSettingFactory
 {
     private static $listBoxValues = [
+        [
+            'value' => 'none',
+            'caption' => 'Widget.widgetAppearanceNone'
+        ],
         [
             'value' => 'primary',
             'caption' => 'Widget.widgetAppearancePrimary'
