@@ -2,13 +2,14 @@
 
 namespace Ceres\Widgets\Helper;
 
-use Plenty\Modules\ShopBuilder\Contracts\Widget;
-use Plenty\Plugin\Templates\Twig;
+use Plenty\Modules\ShopBuilder\Contracts\BaseWidget as InternalBaseWidget;
 use Plenty\Plugin\Log\Loggable;
 
-class BaseWidget implements Widget
+class BaseWidget extends InternalBaseWidget
 {
     use Loggable;
+
+    protected $template = "";
 
     const TOOLBAR_LAYOUT = [
         "NONE"   => "",
@@ -23,79 +24,22 @@ class BaseWidget implements Widget
         'checkout'      => 'tpl.checkout'
     ];
 
-    /**
-     * The template to be used for this widget
-     *
-     * @var string
-     */
-    protected $template = "";
-
-    /**
-     * @var Twig $twig
-     */
-    protected $twig = null;
-
-    public function __construct(Twig $twig)
+    public function getTemplate()
     {
-        $this->twig = $twig;
+        return $this->template;
     }
 
-    /**
-     * Get the html representation of the widget.
-     *
-     * @param array $widgetSettings
-     * @param array $children
-     *
-     * @return string
-     */
-    public function getPreview(
-        array $widgetSettings = [],
-        array $children = []
-    ): string
+    public function getData()
     {
-        $template = $this->renderTemplate(
-            $widgetSettings,
-            $children,
-            true
-        );
-
-        try
-        {
-            $previewData = $this->getPreviewData($widgetSettings);
-            return $this->twig->renderString($template, $previewData);
-        }
-        catch(\Exception $e)
-        {
-            $this->getLogger(__METHOD__)->error("twig_preview_exception", [
-                'message' => $e->getMessage()
-            ]);
-
-            return "";
-        }
+        return [];
     }
 
-    /**
-     * Render the template of the widget.
-     * Returns a twig-template which will be included in the frontend
-     * or rendered again for generating the preview
-     *
-     * @param array $widgetSettings
-     * @param array $children
-     *
-     * @return string
-     */
-    public function render(
-        array $widgetSettings = [],
-        array $children = []
-    ): string
+    public function getSettings()
     {
-        return $this->renderTemplate(
-            $widgetSettings,
-            $children
-        );
+        return [];
     }
 
-    private function renderTemplate(
+    protected function renderTemplate(
         $widgetSettings = [],
         $children = [],
         $isPreview = false
@@ -108,29 +52,7 @@ class BaseWidget implements Widget
             unset($widgetSettings['template']);
         }
 
-        $templateData = $this->getTemplateData($widgetSettings, $isPreview);
-
-        $templateData["widget"] = [
-            "settings"      => $widgetSettings
-        ];
-        $templateData["children"]  = $children;
-        $templateData["isPreview"] = $isPreview;
-        $templateData["TOOLBAR_LAYOUT"] = self::TOOLBAR_LAYOUT;
-
-        try
-        {
-            $rendered = $this->twig->render($this->template, $templateData);
-        }
-        catch(\Exception $e)
-        {
-            // Twig_Errors (Syntax or Runtime)
-            $this->getLogger(__METHOD__)->error("twig_render_exception",
-                [
-                    'message' => $e->getMessage()
-                ]);
-
-            return "";
-        }
+        $rendered = parent::renderTemplate($widgetSettings, $children, $isPreview);
 
         if($isPreview && strlen($template))
         {
@@ -149,18 +71,9 @@ class BaseWidget implements Widget
      */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
-        return [];
-    }
-
-    /**
-     * Get additional data to be passed to the template while rendering the preview markup
-     *
-     * @param $widgetSettings
-     * @return array
-     */
-    protected function getPreviewData($widgetSettings)
-    {
-        return [];
+        $templateData = parent::getTemplateData($widgetSettings, $isPreview);
+        $templateData['TOOLBAR_LAYOUT'] = self::TOOLBAR_LAYOUT;
+        return $templateData;
     }
 
     protected function mockPaginatedResult( \Closure $factory, $itemsPerPage = 10, $currentPage = 1, $pages = 5 )
