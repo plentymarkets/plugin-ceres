@@ -2,9 +2,9 @@
 
 namespace Ceres\Widgets\Helper\Factories;
 
-use Ceres\Widgets\Helper\Factories\Settings\CheckboxSettingFactory;
-use Ceres\Widgets\Helper\Factories\Settings\CustomSettingFactory;
-use Ceres\Widgets\Helper\Factories\Settings\SettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\ContainerSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\BaseSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\GenericSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\TextSettingFactory;
 
 class WidgetSettingsFactory
@@ -13,11 +13,38 @@ class WidgetSettingsFactory
 
     /**
      * @param $key
-     * @return SettingFactory
+     * @return GenericSettingFactory
      */
     public function createSetting($key)
     {
-        return $this->create($key, SettingFactory::class);
+        return $this->create($key, GenericSettingFactory::class);
+    }
+
+    /**
+     * @param $key
+     * @return ContainerSettingFactory
+     */
+    public function createContainer($key)
+    {
+        return $this->create($key, ContainerSettingFactory::class);
+    }
+
+    /**
+     * @param $key
+     * @return ContainerSettingFactory
+     */
+    public function createVerticalContainer($key)
+    {
+        return $this->createContainer($key)->withType("vertical");
+    }
+
+    /**
+     * @param $key
+     * @return ContainerSettingFactory
+     */
+    public function createHorizontalContainer($key)
+    {
+        return $this->createContainer($key)->withType("horizontal");
     }
 
     /**
@@ -46,7 +73,7 @@ class WidgetSettingsFactory
         $result = [];
         /**
          * @var string $key
-         * @var SettingFactory $setting
+         * @var BaseSettingFactory $setting
          */
         foreach($this->settings as $key => $setting)
         {

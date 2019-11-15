@@ -2,7 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class TextSettingFactory extends SettingFactory
+class TextSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {
