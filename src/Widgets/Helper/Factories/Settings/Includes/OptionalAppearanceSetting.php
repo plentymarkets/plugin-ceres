@@ -17,13 +17,13 @@ class OptionalAppearanceSetting extends BaseSettingFactory
 
         /** @var ValueListFactory $valueListFactory */
         $valueListFactory = pluginApp(ValueListFactory::class);
-        $valueListFactory->addEntry('none', 'Widget.widgetAppearanceNone');
-        $valueListFactory->addEntry('primary', 'Widget.widgetAppearancePrimary');
-        $valueListFactory->addEntry('secondary', 'Widget.widgetAppearanceSecondary');
-        $valueListFactory->addEntry('success', 'Widget.widgetAppearanceSuccess');
-        $valueListFactory->addEntry('info', 'Widget.widgetAppearanceInfo');
-        $valueListFactory->addEntry('warning', 'Widget.widgetAppearanceWarning');
-        $valueListFactory->addEntry('danger', 'Widget.widgetAppearanceDanger');
+        $valueListFactory->addEntry('none', 'Widget.widgetAppearanceNone')
+            ->addEntry('primary', 'Widget.widgetAppearancePrimary')
+            ->addEntry('secondary', 'Widget.widgetAppearanceSecondary')
+            ->addEntry('success', 'Widget.widgetAppearanceSuccess')
+            ->addEntry('info', 'Widget.widgetAppearanceInfo')
+            ->addEntry('warning', 'Widget.widgetAppearanceWarning')
+            ->addEntry('danger', 'Widget.widgetAppearanceDanger');
 
         $this->withOption('listBoxValues', $valueListFactory->toArray());
     }
