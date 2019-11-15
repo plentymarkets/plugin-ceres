@@ -4,7 +4,7 @@
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
 
-class DoubleSettingFactory extends SettingFactory
+class DoubleSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {

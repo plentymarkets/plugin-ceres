@@ -2,7 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class CheckboxSettingFactory extends SettingFactory
+class CheckboxSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {

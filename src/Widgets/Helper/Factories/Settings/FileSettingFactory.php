@@ -4,7 +4,7 @@
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
 
-class FileSettingFactory extends SettingFactory
+class FileSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {

@@ -4,7 +4,9 @@ namespace Ceres\Widgets\Helper\Factories;
 
 use Ceres\Widgets\Helper\Factories\Settings\ContainerSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\BaseSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\EditorSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\GenericSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\NumberSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\TextSettingFactory;
 
 class WidgetSettingsFactory
@@ -56,9 +58,57 @@ class WidgetSettingsFactory
         return $this->create($key, TextSettingFactory::class);
     }
 
+    /**
+     * @param string $key
+     * @return CheckboxSettingFactory
+     */
     public function createCheckbox($key)
     {
-        return $this->ceate($key, CheckboxSettingFactory::class);
+        return $this->create($key, CheckboxSettingFactory::class);
+    }
+
+    /**
+     * @param string $key
+     * @return GenericSettingFactory
+     */
+    public function createColor($key)
+    {
+        $colorSetting = $this->createSetting($key);
+        $colorSetting->withType('color');
+        return $colorSetting;
+    }
+
+    /**
+     * @param string $key
+     * @return GenericSettingFactory
+     */
+    public function createNumber($key)
+    {
+        $setting = $this->createSetting($key);
+        $setting->withType('number');
+        return $setting;
+    }
+
+    /**
+     * @param string $key
+     * @return EditorSettingFactory
+     */
+    public function createNoteEditor($key)
+    {
+        $setting = $this->create($key, EditorSettingFactory::class);
+        $setting->withType('noteEditor');
+        return $setting;
+    }
+
+    /**
+     * @param string $key
+     * @return EditorSettingFactory
+     */
+    public function createCodeEditor($key)
+    {
+        $setting = $this->create($key, EditorSettingFactory::class);
+        $setting->withType('codeEditor');
+        return $setting;
     }
 
     private function create($key, $class)

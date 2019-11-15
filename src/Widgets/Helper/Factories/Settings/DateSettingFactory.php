@@ -2,7 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class DateSettingFactory extends SettingFactory
+class DateSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {
