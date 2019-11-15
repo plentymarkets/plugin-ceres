@@ -12,7 +12,6 @@ use Ceres\Widgets\Helper\Factories\Settings\DoubleSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\EditorSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\FileSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\GenericSettingFactory;
-use Ceres\Widgets\Helper\Factories\Settings\NumberSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SliderSettingFactory;
