@@ -20,7 +20,10 @@ class WidgetSettingsFactory
      */
     public function createSetting($key)
     {
-        return $this->create($key, GenericSettingFactory::class);
+        /** @var GenericSettingFactory $setting */
+        $setting = pluginApp(GenericSettingFactory::class);
+        $this->settings[$key] = $setting;
+        return $setting;
     }
 
     /**
@@ -30,7 +33,10 @@ class WidgetSettingsFactory
      */
     public function createContainer($key)
     {
-        return $this->create($key, ContainerSettingFactory::class);
+        /** @var ContainerSettingFactory $setting */
+        $setting = pluginApp(ContainerSettingFactory::class);
+        $this->settings[$key] = $setting;
+        return $setting;
     }
 
     /**
@@ -41,7 +47,10 @@ class WidgetSettingsFactory
      */
     public function createVerticalContainer($key)
     {
-        return $this->createContainer($key)->withType("vertical");
+        /** @var ContainerSettingFactory $setting */
+        $setting = pluginApp(ContainerSettingFactory::class);
+        $this->settings[$key] = $setting->withType("vertical");
+        return $setting;
     }
 
     /**
@@ -52,7 +61,10 @@ class WidgetSettingsFactory
      */
     public function createHorizontalContainer($key)
     {
-        return $this->createContainer($key)->withType("horizontal");
+        /** @var ContainerSettingFactory $setting */
+        $setting = pluginApp(ContainerSettingFactory::class);
+        $this->settings[$key] = $setting->withType("horizontal");
+        return $setting;
     }
 
     /**
@@ -63,12 +75,8 @@ class WidgetSettingsFactory
      */
     public function createText($key)
     {
-        return $this->create($key, TextSettingFactory::class);
-    }
-
-    private function create($key, $class)
-    {
-        $setting = pluginApp($class);
+        /** @var TextSettingFactory $setting */
+        $setting = pluginApp(TextSettingFactory::class);
         $this->settings[$key] = $setting;
         return $setting;
     }
