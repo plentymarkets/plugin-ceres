@@ -12,7 +12,10 @@ class WidgetSettingsFactory
     private $settings = [];
 
     /**
-     * @param $key
+     * Create a generic widget settings entry.
+     *
+     * @param string    $key    The key of the new settings entry. If key already exists, previous entry will be overridden.
+     *
      * @return GenericSettingFactory
      */
     public function createSetting($key)
@@ -21,7 +24,8 @@ class WidgetSettingsFactory
     }
 
     /**
-     * @param $key
+     * Create a container entry which may contain nested settings.
+     * @param string $key
      * @return ContainerSettingFactory
      */
     public function createContainer($key)
@@ -30,7 +34,9 @@ class WidgetSettingsFactory
     }
 
     /**
-     * @param $key
+     * Create a vertical container
+     *
+     * @param string $key
      * @return ContainerSettingFactory
      */
     public function createVerticalContainer($key)
@@ -39,7 +45,9 @@ class WidgetSettingsFactory
     }
 
     /**
-     * @param $key
+     * Create a horizontal container
+     *
+     * @param string $key
      * @return ContainerSettingFactory
      */
     public function createHorizontalContainer($key)
@@ -48,7 +56,9 @@ class WidgetSettingsFactory
     }
 
     /**
-     * @param $key
+     * Create a text input setting
+     *
+     * @param string $key
      * @return TextSettingFactory
      */
     public function createText($key)
