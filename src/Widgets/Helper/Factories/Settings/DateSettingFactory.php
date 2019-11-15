@@ -10,10 +10,18 @@ class DateSettingFactory extends BaseSettingFactory
     }
 
     /**
-     * @param string $icon
+     * @param boolean $isCalendarTop
      */
-    public function withIcon($icon)
+    public function withCalendarTop($isCalendarTop)
     {
-        $this->withOption('icon', $icon);
+        $this->withOption('openCalendarTop', $isCalendarTop);
+    }
+
+    /**
+     * @param string $format
+     */
+    public function withDisplayDateFormat($format)
+    {
+        $this->withOption('displayDateFormat', $format);
     }
 }

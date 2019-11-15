@@ -10,18 +10,10 @@ class CheckboxSettingFactory extends BaseSettingFactory
     }
 
     /**
-     * @param boolean $isCalendarTop
+     * @param string $icon
      */
-    public function withCalendarTop($isCalendarTop)
+    public function withIcon($icon)
     {
-        $this->withOption('openCalendarTop', $isCalendarTop);
-    }
-
-    /**
-     * @param string $format
-     */
-    public function withDisplayDateFormat($format)
-    {
-        $this->withOption('displayDateFormat', $format);
+        $this->withOption('icon', $icon);
     }
 }
