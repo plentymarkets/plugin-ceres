@@ -16,24 +16,24 @@ class IconSetting extends BaseSettingFactory
 
         /** @var ValueListFactory $valueListFactory */
         $valueListFactory = pluginApp(ValueListFactory::class);
-        $valueListFactory->addEntry('none', 'Widget.widgetIconNone');
-        $valueListFactory->addEntry('fa-check', 'Widget.widgetIconCheck');
-        $valueListFactory->addEntry('fa-info', 'Widget.widgetIconInfo');
-        $valueListFactory->addEntry('fa-circle', 'Widget.widgetIconCircle');
-        $valueListFactory->addEntry('fa-circle-thin', 'Widget.widgetIconCircleThin');
-        $valueListFactory->addEntry('fa-comment-o', 'Widget.widgetIconComment');
-        $valueListFactory->addEntry('fa-credit-card', 'Widget.widgetIconCreditcard');
-        $valueListFactory->addEntry('fa-envelope-o', 'Widget.widgetIconEnvelope');
-        $valueListFactory->addEntry('fa-heart', 'Widget.widgetIconHeart');
-        $valueListFactory->addEntry('fa-thumbs-o-up', 'Widget.widgetIconThumbsUp');
-        $valueListFactory->addEntry('fa-euro', 'Widget.widgetIconEuro');
-        $valueListFactory->addEntry('fa-dollar', 'Widget.widgetIconDollar');
-        $valueListFactory->addEntry('fa-percent', 'Widget.widgetIconPercent');
-        $valueListFactory->addEntry('fa-gift', 'Widget.widgetIconGift');
-        $valueListFactory->addEntry('fa-truck', 'Widget.widgetIconTruck');
-        $valueListFactory->addEntry('fa-phone', 'Widget.widgetIconPhone');
-        $valueListFactory->addEntry('fa-copyright', 'Widget.widgetIconCopyright');
-        $valueListFactory->addEntry('fa-registered', 'Widget.widgetIconRegistered');
+        $valueListFactory->addEntry('none', 'Widget.widgetIconNone')
+            ->addEntry('fa-check', 'Widget.widgetIconCheck')
+            ->addEntry('fa-info', 'Widget.widgetIconInfo')
+            ->addEntry('fa-circle', 'Widget.widgetIconCircle')
+            ->addEntry('fa-circle-thin', 'Widget.widgetIconCircleThin')
+            ->addEntry('fa-comment-o', 'Widget.widgetIconComment')
+            ->addEntry('fa-credit-card', 'Widget.widgetIconCreditcard')
+            ->addEntry('fa-envelope-o', 'Widget.widgetIconEnvelope')
+            ->addEntry('fa-heart', 'Widget.widgetIconHeart')
+            ->addEntry('fa-thumbs-o-up', 'Widget.widgetIconThumbsUp')
+            ->addEntry('fa-euro', 'Widget.widgetIconEuro')
+            ->addEntry('fa-dollar', 'Widget.widgetIconDollar')
+            ->addEntry('fa-percent', 'Widget.widgetIconPercent')
+            ->addEntry('fa-gift', 'Widget.widgetIconGift')
+            ->addEntry('fa-truck', 'Widget.widgetIconTruck')
+            ->addEntry('fa-phone', 'Widget.widgetIconPhone')
+            ->addEntry('fa-copyright', 'Widget.widgetIconCopyright')
+            ->addEntry('fa-registered', 'Widget.widgetIconRegistered');
 
         $this->withOption('listBoxValues', $valueListFactory->toArray());
     }
