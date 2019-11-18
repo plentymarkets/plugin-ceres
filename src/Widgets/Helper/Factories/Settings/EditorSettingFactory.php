@@ -8,25 +8,28 @@ class EditorSettingFactory extends GenericSettingFactory
 {
     /**
      * @param string $placeholder
+     * @return BaseSettingFactory|EditorSettingFactory
      */
     public function withPlaceHolder($placeholder)
     {
-        $this->withOption('placeholder', $placeholder);
+        return $this->withOption('placeholder', $placeholder);
     }
 
     /**
      * @param string $fixedHeight
+     * @return BaseSettingFactory|EditorSettingFactory
      */
     public function withFixedHeight($fixedHeight)
     {
-        $this->withOption('fixedHeight', $fixedHeight);
+        return $this->withOption('fixedHeight', $fixedHeight);
     }
 
     /**
      * @param string $minHeight
+     * @return BaseSettingFactory|EditorSettingFactory
      */
     public function withMinHeight($minHeight)
     {
-        $this->withOption('minHeight', $minHeight);
+        return $this->withOption('minHeight', $minHeight);
     }
 }

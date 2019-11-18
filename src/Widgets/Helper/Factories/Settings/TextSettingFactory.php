@@ -11,25 +11,28 @@ class TextSettingFactory extends BaseSettingFactory
 
     /**
      * @param boolean $isPassword
+     * @return TextSettingFactory
      */
     public function withPassword($isPassword)
     {
-        $this->withOption('isPassword', $isPassword);
+        return $this->withOption('isPassword', $isPassword);
     }
 
     /**
      * @param boolean $isIBAN
+     * @return TextSettingFactory
      */
     public function withIBAN($isIBAN)
     {
-        $this->withOption('isIban', $isIBAN);
+        return $this->withOption('isIban', $isIBAN);
     }
 
     /**
      * @param boolean $isReadonly
+     * @return TextSettingFactory
      */
     public function withReadonly($isReadonly)
     {
-        $this->withOption('isReadonly', $isReadonly);
+        return $this->withOption('isReadonly', $isReadonly);
     }
 }

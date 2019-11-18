@@ -13,25 +13,28 @@ class CategorySettingFactory extends BaseSettingFactory
 
     /**
      * @param boolean $displayResetButton
+     * @return CategorySettingFactory
      */
     public function withDisplayResetButton($displayResetButton)
     {
-        $this->withOption('displayResetButton', $displayResetButton);
+        return $this->withOption('displayResetButton', $displayResetButton);
     }
 
     /**
      * @param boolean $displaySearch
+     * @return CategorySettingFactory
      */
     public function withDisplaySearch($displaySearch)
     {
-        $this->withOption('displaySearch', $displaySearch);
+        return $this->withOption('displaySearch', $displaySearch);
     }
 
     /**
      * @param boolean $showFullSelectionPath
+     * @return CategorySettingFactory
      */
     public function withShowFullSelectionPath($showFullSelectionPath)
     {
-        $this->withOption('showFullSelectionPath', $showFullSelectionPath);
+        return $this->withOption('showFullSelectionPath', $showFullSelectionPath);
     }
 }
