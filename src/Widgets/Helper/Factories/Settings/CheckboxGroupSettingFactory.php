@@ -8,23 +8,25 @@ class CheckboxGroupSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {
-        $this->withType('checkboxGroup');
+        return $this->withType('checkboxGroup');
     }
 
     /**
      * @param boolean $collapsed
+     * @return CheckboxGroupSettingFactory
      */
     public function withCollapsed($collapsed)
     {
-        $this->withOption('collapsed', $collapsed);
+        return $this->withOption('collapsed', $collapsed);
     }
 
     /**
      * @param array $checkboxValues
+     * @return CheckboxGroupSettingFactory
      */
     public function withCheckboxValues($checkboxValues)
     {
-        $this->withOption('checkboxValues', $checkboxValues);
+        return $this->withOption('checkboxValues', $checkboxValues);
     }
 
 }

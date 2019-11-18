@@ -11,9 +11,10 @@ class CheckboxSettingFactory extends BaseSettingFactory
 
     /**
      * @param string $icon
+     * @return CheckboxSettingFactory
      */
     public function withIcon($icon)
     {
-        $this->withOption('icon', $icon);
+        return $this->withOption('icon', $icon);
     }
 }
