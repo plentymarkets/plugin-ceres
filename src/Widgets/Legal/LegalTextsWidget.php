@@ -15,12 +15,11 @@ class LegalTextsWidget extends BaseWidget
 
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::ImageBoxWidget")
-            ->withLabel("Widget.imageBoxLabel")
-            ->withPreviewImageUrl("/images/widgets/image-box.svg")
-            ->withType(WidgetTypes::STATIC)
-            ->withCategory(WidgetCategories::IMAGE)
-            ->withPosition(600)
+        return WidgetDataFactory::make("Ceres::LegalTextsWidget")
+            ->withLabel("Widget.legalTextsLabel")
+            ->withPreviewImageUrl("/images/widgets/legal-texts.svg")
+            ->withType(WidgetTypes::DEFAULT)
+            ->withPosition(200)
             ->toArray();
     }
     public function getSettings()
