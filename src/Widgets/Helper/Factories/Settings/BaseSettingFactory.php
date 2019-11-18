@@ -67,12 +67,23 @@ class BaseSettingFactory
     /**
      * Set the name of the setting.
      *
-     * @param $name
+     * @param string $name  The label of the setting
      * @return $this
      */
     public function withName($name)
     {
         return $this->withOption("name", $name);
+    }
+
+    /**
+     * Set a tooltip text for this input
+     *
+     * @param string $tooltip   An additional description of the setting
+     * @return $this
+     */
+    public function withTooltip($tooltip)
+    {
+        return $this->withOption("tooltipText", $tooltip);
     }
 
     /**
