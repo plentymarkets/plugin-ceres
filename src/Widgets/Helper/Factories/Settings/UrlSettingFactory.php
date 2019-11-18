@@ -13,9 +13,10 @@ class UrlSettingFactory extends BaseSettingFactory
 
     /**
      * @param array $internalLinks
+     * @return UrlSettingFactory
      */
     public function withInternalLinks($internalLinks)
     {
-        $this->withOption('internalLinks', $internalLinks);
+        return $this->withOption('internalLinks', $internalLinks);
     }
 }

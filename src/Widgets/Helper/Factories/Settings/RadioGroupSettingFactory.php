@@ -13,10 +13,11 @@ class RadioGroupSettingFactory extends BaseSettingFactory
 
     /**
      * @param array $radioValues
+     * @return RadioGroupSettingFactory
      */
     public function withRadioValues($radioValues)
     {
-        $this->withOption('radioValues', $radioValues);
+        return $this->withOption('radioValues', $radioValues);
     }
 
 }

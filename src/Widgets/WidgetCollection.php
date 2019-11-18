@@ -203,12 +203,11 @@ class WidgetCollection
 
     public static function all()
     {
-        return [];
-//        return array_merge(
-//            self::BASKET_WIDGETS,
+        return array_merge(
+            self::BASKET_WIDGETS,
 //            self::CHECKOUT_WIDGETS,
 //            self::COMMON_WIDGETS,
-//            self::CONTACT_WIDGETS,
+            self::CONTACT_WIDGETS,
 //            self::CUSTOMER_WIDGETS,
 //            self::FOOTER_WIDGETS,
 //            self::FORM_WIDGETS,
@@ -219,7 +218,7 @@ class WidgetCollection
 //            self::LOGIN_WIDGETS,
 //            self::MY_ACCOUNT_WIDGETS,
 //            self::ORDER_CONFIRMATION_WIDGETS
-//        );
+        );
     }
 
 }

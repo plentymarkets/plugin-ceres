@@ -16,6 +16,7 @@ use Ceres\Widgets\Helper\Factories\Settings\Includes\AppearanceSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\ButtonSizeSetting;
 use Ceres\Widgets\Helper\Factories\Settings\ManufacturerSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
@@ -32,7 +33,7 @@ class WidgetSettingsFactory
     /**
      * Create a generic widget settings entry.
      *
-     * @param string    $key    The key of the new settings entry. If key already exists, previous entry will be overridden.
+     * @param string $key The key of the new settings entry. If key already exists, previous entry will be overridden.
      *
      * @return GenericSettingFactory
      */
@@ -375,6 +376,17 @@ class WidgetSettingsFactory
         /** @var SpacingSetting $setting */
         $setting = pluginApp(SpacingSetting::class, ['usePadding' => $usePadding, 'useMargin' => $useMargin]);
         $this->settings['spacing'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return ButtonSizeSetting
+     */
+    public function createButtonSize()
+    {
+        /** @var ButtonSizeSetting $setting */
+        $setting = pluginApp(ButtonSizeSetting::class);
+        $this->settings['buttonSize'] = $setting;
         return $setting;
     }
 
