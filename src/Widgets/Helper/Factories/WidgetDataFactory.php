@@ -2,7 +2,7 @@
 
 namespace Ceres\Widgets\Helper;
 
-class  WidgetDataFactory
+class WidgetDataFactory
 {
     private $data = [];
 
