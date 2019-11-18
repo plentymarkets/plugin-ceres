@@ -13,9 +13,10 @@ class SuggestionSettingFactory extends BaseSettingFactory
 
     /**
      * @param array $listBoxValues
+     * @return SuggestionSettingFactory
      */
     public function withListBoxValues($listBoxValues)
     {
-        $this->withOption('listBoxValues', $listBoxValues);
+        return $this->withOption('listBoxValues', $listBoxValues);
     }
 }

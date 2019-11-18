@@ -89,13 +89,25 @@ class BaseSettingFactory
     /**
      * Determines whether the declaration is used to render a list of the specified form field.
      *
-     * @param string|int $min
-     * @param string|int $max
+     * @param int $min  Minimum number of entries.
+     * @param int $max  Maximum number of entries. If not set or smaller than 0, unlimited entries might be added by the user.
      * @return $this
      */
-    public function withList($min, $max = "")
+    public function withList($min = 0, $max = 0)
     {
-        $this->data['isList'] = "[{$min}, {$max}]";
+        if($min < 0) {
+            $min = 0;
+        }
+
+        if($min <= 0 && $max <= 0) {
+            $this->data['isList'] = true;
+        } else {
+            if($max <= 0) {
+                $this->data['isList'] = "[{$min},]";
+            } else {
+                $this->data['isList'] = "[{$min}, {$max}]";
+            }
+        }
         return $this;
     }
 
