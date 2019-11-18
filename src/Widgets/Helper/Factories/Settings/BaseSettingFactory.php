@@ -67,7 +67,7 @@ class BaseSettingFactory
     /**
      * Set the name of the setting.
      *
-     * @param $name
+     * @param string $name  The label of the setting
      * @return $this
      */
     public function withName($name)
@@ -76,7 +76,17 @@ class BaseSettingFactory
     }
 
     /**
-     * Determines whether the declaration is used to render a list of the specified form field.
+     * Set a tooltip text for this input
+     *
+     * @param string $tooltip   An additional description of the setting
+     * @return $this
+     */
+    public function withTooltip($tooltip)
+    {
+        return $this->withOption("tooltipText", $tooltip);
+    }
+  
+    /** Determines whether the declaration is used to render a list of the specified form field.
      *
      * @param string|int $min
      * @param string|int $max
