@@ -8,7 +8,7 @@
             </div>
         </div>
         <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
-            <div class="prop-xs-1-1">
+            <div class="prop-xs-1-1" v-for="(imagePreview, index) in carouselImages">
                 <div class="image-container">
                     <img
                         @click="goTo(index)"
@@ -16,9 +16,8 @@
                         v-bind:class="{ 'active': currentItem === index}"
                         :src="imagePreview.url"
                         :alt="getAltText(imagePreview)"
-                        :title="getItemName()"
-                        v-for="(imagePreview, index) in carouselImages">
-                </div>
+                        :title="getItemName()">
+                </div>  
             </div>
         </div>
     </div>
