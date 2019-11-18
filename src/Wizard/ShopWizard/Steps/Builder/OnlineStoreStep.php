@@ -339,6 +339,13 @@ class OnlineStoreStep extends Step
                         "name" => "Wizard.sessionLifeTime",
                         "listBoxValues" => $sessionLifetimeOptions
                     ]
+                ],
+                "onlineStore_blockCookies" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.blockCookies"
+                    ]
                 ]
             ]
         ];
