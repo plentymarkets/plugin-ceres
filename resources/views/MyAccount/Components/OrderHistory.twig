@@ -36,7 +36,8 @@
                 <hr>
                 <!-- ORDER HISTORY TWIG -->
                 <div class="order-list">
-                    {% for entry in orderList.entries %}
+                    {% for tempOrderEntry in orderList.entries %}
+                        {% set entry = tempOrderEntry.toArray() %}
                         <article class="cmp cmp-order-item">
                             <div class="item-details small">
                                 <div class="mb-3">

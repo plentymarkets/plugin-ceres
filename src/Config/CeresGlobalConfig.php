@@ -14,6 +14,7 @@ class CeresGlobalConfig extends PluginConfig
     public $googleRecaptchaVersion;
     public $googleRecaptchaApiKey;
     public $registrationRequirePrivacyPolicyConfirmation;
+    public $blockCookies;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -26,5 +27,6 @@ class CeresGlobalConfig extends PluginConfig
         $this->googleRecaptchaVersion   = $this->getIntegerValue( "global.google_recaptcha_version", 2 );
         $this->googleRecaptchaApiKey    = $this->getTextValue( "global.google_recaptcha_api_key", "" );
         $this->registrationRequirePrivacyPolicyConfirmation = $this->getBooleanValue( "global.registration_require_privacy_policy_confirmation", true );
+        $this->blockCookies             = $this->getBooleanValue( "global.block_cookies", false );
     }
 }

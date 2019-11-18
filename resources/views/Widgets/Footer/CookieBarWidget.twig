@@ -1,0 +1,22 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass      = widget.settings.customClass.mobile %}
+{% set appearance       = widget.settings.appearance.mobile | default("primary") %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{{ Twig.component("Ceres::PageDesign.Components.CookieBar") }}
+{{ Twig.component("Ceres::PageDesign.Components.PrivacySettings") }}
+
+<div class="widget-cookie-bar widget-{{ appearance -}}
+    {%- if customClass | length > 0 %} {{ customClass }}{% endif -%}
+    {%- if isPreview %} widget-fw{% endif %}">
+    <div class="widget-inner">
+        <cookie-bar
+                {%- if spacingClasses | length > 0 %} classes="{{ spacingClasses }}"{% endif %}
+                {%- if inlineSpacings | length > 0 %} styles="{{ inlineSpacings }}"{% endif %}>
+        </cookie-bar>
+    </div>
+</div>

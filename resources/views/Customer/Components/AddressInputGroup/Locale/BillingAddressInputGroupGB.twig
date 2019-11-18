@@ -61,14 +61,14 @@
             <div class="col-12 col-sm-4">
                 <div class="input-unit" data-model="name2" v-validate:text="areNameFieldsRequired('gb', 'billing_address')">
                     <input type="text" name="firstName" :id="'txtFirstName' + _uid" :value="value.name2" @input="emitInputEvent('name2', $event.target.value)" data-model="name2" data-autofocus>
-                    <label :for="'txtFirstName' + _uid">{{ trans("Ceres::Template.addressFirstName") }}<span v-if="areNameFieldsRequired('gb', 'billing_address')">*</span></label>
+                    <label :for="'txtFirstName' + _uid">{{ trans("Ceres::Template.addressFirstName") }}<template v-if="areNameFieldsRequired('gb', 'billing_address')">*</template></label>
                 </div>
             </div>
 
             <div class="col-12 col-sm-4">
                 <div class="input-unit" data-model="name3" v-validate:text="areNameFieldsRequired('gb', 'billing_address')">
                     <input type="text" name="lastName" :id="'txtLastName' + _uid" :value="value.name3" @input="emitInputEvent('name3', $event.target.value)" data-model="name3">
-                    <label :for="'txtLastName' + _uid">{{ trans("Ceres::Template.addressLastName") }}<span v-if="areNameFieldsRequired('gb', 'billing_address')">*</span></label>
+                    <label :for="'txtLastName' + _uid">{{ trans("Ceres::Template.addressLastName") }}<template v-if="areNameFieldsRequired('gb', 'billing_address')">*</template></label>
                 </div>
             </div>
         </template>
