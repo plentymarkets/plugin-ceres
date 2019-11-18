@@ -20,8 +20,8 @@ class ShippingProfileWidget extends BaseWidget
             ->withType(WidgetTypes::CHECKOUT)
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(100)
+            ->withMaxPerPage(1)
             ->toArray();
-        // TODO: maxPerPage (1)
     }
 
     public function getSettings()

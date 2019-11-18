@@ -20,8 +20,8 @@ class PaymentProviderWidget extends BaseWidget
             ->withType(WidgetTypes::CHECKOUT)
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(200)
+            ->withMaxPerPage(1)
             ->toArray();
-        // TODO: maxPerPage after merge (1)
     }
 
     public function getSettings()

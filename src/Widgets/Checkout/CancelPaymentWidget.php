@@ -37,13 +37,13 @@ class CancelPaymentWidget extends BaseWidget
             ->withName("Widget.widgetButtonSizeLabel");
             // TODO: tooltipText cant be added yet.
 
-        /** @var ValueListFactory $listBoxValues */
-        $listBoxValues = pluginApp(ValueListFactory::class);
-        $listBoxValues->addEntry("btn-sm", "Widget.widgetButtonSizeSm")
-            ->addEntry("", "Widget.widgetButtonSizeNormal")
-            ->addEntry("btn-lg", "Widget.widgetButtonSizeLg");
-
-        $select->withListBoxValues($listBoxValues->toArray());
+        $select->withListBoxValues(
+            ValueListFactory::make()
+                ->addEntry("btn-sm", "Widget.widgetButtonSizeSm")
+                ->addEntry("", "Widget.widgetButtonSizeNormal")
+                ->addEntry("btn-lg", "Widget.widgetButtonSizeLg")
+                ->toArray()
+        );
 
         $settings->createSpacing();
 
