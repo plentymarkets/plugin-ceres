@@ -42,8 +42,7 @@ class NewsletterWidget extends BaseWidget
             ->withName("Widget.newsletterEmailFolderLabel")
             ->withTooltip("Widget.newsletterEmailFolderTooltip");
 
-        // BUTTON SIZE
-
+        $settings->createButtonSize();
         $settings->createSpacing(false, true);
 
         return $settings->toArray();

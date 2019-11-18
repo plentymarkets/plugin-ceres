@@ -4,7 +4,6 @@ namespace Ceres\Widgets\Common;
 
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
-use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
@@ -29,9 +28,7 @@ class NewsletterUnsubscribeWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance();
-
-        // BUTTON SIZE
-
+        $settings->createButtonSize();
         $settings->createSpacing(false, true);
 
         return $settings->toArray();

@@ -28,9 +28,7 @@ class PrintButtonWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance();
-
-        // BUTTON SIZE
-
+        $settings->createButtonSize();
         $settings->createSpacing();
 
         return $settings->toArray();
