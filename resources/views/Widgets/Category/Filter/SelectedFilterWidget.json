@@ -1,7 +1,7 @@
 {
   "identifier": "Ceres::SelectedFilterWidget",
   "label": "Widget.selectedFilterWidgetLabel",
-  "previewImageURL": "",
+  "previewImageURL": "/images/widgets/selected-filter.svg",
   "type": "categoryitem",
   "categories": ["categoryitem"],
   "position": 605,
