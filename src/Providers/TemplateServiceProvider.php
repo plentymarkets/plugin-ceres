@@ -28,7 +28,7 @@ use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use IO\Services\UrlBuilder\UrlQuery;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
-use Plenty\Modules\ShopBuilder\Repositories\ContentWidgetRepository;
+use Plenty\Modules\ShopBuilder\Contracts\ContentWidgetRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
@@ -94,8 +94,8 @@ class TemplateServiceProvider extends ServiceProvider
         $wizardContainer->register('shopCeres-assistant', ShopWizard::class);
 
         // register shop builder widgets
-        /** @var ContentWidgetRepository $widgetRepository */
-        $widgetRepository = pluginApp(ContentWidgetRepository::class);
+        /** @var ContentWidgetRepositoryContract $widgetRepository */
+        $widgetRepository = pluginApp(ContentWidgetRepositoryContract::class);
         foreach(WidgetCollection::all() as $widgetClass)
         {
             $widgetRepository->registerWidget($widgetClass);
