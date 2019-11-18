@@ -85,6 +85,17 @@ class WidgetDataFactory
     }
 
     /**
+     * @param int $min
+     * @param int $max
+     * @return $this
+     */
+    public function withList($min, $max)
+    {
+        $this->data['isList'] = "[{$min}, {$max}]";
+        return $this;
+    }
+
+    /**
      * Get widget data.
      *
      * @return array
