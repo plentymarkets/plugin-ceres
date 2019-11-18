@@ -29,7 +29,7 @@ class GuestLoginWidget extends BaseWidget
         $settings->createCustomClass();
         $settings->createAppearance();
         $settings->createButtonSize();
-        $settings->createSpacing();
+        $settings->createSpacing(false, true);
 
         return $settings->toArray();
     }
