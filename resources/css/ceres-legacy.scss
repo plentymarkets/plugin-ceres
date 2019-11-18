@@ -13097,6 +13097,11 @@ html.ie {
     .privacy-settings
     {
         max-height: 50vh;
+
+        table tr td:first-child 
+        {
+            width: 200px;
+        }
     }
 
     &.out
@@ -13105,6 +13110,7 @@ html.ie {
         right: auto;
     }
 }
+
 .tooltip {
     pointer-events: none;
 }
@@ -14421,6 +14427,18 @@ div:not(.top-bar) {
 
 .flag-icon-nn {
 	background-image: url(../images/flags/4x3/no.svg);
+}
+
+.flag-icon-ic {
+	background-image: url(../images/flags/ic.svg);
+}
+
+.flag-icon-ea {
+	background-image: url(../images/flags/ea.svg);
+}
+
+.flag-icon-an {
+	background-image: url(../images/flags/an.svg);
 }
 
 .fixed-top .cmp-country-settings,
@@ -20896,7 +20914,7 @@ header .widget
         .border-appearance.active,
         .border-appearance:hover
         {
-            border-color: $value;
+            border-color: $value !important;
         }
 
         .pagination .page-item
@@ -20913,6 +20931,15 @@ header .widget
             {
                 border-color: $value;
                 @include context-bg($value);
+            }
+        }
+
+        .custom-control-appearance
+        {
+            .custom-control-input:checked ~ .custom-control-label::before
+            {
+                border-color: $value;
+                background-color: $value;
             }
         }
     }

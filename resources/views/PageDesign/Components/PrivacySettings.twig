@@ -30,8 +30,8 @@
                     <div v-if="expandedGroups['{{ consentGroup.key }}']">
                         {% for consent in consentGroup.consents %}
                             {% set necessary = consentGroup.necessary or consent.necessary %}
-                            <div class="card consent bg-light mb-3{% if necessary %} border-primary border-appearance{% endif %}"
-                                 {% if not necessary %} :class="{'border-primary border-appearance': isConsented('{{ consentGroup.key }}.{{ consent.key }}')}"{% endif %}>
+                            <div class="card consent bg-light mb-3{% if necessary %} border-primary border-appearance active{% endif %}"
+                                 {% if not necessary %} :class="{'border-primary border-appearance active': isConsented('{{ consentGroup.key }}.{{ consent.key }}')}"{% endif %}>
 
                                 <div class="card-body" @click.stop="toggleConsent('{{ consentGroup.key }}.{{ consent.key }}')">
                                     <p class="d-flex mb-0 font-weight-bold">

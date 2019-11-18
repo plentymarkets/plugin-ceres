@@ -13646,6 +13646,8 @@ html.ie #thumb-carousel .owl-stage {
 
 .cookie-bar .privacy-settings {
   max-height: 50vh; }
+  .cookie-bar .privacy-settings table tr td:first-child {
+    width: 200px; }
 
 .cookie-bar.out {
   left: 15px;
@@ -14479,6 +14481,15 @@ div:not(.top-bar) > .page-header > div > .cmp-search-box {
 
 .flag-icon-nn {
   background-image: url(../images/flags/4x3/no.svg); }
+
+.flag-icon-ic {
+  background-image: url(../images/flags/ic.svg); }
+
+.flag-icon-ea {
+  background-image: url(../images/flags/ea.svg); }
+
+.flag-icon-an {
+  background-image: url(../images/flags/an.svg); }
 
 .fixed-top .cmp-country-settings,
 .fixed-top .cmp-currency-select {
@@ -19465,7 +19476,7 @@ header .widget {
 
 .widget-primary .border-appearance.active,
 .widget-primary .border-appearance:hover {
-  border-color: #008ebd; }
+  border-color: #008ebd !important; }
 
 .widget-primary .pagination .page-item .page-link {
   color: #008ebd; }
@@ -19476,6 +19487,10 @@ header .widget {
   border-color: #008ebd;
   background-color: #008ebd;
   color: #fff; }
+
+.widget-primary .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #008ebd;
+  background-color: #008ebd; }
 
 .widget-secondary .text-appearance {
   color: #d4021d !important; }
@@ -19553,7 +19568,7 @@ header .widget {
 
 .widget-secondary .border-appearance.active,
 .widget-secondary .border-appearance:hover {
-  border-color: #d4021d; }
+  border-color: #d4021d !important; }
 
 .widget-secondary .pagination .page-item .page-link {
   color: #d4021d; }
@@ -19564,6 +19579,10 @@ header .widget {
   border-color: #d4021d;
   background-color: #d4021d;
   color: #fff; }
+
+.widget-secondary .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #d4021d;
+  background-color: #d4021d; }
 
 .widget-success .text-appearance {
   color: #28a745 !important; }
@@ -19641,7 +19660,7 @@ header .widget {
 
 .widget-success .border-appearance.active,
 .widget-success .border-appearance:hover {
-  border-color: #28a745; }
+  border-color: #28a745 !important; }
 
 .widget-success .pagination .page-item .page-link {
   color: #28a745; }
@@ -19652,6 +19671,10 @@ header .widget {
   border-color: #28a745;
   background-color: #28a745;
   color: #fff; }
+
+.widget-success .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #28a745;
+  background-color: #28a745; }
 
 .widget-info .text-appearance {
   color: #17a2b8 !important; }
@@ -19729,7 +19752,7 @@ header .widget {
 
 .widget-info .border-appearance.active,
 .widget-info .border-appearance:hover {
-  border-color: #17a2b8; }
+  border-color: #17a2b8 !important; }
 
 .widget-info .pagination .page-item .page-link {
   color: #17a2b8; }
@@ -19740,6 +19763,10 @@ header .widget {
   border-color: #17a2b8;
   background-color: #17a2b8;
   color: #fff; }
+
+.widget-info .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #17a2b8;
+  background-color: #17a2b8; }
 
 .widget-warning .text-appearance {
   color: #ffc107 !important; }
@@ -19817,7 +19844,7 @@ header .widget {
 
 .widget-warning .border-appearance.active,
 .widget-warning .border-appearance:hover {
-  border-color: #ffc107; }
+  border-color: #ffc107 !important; }
 
 .widget-warning .pagination .page-item .page-link {
   color: #ffc107; }
@@ -19828,6 +19855,10 @@ header .widget {
   border-color: #ffc107;
   background-color: #ffc107;
   color: #212529; }
+
+.widget-warning .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #ffc107;
+  background-color: #ffc107; }
 
 .widget-danger .text-appearance {
   color: #d4021d !important; }
@@ -19905,7 +19936,7 @@ header .widget {
 
 .widget-danger .border-appearance.active,
 .widget-danger .border-appearance:hover {
-  border-color: #d4021d; }
+  border-color: #d4021d !important; }
 
 .widget-danger .pagination .page-item .page-link {
   color: #d4021d; }
@@ -19916,6 +19947,10 @@ header .widget {
   border-color: #d4021d;
   background-color: #d4021d;
   color: #fff; }
+
+.widget-danger .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #d4021d;
+  background-color: #d4021d; }
 
 .widget-placeholder {
   background-color: #dcdbd8;
