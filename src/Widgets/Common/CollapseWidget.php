@@ -16,7 +16,7 @@ class CollapseWidget extends BaseWidget
     {
         return WidgetDataFactory::make("Ceres::CollapseWidget")
             ->withLabel("Widget.collapseLabel")
-            ->withPreviewImageUrl("/images/widgets/collapse.svg"
+            ->withPreviewImageUrl("/images/widgets/collapse.svg")
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(1300)
