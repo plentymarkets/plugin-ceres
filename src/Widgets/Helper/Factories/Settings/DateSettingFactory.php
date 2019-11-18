@@ -11,17 +11,19 @@ class DateSettingFactory extends BaseSettingFactory
 
     /**
      * @param boolean $isCalendarTop
+     * @return DateSettingFactory
      */
     public function withCalendarTop($isCalendarTop)
     {
-        $this->withOption('openCalendarTop', $isCalendarTop);
+        return $this->withOption('openCalendarTop', $isCalendarTop);
     }
 
     /**
      * @param string $format
+     * @return DateSettingFactory
      */
     public function withDisplayDateFormat($format)
     {
-        $this->withOption('displayDateFormat', $format);
+        return $this->withOption('displayDateFormat', $format);
     }
 }

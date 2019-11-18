@@ -13,17 +13,19 @@ class TextareaSettingFactory extends BaseSettingFactory
 
     /**
      * @param boolean $isFixedHeight
+     * @return TextareaSettingFactory
      */
     public function withFixedHeight($isFixedHeight)
     {
-        $this->withOption('hasFixedHeight', $isFixedHeight);
+        return $this->withOption('hasFixedHeight', $isFixedHeight);
     }
 
     /**
      * @param integer $maxRows
+     * @return TextareaSettingFactory
      */
     public function withMaxRows($maxRows)
     {
-        $this->withOption('maxRows', $maxRows);
+        return $this->withOption('maxRows', $maxRows);
     }
 }

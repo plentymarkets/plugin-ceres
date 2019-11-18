@@ -2,6 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories;
 
+use Ceres\Widgets\Helper\Factories\Settings\ButtonSizeSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CategorySettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxSettingFactory;
@@ -30,7 +31,7 @@ class WidgetSettingsFactory
     /**
      * Create a generic widget settings entry.
      *
-     * @param string    $key    The key of the new settings entry. If key already exists, previous entry will be overridden.
+     * @param string $key The key of the new settings entry. If key already exists, previous entry will be overridden.
      *
      * @return GenericSettingFactory
      */
@@ -161,6 +162,7 @@ class WidgetSettingsFactory
     {
         $setting = $this->createSetting($key);
         $setting->withType('number');
+        $this->settings[$key] = $setting;
         return $setting;
     }
 
@@ -228,6 +230,7 @@ class WidgetSettingsFactory
     {
         $colorSetting = $this->createSetting($key);
         $colorSetting->withType('color');
+        $this->settings[$key] = $colorSetting;
         return $colorSetting;
     }
 
@@ -282,6 +285,7 @@ class WidgetSettingsFactory
         /** @var EditorSettingFactory $setting */
         $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('noteEditor');
+        $this->settings[$key] = $setting;
         return $setting;
     }
 
@@ -294,6 +298,7 @@ class WidgetSettingsFactory
         /** @var EditorSettingFactory $setting */
         $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('codeEditor');
+        $this->settings[$key] = $setting;
         return $setting;
     }
 
@@ -341,6 +346,17 @@ class WidgetSettingsFactory
         /** @var SpacingSetting $setting */
         $setting = pluginApp(SpacingSetting::class, ['usePadding' => $usePadding, 'useMargin' => $useMargin]);
         $this->settings['spacing'] = $setting;
+        return $setting;
+    }
+
+    /**
+     * @return ButtonSizeSettingFactory
+     */
+    public function createButtonSize()
+    {
+        /** @var ButtonSizeSettingFactory $setting */
+        $setting = pluginApp(ButtonSizeSettingFactory::class);
+        $this->settings['buttonSize'] = $setting;
         return $setting;
     }
 
