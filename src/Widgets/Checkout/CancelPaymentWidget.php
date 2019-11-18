@@ -35,15 +35,14 @@ class CancelPaymentWidget extends BaseWidget
         $select = $settings->createSelect("buttonSize")
             ->withDefaultValue("")
             ->withName("Widget.widgetButtonSizeLabel")
-            ->withTooltip("Widget.widgetButtonSizeTooltip");
-
-        $select->withListBoxValues(
-            ValueListFactory::make()
-                ->addEntry("btn-sm", "Widget.widgetButtonSizeSm")
-                ->addEntry("", "Widget.widgetButtonSizeNormal")
-                ->addEntry("btn-lg", "Widget.widgetButtonSizeLg")
-                ->toArray()
-        );
+            ->withTooltip("Widget.widgetButtonSizeTooltip")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry("btn-sm", "Widget.widgetButtonSizeSm")
+                    ->addEntry("", "Widget.widgetButtonSizeNormal")
+                    ->addEntry("btn-lg", "Widget.widgetButtonSizeLg")
+                    ->toArray()
+            );
 
         $settings->createSpacing();
 

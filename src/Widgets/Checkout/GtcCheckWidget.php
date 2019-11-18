@@ -20,6 +20,7 @@ class GtcCheckWidget extends BaseWidget
             ->withType(WidgetTypes::CHECKOUT)
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(400)
+            ->withMaxPerPage(1)
             ->toArray();
     }
 
