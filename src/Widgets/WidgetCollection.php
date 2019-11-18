@@ -213,7 +213,7 @@ class WidgetCollection
 //            self::FORM_WIDGETS,
 //            self::GRID_WIDGETS,
 //            self::HEADER_WIDGETS,
-//            self::ITEM_WIDGETS,
+            self::ITEM_WIDGETS,
 //            self::LEGAL_WIDGETS,
 //            self::LOGIN_WIDGETS,
 //            self::MY_ACCOUNT_WIDGETS,
