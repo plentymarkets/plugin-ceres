@@ -18,7 +18,7 @@ class TabWidget extends GridWidget
             ->withPreviewImageUrl("/images/widgets/tab.svg")
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
-            ->withPosition(500)
+            ->withPosition(200)
             ->toArray();
     }
 
@@ -50,7 +50,9 @@ class TabWidget extends GridWidget
             ->withName("Widget.tabNewTabInputName")
             ->withTooltip("Widget.tabNewTabInputTooltip");
 
-        // UUID FACTORY?
+        $container->children->createUUID("uuid");
+
+        $settings->createSpacing();
 
         return $settings->toArray();
     }
