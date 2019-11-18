@@ -8,7 +8,7 @@ class CheckboxGroupSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {
-        return $this->withType('checkboxGroup');
+        $this->withType('checkboxGroup');
     }
 
     /**
