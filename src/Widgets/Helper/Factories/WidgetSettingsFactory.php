@@ -23,6 +23,7 @@ use Ceres\Widgets\Helper\Factories\Settings\SliderSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SuggestionSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\TextareaSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\TextSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\UUIDSettingFactory;
 
 class WidgetSettingsFactory
 {
@@ -298,6 +299,20 @@ class WidgetSettingsFactory
         /** @var EditorSettingFactory $setting */
         $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('codeEditor');
+        $this->settings[$key] = $setting;
+        return $setting;
+    }
+
+    /**
+     * Create an UUID setting
+     *
+     * @param $key
+     * @return UUIDSettingFactory
+     */
+    public function createUUID($key)
+    {
+        /** @var UUIDSettingFactory $setting */
+        $setting = pluginApp(UUIDSettingFactory::class);
         $this->settings[$key] = $setting;
         return $setting;
     }
