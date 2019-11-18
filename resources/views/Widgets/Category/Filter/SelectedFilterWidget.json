@@ -1,0 +1,20 @@
+{
+  "identifier": "Ceres::SelectedFilterWidget",
+  "label": "Widget.selectedFilterWidgetLabel",
+  "previewImageURL": "",
+  "type": "categoryitem",
+  "categories": ["categoryitem"],
+  "position": 605,
+  "widgetClass": "Ceres\\Widgets\\Category\\Filter\\SelectedFilterWidget",
+  "settings": {
+    "customClass":"@include(customClass)",
+    "appearance": {
+      "type": "select",
+      "required": true,
+      "defaultValue": "none",
+      "options": "@include(optionalAppearance)"
+    },
+    "alignment": "@include(alignment)",
+    "spacing": "@include(spacing)"
+  }
+}
