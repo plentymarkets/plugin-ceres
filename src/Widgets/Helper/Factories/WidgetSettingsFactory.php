@@ -16,6 +16,7 @@ use Ceres\Widgets\Helper\Factories\Settings\Includes\AppearanceSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingSetting;
+use Ceres\Widgets\Helper\Factories\Settings\ManufacturerSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SliderSettingFactory;
@@ -312,6 +313,20 @@ class WidgetSettingsFactory
         /** @var EditorSettingFactory $setting */
         $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('codeEditor');
+        $this->settings[$key] = $setting;
+        return $setting;
+    }
+
+    /**
+     * Create a manufacturer picker
+     *
+     * @param $key
+     * @return ManufacturerSettingFactory
+     */
+    public function createManufacturer($key)
+    {
+        /** @var ManufacturerSettingFactory $setting */
+        $setting = pluginApp(ManufacturerSettingFactory::class);
         $this->settings[$key] = $setting;
         return $setting;
     }
