@@ -86,6 +86,18 @@ class BaseSettingFactory
         return $this->withOption("tooltipText", $tooltip);
     }
 
+    /** Determines whether the declaration is used to render a list of the specified form field.
+     *
+     * @param string|int $min
+     * @param string|int $max
+     * @return $this
+     */
+    public function withList($min, $max = "")
+    {
+        $this->data['isList'] = "[{$min}, {$max}]";
+        return $this;
+    }
+
     /**
      * Get all data as a native array
      *
