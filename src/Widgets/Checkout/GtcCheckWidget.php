@@ -33,25 +33,25 @@ class GtcCheckWidget extends BaseWidget
 
         $settings->createCheckbox("hideCheckbox")
             ->withDefaultValue(false)
-            ->withName("Widget.gtcCheckHideCheckboxLabel");
-        // missing tooltip
+            ->withName("Widget.gtcCheckHideCheckboxLabel")
+            ->withTooltip("Widget.gtcCheckHideCheckboxTooltip");
 
         $settings->createCheckbox("isPreselected")
             ->withCondition("hideCheckbox !== true")
             ->withDefaultValue(false)
-            ->withName("Widget.gtcCheckIsPreselectedLabel");
-        // missing tooltip
+            ->withName("Widget.gtcCheckIsPreselectedLabel")
+            ->withTooltip("Widget.gtcCheckIsPreselectedTooltip");
 
         $settings->createCheckbox("isRequired")
             ->withCondition("hideCheckbox !== true")
             ->withDefaultValue(true)
-            ->withName("Widget.gtcCheckIsRequiredLabel");
-        // missing tooltip
+            ->withName("Widget.gtcCheckIsRequiredLabel")
+            ->withTooltip("Widget.gtcCheckIsRequiredTooltip");
 
         $settings->createCodeEditor("customText")
             ->withDefaultValue("")
-            ->withName("Widget.gtcCheckCustomTextLabel");
-        // missing tooltip
+            ->withName("Widget.gtcCheckCustomTextLabel")
+            ->withTooltip("Widget.gtcCheckCustomTextTooltip");
 
         $settings->createSpacing(false, true);
 

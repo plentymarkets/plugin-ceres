@@ -29,7 +29,7 @@ class ContactWishWidget extends BaseWidget
         $settings = pluginApp(WidgetSettingsFactory::class);
 
         $settings->createCustomClass();
-        $settings->createSpacing();
+        $settings->createSpacing(false, true);
 
         return $settings->toArray();
     }

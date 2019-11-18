@@ -32,28 +32,30 @@ class SubscribeNewsletterCheckWidget extends BaseWidget
 
         $settings->createNumber("emailFolder")
             ->withDefaultValue("")
-            ->withName("Widget.subscribeNewsletterCheckEmailFolderLabel");
+            ->withName("Widget.subscribeNewsletterCheckEmailFolderLabel")
+            ->withTooltip("Widget.subscribeNewsletterCheckEmailFolderTooltip");
 
         $settings->createCheckbox("hideCheckbox")
             ->withDefaultValue(false)
-            ->withName("Widget.subscribeNewsletterCheckHideCheckboxTooltip");
-        // missing tooltip
+            ->withName("Widget.subscribeNewsletterCheckHideCheckboxTooltip")
+            ->withTooltip("Widget.subscribeNewsletterCheckHideCheckboxTooltip");
 
         $settings->createCheckbox("isPreselected")
             ->withCondition("hideCheckbox !== true")
             ->withDefaultValue(false)
-            ->withName("Widget.subscribeNewsletterCheckIsPreselectedLabel");
-        // missing tooltip
+            ->withName("Widget.subscribeNewsletterCheckIsPreselectedLabel")
+            ->withTooltip("Widget.subscribeNewsletterCheckIsPreselectedTooltip");
 
         $settings->createCheckbox("isRequired")
             ->withCondition("hideCheckbox !== true")
             ->withDefaultValue(true)
-            ->withName("Widget.subscribeNewsletterCheckIsRequiredLabel");
-        // missing tooltip
+            ->withName("Widget.subscribeNewsletterCheckIsRequiredLabel")
+            ->withTooltip("Widget.subscribeNewsletterCheckIsRequiredTooltip");
 
         $settings->createCodeEditor("customText")
             ->withDefaultValue("")
-            ->withName("Widget.subscribeNewsletterCheckCustomTextLabel");
+            ->withName("Widget.subscribeNewsletterCheckCustomTextLabel")
+            ->withTooltip("Widget.subscribeNewsletterCheckCustomTextTooltip");
         // missing tooltip
 
         $settings->createSpacing(false, true);

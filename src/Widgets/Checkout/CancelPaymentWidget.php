@@ -34,8 +34,8 @@ class CancelPaymentWidget extends BaseWidget
 
         $select = $settings->createSelect("buttonSize")
             ->withDefaultValue("")
-            ->withName("Widget.widgetButtonSizeLabel");
-            // TODO: tooltipText cant be added yet.
+            ->withName("Widget.widgetButtonSizeLabel")
+            ->withTooltip("Widget.widgetButtonSizeTooltip");
 
         $select->withListBoxValues(
             ValueListFactory::make()
