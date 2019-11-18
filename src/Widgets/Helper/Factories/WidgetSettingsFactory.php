@@ -2,7 +2,6 @@
 
 namespace Ceres\Widgets\Helper\Factories;
 
-use Ceres\Widgets\Helper\Factories\Settings\ButtonSizeSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CategorySettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxSettingFactory;
@@ -17,6 +16,7 @@ use Ceres\Widgets\Helper\Factories\Settings\Includes\AppearanceSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingSetting;
+use Ceres\Widgets\Helper\Factories\Settings\Includes\ButtonSizeSetting;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SliderSettingFactory;
@@ -350,12 +350,12 @@ class WidgetSettingsFactory
     }
 
     /**
-     * @return ButtonSizeSettingFactory
+     * @return ButtonSizeSetting
      */
     public function createButtonSize()
     {
-        /** @var ButtonSizeSettingFactory $setting */
-        $setting = pluginApp(ButtonSizeSettingFactory::class);
+        /** @var ButtonSizeSetting $setting */
+        $setting = pluginApp(ButtonSizeSetting::class);
         $this->settings['buttonSize'] = $setting;
         return $setting;
     }
