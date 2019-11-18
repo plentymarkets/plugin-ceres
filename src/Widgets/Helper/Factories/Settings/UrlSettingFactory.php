@@ -18,5 +18,4 @@ class UrlSettingFactory extends BaseSettingFactory
     {
         $this->withOption('internalLinks', $internalLinks);
     }
-
 }
