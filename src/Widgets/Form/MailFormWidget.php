@@ -36,57 +36,33 @@ class MailFormWidget extends BaseWidget
         $settingsFactory->createText("labelSubmit")
             ->withDefaultValue("")
             ->withName("Widget.mailFormSubmitLabel")
-            // TODO tooltip
-            //->withTooltip("Widget.mailFormSubmitTooltip")
-            ;
+            ->withTooltip("Widget.mailFormSubmitTooltip");
 
         $settingsFactory->createText("mailTarget")
             ->withDefaultValue("")
             ->withName("Widget.mailFormMailTargetLabel")
-            // TODO tooltip
-            //->withTooltip("Widget.mailFormMailTargetTooltip")
-            ;
+            ->withTooltip("Widget.mailFormMailTargetTooltip");
 
         $settingsFactory->createText("subject")
             ->withDefaultValue("")
             ->withName("Widget.mailFormSubjectLabel")
-            // TODO tooltip
-            //->withTooltip("Widget.mailFormSubjectTooltip")
-            ;
+            ->withTooltip("Widget.mailFormSubjectTooltip");
 
         $settingsFactory->createText("ccAddresses")
             ->withDefaultValue("")
             ->withList(1)
             ->withName("Widget.mailFormCCAddressesLabel")
-            // TODO tooltip
-            //->withTooltip("Widget.mailFormCCAddressesTooltip")
-            ;
+            ->withTooltip("Widget.mailFormCCAddressesTooltip");
 
         $settingsFactory->createText("bccAddresses")
             ->withDefaultValue("")
             ->withList(1)
             ->withName("Widget.mailFormBCCAddressesLabel")
-            // TODO tooltip
-            //->withTooltip("Widget.mailFormBCCAddressesTooltip")
-            ;
+            ->withTooltip("Widget.mailFormBCCAddressesTooltip");
 
-        $settingsFactory->createSelect("buttonSize")
-            ->withDefaultValue("")
-            ->withName("Widget.mailFormBCCAddressesLabel")
-            // TODO tooltip
-            //->withTooltip("Widget.mailFormBCCAddressesTooltip")
-            ->withListBoxValues(
-                ValueListFactory::make()
-                    ->addEntry("btn-sm", "Widget.widgetButtonSizeSm")
-                    ->addEntry("", "Widget.widgetButtonSizeNormal")
-                    ->addEntry("btn-lg", "Widget.widgetButtonSizeLg")
-                    ->toArray()
-            );
-
+        $settingsFactory->createButtonSize();
         $settingsFactory->createSpacing(true, true);
 
         return $settingsFactory->toArray();
     }
-
-
 }
