@@ -13,17 +13,19 @@ class SelectSettingFactory extends BaseSettingFactory
 
     /**
      * @param boolean $openOnTop
+     * @return SelectSettingFactory
      */
     public function withOpenOnTop($openOnTop)
     {
-        $this->withOption('openOnTop', $openOnTop);
+        return $this->withOption('openOnTop', $openOnTop);
     }
 
     /**
      * @param array $listBoxValues
+     * @return SelectSettingFactory
      */
     public function withListBoxValues($listBoxValues)
     {
-        $this->withOption('listBoxValues', $listBoxValues);
+        return $this->withOption('listBoxValues', $listBoxValues);
     }
 }
