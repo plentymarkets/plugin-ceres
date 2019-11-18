@@ -162,6 +162,7 @@ class WidgetSettingsFactory
     {
         $setting = $this->createSetting($key);
         $setting->withType('number');
+        $this->settings[$key] = $setting;
         return $setting;
     }
 
@@ -229,6 +230,7 @@ class WidgetSettingsFactory
     {
         $colorSetting = $this->createSetting($key);
         $colorSetting->withType('color');
+        $this->settings[$key] = $colorSetting;
         return $colorSetting;
     }
 
