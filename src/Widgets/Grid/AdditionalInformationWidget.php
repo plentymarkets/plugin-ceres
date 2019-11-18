@@ -63,9 +63,7 @@ class AdditionalInformationWidget extends BaseWidget
             );
 
         $settings->createIcon();
-
-        // BUTTON SIZE
-
+        $settings->createButtonSize();
         $settings->createSpacing(true, false);
 
         return $settings->toArray();
