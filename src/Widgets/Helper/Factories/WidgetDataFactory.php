@@ -84,7 +84,7 @@ class WidgetDataFactory
         return $this;
     }
 
-    /**
+     /**
      * Limit the amount of times a widget can be placed on a content.
      *
      * @param int $maxPerPage Maximum allowed amount of instances of the widget on a content
