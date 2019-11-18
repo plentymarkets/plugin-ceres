@@ -65,10 +65,7 @@
 
 .owl-carousel .owl-item img {
   width: 100%;
-  -webkit-transform-style: preserve-3d;
   object-fit: contain;
-  display: inline-block;
-  vertical-align: middle;
   height: 100%;
 }
 
@@ -417,25 +414,15 @@ Custom classes
 }
 
 .owl-thumbs {
-  display: inline-block;
   margin-top: .5rem;
 
   .owl-thumb {
-    object-fit: contain;
-    width: 8em;
-    height: 8em;
-    display: inline-block;
-    vertical-align: middle;
     background:$white;
     border:1px solid transparent;
     &.active,
     &:hover {
       border:1px solid $primary;
       cursor: pointer;
-    }
-
-    @include media-breakpoint-down(md) {
-      height: 4em;
     }
   }
 }
