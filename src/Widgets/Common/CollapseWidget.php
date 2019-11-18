@@ -33,7 +33,7 @@ class CollapseWidget extends BaseWidget
 
         $collapseBox = $settings->createVerticalContainer("collapseBox")
             ->withName("Widget.collapseBoxLabel")
-            ->withList(0);
+            ->withList(1);
 
         $collapseBox->children->createText("headline")
             ->withDefaultValue("")
