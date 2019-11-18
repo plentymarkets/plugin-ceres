@@ -61,7 +61,7 @@ class MailFormWidget extends BaseWidget
             ->withTooltip("Widget.mailFormBCCAddressesTooltip");
 
         $settingsFactory->createButtonSize();
-        $settingsFactory->createSpacing(true, true);
+        $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
     }
