@@ -5,6 +5,7 @@ namespace Ceres\Widgets\Footer;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
+use Ceres\Widgets\Helper\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class CookieBarWidget extends BaseWidget
@@ -18,7 +19,7 @@ class CookieBarWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/cookie-bar.svg")
             ->withType(WidgetTypes::FOOTER)
             ->withCategory(WidgetCategories::FOOTER)
-            ->withPosition(1200)
+            ->withPosition(100)
             ->toArray();
     }
 
