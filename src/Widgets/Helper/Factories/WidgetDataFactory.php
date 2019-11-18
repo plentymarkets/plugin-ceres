@@ -85,11 +85,11 @@ class WidgetDataFactory
     }
 
     /**
-     * @param int $min
-     * @param int $max
+     * @param string|int $min
+     * @param string|int $max
      * @return $this
      */
-    public function withList($min, $max)
+    public function withList($min, $max = "")
     {
         $this->data['isList'] = "[{$min}, {$max}]";
         return $this;
