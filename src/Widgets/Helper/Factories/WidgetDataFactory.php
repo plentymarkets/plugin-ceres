@@ -85,6 +85,19 @@ class WidgetDataFactory
     }
 
     /**
+     * Determines whether the declaration is used to render a list of the specified form field.
+     *
+     * @param string|int $min
+     * @param string|int $max
+     * @return $this
+     */
+    public function withList($min, $max = "")
+    {
+        $this->data['isList'] = "[{$min}, {$max}]";
+        return $this;
+    }
+
+     /**
      * Limit the amount of times a widget can be placed on a content.
      *
      * @param int $maxPerPage Maximum allowed amount of instances of the widget on a content
