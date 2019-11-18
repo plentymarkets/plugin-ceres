@@ -13,25 +13,28 @@ class FileSettingFactory extends BaseSettingFactory
 
     /**
      * @param boolean $showPreview
+     * @return FileSettingFactory
      */
     public function withShowPreview($showPreview)
     {
-        $this->withOption('showPreview', $showPreview);
+        return $this->withOption('showPreview', $showPreview);
     }
 
     /**
      * @param string[] $allowedExtensions
+     * @return FileSettingFactory
      */
     public function withAllowedExtensions($allowedExtensions)
     {
-        $this->withOption('allowedExtensions', $allowedExtensions);
+        return $this->withOption('allowedExtensions', $allowedExtensions);
     }
 
     /**
      * @param boolean $foldersAllowed
+     * @return FileSettingFactory
      */
     public function withFoldersAllowed($foldersAllowed)
     {
-        $this->withOption('allowedFolders', $foldersAllowed);
+        return $this->withOption('allowedFolders', $foldersAllowed);
     }
 }

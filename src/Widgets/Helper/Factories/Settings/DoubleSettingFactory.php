@@ -13,17 +13,19 @@ class DoubleSettingFactory extends BaseSettingFactory
 
     /**
      * @param $isPriceInput
+     * @return DoubleSettingFactory
      */
     public function withPriceInput($isPriceInput)
     {
-        $this->withOption('isPriceInput', $isPriceInput);
+        return $this->withOption('isPriceInput', $isPriceInput);
     }
 
     /**
      * @param integer $decimalCount
+     * @return DoubleSettingFactory
      */
     public function withDecimalCount($decimalCount)
     {
-        $this->withOption('decimalCount', $decimalCount);
+        return  $this->withOption('decimalCount', $decimalCount);
     }
 }

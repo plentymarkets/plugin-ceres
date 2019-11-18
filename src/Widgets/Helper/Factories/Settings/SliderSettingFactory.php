@@ -13,50 +13,56 @@ class SliderSettingFactory extends BaseSettingFactory
 
     /**
      * @param integer $min
+     * @return SliderSettingFactory
      */
     public function withMin($min)
     {
-        $this->withOption('min', $min);
+        return $this->withOption('min', $min);
     }
 
     /**
      * @param integer $max
+     * @return SliderSettingFactory
      */
     public function withMax($max)
     {
-        $this->withOption('max', $max);
+        return $this->withOption('max', $max);
     }
 
     /**
      * @param integer $interval
+     * @return SliderSettingFactory
      */
     public function withInterval($interval)
     {
-        $this->withOption('interval', $interval);
+        return $this->withOption('interval', $interval);
     }
 
     /**
      * @param integer $precision
+     * @return SliderSettingFactory
      */
     public function withPrecision($precision)
     {
-        $this->withOption('precision', $precision);
+        return $this->withOption('precision', $precision);
     }
 
     /**
      * @param boolean $showMinMax
+     * @return SliderSettingFactory
      */
     public function withShowMinMax($showMinMax)
     {
-        $this->withOption('showMinMax', $showMinMax);
+        return $this->withOption('showMinMax', $showMinMax);
     }
 
     /**
      * @param boolean $showTicks
+     * @return SliderSettingFactory
      */
     public function withShowTicks($showTicks)
     {
-        $this->withOption('withTicks', $showTicks);
+        return $this->withOption('withTicks', $showTicks);
     }
 
 }
