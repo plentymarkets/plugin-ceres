@@ -23,17 +23,15 @@
 
 {{ Twig.print("services.template.disableCacheForTemplate()") }}
 
-{{ Twig.if("not services.authentication.isLoggedIn() or #{ isPreview | json_encode }") }}
-    <div class="widget widget-registration widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
-        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-        <div class="widget-inner">
-            <registration
-                template="#vue-registration"
-                backlink="{{ request.get("backlink") | url_encode }}"
-                :shown-fields="{{ shownFields | json_encode }}"
-                :button-size="{{ buttonSize | json_encode }}"
-                :required-fields="{{ requiredFields | json_encode }}">
-            </registration>
-        </div>
+<div class="widget widget-registration widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div class="widget-inner">
+        <registration
+            template="#vue-registration"
+            backlink="{{ Twig.print("request.get('backlink') | url_encode") }}"
+            :shown-fields="{{ shownFields | json_encode }}"
+            :button-size="{{ buttonSize | json_encode }}"
+            :required-fields="{{ requiredFields | json_encode }}">
+        </registration>
     </div>
-{{ Twig.endif() }}
+</div>

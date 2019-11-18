@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::CookieBarWidget",
+    "label": "Widget.cookieBarLabel",
+    "previewImageURL": "/images/widgets/cookie-bar.svg",
+    "type": "footer",
+    "categories": ["footer"],
+    "position": 1200,
+    "widgetClass": "Ceres\\Widgets\\Footer\\CookieBarWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

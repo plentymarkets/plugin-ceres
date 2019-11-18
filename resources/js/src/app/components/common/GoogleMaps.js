@@ -1,8 +1,10 @@
 import Vue from "vue";
+import { whenConsented } from "../../helper/whenConsented";
+import { isNullOrUndefined } from "../../helper/utils";
 
 Vue.component("google-maps-widget",
     {
-        template: `<div :class="aspectRatio" class="maps-component" ref="googleMapsContainer"></div>`,
+        template: `<div :class="aspectRatio" class="maps-component position-relative" ref="googleMapsContainer"><div v-if="scriptBlocked"><slot></slot></div></div>`,
 
         props:
         {
@@ -41,6 +43,13 @@ Vue.component("google-maps-widget",
                 }
         },
 
+        data: function()
+        {
+            return {
+                scriptBlocked: true
+            };
+        },
+
         computed:
         {
             coordinates()
@@ -64,14 +73,15 @@ Vue.component("google-maps-widget",
         {
             this.$nextTick(() =>
             {
-                if (!document.querySelector("#google-maps-api"))
-                {
-                    this.createScript().then(() => this.initializeMap());
-                }
-                else
-                {
-                    this.listenToExistingScript();
-                }
+                this.createScript()
+                    .then(() =>
+                    {
+                        this.initializeMap();
+                    })
+                    .catch(() =>
+                    {
+                        // Do nothing
+                    });
             });
         },
 
@@ -81,32 +91,48 @@ Vue.component("google-maps-widget",
             {
                 return new Promise((resolve, reject) =>
                 {
-                    const script = document.createElement("script");
-                    const scriptSource = `https://maps.googleapis.com/maps/api/js?key=${this.googleApiKey}`;
+                    const script = document.querySelector("script#google-maps-api");
 
-                    script.type = "text/javascript";
-                    script.id = "google-maps-api";
-                    script.src = scriptSource;
+                    if (!isNullOrUndefined(script))
+                    {
+                        // script already injected...
+                        this.scriptBlocked = false;
+                        if (isNullOrUndefined(google))
+                        {
+                            // ...but not loaded yet
+                            script.addEventListener("load", () => resolve(script), false);
+                        }
+                        else
+                        {
+                            // ..and fully loaded
+                            resolve(script);
+                        }
+                    }
+                    else
+                    {
+                        // script not loaded
+                        whenConsented(
+                            "media.googleMaps",
+                            () =>
+                            {
+                                this.scriptBlocked = false;
+                                const script = document.createElement("script");
 
-                    script.addEventListener("load", () => resolve(script), false);
-                    script.addEventListener("error", () => reject(script), false);
+                                script.type = "text/javascript";
+                                script.id = "google-maps-api";
+                                script.src = `https://maps.googleapis.com/maps/api/js?key=${this.googleApiKey}`;
 
-                    document.body.appendChild(script);
+                                script.addEventListener("load", () => resolve(script), false);
+                                script.addEventListener("error", () => reject(script), false);
+
+                                document.body.appendChild(script);
+                            },
+                            () =>
+                            {
+                                this.scriptBlocked = true;
+                            });
+                    }
                 });
-            },
-
-            listenToExistingScript()
-            {
-                const script = document.querySelector("script#google-maps-api");
-
-                if (typeof google === "undefined")
-                {
-                    script.addEventListener("load", () => this.initializeMap(), false);
-                }
-                else
-                {
-                    this.initializeMap();
-                }
             },
 
             initializeMap()
