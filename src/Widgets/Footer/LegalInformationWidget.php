@@ -66,5 +66,7 @@ class LegalInformationWidget extends BaseWidget
             ->withAllowedExtensions(["pdf"]);
 
         $settingsFactory->createSpacing();
+
+        return $settingsFactory->toArray();
     }
 }
