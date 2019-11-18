@@ -72,7 +72,8 @@ class ImageBoxWidget extends BaseWidget
                     ->toArray()
             );
 
-        // URL IS MISSING
+        $settings->createUrl("url")
+            ->withName("Widget.imageBoxUrlLabel");
 
         $settings->createCheckbox("customCaption")
             ->withCondition("style !== 'no-caption'")
