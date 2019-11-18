@@ -19,7 +19,7 @@ class CancelPaymentWidget extends BaseWidget
             ->withLabel("Widget.cancelPaymentLabel")
             ->withPreviewImageUrl("/images/widgets/cancel-payment.svg")
             ->withType(WidgetTypes::CHECKOUT)
-            ->withCategory(WidgetCategories::BASKET)
+            ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(800)
             ->toArray();
     }
