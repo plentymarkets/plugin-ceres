@@ -34,8 +34,7 @@
                 <hr>
                 <!-- ORDER HISTORY TWIG -->
                 <div class="order-list">
-                    {% for tempOrderEntry in orderList.entries %}
-                        {% set entry = tempOrderEntry.toArray() %}
+                    {% for entry in orderList.entries %}
                         <article class="cmp cmp-order-item">
                             <div class="item-details small">
                                 <div class="mb-3">
@@ -84,9 +83,9 @@
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                                 {{ trans("Ceres::Template.orderHistoryOrderDetails") }}
                                             </button>
-
-                                            {% if entry.isReturnable %}
-                                                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="{{ urls.returns(entry.order.id) }}">
+                                            {% set returnOrder = entry.toArray() %}
+                                            {% if returnOrder.isReturnable %}
+                                                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="{{ urls.returns(returnOrder.order.id) }}">
                                                     <i class="fa fa-undo" aria-hidden="true"></i>
                                                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                                                 </a>
