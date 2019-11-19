@@ -34,7 +34,7 @@ class AddressWidget extends BaseWidget
 
         $settingsFactory->createSelect("addressDefaultSalutation")
             ->withName("Widget.addressDefaultSalutation")
-//            ->withTooltip("Widget.addressDefaultSalutationTooltip")
+            ->withTooltip("Widget.addressDefaultSalutationTooltip")
             ->withDefaultValue("male")
             ->withListBoxValues(
                 ValueListFactory::make()
@@ -47,7 +47,7 @@ class AddressWidget extends BaseWidget
 
         $settingsFactory->createSelect("addressType")
             ->withName("Widget.addressType")
-//            ->withTooltip("Widget.addressTypeTooltip")
+            ->withTooltip("Widget.addressTypeTooltip")
             ->withDefaultValue("1")
             ->withListBoxValues(
                 ValueListFactory::make()
@@ -58,7 +58,7 @@ class AddressWidget extends BaseWidget
 
         $settingsFactory->createSelect("addressLayout")
             ->withName("Widget.addressLayout")
-//            ->withTooltip("Widget.addressLayoutTooltip")
+            ->withTooltip("Widget.addressLayoutTooltip")
             ->withDefaultValue("DE")
             ->withListBoxValues(
                 ValueListFactory::make()
