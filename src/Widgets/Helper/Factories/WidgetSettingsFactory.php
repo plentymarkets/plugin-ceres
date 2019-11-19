@@ -17,6 +17,7 @@ use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\ButtonSizeSetting;
+use Ceres\Widgets\Helper\Factories\Settings\ManufacturerSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SliderSettingFactory;
@@ -24,6 +25,7 @@ use Ceres\Widgets\Helper\Factories\Settings\SuggestionSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\TextareaSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\TextSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\UUIDSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\UrlSettingFactory;
 
 class WidgetSettingsFactory
 {
@@ -278,6 +280,20 @@ class WidgetSettingsFactory
     }
 
     /**
+     * Create a url picker
+     *
+     * @param string $key
+     * @return UrlSettingFactory
+     */
+    public function createUrl($key)
+    {
+        /** @var UrlSettingFactory $setting */
+        $setting = pluginApp(UrlSettingFactory::class);
+        $this->settings[$key] = $setting;
+        return $setting;
+    }
+
+    /**
      * @param string $key
      * @return EditorSettingFactory
      */
@@ -313,6 +329,20 @@ class WidgetSettingsFactory
     {
         /** @var UUIDSettingFactory $setting */
         $setting = pluginApp(UUIDSettingFactory::class);
+        $this->settings[$key] = $setting;
+        return $setting;
+    }
+  
+    /**
+     * Create a manufacturer picker
+     *
+     * @param $key
+     * @return ManufacturerSettingFactory
+     */
+    public function createManufacturer($key)
+    {
+        /** @var ManufacturerSettingFactory $setting */
+        $setting = pluginApp(ManufacturerSettingFactory::class);
         $this->settings[$key] = $setting;
         return $setting;
     }
