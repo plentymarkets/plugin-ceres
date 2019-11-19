@@ -10,7 +10,7 @@ class AppearanceSetting extends BaseSettingFactory
     public function __construct($optional)
     {
         $this->withType('select')
-            ->withDefaultValue('primary')
+            ->withDefaultValue($optional ? 'none' : 'primary')
             ->withName('Widget.widgetAppearanceLabel')
             ->withOption('tooltipText', 'Widget.widgetAppearanceTooltip');
 
