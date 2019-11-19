@@ -100,8 +100,7 @@
 
         {% set currentUrl = currentUrl ~ "/" ~ category.details[0].nameUrl  %}
         <ul>
-            <li class="nav-item
-                {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
+            <li class="nav-item {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
 
                 <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
                 {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
