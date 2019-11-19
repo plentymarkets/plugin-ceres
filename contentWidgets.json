@@ -880,24 +880,6 @@
                     ]
                 }
             },
-            "linkTarget": {
-                "type": "select",
-                "defaultValue": "dynamic",
-                "options": {
-                    "name": "Widget.itemGridLinkTargetLabel",
-                    "tooltipText": "Widget.itemGridLinkTargetTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": "dynamic",
-                            "caption": "Widget.itemGridLinkTargetOptionDynamic"
-                        },
-                        {
-                            "value": "select",
-                            "caption": "Widget.itemGridLinkTargetOptionSelect"
-                        }
-                    ]
-                }
-            },
             "spacing": {
                 "type": "vertical",
                 "options": {
