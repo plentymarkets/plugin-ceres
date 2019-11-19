@@ -34,7 +34,7 @@ class ItemDataTableWidget extends BaseWidget
         $settingsFactory->createSelect("itemInformation")
             ->withName("Widget.")
             ->withDefaultValue("item.id")
-            ->withList(true)
+            ->withList(1)
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("item.id", "Widget.itemDataTableItemId")
