@@ -4,7 +4,8 @@
 
 ### Behoben 
 
-- Bestellmerkmale wurden im Warenkorb und im Checkout weder angezeigt noch verrechnet und wurden dadurch nicht am Auftrag mitgegeben. Dieses Verhalten wurde behoben.
+- Bestellmerkmale wurden im Warenkorb und im Checkout erst nach einem erneuten Laden der Seite angezeigt und nicht am Auftrag mitgegeben. Dieses Verhalten wurde behoben.
+- Im Mein Konto-Bereich konnten Auftragsdetails nicht mehr eingesehen werden, sofern dieser nicht mit dem ShopBuilder erstellt wurde. Dies wurde behoben. 
 
 ## v4.4.0 (2019-11-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.4...4.4.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
