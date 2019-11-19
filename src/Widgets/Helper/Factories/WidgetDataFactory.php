@@ -97,6 +97,18 @@ class WidgetDataFactory
     }
 
     /**
+     * Limits the widget types that you can drop into this widget.
+     *
+     * @param WidgetTypes[] $allowedTypes
+     * @return $this
+     */
+    public function withAllowedNestingTypes($allowedTypes)
+    {
+        $this->data['allowedNestingTypes'] = $allowedTypes;
+        return $this;
+    }
+  
+    /**
      * Set the widget as deprecated.
      *
      * @return $this
