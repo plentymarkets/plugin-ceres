@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v4.4.1 (2019-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.0...4.4.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben 
+
+- Bestellmerkmale wurden im Warenkorb und im Checkout weder angezeigt noch verrechnet und wurden dadurch nicht am Auftrag mitgegeben. Dieses Verhalten wurde behoben.
+
 ## v4.4.0 (2019-11-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.4...4.4.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
