@@ -38,7 +38,7 @@ class StickyContainerWidget extends BaseWidget
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("stickToParent", "Widget.stickyContainerStickToParent")
-                    ->addEntry("stickTobody", "Widget.stickyContainerStickToBody")
+                    ->addEntry("stickToBody", "Widget.stickyContainerStickToBody")
                     ->toArray()
             );
 
