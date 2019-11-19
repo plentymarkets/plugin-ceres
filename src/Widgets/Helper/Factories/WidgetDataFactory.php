@@ -97,6 +97,17 @@ class WidgetDataFactory
     }
 
     /**
+     * Set the widget as deprecated.
+     *
+     * @return $this
+     */
+    public function withDeprecated()
+    {
+        $this->data['deprecated'] = true;
+        return $this;
+    }
+
+    /**
      * Get widget data.
      *
      * @return array
