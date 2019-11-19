@@ -29,8 +29,7 @@ class InlineTextWidget extends BaseWidget
         $settings = pluginApp(WidgetSettingsFactory::class);
 
         $settings->createCustomClass();
-        $settings->createAppearance(true)
-            ->withDefaultValue("none");
+        $settings->createAppearance(true);
 
         $settings->createSpacing();
 

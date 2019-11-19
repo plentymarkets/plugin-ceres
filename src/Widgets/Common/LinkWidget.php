@@ -32,7 +32,7 @@ class LinkWidget extends BaseWidget
         $settings->createCustomClass();
         $settings->createAppearance();
 
-        // WAIT FOR BUTTONSIZE INCLUDE
+        $settings->createButtonSize();
 
         $settings->createCheckbox("block")
             ->withDefaultValue(false)

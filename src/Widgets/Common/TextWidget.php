@@ -29,8 +29,7 @@ class TextWidget extends BaseWidget
         $settings = pluginApp(WidgetSettingsFactory::class);
 
         $settings->createCustomClass();
-        $settings->createAppearance(true)
-            ->withDefaultValue("none");
+        $settings->createAppearance(true);
 
         $settings->createCodeEditor("text")
             ->withName("Widget.textCodeEditorLabel");

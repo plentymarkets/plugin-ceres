@@ -28,8 +28,7 @@ class CollapseWidget extends BaseWidget
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
         $settings->createCustomClass();
-        $settings->createAppearance(true)
-            ->withDefaultValue("none");
+        $settings->createAppearance(true);
 
         $collapseBox = $settings->createVerticalContainer("collapseBox")
             ->withName("Widget.collapseBoxLabel")
