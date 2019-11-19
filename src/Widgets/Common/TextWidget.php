@@ -20,6 +20,7 @@ class TextWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(800)
+            ->withDeprecated()
             ->toArray();
     }
 

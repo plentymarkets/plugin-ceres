@@ -16,6 +16,7 @@ class LinkListWidget extends ListWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(1000)
+            ->withDeprecated()
             ->toArray();
     }
 
