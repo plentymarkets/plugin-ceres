@@ -85,7 +85,7 @@ class BaseSettingFactory
     {
         return $this->withOption("tooltipText", $tooltip);
     }
-  
+
     /**
      * Determines whether the declaration is used to render a list of the specified form field.
      *
