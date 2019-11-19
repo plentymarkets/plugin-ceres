@@ -43,5 +43,7 @@ class ThreeColumnWidget extends GridWidget
                     ->addEntry("oneStackedToTwo", "Widget.gridThreeColumnLayoutOneStackedToTwo")
                     ->toArray()
             );
+
+        return $settings->toArray();
     }
 }

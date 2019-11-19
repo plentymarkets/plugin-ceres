@@ -14,12 +14,12 @@ class TextAreaWidget extends BaseWidget
 
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::SelectionWidget")
-            ->withLabel("Widget.selectionLabel")
-            ->withPreviewImageUrl("/images/widgets/input-select.svg")
+        return WidgetDataFactory::make("Ceres::TextAreaWidget")
+            ->withLabel("Widget.textAreaLabel")
+            ->withPreviewImageUrl("/images/widgets/input-textarea.svg")
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
-            ->withPosition(500)
+            ->withPosition(400)
             ->toArray();
     }
 
@@ -46,6 +46,11 @@ class TextAreaWidget extends BaseWidget
             ->withTooltip("Widget.textAreaRowsTooltip");
 
         $settingsFactory->createCheckbox("fixedHeight")
+            ->withDefaultValue(false)
+            ->withName("Widget.textAreaFixedHeightLabel")
+            ->withTooltip("Widget.textAreaFixedHeightTooltip");
+
+        $settingsFactory->createCheckbox("isRequired")
             ->withDefaultValue(false)
             ->withName("Widget.mailFormFieldIsRequiredLabel")
             ->withTooltip("Widget.mailFormFieldIsRequiredTooltip");

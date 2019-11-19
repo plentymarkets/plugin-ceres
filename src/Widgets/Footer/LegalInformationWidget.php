@@ -46,20 +46,20 @@ class LegalInformationWidget extends BaseWidget
             ->withDefaultValue(true)
             ->withName("Widget.legalInformationShowGtcLabel");
 
-        $verticalContainerChildren = $settingsFactory->createVerticalContainer("cancellationFormContainer")
+        $cancellationFormContainer = $settingsFactory->createVerticalContainer("cancellationFormContainer")
             ->withName("Widget.legalInformationCancellationFormContainerLabel")
             ->children;
 
-        $verticalContainerChildren->createCheckbox("showCancellationForm")
+        $cancellationFormContainer->createCheckbox("showCancellationForm")
             ->withDefaultValue(true)
             ->withName("Widget.legalInformationShowCancellationFormLabel");
 
-        $verticalContainerChildren->createCheckbox("useCancellationPdfUpload")
+        $cancellationFormContainer->createCheckbox("useCancellationPdfUpload")
             ->withDefaultValue(false)
             ->withCondition("cancellationFormContainer.showCancellationForm")
             ->withName("Widget.legalInformationCancellationPdfActiveLabel");
 
-        $verticalContainerChildren->createFile("useCancellationPdfUpload")
+        $cancellationFormContainer->createFile("cancellationPdfPath")
             ->withCondition("cancellationFormContainer.showCancellationForm && cancellationFormContainer.useCancellationPdfUpload")
             ->withName("Widget.legalInformationCancellationPdfUploadLabel")
             ->withTooltip("Widget.legalInformationCancellationPdfUploadTooltip")

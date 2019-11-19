@@ -41,16 +41,16 @@ class MailInputWidget extends BaseWidget
             ->withTooltip("Widget.mailFormFieldLabelTooltip");
 
         $settingsFactory->createCheckbox("isRequired")
-            ->withDefaultValue(true)
+            ->withDefaultValue(false)
             ->withName("Widget.mailFormFieldIsRequiredLabel")
             ->withTooltip("Widget.mailFormFieldIsRequiredTooltip");
 
         $settingsFactory->createCheckbox("allowMailCC")
-            ->withDefaultValue(true)
+            ->withDefaultValue(false)
             ->withName("Widget.mailInputAllowMailCCLabel");
 
         $settingsFactory->createCheckbox("replyToMail")
-            ->withDefaultValue(true)
+            ->withDefaultValue(false)
             ->withName("Widget.mailInputReplyToMailLabel");
 
         $settingsFactory->createSpacing(false, true);

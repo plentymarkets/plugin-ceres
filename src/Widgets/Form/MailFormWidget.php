@@ -31,7 +31,7 @@ class MailFormWidget extends BaseWidget
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
         $settingsFactory->createCustomClass();
-        $settingsFactory->createAppearance(true);
+        $settingsFactory->createAppearance();
 
         $settingsFactory->createText("labelSubmit")
             ->withDefaultValue("")
@@ -49,13 +49,11 @@ class MailFormWidget extends BaseWidget
             ->withTooltip("Widget.mailFormSubjectTooltip");
 
         $settingsFactory->createText("ccAddresses")
-            ->withDefaultValue("")
             ->withList(1)
             ->withName("Widget.mailFormCCAddressesLabel")
             ->withTooltip("Widget.mailFormCCAddressesTooltip");
 
         $settingsFactory->createText("bccAddresses")
-            ->withDefaultValue("")
             ->withList(1)
             ->withName("Widget.mailFormBCCAddressesLabel")
             ->withTooltip("Widget.mailFormBCCAddressesTooltip");

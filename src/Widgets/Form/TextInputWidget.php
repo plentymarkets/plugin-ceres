@@ -16,7 +16,7 @@ class TextInputWidget extends BaseWidget
     {
         return WidgetDataFactory::make("Ceres::TextInputWidget")
             ->withLabel("Widget.textInputLabel")
-            ->withPreviewImageUrl("/images/widgets/input-select.svg")
+            ->withPreviewImageUrl("/images/widgets/input-text.svg")
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(500)

@@ -9,6 +9,7 @@ class FileSettingFactory extends BaseSettingFactory
     public function __construct()
     {
         $this->withType('file');
+        $this->withDefaultValue('');
     }
 
     /**

@@ -77,7 +77,7 @@ class ImageCarouselWidget extends BaseWidget
             );
 
         $container->children->createText("headline")
-            ->withCondition("$slides.headlineStyle === 'custom-caption'")
+            ->withCondition("\$slides.headlineStyle === 'custom-caption'")
             ->withDefaultValue("")
             ->withName("Widget.imageCarouselHeadlineLabel")
             ->withTooltip("Widget.imageCarouselHeadlineTooltip");

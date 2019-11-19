@@ -36,11 +36,11 @@ class TabWidget extends GridWidget
                 [
                     [
                         "title" => "Tab 1",
-                        "uiid" => "3a0ca715-ff40-4446-8393-07f663ce45a2"
+                        "uuid" => "3a0ca715-ff40-4446-8393-07f663ce45a2"
                     ],
                     [
                         "title" => "Tab 2",
-                        "uiid" => "ac25da98-b0f4-4db3-bc8b-4c5a0fcf3150"
+                        "uuid" => "ac25da98-b0f4-4db3-bc8b-4c5a0fcf3150"
                     ]
                 ]
             )

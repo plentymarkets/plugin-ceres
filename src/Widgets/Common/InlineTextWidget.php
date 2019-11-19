@@ -30,9 +30,8 @@ class InlineTextWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance(true);
-
         $settings->createSpacing();
 
-        $settings->toArray();
+        return $settings->toArray();
     }
 }

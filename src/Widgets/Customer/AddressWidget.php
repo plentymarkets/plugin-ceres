@@ -70,19 +70,24 @@ class AddressWidget extends BaseWidget
         foreach(['1', '2'] as $addressType) {
             foreach(['DE', 'GB'] as $addressLayout) {
                 $translationSuffix = $addressType === '1' ? "Invoice" : "Shipping";
-                $fieldPrefix = $addressType === '1' ? "billing_address." : "delivery_address";
+                $fieldPrefix = $addressType === '1' ? "billing_address." : "delivery_address.";
 
-                $settingsFactory->createCheckboxGroup("addressFields".$translationSuffix.$addressLayout)
+                $addressFields = $settingsFactory->createCheckboxGroup("addressFields".$translationSuffix.$addressLayout)
                     ->withName("Widget.addressFields".$translationSuffix.$addressLayout)
-                    ->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."salutation"])
                     ->withCondition("addressType === '$addressType' && addressLayout === '$addressLayout'")
                     ->withCheckboxValues(
                         $this->makeAddressFieldsValueList($fieldPrefix, false, $addressLayout)
                     );
 
+                if($addressLayout === 'DE' || $addressType === '2') {
+                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."salutation"]);
+                } else {
+                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."address2", $fieldPrefix."salutation"]);
+                }
+
                 $settingsFactory->createCheckboxGroup("addressRequiredFields".$translationSuffix.$addressLayout)
                     ->withName("Widget.addressRequiredFields".$translationSuffix.$addressLayout)
-                    ->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."salutation"])
+                    ->withDefaultValue([])
                     ->withCondition("addressType === '$addressType' && addressLayout === '$addressLayout'")
                     ->withCheckboxValues(
                         $this->makeAddressFieldsValueList($fieldPrefix, true, $addressLayout)
@@ -95,7 +100,7 @@ class AddressWidget extends BaseWidget
         return $settingsFactory->toArray();
     }
 
-    private function makeAddressFieldsValueList($fieldPrefix = 'billing_address', $requiredFields = false, $addressLayout = "DE")
+    private function makeAddressFieldsValueList($fieldPrefix = 'billing_address.', $requiredFields = false, $addressLayout = "DE")
     {
         $fieldList = ValueListFactory::make();
 
@@ -105,29 +110,33 @@ class AddressWidget extends BaseWidget
         }
 
         $fieldList
-            ->addEntry($fieldPrefix."vatNumber", "Widget.addressFieldVatNumber")
-            ->addEntry($fieldPrefix."contactPerson", "Widget.addressFieldContactPerson")
-            ->addEntry($fieldPrefix."salutation", "Widget.addressFieldSalutation")
-            ->addEntry($fieldPrefix."title", "Widget.addressFieldTitle")
-            ->addEntry($fieldPrefix."birthday", "Widget.addressFieldBirthday")
-            ->addEntry($fieldPrefix."name4", "Widget.addressFieldName4");
+            ->addEntry($fieldPrefix."vatNumber", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."VatNumber")
+            ->addEntry($fieldPrefix."contactPerson", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."ContactPerson")
+            ->addEntry($fieldPrefix."salutation", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Salutation")
+            ->addEntry($fieldPrefix."title", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Title");
+
+        if($fieldPrefix === 'billing_address.') {
+            $fieldList->addEntry($fieldPrefix."birthday", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Birthday");
+        }
+
+        $fieldList->addEntry($fieldPrefix."name4", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Name4");
 
         if($addressLayout === "GB") {
             // Address 2 (= house no) is mandatory for german addresses and cannot be deactivated
-            $fieldList->addEntry($fieldPrefix."address2", "Widget.addressFieldAddress2");
+            $fieldList->addEntry($fieldPrefix."address2", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Address2");
         }
 
         $fieldList
-            ->addEntry($fieldPrefix."address3", "Widget.addressFieldAddress3")
-            ->addEntry($fieldPrefix."address4", "Widget.addressFieldAddress4");
+            ->addEntry($fieldPrefix."address3", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Address3")
+            ->addEntry($fieldPrefix."address4", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Address4");
 
         if($addressLayout === "DE") {
             // states can only be activated for german addresses
-            $fieldList->addEntry($fieldPrefix."stateId", "Widget.addressFieldStateId");
+            $fieldList->addEntry($fieldPrefix."stateId", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."StateId");
         }
 
         return $fieldList
-            ->addEntry($fieldPrefix."phoneNumber", "Widget.addressFieldPhoneNumber")
+            ->addEntry($fieldPrefix."phoneNumber", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."PhoneNumber")
             ->toArray();
     }
 }
