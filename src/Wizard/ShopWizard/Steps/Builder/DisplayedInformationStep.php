@@ -191,7 +191,22 @@ class DisplayedInformationStep extends Step
                     "options" => [
                         "name" => "Wizard.requireOrderProperties",
                     ]
-                ]
+                ],
+                "displayInfo_showPleaseSelect" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.showPleaseSelect",
+                    ]
+                ],
+                "displayInfo_attributeSelectDefaultOption" => [
+                    "type" => "checkbox",
+                    "isVisible" => "displayInfo_showPleaseSelect",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.attributeSelectDefaultOption",
+                    ]
+                ],
             ]
         ];
     }
