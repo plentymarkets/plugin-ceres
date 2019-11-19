@@ -51,7 +51,7 @@
         .border-appearance.active,
         .border-appearance:hover
         {
-            border-color: $value;
+            border-color: $value !important;
         }
 
         .pagination .page-item
@@ -68,6 +68,15 @@
             {
                 border-color: $value;
                 @include context-bg($value);
+            }
+        }
+
+        .custom-control-appearance
+        {
+            .custom-control-input:checked ~ .custom-control-label::before
+            {
+                border-color: $value;
+                background-color: $value;
             }
         }
     }

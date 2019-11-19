@@ -12,7 +12,7 @@
 
 <div class="widget-cookie-bar widget-{{ appearance -}}
     {%- if customClass | length > 0 %} {{ customClass }}{% endif -%}
-    {%- if isShopBuilder %} widget-fw{% endif %}">
+    {%- if isPreview %} widget-fw{% endif %}">
     <div class="widget-inner">
         <cookie-bar
                 {%- if spacingClasses | length > 0 %} classes="{{ spacingClasses }}"{% endif %}
