@@ -29,7 +29,7 @@ class AcceptPrivacyPolicyWidget extends BaseWidget
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
         $settingsFactory->createCustomClass();
-        $settingsFactory->createSpacing(true, true);
+        $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
     }
