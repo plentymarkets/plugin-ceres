@@ -32,7 +32,7 @@ class ItemDataTableWidget extends BaseWidget
         $settingsFactory->createCustomClass();
 
         $settingsFactory->createSelect("itemInformation")
-            ->withName("Widget.")
+            ->withName("Widget.itemDataTableDisplayedInformation")
             ->withDefaultValue("item.id")
             ->withList(1)
             ->withListBoxValues(
