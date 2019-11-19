@@ -72761,9 +72761,11 @@ var mutations = {
           var item = _step.value;
 
           if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_15__["isNullOrUndefined"])(item.variation)) {
-            item.variation = state.items.find(function (i) {
+            var oldBasketItem = state.items.find(function (i) {
               return i.id === item.id;
-            }).variation;
+            });
+            item.variation = oldBasketItem.variation;
+            item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
           }
 
           newItems.push(item);

@@ -43,12 +43,12 @@ const mutations =
                 {
                     if (isNullOrUndefined(item.variation))
                     {
-                        item.variation = state.items.find(i => i.id === item.id).variation;
+                        const oldBasketItem = state.items.find(i => i.id === item.id);
+
+                        item.variation = oldBasketItem.variation;
+                        item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
                     }
-                    if (isNullOrUndefined(item.basketItemOrderParams))
-                    {
-                        item.basketItemOrderParams = state.items.find(i => i.id === item.id).basketItemOrderParams;
-                    }
+
                     newItems.push(item);
                 }
 
