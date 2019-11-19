@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/attributes-properties-characteristics-filter.svg",
     "type": "categoryitem",
     "categories": ["categoryitem"],
-    "position": 600,
+    "position": 700,
     "widgetClass": "Ceres\\Widgets\\Category\\Filter\\AttributesPropertiesCharacteristicsFilterWidget",
     "settings": {
         "customClass":"@include(customClass)",

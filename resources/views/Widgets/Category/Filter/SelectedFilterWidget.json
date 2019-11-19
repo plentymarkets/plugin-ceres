@@ -4,7 +4,7 @@
   "previewImageURL": "/images/widgets/selected-filter.svg",
   "type": "categoryitem",
   "categories": ["categoryitem"],
-  "position": 605,
+  "position": 600,
   "widgetClass": "Ceres\\Widgets\\Category\\Filter\\SelectedFilterWidget",
   "settings": {
     "customClass":"@include(customClass)",
