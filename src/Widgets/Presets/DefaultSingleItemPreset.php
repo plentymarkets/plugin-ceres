@@ -45,6 +45,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createStickyContainer();
         $this->createManufacturer();
         $this->createNameHeader();
+        $this->createTagsWidget();
         $this->createSeparatorWidget();
         $this->createItemVariationNumber();
         $this->createItemBundleWidget();
@@ -54,7 +55,6 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createItemPriceWidget();
         $this->createItemAvailabilityWidget();
         $this->createAddToBasketWidget();
-        $this->createTagWidget();
         $this->createAddToWishListWiget();
         $this->createSeparatorWidget();
         $this->createLegalInformation();
@@ -304,7 +304,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('forceContent', false);
     }
 
-    private function createTagWidget()
+    private function createTagsWidget()
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::TagsWidget')
             ->withSetting('spacing.customMargin', true)

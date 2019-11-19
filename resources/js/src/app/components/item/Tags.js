@@ -1,6 +1,5 @@
 import Vue from "vue";
 import { mapState } from "vuex";
-import { navigateTo } from "../../services/UrlService";
 
 Vue.component("tags", {
 
@@ -33,29 +32,29 @@ Vue.component("tags", {
     },
     methods:
         {
-            getFontColorBasedOnBackground(bgColor)
+            getTextColorClass(bgColor)
             {
+                if (!bgColor)return null;
                 const color = (bgColor.charAt(0) === "#") ? bgColor.substring(1, 7) : bgColor;
                 const red = parseInt(color.substring(0, 2), 16);
                 const green = parseInt(color.substring(2, 4), 16);
                 const blue = parseInt(color.substring(4, 6), 16);
-
-                return (((red * 0.299) + (green * 0.587) + (blue * 0.114)) > 186) ? "#000000" : "#FFFFFF";
+                const result = (red * 0.299) + (green * 0.587) + (blue * 0.114);
+                return (result > 186) ? "text-context-dark" : "text-context-light";
             },
             getStyles(tag)
             {
                 if (tag.color)
                 {
                     return {
-                        backgroundColor: tag.color,
-                        color: this.getFontColorBasedOnBackground(tag.color)
+                        backgroundColor: tag.color
                     };
                 }
                 return {};
             },
-            navigateToSearch(tag)
+            getTagLink(tag)
             {
-                navigateTo("/" + tag.names.name + "_t" + tag.id);
+                return "/" + tag.names.name + "_t" + tag.id;
             }
         }
 });

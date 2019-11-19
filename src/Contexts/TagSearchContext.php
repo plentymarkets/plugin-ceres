@@ -44,3 +44,4 @@ class TagSearchContext extends GlobalContext implements ContextInterface
         $this->searchString = $itemListOptions['tagName'];
     }
 }
+

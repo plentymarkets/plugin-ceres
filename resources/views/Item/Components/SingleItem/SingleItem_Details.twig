@@ -8,6 +8,8 @@
     </span>
 </h1>
 
+<tags></tags>
+
 {% if ('item.shortDescription' in itemData or 'all' in itemData)%}
     <p class="single-description" v-if="currentVariation.texts.shortDescription !== ''" v-html="currentVariation.texts.shortDescription"></p>
 {% endif %}
@@ -76,7 +78,6 @@
         ${ currentVariation.variation.availability.names.name }
     </span>
 </span>
-<tags></tags>
 <div class="my-3">
     <div class="w-100">
         <slot name="before-add-to-basket"></slot>

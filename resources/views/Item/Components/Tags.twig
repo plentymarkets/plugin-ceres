@@ -1,9 +1,9 @@
 <script type="x/template" id="vue-tags">
     <div v-if="tags" class="pt-1 pb-1">
-        <a v-for="tag in tags" 
-           @click="navigateToSearch(tag)" 
-           class="badge cursor-pointer mr-1" 
-           :class="[tagAppearance, marginClasses]"
+        <a v-for="tag in tags"
+           v-bind:href="getTagLink(tag)"
+           class="badge mr-1" 
+           :class="[tagAppearance, marginClasses, getTextColorClass(tag.color)]"
            :style="[getStyles(tag), marginInlineStyles]">
             <span>${ tag.names.name }</span>
         </a>

@@ -60924,7 +60924,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 
 
 
@@ -60942,7 +60941,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -60971,25 +60969,26 @@ vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("tags", {
     }
   })),
   methods: {
-    getFontColorBasedOnBackground: function getFontColorBasedOnBackground(bgColor) {
+    getTextColorClass: function getTextColorClass(bgColor) {
+      if (!bgColor) return null;
       var color = bgColor.charAt(0) === "#" ? bgColor.substring(1, 7) : bgColor;
       var red = parseInt(color.substring(0, 2), 16);
       var green = parseInt(color.substring(2, 4), 16);
       var blue = parseInt(color.substring(4, 6), 16);
-      return red * 0.299 + green * 0.587 + blue * 0.114 > 186 ? "#000000" : "#FFFFFF";
+      var result = red * 0.299 + green * 0.587 + blue * 0.114;
+      return result > 186 ? "text-context-dark" : "text-context-light";
     },
     getStyles: function getStyles(tag) {
       if (tag.color) {
         return {
-          backgroundColor: tag.color,
-          color: this.getFontColorBasedOnBackground(tag.color)
+          backgroundColor: tag.color
         };
       }
 
-      return null;
+      return {};
     },
-    navigateToSearch: function navigateToSearch(tag) {
-      Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_13__["navigateTo"])("/" + tag.names.name + "_t" + tag.id);
+    getTagLink: function getTagLink(tag) {
+      return "/" + tag.names.name + "_t" + tag.id;
     }
   }
 });
