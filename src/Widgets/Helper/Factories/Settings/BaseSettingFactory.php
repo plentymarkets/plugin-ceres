@@ -12,6 +12,10 @@ namespace Ceres\Widgets\Helper\Factories\Settings;
  */
 class BaseSettingFactory
 {
+    public function __construct()
+    {
+    }
+
     protected $data = [];
 
     /**

@@ -12,6 +12,10 @@ namespace Ceres\Widgets\Helper\Factories\Settings;
  */
 class GenericSettingFactory extends BaseSettingFactory
 {
+    public function __construct()
+    {
+    }
+
     /**
      * @inheritDoc
      */
