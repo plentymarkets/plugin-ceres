@@ -30,7 +30,7 @@ class ChangeMailWidget extends BaseWidget
 
         $settingsFactory->createCustomClass();
         $settingsFactory->createAppearance();
-        $settingsFactory->createSpacing(false,true);
+        $settingsFactory->createSpacing(false, true);
 
         return $settingsFactory->toArray();
     }
