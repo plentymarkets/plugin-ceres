@@ -86,7 +86,7 @@ class TopBarWidget extends BaseWidget
             ->withDefaultValue(true);
 
         $settingsFactory->createSelect("basketValues")
-            ->withName("Widget.")
+            ->withName("Widget.topBarBasketValuesLabel")
             ->withTooltip("Widget.")
             ->withDefaultValue("sum")
             ->withCondition("enableBasketPreview")
