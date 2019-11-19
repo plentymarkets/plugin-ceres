@@ -5,14 +5,11 @@
 
     .form-check-wrapper {
         padding: 0.25rem 0;
+        cursor: pointer;
     }
 
     .form-check {
         margin-bottom: 0;
-
-        .filter-badge {
-            right: 0 !important;
-        }
     }
 }
 
