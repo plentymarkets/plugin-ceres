@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Ceres\Widgets\Helper\Factories\Includes\Settings;
+namespace Ceres\Widgets\Helper\Factories\Settings\Includes;
 
 
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;

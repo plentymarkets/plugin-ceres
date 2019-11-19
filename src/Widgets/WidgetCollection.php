@@ -206,7 +206,7 @@ class WidgetCollection
         return array_merge(
             self::BASKET_WIDGETS,
 //            self::CHECKOUT_WIDGETS,
-//            self::COMMON_WIDGETS,
+            self::COMMON_WIDGETS,
             self::CONTACT_WIDGETS,
 //            self::CUSTOMER_WIDGETS,
 //            self::FOOTER_WIDGETS,
