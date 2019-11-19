@@ -31,6 +31,7 @@ class BasketTotalsWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createCheckboxGroup("visibleFields")
+            ->withName("Widget.basketTotalsVisibleFields")
             ->withDefaultValue([
                 "basketValueNet",
                 "basketValueGross",
@@ -60,7 +61,7 @@ class BasketTotalsWidget extends BaseWidget
                     ->toArray()
             );
 
-        $settings->createSpacing();
+        $settings->createSpacing(false, true);
 
         return $settings->toArray();
     }

@@ -15,6 +15,7 @@ class ButtonSizeSetting extends SelectSettingFactory
 
         $this->withName("Widget.widgetButtonSizeLabel")
             ->withTooltip("Widget.widgetButtonSizeTooltip")
+            ->withDefaultValue("")
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("btn-sm", "Widget.widgetButtonSizeSm")

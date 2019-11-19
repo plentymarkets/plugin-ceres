@@ -10,7 +10,8 @@ class SpacingSetting extends ContainerSettingFactory
     {
         parent::__construct();
 
-        $this->withType('vertical');
+        $this->withType('vertical')
+            ->withName('Widget.widgetSpacing');
 
         if($usePadding)
         {
