@@ -72759,12 +72759,19 @@ var mutations = {
       try {
         var _loop = function _loop() {
           var item = _step.value;
+          var oldBasketItem = null;
 
           if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_15__["isNullOrUndefined"])(item.variation)) {
-            var oldBasketItem = state.items.find(function (i) {
+            oldBasketItem = state.items.find(function (i) {
               return i.id === item.id;
             });
             item.variation = oldBasketItem.variation;
+          }
+
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_15__["isNullOrUndefined"])(item.basketItemOrderParams)) {
+            oldBasketItem = oldBasketItem || state.items.find(function (i) {
+              return i.id === item.id;
+            });
             item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
           }
 

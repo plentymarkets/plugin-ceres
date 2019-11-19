@@ -41,14 +41,18 @@ const mutations =
 
                 for (const item of basketItems)
                 {
+                    const oldBasketItem = null;
+
                     if (isNullOrUndefined(item.variation))
                     {
-                        const oldBasketItem = state.items.find(i => i.id === item.id);
-
+                        oldBasketItem = state.items.find(i => i.id === item.id);
                         item.variation = oldBasketItem.variation;
+                    }
+                    if (isNullOrUndefined(item.basketItemOrderParams))
+                    {
+                        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
                         item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
                     }
-
                     newItems.push(item);
                 }
 
