@@ -88,7 +88,7 @@
 
 {% endmacro %}
 
-{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl) %}
+{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding) %}
 
     {% import _self as sidemenu %}
     {% for category in categories if category.details[0] %}
@@ -100,11 +100,17 @@
 
         {% set currentUrl = currentUrl ~ "/" ~ category.details[0].nameUrl  %}
         <ul>
-            <li class="nav-item{% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
-                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link">{{ category.details[0].name }}</a>
+            <li class="nav-item
+                {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
+
+                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
+                {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                    {{ category.details[0].name }}
+                </a>
                 {% if category.children is not empty %}
                     {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
-                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl) }}
+                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl, spacingPadding, inlinePadding) }}
                     {% endfor %}
                 {% endif %}
             </li>
