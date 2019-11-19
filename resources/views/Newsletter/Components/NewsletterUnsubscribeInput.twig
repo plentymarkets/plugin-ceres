@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-newsletter-unsubscribe-input">
-    <form :id="'newsletter-unsubscribe-input-form_' + _uid" @submit.prevent="validateData">
+    <form :id="'newsletter-unsubscribe-input-form_' + _uid" method="post" @submit.prevent="validateData">
         <div class="row">
             <div class="col-12">
                 <div class="input-unit mt-3" data-validate="mail">
