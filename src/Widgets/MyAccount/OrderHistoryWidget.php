@@ -29,8 +29,10 @@ class OrderHistoryWidget extends BaseWidget
             ->withType(WidgetTypes::MY_ACCOUNT)
             ->withCategory(WidgetCategories::MY_ACCOUNT)
             ->withPosition(100)
+            ->withMaxPerPage(1)
             ->toArray();
     }
+
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
