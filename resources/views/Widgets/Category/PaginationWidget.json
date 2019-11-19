@@ -38,6 +38,7 @@
                 "name": "Widget.paginationPageLimitLabel"
             }
         },
+        "alignment": "@include(alignment)",
         "spacing":"@include(spacing)"
     }
 }

@@ -1,4 +1,4 @@
-.widget-item-dynamic-filter
+.widget-filter-base
 {
     padding: 2rem;
     background-color: $white;
@@ -16,6 +16,6 @@
     }
 }
 
-.widget-toolbar .widget-item-dynamic-filter {
+.widget-toolbar .widget-filter-base {
     padding: 0;
 }

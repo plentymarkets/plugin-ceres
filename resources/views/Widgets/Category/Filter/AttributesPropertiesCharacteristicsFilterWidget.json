@@ -5,7 +5,7 @@
     "type": "categoryitem",
     "categories": ["categoryitem"],
     "position": 600,
-    "widgetClass": "Ceres\\Widgets\\Category\\AttributesPropertiesCharacteristicsFilterWidget",
+    "widgetClass": "Ceres\\Widgets\\Category\\Filter\\AttributesPropertiesCharacteristicsFilterWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {

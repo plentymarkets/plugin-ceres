@@ -75,6 +75,16 @@ Vue.component("registration", {
                             {
                                 this.$refs.passwordHint.showPopper();
                             }
+
+                            const invalidFieldNames = this.getInvalidFieldNames(invalidFields);
+
+                            if (invalidFieldNames.length > 0)
+                            {
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: invalidFieldNames.join(", ") })
+                                );
+                            }
+
                             ValidationService.markInvalidFields(invalidFields, "error");
 
                             if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
@@ -87,6 +97,21 @@ Vue.component("registration", {
                             }
                         });
                 });
+        },
+
+        getInvalidFieldNames(invalidFields = [])
+        {
+            const fieldNames = [];
+
+            for (const field of invalidFields)
+            {
+                let fieldName = field.lastElementChild.innerHTML.trim();
+
+                fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+                fieldNames.push(fieldName);
+            }
+
+            return fieldNames;
         },
 
         /**

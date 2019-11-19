@@ -50,15 +50,19 @@ Vue.component("popper", {
                     document.body.appendChild(node);
                 }
 
-                this.popper = new Popper(this.$refs.handle, node, {
-                    placement: this.placement,
-                    modifiers: {
-                        arrow: {
-                            element: this.$refs.arrow
-                        }
-                    },
-                    removeOnDestroy: true
-                });
+                this.popper = new Popper(
+                    (this.$refs.handle.firstElementChild || this.$refs.handle),
+                    node,
+                    {
+                        placement: this.placement,
+                        modifiers: {
+                            arrow: {
+                                element: this.$refs.arrow
+                            }
+                        },
+                        removeOnDestroy: true
+                    }
+                );
 
                 const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
 

@@ -13092,6 +13092,25 @@ html.ie {
     }
 }
 
+.cookie-bar
+{
+    .privacy-settings
+    {
+        max-height: 50vh;
+
+        table tr td:first-child 
+        {
+            width: 200px;
+        }
+    }
+
+    &.out
+    {
+        left: 15px;
+        right: auto;
+    }
+}
+
 .tooltip {
     pointer-events: none;
 }
@@ -14408,6 +14427,18 @@ div:not(.top-bar) {
 
 .flag-icon-nn {
 	background-image: url(../images/flags/4x3/no.svg);
+}
+
+.flag-icon-ic {
+	background-image: url(../images/flags/ic.svg);
+}
+
+.flag-icon-ea {
+	background-image: url(../images/flags/ea.svg);
+}
+
+.flag-icon-an {
+	background-image: url(../images/flags/an.svg);
 }
 
 .fixed-top .cmp-country-settings,
@@ -18445,7 +18476,7 @@ html.crios {
 }
 
 .filter-collapse,
-.widget-item-dynamic-filter {
+.widget-filter-base {
     .card {
         background-color: transparent;
         border: 0;
@@ -19735,7 +19766,7 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
-.widget-item-dynamic-filter
+.widget-filter-base
 {
     padding: 2rem;
     background-color: $white;
@@ -19753,7 +19784,7 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
-.widget-toolbar .widget-item-dynamic-filter {
+.widget-toolbar .widget-filter-base {
     padding: 0;
 }
 
@@ -19793,6 +19824,34 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
+.widget-pagination
+{
+    &.widget-alignment-center
+    {
+        ul.pagination
+        {
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding-right: 0 !important;
+        }
+    }
+
+    &.widget-alignment-right
+    {
+        ul.pagination
+        {
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            margin-left: auto;
+            padding-right: 0 !important;
+        }
+    }
+}
+
 .widget-toolbar {
     .widget {
         margin-bottom: 0;
@@ -19800,6 +19859,10 @@ html.ie .v-s-boxes .v-s-box.invalid {
     
     .list-controls-inner {
         padding: 1rem;
+
+        div.widget ~ div.widget {
+            margin-left: 1em;
+        }
     }
 
     .filter-collapse {
@@ -19808,10 +19871,6 @@ html.ie .v-s-boxes .v-s-box.invalid {
             border: 1px solid $gray-lighter2;
             padding: 2rem;
         }
-    }
-
-    div.widget:nth-of-type(2) {
-        margin-left: 1em;
     }
 }
 
@@ -20965,7 +21024,7 @@ header .widget
         .border-appearance.active,
         .border-appearance:hover
         {
-            border-color: $value;
+            border-color: $value !important;
         }
 
         .add-to-basket-lg-container:hover {
@@ -20992,6 +21051,15 @@ header .widget
                     border-color: $value;
                     @include context-bg($value);
                 }
+            }
+        }
+
+        .custom-control-appearance
+        {
+            .custom-control-input:checked ~ .custom-control-label::before
+            {
+                border-color: $value;
+                background-color: $value;
             }
         }
     }

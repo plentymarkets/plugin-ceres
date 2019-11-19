@@ -6,9 +6,9 @@
 
 <script type="x/template" id="vue-basket-list-item">
     <div class="basket-item-container basket-list-item">
-        
+
         {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
-        
+
         <div class="basket-item component-loading with-icon" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
 
             <div class="image-container">
@@ -59,13 +59,16 @@
                                         <div v-for="property in propertyGroup.properties">
                                             <strong v-if="propertyGroup.name">${ propertyGroup.name }: </strong>
                                             <span>${ property.names.name }</span>
-                                            <span v-html="property.values.value"></span>
+                                            <span v-if="property.cast == 'file'">
+                                                <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
+                                            </span>
+                                            <span v-else v-html="property.values.value"></span>
                                         </div>
                                     </template>
                                 </div>
                         </div>
                     </div>
-    
+
                     <div class="basket-item-container-right">
                         <div class="qty-box-container">
                             <quantity-input
@@ -77,10 +80,10 @@
                                     :max="basketItem.variation.data.variation.maximumOrderQuantity"
                                     :interval="basketItem.variation.data.variation.intervalOrderQuantity"></quantity-input>
                         </div>
-    
+
                         <div class="price-box">
                             <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }</div>
-                
+
                             <div class="item-remove-container">
                                 <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
                                     <span>
@@ -151,8 +154,8 @@
                 </label>
             </div>
         </div>
-        
+
         {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
-        
+
     </div>
 </script>

@@ -180,6 +180,7 @@ const actions =
             commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
+            dispatch("loadItemList");
         },
 
         selectItemListPage({ dispatch, commit }, page)
