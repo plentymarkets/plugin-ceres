@@ -29,7 +29,8 @@ class GraduatedPriceWidget extends BaseWidget
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
         $settingsFactory->createCustomClass();
-        $settingsFactory->createAppearance();
+        $settingsFactory->createAppearance()
+            ->withDefaultValue("success");
         $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
