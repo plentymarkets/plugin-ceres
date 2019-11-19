@@ -1,5 +1,12 @@
 # Release Notes for Ceres
 
+## v4.4.1 (2019-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.0...4.4.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed 
+
+- Due to an error, order characteristics were not displayed in the shopping cart and the checkout and were not included in the order. This behaviour has been fixed.
+- Due to an error, it was not possible to open order details on My account pages that were not created with the ShopBuilder. This has been fixed.
+
 ## v4.4.0 (2019-11-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.4...4.4.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
