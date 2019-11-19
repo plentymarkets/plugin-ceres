@@ -1,24 +1,27 @@
 <?php
 
 
-namespace Ceres\Widgets\Helper\Factories\Settings;
+namespace Ceres\Widgets\Helper\Factories\Settings\Includes;
 
 
-class ButtonSizeSettingFactory extends SelectSettingFactory
+use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
+
+class ButtonSizeSetting extends SelectSettingFactory
 {
     public function __construct()
     {
         parent::__construct();
 
         $this->withName("Widget.widgetButtonSizeLabel")
-            // TODO tooltip
-            // ->withTooltip(Widget.widgetButtonSizeTooltip)
+            ->withTooltip("Widget.widgetButtonSizeTooltip")
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("btn-sm", "Widget.widgetButtonSizeSm")
                     ->addEntry("", "Widget.widgetButtonSizeNormal")
                     ->addEntry("btn-lg", "Widget.widgetButtonSizeLg")
-                    ->toArray());
+                    ->toArray()
+            );
     }
 
 }

@@ -107,6 +107,17 @@ class WidgetDataFactory
         $this->data['allowedNestingTypes'] = $allowedTypes;
         return $this;
     }
+  
+    /**
+     * Set the widget as deprecated.
+     *
+     * @return $this
+     */
+    public function withDeprecated()
+    {
+        $this->data['deprecated'] = true;
+        return $this;
+    }
 
     /**
      * Get widget data.
