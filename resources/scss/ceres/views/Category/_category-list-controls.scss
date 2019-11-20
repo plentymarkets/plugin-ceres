@@ -106,7 +106,7 @@
             &.first-level {
                 display: none;
             }
-            &.first-level.active {
+            &.first-level.active, &.first-level.is-open {
                 display: list-item;
             }
             a {
@@ -123,7 +123,7 @@
             ul {
                 display: none;
             }
-            &.active {
+            &.active, &.is-open {
                 & > ul {
                     display: block;
                 }

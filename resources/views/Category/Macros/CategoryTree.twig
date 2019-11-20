@@ -99,10 +99,19 @@
         {% endif %}
 
         {% set currentUrl = currentUrl ~ "/" ~ category.details[0].nameUrl  %}
+        {% set isCategoryActive = false %}
+        {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
+            {% set isCategoryActive = true %}
+        {% endfor %}
+
         <ul>
-            <li class="nav-item {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
+            <li class="nav-item{% if isCategoryActive %} active{% endif %}">
+                {% if category.children is not empty and not isCategoryActive %}
+                    <i v-sidenavigation-children="{ categoryId: {{ category.id }}, isActive: {{ isCategoryActive | json_encode }}, currentUrl: {{ currentUrl | json_encode }} }" class="fa fa-caret-down" aria-hidden="true"></i>
+                {% endif %}
+
                 <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
-                {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} bg-appearance{% endfor %}
+                {% if isCategoryActive %} bg-appearance{% endif %}
                 {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     {{ category.details[0].name }}
