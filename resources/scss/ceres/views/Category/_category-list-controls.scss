@@ -116,9 +116,6 @@
             padding: 0.75rem 2rem;
             width: 100%;
         }
-        i {
-            vertical-align: center;
-        }
     }
 
     ul {
@@ -151,13 +148,24 @@
                         a {
                             padding-left: 3.5rem !important;
                         }
+                        .expand_nav {
+                            padding-left: 2.25rem;
+                        }
                         ul li {
                             a {
                                 padding-left: 5rem !important;
                             }
-                            ul li a {
-                                padding-left: 6.5rem !important;
+                            .expand_nav {
+                                padding-left: 3.75rem;
                             }
+                            ul li {
+                                a {
+                                    padding-left: 6.5rem !important;
+                                }
+                                .expand_nav {
+                                    padding-left: 5.25rem !important;
+                                }
+                            } 
                         }
                     }
                 }
