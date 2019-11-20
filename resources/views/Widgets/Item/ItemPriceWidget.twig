@@ -26,13 +26,17 @@
             <span class="font-weight-bold"
                 ref="variationTotalPrice"
                 :content="$store.getters.currentItemVariation.prices.default.price.value"
-                v-text="$options.filters.currency($store.getters.variationTotalPrice, $store.getters.currentItemVariation.prices.default.currency)">
+              {% if addPleaseSelectOption %}
+                v-text="'ab ' +$options.filters.currency($store.getters.variationTotalPrice, $store.getters.currentItemVariation.prices.default.currency)"
+              {% else %}
+                    v-text="$options.filters.currency($store.getters.variationTotalPrice, $store.getters.currentItemVariation.prices.default.currency)"
+              {% endif %}>
                 {# TODO ADD placeholder #}
             </span>
             <sup>*</sup>
             <span :content="$store.getters.currentItemVariation.prices.default.currency"></span>
         </span>
-        
+        sdasfsfasfasfsafasf
         <div class="base-price text-muted my-3" v-if="$store.getters.currentItemVariation.unit">
             <div>
                 {{ trans("Ceres::Template.singleItemContent") }}

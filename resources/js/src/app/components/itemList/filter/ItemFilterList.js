@@ -19,13 +19,7 @@ Vue.component("item-filter-list", {
         allowedFacetsTypes:
         {
             type: Array,
-            default: () => [
-                "availability",
-                "category",
-                "dynamic",
-                "feedback",
-                "price"
-            ]
+            default: () => []
         },
         paddingClasses:
         {
@@ -53,6 +47,11 @@ Vue.component("item-filter-list", {
         ...mapState({
             facets(state)
             {
+                if (!this.allowedFacetsTypes.length)
+                {
+                    return state.itemList.facets;
+                }
+
                 return state.itemList.facets
                     .filter(facet => this.allowedFacetsTypes.includes(facet.id) || this.allowedFacetsTypes.includes(facet.type));
             },

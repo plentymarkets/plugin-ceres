@@ -13644,6 +13644,15 @@ html.ie #thumb-carousel .owl-stage {
   width: 552px;
   max-width: 552px; }
 
+.cookie-bar .privacy-settings {
+  max-height: 50vh; }
+  .cookie-bar .privacy-settings table tr td:first-child {
+    width: 200px; }
+
+.cookie-bar.out {
+  left: 15px;
+  right: auto; }
+
 .tooltip {
   pointer-events: none; }
 
@@ -14472,6 +14481,15 @@ div:not(.top-bar) > .page-header > div > .cmp-search-box {
 
 .flag-icon-nn {
   background-image: url(../images/flags/4x3/no.svg); }
+
+.flag-icon-ic {
+  background-image: url(../images/flags/ic.svg); }
+
+.flag-icon-ea {
+  background-image: url(../images/flags/ea.svg); }
+
+.flag-icon-an {
+  background-image: url(../images/flags/an.svg); }
 
 .fixed-top .cmp-country-settings,
 .fixed-top .cmp-currency-select {
@@ -17129,72 +17147,18 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
     .list-controls .filter-toggle[aria-expanded="true"] i {
       -webkit-transform: rotate(-90deg);
               transform: rotate(-90deg); }
-  .list-controls #filterCollapse {
+  .list-controls .filter-collapse {
     position: absolute;
     z-index: 1050;
     width: 100%;
     margin-left: -15px;
     padding-right: 15px;
     top: 100%; }
-    .list-controls #filterCollapse .page-content {
+    .list-controls .filter-collapse .page-content {
       background: #fff;
       padding: 2em !important;
       border: 1px solid #f4f4f4;
       margin: 0 7.5px; }
-      .list-controls #filterCollapse .page-content .card, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child {
-        background-color: transparent;
-        border: 0;
-        padding-right: 0; }
-        .list-controls #filterCollapse .page-content .card h3, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child h3, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child h3 {
-          text-transform: uppercase;
-          font-size: 1.2rem;
-          border-bottom: 1px solid #b2b1a7;
-          padding-bottom: 0.5rem;
-          font-weight: bold;
-          color: #4D4F4D; }
-        .list-controls #filterCollapse .page-content .card .form-check, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check {
-          padding-left: 0; }
-          .list-controls #filterCollapse .page-content .card .form-check .form-check-input:checked + label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-input:checked + label {
-            background: #f4f4f4;
-            color: #282d2f;
-            padding-left: 1.75rem; }
-            .list-controls #filterCollapse .page-content .card .form-check .form-check-input:checked + label::before, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label::before, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-input:checked + label::before {
-              font-family: "FontAwesome";
-              content: "\f046";
-              opacity: 1; }
-          .list-controls #filterCollapse .page-content .card .form-check .form-check-input:disabled + label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-input:disabled + label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-input:disabled + label {
-            cursor: not-allowed; }
-          .list-controls #filterCollapse .page-content .card .form-check .form-check-label, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-label, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-label {
-            padding: 0.5rem 0;
-            color: #4D4F4D;
-            display: block;
-            -webkit-transition: all 0.1s ease;
-            transition: all 0.1s ease; }
-            .list-controls #filterCollapse .page-content .card .form-check .form-check-label:hover, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-label:hover, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-label:hover {
-              background: #f7f7f9;
-              color: #4D4F4D;
-              -webkit-transition: all 0.1s ease;
-              transition: all 0.1s ease;
-              padding-left: 0.5rem; }
-            .list-controls #filterCollapse .page-content .card .form-check .form-check-label::before, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .form-check-label::before, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .form-check-label::before {
-              font-family: "FontAwesome";
-              content: "\f046";
-              opacity: 0;
-              position: absolute;
-              left: 0.5rem; }
-          .list-controls #filterCollapse .page-content .card .form-check .filter-badge, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child .form-check .filter-badge, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child .form-check .filter-badge {
-            position: absolute;
-            display: inline-block;
-            font-size: 0.85rem;
-            background: #f4f4f4;
-            padding: 0.1rem 0;
-            color: #7a7f7f;
-            right: 0.5rem;
-            text-align: center;
-            min-width: 3em;
-            top: 50%;
-            -webkit-transform: translateY(-50%);
-                    transform: translateY(-50%); }
   @media (min-width: 576px) {
     .list-controls .list-sort,
     .list-controls .list-itemsperpage {
@@ -17206,7 +17170,7 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
       position: absolute;
       right: 0.5em; } }
   @media (min-width: 768px) {
-    .list-controls #filterCollapse .page-content .card, .list-controls #filterCollapse .page-content .cmp-address-list .items > div:first-child, .cmp-address-list .list-controls #filterCollapse .page-content .items > div:first-child {
+    .list-controls .filter-collapse .page-content .card, .list-controls .filter-collapse .page-content .cmp-address-list .items > div:first-child, .cmp-address-list .list-controls .filter-collapse .page-content .items > div:first-child {
       padding-right: 2em; } }
 
 .sidebar-categories {
@@ -17245,6 +17209,86 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
       padding-left: 5.5rem; }
     .sidebar-categories ul li.active > a {
       background: #f4f4f4; }
+
+.filter-collapse .card, .filter-collapse .cmp-address-list .items > div:first-child, .cmp-address-list .filter-collapse .items > div:first-child,
+.widget-filter-base .card,
+.widget-filter-base .cmp-address-list .items > div:first-child,
+.cmp-address-list .widget-filter-base .items > div:first-child {
+  background-color: transparent;
+  border: 0;
+  padding-right: 0; }
+  .filter-collapse .card:not(:last-child), .filter-collapse .cmp-address-list .items > div:not(:last-child):first-child, .cmp-address-list .filter-collapse .items > div:not(:last-child):first-child,
+  .widget-filter-base .card:not(:last-child),
+  .widget-filter-base .cmp-address-list .items > div:not(:last-child):first-child,
+  .cmp-address-list .widget-filter-base .items > div:not(:last-child):first-child {
+    padding-bottom: .75rem; }
+  .filter-collapse .card .form-check, .filter-collapse .cmp-address-list .items > div:first-child .form-check, .cmp-address-list .filter-collapse .items > div:first-child .form-check,
+  .widget-filter-base .card .form-check,
+  .widget-filter-base .cmp-address-list .items > div:first-child .form-check,
+  .cmp-address-list .widget-filter-base .items > div:first-child .form-check {
+    padding-left: 0; }
+    .filter-collapse .card .form-check .form-check-input:checked + label, .filter-collapse .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label, .cmp-address-list .filter-collapse .items > div:first-child .form-check .form-check-input:checked + label,
+    .widget-filter-base .card .form-check .form-check-input:checked + label,
+    .widget-filter-base .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label,
+    .cmp-address-list .widget-filter-base .items > div:first-child .form-check .form-check-input:checked + label {
+      background: #f4f4f4;
+      color: #282d2f;
+      padding-left: 1.75rem; }
+      .filter-collapse .card .form-check .form-check-input:checked + label::before, .filter-collapse .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label::before, .cmp-address-list .filter-collapse .items > div:first-child .form-check .form-check-input:checked + label::before,
+      .widget-filter-base .card .form-check .form-check-input:checked + label::before,
+      .widget-filter-base .cmp-address-list .items > div:first-child .form-check .form-check-input:checked + label::before,
+      .cmp-address-list .widget-filter-base .items > div:first-child .form-check .form-check-input:checked + label::before {
+        font-family: "FontAwesome";
+        content: "\f046";
+        opacity: 1; }
+    .filter-collapse .card .form-check .form-check-input:disabled + label, .filter-collapse .cmp-address-list .items > div:first-child .form-check .form-check-input:disabled + label, .cmp-address-list .filter-collapse .items > div:first-child .form-check .form-check-input:disabled + label,
+    .widget-filter-base .card .form-check .form-check-input:disabled + label,
+    .widget-filter-base .cmp-address-list .items > div:first-child .form-check .form-check-input:disabled + label,
+    .cmp-address-list .widget-filter-base .items > div:first-child .form-check .form-check-input:disabled + label {
+      cursor: not-allowed; }
+    .filter-collapse .card .form-check .form-check-label, .filter-collapse .cmp-address-list .items > div:first-child .form-check .form-check-label, .cmp-address-list .filter-collapse .items > div:first-child .form-check .form-check-label,
+    .widget-filter-base .card .form-check .form-check-label,
+    .widget-filter-base .cmp-address-list .items > div:first-child .form-check .form-check-label,
+    .cmp-address-list .widget-filter-base .items > div:first-child .form-check .form-check-label {
+      padding: 0.5rem 0;
+      color: #4D4F4D;
+      display: block;
+      -webkit-transition: all 0.1s ease;
+      transition: all 0.1s ease; }
+      .filter-collapse .card .form-check .form-check-label:hover, .filter-collapse .cmp-address-list .items > div:first-child .form-check .form-check-label:hover, .cmp-address-list .filter-collapse .items > div:first-child .form-check .form-check-label:hover,
+      .widget-filter-base .card .form-check .form-check-label:hover,
+      .widget-filter-base .cmp-address-list .items > div:first-child .form-check .form-check-label:hover,
+      .cmp-address-list .widget-filter-base .items > div:first-child .form-check .form-check-label:hover {
+        background: #f7f7f9;
+        color: #4D4F4D;
+        -webkit-transition: all 0.1s ease;
+        transition: all 0.1s ease;
+        padding-left: 0.5rem; }
+      .filter-collapse .card .form-check .form-check-label::before, .filter-collapse .cmp-address-list .items > div:first-child .form-check .form-check-label::before, .cmp-address-list .filter-collapse .items > div:first-child .form-check .form-check-label::before,
+      .widget-filter-base .card .form-check .form-check-label::before,
+      .widget-filter-base .cmp-address-list .items > div:first-child .form-check .form-check-label::before,
+      .cmp-address-list .widget-filter-base .items > div:first-child .form-check .form-check-label::before {
+        font-family: "FontAwesome";
+        content: "\f046";
+        opacity: 0;
+        position: absolute;
+        left: 0.5rem; }
+    .filter-collapse .card .form-check .filter-badge, .filter-collapse .cmp-address-list .items > div:first-child .form-check .filter-badge, .cmp-address-list .filter-collapse .items > div:first-child .form-check .filter-badge,
+    .widget-filter-base .card .form-check .filter-badge,
+    .widget-filter-base .cmp-address-list .items > div:first-child .form-check .filter-badge,
+    .cmp-address-list .widget-filter-base .items > div:first-child .form-check .filter-badge {
+      position: absolute;
+      display: inline-block;
+      font-size: 0.85rem;
+      background: #f4f4f4;
+      padding: 0.1rem 0;
+      color: #7a7f7f;
+      right: 0.5rem;
+      text-align: center;
+      min-width: 3em;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%); }
 
 .homepage-title {
   padding: 1rem 1.5rem;
@@ -18199,6 +18243,19 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
 .widget-account-settings .card, .widget-account-settings .cmp-address-list .items > div:first-child, .cmp-address-list .widget-account-settings .items > div:first-child {
   min-height: 115px; }
 
+.widget-filter-base {
+  padding: 2rem;
+  background-color: #fff; }
+  .widget-filter-base .form-check-wrapper {
+    padding: 0.25rem 0; }
+  .widget-filter-base .form-check {
+    margin-bottom: 0; }
+    .widget-filter-base .form-check .filter-badge {
+      right: 0 !important; }
+
+.widget-toolbar .widget-filter-base {
+  padding: 0; }
+
 .widget-item-grid .product-list > li.col-12 {
   padding-right: 15px !important;
   padding-left: 15px !important; }
@@ -18227,19 +18284,33 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
 .widget-item-grid .cmp-product-thumb {
   margin-bottom: 0px !important; }
 
+.widget-pagination.widget-alignment-center ul.pagination {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 0 !important; }
+
+.widget-pagination.widget-alignment-right ul.pagination {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  padding-right: 0 !important; }
+
 .widget-toolbar .widget {
   margin-bottom: 0; }
 
 .widget-toolbar .list-controls-inner {
   padding: 1rem; }
+  .widget-toolbar .list-controls-inner div.widget ~ div.widget {
+    margin-left: 1em; }
 
-.widget-toolbar #filterCollapse > div {
+.widget-toolbar .filter-collapse > div {
   background: #fff;
   border: 1px solid #f4f4f4;
-  padding: 1rem; }
-
-.widget-toolbar div.widget:nth-of-type(2) {
-  margin-left: 1em; }
+  padding: 2rem; }
 
 .widget-provider-select.widget-primary input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #008ebd; }
@@ -19499,7 +19570,7 @@ header .widget {
 
 .widget-primary .border-appearance.active,
 .widget-primary .border-appearance:hover {
-  border-color: #008ebd; }
+  border-color: #008ebd !important; }
 
 .widget-primary .add-to-basket-lg-container:hover {
   border-color: transparent #008ebd transparent transparent !important; }
@@ -19514,6 +19585,10 @@ header .widget {
     border-color: #008ebd;
     background-color: #008ebd;
     color: #fff; }
+
+.widget-primary .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #008ebd;
+  background-color: #008ebd; }
 
 .widget-secondary .text-appearance {
   color: #d4021d !important; }
@@ -19591,7 +19666,7 @@ header .widget {
 
 .widget-secondary .border-appearance.active,
 .widget-secondary .border-appearance:hover {
-  border-color: #d4021d; }
+  border-color: #d4021d !important; }
 
 .widget-secondary .add-to-basket-lg-container:hover {
   border-color: transparent #d4021d transparent transparent !important; }
@@ -19606,6 +19681,10 @@ header .widget {
     border-color: #d4021d;
     background-color: #d4021d;
     color: #fff; }
+
+.widget-secondary .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #d4021d;
+  background-color: #d4021d; }
 
 .widget-success .text-appearance {
   color: #28a745 !important; }
@@ -19683,7 +19762,7 @@ header .widget {
 
 .widget-success .border-appearance.active,
 .widget-success .border-appearance:hover {
-  border-color: #28a745; }
+  border-color: #28a745 !important; }
 
 .widget-success .add-to-basket-lg-container:hover {
   border-color: transparent #28a745 transparent transparent !important; }
@@ -19698,6 +19777,10 @@ header .widget {
     border-color: #28a745;
     background-color: #28a745;
     color: #fff; }
+
+.widget-success .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #28a745;
+  background-color: #28a745; }
 
 .widget-info .text-appearance {
   color: #17a2b8 !important; }
@@ -19775,7 +19858,7 @@ header .widget {
 
 .widget-info .border-appearance.active,
 .widget-info .border-appearance:hover {
-  border-color: #17a2b8; }
+  border-color: #17a2b8 !important; }
 
 .widget-info .add-to-basket-lg-container:hover {
   border-color: transparent #17a2b8 transparent transparent !important; }
@@ -19790,6 +19873,10 @@ header .widget {
     border-color: #17a2b8;
     background-color: #17a2b8;
     color: #fff; }
+
+.widget-info .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #17a2b8;
+  background-color: #17a2b8; }
 
 .widget-warning .text-appearance {
   color: #ffc107 !important; }
@@ -19867,7 +19954,7 @@ header .widget {
 
 .widget-warning .border-appearance.active,
 .widget-warning .border-appearance:hover {
-  border-color: #ffc107; }
+  border-color: #ffc107 !important; }
 
 .widget-warning .add-to-basket-lg-container:hover {
   border-color: transparent #ffc107 transparent transparent !important; }
@@ -19882,6 +19969,10 @@ header .widget {
     border-color: #ffc107;
     background-color: #ffc107;
     color: #212529; }
+
+.widget-warning .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #ffc107;
+  background-color: #ffc107; }
 
 .widget-danger .text-appearance {
   color: #d4021d !important; }
@@ -19959,7 +20050,7 @@ header .widget {
 
 .widget-danger .border-appearance.active,
 .widget-danger .border-appearance:hover {
-  border-color: #d4021d; }
+  border-color: #d4021d !important; }
 
 .widget-danger .add-to-basket-lg-container:hover {
   border-color: transparent #d4021d transparent transparent !important; }
@@ -19974,6 +20065,10 @@ header .widget {
     border-color: #d4021d;
     background-color: #d4021d;
     color: #fff; }
+
+.widget-danger .custom-control-appearance .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #d4021d;
+  background-color: #d4021d; }
 
 .widget-placeholder {
   background-color: #dcdbd8;

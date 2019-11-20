@@ -1,11 +1,11 @@
 {
-    "identifier": "Ceres::ItemDynamicFilterWidget",
-    "label": "Widget.itemDynamicFilterLabel",
-    "previewImageURL": "/images/widgets/item-dynamic-filter.svg",
+    "identifier": "Ceres::AvailabilityFilterWidget",
+    "label": "Widget.availabilityFilterLabel",
+    "previewImageURL": "/images/widgets/availability-filter.svg",
     "type": "categoryitem",
     "categories": ["categoryitem"],
-    "position": 600,
-    "widgetClass": "Ceres\\Widgets\\Category\\ItemDynamicFilterWidget",
+    "position": 800,
+    "widgetClass": "Ceres\\Widgets\\Category\\Filter\\AvailabilityFilterWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {

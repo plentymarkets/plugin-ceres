@@ -354,15 +354,15 @@
         }
     },
     {
-        "identifier": "Ceres::ItemDynamicFilterWidget",
-        "label": "Widget.itemDynamicFilterLabel",
-        "previewImageURL": "/images/widgets/item-dynamic-filter.svg",
-        "type": "toolbar",
+        "identifier": "Ceres::AttributesPropertiesCharacteristicsFilterWidget",
+        "label": "Widget.attributesPropertiesCharacteristicsFilterLabel",
+        "previewImageURL": "/images/widgets/attributes-properties-characteristics-filter.svg",
+        "type": "categoryitem",
         "categories": [
             "categoryitem"
         ],
         "position": 600,
-        "widgetClass": "Ceres\\Widgets\\Category\\ItemDynamicFilterWidget",
+        "widgetClass": "Ceres\\Widgets\\Category\\Filter\\AttributesPropertiesCharacteristicsFilterWidget",
         "settings": {
             "customClass": {
                 "type": "text",
@@ -382,34 +382,39 @@
                     "tooltipText": "Widget.widgetAppearanceTooltip",
                     "listBoxValues": [
                         {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
                             "value": "primary",
                             "caption": "Widget.widgetAppearancePrimary",
-                            "position": 0
+                            "position": 1
                         },
                         {
                             "value": "secondary",
                             "caption": "Widget.widgetAppearanceSecondary",
-                            "position": 1
+                            "position": 2
                         },
                         {
                             "value": "success",
                             "caption": "Widget.widgetAppearanceSuccess",
-                            "position": 2
+                            "position": 3
                         },
                         {
                             "value": "info",
                             "caption": "Widget.widgetAppearanceInfo",
-                            "position": 3
+                            "position": 4
                         },
                         {
                             "value": "warning",
                             "caption": "Widget.widgetAppearanceWarning",
-                            "position": 4
+                            "position": 5
                         },
                         {
                             "value": "danger",
                             "caption": "Widget.widgetAppearanceDanger",
-                            "position": 5
+                            "position": 6
                         }
                     ]
                 }
@@ -434,7 +439,337 @@
                                 "px",
                                 "rem"
                             ],
+                            "direction": "vertical"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
                             "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::AvailabilityFilterWidget",
+        "label": "Widget.availabilityFilterLabel",
+        "previewImageURL": "/images/widgets/availability-filter.svg",
+        "type": "categoryitem",
+        "categories": [
+            "categoryitem"
+        ],
+        "position": 700,
+        "widgetClass": "Ceres\\Widgets\\Category\\Filter\\AvailabilityFilterWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "vertical"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::CategoryFilterWidget",
+        "label": "Widget.categoryFilterLabel",
+        "previewImageURL": "/images/widgets/category-filter.svg",
+        "type": "categoryitem",
+        "categories": [
+            "categoryitem"
+        ],
+        "position": 800,
+        "widgetClass": "Ceres\\Widgets\\Category\\Filter\\CategoryFilterWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "vertical"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::PriceFilterWidget",
+        "label": "Widget.priceFilterLabel",
+        "previewImageURL": "/images/widgets/price-filter.svg",
+        "type": "categoryitem",
+        "categories": [
+            "categoryitem"
+        ],
+        "position": 900,
+        "widgetClass": "Ceres\\Widgets\\Category\\Filter\\PriceFilterWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "vertical"
                         }
                     },
                     "customMargin": {
@@ -880,6 +1215,10 @@
                     "name": "Widget.paginationPageLimitLabel"
                 }
             },
+            "alignment": {
+                "type": "alignment",
+                "defaultValue": "left"
+            },
             "spacing": {
                 "type": "vertical",
                 "options": {
@@ -938,7 +1277,8 @@
             "structure",
             "static",
             "default",
-            "toolbar"
+            "toolbar",
+            "categoryitem"
         ],
         "settings": {
             "customClass": {
@@ -994,7 +1334,7 @@
             "icon": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "none",
+                "defaultValue": "fa-sliders",
                 "options": {
                     "name": "Widget.widgetIconLabel",
                     "tooltipText": "Widget.widgetIconTooltip",
@@ -1009,8 +1349,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",
@@ -3170,8 +3509,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",
@@ -3428,8 +3766,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",
@@ -3615,8 +3952,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",
@@ -4330,6 +4666,114 @@
                             "value": "btn-lg",
                             "caption": "Widget.widgetButtonSizeLg",
                             "position": 2
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::PrivacySettingsWidget",
+        "label": "Widget.privacySettingsLabel",
+        "previewImageURL": "/images/widgets/privacy-settings.svg",
+        "type": "static",
+        "categories": [],
+        "position": 1200,
+        "widgetClass": "Ceres\\Widgets\\Common\\PrivacySettingsWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
                         }
                     ]
                 }
@@ -5500,6 +5944,91 @@
         }
     },
     {
+        "identifier": "Ceres::CookieBarWidget",
+        "label": "Widget.cookieBarLabel",
+        "previewImageURL": "/images/widgets/cookie-bar.svg",
+        "type": "footer",
+        "categories": [
+            "footer"
+        ],
+        "position": 1200,
+        "widgetClass": "Ceres\\Widgets\\Footer\\CookieBarWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "primary",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 0
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 1
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 2
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 3
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 4
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 5
+                        }
+                    ]
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "children": {
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
         "identifier": "Ceres::LegalInformationWidget",
         "label": "Widget.legalInformationLabel",
         "previewImageURL": "/images/widgets/legal-information.svg",
@@ -6400,7 +6929,7 @@
             "icon": {
                 "type": "select",
                 "required": true,
-                "defaultValue": "none",
+                "defaultValue": "fa-info",
                 "options": {
                     "name": "Widget.widgetIconLabel",
                     "tooltipText": "Widget.widgetIconTooltip",
@@ -6415,8 +6944,7 @@
                         },
                         {
                             "value": "fa-info",
-                            "caption": "Widget.widgetIconInfo",
-                            "position": 1
+                            "caption": "Widget.widgetIconInfo"
                         },
                         {
                             "value": "fa-circle",

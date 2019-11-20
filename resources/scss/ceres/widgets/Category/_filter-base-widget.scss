@@ -1,21 +1,18 @@
-.widget-item-dynamic-filter
+.widget-filter-base
 {
     padding: 2rem;
     background-color: $white;
 
     .form-check-wrapper {
         padding: 0.25rem 0;
+        cursor: pointer;
     }
 
     .form-check {
         margin-bottom: 0;
-
-        .filter-badge {
-            right: 0 !important;
-        }
     }
 }
 
-.widget-toolbar .widget-item-dynamic-filter {
+.widget-toolbar .widget-filter-base {
     padding: 0;
 }

@@ -27,11 +27,6 @@
                     "@type"         : "Organization",
                     "name"          : "{{ itemData.item.manufacturer.externalName }}"
                 },
-                "model": {
-                    "@type"         : "ProductModel",
-                    "isVariantOf"   : "{{ itemData.item.id }}",
-                    "model"         : "{{ itemData.variation.model }}"
-                },
                 "offers": {
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",

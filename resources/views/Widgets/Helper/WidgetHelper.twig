@@ -21,7 +21,7 @@
     {% set padding = "" %}
     {% if paddingKey != false %}
         {% set paddingKey = paddingKey | default("padding") %}
-        {% if paddingKey == true %}
+        {% if paddingKey is same as(true) %}
             {% set paddingKey = "padding" %}
         {% endif %}
         {% if widgetSettings[paddingKey] is defined %}
@@ -32,7 +32,7 @@
     {% set margin = "" %}
     {% if marginKey != false %}
         {% set marginKey = marginKey | default("margin") %}
-        {% if marginKey == true %}
+        {% if marginKey is same as(true) %}
             {% set marginKey = "margin" %}
         {% endif %}
         {% if widgetSettings[marginKey] is defined %}
@@ -52,7 +52,7 @@
     {% set padding = "" %}
     {% if paddingKey != false %}
         {% set paddingKey = paddingKey | default("padding") %}
-        {% if paddingKey == true %}
+        {% if paddingKey is same as(true) %}
             {% set paddingKey = "padding" %}
         {% endif %}
         {% if widgetSettings[paddingKey] is defined %}
@@ -63,7 +63,7 @@
     {% set margin = "" %}
     {% if marginKey != false %}
         {% set marginKey = marginKey | default("margin") %}
-        {% if marginKey == true %}
+        {% if marginKey is same as(true) %}
             {% set marginKey = "margin" %}
         {% endif %}
         {% if widgetSettings[marginKey] is defined %}

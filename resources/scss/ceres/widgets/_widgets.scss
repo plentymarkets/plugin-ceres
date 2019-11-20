@@ -1,8 +1,10 @@
 @import "mixins/mixins";
 
-@import "Category/item-dynamic-filter-widget";
+@import "Category/filter-base-widget";
 @import "Category/item-grid-widget";
+@import "Category/pagination-widget";
 @import "Category/toolbar-widget";
+@import "Category/selected-filter-widget";
 @import "Checkout/provider-select-widget";
 @import "Common/faq-widget";
 @import "Common/image-box-widget";
