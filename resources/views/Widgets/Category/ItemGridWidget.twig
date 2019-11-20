@@ -17,7 +17,7 @@
 
 {% set appearance      = widget.settings.appearance.mobile | default("primary") %}
 
-{{ Twig.set("buildUrlWithVariationId", "not ceresConfig.item.showPleaseSelect == false | default(true)") }}
+{{ Twig.set("buildUrlWithVariationId", "not ceresConfig.item.showPleaseSelect") }}
 
 <div class="widget widget-item-grid widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if( "itemList is not empty" ) }}
