@@ -88,7 +88,7 @@
 
 {% endmacro %}
 
-{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding) %}
+{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding, openableChildren) %}
 
     {% import _self as sidemenu %}
     {% for category in categories if category.details[0] %}
@@ -106,8 +106,8 @@
 
         <ul>
             <li class="nav-item{% if isCategoryActive %} active{% endif %}">
-                {% if category.children is not empty and not isCategoryActive %}
-                    <i v-sidenavigation-children="{ categoryId: {{ category.id }}, isActive: {{ isCategoryActive | json_encode }}, currentUrl: {{ currentUrl | json_encode }} }" class="fa fa-caret-down" aria-hidden="true"></i>
+                {% if category.children is not empty and not isCategoryActive and openableChildren %}
+                    <i v-sidenavigation-children="{ categoryId: {{ category.id }}, currentUrl: {{ currentUrl | json_encode }} }" class="fa fa-caret-down" aria-hidden="true"></i>
                 {% endif %}
 
                 <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
@@ -116,9 +116,10 @@
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     {{ category.details[0].name }}
                 </a>
+
                 {% if category.children is not empty %}
                     {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
-                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl, spacingPadding, inlinePadding) }}
+                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl, spacingPadding, inlinePadding, openableChildren) }}
                     {% endfor %}
                 {% endif %}
             </li>
