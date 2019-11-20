@@ -96,7 +96,8 @@ class TemplateServiceProvider extends ServiceProvider
         // register shop builder widgets
         /** @var ContentWidgetRepositoryContract $widgetRepository */
         $widgetRepository = pluginApp(ContentWidgetRepositoryContract::class);
-        foreach(WidgetCollection::all() as $widgetClass)
+        $widgetClasses = WidgetCollection::all();
+        foreach($widgetClasses as $widgetClass)
         {
             $widgetRepository->registerWidget($widgetClass);
         }

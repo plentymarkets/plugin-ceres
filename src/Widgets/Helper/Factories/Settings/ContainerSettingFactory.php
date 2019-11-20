@@ -11,7 +11,7 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
  *
  * @package Ceres\Widgets\Helper\Factories\Settings
  */
-class ContainerSettingFactory extends GenericSettingFactory
+class ContainerSettingFactory extends BaseSettingFactory
 {
     /**
      * @var WidgetSettingsFactory $children

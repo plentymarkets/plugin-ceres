@@ -6,7 +6,7 @@ use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class ImageCarouselWidget extends BaseWidget
@@ -77,7 +77,7 @@ class ImageCarouselWidget extends BaseWidget
             );
 
         $container->children->createText("headline")
-            ->withCondition("$slides.headlineStyle === 'custom-caption'")
+            ->withCondition("\$slides.headlineStyle === 'custom-caption'")
             ->withDefaultValue("")
             ->withName("Widget.imageCarouselHeadlineLabel")
             ->withTooltip("Widget.imageCarouselHeadlineTooltip");

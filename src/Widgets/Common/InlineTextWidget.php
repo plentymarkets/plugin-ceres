@@ -5,7 +5,7 @@ namespace Ceres\Widgets\Common;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class InlineTextWidget extends BaseWidget
@@ -30,9 +30,8 @@ class InlineTextWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance(true);
-
         $settings->createSpacing();
 
-        $settings->toArray();
+        return $settings->toArray();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ceres\Widgets\Helper;
+namespace Ceres\Widgets\Helper\Factories;
 
 class WidgetDataFactory
 {

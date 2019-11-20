@@ -5,7 +5,7 @@ namespace Ceres\Widgets\Checkout;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class SubscribeNewsletterCheckWidget extends BaseWidget
@@ -37,7 +37,7 @@ class SubscribeNewsletterCheckWidget extends BaseWidget
 
         $settings->createCheckbox("hideCheckbox")
             ->withDefaultValue(false)
-            ->withName("Widget.subscribeNewsletterCheckHideCheckboxTooltip")
+            ->withName("Widget.subscribeNewsletterCheckHideCheckboxLabel")
             ->withTooltip("Widget.subscribeNewsletterCheckHideCheckboxTooltip");
 
         $settings->createCheckbox("isPreselected")
@@ -48,7 +48,7 @@ class SubscribeNewsletterCheckWidget extends BaseWidget
 
         $settings->createCheckbox("isRequired")
             ->withCondition("hideCheckbox !== true")
-            ->withDefaultValue(true)
+            ->withDefaultValue(false)
             ->withName("Widget.subscribeNewsletterCheckIsRequiredLabel")
             ->withTooltip("Widget.subscribeNewsletterCheckIsRequiredTooltip");
 
@@ -56,7 +56,6 @@ class SubscribeNewsletterCheckWidget extends BaseWidget
             ->withDefaultValue("")
             ->withName("Widget.subscribeNewsletterCheckCustomTextLabel")
             ->withTooltip("Widget.subscribeNewsletterCheckCustomTextTooltip");
-        // missing tooltip
 
         $settings->createSpacing(false, true);
 

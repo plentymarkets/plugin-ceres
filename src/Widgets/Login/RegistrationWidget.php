@@ -6,7 +6,7 @@ use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class RegistrationWidget extends BaseWidget
@@ -68,12 +68,7 @@ class RegistrationWidget extends BaseWidget
 
         $settings->createCheckboxGroup("requiredFieldsDe")
             ->withCondition("addressLayout === 'DE'")
-            ->withDefaultValue(
-                [
-                    "billing_address.name1",
-                    "billing_address.salutation"
-                ]
-            )
+            ->withDefaultValue([])
             ->withName("Widget.registrationRequiredFieldsDe")
             ->withCheckboxValues(
                 ValueListFactory::make()
@@ -91,9 +86,10 @@ class RegistrationWidget extends BaseWidget
             );
 
         $settings->createCheckboxGroup("shownFieldsGb")
+            ->withCondition("addressLayout === 'GB'")
             ->withDefaultValue(
                 [
-                    "billing_addess.name1",
+                    "billing_address.name1",
                     "billing_address.address2",
                     "billing_address.salutation"
                 ]

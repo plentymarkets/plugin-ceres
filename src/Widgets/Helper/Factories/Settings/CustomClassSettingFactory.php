@@ -1,10 +1,8 @@
 <?php
 
-namespace Ceres\Widgets\Helper\Factories\Settings\Includes;
+namespace Ceres\Widgets\Helper\Factories\Settings;
 
-use Ceres\Widgets\Helper\Factories\Settings\BaseSettingFactory;
-
-class CustomClassSetting extends BaseSettingFactory
+class CustomClassSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {

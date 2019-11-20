@@ -5,7 +5,7 @@ namespace Ceres\Widgets\OrderConfirmation;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 use IO\Services\Order\Factories\OrderResultFactory;
 
@@ -33,7 +33,7 @@ class OrderReturnWidget extends OrderConfirmationBaseWidget
         $settings->createAppearance();
 
         $settings->createCheckboxGroup("itemDetailsData")
-            ->withDefaultValue(["availablity"])
+            ->withDefaultValue(["availability"])
             ->withName("Widget.basketDetailsDataLabel")
             ->withCheckboxValues(
                 ValueListFactory::make()

@@ -1,11 +1,8 @@
 <?php
 
-namespace Ceres\Widgets\Helper\Factories\Settings\Includes;
+namespace Ceres\Widgets\Helper\Factories\Settings;
 
-use Ceres\Widgets\Helper\Factories\Settings\BaseSettingFactory;
-use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
-
-class IconSetting extends BaseSettingFactory
+class IconSettingFactory extends BaseSettingFactory
 {
     public function __construct()
     {

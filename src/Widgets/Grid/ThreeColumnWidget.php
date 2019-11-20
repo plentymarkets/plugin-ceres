@@ -5,7 +5,7 @@ namespace Ceres\Widgets\Grid;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class ThreeColumnWidget extends GridWidget
@@ -43,5 +43,7 @@ class ThreeColumnWidget extends GridWidget
                     ->addEntry("oneStackedToTwo", "Widget.gridThreeColumnLayoutOneStackedToTwo")
                     ->toArray()
             );
+
+        return $settings->toArray();
     }
 }

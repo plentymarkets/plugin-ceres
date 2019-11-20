@@ -6,7 +6,7 @@ use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class BasketTotalsWidget extends BaseWidget
@@ -31,6 +31,7 @@ class BasketTotalsWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createCheckboxGroup("visibleFields")
+            ->withName("Widget.basketTotalsVisibleFields")
             ->withDefaultValue([
                 "basketValueNet",
                 "basketValueGross",
@@ -60,7 +61,7 @@ class BasketTotalsWidget extends BaseWidget
                     ->toArray()
             );
 
-        $settings->createSpacing();
+        $settings->createSpacing(false, true);
 
         return $settings->toArray();
     }

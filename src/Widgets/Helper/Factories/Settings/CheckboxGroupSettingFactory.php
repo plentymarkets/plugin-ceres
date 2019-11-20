@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Ceres\Widgets\Helper\Factories\Settings;
-
 
 class CheckboxGroupSettingFactory extends BaseSettingFactory
 {
@@ -29,4 +27,13 @@ class CheckboxGroupSettingFactory extends BaseSettingFactory
         return $this->withOption('checkboxValues', $checkboxValues);
     }
 
+    /**
+     * @param array $defaultValue
+     * @return $this
+     */
+    public function withDefaultValue($defaultValue)
+    {
+        $this->data['defaultValue'] = $defaultValue;
+        return $this;
+    }
 }

@@ -5,7 +5,7 @@ namespace Ceres\Widgets\Grid;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class TwoColumnWidget extends GridWidget
@@ -16,7 +16,7 @@ class TwoColumnWidget extends GridWidget
     {
         return WidgetDataFactory::make("Ceres::TwoColumnWidget")
             ->withLabel("Widget.gridTwoColumnLabel")
-            ->withPreviewImageUrl("/images/widgets/grid-3-col.svg")
+            ->withPreviewImageUrl("/images/widgets/grid-2-col.svg")
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
             ->withPosition(300)
@@ -73,5 +73,7 @@ class TwoColumnWidget extends GridWidget
                     ->addEntry("stackedMobile", "Widget.gridTwoColumnLayoutStacked")
                     ->toArray()
             );
+
+        return $settings->toArray();
     }
 }

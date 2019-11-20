@@ -5,7 +5,7 @@ namespace Ceres\Widgets\OrderConfirmation;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class OrderTotalsWidget extends OrderConfirmationBaseWidget
@@ -31,21 +31,19 @@ class OrderTotalsWidget extends OrderConfirmationBaseWidget
         $settings->createCustomClass();
 
         $settings->createCheckboxGroup("visibleFields")
-            ->withDefaultValue(
-                [
-                    "orderValueNet",
-                    "orderValueGross",
-                    "rebate",
-                    "shippingCostsNet",
-                    "shippingCostsGross",
-                    "promotionCoupon",
-                    "totalSumNet",
-                    "vats",
-                    "totalSumGross",
-                    "salesCoupon",
-                    "openAmount"
-                ]
-            )
+            ->withDefaultValue([
+                "orderValueNet",
+                "orderValueGross",
+                "rebate",
+                "shippingCostsNet",
+                "shippingCostsGross",
+                "promotionCoupon",
+                "totalSumNet",
+                "vats",
+                "totalSumGross",
+                "salesCoupon",
+                "openAmount"
+            ])
             ->withName("Widget.basketTotalsVisibleFields")
             ->withCheckboxValues(
                 ValueListFactory::make()

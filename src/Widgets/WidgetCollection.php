@@ -208,18 +208,18 @@ class WidgetCollection
             self::CHECKOUT_WIDGETS,
             self::COMMON_WIDGETS,
             self::CONTACT_WIDGETS,
-//            self::CUSTOMER_WIDGETS,
-//            self::FOOTER_WIDGETS,
-//            self::FORM_WIDGETS,
+            self::CUSTOMER_WIDGETS,
+            self::FOOTER_WIDGETS,
+            self::FORM_WIDGETS,
             self::GRID_WIDGETS,
-//            self::HEADER_WIDGETS,
+            self::HEADER_WIDGETS,
             self::ITEM_WIDGETS,
             self::HEADER_WIDGETS,
-//            self::ITEM_WIDGETS,
-            self::ORDER_CONFIRMATION_WIDGETS
+            self::ITEM_WIDGETS,
+            self::ORDER_CONFIRMATION_WIDGETS,
             self::MY_ACCOUNT_WIDGETS,
             self::LOGIN_WIDGETS,
-            self::LEGAL_WIDGETS,
+            self::LEGAL_WIDGETS
         );
     }
 

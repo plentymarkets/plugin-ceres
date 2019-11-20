@@ -5,7 +5,7 @@ namespace Ceres\Widgets\MyAccount;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\WidgetDataFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class BankDataSelectWidget extends BaseWidget
@@ -29,7 +29,7 @@ class BankDataSelectWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance();
-        $settings->createSpacing();
+        $settings->createSpacing(false, true);
 
         return $settings->toArray();
     }
