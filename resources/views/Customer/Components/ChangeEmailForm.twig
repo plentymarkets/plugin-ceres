@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-change-email-form">
-    <form @submit.prevent="submit()" class="clearfix">
+    <form method="post" @submit.prevent="submit()" class="clearfix">
         <div class="input-unit mt-3">
             <label :for="'new-mail' + _uid" class="disabled">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
             <input type="email" name="email" class="form-control" :id="'new-mail' + _uid" :value="newMail" disabled>

@@ -274,7 +274,8 @@ class TemplateServiceProvider extends ServiceProvider
                     $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
                     return $urlQuery->toAbsoluteUrl();
                 },
-                'group' => 'necessary'
+                'group' => 'necessary',
+                'cookieNames' => ['XSRF-TOKEN']
             ]
         );
 
@@ -287,8 +288,7 @@ class TemplateServiceProvider extends ServiceProvider
                 'provider'      => 'Ceres::Template.consentGoogleMapsProvider',
                 'lifespan'      => 'Ceres::Template.consentGoogleMapsLifespan',
                 'policyUrl'     => 'Ceres::Template.consentGoogleMapsPolicyUrl',
-                'group'         => 'media',
-                'isOptOut'      => true
+                'group'         => 'media'
             ]
         );
     }

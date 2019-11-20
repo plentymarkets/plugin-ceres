@@ -1,5 +1,66 @@
 # Release Notes for Ceres
 
+## v4.4.1 (2019-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.0...4.4.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed 
+
+- Due to an error, order characteristics were not displayed in the shopping cart and the checkout and were not included in the order. This behaviour has been fixed.
+- Due to an error, it was not possible to open order details on My account pages that were not created with the ShopBuilder. This has been fixed.
+
+## v4.4.0 (2019-11-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.4...4.4.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- The default value of the setting "Category levels in the category tree" has been set to 4 levels. If you want to load more than 4 levels, you will have to change this setting in the Ceres configuration. This may negatively impact the performance of the online store.
+
+### Added
+
+- We added a cookie bar widget to the ShopBuilder.
+- We added a widget for privacy settings to the ShopBuilder.
+- We added the additional information widget, which is a structure element with which you can display contents as a popover.
+- A setting has been added to the Ceres configuration with which non-essential cookies can be blocked until the user has consented to its use.
+- A setting has been added to the Ceres configuration with which you can determine the number of levels in the category navigation.
+- We added the CSS class .widget-fw with which ShopBuilder widgets can be scaled to the entire width of the page.
+- We added the CSS class .unfixed with which the scrolling behaviour of ShopBuilder widgets in the header can be adjusted in a way that widgets scroll together with the rest of the page.
+- We added a safe mode, with which Ceres can be displayed without any changes made by themes or other external plugins.
+- The language files of the online store are now available in Dutch, French, and Polish.
+- The data field "Unit" has been added to the data field picker in the ShopBuilder.
+- The ShopBuilder now enables the display of properties of the type **file** in the single item view.
+
+### Changed
+
+- The country of delivery selection now supports the flags for the Canary Islands, the Netherlands Antilles, and Ceuta.
+- The **More** button in the list of shopping cart items has been reintroduced.
+- In the totals in the shopping cart and checkout, gift cards are now displayed above the net totals.
+- GoogleMaps is now only loaded after the user has given their consent.
+- We improved the logging of Twig errors.
+- The layout of the header is now calculated independently of breakpoints.
+- The default setting of the scrolling behaviour of the sticky widget has been set to **Only scrolls within a structure element**.
+- The ShopBuilder category "Homepage" now uses the meta title as the tab title, if available.
+- Blank input fields in the registration form are now output in an error notification.
+
+### Fixed
+
+- Changes to filter, sorting, or items per page settings in the category view on mobile devices removed the country code from the URL. This has been fixed.
+- Items for which the setting **Promotional coupon/POS discount: Purchasable with coupon only** is active can no longer be bought if no promotional coupon has been redeemed.
+- The item ID of items in the shopping cart is now displayed correctly.
+- Under certain circumstances, structure widgets in the header were displayed incorrectly. This behaviour has been fixed.
+- Order characteristics were no longer displayed in the shopping cart after the page had been changed. This has been fixed.
+- We fixed rounding errors that occurred in connection with the formatting of prices.
+- Due to an error, switching between gross and net prices did not update the item's price in the shopping cart. This has been fixed.
+- Generating item or variation URLs could lead to errors if the item category no longer existed. This behaviour has been fixed.
+- The structured data is now correctly bundled if more than one FAQ widget is used on one page.
+- Due to an error, the redirection of the registration widget was not functioning properly. This has been fixed.
+- When adding an item from the wish list to the shopping cart, the quantity input now works correctly.
+- Item bundles in the category and list views were displayed with a percentual savings badge instead of the item bundle badge. This has been fixed.
+- The prices of live shopping items are now displayed correctly if neither an RRP nor a special offer has been stored.
+- The order confirmation page could include incorrect calculations. This has been fixed.
+- Due to an error, the top bar widget was not displayed if all of its components had been deactivated in the widget settings. This has been fixed.
+- Percentage-based order characteristics were not outputted correctly. This has been fixed.
+- The button for creating returns in the my account area was not displayed if the my account page had not been created via the ShopBuilder. This behaviour has been fixed.
+- JavaScript errors could occur in the context of the AddToBasketOverlay. This behaviour has been fixed.
+- Changing the country of delivery opened the shopping cart preview, even if the user was already on the shopping cart page. This behaviour has been fixed.
+
 ## v4.3.4 (2019-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.3...4.3.4" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
