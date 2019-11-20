@@ -32,7 +32,7 @@ Vue.filter("itemURL", function(item, withVariationId = true)
     }
     else if (withVariationId)
     {
-        suffix = "_" + item.item.id + (!removeVariationId ? "_" + item.variation.id : "");
+        suffix = "_" + item.item.id + "_" + item.variation.id;
     }
     else
     {
