@@ -1,13 +1,8 @@
 <?php
 
+namespace Ceres\Widgets\Helper\Factories\Settings;
 
-namespace Ceres\Widgets\Helper\Factories\Settings\Includes;
-
-
-use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
-use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
-
-class ButtonSizeSetting extends SelectSettingFactory
+class ButtonSizeSettingFactory extends SelectSettingFactory
 {
     public function __construct()
     {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Ceres\Widgets\Helper\Factories\Settings;
-
 
 class RadioGroupSettingFactory extends BaseSettingFactory
 {
@@ -19,5 +17,4 @@ class RadioGroupSettingFactory extends BaseSettingFactory
     {
         return $this->withOption('radioValues', $radioValues);
     }
-
 }

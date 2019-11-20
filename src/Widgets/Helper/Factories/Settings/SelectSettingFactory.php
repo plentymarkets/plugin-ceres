@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Ceres\Widgets\Helper\Factories\Settings;
-
 
 class SelectSettingFactory extends BaseSettingFactory
 {

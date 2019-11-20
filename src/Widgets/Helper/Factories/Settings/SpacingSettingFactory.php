@@ -1,10 +1,8 @@
 <?php
 
-namespace Ceres\Widgets\Helper\Factories\Settings\Includes;
+namespace Ceres\Widgets\Helper\Factories\Settings;
 
-use Ceres\Widgets\Helper\Factories\Settings\ContainerSettingFactory;
-
-class SpacingSetting extends ContainerSettingFactory
+class SpacingSettingFactory extends ContainerSettingFactory
 {
     public function __construct($usePadding, $useMargin)
     {

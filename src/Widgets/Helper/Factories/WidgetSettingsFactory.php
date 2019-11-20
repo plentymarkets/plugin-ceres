@@ -11,11 +11,11 @@ use Ceres\Widgets\Helper\Factories\Settings\DateSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\DoubleSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\EditorSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\FileSettingFactory;
-use Ceres\Widgets\Helper\Factories\Settings\Includes\AppearanceSetting;
-use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
-use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
-use Ceres\Widgets\Helper\Factories\Settings\Includes\SpacingSetting;
-use Ceres\Widgets\Helper\Factories\Settings\Includes\ButtonSizeSetting;
+use Ceres\Widgets\Helper\Factories\Settings\AppearanceSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\CustomClassSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\IconSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\SpacingSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\ButtonSizeSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\ManufacturerSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
@@ -347,35 +347,35 @@ class WidgetSettingsFactory
     }
 
     /**
-     * @return CustomClassSetting
+     * @return CustomClassSettingFactory
      */
     public function createCustomClass()
     {
-        /** @var CustomClassSetting $setting */
-        $setting = pluginApp(CustomClassSetting::class);
+        /** @var CustomClassSettingFactory $setting */
+        $setting = pluginApp(CustomClassSettingFactory::class);
         $this->settings['customClass'] = $setting;
         return $setting;
     }
 
     /**
      * @param $optional
-     * @return AppearanceSetting
+     * @return AppearanceSettingFactory
      */
     public function createAppearance($optional = false)
     {
-        /** @var AppearanceSetting $setting */
-        $setting = pluginApp(AppearanceSetting::class, ['optional' => $optional]);
+        /** @var AppearanceSettingFactory $setting */
+        $setting = pluginApp(AppearanceSettingFactory::class, ['optional' => $optional]);
         $this->settings['appearance'] = $setting;
         return $setting;
     }
 
     /**
-     * @return IconSetting
+     * @return IconSettingFactory
      */
     public function createIcon()
     {
-        /** @var IconSetting $setting */
-        $setting = pluginApp(IconSetting::class);
+        /** @var IconSettingFactory $setting */
+        $setting = pluginApp(IconSettingFactory::class);
         $this->settings['icon'] = $setting;
         return $setting;
     }
@@ -383,23 +383,23 @@ class WidgetSettingsFactory
     /**
      * @param $usePadding
      * @param $useMargin
-     * @return SpacingSetting
+     * @return SpacingSettingFactory
      */
     public function createSpacing($usePadding = true, $useMargin = true)
     {
-        /** @var SpacingSetting $setting */
-        $setting = pluginApp(SpacingSetting::class, ['usePadding' => $usePadding, 'useMargin' => $useMargin]);
+        /** @var SpacingSettingFactory $setting */
+        $setting = pluginApp(SpacingSettingFactory::class, ['usePadding' => $usePadding, 'useMargin' => $useMargin]);
         $this->settings['spacing'] = $setting;
         return $setting;
     }
 
     /**
-     * @return ButtonSizeSetting
+     * @return ButtonSizeSettingFactory
      */
     public function createButtonSize()
     {
-        /** @var ButtonSizeSetting $setting */
-        $setting = pluginApp(ButtonSizeSetting::class);
+        /** @var ButtonSizeSettingFactory $setting */
+        $setting = pluginApp(ButtonSizeSettingFactory::class);
         $this->settings['buttonSize'] = $setting;
         return $setting;
     }
