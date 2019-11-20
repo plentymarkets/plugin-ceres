@@ -3,7 +3,7 @@ import ApiService from "../../services/ApiService";
 
 class SidenavigationChildrenLoader
 {
-    constructor(element, categoryId, currentUrl, openClassName)
+    constructor(element, categoryId, currentUrl, isActive, openClassName)
     {
         this.categoryId = categoryId;
         this.element = element;
@@ -11,6 +11,15 @@ class SidenavigationChildrenLoader
         this.openClassName = openClassName || "is-open";
 
         this.template = "";
+
+        if (isActive)
+        {
+            this.firstChildrenLoad = true;
+            setTimeout(() =>
+            {
+                this.parent.classList.add(this.openClassName);
+            }, 0);
+        }
     }
 
     get parent()
@@ -75,8 +84,6 @@ class SidenavigationChildrenLoader
         }
 
         this.parent.classList.toggle(this.openClassName);
-        this.element.classList.toggle("fa-caret-down");
-        this.element.classList.toggle("fa-caret-right");
     }
 }
 
@@ -85,8 +92,9 @@ Vue.directive("sidenavigation-children", {
     {
         const categoryId = binding.value.categoryId;
         const currentUrl = binding.value.currentUrl;
+        const isActive   = binding.value.isActive;
 
-        const sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl);
+        const sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive);
 
         el.addEventListener("click", () =>
         {
