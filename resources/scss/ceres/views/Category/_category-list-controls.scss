@@ -100,21 +100,37 @@
         padding: 1.2rem 2rem;
         text-transform: uppercase;
     }
+    .nav-item {
+        position: relative;
+        cursor: pointer;
+
+        .expand_nav {
+            width: 30px;
+            text-align: center;
+            align-self: center;
+            float: left;
+            padding: 0.75rem 0;
+        }
+
+        .nav-link {
+            padding: 0.75rem 2rem;
+            width: 100%;
+        }
+    }
+
     ul {
         @include reset-list();
         li {
             &.first-level {
                 display: none;
             }
-            &.first-level.active {
+            &.first-level.active, &.first-level.is-open {
                 display: list-item;
             }
             a {
                 display: block;
                 color: $gray-dark;
-                padding: 0.75rem 15px;
                 font-size: 1rem;
-                cursor: pointer;
                 &:hover {
                     color: $gray-darker;
                     background: $gray-lightest;
@@ -123,22 +139,40 @@
             ul {
                 display: none;
             }
-            &.active {
+            &.is-open {
+                > .expand_nav
+                {
+                    i
+                    {
+                        transform: rotate(90deg);
+                    }
+                }
                 & > ul {
                     display: block;
                 }
                 ul {
                     li {
                         a {
+                            padding-left: 3.5rem !important;
+                        }
+                        .expand_nav {
                             padding-left: 2.25rem;
                         }
                         ul li {
                             a {
+                                padding-left: 5rem !important;
+                            }
+                            .expand_nav {
                                 padding-left: 3.75rem;
                             }
-                            ul li a {
-                                padding-left: 5.25rem;
-                            }
+                            ul li {
+                                a {
+                                    padding-left: 6.5rem !important;
+                                }
+                                .expand_nav {
+                                    padding-left: 5.25rem !important;
+                                }
+                            } 
                         }
                     }
                 }
