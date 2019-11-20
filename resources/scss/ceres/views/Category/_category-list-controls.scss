@@ -139,7 +139,14 @@
             ul {
                 display: none;
             }
-            &.active, &.is-open {
+            &.is-open {
+                > .expand_nav
+                {
+                    i
+                    {
+                        transform: rotate(90deg);
+                    }
+                }
                 & > ul {
                     display: block;
                 }
