@@ -33,17 +33,34 @@ class SidenavigationChildrenLoader
 
     createChildren()
     {
-        const ul = document.createElement("ul");
+        for (const template of this.getSplitMarkup())
+        {
+            const ul = document.createElement("ul");
 
-        this.parent.appendChild(ul);
+            this.parent.appendChild(ul);
 
-        const compiled = Vue.compile(this.template);
+            const compiled = Vue.compile(template);
 
-        new Vue({
-            store: window.ceresStore,
-            render: compiled.render,
-            staticRenderFns: compiled.staticRenderFns
-        }).$mount(ul);
+            new Vue({
+                store: window.ceresStore,
+                render: compiled.render,
+                staticRenderFns: compiled.staticRenderFns
+            }).$mount(ul);
+        }
+    }
+
+    getSplitMarkup()
+    {
+        const fragment = document.createRange().createContextualFragment(this.template);
+        const elements = fragment.children;
+        const data = [];
+
+        for (const element of elements)
+        {
+            data.push(element.outerHTML);
+        }
+
+        return data;
     }
 
     toggle()
