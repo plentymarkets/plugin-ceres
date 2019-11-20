@@ -1,7 +1,7 @@
 import { isNullOrUndefined } from "../helper/utils";
 import Vue from "vue";
 
-Vue.filter("itemURL", function(item)
+Vue.filter("itemURL", function(item, withVariationId = true)
 {
     const enableOldUrlPattern = App.config.global.enableOldUrlPattern;
     const urlPath = item.texts.urlPath || "";
@@ -30,9 +30,13 @@ Vue.filter("itemURL", function(item)
     {
         suffix = "/a-" + item.item.id;
     }
-    else
+    else if (withVariationId)
     {
         suffix = "_" + item.item.id + "_" + item.variation.id;
+    }
+    else
+    {
+        suffix = "_" + item.item.id;
     }
 
     let trailingSlash = "";

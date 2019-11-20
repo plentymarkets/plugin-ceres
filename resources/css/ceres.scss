@@ -18476,7 +18476,7 @@ html.crios {
 }
 
 .filter-collapse,
-.widget-attributes-properties-characteristics-filter {
+.widget-filter-base {
     .card {
         background-color: transparent;
         border: 0;
@@ -19766,7 +19766,7 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
-.widget-attributes-properties-characteristics-filter
+.widget-filter-base
 {
     padding: 2rem;
     background-color: $white;
@@ -19784,7 +19784,7 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
-.widget-toolbar .widget-attributes-properties-characteristics-filter {
+.widget-toolbar .widget-filter-base {
     padding: 0;
 }
 
@@ -19821,6 +19821,34 @@ html.ie .v-s-boxes .v-s-box.invalid {
 
     .cmp-product-thumb {
         margin-bottom: 0px !important;
+    }
+}
+
+.widget-pagination
+{
+    &.widget-alignment-center
+    {
+        ul.pagination
+        {
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding-right: 0 !important;
+        }
+    }
+
+    &.widget-alignment-right
+    {
+        ul.pagination
+        {
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            margin-left: auto;
+            padding-right: 0 !important;
+        }
     }
 }
 

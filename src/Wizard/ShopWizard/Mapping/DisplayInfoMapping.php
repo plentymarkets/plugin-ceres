@@ -69,6 +69,18 @@ class DisplayInfoMapping
             "global"   => false,
             "optional" => true,
         ],
+        "displayInfo_showPleaseSelect" => [
+            "field"    => "item.show_please_select",
+            "type"     => "boolean",
+            "global"   => false,
+            "optional" => true,
+        ],
+        "displayInfo_attributeSelectDefaultOption" => [
+            "field"    => "attributeSelectDefaultOption",
+            "type"     => "boolean",
+            "global"   => true,
+            "optional" => true,
+        ],
         "displayInfo_cartItemData" => [
             "field"    => "basket.item_data",
             "type"     => "concatenated",
