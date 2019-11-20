@@ -100,6 +100,27 @@
         padding: 1.2rem 2rem;
         text-transform: uppercase;
     }
+    .nav-item {
+        position: relative;
+        cursor: pointer;
+
+        .expand_nav {
+            width: 30px;
+            text-align: center;
+            align-self: center;
+            float: left;
+            padding: 0.75rem 0;
+        }
+
+        .nav-link {
+            padding: 0.75rem 2rem;
+            width: 100%;
+        }
+        i {
+            vertical-align: center;
+        }
+    }
+
     ul {
         @include reset-list();
         li {
@@ -112,9 +133,7 @@
             a {
                 display: block;
                 color: $gray-dark;
-                padding: 0.75rem 15px;
                 font-size: 1rem;
-                cursor: pointer;
                 &:hover {
                     color: $gray-darker;
                     background: $gray-lightest;
@@ -130,14 +149,14 @@
                 ul {
                     li {
                         a {
-                            padding-left: 2.25rem;
+                            padding-left: 3.5rem !important;
                         }
                         ul li {
                             a {
-                                padding-left: 3.75rem;
+                                padding-left: 5rem !important;
                             }
                             ul li a {
-                                padding-left: 5.25rem;
+                                padding-left: 6.5rem !important;
                             }
                         }
                     }

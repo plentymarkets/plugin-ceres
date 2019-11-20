@@ -106,8 +106,8 @@
 
         <ul>
             <li class="nav-item{% if isCategoryActive %} active{% endif %}">
-                {% if category.children is not empty and not isCategoryActive and openableChildren %}
-                    <i v-sidenavigation-children="{ categoryId: {{ category.id }}, currentUrl: {{ currentUrl | json_encode }} }" class="fa fa-caret-down" aria-hidden="true"></i>
+                {% if category.children is not empty and openableChildren %}
+                    <div class="expand_nav" v-sidenavigation-children="{ categoryId: {{ category.id }}, currentUrl: {{ currentUrl | json_encode }} }"><i class="fa fa-caret-right" aria-hidden="true"></i></div>
                 {% endif %}
 
                 <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
