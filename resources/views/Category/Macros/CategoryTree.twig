@@ -88,8 +88,7 @@
 
 {% endmacro %}
 
-{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding, openableChildren) %}
-
+{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding, showItemCount, openableChildren) %}
     {% import _self as sidemenu %}
     {% for category in categories if category.details[0] %}
 
@@ -115,6 +114,7 @@
                 {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     {{ category.details[0].name }}
+                    {% if showItemCount == true %}<div class="filter-badge bg-appearance">{{ category.itemCount[0].count }}</div>{% endif %}
                 </a>
 
                 {% if category.children is not empty %}
@@ -124,7 +124,6 @@
                 {% endif %}
             </li>
         </ul>
-
     {% endfor %}
 
 {% endmacro %}

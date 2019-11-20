@@ -21,6 +21,13 @@
                 "name": "Widget.categoryNavigationOpenableChildrenLabel"
             }
         },
+        "showItemCount": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.categoryNavigationShowItemCount"
+            }
+        },
         "spacing": {
             "type": "vertical",
             "options": {

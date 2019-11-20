@@ -5,5 +5,6 @@
     "details.lang",
     "details.nameUrl",
     "details.metaTitle",
-    "details.imagePath"
+    "details.imagePath",
+    "itemCount"
 ]

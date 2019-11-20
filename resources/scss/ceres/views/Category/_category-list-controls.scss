@@ -237,20 +237,20 @@
                     left: 0.5rem;
                 }
             }
-            .filter-badge {
-                position: absolute;
-                display: inline-block;
-                font-size: 0.85rem;
-                background: $gray-lighter2;
-                padding: 0.1rem 0;
-                color: $gray;
-                right: 0.5rem;
-                text-align: center;
-                min-width: 3em;
-                top: 50%;
-                transform: translateY(-50%);
-            }
         }
     }
 }
 
+.filter-badge {
+    position: absolute;
+    display: inline-block;
+    font-size: 0.85rem;
+    background: $gray-lighter2;
+    padding: 0.1rem 0;
+    color: $gray;
+    right: 0.5rem;
+    text-align: center;
+    min-width: 3em;
+    top: 50%;
+    transform: translateY(-50%);
+}
