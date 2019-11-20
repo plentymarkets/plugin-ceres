@@ -102,6 +102,7 @@
         <ul>
             <li class="nav-item {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
                 <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
+                {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} bg-appearance{% endfor %}
                 {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     {{ category.details[0].name }}
