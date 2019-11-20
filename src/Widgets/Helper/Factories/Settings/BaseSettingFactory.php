@@ -20,7 +20,7 @@ class BaseSettingFactory
      * @param string    $type
      * @return $this
      */
-    protected function withType($type)
+    public function withType($type)
     {
         $this->data['type'] = $type;
         return $this;
@@ -33,7 +33,7 @@ class BaseSettingFactory
      * @param mixed     $value      The option value
      * @return $this
      */
-    protected function withOption($key, $value)
+    public function withOption($key, $value)
     {
         $this->data['options'] = $this->data['options'] ?? [];
         $this->data['options'][$key] = $value;
@@ -43,7 +43,7 @@ class BaseSettingFactory
     /**
      * Set the default value for the setting.
      *
-     * @param mixed     $defaultValue   The default value
+     * @param array|mixed    $defaultValue   The default value
      * @return $this
      */
     public function withDefaultValue($defaultValue)

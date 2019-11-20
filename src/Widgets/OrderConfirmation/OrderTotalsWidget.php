@@ -31,21 +31,19 @@ class OrderTotalsWidget extends OrderConfirmationBaseWidget
         $settings->createCustomClass();
 
         $settings->createCheckboxGroup("visibleFields")
-            ->withDefaultValue(
-                [
-                    "orderValueNet",
-                    "orderValueGross",
-                    "rebate",
-                    "shippingCostsNet",
-                    "shippingCostsGross",
-                    "promotionCoupon",
-                    "totalSumNet",
-                    "vats",
-                    "totalSumGross",
-                    "salesCoupon",
-                    "openAmount"
-                ]
-            )
+            ->withDefaultValue([
+                "orderValueNet",
+                "orderValueGross",
+                "rebate",
+                "shippingCostsNet",
+                "shippingCostsGross",
+                "promotionCoupon",
+                "totalSumNet",
+                "vats",
+                "totalSumGross",
+                "salesCoupon",
+                "openAmount"
+            ])
             ->withName("Widget.basketTotalsVisibleFields")
             ->withCheckboxValues(
                 ValueListFactory::make()

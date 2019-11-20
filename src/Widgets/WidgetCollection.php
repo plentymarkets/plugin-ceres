@@ -219,7 +219,7 @@ class WidgetCollection
             self::ORDER_CONFIRMATION_WIDGETS,
             self::MY_ACCOUNT_WIDGETS,
             self::LOGIN_WIDGETS,
-            self::LEGAL_WIDGETS,
+            self::LEGAL_WIDGETS
         );
     }
 

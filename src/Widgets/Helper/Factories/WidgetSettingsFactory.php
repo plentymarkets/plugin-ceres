@@ -11,7 +11,6 @@ use Ceres\Widgets\Helper\Factories\Settings\DateSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\DoubleSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\EditorSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\FileSettingFactory;
-use Ceres\Widgets\Helper\Factories\Settings\GenericSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\AppearanceSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\CustomClassSetting;
 use Ceres\Widgets\Helper\Factories\Settings\Includes\IconSetting;
@@ -36,12 +35,12 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the new settings entry. If key already exists, previous entry will be overridden.
      *
-     * @return GenericSettingFactory
+     * @return BaseSettingFactory
      */
     public function createSetting($key)
     {
-        /** @var GenericSettingFactory $setting */
-        $setting = pluginApp(GenericSettingFactory::class);
+        /** @var BaseSettingFactory $setting */
+        $setting = pluginApp(BaseSettingFactory::class);
         $this->settings[$key] = $setting;
         return $setting;
     }
@@ -159,7 +158,7 @@ class WidgetSettingsFactory
 
     /**
      * @param string $key
-     * @return GenericSettingFactory
+     * @return BaseSettingFactory
      */
     public function createNumber($key)
     {
@@ -227,7 +226,7 @@ class WidgetSettingsFactory
 
     /**
      * @param string $key
-     * @return GenericSettingFactory
+     * @return BaseSettingFactory
      */
     public function createColor($key)
     {
