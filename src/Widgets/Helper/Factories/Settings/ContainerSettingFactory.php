@@ -22,7 +22,6 @@ class ContainerSettingFactory extends BaseSettingFactory
 
     public function __construct()
     {
-        parent::__construct();
         $this->children = pluginApp(WidgetSettingsFactory::class);
     }
 
