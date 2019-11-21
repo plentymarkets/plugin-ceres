@@ -15,12 +15,11 @@
     <div class="widget-inner">
 
         <div class="category-title">{{ Twig.trans("Ceres::Template.itemCategories") }}</div>
-            {{ Twig.include("Ceres::PageDesign.Partials.Header.SideNavigation", { 
-                spacingPadding: spacingPadding | json_encode,
-                inlinePadding : inlinePadding | json_encode,
-                openableChildren: openableChildren | json_encode })
-            }}
-        </div>
+        {{ Twig.include("Ceres::PageDesign.Partials.Header.SideNavigation", { 
+            spacingPadding: spacingPadding | json_encode,
+            inlinePadding : inlinePadding | json_encode,
+            openableChildren: openableChildren | json_encode })
+        }}
 
         {{ LayoutContainer.show("Ceres::CategoryItem.SideNavBarBottom") }}
     </div>
