@@ -1,0 +1,54 @@
+{
+    "identifier": "Ceres::ManufacturerFilterWidget",
+    "label": "Widget.manufacturerFilterLabel",
+    "previewImageURL": "/images/widgets/manufacturer-filter.svg",
+    "type": "categoryitem",
+    "categories": ["categoryitem"],
+    "position": 1100,
+    "widgetClass": "Ceres\\Widgets\\Category\\Filter\\ManufacturerFilterWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "spacing": {
+            "type": "vertical",
+            "options": {
+                "name": "Widget.widgetSpacing"
+            },
+            "children": {
+                "customPadding": {
+                    "type": "checkbox",
+                    "options": {
+                        "name": "Widget.widgetCustomPadding"
+                    }
+                },
+                "padding": {
+                    "type": "spacing",
+                    "isVisible": "!!spacing.customPadding",
+                    "options": {
+                        "units": ["px", "rem"],
+                        "direction": "vertical"
+                    }
+                },
+                "customMargin": {
+                    "type": "checkbox",
+                    "options": {
+                        "name": "Widget.widgetCustomMargin"
+                    }
+                },
+                "margin": {
+                    "type": "spacing",
+                    "isVisible": "!!spacing.customMargin",
+                    "options": {
+                        "units": ["px", "rem"],
+                        "direction": "all"
+                    }
+                }
+            }
+        }
+    }
+}
