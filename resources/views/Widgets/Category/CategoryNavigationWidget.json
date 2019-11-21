@@ -14,11 +14,18 @@
             "defaultValue": "none",
             "options": "@include(optionalAppearance)"
         },
-        "openableChildren": {
+        "expandableChildren": {
             "type": "checkbox",
             "defaultValue": false,
             "options": {
-                "name": "Widget.categoryNavigationOpenableChildrenLabel"
+                "name": "Widget.categoryNavigationExpandableChildrenLabel"
+            }
+        },
+        "showItemCount": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.categoryNavigationShowItemCount"
             }
         },
         "spacing": {
