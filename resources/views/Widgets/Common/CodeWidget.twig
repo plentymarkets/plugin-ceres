@@ -1,3 +1,4 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set customClass = widget.settings.customClass.mobile %}
@@ -10,6 +11,10 @@
 
 <div class="widget widget-code {% if isPreview %}widget-editable-min-height {% endif %}widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if hasSpacing %} m-0{% endif %}">
     <div class="widget-inner bg-appearance{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{{ WidgetHelper.makeCodeEditable('text', 'Ceres::Widget.textLabel', isPreview) }}>
-        {{ text | raw }}
+        {% if isPreview and isSafeMode %}
+            {{ Twig.do("verbatim") }}<pre v-text="{{ text | json_encode }}"></pre>{{ Twig.do("endverbatim") }}
+        {% else %}
+            {{ text | raw }}
+        {% endif %}
     </div>
 </div>
