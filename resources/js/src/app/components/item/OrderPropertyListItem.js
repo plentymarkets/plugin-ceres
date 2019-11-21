@@ -1,5 +1,9 @@
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+
+import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
 Vue.component("order-property-list-item", {
 
@@ -19,7 +23,8 @@ Vue.component("order-property-list-item", {
         return {
             inputValue: "",
             selectedFile: null,
-            waiting: false
+            waiting: false,
+            selectionValue: null
         };
     },
 
@@ -84,19 +89,26 @@ Vue.component("order-property-list-item", {
             return this.property.itemSurcharge || this.property.surcharge;
         },
 
-        ...Vuex.mapState({
+        selectedDescription()
+        {
+            if (this.inputType !== "selection" || isNullOrUndefined(this.selectionValue))
+            {
+                return null;
+            }
+
+            const selectedProperty = this.property.selectionValues[this.selectionValue];
+
+            return selectedProperty.description;
+        },
+
+        ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
         }),
 
-        ...Vuex.mapGetters([
+        ...mapGetters([
             "variationMissingProperties"
         ])
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:
@@ -121,6 +133,13 @@ Vue.component("order-property-list-item", {
             else if (this.inputType === "radio")
             {
                 this.$emit("radio-change", this.property.id);
+            }
+            else if (this.inputType === "selection")
+            {
+                if (isNullOrUndefined(value) || value.length <= 0)
+                {
+                    value = null;
+                }
             }
 
             this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
@@ -165,7 +184,7 @@ Vue.component("order-property-list-item", {
             return value;
         },
 
-        ...Vuex.mapMutations([
+        ...mapMutations([
             "setVariationOrderProperty",
             "setIsBasketLoading"
         ]),

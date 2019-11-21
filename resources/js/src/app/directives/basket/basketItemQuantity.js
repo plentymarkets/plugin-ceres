@@ -1,5 +1,6 @@
 import { floatLength } from "../../helper/number";
 import { defaultValue } from "../../helper/utils";
+import Vue from "vue";
 
 Vue.directive("basket-item-quantity",
     {

@@ -1,17 +1,8 @@
-//header scss
-.unfixed
-{
-	left: 0;
-	right: 0;
-}
-
 .top-bar{
 	@media print {
 		display: none;
 	}
 
-	width: 100%;
-	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
 
@@ -69,6 +60,10 @@
 				}
 			}
 		}
+	}
+
+	.account-menu {
+		min-width: 100%;
 	}
 
 	&.fixed-top {
@@ -180,10 +175,6 @@
 					}
 				}
 			}
-			.account-menu {
-				padding:0;
-				margin:0;
-			}
 		}
 
 		.control-wish-list {
@@ -291,9 +282,10 @@
 		}
 	}
 
-	.navbar{
+	.navbar {
 		font-family:$font-family-heading;
 		border-bottom:1px solid darken($gray-lighter2, 2%);
+
 		a {
 			color: $gray-dark;
 			&:hover {
@@ -367,7 +359,6 @@
 
 .navbar {
 	padding:0;
-	z-index: $zindex-navbar;
 	background-color: $navbar-background-color;
 	border-bottom: 1px solid $gray-lighter;
 
@@ -375,7 +366,6 @@
 
 		border-radius: 0;
 		padding:0;
-		z-index: $zindex-navbar;
 		border-bottom: 1px solid $gray-lighter;
 
 		.dropdown:hover .dropdown-menu {
@@ -389,7 +379,6 @@
 	position: relative;
 	padding:0 15px;
 	display: block;
-	width: 100%;
 }
 
 .navbar-brand {
@@ -434,17 +423,14 @@
 
 .wrapper-main header
 {
-	.container-max > .row
-	{
+	.container-max > .row {
 		flex-direction: row-reverse;
 		position: relative;
 	}
-	.controls-list
-	{
+	.controls-list {
 		width: auto;
 
-		&>li
-		{
+		>li	{
 			// default font size for all items
 			font-size: .8rem;
 
@@ -546,16 +532,6 @@
 }
 
 @include media-breakpoint-up(lg){
-
-	.brand-wrapper{
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		z-index:1000;
-		width: auto;
-		left: 0;
-	}
-
 	.navbar-nav{
 		&>.nav-item{
 			&>.nav-link{
@@ -578,6 +554,13 @@
  	}
  }
 
-.account-menu.dropdown-menu.dropdown-menu-right.small{
-	min-width: 100%;
-}
+ html.ie {
+	.always-visible-search {
+		min-height: 32px;
+	}
+
+	.navbar-brand img[src*="svg"] {
+		width: 100%;
+		height: 100%;
+	}
+ }

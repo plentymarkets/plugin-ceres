@@ -1,23 +1,29 @@
+import ValidationService from "../../services/ValidationService";
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
+import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined } from "../../helper/utils";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-const ModalService        = require("services/ModalService");
-
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
-import { navigateTo } from "services/UrlService";
+const ApiService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+const ModalService        = require("../../services/ModalService");
 
 Vue.component("registration", {
 
     delimiters: ["${", "}"],
+
+    mixins: [ButtonSizePropertyMixin],
 
     props: {
         modalElement: String,
         guestMode: { type: Boolean, default: false },
         isSimpleRegistration: { type: Boolean, default: false },
         template: String,
-        backlink: String
+        backlink: String,
+        shownFields: Object,
+        requiredFields: Object
     },
 
     data()
@@ -29,16 +35,13 @@ Vue.component("registration", {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                addressSalutation: 0,
                 gender: "male"
             },
-            isDisabled: false
+            isDisabled: false,
+            privacyPolicyAccepted : false,
+            privacyPolicyShowError: false,
+            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {
@@ -47,27 +50,78 @@ Vue.component("registration", {
          */
         validateRegistration()
         {
-            ValidationService.validate($("#registration" + this._uid))
-                .done(() =>
+            executeReCaptcha(this.$refs.registrationForm)
+                .then((recaptchaToken) =>
                 {
-                    this.sendRegistration();
-                })
-                .fail(invalidFields =>
-                {
-                    if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
-                    {
-                        this.$refs.passwordHint.showPopper();
-                    }
-                    ValidationService.markInvalidFields(invalidFields, "error");
+                    ValidationService.validate(this.$refs.registrationForm)
+                        .done(() =>
+                        {
+                            if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
+                            {
+                                this.sendRegistration(recaptchaToken);
+                            }
+                            else
+                            {
+                                this.privacyPolicyShowError = true;
+
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                                );
+                            }
+                        })
+                        .fail(invalidFields =>
+                        {
+                            if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
+                            {
+                                this.$refs.passwordHint.showPopper();
+                            }
+
+                            const invalidFieldNames = this.getInvalidFieldNames(invalidFields);
+
+                            if (invalidFieldNames.length > 0)
+                            {
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: invalidFieldNames.join(", ") })
+                                );
+                            }
+
+                            ValidationService.markInvalidFields(invalidFields, "error");
+
+                            if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
+                            {
+                                this.privacyPolicyShowError = true;
+
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                                );
+                            }
+                        });
                 });
+        },
+
+        getInvalidFieldNames(invalidFields = [])
+        {
+            const fieldNames = [];
+
+            for (const field of invalidFields)
+            {
+                let fieldName = field.lastElementChild.innerHTML.trim();
+
+                fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+                fieldNames.push(fieldName);
+            }
+
+            return fieldNames;
         },
 
         /**
          * Send the registration
          */
-        sendRegistration()
+        sendRegistration(recaptchaToken)
         {
             const userObject = this.getUserObject();
+
+            userObject.recaptcha = recaptchaToken;
 
             this.isDisabled = true;
 
@@ -75,10 +129,11 @@ Vue.component("registration", {
                 .done(response =>
                 {
                     ApiService.setToken(response);
-                    document.dispatchEvent(new CustomEvent("onSignUpSuccess", { detail: userObject }));
 
                     if (!response.code)
                     {
+                        document.dispatchEvent(new CustomEvent("onSignUpSuccess", { detail: userObject }));
+
                         NotificationService.success(
                             TranslationService.translate("Ceres::Template.regSuccessful")
                         ).closeAfter(3000);
@@ -101,7 +156,7 @@ Vue.component("registration", {
                     {
                         NotificationService.error(
                             TranslationService.translate("Ceres::Template.regError")
-                        ).closeAfter(3000);
+                        ).closeAfter(10000);
                     }
 
                     this.isDisabled = false;
@@ -151,6 +206,16 @@ Vue.component("registration", {
             }
 
             return userObject;
+        },
+
+        privacyPolicyValueChanged(value)
+        {
+            this.privacyPolicyAccepted = value;
+
+            if (value)
+            {
+                this.privacyPolicyShowError = false;
+            }
         }
     }
 });

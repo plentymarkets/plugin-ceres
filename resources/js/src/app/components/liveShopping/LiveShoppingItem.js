@@ -1,5 +1,8 @@
 import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
+import moment from "moment";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
@@ -22,6 +25,16 @@ Vue.component("live-shopping-item", {
         displaySettings:
         {
             type: Object
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -113,15 +126,13 @@ Vue.component("live-shopping-item", {
             return prices;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             liveShoppingOffers: state => state.liveShopping.liveShoppingOffers
         })
     },
 
     created()
     {
-        this.$options.template = this.template;
-
         this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
     },
 

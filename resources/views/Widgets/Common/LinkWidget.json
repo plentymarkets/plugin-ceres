@@ -1,0 +1,79 @@
+{
+    "identifier": "Ceres::LinkWidget",
+    "label": "Widget.linkLabel",
+    "previewImageURL": "/images/widgets/link.svg",
+    "type": "static",
+    "categories": ["text"],
+    "position": 900,
+    "widgetClass": "Ceres\\Widgets\\Common\\LinkWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options":{
+                "name": "Widget.linkSizeLabel",
+                "tooltipText": "Widget.linkSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.linkSizeSmall",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.linkSizeMedium",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.linkSizeLarge",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "block": {
+            "type": "checkbox",
+            "required": false,
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.linkBlock"
+            }
+        },
+        "icon": "@include(icon)",
+        "text": {
+            "type": "text",
+            "required": false,
+            "options": {
+                "name": "Widget.linkTextLabel",
+                "tooltipText": "Widget.linkTextTooltip"
+            }
+        },
+        "url": {
+            "type": "url",
+            "required": false,
+            "options": {
+                "name": "Widget.linkUrlLabel",
+                "tooltipText": "Widget.linkUrlTooltip",
+                "internalLinks": [
+                    {
+                        "value": "return",
+                        "caption": "Widget.urlReturnLabel"
+                    },
+                    {
+                        "value": "tracking",
+                        "caption": "Widget.urlTrackingLabel"
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}

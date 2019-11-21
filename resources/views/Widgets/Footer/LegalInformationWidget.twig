@@ -1,4 +1,10 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {% set configuration = {
     showCancellationRights: widget.settings.showCancellationRights.mobile,
@@ -10,7 +16,8 @@
     cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
 } %}
 
-<div class="widget-legal-information text-center my-3">
+<div class="widget-legal-information text-center my-3{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div>
         {{ Twig.do('autoescape false') }}
 
@@ -27,7 +34,7 @@
         {% endif %}
 
         {% if configuration.showLegalDisclosure %}
-            <a href="{{ Twig.print('urls.legalDisclosure') }}">{{ Twig.trans("Ceres::Template.footerLegalDisclosure") }}</a>
+            <a href="{{ Twig.print('urls.legalDisclosure') }}">{{ Twig.trans("Ceres::Template.footerLegalDisclosure", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
 
         {% if configuration.showPrivacyPolicy %}
@@ -35,12 +42,12 @@
         {% endif %}
 
         {% if configuration.showGtc %}
-            <a href="{{ Twig.print('urls.gtc') }}">{{ Twig.trans("Ceres::Template.footerGtc") }}</a>
+            <a href="{{ Twig.print('urls.gtc') }}">{{ Twig.trans("Ceres::Template.footerGtc", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
 
-        {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
+        {{ Twig.if('(config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com") or config("IO.routing.category_contact") > 0') }}
             <a href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
-        {% endif %}
+        {{ Twig.endif() }}
         {{ Twig.do('endautoescape') }}
     </div>
 </div>

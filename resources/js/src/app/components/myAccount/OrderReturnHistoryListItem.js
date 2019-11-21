@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.component("order-return-history-list-item", {
 
     props: {
@@ -15,7 +17,7 @@ Vue.component("order-return-history-list-item", {
     },
 
     data()
-	{
+    {
         return {
             itemsToRender: [],
             showAllOrderItems: false
@@ -24,7 +26,6 @@ Vue.component("order-return-history-list-item", {
 
     created()
     {
-        this.$options.template = this.template;
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 5);
     },
 

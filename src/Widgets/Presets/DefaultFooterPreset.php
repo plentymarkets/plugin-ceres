@@ -52,6 +52,7 @@ class DefaultFooterPreset implements ContentPreset
         $this->createLinkListWidget();
         $this->createLegalInformationWidget();
         $this->createTextWidget();
+        $this->createCookieBar();
 
         return $this->preset->toArray();
     }
@@ -165,8 +166,15 @@ class DefaultFooterPreset implements ContentPreset
         $defaultText .=     "<small>&copy; Copyright {{ \"now\" | date(\"Y\") }} | {{ trans(\"Ceres::Template.footerAllRightsReserved\") }}</small>";
         $defaultText .= "</div>";
 
-        $this->preset->createWidget("Ceres::TextWidget")
+        $this->preset->createWidget("Ceres::CodeWidget")
             ->withSetting("appearance", "none")
             ->withSetting("text", $defaultText);
+    }
+
+    private function createCookieBar()
+    {
+        $this->preset->createWidget("Ceres::CookieBarWidget")
+            ->withSetting("customClass", "")
+            ->withSetting("appearance", "primary");
     }
 }

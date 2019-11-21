@@ -1,5 +1,8 @@
-import TranslationService from "services/TranslationService";
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
+import { isDefined } from "../../helper/utils";
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("payment-provider-select", {
     props:
@@ -8,14 +11,26 @@ Vue.component("payment-provider-select", {
         {
             type: String,
             default: "#vue-payment-provider-select"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         methodOfPaymentList: state => state.checkout.payment.methodOfPaymentList,
         methodOfPaymentId: state => state.checkout.payment.methodOfPaymentId,
         showError: state => state.checkout.validation.paymentProvider.showError,
-        isBasketLoading: state => state.basket.isBasketLoading
+        isBasketLoading: state => state.basket.isBasketLoading,
+        isCheckoutReadonly: state => state.checkout.readOnly,
+        selectedShippingProfile: state => state.checkout.shipping.selectedShippingProfile
     }),
 
     /**
@@ -23,7 +38,6 @@ Vue.component("payment-provider-select", {
      */
     created()
     {
-        this.$options.template = this.template;
         this.$store.commit("setPaymentProviderValidator", this.validate);
     },
 
@@ -57,6 +71,18 @@ Vue.component("payment-provider-select", {
                 NotificationService.error(
                     TranslationService.translate("Ceres::Template.checkoutCheckPaymentProvider")
                 );
+            }
+        },
+
+        isPaymentMethodExcluded(paymentMethodId)
+        {
+            if (isDefined(this.selectedShippingProfile.excludedPaymentMethodIds))
+            {
+                return this.selectedShippingProfile.excludedPaymentMethodIds.includes(paymentMethodId);
+            }
+            else
+            {
+                return false;
             }
         }
     }

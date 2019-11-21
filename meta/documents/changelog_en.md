@@ -1,5 +1,470 @@
 # Release Notes for Ceres
 
+## v4.4.1 (2019-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.0...4.4.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed 
+
+- Due to an error, order characteristics were not displayed in the shopping cart and the checkout and were not included in the order. This behaviour has been fixed.
+- Due to an error, it was not possible to open order details on My account pages that were not created with the ShopBuilder. This has been fixed.
+
+## v4.4.0 (2019-11-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.4...4.4.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- The default value of the setting "Category levels in the category tree" has been set to 4 levels. If you want to load more than 4 levels, you will have to change this setting in the Ceres configuration. This may negatively impact the performance of the online store.
+
+### Added
+
+- We added a cookie bar widget to the ShopBuilder.
+- We added a widget for privacy settings to the ShopBuilder.
+- We added the additional information widget, which is a structure element with which you can display contents as a popover.
+- A setting has been added to the Ceres configuration with which non-essential cookies can be blocked until the user has consented to its use.
+- A setting has been added to the Ceres configuration with which you can determine the number of levels in the category navigation.
+- We added the CSS class .widget-fw with which ShopBuilder widgets can be scaled to the entire width of the page.
+- We added the CSS class .unfixed with which the scrolling behaviour of ShopBuilder widgets in the header can be adjusted in a way that widgets scroll together with the rest of the page.
+- We added a safe mode, with which Ceres can be displayed without any changes made by themes or other external plugins.
+- The language files of the online store are now available in Dutch, French, and Polish.
+- The data field "Unit" has been added to the data field picker in the ShopBuilder.
+- The ShopBuilder now enables the display of properties of the type **file** in the single item view.
+
+### Changed
+
+- The country of delivery selection now supports the flags for the Canary Islands, the Netherlands Antilles, and Ceuta.
+- The **More** button in the list of shopping cart items has been reintroduced.
+- In the totals in the shopping cart and checkout, gift cards are now displayed above the net totals.
+- GoogleMaps is now only loaded after the user has given their consent.
+- We improved the logging of Twig errors.
+- The layout of the header is now calculated independently of breakpoints.
+- The default setting of the scrolling behaviour of the sticky widget has been set to **Only scrolls within a structure element**.
+- The ShopBuilder category "Homepage" now uses the meta title as the tab title, if available.
+- Blank input fields in the registration form are now output in an error notification.
+
+### Fixed
+
+- Changes to filter, sorting, or items per page settings in the category view on mobile devices removed the country code from the URL. This has been fixed.
+- Items for which the setting **Promotional coupon/POS discount: Purchasable with coupon only** is active can no longer be bought if no promotional coupon has been redeemed.
+- The item ID of items in the shopping cart is now displayed correctly.
+- Under certain circumstances, structure widgets in the header were displayed incorrectly. This behaviour has been fixed.
+- Order characteristics were no longer displayed in the shopping cart after the page had been changed. This has been fixed.
+- We fixed rounding errors that occurred in connection with the formatting of prices.
+- Due to an error, switching between gross and net prices did not update the item's price in the shopping cart. This has been fixed.
+- Generating item or variation URLs could lead to errors if the item category no longer existed. This behaviour has been fixed.
+- The structured data is now correctly bundled if more than one FAQ widget is used on one page.
+- Due to an error, the redirection of the registration widget was not functioning properly. This has been fixed.
+- When adding an item from the wish list to the shopping cart, the quantity input now works correctly.
+- Item bundles in the category and list views were displayed with a percentual savings badge instead of the item bundle badge. This has been fixed.
+- The prices of live shopping items are now displayed correctly if neither an RRP nor a special offer has been stored.
+- The order confirmation page could include incorrect calculations. This has been fixed.
+- Due to an error, the top bar widget was not displayed if all of its components had been deactivated in the widget settings. This has been fixed.
+- Percentage-based order characteristics were not outputted correctly. This has been fixed.
+- The button for creating returns in the my account area was not displayed if the my account page had not been created via the ShopBuilder. This behaviour has been fixed.
+- JavaScript errors could occur in the context of the AddToBasketOverlay. This behaviour has been fixed.
+- Changing the country of delivery opened the shopping cart preview, even if the user was already on the shopping cart page. This behaviour has been fixed.
+
+## v4.3.4 (2019-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.3...4.3.4" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- In order to use Ceres version 4.3.4, you need to update the plugin IO to its current version 4.3.3.
+
+### Fixed
+
+- The value of order characteristics of the type "selection" is now displayed correctly in the shopping cart.
+- Obsolete settings regarding button sizes are now interpreted correctly.
+- Guest accounts could not access order documents. This has been fixed.
+- After adding items with order characteristics to the shopping cart, the confirmation overlay is now displayed correctly.
+- The assistant stored an invalid value for the setting regarding the position of the shopping cart preview. This has been fixed.
+- The default settings are now correctly loaded in the assistant.
+- The components of item bundles were displayed incorrectly. This has been fixed.
+
+## v4.3.3 (2019-10-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.2...4.3.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, variation properties without groups have not be displayed in the shopping cart. This has been fixed.
+- Due to an error, necessary data was unavailable in the layout containers of the order data widget. This has been fixed.
+- The layout container `Ceres::Scripts.AfterScriptsLoaded` is now initialised before initialising Vue.js so that own Vue components can be registered again.
+- Due to an error, ShopBuilder contents were not displayed when the privacy policy widget was placed on a page. This has been fixed.
+
+## v4.3.2 (2019-10-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.1...4.3.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the registration page could not be opened via the header of the online store. This has been fixed.
+- Due to an error, scripts that where implemented using the `<script2>` tag were not loaded correctly. This has been fixed.
+- Due to an error, the Vue dev tools were also loaded in the live mode. This has been fixed.
+
+## v4.3.1 (2019-10-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.0...4.3.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- The loading time of the **assistent** in the plentymarkets back end has been improved.
+- Due to an error, the language was not appended to the URL of the mobile navigation correctly. This has been fixed.
+
+## v4.3.0 (2019-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.1...4.3.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes made to existing widgets, ShopBuilder contents have to be refreshed by clicking the button **Regenerate contents** in the **CMS » ShopBuilder** menu.
+- The **Cash on delivery** plugin has to be updated to version 1.0.8 to ensure compatibility with Ceres.
+
+### Added 
+
+- We added a notification below the totals in the shopping cart that informs the customer about potential additional charges in case of an export delivery. You can remove the message by saving an empty string in the "basketExportDeliveryWarning" key in the **CMS » Multilingualism** menu.
+- We added the ShopBuilder widget "Order documents" for the order confirmation. Customers can download important documents, such as invoice, external invoice, delivery note, order confirmation etc.
+- We added the following widgets to the ShopBuilder: Order data, order totals, purchased items, registration, login, guest order, wish list, country of delivery selection, unsubscribe from newsletter, returns form, change password form, change email form.
+- We added the following presets to the ShopBuilder: Order confirmation, 404 page, login, registration, unsubscribe from newsletter page, wish list, returns form, change password page, change email page, shopping cart. 
+- We added the link button widget to the ShopBuilder. It serves to provide buttons that link to returns and shipment tracking.
+
+### Changed 
+
+- **Custom titles** of item list widgets are no longer displayed in capital letters.
+- Item information in the order confirmation now includes attributes.
+- The attributes of variations are now listed in the returns widget of the ShopBuilder.
+- The attributes of variations are now listed in the order data widget of the ShopBuilder.
+- The amount of data transferred during changes to the shopping cart has been reduced in order to improve the performance of the online store.
+- Objects created via **pluginApp** are now stored in their variables before they are processed further. The direct use of new instances could, under certain circumstances, lead to errors during the publishing of plugins.
+- If the option **Always display content selection** is inactive in the attribute selection widget, the content list in the attribute selection is hidden if the selected attributes do not yield a variation.
+- Order characteristics are now sorted by position in the shopping cart.
+- The structured data on item pages has been reworked.
+- The tooltip of the "Add to basket" button has been adjusted to account for items that are not available.
+- Parameters for search queries and the category view are now validated.
+- The option "Enable Callisto route pattern for items" has been expanded to also consider the option "Item URL structure" in the **Setup » Client » Select client » SEO » URL structure » Item** menu.
+- The payment and shipping method selection has been revised so that the selections can no longer preclude each other. Payment and shipping methods can always be changed. A notification is displayed in case an incompatible combination is selected.
+- The ShopBooster now also caches the wish list view.
+- The registration form is now also validated by Google reCAPTCHA, as long as the corresponding account data has been stored in the Ceres settings.
+- The shopping cart content widget has been revised and now includes settings pertaining to the displayed item data.
+- If a customer unsubscribes from a newsletter, they now only unsubscribe from one newsletter, depending on the link they followed. Previously, a customer unsubscribed from all newsletters at once.
+- In order to prevent issues, countries of delivery are now initially loaded, regardless of whether a widget includes the country of delivery selection.
+- The size of widget placeholders in the ShopBuilder has been reduced for structure elements to improve readability.
+
+### Fixed
+
+- Due to the lack of a specified minimum height, code widgets could not be edited in the ShopBuilder. This behaviour has been fixed.
+- If a category with no meta title was linked for the ShopBuilder homepage, the category name was used as the title of the browser tab. From now on, only the meta title is displayed as the title of the browser title. If no meta title is stored for the category, no browser tab title is displayed.
+- Order characteristics are now correctly displayed in the returns widget of the ShopBuilder.
+- The minimum size of the image carousel cut off images on small displays. It has been removed.
+- Shop logos in SVG format were displayed incorrectly when using Internet Explorer 11. This has been fixed.
+- Due to an error, category images were displayed incorrectly on iOS devices. This has been fixed.
+- Widgets in the header were displayed incorrectly on mobile devices. This has been fixed.
+- Redirecting from internal URLs to multilingual categories in the ShopBuilder could lead to issues. This has been fixed.
+- In the single item view, the input of the amount is now reset after changing the variation.
+- The alternative text is now displayed correctly for images from the webspace in image box widgets.
+- The default language for search engines is now transmitted correctly.
+- The layout container for overwriting shipping profiles in the order data widget was faulty. This behaviour has been fixed.
+- Due to an error, the language was not appended to the URL of the mobile navigation correctly. This has been fixed.
+- Under certain circumstances, an empty `<title>` tag was displayed. This behaviour has been fixed.
+- Due to an error, the list of last seen items was not loaded in tab widgets. This has been fixed.
+- In a few cases, rounding errors of prices could occur. This has been fixed.
+- The subtotals were not displayed correctly in the order details. This has been fixed.
+- Item lists created with the ShopBuilder now only display the "Show all" link if the list type is "category".
+- Due to an error, the item view created with the ShopBuilder was not loaded when using Internet Explorer. This has been fixed. 
+- Due to an error, some attributes could not be selected in the single item view. This has been fixed.
+- The translation key "orderConfirmationItemDiscount" was not stored in English. This has been fixed.
+- The post number is now also displayed in the My account area and the order confirmation.
+
+## v4.2.1 (2019-09-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.0...4.2.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- You can now create an individual header and footer for each category and each content type.
+- Variation properties are no longer limited to type "None" in the checkout. Furthermore, variation properties will now be displayed on the shopping cart page.
+
+### Fixed
+
+- Due to an error, hashes included in URLs were cut off when the page was accessed. This has been fixed.
+- Due to an error, data for the mobile navigation was not loaded in categories that were linked as the homepage. This has been fixed.
+
+## v4.2.0 (2019-08-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.2...4.2.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- ShopBuilder homepages will from now on be managed as their own category in the ShopBuilder. In order to be able to use the ShopBuilder homepage in the future, it is necessary to create a new category of the type content and link it in the ShopBuilder's linking interface by clicking the gear wheel icon in the top left corner. You can copy the contents of your homepage into the newly created category. The container "Homepage" will prospectively be removed with Ceres v5.0.0.
+
+### Added
+
+- The Ceres assistant has been added to the **System » Assistants** menu.
+- We added the following widgets for creating contact forms in the ShopBuilder: email form, text field (single line), text field (multiple lines), email field, selection, reCaptcha.
+- We added the ShopBuilder preset for the default contact page.
+- The widget "GoogleMaps" was relocated to the Ceres plugin. It now includes the setting "Map type": This setting makes it possible to display the map as a street map, satellite map, hybrid map, or terrain map.
+- We added the "Contact data" widget.
+- You can now determine the scrolling behaviour of the sticky widget. It can either scroll within its structure element or across the entire page.
+- The static pages for cancellation form, cancellation rights, general terms and conditions, privacy policy and legal disclosure can now be created and edited with the ShopBuilder.
+- We added the widget "Legal texts" to the ShopBuilder. This makes it possible to display the legal texts that are stored under **System » System settings » Client » Select client » Online store » Legal information**.
+- We added the widget "Print". This serves to open the browser's print dialogue box.
+- We added the ShopBuilder presets for the cancellation form, cancellation rights, general terms and conditions, privacy policy and legal disclosure.
+- The logo of the manufacturer is now available as a data field in the inline editor of the single item view.
+- You can now select the type of animation for the image carousel and the item image widgets.
+- .css and .js files now have a dynamic suffix, which makes it possible to remove them from browser caches when the plugin set is saved and published (Cache busting).
+- A warning is now displayed if an item without stock limitation is added to the shopping cart in an amount that exceed its available stock. The new key in the **CMS » Multilingualism** menu is "notificationsWarningOverselling".
+
+
+### Changed
+
+- In order to improve performance, categories for the mobile navigation are only loaded, if a resolution of the screen has been reached, at which the categories are actually displayed.
+- The settings in the tab "Contact form" of the Ceres configuration have been marked as deprecated and have been removed. Th contact form is now created and managed via the ShopBuilder.
+- The attribute selection has been expanded by the option "Always display content selection". If this option is active, the selection of content for variations is always displayed, as long as the variation has more than one content.
+- The ShopBuilder container "Homepage" has been marked as deprecated. From now on, you need to create a new category for managing the homepage of your online store.
+- The "Add to shopping cart" button is now deactivated in the single item view if the selected variation cannot be purchased.
+- Items that are linked to an empty item template are now displayed in the default single item view layout of Ceres.
+- In order to save data traffic, only currently visible categories are transmitted to the browser while the page navigation is assembled.
+- The mobile navigation now initially displays the default category of the item on the single item view.
+
+### Fixed
+
+- The discount for the value of goods is now correctly calculated in the subtotals.
+- Discounts on individual items are now listed in the order confirmation and the order history.
+- The preset for the single item view caused errors on mobile devices. This has been fixed.
+- Due to an error, the timer of the shopping cart modal was not working as intended. This has been fixed.
+- If an item was linked to an item template for which no content had been stored in the tab Template, TWIG errors could occur when opening the single item view of the item. This has been fixed.
+- The title of the image box widget was not displayed correctly on mobile devices if the option "Image and text (full footer)" was active. This has been fixed.
+- Under certain circumstances, the title bar widget could issue an additional empty `<h1>` tag. This has been fixed.
+- Due to an error, item URLs were not displayed correctly if the option **Trailing slash** was active. This has ben fixed.
+- Under certain circumstance, rounding errors caused incorrect price displays. This has been fixed.
+- Due to an error, the newsletter widget caused the display of a number of faulty error notifications in the browser console.
+- The discount of items with the store special "Special offer" was calculated incorrectly if an active sales price was configured as a "Special offer" price. This has been fixed.
+- The "Add to basket" button is now visibly deactivated if an item can not be purchased.
+- The 'isVariationSelected' value in the SingleItem component is now correctly linked to the VueX module.
+- Special characters were not displayed correctly in the `<title>` tag. This has been fixed.
+- Selecting filters on category pages could lead to an error. This has been fixed.
+- The labels of the item sorting values "First update" and "Last update" were swapped. This has been fixed.
+- Due to an error, no error notifications were displayed in the shopping cart preview. This has been fixed.
+- Unsubscribing from the newsletter was not possible if the option **Trailing slash** was active. This has been fixed.
+- The settings for the automatic recognition of browser languages are now functioning correctly.
+- For the redemption of coupons, you can now save an information text in the **CMS » Multilingualism** menu, which is displayed if the customer is currently in the read only checkout. The corresponding key is "couponReadonlyInfoText".
+
+## v4.1.2 (2019-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.1...4.1.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Items with a large number of variations and item images could not be loaded correctly. This has been fixed.
+- Special characters in URL parameters are now interpreted correctly.
+
+## v4.1.1 (2019-07-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.0...4.1.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Attributes of variations without stock are now displayed if the options "Available automatically if net stock is positive" and "Not available automatically if net stock is 0 or negative" are deactivated.
+- The categories of the mobile navigation are only loaded if the screen resolution is high enough to display the categories.
+
+### Fixed
+
+- The session flag for the read-only checkout is now passed on to the `executePayment()` method in IO.
+- Due to an error, the selection of attributes issued the notification "Content not available" for certain item configurations. This has been fixed.
+- Due to an error, the attribute selection was not displayed correctly for variations that only differ in their content. This has been fixed.
+- Due to an error, item images scaled to the size of the item tile in the variation selection. Item images are now displayed in their original aspect ratio.
+
+## v4.1.0 (2019-07-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.0.2...4.1.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to widgets, it is necessary to re-generate the ShopBuilder contents via the **regenerate contents** button.
+- The item data table widget displays 12 item data fields per default if they are stored for the item. Please check the widget settings of the item data table to prevent displaying unwanted item information.
+- If you are using the ShopBuilder preset for the single item view, you need to manually add item lists to the page.
+
+### Added
+
+- It is now possible to send forms in the online store by pressing the enter key.
+- Variation properties can now be added to the single item view via the ShopBuilder.
+- We added the ShopBuilder preset for the single item view.
+- The variation selection can now display attributes of the types box and image. Attributes and attribute values are sorted by position.
+- We added the settings for paddings and margins to the tab widget.
+- Preloading has been added to the ceres-legacy.css so that it is loaded at an earlier time. We would like to thank @JVolke for the contribution.
+- You can now display a checkbox for accepting the privacy policy in the customer registration.
+- The shopping cart and shopping cart preview now include the country of delivery selection. You can deactivate the display of the country of delivery selection in the tab **shopping cart** of the Ceres configuration.
+- 6 new icons have been added to the list widget.
+- We now provide rich snippet data for the breadcrumbs and FAQ widgets.
+- Every widget now contains an input field for individual CSS classes. This enables individual styling possibilities for each widget. We would like to thank @xnaff for their contribution.
+- We added the following widgets to the ShopBuilder: Attribute selection, Add to shopping cart, Add to wish list, Item availability, Item image, Order properties, Item bundle, Graduated prices, Item data table.
+
+### Changed
+
+- The variation selection in the single item view has been remodeled on the basis of ElasticSearch technology in order to increase performance.
+- E-mails for customer registration in the online store now support umlauts.
+- The "change password" function in the My Account area now validates the password according to our specifications.
+- The error notification that is displayed when the minimum order value is not met has been adjusted and now contains the minimum order value.
+- The alternative text of images in the image box and image carousel widgets is now displayed correctly.
+- A CSS class has been added for the wish list view. We would like to thank @daniel-mannheimer for the contribution.
+- In the shopping cart overlay, the order confirmation page, and the my account area, order properties of the type **selection** now display the name of the selection instead of the ID.
+- The error notification that appears when a customer attempts to register an email address that has already been registered in the online store is now displayed for a longer time.
+- It is now possible to enter a VAT identification number for delivery addresses.
+- The following Ceres settings have been marked as `deprecated` and have been relocated to the corresponding widget settings: **Show item information**, all settings regarding **item lists**.
+- The setting **Enable selection of variations without stock in variation drop-down** has been `deprecated`.
+
+### Fixed
+
+- The plentymarkets logo is now included in the footer preset via the code widget instead of the text widget.
+- The values of order properties of the type "none" are no longer displayed as "true" on the order confirmation page.
+- Due to an error, the browser would crash when the settings of the top bar widget were carried out. This has been fixed.
+- Resizing the browser window could lead to widgets in the header overlapping the page body. This behaviour has been fixed.
+- The two parameters items and page of the pagination now only allow numerical values.
+- The option "Require all order characteristics before adding an item to shopping cart" in the Ceres configuration did not validate order characteristics of the type *file*. This has been fixed.
+- Grid widgets were not displayed correctly in the header. This has been fixed.
+- The :hyphen placeholder is now available for the translations keys for GTC (footerGtc) and legal disclosure (footerLegalDisclosure).
+- Due to an error, preview images were not displayed in the item search. This has been fixed.
+- The input field for dates is now correctly validated.
+- The visual presentation of the single item view on mobile devices has been corrected.
+- Order properties in property groups that are configured for surcharges on a percentage basis are now correctly displayed in the single item view. For this, we added data fields in the result field files.
+- The input fields "VAT number" and "company name" are now displayed correctly if UK is selected as the country of delivery.
+- Live shopping offers without a special offer price are now displayed correctly.
+- Order properties with a percentual surcharge for which a lump sum surcharge has been configured on the item level were not calculated correctly. This has been fixed.
+- The alternative text of images in the image box and image carousel widgets is now displayed correctly.
+- Due to an error, widgets would sometimes overlap contents in sticky container widgets. This has been fixed.
+- For order characteristics of the type **File**, unregistered customers could not click the preview link in the order confirmation. This has been fixed.
+- Due to an error, the input fields for the newsletter registration was not correctly validated in the Internet Explorer, preventing a successful registration. This has been fixed.
+- The input field for the newsletter registration reloaded the page when the enter key was pressed. This has been fixed.
+- Hovering over a tooltip in the shopping cart closed the shopping cart preview. This has been fixed.
+- The "Add to shopping cart" button was displayed in the category view if both the minimum order quantity and the interval order quantity were configured for variations. This behaviour has been fixed.
+- The input field for the order quantity was not always filled out correctly if a minimum order quantity had been configured for the item. This behaviour has been fixed.
+- The "Information on your registration" pop-up was not displayed correctly on mobile devices. This has been fixed.
+- Certain layout options of the grid widget with three columns led to display errors. This has been fixed.
+- Header widgets that are not fixed to the top are now ignored when the upper margin of the sticky container widget is calculated.
+- It was not possible to open certain links in a mega menu that had at least two rows worth of entries. This has been fixed.
+- Overflowing content was not scrollable in the item description tab. This behaviour has been fixed.
+- The labels of order properties are now displayed in the correct language.
+- Users were unable to close error notifications in several overlays in the online store. Error notifications are now displayed in a higher layer than other elements and can be clicked again.
+- The position of attributes was not taken into account. This behaviour has been fixed.
+- The hover effect was not displayed for the category navigation in the header. This has been fixed.
+- Under certain circumstances, it was impossible to enter an address in the checkout if the online store was accessed in the Facebook browser via an advertisement. This has been fixed.
+- Under certain circumstances, the header would overlap sticky container widgets in the Internet Explorer. This has been fixed.
+- If an error occurs during payment after an order has been completed, the order can only be finalised after a waiting period of 30 seconds. This prevents the creation of duplicate orders that would thereby be invalid.
+- Due to an error, no countries were preselected if the country selection was disabled in the top bar widget. This has been fixed.
+- Empty item lists no longer render an empty `<ul>` tag. We would like to thank @daniel-mannheimer for the contribution.
+- We fixed an error due to which the routes /checkout and /my-account did not redirect to the corresponding ShopBuilder content.
+- Due to an error, sometimes no tab was preselected in the tab widget. This has been fixed.
+- Due to an error, the attributes of an item were not displayed in the variation selection if only a graduated price was configured for the item. This has been fixed.
+
+## v4.0.2 (2019-06-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.0.1...4.0.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Under certain circumstances, the My Account area was not correctly displayed in the ShopBuilder due to the faulty generation of the order history widget. This has been fixed.
+
+## v4.0.1 (2019-05-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.0.0...4.0.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- The "Change email address" button in the My Account area is now hidden if the route "/change-mail" in IO is inactive.
+- Contents of the title bar widget that had been created prior to the release of Ceres 4.0.0 were not evaluated correctly by the ShopBuilder. Therefore, the default text was displayed instead. This behaviour has been fixed.
+
+## v4.0.0 (2019-05-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.2...4.0.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- It is now possible for registered customers to change their email address in the My Account area. To enable this, you need to carry out settings in the **System » System settings » Client » Select client » Email** menu. Create a new template under **Templates**. This template needs to include the variable "$NewCustomerEmail", which contains a confirmation link for the change of the email address. You need to link this template to the **Customer wants to change email address** event under **Automatic**.
+- In order to make it possible for customers to change their email address in the My Account area, you need to activate the route "/change-mail" in the settings of the IO plugin.
+- Due to changes made to the address input field "Contact person", default Ceres stores now display the input fields for first and last names for B2B customers. These input fields are not required by default. You can make changes to the address input fields directly in the address selection widget of the ShopBuilder.
+- If you use the plentymarkets plugin "Customer feedback", you need to update the plugin to version 2.0.0 in order for it to work properly.
+
+### Added
+
+- Customers are now able to change their email address in the My Account area.
+- We added the widget "Cancel order" for the checkout. This serves to cancel a verified order by a payment plugin (e.g. PayPal).
+- We created an interface for blocking relevant inputs in the checkout for payment plugins that do not allow changes to this data.
+- We added the "Tabs" widget, which is a new structure widget that allows the creation of tabs that can be filled with other widgets.
+- Pages can now be identified via a class in the <body> tag.
+- The texts of the following widgets can now be edited directly in the ShopBuilder preview via inline editing: Text, image box, item list, title bar, newsletter, shipping profile selection, payment provider selection, address selection, account settings, notes and requests, order history and return history.
+- You can now determine which option is preselected in the "Form of address" drop-down list in the registration and address selection. You can carry out the settings in the Ceres configuration or in the settings of the address selection widget.
+- "Mx." is now available as an option in the "Form of address" drop-down list in the registration and the address selection. This option serves to provide a form of address for the gender option "Diverse".
+- The shipping profile now displays the maximum delivery time. The maximum delivery time is the sum of the availability with the longest delivery time among items in the shopping cart and the period of delivery specified in the shipping profile.
+- We added the layout container **Checkout: Override headline**. It serves to overwrite the default headline of the checkout.
+- The paddings and margins of all non-grid widgets of the ShopBuilder can now be configured individually in the Widget settings.
+- We added the inline editing code widget, which makes it possible to write and edit code directly in the ShopBuilder preview.
+- We added the inline editing text widget, which makes it possible to write and edit text directly in the ShopBuilder preview. This widget replaces the former text widget, which has been deprecated and is no longer available in the widget selection of the ShopBuilder.
+- You can now specify additional CC and BCC email addresses for the contact form. We would like to thank @lauflust for the contribution.
+- The subject for the email sent via the contact form can now be extended in the **CMS » Multilingualism** menu. We would like to thank @lauflust for the contribution.
+
+### Changed
+
+- You can now configure the address field "Contact person" to either display the input field contact person or the input fields for first and last name. The fields can also be configured as required address fields.
+- The type specifications of the functions `isActive()`, `isOpen()` and `isCurrent()` in the CategoryService have been adjusted so that they can be also be called from Twig templates.
+- The notifications that are issued when errors occur in the validation of address input fields are now reset upon changing the form of address, the country or when switching between address and Packstation/post office.
+- Item lists and categories now contain links to individual items that are issued even without active JavaScript.
+- The Twig function "queryString" can now process multi-dimensional arrays. We would like to thank @wladi0097 for the contribution.
+- Obsolete language-specific settings have been removed from the Ceres configuration for reasons of clarity. With the introduction of the **CMS » Multilingualism** menu, these entries had been relocated to the language files of Ceres and marked as deprecated.
+- The syntax for slots has been updated and now uses the `v-slot` directive introduced by Vue.js v2.6.0.
+- The link list widget of the ShopBuilder has been marked as deprecated and is no longer available in the widget selection. It has been replaced by the list widget, which assumes the same functionality.
+- We have made adjustments to several components in which we now use the json_data filter to relocate larger JSON objects from properties to external <script> tags. This serves to reduce the document size and accelerate the initialisation of Vue.js. Please consult [our developer documentation](https://developers.plentymarkets.com/dev-doc/theme-plugins#ceres-4-update) for a list of adjusted components.
+
+### Fixed
+
+- Due to an error, more pages were returned in the pagination of a category than ElasticSearch could process. The maximum number of items per category has therefore been limited to 10,000.
+- Hreflang attributes now use the correct ISO codes for activated languages.
+- The bank account widget used the wrong translation keys. This has been fixed.
+- Under certain circumstances, widgets in the header would overlap. This behaviour has been fixed.
+- Due to an error, the size of the input fields of the registration was too small in the Internet Explorer 11. This has been fixed.
+- Due to an error, delivery to a Packstation/post office could be selected for shipping profiles that did not support this option. This has been fixed.
+- Due to an error in the layout of the category navigation, the company logo overlapped certain menu entries. This has been fixed.
+- The mega menu could not be opened in the mobile view of the Firefox browser. This has been fixed.
+- When selecting the option "Image and text (full width)" in the settings of the image box widget, the link was not scaled to the full width of the image. This behaviour has been fixed.
+- Under certain circumstances, other elements could overlap error notifications. This has been fixed.
+- Due to an error, the preview text of an item was not displayed in the shopping cart if the item text was not filled in. This has been fixed.
+- When changing variations, it was possible that variations were displayed as item packages, even if the variation was not configured as such. This behaviour has been fixed.
+- Under certain circumstances, input fields were automatically filled in with the email address of the user in Google Chrome. This has been fixed.
+- Invalid values are now filtered out when navigating to URLs that include parameters.
+- Due to an error, it was no longer possible to delete addresses. This has been fixed.
+- Due to an error, the setting for displaying and validating the input field **State** was not always recognised. This has been fixed.
+- The post number in the address data for Packstation/post office is now taken from the input field "Post number" instead of the field "Address 3".
+- The email that contains the link for resending the customer password now uses the URL of the corresponding client.
+- Due to an error, the cross-selling item list in the single item view was not loaded when the page was accessed the first time. This has been fixed.
+- Due to an error, the sorting value for the category also affected the sorting of variations of individual items, as long as the option "dynamically" was selected for the setting **Show variations by type**. As of now, the variation with the lowest price is displayed first.
+- Under certain circumstances, the footer could overlap content on the right side of the single item view. This has been fixed.
+- Due to an error, order characteristics of the type "selection" were not working properly. This has been fixed.
+
+## v3.2.2 (2019-04-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.1...3.2.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- All global data is now loaded per default if no context is explicitly specified.
+- Due to an error, several widgets extended beyond the limits of a grid widget. This has been fixed.
+- Due to an error, categories were not correctly displayed in the category navigation widget of the ShopBuilder header. This has been fixed.
+
+## v3.2.1 (2019-04-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.0...3.2.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the order history widget could not be displayed for variable users. This has been fixed.
+
+## v3.2.0 (2019-03-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.1.3...3.2.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Order characteristics of the type **Selection** are now supported and the description of the characteristic is displayed in the front end. You should check the **description** of the order characteristic and review whether you want the description to be displayed in the online store.
+- In case the markup is displayed incorrectly, you can use the **Regenerate contents** button.
+
+
+### Added
+
+- The widget "Two column grid" can now be arranged individually for each display size.
+- The aspect ratio of images can now be specified in the image carousel widget of the ShopBuilder.
+- The aspect ratio of images can now be specified in the image box widget of the ShopBuilder.
+- We added the new layout container **Basket.ExtendOverlayButtons**.
+- Ceres now considers the visibility of order statuses as specified in the back end.
+- Order characteristics of the type **Selection** are now supported.
+
+### Changed
+
+- The address information on the order confirmation page now includes the contact person for B2B company addresses.
+- You can now use all ShopBuilder widgets for static pages in the header.
+- The following settings have been marked as `deprecated` and have been removed from the section **Checkout and My account** from the Ceres configuration: Number of orders to show per page in the order history, Allow returns in My account, Allow customers to change the payment method. These settings have been relocated to the **Order history** widget of the ShopBuilder.
+- It is now required to enter the old password in order to change the password in the MyAccount area.
+- The loading of the category tree has been refactored, resulting in a significantly better performance.
+- We added notification messages to the Ceres search, which state the number of search results.
+
+### Fixed
+
+- Due to an error, the space between the page body and the header was calculated incorrectly. This has been fixed.
+- Item bundles were not displayed correctly if the option **Replace item bundle with base items** was selected. This has been fixed.
+- Due to an error, images were not loaded correctly in Internet Explorer 11. This has been fixed.
+- Tab spaces in the description of the structured data on the single item view caused errors. This behaviour has been fixed.
+- The setting for the number of decimal places is now interpreted correctly again.
+- Item properties no longer prevent adding the items to the shopping cart from item lists.
+- Empty error messages are no longer displayed.
+- The mapping between availabilities configured in the back end and availabilities specified by search engines was not working properly. This behaviour has been fixed.
+- Due to an error pertaining to variation properties, the shopping cart was not properly rendered in the checkout. This has been fixed.
+- The category option "Visible: After login" is now applicable in Ceres online stores. Categories for which this option is active are only displayed in the navigation after a login. Directly accessing the URL redirects to the login page.
+- In the address overlay, it was not possible to enter anything containing an apostrophe. This error has been fixed.
+
 ## v3.1.3 (2019-03-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.1.2...3.1.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
@@ -1232,7 +1697,7 @@
 ### Added
 
 - The **Company** field is shown in address forms as soon as **Company** is selected in the **Form of address** drop-down.
-- If the **Company** field is deactivated in the **Checkout and My account** tab in the config, the option **Company** is not shown in the **Form of address** drop-down.  
+- If the **Company** field is deactivated in the **Checkout and My account** tab in the config, the option **Company** is not shown in the **Form of address** drop-down.
 
 ### Changed
 

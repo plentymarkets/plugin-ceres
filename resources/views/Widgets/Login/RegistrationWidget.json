@@ -1,0 +1,272 @@
+{
+    "identifier": "Ceres::RegistrationWidget",
+    "label": "Widget.registrationLabel",
+    "previewImageURL": "/images/widgets/registration.svg",
+    "type": "default",
+    "categories": ["customer"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Login\\RegistrationWidget",
+    "settings": {
+        "customClass": "@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "addressLayout": {
+            "type": "select",
+            "defaultValue": "DE",
+            "options": {
+                "name": "Widget.addressLayout",
+                "tooltipText": "Widget.addressLayoutTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "DE",
+                        "caption": "Widget.addressLayoutDE",
+                        "position": 0
+                    },
+                    {
+                        "value": "GB",
+                        "caption": "Widget.addressLayoutGB",
+                        "position": 1
+                    }
+                ]
+            }
+        },
+        "shownFieldsDe": {
+            "type": "checkboxGroup",
+            "isVisible": "addressLayout === 'DE'",
+            "defaultValue": ["billing_address.name1", "billing_address.salutation"],
+            "options": {
+                "name": "Widget.registrationShownFieldsDe",
+                "checkboxValues": [
+                    {
+                        "value": "billing_address.name1",
+                        "caption": "Widget.addressFieldName1"
+                    },
+                    {
+                        "value": "billing_address.vatNumber",
+                        "caption": "Widget.addressFieldVatNumber"
+                    },
+                    {
+                        "value": "billing_address.contactPerson",
+                        "caption": "Widget.addressFieldContactPerson"
+                    },
+                    {
+                        "value": "billing_address.salutation",
+                        "caption": "Widget.addressFieldSalutation"
+                    },
+                    {
+                        "value": "billing_address.title",
+                        "caption": "Widget.addressFieldTitle"
+                    },
+                    {
+                        "value": "billing_address.birthday",
+                        "caption": "Widget.addressFieldBirthday"
+                    },
+                    {
+                        "value": "billing_address.name4",
+                        "caption": "Widget.addressFieldName4"
+                    },
+                    {
+                        "value": "billing_address.address3",
+                        "caption": "Widget.addressFieldAddress3"
+                    },
+                    {
+                        "value": "billing_address.address4",
+                        "caption": "Widget.addressFieldAddress4"
+                    },
+                    {
+                        "value": "billing_address.stateId",
+                        "caption": "Widget.addressFieldStateId"
+                    },
+                    {
+                        "value": "billing_address.phoneNumber",
+                        "caption": "Widget.addressFieldPhoneNumber"
+                    }
+                ]
+            }
+        },
+        "requiredFieldsDe": {
+            "type": "checkboxGroup",
+            "isVisible": "addressLayout === 'DE'",
+            "defaultValue": [],
+            "options": {
+                "name": "Widget.registrationRequiredFieldsDe",
+                "checkboxValues": [
+                    {
+                        "value": "billing_address.vatNumber",
+                        "caption": "Widget.addressFieldVatNumber"
+                    },
+                    {
+                        "value": "billing_address.salutation",
+                        "caption": "Widget.addressFieldSalutation"
+                    },
+                    {
+                        "value": "billing_address.title",
+                        "caption": "Widget.addressFieldTitle"
+                    },
+                    {
+                        "value": "billing_address.contactPerson",
+                        "caption": "Widget.addressFieldContactPerson"
+                    },
+                    {
+                        "value": "billing_address.birthday",
+                        "caption": "Widget.addressFieldBirthday"
+                    },
+                    {
+                        "value": "billing_address.name4",
+                        "caption": "Widget.addressFieldName4"
+                    },
+                    {
+                        "value": "billing_address.address3",
+                        "caption": "Widget.addressFieldAddress3"
+                    },
+                    {
+                        "value": "billing_address.address4",
+                        "caption": "Widget.addressFieldAddress4"
+                    },
+                    {
+                        "value": "billing_address.stateId",
+                        "caption": "Widget.addressFieldStateId"
+                    },
+                    {
+                        "value": "billing_address.phoneNumber",
+                        "caption": "Widget.addressFieldPhoneNumber"
+                    }
+                ]
+            }
+        },
+        "shownFieldsGb": {
+            "type": "checkboxGroup",
+            "isVisible": "addressLayout === 'GB'",
+            "defaultValue": ["billing_address.name1", "billing_address.address2", "billing_address.salutation"],
+            "options": {
+                "name": "Widget.registrationShownFieldsGb",
+                "checkboxValues": [
+                    {
+                        "value": "billing_address.name1",
+                        "caption": "Widget.addressFieldEnName1"
+                    },
+                    {
+                        "value": "billing_address.vatNumber",
+                        "caption": "Widget.addressFieldEnVatNumber"
+                    },
+                    {
+                        "value": "billing_address.contactPerson",
+                        "caption": "Widget.addressFieldEnContactPerson"
+                    },
+                    {
+                        "value": "billing_address.salutation",
+                        "caption": "Widget.addressFieldEnSalutation"
+                    },
+                    {
+                        "value": "billing_address.title",
+                        "caption": "Widget.addressFieldEnTitle"
+                    },
+                    {
+                        "value": "billing_address.birthday",
+                        "caption": "Widget.addressFieldEnBirthday"
+                    },
+                    {
+                        "value": "billing_address.name4",
+                        "caption": "Widget.addressFieldEnName4"
+                    },
+                    {
+                        "value": "billing_address.address2",
+                        "caption": "Widget.addressFieldEnAddress2"
+                    },
+                    {
+                        "value": "billing_address.address3",
+                        "caption": "Widget.addressFieldEnAddress3"
+                    },
+                    {
+                        "value": "billing_address.address4",
+                        "caption": "Widget.addressFieldEnAddress4"
+                    },
+                    {
+                        "value": "billing_address.phoneNumber",
+                        "caption": "Widget.addressFieldEnPhoneNumber"
+                    }
+                ]
+            }
+        },
+        "requiredFieldsGb": {
+            "type": "checkboxGroup",
+            "isVisible": "addressLayout === 'GB'",
+            "defaultValue": [],
+            "options": {
+                "name": "Widget.registrationRequiredFieldsGb",
+                "checkboxValues": [
+                    {
+                        "value": "billing_address.vatNumber",
+                        "caption": "Widget.addressFieldEnVatNumber"
+                    },
+                    {
+                        "value": "billing_address.salutation",
+                        "caption": "Widget.addressFieldEnSalutation"
+                    },
+                    {
+                        "value": "billing_address.title",
+                        "caption": "Widget.addressFieldEnTitle"
+                    },
+                    {
+                        "value": "billing_address.contactPerson",
+                        "caption": "Widget.addressFieldEnContactPerson"
+                    },
+                    {
+                        "value": "billing_address.birthday",
+                        "caption": "Widget.addressFieldEnBirthday"
+                    },
+                    {
+                        "value": "billing_address.name4",
+                        "caption": "Widget.addressFieldEnName4"
+                    },
+                    {
+                        "value": "billing_address.address2",
+                        "caption": "Widget.addressFieldEnAddress2"
+                    },
+                    {
+                        "value": "billing_address.address3",
+                        "caption": "Widget.addressFieldEnAddress3"
+                    },
+                    {
+                        "value": "billing_address.address4",
+                        "caption": "Widget.addressFieldEnAddress4"
+                    },
+                    {
+                        "value": "billing_address.phoneNumber",
+                        "caption": "Widget.addressFieldEnPhoneNumber"
+                    }
+                ]
+            }
+        },
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing": "@include(spacingMargin)"
+    }
+}

@@ -15,6 +15,15 @@
     {% endif %}
 
     <div class="categoriegrid page-content container-max">
+
+        {% if category is not defined and itemList is not empty %}
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
+                </div>
+            </div>
+        {% endif %}
+
         {% if category is defined and not ceresConfig.item.showCategoryImage %}
             <div class="row mt-3">
                 <div class="col-12">
@@ -81,18 +90,29 @@
             {% endif %}
 
             <div class="col-12 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}9{% else %}12{% endif %}">
-                <ul class="product-list row grid">
-                    {% for item in itemList %}
-                        <li class="col-12 col-sm-6 col-md-4 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}4{% else %}3{% endif %}">
-                            <category-item
-                                :item-data="{{ item.data | json_encode }}"
-                                :decimal-count="{{ ceresConfig.item.storeSpecial }}">
-                                <template slot="BeforePrices">{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
-                                <template slot="AfterPrices">{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
-                            </category-item>
-                        </li>
-                    {% endfor %}
-                </ul>
+                {% if itemList is not empty %}
+	                <ul class="product-list row grid">
+	                    {% for item in itemList %}
+	                        <li class="col-12 col-sm-6 col-md-4 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}4{% else %}3{% endif %}">
+	                            <category-item
+	                                item-data-ref="{{ item.data | json_data }}"
+	                                :decimal-count="{{ ceresConfig.item.storeSpecial }}">
+	                                <template #before-prices>{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+	                                <template #after-prices>{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
+
+	                                <a href="{{ item.data | itemURL }}" class="small">
+	                                    <i class="fa fa-image"></i>
+	                                    <span>{{ item.data | itemName }}</span>
+	                                </a>
+	                            </category-item>
+	                        </li>
+	                    {% endfor %}
+	                </ul>
+                {% endif %}
+
+                {% if category is not defined and itemList is empty %}
+                    <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
+                {% endif %}
             </div>
         </div>
 
@@ -119,8 +139,6 @@
 {% endblock %}
 
 {% block PartialHead %}
-    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl ~ urls.search }}?query={search_term}","query-input": "required name=search_term"}}</script>
-
     {% set canonicalUrl = services.url.getCanonicalURL() %}
     {% if currentPage - 1 > 0 %}
         <link rel="prev" href="{{ canonicalUrl ~ queryString({'page': currentPage - 1}) }}" />
@@ -130,14 +148,13 @@
         <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}" />
     {% endif %}
 
-    {% if category is defined %}
-        <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
-
-        <meta name="description" content="{{ category.details[0].metaDescription }}">
-        <meta name="keywords" content="{{ category.details[0].metaKeywords }}">
-        <meta name="robots" content="{% if forceNoIndex or (currentPage >= config("Ceres.pagination.noIndex") and config("Ceres.pagination.noIndex") != 0 )%}NOINDEX{% else %}{{ metaRobots }}{% endif %}">
+    {% if category is not defined %}
+      {% embed getPartial('page-metadata') %}
+              {% block title      trans("Ceres::Template.itemSearchResults") ~ " " ~ searchString %}
+              {% block robots     ceresConfig.meta.robotsSearchResult %}
+      {% endembed %}
     {% else %}
-        <meta name="robots" content="{{ config("Ceres.meta.robots_search_result") }}">
-        <title>{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+      {% embed getPartial('page-metadata') %}
+      {% endembed %}
     {% endif %}
 {% endblock %}

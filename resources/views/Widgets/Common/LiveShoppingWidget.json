@@ -6,6 +6,7 @@
     "categories": ["item"],
     "widgetClass": "Ceres\\Widgets\\Common\\LiveShoppingWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "liveShoppingSelection": {
             "type": "select",
             "required": true,
@@ -193,6 +194,7 @@
                 "name": "Widget.liveShoppingCustomImagePathLabel",
                 "tooltipText": "Widget.liveShoppingCustomImagePathTooltip"
             }
-        }
+        },
+        "spacing":"@include(spacing)"
     }
 }

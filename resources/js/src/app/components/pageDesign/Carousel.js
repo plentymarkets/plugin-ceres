@@ -1,3 +1,6 @@
+import Vue from "vue";
+import "owl.carousel";
+
 Vue.component("carousel", {
 
     components:
@@ -54,8 +57,6 @@ Vue.component("carousel", {
 
     created()
     {
-        this.$options.template = this.template;
-
         if (this.$slots.items)
         {
             this.itemCount = this.$slots.items.length;

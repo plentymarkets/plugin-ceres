@@ -1,17 +1,32 @@
-import ExceptionMap from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
+import ExceptionMap from "../../../exceptions/ExceptionMap";
+import TranslationService from "../../../services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
 import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../../services/NotificationService");
 
 Vue.component("basket-list-item", {
-    props: [
-        "basketItem",
-        "size",
-        "language",
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-basket-list-item"
+        },
+        basketItem: Object,
+        basketDetailsData:
+        {
+            type: Array,
+            default: () => []
+        },
+        isPreview:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
 
     data()
     {
@@ -75,12 +90,7 @@ Vue.component("basket-list-item", {
 
         unitPrice()
         {
-            if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
-            {
-                return this.basketItem.variation.data.prices.specialOffer.unitPrice.value;
-            }
-
-            return this.basketItem.variation.data.prices.default.unitPrice.value;
+            return this.basketItem.price;
         },
 
         basePrice()
@@ -95,18 +105,24 @@ Vue.component("basket-list-item", {
 
         transformedVariationProperties()
         {
-            return transformBasketItemProperties(this.basketItem, ["empty"], "displayInOrderProcess");
+            return transformBasketItemProperties(this.basketItem, [], "displayInOrderProcess");
         },
 
-        ...Vuex.mapState({
+        // eslint-disable-next-line complexity
+        isMoreButtonVisible()
+        {
+            return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.variation.data.item.id ||
+                   this.isDataFieldVisible("basket.item.customNumber") && this.basketItem.variation.data.variation.number ||
+                   this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name ||
+                   this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description ||
+                   this.isDataFieldVisible("basket.item.description_short") && this.basketItem.variation.data.texts.shortDescription;
+        },
+
+        ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
+            isCheckoutReadonly: state => state.checkout.readOnly,
             showNetPrice: state => state.basket.showNetPrices
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {
@@ -145,7 +161,7 @@ Vue.component("basket-list-item", {
 
                 const origQty = this.basketItem.quantity;
 
-                this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(
+                this.$store.dispatch("updateBasketItemQuantity", { id: this.basketItem.id, variationId: this.basketItem.variation.id, quantity: quantity }).then(
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: this.basketItem }));
@@ -155,14 +171,15 @@ Vue.component("basket-list-item", {
                     {
                         this.basketItem.quantity = origQty;
 
-                        if (this.size === "small")
+                        if (this.isPreview)
                         {
                             this.$store.dispatch(
                                 "addBasketNotification",
                                 {
                                     type: "error",
                                     message: TranslationService.translate(
-                                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                                        error.data.placeholder
                                     )
                                 }
                             );
@@ -171,7 +188,8 @@ Vue.component("basket-list-item", {
                         {
                             NotificationService.error(
                                 TranslationService.translate(
-                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                                    error.data.placeholder
                                 )
                             ).closeAfter(5000);
                         }
@@ -191,6 +209,11 @@ Vue.component("basket-list-item", {
             }
 
             return false;
+        },
+
+        isDataFieldVisible(value)
+        {
+            return this.basketDetailsData.includes(value);
         }
     }
 });

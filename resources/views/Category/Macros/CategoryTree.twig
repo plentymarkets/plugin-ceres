@@ -62,7 +62,11 @@
                             {% for child in category.children %}
                                 {% if child.details | length > 0 %}
                                     <li>
-                                        <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
+                                        <ul class="nav-dropdown-inner">
+                                            <li>
+                                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 {% endif %}
                             {% endfor %}
@@ -99,7 +103,9 @@
             <li class="nav-item{% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
                 <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link">{{ category.details[0].name }}</a>
                 {% if category.children is not empty %}
-                    {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl) }}
+                    {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
+                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl) }}
+                    {% endfor %}
                 {% endif %}
             </li>
         </ul>

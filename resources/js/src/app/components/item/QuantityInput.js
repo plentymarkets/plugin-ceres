@@ -2,6 +2,8 @@ import { floatLength, formatFloat, limit } from "../../helper/number";
 import { defaultValue, isDefined, isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import { debounce } from "../../helper/debounce";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("quantity-input", {
 
@@ -59,8 +61,6 @@ Vue.component("quantity-input", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.compInterval = defaultValue(this.compInterval, 1);
         this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
 
@@ -123,7 +123,7 @@ Vue.component("quantity-input", {
             return this.$options.filters.numberFormat(this.compValue);
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             basketItems: state => state.basket.items
         })
     },
@@ -223,6 +223,10 @@ Vue.component("quantity-input", {
             {
                 this.compValue = value;
                 this.onValueChanged();
+            }
+            else if (!isNullOrUndefined(this.$refs.quantityInputField))
+            {
+                this.$refs.quantityInputField.value = value;
             }
         },
 

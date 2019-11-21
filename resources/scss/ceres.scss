@@ -1,0 +1,96 @@
+@import "~bootstrap/scss/functions";
+@import "variables";
+// ==========================================================================
+// External Libs
+// ==========================================================================
+@import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/scss/font-awesome";
+@import "~flag-icon-css/sass/flag-icon";
+
+// ==========================================================================
+// Custom styles
+// ==========================================================================
+
+// global
+@import "ceres/mixins/breakpoints";
+@import "ceres/mixins/general-mixins";
+@import "ceres/mixins/proportional-boxes";
+@import "ceres/common/typography";
+@import "ceres/common/common";
+@import "ceres/common/structure";
+@import "ceres/common/modal";
+@import "ceres/common/reboot";
+
+//TODO's
+@import "ceres/common/buttons";
+
+// External plugins overrides
+@import "ceres/plugins/bs4-progress";
+@import "ceres/plugins/lightbox";
+@import "ceres/plugins/owl-carousel";
+
+// Components
+@import "ceres/components/accordion";
+@import "ceres/components/alerts";
+@import "ceres/components/anicon";
+@import "ceres/components/component-base";
+@import "ceres/components/featured-category";
+@import "ceres/components/featured-sale-new";
+@import "ceres/components/live-shopping";
+@import "ceres/components/notifications";
+@import "ceres/components/popover";
+@import "ceres/components/cookie-bar";
+@import "ceres/components/tooltip";
+
+// Forms
+@import "ceres/forms/input-groups";
+@import "ceres/forms/inputs";
+
+// Page Design / Global components
+@import "ceres/views/PageDesign/header";
+@import "ceres/views/PageDesign/search-box";
+@import "ceres/views/PageDesign/language-select";
+@import "ceres/views/PageDesign/navigation";
+@import "ceres/views/PageDesign/breadcrumb";
+@import "ceres/views/PageDesign/footer";
+
+// Templates
+@import "ceres/views/Confirmation/confirmation-order-item";
+@import "ceres/views/Templates/AddressSelect/address-select";
+@import "ceres/views/Templates/BasketItemList/basket-item";
+@import "ceres/views/Templates/BasketItemList/basket-list-item";
+@import "ceres/views/Templates/BasketPreview/basket-preview-hover";
+@import "ceres/views/Templates/BasketPreview/basket-preview";
+@import "ceres/views/Templates/BasketTotalSum/basket-total-sum";
+@import "ceres/views/Templates/CategoryListItem/category-list-item";
+@import "ceres/views/Templates/CategoryViewFilter/category-view-filter";
+@import "ceres/views/Templates/Customer/contact";
+@import "ceres/views/Templates/Customer/login";
+@import "ceres/views/Templates/Hero/component-hero";
+@import "ceres/views/Templates/Item/quantity-input";
+@import "ceres/views/Templates/ItemListSort/pagination";
+@import "ceres/views/Templates/ItemRating/item-rating-roll";
+@import "ceres/views/Templates/ItemRating/item-rating-section";
+@import "ceres/views/Templates/OrderItem/order-history-list";
+@import "ceres/views/Templates/OrderItem/order-item";
+@import "ceres/views/Templates/OrderItem/order-return";
+@import "ceres/views/Templates/PaymentShippingSelect/payment-shipping-select";
+@import "ceres/views/Templates/ToggleCategoryListView/toggle-list-view";
+@import "ceres/views/Templates/WishList/wish-list";
+
+// Pages
+@import "ceres/views/Category/category-list";
+@import "ceres/views/Category/category-list-controls";
+@import "ceres/views/Home/home";
+@import "ceres/views/Home/marketing-homepage";
+@import "ceres/views/Checkout/checkout";
+@import "ceres/views/Item/single-item";
+@import "ceres/views/ItemList/loading-animation";
+@import "ceres/views/StaticPages/static-pages";
+@import "ceres/views/MyAccount/my-account";
+
+// Widgets
+@import "ceres/widgets/widgets";
+
+// Bootstrap Compatibility
+@import "ceres/common/visibility";

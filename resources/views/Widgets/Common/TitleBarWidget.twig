@@ -1,13 +1,24 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set text = widget.settings.text.mobile %}
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-title-bar widget-{{ widget.settings.appearance.mobile | default('primary') }}">
-    <div class="widget-inner bg-appearance">
-        {% if text | trim is not empty %}
-            <h1>{{ text }}</h1>
+{% set appearance = widget.settings.appearance.mobile | default('primary') %}
+
+<div class="widget widget-title-bar widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
+        {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-title-bar widget-" ~ appearance) }}>
+        {% if text | trim is empty %}
+            <h1 class="align-center">{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.headerCompanyName")) }}</h1>
         {% else %}
-            <h1>{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}</h1>
+            {{ WidgetHelper.editableTwig(isPreview, text) }}
         {% endif %}
     </div>
 </div>

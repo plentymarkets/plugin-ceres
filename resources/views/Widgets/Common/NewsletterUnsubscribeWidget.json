@@ -1,0 +1,43 @@
+{
+    "identifier": "Ceres::NewsletterUnsubscribeWidget",
+    "label": "Widget.newsletterUnsubscribeLabel",
+    "previewImageURL": "/images/widgets/newsletter-unsubscribe.svg",
+    "type": "static",
+    "position": 600,
+    "widgetClass": "Ceres\\Widgets\\Common\\NewsletterUnsubscribeWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

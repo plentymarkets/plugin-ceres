@@ -1,0 +1,19 @@
+{
+    "identifier": "Ceres::OrderPropertyWidget",
+    "label": "Widget.orderPropertyLabel",
+    "previewImageURL": "/images/widgets/order-property.svg",
+    "type": "item",
+    "categories": ["item"],
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\Item\\OrderPropertyWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "spacing":"@include(spacing)"
+    }
+}

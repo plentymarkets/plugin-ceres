@@ -8,3 +8,18 @@
     margin-left: 5px;
   }
 }
+
+@include media-breakpoint-down(xs) {     
+    html.facebook {
+        .checkout .modal.show,
+        .myaccount .modal.show {
+            position: absolute !important;
+            transform: translateZ(0);
+            min-height: 100vh;
+        }
+        body.modal-open {
+            position: relative !important;
+            overflow: auto !important;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.component( "Ceres::Item.Components.ItemBundle" ) }}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+
+<div class="widget widget-item-bundle widget-{{ appearance }} 
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %} 
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}" 
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}> 
+    <item-bundle
+        {% if not isPreview %}v-if="$store.getters.currentItemVariation && $store.getters.currentItemVariation.variation.bundleType === 'bundle'"
+        :bundle-type="$store.getters.currentItemVariation.variation.bundleType"{% else %}
+        :bundle-type="'bundle'"{% endif %}
+        :bundle-components="$store.getters.currentItemVariation.bundleComponents"
+        {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+        {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+        
+        {% if isPreview %}
+            <div class="widget-placeholder">
+                <div>
+                    <p class="title mb-0">{{ trans("Ceres::Widget.itemBundlePlaceholderTitle") }}</p>
+                    <p class="description mt-3">{{ trans("Ceres::Widget.itemBundlePlaceholderDescription") }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </item-bundle>
+</div>

@@ -1,6 +1,7 @@
-import { navigateTo } from "services/UrlService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
 
-var ApiService = require("services/ApiService");
+const ApiService = require("../../services/ApiService");
 
 Vue.directive("logout",
     {
@@ -18,7 +19,7 @@ Vue.directive("logout",
                         .done(
                             function()
                             {
-                                var url = window.location.origin;
+                                let url = window.location.origin;
 
                                 if (App.defaultLanguage != App.language)
                                 {

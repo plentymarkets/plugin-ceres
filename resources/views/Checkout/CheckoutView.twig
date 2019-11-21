@@ -2,8 +2,9 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.checkout") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.checkout") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
@@ -18,6 +19,7 @@
     {{ component( "Ceres::Basket.Components.Coupon" ) }}
     {{ component( "Ceres::Basket.Components.BasketList" ) }}
     {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
+    {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
     {{ component( "Ceres::Checkout.Components.Checkout" ) }}
 
     {% set optionalInvoiceAddressFields = {
@@ -44,17 +46,28 @@
 
     <div class="page-content checkout container-max">
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
-        {% if overrideCheckout|trim is empty %}
+        {% if overrideCheckout | trim is empty %}
             <div class="row mt-3">
                 <div class="col-12">
-                    <h1 class="h2">{{ trans("Ceres::Template.checkout") }}</h1>
+                    {% set overrideCheckoutHeadline = LayoutContainer.show("Ceres::Checkout.Headline") %}
+                    {% if overrideCheckoutHeadline | trim is empty %}
+                        <h1 class="h2">
+                            {% if not checkout.readOnly %}
+                                {{ trans("Ceres::Template.checkout") }}
+                            {% else %}
+                                {{ trans("Ceres::Template.checkoutCheckOrder") }}
+                            {% endif %}
+                        </h1>
+                    {% else %}
+                        {{ overrideCheckoutHeadline }}
+                    {% endif %}
                     <hr>
                 </div>
             </div>
 
             <checkout
                 v-cloak
-                :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"
+                :initial-checkout="{{ checkout | json_encode() }}"
                 :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
                 :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                 :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
@@ -77,7 +90,8 @@
                                             <invoice-address-select
                                                 :has-to-validate="true"
                                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                                                :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                                                :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                                             </invoice-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
@@ -95,7 +109,8 @@
                                         <div class="shipping-addresses-select">
                                             <shipping-address-select
                                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
-                                                :required-address-fields="{{ requiredShippingAddressFields | json_encode }}">
+                                                :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
+                                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                                             </shipping-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
@@ -110,23 +125,31 @@
                                     <h3>{{ trans("Ceres::Template.checkoutShippingProfile") }}</h3>
                                 </header>
 
+                                {% set overridePaymentList = LayoutContainer.show("Ceres::Checkout.PaymentList") %}
+                                {% if  overridePaymentList|trim  is empty %}
+                                    {% set isOverwritten = false %}
+                                {% else %}
+                                    {% set isOverwritten = true %}
+                                {% endif %}
+
                                 {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingProfileList") }}
                                 {% if overrideShippingProfiles|trim is empty %}
                                     <div class="shipping-method-select">
-                                        <shipping-profile-select></shipping-profile-select>
+                                        <shipping-profile-select
+                                            :payment-container-is-overwritten="{{ isOverwritten | json_encode }}"
+                                        ></shipping-profile-select>
                                     </div>
                                 {% else %}
                                     {{ overrideShippingProfiles }}
                                 {% endif %}
                                 {{ LayoutContainer.show("Ceres::Checkout.AfterShippingProfileList") }}
 
-                                {% set overridePaymentList = LayoutContainer.show("Ceres::Checkout.PaymentList") %}
                                 <header class="mb-3">
                                     <h3>{{ trans("Ceres::Template.checkoutPaymentMethod") }}</h3>
                                 </header>
 
                                 {{ LayoutContainer.show("Ceres::Checkout.BeforePaymentList") }}
-                                {% if overridePaymentList|trim is empty %}
+                                {% if not isOverwritten %}
                                     <div class="payment-method-select">
                                         <payment-provider-select></payment-provider-select>
                                     </div>
@@ -159,7 +182,7 @@
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar">
                                     <div class="cmp cmp-basket-preview-list">
-                                        <basket-list size="small"></basket-list>
+                                        <basket-list></basket-list>
                                     </div>
                                     <hr>
                                     <coupon></coupon>
@@ -178,8 +201,14 @@
                             </aside>
 
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
-                            <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
+                            <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}{% if services.checkout.getReadOnlyCheckout() == 1 %}?readonlyCheckout=1{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
+
+                            {% if checkout.readOnly %}
+                                <a class="btn btn-block btn-outline-primary mt-3" href="{{ urls.checkout }}?readonlyCheckout=0">
+                                    <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.checkoutCancelCheckout") }}
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

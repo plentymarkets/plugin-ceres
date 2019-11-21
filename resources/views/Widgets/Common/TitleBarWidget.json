@@ -7,20 +7,13 @@
     "position": 400,
     "widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "text": {
-            "type": "text",
-            "required": true,
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.titleBarTextLabel",
-                "tooltipText": "Widget.titleBarTextTooltip"
-            }
-        }
+        "spacing":"@include(spacing)"
     }
 }

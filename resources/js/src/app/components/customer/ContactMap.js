@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.component("contact-map", {
 
     props: [
@@ -7,11 +9,6 @@ Vue.component("contact-map", {
         "googleApiKey",
         "template"
     ],
-
-    created()
-    {
-        this.$options.template = this.template;
-    },
 
     mounted()
     {

@@ -1,3 +1,7 @@
+import Vue from "vue";
+import "owl.carousel";
+import "jquery-lazyload";
+
 Vue.component("category-image-carousel", {
 
     delimiters: ["${", "}"],
@@ -76,8 +80,6 @@ Vue.component("category-image-carousel", {
 
     created()
     {
-        this.$options.template = this.template;
-
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         const shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
 

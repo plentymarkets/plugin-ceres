@@ -8,19 +8,13 @@
     "widgetClass": "Ceres\\Widgets\\Checkout\\PaymentProviderWidget",
     "maxPerPage": 1,
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "hintText": {
-            "type": "codeEditor",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.paymentProviderHintTextLabel",
-                "tooltipText": "Widget.paymentProviderHintTextTooltip"
-            }
-        }
+        "spacing":"@include(spacing)"
     }
 }

@@ -13,51 +13,74 @@
         </div>
 
         <div class="category-list-view-port" v-if="showQuantity && !useLargeScale">
-            <span>
-                <div class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
-                    <div class="add-to-basket-container">
-                        <div class="quantity-input-container">
-                            <quantity-input :value="1"
-                                        @quantity-change="updateQuantity"
-                                        @out-of-stock="handleButtonState"
-                                        :timeout="0" 
-                                        :min="minimumQuantity"
-                                        :max="maximumQuantity"
-                                        :interval="intervalQuantity"
-                                        :variation-id="variationId"
-                                        template="#vue-quantity-input"></quantity-input>
-                        </div>
-
-                        <button v-if="!isVariationSelected" class="btn btn-block btn-primary disabled" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.singleItemPleaseSelectValidVariation") }}">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.singleItemAddToBasket") }}
-                        </button>
-                        <button v-else-if="!buttonLockState" :disabled="waiting || !hasPrice" class="btn btn-block btn-primary" @click="addToBasket()">
-                            <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.singleItemAddToBasket") }}
-                        </button>
-                        <button v-else
-                                class="btn btn-block btn-primary disabled"
-                                v-tooltip
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                :title="'Ceres::Template.singleItemQuantityMax' | translate({max: item.variation.maximumOrderQuantity})">
-                            <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.singleItemAddToBasket") }}
-                        </button>
-                    </div>
+            <div class="add-to-basket-container">
+                <div class="quantity-input-container">
+                    <quantity-input :value="quantity"
+                                @quantity-change="updateQuantity"
+                                @out-of-stock="handleButtonState"
+                                :timeout="0" 
+                                :min="minimumQuantity"
+                                :max="maximumQuantity"
+                                :interval="intervalQuantity"
+                                :variation-id="variationId"
+                                template="#vue-quantity-input"></quantity-input>
                 </div>
 
-            </span>
+                <button
+                    v-if="!isVariationSelected || !isSalable"
+                    class="btn btn-block btn-primary btn-appearance disabled"
+                    v-tooltip
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    :title="tooltipText"
+                    :class="buttonClasses"
+                    :style="paddingInlineStyles">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    {{ trans("Ceres::Template.singleItemAddToBasket") }}
+                </button>
+                <button
+                    v-else-if="!buttonLockState"
+                    :disabled="waiting || !hasPrice"
+                    class="btn btn-block btn-primary btn-appearance"
+                    @click="addToBasket()"
+                    :class="buttonClasses"
+                    :style="paddingInlineStyles">
+                    <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    {{ trans("Ceres::Template.singleItemAddToBasket") }}
+                </button>
+                <button v-else
+                        class="btn btn-block btn-primary btn-appearance disabled"
+                        v-tooltip
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        :title="'Ceres::Template.singleItemQuantityMax' | translate({max: item.variation.maximumOrderQuantity})"
+                        :class="buttonClasses"
+                        :style="paddingInlineStyles">
+                    <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    {{ trans("Ceres::Template.singleItemAddToBasket") }}
+                </button>
+            </div>
         </div>
 
-        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale">
+        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && isWishList !== 'true'">
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()">
-                    <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true"></i>
+                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary btn-outline-appearance mobile-width-button" @click="addToBasket()">
+                    <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true" v-waiting-animation="waiting"></i>
                     <span class="mobile-text-only">{{ trans("Ceres::Template.singleItemAddToBasket") }}</span>
                 </button>
-                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-outline-primary mobile-width-button" @click="directToItem()">
+                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-outline-primary btn-outline-appearance mobile-width-button" @click="directToItem()">
+                    <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
+                    <span class="mobile-text-only">{{ trans("Ceres::Template.itemShowItem") }}</span>
+                </button>
+            </div>
+        </div>
+        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && isWishList === 'true'">
+            <div class="btn-group" role="group" aria-label="Thumb Control">
+                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
+                    <i class="fa fa-shopping-cart fa-lg mobile-icon-right" aria-hidden="true" v-waiting-animation="waiting"></i>
+                    <span class="mobile-text-only">{{ trans("Ceres::Template.singleItemAddToBasket") }}</span>
+                </button>
+                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="directToItem()">
                     <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
                     <span class="mobile-text-only">{{ trans("Ceres::Template.itemShowItem") }}</span>
                 </button>

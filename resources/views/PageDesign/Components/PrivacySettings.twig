@@ -1,0 +1,93 @@
+<script type="x/template" id="vue-privacy-settings">
+    <div class="privacy-settings d-flex flex-column">
+        <div class="privacy-settings-body overflow-auto">
+        {% for consentGroup in get_consent_groups() %}
+            <div class="card consent-group{% if not loop.last %} mb-3{% endif %}" :class="cardClass" :style="cardStyle">
+                <div class="card-body mb-0" @click.stop="toggleConsent('{{ consentGroup.key }}.*')">
+                    <p class="card-title h4 d-flex">
+                        <span class="flex-fill">
+                            {% if consentGroup.label | length > 0 %}
+                                {{ consentGroup.label }}
+                            {% else %}
+                                {{ trans("Ceres::Template.privacySettingsDefaultGroup") }}
+                            {% endif %}
+                            ({{ consentGroup.consents | length }})
+                        </span>
+                        {% if not consentGroup.necessary %}
+                            <span class="custom-control custom-switch custom-control-appearance">
+                                <input type="checkbox"
+                                       class="custom-control-input"
+                                       :checked="isConsented('{{ consentGroup.key }}.*')">
+                                <label class="custom-control-label"></label>
+                            </span>
+                        {% else %}
+                            <span class="badge badge-primary bg-appearance">{{ trans("Ceres::Template.privacySettingsNecessary") }}</span>
+                        {% endif %}
+                    </p>
+                    {% if consentGroup.description | length > 0 %}<p class="card-text">{{ consentGroup.description }}</p>{% endif %}
+                </div>
+                <div class="card-body mt-0">
+                    <div v-if="expandedGroups['{{ consentGroup.key }}']">
+                        {% for consent in consentGroup.consents %}
+                            {% set necessary = consentGroup.necessary or consent.necessary %}
+                            <div class="card consent bg-light mb-3{% if necessary %} border-primary border-appearance active{% endif %}"
+                                 {% if not necessary %} :class="{'border-primary border-appearance active': isConsented('{{ consentGroup.key }}.{{ consent.key }}')}"{% endif %}>
+
+                                <div class="card-body" @click.stop="toggleConsent('{{ consentGroup.key }}.{{ consent.key }}')">
+                                    <p class="d-flex mb-0 font-weight-bold">
+                                        <span class="flex-fill">{{ consent.label }}</span>
+                                        {% if not consentGroup.necessary and not consent.necessary %}
+                                            <span class="custom-control custom-switch custom-control-appearance">
+                                                <input type="checkbox"
+                                                       class="custom-control-input"
+                                                       :checked="isConsented('{{ consentGroup.key }}.{{ consent.key }}')">
+                                                <label class="custom-control-label"></label>
+                                            </span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                {% if consent.provider | length > 0 or consent.description.length > 0 or consent.policyUrl | length > 0 or consent.lifespan | length > 0 %}
+                                    <table class="table table-responsive-md table-sm table-striped mb-0">
+                                        <tbody>
+                                            {% if consent.provider | length > 0 %}
+                                                <tr>
+                                                    <td class="pl-3">{{ trans("Ceres::Template.privacySettingsProvider") }}</td>
+                                                    <td class="pr-3">{{ consent.provider }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if consent.description | length > 0 %}
+                                                <tr>
+                                                    <td class="pl-3">{{ trans("Ceres::Template.privacySettingsDescription") }}</td>
+                                                    <td class="pr-3">{{ consent.description }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if consent.policyUrl | length > 0 %}
+                                                <tr>
+                                                    <td class="pl-3">{{ trans("Ceres::Template.privacySettingsPolicyUrl") }}</td>
+                                                    <td class="pr-3">
+                                                        <a class="text-primary text-appearance" href="{{ consent.policyUrl }}" target="_blank">{{ consent.policyUrl }}</a>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if consent.lifespan | length > 0 %}
+                                                <tr>
+                                                    <td class="pl-3">{{ trans("Ceres::Template.privacySettingsLifespan") }}</td>
+                                                    <td class="pr-3">{{ consent.lifespan }}</td>
+                                                </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <a href="#" class="card-link text-primary text-appearance" @click="setGroupVisibility('{{ consentGroup.key }}', true, $event)" v-if="!expandedGroups['{{ consentGroup.key }}']">{{ trans("Ceres::Template.privacySettingsMoreInformation") }}</a>
+                    <a href="#" class="card-link text-primary text-appearance" @click="setGroupVisibility('{{ consentGroup.key }}', false, $event)" v-else>{{ trans("Ceres::Template.privacySettingsLessInformation") }}</a>
+
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</script>

@@ -53,90 +53,20 @@
                         "defaultValue": "false"
                     }
                 },
-                "contact.shop_mail": {
-                    "type": "inputText",
+                "global.google_recaptcha_version": {
+                    "type": "selectBox",
                     "required": false,
-                    "label": "Config.contactShopMailLabel",
+                    "label": "Config.globalGoogleRecaptchaVersionLabel",
                     "options": {
-                        "defaultValue": "your@email.com"
-                    }
-                },
-                "contact.opening_times": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactOpeningTimesLabel",
-                    "options": {
-                        "defaultValue": "Montag - Freitag, 00:00 - 24:00"
-                    }
-                },
-                "contact.en.opening_times": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactEnOpeningTimesLabel",
-                    "options": {
-                        "defaultValue": "Monday - Friday, 00:00 - 24:00"
-                    }
-                },
-                "contact.show_data": {
-                    "type": "multiCheckBox",
-                    "required": false,
-                    "label": "Config.contactShowDataLabel",
-                    "options": {
-                        "defaultValue": "street, zip, city, hotline, email, opening_times",
-                        "checkBoxValues": [
+                        "defaultValue": 2,
+                        "selectBoxValues": [
                             {
-                                "value": "name",
-                                "caption": "Config.contactShowDataName"
+                                "value": 2,
+                                "caption": "Config.globalGoogleRecaptchaVersion2Invisible"
                             },
                             {
-                                "value": "ceo",
-                                "caption": "Config.contactShowDataCeo"
-                            },
-                            {
-                                "value": "city",
-                                "caption": "Config.contactShowDataCity"
-                            },
-                            {
-                                "value": "country",
-                                "caption": "Config.contactShowDataCountry"
-                            },
-                            {
-                                "value": "email",
-                                "caption": "Config.contactShowDataEmail"
-                            },
-                            {
-                                "value": "fax",
-                                "caption": "Config.contactShowDataFax"
-                            },
-                            {
-                                "value": "fon",
-                                "caption": "Config.contactShowDataFon"
-                            },
-                            {
-                                "value": "hotline",
-                                "caption": "Config.contactShowDataHotline"
-                            },
-                            {
-                                "value": "street",
-                                "caption": "Config.contactShowDataStreet"
-                            },
-                            {
-                                "value": "vatNumber",
-                                "caption": "Config.contactShowDataVatNumber"
-                            },
-                            {
-                                "value": "zip",
-                                "caption": "Config.contactShowDataZip"
-                            },
-                            {
-                                "value": "timezone",
-                                "caption": "Config.contactShowDataTimezone"
-                            },
-                            {
-                                "value": "opening_times",
-                                "caption": "Config.contactShowDataOpeningTimes"
+                                "value": 3,
+                                "caption": "Config.globalGoogleRecaptchaVersion3"
                             }
                         ]
                     }
@@ -157,36 +87,62 @@
                         "defaultValue": ""
                     }
                 },
-                "contact.api_key": {
+                "global.google_recaptcha_threshold": {
                     "type": "inputText",
                     "required": false,
-                    "label": "Config.contactApiKeyLabel",
+                    "label": "Config.globalGoogleRecaptchaThreshold",
                     "options": {
-                        "defaultValue": "API key"
+                        "defaultValue": 0.5
                     }
                 },
-                "contact.map_zoom": {
-                    "type": "inputText",
+                "global.user_data_hash_max_age": {
+                    "type": "selectBox",
                     "required": false,
-                    "label": "Config.contactMapZoomLabel",
+                    "label": "Config.globalUserDataHashMaxAgeLabel",
                     "options": {
-                        "defaultValue": "16"
+                        "defaultValue": 24,
+                        "selectBoxValues": [
+                            {
+                                "value": 1,
+                                "caption": "Config.globalMaxAge1Hour"
+                            },
+                            {
+                                "value": 6,
+                                "caption": "Config.globalMaxAge6Hours"
+                            },
+                            {
+                                "value": 12,
+                                "caption": "Config.globalMaxAge12Hours"
+                            },
+                            {
+                                "value": 24,
+                                "caption": "Config.globalMaxAge24Hours"
+                            },
+                            {
+                                "value": 168,
+                                "caption": "Config.globalMaxAge1Week"
+                            },
+                            {
+                                "value": -1,
+                                "caption": "Config.globalMaxAgeInfinite"
+                            }
+                        ]
                     }
                 },
-                "contact.map_show_in_mobile": {
+                "global.registration_require_privacy_policy_confirmation": {
                     "type": "checkBox",
                     "required": false,
-                    "label": "Config.contactMapShowInMobileLabel",
-                    "options": {
-                        "defaultValue": "false"
-                    }
-                },
-                "contact.enable_confirming_privacy_policy": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.contactEnableConfirmingPrivacyPolicyLabel",
+                    "label": "Config.globalRegistrationRequirePrivacyPolicyConfirmation",
                     "options": {
                         "defaultValue": "true"
+                    }
+                },
+                "global.block_cookies": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalBlockCookies",
+                    "options": {
+                        "defaultValue": "false"
                     }
                 }
             }
@@ -407,6 +363,40 @@
                         ]
                     }
                 },
+                "header.menu_levels": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.headerMenuLevelsLabel",
+                    "options": {
+                        "defaultValue": 4,
+                        "selectBoxValues": [
+                            {
+                                "value": 1,
+                                "caption": "Config.headerMenuLevels1"
+                            },
+                            {
+                                "value": 2,
+                                "caption": "Config.headerMenuLevels2"
+                            },
+                            {
+                                "value": 3,
+                                "caption": "Config.headerMenuLevels3"
+                            },
+                            {
+                                "value": 4,
+                                "caption": "Config.headerMenuLevels4"
+                            },
+                            {
+                                "value": 5,
+                                "caption": "Config.headerMenuLevels5"
+                            },
+                            {
+                                "value": 6,
+                                "caption": "Config.headerMenuLevels6"
+                            }
+                        ]
+                    }
+                },
                 "header.megamenu_levels": {
                     "type": "selectBox",
                     "required": false,
@@ -511,33 +501,6 @@
                         ]
                     }
                 },
-                "footer.store_feature_1": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.footerStoreFeature1Label",
-                    "options": {
-                        "defaultValue": "Delivery period approx. 1 to 3 business days"
-                    }
-                },
-                "footer.store_feature_2": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.footerStoreFeature2Label",
-                    "options": {
-                        "defaultValue": "Free shipping & return"
-                    }
-                },
-                "footer.store_feature_3": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.footerStoreFeature3Label",
-                    "options": {
-                        "defaultValue": "100-day return policy"
-                    }
-                },
                 "footer.number_of_cols": {
                     "type": "selectBox",
                     "required": false,
@@ -561,15 +524,6 @@
                         ]
                     }
                 },
-                "footer.col_1_title": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.footerCol1TitleLabel",
-                    "options": {
-                        "defaultValue": "Shop"
-                    }
-                },
                 "footer.col_1_categories": {
                     "type": "inputText",
                     "required": false,
@@ -579,15 +533,6 @@
                         "defaultValue": ""
                     }
                 },
-                "footer.col_2_title": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.footerCol2TitleLabel",
-                    "options": {
-                        "defaultValue": "My account"
-                    }
-                },
                 "footer.col_2_categories": {
                     "type": "inputText",
                     "required": false,
@@ -595,15 +540,6 @@
                     "label": "Config.footerCol2CategoriesLabel",
                     "options": {
                         "defaultValue": ""
-                    }
-                },
-                "footer.col_3_title": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.footerCol3TitleLabel",
-                    "options": {
-                        "defaultValue": "Service"
                     }
                 },
                 "footer.col_3_categories": {
@@ -685,6 +621,7 @@
                 "item.data": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemDataLabel",
                     "options": {
                         "defaultValue": "all",
@@ -785,6 +722,7 @@
                 "item.show_variation_over_dropdown": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemShowVariationOverDropdownLabel",
                     "options": {
                         "defaultValue": "false"
@@ -974,6 +912,7 @@
                 "item.lists.cross_selling_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemListsCrossSellingTypeLabel",
                     "options": {
                         "defaultValue": "Similar",
@@ -1000,6 +939,7 @@
               "item.lists.cross_selling_sorting": {
                   "type": "selectBox",
                   "required": false,
+                  "deprecated": true,
                   "label": "Config.itemListsCrossSellingSortingLabel",
                   "options": {
                     "defaultValue": "texts.name_asc",
@@ -1110,6 +1050,7 @@
               "item.lists.tag_sorting": {
                   "type": "selectBox",
                   "required": false,
+                  "deprecated": true,
                   "label": "Config.itemListsTagSortingLabel",
                   "options": {
                       "defaultValue": "texts.name_asc",
@@ -1220,6 +1161,7 @@
                 "item.lists.1.list_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists1ListTypeLabel",
                     "options": {
                         "defaultValue": "last_seen",
@@ -1239,27 +1181,10 @@
                         ]
                     }
                 },
-                "item.lists.1.de.list_name": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.itemLists1DeListNameLabel",
-                    "options": {
-                        "defaultValue": "DE name"
-                    }
-                },
-                "item.lists.1.en.list_name": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.itemLists1EnListNameLabel",
-                    "options": {
-                        "defaultValue": "EN name"
-                    }
-                },
                 "item.lists.1.tag_ids": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists1TagIdsLabel",
                     "options": {
                         "defaultValue": "1,2,3"
@@ -1268,6 +1193,7 @@
                 "item.lists.2.list_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists2ListTypeLabel",
                     "options": {
                         "defaultValue": "cross_selling",
@@ -1287,27 +1213,10 @@
                         ]
                     }
                 },
-                "item.lists.2.de.list_name": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.itemLists2DeListNameLabel",
-                    "options": {
-                        "defaultValue": "DE name"
-                    }
-                },
-                "item.lists.2.en.list_name": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.itemLists2EnListNameLabel",
-                    "options": {
-                        "defaultValue": "EN name"
-                    }
-                },
                 "item.lists.2.tag_ids": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists2TagIdsLabel",
                     "options": {
                         "defaultValue": "1,2,3"
@@ -1316,6 +1225,7 @@
                 "item.lists.3.list_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists3ListTypeLabel",
                     "options": {
                         "defaultValue": "tag_list",
@@ -1335,27 +1245,10 @@
                         ]
                     }
                 },
-                "item.lists.3.de.list_name": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.itemLists3DeListNameLabel",
-                    "options": {
-                        "defaultValue": "DE name"
-                    }
-                },
-                "item.lists.3.en.list_name": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.itemLists3EnListNameLabel",
-                    "options": {
-                        "defaultValue": "EN name"
-                    }
-                },
                 "item.lists.3.tag_ids": {
                     "type": "inputText",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLists3TagIdsLabel",
                     "options": {
                         "defaultValue": "1,2,3"
@@ -1474,15 +1367,6 @@
                         ]
                     }
                 },
-                "basket.variations": {
-                    "type": "checkBox",
-                    "deprecated": true,
-                    "required": false,
-                    "label": "Config.basketVariationsLabel",
-                    "options": {
-                        "defaultValue": "false"
-                    }
-                },
                 "basket.add_item_to_basket_confirm": {
                     "type": "selectBox",
                     "required": false,
@@ -1521,6 +1405,141 @@
                                 "caption": "Config.basketPreviewTypeRight"
                             }
                         ]
+                    }
+                },
+                "basket.show_shipping_country_select": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.basketShowShippingCountrySelect",
+                    "options": {
+                      "defaultValue": "true"
+                    }
+                }
+            }
+        },
+        "Config.ContactTab": {
+            "label": "Config.contactTab",
+            "formFields": {
+                "contact.shop_mail": {
+                    "type": "inputText",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactShopMailLabel",
+                    "options": {
+                        "defaultValue": "your@email.com"
+                    }
+                },
+                "contact.shop_mail_cc": {
+                    "type": "inputText",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactShopMailCcLabel",
+                    "options": {}
+                },
+                "contact.shop_mail_bcc": {
+                    "type": "inputText",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactShopMailBccLabel",
+                    "options": {}
+                },
+                "contact.show_data": {
+                    "type": "multiCheckBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactShowDataLabel",
+                    "options": {
+                        "defaultValue": "street, zip, city, hotline, email, opening_times",
+                        "checkBoxValues": [
+                            {
+                                "value": "name",
+                                "caption": "Config.contactShowDataName"
+                            },
+                            {
+                                "value": "ceo",
+                                "caption": "Config.contactShowDataCeo"
+                            },
+                            {
+                                "value": "city",
+                                "caption": "Config.contactShowDataCity"
+                            },
+                            {
+                                "value": "country",
+                                "caption": "Config.contactShowDataCountry"
+                            },
+                            {
+                                "value": "email",
+                                "caption": "Config.contactShowDataEmail"
+                            },
+                            {
+                                "value": "fax",
+                                "caption": "Config.contactShowDataFax"
+                            },
+                            {
+                                "value": "fon",
+                                "caption": "Config.contactShowDataFon"
+                            },
+                            {
+                                "value": "hotline",
+                                "caption": "Config.contactShowDataHotline"
+                            },
+                            {
+                                "value": "street",
+                                "caption": "Config.contactShowDataStreet"
+                            },
+                            {
+                                "value": "vatNumber",
+                                "caption": "Config.contactShowDataVatNumber"
+                            },
+                            {
+                                "value": "zip",
+                                "caption": "Config.contactShowDataZip"
+                            },
+                            {
+                                "value": "timezone",
+                                "caption": "Config.contactShowDataTimezone"
+                            },
+                            {
+                                "value": "opening_times",
+                                "caption": "Config.contactShowDataOpeningTimes"
+                            }
+                        ]
+                    }
+                },
+                "contact.api_key": {
+                    "type": "inputText",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactApiKeyLabel",
+                    "options": {
+                        "defaultValue": "API key"
+                    }
+                },
+                "contact.map_zoom": {
+                    "type": "inputText",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactMapZoomLabel",
+                    "options": {
+                        "defaultValue": "16"
+                    }
+                },
+                "contact.map_show_in_mobile": {
+                    "type": "checkBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactMapShowInMobileLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+                "contact.enable_confirming_privacy_policy": {
+                    "type": "checkBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.contactEnableConfirmingPrivacyPolicyLabel",
+                    "options": {
+                        "defaultValue": "true"
                     }
                 }
             }
@@ -2617,6 +2636,15 @@
                         "defaultValue": "false"
                     }
                 },
+                "checkout.show_all_shipping_profiles": {
+                    "type": "checkBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.checkoutShowAllShippingProfiles",
+                    "options": {
+                      "defaultValue": "false"
+                    }
+                },
                 "my_account.confirmation_link_expiration": {
                     "type": "selectBox",
                     "required": false,
@@ -2639,6 +2667,33 @@
                         ]
                     }
                 },
+                "addresses.defaultSalutation": {
+                    "type": "selectBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.addressDefaultSalutation",
+                    "options": {
+                        "defaultValue": "male",
+                        "selectBoxValues": [
+                            {
+                                "value": "male",
+                                "caption": "Config.addressDefaultSalutationValueMale"
+                            },
+                            {
+                                "value": "female",
+                                "caption": "Config.addressDefaultSalutationValueFemale"
+                            },
+                            {
+                                "value": "diverse",
+                                "caption": "Config.addressDefaultSalutationValueDiverse"
+                            },
+                            {
+                                "value": "company",
+                                "caption": "Config.addressDefaultSalutationValueCompany"
+                            }
+                        ]
+                    }
+                },
                 "billing_address.show": {
                     "type": "multiCheckBox",
                     "required": false,
@@ -2654,6 +2709,10 @@
                             {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldVatNumber"
+                            },
+                            {
+                                "value": "billing_address.contactPerson",
+                                "caption": "Config.addressFieldContactPerson"
                             },
                             {
                                 "value": "billing_address.salutation",
@@ -2711,6 +2770,10 @@
                                 "caption": "Config.addressFieldTitle"
                             },
                             {
+                                "value": "billing_address.contactPerson",
+                                "caption": "Config.addressFieldContactPerson"
+                            },
+                            {
                                 "value": "billing_address.birthday",
                                 "caption": "Config.addressFieldBirthday"
                             },
@@ -2752,6 +2815,10 @@
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
+                            },
+                            {
+                                "value": "delivery_address.contactPerson",
+                                "caption": "Config.addressFieldContactPerson"
                             },
                             {
                                 "value": "delivery_address.title",
@@ -2797,6 +2864,10 @@
                                 "caption": "Config.addressFieldTitle"
                             },
                             {
+                                "value": "delivery_address.contactPerson",
+                                "caption": "Config.addressFieldContactPerson"
+                            },
+                            {
                                 "value": "delivery_address.name4",
                                 "caption": "Config.addressFieldName4"
                             },
@@ -2834,6 +2905,10 @@
                             {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldEnVatNumber"
+                            },
+                            {
+                                "value": "billing_address.contactPerson",
+                                "caption": "Config.addressFieldEnContactPerson"
                             },
                             {
                                 "value": "billing_address.salutation",
@@ -2891,6 +2966,10 @@
                                 "caption": "Config.addressFieldEnTitle"
                             },
                             {
+                                "value": "billing_address.contactPerson",
+                                "caption": "Config.addressFieldEnContactPerson"
+                            },
+                            {
                                 "value": "billing_address.birthday",
                                 "caption": "Config.addressFieldEnBirthday"
                             },
@@ -2934,6 +3013,10 @@
                                 "caption": "Config.addressFieldEnSalutation"
                             },
                             {
+                                "value": "delivery_address.contactPerson",
+                                "caption": "Config.addressFieldEnContactPerson"
+                            },
+                            {
                                 "value": "delivery_address.title",
                                 "caption": "Config.addressFieldEnTitle"
                             },
@@ -2975,6 +3058,10 @@
                             {
                                 "value": "delivery_address.title",
                                 "caption": "Config.addressFieldEnTitle"
+                            },
+                            {
+                                "value": "delivery_address.contactPerson",
+                                "caption": "Config.addressFieldEnContactPerson"
                             },
                             {
                                 "value": "delivery_address.name4",
@@ -3340,24 +3427,6 @@
                         ]
                     }
                 },
-                "meta.de.description_home": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaDeDescriptionHomeLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
-                "meta.en.description_home": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaEnDescriptionHomeLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
                 "meta.robots_contact": {
                     "type": "selectBox",
                     "required": false,
@@ -3386,24 +3455,6 @@
                                 "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
-                    }
-                },
-                "meta.de.description_contact": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaDeDescriptionContactLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
-                "meta.en.description_contact": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaEnDescriptionContactLabel",
-                    "options": {
-                        "defaultValue": ""
                     }
                 },
                 "meta.robots_cancel_rights": {
@@ -3436,24 +3487,6 @@
                         ]
                     }
                 },
-                "meta.de.description_cancel_rights": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaDeDescriptionCancelRightsLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
-                "meta.en.description_cancel_rights": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaEnDescriptionCancelRightsLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
                 "meta.robots_cancel_form": {
                     "type": "selectBox",
                     "required": false,
@@ -3482,24 +3515,6 @@
                                 "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
-                    }
-                },
-                "meta.de.description_cancel_form": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaDeDescriptionCancelFormLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
-                "meta.en.description_cancel_form": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaEnDescriptionCancelFormLabel",
-                    "options": {
-                        "defaultValue": ""
                     }
                 },
                 "meta.robots_legal_disclosure": {
@@ -3532,24 +3547,6 @@
                         ]
                     }
                 },
-                "meta.de.description_legal_disclosure": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaDeDescriptionLegalDisclosureLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
-                "meta.en.description_legal_disclosure": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaEnDescriptionLegalDisclosureLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
                 "meta.robots_privacy_policy": {
                     "type": "selectBox",
                     "required": false,
@@ -3580,24 +3577,6 @@
                         ]
                     }
                 },
-                "meta.de.description_privacy_policy": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaDeDescriptionPrivacyPolicyLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
-                "meta.en.description_privacy_policy": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaEnDescriptionPrivacyPolicyLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
                 "meta.robots_terms_and_conditions": {
                     "type": "selectBox",
                     "required": false,
@@ -3626,24 +3605,6 @@
                                 "caption": "Config.metaRobotsNoindexNofollow"
                             }
                         ]
-                    }
-                },
-                "meta.de.description_terms_and_conditions": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaDeDescriptionTermsAndConditionsLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
-                "meta.en.description_terms_and_conditions": {
-                    "type": "inputTextArea",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.metaEnDescriptionTermsAndConditionsLabel",
-                    "options": {
-                        "defaultValue": ""
                     }
                 },
                 "meta.robots_search_result": {

@@ -1,20 +1,33 @@
-import address from "store/modules/AddressModule";
-import basket from "store/modules/BasketModule";
-import checkout from "store/modules/CheckoutModule";
-import item from "store/modules/SingleItemModule";
-import itemList from "store/modules/ItemListModule";
-import lastSeen from "store/modules/LastSeenModule";
-import liveShopping from "store/modules/LiveShoppingModule";
-import localization from "store/modules/LocalizationModule";
-import navigation from "store/modules/NavigationModule";
-import orderReturn from "store/modules/OrderReturnModule";
-import user from "store/modules/UserModule";
-import wishList from "store/modules/WishListModule";
+import Vue from "vue";
+import Vuex from "vuex";
 
-import eventPropagation from "store/plugins/EventPropagationPlugin";
+import ApiService from "../services/ApiService";
 
-Vue.use(require("vue-script2"));
+import address from "./modules/AddressModule";
+import basket from "./modules/BasketModule";
+import checkout from "./modules/CheckoutModule";
+import consents from "./modules/ConsentModule";
+import contactForm from "./modules/ContactForm";
+import item from "./modules/SingleItemModule";
+import itemList from "./modules/ItemListModule";
+import lastSeen from "./modules/LastSeenModule";
+import liveShopping from "./modules/LiveShoppingModule";
+import localization from "./modules/LocalizationModule";
+import navigation from "./modules/NavigationModule";
+import orderReturn from "./modules/OrderReturnModule";
+import user from "./modules/UserModule";
+import variationSelect from "./modules/VariationSelectModule";
+import wishList from "./modules/WishListModule";
+
+import eventPropagation from "./plugins/EventPropagationPlugin";
+
+
+// =========================
+// init vuex store
+// =========================
+
 Vue.options.delimiters = ["${", "}"];
+Vue.use(Vuex);
 
 // eslint-disable-next-line
 const store = new Vuex.Store(
@@ -24,6 +37,8 @@ const store = new Vuex.Store(
             address,
             basket,
             checkout,
+            consents,
+            contactForm,
             item,
             itemList,
             lastSeen,
@@ -32,11 +47,41 @@ const store = new Vuex.Store(
             navigation,
             orderReturn,
             user,
+            variationSelect,
             wishList
         },
 
         plugins: [eventPropagation]
     });
+
+// =========================
+// Fill initial vuex data
+// =========================
+
+App.initialData.shippingCountries.sort((first, second) =>
+{
+    if (first.currLangName < second.currLangName)
+    {
+        return -1;
+    }
+    if (first.currLangName > second.currLangName)
+    {
+        return 1;
+    }
+    return 0;
+});
+
+store.commit("setShippingCountries", App.initialData.shippingCountries);
+store.commit("setShippingCountryId", App.initialData.shippingCountryId);
+store.commit("initConsents");
+
+ApiService.listen("LocalizationChanged",
+    data =>
+    {
+        store.commit("setShippingCountries", data.localization.activeShippingCountries);
+        store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
+    });
+
 
 window.ceresStore = store;
 

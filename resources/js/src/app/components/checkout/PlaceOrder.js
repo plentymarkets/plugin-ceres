@@ -1,10 +1,16 @@
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
 import { isDefined } from "../../helper/utils";
-import { navigateTo } from "services/UrlService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
+import { mapState } from "vuex";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
+
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("place-order", {
+
+    mixins: [ButtonSizePropertyMixin],
+
     props:
     {
         template:
@@ -16,14 +22,15 @@ Vue.component("place-order", {
         {
             type: String
         },
-        buttonSize:
+        paddingClasses:
         {
-            type: [String, null],
-            default: null,
-            validator: value =>
-            {
-                return ["sm", "lg"].indexOf(value) !== -1;
-            }
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -40,9 +47,14 @@ Vue.component("place-order", {
         {
             const classes = [];
 
-            if (isDefined(this.buttonSize))
+            if (isDefined(this.buttonSizeClass))
             {
-                classes.push(`btn-${this.buttonSize}`);
+                classes.push(this.buttonSizeClass);
+            }
+
+            if (isDefined(this.paddingClasses))
+            {
+                classes.push(this.paddingClasses.split(" "));
             }
 
             return classes;
@@ -65,7 +77,7 @@ Vue.component("place-order", {
             return activeNewsletterSubscriptions;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             checkoutValidation: state => state.checkout.validation,
             contactWish: state => state.checkout.contactWish,
             isBasketLoading: state => state.basket.isBasketLoading,
@@ -74,11 +86,6 @@ Vue.component("place-order", {
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
             newsletterSubscription: state => state.checkout.newsletterSubscription
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {
@@ -145,8 +152,8 @@ Vue.component("place-order", {
 
         afterPreparePayment(response)
         {
-            var paymentType = response.type || "errorCode";
-            var paymentValue = response.value || "";
+            const paymentType = response.type || "errorCode";
+            const paymentValue = response.value || "";
 
             switch (paymentType)
             {
@@ -159,11 +166,11 @@ Vue.component("place-order", {
                 }
                 break;
             case "redirectUrl":
-                    // redirect to given payment provider
+                // redirect to given payment provider
                 window.location.assign(paymentValue);
                 break;
             case "externalContentUrl":
-                    // show external content in iframe
+                // show external content in iframe
                 this.showModal(paymentValue, true);
                 break;
             case "htmlContent":

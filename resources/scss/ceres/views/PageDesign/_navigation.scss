@@ -1,42 +1,14 @@
-nav.navbar
-{
-	.container-max
-	{
-		display: block;
-	}
-}
-
-nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
-	display: block;
-	margin-top: 0px;
-}
-
-.dropdown-menu.dropdown-menu-right {
-	min-width: 100%;
-}
-
-.dropdown-item.special-case {
-	padding: 3px 5px !important;
-}
-
 /* settings */
 // mobile
-$menu-h-sm  			: 100%;
-$menu-w-sm  			: 100%;
 $menu-bg-sm 			: $primary;
 $menu-breadcrumb-bg 	: $gray-darker;
-$menu-breadcrumb-color 	: $white;
-$menu-color-sm 			: $white;
+$menu-breadcrumb-color 	: color-yiq($menu-breadcrumb-bg);
+$menu-color-sm 			: color-yiq($primary);
 $menu-font-s-sm  		: 1.2em;
-$menu-font-f-sm  		: $font-family-serif;
-
 // desktop
-$menu-h-lg  			: 100%;
-$menu-w-lg  			: 100%;
 $menu-bg-lg 			: transparent;
 $menu-color-lg 			: $primary;
 $menu-font-s-lg  		: 1rem;
-$menu-font-f-lg  		: $font-family-serif;
 $menu-li-bg-hover		: $primary;
 $menu-li-color-hover	: color-yiq($primary);
 $menu-li-padding-x      : 1rem;
@@ -46,7 +18,6 @@ $menu-big-menu-bg 				: darken($primary,10%);
 $menu-big-menu-li-bg			: transparent; //color-yiq($primary, $gray-dark, transparent);
 $menu-big-menu-li-bg-hover		: $primary;
 $menu-big-menu-li-color			: color-yiq($primary);
-$menu-big-menu-li-color-hover	: $body-color;
 // megamenu
 $megamenu-bg 					: $white;
 $megamenu-color-top-btn			: $primary;
@@ -54,23 +25,63 @@ $megamenu-color-bottom-btn		: $black;
 $megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
 $megamenu-btn-more 				: $gray;
 
+nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
+	display: block;
+	margin-top: 0px;
+}
+
 body.menu-is-visible { 
 	overflow-y : hidden;
 	position: fixed;
 }
+
+// Normal
+nav.navbar:not(.megamenu) {
+    .nav-dropdown-inner {
+        width: 100%;
+        
+        li:hover {
+            background: $menu-big-menu-bg;
+        } 
+    }
+}
+
+// Normal and Megamenu
+nav.navbar
+{
+	.container-max
+	{
+		display: block;
+		
+		> div.row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-content: stretch;
+            align-items: center;
+            
+            .brand-wrapper {
+                flex: 0 0 auto;
+                align-self: auto;
+                
+                @include media-breakpoint-down(md){
+                    width: 100%;
+                }
+            }
+
+            #mainNavbarCollapsable {
+                flex: 1 1 auto;
+                align-self: stretch;
+            }
+		}
+	}
+}
+
 #mainNavbarCollapsable {
-	background 	: $menu-bg-sm;
-	bottom 		: 0;
-	color 		: $menu-color-sm;
 	font-size 	: $menu-font-s-sm;
-	left 		: 0;
 	opacity 	: .6;
-	overflow-y 	: auto;
-	position 	: fixed;
-	right 		: 0;
-	top 		: 0;
-	transform 	: translateX(-100%);
-	transition 	: all .3s ease;
+    transition 	: all .3s ease;
 
 	&.open {
 		opacity 	: 1;
@@ -110,8 +121,11 @@ body.menu-is-visible {
 		list-style 	: none;
 		height 		: 100%;
 		margin 		: 0;
-		padding 	: 0;
-		position 	: relative;
+        padding 	: 0;
+        float: right;
+        display: flex;
+        flex-flow: wrap;
+        justify-content: flex-end;
 
 		&:empty {
 			min-height: $line-height-base + $menu-li-padding-y * 2;
@@ -120,7 +134,6 @@ body.menu-is-visible {
 		li 	{
 			width : 100%;
 			cursor: pointer;
-			float: left;
 			display: flex;
 			flex-wrap: wrap;
 
@@ -138,14 +151,9 @@ body.menu-is-visible {
 			}
 
 			ul {
-				background 	: $menu-bg-sm;
 				left 		: 0;
 				list-style 	: none;
-				margin 		: 0;
 				padding 	: 0;
-				position 	: relative;
-				top 		: 0;
-				width 		: 100%;
 			}
 			&.ddown {
 				.nav-direction {
@@ -176,12 +184,7 @@ body.menu-is-visible {
 
 	@include media-breakpoint-up(lg){
 		background-color : $menu-bg-lg;
-		display 		 : block!important;
 		opacity 		 : 1;
-		overflow 		 : visible;
-		position 		 : relative;
-		transform 		 : translateX(0);
-		width 			 : 100%;
 		font-size 		 : $menu-font-s-lg;
 		transition 		 : all .1s ease;
 
@@ -204,15 +207,15 @@ body.menu-is-visible {
 					visibility 		: hidden;
 					opacity 		: 0;
 					transition 		: all .1s ease;
-					background 		: $menu-big-menu-bg;
+					background 		: $menu-color-lg;
 					height 			: auto;
-					top 			: 100%;
 					text-align 		: center;
 					width 			: auto;
 					max-width 		: 25em;
 					min-width 		: 100%;
 					word-wrap		: break-word;
-					position 		: absolute;
+                    position 		: absolute;
+                    z-index: 1;
 
 					>li {
 						background 	: $menu-big-menu-li-bg;
@@ -220,7 +223,7 @@ body.menu-is-visible {
 						transition  : all .1s ease;
 						width 		: 100%;
 						min-width	: 150px;
-						text-align  : initial;
+						text-align  : left;
 
 						.no-touch &:hover,
 						.touch &.hover {
@@ -259,8 +262,8 @@ body.menu-is-visible {
 					border 			: none;
 					float 			: right;
 					font-family 	: FontAwesome;
-					height 			: auto;
-					width 			: auto;
+					width: 15px;
+					height: 8px;
 				}
 				&.ddown .ddown a:after { display : none; }
 			}
@@ -268,91 +271,101 @@ body.menu-is-visible {
 	}
 }
 
-@include media-breakpoint-up(lg){ 
-	nav.navbar.megamenu {
-		position : relative;
+// Megamenu only
+nav.navbar.megamenu {
+    #mainNavbarCollapsable {
+        ul.mainmenu {
+            >li {
+                position : static;
 
-		#mainNavbarCollapsable ul.mainmenu {
-			background 		: transparent;
-			display 		: flex;
-			justify-content : flex-end; 
-			width 			: 100%; 
+                .no-touch &:hover,
+                .touch &.hover {
+                    >ul.collapse { display : block; } 
+                }
 
-			>li {
-				position : static;
+                >ul.collapse {
+                    background-color: $megamenu-bg;
+                    column-gap		: .5em;
+                    column-rule		: 1px solid #dcdbd7;
+                    display			: none;
+                    padding			: 1em 0;
+                    min-height		: 7em;
+                    max-height		: 86vh;  
+                    column-count	: 5;
+                    overflow-x		: auto;
+                    overflow-y		: hidden;
+                    column-fill		: balance;
 
-				.no-touch &:hover,
-				.touch &.hover {
-					background : transparent !important; 
-					color 	   : $megamenu-btn-hover !important;  
+                    li {
+                        display		: list-item;
+                    }
 
-					>ul.collapse { display : block; } 
-				}
+                    >li ul.nav-dropdown-inner {
+                        padding-bottom		: 1em;
 
-				>ul.collapse {
-					background-color: $megamenu-bg;
-					column-gap		: .5em;
-					column-rule		: 1px solid #dcdbd7;
-					display			: none;
-					padding			: 1em 0;
-					min-height		: 7em;
-					max-height		: 86vh;  
-					column-count	: 5;
-					overflow-x		: auto;
-					overflow-y		: hidden;
-					column-fill		: balance;
+                        >li {
+                            // 0.1px for rendering fix
+                            padding	: 0.1px 1.5em;
+                            line-height		: 170%;
+                            text-align		: left;
+        
+                            &.bt-more>a {
+                                color 			: $megamenu-btn-more;
+                                text-transform 	: lowercase; 
+                            }
+                            >a {
+                                color	: $megamenu-color-bottom-btn;
+                                padding	: 0;
+                            }                            
+                            &:hover a {
+                                color: $megamenu-color-top-btn;
+                            }
+                        }
+                        .level1 { 
+                            >a {								
+                                color		: $megamenu-color-top-btn; 
+                                font-weight	: bold; 
+                            }
+                            
+                            &:hover a {
+                                color: $megamenu-btn-hover;
+                            }
+                        }
+                        .level3 { 
+                            padding-left	: 2.5em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
-					li {
-						display		: list-item;
-						float		: none;
-					}
+// Mobile Navigation only
+@-webkit-keyframes mobile-nav-placeholder {
+	0% { opacity: 0.1; }
+	50% { opacity: 0.15; }
+	100% { opacity: 0.1; }
+}
 
-					>li ul.nav-dropdown-inner {
-						background-color	: $megamenu-bg;
-						padding-bottom		: 1em;
-
-						>li {
-							// 0.1px for rendering fix
-							padding	: 0.1px 1.5em;
-							line-height		: 170%;
-							text-align		: left;
-		
-							&.bt-more>a {
-								color 			: $megamenu-btn-more;
-								text-transform 	: lowercase; 
-							}
-							>a {
-								color	: $megamenu-color-bottom-btn;
-								padding	: 0;
-							}
-						}
-						.level1 { 
-							>a {								
-								color		: $megamenu-color-top-btn; 
-								font-weight	: bold; 
-							}
-						}
-						.level3 { 
-							padding-left	: 2.5em;
-						}
-					}
-				}
-			}
-		}
-	}
+@keyframes mobile-nav-placeholder {
+	0% { opacity: 0.1; }
+	50% { opacity: 0.15; }
+	100% { opacity: 0.1; }
 }
 
 .mobile-navigation{
+	top 		: 0;
+    right 		: 0;
+    bottom 		: 0;
+	left 		: 0;
 	background 	: $menu-bg-sm;
-	bottom 		: 0;
 	color 		: $menu-color-sm;
 	font-size 	: $menu-font-s-sm;
-	left 		: 0;
 	opacity 	: .6;
 	overflow-y 	: auto;
 	position 	: fixed;
-	right 		: 0;
-	top 		: 0;
+
 	transform   : translateX(100%);
 	transition 	: all .3s ease;
 	z-index     : 99999;
@@ -363,7 +376,13 @@ body.menu-is-visible {
 		transform 	: translateX(0);
 	}
 
+	.sk-fading-circle .sk-circle:before,
+	.loading-animation > div {
+		background-color: $menu-color-sm;
+	}
+
 	ul.breadcrumb {
+		color      : $menu-breadcrumb-color;
 		background : $menu-breadcrumb-bg;
 		max-width  : initial;
 		font-size  : .8em;
@@ -465,15 +484,35 @@ body.menu-is-visible {
 			}
 		}
 	}
+
+	.nav-placeholder
+	{
+		height: 25px;
+		width: 200px;
+		display: inline;
+		background: #fff;
+		margin: 1rem;
+		border-radius: 3px;
+		opacity: 0.1;
+		-webkit-animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
+		animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
+	}
 }
 
-.breadcrumb-item-transition {
-  transition: all 1s ease;
-  overflow: hidden; }
-
-.breadcrumb-item-enter, .breadcrumb-item-leave {
-  opacity: 0;
-  transform: translateX(-30px); }
+// IE compatibility
+html.ie {
+    nav.navbar #mainNavbarCollapsable {
+        width: 100%;
+    }
+    .mobile-navigation ul.mainmenu li {
+        a {
+            flex: 1 0 75%;
+        }
+        .nav-direction {
+            flex: 1 0 10%;
+        }
+    }
+}
 
 .mainmenu-[class^='animate-'],
 .mainmenu[class*=' animate-'] {

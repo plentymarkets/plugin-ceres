@@ -1,10 +1,17 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set customClass = widget.settings.customClass.mobile %}
+{% set appearance  = widget.settings.appearance.mobile %}
+{% set aspectRatio = widget.settings.aspectRatio.mobile %}
+{% set animationStyle = widget.settings.animationStyle.mobile %}
+{% set carouselId  = uid() %}
 {% set placeholder = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc73f%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc73f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3E%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
+{% set margin = WidgetHelper.getSpacingClasses(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
-
-{% set carouselId = uid() %}
 
 {{ Twig.set("slides", "[]") }}
 
@@ -24,7 +31,8 @@
 
         {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
         {{ Twig.set("slide", "slide | merge({ url: categoryUrl })") }}
-        {{ Twig.set("slide", "slide | merge({ imageUrl: \"documents/\" ~ category.details[0].imagePath })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: \"/documents/\" ~ category.details[0].imagePath })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: category.details[0].name })") }}
 
         {% set pushCurrentSlide = true %}
 
@@ -41,6 +49,7 @@
         {{ Twig.set("slide", "slide | merge({ name: " ~ Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"]) ~ " })") }}
         {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: itemImage.alternate })") }}
 
         {% set pushCurrentSlide = true %}
 
@@ -48,6 +57,7 @@
 
         {{ Twig.set("slide", "slide | merge({ url: #{ slideUrlValue | json_encode } })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideUrlValue | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: cdn_metadata(#{ slideUrlValue | json_encode }, 'alttext') })") }}
         {% set pushCurrentSlide = true %}
 
     {% elseif slideUrlType == 'external' and slideUrlValue | trim is not empty %}
@@ -60,6 +70,7 @@
     {% if slideSettings.customImagePath | trim is not empty %}
 
         {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideSettings.customImagePath | json_encode } })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: cdn_metadata(#{ slideSettings.customImagePath | json_encode }, 'alttext') })") }}
 
         {% set pushCurrentSlide = true %}
 
@@ -89,8 +100,9 @@
 
 {{ Twig.endif() }}
 
-<div class="widget widget-image-carousel widget-{{ widget.settings.appearance.mobile | default('primary') }} widget-proportional">
-    <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide" data-ride="carousel">
+<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide{% if animationStyle == 'fade' %} carousel-fade{% endif %}" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
             {{ Twig.for("slide", "slides") }}
             
@@ -98,7 +110,11 @@
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}
                     {{ Twig.if("slide.openInNewTab is not empty") }} target="_blank" {{ Twig.endif() }}>
                     {{ Twig.if("slide.imageUrl is not empty") }}
-                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
+                        {{ Twig.set("altText", "slide.imageAltText") }}
+                        {{ Twig.if("altText | trim is empty") }}
+                            {{ Twig.set("altText", "slide.name") }}
+                        {{ Twig.endif }}
+                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
                     {{ Twig.endif() }}
 
                     {{ Twig.if("slide.name is not empty and slide.headlineStyle != 'no-caption'") }}

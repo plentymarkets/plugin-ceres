@@ -1,0 +1,90 @@
+{
+    "identifier": "Ceres::MailFormWidget",
+    "label": "Widget.mailFormLabel",
+    "previewImageURL": "/images/widgets/mail-form.svg",
+    "type": "default",
+    "categories": ["form"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Form\\MailFormWidget",
+    "allowedNestingTypes": ["structure", "static", "default", "form"],
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "labelSubmit": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormSubmitLabel",
+                "tooltip": "Widget.mailFormSubmitTooltip"
+            }
+        },
+        "mailTarget": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormMailTargetLabel",
+                "tooltip": "Widget.mailFormMailTargetTooltip"
+            }
+        },
+        "subject": {
+            "type": "text",
+            "required": false,
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.mailFormSubjectLabel",
+                "tooltip": "Widget.mailFormSubjectTooltip"
+            }
+        },
+        "ccAddresses": {
+            "type": "text",
+            "required": false,
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.mailFormCCAddressesLabel",
+                "tooltip": "Widget.mailFormCCAddressesTooltip"
+            }
+        },
+        "bccAddresses": {
+            "type": "text",
+            "required": false,
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.mailFormBCCAddressesLabel",
+                "tooltip": "Widget.mailFormBCCAddressesTooltip"
+            }
+        },
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}

@@ -1,16 +1,9 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set customClass = widget.settings.customClass.mobile %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings( widget.settings, false, true ) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses( widget.settings, false, true ) %}
 
 {% if isPreview %}<div class="widget-editable-min-height">{% endif %}
-    <hr{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{% if spacingClasses | length > 0 %} class="{{ spacingClasses }}"{% endif %}>
+    <hr class="widget widget-separator{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% else %} mb-3{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}" {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 {% if isPreview %}</div>{% endif %}
-
-
-
-
-
-
-
-

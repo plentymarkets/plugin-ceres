@@ -1,4 +1,5 @@
 {
+    "deprecated": true,
     "identifier": "Ceres::TextWidget",
     "label": "Widget.textLabel",
     "previewImageURL": "/images/widgets/text.svg",
@@ -7,6 +8,7 @@
     "position": 800,
     "widgetClass": "Ceres\\Widgets\\Common\\TextWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,

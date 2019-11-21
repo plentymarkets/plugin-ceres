@@ -1,14 +1,14 @@
-{% set text         = widget.settings.text.mobile %}
-{% set appearance   = widget.settings.appearance.mobile %}
-
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set customClass = widget.settings.customClass.mobile %}
+{% set text         = widget.settings.text.mobile %}
+{% set appearance   = widget.settings.appearance.mobile %}
 {% set hasSpacing = widget.settings.customMargin.mobile or widget.settings.customPadding.mobile %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
 {% if text | trim is not empty %}
-<div class="widget widget-text widget-{{ appearance | default('primary') }}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+<div class="widget widget-text widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %} bg-appearance">
         {{ text | raw }}
     </div>

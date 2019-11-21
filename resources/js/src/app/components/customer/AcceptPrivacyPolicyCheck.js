@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.component("accept-privacy-policy-check", {
 
     props: {
@@ -16,11 +18,6 @@ Vue.component("accept-privacy-policy-check", {
         {
             type: Boolean
         }
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:

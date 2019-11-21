@@ -1,52 +1,117 @@
 {{ component( "Ceres::Item.Components.ItemBundle" ) }}
 
 <script type="x/template" id="vue-order-return-item">
-	<article  class="order-return-item" :id="'article_' + _uid">
-		<div class="row">
-			<div class="col-3 col-sm-2 order-flex">
-				<div class="input-group">
-					<span class="input-group-prepend">
-						<label class="input-group-text">
-							<input type="checkbox" v-model="isChecked" @change="updateValue($event)">
-						</label>
-					</span>
-					<input 	type="number" 
-							min="1" 
-							:max="orderItem.quantity" 
-							class="form-control" 
-							:disabled="!isChecked" 
-							@change="validateValue()" 
-							v-model="returnCount" 
-							placeholder="0">
-				</div>
-				<div class="max-counter-slash">
-					/
-				</div>
-				<div class="max-counter-return">
-					${ orderItem.quantity }
-				</div>
-			</div>
-			<div class="col-3 col-sm-2 order-return-container">
-				<div class="order-return-image-container">
-					<a :href="orderItemURL">
-						<img class="order-return-image" :src="orderItemImage" :alt="orderItem | itemBundleName" :title="orderItem | itemBundleName">
-					</a>
-				</div>
+	<article class="basket-item-container basket-list-item">
+
+		<div class="basket-item">
+
+			<div class="image-container">
+				<img class="img-basket-small" v-if="orderItemImage" :src="orderItemImage" :alt="orderItem | itemBundleName" :title="orderItem | itemBundleName">
 			</div>
 
-			<div class="col-5 col-sm-4 order-return-texts">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12 col-lg-12">
-							<a :href="orderItemURL">
-								<h2 class="h5 order-return-name">${ orderItem | itemBundleName }</h2>
+			<div class="meta-container-wrapper">
+				<div class="meta-container-wrapper-inner">
+					<div class="meta-container">
+						<div>
+							<a :href="orderItemURL" class="item-name text-primary text-appearance">
+								${ orderItem | itemBundleName }
 							</a>
+							
+							<div class="item-base-price">
+								<template v-if="isNet">
+									${ amount.priceNet | currency(amount.currency) }
+								</template>
+								<template v-if="!isNet">
+									${ amount.priceGross | currency(amount.currency) }
+								</template>
+							</div>
+
+							<item-bundle
+								:bundle-type="orderItem.bundleType"
+								:bundle-components="orderItem.bundleComponents"></item-bundle>
+
+							<div class="item-small-prices">
+								<div v-for="attribute in variation.attributes">
+									<strong>${ attribute.attribute.names.name }: </strong>
+									<span>${ attribute.value.names.name }</span>
+								</div>
+							</div>
+
+							<div class="item-small-prices text-muted" v-if="orderItem.orderProperties">
+								<div v-for="property in orderItem.orderProperties">
+									<strong>${ property.name }: </strong>
+									<span v-if="property.type === 'file'">
+                                        <a :href="property.value | fileUploadPath" target="_blank" class="text-primary text-appearance">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            ${ property.value | fileName }
+                                        </a>
+                                    </span>
+									<span v-else-if="property.type === 'selection'">${ property.selectionValueName }</span>
+									<span v-else-if="!!property.type">${ property.value }</span>
+								</div>
+							</div>
 						</div>
+					</div>
+
+					<div class="basket-item-container-right">
+						<div class="qty-box-container">
+							<quantity-input
+								template="#vue-quantity-input"
+								@quantity-change="updateQuantity"
+								:value="returnCount"
+								:min="0"
+								:max="orderItem.quantity"></quantity-input>
+						</div>
+
+						<div class="price-box">
+							<div class="item-total-price" v-if="isNet">
+								${ orderItem.quantity * amount.priceNet | currency(amount.currency) }
+							</div>
+
+							<div class="item-total-price" v-if="!isNet">
+								${ orderItem.quantity * amount.priceGross | currency(amount.currency) }
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-additional-information-container" v-if="variation">
+					<div class="item-additional-information">
+
+						<template v-if="isDataFieldVisible('item_id') && variation.item.id">
+							<div class="mt-3">
+								<strong>{{ trans("Ceres::Template.basketItemId") }}:</strong>
+								<span>${ variation.item.id }</span>
+							</div>
+						</template>
+
+						<template v-if="isDataFieldVisible('custom_number') && variation.variation.number">
+							<div>
+								<strong>{{ trans("Ceres::Template.basketItemNumber") }}:</strong>
+								<span>${ variation.variation.number }</span>
+							</div>
+						</template>
+
+						<template v-if="isDataFieldVisible('availability') && variation.variation.availability.names.name">
+							<div>
+								<strong>{{ trans("Ceres::Template.basketAvailability") }}:</strong>
+								<span class="badge" :class="'availability_' + variation.variation.availability.id">
+									${ variation.variation.availability.names.name }
+								</span>
+							</div>
+						</template>
+
+						<template v-if="isDataFieldVisible('description_long') && variation.texts.description">
+							<p class="my-3" v-html="variation.texts.description"></p>
+						</template>
+
+						<template v-if="isDataFieldVisible('description_short') && variation.texts.shortDescription">
+							<p class="my-3" v-html="variation.texts.shortDescription"></p>
+						</template>
 					</div>
 				</div>
 			</div>
 
-			<item-bundle :bundle-type="orderItem.bundleType" :bundle-components="orderItem.bundleComponents" template="#vue-item-bundle"></item-bundle>
 		</div>
 	</article>
 </script>

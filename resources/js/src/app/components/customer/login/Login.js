@@ -1,21 +1,38 @@
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-const ModalService        = require("services/ModalService");
-const AutoFocusService    = require("services/AutoFocusService");
+import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixin";
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
+const ApiService          = require("../../../services/ApiService");
+const NotificationService = require("../../../services/NotificationService");
+const ModalService        = require("../../../services/ModalService");
+const AutoFocusService    = require("../../../services/AutoFocusService");
+
+import ValidationService from "../../../services/ValidationService";
+import TranslationService from "../../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("login", {
 
-    delimiters: ["${", "}"],
+    mixins: [ButtonSizePropertyMixin],
 
-    props: [
-        "modalElement",
-        "backlink",
-        "hasToForward",
-        "template"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-login"
+        },
+        backlink:
+        {
+            type: String
+        },
+        modalElement: {
+            type: String
+        },
+        hasToForward:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
 
     data()
     {
@@ -27,18 +44,11 @@ Vue.component("login", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>
         {
             this.loginFields = $(".login-container").find(".input-unit");
-
-            this.removeLoginModal();
 
             AutoFocusService.triggerAutoFocus();
         });
@@ -77,16 +87,6 @@ Vue.component("login", {
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
                 });
-        },
-
-        removeLoginModal()
-        {
-            if (!this.modalElement)
-            {
-                const loginModal = document.getElementById("login");
-
-                loginModal.parentNode.removeChild(loginModal);
-            }
         },
 
         /**
@@ -130,12 +130,12 @@ Vue.component("login", {
                         var translationKey = "Ceres::Template.loginFailed";
 
                         if (response.error.message.length > 0 && response.error.message === "user is blocked")
-                            {
+                        {
                             translationKey = "Ceres::Template.loginBlocked";
                         }
                         NotificationService.error(
-                                TranslationService.translate(translationKey)
-                            ).closeAfter(10000);
+                            TranslationService.translate(translationKey)
+                        ).closeAfter(10000);
                         break;
                     default:
                         return;

@@ -1,24 +1,20 @@
-import TranslationService from "services/TranslationService";
-import ValidationService from "services/ValidationService";
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../services/TranslationService";
+import ValidationService from "../../services/ValidationService";
+import Vue from "vue";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
+
+const ApiService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("newsletter-input", {
+
+    mixins: [ButtonSizePropertyMixin],
+
     props: {
         template:
         {
             type: String,
             default: "#vue-newsletter-input"
-        },
-        title:
-        {
-            type: String,
-            default: ""
-        },
-        subTitle:
-        {
-            type: String,
-            default: ""
         },
         showNameInputs:
         {
@@ -46,11 +42,6 @@ Vue.component("newsletter-input", {
             isDisabled: false,
             privacyPolicyValue: false
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods: {

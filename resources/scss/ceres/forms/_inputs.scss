@@ -145,6 +145,11 @@ $border-width: 1px;
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        &.disabled,
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     i
@@ -328,6 +333,25 @@ $border-width: 1px;
     }
     .form-check-input {
         cursor: pointer;
+    }
+}
+
+.select-unit
+{
+    > label
+    {
+        margin-bottom: .1rem;
+        font-weight: bold;
+    }
+
+    .form-check
+    {
+        margin-bottom: 0;
+    }
+
+    &.error
+    {
+        color: $danger;
     }
 }
 

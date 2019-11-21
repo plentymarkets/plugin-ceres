@@ -1,5 +1,12 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
 {{ Twig.if("frontend.Account.getIsAccountLoggedIn or #{ isPreview | json_encode }") }}
 
     {{ Twig.set("userObject", Twig.call("services.customer.getContact" )) }}
@@ -14,7 +21,8 @@
     {% set setting = widget.settings.salutation.mobile %}
     {{ Twig.set( "pattern" , setting | json_encode ) }}
 
-    <div class="widget widget-greeting">
+    <div class="widget widget-greeting{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         {% if setting == "firstname_surname" %}
             {{ Twig.if ("userObject.firstName | length > 0 and userObject.lastName | length > 0") }}
                 {{ Twig.set("name", "userObject.firstName ~ ' ' ~ userObject.lastName" ) }}
@@ -32,6 +40,9 @@
                 {{ Twig.endif() }}
                 {{ Twig.if("userObject.gender == 'female'")  }}
                     {{ Twig.set("name", "trans('Ceres::Widget.greetingWidgetFemale') ~ ' ' ~ userObject.lastName" ) }}
+                {{ Twig.endif() }}
+                {{ Twig.if("userObject.gender == 'diverse'")  }}
+                    {{ Twig.set("name", "trans('Ceres::Widget.greetingWidgetDiverse') ~ ' ' ~ userObject.lastName" ) }}
                 {{ Twig.endif() }}
             {{ Twig.endif() }}
 

@@ -106,41 +106,12 @@
 		transition: max-height 300ms; 
 	}
 
-	.expand-btn{
-		display: block;
-		position: relative;
-		z-index: 999;
-		width: 100%;
-		text-align: center;
-		cursor: pointer;
-
-		&:before{
-			content: "";
-			display: block;
-			width: 100%;
-			height: 1.5em;
-			border-bottom: 1px solid $gray-lighter;
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-		}
-
-		&:after{
-			content: attr(data-show-more);
-			font-weight: 700;
-			color: $gray-light;
-		    display: inline-block;
-		    position: relative;
-		    background-color: $body-bg;
-		    padding: 0 .5em;
-		    top: -.8em;
-		}
-	}
-
 	.toggle-description:checked{
 		& ~ .item-description{
 			max-height: 70em;// 10 lines
 		}
 
-		& ~ .expand-btn{
+		& ~ .btn-collapse{
 			&:after{
 				content: attr(data-show-less);
 			}
@@ -251,6 +222,11 @@
 				left:20%;
 			}
 		}
+	}
+
+	.rebate-hint
+	{
+		color: $gray;
 	}
 }
 

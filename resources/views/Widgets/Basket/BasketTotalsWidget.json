@@ -2,14 +2,15 @@
     "identifier": "Ceres::BasketTotalsWidget",
     "label": "Widget.basketTotalsLabel",
     "previewImageURL": "/images/widgets/basket-totals.svg",
-    "type": "basket",
+    "type": "default",
     "categories": ["basket"],
     "position": 300,
     "widgetClass": "Ceres\\Widgets\\Basket\\BasketTotalsWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "visibleFields": {
             "type": "checkboxGroup",
-            "defaultValue": ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"],
+            "defaultValue": ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount"],
             "options": {
                 "name": "Widget.basketTotalsVisibleFields",
                 "checkboxValues": [
@@ -34,12 +35,12 @@
                         "caption": "Widget.showBasketShippingCostsGross"
                     },
                     {
-                        "value": "totalSumNet",
-                        "caption": "Widget.showBasketTotalSumNet"
-                    },
-                    {
                         "value": "promotionCoupon",
                         "caption": "Widget.showBasketPromotionCoupon"
+                    },
+                    {
+                        "value": "totalSumNet",
+                        "caption": "Widget.showBasketTotalSumNet"
                     },
                     {
                         "value": "vats",
@@ -59,6 +60,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

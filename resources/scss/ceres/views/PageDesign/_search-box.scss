@@ -67,7 +67,7 @@ div:not(.top-bar) {
             position: absolute;
             box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
             background: #ffffff;
-            overflow: scroll;
+            overflow: auto;
             -webkit-overflow-scrolling: touch;
             z-index: 1070;
             max-height: 310px;
@@ -96,6 +96,7 @@ div:not(.top-bar) {
                 {
                     align-self: center;
                     color: $gray-dark;
+                    max-width: 0;
                 }
 
                 & > .autocomplete-image-container

@@ -2,9 +2,12 @@
 {
     > .widget-inner
     {
+        display: flex;
+
         > div
         {
-            height: 100%;
+            flex: 1;
+            max-width: 100%;
         }
     }
 
@@ -15,17 +18,19 @@
 
         > .widget-inner
         {
-            display: flex;
-
-            > div
-            {
-                flex: 1;
-
-            }
+            max-width: none;
 
             [data-builder-child-container]
             {
                 min-height: 100px;
+            }
+
+            @include media-breakpoint-up(md)
+            {
+                .widget-proportional
+                {
+                    height: 100%;
+                }
             }
         }
     }
@@ -104,4 +109,8 @@
         background-color: $white;
         padding: $spacer;
     }
+}
+
+html.ie .widget-grid .widget-inner-stacked {
+    display: block;
 }

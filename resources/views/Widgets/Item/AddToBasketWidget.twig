@@ -1,0 +1,45 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.import("AddToBasket"    , "Ceres::Basket.Macros.AddToBasket") }}
+
+{{ Twig.component("Ceres::Basket.Components.AddToBasket") }}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+
+<div class="widget widget-add-to-basket widget-{{ appearance }}
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", Twig.var("item.documents[0].data")])) }}
+    
+    <div class="w-100" v-if="$store.state.item.variation.documents">
+
+        {{ AddToBasket.printVueComponent(
+            "$store.state.item.variation.documents[0].data",
+            false, 
+            true,
+            {
+                ":missing-order-properties":"$store.getters.variationMissingProperties",
+                ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice",
+                "button-size": buttonSize,
+                "padding-classes": spacingPadding,
+                "padding-inline-styles": inlinePadding
+            }
+        ) }}
+    </div>
+
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.AfterAddToBasket", Twig.var("item.documents[0].data")])) }}
+</div>

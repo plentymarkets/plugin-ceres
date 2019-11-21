@@ -1,3 +1,6 @@
+import Vue from "vue";
+import moment from "moment";
+
 Vue.component("live-shopping-details", {
     props:
     {
@@ -56,8 +59,6 @@ Vue.component("live-shopping-details", {
 
     created()
     {
-        this.$options.template = this.template;
-
         this.initializeDataAndTimer();
     },
 
@@ -100,13 +101,22 @@ Vue.component("live-shopping-details", {
         setItemPriceRebatePercentage()
         {
             const specialOfferPrice = this.prices.price.price.value;
-            const defaultPrice      = this.prices.rrp.price.value;
-            let percentage          = 100 - specialOfferPrice / defaultPrice * 100;
+            const defaultPrice      = this.prices.rrp && this.prices.rrp.price.value || 0;
 
-            percentage = percentage.toFixed(App.config.item.storeSpecial);
-            percentage = percentage.replace(".", App.decimalSeparator);
+            if (defaultPrice === 0)
+            {
+                this.itemPriceRebatePercentage = 0;
+            }
+            else
+            {
+                let percentage          = 100 - specialOfferPrice / defaultPrice * 100;
 
-            this.itemPriceRebatePercentage = percentage;
+                percentage = percentage.toFixed(App.config.item.storeSpecial);
+                percentage = percentage.replace(".", App.decimalSeparator);
+
+                this.itemPriceRebatePercentage = percentage;
+            }
+
         },
 
         calculations()

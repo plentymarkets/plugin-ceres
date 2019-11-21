@@ -7,17 +7,13 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\BankDataSelectWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "text": {
-            "type": "codeEditor",
-            "options": {
-                "name": "Widget.myAccountHintTextLabel"
-            }
-        }
+        "spacing":"@include(spacingMargin)"
     }
 }

@@ -1,0 +1,72 @@
+{
+    "identifier": "Ceres::OrderReturnWidget",
+    "label": "Widget.orderReturnLabel",
+    "previewImageURL": "/images/widgets/order-return.svg",
+    "type": "default",
+    "categories": ["orderconfirmation"],
+    "position": 500,
+    "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderReturnWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "itemDetailsData": {
+            "type": "checkboxGroup",
+            "defaultValue": ["availability"],
+            "options": {
+                "name": "Widget.basketDetailsDataLabel",
+                "checkboxValues": [
+                    {
+                        "value": "item_id",
+                        "caption": "Widget.basketDetailsDataItemId"
+                    },
+                    {
+                        "value": "custom_number",
+                        "caption": "Widget.basketDetailsDataCustomNumber"
+                    },
+                    {
+                        "value": "availability",
+                        "caption": "Widget.basketDetailsDataAvailability"
+                    },
+                    {
+                        "value": "description_long",
+                        "caption": "Widget.basketDetailsDataDescriptionLong"
+                    },
+                    {
+                        "value": "description_short",
+                        "caption": "Widget.basketDetailsDataDescriptionShort"
+                    }
+                ]
+            }
+        },
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

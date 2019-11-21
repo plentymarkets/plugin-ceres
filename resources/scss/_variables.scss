@@ -1,7 +1,7 @@
 //
 // Variables
 // --------------------------------------------------
-
+$enable-deprecation-messages: false;
 
 //
 // Colors
@@ -230,13 +230,13 @@ $zIndex-10:                         10000 !default;
 // of components dependent on the z-axis and are designed to all work together.
 
 $zindex-dropdown:                   $zIndex-1 !default;
-$zindex-sticky:                     $zIndex-3 !default;
 $zindex-fixed:                      $zIndex-3 !default;
 $zindex-modal-backdrop:             $zIndex-7 !default;
 $zindex-modal:                      $zIndex-8 !default;
-$zindex-navbar:                     $zIndex-5 !default;
 $zindex-popover:                    $zIndex-10 !default;
+$zindex-sticky:                     $zIndex-2 !default;
 $zindex-tooltip:                    $zIndex-7 !default;
+$zindex-wrapper:                    $zIndex-10 !default;
 
 // Navbar
 $navbar-background-color:           $gray-lightest !default;
@@ -253,6 +253,9 @@ $nav-tabs-border-color:             #ddd !default;
 
 
 // Popovers
+$popover-max-width:                 276px !default;
+$popover-max-width-md:              414px !default;
+$popover-max-width-lg:              552px !default;
 $popover-inner-padding:             1px !default;
 
 // Padding applied to the modal body

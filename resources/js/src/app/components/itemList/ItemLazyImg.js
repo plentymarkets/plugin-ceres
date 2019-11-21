@@ -1,3 +1,6 @@
+import Vue from "vue";
+import "jquery-lazyload";
+
 Vue.component("item-lazy-img", {
 
     delimiters: ["${", "}"],
@@ -6,11 +9,6 @@ Vue.component("item-lazy-img", {
         "imageUrl",
         "template"
     ],
-
-    created()
-    {
-        this.$options.template = this.template;
-    },
 
     mounted()
     {

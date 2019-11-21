@@ -1,4 +1,4 @@
-import $ from "jquery";
+import { isMail } from "../helper/strings";
 import { isNull } from "../helper/utils";
 
 let $form;
@@ -99,14 +99,23 @@ export function unmarkAllFields(form)
         const $elem = $(elem);
 
         $elem.removeClass("error");
+
+        _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
     });
 }
 
 function _validateElement(elem)
 {
-    const $elem          = $(elem);
+    const $elem = $(elem);
+
+    /** return if the attribute data-validate is not present on the element */
+    if (!$elem[0].attributes.hasOwnProperty("data-validate"))
+    {
+        return true;
+    }
+
     const validationKeys = $elem.attr("data-validate").split("|").map(function(i)
-        {
+    {
         return i.trim();
     }) || ["text"];
     let hasError       = false;
@@ -187,12 +196,12 @@ function _validateInput($formControl, validationKey)
     case "password":
         return _isPassword($formControl);
     case "regex":
-        {
-            const ref = $formControl.attr("data-validate-ref");
-            const regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+    {
+        const ref = $formControl.attr("data-validate-ref");
+        const regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
 
-            return _hasValue($formControl) && regex.test($.trim($formControl.val()));
-        }
+        return _hasValue($formControl) && regex.test($.trim($formControl.val()));
+    }
     default:
         console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
         return true;
@@ -238,9 +247,7 @@ function _isValidDate($formControl)
  */
 function _isMail($formControl)
 {
-    const mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-    return mailRegEx.test($formControl.val());
+    return isMail($formControl.val());
 }
 
 /**
@@ -284,7 +291,7 @@ function _isActive($elem)
 function _eval(input)
 {
     // eslint-disable-next-line
-    return (new Function("return " + input))();
+    return (new Function(`return ${ input };`))();
 }
 
 export default { validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields };

@@ -6,8 +6,6 @@ use Ceres\Helper\ExternalSearch;
 use Ceres\Helper\SearchOptions;
 use IO\Services\ItemSearch\SearchPresets\VariationList;
 use IO\Services\ItemSearch\Services\ItemSearchService;
-use IO\Services\SessionStorageService;
-use Plenty\Plugin\Translation\Translator;
 
 trait ItemListContext
 {
@@ -27,8 +25,8 @@ trait ItemListContext
 
     protected function initItemList( $defaultSearchFactories, $options, $scope = SearchOptions::SCOPE_CATEGORY )
     {
-        $this->currentPage      = $options['page'];
-        $this->itemsPerPage     = $options['itemsPerPage'];
+        $this->currentPage      = intval($options['page']);
+        $this->itemsPerPage     = intval($options['itemsPerPage']);
         $this->itemSorting      = $options['sorting'];
         $this->query            = ['items' => $this->itemsPerPage, 'sorting' => $this->itemSorting];
 
@@ -78,9 +76,11 @@ trait ItemListContext
         }
 
         $searchResults = $itemSearchService->getResults( $defaultSearchFactories );
-        $this->pageMax          = ceil( $searchResults['itemList']['total'] / $options['itemsPerPage'] );
-        $this->itemCountPage    = count( $searchResults['itemList']['documents'] );
         $this->itemCountTotal   = $searchResults['itemList']['total'];
+        $this->itemCountTotal = $this->itemCountTotal >  10000 ? 10000 : $this->itemCountTotal;
+
+        $this->pageMax          = ceil( $this->itemCountTotal / $options['itemsPerPage'] );
+        $this->itemCountPage    = count( $searchResults['itemList']['documents'] );
         $this->itemList         = $searchResults['itemList']['documents'];
         $this->facets           = $searchResults['facets'];
     }

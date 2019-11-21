@@ -1,0 +1,9 @@
+<script>
+    window.ceresStore.commit("setWishListItems", {{ services.itemList.getItemList("random", null, null, 3).documents | json_encode | raw }});
+    window.ceresStore.commit("setIsWishListInitiallyLoading");
+
+    {% set fakeBasket = services.faker.getBasket() %}
+    window.ceresStore.commit("setBasket", {{ fakeBasket.basket | json_encode | raw }});
+    window.ceresStore.commit("setBasketItems", {{ fakeBasket.basketItems | json_encode | raw }});
+    window.ceresStore.commit("setIsBasketInitiallyLoaded");
+</script>

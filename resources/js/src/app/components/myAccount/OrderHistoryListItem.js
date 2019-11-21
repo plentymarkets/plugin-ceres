@@ -1,4 +1,5 @@
-import ApiService from "services/ApiService";
+import Vue from "vue";
+const ApiService = require("../../services/ApiService");
 
 Vue.component("order-history-list-item", {
 
@@ -38,11 +39,6 @@ Vue.component("order-history-list-item", {
             isDataLoaded: false,
             showAllOrderItems: false
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:

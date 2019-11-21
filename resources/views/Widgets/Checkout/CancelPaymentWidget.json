@@ -1,0 +1,44 @@
+{
+    "identifier": "Ceres::CancelPaymentWidget",
+    "label": "Widget.cancelPaymentLabel",
+    "previewImageURL": "/images/widgets/cancel-payment.svg",
+    "type": "checkout",
+    "categories": ["checkout"],
+    "position": 800,
+    "widgetClass": "Ceres\\Widgets\\Checkout\\CancelPaymentWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "primary",
+            "options": "@include(appearance)"
+        },
+        "buttonSize": {
+            "type": "select",
+            "defaultValue": "",
+            "options": {
+                "name": "Widget.widgetButtonSizeLabel",
+                "tooltipText": "Widget.widgetButtonSizeTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "btn-sm",
+                        "caption": "Widget.widgetButtonSizeSm",
+                        "position": 0
+                    },
+                    {
+                        "value": "",
+                        "caption": "Widget.widgetButtonSizeNormal",
+                        "position": 1
+                    },
+                    {
+                        "value": "btn-lg",
+                        "caption": "Widget.widgetButtonSizeLg",
+                        "position": 2
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacing)"
+    }
+}

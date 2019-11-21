@@ -1,9 +1,9 @@
+import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
 
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-
-import TranslationService from "services/TranslationService";
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("order-return-history-list", {
 
@@ -12,11 +12,6 @@ Vue.component("order-return-history-list", {
         {
             type: String,
             default: "#vue-order-return-history-list"
-        },
-        hintText:
-        {
-            type: String,
-            default: null
         },
         returnsPerPage: {
             type: Number,
@@ -30,7 +25,7 @@ Vue.component("order-return-history-list", {
     },
 
     data()
-	{
+    {
         return {
             waiting: false,
             returnsList: { page: 1 }
@@ -38,8 +33,7 @@ Vue.component("order-return-history-list", {
     },
 
     created()
-	{
-        this.$options.template = this.template;
+    {
         if (!isNullOrUndefined(this.initialData))
         {
             this.returnsList = this.initialData;
@@ -63,19 +57,19 @@ Vue.component("order-return-history-list", {
                 this.returnsList.page = page;
 
                 ApiService.get("/rest/io/customer/order/return", { page: page, items: this.returnsPerPage })
-                .done(response =>
-                {
-                    this.waiting = false;
-                    this.returnsList = response;
-                })
-                .fail(response =>
-                {
-                    this.waiting = false;
-                    this.returnsList.page = lastPage;
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.returnHistoryOops")
-                    );
-                });
+                    .done(response =>
+                    {
+                        this.waiting = false;
+                        this.returnsList = response;
+                    })
+                    .fail(response =>
+                    {
+                        this.waiting = false;
+                        this.returnsList.page = lastPage;
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.returnHistoryOops")
+                        );
+                    });
             }
         }
     }

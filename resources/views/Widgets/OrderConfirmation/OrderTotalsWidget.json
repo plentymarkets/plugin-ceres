@@ -1,0 +1,66 @@
+{
+    "identifier": "Ceres::OrderTotalsWidget",
+    "label": "Widget.basketTotalsLabel",
+    "previewImageURL": "/images/widgets/basket-totals.svg",
+    "type": "default",
+    "categories": ["orderconfirmation"],
+    "position": 300,
+    "widgetClass": "Ceres\\Widgets\\OrderConfirmation\\OrderTotalsWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "visibleFields": {
+            "type": "checkboxGroup",
+            "defaultValue": ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount"],
+            "options": {
+                "name": "Widget.basketTotalsVisibleFields",
+                "checkboxValues": [
+                    {
+                        "value": "orderValueNet",
+                        "caption": "Widget.showBasketValueNet"
+                    },
+                    {
+                        "value": "orderValueGross",
+                        "caption": "Widget.showBasketValueGross"
+                    },
+                    {
+                        "value": "rebate",
+                        "caption": "Widget.showBasketTotalsRebate"
+                    },
+                    {
+                        "value": "shippingCostsNet",
+                        "caption": "Widget.showBasketShippingCostsNet"
+                    },
+                    {
+                        "value": "shippingCostsGross",
+                        "caption": "Widget.showBasketShippingCostsGross"
+                    },
+                    {
+                        "value": "promotionCoupon",
+                        "caption": "Widget.showBasketPromotionCoupon"
+                    },
+                    {
+                        "value": "totalSumNet",
+                        "caption": "Widget.showBasketTotalSumNet"
+                    },
+                    {
+                        "value": "vats",
+                        "caption": "Widget.showBasketVats"
+                    },
+                    {
+                        "value": "totalSumGross",
+                        "caption": "Widget.showBasketTotalSumGross"
+                    },
+                    {
+                        "value": "salesCoupon",
+                        "caption": "Widget.showBasketSalesCoupon"
+                    },
+                    {
+                        "value": "openAmount",
+                        "caption": "Widget.showBasketOpenAmount"
+                    }
+                ]
+            }
+        },
+        "spacing":"@include(spacingMargin)"
+    }
+}

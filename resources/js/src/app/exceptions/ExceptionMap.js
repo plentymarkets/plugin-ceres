@@ -12,14 +12,18 @@ export const exceptionMap = new Map(
         ["9", "notificationsBasketItemsRemoved"],
         ["10", "notificationsBasketItemsRemovedForLanguage"],
         ["11", "notificationsNoEmailEntered"],
+        ["12", "notificationsWarningOverselling"],
         ["110", "errorBasketItemVariationNotFound"],
         ["111", "errorBasketItemNotEnoughStockForVariation"],
         ["112", "errorBasketItemMaximumQuantityReachedForItem"],
         ["113", "errorBasketItemMaximumQuantityReachedForVariation"],
         ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"],
+        ["115", "errorCreateOrderRetryTimeNotReached"],
         ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"],
         ["302", "couponNoMatchingItemInBasket"],
-        ["401", "notificationsCalculateShippingFailed"]
+        ["401", "notificationsCalculateShippingFailed"],
+        ["501", "couponPromotionRequired"]
+
     ]
 );
 

@@ -1,9 +1,9 @@
-import ModalService from "services/ModalService";
+import ModalService from "./ModalService";
 
 export function autoFocus()
 {
     for (const modal of document.getElementsByClassName("modal"))
-	{
+    {
         if (typeof modal === "object")
         {
             const currentModal = ModalService.findModal(modal);
@@ -23,19 +23,24 @@ export function autoFocus()
 
 export function triggerAutoFocus(modal)
 {
+    if ( App.isShopBuilder )
+    {
+        return;
+    }
+
     let focusElements;
 
     if (modal)
-	{
+    {
         focusElements = modal.getModalContainer()[0].querySelectorAll("[data-autofocus]");
     }
     else
-	{
+    {
         focusElements = document.querySelectorAll("[data-autofocus]");
     }
 
     setTimeout(() =>
-	{
+    {
         if (focusElements[0]) focusElements[0].focus();
     }, 0);
 }

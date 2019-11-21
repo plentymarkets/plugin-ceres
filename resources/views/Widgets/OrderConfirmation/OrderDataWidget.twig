@@ -1,0 +1,156 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressHeader") }}
+{{ Twig.component("Ceres::MyAccount.Components.ChangePaymentMethod") }}
+
+{% set showCustomerId   = widget.settings.showCustomerId.mobile %}
+{% set customClass      = widget.settings.customClass.mobile %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlinePadding    = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin     = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin    = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+{% set appearance       = widget.settings.appearance.mobile | default("primary") %}
+
+{% set addressFields = widget.settings.addressFields.mobile | default([
+    "title",
+    "contactPerson",
+    "name1",
+    "name2",
+    "name3",
+    "name4",
+    "address1",
+    "address2",
+    "address3",
+    "address4",
+    "postalCode",
+    "town",
+    "country"
+]) %}
+
+{{ Twig.if("data.order is defined and data.order is not null") }}
+<div class="widget widget-order-data widget-{{ appearance }} border
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+    {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% else %} px-4 py-3{% endif %}
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+    <div class="widget-inner">
+        <div class="h3">
+            {{ Twig.trans("Ceres::Template.orderConfirmationOrderId") }} {{ Twig.print("data.order.id") }}
+        </div>
+        <div class="row">
+            <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationDate") }}</strong>
+            <span class="col-6 col-sm-7">{{ Twig.print("data.order.createdAt | formatDateTime | date(trans('Ceres::Template.devDateTimeFormat'))") }}</span>
+        </div>
+
+        {{ Twig.if("data.status is defined and data.status is not empty") }}
+            <div class="row">
+                <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationStatus") }}</strong>
+                <span class="col-6 col-sm-7">{{ Twig.print("data.status") }}</span>
+            </div>
+        {{ Twig.endif() }}
+
+        <hr>
+
+        {% if showCustomerId %}
+            {{ Twig.set("customerId", "" | json_encode) }}
+            {{ Twig.for("relation", "data.order.relations", "relation.referenceType == 'contact'") }}
+                {{ Twig.set("customerId", "relation.referenceId") }}
+            {{ Twig.endfor() }}
+
+            {{ Twig.if("customerId or #{ isPreview | json_encode }") }}
+                <div class="row mb-3">
+                    <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationCustomerID") }}</strong>
+                    <span class="col-6 col-sm-7">{{ Twig.print(Twig.call("services.customer.getContactNumber", [Twig.var("customerID")])) }}</span>
+                </div>
+            {{ Twig.endif() }}
+        {% endif %}
+
+        <div class="row">
+            <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
+            <span class="col-6 col-sm-7">
+                <address-header
+                    :address="{{ Twig.print("data.order.billingAddress | json_encode") }}"
+                    :address-fields="{{ addressFields | json_encode }}"></address-header>
+            </span>
+        </div>
+
+        <div class="row mt-3">
+            <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationShippingAddress") }}</strong>
+            <span class="col-6 col-sm-7">
+                {{ Twig.if("data.order.billingAddress.id == data.order.deliveryAddress.id") }}
+                    <span>
+                        {{ Twig.trans("Ceres::Template.orderConfirmationSameAsInvoice") }}
+                    </span>
+                {{ Twig.else() }}
+                    <span>
+                        <address-header
+                            :address="{{ Twig.print("data.order.deliveryAddress | json_encode") }}"
+                            :address-fields="{{ addressFields | json_encode }}"></address-header>
+                    </span>
+                {{ Twig.endif() }}
+            </span>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>
+            <span class="col-6 col-sm-7" id="payment_name_{{ Twig.print("data.order.id") }}">{{ Twig.print("data.paymentMethodName") }}</span>
+        </div>
+        <div class="row">
+            <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationPaymentStatus") }}</strong>
+            {{ Twig.set("paymentMethodId", "-1") }}
+            {{ Twig.for("propertyKey", "data.order.properties") }}
+                {{ Twig.if("data.order.properties[loop.index0].typeId == 4") }}
+                    {{ Twig.set("paymentStatus", "entry.order.properties[loop.index0].value") }}
+                    <span class="col-6 col-sm-7" id="payment_state_{{ Twig.print("data.order.id") }}">{{ Twig.print('trans("Ceres::Template.orderConfirmationPaymentStatus_" ~ data.order.properties[loop.index0].value)') }}</span>
+                {{ Twig.elseif("data.order.properties[loop.index0].typeId == 3") }}
+                    {{ Twig.set("paymentMethodId", "data.order.properties[loop.index0].value") }}
+                {{ Twig.endif() }}
+            {{ Twig.endfor() }}
+        </div>
+
+        {{ Twig.set("currentTemplate", Twig.call("services.template.getCurrentTemplate")) }}
+
+        {{ Twig.if("paymentMethodId != -1 and showAdditionalPaymentInformation == true") }}
+            <change-payment-method
+                :current-order="{{ Twig.print("data.order | json_encode") }}"
+                :change-possible="{{ Twig.print(Twig.call("services.order.allowPaymentMethodSwitchFrom", [Twig.var("paymentMethodId"), Twig.var("data.order.id")]) ~ " | json_encode") }}"
+                :allowed-payment-methods="{{ Twig.print(Twig.call("services.order.getPaymentMethodListForSwitch", [Twig.var("paymentMethodId"), Twig.var("data.order.id")]) ~ " | json_encode") }}"
+                :payment-status="{{ Twig.print("paymentStatus | json_encode") }}"
+                :current-payment-method-name="{{ Twig.print("data.paymentMethodName | json_encode") }}"
+                :current-template="{{ Twig.print("currentTemplate | json_encode") }}">
+            </change-payment-method>
+        {{ Twig.endif() }}
+
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::OrderConfirmation.AdditionalPaymentInformation", Twig.var("data.order")])) }}
+
+        <hr>
+
+        <div class="row">
+            <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
+            <span class="col-6 col-sm-7">{{ Twig.print("data.shippingProvider") }} - {{ Twig.print("data.shippingProfileName") }}</span>
+        </div>
+
+        {{ Twig.set("shippingDate", "" | json_encode) }}
+        {{ Twig.for("date", "data.order.dates", "date.typeId == 8") }}
+            {{ Twig.set("shippingDate", "date.date") }}
+        {{ Twig.endfor() }}
+
+        {{ Twig.if("shippingDate") }}
+            <div class="row">
+                <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationEstimatedShippingDate") }}</strong>
+                <span class="col-6 col-sm-7">{{ Twig.print("shippingDate | date(Twig.trans('Ceres::Template.devDateFormat'))") }}</span>
+            </div>
+        {{ Twig.endif() }}
+
+            
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::OrderConfirmation.AdditionalShippingInformation", Twig.var("data.order")])) }}
+    </div>
+</div>
+{{ Twig.endif() }}

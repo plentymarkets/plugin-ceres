@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapState } from "vuex";
+
 Vue.component("contact-wish-input", {
 
     props:
@@ -9,14 +12,9 @@ Vue.component("contact-wish-input", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         contactWish: state => state.checkout.contactWish
     }),
-
-    created: function()
-    {
-        this.$options.template = this.template;
-    },
 
     methods: {
         updateContactWish(event)

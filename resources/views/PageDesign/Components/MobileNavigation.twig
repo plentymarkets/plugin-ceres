@@ -1,49 +1,81 @@
 <script type="x/template" id="vue-mobile-navigation">
     <div class="mobile-navigation">
 
-        <ul class="breadcrumb">
-            <li class="btn-close" @click="closeNavigation()"></li>
+        <div v-show="isNavigationInitialized">
+            <ul class="breadcrumb">
+                <li class="btn-close" @click="closeNavigation()"></li>
 
-            <li class="breadcrumb-item" @click="slideTo(navigationTree, true)">
-                <i class="fa fa-home" aria-hidden="true"></i>
-            </li>
+                <li class="breadcrumb-item" @click="slideTo(null, true)">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </li>
 
-            <li  class="breadcrumb-item" v-for="breadcrumb in breadcrumbs" @click="slideTo(breadcrumb.layer, true)">
-                ${ breadcrumb.name }
-            </li>
-        </ul>
+                <li  class="breadcrumb-item" v-for="breadcrumb in breadcrumbs" @click="slideTo(breadcrumb.parent, true)">
+                    ${ breadcrumb.name }
+                </li>
+            </ul>
+            <ul v-menu id="menu-1" class="mainmenu menu-active">
+                <li class="ddown" v-if="dataContainer1.parent" @click="slideTo(dataContainer1.parent && dataContainer1.parent.parent || null, true)">
+                    <span class="nav-direction btn-up">
+                        <i class="fa fa-lg fa-level-up" aria-hidden="true"></i>
+                    </span>
+                </li>
 
+                <li class="ddown" v-for="category in dataContainer1.categories">
+                    <a :href="getCategoryUrl(category.url)">${ category.details[0].name }</a>
+                    <span class="nav-direction" v-if="category.childCount" @click="slideTo(category)">
+                        <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                </li>
+                <template v-if="dataContainer1.categories[0]">
+                    <li class="ddown" v-for="number in dataContainer1.categories[0].siblingCount - dataContainer1.categories.length">
+                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                    </li>
+                </template>
+                <template v-else-if="dataContainer1.parent">
+                    <li class="ddown" v-for="number in dataContainer1.parent.childCount">
+                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                    </li>
+                </template>
+            </ul>
 
-        <ul v-menu id="menu-1" class="mainmenu menu-active">
-            <li class="ddown" v-if="parentCategories" @click="slideTo(parentCategories, true)">
-                <span class="nav-direction btn-up">
-                    <i class="fa fa-lg fa-level-up" aria-hidden="true"></i>
-                </span>
-            </li>
+            <ul v-menu id="menu-2" class="mainmenu">
+                <li class="ddown" v-if="dataContainer2.parent" @click="slideTo(dataContainer2.parent && dataContainer2.parent.parent || null, true)">
+                    <span class="nav-direction btn-up">
+                        <i class="fa fa-lg fa-level-up" aria-hidden="true"></i>
+                    </span>
+                </li>
 
-            <li class="ddown" v-for="category in dataContainer1" v-show="!category.hideCategory">
-                <a :href="category.url" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
+                <li  class="ddown" v-for="category in dataContainer2.categories">
+                    <a :href="getCategoryUrl(category.url)">${ category.details[0].name }</a>
+                    <span class="nav-direction" v-if="category.childCount" @click="slideTo(category)">
+                        <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                </li>
+                <template v-if="dataContainer2.categories[0]">
+                    <li class="ddown" v-for="number in dataContainer2.categories[0].siblingCount - dataContainer2.categories.length">
+                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                    </li>
+                </template>
+                <template v-else-if="dataContainer2.parent">
+                    <li class="ddown" v-for="number in dataContainer2.parent.childCount">
+                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                    </li>
+                </template>
+            </ul>
+        </div>
 
-                <span class="nav-direction" v-if="category.children && category.showChildren" @click="slideTo(category.children)">
-                    <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
-                </span>
-            </li>
-        </ul>
+        <template v-if="!isNavigationInitialized">
+            <ul class="breadcrumb">
+                <li class="btn-close" @click="closeNavigation()"></li>
 
-        <ul v-menu id="menu-2" class="mainmenu">
-            <li class="ddown" v-if="parentCategories" @click="slideTo(parentCategories, true)">
-                <span class="nav-direction btn-up">
-                    <i class="fa fa-lg fa-level-up" aria-hidden="true"></i>
-                </span>
-            </li>
+                <li class="breadcrumb-item">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </li>
+            </ul>
 
-            <li class="ddown" v-for="category in dataContainer2" v-show="!category.hideCategory">
-                <a :href="category.url" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
-                
-                <span class="nav-direction" v-if="category.children && category.showChildren" @click="slideTo(category.children)">
-                    <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
-                </span>
-            </li>
-        </ul>
+            <div class="loading">
+                {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
+            </div>
+        </template>
     </div>
 </script>

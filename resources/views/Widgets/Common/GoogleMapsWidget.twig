@@ -1,0 +1,26 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+<div class="widget widget-google-maps">
+    {% if geocoding_data is not empty %}
+        <google-maps-widget google-api-key="{{ geocoding_data.apiKey }}"
+                            address="{{ geocoding_data.address }}"
+                            :lat="{{ geocoding_data.lat }}"
+                            :lng="{{ geocoding_data.lng }}"
+                            :zoom="{{ widget.settings.zoom.mobile | default(16) }}"
+                            maptype="{{ widget.settings.maptype.mobile }}"
+                            aspect-ratio="{{ widget.settings.aspectRatio.mobile }}">
+            <div class="d-flex flex-center h-100 position-absolute w-100 text-muted">
+                <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
+            </div>
+        </google-maps-widget>
+
+    {% elseif isPreview %}
+        <div class="widget-placeholder {{ widget.settings.aspectRatio.mobile }}">
+            <div>
+                <p class="title">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderTitle") }}</p>
+                <p class="description">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderDescription") }}</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+

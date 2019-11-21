@@ -12,6 +12,17 @@ This is a plugin for [plentymarkets 7](https://www.plentymarkets.com). The [IO](
 
 For detailed information about plugin provisioning refer to [plentymarkets developers](https://developers.plentymarkets.com/dev-doc/basics#plugin-provisioning).
 
+## Quick start
+
+If you want make your own individual changes to the Ceres plugin, you need to follow the following steps.
+
+1. Install node.js in the LTS version from [nodejs.org](https://nodejs.org/en/).
+2. Open your console and navigate to the Ceres directory.
+3. Run the command **npm install**.
+4. After you have integrated your changes, run the command **npm run build**.
+
+Your Javascript, widget and SCSS changes have now been assembled locally. 
+
 ## Plugin documentation
 
 - Learn how to create your [first plentymarkets plugin](https://developers.plentymarkets.com/tutorials/helloworld)

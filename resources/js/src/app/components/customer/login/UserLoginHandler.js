@@ -1,7 +1,9 @@
 import { isDefined } from "../../../helper/utils";
-const ApiService = require("services/ApiService");
+import ValidationService from "../../../services/ValidationService";
+import Vue from "vue";
+import { mapGetters } from "vuex";
 
-import ValidationService from "services/ValidationService";
+const ApiService = require("../../../services/ApiService");
 
 Vue.component("user-login-handler", {
 
@@ -18,15 +20,13 @@ Vue.component("user-login-handler", {
         }
     },
 
-    computed: Vuex.mapGetters([
+    computed: mapGetters([
         "username",
         "isLoggedIn"
     ]),
 
     created()
     {
-        this.$options.template = this.template;
-
         ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
             .done(response =>
             {

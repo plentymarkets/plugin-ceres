@@ -12,12 +12,21 @@ body .wrapper-main{
     }
 }
 
+.category-contact .main .container-max
+{
+    background-color: $white;
+    padding-top: $spacer;
+    margin-top: 2 * $spacer;
+    margin-bottom: 2 * $spacer;
+}
+
 .page-content{
     padding-top: $spacer;
     background-color: $gray-lightest;
     &.basket,
     &.checkout,
     &.contact,
+    &.wishlist,
     &.myaccount {
         &:not(.checkout):not(.basket) {
             background-color: $white;
@@ -48,10 +57,11 @@ body .wrapper-main{
     .default-not-found {
         background-color: rgb(247, 247, 249);
     }
-    .not-found-text {
-        font-size: 115px;
-        text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
-    }
+}
+
+.not-found-text {
+    font-size: 115px;
+    text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
 }
 
 .rating{
@@ -117,8 +127,9 @@ a:active {
     float: none;
 }
 
-.bg-white {
-    background-color: $white !important;
+.flex-center {
+    align-items: center;
+    justify-content: center;
 }
 
 .text-wrap {
@@ -129,9 +140,24 @@ a:active {
     z-index: 1;
 }
 
+.sticky-element.is-sticky {
+    z-index: $zindex-sticky !important;
+}
+
+.inline-select {
+    margin-left: -7px;
+    text-decoration: underline;
+    font-weight: inherit;
+}
+
 @each $color, $value in $theme-colors {
     @include bg-variant(".bg-#{$color}", $value);
     .bg-#{$color} {
         @include context-bg($value);
     }
+}
+
+.fa.none {
+    @extend .fa-circle;
+    color: transparent !important;
 }

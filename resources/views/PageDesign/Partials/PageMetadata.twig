@@ -1,0 +1,81 @@
+{% set details = null %}
+{% if category is defined and category is not null %}
+    {% set details = category.details[0] %}
+{% endif %}
+
+{% set robots = '' %}
+{% set description = '' %}
+{% set keywords = '' %}
+{% set image = '' %}
+{% set title = '' %}
+
+{% if block('robots') is defined %}
+    {% set robots = block('robots') | default('NOINDEX, NOFOLLOW') %}
+{% elseif details is not null %}
+    {% set robots = details.metaRobots | replace({'_': ', '}) %}
+{% endif %}
+
+{% if block('description') is defined %}
+    {% set description = block('description') %}
+{% elseif details is not null %}
+    {% set description = details.metaDescription %}
+{% endif %}
+
+{% if block('keywords') is defined %}
+    {% set keywords = block('keywords') %}
+{% elseif details is not null %}
+    {% set keywords = details.metaKeywords %}
+{% endif %}
+
+{% if block('image') is defined %}
+    {% set image = block('image') | default(ceresConfig.header.companyLogo) %}
+{% elseif details is not null %}
+    {% set image = details.imagePath | default(ceresConfig.header.companyLogo) %}
+{% endif %}
+
+{% if block('title') is defined %}
+    {% set title = block('title') %}
+{% elseif details is not null %}
+    {% set title = details.metaTitle | default(details.name) %}
+{% endif %}
+
+{% set type             = block('type') | default('article') %}
+{% set url              = block('url') | default(services.url.getCanonicalURL()) | default(webstoreConfig.domainSsl) %}
+
+{% if title | trim is not empty %}
+    {% set title = title ~ " | " %}
+{% endif %}
+{% set title = title ~ trans("Ceres::Template.headerCompanyName") %}
+
+{% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'layout/') %}
+    {% set image = plugin_path('Ceres') ~ "/" ~ image %}
+{% endif %}
+
+<meta name="robots" content="{% if forceNoIndex %}NOINDEX{% else %}{{ robots }}{% endif %}">
+{% if description | trim is not empty %}
+    <meta name="description" content="{{ description | trim }}">
+{% endif %}
+{% if keywords | trim is not empty %}
+    <meta name="keywords" content="{{ keywords | trim }}">
+{% endif %}
+<meta property="og:title" content="{{ title | trim | raw }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="{{ url | trim }}"/>
+<meta property="og:image" content="{{ image | trim }}"/>
+
+<script type="application/ld+json">
+{% block schemaOrg %}
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": {{ url | json_encode | raw }},
+    "potentialAction":{
+        "@type": "SearchAction",
+        "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl ~ urls.search }}?query={search_term}",
+        "query-input": "required name=search_term"
+    }
+}
+{% endblock %}
+</script>
+
+<title>{{ title | trim | raw }}</title>

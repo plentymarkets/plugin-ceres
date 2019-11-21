@@ -1,4 +1,5 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("order-documents", {
 
@@ -41,11 +42,6 @@ Vue.component("order-documents", {
                 "return_note"
             ]
         }
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     computed:

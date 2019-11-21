@@ -1,8 +1,9 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.returnCenter") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.returnCenter") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
@@ -19,7 +20,7 @@
 
         <hr>
 
-		<order-return template="#vue-order-return" :init-order-data="{{ orderData | json_encode }}"></order-return>
+		<order-return :init-order-data="{{ orderData | json_encode }}"></order-return>
 
 	</div>
 {% endblock %}

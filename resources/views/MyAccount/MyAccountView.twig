@@ -1,8 +1,9 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.myAccount") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.myAccount") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
@@ -77,10 +78,11 @@
                             {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}
                         </h4>
                         <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountAll") }} {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}</p>
-                        <div class="shipping-addresses-select">
+                        <div class="invoice-addresses-select">
                             <invoice-address-select
                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                                :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                                :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                             </invoice-address-select>
                         </div>
                     </div>
@@ -92,7 +94,8 @@
                         <div class="shipping-addresses-select">
                             <shipping-address-select
                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
-                                :required-address-fields="{{ requiredShippingAddressFields | json_encode }}">
+                                :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
+                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                             </shipping-address-select>
                         </div>
                     </div>

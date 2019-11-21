@@ -1,7 +1,9 @@
-import ApiService from "services/ApiService";
-import TranslationService from "services/TranslationService";
-import NotificationService from "services/NotificationService";
+import TranslationService from "../../services/TranslationService";
+import NotificationService from "../../services/NotificationService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import Vue from "vue";
+
+const ApiService = require("../../services/ApiService");
 
 Vue.component("order-history-list", {
 
@@ -16,11 +18,6 @@ Vue.component("order-history-list", {
         {
             type: Number,
             default: 5
-        },
-        hintText:
-        {
-            type: String,
-            default: null
         },
         allowPaymentProviderChange:
         {
@@ -50,8 +47,6 @@ Vue.component("order-history-list", {
 
     created()
     {
-        this.$options.template = this.template;
-
         if (!isNullOrUndefined(this.initialData))
         {
             this.orderList = this.initialData;

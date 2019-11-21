@@ -8,19 +8,12 @@
     "maxPerPage": 1,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\OrderReturnHistoryWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": {
             "type": "select",
             "required": true,
             "defaultValue": "primary",
             "options": "@include(appearance)"
-        },
-        "hintText": {
-            "type": "codeEditor",
-            "defaultValue": "",
-            "options": {
-                "name": "Widget.orderHistoryHintTextLabel",
-                "tooltipText": "Widget.orderHistoryHintTextTooltip"
-            }
         },
         "returnsPerPage": {
             "type": "select",
@@ -51,6 +44,7 @@
                     }
                 ]
             }
-        }
+        },
+        "spacing":"@include(spacingMargin)"
     }
 }

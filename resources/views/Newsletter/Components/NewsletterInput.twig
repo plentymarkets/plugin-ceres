@@ -1,12 +1,5 @@
 <script type="x/template" id="vue-newsletter-input">
-        <form :id="'newsletter-input-form_' + _uid">
-            <div class="row">
-                <div class="col-xs-12" v-if="title">
-                    <p class="h4">${ title }</p>
-                    <p v-if="subTitle">${ subTitle }</p>
-                </div>
-            </div>
-
+        <form :id="'newsletter-input-form_' + _uid" method="post" @submit.prevent="validateData">
             <div class="row">
                 <div class="col-xs-6" v-if="showNameInputs">
                     <div class="input-unit">
@@ -25,7 +18,7 @@
                     <div class="input-group">
                         <div class="input-unit" data-validate="mail">
                             <label :for="'email-input-id_' + _uid">{{ trans("Ceres::Template.newsletterEmail") }} *</label>
-                            <input type="email" :id="'email-input-id_' + _uid" v-model="email">
+                            <input type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
                         </div>
                     </div>
                 </div>
@@ -48,7 +41,7 @@
 
                 <div class="col-xs-12 mt-3">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-block btn-primary btn-appearance" @click="validateData" :disabled="isDisabled">
+                            <button type="button" class="btn btn-block btn-primary btn-appearance" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
                                 <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                 {{ trans('Ceres::Template.newsletterSubscribeButtonLabel') }}
                             </button>

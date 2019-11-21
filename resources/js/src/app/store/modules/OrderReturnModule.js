@@ -1,4 +1,4 @@
-import ApiService from "services/ApiService";
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
@@ -10,20 +10,20 @@ const state =
 const mutations =
     {
         setOrderReturnData(state, orderData)
-		{
+        {
             orderData.order.orderItems = orderData.order.orderItems.filter(orderItem => orderItem.quantity !== 0);
 
             state.orderData = orderData;
         },
 
         updateOrderReturnItems(state, { quantity, orderItem })
-		{
+        {
             if (quantity <= orderItem.quantity)
-			{
+            {
                 const orderItemIndex = state.orderReturnItems.findIndex(entry => entry.orderItem.itemVariationId === orderItem.itemVariationId);
 
                 if (quantity !== 0)
-				{
+                {
                     if (orderItemIndex === -1)
                     {
                         state.orderReturnItems.push({ quantity, orderItem });
@@ -35,7 +35,7 @@ const mutations =
                     }
                 }
                 else
-				{
+                {
                     state.orderReturnItems.splice(orderItemIndex, 1);
                 }
             }
@@ -50,7 +50,7 @@ const mutations =
 const actions =
     {
         sendOrderReturn({ state })
-		{
+        {
             return new Promise((resolve, reject) =>
             {
                 if (state.orderReturnItems.length > 0)
@@ -84,7 +84,9 @@ const getters =
     {
         getOrderItemImage: state => orderItemId => state.orderData.itemImages[orderItemId],
 
-        getOrderItemURL: state => orderItemId => state.orderData.itemURLs[orderItemId]
+        getOrderItemURL: state => orderItemId => state.orderData.itemURLs[orderItemId],
+
+        getOrderItemVariation: state => orderItemId => state.orderData.variations[orderItemId]
     };
 
 export default

@@ -2,15 +2,13 @@
     {% for content in container_internal(containerName, object) %}
         {{ content|raw }}
     {% endfor %}
-
     {% if object == null %}
-        {% for content in container(containerName) %}
+        {% for content in container(containerName) if not isSafeMode or content.plugin == "Plenty" %}
             {{ content.result|raw|filter_tags(containerName) }}
         {% endfor %}
     {% else %}
-        {% for content in container(containerName, object) %}
+        {% for content in container(containerName, object) if not isSafeMode or content.plugin == "Plenty"  %}
             {{ content.result|raw|filter_tags(containerName) }}
         {% endfor %}
     {% endif %}
-
 {% endmacro %}

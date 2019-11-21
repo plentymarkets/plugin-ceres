@@ -1,6 +1,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {{ component( "Ceres::Basket.Components.BasketList" ) }}
 {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
+{{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
 
 <script type="x/template" id="vue-basket-preview-hover">
     <div class="basket-preview-hover-wrapper" :class="{ 'empty': !basketItems.length }">
@@ -14,7 +15,7 @@
                     </button>
                 </header>
 
-                <basket-list class="item-list" v-if="basketItems.length" size="small"></basket-list>
+                <basket-list class="item-list" v-if="basketItems.length" :is-preview="true"></basket-list>
                 <div class="no-items" v-else>{{ trans("Ceres::Template.basketNoItems") }}</div>
 
                 <div class="basket-totals" v-if="basketItems.length">
@@ -26,6 +27,11 @@
                             <div>${ notification.message }</div>
                         </div>
                     </div>
+                    
+                    {% if ceresConfig.basket.showShippingCountrySelect %}
+                        <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                        <hr>
+                    {% endif %}
 
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
                     <basket-totals></basket-totals>

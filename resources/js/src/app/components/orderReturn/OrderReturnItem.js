@@ -1,48 +1,77 @@
+import Vue from "vue";
+
 Vue.component("order-return-item", {
 
-    props: [
-        "orderItem",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-order-return-item"
+        },
+        orderItem:
+        {
+            type: Object,
+            required: true
+        },
+        itemDetailsData:
+        {
+            type: Array,
+            default: () => []
+        },
+        isNet:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
 
     data()
-	{
+    {
         return {
-            isChecked: false,
             returnCount: 0
         };
     },
 
     created()
-	{
-        this.$options.template = this.template;
+    {
         vueEventHub.$on("select-all-items", () => this.selectItem());
     },
 
     computed:
     {
         orderItemImage()
-		{
+        {
             return this.$store.getters.getOrderItemImage(this.orderItem.itemVariationId);
         },
 
         orderItemURL()
-		{
+        {
             return this.$store.getters.getOrderItemURL(this.orderItem.itemVariationId);
+        },
+
+        variation()
+        {
+            return this.$store.getters.getOrderItemVariation(this.orderItem.itemVariationId);
+        },
+
+        amount()
+        {
+            return this.orderItem.amounts.find((amount) => !amount.isSystemCurrency) || this.orderItem.amounts[0];
         }
     },
 
     methods:
     {
-        validateValue()
-		{
+        updateQuantity(quantity)
+        {
+            this.returnCount = quantity;
             if (this.returnCount > this.orderItem.quantity)
-			{
+            {
                 this.returnCount = this.orderItem.quantity;
             }
-            else if (this.returnCount <= 0)
-			{
-                this.returnCount = 1;
+            else if (this.returnCount < 0)
+            {
+                this.returnCount = 0;
             }
 
             this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
@@ -50,23 +79,12 @@ Vue.component("order-return-item", {
 
         selectItem()
         {
-            this.isChecked = true;
-
-            this.updateValue();
+            this.returnCount = this.orderItem.quantity;
         },
 
-        updateValue()
-		{
-            if (this.isChecked)
-			{
-                this.returnCount = this.orderItem.quantity;
-            }
-            else
-			{
-                this.returnCount = 0;
-            }
-
-            this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
+        isDataFieldVisible(value)
+        {
+            return this.itemDetailsData.includes(value);
         }
     }
 });

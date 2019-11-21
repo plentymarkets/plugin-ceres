@@ -1,4 +1,4 @@
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 const cloneDeep = require("lodash/cloneDeep");
 
 export default function(store)

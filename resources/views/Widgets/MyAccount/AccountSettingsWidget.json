@@ -7,16 +7,12 @@
     "position": 100,
     "widgetClass": "Ceres\\Widgets\\MyAccount\\AccountSettingsWidget",
     "settings": {
+        "customClass":"@include(customClass)",
         "appearance": { 
             "type": "select", 
             "defaultValue": "primary", 
             "options": "@include(appearance)" 
         },
-        "text": {
-            "type": "codeEditor",
-            "options": {
-                "name": "Widget.myAccountHintTextLabel"
-            }
-        }
+        "spacing":"@include(spacing)"
     }
 }
