@@ -16,8 +16,8 @@ class BaseSettingFactory
 
     public static function create($data = [])
     {
-        /** @var static $instance */
-        $instance = pluginApp(static::class);
+        /** @var BaseSettingFactory $instance */
+        $instance = pluginApp(BaseSettingFactory::class);
         $instance->data = $data;
         return $instance;
     }
