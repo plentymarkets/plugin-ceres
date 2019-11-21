@@ -12,7 +12,7 @@
 {% set expandableChildren = widget.settings.expandableChildren.mobile %}
 {% set showItemCount = widget.settings.showItemCount.mobile | default(false) %}
 
-<div class="widget widget-category-navigation widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-side-navigation widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
 
         <div class="category-title">{{ Twig.trans("Ceres::Template.itemCategories") }}</div>

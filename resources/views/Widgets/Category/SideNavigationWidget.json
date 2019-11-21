@@ -1,11 +1,11 @@
 {
-    "identifier": "Ceres::CategoryNavigationWidget",
-    "label": "Widget.categoryNavigationLabel",
-    "previewImageURL": "/images/widgets/category-navigation.svg",
+    "identifier": "Ceres::SideNavigationWidget",
+    "label": "Widget.sideNavigationLabel",
+    "previewImageURL": "/images/widgets/side-navigation.svg",
     "type": "categoryitem",
     "categories": ["categoryitem"],
     "position": 1100,
-    "widgetClass": "Ceres\\Widgets\\Category\\CategoryNavigationWidget",
+    "widgetClass": "Ceres\\Widgets\\Category\\SideNavigationWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {
@@ -18,14 +18,14 @@
             "type": "checkbox",
             "defaultValue": false,
             "options": {
-                "name": "Widget.categoryNavigationExpandableChildrenLabel"
+                "name": "Widget.sideNavigationExpandableChildrenLabel"
             }
         },
         "showItemCount": {
             "type": "checkbox",
             "defaultValue": false,
             "options": {
-                "name": "Widget.categoryNavigationShowItemCount"
+                "name": "Widget.sideNavigationShowItemCount"
             }
         },
         "spacing": {
