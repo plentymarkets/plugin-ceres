@@ -109,8 +109,9 @@
             text-align: center;
             float: left;
             padding: 0.75rem 0;
+            position: relative;
+            z-index: 1;
         }
-
         .nav-link {
             padding: 0.75rem 2rem;
             width: 100%;
