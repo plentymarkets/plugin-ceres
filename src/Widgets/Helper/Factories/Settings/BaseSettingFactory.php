@@ -14,6 +14,14 @@ class BaseSettingFactory
 {
     protected $data = [];
 
+    public static function create($data = [])
+    {
+        /** @var static $instance */
+        $instance = pluginApp(static::class);
+        $instance->data = $data;
+        return $instance;
+    }
+
     /**
      * Set the type of the setting.
      *

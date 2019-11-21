@@ -25,10 +25,54 @@ use Ceres\Widgets\Helper\Factories\Settings\TextareaSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\TextSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\UUIDSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\UrlSettingFactory;
+use Plenty\Modules\ShopBuilder\Contracts\DynamicWidget;
 
 class WidgetSettingsFactory
 {
     private $settings = [];
+    private $pointer = null;
+
+    /**
+     * Create a new factory instance and initialize values from given widget class.
+     *
+     * @param string $parentWidgetClass
+     * @return WidgetSettingsFactory
+     */
+    public static function inherit($parentWidgetClass)
+    {
+        $parentSettings = [];
+        $parentWidget = pluginApp($parentWidgetClass);
+        if($parentWidget instanceof DynamicWidget)
+        {
+            $parentSettings = $parentWidget->getSettings();
+        }
+        return self::create($parentSettings);
+    }
+
+    /**
+     * Create a new factory instance with initial values.
+     *
+     * @param array $data
+     * @return WidgetSettingsFactory
+     */
+    public static function create($data = [])
+    {
+        /** @var WidgetSettingsFactory $instance */
+        $instance = pluginApp(WidgetSettingsFactory::class);
+        foreach($data as $key => $settingData)
+        {
+            if(array_key_exists('children', $settingData))
+            {
+                $instance->settings[$key] = ContainerSettingFactory::create($settingData);
+            }
+            else
+            {
+                $instance->settings[$key] = BaseSettingFactory::create($settingData);
+            }
+        }
+
+        return $instance;
+    }
 
     /**
      * Create a generic widget settings entry.
@@ -41,7 +85,7 @@ class WidgetSettingsFactory
     {
         /** @var BaseSettingFactory $setting */
         $setting = pluginApp(BaseSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -54,7 +98,7 @@ class WidgetSettingsFactory
     {
         /** @var ContainerSettingFactory $setting */
         $setting = pluginApp(ContainerSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -68,7 +112,8 @@ class WidgetSettingsFactory
     {
         /** @var ContainerSettingFactory $setting */
         $setting = pluginApp(ContainerSettingFactory::class);
-        $this->settings[$key] = $setting->withType("vertical");
+        $setting->withType("vertical");
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -82,7 +127,8 @@ class WidgetSettingsFactory
     {
         /** @var ContainerSettingFactory $setting */
         $setting = pluginApp(ContainerSettingFactory::class);
-        $this->settings[$key] = $setting->withType("horizontal");
+        $setting->withType("horizontal");
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -96,7 +142,7 @@ class WidgetSettingsFactory
     {
         /** @var TextSettingFactory $setting */
         $setting = pluginApp(TextSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -110,7 +156,7 @@ class WidgetSettingsFactory
     {
         /** @var CheckboxSettingFactory $setting */
         $setting = pluginApp(CheckboxSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -124,7 +170,7 @@ class WidgetSettingsFactory
     {
         /** @var DateSettingFactory $setting */
         $setting = pluginApp(DateSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -138,7 +184,7 @@ class WidgetSettingsFactory
     {
         /** @var FileSettingFactory $setting */
         $setting = pluginApp(FileSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -152,7 +198,7 @@ class WidgetSettingsFactory
     {
         /** @var TextareaSettingFactory $setting */
         $setting = pluginApp(TextareaSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -164,7 +210,7 @@ class WidgetSettingsFactory
     {
         $setting = $this->createSetting($key);
         $setting->withType('number');
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -178,7 +224,7 @@ class WidgetSettingsFactory
     {
         /** @var DoubleSettingFactory $setting */
         $setting = pluginApp(DoubleSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -192,7 +238,7 @@ class WidgetSettingsFactory
     {
         /** @var SelectSettingFactory $setting */
         $setting = pluginApp(SelectSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -206,7 +252,7 @@ class WidgetSettingsFactory
     {
         /** @var SuggestionSettingFactory $setting */
         $setting = pluginApp(SuggestionSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -220,7 +266,7 @@ class WidgetSettingsFactory
     {
         /** @var CategorySettingFactory $setting */
         $setting = pluginApp(CategorySettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -230,10 +276,10 @@ class WidgetSettingsFactory
      */
     public function createColor($key)
     {
-        $colorSetting = $this->createSetting($key);
-        $colorSetting->withType('color');
-        $this->settings[$key] = $colorSetting;
-        return $colorSetting;
+        $setting = $this->createSetting($key);
+        $setting->withType('color');
+        $this->addSetting($key, $setting);
+        return $setting;
     }
 
     /**
@@ -246,7 +292,7 @@ class WidgetSettingsFactory
     {
         /** @var SliderSettingFactory $setting */
         $setting = pluginApp(SliderSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -260,7 +306,7 @@ class WidgetSettingsFactory
     {
         /** @var CheckboxGroupSettingFactory $setting */
         $setting = pluginApp(CheckboxGroupSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -274,7 +320,7 @@ class WidgetSettingsFactory
     {
         /** @var RadioGroupSettingFactory $setting */
         $setting = pluginApp(RadioGroupSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -288,7 +334,7 @@ class WidgetSettingsFactory
     {
         /** @var UrlSettingFactory $setting */
         $setting = pluginApp(UrlSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -301,7 +347,7 @@ class WidgetSettingsFactory
         /** @var EditorSettingFactory $setting */
         $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('noteEditor');
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -314,7 +360,7 @@ class WidgetSettingsFactory
         /** @var EditorSettingFactory $setting */
         $setting = pluginApp(EditorSettingFactory::class);
         $setting->withType('codeEditor');
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -328,10 +374,10 @@ class WidgetSettingsFactory
     {
         /** @var UUIDSettingFactory $setting */
         $setting = pluginApp(UUIDSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
-  
+
     /**
      * Create a manufacturer picker
      *
@@ -342,7 +388,7 @@ class WidgetSettingsFactory
     {
         /** @var ManufacturerSettingFactory $setting */
         $setting = pluginApp(ManufacturerSettingFactory::class);
-        $this->settings[$key] = $setting;
+        $this->addSetting($key, $setting);
         return $setting;
     }
 
@@ -353,7 +399,7 @@ class WidgetSettingsFactory
     {
         /** @var CustomClassSettingFactory $setting */
         $setting = pluginApp(CustomClassSettingFactory::class);
-        $this->settings['customClass'] = $setting;
+        $this->addSetting('customClass', $setting);
         return $setting;
     }
 
@@ -365,7 +411,7 @@ class WidgetSettingsFactory
     {
         /** @var AppearanceSettingFactory $setting */
         $setting = pluginApp(AppearanceSettingFactory::class, ['optional' => $optional]);
-        $this->settings['appearance'] = $setting;
+        $this->addSetting('appearance', $setting);
         return $setting;
     }
 
@@ -376,7 +422,7 @@ class WidgetSettingsFactory
     {
         /** @var IconSettingFactory $setting */
         $setting = pluginApp(IconSettingFactory::class);
-        $this->settings['icon'] = $setting;
+        $this->addSetting('icon', $setting);
         return $setting;
     }
 
@@ -389,7 +435,7 @@ class WidgetSettingsFactory
     {
         /** @var SpacingSettingFactory $setting */
         $setting = pluginApp(SpacingSettingFactory::class, ['usePadding' => $usePadding, 'useMargin' => $useMargin]);
-        $this->settings['spacing'] = $setting;
+        $this->addSetting('spacing', $setting);
         return $setting;
     }
 
@@ -400,7 +446,7 @@ class WidgetSettingsFactory
     {
         /** @var ButtonSizeSettingFactory $setting */
         $setting = pluginApp(ButtonSizeSettingFactory::class);
-        $this->settings['buttonSize'] = $setting;
+        $this->addSetting('buttonSize', $setting);
         return $setting;
     }
 
@@ -416,5 +462,64 @@ class WidgetSettingsFactory
             $result[$key] = $setting->toArray();
         }
         return $result;
+    }
+
+    /**
+     * Set a settings key to insert new settings after.
+     * The key might be a path to nested setting entries.
+     * If so, the nested factory instance will be returned.
+     * By default new settings will be appended at the end.
+     *
+     * @param $key
+     * @return $this
+     */
+    public function withPointer($key)
+    {
+        $keyPath = explode(".", $key);
+        $currentKey = array_shift($keyPath);
+        if(count($keyPath))
+        {
+            // key references nested setting => try to access children
+            $setting = $this->settings[$currentKey];
+            if($setting instanceof ContainerSettingFactory)
+            {
+                // continue resolving path in child factory instance
+                return $setting->children->withPointer(implode(".", $keyPath));
+            }
+
+            // key not found or references setting has no nested children => reset pointer
+            $this->pointer = -1;
+        }
+        else
+        {
+            // key references setting of this factory => calculate new pointer
+            $pointer = array_search($currentKey, array_keys($this->settings));
+            if($pointer !== false)
+            {
+                $this->pointer = $pointer + 1;
+            }
+            else
+            {
+                $this->pointer = -1;
+            }
+        }
+
+        // pointer has
+        return $this;
+    }
+
+    private function addSetting($key, $setting)
+    {
+        if(is_null($this->pointer) || $this->pointer < 0)
+        {
+            $this->pointer = count($this->settings);
+        }
+
+        $settings = array_slice($this->settings, 0, $this->pointer, true)
+            + [$key => $setting]
+            + array_slice($this->settings, $this->pointer, null, true);
+
+        $this->pointer++;
+        $this->settings = $settings;
     }
 }
