@@ -100,7 +100,13 @@ Vue.directive("sidenavigation-children", {
         const isActive   = binding.value.isActive;
         const showItemCount = binding.value.showItemCount;
 
-        const sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive, showItemCount);
+        const sidenavigationChildrenLoader = new SidenavigationChildrenLoader(
+            el,
+            categoryId,
+            currentUrl,
+            isActive,
+            showItemCount
+        );
 
         el.addEventListener("click", () =>
         {
