@@ -32,7 +32,11 @@ class SidenavigationChildrenLoader
     {
         return new Promise(resolve =>
         {
-            ApiService.get("/rest/io/categorytree/children", { categoryId: this.categoryId, currentUrl: this.currentUrl, showItemCount: this.showItemCount })
+            ApiService.get("/rest/io/categorytree/children", {
+                categoryId: this.categoryId,
+                currentUrl: this.currentUrl,
+                showItemCount: this.showItemCount ? 1 : 0
+            })
                 .then(result =>
                 {
                     this.template = result;
@@ -94,7 +98,7 @@ Vue.directive("sidenavigation-children", {
         const categoryId = binding.value.categoryId;
         const currentUrl = binding.value.currentUrl;
         const isActive   = binding.value.isActive;
-        const showItemCount = binding.value.isActive;
+        const showItemCount = binding.value.showItemCount;
 
         const sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive, showItemCount);
 

@@ -119,7 +119,7 @@
 
                 {% if category.children is not empty %}
                     {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
-                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl, spacingPadding, inlinePadding, expandableChildren) }}
+                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl, spacingPadding, inlinePadding, showItemCount, expandableChildren) }}
                     {% endfor %}
                 {% endif %}
             </li>
