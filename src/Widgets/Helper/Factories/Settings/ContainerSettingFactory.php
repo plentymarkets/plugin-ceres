@@ -20,6 +20,22 @@ class ContainerSettingFactory extends BaseSettingFactory
      */
     public $children;
 
+    /**
+     * Create a new factory instance with initial value.
+     *
+     * @param array $data
+     * @return ContainerSettingFactory
+     */
+    public static function create($data = [])
+    {
+        /** @var ContainerSettingFactory $instance */
+        $instance = pluginApp(ContainerSettingFactory::class);
+        $instance->children = WidgetSettingsFactory::create($data['children']);
+        unset($data['children']);
+        $instance->data = $data;
+        return $instance;
+    }
+
     public function __construct()
     {
         $this->children = pluginApp(WidgetSettingsFactory::class);
