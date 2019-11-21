@@ -9,12 +9,16 @@
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
+{% set openableChildren = widget.settings.openableChildren.mobile %}
+
 <div class="widget widget-category-navigation widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
+
         <div class="category-title">{{ Twig.trans("Ceres::Template.itemCategories") }}</div>
             {{ Twig.include("Ceres::PageDesign.Partials.Header.SideNavigation", { 
                 spacingPadding: spacingPadding | json_encode,
-                inlinePadding : inlinePadding | json_encode })
+                inlinePadding : inlinePadding | json_encode,
+                openableChildren: openableChildren | json_encode })
             }}
         </div>
 

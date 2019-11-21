@@ -88,7 +88,7 @@
 
 {% endmacro %}
 
-{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding) %}
+{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding, openableChildren) %}
 
     {% import _self as sidemenu %}
     {% for category in categories if category.details[0] %}
@@ -99,17 +99,27 @@
         {% endif %}
 
         {% set currentUrl = currentUrl ~ "/" ~ category.details[0].nameUrl  %}
+        {% set isCategoryActive = false %}
+        {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
+            {% set isCategoryActive = true %}
+        {% endfor %}
+
         <ul>
-            <li class="nav-item {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
+            <li class="nav-item{% if isCategoryActive %} active{% endif %}">
+                {% if category.children is not empty and openableChildren %}
+                    <div class="expand_nav" v-sidenavigation-children="{ categoryId: {{ category.id }}, currentUrl: {{ currentUrl | json_encode }}, isActive: {{ isCategoryActive | json_encode }} }"><i class="fa fa-caret-right" aria-hidden="true"></i></div>
+                {% endif %}
+
                 <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
-                {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} bg-appearance{% endfor %}
+                {% if isCategoryActive %} bg-appearance{% endif %}
                 {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     {{ category.details[0].name }}
                 </a>
+
                 {% if category.children is not empty %}
                     {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
-                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl, spacingPadding, inlinePadding) }}
+                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl, spacingPadding, inlinePadding, openableChildren) }}
                     {% endfor %}
                 {% endif %}
             </li>
