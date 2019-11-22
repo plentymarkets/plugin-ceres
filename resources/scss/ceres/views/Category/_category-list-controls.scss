@@ -105,7 +105,7 @@
         cursor: pointer;
 
         .expand_nav {
-            width: 30px;
+            width: 1.75rem;
             text-align: center;
             float: left;
             padding: 0.75rem 0;
@@ -113,7 +113,7 @@
             z-index: 1;
         }
         .nav-link {
-            padding: 0.75rem 2rem;
+            padding: 0.75rem 1.75rem;
             width: 100%;
             position: relative;
         }
@@ -135,6 +135,9 @@
                 &:hover {
                     color: $gray-darker;
                     background: $gray-lightest;
+                    .filter-badge {
+                        background: $white;
+                    }
                 }
             }
             ul {
@@ -151,30 +154,36 @@
                 & > ul {
                     display: block;
                 }
-                ul {
-                    li {
+                ul li {
+                    a {
+                        padding-left: 3rem !important;
+                    }
+                    .expand_nav {
+                        margin-left: $nav-link-expandable-margin;
+                    }
+                    ul li {
                         a {
-                            padding-left: 3.5rem !important;
+                            padding-left: 4.25rem !important;
                         }
                         .expand_nav {
-                            padding-left: 2.25rem;
+                            margin-left: $nav-link-expandable-margin * 2;
                         }
                         ul li {
                             a {
-                                padding-left: 5rem !important;
+                                padding-left: 5.5rem !important;
                             }
                             .expand_nav {
-                                padding-left: 3.75rem;
+                                margin-left: $nav-link-expandable-margin * 3;
                             }
                             ul li {
                                 a {
-                                    padding-left: 6.5rem !important;
+                                    padding-left: 6.75rem !important;
                                 }
                                 .expand_nav {
-                                    padding-left: 5.25rem !important;
+                                    margin-left: $nav-link-expandable-margin * 4;
                                 }
                             } 
-                        }
+                        } 
                     }
                 }
             }
