@@ -36,6 +36,7 @@
     "images.variation.path",
     "images.variation.names.alternate",
     "images.variation.names.lang",
+    "properties.surcharge",
     "properties.property.id",
     "properties.property.isShownAtCheckout",
     "properties.property.position",
