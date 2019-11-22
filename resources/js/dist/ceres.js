@@ -57085,10 +57085,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_14__);
+
 
 
 
@@ -57106,7 +57108,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
+vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("create-update-address", {
   delimiters: ["${", "}"],
   props: {
     addressData: {
@@ -57158,7 +57160,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
     validate: function validate() {
       var _this = this;
 
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_11__["default"].validate(this.$refs.addressForm).done(function () {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].validate(this.$refs.addressForm).done(function () {
         _this.saveAddress();
       }).fail(function (invalidFields) {
         var fieldNames = [];
@@ -57188,8 +57190,8 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
           }
         }
 
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_11__["default"].markInvalidFields(invalidFields, "error");
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].markInvalidFields(invalidFields, "error");
+        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
           fields: fieldNames.join(", ")
         }));
       });
@@ -57262,7 +57264,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
       });
     },
     _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_11__["default"].markFailedValidationFields(this.$refs.addressForm, validationErrors);
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].markFailedValidationFields(this.$refs.addressForm, validationErrors);
       var errorMessage = "";
 
       for (var _i = 0, _Object$values = Object.values(validationErrors); _i < _Object$values.length; _i++) {
@@ -57294,7 +57296,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
             switch (optionType.typeId) {
               case 1:
                 {
-                  if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value) {
+                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.vatNumber) && this.addressData.vatNumber !== optionType.value) {
                     optionType.value = this.addressData.vatNumber;
                   }
 
@@ -57303,7 +57305,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
 
               case 4:
                 {
-                  if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
+                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.telephone) && this.addressData.telephone !== optionType.value) {
                     optionType.value = this.addressData.telephone;
                   }
 
@@ -57312,7 +57314,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
 
               case 6:
                 {
-                  if (this.addressData.postNumber && this.addressData.postNumber !== optionType.value) {
+                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.postNumber) && this.addressData.postNumber !== optionType.value) {
                     optionType.value = this.addressData.postNumber;
                   }
 
@@ -57321,7 +57323,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
 
               case 9:
                 {
-                  if (this.addressData.birthday && this.addressData.birthday !== optionType.value) {
+                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.birthday) && this.addressData.birthday !== optionType.value) {
                     optionType.value = this.addressData.birthday;
                   }
 
@@ -57330,7 +57332,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
 
               case 11:
                 {
-                  if (this.addressData.title && this.addressData.title !== optionType.value) {
+                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.title) && this.addressData.title !== optionType.value) {
                     optionType.value = this.addressData.title;
                   }
 
@@ -57339,7 +57341,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
 
               case 12:
                 {
-                  if (this.addressData.contactPerson && this.addressData.contactPerson !== optionType.value) {
+                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.contactPerson) && this.addressData.contactPerson !== optionType.value) {
                     optionType.value = this.addressData.contactPerson;
                   }
 
@@ -57373,7 +57375,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("create-update-address", {
       var pickupCondition = event.field === "showPickupStation" && event.field.value !== this.addressData.showPickupStation;
 
       if (genderCondition || countryCondition || pickupCondition) {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_11__["default"].unmarkAllFields(this.$refs.addressForm);
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].unmarkAllFields(this.$refs.addressForm);
       }
     }
   }
