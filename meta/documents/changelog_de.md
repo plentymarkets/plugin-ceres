@@ -1,5 +1,12 @@
 # Release Notes für Ceres
 
+## v4.4.2 (2019-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.1...4.4.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Bei Aufpreisen für Bestellmerkmale, die am Artikel geflegt wurden, kam es in der Artikelliste zu Anzeigefehlern. Dieses Verhalten wurde behoben.
+- Durch einen Fehler wurden Attribute nicht auf der Bestellbestätigungsseite angezeigt, wenn diese mit dem ShopBuilder erstellt wurde. Dies wurde behoben.
+
 ## v4.4.1 (2019-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.0...4.4.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben 
