@@ -139,6 +139,17 @@
                         background: $white;
                     }
                 }
+
+                span.placeholder
+                {
+                    background: $gray;
+                    opacity: .1;
+                    animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
+                    color: transparent;
+                    width: 10%;
+                    border-radius: 3px;
+                    display: inline-block;	
+                }
             }
             ul {
                 display: none;
