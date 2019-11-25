@@ -5,7 +5,7 @@
     "type": "default",
     "categories": ["navigation"],
     "position": 0,
-    "widgetClass": "Ceres\\Widgets\\Category\\NavigationTreeWidget",
+    "widgetClass": "Ceres\\Widgets\\Navigation\\NavigationTreeWidget",
     "settings": {
         "customClass":"@include(customClass)",
         "appearance": {
