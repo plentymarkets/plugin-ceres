@@ -91,7 +91,7 @@
 }
 
 .sidebar-categories,
-.widget-category-navigation {
+.widget-navigation-tree {
     background: $white;
     font-family: $font-family-heading;
 
@@ -135,9 +135,6 @@
                 &:hover {
                     color: $gray-darker;
                     background: $gray-lightest;
-                    .filter-badge {
-                        background: $white;
-                    }
                 }
             }
             ul {
