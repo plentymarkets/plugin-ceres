@@ -92,39 +92,32 @@
     {% import _self as sidemenu %}
 
     {% for category in categories if category.details[0] %}
-
         {% for entry in customEntries if entry.text is not empty %}
-            {% if entry.position == loop.parent.loop.index  %}
-
-                {% if entry.url.value is not empty %}
-                    {% if entry.url.type == 'category' %}
-                        {% set __category = services.category.get(entry.url.value) %}
-                        {% set realUrl = services.category.getURL(__category) %}
-                    {% endif %}
-                    {% if entry.url.type == 'item' %}
-                        {% set __itemData = services.item.getVariation(entry.url.value) %}
-                        {% set realUrl = __itemData.documents[0].data | itemURL %}
-                    {% endif %}
-                    {% if entry.url.type == 'external' or entry.url.type == 'file' %}
-                        {% set realUrl = entry.url.value %}
-                    {% endif %}
+            {% if entry.url.value is not empty %}
+                {% if entry.url.type == 'category' %}
+                    {% set __category = services.category.get(entry.url.value) %}
+                    {% set realUrl = services.category.getURL(__category) %}
                 {% endif %}
+                {% if entry.url.type == 'item' %}
+                    {% set __itemData = services.item.getVariation(entry.url.value) %}
+                    {% set realUrl = __itemData.documents[0].data | itemURL %}
+                {% endif %}
+                {% if entry.url.type == 'external' or entry.url.type == 'file' %}
+                    {% set realUrl = entry.url.value %}
+                {% endif %}
+            {% endif %}
 
-                {% set Test %}<!--
-                -->
-                <ul>
-                    <li class="nav-item">
-                        <a {% if realUrl is not empty %}href="{{ realUrl }}"{% endif %} class="nav-link
-                            {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
-                            {% if entry.url.openInNewTab %} target="_blank"{% endif %}
-                            {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-                            {{ entry.text }}
-                        </a>
-                    </li>
-                </ul><!--
-                -->{% endset %}
-                {{ Test }}
-
+            {% if entry.position == loop.parent.loop.index %}
+            <ul>
+                <li class="nav-item">
+                    <a {% if realUrl is not empty %}href="{{ realUrl }}"{% endif %} class="nav-link
+                        {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                        {% if entry.url.openInNewTab %} target="_blank"{% endif %}
+                        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                        {{ entry.text }}
+                    </a>
+                </li>
+            </ul>
             {% endif %}
         {% endfor %}
 
@@ -169,8 +162,6 @@
                 {% endif %}
             </li>
         </ul>
-
-        {# {% if customEntries[0].position > categories | length and categories | length == loop.index %}{% endif %} #}
     {% endfor %}
 
 {% endmacro %}
