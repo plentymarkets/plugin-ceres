@@ -18,14 +18,6 @@ Vue.component("google-maps-widget",
                     type: String,
                     required: true
                 },
-            lat:
-                {
-                    type: Number
-                },
-            lng:
-                {
-                    type: Number
-                },
             zoom:
                 {
                     type: Number,
@@ -50,25 +42,6 @@ Vue.component("google-maps-widget",
             };
         },
 
-        computed:
-        {
-            coordinates()
-            {
-                const isLatValid = !isNaN(this.lat) && this.lat > -90 && this.lat < 90;
-                const isLngValid = !isNaN(this.lng) && this.lng > -180 && this.lng < 180;
-
-                if (isLatValid && isLngValid)
-                {
-                    return {
-                        lat: this.lat,
-                        lng: this.lng
-                    };
-                }
-
-                return null;
-            }
-        },
-
         mounted()
         {
             this.$nextTick(() =>
@@ -76,7 +49,7 @@ Vue.component("google-maps-widget",
                 this.createScript()
                     .then(() =>
                     {
-                        this.initializeMap();
+                        this.renderMap();
                     })
                     .catch(() =>
                     {
@@ -135,22 +108,19 @@ Vue.component("google-maps-widget",
                 });
             },
 
-            initializeMap()
+            renderMap()
             {
-                if (this.coordinates)
-                {
-                    this.renderMap(this.coordinates);
-                }
-                else
-                {
-                    this.geocodeAddress().then(coordinates =>
+                const map = new google.maps.Map(this.$refs.googleMapsContainer,
                     {
-                        this.renderMap(coordinates);
+                        center: { lat: -34.397, lng: 150.644 },
+                        zoom  : this.zoom,
+                        mapTypeId: this.maptype
                     });
-                }
+
+                this.geocodeAddress(map);
             },
 
-            geocodeAddress()
+            geocodeAddress(map)
             {
                 return new Promise((resolve, reject) =>
                 {
@@ -165,26 +135,20 @@ Vue.component("google-maps-widget",
                         }
                         else
                         {
+                            console.log("Not possible to get Ltd and Lng for the given address. Status: " + status);
                             reject();
                         }
                     });
+                }).then( coordinates =>
+                {
+                    map.setCenter(coordinates);
+
+                    new google.maps.Marker(
+                        {
+                            map: map,
+                            position: coordinates
+                        });
                 });
-            },
-
-            renderMap(coordinates)
-            {
-                const map = new google.maps.Map(this.$refs.googleMapsContainer,
-                    {
-                        center: coordinates,
-                        zoom  : this.zoom,
-                        mapTypeId: this.maptype
-                    });
-
-                new google.maps.Marker(
-                    {
-                        map: map,
-                        position: coordinates
-                    });
             }
         }
     });
