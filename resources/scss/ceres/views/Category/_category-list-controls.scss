@@ -98,7 +98,9 @@
     .category-title {
         background: #efefef;
         padding: 1.2rem 2rem;
-        text-transform: uppercase;
+        p:first-child {
+            margin-bottom: 0;
+        }
     }
     .nav-item {
         position: relative;
