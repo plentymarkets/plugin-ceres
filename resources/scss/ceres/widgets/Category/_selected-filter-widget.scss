@@ -27,6 +27,10 @@
     .selected-filters {
         float: none;
         display: block;
+        margin-top: 0;
+        .selected-filter {
+            margin-top: 10px;
+        }
     }
 
     &.widget-none {
