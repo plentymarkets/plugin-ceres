@@ -11,9 +11,11 @@ class FilterBaseWidget extends BaseWidget
 
     protected $allowedFacetTypes = [];
 
+    protected $className = "";
+
     protected function getTemplateData($widgetSettings, $isPreview)
     {
-        return [ "allowedFacetTypes" => $this->allowedFacetTypes ];
+        return [ "allowedFacetTypes" => $this->allowedFacetTypes, "className" => $this->className ];
     }
 
     /**
