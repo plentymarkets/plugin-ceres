@@ -1,31 +1,25 @@
 import Vue from "vue";
-import "jquery-lazyload";
+import lozad from "lozad";
 
 Vue.component("item-lazy-img", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "imageUrl",
-        "template"
-    ],
+    props: {
+        imageUrl: String,
+        template: {
+            type: String,
+            default: "#vue-item-lazy-img"
+        }
+    },
 
     mounted()
     {
         this.$nextTick(() =>
         {
-            setTimeout(() =>
-            {
-                $(this.$refs.lazyImg).show().lazyload({ threshold : 100 });
-            }, 1);
-        });
-    },
+            const observer = lozad(this.$el);
 
-    methods:
-    {
-        loadImage()
-        {
-            $(this.$refs.lazyImg).trigger("appear");
-        }
+            observer.observe();
+        });
     }
 });

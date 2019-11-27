@@ -69,18 +69,5 @@ Vue.component("category-item", {
         ...mapState({
             showNetPrices: state => state.basket.showNetPrices
         })
-    },
-
-    methods:
-    {
-        loadFirstImage()
-        {
-            const categoryImageCarousel = this.$refs.categoryImageCarousel;
-
-            if (categoryImageCarousel)
-            {
-                categoryImageCarousel.loadFirstImage();
-            }
-        }
     }
 });

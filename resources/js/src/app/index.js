@@ -3,6 +3,7 @@
 // =========================
 
 import "custom-event-polyfill";
+import "intersection-observer";
 
 // =========================
 // Framework's
