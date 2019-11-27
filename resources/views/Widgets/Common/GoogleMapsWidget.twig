@@ -4,8 +4,6 @@
     {% if geocoding_data is not empty %}
         <google-maps-widget google-api-key="{{ geocoding_data.apiKey }}"
                             address="{{ geocoding_data.address }}"
-                            :lat="{{ geocoding_data.lat }}"
-                            :lng="{{ geocoding_data.lng }}"
                             :zoom="{{ widget.settings.zoom.mobile | default(16) }}"
                             maptype="{{ widget.settings.maptype.mobile }}"
                             aspect-ratio="{{ widget.settings.aspectRatio.mobile }}">
