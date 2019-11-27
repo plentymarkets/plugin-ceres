@@ -1,21 +1,38 @@
 .widget-selected-filter
 {
-  &.widget-alignment-center
-  {
-    div.selected-filters
+    &.widget-alignment-center
     {
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
+        div.selected-filters
+        {
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
-  }
 
-  &.widget-alignment-right
-  {
-    div.selected-filters
+    &.widget-alignment-right
     {
-      width: fit-content;
-      margin-left: auto;
+        div.selected-filters
+        {
+            width: fit-content;
+            margin-left: auto;
+        }
     }
-  }
+    &.widget-alignment-left {
+        span.selected-filter {
+            margin: 0 10px 0 0;
+        }
+    }
+
+    .selected-filters {
+        float: none;
+        display: block;
+    }
+
+    &.widget-none {
+        span.selected-filter {
+            color: $black !important;
+            background-color: #efefef !important;
+        }
+    }
 }
