@@ -1,11 +1,9 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="plentymarkets" />
-
-{% set lang = services.sessionStorage.getLang() %}
-
-{% set defaultCSS = plugin_path('Ceres') ~ "/css/ceres-legacy.css?v=" ~ buildHash %}
 
 {% if ceresConfig.global.favicon is empty %}
     {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
@@ -39,50 +37,42 @@
     %}
 
     {% if customFont.regular %}
-        @font-face {
-            font-family: "Custom-Font";
-            src: url("{{ customFont.regular }}");
-        }
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.regular }}");
+    }
     {% endif %}
     {% if customFont.bold %}
-        @font-face {
-            font-family: "Custom-Font";
-            src: url("{{ customFont.bold }}");
-            font-weight: bold;
-        }
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.bold }}");
+        font-weight: bold;
+    }
     {% endif %}
     {% if customFont.italic %}
-        @font-face {
-            font-family: "Custom-Font";
-            src: url("{{ customFont.italic }}");
-            font-style: italic;
-        }
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.italic }}");
+        font-style: italic;
+    }
     {% endif %}
     {% if customFont.boldItalic %}
-        @font-face {
-            font-family: "Custom-Font";
-            src: url("{{ customFont.boldItalic }}");
-            font-weight: bold;
-            font-style: italic;
-        }
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.boldItalic }}");
+        font-weight: bold;
+        font-style: italic;
+    }
     {% endif %}
 </style>
 
-{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set logData = config("Ceres.log.data")|split(', ') %}
-{% set sortValues = config("Ceres.sort.data")|split(', ') %}
-{% set defaultSorting = config('Ceres.sort.defaultSorting') %}
-{% set defaultSortingSearch = config('Ceres.sort.defaultSortingSearch') %}
-{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
-{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
-{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
-{% set performanceLevel = config('Ceres.log.performance.level') %}
-{% set itemName = config('Ceres.item.name') %}
+{% set defaultCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".css?v=" ~ buildHash %}
+{% set defaultSCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".scss?v=" ~ buildHash %}
 
 <link rel="preload" as="style" href="{{ defaultCSS }}">
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
-    <link data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ plugin_path('Ceres') }}/css/ceres-legacy.scss" rel="stylesheet" href="{{ defaultCSS }}">
+    <link rel="stylesheet" href="{{ defaultCSS }}"{% if isShopBuilder %} data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ defaultSCSS }}"{% endif %}>
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}

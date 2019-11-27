@@ -52,6 +52,7 @@ class GlobalContext implements ContextInterface
     public $isSafeMode;
     public $bodyClasses;
     public $buildHash;
+    public $assetName = "ceres-app";
 
     public function init($params)
     {
