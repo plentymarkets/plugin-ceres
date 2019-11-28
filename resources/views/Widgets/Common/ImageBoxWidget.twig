@@ -87,7 +87,7 @@
                 alt="{{ Twig.print("imageAltText") }}">
             </item-lazy-img>
         {% else %}
-            {# <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("slide.name") }}" class="img-cover"> #}
+            <img{% if imageSize == "cover" %} v-ie-objectfit-polyfill="'cover'"{% endif %} class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" alt="{{ Twig.print("imageAltText") }}"/>
         {% endif %}
     {{ Twig.endif() }}
 
