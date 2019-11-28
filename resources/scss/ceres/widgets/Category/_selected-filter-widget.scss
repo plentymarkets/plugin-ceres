@@ -20,7 +20,7 @@
     }
     &.widget-alignment-left {
         span.selected-filter {
-            margin: 0 10px 0 0;
+            margin-left: 10px;
         }
     }
 
@@ -29,7 +29,7 @@
         display: block;
         margin-top: 0;
         .selected-filter {
-            margin-top: 10px;
+            margin-bottom: 10px;
         }
     }
 

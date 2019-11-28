@@ -17,7 +17,7 @@
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-{% set appearance      = widget.settings.appearance.mobile | default("none") %}
+{% set appearance      = widget.settings.appearance.mobile | default("primary") %}
 {% set alignment     = widget.settings.alignment.mobile | default("left") %}
 
 <div class="widget widget-selected-filter widget-{{ appearance }} widget-alignment-{{ alignment }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
