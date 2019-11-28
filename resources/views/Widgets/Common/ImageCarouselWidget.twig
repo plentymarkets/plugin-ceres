@@ -114,14 +114,18 @@
                         {{ Twig.if("altText | trim is empty") }}
                             {{ Twig.set("altText", "slide.name") }}
                         {{ Twig.endif }}
-                        {# <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("slide.name") }}" class="img-cover"> #}
-                        <item-lazy-img
-                            class="img-cover"
-                            image-url="{{ Twig.print("slide.imageUrl") }}"
-                            alt="{{ Twig.print("altText") }}"
-                            title="{{ Twig.print("slide.name") }}"
-                            template="#vue-item-lazy-img">
-                        </item-lazy-img>
+                        
+                        {% if widget.settings.lazyLoading %}
+                            <item-lazy-img
+                                class="img-cover"
+                                image-url="{{ Twig.print("slide.imageUrl") }}"
+                                alt="{{ Twig.print("altText") }}"
+                                title="{{ Twig.print("slide.name") }}"
+                                template="#vue-item-lazy-img">
+                            </item-lazy-img>
+                        {% else %}
+                            <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
+                        {% endif %}
                     {{ Twig.endif() }}
 
                     {{ Twig.if("slide.name is not empty and slide.headlineStyle != 'no-caption'") }}

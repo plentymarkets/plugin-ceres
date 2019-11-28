@@ -60,6 +60,10 @@ class ImageCarouselWidget extends BaseWidget
                     ->toArray()
             );
 
+        $settings->createCheckbox("lazyLoading")
+            ->withName("Widget.imageCarouselLazyLoadingName")
+            ->withDefaultValue(true);
+
         $container = $settings->createVerticalContainer("slides")
             ->withList(1)
             ->withName("Widget.imageCarouselSlide");
@@ -89,6 +93,8 @@ class ImageCarouselWidget extends BaseWidget
             ->withDefaultValue("")
             ->withName("Widget.imageCarouselCustomImagePathLabel")
             ->withTooltip("Widget.imageCarouselCustomImagePathTooltip");
+
+        
 
         $settings->createSpacing(false, true);
         return $settings->toArray();

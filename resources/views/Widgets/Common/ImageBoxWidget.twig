@@ -78,13 +78,17 @@
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary')  }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if("imageUrl | trim is not empty") }}
-        <item-lazy-img
-            {% if imageSize == "cover" %} v-ie-objectfit-polyfill="'cover'"{% endif %}
-            class="img-{{ imageSize }}"
-            template="#vue-item-lazy-img"
-            image-url="{{ Twig.print("imageUrl") }}"
-            alt="{{ Twig.print("imageAltText") }}">
-        </item-lazy-img>
+        {% if widget.settings.lazyLoading %}
+            <item-lazy-img
+                {% if imageSize == "cover" %} v-ie-objectfit-polyfill="'cover'"{% endif %}
+                class="img-{{ imageSize }}"
+                template="#vue-item-lazy-img"
+                image-url="{{ Twig.print("imageUrl") }}"
+                alt="{{ Twig.print("imageAltText") }}">
+            </item-lazy-img>
+        {% else %}
+            {# <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("slide.name") }}" class="img-cover"> #}
+        {% endif %}
     {{ Twig.endif() }}
 
     <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}{% if openInNewTab == true %} target="_blank"{% endif %}{% if urlType == 'external' %} rel="noopener"{% endif %} class="widget-inner">
