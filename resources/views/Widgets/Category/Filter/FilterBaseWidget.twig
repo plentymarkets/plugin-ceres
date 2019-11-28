@@ -16,6 +16,7 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
     <item-filter-list
+        class="{{ "widget-filter-" ~ className }}"
         template="#vue-item-filter-list-bulk"
         :facet-data="{{ Twig.print('facets | json_encode') }}"
         :allowed-facets-types="{{ allowedFacetTypes | json_encode }}"
