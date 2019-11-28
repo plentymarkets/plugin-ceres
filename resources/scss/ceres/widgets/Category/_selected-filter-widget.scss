@@ -1,7 +1,7 @@
 .widget-selected-filter
 {
     &.widget-alignment-left {
-        .selected-filter {
+        span.selected-filter {
             margin-right: 10px;
             margin-left: 0;
         }
@@ -11,13 +11,13 @@
         float: none;
         display: block;
         margin-top: 0;
-        .selected-filter {
+        span.selected-filter {
             margin-bottom: 10px;
         }
     }
 
     &.widget-none {
-        .selected-filter {
+        span.selected-filter {
             color: $black !important;
             background-color: #efefef !important;
         }
