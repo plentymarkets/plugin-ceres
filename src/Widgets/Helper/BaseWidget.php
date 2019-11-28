@@ -2,11 +2,11 @@
 
 namespace Ceres\Widgets\Helper;
 
-use Plenty\Modules\ShopBuilder\Contracts\Widget;
+use Plenty\Modules\ShopBuilder\Contracts\DynamicWidget;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Log\Loggable;
 
-class BaseWidget implements Widget
+class BaseWidget implements DynamicWidget
 {
     use Loggable;
 
@@ -38,6 +38,22 @@ class BaseWidget implements Widget
     public function __construct(Twig $twig)
     {
         $this->twig = $twig;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getData()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSettings()
+    {
+        return [];
     }
 
     /**
