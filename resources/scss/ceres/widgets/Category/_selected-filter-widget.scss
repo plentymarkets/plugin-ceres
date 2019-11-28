@@ -9,7 +9,6 @@
             margin-right: auto;
         }
     }
-
     &.widget-alignment-right
     {
         div.selected-filters
@@ -20,7 +19,8 @@
     }
     &.widget-alignment-left {
         span.selected-filter {
-            margin-left: 10px;
+            margin-right: 10px;
+            margin-left: 0;
         }
     }
 
