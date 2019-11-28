@@ -1,24 +1,7 @@
 .widget-selected-filter
 {
-    &.widget-alignment-center
-    {
-        div.selected-filters
-        {
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-    &.widget-alignment-right
-    {
-        div.selected-filters
-        {
-            width: fit-content;
-            margin-left: auto;
-        }
-    }
     &.widget-alignment-left {
-        span.selected-filter {
+        .selected-filter {
             margin-right: 10px;
             margin-left: 0;
         }
@@ -34,7 +17,7 @@
     }
 
     &.widget-none {
-        span.selected-filter {
+        .selected-filter {
             color: $black !important;
             background-color: #efefef !important;
         }
