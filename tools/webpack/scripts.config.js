@@ -7,9 +7,14 @@ module.exports = env =>
     return {
         name: "scripts",
         mode: env.prod ? "production" : "development",
-        entry: "./resources/js/src/app/index.js",
+        entry: {
+            app: "./resources/js/src/index.js",
+            category: "./resources/js/src/category.js",
+            item: "./resources/js/src/item.js",
+            checkout: "./resources/js/src/checkout.js"
+        },
         output: {
-            filename: "../../../resources/js/dist/ceres" + (env.prod ? ".min" : "") + ".js",
+            filename: "../../../resources/js/dist/ceres-[name]" + (env.prod ? ".min" : "") + ".js",
             path: path.resolve(__dirname, "dist")
         },
         resolve: {

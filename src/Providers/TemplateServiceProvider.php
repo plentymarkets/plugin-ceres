@@ -9,6 +9,7 @@ use Ceres\Contexts\ChangeMailContext;
 use Ceres\Contexts\CheckoutContext;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
+use Ceres\Contexts\MyAccountContext;
 use Ceres\Contexts\OrderConfirmationContext;
 use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\PasswordResetContext;
@@ -56,7 +57,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.checkout'                      => ['Checkout.CheckoutView',                  CheckoutContext::class],
         'tpl.checkout.category'             => ['Checkout.CheckoutCategory',              CheckoutContext::class],
         'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],
-        'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
+        'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            MyAccountContext::class],
         'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],
         'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],
         'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],

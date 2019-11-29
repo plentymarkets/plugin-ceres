@@ -1,3 +1,4 @@
+// extends category styles
 // Bootstrap functions
 //
 // Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
@@ -21011,7 +21012,7 @@ header .widget
       }
     }
   }
-
+// legacy styles for markup based on bootstrap 4.0.0-alpha6
 .pos-f-t { @extend .position-fixed; }
 
 .col-xs-1 { @extend .col-1 }

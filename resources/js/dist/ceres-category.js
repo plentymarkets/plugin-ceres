@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./resources/js/src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./resources/js/src/category.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -75373,56 +75373,7 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_3___default.a;
 
 
 
-/***/ }),
-
-/***/ "./resources/js/src/checkout.js":
-/*!**************************************!*\
-  !*** ./resources/js/src/checkout.js ***!
-  \**************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _category__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./category */ "./resources/js/src/category.js");
-// checkout script extends category script
-
-
-/***/ }),
-
-/***/ "./resources/js/src/index.js":
-/*!***********************************!*\
-  !*** ./resources/js/src/index.js ***!
-  \***********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _category__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./category */ "./resources/js/src/category.js");
-/* harmony import */ var _item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./item */ "./resources/js/src/item.js");
-/* harmony import */ var _checkout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./checkout */ "./resources/js/src/checkout.js");
-// contains all scripts for legacy
-
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/item.js":
-/*!**********************************!*\
-  !*** ./resources/js/src/item.js ***!
-  \**********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _category__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./category */ "./resources/js/src/category.js");
-// item script extends category script
-
-
 /***/ })
 
 /******/ });
-//# sourceMappingURL=ceres-app.js.map
+//# sourceMappingURL=ceres-category.js.map
