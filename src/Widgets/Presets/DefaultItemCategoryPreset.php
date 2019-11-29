@@ -16,12 +16,15 @@ class DefaultItemCategoryPreset implements ContentPreset
 
     /** @var CeresConfig */
     private $ceresConfig;
+    
+    /** @var PresetWidgetFactory */
+    private $toolbarWidget;
+
+    /** @var PresetWidgetFactory */
+    private $threeColumnWidget;
 
     /** @var PresetWidgetFactory */
     private $twoColumnWidget;
-
-    /** @var PresetWidgetFactory */
-    private $toolbarWidget;
 
     /** @var Translator */
     private $translator;
@@ -33,9 +36,20 @@ class DefaultItemCategoryPreset implements ContentPreset
         $this->translator = pluginApp(Translator::class);
 
         $this->createHeadline();
+
         $this->createToolbarWidget();
+        $this->createItemSortingWidget();
+        $this->createItemsPerPageWidget();
+        $this->createThreeColumnWidget();
+
+        $this->createAttributesPropertiesCharacteristicsFilterWidget();
+        $this->createPriceFilterWidget();
+        $this->createAvailabilityFilterWidget();
+        $this->createManufacturerFilterWidget();
+
         $this->selectedFilterWidget();
         $this->paginationWidget();
+
         $this->createTwoColumnWidget();
         $this->createNavigationTreeWidget();
         $this->createItemGridWidget();
@@ -62,13 +76,62 @@ class DefaultItemCategoryPreset implements ContentPreset
     private function createToolbarWidget()
     {
         $this->toolbarWidget = $this->preset->createWidget('Ceres::ToolbarWidget')
+            ->withSetting('customClass', '')
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 4)
+            ->withSetting("spacing.margin.bottom.unit", null);
+    }
+
+    private function createItemSortingWidget()
+    {
+        $this->toolbarWidget->createChild("toolbar", "Ceres::ItemSortingWidget")
+            ->withSetting('customClass', '')
+            ->withSetting('itemSortOptions', ["texts.name1_asc", "texts.name1_desc", "sorting.price.avg_asc", "sorting.price.avg_desc"]);
+    }
+
+    private function createItemsPerPageWidget()
+    {
+        $this->toolbarWidget->createChild("toolbar", "Ceres::ItemsPerPageWidget")
+             ->withSetting('customClass', '');
+    }
+
+    private function createThreeColumnWidget()
+    {
+        $this->threeColumnWidget = $this->toolbarWidget->createChild("collapsable", "Ceres::ThreeColumnWidget")
+            ->withSetting('customClass', '')
+            ->withSetting('layout', 'oneToOneToOne');
+    }
+
+    private function createAttributesPropertiesCharacteristicsFilterWidget()
+    {
+        $this->threeColumnWidget->createChild("first", "Ceres::AttributesPropertiesCharacteristicsFilterWidget")
+            ->withSetting('customClass', '');
+    }
+    private function createPriceFilterWidget()
+    {
+        $this->threeColumnWidget->createChild("second", "Ceres::PriceFilterWidget")
+            ->withSetting('customClass', '');
+    }
+    private function createAvailabilityFilterWidget()
+    {
+        $this->threeColumnWidget->createChild("second", "Ceres::AvailabilityFilterWidgetWidget")
+            ->withSetting('customClass', '');
+    }
+    private function createManufacturerFilterWidget()
+    {
+        $this->threeColumnWidget->createChild("third", "Ceres::ManufacturerFilterWidget")
             ->withSetting('customClass', '');
     }
 
     private function selectedFilterWidget()
     {
         $this->preset->createWidget("Ceres::SelectedFilterWidget")
-            ->withSetting('customClass', '');
+            ->withSetting('customClass', '')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('alignment', 'right')
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 2)
+            ->withSetting("spacing.margin.bottom.unit", null);
     }
 
     private function paginationWidget()
@@ -80,7 +143,9 @@ class DefaultItemCategoryPreset implements ContentPreset
     private function createTwoColumnWidget()
     {
         $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
-            ->withSetting('layout', 'threeToNine');
+            ->withSetting('layout', 'threeToNine')
+            ->withSetting("layoutTablet", "threeToNine")
+            ->withSetting("layoutMobile", "stackedMobile");
     }
 
     private function createNavigationTreeWidget()
