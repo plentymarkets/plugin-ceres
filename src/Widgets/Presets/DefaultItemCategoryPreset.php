@@ -2,20 +2,14 @@
 
 namespace Ceres\Widgets\Presets;
 
-use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
-use Plenty\Plugin\Translation\Translator;
-use IO\Extensions\Functions\UniqueId;
 
 class DefaultItemCategoryPreset implements ContentPreset
 {
     /** @var PresetHelper */
     private $preset;
-
-    /** @var CeresConfig */
-    private $ceresConfig;
     
     /** @var PresetWidgetFactory */
     private $toolbarWidget;
@@ -26,16 +20,9 @@ class DefaultItemCategoryPreset implements ContentPreset
     /** @var PresetWidgetFactory */
     private $twoColumnWidget;
 
-    /** @var Translator */
-    private $translator;
-
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
-        $this->ceresConfig = pluginApp(CeresConfig::class);
-        $this->translator = pluginApp(Translator::class);
-
-        $this->createHeadline();
 
         $this->createToolbarWidget();
         $this->createItemSortingWidget();
@@ -110,11 +97,14 @@ class DefaultItemCategoryPreset implements ContentPreset
     private function createPriceFilterWidget()
     {
         $this->threeColumnWidget->createChild("second", "Ceres::PriceFilterWidget")
-            ->withSetting('customClass', '');
+            ->withSetting('customClass', '')
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 4)
+            ->withSetting("spacing.margin.bottom.unit", null);
     }
     private function createAvailabilityFilterWidget()
     {
-        $this->threeColumnWidget->createChild("second", "Ceres::AvailabilityFilterWidgetWidget")
+        $this->threeColumnWidget->createChild("second", "Ceres::AvailabilityFilterWidget")
             ->withSetting('customClass', '');
     }
     private function createManufacturerFilterWidget()
