@@ -18,8 +18,8 @@
             "type": "select",
             "defaultValue": 4,
             "options": {
-                "name": "Widget.itemGridNumberOfColumnsLabel",
-                "tooltipText": "Widget.itemGridNumberOfColumnsTooltip",
+                "name": "Widget.itemGridNumberOfColumnsLabelDesktop",
+                "tooltipText": "Widget.itemGridNumberOfColumnsTooltipDesktop",
                 "listBoxValues": [
                     {
                         "value": 1,
@@ -44,8 +44,8 @@
             "type": "select",
             "defaultValue": 3,
             "options": {
-                "name": "Widget.itemGridNumberOfColumnsLabel",
-                "tooltipText": "Widget.itemGridNumberOfColumnsTooltip",
+                "name": "Widget.itemGridNumberOfColumnsLabelTablet",
+                "tooltipText": "Widget.itemGridNumberOfColumnsTooltipTablet",
                 "listBoxValues": [
                     {
                         "value": 1,
@@ -70,8 +70,8 @@
             "type": "select",
             "defaultValue": 1,
             "options": {
-                "name": "Widget.itemGridNumberOfColumnsLabel",
-                "tooltipText": "Widget.itemGridNumberOfColumnsTooltip",
+                "name": "Widget.itemGridNumberOfColumnsLabelMobile",
+                "tooltipText": "Widget.itemGridNumberOfColumnsTooltipMobile",
                 "listBoxValues": [
                     {
                         "value": 1,
