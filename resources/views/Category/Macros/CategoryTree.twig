@@ -124,7 +124,7 @@
                 {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     {{ category.details[0].name }}
-                    {% if showItemCount == true %}<div class="filter-badge">{{ category.itemCount[0].count }}</div>{% endif %}
+                    {% if showItemCount == true and category.itemCount[0].count > 0 %}<div class="filter-badge">{{ category.itemCount[0].count }}</div>{% endif %}
                 </a>
 
                 {% if category.children is not empty %}
