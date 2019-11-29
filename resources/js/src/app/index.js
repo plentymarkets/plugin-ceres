@@ -133,6 +133,8 @@ import "./components/orderReturn/OrderReturn";
 import "./components/orderReturn/OrderReturnItem";
 
 import "./components/pageDesign/Carousel";
+import "./components/pageDesign/CookieBar";
+import "./components/pageDesign/PrivacySettings";
 import "./components/pageDesign/MobileNavigation";
 import "./components/pageDesign/Notifications";
 import "./components/pageDesign/Popper";
@@ -163,6 +165,7 @@ import "./directives/helper/waitingAnimationInfinite";
 
 import "./directives/navigation/navigationTouchHandler";
 import "./directives/navigation/openMobileNavigation";
+import "./directives/navigation/sidenavigationChildrenLoader";
 
 import "./directives/pageDesign/ieObjectfitPolyfill";
 import "./directives/pageDesign/scrollToTop";
@@ -195,6 +198,7 @@ import "./filters/itemUrl.filter";
 import "./filters/numberFormat.filter";
 import "./filters/propertySurcharge.filter";
 import "./filters/propertySurchargeSum.filter";
+import "./filters/propertyFileUrl.filter";
 import "./filters/translate.filter";
 import "./filters/truncate.filter";
 

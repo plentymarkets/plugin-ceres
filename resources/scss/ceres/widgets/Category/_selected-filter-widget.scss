@@ -1,0 +1,42 @@
+.widget-selected-filter
+{
+    &.widget-alignment-center
+    {
+        div.selected-filters
+        {
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    &.widget-alignment-right
+    {
+        div.selected-filters
+        {
+            width: fit-content;
+            margin-left: auto;
+        }
+    }
+    &.widget-alignment-left {
+        span.selected-filter {
+            margin-right: 10px;
+            margin-left: 0;
+        }
+    }
+
+    .selected-filters {
+        float: none;
+        display: block;
+        margin-top: 0;
+        .selected-filter {
+            margin-bottom: 10px;
+        }
+    }
+
+    &.widget-none {
+        span.selected-filter {
+            color: $black !important;
+            background-color: #efefef !important;
+        }
+    }
+}

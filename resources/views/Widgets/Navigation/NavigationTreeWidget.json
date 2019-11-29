@@ -1,0 +1,68 @@
+{
+    "identifier": "Ceres::NavigationTreeWidget",
+    "label": "Widget.navigationTreeLabel",
+    "previewImageURL": "/images/widgets/navigation-tree.svg",
+    "type": "default",
+    "categories": ["navigation"],
+    "position": 0,
+    "widgetClass": "Ceres\\Widgets\\Navigation\\NavigationTreeWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "expandableChildren": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.navigationTreeExpandableChildrenLabel"
+            }
+        },
+        "showItemCount": {
+            "type": "checkbox",
+            "defaultValue": false,
+            "options": {
+                "name": "Widget.navigationTreeShowItemCount"
+            }
+        },
+        "spacing": {
+            "type": "vertical",
+            "options": {
+                "name": "Widget.widgetSpacing"
+            },
+            "children": {
+                "customPadding": {
+                    "type": "checkbox",
+                    "options": {
+                        "name": "Widget.widgetCustomPadding"
+                    }
+                },
+                "padding": {
+                    "type": "spacing",
+                    "isVisible": "!!spacing.customPadding",
+                    "options": {
+                        "units": ["px", "rem"],
+                        "direction": "vertical"
+                    }
+                },
+                "customMargin": {
+                    "type": "checkbox",
+                    "options": {
+                        "name": "Widget.widgetCustomMargin"
+                    }
+                },
+                "margin": {
+                    "type": "spacing",
+                    "isVisible": "!!spacing.customMargin",
+                    "options": {
+                        "units": ["px", "rem"],
+                        "direction": "all"
+                    }
+                }
+            }
+        }
+    }
+}

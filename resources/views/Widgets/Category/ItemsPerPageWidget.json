@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/items-per-page.svg",
     "type": "toolbar",
     "categories": ["categoryitem"],
-    "position": 300,
+    "position": 200,
     "widgetClass": "Ceres\\Widgets\\Category\\ItemsPerPageWidget",
     "settings": {
         "customClass":"@include(customClass)",

@@ -1,0 +1,23 @@
+.widget-pagination
+{
+    &.widget-alignment-center
+    {
+        ul.pagination
+        {
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding-right: 0 !important;
+        }
+    }
+
+    &.widget-alignment-right
+    {
+        ul.pagination
+        {
+            width: fit-content;
+            margin-left: auto;
+            padding-right: 0 !important;
+        }
+    }
+}

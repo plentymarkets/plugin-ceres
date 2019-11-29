@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/item-sorting.svg",
     "type": "toolbar",
     "categories": ["categoryitem"],
-    "position": 400,
+    "position": 300,
     "widgetClass": "Ceres\\Widgets\\Category\\ItemSortingWidget",
     "settings": {
         "customClass":"@include(customClass)",

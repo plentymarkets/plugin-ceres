@@ -4,7 +4,7 @@
     "previewImageURL": "/images/widgets/pagination.svg",
     "type": "categoryitem",
     "categories": ["categoryitem"],
-    "position": 600,
+    "position": 500,
     "widgetClass": "Ceres\\Widgets\\Category\\PaginationWidget",
     "settings": {
         "customClass":"@include(customClass)",
@@ -38,6 +38,7 @@
                 "name": "Widget.paginationPageLimitLabel"
             }
         },
+        "alignment": "@include(alignment)",
         "spacing":"@include(spacing)"
     }
 }

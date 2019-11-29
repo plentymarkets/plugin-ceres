@@ -136,6 +136,14 @@
                     "options": {
                         "defaultValue": "true"
                     }
+                },
+                "global.block_cookies": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalBlockCookies",
+                    "options": {
+                        "defaultValue": "false"
+                    }
                 }
             }
         },
@@ -745,6 +753,14 @@
                                 "caption": "Config.itemVariationShowTypeCombined"
                             }
                         ]
+                    }
+                },
+                "item.show_please_select": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.itemShowPleaseSelect",
+                    "options": {
+                        "defaultValue": "false"
                     }
                 },
                 "item.enable_image_carousel": {
