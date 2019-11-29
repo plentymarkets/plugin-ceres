@@ -245,3 +245,16 @@ header .widget
 {
     text-align: justify;
 }
+
+.widget-alignment-center {
+    .widget-alignment {
+        display: flex;
+        justify-content: center;
+    }
+}
+.widget-alignment-right {
+    .widget-alignment {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

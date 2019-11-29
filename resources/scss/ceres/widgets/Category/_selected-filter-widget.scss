@@ -1,22 +1,5 @@
 .widget-selected-filter
 {
-    &.widget-alignment-center
-    {
-        div.selected-filters
-        {
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-    &.widget-alignment-right
-    {
-        div.selected-filters
-        {
-            width: fit-content;
-            margin-left: auto;
-        }
-    }
     &.widget-alignment-left {
         span.selected-filter {
             margin-right: 10px;
@@ -28,7 +11,7 @@
         float: none;
         display: block;
         margin-top: 0;
-        .selected-filter {
+        span.selected-filter {
             margin-bottom: 10px;
         }
     }
