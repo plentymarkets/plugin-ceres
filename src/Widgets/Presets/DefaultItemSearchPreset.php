@@ -38,9 +38,6 @@ class DefaultItemSearchPreset implements ContentPreset
 
         $this->selectedFilterWidget();
         $this->paginationWidget();
-
-        $this->createTwoColumnWidget();
-        $this->createNavigationTreeWidget();
         $this->createItemGridWidget();
 
         return $this->preset->toArray();
@@ -59,7 +56,7 @@ class DefaultItemSearchPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', '<h1>{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>')
+            ->withSetting('text', '<h1>{{ trans("Ceres::Template.itemSearchResults") }}</h1>')
             ->withSetting('appearance','none');
     }
     
@@ -133,24 +130,10 @@ class DefaultItemSearchPreset implements ContentPreset
             ->withSetting('alignment', 'right');
     }
 
-    private function createTwoColumnWidget()
-    {
-        $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
-            ->withSetting('layout', 'threeToNine')
-            ->withSetting("layoutTablet", "threeToNine")
-            ->withSetting("layoutMobile", "stackedMobile");
-    }
-
-    private function createNavigationTreeWidget()
-    {
-        $this->twoColumnWidget->createChild('first', 'Ceres::NavigationTreeWidget')
-            ->withSetting('customClass', '');
-    }
-
     private function createItemGridWidget()
     {
-        $this->twoColumnWidget->createChild('second', 'Ceres::ItemGridWidget')
-            ->withSetting('numberOfColumns', 3)
+        $this->preset->createWidget("Ceres::ItemGridWidget")
+            ->withSetting('numberOfColumns', 4)
             ->withSetting('customClass', '');
     }
 }
