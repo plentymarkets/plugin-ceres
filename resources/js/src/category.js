@@ -103,34 +103,25 @@ import "./app/components/itemList/filter/ItemFilterList";
 import "./app/components/itemList/filter/ItemFilterPrice";
 import "./app/components/itemList/filter/ItemFilterTagList";
 
-// TODO: Move to parent component
-import "./app/components/liveShopping/LiveShoppingDetails";
 import "./app/components/liveShopping/LiveShoppingItem";
 
 import "./app/components/myAccount/AccountSettings";
 import "./app/components/myAccount/BankDataSelect";
 import "./app/components/myAccount/ChangePaymentMethod";
-import "./app/components/myAccount/History";
 import "./app/components/myAccount/MyAccount";
 import "./app/components/myAccount/OrderDocuments";
-import "./app/components/myAccount/OrderHistory";
 
-// TODO: Move to parent component
+// legacy non-shopbuilder components
+import "./app/components/myAccount/History";
+
+// new shopbuilder-only component
 import "./app/components/myAccount/OrderHistoryList";
-import "./app/components/myAccount/OrderHistoryListItem";
-
-import "./app/components/myAccount/OrderReturnHistory";
-
-// TODO: Move to parent component
-import "./app/components/myAccount/OrderReturnHistoryItem";
 import "./app/components/myAccount/OrderReturnHistoryList";
-import "./app/components/myAccount/OrderReturnHistoryListItem";
 
 import "./app/components/newsletter/NewsletterInput";
 import "./app/components/newsletter/NewsletterUnsubscribeInput";
 
 import "./app/components/orderReturn/OrderReturn";
-import "./app/components/orderReturn/OrderReturnItem";
 
 import "./app/components/pageDesign/Carousel";
 import "./app/components/pageDesign/CookieBar";
@@ -139,9 +130,7 @@ import "./app/components/pageDesign/MobileNavigation";
 import "./app/components/pageDesign/Notifications";
 import "./app/components/pageDesign/Popper";
 import "./app/components/pageDesign/ShippingCountrySelect";
-import "./app/components/pageDesign/WaitScreen";
 
-// TODO: Move to parent component
 import "./app/components/wishList/WishList";
 import "./app/components/wishList/WishListCount";
 
@@ -149,7 +138,6 @@ import "./app/components/wishList/WishListCount";
 // =========================
 // DIRECTIVES
 // =========================
-
 import "./app/directives/basket/basketItemQuantity";
 import "./app/directives/basket/basketItemSum";
 import "./app/directives/basket/toggleBasketPreview";
@@ -175,7 +163,6 @@ import "./app/directives/pageDesign/tooltip";
 // =========================
 // FILTERS
 // =========================
-
 import "./app/filters/ageRestriction.filter";
 import "./app/filters/arrayFirst.filter";
 import "./app/filters/attachText.filter";
@@ -205,7 +192,6 @@ import "./app/filters/truncate.filter";
 // =========================
 // MIXINS
 // =========================
-
 import "./app/mixins/buttonSizeProperty.mixin";
 import "./app/mixins/getJsonData.mixin";
 import "./app/mixins/template.mixin";
@@ -214,5 +200,4 @@ import "./app/mixins/template.mixin";
 // =========================
 // Bootstrap frameworks
 // =========================
-
 import "./app/main";

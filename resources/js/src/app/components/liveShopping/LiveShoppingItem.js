@@ -3,10 +3,17 @@ import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
 import moment from "moment";
+import LiveShoppingDetails from "./LiveShoppingDetails";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
 Vue.component("live-shopping-item", {
+
+    components:
+    {
+        LiveShoppingDetails
+    },
+
     props: {
         template:
         {
