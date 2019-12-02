@@ -11,7 +11,6 @@
         <category-item v-if="!!currentOffer" :item-data="currentOffer.item" :decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle" :padding-classes="paddingClasses" :padding-inline-styles="paddingInlineStyles">
             <template #store-special>
                 <item-store-special v-if="!!storeSpecial"
-                                    #store-special
                                     :store-special="storeSpecial"
                                     :recommended-retail-price="prices.rrp"
                                     :variation-retail-price="prices.price"
