@@ -91,14 +91,16 @@
 }
 
 .sidebar-categories,
-.widget-category-navigation {
+.widget-navigation-tree {
     background: $white;
     font-family: $font-family-heading;
 
     .category-title {
         background: #efefef;
         padding: 1.2rem 2rem;
-        text-transform: uppercase;
+        p:first-child {
+            margin-bottom: 0;
+        }
     }
     .nav-item {
         position: relative;
@@ -135,9 +137,17 @@
                 &:hover {
                     color: $gray-darker;
                     background: $gray-lightest;
-                    .filter-badge {
-                        background: $white;
-                    }
+                }
+
+                span.placeholder
+                {
+                    background: $gray;
+                    opacity: .1;
+                    animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
+                    color: transparent;
+                    width: 10%;
+                    border-radius: 3px;
+                    display: inline-block;	
                 }
             }
             a:not([href]) {

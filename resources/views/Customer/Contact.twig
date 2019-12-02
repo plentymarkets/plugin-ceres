@@ -45,7 +45,7 @@
             {% endif %}
 
             {% set formId = uid() %}
-            <form id="contact-form" class="col-12{% if contactConfigSet and not googleApiKey %} col-md-8 col-lg-9{% endif %}" @submit.prevent="$store.dispatch('sendContactForm', $event)">
+            <form id="contact-form" class="col-12{% if contactConfigSet and not googleApiKey %} col-md-8 col-lg-9{% endif %}" method="post" @submit.prevent="$store.dispatch('sendContactForm', $event)">
                 <div class="row">
                     <div class="col-12 col-md-6 mb-3">
                         <div class="input-unit">

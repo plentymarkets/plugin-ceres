@@ -122,13 +122,13 @@
                                 {{ Twig.endfor() }}
                             </div>
 
-                            <label 
+                            <label
                                 class="btn-collapse mb-0 collapsed"
-                                data-toggle="collapse" 
-                                data-target="#collapseOrderProperties" 
-                                aria-expanded="false" 
-                                aria-controls="collapseOrderProperties" 
-                                data-show-more="{{ trans("Ceres::Template.basketShowMore") }}" 
+                                data-toggle="collapse"
+                                data-target="#collapseOrderProperties"
+                                aria-expanded="false"
+                                aria-controls="collapseOrderProperties"
+                                data-show-more="{{ trans("Ceres::Template.basketShowMore") }}"
                                 data-show-less="{{ trans("Ceres::Template.basketShowLess") }}">
                                 <i class="fa fa-caret-down fa-lg"></i>
                             </label>
@@ -138,6 +138,13 @@
                             <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
                             <strong class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPriceTotal | formatMonetary( itemAmount.currency )') }}</strong>
                         </div>
+
+                        {{ Twig.for("attribute", "item.attributes") }}
+                            <div>
+                                <strong>{{ Twig.print("attribute.name") }}: </strong>
+                                <span>{{ Twig.print("attribute.value") }}</span>
+                            </div>
+                        {{ Twig.endfor() }}
                     </div>
                 </article>
             {{ Twig.endif() }}
