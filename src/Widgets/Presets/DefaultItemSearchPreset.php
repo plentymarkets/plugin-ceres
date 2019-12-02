@@ -24,6 +24,8 @@ class DefaultItemSearchPreset implements ContentPreset
     {
         $this->preset = pluginApp(PresetHelper::class);
 
+        $this->createHeadline();
+
         $this->createToolbarWidget();
         $this->createItemSortingWidget();
         $this->createItemsPerPageWidget();
@@ -48,6 +50,7 @@ class DefaultItemSearchPreset implements ContentPreset
     {
         $this->preset->createWidget("Ceres::InlineTextWidget")
             ->withSetting('spacing.customPadding', true)
+            ->withSetting('customClass', 'h2')
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
             ->withSetting('spacing.padding.right.value', 0)
@@ -56,7 +59,7 @@ class DefaultItemSearchPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', "<h1>Suchergebnisse für:</h1>")
+            ->withSetting('text', '<h1>{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>')
             ->withSetting('appearance','none');
     }
     

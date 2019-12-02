@@ -119,6 +119,12 @@
               "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
             }
         ],
+        "itemsearch": [
+            {
+                "label": "Widget.presetItemSearchDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultItemSearchPreset"
+            }
+        ],
         "singleitem":
         [
             {
