@@ -53,17 +53,11 @@ import "./app/components/customer/login/Login";
 import "./app/components/customer/login/LoginView";
 import "./app/components/customer/login/UserLoginHandler";
 
-import "./app/components/item/AddToWishList";
-import "./app/components/item/GraduatedPrices";
-import "./app/components/item/ItemBundle";
-import "./app/components/item/ItemDataTable";
-import "./app/components/item/ItemImageCarousel";
-import "./app/components/item/OrderProperties";
 
-import "./app/components/item/OrderPropertyList";
+import "./app/components/item/ItemBundle";
+
 import "./app/components/item/OrderPropertyValue";
 import "./app/components/item/QuantityInput";
-import "./app/components/item/SingleItem";
 
 import "./app/components/itemList/CategoryImageCarousel";
 import "./app/components/itemList/CategoryItem";
@@ -92,7 +86,6 @@ import "./app/components/pageDesign/ShippingCountrySelect";
 
 import "./app/components/wishList/WishList";
 import "./app/components/wishList/WishListCount";
-
 
 // =========================
 // DIRECTIVES
