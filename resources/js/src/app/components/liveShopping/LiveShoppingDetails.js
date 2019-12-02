@@ -1,5 +1,5 @@
 import Vue from "vue";
-import moment from "moment";
+import dayjs from "dayjs";
 
 Vue.component("live-shopping-details", {
     props:
@@ -66,12 +66,12 @@ Vue.component("live-shopping-details", {
     {
         initializeDataAndTimer()
         {
-            const momentNow = moment(Date.now());
+            const momentNow = dayjs();
 
-            this.momentBegin = moment.unix(this.liveShoppingData.liveShopping.fromTime);
-            this.momentEnd = moment.unix(this.liveShoppingData.liveShopping.toTime);
-            this.hasStarted = this.momentBegin < momentNow;
-            this.hasClosed = this.momentEnd < momentNow;
+            this.momentBegin = dayjs.unix(this.liveShoppingData.liveShopping.fromTime);
+            this.momentEnd = dayjs.unix(this.liveShoppingData.liveShopping.toTime);
+            this.hasStarted = this.momentBegin.valueOf() < momentNow.valueOf();
+            this.hasClosed = this.momentEnd.valueOf() < momentNow.valueOf();
 
             this.setQuantitySoldPercentage();
 
@@ -121,19 +121,18 @@ Vue.component("live-shopping-details", {
 
         calculations()
         {
-            const momentNow = moment(Date.now());
+            const momentNow = dayjs();
             let fullSeconds = 0;
             let remainSeconds = 0;
 
+            fullSeconds = this.momentEnd.diff(this.momentBegin, "second");
             if (this.hasStarted)
             {
-                fullSeconds = this.momentEnd.diff(this.momentBegin, "seconds");
-                remainSeconds = this.momentEnd.diff(momentNow, "seconds");
+                remainSeconds = this.momentEnd.diff(momentNow, "second");
             }
             else
             {
-                fullSeconds = this.momentBegin.diff(this.momentNow, "seconds");
-                remainSeconds = this.momentBegin.diff(momentNow, "seconds");
+                remainSeconds = this.momentBegin.diff(momentNow, "second");
             }
 
             this.timePercentage = (remainSeconds / fullSeconds * 100).toFixed(App.config.item.storeSpecial);
@@ -152,13 +151,23 @@ Vue.component("live-shopping-details", {
 
         getDuration(seconds)
         {
-            const duration = moment.duration(seconds, "seconds");
+            const days = Math.floor(seconds / (60 * 60 * 24));
+
+            seconds = seconds - (days * 60 * 60 * 24);
+
+            const hours = Math.floor(seconds / (60 * 60));
+
+            seconds = seconds - (hours * 60 * 60);
+
+            const minutes = Math.floor(seconds / 60);
+
+            seconds = seconds - (hours * 60);
 
             return {
-                days: duration.days(),
-                hours: duration.hours(),
-                minutes: duration.minutes(),
-                seconds: duration.seconds()
+                days: days,
+                hours: hours,
+                minutes: minutes,
+                seconds: seconds
             };
         }
     },
