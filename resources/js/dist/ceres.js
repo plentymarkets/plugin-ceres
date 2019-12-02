@@ -62252,7 +62252,11 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
         return "";
       }
 
-      return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.storeSpecial.names.name)) {
+        return this.storeSpecial.names.name;
+      }
+
+      return this.labels[this.storeSpecial.id];
     },
     getPercentageSale: function getPercentageSale() {
       var percent;
