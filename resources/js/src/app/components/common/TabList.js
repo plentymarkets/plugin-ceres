@@ -1,5 +1,6 @@
 import { isDefined } from "../../helper/utils";
 import Vue from "vue";
+import TabItem from "./TabItem";
 
 const TabNavItem = {
     name: "tab-nav-item",
@@ -59,6 +60,12 @@ const TabNavItem = {
 };
 
 Vue.component("tab-list", {
+
+    components:
+    {
+        TabItem
+    },
+
     render(createElement)
     {
         const tabListElements = [];

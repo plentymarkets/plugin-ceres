@@ -33,9 +33,6 @@ import "./app/components/basket/BasketTotals";
 import "./app/components/basket/Coupon";
 import "./app/components/basket/list/BasketList";
 
-// TODO: Move to list component
-import "./app/components/basket/list/BasketListItem";
-
 import "./app/components/checkout/AcceptGtcCheck";
 import "./app/components/checkout/Checkout";
 import "./app/components/checkout/ContactWishInput";
@@ -46,7 +43,6 @@ import "./app/components/checkout/ShippingProfileSelect";
 import "./app/components/checkout/SubscribeNewsletterCheck";
 
 import "./app/components/common/GoogleMaps";
-import "./app/components/common/TabItem";
 import "./app/components/common/TabList";
 
 import "./app/components/containers/LastSeenItemList";
@@ -60,13 +56,10 @@ import "./app/components/customer/ReCaptcha";
 import "./app/components/customer/Registration";
 import "./app/components/customer/ResetPasswordForm";
 import "./app/components/customer/SalutationSelect";
-import "./app/components/customer/AddressSelect/AddressSelect";
 
-// TODO: Move to parent component
-import "./app/components/customer/AddressSelect/AddressHeader";
 import "./app/components/customer/AddressSelect/InvoiceAddressSelect";
 import "./app/components/customer/AddressSelect/ShippingAddressSelect";
-import "./app/components/customer/AddressSelect/CreateUpdateAddress/CreateUpdateAddress";
+import "./app/components/customer/AddressSelect/AddressHeader";
 
 import "./app/components/customer/login/ForgotPassword";
 import "./app/components/customer/login/GuestLogin";
@@ -81,15 +74,10 @@ import "./app/components/item/ItemDataTable";
 import "./app/components/item/ItemImageCarousel";
 import "./app/components/item/OrderProperties";
 
-// TODO: Move to parent component
 import "./app/components/item/OrderPropertyList";
-import "./app/components/item/OrderPropertyListGroup";
-import "./app/components/item/OrderPropertyListItem";
 import "./app/components/item/OrderPropertyValue";
 import "./app/components/item/QuantityInput";
 import "./app/components/item/SingleItem";
-import "./app/components/item/VariationSelect";
-
 
 import "./app/components/itemList/CategoryImageCarousel";
 import "./app/components/itemList/CategoryItem";
@@ -98,9 +86,7 @@ import "./app/components/itemList/ItemSearch";
 import "./app/components/itemList/ItemStoreSpecial";
 import "./app/components/itemList/filter/ItemFilter";
 
-// TODO: Move to parent component
 import "./app/components/itemList/filter/ItemFilterList";
-import "./app/components/itemList/filter/ItemFilterPrice";
 import "./app/components/itemList/filter/ItemFilterTagList";
 
 // TODO: Move to parent component
