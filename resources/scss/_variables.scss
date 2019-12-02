@@ -243,14 +243,13 @@ $navbar-background-color:           $gray-lightest !default;
 $navbar-dark-color:                 $gray !default;
 $navbar-dark-disabled-color:        $gray-light !default;
 
-
 // Navs
-
 $nav-link-padding-y:                1.3rem !default;
 $nav-link-hover-bg:                 $brand-primary !default;
-
 $nav-tabs-border-color:             #ddd !default;
 
+// Sidenavigation
+$nav-link-expandable-margin:        1.25rem !default;
 
 // Popovers
 $popover-max-width:                 276px !default;
@@ -265,19 +264,14 @@ $modal-lg:                          900px !default;
 $modal-md:                          600px !default;
 $modal-sm:                          300px !default;
 
-
-
 // Breadcrumbs
-
 $breadcrumb-padding-y:              .5rem !default;
 $breadcrumb-bg:                     darken($gray-lighter2, 2%) !default;
 
 // Category
-
 $category-text-color:               #fff !default;
 
 // Liveshopping
-
 $live-shopping-padding-x:           0.8rem;
 $live-shopping-padding-y:           1rem;
 

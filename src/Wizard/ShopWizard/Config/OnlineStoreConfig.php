@@ -44,9 +44,9 @@ class OnlineStoreConfig
     ];
     
     private static $itemBundles = [
-        "itemBundlesDoNot"   => "1",
-        "itemBundlesList"    => "2",
-        "itemBundlesReplace" => "0"
+        "itemBundlesDoNot"   => 1,
+        "itemBundlesList"    => 2,
+        "itemBundlesReplace" => 0
     ];
 
     public static $sessionLifetimeOptions = [

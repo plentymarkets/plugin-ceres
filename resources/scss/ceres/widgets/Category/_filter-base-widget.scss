@@ -5,11 +5,12 @@
 
     .form-check-wrapper {
         padding: 0.25rem 0;
-        cursor: pointer;
     }
-
     .form-check {
         margin-bottom: 0;
+    }
+    .form-check-label {
+        cursor: pointer;
     }
 }
 

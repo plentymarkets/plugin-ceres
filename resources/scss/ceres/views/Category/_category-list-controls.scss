@@ -91,30 +91,33 @@
 }
 
 .sidebar-categories,
-.widget-category-navigation {
+.widget-navigation-tree {
     background: $white;
     font-family: $font-family-heading;
 
     .category-title {
         background: #efefef;
         padding: 1.2rem 2rem;
-        text-transform: uppercase;
+        p:first-child {
+            margin-bottom: 0;
+        }
     }
     .nav-item {
         position: relative;
         cursor: pointer;
 
         .expand_nav {
-            width: 30px;
+            width: 1.75rem;
             text-align: center;
-            align-self: center;
             float: left;
             padding: 0.75rem 0;
+            position: relative;
+            z-index: 1;
         }
-
         .nav-link {
-            padding: 0.75rem 2rem;
+            padding: 0.75rem 1.75rem;
             width: 100%;
+            position: relative;
         }
     }
 
@@ -135,6 +138,17 @@
                     color: $gray-darker;
                     background: $gray-lightest;
                 }
+
+                span.placeholder
+                {
+                    background: $gray;
+                    opacity: .1;
+                    animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
+                    color: transparent;
+                    width: 10%;
+                    border-radius: 3px;
+                    display: inline-block;	
+                }
             }
             ul {
                 display: none;
@@ -150,30 +164,36 @@
                 & > ul {
                     display: block;
                 }
-                ul {
-                    li {
+                ul li {
+                    a {
+                        padding-left: 3rem !important;
+                    }
+                    .expand_nav {
+                        margin-left: $nav-link-expandable-margin;
+                    }
+                    ul li {
                         a {
-                            padding-left: 3.5rem !important;
+                            padding-left: 4.25rem !important;
                         }
                         .expand_nav {
-                            padding-left: 2.25rem;
+                            margin-left: $nav-link-expandable-margin * 2;
                         }
                         ul li {
                             a {
-                                padding-left: 5rem !important;
+                                padding-left: 5.5rem !important;
                             }
                             .expand_nav {
-                                padding-left: 3.75rem;
+                                margin-left: $nav-link-expandable-margin * 3;
                             }
                             ul li {
                                 a {
-                                    padding-left: 6.5rem !important;
+                                    padding-left: 6.75rem !important;
                                 }
                                 .expand_nav {
-                                    padding-left: 5.25rem !important;
+                                    margin-left: $nav-link-expandable-margin * 4;
                                 }
                             } 
-                        }
+                        } 
                     }
                 }
             }
@@ -237,20 +257,20 @@
                     left: 0.5rem;
                 }
             }
-            .filter-badge {
-                position: absolute;
-                display: inline-block;
-                font-size: 0.85rem;
-                background: $gray-lighter2;
-                padding: 0.1rem 0;
-                color: $gray;
-                right: 0.5rem;
-                text-align: center;
-                min-width: 3em;
-                top: 50%;
-                transform: translateY(-50%);
-            }
         }
     }
 }
 
+.filter-badge {
+    position: absolute;
+    display: inline-block;
+    font-size: 0.85rem;
+    background: $gray-lighter2;
+    padding: 0.1rem 0;
+    color: $gray;
+    right: 0.5rem;
+    text-align: center;
+    min-width: 3em;
+    top: 50%;
+    transform: translateY(-50%);
+}
