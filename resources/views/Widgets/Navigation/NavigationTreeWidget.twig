@@ -16,13 +16,8 @@
 {% set showItemCount = widget.settings.showItemCount.mobile | default(false) %}
 {% set customEntries = widget.settings.customEntries.mobile %}
 
-{# {{ Twig.set("customEntries", customEntries | json_encode) }} #}
-
 <div class="widget widget-navigation-tree widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
-<<<<<<< HEAD:resources/views/Widgets/Category/CategoryNavigationWidget.twig
-        <div class="category-title">{{ Twig.trans("Ceres::Template.itemCategories") }}</div>
-=======
         <div class="category-title" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
             {% if headline | trim is empty %}
                 {{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemCategories")) }}
@@ -31,7 +26,6 @@
             {% endif %}
         </div>
 
->>>>>>> feature/beta/sb_categoryitem:resources/views/Widgets/Navigation/NavigationTreeWidget.twig
         {{ Twig.include("Ceres::PageDesign.Partials.Header.SideNavigation", { 
             spacingPadding: spacingPadding | json_encode,
             inlinePadding : inlinePadding | json_encode,
