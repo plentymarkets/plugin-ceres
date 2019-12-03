@@ -2,7 +2,7 @@ import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("item-store-special", {
+export default Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
 
@@ -72,7 +72,12 @@ Vue.component("item-store-special", {
                 return "";
             }
 
-            return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
+            if (!isNullOrUndefined(this.storeSpecial.names.name))
+            {
+                return this.storeSpecial.names.name;
+            }
+
+            return this.labels[this.storeSpecial.id];
         },
 
         getPercentageSale()

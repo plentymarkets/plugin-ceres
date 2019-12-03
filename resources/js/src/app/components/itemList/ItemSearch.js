@@ -6,7 +6,7 @@ import Vue from "vue";
 
 const ApiService = require("../../services/ApiService");
 
-Vue.component("item-search", {
+export default Vue.component("item-search", {
 
     props: {
         template:

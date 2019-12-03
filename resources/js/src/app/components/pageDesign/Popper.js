@@ -5,7 +5,7 @@ import Popper from "popper.js";
 
 const ModalService        = require("../../services/ModalService");
 
-Vue.component("popper", {
+export default Vue.component("popper", {
 
     delimiters: ["${", "}"],
 

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapMutations } from "vuex";
 
-Vue.component("privacy-settings", {
+export default Vue.component("privacy-settings", {
 
     props:
     {

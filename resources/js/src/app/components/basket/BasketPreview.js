@@ -2,7 +2,7 @@ import ApiService from "../../services/ApiService";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("basket-preview", {
+export default Vue.component("basket-preview", {
 
     delimiters: ["${", "}"],
 

@@ -2,7 +2,7 @@ import Vue from "vue";
 import { mapState, mapActions } from "vuex";
 import WishListItem from "./WishListItem";
 
-Vue.component("wish-list", {
+export default Vue.component("wish-list", {
     components:
     {
         WishListItem

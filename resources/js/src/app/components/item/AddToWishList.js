@@ -5,7 +5,7 @@ import { mapState } from "vuex";
 
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("add-to-wish-list", {
+export default Vue.component("add-to-wish-list", {
 
     props: {
         template: {

@@ -1,7 +1,7 @@
 import Vue from "vue";
 const ModalService = require("../../../services/ModalService");
 
-Vue.component("login-view", {
+export default Vue.component("login-view", {
 
     props:
     {

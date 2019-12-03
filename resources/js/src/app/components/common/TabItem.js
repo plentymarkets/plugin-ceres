@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-Vue.component("tab-item", {
+export default Vue.component("tab-item", {
 
     render(createElement)
     {

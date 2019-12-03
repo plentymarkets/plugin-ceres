@@ -2,7 +2,7 @@ import { removeUrlParam } from "../../services/UrlService";
 import Vue from "vue";
 import { mapState, mapGetters } from "vuex";
 
-Vue.component("shipping-country-select", {
+export default Vue.component("shipping-country-select", {
 
     props:
     {
