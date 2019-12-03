@@ -8,7 +8,7 @@ import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("add-to-basket", {
+export default Vue.component("add-to-basket", {
 
     mixins: [ButtonSizePropertyMixin],
 

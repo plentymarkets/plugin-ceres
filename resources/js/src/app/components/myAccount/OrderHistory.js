@@ -2,7 +2,7 @@ import Vue from "vue";
 
 const ApiService = require("../../services/ApiService");
 
-Vue.component("order-history", {
+export default Vue.component("order-history", {
 
     delimiters: ["${", "}"],
 

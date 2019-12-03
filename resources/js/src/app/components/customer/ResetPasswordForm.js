@@ -7,7 +7,7 @@ import { isNullOrUndefined } from "../../helper/utils";
 const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("reset-password-form", {
+export default Vue.component("reset-password-form", {
 
     props: {
         template:

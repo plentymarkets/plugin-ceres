@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-Vue.component("order-return-item", {
+export default Vue.component("order-return-item", {
 
     props: {
         template:

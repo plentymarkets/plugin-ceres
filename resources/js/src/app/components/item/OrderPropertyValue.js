@@ -2,7 +2,7 @@ import { isDefined } from "../../helper/utils";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("order-property-value", {
+export default Vue.component("order-property-value", {
     props:
     {
         template:

@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-Vue.component("accept-privacy-policy-check", {
+export default Vue.component("accept-privacy-policy-check", {
 
     props: {
         template:

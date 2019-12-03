@@ -5,7 +5,7 @@ import { mapState } from "vuex";
 const ModalService  = require("../../services/ModalService");
 const ApiService    = require("../../services/ApiService");
 
-Vue.component("add-item-to-basket-overlay", {
+export default Vue.component("add-item-to-basket-overlay", {
 
     delimiters: ["${", "}"],
 

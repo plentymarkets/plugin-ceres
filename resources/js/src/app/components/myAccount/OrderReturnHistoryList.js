@@ -6,7 +6,7 @@ import OrderReturnHistoryListItem from "./OrderReturnHistoryListItem";
 const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("order-return-history-list", {
+export default Vue.component("order-return-history-list", {
 
     components:
     {

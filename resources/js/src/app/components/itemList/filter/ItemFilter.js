@@ -2,7 +2,7 @@ import TranslationService from "../../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("item-filter", {
+export default Vue.component("item-filter", {
 
     delimiters: ["${", "}"],
 

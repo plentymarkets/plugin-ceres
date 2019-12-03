@@ -5,7 +5,7 @@ import { isNullOrUndefined } from "../../helper/utils";
 import Vue from "vue";
 import { mapState, mapGetters, mapMutations } from "vuex";
 
-Vue.component("order-property-list-item", {
+export default Vue.component("order-property-list-item", {
 
     props:
     {

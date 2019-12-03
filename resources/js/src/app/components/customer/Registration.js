@@ -11,7 +11,7 @@ const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 const ModalService        = require("../../services/ModalService");
 
-Vue.component("registration", {
+export default Vue.component("registration", {
 
     components:
     {

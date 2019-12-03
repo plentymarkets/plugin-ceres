@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-Vue.component("contact-map", {
+export default Vue.component("contact-map", {
 
     props: [
         "mapZoom",

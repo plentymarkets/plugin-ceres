@@ -4,7 +4,7 @@ import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("coupon", {
+export default Vue.component("coupon", {
 
     props: {
         template:

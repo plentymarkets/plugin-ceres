@@ -4,7 +4,7 @@ const NotificationService = require("../../services/NotificationService");
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("change-email-form", {
+export default Vue.component("change-email-form", {
 
     props: {
         template: {

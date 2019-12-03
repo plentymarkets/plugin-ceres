@@ -2,7 +2,7 @@ import Vue from "vue";
 import OrderHistory from "./OrderHistory";
 import OrderReturnHistory from "./OrderReturnHistory";
 
-Vue.component("history", {
+export default Vue.component("history", {
 
     components:
     {

@@ -5,7 +5,7 @@ import Vue from "vue";
 import { mapState, mapGetters } from "vuex";
 import VariationSelect from "./VariationSelect";
 
-Vue.component("single-item", {
+export default Vue.component("single-item", {
 
     components:
     {

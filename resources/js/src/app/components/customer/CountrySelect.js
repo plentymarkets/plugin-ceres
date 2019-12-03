@@ -3,7 +3,7 @@ import { isNullOrUndefined } from "../../helper/utils";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("country-select", {
+export default Vue.component("country-select", {
 
     delimiters: ["${", "}"],
 

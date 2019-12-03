@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("contact-wish-input", {
+export default Vue.component("contact-wish-input", {
 
     props:
     {

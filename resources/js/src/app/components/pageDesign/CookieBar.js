@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapMutations } from "vuex";
 
-Vue.component("cookie-bar", {
+export default Vue.component("cookie-bar", {
 
     props:
     {
