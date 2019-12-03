@@ -22881,44 +22881,6 @@ module.exports = Set;
 
 /***/ }),
 
-/***/ "./node_modules/lodash/_SetCache.js":
-/*!******************************************!*\
-  !*** ./node_modules/lodash/_SetCache.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js"),
-    setCacheAdd = __webpack_require__(/*! ./_setCacheAdd */ "./node_modules/lodash/_setCacheAdd.js"),
-    setCacheHas = __webpack_require__(/*! ./_setCacheHas */ "./node_modules/lodash/_setCacheHas.js");
-
-/**
- *
- * Creates an array cache object to store unique values.
- *
- * @private
- * @constructor
- * @param {Array} [values] The values to cache.
- */
-function SetCache(values) {
-  var index = -1,
-      length = values == null ? 0 : values.length;
-
-  this.__data__ = new MapCache;
-  while (++index < length) {
-    this.add(values[index]);
-  }
-}
-
-// Add methods to `SetCache`.
-SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
-SetCache.prototype.has = setCacheHas;
-
-module.exports = SetCache;
-
-
-/***/ }),
-
 /***/ "./node_modules/lodash/_Stack.js":
 /*!***************************************!*\
   !*** ./node_modules/lodash/_Stack.js ***!
@@ -23197,40 +23159,6 @@ function arrayPush(array, values) {
 }
 
 module.exports = arrayPush;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_arraySome.js":
-/*!*******************************************!*\
-  !*** ./node_modules/lodash/_arraySome.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * A specialized version of `_.some` for arrays without support for iteratee
- * shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} predicate The function invoked per iteration.
- * @returns {boolean} Returns `true` if any element passes the predicate check,
- *  else `false`.
- */
-function arraySome(array, predicate) {
-  var index = -1,
-      length = array == null ? 0 : array.length;
-
-  while (++index < length) {
-    if (predicate(array[index], index, array)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-module.exports = arraySome;
 
 
 /***/ }),
@@ -23749,139 +23677,6 @@ module.exports = baseIsArguments;
 
 /***/ }),
 
-/***/ "./node_modules/lodash/_baseIsEqual.js":
-/*!*********************************************!*\
-  !*** ./node_modules/lodash/_baseIsEqual.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsEqualDeep = __webpack_require__(/*! ./_baseIsEqualDeep */ "./node_modules/lodash/_baseIsEqualDeep.js"),
-    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
-
-/**
- * The base implementation of `_.isEqual` which supports partial comparisons
- * and tracks traversed objects.
- *
- * @private
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @param {boolean} bitmask The bitmask flags.
- *  1 - Unordered comparison
- *  2 - Partial comparison
- * @param {Function} [customizer] The function to customize comparisons.
- * @param {Object} [stack] Tracks traversed `value` and `other` objects.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- */
-function baseIsEqual(value, other, bitmask, customizer, stack) {
-  if (value === other) {
-    return true;
-  }
-  if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
-}
-
-module.exports = baseIsEqual;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_baseIsEqualDeep.js":
-/*!*************************************************!*\
-  !*** ./node_modules/lodash/_baseIsEqualDeep.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Stack = __webpack_require__(/*! ./_Stack */ "./node_modules/lodash/_Stack.js"),
-    equalArrays = __webpack_require__(/*! ./_equalArrays */ "./node_modules/lodash/_equalArrays.js"),
-    equalByTag = __webpack_require__(/*! ./_equalByTag */ "./node_modules/lodash/_equalByTag.js"),
-    equalObjects = __webpack_require__(/*! ./_equalObjects */ "./node_modules/lodash/_equalObjects.js"),
-    getTag = __webpack_require__(/*! ./_getTag */ "./node_modules/lodash/_getTag.js"),
-    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
-    isBuffer = __webpack_require__(/*! ./isBuffer */ "./node_modules/lodash/isBuffer.js"),
-    isTypedArray = __webpack_require__(/*! ./isTypedArray */ "./node_modules/lodash/isTypedArray.js");
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1;
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    objectTag = '[object Object]';
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * A specialized version of `baseIsEqual` for arrays and objects which performs
- * deep comparisons and tracks traversed objects enabling objects with circular
- * references to be compared.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} [stack] Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
-  var objIsArr = isArray(object),
-      othIsArr = isArray(other),
-      objTag = objIsArr ? arrayTag : getTag(object),
-      othTag = othIsArr ? arrayTag : getTag(other);
-
-  objTag = objTag == argsTag ? objectTag : objTag;
-  othTag = othTag == argsTag ? objectTag : othTag;
-
-  var objIsObj = objTag == objectTag,
-      othIsObj = othTag == objectTag,
-      isSameTag = objTag == othTag;
-
-  if (isSameTag && isBuffer(object)) {
-    if (!isBuffer(other)) {
-      return false;
-    }
-    objIsArr = true;
-    objIsObj = false;
-  }
-  if (isSameTag && !objIsObj) {
-    stack || (stack = new Stack);
-    return (objIsArr || isTypedArray(object))
-      ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
-      : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
-  }
-  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
-    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
-
-    if (objIsWrapped || othIsWrapped) {
-      var objUnwrapped = objIsWrapped ? object.value() : object,
-          othUnwrapped = othIsWrapped ? other.value() : other;
-
-      stack || (stack = new Stack);
-      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
-    }
-  }
-  if (!isSameTag) {
-    return false;
-  }
-  stack || (stack = new Stack);
-  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
-}
-
-module.exports = baseIsEqualDeep;
-
-
-/***/ }),
-
 /***/ "./node_modules/lodash/_baseIsMap.js":
 /*!*******************************************!*\
   !*** ./node_modules/lodash/_baseIsMap.js ***!
@@ -24254,30 +24049,6 @@ function baseUnary(func) {
 }
 
 module.exports = baseUnary;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_cacheHas.js":
-/*!******************************************!*\
-  !*** ./node_modules/lodash/_cacheHas.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Checks if a `cache` value for `key` exists.
- *
- * @private
- * @param {Object} cache The cache to query.
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function cacheHas(cache, key) {
-  return cache.has(key);
-}
-
-module.exports = cacheHas;
 
 
 /***/ }),
@@ -24670,323 +24441,6 @@ var defineProperty = (function() {
 }());
 
 module.exports = defineProperty;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_equalArrays.js":
-/*!*********************************************!*\
-  !*** ./node_modules/lodash/_equalArrays.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var SetCache = __webpack_require__(/*! ./_SetCache */ "./node_modules/lodash/_SetCache.js"),
-    arraySome = __webpack_require__(/*! ./_arraySome */ "./node_modules/lodash/_arraySome.js"),
-    cacheHas = __webpack_require__(/*! ./_cacheHas */ "./node_modules/lodash/_cacheHas.js");
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/**
- * A specialized version of `baseIsEqualDeep` for arrays with support for
- * partial deep comparisons.
- *
- * @private
- * @param {Array} array The array to compare.
- * @param {Array} other The other array to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} stack Tracks traversed `array` and `other` objects.
- * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
- */
-function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
-      arrLength = array.length,
-      othLength = other.length;
-
-  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
-    return false;
-  }
-  // Assume cyclic values are equal.
-  var stacked = stack.get(array);
-  if (stacked && stack.get(other)) {
-    return stacked == other;
-  }
-  var index = -1,
-      result = true,
-      seen = (bitmask & COMPARE_UNORDERED_FLAG) ? new SetCache : undefined;
-
-  stack.set(array, other);
-  stack.set(other, array);
-
-  // Ignore non-index properties.
-  while (++index < arrLength) {
-    var arrValue = array[index],
-        othValue = other[index];
-
-    if (customizer) {
-      var compared = isPartial
-        ? customizer(othValue, arrValue, index, other, array, stack)
-        : customizer(arrValue, othValue, index, array, other, stack);
-    }
-    if (compared !== undefined) {
-      if (compared) {
-        continue;
-      }
-      result = false;
-      break;
-    }
-    // Recursively compare arrays (susceptible to call stack limits).
-    if (seen) {
-      if (!arraySome(other, function(othValue, othIndex) {
-            if (!cacheHas(seen, othIndex) &&
-                (arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
-              return seen.push(othIndex);
-            }
-          })) {
-        result = false;
-        break;
-      }
-    } else if (!(
-          arrValue === othValue ||
-            equalFunc(arrValue, othValue, bitmask, customizer, stack)
-        )) {
-      result = false;
-      break;
-    }
-  }
-  stack['delete'](array);
-  stack['delete'](other);
-  return result;
-}
-
-module.exports = equalArrays;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_equalByTag.js":
-/*!********************************************!*\
-  !*** ./node_modules/lodash/_equalByTag.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
-    Uint8Array = __webpack_require__(/*! ./_Uint8Array */ "./node_modules/lodash/_Uint8Array.js"),
-    eq = __webpack_require__(/*! ./eq */ "./node_modules/lodash/eq.js"),
-    equalArrays = __webpack_require__(/*! ./_equalArrays */ "./node_modules/lodash/_equalArrays.js"),
-    mapToArray = __webpack_require__(/*! ./_mapToArray */ "./node_modules/lodash/_mapToArray.js"),
-    setToArray = __webpack_require__(/*! ./_setToArray */ "./node_modules/lodash/_setToArray.js");
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/** `Object#toString` result references. */
-var boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    symbolTag = '[object Symbol]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    dataViewTag = '[object DataView]';
-
-/** Used to convert symbols to primitives and strings. */
-var symbolProto = Symbol ? Symbol.prototype : undefined,
-    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
-
-/**
- * A specialized version of `baseIsEqualDeep` for comparing objects of
- * the same `toStringTag`.
- *
- * **Note:** This function only supports comparing values with tags of
- * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {string} tag The `toStringTag` of the objects to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} stack Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
-  switch (tag) {
-    case dataViewTag:
-      if ((object.byteLength != other.byteLength) ||
-          (object.byteOffset != other.byteOffset)) {
-        return false;
-      }
-      object = object.buffer;
-      other = other.buffer;
-
-    case arrayBufferTag:
-      if ((object.byteLength != other.byteLength) ||
-          !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
-        return false;
-      }
-      return true;
-
-    case boolTag:
-    case dateTag:
-    case numberTag:
-      // Coerce booleans to `1` or `0` and dates to milliseconds.
-      // Invalid dates are coerced to `NaN`.
-      return eq(+object, +other);
-
-    case errorTag:
-      return object.name == other.name && object.message == other.message;
-
-    case regexpTag:
-    case stringTag:
-      // Coerce regexes to strings and treat strings, primitives and objects,
-      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
-      // for more details.
-      return object == (other + '');
-
-    case mapTag:
-      var convert = mapToArray;
-
-    case setTag:
-      var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
-      convert || (convert = setToArray);
-
-      if (object.size != other.size && !isPartial) {
-        return false;
-      }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked) {
-        return stacked == other;
-      }
-      bitmask |= COMPARE_UNORDERED_FLAG;
-
-      // Recursively compare objects (susceptible to call stack limits).
-      stack.set(object, other);
-      var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
-      stack['delete'](object);
-      return result;
-
-    case symbolTag:
-      if (symbolValueOf) {
-        return symbolValueOf.call(object) == symbolValueOf.call(other);
-      }
-  }
-  return false;
-}
-
-module.exports = equalByTag;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_equalObjects.js":
-/*!**********************************************!*\
-  !*** ./node_modules/lodash/_equalObjects.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getAllKeys = __webpack_require__(/*! ./_getAllKeys */ "./node_modules/lodash/_getAllKeys.js");
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1;
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * A specialized version of `baseIsEqualDeep` for objects with support for
- * partial deep comparisons.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} stack Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
-      objProps = getAllKeys(object),
-      objLength = objProps.length,
-      othProps = getAllKeys(other),
-      othLength = othProps.length;
-
-  if (objLength != othLength && !isPartial) {
-    return false;
-  }
-  var index = objLength;
-  while (index--) {
-    var key = objProps[index];
-    if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
-      return false;
-    }
-  }
-  // Assume cyclic values are equal.
-  var stacked = stack.get(object);
-  if (stacked && stack.get(other)) {
-    return stacked == other;
-  }
-  var result = true;
-  stack.set(object, other);
-  stack.set(other, object);
-
-  var skipCtor = isPartial;
-  while (++index < objLength) {
-    key = objProps[index];
-    var objValue = object[key],
-        othValue = other[key];
-
-    if (customizer) {
-      var compared = isPartial
-        ? customizer(othValue, objValue, key, other, object, stack)
-        : customizer(objValue, othValue, key, object, other, stack);
-    }
-    // Recursively compare objects (susceptible to call stack limits).
-    if (!(compared === undefined
-          ? (objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack))
-          : compared
-        )) {
-      result = false;
-      break;
-    }
-    skipCtor || (skipCtor = key == 'constructor');
-  }
-  if (result && !skipCtor) {
-    var objCtor = object.constructor,
-        othCtor = other.constructor;
-
-    // Non `Object` object instances with different constructors are not equal.
-    if (objCtor != othCtor &&
-        ('constructor' in object && 'constructor' in other) &&
-        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
-          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
-      result = false;
-    }
-  }
-  stack['delete'](object);
-  stack['delete'](other);
-  return result;
-}
-
-module.exports = equalObjects;
 
 
 /***/ }),
@@ -26154,35 +25608,6 @@ module.exports = mapCacheSet;
 
 /***/ }),
 
-/***/ "./node_modules/lodash/_mapToArray.js":
-/*!********************************************!*\
-  !*** ./node_modules/lodash/_mapToArray.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Converts `map` to its key-value pairs.
- *
- * @private
- * @param {Object} map The map to convert.
- * @returns {Array} Returns the key-value pairs.
- */
-function mapToArray(map) {
-  var index = -1,
-      result = Array(map.size);
-
-  map.forEach(function(value, key) {
-    result[++index] = [key, value];
-  });
-  return result;
-}
-
-module.exports = mapToArray;
-
-
-/***/ }),
-
 /***/ "./node_modules/lodash/_memoizeCapped.js":
 /*!***********************************************!*\
   !*** ./node_modules/lodash/_memoizeCapped.js ***!
@@ -26402,90 +25827,6 @@ var freeSelf = typeof self == 'object' && self && self.Object === Object && self
 var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_setCacheAdd.js":
-/*!*********************************************!*\
-  !*** ./node_modules/lodash/_setCacheAdd.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/**
- * Adds `value` to the array cache.
- *
- * @private
- * @name add
- * @memberOf SetCache
- * @alias push
- * @param {*} value The value to cache.
- * @returns {Object} Returns the cache instance.
- */
-function setCacheAdd(value) {
-  this.__data__.set(value, HASH_UNDEFINED);
-  return this;
-}
-
-module.exports = setCacheAdd;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_setCacheHas.js":
-/*!*********************************************!*\
-  !*** ./node_modules/lodash/_setCacheHas.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Checks if `value` is in the array cache.
- *
- * @private
- * @name has
- * @memberOf SetCache
- * @param {*} value The value to search for.
- * @returns {number} Returns `true` if `value` is found, else `false`.
- */
-function setCacheHas(value) {
-  return this.__data__.has(value);
-}
-
-module.exports = setCacheHas;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/_setToArray.js":
-/*!********************************************!*\
-  !*** ./node_modules/lodash/_setToArray.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Converts `set` to an array of its values.
- *
- * @private
- * @param {Object} set The set to convert.
- * @returns {Array} Returns the values.
- */
-function setToArray(set) {
-  var index = -1,
-      result = Array(set.size);
-
-  set.forEach(function(value) {
-    result[++index] = value;
-  });
-  return result;
-}
-
-module.exports = setToArray;
 
 
 /***/ }),
@@ -27054,52 +26395,6 @@ var isBuffer = nativeIsBuffer || stubFalse;
 module.exports = isBuffer;
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
-
-/***/ }),
-
-/***/ "./node_modules/lodash/isEqual.js":
-/*!****************************************!*\
-  !*** ./node_modules/lodash/isEqual.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsEqual = __webpack_require__(/*! ./_baseIsEqual */ "./node_modules/lodash/_baseIsEqual.js");
-
-/**
- * Performs a deep comparison between two values to determine if they are
- * equivalent.
- *
- * **Note:** This method supports comparing arrays, array buffers, booleans,
- * date objects, error objects, maps, numbers, `Object` objects, regexes,
- * sets, strings, symbols, and typed arrays. `Object` objects are compared
- * by their own, not inherited, enumerable properties. Functions and DOM
- * nodes are compared by strict equality, i.e. `===`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- * @example
- *
- * var object = { 'a': 1 };
- * var other = { 'a': 1 };
- *
- * _.isEqual(object, other);
- * // => true
- *
- * object === other;
- * // => false
- */
-function isEqual(value, other) {
-  return baseIsEqual(value, other);
-}
-
-module.exports = isEqual;
-
 
 /***/ }),
 
@@ -53383,7 +52678,7 @@ module.exports = function(module) {
 /*!**************************************************************************!*\
   !*** ./resources/js/src/app/components/basket/AddItemToBasketOverlay.js ***!
   \**************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53446,7 +52741,7 @@ var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./res
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overlay", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overlay", {
   delimiters: ["${", "}"],
   props: {
     template: {
@@ -53587,7 +52882,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overla
       return orderParamValue;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -53595,7 +52890,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("add-item-to-basket-overla
 /*!***************************************************************!*\
   !*** ./resources/js/src/app/components/basket/AddToBasket.js ***!
   \***************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53700,7 +52995,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("add-to-basket", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("add-to-basket", {
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_31__["ButtonSizePropertyMixin"]],
   props: {
     template: {
@@ -53924,7 +53219,7 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("add-to-basket", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -53932,7 +53227,7 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("add-to-basket", {
 /*!*****************************************************************!*\
   !*** ./resources/js/src/app/components/basket/BasketPreview.js ***!
   \*****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53944,7 +53239,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("basket-preview", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("basket-preview", {
   delimiters: ["${", "}"],
   props: {
     template: {
@@ -54014,7 +53309,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("basket-preview", {
       }, 1);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -54022,7 +53317,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("basket-preview", {
 /*!****************************************************************!*\
   !*** ./resources/js/src/app/components/basket/BasketTotals.js ***!
   \****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54069,7 +53364,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("basket-totals", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("basket-totals", {
   props: {
     template: {
       type: String,
@@ -54114,7 +53409,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("basket-totals", {
       return value / (100 - percent) * 100;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -54122,7 +53417,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("basket-totals", {
 /*!**********************************************************!*\
   !*** ./resources/js/src/app/components/basket/Coupon.js ***!
   \**********************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54176,7 +53471,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_12___default.a.component("coupon", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_12___default.a.component("coupon", {
   props: {
     template: {
       type: String,
@@ -54284,7 +53579,7 @@ vue__WEBPACK_IMPORTED_MODULE_12___default.a.component("coupon", {
       return _services_TranslationService__WEBPACK_IMPORTED_MODULE_11__["default"].translate("Ceres::Template.couponRedeemFailure");
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -54292,7 +53587,7 @@ vue__WEBPACK_IMPORTED_MODULE_12___default.a.component("coupon", {
 /*!*******************************************************************!*\
   !*** ./resources/js/src/app/components/basket/list/BasketList.js ***!
   \*******************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54300,9 +53595,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _BasketListItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BasketListItem */ "./resources/js/src/app/components/basket/list/BasketListItem.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-list", {
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-list", {
+  components: {
+    BasketListItem: _BasketListItem__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   props: {
     template: {
       type: String,
@@ -54327,7 +53627,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-list", {
       return state.basket.isBasketInitiallyLoaded;
     }
   })
-});
+}));
 
 /***/ }),
 
@@ -54335,7 +53635,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("basket-list", {
 /*!***********************************************************************!*\
   !*** ./resources/js/src/app/components/basket/list/BasketListItem.js ***!
   \***********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54429,7 +53729,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var NotificationService = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_26___default.a.component("basket-list-item", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_26___default.a.component("basket-list-item", {
   props: {
     template: {
       type: String,
@@ -54605,1176 +53905,7 @@ vue__WEBPACK_IMPORTED_MODULE_26___default.a.component("basket-list-item", {
       return this.basketDetailsData.includes(value);
     }
   }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/checkout/AcceptGtcCheck.js":
-/*!********************************************************************!*\
-  !*** ./resources/js/src/app/components/checkout/AcceptGtcCheck.js ***!
-  \********************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-
-
-
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("accept-gtc-check", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-accept-gtc-check"
-    },
-    hideCheckbox: {
-      type: Boolean
-    },
-    isPreselected: {
-      type: Boolean
-    },
-    isRequired: {
-      type: Boolean,
-      default: true
-    },
-    customText: {
-      type: String,
-      default: ""
-    }
-  },
-  data: function data() {
-    return {
-      isChecked: this.isPreselected
-    };
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapState"])({
-    showError: function showError(state) {
-      return state.checkout.validation.gtc.showError;
-    }
-  })),
-  created: function created() {
-    if (this.hideCheckbox) {
-      this.isChecked = true;
-    } else if (this.isRequired) {
-      this.$store.commit("setGtcValidator", this.validate);
-    }
-  },
-  methods: {
-    validate: function validate() {
-      var showError = !this.isChecked;
-      this.$store.commit("setGtcShowError", showError);
-
-      if (showError) {
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.checkoutCheckAcceptGtc"));
-      }
-    }
-  },
-  watch: {
-    isChecked: function isChecked() {
-      if (this.showError) {
-        this.validate();
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/checkout/Checkout.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/src/app/components/checkout/Checkout.js ***!
-  \**************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_find_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.find-index */ "./node_modules/core-js/modules/es.array.find-index.js");
-/* harmony import */ var core_js_modules_es_array_find_index__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_index__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.sort */ "./node_modules/core-js/modules/es.array.sort.js");
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-var _isEqual = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/isEqual.js");
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("checkout", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-checkout"
-    },
-    initialCheckout: {
-      type: Object,
-      required: true
-    },
-    deliveryAddressList: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    selectedDeliveryAddress: {
-      type: Number,
-      default: -99
-    },
-    billingAddressList: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    selectedBillingAddress: {
-      type: Number,
-      default: 0
-    }
-  },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapState"])({
-    checkout: function checkout(state) {
-      return state.checkout;
-    },
-    deliveryAddressId: function deliveryAddressId(state) {
-      return state.address.deliveryAddressId;
-    }
-  }),
-  created: function created() {
-    this.$store.dispatch("setCheckout", this.initialCheckout);
-    this.$store.dispatch("initBillingAddress", {
-      id: this.selectedBillingAddress,
-      addressList: this.billingAddressList
-    });
-    this.$store.dispatch("initDeliveryAddress", {
-      id: this.selectedDeliveryAddress,
-      addressList: this.deliveryAddressList
-    });
-    this.addEventHandler();
-    Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_13__["removeUrlParam"])("readonlyCheckout");
-  },
-  methods: {
-    addEventHandler: function addEventHandler() {
-      var _this = this;
-
-      ApiService.listen("CheckoutChanged", function (checkout) {
-        _this.handleCheckoutChangedEvent(checkout.checkout);
-      });
-      document.addEventListener("afterPaymentMethodChanged", function (event) {
-        var newMethodOfPaymentId = event.detail;
-
-        if (newMethodOfPaymentId !== _this.checkout.payment.methodOfPaymentId) {
-          _this.updateCheckoutAndBasket();
-        }
-      });
-    },
-    updateCheckoutAndBasket: function updateCheckoutAndBasket() {
-      var _this2 = this;
-
-      this.$store.commit("setIsBasketLoading", true);
-      var reloadBasketPromise = this.$store.dispatch("refreshBasket");
-      var reloadCheckoutPromise = this.$store.dispatch("refreshCheckout");
-      Promise.all([reloadBasketPromise, reloadCheckoutPromise]).then(function (data) {
-        _this2.$store.commit("setIsBasketLoading", false);
-      });
-    },
-    handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
-      if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
-        NotificationService.info(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.checkoutMethodOfPaymentListChanged"));
-        this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
-      }
-
-      if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList.slice())) {
-        this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
-      }
-
-      if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId) {
-        NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.checkoutMethodOfPaymentChanged"));
-        this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
-      }
-
-      if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId) {
-        NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.checkoutShippingProfileChanged"));
-        this.$store.commit("setShippingProfile", checkout.shippingProfileId);
-      }
-
-      if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId) {
-        this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
-      }
-
-      var responseDeliveryAddressId = checkout.deliveryAddressId !== 0 ? checkout.deliveryAddressId : -99;
-
-      if (this.deliveryAddressId !== responseDeliveryAddressId) {
-        NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.addressChangedWarning"));
-        this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
-      }
-
-      if (!_isEqual(this.checkout.shipping.maxDeliveryDays, checkout.maxDeliveryDays)) {
-        this.$store.commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
-      }
-
-      if (this.checkout.readOnly !== checkout.readOnly) {
-        this.$store.commit("setIsCheckoutReadonly", checkout.readOnly);
-        window.location.href = App.urls.checkout;
-      }
-    },
-    hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
-      if (oldList.length !== newList.length) {
-        NotificationService.info(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.checkoutShippingProfileListChanged"));
-        return true;
-      }
-
-      this.sortList(oldList, "parcelServicePresetId");
-      this.sortList(newList, "parcelServicePresetId");
-
-      for (var index in oldList) {
-        if (oldList[index].parcelServicePresetId !== newList[index].parcelServicePresetId) {
-          NotificationService.info(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.checkoutShippingProfileListChanged"));
-          return true;
-        } else if (oldList[index].shippingAmount !== newList[index].shippingAmount) {
-          NotificationService.info(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.checkoutShippingProfilePriceChanged"));
-          return true;
-        } else if (oldList[index].shippingPrivacyInformation !== newList[index].shippingPrivacyInformation) {
-          return true;
-        }
-      }
-
-      return false;
-    },
-    isEquals: function isEquals(oldList, newList, fieldToCompare) {
-      if (oldList.length !== newList.length) {
-        return false;
-      }
-
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        var _loop = function _loop() {
-          var oldListItem = _step.value;
-
-          if (newList.findIndex(function (newListItem) {
-            return newListItem[fieldToCompare] === oldListItem[fieldToCompare];
-          }) === -1) {
-            return {
-              v: false
-            };
-          }
-        };
-
-        for (var _iterator = oldList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var _ret = _loop();
-
-          if (_typeof(_ret) === "object") return _ret.v;
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      return true;
-    },
-    sortList: function sortList(list, field) {
-      list.sort(function (valueA, valueB) {
-        if (valueA[field] > valueB[field]) {
-          return 1;
-        }
-
-        if (valueA[field] < valueB[field]) {
-          return -1;
-        }
-
-        return 0;
-      });
-    },
-    showModal: function showModal(content) {
-      $(this.$refs.checkoutModalContent).html(content);
-      $(this.$refs.checkoutModal).modal("show");
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/checkout/ContactWishInput.js":
-/*!**********************************************************************!*\
-  !*** ./resources/js/src/app/components/checkout/ContactWishInput.js ***!
-  \**********************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("contact-wish-input", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-contact-wish-input"
-    }
-  },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
-    contactWish: function contactWish(state) {
-      return state.checkout.contactWish;
-    }
-  }),
-  methods: {
-    updateContactWish: function updateContactWish(event) {
-      this.$store.commit("setContactWish", event.srcElement.value);
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/checkout/PaymentProviderSelect.js":
-/*!***************************************************************************!*\
-  !*** ./resources/js/src/app/components/checkout/PaymentProviderSelect.js ***!
-  \***************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.includes */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
-
-
-
-
-
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("payment-provider-select", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-payment-provider-select"
-    },
-    paddingClasses: {
-      type: String,
-      default: null
-    },
-    paddingInlineStyles: {
-      type: String,
-      default: null
-    }
-  },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapState"])({
-    methodOfPaymentList: function methodOfPaymentList(state) {
-      return state.checkout.payment.methodOfPaymentList;
-    },
-    methodOfPaymentId: function methodOfPaymentId(state) {
-      return state.checkout.payment.methodOfPaymentId;
-    },
-    showError: function showError(state) {
-      return state.checkout.validation.paymentProvider.showError;
-    },
-    isBasketLoading: function isBasketLoading(state) {
-      return state.basket.isBasketLoading;
-    },
-    isCheckoutReadonly: function isCheckoutReadonly(state) {
-      return state.checkout.readOnly;
-    },
-    selectedShippingProfile: function selectedShippingProfile(state) {
-      return state.checkout.shipping.selectedShippingProfile;
-    }
-  }),
-
-  /**
-   * Initialise the event listener
-   */
-  created: function created() {
-    this.$store.commit("setPaymentProviderValidator", this.validate);
-  },
-  methods: {
-    /**
-     * Event when changing the payment provider
-     */
-    onPaymentProviderChange: function onPaymentProviderChange(newMethodOfPayment) {
-      var _this = this;
-
-      this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id).then(function (data) {
-        document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {
-          detail: _this.methodOfPaymentId
-        }));
-      }, function (error) {
-        console.log("error");
-      });
-      this.validate();
-    },
-    validate: function validate() {
-      var showError = !(this.methodOfPaymentId > 0);
-      this.$store.commit("setPaymentProviderShowError", showError);
-
-      if (showError) {
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_2__["default"].translate("Ceres::Template.checkoutCheckPaymentProvider"));
-      }
-    },
-    isPaymentMethodExcluded: function isPaymentMethodExcluded(paymentMethodId) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isDefined"])(this.selectedShippingProfile.excludedPaymentMethodIds)) {
-        return this.selectedShippingProfile.excludedPaymentMethodIds.includes(paymentMethodId);
-      } else {
-        return false;
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/checkout/PlaceOrder.js":
-/*!****************************************************************!*\
-  !*** ./resources/js/src/app/components/checkout/PlaceOrder.js ***!
-  \****************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
-
-
-
-
-
-
-
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("place-order", {
-  mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_15__["ButtonSizePropertyMixin"]],
-  props: {
-    template: {
-      type: String,
-      default: "#vue-place-order"
-    },
-    targetContinue: {
-      type: String
-    },
-    paddingClasses: {
-      type: String,
-      default: null
-    },
-    paddingInlineStyles: {
-      type: String,
-      default: null
-    }
-  },
-  data: function data() {
-    return {
-      waiting: false
-    };
-  },
-  computed: _objectSpread({
-    buttonClasses: function buttonClasses() {
-      var classes = [];
-
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.buttonSizeClass)) {
-        classes.push(this.buttonSizeClass);
-      }
-
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.paddingClasses)) {
-        classes.push(this.paddingClasses.split(" "));
-      }
-
-      return classes;
-    },
-    activeNewsletterSubscriptions: function activeNewsletterSubscriptions() {
-      var activeNewsletterSubscriptions = [];
-
-      for (var emailFolder in this.newsletterSubscription) {
-        var emailFolderValue = this.newsletterSubscription[emailFolder];
-
-        if (emailFolderValue) {
-          activeNewsletterSubscriptions.push(emailFolder);
-        }
-      }
-
-      return activeNewsletterSubscriptions;
-    }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_14__["mapState"])({
-    checkoutValidation: function checkoutValidation(state) {
-      return state.checkout.validation;
-    },
-    contactWish: function contactWish(state) {
-      return state.checkout.contactWish;
-    },
-    isBasketLoading: function isBasketLoading(state) {
-      return state.basket.isBasketLoading;
-    },
-    basketItemQuantity: function basketItemQuantity(state) {
-      return state.basket.data.itemQuantity;
-    },
-    isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
-      return state.basket.isBasketInitiallyLoaded;
-    },
-    shippingPrivacyHintAccepted: function shippingPrivacyHintAccepted(state) {
-      return state.checkout.shippingPrivacyHintAccepted;
-    },
-    newsletterSubscription: function newsletterSubscription(state) {
-      return state.checkout.newsletterSubscription;
-    }
-  })),
-  methods: {
-    placeOrder: function placeOrder() {
-      var _this = this;
-
-      this.waiting = true;
-      var url = "/rest/io/order/additional_information";
-      var params = {
-        orderContactWish: this.contactWish,
-        shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
-        newsletterSubscriptions: this.activeNewsletterSubscriptions
-      };
-      var options = {
-        supressNotifications: true
-      };
-      ApiService.post(url, params, options).always(function () {
-        _this.preparePayment();
-      });
-    },
-    preparePayment: function preparePayment() {
-      var _this2 = this;
-
-      this.waiting = true;
-
-      if (this.validateCheckout() && this.basketItemQuantity > 0) {
-        ApiService.post("/rest/io/checkout/payment").done(function (response) {
-          _this2.afterPreparePayment(response);
-        }).fail(function (error) {
-          _this2.waiting = false;
-        });
-      } else {
-        this.waiting = false;
-      }
-    },
-    validateCheckout: function validateCheckout() {
-      var isValid = true;
-
-      for (var index in this.checkoutValidation) {
-        if (this.checkoutValidation[index].validate) {
-          this.checkoutValidation[index].validate();
-
-          if (this.checkoutValidation[index].showError) {
-            isValid = !this.checkoutValidation[index].showError;
-          }
-        }
-      }
-
-      return isValid;
-    },
-    afterPreparePayment: function afterPreparePayment(response) {
-      var paymentType = response.type || "errorCode";
-      var paymentValue = response.value || "";
-
-      switch (paymentType) {
-        case "continue":
-          var target = this.targetContinue;
-
-          if (target) {
-            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_12__["navigateTo"])(target);
-          }
-
-          break;
-
-        case "redirectUrl":
-          // redirect to given payment provider
-          window.location.assign(paymentValue);
-          break;
-
-        case "externalContentUrl":
-          // show external content in iframe
-          this.showModal(paymentValue, true);
-          break;
-
-        case "htmlContent":
-          this.showModal(paymentValue, false);
-          break;
-
-        case "errorCode":
-          NotificationService.error(paymentValue);
-          this.waiting = false;
-          break;
-
-        default:
-          NotificationService.error("Unknown response from payment provider: " + paymentType);
-          this.waiting = false;
-          break;
-      }
-    },
-    showModal: function showModal(content, isExternalContent) {
-      if (isExternalContent) {
-        this.$emit("payment-response", "<iframe src=\"" + content + "\">");
-      } else {
-        this.$emit("payment-response", content);
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/checkout/ShippingPrivacyHintCheck.js":
-/*!******************************************************************************!*\
-  !*** ./resources/js/src/app/components/checkout/ShippingPrivacyHintCheck.js ***!
-  \******************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_18___default.a.component("shipping-privacy-hint-check", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-shipping-privacy-hint-check"
-    }
-  },
-  computed: _objectSpread({
-    currentShippingProfile: function currentShippingProfile() {
-      var _this = this;
-
-      return this.shippingProfileList.find(function (profile) {
-        return profile.parcelServicePresetId === _this.shippingProfileId;
-      });
-    },
-    currentPrivacyHints: function currentPrivacyHints() {
-      if (this.currentShippingProfile && this.currentShippingProfile.shippingPrivacyInformation) {
-        return this.currentShippingProfile.shippingPrivacyInformation.filter(function (entry) {
-          return !!entry.showDataPrivacyAgreementHint;
-        });
-      }
-
-      return [];
-    },
-    privacyHintContent: function privacyHintContent() {
-      var andTranslation = _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutShippingPrivacyHintAnd");
-      var parcelServiceInformation = "";
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = this.currentPrivacyHints[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var hint = _step.value;
-
-          if (parcelServiceInformation !== "") {
-            parcelServiceInformation += " ".concat(andTranslation, " ");
-          }
-
-          parcelServiceInformation += "<strong>".concat(hint.parcelServiceName, ", ").concat(hint.parcelServiceAddress, "</strong>");
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutShippingPrivacyHint", {
-        parcelServiceInformation: parcelServiceInformation
-      });
-    }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_19__["mapState"])({
-    shippingProfileList: function shippingProfileList(state) {
-      return state.checkout.shipping.shippingProfileList;
-    },
-    shippingProfileId: function shippingProfileId(state) {
-      return state.checkout.shipping.shippingProfileId;
-    },
-    shippingPrivacyHintAccepted: function shippingPrivacyHintAccepted(state) {
-      return state.checkout.shippingPrivacyHintAccepted;
-    }
-  })),
-  methods: {
-    setValue: function setValue(value) {
-      this.$store.commit("setShippingPrivacyHintAccepted", value);
-    }
-  },
-  watch: {
-    currentShippingProfile: function currentShippingProfile(value, oldValue) {
-      if (this.shippingPrivacyHintAccepted && value.parcelServiceId !== oldValue.parcelServiceId) {
-        this.setValue(false);
-        $(this.$refs.formCheck).fadeTo(100, 0.1).fadeTo(400, 1.0);
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutShippingPrivacyReseted"));
-      } else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {
-        this.setValue(false);
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/checkout/ShippingProfileSelect.js":
-/*!***************************************************************************!*\
-  !*** ./resources/js/src/app/components/checkout/ShippingProfileSelect.js ***!
-  \***************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.includes */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
-
-
-
-
-
-
-
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_5___default.a.component("shipping-profile-select", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-shipping-profile-select"
-    },
-    paddingClasses: {
-      type: String,
-      default: null
-    },
-    paddingInlineStyles: {
-      type: String,
-      default: null
-    },
-    paymentContainerIsOverwritten: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapState"])({
-    shippingProfileList: function shippingProfileList(state) {
-      return state.checkout.shipping.shippingProfileList;
-    },
-    maxDeliveryDays: function maxDeliveryDays(state) {
-      return state.checkout.shipping.maxDeliveryDays;
-    },
-    shippingProfileId: function shippingProfileId(state) {
-      return state.checkout.shipping.shippingProfileId;
-    },
-    showError: function showError(state) {
-      return state.checkout.validation.shippingProfile.showError;
-    },
-    isBasketLoading: function isBasketLoading(state) {
-      return state.basket.isBasketLoading;
-    },
-    isCheckoutReadonly: function isCheckoutReadonly(state) {
-      return state.checkout.readOnly;
-    },
-    selectedPaymentMethodId: function selectedPaymentMethodId(state) {
-      return state.checkout.payment.methodOfPaymentId;
-    }
-  }),
-
-  /**
-   * Add a shipping provider
-   * Initialise the event listener
-   */
-  created: function created() {
-    this.$store.commit("setShippingProfileValidator", this.validate);
-  },
-  methods: {
-    /**
-     * Method on shipping profile changed
-     */
-    onShippingProfileChange: function onShippingProfileChange(shippingProfileId) {
-      var _this = this;
-
-      this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(function (shippingProfile) {
-        return shippingProfile.parcelServicePresetId === shippingProfileId;
-      })).then(function (data) {
-        document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", {
-          detail: _this.shippingProfileId
-        }));
-      }, function (error) {
-        console.log("error");
-      });
-      this.validate();
-    },
-    validate: function validate() {
-      var showError = this.shippingProfileId <= 0 || this.shippingProfileList.length <= 0;
-      this.$store.commit("setShippingProfileShowError", showError);
-
-      if (showError) {
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_4__["default"].translate("Ceres::Template.checkoutCheckShippingProfile"));
-      }
-    },
-    getTooltip: function getTooltip(shippingProfileId, methodOfPaymentId) {
-      var translationKey = "";
-      var params = {};
-
-      for (var i = 0; i < this.shippingProfileList.length; i++) {
-        var shippingProfile = this.shippingProfileList[i];
-
-        if (shippingProfile.parcelServicePresetId === shippingProfileId) {
-          if (this.paymentContainerIsOverwritten) {
-            translationKey = "Ceres::Template.checkoutChangePaymentMethodToHint";
-            params.paymentMethodNames = shippingProfile.allowedPaymentMethodNames.join(",");
-          } else {
-            translationKey = "Ceres::Template.checkoutChangePaymentMethodHint";
-          }
-
-          break;
-        }
-      }
-
-      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_4__["default"].translate(translationKey, params);
-    },
-    isPaymentMethodExcluded: function isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isDefined"])(shippingProfile.excludedPaymentMethodIds)) {
-        return shippingProfile.excludedPaymentMethodIds.includes(selectedPaymentMethodId);
-      } else {
-        return false;
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/checkout/SubscribeNewsletterCheck.js":
-/*!******************************************************************************!*\
-  !*** ./resources/js/src/app/components/checkout/SubscribeNewsletterCheck.js ***!
-  \******************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("subscribe-newsletter-check", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-subscribe-newsletter-check"
-    },
-    emailFolder: {
-      type: Number,
-      default: 0
-    },
-    hideCheckbox: {
-      type: Boolean
-    },
-    isPreselected: {
-      type: Boolean
-    },
-    isRequired: {
-      type: Boolean,
-      default: true
-    },
-    customText: {
-      type: String,
-      default: ""
-    }
-  },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapState"])({
-    newsletterSubscription: function newsletterSubscription(state) {
-      return state.checkout.newsletterSubscription[this.emailFolder];
-    },
-    showError: function showError(state) {
-      if (state.checkout.validation["subscribeNewsletter_".concat(this.emailFolder)]) {
-        return state.checkout.validation["subscribeNewsletter_".concat(this.emailFolder)].showError;
-      }
-
-      return null;
-    }
-  }),
-  created: function created() {
-    if (this.isPreselected || this.hideCheckbox) {
-      this.setValue(true);
-    }
-
-    if (this.isRequired) {
-      this.$store.commit("addSubscribeNewsletterValidate", {
-        emailFolder: this.emailFolder,
-        validator: this.validate
-      });
-    }
-  },
-  methods: {
-    setValue: function setValue(value) {
-      this.$store.commit("setSubscribeNewsletterCheck", {
-        emailFolder: this.emailFolder,
-        value: value
-      });
-    },
-    validate: function validate() {
-      var showError = this.isRequired && !this.newsletterSubscription;
-      this.$store.commit("setSubscribeNewsletterShowErr", {
-        emailFolder: this.emailFolder,
-        showError: showError
-      });
-
-      if (showError) {
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_2__["default"].translate("Ceres::Template.checkoutCheckAcceptNewsletterSubscription"));
-      }
-    }
-  },
-  watch: {
-    newsletterSubscription: function newsletterSubscription() {
-      if (this.showError) {
-        this.validate();
-      }
-    }
-  }
-});
+}));
 
 /***/ }),
 
@@ -55782,7 +53913,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("subscribe-newsletter-check
 /*!**************************************************************!*\
   !*** ./resources/js/src/app/components/common/GoogleMaps.js ***!
   \**************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55803,7 +53934,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
   template: "<div :class=\"aspectRatio\" class=\"maps-component position-relative\" ref=\"googleMapsContainer\"><div v-if=\"scriptBlocked\"><slot></slot></div></div>",
   props: {
     googleApiKey: {
@@ -55945,7 +54076,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
       });
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -55953,7 +54084,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
 /*!***********************************************************!*\
   !*** ./resources/js/src/app/components/common/TabItem.js ***!
   \***********************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55961,7 +54092,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("tab-item", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("tab-item", {
   render: function render(createElement) {
     return createElement("div", {
       staticClass: "tab-pane",
@@ -55997,7 +54128,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("tab-item", {
       this.localActive = isActive;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -56005,7 +54136,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("tab-item", {
 /*!***********************************************************!*\
   !*** ./resources/js/src/app/components/common/TabList.js ***!
   \***********************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56031,6 +54162,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _TabItem__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./TabItem */ "./resources/js/src/app/components/common/TabItem.js");
+
 
 
 
@@ -56085,7 +54218,10 @@ var TabNavItem = {
     }
   }
 };
-vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("tab-list", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("tab-list", {
+  components: {
+    TabItem: _TabItem__WEBPACK_IMPORTED_MODULE_11__["default"]
+  },
   render: function render(createElement) {
     var _this2 = this;
 
@@ -56191,7 +54327,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("tab-list", {
       return imgPattern.test(tab.$el.innerHTML) || tab.$el.textContent.trim().length > 0;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -56199,7 +54335,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("tab-list", {
 /*!************************************************************************!*\
   !*** ./resources/js/src/app/components/containers/LastSeenItemList.js ***!
   \************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56217,7 +54353,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("last-seen-item-list", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("last-seen-item-list", {
   props: {
     template: {
       type: String,
@@ -56266,7 +54402,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("last-seen-item-list", {
       return "";
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -56274,7 +54410,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("last-seen-item-list", {
 /*!******************************************************************************!*\
   !*** ./resources/js/src/app/components/customer/AcceptPrivacyPolicyCheck.js ***!
   \******************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56282,7 +54418,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("accept-privacy-policy-check", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("accept-privacy-policy-check", {
   props: {
     template: {
       type: String,
@@ -56300,7 +54436,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("accept-privacy-policy-chec
       this.$emit("input", value);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -56308,7 +54444,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("accept-privacy-policy-chec
 /*!***********************************************************************!*\
   !*** ./resources/js/src/app/components/customer/AddressInputGroup.js ***!
   \***********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56341,6 +54477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _SalutationSelect__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./SalutationSelect */ "./resources/js/src/app/components/customer/SalutationSelect.js");
 
 
 
@@ -56363,8 +54500,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("address-input-group", {
-  delimiters: ["${", "}"],
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("address-input-group", {
+  components: {
+    SalutationSelect: _SalutationSelect__WEBPACK_IMPORTED_MODULE_15__["default"]
+  },
   props: {
     defaultCountry: {
       type: String,
@@ -56507,1075 +54647,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("address-input-group", {
       return condition1 || condition2 || condition3 || condition4;
     }
   }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/customer/AddressSelect/AddressHeader.js":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/src/app/components/customer/AddressSelect/AddressHeader.js ***!
-  \*********************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.includes */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_9__);
-
-
-
-
-
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("address-header", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-address-header"
-    },
-    address: {
-      type: Object,
-      required: true
-    },
-    addressFields: {
-      type: Array,
-      default: function _default() {
-        return ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"];
-      }
-    }
-  },
-  methods: {
-    getCountryName: function getCountryName(countryId) {
-      return this.$store.getters.getCountryName(countryId);
-    },
-    isAddressFieldEnabled: function isAddressFieldEnabled(fieldName) {
-      return this.addressFields.includes(fieldName);
-    }
-  },
-  filters: {
-    optionType: function optionType(selectedAddress, typeId) {
-      // TODO DUPLICATE (Address Select) - move to vuex
-      if (selectedAddress && selectedAddress.options) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = selectedAddress.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var optionType = _step.value;
-
-            if (optionType.typeId === typeId) {
-              return optionType.value;
-            }
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-      }
-
-      return "";
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/customer/AddressSelect/AddressSelect.js":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/src/app/components/customer/AddressSelect/AddressSelect.js ***!
-  \*********************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.includes */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.assign */ "./node_modules/core-js/modules/es.object.assign.js");
-/* harmony import */ var core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.parse-int */ "./node_modules/core-js/modules/es.parse-int.js");
-/* harmony import */ var core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-var ApiService = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_22___default.a.component("address-select", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-address-select"
-    },
-    addressType: {
-      type: String,
-      required: true
-    },
-    showError: Boolean,
-    optionalAddressFields: {
-      type: Object,
-      default: function _default() {
-        return {
-          de: [],
-          gb: []
-        };
-      }
-    },
-    requiredAddressFields: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    defaultSalutation: {
-      type: String,
-      default: "male"
-    },
-    paddingClasses: {
-      type: String,
-      default: null
-    },
-    paddingInlineStyles: {
-      type: String,
-      default: null
-    }
-  },
-  data: function data() {
-    return {
-      addressModal: {},
-      modalType: "",
-      headline: "",
-      addressToEdit: {
-        gender: this.defaultSalutation,
-        countryId: this.shippingCountryId
-      },
-      addressToDelete: {},
-      deleteModal: "",
-      deleteModalWaiting: false,
-      addressOptionTypeFieldMap: {
-        1: "vatNumber",
-        4: "telephone",
-        6: "postNumber",
-        9: "birthday",
-        11: "title",
-        12: "contactPerson"
-      }
-    };
-  },
-  computed: _objectSpread({
-    selectedAddress: function selectedAddress() {
-      return this.$store.getters.getSelectedAddress(this.addressType);
-    },
-    addressList: function addressList() {
-      return this.$store.getters.getAddressList(this.addressType);
-    },
-    shippingCountryId: function shippingCountryId() {
-      return this.$store.state.localization.shippingCountryId;
-    },
-    isAddAddressEnabled: function isAddAddressEnabled() {
-      if (this.addressType === "1") {
-        return this.$store.getters.isLoggedIn || this.addressList.length < 1;
-      }
-
-      return this.$store.getters.isLoggedIn || this.addressList.length < 2;
-    },
-    isAddressListEmpty: function isAddressListEmpty() {
-      return !(this.addressList && this.addressList.length > 0);
-    },
-    isSalutationEnabled: function isSalutationEnabled() {
-      var countryId = parseInt(this.addressToEdit.countryId) || 1;
-      var addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
-      var countryKey = countryId === 12 ? "gb" : "de";
-      return this.optionalAddressFields[countryKey].includes("".concat(addressKey, ".salutation"));
-    }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_23__["mapState"])({
-    countryList: function countryList(state) {
-      return state.localization.shippingCountries;
-    },
-    isBasketLoading: function isBasketLoading(state) {
-      return state.basket.isBasketLoading;
-    },
-    isCheckoutReadonly: function isCheckoutReadonly(state) {
-      return state.checkout.readOnly;
-    }
-  })),
-
-  /**
-   *  Check whether the address list is not empty and select the address with the matching ID
-   */
-  created: function created() {
-    this.addEventListener();
-  },
-
-  /**
-   * Select the address modal
-   */
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      _this.addressModal = ModalService.findModal(_this.$refs.addressModal);
-      _this.deleteModal = ModalService.findModal(_this.$refs.deleteModal);
-    });
-  },
-  methods: {
-    /**
-     * Add the event listener
-     */
-    addEventListener: function addEventListener() {
-      var _this2 = this;
-
-      ApiService.listen("AfterAccountContactLogout", function () {
-        _this2.$store.commit("resetAddress", _this2.addressType);
-      });
-    },
-
-    /**
-     * Update the selected address
-     * @param index
-     */
-    onAddressChanged: function onAddressChanged(address) {
-      this.$emit("address-changed", address);
-    },
-
-    /**
-     * Show the add modal
-     */
-    showAddModal: function showAddModal(type) {
-      this.modalType = type || "create";
-
-      if (this.isSalutationEnabled) {
-        this.addressToEdit = {
-          gender: this.defaultSalutation,
-          countryId: this.shippingCountryId,
-          showPickupStation: false
-        };
-      } else {
-        this.addressToEdit = {
-          countryId: this.shippingCountryId
-        };
-      }
-
-      this.updateHeadline();
-
-      if (this.modalType === "create") {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_20__["default"].unmarkAllFields($(this.$refs.addressModal));
-      }
-
-      this.addressModal.show();
-    },
-
-    /**
-     * Show the edit modal
-     * @param address
-     */
-    showEditModal: function showEditModal(address) {
-      this.modalType = "update";
-      this.addressToEdit = this.getAddressToEdit(address);
-
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(this.addressToEdit.address1) && (this.addressToEdit.address1 === "PACKSTATION" || this.addressToEdit.address1 === "POSTFILIALE") && this.$store.getters.isParcelOrOfficeAvailable) {
-        this.addressToEdit.showPickupStation = true;
-      }
-
-      this.updateHeadline();
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_20__["default"].unmarkAllFields($(this.$refs.addressModal));
-      this.addressModal.show();
-    },
-    getAddressToEdit: function getAddressToEdit(address) {
-      // Creates a tmp address to prevent unwanted two-way binding
-      var addressToEdit = JSON.parse(JSON.stringify(address));
-
-      if (addressToEdit.options) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = addressToEdit.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var option = _step.value;
-            var optionName = this.addressOptionTypeFieldMap[option.typeId];
-            addressToEdit[optionName] = option.value || null;
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-      }
-
-      return addressToEdit;
-    },
-
-    /**
-     * Show the delete modal
-     * @param address
-     */
-    showDeleteModal: function showDeleteModal(address) {
-      this.modalType = "delete";
-      this.addressToDelete = address;
-      this.updateHeadline();
-      this.deleteModal.show();
-    },
-
-    /**
-     * Delete the address selected before
-     */
-    deleteAddress: function deleteAddress() {
-      var _this3 = this;
-
-      this.deleteModalWaiting = true;
-      this.$store.dispatch("deleteAddress", {
-        address: this.addressToDelete,
-        addressType: this.addressType
-      }).then(function (response) {
-        _this3.closeDeleteModal();
-
-        _this3.deleteModalWaiting = false;
-      }, function (error) {
-        _this3.deleteModalWaiting = false;
-      });
-    },
-
-    /**
-     * Close the current create/update address modal
-     */
-    closeAddressModal: function closeAddressModal() {
-      this.addressModal.hide();
-    },
-
-    /**
-     * Close the current delete address modal
-     */
-    closeDeleteModal: function closeDeleteModal() {
-      this.deleteModal.hide();
-    },
-
-    /**
-     * Dynamically create the header line in the modal
-     */
-    updateHeadline: function updateHeadline() {
-      var headline;
-
-      if (this.modalType === "initial") {
-        headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.addressInvoiceAddressInitial");
-      } else if (this.addressType === "2") {
-        if (this.modalType === "update") {
-          headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.addressShippingAddressEdit");
-        } else if (this.modalType === "create") {
-          headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.addressShippingAddressCreate");
-        } else {
-          headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.addressShippingAddressDelete");
-        }
-      } else if (this.modalType === "update") {
-        headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.addressInvoiceAddressEdit");
-      } else if (this.modalType === "create") {
-        headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.addressInvoiceAddressCreate");
-      } else {
-        headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.addressInvoiceAddressDelete");
-      }
-
-      this.headline = headline;
-    },
-
-    /**
-     * @param countryId
-     * @returns string
-     */
-    getCountryName: function getCountryName(countryId) {
-      return this.$store.getters.getCountryName(countryId);
-    },
-    setAddressToEditField: function setAddressToEditField(_ref) {
-      var field = _ref.field,
-          value = _ref.value;
-      this.addressToEdit[field] = value;
-      this.addressToEdit = Object.assign({}, this.addressToEdit);
-    },
-    onDropdownClicked: function onDropdownClicked(event) {
-      if (this.isAddressListEmpty || parseInt(this.addressType) === 2 && this.addressList.length === 1) {
-        event.preventDefault();
-        event.stopPropagation();
-        this.showAddModal();
-      }
-    }
-  },
-  filters: {
-    optionType: function optionType(selectedAddress, typeId) {
-      if (selectedAddress && selectedAddress.options) {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = selectedAddress.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var optionType = _step2.value;
-
-            if (optionType.typeId === typeId) {
-              return optionType.value;
-            }
-          }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
-        }
-      }
-
-      return "";
-    }
-  },
-  watch: {
-    isSalutationEnabled: function isSalutationEnabled(newVal) {
-      if (!newVal) {
-        delete this.addressToEdit.gender;
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/customer/AddressSelect/CreateUpdateAddress/CreateUpdateAddress.js":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/src/app/components/customer/AddressSelect/CreateUpdateAddress/CreateUpdateAddress.js ***!
-  \***********************************************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.values */ "./node_modules/core-js/modules/es.object.values.js");
-/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.trim */ "./node_modules/core-js/modules/es.string.trim.js");
-/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_14__);
-
-
-
-
-
-
-
-
-
-
-
-
-
-var NotificationService = __webpack_require__(/*! ../../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("create-update-address", {
-  delimiters: ["${", "}"],
-  props: {
-    addressData: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    addressModal: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    modalType: String,
-    addressType: String,
-    template: String,
-    optionalAddressFields: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    requiredAddressFields: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    defaultSalutation: {
-      type: String,
-      default: "male"
-    }
-  },
-  data: function data() {
-    return {
-      waiting: false
-    };
-  },
-  computed: {
-    addressList: function addressList() {
-      this.$store.getters.getAddressList(this.addressType);
-    }
-  },
-  methods: {
-    /**
-     * Validate the address fields
-     */
-    validate: function validate() {
-      var _this = this;
-
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].validate(this.$refs.addressForm).done(function () {
-        _this.saveAddress();
-      }).fail(function (invalidFields) {
-        var fieldNames = [];
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = invalidFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var field = _step.value;
-            var fieldName = field.lastElementChild.innerHTML.trim();
-            fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
-            fieldNames.push(fieldName);
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].markInvalidFields(invalidFields, "error");
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
-          fields: fieldNames.join(", ")
-        }));
-      });
-    },
-
-    /**
-     * Save the new address or update an existing one
-     */
-    saveAddress: function saveAddress() {
-      if (this.modalType === "initial" || this.modalType === "create") {
-        this.createAddress();
-      } else if (this.modalType === "update") {
-        this.updateAddress();
-      }
-    },
-
-    /**
-     * Update an address
-     */
-    updateAddress: function updateAddress() {
-      var _this2 = this;
-
-      this.waiting = true;
-
-      this._syncOptionTypesAddressData();
-
-      this.$store.dispatch("updateAddress", {
-        address: this.addressData,
-        addressType: this.addressType
-      }).then(function (resolve) {
-        _this2.addressModal.hide();
-
-        _this2.waiting = false;
-      }, function (error) {
-        _this2.waiting = false;
-
-        if (error.validation_errors) {
-          _this2._handleValidationErrors(error.validation_errors);
-        } else if (error.error) {
-          _this2._handleError(error.error);
-        }
-      });
-    },
-
-    /**
-     * Create a new address
-     */
-    createAddress: function createAddress() {
-      var _this3 = this;
-
-      this.waiting = true;
-
-      this._syncOptionTypesAddressData();
-
-      this.$store.dispatch("createAddress", {
-        address: this.addressData,
-        addressType: this.addressType
-      }).then(function (response) {
-        _this3.addressModal.hide();
-
-        _this3.waiting = false;
-      }, function (error) {
-        _this3.waiting = false;
-
-        if (error.validation_errors) {
-          _this3._handleValidationErrors(error.validation_errors);
-        } else if (error.error) {
-          _this3._handleError(error.error);
-        }
-      });
-    },
-    _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].markFailedValidationFields(this.$refs.addressForm, validationErrors);
-      var errorMessage = "";
-
-      for (var _i = 0, _Object$values = Object.values(validationErrors); _i < _Object$values.length; _i++) {
-        var value = _Object$values[_i];
-        errorMessage += value + "<br>";
-      }
-
-      NotificationService.error(errorMessage);
-    },
-    _handleError: function _handleError(error) {
-      if (error.code === 11) {
-        NotificationService.error({
-          code: error.code,
-          message: ""
-        });
-        window.location.reload();
-      } else this._handleValidationErrors(error);
-    },
-    _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
-      if (typeof this.addressData.options !== "undefined") {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = this.addressData.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var optionType = _step2.value;
-
-            switch (optionType.typeId) {
-              case 1:
-                {
-                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.vatNumber) && this.addressData.vatNumber !== optionType.value) {
-                    optionType.value = this.addressData.vatNumber;
-                  }
-
-                  break;
-                }
-
-              case 4:
-                {
-                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.telephone) && this.addressData.telephone !== optionType.value) {
-                    optionType.value = this.addressData.telephone;
-                  }
-
-                  break;
-                }
-
-              case 6:
-                {
-                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.postNumber) && this.addressData.postNumber !== optionType.value) {
-                    optionType.value = this.addressData.postNumber;
-                  }
-
-                  break;
-                }
-
-              case 9:
-                {
-                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.birthday) && this.addressData.birthday !== optionType.value) {
-                    optionType.value = this.addressData.birthday;
-                  }
-
-                  break;
-                }
-
-              case 11:
-                {
-                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.title) && this.addressData.title !== optionType.value) {
-                    optionType.value = this.addressData.title;
-                  }
-
-                  break;
-                }
-
-              case 12:
-                {
-                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.addressData.contactPerson) && this.addressData.contactPerson !== optionType.value) {
-                    optionType.value = this.addressData.contactPerson;
-                  }
-
-                  break;
-                }
-            }
-          }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
-        }
-      }
-    },
-    emitInputEvent: function emitInputEvent(event) {
-      this.$emit("input", event);
-      this.checkInputEventForUnmarkFields(event);
-    },
-    checkInputEventForUnmarkFields: function checkInputEventForUnmarkFields(event) {
-      var genderCondition = event.field === "gender" && event.field.value !== this.addressData.gender;
-      var countryCondition = event.field === "countryId" && event.field.value !== this.addressData.countryId;
-      var pickupCondition = event.field === "showPickupStation" && event.field.value !== this.addressData.showPickupStation;
-
-      if (genderCondition || countryCondition || pickupCondition) {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].unmarkAllFields(this.$refs.addressForm);
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/customer/AddressSelect/InvoiceAddressSelect.js":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/src/app/components/customer/AddressSelect/InvoiceAddressSelect.js ***!
-  \****************************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-
-
-var NotificationService = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("invoice-address-select", {
-  delimiters: ["${", "}"],
-  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\">\n        </address-select>\n    ",
-  props: {
-    optionalAddressFields: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    requiredAddressFields: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    defaultSalutation: {
-      type: String,
-      default: "male"
-    },
-    hasToValidate: {
-      type: Boolean,
-      default: false
-    },
-    paddingClasses: {
-      type: String,
-      default: null
-    },
-    paddingInlineStyles: {
-      type: String,
-      default: null
-    }
-  },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
-    billingAddressId: function billingAddressId(state) {
-      return state.address.billingAddressId;
-    },
-    billingAddressList: function billingAddressList(state) {
-      return state.address.billingAddressList;
-    },
-    showError: function showError(state) {
-      return state.checkout.validation.invoiceAddress.showError;
-    }
-  }),
-
-  /**
-   * Initialise the event listener
-   */
-  created: function created() {
-    if (this.hasToValidate) {
-      this.$store.commit("setInvoiceAddressValidator", this.validate);
-    }
-  },
-
-  /**
-   * If no address is related to the user, a popup will open to add an address
-   */
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      if (!App.isShopBuilder && App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
-        _this.$refs.invoice.showAddModal("initial");
-      }
-    });
-  },
-  methods: {
-    /**
-     * Update the invoice address
-     * @param selectedAddress
-     */
-    addressChanged: function addressChanged(selectedAddress) {
-      var _this2 = this;
-
-      this.$store.dispatch("selectAddress", {
-        selectedAddress: selectedAddress,
-        addressType: "1"
-      }).then(function (response) {
-        document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", {
-          detail: _this2.billingAddressId
-        }));
-      }, function (error) {});
-
-      if (this.hasToValidate) {
-        this.validate();
-      }
-    },
-    validate: function validate() {
-      var showError = this.billingAddressId <= 0;
-      this.$store.commit("setInvoiceAddressShowError", showError);
-
-      if (showError) {
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.checkoutCheckInvoiceAddress"));
-      }
-    }
-  },
-  watch: {
-    billingAddressId: function billingAddressId() {
-      if (this.hasToValidate && this.showError) {
-        this.validate();
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/customer/AddressSelect/ShippingAddressSelect.js":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/src/app/components/customer/AddressSelect/ShippingAddressSelect.js ***!
-  \*****************************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("shipping-address-select", {
-  delimiters: ["${", "}"],
-  template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\">\n        </address-select>\n    ",
-  props: {
-    optionalAddressFields: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    requiredAddressFields: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    defaultSalutation: {
-      type: String,
-      default: "male"
-    },
-    paddingClasses: {
-      type: String,
-      default: null
-    },
-    paddingInlineStyles: {
-      type: String,
-      default: null
-    }
-  },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
-    deliveryAddressId: function deliveryAddressId(state) {
-      return state.address.deliveryAddressId;
-    }
-  }),
-  methods: {
-    /**
-     * Update the delivery address
-     * @param selectedAddress
-     */
-    addressChanged: function addressChanged(selectedAddress) {
-      var _this = this;
-
-      this.$store.dispatch("selectAddress", {
-        selectedAddress: selectedAddress,
-        addressType: "2"
-      }).then(function (response) {
-        document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", {
-          detail: _this.deliveryAddressId
-        }));
-      }, function (error) {});
-    }
-  }
-});
+}));
 
 /***/ }),
 
@@ -57583,7 +54655,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("shipping-address-select", 
 /*!*********************************************************************!*\
   !*** ./resources/js/src/app/components/customer/ChangeEmailForm.js ***!
   \*********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57601,7 +54673,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("change-email-form", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("change-email-form", {
   props: {
     template: {
       type: String,
@@ -57647,7 +54719,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("change-email-form", {
       });
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -57655,7 +54727,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("change-email-form", {
 /*!****************************************************************!*\
   !*** ./resources/js/src/app/components/customer/ContactMap.js ***!
   \****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57666,7 +54738,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("contact-map", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("contact-map", {
   props: ["mapZoom", "zip", "street", "googleApiKey", "template"],
   mounted: function mounted() {
     var _this = this;
@@ -57732,7 +54804,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("contact-map", {
       head.appendChild(script);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -57740,7 +54812,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("contact-map", {
 /*!*******************************************************************!*\
   !*** ./resources/js/src/app/components/customer/CountrySelect.js ***!
   \*******************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57803,7 +54875,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_16___default.a.component("country-select", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_16___default.a.component("country-select", {
   delimiters: ["${", "}"],
   props: {
     selectedCountryId: Number,
@@ -57924,7 +54996,7 @@ vue__WEBPACK_IMPORTED_MODULE_16___default.a.component("country-select", {
       this.updateSelectedCountry();
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -57932,7 +55004,7 @@ vue__WEBPACK_IMPORTED_MODULE_16___default.a.component("country-select", {
 /*!***************************************************************!*\
   !*** ./resources/js/src/app/components/customer/ReCaptcha.js ***!
   \***************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57947,7 +55019,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var gRecaptchaApiLoaded;
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("recaptcha", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("recaptcha", {
   template: "<div data-recaptcha></div>",
   data: function data() {
     return {
@@ -58020,7 +55092,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("recaptcha", {
       }));
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58028,7 +55100,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("recaptcha", {
 /*!******************************************************************!*\
   !*** ./resources/js/src/app/components/customer/Registration.js ***!
   \******************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58065,6 +55137,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
+/* harmony import */ var _AddressInputGroup__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./AddressInputGroup */ "./resources/js/src/app/components/customer/AddressInputGroup.js");
+
 
 
 
@@ -58091,8 +55165,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
-  delimiters: ["${", "}"],
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
+  components: {
+    AddressInputGroup: _AddressInputGroup__WEBPACK_IMPORTED_MODULE_19__["default"]
+  },
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_18__["ButtonSizePropertyMixin"]],
   props: {
     modalElement: String,
@@ -58279,7 +55355,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58287,7 +55363,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
 /*!***********************************************************************!*\
   !*** ./resources/js/src/app/components/customer/ResetPasswordForm.js ***!
   \***********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58311,7 +55387,7 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("reset-password-form", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("reset-password-form", {
   props: {
     template: {
       type: String,
@@ -58368,7 +55444,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("reset-password-form", {
       });
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58376,7 +55452,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("reset-password-form", {
 /*!**********************************************************************!*\
   !*** ./resources/js/src/app/components/customer/SalutationSelect.js ***!
   \**********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58409,7 +55485,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("salutation-select", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("salutation-select", {
   props: {
     template: {
       type: String,
@@ -58534,7 +55610,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("salutation-select", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58542,7 +55618,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("salutation-select", {
 /*!**************************************************************************!*\
   !*** ./resources/js/src/app/components/customer/login/ForgotPassword.js ***!
   \**************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58571,7 +55647,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("forgot-password-modal", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("forgot-password-modal", {
   delimiters: ["${", "}"],
   props: {
     template: {
@@ -58645,7 +55721,7 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("forgot-password-modal", {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__["default"].unmarkAllFields(this.$refs.pwdModal);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58653,7 +55729,7 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("forgot-password-modal", {
 /*!**********************************************************************!*\
   !*** ./resources/js/src/app/components/customer/login/GuestLogin.js ***!
   \**********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58672,7 +55748,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_4__["ButtonSizePropertyMixin"]],
   props: {
     template: {
@@ -58723,7 +55799,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
       });
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58731,7 +55807,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
 /*!*****************************************************************!*\
   !*** ./resources/js/src/app/components/customer/login/Login.js ***!
   \*****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58757,7 +55833,7 @@ var AutoFocusService = __webpack_require__(/*! ../../../services/AutoFocusServic
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("login", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("login", {
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_1__["ButtonSizePropertyMixin"]],
   props: {
     template: {
@@ -58876,7 +55952,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("login", {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__["default"].unmarkAllFields($("#login-form-" + this._uid));
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58884,7 +55960,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("login", {
 /*!*********************************************************************!*\
   !*** ./resources/js/src/app/components/customer/login/LoginView.js ***!
   \*********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58895,7 +55971,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("login-view", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("login-view", {
   props: {
     template: {
       type: String,
@@ -58907,7 +55983,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("login-view", {
       ModalService.findModal(this.$refs.guestModal).show();
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58915,7 +55991,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("login-view", {
 /*!****************************************************************************!*\
   !*** ./resources/js/src/app/components/customer/login/UserLoginHandler.js ***!
   \****************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58932,7 +56008,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("user-login-handler", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("user-login-handler", {
   delimiters: ["${", "}"],
   props: {
     template: {
@@ -58986,7 +56062,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("user-login-handler", {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_1__["default"].unmarkAllFields($("#registration"));
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -58994,7 +56070,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("user-login-handler", {
 /*!***************************************************************!*\
   !*** ./resources/js/src/app/components/item/AddToWishList.js ***!
   \***************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59057,7 +56133,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("add-to-wish-list", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("add-to-wish-list", {
   props: {
     template: {
       type: String,
@@ -59137,7 +56213,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("add-to-wish-list", {
       this.changeTooltipText();
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -59145,7 +56221,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("add-to-wish-list", {
 /*!*****************************************************************!*\
   !*** ./resources/js/src/app/components/item/GraduatedPrices.js ***!
   \*****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59233,7 +56309,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_21___default.a.component("graduated-prices", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_21___default.a.component("graduated-prices", {
   props: {
     template: {
       type: String,
@@ -59280,7 +56356,7 @@ vue__WEBPACK_IMPORTED_MODULE_21___default.a.component("graduated-prices", {
       return state.item.variationOrderQuantity;
     }
   }))
-});
+}));
 
 /***/ }),
 
@@ -59288,7 +56364,7 @@ vue__WEBPACK_IMPORTED_MODULE_21___default.a.component("graduated-prices", {
 /*!************************************************************!*\
   !*** ./resources/js/src/app/components/item/ItemBundle.js ***!
   \************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59296,7 +56372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-bundle", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-bundle", {
   props: {
     template: {
       type: String,
@@ -59335,7 +56411,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-bundle", {
       return item;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -59343,7 +56419,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-bundle", {
 /*!***************************************************************!*\
   !*** ./resources/js/src/app/components/item/ItemDataTable.js ***!
   \***************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59400,7 +56476,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("item-data-table", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("item-data-table", {
   props: {
     template: {
       type: String,
@@ -59504,7 +56580,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("item-data-table", {
       return value;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -59512,7 +56588,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("item-data-table", {
 /*!*******************************************************************!*\
   !*** ./resources/js/src/app/components/item/ItemImageCarousel.js ***!
   \*******************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59578,7 +56654,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("item-image-carousel", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("item-image-carousel", {
   props: {
     template: {
       type: String,
@@ -59775,7 +56851,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("item-image-carousel", {
       return this.$options.filters.itemName(this.currentVariation.documents[0].data);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -59783,7 +56859,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("item-image-carousel", {
 /*!*****************************************************************!*\
   !*** ./resources/js/src/app/components/item/OrderProperties.js ***!
   \*****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59793,7 +56869,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-properties", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-properties", {
   props: ["template"],
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     properties: function properties(state) {
@@ -59801,7 +56877,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-properties", {
     }
   }),
   methods: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setVariationOrderProperty"])
-});
+}));
 
 /***/ }),
 
@@ -59809,7 +56885,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-properties", {
 /*!*******************************************************************!*\
   !*** ./resources/js/src/app/components/item/OrderPropertyList.js ***!
   \*******************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59865,6 +56941,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_24__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _OrderPropertyListGroup__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./OrderPropertyListGroup */ "./resources/js/src/app/components/item/OrderPropertyListGroup.js");
 
 
 
@@ -59906,7 +56983,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_24___default.a.component("order-property-list", {
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_24___default.a.component("order-property-list", {
+  components: {
+    OrderPropertyListGroup: _OrderPropertyListGroup__WEBPACK_IMPORTED_MODULE_26__["default"]
+  },
   props: {
     template: {
       type: String,
@@ -60038,7 +57119,7 @@ vue__WEBPACK_IMPORTED_MODULE_24___default.a.component("order-property-list", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -60046,7 +57127,7 @@ vue__WEBPACK_IMPORTED_MODULE_24___default.a.component("order-property-list", {
 /*!************************************************************************!*\
   !*** ./resources/js/src/app/components/item/OrderPropertyListGroup.js ***!
   \************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60084,6 +57165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _OrderPropertyListItem__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./OrderPropertyListItem */ "./resources/js/src/app/components/item/OrderPropertyListItem.js");
 
 
 
@@ -60108,7 +57190,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("order-property-list-group", {
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("order-property-list-group", {
+  components: {
+    OrderPropertyListItem: _OrderPropertyListItem__WEBPACK_IMPORTED_MODULE_17__["default"]
+  },
   props: {
     template: {
       type: String,
@@ -60177,7 +57263,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("order-property-list-group
       return false;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapMutations"])(["setVariationOrderProperty"]))
-});
+}));
 
 /***/ }),
 
@@ -60185,7 +57271,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("order-property-list-group
 /*!***********************************************************************!*\
   !*** ./resources/js/src/app/components/item/OrderPropertyListItem.js ***!
   \***********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60271,7 +57357,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_22___default.a.component("order-property-list-item", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_22___default.a.component("order-property-list-item", {
   props: {
     template: {
       type: String,
@@ -60459,7 +57545,7 @@ vue__WEBPACK_IMPORTED_MODULE_22___default.a.component("order-property-list-item"
       }
     }
   })
-});
+}));
 
 /***/ }),
 
@@ -60467,7 +57553,7 @@ vue__WEBPACK_IMPORTED_MODULE_22___default.a.component("order-property-list-item"
 /*!********************************************************************!*\
   !*** ./resources/js/src/app/components/item/OrderPropertyValue.js ***!
   \********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60522,7 +57608,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("order-property-value", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("order-property-value", {
   props: {
     template: {
       type: String,
@@ -60565,7 +57651,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("order-property-value", {
       return state.basket.items;
     }
   }))
-});
+}));
 
 /***/ }),
 
@@ -60573,7 +57659,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("order-property-value", {
 /*!***************************************************************!*\
   !*** ./resources/js/src/app/components/item/QuantityInput.js ***!
   \***************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60640,7 +57726,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_18___default.a.component("quantity-input", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_18___default.a.component("quantity-input", {
   delimiters: ["${", "}"],
   props: {
     value: {
@@ -60837,7 +57923,7 @@ vue__WEBPACK_IMPORTED_MODULE_18___default.a.component("quantity-input", {
       this.setValue(this.compMin);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -60845,7 +57931,7 @@ vue__WEBPACK_IMPORTED_MODULE_18___default.a.component("quantity-input", {
 /*!************************************************************!*\
   !*** ./resources/js/src/app/components/item/SingleItem.js ***!
   \************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60880,6 +57966,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _VariationSelect__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./VariationSelect */ "./resources/js/src/app/components/item/VariationSelect.js");
 
 
 
@@ -60904,7 +57991,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("single-item", {
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("single-item", {
+  components: {
+    VariationSelect: _VariationSelect__WEBPACK_IMPORTED_MODULE_17__["default"]
+  },
   props: {
     template: {
       type: String,
@@ -60957,7 +58048,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("single-item", {
       return this.getDataField(field);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -60965,7 +58056,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("single-item", {
 /*!*****************************************************************!*\
   !*** ./resources/js/src/app/components/item/VariationSelect.js ***!
   \*****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61079,7 +58170,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("variation-select", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("variation-select", {
   props: {
     template: {
       type: String,
@@ -61604,7 +58695,7 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("variation-select", {
       this.$store.commit("setIsVariationSelected", !!value);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -61612,7 +58703,7 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("variation-select", {
 /*!***************************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/CategoryImageCarousel.js ***!
   \***************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61632,7 +58723,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("category-image-carousel", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("category-image-carousel", {
   delimiters: ["${", "}"],
   props: {
     imageUrlsData: {
@@ -61752,7 +58843,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("category-image-carousel", 
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -61760,7 +58851,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("category-image-carousel", 
 /*!******************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/CategoryItem.js ***!
   \******************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61807,7 +58898,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("category-item", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("category-item", {
   props: {
     template: {
       type: String,
@@ -61869,7 +58960,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("category-item", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -61877,7 +58968,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("category-item", {
 /*!*****************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/ItemLazyImg.js ***!
   \*****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61888,7 +58979,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery_lazyload__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery_lazyload__WEBPACK_IMPORTED_MODULE_1__);
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-lazy-img", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-lazy-img", {
   delimiters: ["${", "}"],
   props: ["imageUrl", "template"],
   mounted: function mounted() {
@@ -61907,7 +58998,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-lazy-img", {
       $(this.$refs.lazyImg).trigger("appear");
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -61915,7 +59006,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-lazy-img", {
 /*!****************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/ItemSearch.js ***!
   \****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61973,7 +59064,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_17___default.a.component("item-search", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_17___default.a.component("item-search", {
   props: {
     template: {
       type: String,
@@ -62177,7 +59268,7 @@ vue__WEBPACK_IMPORTED_MODULE_17___default.a.component("item-search", {
       }, 100);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -62185,7 +59276,7 @@ vue__WEBPACK_IMPORTED_MODULE_17___default.a.component("item-search", {
 /*!**********************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/ItemStoreSpecial.js ***!
   \**********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62209,7 +59300,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
   delimiters: ["${", "}"],
   template: "#vue-item-store-special",
   props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "specialOfferPrice", "decimalCount", "bundleType"],
@@ -62275,7 +59366,7 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
       this.initializeStoreSpecial();
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -62283,7 +59374,7 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
 /*!***********************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/filter/ItemFilter.js ***!
   \***********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62347,7 +59438,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_16___default.a.component("item-filter", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_16___default.a.component("item-filter", {
   delimiters: ["${", "}"],
   props: {
     template: {
@@ -62399,7 +59490,7 @@ vue__WEBPACK_IMPORTED_MODULE_16___default.a.component("item-filter", {
       }) > -1;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -62407,7 +59498,7 @@ vue__WEBPACK_IMPORTED_MODULE_16___default.a.component("item-filter", {
 /*!***************************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/filter/ItemFilterList.js ***!
   \***************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62462,6 +59553,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_24__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _ItemFilterPrice__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./ItemFilterPrice */ "./resources/js/src/app/components/itemList/filter/ItemFilterPrice.js");
 
 
 
@@ -62497,8 +59589,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_24___default.a.component("item-filter-list", {
-  delimiters: ["${", "}"],
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_24___default.a.component("item-filter-list", {
+  components: {
+    ItemFilterPrice: _ItemFilterPrice__WEBPACK_IMPORTED_MODULE_26__["default"]
+  },
   props: {
     template: {
       type: String,
@@ -62652,7 +59747,7 @@ vue__WEBPACK_IMPORTED_MODULE_24___default.a.component("item-filter-list", {
       }, 300);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -62660,7 +59755,7 @@ vue__WEBPACK_IMPORTED_MODULE_24___default.a.component("item-filter-list", {
 /*!****************************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/filter/ItemFilterPrice.js ***!
   \****************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62715,7 +59810,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("item-filter-price", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("item-filter-price", {
   delimiters: ["${", "}"],
   props: {
     template: {
@@ -62757,7 +59852,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("item-filter-price", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -62765,7 +59860,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("item-filter-price", {
 /*!******************************************************************************!*\
   !*** ./resources/js/src/app/components/itemList/filter/ItemFilterTagList.js ***!
   \******************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62809,7 +59904,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("item-filter-tag-list", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("item-filter-tag-list", {
   props: {
     template: {
       type: String,
@@ -62833,7 +59928,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("item-filter-tag-list", {
       this.loadItemList();
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapMutations"])(["resetAllSelectedFacets"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapActions"])(["selectFacet", "loadItemList"]))
-});
+}));
 
 /***/ }),
 
@@ -62841,7 +59936,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("item-filter-tag-list", {
 /*!*****************************************************************************!*\
   !*** ./resources/js/src/app/components/liveShopping/LiveShoppingDetails.js ***!
   \*****************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62864,7 +59959,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("live-shopping-details", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("live-shopping-details", {
   props: {
     template: {
       type: String,
@@ -62989,7 +60084,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("live-shopping-details", {
       this.initializeDataAndTimer();
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -62997,7 +60092,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("live-shopping-details", {
 /*!**************************************************************************!*\
   !*** ./resources/js/src/app/components/liveShopping/LiveShoppingItem.js ***!
   \**************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63033,6 +60128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _LiveShoppingDetails__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./LiveShoppingDetails */ "./resources/js/src/app/components/liveShopping/LiveShoppingDetails.js");
 
 
 
@@ -63057,12 +60153,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var TimeEnum = Object.freeze({
   past: 1,
   now: 2,
   future: 3
 });
-vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("live-shopping-item", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("live-shopping-item", {
+  components: {
+    LiveShoppingDetails: _LiveShoppingDetails__WEBPACK_IMPORTED_MODULE_17__["default"]
+  },
   props: {
     template: {
       type: String,
@@ -63185,1425 +60285,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("live-shopping-item", {
       this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
     }
   }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/AccountSettings.js":
-/*!**********************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/AccountSettings.js ***!
-  \**********************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
-
-var APIService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-var ValidationService = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("account-settings", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-account-settings"
-    },
-    userData: {
-      type: Object,
-      // eslint-disable-next-line
-      default: function _default() {}
-    }
-  },
-  data: function data() {
-    return {
-      isLoading: false,
-      oldPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-      newMail: "",
-      newMail2: "",
-      accountSettingsClass: "",
-      accountEmailModal: null,
-      accountPasswordModal: {}
-    };
-  },
-
-  /**
-   * Initialise the account settings modal
-   */
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      if (_this.$refs.accountEmailModal) {
-        _this.accountEmailModal = ModalService.findModal(_this.$refs.accountEmailModal);
-      }
-
-      _this.accountPasswordModal = ModalService.findModal(_this.$refs.accountPasswordModal);
-    });
-  },
-  computed: {
-    /**
-     * Check whether the data matches
-     * @returns {boolean}
-     */
-    matchEmail: function matchEmail() {
-      return this.newMail2.length <= 0 || this.newMail === this.newMail2;
-    },
-    matchOldEmail: function matchOldEmail() {
-      return this.newMail === this.newMail2 && this.newMail === this.userData.email;
-    },
-    matchPassword: function matchPassword() {
-      return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
-    },
-    isValidEmail: function isValidEmail() {
-      return this.newMail.length > 0 && this.newMail === this.newMail2 && this.newMail !== this.userData.email;
-    },
-    isValidPassword: function isValidPassword() {
-      return this.oldPassword.length > 0 && this.newPassword.length > 0 && this.newPassword === this.confirmPassword;
-    }
-  },
-  methods: {
-    /**
-     * Open the change mail modal
-     */
-    showChangeAccountEmail: function showChangeAccountEmail() {
-      this.accountEmailModal.show();
-    },
-
-    /**
-     * Open the change password modal
-     */
-    showChangeAccountPassword: function showChangeAccountPassword() {
-      this.accountPasswordModal.show();
-    },
-
-    /**
-     * Checks the new password to see if it meets the password requirements
-     */
-    validatePassword: function validatePassword() {
-      var _this2 = this;
-
-      ValidationService.validate(this.$refs.passwordFormControl).done(function () {
-        _this2.saveAccountPassword();
-      }).fail(function (invalidFields) {
-        ValidationService.markInvalidFields(invalidFields, "error");
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.resetPwInvalidPassword")).closeAfter(5000);
-
-        _this2.$refs.passwordHint.showPopper();
-      });
-    },
-
-    /**
-     * Save the new password
-     */
-    saveAccountPassword: function saveAccountPassword() {
-      var _this3 = this;
-
-      if (this.isValidPassword) {
-        this.isLoading = true;
-        APIService.post("/rest/io/customer/password", {
-          oldPassword: this.oldPassword,
-          password: this.newPassword,
-          password2: this.confirmPassword
-        }).done(function (response) {
-          _this3.clearFieldsAndClose();
-
-          NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
-        }).fail(function (response) {
-          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
-        }).always(function () {
-          _this3.isLoading = false;
-        });
-      }
-    },
-
-    /**
-     * Save the new email
-     */
-    saveAccountEmail: function saveAccountEmail() {
-      var _this4 = this;
-
-      if (this.isValidEmail) {
-        this.isLoading = true;
-        APIService.post("/rest/io/customer/mail", {
-          newMail: this.newMail,
-          newMail2: this.newMail2
-        }).done(function (response) {
-          _this4.clearFieldsAndClose();
-
-          NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.myAccountChangeEmailConfirmationSent")).closeAfter(3000);
-        }).fail(function (response, status) {
-          var message = _services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.myAccountChangeEmailFailed");
-
-          if (status === 400) {
-            message = _services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.regError");
-          }
-
-          NotificationService.error(message).closeAfter(5000);
-        }).always(function () {
-          _this4.isLoading = false;
-        });
-      }
-    },
-
-    /**
-     * Clear the password fields in the modal
-     */
-    clearFields: function clearFields() {
-      this.oldPassword = "";
-      this.newPassword = "";
-      this.confirmPassword = "";
-      this.newMail = "";
-      this.newMail2 = "";
-    },
-
-    /**
-     * Clear the fields and close the modal
-     */
-    clearFieldsAndClose: function clearFieldsAndClose() {
-      if (this.accountEmailModal) {
-        this.accountEmailModal.hide();
-      }
-
-      this.accountPasswordModal.hide();
-      this.clearFields();
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/BankDataSelect.js":
-/*!*********************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/BankDataSelect.js ***!
-  \*********************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
-
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("bank-data-select", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-bank-data-select"
-    },
-    userBankData: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    contactId: {
-      type: String
-    }
-  },
-  data: function data() {
-    return {
-      bankInfoModal: {},
-      bankDeleteModal: {},
-      updateBankData: {},
-      selectedBankData: null,
-      updateBankIndex: 0,
-      doUpdate: null,
-      headline: "",
-      waiting: false
-    };
-  },
-
-  /**
-   * Select the modals
-   */
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      _this.bankInfoModal = ModalService.findModal(_this.$refs.bankInfoModal);
-      _this.bankDeleteModal = ModalService.findModal(_this.$refs.bankDeleteModal);
-    });
-  },
-  methods: {
-    /**
-     * Set the selected bank-data
-     */
-    changeSelecting: function changeSelecting(bankData) {
-      this.selectedBankData = bankData;
-    },
-
-    /**
-     * Open the modal to add new bank-data
-     */
-    openAddBank: function openAddBank() {
-      this.headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountBankAddDataTitle");
-      this.openModal(false);
-    },
-
-    /**
-     * Set data to update and open the modal
-     * @param index
-     * @param bankdata
-     */
-    openUpdateBank: function openUpdateBank(index, bankData) {
-      this.headline = _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountBankUpdateDataTitle");
-      this.setUpdateData(index, bankData);
-      this.openModal(true);
-    },
-
-    /**
-     * Set data to remove and open the modal
-     * @param index
-     * @param bankdata
-     */
-    openDeleteBank: function openDeleteBank(index, bankData) {
-      this.setUpdateData(index, bankData);
-      this.doUpdate = false;
-      this.bankDeleteModal.show();
-    },
-
-    /**
-     * Open the modal
-     * @param doUpdate
-     */
-    openModal: function openModal(doUpdate) {
-      if (!doUpdate) {
-        this.resetData();
-      }
-
-      this.doUpdate = doUpdate;
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__["default"].unmarkAllFields($(this.$refs.bankInfoModal));
-      this.bankInfoModal.show();
-    },
-
-    /**
-     * Set data to change
-     * @param index
-     * @param bankdata
-     */
-    setUpdateData: function setUpdateData(index, bankData) {
-      this.updateBankData = JSON.parse(JSON.stringify(bankData));
-      this.updateBankIndex = index;
-    },
-
-    /**
-     * Validate the input-fields-data
-     */
-    validateInput: function validateInput() {
-      var _this2 = this;
-
-      this.waiting = true;
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__["default"].validate($("#my-bankForm")).done(function () {
-        if (_this2.doUpdate) {
-          _this2.updateBankInfo();
-        } else {
-          _this2.addBankInfo();
-        }
-      }).fail(function (invalidFields) {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__["default"].markInvalidFields(invalidFields, "error");
-        _this2.waiting = false;
-      });
-    },
-
-    /**
-     * Update bank-data
-     */
-    updateBankInfo: function updateBankInfo() {
-      var _this3 = this;
-
-      this.updateBankData.lastUpdateBy = "customer";
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
-        _this3.userBankData.splice(_this3.updateBankIndex, 1, response);
-
-        _this3.checkBankDataSelection();
-
-        _this3.closeModal();
-
-        NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountBankDataUpdated")).closeAfter(3000);
-        _this3.waiting = false;
-      }).fail(function () {
-        _this3.closeModal();
-
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
-        _this3.waiting = false;
-      });
-    },
-
-    /**
-     * Add new bank-data
-     */
-    addBankInfo: function addBankInfo() {
-      var _this4 = this;
-
-      this.updateBankData.lastUpdateBy = "customer";
-      this.updateBankData.contactId = this.contactId;
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].post("/rest/io/customer/bank_data", this.updateBankData).done(function (response) {
-        _this4.userBankData.push(response);
-
-        _this4.checkBankDataSelection(true);
-
-        _this4.closeModal();
-
-        NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountBankDataAdded")).closeAfter(3000);
-        _this4.waiting = false;
-      }).fail(function () {
-        _this4.closeModal();
-
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountBankDataNotAdded")).closeAfter(5000);
-        _this4.waiting = false;
-      });
-    },
-
-    /**
-     * Delete bank-data
-     */
-    removeBankInfo: function removeBankInfo() {
-      var _this5 = this;
-
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].del("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
-        _this5.checkBankDataSelection(false);
-
-        _this5.closeDeleteModal();
-
-        _this5.userBankData.splice(_this5.updateBankIndex, 1);
-
-        NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountBankDataDeleted")).closeAfter(3000);
-      }).fail(function () {
-        _this5.closeDeleteModal();
-
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountBankDataNotDeleted")).closeAfter(5000);
-      });
-    },
-
-    /**
-     * Check selection on delete and on add bank-data
-     */
-    checkBankDataSelection: function checkBankDataSelection(addData) {
-      if (addData && !this.doUpdate && this.userBankData.length < 1) {
-        this.selectedBankData = this.userBankData[0];
-      }
-
-      if (!addData && this.selectedBankData && this.selectedBankData.id === this.updateBankData.id) {
-        if (!this.doUpdate) {
-          this.selectedBankData = null;
-        } else {
-          this.selectedBankData = this.userBankData[this.updateBankIndex];
-        }
-      }
-    },
-
-    /**
-     * Reset the updateBankData and updateBankIndex
-     */
-    resetData: function resetData() {
-      this.updateBankData = {};
-      this.updateBankIndex = 0;
-      this.doUpdate = false;
-    },
-
-    /**
-     * Close the current bank-modal
-     */
-    closeModal: function closeModal() {
-      this.bankInfoModal.hide();
-      this.resetData();
-    },
-
-    /**
-     * Close the current bank-delete-modal
-     */
-    closeDeleteModal: function closeDeleteModal() {
-      this.bankDeleteModal.hide();
-      this.resetData();
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/ChangePaymentMethod.js":
-/*!**************************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/ChangePaymentMethod.js ***!
-  \**************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_9__);
-
-
-
-
-
-
-
-
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("change-payment-method", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-change-payment-method"
-    },
-    currentOrder: {
-      type: Object
-    },
-    allowedPaymentMethods: {
-      type: Array
-    },
-    changePossible: {
-      type: Boolean
-    },
-    paymentStatus: {
-      type: String
-    },
-    currentTemplate: {
-      type: String
-    },
-    currentPaymentMethodName: {
-      type: String
-    }
-  },
-  data: function data() {
-    return {
-      compAllowedPaymentMethods: this.allowedPaymentMethods,
-      changePaymentModal: {},
-      paymentMethod: 0,
-      isPending: false,
-      showErrorMessage: false
-    };
-  },
-
-  /**
-   * Initialize the change payment modal
-   */
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      _this.changePaymentModal = ModalService.findModal(_this.$refs.changePaymentModal);
-    });
-  },
-  methods: {
-    checkChangeAllowed: function checkChangeAllowed() {
-      var _this2 = this;
-
-      ApiService.get("/rest/io/order/payment", {
-        orderId: this.currentOrder.id,
-        paymentMethodId: this.paymentMethod
-      }).done(function (response) {
-        // TODO: research - if response should be false, it returns an object
-        _this2.changePossible = _typeof(response) === "object" ? response.data : response;
-      }).fail(function () {
-        _this2.changePossible = false;
-      });
-    },
-    openPaymentChangeModal: function openPaymentChangeModal() {
-      this.changePaymentModal.show();
-    },
-    getPaymentStateText: function getPaymentStateText(paymentStates) {
-      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_8__["default"].translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates.find(function (paymentState) {
-        return paymentState.typeId === 4;
-      }).value);
-    },
-    getPaymentId: function getPaymentId(paymentIds) {
-      var paymentId = paymentIds.find(function (paymentId) {
-        return paymentId.typeId === 3;
-      }).value;
-
-      if (paymentId) {
-        return paymentId;
-      }
-
-      return "";
-    },
-    closeModal: function closeModal() {
-      this.changePaymentModal.hide();
-      this.isPending = false;
-    },
-    updateOrderHistory: function updateOrderHistory(updatedOrder) {
-      document.getElementById("payment_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
-      document.getElementById("payment_state_" + this.currentOrder.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
-      document.getElementById("current_payment_method_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
-      this.checkChangeAllowed();
-      this.closeModal();
-    },
-    updateAllowedPaymentMethods: function updateAllowedPaymentMethods(paymentMethodId) {
-      var _this3 = this;
-
-      ApiService.get("/rest/io/order/paymentMethods", {
-        orderId: this.currentOrder.id,
-        paymentMethodId: paymentMethodId
-      }).done(function (response) {
-        _this3.compAllowedPaymentMethods = response;
-      }).fail(function () {});
-    },
-    changePaymentMethod: function changePaymentMethod() {
-      var _this4 = this;
-
-      this.isPending = true;
-      ApiService.post("/rest/io/order/payment", {
-        orderId: this.currentOrder.id,
-        paymentMethodId: this.paymentMethod
-      }).done(function (response) {
-        document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", {
-          detail: {
-            oldOrder: _this4.currentOrder,
-            newOrder: response
-          }
-        }));
-
-        _this4.updateOrderHistory(response);
-
-        _this4.updateAllowedPaymentMethods(_this4.getPaymentId(response.order.properties));
-      }).fail(function () {// TODO add error msg
-      });
-    }
-  },
-  computed: {
-    showIsSwitchableWarning: function showIsSwitchableWarning() {
-      var _this5 = this;
-
-      var currentPaymentMethod = this.compAllowedPaymentMethods.find(function (paymentMethod) {
-        return paymentMethod.id === _this5.paymentMethod;
-      });
-
-      if (currentPaymentMethod) {
-        return !currentPaymentMethod.isSwitchableFrom;
-      }
-
-      return false;
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/History.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/History.js ***!
-  \**************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-
-
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("history", {
-  props: {
-    template: String,
-    ordersPerPage: Number,
-    isReturnActive: Boolean,
-    contactHasReturns: Boolean
-  },
-  data: function data() {
-    return {
-      returnsFirstOpened: false
-    };
-  },
-  methods: {
-    returnsTabsOpened: function returnsTabsOpened() {
-      if (!this.returnsFirstOpened) {
-        this.returnsFirstOpened = true;
-        vueEventHub.$emit("returns-first-opening");
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/MyAccount.js":
-/*!****************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/MyAccount.js ***!
-  \****************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-
-
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("my-account", {
-  template: "\n    <div>\n        <slot>\n        </slot>\n    </div>\n    ",
-  props: {
-    deliveryAddressList: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    selectedDeliveryAddress: {
-      type: Number,
-      default: -99
-    },
-    billingAddressList: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    selectedBillingAddress: {
-      type: Number,
-      default: 0
-    }
-  },
-  created: function created() {
-    this.$store.dispatch("initBillingAddress", {
-      id: this.selectedBillingAddress,
-      addressList: this.billingAddressList
-    });
-    this.$store.dispatch("initDeliveryAddress", {
-      id: this.selectedDeliveryAddress,
-      addressList: this.deliveryAddressList
-    });
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/OrderDocuments.js":
-/*!*********************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/OrderDocuments.js ***!
-  \*********************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.includes */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-documents", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-order-documents"
-    },
-    documents: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    type: {
-      type: String,
-      default: "order"
-    },
-    allowedTypesForOrders: {
-      type: Array,
-      default: function _default() {
-        return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery", "reversal_document"];
-      }
-    },
-    allowedTypesForReturns: {
-      type: Array,
-      default: function _default() {
-        return ["return_note"];
-      }
-    }
-  },
-  computed: {
-    activeDocuments: function activeDocuments() {
-      var _this = this;
-
-      if (this.type === "order") {
-        return this.documents.filter(function (document) {
-          return _this.allowedTypesForOrders.includes(document.type);
-        });
-      }
-
-      return this.documents.filter(function (document) {
-        return _this.allowedTypesForReturns.includes(document.type);
-      });
-    }
-  },
-  methods: {
-    getTypeName: function getTypeName(type) {
-      return {
-        correction_document: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsCorrectionDocument"),
-        credit_note: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsCreditNote"),
-        delivery_note: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsDeliveryNote"),
-        dunning_letter: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsDunningLetter"),
-        invoice_external: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsInvoiceExternal"),
-        invoice: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsInvoice"),
-        offer: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsOffer"),
-        order_confirmation: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsOrderConfirmation"),
-        pickup_delivery: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsPickupDelivery"),
-        pro_forma_invoice: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsProFormaInvoice"),
-        receipt: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsReceipt"),
-        return_note: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsReturnNote"),
-        success_confirmation: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsSuccessConfirmation"),
-        reversal_document: _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.myAccountOrderDocumentsReversalDocument")
-      }[type];
-    },
-    getDownloadTooltip: function getDownloadTooltip(type) {
-      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.orderHistoryOpenDocument", {
-        documentName: this.getTypeName(type)
-      });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/OrderHistory.js":
-/*!*******************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/OrderHistory.js ***!
-  \*******************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-history", {
-  delimiters: ["${", "}"],
-  props: {
-    template: {
-      type: String,
-      default: "#vue-order-history"
-    },
-    orderDetailsTemplate: {
-      type: String,
-      default: "Ceres::Checkout.OrderDetails"
-    }
-  },
-  data: function data() {
-    return {
-      currentOrder: null,
-      isLoading: false
-    };
-  },
-  methods: {
-    setCurrentOrder: function setCurrentOrder(order) {
-      var _this = this;
-
-      $("#dynamic-twig-content").html("");
-      this.isLoading = true;
-      this.currentOrder = order;
-      vue__WEBPACK_IMPORTED_MODULE_0___default.a.nextTick(function () {
-        $(_this.$refs.orderDetails).modal("show");
-      });
-      ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + order.order.id).done(function (response) {
-        _this.isLoading = false;
-        $("#dynamic-twig-content").html(response);
-      });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/OrderHistoryList.js":
-/*!***********************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/OrderHistoryList.js ***!
-  \***********************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_8__);
-
-
-
-
-
-
-
-
-
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("order-history-list", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-order-history-list"
-    },
-    ordersPerPage: {
-      type: Number,
-      default: 5
-    },
-    allowPaymentProviderChange: {
-      type: Boolean,
-      default: false
-    },
-    allowReturn: {
-      type: Boolean,
-      default: true
-    },
-    initialData: {
-      type: Object,
-      default: null
-    }
-  },
-  data: function data() {
-    return {
-      waiting: false,
-      orderList: {},
-      page: 1
-    };
-  },
-  created: function created() {
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(this.initialData)) {
-      this.orderList = this.initialData;
-    } else {
-      this.setPage(1);
-    }
-  },
-  computed: {
-    showTrackingColumn: function showTrackingColumn() {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isDefined"])(this.orderList.entries)) {
-        return this.orderList.entries.filter(function (entry) {
-          return !!entry.trackingURL;
-        }).length;
-      }
-
-      return false;
-    }
-  },
-  methods: {
-    setPage: function setPage() {
-      var _this = this;
-
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-      if (!this.waiting) {
-        this.waiting = true;
-        var lastPage = this.orderList.page;
-        this.orderList.page = page;
-        ApiService.get("/rest/io/customer/order/list", {
-          page: page,
-          items: this.ordersPerPage
-        }).done(function (response) {
-          _this.waiting = false;
-          _this.orderList = response;
-        }).fail(function (response) {
-          _this.waiting = false;
-          _this.orderList.page = lastPage;
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_5__["default"].translate("Ceres::Template.returnHistoryOops"));
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/OrderHistoryListItem.js":
-/*!***************************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/OrderHistoryListItem.js ***!
-  \***************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-history-list-item", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-order-history-list-item"
-    },
-    orderDetailsTemplate: {
-      type: String,
-      default: "Ceres::MyAccount.Partials.OrderHistoryListItemDetails"
-    },
-    order: {
-      type: Object,
-      required: true
-    },
-    allowPaymentProviderChange: {
-      type: Boolean,
-      default: true
-    },
-    allowReturn: {
-      type: Boolean,
-      default: true
-    }
-  },
-  data: function data() {
-    return {
-      waiting: false,
-      isDataLoaded: false,
-      showAllOrderItems: false
-    };
-  },
-  methods: {
-    loadOrderDetailTemplate: function loadOrderDetailTemplate() {
-      var _this = this;
-
-      if (!this.waiting && !this.isDataLoaded) {
-        this.waiting = true;
-        ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
-          var compiled = vue__WEBPACK_IMPORTED_MODULE_0___default.a.compile(orderDetails);
-          var component = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-            data: {
-              showAllOrderItems: _this.showAllOrderItems,
-              allowPaymentProviderChange: _this.allowPaymentProviderChange,
-              allowReturn: _this.allowReturn
-            },
-            store: window.ceresStore,
-            render: compiled.render,
-            staticRenderFns: compiled.staticRenderFns
-          });
-          component.$mount(_this.$refs.orderDetailsContainer);
-          _this.isDataLoaded = true;
-        }).always(function () {
-          _this.waiting = true;
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/OrderReturnHistory.js":
-/*!*************************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/OrderReturnHistory.js ***!
-  \*************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("order-return-history", {
-  props: ["template", "itemsPerPage", "showFirstPage", "showLastPage"],
-  data: function data() {
-    return {
-      waiting: false,
-      returnsList: {
-        page: 1
-      }
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    this.itemsPerPage = this.itemsPerPage || 10;
-    vueEventHub.$on("returns-first-opening", function () {
-      return _this.setPage(1);
-    });
-  },
-  methods: {
-    setPage: function setPage(page) {
-      var _this2 = this;
-
-      if (!this.waiting) {
-        this.waiting = true;
-        var lastPage = this.returnsList.page;
-        this.returnsList.page = page;
-        ApiService.get("/rest/io/customer/order/return", {
-          page: page,
-          items: this.itemsPerPage
-        }).done(function (response) {
-          _this2.waiting = false;
-          _this2.returnsList = response;
-        }).fail(function (response) {
-          _this2.waiting = false;
-          _this2.returnsList.page = lastPage;
-          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.returnHistoryOops"));
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/OrderReturnHistoryItem.js":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/OrderReturnHistoryItem.js ***!
-  \*****************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_9__);
-
-
-
-
-
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("order-return-history-item", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-order-return-history-item"
-    },
-    returnOrder: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    }
-  },
-  data: function data() {
-    return {
-      itemsToRender: []
-    };
-  },
-  created: function created() {
-    this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
-  },
-  methods: {
-    toggleNaming: function toggleNaming(element) {
-      if (document.getElementById(element).innerText === _services_TranslationService__WEBPACK_IMPORTED_MODULE_8__["default"].translate("Ceres::Template.returnHistoryReturnShowMore")) {
-        this.itemsToRender = this.returnOrder.order.orderItems;
-        document.getElementById(element).innerText = _services_TranslationService__WEBPACK_IMPORTED_MODULE_8__["default"].translate("Ceres::Template.returnHistoryReturnShowLess");
-      } else {
-        this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
-        document.getElementById(element).innerText = _services_TranslationService__WEBPACK_IMPORTED_MODULE_8__["default"].translate("Ceres::Template.returnHistoryReturnShowMore");
-      }
-    },
-    getOriginOrderId: function getOriginOrderId(order) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = order.orderReferences[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var orderRef = _step.value;
-
-          if (orderRef.referenceType === "parent") {
-            return orderRef.referenceOrderId;
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      return "-";
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/OrderReturnHistoryList.js":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/OrderReturnHistoryList.js ***!
-  \*****************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("order-return-history-list", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-order-return-history-list"
-    },
-    returnsPerPage: {
-      type: Number,
-      default: 5
-    },
-    initialData: {
-      type: Object,
-      default: null
-    }
-  },
-  data: function data() {
-    return {
-      waiting: false,
-      returnsList: {
-        page: 1
-      }
-    };
-  },
-  created: function created() {
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(this.initialData)) {
-      this.returnsList = this.initialData;
-    } else {
-      this.setPage(1);
-    }
-  },
-  methods: {
-    setPage: function setPage(page) {
-      var _this = this;
-
-      if (!this.waiting) {
-        this.waiting = true;
-        var lastPage = this.returnsList.page;
-        this.returnsList.page = page;
-        ApiService.get("/rest/io/customer/order/return", {
-          page: page,
-          items: this.returnsPerPage
-        }).done(function (response) {
-          _this.waiting = false;
-          _this.returnsList = response;
-        }).fail(function (response) {
-          _this.waiting = false;
-          _this.returnsList.page = lastPage;
-          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template.returnHistoryOops"));
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/myAccount/OrderReturnHistoryListItem.js":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/src/app/components/myAccount/OrderReturnHistoryListItem.js ***!
-  \*********************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_8__);
-
-
-
-
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("order-return-history-list-item", {
-  props: {
-    template: {
-      type: String,
-      default: "#vue-order-return-history-list-item"
-    },
-    returnOrder: {
-      type: Object,
-      // eslint-disable-next-line
-      default: function _default() {}
-    }
-  },
-  data: function data() {
-    return {
-      itemsToRender: [],
-      showAllOrderItems: false
-    };
-  },
-  created: function created() {
-    this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 5);
-  },
-  methods: {
-    toggleShowAllOrderItems: function toggleShowAllOrderItems() {
-      this.showAllOrderItems = !this.showAllOrderItems;
-
-      if (this.showAllOrderItems) {
-        this.itemsToRender = this.returnOrder.order.orderItems;
-      } else {
-        this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 5);
-      }
-    },
-    getOriginOrderId: function getOriginOrderId(order) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = order.orderReferences[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var orderRef = _step.value;
-
-          if (orderRef.referenceType === "parent") {
-            return orderRef.referenceOrderId;
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      return "-";
-    }
-  }
-});
+}));
 
 /***/ }),
 
@@ -64611,7 +60293,7 @@ vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("order-return-history-list-
 /*!***********************************************************************!*\
   !*** ./resources/js/src/app/components/newsletter/NewsletterInput.js ***!
   \***********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64633,7 +60315,7 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("newsletter-input", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("newsletter-input", {
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_4__["ButtonSizePropertyMixin"]],
   props: {
     template: {
@@ -64699,7 +60381,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("newsletter-input", {
       this.privacyPolicyValue = false;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -64707,7 +60389,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("newsletter-input", {
 /*!**********************************************************************************!*\
   !*** ./resources/js/src/app/components/newsletter/NewsletterUnsubscribeInput.js ***!
   \**********************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64735,7 +60417,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("newsletter-unsubscribe-input", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("newsletter-unsubscribe-input", {
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_9__["ButtonSizePropertyMixin"]],
   props: {
     template: {
@@ -64786,7 +60468,7 @@ vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("newsletter-unsubscribe-inp
       this.email = "";
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -64794,7 +60476,7 @@ vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("newsletter-unsubscribe-inp
 /*!********************************************************************!*\
   !*** ./resources/js/src/app/components/orderReturn/OrderReturn.js ***!
   \********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64826,6 +60508,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
 /* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 /* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
+/* harmony import */ var _OrderReturnItem__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./OrderReturnItem */ "./resources/js/src/app/components/orderReturn/OrderReturnItem.js");
 
 
 
@@ -64849,7 +60532,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("order-return", {
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("order-return", {
+  components: {
+    OrderReturnItem: _OrderReturnItem__WEBPACK_IMPORTED_MODULE_16__["default"]
+  },
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_15__["ButtonSizePropertyMixin"]],
   props: {
     template: {
@@ -64916,7 +60603,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("order-return", {
       vueEventHub.$emit("select-all-items");
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapMutations"])(["updateOrderReturnNote"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapActions"])(["sendOrderReturn"]))
-});
+}));
 
 /***/ }),
 
@@ -64924,7 +60611,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("order-return", {
 /*!************************************************************************!*\
   !*** ./resources/js/src/app/components/orderReturn/OrderReturnItem.js ***!
   \************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64944,7 +60631,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-return-item", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-return-item", {
   props: {
     template: {
       type: String,
@@ -65015,7 +60702,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-return-item", {
       return this.itemDetailsData.includes(value);
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -65023,7 +60710,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-return-item", {
 /*!****************************************************************!*\
   !*** ./resources/js/src/app/components/pageDesign/Carousel.js ***!
   \****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65037,7 +60724,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("carousel", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("carousel", {
   components: {
     SlotComponent: {
       functional: true,
@@ -65133,7 +60820,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("carousel", {
       });
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -65141,7 +60828,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("carousel", {
 /*!*****************************************************************!*\
   !*** ./resources/js/src/app/components/pageDesign/CookieBar.js ***!
   \*****************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65185,7 +60872,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("cookie-bar", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("cookie-bar", {
   props: {
     template: {
       type: String,
@@ -65217,7 +60904,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("cookie-bar", {
       this.$store.commit("toggleConsent", groupKey + ".*");
     }
   })
-});
+}));
 
 /***/ }),
 
@@ -65225,7 +60912,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("cookie-bar", {
 /*!************************************************************************!*\
   !*** ./resources/js/src/app/components/pageDesign/MobileNavigation.js ***!
   \************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65315,7 +61002,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_25___default.a.component("mobile-navigation", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_25___default.a.component("mobile-navigation", {
   props: {
     template: {
       default: "#vue-mobile-navigation",
@@ -65543,7 +61230,7 @@ vue__WEBPACK_IMPORTED_MODULE_25___default.a.component("mobile-navigation", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -65551,7 +61238,7 @@ vue__WEBPACK_IMPORTED_MODULE_25___default.a.component("mobile-navigation", {
 /*!*********************************************************************!*\
   !*** ./resources/js/src/app/components/pageDesign/Notifications.js ***!
   \*********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65564,7 +61251,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("notifications", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("notifications", {
   delimiters: ["${", "}"],
   props: ["initialNotifications", "template"],
   data: function data() {
@@ -65613,7 +61300,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("notifications", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -65621,7 +61308,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("notifications", {
 /*!**************************************************************!*\
   !*** ./resources/js/src/app/components/pageDesign/Popper.js ***!
   \**************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65638,7 +61325,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
   delimiters: ["${", "}"],
   props: {
     template: {
@@ -65745,7 +61432,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
       }
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -65753,7 +61440,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("popper", {
 /*!***********************************************************************!*\
   !*** ./resources/js/src/app/components/pageDesign/PrivacySettings.js ***!
   \***********************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65797,7 +61484,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("privacy-settings", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("privacy-settings", {
   props: {
     template: {
       type: String,
@@ -65827,7 +61514,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("privacy-settings", {
       this.$set(this.expandedGroups, groupKey, value);
     }
   })
-});
+}));
 
 /***/ }),
 
@@ -65835,7 +61522,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("privacy-settings", {
 /*!*****************************************************************************!*\
   !*** ./resources/js/src/app/components/pageDesign/ShippingCountrySelect.js ***!
   \*****************************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65881,7 +61568,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("shipping-country-select", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("shipping-country-select", {
   props: {
     template: {
       type: String,
@@ -65919,50 +61606,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("shipping-country-select",
       }
     }
   }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/pageDesign/WaitScreen.js":
-/*!******************************************************************!*\
-  !*** ./resources/js/src/app/components/pageDesign/WaitScreen.js ***!
-  \******************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-var WaitScreenService = __webpack_require__(/*! ../../services/WaitScreenService */ "./resources/js/src/app/services/WaitScreenService.js");
-
-
-/**
-*
-* CURRENTLY NOT IN USE
-* MAY BE USEFUL LATER
-*
-*/
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("wait-screen", {
-  // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
-  delimiters: ["${", "}"],
-  props: ["template"],
-  data: function data() {
-    return {
-      overlay: WaitScreenService.getOverlay()
-    };
-  },
-  computed: {
-    /**
-     * Show an overlay over the page
-     * @returns {boolean}
-     */
-    visible: function visible() {
-      return this.overlay.count > 0;
-    }
-  }
-});
+}));
 
 /***/ }),
 
@@ -65970,7 +61614,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("wait-screen", {
 /*!**************************************************************!*\
   !*** ./resources/js/src/app/components/wishList/WishList.js ***!
   \**************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66016,7 +61660,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("wish-list", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("wish-list", {
   components: {
     WishListItem: _WishListItem__WEBPACK_IMPORTED_MODULE_11__["default"]
   },
@@ -66044,7 +61688,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("wish-list", {
     this.initWishListItems();
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapActions"])(["initWishListItems"]))
-});
+}));
 
 /***/ }),
 
@@ -66052,7 +61696,7 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.component("wish-list", {
 /*!*******************************************************************!*\
   !*** ./resources/js/src/app/components/wishList/WishListCount.js ***!
   \*******************************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66060,7 +61704,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("wish-list-count", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("wish-list-count", {
   props: {
     template: {
       type: String,
@@ -66072,7 +61716,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("wish-list-count", {
       return this.$store.getters.wishListCount;
     }
   }
-});
+}));
 
 /***/ }),
 
@@ -70165,8 +65809,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var NotificationService = __webpack_require__(/*! ./NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-var WaitScreenService = __webpack_require__(/*! ./WaitScreenService */ "./resources/js/src/app/services/WaitScreenService.js");
-
 var _eventListeners = {};
 $(document).ready(function () {
   $.ajaxSetup({
@@ -70267,11 +65909,6 @@ function send(url) {
   };
   data.templateEvent = App.templateEvent;
   config.data = data;
-
-  if (!config.doInBackground) {
-    WaitScreenService.showWaitScreen();
-  }
-
   var request = $.ajax(url, config).done(function (response) {
     if (config.keepOriginalResponse) {
       deferred.resolve(response);
@@ -70281,10 +65918,6 @@ function send(url) {
   }).fail(function (jqXHR) {
     var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
     deferred.reject(response, jqXHR.status);
-  }).always(function () {
-    if (!config.doInBackground) {
-      WaitScreenService.hideWaitScreen();
-    }
   });
   deferred.abort = request.abort;
   return deferred;
@@ -71795,54 +67428,6 @@ function transformBasketItemProperties(basketItem) {
   transformVariationProperties: transformVariationProperties,
   transformBasketItemProperties: transformBasketItemProperties
 });
-
-/***/ }),
-
-/***/ "./resources/js/src/app/services/WaitScreenService.js":
-/*!************************************************************!*\
-  !*** ./resources/js/src/app/services/WaitScreenService.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function () {
-  var overlay = {
-    count: 0,
-    isVisible: false
-  };
-  return {
-    getOverlay: getOverlay,
-    showWaitScreen: showWaitScreen,
-    hideWaitScreen: hideWaitScreen
-  };
-
-  function getOverlay() {
-    return overlay;
-  }
-
-  function showWaitScreen() {
-    overlay.count = overlay.count || 0;
-    overlay.count++;
-    overlay.isVisible = true;
-  }
-
-  function hideWaitScreen(force) {
-    overlay.count = overlay.count || 0;
-
-    if (overlay.count > 0) {
-      overlay.count--;
-    }
-
-    if (force) {
-      overlay.count = 0;
-    }
-
-    if (overlay.count <= 0) {
-      overlay.count = 0;
-      overlay.visible = false;
-    }
-  }
-}();
 
 /***/ }),
 
@@ -75075,132 +70660,88 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_components_basket_BasketTotals__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/components/basket/BasketTotals */ "./resources/js/src/app/components/basket/BasketTotals.js");
 /* harmony import */ var _app_components_basket_Coupon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/components/basket/Coupon */ "./resources/js/src/app/components/basket/Coupon.js");
 /* harmony import */ var _app_components_basket_list_BasketList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/components/basket/list/BasketList */ "./resources/js/src/app/components/basket/list/BasketList.js");
-/* harmony import */ var _app_components_basket_list_BasketListItem__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/components/basket/list/BasketListItem */ "./resources/js/src/app/components/basket/list/BasketListItem.js");
-/* harmony import */ var _app_components_checkout_AcceptGtcCheck__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/components/checkout/AcceptGtcCheck */ "./resources/js/src/app/components/checkout/AcceptGtcCheck.js");
-/* harmony import */ var _app_components_checkout_Checkout__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/components/checkout/Checkout */ "./resources/js/src/app/components/checkout/Checkout.js");
-/* harmony import */ var _app_components_checkout_ContactWishInput__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./app/components/checkout/ContactWishInput */ "./resources/js/src/app/components/checkout/ContactWishInput.js");
-/* harmony import */ var _app_components_checkout_PaymentProviderSelect__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app/components/checkout/PaymentProviderSelect */ "./resources/js/src/app/components/checkout/PaymentProviderSelect.js");
-/* harmony import */ var _app_components_checkout_PlaceOrder__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app/components/checkout/PlaceOrder */ "./resources/js/src/app/components/checkout/PlaceOrder.js");
-/* harmony import */ var _app_components_checkout_ShippingPrivacyHintCheck__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app/components/checkout/ShippingPrivacyHintCheck */ "./resources/js/src/app/components/checkout/ShippingPrivacyHintCheck.js");
-/* harmony import */ var _app_components_checkout_ShippingProfileSelect__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app/components/checkout/ShippingProfileSelect */ "./resources/js/src/app/components/checkout/ShippingProfileSelect.js");
-/* harmony import */ var _app_components_checkout_SubscribeNewsletterCheck__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app/components/checkout/SubscribeNewsletterCheck */ "./resources/js/src/app/components/checkout/SubscribeNewsletterCheck.js");
-/* harmony import */ var _app_components_common_GoogleMaps__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./app/components/common/GoogleMaps */ "./resources/js/src/app/components/common/GoogleMaps.js");
-/* harmony import */ var _app_components_common_TabItem__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./app/components/common/TabItem */ "./resources/js/src/app/components/common/TabItem.js");
-/* harmony import */ var _app_components_common_TabList__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./app/components/common/TabList */ "./resources/js/src/app/components/common/TabList.js");
-/* harmony import */ var _app_components_containers_LastSeenItemList__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./app/components/containers/LastSeenItemList */ "./resources/js/src/app/components/containers/LastSeenItemList.js");
-/* harmony import */ var _app_components_customer_AcceptPrivacyPolicyCheck__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./app/components/customer/AcceptPrivacyPolicyCheck */ "./resources/js/src/app/components/customer/AcceptPrivacyPolicyCheck.js");
-/* harmony import */ var _app_components_customer_AddressInputGroup__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./app/components/customer/AddressInputGroup */ "./resources/js/src/app/components/customer/AddressInputGroup.js");
-/* harmony import */ var _app_components_customer_ChangeEmailForm__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./app/components/customer/ChangeEmailForm */ "./resources/js/src/app/components/customer/ChangeEmailForm.js");
-/* harmony import */ var _app_components_customer_ContactMap__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./app/components/customer/ContactMap */ "./resources/js/src/app/components/customer/ContactMap.js");
-/* harmony import */ var _app_components_customer_CountrySelect__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./app/components/customer/CountrySelect */ "./resources/js/src/app/components/customer/CountrySelect.js");
-/* harmony import */ var _app_components_customer_ReCaptcha__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./app/components/customer/ReCaptcha */ "./resources/js/src/app/components/customer/ReCaptcha.js");
-/* harmony import */ var _app_components_customer_Registration__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./app/components/customer/Registration */ "./resources/js/src/app/components/customer/Registration.js");
-/* harmony import */ var _app_components_customer_ResetPasswordForm__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./app/components/customer/ResetPasswordForm */ "./resources/js/src/app/components/customer/ResetPasswordForm.js");
-/* harmony import */ var _app_components_customer_SalutationSelect__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./app/components/customer/SalutationSelect */ "./resources/js/src/app/components/customer/SalutationSelect.js");
-/* harmony import */ var _app_components_customer_AddressSelect_AddressSelect__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/AddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/AddressSelect.js");
-/* harmony import */ var _app_components_customer_AddressSelect_AddressHeader__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/AddressHeader */ "./resources/js/src/app/components/customer/AddressSelect/AddressHeader.js");
-/* harmony import */ var _app_components_customer_AddressSelect_InvoiceAddressSelect__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/InvoiceAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/InvoiceAddressSelect.js");
-/* harmony import */ var _app_components_customer_AddressSelect_ShippingAddressSelect__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/ShippingAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/ShippingAddressSelect.js");
-/* harmony import */ var _app_components_customer_AddressSelect_CreateUpdateAddress_CreateUpdateAddress__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/CreateUpdateAddress/CreateUpdateAddress */ "./resources/js/src/app/components/customer/AddressSelect/CreateUpdateAddress/CreateUpdateAddress.js");
-/* harmony import */ var _app_components_customer_login_ForgotPassword__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./app/components/customer/login/ForgotPassword */ "./resources/js/src/app/components/customer/login/ForgotPassword.js");
-/* harmony import */ var _app_components_customer_login_GuestLogin__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./app/components/customer/login/GuestLogin */ "./resources/js/src/app/components/customer/login/GuestLogin.js");
-/* harmony import */ var _app_components_customer_login_Login__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./app/components/customer/login/Login */ "./resources/js/src/app/components/customer/login/Login.js");
-/* harmony import */ var _app_components_customer_login_LoginView__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./app/components/customer/login/LoginView */ "./resources/js/src/app/components/customer/login/LoginView.js");
-/* harmony import */ var _app_components_customer_login_UserLoginHandler__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./app/components/customer/login/UserLoginHandler */ "./resources/js/src/app/components/customer/login/UserLoginHandler.js");
-/* harmony import */ var _app_components_item_AddToWishList__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./app/components/item/AddToWishList */ "./resources/js/src/app/components/item/AddToWishList.js");
-/* harmony import */ var _app_components_item_GraduatedPrices__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./app/components/item/GraduatedPrices */ "./resources/js/src/app/components/item/GraduatedPrices.js");
-/* harmony import */ var _app_components_item_ItemBundle__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./app/components/item/ItemBundle */ "./resources/js/src/app/components/item/ItemBundle.js");
-/* harmony import */ var _app_components_item_ItemDataTable__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./app/components/item/ItemDataTable */ "./resources/js/src/app/components/item/ItemDataTable.js");
-/* harmony import */ var _app_components_item_ItemImageCarousel__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./app/components/item/ItemImageCarousel */ "./resources/js/src/app/components/item/ItemImageCarousel.js");
-/* harmony import */ var _app_components_item_OrderProperties__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./app/components/item/OrderProperties */ "./resources/js/src/app/components/item/OrderProperties.js");
-/* harmony import */ var _app_components_item_OrderPropertyList__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./app/components/item/OrderPropertyList */ "./resources/js/src/app/components/item/OrderPropertyList.js");
-/* harmony import */ var _app_components_item_OrderPropertyListGroup__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./app/components/item/OrderPropertyListGroup */ "./resources/js/src/app/components/item/OrderPropertyListGroup.js");
-/* harmony import */ var _app_components_item_OrderPropertyListItem__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./app/components/item/OrderPropertyListItem */ "./resources/js/src/app/components/item/OrderPropertyListItem.js");
-/* harmony import */ var _app_components_item_OrderPropertyValue__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./app/components/item/OrderPropertyValue */ "./resources/js/src/app/components/item/OrderPropertyValue.js");
-/* harmony import */ var _app_components_item_QuantityInput__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./app/components/item/QuantityInput */ "./resources/js/src/app/components/item/QuantityInput.js");
-/* harmony import */ var _app_components_item_SingleItem__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./app/components/item/SingleItem */ "./resources/js/src/app/components/item/SingleItem.js");
-/* harmony import */ var _app_components_item_VariationSelect__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./app/components/item/VariationSelect */ "./resources/js/src/app/components/item/VariationSelect.js");
-/* harmony import */ var _app_components_itemList_CategoryImageCarousel__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./app/components/itemList/CategoryImageCarousel */ "./resources/js/src/app/components/itemList/CategoryImageCarousel.js");
-/* harmony import */ var _app_components_itemList_CategoryItem__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./app/components/itemList/CategoryItem */ "./resources/js/src/app/components/itemList/CategoryItem.js");
-/* harmony import */ var _app_components_itemList_ItemLazyImg__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./app/components/itemList/ItemLazyImg */ "./resources/js/src/app/components/itemList/ItemLazyImg.js");
-/* harmony import */ var _app_components_itemList_ItemSearch__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./app/components/itemList/ItemSearch */ "./resources/js/src/app/components/itemList/ItemSearch.js");
-/* harmony import */ var _app_components_itemList_ItemStoreSpecial__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./app/components/itemList/ItemStoreSpecial */ "./resources/js/src/app/components/itemList/ItemStoreSpecial.js");
-/* harmony import */ var _app_components_itemList_filter_ItemFilter__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./app/components/itemList/filter/ItemFilter */ "./resources/js/src/app/components/itemList/filter/ItemFilter.js");
-/* harmony import */ var _app_components_itemList_filter_ItemFilterList__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./app/components/itemList/filter/ItemFilterList */ "./resources/js/src/app/components/itemList/filter/ItemFilterList.js");
-/* harmony import */ var _app_components_itemList_filter_ItemFilterPrice__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./app/components/itemList/filter/ItemFilterPrice */ "./resources/js/src/app/components/itemList/filter/ItemFilterPrice.js");
-/* harmony import */ var _app_components_itemList_filter_ItemFilterTagList__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./app/components/itemList/filter/ItemFilterTagList */ "./resources/js/src/app/components/itemList/filter/ItemFilterTagList.js");
-/* harmony import */ var _app_components_liveShopping_LiveShoppingDetails__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./app/components/liveShopping/LiveShoppingDetails */ "./resources/js/src/app/components/liveShopping/LiveShoppingDetails.js");
-/* harmony import */ var _app_components_liveShopping_LiveShoppingItem__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./app/components/liveShopping/LiveShoppingItem */ "./resources/js/src/app/components/liveShopping/LiveShoppingItem.js");
-/* harmony import */ var _app_components_myAccount_AccountSettings__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./app/components/myAccount/AccountSettings */ "./resources/js/src/app/components/myAccount/AccountSettings.js");
-/* harmony import */ var _app_components_myAccount_BankDataSelect__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./app/components/myAccount/BankDataSelect */ "./resources/js/src/app/components/myAccount/BankDataSelect.js");
-/* harmony import */ var _app_components_myAccount_ChangePaymentMethod__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./app/components/myAccount/ChangePaymentMethod */ "./resources/js/src/app/components/myAccount/ChangePaymentMethod.js");
-/* harmony import */ var _app_components_myAccount_History__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./app/components/myAccount/History */ "./resources/js/src/app/components/myAccount/History.js");
-/* harmony import */ var _app_components_myAccount_MyAccount__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./app/components/myAccount/MyAccount */ "./resources/js/src/app/components/myAccount/MyAccount.js");
-/* harmony import */ var _app_components_myAccount_OrderDocuments__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./app/components/myAccount/OrderDocuments */ "./resources/js/src/app/components/myAccount/OrderDocuments.js");
-/* harmony import */ var _app_components_myAccount_OrderHistory__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./app/components/myAccount/OrderHistory */ "./resources/js/src/app/components/myAccount/OrderHistory.js");
-/* harmony import */ var _app_components_myAccount_OrderHistoryList__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./app/components/myAccount/OrderHistoryList */ "./resources/js/src/app/components/myAccount/OrderHistoryList.js");
-/* harmony import */ var _app_components_myAccount_OrderHistoryListItem__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./app/components/myAccount/OrderHistoryListItem */ "./resources/js/src/app/components/myAccount/OrderHistoryListItem.js");
-/* harmony import */ var _app_components_myAccount_OrderReturnHistory__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./app/components/myAccount/OrderReturnHistory */ "./resources/js/src/app/components/myAccount/OrderReturnHistory.js");
-/* harmony import */ var _app_components_myAccount_OrderReturnHistoryItem__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./app/components/myAccount/OrderReturnHistoryItem */ "./resources/js/src/app/components/myAccount/OrderReturnHistoryItem.js");
-/* harmony import */ var _app_components_myAccount_OrderReturnHistoryList__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./app/components/myAccount/OrderReturnHistoryList */ "./resources/js/src/app/components/myAccount/OrderReturnHistoryList.js");
-/* harmony import */ var _app_components_myAccount_OrderReturnHistoryListItem__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./app/components/myAccount/OrderReturnHistoryListItem */ "./resources/js/src/app/components/myAccount/OrderReturnHistoryListItem.js");
-/* harmony import */ var _app_components_newsletter_NewsletterInput__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./app/components/newsletter/NewsletterInput */ "./resources/js/src/app/components/newsletter/NewsletterInput.js");
-/* harmony import */ var _app_components_newsletter_NewsletterUnsubscribeInput__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./app/components/newsletter/NewsletterUnsubscribeInput */ "./resources/js/src/app/components/newsletter/NewsletterUnsubscribeInput.js");
-/* harmony import */ var _app_components_orderReturn_OrderReturn__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./app/components/orderReturn/OrderReturn */ "./resources/js/src/app/components/orderReturn/OrderReturn.js");
-/* harmony import */ var _app_components_orderReturn_OrderReturnItem__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./app/components/orderReturn/OrderReturnItem */ "./resources/js/src/app/components/orderReturn/OrderReturnItem.js");
-/* harmony import */ var _app_components_pageDesign_Carousel__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./app/components/pageDesign/Carousel */ "./resources/js/src/app/components/pageDesign/Carousel.js");
-/* harmony import */ var _app_components_pageDesign_CookieBar__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./app/components/pageDesign/CookieBar */ "./resources/js/src/app/components/pageDesign/CookieBar.js");
-/* harmony import */ var _app_components_pageDesign_PrivacySettings__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./app/components/pageDesign/PrivacySettings */ "./resources/js/src/app/components/pageDesign/PrivacySettings.js");
-/* harmony import */ var _app_components_pageDesign_MobileNavigation__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./app/components/pageDesign/MobileNavigation */ "./resources/js/src/app/components/pageDesign/MobileNavigation.js");
-/* harmony import */ var _app_components_pageDesign_Notifications__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./app/components/pageDesign/Notifications */ "./resources/js/src/app/components/pageDesign/Notifications.js");
-/* harmony import */ var _app_components_pageDesign_Popper__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./app/components/pageDesign/Popper */ "./resources/js/src/app/components/pageDesign/Popper.js");
-/* harmony import */ var _app_components_pageDesign_ShippingCountrySelect__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./app/components/pageDesign/ShippingCountrySelect */ "./resources/js/src/app/components/pageDesign/ShippingCountrySelect.js");
-/* harmony import */ var _app_components_pageDesign_WaitScreen__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./app/components/pageDesign/WaitScreen */ "./resources/js/src/app/components/pageDesign/WaitScreen.js");
-/* harmony import */ var _app_components_wishList_WishList__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./app/components/wishList/WishList */ "./resources/js/src/app/components/wishList/WishList.js");
-/* harmony import */ var _app_components_wishList_WishListCount__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./app/components/wishList/WishListCount */ "./resources/js/src/app/components/wishList/WishListCount.js");
-/* harmony import */ var _app_directives_basket_basketItemQuantity__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./app/directives/basket/basketItemQuantity */ "./resources/js/src/app/directives/basket/basketItemQuantity.js");
-/* harmony import */ var _app_directives_basket_basketItemSum__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./app/directives/basket/basketItemSum */ "./resources/js/src/app/directives/basket/basketItemSum.js");
-/* harmony import */ var _app_directives_basket_toggleBasketPreview__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./app/directives/basket/toggleBasketPreview */ "./resources/js/src/app/directives/basket/toggleBasketPreview.js");
-/* harmony import */ var _app_directives_common_truncateTooltip__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! ./app/directives/common/truncateTooltip */ "./resources/js/src/app/directives/common/truncateTooltip.js");
-/* harmony import */ var _app_directives_customer_logout__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! ./app/directives/customer/logout */ "./resources/js/src/app/directives/customer/logout.js");
-/* harmony import */ var _app_directives_helper_populateStore__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! ./app/directives/helper/populateStore */ "./resources/js/src/app/directives/helper/populateStore.js");
-/* harmony import */ var _app_directives_helper_validate__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! ./app/directives/helper/validate */ "./resources/js/src/app/directives/helper/validate.js");
-/* harmony import */ var _app_directives_helper_waitingAnimation__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimation */ "./resources/js/src/app/directives/helper/waitingAnimation.js");
-/* harmony import */ var _app_directives_helper_waitingAnimationInfinite__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimationInfinite */ "./resources/js/src/app/directives/helper/waitingAnimationInfinite.js");
-/* harmony import */ var _app_directives_navigation_navigationTouchHandler__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! ./app/directives/navigation/navigationTouchHandler */ "./resources/js/src/app/directives/navigation/navigationTouchHandler.js");
-/* harmony import */ var _app_directives_navigation_openMobileNavigation__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! ./app/directives/navigation/openMobileNavigation */ "./resources/js/src/app/directives/navigation/openMobileNavigation.js");
-/* harmony import */ var _app_directives_pageDesign_ieObjectfitPolyfill__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! ./app/directives/pageDesign/ieObjectfitPolyfill */ "./resources/js/src/app/directives/pageDesign/ieObjectfitPolyfill.js");
-/* harmony import */ var _app_directives_pageDesign_scrollToTop__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! ./app/directives/pageDesign/scrollToTop */ "./resources/js/src/app/directives/pageDesign/scrollToTop.js");
-/* harmony import */ var _app_directives_pageDesign_stickInParent__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! ./app/directives/pageDesign/stickInParent */ "./resources/js/src/app/directives/pageDesign/stickInParent.js");
-/* harmony import */ var _app_directives_pageDesign_tooltip__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! ./app/directives/pageDesign/tooltip */ "./resources/js/src/app/directives/pageDesign/tooltip.js");
-/* harmony import */ var _app_filters_ageRestriction_filter__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! ./app/filters/ageRestriction.filter */ "./resources/js/src/app/filters/ageRestriction.filter.js");
-/* harmony import */ var _app_filters_arrayFirst_filter__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! ./app/filters/arrayFirst.filter */ "./resources/js/src/app/filters/arrayFirst.filter.js");
-/* harmony import */ var _app_filters_attachText_filter__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! ./app/filters/attachText.filter */ "./resources/js/src/app/filters/attachText.filter.js");
-/* harmony import */ var _app_filters_currency_filter__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! ./app/filters/currency.filter */ "./resources/js/src/app/filters/currency.filter.js");
-/* harmony import */ var _app_filters_date_filter__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! ./app/filters/date.filter */ "./resources/js/src/app/filters/date.filter.js");
-/* harmony import */ var _app_filters_fileName_filter__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! ./app/filters/fileName.filter */ "./resources/js/src/app/filters/fileName.filter.js");
-/* harmony import */ var _app_filters_fileUploadPath_filter__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! ./app/filters/fileUploadPath.filter */ "./resources/js/src/app/filters/fileUploadPath.filter.js");
-/* harmony import */ var _app_filters_graduatedPrice_filter__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! ./app/filters/graduatedPrice.filter */ "./resources/js/src/app/filters/graduatedPrice.filter.js");
-/* harmony import */ var _app_filters_hasItemDefaultPrice_filter__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! ./app/filters/hasItemDefaultPrice.filter */ "./resources/js/src/app/filters/hasItemDefaultPrice.filter.js");
-/* harmony import */ var _app_filters_inputUnit_filter__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(/*! ./app/filters/inputUnit.filter */ "./resources/js/src/app/filters/inputUnit.filter.js");
-/* harmony import */ var _app_filters_itemBundleName_filter__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! ./app/filters/itemBundleName.filter */ "./resources/js/src/app/filters/itemBundleName.filter.js");
-/* harmony import */ var _app_filters_itemCrossPrice_filter__WEBPACK_IMPORTED_MODULE_120__ = __webpack_require__(/*! ./app/filters/itemCrossPrice.filter */ "./resources/js/src/app/filters/itemCrossPrice.filter.js");
-/* harmony import */ var _app_filters_itemImage_filter__WEBPACK_IMPORTED_MODULE_121__ = __webpack_require__(/*! ./app/filters/itemImage.filter */ "./resources/js/src/app/filters/itemImage.filter.js");
-/* harmony import */ var _app_filters_itemImageAlternativeText_filter__WEBPACK_IMPORTED_MODULE_122__ = __webpack_require__(/*! ./app/filters/itemImageAlternativeText.filter */ "./resources/js/src/app/filters/itemImageAlternativeText.filter.js");
-/* harmony import */ var _app_filters_itemImages_filter__WEBPACK_IMPORTED_MODULE_123__ = __webpack_require__(/*! ./app/filters/itemImages.filter */ "./resources/js/src/app/filters/itemImages.filter.js");
-/* harmony import */ var _app_filters_itemName_filter__WEBPACK_IMPORTED_MODULE_124__ = __webpack_require__(/*! ./app/filters/itemName.filter */ "./resources/js/src/app/filters/itemName.filter.js");
-/* harmony import */ var _app_filters_itemPrice_filter__WEBPACK_IMPORTED_MODULE_125__ = __webpack_require__(/*! ./app/filters/itemPrice.filter */ "./resources/js/src/app/filters/itemPrice.filter.js");
-/* harmony import */ var _app_filters_itemUrl_filter__WEBPACK_IMPORTED_MODULE_126__ = __webpack_require__(/*! ./app/filters/itemUrl.filter */ "./resources/js/src/app/filters/itemUrl.filter.js");
-/* harmony import */ var _app_filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_127__ = __webpack_require__(/*! ./app/filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
-/* harmony import */ var _app_filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_128__ = __webpack_require__(/*! ./app/filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
-/* harmony import */ var _app_filters_propertySurchargeSum_filter__WEBPACK_IMPORTED_MODULE_129__ = __webpack_require__(/*! ./app/filters/propertySurchargeSum.filter */ "./resources/js/src/app/filters/propertySurchargeSum.filter.js");
-/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_130__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
-/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_131__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
-/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_132__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
-/* harmony import */ var _app_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_133__ = __webpack_require__(/*! ./app/mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
-/* harmony import */ var _app_mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_134__ = __webpack_require__(/*! ./app/mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
-/* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_135__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
-/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_136__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
+/* harmony import */ var _app_components_common_GoogleMaps__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/components/common/GoogleMaps */ "./resources/js/src/app/components/common/GoogleMaps.js");
+/* harmony import */ var _app_components_common_TabList__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/components/common/TabList */ "./resources/js/src/app/components/common/TabList.js");
+/* harmony import */ var _app_components_containers_LastSeenItemList__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/components/containers/LastSeenItemList */ "./resources/js/src/app/components/containers/LastSeenItemList.js");
+/* harmony import */ var _app_components_customer_AcceptPrivacyPolicyCheck__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./app/components/customer/AcceptPrivacyPolicyCheck */ "./resources/js/src/app/components/customer/AcceptPrivacyPolicyCheck.js");
+/* harmony import */ var _app_components_customer_ChangeEmailForm__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app/components/customer/ChangeEmailForm */ "./resources/js/src/app/components/customer/ChangeEmailForm.js");
+/* harmony import */ var _app_components_customer_ContactMap__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app/components/customer/ContactMap */ "./resources/js/src/app/components/customer/ContactMap.js");
+/* harmony import */ var _app_components_customer_CountrySelect__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app/components/customer/CountrySelect */ "./resources/js/src/app/components/customer/CountrySelect.js");
+/* harmony import */ var _app_components_customer_ReCaptcha__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app/components/customer/ReCaptcha */ "./resources/js/src/app/components/customer/ReCaptcha.js");
+/* harmony import */ var _app_components_customer_Registration__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app/components/customer/Registration */ "./resources/js/src/app/components/customer/Registration.js");
+/* harmony import */ var _app_components_customer_ResetPasswordForm__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./app/components/customer/ResetPasswordForm */ "./resources/js/src/app/components/customer/ResetPasswordForm.js");
+/* harmony import */ var _app_components_customer_login_ForgotPassword__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./app/components/customer/login/ForgotPassword */ "./resources/js/src/app/components/customer/login/ForgotPassword.js");
+/* harmony import */ var _app_components_customer_login_GuestLogin__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./app/components/customer/login/GuestLogin */ "./resources/js/src/app/components/customer/login/GuestLogin.js");
+/* harmony import */ var _app_components_customer_login_Login__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./app/components/customer/login/Login */ "./resources/js/src/app/components/customer/login/Login.js");
+/* harmony import */ var _app_components_customer_login_LoginView__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./app/components/customer/login/LoginView */ "./resources/js/src/app/components/customer/login/LoginView.js");
+/* harmony import */ var _app_components_customer_login_UserLoginHandler__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./app/components/customer/login/UserLoginHandler */ "./resources/js/src/app/components/customer/login/UserLoginHandler.js");
+/* harmony import */ var _app_components_item_ItemBundle__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./app/components/item/ItemBundle */ "./resources/js/src/app/components/item/ItemBundle.js");
+/* harmony import */ var _app_components_item_OrderPropertyValue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./app/components/item/OrderPropertyValue */ "./resources/js/src/app/components/item/OrderPropertyValue.js");
+/* harmony import */ var _app_components_item_QuantityInput__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./app/components/item/QuantityInput */ "./resources/js/src/app/components/item/QuantityInput.js");
+/* harmony import */ var _app_components_itemList_CategoryImageCarousel__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./app/components/itemList/CategoryImageCarousel */ "./resources/js/src/app/components/itemList/CategoryImageCarousel.js");
+/* harmony import */ var _app_components_itemList_CategoryItem__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./app/components/itemList/CategoryItem */ "./resources/js/src/app/components/itemList/CategoryItem.js");
+/* harmony import */ var _app_components_itemList_ItemLazyImg__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./app/components/itemList/ItemLazyImg */ "./resources/js/src/app/components/itemList/ItemLazyImg.js");
+/* harmony import */ var _app_components_itemList_ItemSearch__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./app/components/itemList/ItemSearch */ "./resources/js/src/app/components/itemList/ItemSearch.js");
+/* harmony import */ var _app_components_itemList_ItemStoreSpecial__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./app/components/itemList/ItemStoreSpecial */ "./resources/js/src/app/components/itemList/ItemStoreSpecial.js");
+/* harmony import */ var _app_components_itemList_filter_ItemFilter__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./app/components/itemList/filter/ItemFilter */ "./resources/js/src/app/components/itemList/filter/ItemFilter.js");
+/* harmony import */ var _app_components_itemList_filter_ItemFilterList__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./app/components/itemList/filter/ItemFilterList */ "./resources/js/src/app/components/itemList/filter/ItemFilterList.js");
+/* harmony import */ var _app_components_itemList_filter_ItemFilterTagList__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./app/components/itemList/filter/ItemFilterTagList */ "./resources/js/src/app/components/itemList/filter/ItemFilterTagList.js");
+/* harmony import */ var _app_components_liveShopping_LiveShoppingItem__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./app/components/liveShopping/LiveShoppingItem */ "./resources/js/src/app/components/liveShopping/LiveShoppingItem.js");
+/* harmony import */ var _app_components_newsletter_NewsletterInput__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./app/components/newsletter/NewsletterInput */ "./resources/js/src/app/components/newsletter/NewsletterInput.js");
+/* harmony import */ var _app_components_newsletter_NewsletterUnsubscribeInput__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./app/components/newsletter/NewsletterUnsubscribeInput */ "./resources/js/src/app/components/newsletter/NewsletterUnsubscribeInput.js");
+/* harmony import */ var _app_components_orderReturn_OrderReturn__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./app/components/orderReturn/OrderReturn */ "./resources/js/src/app/components/orderReturn/OrderReturn.js");
+/* harmony import */ var _app_components_pageDesign_Carousel__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./app/components/pageDesign/Carousel */ "./resources/js/src/app/components/pageDesign/Carousel.js");
+/* harmony import */ var _app_components_pageDesign_CookieBar__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./app/components/pageDesign/CookieBar */ "./resources/js/src/app/components/pageDesign/CookieBar.js");
+/* harmony import */ var _app_components_pageDesign_PrivacySettings__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./app/components/pageDesign/PrivacySettings */ "./resources/js/src/app/components/pageDesign/PrivacySettings.js");
+/* harmony import */ var _app_components_pageDesign_MobileNavigation__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./app/components/pageDesign/MobileNavigation */ "./resources/js/src/app/components/pageDesign/MobileNavigation.js");
+/* harmony import */ var _app_components_pageDesign_Notifications__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./app/components/pageDesign/Notifications */ "./resources/js/src/app/components/pageDesign/Notifications.js");
+/* harmony import */ var _app_components_pageDesign_Popper__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./app/components/pageDesign/Popper */ "./resources/js/src/app/components/pageDesign/Popper.js");
+/* harmony import */ var _app_components_pageDesign_ShippingCountrySelect__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./app/components/pageDesign/ShippingCountrySelect */ "./resources/js/src/app/components/pageDesign/ShippingCountrySelect.js");
+/* harmony import */ var _app_components_wishList_WishList__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./app/components/wishList/WishList */ "./resources/js/src/app/components/wishList/WishList.js");
+/* harmony import */ var _app_components_wishList_WishListCount__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./app/components/wishList/WishListCount */ "./resources/js/src/app/components/wishList/WishListCount.js");
+/* harmony import */ var _app_directives_basket_basketItemQuantity__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./app/directives/basket/basketItemQuantity */ "./resources/js/src/app/directives/basket/basketItemQuantity.js");
+/* harmony import */ var _app_directives_basket_basketItemSum__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./app/directives/basket/basketItemSum */ "./resources/js/src/app/directives/basket/basketItemSum.js");
+/* harmony import */ var _app_directives_basket_toggleBasketPreview__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./app/directives/basket/toggleBasketPreview */ "./resources/js/src/app/directives/basket/toggleBasketPreview.js");
+/* harmony import */ var _app_directives_common_truncateTooltip__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./app/directives/common/truncateTooltip */ "./resources/js/src/app/directives/common/truncateTooltip.js");
+/* harmony import */ var _app_directives_customer_logout__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./app/directives/customer/logout */ "./resources/js/src/app/directives/customer/logout.js");
+/* harmony import */ var _app_directives_helper_populateStore__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./app/directives/helper/populateStore */ "./resources/js/src/app/directives/helper/populateStore.js");
+/* harmony import */ var _app_directives_helper_validate__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./app/directives/helper/validate */ "./resources/js/src/app/directives/helper/validate.js");
+/* harmony import */ var _app_directives_helper_waitingAnimation__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimation */ "./resources/js/src/app/directives/helper/waitingAnimation.js");
+/* harmony import */ var _app_directives_helper_waitingAnimationInfinite__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimationInfinite */ "./resources/js/src/app/directives/helper/waitingAnimationInfinite.js");
+/* harmony import */ var _app_directives_navigation_navigationTouchHandler__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./app/directives/navigation/navigationTouchHandler */ "./resources/js/src/app/directives/navigation/navigationTouchHandler.js");
+/* harmony import */ var _app_directives_navigation_openMobileNavigation__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./app/directives/navigation/openMobileNavigation */ "./resources/js/src/app/directives/navigation/openMobileNavigation.js");
+/* harmony import */ var _app_directives_pageDesign_ieObjectfitPolyfill__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./app/directives/pageDesign/ieObjectfitPolyfill */ "./resources/js/src/app/directives/pageDesign/ieObjectfitPolyfill.js");
+/* harmony import */ var _app_directives_pageDesign_scrollToTop__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./app/directives/pageDesign/scrollToTop */ "./resources/js/src/app/directives/pageDesign/scrollToTop.js");
+/* harmony import */ var _app_directives_pageDesign_stickInParent__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./app/directives/pageDesign/stickInParent */ "./resources/js/src/app/directives/pageDesign/stickInParent.js");
+/* harmony import */ var _app_directives_pageDesign_tooltip__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./app/directives/pageDesign/tooltip */ "./resources/js/src/app/directives/pageDesign/tooltip.js");
+/* harmony import */ var _app_filters_ageRestriction_filter__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./app/filters/ageRestriction.filter */ "./resources/js/src/app/filters/ageRestriction.filter.js");
+/* harmony import */ var _app_filters_arrayFirst_filter__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./app/filters/arrayFirst.filter */ "./resources/js/src/app/filters/arrayFirst.filter.js");
+/* harmony import */ var _app_filters_attachText_filter__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./app/filters/attachText.filter */ "./resources/js/src/app/filters/attachText.filter.js");
+/* harmony import */ var _app_filters_currency_filter__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./app/filters/currency.filter */ "./resources/js/src/app/filters/currency.filter.js");
+/* harmony import */ var _app_filters_date_filter__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./app/filters/date.filter */ "./resources/js/src/app/filters/date.filter.js");
+/* harmony import */ var _app_filters_fileName_filter__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./app/filters/fileName.filter */ "./resources/js/src/app/filters/fileName.filter.js");
+/* harmony import */ var _app_filters_fileUploadPath_filter__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./app/filters/fileUploadPath.filter */ "./resources/js/src/app/filters/fileUploadPath.filter.js");
+/* harmony import */ var _app_filters_graduatedPrice_filter__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./app/filters/graduatedPrice.filter */ "./resources/js/src/app/filters/graduatedPrice.filter.js");
+/* harmony import */ var _app_filters_hasItemDefaultPrice_filter__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./app/filters/hasItemDefaultPrice.filter */ "./resources/js/src/app/filters/hasItemDefaultPrice.filter.js");
+/* harmony import */ var _app_filters_inputUnit_filter__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./app/filters/inputUnit.filter */ "./resources/js/src/app/filters/inputUnit.filter.js");
+/* harmony import */ var _app_filters_itemBundleName_filter__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./app/filters/itemBundleName.filter */ "./resources/js/src/app/filters/itemBundleName.filter.js");
+/* harmony import */ var _app_filters_itemCrossPrice_filter__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./app/filters/itemCrossPrice.filter */ "./resources/js/src/app/filters/itemCrossPrice.filter.js");
+/* harmony import */ var _app_filters_itemImage_filter__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./app/filters/itemImage.filter */ "./resources/js/src/app/filters/itemImage.filter.js");
+/* harmony import */ var _app_filters_itemImageAlternativeText_filter__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./app/filters/itemImageAlternativeText.filter */ "./resources/js/src/app/filters/itemImageAlternativeText.filter.js");
+/* harmony import */ var _app_filters_itemImages_filter__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./app/filters/itemImages.filter */ "./resources/js/src/app/filters/itemImages.filter.js");
+/* harmony import */ var _app_filters_itemName_filter__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./app/filters/itemName.filter */ "./resources/js/src/app/filters/itemName.filter.js");
+/* harmony import */ var _app_filters_itemPrice_filter__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./app/filters/itemPrice.filter */ "./resources/js/src/app/filters/itemPrice.filter.js");
+/* harmony import */ var _app_filters_itemUrl_filter__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./app/filters/itemUrl.filter */ "./resources/js/src/app/filters/itemUrl.filter.js");
+/* harmony import */ var _app_filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./app/filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
+/* harmony import */ var _app_filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./app/filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
+/* harmony import */ var _app_filters_propertySurchargeSum_filter__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./app/filters/propertySurchargeSum.filter */ "./resources/js/src/app/filters/propertySurchargeSum.filter.js");
+/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
+/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
+/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
+/* harmony import */ var _app_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./app/mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
+/* harmony import */ var _app_mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./app/mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
+/* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
+/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
 // =========================
 // Polyfill's
 // =========================
@@ -75225,7 +70766,6 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_3___default.a;
 
 
 
- // TODO: Move to list component
 
 
 
@@ -75239,6 +70779,7 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_3___default.a;
 
 
 
+ // legacy non-shopbuilder component
 
 
 
@@ -75249,7 +70790,6 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_3___default.a;
 
 
 
- // TODO: Move to parent component
 
 
 
@@ -75264,56 +70804,6 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_3___default.a;
 
 
 
-
- // TODO: Move to parent component
-
-
-
-
-
-
-
-
-
-
-
-
-
- // TODO: Move to parent component
-
-
-
- // TODO: Move to parent component
-
-
-
-
-
-
-
-
-
- // TODO: Move to parent component
-
-
-
- // TODO: Move to parent component
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- // TODO: Move to parent component
 
 
  // =========================
@@ -75385,7 +70875,21 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_3___default.a;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _category__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./category */ "./resources/js/src/category.js");
+/* harmony import */ var _app_components_item_AddToWishList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app/components/item/AddToWishList */ "./resources/js/src/app/components/item/AddToWishList.js");
+/* harmony import */ var _app_components_item_GraduatedPrices__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/components/item/GraduatedPrices */ "./resources/js/src/app/components/item/GraduatedPrices.js");
+/* harmony import */ var _app_components_item_ItemDataTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/components/item/ItemDataTable */ "./resources/js/src/app/components/item/ItemDataTable.js");
+/* harmony import */ var _app_components_item_ItemImageCarousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/components/item/ItemImageCarousel */ "./resources/js/src/app/components/item/ItemImageCarousel.js");
+/* harmony import */ var _app_components_item_OrderProperties__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/components/item/OrderProperties */ "./resources/js/src/app/components/item/OrderProperties.js");
+/* harmony import */ var _app_components_item_OrderPropertyList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app/components/item/OrderPropertyList */ "./resources/js/src/app/components/item/OrderPropertyList.js");
+/* harmony import */ var _app_components_item_SingleItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app/components/item/SingleItem */ "./resources/js/src/app/components/item/SingleItem.js");
 // item script extends category script
+
+
+
+
+
+
+
 
 
 /***/ })
