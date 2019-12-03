@@ -1,0 +1,117 @@
+{
+    "identifier": "Ceres::StepByStepNavigationWidget",
+    "label": "Widget.stepByStepNavigationLabel",
+    "previewImageURL": "/images/widgets/step-by-step-navigation.svg",
+    "type": "default",
+    "categories": ["navigation"],
+    "position": 100,
+    "widgetClass": "Ceres\\Widgets\\Navigation\\StepByStepNavigationWidget",
+    "settings": {
+        "customClass":"@include(customClass)",
+        "appearance": {
+            "type": "select",
+            "required": true,
+            "defaultValue": "none",
+            "options": "@include(optionalAppearance)"
+        },
+        "source": {
+            "type": "select",
+            "defaultValue": "none",
+            "options": {
+                "name": "Widget.stepByStepNavigationSourceLabel",
+                "tooltipText": "Widget.stepByStepNavigationSourceTooltip",
+                "listBoxValues": [
+                    {
+                        "value": "imagePath",
+                        "caption": "Widget.stepByStepNavigationImage1"
+                    },
+                    {
+                        "value": "image2Path",
+                        "caption": "Widget.stepByStepNavigationImage2"
+                    },
+                    {
+                        "value": "none",
+                        "caption": "Widget.stepByStepNavigationImageNone"
+                    }
+                ]
+            }
+        },
+        "maxLevel": {
+            "type": "select",
+            "defaultValue": 1,
+            "options": {
+                "name": "Widget.stepByStepNavigationMaxLevelLabel",
+                "tooltipText": "Widget.stepByStepNavigationMaxLevelTooltip",
+                "listBoxValues": [
+                    {
+                        "value": 1,
+                        "caption": "Widget.widgetNum1"
+                    },
+                    {
+                        "value": 2,
+                        "caption": "Widget.widgetNum2"
+                    },
+                    {
+                        "value": 3,
+                        "caption": "Widget.widgetNum3"
+                    },
+                    {
+                        "value": 4,
+                        "caption": "Widget.widgetNum4"
+                    },
+                    {
+                        "value": 5,
+                        "caption": "Widget.widgetNum5"
+                    },
+                    {
+                        "value": 6,
+                        "caption": "Widget.widgetNum6"
+                    }
+                ]
+            }
+        },
+        "numberOfColumns": {
+            "type": "select",
+            "defaultValue": 4,
+            "options": {
+                "name": "Widget.stepByStepNavigationNumberOfColumnsLabel",
+                "tooltipText": "Widget.stepByStepNavigationNumberOfColumnsTooltip",
+                "listBoxValues": [
+                    {
+                        "value": 1,
+                        "caption": "Widget.widgetNum1"
+                    },
+                    {
+                        "value": 2,
+                        "caption": "Widget.widgetNum2"
+                    },
+                    {
+                        "value": 3,
+                        "caption": "Widget.widgetNum3"
+                    },
+                    {
+                        "value": 4,
+                        "caption": "Widget.widgetNum4"
+                    },
+                    {
+                        "value": 5,
+                        "caption": "Widget.widgetNum5"
+                    },
+                    {
+                        "value": 6,
+                        "caption": "Widget.widgetNum6"
+                    }
+                ]
+            }
+        },
+        "numberOfRows": {
+            "type": "number",
+            "defaultValue": 2,
+            "options": {
+                "name": "Widget.stepByStepNavigationNumberOfRowsLabel",
+                "tooltipText": "Widget.stepByStepNavigationNumberOfRowsTooltip"
+            }
+        },
+        "spacing": "@include(spacing)"
+    }
+}
