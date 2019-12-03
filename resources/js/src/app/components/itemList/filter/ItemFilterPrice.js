@@ -2,7 +2,7 @@ import UrlService from "../../../services/UrlService";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("item-filter-price", {
+export default Vue.component("item-filter-price", {
 
     delimiters: ["${", "}"],
 

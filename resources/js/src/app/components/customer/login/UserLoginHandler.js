@@ -5,7 +5,7 @@ import { mapGetters } from "vuex";
 
 const ApiService = require("../../../services/ApiService");
 
-Vue.component("user-login-handler", {
+export default Vue.component("user-login-handler", {
 
     delimiters: ["${", "}"],
 

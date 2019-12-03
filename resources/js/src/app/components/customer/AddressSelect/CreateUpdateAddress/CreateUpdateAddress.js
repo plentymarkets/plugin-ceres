@@ -7,7 +7,7 @@ import TranslationService from "../../../../services/TranslationService";
 import Vue from "vue";
 import AddressInputGroup from "../../AddressInputGroup";
 
-Vue.component("create-update-address", {
+export default Vue.component("create-update-address", {
 
     components:
     {

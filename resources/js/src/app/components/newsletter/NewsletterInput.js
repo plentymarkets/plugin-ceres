@@ -6,7 +6,7 @@ import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 const ApiService          = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("newsletter-input", {
+export default Vue.component("newsletter-input", {
 
     mixins: [ButtonSizePropertyMixin],
 

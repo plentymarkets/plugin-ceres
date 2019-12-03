@@ -6,7 +6,7 @@ import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixi
 
 const ApiService = require("../../../services/ApiService");
 
-Vue.component("guest-login", {
+export default Vue.component("guest-login", {
 
     mixins: [ButtonSizePropertyMixin],
 

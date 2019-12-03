@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapState, mapMutations } from "vuex";
 
-Vue.component("order-properties", {
+export default Vue.component("order-properties", {
 
     props: [
         "template"

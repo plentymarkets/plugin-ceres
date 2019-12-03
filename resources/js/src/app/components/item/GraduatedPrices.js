@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("graduated-prices", {
+export default Vue.component("graduated-prices", {
     props:
     {
         template:

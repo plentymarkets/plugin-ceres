@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("basket-totals", {
+export default Vue.component("basket-totals", {
 
     props:
     {

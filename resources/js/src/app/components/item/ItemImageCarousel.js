@@ -5,7 +5,7 @@ import "owl.carousel";
 import lightbox from "lightbox2";
 import { mapState } from "vuex";
 
-Vue.component("item-image-carousel", {
+export default Vue.component("item-image-carousel", {
 
     props: {
         template:

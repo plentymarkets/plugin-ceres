@@ -7,7 +7,7 @@ import LiveShoppingDetails from "./LiveShoppingDetails";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
-Vue.component("live-shopping-item", {
+export default Vue.component("live-shopping-item", {
 
     components:
     {

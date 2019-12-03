@@ -5,7 +5,7 @@ import { debounce } from "../../helper/debounce";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("quantity-input", {
+export default Vue.component("quantity-input", {
 
     delimiters: ["${", "}"],
 

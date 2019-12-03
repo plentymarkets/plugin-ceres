@@ -59,7 +59,7 @@ const TabNavItem = {
     }
 };
 
-Vue.component("tab-list", {
+export default Vue.component("tab-list", {
 
     components:
     {

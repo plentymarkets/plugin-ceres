@@ -8,7 +8,7 @@ import UrlService from "../../../services/UrlService";
 import { isNullOrUndefined } from "../../../helper/utils";
 import Vue from "vue";
 
-Vue.component("forgot-password-modal", {
+export default Vue.component("forgot-password-modal", {
 
     delimiters: ["${", "}"],
 

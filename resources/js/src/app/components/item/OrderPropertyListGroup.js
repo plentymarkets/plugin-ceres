@@ -2,7 +2,7 @@ import Vue from "vue";
 import { mapMutations } from "vuex";
 import OrderPropertyListItem from "./OrderPropertyListItem";
 
-Vue.component("order-property-list-group", {
+export default Vue.component("order-property-list-group", {
 
     components:
     {

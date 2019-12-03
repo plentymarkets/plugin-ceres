@@ -7,7 +7,7 @@ import { mapState } from "vuex";
 
 const NotificationService = require("../../../services/NotificationService");
 
-Vue.component("basket-list-item", {
+export default Vue.component("basket-list-item", {
     props:
     {
         template:

@@ -9,7 +9,7 @@ import ValidationService from "../../../services/ValidationService";
 import TranslationService from "../../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("login", {
+export default Vue.component("login", {
 
     mixins: [ButtonSizePropertyMixin],
 

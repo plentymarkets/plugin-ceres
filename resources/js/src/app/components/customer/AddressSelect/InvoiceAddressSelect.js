@@ -4,7 +4,7 @@ import { mapState } from "vuex";
 import { error } from "../../../services/NotificationService";
 import AddressSelect from "./AddressSelect";
 
-Vue.component("invoice-address-select", {
+export default Vue.component("invoice-address-select", {
 
     components:
     {

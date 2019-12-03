@@ -8,7 +8,7 @@ import { isUndefined } from "../../helper/utils";
 import Vue from "vue";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
-Vue.component("newsletter-unsubscribe-input", {
+export default Vue.component("newsletter-unsubscribe-input", {
 
     mixins: [ButtonSizePropertyMixin],
 

@@ -3,7 +3,7 @@ import Vue from "vue";
 
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("notifications", {
+export default Vue.component("notifications", {
 
     delimiters: ["${", "}"],
 

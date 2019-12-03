@@ -2,7 +2,7 @@ import { isDefined } from "../../helper/utils";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("last-seen-item-list", {
+export default Vue.component("last-seen-item-list", {
 
     props:
     {

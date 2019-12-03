@@ -6,7 +6,7 @@ import OrderHistoryListItem from "./OrderHistoryListItem";
 
 const ApiService = require("../../services/ApiService");
 
-Vue.component("order-history-list", {
+export default Vue.component("order-history-list", {
 
     components:
     {
