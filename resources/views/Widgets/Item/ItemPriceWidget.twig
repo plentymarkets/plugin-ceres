@@ -32,7 +32,9 @@
             <span class="font-weight-bold"
                 ref="variationTotalPrice"
                 :content="$store.getters.currentItemVariation.prices.default.price.value"
-                v-text="$store.state.variationSelect.addPleaseSelectOption ?
+                v-text="$store.state.variationSelect.addPleaseSelectOption &&
+                        $store.state.variationSelect.isVariationSelected === false  &&
+                        $store.state.item.pleaseSelectVariationId == $store.getters.currentItemVariation.variation.id ?
                     '{{ priceTranslation }}' :
                     $options.filters.currency($store.getters.variationTotalPrice, $store.getters.currentItemVariation.prices.default.currency)">
                 {# TODO ADD placeholder #}

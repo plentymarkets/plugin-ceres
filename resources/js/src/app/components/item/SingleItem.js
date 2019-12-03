@@ -19,7 +19,9 @@ Vue.component("single-item", {
         "itemData",
         "attributesData",
         "variations",
-        "addPleaseSelectOption"
+        "addPleaseSelectOption",
+        "addPleaseSelectOptionVariationId",
+        "initialPleaseSelect"
     ],
 
     computed:
@@ -57,13 +59,15 @@ Vue.component("single-item", {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
+        this.$store.commit("setPleaseSelectVariationId", this.addPleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch("setVariationSelect", {
             attributes:         this.attributesData,
             variations:         this.variations,
             initialVariationId: this.currentVariation.variation.id,
-            addPleaseSelectOption: this.addPleaseSelectOption
+            addPleaseSelectOption: this.addPleaseSelectOption,
+            initialPleaseSelect: this.initialPleaseSelect
         });
     },
 

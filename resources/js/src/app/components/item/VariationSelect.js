@@ -95,7 +95,8 @@ Vue.component("variation-select", {
             selectedUnit: state => state.variationSelect.selectedUnit,
             units: state => state.variationSelect.units,
             variations: state => state.variationSelect.variations,
-            addPleaseSelectOption: state => state.variationSelect.addPleaseSelectOption
+            addPleaseSelectOption: state => state.variationSelect.addPleaseSelectOption,
+            initialPleaseSelect: state => state.variationSelect.initialPleaseSelect
         })
     },
 
@@ -311,7 +312,7 @@ Vue.component("variation-select", {
                     TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name })
                 );
 
-                attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && this.addPleaseSelectOption) ? -1 : null;
+                attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && this.initialPleaseSelect) ? -1 : null;
             }
 
             if (invalidSelection.newUnit)

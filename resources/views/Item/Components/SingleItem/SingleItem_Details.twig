@@ -48,7 +48,7 @@
 {% endif %}
 
 <span class="price h1">
-    <span v-if="$store.state.variationSelect.addPleaseSelectOption" :content="currentVariation.prices.default.price.value">
+    <span v-if="$store.state.variationSelect.addPleaseSelectOption && $store.state.variationSelect.isVariationSelected === false && $store.state.item.pleaseSelectVariationId == currentVariation.variation.id" :content="currentVariation.prices.default.price.value">
         {{ trans("Ceres::Template.variationPrice", {price: "${ variationTotalPrice | currency(currentVariation.prices.default.currency) }"}) }}
     </span>
     <span v-else :content="currentVariation.prices.default.price.value">
