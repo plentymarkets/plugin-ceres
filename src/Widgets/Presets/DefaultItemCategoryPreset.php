@@ -43,22 +43,6 @@ class DefaultItemCategoryPreset implements ContentPreset
 
         return $this->preset->toArray();
     }
-
-    private function createHeadline()
-    {
-        $this->preset->createWidget("Ceres::InlineTextWidget")
-            ->withSetting('spacing.customPadding', true)
-            ->withSetting('spacing.padding.left.value', 0)
-            ->withSetting('spacing.padding.left.unit', null)
-            ->withSetting('spacing.padding.right.value', 0)
-            ->withSetting('spacing.padding.right.unit', null)
-            ->withSetting('spacing.padding.top.value', 0)
-            ->withSetting('spacing.padding.top.unit', null)
-            ->withSetting('spacing.padding.bottom.value', 0)
-            ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', "<h1>Wohnzimmer</h1>")
-            ->withSetting('appearance','none');
-    }
     
     private function createToolbarWidget()
     {
