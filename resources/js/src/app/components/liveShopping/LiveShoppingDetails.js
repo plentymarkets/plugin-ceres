@@ -1,7 +1,7 @@
 import Vue from "vue";
 import dayjs from "dayjs";
 
-Vue.component("live-shopping-details", {
+export default Vue.component("live-shopping-details", {
     props:
     {
         template:
@@ -161,7 +161,7 @@ Vue.component("live-shopping-details", {
 
             const minutes = Math.floor(seconds / 60);
 
-            seconds = seconds - (hours * 60);
+            seconds = seconds - (minutes * 60);
 
             return {
                 days: days,
