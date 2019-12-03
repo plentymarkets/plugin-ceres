@@ -6,7 +6,13 @@
 
 {% block PageBody %}
 
-    {% set shopBuilderTemplate = shop_builder_category_template(category.id, "categoryitem") %}
+    {% set listType = "categoryitem" %}
+    {% if isSearch %}
+        {% set listType = "itemsearch" %}
+    {% endif %}
+
+    {% set shopBuilderTemplate = shop_builder_category_template(category.id, listType) %}
+
     {% if shopBuilderTemplate | trim is not empty or isShopBuilder %}
 
         <div class="categoriegrid page-content container-max">
