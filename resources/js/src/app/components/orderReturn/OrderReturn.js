@@ -6,7 +6,7 @@ import NotificationService from "../../services/NotificationService";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 import OrderReturnItem from "./OrderReturnItem";
 
-Vue.component("order-return", {
+export default Vue.component("order-return", {
 
     components:
     {

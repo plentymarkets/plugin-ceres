@@ -3,7 +3,7 @@ import Vue from "vue";
 import { mapState } from "vuex";
 import ItemFilterPrice from "./ItemFilterPrice";
 
-Vue.component("item-filter-list", {
+export default Vue.component("item-filter-list", {
 
     components:
     {

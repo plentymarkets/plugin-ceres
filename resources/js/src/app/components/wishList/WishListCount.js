@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-Vue.component("wish-list-count", {
+export default Vue.component("wish-list-count", {
 
     props: {
         template: {

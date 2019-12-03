@@ -5,7 +5,7 @@ import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import OrderReturnHistoryItem from "./OrderReturnHistoryItem";
 
-Vue.component("order-return-history", {
+export default Vue.component("order-return-history", {
 
     components:
     {

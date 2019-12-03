@@ -8,7 +8,7 @@ import CreateUpdateAddress from "./CreateUpdateAddress/CreateUpdateAddress";
 const ApiService = require("../../../services/ApiService");
 const ModalService = require("../../../services/ModalService");
 
-Vue.component("address-select", {
+export default Vue.component("address-select", {
 
     components:
     {

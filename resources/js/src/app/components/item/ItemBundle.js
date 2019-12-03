@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-Vue.component("item-bundle", {
+export default Vue.component("item-bundle", {
 
     props:
     {
