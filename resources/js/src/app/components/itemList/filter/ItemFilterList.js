@@ -7,7 +7,7 @@ Vue.component("item-filter-list", {
 
     components:
     {
-        ItemFilterPrice,
+        ItemFilterPrice
     },
 
     props: {
