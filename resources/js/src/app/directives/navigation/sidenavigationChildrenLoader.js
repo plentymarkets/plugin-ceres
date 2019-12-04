@@ -82,7 +82,7 @@ class SidenavigationChildrenLoader
     {
         return new Promise(resolve =>
         {
-            ApiService.get("/rest/io/categorytree/children", {
+            ApiService.get("/rest/io/categorytree/template_for_children", {
                 categoryId: this.categoryId,
                 currentUrl: this.currentUrl,
                 showItemCount: this.showItemCount ? 1 : 0
