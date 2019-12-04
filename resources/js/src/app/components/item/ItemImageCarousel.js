@@ -287,7 +287,6 @@ Vue.component("item-image-carousel", {
             const scriptSource = `${ this.pluginPath }/js/dist/lightbox.min.js`;
             const script = document.createElement("script");
 
-            console.log(this.pluginPath);
             script.type = "text/javascript";
             script.src = scriptSource;
             script.addEventListener("load", () => this.reInitialize(), false);
