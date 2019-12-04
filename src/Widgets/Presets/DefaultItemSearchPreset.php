@@ -39,6 +39,8 @@ class DefaultItemSearchPreset implements ContentPreset
         
         $this->paginationWidget();
         $this->createItemGridWidget();
+        
+        $this->createNoResultCodeWidget();
 
         return $this->preset->toArray();
     }
@@ -51,6 +53,15 @@ class DefaultItemSearchPreset implements ContentPreset
                         <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
                     </div>
                 </div>');
+    }
+    
+    private function createNoResultCodeWidget()
+    {
+        $this->preset->createWidget('Ceres::CodeWidget')
+                     ->withSetting('text', '{% if itemCountTotal <= 0 %}
+                                                                <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
+                                                            {% endif%}');
+        
     }
     
     private function createToolbarWidget()
