@@ -9,13 +9,14 @@
 <script type="x/template" id="vue-live-shopping-item">
     <div>
         <category-item v-if="!!currentOffer" :item-data="currentOffer.item" :decimal-count="{{ ceresConfig.item.storeSpecial }}" image-url-accessor="urlMiddle" :padding-classes="paddingClasses" :padding-inline-styles="paddingInlineStyles">
-            <item-store-special v-if="!!storeSpecial"
-                                #store-special
-                                :store-special="storeSpecial"
-                                :recommended-retail-price="prices.rrp"
-                                :variation-retail-price="prices.price"
-                                :decimal-count="{{ ceresConfig.item.storeSpecial }}">
-            </item-store-special>
+            <template #store-special>
+                <item-store-special v-if="!!storeSpecial"
+                                    :store-special="storeSpecial"
+                                    :recommended-retail-price="prices.rrp"
+                                    :variation-retail-price="prices.price"
+                                    :decimal-count="{{ ceresConfig.item.storeSpecial }}">
+                </item-store-special>
+            </template>
 
             <template #item-image>
                 <a v-if="!!displaySettings.customImagePath" :href="currentOffer.item | itemURL">
