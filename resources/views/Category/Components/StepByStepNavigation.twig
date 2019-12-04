@@ -1,19 +1,19 @@
 <script type="x/template" id="vue-step-by-step-navigation">
-    <div>
+    <div class="row">
 
         <template v-for="category in categoryChildren">
 
-            <a :href="category.url">
-                <div>
-                    <img :src="category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
-                    <h6>${ category.details[0].name }</h6>
-                </div>
-            </a>
+            <div :class="'col-' + columnDivider" class="border">
+                <a :href="category.url">
+                        <img v-if="imageSource !== 'none'" :src="category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
+                        <h6>${ category.details[0].name }</h6>
+                </a>
+            </div>
 
         </template>
 
 
-        <div @click="loadChunk()">
+        <div :class="'col-' + columnDivider" @click="loadChunk()" class="border">
             <span v-if="isWaiting">loading...</span>
             <span v-else>more...</span>
         </div>

@@ -1,6 +1,8 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{{ Twig.component("Ceres::Category.Components.StepByStepNavigation") }}
+
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set appearance      = widget.settings.appearance.mobile | default("none") %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -15,5 +17,18 @@
 {% set numberOfRows = widget.settings.numberOfRows.mobile %}
 
 <div class="widget widget-step-by-step-navigation widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div class="widget-inner"></div>
+    <div class="widget-inner">
+
+        {{ Twig.if("category.level <= #{ maxLevel }") }}
+
+            <step-by-step-navigation
+                :category-id="{{ Twig.print("category.id") }}"
+                :chunk-size="{{ numberOfColumns * numberOfRows }}"
+                image-source="{{ source }}"
+                :columns="{{ numberOfColumns }}">
+            </step-by-step-navigation>
+
+        {{ Twig.endif() }}
+    
+    </div>
 </div>

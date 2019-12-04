@@ -13,8 +13,7 @@ Vue.component("step-by-step-navigation", {
         categoryId:
         {
             type: Number,
-            required: false,
-            default: 28
+            required: true
         },
         chunkSize:
         {
@@ -25,6 +24,16 @@ Vue.component("step-by-step-navigation", {
         {
             type: String,
             default: "imagePath"
+        },
+        columns:
+        {
+            type: Number,
+            default: 4
+        },
+        columnsMax:
+        {
+            type: Number,
+            default: 12
         }
     },
 
@@ -35,9 +44,17 @@ Vue.component("step-by-step-navigation", {
         };
     },
 
-    computed: mapState({
-        categoryChildren: state => state.navigation.categoryChildren
-    }),
+    computed:
+    {
+        columnDivider()
+        {
+            return this.columnsMax / this.columns;
+        },
+
+        ...mapState({
+            categoryChildren: state => state.navigation.categoryChildren
+        })
+    },
 
     created()
     {

@@ -29,7 +29,13 @@ const mutations =
 
         addCategoryChildren(state, children)
         {
-            Vue.set(state, "categoryChildren", [...state.categoryChildren, ...children]);
+            for (const category of children)
+            {
+                if (!state.categoryChildren.find(cat => cat.id === category.id))
+                {
+                    state.categoryChildren.push(category);
+                }
+            }
         }
     };
 
