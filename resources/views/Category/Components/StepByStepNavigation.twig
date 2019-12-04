@@ -1,25 +1,20 @@
 <script type="x/template" id="vue-step-by-step-navigation">
     <div class="row">
-
-        <template v-for="category in categoryChildren">
-
-            <div :class="'col-' + columnDivider">
-                <a :href="category.url">
-                    <div class="nav-item border d-flex">
-                        <div class="prop-xs-1-1">
-                            <img v-if="imageSource !== 'none'" :src="category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
-                        </div>
-                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">${ category.details[0].name }</span></div>
+        <div class="mb-3" :class="'col-' + columnDivider" v-for="category in categoryChildren">
+            <a :href="category.url" :title="category.details[0].metaTitle || category.details[0].name">
+                <div class="nav-item border d-flex">
+                    <div v-if="category.details[0][imageSource]" class="prop-xs-1-1">
+                        <img v-if="imageSource !== 'none'" :src="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
                     </div>
-                </a>  
-            </div>
+                    <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">${ category.details[0].name }</span></div>
+                </div>
+            </a>  
+        </div>
 
-        </template>
-
-        <div :class="'col-' + columnDivider" @click="loadChunk()">
-            <div class="nav-item border d-flex">
-                <span v-if="isWaiting">loading...</span>
-                <span v-else>more...</span>
+        <div class="mb-3" :class="'col-' + columnDivider" @click="loadChunk()">
+            <div class="nav-item border d-flex load-more">
+                <span v-if="isWaiting">{{ trans("Ceres::Template.stepByStepNavigationLoading") }}</span>
+                <span v-else>{{ trans("Ceres::Template.stepByStepNavigationShowMore") }}</span>
             </div>
         </div>
     </div>
