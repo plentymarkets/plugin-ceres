@@ -11,9 +11,9 @@
     {{ Twig.do("set itemsPerPageEntries = itemsPerPageEntries | merge([ceresConfig.pagination.itemsPerPage])") }}
 {{ Twig.endif() }}
 
-<div class="widget widget-items-per-page d-sm-inline-block{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-items-per-page d-inline-block{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
-        <div class="list-itemsperpage">
+        <div class="list-itemsperpage p-0">
             <select
                 class="custom-select"
                 @change="$store.dispatch('selectItemsPerPage', $event.target.value)"

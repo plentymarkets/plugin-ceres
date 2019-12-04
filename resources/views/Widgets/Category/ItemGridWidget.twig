@@ -11,9 +11,7 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-{% set numberOfColumnsDesktop   = widget.settings.numberOfColumnsDesktop.mobile | default(4) %}
-{% set numberOfColumnsTablet    = widget.settings.numberOfColumnsTablet.mobile | default(3) %}
-{% set numberOfColumnsMobile    = widget.settings.numberOfColumnsMobile.mobile | default(1) %}
+{% set numberOfColumns = widget.settings.numberOfColumns.mobile | default(4) %}
 
 {% set appearance      = widget.settings.appearance.mobile | default("primary") %}
 
@@ -23,7 +21,7 @@
     {{ Twig.if( "itemList is not empty" ) }}
         <div class="widget-inner row product-list grid">
             {{ Twig.for("item", "itemList") }}
-                <li class="col-{{ 12 / numberOfColumnsMobile }} col-md-{{ 12 / numberOfColumnsTablet }} col-lg-{{ 12 / numberOfColumnsDesktop }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                <li class="col-{{ 12 / numberOfColumns }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     <category-item
                         :item-data="{{ Twig.print("item.data | json_encode") }}"

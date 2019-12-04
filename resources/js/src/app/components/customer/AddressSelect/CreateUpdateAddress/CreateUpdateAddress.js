@@ -1,5 +1,3 @@
-import { isNullOrUndefined } from "../../../../helper/utils";
-
 const NotificationService = require("../../../../services/NotificationService");
 
 import ValidationService from "../../../../services/ValidationService";
@@ -205,7 +203,7 @@ Vue.component("create-update-address", {
                     {
                     case 1:
                     {
-                        if (!isNullOrUndefined(this.addressData.vatNumber) && this.addressData.vatNumber !== optionType.value)
+                        if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value)
                         {
                             optionType.value = this.addressData.vatNumber;
                         }
@@ -214,7 +212,7 @@ Vue.component("create-update-address", {
                     }
                     case 4:
                     {
-                        if (!isNullOrUndefined(this.addressData.telephone) && this.addressData.telephone !== optionType.value)
+                        if (this.addressData.telephone && this.addressData.telephone !== optionType.value)
                         {
                             optionType.value = this.addressData.telephone;
                         }
@@ -222,7 +220,7 @@ Vue.component("create-update-address", {
                     }
                     case 6:
                     {
-                        if (!isNullOrUndefined(this.addressData.postNumber) && this.addressData.postNumber !== optionType.value)
+                        if (this.addressData.postNumber && this.addressData.postNumber !== optionType.value)
                         {
                             optionType.value = this.addressData.postNumber;
                         }
@@ -230,7 +228,7 @@ Vue.component("create-update-address", {
                     }
                     case 9:
                     {
-                        if (!isNullOrUndefined(this.addressData.birthday) && this.addressData.birthday !== optionType.value)
+                        if (this.addressData.birthday && this.addressData.birthday !== optionType.value)
                         {
                             optionType.value = this.addressData.birthday;
                         }
@@ -238,7 +236,7 @@ Vue.component("create-update-address", {
                     }
                     case 11:
                     {
-                        if (!isNullOrUndefined(this.addressData.title) && this.addressData.title !== optionType.value)
+                        if (this.addressData.title && this.addressData.title !== optionType.value)
                         {
                             optionType.value = this.addressData.title;
                         }
@@ -246,7 +244,7 @@ Vue.component("create-update-address", {
                     }
                     case 12:
                     {
-                        if (!isNullOrUndefined(this.addressData.contactPerson) && this.addressData.contactPerson !== optionType.value)
+                        if (this.addressData.contactPerson && this.addressData.contactPerson !== optionType.value)
                         {
                             optionType.value = this.addressData.contactPerson;
                         }
