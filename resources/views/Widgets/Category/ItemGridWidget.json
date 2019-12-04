@@ -14,64 +14,12 @@
             "defaultValue": "primary",
             "options": "@include(appearance)"
         },
-        "numberOfColumnsDesktop": {
+        "numberOfColumns": {
             "type": "select",
             "defaultValue": 4,
             "options": {
-                "name": "Widget.itemGridNumberOfColumnsDesktopLabel",
-                "tooltipText": "Widget.itemGridNumberOfColumnsDesktopTooltip",
-                "listBoxValues": [
-                    {
-                        "value": 1,
-                        "caption": "Widget.widgetNum1"
-                    },
-                    {
-                        "value": 2,
-                        "caption": "Widget.widgetNum2"
-                    },
-                    {
-                        "value": 3,
-                        "caption": "Widget.widgetNum3"
-                    },
-                    {
-                        "value": 4,
-                        "caption": "Widget.widgetNum4"
-                    }
-                ]
-            }
-        },
-        "numberOfColumnsTablet": {
-            "type": "select",
-            "defaultValue": 3,
-            "options": {
-                "name": "Widget.itemGridNumberOfColumnsTabletLabel",
-                "tooltipText": "Widget.itemGridNumberOfColumnsTabletTooltip",
-                "listBoxValues": [
-                    {
-                        "value": 1,
-                        "caption": "Widget.widgetNum1"
-                    },
-                    {
-                        "value": 2,
-                        "caption": "Widget.widgetNum2"
-                    },
-                    {
-                        "value": 3,
-                        "caption": "Widget.widgetNum3"
-                    },
-                    {
-                        "value": 4,
-                        "caption": "Widget.widgetNum4"
-                    }
-                ]
-            }
-        },
-        "numberOfColumnsMobile": {
-            "type": "select",
-            "defaultValue": 1,
-            "options": {
-                "name": "Widget.itemGridNumberOfColumnsMobileLabel",
-                "tooltipText": "Widget.itemGridNumberOfColumnsMobileTooltip",
+                "name": "Widget.itemGridNumberOfColumnsLabel",
+                "tooltipText": "Widget.itemGridNumberOfColumnsTooltip",
                 "listBoxValues": [
                     {
                         "value": 1,

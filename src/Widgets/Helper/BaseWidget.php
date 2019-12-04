@@ -3,6 +3,7 @@
 namespace Ceres\Widgets\Helper;
 
 use Plenty\Modules\ShopBuilder\Contracts\Widget;
+use Plenty\Plugin\Application;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Log\Loggable;
 
@@ -35,9 +36,13 @@ class BaseWidget implements Widget
      */
     protected $twig = null;
 
-    public function __construct(Twig $twig)
+    /** @var Application $app  */
+    protected $app = null;
+
+    public function __construct(Twig $twig, Application $app)
     {
         $this->twig = $twig;
+        $this->app = $app;
     }
 
     /**
@@ -115,6 +120,7 @@ class BaseWidget implements Widget
         ];
         $templateData["children"]  = $children;
         $templateData["isPreview"] = $isPreview;
+        $templateData["isSafeMode"] = $this->app->isTemplateSafeMode();
         $templateData["TOOLBAR_LAYOUT"] = self::TOOLBAR_LAYOUT;
 
         try

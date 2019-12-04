@@ -1078,64 +1078,12 @@
                     ]
                 }
             },
-            "numberOfColumnsDesktop": {
+            "numberOfColumns": {
                 "type": "select",
                 "defaultValue": 4,
                 "options": {
-                    "name": "Widget.itemGridNumberOfColumnsDesktopLabel",
-                    "tooltipText": "Widget.itemGridNumberOfColumnsDesktopTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": 1,
-                            "caption": "Widget.widgetNum1"
-                        },
-                        {
-                            "value": 2,
-                            "caption": "Widget.widgetNum2"
-                        },
-                        {
-                            "value": 3,
-                            "caption": "Widget.widgetNum3"
-                        },
-                        {
-                            "value": 4,
-                            "caption": "Widget.widgetNum4"
-                        }
-                    ]
-                }
-            },
-            "numberOfColumnsTablet": {
-                "type": "select",
-                "defaultValue": 3,
-                "options": {
-                    "name": "Widget.itemGridNumberOfColumnsTabletLabel",
-                    "tooltipText": "Widget.itemGridNumberOfColumnsTabletTooltip",
-                    "listBoxValues": [
-                        {
-                            "value": 1,
-                            "caption": "Widget.widgetNum1"
-                        },
-                        {
-                            "value": 2,
-                            "caption": "Widget.widgetNum2"
-                        },
-                        {
-                            "value": 3,
-                            "caption": "Widget.widgetNum3"
-                        },
-                        {
-                            "value": 4,
-                            "caption": "Widget.widgetNum4"
-                        }
-                    ]
-                }
-            },
-            "numberOfColumnsMobile": {
-                "type": "select",
-                "defaultValue": 1,
-                "options": {
-                    "name": "Widget.itemGridNumberOfColumnsMobileLabel",
-                    "tooltipText": "Widget.itemGridNumberOfColumnsMobileTooltip",
+                    "name": "Widget.itemGridNumberOfColumnsLabel",
+                    "tooltipText": "Widget.itemGridNumberOfColumnsTooltip",
                     "listBoxValues": [
                         {
                             "value": 1,
@@ -10673,6 +10621,40 @@
                     "name": "Widget.navigationTreeShowItemCount"
                 }
             },
+            "customEntries": {
+                "type": "vertical",
+                "isList": "[1,]",
+                "options": {
+                    "name": "Widget.categoryNavigationCustomEntries"
+                },
+                "children": {
+                    "text": {
+                        "type": "text",
+                        "required": true,
+                        "defaultValue": "",
+                        "options": {
+                            "name": "Widget.categoryNavigationCustomEntriesLabel",
+                            "tooltipText": "Widget.categoryNavigationCustomEntriesTooltip"
+                        }
+                    },
+                    "url": {
+                        "type": "url",
+                        "required": false,
+                        "options": {
+                            "name": "Widget.categoryNavigationCustomEntriesUrlLabel",
+                            "tooltipText": "Widget.categoryNavigationCustomEntriesUrlTooltip"
+                        }
+                    },
+                    "position": {
+                        "type": "text",
+                        "required": false,
+                        "options": {
+                            "name": "Widget.categoryNavigationCustomEntriesPositionLabel",
+                            "tooltipText": "Widget.categoryNavigationCustomEntriesPositionTooltip"
+                        }
+                    }
+                }
+            },
             "spacing": {
                 "type": "vertical",
                 "options": {
@@ -10694,6 +10676,206 @@
                                 "rem"
                             ],
                             "direction": "vertical"
+                        }
+                    },
+                    "customMargin": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomMargin"
+                        }
+                    },
+                    "margin": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customMargin",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "identifier": "Ceres::StepByStepNavigationWidget",
+        "label": "Widget.stepByStepNavigationLabel",
+        "previewImageURL": "/images/widgets/step-by-step-navigation.svg",
+        "type": "default",
+        "categories": [
+            "navigation"
+        ],
+        "position": 100,
+        "widgetClass": "Ceres\\Widgets\\Navigation\\StepByStepNavigationWidget",
+        "settings": {
+            "customClass": {
+                "type": "text",
+                "required": false,
+                "defaultValue": "",
+                "options": {
+                    "name": "Widget.customClass",
+                    "tooltipText": "Widget.customClassTooltip"
+                }
+            },
+            "appearance": {
+                "type": "select",
+                "required": true,
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.widgetAppearanceLabel",
+                    "tooltipText": "Widget.widgetAppearanceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "none",
+                            "caption": "Widget.widgetAppearanceNone",
+                            "position": 0
+                        },
+                        {
+                            "value": "primary",
+                            "caption": "Widget.widgetAppearancePrimary",
+                            "position": 1
+                        },
+                        {
+                            "value": "secondary",
+                            "caption": "Widget.widgetAppearanceSecondary",
+                            "position": 2
+                        },
+                        {
+                            "value": "success",
+                            "caption": "Widget.widgetAppearanceSuccess",
+                            "position": 3
+                        },
+                        {
+                            "value": "info",
+                            "caption": "Widget.widgetAppearanceInfo",
+                            "position": 4
+                        },
+                        {
+                            "value": "warning",
+                            "caption": "Widget.widgetAppearanceWarning",
+                            "position": 5
+                        },
+                        {
+                            "value": "danger",
+                            "caption": "Widget.widgetAppearanceDanger",
+                            "position": 6
+                        }
+                    ]
+                }
+            },
+            "source": {
+                "type": "select",
+                "defaultValue": "none",
+                "options": {
+                    "name": "Widget.stepByStepNavigationSourceLabel",
+                    "tooltipText": "Widget.stepByStepNavigationSourceTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": "imagePath",
+                            "caption": "Widget.stepByStepNavigationImage1"
+                        },
+                        {
+                            "value": "image2Path",
+                            "caption": "Widget.stepByStepNavigationImage2"
+                        },
+                        {
+                            "value": "none",
+                            "caption": "Widget.stepByStepNavigationImageNone"
+                        }
+                    ]
+                }
+            },
+            "maxLevel": {
+                "type": "select",
+                "defaultValue": 1,
+                "options": {
+                    "name": "Widget.stepByStepNavigationMaxLevelLabel",
+                    "tooltipText": "Widget.stepByStepNavigationMaxLevelTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 1,
+                            "caption": "Widget.widgetNum1"
+                        },
+                        {
+                            "value": 2,
+                            "caption": "Widget.widgetNum2"
+                        },
+                        {
+                            "value": 3,
+                            "caption": "Widget.widgetNum3"
+                        },
+                        {
+                            "value": 4,
+                            "caption": "Widget.widgetNum4"
+                        },
+                        {
+                            "value": 5,
+                            "caption": "Widget.widgetNum5"
+                        },
+                        {
+                            "value": 6,
+                            "caption": "Widget.widgetNum6"
+                        }
+                    ]
+                }
+            },
+            "numberOfColumns": {
+                "type": "select",
+                "defaultValue": 4,
+                "options": {
+                    "name": "Widget.stepByStepNavigationNumberOfColumnsLabel",
+                    "tooltipText": "Widget.stepByStepNavigationNumberOfColumnsTooltip",
+                    "listBoxValues": [
+                        {
+                            "value": 1,
+                            "caption": "Widget.widgetNum1"
+                        },
+                        {
+                            "value": 2,
+                            "caption": "Widget.widgetNum2"
+                        },
+                        {
+                            "value": 3,
+                            "caption": "Widget.widgetNum3"
+                        },
+                        {
+                            "value": 4,
+                            "caption": "Widget.widgetNum4"
+                        }
+                    ]
+                }
+            },
+            "numberOfRows": {
+                "type": "number",
+                "defaultValue": 2,
+                "options": {
+                    "name": "Widget.stepByStepNavigationNumberOfRowsLabel",
+                    "tooltipText": "Widget.stepByStepNavigationNumberOfRowsTooltip"
+                }
+            },
+            "spacing": {
+                "type": "vertical",
+                "options": {
+                    "name": "Widget.widgetSpacing"
+                },
+                "children": {
+                    "customPadding": {
+                        "type": "checkbox",
+                        "options": {
+                            "name": "Widget.widgetCustomPadding"
+                        }
+                    },
+                    "padding": {
+                        "type": "spacing",
+                        "isVisible": "!!spacing.customPadding",
+                        "options": {
+                            "units": [
+                                "px",
+                                "rem"
+                            ],
+                            "direction": "all"
                         }
                     },
                     "customMargin": {
