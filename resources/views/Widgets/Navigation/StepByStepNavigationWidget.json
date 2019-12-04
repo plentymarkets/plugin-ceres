@@ -92,14 +92,6 @@
                     {
                         "value": 4,
                         "caption": "Widget.widgetNum4"
-                    },
-                    {
-                        "value": 5,
-                        "caption": "Widget.widgetNum5"
-                    },
-                    {
-                        "value": 6,
-                        "caption": "Widget.widgetNum6"
                     }
                 ]
             }
