@@ -4,6 +4,10 @@
         height: 100%;
         flex-direction: column;
         justify-content: center;
+
+        &.no-img {
+            min-height: 75px;
+        }
     }
     
     .nav-text {
