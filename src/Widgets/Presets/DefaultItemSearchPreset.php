@@ -24,7 +24,7 @@ class DefaultItemSearchPreset implements ContentPreset
     {
         $this->preset = pluginApp(PresetHelper::class);
 
-        $this->createHeadline();
+        $this->createSearchStringCodeWidget();
 
         $this->createToolbarWidget();
         $this->createItemSortingWidget();
@@ -35,29 +35,22 @@ class DefaultItemSearchPreset implements ContentPreset
         $this->createPriceFilterWidget();
         $this->createAvailabilityFilterWidget();
         $this->createManufacturerFilterWidget();
-
         $this->selectedFilterWidget();
+        
         $this->paginationWidget();
         $this->createItemGridWidget();
 
         return $this->preset->toArray();
     }
-
-    private function createHeadline()
+    
+    private function createSearchStringCodeWidget()
     {
-        $this->preset->createWidget("Ceres::InlineTextWidget")
-            ->withSetting('spacing.customPadding', true)
-            ->withSetting('customClass', 'h2')
-            ->withSetting('spacing.padding.left.value', 0)
-            ->withSetting('spacing.padding.left.unit', null)
-            ->withSetting('spacing.padding.right.value', 0)
-            ->withSetting('spacing.padding.right.unit', null)
-            ->withSetting('spacing.padding.top.value', 0)
-            ->withSetting('spacing.padding.top.unit', null)
-            ->withSetting('spacing.padding.bottom.value', 0)
-            ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', '<h1>{{ trans("Ceres::Template.itemSearchResults") }}</h1>')
-            ->withSetting('appearance','none');
+        $this->preset->createWidget('Ceres::CodeWidget')
+                     ->withSetting('text', '<div class="row mt-3">
+                    <div class="col-12">
+                        <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
+                    </div>
+                </div>');
     }
     
     private function createToolbarWidget()
