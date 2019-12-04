@@ -18,16 +18,16 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 <div class="widget widget-toolbar list-controls{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div class="list-controls-inner{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+    <div class="list-controls-inner {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         
-        <div class="d-sm-flex p-2">
+        <div class="d-flex">
             <div class="flex-fill" {% if isPreview %}data-builder-child-container="toolbar"{% endif %}>
                 {{ children.toolbar | raw }}
             </div>
 
             {% if ( overrideSearchFilters | trim is empty ) and ( isPreview or children.collapsable ) %}
             <div class="d-flex widget-{{ appearance }}">
-                <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}">
+                <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed pr-0" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}">
                     {%- if icon != "none" -%}
                         <i class="fa {{ icon }} default-float mr-1" aria-hidden="true" style="line-height: inherit"></i>
                     {%- endif -%}

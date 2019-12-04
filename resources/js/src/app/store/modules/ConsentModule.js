@@ -37,14 +37,11 @@ const mutations =
         {
             Object.keys((state.consents || {})).forEach((groupKey) =>
             {
-                if (typeof state.consents[groupKey] === "object")
+                Object.keys(state.consents[groupKey]).forEach((consentKey) =>
                 {
-                    Object.keys(state.consents[groupKey]).forEach((consentKey) =>
-                    {
-                        state.consents[groupKey] = state.consents[groupKey] || {};
-                        state.consents[groupKey][consentKey] = true;
-                    });
-                }
+                    state.consents[groupKey] = state.consents[groupKey] || {};
+                    state.consents[groupKey][consentKey] = true;
+                });
             });
 
             if (window.ConsentManager)

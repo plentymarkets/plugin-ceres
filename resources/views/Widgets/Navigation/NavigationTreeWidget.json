@@ -28,6 +28,41 @@
                 "name": "Widget.navigationTreeShowItemCount"
             }
         },
+        "customEntries": {
+            "type": "vertical",
+            "isList": "[1,]",
+            "options": {
+                "name": "Widget.categoryNavigationCustomEntries"
+            },
+            "children": {
+                "text": {
+                    "type": "text",
+                    "required": true,
+                    "defaultValue": "",
+                    "options": {
+                        "name": "Widget.categoryNavigationCustomEntriesLabel",
+                        "tooltipText": "Widget.categoryNavigationCustomEntriesTooltip"
+                    }
+                },
+                "url":
+                {
+                    "type": "url",
+                    "required": false,
+                    "options": {
+                        "name": "Widget.categoryNavigationCustomEntriesUrlLabel",
+                        "tooltipText": "Widget.categoryNavigationCustomEntriesUrlTooltip"
+                    }
+                },
+                "position": {
+                    "type": "text",
+                    "required": false,
+                    "options": {
+                        "name": "Widget.categoryNavigationCustomEntriesPositionLabel",
+                        "tooltipText": "Widget.categoryNavigationCustomEntriesPositionTooltip"
+                    }
+                }
+            }
+        },
         "spacing": {
             "type": "vertical",
             "options": {
