@@ -119,6 +119,12 @@
               "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
             }
         ],
+        "categoryitem": [
+            {
+                "label": "Widget.presetItemCategoryDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultItemCategoryPreset"
+            }
+        ],
         "singleitem":
         [
             {

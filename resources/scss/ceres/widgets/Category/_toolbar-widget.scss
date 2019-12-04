@@ -2,6 +2,14 @@
     .widget {
         margin-bottom: 0;
     }
+    
+    .list-controls-inner {
+        padding: 1rem;
+
+        div.widget ~ div.widget {
+            margin-left: 1em;
+        }
+    }
 
     .filter-collapse {
         > div {
