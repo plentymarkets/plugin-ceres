@@ -130,7 +130,7 @@
             &.first-level.active, &.first-level.is-open {
                 display: list-item;
             }
-            a {
+            a[href] {
                 display: block;
                 color: $gray-dark;
                 font-size: 1rem;
@@ -149,6 +149,9 @@
                     border-radius: 3px;
                     display: inline-block;	
                 }
+            }
+            a:not([href]) {
+                cursor: auto; 
             }
             ul {
                 display: none;

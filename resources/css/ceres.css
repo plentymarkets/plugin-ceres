@@ -17213,17 +17213,17 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
     .widget-navigation-tree ul li.first-level.active,
     .widget-navigation-tree ul li.first-level.is-open {
       display: list-item; }
-    .sidebar-categories ul li a,
-    .widget-navigation-tree ul li a {
+    .sidebar-categories ul li a[href],
+    .widget-navigation-tree ul li a[href] {
       display: block;
       color: #4D4F4D;
       font-size: 1rem; }
-      .sidebar-categories ul li a:hover,
-      .widget-navigation-tree ul li a:hover {
+      .sidebar-categories ul li a[href]:hover,
+      .widget-navigation-tree ul li a[href]:hover {
         color: #282d2f;
         background: #f7f7f9; }
-      .sidebar-categories ul li a span.placeholder,
-      .widget-navigation-tree ul li a span.placeholder {
+      .sidebar-categories ul li a[href] span.placeholder,
+      .widget-navigation-tree ul li a[href] span.placeholder {
         background: #7a7f7f;
         opacity: .1;
         -webkit-animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
@@ -17232,6 +17232,9 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
         width: 10%;
         border-radius: 3px;
         display: inline-block; }
+    .sidebar-categories ul li a:not([href]),
+    .widget-navigation-tree ul li a:not([href]) {
+      cursor: auto; }
     .sidebar-categories ul li ul,
     .widget-navigation-tree ul li ul {
       display: none; }
