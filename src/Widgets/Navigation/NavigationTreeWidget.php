@@ -41,4 +41,18 @@ class NavigationTreeWidget extends BaseWidget
             'categories' => $categories
         ];
     }
+    
+    public function getTemplateData($widgetSettings, $isPreview)
+    {
+        $customEntries = $widgetSettings["customEntries"]["mobile"];
+        
+        usort(
+            $customEntries,
+            function ($entryA, $entryB) {
+                return $entryA["position"] - $entryB["position"];
+            }
+        );
+        
+        return ["customEntries" => $customEntries];
+    }
 }

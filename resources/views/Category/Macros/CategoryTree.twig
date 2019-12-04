@@ -88,9 +88,38 @@
 
 {% endmacro %}
 
-{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding, showItemCount, expandableChildren) %}
+{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding, showItemCount, expandableChildren, customEntries ) %}
     {% import _self as sidemenu %}
+
     {% for category in categories if category.details[0] %}
+        {% for entry in customEntries if entry.text is not empty %}
+            {% if entry.url.value is not empty %}
+                {% if entry.url.type == 'category' %}
+                    {% set __category = services.category.get(entry.url.value) %}
+                    {% set realUrl = services.category.getURL(__category) %}
+                {% endif %}
+                {% if entry.url.type == 'item' %}
+                    {% set __itemData = services.item.getVariation(entry.url.value) %}
+                    {% set realUrl = __itemData.documents[0].data | itemURL %}
+                {% endif %}
+                {% if entry.url.type == 'external' or entry.url.type == 'file' %}
+                    {% set realUrl = entry.url.value %}
+                {% endif %}
+            {% endif %}
+
+            {% if entry.position == loop.parent.loop.index %}
+            <ul>
+                <li class="nav-item">
+                    <a {% if realUrl is not empty %}href="{{ realUrl }}"{% endif %} class="nav-link
+                        {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                        {% if entry.url.openInNewTab %} target="_blank"{% endif %}
+                        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                        {{ entry.text }}
+                    </a>
+                </li>
+            </ul>
+            {% endif %}
+        {% endfor %}
 
         {% set currentUrl = currentScopeUrl %}
         {% if currentUrl is empty and urls.includeLanguage %}
@@ -134,6 +163,36 @@
                 {% endif %}
             </li>
         </ul>
+
+        {% if loop.index == categories | length %}
+            {% for entry in customEntries if entry.text is not empty and entry.position > categories | length %}
+                {% if entry.url.value is not empty %}
+                    {% if entry.url.type == 'category' %}
+                        {% set __category = services.category.get(entry.url.value) %}
+                        {% set realUrl = services.category.getURL(__category) %}
+                    {% endif %}
+                    {% if entry.url.type == 'item' %}
+                        {% set __itemData = services.item.getVariation(entry.url.value) %}
+                        {% set realUrl = __itemData.documents[0].data | itemURL %}
+                    {% endif %}
+                    {% if entry.url.type == 'external' or entry.url.type == 'file' %}
+                        {% set realUrl = entry.url.value %}
+                    {% endif %}
+                {% endif %}
+
+                <ul>
+                    <li class="nav-item">
+                        <a {% if realUrl is not empty %}href="{{ realUrl }}"{% endif %} class="nav-link
+                            {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                            {% if entry.url.openInNewTab %} target="_blank"{% endif %}
+                            {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                            {{ entry.text }}
+                        </a>
+                    </li>
+                </ul>
+            {% endfor %}
+        {% endif %}
+        
     {% endfor %}
 
 {% endmacro %}
