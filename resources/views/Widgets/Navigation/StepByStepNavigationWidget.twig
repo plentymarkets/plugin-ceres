@@ -26,12 +26,14 @@
         {% else %}
 
             {{ Twig.if("category.level <= #{ maxLevel }") }}
+                {{ Twig.set("children", Twig.call("services.category.getChildren", [Twig.var("category.id")])) }}
 
                 <step-by-step-navigation
                     :category-id="{{ Twig.print("category.id") }}"
                     :chunk-size="{{ numberOfColumns * numberOfRows }}"
                     image-source="{{ source }}"
-                    :columns="{{ numberOfColumns }}">
+                    :columns="{{ numberOfColumns }}"
+                    :children-count="{{ Twig.print("children | length ")}}">
                 </step-by-step-navigation>
 
             {{ Twig.endif() }}

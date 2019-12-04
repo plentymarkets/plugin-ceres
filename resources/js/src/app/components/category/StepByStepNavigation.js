@@ -34,6 +34,11 @@ Vue.component("step-by-step-navigation", {
         {
             type: Number,
             default: 12
+        },
+        childrenCount:
+        {
+            type: Number,
+            required: true
         }
     },
 
