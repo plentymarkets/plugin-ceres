@@ -92,12 +92,12 @@ const actions =
             }
         },
 
-        loadCategoryChildrenChunk({ commit }, { categoryId, size })
+        loadCategoryChildrenChunk({ state, commit }, { categoryId, size })
         {
             return new Promise((resolve, reject) =>
             {
                 ApiService
-                    .get("/rest/io/categorytree/children", { categoryId, indexStart: 0, maxCount: size })
+                    .get("/rest/io/categorytree/children", { categoryId, indexStart: state.categoryChildren.length, maxCount: size })
                     .done(response =>
                     {
                         commit("addCategoryChildren", response);
