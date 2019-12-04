@@ -19,16 +19,24 @@
 <div class="widget widget-step-by-step-navigation widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
 
-        {{ Twig.if("category.level <= #{ maxLevel }") }}
+        {% if isPreview %}
 
-            <step-by-step-navigation
-                :category-id="{{ Twig.print("category.id") }}"
-                :chunk-size="{{ numberOfColumns * numberOfRows }}"
-                image-source="{{ source }}"
-                :columns="{{ numberOfColumns }}">
-            </step-by-step-navigation>
+            VORSCHAU!
 
-        {{ Twig.endif() }}
+        {% else %}
+
+            {{ Twig.if("category.level <= #{ maxLevel }") }}
+
+                <step-by-step-navigation
+                    :category-id="{{ Twig.print("category.id") }}"
+                    :chunk-size="{{ numberOfColumns * numberOfRows }}"
+                    image-source="{{ source }}"
+                    :columns="{{ numberOfColumns }}">
+                </step-by-step-navigation>
+
+            {{ Twig.endif() }}
+
+        {% endif %}
     
     </div>
 </div>
