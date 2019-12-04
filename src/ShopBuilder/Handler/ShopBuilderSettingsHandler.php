@@ -127,7 +127,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         return $this->setEnabledRoute(RouteConfig::MY_ACCOUNT, $enableMyAccountRoute);
     }
     
-    public function readRouting_searchEnableRoute()
+    public function readRouting_searchEnableRoute(): bool
     {
         return in_array(RouteConfig::SEARCH, RouteConfig::getEnabledRoutes());
     }
