@@ -129,7 +129,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     
     public function readRouting_searchEnableRoute()
     {
-        return in_array( RouteConfig::SEARCH, RouteConfig::getEnabledRoutes());
+        return in_array(RouteConfig::SEARCH, RouteConfig::getEnabledRoutes());
     }
     
     public function writeRouting_searchEnableRoute($enableSearchRoute)
