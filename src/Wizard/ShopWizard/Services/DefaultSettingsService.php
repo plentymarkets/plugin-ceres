@@ -122,11 +122,11 @@ class DefaultSettingsService
         $shippingCountries = $this->countryRepository->getActiveCountriesList();
         return count($shippingCountries) ? true : false;
     }
-    
+
     /**
      * @return array
      */
-    public function getShippingProfiles()
+    public function getShippingProfiles(): array
     {
         return $this->parcelServicePresetRepo->getPreviewList();
     }
@@ -134,7 +134,7 @@ class DefaultSettingsService
     /**
      * @return array
      */
-    public function getShippingMethods()
+    public function getShippingMethods(): array
     {
         $shippingMethods = [];
         $shippingProfiles = $this->parcelServicePresetRepo->getPresetList(['*'], 'parcelService');
