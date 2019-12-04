@@ -17,6 +17,7 @@
     },
     "allowedTypes": {
         "categoryitem": ["static", "structure", "default", "categoryitem", "customer"],
+        "itemsearch":   ["static", "structure", "default", "categoryitem", "customer"],
         "checkout":     ["static", "structure", "default", "checkout", "customer"],
         "content":      ["static", "structure", "default"],
         "footer":       ["footer", "static", "structure", "default"],
@@ -282,6 +283,22 @@
                     "isVisible": "!routing.myAccountCategory",
                     "options": {
                         "name": "Config.routingEnableRouteMyAccount"
+                    }
+                },
+                "searchCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryItemSearch"
+                    }
+                },
+                "searchEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.searchCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteItemSearch"
                     }
                 },
                 "loginCategory": {
@@ -598,6 +615,7 @@
     "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
     "supportedFeatures": {
         "categoryItemContent": true,
+        "itemSearchContent": true,
         "singleItemContent": true,
         "globalElementsOverride": true,
         "safeMode" : true
