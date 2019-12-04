@@ -1,0 +1,21 @@
+<script type="x/template" id="vue-step-by-step-navigation">
+    <div>
+
+        <template v-for="category in categoryChildren">
+
+            <a :href="category.url">
+                <div>
+                    <img :src="category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
+                    <h6>${ category.details[0].name }</h6>
+                </div>
+            </a>
+
+        </template>
+
+
+        <div @click="loadChunk()">
+            <span v-if="isWaiting">loading...</span>
+            <span v-else>more...</span>
+        </div>
+    </div>
+</script>

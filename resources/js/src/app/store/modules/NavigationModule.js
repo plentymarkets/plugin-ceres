@@ -6,7 +6,8 @@ const state =
     {
         tree: [],
         cachedTrees: {},
-        currentCategory: null
+        currentCategory: null,
+        categoryChildren: []
     };
 
 const mutations =
@@ -24,6 +25,11 @@ const mutations =
         addCachedPartialTree(state, { tree, categoryId })
         {
             state.cachedTrees[categoryId] = tree;
+        },
+
+        addCategoryChildren(state, children)
+        {
+            Vue.set(state, "categoryChildren", [...state.categoryChildren, ...children]);
         }
     };
 
@@ -84,6 +90,24 @@ const actions =
                     dispatch("setCurrentCategoryById", { categoryId, categories: category.children });
                 }
             }
+        },
+
+        loadCategoryChildrenChunk({ commit }, { categoryId, size })
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService
+                    .get("/rest/io/categorytree/children", { categoryId, indexStart: 0, maxCount: size })
+                    .done(response =>
+                    {
+                        commit("addCategoryChildren", response);
+                        resolve(response);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
+            });
         }
     };
 

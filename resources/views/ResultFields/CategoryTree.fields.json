@@ -6,5 +6,6 @@
     "details.nameUrl",
     "details.metaTitle",
     "details.imagePath",
+    "details.image2Path",
     "itemCount"
 ]
