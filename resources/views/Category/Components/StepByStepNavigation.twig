@@ -3,19 +3,24 @@
 
         <template v-for="category in categoryChildren">
 
-            <div :class="'col-' + columnDivider" class="border">
+            <div :class="'col-' + columnDivider">
                 <a :href="category.url">
-                        <img v-if="imageSource !== 'none'" :src="category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
-                        <h6>${ category.details[0].name }</h6>
-                </a>
+                    <div class="nav-item border d-flex">
+                        <div class="prop-xs-1-1">
+                            <img v-if="imageSource !== 'none'" :src="category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
+                        </div>
+                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">${ category.details[0].name }</span></div>
+                    </div>
+                </a>  
             </div>
 
         </template>
 
-
-        <div :class="'col-' + columnDivider" @click="loadChunk()" class="border">
-            <span v-if="isWaiting">loading...</span>
-            <span v-else>more...</span>
+        <div :class="'col-' + columnDivider" @click="loadChunk()">
+            <div class="nav-item border d-flex">
+                <span v-if="isWaiting">loading...</span>
+                <span v-else>more...</span>
+            </div>
         </div>
     </div>
 </script>
