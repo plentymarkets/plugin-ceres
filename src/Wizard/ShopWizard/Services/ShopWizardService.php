@@ -10,7 +10,6 @@ use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositor
 use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Plugin\Models\Plugin;
-use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetEntryRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
@@ -45,7 +44,7 @@ class ShopWizardService
     /**
      * @return array
      */
-    public function getWebstoresIdentifiers():array
+    public function getWebstoresIdentifiers(): array
     {
         $webstoresMapped = [];
 
@@ -56,8 +55,10 @@ class ShopWizardService
 
         /** @var PluginRepositoryContract $pluginRepo */
         $pluginRepo = pluginApp(PluginRepositoryContract::class);
-        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-        $pluginSets = $pluginSetRepo->list();
+        /** @var PluginSetRepositoryContract $pluginSetRepo */
+        $pluginSetRepo  = pluginApp(PluginSetRepositoryContract::class);
+        $pluginSets     = $pluginSetRepo->list();
+        /** @var ShopWizardConfigRepository $wizardConfRepo */
         $wizardConfRepo = pluginApp(ShopWizardConfigRepository::class);
 
         $plugin = $pluginRepo->getPluginByName("Ceres");
@@ -108,7 +109,7 @@ class ShopWizardService
      * @param $pluginSetId
      * @return array
      */
-    public function mapWebstoreData($webstoreId, $pluginSetId)
+    public function mapWebstoreData($webstoreId, $pluginSetId): array
     {
         $globalData = [];
 
@@ -241,9 +242,7 @@ class ShopWizardService
 
         if ($plugin instanceof Plugin)
         {
-            /**
-             * @var PluginSetRepositoryContract $pluginSetRepo
-             */
+            /** @var PluginSetRepositoryContract $pluginSetRepo */
             $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
             $pluginSetEntries = $pluginSetRepo->listSetEntries($pluginSetId);
 

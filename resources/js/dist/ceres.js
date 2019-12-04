@@ -62254,7 +62254,11 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
         return "";
       }
 
-      return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.storeSpecial.names.name)) {
+        return this.storeSpecial.names.name;
+      }
+
+      return this.labels[this.storeSpecial.id];
     },
     getPercentageSale: function getPercentageSale() {
       var percent;
@@ -66572,6 +66576,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -66591,10 +66596,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 var SidenavigationChildrenLoader =
 /*#__PURE__*/
 function () {
-  function SidenavigationChildrenLoader(element, categoryId, currentUrl, isActive, openClassName) {
+  function SidenavigationChildrenLoader(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName) {
     var _this = this;
 
     _classCallCheck(this, SidenavigationChildrenLoader);
@@ -66602,8 +66608,11 @@ function () {
     this.categoryId = categoryId;
     this.element = element;
     this.currentUrl = currentUrl;
+    this.showItemCount = showItemCount;
+    this.childCount = childCount;
     this.openClassName = openClassName || "is-open";
     this.template = "";
+    this.placeholders = [];
 
     if (isActive) {
       this.firstChildrenLoad = true;
@@ -66614,38 +66623,46 @@ function () {
   }
 
   _createClass(SidenavigationChildrenLoader, [{
-    key: "loadChildren",
-    value: function loadChildren() {
-      var _this2 = this;
+    key: "createElement",
+    value: function createElement(tag, classes, width, innerText, child) {
+      var element = document.createElement(tag);
 
-      return new Promise(function (resolve) {
-        _services_ApiService__WEBPACK_IMPORTED_MODULE_10__["default"].get("/rest/io/categorytree/children", {
-          categoryId: _this2.categoryId,
-          currentUrl: _this2.currentUrl
-        }).then(function (result) {
-          _this2.template = result;
-          resolve(_this2.template);
-        });
-      });
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(classes)) {
+        element.classList.add(classes);
+      }
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(width)) {
+        element.style.width = width;
+      }
+
+      element.innerText = innerText;
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(child)) {
+        element.appendChild(child);
+      }
+
+      return element;
     }
   }, {
-    key: "createChildren",
-    value: function createChildren() {
+    key: "createPlaceholder",
+    value: function createPlaceholder() {
+      for (var i = 0; i < this.childCount; i++) {
+        var placeholder = this.createElement("ul", null, null, null, this.createElement("li", "nav-item", null, null, this.createElement("a", "nav-link", null, null, this.createElement("span", "placeholder", Math.floor(Math.random() * 20 + 10) + "%", "."))));
+        this.placeholders.push(placeholder);
+        this.parent.appendChild(placeholder);
+      }
+    }
+  }, {
+    key: "removePlaceholder",
+    value: function removePlaceholder() {
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
 
       try {
-        for (var _iterator = this.getSplitMarkup()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var template = _step.value;
-          var ul = document.createElement("ul");
-          this.parent.appendChild(ul);
-          var compiled = vue__WEBPACK_IMPORTED_MODULE_9___default.a.compile(template);
-          new vue__WEBPACK_IMPORTED_MODULE_9___default.a({
-            store: window.ceresStore,
-            render: compiled.render,
-            staticRenderFns: compiled.staticRenderFns
-          }).$mount(ul);
+        for (var _iterator = this.placeholders[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var placeholder = _step.value;
+          placeholder.remove();
         }
       } catch (err) {
         _didIteratorError = true;
@@ -66663,19 +66680,39 @@ function () {
       }
     }
   }, {
-    key: "getSplitMarkup",
-    value: function getSplitMarkup() {
-      var fragment = document.createRange().createContextualFragment(this.template);
-      var elements = fragment.children;
-      var data = [];
+    key: "loadChildren",
+    value: function loadChildren() {
+      var _this2 = this;
+
+      return new Promise(function (resolve) {
+        _services_ApiService__WEBPACK_IMPORTED_MODULE_10__["default"].get("/rest/io/categorytree/template_for_children", {
+          categoryId: _this2.categoryId,
+          currentUrl: _this2.currentUrl,
+          showItemCount: _this2.showItemCount ? 1 : 0
+        }).then(function (result) {
+          _this2.template = result;
+          resolve(_this2.template);
+        });
+      });
+    }
+  }, {
+    key: "createChildren",
+    value: function createChildren() {
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator2 = elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var element = _step2.value;
-          data.push(element.outerHTML);
+        for (var _iterator2 = this.getSplitMarkup()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var template = _step2.value;
+          var ul = document.createElement("ul");
+          this.parent.appendChild(ul);
+          var compiled = vue__WEBPACK_IMPORTED_MODULE_9___default.a.compile(template);
+          new vue__WEBPACK_IMPORTED_MODULE_9___default.a({
+            store: window.ceresStore,
+            render: compiled.render,
+            staticRenderFns: compiled.staticRenderFns
+          }).$mount(ul);
         }
       } catch (err) {
         _didIteratorError2 = true;
@@ -66691,6 +66728,36 @@ function () {
           }
         }
       }
+    }
+  }, {
+    key: "getSplitMarkup",
+    value: function getSplitMarkup() {
+      var fragment = document.createRange().createContextualFragment(this.template);
+      var elements = fragment.children;
+      var data = [];
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = elements[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var element = _step3.value;
+          data.push(element.outerHTML);
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
 
       return data;
     }
@@ -66701,7 +66768,10 @@ function () {
 
       if (!this.firstChildrenLoad) {
         this.firstChildrenLoad = true;
+        this.createPlaceholder();
         this.loadChildren().then(function () {
+          _this3.removePlaceholder();
+
           _this3.createChildren();
         });
       }
@@ -66723,7 +66793,9 @@ vue__WEBPACK_IMPORTED_MODULE_9___default.a.directive("sidenavigation-children", 
     var categoryId = binding.value.categoryId;
     var currentUrl = binding.value.currentUrl;
     var isActive = binding.value.isActive;
-    var sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive);
+    var showItemCount = binding.value.showItemCount;
+    var childCount = binding.value.childCount;
+    var sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive, showItemCount, childCount);
     el.addEventListener("click", function () {
       sidenavigationChildrenLoader.toggle();
     });
