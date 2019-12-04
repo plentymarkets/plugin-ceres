@@ -31,11 +31,10 @@ class NavigationTreeWidget extends BaseWidget
             $customerService->getContactClassId()
         );
         
-        if(!count($categories))
-        {
+        if (!count($categories)) {
             /** @var CategoryTreeFaker $categoryTreeFaker */
             $categoryTreeFaker = pluginApp(CategoryTreeFaker::class);
-            $categories = $categoryTreeFaker->fill([]);
+            $categories        = $categoryTreeFaker->fill([]);
         }
         
         return [
