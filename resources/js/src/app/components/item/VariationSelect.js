@@ -45,6 +45,11 @@ Vue.component("variation-select", {
             return this.variations.some(variation => !variation.attributes.length);
         },
 
+        addPleaseSelectOption()
+        {
+            return App.config.item.showPleaseSelect;
+        },
+
         /**
          * returns the variation, based on the selected attributes / unit
          * returns false if there are none or multiple results
@@ -94,9 +99,7 @@ Vue.component("variation-select", {
             selectedAttributes: state => state.variationSelect.selectedAttributes,
             selectedUnit: state => state.variationSelect.selectedUnit,
             units: state => state.variationSelect.units,
-            variations: state => state.variationSelect.variations,
-            addPleaseSelectOption: state => state.variationSelect.addPleaseSelectOption,
-            initialPleaseSelect: state => state.variationSelect.initialPleaseSelect
+            variations: state => state.variationSelect.variations
         })
     },
 
@@ -312,7 +315,7 @@ Vue.component("variation-select", {
                     TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name })
                 );
 
-                attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && this.initialPleaseSelect) ? -1 : null;
+                attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && App.initialData.initialPleaseSelectOption) ? -1 : null;
             }
 
             if (invalidSelection.newUnit)
@@ -486,7 +489,7 @@ Vue.component("variation-select", {
             {
                 return selectedAttributeValue.name;
             }
-            else if (this.addPleaseSelectOption && selectedAttributeValueId === -1)
+            else if (App.config.item.showPleaseSelect && selectedAttributeValueId === -1)
             {
                 return TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
             }

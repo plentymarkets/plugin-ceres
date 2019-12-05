@@ -19,9 +19,7 @@ Vue.component("single-item", {
         "itemData",
         "attributesData",
         "variations",
-        "addPleaseSelectOption",
-        "addPleaseSelectOptionVariationId",
-        "initialPleaseSelect"
+        "addPleaseSelectOptionVariationId"
     ],
 
     computed:
@@ -39,6 +37,11 @@ Vue.component("single-item", {
         transformedVariationProperties()
         {
             return transformVariationProperties(this.currentVariation, [], "showInItemListing");
+        },
+
+        addPleaseSelectOption()
+        {
+            return App.config.item.showPleaseSelect;
         },
 
         ...mapState({
@@ -65,9 +68,7 @@ Vue.component("single-item", {
         this.$store.dispatch("setVariationSelect", {
             attributes:         this.attributesData,
             variations:         this.variations,
-            initialVariationId: this.currentVariation.variation.id,
-            addPleaseSelectOption: this.addPleaseSelectOption,
-            initialPleaseSelect: this.initialPleaseSelect
+            initialVariationId: this.currentVariation.variation.id
         });
     },
 

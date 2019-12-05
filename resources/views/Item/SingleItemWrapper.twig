@@ -102,9 +102,7 @@
                         item-data="{{ item | json_data }}"
                         attributes-data="{{ attributes | json_data }}"
                         variations="{{ variations | json_data }}"
-                        add-please-select-option="{{ addPleaseSelectOption | json_data }}"
                         add-please-select-option-variation-id="{{ addPleaseSelectOptionVariationId | json_data }}"
-                        initial-please-select="{{ initialPleaseSelect | json_data }}"
                         v-slot="slotProps">
                         {{ shopBuilderTemplate | raw }}
                     </single-item>

@@ -1,3 +1,4 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {{ Twig.component( "Ceres::Item.Components.GraduatedPrices" ) }}
@@ -12,9 +13,9 @@
 
 <div class="widget widget-item-price widget-{{ appearance }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    
+
     <template v-if="$store.getters.currentItemVariation">
         {% if widget.settings.showCrossPrice.mobile %}
             <div class="crossprice" v-if="$store.getters.currentItemVariation.prices.rrp && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > 0 && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > $store.getters.currentItemVariation.prices.default.unitPrice.value">
@@ -28,9 +29,9 @@
             <span class="font-weight-bold"
                 ref="variationTotalPrice"
                 :content="$store.getters.currentItemVariation.prices.default.price.value"
-                v-text="$store.state.variationSelect.addPleaseSelectOption &&
-                        $store.state.variationSelect.isVariationSelected === false  &&
-                        $store.state.item.pleaseSelectVariationId == $store.getters.currentItemVariation.variation.id ?
+                v-text="{{ Twig.print("ceresConfig.item.showPleaseSelect | json_encode") }} &&
+                        $store.state.variationSelect.isVariationSelected === false &&
+                        ($store.state.item.pleaseSelectVariationId == $store.getters.currentItemVariation.variation.id  || $store.state.item.pleaseSelectVariationId == 0)?
                     '{{ priceTranslation }}' :
                     $options.filters.currency($store.getters.variationTotalPrice, $store.getters.currentItemVariation.prices.default.currency)">
                 {# TODO ADD placeholder #}
