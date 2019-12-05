@@ -7,14 +7,18 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set appearance = widget.settings.appearance.mobile | default("none") %}
+{% set showCrossPrice = widget.settings.showCrossPrice.mobile %}
 
 <div class="widget widget-item-price widget-{{ appearance }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if showCrossPrice %}
+        :class="{ 'has-crossprice': $store.getters.currentItemVariation.prices.rrp && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > 0 && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > $store.getters.currentItemVariation.prices.default.unitPrice.value }"
+    {% endif %}
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    
+
     <template v-if="$store.getters.currentItemVariation">
-        {% if widget.settings.showCrossPrice.mobile %}
+        {% if showCrossPrice %}
             <div class="crossprice" v-if="$store.getters.currentItemVariation.prices.rrp && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > 0 && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > $store.getters.currentItemVariation.prices.default.unitPrice.value">
                 <del class="text-muted text-appearance small" v-text="$options.filters.itemCrossPrice($store.getters.currentItemVariation.prices.rrp.unitPrice.formatted)">
                     {# TODO ADD placeholder #}
