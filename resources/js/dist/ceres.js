@@ -62254,7 +62254,11 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("item-store-special", {
         return "";
       }
 
-      return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.storeSpecial.names.name)) {
+        return this.storeSpecial.names.name;
+      }
+
+      return this.labels[this.storeSpecial.id];
     },
     getPercentageSale: function getPercentageSale() {
       var percent;
@@ -66681,7 +66685,7 @@ function () {
       var _this2 = this;
 
       return new Promise(function (resolve) {
-        _services_ApiService__WEBPACK_IMPORTED_MODULE_10__["default"].get("/rest/io/categorytree/children", {
+        _services_ApiService__WEBPACK_IMPORTED_MODULE_10__["default"].get("/rest/io/categorytree/template_for_children", {
           categoryId: _this2.categoryId,
           currentUrl: _this2.currentUrl,
           showItemCount: _this2.showItemCount ? 1 : 0

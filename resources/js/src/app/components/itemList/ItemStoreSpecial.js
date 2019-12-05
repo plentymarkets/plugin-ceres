@@ -72,7 +72,12 @@ Vue.component("item-store-special", {
                 return "";
             }
 
-            return this.labels[this.storeSpecial.id] || this.storeSpecial.names.name;
+            if (!isNullOrUndefined(this.storeSpecial.names.name))
+            {
+                return this.storeSpecial.names.name;
+            }
+
+            return this.labels[this.storeSpecial.id];
         },
 
         getPercentageSale()
