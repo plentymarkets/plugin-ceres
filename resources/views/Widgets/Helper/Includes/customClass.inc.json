@@ -1,9 +1,0 @@
-{
-  "type": "text",
-  "required": false,
-  "defaultValue": "",
-  "options": {
-    "name": "Widget.customClass",
-    "tooltipText": "Widget.customClassTooltip"
-  }
-}

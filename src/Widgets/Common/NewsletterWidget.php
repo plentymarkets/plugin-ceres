@@ -3,10 +3,50 @@
 namespace Ceres\Widgets\Common;
 
 use Ceres\Widgets\Helper\BaseWidget;
+use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
+use Ceres\Widgets\Helper\WidgetTypes;
 
 class NewsletterWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Common.NewsletterWidget";
+
+    public function getData()
+    {
+        return WidgetDataFactory::make("Ceres::NewsletterWidget")
+            ->withLabel("Widget.newsletterLabel")
+            ->withPreviewImageUrl("/images/widgets/newsletter.svg")
+            ->withType(WidgetTypes::STATIC)
+            ->withPosition(500)
+            ->toArray();
+    }
+
+    public function getSettings()
+    {
+        /** @var WidgetSettingsFactory $settings */
+        $settings = pluginApp(WidgetSettingsFactory::class);
+
+        $settings->createCustomClass();
+        $settings->createAppearance();
+
+        $settings->createCheckbox("showNameInputs")
+            ->withDefaultValue(false)
+            ->withName("Widget.newsletterShowNameInputsLabel");
+
+        $settings->createCheckbox("showPrivacyPolicyCheckbox")
+            ->withDefaultValue(true)
+            ->withName("Widget.newsletterShowPrivacyPolicyCheckboxLabel");
+
+        $settings->createNumber("emailFolder")
+            ->withDefaultValue("")
+            ->withName("Widget.newsletterEmailFolderLabel")
+            ->withTooltip("Widget.newsletterEmailFolderTooltip");
+
+        $settings->createButtonSize();
+        $settings->createSpacing(false, true);
+
+        return $settings->toArray();
+    }
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
