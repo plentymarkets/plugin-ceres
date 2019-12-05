@@ -17441,11 +17441,6 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
 [v-cloak] {
   display: none; }
 
-.unkown-os body.modal-open,
-.ios body.modal-open {
-  position: fixed;
-  width: 100%; }
-
 .mkt-homepage {
   margin-bottom: 2rem; }
   .mkt-homepage .carousel-inner > .item > img,
