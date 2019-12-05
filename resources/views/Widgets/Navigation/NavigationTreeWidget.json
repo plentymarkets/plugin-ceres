@@ -32,7 +32,7 @@
             "type": "vertical",
             "isList": "[1,]",
             "options": {
-                "name": "Widget.categoryNavigationCustomEntries"
+                "name": "Widget.navigationTreeCustomEntries"
             },
             "children": {
                 "text": {
@@ -40,8 +40,8 @@
                     "required": true,
                     "defaultValue": "",
                     "options": {
-                        "name": "Widget.categoryNavigationCustomEntriesLabel",
-                        "tooltipText": "Widget.categoryNavigationCustomEntriesTooltip"
+                        "name": "Widget.navigationTreeCustomEntriesLabel",
+                        "tooltipText": "Widget.navigationTreeCustomEntriesTooltip"
                     }
                 },
                 "url":
@@ -49,16 +49,16 @@
                     "type": "url",
                     "required": false,
                     "options": {
-                        "name": "Widget.categoryNavigationCustomEntriesUrlLabel",
-                        "tooltipText": "Widget.categoryNavigationCustomEntriesUrlTooltip"
+                        "name": "Widget.navigationTreeCustomEntriesUrlLabel",
+                        "tooltipText": "Widget.navigationTreeCustomEntriesUrlTooltip"
                     }
                 },
                 "position": {
                     "type": "text",
                     "required": false,
                     "options": {
-                        "name": "Widget.categoryNavigationCustomEntriesPositionLabel",
-                        "tooltipText": "Widget.categoryNavigationCustomEntriesPositionTooltip"
+                        "name": "Widget.navigationTreeCustomEntriesPositionLabel",
+                        "tooltipText": "Widget.navigationTreeCustomEntriesPositionTooltip"
                     }
                 }
             }
