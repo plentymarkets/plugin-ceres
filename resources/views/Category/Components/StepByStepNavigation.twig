@@ -12,12 +12,12 @@
             </a>  
         </div>
 
-        <div class="mb-3" :class="'col-' + columnDivider" @click="loadChunk()" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
+        <div class="mb-3 col-12"  @click="loadChunk()" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
             <div class="nav-item border d-flex p-2 load-more">
                 
                 <!-- ${ childrenCount }
                 ${ categoryChildren.length } -->
-                <i class="fa fa-repeat fa-3x m-x-auto my-2" :class="{ 'fa-spin': isWaiting }"></i>
+                <i class="fa fa-repeat fa-2x fa-fw m-x-auto my-1" :class="{ 'fa-spin': isWaiting }"></i>
                 <span v-if="isWaiting">{{ trans("Ceres::Template.stepByStepNavigationLoading") }}</span>
                 <span v-else>{{ trans("Ceres::Template.stepByStepNavigationShowMore") }}</span>
             </div>

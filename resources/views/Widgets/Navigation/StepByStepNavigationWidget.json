@@ -16,7 +16,7 @@
         },
         "source": {
             "type": "select",
-            "defaultValue": "none",
+            "defaultValue": "image2Path",
             "options": {
                 "name": "Widget.stepByStepNavigationSourceLabel",
                 "tooltipText": "Widget.stepByStepNavigationSourceTooltip",
