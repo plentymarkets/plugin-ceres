@@ -26,7 +26,8 @@ module.exports = env =>
                     exclude: /node_modules/,
                     loader: "eslint-loader",
                     options: {
-                        cache: true
+                        cache: true,
+                        fix: env.prod
                     }
                 },
                 {
