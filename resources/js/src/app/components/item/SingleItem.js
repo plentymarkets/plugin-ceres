@@ -12,14 +12,18 @@ Vue.component("single-item", {
         {
             type: String,
             default: "#vue-single-item"
+        },
+        pleaseSelectOptionVariationId:
+        {
+            type: Number,
+            default: 0
         }
     },
 
     jsonDataFields: [
         "itemData",
         "attributesData",
-        "variations",
-        "addPleaseSelectOptionVariationId"
+        "variations"
     ],
 
     computed:
@@ -62,7 +66,7 @@ Vue.component("single-item", {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setPleaseSelectVariationId", this.addPleaseSelectOptionVariationId);
+        this.$store.commit("setPleaseSelectVariationId", this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch("setVariationSelect", {
