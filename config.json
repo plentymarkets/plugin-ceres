@@ -1509,10 +1509,9 @@
                 "contact.api_key": {
                     "type": "inputText",
                     "required": false,
-                    "deprecated": true,
                     "label": "Config.contactApiKeyLabel",
                     "options": {
-                        "defaultValue": "API key"
+                        "defaultValue": ""
                     }
                 },
                 "contact.map_zoom": {
