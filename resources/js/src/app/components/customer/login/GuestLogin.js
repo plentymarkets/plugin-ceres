@@ -20,6 +20,11 @@ Vue.component("guest-login", {
         backlink:
         {
             type: String
+        },
+        initialEmail:
+        {
+            type: String,
+            default: ""
         }
     },
 
@@ -29,6 +34,14 @@ Vue.component("guest-login", {
             email: "",
             isDisabled: false
         };
+    },
+
+    created()
+    {
+        if (this.initialEmail.length > 0)
+        {
+            this.email = this.initialEmail;
+        }
     },
 
     mounted()
