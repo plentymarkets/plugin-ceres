@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-guest-login">
     <div>
-        <form ref="form" class="mb-3 login-pwd-reset">
+        <form ref="form" method="post" class="mb-3 login-pwd-reset">
             <div class="input-unit" data-validate="mail">
                 {% set uid_mail = uid() %}
                 <input type="email" name="email" autocomplete="email" id="{{ uid_mail }}" v-model="email" data-autofocus>

@@ -3,7 +3,7 @@
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 
 <script type="x/template" id="vue-registration">
-    <form class="w-100" autocomplete="on" @submit.prevent="validateRegistration()" ref="registrationForm">
+    <form class="w-100" autocomplete="on" method="post" @submit.prevent="validateRegistration()" ref="registrationForm">
         <div class="row">
             <div class="col-sm-12">
                 <div class="input-unit" data-validate="mail">
