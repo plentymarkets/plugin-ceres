@@ -19,7 +19,7 @@ class ThreeColumnWidget extends GridWidget
             ->withPreviewImageUrl("/images/widgets/grid-3-col.svg")
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
-            ->withPosition(500)
+            ->withPosition(200)
             ->toArray();
     }
 
