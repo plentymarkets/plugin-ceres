@@ -62,7 +62,7 @@ Vue.component("item-filter-list", {
 
     created()
     {
-        this.$store.commit("setFacets", this.facetData);
+        this.$store.commit("addFacets", this.facetData);
 
         this.initSelectedFacets();
     },

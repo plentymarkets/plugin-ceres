@@ -8,6 +8,6 @@
     window.ceresStore.commit("setIsBasketInitiallyLoaded");
 
     {% set fakeFacets = services.faker.getFacets() %}
-    window.ceresStore.commit("setFacets", {{ fakeFacets | json_encode | raw }});
-    window.ceresStore.commit("setSelectedFacetsByIds", {{ services.faker.getSelectedFacetIds(fakeFacets) | json_encode | raw }});
+    window.ceresStore.commit("addFacets", {{ fakeFacets | json_encode | raw }});
+    window.ceresStore.commit("setSelectedFacetsByIds", window.ceresStore.state.itemList.facets[0].values.map(value => value.id));
 </script>
