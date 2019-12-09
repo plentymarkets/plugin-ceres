@@ -14,6 +14,7 @@ use Ceres\Widgets\Checkout\PlaceOrderWidget;
 use Ceres\Widgets\Checkout\ShippingPrivacyCheckWidget;
 use Ceres\Widgets\Checkout\ShippingProfileWidget;
 use Ceres\Widgets\Checkout\SubscribeNewsletterCheckWidget;
+use Ceres\Widgets\Common\BackgroundWidget;
 use Ceres\Widgets\Common\CodeWidget;
 use Ceres\Widgets\Common\CollapseWidget;
 use Ceres\Widgets\Common\GoogleMapsWidget;
@@ -101,6 +102,7 @@ class WidgetCollection
     ];
 
     const COMMON_WIDGETS = [
+        BackgroundWidget::class,
         CodeWidget::class,
         CollapseWidget::class,
         GoogleMapsWidget::class,
