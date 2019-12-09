@@ -63,6 +63,7 @@ use Ceres\Widgets\Item\ItemDataTableWidget;
 use Ceres\Widgets\Item\ItemImageWidget;
 use Ceres\Widgets\Item\ItemPriceWidget;
 use Ceres\Widgets\Item\OrderPropertyWidget;
+use Ceres\Widgets\Item\TagsWidget;
 use Ceres\Widgets\Item\WishListWidget;
 use Ceres\Widgets\Legal\LegalTextsWidget;
 use Ceres\Widgets\Login\GuestLoginWidget;
@@ -171,7 +172,8 @@ class WidgetCollection
         ItemImageWidget::class,
         ItemPriceWidget::class,
         OrderPropertyWidget::class,
-        WishListWidget::class
+        WishListWidget::class,
+        TagsWidget::class
     ];
 
     const LEGAL_WIDGETS = [
