@@ -1,7 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
 {{ Twig.component( "Ceres::Item.Components.ItemImageCarousel" ) }}
-{{ Twig.set("ImageCarouselOverride", Twig.call("LayoutContainer.show", ["Ceres::SingleItem.ImageCarousel"])) }}
 
 {% set customClass = widget.settings.customClass.mobile %}
 {% set appearance = widget.settings.appearance.mobile %}
@@ -12,6 +11,7 @@
 {% set animationStyle = widget.settings.animationStyle.mobile %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.set("ImageCarouselOverride", Twig.call("LayoutContainer.show", ["Ceres::SingleItem.ImageCarousel"])) }}
 
 <div class="widget widget-item-image widget-{{ appearance | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
