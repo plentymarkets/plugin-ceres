@@ -110,7 +110,7 @@ Vue.component("google-maps-widget",
 
                                 script.type = "text/javascript";
                                 script.id = "google-maps-api";
-                                script.src = `https://maps.googleapis.com/maps/api/js?key=${App.config.contact.apiKey}`;
+                                script.src = `https://maps.googleapis.com/maps/api/js?key=${App.config.global.googleMapsApiKey}`;
 
                                 script.addEventListener("load", () => resolve(script), false);
                                 script.addEventListener("error", () => reject(script), false);

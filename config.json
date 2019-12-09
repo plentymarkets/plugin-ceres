@@ -53,6 +53,14 @@
                         "defaultValue": "false"
                     }
                 },
+                "contact.api_key": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.contactApiKeyLabel",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
                 "global.google_recaptcha_version": {
                     "type": "selectBox",
                     "required": false,
@@ -1504,14 +1512,6 @@
                                 "caption": "Config.contactShowDataOpeningTimes"
                             }
                         ]
-                    }
-                },
-                "contact.api_key": {
-                    "type": "inputText",
-                    "required": false,
-                    "label": "Config.contactApiKeyLabel",
-                    "options": {
-                        "defaultValue": ""
                     }
                 },
                 "contact.map_zoom": {

@@ -1,6 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{{ Twig.if("ceresConfig.contact.apiKey | trim is not empty or #{ isPreview | json_encode }") }}
+{{ Twig.if("ceresConfig.global.googleMapsApiKey | trim is not empty or #{ isPreview | json_encode }") }}
     <div class="widget widget-google-maps">
         {% if location is not empty %}
             <google-maps-widget :lat="{{ location.lat }}"
