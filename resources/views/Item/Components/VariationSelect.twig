@@ -5,8 +5,7 @@
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
                     <select class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)">
-                        <option :value="-1" v-if="addPleaseSelectOption">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
-                        <option :value="-1" v-if="!addPleaseSelectOption && !hasSelection">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                        <option :value="-1" v-if="addPleaseSelectOption || !hasSelection">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
                         <option :value="null" v-if="hasEmptyOption || selectedAttributes[attribute.attributeId] === null" :selected="selectedAttributes[attribute.attributeId] === null">{{ trans("Ceres::Template.singleItemNoSelection") }}</option>
                         <option
                             v-for="value in attribute.values"

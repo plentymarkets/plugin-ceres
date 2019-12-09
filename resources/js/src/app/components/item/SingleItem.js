@@ -72,7 +72,8 @@ Vue.component("single-item", {
         this.$store.dispatch("setVariationSelect", {
             attributes:         this.attributesData,
             variations:         this.variations,
-            initialVariationId: this.currentVariation.variation.id
+            initialVariationId: this.currentVariation.variation.id,
+            isPleaseSelectOption: this.currentVariation.variation.id === this.pleaseSelectOptionVariationId || this.pleaseSelectOptionVariationId === 0
         });
     },
 

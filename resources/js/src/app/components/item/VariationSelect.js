@@ -315,7 +315,7 @@ Vue.component("variation-select", {
                     TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name })
                 );
 
-                attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && App.initialData.initialPleaseSelectOption) ? -1 : null;
+                attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && App.config.item.showPleaseSelect) ? -1 : null;
             }
 
             if (invalidSelection.newUnit)
