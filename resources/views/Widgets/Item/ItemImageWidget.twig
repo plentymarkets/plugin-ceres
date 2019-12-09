@@ -21,7 +21,8 @@
             image-url-accessor="{{ imageSize }}"
             :show-thumbs="{{ showThumbs | json_encode }}"
             :show-dots="{{ showDots | json_encode }}"
-            animation-style="{{ animationStyle }}">
+            animation-style="{{ animationStyle }}"
+            plugin-path="{{ plugin_path('Ceres') }}">
         </item-image-carousel>
     {{ Twig.else() }}
         {{ Twig.print("ImageCarouselOverride") }}
