@@ -19,6 +19,7 @@ use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
+use Ceres\Widgets\WidgetCollection;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\ShopWizard;
 use IO\Extensions\Constants\ShopUrls;
@@ -28,6 +29,7 @@ use IO\Helper\TemplateContainer;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use IO\Services\UrlBuilder\UrlQuery;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
+use Plenty\Modules\ShopBuilder\Contracts\ContentWidgetRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
@@ -92,6 +94,15 @@ class TemplateServiceProvider extends ServiceProvider
         /** @var WizardContainerContract $wizardContainer */
         $wizardContainer = pluginApp(WizardContainerContract::class);
         $wizardContainer->register('shopCeres-assistant', ShopWizard::class);
+
+        // register shop builder widgets
+        /** @var ContentWidgetRepositoryContract $widgetRepository */
+        $widgetRepository = pluginApp(ContentWidgetRepositoryContract::class);
+        $widgetClasses = WidgetCollection::all();
+        foreach($widgetClasses as $widgetClass)
+        {
+            $widgetRepository->registerWidget($widgetClass);
+        }
 
         $this->registerConsents();
 
