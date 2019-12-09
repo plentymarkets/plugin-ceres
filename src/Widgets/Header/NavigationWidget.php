@@ -45,6 +45,7 @@ class NavigationWidget extends BaseWidget
         return [
             'categories' => $categories
         ];
+    }
 
     public function getData()
     {
