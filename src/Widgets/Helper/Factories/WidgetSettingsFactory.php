@@ -405,13 +405,18 @@ class WidgetSettingsFactory
     }
 
     /**
-     * @param $optional
+     * @param $selectionNone
      * @return AppearanceSettingFactory
      */
-    public function createAppearance($optional = false)
+    public function createAppearance($selectionNone = false, $themeColors = true, $colors = false)
     {
         /** @var AppearanceSettingFactory $setting */
-        $setting = pluginApp(AppearanceSettingFactory::class, ['optional' => $optional]);
+        $setting = pluginApp(AppearanceSettingFactory::class,
+        [
+            'selectionNone'    => $selectionNone,
+            'themeColors'      => $themeColors,
+            'colors'           => $colors
+        ]);
         $this->addSetting('appearance', $setting);
         return $setting;
     }
