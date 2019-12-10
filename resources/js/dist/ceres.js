@@ -55497,14 +55497,6 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
   template: "<div :class=\"aspectRatio\" class=\"maps-component position-relative\" ref=\"googleMapsContainer\"><div v-if=\"scriptBlocked\"><slot></slot></div></div>",
   props: {
-    googleApiKey: {
-      type: String,
-      required: true
-    },
-    address: {
-      type: String,
-      required: true
-    },
     lat: {
       type: Number
     },
@@ -55581,7 +55573,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
             var script = document.createElement("script");
             script.type = "text/javascript";
             script.id = "google-maps-api";
-            script.src = "https://maps.googleapis.com/maps/api/js?key=".concat(_this2.googleApiKey);
+            script.src = "https://maps.googleapis.com/maps/api/js?key=".concat(App.config.global.googleMapsApiKey);
             script.addEventListener("load", function () {
               return resolve(script);
             }, false);
@@ -55596,44 +55588,17 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("google-maps-widget", {
       });
     },
     initializeMap: function initializeMap() {
-      var _this3 = this;
-
       if (this.coordinates) {
-        this.renderMap(this.coordinates);
-      } else {
-        this.geocodeAddress().then(function (coordinates) {
-          _this3.renderMap(coordinates);
+        var map = new google.maps.Map(this.$refs.googleMapsContainer, {
+          center: this.coordinates,
+          zoom: this.zoom,
+          mapTypeId: this.maptype
+        });
+        new google.maps.Marker({
+          map: map,
+          position: this.coordinates
         });
       }
-    },
-    geocodeAddress: function geocodeAddress() {
-      var _this4 = this;
-
-      return new Promise(function (resolve, reject) {
-        new google.maps.Geocoder().geocode({
-          address: _this4.address
-        }, function (results, status) {
-          if (status === google.maps.GeocoderStatus.OK) {
-            resolve({
-              lat: results[0].geometry.location.lat(),
-              lng: results[0].geometry.location.lng()
-            });
-          } else {
-            reject();
-          }
-        });
-      });
-    },
-    renderMap: function renderMap(coordinates) {
-      var map = new google.maps.Map(this.$refs.googleMapsContainer, {
-        center: coordinates,
-        zoom: this.zoom,
-        mapTypeId: this.maptype
-      });
-      new google.maps.Marker({
-        map: map,
-        position: coordinates
-      });
     }
   }
 });
