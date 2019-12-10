@@ -23,7 +23,11 @@
                        :data-title="getTooltip(shippingProfile.parcelServicePresetId, selectedPaymentMethodId)"
                     >
                     <div class="icon">
-                        {#<img src="">#}
+                        <div class="square-container" v-if="shippingProfile.icon">
+                            <div class="square-inner center-xy">
+                                <img :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName" :title="shippingProfile.parcelServiceName" >
+                            </div>
+                        </div>
                     </div><!--
                     --><div class="content">
                         ${ shippingProfile.parcelServiceName } - ${ shippingProfile.parcelServicePresetName }
