@@ -1,0 +1,20 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set opacity = (widget.settings.opacity.mobile | default(1)) / 100 %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set heightClass  = WidgetHelper.getHeightClass(widget.settings) %}
+{% set inlineHeight = WidgetHelper.getInlineHeight(widget.settings) %}
+
+<div>
+    <div>Opacity: {{ opacity }}</div>
+    <div>HeightClass: {{ heightClass }}</div>
+    <div>Inline: {{ inlineHeight }}</div>
+</div>

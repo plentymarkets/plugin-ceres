@@ -76,6 +76,26 @@
 {{- result | trim -}}
 {% endmacro %}
 
+{% macro getInlineHeight( widgetSettings, style = "height" ) %}
+    {% set heightValue = widgetSettings.height.top.value.mobile %}
+    {% set heightUnit  = widgetSettings.height.top.unit.mobile %}
+
+    {%- if heightValue is defined and heightUnit is not null %}
+        {{- style }}: {{ heightValue }}{{ heightUnit ~ "; " -}}
+    {% endif -%}
+
+{% endmacro %}
+
+{% macro getHeightClass( widgetSettings, classPrefix = "h" ) %}
+    {% set heightValue = widgetSettings.height.top.value.mobile %}
+    {% set heightUnit  = widgetSettings.height.top.unit.mobile %}
+
+    {%- if heightValue is defined and heightUnit is null and heightValue is not null %}
+        {{- classPrefix }}-{{ heightValue -}}
+    {% endif -%}
+
+{% endmacro %}
+
 {% macro setUrlVariable(variableName, urlValue, urlType) %}
 
     {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}

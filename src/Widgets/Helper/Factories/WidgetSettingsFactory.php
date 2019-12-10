@@ -17,6 +17,7 @@ use Ceres\Widgets\Helper\Factories\Settings\CustomClassSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\IconSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SpacingSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\ButtonSizeSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\HeightSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\ManufacturerSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\RadioGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\SelectSettingFactory;
@@ -437,6 +438,18 @@ class WidgetSettingsFactory
         /** @var SpacingSettingFactory $setting */
         $setting = pluginApp(SpacingSettingFactory::class, ['usePadding' => $usePadding, 'useMargin' => $useMargin]);
         $this->addSetting('spacing', $setting);
+        return $setting;
+    }
+
+    /**
+     * @return HeightSettingFactory
+     */
+    public function createHeight()
+    {
+        /** @var HeightSettingFactory $setting */
+        $setting = pluginApp(HeightSettingFactory::class);
+        $this->addSetting('height', $setting);
+
         return $setting;
     }
 
