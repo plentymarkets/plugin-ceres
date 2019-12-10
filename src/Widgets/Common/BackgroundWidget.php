@@ -49,7 +49,7 @@ class BackgroundWidget extends BaseWidget
     private function createBackgroundSourceSettings($settings)
     {
         $settings->createSelect("sourceType")
-            ->withDefaultValue("default-caption")
+            ->withDefaultValue("category-image1")
             ->withName("Widget.backgroundSourceTypeLabel")
             ->withTooltip("Widget.backgroundSourceTypeTooltip")
             ->withListBoxValues(
