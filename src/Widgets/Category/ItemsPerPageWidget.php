@@ -49,7 +49,7 @@ class ItemsPerPageWidget extends BaseWidget
         $listEntries  = [];
         $itemsPerPage = [];
         $result       = [];
-        if (array_key_exists("entries", $widgetSettings)) {
+        if (array_key_exists('entries', $widgetSettings)) {
             $listEntries = $widgetSettings["entries"]["mobile"];
         }
         
