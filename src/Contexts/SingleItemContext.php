@@ -17,6 +17,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $customerShowNetPrices;
     public $defaultCategory;
     public $dynamicVariationId;
+    public $initPleaseSelectOption;
 
     public function init($params)
     {
@@ -28,6 +29,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $configRepository = pluginApp(ConfigRepository::class);
 
         $this->dynamicVariationId = intval($params['dynamic']['documents'][0]['id'] ?? 0);
+        $this->initPleaseSelectOption = $this->getParam('initPleaseSelectOption', false);
 
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
