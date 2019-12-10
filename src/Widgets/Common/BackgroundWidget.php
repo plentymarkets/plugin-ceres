@@ -60,6 +60,7 @@ class BackgroundWidget extends BaseWidget
             ->withTooltip("Widget.backgroundFixedTooltip");
 
         $settings->createCheckbox("backgroundRepeat")
+            ->withCondition("backgroundSize !== 'cover'")
             ->withDefaultValue(false)
             ->withName("Widget.backgroundRepeatLabel")
             ->withTooltip("Widget.backgroundRepeatTooltip");
