@@ -30,7 +30,7 @@ class ItemsPerPageWidget extends BaseWidget
         
         $settings->createCustomClass();
         
-        $container = $settings->createVerticalContainer("entries")
+        $container = $settings->createVerticalContainer('entries')
                               ->withList(1)
                               ->withName("Widget.ItemsPerPageEntryLabel");
         
