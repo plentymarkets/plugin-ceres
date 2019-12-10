@@ -32,7 +32,7 @@ class ItemsPerPageWidget extends BaseWidget
         
         $container = $settings->createVerticalContainer('entries')
                               ->withList(1)
-                              ->withName("Widget.ItemsPerPageEntryLabel");
+                              ->withName('Widget.ItemsPerPageEntryLabel');
         
         $container->children->createText("text")
                             ->withDefaultValue(20)
