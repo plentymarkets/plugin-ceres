@@ -102,7 +102,8 @@
                         item-data="{{ item | json_data }}"
                         attributes-data="{{ attributes | json_data }}"
                         variations="{{ variations | json_data }}"
-                        :please-select-option-variation-id="{{ dynamicVariationId | json_encode }}"
+                        :please-select-option-variation-id="{{ dynamicVariationId }}"
+                        :init-please-select-option="{% if webstoreConfig.attributeSelectDefaultOption %}true{% else %}false{% endif %}"
                         v-slot="slotProps">
                         {{ shopBuilderTemplate | raw }}
                     </single-item>

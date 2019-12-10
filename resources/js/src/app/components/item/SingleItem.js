@@ -17,6 +17,11 @@ Vue.component("single-item", {
         {
             type: Number,
             default: 0
+        },
+        initPleaseSelectOption:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -73,7 +78,7 @@ Vue.component("single-item", {
             attributes:         this.attributesData,
             variations:         this.variations,
             initialVariationId: this.currentVariation.variation.id,
-            isPleaseSelectOption: this.currentVariation.variation.id === this.pleaseSelectOptionVariationId || this.pleaseSelectOptionVariationId === 0
+            isPleaseSelectOption: this.initPleaseSelectOption
         });
     },
 
