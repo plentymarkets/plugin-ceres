@@ -7,6 +7,6 @@ class AlignmentSettingFactory extends BaseSettingFactory
     public function __construct()
     {
         $this->withType('alignment')
-            ->withDefaultValue('left');
+             ->withDefaultValue('left');
     }
 }

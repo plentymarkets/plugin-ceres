@@ -30,21 +30,21 @@ class PaginationWidget extends BaseWidget
         $settings->createCustomClass();
         
         $settings->createAppearance()
-            ->withDefaultValue('primary');
+                 ->withDefaultValue('primary');
         
         $settings->createCheckbox('showFirstPage')
-            ->withDefaultValue(false)
-            ->withName('Widget.paginationShowFirstPageLabel');
+                 ->withDefaultValue(false)
+                 ->withName('Widget.paginationShowFirstPageLabel');
         
         $settings->createCheckbox('showLastPage')
-            ->withDefaultValue(false)
-            ->withName('Widget.paginationShowLastPageLabel');
+                 ->withDefaultValue(false)
+                 ->withName('Widget.paginationShowLastPageLabel');
         
         $settings->createSlider('pageLimit')
-            ->withDefaultValue(1)
-            ->withName('Widget.paginationPageLimitLabel')
-            ->withInterval(1)
-            ->withMax(10);
+                 ->withDefaultValue(1)
+                 ->withName('Widget.paginationPageLimitLabel')
+                 ->withInterval(1)
+                 ->withMax(10);
         
         $settings->createAlignment();
         

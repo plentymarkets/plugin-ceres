@@ -102,7 +102,7 @@ class WidgetCollection
         CouponWidget::class,
         ShippingCountryWidget::class
     ];
-
+    
     const CHECKOUT_WIDGETS = [
         CancelPaymentWidget::class,
         ContactWishWidget::class,
@@ -113,7 +113,7 @@ class WidgetCollection
         ShippingProfileWidget::class,
         SubscribeNewsletterCheckWidget::class
     ];
-
+    
     const COMMON_WIDGETS = [
         BackgroundWidget::class,
         CodeWidget::class,
@@ -135,22 +135,22 @@ class WidgetCollection
         TextWidget::class,
         TitleBarWidget::class
     ];
-
+    
     const CONTACT_WIDGETS = [
         ContactDetailsWidget::class
     ];
-
+    
     const CUSTOMER_WIDGETS = [
         AddressWidget::class,
         ChangeMailWidget::class,
         ChangePasswordWidget::class
     ];
-
+    
     const FOOTER_WIDGETS = [
         CookieBarWidget::class,
         LegalInformationWidget::class
     ];
-
+    
     const FORM_WIDGETS = [
         AcceptPrivacyPolicyWidget::class,
         MailFormWidget::class,
@@ -159,7 +159,7 @@ class WidgetCollection
         TextAreaWidget::class,
         TextInputWidget::class
     ];
-
+    
     const GRID_WIDGETS = [
         AdditionalInformationWidget::class,
         FourColumnWidget::class,
@@ -168,13 +168,13 @@ class WidgetCollection
         ThreeColumnWidget::class,
         TwoColumnWidget::class
     ];
-
+    
     const HEADER_WIDGETS = [
         BreadcrumbWidget::class,
         NavigationWidget::class,
         TopBarWidget::class
     ];
-
+    
     const ITEM_WIDGETS = [
         AddToBasketWidget::class,
         AddToWishListWidget::class,
@@ -188,17 +188,17 @@ class WidgetCollection
         OrderPropertyWidget::class,
         WishListWidget::class
     ];
-
+    
     const LEGAL_WIDGETS = [
         LegalTextsWidget::class
     ];
-
+    
     const LOGIN_WIDGETS = [
         GuestLoginWidget::class,
         LoginWidget::class,
         RegistrationWidget::class
     ];
-
+    
     const MY_ACCOUNT_WIDGETS = [
         AccountSettingsWidget::class,
         BankDataSelectWidget::class,
@@ -207,7 +207,7 @@ class WidgetCollection
         OrderHistoryWidget::class,
         OrderReturnHistoryWidget::class
     ];
-
+    
     const ORDER_CONFIRMATION_WIDGETS = [
         OrderDataWidget::class,
         OrderDocumentsWidget::class,
@@ -231,7 +231,7 @@ class WidgetCollection
         ManufacturerFilterWidget::class,
         PriceFilterWidget::class
     ];
-
+    
     public static function all()
     {
         return array_merge(
@@ -252,5 +252,5 @@ class WidgetCollection
             self::CATEGORY_ITEM_WIDGETS,
         );
     }
-
+    
 }
