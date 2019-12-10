@@ -34,7 +34,7 @@ class ItemsPerPageWidget extends BaseWidget
                               ->withList(1)
                               ->withName('Widget.ItemsPerPageEntryLabel');
         
-        $container->children->createText("text")
+        $container->children->createText('text')
                             ->withDefaultValue(20)
                             ->withName("Widget.ItemsPerPageEntryNameLabel")
                             ->withTooltip("Widget.ItemsPerPageEntryNameTooltip");
