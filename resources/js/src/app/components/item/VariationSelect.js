@@ -334,10 +334,7 @@ Vue.component("variation-select", {
 
             this.$store.commit("setItemSelectedAttributes", attributes);
 
-            if (this.currentSelection)
-            {
-                this.setVariation(this.currentSelection.variationId);
-            }
+            this.setVariation(this.currentSelection ? this.currentSelection.variationId : 0);
 
             NotificationService.warn(
                 messages.join("<br>")
