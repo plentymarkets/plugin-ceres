@@ -2,6 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories;
 
+use Ceres\Widgets\Helper\Factories\Settings\AlignmentSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CategorySettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxSettingFactory;
@@ -447,6 +448,17 @@ class WidgetSettingsFactory
         /** @var ButtonSizeSettingFactory $setting */
         $setting = pluginApp(ButtonSizeSettingFactory::class);
         $this->addSetting('buttonSize', $setting);
+        return $setting;
+    }
+    
+    /**
+     * @return AlignmentSettingFactory
+     */
+    public function createAlignment()
+    {
+        /** @var AlignmentSettingFactory $setting */
+        $setting = pluginApp(AlignmentSettingFactory::class);
+        $this->addSetting('alignment', $setting);
         return $setting;
     }
 
