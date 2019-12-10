@@ -38,9 +38,33 @@ class BackgroundWidget extends BaseWidget
             ->withOption("inputMax", 100);
 
         $settings->createHeight();
+        
+        $this->createBackgroundSourceSettings($settings);
 
         $settings->createSpacing(true, true);
 
         return $settings->toArray();
+    }
+
+    private function createBackgroundSourceSettings($settings)
+    {
+        $settings->createSelect("sourceType")
+            ->withDefaultValue("default-caption")
+            ->withName("Widget.backgroundSourceTypeLabel")
+            ->withTooltip("Widget.backgroundSourceTypeTooltip")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry("category-image1", "Widget.backgroundSourceTypeCategoryImage1")
+                    ->addEntry("category-image2", "Widget.backgroundSourceTypeCategoryImage2")
+                    ->addEntry("custom-image", "Widget.backgroundSourceTypeCustomImage")
+                    ->addEntry("color", "Widget.backgroundSourceTypeCategoryColor")
+                    ->toArray()
+            );
+
+        $settings->createUrl("customImagePath")
+            ->withCondition("sourceType === 'custom-image'");
+
+        $settings->createAppearance()
+            ->withCondition("sourceType === 'color'");
     }
 }
