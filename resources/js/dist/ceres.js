@@ -60671,10 +60671,10 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("single-item", {
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/Tags.js":
-/*!******************************************************!*\
-  !*** ./resources/js/src/app/components/item/Tags.js ***!
-  \******************************************************/
+/***/ "./resources/js/src/app/components/item/TagList.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/src/app/components/item/TagList.js ***!
+  \*********************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -60725,11 +60725,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("tags", {
+vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("tag-list", {
   props: {
     template: {
       type: String,
-      default: "#vue-tags"
+      default: "#vue-tag-list"
     },
     tagAppearance: {
       type: String,
@@ -69492,7 +69492,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_item_ItemDataTable__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/item/ItemDataTable */ "./resources/js/src/app/components/item/ItemDataTable.js");
 /* harmony import */ var _components_item_ItemImageCarousel__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/item/ItemImageCarousel */ "./resources/js/src/app/components/item/ItemImageCarousel.js");
 /* harmony import */ var _components_item_OrderProperties__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/item/OrderProperties */ "./resources/js/src/app/components/item/OrderProperties.js");
-/* harmony import */ var _components_item_Tags__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/item/Tags */ "./resources/js/src/app/components/item/Tags.js");
+/* harmony import */ var _components_item_TagList__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/item/TagList */ "./resources/js/src/app/components/item/TagList.js");
 /* harmony import */ var _components_item_OrderPropertyList__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/item/OrderPropertyList */ "./resources/js/src/app/components/item/OrderPropertyList.js");
 /* harmony import */ var _components_item_OrderPropertyListGroup__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/item/OrderPropertyListGroup */ "./resources/js/src/app/components/item/OrderPropertyListGroup.js");
 /* harmony import */ var _components_item_OrderPropertyListItem__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/item/OrderPropertyListItem */ "./resources/js/src/app/components/item/OrderPropertyListItem.js");

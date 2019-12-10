@@ -150,11 +150,6 @@ a:active {
     font-weight: inherit;
 }
 
-.cursor-pointer
-{
-    cursor: pointer;
-}
-
 @each $color, $value in $theme-colors {
     @include bg-variant(".bg-#{$color}", $value);
     .bg-#{$color} {

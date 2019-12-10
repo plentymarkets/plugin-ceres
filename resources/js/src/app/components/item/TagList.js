@@ -1,13 +1,13 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("tags", {
+Vue.component("tag-list", {
 
     props: {
         template:
         {
             type: String,
-            default: "#vue-tags"
+            default: "#vue-tag-list"
         },
         tagAppearance:
         {
