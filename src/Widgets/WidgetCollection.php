@@ -6,6 +6,17 @@ use Ceres\Widgets\Basket\BasketTotalsWidget;
 use Ceres\Widgets\Basket\BasketWidget;
 use Ceres\Widgets\Basket\CouponWidget;
 use Ceres\Widgets\Basket\ShippingCountryWidget;
+use Ceres\Widgets\Category\Filter\AttributesPropertiesCharacteristicsFilterWidget;
+use Ceres\Widgets\Category\Filter\AvailabilityFilterWidget;
+use Ceres\Widgets\Category\Filter\CategoryFilterWidget;
+use Ceres\Widgets\Category\Filter\ManufacturerFilterWidget;
+use Ceres\Widgets\Category\Filter\PriceFilterWidget;
+use Ceres\Widgets\Category\Filter\SelectedFilterWidget;
+use Ceres\Widgets\Category\ItemGridWidget;
+use Ceres\Widgets\Category\ItemSortingWidget;
+use Ceres\Widgets\Category\ItemsPerPageWidget;
+use Ceres\Widgets\Category\PaginationWidget;
+use Ceres\Widgets\Category\ToolbarWidget;
 use Ceres\Widgets\Checkout\CancelPaymentWidget;
 use Ceres\Widgets\Checkout\ContactWishWidget;
 use Ceres\Widgets\Checkout\GtcCheckWidget;
@@ -75,6 +86,8 @@ use Ceres\Widgets\MyAccount\GreetingWidget;
 use Ceres\Widgets\MyAccount\LogoutButtonWidget;
 use Ceres\Widgets\MyAccount\OrderHistoryWidget;
 use Ceres\Widgets\MyAccount\OrderReturnHistoryWidget;
+use Ceres\Widgets\Navigation\NavigationTreeWidget;
+use Ceres\Widgets\Navigation\StepByStepNavigationWidget;
 use Ceres\Widgets\OrderConfirmation\OrderDataWidget;
 use Ceres\Widgets\OrderConfirmation\OrderDocumentsWidget;
 use Ceres\Widgets\OrderConfirmation\OrderReturnWidget;
@@ -89,7 +102,7 @@ class WidgetCollection
         CouponWidget::class,
         ShippingCountryWidget::class
     ];
-
+    
     const CHECKOUT_WIDGETS = [
         CancelPaymentWidget::class,
         ContactWishWidget::class,
@@ -100,7 +113,7 @@ class WidgetCollection
         ShippingProfileWidget::class,
         SubscribeNewsletterCheckWidget::class
     ];
-
+    
     const COMMON_WIDGETS = [
         BackgroundWidget::class,
         CodeWidget::class,
@@ -122,22 +135,22 @@ class WidgetCollection
         TextWidget::class,
         TitleBarWidget::class
     ];
-
+    
     const CONTACT_WIDGETS = [
         ContactDetailsWidget::class
     ];
-
+    
     const CUSTOMER_WIDGETS = [
         AddressWidget::class,
         ChangeMailWidget::class,
         ChangePasswordWidget::class
     ];
-
+    
     const FOOTER_WIDGETS = [
         CookieBarWidget::class,
         LegalInformationWidget::class
     ];
-
+    
     const FORM_WIDGETS = [
         AcceptPrivacyPolicyWidget::class,
         MailFormWidget::class,
@@ -146,7 +159,7 @@ class WidgetCollection
         TextAreaWidget::class,
         TextInputWidget::class
     ];
-
+    
     const GRID_WIDGETS = [
         AdditionalInformationWidget::class,
         FourColumnWidget::class,
@@ -155,13 +168,13 @@ class WidgetCollection
         ThreeColumnWidget::class,
         TwoColumnWidget::class
     ];
-
+    
     const HEADER_WIDGETS = [
         BreadcrumbWidget::class,
         NavigationWidget::class,
         TopBarWidget::class
     ];
-
+    
     const ITEM_WIDGETS = [
         AddToBasketWidget::class,
         AddToWishListWidget::class,
@@ -175,17 +188,17 @@ class WidgetCollection
         OrderPropertyWidget::class,
         WishListWidget::class
     ];
-
+    
     const LEGAL_WIDGETS = [
         LegalTextsWidget::class
     ];
-
+    
     const LOGIN_WIDGETS = [
         GuestLoginWidget::class,
         LoginWidget::class,
         RegistrationWidget::class
     ];
-
+    
     const MY_ACCOUNT_WIDGETS = [
         AccountSettingsWidget::class,
         BankDataSelectWidget::class,
@@ -194,7 +207,7 @@ class WidgetCollection
         OrderHistoryWidget::class,
         OrderReturnHistoryWidget::class
     ];
-
+    
     const ORDER_CONFIRMATION_WIDGETS = [
         OrderDataWidget::class,
         OrderDocumentsWidget::class,
@@ -202,7 +215,23 @@ class WidgetCollection
         OrderTotalsWidget::class,
         PurchasedItemsWidget::class
     ];
-
+    
+    const CATEGORY_ITEM_WIDGETS = [
+        ItemSortingWidget::class,
+        ItemsPerPageWidget::class,
+        ItemGridWidget::class,
+        ToolbarWidget::class,
+        PaginationWidget::class,
+        NavigationTreeWidget::class,
+        StepByStepNavigationWidget::class,
+        SelectedFilterWidget::class,
+        AttributesPropertiesCharacteristicsFilterWidget::class,
+        AvailabilityFilterWidget::class,
+        CategoryFilterWidget::class,
+        ManufacturerFilterWidget::class,
+        PriceFilterWidget::class
+    ];
+    
     public static function all()
     {
         return array_merge(
@@ -219,8 +248,9 @@ class WidgetCollection
             self::LEGAL_WIDGETS,
             self::LOGIN_WIDGETS,
             self::MY_ACCOUNT_WIDGETS,
-            self::ORDER_CONFIRMATION_WIDGETS
+            self::ORDER_CONFIRMATION_WIDGETS,
+            self::CATEGORY_ITEM_WIDGETS,
         );
     }
-
+    
 }
