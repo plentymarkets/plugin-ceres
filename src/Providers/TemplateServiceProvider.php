@@ -46,44 +46,45 @@ class TemplateServiceProvider extends ServiceProvider
     const EVENT_LISTENER_PRIORITY = 100;
 
     private static $templateKeyToViewMap =
-    [
-        'tpl.home'                          => ['Homepage.Homepage',                      GlobalContext::class],
-        'tpl.home.category'                 => ['Homepage.HomepageCategory',              CategoryContext::class],
-        'tpl.category.content'              => ['Category.Content.CategoryContent',       CategoryContext::class],
-        'tpl.category.item'                 => ['Category.Item.CategoryItem',             CategoryItemContext::class],
-        'tpl.category.blog'                 => ['PageDesign.PageDesign',                  GlobalContext::class],
-        'tpl.category.container'            => ['PageDesign.PageDesign',                  GlobalContext::class],
-        'tpl.item'                          => ['Item.SingleItemWrapper',                 SingleItemContext::class],
-        'tpl.basket'                        => ['Basket.Basket',                          GlobalContext::class],
-        'tpl.checkout'                      => ['Checkout.CheckoutView',                  CheckoutContext::class],
-        'tpl.checkout.category'             => ['Checkout.CheckoutCategory',              CheckoutContext::class],
-        'tpl.my-account'                    => ['MyAccount.MyAccountView',                GlobalContext::class],
-        'tpl.my-account.category'           => ['MyAccount.MyAccountCategory',            CategoryContext::class],
-        'tpl.confirmation'                  => ['Checkout.OrderConfirmation',             OrderConfirmationContext::class],
-        'tpl.login'                         => ['Customer.Login',                         GlobalContext::class],
-        'tpl.register'                      => ['Customer.Register',                      GlobalContext::class],
-        'tpl.guest'                         => ['Customer.Guest',                         GlobalContext::class],
-        'tpl.password-reset'                => ['Customer.ResetPassword',                 PasswordResetContext::class],
-        'tpl.change-mail'                   => ['Customer.ChangeMail',                    ChangeMailContext::class],
-        'tpl.contact'                       => ['Customer.Contact',                       GlobalContext::class],
-        'tpl.search'                        => ['Category.Item.CategoryItem',             ItemSearchContext::class],
-        'tpl.wish-list'                     => ['WishList.WishListView',                  GlobalContext::class],
-        'tpl.order.return'                  => ['OrderReturn.OrderReturnView',            OrderReturnContext::class],
-        'tpl.order.return.confirmation'     => ['OrderReturn.OrderReturnConfirmation',    GlobalContext::class],
-        'tpl.cancellation-rights'           => ['StaticPages.CancellationRights',         GlobalContext::class],
-        'tpl.cancellation-form'             => ['StaticPages.CancellationForm',           GlobalContext::class],
-        'tpl.legal-disclosure'              => ['StaticPages.LegalDisclosure',            GlobalContext::class],
-        'tpl.privacy-policy'                => ['StaticPages.PrivacyPolicy',              GlobalContext::class],
-        'tpl.terms-conditions'              => ['StaticPages.TermsAndConditions',         GlobalContext::class],
-        'tpl.item-not-found'                => ['StaticPages.ItemNotFound',               GlobalContext::class],
-        'tpl.page-not-found'                => ['StaticPages.PageNotFound',               GlobalContext::class],
-        'tpl.newsletter.opt-out'            => ['Newsletter.NewsletterOptOut',            GlobalContext::class],
-        'tpl.mail.contact'                  => ['Customer.Components.Contact.ContactMail',GlobalContext::class]
-    ];
+        [
+            'tpl.home' => ['Homepage.Homepage', GlobalContext::class],
+            'tpl.home.category' => ['Homepage.HomepageCategory', CategoryContext::class],
+            'tpl.category.content' => ['Category.Content.CategoryContent', CategoryContext::class],
+            'tpl.category.item' => ['Category.Item.CategoryItem', CategoryItemContext::class],
+            'tpl.category.blog' => ['PageDesign.PageDesign', GlobalContext::class],
+            'tpl.category.container' => ['PageDesign.PageDesign', GlobalContext::class],
+            'tpl.item' => ['Item.SingleItemWrapper', SingleItemContext::class],
+            'tpl.basket' => ['Basket.Basket', GlobalContext::class],
+            'tpl.checkout' => ['Checkout.CheckoutView', CheckoutContext::class],
+            'tpl.checkout.category' => ['Checkout.CheckoutCategory', CheckoutContext::class],
+            'tpl.my-account' => ['MyAccount.MyAccountView', GlobalContext::class],
+            'tpl.my-account.category' => ['MyAccount.MyAccountCategory', CategoryContext::class],
+            'tpl.confirmation' => ['Checkout.OrderConfirmation', OrderConfirmationContext::class],
+            'tpl.login' => ['Customer.Login', GlobalContext::class],
+            'tpl.register' => ['Customer.Register', GlobalContext::class],
+            'tpl.guest' => ['Customer.Guest', GlobalContext::class],
+            'tpl.password-reset' => ['Customer.ResetPassword', PasswordResetContext::class],
+            'tpl.change-mail' => ['Customer.ChangeMail', ChangeMailContext::class],
+            'tpl.contact' => ['Customer.Contact', GlobalContext::class],
+            'tpl.search' => ['Category.Item.CategoryItem', ItemSearchContext::class],
+            'tpl.wish-list' => ['WishList.WishListView', GlobalContext::class],
+            'tpl.order.return' => ['OrderReturn.OrderReturnView', OrderReturnContext::class],
+            'tpl.order.return.confirmation' => ['OrderReturn.OrderReturnConfirmation', GlobalContext::class],
+            'tpl.cancellation-rights' => ['StaticPages.CancellationRights', GlobalContext::class],
+            'tpl.cancellation-form' => ['StaticPages.CancellationForm', GlobalContext::class],
+            'tpl.legal-disclosure' => ['StaticPages.LegalDisclosure', GlobalContext::class],
+            'tpl.privacy-policy' => ['StaticPages.PrivacyPolicy', GlobalContext::class],
+            'tpl.terms-conditions' => ['StaticPages.TermsAndConditions', GlobalContext::class],
+            'tpl.item-not-found' => ['StaticPages.ItemNotFound', GlobalContext::class],
+            'tpl.page-not-found' => ['StaticPages.PageNotFound', GlobalContext::class],
+            'tpl.newsletter.opt-out' => ['Newsletter.NewsletterOptOut', GlobalContext::class],
+            'tpl.mail.contact' => ['Customer.Components.Contact.ContactMail', GlobalContext::class]
+        ];
 
-    public function register(){
-        $this->getApplication()->singleton( CeresConfig::class );
-        $this->getApplication()->singleton( DefaultSettingsService::class );
+    public function register()
+    {
+        $this->getApplication()->singleton(CeresConfig::class);
+        $this->getApplication()->singleton(DefaultSettingsService::class);
     }
 
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
@@ -97,8 +98,7 @@ class TemplateServiceProvider extends ServiceProvider
         /** @var ContentWidgetRepositoryContract $widgetRepository */
         $widgetRepository = pluginApp(ContentWidgetRepositoryContract::class);
         $widgetClasses = WidgetCollection::all();
-        foreach($widgetClasses as $widgetClass)
-        {
+        foreach ($widgetClasses as $widgetClass) {
             $widgetRepository->registerWidget($widgetClass);
         }
 
@@ -112,8 +112,7 @@ class TemplateServiceProvider extends ServiceProvider
         $twig->addExtension(TwigItemDataField::class);
 
         $this->listenToIO('tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
-            if ( !$templateContainer->hasTemplate() )
-            {
+            if (!$templateContainer->hasTemplate()) {
                 $this->setTemplateAndContext($templateContainer);
             }
         });
@@ -122,11 +121,11 @@ class TemplateServiceProvider extends ServiceProvider
             $this->setTemplateAndContext($templateContainer);
         });
 
-        $this->listenToIO('ResultFields.*', function(ResultFieldTemplate $templateContainer) {
+        $this->listenToIO('ResultFields.*', function (ResultFieldTemplate $templateContainer) {
             $templateContainer->setTemplates([
-                ResultFieldTemplate::TEMPLATE_LIST_ITEM     => 'Ceres::ResultFields.ListItem',
-                ResultFieldTemplate::TEMPLATE_SINGLE_ITEM   => 'Ceres::ResultFields.SingleItem',
-                ResultFieldTemplate::TEMPLATE_BASKET_ITEM   => 'Ceres::ResultFields.BasketItem',
+                ResultFieldTemplate::TEMPLATE_LIST_ITEM => 'Ceres::ResultFields.ListItem',
+                ResultFieldTemplate::TEMPLATE_SINGLE_ITEM => 'Ceres::ResultFields.SingleItem',
+                ResultFieldTemplate::TEMPLATE_BASKET_ITEM => 'Ceres::ResultFields.BasketItem',
                 ResultFieldTemplate::TEMPLATE_AUTOCOMPLETE_ITEM_LIST => 'Ceres::ResultFields.AutoCompleteListItem',
                 ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
                 ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
@@ -157,25 +156,21 @@ class TemplateServiceProvider extends ServiceProvider
     /**
      * @param TemplateContainer $templateContainer
      */
-    private function setTemplateAndContext( $templateContainer )
+    private function setTemplateAndContext($templateContainer)
     {
-        $templateEvent  = $templateContainer->getTemplateKey();
+        $templateEvent = $templateContainer->getTemplateKey();
         $template = substr($templateEvent, 4);
-        if ( RouteConfig::getCategoryId( $template ) > 0
-            && array_key_exists($templateEvent.'.category', self::$templateKeyToViewMap))
-        {
+        if (RouteConfig::getCategoryId($template) > 0
+            && array_key_exists($templateEvent . '.category', self::$templateKeyToViewMap)) {
             $templateEvent .= '.category';
         }
 
-        if( array_key_exists($templateEvent, self::$templateKeyToViewMap) )
-        {
+        if (array_key_exists($templateEvent, self::$templateKeyToViewMap)) {
             $templateConfig = self::$templateKeyToViewMap[$templateEvent];
-            $templateContainer->setTemplate( 'Ceres::' . $templateConfig[0] );
-            $templateContainer->setContext( $templateConfig[1] );
-        }
-        else
-        {
-            $templateContainer->setContext( GlobalContext::class );
+            $templateContainer->setTemplate('Ceres::' . $templateConfig[0]);
+            $templateContainer->setContext($templateConfig[1]);
+        } else {
+            $templateContainer->setContext(GlobalContext::class);
         }
     }
 
@@ -222,7 +217,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
         $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
-        $webstoreConfig     = $webstoreRepository->findByPlentyId($this->getApplication()->getPlentyId());
+        $webstoreConfig = $webstoreRepository->findByPlentyId($this->getApplication()->getPlentyId());
 
         $consentRepository->registerConsent(
             'consent',
@@ -233,8 +228,7 @@ class TemplateServiceProvider extends ServiceProvider
                 'description' => 'Ceres::Template.consentConsentDescription',
                 'provider' => 'Ceres::Template.headerCompanyName',
                 'lifespan' => 'Ceres::Template.consentLifespanSession',
-                'policyUrl' => function()
-                {
+                'policyUrl' => function () {
                     /** @var ShopUrls $shopUrls */
                     $shopUrls = pluginApp(ShopUrls::class);
                     /** @var UrlQuery $urlQuery */
@@ -254,8 +248,7 @@ class TemplateServiceProvider extends ServiceProvider
                 'description' => 'Ceres::Template.consentSessionDescription',
                 'provider' => 'Ceres::Template.headerCompanyName',
                 'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
-                'policyUrl' => function()
-                {
+                'policyUrl' => function () {
                     /** @var ShopUrls $shopUrls */
                     $shopUrls = pluginApp(ShopUrls::class);
                     /** @var UrlQuery $urlQuery */
@@ -275,8 +268,7 @@ class TemplateServiceProvider extends ServiceProvider
                 'description' => 'Ceres::Template.consentCsrfDescription',
                 'provider' => 'Ceres::Template.headerCompanyName',
                 'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
-                'policyUrl' => function()
-                {
+                'policyUrl' => function () {
                     /** @var ShopUrls $shopUrls */
                     $shopUrls = pluginApp(ShopUrls::class);
                     /** @var UrlQuery $urlQuery */
@@ -288,17 +280,24 @@ class TemplateServiceProvider extends ServiceProvider
             ]
         );
 
-        $consentRepository->registerConsent(
-            'googleMaps',
-            'Ceres::Template.consentGoogleMapsLabel',
-            [
-                'position'      => 100,
-                'description'   => 'Ceres::Template.consentGoogleMapsDescription',
-                'provider'      => 'Ceres::Template.consentGoogleMapsProvider',
-                'lifespan'      => 'Ceres::Template.consentGoogleMapsLifespan',
-                'policyUrl'     => 'Ceres::Template.consentGoogleMapsPolicyUrl',
-                'group'         => 'media'
-            ]
-        );
+        /**
+         * @var ConfigRepository $config
+         * Cannot use CeresConfig since it depends on IO helper class
+         */
+        $config = pluginApp(ConfigRepository::class);
+        if (strlen($config->get('Ceres.contact.apiKey'))) {
+            $consentRepository->registerConsent(
+                'googleMaps',
+                'Ceres::Template.consentGoogleMapsLabel',
+                [
+                    'position' => 100,
+                    'description' => 'Ceres::Template.consentGoogleMapsDescription',
+                    'provider' => 'Ceres::Template.consentGoogleMapsProvider',
+                    'lifespan' => 'Ceres::Template.consentGoogleMapsLifespan',
+                    'policyUrl' => 'Ceres::Template.consentGoogleMapsPolicyUrl',
+                    'group' => 'media'
+                ]
+            );
+        }
     }
 }
