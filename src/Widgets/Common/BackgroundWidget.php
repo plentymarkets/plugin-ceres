@@ -37,6 +37,33 @@ class BackgroundWidget extends BaseWidget
             ->withOption("inputInterval", 1)
             ->withOption("inputMax", 100);
 
+        $settings->createCheckbox("fullWidth")
+            ->withDefaultValue(true)
+            ->withName("Widget.backgroundFullWidthLabel")
+            ->withName("Widget.backgroundFullWidthTooltip");
+
+        $settings->createSelect("backgroundSize")
+            ->withDefaultValue("cover")
+            ->withName("Widget.backgroundSizeLabel")
+            ->withTooltip("Widget.backgroundSizeTooltip")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry("cover", "Widget.backgroundSizeCover")
+                    ->addEntry("contain", "Widget.backgroundSizeContain")
+                    ->addEntry("auto", "Widget.backgroundSizeAuto")
+                    ->toArray()
+        );
+
+        $settings->createCheckbox("backgroundFixed")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundFixedLabel")
+            ->withTooltip("Widget.backgroundFixedTooltip");
+
+        $settings->createCheckbox("backgroundRepeat")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundRepeatLabel")
+            ->withTooltip("Widget.backgroundRepeatTooltip");
+
         $settings->createHeight();
 
         $settings->createSpacing(true, true);
