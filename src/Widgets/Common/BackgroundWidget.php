@@ -88,7 +88,7 @@ class BackgroundWidget extends BaseWidget
 
         if ( array_key_exists("backgroundSize", $widgetSettings) && $widgetSettings["backgroundSize"]["mobile"] )
         {
-            $stylingClasses .= $widgetSettings["backgroundSize"]["mobile"] . " ";
+            $stylingClasses .= $widgetSettings["backgroundSize"]["mobile"];
         }
 
         return [
