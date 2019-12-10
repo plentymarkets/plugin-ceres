@@ -54,7 +54,7 @@ class ItemsPerPageWidget extends BaseWidget
         }
         
         foreach ($listEntries as $i => $listEntry) {
-            if (is_int((int)$listEntry["text"])) {
+            if (is_int((int)$listEntry['text'])) {
                 $itemsPerPage[] = (int)$listEntry["text"];
             }
         }
