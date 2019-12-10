@@ -36,7 +36,7 @@ class ItemsPerPageWidget extends BaseWidget
         
         $container->children->createText('text')
                             ->withDefaultValue(20)
-                            ->withName("Widget.ItemsPerPageEntryNameLabel")
+                            ->withName('Widget.ItemsPerPageEntryNameLabel')
                             ->withTooltip("Widget.ItemsPerPageEntryNameTooltip");
         
         $settings->createSpacing(false, true);
