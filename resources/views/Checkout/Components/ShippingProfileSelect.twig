@@ -23,9 +23,9 @@
                        :data-title="getTooltip(shippingProfile.parcelServicePresetId, selectedPaymentMethodId)"
                     >
                     <div class="icon">
-                        <div class="square-container">
+                        <div class="square-container" v-if="shippingProfile.icon">
                             <div class="square-inner center-xy">
-                                <img v-if="shippingProfile.icon" :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName" :title="shippingProfile.parcelServiceName" >
+                                <img :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName" :title="shippingProfile.parcelServiceName" >
                             </div>
                         </div>
                     </div><!--
