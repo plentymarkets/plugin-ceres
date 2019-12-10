@@ -8,11 +8,11 @@ use IO\Services\ItemSearch\Factories\Faker\FacetFaker;
 
 class FilterBaseWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Category.Filter.FilterBaseWidget";
+    protected $template = 'Ceres::Widgets.Category.Filter.FilterBaseWidget';
     
     protected $allowedFacetTypes = [];
     
-    protected $className = "";
+    protected $className = '';
     
     public function getSettings()
     {
@@ -30,39 +30,39 @@ class FilterBaseWidget extends BaseWidget
         $spacingContainer->children->createCheckbox('customPadding')
                                    ->withName('Widget.widgetCustomPadding');
         
-        $spacingContainer->children->createSetting("padding")
-                                   ->withType("spacing")
+        $spacingContainer->children->createSetting('padding')
+                                   ->withType('spacing')
                                    ->withCondition('!!spacing.customPadding')
                                    ->withOption(
-                                       "units",
+                                       'units',
                                        [
-                                           "px",
-                                           "rem"
+                                           'px',
+                                           'rem'
                                        ]
                                    )
-                                   ->withOption("direction", "vertical");
+                                   ->withOption('direction', 'vertical');
         
         $spacingContainer->children->createCheckbox('customMargin')
                                    ->withName('Widget.widgetCustomMargin');
         
-        $spacingContainer->children->createSetting("margin")
-                                   ->withType("spacing")
+        $spacingContainer->children->createSetting('margin')
+                                   ->withType('spacing')
                                    ->withCondition('!!spacing.customMargin')
                                    ->withOption(
-                                       "units",
+                                       'units',
                                        [
-                                           "px",
-                                           "rem"
+                                           'px',
+                                           'rem'
                                        ]
                                    )
-                                   ->withOption("direction", "all");
+                                   ->withOption('direction', 'all');
         
         return $settings->toArray();
     }
     
     protected function getTemplateData($widgetSettings, $isPreview)
     {
-        return ["allowedFacetTypes" => $this->allowedFacetTypes, "className" => $this->className];
+        return ['allowedFacetTypes' => $this->allowedFacetTypes, 'className' => $this->className];
     }
     
     /**
@@ -74,6 +74,6 @@ class FilterBaseWidget extends BaseWidget
         $facetFaker  = pluginApp(FacetFaker::class);
         $facetResult = $facetFaker->fill([]);
         
-        return ["facets" => $facetResult];
+        return ['facets' => $facetResult];
     }
 }

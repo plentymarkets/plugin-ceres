@@ -14,7 +14,7 @@ use IO\Services\ItemSearch\Factories\Faker\CategoryTreeFaker;
 
 class NavigationTreeWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Navigation.NavigationTreeWidget";
+    protected $template = 'Ceres::Widgets.Navigation.NavigationTreeWidget';
     
     public function getData()
     {
@@ -67,32 +67,32 @@ class NavigationTreeWidget extends BaseWidget
         $spacingContainer->children->createCheckbox('customPadding')
                                    ->withName('Widget.widgetCustomPadding');
         
-        $spacingContainer->children->createSetting("padding")
-                                   ->withType("spacing")
+        $spacingContainer->children->createSetting('padding')
+                                   ->withType('spacing')
                                    ->withCondition('!!spacing.customPadding')
                                    ->withOption(
-                                       "units",
+                                       'units',
                                        [
-                                           "px",
-                                           "rem"
+                                           'px',
+                                           'rem'
                                        ]
                                    )
-                                   ->withOption("direction", "vertical");
+                                   ->withOption('direction', 'vertical');
         
         $spacingContainer->children->createCheckbox('customMargin')
                                    ->withName('Widget.widgetCustomMargin');
         
-        $spacingContainer->children->createSetting("margin")
-                                   ->withType("spacing")
+        $spacingContainer->children->createSetting('margin')
+                                   ->withType('spacing')
                                    ->withCondition('!!spacing.customMargin')
                                    ->withOption(
-                                       "units",
+                                       'units',
                                        [
-                                           "px",
-                                           "rem"
+                                           'px',
+                                           'rem'
                                        ]
                                    )
-                                   ->withOption("direction", "all");
+                                   ->withOption('direction', 'all');
         
         return $settings->toArray();
     }
@@ -128,15 +128,15 @@ class NavigationTreeWidget extends BaseWidget
     
     public function getTemplateData($widgetSettings, $isPreview)
     {
-        $customEntries = $widgetSettings["customEntries"]["mobile"];
+        $customEntries = $widgetSettings['customEntries']['mobile'];
         
         usort(
             $customEntries,
             function ($entryA, $entryB) {
-                return $entryA["position"] - $entryB["position"];
+                return $entryA['position'] - $entryB['position'];
             }
         );
         
-        return ["customEntries" => $customEntries];
+        return ['customEntries' => $customEntries];
     }
 }
