@@ -62,12 +62,16 @@ const actions =
             {
                 let variationAttribute;
 
-                if (initialVariation)
+                if ((App.config.item.showPleaseSelect && variationSelect.isPleaseSelectOption) || !initialVariation)
+                {
+                    selectedAttributes[attribute.attributeId] = -1;
+                }
+                else
                 {
                     variationAttribute = initialVariation.attributes.find(variationAttribute => variationAttribute.attributeId === attribute.attributeId);
+                    selectedAttributes[attribute.attributeId] = variationAttribute ? variationAttribute.attributeValueId : null;
                 }
 
-                selectedAttributes[attribute.attributeId] = variationAttribute ? variationAttribute.attributeValueId : null;
             }
 
             for (const variation of variations)
@@ -85,7 +89,13 @@ const actions =
 
 const getters =
     {
-
+        showDynamicPrice(state, getters, rootState, rootGetters)
+        {
+            return App.config.item.showPleaseSelect
+                && !state.isVariationSelected
+                && (rootState.item.pleaseSelectVariationId === rootGetters.currentItemVariation.variation.id
+                    || rootState.item.pleaseSelectVariationId === 0);
+        }
     };
 
 export default
