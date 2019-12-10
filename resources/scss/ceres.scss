@@ -12,15 +12,15 @@
 // ==========================================================================
 
 // global
-@import "ceres/common/background";
-@import "ceres/common/common";
-@import "ceres/common/modal";
-@import "ceres/common/reboot";
-@import "ceres/common/structure";
-@import "ceres/common/typography";
 @import "ceres/mixins/breakpoints";
 @import "ceres/mixins/general-mixins";
 @import "ceres/mixins/proportional-boxes";
+@import "ceres/common/typography";
+@import "ceres/common/common";
+@import "ceres/common/structure";
+@import "ceres/common/modal";
+@import "ceres/common/reboot";
+@import "ceres/common/background";
 
 //TODO's
 @import "ceres/common/buttons";
