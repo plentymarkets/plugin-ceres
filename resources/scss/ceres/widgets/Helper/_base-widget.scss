@@ -79,7 +79,7 @@
 
 .widget-fw {
     position: relative;
-    width: 100vw;
+    width: 100vw !important;
     left: calc(-1 * (100vw - 100%) / 2) !important;
     right: 0 !important;
     margin-left: 0;

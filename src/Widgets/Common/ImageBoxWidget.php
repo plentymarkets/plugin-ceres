@@ -84,6 +84,11 @@ class ImageBoxWidget extends BaseWidget
             ->withName("Widget.imageBoxCustomImagePathLabel")
             ->withTooltip("Widget.imageBoxCustomImagePathTooltip");
 
+        $settings->createCheckbox("lazyLoading")
+            ->withName("Widget.imageBoxLazyLoadingName")
+            ->withTooltip("Widget.imageBoxLazyLoadingTooltip")
+            ->withDefaultValue(true);
+
         $settings->createSpacing(false, true);
 
         return $settings->toArray();

@@ -60,6 +60,11 @@ class ImageCarouselWidget extends BaseWidget
                     ->toArray()
             );
 
+        $settings->createCheckbox("lazyLoading")
+            ->withName("Widget.imageCarouselLazyLoadingName")
+            ->withTooltip("Widget.imageCarouselLazyLoadingTooltip")
+            ->withDefaultValue(true);
+
         $container = $settings->createVerticalContainer("slides")
             ->withList(1)
             ->withName("Widget.imageCarouselSlide");

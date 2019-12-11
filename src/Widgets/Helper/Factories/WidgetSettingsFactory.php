@@ -2,6 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories;
 
+use Ceres\Widgets\Helper\Factories\Settings\AlignmentSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CategorySettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxSettingFactory;
@@ -33,7 +34,7 @@ class WidgetSettingsFactory
 {
     private $settings = [];
     private $pointer = null;
-
+    
     /**
      * Create a new factory instance and initialize values from given widget class.
      *
@@ -43,14 +44,13 @@ class WidgetSettingsFactory
     public static function inherit($parentWidgetClass)
     {
         $parentSettings = [];
-        $parentWidget = pluginApp($parentWidgetClass);
-        if($parentWidget instanceof DynamicWidget)
-        {
+        $parentWidget   = pluginApp($parentWidgetClass);
+        if ($parentWidget instanceof DynamicWidget) {
             $parentSettings = $parentWidget->getSettings();
         }
         return self::create($parentSettings);
     }
-
+    
     /**
      * Create a new factory instance with initial values.
      *
@@ -61,21 +61,17 @@ class WidgetSettingsFactory
     {
         /** @var WidgetSettingsFactory $instance */
         $instance = pluginApp(WidgetSettingsFactory::class);
-        foreach($data as $key => $settingData)
-        {
-            if(array_key_exists('children', $settingData))
-            {
+        foreach ($data as $key => $settingData) {
+            if (array_key_exists('children', $settingData)) {
                 $instance->settings[$key] = ContainerSettingFactory::create($settingData);
-            }
-            else
-            {
+            } else {
                 $instance->settings[$key] = BaseSettingFactory::create($settingData);
             }
         }
-
+        
         return $instance;
     }
-
+    
     /**
      * Create a generic widget settings entry.
      *
@@ -90,7 +86,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a container entry which may contain nested settings.
      * @param string $key
@@ -103,7 +99,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a vertical container
      *
@@ -118,7 +114,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a horizontal container
      *
@@ -133,7 +129,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a text input setting
      *
@@ -147,7 +143,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a checkbox setting
      *
@@ -161,7 +157,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a color setting
      *
@@ -188,7 +184,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a file picker setting
      *
@@ -202,7 +198,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a textarea input setting
      *
@@ -216,7 +212,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * @param string $key
      * @return BaseSettingFactory
@@ -228,7 +224,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a double input setting
      *
@@ -242,7 +238,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a dropdown setting
      *
@@ -256,7 +252,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a dropdown setting
      *
@@ -270,7 +266,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a category select setting
      *
@@ -284,7 +280,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * @param string $key
      * @return BaseSettingFactory
@@ -296,7 +292,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a slider setting
      *
@@ -310,7 +306,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a checkbox group setting
      *
@@ -324,7 +320,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a checkbox group setting
      *
@@ -338,7 +334,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a url picker
      *
@@ -352,7 +348,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * @param string $key
      * @return EditorSettingFactory
@@ -365,7 +361,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * @param string $key
      * @return EditorSettingFactory
@@ -378,7 +374,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create an UUID setting
      *
@@ -392,7 +388,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * Create a manufacturer picker
      *
@@ -406,7 +402,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-
+    
     /**
      * @return CustomClassSettingFactory
      */
@@ -417,7 +413,7 @@ class WidgetSettingsFactory
         $this->addSetting('customClass', $setting);
         return $setting;
     }
-
+    
     /**
      * @param $optional
      * @return AppearanceSettingFactory
@@ -429,7 +425,7 @@ class WidgetSettingsFactory
         $this->addSetting('appearance', $setting);
         return $setting;
     }
-
+    
     /**
      * @return IconSettingFactory
      */
@@ -440,7 +436,7 @@ class WidgetSettingsFactory
         $this->addSetting('icon', $setting);
         return $setting;
     }
-
+    
     /**
      * @param $usePadding
      * @param $useMargin
@@ -453,7 +449,7 @@ class WidgetSettingsFactory
         $this->addSetting('spacing', $setting);
         return $setting;
     }
-
+    
     /**
      * @return HeightSettingFactory
      */
@@ -462,10 +458,10 @@ class WidgetSettingsFactory
         /** @var HeightSettingFactory $setting */
         $setting = pluginApp(HeightSettingFactory::class);
         $this->addSetting('height', $setting);
-
+        
         return $setting;
     }
-
+    
     /**
      * @return ButtonSizeSettingFactory
      */
@@ -476,7 +472,18 @@ class WidgetSettingsFactory
         $this->addSetting('buttonSize', $setting);
         return $setting;
     }
-
+    
+    /**
+     * @return AlignmentSettingFactory
+     */
+    public function createAlignment()
+    {
+        /** @var AlignmentSettingFactory $setting */
+        $setting = pluginApp(AlignmentSettingFactory::class);
+        $this->addSetting('alignment', $setting);
+        return $setting;
+    }
+    
     public function toArray()
     {
         $result = [];
@@ -484,13 +491,12 @@ class WidgetSettingsFactory
          * @var string $key
          * @var BaseSettingFactory $setting
          */
-        foreach($this->settings as $key => $setting)
-        {
+        foreach ($this->settings as $key => $setting) {
             $result[$key] = $setting->toArray();
         }
         return $result;
     }
-
+    
     /**
      * Set a settings key to insert new settings after.
      * The key might be a path to nested setting entries.
@@ -502,50 +508,42 @@ class WidgetSettingsFactory
      */
     public function withPointer($key)
     {
-        $keyPath = explode(".", $key);
+        $keyPath    = explode(".", $key);
         $currentKey = array_shift($keyPath);
-        if(count($keyPath))
-        {
+        if (count($keyPath)) {
             // key references nested setting => try to access children
             $setting = $this->settings[$currentKey];
-            if($setting instanceof ContainerSettingFactory)
-            {
+            if ($setting instanceof ContainerSettingFactory) {
                 // continue resolving path in child factory instance
                 return $setting->children->withPointer(implode(".", $keyPath));
             }
-
+            
             // key not found or references setting has no nested children => reset pointer
             $this->pointer = -1;
-        }
-        else
-        {
+        } else {
             // key references setting of this factory => calculate new pointer
             $pointer = array_search($currentKey, array_keys($this->settings));
-            if($pointer !== false)
-            {
+            if ($pointer !== false) {
                 $this->pointer = $pointer + 1;
-            }
-            else
-            {
+            } else {
                 $this->pointer = -1;
             }
         }
-
+        
         // pointer has
         return $this;
     }
-
+    
     private function addSetting($key, $setting)
     {
-        if(is_null($this->pointer) || $this->pointer < 0)
-        {
+        if (is_null($this->pointer) || $this->pointer < 0) {
             $this->pointer = count($this->settings);
         }
-
+        
         $settings = array_slice($this->settings, 0, $this->pointer, true)
             + [$key => $setting]
             + array_slice($this->settings, $this->pointer, null, true);
-
+        
         $this->pointer++;
         $this->settings = $settings;
     }

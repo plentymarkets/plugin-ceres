@@ -37,6 +37,34 @@ class BackgroundWidget extends BaseWidget
             ->withOption("inputInterval", 1)
             ->withOption("inputMax", 100);
 
+        $settings->createCheckbox("fullWidth")
+            ->withDefaultValue(true)
+            ->withName("Widget.backgroundFullWidthLabel")
+            ->withTooltip("Widget.backgroundFullWidthTooltip");
+            
+        $settings->createCheckbox("backgroundFixed")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundFixedLabel")
+            ->withTooltip("Widget.backgroundFixedTooltip");
+
+        $settings->createCheckbox("backgroundRepeat")
+            ->withCondition("backgroundSize !== 'bg-cover'")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundRepeatLabel")
+            ->withTooltip("Widget.backgroundRepeatTooltip");
+
+        $settings->createSelect("backgroundSize")
+            ->withDefaultValue("bg-cover")
+            ->withName("Widget.backgroundSizeLabel")
+            ->withTooltip("Widget.backgroundSizeTooltip")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry("bg-cover", "Widget.backgroundSizeCover")
+                    ->addEntry("bg-contain", "Widget.backgroundSizeContain")
+                    ->addEntry("bg-auto", "Widget.backgroundSizeAuto")
+                    ->toArray()
+        );
+
         $settings->createHeight();
 
         $this->createBackgroundSourceSettings($settings);
@@ -69,5 +97,29 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createColorPalette()
             ->withCondition("sourceType === 'color'");
+    }
+
+    protected function getTemplateData($widgetSettings, $isPreview)
+    {
+        $stylingClasses = "";
+
+        if ( array_key_exists("backgroundFixed", $widgetSettings) && $widgetSettings["backgroundFixed"]["mobile"] == false )
+        {
+            $stylingClasses .= "bg-scroll ";
+        }
+
+        if ( array_key_exists("backgroundRepeat", $widgetSettings) && $widgetSettings["backgroundRepeat"]["mobile"] == true && $widgetSettings["backgroundSize"]["mobile"] !== 'bg-cover')
+        {
+            $stylingClasses .= "bg-repeat ";
+        }
+
+        if ( array_key_exists("backgroundSize", $widgetSettings) && $widgetSettings["backgroundSize"]["mobile"] )
+        {
+            $stylingClasses .= $widgetSettings["backgroundSize"]["mobile"];
+        }
+
+        return [
+            'stylingClasses'  => $stylingClasses
+        ];
     }
 }

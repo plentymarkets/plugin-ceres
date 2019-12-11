@@ -17,6 +17,38 @@ const state =
 
 const mutations =
     {
+        addFacets(state, facets)
+        {
+            const stateFacets = state.facets;
+
+            for (const facet of facets)
+            {
+                if (!stateFacets.find(fac => fac.id === facet.id))
+                {
+                    stateFacets.push(facet);
+                }
+            }
+
+            stateFacets.sort((facetA, facetB) =>
+            {
+                if (facetA.position > facetB.position)
+                {
+                    return 1;
+                }
+                else if (facetA.position < facetB.position)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
+
+            state.facets = stateFacets;
+        },
+
+        /**
+         * @deprecated use addFacets instead
+         */
         setFacets(state, facets)
         {
             facets = facets || [];

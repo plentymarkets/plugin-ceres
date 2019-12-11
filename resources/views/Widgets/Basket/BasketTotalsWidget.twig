@@ -10,13 +10,25 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Basket.Components.BasketTotals") }}
 
+{{ Twig.set("currentTemplate", Twig.call("services.template.getCurrentTemplate")) }}
+
 {% if visibleFields | length > 0 %}
 <div class="widget widget-basket-totals{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBasketTotals"])) }}
+
+    {{ Twig.if("currentTemplate == 'tpl.checkout' or currentTemplate == 'tpl.checkout.category'") }}
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeBasketTotals"])) }}
+    {{ Twig.else() }}
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Basket.BeforeBasketTotals"])) }}
+    {{ Twig.endif() }}
 
     <basket-totals :visible-fields="{{ visibleFields | json_encode }}"></basket-totals>
 
-    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBasketTotals"])) }}
+    {{ Twig.if("currentTemplate == 'tpl.checkout' or currentTemplate == 'tpl.checkout.category'") }}
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBasketTotals"])) }}
+    {{ Twig.else() }}
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Basket.AfterBasketTotals"])) }}
+    {{ Twig.endif() }}
+    
 </div>
 {% endif %}
