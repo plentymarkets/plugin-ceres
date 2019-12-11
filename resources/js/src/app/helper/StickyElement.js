@@ -94,6 +94,10 @@ export class StickyElement
             window.removeEventListener(event, this.eventListener);
         });
         this.eventListener = null;
+        if (this.animationFrame > 0)
+        {
+            cancelAnimationFrame(this.animationFrame);
+        }
         this.animationFrame = 0;
         this.enabled = false;
 
@@ -105,12 +109,7 @@ export class StickyElement
         {
             this.updateStyles();
         }
-        requestAnimationFrame(this.tick.bind(this));
-    }
-
-    observe()
-    {
-
+        this.animationFrame = requestAnimationFrame(this.tick.bind(this));
     }
 
     checkElement(skipOffsetCalculation)
@@ -209,7 +208,7 @@ export class StickyElement
         {
             styles = {
                 position:   "fixed",
-                top: 0,
+                top:        0,
                 transform:  "translate3d(0, " + this.position.y + "px, 0)",
                 left:       this.position.x + "px",
                 width:      this.position.width + "px"
