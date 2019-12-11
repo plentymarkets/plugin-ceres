@@ -27350,10 +27350,10 @@ module.exports = toString;
 
 /***/ }),
 
-/***/ "./node_modules/moment/locale sync recursive [\\/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/moment/locale sync [\/\\](de(\.js)?|fr(\.js)?|it(\.js)?|es(\.js)?|tr(\.js)?|nl(\.js)?|pl(\.js)?|se(\.js)?|ru(\.js)?|sk(\.js)?|pt(\.js)?|bg(\.js)?|ro(\.js)?)$ ***!
-  \************************************************************************************************************************************************************************************/
+/***/ "./node_modules/moment/locale sync recursive [/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/moment/locale sync [/\\](de(\.js)?|fr(\.js)?|it(\.js)?|es(\.js)?|tr(\.js)?|nl(\.js)?|pl(\.js)?|se(\.js)?|ru(\.js)?|sk(\.js)?|pt(\.js)?|bg(\.js)?|ro(\.js)?)$ ***!
+  \***********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27404,7 +27404,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = "./node_modules/moment/locale sync recursive [\\/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$";
+webpackContext.id = "./node_modules/moment/locale sync recursive [/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$";
 
 /***/ }),
 
@@ -30625,7 +30625,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive [\\/\\\\](de(\\
             try {
                 oldLocale = globalLocale._abbr;
                 var aliasedRequire = require;
-                __webpack_require__("./node_modules/moment/locale sync recursive [\\/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$")("./" + name);
+                __webpack_require__("./node_modules/moment/locale sync recursive [/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$")("./" + name);
                 getSetGlobalLocale(oldLocale);
             } catch (e) {}
         }
@@ -68081,7 +68081,12 @@ function () {
 
         _this2.el.parentNode.insertBefore(_this2.placeholder, _this2.el);
 
-        _this2.eventListener = _this2.tick.bind(_this2);
+        _this2.eventListener = function () {
+          if (_this2.enabled && !_this2.isMinWidth) {
+            _this2.checkElement();
+          }
+        };
+
         document.addEventListener("storeChanged", _this2.eventListener);
         STICKY_EVENTS.forEach(function (event) {
           window.addEventListener(event, _this2.eventListener);
@@ -68123,22 +68128,15 @@ function () {
   }, {
     key: "tick",
     value: function tick() {
-      var _this4 = this;
-
       if (this.enabled && !this.isMinWidth) {
-        if (this.animationFrame > 0) {
-          cancelAnimationFrame(this.animationFrame);
-        }
-
-        this.animationFrame = requestAnimationFrame(function () {
-          _this4.checkElement();
-
-          _this4.updateStyles();
-
-          _this4.animationFrame = 0;
-        });
+        this.updateStyles();
       }
+
+      requestAnimationFrame(this.tick.bind(this));
     }
+  }, {
+    key: "observe",
+    value: function observe() {}
   }, {
     key: "checkElement",
     value: function checkElement(skipOffsetCalculation) {
@@ -68166,7 +68164,7 @@ function () {
   }, {
     key: "calculateOffset",
     value: function calculateOffset() {
-      var _this5 = this;
+      var _this4 = this;
 
       if (!this.enabled) {
         return;
@@ -68197,10 +68195,10 @@ function () {
           stickyElement.checkElement(true);
         }
 
-        if (stickyElement.position.origY + stickyElement.position.height <= _this5.position.origY) {
-          _this5.offsetTop += stickyElement.position.height;
-        } else if (stickyElement.position.origY >= _this5.position.origY + _this5.position.height) {
-          _this5.offsetBottom += stickyElement.position.height;
+        if (stickyElement.position.origY + stickyElement.position.height <= _this4.position.origY) {
+          _this4.offsetTop += stickyElement.position.height;
+        } else if (stickyElement.position.origY >= _this4.position.origY + _this4.position.height) {
+          _this4.offsetBottom += stickyElement.position.height;
         }
       });
     }
@@ -68212,7 +68210,8 @@ function () {
         top: null,
         left: null,
         width: null,
-        zIndex: null
+        zIndex: null,
+        transform: null
       };
       var placeholderStyles = {
         paddingTop: null
@@ -68221,7 +68220,8 @@ function () {
       if (this.position.isSticky) {
         styles = {
           position: "fixed",
-          top: this.position.y + "px",
+          top: 0,
+          transform: "translate3d(0, " + this.position.y + "px, 0)",
           left: this.position.x + "px",
           width: this.position.width + "px"
         };
