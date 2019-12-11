@@ -116,13 +116,12 @@
                         {{ Twig.endif }}
                         
                         {% if widget.settings.lazyLoading %}
-                            <item-lazy-img
+                            <lazy-img
                                 class="img-cover"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
-                                title="{{ Twig.print("slide.name") }}"
-                                template="#vue-item-lazy-img">
-                            </item-lazy-img>
+                                title="{{ Twig.print("slide.name") }}">
+                            </lazy-img>
                         {% else %}
                             <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
                         {% endif %}

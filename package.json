@@ -60,7 +60,6 @@
     "detect-browser": "^2.3.0",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
-    "intersection-observer": "^0.7.0",
     "jquery": "^3.4.0",
     "lodash": "^4.17.15",
     "lozad": "^1.14.0",

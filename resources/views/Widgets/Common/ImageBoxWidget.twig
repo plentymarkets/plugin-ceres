@@ -79,15 +79,13 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if("imageUrl | trim is not empty") }}
         {% if widget.settings.lazyLoading %}
-            <item-lazy-img
-                {% if imageSize == "cover" %} v-ie-objectfit-polyfill="'cover'"{% endif %}
+            <lazy-img
                 class="img-{{ imageSize }}"
-                template="#vue-item-lazy-img"
                 image-url="{{ Twig.print("imageUrl") }}"
                 alt="{{ Twig.print("imageAltText") }}">
-            </item-lazy-img>
+            </lazy-img>
         {% else %}
-            <img{% if imageSize == "cover" %} v-ie-objectfit-polyfill="'cover'"{% endif %} class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" alt="{{ Twig.print("imageAltText") }}"/>
+            <img class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" alt="{{ Twig.print("imageAltText") }}"/>
         {% endif %}
     {{ Twig.endif() }}
 
