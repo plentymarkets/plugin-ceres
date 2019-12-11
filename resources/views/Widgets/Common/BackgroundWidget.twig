@@ -15,7 +15,7 @@
 {% set sourceType = widget.settings.sourceType.mobile %}
 {% set customImageValue = widget.settings.customImagePath.value.mobile %}
 {% set customImageType = widget.settings.customImagePath.type.mobile %}
-{% set appearance = widget.settings.appearance.mobile %}
+{% set colorPalette = widget.settings.colorPalette.mobile %}
 
 {{ Twig.set("url", "" | json_encode) }}
     
@@ -47,7 +47,7 @@
 
 <div class="border rounded border-danger mb-1">
     {% if sourceType == "color" %}
-        <div class="bg-{{ appearance | default("primary") }} border rounded" style="height: 40px;"></div>        
+        <div class="bg-{{ colorPalette | default("primary") }} border rounded" style="height: 40px;"></div>
 
     {% else %}
         <img height="40" src="{{ Twig.print("url") }}" alt="">

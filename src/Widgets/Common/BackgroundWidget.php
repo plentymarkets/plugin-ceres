@@ -38,7 +38,7 @@ class BackgroundWidget extends BaseWidget
             ->withOption("inputMax", 100);
 
         $settings->createHeight();
-        
+
         $this->createBackgroundSourceSettings($settings);
 
         $settings->createSpacing(true, true);
@@ -46,6 +46,9 @@ class BackgroundWidget extends BaseWidget
         return $settings->toArray();
     }
 
+    /**
+     * @param WidgetSettingsFactory $settings
+     */
     private function createBackgroundSourceSettings($settings)
     {
         $settings->createSelect("sourceType")
@@ -64,7 +67,7 @@ class BackgroundWidget extends BaseWidget
         $settings->createUrl("customImagePath")
             ->withCondition("sourceType === 'custom-image'");
 
-        $settings->createAppearance(false, true, true, 'Widget.widgetColor')
+        $settings->createColorPalette()
             ->withCondition("sourceType === 'color'");
     }
 }

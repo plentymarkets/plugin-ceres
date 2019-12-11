@@ -5,6 +5,7 @@ namespace Ceres\Widgets\Helper\Factories;
 use Ceres\Widgets\Helper\Factories\Settings\CategorySettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxGroupSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CheckboxSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\ColorPaletteSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\ContainerSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\BaseSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\DateSettingFactory;
@@ -158,6 +159,19 @@ class WidgetSettingsFactory
         /** @var CheckboxSettingFactory $setting */
         $setting = pluginApp(CheckboxSettingFactory::class);
         $this->addSetting($key, $setting);
+        return $setting;
+    }
+
+    /**
+     * Create a color setting
+     *
+     * @return ColorPaletteSettingFactory
+     */
+    public function createColorPalette()
+    {
+        /** @var ColorPaletteSettingFactory $setting */
+        $setting = pluginApp(ColorPaletteSettingFactory::class);
+        $this->addSetting('colorPalette', $setting);
         return $setting;
     }
 
@@ -405,19 +419,13 @@ class WidgetSettingsFactory
     }
 
     /**
-     * @param $selectionNone
+     * @param $optional
      * @return AppearanceSettingFactory
      */
-    public function createAppearance($selectionNone = false, $themeColors = true, $colors = false, $name='Widget.widgetAppearanceLabel')
+    public function createAppearance($optional = false)
     {
         /** @var AppearanceSettingFactory $setting */
-        $setting = pluginApp(AppearanceSettingFactory::class,
-        [
-            'selectionNone'    => $selectionNone,
-            'themeColors'      => $themeColors,
-            'colors'           => $colors,
-            'name'             => $name
-        ]);
+        $setting = pluginApp(AppearanceSettingFactory::class, ['optional' => $optional]);
         $this->addSetting('appearance', $setting);
         return $setting;
     }

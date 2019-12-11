@@ -4,48 +4,27 @@ namespace Ceres\Widgets\Helper\Factories\Settings;
 
 class AppearanceSettingFactory extends BaseSettingFactory
 {
-    public function __construct($selectionNone = false, $themeColors = true, $colors = false, $name='Widget.widgetAppearanceLabel')
+    public function __construct($optional)
     {
         $this->withType('select')
-            ->withDefaultValue($selectionNone ? 'none' : 'primary')
-            ->withName($name)
+            ->withDefaultValue($optional ? 'none' : 'primary')
+            ->withName('Widget.widgetAppearanceLabel')
             ->withOption('tooltipText', 'Widget.widgetAppearanceTooltip');
 
         /** @var ValueListFactory $valueListFactory */
         $valueListFactory = pluginApp(ValueListFactory::class);
 
-        if($selectionNone)
+        if($optional)
         {
             $valueListFactory->addEntry('none', 'Widget.widgetAppearanceNone');
         }
 
-        if ($themeColors)
-        {
-            $valueListFactory->addEntry('primary', 'Widget.widgetAppearancePrimary')
-                ->addEntry('secondary', 'Widget.widgetAppearanceSecondary')
-                ->addEntry('success', 'Widget.widgetAppearanceSuccess')
-                ->addEntry('info', 'Widget.widgetAppearanceInfo')
-                ->addEntry('warning', 'Widget.widgetAppearanceWarning')
-                ->addEntry('danger', 'Widget.widgetAppearanceDanger');
-        }
-
-        if ($colors)
-        {
-            $valueListFactory->addEntry('blue', 'Widget.widgetAppearanceBlue')
-                ->addEntry('indigo', 'Widget.widgetAppearanceIndigo')
-                ->addEntry('purple', 'Widget.widgetAppearancePurple')
-                ->addEntry('pink', 'Widget.widgetAppearancePink')
-                ->addEntry('red', 'Widget.widgetAppearanceRed')
-                ->addEntry('orange', 'Widget.widgetAppearanceOrange')
-                ->addEntry('yellow', 'Widget.widgetAppearanceYellow')
-                ->addEntry('green', 'Widget.widgetAppearanceGreen')
-                ->addEntry('teal', 'Widget.widgetAppearanceTeal')
-                ->addEntry('cyan', 'Widget.widgetAppearanceCyan')
-                ->addEntry('white', 'Widget.widgetAppearanceWhite')
-                ->addEntry('gray', 'Widget.widgetAppearanceGray')
-                ->addEntry('gray-dark', 'Widget.widgetAppearanceGrayDark')
-                ->addEntry('black', 'Widget.widgetAppearanceBlack');
-        }
+        $valueListFactory->addEntry('primary', 'Widget.widgetAppearancePrimary')
+            ->addEntry('secondary', 'Widget.widgetAppearanceSecondary')
+            ->addEntry('success', 'Widget.widgetAppearanceSuccess')
+            ->addEntry('info', 'Widget.widgetAppearanceInfo')
+            ->addEntry('warning', 'Widget.widgetAppearanceWarning')
+            ->addEntry('danger', 'Widget.widgetAppearanceDanger');
 
         $this->withOption('listBoxValues', $valueListFactory->toArray());
     }
