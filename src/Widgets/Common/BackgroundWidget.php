@@ -54,7 +54,7 @@ class BackgroundWidget extends BaseWidget
             ->withTooltip("Widget.backgroundRepeatTooltip");
 
         $settings->createSelect("backgroundSize")
-            ->withDefaultValue("cover")
+            ->withDefaultValue("bg-cover")
             ->withName("Widget.backgroundSizeLabel")
             ->withTooltip("Widget.backgroundSizeTooltip")
             ->withListBoxValues(
