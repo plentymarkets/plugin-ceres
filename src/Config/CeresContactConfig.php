@@ -5,6 +5,12 @@ namespace Ceres\Config;
 use IO\Helper\PluginConfig;
 use Plenty\Plugin\ConfigRepository;
 
+/**
+ * Class CeresContactConfig
+ * @package Ceres\Config
+ *
+ * @deprecated since 4.4.0. This class will be removed in 5.0.0
+ */
 class CeresContactConfig extends PluginConfig
 {
     public $shopMail;

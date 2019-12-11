@@ -81,6 +81,12 @@ class OnlineStoreMapping
             "global"   => false,
             "optional" => false,
         ],
+        "onlineStore_googleMapsApiKey" => [
+            "field"     => "contact.api_key",
+            "type"      => "string",
+            "global"    => false,
+            "optional"  => false,
+        ],
         "onlineStore_recaptchaVersion" => [
             "field"     => "global.google_recaptcha_version",
             "type"      => "integer",
