@@ -3,7 +3,7 @@ import lozad from "lozad";
 
 Vue.component("lazy-img", {
 
-    template: `<img :data-src="imageUrl" ref="lazyImg">`,
+    template: `<img :data-src="imageUrl">`,
 
     props: {
         imageUrl: String
