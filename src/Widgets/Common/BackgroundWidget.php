@@ -54,7 +54,7 @@ class BackgroundWidget extends BaseWidget
             ->withTooltip("Widget.backgroundRepeatTooltip");
 
         $settings->createSelect("backgroundSize")
-            ->withDefaultValue("cover")
+            ->withDefaultValue("bg-cover")
             ->withName("Widget.backgroundSizeLabel")
             ->withTooltip("Widget.backgroundSizeTooltip")
             ->withListBoxValues(
@@ -81,7 +81,7 @@ class BackgroundWidget extends BaseWidget
             $stylingClasses .= "bg-scroll ";
         }
 
-        if ( array_key_exists("backgroundRepeat", $widgetSettings) && $widgetSettings["backgroundRepeat"]["mobile"] == true )
+        if ( array_key_exists("backgroundRepeat", $widgetSettings) && $widgetSettings["backgroundRepeat"]["mobile"] == true && $widgetSettings["backgroundSize"]["mobile"] !== 'bg-cover')
         {
             $stylingClasses .= "bg-repeat ";
         }

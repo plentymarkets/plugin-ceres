@@ -17,7 +17,7 @@
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" style="min-height:23vw;"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div>
-        <div class="parallax-img-container-inner {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"
+        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"
             style="background-image: url(http://master.plentymarkets.com/documents/category/16/2000x1000.jpg);{% if opacity < 1 %}opacity:{{ opacity }};{% endif %}">
         </div>
     </div>
