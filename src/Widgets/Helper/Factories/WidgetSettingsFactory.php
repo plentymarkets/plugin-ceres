@@ -408,14 +408,15 @@ class WidgetSettingsFactory
      * @param $selectionNone
      * @return AppearanceSettingFactory
      */
-    public function createAppearance($selectionNone = false, $themeColors = true, $colors = false)
+    public function createAppearance($selectionNone = false, $themeColors = true, $colors = false, $name='Widget.widgetAppearanceLabel')
     {
         /** @var AppearanceSettingFactory $setting */
         $setting = pluginApp(AppearanceSettingFactory::class,
         [
             'selectionNone'    => $selectionNone,
             'themeColors'      => $themeColors,
-            'colors'           => $colors
+            'colors'           => $colors,
+            'name'             => $name
         ]);
         $this->addSetting('appearance', $setting);
         return $setting;

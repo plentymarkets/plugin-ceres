@@ -4,11 +4,11 @@ namespace Ceres\Widgets\Helper\Factories\Settings;
 
 class AppearanceSettingFactory extends BaseSettingFactory
 {
-    public function __construct($selectionNone = false, $themeColors = true, $colors = false)
+    public function __construct($selectionNone = false, $themeColors = true, $colors = false, $name='Widget.widgetAppearanceLabel')
     {
         $this->withType('select')
             ->withDefaultValue($selectionNone ? 'none' : 'primary')
-            ->withName('Widget.widgetAppearanceLabel')
+            ->withName($name)
             ->withOption('tooltipText', 'Widget.widgetAppearanceTooltip');
 
         /** @var ValueListFactory $valueListFactory */

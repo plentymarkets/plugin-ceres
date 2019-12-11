@@ -64,7 +64,7 @@ class BackgroundWidget extends BaseWidget
         $settings->createUrl("customImagePath")
             ->withCondition("sourceType === 'custom-image'");
 
-        $settings->createAppearance(false, true, true)
+        $settings->createAppearance(false, true, true, 'Widget.widgetColor')
             ->withCondition("sourceType === 'color'");
     }
 }
