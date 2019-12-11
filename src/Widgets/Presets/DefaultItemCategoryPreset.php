@@ -10,7 +10,10 @@ class DefaultItemCategoryPreset implements ContentPreset
 {
     /** @var PresetHelper */
     private $preset;
-    
+
+    /** @var PresetWidgetFactory */
+    private $backgroundWidget;
+
     /** @var PresetWidgetFactory */
     private $toolbarWidget;
     
@@ -24,6 +27,9 @@ class DefaultItemCategoryPreset implements ContentPreset
     {
         $this->preset = pluginApp(PresetHelper::class);
         
+        $this->createBackgroundWidget();
+        $this->createInlineTextWidget();
+
         $this->createToolbarWidget();
         $this->createItemSortingWidget();
         $this->createItemsPerPageWidget();
@@ -44,6 +50,39 @@ class DefaultItemCategoryPreset implements ContentPreset
         return $this->preset->toArray();
     }
     
+    private function createBackgroundWidget()
+    {
+        $this->backgroundWidget = $this->preset->createWidget('Ceres::BackgroundWidget')
+                                               ->withSetting('customClass', '')
+                                               ->withSetting("spacing.customMargin", true)
+                                               ->withSetting("spacing.margin.bottom.value", 0)
+                                               ->withSetting("spacing.margin.bottom.unit", null)
+                                               ->withSetting("opacity", 100)
+                                               ->withSetting("fullWidth", true)
+                                               ->withSetting("backgroundFixed", true)
+                                               ->withSetting("backgroundRepeat", false)
+                                               ->withSetting("backgroundSize", "bg-cover");
+    }
+
+    private function createInlineTextWidget()
+    {
+        $this->backgroundWidget->createChild('Ceres::CodeWidget')
+                               ->withSetting("customClass", "")
+                               ->withSetting("spacing.customPadding", true)
+                               ->withSetting("spacing.padding.left.value", 0)
+                               ->withSetting("spacing.padding.left.unit", null)
+                               ->withSetting("spacing.padding.right.value", 0)
+                               ->withSetting("spacing.padding.right.unit", null)
+                               ->withSetting("spacing.padding.top.value", 0)
+                               ->withSetting("spacing.padding.top.unit", null)
+                               ->withSetting("spacing.padding.bottom.value", 0)
+                               ->withSetting("spacing.padding.bottom.unit", null)
+                               ->withSetting("spacing.customMargin", true)
+                               ->withSetting("spacing.margin.bottom.value", 0)
+                               ->withSetting("spacing.margin.bottom.unit", null)
+                               ->withSetting('text', "<h1 class='h2 pt-4 category-title'>$categoryName</h1><div class='category-description mb-3'>$categoryDescription</div>");
+    }
+
     private function createToolbarWidget()
     {
         $this->toolbarWidget = $this->preset->createWidget('Ceres::ToolbarWidget')
