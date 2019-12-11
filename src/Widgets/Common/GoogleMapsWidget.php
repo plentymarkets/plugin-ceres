@@ -8,9 +8,12 @@ use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use Plenty\Plugin\Log\Loggable;
 
 class GoogleMapsWidget extends BaseWidget
 {
+    use Loggable;
+
     protected $template = "Ceres::Widgets.Common.GoogleMapsWidget";
 
     public function getData()
@@ -108,6 +111,16 @@ class GoogleMapsWidget extends BaseWidget
                     'lng' => $lng
                 ]
             ];
+        }
+        elseif(isset($result['error_message']))
+        {
+            $this->getLogger(__CLASS__)->error(
+                'Google Maps API error',
+                [
+                    'status' => $result['status'],
+                    'error message' => $result['error_message']
+                ]
+            );
         }
 
         return [
