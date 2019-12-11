@@ -94,8 +94,6 @@ class ImageCarouselWidget extends BaseWidget
             ->withName("Widget.imageCarouselCustomImagePathLabel")
             ->withTooltip("Widget.imageCarouselCustomImagePathTooltip");
 
-        
-
         $settings->createSpacing(false, true);
         return $settings->toArray();
     }
