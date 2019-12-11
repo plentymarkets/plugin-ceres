@@ -67,9 +67,36 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createHeight();
 
+        $this->createBackgroundSourceSettings($settings);
+
         $settings->createSpacing(true, true);
 
         return $settings->toArray();
+    }
+
+    /**
+     * @param WidgetSettingsFactory $settings
+     */
+    private function createBackgroundSourceSettings($settings)
+    {
+        $settings->createSelect("sourceType")
+            ->withDefaultValue("category-image1")
+            ->withName("Widget.backgroundSourceTypeLabel")
+            ->withTooltip("Widget.backgroundSourceTypeTooltip")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry("category-image1", "Widget.backgroundSourceTypeCategoryImage1")
+                    ->addEntry("category-image2", "Widget.backgroundSourceTypeCategoryImage2")
+                    ->addEntry("custom-image", "Widget.backgroundSourceTypeCustomImage")
+                    ->addEntry("color", "Widget.backgroundSourceTypeCategoryColor")
+                    ->toArray()
+            );
+
+        $settings->createUrl("customImagePath")
+            ->withCondition("sourceType === 'custom-image'");
+
+        $settings->createColorPalette()
+            ->withCondition("sourceType === 'color'");
     }
 
     protected function getTemplateData($widgetSettings, $isPreview)
