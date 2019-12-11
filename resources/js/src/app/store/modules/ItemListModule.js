@@ -35,7 +35,7 @@ const mutations =
                 {
                     return 1;
                 }
-                if (facetA.position < facetB.position)
+                else if (facetA.position < facetB.position)
                 {
                     return -1;
                 }
@@ -46,6 +46,9 @@ const mutations =
             state.facets = stateFacets;
         },
 
+        /**
+         * @deprecated use addFacets instead
+         */
         setFacets(state, facets)
         {
             facets = facets || [];
