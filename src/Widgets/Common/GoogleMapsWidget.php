@@ -112,8 +112,8 @@ class GoogleMapsWidget extends BaseWidget
                 ]
             ];
         }
-        elseif(isset($result['error_message']))
-        {
+
+        if (isset($result['error_message'])) {
             $this->getLogger(__CLASS__)->error(
                 'Google Maps API error',
                 [
