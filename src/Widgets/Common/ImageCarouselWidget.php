@@ -62,6 +62,7 @@ class ImageCarouselWidget extends BaseWidget
 
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageCarouselLazyLoadingName")
+            ->withTooltip("Widget.imageCarouselLazyLoadingTooltip")
             ->withDefaultValue(true);
 
         $container = $settings->createVerticalContainer("slides")

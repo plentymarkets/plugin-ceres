@@ -86,6 +86,7 @@ class ImageBoxWidget extends BaseWidget
 
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageBoxLazyLoadingName")
+            ->withTooltip("Widget.imageBoxLazyLoadingTooltip")
             ->withDefaultValue(true);
 
         $settings->createSpacing(false, true);
