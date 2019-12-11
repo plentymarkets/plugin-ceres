@@ -37,12 +37,12 @@ class GoogleMapsWidget extends BaseWidget
             ->withName("Widget.googleMapsMapTypeLabel")
             ->withTooltip("Widget.googleMapsMapTypeTooltip")
             ->withListBoxValues(
-              ValueListFactory::make()
-                  ->addEntry("roadmap","Widget.googleMapsMapTypeRoadmap")
-                  ->addEntry("satellite","Widget.googleMapsMapTypeSatellite")
-                  ->addEntry("hybrid","Widget.googleMapsMapTypeHybrid")
-                  ->addEntry("terrain","Widget.googleMapsMapTypeTerrain")
-                  ->toArray()
+                ValueListFactory::make()
+                    ->addEntry("roadmap", "Widget.googleMapsMapTypeRoadmap")
+                    ->addEntry("satellite", "Widget.googleMapsMapTypeSatellite")
+                    ->addEntry("hybrid", "Widget.googleMapsMapTypeHybrid")
+                    ->addEntry("terrain", "Widget.googleMapsMapTypeTerrain")
+                    ->toArray()
             );
 
         $settings->createNumber("zoom")
@@ -69,13 +69,12 @@ class GoogleMapsWidget extends BaseWidget
     {
         /** @var CeresConfig $config */
         $config = pluginApp(CeresConfig::class);
-        $address = $widgetSettings["address"]["mobile"];
+        $address = $widgetSettings['address']['mobile'];
         $apiKey = $config->contact->apiKey;
 
-        if (empty($address) || empty($apiKey))
-        {
+        if (empty($address) || empty($apiKey)) {
             return [
-                "location" => null
+                'location' => null
             ];
         }
 
@@ -86,31 +85,33 @@ class GoogleMapsWidget extends BaseWidget
 
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $url
-        ));
+        curl_setopt_array(
+            $curl,
+            array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => $url
+            )
+        );
 
         $result_json = curl_exec($curl);
         $result = json_decode($result_json, true);
 
         curl_close($curl);
 
-        $lat = isset($result["results"][0]["geometry"]["location"]["lat"]) ? $result["results"][0]["geometry"]["location"]["lat"] : "";
-        $lng = isset($result["results"][0]["geometry"]["location"]["lng"]) ? $result["results"][0]["geometry"]["location"]["lng"] : "";
+        $lat = $result['results'][0]['geometry']['location']['lat'] ?? '';
+        $lng = $result['results'][0]['geometry']['location']['lng'] ?? '';
 
-        if ($lat && $lng)
-        {
+        if ($lat && $lng) {
             return [
-                "location" => [
-                    "lat" => $lat,
-                    "lng" => $lng
+                'location' => [
+                    'lat' => $lat,
+                    'lng' => $lng
                 ]
             ];
         }
 
         return [
-            "location" => null
+            'location' => null
         ];
     }
 }
