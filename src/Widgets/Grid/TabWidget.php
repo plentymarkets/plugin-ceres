@@ -18,7 +18,7 @@ class TabWidget extends GridWidget
             ->withPreviewImageUrl("/images/widgets/tab.svg")
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
-            ->withPosition(200)
+            ->withPosition(500)
             ->toArray();
     }
 
