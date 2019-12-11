@@ -2,19 +2,28 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set opacity = (widget.settings.opacity.mobile | default(1)) / 100 %}
+{% set fullWidth = widget.settings.fullWidth.mobile is same as (true) %}
+{% set heightClass  = WidgetHelper.getHeightClass(widget.settings) %}
+{% set inlineHeight = WidgetHelper.getInlineHeight(widget.settings) %}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% set heightClass  = WidgetHelper.getHeightClass(widget.settings) %}
-{% set inlineHeight = WidgetHelper.getInlineHeight(widget.settings) %}
-
-<div>
-    <div>Opacity: {{ opacity }}</div>
-    <div>HeightClass: {{ heightClass }}</div>
-    <div>Inline: {{ inlineHeight }}</div>
+<div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" style="min-height:23vw;"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div>
+        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"
+            style="background-image: url(http://master.plentymarkets.com/documents/category/16/2000x1000.jpg);{% if opacity < 1 %}opacity:{{ opacity }};{% endif %}">
+        </div>
+    </div>
+    <div class="container-max d-flex">
+        <div{% if spacingPadding | length > 0 %} class="{{ spacingPadding }}"{% endif %}{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        </div>
+    </div>
 </div>
