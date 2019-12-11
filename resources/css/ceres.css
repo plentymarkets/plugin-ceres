@@ -17803,6 +17803,8 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
       visibility: hidden; }
       .order-property-slider .order-property-slider-inner > div.active {
         visibility: visible; }
+    .order-property-slider .order-property-slider-inner .form-check {
+      padding-left: 1.35rem; }
   .order-property-slider .order-property-slider-controls {
     display: -webkit-box;
     display: flex;

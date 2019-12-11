@@ -29,12 +29,12 @@
                                 <p>
                                     <strong>${ itemName }</strong>
                                     <br>
-                                    <span v-if="this.countAdditionalBasketItems > 0">{{ trans("Ceres::Template.basketItemOverlayAdditionalCount", {"count": "${this.countAdditionalBasketItems}"}) }}</span>
+                                    <span v-if="countAdditionalBasketItems > 0">{{ trans("Ceres::Template.basketItemOverlayAdditionalCount", {"count": "${countAdditionalBasketItems}"}) }}</span>
                                 </p>
 
                                 <p class="small">
                                     <strong>
-                                        <span class="text-muted">${ this.basketItem.quantity } x </span>
+                                        <span class="text-muted">${ basketItem.quantity } x </span>
                                         <span>${ price | currency }</span>
                                     </strong>
                                 </p>
