@@ -2,12 +2,16 @@
 
 namespace Ceres\Widgets\Presets;
 
+use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
 class DefaultItemCategoryPreset implements ContentPreset
 {
+    /** @var CeresConfig */
+    private $ceresConfig;
+    
     /** @var PresetHelper */
     private $preset;
 
@@ -25,10 +29,11 @@ class DefaultItemCategoryPreset implements ContentPreset
     
     public function getWidgets()
     {
+        $this->ceresConfig = pluginApp(CeresConfig::class);
+        
         $this->preset = pluginApp(PresetHelper::class);
         
         $this->createBackgroundWidget();
-        $this->createInlineTextWidget();
 
         $this->createToolbarWidget();
         $this->createItemSortingWidget();
@@ -52,35 +57,88 @@ class DefaultItemCategoryPreset implements ContentPreset
     
     private function createBackgroundWidget()
     {
-        $this->backgroundWidget = $this->preset->createWidget('Ceres::BackgroundWidget')
-                                               ->withSetting('customClass', '')
-                                               ->withSetting("spacing.customMargin", true)
-                                               ->withSetting("spacing.margin.bottom.value", 0)
-                                               ->withSetting("spacing.margin.bottom.unit", null)
-                                               ->withSetting("opacity", 100)
-                                               ->withSetting("fullWidth", true)
-                                               ->withSetting("backgroundFixed", true)
-                                               ->withSetting("backgroundRepeat", false)
-                                               ->withSetting("backgroundSize", "bg-cover");
+        if($this->ceresConfig->item->showCategoryImage)
+        {
+            $this->backgroundWidget = $this->preset->createWidget('Ceres::BackgroundWidget')
+                                                   ->withSetting('customClass', '')
+                                                   ->withSetting("spacing.customMargin", true)
+                                                   ->withSetting("spacing.margin.bottom.value", 0)
+                                                   ->withSetting("spacing.margin.bottom.unit", null)
+                                                   ->withSetting("opacity", 100)
+                                                   ->withSetting("fullWidth", true)
+                                                   ->withSetting("backgroundFixed", true)
+                                                   ->withSetting("backgroundRepeat", false)
+                                                   ->withSetting("backgroundSize", "bg-cover");
+    
+            $this->createInlineTextWidget();
+        }
+        else
+        {
+            $this->createInlineTextWidget(false);
+        }
     }
 
-    private function createInlineTextWidget()
+    private function createInlineTextWidget($asChild = true)
     {
-        $this->backgroundWidget->createChild('Ceres::CodeWidget')
-                               ->withSetting("customClass", "")
-                               ->withSetting("spacing.customPadding", true)
-                               ->withSetting("spacing.padding.left.value", 0)
-                               ->withSetting("spacing.padding.left.unit", null)
-                               ->withSetting("spacing.padding.right.value", 0)
-                               ->withSetting("spacing.padding.right.unit", null)
-                               ->withSetting("spacing.padding.top.value", 0)
-                               ->withSetting("spacing.padding.top.unit", null)
-                               ->withSetting("spacing.padding.bottom.value", 0)
-                               ->withSetting("spacing.padding.bottom.unit", null)
-                               ->withSetting("spacing.customMargin", true)
-                               ->withSetting("spacing.margin.bottom.value", 0)
-                               ->withSetting("spacing.margin.bottom.unit", null)
-                               ->withSetting('text', "<h1 class='h2 pt-4 category-title'>$categoryName</h1><div class='category-description mb-3'>$categoryDescription</div>");
+        $text = '{% if category is not empty %}
+                    {% set categoryName = category.details[0].name %}
+                    {% set categoryDescription = category.details[0].description %}
+                    {% set categoryDescription2 = category.details[0].description2 %}
+                {% else %}
+                   {% set categoryName = trans("Ceres::Widget.backgroundPreviewTextCategoryName") %}
+                   {% set categoryDescription = trans("Ceres::Widget.backgroundPreviewTextCategoryDescription") ~ " 1" %}
+                   {% set categoryDescription2 = trans("Ceres::Widget.backgroundPreviewTextCategoryDescription") ~ " 2" %}
+                {% endif %}
+                
+                {% set descriptionSetting = ceresConfig.item.showCategoryDescriptionTop %}
+                
+                <h1 class="h2 pt-4 category-title">{{ categoryName }}</h1>
+                {% if descriptionSetting == "description1" %}
+                     <div class="category-description mb-3">{{ categoryDescription }}</div>
+                {% elseif descriptionSetting == "description2" %}
+                     <div class="category-description mb-3">{{ categoryDescription2 }}</div>
+                {% elseif descriptionSetting == "both" %}
+                     <div class="category-description mb-3">{{ categoryDescription }}</div>
+                     <div class="category-description mb-3">{{ categoryDescription2 }}</div>
+                {% endif %}';
+        
+        if($asChild)
+        {
+            $this->backgroundWidget->createChild('background','Ceres::CodeWidget')
+                                   ->withSetting("customClass", "")
+                                   ->withSetting("spacing.customPadding", true)
+                                   ->withSetting("spacing.padding.left.value", 0)
+                                   ->withSetting("spacing.padding.left.unit", null)
+                                   ->withSetting("spacing.padding.right.value", 0)
+                                   ->withSetting("spacing.padding.right.unit", null)
+                                   ->withSetting("spacing.padding.top.value", 0)
+                                   ->withSetting("spacing.padding.top.unit", null)
+                                   ->withSetting("spacing.padding.bottom.value", 0)
+                                   ->withSetting("spacing.padding.bottom.unit", null)
+                                   ->withSetting("spacing.customMargin", true)
+                                   ->withSetting("spacing.margin.bottom.value", 0)
+                                   ->withSetting("spacing.margin.bottom.unit", null)
+                                   ->withSetting('text', $text);
+        }
+        else
+        {
+            $this->preset->createWidget('Ceres::CodeWidget')
+                                   ->withSetting("customClass", "")
+                                   ->withSetting("spacing.customPadding", true)
+                                   ->withSetting("spacing.padding.left.value", 0)
+                                   ->withSetting("spacing.padding.left.unit", null)
+                                   ->withSetting("spacing.padding.right.value", 0)
+                                   ->withSetting("spacing.padding.right.unit", null)
+                                   ->withSetting("spacing.padding.top.value", 0)
+                                   ->withSetting("spacing.padding.top.unit", null)
+                                   ->withSetting("spacing.padding.bottom.value", 0)
+                                   ->withSetting("spacing.padding.bottom.unit", null)
+                                   ->withSetting("spacing.customMargin", true)
+                                   ->withSetting("spacing.margin.bottom.value", 0)
+                                   ->withSetting("spacing.margin.bottom.unit", null)
+                                   ->withSetting('text', $text);
+        }
+        
     }
 
     private function createToolbarWidget()
