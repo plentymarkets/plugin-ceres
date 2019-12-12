@@ -1,4 +1,4 @@
-@each $color, $value in map-merge($colors, ( "black" : $black )) 
+@each $color, $value in ( "dark" : $dark, "white": $white )
 {
     .bg-#{ $color }
     {

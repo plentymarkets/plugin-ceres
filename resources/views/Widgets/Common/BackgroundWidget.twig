@@ -21,6 +21,7 @@
 {% set customImageValue = widget.settings.customImagePath.value.mobile %}
 {% set customImageType = widget.settings.customImagePath.type.mobile %}
 {% set colorPalette = widget.settings.colorPalette.mobile %}
+{% set customColor = widget.settings.customColor.mobile %}
 
 {{ Twig.set("url", "" | json_encode) }}
     
@@ -50,25 +51,30 @@
 
 {% endif %}
 
-{#
-<div class="border rounded border-danger mb-1">
-    {% if sourceType == "color" %}
-        <div class="bg-{{ colorPalette | default("primary") }} border rounded" style="height: 40px;"></div>
-
-    {% else %}
-        <img height="40" src="{{ Twig.print("url") }}" alt="">
-
-    {% endif %}
-</div>
-#}
-
 <div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" style="min-height:23vw;"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div>
-        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"
-            style="background-image: url(http://master.plentymarkets.com/documents/category/16/2000x1000.jpg);{% if opacity < 1 %}opacity:{{ opacity }};{% endif %}">
+
+        <div class="parallax-img-container-inner
+            {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
+            {% if sourceType == "color" and colorPalette != "custom" %} bg-{{ colorPalette | default("primary") }}{% endif %}
+            {% if isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %} widget-placeholder{% endif %}"
+
+            style="{% if sourceType != "color" %}background-image: url({{ Twig.print("url") }});{% endif %}
+                {% if opacity < 1 %}opacity:{{ opacity }};{% endif %}
+                {% if sourceType == "color" and colorPalette == "custom" %}background-color: {{ customColor }}{% endif %}"
+        >
+
+            {% if isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %}
+                <div>
+                    <p class="title mb-0">{{ trans("Ceres::Widget.backgroundPlaceholderTitle") }}</p>
+                    <p class="description mt-3">{{ trans("Ceres::Widget.backgroundPlaceholderDescription") }}</p>
+                </div>
+            {% endif %}
+
         </div>
+
     </div>
     <div class="container-max d-flex">
         <div class="w-100{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
