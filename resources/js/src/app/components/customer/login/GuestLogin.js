@@ -1,7 +1,7 @@
 import ValidationService from "../../../services/ValidationService";
 import { navigateTo } from "../../../services/UrlService";
 import Vue from "vue";
-import { isDefined } from "../../../helper/utils";
+import { isDefined, isNullOrUndefined } from "../../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixin";
 
 const ApiService = require("../../../services/ApiService");
@@ -38,7 +38,7 @@ Vue.component("guest-login", {
 
     created()
     {
-        if (this.initialEmail.length > 0)
+        if (!isNullOrUndefined(this.initialEmail) && this.initialEmail.length > 0)
         {
             this.email = this.initialEmail;
         }
