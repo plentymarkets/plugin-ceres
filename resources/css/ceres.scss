@@ -20809,11 +20809,11 @@ header .widget
 /*
  * INLINE EDITOR CLASSES
  */
-@each $color, $value in $shop-builder-colors
+@each $color, $value in map-merge($shop-builder-colors, ("dark": $dark, "light": $light))
 {
     .color-#{$color}
     {
-        color: $value !important;
+        @extend .text-#{$color};
     }
 
     .bg-#{$color}
