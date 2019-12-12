@@ -4,17 +4,16 @@
     @include media-breakpoint-up($breakpoint) {
         @each $size, $height in $heights {
             .h#{$infix}-#{$size} {
-                height: map-get($height, $breakpoint) !important;
+                min-height: map-get($height, $breakpoint) !important;
 
                 $bp: breakpoint-next($breakpoint);
                 @while $bp != null {
                     @include media-breakpoint-up($bp) {
-                        height: map-get($height, $bp) !important;
+                        min-height: map-get($height, $bp) !important;
                     }
                     $bp: breakpoint-next($bp);
                 }
             }
-
         }
     }
 }
