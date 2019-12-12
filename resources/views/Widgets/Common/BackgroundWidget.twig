@@ -14,11 +14,63 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
+<<<<<<< HEAD
 <div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div>
         <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"{% if opacity < 1 %} style="{{ opacity }}"{% endif %}></div>
+=======
+{% set sourceType = widget.settings.sourceType.mobile %}
+{% set customImageValue = widget.settings.customImagePath.value.mobile %}
+{% set customImageType = widget.settings.customImagePath.type.mobile %}
+{% set colorPalette = widget.settings.colorPalette.mobile %}
+
+{{ Twig.set("url", "" | json_encode) }}
+    
+{% if sourceType == "category-image1" %}
+    {{ Twig.set("url", "category.details[0].imagePath") }}
+    {{ Twig.set("url", "'/documents/' ~ url") }}
+
+{% elseif sourceType == "category-image2" %}
+    {{ Twig.set("url", "category.details[0].image2Path") }}
+    {{ Twig.set("url", "'/documents/' ~ url") }}
+
+{% elseif sourceType == "custom-image" %}
+    {{ Twig.set("url", customImageValue | json_encode) }}
+
+    {% if customImageType == "category" %}
+        {{ Twig.set("category", Twig.call("services.category.get", [customImageValue])) }}
+        {{ Twig.set("url", "category.details[0].imagePath") }}
+        {{ Twig.set("url", "'/documents/' ~ url") }}
+
+    {% elseif customImageType == "item" %}
+        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [customImageValue | int])) }}
+        {{ Twig.set("itemData", "itemData.documents[0].data") }}
+        {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
+        {{ Twig.set("url", "itemImage.url") }}
+
+    {% endif %}
+
+{% endif %}
+
+{#
+<div class="border rounded border-danger mb-1">
+    {% if sourceType == "color" %}
+        <div class="bg-{{ colorPalette | default("primary") }} border rounded" style="height: 40px;"></div>
+
+    {% else %}
+        <img height="40" src="{{ Twig.print("url") }}" alt="">
+
+    {% endif %}
+</div>
+#}
+
+<div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if heightClass | length > 0 %} {{ heightClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlineHeight | length > 0 %} {{ inlineHeight }}{% endif %}">
+    <div>
+        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"></div>
+>>>>>>> feature/beta/sb_categoryitem
     </div>
     <div class="container-max d-flex">
         <div class="w-100{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}

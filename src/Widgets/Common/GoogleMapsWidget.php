@@ -2,10 +2,10 @@
 
 namespace Ceres\Widgets\Common;
 
+use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
-use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
@@ -27,10 +27,6 @@ class GoogleMapsWidget extends BaseWidget
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
-
-        $settings->createText("apiKey")
-            ->withName("Widget.googleMapsApiKeyLabel")
-            ->withTooltip("Widget.googleMapsApiKeyTooltip");
 
         $settings->createTextarea("address")
             ->withName("Widget.googleMapsAddressLabel")
@@ -71,14 +67,15 @@ class GoogleMapsWidget extends BaseWidget
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
+        /** @var CeresConfig $config */
+        $config = pluginApp(CeresConfig::class);
         $address = $widgetSettings["address"]["mobile"];
-
-        $apiKey = $widgetSettings["apiKey"]["mobile"];
+        $apiKey = $config->contact->apiKey;
 
         if (empty($address) || empty($apiKey))
         {
             return [
-                "geocoding_data" => false
+                "location" => null
             ];
         }
 
@@ -101,22 +98,19 @@ class GoogleMapsWidget extends BaseWidget
 
         $lat = isset($result["results"][0]["geometry"]["location"]["lat"]) ? $result["results"][0]["geometry"]["location"]["lat"] : "";
         $lng = isset($result["results"][0]["geometry"]["location"]["lng"]) ? $result["results"][0]["geometry"]["location"]["lng"] : "";
-        $formatted_address = isset($result["results"][0]["formatted_address"]) ? $result["results"][0]["formatted_address"] : "";
 
-        if ($lat && $lng && $formatted_address)
+        if ($lat && $lng)
         {
             return [
-                "geocoding_data" => [
+                "location" => [
                     "lat" => $lat,
-                    "lng" => $lng,
-                    "address" => $formatted_address,
-                    "apiKey" => $apiKey
+                    "lng" => $lng
                 ]
             ];
         }
 
         return [
-            "geocoding_data" => false
+            "location" => null
         ];
     }
 }

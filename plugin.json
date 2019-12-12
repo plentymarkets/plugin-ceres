@@ -308,12 +308,12 @@
         },
         {
             "key"           : "Basket.BeforeBasketTotals",
-            "name"          : "Shopping cart: Before basket totals (deprecated)",
+            "name"          : "Shopping cart: Before basket totals",
             "description"   : "Add content before the basket totals in the shopping cart."
         },
         {
             "key"           : "Basket.AfterBasketTotals",
-            "name"          : "Shopping cart: After basket totals (deprecated)",
+            "name"          : "Shopping cart: After basket totals",
             "description"   : "Add content after the basket totals in the shopping cart."
         },
         {
