@@ -97,6 +97,10 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createColorPalette()
             ->withCondition("sourceType === 'color'");
+
+        $settings->createColor("customColor")
+            ->withDefaultValue("#000000")
+            ->withCondition("sourceType === 'color' && colorPalette === 'custom'");
     }
 
     protected function getTemplateData($widgetSettings, $isPreview)
