@@ -68,7 +68,9 @@ class DefaultItemCategoryPreset implements ContentPreset
                                                    ->withSetting("fullWidth", true)
                                                    ->withSetting("backgroundFixed", true)
                                                    ->withSetting("backgroundRepeat", false)
-                                                   ->withSetting("backgroundSize", "bg-cover");
+                                                   ->withSetting("backgroundSize", "bg-cover")
+                                                   ->withSetting("sourceType", "category-image1")
+                                                   ->withSetting("height.top.value", 4);
     
             $this->createInlineTextWidget();
         }
