@@ -50,8 +50,8 @@ class OnlineStoreConfig
     ];
 
     public static $sessionLifetimeOptions = [
-        "sessionLifetimeUntilBrowserIsClosed" => "0",
-        "sessionLifetimeHundredDays"  => "8640000",
+        "sessionLifetimeUntilBrowserIsClosed" => 0,
+        "sessionLifetimeHundredDays"  => 8640000,
     ];
 
     
