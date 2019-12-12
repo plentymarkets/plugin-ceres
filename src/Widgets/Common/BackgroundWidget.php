@@ -31,29 +31,57 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createCustomClass();
 
+        $settings->createCheckbox("fullWidth")
+            ->withDefaultValue(true)
+            ->withName("Widget.backgroundFullWidthLabel")
+            ->withTooltip("Widget.backgroundFullWidthTooltip");
+
+        $settings->createColorPalette();
+
+        $settings->createColor("customColor")
+            ->withCondition("colorPalette === 'custom'")
+            ->withDefaultValue("#000000");
+
+        $this->createImageSettings($settings);
+
         $settings->createSlider("opacity")
             ->withDefaultValue(100)
             ->withName("Widget.backgroundOpacityLabel")
             ->withOption("inputInterval", 1)
             ->withOption("inputMax", 100);
-
-        $settings->createCheckbox("fullWidth")
-            ->withDefaultValue(true)
-            ->withName("Widget.backgroundFullWidthLabel")
-            ->withTooltip("Widget.backgroundFullWidthTooltip");
             
-        $settings->createCheckbox("backgroundFixed")
-            ->withDefaultValue(false)
-            ->withName("Widget.backgroundFixedLabel")
-            ->withTooltip("Widget.backgroundFixedTooltip");
 
-        $settings->createCheckbox("backgroundRepeat")
-            ->withCondition("backgroundSize !== 'bg-cover'")
-            ->withDefaultValue(false)
-            ->withName("Widget.backgroundRepeatLabel")
-            ->withTooltip("Widget.backgroundRepeatTooltip");
+        $settings->createHeight();
+
+        $settings->createSpacing();
+
+        return $settings->toArray();
+    }
+
+    /**
+     * @param WidgetSettingsFactory $settings
+     */
+    private function createImageSettings($settings)
+    {
+        $settings->createSelect("sourceType")
+            ->withDefaultValue("none")
+            ->withName("Widget.backgroundSourceTypeLabel")
+            ->withTooltip("Widget.backgroundSourceTypeTooltip")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry("none", "Widget.backgroundSourceTypeNone")
+                    ->addEntry("custom-image", "Widget.backgroundSourceTypeCustomImage")
+                    ->addEntry("category-image1", "Widget.backgroundSourceTypeCategoryImage1")
+                    ->addEntry("category-image2", "Widget.backgroundSourceTypeCategoryImage2")
+                    ->toArray()
+            );
+
+        $settings->createFile("customImagePath")
+            ->withCondition("sourceType === 'custom-image'")
+            ->withName("Widget.backgroundImageSource");
 
         $settings->createSelect("backgroundSize")
+            ->withCondition("sourceType !== 'none'")
             ->withDefaultValue("bg-cover")
             ->withName("Widget.backgroundSizeLabel")
             ->withTooltip("Widget.backgroundSizeTooltip")
@@ -63,44 +91,27 @@ class BackgroundWidget extends BaseWidget
                     ->addEntry("bg-contain", "Widget.backgroundSizeContain")
                     ->addEntry("bg-auto", "Widget.backgroundSizeAuto")
                     ->toArray()
-        );
+            );
 
-        $settings->createHeight();
+        $settings->createCheckbox("backgroundFixed")
+            ->withCondition("sourceType !== 'none'")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundFixedLabel")
+            ->withTooltip("Widget.backgroundFixedTooltip");
 
-        $this->createBackgroundSourceSettings($settings);
-
-        $settings->createSpacing(true, true);
-
-        return $settings->toArray();
+        $settings->createCheckbox("backgroundRepeat")
+            ->withCondition("sourceType !== 'none' && backgroundSize !== 'bg-cover'")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundRepeatLabel")
+            ->withTooltip("Widget.backgroundRepeatTooltip");
     }
 
     /**
      * @param WidgetSettingsFactory $settings
      */
-    private function createBackgroundSourceSettings($settings)
+    private function createColorSettings($settings)
     {
-        $settings->createSelect("sourceType")
-            ->withDefaultValue("category-image1")
-            ->withName("Widget.backgroundSourceTypeLabel")
-            ->withTooltip("Widget.backgroundSourceTypeTooltip")
-            ->withListBoxValues(
-                ValueListFactory::make()
-                    ->addEntry("category-image1", "Widget.backgroundSourceTypeCategoryImage1")
-                    ->addEntry("category-image2", "Widget.backgroundSourceTypeCategoryImage2")
-                    ->addEntry("custom-image", "Widget.backgroundSourceTypeCustomImage")
-                    ->addEntry("color", "Widget.backgroundSourceTypeCategoryColor")
-                    ->toArray()
-            );
 
-        $settings->createUrl("customImagePath")
-            ->withCondition("sourceType === 'custom-image'");
-
-        $settings->createColorPalette()
-            ->withCondition("sourceType === 'color'");
-
-        $settings->createColor("customColor")
-            ->withDefaultValue("#000000")
-            ->withCondition("sourceType === 'color' && colorPalette === 'custom'");
     }
 
     protected function getTemplateData($widgetSettings, $isPreview)

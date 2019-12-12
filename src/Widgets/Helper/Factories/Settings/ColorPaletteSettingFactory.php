@@ -7,14 +7,16 @@ class ColorPaletteSettingFactory extends BaseSettingFactory
     public function __construct()
     {
         $this->withType('select')
-            ->withDefaultValue('primary')
+            ->withDefaultValue('none')
             ->withName('Widget.widgetColor')
             ->withOption('tooltipText', 'Widget.widgetAppearanceTooltip');
 
         /** @var ValueListFactory $valueListFactory */
         $valueListFactory = pluginApp(ValueListFactory::class);
 
-        $valueListFactory->addEntry('primary', 'Widget.widgetAppearancePrimary')
+        $valueListFactory
+            ->addEntry('none', 'Widget.widgetAppearanceNone')
+            ->addEntry('primary', 'Widget.widgetAppearancePrimary')
             ->addEntry('secondary', 'Widget.widgetAppearanceSecondary')
             ->addEntry('success', 'Widget.widgetAppearanceSuccess')
             ->addEntry('info', 'Widget.widgetAppearanceInfo')
