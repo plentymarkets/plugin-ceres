@@ -13,10 +13,6 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% set heightClass  = WidgetHelper.getHeightClass(widget.settings) %}
-{% set inlineHeight = WidgetHelper.getInlineHeight(widget.settings) %}
-
-{% set opacity = (widget.settings.opacity.mobile | default(1)) / 100 %}
 {% set sourceType = widget.settings.sourceType.mobile %}
 {% set customImageValue = widget.settings.customImagePath.value.mobile %}
 {% set customImageType = widget.settings.customImagePath.type.mobile %}
@@ -62,13 +58,10 @@
 </div>
 #}
 
-<div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}
-    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" style="min-height:23vw;"
-    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if heightClass | length > 0 %} {{ heightClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlineHeight | length > 0 %} {{ inlineHeight }}{% endif %}">
     <div>
-        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"
-            style="background-image: url(http://master.plentymarkets.com/documents/category/16/2000x1000.jpg);{% if opacity < 1 %}opacity:{{ opacity }};{% endif %}">
-        </div>
+        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"></div>
     </div>
     <div class="container-max d-flex">
         <div class="w-100{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
