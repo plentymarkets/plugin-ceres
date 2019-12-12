@@ -55,7 +55,7 @@ Vue.component("tag-list", {
             },
             getTagLink(tag)
             {
-                return "/" + tag.names.name + "_t" + tag.id;
+                return "/" + encodeURIComponent(tag.names.name.toLowerCase()) + "_t" + tag.id;
             }
         }
 });

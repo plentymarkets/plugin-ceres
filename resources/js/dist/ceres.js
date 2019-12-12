@@ -60515,7 +60515,7 @@ vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("tag-list", {
   })),
   methods: {
     getTextColorClass: function getTextColorClass(bgColor) {
-      if (!bgColor) return null;
+      if (!bgColor) return "badge-primary";
       var color = bgColor.charAt(0) === "#" ? bgColor.substring(1, 7) : bgColor;
       var red = parseInt(color.substring(0, 2), 16);
       var green = parseInt(color.substring(2, 4), 16);
@@ -60533,7 +60533,7 @@ vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("tag-list", {
       return {};
     },
     getTagLink: function getTagLink(tag) {
-      return "/" + tag.names.name + "_t" + tag.id;
+      return "/" + encodeURIComponent(tag.names.name.toLowerCase()) + "_t" + tag.id;
     }
   }
 });
