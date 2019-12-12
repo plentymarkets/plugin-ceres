@@ -14,29 +14,15 @@ class ColorPaletteSettingFactory extends BaseSettingFactory
         /** @var ValueListFactory $valueListFactory */
         $valueListFactory = pluginApp(ValueListFactory::class);
 
-        // theme colors
         $valueListFactory->addEntry('primary', 'Widget.widgetAppearancePrimary')
             ->addEntry('secondary', 'Widget.widgetAppearanceSecondary')
             ->addEntry('success', 'Widget.widgetAppearanceSuccess')
             ->addEntry('info', 'Widget.widgetAppearanceInfo')
             ->addEntry('warning', 'Widget.widgetAppearanceWarning')
-            ->addEntry('danger', 'Widget.widgetAppearanceDanger');
-
-        // colors
-        $valueListFactory->addEntry('blue', 'Widget.widgetColorBlue')
-            ->addEntry('indigo', 'Widget.widgetColorIndigo')
-            ->addEntry('purple', 'Widget.widgetColorPurple')
-            ->addEntry('pink', 'Widget.widgetColorPink')
-            ->addEntry('red', 'Widget.widgetColorRed')
-            ->addEntry('orange', 'Widget.widgetColorOrange')
-            ->addEntry('yellow', 'Widget.widgetColorYellow')
-            ->addEntry('green', 'Widget.widgetColorGreen')
-            ->addEntry('teal', 'Widget.widgetColorTeal')
-            ->addEntry('cyan', 'Widget.widgetColorCyan')
+            ->addEntry('danger', 'Widget.widgetAppearanceDanger')
+            ->addEntry('dark', 'Widget.widgetColorDark')
             ->addEntry('white', 'Widget.widgetColorWhite')
-            ->addEntry('gray', 'Widget.widgetColorGray')
-            ->addEntry('gray-dark', 'Widget.widgetColorGrayDark')
-            ->addEntry('black', 'Widget.widgetColorBlack');
+            ->addEntry('custom', 'Widget.widgetColorCustom');
 
         $this->withOption('listBoxValues', $valueListFactory->toArray());
     }
