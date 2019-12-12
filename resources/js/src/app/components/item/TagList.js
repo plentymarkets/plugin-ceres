@@ -34,7 +34,7 @@ Vue.component("tag-list", {
         {
             getTextColorClass(bgColor)
             {
-                if (!bgColor)return null;
+                if (!bgColor)return "badge-primary";
                 const color = (bgColor.charAt(0) === "#") ? bgColor.substring(1, 7) : bgColor;
                 const red = parseInt(color.substring(0, 2), 16);
                 const green = parseInt(color.substring(2, 4), 16);
