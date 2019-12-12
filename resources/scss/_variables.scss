@@ -60,6 +60,17 @@ $yiq-text-dark:             $gray-900 !default;
 $yiq-text-light:            $white !default;
 $yiq-contrasted-threshold:  186 !default;
 
+
+//
+// Sizes
+//
+$heights: (
+  1: (xs: 36px, sm: 48px, md: 64px, lg: 72px, xl: 80px),
+  2: (xs: 72px, sm: 90px, md: 128px, lg: 144px, xl: 160px),
+  3: (xs: 128px, sm: 160px, md: 192px, lg: 224px, xl: 256px),
+  4: (xs: 200px, sm: 244px, md: 288px, lg: 332px, xl: 376px),
+  5: (xs: 272px, sm: 328px, md: 384px, lg: 440px, xl: 496px)
+) !default;
 //
 // Fonts
 //

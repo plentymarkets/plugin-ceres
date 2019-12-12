@@ -1,0 +1,19 @@
+@each $breakpoint in map-keys($grid-breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @include media-breakpoint-up($breakpoint) {
+        @each $size, $height in $heights {
+            .mh#{$infix}-#{$size} {
+                min-height: map-get($height, $breakpoint) !important;
+
+                $bp: breakpoint-next($breakpoint);
+                @while $bp != null {
+                    @include media-breakpoint-up($bp) {
+                        min-height: map-get($height, $bp) !important;
+                    }
+                    $bp: breakpoint-next($bp);
+                }
+            }
+        }
+    }
+}
