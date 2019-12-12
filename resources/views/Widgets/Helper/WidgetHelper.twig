@@ -76,7 +76,7 @@
 {{- result | trim -}}
 {% endmacro %}
 
-{% macro getInlineHeight( widgetSettings, style = "height" ) %}
+{% macro getInlineMinHeight( widgetSettings, style = "min-height" ) %}
     {% set heightValue = widgetSettings.height.top.value.mobile %}
     {% set heightUnit  = widgetSettings.height.top.unit.mobile %}
 
@@ -86,7 +86,7 @@
 
 {% endmacro %}
 
-{% macro getHeightClass( widgetSettings, classPrefix = "h" ) %}
+{% macro getMinHeightClass( widgetSettings, classPrefix = "mh" ) %}
     {% set heightValue = widgetSettings.height.top.value.mobile %}
     {% set heightUnit  = widgetSettings.height.top.unit.mobile %}
 

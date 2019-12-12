@@ -1,10 +1,10 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set opacity = (widget.settings.opacity.mobile | default(1)) / 100 %}
+{% set opacity = (widget.settings.opacity.mobile | default(100)) / 100 %}
 {% set fullWidth = widget.settings.fullWidth.mobile is same as (true) %}
-{% set heightClass  = WidgetHelper.getHeightClass(widget.settings) %}
-{% set inlineHeight = WidgetHelper.getInlineHeight(widget.settings) %}
+{% set minHeightClass  = WidgetHelper.getMinHeightClass(widget.settings) %}
+{% set inlineMinHeight = WidgetHelper.getInlineMinHeight(widget.settings) %}
 
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -13,10 +13,6 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% set heightClass  = WidgetHelper.getHeightClass(widget.settings) %}
-{% set inlineHeight = WidgetHelper.getInlineHeight(widget.settings) %}
-
-{% set opacity = (widget.settings.opacity.mobile | default(1)) / 100 %}
 {% set sourceType = widget.settings.sourceType.mobile %}
 {% set customImageValue = widget.settings.customImagePath.value.mobile %}
 {% set customImageType = widget.settings.customImagePath.type.mobile %}
@@ -51,20 +47,17 @@
 
 {% endif %}
 
-<div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}
-    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" style="min-height:23vw;"
-    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if minHeightClass | length > 0 %} {{ minHeightClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}{% endif %}">
     <div>
-
         <div class="parallax-img-container-inner
             {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
             {% if sourceType == "color" and colorPalette != "custom" %} bg-{{ colorPalette | default("primary") }}{% endif %}
             {% if isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %} widget-placeholder{% endif %}"
 
             style="{% if sourceType != "color" %}background-image: url({{ Twig.print("url") }});{% endif %}
-                {% if opacity < 1 %}opacity:{{ opacity }};{% endif %}
-                {% if sourceType == "color" and colorPalette == "custom" %}background-color: {{ customColor }}{% endif %}"
-        >
+                {% if opacity < 1 %} opacity:{{ opacity }};{% endif %}
+                {% if sourceType == "color" and colorPalette == "custom" %} background-color: {{ customColor }}{% endif %}">
 
             {% if isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %}
                 <div>
@@ -72,9 +65,7 @@
                     <p class="description mt-3">{{ trans("Ceres::Widget.backgroundPlaceholderDescription") }}</p>
                 </div>
             {% endif %}
-
         </div>
-
     </div>
     <div class="container-max d-flex">
         <div class="w-100{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
