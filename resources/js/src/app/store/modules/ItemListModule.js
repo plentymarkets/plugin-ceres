@@ -25,6 +25,20 @@ const mutations =
             {
                 if (!stateFacets.find(fac => fac.id === facet.id))
                 {
+                    facet.values.sort((facetA, facetB) =>
+                    {
+                        if (facetA.position > facetB.position)
+                        {
+                            return 1;
+                        }
+                        else if (facetA.position < facetB.position)
+                        {
+                            return -1;
+                        }
+
+                        return 0;
+                    });
+
                     stateFacets.push(facet);
                 }
             }

@@ -11393,6 +11393,15 @@ html.ios {
     }
 }
 
+@each $color, $value in map-merge($colors, ( "black" : $black )) 
+{
+    .bg-#{ $color }
+    {
+        background-color: $value !important;
+        color: color-yiq($value) !important;
+    }
+}
+
 .bg-cover {
     background-size: cover !important;
 }

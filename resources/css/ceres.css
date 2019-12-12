@@ -12258,6 +12258,62 @@ html.ios select,
 html.ios textarea {
   font-size: 16px !important; }
 
+.bg-blue {
+  background-color: #008ebd !important;
+  color: #fff !important; }
+
+.bg-indigo {
+  background-color: #6610f2 !important;
+  color: #fff !important; }
+
+.bg-purple {
+  background-color: #6f42c1 !important;
+  color: #fff !important; }
+
+.bg-pink {
+  background-color: #e83e8c !important;
+  color: #fff !important; }
+
+.bg-red {
+  background-color: #d4021d !important;
+  color: #fff !important; }
+
+.bg-orange {
+  background-color: #fd7e14 !important;
+  color: #fff !important; }
+
+.bg-yellow {
+  background-color: #ffc107 !important;
+  color: #212529 !important; }
+
+.bg-green {
+  background-color: #28a745 !important;
+  color: #fff !important; }
+
+.bg-teal {
+  background-color: #20c997 !important;
+  color: #fff !important; }
+
+.bg-cyan {
+  background-color: #17a2b8 !important;
+  color: #fff !important; }
+
+.bg-white {
+  background-color: #fff !important;
+  color: #212529 !important; }
+
+.bg-gray {
+  background-color: #6c757d !important;
+  color: #fff !important; }
+
+.bg-gray-dark {
+  background-color: #343a40 !important;
+  color: #fff !important; }
+
+.bg-black {
+  background-color: #000 !important;
+  color: #fff !important; }
+
 .bg-cover {
   background-size: cover !important; }
 

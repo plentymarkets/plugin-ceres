@@ -4,8 +4,6 @@ import { mapState } from "vuex";
 
 Vue.component("item-filter", {
 
-    delimiters: ["${", "}"],
-
     props:
     {
         template:
@@ -33,19 +31,7 @@ Vue.component("item-filter", {
     {
         facets()
         {
-            return this.facet.values.sort((facetA, facetB) =>
-            {
-                if (facetA.position > facetB.position)
-                {
-                    return 1;
-                }
-                if (facetA.position < facetB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
+            return this.facet.values;
         },
 
         facetName()
