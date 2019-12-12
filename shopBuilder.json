@@ -123,7 +123,7 @@
         "categoryitem": [
             {
                 "label": "Widget.presetItemCategoryDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultItemCategoryPreset"
+                "presetClass": "Ceres\\Widgets\\Presets\\ItemCategoryPreset"
             }
         ],
         "itemsearch": [
