@@ -8,28 +8,10 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
-use IO\Helper\RouteConfig;
-use Plenty\Plugin\Application;
-use Plenty\Plugin\Templates\Twig;
 
 class TagsWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Item.TagsWidget";
-    protected $tagRouteActive = false;
-    private $IORouteConfig = null;
-
-    public function __construct(Twig $twig, Application $app)
-    {
-        parent::__construct($twig, $app);
-        /** @var RouteConfig $IORouteConfig */
-        $this->IORouteConfig = pluginApp( RouteConfig::class );
-        $this->tagRouteActive = $this->IORouteConfig->isActive(RouteConfig::TAGS);
-    }
-
-    public function getTemplateData($widgetSettings, $isPreview)
-    {
-        return ['tagRouteActive' => $this->tagRouteActive];
-    }
 
     public function getData()
     {

@@ -23,11 +23,6 @@ Vue.component("tag-list", {
         {
             type: String,
             default: ""
-        },
-        tagRouteActive:
-        {
-            type: Boolean,
-            default: false
         }
     },
     computed: {
@@ -60,7 +55,7 @@ Vue.component("tag-list", {
             },
             getTagLink(tag)
             {
-                return "/" + encodeURIComponent(tag.names.name.toLowerCase()) + "_t" + tag.id;
+                return "/" + tag.names.name + "_t" + tag.id;
             }
         }
 });

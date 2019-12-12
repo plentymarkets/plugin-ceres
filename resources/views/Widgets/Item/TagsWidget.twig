@@ -13,8 +13,8 @@
 
 <div class="widget {% if buttonSize | length > 0 %} {{ buttonSize }}{% endif %} {% if customClass | length > 0 %}
     {{ customClass }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <tag-list tag-appearance="{{ tagAppearance }}" :tag-route-active="{{ tagRouteActive }}"
-    {% if inlineMargin | length > 0 %} margin-inline-styles="{{ inlineMargin }}" {% endif %}
+    <tag-list tag-appearance="{{ tagAppearance }}"
+     {% if inlineMargin | length > 0 %} margin-inline-styles="{{ inlineMargin }}" {% endif %}
     {% if spacingMargin | length > 0 %} margin-classes="{{ spacingMargin }}" {% endif %}>
     </tag-list>
 </div>
