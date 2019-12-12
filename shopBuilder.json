@@ -129,7 +129,7 @@
         "itemsearch": [
             {
               "label": "Widget.presetItemSearchDefault",
-              "presetClass": "Ceres\\Widgets\\Presets\\DefaultItemSearchPreset"
+              "presetClass": "Ceres\\Widgets\\Presets\\ItemSearchPreset"
             }
         ],
         "singleitem": [
