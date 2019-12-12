@@ -49,7 +49,7 @@ class BackgroundWidget extends BaseWidget
             ->withName("Widget.backgroundOpacityLabel")
             ->withOption("inputInterval", 1)
             ->withOption("inputMax", 100);
-            
+
 
         $settings->createHeight();
 
@@ -106,35 +106,26 @@ class BackgroundWidget extends BaseWidget
             ->withTooltip("Widget.backgroundRepeatTooltip");
     }
 
-    /**
-     * @param WidgetSettingsFactory $settings
-     */
-    private function createColorSettings($settings)
-    {
-
-    }
-
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $stylingClasses = "";
 
-        if ( array_key_exists("backgroundFixed", $widgetSettings) && $widgetSettings["backgroundFixed"]["mobile"] == false )
-        {
+        if (array_key_exists("backgroundFixed",
+                $widgetSettings) && $widgetSettings["backgroundFixed"]["mobile"] == false) {
             $stylingClasses .= "bg-scroll ";
         }
 
-        if ( array_key_exists("backgroundRepeat", $widgetSettings) && $widgetSettings["backgroundRepeat"]["mobile"] == true && $widgetSettings["backgroundSize"]["mobile"] !== 'bg-cover')
-        {
+        if (array_key_exists("backgroundRepeat",
+                $widgetSettings) && $widgetSettings["backgroundRepeat"]["mobile"] == true && $widgetSettings["backgroundSize"]["mobile"] !== 'bg-cover') {
             $stylingClasses .= "bg-repeat ";
         }
 
-        if ( array_key_exists("backgroundSize", $widgetSettings) && $widgetSettings["backgroundSize"]["mobile"] )
-        {
+        if (array_key_exists("backgroundSize", $widgetSettings) && $widgetSettings["backgroundSize"]["mobile"]) {
             $stylingClasses .= $widgetSettings["backgroundSize"]["mobile"];
         }
 
         return [
-            'stylingClasses'  => $stylingClasses
+            'stylingClasses' => $stylingClasses
         ];
     }
 }
