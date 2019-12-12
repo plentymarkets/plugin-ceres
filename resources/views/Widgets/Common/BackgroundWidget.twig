@@ -2,7 +2,6 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set opacity = (widget.settings.opacity.mobile | default(1)) / 100 %}
-{% set opacity = "opacity:" ~ opacity ~ ";" %}
 {% set fullWidth = widget.settings.fullWidth.mobile is same as (true) %}
 {% set heightClass  = WidgetHelper.getHeightClass(widget.settings) %}
 {% set inlineHeight = WidgetHelper.getInlineHeight(widget.settings) %}
@@ -51,10 +50,8 @@
 <div class="border rounded border-danger mb-1">
     {% if sourceType == "color" %}
         <div class="bg-{{ colorPalette | default("primary") }} border rounded" style="height: 40px;"></div>
-
     {% else %}
         <img height="40" src="{{ Twig.print("url") }}" alt="">
-
     {% endif %}
 </div>
 #}
@@ -62,7 +59,7 @@
 <div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if heightClass | length > 0 %} {{ heightClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
      style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlineHeight | length > 0 %} {{ inlineHeight }}{% endif %}">
     <div>
-        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"{% if opacity < 1 %} style="{{ opacity }}"{% endif %}></div>
+        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"></div>
     </div>
     <div class="container-max d-flex">
         <div class="w-100{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
