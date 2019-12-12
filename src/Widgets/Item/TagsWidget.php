@@ -42,6 +42,7 @@ class TagsWidget extends BaseWidget
         $settingsFactory->createSelect("buttonSize")
             ->withName("Widget.widgetTagSizeLabel")
             ->withTooltip("Widget.widgetButtonSizeTooltip")
+            ->withDefaultValue("h4")
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("", "Widget.widgetButtonSizeSm")
