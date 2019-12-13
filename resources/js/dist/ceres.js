@@ -58143,6 +58143,10 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
     },
     backlink: {
       type: String
+    },
+    initialEmail: {
+      type: String,
+      default: ""
     }
   },
   data: function data() {
@@ -58150,6 +58154,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
       email: "",
       isDisabled: false
     };
+  },
+  created: function created() {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(this.initialEmail) && this.initialEmail.length > 0) {
+      this.email = this.initialEmail;
+    }
   },
   mounted: function mounted() {
     var _this = this;
