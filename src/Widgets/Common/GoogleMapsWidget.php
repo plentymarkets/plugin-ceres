@@ -14,54 +14,54 @@ class GoogleMapsWidget extends BaseWidget
 {
     use Loggable;
 
-    protected $template = "Ceres::Widgets.Common.GoogleMapsWidget";
+    protected $template = 'Ceres::Widgets.Common.GoogleMapsWidget';
 
-    public function getData()
+    public function getData(): array
     {
-        return WidgetDataFactory::make("Ceres::GoogleMapsWidget")
-            ->withLabel("Widget.googleMapsLabel")
-            ->withPreviewImageUrl("/images/widgets/google-maps.svg")
+        return WidgetDataFactory::make('Ceres::GoogleMapsWidget')
+            ->withLabel('Widget.googleMapsLabel')
+            ->withPreviewImageUrl('/images/widgets/google-maps.svg')
             ->withType(WidgetTypes::DEFAULT)
             ->withPosition(1050)
             ->toArray();
     }
 
-    public function getSettings()
+    public function getSettings(): array
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
 
-        $settings->createTextarea("address")
-            ->withName("Widget.googleMapsAddressLabel")
-            ->withTooltip("Widget.googleMapsAddressTooltip");
+        $settings->createTextarea('address')
+            ->withName('Widget.googleMapsAddressLabel')
+            ->withTooltip('Widget.googleMapsAddressTooltip');
 
-        $settings->createSelect("maptype")
-            ->withDefaultValue("roadmap")
-            ->withName("Widget.googleMapsMapTypeLabel")
-            ->withTooltip("Widget.googleMapsMapTypeTooltip")
+        $settings->createSelect('maptype')
+            ->withDefaultValue('roadmap')
+            ->withName('Widget.googleMapsMapTypeLabel')
+            ->withTooltip('Widget.googleMapsMapTypeTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
-                    ->addEntry("roadmap", "Widget.googleMapsMapTypeRoadmap")
-                    ->addEntry("satellite", "Widget.googleMapsMapTypeSatellite")
-                    ->addEntry("hybrid", "Widget.googleMapsMapTypeHybrid")
-                    ->addEntry("terrain", "Widget.googleMapsMapTypeTerrain")
+                    ->addEntry('roadmap', 'Widget.googleMapsMapTypeRoadmap')
+                    ->addEntry('satellite', 'Widget.googleMapsMapTypeSatellite')
+                    ->addEntry('hybrid', 'Widget.googleMapsMapTypeHybrid')
+                    ->addEntry('terrain', 'Widget.googleMapsMapTypeTerrain')
                     ->toArray()
             );
 
-        $settings->createNumber("zoom")
+        $settings->createNumber('zoom')
             ->withDefaultValue(16)
-            ->withName("Widget.googleMapsZoomLabel")
-            ->withTooltip("Widget.googleMapsZoomTooltip");
+            ->withName('Widget.googleMapsZoomLabel')
+            ->withTooltip('Widget.googleMapsZoomTooltip');
 
-        $settings->createSelect("aspectRatio")
-            ->withDefaultValue("prop-xs-3-1")
-            ->withName("Widget.googleMapsAspectRatioLabel")
-            ->withTooltip("Widget.googleMapsAspectRatioTooltip")
+        $settings->createSelect('aspectRatio')
+            ->withDefaultValue('prop-xs-3-1')
+            ->withName('Widget.googleMapsAspectRatioLabel')
+            ->withTooltip('Widget.googleMapsAspectRatioTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
-                    ->addEntry("prop-xs-3-1", "Widget.googleMapsAspectRatioThreeToOne")
-                    ->addEntry("prop-xs-2-1", "Widget.googleMapsAspectRatioTwoToOne")
-                    ->addEntry("prop-xs-1-1", "Widget.googleMapsAspectRatioOneToOne")
+                    ->addEntry('prop-xs-3-1', 'Widget.googleMapsAspectRatioThreeToOne')
+                    ->addEntry('prop-xs-2-1', 'Widget.googleMapsAspectRatioTwoToOne')
+                    ->addEntry('prop-xs-1-1', 'Widget.googleMapsAspectRatioOneToOne')
                     ->toArray()
             );
 
