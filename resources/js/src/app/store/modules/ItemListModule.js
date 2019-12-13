@@ -25,37 +25,9 @@ const mutations =
             {
                 if (!stateFacets.find(fac => fac.id === facet.id))
                 {
-                    facet.values.sort((facetA, facetB) =>
-                    {
-                        if (facetA.position > facetB.position)
-                        {
-                            return 1;
-                        }
-                        else if (facetA.position < facetB.position)
-                        {
-                            return -1;
-                        }
-
-                        return 0;
-                    });
-
                     stateFacets.push(facet);
                 }
             }
-
-            stateFacets.sort((facetA, facetB) =>
-            {
-                if (facetA.position > facetB.position)
-                {
-                    return 1;
-                }
-                else if (facetA.position < facetB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
 
             state.facets = stateFacets;
         },
@@ -65,23 +37,7 @@ const mutations =
          */
         setFacets(state, facets)
         {
-            facets = facets || [];
-
-            facets.sort((facetA, facetB) =>
-            {
-                if (facetA.position > facetB.position)
-                {
-                    return 1;
-                }
-                if (facetA.position < facetB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
-
-            state.facets = facets;
+            state.facets = facets || [];
         },
 
         setPriceFacet(state, { priceMin, priceMax })
