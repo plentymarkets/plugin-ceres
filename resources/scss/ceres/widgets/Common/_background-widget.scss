@@ -12,6 +12,17 @@
     }
     .container-max {
         z-index: 1;
-        align-items: flex-end;
+        
+        &.huge-font {
+            font-size: 35px;
+    
+            .widget-text {
+                h1 { font-size: 2em };
+                h2 { font-size: 1.8em };
+                h3 { font-size: 1.5em };
+                h4 { font-size: 1.25em };
+                * { font-size: 1em };
+            }
+        }
     }
 }
