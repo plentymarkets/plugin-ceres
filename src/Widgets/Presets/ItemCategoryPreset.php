@@ -101,7 +101,7 @@ class ItemCategoryPreset implements ContentPreset
                      <div class="category-description mb-3">{{ categoryDescription | raw }}</div>
                      <div class="category-description mb-3">{{ categoryDescription2 | raw }}</div>
                 {% else %}
-                    <div class="category-description mb-3">{% if descriptionSetting == "description1" %}{{ categoryDescription | raw }}{% elseif descriptionSetting == "description2" %}{{ categoryDescription2 | raw }}</div>
+                    <div class="category-description mb-3">{% if descriptionSetting == "description1" %}{{ categoryDescription | raw }}{% elseif descriptionSetting == "description2" %}{{ categoryDescription2 | raw }}{% endif %}seif</div>
                 {% endif %}';
 
         $codeWidget = $asChild
