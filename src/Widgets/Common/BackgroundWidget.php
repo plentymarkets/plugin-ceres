@@ -33,8 +33,18 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createCheckbox('fullWidth')
             ->withDefaultValue(true)
-            ->withName('Widget.backgroundFullWidthLabel')
-            ->withTooltip('Widget.backgroundFullWidthTooltip');
+            ->withName("Widget.backgroundFullWidthLabel")
+            ->withTooltip("Widget.backgroundFullWidthTooltip");
+
+        $settings->createCheckbox("hugeFont")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundHugeFontLabel")
+            ->withTooltip("Widget.backgroundHugeFontTooltip");
+            
+        $settings->createCheckbox("backgroundFixed")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundFixedLabel")
+            ->withTooltip("Widget.backgroundFixedTooltip");
 
         $settings->createColorPalette();
 
