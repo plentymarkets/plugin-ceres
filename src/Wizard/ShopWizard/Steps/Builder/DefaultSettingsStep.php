@@ -71,6 +71,7 @@ class DefaultSettingsStep extends Step
      */
     public function generateStep()
     {
+        /** @var DefaultSettingsService $wizardService */
         $wizardService = pluginApp(DefaultSettingsService::class);
 
         $shippingMethods = $wizardService->getShippingMethods();
@@ -97,22 +98,22 @@ class DefaultSettingsStep extends Step
         
         $b2bClassesList = StepHelper::buildListBoxData($b2bClasses);
 
-        $locations = $this->locationRepository->getAll();
-        $locationsList = StepHelper::buildListBoxData($locations, "name", "id");
+        $locations = $this->locationRepository->getAll()->toArray();
+        $locationsList = StepHelper::buildListBoxData($locations, 'name', 'id');
         
         return [
-            "title"       => "Wizard.defaultSettings",
-            "description" => "Wizard.defaultSettingsDescription",
-            "condition"   => $this->hasRequiredSettings(),
-            "sections"    => [
-                $this->generateSection("defaultLanguage", $languagesList, $this->globalsCondition),
-                $this->generateSection("defaultShippingMethod", $shippingMethodsList, $this->globalsCondition),
-                $this->generateSection("defaultShippingProfile", $shippingProfilesList, $this->globalsCondition),
-                $this->generateSection("defaultPaymentMethod", $paymentMethodsList, $this->globalsCondition),
-                $this->generateCountryDeliverySection("defaultDeliveryCountry", $deliveryCountries, $this->globalsCondition),
-                $this->generateSection("defaultB2C", $b2bClassesList, $this->globalsCondition),
-                $this->generateSection("defaultB2B",$b2bClassesList),
-                $this->generateSection("defaultLocation",$locationsList, $this->globalsCondition)
+            'title'       => 'Wizard.defaultSettings',
+            'description' => 'Wizard.defaultSettingsDescription',
+            'condition'   => $this->hasRequiredSettings(),
+            'sections'    => [
+                $this->generateSection('defaultLanguage', $languagesList, $this->globalsCondition),
+                $this->generateSection('defaultShippingMethod', $shippingMethodsList, $this->globalsCondition),
+                $this->generateSection('defaultShippingProfile', $shippingProfilesList, $this->globalsCondition),
+                $this->generateSection('defaultPaymentMethod', $paymentMethodsList, $this->globalsCondition),
+                $this->generateCountryDeliverySection('defaultDeliveryCountry', $deliveryCountries, $this->globalsCondition),
+                $this->generateSection('defaultB2C', $b2bClassesList, $this->globalsCondition),
+                $this->generateSection('defaultB2B',$b2bClassesList),
+                $this->generateSection('defaultLocation',$locationsList, $this->globalsCondition)
             ]
         ];
     }
@@ -126,15 +127,15 @@ class DefaultSettingsStep extends Step
     private function generateSection($name, $listBoxValues, $condition = true):array
     {
         return [
-            "title"       => "Wizard." . $name,
-            "description" => "Wizard." . $name . "Description",
-            "condition"   => $condition,
-            "form"        => [
-                "defSettings_" . $name => [
-                    "type"    => "select",
-                    "options" => [
-                        "name"          => "Wizard." . $name,
-                        "listBoxValues" => $listBoxValues
+            'title'       => 'Wizard.' . $name,
+            'description' => 'Wizard.' . $name . 'Description',
+            'condition'   => $condition,
+            'form'        => [
+                'defSettings_' . $name => [
+                    'type'    => 'select',
+                    'options' => [
+                        'name'          => 'Wizard.' . $name,
+                        'listBoxValues' => $listBoxValues
                     ]
                 ]
             ]
@@ -151,10 +152,10 @@ class DefaultSettingsStep extends Step
     private function generateCountryDeliverySection($name, $collection, $condition = true):array
     {
         return [
-            "title" => "Wizard." . $name,
-            "description" => "Wizard." . $name . "Description",
-            "condition" => $condition,
-            "form" => $this->generateCountriesList($collection)
+            'title' => 'Wizard.' . $name,
+            'description' => 'Wizard.' . $name . 'Description',
+            'condition' => $condition,
+            'form' => $this->generateCountriesList($collection)
         ];
     }
 
@@ -169,7 +170,7 @@ class DefaultSettingsStep extends Step
     
         $languages = LanguagesHelper::getTranslatedLanguages();
         $countryNames = $this->countryRepository->getActiveCountryNameMap(LanguagesHelper::getUserLang());
-        $prefix = $this->translator->trans("Ceres::Wizard.defaultDeliveryCountry");
+        $prefix = $this->translator->trans('Ceres::Wizard.defaultDeliveryCountry');
         if (count($countriesCollection)) {
             foreach ($languages as $langKey => $language) {
                 $settingKey = 'defSettings_deliveryCountry_' . $langKey;
@@ -178,11 +179,11 @@ class DefaultSettingsStep extends Step
 
                 if(count($countries)) {
                     $list[$settingKey] = [
-                        "type"    => "select",
-                        "options" => [
-                            "name"          => "{$prefix} {$language}",
+                        'type'    => 'select',
+                        'options' => [
+                            'name'          => "{$prefix} {$language}",
                             'required'      => true,
-                            "listBoxValues" => []
+                            'listBoxValues' => []
                         ]
                     ];
 
@@ -190,8 +191,8 @@ class DefaultSettingsStep extends Step
                         $countryData = $country->toArray();
 
                         $list[$settingKey]['options']['listBoxValues'][] = [
-                            "value"   => $countryData['id'],
-                            "caption" => $countryNames[$countryData['id']]
+                            'value'   => $countryData['id'],
+                            'caption' => $countryNames[$countryData['id']]
                         ];
                     }
                 }
