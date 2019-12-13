@@ -11963,6 +11963,8 @@ body.lb-disable-scrolling {
 }
 
 .owl-carousel .owl-item img {
+  // display block is required for lozad framework
+  display: block;
   width: 100%;
   -o-object-fit: contain;
      object-fit: contain;
