@@ -31,12 +31,6 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createCustomClass();
 
-        $settings->createSlider("opacity")
-            ->withDefaultValue(100)
-            ->withName("Widget.backgroundOpacityLabel")
-            ->withOption("inputInterval", 1)
-            ->withOption("inputMax", 100);
-
         $settings->createCheckbox('fullWidth')
             ->withDefaultValue(true)
             ->withName("Widget.backgroundFullWidthLabel")

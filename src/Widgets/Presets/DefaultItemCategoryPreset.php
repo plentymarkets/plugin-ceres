@@ -106,43 +106,24 @@ class DefaultItemCategoryPreset implements ContentPreset
                      <div class="category-description mb-3">{{ categoryDescription2 }}</div>
                 {% endif %}';
         
-        if($asChild)
-        {
-            $this->backgroundWidget->createChild('background','Ceres::CodeWidget')
-                                   ->withSetting("customClass", "")
-                                   ->withSetting("spacing.customPadding", true)
-                                   ->withSetting("spacing.padding.left.value", 0)
-                                   ->withSetting("spacing.padding.left.unit", null)
-                                   ->withSetting("spacing.padding.right.value", 0)
-                                   ->withSetting("spacing.padding.right.unit", null)
-                                   ->withSetting("spacing.padding.top.value", 0)
-                                   ->withSetting("spacing.padding.top.unit", null)
-                                   ->withSetting("spacing.padding.bottom.value", 0)
-                                   ->withSetting("spacing.padding.bottom.unit", null)
-                                   ->withSetting("spacing.customMargin", true)
-                                   ->withSetting("spacing.margin.bottom.value", 0)
-                                   ->withSetting("spacing.margin.bottom.unit", null)
-                                   ->withSetting('text', $text);
-        }
-        else
-        {
-            $this->preset->createWidget('Ceres::CodeWidget')
-                                   ->withSetting("customClass", "")
-                                   ->withSetting("spacing.customPadding", true)
-                                   ->withSetting("spacing.padding.left.value", 0)
-                                   ->withSetting("spacing.padding.left.unit", null)
-                                   ->withSetting("spacing.padding.right.value", 0)
-                                   ->withSetting("spacing.padding.right.unit", null)
-                                   ->withSetting("spacing.padding.top.value", 0)
-                                   ->withSetting("spacing.padding.top.unit", null)
-                                   ->withSetting("spacing.padding.bottom.value", 0)
-                                   ->withSetting("spacing.padding.bottom.unit", null)
-                                   ->withSetting("spacing.customMargin", true)
-                                   ->withSetting("spacing.margin.bottom.value", 0)
-                                   ->withSetting("spacing.margin.bottom.unit", null)
-                                   ->withSetting('text', $text);
-        }
-        
+        $codeWidget = $asChild
+        ? $this->backgroundWidget->createChild('background', 'Ceres::CodeWidget')
+        : $this->preset->createWidget('Ceres::CodeWidget');
+              
+        $codeWidget->withSetting("customClass", "")
+        ->withSetting("spacing.customPadding", true)
+        ->withSetting("spacing.padding.left.value", 0)
+        ->withSetting("spacing.padding.left.unit", null)
+        ->withSetting("spacing.padding.right.value", 0)
+        ->withSetting("spacing.padding.right.unit", null)
+        ->withSetting("spacing.padding.top.value", 0)
+        ->withSetting("spacing.padding.top.unit", null)
+        ->withSetting("spacing.padding.bottom.value", 0)
+        ->withSetting("spacing.padding.bottom.unit", null)
+        ->withSetting("spacing.customMargin", true)
+        ->withSetting("spacing.margin.bottom.value", 0)
+        ->withSetting("spacing.margin.bottom.unit", null)
+        ->withSetting('text', $text);
     }
 
     private function createToolbarWidget()
