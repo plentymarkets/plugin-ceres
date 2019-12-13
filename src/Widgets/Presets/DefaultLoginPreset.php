@@ -2,7 +2,6 @@
 
 namespace Ceres\Widgets\Presets;
 
-use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use IO\Extensions\Constants\ShopUrls;
 use IO\Helper\RouteConfig;
@@ -23,7 +22,10 @@ class DefaultLoginPreset implements ContentPreset
     /** @var Translator */
     private $translator;
 
-    public function getWidgets()
+    /**
+     * @return array
+     */
+    public function getWidgets(): array
     {
         $this->preset = pluginApp(PresetHelper::class);
         $this->translator = pluginApp(Translator::class);
@@ -41,7 +43,7 @@ class DefaultLoginPreset implements ContentPreset
         return $this->preset->toArray();
     }
 
-    private function createTwoColumnWidget()
+    private function createTwoColumnWidget(): void
     {
         $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
             ->withSetting('layout', 'oneToOne')
@@ -49,7 +51,7 @@ class DefaultLoginPreset implements ContentPreset
             ->withSetting('layoutMobile', 'stackedMobile');
     }
 
-    private function createTextWidgetLogin()
+    private function createTextWidgetLogin(): void
     {
         $this->twoColumnWidget->createChild('first', 'Ceres::InlineTextWidget')
             ->withSetting('customClass', 'h1')
@@ -71,7 +73,7 @@ class DefaultLoginPreset implements ContentPreset
             ->withSetting('spacing.margin.bottom.unit', null);
     }
 
-    private function createLoginWidget()
+    private function createLoginWidget(): void
     {
         $this->twoColumnWidget->createChild('first', 'Ceres::LoginWidget')
             ->withSetting('customClass', '')
@@ -80,7 +82,7 @@ class DefaultLoginPreset implements ContentPreset
             ->withSetting('spacing.margin.top.unit', null);
     }
 
-    private function createTextWidgetGuest()
+    private function createTextWidgetGuest(): void
     {
         $this->twoColumnWidget->createChild('second', 'Ceres::InlineTextWidget')
             ->withSetting('customClass', 'h1')
@@ -102,7 +104,7 @@ class DefaultLoginPreset implements ContentPreset
             ->withSetting('spacing.margin.bottom.unit', null);
     }
 
-    private function createGuestLoginWidget()
+    private function createGuestLoginWidget(): void
     {
         $this->twoColumnWidget->createChild('second', 'Ceres::GuestLoginWidget')
             ->withSetting('customClass', '')
@@ -111,7 +113,7 @@ class DefaultLoginPreset implements ContentPreset
             ->withSetting('spacing.margin.top.unit', null);
     }
 
-    private function createTextWidgetRegister()
+    private function createTextWidgetRegister(): void
     {
         $this->twoColumnWidget->createChild('first', 'Ceres::InlineTextWidget')
             ->withSetting('customClass', 'h1')
@@ -133,7 +135,7 @@ class DefaultLoginPreset implements ContentPreset
             ->withSetting('spacing.margin.bottom.unit', null);
     }
 
-    private function createRegisterLinkWidget()
+    private function createRegisterLinkWidget(): void
     {
         $registerLinkWidget = $this->twoColumnWidget->createChild('first', 'Ceres::LinkWidget')
             ->withSetting('customClass', '')
