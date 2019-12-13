@@ -60,7 +60,7 @@ class DefaultItemCategoryPreset implements ContentPreset
         if($this->ceresConfig->item->showCategoryImage)
         {
             $this->backgroundWidget = $this->preset->createWidget('Ceres::BackgroundWidget')
-                                                   ->withSetting('customClass', '')
+                                                   ->withSetting('customClass', 'align-items-end')
                                                    ->withSetting("spacing.customMargin", true)
                                                    ->withSetting("spacing.margin.bottom.value", 0)
                                                    ->withSetting("spacing.margin.bottom.unit", null)
@@ -70,6 +70,8 @@ class DefaultItemCategoryPreset implements ContentPreset
                                                    ->withSetting("backgroundRepeat", false)
                                                    ->withSetting("backgroundSize", "bg-cover")
                                                    ->withSetting("sourceType", "category-image1")
+                                                   ->withSetting("hugeFont", true)
+                                                   ->withSetting("colorPalette", "none")
                                                    ->withSetting("height.top.value", 4);
     
             $this->createInlineTextWidget();
@@ -94,7 +96,7 @@ class DefaultItemCategoryPreset implements ContentPreset
                 
                 {% set descriptionSetting = ceresConfig.item.showCategoryDescriptionTop %}
                 
-                <h1 class="h2 pt-4 category-title">{{ categoryName }}</h1>
+                <h1 class="pt-4 category-title">{{ categoryName }}</h1>
                 {% if descriptionSetting == "description1" %}
                      <div class="category-description mb-3">{{ categoryDescription }}</div>
                 {% elseif descriptionSetting == "description2" %}
