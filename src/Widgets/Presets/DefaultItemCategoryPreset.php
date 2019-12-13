@@ -62,7 +62,7 @@ class DefaultItemCategoryPreset implements ContentPreset
             $this->backgroundWidget = $this->preset->createWidget('Ceres::BackgroundWidget')
                                                    ->withSetting('customClass', 'align-items-end')
                                                    ->withSetting("spacing.customMargin", true)
-                                                   ->withSetting("spacing.margin.bottom.value", 0)
+                                                   ->withSetting("spacing.margin.bottom.value", 3)
                                                    ->withSetting("spacing.margin.bottom.unit", null)
                                                    ->withSetting("opacity", 100)
                                                    ->withSetting("fullWidth", true)
@@ -109,19 +109,19 @@ class DefaultItemCategoryPreset implements ContentPreset
         : $this->preset->createWidget('Ceres::CodeWidget');
               
         $codeWidget->withSetting("customClass", "text-white text-shadow")
-        ->withSetting("spacing.customPadding", true)
-        ->withSetting("spacing.padding.left.value", 0)
-        ->withSetting("spacing.padding.left.unit", null)
-        ->withSetting("spacing.padding.right.value", 0)
-        ->withSetting("spacing.padding.right.unit", null)
-        ->withSetting("spacing.padding.top.value", 0)
-        ->withSetting("spacing.padding.top.unit", null)
-        ->withSetting("spacing.padding.bottom.value", 0)
-        ->withSetting("spacing.padding.bottom.unit", null)
-        ->withSetting("spacing.customMargin", true)
-        ->withSetting("spacing.margin.bottom.value", 0)
-        ->withSetting("spacing.margin.bottom.unit", null)
-        ->withSetting('text', $text);
+                   ->withSetting("spacing.customPadding", true)
+                   ->withSetting("spacing.padding.left.value", 0)
+                   ->withSetting("spacing.padding.left.unit", null)
+                   ->withSetting("spacing.padding.right.value", 0)
+                   ->withSetting("spacing.padding.right.unit", null)
+                   ->withSetting("spacing.padding.top.value", 0)
+                   ->withSetting("spacing.padding.top.unit", null)
+                   ->withSetting("spacing.padding.bottom.value", 0)
+                   ->withSetting("spacing.padding.bottom.unit", null)
+                   ->withSetting("spacing.customMargin", true)
+                   ->withSetting("spacing.margin.bottom.value", 0)
+                   ->withSetting("spacing.margin.bottom.unit", null)
+                   ->withSetting('text', $text);
     }
 
     private function createToolbarWidget()
