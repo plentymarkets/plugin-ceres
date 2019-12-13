@@ -64,6 +64,8 @@
 }
 
 .owl-carousel .owl-item img {
+  // display block is required for lozad framework
+  display: block;
   width: 100%;
   object-fit: contain;
   height: 100%;
