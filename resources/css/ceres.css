@@ -12258,21 +12258,6 @@ html.ios select,
 html.ios textarea {
   font-size: 16px !important; }
 
-.bg-cover {
-  background-size: cover !important; }
-
-.bg-contain {
-  background-size: contain !important; }
-
-.bg-auto {
-  background-size: auto !important; }
-
-.bg-scroll {
-  background-attachment: scroll !important; }
-
-.bg-repeat {
-  background-repeat: repeat !important; }
-
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px; }
   .input-group .input-unit + .input-group-btn .btn {
@@ -17894,8 +17879,6 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
       visibility: hidden; }
       .order-property-slider .order-property-slider-inner > div.active {
         visibility: visible; }
-    .order-property-slider .order-property-slider-inner .form-check {
-      padding-left: 1.35rem; }
   .order-property-slider .order-property-slider-controls {
     display: -webkit-box;
     display: flex;
@@ -18396,22 +18379,6 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
 
 .widget-provider-select.widget-danger input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #d4021d; }
-
-.widget-background.widget {
-  width: auto; }
-
-.widget-background .parallax-img-container-inner {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  height: 100% !important; }
-
-.widget-background .container-max {
-  z-index: 1;
-  -webkit-box-align: end;
-          align-items: flex-end; }
 
 .widget.accordion div.card:first-of-type, .widget.accordion .cmp-address-list .items > div:first-of-type:first-child, .cmp-address-list .widget.accordion .items > div:first-of-type:first-child {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
@@ -19078,7 +19045,7 @@ html.ie .widget-grid .widget-inner-stacked {
 
 .widget-fw {
   position: relative;
-  width: 100vw !important;
+  width: 100vw;
   left: calc(-1 * (100vw - 100%) / 2) !important;
   right: 0 !important;
   margin-left: 0;

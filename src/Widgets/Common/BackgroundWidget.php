@@ -60,7 +60,6 @@ class BackgroundWidget extends BaseWidget
             ->withOption('inputInterval', 1)
             ->withOption('inputMax', 100);
 
-
         $settings->createHeight();
 
         $settings->createSpacing();
