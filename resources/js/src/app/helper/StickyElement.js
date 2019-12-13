@@ -109,6 +109,11 @@ export class StickyElement
                 this.animationFrame = 0;
             });
         }
+        else if (this.enabled && this.isMinWidth && this.position.isSticky)
+        {
+            this.checkElement();
+            this.updateStyles();
+        }
     }
 
     checkElement(skipOffsetCalculation)
