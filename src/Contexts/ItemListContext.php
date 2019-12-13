@@ -71,7 +71,7 @@ trait ItemListContext
                 $this->itemCountTotal   = $externalSearch->getCountTotal();
                 $this->facets           = [];
 
-                return 0;
+                return;
             }
         }
 
@@ -88,14 +88,14 @@ trait ItemListContext
     private function getSortedFacets($facets)
     {
         usort($facets,
-            function (int $facetA, int $facetB) {
-                return ($facetA->position <=> $facetB->position);
+            function ($facetA, $facetB) {
+                return ($facetA['position'] <=> $facetB['position']);
             });
 
-        foreach ($facets as $facet) {
-            usort($facet->values,
-                function (int $valueA, int $valueB) {
-                    return ($valueA->position <=> $valueB->position);
+        foreach ($facets as $i => $facet) {
+            usort($facets[$i]['values'],
+                function ($valueA, $valueB) {
+                    return ($valueA['position'] <=> $valueB['position']);
                 });
         }
 
