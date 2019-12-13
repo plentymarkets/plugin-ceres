@@ -12,6 +12,7 @@
 
 {% set appearance      = widget.settings.appearance.mobile | default("none") %}
 
+{{ Twig.if("services.facet.facetDataExists(facets, #{allowedFacetTypes | json_encode}) or #{ isPreview | json_encode }") }}
 <div class="widget widget-filter-base widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
@@ -24,3 +25,4 @@
         :padding-inline-styles="{{ inlinePadding | json_encode }}">
     </item-filter-list>
 </div>
+{{ Twig.endif() }}
