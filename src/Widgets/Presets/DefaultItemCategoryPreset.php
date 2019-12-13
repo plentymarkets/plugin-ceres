@@ -97,20 +97,18 @@ class DefaultItemCategoryPreset implements ContentPreset
                 {% set descriptionSetting = ceresConfig.item.showCategoryDescriptionTop %}
                 
                 <h1 class="pt-4 category-title">{{ categoryName }}</h1>
-                {% if descriptionSetting == "description1" %}
-                     <div class="category-description mb-3">{{ categoryDescription }}</div>
-                {% elseif descriptionSetting == "description2" %}
-                     <div class="category-description mb-3">{{ categoryDescription2 }}</div>
-                {% elseif descriptionSetting == "both" %}
+                {% if descriptionSetting == "both" %}
                      <div class="category-description mb-3">{{ categoryDescription }}</div>
                      <div class="category-description mb-3">{{ categoryDescription2 }}</div>
+                {% else %}
+                    <div class="category-description mb-3">{% if descriptionSetting == "description1" %}{{ categoryDescription }}{% elseif descriptionSetting == "description2" %}{{ categoryDescription2 }}</div>
                 {% endif %}';
         
         $codeWidget = $asChild
         ? $this->backgroundWidget->createChild('background', 'Ceres::CodeWidget')
         : $this->preset->createWidget('Ceres::CodeWidget');
               
-        $codeWidget->withSetting("customClass", "")
+        $codeWidget->withSetting("customClass", "text-white text-shadow")
         ->withSetting("spacing.customPadding", true)
         ->withSetting("spacing.padding.left.value", 0)
         ->withSetting("spacing.padding.left.unit", null)
