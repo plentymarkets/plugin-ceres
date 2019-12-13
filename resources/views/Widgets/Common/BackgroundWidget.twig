@@ -1,10 +1,11 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set opacity = (widget.settings.opacity.mobile | default(1)) / 100 %}
+{% set opacity = (widget.settings.opacity.mobile | default(100)) / 100 %}
 {% set fullWidth = widget.settings.fullWidth.mobile is same as (true) %}
-{% set heightClass  = WidgetHelper.getHeightClass(widget.settings) %}
-{% set inlineHeight = WidgetHelper.getInlineHeight(widget.settings) %}
+{% set hugeFont = widget.settings.hugeFont.mobile is same as (true) %}
+{% set minHeightClass  = WidgetHelper.getMinHeightClass(widget.settings) %}
+{% set inlineMinHeight = WidgetHelper.getInlineMinHeight(widget.settings) %}
 
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -14,9 +15,9 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 {% set sourceType = widget.settings.sourceType.mobile %}
-{% set customImageValue = widget.settings.customImagePath.value.mobile %}
-{% set customImageType = widget.settings.customImagePath.type.mobile %}
+{% set customImagePath = widget.settings.customImagePath.mobile %}
 {% set colorPalette = widget.settings.colorPalette.mobile %}
+{% set customColor = widget.settings.customColor.mobile %}
 
 {{ Twig.set("url", "" | json_encode) }}
     
@@ -29,41 +30,30 @@
     {{ Twig.set("url", "'/documents/' ~ url") }}
 
 {% elseif sourceType == "custom-image" %}
-    {{ Twig.set("url", customImageValue | json_encode) }}
-
-    {% if customImageType == "category" %}
-        {{ Twig.set("category", Twig.call("services.category.get", [customImageValue])) }}
-        {{ Twig.set("url", "category.details[0].imagePath") }}
-        {{ Twig.set("url", "'/documents/' ~ url") }}
-
-    {% elseif customImageType == "item" %}
-        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [customImageValue | int])) }}
-        {{ Twig.set("itemData", "itemData.documents[0].data") }}
-        {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
-        {{ Twig.set("url", "itemImage.url") }}
-
-    {% endif %}
-
+    {{ Twig.set("url", customImagePath | json_encode) }}
 {% endif %}
 
-{#
-<div class="border rounded border-danger mb-1">
-    {% if sourceType == "color" %}
-        <div class="bg-{{ colorPalette | default("primary") }} border rounded" style="height: 40px;"></div>
-
-    {% else %}
-        <img height="40" src="{{ Twig.print("url") }}" alt="">
-
-    {% endif %}
-</div>
-#}
-
-<div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if heightClass | length > 0 %} {{ heightClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
-     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlineHeight | length > 0 %} {{ inlineHeight }}{% endif %}">
+<div class="widget widget-background d-flex parallax-img-container{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if minHeightClass | length > 0 %} {{ minHeightClass }}{% endif %}{% if fullWidth %} widget-fw{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}{% endif %}">
     <div>
-        <div class="parallax-img-container-inner{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}"></div>
+        <div class="parallax-img-container-inner
+            {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
+            {% if colorPalette != "custom" and colorPalette != "none" %} bg-{{ colorPalette | default("none") }}{% endif %}
+            {% if isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %} widget-placeholder{% endif %}"
+
+            style="{% if sourceType != "none" %}background-image: url({{ Twig.print("url") }});{% endif %}
+                {% if opacity < 1 %} opacity:{{ opacity }};{% endif %}
+                {% if colorPalette == "custom" %} background-color: {{ customColor }}{% endif %}">
+
+            {% if isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %}
+                <div>
+                    <p class="title mb-0">{{ trans("Ceres::Widget.backgroundPlaceholderTitle") }}</p>
+                    <p class="description mt-3">{{ trans("Ceres::Widget.backgroundPlaceholderDescription") }}</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
-    <div class="container-max d-flex">
+    <div class="container-max d-flex{% if hugeFont %} huge-font{% endif %}">
         <div class="w-100{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
             {% if isPreview %} data-builder-child-container="background"{% endif %}>
             {{ children.background | raw }}

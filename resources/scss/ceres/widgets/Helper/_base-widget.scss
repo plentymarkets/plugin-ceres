@@ -246,6 +246,10 @@ header .widget
     text-align: justify;
 }
 
+.text-shadow {
+    text-shadow: 0 0 0.1em rgba(0,0,0,0.75);
+}
+
 .widget-alignment-center {
     .widget-alignment {
         display: flex;
