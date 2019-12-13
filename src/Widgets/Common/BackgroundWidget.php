@@ -41,6 +41,11 @@ class BackgroundWidget extends BaseWidget
             ->withDefaultValue(true)
             ->withName("Widget.backgroundFullWidthLabel")
             ->withTooltip("Widget.backgroundFullWidthTooltip");
+
+        $settings->createCheckbox("hugeFont")
+            ->withDefaultValue(false)
+            ->withName("Widget.backgroundHugeFontLabel")
+            ->withTooltip("Widget.backgroundHugeFontTooltip");
             
         $settings->createCheckbox("backgroundFixed")
             ->withDefaultValue(false)
