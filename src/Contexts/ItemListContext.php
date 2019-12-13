@@ -82,6 +82,23 @@ trait ItemListContext
         $this->pageMax          = ceil( $this->itemCountTotal / $options['itemsPerPage'] );
         $this->itemCountPage    = count( $searchResults['itemList']['documents'] );
         $this->itemList         = $searchResults['itemList']['documents'];
-        $this->facets           = $searchResults['facets'];
+        $this->facets           = $this->getSortedFacets($searchResults['facets']);
+    }
+
+    private function getSortedFacets($facets)
+    {
+        usort($facets,
+            function (int $facetA, int $facetB) {
+                return ($facetA->position <=> $facetB->position);
+            });
+
+        foreach ($facets as $facet) {
+            usort($facet->values,
+                function (int $valueA, int $valueB) {
+                    return ($valueA->position <=> $valueB->position);
+                });
+        }
+
+        return $facets;
     }
 }
