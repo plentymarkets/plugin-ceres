@@ -6,7 +6,7 @@ use Ceres\Helper\SearchOptions;
 use IO\Helper\ContextInterface;
 use IO\Services\ItemSearch\SearchPresets\TagItems;
 
-class TagSearchContext extends GlobalContext implements ContextInterface
+class TagSearchContext extends CategoryContext implements ContextInterface
 {
 
     use ItemListContext;
