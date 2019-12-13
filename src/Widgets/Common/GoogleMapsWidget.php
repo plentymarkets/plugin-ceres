@@ -118,7 +118,7 @@ class GoogleMapsWidget extends BaseWidget
                 'Google Maps API error',
                 [
                     'status' => $result['status'],
-                    'error message' => $result['error_message']
+                    'error' => $result['error_message']
                 ]
             );
         }
