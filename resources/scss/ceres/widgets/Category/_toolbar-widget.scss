@@ -1,0 +1,13 @@
+.widget-toolbar {
+    .widget {
+        margin-bottom: 0;
+    }
+
+    .filter-collapse {
+        > div {
+            background: $white;
+            border: 1px solid $gray-lighter2;
+            padding: 2rem;
+        }
+    }
+}

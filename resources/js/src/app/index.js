@@ -166,6 +166,7 @@ import "./directives/helper/waitingAnimationInfinite";
 
 import "./directives/navigation/navigationTouchHandler";
 import "./directives/navigation/openMobileNavigation";
+import "./directives/navigation/sidenavigationChildrenLoader";
 
 import "./directives/pageDesign/scrollToTop";
 import "./directives/pageDesign/stickInParent";

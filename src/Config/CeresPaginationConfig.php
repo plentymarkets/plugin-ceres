@@ -12,8 +12,9 @@ class CeresPaginationConfig extends PluginConfig
     public $showLastPage;
     public $columnsPerPage;
     public $rowsPerPage;
+    public $itemsPerPage;
     public $noIndex;
-    
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
@@ -22,6 +23,7 @@ class CeresPaginationConfig extends PluginConfig
         $this->showFirstPage    = $this->getBooleanValue( "pagination.showFirstPage", false );
         $this->showLastPage     = $this->getBooleanValue( "pagination.showLastPage", false );
         $this->columnsPerPage   = $this->getIntegerValue( "pagination.columnsPerPage", 4 );
+        $this->itemsPerPage     = $this->getIntegerValue( "pagination.itemsPerPage", 20 );
         $this->rowsPerPage      = $this->getMultiSelectValue(
             "pagination.rowsPerPage",
             [

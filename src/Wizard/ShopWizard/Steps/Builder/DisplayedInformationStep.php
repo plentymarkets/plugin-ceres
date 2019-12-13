@@ -119,8 +119,6 @@ class DisplayedInformationStep extends Step
      */
     private function generateCategoryView(): array
     {
-        $variationTypes               = ItemViewConfig::getItemVariationTypes();
-        $variationsTypesList          = StepHelper::generateTranslatedListBoxValues($variationTypes);
         $categoryDescriptionPositions = ItemViewConfig::getCategoryDescriptionPositions();
         $categoryDescriptionList      = StepHelper::generateTranslatedListBoxValues($categoryDescriptionPositions);
 
@@ -128,14 +126,6 @@ class DisplayedInformationStep extends Step
             "title" => "Wizard.displayedInfoCategoryViewType",
             "description" => "Wizard.displayedInfoCategoryViewTypeDescription",
             "form" => [
-                "displayInfo_variationType" => [
-                    "type" => "select",
-                    "defaultValue" => $variationsTypesList[0]['value'],
-                    "options" => [
-                        "name" => "Wizard.variationType",
-                        "listBoxValues" => $variationsTypesList
-                    ]
-                ],
                 "displayInfo_showCategoryImage" => [
                     "type" => "checkbox",
                     "defaultValue" => true,
@@ -201,7 +191,22 @@ class DisplayedInformationStep extends Step
                     "options" => [
                         "name" => "Wizard.requireOrderProperties",
                     ]
-                ]
+                ],
+                "displayInfo_showPleaseSelect" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.showPleaseSelect",
+                    ]
+                ],
+                "displayInfo_attributeSelectDefaultOption" => [
+                    "type" => "checkbox",
+                    "isVisible" => "displayInfo_showPleaseSelect",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.attributeSelectDefaultOption",
+                    ]
+                ],
             ]
         ];
     }

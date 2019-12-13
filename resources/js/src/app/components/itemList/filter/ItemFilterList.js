@@ -4,8 +4,6 @@ import { mapState } from "vuex";
 
 Vue.component("item-filter-list", {
 
-    delimiters: ["${", "}"],
-
     props: {
         template: {
             type: String,
@@ -17,6 +15,21 @@ Vue.component("item-filter-list", {
             {
                 return [];
             }
+        },
+        allowedFacetsTypes:
+        {
+            type: Array,
+            default: () => []
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -25,75 +38,22 @@ Vue.component("item-filter-list", {
         return {
             initialSelectedFacets: [],
             initialPriceMin: "",
-            initialPriceMax: "",
-            isActive: false
+            initialPriceMax: ""
         };
     },
 
     computed:
     {
-        isInitialFacetSelectionActive()
-        {
-            if (!this.isInitialPriceFacetActive)
-            {
-                return false;
-            }
-
-            const selectedFacetIds = this.selectedFacets.map(facet => facet.id);
-
-            if (this.initialSelectedFacets.length === selectedFacetIds.length)
-            {
-                for (const selectedFacetId of selectedFacetIds)
-                {
-                    if (!this.initialSelectedFacets.find(initialFacetId => initialFacetId.toString() === selectedFacetId.toString()))
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-
-            return false;
-        },
-
-        isInitialPriceFacetActive()
-        {
-            const currentPriceFacet = this.selectedFacets.filter(facet => facet.id === "price")[0];
-
-            // no initial price facet and no current one
-            if (!this.initialPriceMin && !this.initialPriceMax && !currentPriceFacet)
-            {
-                return true;
-            }
-
-            if (currentPriceFacet)
-            {
-                if (currentPriceFacet.priceMin === this.initialPriceMin && currentPriceFacet.priceMax === this.initialPriceMax)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        },
-
         ...mapState({
             facets(state)
             {
-                return state.itemList.facets.sort((facetA, facetB) =>
+                if (!this.allowedFacetsTypes.length)
                 {
-                    if (facetA.position > facetB.position)
-                    {
-                        return 1;
-                    }
-                    if (facetA.position < facetB.position)
-                    {
-                        return -1;
-                    }
+                    return state.itemList.facets;
+                }
 
-                    return 0;
-                });
+                return state.itemList.facets
+                    .filter(facet => this.allowedFacetsTypes.includes(facet.id) || this.allowedFacetsTypes.includes(facet.type));
             },
             isLoading: state => state.itemList.isLoading,
             selectedFacets: state => state.itemList.selectedFacets
@@ -102,51 +62,53 @@ Vue.component("item-filter-list", {
 
     created()
     {
-        this.$store.commit("setFacets", this.facetData);
+        this.$store.commit("addFacets", this.facetData);
 
-        const urlParams = UrlService.getUrlParams(document.location.search);
-
-        let selectedFacets = [];
-
-        if (urlParams.facets)
-        {
-            selectedFacets = urlParams.facets.split(",");
-        }
-
-        if (urlParams.priceMin || urlParams.priceMax)
-        {
-            const priceMin = urlParams.priceMin || "";
-            const priceMax = urlParams.priceMax || "";
-
-            this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
-
-            this.initialPriceMin = priceMin;
-            this.initialPriceMax = priceMax;
-
-            selectedFacets.push("price");
-        }
-
-        if (selectedFacets.length > 0)
-        {
-            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
-        }
-
-        this.initialSelectedFacets = selectedFacets;
+        this.initSelectedFacets();
     },
 
     methods:
     {
-        toggleOpeningState()
+        initSelectedFacets()
         {
-            window.setTimeout(() =>
-            {
-                if (this.isActive && !this.isInitialFacetSelectionActive)
-                {
-                    this.$store.dispatch("loadItemList");
-                }
+            const urlParams = UrlService.getUrlParams(document.location.search);
 
-                this.isActive = !this.isActive;
-            }, 300);
+            let selectedFacets = [];
+
+            if (urlParams.facets)
+            {
+                selectedFacets = urlParams.facets.split(",");
+            }
+
+            if (this.initPriceFacet(urlParams))
+            {
+                selectedFacets.push("price");
+            }
+
+            if (selectedFacets.length > 0)
+            {
+                this.$store.commit("setSelectedFacetsByIds", selectedFacets);
+            }
+
+            this.initialSelectedFacets = selectedFacets;
+        },
+
+        initPriceFacet(urlParams)
+        {
+            if (urlParams.priceMin || urlParams.priceMax)
+            {
+                const priceMin = urlParams.priceMin || "";
+                const priceMax = urlParams.priceMax || "";
+
+                this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+
+                this.initialPriceMin = priceMin;
+                this.initialPriceMax = priceMax;
+
+                return true;
+            }
+
+            return false;
         }
     }
 });

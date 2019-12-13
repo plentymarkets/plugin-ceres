@@ -36,6 +36,11 @@ Vue.component("category-item", {
         {
             type: String,
             default: null
+        },
+        urlWithVariationId:
+        {
+            type: Boolean,
+            default: true
         }
     },
 
