@@ -6,7 +6,7 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
-class DefaultItemSearchPreset implements ContentPreset
+class ItemSearchPreset implements ContentPreset
 {
     /** @var PresetHelper */
     private $preset;
@@ -48,7 +48,9 @@ class DefaultItemSearchPreset implements ContentPreset
     private function createSearchStringCodeWidget()
     {
         $this->preset->createWidget('Ceres::CodeWidget')
-                     ->withSetting('text', '<div class="row mt-3">
+                     ->withSetting('text', '
+                                            {% if category is empty and searchString is empty %}{% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}{% endif %}
+                                            <div class="row mt-3">
                                                 <div class="col-12">
                                                     <h1 class="h2" id="searchPageTitle">
                                                         {% if isTag %}
@@ -64,7 +66,8 @@ class DefaultItemSearchPreset implements ContentPreset
     private function createNoResultCodeWidget()
     {
         $this->preset->createWidget('Ceres::CodeWidget')
-                     ->withSetting('text', '{% if itemCountTotal <= 0 %}
+                     ->withSetting('text', '
+                                            {% if itemCountTotal <= 0 %}
                                                 <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
                                             {% endif%}');
     }

@@ -57121,6 +57121,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 
 
+/**
+ * @deprecated since version 4.5.0
+ *
+ * This component will be removed with the next major release
+ */
+
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("contact-map", {
   props: ["mapZoom", "zip", "street", "googleApiKey", "template"],
   mounted: function mounted() {
@@ -57131,6 +57137,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("contact-map", {
         _this.addScript("https://maps.googleapis.com/maps/api/js?key=" + _this.googleApiKey);
       }
     });
+    console.warn("contact-map is a deprecated vue component!");
   },
   methods: {
     initMap: function initMap() {
@@ -58136,6 +58143,10 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
     },
     backlink: {
       type: String
+    },
+    initialEmail: {
+      type: String,
+      default: ""
     }
   },
   data: function data() {
@@ -58143,6 +58154,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("guest-login", {
       email: "",
       isDisabled: false
     };
+  },
+  created: function created() {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(this.initialEmail) && this.initialEmail.length > 0) {
+      this.email = this.initialEmail;
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -66545,7 +66561,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("arrayFirst", function (array) {
-  console.warn("arrayFirst is a depricated vue filter!");
+  console.warn("arrayFirst is a deprecated vue filter!");
   return array[0];
 });
 
@@ -66573,7 +66589,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("attachText", function (item, text) {
-  console.warn("attachText is a depricated vue filter!");
+  console.warn("attachText is a deprecated vue filter!");
   return text + item;
 });
 

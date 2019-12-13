@@ -12995,6 +12995,7 @@ body.lb-disable-scrolling {
   height: 100%; }
 
 .owl-carousel .owl-item img {
+  display: block;
   width: 100%;
   -o-object-fit: contain;
      object-fit: contain;
@@ -18655,6 +18656,10 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
 .widget-background.widget {
   width: auto; }
 
+.widget-background.align-items-end .container-max {
+  -webkit-box-align: end;
+          align-items: flex-end; }
+
 .widget-background .parallax-img-container-inner {
   position: absolute;
   left: 0;
@@ -18664,9 +18669,24 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
   height: 100% !important; }
 
 .widget-background .container-max {
-  z-index: 1;
-  -webkit-box-align: end;
-          align-items: flex-end; }
+  z-index: 1; }
+  .widget-background .container-max.huge-font {
+    font-size: 35px; }
+    .widget-background .container-max.huge-font .widget-text h1,
+    .widget-background .container-max.huge-font .widget-code h1 {
+      font-size: 2em; }
+    .widget-background .container-max.huge-font .widget-text h2,
+    .widget-background .container-max.huge-font .widget-code h2 {
+      font-size: 1.8em; }
+    .widget-background .container-max.huge-font .widget-text h3,
+    .widget-background .container-max.huge-font .widget-code h3 {
+      font-size: 1.5em; }
+    .widget-background .container-max.huge-font .widget-text h4,
+    .widget-background .container-max.huge-font .widget-code h4 {
+      font-size: 1.25em; }
+    .widget-background .container-max.huge-font .widget-text *,
+    .widget-background .container-max.huge-font .widget-code * {
+      font-size: 1em; }
 
 .widget.accordion div.card:first-of-type, .widget.accordion .cmp-address-list .items > div:first-of-type:first-child, .cmp-address-list .widget.accordion .items > div:first-of-type:first-child {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
@@ -19821,6 +19841,9 @@ header .widget {
 
 .align-justify {
   text-align: justify; }
+
+.text-shadow {
+  text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.75); }
 
 .widget-alignment-center .widget-alignment {
   display: -webkit-box;
