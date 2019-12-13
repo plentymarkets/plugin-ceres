@@ -6,11 +6,11 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
-class DefaultItemSearchPreset implements ContentPreset
+class ItemSearchPreset implements ContentPreset
 {
     /** @var PresetHelper */
     private $preset;
-    
+
     /** @var PresetWidgetFactory */
     private $toolbarWidget;
 
@@ -36,15 +36,15 @@ class DefaultItemSearchPreset implements ContentPreset
         $this->createAvailabilityFilterWidget();
         $this->createManufacturerFilterWidget();
         $this->selectedFilterWidget();
-        
+
         $this->paginationWidget();
         $this->createItemGridWidget();
-        
+
         $this->createNoResultCodeWidget();
 
         return $this->preset->toArray();
     }
-    
+
     private function createSearchStringCodeWidget()
     {
         $this->preset->createWidget('Ceres::CodeWidget')
@@ -56,7 +56,7 @@ class DefaultItemSearchPreset implements ContentPreset
                                                 </div>
                                             </div>');
     }
-    
+
     private function createNoResultCodeWidget()
     {
         $this->preset->createWidget('Ceres::CodeWidget')
@@ -65,7 +65,7 @@ class DefaultItemSearchPreset implements ContentPreset
                                                 <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
                                             {% endif%}');
     }
-    
+
     private function createToolbarWidget()
     {
         $this->toolbarWidget = $this->preset->createWidget('Ceres::ToolbarWidget')

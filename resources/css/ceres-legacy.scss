@@ -11393,6 +11393,22 @@ html.ios {
     }
 }
 
+.bg-cover {
+    background-size: cover !important;
+}
+.bg-contain {
+    background-size: contain !important;
+}
+.bg-auto {
+    background-size: auto !important;
+}
+.bg-scroll {
+    background-attachment: scroll !important;
+}
+.bg-repeat {
+    background-repeat: repeat !important;
+}
+
 
 //TODO's
 .input-group{
@@ -19292,6 +19308,10 @@ html.crios {
                 visibility: visible;
             }
         }
+
+        .form-check {
+            padding-left: 1.35rem;
+        }
     }
     
     .order-property-slider-controls {
@@ -19928,6 +19948,25 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
+.widget-background {
+    &.widget {
+        width: auto;
+    }
+    .parallax-img-container-inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100% !important;
+    }
+    .container-max {
+        z-index: 1;
+        -webkit-box-align: end;
+            -ms-flex-align: end;
+                align-items: flex-end;
+    }
+}
 .widget.accordion {
     div.card {
         &:first-of-type {
@@ -20841,7 +20880,7 @@ html.ie .widget-grid .widget-inner-stacked {
 
 .widget-fw {
     position: relative;
-    width: 100vw;
+    width: 100vw !important;
     left: calc(-1 * (100vw - 100%) / 2) !important;
     right: 0 !important;
     margin-left: 0;
