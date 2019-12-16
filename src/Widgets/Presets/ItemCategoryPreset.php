@@ -71,19 +71,19 @@ class ItemCategoryPreset implements ContentPreset
         if ($this->ceresConfig->item->showCategoryImage) {
             $this->backgroundWidget = $this->preset->createWidget('Ceres::BackgroundWidget')
                                                    ->withSetting('customClass', 'align-items-end')
-                                                   ->withSetting("spacing.customMargin", true)
-                                                   ->withSetting("spacing.margin.bottom.value", 3)
-                                                   ->withSetting("spacing.margin.bottom.unit", null)
-                                                   ->withSetting("opacity", 100)
-                                                   ->withSetting("fullWidth", true)
-                                                   ->withSetting("backgroundFixed", true)
-                                                   ->withSetting("backgroundRepeat", false)
-                                                   ->withSetting("backgroundSize", "bg-cover")
-                                                   ->withSetting("sourceType", "category-image1")
-                                                   ->withSetting("hugeFont", true)
-                                                   ->withSetting("colorPalette", "none")
-                                                   ->withSetting("height.top.value", 4);
-            
+                                                   ->withSetting('spacing.customMargin', true)
+                                                   ->withSetting('spacing.margin.bottom.value', 3)
+                                                   ->withSetting('spacing.margin.bottom.unit', null)
+                                                   ->withSetting('opacity', 100)
+                                                   ->withSetting('fullWidth', true)
+                                                   ->withSetting('backgroundFixed', true)
+                                                   ->withSetting('backgroundRepeat', false)
+                                                   ->withSetting('backgroundSize', 'bg-cover')
+                                                   ->withSetting('sourceType', 'category-image1')
+                                                   ->withSetting('hugeFont', true)
+                                                   ->withSetting('colorPalette', 'none')
+                                                   ->withSetting('height.top.value', 4);
+
             $this->createInlineTextWidget();
         } else {
             $this->createInlineTextWidget(false);
@@ -117,22 +117,22 @@ class ItemCategoryPreset implements ContentPreset
                 {% endif %}';
         
         $codeWidget = $asChild
-            ? $this->backgroundWidget->createChild('background', 'Ceres::CodeWidget')
-            : $this->preset->createWidget('Ceres::CodeWidget');
-        
-        $codeWidget->withSetting("customClass", "text-white text-shadow")
-                   ->withSetting("spacing.customPadding", true)
-                   ->withSetting("spacing.padding.left.value", 0)
-                   ->withSetting("spacing.padding.left.unit", null)
-                   ->withSetting("spacing.padding.right.value", 0)
-                   ->withSetting("spacing.padding.right.unit", null)
-                   ->withSetting("spacing.padding.top.value", 0)
-                   ->withSetting("spacing.padding.top.unit", null)
-                   ->withSetting("spacing.padding.bottom.value", 0)
-                   ->withSetting("spacing.padding.bottom.unit", null)
-                   ->withSetting("spacing.customMargin", true)
-                   ->withSetting("spacing.margin.bottom.value", 0)
-                   ->withSetting("spacing.margin.bottom.unit", null)
+        ? $this->backgroundWidget->createChild('background', 'Ceres::CodeWidget')
+        : $this->preset->createWidget('Ceres::CodeWidget');
+
+        $codeWidget->withSetting('customClass', 'text-white text-shadow')
+                   ->withSetting('spacing.customPadding', true)
+                   ->withSetting('spacing.padding.left.value', 0)
+                   ->withSetting('spacing.padding.left.unit', null)
+                   ->withSetting('spacing.padding.right.value', 0)
+                   ->withSetting('spacing.padding.right.unit', null)
+                   ->withSetting('spacing.padding.top.value', 0)
+                   ->withSetting('spacing.padding.top.unit', null)
+                   ->withSetting('spacing.padding.bottom.value', 0)
+                   ->withSetting('spacing.padding.bottom.unit', null)
+                   ->withSetting('spacing.customMargin', true)
+                   ->withSetting('spacing.margin.bottom.value', 0)
+                   ->withSetting('spacing.margin.bottom.unit', null)
                    ->withSetting('text', $text);
     }
     
@@ -140,80 +140,84 @@ class ItemCategoryPreset implements ContentPreset
     {
         $this->toolbarWidget = $this->preset->createWidget('Ceres::ToolbarWidget')
                                             ->withSetting('customClass', '')
-                                            ->withSetting("spacing.customMargin", true)
-                                            ->withSetting("spacing.margin.bottom.value", 4)
-                                            ->withSetting("spacing.margin.bottom.unit", null);
+                                            ->withSetting('spacing.customMargin', true)
+                                            ->withSetting('spacing.margin.bottom.value', 4)
+                                            ->withSetting('spacing.margin.bottom.unit', null);
     }
     
     private function createItemSortingWidget()
     {
-        $this->toolbarWidget->createChild("toolbar", "Ceres::ItemSortingWidget")
+        $this->toolbarWidget->createChild('toolbar', 'Ceres::ItemSortingWidget')
                             ->withSetting('customClass', '')
-                            ->withSetting(
-                                'itemSortOptions',
-                                [
-                                    "texts.name1_asc",
-                                    "texts.name1_desc",
-                                    "sorting.price.avg_asc",
-                                    "sorting.price.avg_desc"
-                                ]
+                            ->withSetting('itemSortOptions',
+                                          [
+                                              'texts.name1_asc',
+                                              'texts.name1_desc',
+                                              'sorting.price.avg_asc',
+                                              'sorting.price.avg_desc'
+                                          ]
                             );
     }
     
     private function createItemsPerPageWidget()
     {
-        $this->toolbarWidget->createChild("toolbar", "Ceres::ItemsPerPageWidget")
-                            ->withSetting('customClass', '');
+        $this->toolbarWidget->createChild('toolbar', 'Ceres::ItemsPerPageWidget')
+                            ->withSetting('customClass', '')
+                            ->withSetting('entries', [
+                                ['text' => '20'],
+                                ['text' => '40'],
+                                ['text' => '100']
+                            ]);
     }
     
     private function createThreeColumnWidget()
     {
-        $this->threeColumnWidget = $this->toolbarWidget->createChild("collapsable", "Ceres::ThreeColumnWidget")
+        $this->threeColumnWidget = $this->toolbarWidget->createChild('collapsable', 'Ceres::ThreeColumnWidget')
                                                        ->withSetting('customClass', '')
                                                        ->withSetting('layout', 'oneToOneToOne');
     }
     
     private function createAttributesPropertiesCharacteristicsFilterWidget()
     {
-        $this->threeColumnWidget->createChild("first", "Ceres::AttributesPropertiesCharacteristicsFilterWidget")
+        $this->threeColumnWidget->createChild('first', 'Ceres::AttributesPropertiesCharacteristicsFilterWidget')
                                 ->withSetting('customClass', '');
     }
     
     private function createPriceFilterWidget()
     {
-        $this->threeColumnWidget->createChild("second", "Ceres::PriceFilterWidget")
+        $this->threeColumnWidget->createChild('second', 'Ceres::PriceFilterWidget')
                                 ->withSetting('customClass', '')
-                                ->withSetting("spacing.customMargin", true)
-                                ->withSetting("spacing.margin.bottom.value", 4)
-                                ->withSetting("spacing.margin.bottom.unit", null);
+                                ->withSetting('spacing.customMargin', true)
+                                ->withSetting('spacing.margin.bottom.value', 4)
+                                ->withSetting('spacing.margin.bottom.unit', null);
     }
     
     private function createAvailabilityFilterWidget()
     {
-        $this->threeColumnWidget->createChild("second", "Ceres::AvailabilityFilterWidget")
+        $this->threeColumnWidget->createChild('second', 'Ceres::AvailabilityFilterWidget')
                                 ->withSetting('customClass', '');
     }
     
     private function createManufacturerFilterWidget()
     {
-        $this->threeColumnWidget->createChild("third", "Ceres::ManufacturerFilterWidget")
+        $this->threeColumnWidget->createChild('third', 'Ceres::ManufacturerFilterWidget')
                                 ->withSetting('customClass', '');
     }
     
     private function selectedFilterWidget()
     {
-        $this->preset->createWidget("Ceres::SelectedFilterWidget")
+        $this->preset->createWidget('Ceres::SelectedFilterWidget')
                      ->withSetting('customClass', '')
                      ->withSetting('appearance', 'primary')
                      ->withSetting('alignment', 'right')
-                     ->withSetting("spacing.customMargin", true)
-                     ->withSetting("spacing.margin.bottom.value", 2)
-                     ->withSetting("spacing.margin.bottom.unit", null);
+                     ->withSetting('spacing.customMargin', true)
+                     ->withSetting('spacing.margin.bottom.value', 2)
+                     ->withSetting('spacing.margin.bottom.unit', null);
     }
     
     private function paginationWidget()
     {
-        $this->preset->createWidget("Ceres::PaginationWidget")
+        $this->preset->createWidget('Ceres::PaginationWidget')
                      ->withSetting('alignment', 'right');
     }
     
@@ -221,8 +225,8 @@ class ItemCategoryPreset implements ContentPreset
     {
         $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
                                               ->withSetting('layout', 'threeToNine')
-                                              ->withSetting("layoutTablet", "threeToNine")
-                                              ->withSetting("layoutMobile", "stackedMobile");
+                                              ->withSetting('layoutTablet', 'threeToNine')
+                                              ->withSetting('layoutMobile', 'stackedMobile');
     }
     
     private function createNavigationTreeWidget()
