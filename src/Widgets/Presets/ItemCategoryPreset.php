@@ -12,8 +12,6 @@ class ItemCategoryPreset implements ContentPreset
     /** @var CeresConfig */
     private $ceresConfig;
     
-    private $contentContainer;
-    
     /** @var bool */
     private $showNavigationTree = false;
     
