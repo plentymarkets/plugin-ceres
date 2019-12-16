@@ -95,7 +95,7 @@ class DefaultSettingsService
         $pluginPaymentMethodsRegistered = [];
         if (count($paymentMethods)) {
             foreach ($paymentMethods as $paymentMethod) {
-                $registeringKey = $paymentMethod->pluginKey . "::" . $paymentMethod->paymentKey;
+                $registeringKey = $paymentMethod->pluginKey . '::' . $paymentMethod->paymentKey;
                 if ($paymentMethodContainer->isRegistered($registeringKey)) {
                     $pluginPaymentMethodsRegistered[$paymentMethod->id] = $paymentMethod->name;
                 }
@@ -143,7 +143,7 @@ class DefaultSettingsService
             foreach ($shippingProfiles as $profile) {
                 $shippingMethod = $profile->parcelService;
                 if($shippingMethod instanceof ParcelService) {
-                    $shippingMethods[$shippingMethod->id] = $shippingMethod->backendName;
+                    $shippingMethods[(float)$shippingMethod->id] = $shippingMethod->backendName;
                 }
             }
         }
@@ -156,7 +156,7 @@ class DefaultSettingsService
      */
     public function hasLocations(): bool
     {
-        $locations = $this->accountingLocationRepo->getAll();
+        $locations = $this->accountingLocationRepo->getAll()->toArray();
         return count($locations) ? true : false;
     }
 
@@ -175,7 +175,7 @@ class DefaultSettingsService
         $pluginSetsData = $pluginSets->toArray();
         $pluginSetList = [];
         if (count($pluginSetsData)) {
-            $plugin = $pluginRepo->getPluginByName("Ceres");
+            $plugin = $pluginRepo->getPluginByName('Ceres');
             if ($plugin instanceof Plugin) {
                 foreach ($pluginSetsData as $pluginSetData) {
                     $pluginSet = $pluginSets->where('id', '=', $pluginSetData['id'])->first();

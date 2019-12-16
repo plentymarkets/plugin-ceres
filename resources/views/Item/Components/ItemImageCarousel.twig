@@ -3,20 +3,20 @@
         <div class="single-carousel owl-carousel owl-theme owl-single-item" ref="single">
             <div v-for="image in singleImages" class="prop-xs-1-1">
                 <a :href="image.url" data-lightbox="single-big-image-gallery">
-                    <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getItemName()" itemprop="image">
+                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getItemName()"></lazy-img>
                 </a>
             </div>
         </div>
         <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
             <div class="prop-xs-1-1" v-for="(imagePreview, index) in carouselImages">
-                <div class="image-container">
-                    <img
-                        @click="goTo(index)"
+                <div class="image-container" @click="goTo(index)">
+                    <lazy-img
                         class="owl-thumb border-appearance"
                         v-bind:class="{ 'active': currentItem === index}"
-                        :src="imagePreview.url"
+                        :image-url="imagePreview.url"
                         :alt="getAltText(imagePreview)"
                         :title="getItemName()">
+                    </lazy-img>
                 </div>  
             </div>
         </div>

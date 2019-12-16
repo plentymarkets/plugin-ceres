@@ -6,6 +6,6 @@ import Vue from "vue";
  */
 Vue.filter("arrayFirst", function(array)
 {
-    console.warn("arrayFirst is a depricated vue filter!");
+    console.warn("arrayFirst is a deprecated vue filter!");
     return array[0];
 });
