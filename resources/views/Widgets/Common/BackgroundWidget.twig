@@ -63,9 +63,11 @@
                 {% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
 
             {% if isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %}
-                <div>
-                    <p class="title mb-0">{{ trans("Ceres::Widget.backgroundPlaceholderTitle") }}</p>
-                    <p class="description mt-3">{{ trans("Ceres::Widget.backgroundPlaceholderDescription") }}</p>
+                <div class="widget-placeholder">
+                    <div>
+                        <p class="title mb-0">{{ trans("Ceres::Widget.backgroundPlaceholderTitle") }}</p>
+                        <p class="description mt-3">{{ trans("Ceres::Widget.backgroundPlaceholderDescription") }}</p>
+                    </div>
                 </div>
             {% endif %}
         </div>
