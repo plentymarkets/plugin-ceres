@@ -18651,6 +18651,21 @@ html.crios {
             transform: translateY(-50%);
 }
 
+.item-filter-price
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+
+    > .input-group
+    {
+        margin-right: $spacer;
+    }
+}
 .homepage-title {
 	padding: 1rem 1.5rem;
 	border-bottom: 0;
@@ -19931,23 +19946,24 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
-.widget-grid .widget-two-col,
-.widget-two-col .col-lg-3,
-.widget-two-col .col-lg-4,
-.widget-two-col .col-lg-5,
-.widget-three-col,
-.widget-four-col {
-    .widget-filter-price {
-        .row {
+.widget-grid .col-lg-2,
+.widget-grid .col-lg-3,
+.widget-grid .widget-grid
+{
+    .widget-filter-price
+    {
+        .item-filter-price
+        {
             display: block;
+            text-align: right;
 
-            .input-group {
-                max-width: 100%;
+            > .input-group
+            {
+                margin-bottom: 1rem;
             }
         }
     }
 }
-
 .widget-selected-filter
 {
     &.widget-alignment-left {
