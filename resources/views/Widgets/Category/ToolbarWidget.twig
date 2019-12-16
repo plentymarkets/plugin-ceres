@@ -25,7 +25,7 @@
                 {{ children.toolbar | raw }}
             </div>
 
-            {{ Twig.if("overrideSearchFilters | trim is empty and ( #{ isPreview | json_encode } or children.collapsable )") }}
+            {{ Twig.if("overrideSearchFilters | trim is empty and (#{isPreview | json_encode} or #{children.collapsable | trim | length > 0 | json_encode})") }}
             <div class="d-flex widget-{{ appearance }}">
                 <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}">
                     {%- if icon != "none" -%}
