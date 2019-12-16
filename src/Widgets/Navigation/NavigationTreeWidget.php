@@ -46,20 +46,20 @@ class NavigationTreeWidget extends BaseWidget
         
         $container = $settings->createVerticalContainer('customEntries')
                               ->withList(1)
-                              ->withName('Widget.categoryNavigationCustomEntries');
+                              ->withName('Widget.navigationTreeCustomEntries');
         
         $container->children->createText('text')
                             ->withDefaultValue('')
-                            ->withName('Widget.categoryNavigationCustomEntriesLabel')
-                            ->withTooltip('Widget.categoryNavigationCustomEntriesTooltip');
+                            ->withName('Widget.navigationTreeCustomEntriesLabel')
+                            ->withTooltip('Widget.navigationTreeCustomEntriesTooltip');
         
         $container->children->createUrl('url')
-                            ->withName('Widget.categoryNavigationCustomEntriesUrlLabel')
-                            ->withTooltip('Widget.categoryNavigationCustomEntriesUrlTooltip');
+                            ->withName('Widget.navigationTreeCustomEntriesUrlLabel')
+                            ->withTooltip('Widget.navigationTreeCustomEntriesUrlTooltip');
         
         $container->children->createText('position')
-                            ->withName('Widget.categoryNavigationCustomEntriesPositionLabel')
-                            ->withTooltip('Widget.categoryNavigationCustomEntriesPositionTooltip');
+                            ->withName('Widget.navigationTreeCustomEntriesPositionLabel')
+                            ->withTooltip('Widget.navigationTreeCustomEntriesPositionTooltip');
         
         $spacingContainer = $settings->createVerticalContainer('spacing')
                                      ->withName('Widget.widgetSpacing');
