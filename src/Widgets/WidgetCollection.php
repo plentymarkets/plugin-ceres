@@ -225,7 +225,6 @@ class WidgetCollection
         ToolbarWidget::class,
         PaginationWidget::class,
         NavigationTreeWidget::class,
-        StepByStepNavigationWidget::class,
         SelectedFilterWidget::class,
         AttributesPropertiesCharacteristicsFilterWidget::class,
         AvailabilityFilterWidget::class,
