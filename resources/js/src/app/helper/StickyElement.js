@@ -23,16 +23,7 @@ export class StickyElement
         this.isMinWidth = true;
         this.checkMinWidth();
 
-        this.resizeListener = () =>
-        {
-            this.checkMinWidth();
-
-            if (this.enabled && this.position.isSticky && this.isMinWidth)
-            {
-                this.checkElement();
-                this.updateStyles();
-            }
-        };
+        this.resizeListener = this.checkMinWidth.bind(this);
 
         window.addEventListener("resize", this.resizeListener);
 
@@ -62,7 +53,7 @@ export class StickyElement
             this.el.parentNode.insertBefore(this.placeholder, this.el);
             this.eventListener = () =>
             {
-                if (this.enabled && !this.isMinWidth)
+                if (this.shouldUpdate())
                 {
                     this.checkElement();
                 }
@@ -116,11 +107,16 @@ export class StickyElement
 
     tick()
     {
-        if (this.enabled && !this.isMinWidth)
+        if (this.shouldUpdate())
         {
             this.updateStyles();
         }
         this.animationFrame = requestAnimationFrame(this.tick.bind(this));
+    }
+
+    shouldUpdate()
+    {
+        return (this.enabled && !this.isMinWidth) || (this.position || {}).isSticky;
     }
 
     checkElement(skipOffsetCalculation)
