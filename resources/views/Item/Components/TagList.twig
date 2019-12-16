@@ -1,0 +1,22 @@
+{% set enabledRoutes = config('IO.routing.enabled_routes') | split(", ") %}
+
+<script type="x/template" id="vue-tag-list">
+    <div v-if="tags" class="pt-1 pb-1">
+        {% if "all" in enabledRoutes or "tags" in enabledRoutes %}
+            <a v-for="tag in tags"
+               v-bind:href="getTagLink(tag)"
+               class="badge mr-1"
+               :class="[tagAppearance, marginClasses, getTextColorClass(tag.color)]"
+               :style="[getStyles(tag), marginInlineStyles]">
+                <span>${ tag.names.name }</span>
+            </a>
+        {% else %}
+            <span v-for="tag in tags"
+               class="badge mr-1"
+               :class="[tagAppearance, marginClasses, getTextColorClass(tag.color)]"
+               :style="[getStyles(tag), marginInlineStyles]">
+                <span>${ tag.names.name }</span>
+            </span>
+        {% endif %}
+    </div>
+</script>

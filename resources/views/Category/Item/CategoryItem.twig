@@ -31,10 +31,16 @@
 
         <div class="categoriegrid page-content container-max">
 
-            {% if category is not defined and itemList is not empty %}
+            {% if isSearch %}
                 <div class="row mt-3">
                     <div class="col-12">
-                        <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
+                        <h1 class="h2" id="searchPageTitle">
+                            {% if isTag %}
+                                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
+                            {% else %}
+                                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
+                            {% endif %}
+                        </h1>
                     </div>
                 </div>
             {% endif %}
@@ -48,7 +54,7 @@
                         {% endif %}
                         {% if ceresConfig.item.showCategoryDescriptionTop in ["description2", "both"] and category.details[0].description2 | trim is not empty %}
                             <div class="category-description mb-3">{{ category.details[0].description2 | raw }}</div>
-                        {% endif %}k
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}

@@ -52,7 +52,13 @@ class ItemSearchPreset implements ContentPreset
                                             {% if category is empty and searchString is empty %}{% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}{% endif %}
                                             <div class="row mt-3">
                                                 <div class="col-12">
-                                                    <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
+                                                    <h1 class="h2" id="searchPageTitle">
+                                                        {% if isTag %}
+                                                                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
+                                                            {% else %}
+                                                                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
+                                                        {% endif %}
+                                                    </h1>
                                                 </div>
                                             </div>');
     }

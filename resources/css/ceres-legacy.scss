@@ -11031,6 +11031,23 @@ $flag-icon-square-path: '/1x1' !default;
 	padding-bottom: .5rem;
 	border-bottom: 1px solid $gray-lighter;
 }
+
+.text-context-dark
+{
+	color: $yiq-text-dark !important;
+	&:hover
+	{
+		color: $yiq-text-dark !important;
+	}
+}
+.text-context-light
+{
+	color: $yiq-text-light !important;
+	&:hover
+	{
+		color: $yiq-text-light !important;
+	}
+}
 body .wrapper-main{
     overflow-x: hidden;
 }

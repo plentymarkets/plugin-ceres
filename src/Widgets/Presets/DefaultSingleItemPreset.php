@@ -45,6 +45,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createStickyContainer();
         $this->createManufacturer();
         $this->createNameHeader();
+        $this->createTagsWidget();
         $this->createSeparatorWidget();
         $this->createItemVariationNumber();
         $this->createItemBundleWidget();
@@ -301,6 +302,18 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.margin.bottom.value', 3)
             ->withSetting('spacing.margin.bottom.unit', null)
             ->withSetting('forceContent', false);
+    }
+
+    private function createTagsWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::TagsWidget')
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.bottom.value', 1)
+            ->withSetting('spacing.margin.bottom.unit', null)
+            ->withSetting('spacing.margin.top.value', 1)
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('spacing.margin.right.value', 1)
+            ->withSetting('spacing.margin.right.unit', null);
     }
 
     private function getShopBuilderDataFieldProvider($provider,$itemDataFields)

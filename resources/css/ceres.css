@@ -11901,6 +11901,16 @@ a.text-dark:hover, a.color-dark:hover, a.text-dark:focus, a.color-dark:focus {
   padding-bottom: .5rem;
   border-bottom: 1px solid #dcdbd8; }
 
+.text-context-dark {
+  color: #212529 !important; }
+  .text-context-dark:hover {
+    color: #212529 !important; }
+
+.text-context-light {
+  color: #fff !important; }
+  .text-context-light:hover {
+    color: #fff !important; }
+
 body .wrapper-main {
   overflow-x: hidden; }
 
