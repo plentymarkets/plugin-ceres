@@ -16,7 +16,7 @@
 
 {% set sourceType = widget.settings.sourceType.mobile %}
 {% set customImagePath = widget.settings.customImagePath.mobile %}
-{% set colorPalette = widget.settings.colorPalette.mobile %}
+{% set colorPalette = widget.settings.colorPalette.mobile | default("none") %}
 {% set customColor = widget.settings.customColor.mobile %}
 
 {{ Twig.set("url", "" | json_encode) }}
