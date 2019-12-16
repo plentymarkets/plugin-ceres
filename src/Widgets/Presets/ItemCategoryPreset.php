@@ -150,7 +150,12 @@ class ItemCategoryPreset implements ContentPreset
     private function createItemsPerPageWidget()
     {
         $this->toolbarWidget->createChild("toolbar", "Ceres::ItemsPerPageWidget")
-                            ->withSetting('customClass', '');
+                            ->withSetting('customClass', '')
+                            ->withSetting('entries', [
+                                ['text' => '20'],
+                                ['text' => '40'],
+                                ['text' => '100']
+                            ]);
     }
 
     private function createThreeColumnWidget()
