@@ -277,3 +277,14 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.item-filter-price
+{
+    display: flex;
+    flex-direction: row;
+
+    > .input-group
+    {
+        margin-right: $spacer;
+    }
+}
