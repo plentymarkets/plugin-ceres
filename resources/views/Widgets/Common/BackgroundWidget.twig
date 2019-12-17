@@ -72,7 +72,7 @@
             {% endif %}
         </div>
     </div>
-    <div class="container-max d-flex{% if hugeFont %} huge-font{% endif %}">
+    <div class="container-max d-flex{% if hugeFont %} huge-font{% endif %}{% if not fullWidth %} px-0{% endif %}">
         <div class="w-100{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
             {% if isPreview %} data-builder-child-container="background"{% endif %}>
             {{ children.background | raw }}
