@@ -88,7 +88,6 @@ use Ceres\Widgets\MyAccount\LogoutButtonWidget;
 use Ceres\Widgets\MyAccount\OrderHistoryWidget;
 use Ceres\Widgets\MyAccount\OrderReturnHistoryWidget;
 use Ceres\Widgets\Navigation\NavigationTreeWidget;
-use Ceres\Widgets\Navigation\StepByStepNavigationWidget;
 use Ceres\Widgets\OrderConfirmation\OrderDataWidget;
 use Ceres\Widgets\OrderConfirmation\OrderDocumentsWidget;
 use Ceres\Widgets\OrderConfirmation\OrderReturnWidget;
@@ -225,7 +224,6 @@ class WidgetCollection
         ToolbarWidget::class,
         PaginationWidget::class,
         NavigationTreeWidget::class,
-        StepByStepNavigationWidget::class,
         SelectedFilterWidget::class,
         AttributesPropertiesCharacteristicsFilterWidget::class,
         AvailabilityFilterWidget::class,
