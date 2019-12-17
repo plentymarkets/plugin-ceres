@@ -198,10 +198,11 @@ class DefaultSettingsService
      */
     public function getWebstores(): array
     {
+        /** @var WebstoreRepositoryContract $webstoreRepo */
         $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);
         $webstores = [];
 
-        $webstoresCollection = $webstoreRepo->loadAllPreview();
+        $webstoresCollection = $webstoreRepo->loadAll();
 
         if (count($webstoresCollection)) {
             foreach ($webstoresCollection as $webstore) {
