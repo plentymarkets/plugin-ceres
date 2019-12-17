@@ -118,8 +118,7 @@ class ItemCategoryPreset implements ContentPreset
         ? $this->backgroundWidget->createChild('background', 'Ceres::CodeWidget')
         : $this->preset->createWidget('Ceres::CodeWidget');
 
-        $codeWidget->withSetting('customClass', 'text-white text-shadow')
-                   ->withSetting('spacing.customPadding', true)
+        $codeWidget->withSetting('spacing.customPadding', true)
                    ->withSetting('spacing.padding.left.value', 0)
                    ->withSetting('spacing.padding.left.unit', null)
                    ->withSetting('spacing.padding.right.value', 0)
@@ -132,6 +131,14 @@ class ItemCategoryPreset implements ContentPreset
                    ->withSetting('spacing.margin.bottom.value', 0)
                    ->withSetting('spacing.margin.bottom.unit', null)
                    ->withSetting('text', $text);
+
+        if ($descriptionSettingKey == 'Top') {
+            $codeWidget->withSetting('customClass', 'text-white text-shadow');
+        }
+        else
+        {
+            $codeWidget->withSetting('customClass', '');
+        }
     }
     
     private function createToolbarWidget()

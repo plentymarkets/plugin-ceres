@@ -21,6 +21,7 @@
 
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("hasUrl", "false") }}
+{{ Twig.set("hasColor", "false") }}
 
 {% if sourceType == "category-image1" %}
     {{ Twig.set("url", "category.details[0].imagePath") }}
@@ -38,9 +39,7 @@
 {{ Twig.endif() }}
 
 {% if colorPalette != "none" %}
-    {{ Twig.set("hasColor", "true")}}
-{% else %}
-    {{ Twig.set("hasColor", "false")}}
+    {{ Twig.set("hasColor", "true") }}
 {% endif %}
 
 {% set showPlaceholder = isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %}
@@ -64,7 +63,7 @@
                 {% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
         </div>
     </div>
-    <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}{% if hugeFont %} huge-font{% endif %}">
+    <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}">
 
         {% if showPlaceholder %}
             <div class="widget-placeholder">
@@ -75,7 +74,7 @@
             </div>
         {% endif %}
 
-        <div class="w-100{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+        <div class="w-100{% if hugeFont %} huge-font{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
             {% if isPreview %} data-builder-child-container="background"{% endif %}>
             {{ children.background | raw }}
         </div>
