@@ -12986,7 +12986,7 @@ body.lb-disable-scrolling {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none; }
 
-.owl-single-item .owl-item .image-container, .owl-single-item .owl-item a {
+.single-carousel.owl-single-item .image-container, .single-carousel.owl-single-item a, .owl-thumbs.owl-single-item .image-container, .owl-thumbs.owl-single-item a {
   position: absolute;
   top: 0;
   left: 0;
@@ -17473,19 +17473,19 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
       .widget-navigation-tree ul li a[href]:hover {
         color: #282d2f;
         background: #f7f7f9; }
-      .sidebar-categories ul li a[href] span.placeholder,
-      .widget-navigation-tree ul li a[href] span.placeholder {
-        background: #7a7f7f;
-        opacity: .1;
-        -webkit-animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
-                animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
-        color: transparent;
-        width: 10%;
-        border-radius: 3px;
-        display: inline-block; }
     .sidebar-categories ul li a:not([href]),
     .widget-navigation-tree ul li a:not([href]) {
       cursor: auto; }
+    .sidebar-categories ul li a span.placeholder,
+    .widget-navigation-tree ul li a span.placeholder {
+      background: #7a7f7f;
+      opacity: .1;
+      -webkit-animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
+              animation: mobile-nav-placeholder 0.8s infinite ease-in-out;
+      color: transparent;
+      width: 10%;
+      border-radius: 3px;
+      display: inline-block; }
     .sidebar-categories ul li ul,
     .widget-navigation-tree ul li ul {
       display: none; }
@@ -18673,22 +18673,22 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
 
 .widget-background .container-max {
   z-index: 1; }
-  .widget-background .container-max.huge-font {
+  .widget-background .container-max .huge-font {
     font-size: 35px; }
-    .widget-background .container-max.huge-font .widget-text h1,
-    .widget-background .container-max.huge-font .widget-code h1 {
+    .widget-background .container-max .huge-font .widget-text h1,
+    .widget-background .container-max .huge-font .widget-code h1 {
       font-size: 2em; }
-    .widget-background .container-max.huge-font .widget-text h2,
-    .widget-background .container-max.huge-font .widget-code h2 {
+    .widget-background .container-max .huge-font .widget-text h2,
+    .widget-background .container-max .huge-font .widget-code h2 {
       font-size: 1.8em; }
-    .widget-background .container-max.huge-font .widget-text h3,
-    .widget-background .container-max.huge-font .widget-code h3 {
+    .widget-background .container-max .huge-font .widget-text h3,
+    .widget-background .container-max .huge-font .widget-code h3 {
       font-size: 1.5em; }
-    .widget-background .container-max.huge-font .widget-text h4,
-    .widget-background .container-max.huge-font .widget-code h4 {
+    .widget-background .container-max .huge-font .widget-text h4,
+    .widget-background .container-max .huge-font .widget-code h4 {
       font-size: 1.25em; }
-    .widget-background .container-max.huge-font .widget-text *,
-    .widget-background .container-max.huge-font .widget-code * {
+    .widget-background .container-max .huge-font .widget-text *,
+    .widget-background .container-max .huge-font .widget-code * {
       font-size: 1em; }
 
 .widget.accordion div.card:first-of-type, .widget.accordion .cmp-address-list .items > div:first-of-type:first-child, .cmp-address-list .widget.accordion .items > div:first-of-type:first-child {
