@@ -4,7 +4,7 @@
 
 ### TODO
 
-- Um die Weiterleitung von Tags auf verlinkte Artikel nutzen zu können, muss die Route **/tags** im Menü **Routing » Routen aktivieren** der **IO**-Konfiguration aktiviert werden.
+- Um die Weiterleitung von Tags auf verlinkte Artikel nutzen zu können, muss die Route **Tags** im Menü **Routing » Routen aktivieren** der **IO**-Konfiguration aktiviert werden.
 - Da Tags nun in der Artikeleinzelansicht sichtbar sind, sollten Tag-Namen und -Verlinkungen im Menü **Einrichtung » Einstellungen » Tags** überprüft werden, um die Anzeige von ungewolltem Inhalt zu vermeiden.
 - Falls "Ab"-Preise in der Artikeleinzelansicht verwendet werden sollen, muss der Übersetzungseintrag "dynamicVariationPrice" unter **Template** im Menü **CMS » Mehrsprachigkeit** angepasst werden.
 - Der Filter für Artikelbewertungen wurde in das Plugin **Kunden-Feedback** ausgelagert. Für die Einbindung eines Artikelbewertungs-Filter muss dieses Plugin auf die aktuelle Version 3.3 angehoben werden.
