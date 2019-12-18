@@ -107,7 +107,7 @@
                 {% endif %}
             {% endif %}
 
-            {% if entry.position == loop.parent.loop.index %}
+            {% if entry.position == loop.parent.loop.index or entry.position == 0 and loop.parent.loop.index == 1 %}
             <ul>
                 <li class="nav-item">
                     <a {% if realUrl is not empty %}href="{{ realUrl }}"{% endif %} class="nav-link
