@@ -9,7 +9,7 @@
 {{ Twig.set("itemSortOptions", itemSortOptions | json_encode) }}
 {{ Twig.set("translations", translations | json_encode) }}
 
-<div class="widget widget-item-sorting d-sm-inline-block{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-item-sorting{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
         <div class="list-sort">
             <select
