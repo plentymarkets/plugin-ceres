@@ -18507,7 +18507,11 @@ html.crios {
                     color: $gray-darker;
                     background: $gray-lightest;
                 }
-
+            }
+            a:not([href]) {
+                cursor: auto; 
+            }
+            a {
                 span.placeholder
                 {
                     background: $gray;
@@ -18519,9 +18523,6 @@ html.crios {
                     border-radius: 3px;
                     display: inline-block;	
                 }
-            }
-            a:not([href]) {
-                cursor: auto; 
             }
             ul {
                 display: none;
