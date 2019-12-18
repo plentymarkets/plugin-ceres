@@ -12986,7 +12986,7 @@ body.lb-disable-scrolling {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none; }
 
-.owl-single-item .owl-item .image-container, .owl-single-item .owl-item a {
+.single-carousel.owl-single-item .image-container, .single-carousel.owl-single-item a, .owl-thumbs.owl-single-item .image-container, .owl-thumbs.owl-single-item a {
   position: absolute;
   top: 0;
   left: 0;
