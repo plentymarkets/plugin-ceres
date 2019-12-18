@@ -30,7 +30,8 @@ class IconSettingFactory extends BaseSettingFactory
             ->addEntry('fa-truck', 'Widget.widgetIconTruck')
             ->addEntry('fa-phone', 'Widget.widgetIconPhone')
             ->addEntry('fa-copyright', 'Widget.widgetIconCopyright')
-            ->addEntry('fa-registered', 'Widget.widgetIconRegistered');
+            ->addEntry('fa-registered', 'Widget.widgetIconRegistered')
+            ->addEntry('fa-sliders', 'Widget.widgetIconSliders');
 
         $this->withOption('listBoxValues', $valueListFactory->toArray());
     }

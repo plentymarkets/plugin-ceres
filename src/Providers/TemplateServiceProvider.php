@@ -13,6 +13,7 @@ use Ceres\Contexts\OrderConfirmationContext;
 use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\PasswordResetContext;
 use Ceres\Contexts\SingleItemContext;
+use Ceres\Contexts\TagSearchContext;
 use Ceres\Extensions\TwigItemDataField;
 use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
@@ -78,7 +79,8 @@ class TemplateServiceProvider extends ServiceProvider
             'tpl.item-not-found' => ['StaticPages.ItemNotFound', GlobalContext::class],
             'tpl.page-not-found' => ['StaticPages.PageNotFound', GlobalContext::class],
             'tpl.newsletter.opt-out' => ['Newsletter.NewsletterOptOut', GlobalContext::class],
-            'tpl.mail.contact' => ['Customer.Components.Contact.ContactMail', GlobalContext::class]
+            'tpl.mail.contact' => ['Customer.Components.Contact.ContactMail', GlobalContext::class],
+            'tpl.tags' => ['Category.Item.CategoryItem', TagSearchContext::class]
         ];
 
     public function register()
@@ -111,36 +113,48 @@ class TemplateServiceProvider extends ServiceProvider
         $twig->addExtension(TwigJsonDataContainer::class);
         $twig->addExtension(TwigItemDataField::class);
 
-        $this->listenToIO('tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
-            if (!$templateContainer->hasTemplate()) {
+        $this->listenToIO(
+            'tpl.*',
+            function (TemplateContainer $templateContainer, $templateData = []) {
+                if (!$templateContainer->hasTemplate()) {
+                    $this->setTemplateAndContext($templateContainer);
+                }
+            }
+        );
+
+        $this->listenToIO(
+            'ctx.*',
+            function (TemplateContainer $templateContainer, $templateData = []) {
                 $this->setTemplateAndContext($templateContainer);
             }
-        });
+        );
 
-        $this->listenToIO('ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
-            $this->setTemplateAndContext($templateContainer);
-        });
+        $this->listenToIO(
+            'ResultFields.*',
+            function (ResultFieldTemplate $templateContainer) {
+                $templateContainer->setTemplates(
+                    [
+                        ResultFieldTemplate::TEMPLATE_LIST_ITEM => 'Ceres::ResultFields.ListItem',
+                        ResultFieldTemplate::TEMPLATE_SINGLE_ITEM => 'Ceres::ResultFields.SingleItem',
+                        ResultFieldTemplate::TEMPLATE_BASKET_ITEM => 'Ceres::ResultFields.BasketItem',
+                        ResultFieldTemplate::TEMPLATE_AUTOCOMPLETE_ITEM_LIST => 'Ceres::ResultFields.AutoCompleteListItem',
+                        ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
+                        ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
+                    ]
+                );
+            }
+        );
 
-        $this->listenToIO('ResultFields.*', function (ResultFieldTemplate $templateContainer) {
-            $templateContainer->setTemplates([
-                ResultFieldTemplate::TEMPLATE_LIST_ITEM => 'Ceres::ResultFields.ListItem',
-                ResultFieldTemplate::TEMPLATE_SINGLE_ITEM => 'Ceres::ResultFields.SingleItem',
-                ResultFieldTemplate::TEMPLATE_BASKET_ITEM => 'Ceres::ResultFields.BasketItem',
-                ResultFieldTemplate::TEMPLATE_AUTOCOMPLETE_ITEM_LIST => 'Ceres::ResultFields.AutoCompleteListItem',
-                ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
-                ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
-            ]);
-        });
-
-        $this->listenToIO('init.templates', function (Partial $partial) {
-
-            $partial->set('head', 'Ceres::PageDesign.Partials.Head');
-            $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');
-            $partial->set('footer', 'Ceres::PageDesign.Partials.Footer');
-            $partial->set('page-design', 'Ceres::PageDesign.PageDesign');
-            $partial->set('page-metadata', 'Ceres::PageDesign.Partials.PageMetadata');
-
-        });
+        $this->listenToIO(
+            'init.templates',
+            function (Partial $partial) {
+                $partial->set('head', 'Ceres::PageDesign.Partials.Head');
+                $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');
+                $partial->set('footer', 'Ceres::PageDesign.Partials.Footer');
+                $partial->set('page-design', 'Ceres::PageDesign.PageDesign');
+                $partial->set('page-metadata', 'Ceres::PageDesign.Partials.PageMetadata');
+            }
+        );
 
         $eventDispatcher->listen(AfterBuildPlugins::class, CeresAfterBuildPlugins::class);
     }

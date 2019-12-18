@@ -79,7 +79,7 @@
 
 .widget-fw {
     position: relative;
-    width: 100vw;
+    width: 100vw !important;
     left: calc(-1 * (100vw - 100%) / 2) !important;
     right: 0 !important;
     margin-left: 0;
@@ -213,11 +213,11 @@ header .widget
 /*
  * INLINE EDITOR CLASSES
  */
-@each $color, $value in $shop-builder-colors
+@each $color, $value in map-merge($shop-builder-colors, ("dark": $dark, "light": $light))
 {
     .color-#{$color}
     {
-        color: $value !important;
+        @extend .text-#{$color};
     }
 
     .bg-#{$color}
@@ -244,4 +244,21 @@ header .widget
 .align-justify
 {
     text-align: justify;
+}
+
+.text-shadow {
+    text-shadow: 0 0 0.1em rgba(0,0,0,0.75);
+}
+
+.widget-alignment-center {
+    .widget-alignment {
+        display: flex;
+        justify-content: center;
+    }
+}
+.widget-alignment-right {
+    .widget-alignment {
+        display: flex;
+        justify-content: flex-end;
+    }
 }

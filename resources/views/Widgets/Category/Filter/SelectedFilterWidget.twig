@@ -1,0 +1,34 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+
+{% set paddingKey = false %}
+{% if spacingSettings.customPadding.mobile %}
+    {% set paddingKey = "padding" %}
+{% endif %}
+
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, "", paddingKey) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, "", paddingKey) %}
+
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
+{% set appearance      = widget.settings.appearance.mobile | default("primary") %}
+{% set alignment     = widget.settings.alignment.mobile | default("left") %}
+
+<div class="widget widget-selected-filter widget-{{ appearance }} widget-alignment-{{ alignment }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+        {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+    <div class="list-controls widget-alignment">
+        <item-filter-tag-list
+                template="#vue-item-filter-tag-list"
+                :margin-classes       ="{{ spacingPadding | json_encode }}"
+                :margin-inline-styles ="{{ inlinePadding | json_encode }}">
+        </item-filter-tag-list>
+    </div>
+
+</div>

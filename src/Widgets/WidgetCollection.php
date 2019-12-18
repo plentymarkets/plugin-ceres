@@ -6,6 +6,17 @@ use Ceres\Widgets\Basket\BasketTotalsWidget;
 use Ceres\Widgets\Basket\BasketWidget;
 use Ceres\Widgets\Basket\CouponWidget;
 use Ceres\Widgets\Basket\ShippingCountryWidget;
+use Ceres\Widgets\Category\Filter\AttributesPropertiesCharacteristicsFilterWidget;
+use Ceres\Widgets\Category\Filter\AvailabilityFilterWidget;
+use Ceres\Widgets\Category\Filter\CategoryFilterWidget;
+use Ceres\Widgets\Category\Filter\ManufacturerFilterWidget;
+use Ceres\Widgets\Category\Filter\PriceFilterWidget;
+use Ceres\Widgets\Category\Filter\SelectedFilterWidget;
+use Ceres\Widgets\Category\ItemGridWidget;
+use Ceres\Widgets\Category\ItemSortingWidget;
+use Ceres\Widgets\Category\ItemsPerPageWidget;
+use Ceres\Widgets\Category\PaginationWidget;
+use Ceres\Widgets\Category\ToolbarWidget;
 use Ceres\Widgets\Checkout\CancelPaymentWidget;
 use Ceres\Widgets\Checkout\ContactWishWidget;
 use Ceres\Widgets\Checkout\GtcCheckWidget;
@@ -14,6 +25,7 @@ use Ceres\Widgets\Checkout\PlaceOrderWidget;
 use Ceres\Widgets\Checkout\ShippingPrivacyCheckWidget;
 use Ceres\Widgets\Checkout\ShippingProfileWidget;
 use Ceres\Widgets\Checkout\SubscribeNewsletterCheckWidget;
+use Ceres\Widgets\Common\BackgroundWidget;
 use Ceres\Widgets\Common\CodeWidget;
 use Ceres\Widgets\Common\CollapseWidget;
 use Ceres\Widgets\Common\GoogleMapsWidget;
@@ -63,6 +75,7 @@ use Ceres\Widgets\Item\ItemDataTableWidget;
 use Ceres\Widgets\Item\ItemImageWidget;
 use Ceres\Widgets\Item\ItemPriceWidget;
 use Ceres\Widgets\Item\OrderPropertyWidget;
+use Ceres\Widgets\Item\TagsWidget;
 use Ceres\Widgets\Item\WishListWidget;
 use Ceres\Widgets\Legal\LegalTextsWidget;
 use Ceres\Widgets\Login\GuestLoginWidget;
@@ -74,6 +87,7 @@ use Ceres\Widgets\MyAccount\GreetingWidget;
 use Ceres\Widgets\MyAccount\LogoutButtonWidget;
 use Ceres\Widgets\MyAccount\OrderHistoryWidget;
 use Ceres\Widgets\MyAccount\OrderReturnHistoryWidget;
+use Ceres\Widgets\Navigation\NavigationTreeWidget;
 use Ceres\Widgets\OrderConfirmation\OrderDataWidget;
 use Ceres\Widgets\OrderConfirmation\OrderDocumentsWidget;
 use Ceres\Widgets\OrderConfirmation\OrderReturnWidget;
@@ -101,6 +115,7 @@ class WidgetCollection
     ];
 
     const COMMON_WIDGETS = [
+        BackgroundWidget::class,
         CodeWidget::class,
         CollapseWidget::class,
         GoogleMapsWidget::class,
@@ -171,7 +186,8 @@ class WidgetCollection
         ItemImageWidget::class,
         ItemPriceWidget::class,
         OrderPropertyWidget::class,
-        WishListWidget::class
+        WishListWidget::class,
+        TagsWidget::class
     ];
 
     const LEGAL_WIDGETS = [
@@ -201,6 +217,21 @@ class WidgetCollection
         PurchasedItemsWidget::class
     ];
 
+    const CATEGORY_ITEM_WIDGETS = [
+        ItemSortingWidget::class,
+        ItemsPerPageWidget::class,
+        ItemGridWidget::class,
+        ToolbarWidget::class,
+        PaginationWidget::class,
+        NavigationTreeWidget::class,
+        SelectedFilterWidget::class,
+        AttributesPropertiesCharacteristicsFilterWidget::class,
+        AvailabilityFilterWidget::class,
+        CategoryFilterWidget::class,
+        ManufacturerFilterWidget::class,
+        PriceFilterWidget::class
+    ];
+
     public static function all()
     {
         return array_merge(
@@ -217,7 +248,8 @@ class WidgetCollection
             self::LEGAL_WIDGETS,
             self::LOGIN_WIDGETS,
             self::MY_ACCOUNT_WIDGETS,
-            self::ORDER_CONFIRMATION_WIDGETS
+            self::ORDER_CONFIRMATION_WIDGETS,
+            self::CATEGORY_ITEM_WIDGETS
         );
     }
 

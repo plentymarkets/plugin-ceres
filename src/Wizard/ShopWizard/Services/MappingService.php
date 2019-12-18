@@ -97,7 +97,7 @@ class MappingService
                 $matchedValue = $value;
                 break;
             case "boolean":
-                $matchedValue = $value == 'true' || $value == '1' ? true : false;
+                $matchedValue = $value === true || $value === 'true' || $value === '1' || $value === 1 ? true : false;
                 break;
             case "integer":
                 $matchedValue = intval($value);

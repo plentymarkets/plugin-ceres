@@ -45,7 +45,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <guest-login backlink="{{ backlink | url_encode }}"></guest-login>
+                        <guest-login backlink="{{ backlink | url_encode }}" :initial-email="{{ services.sessionStorage.getSessionValue("guestEmail") | json_encode }}"></guest-login>
                     </div>       
                 </div>
             </div>

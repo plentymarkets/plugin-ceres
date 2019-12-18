@@ -3,4 +3,4 @@
 {% set lang = services.sessionStorage.getLang() %}
 {% set categoryBreadcrumbs = services.category.getHierarchy() %}
 
-{{ Tree.get_sidemenu(categoryBreadcrumbs, categories, "") }}
+{{ Tree.get_sidemenu(categoryBreadcrumbs, categories, "", spacingPadding, inlinePadding, showItemCount, expandableChildren, customEntries) }}

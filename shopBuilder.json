@@ -16,12 +16,14 @@
         ]
     },
     "allowedTypes": {
-        "header":       ["header", "static", "structure", "default"],
-        "footer":       ["footer", "static", "structure", "default"],
-        "content":      ["static", "structure", "default"],
-        "singleitem":   ["static", "structure", "default", "item"],
+        "categoryitem": ["static", "structure", "default", "categoryitem", "customer"],
+        "itemsearch":   ["static", "structure", "default", "categoryitem", "customer"],
         "checkout":     ["static", "structure", "default", "checkout", "customer"],
-        "myaccount":    ["static", "structure", "default", "myaccount", "customer"]
+        "content":      ["static", "structure", "default"],
+        "footer":       ["footer", "static", "structure", "default"],
+        "header":       ["header", "static", "structure", "default"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer"],
+        "singleitem":   ["static", "structure", "default", "item"]
     },
     "presets": {
         "header": [
@@ -118,8 +120,19 @@
               "presetClass": "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset"
             }
         ],
-        "singleitem":
-        [
+        "categoryitem": [
+            {
+                "label": "Widget.presetItemCategoryDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\ItemCategoryPreset"
+            }
+        ],
+        "itemsearch": [
+            {
+              "label": "Widget.presetItemSearchDefault",
+              "presetClass": "Ceres\\Widgets\\Presets\\ItemSearchPreset"
+            }
+        ],
+        "singleitem": [
             {
                 "label":"Widget.presetSingleItemDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleItemPreset"
@@ -189,6 +202,16 @@
             "key": "orderconfirmation",
             "label": "Widget.categoryOrderConfirmation",
             "position": 1200
+        },
+        {
+            "key": "categoryitem",
+            "label": "Widget.categoryCategoryItem",
+            "position": 1300
+        },
+        {
+            "key": "navigation",
+            "label": "Widget.categoryNavigation",
+            "position": 1400
         },
         {
             "key": "footer",
@@ -265,6 +288,22 @@
                     "isVisible": "!routing.myAccountCategory",
                     "options": {
                         "name": "Config.routingEnableRouteMyAccount"
+                    }
+                },
+                "searchCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryItemSearch"
+                    }
+                },
+                "searchEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.searchCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteItemSearch"
                     }
                 },
                 "loginCategory": {
@@ -580,6 +619,8 @@
     },
     "globalSettingsHandler": "Ceres\\ShopBuilder\\Handler\\ShopBuilderSettingsHandler",
     "supportedFeatures": {
+        "categoryItemContent": true,
+        "itemSearchContent": true,
         "singleItemContent": true,
         "globalElementsOverride": true,
         "safeMode" : true

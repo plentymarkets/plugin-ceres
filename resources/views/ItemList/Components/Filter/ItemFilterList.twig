@@ -3,11 +3,11 @@
         {{ component( "Ceres::ItemList.Components.Filter.ItemFilter") }}
         {{ component( "Ceres::ItemList.Components.Filter.ItemFilterPrice") }}
 
-        <a class="btn btn-link filter-toggle" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse" @click="toggleOpeningState()">
+        <a class="btn btn-link filter-toggle" data-toggle="collapse" :href="'#filter-collapse_' + _uid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
             <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ trans("Ceres::Template.itemFilter") }}
         </a>
 
-        <div class="collapse" :class="{show: isActive}" id="filterCollapse">
+        <div class="filter-collapse collapse" :id="'filter-collapse_' + _uid">
             <div class="container-max page-content component-loading" :class="{ 'isLoading': isLoading }">
                 <div class="card-columns">
                     <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
@@ -15,10 +15,9 @@
 
                 <div class="row">
                     <div class="col-12 text-right">
-                        <button type="button" class="btn btn-primary btn-medium-large" data-toggle="collapse" href="#filterCollapse" aria-controls="filterCollapse" @click="toggleOpeningState()">
-                            <i :class="{ 'fa-times': isInitialFacetSelectionActive, 'fa-check': !isInitialFacetSelectionActive }" class="fa" aria-hidden="true"></i>
-                            <span v-if="isInitialFacetSelectionActive">{{ trans("Ceres::Template.itemClose") }}&nbsp;</span>
-                            <span v-else>{{ trans("Ceres::Template.itemFilterApply") }}&nbsp;</span>
+                        <button type="button" class="btn btn-primary btn-medium-large" data-toggle="collapse" :href="'#filter-collapse_' + _uid" :aria-controls="'filter-collapse_' + _uid">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <span>{{ trans("Ceres::Template.itemClose") }}&nbsp;</span>
                         </button>
                     </div>
                 </div>

@@ -485,12 +485,12 @@ nav.navbar.megamenu {
 		}
 	}
 
-	.nav-placeholder
+ 	.nav-placeholder
 	{
+		display: block;
 		height: 25px;
 		width: 200px;
-		display: inline;
-		background: #fff;
+		background: $black;
 		margin: 1rem;
 		border-radius: 3px;
 		opacity: 0.1;
