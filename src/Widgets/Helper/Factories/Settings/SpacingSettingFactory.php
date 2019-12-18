@@ -10,9 +10,7 @@ class SpacingSettingFactory extends ContainerSettingFactory
 
         $this->withType('vertical');
 
-        if($usePadding && $useMargin) {
-            $this->withName('Widget.widgetSpacing');
-        }
+        $this->withName('Widget.widgetSpacing');
 
         if($usePadding)
         {
