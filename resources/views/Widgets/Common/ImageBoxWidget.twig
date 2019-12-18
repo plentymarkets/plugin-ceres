@@ -78,7 +78,7 @@
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary')  }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if("imageUrl | trim is not empty") }}
-        {% if widget.settings.lazyLoading %}
+        {% if widget.settings.lazyLoading.mobile %}
             <lazy-img
                 class="img-{{ imageSize }}"
                 image-url="{{ Twig.print("imageUrl") }}"

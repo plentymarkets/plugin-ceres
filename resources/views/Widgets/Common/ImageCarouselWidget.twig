@@ -115,7 +115,7 @@
                             {{ Twig.set("altText", "slide.name") }}
                         {{ Twig.endif }}
                         
-                        {% if widget.settings.lazyLoading %}
+                        {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img
                                 class="img-cover"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
