@@ -18633,6 +18633,10 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
 .widget-toolbar .widget {
   margin-bottom: 0; }
 
+@media (min-width: 576px) {
+  .widget-toolbar .list-controls-inner .flex-fill > div {
+    display: inline-block !important; } }
+
 .widget-toolbar .filter-collapse > div {
   background: #fff;
   border: 1px solid #f4f4f4;
