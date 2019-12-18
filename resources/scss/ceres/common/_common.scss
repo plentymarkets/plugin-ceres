@@ -2,6 +2,12 @@ body .wrapper-main{
     overflow-x: hidden;
 }
 
+.sb-no-animation.collapsing {
+    -webkit-transition: none !important;
+    transition: none !important;
+    display: none !important;
+}
+
 .hidden {
     display: none;
 }
