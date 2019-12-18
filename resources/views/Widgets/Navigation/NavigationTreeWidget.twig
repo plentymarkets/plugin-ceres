@@ -13,7 +13,7 @@
 
 {% set headline = widget.settings.headline.mobile %}
 {% set expandableChildren = widget.settings.expandableChildren.mobile %}
-{% set showItemCount = widget.settings.showItemCount.mobile | default(false) %}
+{% set showItemCount = widget.settings.showItemCount.mobile %}
 
 <div class="widget widget-navigation-tree widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">

@@ -37,11 +37,11 @@ class NavigationTreeWidget extends BaseWidget
         $settings->createAppearance();
         
         $settings->createCheckbox('expandableChildren')
-                 ->withDefaultValue(false)
+                 ->withDefaultValue(true)
                  ->withName('Widget.navigationTreeExpandableChildrenLabel');
         
         $settings->createCheckbox('showItemCount')
-                 ->withDefaultValue(false)
+                 ->withDefaultValue(true)
                  ->withName('Widget.navigationTreeShowItemCount');
         
         $container = $settings->createVerticalContainer('customEntries')
