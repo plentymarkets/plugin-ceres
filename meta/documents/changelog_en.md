@@ -49,7 +49,7 @@
 - Due to an error, store specials were not displayed for live shopping items. This has been fixed. We would like to thank @Lauflust for the contribution.
 - When opening a modal in Safari on mobile devices, the page scrolled back to the top. This has been fixed.
 - If a user clicked the cookie bar's "Accept all" button a second time before refreshing the page, the cookie bar could no longer be closed. This behaviour has been fixed.
-- Entering the e-mail address a second time was imposssible for guest accounts if an e-mail address had already been entered. This has been fixed.
+- Entering the e-mail address a second time was impossible for guest accounts if an e-mail address had already been entered. This has been fixed.
 - Due to a CSS error, error notifications in the shopping cart were invisible. This has been fixed.
 
 ## v4.4.2 (2019-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.1...4.4.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
