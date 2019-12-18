@@ -11911,7 +11911,7 @@ a.text-dark:hover, a.color-dark:hover, a.text-dark:focus, a.color-dark:focus {
   .text-context-light:hover {
     color: #fff !important; }
 
-body .wrapper-main {
+body, body .wrapper-main {
   overflow-x: hidden; }
 
 .sb-no-animation.collapsing {

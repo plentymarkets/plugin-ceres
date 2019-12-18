@@ -11048,7 +11048,7 @@ $flag-icon-square-path: '/1x1' !default;
 		color: $yiq-text-light !important;
 	}
 }
-body .wrapper-main{
+body, body .wrapper-main{
     overflow-x: hidden;
 }
 
