@@ -1,5 +1,57 @@
 # Release Notes for Ceres
 
+## v4.5.0 (2019-12-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.2...4.5.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- In order to enable the redirection from tags to items linked with the tag, the route **Tags** has to be activated in the **Routing » Enable routes** menu of the **IO** configuration.
+- Since tags are now displayed in the single item view, you need to review your tag labels and tag links in the **Setup » Settings » Tags** menu in order to avoid displaying unwanted content. 
+- If you want to include "From" prices in the single item view, the translation key "dynamicVariationPrice" has to be filled out in the **CMS » Multilingualism** menu.
+- The item rating filter has been moved to the plugin **Customer feedback**. If you want to display item rating filters, you need to update the plugin to the current version 3.3
+
+### Added
+
+- In the ItemListModule, facet data is now written into the Vue store via the new function `addFacets()` instead of the function `setFacets()`. This serves to prevent duplicate data. The function `setFacets()` has been marked as `deprecated`.
+- The Ceres assistant now includes settings for the variation selection with which the "Please select" option can be activated and preselected.
+- "From" prices can now be displayed in the single item view if the option "Please select" is active for the variation selection. The translation key "dynamicVariationPrice" has to be filled out in the **CMS » Multilingualism** menu.
+- The following widgets have been added to the ShopBuilder for creating category views: Pagination, Items per page, Tool bar, Item grid, Item sorting, Availability filter, Filter for attributes, properties and characteristics, Price filter, Category filter, Manufacturer filter, Navigation tree, Background image.
+- We added the "Tags" widget to the ShopBuilder, with which tags can be displayed in the single item view. Tags are set up in the **Setup » Settings » Tags** menu. 
+- The number of columns in the item grid widget can now be set in correspondence to the viewport. We would like to thank @daniel-mannheimer for the contribution.
+- Contents of the type **item category** can now be used for the category view.
+- We added the presets for the search results page and the item category view.
+- We added helper classes in order to more easily define widget settings.
+
+### Changed 
+
+- The settings "Position of the pagination", "Always show first page" and "Always show last page" have been moved to the ShopBuilder and have been marked as `deprecated`.
+- The option "Please select" in the variation selection has been changed to "No selection" in order to clarify that the selected variation can be purchased, even if no attribute has been selected. 
+- Images of items in the shopping cart and the single item view are now loaded via lazy load as soon as they become visible in order to improve performance.
+- Icons of shipping profiles are now displayed in the checkout if the plugin of the corresponding shipping method provides an icon.
+- Contents of the code widget are now output as clear text in the secure mode in order to ensure that the contents can still be edited, even in case of faulty input.
+- The aspect ratio of the item image widget no longer changes in different column widths.
+- Layout containers which can no longer be output with the ShopBuilder have been marked as `deprecated`.
+- We added a setting to the image box and image box carousel widgets with which lazy loading can be activated, thereby only loading visible content. This improves the performance of the online store.
+- The sorting of facets has been moved from Ceres to IO. The facets are returned from the server in a sorted fashion.
+- The Vue component `contact-map` has been marked as `deprecated`.
+- The Google Maps widget now logs errors.
+- The following settings for the category view have been marked as `deprecated`: "Show category decription above item list", "Show category decription below item list", and "Show categories as filter options for search results".
+
+### Fixed
+
+- Javascript errors occurred if an item was added to the shopping cart a second time. This behaviour has been fixed.
+- The layout containers "Shopping cart: Before basket totals" and "Shopping cart: After basket totals" are now output correctly in the totals widget unless it is placed in the checkout.
+- In the Microsoft Edge browser, adding items to the shopping cart led to a Javascript error due to which the "AddToBasket" overlay was no longer displayed. This has been fixed.
+- The layout container "ImageCarouselOverride" was not displayed correctly in the item image widget. This has been fixed.
+- Overwriting styles in the code widget with a theme could lead to unreadable syntax. This behaviour has been fixed.
+- When setting up the online store with the assistant more than once, the value for the option concerning item bundles was not displayed correctly. This has been fixed.
+- Due to an error, the wrong data was transmitted to Google Analytics under certain circumstances. This behaviour has been fixed.
+- Due to an error, phone number and VAT ID could not be removed from an address. This has been fixed.
+- Due to an error, store specials were not displayed for live shopping items. This has been fixed. We would like to thank @Lauflust for the contribution.
+- When opening a modal in Safari on mobile devices, the page scrolled back to the top. This has been fixed.
+- If a user clicked the cookie bar's "Accept all" button a second time before refreshing the page, the cookie bar could no longer be closed. This behaviour has been fixed.
+- Entering the e-mail address a second time was impossible for guest accounts if an e-mail address had already been entered. This has been fixed.
+- Due to a CSS error, error notifications in the shopping cart were invisible. This has been fixed.
+
 ## v4.4.2 (2019-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.1...4.4.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
