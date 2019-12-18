@@ -34,7 +34,7 @@ class NavigationTreeWidget extends BaseWidget
         
         $settings->createCustomClass();
         
-        $settings->createAppearance();
+        $settings->createAppearance(true);
         
         $settings->createCheckbox('expandableChildren')
                  ->withDefaultValue(true)
