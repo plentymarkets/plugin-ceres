@@ -67985,9 +67985,9 @@ function () {
     this.offsetTop = 0;
     this.minWidth = minWidth;
     this.isMinWidth = true;
+    this.checkMinWidth();
     this.resizeListener = this.checkMinWidth.bind(this);
     window.addEventListener("resize", this.resizeListener);
-    this.checkMinWidth();
     this.vm.$nextTick(function () {
       var containerElement = _this.getContainerElement();
 
@@ -68017,7 +68017,12 @@ function () {
 
         _this2.el.parentNode.insertBefore(_this2.placeholder, _this2.el);
 
-        _this2.eventListener = _this2.tick.bind(_this2);
+        _this2.eventListener = function () {
+          if (_this2.shouldUpdate()) {
+            _this2.checkElement();
+          }
+        };
+
         document.addEventListener("storeChanged", _this2.eventListener);
         STICKY_EVENTS.forEach(function (event) {
           window.addEventListener(event, _this2.eventListener);
@@ -68053,27 +68058,27 @@ function () {
         window.removeEventListener(event, _this3.eventListener);
       });
       this.eventListener = null;
+
+      if (this.animationFrame > 0) {
+        cancelAnimationFrame(this.animationFrame);
+      }
+
       this.animationFrame = 0;
       this.enabled = false;
     }
   }, {
     key: "tick",
     value: function tick() {
-      var _this4 = this;
-
-      if (this.enabled && !this.isMinWidth) {
-        if (this.animationFrame > 0) {
-          cancelAnimationFrame(this.animationFrame);
-        }
-
-        this.animationFrame = requestAnimationFrame(function () {
-          _this4.checkElement();
-
-          _this4.updateStyles();
-
-          _this4.animationFrame = 0;
-        });
+      if (this.shouldUpdate()) {
+        this.updateStyles();
       }
+
+      this.animationFrame = requestAnimationFrame(this.tick.bind(this));
+    }
+  }, {
+    key: "shouldUpdate",
+    value: function shouldUpdate() {
+      return this.enabled && !this.isMinWidth || (this.position || {}).isSticky;
     }
   }, {
     key: "checkElement",
@@ -68102,7 +68107,7 @@ function () {
   }, {
     key: "calculateOffset",
     value: function calculateOffset() {
-      var _this5 = this;
+      var _this4 = this;
 
       if (!this.enabled) {
         return;
@@ -68133,10 +68138,10 @@ function () {
           stickyElement.checkElement(true);
         }
 
-        if (stickyElement.position.origY + stickyElement.position.height <= _this5.position.origY) {
-          _this5.offsetTop += stickyElement.position.height;
-        } else if (stickyElement.position.origY >= _this5.position.origY + _this5.position.height) {
-          _this5.offsetBottom += stickyElement.position.height;
+        if (stickyElement.position.origY + stickyElement.position.height <= _this4.position.origY) {
+          _this4.offsetTop += stickyElement.position.height;
+        } else if (stickyElement.position.origY >= _this4.position.origY + _this4.position.height) {
+          _this4.offsetBottom += stickyElement.position.height;
         }
       });
     }
@@ -68148,7 +68153,8 @@ function () {
         top: null,
         left: null,
         width: null,
-        zIndex: null
+        zIndex: null,
+        transform: null
       };
       var placeholderStyles = {
         paddingTop: null
@@ -68157,7 +68163,8 @@ function () {
       if (this.position.isSticky) {
         styles = {
           position: "fixed",
-          top: this.position.y + "px",
+          top: 0,
+          transform: "translate3d(0, " + this.position.y + "px, 0)",
           left: this.position.x + "px",
           width: this.position.width + "px"
         };
