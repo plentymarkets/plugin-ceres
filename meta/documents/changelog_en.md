@@ -4,7 +4,7 @@
 
 ### TODO
 
-- In order to enable the redirection from tags to items linked with the tag, the route **/tags** has to be activated in the **Routing » Enable routes** menu of the **IO** configuration.
+- In order to enable the redirection from tags to items linked with the tag, the route **Tags** has to be activated in the **Routing » Enable routes** menu of the **IO** configuration.
 - Since tags are now displayed in the single item view, you need to review your tag labels and tag links in the **Setup » Settings » Tags** menu in order to avoid displaying unwanted content. 
 - If you want to include "From" prices in the single item view, the translation key "dynamicVariationPrice" has to be filled out in the **CMS » Multilingualism** menu.
 - The item rating filter has been moved to the plugin **Customer feedback**. If you want to display item rating filters, you need to update the plugin to the current version 3.3
