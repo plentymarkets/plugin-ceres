@@ -21,7 +21,7 @@ class FilterBaseWidget extends BaseWidget
         
         $settings->createCustomClass();
         
-        $settings->createAppearance()
+        $settings->createAppearance(true)
                  ->withDefaultValue('none');
         
         $spacingContainer = $settings->createVerticalContainer('spacing')
