@@ -19938,13 +19938,31 @@ html.ie .v-s-boxes .v-s-box.invalid {
             padding-right: $grid-gutter-width/2 !important;
         }
     }
-    
+
     > .widget-inner > li {
         padding-bottom: $grid-gutter-width;
     }
 
+    @include media-breakpoint-only(xs) {
+        .col-6 {
+            .thumb-image {
+                width: 100%;
+            }
+            .thumb-content {
+                width: 100%;
+                margin-left: 0;
+            }
+            .prices {
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                    -ms-flex-flow: column;
+                        flex-flow: column;
+            }
+        }
+    }
+
     .cmp-product-thumb {
-        margin-bottom: 0px !important;
+        margin-bottom: 0 !important;
     }
 }
 

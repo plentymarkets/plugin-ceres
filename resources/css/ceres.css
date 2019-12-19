@@ -18604,8 +18604,19 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
 .widget-item-grid > .widget-inner > li {
   padding-bottom: 30px; }
 
+@media (max-width: 575.98px) {
+  .widget-item-grid .col-6 .thumb-image {
+    width: 100%; }
+  .widget-item-grid .col-6 .thumb-content {
+    width: 100%;
+    margin-left: 0; }
+  .widget-item-grid .col-6 .prices {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-flow: column; } }
+
 .widget-item-grid .cmp-product-thumb {
-  margin-bottom: 0px !important; }
+  margin-bottom: 0 !important; }
 
 .widget-pagination ul.pagination {
   padding-right: 0 !important; }
