@@ -24,7 +24,7 @@
 				   v-model="priceMax">
 		</div>
 
-		<button type="button" class="btn btn-primary" :class="{'disabled': isDisabled}" v-tooltip
+		<button type="button" class="btn btn-primary btn-appearance" :class="{'disabled': isDisabled}" v-tooltip
 				data-toggle="tooltip" data-placement="top" @click="triggerFilter()" title="{{ trans("Ceres::Template.itemApply") }}">
 			<i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
 		</button>

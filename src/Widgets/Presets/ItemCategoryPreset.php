@@ -191,6 +191,7 @@ class ItemCategoryPreset implements ContentPreset
     private function createPriceFilterWidget()
     {
         $this->threeColumnWidget->createChild('second', 'Ceres::PriceFilterWidget')
+                                ->withSetting('appearance', 'primary')
                                 ->withSetting('customClass', '')
                                 ->withSetting('spacing.customMargin', true)
                                 ->withSetting('spacing.margin.bottom.value', 4)
