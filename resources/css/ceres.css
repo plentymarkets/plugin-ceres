@@ -18631,6 +18631,11 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
   .widget-grid .widget-grid .widget-filter-price .item-filter-price > .input-group {
     margin-bottom: 1rem; }
 
+.widget-none .widget-filter-price .btn-appearance {
+  color: #495057;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.15); }
+
 .widget-selected-filter.widget-alignment-left span.selected-filter {
   margin-right: 10px;
   margin-left: 0; }
