@@ -69,8 +69,6 @@ class ItemGridWidget extends BaseWidget
                      ValueListFactory::make()
                                      ->addEntry(1, 'Widget.widgetNum1')
                                      ->addEntry(2, 'Widget.widgetNum2')
-                                     ->addEntry(3, 'Widget.widgetNum3')
-                                     ->addEntry(4, 'Widget.widgetNum4')
                                      ->toArray()
                  );
         
