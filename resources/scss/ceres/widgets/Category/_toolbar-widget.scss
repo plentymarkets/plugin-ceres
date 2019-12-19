@@ -20,4 +20,14 @@
             padding: 2rem;
         }
     }
+
+    .collapse-container:empty {
+        &:after {
+            content: attr(data-translation-empty);
+            display: block;
+            padding: .75rem;
+            color: $gray-dark;
+            text-align: center;
+        }
+    }
 }
