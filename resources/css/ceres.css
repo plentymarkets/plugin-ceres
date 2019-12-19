@@ -18663,6 +18663,13 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
   border: 1px solid #f4f4f4;
   padding: 2rem; }
 
+.widget-toolbar .collapse-container:empty:after {
+  content: attr(data-translation-empty);
+  display: block;
+  padding: .75rem;
+  color: #4D4F4D;
+  text-align: center; }
+
 .widget-provider-select.widget-primary input:checked + .provider-select-label {
   box-shadow: inset 0 0 0 0.1rem #008ebd; }
 

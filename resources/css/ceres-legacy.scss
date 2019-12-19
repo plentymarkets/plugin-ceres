@@ -20050,6 +20050,16 @@ html.ie .v-s-boxes .v-s-box.invalid {
             padding: 2rem;
         }
     }
+
+    .collapse-container:empty {
+        &:after {
+            content: attr(data-translation-empty);
+            display: block;
+            padding: .75rem;
+            color: $gray-dark;
+            text-align: center;
+        }
+    }
 }
 
 .widget-provider-select
