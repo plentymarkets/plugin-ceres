@@ -16,3 +16,13 @@
         }
     }
 }
+
+.widget-none {
+    .widget-filter-price {
+        .btn-appearance {
+            color: $gray-700;
+            background-color: rgba(0,0,0,0.15);
+            border-color: rgba(0,0,0,0.15);
+        }
+    }
+}
