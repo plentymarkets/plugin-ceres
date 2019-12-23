@@ -137,7 +137,7 @@ export function send(url, data = {}, config)
     config.keepOriginalResponse = !!config.keepOriginalResponse;
     config.headers = config.headers || { "Accept-Language": App.language };
 
-    data.templateEvent = App.templateEvent;
+    data.templateType = App.templateType;
     config.data = data;
 
     if (!config.doInBackground)
