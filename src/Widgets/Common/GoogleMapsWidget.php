@@ -31,6 +31,7 @@ class GoogleMapsWidget extends BaseWidget
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
 
+        $settings->createCustomClass();
         $settings->createTextarea('address')
             ->withName('Widget.googleMapsAddressLabel')
             ->withTooltip('Widget.googleMapsAddressTooltip');
@@ -64,6 +65,8 @@ class GoogleMapsWidget extends BaseWidget
                     ->addEntry('prop-xs-1-1', 'Widget.googleMapsAspectRatioOneToOne')
                     ->toArray()
             );
+
+        $settings->createSpacing();
 
         return $settings->toArray();
     }
