@@ -17,7 +17,7 @@
                 "@type"         : "Product",
                 "@id"           : "{{ itemData.variation.id }}",
                 "name"          : "{{ ItemName.get(itemData | itemName, itemData.variation.bundleType) | trim }}",
-                "category"      : "{{ defaultCategory.details[0].name | raw  }}",
+                "category"      : "{{ defaultCategory.details[0].name }}",
                 "releaseDate"   : "{{ itemData.variation.releasedAt }}",
                 "image"         : "{{ itemData.images.all[0].urlPreview }}",
                 "identifier"    : "{{ itemData.variation.id }}",
