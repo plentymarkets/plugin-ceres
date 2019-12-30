@@ -108,11 +108,12 @@ class SearchOptions
 
     public static function validateItemListOptions($itemListOptions, $scope)
     {
-        // Get all sorting strings
-        $sortingStrings = self::get($scope);
 
-        if( !array_key_exists($itemListOptions['sorting'], $sortingStrings->sorting) )
+
+        if( !array_key_exists($itemListOptions['sorting'], SearchOptions::TRANSLATION_MAP) )
         {
+            // Get all sorting strings
+            $sortingStrings = self::get($scope);
             $itemListOptions['sorting'] = $sortingStrings->defaultSorting;
         }
 
@@ -121,13 +122,14 @@ class SearchOptions
             $itemListOptions['page'] = 1;
         }
 
-        /** @var CeresConfig $ceresConfig */
-        $ceresConfig = pluginApp(CeresConfig::class);
-        
+
+
         if( (int)$itemListOptions['itemsPerPage'] <= 0 )
         {
-            $defaultItemsPerPage = $ceresConfig->pagination->rowsPerPage[0] * $ceresConfig->pagination->columnsPerPage;
-            $itemListOptions['itemsPerPage'] = $defaultItemsPerPage;
+             /** @var CeresConfig $ceresConfig */
+             $ceresConfig = pluginApp(CeresConfig::class);
+             $defaultItemsPerPage = $ceresConfig->pagination->itemsPerPage;
+             $itemListOptions['itemsPerPage'] = $defaultItemsPerPage;
         }
 
         if( (int) $itemListOptions['priceMin'] < 0 )

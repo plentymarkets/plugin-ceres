@@ -13,6 +13,7 @@ class CeresItemConfig extends PluginConfig
     public $storeSpecial;
     public $showVariationOverDropdown;
     public $variationShowType;
+    public $showPleaseSelect;
     public $enableImageCarousel;
     public $categoryShowDots;
     public $categoryShowNav;
@@ -54,6 +55,7 @@ class CeresItemConfig extends PluginConfig
         $this->storeSpecial                     = $this->getIntegerValue( "item.storeSpecial", 0 );
         $this->showVariationOverDropdown        = $this->getBooleanValue( "item.show_variation_over_dropdown", false );
         $this->variationShowType                = $this->getTextValue( "item.variation_show_type", "all" );
+        $this->showPleaseSelect                 = $this->getBooleanValue( "item.show_please_select", false );
         $this->enableImageCarousel              = $this->getBooleanValue( "item.enable_image_carousel", true );
         $this->categoryShowDots                 = $this->getBooleanValue( "item.category_show_dots", true );
         $this->categoryShowNav                  = $this->getBooleanValue( "item.category_show_nav", true );

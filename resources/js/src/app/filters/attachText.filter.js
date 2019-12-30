@@ -7,6 +7,6 @@ import Vue from "vue";
  */
 Vue.filter("attachText", function(item, text)
 {
-    console.warn("attachText is a depricated vue filter!");
+    console.warn("attachText is a deprecated vue filter!");
     return text + item;
 });

@@ -1,0 +1,81 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set opacity = (widget.settings.opacity.mobile | default(100)) / 100 %}
+{% set fullWidth = widget.settings.fullWidth.mobile is same as (true) %}
+{% set hugeFont = widget.settings.hugeFont.mobile is same as (true) %}
+{% set minHeightClass  = WidgetHelper.getMinHeightClass(widget.settings) %}
+{% set inlineMinHeight = WidgetHelper.getInlineMinHeight(widget.settings) %}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set sourceType = widget.settings.sourceType.mobile %}
+{% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set colorPalette = widget.settings.colorPalette.mobile | default("none") %}
+{% set customColor = widget.settings.customColor.mobile %}
+
+{{ Twig.set("url", "" | json_encode) }}
+{{ Twig.set("hasUrl", "false") }}
+{{ Twig.set("hasColor", "false") }}
+
+{% if sourceType == "category-image1" %}
+    {{ Twig.set("url", "category.details[0].imagePath") }}
+{% elseif sourceType == "category-image2" %}
+    {{ Twig.set("url", "category.details[0].image2Path") }}
+{% elseif sourceType == "custom-image" %}
+    {{ Twig.set("url", customImagePath | json_encode) }}
+{% endif %}
+
+{{ Twig.if("url | trim is not empty") }}
+    {% if sourceType == "category-image1" or sourceType == "category-image2" %}
+        {{ Twig.set("url", "'/documents/' ~ url") }}
+    {% endif %}
+    {{ Twig.set("hasUrl", "true") }}
+{{ Twig.endif() }}
+
+{% if colorPalette != "none" %}
+    {{ Twig.set("hasColor", "true") }}
+{% endif %}
+
+{% set showPlaceholder = isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %}
+
+<div class="widget widget-background d-flex parallax-img-container
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+    {% if minHeightClass | length > 0 %}{{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }} {{ minHeightClass }}{{ Twig.endif() }}{% endif %}
+    {% if fullWidth %} widget-fw{% endif %}
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}
+            {{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }}
+                {% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}
+            {{ Twig.endif() }}{% endif %}">
+    <div>
+        <div class="parallax-img-container-inner
+            {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
+            {% if colorPalette != "custom" and colorPalette != "none" %} bg-{{ colorPalette | default("none") }}{% endif %}"
+
+            style="{{ Twig.if("hasUrl") }}background-image: url({{ Twig.print("url") }});{{ Twig.endif() }}
+                {% if opacity < 1 %} opacity:{{ opacity }};{% endif %}
+                {% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
+        </div>
+    </div>
+    <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}{% if not fullWidth %} px-0{% endif %}">
+        {% if showPlaceholder %}
+            <div class="widget-placeholder">
+                <div>
+                    <p class="title mb-0">{{ trans("Ceres::Widget.backgroundPlaceholderTitle") }}</p>
+                    <p class="description mt-3">{{ trans("Ceres::Widget.backgroundPlaceholderDescription") }}</p>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="w-100{% if hugeFont %} huge-font{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+            {% if isPreview %} data-builder-child-container="background"{% endif %}>
+            {{ children.background | raw }}
+        </div>
+    </div>
+</div>

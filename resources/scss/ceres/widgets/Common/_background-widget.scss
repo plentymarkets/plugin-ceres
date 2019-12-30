@@ -1,0 +1,37 @@
+.widget-background {
+    &.widget {
+        width: auto;
+    }
+
+    &.align-items-end {
+        .container-max {
+            align-items: flex-end;
+        }
+    }
+
+    .parallax-img-container-inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100% !important;
+    }
+
+    .container-max {
+        z-index: 1;
+        
+        .huge-font {
+            font-size: 35px;
+    
+            .widget-text,
+            .widget-code {
+                h1 { font-size: 2em };
+                h2 { font-size: 1.8em };
+                h3 { font-size: 1.5em };
+                h4 { font-size: 1.25em };
+                * { font-size: 1em };
+            }
+        }
+    }
+}

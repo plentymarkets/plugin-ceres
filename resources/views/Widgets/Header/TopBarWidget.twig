@@ -27,7 +27,7 @@
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
         <div class="row mx-0">
-            {% if isPreview and not 
+            {% if isPreview and not
                 enableLogin and not
                 enableRegistration and not
                 enableLanguageSelect and not
@@ -193,10 +193,10 @@
                                     <hr>
                                 </div>
                                 <ul class="text-center text-sm-left">
-                                    {{ Twig.set("activeCurrency", Twig.call("services.checkout.getCurrencyData().name")) }}
+                                    {{ Twig.set("activeCurrency", Twig.call("services.checkout.getCurrencyData")) }}
                                     {{ Twig.for("currency", Twig.call("services.checkout.getCurrencyList")) }}
-                                    {{ Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency") }}
-                                        <li{{ Twig.if("currency.name == activeCurrency") }} class="active"{{ Twig.endif() }}>
+                                    {{ Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency.name") }}
+                                        <li{{ Twig.if("currency.name == activeCurrency.name") }} class="active"{{ Twig.endif() }}>
                                             <a href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
                                                 {{ Twig.if("currencyFormatSelect == 'all'") }}
                                                     {{ Twig.print("currency.name") }} <br class="d-block d-sm-none" />({{ Twig.print("currency.symbol") }})

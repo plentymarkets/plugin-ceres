@@ -6,14 +6,45 @@
     {% set baseURL = urls.myAccount %}
 {% endif %}
 
-<nav class="cmp cmp-paginator row float-right text-center">
+{# set 'showFirstPage', 'showLastPage', 'pageLimit' if not set from outside #}
+{% if showFirstPage is not defined %}
+    {% set showFirstPage = ceresConfig.pagination.showFirstPage %}
+{% endif %}
+{% if showLastPage is not defined %}
+    {% set showLastPage = ceresConfig.pagination.showLastPage %}
+{% endif %}
+{% if pageLimit is not defined %}
+    {% set pageLimit = 1 %}
+{% endif %}
+
+{# set 'start', 'end' values for pagination button loop #}
+{% set start = currentPage - pageLimit %}
+{% set end = currentPage + pageLimit %}
+
+{# increase pagination start, if touching end of buttons #}
+{% if currentPage + pageLimit > pageMax %}
+    {% set subtrahend = pageLimit - (pageMax - currentPage) %}
+    {% set start = start - subtrahend %}
+{% endif %}
+
+{# increase pagination end, if touching beginning of buttons #}
+{% if currentPage - 1 < pageLimit %}
+    {% set summand = pageLimit - (currentPage - 1) %}
+    {% set end = end + summand %}
+{% endif %}
+
+{% set isFirstLastPagePossible = pageMax > (pageLimit * 2 + 1) %}
+
+<nav class="cmp cmp-paginator text-center">
     {% if pageMax > 1 %}
-        <ul class="pagination col-12 m-y-0">
+        <ul class="pagination col-12 m-y-0 widget-alignment">
 
             <!-- FIRST PAGE LINK -->
-            {% if ceresConfig.pagination.showFirstPage and pageMax > 3 and currentPage > 2 %}
+            {% if showFirstPage and isFirstLastPagePossible and currentPage > pageLimit + 1 and currentPage != 2 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': null }) }}">
+                    <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+                        {% if not isPreview %}href="{{ baseURL ~ queryString({ 'page': null }) }}"{% endif %}>
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 </li>
@@ -22,54 +53,44 @@
 
             <!-- PREV LINK -->
             <li class="page-item{% if currentPage <= 1 %} disabled{% endif %}">
-                <a class="page-link"{% if currentPage > 1 %} href="{{ baseURL ~ queryString({ 'page': prevPage }) }}"{% endif %}>
+                <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                    {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+                    {% if currentPage > 1 and not isPreview %} href="{{ baseURL ~ queryString({ 'page': prevPage }) }}"{% endif %}>
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </a>
             </li>
             <!-- ./PREV LINK -->
 
             <!-- PAGINATION -->
-            {% if currentPage == pageMax and currentPage > 2 %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': beforePrevPage }) }}">{{ currentPage - 2 }}</a>
-                </li>
-            {% endif %}
+            {% for i in start..end if i >= 1 and i <= pageMax %}
+                {% set target = i <= 1 ? null : i %}
 
-            {% if currentPage > 1 %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': prevPage }) }}">{{ currentPage - 1 }}</a>
+                <li class="page-item{% if i == currentPage %} active{% endif %}">
+                    <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+                        {% if i != currentPage and not isPreview %}href="{{ baseURL ~ queryString({ 'page': target }) }}"{% endif %}>
+                        {{ i }}
+                    </a>
                 </li>
-            {% endif %}
-
-            <li class="page-item active">
-                <a class="page-link">{{ currentPage }}</a>
-            </li>
-
-            {% if currentPage + 1 <= pageMax %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': currentPage + 1 }) }}">{{ currentPage + 1 }}</a>
-                </li>
-            {% endif %}
-
-            {% if currentPage == 1 and currentPage + 2 <= pageMax %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': currentPage + 2 }) }}">{{ currentPage + 2 }}</a>
-                </li>
-            {% endif %}
+            {% endfor %} 
             <!-- ./PAGINATION -->
 
             <!-- NEXT LINK -->
             <li class="page-item{% if currentPage >= pageMax %} disabled{% endif %}">
-                <a class="page-link"{% if currentPage < pageMax %} href="{{ baseURL ~ queryString({ 'page': currentPage + 1 }) }}"{% endif %}>
+                <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                    {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+                    {% if currentPage < pageMax and not isPreview %} href="{{ baseURL ~ queryString({ 'page': currentPage + 1 }) }}"{% endif %}>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
             </li>
             <!-- ./NEXT LINK -->
 
             <!-- LAST PAGE LINK -->
-            {% if ceresConfig.pagination.showLastPage and pageMax > 3 and currentPage < pageMax - 1 %}
+            {% if showLastPage and isFirstLastPagePossible and currentPage < pageMax - pageLimit and currentPage != pageMax - 1 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ baseURL ~ queryString({ 'page': pageMax }) }}">
+                    <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+                        {% if not isPreview %}href="{{ baseURL ~ queryString({ 'page': pageMax }) }}"{% endif %}>
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </a>
                 </li>

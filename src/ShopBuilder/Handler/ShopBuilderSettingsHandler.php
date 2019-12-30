@@ -16,6 +16,8 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.checkoutEnableRoute'           => 'IO.routing.enabled_routes',
         'routing.myAccountCategory'             => 'IO.routing.category_my-account',
         'routing.myAccountEnableRoute'          => 'IO.routing.enabled_routes',
+        'routing.searchCategory'                => 'IO.routing.category_search',
+        'routing.searchEnableRoute'             => 'IO.routing.enabled_routes',
         'routing.loginCategory'                 => 'IO.routing.category_login',
         'routing.loginEnableRoute'              => 'IO.routing.enabled_routes',
         'routing.registerCategory'              => 'IO.routing.category_register',
@@ -60,6 +62,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
         'routing.basket'                        => 'int',
         'routing.checkoutCategory'              => 'int',
         'routing.myAccountCategory'             => 'int',
+        'routing.searchCategory'                => 'int',
         'routing.loginCategory'                 => 'int',
         'routing.registerCategory'              => 'int',
         'routing.confirmationCategory'          => 'int',
@@ -122,6 +125,16 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     public function writeRouting_MyAccountEnableRoute($enableMyAccountRoute)
     {
         return $this->setEnabledRoute(RouteConfig::MY_ACCOUNT, $enableMyAccountRoute);
+    }
+    
+    public function readRouting_searchEnableRoute(): bool
+    {
+        return in_array(RouteConfig::SEARCH, RouteConfig::getEnabledRoutes());
+    }
+    
+    public function writeRouting_searchEnableRoute($enableSearchRoute): string
+    {
+        return $this->setEnabledRoute(RouteConfig::SEARCH, $enableSearchRoute);
     }
 
     public function readRouting_ConfirmationEnableRoute()

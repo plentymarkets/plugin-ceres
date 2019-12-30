@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-item-filter-price">
-	<div class="row">
-		<div class="input-group col-lg-5 pb-3">
+	<div class="item-filter-price">
+		<div class="input-group">
 			<div class="input-group-prepend">
 				<span class="input-group-text">${ currency }</span>
 			</div>
@@ -12,7 +12,7 @@
 				   v-model="priceMin">
 		</div>
 
-		<div class="input-group col-lg-5 pb-3">
+		<div class="input-group">
 			<div class="input-group-prepend">
 				<span class="input-group-text">${ currency }</span>
 			</div>
@@ -24,11 +24,9 @@
 				   v-model="priceMax">
 		</div>
 
-		<div class="col-lg-2">
-			<button type="button" class="btn btn-primary" :class="{'disabled': isDisabled}" v-tooltip 
-					data-toggle="tooltip" data-placement="top" @click="triggerFilter()" title="{{ trans("Ceres::Template.itemApply") }}">
-				<i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
-			</button>
-		</div>
-	</div>	
+		<button type="button" class="btn btn-primary btn-appearance" :class="{'disabled': isDisabled}" v-tooltip
+				data-toggle="tooltip" data-placement="top" @click="triggerFilter()" title="{{ trans("Ceres::Template.itemApply") }}">
+			<i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
+		</button>
+	</div>
 </script>

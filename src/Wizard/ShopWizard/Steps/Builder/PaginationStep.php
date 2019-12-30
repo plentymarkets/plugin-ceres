@@ -38,9 +38,6 @@ class PaginationStep extends Step
         $paginationPositions = PaginationConfig::getPaginationPositions();
         $paginationPositionOptions = StepHelper::generateTranslatedListBoxValues($paginationPositions);
 
-        //$rowsPerPage = PaginationConfig::getRowsPerPage();
-        //$rowsPerPageOptions = StepHelper::generateTranslatedListBoxValues($rowsPerPage);
-
         return [
             "title" => "Wizard.paginationSettings",
             "description" => "Wizard.paginationSettingsDescription",
@@ -67,26 +64,12 @@ class PaginationStep extends Step
                         "name" => "Wizard.paginationShowLastPage",
                     ]
                 ],
-//                "paginationStep_columnsPerPage" => [
-//                    "type" => "select",
-//                    "defaultValue" => $paginationPositionOptions[0]['value'],
-//                    "options" => [
-//                        "name" => "Wizard.paginationColumnsPerPage",
-//                        "listBoxValues" => $paginationPositionOptions
-//                    ]
-//                ],
-//                "paginationStep_rowsPerPage" => [
-//                    "type" => "checkboxGroup",
-//                    "defaultValue" => [
-//                        $rowsPerPageOptions[0]["value"],
-//                        $rowsPerPageOptions[1]["value"],
-//                        $rowsPerPageOptions[4]["value"],
-//                    ],
-//                    "options" =>[
-//                        "name" => "Wizard.paginationRowsPerPage",
-//                        "checkboxValues" => $rowsPerPageOptions
-//                    ]
-//                ]
+                "paginationStep_itemsPerPage" => [
+                    "type" => "text",
+                    "options" => [
+                        "name" => "Wizard.paginationItemsPerPage"
+                    ]
+                ]
             ]
         ];
     }
@@ -127,7 +110,7 @@ class PaginationStep extends Step
             ]
         ];
     }
-    
+
     /**
      * @return array
      */
@@ -138,7 +121,7 @@ class PaginationStep extends Step
 
         $secondSortingRules = PaginationConfig::getSecondSortingCategoryRules();
         $secondCatOptions   = StepHelper::generateTranslatedListBoxValues($secondSortingRules);
-        
+
         return [
             "title" => "Wizard.recommendedSortingSettings",
             "description" => "Wizard.recommendedSortingSettingsDescription",

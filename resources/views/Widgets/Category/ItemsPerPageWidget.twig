@@ -1,0 +1,27 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{{ Twig.set("itemsPerPageEntries", itemsPerPageEntries | json_encode) }}
+{{ Twig.if("ceresConfig.pagination.itemsPerPage not in itemsPerPageEntries") }}
+    {{ Twig.do("set itemsPerPageEntries = itemsPerPageEntries | merge([ceresConfig.pagination.itemsPerPage])") }}
+{{ Twig.endif() }}
+
+<div class="widget widget-items-per-page{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner">
+        <div class="list-itemsperpage">
+            <select
+                class="custom-select"
+                @change="$store.dispatch('selectItemsPerPage', $event.target.value)"
+                v-populate-store:mutation="{ name: 'setItemsPerPage', data: {{ Twig.print("itemsPerPage | json_encode") }} }">
+                {{ Twig.for("entry", "itemsPerPageEntries") }}
+                <option value="{{ Twig.print("entry") }}"{{ Twig.if("entry == itemsPerPage") }} selected{{ Twig.endif() }}>{{ Twig.print("entry") }}</option>
+                {{ Twig.endfor() }}
+            </select>
+        </div>
+    </div>
+</div>

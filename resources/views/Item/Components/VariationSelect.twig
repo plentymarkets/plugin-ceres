@@ -5,7 +5,8 @@
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
                     <select class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)">
-                        <option :value="null" v-if="hasEmptyOption || selectedAttributes[attribute.attributeId] === null" :selected="selectedAttributes[attribute.attributeId] === null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                        <option :value="-1" v-if="addPleaseSelectOption || !hasSelection">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                        <option :value="null" v-if="hasEmptyOption || selectedAttributes[attribute.attributeId] === null" :selected="selectedAttributes[attribute.attributeId] === null">{{ trans("Ceres::Template.singleItemNoSelection") }}</option>
                         <option
                             v-for="value in attribute.values"
                             :value="value.attributeValueId"
@@ -27,10 +28,16 @@
                     <span class="text-muted">${ attribute.name }:</span> <b>${ getSelectedAttributeValueName(attribute) }</b>
                     <div class="v-s-boxes py-3" :class="{ 'images': attribute.type === 'image' }">
                         <div class="v-s-box bg-white empty-option"
+                            v-if="addPleaseSelectOption"
+                            @click="selectAttribute(attribute.attributeId, -1)"
+                            :class="{ 'active': selectedAttributes[attribute.attributeId] === -1, 'invalid': !isAttributeSelectionValid(attribute.attributeId, -1) }">
+                            <span class="mx-3">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</span>
+                        </div>
+                        <div class="v-s-box bg-white empty-option"
                             v-if="hasEmptyOption"
                             @click="selectAttribute(attribute.attributeId, null)"
                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null) }">
-                            <span class="mx-3">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</span>
+                            <span class="mx-3">{{ trans("Ceres::Template.singleItemNoSelection") }}</span>
                         </div>
 
                         <div class="v-s-box bg-white"
@@ -39,7 +46,7 @@
                             :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }"
                             v-tooltip="!isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getInvalidOptionTooltip(attribute.attributeId, value.attributeValueId)">
                             <span class="mx-3" v-if="attribute.type === 'box'">${ value.name }</span>
-                            <img v-ie-objectfit-polyfill="'contain'" class="p-1" v-else :src="value.imageUrl" :alt="value.name">
+                            <img class="p-1" v-else :src="value.imageUrl" :alt="value.name">
                         </div>
                     </div>
                 </div>
@@ -66,7 +73,7 @@
                 </div>
             </div>
             <!-- /units -->
-        
+
         </div>
 
         <div v-else>

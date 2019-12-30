@@ -48,7 +48,7 @@ class ShopWizard extends WizardProvider
     /**
      * @return array
      */
-    protected function structure()
+    protected function structure(): array
     {
         $requiredSettings  = pluginApp(RequiredSettingsStep::class);
         $settingsSelection = pluginApp(SettingsSelectionStep::class);
@@ -63,36 +63,36 @@ class ShopWizard extends WizardProvider
         $seo               = pluginApp(SeoStep::class);
         
         return [
-            "title" => "Wizard.title",
-            "shortDescription" => "Wizard.shortDescription",
-            "keywords" => $this->buildKeywords(),
-            "topics" => [
-                "omni-channel"
+            'title' => 'Wizard.title',
+            'shortDescription' => 'Wizard.shortDescription',
+            'keywords' => $this->buildKeywords(),
+            'topics' => [
+                'omni-channel'
             ],
-            "key" => "shopCeres-assistant",
-            "reloadStructure" => true,
-            "iconPath" => "https://plentymarkets-assistant.s3.eu-central-1.amazonaws.com/ceres_assistent.svg",
+            'key' => 'shopCeres-assistant',
+            'reloadStructure' => true,
+            'iconPath' => 'https://plentymarkets-assistant.s3.eu-central-1.amazonaws.com/ceres_assistent.svg',
             'dataSource' => 'Ceres\Wizard\ShopWizard\DataSource\ShopWizardDataSource',
             'settingsHandlerClass' => 'Ceres\Wizard\ShopWizard\SettingsHandlers\ShopWizardSettingsHandler',
             'dependencyClass' => 'Ceres\Wizard\ShopWizard\DynamicLoaders\ShopWizardDynamicLoader',
-            "translationNamespace" => "Ceres",
-            "options" => [
+            'translationNamespace' => 'Ceres',
+            'options' => [
                 'client' => $this->buildClientOptions(),
                 'pluginSet' => $this->buildPluginSetOptions()
             ],
-            "undeleteableOptionIds" => $this->getUnDeletableOptions(),
-            "steps" => [
-                "requiredStep" => $requiredSettings->generateStep(),
-                "settingsSelectionStep" => $settingsSelection->generateStep(),
-                "defaultSettingsStep" => $defaultSettings->generateStep(),
-                "onlineStoreStep" => $onlineStore->generateStep(),
-                "currencyStep" => $currency->generateStep(),
-                "displayInfoStep" => $displayInfo->generateStep(),
-                "paginationStep" => $pagination->generateStep(),
-                "languagesStep" => $languages->generateStep(),
-                "performanceStep" => $performance->generateStep(),
-                "searchStep" => $search->generateStep(),
-                "seoStep" => $seo->generateStep()
+            'undeleteableOptionIds' => $this->getUnDeletableOptions(),
+            'steps' => [
+                'requiredStep' => $requiredSettings->generateStep(),
+                'settingsSelectionStep' => $settingsSelection->generateStep(),
+                'defaultSettingsStep' => $defaultSettings->generateStep(),
+                'onlineStoreStep' => $onlineStore->generateStep(),
+                'currencyStep' => $currency->generateStep(),
+                'displayInfoStep' => $displayInfo->generateStep(),
+                'paginationStep' => $pagination->generateStep(),
+                'languagesStep' => $languages->generateStep(),
+                'performanceStep' => $performance->generateStep(),
+                'searchStep' => $search->generateStep(),
+                'seoStep' => $seo->generateStep()
             ]
         ];
     }
@@ -100,11 +100,11 @@ class ShopWizard extends WizardProvider
     /**
      * @return array
      */
-    private function buildKeywords()
+    private function buildKeywords(): array
     {
         $keywords = [];
         $i = 1;
-        $prefix = ["Ceres::", "Wizard.keyword"];
+        $prefix = ['Ceres::', 'Wizard.keyword'];
         
         while($this->translator->trans($prefix[0].$prefix[1].$i) !== $prefix[0].$prefix[1].$i)
         {
@@ -120,35 +120,33 @@ class ShopWizard extends WizardProvider
     }
 
     /**
-     * @param array $clients
-     *
      * @return array
      */
-    private function buildClientOptions()
+    private function buildClientOptions(): array
     {
         $clients = $this->settingsService->getWebstores();
         $pluginSets = $this->settingsService->getPluginSets();
         
         $clientsList = [
             [
-                "value" => "",
-                "caption" => $this->translator->trans("Ceres::Wizard.selectClient")
+                'value' => '',
+                'caption' => $this->translator->trans('Ceres::Wizard.selectClient')
             ]
         ];
 
         //we add preview option only there are more than one plugin set
         if (count($pluginSets) > 1) {
             $clientsList[] = [
-                "value" => "preview",
-                "caption" => $this->translator->trans("Ceres::Wizard.previewOption")
+                'value' => 'preview',
+                'caption' => $this->translator->trans('Ceres::Wizard.previewOption')
             ];
         }
 
         if (count($clients)) {
             foreach($clients as $client) {
                 $clientsList[] = [
-                    "value" => $client['id'],
-                    "caption" => $client["name"]
+                    'value' => $client['id'],
+                    'caption' => $client['name']
                 ];
             }
         }
@@ -167,14 +165,14 @@ class ShopWizard extends WizardProvider
     /**
      * @return array
      */
-    private function buildPluginSetOptions()
+    private function buildPluginSetOptions(): array
     {
         $pluginSets = $this->settingsService->getPluginSets();
         
         $pluginSetValues = [
             [
-                "value" => "",
-                "caption" => $this->translator->trans("Ceres::Wizard.selectPluginSet")
+                'value' => '',
+                'caption' => $this->translator->trans('Ceres::Wizard.selectPluginSet')
             ]
 
         ];
@@ -182,8 +180,8 @@ class ShopWizard extends WizardProvider
         if (count($pluginSets)) {
             foreach ($pluginSets as $pluginSet) {
                 $pluginSetValues[] = [
-                    "value" => $pluginSet['id'],
-                    "caption" => $pluginSet['name']
+                    'value' => $pluginSet['id'],
+                    'caption' => $pluginSet['name']
                 ];
             }
         }
@@ -202,15 +200,14 @@ class ShopWizard extends WizardProvider
     /**
      * @return array
      */
-    private function getUnDeletableOptions():array
+    private function getUnDeletableOptions(): array
     {
-        $settingsService = pluginApp(DefaultSettingsService::class);
-        $webStores = $settingsService->getWebstores();
+        $webStores = $this->settingsService->getWebstores();
         $unDeletableOptions = [];
 
         if (count($webStores)) {
             foreach ($webStores as $webStore) {
-                $optionId = "webstore_" . $webStore['id'] . "." . "pluginSet_" . $webStore['pluginSetId'];
+                $optionId = 'webstore_' . $webStore['id'] . '.' . 'pluginSet_' . $webStore['pluginSetId'];
                 $unDeletableOptions[] = $optionId;
             }
         }

@@ -143,6 +143,14 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 if (!empty($activeLanguagesList)) {
                     $webstoreData['languageList'] = $activeLanguagesList;
                 }
+    
+                if (isset($data['displayInfo_attributeSelectDefaultOption'])) {
+                    $webstoreData['attributeSelectDefaultOption'] = 0;
+                    if($data['displayInfo_attributeSelectDefaultOption'] !== false)
+                    {
+                        $webstoreData['attributeSelectDefaultOption'] = 1;
+                    }
+                }
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
 
@@ -277,6 +285,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 }
             }
 
+            /** @var MappingService $mappingService */
             $mappingService = pluginApp(MappingService::class);
             $pluginData = $mappingService->processPluginMappingData($data, "store");
 

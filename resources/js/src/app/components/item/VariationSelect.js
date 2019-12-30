@@ -1,5 +1,5 @@
 import { textWidth } from "../../helper/dom";
-import { isDefined, isNull } from "../../helper/utils";
+import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
@@ -29,6 +29,12 @@ export default Vue.component("variation-select", {
         };
     },
 
+    mounted()
+    {
+        // initially check for valid selection and disable add to basket button
+        this.$store.commit("setIsVariationSelected", !!this.currentSelection);
+    },
+
     computed:
     {
         /**
@@ -37,6 +43,11 @@ export default Vue.component("variation-select", {
         hasEmptyOption()
         {
             return this.variations.some(variation => !variation.attributes.length);
+        },
+
+        addPleaseSelectOption()
+        {
+            return App.config.item.showPleaseSelect;
         },
 
         /**
@@ -75,6 +86,11 @@ export default Vue.component("variation-select", {
         isContentVisible()
         {
             return !this.forceContent && !!this.currentSelection || this.forceContent;
+        },
+
+        hasSelection()
+        {
+            return !isNullOrUndefined(this.selectedAttributes) && !Object.values(this.selectedAttributes).some((value) => value < 0);
         },
 
         ...mapState({
@@ -121,6 +137,11 @@ export default Vue.component("variation-select", {
             if (this.currentSelection)
             {
                 this.setVariation(this.currentSelection.variationId);
+            }
+            else if (!this.hasSelection)
+            {
+                // user switched back to "please select"
+                this.setVariation(0);
             }
             else
             {
@@ -294,7 +315,7 @@ export default Vue.component("variation-select", {
                     TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name })
                 );
 
-                attributes[attributeToReset.attributeId] = null;
+                attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && App.config.item.showPleaseSelect) ? -1 : null;
             }
 
             if (invalidSelection.newUnit)
@@ -313,10 +334,7 @@ export default Vue.component("variation-select", {
 
             this.$store.commit("setItemSelectedAttributes", attributes);
 
-            if (this.currentSelection)
-            {
-                this.setVariation(this.currentSelection.variationId);
-            }
+            this.setVariation(this.currentSelection ? this.currentSelection.variationId : 0);
 
             NotificationService.warn(
                 messages.join("<br>")
@@ -370,7 +388,7 @@ export default Vue.component("variation-select", {
                     // an attribute is not matching with selection
                     if (variationAttribute &&
                         variationAttribute.attributeValueId !== attributes[attributeId] &&
-                        (strict || !strict && !isNull(attributes[attributeId])))
+                        (strict || !strict && !isNull(attributes[attributeId]) && attributes[attributeId] !== -1))
                     {
                         return false;
                     }
@@ -464,7 +482,15 @@ export default Vue.component("variation-select", {
             const selectedAttributeValueId =  this.selectedAttributes[attribute.attributeId];
             const selectedAttributeValue = attribute.values.find(attrValue => attrValue.attributeValueId === selectedAttributeValueId);
 
-            return selectedAttributeValue ? selectedAttributeValue.name : TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
+            if (selectedAttributeValue)
+            {
+                return selectedAttributeValue.name;
+            }
+            else if (App.config.item.showPleaseSelect && selectedAttributeValueId === -1)
+            {
+                return TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
+            }
+            return TranslationService.translate("Ceres::Template.singleItemNoSelection");
         }
     },
 

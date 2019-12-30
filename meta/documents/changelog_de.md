@@ -1,5 +1,57 @@
 # Release Notes für Ceres
 
+## v4.5.0 (2019-12-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.2...4.5.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Um die Weiterleitung von Tags auf verlinkte Artikel nutzen zu können, muss die Route **Tags** im Menü **Routing » Routen aktivieren** der **IO**-Konfiguration aktiviert werden.
+- Da Tags nun in der Artikeleinzelansicht sichtbar sind, sollten Tag-Namen und -Verlinkungen im Menü **Einrichtung » Einstellungen » Tags** überprüft werden, um die Anzeige von ungewolltem Inhalt zu vermeiden.
+- Falls "Ab"-Preise in der Artikeleinzelansicht verwendet werden sollen, muss der Übersetzungseintrag "dynamicVariationPrice" unter **Template** im Menü **CMS » Mehrsprachigkeit** angepasst werden.
+- Der Filter für Artikelbewertungen wurde in das Plugin **Kunden-Feedback** ausgelagert. Für die Einbindung eines Artikelbewertungs-Filter muss dieses Plugin auf die aktuelle Version 3.3 angehoben werden.
+
+### Hinzugefügt
+
+- Der Ceres-Assistent enthält jetzt Einstellungen für die Variantenauswahl, mit welchen die "Bitte wählen"-Option hinzugefügt und vorausgewählt werden kann.
+- In der Artikeleinzelansicht können nun "Ab"-Preise angezeigt werden, wenn die Option "Bitte wählen" für die Variantenauswahl aktiviert ist. Hierfür muss der Übersetzungswert "dynamicVariationPrice" unter **Template** im Menü **CMS » Mehrsprachigkeit** angepasst werden.
+- Die folgenden Widgets wurden zum ShopBuilder hinzugefügt, um die Kategorieansicht abbilden zu können: Seitennummerierung, Artikel pro Seite, Toolbar, Artikelraster, Artikelsortierung, Verfügbarkeitsfilter, Filter für Attribute, Eigenschaften und Merkmale, Preisfilter, Kategoriefilter, Herstellerfilter, Navigationsbaum, Hintergrundbild.
+- Das Tags-Widget für den ShopBuilder wurde hinzugefügt, mit welchem Tags in der Artikeleinzelansicht dargestellt werden können. Tags werden im Menü **Einrichtung » Einstellungen » Tags** eingerichtet.
+- Im Artikelraster-Widget kann die Spaltenanzahl nun abhängig vom Viewport eingestellt werden. Wir bedanken uns bei @daniel-mannheimer für den Beitrag.
+- Inhalte vom Typ **Artikelkategorie** werden nun in der Kategorieansicht berücksichtigt.
+- Die Vorlagen für die Artikelkategorie and die Suchergebnisse-Seite wurden hinzugefügt.
+- Es wurden Hilfsklassen hinzugefügt, um Widget-Einstellungen einfacher definieren zu können.
+- Facettendaten werden jetzt über die neue Funktion `addFacets()` anstatt `setFacets()` im ItemListModule in den Vue Store geschrieben, um doppelte Daten zu vermeiden. Die Funktion `setFacets()` wurde als `deprecated` markiert.
+
+### Geändert
+
+- Die Einstellungen "Position der Paginierung", "Erste Seite immer anzeigen" und "Letzte Seite immer anzeigen" wurden als `deprecated` gekennzeichnet und werden nun über den ShopBuilder vorgenommen.
+- Die Bezeichnung "Bitte wählen" in der Variantenauswahl wurde in "Keine Auswahl" geändert, um kenntlich zu machen, dass die gewählte Variante ein wählbarer Artikel ist, auch ohne ausgewähltem Attribut.
+- Die Bilder der Warenkorbartikel und der Artikeleinzelansicht werden nun nachgeladen, sobald sie sichtbar werden.
+- Icons von Versandprofilen werden ab sofort im Checkout angezeigt, sofern das Plugin der jeweiligen Versandart ein Icon zur Verfügung stellt.
+- Inhalte des Code-Widgets werden im abgesicherten Modus ab sofort als Klartext ausgegeben, damit diese bei fehlerhaften Eingaben weiterhin bearbeitet werden können.
+- Es wurde eine neue Einstellung zum Bilderbox- und Bilderkarussell-Widget hinzugefügt, mit der Bilder erst geladen werden, wenn diese sichtbar sind. Dadurch wird die Performance verbessert.
+- Die Sortierung der Facetten wurde aus Ceres entfernt und nach IO ausgelagert. Die Facetten kommen nun sortiert vom Server.
+- Die Vue-Komponente `contact-map` wurde als `deprecated` markiert.
+- Das Google Maps-Widget loggt nun Fehler.
+- Die folgenden Einstellungen zur Kategorieansicht wurden als `deprecated` markiert: "Kategoriebeschreibung über Artikelliste anzeigen", "Kategoriebeschreibung unter Artikelliste anzeigen" und "Kategorien als Filteroption bei Suchergebnissen anzeigen".
+
+### Behoben
+
+- Es kam zu Javascript-Fehlern, wenn ein Artikel in den Warenkorb gelegt wurde, der sich bereits im Warenkorb befand. Dieses Verhalten wurden behoben.
+- Die Layout-Container "Shopping cart: Before basket totals" und "Shopping cart: After basket totals" werden nun korrekt im Summen-Widget ausgegeben, wenn sich dieses nicht im Checkout befindet.
+- Im Microsoft Edge-Browser kam es beim Hinzufügen von Artikeln zum Warenkorb zu einem Javascript Fehler, der dazu führte, dass das "AddToBasket"-Overlay nicht angezeigt wurde. Dies wurde behoben.
+- Im Artikelbild-Widget wurde der Layout-Container "ImageCarouselOverride" nicht korrekt ausgegeben. Dies wurde behoben.
+- Das Überschreiben von Styles im Code-Widget durch ein Theme führte zu unleserlicher Syntax. Dieses Verhalten wurde behoben.
+- Das Seitenverhältnis des Artikelbild-Widgets ändert sich nun nicht mehr bei verschiedenen Spaltenbreiten.
+- Layout-Container, die über den ShopBuilder nicht mehr ausgegeben werden, wurden als `deprecated` markiert.
+- Bei einem erneuten Durchlaufen des Ceres-Assistenten wurde der zuvor eingestellte Wert für die Anzeige von Artikelpaketen nicht richtig angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurden unter bestimmten Umständen falsche Daten an Google Analytics gegeben. Dieses Verhalten wurde behoben.
+- Durch einen Fehler konnten Telefonnummer und Umsatzsteuer-ID nicht mehr aus einer Adresse entfernt werden. Dies wurde behoben.
+- Durch einen Fehler wurde die Shop-Aktion bei Liveshopping-Artikeln nicht ausgegeben. Dies wurde behoben. Vielen Dank an @Lauflust für diesen Beitrag.
+- Beim Öffnen eines Modals in Safari auf mobilen Endgeräten scrollte die Seite zum Seitenanfang. Dies wurde behoben.
+- Wenn der Button "Alle akzeptieren" in der CookieBar ein zweites Mal geklickt wurde, ohne dass zuvor die Seite erneut geladen wurde, konnte die CookieBar nicht mehr geschlossen werden. Dieses Verhalten wurde behoben.
+- Bei einer Gastbestellung war die Eingabe der E-Mail-Adresse nicht möglich, falls bereits eine E-Mail-Adresse eingetragen war. Dieses Verhalten wurde behoben.
+- Fehlermeldungen im Warenkorb waren aufgrund eines CSS-Fehlers unsichtbar. Dies wurde behoben.
+
 ## v4.4.2 (2019-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.1...4.4.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben

@@ -4,8 +4,6 @@ import { mapState } from "vuex";
 
 export default Vue.component("item-filter", {
 
-    delimiters: ["${", "}"],
-
     props:
     {
         template:
@@ -16,6 +14,16 @@ export default Vue.component("item-filter", {
         facet:
         {
             type: Object
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -23,19 +31,7 @@ export default Vue.component("item-filter", {
     {
         facets()
         {
-            return this.facet.values.sort((facetA, facetB) =>
-            {
-                if (facetA.position > facetB.position)
-                {
-                    return 1;
-                }
-                if (facetA.position < facetB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
+            return this.facet.values;
         },
 
         facetName()

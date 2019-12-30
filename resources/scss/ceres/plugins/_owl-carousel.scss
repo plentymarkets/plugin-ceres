@@ -54,16 +54,21 @@
   -webkit-touch-callout: none;
 }
 
-.owl-carousel .owl-item a,
-.owl-carousel .owl-item .image-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.single-carousel, .owl-thumbs {
+    &.owl-single-item {
+      .image-container, a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
 }
 
 .owl-carousel .owl-item img {
+  // display block is required for lozad framework
+  display: block;
   width: 100%;
   object-fit: contain;
   height: 100%;

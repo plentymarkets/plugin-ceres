@@ -1,26 +1,35 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-<div class="widget widget-google-maps">
-    {% if geocoding_data is not empty %}
-        <google-maps-widget google-api-key="{{ geocoding_data.apiKey }}"
-                            address="{{ geocoding_data.address }}"
-                            :lat="{{ geocoding_data.lat }}"
-                            :lng="{{ geocoding_data.lng }}"
-                            :zoom="{{ widget.settings.zoom.mobile | default(16) }}"
-                            maptype="{{ widget.settings.maptype.mobile }}"
-                            aspect-ratio="{{ widget.settings.aspectRatio.mobile }}">
-            <div class="d-flex flex-center h-100 position-absolute w-100 text-muted">
-                <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
-            </div>
-        </google-maps-widget>
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-    {% elseif isPreview %}
-        <div class="widget-placeholder {{ widget.settings.aspectRatio.mobile }}">
-            <div>
-                <p class="title">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderTitle") }}</p>
-                <p class="description">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderDescription") }}</p>
-            </div>
+{{ Twig.if("ceresConfig.global.googleMapsApiKey | trim is not empty or #{ isPreview | json_encode }") }}
+    <div class="widget widget-google-maps{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlinePadding | length > 0 %} {{ inlinePadding }}{% endif %}">
+        {% if location is not empty %}
+        <div class="widget-inner{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+            <google-maps-widget :lat="{{ location.lat }}"
+                                :lng="{{ location.lng }}"
+                                :zoom="{{ widget.settings.zoom.mobile | default(16) }}"
+                                maptype="{{ widget.settings.maptype.mobile }}"
+                                aspect-ratio="{{ widget.settings.aspectRatio.mobile }}">
+                <div class="d-flex flex-center h-100 position-absolute w-100 text-muted">
+                    <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
+                </div>
+            </google-maps-widget>
         </div>
-    {% endif %}
-</div>
 
+        {% elseif isPreview %}
+            <div class="widget-placeholder {{ widget.settings.aspectRatio.mobile }}">
+                <div>
+                    <p class="title">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderTitle") }}</p>
+                    <p class="description">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderDescription") }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{{ Twig.endif() }}

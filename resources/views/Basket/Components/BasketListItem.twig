@@ -12,7 +12,13 @@
         <div class="basket-item component-loading with-icon" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
 
             <div class="image-container">
-                <img class="img-basket-small" v-if="image" :src="image" :alt="altText" :title="itemName">
+                <lazy-img
+                    class="img-basket-small"
+                    v-if="image"
+                    :image-url="image"
+                    :alt="altText"
+                    :title="itemName">
+                </lazy-img>
             </div>
 
             <div class="meta-container-wrapper">
@@ -96,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
+                <div class="item-properties" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
                     <div class="item-properties-header">{{ trans("Ceres::Template.basketAdditionalOptions") }}:</div>
                     <ul class="ml-3">
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">

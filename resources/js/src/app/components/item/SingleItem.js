@@ -18,6 +18,16 @@ export default Vue.component("single-item", {
         {
             type: String,
             default: "#vue-single-item"
+        },
+        pleaseSelectOptionVariationId:
+        {
+            type: Number,
+            default: 0
+        },
+        initPleaseSelectOption:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -44,6 +54,11 @@ export default Vue.component("single-item", {
             return transformVariationProperties(this.currentVariation, [], "showInItemListing");
         },
 
+        addPleaseSelectOption()
+        {
+            return App.config.item.showPleaseSelect;
+        },
+
         ...mapState({
             currentVariation: state => state.item.variation.documents[0].data,
             isVariationSelected: state => state.variationSelect.isVariationSelected,
@@ -62,12 +77,14 @@ export default Vue.component("single-item", {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
+        this.$store.commit("setPleaseSelectVariationId", this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch("setVariationSelect", {
             attributes:         this.attributesData,
             variations:         this.variations,
-            initialVariationId: this.currentVariation.variation.id
+            initialVariationId: this.currentVariation.variation.id,
+            isPleaseSelectOption: this.initPleaseSelectOption
         });
     },
 

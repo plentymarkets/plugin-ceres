@@ -1,7 +1,7 @@
 import ValidationService from "../../../services/ValidationService";
 import { navigateTo } from "../../../services/UrlService";
 import Vue from "vue";
-import { isDefined } from "../../../helper/utils";
+import { isDefined, isNullOrUndefined } from "../../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixin";
 
 const ApiService = require("../../../services/ApiService");
@@ -20,6 +20,11 @@ export default Vue.component("guest-login", {
         backlink:
         {
             type: String
+        },
+        initialEmail:
+        {
+            type: String,
+            default: ""
         }
     },
 
@@ -29,6 +34,14 @@ export default Vue.component("guest-login", {
             email: "",
             isDisabled: false
         };
+    },
+
+    created()
+    {
+        if (!isNullOrUndefined(this.initialEmail) && this.initialEmail.length > 0)
+        {
+            this.email = this.initialEmail;
+        }
     },
 
     mounted()

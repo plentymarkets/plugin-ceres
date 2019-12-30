@@ -36,6 +36,11 @@ export default Vue.component("category-item", {
         {
             type: String,
             default: null
+        },
+        urlWithVariationId:
+        {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -69,18 +74,5 @@ export default Vue.component("category-item", {
         ...mapState({
             showNetPrices: state => state.basket.showNetPrices
         })
-    },
-
-    methods:
-    {
-        loadFirstImage()
-        {
-            const categoryImageCarousel = this.$refs.categoryImageCarousel;
-
-            if (categoryImageCarousel)
-            {
-                categoryImageCarousel.loadFirstImage();
-            }
-        }
     }
 });

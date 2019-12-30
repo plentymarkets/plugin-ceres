@@ -1,0 +1,25 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{{ Twig.set("itemSortOptions", itemSortOptions | json_encode) }}
+{{ Twig.set("translations", translations | json_encode) }}
+
+<div class="widget widget-item-sorting{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner">
+        <div class="list-sort">
+            <select
+                class="custom-select"
+                @change="$store.dispatch('selectItemListSorting', $event.target.value)"
+                v-populate-store:mutation="{ name: 'setItemListSorting', data: {{ Twig.print("itemSorting | json_encode") }} }">
+                {{ Twig.for("value", "itemSortOptions") }}
+                    <option value="{{ Twig.print('value') }}"{{ Twig.if("value == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations[value])") }}</option>
+                {{ Twig.endfor() }}
+            </select>
+        </div>
+    </div>
+</div>

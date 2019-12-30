@@ -12,11 +12,14 @@
 
 {{ Twig.set("backlink", "request.get('backlink')") }}
 
-{{ Twig.if("not services.authentication.isLoggedIn() or #{ isPreview | json_encode }") }}
-    <div class="widget widget-guest-login widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
-        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-        <div class="widget-inner">
-            <guest-login :button-size="{{ buttonSize | json_encode }}" backlink="{{ Twig.print("backlink | url_encode") }}"></guest-login>
-        </div>
+{{ Twig.if("not services.customer.getContactId() > 0 or #{ isPreview | json_encode }") }}
+<div class="widget widget-guest-login widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div class="widget-inner">
+        <guest-login :button-size="{{ buttonSize | json_encode }}"
+                     :initial-email="{{ Twig.print(Twig.call("services.sessionStorage.getSessionValue", ['guestEmail']) ~ " | json_encode") }}"
+                     backlink="{{ Twig.print("backlink | url_encode") }}">
+        </guest-login>
     </div>
+</div>
 {{ Twig.endif() }}

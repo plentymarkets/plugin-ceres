@@ -1,0 +1,46 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
+{% set appearance    = widget.settings.appearance.mobile | default("primary") %}
+{% set pageLimit     = widget.settings.pageLimit.mobile | default(1) %}
+{% set showFirstPage = widget.settings.showFirstPage.mobile %}
+{% set showLastPage  = widget.settings.showLastPage.mobile %}
+{% set alignment     = widget.settings.alignment.mobile | default("left") %}
+
+<div class="widget widget-pagination widget-{{ appearance }} widget-alignment-{{ alignment }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div>
+        {% if isPreview %}
+
+            {# in the preview we need some dummy pages #}
+            {{ Twig.include("Ceres::Category.Item.Partials.Pagination", { 
+                showFirstPage : showFirstPage | json_encode,
+                showLastPage  : showLastPage | json_encode,
+                pageLimit     : pageLimit,
+                currentPage   : 2,
+                pageMax       : (pageLimit * 2) + 4,
+                spacingPadding: spacingPadding | json_encode,
+                inlinePadding : inlinePadding | json_encode,
+                isPreview     : true })
+            }}
+
+        {% else %}
+
+            {{ Twig.include("Ceres::Category.Item.Partials.Pagination", {
+                showFirstPage : showFirstPage | json_encode,
+                showLastPage  : showLastPage | json_encode,
+                pageLimit     : pageLimit,
+                spacingPadding: spacingPadding | json_encode,
+                inlinePadding : inlinePadding | json_encode })
+            }}
+
+        {% endif %}
+    </div>
+</div>

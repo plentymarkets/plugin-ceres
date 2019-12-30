@@ -104,22 +104,7 @@ export default Vue.component("carousel", {
                     "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
                     "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
                 ],
-                smartSpeed       : 350,
-                onChanged: property =>
-                {
-                    const begin = property.item.index;
-                    const end = begin + property.page.size;
-
-                    for (let i = begin; i < end; i++)
-                    {
-                        const childComponent = self.$children[i];
-
-                        if (childComponent && childComponent.loadFirstImage)
-                        {
-                            childComponent.loadFirstImage();
-                        }
-                    }
-                }
+                smartSpeed       : 350
             });
         }
     }

@@ -34,6 +34,7 @@ import "./app/components/basket/Coupon";
 import "./app/components/basket/list/BasketList";
 
 import "./app/components/common/GoogleMaps";
+import "./app/components/common/LazyImg";
 import "./app/components/common/TabList";
 
 import "./app/components/containers/LastSeenItemList";
@@ -58,10 +59,10 @@ import "./app/components/item/ItemBundle";
 
 import "./app/components/item/OrderPropertyValue";
 import "./app/components/item/QuantityInput";
+import "./app/components/item/TagList";
 
 import "./app/components/itemList/CategoryImageCarousel";
 import "./app/components/itemList/CategoryItem";
-import "./app/components/itemList/ItemLazyImg";
 import "./app/components/itemList/ItemSearch";
 import "./app/components/itemList/ItemStoreSpecial";
 import "./app/components/itemList/filter/ItemFilter";
@@ -106,9 +107,9 @@ import "./app/directives/helper/waitingAnimationInfinite";
 import "./app/directives/navigation/navigationTouchHandler";
 import "./app/directives/navigation/openMobileNavigation";
 
-import "./app/directives/pageDesign/ieObjectfitPolyfill";
 import "./app/directives/pageDesign/scrollToTop";
 import "./app/directives/pageDesign/stickInParent";
+import "./app/directives/navigation/sidenavigationChildrenLoader";
 import "./app/directives/pageDesign/tooltip";
 
 
