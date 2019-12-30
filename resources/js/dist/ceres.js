@@ -58976,10 +58976,12 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("item-data-table", {
     getFieldValue: function getFieldValue(path) {
       var value;
 
-      if (path !== "item.variationDimensions") {
-        value = lodash_get__WEBPACK_IMPORTED_MODULE_11___default()(this.currentVariation, path);
-      } else {
+      if (path === "item.variationDimensions") {
         value = "".concat(lodash_get__WEBPACK_IMPORTED_MODULE_11___default()(this.currentVariation, "variation.lengthMM"), "\xD7").concat(lodash_get__WEBPACK_IMPORTED_MODULE_11___default()(this.currentVariation, "variation.widthMM"), "\xD7").concat(lodash_get__WEBPACK_IMPORTED_MODULE_11___default()(this.currentVariation, "variation.heightMM"), " mm");
+      } else if (path === "unit.names.name") {
+        value = "".concat(lodash_get__WEBPACK_IMPORTED_MODULE_11___default()(this.currentVariation, "unit.content"), " ").concat(lodash_get__WEBPACK_IMPORTED_MODULE_11___default()(this.currentVariation, "unit.names.name"));
+      } else {
+        value = lodash_get__WEBPACK_IMPORTED_MODULE_11___default()(this.currentVariation, path);
       }
 
       return this.formatFieldData(value, path);
