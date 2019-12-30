@@ -28,12 +28,12 @@
     "> .25%"
   ],
   "devDependencies": {
-    "@babel/core": "^7.7.4",
+    "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
     "autoprefixer": "^8.6.5",
     "babel-loader": "^8.0.6",
-    "css-loader": "^3.2.0",
+    "css-loader": "^3.3.2",
     "del": "^2.2.0",
     "eslint": "^6.7.2",
     "eslint-config-google": "^0.13.0",
@@ -49,13 +49,13 @@
     "postcss-scss": "^1.0.5",
     "q": "^1.5.1",
     "sass-loader": "^7.3.1",
-    "webpack": "^4.41.2",
+    "webpack": "^4.41.3",
     "webpack-cli": "^3.3.10",
     "webpack-fix-style-only-entries": "^0.3.1"
   },
   "dependencies": {
     "bootstrap": "4.3.1",
-    "core-js": "^3.4.5",
+    "core-js": "^3.5.0",
     "custom-event-polyfill": "^0.3.0",
     "detect-browser": "^2.3.0",
     "flag-icon-css": "^2.9.0",
@@ -66,7 +66,7 @@
     "moment": "^2.24.0",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.16.0",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vue-script2": "2.0.3",
     "vuex": "^3.1.2"
   }
