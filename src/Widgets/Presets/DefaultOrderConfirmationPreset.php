@@ -137,7 +137,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
                                 ->withSetting("text", $this->translator->trans("Ceres::Widget.urlReturnLabel"))
                                 ->withSetting("url.value", "return")
                                 ->withSetting("url.type", "internalLink")
-                                ->withSetting("url.openInNewTab", true);
+                                ->withSetting("url.openInNewTab", false);
     }
 
     private function createOrderTotalsWidget()

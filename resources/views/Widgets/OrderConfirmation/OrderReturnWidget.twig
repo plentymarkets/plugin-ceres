@@ -16,6 +16,7 @@
     <div class="widget-inner">
         <order-return
             :init-order-data="{{ Twig.print("orderData | json_encode") }}"
+            order-access-key="{{ Twig.print("request.get('orderAccessKey')") }}"
             :item-details-data="{{ itemDetailsData | json_encode }}"
             :button-size="{{ buttonSize | json_encode }}">
         </order-return>

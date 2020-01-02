@@ -20,6 +20,11 @@ Vue.component("order-return", {
             type: Object,
             required: true
         },
+        orderAccessKey:
+        {
+            type: String,
+            default: ""
+        },
         itemDetailsData:
         {
             type: Array,
@@ -37,6 +42,7 @@ Vue.component("order-return", {
     created()
     {
         this.$store.commit("setOrderReturnData", this.initOrderData);
+        this.$store.commit("setOrderAccessKey", this.orderAccessKey);
     },
 
     computed:
