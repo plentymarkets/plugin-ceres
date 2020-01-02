@@ -64374,6 +64374,10 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("order-return", {
       type: Object,
       required: true
     },
+    orderAccessKey: {
+      type: String,
+      default: ""
+    },
     itemDetailsData: {
       type: Array,
       default: function _default() {
@@ -64388,6 +64392,7 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("order-return", {
   },
   created: function created() {
     this.$store.commit("setOrderReturnData", this.initOrderData);
+    this.$store.commit("setOrderAccessKey", this.orderAccessKey);
   },
   computed: _objectSpread({
     amount: function amount() {
@@ -74160,6 +74165,7 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 
 var state = {
   orderData: {},
+  orderAccessKey: "",
   orderReturnItems: [],
   orderReturnNote: ""
 };
@@ -74169,6 +74175,9 @@ var mutations = {
       return orderItem.quantity !== 0;
     });
     state.orderData = orderData;
+  },
+  setOrderAccessKey: function setOrderAccessKey(state, orderAccessKey) {
+    state.orderAccessKey = orderAccessKey;
   },
   updateOrderReturnItems: function updateOrderReturnItems(state, _ref) {
     var quantity = _ref.quantity,
@@ -74214,6 +74223,7 @@ var actions = {
 
         ApiService.post("/rest/io/order/return", {
           orderId: state.orderData.order.id,
+          orderAccessKey: state.orderAccessKey,
           variationIds: variationIds,
           returnNote: state.orderReturnNote
         }).done(function (data) {
