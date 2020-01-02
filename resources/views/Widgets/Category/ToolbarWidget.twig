@@ -48,7 +48,7 @@
         </div>
     </div>
     {{ Twig.if("overrideSearchFilters | trim is empty") }}
-    <div id="filter-collapse_{{ uid }}" class="filter-collapse collapse p-0 m-0{% if isPreview %} sb-no-animation{% endif %}" >
+    <div id="filter-collapse_{{ uid }}" class="filter-collapse collapse p-0 m-0{% if isPreview %} position-static sb-no-animation{% endif %}">
         <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
             <div class="collapse-container" data-translation-empty="{{ trans("Ceres::Template.itemFilterNoContentMessage") }}" {% if isPreview %}data-builder-child-container="collapsable"{% endif %}>
                 {{ children.collapsable | raw }}
