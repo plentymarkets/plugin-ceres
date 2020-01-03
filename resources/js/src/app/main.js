@@ -338,7 +338,6 @@ if ( headerParent )
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
         calculateBodyOffset();
-        $(".owl-carousel").trigger("refresh.owl.carousel");
     });
 
     const headerImages = headerParent.querySelectorAll("img");
