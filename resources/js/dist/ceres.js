@@ -57591,7 +57591,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
 
 vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
-  delimiters: ["${", "}"],
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_18__["ButtonSizePropertyMixin"]],
   props: {
     modalElement: String,
@@ -57621,32 +57620,42 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
       isDisabled: false,
       privacyPolicyAccepted: false,
       privacyPolicyShowError: false,
-      enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
+      enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
+      modalShown: false
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      if (_this.modalElement) {
+        _this.initModalEventListeners();
+      }
+    });
   },
   methods: {
     /**
      * Validate the registration form
      */
     validateRegistration: function validateRegistration() {
-      var _this = this;
+      var _this2 = this;
 
       Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_16__["executeReCaptcha"])(this.$refs.registrationForm).then(function (recaptchaToken) {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].validate(_this.$refs.registrationForm).done(function () {
-          if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
-            _this.sendRegistration(recaptchaToken);
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].validate(_this2.$refs.registrationForm).done(function () {
+          if (!_this2.enableConfirmingPrivacyPolicy || _this2.privacyPolicyAccepted) {
+            _this2.sendRegistration(recaptchaToken);
           } else {
-            _this.privacyPolicyShowError = true;
+            _this2.privacyPolicyShowError = true;
             NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
               hyphen: "&shy;"
             }));
           }
         }).fail(function (invalidFields) {
-          if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_17__["isNullOrUndefined"])(_this.$refs.passwordHint) && invalidFields.indexOf(_this.$refs.passwordInput) >= 0) {
-            _this.$refs.passwordHint.showPopper();
+          if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_17__["isNullOrUndefined"])(_this2.$refs.passwordHint) && invalidFields.indexOf(_this2.$refs.passwordInput) >= 0) {
+            _this2.$refs.passwordHint.showPopper();
           }
 
-          var invalidFieldNames = _this.getInvalidFieldNames(invalidFields);
+          var invalidFieldNames = _this2.getInvalidFieldNames(invalidFields);
 
           if (invalidFieldNames.length > 0) {
             NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
@@ -57656,8 +57665,8 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
 
           _services_ValidationService__WEBPACK_IMPORTED_MODULE_12__["default"].markInvalidFields(invalidFields, "error");
 
-          if (_this.enableConfirmingPrivacyPolicy && !_this.privacyPolicyAccepted) {
-            _this.privacyPolicyShowError = true;
+          if (_this2.enableConfirmingPrivacyPolicy && !_this2.privacyPolicyAccepted) {
+            _this2.privacyPolicyShowError = true;
             NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
               hyphen: "&shy;"
             }));
@@ -57701,7 +57710,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
      * Send the registration
      */
     sendRegistration: function sendRegistration(recaptchaToken) {
-      var _this2 = this;
+      var _this3 = this;
 
       var userObject = this.getUserObject();
       userObject.recaptcha = recaptchaToken;
@@ -57715,12 +57724,12 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
           }));
           NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.regSuccessful")).closeAfter(3000);
 
-          if (document.getElementById(_this2.modalElement) !== null) {
-            ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
+          if (document.getElementById(_this3.modalElement) !== null) {
+            ModalService.findModal(document.getElementById(_this3.modalElement)).hide();
           }
 
-          if (_this2.backlink !== null && _this2.backlink) {
-            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_14__["navigateTo"])(decodeURIComponent(_this2.backlink));
+          if (_this3.backlink !== null && _this3.backlink) {
+            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_14__["navigateTo"])(decodeURIComponent(_this3.backlink));
           } else {
             location.reload();
           }
@@ -57728,9 +57737,9 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
           NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.regError")).closeAfter(10000);
         }
 
-        _this2.isDisabled = false;
+        _this3.isDisabled = false;
       }).fail(function () {
-        _this2.isDisabled = false;
+        _this3.isDisabled = false;
       });
     },
     setAddressDataField: function setAddressDataField(_ref) {
@@ -57775,6 +57784,20 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
 
       if (value) {
         this.privacyPolicyShowError = false;
+      }
+    },
+    initModalEventListeners: function initModalEventListeners() {
+      var _this4 = this;
+
+      var modal = ModalService.findModal(document.getElementById(this.modalElement));
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_17__["isDefined"])(modal)) {
+        modal.on("show.bs.modal", function () {
+          _this4.modalShown = true;
+        });
+        modal.on("hide.bs.modal", function () {
+          _this4.modalShown = false;
+        });
       }
     }
   }
