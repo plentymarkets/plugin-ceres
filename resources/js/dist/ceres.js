@@ -69937,7 +69937,6 @@ if (headerParent) {
   }, 10));
   $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
     calculateBodyOffset();
-    $(".owl-carousel").trigger("refresh.owl.carousel");
   });
   var headerImages = headerParent.querySelectorAll("img");
   Promise.all(Array.prototype.slice.call(headerImages).map(function (headerImage) {
