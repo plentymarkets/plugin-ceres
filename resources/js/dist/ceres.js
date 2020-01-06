@@ -55399,6 +55399,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("lazy-img", {
     this.$nextTick(function () {
       lozad__WEBPACK_IMPORTED_MODULE_1___default()(_this.$el).observe();
     });
+  },
+  watch: {
+    imageUrl: function imageUrl() {
+      var _this2 = this;
+
+      this.$nextTick(function () {
+        _this2.$el.setAttribute("data-loaded", false);
+
+        lozad__WEBPACK_IMPORTED_MODULE_1___default()(_this2.$el).triggerLoad(_this2.$el);
+      });
+    }
   }
 });
 
