@@ -55,7 +55,7 @@ class TwigItemDataField extends Twig_Extension
             $this->twig->createSimpleFunction(
                 'item_data_field_html',
                 [$this, 'getDataFieldHtml'],
-                ['is_safe' => array('html')]
+                ['is_safe' => ['html']]
             ),
         ];
     }
