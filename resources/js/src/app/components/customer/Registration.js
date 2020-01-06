@@ -43,10 +43,6 @@ Vue.component("registration", {
         };
     },
 
-    created()
-    {
-    },
-
     mounted()
     {
         this.$nextTick(() =>
