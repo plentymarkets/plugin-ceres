@@ -52,9 +52,7 @@ Vue.component("address-input-group", {
     {
         isMyAccount()
         {
-            const myAccountClass = document.getElementsByClassName("category-my-account");
-
-            return myAccountClass.length > 0;
+            return App.templateType === "my-account";
         },
 
         isPickupStation()
