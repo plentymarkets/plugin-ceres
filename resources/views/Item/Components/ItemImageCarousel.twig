@@ -3,7 +3,7 @@
         <div class="single-carousel owl-carousel owl-theme owl-single-item" ref="single">
             <div v-for="image in singleImages" class="prop-xs-1-1">
                 <a :href="image.url" data-lightbox="single-big-image-gallery">
-                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getItemName()"></lazy-img>
+                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getImageName(image)"></lazy-img>
                 </a>
             </div>
         </div>
@@ -15,7 +15,7 @@
                         v-bind:class="{ 'active': currentItem === index}"
                         :image-url="imagePreview.url"
                         :alt="getAltText(imagePreview)"
-                        :title="getItemName()">
+                        :title="getImageName(imagePreview)">
                     </lazy-img>
                 </div>  
             </div>
