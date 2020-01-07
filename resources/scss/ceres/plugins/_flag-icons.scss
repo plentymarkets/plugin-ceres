@@ -1,0 +1,10 @@
+@import "~flag-icon-css/sass/flag-icon-base";
+@each $lang in ('de', 'bg', 'fr', 'it', 'es', 'tr', 'nl', 'pl', 'pt', 'no', 'dk', 'se', 'cz', 'ro', 'ru', 'sk', 'cn', 'vn') {
+    @include flag-icon($lang);
+}
+
+@each $lang, $mapped in ('en': 'bg', 'da': 'dk', 'nn': 'no') {
+    .flag-icon-#{$lang} {
+        @extend .flag-icon-#{$mapped};
+    }
+}
