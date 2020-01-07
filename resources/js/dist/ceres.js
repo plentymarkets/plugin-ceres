@@ -62532,7 +62532,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("live-shopping-details", {
     getDuration: function getDuration(seconds) {
       var duration = moment__WEBPACK_IMPORTED_MODULE_5___default.a.duration(seconds, "seconds");
       return {
-        days: duration.days(),
+        days: Math.floor(duration.asDays()),
         hours: duration.hours(),
         minutes: duration.minutes(),
         seconds: duration.seconds()
