@@ -72,17 +72,15 @@ Vue.component("step-by-step-navigation", {
         {
             if (!this.isWaiting)
             {
-
+                this.isWaiting = true;
+    
+                this.$store.dispatch("loadCategoryChildrenChunk",
+                    { categoryId: this.categoryId, size: this.chunkSize })
+                    .finally(() =>
+                    {
+                        this.isWaiting = false;
+                    });
             }
-
-            this.isWaiting = true;
-
-            this.$store.dispatch("loadCategoryChildrenChunk",
-                { categoryId: this.categoryId, size: this.chunkSize })
-                .finally(() =>
-                {
-                    this.isWaiting = false;
-                });
         }
     }
 });
