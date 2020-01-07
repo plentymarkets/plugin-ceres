@@ -2,12 +2,14 @@
     .widget {
         margin-bottom: 0;
     }
-    
-    .list-controls-inner {
-        padding: 1rem;
 
-        div.widget ~ div.widget {
-            margin-left: 1em;
+    .list-controls-inner {
+        .flex-fill {
+            > div {
+                @include media-breakpoint-up(sm) {
+                    display: inline-block !important;
+                }
+            }
         }
     }
 
@@ -16,6 +18,16 @@
             background: $white;
             border: 1px solid $gray-lighter2;
             padding: 2rem;
+        }
+    }
+
+    .collapse-container:empty {
+        &:after {
+            content: attr(data-translation-empty);
+            display: block;
+            padding: .75rem;
+            color: $gray-dark;
+            text-align: center;
         }
     }
 }

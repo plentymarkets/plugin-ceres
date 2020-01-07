@@ -8,8 +8,13 @@
 {{ component( "Ceres::Item.Components.OrderPropertyList" ) }}
 {{ component( "Ceres::Item.Components.SingleItem" ) }}
 {{ component( "Ceres::Item.Components.VariationSelect" ) }}
+{{ component( "Ceres::Item.Components.TagList" ) }}
 
-<single-item v-cloak item-data="{{ item | json_data }}" attributes-data="{{ attributes | json_data }}" variations="{{ variations | json_data }}">
+<single-item v-cloak item-data="{{ item | json_data }}"
+             attributes-data="{{ attributes | json_data }}"
+             variations="{{ variations | json_data }}"
+             :please-select-option-variation-id="{{ dynamicVariationId }}"
+             :init-please-select-option="{{ initPleaseSelectOption | json_encode }}">
     <template #before-price>{{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}</template>
     <template #after-price>{{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}</template>
     <template #before-add-to-basket>{{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data) }}</template>
@@ -23,7 +28,7 @@
     <template #image-carousel>
         {% set ImageCarouselOverride = LayoutContainer.show("Ceres::SingleItem.ImageCarousel") %}
         {% if ImageCarouselOverride|trim is empty %}
-            <item-image-carousel image-url-accessor="url" template="#vue-item-image-carousel"></item-image-carousel>
+            <item-image-carousel plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url" template="#vue-item-image-carousel"></item-image-carousel>
         {% else %}
             {{ ImageCarouselOverride }}
         {% endif %}

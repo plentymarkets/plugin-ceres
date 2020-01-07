@@ -12,11 +12,12 @@ use Plenty\Plugin\ConfigRepository;
 class SingleItemContext extends GlobalContext implements ContextInterface
 {
     public $item;
-
     public $attributes;
     public $variations;
     public $customerShowNetPrices;
     public $defaultCategory;
+    public $dynamicVariationId;
+    public $initPleaseSelectOption;
 
     public function init($params)
     {
@@ -27,6 +28,9 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         /** @var ConfigRepository $configRepository */
         $configRepository = pluginApp(ConfigRepository::class);
 
+        $this->dynamicVariationId = intval($params['dynamic']['documents'][0]['id'] ?? 0);
+        $this->initPleaseSelectOption = $this->getParam('initPleaseSelectOption', false);
+
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
 
@@ -36,27 +40,23 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->attributes = $params['variationAttributeMap']['attributes'];
         $this->variations = $params['variationAttributeMap']['variations'];
-
         $this->customerShowNetPrices = $customerService->showNetPrices();
 
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
-        foreach($this->item['documents'][0]['data']['defaultCategories'] as $category)
-        {
-            if ($category['plentyId'] == $plentyId)
-            {
+        foreach ($this->item['documents'][0]['data']['defaultCategories'] as $category) {
+            if ($category['plentyId'] == $plentyId) {
                 $defaultCategoryId = $category['id'];
                 break;
             }
         }
 
-        if($defaultCategoryId > 0)
-        {
+        if ($defaultCategoryId > 0) {
             /** @var CategoryService $categoryService */
             $categoryService = pluginApp(CategoryService::class);
             $this->defaultCategory = $categoryService->get($defaultCategoryId);
         }
-        
+
         $this->bodyClasses[] = "item-" . $itemData['item']['id'];
         $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
     }

@@ -47,6 +47,11 @@ class GlobalContext implements ContextInterface
      */
     public $homepageURL;
     public $splitItemBundle;
+
+    /**
+     * @deprecated since 4.5
+     * Use IO\Extensions\Constants\ShopUrls::getTemplateType() instead
+     */
     public $templateEvent;
     public $isShopBuilder;
     public $isSafeMode;

@@ -13,6 +13,7 @@
 {% set spacingPaddingLR  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "", ["left", "right"]) %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 {% set inlineMargin      = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set customClass     = widget.settings.customClass.mobile %}
 
 <div class="widget widget-selection
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}

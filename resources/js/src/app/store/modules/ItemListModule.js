@@ -17,25 +17,27 @@ const state =
 
 const mutations =
     {
+        addFacets(state, facets)
+        {
+            const stateFacets = state.facets;
+
+            for (const facet of facets)
+            {
+                if (!stateFacets.find(fac => fac.id === facet.id))
+                {
+                    stateFacets.push(facet);
+                }
+            }
+
+            state.facets = stateFacets;
+        },
+
+        /**
+         * @deprecated use addFacets instead
+         */
         setFacets(state, facets)
         {
-            facets = facets || [];
-
-            facets.sort((facetA, facetB) =>
-            {
-                if (facetA.position > facetB.position)
-                {
-                    return 1;
-                }
-                if (facetA.position < facetB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
-
-            state.facets = facets;
+            state.facets = facets || [];
         },
 
         setPriceFacet(state, { priceMin, priceMax })

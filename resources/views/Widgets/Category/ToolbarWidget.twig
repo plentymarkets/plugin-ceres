@@ -1,8 +1,8 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
-{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets ) %}
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.set("overrideSearchFilters", Twig.call("LayoutContainer.show", ["Ceres::Search.Filter", Twig.var("facets")])) }}
 
 {% set icon = widget.settings.icon.mobile | default("fa-sliders") %}
 {% set text = widget.settings.text.mobile %}
@@ -16,33 +16,41 @@
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+{% set hasCollapsableContent = false %}
+
+{% if children is defined and children.collapsable | trim is not empty %}
+    {% set hasCollapsableContent = true %}
+{% endif %}
 
 <div class="widget widget-toolbar list-controls{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div class="list-controls-inner {% if spacingPadding | length > 0 %}{{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-        
-        <div class="d-flex">
+    <div class="list-controls-inner{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+        <div class="d-sm-flex p-2">
+
             <div class="flex-fill" {% if isPreview %}data-builder-child-container="toolbar"{% endif %}>
                 {{ children.toolbar | raw }}
             </div>
 
-            {% if ( overrideSearchFilters | trim is empty ) and ( isPreview or children.collapsable ) %}
-            <div class="d-flex widget-{{ appearance }}">
-                <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed pr-0" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}">
-                    {%- if icon != "none" -%}
-                        <i class="fa {{ icon }} default-float mr-1" aria-hidden="true" style="line-height: inherit"></i>
-                    {%- endif -%}
-                    {%- if text | trim is empty -%}{{ Twig.trans("Ceres::Template.itemFilter") }}{%- else -%}{{- text -}}{%- endif -%}
-                </a>
-            </div>
-            {% else %}
-                {{ overrideSearchFilters }}
-            {% endif %}
+            {{ Twig.if("overrideSearchFilters | trim is empty") }}
+                {% if isPreview or hasCollapsableContent %}
+                <div class="d-flex widget-{{ appearance }}">
+                    <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}">
+                        {%- if icon != "none" -%}
+                            <i class="fa {{ icon }} default-float mr-1" aria-hidden="true" style="line-height: inherit"></i>
+                        {%- endif -%}
+                        {%- if text | trim is empty -%}{{ Twig.trans("Ceres::Template.itemFilter") }}{%- else -%}{{- text -}}{%- endif -%}
+                    </a>
+                </div>
+                {% endif %}
+            {{ Twig.else() }}
+                {{ Twig.print("overrideSearchFilters") }}
+            {{ Twig.endif() }}
+
         </div>
     </div>
-    {% if overrideSearchFilters | trim is empty %}
-    <div id="filter-collapse_{{ uid }}" class="filter-collapse collapse p-0 m-0">
+    {{ Twig.if("overrideSearchFilters | trim is empty") }}
+    <div id="filter-collapse_{{ uid }}" class="filter-collapse collapse p-0 m-0{% if isPreview %} position-static sb-no-animation{% endif %}">
         <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-            <div {% if isPreview %}data-builder-child-container="collapsable"{% endif %}>
+            <div class="collapse-container" data-translation-empty="{{ trans("Ceres::Template.itemFilterNoContentMessage") }}" {% if isPreview %}data-builder-child-container="collapsable"{% endif %}>
                 {{ children.collapsable | raw }}
             </div>
             <div class="text-right mt-3 widget-{{ appearance }}">
@@ -50,5 +58,5 @@
             </div>
         </div>
     </div>
-    {% endif %}
+    {{ Twig.endif() }}
 </div>

@@ -138,7 +138,11 @@
                     color: $gray-darker;
                     background: $gray-lightest;
                 }
-
+            }
+            a:not([href]) {
+                cursor: auto; 
+            }
+            a {
                 span.placeholder
                 {
                     background: $gray;
@@ -149,9 +153,6 @@
                     border-radius: 3px;
                     display: inline-block;	
                 }
-            }
-            a:not([href]) {
-                cursor: auto; 
             }
             ul {
                 display: none;
@@ -276,4 +277,15 @@
     min-width: 3em;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.item-filter-price
+{
+    display: flex;
+    flex-direction: row;
+
+    > .input-group
+    {
+        margin-right: $spacer;
+    }
 }

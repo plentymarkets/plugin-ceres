@@ -78,7 +78,15 @@
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary')  }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if("imageUrl | trim is not empty") }}
-        <img{% if imageSize == "cover" %} v-ie-objectfit-polyfill="'cover'"{% endif %} class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" alt="{{ Twig.print("imageAltText") }}"/>
+        {% if widget.settings.lazyLoading.mobile %}
+            <lazy-img
+                class="img-{{ imageSize }}"
+                image-url="{{ Twig.print("imageUrl") }}"
+                alt="{{ Twig.print("imageAltText") }}">
+            </lazy-img>
+        {% else %}
+            <img class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" alt="{{ Twig.print("imageAltText") }}"/>
+        {% endif %}
     {{ Twig.endif() }}
 
     <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}{% if openInNewTab == true %} target="_blank"{% endif %}{% if urlType == 'external' %} rel="noopener"{% endif %} class="widget-inner">

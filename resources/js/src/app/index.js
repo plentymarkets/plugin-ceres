@@ -48,6 +48,7 @@ import "./components/checkout/ShippingProfileSelect";
 import "./components/checkout/SubscribeNewsletterCheck";
 
 import "./components/common/GoogleMaps";
+import "./components/common/LazyImg";
 import "./components/common/TabItem";
 import "./components/common/TabList";
 
@@ -82,6 +83,7 @@ import "./components/item/ItemBundle";
 import "./components/item/ItemDataTable";
 import "./components/item/ItemImageCarousel";
 import "./components/item/OrderProperties";
+import "./components/item/TagList";
 
 // TODO: Move to parent component
 import "./components/item/OrderPropertyList";
@@ -95,7 +97,6 @@ import "./components/item/VariationSelect";
 
 import "./components/itemList/CategoryImageCarousel";
 import "./components/itemList/CategoryItem";
-import "./components/itemList/ItemLazyImg";
 import "./components/itemList/ItemSearch";
 import "./components/itemList/ItemStoreSpecial";
 import "./components/itemList/filter/ItemFilter";
@@ -169,7 +170,6 @@ import "./directives/navigation/navigationTouchHandler";
 import "./directives/navigation/openMobileNavigation";
 import "./directives/navigation/sidenavigationChildrenLoader";
 
-import "./directives/pageDesign/ieObjectfitPolyfill";
 import "./directives/pageDesign/scrollToTop";
 import "./directives/pageDesign/stickInParent";
 import "./directives/pageDesign/tooltip";

@@ -1,0 +1,24 @@
+@each $color, $value in ( "dark" : $dark, "white": $white )
+{
+    .bg-#{ $color }
+    {
+        background-color: $value !important;
+        color: color-yiq($value) !important;
+    }
+}
+
+.bg-cover {
+    background-size: cover !important;
+}
+.bg-contain {
+    background-size: contain !important;
+}
+.bg-auto {
+    background-size: auto !important;
+}
+.bg-scroll {
+    background-attachment: scroll !important;
+}
+.bg-repeat {
+    background-repeat: repeat !important;
+}

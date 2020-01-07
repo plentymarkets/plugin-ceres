@@ -11,21 +11,20 @@
 {% set animationStyle = widget.settings.animationStyle.mobile %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.set("ImageCarouselOverride", Twig.call("LayoutContainer.show", ["Ceres::SingleItem.ImageCarousel"])) }}
 
 <div class="widget widget-item-image widget-{{ appearance | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
-    {% set ImageCarouselOverride = LayoutContainer.show("Ceres::SingleItem.ImageCarousel") %}
-    {% if ImageCarouselOverride|trim is empty %}
+    {{ Twig.if("ImageCarouselOverride | trim is empty") }}
         <item-image-carousel v-if="!!$store && !!$store.state.item.variation && !!$store.state.item.variation.documents && !!$store.state.item.variation.documents.length"
             :max-quantity="{{ maxQuantity }}"
             image-url-accessor="{{ imageSize }}"
             :show-thumbs="{{ showThumbs | json_encode }}"
             :show-dots="{{ showDots | json_encode }}"
-            animation-style="{{ animationStyle }}">
+            animation-style="{{ animationStyle }}"
+            plugin-path="{{ plugin_path('Ceres') }}">
         </item-image-carousel>
-    {% else %}
-        {{ ImageCarouselOverride }}
-    {% endif %}
+    {{ Twig.else() }}
+        {{ Twig.print("ImageCarouselOverride") }}
+    {{ Twig.endif() }}
 </div>
-
-

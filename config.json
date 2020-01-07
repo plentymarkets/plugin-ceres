@@ -53,6 +53,14 @@
                         "defaultValue": "false"
                     }
                 },
+                "contact.api_key": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.contactApiKeyLabel",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
                 "global.google_recaptcha_version": {
                     "type": "selectBox",
                     "required": false,
@@ -816,6 +824,7 @@
                 "item.show_category_description_top": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemShowCategoryDescriptionTopLabel",
                     "options": {
                         "defaultValue": "description1",
@@ -842,6 +851,7 @@
                 "item.show_category_description_bottom": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemShowCategoryDescriptionBottomLabel",
                     "options": {
                         "defaultValue": "none",
@@ -885,6 +895,7 @@
                 "item.show_category_filter": {
                   "type": "checkBox",
                   "required": false,
+                  "deprecated": true,
                   "label": "Config.itemShowCategoryFilterLabel",
                   "options": {
                     "defaultValue": "false"
@@ -1513,15 +1524,6 @@
                                 "caption": "Config.contactShowDataOpeningTimes"
                             }
                         ]
-                    }
-                },
-                "contact.api_key": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactApiKeyLabel",
-                    "options": {
-                        "defaultValue": "API key"
                     }
                 },
                 "contact.map_zoom": {

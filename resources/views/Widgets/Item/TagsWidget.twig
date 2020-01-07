@@ -1,0 +1,21 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.component("Ceres::Item.Components.TagList") }}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
+{% set tagAppearance = widget.settings.tagAppearance.mobile %}
+
+<div class="widget {% if buttonSize | length > 0 %} {{ buttonSize }}{% endif %} {% if customClass | length > 0 %}
+    {{ customClass }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <tag-list tag-appearance="{{ tagAppearance }}"
+     {% if inlineMargin | length > 0 %} margin-inline-styles="{{ inlineMargin }}" {% endif %}
+    {% if spacingMargin | length > 0 %} margin-classes="{{ spacingMargin }}" {% endif %}>
+    </tag-list>
+</div>
+

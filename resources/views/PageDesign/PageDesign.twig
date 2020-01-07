@@ -196,7 +196,7 @@
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
         isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-        templateEvent: "{{ templateEvent }}",
+        templateType: "{{ urls.templateType }}",
         language: "{{ lang }}",
         defaultLanguage: "{{ defaultLanguage }}",
         decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
