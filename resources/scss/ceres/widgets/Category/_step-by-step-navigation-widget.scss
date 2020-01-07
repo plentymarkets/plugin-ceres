@@ -4,6 +4,7 @@
         height: 100%;
         flex-direction: column;
         justify-content: center;
+        min-height: 75px;
         cursor: pointer;
     }
     
@@ -23,6 +24,10 @@
         bottom: 0;
     }
     
+    .load-more {
+        min-height: auto;
+    }
+
     &.widget-none {
         span {
             color: black;
