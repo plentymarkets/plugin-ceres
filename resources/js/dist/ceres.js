@@ -55899,6 +55899,9 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("address-input-group", {
     }
   },
   computed: _objectSpread({
+    isMyAccount: function isMyAccount() {
+      return App.templateType === "my-account";
+    },
     isPickupStation: function isPickupStation() {
       return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
     },
@@ -55906,7 +55909,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("address-input-group", {
       return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
     },
     isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable() {
-      return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+      return (this.isParcelBoxAvailable || this.isPostOfficeAvailable || this.isMyAccount) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_14__["mapState"])({
     isParcelBoxAvailable: function isParcelBoxAvailable(state) {
