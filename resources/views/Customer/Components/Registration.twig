@@ -77,7 +77,7 @@
         </div>
 
         {% if ceresConfig.global.googleRecaptchaApiKey | trim is not empty %}
-            <recaptcha></recaptcha>
+            <recaptcha v-if="modalShown"></recaptcha>
         {% endif %}
     </form>
 </script>
