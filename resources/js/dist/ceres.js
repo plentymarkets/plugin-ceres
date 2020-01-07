@@ -55506,25 +55506,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.regexp.constructor */ "./node_modules/core-js/modules/es.regexp.constructor.js");
-/* harmony import */ var core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.string.trim */ "./node_modules/core-js/modules/es.string.trim.js");
-/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_10__);
-
-
+/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
+/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.string.trim */ "./node_modules/core-js/modules/es.string.trim.js");
+/* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
@@ -55577,17 +55571,15 @@ var TabNavItem = {
     }
   }
 };
-vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("tab-list", {
+vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("tab-list", {
   render: function render(createElement) {
     var _this2 = this;
 
     var tabListElements = [];
-    var filteredTabs = this.$slots.default.filter(function (tab) {
-      return !!tab.componentOptions;
-    });
+    var tabs = this.getVisibleTabs();
 
-    if (this.tabs.length > 0) {
-      var navElements = this.tabs.map(function (tab, index) {
+    if (tabs.length > 0) {
+      var navElements = tabs.map(function (tab, index) {
         return createElement(TabNavItem, {
           props: {
             tab: tab,
@@ -55614,7 +55606,9 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("tab-list", {
 
     var content = createElement("div", {
       staticClass: "tab-content"
-    }, [filteredTabs]);
+    }, [this.$slots.default.filter(function (tab) {
+      return !!tab.componentOptions;
+    })]);
     tabListElements.push(content);
     return createElement("div", {}, tabListElements);
   },
@@ -55630,41 +55624,52 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("tab-list", {
   },
   data: function data() {
     return {
-      tabs: []
+      tabComponents: [],
+      tabsHash: ""
     };
   },
   created: function created() {
     var _this3 = this;
 
     this.$nextTick(function () {
-      _this3.updateTabs();
-
-      var hasActiveContent = _this3.tabs.some(function (tab) {
-        return tab.active;
+      // get all child tab components
+      _this3.tabComponents = (_this3.$slots.default || []).map(function (vnode) {
+        return vnode.componentInstance;
+      }).filter(function (entry) {
+        return !!entry;
       });
-
-      if (!hasActiveContent) {
-        _this3.activateTab(_this3.tabs[0]);
-      }
     });
   },
+  updated: function updated() {
+    var tabs = this.getVisibleTabs();
+    var hash = tabs.map(function (component) {
+      return component._uid;
+    }).join("_"); // need to check if visible tabs have been changed after rendering
+
+    if (this.tabsHash !== hash) {
+      // visible tabs changed => need to re-render component
+      this.tabsHash = hash;
+      this.$forceUpdate(); // check for active tab
+
+      if (!tabs.some(function (tab) {
+        return tab.active;
+      }) && tabs.length > 0) {
+        this.activateTab(tabs[0]);
+      }
+    }
+  },
   methods: {
-    getTabs: function getTabs() {
+    getVisibleTabs: function getVisibleTabs() {
       var _this4 = this;
 
-      var tabs = this.$slots.default || [];
-      var tabComps = tabs.map(function (vnode) {
-        return vnode.componentInstance;
+      // filter visible tabs
+      var tabs = this.tabComponents.filter(function (tab) {
+        return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isDefined"])(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
       });
-      return tabComps.filter(function (tab) {
-        return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
-      });
-    },
-    updateTabs: function updateTabs() {
-      this.tabs = this.getTabs();
+      return tabs;
     },
     activateTab: function activateTab(tab) {
-      var activeTab = this.tabs.find(function (tab) {
+      var activeTab = this.tabComponents.find(function (tab) {
         return tab.localActive;
       });
       tab.setActive(true);
@@ -55675,12 +55680,11 @@ vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("tab-list", {
     },
 
     /**
-     * Checks if tab content contains img tag or text.
+     * Checks if tab content contains text or img or iframe element.
      * @param {*} tab
      */
     filterContent: function filterContent(tab) {
-      var imgPattern = new RegExp(/<img([\w\W]+?)>/);
-      return imgPattern.test(tab.$el.innerHTML) || tab.$el.textContent.trim().length > 0;
+      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe");
     }
   }
 });
