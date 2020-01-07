@@ -153,8 +153,7 @@ Vue.component("live-shopping-details", {
         getDuration(seconds)
         {
             const duration = moment.duration(seconds, "seconds");
-
-            this.realduration = duration;
+            
             return {
                 days: Math.floor(duration.asDays()),
                 hours: duration.hours(),
