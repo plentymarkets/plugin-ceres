@@ -90,7 +90,7 @@
                         * <span v-if="showNetPrices">{{ trans("Ceres::Template.itemExclVAT") }}</span>
                         <span v-else>{{ trans("Ceres::Template.itemInclVAT") }}</span>
                         {{ trans("Ceres::Template.itemExclusive") }}
-                        <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                        <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts" class="text-appearance"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                     </span>
                 </div>
             </slot>
