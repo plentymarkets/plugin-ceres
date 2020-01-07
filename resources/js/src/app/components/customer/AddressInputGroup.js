@@ -50,6 +50,11 @@ Vue.component("address-input-group", {
 
     computed:
     {
+        isMyAccount()
+        {
+            return App.templateType === "my-account";
+        },
+
         isPickupStation()
         {
             return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
@@ -62,7 +67,7 @@ Vue.component("address-input-group", {
 
         isParcelOrOfficeAvailable()
         {
-            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable || this.isMyAccount) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
         },
 
         ...mapState({
