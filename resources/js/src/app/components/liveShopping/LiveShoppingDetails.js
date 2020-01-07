@@ -153,9 +153,8 @@ Vue.component("live-shopping-details", {
         getDuration(seconds)
         {
             const duration = moment.duration(seconds, "seconds");
-
             return {
-                days: duration.days(),
+                days: Math.floor(duration.asDays()),
                 hours: duration.hours(),
                 minutes: duration.minutes(),
                 seconds: duration.seconds()
