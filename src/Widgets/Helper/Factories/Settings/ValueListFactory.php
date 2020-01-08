@@ -8,6 +8,9 @@ class ValueListFactory
 {
     private $valueList;
 
+    /**
+     * @return ValueListFactory
+     */
     public static function make()
     {
         /** @var ValueListFactory $instance */
@@ -15,11 +18,16 @@ class ValueListFactory
         return $instance;
     }
 
+    /**
+     * @param $value
+     * @param $caption
+     * @return ValueListFactory
+     */
     public function addEntry($value, $caption)
     {
         $this->valueList[] = [
-            "value" => $value,
-            "caption" => $caption
+            'value' => $value,
+            'caption' => $caption
         ];
         return $this;
     }

@@ -17,7 +17,7 @@ class ItemsPerPageWidget extends BaseWidget
         return WidgetDataFactory::make('Ceres::ItemsPerPageWidget')
                                 ->withLabel('Widget.ItemsPerPageLabel')
                                 ->withPreviewImageUrl('/images/widgets/items-per-page.svg')
-                                ->withType(WidgetTypes::TOOLBAR)
+                                ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(200)
                                 ->toArray();

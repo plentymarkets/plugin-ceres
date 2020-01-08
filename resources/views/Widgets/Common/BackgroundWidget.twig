@@ -54,14 +54,17 @@
                 {% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}
             {{ Twig.endif() }}{% endif %}">
     <div>
-        <div class="parallax-img-container-inner
+        <lazy-img class="parallax-img-container-inner
             {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
             {% if colorPalette != "custom" and colorPalette != "none" %} bg-{{ colorPalette | default("none") }}{% endif %}"
 
-            style="{{ Twig.if("hasUrl") }}background-image: url({{ Twig.print("url") }});{{ Twig.endif() }}
-                {% if opacity < 1 %} opacity:{{ opacity }};{% endif %}
-                {% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
-        </div>
+            {{ Twig.if("hasUrl") }}
+                image-url="{{ Twig.print("url") }}"
+            {{ Twig.endif() }}
+            :is-background-image="true"
+
+            style="{% if opacity < 1 %}opacity:{{ opacity }};{% endif %}{% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
+        </lazy-img>
     </div>
     <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}{% if not fullWidth %} px-0{% endif %}">
         {% if showPlaceholder %}
