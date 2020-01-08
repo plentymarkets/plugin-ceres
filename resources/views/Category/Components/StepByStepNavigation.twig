@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-step-by-step-navigation">
     <div>
-        <slot v-if="!isInitalyLoaded"></slot>
+        <slot v-if="!isInitialyLoaded"></slot>
         <div class="row">
             <div class="mb-3" :class="'col-' + columnDivider" v-for="category in categoryChildren">
                 <a :href="category.url" :title="category.details[0].metaTitle || category.details[0].name">
