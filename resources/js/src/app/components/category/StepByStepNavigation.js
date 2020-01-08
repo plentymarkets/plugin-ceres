@@ -45,7 +45,8 @@ Vue.component("step-by-step-navigation", {
     data()
     {
         return {
-            isWaiting: false
+            isWaiting: false,
+            isInitalyLoaded: false
         };
     },
 
@@ -72,17 +73,16 @@ Vue.component("step-by-step-navigation", {
         {
             if (!this.isWaiting)
             {
+                this.isWaiting = true;
 
+                this.$store.dispatch("loadCategoryChildrenChunk",
+                    { categoryId: this.categoryId, size: this.chunkSize })
+                    .finally(() =>
+                    {
+                        this.isWaiting = false;
+                        this.isInitalyLoaded = true;
+                    });
             }
-
-            this.isWaiting = true;
-
-            this.$store.dispatch("loadCategoryChildrenChunk",
-                { categoryId: this.categoryId, size: this.chunkSize })
-                .finally(() =>
-                {
-                    this.isWaiting = false;
-                });
         }
     }
 });

@@ -1,27 +1,27 @@
 <script type="x/template" id="vue-step-by-step-navigation">
-    <div class="row">
-        <div class="mb-3" :class="'col-' + columnDivider" v-for="category in categoryChildren">
-            <a :href="category.url" :title="category.details[0].metaTitle || category.details[0].name">
-                <div class="nav-item border d-flex" :class="{ 'no-img': imageSource == 'none' }">
-                    <!-- ${ category.details[0] } -->
-                    <div v-if="category.details[0][imageSource]" class="prop-xs-1-1">
-                        <img v-if="imageSource !== 'none'" :src="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
+    <div>
+        <slot v-if="!isInitalyLoaded"></slot>
+        <div class="row">
+            <div class="mb-3" :class="'col-' + columnDivider" v-for="category in categoryChildren">
+                <a :href="category.url" :title="category.details[0].metaTitle || category.details[0].name">
+                    <div class="nav-item border d-flex" :class="{ 'no-img': imageSource == 'none' }">
+                        <div v-if="category.details[0][imageSource]" class="prop-xs-1-1">
+                            <img v-if="imageSource !== 'none'" :src="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
+                        </div>
+                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">${ category.details[0].name }</span></div>
                     </div>
-                    <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">${ category.details[0].name }</span></div>
-                </div>
-            </a>  
-        </div>
+                </a>  
+            </div>
 
-        <div class="mb-3 m-x-auto"  @click="loadChunk()" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
-            <div class="nav-item border d-flex px-4 py-3 load-more bg-appearance">
-                
-                <!-- ${ childrenCount }
-                ${ categoryChildren.length } -->
-                <div v-if="isWaiting">
-                    <span>{{ trans("Ceres::Template.stepByStepNavigationLoading") }}</span>
-                    <i class="fa fa-repeat fa-fw my-1" :class="{ 'fa-spin': isWaiting }"></i> <!-- fa-2x m-x-auto  -->
+            <div class="mb-3 m-x-auto"  @click="loadChunk()" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
+                <div class="nav-item border d-flex px-4 py-3 load-more bg-appearance">
+                    
+                    <div v-if="isWaiting">
+                        <span>{{ trans("Ceres::Template.stepByStepNavigationLoading") }}</span>
+                        <i class="fa fa-repeat fa-fw my-1" :class="{ 'fa-spin': isWaiting }"></i>
+                    </div>
+                    <span v-else>{{ trans("Ceres::Template.stepByStepNavigationShowMore") }}</span>
                 </div>
-                <span v-else>{{ trans("Ceres::Template.stepByStepNavigationShowMore") }}</span>
             </div>
         </div>
     </div>
