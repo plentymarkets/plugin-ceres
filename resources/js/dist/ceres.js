@@ -55590,9 +55590,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("lazy-img", {
-  template: "<img :data-src=\"imageUrl\">",
+  template: "<img v-if=\"!isBackgroundImage\" :data-src=\"imageUrl\">\n                <div v-else :data-background-image=\"imageUrl\">\n                    <slot></slot>\n                </div>",
   props: {
-    imageUrl: String
+    imageUrl: String,
+    isBackgroundImage: Boolean
   },
   mounted: function mounted() {
     var _this = this;
