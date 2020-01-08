@@ -21,7 +21,7 @@ class ItemSortingWidget extends BaseWidget
         return WidgetDataFactory::make('Ceres::ItemSortingWidget')
                                 ->withLabel('Widget.itemSortingLabel')
                                 ->withPreviewImageUrl('/images/widgets/item-sorting.svg')
-                                ->withType(WidgetTypes::TOOLBAR)
+                                ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(300)
                                 ->toArray();
