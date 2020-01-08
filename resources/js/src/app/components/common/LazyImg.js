@@ -3,8 +3,8 @@ import lozad from "lozad";
 
 Vue.component("lazy-img", {
 
-    template: `<img v-if="!isBackgroundImage" :data-src="imageUrl">
-               <div v-else :data-background-image="imageUrl">
+    template:  `<img v-if="!isBackgroundImage" :data-src="imageUrl">
+                <div v-else :data-background-image="imageUrl">
                     <slot></slot>
                 </div>`,
 
