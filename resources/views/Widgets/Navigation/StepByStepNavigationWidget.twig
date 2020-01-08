@@ -1,0 +1,44 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component("Ceres::Category.Components.StepByStepNavigation") }}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set appearance      = widget.settings.appearance.mobile | default("none") %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
+{% set source = widget.settings.source.mobile %}
+{% set maxLevel = widget.settings.maxLevel.mobile %}
+{% set numberOfColumns = widget.settings.numberOfColumns.mobile %}
+{% set numberOfRows = widget.settings.numberOfRows.mobile %}
+
+<div class="widget widget-step-by-step-navigation widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner">
+
+        {% if isPreview %}
+            
+            <div>Shop-Builder Vorschau</div>
+
+        {% else %}
+
+            {{ Twig.if("category.level <= #{ maxLevel }") }}
+                {{ Twig.set("children", Twig.call("services.category.getChildren", [Twig.var("category.id")])) }}
+
+                <step-by-step-navigation
+                    :category-id="{{ Twig.print("category.id") }}"
+                    :chunk-size="{{ numberOfColumns * numberOfRows }}"
+                    image-source="{{ source }}"
+                    :columns="{{ numberOfColumns }}"
+                    :children-count="{{ Twig.print("children | length ")}}">
+                </step-by-step-navigation>
+
+            {{ Twig.endif() }}
+
+        {% endif %}
+    
+    </div>
+</div>

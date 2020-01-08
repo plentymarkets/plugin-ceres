@@ -19999,6 +19999,55 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
+.widget-step-by-step-navigation {
+    .nav-item {
+        background-color: white;
+        height: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        min-height: 75px;
+        cursor: pointer;
+    }
+    
+    .nav-text {
+        background-color: $gray-lighter2;
+        -webkit-box-flex: 1;
+            -ms-flex: auto;
+                flex: auto;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+    
+    .load-more {
+        min-height: auto;
+    }
+
+    &.widget-none {
+        span {
+            color: black;
+        }
+    }
+
+    span {
+        -ms-flex-item-align: center;
+            align-self: center;
+    }
+}
 .widget-toolbar {
     .widget {
         margin-bottom: 0;
