@@ -5,7 +5,9 @@
                 <div class="nav-item border d-flex" :class="{ 'no-img': imageSource == 'none' }">
                     <!-- ${ category.details[0] } -->
                     <div v-if="category.details[0][imageSource]" class="prop-xs-1-1">
-                        <img v-if="imageSource !== 'none'" :src="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
+                        <lazy-img v-if="imageSource !== 'none'"
+                            :image-url="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
+                        </lazy-img>
                     </div>
                     <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">${ category.details[0].name }</span></div>
                 </div>
