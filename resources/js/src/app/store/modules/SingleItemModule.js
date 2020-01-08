@@ -48,6 +48,19 @@ const mutations =
 
             if (index >= 0)
             {
+                const group = state.variation.documents[0].data.properties[index].group;
+
+                if (group && group.orderPropertyGroupingType === "single")
+                {
+                    state.variation.documents[0].data.properties.forEach(prop =>
+                    {
+                        if (prop.group && prop.group.id === group.id)
+                        {
+                            prop.property.value = null;
+                        }
+                    });
+                }
+
                 Vue.set(state.variation.documents[0].data.properties[index], "property",
                     {
                         ...state.variation.documents[0].data.properties[index].property,
