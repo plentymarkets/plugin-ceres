@@ -69,7 +69,10 @@
                         {{ Twig.if("children | length > chunkSize") }}
                             <div class="mb-3 m-x-auto">
                                 <div class="nav-item border d-flex px-4 py-3 load-more bg-appearance">
-                                    <span>{{ trans("Ceres::Template.stepByStepNavigationShowMore") }}</span>
+                                    <div>
+                                        <span>{{ trans("Ceres::Template.stepByStepNavigationLoading") }}</span>
+                                        <i class="fa fa-repeat fa-spin fa-fw my-1"></i>
+                                    </div>
                                 </div>
                             </div>
                         {{ Twig.endif() }}
