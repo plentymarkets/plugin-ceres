@@ -18654,9 +18654,6 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
   top: 0;
   bottom: 0; }
 
-.widget-step-by-step-navigation .load-more {
-  min-height: auto; }
-
 .widget-step-by-step-navigation.widget-none span {
   color: black; }
 
