@@ -3998,7 +3998,7 @@ input[type="button"].btn-block {
   overflow: hidden;
   font-size: 0.75rem;
   background-color: #e9ecef;
-  border-radius: 0.1rem; }
+  border-radius: 0.25rem; }
 
 .progress-bar {
   display: -webkit-box;
@@ -12796,30 +12796,6 @@ button:focus {
 .btn-only-icon-xl-down i {
   margin: 0 !important;
   float: none !important; }
-
-.bs4-progress {
-  display: -webkit-box;
-  display: flex;
-  height: .75rem;
-  overflow: hidden;
-  font-size: .75rem;
-  background-color: #e9ecef;
-  border-radius: .25rem; }
-
-.bs4-progress-bar {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  -webkit-box-pack: center;
-          justify-content: center;
-  text-align: center;
-  white-space: nowrap;
-  -webkit-transition: width .6s ease;
-  transition: width .6s ease;
-  background-color: #008ebd;
-  color: #fff; }
 
 body.lb-disable-scrolling {
   overflow: hidden; }
