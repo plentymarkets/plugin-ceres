@@ -147,6 +147,17 @@ $yiq-text-dark:             $gray-900 !default;
 $yiq-text-light:            $white !default;
 $yiq-contrasted-threshold:  186 !default;
 
+
+//
+// Sizes
+//
+$heights: (
+  1: (xs: 36px, sm: 48px, md: 64px, lg: 72px, xl: 80px),
+  2: (xs: 72px, sm: 90px, md: 128px, lg: 144px, xl: 160px),
+  3: (xs: 128px, sm: 160px, md: 192px, lg: 224px, xl: 256px),
+  4: (xs: 200px, sm: 244px, md: 288px, lg: 332px, xl: 376px),
+  5: (xs: 272px, sm: 328px, md: 384px, lg: 440px, xl: 496px)
+) !default;
 //
 // Fonts
 //
@@ -227,6 +238,8 @@ $line-height-lg:            (4 / 3) !default;
 $border-radius:             .1rem !default;
 $border-radius-sm:          .15rem !default;
 $border-radius-lg:          .2rem !default;
+
+$progress-border-radius:    .25rem !default;
 
 //Ceres 4 variables
 $aside-columns-width: 30em !default;
@@ -10941,10 +10954,6 @@ $flag-icon-square-path: '/1x1' !default;
     color: color-yiq($color);
 }
 
-$widths: 1, 2, 3, 4, 5, 6;
-$heights: 1, 2, 3, 4, 5, 6;
-
-
 //helper for removing paddings from bootstrap columns
 .prop-row{
     display: -webkit-box;
@@ -10972,7 +10981,7 @@ $heights: 1, 2, 3, 4, 5, 6;
 }
 
 
-@mixin make-props($widths: $widths, $heights: $heights, $breakpoints: $grid-breakpoints) {
+@mixin make-props($widths: (1, 2, 3, 4, 5, 6), $heights: (1, 2, 3, 4, 5, 6), $breakpoints: $grid-breakpoints) {
 
     // Common properties for all breakpoints
     %base-prop {
@@ -11024,8 +11033,31 @@ $heights: 1, 2, 3, 4, 5, 6;
 	padding-bottom: .5rem;
 	border-bottom: 1px solid $gray-lighter;
 }
-body .wrapper-main{
+
+.text-context-dark
+{
+	color: $yiq-text-dark !important;
+	&:hover
+	{
+		color: $yiq-text-dark !important;
+	}
+}
+.text-context-light
+{
+	color: $yiq-text-light !important;
+	&:hover
+	{
+		color: $yiq-text-light !important;
+	}
+}
+body, body .wrapper-main{
     overflow-x: hidden;
+}
+
+.sb-no-animation.collapsing {
+    -webkit-transition: none !important;
+    transition: none !important;
+    display: none !important;
 }
 
 .hidden {
@@ -11393,6 +11425,51 @@ html.ios {
     }
 }
 
+@each $color, $value in ( "dark" : $dark, "white": $white )
+{
+    .bg-#{ $color }
+    {
+        background-color: $value !important;
+        color: color-yiq($value) !important;
+    }
+}
+
+.bg-cover {
+    background-size: cover !important;
+}
+.bg-contain {
+    background-size: contain !important;
+}
+.bg-auto {
+    background-size: auto !important;
+}
+.bg-scroll {
+    background-attachment: scroll !important;
+}
+.bg-repeat {
+    background-repeat: repeat !important;
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @include media-breakpoint-up($breakpoint) {
+        @each $size, $height in $heights {
+            .mh#{$infix}-#{$size} {
+                min-height: map-get($height, $breakpoint) !important;
+
+                $bp: breakpoint-next($breakpoint);
+                @while $bp != null {
+                    @include media-breakpoint-up($bp) {
+                        min-height: map-get($height, $bp) !important;
+                    }
+                    $bp: breakpoint-next($bp);
+                }
+            }
+        }
+    }
+}
+
 
 //TODO's
 .input-group{
@@ -11682,37 +11759,6 @@ button:focus {
 }
 
 // External plugins overrides
-.bs4-progress
-{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: .75rem;
-    overflow: hidden;
-    font-size: .75rem;
-    background-color: #e9ecef;
-    border-radius: .25rem;
-}
-
-.bs4-progress-bar
-{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-transition: width .6s ease;
-    transition: width .6s ease;
-    @include context-bg($primary);
-}
-
 
 
 body.lb-disable-scrolling {
@@ -11940,16 +11986,25 @@ body.lb-disable-scrolling {
   -webkit-touch-callout: none;
 }
 
+.single-carousel, .owl-thumbs {
+    &.owl-single-item {
+      .image-container, a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+}
+
 .owl-carousel .owl-item img {
-  width: 99%;
-  -webkit-transform-style: preserve-3d;
+  // display block is required for lozad framework
+  display: block;
+  width: 100%;
   -o-object-fit: contain;
      object-fit: contain;
-  display: inline-block;
-  vertical-align: middle;
-}
-.single-carousel .owl-item img {
-  height: 300px;
+  height: 100%;
 }
 
 .owl-carousel .owl-nav.disabled,
@@ -12304,42 +12359,17 @@ Custom classes
   }
 }
 
-@include media-breakpoint-up(sm) {
-  .single-carousel .owl-item img {
-    height: 500px;
-  }
-}
 .owl-thumbs {
-  display: inline-block;
+  margin-top: .5rem;
+
   .owl-thumb {
-    -o-object-fit: contain;
-       object-fit: contain;
-    width: 8em;
-    height: 8em;
-    display: inline-block;
-    vertical-align: middle;
     background:$white;
     border:1px solid transparent;
-    margin:.5rem .5rem 0 0;
     &.active,
     &:hover {
       border:1px solid $primary;
       cursor: pointer;
     }
-
-    @include media-breakpoint-down(md) {
-      height: 4em;
-    }
-  }
-}
-@include media-breakpoint-up(lg) {
-  .single-carousel .owl-item img {
-    height: 600px;
-  }
-}
-@include media-breakpoint-up(xl) {
-  .single-carousel .owl-item img {
-    height: 700px;
   }
 }
 
@@ -18456,7 +18486,11 @@ html.crios {
                     color: $gray-darker;
                     background: $gray-lightest;
                 }
-
+            }
+            a:not([href]) {
+                cursor: auto; 
+            }
+            a {
                 span.placeholder
                 {
                     background: $gray;
@@ -18468,9 +18502,6 @@ html.crios {
                     border-radius: 3px;
                     display: inline-block;	
                 }
-            }
-            a:not([href]) {
-                cursor: auto; 
             }
             ul {
                 display: none;
@@ -18601,6 +18632,21 @@ html.crios {
             transform: translateY(-50%);
 }
 
+.item-filter-price
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+
+    > .input-group
+    {
+        margin-right: $spacer;
+    }
+}
 .homepage-title {
 	padding: 1rem 1.5rem;
 	border-bottom: 0;
@@ -18906,13 +18952,6 @@ html.crios {
 
 [v-cloak] {
 	display: none;
-}
-
-// FIX iOS 11.0.0 - 11.X bug https://bugs.webkit.org/show_bug.cgi?id=176896
-.unkown-os body.modal-open,
-.ios body.modal-open {
-	position: fixed;
-	width: 100%;
 }
 
 .mkt-homepage
@@ -19319,6 +19358,10 @@ html.crios {
             &.active {
                 visibility: visible;
             }
+        }
+
+        .form-check {
+            padding-left: 1.35rem;
         }
     }
     
@@ -19866,13 +19909,31 @@ html.ie .v-s-boxes .v-s-box.invalid {
             padding-right: $grid-gutter-width/2 !important;
         }
     }
-    
+
     > .widget-inner > li {
         padding-bottom: $grid-gutter-width;
     }
 
+    @include media-breakpoint-only(xs) {
+        .col-6 {
+            .thumb-image {
+                width: 100%;
+            }
+            .thumb-content {
+                width: 100%;
+                margin-left: 0;
+            }
+            .prices {
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                    -ms-flex-flow: column;
+                        flex-flow: column;
+            }
+        }
+    }
+
     .cmp-product-thumb {
-        margin-bottom: 0px !important;
+        margin-bottom: 0 !important;
     }
 }
 
@@ -19884,23 +19945,34 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
-.widget-grid .widget-two-col,
-.widget-two-col .col-lg-3,
-.widget-two-col .col-lg-4,
-.widget-two-col .col-lg-5,
-.widget-three-col,
-.widget-four-col {
-    .widget-filter-price {
-        .row {
+.widget-grid .col-lg-2,
+.widget-grid .col-lg-3,
+.widget-grid .widget-grid
+{
+    .widget-filter-price
+    {
+        .item-filter-price
+        {
             display: block;
+            text-align: right;
 
-            .input-group {
-                max-width: 100%;
+            > .input-group
+            {
+                margin-bottom: 1rem;
             }
         }
     }
 }
 
+.widget-none {
+    .widget-filter-price {
+        .btn-appearance {
+            color: $gray-700;
+            background-color: rgba(0,0,0,0.15);
+            border-color: rgba(0,0,0,0.15);
+        }
+    }
+}
 .widget-selected-filter
 {
     &.widget-alignment-left {
@@ -19927,16 +19999,67 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
+.widget-step-by-step-navigation {
+    .nav-item {
+        background-color: white;
+        height: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        min-height: 75px;
+        cursor: pointer;
+    }
+    
+    .nav-text {
+        background-color: $gray-lighter2;
+        -webkit-box-flex: 1;
+            -ms-flex: auto;
+                flex: auto;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+    
+    .load-more {
+        min-height: auto;
+    }
+
+    &.widget-none {
+        span {
+            color: black;
+        }
+    }
+
+    span {
+        -ms-flex-item-align: center;
+            align-self: center;
+    }
+}
 .widget-toolbar {
     .widget {
         margin-bottom: 0;
     }
-    
-    .list-controls-inner {
-        padding: 1rem;
 
-        div.widget ~ div.widget {
-            margin-left: 1em;
+    .list-controls-inner {
+        .flex-fill {
+            > div {
+                @include media-breakpoint-up(sm) {
+                    display: inline-block !important;
+                }
+            }
         }
     }
 
@@ -19945,6 +20068,16 @@ html.ie .v-s-boxes .v-s-box.invalid {
             background: $white;
             border: 1px solid $gray-lighter2;
             padding: 2rem;
+        }
+    }
+
+    .collapse-container:empty {
+        &:after {
+            content: attr(data-translation-empty);
+            display: block;
+            padding: .75rem;
+            color: $gray-dark;
+            text-align: center;
         }
     }
 }
@@ -19959,6 +20092,46 @@ html.ie .v-s-boxes .v-s-box.invalid {
             {
                 -webkit-box-shadow: inset 0 0 0 0.1rem $value;
                         box-shadow: inset 0 0 0 0.1rem $value;   
+            }
+        }
+    }
+}
+
+.widget-background {
+    &.widget {
+        width: auto;
+    }
+
+    &.align-items-end {
+        .container-max {
+            -webkit-box-align: end;
+                -ms-flex-align: end;
+                    align-items: flex-end;
+        }
+    }
+
+    .parallax-img-container-inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100% !important;
+    }
+
+    .container-max {
+        z-index: 1;
+        
+        .huge-font {
+            font-size: 35px;
+    
+            .widget-text,
+            .widget-code {
+                h1 { font-size: 2em };
+                h2 { font-size: 1.8em };
+                h3 { font-size: 1.5em };
+                h4 { font-size: 1.25em };
+                * { font-size: 1em };
             }
         }
     }
@@ -20877,7 +21050,7 @@ html.ie .widget-grid .widget-inner-stacked {
 
 .widget-fw {
     position: relative;
-    width: 100vw;
+    width: 100vw !important;
     left: calc(-1 * (100vw - 100%) / 2) !important;
     right: 0 !important;
     margin-left: 0;
@@ -21011,11 +21184,11 @@ header .widget
 /*
  * INLINE EDITOR CLASSES
  */
-@each $color, $value in $shop-builder-colors
+@each $color, $value in map-merge($shop-builder-colors, ("dark": $dark, "light": $light))
 {
     .color-#{$color}
     {
-        color: $value !important;
+        @extend .text-#{$color};
     }
 
     .bg-#{$color}
@@ -21042,6 +21215,10 @@ header .widget
 .align-justify
 {
     text-align: justify;
+}
+
+.text-shadow {
+    text-shadow: 0 0 0.1em rgba(0,0,0,0.75);
 }
 
 .widget-alignment-center {
@@ -21248,6 +21425,7 @@ header .widget
       }
     }
   }
+
 
 .pos-f-t { @extend .position-fixed; }
 
