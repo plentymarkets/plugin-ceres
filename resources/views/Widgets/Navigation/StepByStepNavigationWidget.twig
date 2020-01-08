@@ -20,15 +20,25 @@
     <div class="widget-inner">
 
         {% if isPreview %}
-            
-            <div>Shop-Builder Vorschau</div>
+        
+            <div class="row">
+                {% for i in 1..numberOfColumns * numberOfRows %}
+                <div class="col-{{ 12 / numberOfColumns }} mb-3">
+                    <div class="nav-item border d-flex">
+                        {% if source != "none" %}
+                            <div class="prop-xs-1-1"><i class="fa fa-image"></i></div>
+                        {% endif %}
+                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">{{ trans("IO::Faker.categoryName", {"count": loop.index}) }}</span></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
 
         {% else %}
 
             {{ Twig.if("category.level <= #{ maxLevel }") }}
                 {{ Twig.set("children", Twig.call("services.category.getChildren", [Twig.var("category.id")])) }}
-                {{ Twig.set("numberOfColumns", numberOfColumns) }}
-                {{ Twig.set("numberOfRows", numberOfRows) }}
+                {{ Twig.set("chunkSize", numberOfColumns * numberOfRows)}}
 
                 {{ Twig.set("hasImg", false | json_encode) }}
                 {{ Twig.for("child", "children", "child.details[0].#{source} | trim is not empty") }}
@@ -37,26 +47,26 @@
 
                 <step-by-step-navigation
                     :category-id="{{ Twig.print("category.id") }}"
-                    :chunk-size="{{ numberOfColumns * numberOfRows }}"
+                    :chunk-size="{{ Twig.print("chunkSize") }}"
                     image-source="{{ source }}"
                     :columns="{{ numberOfColumns }}"
                     :children-count="{{ Twig.print("children | length")}}">
                     
                     <div class="row">
                         {{ Twig.for("i", "1..children | length") }}
-                            {{ Twig.if("loop.index <= numberOfColumns * numberOfRows") }}
+                            {{ Twig.if("loop.index <= chunkSize") }}
                                 <div class="col-{{ 12 / numberOfColumns }} mb-3">
-                                    <div class="nav-item border d-flex isLoading refreshing with-icon component-loading{% if imageSource == 'none' %} no-img{% endif %}">
+                                    <div class="nav-item border d-flex isLoading refreshing with-icon component-loading">
                                         {{ Twig.if("hasImg") }}
                                             <div class="prop-xs-1-1"></div>
                                         {{ Twig.endif() }}
-                                        <div class="nav-text d-flex align-center p-2"></div>
+                                        <div class="nav-text d-flex align-center p-2">&nbsp;</div>
                                     </div>
                                 </div>
                             {{ Twig.endif() }}
                         {{ Twig.endfor() }}
 
-                        {{ Twig.if("children | length > (numberOfColumns * numberOfRows)") }}
+                        {{ Twig.if("children | length > chunkSize") }}
                             <div class="mb-3 m-x-auto">
                                 <div class="nav-item border d-flex px-4 py-3 load-more bg-appearance">
                                     <span>{{ trans("Ceres::Template.stepByStepNavigationShowMore") }}</span>
