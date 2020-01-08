@@ -54235,7 +54235,8 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("step-by-step-navigation",
   },
   data: function data() {
     return {
-      isWaiting: false
+      isWaiting: false,
+      isInitialyLoaded: false
     };
   },
   computed: _objectSpread({
@@ -54261,6 +54262,7 @@ vue__WEBPACK_IMPORTED_MODULE_13___default.a.component("step-by-step-navigation",
           size: this.chunkSize
         }).finally(function () {
           _this.isWaiting = false;
+          _this.isInitialyLoaded = true;
         });
       }
     }

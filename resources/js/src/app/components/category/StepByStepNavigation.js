@@ -45,7 +45,8 @@ Vue.component("step-by-step-navigation", {
     data()
     {
         return {
-            isWaiting: false
+            isWaiting: false,
+            isInitialyLoaded: false
         };
     },
 
@@ -79,6 +80,7 @@ Vue.component("step-by-step-navigation", {
                     .finally(() =>
                     {
                         this.isWaiting = false;
+                        this.isInitialyLoaded = true;
                     });
             }
         }

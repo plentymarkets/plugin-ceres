@@ -27,13 +27,43 @@
 
             {{ Twig.if("category.level <= #{ maxLevel }") }}
                 {{ Twig.set("children", Twig.call("services.category.getChildren", [Twig.var("category.id")])) }}
+                {{ Twig.set("numberOfColumns", numberOfColumns) }}
+                {{ Twig.set("numberOfRows", numberOfRows) }}
+
+                {{ Twig.set("hasImg", false | json_encode) }}
+                {{ Twig.for("child", "children", "child.details[0].#{source} | trim is not empty") }}
+                    {{ Twig.set("hasImg", true | json_encode) }}
+                {{ Twig.endfor() }}
 
                 <step-by-step-navigation
                     :category-id="{{ Twig.print("category.id") }}"
                     :chunk-size="{{ numberOfColumns * numberOfRows }}"
                     image-source="{{ source }}"
                     :columns="{{ numberOfColumns }}"
-                    :children-count="{{ Twig.print("children | length ")}}">
+                    :children-count="{{ Twig.print("children | length")}}">
+                    
+                    <div class="row">
+                        {{ Twig.for("i", "1..children | length") }}
+                            {{ Twig.if("loop.index <= numberOfColumns * numberOfRows") }}
+                                <div class="col-{{ 12 / numberOfColumns }} mb-3">
+                                    <div class="nav-item border d-flex isLoading refreshing with-icon component-loading{% if imageSource == 'none' %} no-img{% endif %}">
+                                        {{ Twig.if("hasImg") }}
+                                            <div class="prop-xs-1-1"></div>
+                                        {{ Twig.endif() }}
+                                        <div class="nav-text d-flex align-center p-2"></div>
+                                    </div>
+                                </div>
+                            {{ Twig.endif() }}
+                        {{ Twig.endfor() }}
+
+                        {{ Twig.if("children | length > (numberOfColumns * numberOfRows)") }}
+                            <div class="mb-3 m-x-auto">
+                                <div class="nav-item border d-flex px-4 py-3 load-more bg-appearance">
+                                    <span>{{ trans("Ceres::Template.stepByStepNavigationShowMore") }}</span>
+                                </div>
+                            </div>
+                        {{ Twig.endif() }}
+                    </div>
                 </step-by-step-navigation>
 
             {{ Twig.endif() }}
