@@ -14,7 +14,11 @@
             </div>
 
             <div v-for="property in propertyGroup.properties" :key="property.id" :class="paddingClasses" :style="paddingInlineStyles">
-                <order-property-list-item v-if="property.isShownOnItemPage" :group="propertyGroup.group" :property="property" v-on:radio-change="unsetDeselectedRadios($event)"></order-property-list-item>
+                <order-property-list-item
+                        v-if="property.isShownOnItemPage"
+                        :group="propertyGroup.group"
+                        :property="property">
+                </order-property-list-item>
             </div>
 
         </div>

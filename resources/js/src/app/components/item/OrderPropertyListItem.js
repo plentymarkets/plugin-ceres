@@ -130,10 +130,6 @@ Vue.component("order-property-list-item", {
                     value = null;
                 }
             }
-            else if (this.inputType === "radio")
-            {
-                this.$emit("radio-change", this.property.id);
-            }
             else if (this.inputType === "selection")
             {
                 if (isNullOrUndefined(value) || value.length <= 0)
