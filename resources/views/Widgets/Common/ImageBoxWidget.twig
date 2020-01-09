@@ -81,13 +81,6 @@
 {{ Twig.endif() }}
 
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary')  }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
-    {% if urlType == 'item' and urlValue | trim is not empty %}
-        <p>{{ Twig.print("itemImage | json_encode") }}</p>
-        <p>{{ Twig.print("itemImage.url") }}</p>
-        <p>{{ Twig.print("itemImage.alternate") }}</p>
-        <p>{{ Twig.print("itemImage.name") }}</p>
-    {% endif %}
-
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if("imageUrl | trim is not empty") }}
         {% if widget.settings.lazyLoading.mobile %}
