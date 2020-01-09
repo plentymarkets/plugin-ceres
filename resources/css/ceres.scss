@@ -239,6 +239,8 @@ $border-radius:             .1rem !default;
 $border-radius-sm:          .15rem !default;
 $border-radius-lg:          .2rem !default;
 
+$progress-border-radius:    .25rem !default;
+
 //Ceres 4 variables
 $aside-columns-width: 30em !default;
 
@@ -11757,37 +11759,6 @@ button:focus {
 }
 
 // External plugins overrides
-.bs4-progress
-{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: .75rem;
-    overflow: hidden;
-    font-size: .75rem;
-    background-color: #e9ecef;
-    border-radius: .25rem;
-}
-
-.bs4-progress-bar
-{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-transition: width .6s ease;
-    transition: width .6s ease;
-    @include context-bg($primary);
-}
-
 
 
 body.lb-disable-scrolling {
@@ -20028,6 +19999,51 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 }
 
+.widget-step-by-step-navigation {
+    .nav-item {
+        background-color: white;
+        height: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        min-height: 75px;
+        cursor: pointer;
+    }
+    
+    .nav-text {
+        background-color: $gray-lighter2;
+        -webkit-box-flex: 1;
+            -ms-flex: auto;
+                flex: auto;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    &.widget-none {
+        span {
+            color: black;
+        }
+    }
+
+    span {
+        -ms-flex-item-align: center;
+            align-self: center;
+    }
+}
 .widget-toolbar {
     .widget {
         margin-bottom: 0;

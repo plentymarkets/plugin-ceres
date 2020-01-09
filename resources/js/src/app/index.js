@@ -33,6 +33,8 @@ import "./components/basket/BasketTotals";
 import "./components/basket/Coupon";
 import "./components/basket/list/BasketList";
 
+import "./components/category/StepByStepNavigation";
+
 // TODO: Move to list component
 import "./components/basket/list/BasketListItem";
 

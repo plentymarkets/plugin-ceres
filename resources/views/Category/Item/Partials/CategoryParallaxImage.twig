@@ -1,7 +1,9 @@
 {% set categoryDescriptionTop = ceresConfig.item.showCategoryDescriptionTop %}
 
 <div class="parallax-img-container">
-    <div class="parallax-img-container-inner" {% if category.details[0].imagePath is not empty %} style="background-image: url(/documents/{{ category.details[0].imagePath }});"{% endif %}>
+    <lazy-img class="parallax-img-container-inner"
+        {% if category.details[0].imagePath is not empty %}image-url="/documents/{{ category.details[0].imagePath }}"{% endif %}
+        :is-background-image="true">
         <div class="container-max">
             <div>
                 <div class="parallax-text-container">
@@ -15,5 +17,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </lazy-img>
 </div>
