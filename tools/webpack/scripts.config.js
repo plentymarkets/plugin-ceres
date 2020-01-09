@@ -7,7 +7,6 @@ module.exports = env =>
         name: "scripts",
         mode: env.prod ? "production" : "development",
         entry: {
-            app: "./resources/js/src/index.js",
             category: "./resources/js/src/category.js",
             item: "./resources/js/src/item.js",
             checkout: "./resources/js/src/checkout.js"

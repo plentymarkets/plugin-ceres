@@ -33,6 +33,8 @@ import "./app/components/basket/BasketTotals";
 import "./app/components/basket/Coupon";
 import "./app/components/basket/list/BasketList";
 
+import "./app/components/category/StepByStepNavigation";
+
 import "./app/components/common/GoogleMaps";
 import "./app/components/common/LazyImg";
 import "./app/components/common/TabList";
