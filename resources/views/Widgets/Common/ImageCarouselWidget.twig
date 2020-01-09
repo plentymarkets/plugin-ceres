@@ -50,6 +50,8 @@
         {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
         {{ Twig.set("slide", "slide | merge({ imageAltText: itemImage.alternate })") }}
+        {{ Twig.set("slide", "slide | merge({ imageName: itemImage.name })") }}
+
 
         {% set pushCurrentSlide = true %}
 
