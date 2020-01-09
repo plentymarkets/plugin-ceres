@@ -1,5 +1,12 @@
 # Release Notes for Ceres
 
+## v4.5.1 (2020-01-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.0...4.5.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, changing a variation did not update its variation properties. This has been fixed.
+- Due to an error, changing a variation did not update its item images. This has been fixed.
+
 ## v4.5.0 (2019-12-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.2...4.5.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

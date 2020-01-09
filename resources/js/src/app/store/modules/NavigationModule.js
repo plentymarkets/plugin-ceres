@@ -6,7 +6,8 @@ const state =
     {
         tree: [],
         cachedTrees: {},
-        currentCategory: null
+        currentCategory: null,
+        categoryChildren: []
     };
 
 const mutations =
@@ -24,6 +25,17 @@ const mutations =
         addCachedPartialTree(state, { tree, categoryId })
         {
             state.cachedTrees[categoryId] = tree;
+        },
+
+        addCategoryChildren(state, children)
+        {
+            for (const category of children)
+            {
+                if (!state.categoryChildren.find(cat => cat.id === category.id))
+                {
+                    state.categoryChildren.push(category);
+                }
+            }
         }
     };
 
@@ -84,6 +96,24 @@ const actions =
                     dispatch("setCurrentCategoryById", { categoryId, categories: category.children });
                 }
             }
+        },
+
+        loadCategoryChildrenChunk({ state, commit }, { categoryId, size })
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService
+                    .get("/rest/io/categorytree/children", { categoryId, indexStart: state.categoryChildren.length, maxCount: size })
+                    .done(response =>
+                    {
+                        commit("addCategoryChildren", response);
+                        resolve(response);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
+            });
         }
     };
 

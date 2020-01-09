@@ -69,11 +69,11 @@ export default Vue.component("tab-list", {
     render(createElement)
     {
         const tabListElements = [];
-        const filteredTabs = this.$slots.default.filter(tab => !!tab.componentOptions);
+        const tabs = this.getVisibleTabs();
 
-        if (this.tabs.length > 0)
+        if (tabs.length > 0)
         {
-            const navElements = this.tabs.map((tab, index) =>
+            const navElements = tabs.map((tab, index) =>
             {
                 return createElement(
                     TabNavItem,
@@ -114,7 +114,7 @@ export default Vue.component("tab-list", {
             {
                 staticClass: "tab-content"
             },
-            [filteredTabs]
+            [this.$slots.default.filter(tab => !!tab.componentOptions)]
         );
 
         tabListElements.push(content);
@@ -142,7 +142,8 @@ export default Vue.component("tab-list", {
     data()
     {
         return {
-            tabs: []
+            tabComponents: [],
+            tabsHash: ""
         };
     },
 
@@ -150,43 +151,51 @@ export default Vue.component("tab-list", {
     {
         this.$nextTick(() =>
         {
-            this.updateTabs();
-
-            const hasActiveContent = this.tabs.some(tab => tab.active);
-
-            if (!hasActiveContent )
-            {
-                this.activateTab(this.tabs[0]);
-            }
+            // get all child tab components
+            this.tabComponents = (this.$slots.default || [])
+                .map((vnode) => vnode.componentInstance)
+                .filter((entry) => !!entry);
         });
+    },
+
+    updated()
+    {
+        const tabs = this.getVisibleTabs();
+        const hash = tabs.map((component) => component._uid).join("_");
+
+        // need to check if visible tabs have been changed after rendering
+        if (this.tabsHash !== hash)
+        {
+            // visible tabs changed => need to re-render component
+            this.tabsHash = hash;
+            this.$forceUpdate();
+
+            // check for active tab
+            if (!tabs.some(tab => tab.active) && tabs.length > 0)
+            {
+                this.activateTab(tabs[0]);
+            }
+        }
     },
 
     methods:
     {
-        getTabs()
+        getVisibleTabs()
         {
-            const tabs = (this.$slots.default || []);
-            const tabComps = tabs.map(function(vnode)
-            {
-                return vnode.componentInstance;
-            });
-
-            return tabComps.filter((tab) =>
+            // filter visible tabs
+            const tabs = this.tabComponents.filter((tab) =>
             {
                 return isDefined(tab) &&
-                       isDefined(tab.$slots.default) &&
-                       (this.renderEmpty || this.filterContent(tab));
+                    isDefined(tab.$slots.default) &&
+                    (this.renderEmpty || this.filterContent(tab));
             });
-        },
 
-        updateTabs()
-        {
-            this.tabs = this.getTabs();
+            return tabs;
         },
 
         activateTab(tab)
         {
-            const activeTab = this.tabs.find(tab => tab.localActive);
+            const activeTab = this.tabComponents.find(tab => tab.localActive);
 
             tab.setActive(true);
 
@@ -197,14 +206,12 @@ export default Vue.component("tab-list", {
         },
 
         /**
-         * Checks if tab content contains img tag or text.
+         * Checks if tab content contains text or img or iframe element.
          * @param {*} tab
          */
         filterContent(tab)
         {
-            const imgPattern = new RegExp(/<img([\w\W]+?)>/);
-
-            return imgPattern.test(tab.$el.innerHTML) || tab.$el.textContent.trim().length > 0;
+            return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe");
         }
     }
 });

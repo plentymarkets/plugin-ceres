@@ -3,7 +3,7 @@ import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
 import Vue from "vue";
 import { executeReCaptcha } from "../../helper/executeReCaptcha";
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 import AddressInputGroup from "./AddressInputGroup";
 
@@ -44,8 +44,20 @@ export default Vue.component("registration", {
             isDisabled: false,
             privacyPolicyAccepted : false,
             privacyPolicyShowError: false,
-            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
+            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
+            modalShown: false
         };
+    },
+
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            if (this.modalElement)
+            {
+                this.initModalEventListeners();
+            }
+        });
     },
 
     methods: {
@@ -219,6 +231,26 @@ export default Vue.component("registration", {
             if (value)
             {
                 this.privacyPolicyShowError = false;
+            }
+        },
+
+        initModalEventListeners()
+        {
+            const modal = ModalService.findModal(document.getElementById(this.modalElement));
+
+            if (isDefined(modal))
+            {
+                modal.on("show.bs.modal",
+                    () =>
+                    {
+                        this.modalShown = true;
+                    });
+
+                modal.on("hide.bs.modal",
+                    () =>
+                    {
+                        this.modalShown = false;
+                    });
             }
         }
     }

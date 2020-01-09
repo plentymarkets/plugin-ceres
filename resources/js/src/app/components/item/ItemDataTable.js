@@ -103,14 +103,19 @@ export default Vue.component("item-data-table", {
         {
             let value;
 
-            if (path !== "item.variationDimensions")
-            {
-                value = get(this.currentVariation, path);
-            }
-            else
+            if (path === "item.variationDimensions")
             {
                 value = `${ get(this.currentVariation, "variation.lengthMM") }×${ get(this.currentVariation, "variation.widthMM") }×${ get(this.currentVariation, "variation.heightMM") } mm`;
             }
+            else if (path === "unit.names.name")
+            {
+                value = `${ get(this.currentVariation, "unit.content") } ${ get(this.currentVariation, "unit.names.name") }`;
+            }
+            else
+            {
+                value = get(this.currentVariation, path);
+            }
+
 
             return this.formatFieldData(value, path);
         },

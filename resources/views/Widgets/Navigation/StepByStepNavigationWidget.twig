@@ -1,0 +1,85 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{{ Twig.component("Ceres::Category.Components.StepByStepNavigation") }}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set appearance      = widget.settings.appearance.mobile | default("none") %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
+{% set source = widget.settings.source.mobile %}
+{% set maxLevel = widget.settings.maxLevel.mobile %}
+{% set numberOfColumns = widget.settings.numberOfColumns.mobile %}
+{% set numberOfRows = widget.settings.numberOfRows.mobile %}
+
+<div class="widget widget-step-by-step-navigation widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner">
+
+        {% if isPreview %}
+        
+            <div class="row">
+                {% for i in 1..numberOfColumns * numberOfRows %}
+                <div class="col-{{ 12 / numberOfColumns }} mb-3">
+                    <div class="nav-item border d-flex">
+                        {% if source != "none" %}
+                            <div class="prop-xs-1-1"><i class="fa fa-image"></i></div>
+                        {% endif %}
+                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">{{ trans("IO::Faker.categoryName", {"count": loop.index}) }}</span></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+
+            {{ Twig.if("category.level <= #{ maxLevel }") }}
+                {{ Twig.set("children", Twig.call("services.category.getChildren", [Twig.var("category.id")])) }}
+                {{ Twig.set("chunkSize", numberOfColumns * numberOfRows)}}
+
+                {{ Twig.set("hasImg", false | json_encode) }}
+                {{ Twig.for("child", "children", "child.details[0].#{source} | trim is not empty") }}
+                    {{ Twig.set("hasImg", true | json_encode) }}
+                {{ Twig.endfor() }}
+
+                <step-by-step-navigation
+                    :category-id="{{ Twig.print("category.id") }}"
+                    :chunk-size="{{ Twig.print("chunkSize") }}"
+                    image-source="{{ source }}"
+                    :columns="{{ numberOfColumns }}"
+                    :children-count="{{ Twig.print("children | length")}}">
+                    
+                    <div class="row">
+                        {{ Twig.for("i", "1..children | length") }}
+                            {{ Twig.if("loop.index <= chunkSize") }}
+                                <div class="col-{{ 12 / numberOfColumns }} mb-3">
+                                    <div class="nav-item border d-flex isLoading refreshing with-icon component-loading">
+                                        {{ Twig.if("hasImg") }}
+                                            <div class="prop-xs-1-1"></div>
+                                        {{ Twig.endif() }}
+                                        <div class="nav-text d-flex align-center p-2">&nbsp;</div>
+                                    </div>
+                                </div>
+                            {{ Twig.endif() }}
+                        {{ Twig.endfor() }}
+
+                        {{ Twig.if("children | length > chunkSize") }}
+                            <div class="mb-3 m-x-auto">
+                                <button type="button" class="btn btn-appearance disabled px-4 py-3">
+                                    <span>{{ trans("Ceres::Template.stepByStepNavigationShowMore") }}</span>
+                                    <i class="fa fa-repeat fa-fw my-1 fa-spin"></i>
+                                </button>
+                            </div>
+                        {{ Twig.endif() }}
+                    </div>
+                </step-by-step-navigation>
+
+            {{ Twig.endif() }}
+
+        {% endif %}
+    
+    </div>
+</div>

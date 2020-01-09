@@ -107,7 +107,7 @@ export default Vue.component("live-shopping-item", {
                     name = TranslationService.translate("Ceres::Template.liveShoppingOfferSoldOut");
                 }
 
-                return { id: 2, names: { name } };
+                return { id: -1, names: { name } };
             }
 
             return null;
