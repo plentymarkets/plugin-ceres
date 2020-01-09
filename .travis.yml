@@ -1,3 +1,4 @@
+dist: trusty
 branches:
   only:
     - stable
@@ -6,6 +7,8 @@ branches:
     - feature/beta/.*
 
 language: node_js
+node_js:
+  - 12
 
 install:
   - npm install
