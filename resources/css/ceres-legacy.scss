@@ -20017,6 +20017,14 @@ html.ie .v-s-boxes .v-s-box.invalid {
                 justify-content: center;
         min-height: 75px;
         cursor: pointer;
+
+        &.preview svg {
+            position: absolute;
+            left: 0;
+            right: 0;
+            display: block !important;
+            fill: $gray-lightest;
+        }
     }
     
     .nav-text {

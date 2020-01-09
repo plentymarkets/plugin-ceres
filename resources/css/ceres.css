@@ -18637,6 +18637,12 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
           justify-content: center;
   min-height: 75px;
   cursor: pointer; }
+  .widget-step-by-step-navigation .nav-item.preview svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: block !important;
+    fill: #f7f7f9; }
 
 .widget-step-by-step-navigation .nav-text {
   background-color: #f4f4f4;
