@@ -19414,6 +19414,11 @@ html.crios {
             }
         }
     }
+
+    .form-check input:checked + label
+    {
+        @extend .text-success;
+    }
 }
 
 .add-to-basket-container {

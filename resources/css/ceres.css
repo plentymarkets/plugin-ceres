@@ -7412,7 +7412,7 @@ a.text-primary:hover, a.color-primary:hover, a.text-primary:focus, a.color-prima
 a.text-secondary:hover, a.color-secondary:hover, a.text-secondary:focus, a.color-secondary:focus {
   color: #880113 !important; }
 
-.text-success, .color-success {
+.text-success, .order-property-slider .form-check input:checked + label, .color-success {
   color: #28a745 !important; }
 
 a.text-success:hover, a.color-success:hover, a.text-success:focus, a.color-success:focus {
