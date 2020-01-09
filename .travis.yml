@@ -1,0 +1,24 @@
+dist: trusty
+sudo: false
+
+language: node_js
+
+node_js:
+  - '12'
+
+addons:
+  chrome: stable
+
+cache:
+  directories:
+    - ./node_modules
+
+install:
+  - rm -rf node_modules && npm i
+
+jobs:
+  include:
+    - name: 'Lint SCSS files'
+      script: npm run lint
+    - name: 'Run test scripts'
+      script: npm run test
