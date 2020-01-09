@@ -174,26 +174,28 @@ Vue.component("add-to-basket", {
                 this.waiting = true;
 
                 let totalSurcharge = 0;
-                const orderParams = this.orderProperties.map((orderProperty) =>
-                {
-                    const property = orderProperty.property;
-
-                    if (property.valueType === "float" &&
-                        !isNullOrUndefined(property.value) &&
-                        property.value.slice(-1) === App.decimalSeparator)
+                const orderParams = this.orderProperties
+                    .filter((orderProperty) => !isNullOrUndefined(orderProperty.property.value))
+                    .map((orderProperty) =>
                     {
-                        property.value = property.value.substr(0, property.value.length - 1);
-                    }
+                        const property = orderProperty.property;
 
-                    totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
+                        if (property.valueType === "float" &&
+                            !isNullOrUndefined(property.value) &&
+                            property.value.slice(-1) === App.decimalSeparator)
+                        {
+                            property.value = property.value.substr(0, property.value.length - 1);
+                        }
 
-                    return {
-                        propertyId: property.id,
-                        type: property.valueType,
-                        name: property.names.name,
-                        value: property.value
-                    };
-                });
+                        totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
+
+                        return {
+                            propertyId: property.id,
+                            type: property.valueType,
+                            name: property.names.name,
+                            value: property.value
+                        };
+                    });
 
                 const basketObject =
                     {
