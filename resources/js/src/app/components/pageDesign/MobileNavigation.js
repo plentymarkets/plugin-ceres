@@ -3,7 +3,7 @@ import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("mobile-navigation", {
+export default Vue.component("mobile-navigation", {
 
     props: {
         template: {

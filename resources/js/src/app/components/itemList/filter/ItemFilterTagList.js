@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 
-Vue.component("item-filter-tag-list", {
+export default Vue.component("item-filter-tag-list", {
 
     props:
     {

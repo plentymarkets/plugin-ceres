@@ -2,7 +2,7 @@ import Vue from "vue";
 import { whenConsented } from "../../helper/whenConsented";
 import { isNullOrUndefined } from "../../helper/utils";
 
-Vue.component("google-maps-widget",
+export default Vue.component("google-maps-widget",
     {
         template: `<div :class="aspectRatio" class="maps-component position-relative" ref="googleMapsContainer"><div v-if="scriptBlocked"><slot></slot></div></div>`,
 

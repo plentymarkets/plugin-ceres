@@ -6,7 +6,7 @@ import { mapState } from "vuex";
 
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("variation-select", {
+export default Vue.component("variation-select", {
 
     props: {
         template:

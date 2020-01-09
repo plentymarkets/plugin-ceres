@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("category-item", {
+export default Vue.component("category-item", {
     props:
     {
         template:

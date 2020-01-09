@@ -16,6 +16,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $variations;
     public $customerShowNetPrices;
     public $defaultCategory;
+    public $assetName = "ceres-item";
     public $dynamicVariationId;
     public $initPleaseSelectOption;
 

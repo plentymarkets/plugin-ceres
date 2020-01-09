@@ -1,10 +1,14 @@
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
+import SalutationSelect from "./SalutationSelect";
 
-Vue.component("address-input-group", {
+export default Vue.component("address-input-group", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        SalutationSelect
+    },
 
     props:
     {

@@ -10,9 +10,11 @@ class CategoryContext extends GlobalContext implements ContextInterface
 {
     /** @var Category */
     public $category = null;
-   
+
     public $metaRobots;
-    
+
+    public $assetName = "ceres-category";
+
     public function init($params)
     {
         parent::init($params);

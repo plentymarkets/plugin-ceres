@@ -5,10 +5,14 @@ const NotificationService = require("../../../../services/NotificationService");
 import ValidationService from "../../../../services/ValidationService";
 import TranslationService from "../../../../services/TranslationService";
 import Vue from "vue";
+import AddressInputGroup from "../../AddressInputGroup";
 
-Vue.component("create-update-address", {
+export default Vue.component("create-update-address", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        AddressInputGroup
+    },
 
     props: {
         addressData: {

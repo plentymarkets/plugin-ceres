@@ -1,7 +1,7 @@
 import Vue from "vue";
 import "owl.carousel";
 
-Vue.component("category-image-carousel", {
+export default Vue.component("category-image-carousel", {
 
     delimiters: ["${", "}"],
 

@@ -2,11 +2,17 @@ import { isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
-import moment from "moment";
+import LiveShoppingDetails from "./LiveShoppingDetails";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
-Vue.component("live-shopping-item", {
+export default Vue.component("live-shopping-item", {
+
+    components:
+    {
+        LiveShoppingDetails
+    },
+
     props: {
         template:
         {
@@ -54,11 +60,11 @@ Vue.component("live-shopping-item", {
         {
             if (!isNullOrUndefined(this.currentOffer))
             {
-                const momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
-                const momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
-                const momentNow = moment(Date.now());
+                const begin = parseInt(this.currentOffer.liveShopping.fromTime) * 1000;
+                const end = parseInt(this.currentOffer.liveShopping.toTime) * 1000;
+                const now = Date.now();
 
-                return momentBegin < momentNow && momentNow < momentEnd;
+                return begin < now && now < end;
             }
 
             return false;
@@ -140,16 +146,16 @@ Vue.component("live-shopping-item", {
     {
         whenIsCurrentOffer()
         {
-            const momentBegin = moment.unix(this.currentOffer.liveShopping.fromTime);
-            const momentEnd = moment.unix(this.currentOffer.liveShopping.toTime);
-            const momentNow = moment(Date.now());
+            const begin = parseInt(this.currentOffer.liveShopping.fromTime) * 1000;
+            const end = parseInt(this.currentOffer.liveShopping.toTime) * 1000;
+            const now = Date.now();
 
-            if (momentBegin < momentNow && momentNow > momentEnd)
+            if (begin < now && now > end)
             {
                 return TimeEnum.past;
             }
 
-            if (momentBegin < momentNow && momentNow < momentEnd)
+            if (begin < now && now < end)
             {
                 return TimeEnum.now;
             }

@@ -4,8 +4,14 @@ import { navigateTo } from "../../services/UrlService";
 import TranslationService from "../../services/TranslationService";
 import NotificationService from "../../services/NotificationService";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
+import OrderReturnItem from "./OrderReturnItem";
 
-Vue.component("order-return", {
+export default Vue.component("order-return", {
+
+    components:
+    {
+        OrderReturnItem
+    },
 
     mixins: [ButtonSizePropertyMixin],
 

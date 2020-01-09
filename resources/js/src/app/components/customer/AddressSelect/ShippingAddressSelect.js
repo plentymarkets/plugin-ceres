@@ -1,9 +1,13 @@
 import Vue from "vue";
 import { mapState } from "vuex";
+import AddressSelect from "./AddressSelect";
 
-Vue.component("shipping-address-select", {
+export default Vue.component("shipping-address-select", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        AddressSelect
+    },
 
     template: `
         <address-select

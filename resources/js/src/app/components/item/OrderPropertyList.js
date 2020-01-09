@@ -1,7 +1,13 @@
 import Vue from "vue";
 import { mapState, mapGetters } from "vuex";
+import OrderPropertyListGroup from "./OrderPropertyListGroup";
 
-Vue.component("order-property-list", {
+export default Vue.component("order-property-list", {
+
+    components:
+    {
+        OrderPropertyListGroup
+    },
 
     props:
     {

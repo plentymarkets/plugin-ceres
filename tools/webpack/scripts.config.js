@@ -1,5 +1,4 @@
 const path = require("path");
-const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 
 module.exports = env =>
 {
@@ -7,9 +6,13 @@ module.exports = env =>
     return {
         name: "scripts",
         mode: env.prod ? "production" : "development",
-        entry: "./resources/js/src/app/index.js",
+        entry: {
+            category: "./resources/js/src/category.js",
+            item: "./resources/js/src/item.js",
+            checkout: "./resources/js/src/checkout.js"
+        },
         output: {
-            filename: "../../../resources/js/dist/ceres" + (env.prod ? ".min" : "") + ".js",
+            filename: "../../../resources/js/dist/ceres-[name]" + (env.prod ? ".min" : "") + ".js",
             path: path.resolve(__dirname, "dist")
         },
         resolve: {
@@ -51,11 +54,6 @@ module.exports = env =>
                     }
                 }
             ]
-        },
-        plugins: [
-            new MomentLocalesPlugin({
-                localesToKeep: ["de", "en", "fr", "it", "es", "tr", "nl", "pl", "se", "ru", "sk", "pt", "bg", "ro"]
-            })
-        ]
+        }
     };
 };

@@ -1,7 +1,13 @@
 import Vue from "vue";
 import { mapState } from "vuex";
+import BasketListItem from "./BasketListItem";
 
-Vue.component("basket-list", {
+export default Vue.component("basket-list", {
+    components:
+    {
+        BasketListItem
+    },
+
     props:
     {
         template:

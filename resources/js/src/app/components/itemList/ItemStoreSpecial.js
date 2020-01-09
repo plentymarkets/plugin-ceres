@@ -2,7 +2,7 @@ import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("item-store-special", {
+export default Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
 
