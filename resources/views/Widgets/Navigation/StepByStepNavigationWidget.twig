@@ -37,7 +37,7 @@
         {% else %}
 
             {{ Twig.if("category.level <= #{ maxLevel }") }}
-                {{ Twig.set("children", Twig.call("services.category.getChildren", [Twig.var("category.id")])) }}
+                {{ Twig.set("children", Twig.call("services.category.getCurrentCategoryChildren", [Twig.var("category.id")])) }}
                 {{ Twig.set("chunkSize", numberOfColumns * numberOfRows)}}
 
                 {{ Twig.set("hasImg", false | json_encode) }}
