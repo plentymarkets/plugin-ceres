@@ -1,4 +1,6 @@
 dist: trusty
+git:
+  depth: 3
 branches:
   only:
     - stable
@@ -16,6 +18,6 @@ install:
 jobs:
   include:
     - name: 'Lint SCSS files'
-      script: npm run lint
+      script: npm run lint:sass
     - name: 'Run test scripts'
       script: npm run test
