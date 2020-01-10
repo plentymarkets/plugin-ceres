@@ -69,6 +69,12 @@ Vue.component("live-shopping-item", {
             if (!isNullOrUndefined(this.currentOffer))
             {
                 const liveShopping = this.currentOffer.liveShopping;
+                const item = this.currentOffer.item;
+
+                if (item.variation.stockLimitation === 1)
+                {
+                    return item.stock.net > 0;
+                }
 
                 return liveShopping.quantitySold < liveShopping.quantityMax;
             }

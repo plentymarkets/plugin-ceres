@@ -92,9 +92,23 @@ Vue.component("live-shopping-details", {
         setQuantitySoldPercentage()
         {
             const data            = this.liveShoppingData.liveShopping;
-            const percentage      = 100 - data.quantitySold / data.quantityMax * 100;
+            const item            = this.liveShoppingData.item;
 
-            this.itemQuantityRemaining = data.quantityMax - data.quantitySold;
+            let percentage = 0;
+
+            const isStockLimited = item.stock.net < data.quantityMax - data.quantitySold;
+
+            if (item.variation.stockLimitation === 1 && isStockLimited)
+            {
+                percentage = (data.quantityMax - item.stock.net) / data.quantityMax * 100;
+                this.itemQuantityRemaining = item.stock.net;
+            }
+            else
+            {
+                percentage = 100 - data.quantitySold / data.quantityMax * 100;
+                this.itemQuantityRemaining = data.quantityMax - data.quantitySold;
+            }
+
             this.quantitySoldPercentage = percentage.toFixed(App.config.item.storeSpecial);
         },
 
