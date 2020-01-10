@@ -46,7 +46,7 @@
 	background: $white;
 	box-shadow: $box-shadow;
 	padding: .75rem;
-	color: $gray-dark;
+	color: $gray-700;
 	font-size: 1rem;
     flex-flow: column;
 	display: flex;
@@ -69,7 +69,7 @@
 	}
 
 	& .basket-header {
-		border-bottom: 1px solid $gray-lighter;
+		border-bottom: 1px solid $gray-300;
 		padding-bottom: .5em;
 	}
 	

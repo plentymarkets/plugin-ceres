@@ -56,7 +56,7 @@
 ///
 /// @author Bruno Fenzl
 ///
-/// @param {color} $default-color [$gray-lighter] Normal color of the star. Defaults to the Bootstrap var $gray-lighter.
+/// @param {color} $default-color [$gray-300] Normal color of the star. Defaults to the Bootstrap var $gray-300.
 /// @param {color} $selected-color [#FFD700] Selected color of the star. Defaults to #FFD700.
 /// @param {color} $hover-color [#FFED85] Hover color of the star. Defaults to #FFED85.
 ///
@@ -83,7 +83,7 @@
 ///         <input type="radio" id="star0-5" name="rating" value="0.5" />
 ///             <label for="star0-5" title="0.5 Star"></label>
 ///     </fieldset>
-@mixin star-rating( $default-color: $gray-lighter, $selected-color: #FFD700, $hover-color: #FFED85){
+@mixin star-rating( $default-color: $gray-300, $selected-color: #FFD700, $hover-color: #FFED85){
     border: none;
     @include clearfix();
 
@@ -94,7 +94,7 @@
     &>label{
         margin: 0;
         padding: 0;
-        color: $gray-lighter;
+        color: $gray-300;
         float: right;
 
         &:before{
@@ -231,7 +231,7 @@
 
 
 
-@mixin pipe($color:$gray-light){
+@mixin pipe($color:$gray-500){
     height: 1em;
     border-left: 1px solid $color;
     margin: 0 .45em 0 .25em;

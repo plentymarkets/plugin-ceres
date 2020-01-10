@@ -1,6 +1,6 @@
 .to-top {
     display: block;
-    background-color: $gray-dark;
+    background-color: $gray-700;
     text-align: center;
     padding: .5rem .5rem;
 	text-decoration:none!important;
@@ -8,7 +8,7 @@
 	width: 100%;
 
     &:hover {
-    	background-color: $gray-darker;
+    	background-color: $gray-900;
     }
     i {
     	color: white;
@@ -22,7 +22,7 @@
 	opacity: .5;
 	-webkit-transition: opacity .3s;
 	transition: opacity .3s;
-	border: 1px solid $gray-darker;
+	border: 1px solid $gray-900;
 	cursor: pointer;
 	text-align: center;
 	position: fixed;
@@ -67,8 +67,8 @@
 	text-decoration: none;
 	opacity: 0.5;
 	transition: opacity 300ms;
-	border: 1px solid $gray-darker;
-	background: $gray-dark;
+	border: 1px solid $gray-900;
+	background: $gray-700;
 	border-radius: $border-radius;
 	cursor: pointer;
 	text-align: center;
@@ -80,7 +80,7 @@
 
 .back-to-top i {
 	font-size: 29px;
-	color: $gray-lightest;
+	color: $gray-100;
 }
 
 .footer{
@@ -99,7 +99,7 @@
 	.svg.plenty-brand {
  		padding:0 .5em;
  		path {
- 			fill: $gray-dark;
+ 			fill: $gray-700;
  		}
  	}
 
@@ -162,7 +162,7 @@
 	}
 
 	.btn-mail {
-	    background-color: $gray;
+	    background-color: $gray-600;
 	    color: white;
 
 		i {
@@ -170,7 +170,7 @@
 		}
 
 		&:hover {
-			background-color: $gray-light;
+			background-color: $gray-500;
 		}
 	}
 

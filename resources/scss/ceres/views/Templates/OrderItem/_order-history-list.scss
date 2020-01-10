@@ -4,7 +4,7 @@
     .order-item {
         > div:nth-child(odd) {
             > div.container-clickable {
-                background: $gray-lightest;
+                background: $gray-100;
             }
         }
     }
@@ -110,7 +110,7 @@
     }
 
     .container-bottom {
-        background: $gray-lightest;
+        background: $gray-100;
 
         .button-spacer {
             margin-top: auto;

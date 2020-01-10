@@ -7,7 +7,7 @@
     {
         position: relative;
         flex: 0 0 auto;
-        border-bottom: 1px solid $gray-lighter;
+        border-bottom: 1px solid $gray-300;
 
         .basket-header-caption
         {
@@ -56,7 +56,7 @@
 	    display: flex;
 	    flex-flow: column nowrap;
         flex: 0 0 auto;
-        border-top: 1px solid $gray-lighter;
+        border-top: 1px solid $gray-300;
 
         @extend .small;
 
@@ -68,7 +68,7 @@
         @include media-breakpoint-only(sm)
         {
             border-top: 0;
-            border-left: 1px solid $gray-lighter;
+            border-left: 1px solid $gray-300;
         }
     }
 

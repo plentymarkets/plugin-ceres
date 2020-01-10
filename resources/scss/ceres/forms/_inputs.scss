@@ -1,8 +1,8 @@
-$color: $gray-dark;
+$color: $gray-700;
 $background: white;
 $active-background: white;
-$border-color: $gray-lighter;
-$border-active: $gray-light;
+$border-color: $gray-300;
+$border-active: $gray-500;
 $border-width: 1px;
 
 .input-unit.textarea
@@ -84,20 +84,20 @@ $border-width: 1px;
         &.disabled,
         &:disabled
         {
-            background-color: $gray-lightest;
-            border-color: $gray-lighter;
+            background-color: $gray-100;
+            border-color: $gray-300;
             cursor: not-allowed;
 
             & ~ label
             {
-                color: $gray-lighter;
+                color: $gray-300;
                 cursor: not-allowed;
             }
         }
 
         & + .symbol
         {
-            color: $gray;
+            color: $gray-600;
             position: absolute;
             top: $border-width;
             right: $border-width;
@@ -110,12 +110,12 @@ $border-width: 1px;
         {
             & + .symbol
             {
-                color: $gray;
+                color: $gray-600;
             }
 
             & + label
             {
-                color: $gray-light !important;
+                color: $gray-500 !important;
             }
         }
     }
@@ -135,7 +135,7 @@ $border-width: 1px;
         width: 100%;
         padding: 0.35rem 1rem 0;
         margin-bottom: 0;
-        color: $gray-light;
+        color: $gray-500;
 
         position: absolute;
         top: 0;
@@ -159,8 +159,8 @@ $border-width: 1px;
         position: absolute;
         top: 0;
         left: 0;
-        background-color: $gray-lightest;
-        color: $gray-lighter;
+        background-color: $gray-100;
+        color: $gray-300;
         line-height: 1.2em;
         width: 1.2em;
         text-align: center;
@@ -322,7 +322,7 @@ $border-width: 1px;
             color: $white !important;
             &:hover
             {
-                color: $gray-lighter2 !important;
+                color: $gray-200 !important;
             }
         }
 

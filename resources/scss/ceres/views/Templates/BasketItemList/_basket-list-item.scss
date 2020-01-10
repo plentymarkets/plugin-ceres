@@ -52,7 +52,7 @@
 	}
 
 	&:not(:last-child) {
-		border-bottom: 1px solid $gray-lighter;
+		border-bottom: 1px solid $gray-300;
 	}
 
 	& .item-bundle {

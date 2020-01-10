@@ -3,12 +3,12 @@ html {
 }
 
 body {
-	background-color: $gray-lightest;
+	background-color: $gray-100;
 
 	> #vue-app,
 	> #vue-error {
 
-		background-color: $gray-lightest;
+		background-color: $gray-100;
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;

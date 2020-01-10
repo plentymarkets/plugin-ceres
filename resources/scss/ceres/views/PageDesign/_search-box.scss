@@ -84,18 +84,18 @@ div:not(.top-bar) {
 
                 &:hover
                 {
-                    background: $gray-lighter;
+                    background: $gray-300;
                 }
 
                 &.autocomplete-selected
                 {
-                    background: $gray-lighter;
+                    background: $gray-300;
                 }
 
                 & > .autocomplete-item-name
                 {
                     align-self: center;
-                    color: $gray-dark;
+                    color: $gray-700;
                     max-width: 0;
                 }
 

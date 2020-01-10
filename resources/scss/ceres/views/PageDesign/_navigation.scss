@@ -1,7 +1,7 @@
 /* settings */
 // mobile
 $menu-bg-sm 			: $primary;
-$menu-breadcrumb-bg 	: $gray-darker;
+$menu-breadcrumb-bg 	: $gray-900;
 $menu-breadcrumb-color 	: color-yiq($menu-breadcrumb-bg);
 $menu-color-sm 			: color-yiq($primary);
 $menu-font-s-sm  		: 1.2em;
@@ -15,7 +15,7 @@ $menu-li-padding-x      : 1rem;
 $menu-li-padding-y      : 1.3rem;
 // bigmenu
 $menu-big-menu-bg 				: darken($primary,10%);
-$menu-big-menu-li-bg			: transparent; //color-yiq($primary, $gray-dark, transparent);
+$menu-big-menu-li-bg			: transparent; //color-yiq($primary, $gray-700, transparent);
 $menu-big-menu-li-bg-hover		: $primary;
 $menu-big-menu-li-color			: color-yiq($primary);
 // megamenu
@@ -23,7 +23,7 @@ $megamenu-bg 					: $white;
 $megamenu-color-top-btn			: $primary;
 $megamenu-color-bottom-btn		: $black;
 $megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
-$megamenu-btn-more 				: $gray;
+$megamenu-btn-more 				: $gray-600;
 
 nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 	display: block;

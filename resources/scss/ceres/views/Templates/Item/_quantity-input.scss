@@ -11,19 +11,19 @@
         padding: 0;
         text-align: center;
         transition: all .2s cubic-bezier(0,0,.26,1);
-        border: 1px solid $gray-lighter;
+        border: 1px solid $gray-300;
         border-radius: $border-radius 0 0 $border-radius;
         
         &:focus {
-            background: $gray-lightest;
+            background: $gray-100;
         }
     }
     
     .qty-btn-container {
         width: 25px;
         position: relative;
-        background: $gray-lighter2;
-        border: 1px solid $gray-lighter;
+        background: $gray-200;
+        border: 1px solid $gray-300;
         border-left: none;
         border-radius: 0 $border-radius $border-radius 0;
         overflow: hidden;
@@ -45,11 +45,11 @@
             }
 
             &:not(.disabled):hover {
-                background: darken($gray-lighter, 10%);
+                background: darken($gray-300, 10%);
             }
 
             & > .qty-sign {
-                color: $gray;
+                color: $gray-600;
                 position: absolute;
                 left: 0;
                 right: 0;
@@ -60,7 +60,7 @@
 
         .qty-btn-seperator {
             height: 1px;
-            background: $gray-lighter;
+            background: $gray-300;
         }
     }
 }

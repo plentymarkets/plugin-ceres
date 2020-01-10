@@ -2,7 +2,7 @@
 	position: relative;
 	display: flex;
 	flex-flow: row wrap;
-	border-bottom:1px solid $gray-lighter;
+	border-bottom:1px solid $gray-300;
 
 	.toggle-description,
 	.item-toggle{
@@ -130,7 +130,7 @@
 	    bottom: 0;
 	    right: 0;
 	    line-height: 1;
-	    color: $gray-lighter;
+	    color: $gray-300;
 	    cursor: pointer;
 		transition: all .2s;
 		text-decoration: none;
@@ -226,7 +226,7 @@
 
 	.rebate-hint
 	{
-		color: $gray;
+		color: $gray-600;
 	}
 }
 
