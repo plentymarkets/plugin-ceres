@@ -15,19 +15,19 @@
 
     .filter-collapse {
         > div {
+            padding: 2rem;
             background: $white;
             border: 1px solid $gray-200;
-            padding: 2rem;
         }
     }
 
     .collapse-container:empty {
-        &:after {
-            content: attr(data-translation-empty);
+        &::after {
             display: block;
             padding: .75rem;
             color: $gray-700;
             text-align: center;
+            content: attr(data-translation-empty);
         }
     }
 }

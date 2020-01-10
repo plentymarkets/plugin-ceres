@@ -2,14 +2,14 @@
 .page-wish-list {
     .category-list-view-port {
         button {
-            white-space: nowrap;
             display: flex;
             flex-direction: row-reverse;
+            white-space: nowrap;
 
             i.fa {
+                margin-left: .25rem;
                 font-size: inherit;
                 line-height: inherit;
-                margin-left: .25rem;
             }
         }
     }

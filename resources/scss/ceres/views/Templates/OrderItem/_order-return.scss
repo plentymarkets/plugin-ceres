@@ -1,15 +1,12 @@
-.order-return-history-item
-{
+.order-return-history-item {
     display: flex;
     flex-direction: row;
-    
-    .order-return-history-image-container
-    {
+
+    .order-return-history-image-container {
         height: 80px;
     }
-    
-    .col-md-8
-    {
+
+    .col-md-8 {
         display: flex;
         align-items: center;
     }

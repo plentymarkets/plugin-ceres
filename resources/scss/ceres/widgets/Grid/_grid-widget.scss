@@ -1,44 +1,34 @@
-.widget-grid
-{
-    > .widget-inner
-    {
+.widget-grid {
+    > .widget-inner {
         display: flex;
 
-        > div
-        {
+        > div {
             flex: 1;
             max-width: 100%;
         }
     }
 
-    .widget-inner-stacked
-    {
+    .widget-inner-stacked {
         display: flex;
         flex-direction: column;
 
-        > .widget-inner
-        {
+        > .widget-inner {
             max-width: none;
 
-            [data-builder-child-container]
-            {
+            [data-builder-child-container] {
                 min-height: 100px;
             }
 
-            @include media-breakpoint-up(md)
-            {
-                .widget-proportional
-                {
+            @include media-breakpoint-up(md) {
+                .widget-proportional {
                     height: 100%;
                 }
             }
         }
     }
 
-    @include media-breakpoint-up(md)
-    {
-        .widget-inner-stacked > .widget-inner:first-child
-        {
+    @include media-breakpoint-up(md) {
+        .widget-inner-stacked > .widget-inner:first-child {
             padding-bottom: 2rem;
         }
     }
@@ -51,39 +41,36 @@
         .widget-inner {
             .widget-list {
                 position: relative;
+                box-sizing: content-box;
                 height: 100%;
+                margin-bottom: 0;
                 color: $footer-features-color;
                 background-color: $footer-features-bg;
-                box-sizing: content-box;
-                margin-bottom: 0;
 
-                .widget-inner
-                {
+                .widget-inner {
                     padding: 1rem;
                 }
             }
 
-            @include media-breakpoint-up(md)
-            {
-                .widget-list
-                {
-                    margin-left: -15px;
-                    margin-right: -15px;
-                    padding-left: 15px;
+            @include media-breakpoint-up(md) {
+                .widget-list {
                     padding-right: 15px;
+                    padding-left: 15px;
+                    margin-right: -15px;
+                    margin-left: -15px;
                 }
 
                 &:first-child {
                     .widget-list {
-                        margin-left: 0;
                         padding-left: 0;
+                        margin-left: 0;
                     }
                 }
 
                 &:last-child {
                     .widget-list {
-                        margin-right: 0;
                         padding-right: 0;
+                        margin-right: 0;
                     }
                 }
             }
@@ -102,12 +89,10 @@
     }
 }
 
-.checkout
-{
-    .widget-grid > .widget-inner > div
-    {
-        background-color: $white;
+.checkout {
+    .widget-grid > .widget-inner > div {
         padding: $spacer;
+        background-color: $white;
     }
 }
 

@@ -1,59 +1,49 @@
-.widget-item-list
-{
-    .widget-inner
-    {
-        padding-left: 0;
+.widget-item-list {
+    .widget-inner {
         padding-right: 0;
+        padding-left: 0;
     }
 
-    .widget-caption
-    {
-        padding: 0.25rem 1.5rem;
+    .widget-caption {
         display: flex;
         align-items: center;
+        padding: .25rem 1.5rem;
 
-        > div
-        {
+        > div {
             flex: 1;
         }
 
     }
 }
 
-.widget-item-list-caption
-{
+.widget-item-list-caption {
     h1,
     h2,
     h3,
-    p
-    {
+    p {
         margin: 0;
         text-transform: uppercase;
     }
 
-    h1
-    {
-        font-size: 2rem;
+    h1 {
         padding-top: .7rem;
         padding-bottom: .7rem;
+        font-size: 2rem;
     }
 
-    h2
-    {
-        font-size: 1.75rem;
+    h2 {
         padding-top: .6rem;
         padding-bottom: .4rem;
+        font-size: 1.75rem;
     }
 
-    h3
-    {
-        font-size: 1.5rem;
+    h3 {
         padding-top: .4rem;
         padding-bottom: .1rem;
+        font-size: 1.5rem;
     }
 
-    .widget-item-list-inline-caption *
-    {
+    .widget-item-list-inline-caption * {
         text-transform: unset !important;
     }
 }

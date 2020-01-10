@@ -15,28 +15,28 @@
             }
         }
         button {
-            text-align: left;
             padding: $card-spacer-x;
+            text-align: left;
             border-top-width: 0;
 
             h5 {
-                font-weight: bold;
                 position: relative;
+                font-weight: bold;
 
                 > .fa {
                     position: absolute;
-                    right: 0;
                     top: -4px;
+                    right: 0;
                     font-size: 1.5rem;
-                    transform: scaleY(-1);
                     transition-timing-function: ease;
                     transition-duration: .35s;
+                    transform: scaleY(-1);
                     transform-origin: 50% 60%;
                 }
             }
-        }        
+        }
         button:hover,
-        button:focus { 
+        button:focus {
             color: black;
         }
 
