@@ -6,11 +6,9 @@ use Ceres\Config\CeresSortingConfig;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Helper\SearchOptions;
 use Ceres\Widgets\Helper\Factories\Settings\ItemSortValueListFactory;
-use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
-use Plenty\Plugin\Http\Request;
 
 class ItemSortingWidget extends BaseWidget
 {
