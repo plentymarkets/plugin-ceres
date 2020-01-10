@@ -1,16 +1,16 @@
 //helper for removing paddings from bootstrap columns
-.prop-row{
+.prop-row {
     display: flex;
     flex-flow: row wrap;
-    
-    [class*="col-"]{
+
+    [class*="col-"] {
         padding-right: 0;
         padding-left: 0;
     }
-    
+
 }
 
-.prop-inner{
+.prop-inner {
     position: absolute;
     top: 0;
     left: 0;
@@ -25,8 +25,8 @@
     // Common properties for all breakpoints
     %base-prop {
         position: relative;
-        width: 100%!important;
-        height: 0!important;
+        width: 100% !important;
+        height: 0 !important;
     }
 
     $breakpoint-counter: 0;
@@ -43,14 +43,14 @@
         }
 
         @include media-breakpoint-up($breakpoint, $breakpoints) {
-            
-            .sqr-#{$breakpoint}-reset{
+
+            .sqr-#{$breakpoint}-reset {
                 height: auto;
                 padding-bottom: 0;
             }
 
             @each $i in $widths {
-            	@each $j in $heights {
+                @each $j in $heights {
                     .prop-#{$breakpoint}-#{$i}-#{$j} {
                         @include make-prop($i, $j);
                     }
@@ -62,8 +62,8 @@
 }
 
 @mixin make-prop($width, $height) {
-    padding-bottom: percentage($height / $width) !important;
     min-height: auto !important;
+    padding-bottom: percentage($height / $width) !important;
 }
 
 @include make-props();

@@ -1,11 +1,12 @@
-body, body .wrapper-main{
+body,
+body .wrapper-main {
     overflow-x: hidden;
 }
 
 .sb-no-animation.collapsing {
+    display: none !important;
     -webkit-transition: none !important;
     transition: none !important;
-    display: none !important;
 }
 
 .hidden {
@@ -18,17 +19,16 @@ body, body .wrapper-main{
     }
 }
 
-.category-contact .main .container-max
-{
-    background-color: $white;
+.category-contact .main .container-max {
     padding-top: $spacer;
     margin-top: 2 * $spacer;
     margin-bottom: 2 * $spacer;
+    background-color: $white;
 }
 
-.page-content{
+.page-content {
     padding-top: $spacer;
-    background-color: $gray-lightest;
+    background-color: $gray-100;
     &.basket,
     &.checkout,
     &.contact,
@@ -37,15 +37,15 @@ body, body .wrapper-main{
         &:not(.checkout):not(.basket) {
             background-color: $white;
         }
-        color: $gray-darker;
-        margin-top: 30px;
         padding-bottom: 30px;
+        margin-top: 30px;
+        color: $gray-900;
     }
 }
-.container-max{
+.container-max {
     @extend .container-fluid;
-    max-width: 1200px;
     z-index: auto;
+    max-width: 1200px;
 
     &.login {
         margin-top: 2rem;
@@ -57,8 +57,8 @@ body, body .wrapper-main{
         font-size: 10em;
     }
     i.fa-home {
-        margin-left: 5px;
         margin-top: 2px;
+        margin-left: 5px;
     }
     .default-not-found {
         background-color: rgb(247, 247, 249);
@@ -67,10 +67,10 @@ body, body .wrapper-main{
 
 .not-found-text {
     font-size: 115px;
-    text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
+    text-shadow: 4px 3px 0 #f7f7f9, 9px 8px 0 rgba(218, 218, 227, .5);
 }
 
-.rating{
+.rating {
     line-height: 1;
 
     .tag,
@@ -79,10 +79,10 @@ body, body .wrapper-main{
         overflow: hidden;
         cursor: pointer;
 
-        .amount{
-            padding: 0.1rem .6rem 0.1rem .4rem;
+        .amount {
+            padding: .1rem .6rem .1rem .4rem;
             margin-left: .2rem;
-            background-color: $gray;
+            background-color: $gray-600;
         }
     }
 }
@@ -98,11 +98,12 @@ a:active {
 }
 
 .border-left {
-    border-left: 1px solid $gray-dark;
+    border-left: 1px solid $gray-700;
 }
 
 
-.carousel-control-next, .carousel-control-prev {
+.carousel-control-next,
+.carousel-control-prev {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -120,7 +121,8 @@ a:active {
 .carousel-control-next {
     right: 0;
 }
-.carousel-control-next-icon, .carousel-control-prev-icon {
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -129,8 +131,8 @@ a:active {
 }
 
 .content-center {
-    margin: 0 auto;
     float: none;
+    margin: 0 auto;
 }
 
 .flex-center {
@@ -139,7 +141,7 @@ a:active {
 }
 
 .text-wrap {
-  white-space: normal;
+    white-space: normal;
 }
 
 .is_stuck {
@@ -152,8 +154,8 @@ a:active {
 
 .inline-select {
     margin-left: -7px;
-    text-decoration: underline;
     font-weight: inherit;
+    text-decoration: underline;
 }
 
 @each $color, $value in $theme-colors {

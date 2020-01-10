@@ -9,7 +9,7 @@
 ///         </div>
 ///     </div>
 ///
-@mixin square-container(){
+@mixin square-container() {
     position: relative;
     display: block;
     width: 100%;
@@ -17,7 +17,7 @@
     padding-bottom: 100%;
     overflow: hidden;
 
-    .square-inner{
+    .square-inner {
         position: absolute;
         top: 0;
         right: 0;
@@ -26,8 +26,8 @@
     }
 }
 
-.square-container{
-    @include square-container()
+.square-container {
+    @include square-container();
 }
 
 /// Class for centering direct single child.
@@ -38,17 +38,17 @@
 ///     <div class="center-xy">
 ///         content to be centered
 ///     </div>
-@mixin center-xy(){
+@mixin center-xy() {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center; // center on the x axys
 
-    img{
+    img {
         align-self: center; // center on the y axys
     }
 }
 
-.center-xy{
+.center-xy {
     @include center-xy();
 }
 
@@ -56,7 +56,7 @@
 ///
 /// @author Bruno Fenzl
 ///
-/// @param {color} $default-color [$gray-lighter] Normal color of the star. Defaults to the Bootstrap var $gray-lighter.
+/// @param {color} $default-color [$gray-300] Normal color of the star. Defaults to the Bootstrap var $gray-300.
 /// @param {color} $selected-color [#FFD700] Selected color of the star. Defaults to #FFD700.
 /// @param {color} $hover-color [#FFED85] Hover color of the star. Defaults to #FFED85.
 ///
@@ -83,60 +83,58 @@
 ///         <input type="radio" id="star0-5" name="rating" value="0.5" />
 ///             <label for="star0-5" title="0.5 Star"></label>
 ///     </fieldset>
-@mixin star-rating( $default-color: $gray-lighter, $selected-color: #FFD700, $hover-color: #FFED85){
+@mixin star-rating( $default-color: $gray-300, $selected-color: #FFD700, $hover-color: #FFED85) {
     border: none;
     @include clearfix();
 
-    &>input {
+    & > input {
         display: none;
     }
 
-    &>label{
-        margin: 0;
-        padding: 0;
-        color: $gray-lighter;
+    & > label {
         float: right;
+        padding: 0;
+        margin: 0;
+        color: $gray-300;
 
-        &:before{
-            content: "\f005";
-            font-family: FontAwesome;
-            font-size: 1.2rem;
+        &::before {
             display: inline-block;
             margin: 0 .25em;
+            font-family: FontAwesome;
+            font-size: 1.2rem;
+            content: "\f005";
         }
 
-        &:nth-of-type(even){
-            &:before{
-                content: "\f089";
+        &:nth-of-type(even) {
+            &::before {
                 position: absolute;
+                content: "\f089";
             }
         }
     }
 
-    &>input:checked ~ label, /* show gold star when clicked */
-    &:not(:checked) > label:hover, /* hover current star */
+    & > input:checked ~ label,
+    &:not(:checked) > label:hover,
     &:not(:checked) > label:hover ~ label { /* hover previous stars in list */
-        color: #FFD700;
+        color: #ffd700;
     }
 
-    & > input:checked + label:hover, /* hover current star when changing rating */
+    & > input:checked + label:hover,
     & > input:checked ~ label:hover,
-    & > label:hover ~ input:checked ~ label, /* lighten current selection */
+    & > label:hover ~ input:checked ~ label,
     & > input:checked ~ label:hover ~ label {
-        color: #FFED85;
+        color: #ffed85;
     }
 
-    .rate-link{
-        float:right;
+    .rate-link {
+        float: right;
         margin-left: .25em;
     }
 }
 
-.star-rating{
+.star-rating {
     @include star-rating();
 }
-
-
 
 
 /// mimics the image-background: cover; behaviour but with img element
@@ -147,23 +145,23 @@
 ///     <div class="img-cover-container">
 ///         img class="" src="">
 ///     </div>
-@mixin img-cover{
+@mixin img-cover {
     position: relative;
     overflow: hidden;
 
-    &>img{
+    & > img {
         position: absolute;
         top: -9999px;
         right: -9999px;
         bottom: -9999px;
         left: -9999px;
-        margin: auto;
         min-width: 100%;
         min-height: 100%;
+        margin: auto;
     }
 }
 
-.img-cover-container{
+.img-cover-container {
     @include img-cover();
 }
 
@@ -177,21 +175,22 @@
 ///         img src="">
 ///     </div>
 
-@mixin img-contain{
+@mixin img-contain {
     position: relative;
     overflow: hidden;
 
-    &>noscript,a>img{
+    & > noscript,
+    a > img {
         position: absolute;
         top: -9999px;
         right: -9999px;
         bottom: -9999px;
         left: -9999px;
-        margin: auto;
-        max-width: 100%;
-        max-height: 100%;
         width: auto;
+        max-width: 100%;
         height: auto;
+        max-height: 100%;
+        margin: auto;
     }
 
     & .owl-carousel {
@@ -206,17 +205,17 @@
                 & .owl-item {
                     height: 100%;
 
-                    & img{
+                    & img {
                         position: absolute;
                         top: -9999px;
                         right: -9999px;
                         bottom: -9999px;
                         left: -9999px;
-                        margin: auto;
-                        max-width: 100%;
-                        max-height: 100%;
                         width: auto;
+                        max-width: 100%;
                         height: auto;
+                        max-height: 100%;
+                        margin: auto;
                     }
                 }
             }
@@ -225,61 +224,58 @@
 
 }
 
-.img-contain-container{
+.img-contain-container {
     @include img-contain();
 }
 
 
-
-@mixin pipe($color:$gray-light){
+@mixin pipe($color:$gray-500) {
     height: 1em;
-    border-left: 1px solid $color;
     margin: 0 .45em 0 .25em;
+    border-left: 1px solid $color;
 }
 
-.pipe{
+.pipe {
     @include pipe();
 }
 
 
-
-@mixin reset-list(){
-    list-style: none;
-    margin: 0;
+@mixin reset-list() {
     padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-@mixin rainbow-li($r, $g, $b, $steps){
-    $step : $steps;
-    $child : 1;
+@mixin rainbow-li($r, $g, $b, $steps) {
+    $step: $steps;
+    $child: 1;
     @while $step >= 1 {
-        $amount : $step/$steps;
+        $amount: $step/$steps;
 
         li:nth-child(#{$child}) .breadcrumb-item:not(.active),
         li:nth-child(#{$child}) .breadcrumb-item:not(.active) {
             background-color: rgba($r, $g, $b, $amount);
 
-            &::after { border-left-color : rgba($r, $g, $b, $amount); }
+            &::after { border-left-color: rgba($r, $g, $b, $amount); }
 
             &:hover {
-                &::after { border-left-color : black!important; }
+                &::after { border-left-color: black !important; }
             }
         }
-        $child : $child + 1;
-        $step  : $step - 1;
+        $child: $child + 1;
+        $step: $step - 1;
     }
 }
 
-@mixin triangle-right($color, $w, $h){
+@mixin triangle-right($color, $w, $h) {
     width: 0;
     height: 0;
     border-top: $w solid transparent;
-    border-left: $h solid $color;
     border-bottom: $w solid transparent;
+    border-left: $h solid $color;
 }
 
-@mixin context-bg($color)
-{
-    background-color: $color;
+@mixin context-bg($color) {
     color: color-yiq($color);
+    background-color: $color;
 }

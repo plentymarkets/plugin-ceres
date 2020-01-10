@@ -1,253 +1,246 @@
-.input-group{
+.input-group {
 
-	.input-unit + .input-group-btn
-	{
-		padding-bottom: $grid-gutter-width/2;
+    .input-unit + .input-group-btn {
+        padding-bottom: $grid-gutter-width/2;
 
-		.btn
-		{
-			height: calc(2.8em + 1px);
-		}
-	}
+        .btn {
+            height: calc(2.8em + 1px);
+        }
+    }
 
-	&.vert{
-		.input-group-btn{
-			display: block;
-			width: 100%;
+    &.vert {
+        .input-group-btn {
+            display: block;
+            width: 100%;
 
-			.btn{
-				width: 100%;
-				margin: 0;
-			}
-		}
+            .btn {
+                width: 100%;
+                margin: 0;
+            }
+        }
 
-		//.form-control:not(:last-child),
-		.input-group-addon:not(:last-child),
-		.input-group-btn:not(:last-child) > .btn,
-		.input-group-btn:not(:last-child) > .btn-group > .btn,
-		.input-group-btn:not(:last-child) > .dropdown-toggle,
-		.input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),
-		.input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {
-		  	@include border-bottom-radius(0);
-		  	@include border-top-radius($border-radius);
-		  	border-bottom: none;
-		}
-		.input-group-addon:not(:last-child) {
-		  	border-bottom: 0;
-		}
-		.input-group .form-control:not(:first-child),
-		.input-group-addon:not(:first-child),
-		.input-group-btn:not(:first-child) > .btn,
-		.input-group-btn:not(:first-child) > .btn-group > .btn,
-		.input-group-btn:not(:first-child) > .dropdown-toggle,
-		.input-group-btn:not(:last-child) > .btn:not(:first-child),
-		.input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {
-		  	@include border-bottom-radius($border-radius);
-		  	@include border-top-radius(0);
-		  	border-top: none;
-		}
-		.form-control + .input-group-addon:not(:first-child) {
-		  	border-top: 0;
-		}
+        //.form-control:not(:last-child),
+        .input-group-addon:not(:last-child),
+        .input-group-btn:not(:last-child) > .btn,
+        .input-group-btn:not(:last-child) > .btn-group > .btn,
+        .input-group-btn:not(:last-child) > .dropdown-toggle,
+        .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),
+        .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {
+            @include border-bottom-radius(0);
+            @include border-top-radius($border-radius);
+            border-bottom: none;
+        }
+        .input-group-addon:not(:last-child) {
+            border-bottom: 0;
+        }
+        .input-group .form-control:not(:first-child),
+        .input-group-addon:not(:first-child),
+        .input-group-btn:not(:first-child) > .btn,
+        .input-group-btn:not(:first-child) > .btn-group > .btn,
+        .input-group-btn:not(:first-child) > .dropdown-toggle,
+        .input-group-btn:not(:last-child) > .btn:not(:first-child),
+        .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {
+            @include border-bottom-radius($border-radius);
+            @include border-top-radius(0);
+            border-top: none;
+        }
+        .form-control + .input-group-addon:not(:first-child) {
+            border-top: 0;
+        }
 
-		.form-control{
-			display: block;
-			float: none;
-			border-radius: 0!important;
-		}
-	}
+        .form-control {
+            display: block;
+            float: none;
+            border-radius: 0 !important;
+        }
+    }
 }
 
 button:focus {
-	outline:none;
+    outline: none;
 }
 
-// button combinations 
+// button combinations
 .btn-group.extended,
-.input-group.extended{
+.input-group.extended {
     display: flex;
 
-    .extended{
+    .extended {
         flex: 1;
 
-        .btn{
+        .btn {
             width: 100%;
         }
     }
 
-    .input-group-btn{
+    .input-group-btn {
         width: auto;
     }
 }
 
 .btn {
-	outline: 0 !important;
-	word-break: break-word;
+    word-break: break-word;
+    outline: 0 !important;
 
-	& .btn-label {
-		&.btn-trans {
-			background: transparent;
-		}
-	}
+    & .btn-label {
+        &.btn-trans {
+            background: transparent;
+        }
+    }
 
-	& > .fa {
-		float: right;
+    & > .fa {
+        float: right;
 
-		&.default-float {
-			float: none;
-		}
-	}
+        &.default-float {
+            float: none;
+        }
+    }
 
-	& > span + .fa {
-		margin-left: 5px;
-		margin-top: 1px;
-	}
+    & > span + .fa {
+        margin-top: 1px;
+        margin-left: 5px;
+    }
 
-	&.btn-medium {
-		min-width: 10rem;
-	}
+    &.btn-medium {
+        min-width: 10rem;
+    }
 
-	&.btn-md {
-		padding-top: 0.8rem;
-		padding-bottom: 0.8rem;
-	}
+    &.btn-md {
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+    }
 
-	&.btn-medium-large {
-		min-width: 12rem;
-	}
+    &.btn-medium-large {
+        min-width: 12rem;
+    }
 
-	&.btn-large {
-		min-width: 15rem;
-	}
+    &.btn-large {
+        min-width: 15rem;
+    }
 
-	&.btn-block {
-		> .fa {
-			line-height: inherit;
-			margin-top: 0;
-		}
-	}
+    &.btn-block {
+        > .fa {
+            margin-top: 0;
+            line-height: inherit;
+        }
+    }
 }
 
 .btn-xs-max-width {
-	@include media-breakpoint-down(xs) {
-		width: 100% !important;
-	}
+    @include media-breakpoint-down(xs) {
+        width: 100% !important;
+    }
 }
 
 .btn-labeled {
-	padding-top: 0;
+    padding-top: 0;
     padding-bottom: 0;
-	
-	@extend .small;
 
-	transition: all 200ms;
+    @extend .small;
 
-	.btn-label {
-		position: relative;
-		right: -#{$btn-padding-x-sm};
-		display: inline-block;
-		padding: $btn-padding-y-sm $btn-padding-x-sm;
-		background-color: rgba(0,0,0,0.15);
-		border-top-right-radius: $border-radius-sm;
-		border-bottom-right-radius: $border-radius-sm;
-	}
+    transition: all 200ms;
 
-	&.label-right{
-		.btn-label {
-			right: auto;
-			left: -#{$btn-padding-x-sm};
-		}
-	}
+    .btn-label {
+        position: relative;
+        right: -#{$btn-padding-x-sm};
+        display: inline-block;
+        padding: $btn-padding-y-sm $btn-padding-x-sm;
+        background-color: rgba(0, 0, 0, .15);
+        border-top-right-radius: $border-radius-sm;
+        border-bottom-right-radius: $border-radius-sm;
+    }
+
+    &.label-right {
+        .btn-label {
+            right: auto;
+            left: -#{$btn-padding-x-sm};
+        }
+    }
 
 
-	&.btn-link{
-		padding-left: 0;
-		padding-right: 0;
+    &.btn-link {
+        padding-right: 0;
+        padding-left: 0;
 
-		.btn-label{
-			background-color: rgba(0,0,0,0);
-			padding: $btn-padding-y-sm 0;
-		}
-	}
+        .btn-label {
+            padding: $btn-padding-y-sm 0;
+            background-color: rgba(0, 0, 0, 0);
+        }
+    }
 }
 
-.btn-icon
-{
-	padding: .6rem;
-	.fa
-	{
-		text-align: center;
-	}
+.btn-icon {
+    padding: .6rem;
+    .fa {
+        text-align: center;
+    }
 
-	&.btn-sm
-	{
-		padding: .4rem;
-	}
+    &.btn-sm {
+        padding: .4rem;
+    }
 
-	&.btn-lg
-	{
-		padding: .95rem;
-	}
+    &.btn-lg {
+        padding: .95rem;
+    }
 
-	&.btn-circle
-	{
-		border-radius: 50%;
-	}
+    &.btn-circle {
+        border-radius: 50%;
+    }
 }
 
 .btn-default {
-	@include button-variant($gray-lighter, $gray-lighter);
+    @include button-variant($gray-300, $gray-300);
 }
 
 .btn-collapse {
-    display: block;
     position: relative;
     z-index: 999;
+    display: block;
     width: 100%;
+    font-size: 85%;
     text-align: center;
-	cursor: pointer;
-	font-size: 85%;
+    cursor: pointer;
 
-    &:before{
-        content: "";
+    &::before {
         display: block;
         width: 100%;
         height: 1.5em;
-        border-bottom: 1px solid $gray-lighter;
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+        content: "";
+        filter: progid:dximagetransform.microsoft.gradient(startColorstr="#00ffffff", endColorstr="#ffffff", GradientType=0);
+        border-bottom: 1px solid $gray-300;
     }
 
-    &:after{
-        content: attr(data-show-more);
-        font-weight: 700;
-        color: $gray-light;
-        display: inline-block;
+    &::after {
         position: relative;
-        background-color: white;
-        padding: 0 .5em;
         top: -.8em;
-	}
+        display: inline-block;
+        padding: 0 .5em;
+        font-weight: 700;
+        color: $gray-500;
+        content: attr(data-show-more);
+        background-color: white;
+    }
 
-	i {
-		color: $gray-light;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 1.5em;
-	}
-	
-	&.opened,
-	&:not(.collapsed) {
-		&:after {
-			content: attr(data-show-less);
-		}
+    i {
+        position: absolute;
+        top: 1.5em;
+        right: 0;
+        left: 0;
+        color: $gray-500;
+    }
 
-		i {
-			transform: rotate(180deg);
-			top: 0;
-			bottom: 1.5em;
-		}
-	}
+    &.opened,
+    &:not(.collapsed) {
+        &::after {
+            content: attr(data-show-less);
+        }
+
+        i {
+            top: 0;
+            bottom: 1.5em;
+            transform: rotate(180deg);
+        }
+    }
 }
 
 // Responsive button text and icon visibility
@@ -255,24 +248,24 @@ button:focus {
 @each $bp in map-keys($grid-breakpoints) {
     .btn-only-icon-#{$bp}-up {
         @include media-breakpoint-up($bp) {
-        width: 2.2rem !important;
-        padding-right: 8px;
-        height: 2.2rem;
+            width: 2.2rem !important;
+            height: 2.2rem;
+            padding-right: 8px;
 
-        & span {
-            display: none !important;
-        }
+            & span {
+                display: none !important;
+            }
         }
     }
     .btn-only-icon-#{$bp}-down {
         @include media-breakpoint-down($bp) {
-        & span {
-            display: none !important;
-        }
-        i {
-            margin: 0 !important;
-            float: none !important;
-        }
+            & span {
+                display: none !important;
+            }
+            i {
+                float: none !important;
+                margin: 0 !important;
+            }
         }
     }
 }

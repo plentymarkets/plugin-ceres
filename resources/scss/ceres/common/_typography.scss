@@ -1,21 +1,17 @@
-.section-header{
-	padding-bottom: .5rem;
-	border-bottom: 1px solid $gray-lighter;
+.section-header {
+    padding-bottom: .5rem;
+    border-bottom: 1px solid $gray-300;
 }
 
-.text-context-dark
-{
-	color: $yiq-text-dark !important;
-	&:hover
-	{
-		color: $yiq-text-dark !important;
-	}
+.text-context-dark {
+    color: $yiq-text-dark !important;
+    &:hover {
+        color: $yiq-text-dark !important;
+    }
 }
-.text-context-light
-{
-	color: $yiq-text-light !important;
-	&:hover
-	{
-		color: $yiq-text-light !important;
-	}
+.text-context-light {
+    color: $yiq-text-light !important;
+    &:hover {
+        color: $yiq-text-light !important;
+    }
 }

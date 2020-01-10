@@ -1,18 +1,14 @@
-.cookie-bar
-{
-    .privacy-settings
-    {
+.cookie-bar {
+    .privacy-settings {
         max-height: 50vh;
 
-        table tr td:first-child 
-        {
+        table tr td:first-child {
             width: 200px;
         }
     }
 
-    &.out
-    {
-        left: 15px;
+    &.out {
         right: auto;
+        left: 15px;
     }
 }

@@ -1,5 +1,4 @@
-@mixin widget-bg-variant($color)
-{
+@mixin widget-bg-variant($color) {
     color: color-yiq($color);
     background-color: $color;
 

@@ -1,5 +1,4 @@
-.widget-selected-filter
-{
+.widget-selected-filter {
     &.widget-alignment-left {
         span.selected-filter {
             margin-right: 10px;
@@ -8,8 +7,8 @@
     }
 
     .selected-filters {
-        float: none;
         display: block;
+        float: none;
         margin-top: 0;
         span.selected-filter {
             margin-bottom: 10px;

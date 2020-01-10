@@ -1,30 +1,30 @@
-.toggle-list-view{
-	
-	.fa{
-		display: block;
-		transition: color 200ms;
-	}
+.toggle-list-view {
 
-	.fa:nth-of-type(1){
-		color: $primary;
-		font-size: 1.5rem;
-	}
+    .fa {
+        display: block;
+        transition: color 200ms;
+    }
 
-	.fa:nth-of-type(2){
-		color: $gray-light;
-		font-size: 1.5rem;
-	}
-	
+    .fa:nth-of-type(1) {
+        font-size: 1.5rem;
+        color: $primary;
+    }
 
-	&.grid{
+    .fa:nth-of-type(2) {
+        font-size: 1.5rem;
+        color: $gray-500;
+    }
 
-		.fa:nth-of-type(1){
-			color: $gray-light;
-		}
-		
-		.fa:nth-of-type(2){
-			color: $primary;
-		}
-	}
-	
+
+    &.grid {
+
+        .fa:nth-of-type(1) {
+            color: $gray-500;
+        }
+
+        .fa:nth-of-type(2) {
+            color: $primary;
+        }
+    }
+
 }
