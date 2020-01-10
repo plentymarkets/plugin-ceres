@@ -11,6 +11,23 @@ import "custom-event-polyfill";
 import Vue from "vue";
 import Vuex from "vuex";
 
+const mount = Vue.prototype.$mount;
+
+Vue.prototype.$mount =
+    function(el, hydrating)
+    {
+        const templateOverride = this.$props.templateOverride;
+
+        if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
+        {
+            const renderFunctions = Vue.compile(document.querySelector(templateOverride).innerHTML);
+
+            Object.assign(this.$options, renderFunctions);
+        }
+
+        return mount.call(this, el, hydrating);
+    };
+
 window.Vue = Vue;
 window.Vuex = Vuex;
 
