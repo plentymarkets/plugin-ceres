@@ -5,7 +5,7 @@
             <div class="mb-3" :class="'col-' + columnDivider" v-for="category in categoryChildren">
                 <a :href="category.url" :title="category.details[0].metaTitle || category.details[0].name">
                     <div class="nav-item border d-flex" :class="{ 'no-img': imageSource == 'none' }">
-                        <div v-if="category.details[0][imageSource]" class="prop-xs-1-1">
+                        <div v-if="category.details[0][imageSource]" class="prop-1-1">
                             <img v-if="imageSource !== 'none'" :src="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
                         </div>
                         <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">${ category.details[0].name }</span></div>

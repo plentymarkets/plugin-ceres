@@ -39,13 +39,12 @@
 
 // global
 @import "mixins/general-mixins";
-@import "mixins/proportional-boxes";
+@import "common/proportional-boxes";
 @import "common/typography";
 @import "common/common";
 @import "common/structure";
 @import "common/modal";
 @import "common/reboot";
-
 @import "common/buttons";
 
 // External plugins overrides
