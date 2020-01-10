@@ -1,100 +1,100 @@
 
 
-@mixin accordion(){
-	
-	.cmp-accordion{
-		
-		//default states
-		.accordion-control{
-			display: none;
-		}
+@mixin accordion() {
 
-		.accordion-header{
-			position: relative;
-			display: block;
-			cursor: normal;
+    .cmp-accordion {
 
-			&::after{
-				content: none;
-			    display: inline-block;
-			    width: 0;
-			    height: 0;
-			    margin-left: .3em;
-			    vertical-align: middle;
-			    border-top: .3em solid;
-			    border-right: .3em solid transparent;
-			    border-left: .3em solid transparent;
+        //default states
+        .accordion-control {
+            display: none;
+        }
 
-			    position: absolute;
-			    top: 50%;
-			    right: 1rem;
+        .accordion-header {
+            position: relative;
+            display: block;
+            cursor: normal;
 
-			    transform: translateY(-50%);
-			}
-		}
+            &::after {
 
-		.accordion-content{
-			height: auto;
-			max-height: none;
-			overflow: hidden;
-		}
+                position: absolute;
+                top: 50%;
+                right: 1rem;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                margin-left: .3em;
+                vertical-align: middle;
+                content: none;
+                border-top: .3em solid;
+                border-right: .3em solid transparent;
+                border-left: .3em solid transparent;
 
-		//active states for each breakpoint
-	    @each $bp in map-keys($grid-breakpoints) {
-		  	&.active-#{$bp}-up {
-		    	@include media-breakpoint-up($bp) {
-		    		.accordion-header{
-			    		cursor: pointer;
-			    		&::after{
-							content: "";
-		    			}
-		    		}
+                transform: translateY(-50%);
+            }
+        }
+
+        .accordion-content {
+            height: auto;
+            max-height: none;
+            overflow: hidden;
+        }
+
+        //active states for each breakpoint
+        @each $bp in map-keys($grid-breakpoints) {
+            &.active-#{$bp}-up {
+                @include media-breakpoint-up($bp) {
+                    .accordion-header {
+                        cursor: pointer;
+                        &::after {
+                            content: "";
+                        }
+                    }
 
 
-		    		.accordion-content{
-		      			max-height: 0;
-		    		}
+                    .accordion-content {
+                        max-height: 0;
+                    }
 
-		    		.accordion-control:checked{
-		    			& + .accordion-header::after{
-							border-top: 0;
-    						border-bottom: .3em solid;
-		    			}
+                    .accordion-control:checked {
+                        & + .accordion-header::after {
+                            border-top: 0;
+                            border-bottom: .3em solid;
+                        }
 
-						& + .accordion-header + .accordion-content{
-							max-height: 100em!important;
-						}
-					}
-		    	}
-		  	}
+                        & + .accordion-header + .accordion-content {
+                            max-height: 100em !important;
+                        }
+                    }
+                }
+            }
 
-		  	&.active-#{$bp}-down {
-		    	@include media-breakpoint-down($bp) {
-		      		.accordion-header{
-			    		cursor: pointer;
-			    		&::after{
-							content: "";
-		    			}
-		    		}
+            &.active-#{$bp}-down {
+                @include media-breakpoint-down($bp) {
+                    .accordion-header {
+                        cursor: pointer;
+                        &::after {
+                            content: "";
+                        }
+                    }
 
-		      		.accordion-content{
-		      			max-height: 0;
-		    		}
+                    .accordion-content {
+                        max-height: 0;
+                    }
 
-		    		.accordion-control:checked{
-		    			& + .accordion-header::after{
-							border-top: 0;
-    						border-bottom: .3em solid;
-		    			}
+                    .accordion-control:checked {
+                        & + .accordion-header::after {
+                            border-top: 0;
+                            border-bottom: .3em solid;
+                        }
 
-						& + .accordion-header + .accordion-content{
-							max-height: 100em!important;
-						}
-					}
-		    	}
-		  	}
-		}// end @each
-	}
+                        & + .accordion-header + .accordion-content {
+                            max-height: 100em !important;
+                        }
+                    }
+                }
+            }
+        }// end @each
+    }
 }
 
 @include accordion();

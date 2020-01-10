@@ -3,6 +3,8 @@
         "stylelint-config-twbs-bootstrap/scss"
     ],
     "rules": {
+        "indentation": 4,
+        "block-opening-brace-space-before": "always",
         "property-blacklist": [
             "border-radius",
             "border-top-left-radius",

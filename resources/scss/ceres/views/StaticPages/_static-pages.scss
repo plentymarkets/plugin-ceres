@@ -1,29 +1,29 @@
 .static-page-plain-text {
-  white-space: pre-line;
+    white-space: pre-line;
 }
 
 @media print {
-  .no-print {
-    display: none;
-  }
+    .no-print {
+        display: none;
+    }
 
-  .print-header {
-    text-align: center;
-    margin-top: 15px;
-  }
+    .print-header {
+        margin-top: 15px;
+        text-align: center;
+    }
 
-  @page {
-    size:  auto;
-    margin: 0mm;
-  }
+    @page {
+        size: auto;
+        margin: 0;
+    }
 
-  html {
-    background-color: #FFFFFF; 
-    margin: 0px;
-  }
+    html {
+        margin: 0;
+        background-color: #fff;
+    }
 }
 
 .no-padding {
-  padding-left: 0;
-  padding-right: 0;
+    padding-right: 0;
+    padding-left: 0;
 }
