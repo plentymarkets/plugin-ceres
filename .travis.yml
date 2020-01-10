@@ -1,6 +1,7 @@
 dist: trusty
 git:
   depth: 3
+
 branches:
   only:
     - stable
@@ -12,8 +13,7 @@ language: node_js
 node_js:
   - 12
 
-install:
-  - npm install
+cache: npm
 
 jobs:
   include:
@@ -21,3 +21,5 @@ jobs:
       script: npm run lint:sass
     - name: 'Run test scripts'
       script: npm run test
+    - name: 'Build assets'
+      script: npm run build

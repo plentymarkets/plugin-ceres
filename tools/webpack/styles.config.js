@@ -1,6 +1,5 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-const StylelintPlugin = require("stylelint-webpack-plugin");
 const path = require("path");
 
 module.exports = env =>
@@ -49,7 +48,6 @@ module.exports = env =>
         },
         plugins: [
             new FixStyleOnlyEntriesPlugin(),
-            // new StylelintPlugin(),
             new MiniCssExtractPlugin({
                 filename: "../../css/ceres-[name]" + (env.prod ? ".min" : "") + ".css",
             })
