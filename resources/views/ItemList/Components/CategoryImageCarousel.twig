@@ -8,7 +8,7 @@
     </a>
 
     <a v-else :href="itemUrl">
-        <lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="titleText"></lazy-img>
+        <lazy-img class="img-fluid" v-if="!disableLazyLoad" ref="itemLazyImage" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="titleText"></lazy-img>
         <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="titleText">
     </a>
 </script>
