@@ -8,7 +8,7 @@ Vue.component("customer-sign-input", {
     <div class="input-unit">
         <input type="text" @change="setCustomerSign($event.srcElement.value)" :id="'customer-sign_' + _uid">
         <label :for="'customer-sign_' + _uid">
-            ${ TranslationService.translate("Ceres::Template.checkoutCustomerSignMessage") }
+            ${ TranslationService.translate("Ceres::Template.checkoutCustomerSign") }
         </label>
     </div>`,
 
