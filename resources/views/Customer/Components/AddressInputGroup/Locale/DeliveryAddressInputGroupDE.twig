@@ -27,7 +27,8 @@
         </div>
         <div
             class="col-12 col-sm-6"
-            v-if="(isInOptionalFields('de', 'delivery_address.salutation') && value.gender === 'company') || isInOptionalFields('de', 'delivery_address.vatNumber')">
+            v-if="(isInOptionalFields('de', 'delivery_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'delivery_address.vatNumber')) ||
+            (!isInOptionalFields('de', 'delivery_address.salutation') && isInOptionalFields('de', 'delivery_address.name1') && isInOptionalFields('de', 'delivery_address.vatNumber'))">
             <div
                 class="input-unit"
                 data-model="vatNumber"
