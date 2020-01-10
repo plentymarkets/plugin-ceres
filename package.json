@@ -49,6 +49,8 @@
     "postcss-scss": "^1.0.5",
     "q": "^1.5.1",
     "sass-loader": "^7.3.1",
+    "vue-loader": "^15.8.3",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-fix-style-only-entries": "^0.3.1"
@@ -57,7 +59,7 @@
     "bootstrap": "4.3.1",
     "core-js": "^3.6.2",
     "custom-event-polyfill": "^0.3.0",
-    "dayjs": "^1.8.17",
+    "dayjs": "^1.8.19",
     "detect-browser": "^2.3.0",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
