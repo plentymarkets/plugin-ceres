@@ -28,7 +28,7 @@ body, body .wrapper-main{
 
 .page-content{
     padding-top: $spacer;
-    background-color: $gray-lightest;
+    background-color: $gray-100;
     &.basket,
     &.checkout,
     &.contact,
@@ -37,7 +37,7 @@ body, body .wrapper-main{
         &:not(.checkout):not(.basket) {
             background-color: $white;
         }
-        color: $gray-darker;
+        color: $gray-900;
         margin-top: 30px;
         padding-bottom: 30px;
     }
@@ -82,7 +82,7 @@ body, body .wrapper-main{
         .amount{
             padding: 0.1rem .6rem 0.1rem .4rem;
             margin-left: .2rem;
-            background-color: $gray;
+            background-color: $gray-600;
         }
     }
 }
@@ -98,7 +98,7 @@ a:active {
 }
 
 .border-left {
-    border-left: 1px solid $gray-dark;
+    border-left: 1px solid $gray-700;
 }
 
 

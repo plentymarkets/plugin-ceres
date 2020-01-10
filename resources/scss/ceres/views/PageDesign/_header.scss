@@ -79,13 +79,13 @@
 		&>li{
 			// default font size for all items
 			font-size: 1rem;
-			color: $gray-lighter;
+			color: $gray-300;
 			margin-right: 0;
 
 			a:not(.btn) {
 				padding: 0.5rem .8rem;
 				display: inline-block;
-				color: $gray-lighter;
+				color: $gray-300;
 
 				&:hover {
 					@include context-bg($primary);
@@ -120,7 +120,7 @@
 	
 					&.show {
 						& > .dropdown-toggle {
-							@include context-bg($gray-darker);
+							@include context-bg($gray-900);
 						}
 	
 						& .dropdown-menu {
@@ -155,10 +155,10 @@
 						a {
 							padding:1rem .8rem;
 							border:0;
-							border-top: 1px solid $gray-lighter;
+							border-top: 1px solid $gray-300;
 							display: block;
-							background-color: $gray-darker;
-							color: color-yiq($gray-darker);
+							background-color: $gray-900;
+							color: color-yiq($gray-900);
 							&:hover {
 								color: color-yiq($primary);
 								background-color: $primary;
@@ -198,7 +198,7 @@
 
 		.control-languages a[aria-expanded="true"],
 		.control-search a[aria-expanded="true"] {
-			background:$gray-darker;
+			background:$gray-900;
 
 			& > i.fa.fa-search {
 				display: none;
@@ -284,19 +284,19 @@
 
 	.navbar {
 		font-family:$font-family-heading;
-		border-bottom:1px solid darken($gray-lighter2, 2%);
+		border-bottom:1px solid darken($gray-200, 2%);
 
 		a {
-			color: $gray-dark;
+			color: $gray-700;
 			&:hover {
-				color: $gray-darker;
+				color: $gray-900;
 			}
 		}
 		.navbar-nav {
 			.nav-item {
 				& > .nav-link {
 					min-width: 140px;
-					border-right:1px solid $gray-lighter;
+					border-right:1px solid $gray-300;
 					text-align: center;
 				}
 				&:last-child {
@@ -310,7 +310,7 @@
 				&:hover {
 					.nav-link {
 						background:transparent;
-						color: $gray-darker;
+						color: $gray-900;
 						cursor: pointer;
 						&.dropdown-toggle::after {
 							display: none;
@@ -360,13 +360,13 @@
 .navbar {
 	padding:0;
 	background-color: $navbar-background-color;
-	border-bottom: 1px solid $gray-lighter;
+	border-bottom: 1px solid $gray-300;
 
 	.navbar {
 
 		border-radius: 0;
 		padding:0;
-		border-bottom: 1px solid $gray-lighter;
+		border-bottom: 1px solid $gray-300;
 
 		.dropdown:hover .dropdown-menu {
 			display: block !important;
@@ -474,7 +474,7 @@
 				position:relative;
 				float: none;
 
-				background-color: $gray-lighter2;
+				background-color: $gray-200;
 				border: none;
 			}
 		}

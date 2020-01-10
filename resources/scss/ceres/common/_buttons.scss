@@ -196,7 +196,7 @@ button:focus {
 }
 
 .btn-default {
-	@include button-variant($gray-lighter, $gray-lighter);
+	@include button-variant($gray-300, $gray-300);
 }
 
 .btn-collapse {
@@ -213,14 +213,14 @@ button:focus {
         display: block;
         width: 100%;
         height: 1.5em;
-        border-bottom: 1px solid $gray-lighter;
+        border-bottom: 1px solid $gray-300;
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
     }
 
     &:after{
         content: attr(data-show-more);
         font-weight: 700;
-        color: $gray-light;
+        color: $gray-500;
         display: inline-block;
         position: relative;
         background-color: white;
@@ -229,7 +229,7 @@ button:focus {
 	}
 
 	i {
-		color: $gray-light;
+		color: $gray-500;
 		position: absolute;
 		left: 0;
 		right: 0;

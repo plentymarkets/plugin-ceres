@@ -42,7 +42,7 @@
         border-top-right-radius: 0;
         border-top-left-radius: 0;
         border-top: none;
-        border: 1px solid $gray-lighter;
+        border: 1px solid $gray-300;
     }
 
     ul{
@@ -58,7 +58,7 @@
 
     .item{
         padding: 0;
-        border-bottom: 1px solid $gray-lighter;
+        border-bottom: 1px solid $gray-300;
         position:relative;
 
         input{ display: none; }

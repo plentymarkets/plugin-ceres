@@ -60,7 +60,7 @@
     > .widget {
         max-width: 1200px;
         min-width: 100%;
-        background-color: $gray-lightest;
+        background-color: $gray-100;
         left: 15px;
         right: 15px;
 
@@ -213,7 +213,7 @@ header .widget
 /*
  * INLINE EDITOR CLASSES
  */
-@each $color, $value in map-merge($shop-builder-colors, ("dark": $dark, "light": $light))
+@each $color, $value in map-merge($shop-builder-colors, ("dark": $gray-900, "light": $gray-100))
 {
     .color-#{$color}
     {

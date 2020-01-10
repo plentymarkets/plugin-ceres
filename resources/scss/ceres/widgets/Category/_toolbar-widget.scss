@@ -16,7 +16,7 @@
     .filter-collapse {
         > div {
             background: $white;
-            border: 1px solid $gray-lighter2;
+            border: 1px solid $gray-200;
             padding: 2rem;
         }
     }
@@ -26,7 +26,7 @@
             content: attr(data-translation-empty);
             display: block;
             padding: .75rem;
-            color: $gray-dark;
+            color: $gray-700;
             text-align: center;
         }
     }

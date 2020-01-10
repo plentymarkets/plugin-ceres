@@ -1,4 +1,4 @@
-@each $color, $value in ( "dark" : $dark, "white": $white )
+@each $color, $value in ( "dark" : $gray-900, "white": $white )
 {
     .bg-#{ $color }
     {

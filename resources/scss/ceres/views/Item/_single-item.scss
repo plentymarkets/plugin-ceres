@@ -78,8 +78,8 @@
                 &.active,
                 &:hover {
                     border:1px solid $nav-tabs-border-color;
-                    color: $gray-darker;
-                    background:$gray-lighter2;
+                    color: $gray-900;
+                    background:$gray-200;
                 }
             }
             &+.nav-item {
@@ -182,7 +182,7 @@
                     &.active,
                     &:hover {
                         border:1px solid $nav-tabs-border-color;
-                        color: $gray;
+                        color: $gray-600;
                         background:white;
                     }
                     &.active {
@@ -232,19 +232,19 @@
                 height: 12px;
                 display: inline-block;
                 border-radius: 50%;
-                border: 1px solid $gray-lighter;
+                border: 1px solid $gray-300;
                 background-color: #fff;
                 margin: 12px 5px 0;
                 cursor: pointer;
                 transition: all .3s ease;
                 
                 &.active {
-                    background-color: $gray-lighter;
+                    background-color: $gray-300;
 
                     &.error {
                         // background-color: lighten($danger, 25%);
-                        background-color: mix($danger, $gray-lighter);
-                        border-color: mix(lighten($danger, 25%), $gray-lighter);
+                        background-color: mix($danger, $gray-300);
+                        border-color: mix(lighten($danger, 25%), $gray-300);
                     }
                 }
 
@@ -283,7 +283,7 @@
         margin: 0.5rem;
         min-width: 40px;
         min-height: 40px;
-        border: 1px solid $gray-lighter;
+        border: 1px solid $gray-300;
         border-radius: $border-radius;
         cursor: pointer;
 
@@ -309,7 +309,7 @@
                     to top left,
                     rgba(0, 0, 0, 0) 0%,
                     rgba(0, 0, 0, 0) calc(50% - 0.8px),
-                    $gray-lighter 50%,
+                    $gray-300 50%,
                     rgba(0, 0, 0, 0) calc(50% + 0.8px),
                     rgba(0, 0, 0, 0) 100%
                 );
