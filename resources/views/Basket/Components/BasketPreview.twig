@@ -31,7 +31,7 @@
             <div class="bg-light totals col-sm-5 col-md-12 pt-3">
 
                 {% if ceresConfig.basket.showShippingCountrySelect %}
-                    <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                    <shipping-country-select :basket-select="true" :open-basket-preview="true"></shipping-country-select>
                     <hr>
                 {% endif %}
 

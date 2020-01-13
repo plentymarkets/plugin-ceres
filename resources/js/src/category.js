@@ -102,7 +102,8 @@ import "./app/components/pageDesign/PrivacySettings";
 import "./app/components/pageDesign/MobileNavigation";
 import "./app/components/pageDesign/Notifications";
 import "./app/components/pageDesign/Popper";
-import "./app/components/pageDesign/ShippingCountrySelect";
+import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
+Vue.component("shipping-country-select", ShippingCountrySelect);
 
 import "./app/components/wishList/WishList";
 import "./app/components/wishList/WishListCount";
@@ -164,12 +165,15 @@ import "./app/filters/truncate.filter";
 // =========================
 // MIXINS
 // =========================
-import "./app/mixins/buttonSizeProperty.mixin";
 import "./app/mixins/getJsonData.mixin";
 import "./app/mixins/template.mixin";
-
 
 // =========================
 // Bootstrap frameworks
 // =========================
 import "./app/main";
+
+import TranslationService from "./app/services/TranslationService";
+window.ceresTranslate = TranslationService.translate;
+
+Vue.prototype.$translate = TranslationService.translate;
