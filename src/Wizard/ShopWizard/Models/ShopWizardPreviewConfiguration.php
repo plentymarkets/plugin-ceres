@@ -22,7 +22,7 @@ class ShopWizardPreviewConfiguration extends Model
     public $pluginSetId = 0;
     public $deleted = false;
     public $webstoreId = null;
-    
+
     /**
      * @return string
      */

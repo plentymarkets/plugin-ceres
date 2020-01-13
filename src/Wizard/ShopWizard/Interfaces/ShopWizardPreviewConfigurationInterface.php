@@ -16,14 +16,14 @@ interface ShopWizardPreviewConfigurationInterface
      * @return mixed
      */
     public function createConfig(array $data);
-    
+
     /**
      * Get all configs
      *
      * @return mixed
      */
     public function getAll();
-    
+
     /**
      * Update a config
      *
@@ -36,7 +36,7 @@ interface ShopWizardPreviewConfigurationInterface
      * @return mixed
      */
     public function updateConfig($pluginSetId, $webstoreId, array $data);
-    
+
     /**
      * Delete config
      *
@@ -49,7 +49,7 @@ interface ShopWizardPreviewConfigurationInterface
      * @return mixed
      */
     public function deleteConfig($pluginSetId, $webstoreId, $deleted);
-    
+
     /**
      * Read account
      *
@@ -60,5 +60,5 @@ interface ShopWizardPreviewConfigurationInterface
      * @return mixed
      */
     public function getConfig($pluginSetId, $webstoreId);
-    
+
 }

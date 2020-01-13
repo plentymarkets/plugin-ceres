@@ -13,7 +13,7 @@ use Plenty\Plugin\Log\Loggable;
 class UpdateShopWizardPreviewTableWebstoreId
 {
     use Loggable;
-    
+
     /**
      * @param Migrate $migrate
      */

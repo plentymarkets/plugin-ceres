@@ -27,9 +27,9 @@ use Plenty\Modules\Webshop\Seo\Models\SitemapConfiguration;
 class ShopWizardService
 {
     private $settingsService;
-    
+
     private $mappingService;
-    
+
     /**
      * ShopWizardService constructor.
      * @param DefaultSettingsService $settingsService
@@ -38,26 +38,26 @@ class ShopWizardService
     public function __construct(DefaultSettingsService $settingsService, MappingService $mappingService)
     {
         $this->settingsService = $settingsService;
-        $this->mappingService  = $mappingService;
+        $this->mappingService = $mappingService;
     }
-    
+
     /**
      * @return array
      */
     public function getWebstoresIdentifiers(): array
     {
         $webstoresMapped = [];
-        
+
         $webstores = $this->settingsService->getWebstores();
-        
+
         /** @var PluginRepositoryContract $pluginRepo */
         $pluginRepo = pluginApp(PluginRepositoryContract::class);
         /** @var PluginSetRepositoryContract $pluginSetRepo */
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-        $pluginSets    = $pluginSetRepo->list();
+        $pluginSets = $pluginSetRepo->list();
         /** @var ShopWizardConfigRepository $wizardConfRepo */
         $wizardConfRepo = pluginApp(ShopWizardConfigRepository::class);
-        
+
         $plugin = $pluginRepo->getPluginByName("Ceres");
         if ($plugin instanceof Plugin) {
             foreach ($pluginSets as $pluginSet) {
@@ -83,16 +83,16 @@ class ShopWizardService
                 }
             }
         }
-        
+
         if (count($webstores)) {
             foreach ($webstores as $webstore) {
                 if (!empty($webstore['pluginSetId'])) {
                     $pluginSet = $pluginSets->where('id', '=', $webstore['pluginSetId'])->first();
-                    
+
                     if ($pluginSet instanceof PluginSet
                         && $pluginRepo->isActiveInPluginSet($plugin->id, $pluginSet)) {
                         $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
-                        
+
                         $webstoresMapped[$key] = [
                             "client" => $webstore['id'],
                             "pluginSet" => $webstore['pluginSetId']
@@ -101,10 +101,10 @@ class ShopWizardService
                 }
             }
         }
-        
+
         return $webstoresMapped;
     }
-    
+
     /**
      * @param $webstoreId
      * @param $pluginSetId
@@ -113,82 +113,82 @@ class ShopWizardService
     public function mapWebstoreData($webstoreId, $pluginSetId): array
     {
         $globalData = [];
-        
+
         if ($webstoreId != 'preview') {
-            $webstoreConfig   = pluginApp(WebstoreConfigurationRepositoryContract::class);
+            $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
             $webstoreConfData = $webstoreConfig->findByWebstoreId($webstoreId)->toArray();
-            
+
             $webstoreRepo = pluginApp(WebstoreRepositoryContract::class);
-            $store        = $webstoreRepo->findById($webstoreId);
-            $plentyId     = $store->storeIdentifier;
-            
+            $store = $webstoreRepo->findById($webstoreId);
+            $plentyId = $store->storeIdentifier;
+
             $globalData = $this->mappingService->processGlobalMappingData($webstoreConfData);
-            
+
             //we check for shipping country list
             if (count($webstoreConfData['defaultShippingCountryList'])) {
                 foreach ($webstoreConfData['defaultShippingCountryList'] as $countryLang => $countryId) {
                     $settingsKey = 'defSettings_deliveryCountry_' . $countryLang;
-                    
+
                     $globalData[$settingsKey] = $countryId;
                 }
             }
-            
+
             //we check for default currency list
-            
+
             if (count($webstoreConfData['defaultCurrencyList'])) {
                 foreach ($webstoreConfData['defaultCurrencyList'] as $currencyCountryCode => $currency) {
                     $settingsKey = 'currencies_defaultCurrency_' . $currencyCountryCode;
-                    
+
                     $globalData[$settingsKey] = $currency;
                 }
             }
-            
+
             if (count($globalData['languages_defaultBrowserLang'])) {
                 $globalData['languages_setLinkedStoreLanguage'] = true;
-                $browserLanguage                                = $globalData['languages_defaultBrowserLang'];
-                
+                $browserLanguage = $globalData['languages_defaultBrowserLang'];
+
                 //now we extract data related from browser language
                 foreach ($browserLanguage as $bLangKey => $bLang) {
                     if ($bLangKey == 'other') {
                         $globalData['languages_defaultBrowserLang'] = $bLang;
                     } else {
-                        $langKey              = "languages_browserLang_{$bLangKey}";
+                        $langKey = "languages_browserLang_{$bLangKey}";
                         $globalData[$langKey] = $bLang;
                     }
                 }
             }
-            
+
             //get content of robots txt
             $robotsRepo = pluginApp(RobotsRepositoryContract::class);
-            $robotsTxt  = $robotsRepo->findByWebstoreId($webstoreId);
-            
+            $robotsTxt = $robotsRepo->findByWebstoreId($webstoreId);
+
             if ($robotsTxt instanceof Robots) {
-                $robotsTxtData               = $robotsTxt->toArray();
+                $robotsTxtData = $robotsTxt->toArray();
                 $globalData['seo_robotsTxt'] =
                     is_array($robotsTxtData['value']) ?
                         $robotsTxtData['value']['value'] :
                         $robotsTxtData['value'];
             }
-            
+
             // get sitemap data
             $siteMapConfigRepo = pluginApp(SitemapConfigurationRepositoryContract::class);
-            $siteMapConfig     = $siteMapConfigRepo->findByWebstoreId($webstoreId);
-            
+            $siteMapConfig = $siteMapConfigRepo->findByWebstoreId($webstoreId);
+
             if ($siteMapConfig instanceof SitemapConfiguration) {
-                $siteMapConfigData               = $siteMapConfig->toArray();
+                $siteMapConfigData = $siteMapConfig->toArray();
                 $globalData['seo_siteMapConfig'] = [];
-                
+
                 foreach ($siteMapConfigData as $configKey => $configStatus) {
                     if ($configStatus) {
                         $globalData['seo_siteMapConfig'][] = $configKey;
                     }
                 }
             }
-            
+
             //get search languages
-            $searchSettingsRepo      = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
+            $searchSettingsRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
             $searchLanguagesSettings = $searchSettingsRepo->getLanguages()->toArray();
-            
+
             //iterate between languages and set the ones enabled
             $enabledLanguages = [];
             foreach ($searchLanguagesSettings['languages'] as $searchLanguage) {
@@ -196,7 +196,7 @@ class ShopWizardService
                     $enabledLanguages[] = $searchLanguage['lang'];
                 }
             }
-            
+
             if (count($enabledLanguages)) {
                 if (isset($enabledLanguages[0])) {
                     $globalData['languages_secondSearchLanguage'] = $enabledLanguages[0];
@@ -204,17 +204,17 @@ class ShopWizardService
                 if (isset($enabledLanguages[1])) {
                     $globalData['languages_firstSearchLanguage'] = $enabledLanguages[1];
                 }
-                
+
                 if (isset($enabledLanguages[2])) {
                     $globalData['languages_thirdSearchLanguage'] = $enabledLanguages[2];
                 }
             }
-            
+
             // search fields logic
-            
+
             $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
             foreach ($itemSearchSettings['fields'] as $fieldKey => $fieldSettings) {
-                $fieldKey        += 1;
+                $fieldKey += 1;
                 $formFieldPrefix = "search_";
                 switch ($fieldKey) {
                     case 1:
@@ -230,21 +230,21 @@ class ShopWizardService
                         $formField = "{$formFieldPrefix}{$fieldKey}thSearchField";
                 }
                 $formFieldValue = $fieldSettings['isActive'] ? $fieldSettings['key'] : "";
-                
+
                 $globalData[$formField] = $formFieldValue;
             }
         }
-        
+
         /** @var PluginRepositoryContract $pluginRepo */
-        $pluginRepo     = pluginApp(PluginRepositoryContract::class);
-        $plugin         = $pluginRepo->getPluginByName("Ceres");
+        $pluginRepo = pluginApp(PluginRepositoryContract::class);
+        $plugin = $pluginRepo->getPluginByName("Ceres");
         $pluginConfData = [];
-        
+
         if ($plugin instanceof Plugin) {
             /** @var PluginSetRepositoryContract $pluginSetRepo */
-            $pluginSetRepo    = pluginApp(PluginSetRepositoryContract::class);
+            $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
             $pluginSetEntries = $pluginSetRepo->listSetEntries($pluginSetId);
-            
+
             foreach ($pluginSetEntries as $pluginSetEntry) {
                 if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->id === $plugin->id) {
                     $config = $pluginSetEntry->configurations()->getResults();
@@ -257,10 +257,10 @@ class ShopWizardService
             }
             /** @var ConfigurationRepositoryContract $configurationRepo */
             $configurationRepo = pluginApp(ConfigurationRepositoryContract::class);
-            $pluginConfigJson  = $configurationRepo->getConfigurationFile($plugin->id, $pluginSetId);
-            
+            $pluginConfigJson = $configurationRepo->getConfigurationFile($plugin->id, $pluginSetId);
+
             $pluginConfig = json_decode($pluginConfigJson, true);
-            
+
             foreach ($pluginConfig['menu'] as $tab) {
                 foreach ($tab['formFields'] as $configKey => $formField) {
                     if (!array_key_exists(
@@ -280,49 +280,49 @@ class ShopWizardService
                 }
             }
         }
-        
-        $hasShippingMethod  = $this->settingsService->hasShippingMethods();
+
+        $hasShippingMethod = $this->settingsService->hasShippingMethods();
         $hasShippingProfile = $this->settingsService->hasShippingProfiles();
-        $hasPaymentMethod   = $this->settingsService->hasPaymentMethods();
+        $hasPaymentMethod = $this->settingsService->hasPaymentMethods();
         $hasShippingCountry = $this->settingsService->hasShippingCountries();
-        
+
         $pluginData = $this->mappingService->processPluginMappingData($pluginConfData);
-        
+
         $defaultData = [
             'client' => $webstoreId,
             'pluginSet' => $pluginSetId
         ];
-        
-        $data                                        = array_merge($defaultData, $globalData, $pluginData);
-        $data['settingsSelection_displayedInfo']     = $this->checkSelectionEnabled('displayInfo', $data);
+
+        $data = array_merge($defaultData, $globalData, $pluginData);
+        $data['settingsSelection_displayedInfo'] = $this->checkSelectionEnabled('displayInfo', $data);
         $data['settingsSelection_paginationSorting'] = $this->checkSelectionEnabled('paginationStep', $data);
-        $data['settingsSelection_languages']         = $this->checkSelectionEnabled('languages', $data);
-        $data['settingsSelection_performance']       = $this->checkSelectionEnabled('performance', $data);
-        $data['settingsSelection_search']            = $this->checkSelectionEnabled('search', $data);
-        $data['settingsSelection_seo']               = $this->checkSelectionEnabled('seo', $data);
-        
+        $data['settingsSelection_languages'] = $this->checkSelectionEnabled('languages', $data);
+        $data['settingsSelection_performance'] = $this->checkSelectionEnabled('performance', $data);
+        $data['settingsSelection_search'] = $this->checkSelectionEnabled('search', $data);
+        $data['settingsSelection_seo'] = $this->checkSelectionEnabled('seo', $data);
+
         //get shop booster cache
         if (!empty($plentyId)) {
             $cacheRepository = pluginApp(ContentCacheSettingsRepositoryContract::class);
-            $shopBooster     = $cacheRepository->getSettings($plentyId);
-            
+            $shopBooster = $cacheRepository->getSettings($plentyId);
+
             if ($shopBooster instanceOf ContentCacheSettings) {
-                $shopBoosterData                 = $shopBooster->toArray();
+                $shopBoosterData = $shopBooster->toArray();
                 $data['performance_shopBooster'] = (bool)$shopBoosterData['contentCacheActive'];
             }
         }
-        
+
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
             $data['setAllRequiredAssistants'] = 'true';
         }
-        
+
         $data['onlineStore_enableRecaptcha'] = strlen($data['onlineStore_recaptchaApiKey']) || strlen(
                 $data['onlineStore_recaptchaSecret']
             );
-        
+
         return $data;
     }
-    
+
     /**
      * @param string $keyPrefix
      * @param array $data
@@ -331,8 +331,8 @@ class ShopWizardService
     private function checkSelectionEnabled(string $keyPrefix, array $data): bool
     {
         $hasData = [];
-        $keys    = array_keys($data);
-        
+        $keys = array_keys($data);
+
         if (count($keys)) {
             foreach ($keys as $key) {
                 if (strpos($key, $keyPrefix) !== false && !empty($data[$key])) {
@@ -340,9 +340,9 @@ class ShopWizardService
                 }
             }
         }
-        
+
         $found = count($hasData) ? true : false;
-        
+
         return $found;
     }
 }

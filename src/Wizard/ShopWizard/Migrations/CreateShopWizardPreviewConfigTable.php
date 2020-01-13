@@ -13,7 +13,7 @@ use Plenty\Plugin\Log\Loggable;
 class CreateShopWizardPreviewConfigTable
 {
     use Loggable;
-    
+
     /**
      * @param Migrate $migrate
      */
