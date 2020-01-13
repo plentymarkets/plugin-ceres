@@ -5,13 +5,16 @@
                 <div class="h5">{{ $translate("Ceres::Template.basketNoItems") }}</div>
             </div>
             <transition-group name="wish-list-item-transition" tag="div">
-                <basket-list-item
-                    v-for="basketItem in basketItems"
-                    :key="basketItem.id"
-                    :basket-item="basketItem"
-                    :is-preview="isPreview"
-                    :basket-details-data="basketDetailsData">
-                </basket-list-item>
+                <template v-for="basketItem in basketItems">
+                    <slot name="before-basket-item"></slot>
+                    <basket-list-item
+                        :key="basketItem.id"
+                        :basket-item="basketItem"
+                        :is-preview="isPreview"
+                        :basket-details-data="basketDetailsData">
+                    </basket-list-item>
+                    <slot name="after-basket-item"></slot>
+                </template>
             </transition-group>
         </div>
 
@@ -24,7 +27,7 @@
 <script>
 import Vue from "vue";
 import { mapState } from "vuex";
-import BasketListItem from "./BasketListItem";
+import BasketListItem from "./BasketListItem.vue";
 
 export default {
     components:

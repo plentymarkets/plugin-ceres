@@ -16,6 +16,15 @@
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 {{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
+
+
+
+{# TODO REMOVE WHEN CONVERTED TO SFC #}
+{{ component("Ceres::Item.Components.ItemBundle") }}
+{{ component("Ceres::Item.Components.OrderPropertyValue") }}
+{{ component("Ceres::Item.Components.QuantityInput") }}
+
+
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
 {% endif %}

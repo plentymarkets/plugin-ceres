@@ -9,7 +9,6 @@
 
 {% block PageBody %}
 
-    {{ component( "Ceres::Basket.Components.BasketList" ) }}
     {{ component( "Ceres::Basket.Components.Coupon" ) }}
     {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
     {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
@@ -28,8 +27,14 @@
             <div class="col-md-7">
                 <div class="py-4 px-3 bg-white">
                     <basket-list :basket-details-data="{{ ceresConfig.basket.itemData | json_encode }}">
+                        <template #before-basket-item>
+                            {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+                        </template>
                         <template #loading-animation>
                             {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                        </template>
+                        <template #after-basket-item>
+                            {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
                         </template>
                     </basket-list>
                 </div>
