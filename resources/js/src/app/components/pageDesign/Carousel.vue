@@ -41,7 +41,7 @@ export default {
     {
         columnWidths()
         {
-            let itemsPerPage = Math.min(Math.max(this.itemsPerPage, 1), 4);
+            const itemsPerPage = Math.min(Math.max(this.itemsPerPage, 1), 4);
 
             return [
                 "col-12",
@@ -74,8 +74,6 @@ export default {
     {
         initializeCarousel()
         {
-            const self = this;
-
             $(this.$refs.carouselContainer).owlCarousel({
                 autoHeight: true,
                 dots: true,
