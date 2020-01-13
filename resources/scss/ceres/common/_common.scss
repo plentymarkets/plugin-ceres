@@ -19,6 +19,17 @@ body .wrapper-main {
     }
 }
 
+.center-xy {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center; // center on the x axys
+
+    img,
+    .owl-stage-outer {
+        align-self: center; // center on the y axys
+    }
+}
+
 .category-contact .main .container-max {
     padding-top: $spacer;
     margin-top: 2 * $spacer;

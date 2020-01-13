@@ -26,7 +26,7 @@
                 <div class="col-{{ 12 / numberOfColumns }} mb-3">
                     <div class="nav-item border d-flex">
                         {% if source != "none" %}
-                            <div class="prop-xs-1-1"><i class="fa fa-image"></i></div>
+                            <div class="prop-1-1"><i class="fa fa-image"></i></div>
                         {% endif %}
                         <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">{{ trans("IO::Faker.categoryName", {"count": loop.index}) }}</span></div>
                     </div>
@@ -58,7 +58,7 @@
                                 <div class="col-{{ 12 / numberOfColumns }} mb-3">
                                     <div class="nav-item border d-flex isLoading refreshing with-icon component-loading">
                                         {{ Twig.if("hasImg") }}
-                                            <div class="prop-xs-1-1"></div>
+                                            <div class="prop-1-1"></div>
                                         {{ Twig.endif() }}
                                         <div class="nav-text d-flex align-center p-2">&nbsp;</div>
                                     </div>
