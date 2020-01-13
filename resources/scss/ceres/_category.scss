@@ -12,13 +12,16 @@
 // global
 @import "mixins/general-mixins";
 
-@import "common/proportional-boxes";
-@import "common/common";
-@import "common/structure";
-@import "common/modal";
-@import "common/reboot";
+@import "common/background";
 @import "common/buttons";
+@import "common/common";
+@import "common/heights";
 @import "common/icons";
+@import "common/modal";
+@import "common/proportional-boxes";
+@import "common/reboot";
+@import "common/structure";
+@import "common/visibility";
 
 // External plugins overrides
 @import "plugins/owl-carousel";
@@ -34,6 +37,7 @@
 @import "components/popover";
 @import "components/cookie-bar";
 @import "components/tooltip";
+@import "components/sticky-element";
 
 // Forms
 @import "forms/input-groups";
@@ -71,5 +75,3 @@
 // Widgets
 @import "widgets/widgets";
 
-// Bootstrap Compatibility
-@import "common/visibility";
