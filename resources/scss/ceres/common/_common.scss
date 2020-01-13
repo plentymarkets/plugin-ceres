@@ -169,3 +169,7 @@ a:active {
     @extend .fa-circle;
     color: transparent !important;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
