@@ -96,11 +96,13 @@ import "./app/components/newsletter/NewsletterUnsubscribeInput";
 
 import "./app/components/orderReturn/OrderReturn";
 
-import "./app/components/pageDesign/Carousel";
 import "./app/components/pageDesign/CookieBar";
 import "./app/components/pageDesign/PrivacySettings";
 import "./app/components/pageDesign/MobileNavigation";
 import "./app/components/pageDesign/Notifications";
+
+import Carousel from "./app/components/pageDesign/Carousel.vue";
+Vue.component("carousel", Carousel);
 import Popper from "./app/components/pageDesign/Popper.vue";
 Vue.component("popper", Popper);
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
