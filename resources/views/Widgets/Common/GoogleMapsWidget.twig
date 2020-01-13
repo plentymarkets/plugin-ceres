@@ -17,7 +17,7 @@
                                 :zoom="{{ widget.settings.zoom.mobile | default(16) }}"
                                 maptype="{{ widget.settings.maptype.mobile }}"
                                 aspect-ratio="{{ widget.settings.aspectRatio.mobile }}">
-                <div class="d-flex flex-center h-100 position-absolute w-100 text-muted">
+                <div class="d-flex align-items-center justify-content-center h-100 position-absolute w-100 text-muted">
                     <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
                 </div>
             </google-maps-widget>
