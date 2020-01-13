@@ -101,7 +101,8 @@ import "./app/components/pageDesign/CookieBar";
 import "./app/components/pageDesign/PrivacySettings";
 import "./app/components/pageDesign/MobileNavigation";
 import "./app/components/pageDesign/Notifications";
-import "./app/components/pageDesign/Popper";
+import Popper from "./app/components/pageDesign/Popper.vue";
+Vue.component("popper", Popper);
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
 Vue.component("shipping-country-select", ShippingCountrySelect);
 
