@@ -22,7 +22,11 @@
             <!-- BASKET LIST -->
             <div class="list col-sm-7 col-md-12 py-3">
                 <div class="cmp cmp-basket-preview-list">
-                    <basket-list :is-preview="true"></basket-list>
+                    <basket-list :is-preview="true">
+                        <template #loading-animation>
+                            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                        </template>
+                    </basket-list>
                 </div>
             </div>
             <!-- ./BASKET LIST -->

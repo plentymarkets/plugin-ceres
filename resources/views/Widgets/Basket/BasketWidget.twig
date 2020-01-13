@@ -14,6 +14,10 @@
 <div class="widget widget-basket widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="cmp">
-        <basket-list :basket-details-data="{{ basketDetailsData | json_encode }}"></basket-list>
+        <basket-list :basket-details-data="{{ basketDetailsData | json_encode }}">
+            <template #loading-animation>
+                {{ Twig.include("Ceres::ItemList.Partials.LoadingAnimation") }}
+            </template>
+        </basket-list>
     </div>
 </div>

@@ -182,7 +182,11 @@
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar">
                                     <div class="cmp cmp-basket-preview-list">
-                                        <basket-list></basket-list>
+                                        <basket-list>
+                                            <template #loading-animation>
+                                                {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                                            </template>
+                                        </basket-list>
                                     </div>
                                     <hr>
                                     <coupon></coupon>
