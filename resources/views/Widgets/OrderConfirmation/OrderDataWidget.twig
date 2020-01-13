@@ -46,7 +46,7 @@
         {# order property type 8 ≈ 'customer sign' #}
         {{ Twig.for("property", "data.order.properties", "property.typeId == 8 and property.value | trim is not empty") }}
             <div class="row">
-                <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.checkoutCustomerSign") }}</strong>
+                <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationCustomerSign") }}</strong>
                 <span class="col-6 col-sm-7">{{ Twig.print("property.value") }}</span>
             </div>
         {{ Twig.endfor() }}
