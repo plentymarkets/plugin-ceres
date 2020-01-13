@@ -1,47 +1,10 @@
-body,
-body .wrapper-main {
-    overflow-x: hidden;
-}
-
 .sb-no-animation.collapsing {
     display: none !important;
     -webkit-transition: none !important;
     transition: none !important;
 }
 
-.hidden {
-    display: none;
-}
-
-.hidden-sm {
-    @include media-breakpoint-only(sm) {
-        display: none;
-    }
-}
-
-.category-contact .main .container-max {
-    padding-top: $spacer;
-    margin-top: 2 * $spacer;
-    margin-bottom: 2 * $spacer;
-    background-color: $white;
-}
-
-.page-content {
-    padding-top: $spacer;
-    background-color: $gray-100;
-    &.basket,
-    &.checkout,
-    &.contact,
-    &.wishlist,
-    &.myaccount {
-        &:not(.checkout):not(.basket) {
-            background-color: $white;
-        }
-        padding-bottom: 30px;
-        margin-top: 30px;
-        color: $gray-900;
-    }
-}
+// TODO: resolve usages to .container
 .container-max {
     @extend .container-fluid;
     z-index: auto;
@@ -53,10 +16,10 @@ body .wrapper-main {
 }
 
 .page-not-found {
-    i.fa-search {
+    .fa-search {
         font-size: 10em;
     }
-    i.fa-home {
+    .fa-home {
         margin-top: 2px;
         margin-left: 5px;
     }
@@ -70,23 +33,6 @@ body .wrapper-main {
     text-shadow: 4px 3px 0 #f7f7f9, 9px 8px 0 rgba(218, 218, 227, .5);
 }
 
-.rating {
-    line-height: 1;
-
-    .tag,
-    .badge {
-        padding-right: 0;
-        overflow: hidden;
-        cursor: pointer;
-
-        .amount {
-            padding: .1rem .6rem .1rem .4rem;
-            margin-left: .2rem;
-            background-color: $gray-600;
-        }
-    }
-}
-
 dt {
     font-weight: 400;
 }
@@ -96,11 +42,6 @@ a:focus,
 a:active {
     text-decoration: none;
 }
-
-.border-left {
-    border-left: 1px solid $gray-700;
-}
-
 
 .carousel-control-next,
 .carousel-control-prev {
