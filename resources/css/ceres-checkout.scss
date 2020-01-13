@@ -11159,15 +11159,14 @@ $fa-var-youtube-square: "\f166";
 
 // FIX: Need to set font-display for better SEO performance
 @font-face {
-    font-family: "FontAwesome";
+    font-family: FontAwesome;
     font-style: normal;
     //  src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
-    font-weight: normal;
+    font-weight: 300;
     src: url("#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}");
     src: url("#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}") format("embedded-opentype"), url("#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}") format("woff2"), url("#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}") format("woff"), url("#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}") format("truetype"), url("#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular") format("svg");
     font-display: block;
 }
-
 // Base Class Definition
 // -------------------------
 
@@ -12421,203 +12420,6 @@ $flag-icon-square-path: '/1x1' !default;
 // ==========================================================================
 
 // global
-// Override bootstrap nested mixins
-
-@mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
-    $min: breakpoint-min($lower, $breakpoints);
-    $max: breakpoint-max($upper, $breakpoints);
-    @if $min and $max {
-        @media (min-width: $min) and (max-width: $max) {
-            @content;
-        }
-    } @else {
-        @if $min {
-            @media (min-width: $min) {
-                @content;
-            }
-        } @else {
-            @if $max {
-                @media (max-width: $max) {
-                    @content;
-                }
-            } @else {
-                @content;
-            }
-        }
-    }
-}
-
-@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
-    $min: breakpoint-min($name, $breakpoints);
-    $max: breakpoint-max($name, $breakpoints);
-    @if $min and $max {
-        @media (min-width: $min) and (max-width: $max) {
-            @content;
-        }
-    } @else {
-        @if $min {
-            @media (min-width: $min) {
-                @content;
-            }
-        } @else {
-            @if $max {
-                @media (max-width: $max) {
-                    @content;
-                }
-            } @else {
-                @content;
-            }
-        }
-    }
-}
-
-/// Element group with fixed aspect ration 1x1
-///
-/// @author Bruno Fenzl
-///
-/// @example scss - Basic Usage HTML
-///     <div class="square-container">
-///         <div class="square-inner">
-///             Content here
-///         </div>
-///     </div>
-///
-@mixin square-container() {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-    overflow: hidden;
-
-    .square-inner {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-}
-
-.square-container {
-    @include square-container();
-}
-
-/// Class for centering direct single child.
-///
-/// @author Bruno Fenzl
-///
-/// @example scss - Basic Usage HTML
-///     <div class="center-xy">
-///         content to be centered
-///     </div>
-@mixin center-xy() {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; // center on the x axys
-
-    img {
-        -ms-flex-item-align: center;
-            align-self: center; // center on the y axys
-    }
-}
-
-.center-xy {
-    @include center-xy();
-}
-
-/// Element group for star rating
-///
-/// @author Bruno Fenzl
-///
-/// @param {color} $default-color [$gray-300] Normal color of the star. Defaults to the Bootstrap var $gray-300.
-/// @param {color} $selected-color [#FFD700] Selected color of the star. Defaults to #FFD700.
-/// @param {color} $hover-color [#FFED85] Hover color of the star. Defaults to #FFED85.
-///
-/// @example css - Basic Usage HTML
-///     <fieldset class="star-rating">
-///         <input type="radio" id="star5" name="rating" value="5" />
-///             <label for="star5" title="5 Stars"></label>
-///         <input type="radio" id="star4-5" name="rating" value="4.5" />
-///             <label for="star4-5" title="4.5 Stars"></label>
-///         <input type="radio" id="star4" name="rating" value="4" />
-///             <label for="star4" title="4 Stars"></label>
-///         <input type="radio" id="star3-5" name="rating" value="3.5" />
-///             <label for="star3-5" title="3.5 Stars"></label>
-///         <input type="radio" id="star3" name="rating" value="3" />
-///             <label for="star3" title="3 Stars"></label>
-///         <input type="radio" id="star2-5" name="rating" value="2.5" />
-///             <label for="star2-5" title="2.5 Stars"></label>
-///         <input type="radio" id="star2" name="rating" value="2" />
-///             <label for="star2" title="2 Stars"></label>
-///         <input type="radio" id="star1-5" name="rating" value="1.5" />
-///             <label for="star1-5" title="1.5 Stars"></label>
-///         <input type="radio" id="star1" name="rating" value="1" />
-///             <label for="star1" title="1 Star"></label>
-///         <input type="radio" id="star0-5" name="rating" value="0.5" />
-///             <label for="star0-5" title="0.5 Star"></label>
-///     </fieldset>
-@mixin star-rating( $default-color: $gray-300, $selected-color: #FFD700, $hover-color: #FFED85) {
-    border: none;
-    @include clearfix();
-
-    & > input {
-        display: none;
-    }
-
-    & > label {
-        float: right;
-        padding: 0;
-        margin: 0;
-        color: $gray-300;
-
-        &::before {
-            display: inline-block;
-            margin: 0 .25em;
-            font-family: FontAwesome;
-            font-size: 1.2rem;
-            content: "\f005";
-        }
-
-        &:nth-of-type(even) {
-            &::before {
-                position: absolute;
-                content: "\f089";
-            }
-        }
-    }
-
-    & > input:checked ~ label,
-    &:not(:checked) > label:hover,
-    &:not(:checked) > label:hover ~ label { /* hover previous stars in list */
-        color: #ffd700;
-    }
-
-    & > input:checked + label:hover,
-    & > input:checked ~ label:hover,
-    & > label:hover ~ input:checked ~ label,
-    & > input:checked ~ label:hover ~ label {
-        color: #ffed85;
-    }
-
-    .rate-link {
-        float: right;
-        margin-left: .25em;
-    }
-}
-
-.star-rating {
-    @include star-rating();
-}
-
-
 /// mimics the image-background: cover; behaviour but with img element
 ///
 /// @author Bruno Fenzl
@@ -12642,11 +12444,6 @@ $flag-icon-square-path: '/1x1' !default;
     }
 }
 
-.img-cover-container {
-    @include img-cover();
-}
-
-
 /// mimics the image-background: contain; behaviour but with img element
 ///
 /// @author Bruno Fenzl
@@ -12655,7 +12452,6 @@ $flag-icon-square-path: '/1x1' !default;
 ///     <div class="img-contain-container">
 ///         img src="">
 ///     </div>
-
 @mixin img-contain {
     position: relative;
     overflow: hidden;
@@ -12674,52 +12470,26 @@ $flag-icon-square-path: '/1x1' !default;
         margin: auto;
     }
 
-    & .owl-carousel {
+    & .owl-carousel,
+    & .owl-stage-outer,
+    & .owl-stage,
+    & .owl-item {
         height: 100%;
-
-        & .owl-stage-outer {
-            height: 100%;
-
-            & .owl-stage {
-                height: 100%;
-
-                & .owl-item {
-                    height: 100%;
-
-                    & img {
-                        position: absolute;
-                        top: -9999px;
-                        right: -9999px;
-                        bottom: -9999px;
-                        left: -9999px;
-                        width: auto;
-                        max-width: 100%;
-                        height: auto;
-                        max-height: 100%;
-                        margin: auto;
-                    }
-                }
-            }
-        }
     }
 
+    & .owl-item img {
+        position: absolute;
+        top: -9999px;
+        right: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        margin: auto;
+    }
 }
-
-.img-contain-container {
-    @include img-contain();
-}
-
-
-@mixin pipe($color:$gray-500) {
-    height: 1em;
-    margin: 0 .45em 0 .25em;
-    border-left: 1px solid $color;
-}
-
-.pipe {
-    @include pipe();
-}
-
 
 @mixin reset-list() {
     padding: 0;
@@ -12727,130 +12497,29 @@ $flag-icon-square-path: '/1x1' !default;
     list-style: none;
 }
 
-@mixin rainbow-li($r, $g, $b, $steps) {
-    $step: $steps;
-    $child: 1;
-    @while $step >= 1 {
-        $amount: $step/$steps;
-
-        li:nth-child(#{$child}) .breadcrumb-item:not(.active),
-        li:nth-child(#{$child}) .breadcrumb-item:not(.active) {
-            background-color: rgba($r, $g, $b, $amount);
-
-            &::after { border-left-color: rgba($r, $g, $b, $amount); }
-
-            &:hover {
-                &::after { border-left-color: black !important; }
-            }
-        }
-        $child: $child + 1;
-        $step: $step - 1;
-    }
-}
-
-@mixin triangle-right($color, $w, $h) {
-    width: 0;
-    height: 0;
-    border-top: $w solid transparent;
-    border-bottom: $w solid transparent;
-    border-left: $h solid $color;
-}
-
 @mixin context-bg($color) {
     color: color-yiq($color);
     background-color: $color;
 }
 
-//helper for removing paddings from bootstrap columns
-.prop-row {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
-
-    [class*="col-"] {
-        padding-right: 0;
-        padding-left: 0;
-    }
-
+[class^="prop-"] {
+    position: relative;
+    width: 100% !important; // stylelint-disable-line declaration-no-important
+    height: 0 !important; // stylelint-disable-line declaration-no-important
 }
 
-.prop-inner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: $grid-gutter-width/2;
-}
+@each $breakpoint in map-keys($grid-breakpoints) {
+    $infix: breakpoint-infix($breakpoint);
+    $next: breakpoint-next($breakpoint);
 
-
-@mixin make-props($widths: (1, 2, 3, 4, 5, 6), $heights: (1, 2, 3, 4, 5, 6), $breakpoints: $grid-breakpoints) {
-
-    // Common properties for all breakpoints
-    %base-prop {
-        position: relative;
-        width: 100% !important;
-        height: 0 !important;
-    }
-
-    $breakpoint-counter: 0;
-    @each $breakpoint in map-keys($breakpoints) {
-
-        $breakpoint-counter: ($breakpoint-counter + 1);
-
-        @each $i in $widths {
-            @each $j in $heights {
-                .prop-#{$breakpoint}-#{$i}-#{$j} {
-                    @extend %base-prop;
+    @include media-breakpoint-up($breakpoint) {
+        @each $i in 1, 2, 3 {
+            @each $j in 1, 2, 3 {
+                .prop#{$infix}-#{$i}-#{$j} {
+                    padding-bottom: percentage($j / $i) // stylelint-disable-line declaration-no-important;
                 }
             }
         }
-
-        @include media-breakpoint-up($breakpoint, $breakpoints) {
-
-            .sqr-#{$breakpoint}-reset {
-                height: auto;
-                padding-bottom: 0;
-            }
-
-            @each $i in $widths {
-                @each $j in $heights {
-                    .prop-#{$breakpoint}-#{$i}-#{$j} {
-                        @include make-prop($i, $j);
-                    }
-                }
-            }
-
-        }
-    }
-}
-
-@mixin make-prop($width, $height) {
-    min-height: auto !important;
-    padding-bottom: percentage($height / $width) !important;
-}
-
-@include make-props();
-
-.section-header {
-    padding-bottom: .5rem;
-    border-bottom: 1px solid $gray-300;
-}
-
-.text-context-dark {
-    color: $yiq-text-dark !important;
-    &:hover {
-        color: $yiq-text-dark !important;
-    }
-}
-.text-context-light {
-    color: $yiq-text-light !important;
-    &:hover {
-        color: $yiq-text-light !important;
     }
 }
 
@@ -12872,6 +12541,25 @@ body .wrapper-main {
 .hidden-sm {
     @include media-breakpoint-only(sm) {
         display: none;
+    }
+}
+
+.center-xy {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; // center on the x axys
+
+    img,
+    .owl-stage-outer {
+        -ms-flex-item-align: center;
+            align-self: center; // center on the y axys
     }
 }
 
@@ -13223,7 +12911,6 @@ html.ios {
         font-size: 16px !important;
     }
 }
-
 
 .input-group {
 
@@ -13619,7 +13306,9 @@ button:focus {
 }
 
 .owl-carousel.owl-loaded {
-    display: block;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
 }
 
 .owl-carousel.owl-loading {
@@ -15461,6 +15150,12 @@ $border-width: 1px;
             }
         }
     }
+}
+
+.pipe {
+    height: 1em;
+    margin: 0 .45em 0 .25em;
+    border-left: 1px solid $gray-500;
 }
 
 html.ie {
@@ -17915,20 +17610,20 @@ html.ie .basket-preview-hover {
         position: relative;
         display: inline-block;
         width: 120px;
+        min-height: auto;
+        padding-bottom: 100%;
         vertical-align: top;
         cursor: pointer;
-    }
 
-    .main-image {
-        @include img-contain();
-        position: absolute;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        background-color: #fff;
+        > * {
+            @extend .center-xy;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     }
 
     //TODO create separate mixin
@@ -20790,21 +20485,15 @@ header .widget {
     $infix: breakpoint-infix($breakpoint);
     $next: breakpoint-next($breakpoint);
 
-    @include media-breakpoint-up($breakpoint) {
-        @each $i in 1, 2, 3, 4 {
-            @each $j in 1, 2, 3, 4 {
-                .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional {
-                    padding-bottom: percentage($j / $i);
-                }
-
-                .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
-                    padding-bottom: percentage($j / $i) !important;
-                }
-
+    @each $i in 1, 2, 3 {
+        @each $j in 1, 2, 3 {
+            .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional,
+            .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
+                @extend .prop#{$infix}-#{$i}-#{$j};
             }
         }
-
     }
+
     @include media-breakpoint-only($breakpoint) {
         .widget-prop#{$infix}-auto > div > .widget-proportional {
             min-height: 100%;
@@ -21481,12 +21170,13 @@ header .widget {
             padding-left: .5rem;
         }
         .icon {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
             width: 4rem;
-
-            img {
-                width: 100%;
-                height: auto;
-            }
+            max-height: 100%;
+            overflow: hidden;
+            text-align: center;
         }
     }
 
