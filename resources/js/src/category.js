@@ -98,11 +98,12 @@ import "./app/components/orderReturn/OrderReturn";
 
 import "./app/components/pageDesign/CookieBar";
 import "./app/components/pageDesign/PrivacySettings";
-import "./app/components/pageDesign/MobileNavigation";
-import "./app/components/pageDesign/Notifications";
-
 import Carousel from "./app/components/pageDesign/Carousel.vue";
 Vue.component("carousel", Carousel);
+import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
+Vue.component("mobile-navigation", MobileNavigation);
+import Notifications from "./app/components/pageDesign/Notifications.vue";
+Vue.component("notifications", Notifications);
 import Popper from "./app/components/pageDesign/Popper.vue";
 Vue.component("popper", Popper);
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
