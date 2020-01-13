@@ -19,7 +19,7 @@ export default {
     components: {
         SlotComponent: {
             functional: true,
-            render: (createElement, context) => context.props.vnode
+            render: (createElement, context) => context.data.attrs.vnode
         }
     },
 
