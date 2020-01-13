@@ -42,6 +42,15 @@
         <div class="h3">
             {{ Twig.trans("Ceres::Template.orderConfirmationOrderId") }} {{ Twig.print("data.order.id") }}
         </div>
+
+        {# order property type 8 ≈ 'customer sign' #}
+        {{ Twig.for("property", "data.order.properties", "property.typeId == 8 and property.value | trim is not empty") }}
+            <div class="row">
+                <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.checkoutCustomerSign") }}</strong>
+                <span class="col-6 col-sm-7">{{ Twig.print("property.value") }}</span>
+            </div>
+        {{ Twig.endfor() }}
+
         <div class="row">
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationDate") }}</strong>
             <span class="col-6 col-sm-7">{{ Twig.print("data.order.createdAt | formatDateTime | date(trans('Ceres::Template.devDateTimeFormat'))") }}</span>
@@ -149,7 +158,6 @@
             </div>
         {{ Twig.endif() }}
 
-            
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::OrderConfirmation.AdditionalShippingInformation", Twig.var("data.order")])) }}
     </div>
 </div>
