@@ -41,16 +41,7 @@ export default {
     {
         columnWidths()
         {
-            let itemsPerPage = this.itemsPerPage;
-
-            if (itemsPerPage < 1)
-            {
-                itemsPerPage = 1;
-            }
-            else if (itemsPerPage > 4)
-            {
-                itemsPerPage = 4;
-            }
+            let itemsPerPage = Math.min(Math.max(this.itemsPerPage, 1), 4);
 
             return [
                 "col-12",
