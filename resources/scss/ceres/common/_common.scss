@@ -4,6 +4,17 @@
     transition: none !important;
 }
 
+.center-xy {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center; // center on the x axys
+
+    img,
+    .owl-stage-outer {
+        align-self: center; // center on the y axys
+    }
+}
+
 // TODO: resolve usages to .container
 .container-max {
     @extend .container-fluid;
