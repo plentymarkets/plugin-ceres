@@ -19,12 +19,12 @@ class ShopWizardDataSource extends BaseWizardDataSource
      * @var ShopWizardService
      */
     private $wizardService;
-
+    
     /**
      * @var RequiredSettingsDataValidator
      */
     private $requiredSettingsDataValidator;
-
+    
     /**
      * ShopWizardDataSource constructor.
      *
@@ -33,7 +33,7 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function __construct(ShopWizardService $wizardService, RequiredSettingsDataValidator $settingsDataValidator)
     {
-        $this->wizardService = $wizardService;
+        $this->wizardService                 = $wizardService;
         $this->requiredSettingsDataValidator = $settingsDataValidator;
     }
     
@@ -42,22 +42,24 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function getIdentifiers()
     {
-        $environments = count($this->wizardService->getWebstoresIdentifiers()) ? array_keys($this->wizardService->getWebstoresIdentifiers()) : [];
+        $environments = count($this->wizardService->getWebstoresIdentifiers()) ? array_keys(
+            $this->wizardService->getWebstoresIdentifiers()
+        ) : [];
         
         return $environments;
     }
-
+    
     /**
      * @return array
      */
     public function get(): array
     {
-        $dataStructure = $this->dataStructure;
-        $dataStructure['data'] = (object) $this->wizardService->getWebstoresIdentifiers();
-
+        $dataStructure         = $this->dataStructure;
+        $dataStructure['data'] = (object)$this->wizardService->getWebstoresIdentifiers();
+        
         return $dataStructure;
     }
-
+    
     /**
      * @param string $optionId
      * @return array
@@ -65,13 +67,13 @@ class ShopWizardDataSource extends BaseWizardDataSource
     public function getByOptionId(string $optionId = 'default')
     {
         list($webstore, $pluginSet) = explode(".", $optionId);
-
-        $webstoreId = explode('_', $webstore)[1];
+        
+        $webstoreId  = explode('_', $webstore)[1];
         $pluginSetId = explode('_', $pluginSet)[1];
-
-        $dataStructure = $this->dataStructure;
-        $dataStructure['data'] = (object) $this->wizardService->mapWebstoreData($webstoreId, $pluginSetId);
-
+        
+        $dataStructure         = $this->dataStructure;
+        $dataStructure['data'] = (object)$this->wizardService->mapWebstoreData($webstoreId, $pluginSetId);
+        
         return $dataStructure;
     }
     
@@ -80,38 +82,40 @@ class ShopWizardDataSource extends BaseWizardDataSource
      * @param array $data
      * @throws \Plenty\Exceptions\ValidationException
      */
-    public function finalize(string $optionId = 'default', array $data = []) {
-        $pluginSet= explode(".", $optionId)[1];
-
+    public function finalize(string $optionId = 'default', array $data = [])
+    {
+        $pluginSet = explode(".", $optionId)[1];
+        
         if (empty($pluginSet)) {
             $settingsService = pluginApp(DefaultSettingsService::class);
-
-            $hasShippingMethod = $settingsService->hasShippingMethods();
+            
+            $hasShippingMethod  = $settingsService->hasShippingMethods();
             $hasShippingProfile = $settingsService->hasShippingProfiles();
-            $hasPaymentMethod = $settingsService->hasPaymentMethods();
+            $hasPaymentMethod   = $settingsService->hasPaymentMethods();
             $hasShippingCountry = $settingsService->hasShippingCountries();
-
+            
             if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
                 $data['setAllRequiredAssistants'] = 'true';
             }
         }
         $this->requiredSettingsDataValidator->validateOrFail($data);
     }
-
+    
     /**
      * @param string $optionId
      */
     public function deleteDataOption(string $optionId = 'default')
     {
-        $pluginSet = explode(".", $optionId)[1];
+        list($webstore, $pluginSet) = explode('.', $optionId);
+        $webstoreId  = explode('_', $webstore)[1];
         $pluginSetId = explode('_', $pluginSet)[1];
-
+        
         $previewConfRepo = pluginApp(ShopWizardConfigRepository::class);
-        $confToDelete = $previewConfRepo->getConfig($pluginSetId);
-
+        $confToDelete    = $previewConfRepo->getConfig($pluginSetId);
+        
         if ($confToDelete instanceof ShopWizardPreviewConfiguration) {
-            $previewConfRepo->deleteConfig($pluginSetId, true);
+            $previewConfRepo->deleteConfig($pluginSetId, $webstoreId, true);
         }
     }
-
+    
 }

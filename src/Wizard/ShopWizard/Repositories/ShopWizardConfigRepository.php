@@ -14,7 +14,7 @@ use Plenty\Plugin\Log\Loggable;
 class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterface
 {
     use Loggable;
-
+    
     private $configList = [];
     
     /**
@@ -24,23 +24,24 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
     public function createConfig(array $data)
     {
         try {
-            $database = pluginApp(DataBase::class);
+            $database    = pluginApp(DataBase::class);
             $configModel = pluginApp(ShopWizardPreviewConfiguration::class);
-
+            
             $configModel->pluginSetId = $data['pluginSetId'];
-            $configModel->deleted = !empty($data['deleted']) ? true : false;
-
+            $configModel->deleted     = !empty($data['deleted']) ? true : false;
+            $configModel->webstoreId  = $data['webstoreId'] ?? null;
+            
             $database->save($configModel);
-
+            
             return $configModel;
-        }catch (\Exception $exception) {
-            $this->getLogger( __FUNCTION__)
-                ->error('Ceres::Wizard.exceptionError', $exception->getMessage());
+        } catch (\Exception $exception) {
+            $this->getLogger(__FUNCTION__)
+                 ->error('Ceres::Wizard.exceptionError', $exception->getMessage());
         }
-
+        
         return false;
     }
-
+    
     /**
      * @return array|mixed
      */
@@ -48,15 +49,14 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
     {
         try {
             $database = pluginApp(DataBase::class);
-            $configs = $database->query(ShopWizardPreviewConfiguration::class)->get();
-
+            $configs  = $database->query(ShopWizardPreviewConfiguration::class)->get();
+            
             return $configs;
-
         } catch (\Exception $ex) {
-            $this->getLogger( __FUNCTION__)
-                ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
+            $this->getLogger(__FUNCTION__)
+                 ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
         }
-
+        
         return [];
     }
     
@@ -65,90 +65,89 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
      * @param array $data
      * @return bool|mixed
      */
-    public function updateConfig($pluginSetId, array $data)
+    public function updateConfig($pluginSetId, $webstoreId, array $data)
     {
         try {
             $database = pluginApp(DataBase::class);
-
-            $configs = $database->query(ShopWizardPreviewConfiguration::class)
-                ->where('pluginSetID', '=', $pluginSetId)
-                ->get();
             
-            $config = $configs[0];
+            $configs = $database->query(ShopWizardPreviewConfiguration::class)
+                                ->where('pluginSetID', '=', $pluginSetId)
+                                ->where('webstoreId', '=', $webstoreId)
+                                ->get();
+            
+            $config          = $configs[0];
             $config->deleted = !empty($data['deleted']) ? true : false;
             
             $database->save($config);
-
+            
             unset($this->configList[$pluginSetId]);
-
+            
             return $config;
-
         } catch (\Exception $ex) {
-            $this->getLogger( __FUNCTION__)
-                ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
+            $this->getLogger(__FUNCTION__)
+                 ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
         }
-
+        
         return false;
     }
-
+    
     /**
      * @param string $pluginSetId
      * @param bool $deleted
      *
      * @return bool|mixed
      */
-    public function deleteConfig($pluginSetId, $deleted)
+    public function deleteConfig($pluginSetId, $webstoreId, $deleted)
     {
         try {
             $database = pluginApp(DataBase::class);
-
-            $configs = $database->query(ShopWizardPreviewConfiguration::class)
-                ->where('pluginSetId', '=', $pluginSetId)
-                ->get();
             
-            $config = $configs[0];
+            $configs = $database->query(ShopWizardPreviewConfiguration::class)
+                                ->where('pluginSetId', '=', $pluginSetId)
+                                ->where('webstoreId', '=', $webstoreId)
+                                ->get();
+            
+            $config          = $configs[0];
             $config->deleted = $deleted;
             
             $database->save($config);
-
+            
             unset($this->configList[$pluginSetId]);
-
         } catch (\Exception $ex) {
-            $this->getLogger( __FUNCTION__)
-                ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
+            $this->getLogger(__FUNCTION__)
+                 ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
         }
-
+        
         return false;
     }
-
+    
     /**
      * @param string $pluginSetId
      *
      * @return bool|mixed
      */
-    public function getConfig($pluginSetId)
+    public function getConfig($pluginSetId, $webstoreId = null)
     {
         if (array_key_exists($pluginSetId, $this->configList)) {
             return $this->configList[$pluginSetId];
         }
-
-        try{
+        
+        try {
             $database = pluginApp(DataBase::class);
-
+            
             $configs = $database->query(ShopWizardPreviewConfiguration::class)
-                ->where('pluginSetId', '=', $pluginSetId)
-                ->get();
+                                ->where('pluginSetId', '=', $pluginSetId)
+                                ->get();
             
             $config = $configs[0];
-
         } catch (\Exception $ex) {
-            $this->getLogger( __FUNCTION__)
-                ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
+            $this->getLogger(__FUNCTION__)
+                 ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
             $config = false;
         }
-
+        
         $this->configList[$pluginSetId] = $config;
-
+        
         return $this->configList[$pluginSetId];
     }
 }

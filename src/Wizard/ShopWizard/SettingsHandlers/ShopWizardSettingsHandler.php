@@ -3,6 +3,7 @@
 namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
+use Ceres\Wizard\ShopWizard\Interfaces\ShopWizardPreviewConfigurationInterface;
 use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Ceres\Wizard\ShopWizard\Services\MappingService;
@@ -41,9 +42,11 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
      * @param CountryRepositoryContract $countryRepository
      * @param CurrencyRepositoryContract $currencyRepositoryContract
      */
-    public function __construct(CountryRepositoryContract $countryRepository, CurrencyRepositoryContract $currencyRepositoryContract)
-    {
-        $this->countryRepository = $countryRepository;
+    public function __construct(
+        CountryRepositoryContract $countryRepository,
+        CurrencyRepositoryContract $currencyRepositoryContract
+    ) {
+        $this->countryRepository  = $countryRepository;
         $this->currencyRepository = $currencyRepositoryContract;
     }
     
@@ -53,124 +56,118 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
      */
     public function handle(array $parameters)
     {
-        $data = $parameters['data'];
+        $data     = $parameters['data'];
         $optionId = $parameters['optionId'];
-
+        
         try {
-            $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
+            $webstoreConfig         = pluginApp(WebstoreConfigurationRepositoryContract::class);
             $settingsHandlerService = pluginApp(SettingsHandlerService::class);
-
-            list($webstore,$pluginSet) = explode(".", $optionId);
-
-            $webstoreId = explode('_', $webstore)[1];
+            
+            list($webstore, $pluginSet) = explode(".", $optionId);
+            
+            $webstoreId  = explode('_', $webstore)[1];
             $pluginSetId = explode('_', $pluginSet)[1];
-
+            
             if (empty($webstoreId) && !empty($data['client'])) {
                 $webstoreId = $data['client'];
             }
-
-            if (empty($pluginSetId) && $data['pluginSet']!== false) {
+            
+            if (empty($pluginSetId) && $data['pluginSet'] !== false) {
                 $pluginSetId = $data['pluginSet'];
             }
-
+            
             //we need to create list of active languages that will be saved into plugin config and system settings
             $activeLanguagesList = count($data['languages_activeLanguages']) ?
-                implode(", ", $data['languages_activeLanguages']):
+                implode(", ", $data['languages_activeLanguages']) :
                 "";
-
-            if ($webstoreId !=='preview') {
-
-                $languages = LanguagesHelper::getTranslatedLanguages();
-                $plentyId = $settingsHandlerService->getStoreIdentifier($webstoreId);
+            
+            if ($webstoreId !== 'preview') {
+                $languages           = LanguagesHelper::getTranslatedLanguages();
+                $plentyId            = $settingsHandlerService->getStoreIdentifier($webstoreId);
                 $shippingCountryList = [];
-                $currenciesList = [];
-
+                $currenciesList      = [];
+                
                 //create default country list
                 foreach ($languages as $langKey => $language) {
                     $settingKey = 'defSettings_deliveryCountry_' . $langKey;
-                    if(isset($data[$settingKey])) {
+                    if (isset($data[$settingKey])) {
                         $shippingCountryList[$langKey] = $data[$settingKey];
                     }
                 }
-
+                
                 //create default currencies list
                 foreach ($languages as $langCode => $language) {
                     $key = 'currencies_defaultCurrency_' . $langCode;
-
+                    
                     if (!empty($data[$key])) {
                         $currenciesList[$langCode] = $data[$key];
                     }
                 }
-
+                
                 $mappingService = pluginApp(MappingService::class);
-
+                
                 $shippingData = [
                     "defaultShippingCountryList" => $shippingCountryList
                 ];
-
+                
                 $currenciesData = [
                     "defaultCurrencyList" => $currenciesList
                 ];
-                $globalData = $mappingService->processGlobalMappingData($data, "store");
-
-                if (isset($globalData["defaultLanguage"]))
-                {
+                $globalData     = $mappingService->processGlobalMappingData($data, "store");
+                
+                if (isset($globalData["defaultLanguage"])) {
                     $defaultLang = $globalData["defaultLanguage"];
-                    if(isset($shippingData["defaultShippingCountryList"][$defaultLang]))
-                    {
+                    if (isset($shippingData["defaultShippingCountryList"][$defaultLang])) {
                         $globalData["defaultShippingCountryId"] = $shippingData["defaultShippingCountryList"][$defaultLang];
                     }
-
-                    if(isset($currenciesData["defaultCurrencyList"][$defaultLang]))
-                    {
+                    
+                    if (isset($currenciesData["defaultCurrencyList"][$defaultLang])) {
                         $globalData["defaultCurrency"] = $currenciesData["defaultCurrencyList"][$defaultLang];
                     }
                 }
-
-                $intermediarBrowserLanguage = $globalData['browserLanguage'];
+                
+                $intermediarBrowserLanguage    = $globalData['browserLanguage'];
                 $globalData['browserLanguage'] = [
                     'other' => $intermediarBrowserLanguage
                 ];
-                foreach ($data as $dataKey => $dataValue){
+                foreach ($data as $dataKey => $dataValue) {
                     if (strpos($dataKey, "languages_browserLang_") !== false) {
-                        $key = end(explode("_", $dataKey));
+                        $key                                 = end(explode("_", $dataKey));
                         $globalData['browserLanguage'][$key] = $dataValue;
                     }
                 }
-
+                
                 $webstoreData = array_merge($shippingData, $currenciesData, $globalData);
-
+                
                 if (!empty($activeLanguagesList)) {
                     $webstoreData['languageList'] = $activeLanguagesList;
                 }
-    
+                
                 if (isset($data['displayInfo_attributeSelectDefaultOption'])) {
                     $webstoreData['attributeSelectDefaultOption'] = 0;
-                    if($data['displayInfo_attributeSelectDefaultOption'] !== false)
-                    {
+                    if ($data['displayInfo_attributeSelectDefaultOption'] !== false) {
                         $webstoreData['attributeSelectDefaultOption'] = 1;
                     }
                 }
-
+                
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
-
+                
                 // we save robotsTxt
                 if (!empty($data["seo_robotsTxt"])) {
                     $robotsRepo = pluginApp(RobotsRepositoryContract::class);
                     $robotsRepo->updateByWebstoreId($webstoreId, $data["seo_robotsTxt"]);
-
                 }
-
+                
                 //save sitemap xml
                 if (isset($data['seo_siteMapConfig'])) {
                     $siteMapConfig = [
-                      "contentCategory" => 0,
-                      "itemCategory" => 0,
-                      "item" => 0,
-                      "blog" => 0
+                        "contentCategory" => 0,
+                        "itemCategory" => 0,
+                        "item" => 0,
+                        "blog" => 0
                     ];
-
-                    foreach($siteMapConfig as $siteMapKey => $siteMapValue) {
+                    
+                    foreach ($siteMapConfig as $siteMapKey => $siteMapValue) {
                         if (in_array($siteMapKey, $data['seo_siteMapConfig'])) {
                             $siteMapConfig[$siteMapKey] = 1;
                         }
@@ -178,14 +175,14 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $siteMapRepo = pluginApp(SitemapConfigurationRepositoryContract::class);
                     $siteMapRepo->updateByWebstoreId($webstoreId, $siteMapConfig);
                 }
-
+                
                 //we handle settings for shopping booster
-
+                
                 if (isset($data["performance_shopBooster"])) {
                     $cacheRepo = pluginApp(ContentCacheSettingsRepositoryContract::class);
-                    $cacheRepo->saveSettings($plentyId, (bool) $data["performance_shopBooster"]);
+                    $cacheRepo->saveSettings($plentyId, (bool)$data["performance_shopBooster"]);
                 }
-
+                
                 //save search languages settings
                 if (
                     isset($data["languages_firstSearchLanguage"]) ||
@@ -193,54 +190,57 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     isset($data["languages_thirdSearchLanguage"])
                 ) {
                     $selectedSearchLanguages = [];
-
+                    
                     if (!empty($data["languages_firstSearchLanguage"])) {
                         $selectedSearchLanguages[] = $data["languages_firstSearchLanguage"];
                     }
-
+                    
                     if (!empty($data["languages_secondSearchLanguage"])) {
                         $selectedSearchLanguages[] = $data["languages_secondSearchLanguage"];
                     }
-
+                    
                     if (!empty($data["languages_thirdSearchLanguage"])) {
                         $selectedSearchLanguages[] = $data["languages_thirdSearchLanguage"];
                     }
-
-                    $searchSettingsRepo = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
+                    
+                    $searchSettingsRepo      = pluginApp(VariationElasticSearchSettingsRepositoryContract::class);
                     $searchLanguagesSettings = $searchSettingsRepo->getLanguages()->toArray();
-
-                    foreach($searchLanguagesSettings['languages'] as &$searchLanguagesSetting) {
+                    
+                    foreach ($searchLanguagesSettings['languages'] as &$searchLanguagesSetting) {
                         if (in_array($searchLanguagesSetting['lang'], $selectedSearchLanguages)) {
                             $searchLanguagesSetting['isActive'] = true;
                         } else {
                             $searchLanguagesSetting['isActive'] = false;
                         }
                     }
-
+                    
                     $searchSettingsRepo->saveLanguages($searchLanguagesSettings);
-
+                    
                     //save search settings
-
+                    
                     $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
-                    $searchFields = $this->getSearchSetingsKeys($itemSearchSettings['fields']);
-                    $searchSettings = $this->setSearchSettingComplete();
-
-                    $completedSettings = [];
+                    $searchFields       = $this->getSearchSetingsKeys($itemSearchSettings['fields']);
+                    $searchSettings     = $this->setSearchSettingComplete();
+                    
+                    $completedSettings      = [];
                     $itemSearchSettingsData = [];
-
-                    foreach($searchSettings as $searchSetting) {
-                        if (!empty($data[$searchSetting['key']]) && !in_array($data[$searchSetting['key']], $completedSettings)){
+                    
+                    foreach ($searchSettings as $searchSetting) {
+                        if (!empty($data[$searchSetting['key']]) && !in_array(
+                                $data[$searchSetting['key']],
+                                $completedSettings
+                            )) {
                             $itemSearchSettingsData[] = [
                                 "key" => $data[$searchSetting['key']],
                                 "boost" => 2000 - (intval($searchSetting['position']) * 100),
                                 "isActive" => true
                             ];
-                            $completedSettings[] = $data[$searchSetting['key']];
+                            $completedSettings[]      = $data[$searchSetting['key']];
                         }
                     }
-
-                    $disabledSettings  = array_diff(array_unique($searchFields), $completedSettings);
-
+                    
+                    $disabledSettings = array_diff(array_unique($searchFields), $completedSettings);
+                    
                     if (count($disabledSettings)) {
                         foreach ($disabledSettings as $disabledSetting) {
                             $itemSearchSettingsData[] = [
@@ -250,33 +250,35 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                             ];
                         }
                     }
-
+                    
                     $searchSettingsRepo->saveSearchSettings(["fields" => $itemSearchSettingsData]);
                 }
+                
+                $previewConfData = [
+                    'pluginSetId' => $pluginSetId,
+                    'deleted' => false,
+                    'webstoreId' => (int)$webstoreId
+                ];
+                
+                $this->savePreviewConfig($pluginSetId, $previewConfData, (int)$webstoreId);
             } else {
                 // we set the preview config entry
-
-                $previewConfigRepo = pluginApp(ShopWizardConfigRepository::class);
+                
                 $previewConfData = [
                     "pluginSetId" => $pluginSetId,
                     "deleted" => false
                 ];
-
-                $previewConf = $previewConfigRepo->getConfig($pluginSetId);
-                if ($previewConf instanceof ShopWizardPreviewConfiguration) {
-                    $previewConfigRepo->updateConfig($pluginSetId, $previewConfData);
-                } else {
-                    $previewConfigRepo->createConfig($previewConfData);
-                }
+                
+                $this->savePreviewConfig($pluginSet, $previewConfData);
             }
-
-            $configRepo = pluginApp(ConfigurationRepositoryContract::class);
+            
+            $configRepo    = pluginApp(ConfigurationRepositoryContract::class);
             $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-            $pluginSets = $pluginSetRepo->list();
-            $pluginId = '';
-
+            $pluginSets    = $pluginSetRepo->list();
+            $pluginId      = '';
+            
             if (count($pluginSets)) {
-                foreach($pluginSets as $pluginSet) {
+                foreach ($pluginSets as $pluginSet) {
                     foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
                         if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
                             $pluginId = $pluginSetEntry->pluginId;
@@ -284,45 +286,43 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     }
                 }
             }
-
+            
             /** @var MappingService $mappingService */
             $mappingService = pluginApp(MappingService::class);
-            $pluginData = $mappingService->processPluginMappingData($data, "store");
-
+            $pluginData     = $mappingService->processPluginMappingData($data, "store");
+            
             if (count($pluginData)) {
                 $configData = [];
-
+                
                 foreach ($pluginData as $itemKey => $itemVal) {
                     $configData[] = [
                         'key' => $itemKey,
                         'value' => $itemVal
                     ];
                 }
-
+                
                 $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
             }
-
+            
             //invalidate caching
             $cacheInvalidRepo = pluginApp(ContentCacheInvalidationRepositoryContract::class);
             $cacheInvalidRepo->invalidateAll();
-
         } catch (\Exception $exception) {
-
             return false;
         }
-
+        
         return true;
     }
     
     /**
      * @return array
      */
-    private function setSearchSettingComplete():array
+    private function setSearchSettingComplete(): array
     {
         $searchSettings = [];
-
+        
         for ($i = 0; $i < 13; $i++) {
-            switch($i){
+            switch ($i) {
                 case 1:
                     $key = "search_firstSearchField";
                     break;
@@ -335,24 +335,38 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 default:
                     $key = "search_{$i}thSearchField";
             }
-
+            
             $searchSettings[] = [
                 "key" => $key,
                 "position" => $i
             ];
         }
-
+        
         return $searchSettings;
     }
-
+    
     private function getSearchSetingsKeys(array $settingsData): array
     {
         $searchKeys = [];
-
+        
         foreach ($settingsData as $setting) {
             $searchKeys[] = $setting['key'];
         }
-
+        
         return $searchKeys;
+    }
+    
+    
+    private function savePreviewConfig($pluginSetId, $previewConfData, $webstoreId = null)
+    {
+        /** @var ShopWizardConfigRepository $previewConfigRepo */
+        $previewConfigRepo = pluginApp(ShopWizardConfigRepository::class);
+        
+        $previewConf = $previewConfigRepo->getConfig($pluginSetId, $webstoreId);
+        if ($previewConf instanceof ShopWizardPreviewConfiguration) {
+            $previewConfigRepo->updateConfig($pluginSetId, $webstoreId, $previewConfData);
+        } else {
+            $previewConfigRepo->createConfig($previewConfData);
+        }
     }
 }
