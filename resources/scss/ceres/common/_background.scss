@@ -1,5 +1,4 @@
 @each $color, $value in map-merge($theme-colors, ("white": $white)) {
-    @extend .bg-#{$color};
     .bg-#{$color} {
         @include context-bg($value);
     }
