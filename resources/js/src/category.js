@@ -96,9 +96,10 @@ import "./app/components/newsletter/NewsletterUnsubscribeInput";
 
 import "./app/components/orderReturn/OrderReturn";
 
-import "./app/components/pageDesign/Carousel";
 import "./app/components/pageDesign/CookieBar";
 import "./app/components/pageDesign/PrivacySettings";
+import Carousel from "./app/components/pageDesign/Carousel.vue";
+Vue.component("carousel", Carousel);
 import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
 Vue.component("mobile-navigation", MobileNavigation);
 import Notifications from "./app/components/pageDesign/Notifications.vue";
