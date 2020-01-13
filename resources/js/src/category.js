@@ -164,12 +164,15 @@ import "./app/filters/truncate.filter";
 // =========================
 // MIXINS
 // =========================
-import "./app/mixins/buttonSizeProperty.mixin";
 import "./app/mixins/getJsonData.mixin";
 import "./app/mixins/template.mixin";
-
 
 // =========================
 // Bootstrap frameworks
 // =========================
 import "./app/main";
+
+import TranslationService from "./app/services/TranslationService";
+window.ceresTranslate = TranslationService.translate;
+
+Vue.prototype.$translate = TranslationService.translate;
