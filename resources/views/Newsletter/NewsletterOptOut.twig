@@ -8,10 +8,10 @@
 
 {% block PageBody %}
 
-    <form action="/newsletter/unsubscribe{% if urls.appendTrailingSlash %}/{% endif %}?folderId={{ request.get('folderId') }}" method="POST">
+    <form action="{{ urls.newsletterOptOut }}?folderId={{ request.get('folderId') }}" method="POST">
         <div class="container-max page-content">
             <div class="row">
-                <div class="col-12 col-sm-8 col-lg-6 mb-5 content-center">
+                <div class="col-12 col-sm-8 col-lg-6 mb-5 mx-auto">
                     <h1 class="mb-5 mt-4">{{ trans("Ceres::Template.newsletterOptOutTitle") }}</h1>
 
                     <span>{{ trans("Ceres::Template.newsletterOptOutInfoText") }}</span>

@@ -1,3 +1,13 @@
+.hidden {
+    display: none;
+}
+
+.hidden-sm {
+    @include media-breakpoint-only(sm) {
+        display: none;
+    }
+}
+
 @each $bp in map-keys($grid-breakpoints) {
     .hidden-#{$bp}-down {
         @include media-breakpoint-down($bp) {

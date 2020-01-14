@@ -73,12 +73,11 @@
             padding-left: .5rem;
         }
         .icon {
+            display: flex;
             width: 4rem;
-
-            img {
-                width: 100%;
-                height: auto;
-            }
+            max-height: 100%;
+            overflow: hidden;
+            text-align: center;
         }
     }
 
