@@ -135,6 +135,13 @@ export default Vue.component("category-image-carousel", {
             const altText = image && image.alternate ? image.alternate : this.altText;
 
             return altText;
+        },
+
+        getImageName(image)
+        {
+            const altText = image && image.name ? image.name : this.titleText;
+
+            return altText;
         }
     }
 });

@@ -277,9 +277,11 @@ export default Vue.component("item-image-carousel", {
             return altText;
         },
 
-        getItemName()
+        getImageName(image)
         {
-            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
+            const imgName = image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+
+            return imgName;
         },
 
         loadLightbox()

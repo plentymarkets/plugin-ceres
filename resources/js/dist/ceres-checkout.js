@@ -47149,15 +47149,29 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         this.showMissingPropertiesError();
       } else if (this.isSalable) {
         this.waiting = true;
-        this.orderProperties.forEach(function (orderProperty) {
-          if (orderProperty.property.valueType === "float" && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_28__["isNullOrUndefined"])(orderProperty.property.value) && orderProperty.property.value.slice(-1) === App.decimalSeparator) {
-            orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
+        var totalSurcharge = 0;
+        var orderParams = this.orderProperties.filter(function (orderProperty) {
+          return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_28__["isNullOrUndefined"])(orderProperty.property.value);
+        }).map(function (orderProperty) {
+          var property = orderProperty.property;
+
+          if (property.valueType === "float" && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_28__["isNullOrUndefined"])(property.value) && property.value.slice(-1) === App.decimalSeparator) {
+            property.value = property.value.substr(0, property.value.length - 1);
           }
+
+          totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
+          return {
+            propertyId: property.id,
+            type: property.valueType,
+            name: property.names.name,
+            value: property.value
+          };
         });
         var basketObject = {
           variationId: this.variationId,
           quantity: this.quantity,
-          basketItemOrderParams: this.orderProperties
+          basketItemOrderParams: orderParams,
+          totalOrderParamsMarkup: totalSurcharge
         };
         this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
           document.dispatchEvent(new CustomEvent("afterBasketItemAdded", {
@@ -48470,6 +48484,72 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/src/app/components/checkout/CustomerSignInput.js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/src/app/components/checkout/CustomerSignInput.js ***!
+  \***********************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
+/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
+/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+
+
+
+
+
+
+
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_10___default.a.component("customer-sign-input", {
+  template: "\n    <div class=\"input-unit\">\n        <input type=\"text\" @change=\"setCustomerSign($event.srcElement.value)\" :id=\"'customer-sign_' + _uid\" :maxlength=\"maxLength\">\n        <label :for=\"'customer-sign_' + _uid\">\n            ".concat(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.checkoutCustomerSign"), "\n        </label>\n    </div>"),
+  props: {
+    maxLength: {
+      type: Number,
+      default: 128
+    }
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapMutations"])(["setCustomerSign"]))
+});
+
+/***/ }),
+
 /***/ "./resources/js/src/app/components/checkout/PaymentProviderSelect.js":
 /*!***************************************************************************!*\
   !*** ./resources/js/src/app/components/checkout/PaymentProviderSelect.js ***!
@@ -48698,6 +48778,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     contactWish: function contactWish(state) {
       return state.checkout.contactWish;
     },
+    customerSign: function customerSign(state) {
+      return state.checkout.customerSign;
+    },
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
     },
@@ -48722,6 +48805,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       var url = "/rest/io/order/additional_information";
       var params = {
         orderContactWish: this.contactWish,
+        orderCustomerSign: this.customerSign,
         shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
         newsletterSubscriptions: this.activeNewsletterSubscriptions
       };
@@ -53070,15 +53154,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.sort */ "./node_modules/core-js/modules/es.array.sort.js");
 /* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("category-image-carousel", {
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("category-image-carousel", {
   delimiters: ["${", "}"],
   props: {
     imageUrlsData: {
@@ -53184,6 +53271,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     getAltText: function getAltText(image) {
       var altText = image && image.alternate ? image.alternate : this.altText;
+      return altText;
+    },
+    getImageName: function getImageName(image) {
+      var altText = image && image.name ? image.name : this.titleText;
       return altText;
     }
   }
@@ -57930,14 +58021,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
 
 
 
@@ -57961,7 +58058,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var SidenavigationChildrenLoader =
 /*#__PURE__*/
 function () {
-  function SidenavigationChildrenLoader(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName) {
+  function SidenavigationChildrenLoader(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding) {
     var _this = this;
 
     _classCallCheck(this, SidenavigationChildrenLoader);
@@ -57972,6 +58069,8 @@ function () {
     this.showItemCount = showItemCount;
     this.childCount = childCount;
     this.openClassName = openClassName || "is-open";
+    this.spacingPadding = spacingPadding || "";
+    this.inlinePadding = inlinePadding || "";
     this.template = "";
     this.placeholders = [];
 
@@ -57985,21 +58084,30 @@ function () {
 
   _createClass(SidenavigationChildrenLoader, [{
     key: "createElement",
-    value: function createElement(tag, classes, width, innerText, child) {
+    value: function createElement(tag, classes, width, innerText, child, spacingPadding, inlinePadding) {
       var element = document.createElement(tag);
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(classes)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(classes)) {
         element.classList.add(classes);
       }
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(width)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(width)) {
         element.style.width = width;
       }
 
       element.innerText = innerText;
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(child)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(child)) {
         element.appendChild(child);
+      }
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(spacingPadding) && spacingPadding.length > 0) {
+        var paddingClasses = spacingPadding.split(" ");
+        element.classList.add(paddingClasses);
+      }
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(inlinePadding) && inlinePadding.length > 0) {
+        element.style = inlinePadding;
       }
 
       return element;
@@ -58008,7 +58116,7 @@ function () {
     key: "createPlaceholder",
     value: function createPlaceholder() {
       for (var i = 0; i < this.childCount; i++) {
-        var placeholder = this.createElement("ul", null, null, null, this.createElement("li", "nav-item", null, null, this.createElement("a", "nav-link", null, null, this.createElement("span", "placeholder", Math.floor(Math.random() * 20 + 10) + "%", "."))));
+        var placeholder = this.createElement("ul", null, null, null, this.createElement("li", "nav-item", null, null, this.createElement("a", "nav-link", null, null, this.createElement("span", "placeholder", Math.floor(Math.random() * 20 + 10) + "%", "."), this.spacingPadding, this.inlinePadding)));
         this.placeholders.push(placeholder);
         this.parent.appendChild(placeholder);
       }
@@ -58046,10 +58154,12 @@ function () {
       var _this2 = this;
 
       return new Promise(function (resolve) {
-        _services_ApiService__WEBPACK_IMPORTED_MODULE_10__["default"].get("/rest/io/categorytree/template_for_children", {
+        _services_ApiService__WEBPACK_IMPORTED_MODULE_12__["default"].get("/rest/io/categorytree/template_for_children", {
           categoryId: _this2.categoryId,
           currentUrl: _this2.currentUrl,
-          showItemCount: _this2.showItemCount ? 1 : 0
+          showItemCount: _this2.showItemCount ? 1 : 0,
+          spacingPadding: _this2.spacingPadding,
+          inlinePadding: _this2.inlinePadding
         }).then(function (result) {
           _this2.template = result;
           resolve(_this2.template);
@@ -58068,8 +58178,8 @@ function () {
           var template = _step2.value;
           var ul = document.createElement("ul");
           this.parent.appendChild(ul);
-          var compiled = vue__WEBPACK_IMPORTED_MODULE_9___default.a.compile(template);
-          new vue__WEBPACK_IMPORTED_MODULE_9___default.a({
+          var compiled = vue__WEBPACK_IMPORTED_MODULE_11___default.a.compile(template);
+          new vue__WEBPACK_IMPORTED_MODULE_11___default.a({
             store: window.ceresStore,
             render: compiled.render,
             staticRenderFns: compiled.staticRenderFns
@@ -58149,14 +58259,17 @@ function () {
   return SidenavigationChildrenLoader;
 }();
 
-vue__WEBPACK_IMPORTED_MODULE_9___default.a.directive("sidenavigation-children", {
+vue__WEBPACK_IMPORTED_MODULE_11___default.a.directive("sidenavigation-children", {
   bind: function bind(el, binding) {
     var categoryId = binding.value.categoryId;
     var currentUrl = binding.value.currentUrl;
     var isActive = binding.value.isActive;
     var showItemCount = binding.value.showItemCount;
     var childCount = binding.value.childCount;
-    var sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive, showItemCount, childCount);
+    var openClassName = binding.value.openClassName;
+    var spacingPadding = binding.value.spacingPadding;
+    var inlinePadding = binding.value.inlinePadding;
+    var sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding);
     el.addEventListener("click", function () {
       sidenavigationChildrenLoader.toggle();
     });
@@ -58846,11 +58959,14 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemImageAlternativeText", fu
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
 
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("itemImages", function (images, accessor) {
+
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemImages", function (images, accessor) {
   if (!images) {
     return [];
   }
@@ -58865,10 +58981,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("itemImages", function (images
   for (var image in images[imagesAccessor]) {
     var imageUrl = images[imagesAccessor][image][accessor];
     var alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
+    var name = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.name : null;
     imageUrls.push({
       url: imageUrl,
       position: images[imagesAccessor][image].position,
-      alternate: alternate
+      alternate: alternate,
+      name: name
     });
   }
 
@@ -63978,6 +64096,7 @@ var state = {
     methodOfPaymentList: []
   },
   contactWish: null,
+  customerSign: null,
   shippingPrivacyHintAccepted: false,
   validation: {
     gtc: {
@@ -64034,6 +64153,9 @@ var mutations = {
   },
   setContactWish: function setContactWish(state, contactWish) {
     state.contactWish = contactWish;
+  },
+  setCustomerSign: function setCustomerSign(state, customerSign) {
+    state.customerSign = customerSign;
   },
   setShippingPrivacyHintAccepted: function setShippingPrivacyHintAccepted(state, value) {
     state.shippingPrivacyHintAccepted = value;
@@ -65712,6 +65834,16 @@ var mutations = {
     });
 
     if (index >= 0) {
+      var group = state.variation.documents[0].data.properties[index].group;
+
+      if (group && group.orderPropertyGroupingType === "single") {
+        state.variation.documents[0].data.properties.forEach(function (prop) {
+          if (prop.group && prop.group.id === group.id) {
+            prop.property.value = null;
+          }
+        });
+      }
+
       vue__WEBPACK_IMPORTED_MODULE_28___default.a.set(state.variation.documents[0].data.properties[index], "property", _objectSpread({}, state.variation.documents[0].data.properties[index].property, {
         value: value
       }));
@@ -66623,23 +66755,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_components_checkout_AcceptGtcCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app/components/checkout/AcceptGtcCheck */ "./resources/js/src/app/components/checkout/AcceptGtcCheck.js");
 /* harmony import */ var _app_components_checkout_Checkout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/components/checkout/Checkout */ "./resources/js/src/app/components/checkout/Checkout.js");
 /* harmony import */ var _app_components_checkout_ContactWishInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/components/checkout/ContactWishInput */ "./resources/js/src/app/components/checkout/ContactWishInput.js");
-/* harmony import */ var _app_components_checkout_PaymentProviderSelect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/components/checkout/PaymentProviderSelect */ "./resources/js/src/app/components/checkout/PaymentProviderSelect.js");
-/* harmony import */ var _app_components_checkout_PlaceOrder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/components/checkout/PlaceOrder */ "./resources/js/src/app/components/checkout/PlaceOrder.js");
-/* harmony import */ var _app_components_checkout_ShippingPrivacyHintCheck__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app/components/checkout/ShippingPrivacyHintCheck */ "./resources/js/src/app/components/checkout/ShippingPrivacyHintCheck.js");
-/* harmony import */ var _app_components_checkout_ShippingProfileSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app/components/checkout/ShippingProfileSelect */ "./resources/js/src/app/components/checkout/ShippingProfileSelect.js");
-/* harmony import */ var _app_components_checkout_SubscribeNewsletterCheck__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/components/checkout/SubscribeNewsletterCheck */ "./resources/js/src/app/components/checkout/SubscribeNewsletterCheck.js");
-/* harmony import */ var _app_components_customer_AddressSelect_AddressHeader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/AddressHeader */ "./resources/js/src/app/components/customer/AddressSelect/AddressHeader.js");
-/* harmony import */ var _app_components_customer_AddressSelect_InvoiceAddressSelect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/InvoiceAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/InvoiceAddressSelect.js");
-/* harmony import */ var _app_components_customer_AddressSelect_ShippingAddressSelect__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/ShippingAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/ShippingAddressSelect.js");
-/* harmony import */ var _app_components_myAccount_AccountSettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/components/myAccount/AccountSettings */ "./resources/js/src/app/components/myAccount/AccountSettings.js");
-/* harmony import */ var _app_components_myAccount_BankDataSelect__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/components/myAccount/BankDataSelect */ "./resources/js/src/app/components/myAccount/BankDataSelect.js");
-/* harmony import */ var _app_components_myAccount_ChangePaymentMethod__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./app/components/myAccount/ChangePaymentMethod */ "./resources/js/src/app/components/myAccount/ChangePaymentMethod.js");
-/* harmony import */ var _app_components_myAccount_MyAccount__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app/components/myAccount/MyAccount */ "./resources/js/src/app/components/myAccount/MyAccount.js");
-/* harmony import */ var _app_components_myAccount_OrderDocuments__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app/components/myAccount/OrderDocuments */ "./resources/js/src/app/components/myAccount/OrderDocuments.js");
-/* harmony import */ var _app_components_myAccount_History__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app/components/myAccount/History */ "./resources/js/src/app/components/myAccount/History.js");
-/* harmony import */ var _app_components_myAccount_OrderHistoryList__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app/components/myAccount/OrderHistoryList */ "./resources/js/src/app/components/myAccount/OrderHistoryList.js");
-/* harmony import */ var _app_components_myAccount_OrderReturnHistoryList__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app/components/myAccount/OrderReturnHistoryList */ "./resources/js/src/app/components/myAccount/OrderReturnHistoryList.js");
+/* harmony import */ var _app_components_checkout_CustomerSignInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/components/checkout/CustomerSignInput */ "./resources/js/src/app/components/checkout/CustomerSignInput.js");
+/* harmony import */ var _app_components_checkout_PaymentProviderSelect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/components/checkout/PaymentProviderSelect */ "./resources/js/src/app/components/checkout/PaymentProviderSelect.js");
+/* harmony import */ var _app_components_checkout_PlaceOrder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app/components/checkout/PlaceOrder */ "./resources/js/src/app/components/checkout/PlaceOrder.js");
+/* harmony import */ var _app_components_checkout_ShippingPrivacyHintCheck__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app/components/checkout/ShippingPrivacyHintCheck */ "./resources/js/src/app/components/checkout/ShippingPrivacyHintCheck.js");
+/* harmony import */ var _app_components_checkout_ShippingProfileSelect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/components/checkout/ShippingProfileSelect */ "./resources/js/src/app/components/checkout/ShippingProfileSelect.js");
+/* harmony import */ var _app_components_checkout_SubscribeNewsletterCheck__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/components/checkout/SubscribeNewsletterCheck */ "./resources/js/src/app/components/checkout/SubscribeNewsletterCheck.js");
+/* harmony import */ var _app_components_customer_AddressSelect_AddressHeader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/AddressHeader */ "./resources/js/src/app/components/customer/AddressSelect/AddressHeader.js");
+/* harmony import */ var _app_components_customer_AddressSelect_InvoiceAddressSelect__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/InvoiceAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/InvoiceAddressSelect.js");
+/* harmony import */ var _app_components_customer_AddressSelect_ShippingAddressSelect__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/ShippingAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/ShippingAddressSelect.js");
+/* harmony import */ var _app_components_myAccount_AccountSettings__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/components/myAccount/AccountSettings */ "./resources/js/src/app/components/myAccount/AccountSettings.js");
+/* harmony import */ var _app_components_myAccount_BankDataSelect__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./app/components/myAccount/BankDataSelect */ "./resources/js/src/app/components/myAccount/BankDataSelect.js");
+/* harmony import */ var _app_components_myAccount_ChangePaymentMethod__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app/components/myAccount/ChangePaymentMethod */ "./resources/js/src/app/components/myAccount/ChangePaymentMethod.js");
+/* harmony import */ var _app_components_myAccount_MyAccount__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app/components/myAccount/MyAccount */ "./resources/js/src/app/components/myAccount/MyAccount.js");
+/* harmony import */ var _app_components_myAccount_OrderDocuments__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app/components/myAccount/OrderDocuments */ "./resources/js/src/app/components/myAccount/OrderDocuments.js");
+/* harmony import */ var _app_components_myAccount_History__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app/components/myAccount/History */ "./resources/js/src/app/components/myAccount/History.js");
+/* harmony import */ var _app_components_myAccount_OrderHistoryList__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app/components/myAccount/OrderHistoryList */ "./resources/js/src/app/components/myAccount/OrderHistoryList.js");
+/* harmony import */ var _app_components_myAccount_OrderReturnHistoryList__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./app/components/myAccount/OrderReturnHistoryList */ "./resources/js/src/app/components/myAccount/OrderReturnHistoryList.js");
 // checkout script extends category script
+
 
 
 
