@@ -61351,6 +61351,10 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("variation-select", {
         names.push("<b>".concat(_services_TranslationService__WEBPACK_IMPORTED_MODULE_28__["default"].translate("Ceres::Template.singleItemContent"), "</b>"));
       }
 
+      if (!names.length) {
+        return null;
+      }
+
       return _services_TranslationService__WEBPACK_IMPORTED_MODULE_28__["default"].translate("Ceres::Template.singleItemNotAvailableInSelection", {
         name: names.join(", ")
       });
