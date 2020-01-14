@@ -23,7 +23,6 @@
 const NotificationService = require("../../services/NotificationService");
 
 import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
 import { mapState } from "vuex";
 
 export default {

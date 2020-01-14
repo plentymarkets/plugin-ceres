@@ -160,7 +160,6 @@ import ExceptionMap from "../../../exceptions/ExceptionMap";
 import TranslationService from "../../../services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
 import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
-import Vue from "vue";
 import { mapState } from "vuex";
 
 const NotificationService = require("../../../services/NotificationService");

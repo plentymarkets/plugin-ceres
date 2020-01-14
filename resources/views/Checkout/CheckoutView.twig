@@ -16,7 +16,6 @@
     {{ component( "Ceres::Checkout.Components.ShippingProfileSelect" ) }}
     {{ component( "Ceres::Checkout.Components.PlaceOrder" ) }}
     {{ component( "Ceres::Checkout.Components.ContactWishInput" ) }}
-    {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
     {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
     {{ component( "Ceres::Checkout.Components.Checkout" ) }}
 
@@ -203,7 +202,32 @@
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar">
                                     {{ LayoutContainer.show("Ceres::Checkout.BeforeBasketTotals") }}
-                                    <basket-totals></basket-totals>
+                                    <basket-totals>
+                                        <template #before-item-sum>
+                                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                                        </template>
+                                        <template #after-item-sum>
+                                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+                                        </template>
+                                        <template #before-shipping-costs>
+                                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+                                        </template>
+                                        <template #after-shipping-costs>
+                                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                                        </template>
+                                        <template #before-total-sum>
+                                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+                                        </template>
+                                        <template #before-vat>
+                                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                                        </template>
+                                        <template #after-vat>
+                                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+                                        </template>
+                                        <template #after-total-sum>
+                                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+                                        </template>
+                                    </basket-totals>
                                     {{ LayoutContainer.show("Ceres::Checkout.AfterBasketTotals") }}
                                 </div>
                             </aside>

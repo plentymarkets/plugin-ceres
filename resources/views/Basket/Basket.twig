@@ -9,8 +9,6 @@
 
 {% block PageBody %}
 
-    {{ component( "Ceres::Basket.Components.Coupon" ) }}
-    {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
     {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
 
     <div v-cloak class="page-content basket container-max" itemtype="http://schema.org/Product http://schema.org/Thing http://schema.org/Offer http://schema.org/PriceSpecification">
@@ -50,7 +48,32 @@
 
                     <hr class="d-md-none">
                     {{ LayoutContainer.show("Ceres::Basket.BeforeBasketTotals") }}
-                    <basket-totals class="mb-4" template="#vue-basket-totals"></basket-totals>
+                    <basket-totals class="mb-4">
+                        <template #before-item-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                        </template>
+                        <template #after-item-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+                        </template>
+                        <template #before-shipping-costs>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+                        </template>
+                        <template #after-shipping-costs>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                        </template>
+                        <template #before-total-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+                        </template>
+                        <template #before-vat>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                        </template>
+                        <template #after-vat>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+                        </template>
+                        <template #after-total-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+                        </template>
+                    </basket-totals>
                     {{ LayoutContainer.show("Ceres::Basket.AfterBasketTotals") }}
 
                     <hr>
