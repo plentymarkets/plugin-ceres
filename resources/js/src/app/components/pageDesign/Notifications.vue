@@ -1,25 +1,57 @@
+<template>
+    <div class="notification-wrapper">
+        <div v-for="notification in filteredNotifications"
+            :key="notification.id"
+            :class="'alert alert-dismissible fade in show alert-' + notification.context"
+            role="alert"
+        >
+            <button type="button" class="close" aria-label="Close" @click="notification.close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            <strong v-if="showErrorCode">{{ notification.code }}</strong>
+
+            <div v-html="notification.message"></div>
+            
+            <p class="small" v-for="(trace, index) in notification.stackTrace" :key="index">
+                {{ trace.message }}
+            </p>
+        </div>
+    </div>
+</template>
+
+<script>
+import NotificationService from "../../services/NotificationService";
 import { isNullOrUndefined } from "../../helper/utils";
 import Vue from "vue";
 
-const NotificationService = require("../../services/NotificationService");
+export default {
 
-export default Vue.component("notifications", {
+    props: {
+        initialNotifications: Object,
+        logData: Array
+    },
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "initialNotifications",
-        "template"
-    ],
-
-    data: function()
+    data()
     {
         return {
             notifications: []
         };
     },
 
-    mounted: function()
+    computed: {
+        showErrorCode()
+        {
+            return this.logData.includes("show_error_code") || this.logData.includes("all");
+        },
+
+        filteredNotifications()
+        {
+            return this.notifications.filter(notification => !!notification.message);
+        }
+    },
+
+    mounted()
     {
         this.$nextTick(() =>
         {
@@ -38,7 +70,7 @@ export default Vue.component("notifications", {
          * Dissmiss the notification
          * @param notification
          */
-        dismiss: function(notification)
+        dismiss(notification)
         {
             NotificationService.getNotifications().remove(notification);
         },
@@ -46,7 +78,7 @@ export default Vue.component("notifications", {
         /**
          * show initial notifications from server
          */
-        showInitialNotifications: function()
+        showInitialNotifications()
         {
             for (const type in this.initialNotifications)
             {
@@ -70,4 +102,5 @@ export default Vue.component("notifications", {
             }
         }
     }
-});
+}
+</script>

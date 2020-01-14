@@ -103,10 +103,14 @@ import "./app/components/orderReturn/OrderReturn";
 import "./app/components/pageDesign/Carousel";
 import "./app/components/pageDesign/CookieBar";
 import "./app/components/pageDesign/PrivacySettings";
-import "./app/components/pageDesign/MobileNavigation";
-import "./app/components/pageDesign/Notifications";
-import "./app/components/pageDesign/Popper";
-import "./app/components/pageDesign/ShippingCountrySelect";
+import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
+Vue.component("mobile-navigation", MobileNavigation);
+import Notifications from "./app/components/pageDesign/Notifications.vue";
+Vue.component("notifications", Notifications);
+import Popper from "./app/components/pageDesign/Popper.vue";
+Vue.component("popper", Popper);
+import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
+Vue.component("shipping-country-select", ShippingCountrySelect);
 
 import "./app/components/wishList/WishList";
 import "./app/components/wishList/WishListCount";
