@@ -49,11 +49,6 @@
 }
 
 .footer {
-
-    @media print {
-        display: none;
-    }
-
     background-color: $footer-bg;
 
     a {

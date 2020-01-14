@@ -27,7 +27,7 @@
 <nav class="navbar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-        <div class="row mx-0">
+        <div class="row mx-0 position-relative">
             <div class="brand-wrapper">
                 <a class="navbar-brand" href="{{ Twig.print('urls.home') }}">
                     <img alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}" src="{{ companyLogoUrl }}" class="img-fluid" />

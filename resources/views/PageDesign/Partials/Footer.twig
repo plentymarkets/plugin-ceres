@@ -9,7 +9,7 @@
 {% set footerContainer = LayoutContainer.show("Ceres::Footer") | trim %}
 {% if footerContainer is empty %}
 
-<div class="footer">
+<div class="footer d-print-none">
 
     <div class="{% if topButtonPosition == "right" %}back-to-top color-light{% else %}back-to-top-center{% endif %} hidden-sm-down text-center cursor-pointer border mx-auto rounded-lg">
         <i class="fa fa-chevron-up fa-2x"></i>
@@ -132,7 +132,7 @@
     </div>
 </div>
 {% else %}
-    <div class="footer container-max">
+    <div class="footer container-max d-print-none">
         <div class="row">
             <div class="col clearfix">
                 {{ footerContainer | raw }}

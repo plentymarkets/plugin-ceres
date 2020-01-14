@@ -5,7 +5,7 @@
 {% block PartialHead %}
     <meta name="description" content="{{ trans('Ceres::Template.cancellationFormMetaDescription') }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_cancel_form") }}">
-    <title class="no-print">{{ trans("Ceres::Template.cancellationForm", {"hyphen": ""}) }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    <title class="d-print-none">{{ trans("Ceres::Template.cancellationForm", {"hyphen": ""}) }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
 {% endblock %}
 
 {% block PageBody %}
@@ -29,9 +29,9 @@
 
                 {{ LayoutContainer.show("Ceres::StaticPages.CancellationForm") }}
 
-				<hr class="my-5 no-print">
+				<hr class="my-5 d-print-none">
 
-				<div class="col-12 col-md-12 no-padding no-print">
+				<div class="col-12 col-md-12 no-padding d-print-none">
 					<button type="submit" class="btn btn-primary btn-medium float-right" onclick="window.print()">
 						<i class="fa fa-print" aria-hidden="true"></i> 
 						{{ trans("Ceres::Template.cancellationFormPrint") }}
