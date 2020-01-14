@@ -1,3 +1,15 @@
+//
+// Fonts
+//
+$root-directory:            ".." !default;
+
+$flag-icon-css-path:        "#{$root-directory}/images/flags" !default;
+$flag-icon-rect-path:       "/4x3" !default;
+$flag-icon-square-path:     "/1x1" !default;
+
+$fa-font-path:              "#{$root-directory}/documents/fonts" !default;
+
+
 @import "~font-awesome/scss/font-awesome";
 @import "~font-awesome/scss/variables";
 @import "~font-awesome/scss/mixins";
