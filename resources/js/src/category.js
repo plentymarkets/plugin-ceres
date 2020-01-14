@@ -45,7 +45,8 @@ import "bootstrap";
 
 import "./app/components/basket/AddItemToBasketOverlay";
 import "./app/components/basket/AddToBasket";
-import "./app/components/basket/BasketPreview";
+import BasketPreview from "./app/components/basket/BasketPreview.vue";
+Vue.component("basket-preview", BasketPreview);
 import BasketTotals from "./app/components/basket/BasketTotals.vue";
 Vue.component("basket-totals", BasketTotals);
 import Coupon from "./app/components/basket/Coupon.vue";
