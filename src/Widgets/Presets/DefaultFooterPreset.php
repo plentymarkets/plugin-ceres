@@ -75,11 +75,7 @@ class DefaultFooterPreset implements ContentPreset
                 'layout',
                 $numberOfFeatures === 2 ? 'onToOne' : 'oneToOneToOne'
             )
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.top.value", 3)
-            ->withSetting("spacing.margin.top.unit", null)
-            ->withSetting("spacing.margin.bottom.value", 3)
-            ->withSetting("spacing.margin.bottom.unit", null);
+            ->withSetting("customClass", "my-3");
 
         for ($i = 1; $i <= $numberOfFeatures && $i <= 3; $i++) {
             $storeFeatureTranslation = $this->translator->trans('Ceres::Template.footerStoreFeature' . $i);
