@@ -57,7 +57,7 @@
             </div>
             <div class="row py-3" v-show="isExpanded" :class="classes" :style="styles">
                 <div class="col-12 mb-3">
-                    <privacy-settings></privacy-settings>
+                    <privacy-settings :consent-groups="consentGroups"></privacy-settings>
                 </div>
                 <div class="col-12 col-md-6">
                     <a href="#" class="text-primary text-appearance d-inline-block mb-3" @click.prevent.stop="isExpanded = false">{{ trans("Ceres::Template.cookieBarBack") }}</a>

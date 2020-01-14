@@ -11,7 +11,8 @@ export default Vue.component("cookie-bar", {
             default: "#vue-cookie-bar"
         },
         styles: String,
-        classes: String
+        classes: String,
+        consentGroups: Array
     },
 
     data()
