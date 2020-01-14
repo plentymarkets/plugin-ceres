@@ -41,6 +41,7 @@ import "./components/basket/list/BasketListItem";
 import "./components/checkout/AcceptGtcCheck";
 import "./components/checkout/Checkout";
 import "./components/checkout/ContactWishInput";
+import "./components/checkout/CustomerSignInput";
 import "./components/checkout/PaymentProviderSelect";
 import "./components/checkout/PlaceOrder";
 import "./components/checkout/ShippingPrivacyHintCheck";
