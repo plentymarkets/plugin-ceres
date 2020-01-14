@@ -69,6 +69,11 @@ Vue.component("add-to-basket", {
             type: Array,
             default: () => []
         },
+        hasOrderProperties:
+        {
+            type: Boolean,
+            default: false
+        },
         hasPrice:
         {
             type: Boolean,
@@ -109,7 +114,7 @@ Vue.component("add-to-basket", {
         requiresProperties()
         {
             return App.config.item.requireOrderProperties &&
-                this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0;
+                (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0);
         },
 
         buttonClasses()
