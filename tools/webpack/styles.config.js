@@ -11,7 +11,8 @@ module.exports = env =>
         entry: {
             category: "./resources/scss/category.scss",
             item: "./resources/scss/item.scss",
-            checkout: "./resources/scss/checkout.scss"
+            checkout: "./resources/scss/checkout.scss",
+            shopbuilder: "./resources/scss/shopbuilder.scss"
         },
         module: {
             rules: [
