@@ -1,10 +1,16 @@
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-
 import { isDefined } from "../../helper/utils";
-import { navigateTo } from "services/UrlService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
+import { mapState } from "vuex";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
-Vue.component("place-order", {
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+
+export default Vue.component("place-order", {
+
+    mixins: [ButtonSizePropertyMixin],
+
     props:
     {
         template:
@@ -15,15 +21,6 @@ Vue.component("place-order", {
         targetContinue:
         {
             type: String
-        },
-        buttonSize:
-        {
-            type: [String, null],
-            default: null,
-            validator: value =>
-            {
-                return ["sm", "lg"].indexOf(value) !== -1;
-            }
         },
         paddingClasses:
         {
@@ -50,9 +47,9 @@ Vue.component("place-order", {
         {
             const classes = [];
 
-            if (isDefined(this.buttonSize))
+            if (isDefined(this.buttonSizeClass))
             {
-                classes.push(`btn-${this.buttonSize}`);
+                classes.push(this.buttonSizeClass);
             }
 
             if (isDefined(this.paddingClasses))
@@ -80,7 +77,7 @@ Vue.component("place-order", {
             return activeNewsletterSubscriptions;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             checkoutValidation: state => state.checkout.validation,
             contactWish: state => state.checkout.contactWish,
             isBasketLoading: state => state.basket.isBasketLoading,

@@ -108,14 +108,14 @@ export function setUrlParams(urlParams, pushState = true)
 
     if (pushState)
     {
-        window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+        window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash );
     }
     else
     {
-        window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params);
+        window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash );
     }
 
-    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url:pathName + params } }));
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url:pathName + params + window.location.hash } }));
 
     Array.prototype
         .slice
@@ -168,12 +168,7 @@ export function navigateTo(url)
 
 export function navigateToParams(urlParams)
 {
-    const pathName =
-        isDefined(store.state.navigation.currentCategory) &&
-        isDefined(store.state.navigation.currentCategory.url) ?
-            store.state.navigation.currentCategory.url :
-            window.location.pathname;
-    const url = normalizeUrl(pathName + "?" + encodeParams(urlParams));
+    const url = normalizeUrl(window.location.pathname + "?" + encodeParams(urlParams));
 
     window.location.assign(url);
 }
@@ -213,9 +208,9 @@ export function encodeParams(params, prefix)
     return prefix + "=" + encodeURIComponent(params);
 }
 
-export function setUrlByItem(itemData)
+export function setUrlByItem(itemData, keepVariationId)
 {
-    const url = vueApp.$options.filters.itemURL(itemData);
+    const url = vueApp.$options.filters.itemURL(itemData, keepVariationId);
     const title = document.getElementsByTagName("title")[0].innerHTML;
 
     window.history.replaceState({}, title, url);

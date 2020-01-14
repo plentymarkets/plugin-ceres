@@ -26,16 +26,7 @@ trait ItemListContext
     protected function initItemList( $defaultSearchFactories, $options, $scope = SearchOptions::SCOPE_CATEGORY )
     {
         $this->currentPage      = intval($options['page']);
-        if ($this->currentPage <= 0)
-        {
-            $this->currentPage = 1;
-        }
-
         $this->itemsPerPage     = intval($options['itemsPerPage']);
-        if ($this->itemsPerPage <= 0)
-        {
-            $this->itemsPerPage = 10;
-        }
         $this->itemSorting      = $options['sorting'];
         $this->query            = ['items' => $this->itemsPerPage, 'sorting' => $this->itemSorting];
 
@@ -80,7 +71,7 @@ trait ItemListContext
                 $this->itemCountTotal   = $externalSearch->getCountTotal();
                 $this->facets           = [];
 
-                return 0;
+                return;
             }
         }
 

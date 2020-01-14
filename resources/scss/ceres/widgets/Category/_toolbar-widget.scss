@@ -1,0 +1,33 @@
+.widget-toolbar {
+    .widget {
+        margin-bottom: 0;
+    }
+
+    .list-controls-inner {
+        .flex-fill {
+            > div {
+                @include media-breakpoint-up(sm) {
+                    display: inline-block !important;
+                }
+            }
+        }
+    }
+
+    .filter-collapse {
+        > div {
+            padding: 2rem;
+            background: $white;
+            border: 1px solid $gray-200;
+        }
+    }
+
+    .collapse-container:empty {
+        &::after {
+            display: block;
+            padding: .75rem;
+            color: $gray-700;
+            text-align: center;
+            content: attr(data-translation-empty);
+        }
+    }
+}

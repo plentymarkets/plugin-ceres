@@ -81,6 +81,18 @@
                 {# Shipping (gross) #}
 
                 {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+
+                {# Coupon #}
+                <template v-if="visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
+                    <dt class="font-weight-bold">
+                        {{ trans("Ceres::Template.basketCoupon") }}
+                    </dt><!--
+                --><dd class="font-weight-bold">
+                        ${ basket.couponDiscount | currency }
+                    </dd>
+                </template>
+                {# Coupon #}
+                
                 <hr>
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
 
@@ -94,17 +106,6 @@
                     </dd>
                 </template>
                 {# Total sum (net) #}
-
-                {# Coupon #}
-                <template v-if="visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
-                    <dt class="font-weight-bold">
-                        {{ trans("Ceres::Template.basketCoupon") }}
-                    </dt><!--
-                --><dd class="font-weight-bold">
-                        ${ basket.couponDiscount | currency }
-                    </dd>
-                </template>
-                {# Coupon #}
 
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
 
@@ -159,5 +160,13 @@
                 {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
             </dl>
         </div>
+
+        {% set deliveryExportTranslation = trans("Ceres::Template.basketExportDeliveryWarning", { from: "${ shopCountry && shopCountry.currLangName }", to: "${ currentShippingCountry && currentShippingCountry.currLangName }" }) %}
+        {% if deliveryExportTranslation | trim is not empty %}
+            <div v-if="basket.isExportDelivery" class="alert alert-info w-100">
+                {{ trans("Ceres::Template.basketExportDeliveryWarning", { from: "${ shopCountry && shopCountry.currLangName }", to: "${ currentShippingCountry && currentShippingCountry.currLangName }" }) }}
+            </div>
+        {% endif %}
+
     </div>
 </script>

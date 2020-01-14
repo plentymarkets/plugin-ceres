@@ -62,6 +62,7 @@
                                     <div>
                                         {% if orderData.order.deliveryAddress.address1 == 'PACKSTATION' or orderData.order.deliveryAddress.address1 == 'POSTFILIALE' %}
                                             {{ trans("Ceres::Template.addressPostNummer") }}
+                                            {{ orderData.order.deliveryAddress | addressOptionType(6) }}
                                         {% endif %}
                                         
                                         {{ orderData.order.deliveryAddress.address3 }}
@@ -96,7 +97,7 @@
 
                     {% set currentTemplate = services.template.getCurrentTemplate() %}
 
-                    {% if paymentMethoId != -1 and showAdditionalPaymentInformation == true %}
+                    {% if paymentMethodId != -1 and showAdditionalPaymentInformation == true %}
                         <change-payment-method
                             :current-order="{{ orderData.order | json_encode() }}"
                             :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
@@ -203,6 +204,14 @@
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
                                 <strong class="col-6 col-sm-9 col-md-7 text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</strong>
                             </div>
+
+                            {% for attribute in item.attributes %}
+                                <div>
+                                    <strong>{{ attribute.name }}: </strong>
+                                    <span>{{ attribute.value }}</span>
+                                </div>
+                            {% endfor %}
+
                             {% if item.orderProperties %}
                                 {% for property in item.orderProperties %}
                                     <div class="row">
@@ -245,7 +254,7 @@
             {% endfor %}
 
         </div>
-
+        
         {{ Totals.forOrder(orderData) }}
     </div>
 </div>

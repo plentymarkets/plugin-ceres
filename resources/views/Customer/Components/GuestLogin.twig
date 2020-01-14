@@ -1,29 +1,18 @@
 <script type="x/template" id="vue-guest-login">
     <div>
-        <form :id="'guest-login-form-' +_uid" class="mb-3 login-pwd-reset">
-            <div class="modal fade" id="guestLogin" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-title h3">{{ trans("Ceres::Template.loginOrderAsGuest") }}</div>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-unit" data-validate="mail">
-                                {% set uid_mail = uid() %}
-                                <input type="email" name="email" autocomplete="email" id="{{ uid_mail }}" v-model="email" data-autofocus>
-                                <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
-                            </div>
-                            <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
-                        </div>       
-                        <div class="modal-footer">
-                            <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium float-right">
-                                <i v-waiting-animation="isDisabled" class="fa fa-arrow-right" aria-hidden="true"></i>
-                                {{ trans("Ceres::Template.loginNext") }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <form ref="form" method="post" class="mb-3 login-pwd-reset">
+            <div class="input-unit" data-validate="mail">
+                {% set uid_mail = uid() %}
+                <input type="email" name="email" autocomplete="email" id="{{ uid_mail }}" v-model="email" data-autofocus>
+                <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
+            </div>
+            <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
+
+            <div class="text-right">
+                <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium btn-appearance" :class="buttonSizeClass">
+                    <i v-waiting-animation="isDisabled" class="fa fa-arrow-right" aria-hidden="true"></i>
+                    {{ trans("Ceres::Template.loginNext") }}
+                </button>
             </div>
         </form>
     </div>

@@ -1,18 +1,34 @@
-import ValidationService from "services/ValidationService";
-import { navigateTo } from "services/UrlService";
+import ValidationService from "../../../services/ValidationService";
+import { navigateTo } from "../../../services/UrlService";
+import Vue from "vue";
+import { isDefined, isNullOrUndefined } from "../../../helper/utils";
+import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixin";
 
-const ApiService = require("services/ApiService");
+const ApiService = require("../../../services/ApiService");
 
-Vue.component("guest-login", {
+export default Vue.component("guest-login", {
 
-    delimiters: ["${", "}"],
+    mixins: [ButtonSizePropertyMixin],
 
-    props: [
-        "template",
-        "backlink"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-guest-login"
+        },
+        backlink:
+        {
+            type: String
+        },
+        initialEmail:
+        {
+            type: String,
+            default: ""
+        }
+    },
 
-    data: function()
+    data()
     {
         return {
             email: "",
@@ -20,55 +36,57 @@ Vue.component("guest-login", {
         };
     },
 
+    created()
+    {
+        if (!isNullOrUndefined(this.initialEmail) && this.initialEmail.length > 0)
+        {
+            this.email = this.initialEmail;
+        }
+    },
+
     mounted()
     {
         this.$nextTick(() =>
         {
-            $("#guestLogin").on("hidden.bs.modal", () =>
+            // for old login view only (input in modal)
+            $(this.$parent.$refs.guestModal).on("hidden.bs.modal", () =>
             {
                 this.email = "";
-                this.resetError();
+                ValidationService.unmarkAllFields(this.$refs.form);
             });
         });
     },
 
-    methods: {
-        validate: function()
+    methods:
+    {
+        validate()
         {
-            ValidationService.validate($("#guest-login-form-" + this._uid))
-                .done(function()
+            ValidationService.validate(this.$refs.form)
+                .done(() =>
                 {
-                    this.sendEMail();
-                }.bind(this))
-                .fail(function(invalidFields)
+                    this.authGuest();
+                })
+                .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
                 });
         },
 
-        sendEMail: function()
+        authGuest()
         {
             this.isDisabled = true;
 
             ApiService.post("/rest/io/guest", { email: this.email })
-                .done(function()
+                .done(() =>
                 {
-                    if (this.backlink !== null && this.backlink)
-                    {
-                        navigateTo(decodeURIComponent(this.backlink));
-                    }
-                    else
-                    {
-                        // Go back to Homepage
-                        navigateTo(window.location.origin);
-                    }
-
-                }.bind(this));
-        },
-
-        resetError()
-        {
-            ValidationService.unmarkAllFields($("#guest-login-form-" + this._uid));
+                    navigateTo(
+                        isDefined(this.backlink) && this.backlink.length ? decodeURIComponent(this.backlink) : window.location.origin
+                    );
+                })
+                .fail(() =>
+                {
+                    this.isDisabled = false;
+                });
         }
     }
 });

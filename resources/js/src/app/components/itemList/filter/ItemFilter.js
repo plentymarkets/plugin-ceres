@@ -1,8 +1,8 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-Vue.component("item-filter", {
-
-    delimiters: ["${", "}"],
+export default Vue.component("item-filter", {
 
     props:
     {
@@ -14,6 +14,16 @@ Vue.component("item-filter", {
         facet:
         {
             type: Object
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -21,19 +31,7 @@ Vue.component("item-filter", {
     {
         facets()
         {
-            return this.facet.values.sort((facetA, facetB) =>
-            {
-                if (facetA.position > facetB.position)
-                {
-                    return 1;
-                }
-                if (facetA.position < facetB.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
+            return this.facet.values;
         },
 
         facetName()
@@ -46,7 +44,7 @@ Vue.component("item-filter", {
             return this.facet.name;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             selectedFacets: state => state.itemList.selectedFacets,
             isLoading: state => state.itemList.isLoading
         })

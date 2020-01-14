@@ -1,8 +1,10 @@
-import { get } from "lodash";
+import get from "lodash/get";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-Vue.component("item-data-table", {
+export default Vue.component("item-data-table", {
     props:
     {
         template:
@@ -29,7 +31,7 @@ Vue.component("item-data-table", {
 
     computed:
     {
-        ...Vuex.mapState({
+        ...mapState({
             currentVariation: state => state.item.variation.documents[0].data
         })
     },
@@ -101,14 +103,19 @@ Vue.component("item-data-table", {
         {
             let value;
 
-            if (path !== "item.variationDimensions")
-            {
-                value = get(this.currentVariation, path);
-            }
-            else
+            if (path === "item.variationDimensions")
             {
                 value = `${ get(this.currentVariation, "variation.lengthMM") }×${ get(this.currentVariation, "variation.widthMM") }×${ get(this.currentVariation, "variation.heightMM") } mm`;
             }
+            else if (path === "unit.names.name")
+            {
+                value = `${ get(this.currentVariation, "unit.content") } ${ get(this.currentVariation, "unit.names.name") }`;
+            }
+            else
+            {
+                value = get(this.currentVariation, path);
+            }
+
 
             return this.formatFieldData(value, path);
         },

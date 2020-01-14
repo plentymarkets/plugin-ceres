@@ -1,7 +1,10 @@
-import TranslationService from "services/TranslationService";
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
+import { isDefined } from "../../helper/utils";
+const NotificationService = require("../../services/NotificationService");
 
-Vue.component("shipping-profile-select", {
+export default Vue.component("shipping-profile-select", {
 
     props:
     {
@@ -19,16 +22,22 @@ Vue.component("shipping-profile-select", {
         {
             type: String,
             default: null
+        },
+        paymentContainerIsOverwritten:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         shippingProfileList: state => state.checkout.shipping.shippingProfileList,
         maxDeliveryDays: state => state.checkout.shipping.maxDeliveryDays,
         shippingProfileId: state => state.checkout.shipping.shippingProfileId,
         showError: state => state.checkout.validation.shippingProfile.showError,
         isBasketLoading: state => state.basket.isBasketLoading,
-        isCheckoutReadonly: state => state.checkout.readOnly
+        isCheckoutReadonly: state => state.checkout.readOnly,
+        selectedPaymentMethodId: state => state.checkout.payment.methodOfPaymentId
     }),
 
     /**
@@ -71,6 +80,46 @@ Vue.component("shipping-profile-select", {
                 NotificationService.error(
                     TranslationService.translate("Ceres::Template.checkoutCheckShippingProfile")
                 );
+            }
+        },
+
+        getTooltip(shippingProfileId, methodOfPaymentId)
+        {
+            let translationKey = "";
+
+            const params = {};
+
+            for (let i = 0; i < this.shippingProfileList.length; i++)
+            {
+                const shippingProfile = this.shippingProfileList[i];
+
+                if (shippingProfile.parcelServicePresetId === shippingProfileId)
+                {
+                    if (this.paymentContainerIsOverwritten)
+                    {
+                        translationKey = "Ceres::Template.checkoutChangePaymentMethodToHint";
+                        params.paymentMethodNames = shippingProfile.allowedPaymentMethodNames.join(",");
+                    }
+                    else
+                    {
+                        translationKey = "Ceres::Template.checkoutChangePaymentMethodHint";
+                    }
+                    break;
+                }
+            }
+
+            return TranslationService.translate(translationKey, params);
+        },
+
+        isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId)
+        {
+            if (isDefined(shippingProfile.excludedPaymentMethodIds))
+            {
+                return shippingProfile.excludedPaymentMethodIds.includes(selectedPaymentMethodId);
+            }
+            else
+            {
+                return false;
             }
         }
     }

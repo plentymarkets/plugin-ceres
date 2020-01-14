@@ -1,8 +1,16 @@
 import { transformVariationProperties } from "../../services/VariationPropertyService";
 import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState, mapGetters } from "vuex";
+import VariationSelect from "./VariationSelect";
 
-Vue.component("single-item", {
+export default Vue.component("single-item", {
+
+    components:
+    {
+        VariationSelect
+    },
 
     props:
     {
@@ -10,6 +18,16 @@ Vue.component("single-item", {
         {
             type: String,
             default: "#vue-single-item"
+        },
+        pleaseSelectOptionVariationId:
+        {
+            type: Number,
+            default: 0
+        },
+        initPleaseSelectOption:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -33,17 +51,22 @@ Vue.component("single-item", {
 
         transformedVariationProperties()
         {
-            return transformVariationProperties(this.currentVariation, ["empty"], "showInItemListing");
+            return transformVariationProperties(this.currentVariation, [], "showInItemListing");
         },
 
-        ...Vuex.mapState({
+        addPleaseSelectOption()
+        {
+            return App.config.item.showPleaseSelect;
+        },
+
+        ...mapState({
             currentVariation: state => state.item.variation.documents[0].data,
             isVariationSelected: state => state.variationSelect.isVariationSelected,
             attributes: state => state.variationSelect.attributes,
             units: state => state.variationSelect.units
         }),
 
-        ...Vuex.mapGetters([
+        ...mapGetters([
             "variationTotalPrice",
             "variationMissingProperties",
             "variationGroupedProperties",
@@ -54,12 +77,14 @@ Vue.component("single-item", {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
+        this.$store.commit("setPleaseSelectVariationId", this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch("setVariationSelect", {
             attributes:         this.attributesData,
             variations:         this.variations,
-            initialVariationId: this.currentVariation.variation.id
+            initialVariationId: this.currentVariation.variation.id,
+            isPleaseSelectOption: this.initPleaseSelectOption
         });
     },
 

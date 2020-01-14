@@ -1,11 +1,17 @@
+import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import OrderReturnHistoryListItem from "./OrderReturnHistoryListItem";
 
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
-import TranslationService from "services/TranslationService";
+export default Vue.component("order-return-history-list", {
 
-Vue.component("order-return-history-list", {
+    components:
+    {
+        OrderReturnHistoryListItem
+    },
 
     props: {
         template:

@@ -45,6 +45,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createStickyContainer();
         $this->createManufacturer();
         $this->createNameHeader();
+        $this->createTagsWidget();
         $this->createSeparatorWidget();
         $this->createItemVariationNumber();
         $this->createItemBundleWidget();
@@ -64,7 +65,7 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createStickyContainer()
     {
         $this->stickyContainer = $this->twoColumnWidget->createChild('second', 'Ceres::StickyContainerWidget')
-            ->withSetting('stickTo', 'stickToBody');
+            ->withSetting('stickTo', 'stickToParent');
     }
 
     private function createTwoColumnWidget()
@@ -134,7 +135,6 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createAddToBasketWidget()
     {
         $this->stickyContainer->createChild('sticky', 'Ceres::AddToBasketWidget')
-            ->withSetting('buttonSize', 'lg')
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 3)
             ->withSetting('spacing.margin.top.unit', null)
@@ -277,10 +277,10 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
-            
+
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
             ->withSetting('itemInformation',
-                            array("item.id", 
+                            array("item.id",
                                 "item.condition.names.name",
                                 "item.ageRestriction",
                                 "variation.externalId",
@@ -300,13 +300,26 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('appearance', 'primary')
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.bottom.value', 3)
-            ->withSetting('spacing.margin.bottom.unit', null);
+            ->withSetting('spacing.margin.bottom.unit', null)
+            ->withSetting('forceContent', false);
+    }
+
+    private function createTagsWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::TagsWidget')
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.bottom.value', 1)
+            ->withSetting('spacing.margin.bottom.unit', null)
+            ->withSetting('spacing.margin.top.value', 1)
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('spacing.margin.right.value', 1)
+            ->withSetting('spacing.margin.right.unit', null);
     }
 
     private function getShopBuilderDataFieldProvider($provider,$itemDataFields)
     {
         $query = "{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\$provider #}";
-        $dataFields = implode(",", $itemDataFields); 
+        $dataFields = implode(",", $itemDataFields);
         $query .= "{{ item_data_field($dataFields)}}";
         return $query;
     }

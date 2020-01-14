@@ -12,6 +12,7 @@ use Plenty\Plugin\Translation\Translator;
 class CheckoutContext extends CategoryContext implements ContextInterface
 {
     public $checkout = [];
+    public $assetName = "ceres-checkout";
 
     public function init($params)
     {

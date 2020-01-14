@@ -88,10 +88,38 @@
 
 {% endmacro %}
 
-{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl) %}
-
+{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl, spacingPadding, inlinePadding, showItemCount, expandableChildren, customEntries ) %}
     {% import _self as sidemenu %}
+
     {% for category in categories if category.details[0] %}
+        {% for entry in customEntries if entry.text is not empty %}
+            {% if entry.url.value is not empty %}
+                {% if entry.url.type == 'category' %}
+                    {% set __category = services.category.get(entry.url.value) %}
+                    {% set realUrl = services.category.getURL(__category) %}
+                {% endif %}
+                {% if entry.url.type == 'item' %}
+                    {% set __itemData = services.item.getVariation(entry.url.value) %}
+                    {% set realUrl = __itemData.documents[0].data | itemURL %}
+                {% endif %}
+                {% if entry.url.type == 'external' or entry.url.type == 'file' %}
+                    {% set realUrl = entry.url.value %}
+                {% endif %}
+            {% endif %}
+
+            {% if entry.position == loop.parent.loop.index or entry.position == 0 and loop.parent.loop.index == 1 %}
+            <ul>
+                <li class="nav-item">
+                    <a {% if realUrl is not empty %}href="{{ realUrl }}"{% endif %} class="nav-link
+                        {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                        {% if entry.url.openInNewTab %} target="_blank"{% endif %}
+                        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                        {{ entry.text }}
+                    </a>
+                </li>
+            </ul>
+            {% endif %}
+        {% endfor %}
 
         {% set currentUrl = currentScopeUrl %}
         {% if currentUrl is empty and urls.includeLanguage %}
@@ -99,17 +127,72 @@
         {% endif %}
 
         {% set currentUrl = currentUrl ~ "/" ~ category.details[0].nameUrl  %}
+        {% set isCategoryActive = false %}
+        {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
+            {% set isCategoryActive = true %}
+        {% endfor %}
+
         <ul>
-            <li class="nav-item{% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %} active{% endfor %}">
-                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link">{{ category.details[0].name }}</a>
+            <li class="nav-item{% if isCategoryActive %} active{% endif %}">
+                {% if category.children is not empty and expandableChildren %}
+                    <div v-sidenavigation-children="{ 
+                            categoryId: {{ category.id }}, 
+                            currentUrl: {{ currentUrl | json_encode }}, 
+                            isActive: {{ isCategoryActive | json_encode }}, 
+                            showItemCount: {{ showItemCount | json_encode }},
+                            childCount: {{ category.children | length }} }"
+                         class="expand_nav{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    </div>
+                {% endif %}
+
+                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
+                {% if isCategoryActive %} bg-appearance{% endif %}
+                {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                    {{ category.details[0].name }}
+                    {% if showItemCount == true and category.itemCount[0].count > 0 %}<div class="filter-badge">{{ category.itemCount[0].count }}</div>{% endif %}
+                </a>
+
                 {% if category.children is not empty %}
                     {% for breadcrumb in breadcrumbs if category.id == breadcrumb.id %}
-                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl) }}
+                        {{ sidemenu.get_sidemenu(breadcrumbs, category.children, currentUrl, spacingPadding, inlinePadding, showItemCount, expandableChildren) }}
                     {% endfor %}
                 {% endif %}
             </li>
         </ul>
 
+        {% if loop.index == categories | length %}
+            {% for entry in customEntries if entry.text is not empty and entry.position > categories | length %}
+                {% if entry.url.value is not empty %}
+                    {% if entry.url.type == 'category' %}
+                        {% set __category = services.category.get(entry.url.value) %}
+                        {% set realUrl = services.category.getURL(__category) %}
+                    {% endif %}
+                    {% if entry.url.type == 'item' %}
+                        {% set __itemData = services.item.getVariation(entry.url.value) %}
+                        {% set realUrl = __itemData.documents[0].data | itemURL %}
+                    {% endif %}
+                    {% if entry.url.type == 'external' or entry.url.type == 'file' %}
+                        {% set realUrl = entry.url.value %}
+                    {% endif %}
+                {% endif %}
+
+                <ul>
+                    <li class="nav-item">
+                        <a {% if realUrl is not empty %}href="{{ realUrl }}"{% endif %} class="nav-link
+                            {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                            {% if entry.url.openInNewTab %} target="_blank"{% endif %}
+                            {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+                            {{ entry.text }}
+                        </a>
+                    </li>
+                </ul>
+            {% endfor %}
+        {% endif %}
+        
     {% endfor %}
 
 {% endmacro %}

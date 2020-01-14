@@ -1,0 +1,83 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
+
+{{ Twig.set("enabledRoutes", Twig.call("config", ["IO.routing.enabled_routes"]) ~ " | split(\", \")") }}
+{{ Twig.set("translationMap",
+    {
+        invoice:            "Ceres::Template.orderConfirmationOrderDocumentsInvoice",
+        invoice_external:   "Ceres::Template.orderConfirmationOrderDocumentsInvoiceExternal",
+        delivery_note:      "Ceres::Template.orderConfirmationOrderDocumentsDeliveryNote",
+        order_confirmation: "Ceres::Template.orderConfirmationOrderDocumentsOrderConfirmation",
+        pickup_delivery:    "Ceres::Template.orderConfirmationOrderDocumentsPickupDelivery",
+        reversal_document:  "Ceres::Template.orderConfirmationOrderDocumentsReversalDocument"
+    } | json_encode)
+}}
+
+{{ Twig.set("requestOrderId", "request.get('orderId')") }}
+{{ Twig.set("requestAccessKey", "request.get('accessKey')") }}
+
+{{ Twig.set("orderDocuments", "[]") }}
+{{ Twig.for("document", "data.order.documents | default([])", "translationMap[document.type] is defined") }}
+    {{ Twig.set("orderDocuments", "orderDocuments | merge([document])") }}
+{{ Twig.endfor() }}
+
+{{ Twig.if("('order-document' in enabledRoutes or 'all' in enabledRoutes) and (orderDocuments | length > 0 or #{ isPreview | json_encode })") }}
+    <div class="widget widget-order-documents widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+            {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+        {{ Twig.if("orderDocuments | length > 1 or #{ isPreview | json_encode }") }}
+        {# dropdown for multiple documents #}
+            <div class="btn-group">
+                <button type="button"
+                    class="btn btn-appearance dropdown-toggle {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                    {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+                    {{ Twig.if("orderDocuments | length > 0") }}
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    {{ Twig.endif() }}>
+                    {{ Twig.trans("Ceres::Template.orderConfirmationOrderDocuments") }}
+                </button>
+
+                <div class="dropdown-menu">
+                    {{ Twig.for("document", "orderDocuments", "translationMap[document.type] is defined") }}
+                        <a class="dropdown-item"
+                            href="{{ Twig.print(Twig.call("urls.orderDocumentPreview", [Twig.var("document.id"), Twig.var("requestOrderId"), Twig.var("requestAccessKey")])) }}"
+                            target="_blank">
+                            {{ Twig.print(Twig.call("trans", [Twig.var("translationMap[document.type]")])) }}
+                        </a>
+                    {{ Twig.endfor() }}
+                </div>
+            </div>
+        {{ Twig.elseif("orderDocuments | length == 1") }}
+        {# single button #}
+            <a class="btn btn-appearance {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
+                href="{{ Twig.print(Twig.call("urls.orderDocumentPreview", [Twig.var("orderDocuments[0].id"), Twig.var("requestOrderId"), Twig.var("requestAccessKey")])) }}"
+                target="_blank">
+                {{ Twig.print(Twig.call("trans", [Twig.var("translationMap[orderDocuments[0].type]")])) }}
+            </a>
+        {{ Twig.endif() }}
+
+    </div>
+
+{{ Twig.elseif("#{ isPreview | json_encode }") }}
+
+    <div class="widget-placeholder">
+        <div>
+            <p class="title">{{ Twig.trans("Ceres::Widget.orderDocumentsLabel") }}</p>
+            <p class="description">{{ Twig.trans("Ceres::Widget.orderDocumentsPlaceholderDescription") }}</p>
+        </div>
+    </div>
+
+{{ Twig.endif() }}

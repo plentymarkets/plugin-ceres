@@ -2,12 +2,20 @@
 
 namespace Ceres\Helper;
 
+use Plenty\Plugin\Application;
 use Plenty\Plugin\Events\Dispatcher;
 
 class LayoutContainer
 {
     public static function getContents( $containerWithPluginName, $arguments )
     {
+        /** @var Application $app */
+        $app = pluginApp(Application::class);
+        if($app->isTemplateSafeMode())
+        {
+            return [];
+        }
+
         list($pluginName, $containerName) = explode("::", $containerWithPluginName);
 
         /** @var Dispatcher $dispatcher */

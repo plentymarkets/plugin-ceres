@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.directive("basket-item-sum",
     {
         update(el, binding)

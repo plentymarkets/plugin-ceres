@@ -1,4 +1,6 @@
-Vue.component("my-account", {
+import Vue from "vue";
+
+export default Vue.component("my-account", {
 
     template: `
     <div>

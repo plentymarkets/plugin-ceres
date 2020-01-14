@@ -1,7 +1,10 @@
 <?php
+
 namespace Ceres\Extensions;
 
+use IO\Helper\Utils;
 use IO\Helper\SafeGetter;
+use IO\Services\PropertyFileService;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
 use Plenty\Plugin\Templates\Twig;
@@ -36,7 +39,7 @@ class TwigItemDataField extends Twig_Extension
      */
     public function getName(): string
     {
-        return "Ceres_Extension_TwigItemDataField";
+        return 'Ceres_Extension_TwigItemDataField';
     }
 
     /**
@@ -49,7 +52,11 @@ class TwigItemDataField extends Twig_Extension
         return [
             $this->twig->createSimpleFunction('set_item_data_base', [$this, 'setItemDataBase']),
             $this->twig->createSimpleFunction('item_data_field', [$this, 'getDataField'], ['is_safe' => array('html')]),
-            $this->twig->createSimpleFunction('item_data_field_html', [$this, 'getDataFieldHtml'], ['is_safe' => array('html')]),
+            $this->twig->createSimpleFunction(
+                'item_data_field_html',
+                [$this, 'getDataFieldHtml'],
+                ['is_safe' => ['html']]
+            ),
         ];
     }
 
@@ -77,42 +84,56 @@ class TwigItemDataField extends Twig_Extension
      * @param null $filter
      * @return string
      */
-    public function getDataField($field, $filter = null, $directiveType = "text", $htmlTagType = "span")
+    public function getDataField($field, $filter = null, $directiveType = "text", $htmlTagType = "span", $linkType = "")
     {
-
         $twigPrint = SafeGetter::get($this->itemData, $field);
-        if(!is_null($filter))
-        {
-            try
-            {
+        if (!is_null($filter)) {
+            try {
                 /** @var Twig $twigRenderer */
                 $twigRenderer = pluginApp(Twig::class);
                 $twigPrint = $twigRenderer->renderString("{{ " . json_encode($twigPrint) . " | $filter }}");
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 $tmp = $e->getMessage();
             }
         }
 
-        if (is_null($directiveType))
-        {
+        if (is_null($directiveType)) {
             return $twigPrint;
         }
 
-        $vueDirective = isset($filter) ?
-            "v-$directiveType=\"getFilteredDataField('$field', '$filter')\"" :
-            "v-$directiveType=\"getDataField('$field')\"";
-    
-        if($htmlTagType == 'img')
-        {
-            $html = '<img src="'.$twigPrint.'" alt="'.$field.'">';
+        $vueDirectiveAttr = $directiveType === 'text' || $directiveType === 'html' ?
+            "v-$directiveType" :
+            ":$directiveType";
+
+        $vueDirectiveValue = isset($filter) ?
+            "slotProps.getFilteredDataField('$field', '$filter')" :
+            "slotProps.getDataField('$field')";
+
+        $additionalAttributes = [];
+
+        if ($directiveType === 'href') {
+            $additionalAttributes['v-text'] = $vueDirectiveValue;
         }
-        else
-        {
-            $html = "<$htmlTagType $vueDirective>$twigPrint</$htmlTagType>";
+
+        if ($linkType === 'file') {
+            $additionalAttributes['v-if'] = $vueDirectiveValue;
+            $additionalAttributes['target'] = '_blank';
+
+            $propertyFileService = pluginApp(PropertyFileService::class);
+            $vueDirectiveValue = "'{$propertyFileService->getPropertyFileUrl()}' + $vueDirectiveValue";
         }
-    
+
+        $attributes = '';
+        foreach ($additionalAttributes as $attrName => $attrValue) {
+            $attributes .= " $attrName=\"$attrValue\"";
+        }
+
+        if (in_array($htmlTagType, ['img'])) {
+            $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes v-if=\"$vueDirectiveValue\"/>";
+        } else {
+            $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes>$twigPrint</$htmlTagType>";
+        }
+
         return $html;
     }
 
@@ -123,7 +144,7 @@ class TwigItemDataField extends Twig_Extension
      */
     public function getDataFieldHtml($field, $filter = null)
     {
-        return $this->getDataField($field, $filter, "html");
+        return $this->getDataField($field, $filter, 'html');
     }
 
     public function formatAgeRestriction($age)
@@ -131,30 +152,25 @@ class TwigItemDataField extends Twig_Extension
         $age = intval($age);
         /** @var Translator $translator */
         $translator = pluginApp(Translator::class);
-        if ($age === 0)
-        {
-            return $translator->trans("Ceres::Template.singleItemAgeRestrictionNone", ["age" => $age]);
+        if ($age === 0) {
+            return $translator->trans('Ceres::Template.singleItemAgeRestrictionNone', ['age' => $age]);
+        } elseif ($age > 0 && $age < 18) {
+            return $translator->trans('Ceres::Template.singleItemAgeRestriction', ['age' => $age]);
+        } elseif ($age === 50) {
+            return $translator->trans('Ceres::Template.singleItemAgeRestrictionNotFlagged', ['age' => $age]);
+        } elseif ($age === 80) {
+            return $translator->trans(
+                'Ceres::Template.singleItemAgeRestrictionNotRequired',
+                ['age' => $age]
+            );
         }
-        else if ($age > 0 && $age < 18)
-        {
-            return $translator->trans("Ceres::Template.singleItemAgeRestriction", ["age" => $age]);
-        }
-        else if ($age === 50)
-        {
-            return $translator->trans("Ceres::Template.singleItemAgeRestrictionNotFlagged", ["age" => $age]);
-        }
-        else if ($age === 80)
-        {
-            return $translator->trans("Ceres::Template.singleItemAgeRestrictionNotRequired", ["age" => $age]);
-        }
-
-        return $translator->trans("Ceres::Template.singleItemAgeRestrictionUnknown", ["age" => $age]);
+        return $translator->trans('Ceres::Template.singleItemAgeRestrictionUnknown', ['age' => $age]);
     }
 
     public function formatDate($date)
     {
         return date(
-            pluginApp(Translator::class)->trans("Ceres::Template.devDateFormat"),
+            Utils::translate('Ceres::Template.devDateFormat'),
             strtotime($date)
         );
     }

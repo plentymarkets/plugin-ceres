@@ -83,6 +83,7 @@
     "variation.position",
     "variation.releasedAt",
     "variation.unitCombinationId",
+    "variation.unitsContained",
     "variation.weightG",
     "variation.weightNetG",
     "variation.widthMM",
@@ -94,5 +95,7 @@
     "variationProperties.property.display",
     "variationProperties.property.groups",
     "variationProperties.property.names.*",
-    "variationProperties.property.position"
+    "variationProperties.property.position",
+    "tags.id",
+    "tags.names.*"
 ]

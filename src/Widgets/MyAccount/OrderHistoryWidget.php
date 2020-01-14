@@ -3,10 +3,16 @@
 namespace Ceres\Widgets\MyAccount;
 
 use Ceres\Widgets\Helper\BaseWidget;
+use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
+use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
+use Ceres\Widgets\Helper\WidgetCategories;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
+use Ceres\Widgets\Helper\WidgetTypes;
+use IO\Helper\Utils;
 use IO\Services\SessionStorageService;
 use Plenty\Modules\Authorization\Services\AuthHelper;
-use Plenty\Modules\Order\Report\KPIs\OrderStatus;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
+use Plenty\Modules\Order\Status\Models\OrderStatus;
 
 class OrderHistoryWidget extends BaseWidget
 {
@@ -14,6 +20,54 @@ class OrderHistoryWidget extends BaseWidget
     private $lang = null;
 
     protected $template = "Ceres::Widgets.MyAccount.OrderHistoryWidget";
+
+    public function getData()
+    {
+        return WidgetDataFactory::make("Ceres::OrderHistoryWidget")
+            ->withLabel("Widget.orderHistoryLabel")
+            ->withPreviewImageUrl("/images/widgets/order-history.svg")
+            ->withType(WidgetTypes::MY_ACCOUNT)
+            ->withCategory(WidgetCategories::MY_ACCOUNT)
+            ->withPosition(100)
+            ->withMaxPerPage(1)
+            ->toArray();
+    }
+
+    public function getSettings()
+    {
+        /** @var WidgetSettingsFactory $settings */
+        $settings = pluginApp(WidgetSettingsFactory::class);
+
+        $settings->createCustomClass();
+        $settings->createAppearance();
+
+        $settings->createSelect("ordersPerPage")
+            ->withDefaultValue(5)
+            ->withName("Widget.orderHistoryOrdersPerPageLabel")
+            ->withTooltip("Widget.orderHistoryOrdersPerPageTooltip")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(5, "Widget.orderHistoryOrdersPerPage5")
+                    ->addEntry(10, "Widget.orderHistoryOrdersPerPage10")
+                    ->addEntry(25, "Widget.orderHistoryOrdersPerPage25")
+                    ->addEntry(50, "Widget.orderHistoryOrdersPerPage50")
+                    ->toArray()
+            );
+
+        $settings->createCheckbox("allowPaymentProviderChange")
+            ->withDefaultValue(true)
+            ->withName("Widget.orderHistoryAllowPaymentProviderChangeLabel")
+            ->withTooltip("Widget.orderHistoryAllowPaymentProviderChangeTooltip");
+
+        $settings->createCheckbox("allowReturn")
+            ->withDefaultValue(true)
+            ->withName("Widget.orderHistoryAllowReturnLabel")
+            ->withTooltip("Widget.orderHistoryAllowReturnTooltip");
+
+        $settings->createSpacing(false, true);
+
+        return $settings->toArray();
+    }
 
     protected function getItemsPerPage($widgetSettings)
     {
@@ -54,7 +108,9 @@ class OrderHistoryWidget extends BaseWidget
             /** @var AuthHelper $authHelper */
             $authHelper = pluginApp(AuthHelper::class);
             $statuses = $authHelper->processUnguarded(function() {
-                return pluginApp(OrderStatusRepositoryContract::class)->all();
+                /** @var OrderStatusRepositoryContract $orderStatusRepo */
+                $orderStatusRepo = pluginApp(OrderStatusRepositoryContract::class);
+                return $orderStatusRepo->all();
             });
 
             /** @var OrderStatus $status */
@@ -65,7 +121,7 @@ class OrderHistoryWidget extends BaseWidget
                     $this->statuses[] = $status;
                 }
             }
-            $this->lang     = pluginApp(SessionStorageService::class)->getLang();
+            $this->lang = Utils::getLang();
         }
 
         $idx = rand(0, count($this->statuses) - 1);

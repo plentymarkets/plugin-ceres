@@ -1,4 +1,6 @@
-Vue.component("order-return-history-list-item", {
+import Vue from "vue";
+
+export default Vue.component("order-return-history-list-item", {
 
     props: {
         template:

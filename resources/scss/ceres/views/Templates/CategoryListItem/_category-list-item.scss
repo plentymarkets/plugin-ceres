@@ -1,110 +1,114 @@
-.cmp-product-thumb{
-    padding: .8rem;
+.cmp-product-thumb {
     width: 100%;
+    padding: .8rem;
+    margin-bottom: $grid-gutter-width/2;
     overflow: hidden;
     background-color: #fff;
-    margin-bottom: $grid-gutter-width/2;
 
-    .tag-list span{
-        background-color: #4D4F4D;
+    .tag-list span {
         text-transform: uppercase;
         cursor: default;
+        background-color: #4d4f4d;
     }
 
-    .prices{
+    .prices {
         display: flex;
     }
 
-    .crossprice{
+    .crossprice {
         font-size: 1rem;
     }
 
-    .price-view-port{
+    .price-view-port {
         flex: 1 0 0;
     }
 
-    .thumb-title{
+    .thumb-title {
         min-height: 32px;
     }
 
-    .add-to-basket-lg-container{
-        -webkit-transform: rotate(360deg);
-        border-style: solid;
-        border-width: 0px 70px 70px 0;
-        border-color: transparent #F7F7F9 transparent transparent;
+    .add-to-basket-lg-container {
         position: absolute;
-        z-index: 99;
         top: 0;
         right: 0;
-        transition: 300ms ease-out;
+        z-index: 99;
         cursor: pointer;
+        border-color: transparent #f7f7f9 transparent transparent;
+        border-style: solid;
+        border-width: 0 70px 70px 0;
+        transition: 300ms ease-out;
+        -webkit-transform: rotate(360deg);
 
-        & > i{
-            right: -56px;
-            top: 11px;
+        & > i {
             position: absolute;
+            top: 11px;
+            right: -56px;
             transition: 300ms ease-out;
         }
 
-        &:hover{
+        &:hover {
             border-color: transparent $primary transparent transparent;
 
-            & > i{
+            & > i {
                 color: color-yiq($primary);
             }
         }
     }
 
-    .category-list-view-port{
-            display: none;
+    .category-list-view-port {
+        display: none;
     }
 
-    .thumb-background{
+    .thumb-background {
         position: absolute;
         top: -1px;
         right: -1px;
         bottom: -2px;
         left: -1px;
         background-color: #fff;
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
         border: 1px solid transparent;
-
-        transform-origin: top right;
-        transform: scaleX(1) scaleY(1);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 
         transition: all 200ms ease-in-out;
+        transform: scaleX(1) scaleY(1);
+
+        transform-origin: top right;
     }
 
-    .thumb-inner{
+    .thumb-inner {
         position: relative;
         height: 100%;
         transition: all 400ms;
     }
 
-    .thumb-image{
+    .thumb-image {
         position: relative;
-        width: 120px;
         display: inline-block;
+        width: 120px;
+        min-height: auto;
+        padding-bottom: 100%;
         vertical-align: top;
         cursor: pointer;
-    }
 
-    .main-image{
-        @include img-contain();
-        position: absolute;
-        background-color: #fff;
-        display: flex;
-        align-items: center;
+        > * {
+            @extend .center-xy;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     }
 
     //TODO create separate mixin
-    .special-tags{
-        z-index: 100;
+    .special-tags {
         position: absolute;
         top: 0;
         right: auto;
         bottom: auto;
         left: 0;
+        z-index: 100;
 
         padding: .5rem;
 
@@ -113,91 +117,91 @@
         .badge {
             display: block;
             padding: .3em .5em .2rem;
+            margin-bottom: 5px;
             font-size: .9rem;
             font-weight: 300;
-            box-shadow: 0 0 3px 0 rgba(0,0,0,.4);
-            margin-bottom: 5px;
+            box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
         }
     }
 
-    .thumb-content{
+    .thumb-content {
         position: relative;
         display: inline-block;
-        vertical-align: top;
-        width: calc( 100% - 120px );
+        width: calc(100% - 120px);
         height: auto;
         padding: 0 .8rem;
         margin-left: -.3em;
+        vertical-align: top;
         background-color: #fff;
 
         transition: all 200ms ease-in-out;
     }
 
-    .thumb-title{
-        display: block;
+    .thumb-title {
         position: relative;
-        text-align:left;
+        display: block;
         font-weight: 700;
-        color: $gray;
         line-height: 1.1em;
+        color: $gray-600;
+        text-align: left;
     }
 
-    .thumb-meta{
+    .thumb-meta {
         margin-top: .5rem;
-        text-align:left;
+        text-align: left;
 
-        .vat-porto-info{
+        .vat-porto-info {
             display: block;
-            white-space: nowrap;
             margin-top: 5px;
+            white-space: nowrap;
         }
 
     }
 
-    .crossprice{
+    .crossprice {
         font-size: .81em;
         font-weight: 700;
-        color: $gray-light;
+        color: $gray-500;
     }
 
     .price {
-        color: $gray;
-        line-height: 1.1;
-        font-weight: 700;
-        font-size: 1.2rem;
         min-height: 21px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1.1;
+        color: $gray-600;
     }
 
     .category-unit-price {
         font-size: .81em;
-        color: $gray-light;
+        color: $gray-500;
     }
 
-    .thumb-buy{
+    .thumb-buy {
         display: block;
     }
 
     .btn-group {
         position: absolute;
         bottom: 0;
-        left: calc(120px + 0.8rem);
+        left: calc(120px + .8rem);
         z-index: 1000;
-        transition:all .3s ease;
         opacity: 1;
+        transition: all .3s ease;
     }
 
-    .mobile-text-only{
+    .mobile-text-only {
         display: none;
     }
 
-    @include media-breakpoint-up(lg){
-        .btn-group{
-            right: 15px;
+    @include media-breakpoint-up(lg) {
+        .btn-group {
             position: absolute;
+            right: 15px;
         }
     }
 
-    @include media-breakpoint-down(xs){
+    @include media-breakpoint-down(xs) {
         .btn-group {
             width: 52%;
         }
@@ -215,14 +219,14 @@
         }
     }
 
-    @include media-breakpoint-down(md){
-        .btn-group{
-            margin-top: 5px;
+    @include media-breakpoint-down(md) {
+        .btn-group {
             position: inherit;
             width: 100%;
+            margin-top: 5px;
         }
 
-        .mobile-text-only{
+        .mobile-text-only {
             display: inline;
             margin-left: -8px;
         }
@@ -239,47 +243,47 @@
             min-height: 32px;
         }
 
-        .category-list-view-port{
+        .category-list-view-port {
             display: inline;
         }
     }
-    
-    @include media-breakpoint-up(sm){
+
+    @include media-breakpoint-up(sm) {
         padding: 0;
         margin-bottom: $grid-gutter-width;
 
-        .thumb-background{
+        .thumb-background {
             display: block;
         }
 
         .thumb-scroll-cmd {
             flex: 0 0 auto;
-            text-align: center;
             padding: .4rem;
+            text-align: center;
         }
 
-        .thumb-btn-buy{
+        .thumb-btn-buy {
             min-height: 2rem;
         }
 
-        .thumb-content{
-            padding: .8rem;
+        .thumb-content {
             width: 100%;
+            padding: .8rem;
             margin: 0;
         }
 
         .btn-group {
+            right: .8rem;
             bottom: 2.5rem;
             left: auto;
-            right: .8rem;
         }
 
-        .thumb-title{
+        .thumb-title {
             font-weight: 400;
             line-height: 1.5em;
         }
 
-        .thumb-image{
+        .thumb-image {
             width: 100%;
         }
 
@@ -294,7 +298,7 @@
                 transform: scale(1.05);
             }
 
-            .owl-nav [class*='owl-'] {
+            .owl-nav [class*="owl-"] {
                 opacity: 1;
             }
         }
@@ -303,18 +307,18 @@
     @include media-breakpoint-up(md){
 
     }
-    @include media-breakpoint-up(lg){
+    @include media-breakpoint-up(lg) {
         .btn-group {
             bottom: .8rem;
         }
         .btn-group {
-            transition:all .3s ease;
             opacity: 0;
+            transition: all .3s ease;
         }
         &:hover {
             .btn-group {
-                transition:all .3s ease;
                 opacity: 1;
+                transition: all .3s ease;
             }
         }
     }

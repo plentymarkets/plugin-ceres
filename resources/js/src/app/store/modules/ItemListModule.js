@@ -1,7 +1,6 @@
-import ApiService from "services/ApiService";
-import { getItemListUrlParams } from "services/ItemListUrlService";
-import { navigateToParams } from "services/UrlService";
-import TranslationService from "services/TranslationService";
+import { getItemListUrlParams } from "../../services/ItemListUrlService";
+import { navigateToParams } from "../../services/UrlService";
+import TranslationService from "../../services/TranslationService";
 
 const state =
     {
@@ -18,6 +17,24 @@ const state =
 
 const mutations =
     {
+        addFacets(state, facets)
+        {
+            const stateFacets = state.facets;
+
+            for (const facet of facets)
+            {
+                if (!stateFacets.find(fac => fac.id === facet.id))
+                {
+                    stateFacets.push(facet);
+                }
+            }
+
+            state.facets = stateFacets;
+        },
+
+        /**
+         * @deprecated use addFacets instead
+         */
         setFacets(state, facets)
         {
             state.facets = facets || [];
@@ -157,7 +174,7 @@ const actions =
             }
 
             commit("setItemListPage", 1);
-            dispatch("loadFacets");
+            dispatch("loadItemList");
         },
 
         selectPriceFacet({ dispatch, commit }, { priceMin, priceMax })
@@ -165,7 +182,7 @@ const actions =
             commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
             commit("setPriceFacetTag");
             commit("setItemListPage", 1);
-            dispatch("loadFacets");
+            dispatch("loadItemList");
         },
 
         selectItemListPage({ dispatch, commit }, page)
@@ -198,38 +215,6 @@ const actions =
             commit("setSelectedFacetsByIds", []);
 
             dispatch("loadItemList");
-        },
-
-        loadFacets({ commit, getters, rootState })
-        {
-            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
-            const params = {
-                categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                facets: getters.selectedFacetIdsForUrl.toString(),
-                priceMax: selectedPriceFacet ? selectedPriceFacet.priceMax : "",
-                priceMin: selectedPriceFacet ? selectedPriceFacet.priceMin : "",
-                query: state.searchString
-            };
-
-            commit("setIsItemListLoading", true);
-
-            return new Promise((resolve, reject) =>
-            {
-                ApiService.get("/rest/io/facet", params)
-                    .done(data =>
-                    {
-                        commit("setFacets", data.facets);
-                        commit("setIsItemListLoading", false);
-
-                        resolve(data);
-                    })
-                    .fail(error =>
-                    {
-                        commit("setIsItemListLoading", false);
-
-                        reject(error);
-                    });
-            });
         },
 
         loadItemList({ state, commit, getters })

@@ -1,6 +1,8 @@
 import { isDefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-Vue.component("last-seen-item-list", {
+export default Vue.component("last-seen-item-list", {
 
     props:
     {
@@ -33,7 +35,7 @@ Vue.component("last-seen-item-list", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         items(state)
         {
             return state.lastSeen.lastSeenItems.slice(0, this.maxItems);

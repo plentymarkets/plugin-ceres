@@ -1,0 +1,27 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass      = widget.settings.customClass.mobile %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set appearance       = widget.settings.appearance.mobile | default("primary") %}
+
+{{ Twig.set("contactId", "request.get(\"contactId\", 0)") }}
+{{ Twig.set("hash", "request.get(\"hash\", null)") }}
+{{ Twig.if("(contactId > 0 and hash is not null and not services.authentication.isLoggedIn()) or #{ isPreview | json_encode }") }}
+    {{ Twig.set("hashData", "services.userDataHash.getData(hash, contactId)") }}
+    {{ Twig.if("(hashData is not null and hashData.newMail is not null) or #{ isPreview | json_encode }") }}
+        <div class="widget widget-change-mail widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+                {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+            {{ Twig.component("Ceres::Customer.Components.ChangeEmailForm") }}
+            <div class="widget-inner">
+                <change-email-form
+                        :contact-id="{{ Twig.print("contactId") }}"
+                        hash="{{ Twig.print("hash") }}"
+                        new-mail="{{ Twig.print("hashData.newMail") }}">
+                </change-email-form>
+            </div>
+        </div>
+    {{ Twig.endif() }}
+{{ Twig.endif() }}

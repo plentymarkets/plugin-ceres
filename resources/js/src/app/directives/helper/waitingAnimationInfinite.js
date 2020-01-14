@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.directive("waiting-animation-infinite", {
 
     bind(el)

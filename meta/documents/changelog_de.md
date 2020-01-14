@@ -1,5 +1,302 @@
 # Release Notes für Ceres
 
+## v4.5.1 (2020-01-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.0...4.5.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden Varianteneigenschaften bei einem Variantenwechsel nicht korrekt aktualisiert. Dies wurde behoben.
+- Durch einen Fehler wurden Artikelbilder bei einem Variantenwechsel nicht korrekt aktualisiert. Dies wurde behoben.
+
+## v4.5.0 (2019-12-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.2...4.5.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Um die Weiterleitung von Tags auf verlinkte Artikel nutzen zu können, muss die Route **Tags** im Menü **Routing » Routen aktivieren** der **IO**-Konfiguration aktiviert werden.
+- Da Tags nun in der Artikeleinzelansicht sichtbar sind, sollten Tag-Namen und -Verlinkungen im Menü **Einrichtung » Einstellungen » Tags** überprüft werden, um die Anzeige von ungewolltem Inhalt zu vermeiden.
+- Falls "Ab"-Preise in der Artikeleinzelansicht verwendet werden sollen, muss der Übersetzungseintrag "dynamicVariationPrice" unter **Template** im Menü **CMS » Mehrsprachigkeit** angepasst werden.
+- Der Filter für Artikelbewertungen wurde in das Plugin **Kunden-Feedback** ausgelagert. Für die Einbindung eines Artikelbewertungs-Filter muss dieses Plugin auf die aktuelle Version 3.3 angehoben werden.
+
+### Hinzugefügt
+
+- Der Ceres-Assistent enthält jetzt Einstellungen für die Variantenauswahl, mit welchen die "Bitte wählen"-Option hinzugefügt und vorausgewählt werden kann.
+- In der Artikeleinzelansicht können nun "Ab"-Preise angezeigt werden, wenn die Option "Bitte wählen" für die Variantenauswahl aktiviert ist. Hierfür muss der Übersetzungswert "dynamicVariationPrice" unter **Template** im Menü **CMS » Mehrsprachigkeit** angepasst werden.
+- Die folgenden Widgets wurden zum ShopBuilder hinzugefügt, um die Kategorieansicht abbilden zu können: Seitennummerierung, Artikel pro Seite, Toolbar, Artikelraster, Artikelsortierung, Verfügbarkeitsfilter, Filter für Attribute, Eigenschaften und Merkmale, Preisfilter, Kategoriefilter, Herstellerfilter, Navigationsbaum, Hintergrundbild.
+- Das Tags-Widget für den ShopBuilder wurde hinzugefügt, mit welchem Tags in der Artikeleinzelansicht dargestellt werden können. Tags werden im Menü **Einrichtung » Einstellungen » Tags** eingerichtet.
+- Im Artikelraster-Widget kann die Spaltenanzahl nun abhängig vom Viewport eingestellt werden. Wir bedanken uns bei @daniel-mannheimer für den Beitrag.
+- Inhalte vom Typ **Artikelkategorie** werden nun in der Kategorieansicht berücksichtigt.
+- Die Vorlagen für die Artikelkategorie and die Suchergebnisse-Seite wurden hinzugefügt.
+- Es wurden Hilfsklassen hinzugefügt, um Widget-Einstellungen einfacher definieren zu können.
+- Facettendaten werden jetzt über die neue Funktion `addFacets()` anstatt `setFacets()` im ItemListModule in den Vue Store geschrieben, um doppelte Daten zu vermeiden. Die Funktion `setFacets()` wurde als `deprecated` markiert.
+
+### Geändert
+
+- Die Einstellungen "Position der Paginierung", "Erste Seite immer anzeigen" und "Letzte Seite immer anzeigen" wurden als `deprecated` gekennzeichnet und werden nun über den ShopBuilder vorgenommen.
+- Die Bezeichnung "Bitte wählen" in der Variantenauswahl wurde in "Keine Auswahl" geändert, um kenntlich zu machen, dass die gewählte Variante ein wählbarer Artikel ist, auch ohne ausgewähltem Attribut.
+- Die Bilder der Warenkorbartikel und der Artikeleinzelansicht werden nun nachgeladen, sobald sie sichtbar werden.
+- Icons von Versandprofilen werden ab sofort im Checkout angezeigt, sofern das Plugin der jeweiligen Versandart ein Icon zur Verfügung stellt.
+- Inhalte des Code-Widgets werden im abgesicherten Modus ab sofort als Klartext ausgegeben, damit diese bei fehlerhaften Eingaben weiterhin bearbeitet werden können.
+- Es wurde eine neue Einstellung zum Bilderbox- und Bilderkarussell-Widget hinzugefügt, mit der Bilder erst geladen werden, wenn diese sichtbar sind. Dadurch wird die Performance verbessert.
+- Die Sortierung der Facetten wurde aus Ceres entfernt und nach IO ausgelagert. Die Facetten kommen nun sortiert vom Server.
+- Die Vue-Komponente `contact-map` wurde als `deprecated` markiert.
+- Das Google Maps-Widget loggt nun Fehler.
+- Die folgenden Einstellungen zur Kategorieansicht wurden als `deprecated` markiert: "Kategoriebeschreibung über Artikelliste anzeigen", "Kategoriebeschreibung unter Artikelliste anzeigen" und "Kategorien als Filteroption bei Suchergebnissen anzeigen".
+
+### Behoben
+
+- Es kam zu Javascript-Fehlern, wenn ein Artikel in den Warenkorb gelegt wurde, der sich bereits im Warenkorb befand. Dieses Verhalten wurden behoben.
+- Die Layout-Container "Shopping cart: Before basket totals" und "Shopping cart: After basket totals" werden nun korrekt im Summen-Widget ausgegeben, wenn sich dieses nicht im Checkout befindet.
+- Im Microsoft Edge-Browser kam es beim Hinzufügen von Artikeln zum Warenkorb zu einem Javascript Fehler, der dazu führte, dass das "AddToBasket"-Overlay nicht angezeigt wurde. Dies wurde behoben.
+- Im Artikelbild-Widget wurde der Layout-Container "ImageCarouselOverride" nicht korrekt ausgegeben. Dies wurde behoben.
+- Das Überschreiben von Styles im Code-Widget durch ein Theme führte zu unleserlicher Syntax. Dieses Verhalten wurde behoben.
+- Das Seitenverhältnis des Artikelbild-Widgets ändert sich nun nicht mehr bei verschiedenen Spaltenbreiten.
+- Layout-Container, die über den ShopBuilder nicht mehr ausgegeben werden, wurden als `deprecated` markiert.
+- Bei einem erneuten Durchlaufen des Ceres-Assistenten wurde der zuvor eingestellte Wert für die Anzeige von Artikelpaketen nicht richtig angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurden unter bestimmten Umständen falsche Daten an Google Analytics gegeben. Dieses Verhalten wurde behoben.
+- Durch einen Fehler konnten Telefonnummer und Umsatzsteuer-ID nicht mehr aus einer Adresse entfernt werden. Dies wurde behoben.
+- Durch einen Fehler wurde die Shop-Aktion bei Liveshopping-Artikeln nicht ausgegeben. Dies wurde behoben. Vielen Dank an @Lauflust für diesen Beitrag.
+- Beim Öffnen eines Modals in Safari auf mobilen Endgeräten scrollte die Seite zum Seitenanfang. Dies wurde behoben.
+- Wenn der Button "Alle akzeptieren" in der CookieBar ein zweites Mal geklickt wurde, ohne dass zuvor die Seite erneut geladen wurde, konnte die CookieBar nicht mehr geschlossen werden. Dieses Verhalten wurde behoben.
+- Bei einer Gastbestellung war die Eingabe der E-Mail-Adresse nicht möglich, falls bereits eine E-Mail-Adresse eingetragen war. Dieses Verhalten wurde behoben.
+- Fehlermeldungen im Warenkorb waren aufgrund eines CSS-Fehlers unsichtbar. Dies wurde behoben.
+
+## v4.4.2 (2019-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.1...4.4.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Bei Aufpreisen für Bestellmerkmale, die am Artikel geflegt wurden, kam es in der Artikelliste zu Anzeigefehlern. Dieses Verhalten wurde behoben.
+- Durch einen Fehler wurden Attribute nicht auf der Bestellbestätigungsseite angezeigt, wenn diese mit dem ShopBuilder erstellt wurde. Dies wurde behoben.
+
+## v4.4.1 (2019-11-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.4.0...4.4.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben 
+
+- Bestellmerkmale wurden im Warenkorb und im Checkout erst nach einem erneuten Laden der Seite angezeigt und nicht am Auftrag mitgegeben. Dieses Verhalten wurde behoben.
+- Im Mein Konto-Bereich konnten Auftragsdetails nicht mehr eingesehen werden, sofern dieser nicht mit dem ShopBuilder erstellt wurde. Dies wurde behoben. 
+
+## v4.4.0 (2019-11-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.4...4.4.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Der Standardwert für die Einstellung "Kategorieebenen des Kategoriebaums" wurde auf 4 Ebenen festgelegt. Um weiterhin alle 6 Ebenen zu laden, muss die Einstellung angepasst werden. Dies hat unter Umständen negative Auswirkungen auf die Performance des Webshops.
+
+### Hinzugefügt
+
+- Es wurde ein CookieBar-Widget zum ShopBuilder hinzugefügt.
+- Es wurde ein Datenschutzeinstellungen-Widget zum ShopBuilder hinzugefügt.
+- Mit dem Widget "Weitere Informationen" wurde ein neues Strukturelement hinzugefügt, um Inhalte in einem Popover darstellen zu können.
+- Es wurde eine Ceres-Einstellung hinzugefügt, um nicht notwendige Cookies zu blockieren, bis der Benutzer der Verwendung zugestimmt hat.
+- Es wurde eine Ceres-Einstellung hinzugefügt, um die Anzahl der Ebenen für die Kategorie-Navigation festzulegen.
+- Die CSS-Klasse .widget-fw wurde hinzugefügt. Mit dieser Klasse können ShopBuilder-Widgets über die gesamte Bildschirmbreite skaliert werden.
+- Die CSS-Klasse .unfixed wurde hinzugefügt. Mit dieser Klasse können ShopBuilder-Widgets im Header gelöst werden, sodass diese beim Scrollen mitlaufen.
+- Es wurde ein abgesicherter Modus eingeführt, um Ceres ohne Änderungen durch Themes oder externe Plugins anzuzeigen.
+- Die Sprachdateien des Webshops sind nun in den Sprachen Französisch, Niederländisch und Polnisch verfügbar.
+- Das Datenfeld "Einheit" wurde zur Datenfeld-Auswahl im ShopBuilder hinzugefügt.
+- Über den ShopBuilder ist es nun möglich, Eigenschaften vom Typ Datei in der Artikelansicht anzuzeigen.
+
+### Geändert
+- In der Lieferlandauswahl wurden die Flaggen für die kanarischen Inseln, die niederländischen Antillen und Ceuta ergänzt.
+- Der **Mehr**-Button in der Auflistung einzelner Artikel im Warenkorb wird nun wieder dargestellt.
+- In den Summen im Warenkorb und Checkout werden Verkaufsgutscheine jetzt oberhalb der Gesammtsumme (Netto) angezeigt.
+- GoogleMaps wird nun erst nach Zustimmung durch den Seitenbesucher geladen.
+- Das Logging von Twig-Fehlern wurde verbessert.
+- Das Layout des Headers wird nun unabhängig von Breakpoints berechnet.
+- Die Standardeinstellung für das Scroll-Verhalten des Sticky-Widgets wurde auf **Scrollt nur innerhalb des Strukturelements** gesetzt.
+- Für die ShopBuilder-Kategorie "Startseite" wird nun bevorzugt der Meta-Titel als Tab-Titel verwendet, sofern dieser hinterlegt ist.
+- Nicht ausgefüllte Felder im Registrierungsformular werden nun in einer Fehlermeldung ausgegeben.
+
+### Behoben
+
+- Durch Änderungen an Filter-, Sortier- oder Artikel pro Seite-Einstellungen auf der mobilen Kategorieansicht wurde das Länderkürzel aus der URL entfernt. Dieses Verhalten wurde behoben.
+- Artikel, für die die Einstellung **Aktionsgutschein/POS-Rabatt: Nur mit Gutschein kaufbar** aktiv ist, können nun nicht mehr gekauft werden, wenn kein Aktionsgutschein eingelöst wurde.
+- Die Artikel-ID von Artikeln im Warenkorb wird nun korrekt ausgegeben.
+- Struktur-Widgets wurden im Header unter bestimmten Umständen nicht korrekt dargestellt. Dieses Verhalten wurde behoben.
+- Bestellmerkmale wurden nach einem Seitenwechsel nicht mehr im Warenkorb angezeigt. Dies wurde behoben.
+- Es wurden Rundungsfehler bei der Preisformatierung behoben.
+- Durch einen Fehler wurde der Preis am Artikel im Warenkorb beim Wechsel zwischen Brutto- und Nettopreis nicht aktualisiert. Dies wurde behoben.
+- Beim Generieren von Artikel- und Varianten-URLs kam es zu Fehlern, wenn die Kategorie des Artikels nicht mehr existierte. Dieses Verhalten wurde behoben.
+- Bei der Verwendung von mehreren FAQ-Widgets auf einer Seite werden die strukturierten Daten nun korrekt zusammengefasst.
+- Durch einen Fehler funktionierte die Weiterleitung des Registrieren-Widgets nicht korrekt. Dies wurde behoben.
+- Beim Hinzufügen eines Artikels aus der Wunschliste zum Warenkorb funktioniert die Mengenangabe nun korrekt.
+- Für Artikelpakete wurde in der Kategorie- und Listenansicht eine prozentuale Ersparnis anstelle des Artikepaket-Badges angezeigt. Dies wurde behoben.
+- Die Preise von Live-Shopping-Artikeln werden nun wieder korrekt angezeigt, wenn weder Angebotspreis noch UVP hinterlegt sind.
+- Auf der Bestellbestätigungsseite kam es teilweise zu falschen Berechnungen. Dies wurde behoben.
+- Durch einen Fehler wurde das Top Bar-Widget nicht mehr angezeigt, wenn alle Bestandteile in den Widget-Einstellungen ausgeblendet wurden. Dies wurde behoben.
+- Durch einen Fehler wurden prozentuale Bestellmerkmale nicht richtig ausgegeben. Dies wurde behoben.
+- Der Button zur Anlage einer Retoure wurde im Mein Konto-Bereich nicht angezeigt, wenn dieser nicht mit dem ShopBuilder erstellt wurde. Das Verhalten wurde behoben.
+- Beim AddToBasketOverlay konnte es zu JavaScript-Fehlern kommen. Dieses Verhalten wurde behoben.
+- Bei einem Lieferlandwechsel öffnete sich die Warenkorbvorschau, auch wenn sich der Nutzer bereits im Warenkorb befand. Dieses Verhalten wurde behoben.
+
+## v4.3.4 (2019-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.3...4.3.4" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO 
+
+- Für die Verwendung von Ceres Version 4.3.4 muss das Plugin IO auf die aktuelle Version 4.3.3 aktualisiert werden.
+
+### Behoben
+
+- Der Wert von Bestellmerkmalen vom Typ "Auswahl" wird wieder korrekt im Warenkorb dargestellt.
+- Veraltete Einstellungen für Button-Größen werden wieder korrekt interpretiert.
+- Auftragsdokumente konnten bei Gastbestellungen nicht angezeigt werden. Dies wurde behoben.
+- Nach dem Hinzufügen von Artikeln mit Bestellmerkmalen wird das Bestätigungs-Overlay wieder korrekt angezeigt.
+- Der Assistent hat einen ungültigen Wert für die Option zur Position der Warenkorbvorschau gespeichert. Dies wurde behoben.
+- Im Assistenten werden die Standardwerte für Einstellungen nun korrekt geladen.
+- Beim Aufsplitten von Artikelpaketen kam es zu einer fehlerhaften Anzeige. Dies wurde behoben.
+
+## v4.3.3 (2019-10-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.2...4.3.3" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Ein Fehler führte dazu, dass Varianteneigenschaften ohne Gruppen im Warenkorb nicht mehr angezeigt wurden. Dies wurde behoben.
+- Ein Fehler führte dazu, dass die Layout-Container im Auftragsdaten-Widget nicht korrekt mit Daten befüllt wurden. Dies wurde behoben.
+- Der LayoutContainer `Ceres::Scripts.AfterScriptsLoaded` wurde vor die Initalisierung von Vue.js verschoben, um das Registrieren eigener Vue-Komponenten wieder zu ermöglichen.
+- Ein Fehler führte dazu, dass keine ShopBuilder-Inhalte mehr angezeigt wurden, wenn das Datenschutz-Widget auf einer Seite platziert wurde. Dies wurde behoben.
+
+## v4.3.2 (2019-10-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.1...4.3.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler war die Registrierungsseite nicht mehr über den Header des Shops erreichbar. Dies wurde behoben.
+- Durch einen Fehler konnten Skripte nicht mehr mit `<script2>`-Tags ausgegeben werden. Dies wurde behoben.
+- Durch einen Fehler wurden auch im Live-Modus die Vue-Devtools angezeigt. Dies wurde behoben.
+
+## v4.3.1 (2019-10-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.3.0...4.3.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Die Ladezeit des **Assistenten** im plentymarkets Backend wurde verbessert.
+- Durch einen Fehler wurde die Sprache nicht richtig in die URL der mobilen Navigation eingefügt. Dies wurde behoben.
+
+## v4.3.0 (2019-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.1...4.3.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu bereitstellen** aktualisiert werden.
+- Für die Verwendung der Zahlungsart **Nachnahme** muss das Nachnahme-Plugin auf Version 1.0.8 aktualisiert werden.
+
+#### Hinzugefügt
+
+- Bei einer Ausfuhrlieferung wird nun eine Meldung unterhalb der Warenkorbsummen angezeigt, welche den Nutzer über potentielle zusätzliche Kosten informiert. Die Meldung kann ausgeblendet werden, indem der Wert "basketExportDeliveryWarning" im Menü **CMS » Mehrsprachigkeit** leer gespeichert wird.
+- Das ShopBuilder-Widget "Auftragsdokumente" wurde für die Kategorie "Bestellbestätigung" hinzugefügt. Darüber können Kunden Dokumente wie Rechnung, externe Rechnung, Lieferschein, Auftragsbestätigung, Abhollieferschein oder Stornobeleg runterladen.
+- Die folgenden Widgets wurden zum ShopBuilder hinzugefügt: Auftragsdaten, Auftragssummen, gekaufte Artikel, Registrierung, Login, Gastbestellung, Lieferland-Auswahl, Wunschliste, Newsletter abmelden, Retourenformular, Passwort ändern-Formular, E-mail ändern-Formular.
+- Die folgenden Vorlagen wurden zum ShopBuilder hinzugefügt: Bestellbestätigung, 404-Seite, Login, Registrierung, Newsletter-Abmeldung, Wunschliste, Retourenformular, Passwort ändern, E-Mail ändern, Warenkorb.  
+- Das Link-Button-Widget wurde zum ShopBuilder hinzugefügt. Dieses stellt Links zu Retouren und Sendungsverfolgung als Schaltflächen zur Verfügung.
+
+### Geändert
+
+- **Eigene Überschriften** des Artikellisten-Widgets werden nicht mehr in Großbuchstaben ausgegeben.
+- Die Artikelinformationen in der Bestellbestätigung beinhalten nun Attribute.
+- Die Attribute der Variante werden nun im Retouren-Widget des ShopBuilders ausgegeben.
+- Die Attribute der Variante werden nun im Auftragsdaten-Widget des ShopBuilders ausgegeben.
+- Die Menge der übertragenen Daten beim Bearbeiten des Warenkorbs wurde minimiert, um die Performance des Webshops zu verbessern.
+- Über **pluginApp** erzeugte Objekte werden nun vor der weiteren Verwendung in eigene Variablen gespeichert. Die direkte Verwendung neuer Instanzen führte in einzelnen Fällen zu Fehlern während der Plugin-Bereitstellung.
+- Wenn die Option "Auswahl des Inhalts immer anzeigen" im Attributauswahl-Widget inaktiv ist, wird die Inhaltsangabe in der Attributauswahl nun ausgeblendet, falls die Kombination der gewählten Attribute keine Variante ergibt.
+- Bestellmerkmale im Warenkorb werden nun nach ihrer Position sortiert.
+- Die strukturierten Daten auf Artikelseiten wurden überarbeitet.
+- Der Hinweistext auf dem "In den Warenkorb"-Button wurde für nicht verfügbare Artikel angepasst.
+- Parameter für Suchanfragen und für die Kategorieansicht werden nun validiert.
+- Die Einstellung "Callisto-URL-Struktur für Artikel aktivieren" wurde erweitert, sodass ab sofort die Einstellungen "Aufbau Artikel-URL" unter **Einrichtung » Mandant » Mandant wählen » SEO » URL-Aufbau » Artikel** berücksichtig wird.
+- Die Auswahl von Zahlungs- und Versandarten wurde angepasst. Ausgewählte Zahlungs- und Versandarten können einander nicht mehr ausschließen. Bei Auswahl einer inkompatiblen Kombination wird ein Hinweis eingeblendet und Zahlungs- und Versandart können neu gewählt werden.
+- Die Wunschlistenansicht wird nun vom ShopBooster gecached.
+- Das Registrierungsformular wird ab sofort auch über Google reCAPTCHA geprüft, sofern entsprechende Zugangsdaten in den Ceres-Einstellungen hinterlegt sind.
+- Dem Warenkorbinhalts-Widget wurden Einstellungen hinzugefügt, um Artikeldaten anzuzeigen.
+- Die Newsletter-Abmeldung meldet den Kunden nicht mehr aus allen Newslettern gleichzeitig ab, sondern nur aus dem, der angefordert wurde.
+- Um Fehler zu vermeiden, werden Lieferländer nun initial geladen, unabhängig davon, ob ein Widget die Lieferlandauswahl enthält.
+- Widget-Platzhalter im ShopBuilder werden nun innerhalb eines Strukturelements kleiner dargestellt, um den Text lesbarer zu machen.
+
+### Behoben 
+
+- Aufgrund von fehlender Mindesthöhe konnte das Code-Widget im ShopBuilder nicht mehr bearbeitet werden. Dies wurde behoben.
+- Wenn im ShopBuilder eine Kategorie für die Startseite verknüpft und die Startseite aufgerufen wurde, wurde der Name der Kategorie als Titel des Browser-Tabs verwendet, sofern kein Metatitel hinterlegt war. Ab sofort wird nur noch der Metatitel ausgegeben. Ist kein Metatitel hinterlegt, wird nichts ausgegeben.
+- Die Bestellmerkmale werden nun korrekt im Retouren-Widget des ShopBuilders ausgegeben.
+- Die Mindestgröße des Bilderkarussells konnte auf kleinen Displaygrößen zum Beschneiden des Bildes führen. Diese wurde entfernt.
+- Beim Verwenden von SVG-Dateien wurde das Shop-Logo im Internet Explorer 11 zu groß dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurden Kategoriebilder auf iOS Geräten inkorrekt dargestellt. Dies wurde behoben.
+- Die Darstellung von Widgets im Header war auf mobilen Geräten fehlerhaft. Dies wurde behoben.
+- Bei der Weiterleitung von systeminternen URLs auf mehrsprachige Kategorien des ShopBuilders kam es zu Problemen. Dies wurde behoben.
+- In der Einzelartikelansicht wird die Anzahleingabe nun nach einem Wechsel der Variante zurückgesetzt.
+- Bei Bildern aus dem Webspace wird nun im Bilderbox-Widget der hinterlegte Alternativtext ausgegeben.
+- Die Standardsprache für Suchmaschinen wird jetzt korrekt übermittelt.
+- Der Layout-Container im Auftragsdaten-Widget für das Überschreiben von Versandprofilen war fehlerhaft. Dies wurde behoben.
+- Durch einen Fehler wurde die Sprache nicht richtig in die URL der mobilen Navigation eingefügt. Dies wurde behoben.
+- Unter bestimmten Umständen wurde ein leeres `<title>`-Tag ausgegeben. Das Verhalten wurde behoben.
+- Durch einen Fehler wurde die Liste der zuletzt gesehenen Artikel innerhalb eines Tab-Widgets nicht geladen. Dies wurde behoben.
+- In einzelnen Fällen kam es zu Rundungsfehlern bei Preisangaben. Dies wurde behoben.
+- In den Auftragsdetails konnte es zu einer fehlerhaften Darstellung der Zwischensumme kommen. Dieses Verhalten wurde behoben.
+- Artikellisten, die über den ShopBuilder angelegt wurden, erhalten nur noch den "Alle ansehen"-Link wenn sie vom Typ "Kategorie" sind.
+- Durch einen Fehler wurde die Artikelansicht des ShopBuilders nicht im Internet Explorer geladen. Dies wurde behoben.
+- Durch einen Fehler konnten manche Attribute in der Artikelansicht nicht ausgewählt werden. Dies wurde behoben.
+- Der Übersetzungsschlüssel "orderConfirmationItemDiscount" war nicht in Englisch hinterlegt. Dies wurde behoben.
+- Die Postnummer wird nun auch im Mein Konto-Bereich und der Bestellbestätigung angezeigt.
+
+## v4.2.1 (2019-09-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.2.0...4.2.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Header und Footer können nun im ShopBuilder individuell für Kategorien und Inhaltstypen gestaltet werden.
+- Eigenschaften sind nun im Bestellvorgang nicht mehr auf den Typ "Kein" beschränkt. Zudem werden Eigenschaften nun im Warenkorb ausgegeben.
+
+### Behoben 
+
+- Durch einen Fehler wurden Hashes an der URL beim Seitenaufruf abgeschnitten. Dies wurde behoben.
+- Durch einen Fehler wurden die Daten der mobilen Navigation in Kategorien, die als Startseite verknüpft sind, nicht geladen. Dies wurde behoben.
+
+## v4.2.0 (2019-08-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.2...4.2.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- ShopBuilder-Startseiten werden ab sofort über eine eigene Kategorie im ShopBuilder abgebildet. Um die Startseite in Zukunft weiter verwenden zu können, muss eine neue Content-Kategorie angelegt und in der Verknüpfungsoberfläche des ShopBuilders verknüpft werden. Hierfür können Inhalte des Startseiten-Containers in die erstellte Kategorie kopiert werden. Der Container "Startseite" wie voraussichtlich mit Ceres 5.0.0 entfernt werden.
+
+### Hinzugefügt
+
+- Der Ceres Assistent ist jetzt im Menü **System » Assistenten** verfügbar.
+- Folgende Widgets wurden hinzugefügt, um eigene Kontaktformulare im ShopBuilder erstellen zu können: E-Mail-Formular, Textfeld (einzeilig), Textfeld (mehrzeilig), E-Mail-Feld, Auswahl, reCaptcha.
+- Es wurde eine ShopBuilder-Vorlage für die Standard-Kontaktseite hinzugefügt.
+- Das Widget "GoogleMaps" wurde nach Ceres überführt und um eine Einstellung für den Kartentyp erweitert: Es ist nun möglich die Karte als Straßenkarte, Satellitenkarte, Hybridkarte oder Terrainkarte anzuzeigen.
+- Das Widget "Kontaktdaten" wurde hinzugefügt.
+- Im Sticky-Widget ist jetzt einstellbar, ob das Widget innerhalb seines Strukturelements oder über den gesamten Seiteninhalt scrollen soll.
+- Die statischen Seiten für Widerrufsformular, Widerrufsrecht, AGB, Datenschutzerklärung und Impressum können nun mit dem ShopBuilder erstellt und bearbeitet werden.
+- Das Widget "Rechtliche Texte" wurde hinzugefügt. Dieses ermöglicht die Anzeige der rechtlichen Texte, die unter **System » Systemeinstellungen » Mandant » [Mandant Name] » Webshop » Rechtliches** hinterlegt sind.
+- Das Widget "Drucken" wurde hinzugefügt. Dieses öffnet den Druckdialog des Browsers.
+- Die ShopBuilder-Vorlagen für Widerrufsformular, Widerrufsrecht, AGB, Datenschutzerklärung und Impressum wurden hinzugefügt.
+- Das Herstellerlogo steht nun als Datenfeld im Inline-Editor der Artikeleinzelansicht zur Verfügung.
+- Die Widgets Bilderkarussell und Artikelbild wurden um eine Option zur Auswahl der Animation erweitert.
+- .css- und .js-Dateien erhalten ein dynamisches Suffix, um diese nach der Bereitstellung der Plugins aus Browser-Caches zu entfernen (Cache-Busting).
+- Es wird nun eine Warnung ausgegeben, wenn ein Artikel ohne Bestandsbegrenzung in einer Menge in den Warenkorb gelegt wird, die nicht vom Bestand gedeckt ist. Der hinzugefügte Wert im Menü **CMS » Mehrsprachigkeit** lautet "notificationsWarningOverselling".
+
+### Geändert
+
+- Um die Performance zu verbessern werden Kategorien für die mobile Navigation nun erst nachgeladen, wenn eine Auflösung erreicht ist, auf der diese auch angezeigt werden.
+- Die Einstellungen des Tabs "Kontaktformular" in der Ceres Konfiguration wurden als deprecated markiert und entfernt. Das Kontaktformular wird nun standardmäßig über den ShopBuilder eingerichtet.
+- Die Attributauswahl wurde um die Option "Auswahl des Inhalts immer anzeigen" erweitert. Wenn diese Option aktiv ist, wird die Inhaltsauswahl für Varianten immer angezeigt, wenn es mehr als einen Inhalt gibt.
+- Der ShopBuilder-Container "Startseite" wurde als deprecated markiert. Ab sofort muss eine eigene Kategorie angelegt werden, um die Startseite abzubilden.
+- Die Schaltfläche "In den Warenkorb" ist nun in der Artikelansicht deaktiviert, wenn die ausgewählte Variante nicht kaufbar ist.
+- Artikel, die mit einer leeren Artikelvorlage verknüpft sind, werden mit dem Layout der Standard-Artikelansicht von Ceres ausgegeben.
+- Beim Aufbau der Seitennavigation werden nur noch aktuell sichtbare Kategorien an den Browser übertragen, um Datenaufkommen zu sparen.
+- Die mobile Navigation zeigt nun auf Artikelseiten initial die Standardkategorie des Artikels an.
+
+### Behoben
+
+- Rabatte auf den Warenwert werden in Zwischensummen nun korrekt berücksichtigt.
+- Auf der Bestellbestätigungsseite und in der Auftragshistorie werden Rabatte auf einzelne Artikel jetzt ausgegeben.
+- Auf mobilen Endgeräten kam es bei der Verwendung der Vorlage für Artikelseiten zu Fehlern. Dies wurde behoben.
+- Durch einen Fehler funktionierte der Timer des Warenkorb-Modals nicht wie beabsichtigt. Dies wurde behoben.
+- Wenn ein Artikel mit einer Artikelvorlage verknüpft wurde, für deren Kategorie keinen Inhalt im Tab Template hinterlegt war, kam es zu TWIG-Fehlern beim Öffnen der Einzelansicht des Artikels. Dies wurde behoben.
+- Die Überschrift des Bilderbox-Widget wurde auf mobilen Geräten fehlerhaft dargestellt, wenn die Option "Bild und Text (vollbreite Fußzeile)" ausgewählt war. Dies wurde behoben.
+- Im Titelleisten-Widget wurde unter gewissen Umständen ein zusätzliches, leeres `<h1>`-Tag ausgegeben. Dies wurde behoben.
+- Durch einen Fehler wurde die Artikel-URL nicht richtig dargestellt, wenn die Option **Slash(/) am Ende von URLs** aktiviert war. Dies wurde behoben.
+- Durch Rundungsfehler kam es unter bestimmten Bedingungen zu fehlerhaften Preisdarstellungen. Dies wurde behoben.
+- Es wurde ein Fehler beim Newsletter-Widget behoben, durch welchen fälschlicherweise Fehlermeldungen in der Entwicklerkonsole des Browsers auftauchten.
+- Bei Artikeln mit der Shop-Aktion "Sonderangebot" im Zusammenhang mit einem aktiven Aktionspreis wurde der Rabatt falsch berechnet. Dies wurde behoben.
+- Die "In den Warenkorb"-Schaltfläche ist nun sichtlich deaktiviert, wenn ein Artikel nicht kaufbar ist, aber im Shop angezeigt wird.
+- Der Wert 'isVariationSelected' innerhalb der SingleItem-Komponente wird nun korrekt an das VueX-Modul gebunden.
+- Im `<title>`-Tag wurden Sonderzeichen nicht korrekt ausgegeben. Dies wurde behoben.
+- Auf Kategorieseiten kam es beim Auswählen von Filtern zu einem Fehler. Dies wurde behoben.
+- Die Benennungen der Artikelsortierungswerte "Zuerst aktualisierte Variante zuerst" und "Zuletzt aktualisierte Variante zuerst" waren vertauscht. Dies wurde behoben.
+- Durch einen Fehler wurden keine Fehlermeldungen in der Warenkorbvorschau angezeigt. Dies wurde behoben.
+- Die Abmeldung vom Newsletter funktionierte nicht, wenn die Option **Slash(/) am Ende von URLs** aktiviert war. Dies wurde behoben.
+- Die Einstellungen zu automatischen Erkennung der Browser-Sprache werden jetzt korrekt berücksichtigt.
+- Für die Gutscheineingabe kann jetzt im Menü ***CMS » Mehrsprachigkeit* ein Text gepflegt werden, welcher angezeigt wird, wenn der Kunde sich im **read-only-Checkout** befindet. Der enstprechende Eintrag heißt "couponReadonlyInfoText".
+
 ## v4.1.2 (2019-07-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.1.1...4.1.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
@@ -216,7 +513,7 @@
 - Das Laden des Kategoriebaums wurde überarbeitet und ist nun deutlich performanter.
 - Der Suche wurden Hinweistexte für **Suchergebnise gefunden** und **keine Suchergebnisse** hinzugefügt
 
-### Behoben  
+### Behoben
 
 - Durch einen Fehler wurde der Abstand zwischen Page-Body und -Header falsch berechnet. Dies wurde behoben.
 - Artikelpakete wurden nicht angezeigt, wenn die Einstellung **Artikelpaket durch Basisartikel ersetzen** gewählt wurde. Dies wurde behoben.
@@ -1465,7 +1762,7 @@
 ### Hinzugefügt
 
 - Das Feld **Firma** wird jetzt standardmäßig im Adressformular angezeigt, wenn in der Anrede **Firma** ausgewählt wird.
-- Wenn das Feld **Firma** im Tab **Checkout and My account** in der Konfig deaktiviert ist, wird die Option **Firma** in der Anrede ausgeblendet.  
+- Wenn das Feld **Firma** im Tab **Checkout and My account** in der Konfig deaktiviert ist, wird die Option **Firma** in der Anrede ausgeblendet.
 
 ### Geändert
 

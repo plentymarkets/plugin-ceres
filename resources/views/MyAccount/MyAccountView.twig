@@ -46,7 +46,7 @@
         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
         :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
         <div>
-            <div class="page-content myaccount container-max mb-5 mt-3">
+            <div class="page-content myaccount container-max mb-5 mt-3 pt-3 bg-white">
                 <!-- HEADER -->
                 <div class="row mb-5">
                     <div class="col-sm-9">
@@ -78,7 +78,7 @@
                             {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}
                         </h4>
                         <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountAll") }} {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}</p>
-                        <div class="shipping-addresses-select">
+                        <div class="invoice-addresses-select">
                             <invoice-address-select
                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
                                 :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"

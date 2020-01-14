@@ -1,6 +1,6 @@
 ![plentymarkets Logo](http://www.plentymarkets.eu/layout/pm/images/logo/plentymarkets-logo.jpg)
 
-# Ceres
+# Ceres ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build%20stable) ![Travis Build Beta](https://img.shields.io/travis/plentymarkets/plugin-ceres/beta?label=build%20beta) ![Travis Build Beta 5](https://img.shields.io/travis/plentymarkets/plugin-ceres/beta5?label=build%20beta5)
 
 This is the official **Ceres** plugin developed by plentymarkets. **Ceres** is the default template plugin for [plentymarkets 7](https://www.plentymarkets.eu/tour/) online stores.
 
@@ -11,6 +11,17 @@ This is a plugin for [plentymarkets 7](https://www.plentymarkets.com). The [IO](
 ## Installing
 
 For detailed information about plugin provisioning refer to [plentymarkets developers](https://developers.plentymarkets.com/dev-doc/basics#plugin-provisioning).
+
+## Quick start
+
+If you want make your own individual changes to the Ceres plugin, you need to follow the following steps.
+
+1. Install node.js in the LTS version from [nodejs.org](https://nodejs.org/en/).
+2. Open your console and navigate to the Ceres directory.
+3. Run the command **npm install**.
+4. After you have integrated your changes, run the command **npm run build**.
+
+Your Javascript, widget and SCSS changes have now been assembled locally. 
 
 ## Plugin documentation
 

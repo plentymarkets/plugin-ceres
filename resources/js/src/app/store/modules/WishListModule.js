@@ -1,9 +1,11 @@
-import ApiService from "services/ApiService";
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
         wishListIds: [],
-        wishListItems: []
+        wishListItems: [],
+        isWishListInitiallyLoading: false,
+        isLoading: false
     };
 
 const mutations =
@@ -36,33 +38,48 @@ const mutations =
         addWishListId(state, id)
         {
             state.wishListIds.push(id);
+        },
+
+        setIsWishListInitiallyLoading(state)
+        {
+            state.isWishListInitiallyLoading = true;
+        },
+
+        setIsWishListLoading(state, isLoading)
+        {
+            state.isLoading = !!isLoading;
         }
     };
 
 const actions =
     {
-        initWishListItems({ commit }, ids)
+        initWishListItems({ commit, state })
         {
             return new Promise((resolve, reject) =>
             {
-                if (ids && ids[0])
+                if (!state.isWishListInitiallyLoading)
                 {
-                    commit("setWishListIds", ids);
+                    commit("setIsWishListInitiallyLoading");
+                    commit("setIsWishListLoading", true);
 
-                    ApiService.get("/rest/io/variations/", { variationIds: ids, template: "Ceres::WishList.WishList" })
-                        .done(data =>
+                    ApiService.get("/rest/io/itemWishList")
+                        .done(response =>
                         {
-                            commit("setWishListItems", data.documents);
-                            resolve(data);
+                            commit("setWishListItems", response.documents);
+                            resolve(response.documents);
                         })
                         .fail(error =>
                         {
                             reject(error);
+                        })
+                        .always(() =>
+                        {
+                            commit("setIsWishListLoading", false);
                         });
                 }
                 else
                 {
-                    resolve();
+                    resolve(state.wishListItems);
                 }
             });
         },
@@ -76,7 +93,7 @@ const actions =
                     commit("removeWishListItem", wishListItem);
                 }
 
-                ApiService.delete("/rest/io/itemWishList/" + id)
+                ApiService.del("/rest/io/itemWishList/" + id)
                     .done(data =>
                     {
                         commit("removeWishListId", id);

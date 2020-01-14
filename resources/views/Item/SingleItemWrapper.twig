@@ -16,21 +16,16 @@
                 "@context"      : "http://schema.org/",
                 "@type"         : "Product",
                 "@id"           : "{{ itemData.variation.id }}",
-                "name"          : "{{ ItemName.get(itemData | itemName, itemData.variation.bundleType) }}",
-                "category"      : "item.",
+                "name"          : "{{ ItemName.get(itemData | itemName, itemData.variation.bundleType) | trim }}",
+                "category"      : "{{ defaultCategory.details[0].name }}",
                 "releaseDate"   : "{{ itemData.variation.releasedAt }}",
                 "image"         : "{{ itemData.images.all[0].urlPreview }}",
                 "identifier"    : "{{ itemData.variation.id }}",
-                "description"   : "{{ itemData.texts.description | filterTabs }}",
+                "description"   : "{{ itemData.texts.description | striptags | filterTabs }}",
                 "disambiguatingDescription" : "{{ itemData.texts.shortDescription }}",
                 "manufacturer"  : {
                     "@type"         : "Organization",
                     "name"          : "{{ itemData.item.manufacturer.externalName }}"
-                },
-                "model": {
-                    "@type"         : "ProductModel",
-                    "isVariantOf"   : "{{ itemData.item.id }}",
-                    "model"         : "{{ itemData.variation.model }}"
                 },
                 "offers": {
                     "@type"         : "Offer",
@@ -102,10 +97,15 @@
         <div class="single container-max page-content">
             <div class="row">
                 <div class="col">
-                    <single-item v-cloak item-data="{{ item | json_data }}" attributes-data="{{ attributes | json_data }}" variations="{{ variations | json_data }}">
-                        <template #default="{ getDataField: getDataField, getFilteredDataField: getFilteredDataField }">
-                            {{ shopBuilderTemplate | raw }}
-                        </template>
+                    <single-item
+                        v-cloak
+                        item-data="{{ item | json_data }}"
+                        attributes-data="{{ attributes | json_data }}"
+                        variations="{{ variations | json_data }}"
+                        :please-select-option-variation-id="{{ dynamicVariationId }}"
+                        :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"
+                        v-slot="slotProps">
+                        {{ shopBuilderTemplate | raw }}
                     </single-item>
                 </div>
             </div>

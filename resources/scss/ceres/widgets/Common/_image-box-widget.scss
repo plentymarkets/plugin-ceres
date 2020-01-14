@@ -1,58 +1,49 @@
-.widget.widget-image-box
-{
+.widget.widget-image-box {
     @include media-breakpoint-only(xs) {
-        padding-bottom: 0;
         min-height: 10rem;
+        padding-bottom: 0;
     }
 
-    > img
-    {
+    > img {
         position: absolute;
-        max-width: 100%;
-        max-height: 100%;
         top: 50%;
         left: 50%;
+        max-width: 100%;
+        max-height: 100%;
         transform: translate(-50%, -50%);
 
-        &.img-cover
-        {
+        &.img-cover {
             min-width: 100%;
             min-height: 100%;
             object-fit: cover;
         }
     }
 
-    > .widget-inner
-    {
-        padding: 1.5rem;
+    > .widget-inner {
         display: flex;
+        padding: 1.5rem;
 
-        .widget-caption
-        {
-            transition: 300ms all ease;
+        .widget-caption {
             word-break: break-word;
+            transition: 300ms all ease;
 
-            h2, .h2
-            {
+            h2,
+            .h2 {
                 margin: 0;
                 font-size: 1.75rem;
             }
         }
     }
 
-    &.widget-image-box-fullwidth
-    {
-        > .widget-inner
-        {
-            .widget-caption
-            {
-                width: 100%;
+    &.widget-image-box-fullwidth {
+        > .widget-inner {
+            .widget-caption {
                 display: flex;
                 align-items: center;
+                width: 100%;
                 padding: 1rem;
 
-                > div
-                {
+                > div {
                     display: block;
                     width: 100%;
                 }
@@ -60,124 +51,97 @@
         }
     }
 
-    &.widget-image-box-inline-caption
-    {
-        > .widget-inner
-        {
+    &.widget-image-box-inline-caption {
+        > .widget-inner {
             align-items: flex-end;
 
-            .widget-caption
-            {
+            .widget-caption {
                 padding: 0 1.5rem;
             }
         }
     }
 
-    &.widget-image-box-block-caption
-    {
-        > .widget-inner
-        {
+    &.widget-image-box-block-caption {
+        > .widget-inner {
             padding: 0;
 
-            .widget-caption
-            {
+            .widget-caption {
                 position: absolute;
-                left: 0;
                 right: 0;
                 bottom: 0;
+                left: 0;
                 width: 100%;
-                padding: 1rem;
                 max-height: 100%;
+                padding: 1rem;
             }
         }
     }
 
-    &.widget-image-box-no-caption
-    {
-        > .widget-inner
-        {
-            .widget-caption
-            {
+    &.widget-image-box-no-caption {
+        > .widget-inner {
+            .widget-caption {
                 display: none;
             }
         }
     }
 
 
-    &.widget-primary
-    {
-        .widget-caption
-        {
+    &.widget-primary {
+        .widget-caption {
             @include widget-bg-variant( rgba($primary, .8) );
         }
 
-        a[href].widget-inner:hover .widget-caption
-        {
+        a[href].widget-inner:hover .widget-caption {
             @include widget-bg-variant( rgba($primary, .9) );
         }
     }
 
-    &.widget-secondary
-    {
-        .widget-caption
-        {
+    &.widget-secondary {
+        .widget-caption {
             @include widget-bg-variant( rgba($secondary, .8) );
         }
 
-        a[href].widget-inner:hover .widget-caption
-        {
+        a[href].widget-inner:hover .widget-caption {
             @include widget-bg-variant( rgba($secondary, .9) );
         }
     }
 
-    &.widget-success
-    {
-        .widget-caption
-        {
+    &.widget-success {
+        .widget-caption {
             @include widget-bg-variant( rgba($success, .8) );
         }
 
-        a[href].widget-inner:hover .widget-caption
-        {
+        a[href].widget-inner:hover .widget-caption {
             @include widget-bg-variant( rgba($success, .9) );
         }
     }
 
-    &.widget-info
-    {
-        .widget-caption
-        {
+    &.widget-info {
+        .widget-caption {
             @include widget-bg-variant( rgba($info, .8) );
         }
 
-        a[href].widget-inner:hover .widget-caption
-        {
+        a[href].widget-inner:hover .widget-caption {
             @include widget-bg-variant( rgba($info, .9) );
         }
     }
 
-    &.widget-warning
-    {
-        .widget-caption
-        {
+    &.widget-warning {
+        .widget-caption {
             @include widget-bg-variant( rgba($warning, .8) );
         }
 
-        a[href].widget-inner:hover .widget-caption
-        {
+        a[href].widget-inner:hover .widget-caption {
             @include widget-bg-variant( rgba($warning, .9) );
         }
     }
 
-    &.widget-danger
-    {
-        .widget-caption
-        {
+    &.widget-danger {
+        .widget-caption {
             @include widget-bg-variant( rgba($danger, .8) );
         }
 
-        a[href].widget-inner:hover .widget-caption
-        {
+        a[href].widget-inner:hover .widget-caption {
             @include widget-bg-variant( rgba($danger, .9) );
         }
     }
@@ -187,84 +151,67 @@
     font-size: 2rem;
 }
 
-.widget-image-box-caption
-{
+.widget-image-box-caption {
     h1,
     h2,
     h3,
-    p
-    {
+    p {
         margin: 0;
     }
 
-    h1
-    {
-        font-size: 2rem;
+    h1 {
         padding-top: 1rem;
         padding-bottom: 1rem;
+        font-size: 2rem;
     }
 
-    h2
-    {
-        font-size: 1.75rem;
+    h2 {
         padding-top: .75rem;
         padding-bottom: .75rem;
+        font-size: 1.75rem;
     }
 
-    h3
-    {
-        font-size: 1.5rem;
+    h3 {
         padding-top: .5rem;
         padding-bottom: .5rem;
+        font-size: 1.5rem;
     }
 
-    p
-    {
+    p {
         padding-top: .2rem;
         padding-bottom: .2rem;
     }
 
-    &.fullwidth
-    {
+    &.fullwidth {
         h1,
         h2,
-        h3
-        {
+        h3 {
             text-transform: uppercase;
         }
 
-        h1
-        {
-            @include media-breakpoint-up(sm)
-            {
+        h1 {
+            @include media-breakpoint-up(sm) {
                 font-size: 4rem;
             }
-            @include media-breakpoint-up(lg)
-            {
+            @include media-breakpoint-up(lg) {
                 font-size: 6rem;
             }
         }
 
-        h2
-        {
-            @include media-breakpoint-up(sm)
-            {
+        h2 {
+            @include media-breakpoint-up(sm) {
                 font-size: 2.5rem;
             }
-            @include media-breakpoint-up(lg)
-            {
+            @include media-breakpoint-up(lg) {
                 font-size: 4rem;
             }
         }
 
-        h3
-        {
-            @include media-breakpoint-up(sm)
-            {
+        h3 {
+            @include media-breakpoint-up(sm) {
                 font-size: 1.5rem;
             }
-            @include media-breakpoint-up(lg)
-            {
+            @include media-breakpoint-up(lg) {
                 font-size: 2.5rem;
             }
         }

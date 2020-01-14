@@ -1,4 +1,7 @@
-Vue.component("item-filter-tag-list", {
+import Vue from "vue";
+import { mapState, mapMutations, mapActions } from "vuex";
+
+export default Vue.component("item-filter-tag-list", {
 
     props:
     {
@@ -6,10 +9,20 @@ Vue.component("item-filter-tag-list", {
         {
             type: String,
             default: "#vue-item-filter-tag-list"
+        },
+        marginClasses:
+        {
+            type: String,
+            default: null
+        },
+        marginInlineStyles:
+        {
+            type: String,
+            default: null
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         tagList: state => state.itemList.selectedFacets
     }),
 
@@ -27,11 +40,11 @@ Vue.component("item-filter-tag-list", {
             this.loadItemList();
         },
 
-        ...Vuex.mapMutations([
+        ...mapMutations([
             "resetAllSelectedFacets"
         ]),
 
-        ...Vuex.mapActions([
+        ...mapActions([
             "selectFacet",
             "loadItemList"
         ])

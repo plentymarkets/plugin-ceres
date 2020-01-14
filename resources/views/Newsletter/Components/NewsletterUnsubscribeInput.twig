@@ -1,0 +1,19 @@
+<script type="x/template" id="vue-newsletter-unsubscribe-input">
+    <form :id="'newsletter-unsubscribe-input-form_' + _uid" method="post" @submit.prevent="validateData">
+        <div class="row">
+            <div class="col-12">
+                <div class="input-unit mt-3" data-validate="mail">
+                    <label for="email-input-id">{{ trans("Ceres::Template.newsletterEmail") }}</label>
+                    <input type="email" name="email" autocomplete="email" class="form-control" id="email-input-id" v-model="email">
+                </div>
+
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
+                        <i class="fa fa-paper-plane-o" v-waiting-animation="isDisabled" aria-hidden="true"></i>
+                        <span>{{ trans("Ceres::Template.newsletterUnsubscribeButtonLabel") }}</span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </form>
+</script>

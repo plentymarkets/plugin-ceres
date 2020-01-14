@@ -4,7 +4,7 @@
     .order-item {
         > div:nth-child(odd) {
             > div.container-clickable {
-                background: $gray-lightest;
+                background: $gray-100;
             }
         }
     }
@@ -21,8 +21,8 @@
 
         &.collapsed {
             .fa-chevron-up {
-                transform: scaleY(-1);
                 top: 2px;
+                transform: scaleY(-1);
             }
         }
         .fa-chevron-up {
@@ -40,9 +40,9 @@
             .icons {
                 margin-top: -5px;
                 .fa {
+                    margin-bottom: -6px;
                     font-size: 2rem;
                     vertical-align: middle;
-                    margin-bottom: -6px;
                 }
             }
         }
@@ -54,8 +54,8 @@
                 }
             }
             .fa-chevron-up {
-                right: 1.15rem;
                 top: 0;
+                right: 1.15rem;
                 left: auto;
             }
         }
@@ -64,10 +64,10 @@
     .container-middle {
         .item {
             img {
-                height: 80px;
                 width: 80px;
-                object-fit: contain;
+                height: 80px;
                 vertical-align: middle;
+                object-fit: contain;
             }
             .item-description {
                 text-align: left;
@@ -90,7 +90,8 @@
 
     .container-bottom {
         .address-list {
-            span, strong {
+            span,
+            strong {
                 display: block;
             }
         }
@@ -110,7 +111,7 @@
     }
 
     .container-bottom {
-        background: $gray-lightest;
+        background: $gray-100;
 
         .button-spacer {
             margin-top: auto;
@@ -123,7 +124,7 @@
         }
         @include media-breakpoint-down(sm) {
             .button-container {
-                margin-top: 0.5rem;
+                margin-top: .5rem;
             }
         }
     }

@@ -1,7 +1,9 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-Vue.component("country-select", {
+export default Vue.component("country-select", {
 
     delimiters: ["${", "}"],
 
@@ -28,10 +30,6 @@ Vue.component("country-select", {
             {}
         }
     },
-
-    jsonDataFields: [
-        "countryList"
-    ],
 
     data()
     {
@@ -72,8 +70,9 @@ Vue.component("country-select", {
             return this.requiredAddressFields[iso];
         },
 
-        ...Vuex.mapState({
-            shippingCountryId: state => state.localization.shippingCountryId
+        ...mapState({
+            shippingCountryId: state => state.localization.shippingCountryId,
+            countryList: state => state.localization.shippingCountries
         })
     },
 
@@ -82,18 +81,6 @@ Vue.component("country-select", {
      */
     created()
     {
-        this.countryList.sort(function(first, second)
-        {
-            if (first.currLangName < second.currLangName)
-            {
-                return -1;
-            }
-            if (first.currLangName > second.currLangName)
-            {
-                return 1;
-            }
-            return 0;
-        });
         this.updateSelectedCountry();
     },
 

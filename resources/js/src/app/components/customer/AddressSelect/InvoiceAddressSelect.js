@@ -1,9 +1,15 @@
-import TranslationService from "services/TranslationService";
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
+import { error } from "../../../services/NotificationService";
+import AddressSelect from "./AddressSelect";
 
-Vue.component("invoice-address-select", {
+export default Vue.component("invoice-address-select", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        AddressSelect
+    },
 
     template: `
         <address-select 
@@ -58,7 +64,7 @@ Vue.component("invoice-address-select", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         billingAddressId: state => state.address.billingAddressId,
         billingAddressList: state => state.address.billingAddressList,
         showError: state => state.checkout.validation.invoiceAddress.showError
@@ -122,7 +128,7 @@ Vue.component("invoice-address-select", {
 
             if (showError)
             {
-                NotificationService.error(
+                error(
                     TranslationService.translate("Ceres::Template.checkoutCheckInvoiceAddress")
                 );
             }

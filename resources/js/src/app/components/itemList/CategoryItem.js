@@ -1,4 +1,7 @@
-Vue.component("category-item", {
+import Vue from "vue";
+import { mapState } from "vuex";
+
+export default Vue.component("category-item", {
     props:
     {
         template:
@@ -33,6 +36,11 @@ Vue.component("category-item", {
         {
             type: String,
             default: null
+        },
+        urlWithVariationId:
+        {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -63,21 +71,8 @@ Vue.component("category-item", {
             return this.item.texts;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             showNetPrices: state => state.basket.showNetPrices
         })
-    },
-
-    methods:
-    {
-        loadFirstImage()
-        {
-            const categoryImageCarousel = this.$refs.categoryImageCarousel;
-
-            if (categoryImageCarousel)
-            {
-                categoryImageCarousel.loadFirstImage();
-            }
-        }
     }
 });

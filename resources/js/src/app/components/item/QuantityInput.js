@@ -2,8 +2,10 @@ import { floatLength, formatFloat, limit } from "../../helper/number";
 import { defaultValue, isDefined, isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import { debounce } from "../../helper/debounce";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-Vue.component("quantity-input", {
+export default Vue.component("quantity-input", {
 
     delimiters: ["${", "}"],
 
@@ -121,7 +123,7 @@ Vue.component("quantity-input", {
             return this.$options.filters.numberFormat(this.compValue);
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             basketItems: state => state.basket.items
         })
     },

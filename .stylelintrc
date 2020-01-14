@@ -1,0 +1,26 @@
+{
+    "extends": [
+        "stylelint-config-twbs-bootstrap/scss"
+    ],
+    "rules": {
+        "indentation": 4,
+        "block-opening-brace-space-before": "always",
+        "property-blacklist": [
+            "border-radius",
+            "border-top-left-radius",
+            "border-top-right-radius",
+            "border-bottom-right-radius",
+            "border-bottom-left-radius",
+            "transition"
+        ],
+        "function-blacklist": [
+            "calc"
+        ],
+        "scss/dollar-variable-default": [
+            true,
+            {
+                "ignore": "local"
+            }
+        ]
+    }
+}

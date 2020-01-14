@@ -1,5 +1,6 @@
-import ApiService from "services/ApiService";
 import { isNullOrUndefined } from "../../helper/utils";
+
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
@@ -46,12 +47,17 @@ const mutations =
             if (shippingProfileId)
             {
                 state.shipping.shippingProfileId = shippingProfileId;
+
+                const selectedShippingProfile = state.shipping.shippingProfileList.find(shipping => shipping.parcelServicePresetId === shippingProfileId);
+
+                state.shipping.selectedShippingProfile = selectedShippingProfile;
             }
         },
 
         setSelectedShippingProfile(state, shippingProfile)
         {
             state.shipping.selectedShippingProfile = shippingProfile;
+            state.shipping.shippingProfileId = shippingProfile.parcelServicePresetId;
         },
 
         setShippingProfileList(state, shippingProfileList)
@@ -223,10 +229,28 @@ const actions =
             {
                 const oldShippingProfile = state.shipping.shippingProfileId;
 
+                const params = { shippingId: shippingProfile.parcelServicePresetId };
+
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
-                ApiService.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId })
+                if (shippingProfile.excludedPaymentMethodIds.includes(state.payment.methodOfPaymentId))
+                {
+                    const methodOfPaymentList = state.payment.methodOfPaymentList;
+
+                    for (let i = 0; i < methodOfPaymentList.length; i++)
+                    {
+                        const methodOfPayment = methodOfPaymentList[i];
+
+                        if (!shippingProfile.excludedPaymentMethodIds.includes(methodOfPayment.id))
+                        {
+                            params.methodOfPaymentId = methodOfPayment.id;
+                            break;
+                        }
+                    }
+                }
+
+                ApiService.post("/rest/io/checkout/shippingId/", params)
                     .done(response =>
                     {
                         commit("setSelectedShippingProfile", shippingProfile);

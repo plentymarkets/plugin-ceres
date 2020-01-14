@@ -1,7 +1,10 @@
-import TranslationService from "services/TranslationService";
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../services/TranslationService";
+const NotificationService = require("../../services/NotificationService");
 
-Vue.component("accept-gtc-check", {
+import Vue from "vue";
+import { mapState } from "vuex";
+
+export default Vue.component("accept-gtc-check", {
 
     props:
     {
@@ -39,7 +42,7 @@ Vue.component("accept-gtc-check", {
 
     computed:
     {
-        ...Vuex.mapState({
+        ...mapState({
             showError: state => state.checkout.validation.gtc.showError
         })
     },

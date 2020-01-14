@@ -1,9 +1,9 @@
-import UrlService from "services/UrlService";
+import UrlService from "./UrlService";
 
 export function getItemListUrlParams(searchParams)
 {
     const urlParams = {};
-    const defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
+    const defaultItemsPerPage = App.config.pagination.itemsPerPage;
 
     urlParams.query = (searchParams.query && searchParams.query.length > 0) ? searchParams.query : null;
     urlParams.items = (searchParams.items !== defaultItemsPerPage) ? searchParams.items : null;

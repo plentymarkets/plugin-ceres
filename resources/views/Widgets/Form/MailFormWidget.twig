@@ -11,7 +11,8 @@
 {% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set formId          = uid() %}
-
+{% set buttonSize      = widget.settings.buttonSize.mobile | default("") %}
+{% set customClass     = widget.settings.customClass.mobile %}
 
 <div class="widget widget-contact-form
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
@@ -19,15 +20,15 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
     <div class="widget-inner">
-        <form class="row" id="{{ formId }}" @submit="$store.dispatch('sendContactForm', $event)">
+        <form class="row" id="{{ formId }}" method="post" @submit.prevent="$store.dispatch('sendContactForm', $event)">
 
-            {% if mailTarget | trim is empty and ceresConfig.contact.shopMail | trim is empty and isPreview %}
+            {{ Twig.if("#{ mailTarget | trim | json_encode } is empty and ceresConfig.contact.shopMail | trim is empty and #{ isPreview | json_encode }") }}
                 <div class="col-12">
                     <div class="alert alert-danger w-100">
                         {{ trans("Ceres::Widget.mailFormNoRecipient") }}
                     </div>
                 </div>
-            {% endif %}
+            {{ Twig.endif() }}
 
             {% if mailTarget is defined and mailTarget | length > 0 %}
                 <input type="hidden" data-mail="recipient" value="{{ mailTarget }}">
@@ -52,7 +53,7 @@
             {{ Twig.endif() }}
 
             <div class="col-12 text-right">
-                <button type="submit" class="btn btn-{{ appearance }}">
+                <button type="submit" class="btn btn-{{ appearance }} {{ buttonSize }}">
                     {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}
                     <i class="fa fa-paper-plane-o ml-2" aria-hidden="true"></i>
                 </button>

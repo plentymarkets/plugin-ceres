@@ -1,9 +1,17 @@
-import ApiService from "services/ApiService";
-import TranslationService from "services/TranslationService";
-import NotificationService from "services/NotificationService";
+import TranslationService from "../../services/TranslationService";
+import NotificationService from "../../services/NotificationService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import Vue from "vue";
+import OrderHistoryListItem from "./OrderHistoryListItem";
 
-Vue.component("order-history-list", {
+const ApiService = require("../../services/ApiService");
+
+export default Vue.component("order-history-list", {
+
+    components:
+    {
+        OrderHistoryListItem
+    },
 
     props:
     {

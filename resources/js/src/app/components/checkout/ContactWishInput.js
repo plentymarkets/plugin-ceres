@@ -1,4 +1,7 @@
-Vue.component("contact-wish-input", {
+import Vue from "vue";
+import { mapState } from "vuex";
+
+export default Vue.component("contact-wish-input", {
 
     props:
     {
@@ -9,7 +12,7 @@ Vue.component("contact-wish-input", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         contactWish: state => state.checkout.contactWish
     }),
 

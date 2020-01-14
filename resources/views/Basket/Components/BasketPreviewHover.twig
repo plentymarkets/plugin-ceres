@@ -15,7 +15,7 @@
                     </button>
                 </header>
 
-                <basket-list class="item-list" v-if="basketItems.length" size="small" :is-preview="true"></basket-list>
+                <basket-list class="item-list" v-if="basketItems.length" :is-preview="true"></basket-list>
                 <div class="no-items" v-else>{{ trans("Ceres::Template.basketNoItems") }}</div>
 
                 <div class="basket-totals" v-if="basketItems.length">
@@ -23,12 +23,15 @@
                     <hr class="mb-4">
 
                     <div v-if="basketNotifications.length > 0">
-                        <div class="alert fade in alert-danger" v-for="notification in basketNotifications">
+                        <div class="w-100 alert alert-danger" v-for="notification in basketNotifications">
                             <div>${ notification.message }</div>
                         </div>
                     </div>
 
-                    <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                    {% if ceresConfig.basket.showShippingCountrySelect %}
+                        <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                        <hr>
+                    {% endif %}
 
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
                     <basket-totals></basket-totals>
@@ -38,7 +41,7 @@
                         <div class="col-6">
                             <a v-waiting-animation-infinite href="{{ urls.basket }}" rel="nofollow" class="btn btn-outline-primary btn-block basketBtn" title="{{ trans("Ceres::Template.basket") }}">
                                 <i class="fa fa-shopping-cart"></i>
-                                {{ trans("Ceres::Template.basket") }} 
+                                {{ trans("Ceres::Template.basket") }}
                             </a>
                         </div>
 
@@ -51,9 +54,9 @@
                                     {{ trans("Ceres::Template.basketCheckout") }}
                                 </a>
                             </div>
-            
+
                         </div>
-            
+
                     </div>
                 </div>
             </div>

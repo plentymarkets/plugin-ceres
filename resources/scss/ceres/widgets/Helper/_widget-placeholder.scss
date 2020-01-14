@@ -1,28 +1,31 @@
-.widget-placeholder
-{
-    width: 100%;
-    padding-bottom: 100%;
-    position: relative;
-    background-color: $gray-lighter;
+.widget-placeholder {
+    padding: 0;
+    text-align: center;
+    background-color: $gray-300;
 
-    > div
-    {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        text-align: center;
-        padding: $spacer;
-        width: 100%;
+    // needed if placeholder uses .prop-x-x-x classes
+    &.proportional-placeholder {
+        > div {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            left: 0;
+            transform: translateY(-50%);
+        }
     }
 
-    .title
-    {
-        font-weight: bold;
-        font-size: 1.3rem;
-    }
+    > div {
+        padding: 1rem;
 
-    .description
-    {
-        font-style: italic;
+        > p.title {
+            font-weight: bold;
+        }
+
+        > p.description {
+            margin-bottom: 0;
+            font-size: .9rem;
+            font-style: italic;
+        }
     }
 }
+

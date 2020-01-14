@@ -1,4 +1,13 @@
-Vue.component("order-property-list-group", {
+import Vue from "vue";
+import { mapMutations } from "vuex";
+import OrderPropertyListItem from "./OrderPropertyListItem";
+
+export default Vue.component("order-property-list-group", {
+
+    components:
+    {
+        OrderPropertyListItem
+    },
 
     props:
     {
@@ -55,7 +64,7 @@ Vue.component("order-property-list-group", {
             return false;
         },
 
-        ...Vuex.mapMutations([
+        ...mapMutations([
             "setVariationOrderProperty"
         ])
     }

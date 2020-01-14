@@ -1,11 +1,13 @@
-const ApiService = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 const _isEqual = require("lodash/isEqual");
 
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
 import { removeUrlParam } from "../../services/UrlService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-Vue.component("checkout", {
+export default Vue.component("checkout", {
 
     props: {
         template: {
@@ -38,7 +40,7 @@ Vue.component("checkout", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         checkout: state => state.checkout,
         deliveryAddressId: state => state.address.deliveryAddressId
     }),

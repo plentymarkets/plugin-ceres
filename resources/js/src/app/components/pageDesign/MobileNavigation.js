@@ -1,7 +1,9 @@
 import { MediaQueryHelper } from "../../helper/MediaQueryHelper";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-Vue.component("mobile-navigation", {
+export default Vue.component("mobile-navigation", {
 
     props: {
         template: {
@@ -12,7 +14,8 @@ Vue.component("mobile-navigation", {
         breakpoints: {
             type: Array,
             default: () => ["xs", "sm", "md"]
-        }
+        },
+        includeLanguage: Boolean
     },
 
     data()
@@ -53,7 +56,7 @@ Vue.component("mobile-navigation", {
             return breadcrumbs;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             navigationTree: state => state.navigation.tree
         })
     },
@@ -224,6 +227,14 @@ Vue.component("mobile-navigation", {
         {
             document.querySelector(".mobile-navigation").classList.remove("open");
             document.querySelector("body").classList.remove("menu-is-visible");
+        },
+
+        getCategoryUrl(url)
+        {
+            const trailingSlash = url[0] === "/" ? "" : "/";
+            const prefix = this.includeLanguage ? `/${App.language}${trailingSlash}` : "";
+
+            return prefix + url;
         }
     },
 

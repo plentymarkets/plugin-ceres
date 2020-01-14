@@ -53,6 +53,14 @@
                         "defaultValue": "false"
                     }
                 },
+                "contact.api_key": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.contactApiKeyLabel",
+                    "options": {
+                        "defaultValue": ""
+                    }
+                },
                 "global.google_recaptcha_version": {
                     "type": "selectBox",
                     "required": false,
@@ -135,6 +143,14 @@
                     "label": "Config.globalRegistrationRequirePrivacyPolicyConfirmation",
                     "options": {
                         "defaultValue": "true"
+                    }
+                },
+                "global.block_cookies": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalBlockCookies",
+                    "options": {
+                        "defaultValue": "false"
                     }
                 }
             }
@@ -351,6 +367,40 @@
                             {
                                 "value": "both",
                                 "caption": "Config.headerBasketValuesBoth"
+                            }
+                        ]
+                    }
+                },
+                "header.menu_levels": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.headerMenuLevelsLabel",
+                    "options": {
+                        "defaultValue": 4,
+                        "selectBoxValues": [
+                            {
+                                "value": 1,
+                                "caption": "Config.headerMenuLevels1"
+                            },
+                            {
+                                "value": 2,
+                                "caption": "Config.headerMenuLevels2"
+                            },
+                            {
+                                "value": 3,
+                                "caption": "Config.headerMenuLevels3"
+                            },
+                            {
+                                "value": 4,
+                                "caption": "Config.headerMenuLevels4"
+                            },
+                            {
+                                "value": 5,
+                                "caption": "Config.headerMenuLevels5"
+                            },
+                            {
+                                "value": 6,
+                                "caption": "Config.headerMenuLevels6"
                             }
                         ]
                     }
@@ -689,6 +739,7 @@
                 "item.variation_show_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemVariationShowTypeLabel",
                     "options": {
                         "defaultValue": "all",
@@ -710,6 +761,14 @@
                                 "caption": "Config.itemVariationShowTypeCombined"
                             }
                         ]
+                    }
+                },
+                "item.show_please_select": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.itemShowPleaseSelect",
+                    "options": {
+                        "defaultValue": "false"
                     }
                 },
                 "item.enable_image_carousel": {
@@ -765,6 +824,7 @@
                 "item.show_category_description_top": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemShowCategoryDescriptionTopLabel",
                     "options": {
                         "defaultValue": "description1",
@@ -791,6 +851,7 @@
                 "item.show_category_description_bottom": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemShowCategoryDescriptionBottomLabel",
                     "options": {
                         "defaultValue": "none",
@@ -834,6 +895,7 @@
                 "item.show_category_filter": {
                   "type": "checkBox",
                   "required": false,
+                  "deprecated": true,
                   "label": "Config.itemShowCategoryFilterLabel",
                   "options": {
                     "defaultValue": "false"
@@ -1464,15 +1526,6 @@
                         ]
                     }
                 },
-                "contact.api_key": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactApiKeyLabel",
-                    "options": {
-                        "defaultValue": "API key"
-                    }
-                },
                 "contact.map_zoom": {
                     "type": "inputText",
                     "required": false,
@@ -1508,6 +1561,7 @@
                 "pagination.position": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.paginationPositionLabel",
                     "options": {
                         "defaultValue": "top",
@@ -1530,6 +1584,7 @@
                 "pagination.showFirstPage": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.paginationShowFirstPageLabel",
                     "options": {
                         "defaultValue": "false"
@@ -1538,14 +1593,24 @@
                 "pagination.showLastPage": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.paginationShowLastPageLabel",
                     "options": {
                         "defaultValue": "false"
                     }
                 },
+                "pagination.itemsPerPage": {
+                    "type": "inputText",
+                    "required": false,
+                    "label": "Config.paginationItemsPerPageLabel",
+                    "options": {
+                        "defaultValue": "20"
+                    }
+                },
                 "pagination.columnsPerPage": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.paginationColumnsPerPageLabel",
                     "options": {
                         "defaultValue": "4",
@@ -1568,6 +1633,7 @@
                 "pagination.rowsPerPage": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.paginationRowsPerPageLabel",
                     "options": {
                         "defaultValue": "5, 10, 25",
@@ -1606,6 +1672,7 @@
                 "sort.data": {
                     "type": "multiCheckBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.sortDataLabel",
                     "options": {
                         "defaultValue": "texts.name1_asc, texts.name1_desc, sorting.price.avg_asc, sorting.price.avg_desc",
@@ -2592,6 +2659,15 @@
                     "label": "Config.myAccountConfirmationLinkLoginRedirectLabel",
                     "options": {
                         "defaultValue": "false"
+                    }
+                },
+                "checkout.show_all_shipping_profiles": {
+                    "type": "checkBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.checkoutShowAllShippingProfiles",
+                    "options": {
+                      "defaultValue": "false"
                     }
                 },
                 "my_account.confirmation_link_expiration": {

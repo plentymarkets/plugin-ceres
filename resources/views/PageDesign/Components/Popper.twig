@@ -12,13 +12,13 @@
 			</slot>
 		</div>
 
-		<div ref="node" class="popover bs-popover-auto" :class="{'d-none': !isVisible}">
+		<div ref="node" class="popover bs-popover-auto" :class="classNames">
 			<h3 class="popover-header">
 				<slot name="title">
 					{# Title to display in the popper #}
 				</slot>
 			</h3>
-			<div class="popover-body">
+			<div class="popover-body" :class="bodyClass" :style="bodyStyle">
 				<slot name="content">
 					{# Content to display in the popper #}
 				</slot>

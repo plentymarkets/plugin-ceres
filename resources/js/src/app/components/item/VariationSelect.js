@@ -1,24 +1,38 @@
 import { textWidth } from "../../helper/dom";
-import { isDefined, isNull } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
-Vue.component("variation-select", {
+export default Vue.component("variation-select", {
 
     props: {
         template:
         {
             type: String,
             default: "#vue-variation-select"
+        },
+        forceContent:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
     data()
     {
         return {
-            filteredVariationsCache: {}
+            filteredVariationsCache: {},
+            lastContentCount: 0
         };
+    },
+
+    mounted()
+    {
+        // initially check for valid selection and disable add to basket button
+        this.$store.commit("setIsVariationSelected", !!this.currentSelection);
     },
 
     computed:
@@ -29,6 +43,11 @@ Vue.component("variation-select", {
         hasEmptyOption()
         {
             return this.variations.some(variation => !variation.attributes.length);
+        },
+
+        addPleaseSelectOption()
+        {
+            return App.config.item.showPleaseSelect;
         },
 
         /**
@@ -47,7 +66,34 @@ Vue.component("variation-select", {
             return false;
         },
 
-        ...Vuex.mapState({
+        /**
+         * returns all units, selectable by current selection
+         * prop 'forceContent' with value true will return all units, without filtering
+         */
+        possibleUnits()
+        {
+            const possibleUnits = {};
+            const variations = this.forceContent ? this.variations : this.filterVariations(null, null, null, true);
+
+            for (const variation of variations)
+            {
+                possibleUnits[variation.unitCombinationId] = variation.unitName;
+            }
+
+            return possibleUnits;
+        },
+
+        isContentVisible()
+        {
+            return !this.forceContent && !!this.currentSelection || this.forceContent;
+        },
+
+        hasSelection()
+        {
+            return !isNullOrUndefined(this.selectedAttributes) && !Object.values(this.selectedAttributes).some((value) => value < 0);
+        },
+
+        ...mapState({
             attributes: state => state.variationSelect.attributes,
             currentVariation: state => state.item.variation.documents[0].data,
             selectedAttributes: state => state.variationSelect.selectedAttributes,
@@ -92,10 +138,17 @@ Vue.component("variation-select", {
             {
                 this.setVariation(this.currentSelection.variationId);
             }
+            else if (!this.hasSelection)
+            {
+                // user switched back to "please select"
+                this.setVariation(0);
+            }
             else
             {
                 this.unsetInvalidSelection(attributeId, attributeValueId, unitId);
             }
+
+            this.lastContentCount = Object.keys(this.possibleUnits).length;
         },
 
         /**
@@ -262,12 +315,12 @@ Vue.component("variation-select", {
                     TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name })
                 );
 
-                attributes[attributeToReset.attributeId] = null;
+                attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && App.config.item.showPleaseSelect) ? -1 : null;
             }
 
             if (invalidSelection.newUnit)
             {
-                if (!isNull(this.selectedUnit))
+                if (this.lastContentCount > 1 && Object.keys(this.possibleUnits).length > 1 && !isNull(this.selectedUnit))
                 {
                     messages.push(
                         TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name:
@@ -281,10 +334,7 @@ Vue.component("variation-select", {
 
             this.$store.commit("setItemSelectedAttributes", attributes);
 
-            if (this.currentSelection)
-            {
-                this.setVariation(this.currentSelection.variationId);
-            }
+            this.setVariation(this.currentSelection ? this.currentSelection.variationId : 0);
 
             NotificationService.warn(
                 messages.join("<br>")
@@ -298,13 +348,14 @@ Vue.component("variation-select", {
          * @param {number} unitId
          * @param {boolean} strict
          */
-        filterVariations(attributes, unitId, strict)
+        filterVariations(attributes, unitId, strict, ignoreUnit)
         {
             attributes = attributes || this.selectedAttributes;
             unitId = unitId || this.selectedUnit;
             strict = !!strict;
+            ignoreUnit = !!ignoreUnit;
 
-            const key = `${JSON.stringify(attributes)}_${unitId}_${strict}`;
+            const key = `${ JSON.stringify(attributes) }_${ unitId }_${ strict }_${ ignoreUnit }`;
 
             if (isDefined(this.filteredVariationsCache[key]))
             {
@@ -313,12 +364,10 @@ Vue.component("variation-select", {
 
             const uniqueValues = [...new Set(Object.values(attributes))];
             const isEmptyOptionSelected = uniqueValues.length === 1 && isNull(uniqueValues[0]);
-
-            // eslint-disable-next-line complexity
             const filteredVariations = this.variations.filter(variation =>
             {
                 // the selected unit is not matching
-                if (variation.unitCombinationId !== unitId)
+                if (!ignoreUnit && variation.unitCombinationId !== unitId)
                 {
                     return false;
                 }
@@ -339,7 +388,7 @@ Vue.component("variation-select", {
                     // an attribute is not matching with selection
                     if (variationAttribute &&
                         variationAttribute.attributeValueId !== attributes[attributeId] &&
-                        (strict || !strict && !isNull(attributes[attributeId])))
+                        (strict || !strict && !isNull(attributes[attributeId]) && attributes[attributeId] !== -1))
                     {
                         return false;
                     }
@@ -369,7 +418,10 @@ Vue.component("variation-select", {
             const selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
 
             selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
-            return !!this.filterVariations(selectedAttributes).length;
+
+            const ignoreUnit = !(Object.keys(this.possibleUnits).length > 1 && this.isContentVisible);
+
+            return !!this.filterVariations(selectedAttributes, null, null, ignoreUnit).length;
         },
 
         /**
@@ -430,7 +482,15 @@ Vue.component("variation-select", {
             const selectedAttributeValueId =  this.selectedAttributes[attribute.attributeId];
             const selectedAttributeValue = attribute.values.find(attrValue => attrValue.attributeValueId === selectedAttributeValueId);
 
-            return selectedAttributeValue ? selectedAttributeValue.name : TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
+            if (selectedAttributeValue)
+            {
+                return selectedAttributeValue.name;
+            }
+            else if (App.config.item.showPleaseSelect && selectedAttributeValueId === -1)
+            {
+                return TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
+            }
+            return TranslationService.translate("Ceres::Template.singleItemNoSelection");
         }
     },
 

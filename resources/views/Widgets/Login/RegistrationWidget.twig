@@ -1,0 +1,37 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.component("Ceres::Customer.Components.Registration") }}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
+
+{% set shownFields = {
+    "de": widget.settings.shownFieldsDe.mobile | default(["billing_address.name1", "billing_address.salutation"]),
+    "gb": widget.settings.shownFieldsGb.mobile | default(["billing_address.name1", "billing_address.address2", "billing_address.salutation"])
+    }
+%}
+{% set requiredFields = {
+    "de": widget.settings.requiredFieldsDe.mobile | default([]),
+    "gb": widget.settings.requiredFieldsGb.mobile | default([])
+    }
+%}
+
+{{ Twig.print("services.template.disableCacheForTemplate()") }}
+
+<div class="widget widget-registration widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div class="widget-inner">
+        <registration
+            template="#vue-registration"
+            backlink="{{ Twig.print("request.get('backlink') | url_encode") }}"
+            :shown-fields="{{ shownFields | json_encode }}"
+            :button-size="{{ buttonSize | json_encode }}"
+            :required-fields="{{ requiredFields | json_encode }}">
+        </registration>
+    </div>
+</div>

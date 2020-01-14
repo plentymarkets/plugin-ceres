@@ -1,23 +1,33 @@
-import { isNullOrUndefined } from "../../helper/utils";
+import ValidationService from "../../services/ValidationService";
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
+import Vue from "vue";
+import { executeReCaptcha } from "../../helper/executeReCaptcha";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
+import AddressInputGroup from "./AddressInputGroup";
 
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-const ModalService        = require("services/ModalService");
+const ApiService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+const ModalService        = require("../../services/ModalService");
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
-import { navigateTo } from "services/UrlService";
+export default Vue.component("registration", {
 
-Vue.component("registration", {
+    components:
+    {
+        AddressInputGroup
+    },
 
-    delimiters: ["${", "}"],
+    mixins: [ButtonSizePropertyMixin],
 
     props: {
         modalElement: String,
         guestMode: { type: Boolean, default: false },
         isSimpleRegistration: { type: Boolean, default: false },
         template: String,
-        backlink: String
+        backlink: String,
+        shownFields: Object,
+        requiredFields: Object
     },
 
     data()
@@ -34,8 +44,20 @@ Vue.component("registration", {
             isDisabled: false,
             privacyPolicyAccepted : false,
             privacyPolicyShowError: false,
-            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
+            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
+            modalShown: false
         };
+    },
+
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            if (this.modalElement)
+            {
+                this.initModalEventListeners();
+            }
+        });
     },
 
     methods: {
@@ -44,47 +66,78 @@ Vue.component("registration", {
          */
         validateRegistration()
         {
-            ValidationService.validate($("#registration" + this._uid))
-                .done(() =>
+            executeReCaptcha(this.$refs.registrationForm)
+                .then((recaptchaToken) =>
                 {
-                    if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
-                    {
-                        this.sendRegistration();
-                    }
-                    else
-                    {
-                        this.privacyPolicyShowError = true;
+                    ValidationService.validate(this.$refs.registrationForm)
+                        .done(() =>
+                        {
+                            if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
+                            {
+                                this.sendRegistration(recaptchaToken);
+                            }
+                            else
+                            {
+                                this.privacyPolicyShowError = true;
 
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
-                        );
-                    }
-                })
-                .fail(invalidFields =>
-                {
-                    if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
-                    {
-                        this.$refs.passwordHint.showPopper();
-                    }
-                    ValidationService.markInvalidFields(invalidFields, "error");
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                                );
+                            }
+                        })
+                        .fail(invalidFields =>
+                        {
+                            if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
+                            {
+                                this.$refs.passwordHint.showPopper();
+                            }
 
-                    if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
-                    {
-                        this.privacyPolicyShowError = true;
+                            const invalidFieldNames = this.getInvalidFieldNames(invalidFields);
 
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
-                        );
-                    }
+                            if (invalidFieldNames.length > 0)
+                            {
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: invalidFieldNames.join(", ") })
+                                );
+                            }
+
+                            ValidationService.markInvalidFields(invalidFields, "error");
+
+                            if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
+                            {
+                                this.privacyPolicyShowError = true;
+
+                                NotificationService.error(
+                                    TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                                );
+                            }
+                        });
                 });
+        },
+
+        getInvalidFieldNames(invalidFields = [])
+        {
+            const fieldNames = [];
+
+            for (const field of invalidFields)
+            {
+                let fieldName = field.lastElementChild.innerHTML.trim();
+
+                fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+                fieldNames.push(fieldName);
+            }
+
+            return fieldNames;
         },
 
         /**
          * Send the registration
          */
-        sendRegistration()
+        sendRegistration(recaptchaToken)
         {
             const userObject = this.getUserObject();
+
+            userObject.recaptcha = recaptchaToken;
 
             this.isDisabled = true;
 
@@ -92,10 +145,11 @@ Vue.component("registration", {
                 .done(response =>
                 {
                     ApiService.setToken(response);
-                    document.dispatchEvent(new CustomEvent("onSignUpSuccess", { detail: userObject }));
 
                     if (!response.code)
                     {
+                        document.dispatchEvent(new CustomEvent("onSignUpSuccess", { detail: userObject }));
+
                         NotificationService.success(
                             TranslationService.translate("Ceres::Template.regSuccessful")
                         ).closeAfter(3000);
@@ -177,6 +231,26 @@ Vue.component("registration", {
             if (value)
             {
                 this.privacyPolicyShowError = false;
+            }
+        },
+
+        initModalEventListeners()
+        {
+            const modal = ModalService.findModal(document.getElementById(this.modalElement));
+
+            if (isDefined(modal))
+            {
+                modal.on("show.bs.modal",
+                    () =>
+                    {
+                        this.modalShown = true;
+                    });
+
+                modal.on("hide.bs.modal",
+                    () =>
+                    {
+                        this.modalShown = false;
+                    });
             }
         }
     }

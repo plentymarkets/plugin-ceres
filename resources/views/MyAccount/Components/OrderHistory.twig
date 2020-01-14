@@ -27,7 +27,9 @@
                     <div class="float-left counter">
                         {{ trans("Ceres::Template.orderHistoryShow", {"countStart": orderList.firstOnPage, "countEnd": orderList.lastOnPage, "orderMaxCount": orderList.totalsCount }) }}
                     </div>
-                    {% include "Ceres::Category.Item.Partials.Pagination" with { 'currentPage': page } %}
+                    <div class="float-right row">
+                        {% include "Ceres::Category.Item.Partials.Pagination" with { 'currentPage': page } %}
+                    </div>
                 </div>
                 {% endif %}
                 <!-- ./ORDER PAGINATION -->
@@ -83,9 +85,9 @@
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                                 {{ trans("Ceres::Template.orderHistoryOrderDetails") }}
                                             </button>
-
-                                            {% if entry.isReturnable %}
-                                                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="{{ urls.returns(entry.order.id) }}">
+                                            {% set returnOrder = entry.toArray() %}
+                                            {% if returnOrder.isReturnable %}
+                                                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="{{ urls.returns(returnOrder.order.id) }}">
                                                     <i class="fa fa-undo" aria-hidden="true"></i>
                                                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                                                 </a>

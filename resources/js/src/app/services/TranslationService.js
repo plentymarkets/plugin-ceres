@@ -1,5 +1,6 @@
 import { defaultValue, isNullOrUndefined } from "../helper/utils";
 import { replaceAll, capitalize } from "../helper/strings";
+import jQuery from "jquery";
 
 const TranslationService = (function($)
 {
@@ -19,6 +20,11 @@ const TranslationService = (function($)
 
         for (let i = 0; i < tags.length; i++)
         {
+            if (!tags[i].dataset || !tags[i].dataset.translation)
+            {
+                continue;
+            }
+
             const identifier = tags[i].dataset.translation;
 
             if (!identifier || !identifierPattern.test(identifier))

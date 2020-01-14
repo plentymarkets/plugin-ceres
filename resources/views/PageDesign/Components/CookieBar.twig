@@ -1,0 +1,81 @@
+<script type="x/template" id="vue-cookie-bar">
+    <div class="cookie-bar{% if not isShopBuilder %} fixed-bottom{% endif %}" :class="{ 'out': !isVisible, 'border-top bg-white': isVisible }">
+        <div class="container-max" v-if="isVisible">
+            <div class="row py-3" v-show="!isExpanded" :class="classes" :style="styles">
+                <div class="col-12 col-md-8">
+                    {% autoescape false %}
+                        {% set gtcContent -%}
+                            <a class="text-appearance" href="{{ urls.gtc }}" target="_blank">{{ trans("Ceres::Template.checkoutGtc") }}</a>
+                        {%- endset %}
+
+                        {% set cancellationContent -%}
+                            <a class="text-appearance" href="{{ urls.cancellationRights }}" target="_blank">{{ trans("Ceres::Template.checkoutCancellationRight", {"hyphen": "&shy;"}) }}</a>
+                        {%- endset %}
+
+                        {% set policyContent -%}
+                            <a class="text-appearance" href="{{ urls.privacyPolicy }}" target="_blank">{{ trans("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
+                        {%- endset %}
+
+                        {% set legalDisclosureContent -%}
+                            <a class="text-appearance" href="{{ urls.legalDisclosure }}" target="_blank">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
+                        {%- endset %}
+
+                        <p>{{ trans("Ceres::Template.cookieBarHintText", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent, "legal": legalDisclosureContent}) }}</p>
+                    {% endautoescape %}
+
+                    <div>
+                        {% for consentGroup in get_consent_groups() if consentGroup.consents | length > 0 %}
+                            <span class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3">
+                                <input type="checkbox"
+                                       class="custom-control-input"
+                                       :id="_uid + '-group-{{ consentGroup.key }}'"
+                                        {% if consentGroup.necessary %}
+                                            disabled checked="checked"
+                                        {% else %}
+                                            :checked="isConsented('{{ consentGroup.key }}')"
+                                            @change="toggleConsent('{{ consentGroup.key }}')"
+                                        {% endif %}>
+                                <label class="custom-control-label" :for="_uid + '-group-{{ consentGroup.key }}'">
+                                    {% if consentGroup.label | length > 0 %}
+                                        {{ consentGroup.label }}
+                                    {% else %}
+                                        {{ trans("Ceres::Template.privacySettingsDefaultGroup") }}
+                                    {% endif %}
+                                </label>
+                            </span>
+                        {% endfor %}
+
+                        <a href="#" class="text-primary text-appearance d-block d-md-inline-block" @click.prevent.stop="isExpanded=true">{{ trans("Ceres::Template.cookieBarMoreSettings") }}</a>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-4 pt-3 pt-md-0">
+                    <button class="btn btn-primary btn-block btn-appearance" @click="acceptAll(); close()">{{ trans("Ceres::Template.cookieBarAcceptAll") }}</button>
+                    <button class="btn btn-default btn-block" @click="storeConsents(); close()">{{ trans("Ceres::Template.cookieBarSave") }}</button>
+                </div>
+
+            </div>
+            <div class="row py-3" v-show="isExpanded" :class="classes" :style="styles">
+                <div class="col-12 mb-3">
+                    <privacy-settings></privacy-settings>
+                </div>
+                <div class="col-12 col-md-6">
+                    <a href="#" class="text-primary text-appearance d-inline-block mb-3" @click.prevent.stop="isExpanded = false">{{ trans("Ceres::Template.cookieBarBack") }}</a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn btn-block btn-primary btn-appearance" @click="acceptAll(); close()">{{ trans("Ceres::Template.cookieBarAcceptAll") }}</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn btn-block btn-block btn-default" @click="storeConsents(); close()">{{ trans("Ceres::Template.cookieBarSave") }}</button>
+                </div>
+            </div>
+        </div>
+
+        <div v-else>
+            <button class="btn btn-primary btn-appearance" @click.prevent.stop="isCollapsed = false">
+                <i class="fa fa-shield float-none"></i>
+                {{ trans("Ceres::Template.cookieBarPrivacySettings") }}
+            </button>
+        </div>
+    </div>
+</script>

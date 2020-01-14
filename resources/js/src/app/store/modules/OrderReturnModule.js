@@ -1,8 +1,9 @@
-import ApiService from "services/ApiService";
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
         orderData: {},
+        orderAccessKey: "",
         orderReturnItems: [],
         orderReturnNote: ""
     };
@@ -14,6 +15,11 @@ const mutations =
             orderData.order.orderItems = orderData.order.orderItems.filter(orderItem => orderItem.quantity !== 0);
 
             state.orderData = orderData;
+        },
+
+        setOrderAccessKey(state, orderAccessKey)
+        {
+            state.orderAccessKey = orderAccessKey;
         },
 
         updateOrderReturnItems(state, { quantity, orderItem })
@@ -62,7 +68,7 @@ const actions =
                         variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
                     }
 
-                    ApiService.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds, returnNote: state.orderReturnNote })
+                    ApiService.post("/rest/io/order/return", { orderId: state.orderData.order.id, orderAccessKey: state.orderAccessKey, variationIds, returnNote: state.orderReturnNote })
                         .done(data =>
                         {
                             resolve(data);
@@ -84,7 +90,9 @@ const getters =
     {
         getOrderItemImage: state => orderItemId => state.orderData.itemImages[orderItemId],
 
-        getOrderItemURL: state => orderItemId => state.orderData.itemURLs[orderItemId]
+        getOrderItemURL: state => orderItemId => state.orderData.itemURLs[orderItemId],
+
+        getOrderItemVariation: state => orderItemId => state.orderData.variations[orderItemId]
     };
 
 export default

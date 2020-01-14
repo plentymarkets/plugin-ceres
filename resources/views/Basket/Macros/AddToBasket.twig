@@ -19,7 +19,7 @@
     </add-to-basket>
 {% endmacro %}
 
-{% macro printVueComponent( itemObject, useLargeScale, showQuantity, options ) %}
+{% macro printVueComponent( itemObject, useLargeScale, showQuantity, options, urlWithVariationId ) %}
     <add-to-basket
             :variation-id="{{ itemObject }}.variation.id"
             :is-salable="!!{{ itemObject }}.filter && {{ itemObject }}.filter.isSalable"
@@ -30,7 +30,7 @@
             :order-properties="{{ itemObject }}.properties.filter(function(prop) { return prop.property.isOderProperty })"
             :use-large-scale="{{ useLargeScale | default(false) | json_encode }}"
             :show-quantity="{{ showQuantity | default(false) | json_encode }}"
-            :item-url="{{ itemObject }} | itemURL"
+            :item-url="{{ itemObject }} | itemURL{% if urlWithVariationId is not empty %}({{ urlWithVariationId }}){% endif %}"
             {% for key, value in options if value is defined and value | length > 0 %}
             {{ key }}="{{ value }}"
             {% endfor %}

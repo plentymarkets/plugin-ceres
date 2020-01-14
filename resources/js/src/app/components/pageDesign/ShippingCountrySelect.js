@@ -1,6 +1,8 @@
 import { removeUrlParam } from "../../services/UrlService";
+import Vue from "vue";
+import { mapState, mapGetters } from "vuex";
 
-Vue.component("shipping-country-select", {
+export default Vue.component("shipping-country-select", {
 
     props:
     {
@@ -28,11 +30,11 @@ Vue.component("shipping-country-select", {
             return !!this.basket.customerInvoiceAddressId || !!this.basket.customerShippingAddressId || this.disableInput;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             localization: state => state.localization,
             basket: state => state.basket.data
         }),
-        ...Vuex.mapGetters([
+        ...mapGetters([
             "getCountryName"
         ])
     },

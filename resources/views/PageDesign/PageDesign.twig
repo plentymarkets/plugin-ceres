@@ -16,7 +16,7 @@
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 {{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
-{% if request.get('isContentBuilder') == 1 %}
+{% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
 {% endif %}
 
@@ -32,6 +32,8 @@
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
 <head>
+    {{ get_consent_scripts(ceresConfig.global.blockCookies) }}
+
     {% include getPartial('head') %}
 
     {% block PartialHead %}
@@ -71,6 +73,7 @@
         {% include getPartial('header') %}
 
         <div id="page-body" class="main">
+
             {% block PageBody %}
                 <!-- inject content of inherited templates here -->
             {% endblock %}
@@ -101,7 +104,7 @@
                             <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                        <login template="#vue-login" modal-element="login-modal-wrapper"></login>
+                        <login modal-element="login-modal-wrapper"></login>
                     </div>
                 </div>
             </div>
@@ -140,7 +143,9 @@
 
                             <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                        <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
+                        <div class="modal-body">
+                            <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -191,12 +196,17 @@
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
         isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-        templateEvent: "{{ templateEvent }}",
+        templateType: "{{ urls.templateType }}",
         language: "{{ lang }}",
         defaultLanguage: "{{ defaultLanguage }}",
         decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
         urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
-        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }}
+        propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
+        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
+        initialData: {
+            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
+            shippingCountryId: {{ services.checkout.getShippingCountryId() | json_encode }}
+        }
     };
 </script>
 
@@ -206,193 +216,62 @@
 {{ LayoutContainer.show("Ceres::Script.Loader") }}
 
 {{ Translations.add( "Ceres", "Template" ) }}
+
+{{ get_json_data() }}
+
 {% if ceresConfig.log.performanceLevel  == 'development' %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js?v={{ buildHash }}"></script>
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js?v={{ buildHash }}"></script>
+    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
 {% else %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js?v={{ buildHash }}"></script>
+    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
 {% endif %}
 
 {% for scriptTemplate in get_additional_scripts() %}
     {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
 {% endfor %}
 
+{% if isShopBuilder %}
+    {% include "Ceres::Widgets.ShopBuilderDataStore" %}
+{% endif %}
+
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
-{{ get_filtered_tags() }}
-{{ get_json_data() }}
-
 <script>
-    vueEventHub = new Vue();
+    window.vueEventHub = new Vue();
 
-    {% if ceresConfig.log.checkSyntax %}
+    if (App.config.log.checkSyntax)
+    {
         var rootElement = document.getElementById("vue-app");
-        rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, '');
 
-        var vueApp = new Vue({
+        rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
+
+        window.vueApp = new Vue({
             store: window.ceresStore
         });
 
         vueApp.$mount( rootElement.cloneNode(true) );
 
-        if ( vueApp.$el.id === "vue-app")
+        if (vueApp.$el.id === "vue-app")
         {
             document.body.replaceChild( vueApp.$el, rootElement );
         }
-    {% else %}
-        var vueApp = new Vue({
+    }
+    else
+    {
+        // eslint-disable-next-line no-unused-vars
+        window.vueApp = new Vue({
             el: "#vue-app",
             store: window.ceresStore
         });
-    {% endif %}
-
-    (function($, MediaQueryHelper) {
-        var vueApp = document.getElementById('vue-app');
-        var headerParent = document.querySelector("[data-header-offset]");
-        var headerLoaded = false;
-        var allHeaderChildrenHeights = [];
-
-        if ( !!headerParent )
-        {
-            var headerChildren = headerParent.children;
-
-            function calculateBodyOffset()
-            {
-                if (headerLoaded && headerParent)
-                {
-                    var bodyOffset = 0;
-                    
-                    for( var i = 0; i < headerChildren.length; i++ )
-                    {
-                        bodyOffset += headerChildren[i].getBoundingClientRect().height;
-                    }
-                    vueApp.style.marginTop = bodyOffset + 'px';
-                    vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
-                }
-            }
-
-            function getHeaderChildrenHeights()
-            {
-                allHeaderChildrenHeights = [];
-
-                for (var i = 0; i < headerChildren.length; i++)
-                {
-                    allHeaderChildrenHeights.push(headerChildren[i].getBoundingClientRect().height);
-                }
-            }
-
-            function scrollHeaderElements()
-            {
-                if (headerLoaded && !App.isShopBuilder)
-                {
-                    var absolutePos = 0;
-                    var fixedElementsHeight = 0; 
-                    var offset = 0;
-                    var scrollTop = window.pageYOffset;
-                    var zIndex = 100;
-
-                    for (var i = 0; i < headerChildren.length; i++)
-                    {
-                        var elem = headerChildren[i];
-                        var elemHeight = allHeaderChildrenHeights[i];
-                        
-                        offset = absolutePos - scrollTop;
-                        elem.style.position = "absolute";
-                        elem.style.zIndex = zIndex;
-                        zIndex--;
-
-                        if (!elem.classList.contains("unfixed"))
-                        {
-                            if (offset < 0)
-                            {
-                                elem.style.top = 0;
-                            }
-                            else 
-                            {
-                                elem.style.top = offset + 'px';
-                            }
-
-                            if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
-                            {
-                                elem.style.top = fixedElementsHeight + 'px';
-                            }
-
-                            fixedElementsHeight = fixedElementsHeight + elemHeight;  
-                        } 
-                        else 
-                        {
-                            elem.style.top = offset + 'px';
-                        }
-                        absolutePos = absolutePos + elemHeight;
-                    }
-                }
-            }
-
-            // When window resize to another breakpoint execute functions
-            MediaQueryHelper.addFunction(function(){
-                calculateBodyOffset();
-                getHeaderChildrenHeights();
-                scrollHeaderElements();
-            }); 
-
-            $(window).scroll(scrollHeaderElements);
-
-            $(document).on('shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate', function()
-            {
-                calculateBodyOffset();
-                $('.owl-carousel').trigger('refresh.owl.carousel');
-            });
-
-            var headerImages = headerParent.querySelectorAll("img");
-
-            Promise.all(
-                Array.prototype.slice.call(headerImages).map(function(headerImage)
-                {
-                    return new Promise(function(resolve)
-                    {
-                        headerImage.onload = function()
-                        {
-                            resolve();
-                        }
-                    });
-                })
-            ).then(function()
-            {
-                // Initialize
-                headerLoaded = true;
-                getHeaderChildrenHeights();
-                scrollHeaderElements();
-                calculateBodyOffset();
-            });
-
-            calculateBodyOffset();
-        }
-
-        $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
-        {
-            var compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
-            var component = new Vue({
-                store: window.ceresStore,
-                render: compiled.render,
-                staticRenderFns: compiled.staticRenderFns
-            });
-            component.$mount( widgetElement[0] );
-            $(component.$el).find('*').each(function(index, elem) {
-                $(elem).click(function(event) {
-                    event.preventDefault();
-                });
-            });
-
-            $(component.$el).find('.owl-carousel').on('resized.owl.carousel', function()
-            {
-                window.dispatchEvent(new Event('resize'));
-            });
-        });
-
-
-    })(jQuery, MediaQueryHelper);
+    }
 </script>
 
+{{ get_filtered_tags() }}
+
 {{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
+
+{% if not services.template.shouldBeCached() %}
+    <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+{% endif %}
+
 </body>
 </html>

@@ -1,12 +1,19 @@
 import { isDefined } from "../../../helper/utils";
+import ValidationService from "../../../services/ValidationService";
+import TranslationService from "../../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
+import CreateUpdateAddress from "./CreateUpdateAddress/CreateUpdateAddress";
 
-const ApiService = require("services/ApiService");
-const ModalService = require("services/ModalService");
+const ApiService = require("../../../services/ApiService");
+const ModalService = require("../../../services/ModalService");
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
+export default Vue.component("address-select", {
 
-Vue.component("address-select", {
+    components:
+    {
+        CreateUpdateAddress
+    },
 
     props:
     {
@@ -123,7 +130,7 @@ Vue.component("address-select", {
             return this.optionalAddressFields[countryKey].includes(`${addressKey}.salutation`);
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             countryList: state => state.localization.shippingCountries,
             isBasketLoading: state => state.basket.isBasketLoading,
             isCheckoutReadonly: state => state.checkout.readOnly

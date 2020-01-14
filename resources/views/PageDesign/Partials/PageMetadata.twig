@@ -1,20 +1,42 @@
-{% if category is defined %}
+{% set details = null %}
+{% if category is defined and category is not null %}
+    {% set details = category.details[0] %}
+{% endif %}
 
-    {% set details      = category.details[0] %}
-    {% set robots       = details.metaRobots | replace({'_': ', '}) %}
-    {% set description  = details.metaDescription %}
-    {% set keywords     = details.metaKeywords %}
-    {% set image        = details.imagePath | default(ceresConfig.header.companyLogo) %}
-    {% set title        = details.metaTitle | default(details.name) %}
+{% set robots = '' %}
+{% set description = '' %}
+{% set keywords = '' %}
+{% set image = '' %}
+{% set title = '' %}
 
-{% else %}
+{% if block('robots') is defined %}
+    {% set robots = block('robots') | default('NOINDEX, NOFOLLOW') %}
+{% elseif details is not null %}
+    {% set robots = details.metaRobots | replace({'_': ', '}) %}
+{% endif %}
 
-    {% set robots       = block('robots') | default('NOINDEX, NOFOLLOW') %}
-    {% set description  = block('description') %}
-    {% set keywords     = block('keywords') %}
-    {% set title        = block('title') %}
-    {% set image        = block('image') | default(ceresConfig.header.companyLogo) %}
+{% if block('description') is defined %}
+    {% set description = block('description') %}
+{% elseif details is not null %}
+    {% set description = details.metaDescription %}
+{% endif %}
 
+{% if block('keywords') is defined %}
+    {% set keywords = block('keywords') %}
+{% elseif details is not null %}
+    {% set keywords = details.metaKeywords %}
+{% endif %}
+
+{% if block('image') is defined %}
+    {% set image = block('image') | default(ceresConfig.header.companyLogo) %}
+{% elseif details is not null %}
+    {% set image = details.imagePath | default(ceresConfig.header.companyLogo) %}
+{% endif %}
+
+{% if block('title') is defined %}
+    {% set title = block('title') %}
+{% elseif details is not null %}
+    {% set title = details.metaTitle | default(details.name) %}
 {% endif %}
 
 {% set type             = block('type') | default('article') %}

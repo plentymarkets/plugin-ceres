@@ -1,7 +1,9 @@
-import NotificationService from "services/NotificationService";
-import TranslationService from "services/TranslationService";
+import NotificationService from "../../services/NotificationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-Vue.component("subscribe-newsletter-check", {
+export default Vue.component("subscribe-newsletter-check", {
 
     props: {
         template:
@@ -34,7 +36,7 @@ Vue.component("subscribe-newsletter-check", {
         }
     },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         newsletterSubscription(state)
         {
             return state.checkout.newsletterSubscription[this.emailFolder];

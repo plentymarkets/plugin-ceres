@@ -1,5 +1,6 @@
 import { isNullOrUndefined } from "../../helper/utils";
 import { StickyElement } from "../../helper/StickyElement";
+import Vue from "vue";
 
 Vue.directive("stick-in-parent",
     {

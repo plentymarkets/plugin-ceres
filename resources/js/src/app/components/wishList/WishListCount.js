@@ -1,7 +1,6 @@
-import { isDefined } from "../../helper/utils";
-const ApiService = require("services/ApiService");
+import Vue from "vue";
 
-Vue.component("wish-list-count", {
+export default Vue.component("wish-list-count", {
 
     props: {
         template: {
@@ -10,22 +9,11 @@ Vue.component("wish-list-count", {
         }
     },
 
-    computed: {
+    computed:
+    {
         wishListCount()
         {
             return this.$store.getters.wishListCount;
         }
-    },
-
-    created()
-    {
-        ApiService.get("/rest/io/itemWishList", {}, { keepOriginalResponse: true })
-            .done(response =>
-            {
-                if (isDefined(response.data))
-                {
-                    this.$store.commit("setWishListIds", response.data);
-                }
-            });
     }
 });

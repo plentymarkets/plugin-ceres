@@ -1,8 +1,14 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
+import SalutationSelect from "./SalutationSelect";
 
-Vue.component("address-input-group", {
+export default Vue.component("address-input-group", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        SalutationSelect
+    },
 
     props:
     {
@@ -48,6 +54,11 @@ Vue.component("address-input-group", {
 
     computed:
     {
+        isMyAccount()
+        {
+            return App.templateType === "my-account";
+        },
+
         isPickupStation()
         {
             return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
@@ -60,10 +71,10 @@ Vue.component("address-input-group", {
 
         isParcelOrOfficeAvailable()
         {
-            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable || this.isMyAccount) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             isParcelBoxAvailable: state => state.checkout.shipping.isParcelBoxAvailable,
             isPostOfficeAvailable: state => state.checkout.shipping.isPostOfficeAvailable
         })

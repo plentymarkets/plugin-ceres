@@ -1,14 +1,17 @@
 import { isNullOrUndefined } from "../../helper/utils";
 import { setUrlByItem } from "../../services/UrlService";
+import Vue from "vue";
 
-const ApiService = require("services/ApiService");
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
         variation: {},
         variationCache: {},
         variationMarkInvalidProperties: false,
-        variationOrderQuantity: 1
+        variationOrderQuantity: 1,
+        initialVariationId: 0,
+        pleaseSelectVariationId: 0
     };
 
 const mutations =
@@ -22,6 +25,21 @@ const mutations =
             }
 
             state.variationCache[variation.documents[0].id] = variation;
+
+            if (state.initialVariationId <= 0)
+            {
+                state.initialVariationId = variation.documents[0].id;
+            }
+
+
+        },
+
+        setPleaseSelectVariationId(state, variationId)
+        {
+            if (state.pleaseSelectVariationId <= 0 && variationId > 0)
+            {
+                state.pleaseSelectVariationId = variationId;
+            }
         },
 
         setVariationOrderProperty(state, { propertyId, value })
@@ -55,17 +73,27 @@ const actions =
         {
             return new Promise(resolve =>
             {
-                const variation = state.variationCache[variationId];
+                const variation = variationId <= 0
+                    ? state.variationCache[state.pleaseSelectVariationId > 0 ? state.pleaseSelectVariationId : state.initialVariationId]
+                    : state.variationCache[variationId];
 
                 if (variation)
                 {
                     commit("setVariation", variation);
 
-                    setUrlByItem(variation.documents[0].data);
+                    setUrlByItem(variation.documents[0].data, variationId > 0);
                     resolve(variation);
                 }
                 else
                 {
+                    let keepVariationId = true;
+
+                    if (variationId <= 0)
+                    {
+                        variationId = state.pleaseSelectVariationId;
+                        keepVariationId = false;
+                    }
+
                     ApiService
                         .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem" })
                         .done(response =>
@@ -73,7 +101,7 @@ const actions =
                             // store received variation data for later reuse
                             commit("setVariation", response);
 
-                            setUrlByItem(response.documents[0].data);
+                            setUrlByItem(response.documents[0].data, keepVariationId);
                             resolve(response);
                         });
                 }

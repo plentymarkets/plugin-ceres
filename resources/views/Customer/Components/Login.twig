@@ -4,22 +4,20 @@
 
 <script type="x/template" id="vue-login">  
     <div class="login-pwd-reset">
-        <form :id="'login-form-' + _uid" class="login-container">
+        <form :id="'login-form-' + _uid" method="post" class="login-container">
             <div :class="{'modal-body': modalElement}">
                 <div class="row">
                     <div class="col-12">
                         <div class="input-unit" data-validate="mail">
-                            {% set uid_mail = uid() %}
-                            <input type="email" name="email" autocomplete="email" id="{{ uid_mail }}" v-model="username" data-autofocus>
-                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
+                            <input type="email" name="email" autocomplete="email" :id="'email' + _uid" v-model="username" data-autofocus>
+                            <label :for="'email' + _uid">{{ trans("Ceres::Template.loginEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
                     </div>
                     <div class="col-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
-                            {% set uid_pwd = uid() %}
-                            <input type="password" name="password" autocomplete="current-password" id="{{ uid_pwd }}" v-model="password">
-                            <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.loginPassword") }}*</label>
+                            <input type="password" name="password" autocomplete="current-password" :id="'password' + _uid" v-model="password">
+                            <label :for="'password' + _uid">{{ trans("Ceres::Template.loginPassword") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.loginEmptyPassword") }}</span>
                     </div>
@@ -27,11 +25,11 @@
             </div>
             <div :class="{'modal-footer justify-content-between': modalElement, 'row': !modalElement}">
                 <div :class="{'col-7 col-sm-4': !modalElement}">
-                    <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.loginForgotPassword") }}?</a>
+                    <a href="javascript:void(0)" @click="showResetPwdView" class="small text-appearance">{{ trans("Ceres::Template.loginForgotPassword") }}?</a>
                 </div>
                 <div :class="{'col-5 col-sm-8 text-sm-right': !modalElement}">
                     {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
-                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium" :class="{'float-right': !modalElement}">
+                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
                         <i class="fa fa-user" v-waiting-animation="isDisabled"></i>
                         {{ trans("Ceres::Template.login") }}
                     </button>

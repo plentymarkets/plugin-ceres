@@ -1,10 +1,20 @@
-<script type="x/template" id="vue-wish-list">
+{{ component("Ceres::WishList.Components.WishListItem") }}
+{{ component("Ceres::ItemList.Components.CategoryItem") }}
 
+<script type="x/template" id="vue-wish-list">
     <div>
-        {% include "Ceres::WishList.Components.WishListItem" %}
+
+        <transition-group name="wish-list-item-transition" tag="div">
+            <wish-list-item
+                v-for="wishListItem in wishListItems"
+                :key="wishListItem.id"
+                :wish-list-item-raw="wishListItem"
+                :item-details-data="itemDetailsData">
+            </wish-list-item>
+        </transition-group>
 
         <transition name="wish-list-no-items-transition">
-            <p class="h4 text-muted wish-list-no-items-label" v-if="!wishListIds[0]">{{ trans("Ceres::Template.wishListNoItems") }}</p>
+            <p class="h4 text-muted wish-list-no-items-label" v-if="!isLoading && !wishListItems[0]">{{ trans("Ceres::Template.wishListNoItems") }}</p>
         </transition>
 
         <div :class="{'loading': isLoading}">
@@ -12,5 +22,4 @@
         </div>
 
     </div>
-
 </script>

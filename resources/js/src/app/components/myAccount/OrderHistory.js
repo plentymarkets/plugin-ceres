@@ -1,6 +1,8 @@
-const ApiService = require("services/ApiService");
+import Vue from "vue";
 
-Vue.component("order-history", {
+const ApiService = require("../../services/ApiService");
+
+export default Vue.component("order-history", {
 
     delimiters: ["${", "}"],
 

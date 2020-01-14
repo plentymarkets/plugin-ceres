@@ -1,18 +1,14 @@
-.basket-preview
-{
-	display: flex;
+.basket-preview {
+    display: flex;
     flex-flow: column nowrap;
 
-    .basket-header
-    {
+    .basket-header {
         position: relative;
         flex: 0 0 auto;
-        border-bottom: 1px solid $gray-lighter;
+        border-bottom: 1px solid $gray-300;
 
-        .basket-header-caption
-        {
-            @include media-breakpoint-up(md)
-            {
+        .basket-header-caption {
+            @include media-breakpoint-up(md) {
                 font-size: 1.5rem;
             }
 
@@ -20,61 +16,55 @@
         }
 
         .close {
-            height: 100%;
-            width: 50px;
             position: absolute;
             top: 0;
             right: 0;
+            width: 50px;
+            height: 100%;
         }
     }
 
-    .basket-preview-content
-    {
+    .basket-preview-content {
         display: flex;
-        flex-direction: column;
         flex: 1;
-        overflow-y: auto;
+        flex-direction: column;
         overflow-x: hidden;
+        overflow-y: auto;
 
-        @include media-breakpoint-only(sm)
-        {
+        @include media-breakpoint-only(sm) {
             flex-direction: row;
         }
     }
 
-    .list
-    {
-	    display: flex;
-	    flex-flow: column nowrap;
-    	flex: 1 1 auto;
-        overflow: auto;
+    .list {
+        display: flex;
+        flex: 1 1 auto;
+        flex-flow: column nowrap;
         min-height: 150px;
+        overflow: auto;
     }
 
-    .totals
-    {
-	    display: flex;
-	    flex-flow: column nowrap;
+    .totals {
+        display: flex;
         flex: 0 0 auto;
-        border-top: 1px solid $gray-lighter;
+        flex-flow: column nowrap;
+        border-top: 1px solid $gray-300;
 
         @extend .small;
 
-        dd, dt
-        {
+        dd,
+        dt {
             margin-bottom: 0;
         }
 
-        @include media-breakpoint-only(sm)
-        {
+        @include media-breakpoint-only(sm) {
             border-top: 0;
-            border-left: 1px solid $gray-lighter;
+            border-left: 1px solid $gray-300;
         }
     }
 
-    @include media-breakpoint-only(sm)
-    {
-        .totals{
+    @include media-breakpoint-only(sm) {
+        .totals {
             overflow-y: auto;
         }
         .basket-preview-content {
@@ -83,8 +73,7 @@
     }
 }
 
-.basket-loading-frame
-{
+.basket-loading-frame {
     display: table;
     width: 100%;
 }

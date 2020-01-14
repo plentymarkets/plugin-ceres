@@ -1,30 +1,18 @@
 <script type="x/template" id="vue-change-email-form">
-    <div class="container-max page-content">
-        <div class="row">
-            <form @submit.prevent="submit()" class="col-12 col-sm-8 col-lg-6 mb-5 content-center">
-                <h1 class="mb-5 mt-4">{{ trans("Ceres::Template.myAccountChangeEmail") }}</h1>
-
-                <span>{{ trans("Ceres::Template.myAccountChangeEmailInfoText") }}</span>
-
-                <div class="input-unit mt-3">
-                    <label :for="'new-mail' + _uid" class="disabled">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
-                    <input type="email" name="email" class="form-control" :id="'new-mail' + _uid" :value="newMail" disabled>
-                </div>
-
-                <div class="input-unit">
-                    <label :for="'password' + _uid">{{ trans("Ceres::Template.loginPassword") }}</label>
-                    <input type="password" name="password" autocomplete="current-password" class="form-control" :id="'password' + _uid" v-model="password">
-                </div>
-
-                <hr>
-
-                <span class="input-group-btn">
-                    <button type="submit" :disabled="isDisabled" class="btn btn-primary float-right btn-medium btn-xs-max-width">
-                        <i class="fa fa-envelope" v-waiting-animation="isDisabled" aria-hidden="true"></i>
-                        <span>{{ trans("Ceres::Template.myAccountChangeEmail") }}</span>
-                    </button>
-                </span>
-            </form>
+    <form method="post" @submit.prevent="submit()" class="clearfix">
+        <div class="input-unit mt-3">
+            <label :for="'new-mail' + _uid" class="disabled">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
+            <input type="email" name="email" class="form-control" :id="'new-mail' + _uid" :value="newMail" disabled>
         </div>
-    </div>
+
+        <div class="input-unit">
+            <label :for="'password' + _uid">{{ trans("Ceres::Template.loginPassword") }}</label>
+            <input type="password" name="password" autocomplete="current-password" class="form-control" :id="'password' + _uid" v-model="password">
+        </div>
+
+        <button type="submit" :disabled="isDisabled" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width">
+            <span>{{ trans("Ceres::Template.myAccountChangeEmail") }}</span>
+            <i class="fa fa-envelope" v-waiting-animation="isDisabled" aria-hidden="true"></i>
+        </button>
+    </form>
 </script>

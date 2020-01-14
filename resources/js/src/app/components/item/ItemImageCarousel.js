@@ -1,7 +1,10 @@
 import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import "owl.carousel";
+import { mapState } from "vuex";
 
-Vue.component("item-image-carousel", {
+export default Vue.component("item-image-carousel", {
 
     props: {
         template:
@@ -33,6 +36,11 @@ Vue.component("item-image-carousel", {
         {
             type: String,
             default: "standard"
+        },
+        pluginPath:
+        {
+            type: String,
+            default: ""
         }
     },
 
@@ -65,7 +73,7 @@ Vue.component("item-image-carousel", {
             ).slice(0, this.maxQuantity);
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             currentVariation: state => state.item.variation
         })
     },
@@ -84,6 +92,10 @@ Vue.component("item-image-carousel", {
             },
             deep: true
         }
+    },
+    created()
+    {
+        this.loadLightbox();
     },
 
     mounted()
@@ -162,10 +174,10 @@ Vue.component("item-image-carousel", {
 
             if (!isNullOrUndefined(window.lightbox))
             {
-                window.lightbox.option({
+                lightbox.option({
                     wrapAround: true
                 });
-                window.lightbox.imageCountLabel = (current, total) =>
+                lightbox.imageCountLabel = (current, total) =>
                 {
                     if (isNullOrUndefined(imageCount) || imageCount <= 1)
                     {
@@ -183,19 +195,19 @@ Vue.component("item-image-carousel", {
                     return TranslationService.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
                 };
 
-                const originalFn = window.lightbox.changeImage;
+                const originalFn = lightbox.changeImage;
 
-                window.lightbox.changeImage = imageNumber =>
+                lightbox.changeImage = imageNumber =>
                 {
-                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1)
+                    if (lightbox.currentImageIndex === 0 && imageNumber === lightbox.album.length - 1)
                     {
                         imageNumber--;
                     }
-                    else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0)
+                    else if (lightbox.currentImageIndex === lightbox.album.length - 1 && imageNumber === 0)
                     {
                         imageNumber++;
                     }
-                    return originalFn.call(window.lightbox, imageNumber);
+                    return originalFn.call(lightbox, imageNumber);
                 };
             }
 
@@ -268,6 +280,18 @@ Vue.component("item-image-carousel", {
         getItemName()
         {
             return this.$options.filters.itemName(this.currentVariation.documents[0].data);
+        },
+
+        loadLightbox()
+        {
+            const scriptSource = `${ this.pluginPath }/js/dist/lightbox.min.js`;
+            const script = document.createElement("script");
+
+            script.type = "text/javascript";
+            script.src = scriptSource;
+            script.addEventListener("load", () => this.reInitialize(), false);
+            script.addEventListener("error", () => console.warn("lightbox could not be initialized"), false);
+            document.body.appendChild(script);
         }
     }
 });

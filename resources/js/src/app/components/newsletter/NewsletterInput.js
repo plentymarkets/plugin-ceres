@@ -1,9 +1,15 @@
-import TranslationService from "services/TranslationService";
-import ValidationService from "services/ValidationService";
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../services/TranslationService";
+import ValidationService from "../../services/ValidationService";
+import Vue from "vue";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
-Vue.component("newsletter-input", {
+const ApiService          = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+
+export default Vue.component("newsletter-input", {
+
+    mixins: [ButtonSizePropertyMixin],
+
     props: {
         template:
         {

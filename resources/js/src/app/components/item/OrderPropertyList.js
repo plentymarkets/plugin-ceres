@@ -1,4 +1,13 @@
-Vue.component("order-property-list", {
+import Vue from "vue";
+import { mapState, mapGetters } from "vuex";
+import OrderPropertyListGroup from "./OrderPropertyListGroup";
+
+export default Vue.component("order-property-list", {
+
+    components:
+    {
+        OrderPropertyListGroup
+    },
 
     props:
     {
@@ -51,11 +60,11 @@ Vue.component("order-property-list", {
             return [];
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
         }),
 
-        ...Vuex.mapGetters([
+        ...mapGetters([
             "variationGroupedProperties",
             "variationMissingProperties"
         ])
