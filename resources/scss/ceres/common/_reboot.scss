@@ -1,4 +1,13 @@
 // additional compatibility scss to bootstrap's reboot
+dt {
+    font-weight: 400;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+}
 
 // prevent iOS standard zoom on input elements on focus
 html.ios {

@@ -75,6 +75,10 @@
     <link rel="stylesheet" href="{{ defaultCSS }}"{% if isShopBuilder %} data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ defaultSCSS }}"{% endif %}>
 {% endif %}
 
+{% if isShopBuilder %}
+    <link rel="stylesheet" href="{{ plugin_path("Ceres") }}/css/ceres-shopbuilder.css?v={{ buildHash }}">
+{% endif %}
+
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
 
 <!-- Extend the existing style with a template -->
