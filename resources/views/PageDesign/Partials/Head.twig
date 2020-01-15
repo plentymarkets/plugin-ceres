@@ -64,8 +64,16 @@
         font-style: italic;
     }
     {% endif %}
+
+    {# FIX: do not display icons until fontawesome is loaded #}
+    .icons-loading .fa { visibility: hidden !important; }
 </style>
 
+{% set iconCSS = plugin_path("Ceres") ~ "/css/ceres-icons.css" %}
+{# asynchronously load icons.css #}
+<link rel="preload" href="{{ iconCSS }}" as="style" onload="this.onload=null;this.rel='stylesheet';">
+{# fallback for disabled javascript #}
+<noscript><link rel="stylesheet" href="{{ iconCSS }}"></noscript>
 
 {% set defaultCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".css?v=" ~ buildHash %}
 {% set defaultSCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".scss?v=" ~ buildHash %}
@@ -79,13 +87,7 @@
     <link rel="stylesheet" href="{{ plugin_path("Ceres") }}/css/ceres-shopbuilder.css?v={{ buildHash }}">
 {% endif %}
 
-{# async styles #}
-{% set iconCSS = plugin_path("Ceres") ~ "/css/ceres-icons.css" %}
-<style>
-    .icons-loading .fa { visibility: hidden !important; }
-</style>
-<link rel="preload" href="{{ iconCSS }}" as="style" onload="this.onload=null;this.rel='stylesheet';">
-<noscript><link rel="stylesheet" href="{{ iconCSS }}"></noscript>
+{# add preload polyfill #}
 <script type="application/javascript">
     /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
     /* This file is meant as a standalone workflow for
