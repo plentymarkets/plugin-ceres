@@ -141,7 +141,7 @@
             </form>
 
             {% if googleApiKey and not contactConfigSet %}
-                <div class="col-12 mt-5{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
+                <div class="col-12 mt-5{% if showMapInMobile == "false" %} d-none d-md-block{% endif %}">
                     <contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
                 </div>
             {% endif %}
