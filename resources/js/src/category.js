@@ -79,9 +79,8 @@ import "./app/components/customer/login/Login";
 import "./app/components/customer/login/LoginView";
 import "./app/components/customer/login/UserLoginHandler";
 
-
-import "./app/components/item/ItemBundle";
-
+import ItemBundle from "./app/components/item/ItemBundle.vue";
+Vue.component("item-bundle", ItemBundle);
 import "./app/components/item/OrderPropertyValue";
 import QuantityInput from "./app/components/item/QuantityInput.vue";
 Vue.component("quantity-input", QuantityInput);

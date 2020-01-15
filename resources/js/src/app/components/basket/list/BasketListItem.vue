@@ -23,8 +23,9 @@
                                 {{ unitPrice | currency }}
                             </div>
 
-                            <item-bundle :bundle-type="basketItem.variation.data.variation.bundleType"
-                                         :bundle-components="basketItem.variation.data.bundleComponents">
+                            <item-bundle
+                                    :bundle-type="basketItem.variation.data.variation.bundleType"
+                                    :bundle-components="basketItem.variation.data.bundleComponents">
                             </item-bundle>
 
                             <div class="item-small-prices text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
