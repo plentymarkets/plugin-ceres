@@ -9112,13 +9112,6 @@ button:focus {
             align-items: center;
 }
 
-.modal-footer {
-    > .fa {
-        margin-top: 1px;
-        margin-left: 5px;
-    }
-}
-
 @include media-breakpoint-down(xs) {
     html.facebook {
         .checkout .modal.show,
@@ -9134,7 +9127,7 @@ button:focus {
         }
     }
 }
-
+ // TODO: This would better fit into /components
 [class^="prop-"] {
     position: relative;
     width: 100% !important; // stylelint-disable-line declaration-no-important
@@ -9172,7 +9165,7 @@ html.ios {
     input,
     select,
     textarea {
-        font-size: 16px !important;
+        font-size: 16px !important; // stylelint-disable-line declaration-no-important
     }
 }
 
@@ -9325,24 +9318,6 @@ body {
                     width: $aside-columns-width;
                 }
             }
-        }
-    }
-}
-
-.hidden {
-    display: none;
-}
-
-.hidden-sm {
-    @include media-breakpoint-only(sm) {
-        display: none;
-    }
-}
-
-@each $bp in map-keys($grid-breakpoints) {
-    .hidden-#{$bp}-down {
-        @include media-breakpoint-down($bp) {
-            display: none !important;
         }
     }
 }
@@ -12417,172 +12392,6 @@ html.ie {
 
 
 // Templates
-.cmp-address-list {
-
-    .items {
-        position: relative;
-
-        @include media-breakpoint-up(md) {
-            display: inline-block;
-            width: 100%;
-            vertical-align: middle;
-        }
-
-        //TODO add class to this div and set this rule by the class
-        & > div:first-child {
-            @extend .card;
-            min-height: 115px;
-            margin-bottom: 0;
-        }
-    }
-
-    .dropdown-toggle {
-        &::after {
-            position: absolute;
-            top: 80%;
-            right: 1.5rem;
-            z-index: 1;
-            -webkit-transform: translateY(-50%);
-                    transform: translateY(-50%);
-        }
-    }
-
-    .items.open {
-        .dropdown-toggle {
-            border-bottom: none;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-    }
-
-    .dropdown-menu {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        border: 1px solid $gray-300;
-        border-top: none;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-
-    ul {
-        width: 100%;
-        max-height: 500px;
-        padding: 0;
-        margin: 0;
-        overflow-x: none;
-        overflow-y: auto;
-        list-style: none;
-        -webkit-box-shadow: $box-shadow;
-                box-shadow: $box-shadow;
-    }
-
-    .item {
-        position: relative;
-        padding: 0;
-        border-bottom: 1px solid $gray-300;
-
-        input { display: none; }
-
-        input:checked {
-
-            & + .item-inner {
-                color: $black;
-                background-color: #d9edf7;
-                -webkit-box-shadow: inset 0 0 0 .1rem $primary;
-                        box-shadow: inset 0 0 0 .1rem $primary;
-            }
-        }
-
-        &:last-of-type {
-            border-bottom: none;
-        }
-    }
-
-
-    .item-inner {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
-        padding: 1em;
-        margin-bottom: 0;
-        cursor: pointer;
-
-        .item-controls {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-
-            .item-edit .fa {
-                padding-top: .3rem;
-                padding-left: .1rem;
-            }
-            .item-remove .fa {
-                padding-top: .1rem;
-            }
-            .fa {
-                float: none;
-                -webkit-transition: all .2s ease-in-out;
-                transition: all .2s ease-in-out;
-            }
-            .btn {
-                width: 2.2rem;
-                height: 2.2rem;
-                padding: 0;
-                margin-left: 5px;
-            }
-        }
-    }
-
-
-    .item-content {
-        display: inline-block;
-        -webkit-box-flex: 1;
-            -ms-flex: 1 1 auto;
-                flex: 1 1 auto;
-        width: 100%;
-
-        strong,
-        span {
-            display: block;
-        }
-    }
-}
-
-.checkout {
-    header {
-        h4 {
-            line-height: 2.5rem;
-        }
-    }
-}
-
-.add-item {
-    position: absolute;
-    cursor: pointer;
-
-    @include media-breakpoint-down(xs) {
-        top: 0;
-        right: 0;
-        bottom: 0;
-
-        & button {
-            width: 50px;
-            min-width: auto !important;
-            height: 74px;
-        }
-    }
-
-    @include media-breakpoint-up(sm) {
-        top: 1em;
-        right: 1em;
-    }
-}
-
 .cmp-basket-item {
     position: relative;
     display: -webkit-box;

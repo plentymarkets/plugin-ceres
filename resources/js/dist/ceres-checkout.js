@@ -47062,6 +47062,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         return [];
       }
     },
+    hasOrderProperties: {
+      type: Boolean,
+      default: false
+    },
     hasPrice: {
       type: Boolean,
       default: true
@@ -47088,9 +47092,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice;
     },
     requiresProperties: function requiresProperties() {
-      return App.config.item.requireOrderProperties && this.orderProperties.filter(function (property) {
+      return App.config.item.requireOrderProperties && (this.hasOrderProperties || this.orderProperties.filter(function (property) {
         return property.property.isShownOnItemPage;
-      }).length > 0;
+      }).length > 0);
     },
     buttonClasses: function buttonClasses() {
       var classes = [];
@@ -52630,23 +52634,8 @@ __webpack_require__.r(__webpack_exports__);
       default: null
     },
     bundleType: String,
-    bundleComponents: Array
-  },
-  data: function data() {
-    return {
-      bundleSetting: null,
-      showItemBundleItems: true
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      if (_this.$refs.bundleSetting) {
-        _this.bundleSetting = _this.$refs.bundleSetting.innerText;
-        _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
-      }
-    });
+    bundleComponents: Array,
+    showBundleItems: Boolean
   },
   methods: {
     getBundleInnerText: function getBundleInnerText(item) {
