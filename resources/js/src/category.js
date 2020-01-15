@@ -43,7 +43,8 @@ import "bootstrap";
 // COMPONENTS
 // =========================
 
-import "./app/components/basket/AddItemToBasketOverlay";
+import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
+Vue.component("add-item-to-basket-overlay", AddItemToBasketOverlay);
 import "./app/components/basket/AddToBasket";
 import BasketPreview from "./app/components/basket/BasketPreview.vue";
 Vue.component("basket-preview", BasketPreview);

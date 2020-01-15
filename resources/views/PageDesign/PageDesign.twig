@@ -5,7 +5,6 @@
 {{ component( "Ceres::Basket.Components.BasketPreview" ) }}
 {{ component( "Ceres::Customer.Components.Login" ) }}
 {{ component( "Ceres::Customer.Components.Registration" ) }}
-{{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 {{ component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
@@ -162,7 +161,11 @@
         <!-- ./REGISTRATION MODAL -->
 
         <!-- BASKET MODAL -->
-        <add-item-to-basket-overlay></add-item-to-basket-overlay>
+        <add-item-to-basket-overlay>
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
+            </template>
+        </add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
 
         <!-- PASSWORD RESET MODAL -->
