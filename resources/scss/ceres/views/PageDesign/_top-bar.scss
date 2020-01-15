@@ -1,6 +1,6 @@
 .top-bar {
     color: $top-bar-color;
-    background-color: $top-bar-bg;
+    background-color: $top-bar-bg !important; // stylelint-disable-line declaration-no-important
 
     a {
         color: $top-bar-color;
@@ -33,6 +33,10 @@
             &:hover {
                 color: color-yiq($primary);
                 background-color: $primary;
+            }
+
+            i {
+                font-size: 1rem;
             }
         }
 
@@ -73,12 +77,13 @@
         }
 
         .dropdown-menu {
+            right: 0;
             z-index: 2000;
             display: block;
             min-width: 105px;
             max-height: 0;
             overflow: hidden;
-            border: none !important;
+            border: none;
             transition: all .3s;
 
             a {
@@ -102,6 +107,12 @@
         .fa-sign-out {
             margin-right: 3px;
         }
+    }
+}
+
+.control-languages {
+    .flag-icon {
+        font-size: .8rem !important; // stylelint-disable-line declaration-no-important
     }
 }
 
