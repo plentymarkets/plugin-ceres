@@ -69,6 +69,11 @@ export default Vue.component("add-to-basket", {
             type: Array,
             default: () => []
         },
+        hasOrderProperties:
+        {
+            type: Boolean,
+            default: false
+        },
         hasPrice:
         {
             type: Boolean,
@@ -109,7 +114,7 @@ export default Vue.component("add-to-basket", {
         requiresProperties()
         {
             return App.config.item.requireOrderProperties &&
-                this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0;
+                (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0);
         },
 
         buttonClasses()
@@ -173,21 +178,36 @@ export default Vue.component("add-to-basket", {
             {
                 this.waiting = true;
 
-                this.orderProperties.forEach(function(orderProperty)
-                {
-                    if (orderProperty.property.valueType === "float" &&
-                        !isNullOrUndefined(orderProperty.property.value) &&
-                        orderProperty.property.value.slice(-1) === App.decimalSeparator)
+                let totalSurcharge = 0;
+                const orderParams = this.orderProperties
+                    .filter((orderProperty) => !isNullOrUndefined(orderProperty.property.value))
+                    .map((orderProperty) =>
                     {
-                        orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
-                    }
-                });
+                        const property = orderProperty.property;
+
+                        if (property.valueType === "float" &&
+                            !isNullOrUndefined(property.value) &&
+                            property.value.slice(-1) === App.decimalSeparator)
+                        {
+                            property.value = property.value.substr(0, property.value.length - 1);
+                        }
+
+                        totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
+
+                        return {
+                            propertyId: property.id,
+                            type: property.valueType,
+                            name: property.names.name,
+                            value: property.value
+                        };
+                    });
 
                 const basketObject =
                     {
                         variationId             :   this.variationId,
                         quantity                :   this.quantity,
-                        basketItemOrderParams   :   this.orderProperties
+                        basketItemOrderParams   :   orderParams,
+                        totalOrderParamsMarkup  :   totalSurcharge
                     };
 
                 this.$store.dispatch("addBasketItem", basketObject).then(

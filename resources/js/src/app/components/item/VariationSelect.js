@@ -204,6 +204,11 @@ export default Vue.component("variation-select", {
                 );
             }
 
+            if (!names.length)
+            {
+                return null;
+            }
+
             return TranslationService.translate("Ceres::Template.singleItemNotAvailableInSelection", { name: names.join(", ") });
         },
 

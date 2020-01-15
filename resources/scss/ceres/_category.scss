@@ -16,11 +16,10 @@
 @import "common/buttons";
 @import "common/common";
 @import "common/heights";
-@import "common/modal";
+@import "common/modal"; // TODO: This would better fit into /components
 @import "common/proportional-boxes";
 @import "common/reboot";
 @import "common/structure";
-@import "common/visibility";
 
 // External plugins overrides
 @import "plugins/owl-carousel";
@@ -49,7 +48,6 @@
 @import "views/PageDesign/top-bar";
 
 // Templates
-@import "views/Templates/AddressSelect/address-select";
 @import "views/Templates/BasketItemList/basket-item";
 @import "views/Templates/BasketItemList/basket-list-item";
 @import "views/Templates/BasketPreview/basket-preview-hover";

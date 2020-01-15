@@ -30,7 +30,11 @@
 <!-- /Variation -->
 
 <!-- Item Bundle -->
-<item-bundle v-if="currentVariation.variation.bundleType === 'bundle'" :bundle-type="currentVariation.variation.bundleType" :bundle-components="currentVariation.bundleComponents"></item-bundle>
+<item-bundle
+        v-if="currentVariation.variation.bundleType === 'bundle'"
+        :bundle-type="currentVariation.variation.bundleType"
+        :bundle-components="currentVariation.bundleComponents"
+        :show-bundle-items="{{ webstoreConfig.dontSplitItemBundle != "1" ? "true" : "false" }}"></item-bundle>
 <!-- /Item Bundle -->
 
 <slot name="before-price"></slot>

@@ -19,7 +19,7 @@
 
             <label class="form-check-label text-appearance"
                    :for="'check' + _uid"
-                   :class="{ 'text-success': property.value, 'text-danger': hasError }"
+                   :class="{ 'text-danger': hasError }"
                    v-tooltip data-toggle="tooltip"
                    :title="property.names.description">
                 ${ property.names.name }

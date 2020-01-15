@@ -34,61 +34,6 @@
     }
 }
 
-
-// a list widget in the footer needs the grey background for store feature colors
-.footer {
-    .widget-grid {
-        .widget-inner {
-            .widget-list {
-                position: relative;
-                box-sizing: content-box;
-                height: 100%;
-                margin-bottom: 0;
-                color: $footer-features-color;
-                background-color: $footer-features-bg;
-
-                .widget-inner {
-                    padding: 1rem;
-                }
-            }
-
-            @include media-breakpoint-up(md) {
-                .widget-list {
-                    padding-right: 15px;
-                    padding-left: 15px;
-                    margin-right: -15px;
-                    margin-left: -15px;
-                }
-
-                &:first-child {
-                    .widget-list {
-                        padding-left: 0;
-                        margin-left: 0;
-                    }
-                }
-
-                &:last-child {
-                    .widget-list {
-                        padding-right: 0;
-                        margin-right: 0;
-                    }
-                }
-            }
-
-
-            @include media-breakpoint-down(sm) {
-                &:not(:last-child) {
-                    .widget-list {
-                        .widget-inner {
-                            padding-bottom: 0;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 html.ie .widget-grid .widget-inner-stacked {
     display: block;
 }
