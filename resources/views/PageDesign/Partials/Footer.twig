@@ -11,7 +11,7 @@
 
 <div class="footer">
 
-    <div class="{% if topButtonPosition == "right" %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">
+    <div class="{% if topButtonPosition == "right" %}back-to-top{% else %}back-to-top-center{% endif %} d-none d-md-block">
         <i class="fa fa-chevron-up"></i>
     </div>
 
@@ -146,7 +146,7 @@
         </div>
 
         <div class="row">
-            <div class="to-top hidden-md-up" v-scroll-to-top>
+            <div class="to-top d-md-none" v-scroll-to-top>
                 <i class="fa fa-arrow-up" aria-hidden="true"></i>
             </div>
         </div>
