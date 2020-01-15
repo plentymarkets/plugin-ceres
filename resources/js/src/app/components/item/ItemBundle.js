@@ -24,11 +24,6 @@ Vue.component("item-bundle", {
         showBundleItems: Boolean
     },
 
-    data()
-    {
-        return {};
-    },
-
     methods:
     {
         getBundleInnerText(item)

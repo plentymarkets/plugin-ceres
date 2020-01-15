@@ -29,7 +29,7 @@
 							<item-bundle
 								:bundle-type="orderItem.bundleType"
 								:bundle-components="orderItem.bundleComponents"
-								:show-bundle-items="{{ webstoreConfig.dontSplitItemBundle != "1" | json_encode }}"></item-bundle>
+								:show-bundle-items="{{ webstoreConfig.dontSplitItemBundle != "1" ? "true" : "false" }}"></item-bundle>
 
 							<div class="item-small-prices">
 								<div v-for="attribute in variation.attributes">
