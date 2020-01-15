@@ -20,27 +20,13 @@ Vue.component("item-bundle", {
             default: null
         },
         bundleType: String,
-        bundleComponents: Array
+        bundleComponents: Array,
+        showBundleItems: Boolean
     },
 
     data()
     {
-        return {
-            bundleSetting: null,
-            showItemBundleItems: true
-        };
-    },
-
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            if (this.$refs.bundleSetting)
-            {
-                this.bundleSetting = this.$refs.bundleSetting.innerText;
-                this.showItemBundleItems = (this.bundleSetting !== "1" && this.bundleType === "bundle");
-            }
-        });
+        return {};
     },
 
     methods:
