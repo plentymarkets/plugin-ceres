@@ -59322,23 +59322,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("item-bundle", {
       default: null
     },
     bundleType: String,
-    bundleComponents: Array
-  },
-  data: function data() {
-    return {
-      bundleSetting: null,
-      showItemBundleItems: true
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      if (_this.$refs.bundleSetting) {
-        _this.bundleSetting = _this.$refs.bundleSetting.innerText;
-        _this.showItemBundleItems = _this.bundleSetting !== "1" && _this.bundleType === "bundle";
-      }
-    });
+    bundleComponents: Array,
+    showBundleItems: Boolean
   },
   methods: {
     getBundleInnerText: function getBundleInnerText(item) {
