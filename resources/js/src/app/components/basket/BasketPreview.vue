@@ -1,0 +1,188 @@
+<template>
+<!-- {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }} -->
+    <div class="wrapper-inner basket-preview">
+        <header class="basket-header p-3">
+            <div class="d-inline-block basket-header-caption">{{ trans("Ceres::Template.basketPreview") }}</div>
+            <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </header>
+
+        <div v-if="basketNotifications.length > 0">
+            <div class="w-100 alert alert-danger" v-for="notification in basketNotifications" :key="notification.id">
+                <div>${ notification.message }</div>
+            </div>
+        </div>
+
+        <div class="basket-preview-content">
+            <!-- BASKET LIST -->
+            <div class="list col-sm-7 col-md-12 py-3">
+                <div class="cmp cmp-basket-preview-list">
+                    <basket-list :is-preview="true">
+                        <template #before-basket-item>
+                            {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+                        </template>
+                        <template #loading-animation>
+                            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                        </template>
+                        <template #after-basket-item>
+                            {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+                        </template>
+                    </basket-list>
+                </div>
+            </div>
+            <!-- ./BASKET LIST -->
+
+            <!-- BASKET PREVIEW BOTTOM -->
+            <div class="bg-light totals col-sm-5 col-md-12 pt-3">
+
+                {% if ceresConfig.basket.showShippingCountrySelect %}
+                    <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                    <hr>
+                {% endif %}
+
+                {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
+                <basket-totals>
+                    <template #before-item-sum>
+                        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                    </template>
+                    <template #after-item-sum>
+                        {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+                    </template>
+                    <template #before-shipping-costs>
+                        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+                    </template>
+                    <template #after-shipping-costs>
+                        {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                    </template>
+                    <template #before-total-sum>
+                        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+                    </template>
+                    <template #before-vat>
+                        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                    </template>
+                    <template #after-vat>
+                        {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+                    </template>
+                    <template #after-total-sum>
+                        {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+                    </template>
+                </basket-totals>
+                {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
+
+                <div class="basket-preview-footer row">
+                    <div class="col-6 col-sm-6 mb-3">
+                        <a v-waiting-animation-infinite
+                        href="{{ urls.basket }}"
+                        rel="nofollow"
+                        class="btn btn-outline-primary btn-block basketBtn"
+                        :class="{ 'disabled': basketItems.length <= 0 }"
+                        title="{{ trans("Ceres::Template.basket") }}">
+                            <i class="fa fa-shopping-cart hidden-sm"></i>
+                            {{ trans("Ceres::Template.basket") }} 
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+                        {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+
+                        <div>
+                            <a v-waiting-animation-infinite
+                            href="{{ urls.checkout }}"
+                            :class="{ 'disabled': basketItems.length <= 0 }"
+                            class="btn btn-primary btn-block checkOutBtn"
+                            rel="nofollow"
+                            title="{{ trans("Ceres::Template.basketCheckout") }}">
+                                <i class="fa fa-arrow-right hidden-sm" aria-hidden="true"></i>
+                                {{ trans("Ceres::Template.basketCheckout") }}
+                            </a>
+                        </div>
+
+                        {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+                    </div>
+                </div>
+            </div>
+            <!-- ./BASKET PREVIEW BOTTOM -->
+        </div>
+    </div>
+</template>
+
+<script>
+import ApiService from "../../services/ApiService";
+import { mapState } from "vuex";
+
+export default {
+
+    props: {
+        showNetPrices:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
+
+    computed: mapState({
+        basket: state => state.basket.data,
+        basketItems: state => state.basket.items,
+        basketNotifications: state => state.basket.basketNotifications,
+        isBasketItemQuantityUpdate: state => state.basket.isBasketItemQuantityUpdate
+    }),
+
+    created()
+    {
+        this.$store.dispatch("loadBasketData");
+        this.$store.commit("setShowNetPrices", this.showNetPrices);
+    },
+
+    /**
+     * Bind to basket and bind the basket items
+     */
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            ApiService.listen("AfterBasketChanged",
+                data =>
+                {
+                    this.$store.commit("setBasket", data.basket);
+                    this.$store.commit("setShowNetPrices", data.showNetPrices);
+                    this.$store.commit("setWishListIds", data.basket.itemWishListIds);
+                });
+        });
+
+        if (App.config.basket.addItemToBasketConfirm === "preview")
+        {
+            ApiService.listen("AfterBasketItemAdd", data =>
+            {
+                this.show();
+            });
+
+            ApiService.listen("AfterBasketItemUpdate", data =>
+            {
+                if (!this.isBasketItemQuantityUpdate)
+                {
+                    this.show();
+                }
+            });
+        }
+    },
+
+    methods:
+    {
+        show()
+        {
+            setTimeout(function()
+            {
+                const vueApp = document.querySelector("#vue-app");
+                const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
+
+                if (vueApp)
+                {
+                    vueApp.classList.add(basketOpenClass);
+                }
+            }, 1);
+        }
+    }
+}
+</script>

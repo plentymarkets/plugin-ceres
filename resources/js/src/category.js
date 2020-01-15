@@ -43,12 +43,18 @@ import "bootstrap";
 // COMPONENTS
 // =========================
 
-import "./app/components/basket/AddItemToBasketOverlay";
-import "./app/components/basket/AddToBasket";
-import "./app/components/basket/BasketPreview";
-import "./app/components/basket/BasketTotals";
-import "./app/components/basket/Coupon";
-import "./app/components/basket/list/BasketList";
+import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
+Vue.component("add-item-to-basket-overlay", AddItemToBasketOverlay);
+import AddToBasket from "./app/components/basket/AddToBasket.vue";
+Vue.component("add-to-basket", AddToBasket);
+import BasketPreview from "./app/components/basket/BasketPreview.vue";
+Vue.component("basket-preview", BasketPreview);
+import BasketTotals from "./app/components/basket/BasketTotals.vue";
+Vue.component("basket-totals", BasketTotals);
+import Coupon from "./app/components/basket/Coupon.vue";
+Vue.component("coupon", Coupon);
+import BasketList from "./app/components/basket/list/BasketList.vue";
+Vue.component("basket-list", BasketList);
 
 import "./app/components/category/StepByStepNavigation";
 
@@ -100,10 +106,14 @@ import "./app/components/orderReturn/OrderReturn";
 import "./app/components/pageDesign/Carousel";
 import "./app/components/pageDesign/CookieBar";
 import "./app/components/pageDesign/PrivacySettings";
-import "./app/components/pageDesign/MobileNavigation";
-import "./app/components/pageDesign/Notifications";
-import "./app/components/pageDesign/Popper";
-import "./app/components/pageDesign/ShippingCountrySelect";
+import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
+Vue.component("mobile-navigation", MobileNavigation);
+import Notifications from "./app/components/pageDesign/Notifications.vue";
+Vue.component("notifications", Notifications);
+import Popper from "./app/components/pageDesign/Popper.vue";
+Vue.component("popper", Popper);
+import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
+Vue.component("shipping-country-select", ShippingCountrySelect);
 
 import "./app/components/wishList/WishList";
 import "./app/components/wishList/WishListCount";

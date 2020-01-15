@@ -1,6 +1,4 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
-{{ component( "Ceres::Basket.Components.BasketList" ) }}
-{{ component( "Ceres::Basket.Components.BasketTotals" ) }}
 {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
 
 <script type="x/template" id="vue-basket-preview-hover">
@@ -15,7 +13,17 @@
                     </button>
                 </header>
 
-                <basket-list class="item-list" v-if="basketItems.length" :is-preview="true"></basket-list>
+                <basket-list class="item-list" v-if="basketItems.length" :is-preview="true">
+                    <template #before-basket-item>
+                        {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+                    </template>
+                    <template #loading-animation>
+                        {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                    </template>
+                    <template #after-basket-item>
+                        {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+                    </template>
+                </basket-list>
                 <div class="no-items" v-else>{{ trans("Ceres::Template.basketNoItems") }}</div>
 
                 <div class="basket-totals" v-if="basketItems.length">
@@ -29,12 +37,37 @@
                     </div>
 
                     {% if ceresConfig.basket.showShippingCountrySelect %}
-                        <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="true"></shipping-country-select>
+                        <shipping-country-select :basket-select="true" :open-basket-preview="true"></shipping-country-select>
                         <hr>
                     {% endif %}
 
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
-                    <basket-totals></basket-totals>
+                    <basket-totals>
+                        <template #before-item-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                        </template>
+                        <template #after-item-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+                        </template>
+                        <template #before-shipping-costs>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+                        </template>
+                        <template #after-shipping-costs>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                        </template>
+                        <template #before-total-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+                        </template>
+                        <template #before-vat>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                        </template>
+                        <template #after-vat>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+                        </template>
+                        <template #after-total-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+                        </template>
+                    </basket-totals>
                     {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
 
                     <div class="row">
