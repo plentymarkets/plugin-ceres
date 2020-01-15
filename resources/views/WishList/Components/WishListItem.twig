@@ -1,5 +1,4 @@
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
-{{ component( "Ceres::Item.Components.QuantityInput" ) }}
 
 {% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
 
@@ -57,7 +56,7 @@
                                 :value="quantity"
                                 :min="wishListItem.variation.minimumOrderQuantity"
                                 :max="wishListItem.variation.maximumOrderQuantity"
-                                :timeout="0" 
+                                :timeout="0"
                                 :interval="wishListItem.variation.intervalQuantity"
                                 :variation-id="wishListItem.variation.id">
                             </quantity-input>
@@ -97,7 +96,7 @@
                                 <span>${ wishListItem.variation.number }</span>
                             </div>
                         </template>
-                        
+
                         <template v-if="isDataFieldVisible('wishListItem.variation.availability')">
                             <div v-if="wishListItem.variation.availability.names.name">
                                 <strong>{{ trans("Ceres::Template.wishListAvailability") }}:</strong>

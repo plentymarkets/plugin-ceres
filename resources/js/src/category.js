@@ -77,7 +77,8 @@ import "./app/components/customer/login/UserLoginHandler";
 import "./app/components/item/ItemBundle";
 
 import "./app/components/item/OrderPropertyValue";
-import "./app/components/item/QuantityInput";
+import QuantityInput from "./app/components/item/QuantityInput.vue";
+Vue.component("quantity-input", QuantityInput);
 import "./app/components/item/TagList";
 
 import "./app/components/itemList/CategoryImageCarousel";
