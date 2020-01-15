@@ -47,7 +47,7 @@
                         class="btn btn-outline-primary btn-block basketBtn"
                         :class="{ 'disabled': basketItems.length <= 0 }"
                         title="{{ trans("Ceres::Template.basket") }}">
-                            <i class="fa fa-shopping-cart hidden-sm"></i>
+                            <i class="fa fa-shopping-cart d-none d-sm-inline d-md-none"></i>
                             {{ trans("Ceres::Template.basket") }} 
                         </a>
                     </div>
@@ -62,7 +62,7 @@
                             class="btn btn-primary btn-block checkOutBtn"
                             rel="nofollow"
                             title="{{ trans("Ceres::Template.basketCheckout") }}">
-                                <i class="fa fa-arrow-right hidden-sm" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-right d-none d-sm-inline d-md-none" aria-hidden="true"></i>
                                 {{ trans("Ceres::Template.basketCheckout") }}
                             </a>
                         </div>

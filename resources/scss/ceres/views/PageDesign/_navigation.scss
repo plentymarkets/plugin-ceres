@@ -1,28 +1,8 @@
 /* settings */
-// mobile
-$menu-bg-sm: $primary;
-$menu-breadcrumb-bg: $gray-900;
-$menu-breadcrumb-color: color-yiq($menu-breadcrumb-bg);
-$menu-color-sm: color-yiq($primary);
-$menu-font-s-sm: 1.2em;
-// desktop
-$menu-color-lg: $primary;
-$menu-font-s-lg: 1rem;
-$menu-li-bg-hover: $primary;
-$menu-li-color-hover: color-yiq($primary);
-$menu-li-padding-x: 1rem;
-$menu-li-padding-y: 1.3rem;
-// bigmenu
-$menu-big-menu-bg: darken($primary, 10%);
-$menu-big-menu-li-bg: transparent; //color-yiq($primary, $gray-700, transparent);
-$menu-big-menu-li-bg-hover: $primary;
-$menu-big-menu-li-color: color-yiq($primary);
-// megamenu
-$megamenu-bg: $white;
-$megamenu-color-top-btn: $primary;
-$megamenu-color-bottom-btn: $black;
-$megamenu-btn-hover: darken($top-bar-basket-btn, 20%);
-$megamenu-btn-more: $gray-600;
+$menu-link-color: $primary !default;
+$mobile-navigation-color: $primary !default;
+$megamenu-color: $primary !default;
+$normalmenu-color: $primary !default;
 
 .navbar {
     background-color: $navbar-background-color;
@@ -53,7 +33,7 @@ $megamenu-btn-more: $gray-600;
 }
 
 // When mobile navigation is open
-body.menu-is-visible {
+body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     position: fixed;
     overflow-y: hidden;
 }
@@ -63,15 +43,15 @@ body.menu-is-visible {
         color: inherit;
     }
 
-    ul.mainmenu {
+    .mainmenu {
         > li {
             position: relative;
+            color: color-yiq($normalmenu-color);
         }
     }
 
-    ul.collapsed {
+    .collapse {
         position: absolute;
-        // z-index: 1;
         display: block;
         min-width: 100%;
         max-height: 80vh;
@@ -79,19 +59,18 @@ body.menu-is-visible {
         overflow-y: auto;
         word-wrap: break-word;
         visibility: hidden;
-        background: $menu-color-lg;
+        background: $normalmenu-color;
         opacity: 0;
-        // transition: all .1s ease;
 
         > li {
             min-width: 150px;
         }
     }
 
-    .nav-dropdown-inner {
+    .collapse-inner {
         > li {
             &:hover {
-                background: $menu-big-menu-bg;
+                background: darken($normalmenu-color, 10%);
             }
 
             a {
@@ -102,11 +81,12 @@ body.menu-is-visible {
 }
 
 .megamenu {
-    ul.mainmenu {
+    .mainmenu {
         > li {
-
             &:hover,
-            &.hover {
+            &.hover { // stylelint-disable-line selector-no-qualifying-type
+                color: inherit;
+
                 > ul {
                     display: block;
                 }
@@ -114,30 +94,7 @@ body.menu-is-visible {
         }
     }
 
-    .nav-dropdown-inner {
-        padding-bottom: 1em;
-
-        li {
-            // 0.1px for rendering fix
-            padding: .1px 1.5em;
-            line-height: 170%;
-            text-align: left;
-        }
-        a {
-            color: $megamenu-color-bottom-btn;
-        }
-        &:hover a {
-            color: $megamenu-color-top-btn;
-        }
-        .bt-more {
-            a {
-                color: $megamenu-btn-more;
-                text-transform: lowercase;
-            }
-        }
-    }
-
-    ul.collapse {
+    .collapse {
         position: absolute;
         left: 0;
         display: none;
@@ -150,18 +107,42 @@ body.menu-is-visible {
         column-count: 5;
         column-fill: balance;
         column-gap: .5em;
-        column-rule: 1px solid #dcdbd7;
+        column-rule: 1px solid $gray-300;
         word-wrap: break-word;
-        background-color: $megamenu-bg;
+        background-color: color-yiq($megamenu-color);
+    }
+
+    .collapse-inner {
+        padding-bottom: 1em;
+
+        li {
+            // 0.1px for rendering fix
+            padding: .1px 1.5em;
+            line-height: 170%;
+            text-align: left;
+
+            &:hover a {
+                color: $megamenu-color;
+            }
+        }
+        a {
+            color: $black;
+        }
+        .bt-more {
+            a {
+                color: $gray-600;
+                text-transform: lowercase;
+            }
+        }
     }
 
     .level1 {
         a {
             font-weight: 700;
-            color: $megamenu-color-top-btn !important; // stylelint-disable-line declaration-no-important
+            color: $megamenu-color !important; // stylelint-disable-line declaration-no-important
         }
         &:hover a {
-            color: $megamenu-btn-hover !important; // stylelint-disable-line declaration-no-important
+            color: darken($megamenu-color, 10%) !important; // stylelint-disable-line declaration-no-important
         }
     }
     .level3 {
@@ -173,7 +154,7 @@ body.menu-is-visible {
 .main-navbar-collapsable {
     flex: 1 1 auto;
     align-self: stretch;
-    font-size: $menu-font-s-lg;
+    font-size: 1rem;
 
     ul {
         padding: 0;
@@ -188,45 +169,52 @@ body.menu-is-visible {
         width: 100%;
     }
 
-    ul.mainmenu {
+    .mainmenu {
         flex-flow: wrap;
         justify-content: flex-end;
         height: 100%;
-        color: $menu-color-lg;
 
         > li {
-            &:hover,
-            &.hover {
-                color: $menu-li-color-hover;
-                background-color: $menu-li-bg-hover;
+            &:hover, // stylelint-disable-line selector-no-qualifying-type
+            &.hover { // stylelint-disable-line selector-no-qualifying-type
+                background-color: $menu-link-color;
+
+                > a {
+                    color: color-yiq($menu-link-color);
+                }
 
                 > ul {
                     visibility: visible;
                     opacity: 1;
                 }
             }
+
+            > a {
+                color: $menu-link-color;
+            }
         }
     }
 
     .ddown {
         > a {
-            padding: $menu-li-padding-y $menu-li-padding-x;
+            padding: 1.3rem 1rem;
 
             &::after {
                 padding-left: .5em;
-                font-family: FontAwesome;
+                font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                 font-size: inherit;
                 content: "\f0d7";
             }
         }
     }
 
-    .nav-dropdown-inner {
+    .collapse-inner {
         > li {
             cursor: pointer;
         }
     }
 }
+
 
 .mobile-navigation {
     position: fixed;
@@ -236,12 +224,11 @@ body.menu-is-visible {
     left: 0;
     z-index: 99999;
     overflow-y: auto;
-    font-size: $menu-font-s-sm;
-    color: $menu-color-sm;
-    background: $menu-bg-sm;
+    font-size: 1.2em;
+    color: color-yiq($mobile-navigation-color);
+    background: $mobile-navigation-color;
     opacity: .6;
-    transition: all .3s ease;
-
+    transition: all .3s ease; // stylelint-disable-line property-blacklist
     transform: translateX(100%);
     -webkit-overflow-scrolling: touch;
 
@@ -258,21 +245,17 @@ body.menu-is-visible {
 
     .sk-fading-circle .sk-circle::before,
     .loading-animation > div {
-        background-color: $menu-color-sm;
+        background-color: color-yiq($mobile-navigation-color);
     }
 
-    ul.breadcrumb {
-        display: block;
-        max-width: initial;
-        padding: 0 calc(15px + .5em) 0 15px;
+    .breadcrumb {
         font-size: .8em;
-        color: $menu-breadcrumb-color;
-        background: $menu-breadcrumb-bg;
+        background: $gray-900;
 
         li {
             display: inline-block;
-            padding: .8rem 0 .75rem;
-            // cursor: pointer;
+            padding: .8rem 0;
+            cursor: pointer;
 
             &:last-child {
                 pointer-events: none;
@@ -282,35 +265,34 @@ body.menu-is-visible {
                 float: right;
                 padding-top: .6em;
                 &::before {
-                    font-family: "FontAwesome";
+                    font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                     font-size: 1.2em;
                     content: "\f00d";
                 }
             }
             &:not(:first-of-type) a::before {
                 padding: 0 .3rem;
-                font-family: FontAwesome;
+                font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                 font-size: 1rem;
                 content: "\f0da";
             }
-            &:first-of-type a::before { display: none !important; }
+            &:first-of-type a::before {
+                display: none !important; // stylelint-disable-line declaration-no-important
+            }
         }
     }
 
-    ul.mainmenu {
+    .mainmenu {
         position: absolute;
         display: none;
-        width: 100%;
         height: 90%;
-        padding: 0;
-        margin: 0;
 
         &.menu-active {
-            display: block !important;
+            display: block !important; // stylelint-disable-line declaration-no-important
         }
 
         .btn-up {
-            flex: none !important;
+            flex: none !important; // stylelint-disable-line declaration-no-important
             transform: rotateY(180deg);
         }
 
@@ -319,7 +301,7 @@ body.menu-is-visible {
             flex-wrap: wrap;
             float: left;
             width: 100%;
-            // cursor: pointer;
+            cursor: pointer;
 
             a {
                 display: inline-block;
@@ -331,50 +313,15 @@ body.menu-is-visible {
                     color: inherit;
                 }
             }
-
-            ul {
-                position: relative;
-                top: 0;
-                left: 0;
-                width: 100%;
-                padding: 0;
-                margin: 0;
-                background: $menu-bg-sm;
-            }
-            &.ddown {
-                .nav-direction {
-                    i {
-                        transition: transform 300ms ease-out;
-                        transform: rotateX(0deg);
-                    }
-                }
-                .nav-direction[aria-expanded="true"] {
-                    i {
-                        transform: rotateX(180deg);
-                    }
-                }
-            }
         }
     }
 
     .nav-placeholder {
-        display: block;
-        width: 200px;
         height: 25px;
-        margin: 1rem;
         background: $black;
-        border-radius: 3px;
-        opacity: .1;
-        -webkit-animation: mobile-nav-placeholder .8s infinite ease-in-out;
+        border-radius: 3px; // stylelint-disable-line property-blacklist
         animation: mobile-nav-placeholder .8s infinite ease-in-out;
     }
-}
-
-// Mobile Navigation only
-@-webkit-keyframes mobile-nav-placeholder {
-    0% { opacity: .1; }
-    50% { opacity: .15; }
-    100% { opacity: .1; }
 }
 
 @keyframes mobile-nav-placeholder {
@@ -383,122 +330,76 @@ body.menu-is-visible {
     100% { opacity: .1; }
 }
 
-.mainmenu-[class^="animate-"],
+.mainmenu-[class^="animate-"], // stylelint-disable-line selector-class-pattern
 .mainmenu[class*=" animate-"] {
-    display: block !important;
+    display: block !important; // stylelint-disable-line declaration-no-important
 }
 
-.animate-outToRight .ddown {
-    -webkit-animation: outtoright .2s both cubic-bezier(.7, 0, .3, 1);
-    animation: outToRight .2s both cubic-bezier(.7, 0, .3, 1);
+.animate-out-to-right .ddown {
+    animation: out-to-right .2s both cubic-bezier(.7, 0, .3, 1);
 }
 
-@-webkit-keyframes outToRight {
+@keyframes out-to-right {
     to {
         opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0);
         transform: translate3d(100%, 0, 0);
     }
 }
-@keyframes outToRight {
-    to {
-        opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0);
-        transform: translate3d(100%, 0, 0);
-    }
-}
-.animate-outToLeft .ddown {
-    -webkit-animation: outtoleft .2s both cubic-bezier(.7, 0, .3, 1);
-    animation: outToLeft .2s both cubic-bezier(.7, 0, .3, 1);
+.animate-out-to-left .ddown {
+    animation: out-to-left .2s both cubic-bezier(.7, 0, .3, 1);
 }
 
-@-webkit-keyframes outToLeft {
+@keyframes out-to-left {
     to {
         opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0);
     }
 }
-@keyframes outToLeft {
-    to {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
-    }
-}
-.animate-inFromLeft .ddown {
-    -webkit-animation: infromleft .2s both cubic-bezier(.7, 0, .3, 1);
-    animation: inFromLeft .2s both cubic-bezier(.7, 0, .3, 1);
+.animate-in-from-left .ddown {
+    animation: in-from-left .2s both cubic-bezier(.7, 0, .3, 1);
 }
 
-@-webkit-keyframes inFromLeft {
+@keyframes in-from-left {
     from {
         opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0);
     }
     to {
         opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
 }
-@keyframes inFromLeft {
-    from {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
-    }
-    to {
-        opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-}
-.animate-inFromRight .ddown {
-    -webkit-animation: infromright .2s both cubic-bezier(.7, 0, .3, 1);
-    animation: inFromRight .2s both cubic-bezier(.7, 0, .3, 1);
+.animate-in-from-right .ddown {
+    animation: in-from-right .2s both cubic-bezier(.7, 0, .3, 1);
 }
 
-@-webkit-keyframes inFromRight {
+@keyframes in-from-right {
     from {
         opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0);
         transform: translate3d(100%, 0, 0);
     }
     to {
         opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-}
-@keyframes inFromRight {
-    from {
-        opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0);
-        transform: translate3d(100%, 0, 0);
-    }
-    to {
-        opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
 }
 
 // IE compatibility
-html.ie {
-    .main-navbar-collapsable {
+html.ie { // stylelint-disable-line selector-no-qualifying-type
+    .main-navbar-collapsable { // stylelint-disable-line selector-no-qualifying-type
         width: 100%;
     }
-    .mobile-navigation ul.mainmenu li {
-        a {
-            flex: 1 0 75%;
-        }
-        .nav-direction {
-            flex: 1 0 10%;
+    .mobile-navigation { // stylelint-disable-line selector-no-qualifying-type
+        .mainmenu { // stylelint-disable-line selector-no-qualifying-type
+            a {
+                flex: 1 0 75%;
+            }
+            .nav-direction { // stylelint-disable-line selector-no-qualifying-type
+                flex: 1 0 10%;
+            }
         }
     }
-    .navbar-brand img[src*="svg"] {
+    .navbar-brand img[src*="svg"] { // stylelint-disable-line selector-no-qualifying-type
         width: 100%;
         height: 100%;
     }

@@ -11,7 +11,7 @@
 
 <div class="footer d-print-none">
 
-    <div class="{% if topButtonPosition == "right" %}back-to-top color-light{% else %}back-to-top-center{% endif %} hidden-sm-down text-center cursor-pointer border mx-auto rounded-lg">
+    <div class="{% if topButtonPosition == "right" %}back-to-top color-light{% else %}back-to-top-center{% endif %} d-none d-md-block text-center cursor-pointer border mx-auto rounded-lg">
         <i class="fa fa-chevron-up fa-2x"></i>
     </div>
 
@@ -138,7 +138,7 @@
                 {{ footerContainer | raw }}
             </div>
         </div>
-        <div class="{% if topButtonPosition == "right" %}back-to-top color-light{% else %}back-to-top-center{% endif %} hidden-sm-down text-center cursor-pointer border mx-auto rounded-lg">
+        <div class="{% if topButtonPosition == "right" %}back-to-top color-light{% else %}back-to-top-center{% endif %} d-none d-md-block text-center cursor-pointer border mx-auto rounded-lg">
             <i class="fa fa-chevron-up fa-2x"></i>
         </div>
 

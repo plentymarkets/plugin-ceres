@@ -247,13 +247,13 @@ export default Vue.component("mobile-navigation", {
                 $(el).on("menu-activated", (event, params) =>
                 {
                     $(event.target).addClass("menu-active");
-                    $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
+                    $(event.target).addClass(params.back ? "animate-in-from-left" : "animate-in-from-right");
                 });
                 // add "deactivated" classes when menu is deactivated
                 $(el).on("menu-deactivated", (event, params) =>
                 {
                     $(event.target).removeClass("menu-active");
-                    $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
+                    $(event.target).addClass(params.back ? "animate-out-to-right" : "animate-out-to-left");
                 });
                 // this removes the animation class automatically after the animation has completed
                 $(el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () =>
