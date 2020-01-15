@@ -1,24 +1,106 @@
+<template>
+    <div>
+        <div :class="{'no-pointer-events': waiting}" class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && canBeAddedToBasket"
+             v-tooltip data-toggle="tooltip" data-placement="top" :title="$translate('Ceres::Template.singleItemAddToBasket')" @click="addToBasket()">
+            <i v-waiting-animation="waiting" class="fa fa-cart-plus fa-lg mobile-icon-right"></i>
+        </div>
+
+        <div class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket"
+             v-tooltip data-toggle="tooltip" data-placement="top" :title="$translate('Ceres::Template.itemShowItem')" @click="directToItem()">
+            <i class="fa fa-arrow-right fa-lg mobile-icon-right"></i>
+        </div>
+
+        <div class="category-list-view-port" v-if="showQuantity && !useLargeScale">
+            <div class="add-to-basket-container">
+                <div class="quantity-input-container">
+                    <quantity-input :value="quantity"
+                                    @quantity-change="updateQuantity"
+                                    @out-of-stock="handleButtonState"
+                                    :timeout="0"
+                                    :min="minimumQuantity"
+                                    :max="maximumQuantity"
+                                    :interval="intervalQuantity"
+                                    :variation-id="variationId"
+                                    template="#vue-quantity-input"></quantity-input>
+                </div>
+
+                <button
+                        v-if="!isVariationSelected || !isSalable"
+                        class="btn btn-block btn-primary btn-appearance disabled"
+                        v-tooltip
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        :title="tooltipText"
+                        :class="buttonClasses"
+                        :style="paddingInlineStyles">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.singleItemAddToBasket") }}
+                </button>
+                <button
+                        v-else-if="!buttonLockState"
+                        :disabled="waiting || !hasPrice"
+                        class="btn btn-block btn-primary btn-appearance"
+                        @click="addToBasket()"
+                        :class="buttonClasses"
+                        :style="paddingInlineStyles">
+                    <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.singleItemAddToBasket") }}
+                </button>
+                <button v-else
+                        class="btn btn-block btn-primary btn-appearance disabled"
+                        v-tooltip
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        :title="'Ceres::Template.singleItemQuantityMax' | translate({max: item.variation.maximumOrderQuantity})"
+                        :class="buttonClasses"
+                        :style="paddingInlineStyles">
+                    <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.singleItemAddToBasket") }}
+                </button>
+            </div>
+        </div>
+
+        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && isWishList !== 'true'">
+            <div class="btn-group" role="group" aria-label="Thumb Control">
+                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary btn-outline-appearance mobile-width-button" @click="addToBasket()">
+                    <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true" v-waiting-animation="waiting"></i>
+                    <span class="mobile-text-only">{{ $translate("Ceres::Template.singleItemAddToBasket") }}</span>
+                </button>
+                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-outline-primary btn-outline-appearance mobile-width-button" @click="directToItem()">
+                    <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
+                    <span class="mobile-text-only">{{ $translate("Ceres::Template.itemShowItem") }}</span>
+                </button>
+            </div>
+        </div>
+        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && isWishList === 'true'">
+            <div class="btn-group" role="group" aria-label="Thumb Control">
+                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
+                    <i class="fa fa-shopping-cart fa-lg mobile-icon-right" aria-hidden="true" v-waiting-animation="waiting"></i>
+                    <span class="mobile-text-only">{{ $translate("Ceres::Template.singleItemAddToBasket") }}</span>
+                </button>
+                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="directToItem()">
+                    <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
+                    <span class="mobile-text-only">{{ $translate("Ceres::Template.itemShowItem") }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
 import ExceptionMap from "../../exceptions/ExceptionMap";
-import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
-import Vue from "vue";
 import { mapState } from "vuex";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
 const NotificationService = require("../../services/NotificationService");
 
-export default Vue.component("add-to-basket", {
-
+export default {
     mixins: [ButtonSizePropertyMixin],
 
     props:
     {
-        template:
-        {
-            type: String,
-            default: "#vue-add-to-basket"
-        },
         itemUrl: String,
         showQuantity:
         {
@@ -133,11 +215,11 @@ export default Vue.component("add-to-basket", {
         {
             if (this.hasAvailableVariations)
             {
-                return TranslationService.translate("Ceres::Template.singleItemPleaseSelectValidVariation");
+                return this.$translate("Ceres::Template.singleItemPleaseSelectValidVariation");
             }
             else
             {
-                return TranslationService.translate("Ceres::Template.singleItemPleaseSelectNotAvailable");
+                return this.$translate("Ceres::Template.singleItemPleaseSelectNotAvailable");
             }
         },
 
@@ -149,6 +231,7 @@ export default Vue.component("add-to-basket", {
             variationOrderQuantity: state => state.item.variationOrderQuantity
         })
     },
+
     data()
     {
         return {
@@ -157,6 +240,7 @@ export default Vue.component("add-to-basket", {
             waiting: false
         };
     },
+
     methods:
     {
         /**
@@ -203,7 +287,7 @@ export default Vue.component("add-to-basket", {
                         if (error.data)
                         {
                             NotificationService.error(
-                                TranslationService.translate(
+                                this.$translate(
                                     "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
                                     error.data.placeholder
                                 )
@@ -224,7 +308,7 @@ export default Vue.component("add-to-basket", {
                 errorMsgContent += name + "<br>";
             }
 
-            NotificationService.error(TranslationService.translate("Ceres::Template.singleItemMissingOrderPropertiesError").replace("<properties>", errorMsgContent));
+            NotificationService.error(this.$translate("Ceres::Template.singleItemMissingOrderPropertiesError").replace("<properties>", errorMsgContent));
         },
 
         directToItem()
@@ -269,4 +353,5 @@ export default Vue.component("add-to-basket", {
             }
         }
     }
-});
+}
+</script>
