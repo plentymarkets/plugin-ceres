@@ -53495,6 +53495,10 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("add-to-basket", {
         return [];
       }
     },
+    hasOrderProperties: {
+      type: Boolean,
+      default: false
+    },
     hasPrice: {
       type: Boolean,
       default: true
@@ -53521,9 +53525,9 @@ vue__WEBPACK_IMPORTED_MODULE_29___default.a.component("add-to-basket", {
       return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice;
     },
     requiresProperties: function requiresProperties() {
-      return App.config.item.requireOrderProperties && this.orderProperties.filter(function (property) {
+      return App.config.item.requireOrderProperties && (this.hasOrderProperties || this.orderProperties.filter(function (property) {
         return property.property.isShownOnItemPage;
-      }).length > 0;
+      }).length > 0);
     },
     buttonClasses: function buttonClasses() {
       var classes = [];
