@@ -1,17 +1,35 @@
+<template>
+    <div itemscope itemtype="http://schema.org/Thing">
+        <div class="single-carousel owl-carousel owl-theme owl-single-item" ref="single">
+            <div v-for="image in singleImages" class="prop-xs-1-1">
+                <a :href="image.url" data-lightbox="single-big-image-gallery">
+                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getItemName()"></lazy-img>
+                </a>
+            </div>
+        </div>
+        <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
+            <div class="prop-xs-1-1" v-for="(imagePreview, index) in carouselImages">
+                <div class="image-container" @click="goTo(index)">
+                    <lazy-img
+                            class="owl-thumb border-appearance"
+                            v-bind:class="{ 'active': currentItem === index}"
+                            :image-url="imagePreview.url"
+                            :alt="getAltText(imagePreview)"
+                            :title="getItemName()">
+                    </lazy-img>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
 import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
 import "owl.carousel";
 import { mapState } from "vuex";
 
-export default Vue.component("item-image-carousel", {
-
+export default {
     props: {
-        template:
-        {
-            type: String,
-            default: "#vue-item-image-carousel"
-        },
         maxQuantity:
         {
             type: Number,
@@ -47,7 +65,7 @@ export default Vue.component("item-image-carousel", {
     data()
     {
         return {
-            currentItem     : 0
+            currentItem: 0
         };
     },
 
@@ -79,7 +97,8 @@ export default Vue.component("item-image-carousel", {
     },
 
     watch: {
-        currentVariation: {
+        currentVariation:
+        {
             handler(val, oldVal)
             {
                 if (val !== oldVal)
@@ -192,7 +211,7 @@ export default Vue.component("item-image-carousel", {
                     {
                         current -= imageCount;
                     }
-                    return TranslationService.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
+                    return this.$translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
                 };
 
                 const originalFn = lightbox.changeImage;
@@ -272,9 +291,7 @@ export default Vue.component("item-image-carousel", {
 
         getAltText(image)
         {
-            const altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
-
-            return altText;
+            return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
         },
 
         getItemName()
@@ -294,4 +311,5 @@ export default Vue.component("item-image-carousel", {
             document.body.appendChild(script);
         }
     }
-});
+}
+</script>

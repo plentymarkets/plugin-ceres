@@ -1,4 +1,3 @@
-{{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
 {{ component( "Ceres::Item.Components.OldVariationSelect" ) }}
 {{ component( "Ceres::Item.Components.OrderProperties" ) }}
 {{ component( "Ceres::Item.Components.OrderPropertyList" ) }}
@@ -24,7 +23,7 @@
     <template #image-carousel>
         {% set ImageCarouselOverride = LayoutContainer.show("Ceres::SingleItem.ImageCarousel") %}
         {% if ImageCarouselOverride|trim is empty %}
-            <item-image-carousel plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url" template="#vue-item-image-carousel"></item-image-carousel>
+            <item-image-carousel plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url"></item-image-carousel>
         {% else %}
             {{ ImageCarouselOverride }}
         {% endif %}
