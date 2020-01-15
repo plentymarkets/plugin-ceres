@@ -96,7 +96,8 @@ import "./app/components/newsletter/NewsletterUnsubscribeInput";
 
 import "./app/components/orderReturn/OrderReturn";
 
-import "./app/components/pageDesign/CookieBar";
+import CookieBar from "./app/components/pageDesign/CookieBar.vue";
+Vue.component("cookie-bar", CookieBar);
 import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
 Vue.component("privacy-settings", PrivacySettings);
 import Carousel from "./app/components/pageDesign/Carousel.vue";
