@@ -346,18 +346,15 @@ export default {
             {
                 translationKey = "Ceres::Template.singleItemAgeRestrictionNone";
             }
-
-            if(age > 0 && age <= 18)
+            else if(age > 0 && age <= 18)
             {
                 translationKey = "Ceres::Template.singleItemAgeRestriction";
             }
-
-            if(age === 50)
+            else if(age === 50)
             {
                 translationKey = "Ceres::Template.singleItemAgeRestrictionNotFlagged";
             }
-
-            if(age === 88)
+            else if(age === 88)
             {
                 translationKey = "Ceres::Template.singleItemAgeRestrictionNotRequired";
             }
