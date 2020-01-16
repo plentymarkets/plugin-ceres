@@ -11,6 +11,23 @@ import "custom-event-polyfill";
 import Vue from "vue";
 import Vuex from "vuex";
 
+const mount = Vue.prototype.$mount;
+
+Vue.prototype.$mount =
+    function(el, hydrating)
+    {
+        const templateOverride = this.$props.templateOverride;
+
+        if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
+        {
+            const renderFunctions = Vue.compile(document.querySelector(templateOverride).innerHTML);
+
+            Object.assign(this.$options, renderFunctions);
+        }
+
+        return mount.call(this, el, hydrating);
+    };
+
 window.Vue = Vue;
 window.Vuex = Vuex;
 
@@ -79,13 +96,20 @@ import "./app/components/newsletter/NewsletterUnsubscribeInput";
 
 import "./app/components/orderReturn/OrderReturn";
 
-import "./app/components/pageDesign/Carousel";
-import "./app/components/pageDesign/CookieBar";
-import "./app/components/pageDesign/PrivacySettings";
-import "./app/components/pageDesign/MobileNavigation";
-import "./app/components/pageDesign/Notifications";
-import "./app/components/pageDesign/Popper";
-import "./app/components/pageDesign/ShippingCountrySelect";
+import CookieBar from "./app/components/pageDesign/CookieBar.vue";
+Vue.component("cookie-bar", CookieBar);
+import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
+Vue.component("privacy-settings", PrivacySettings);
+import Carousel from "./app/components/pageDesign/Carousel.vue";
+Vue.component("carousel", Carousel);
+import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
+Vue.component("mobile-navigation", MobileNavigation);
+import Notifications from "./app/components/pageDesign/Notifications.vue";
+Vue.component("notifications", Notifications);
+import Popper from "./app/components/pageDesign/Popper.vue";
+Vue.component("popper", Popper);
+import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
+Vue.component("shipping-country-select", ShippingCountrySelect);
 
 import "./app/components/wishList/WishList";
 import "./app/components/wishList/WishListCount";
@@ -147,12 +171,15 @@ import "./app/filters/truncate.filter";
 // =========================
 // MIXINS
 // =========================
-import "./app/mixins/buttonSizeProperty.mixin";
 import "./app/mixins/getJsonData.mixin";
 import "./app/mixins/template.mixin";
-
 
 // =========================
 // Bootstrap frameworks
 // =========================
 import "./app/main";
+
+import TranslationService from "./app/services/TranslationService";
+window.ceresTranslate = TranslationService.translate;
+
+Vue.prototype.$translate = TranslationService.translate;
