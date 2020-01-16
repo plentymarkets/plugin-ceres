@@ -75,29 +75,23 @@
                         </div>
                     </div>
 
-                    <div class="basket-item-container-right ml-3">
-                        <div class="qty-box-container">
-                            <quantity-input
-                                    template="#vue-quantity-input"
-                                    @quantity-change="updateQuantity"
-                                    :value="basketItem.quantity"
-                                    :waiting="isInputLocked || isCheckoutReadonly"
-                                    :min="basketItem.variation.data.variation.minimumOrderQuantity"
-                                    :max="basketItem.variation.data.variation.maximumOrderQuantity"
-                                    :interval="basketItem.variation.data.variation.intervalOrderQuantity"></quantity-input>
-                        </div>
+                    <div class="basket-item-container-right">
+                        <quantity-input
+                                template="#vue-quantity-input"
+                                @quantity-change="updateQuantity"
+                                :value="basketItem.quantity"
+                                :waiting="isInputLocked || isCheckoutReadonly"
+                                :min="basketItem.variation.data.variation.minimumOrderQuantity"
+                                :max="basketItem.variation.data.variation.maximumOrderQuantity"
+                                :interval="basketItem.variation.data.variation.intervalOrderQuantity"></quantity-input>
 
-                        <div class="price-box ml-2">
-                            <div class="item-total-price font-weight-bold text-right text-nowrap">${ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }</div>
+                        <div class="price-box text-right ml-2 mt-1">
+                            <div class="item-total-price font-weight-bold text-nowrap">${ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }</div>
 
-                            <div class="item-remove-container">
-                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
-                                    <span>
-                                        {{ trans("Ceres::Template.basketDelete") }}
-                                        <i v-waiting-animation="waitingForDelete" class="fa fa-trash-o" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            <button class="btn btn-sm text-danger p-0" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
+                                {{ trans("Ceres::Template.basketDelete") }}
+                                <i v-waiting-animation="waitingForDelete" class="fa fa-trash-o default-float" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

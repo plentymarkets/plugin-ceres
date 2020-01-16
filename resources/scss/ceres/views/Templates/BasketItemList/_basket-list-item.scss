@@ -46,7 +46,22 @@
         }
     }
 
-    .meta-container,
+    .meta-container {
+        width: 100%;
+        min-width: 0;
+
+        html.ie & { // stylelint-disable-line selector-no-qualifying-type
+            display: block;
+            float: left;
+            width: 65%;
+
+            @include media-breakpoint-down(lg) {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
     .meta-container-wrapper {
         width: 100%;
         min-width: 0;
@@ -79,98 +94,23 @@
 
 .basket-item-container-right {
 
-    .qty-box-container {
-        margin: 0 0 0 10px;
+    .qty-box {
+        height: 41px;
+        margin-left: auto;
 
-        @include media-breakpoint-down(sm) {
-            margin: 0 0 5px 27px;
-        }
-
-        .qty-box {
-            height: 41px;
-            margin: 0 0 5px auto;
-
-            .qty-input {
-                margin-left: auto;
-            }
+        .qty-input {
+            margin-left: auto;
         }
     }
-    .item-remove-container {
-        font-size: 1.2em;
-        line-height: 1.2em;
-        text-align: right;
 
-        > .item-remove-button {
-            padding: 0;
-            color: $danger;
-            cursor: pointer;
-            background: none;
-            border: none;
-
-            &.disabled {
-                cursor: not-allowed;
-            }
-        }
-    }
-}
-
-/* Compatibility for IE */
-html.ie .basket-list-item { // stylelint-disable-line
-
-    .meta-container {
-        display: block;
-        float: left;
-        width: 65%;
-    }
-    .basket-item-container-right {
+    html.ie & { // stylelint-disable-line selector-no-qualifying-type
         display: block;
         width: 35%;
+        margin-left: auto;
 
-        // Align childs right
-        .qty-box-container .qty-box {
-            margin: 0 0 5px;
-
-            .qty-input {
-                margin-left: auto;
-            }
-        }
-    }
-
-    // For Basket-Preview and Basket
-    @include media-breakpoint-down(sm) {
-        .meta-container {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        // Initialise width
-        .basket-item-container-right {
+        @include media-breakpoint-down(lg) {
             display: flex;
             width: 100%;
-            // Arrange to the right
-            .qty-box-container {
-                margin-left: auto;
-            }
-        }
-    }
-}
-
-// For Checkout
-html.ie .checkout .basket-list-item {
-    @include media-breakpoint-down(lg) {
-        .meta-container {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        // Initialise width
-        .basket-item-container-right {
-            display: flex;
-            width: 100%;
-            // Arrange to the right
-            .qty-box-container {
-                margin-left: auto;
-            }
         }
     }
 }
