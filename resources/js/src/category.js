@@ -43,8 +43,10 @@ import "bootstrap";
 // COMPONENTS
 // =========================
 
-import "./app/components/basket/AddItemToBasketOverlay";
-import "./app/components/basket/AddToBasket";
+import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
+Vue.component("add-item-to-basket-overlay", AddItemToBasketOverlay);
+import AddToBasket from "./app/components/basket/AddToBasket.vue";
+Vue.component("add-to-basket", AddToBasket);
 import BasketPreview from "./app/components/basket/BasketPreview.vue";
 Vue.component("basket-preview", BasketPreview);
 import BasketTotals from "./app/components/basket/BasketTotals.vue";
@@ -100,9 +102,12 @@ import "./app/components/newsletter/NewsletterUnsubscribeInput";
 
 import "./app/components/orderReturn/OrderReturn";
 
-import "./app/components/pageDesign/Carousel";
-import "./app/components/pageDesign/CookieBar";
-import "./app/components/pageDesign/PrivacySettings";
+import CookieBar from "./app/components/pageDesign/CookieBar.vue";
+Vue.component("cookie-bar", CookieBar);
+import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
+Vue.component("privacy-settings", PrivacySettings);
+import Carousel from "./app/components/pageDesign/Carousel.vue";
+Vue.component("carousel", Carousel);
 import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
 Vue.component("mobile-navigation", MobileNavigation);
 import Notifications from "./app/components/pageDesign/Notifications.vue";
