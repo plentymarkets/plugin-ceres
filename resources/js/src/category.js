@@ -81,7 +81,8 @@ import "./app/components/customer/login/UserLoginHandler";
 
 import ItemBundle from "./app/components/item/ItemBundle.vue";
 Vue.component("item-bundle", ItemBundle);
-import "./app/components/item/OrderPropertyValue";
+import OrderPropertyValue from "./app/components/item/OrderPropertyValue.vue";
+Vue.component("order-property-value", OrderPropertyValue);
 import QuantityInput from "./app/components/item/QuantityInput.vue";
 Vue.component("quantity-input", QuantityInput);
 import TagList from "./app/components/item/TagList.vue";

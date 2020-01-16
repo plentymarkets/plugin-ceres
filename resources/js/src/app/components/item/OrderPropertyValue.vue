@@ -1,15 +1,20 @@
+<template>
+    <span v-if="property.type === 'file'">
+        <a :href="property.value | fileUploadPath" target="_blank">
+            <i class="fa fa-external-link" aria-hidden="true"></i>
+            {{ property.value | fileName }}
+        </a>
+    </span>
+    <span v-else>${ valueLabel }</span>
+</template>
+
+<script>
 import { isDefined } from "../../helper/utils";
-import Vue from "vue";
 import { mapState } from "vuex";
 
-export default Vue.component("order-property-value", {
+export default {
     props:
     {
-        template:
-        {
-            type: String,
-            default: "#vue-order-property-value"
-        },
         property:
         {
             type: Object,
@@ -52,5 +57,5 @@ export default Vue.component("order-property-value", {
             basketItems: state => state.basket.items
         })
     }
-});
-
+}
+</script>
