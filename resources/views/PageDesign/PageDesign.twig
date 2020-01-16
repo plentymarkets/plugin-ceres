@@ -14,7 +14,6 @@
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryItem") }}
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
-{{ component( "Ceres::PageDesign.Components.Carousel" ) }}
 
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
@@ -62,7 +61,7 @@
 <div id="vue-app"{% if openBasketClass is not empty %} class="{{ openBasketClass }}"{% endif %}>
     <div class="wrapper wrapper-top">
         <!-- messages -->
-        <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+        <notifications :initial-notifications="{{ notifications | json_encode }}" :log-data="{{ config('Ceres.log.data') | split(', ') | json_encode }}"></notifications>
     </div>
 
     <div class="wrapper wrapper-left">
