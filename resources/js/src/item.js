@@ -13,4 +13,5 @@ import VariationSelect from "./app/components/item/VariationSelect.vue";
 Vue.component("variation-select", VariationSelect);
 import "./app/components/item/OrderProperties";
 import "./app/components/item/OrderPropertyList";
-import "./app/components/item/SingleItem";
+import SingleItem from "./app/components/item/SingleItem.vue";
+Vue.component("single-item", SingleItem);

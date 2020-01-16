@@ -1,12 +1,13 @@
 {{ component( "Ceres::Item.Components.OrderProperties" ) }}
 {{ component( "Ceres::Item.Components.OrderPropertyList" ) }}
-{{ component( "Ceres::Item.Components.SingleItem" ) }}
 {{ component( "Ceres::Item.Components.TagList" ) }}
 
 <single-item v-cloak item-data="{{ item | json_data }}"
              attributes-data="{{ attributes | json_data }}"
              variations="{{ variations | json_data }}"
              :please-select-option-variation-id="{{ dynamicVariationId }}"
+             :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
+             :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"
              :init-please-select-option="{{ initPleaseSelectOption | json_encode }}">
     <template #before-price>{{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}</template>
     <template #after-price>{{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}</template>
