@@ -1,21 +1,35 @@
-import Vue from "vue";
-import { mapMutations } from "vuex";
-import OrderPropertyListItem from "./OrderPropertyListItem";
+<template>
+    <div>
+        <div v-if="isShownOnItemPageCount">
+            <div v-if="propertyGroup.group" :class="paddingClasses" :style="paddingInlineStyles">
+                <div class="h4">
+                    {{ propertyGroup.group.names.name }}:
+                </div>
+                <p class="text-muted text-wrap">
+                    {{ propertyGroup.group.names.description }}
+                </p>
+            </div>
 
-export default Vue.component("order-property-list-group", {
+            <div v-for="property in propertyGroup.properties" :key="property.id" :class="paddingClasses" :style="paddingInlineStyles">
+                <order-property-list-item v-if="property.isShownOnItemPage" :group="propertyGroup.group" :property="property" @radio-change="unsetDeselectedRadios($event)"></order-property-list-item>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { mapMutations } from "vuex";
+import OrderPropertyListItem from "./OrderPropertyListItem.vue";
+
+export default {
 
     components:
     {
-        OrderPropertyListItem
+        "order-property-list-item": OrderPropertyListItem
     },
 
     props:
     {
-        template:
-        {
-            type: String,
-            default: "#vue-order-property-list-group"
-        },
         paddingClasses:
         {
             type: String,
@@ -68,4 +82,9 @@ export default Vue.component("order-property-list-group", {
             "setVariationOrderProperty"
         ])
     }
-});
+}
+</script>
+
+<style>
+
+</style>
