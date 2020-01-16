@@ -2,17 +2,11 @@ html {
     font-size: $font-size-root;
 }
 
-body,
-body .wrapper-main {
+body {
     overflow-x: hidden;
 }
 
 .app {
-    .wrapper-main {
-        position: relative;
-        z-index: $zindex-wrapper + 1;
-    }
-
     .wrapper-right {
         top: 0;
         bottom: 0;
