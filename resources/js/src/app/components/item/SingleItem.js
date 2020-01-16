@@ -3,15 +3,8 @@ import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
 import Vue from "vue";
 import { mapState, mapGetters } from "vuex";
-import VariationSelect from "./VariationSelect";
 
 export default Vue.component("single-item", {
-
-    components:
-    {
-        VariationSelect
-    },
-
     props:
     {
         template:

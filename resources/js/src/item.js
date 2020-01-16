@@ -9,6 +9,8 @@ import ItemDataTable from "./app/components/item/ItemDataTable.vue";
 Vue.component("item-data-table", ItemDataTable);
 import ItemImageCarousel from "./app/components/item/ItemImageCarousel.vue";
 Vue.component("item-image-carousel", ItemImageCarousel);
+import VariationSelect from "./app/components/item/VariationSelect.vue";
+Vue.component("variation-select", VariationSelect);
 import "./app/components/item/OrderProperties";
 import "./app/components/item/OrderPropertyList";
 import "./app/components/item/SingleItem";
