@@ -154,6 +154,11 @@
         <div class="col-md-7">
             <div class="row">
                 <div class="col-sm-4">                            
+                    {% for property in orderData.order.properties if property.typeId == 8 and property.value | trim is not empty %}
+                        <h5 class="mb-0"><b>{{ trans("Ceres::Template.myAccountCustomerSign") }}</b></h5>
+                        <div class="mb-3" id="customer_sign_{{ orderData.order.id }}">{{ property.value }}</div>
+                    {% endfor %}
+
                     <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</b></h5>
                     <div class="mb-3" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</div>
 

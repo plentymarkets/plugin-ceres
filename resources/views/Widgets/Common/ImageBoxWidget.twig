@@ -22,6 +22,7 @@
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("imageUrl", "" | json_encode) }}
 {{ Twig.set("imageAltText", "" | json_encode) }}
+{{ Twig.set("imageName", "" | json_encode) }}
 
 {% if urlType == 'category' and urlValue | trim is not empty %}
 
@@ -45,7 +46,7 @@
     {{ Twig.set("url", "itemData | itemURL") }}
     {{ Twig.set("imageUrl", "itemImage.url") }}
     {{ Twig.set("imageAltText", "itemImage.alternate") }}
-
+    {{ Twig.set("imageName", "itemImage.name") }}
 
 {% elseif urlType == 'file' and urlValue | trim is not empty %}
 
@@ -70,6 +71,10 @@
     {{ Twig.set("imageAltText", "name") }}
 {{ Twig.endif() }}
 
+{{ Twig.if("imageName | trim is empty") }}
+    {{ Twig.set("imageName", "name") }}
+{{ Twig.endif() }}
+
 {{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}
     {{ Twig.set("name", trans("Ceres::Widget.imageBoxPlaceholderName") | json_encode) }}
     {{ Twig.set("imageUrl", "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_161c3653395%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_161c3653395%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3E%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" | json_encode) }}
@@ -82,10 +87,16 @@
             <lazy-img
                 class="img-{{ imageSize }}"
                 image-url="{{ Twig.print("imageUrl") }}"
-                alt="{{ Twig.print("imageAltText") }}">
+                alt="{{ Twig.print("imageAltText") }}"
+                {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </lazy-img>
         {% else %}
-            <img class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" alt="{{ Twig.print("imageAltText") }}"/>
+            <img
+                class="img-{{ imageSize }}"
+                src="{{ Twig.print("imageUrl") }}"
+                alt="{{ Twig.print("imageAltText") }}"
+                {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
+            />
         {% endif %}
     {{ Twig.endif() }}
 
@@ -93,7 +104,7 @@
         <div class="widget-caption widget-image-box-caption {{ style }}">
             {% if customCaption %}
                 <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-image-box-caption " ~ style ) }}>
-                    {{ headline | raw }}
+                    {{ headline | striptags('<p><br><span><h1><h2><h3><h4><h5><h6>') | raw }}
                 </div>
             {% else %}
                 {{ Twig.if("name | trim is not empty") }}

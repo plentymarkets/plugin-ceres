@@ -80,6 +80,7 @@ export default Vue.component("place-order", {
         ...mapState({
             checkoutValidation: state => state.checkout.validation,
             contactWish: state => state.checkout.contactWish,
+            customerSign: state => state.checkout.customerSign,
             isBasketLoading: state => state.basket.isBasketLoading,
             basketItemQuantity: state => state.basket.data.itemQuantity,
             isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
@@ -96,6 +97,7 @@ export default Vue.component("place-order", {
             const url = "/rest/io/order/additional_information";
             const params = {
                 orderContactWish: this.contactWish,
+                orderCustomerSign: this.customerSign,
                 shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
                 newsletterSubscriptions: this.activeNewsletterSubscriptions
             };

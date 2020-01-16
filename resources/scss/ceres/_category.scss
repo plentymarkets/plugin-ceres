@@ -5,51 +5,26 @@
 // ==========================================================================
 @import "~bootstrap/scss/bootstrap";
 
-@import "~font-awesome/scss/font-awesome";
-@import "~font-awesome/scss/variables";
-@import "~font-awesome/scss/mixins";
-
-// FIX: Need to set font-display for better SEO performance
-@font-face {
-    font-family: FontAwesome;
-    font-style: normal;
-    //  src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
-    font-weight: 300;
-    src: url("#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}");
-    src: url("#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}") format("embedded-opentype"), url("#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}") format("woff2"), url("#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}") format("woff"), url("#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}") format("truetype"), url("#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular") format("svg");
-    font-display: block;
-}
-@import "~font-awesome/scss/core";
-@import "~font-awesome/scss/larger";
-@import "~font-awesome/scss/fixed-width";
-@import "~font-awesome/scss/list";
-@import "~font-awesome/scss/bordered-pulled";
-@import "~font-awesome/scss/animated";
-@import "~font-awesome/scss/rotated-flipped";
-@import "~font-awesome/scss/stacked";
-@import "~font-awesome/scss/icons";
-@import "~font-awesome/scss/screen-reader";
-
-@import "~flag-icon-css/sass/flag-icon";
-
 // ==========================================================================
 // Custom styles
 // ==========================================================================
 
 // global
 @import "mixins/general-mixins";
-@import "common/proportional-boxes";
-@import "common/common";
-@import "common/structure";
-@import "common/modal";
-@import "common/reboot";
+
+@import "common/background";
 @import "common/buttons";
+@import "common/common";
+@import "common/heights";
+@import "common/modal"; // TODO: This would better fit into /components
+@import "common/proportional-boxes";
+@import "common/reboot";
+@import "common/structure";
 
 // External plugins overrides
 @import "plugins/owl-carousel";
 
 // Components
-@import "components/accordion";
 @import "components/alerts";
 @import "components/anicon";
 @import "components/component-base";
@@ -59,9 +34,9 @@
 @import "components/popover";
 @import "components/cookie-bar";
 @import "components/tooltip";
+@import "components/sticky-element";
 
 // Forms
-@import "forms/input-groups";
 @import "forms/inputs";
 
 // Page Design / Global components
@@ -73,7 +48,6 @@
 @import "views/PageDesign/footer";
 
 // Templates
-@import "views/Templates/AddressSelect/address-select";
 @import "views/Templates/BasketItemList/basket-item";
 @import "views/Templates/BasketItemList/basket-list-item";
 @import "views/Templates/BasketPreview/basket-preview-hover";
@@ -91,10 +65,7 @@
 @import "views/Category/category-list-controls";
 @import "views/Item/single-item";
 @import "views/ItemList/loading-animation";
-@import "views/StaticPages/static-pages";
 
 // Widgets
 @import "widgets/widgets";
 
-// Bootstrap Compatibility
-@import "common/visibility";
