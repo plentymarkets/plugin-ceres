@@ -6,14 +6,19 @@
             </div>
             <transition-group name="wish-list-item-transition" tag="div">
                 <template v-for="basketItem in basketItems">
-                    <slot name="before-basket-item"></slot>
                     <basket-list-item
                         :key="basketItem.id"
                         :basket-item="basketItem"
                         :is-preview="isPreview"
-                        :basket-details-data="basketDetailsData">
+                        :basket-details-data="basketDetailsData"
+                    >
+                        <template #before-basket-item>
+                            <slot name="before-basket-item"></slot>
+                        </template>
+                        <template #after-basket-item>
+                            <slot name="after-basket-item"></slot>
+                        </template>
                     </basket-list-item>
-                    <slot name="after-basket-item"></slot>
                 </template>
             </transition-group>
         </div>
