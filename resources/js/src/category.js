@@ -84,7 +84,8 @@ Vue.component("item-bundle", ItemBundle);
 import "./app/components/item/OrderPropertyValue";
 import QuantityInput from "./app/components/item/QuantityInput.vue";
 Vue.component("quantity-input", QuantityInput);
-import "./app/components/item/TagList";
+import TagList from "./app/components/item/TagList.vue";
+Vue.component("tag-list", TagList);
 
 import "./app/components/itemList/CategoryImageCarousel";
 import "./app/components/itemList/CategoryItem";

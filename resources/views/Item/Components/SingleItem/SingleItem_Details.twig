@@ -8,7 +8,7 @@
     </span>
 </h1>
 
-<tag-list></tag-list>
+<tag-list :enabled-routes="{{ config('IO.routing.enabled_routes') | split(', ') | json_encode }}"></tag-list>
 
 {% if ('item.shortDescription' in itemData or 'all' in itemData)%}
     <p class="single-description" v-if="currentVariation.texts.shortDescription !== ''" v-html="currentVariation.texts.shortDescription"></p>
