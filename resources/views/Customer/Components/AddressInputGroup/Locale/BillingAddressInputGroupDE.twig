@@ -27,7 +27,8 @@
 
         <div
             class="col-12 col-sm-6"
-            v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company') || isInOptionalFields('de', 'billing_address.vatNumber')">
+            v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'billing_address.vatNumber')) ||
+            (!isInOptionalFields('de', 'billing_address.salutation') && isInOptionalFields('de', 'billing_address.name1') && isInOptionalFields('de', 'billing_address.vatNumber'))">
             <div
                 class="input-unit"
                 data-model="vatNumber"
@@ -93,7 +94,7 @@
                 </label>
             </div>
         </div>
-    
+
         <div v-if="isInOptionalFields('de', 'billing_address.birthday')" class="col-12 col-sm-4">
             <div
                 class="input-unit"

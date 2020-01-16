@@ -45,7 +45,7 @@ class StepByStepNavigationWidget extends BaseWidget
             );
 
         $settings->createSelect("maxLevel")
-            ->withDefaultValue(1)
+            ->withDefaultValue(3)
             ->withName("Widget.stepByStepNavigationMaxLevelLabel")
             ->withTooltip("Widget.stepByStepNavigationMaxLevelTooltip")
             ->withListBoxValues(

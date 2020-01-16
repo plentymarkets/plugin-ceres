@@ -5,7 +5,15 @@
         height: 100%;
         min-height: 75px;
         cursor: pointer;
-        background-color: white;
+        background-color: $white;
+
+        &.preview svg {
+            position: absolute;
+            left: 0;
+            right: 0;
+            display: block !important;
+            fill: $gray-100;
+        }
     }
 
     .nav-text {
@@ -26,7 +34,7 @@
 
     &.widget-none {
         span {
-            color: black;
+            color: $black;
         }
     }
 
