@@ -2,13 +2,6 @@
     align-items: center;
 }
 
-.modal-footer {
-    > .fa {
-        margin-top: 1px;
-        margin-left: 5px;
-    }
-}
-
 @include media-breakpoint-down(xs) {
     html.facebook {
         .checkout .modal.show,
