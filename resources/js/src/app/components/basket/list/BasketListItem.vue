@@ -1,5 +1,7 @@
 <template>
     <div class="basket-item-container basket-list-item">
+        <slot name="before-basket-item"></slot>
+
         <div class="basket-item component-loading with-icon" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
             <div class="image-container">
                 <lazy-img
@@ -152,6 +154,8 @@
                 </label>
             </div>
         </div>
+
+        <slot name="after-basket-item"></slot>
     </div>
 </template>
 
