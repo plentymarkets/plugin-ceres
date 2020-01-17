@@ -79,12 +79,14 @@ import "./app/components/customer/login/Login";
 import "./app/components/customer/login/LoginView";
 import "./app/components/customer/login/UserLoginHandler";
 
-
-import "./app/components/item/ItemBundle";
-
-import "./app/components/item/OrderPropertyValue";
-import "./app/components/item/QuantityInput";
-import "./app/components/item/TagList";
+import ItemBundle from "./app/components/item/ItemBundle.vue";
+Vue.component("item-bundle", ItemBundle);
+import OrderPropertyValue from "./app/components/item/OrderPropertyValue.vue";
+Vue.component("order-property-value", OrderPropertyValue);
+import QuantityInput from "./app/components/item/QuantityInput.vue";
+Vue.component("quantity-input", QuantityInput);
+import TagList from "./app/components/item/TagList.vue";
+Vue.component("tag-list", TagList);
 
 import "./app/components/itemList/CategoryImageCarousel";
 import "./app/components/itemList/CategoryItem";

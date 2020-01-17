@@ -1,8 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{{ Twig.component( "Ceres::Item.Components.ItemBundle" ) }}
-
 {% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
@@ -12,19 +10,18 @@
 
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 
-<div class="widget widget-item-bundle widget-{{ appearance }} 
-    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %} 
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}" 
-    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}> 
+<div class="widget widget-item-bundle widget-{{ appearance }}
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <item-bundle
         {% if not isPreview %}v-if="$store.getters.currentItemVariation && $store.getters.currentItemVariation.variation.bundleType === 'bundle'"
         :bundle-type="$store.getters.currentItemVariation.variation.bundleType"{% else %}
         :bundle-type="'bundle'"{% endif %}
         :bundle-components="$store.getters.currentItemVariation.bundleComponents"
-        :show-bundle-items="{{ Twig.print("webstoreConfig.dontSplitItemBundle != '1' ? 'true' : 'false'") }}"
         {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
         {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
-        
+
         {% if isPreview %}
             <div class="widget-placeholder">
                 <div>

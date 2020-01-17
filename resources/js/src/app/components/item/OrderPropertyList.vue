@@ -1,21 +1,53 @@
-import Vue from "vue";
-import { mapState, mapGetters } from "vuex";
-import OrderPropertyListGroup from "./OrderPropertyListGroup";
+<template>
+    <div class="order-property-slider mb-3">
+        <div class="order-property-slider-inner" :style="{transform: 'translateX(-' + (activeSlide * 100) + '%)'}">
+            <div v-for="(propertyGroup, index) in sortedGroupedProperties" :class="{'active': index === activeSlide}" :key="index">
+                <order-property-list-group
+                    :padding-classes="paddingClasses"
+                    :padding-inline-styles="paddingInlineStyles"
+                    :key="propertyGroup.id"
+                    :property-group="propertyGroup">
+                </order-property-list-group>
+            </div>
+        </div>
 
-export default Vue.component("order-property-list", {
+        <div class="order-property-slider-controls" :class="paddingClasses" :style="paddingInlineStyles" v-if="sortedGroupedProperties.length > 1">
+            <div class="btn" @click="slideTo(activeSlide - 1)" :class="{'btn-primary': activeSlide > 0, 'btn-secondary disabled': activeSlide === 0}" tabindex="0">
+                <span class="fa fa-chevron-left"></span>
+            </div>
+
+            <div class="slider-nav">
+                <span v-for="(propertyGroup, index) in sortedGroupedProperties"
+                      :class="{ 'active': index === activeSlide, 'highlight': !touchedSlides[index], 'error': propertyGroup.hasError }"
+                      @click="slideTo(index)"
+                      :key="index"
+                      v-tooltip
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      :title="propertyGroup.group ? propertyGroup.group.names.name : $translate('Ceres::Template.singleItemPropertiesWithoutGroup')">
+                </span>
+            </div>
+
+            <div class="btn float-right" @click="slideTo(activeSlide + 1)" :class="{'btn-primary': activeSlide < sortedGroupedProperties.length - 1, 'btn-secondary disabled': activeSlide >= sortedGroupedProperties.length - 1 }" tabindex="0">
+                <span class="fa fa-chevron-right"></span>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { mapState, mapGetters } from "vuex";
+import OrderPropertyListGroup from "./OrderPropertyListGroup.vue";
+
+export default {
 
     components:
     {
-        OrderPropertyListGroup
+        "order-property-list-group": OrderPropertyListGroup
     },
 
     props:
     {
-        template:
-        {
-            type: String,
-            default: "#vue-order-property-list"
-        },
         paddingClasses:
         {
             type: String,
@@ -28,7 +60,7 @@ export default Vue.component("order-property-list", {
         }
     },
 
-    data: function()
+    data()
     {
         return {
             activeSlide: 0,
@@ -129,4 +161,5 @@ export default Vue.component("order-property-list", {
             }
         }
     }
-});
+}
+</script>
