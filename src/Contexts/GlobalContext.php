@@ -63,6 +63,7 @@ class GlobalContext implements ContextInterface
     {
         $this->params = $params;
 
+        //TODO VDI MEYER
         /** @var SessionStorageService $sessionStorageService */
         $sessionStorageService = pluginApp(SessionStorageService::class);
 
@@ -74,7 +75,7 @@ class GlobalContext implements ContextInterface
 
         /** @var WebstoreConfigurationService $webstoreConfigService */
         $webstoreConfigService = pluginApp(WebstoreConfigurationService::class);
-        
+
         /** @var BasketService $basketService */
         $basketService = pluginApp(BasketService::class);
 
@@ -139,7 +140,7 @@ class GlobalContext implements ContextInterface
         $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
 
         $this->isSafeMode = $app->isTemplateSafeMode();
-       
+
         $this->bodyClasses = [];
         $templateClass = str_replace('tpl', 'page', $this->templateEvent);
         $templateClass = str_replace('.', '-', $templateClass);
