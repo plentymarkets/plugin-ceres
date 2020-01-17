@@ -273,13 +273,13 @@ export default {
             {
                 if (attribute.attributeId !== attributeId)
                 {
-                    names.push(`<b>${attribute.name}</b>`);
+                    names.push("<b>" + attribute.name +"</b>");
                 }
             }
             if (invalidSelection.newUnit)
             {
                 names.push(
-                    `<b>${this.$translate("Ceres::Template.singleItemContent")}</b>`
+                    "<b>" + this.$translate("Ceres::Template.singleItemContent") + "</b>"
                 );
             }
 
@@ -439,7 +439,7 @@ export default {
             strict = !!strict;
             ignoreUnit = !!ignoreUnit;
 
-            const key = `${ JSON.stringify(attributes) }_${ unitId }_${ strict }_${ ignoreUnit }`;
+            const key = JSON.stringify(attributes) + "_" + unitId + "_" + strict + "_" + ignoreUnit;
 
             if (isDefined(this.filteredVariationsCache[key]))
             {

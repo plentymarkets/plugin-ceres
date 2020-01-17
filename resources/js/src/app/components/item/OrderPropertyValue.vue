@@ -5,7 +5,7 @@
             {{ property.value | fileName }}
         </a>
     </span>
-    <span v-else>${ valueLabel }</span>
+    <span v-else>{{ valueLabel }}</span>
 </template>
 
 <script>

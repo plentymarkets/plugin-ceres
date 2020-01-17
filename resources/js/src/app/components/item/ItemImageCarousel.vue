@@ -301,7 +301,7 @@ export default {
 
         loadLightbox()
         {
-            const scriptSource = `${ this.pluginPath }/js/dist/lightbox.min.js`;
+            const scriptSource = this.pluginPath + "/js/dist/lightbox.min.js";
             const script = document.createElement("script");
 
             script.type = "text/javascript";
