@@ -81,7 +81,9 @@ Vue.component("guest-login", GuestLogin);
 import Login from "./app/components/customer/login/Login.vue";
 Vue.component("login", Login);
 // legacy non-shopbuilder component
-import "./app/components/customer/login/LoginView";
+import LoginView from "./app/components/customer/login/LoginView.vue";
+Vue.component("login-view", LoginView);
+
 import "./app/components/customer/login/UserLoginHandler";
 
 import ItemBundle from "./app/components/item/ItemBundle.vue";
