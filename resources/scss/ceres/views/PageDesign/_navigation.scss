@@ -228,7 +228,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     color: color-yiq($mobile-navigation-color);
     background: $mobile-navigation-color;
     opacity: .6;
-    transition: all .3s ease; // stylelint-disable-line property-blacklist
+    @include transition(all .3s ease);
     transform: translateX(100%);
     -webkit-overflow-scrolling: touch;
 

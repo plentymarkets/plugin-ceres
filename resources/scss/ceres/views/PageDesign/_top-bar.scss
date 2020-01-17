@@ -63,7 +63,7 @@
     .dropdown {
 
         .dropdown-toggle {
-            transition: all .1s;
+            @include transition(all .1s);
 
             &::after {
                 margin-left: 7px;
@@ -84,7 +84,7 @@
             max-height: 0;
             overflow: hidden;
             border: none;
-            transition: all .3s;
+            @include transition(all .3s);
 
             a {
                 display: block;
