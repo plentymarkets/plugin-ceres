@@ -1,11 +1,10 @@
 <template>
-    <a class="btn btn-link btn-sm text-muted"
-       :class="{ active: isVariationInWishList }"
-       @click.prevent="switchState()"
-       data-toggle="tooltip"
-       data-placement="top"
-       title=""
-       ref="addToWishList">
+    <a class="btn btn-link btn-sm text-muted" 
+        @click.prevent="switchState()"
+        data-toggle="tooltip"
+        data-placement="top"
+        ref="addToWishList"
+        title="">
         <i v-waiting-animation="isLoading" class="fa fa-heart default-float" :class="{'text-appearance text-danger': isVariationInWishList}"></i>
         {{ $translate("Ceres::Template.singleItemWishList") }}
     </a>
