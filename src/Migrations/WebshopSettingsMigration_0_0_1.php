@@ -2,11 +2,11 @@
 
 namespace Ceres\Migrations;
 
-use IO\Services\WebstoreConfigurationService;
 use Plenty\Modules\Plugin\Models\Plugin;
 use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 
 /**
  * Class WebshopSettingsMigration_0_0_1
@@ -21,28 +21,28 @@ class WebshopSettingsMigration_0_0_1
     {
         /** @var PlentyModuleRepositoryContract $moduleRepo */
         $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
-        
+
         if($moduleRepo->isActive('webstore'))
         {
-            /** @var WebstoreConfigurationService $webstoreConfigService */
-            $webstoreConfigService = pluginApp(WebstoreConfigurationService::class);
-            $webstoreConfig        = $webstoreConfigService->getWebstoreConfig();
-    
+            /** @var WebstoreConfigurationRepositoryContract $webstoreConfigurationRepository */
+            $webstoreConfigurationRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
+            $webstoreConfig        = $webstoreConfigurationRepository->getWebstoreConfiguration();
+
             $activeLanguages              = $webstoreConfig->languageList;
             $googleReCaptchaApiWebsiteKey = $webstoreConfig->googleRecaptchaApiWebsitekey;
-    
+
             $pluginId = 0;
-    
+
             /** @var PluginRepositoryContract $pluginRepo */
             $pluginRepo = pluginApp(PluginRepositoryContract::class);
             $pluginResult = $pluginRepo->searchPlugins(['name' => 'Ceres'], 1)->getResult();
             $plugin = $pluginResult[0];
-    
+
             if($plugin instanceof Plugin)
             {
                 $pluginId = (int)$plugin->id;
             }
-    
+
             if((int)$pluginId > 0)
             {
                 $newConfigValues = [
@@ -55,7 +55,7 @@ class WebshopSettingsMigration_0_0_1
                         'value' => (count($activeLanguages) ? implode(', ', $activeLanguages) : '')
                     ]
                 ];
-        
+
                 /** @var ConfigurationRepositoryContract $configRepo */
                 $configRepo = pluginApp(ConfigurationRepositoryContract::class);
                 $configRepo->saveConfiguration($pluginId, $newConfigValues);

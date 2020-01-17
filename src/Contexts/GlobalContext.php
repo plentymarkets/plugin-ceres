@@ -13,8 +13,8 @@ use IO\Services\CustomerService;
 use IO\Services\NotificationService;
 use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
-use IO\Services\WebstoreConfigurationService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Http\Request;
 
@@ -73,8 +73,8 @@ class GlobalContext implements ContextInterface
         /** @var TemplateService $templateService */
         $templateService = pluginApp(TemplateService::class);
 
-        /** @var WebstoreConfigurationService $webstoreConfigService */
-        $webstoreConfigService = pluginApp(WebstoreConfigurationService::class);
+        /** @var WebstoreConfigurationRepositoryContract $webstoreConfigurationRepository */
+        $webstoreConfigurationRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
 
         /** @var BasketService $basketService */
         $basketService = pluginApp(BasketService::class);
@@ -98,7 +98,7 @@ class GlobalContext implements ContextInterface
         $app = pluginApp(Application::class);
 
         $this->ceresConfig = pluginApp(CeresConfig::class);
-        $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
+        $this->webstoreConfig = $webstoreConfigurationRepository->getWebstoreConfiguration();
 
         $this->request = pluginApp(Request::class);
 
@@ -133,7 +133,7 @@ class GlobalContext implements ContextInterface
 
         $this->showNetPrices = $customerService->showNetPrices();
 
-        $this->splitItemBundle = $webstoreConfigService->getWebstoreConfig()->dontSplitItemBundle;
+        $this->splitItemBundle = $webstoreConfigurationRepository->getWebstoreConfig()->dontSplitItemBundle;
 
         $this->templateEvent = $templateService->getCurrentTemplate();
 
