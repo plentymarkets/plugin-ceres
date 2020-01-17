@@ -175,6 +175,11 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         height: 100%;
 
         > li {
+            > a {
+                padding: 1.3rem 1rem;
+                color: $menu-link-color;
+            }
+
             &:hover, // stylelint-disable-line selector-no-qualifying-type
             &.hover { // stylelint-disable-line selector-no-qualifying-type
                 background-color: $menu-link-color;
@@ -188,17 +193,11 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
                     opacity: 1;
                 }
             }
-
-            > a {
-                color: $menu-link-color;
-            }
         }
     }
 
     .ddown {
         > a {
-            padding: 1.3rem 1rem;
-
             &::after {
                 padding-left: .5em;
                 font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
