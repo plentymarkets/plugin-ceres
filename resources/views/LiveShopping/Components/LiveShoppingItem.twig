@@ -1,4 +1,3 @@
-{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 {{ component( "Ceres::LiveShopping.Components.LiveShoppingDetails" ) }}
@@ -20,7 +19,7 @@
             <template #item-image>
                 <a v-if="!!displaySettings.customImagePath" :href="currentOffer.item | itemURL">
                     <lazy-img   :image-url="displaySettings.customImagePath"
-                                :alt="currentOffer.item | itemName" 
+                                :alt="currentOffer.item | itemName"
                                 :title="currentOffer.item | itemName">
                     </lazy-img>
                 </a>

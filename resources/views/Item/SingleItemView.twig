@@ -1,19 +1,9 @@
-{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
-{{ component( "Ceres::Item.Components.AddToWishList" ) }}
-{{ component( "Ceres::Item.Components.GraduatedPrices" ) }}
-{{ component( "Ceres::Item.Components.ItemBundle" ) }}
-{{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
-{{ component( "Ceres::Item.Components.OldVariationSelect" ) }}
-{{ component( "Ceres::Item.Components.OrderProperties" ) }}
-{{ component( "Ceres::Item.Components.OrderPropertyList" ) }}
-{{ component( "Ceres::Item.Components.SingleItem" ) }}
-{{ component( "Ceres::Item.Components.VariationSelect" ) }}
-{{ component( "Ceres::Item.Components.TagList" ) }}
-
 <single-item v-cloak item-data="{{ item | json_data }}"
              attributes-data="{{ attributes | json_data }}"
              variations="{{ variations | json_data }}"
              :please-select-option-variation-id="{{ dynamicVariationId }}"
+             :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
+             :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"
              :init-please-select-option="{{ initPleaseSelectOption | json_encode }}">
     <template #before-price>{{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}</template>
     <template #after-price>{{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}</template>
@@ -28,9 +18,12 @@
     <template #image-carousel>
         {% set ImageCarouselOverride = LayoutContainer.show("Ceres::SingleItem.ImageCarousel") %}
         {% if ImageCarouselOverride|trim is empty %}
-            <item-image-carousel plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url" template="#vue-item-image-carousel"></item-image-carousel>
+            <item-image-carousel plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url"></item-image-carousel>
         {% else %}
             {{ ImageCarouselOverride }}
         {% endif %}
+    </template>
+    <template #tag-list>
+        <tag-list :enabled-routes="{{ config('IO.routing.enabled_routes') | split(', ') | json_encode }}"></tag-list>
     </template>
 </single-item>

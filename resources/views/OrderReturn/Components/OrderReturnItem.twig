@@ -1,5 +1,3 @@
-{{ component( "Ceres::Item.Components.ItemBundle" ) }}
-
 <script type="x/template" id="vue-order-return-item">
 	<article class="basket-list-item">
 
@@ -16,7 +14,7 @@
 							<a :href="orderItemURL" class="item-name text-primary text-appearance small font-weight-bold text-break">
 								${ orderItem | itemBundleName }
 							</a>
-							
+
 							<div class="item-base-price small">
 								<template v-if="isNet">
 									${ amount.priceNet | currency(amount.currency) }
@@ -28,8 +26,7 @@
 
 							<item-bundle
 								:bundle-type="orderItem.bundleType"
-								:bundle-components="orderItem.bundleComponents"
-								:show-bundle-items="{{ webstoreConfig.dontSplitItemBundle != "1" ? "true" : "false" }}"></item-bundle>
+								:bundle-components="orderItem.bundleComponents"></item-bundle>
 
 							<div class="item-small-prices small">
 								<div v-for="attribute in variation.attributes">

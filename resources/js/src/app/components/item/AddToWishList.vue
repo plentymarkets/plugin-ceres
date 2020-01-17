@@ -1,17 +1,18 @@
-import TranslationService from "../../services/TranslationService";
+<template>
+    <a class="text-muted small add-to-wish-list" :class="{ active: isVariationInWishList }" @click.prevent="switchState()" data-toggle="tooltip" data-placement="top" title="" ref="addToWishList">
+        <i v-waiting-animation="isLoading" class="fa fa-heart text-appearance"></i>
+        {{ $translate("Ceres::Template.singleItemWishList") }}
+    </a>
+</template>
+
+<script>
 import { isNullOrUndefined } from "../../helper/utils";
-import Vue from "vue";
 import { mapState } from "vuex";
 
 const NotificationService = require("../../services/NotificationService");
 
-export default Vue.component("add-to-wish-list", {
-
+export default {
     props: {
-        template: {
-            type: String,
-            default: "#vue-add-to-wish-list"
-        },
         variationId: Number
     },
 
@@ -75,7 +76,7 @@ export default Vue.component("add-to-wish-list", {
                         this.isLoading = false;
 
                         NotificationService.success(
-                            TranslationService.translate("Ceres::Template.singleItemWishListAdded")
+                            this.$translate("Ceres::Template.singleItemWishListAdded")
                         );
                     },
                     error =>
@@ -91,24 +92,24 @@ export default Vue.component("add-to-wish-list", {
             {
                 this.isLoading = true;
                 this.$store.dispatch("removeWishListItem", { id: parseInt(this.currentVariationId) }).then(response =>
-                {
-                    this.isLoading = false;
+                    {
+                        this.isLoading = false;
 
-                    NotificationService.success(
-                        TranslationService.translate("Ceres::Template.singleItemWishListRemoved")
-                    );
-                },
-                error =>
-                {
-                    this.isLoading = false;
-                });
+                        NotificationService.success(
+                            this.$translate("Ceres::Template.singleItemWishListRemoved")
+                        );
+                    },
+                    error =>
+                    {
+                        this.isLoading = false;
+                    });
             }
         },
 
         changeTooltipText()
         {
-            const tooltipText = TranslationService.translate(
-                `Ceres::Template.${this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"}`
+            const tooltipText = this.$translate(
+                "Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd")
             );
 
             $(".add-to-wish-list")
@@ -125,4 +126,6 @@ export default Vue.component("add-to-wish-list", {
             this.changeTooltipText();
         }
     }
-});
+}
+
+</script>

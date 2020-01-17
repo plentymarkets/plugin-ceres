@@ -1,19 +1,98 @@
+<template>
+    <div>
+        <div v-if="attributes.length || (Object.keys(possibleUnits).length > 1 && isContentVisible)" class="row">
+            <div class="col-12 variation-select" v-for="attribute in attributes">
+                <!-- dropdown -->
+                <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
+                    <select class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)">
+                        <option :value="-1" v-if="addPleaseSelectOption || !hasSelection">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
+                        <option
+                                :value="null" v-if="hasEmptyOption || selectedAttributes[attribute.attributeId] === null"
+                                :selected="selectedAttributes[attribute.attributeId] === null">{{ $translate("Ceres::Template.singleItemNoSelection") }}</option>
+                        <option
+                                v-for="value in attribute.values"
+                                :value="value.attributeValueId"
+                                :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]">
+                            <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)">
+                                {{ value.name }}
+                            </template>
+                            <template v-else>
+                                {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": value.name }) }}
+                            </template>
+                        </option>
+                    </select>
+                    <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name">{{ attribute.name }}</label>
+                </div>
+                <!-- /dropdown -->
+
+                <!-- box and image -->
+                <div v-else-if="attribute.type === 'box' || attribute.type === 'image'">
+                    <span class="text-muted">{{ attribute.name }}:</span> <b>{{ getSelectedAttributeValueName(attribute) }}</b>
+                    <div class="v-s-boxes py-3" :class="{ 'images': attribute.type === 'image' }">
+                        <div class="v-s-box bg-white empty-option"
+                             v-if="addPleaseSelectOption"
+                             @click="selectAttribute(attribute.attributeId, -1)"
+                             :class="{ 'active': selectedAttributes[attribute.attributeId] === -1, 'invalid': !isAttributeSelectionValid(attribute.attributeId, -1) }">
+                            <span class="mx-3">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</span>
+                        </div>
+                        <div class="v-s-box bg-white empty-option"
+                             v-if="hasEmptyOption"
+                             @click="selectAttribute(attribute.attributeId, null)"
+                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null) }">
+                            <span class="mx-3">{{ $translate("Ceres::Template.singleItemNoSelection") }}</span>
+                        </div>
+
+                        <div class="v-s-box bg-white"
+                             v-for="value in attribute.values"
+                             @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
+                             :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }"
+                             v-tooltip="!isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getInvalidOptionTooltip(attribute.attributeId, value.attributeValueId)">
+                            <span class="mx-3" v-if="attribute.type === 'box'">{{ value.name }}</span>
+                            <img class="p-1" v-else :src="value.imageUrl" :alt="value.name">
+                        </div>
+                    </div>
+                </div>
+                <!-- /box and image -->
+            </div>
+
+            <!-- units -->
+            <div class="col-12 variation-select" v-if="Object.keys(possibleUnits).length > 1 && isContentVisible">
+                <div class="input-unit">
+                    <select class="custom-select" @change="selectUnit($event.target.value)">
+                        <option
+                                v-for="(unit, unitId) in possibleUnits"
+                                :value="unitId"
+                                :selected="parseInt(unitId) === selectedUnit">
+                            <template v-if="isUnitSelectionValid(unitId)">
+                                {{ unit }}
+                            </template>
+                            <template v-else>
+                                {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": unit }) }}
+                            </template>
+                        </option>
+                    </select>
+                    <label>{{ $translate("Ceres::Template.singleItemContent") }}</label>
+                </div>
+            </div>
+            <!-- /units -->
+        </div>
+
+        <div v-else>
+            <slot></slot>
+        </div>
+    </div>
+</template>
+
+<script>
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
 import { mapState } from "vuex";
 
 const NotificationService = require("../../services/NotificationService");
 
-export default Vue.component("variation-select", {
+export default {
 
     props: {
-        template:
-        {
-            type: String,
-            default: "#vue-variation-select"
-        },
         forceContent:
         {
             type: Boolean,
@@ -194,13 +273,13 @@ export default Vue.component("variation-select", {
             {
                 if (attribute.attributeId !== attributeId)
                 {
-                    names.push(`<b>${attribute.name}</b>`);
+                    names.push("<b>" + attribute.name +"</b>");
                 }
             }
             if (invalidSelection.newUnit)
             {
                 names.push(
-                    `<b>${TranslationService.translate("Ceres::Template.singleItemContent")}</b>`
+                    "<b>" + this.$translate("Ceres::Template.singleItemContent") + "</b>"
                 );
             }
 
@@ -209,7 +288,7 @@ export default Vue.component("variation-select", {
                 return null;
             }
 
-            return TranslationService.translate("Ceres::Template.singleItemNotAvailableInSelection", { name: names.join(", ") });
+            return this.$translate("Ceres::Template.singleItemNotAvailableInSelection", { name: names.join(", ") });
         },
 
         /**
@@ -317,7 +396,7 @@ export default Vue.component("variation-select", {
             for (const attributeToReset of invalidSelection.attributesToReset)
             {
                 messages.push(
-                    TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name })
+                    this.$translate("Ceres::Template.singleItemNotAvailable", { name: attributeToReset.name })
                 );
 
                 attributes[attributeToReset.attributeId] = (!this.hasEmptyOption && App.config.item.showPleaseSelect) ? -1 : null;
@@ -328,8 +407,8 @@ export default Vue.component("variation-select", {
                 if (this.lastContentCount > 1 && Object.keys(this.possibleUnits).length > 1 && !isNull(this.selectedUnit))
                 {
                     messages.push(
-                        TranslationService.translate("Ceres::Template.singleItemNotAvailable", { name:
-                            TranslationService.translate("Ceres::Template.singleItemContent")
+                        this.$translate("Ceres::Template.singleItemNotAvailable", { name:
+                                this.$translate("Ceres::Template.singleItemContent")
                         })
                     );
                 }
@@ -360,7 +439,7 @@ export default Vue.component("variation-select", {
             strict = !!strict;
             ignoreUnit = !!ignoreUnit;
 
-            const key = `${ JSON.stringify(attributes) }_${ unitId }_${ strict }_${ ignoreUnit }`;
+            const key = JSON.stringify(attributes) + "_" + unitId + "_" + strict + "_" + ignoreUnit;
 
             if (isDefined(this.filteredVariationsCache[key]))
             {
@@ -463,10 +542,10 @@ export default Vue.component("variation-select", {
                     document.dispatchEvent(new CustomEvent("onVariationChanged",
                         {
                             detail:
-                            {
-                                attributes: variation.attributes,
-                                documents: variation.documents
-                            }
+                                {
+                                    attributes: variation.attributes,
+                                    documents: variation.documents
+                                }
                         }));
                 });
             }
@@ -493,9 +572,9 @@ export default Vue.component("variation-select", {
             }
             else if (App.config.item.showPleaseSelect && selectedAttributeValueId === -1)
             {
-                return TranslationService.translate("Ceres::Template.singleItemPleaseSelect");
+                return this.$translate("Ceres::Template.singleItemPleaseSelect");
             }
-            return TranslationService.translate("Ceres::Template.singleItemNoSelection");
+            return this.$translate("Ceres::Template.singleItemNoSelection");
         }
     },
 
@@ -506,4 +585,5 @@ export default Vue.component("variation-select", {
             this.$store.commit("setIsVariationSelected", !!value);
         }
     }
-});
+}
+</script>
