@@ -2,7 +2,7 @@
     <div class="basket-item-container basket-list-item">
         <slot name="before-basket-item"></slot>
 
-        <div class="basket-item d-flex py-4 component-loading with-icon" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
+        <div class="basket-item component-loading with-icon" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
             <div class="image-container">
                 <lazy-img
                     class="img-basket-small"
@@ -13,9 +13,9 @@
                 </lazy-img>
             </div>
 
-            <div class="meta-container-wrapper w-100">
-                <div class="meta-container-wrapper-inner d-flex">
-                    <div class="meta-container w-100">
+            <div class="meta-container-wrapper">
+                <div class="meta-container-wrapper-inner">
+                    <div class="meta-container">
                         <div>
                             <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance">
                                 {{ basketItem.variation.data | itemName }}
@@ -69,7 +69,7 @@
                         </div>
                     </div>
 
-                    <div class="basket-item-container-right d-block ml-auto">
+                    <div class="basket-item-container-right">
                         <div class="qty-box-container">
                             <quantity-input
                                     template="#vue-quantity-input"

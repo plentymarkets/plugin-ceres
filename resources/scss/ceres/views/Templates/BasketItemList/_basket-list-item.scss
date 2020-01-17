@@ -37,7 +37,7 @@
     }
 }
 
-.basket-preview-hover {
+.top-bar .controls-list > li .basket-preview-hover {
     .basket-item {
         a {
             padding: 0;
@@ -77,127 +77,141 @@
         font-weight: 700;
     }
 
-    .image-container {
-        flex-shrink: 0;
-        width: 75px;
-        margin-right: 10px;
+    .basket-item {
+        display: flex;
+        padding: 1.5rem 0;
 
-        @include media-breakpoint-down(xs) {
-            width: 50px;
-            margin: 0 10px;
+        .image-container {
+            flex-shrink: 0;
+            width: 75px;
+            margin-right: 10px;
+
+            @include media-breakpoint-down(xs) {
+                width: 50px;
+                margin: 0 10px;
+            }
         }
-    }
 
-    .meta-container-wrapper {
-        min-width: 0;
-    }
-
-    .meta-container {
-        min-width: 0;
-
-        & > div {
-            position: relative;
+        .meta-container-wrapper {
             width: 100%;
-        }
+            min-width: 0;
 
-        .item-name {
-            font-size: 80%;
-            font-weight: 700;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
+            .meta-container-wrapper-inner {
+                display: flex;
 
-        .item-base-price {
-            font-size: 80%;
-        }
+                .meta-container {
+                    width: 100%;
+                    min-width: 0;
 
-        .item-small-prices {
-            font-size: 75%;
-        }
-    }
+                    & > div {
+                        position: relative;
+                        width: 100%;
+                    }
 
-    .basket-item-container-right {
-        .qty-box-container {
-            margin: 0 0 0 10px;
+                    .item-name {
+                        font-size: 80%;
+                        font-weight: 700;
+                        word-wrap: break-word;
+                        overflow-wrap: break-word;
+                    }
 
-            @include media-breakpoint-down(sm) {
-                margin: 0 0 5px 27px;
-            }
+                    .item-base-price {
+                        font-size: 80%;
+                    }
 
-            .qty-box {
-                height: 41px;
-                margin: 0 0 5px auto;
-
-                .qty-input {
-                    margin-left: auto;
+                    .item-small-prices {
+                        font-size: 75%;
+                    }
                 }
             }
         }
 
-        .price-box {
-            margin-left: auto;
-        }
-
-        .item-total-price {
-            font-weight: 700;
-            text-align: right;
-            white-space: nowrap;
-        }
-
-        .item-remove-container {
-            font-size: 1.2em;
-            line-height: 1.2em;
-            text-align: right;
-
-            > .item-remove-button {
-                padding: 0;
-                color: $danger;
-                cursor: pointer;
-                background: none;
-                border: none;
-
-                &.disabled {
-                    cursor: not-allowed;
-                }
-            }
-        }
-    }
-
-    .item-properties {
-        margin-top: .25em;
-        font-size: 75%;
-
-        .item-properties-header {
-            margin-bottom: .25em;
-            font-weight: 700;
-        }
-
-        .item-property-value {
+        .basket-item-container-right {
             display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+            margin-left: auto;
 
+            .qty-box-container {
+                margin: 0 0 0 10px;
 
-        .item-property-value > strong.colon::after {
-            content: ":";
-        }
+                @include media-breakpoint-down(sm) {
+                    margin: 0 0 5px 27px;
+                }
 
-        ul {
-            padding: 0;
-            margin-bottom: 0;
-            list-style: disc;
+                .qty-box {
+                    height: 41px;
+                    margin: 0 0 5px auto;
 
-            div {
-                margin-bottom: .25em;
+                    .qty-input {
+                        margin-left: auto;
+                    }
+                }
+            }
+
+            .price-box {
+                margin-left: auto;
+            }
+
+            .item-total-price {
+                font-weight: 700;
+                text-align: right;
+                white-space: nowrap;
+            }
+
+            .item-remove-container {
+                font-size: 1.2em;
+                line-height: 1.2em;
+                text-align: right;
+
+                > .item-remove-button {
+                    padding: 0;
+                    color: $danger;
+                    cursor: pointer;
+                    background: none;
+                    border: none;
+
+                    &.disabled {
+                        cursor: not-allowed;
+                    }
+                }
             }
         }
-    }
 
-    .item-additional-information-container {
-        .item-additional-information {
+        .item-properties {
+            margin-top: .25em;
             font-size: 75%;
+
+            .item-properties-header {
+                margin-bottom: .25em;
+                font-weight: 700;
+            }
+
+            .item-property-value {
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+
+            .item-property-value > strong.colon::after {
+                content: ":";
+            }
+
+            ul {
+                padding: 0;
+                margin-bottom: 0;
+                list-style: disc;
+
+                div {
+                    margin-bottom: .25em;
+                }
+            }
+        }
+
+        .item-additional-information-container {
+            .item-additional-information {
+                font-size: 75%;
+            }
         }
     }
 }
