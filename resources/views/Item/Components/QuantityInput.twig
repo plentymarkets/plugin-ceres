@@ -1,35 +1,33 @@
 <script type="x/template" id="vue-quantity-input">
-    <div class="qty-box">
-        <input class="qty-input"
+    <div class="qty-box d-flex h-100">
+        <input class="qty-input text-center"
                type="text"
                :value="displayValue"
                @change="setValue($event.target.value)"
                :disabled="waiting"
                 ref="quantityInputField">
 
-        <div class="qty-btn-container">
+        <div class="qty-btn-container d-flex flex-column">
 
-            <div class="qty-btn"
+            <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
                  @click="increaseValue()"
                  :class="{'disabled': isMaximum || waiting}"
                  v-tooltip="isMaximum && compMax !== 0"
                  data-toggle="tooltip"
                  data-placement="top"
                  :title="maximumHint">
-                <i class="fa fa-plus qty-sign" aria-hidden="true"></i>
-            </div>
+                <i class="fa fa-plus default-float" aria-hidden="true"></i>
+            </button>
 
-            <div class="qty-btn-seperator"></div>
-
-            <div class="qty-btn"
+            <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
                  @click="decreaseValue()"
                  :class="{'disabled': isMinimum || waiting}"
                  v-tooltip="isMinimum"
                  data-toggle="tooltip"
                  data-placement="bottom"
                  :title="minimumHint">
-                <i class="fa fa-minus qty-sign" aria-hidden="true"></i>
-            </div>
+                <i class="fa fa-minus default-float" aria-hidden="true"></i>
+            </button>
 
         </div>
     </div>
