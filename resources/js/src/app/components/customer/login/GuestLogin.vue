@@ -1,22 +1,34 @@
-import ValidationService from "../../../services/ValidationService";
-import { navigateTo } from "../../../services/UrlService";
-import Vue from "vue";
-import { isDefined, isNullOrUndefined } from "../../../helper/utils";
+<template>
+    <div>
+        <form ref="form" method="post" class="mb-3 login-pwd-reset">
+            <div class="input-unit" data-validate="mail">
+                <input type="email" name="email" autocomplete="email" :id="_uid" v-model="email" data-autofocus>
+                <label :for="_uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
+            </div>
+            <span class="error-msg">{{ $translate("Ceres::Template.loginEnterConfirmEmail") }}</span>
+
+            <div class="text-right">
+                <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium btn-appearance" :class="buttonSizeClass">
+                    <i v-waiting-animation="isDisabled" class="fa fa-arrow-right" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.loginNext") }}
+                </button>
+            </div>
+        </form>
+    </div>
+</template>
+
+<script>
 import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixin";
 
-const ApiService = require("../../../services/ApiService");
+import ApiService from "../../../services/ApiService";
+import ValidationService from "../../../services/ValidationService";
+import { navigateTo } from "../../../services/UrlService";
+import { isDefined, isNullOrUndefined } from "../../../helper/utils";
 
-export default Vue.component("guest-login", {
-
+export default {
     mixins: [ButtonSizePropertyMixin],
 
-    props:
-    {
-        template:
-        {
-            type: String,
-            default: "#vue-guest-login"
-        },
+    props: {
         backlink:
         {
             type: String
@@ -49,11 +61,14 @@ export default Vue.component("guest-login", {
         this.$nextTick(() =>
         {
             // for old login view only (input in modal)
-            $(this.$parent.$refs.guestModal).on("hidden.bs.modal", () =>
+            if(!isNullOrUndefined(this.$parent.$refs.guestModal))
             {
-                this.email = "";
-                ValidationService.unmarkAllFields(this.$refs.form);
-            });
+                this.$parent.$refs.guestModal.addEventListener("hidden.bs.modal", () =>
+                {
+                    this.email = "";
+                    ValidationService.unmarkAllFields(this.$refs.form);
+                });
+            }
         });
     },
 
@@ -89,4 +104,5 @@ export default Vue.component("guest-login", {
                 });
         }
     }
-});
+}
+</script>
