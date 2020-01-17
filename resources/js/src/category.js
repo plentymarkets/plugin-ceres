@@ -76,7 +76,8 @@ Vue.component("registration", Registration);
 import "./app/components/customer/ResetPasswordForm";
 
 import "./app/components/customer/login/ForgotPassword";
-import "./app/components/customer/login/GuestLogin";
+import GuestLogin from "./app/components/customer/login/GuestLogin.vue";
+Vue.component("guest-login", GuestLogin);
 import Login from "./app/components/customer/login/Login.vue";
 Vue.component("login", Login);
 // legacy non-shopbuilder component
