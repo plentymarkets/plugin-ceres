@@ -3,8 +3,6 @@
 
 {% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
-{{ component( "Ceres::Item.Components.ItemBundle" ) }}
-
 {% set basketTotalsCurrency = totals.currency %}
 
 <div class="row">
@@ -64,7 +62,7 @@
                                             {{ trans("Ceres::Template.addressPostNummer") }}
                                             {{ orderData.order.deliveryAddress | addressOptionType(6) }}
                                         {% endif %}
-                                        
+
                                         {{ orderData.order.deliveryAddress.address3 }}
                                     </div>
                                     <div>{{ orderData.order.deliveryAddress.postalCode }} {{ orderData.order.deliveryAddress.town }}</div>
@@ -119,7 +117,7 @@
                         <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
                         <span class="col-6 col-sm-7">{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</span>
                     </div>
-                    
+
                     {% set shippingDate = "" %}
                     {% for date in orderData.order.dates %}
                         {% if date.typeId == 8 %}
@@ -254,7 +252,7 @@
             {% endfor %}
 
         </div>
-        
+
         {{ Totals.forOrder(orderData) }}
     </div>
 </div>

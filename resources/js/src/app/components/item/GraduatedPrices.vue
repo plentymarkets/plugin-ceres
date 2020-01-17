@@ -1,23 +1,30 @@
-import Vue from "vue";
+<template>
+    <div v-if="graduatedPrices[0]">
+        <b>{{ $translate("Ceres::Template.singleItemGraduatedPrices") }}:</b>
+        <table class="graduated-prices-table text-muted">
+            <tr v-for="(price, index) in graduatedPrices">
+                <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemMinimumQuantity") }} {{ price.minimumOrderQuantity }}</td>
+                <td :class="paddingClasses" :style="paddingInlineStyles">
+                    {{ price.unitPrice.formatted }}
+                    <transition name="fade">
+                        <i class="fa fa-lg fa-check-circle-o ml-1 text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
+                    </transition>
+                </td>
+            </tr>
+        </table>
+    </div>
+</template>
+
+<script>
 import { mapState } from "vuex";
 
-export default Vue.component("graduated-prices", {
-    props:
-    {
-        template:
-        {
-            type: String,
-            default: "#vue-graduated-prices"
+export default {
+    props: {
+        paddingClasses: {
+            type: String
         },
-        paddingClasses:
-        {
-            type: String,
-            default: null
-        },
-        paddingInlineStyles:
-        {
-            type: String,
-            default: null
+        paddingInlineStyles: {
+            type: String
         }
     },
     computed:
@@ -53,4 +60,5 @@ export default Vue.component("graduated-prices", {
             variationOrderQuantity: state => state.item.variationOrderQuantity
         })
     }
-});
+}
+</script>
