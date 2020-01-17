@@ -1,66 +1,40 @@
 .qty-box {
-    display: flex;
     width: fit-content;
-    height: 100%;
 
     .qty-input {
-        width: 48px;
-        height: 100%;
-        min-height: 27px;
-        padding: 0;
-        text-align: center;
-        border: 1px solid $gray-300;
-        border-radius: $border-radius 0 0 $border-radius;
+        width: $qty-box-width;
+        padding: $qty-box-padding-y $qty-box-padding-x;
+        border: 1px solid $qty-box-border;
+        border-right: 0;
         outline: none;
-        transition: all .2s cubic-bezier(0, 0, .26, 1);
+        @include transition(all .2s cubic-bezier(0, 0, .26, 1));
 
         &:focus {
-            background: $gray-100;
+            background-color: $qty-box-bg;
         }
     }
 
-    .qty-btn-container {
-        position: relative;
-        width: 25px;
-        height: 100%;
-        overflow: hidden;
-        background: $gray-200;
-        border: 1px solid $gray-300;
-        border-left: none;
-        border-radius: 0 $border-radius $border-radius 0;
+}
+.qty-btn-container {
+    width: $qty-box-btn-width;
+    @include border-radius(0 $border-radius $border-radius 0);
 
-        .qty-btn {
-            position: relative;
-            width: 100%;
-            height: calc(50% - .5px);
-            min-height: 12px;
-            text-align: center;
-            cursor: pointer;
-            border-radius: $border-radius;
-            transition: all .2s cubic-bezier(0, 0, .26, 1);
+    .qty-btn {
+        background-color: $qty-box-bg;
+        border: 1px solid $qty-box-border;
+        box-shadow: none;
+        @include border-radius(0 $border-radius $border-radius 0);
 
-            &.disabled {
-                cursor: not-allowed;
-                opacity: .5;
-            }
-
-            &:not(.disabled):hover {
-                background: darken($gray-300, 10%);
-            }
-
-            & > .qty-sign {
-                position: absolute;
-                top: 50%;
-                right: 0;
-                left: 0;
-                color: $gray-600;
-                transform: translateY(-50%);
-            }
+        + .qty-btn {
+            border-top: 0;
         }
 
-        .qty-btn-seperator {
-            height: 1px;
-            background: $gray-300;
+        &.disabled {
+            cursor: not-allowed;
+        }
+
+        &:not(.disabled):hover {
+            background: darken($qty-box-bg, 10%);
         }
     }
 }
