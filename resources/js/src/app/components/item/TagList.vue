@@ -48,7 +48,7 @@ export default {
         enabledRoutes:
         {
             type: Array,
-            default: []
+            default: () => []
         }
     },
     computed: {
@@ -90,7 +90,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>
