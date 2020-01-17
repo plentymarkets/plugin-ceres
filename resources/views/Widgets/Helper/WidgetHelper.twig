@@ -138,3 +138,13 @@
 {% macro makeClickable(isPreview) %}
     {%- if isPreview %} data-builder-clickable{% endif -%}
 {% endmacro %}
+
+{% macro concatClasses(inputStrings) %}
+    {%- spaceless %}
+        {% set classes = "" %}
+        {% for inputString in inputStrings if inputString | trim | length > 0 %}
+            {% set classes = classes ~ " " ~ inputString %}
+        {% endfor %}
+        {{ classes | trim }}
+    {% endspaceless -%}
+{% endmacro %}
