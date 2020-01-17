@@ -335,3 +335,66 @@ $border-width: 1px;
         display: block;
     }
 }
+
+.login-pwd-reset {
+    .input-unit {
+        & + .error-msg {
+            display: none;
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #d9534f;
+        }
+
+        &.error {
+            margin-bottom: 2px;
+
+            & + .error-msg {
+                display: block;
+            }
+        }
+    }
+}
+
+#contact-form {
+
+    .input-unit {
+
+        & + .error-feedback {
+            position: relative;
+            display: none;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #d9534f;
+        }
+
+        &.error {
+            margin-bottom: 0;
+
+            & + .error-feedback {
+                display: block;
+            }
+        }
+
+        @include media-breakpoint-up(md) {
+
+            &.error {
+                margin-bottom: 0;
+
+                & + .error-feedback {
+                    margin-bottom: 0;
+                }
+
+                &.input-name-field {
+                    & + .error-feedback {
+                        margin-bottom: -3px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+textarea.no-resize {
+    resize: none;
+}
+
