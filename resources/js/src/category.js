@@ -71,7 +71,8 @@ import "./app/components/customer/ContactMap";
 import ReCaptcha from "./app/components/customer/ReCaptcha.vue";
 Vue.component("recaptcha", ReCaptcha);
 
-import "./app/components/customer/Registration";
+import Registration from "./app/components/customer/Registration.vue";
+Vue.component("registration", Registration);
 import "./app/components/customer/ResetPasswordForm";
 
 import "./app/components/customer/login/ForgotPassword";

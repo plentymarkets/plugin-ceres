@@ -4,7 +4,6 @@
 {{ component( "Ceres::PageDesign.Components.Notifications" ) }}
 {{ component( "Ceres::Basket.Components.BasketPreview" ) }}
 {{ component( "Ceres::Customer.Components.Login" ) }}
-{{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 {{ component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
@@ -16,6 +15,7 @@
 
 {# TODO REMOVE WHEN CONVERTED TO SFC #}
 {{ component("Ceres::Item.Components.OrderPropertyValue") }}
+{{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
@@ -195,7 +195,11 @@
                             <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
+                            <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
+                                <template #extend-overlay-buttons>
+                                    {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+                                </template>
+                            </registration>
                         </div>
                     </div>
                 </div>
