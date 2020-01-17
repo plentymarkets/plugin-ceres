@@ -1,16 +1,30 @@
-const ApiService          = require("../../services/ApiService");
-const NotificationService = require("../../services/NotificationService");
+<template>
+    <form method="post" @submit.prevent="submit()" class="clearfix">
+        <div class="input-unit mt-3">
+            <label :for="'new-mail' + _uid" class="disabled">{{ $translate("Ceres::Template.myAccountNewEmail") }}</label>
+            <input type="email" name="email" class="form-control" :id="'new-mail' + _uid" :value="newMail" disabled>
+        </div>
 
+        <div class="input-unit">
+            <label :for="'password' + _uid">{{ $translate("Ceres::Template.loginPassword") }}</label>
+            <input type="password" name="password" autocomplete="current-password" class="form-control" :id="'password' + _uid" v-model="password">
+        </div>
+
+        <button type="submit" :disabled="isDisabled" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width">
+            <span>{{ $translate("Ceres::Template.myAccountChangeEmail") }}</span>
+            <i class="fa fa-envelope" v-waiting-animation="isDisabled" aria-hidden="true"></i>
+        </button>
+    </form>
+</template>
+
+<script>
+import NotificationService from "../../services/NotificationService";
+import ApiService from "../../services/ApiService";
 import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
 
-export default Vue.component("change-email-form", {
+export default {
 
     props: {
-        template: {
-            type: String,
-            default: "#vue-change-email-form"
-        },
         contactId:
         {
             type: Number,
@@ -63,4 +77,5 @@ export default Vue.component("change-email-form", {
                 });
         }
     }
-});
+}
+</script>

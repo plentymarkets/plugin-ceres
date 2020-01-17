@@ -65,7 +65,8 @@ import "./app/components/common/TabList";
 import "./app/components/containers/LastSeenItemList";
 
 import "./app/components/customer/AcceptPrivacyPolicyCheck";
-import "./app/components/customer/ChangeEmailForm";
+import ChangeEmailForm from "./app/components/customer/ChangeEmailForm.vue";
+Vue.component("change-email-form", ChangeEmailForm);
 import "./app/components/customer/ContactMap";
 import "./app/components/customer/CountrySelect";
 import "./app/components/customer/ReCaptcha";
