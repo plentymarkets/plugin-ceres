@@ -1,10 +1,13 @@
+<template>
+    <div data-recaptcha></div>
+</template>
+
+<script>
 let gRecaptchaApiLoaded;
 
-import Vue from "vue";
+export default {
 
-export default Vue.component("recaptcha", {
-
-    template: "<div data-recaptcha></div>",
+    name: "recaptcha",
 
     data()
     {
@@ -91,4 +94,9 @@ export default Vue.component("recaptcha", {
                 );
         }
     }
-});
+}
+</script>
+
+<style>
+
+</style>
