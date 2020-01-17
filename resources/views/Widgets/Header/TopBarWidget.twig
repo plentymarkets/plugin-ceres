@@ -26,7 +26,7 @@
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max">
-        <div class="row mx-0">
+        <div class="row mx-0 flex-row-reverse position-relative">
             {% if isPreview and not
                 enableLogin and not
                 enableRegistration and not
@@ -45,20 +45,18 @@
                 </div>
             {% endif %}
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Header.LeftSide"])) }}
-            <div class="top-bar-items {% if searchStyle == "permanent" %}search-shown{% endif %}">
+            <div class="top-bar-items {% if searchStyle == "permanent" %}search-permanent d-flex flex-grow-1 flex-column-reverse flex-md-row{% endif %}">
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <div class="always-visible-search">
+                        <div class="always-visible-search m-2 flex-grow-1">
                             <item-search template="#vue-item-search"
                                          :show-item-images="{{ showItemImages | json_encode }}"
                                          :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
-                                <div class="search-box-inner">
-                                    <div class="search-box-shadow-frame">
-                                        <input type="search" class="search-input"/>
-                                        <button class="search-submit" type="submit">
-                                            <i class="fa fa-search sm-up"></i>
-                                        </button>
-                                    </div>
+                                <div class="position-relative d-flex flex-grow-1">
+                                    <input type="search" class="search-input px-3 py-2 flex-grow-1">
+                                    <button class="search-submit px-3" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
                             </item-search>
                         </div>
@@ -67,19 +65,19 @@
                     {{ Twig.endif() }}
                 {% endif %}
                 <div class="controls">
-                    <ul id="controlsList" class="controls-list list-inline">
+                    <ul id="controlsList" class="controls-list mb-0 d-flex list-inline">
                         {% if enableLogin %}
                             <li class="list-inline-item control-user">
                                 <user-login-handler :show-registration="{{ enableRegistration | json_encode }}">
                                     <a data-toggle="modal">
                                         <i class="fa fa-user mr-1" aria-hidden="true"></i>
-                                        <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
+                                        <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
                                     </a>
                                     {% if enableRegistration %}
                                     <span class="pipe"></span>
                                     <a data-toggle="modal">
                                         <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
-                                        <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
+                                        <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                     </a>
                                     {% endif %}
                                 </user-login-handler>
@@ -88,7 +86,7 @@
                             <li class="list-inline-item control-user">
                                 <a data-toggle="modal">
                                     <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
-                                    <span class="hidden-xs-down">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
+                                    <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                 </a>
                             </li>
                         {% endif %}
@@ -136,7 +134,7 @@
                             <li class="list-inline-item control-wish-list">
                                 <wish-list-count>
                                     <a>
-                                        <span class="badge-right">0</span>
+                                        <span class="badge-right mr-1">0</span>
                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </wish-list-count>
@@ -145,16 +143,16 @@
                         {% endif %}
 
                         {% if enableBasketPreview %}
-                            <li class="list-inline-item control-basket">
+                            <li class="list-inline-item control-basket position-relative">
                                 <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
                                     {% if basketValues != "sum" %}
-                                        <span class="badge-right" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
+                                        <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
                                     {% endif %}
 
                                     <i v-waiting-animation="$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     {% if basketValues != "quantity" %}
-                                        <span class="badge" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 {{ Twig.print("currencyData") }}</span>
-                                        <span class="badge" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ Twig.print("currencyData") }}</span>
+                                        <span class="badge p-0 ml-2" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 {{ Twig.print("currencyData") }}</span>
+                                        <span class="badge p-0 ml-2" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ Twig.print("currencyData") }}</span>
                                     {% endif %}
                                 </a>
 
@@ -221,7 +219,7 @@
     </div>
 
     <div class="container-max page-header">
-        <div class="row mx-0">
+        <div class="row mx-0 flex-row-reverse position-relative">
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
