@@ -20,7 +20,6 @@
 <script>
 import NotificationService from "../../services/NotificationService";
 import ApiService from "../../services/ApiService";
-import TranslationService from "../../services/TranslationService";
 
 export default {
 
@@ -61,14 +60,14 @@ export default {
                 .done(response =>
                 {
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.myAccountChangeEmailSuccessful")
+                        this.$translate("Ceres::Template.myAccountChangeEmailSuccessful")
                     );
                     window.location.assign(window.location.origin);
                 })
                 .fail(() =>
                 {
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.myAccountChangeEmailFailed")
+                        this.$translate("Ceres::Template.myAccountChangeEmailFailed")
                     ).closeAfter(10000);
                 })
                 .always(() =>
