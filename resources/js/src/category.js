@@ -73,7 +73,8 @@ Vue.component("recaptcha", ReCaptcha);
 
 import Registration from "./app/components/customer/Registration.vue";
 Vue.component("registration", Registration);
-import "./app/components/customer/ResetPasswordForm";
+import ResetPasswordForm from "./app/components/customer/ResetPasswordForm.vue";
+Vue.component("reset-password-form", ResetPasswordForm);
 
 import "./app/components/customer/login/ForgotPassword";
 import GuestLogin from "./app/components/customer/login/GuestLogin.vue";
