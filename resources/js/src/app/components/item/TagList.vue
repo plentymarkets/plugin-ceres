@@ -1,7 +1,7 @@
 <template>
     <div v-if="tags" class="pt-1 pb-1">
         <template v-if="isTagRouteEnabled">
-            <a 
+            <a
                 v-for="tag in tags"
                 :key="tag.id"
                 :href="getTagLink(tag)"
@@ -12,7 +12,7 @@
             </a>
         </template>
         <template v-else>
-            <span 
+            <span
                 v-for="tag in tags"
                 :key="tag.id"
                 class="badge mr-1"
@@ -48,7 +48,7 @@ export default {
         enabledRoutes:
         {
             type: Array,
-            default: []
+            default: () => []
         }
     },
     computed: {
@@ -71,7 +71,7 @@ export default {
             const blue = parseInt(color.substring(4, 6), 16);
             const result = (red * 0.299) + (green * 0.587) + (blue * 0.114);
 
-            return (result > 186) ? "text-context-dark" : "text-context-light";
+            return (result > 186) ? "text-dark" : "text-light";
         },
         getStyles(tag)
         {
@@ -90,7 +90,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

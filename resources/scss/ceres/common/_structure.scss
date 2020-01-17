@@ -2,6 +2,11 @@ html {
     font-size: $font-size-root;
 }
 
+body,
+body .wrapper-main {
+    overflow-x: hidden;
+}
+
 body {
     background-color: $gray-100;
 

@@ -11,6 +11,7 @@ import ItemImageCarousel from "./app/components/item/ItemImageCarousel.vue";
 Vue.component("item-image-carousel", ItemImageCarousel);
 import VariationSelect from "./app/components/item/VariationSelect.vue";
 Vue.component("variation-select", VariationSelect);
+import SingleItem from "./app/components/item/SingleItem.vue";
+Vue.component("single-item", SingleItem);
 import OrderPropertyList from "./app/components/item/OrderPropertyList.vue";
 Vue.component("order-property-list", OrderPropertyList);
-import "./app/components/item/SingleItem";

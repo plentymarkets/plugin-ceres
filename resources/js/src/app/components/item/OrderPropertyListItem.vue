@@ -18,7 +18,7 @@
 
             <label class="form-check-label text-appearance"
                    :for="'check' + _uid"
-                   :class="{ 'text-success': property.value, 'text-danger': hasError }"
+                   :class="{ 'text-danger': hasError }"
                    v-tooltip data-toggle="tooltip"
                    :title="property.names.description">
                 {{ property.names.name }}
@@ -27,7 +27,7 @@
         </div>
 
         <div v-else-if="inputType === 'selection'" :class="{ 'd-flex': selectedDescription }">
-            <div 
+            <div
                 class="input-unit order-property-input"
                 :class="{ 'active': property.value, 'error': hasError }"
                 v-tooltip
@@ -200,10 +200,6 @@ export default {
                 {
                     value = null;
                 }
-            }
-            else if (this.inputType === "radio")
-            {
-                this.$emit("radio-change", this.property.id);
             }
             else if (this.inputType === "selection")
             {

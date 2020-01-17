@@ -25,23 +25,13 @@ export default {
         bundleType: String,
         bundleComponents: Array
     },
-
-    data()
+    
+    computed:
     {
-        return {
-            showItemBundleItems: true
-        };
-    },
-
-    mounted()
-    {
-        this.$nextTick(() =>
+        showItemBundleItems()
         {
-            if (this.$refs.bundleSetting)
-            {
-                this.showItemBundleItems = (App.bundleSetting !== 1 && this.bundleType === "bundle");
-            }
-        });
+            return App.bundleSetting !== 1 && this.bundleType === "bundle";
+        }
     },
 
     methods:
