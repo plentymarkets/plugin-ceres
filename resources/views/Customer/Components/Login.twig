@@ -12,7 +12,7 @@
                             <input type="email" name="email" autocomplete="email" :id="'email' + _uid" v-model="username" data-autofocus>
                             <label :for="'email' + _uid">{{ trans("Ceres::Template.loginEmail") }}*</label>
                         </div>
-                        <span class="invalid-feedback">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
+                        <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
                     </div>
                     <div class="col-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
