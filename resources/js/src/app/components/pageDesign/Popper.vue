@@ -1,19 +1,39 @@
+<template>
+  	<div>
+		<div class="popper-handle" ref="handle">
+			<slot name="handle">
+				<!--Element to trigger popper -->
+                <button class="btn btn-icon btn-secondary btn-sm">
+                    <i class="fa fa-info"></i>
+                </button>
+			</slot>
+		</div>
+
+		<div ref="node" class="popover bs-popover-auto" :class="classNames">
+			<h3 class="popover-header">
+				<slot name="title">
+					<!-- {# Title to display in the popper #} -->
+				</slot>
+			</h3>
+			<div class="popover-body" :class="bodyClass" :style="bodyStyle">
+				<slot name="content">
+					<!-- {# Content to display in the popper #} -->
+				</slot>
+			</div>
+			<div class="arrow" ref="arrow"></div>
+		</div>
+	</div>
+</template>
+
+<script>
 import { isNullOrUndefined } from "../../helper/utils";
 import { findParent } from "../../helper/dom";
+import { findModal } from "../../services/ModalService";
 import Vue from "vue";
 import Popper from "popper.js";
 
-const ModalService        = require("../../services/ModalService");
-
-export default Vue.component("popper", {
-
-    delimiters: ["${", "}"],
-
+export default {
     props: {
-        template: {
-            type: String,
-            default: "#vue-popper"
-        },
         placement: {
             type: String,
             default: "auto"
@@ -90,7 +110,7 @@ export default Vue.component("popper", {
 
             if (!isNullOrUndefined(parentModal))
             {
-                ModalService.findModal(parentModal)
+                findModal(parentModal)
                     .on("hide.bs.modal", () =>
                     {
                         this.hidePopper();
@@ -149,4 +169,5 @@ export default Vue.component("popper", {
             }
         }
     }
-});
+}
+</script>

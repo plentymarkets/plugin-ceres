@@ -1,4 +1,5 @@
 const path = require("path");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = env =>
 {
@@ -47,6 +48,10 @@ module.exports = env =>
                     ]
                 },
                 {
+                    test: /\.vue$/,
+                    loader: "vue-loader"
+                },
+                {
                     test: /\.m?js$/,
                     exclude: /node_modules/,
                     use: {
@@ -54,6 +59,9 @@ module.exports = env =>
                     }
                 }
             ]
-        }
+        },
+        plugins: [
+            new VueLoaderPlugin()
+        ]
     };
 };

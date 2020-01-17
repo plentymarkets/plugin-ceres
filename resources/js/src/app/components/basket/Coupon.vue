@@ -1,10 +1,31 @@
+<template>
+    <div class="cmp">
+        <p v-if="isCheckoutReadonly && !!$translate('Ceres::Template.couponReadonlyInfoText')">
+            {{ couponReadonlyInfoText }}
+        </p>
+        <div :class="{'input-group':true, 'component-loading':isCheckoutReadonly, 'isLoading':isCheckoutReadonly}">
+            <input type="text" class="form-control" v-model="couponCode" :placeholder="$translate('Ceres::Template.couponEnterCoupon')" @keyup.enter="redeemCode()" :disabled="disabled || isCheckoutReadonly">
+            <span class="input-group-btn">
+                <button class="btn btn-medium btn-primary btn-appearance" type="button" @click="redeemCode()" :disabled="waiting || isCheckoutReadonly" v-if="!disabled">
+                    <i v-waiting-animation="waiting" class="fa fa-gift" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.couponRedeem") }}
+                </button>
+                <button class="btn btn-medium btn-danger" type="button" @click="removeCode()" :disabled="waiting || isCheckoutReadonly" v-else>
+                    <i v-waiting-animation="waiting" class="fa fa-trash" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.couponRemove") }}
+                </button>
+            </span>
+        </div>
+    </div>
+</template>
+
+<script>
 const NotificationService = require("../../services/NotificationService");
 
 import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
 import { mapState } from "vuex";
 
-export default Vue.component("coupon", {
+export default {
 
     props: {
         template:
@@ -146,4 +167,5 @@ export default Vue.component("coupon", {
             return TranslationService.translate("Ceres::Template.couponRedeemFailure");
         }
     }
-});
+}
+</script>
