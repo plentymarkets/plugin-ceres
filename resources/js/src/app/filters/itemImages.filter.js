@@ -19,8 +19,9 @@ Vue.filter("itemImages", function(images, accessor)
     {
         const imageUrl = images[imagesAccessor][image][accessor];
         const alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
+        const name = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.name : null;
 
-        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][image].position, alternate });
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][image].position, alternate, name });
     }
 
     return imageUrls;

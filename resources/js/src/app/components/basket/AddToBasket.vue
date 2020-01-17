@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div :class="{'no-pointer-events': waiting}" class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && canBeAddedToBasket"
+        <div :class="{'no-pointer-events': waiting}" class="add-to-basket-lg-container d-none d-lg-block" v-if="!showQuantity && useLargeScale && canBeAddedToBasket"
              v-tooltip data-toggle="tooltip" data-placement="top" :title="$translate('Ceres::Template.singleItemAddToBasket')" @click="addToBasket()">
             <i v-waiting-animation="waiting" class="fa fa-cart-plus fa-lg mobile-icon-right"></i>
         </div>
 
-        <div class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket"
+        <div class="add-to-basket-lg-container d-none d-lg-block" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket"
              v-tooltip data-toggle="tooltip" data-placement="top" :title="$translate('Ceres::Template.itemShowItem')" @click="directToItem()">
             <i class="fa fa-arrow-right fa-lg mobile-icon-right"></i>
         </div>
@@ -151,6 +151,11 @@ export default {
             type: Array,
             default: () => []
         },
+        hasOrderProperties:
+        {
+            type: Boolean,
+            default: false
+        },
         hasPrice:
         {
             type: Boolean,
@@ -191,7 +196,7 @@ export default {
         requiresProperties()
         {
             return App.config.item.requireOrderProperties &&
-                this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0;
+                (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0);
         },
 
         buttonClasses()
@@ -257,21 +262,36 @@ export default {
             {
                 this.waiting = true;
 
-                this.orderProperties.forEach(function(orderProperty)
-                {
-                    if (orderProperty.property.valueType === "float" &&
-                        !isNullOrUndefined(orderProperty.property.value) &&
-                        orderProperty.property.value.slice(-1) === App.decimalSeparator)
+                let totalSurcharge = 0;
+                const orderParams = this.orderProperties
+                    .filter((orderProperty) => !isNullOrUndefined(orderProperty.property.value))
+                    .map((orderProperty) =>
                     {
-                        orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
-                    }
-                });
+                        const property = orderProperty.property;
+
+                        if (property.valueType === "float" &&
+                            !isNullOrUndefined(property.value) &&
+                            property.value.slice(-1) === App.decimalSeparator)
+                        {
+                            property.value = property.value.substr(0, property.value.length - 1);
+                        }
+
+                        totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
+
+                        return {
+                            propertyId: property.id,
+                            type: property.valueType,
+                            name: property.names.name,
+                            value: property.value
+                        };
+                    });
 
                 const basketObject =
                     {
                         variationId             :   this.variationId,
                         quantity                :   this.quantity,
-                        basketItemOrderParams   :   this.orderProperties
+                        basketItemOrderParams   :   orderParams,
+                        totalOrderParamsMarkup  :   totalSurcharge
                     };
 
                 this.$store.dispatch("addBasketItem", basketObject).then(

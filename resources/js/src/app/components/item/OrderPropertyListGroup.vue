@@ -11,14 +11,13 @@
             </div>
 
             <div v-for="property in propertyGroup.properties" :key="property.id" :class="paddingClasses" :style="paddingInlineStyles">
-                <order-property-list-item v-if="property.isShownOnItemPage" :group="propertyGroup.group" :property="property" @radio-change="unsetDeselectedRadios($event)"></order-property-list-item>
+                <order-property-list-item v-if="property.isShownOnItemPage" :group="propertyGroup.group" :property="property"></order-property-list-item>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 import OrderPropertyListItem from "./OrderPropertyListItem.vue";
 
 export default {
@@ -51,40 +50,6 @@ export default {
 
             return properties.length;
         }
-    },
-
-    methods:
-    {
-        unsetDeselectedRadios(propertyId)
-        {
-            const propertiesToUnselect = this.propertyGroup.properties.filter(property => property.id !== propertyId && this.isPropertyTypeRadio(property));
-
-            for (const property of propertiesToUnselect)
-            {
-                this.setVariationOrderProperty({ propertyId: property.id, value: null });
-            }
-        },
-
-        isPropertyTypeRadio(property)
-        {
-            const orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
-            const valueType = property.valueType;
-
-            if (valueType === "empty" && orderPropertyGroupingType === "single")
-            {
-                return true;
-            }
-
-            return false;
-        },
-
-        ...mapMutations([
-            "setVariationOrderProperty"
-        ])
     }
 }
 </script>
-
-<style>
-
-</style>

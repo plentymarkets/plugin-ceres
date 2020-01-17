@@ -10,17 +10,35 @@
 
 	{{ component( "Ceres::OrderReturn.Components.OrderReturn" ) }}
 
-	<div class="page-content basket order-return container-max mb-5 mt-3">
+    {% set hasShopBuilderContent = false %}
 
-		<div class="row mt-3">
-            <div class="col-12">
-                <h1 class="h2">{{ trans("Ceres::Template.return") }}</h1>
+    {% if category is defined %}
+        {% set shopBuilderTemplate = shop_builder_category_template(category.id, "content") %}
+        {% if shopBuilderTemplate | trim is not empty %}
+            {% set hasShopBuilderContent = true %}
+
+            <div class="page-content order-return container-max">
+                <div class="row">
+                    <div class="col-12">
+                        {{ shopBuilderTemplate | raw }}
+                    </div>
+                </div>
+	        </div>
+
+        {% endif %}
+    {% endif %}
+
+    {% if not hasShopBuilderContent %}
+        <div class="page-content basket order-return container-max mb-5 mt-3">
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h1 class="h2">{{ trans("Ceres::Template.return") }}</h1>
+                </div>
             </div>
+
+            <hr>
+
+            <order-return :init-order-data="{{ orderData | json_encode }}" order-access-key="{{ request.get('orderAccessKey') }}"></order-return>
         </div>
-
-        <hr>
-
-		<order-return :init-order-data="{{ orderData | json_encode }}" order-access-key="{{ request.get('orderAccessKey') }}"></order-return>
-
-	</div>
+    {% endif %}
 {% endblock %}
