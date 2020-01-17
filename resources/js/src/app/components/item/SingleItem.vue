@@ -21,7 +21,7 @@
                                 </span>
                             </h1>
 
-                            <tag-list></tag-list>
+                            <slot name="tag-list"></slot>
 
                             <p class="single-description"
                                v-if="isShortDescriptionActive && currentVariation.texts.shortDescription !== ''"

@@ -23,4 +23,7 @@
             {{ ImageCarouselOverride }}
         {% endif %}
     </template>
+    <template #tag-list>
+        <tag-list :enabled-routes="{{ config('IO.routing.enabled_routes') | split(', ') | json_encode }}"></tag-list>
+    </template>
 </single-item>
