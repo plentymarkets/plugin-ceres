@@ -83,10 +83,9 @@ import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 import AddressInputGroup from "./AddressInputGroup";
-
-const ApiService = require("../../services/ApiService");
-const NotificationService = require("../../services/NotificationService");
-const ModalService = require("../../services/ModalService");
+import ApiService from "../../services/ApiService";
+import NotificationService from "../../services/NotificationService";
+import ModalService from "../../services/ModalService";
 
 export default {
 
