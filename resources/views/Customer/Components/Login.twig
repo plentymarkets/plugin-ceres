@@ -4,7 +4,7 @@
 
 <script type="x/template" id="vue-login">  
     <div class="login-pwd-reset">
-        <form :id="'login-form-' + _uid" method="post" class="login-container">
+        <form :id="'login-form-' + _uid" method="post">
             <div :class="{'modal-body': modalElement}">
                 <div class="row">
                     <div class="col-12">
@@ -12,7 +12,7 @@
                             <input type="email" name="email" autocomplete="email" :id="'email' + _uid" v-model="username" data-autofocus>
                             <label :for="'email' + _uid">{{ trans("Ceres::Template.loginEmail") }}*</label>
                         </div>
-                        <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
+                        <span class="invalid-feedback">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
                     </div>
                     <div class="col-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
