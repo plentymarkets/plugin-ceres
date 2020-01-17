@@ -25,14 +25,7 @@ export default {
         bundleType: String,
         bundleComponents: Array
     },
-
-    data()
-    {
-        return {
-            showItemBundleItems: true
-        };
-    },
-
+    
     computed:
     {
         showItemBundleItems()
