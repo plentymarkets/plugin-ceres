@@ -101,7 +101,7 @@
             <div class="row">
 
                 {% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}
-                    <div class="col-3 hidden-md-down">
+                    <div class="col-3 d-none d-lg-block">
                         <div class="sidebar-categories">
                             <div class="category-title">{{ trans("Ceres::Template.itemCategories") }}</div>
                             {{ include('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}

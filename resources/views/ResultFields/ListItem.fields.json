@@ -3,11 +3,13 @@
     "images.all.position",
     "images.all.path",
     "images.all.names.alternate",
+    "images.all.names.name",
     "images.all.names.lang",
     "images.variation.urlMiddle",
     "images.variation.position",
     "images.variation.path",
     "images.variation.names.alternate",
+    "images.variation.names.name",
     "images.variation.names.lang",
 
     "properties.property.id",

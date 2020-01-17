@@ -283,6 +283,11 @@ export default {
                 );
             }
 
+            if (!names.length)
+            {
+                return null;
+            }
+
             return this.$translate("Ceres::Template.singleItemNotAvailableInSelection", { name: names.join(", ") });
         },
 

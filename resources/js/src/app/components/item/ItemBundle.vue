@@ -33,15 +33,12 @@ export default {
         };
     },
 
-    mounted()
+    computed:
     {
-        this.$nextTick(() =>
+        showItemBundleItems()
         {
-            if (this.$refs.bundleSetting)
-            {
-                this.showItemBundleItems = (App.bundleSetting !== 1 && this.bundleType === "bundle");
-            }
-        });
+            return App.bundleSetting !== 1 && this.bundleType === "bundle";
+        }
     },
 
     methods:

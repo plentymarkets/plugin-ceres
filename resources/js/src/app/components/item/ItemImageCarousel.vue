@@ -1,21 +1,21 @@
 <template>
     <div itemscope itemtype="http://schema.org/Thing">
         <div class="single-carousel owl-carousel owl-theme owl-single-item" ref="single">
-            <div v-for="image in singleImages" class="prop-xs-1-1">
+            <div v-for="image in singleImages" class="prop-1-1">
                 <a :href="image.url" data-lightbox="single-big-image-gallery">
-                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getItemName()"></lazy-img>
+                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getImageName(image)"></lazy-img>
                 </a>
             </div>
         </div>
         <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
-            <div class="prop-xs-1-1" v-for="(imagePreview, index) in carouselImages">
+            <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
                 <div class="image-container" @click="goTo(index)">
                     <lazy-img
-                            class="owl-thumb border-appearance"
-                            v-bind:class="{ 'active': currentItem === index}"
-                            :image-url="imagePreview.url"
-                            :alt="getAltText(imagePreview)"
-                            :title="getItemName()">
+                        class="owl-thumb border-appearance"
+                        v-bind:class="{ 'active': currentItem === index}"
+                        :image-url="imagePreview.url"
+                        :alt="getAltText(imagePreview)"
+                        :title="getImageName(imagePreview)">
                     </lazy-img>
                 </div>
             </div>
@@ -294,9 +294,9 @@ export default {
             return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
         },
 
-        getItemName()
+        getImageName(image)
         {
-            return this.$options.filters.itemName(this.currentVariation.documents[0].data);
+            return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation.documents[0].data);
         },
 
         loadLightbox()

@@ -16,14 +16,14 @@
         ]
     },
     "allowedTypes": {
-        "categoryitem": ["static", "structure", "default", "categoryitem", "customer"],
-        "itemsearch":   ["static", "structure", "default", "categoryitem", "customer"],
-        "checkout":     ["static", "structure", "default", "checkout", "customer"],
-        "content":      ["static", "structure", "default"],
-        "footer":       ["footer", "static", "structure", "default"],
         "header":       ["header", "static", "structure", "default"],
-        "myaccount":    ["static", "structure", "default", "myaccount", "customer"],
-        "singleitem":   ["static", "structure", "default", "item"]
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "singleitem":   ["static", "structure", "default", "item"],
+        "categoryitem": ["static", "structure", "default", "categoryitem"],
+        "itemsearch":   ["static", "structure", "default", "categoryitem"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer"]
     },
     "presets": {
         "header": [

@@ -20,21 +20,17 @@
             <div class="thumb-background"></div>
 
             <div class="thumb-image">
-                <div class="square-container">
-                    <div class="square-inner main-image">
-                        <slot name="item-image">
-                            <category-image-carousel template="#vue-category-image-carousel"
-                                                    :image-urls-data="item.images | itemImages(imageUrlAccessor)"
-                                                    :alt-text="item | itemName"
-                                                    :title-text="item | itemName"
-                                                    :item-url="item | itemURL(urlWithVariationId)"
-                                                    :enable-carousel="{{ enableCarousel }}"
-                                                    :disable-carousel-on-mobile="disableCarouselOnMobile"
-                                                    ref="categoryImageCarousel">
-                            </category-image-carousel>
-                        </slot>
-                    </div>
-                </div>
+                <slot name="item-image">
+                    <category-image-carousel template="#vue-category-image-carousel"
+                                            :image-urls-data="item.images | itemImages(imageUrlAccessor)"
+                                            :alt-text="item | itemName"
+                                            :title-text="item | itemName"
+                                            :item-url="item | itemURL(urlWithVariationId)"
+                                            :enable-carousel="{{ enableCarousel }}"
+                                            :disable-carousel-on-mobile="disableCarouselOnMobile"
+                                            ref="categoryImageCarousel">
+                    </category-image-carousel>
+                </slot>
             </div>
 
             <!-- STORE SPECIALS -->
