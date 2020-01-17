@@ -1,0 +1,315 @@
+<template>
+    <div itemscope itemtype="http://schema.org/Thing">
+        <div class="single-carousel owl-carousel owl-theme owl-single-item" ref="single">
+            <div v-for="image in singleImages" class="prop-1-1">
+                <a :href="image.url" data-lightbox="single-big-image-gallery">
+                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getImageName(image)"></lazy-img>
+                </a>
+            </div>
+        </div>
+        <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
+            <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
+                <div class="image-container" @click="goTo(index)">
+                    <lazy-img
+                        class="owl-thumb border-appearance"
+                        v-bind:class="{ 'active': currentItem === index}"
+                        :image-url="imagePreview.url"
+                        :alt="getAltText(imagePreview)"
+                        :title="getImageName(imagePreview)">
+                    </lazy-img>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { isNullOrUndefined } from "../../helper/utils";
+import "owl.carousel";
+import { mapState } from "vuex";
+
+export default {
+    props: {
+        maxQuantity:
+        {
+            type: Number,
+            default: 10
+        },
+        imageUrlAccessor:
+        {
+            type: String,
+            default: "url"
+        },
+        showThumbs:
+        {
+            type: Boolean,
+            default: true
+        },
+        showDots:
+        {
+            type: Boolean,
+            default: true
+        },
+        animationStyle:
+        {
+            type: String,
+            default: "standard"
+        },
+        pluginPath:
+        {
+            type: String,
+            default: ""
+        }
+    },
+
+    data()
+    {
+        return {
+            currentItem: 0
+        };
+    },
+
+    computed:
+    {
+        carouselImages()
+        {
+            return this.orderByPosition(
+                this.$options.filters.itemImages(
+                    this.currentVariation.documents[0].data.images,
+                    "urlPreview"
+                )
+            ).slice(0, this.maxQuantity);
+        },
+
+        singleImages()
+        {
+            return this.orderByPosition(
+                this.$options.filters.itemImages(
+                    this.currentVariation.documents[0].data.images,
+                    this.imageUrlAccessor
+                )
+            ).slice(0, this.maxQuantity);
+        },
+
+        ...mapState({
+            currentVariation: state => state.item.variation
+        })
+    },
+
+    watch: {
+        currentVariation:
+        {
+            handler(val, oldVal)
+            {
+                if (val !== oldVal)
+                {
+                    setTimeout(() =>
+                    {
+                        this.reInitialize();
+                    }, 1);
+                }
+            },
+            deep: true
+        }
+    },
+    created()
+    {
+        this.loadLightbox();
+    },
+
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            this.initCarousel();
+            this.initThumbCarousel();
+        });
+    },
+
+    methods:
+    {
+        getImageCount()
+        {
+            return this.carouselImages.length > this.maxQuantity ? this.maxQuantity : this.carouselImages.length;
+        },
+
+        reInitialize()
+        {
+            const $owl = $(this.$refs.single);
+
+            $owl.trigger("destroy.owl.carousel");
+            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $owl.find(".owl-item").remove();
+
+            const $thumbs = $(this.$refs.thumbs);
+
+            $thumbs.trigger("destroy.owl.carousel");
+            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $thumbs.find(".owl-item").remove();
+
+            this.initCarousel();
+            this.initThumbCarousel();
+        },
+
+        initCarousel()
+        {
+            const imageCount = this.getImageCount();
+            const carouselSettings = {
+                autoHeight       : true,
+                dots             : this.showDots,
+                items            : 1,
+                lazyLoad         : true,
+                loop             : true,
+                margin           : 10,
+                mouseDrag        : imageCount > 1,
+                nav              : imageCount > 1,
+                navClass         : [
+                    "owl-single-item-nav left carousel-control",
+                    "owl-single-item-nav right carousel-control"
+                ],
+                navContainerClass: "",
+                navText          : [
+                    "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                    "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                ],
+                smartSpeed       : 350,
+                onChanged: event =>
+                {
+                    const $thumb = $(this.$refs.thumbs);
+
+                    $thumb.trigger("to.owl.carousel", [
+                        event.page.index,
+                        350
+                    ]);
+                }
+            };
+
+            if (this.animationStyle !== "standard")
+            {
+                carouselSettings.animateOut = this.animationStyle;
+            }
+
+            $(this.$refs.single).owlCarousel(carouselSettings);
+
+            if (!isNullOrUndefined(window.lightbox))
+            {
+                lightbox.option({
+                    wrapAround: true
+                });
+                lightbox.imageCountLabel = (current, total) =>
+                {
+                    if (isNullOrUndefined(imageCount) || imageCount <= 1)
+                    {
+                        return "";
+                    }
+                    current -= ((total - imageCount) / 2);
+                    while (current <= 0)
+                    {
+                        current += imageCount;
+                    }
+                    while (current > imageCount)
+                    {
+                        current -= imageCount;
+                    }
+                    return this.$translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
+                };
+
+                const originalFn = lightbox.changeImage;
+
+                lightbox.changeImage = imageNumber =>
+                {
+                    if (lightbox.currentImageIndex === 0 && imageNumber === lightbox.album.length - 1)
+                    {
+                        imageNumber--;
+                    }
+                    else if (lightbox.currentImageIndex === lightbox.album.length - 1 && imageNumber === 0)
+                    {
+                        imageNumber++;
+                    }
+                    return originalFn.call(lightbox, imageNumber);
+                };
+            }
+
+            $(this.$refs.single).on("changed.owl.carousel", event =>
+            {
+                this.currentItem = event.page.index;
+            });
+        },
+
+        initThumbCarousel()
+        {
+            $(this.$refs.thumbs).owlCarousel({
+                autoHeight       : true,
+                dots             : false,
+                items            : 5,
+                lazyLoad         : true,
+                loop             : false,
+                margin           : 10,
+                mouseDrag        : false,
+                center           : false,
+                nav              : true,
+                navClass         : [
+                    "owl-single-item-nav left carousel-control",
+                    "owl-single-item-nav right carousel-control"
+                ],
+                navContainerClass: "",
+                navText          : [
+                    "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                    "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                ],
+                smartSpeed       : 350
+            });
+        },
+
+        goTo(index)
+        {
+            const $owl = $(this.$refs.single);
+
+            $owl.trigger("to.owl.carousel", [
+                index,
+                350
+            ]);
+        },
+
+        orderByPosition(list)
+        {
+            return list.sort(
+                (entryA, entryB) =>
+                {
+                    if (entryA.position > entryB.position)
+                    {
+                        return 1;
+                    }
+                    if (entryA.position < entryB.position)
+                    {
+                        return -1;
+                    }
+
+                    return 0;
+                });
+        },
+
+        getAltText(image)
+        {
+            return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+        },
+
+        getImageName(image)
+        {
+            return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+        },
+
+        loadLightbox()
+        {
+            const scriptSource = this.pluginPath + "/js/dist/lightbox.min.js";
+            const script = document.createElement("script");
+
+            script.type = "text/javascript";
+            script.src = scriptSource;
+            script.addEventListener("load", () => this.reInitialize(), false);
+            script.addEventListener("error", () => console.warn("lightbox could not be initialized"), false);
+            document.body.appendChild(script);
+        }
+    }
+}
+</script>

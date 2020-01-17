@@ -12,8 +12,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
     <div class="widget-inner">
-        <shipping-country-select template="#vue-basket-shipping-country-select">
-        </shipping-country-select>
+        <shipping-country-select :basket-select="true"></shipping-country-select>
     </div>
     
 </div>

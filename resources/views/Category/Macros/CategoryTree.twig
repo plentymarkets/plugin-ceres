@@ -7,7 +7,7 @@
         {% for child in category.children if counter < maxItems[level] %}
             {% if (child.details | length > 0) %}
                 {% if level == 1 %}
-                    <li><ul class="nav-dropdown-inner">
+                    <li><ul class="collapse-inner">
                 {% endif %}
                     <li class="level{{ level }}">
                         {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
@@ -51,18 +51,13 @@
 
                 <li class="ddown" v-navigation-touch-handler>
                     <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}">{{ category.details[0].name }}</a>
-
-                    <span class="d-lg-none nav-direction" data-toggle="collapse" href="#navDropdown{{ counter }}" aria-expanded="false">
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </span>
-
-                    <ul data-level="1" id="navDropdown{{ counter }}" class="collapse">
+                    <ul data-level="1" class="collapse nav-dropdown-{{ counter }}">
                         {% set counter = counter + 1 %}
                         {% if megaMenuLevels == 1 %}
                             {% for child in category.children %}
                                 {% if child.details | length > 0 %}
                                     <li>
-                                        <ul class="nav-dropdown-inner">
+                                        <ul class="collapse-inner">
                                             <li>
                                                 <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}">{{ child.details[0].name }}</a>
                                             </li>

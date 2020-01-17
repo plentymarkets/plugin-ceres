@@ -67,7 +67,7 @@ $fa-font-path:              "#{$root-directory}/documents/fonts" !default;
 //
 // Top Bar
 //
-$top-bar-bg:                $gray-900;
+$top-bar-bg:                $gray-700;
 $top-bar-color:             color-yiq($top-bar-bg);
 $top-bar-basket-btn:        $primary;
 $top-bar-basket-color:      color-yiq($top-bar-basket-btn);
@@ -272,6 +272,14 @@ $live-shopping-padding-y:           1rem;
 
 $component-active-bg:               $primary !default;
 $component-active-color:            color-yiq($component-active-bg) !default;
+
+// quantity input
+$qty-box-width: 48px !default;
+$qty-box-btn-width: 24px !default;
+$qty-box-padding-x: 0 !default;
+$qty-box-padding-y: 10px !default;
+$qty-box-border: $gray-400 !default;
+$qty-box-bg: $gray-200 !default;
 
 // Shopbuilder
 $shop-builder-colors:

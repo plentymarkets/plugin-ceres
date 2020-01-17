@@ -5,7 +5,6 @@
 {{ component( "Ceres::Basket.Components.BasketPreview" ) }}
 {{ component( "Ceres::Customer.Components.Login" ) }}
 {{ component( "Ceres::Customer.Components.Registration" ) }}
-{{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 {{ component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
@@ -14,7 +13,9 @@
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryItem") }}
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
-{{ component( "Ceres::PageDesign.Components.Carousel" ) }}
+
+{# TODO REMOVE WHEN CONVERTED TO SFC #}
+{{ component("Ceres::Item.Components.OrderPropertyValue") }}
 
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
@@ -62,7 +63,7 @@
 <div id="vue-app"{% if openBasketClass is not empty %} class="{{ openBasketClass }}"{% endif %}>
     <div class="wrapper wrapper-top">
         <!-- messages -->
-        <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+        <notifications :initial-notifications="{{ notifications | json_encode }}" :log-data="{{ config('Ceres.log.data') | split(', ') | json_encode }}"></notifications>
     </div>
 
     <div class="wrapper wrapper-left">
@@ -90,7 +91,57 @@
     {% endif %}
     {% if ceresConfig.basket.previewType == "right" %}
         <div class="wrapper wrapper-right">
-            <basket-preview :show-net-prices={{ showNetPrices | json_encode }}></basket-preview>
+            <basket-preview
+                :show-net-prices={{ showNetPrices | json_encode }}
+                checkout-url="{{ urls.checkout }}"
+                basket-url="{{ urls.basket }}"
+            >
+                <template #before-basket-item>
+                    {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+                </template>
+                <template #loading-animation>
+                    {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                </template>
+                <template #after-basket-item>
+                    {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+                </template>
+                <template #before-basket-totals>
+                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
+                </template>
+                <template #before-item-sum>
+                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                </template>
+                <template #after-item-sum>
+                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+                </template>
+                <template #before-shipping-costs>
+                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+                </template>
+                <template #after-shipping-costs>
+                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                </template>
+                <template #before-total-sum>
+                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+                </template>
+                <template #before-vat>
+                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                </template>
+                <template #after-vat>
+                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+                </template>
+                <template #after-total-sum>
+                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+                </template>
+                <template #after-basket-totals>
+                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
+                </template>
+                <template #before-checkout-button>
+                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+                </template>
+                <template #after-checkout-button>
+                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+                </template>
+            </basket-preview>
         </div>
     {% endif %}
 
@@ -153,7 +204,11 @@
         <!-- ./REGISTRATION MODAL -->
 
         <!-- BASKET MODAL -->
-        <add-item-to-basket-overlay></add-item-to-basket-overlay>
+        <add-item-to-basket-overlay>
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
+            </template>
+        </add-item-to-basket-overlay>
         <!-- ./BASKET MODAL -->
 
         <!-- PASSWORD RESET MODAL -->
@@ -203,6 +258,7 @@
         urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
         propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
         isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
+        bundleSetting: {{ services.webstoreConfig.getWebstoreConfig().dontSplitItemBundle }},
         initialData: {
             shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
             shippingCountryId: {{ services.checkout.getShippingCountryId() | json_encode }}
