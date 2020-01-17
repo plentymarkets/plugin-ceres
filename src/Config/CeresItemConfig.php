@@ -23,6 +23,7 @@ class CeresItemConfig extends PluginConfig
     public $showCategoryDescriptionBottom;
     public $requireOrderProperties;
     public $loadingAnimationType;
+    public $showCategoryFilter;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -65,5 +66,6 @@ class CeresItemConfig extends PluginConfig
         $this->showCategoryDescriptionBottom    = $this->getTextValue( "item.show_category_description_bottom", "none" );
         $this->requireOrderProperties           = $this->getBooleanValue( "item.require_all_properties", false );
         $this->loadingAnimationType             = $this->getTextValue( "item.loading_animation_type", "bars" );
+        $this->showCategoryFilter               = $this->getBooleanValue("item.show_category_filter", false);
     }
 }

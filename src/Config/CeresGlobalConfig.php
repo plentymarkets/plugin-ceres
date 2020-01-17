@@ -13,9 +13,12 @@ class CeresGlobalConfig extends PluginConfig
     public $enableOldUrlPattern;
     public $googleRecaptchaVersion;
     public $googleRecaptchaApiKey;
+    public $googleRecaptchaSecret;
+    public $googleRecaptchaThreshold;
     public $googleMapsApiKey;
     public $registrationRequirePrivacyPolicyConfirmation;
     public $blockCookies;
+    public $userDataHashMaxAge;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -31,7 +34,10 @@ class CeresGlobalConfig extends PluginConfig
         $this->googleMapsApiKey         = $this->getTextValue( "contact.api_key", "", "API key" );
         $this->googleRecaptchaVersion   = $this->getIntegerValue( "global.google_recaptcha_version", 2 );
         $this->googleRecaptchaApiKey    = $this->getTextValue( "global.google_recaptcha_api_key", "" );
+        $this->googleRecaptchaSecret    = $this->getTextValue("global.google_recaptcha_secret", "");
+        $this->googleRecaptchaThreshold = $this->getConfigValue('google_recaptcha_threshold', 0.5);
         $this->registrationRequirePrivacyPolicyConfirmation = $this->getBooleanValue( "global.registration_require_privacy_policy_confirmation", true );
         $this->blockCookies             = $this->getBooleanValue( "global.block_cookies", false );
+        $this->userDataHashMaxAge       = $this->getIntegerValue("global.user_data_hash_max_age", 24);
     }
 }

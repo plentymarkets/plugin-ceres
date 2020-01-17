@@ -44,6 +44,9 @@ class CeresConfig
     /** @var CeresMetaConfig  */
     public $meta;
 
+    /** @var CeresCheckoutConfig */
+    public $checkout;
+
     /** @var CeresMyAccountConfig  */
     public $myAccount;
 
@@ -71,6 +74,7 @@ class CeresConfig
         $this->language     = pluginApp( CeresLanguageConfig::class );
         $this->log          = pluginApp( CeresLogConfig::class );
         $this->meta         = pluginApp( CeresMetaConfig::class );
+        $this->checkout     = pluginApp( CeresCheckoutConfig::class );
         $this->myAccount    = pluginApp( CeresMyAccountConfig::class );
         $this->pagination   = pluginApp( CeresPaginationConfig::class );
         $this->search       = pluginApp( CeresSearchConfig::class );
