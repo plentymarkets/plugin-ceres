@@ -10,7 +10,11 @@
 
                 <div>
                     <h1 class="login-view-title mb-5">{{ trans("Ceres::Template.login") }}</h1>
-                    <login backlink="{{ backlink | url_encode }}" :has-to-forward="true"></login>
+                    <login backlink="{{ backlink | url_encode }}" :has-to-forward="true">
+                        <template #extend-overlay-buttons>
+                            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                        </template>
+                    </login>
                 </div>
 
                 <hr>
@@ -46,7 +50,7 @@
                     </div>
                     <div class="modal-body">
                         <guest-login backlink="{{ backlink | url_encode }}" :initial-email="{{ services.sessionStorage.getSessionValue("guestEmail") | json_encode }}"></guest-login>
-                    </div>       
+                    </div>
                 </div>
             </div>
         </div>
