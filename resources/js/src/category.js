@@ -11,6 +11,23 @@ import "custom-event-polyfill";
 import Vue from "vue";
 import Vuex from "vuex";
 
+const mount = Vue.prototype.$mount;
+
+Vue.prototype.$mount =
+    function(el, hydrating)
+    {
+        const templateOverride = this.$props.templateOverride;
+
+        if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
+        {
+            const renderFunctions = Vue.compile(document.querySelector(templateOverride).innerHTML);
+
+            Object.assign(this.$options, renderFunctions);
+        }
+
+        return mount.call(this, el, hydrating);
+    };
+
 window.Vue = Vue;
 window.Vuex = Vuex;
 
@@ -26,12 +43,18 @@ import "bootstrap";
 // COMPONENTS
 // =========================
 
-import "./app/components/basket/AddItemToBasketOverlay";
-import "./app/components/basket/AddToBasket";
-import "./app/components/basket/BasketPreview";
-import "./app/components/basket/BasketTotals";
-import "./app/components/basket/Coupon";
-import "./app/components/basket/list/BasketList";
+import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
+Vue.component("add-item-to-basket-overlay", AddItemToBasketOverlay);
+import AddToBasket from "./app/components/basket/AddToBasket.vue";
+Vue.component("add-to-basket", AddToBasket);
+import BasketPreview from "./app/components/basket/BasketPreview.vue";
+Vue.component("basket-preview", BasketPreview);
+import BasketTotals from "./app/components/basket/BasketTotals.vue";
+Vue.component("basket-totals", BasketTotals);
+import Coupon from "./app/components/basket/Coupon.vue";
+Vue.component("coupon", Coupon);
+import BasketList from "./app/components/basket/list/BasketList.vue";
+Vue.component("basket-list", BasketList);
 
 import "./app/components/category/StepByStepNavigation";
 
@@ -56,12 +79,14 @@ import "./app/components/customer/login/Login";
 import "./app/components/customer/login/LoginView";
 import "./app/components/customer/login/UserLoginHandler";
 
-
-import "./app/components/item/ItemBundle";
-
-import "./app/components/item/OrderPropertyValue";
-import "./app/components/item/QuantityInput";
-import "./app/components/item/TagList";
+import ItemBundle from "./app/components/item/ItemBundle.vue";
+Vue.component("item-bundle", ItemBundle);
+import OrderPropertyValue from "./app/components/item/OrderPropertyValue.vue";
+Vue.component("order-property-value", OrderPropertyValue);
+import QuantityInput from "./app/components/item/QuantityInput.vue";
+Vue.component("quantity-input", QuantityInput);
+import TagList from "./app/components/item/TagList.vue";
+Vue.component("tag-list", TagList);
 
 import "./app/components/itemList/CategoryImageCarousel";
 import "./app/components/itemList/CategoryItem";
@@ -79,13 +104,20 @@ import "./app/components/newsletter/NewsletterUnsubscribeInput";
 
 import "./app/components/orderReturn/OrderReturn";
 
-import "./app/components/pageDesign/Carousel";
-import "./app/components/pageDesign/CookieBar";
-import "./app/components/pageDesign/PrivacySettings";
-import "./app/components/pageDesign/MobileNavigation";
-import "./app/components/pageDesign/Notifications";
-import "./app/components/pageDesign/Popper";
-import "./app/components/pageDesign/ShippingCountrySelect";
+import CookieBar from "./app/components/pageDesign/CookieBar.vue";
+Vue.component("cookie-bar", CookieBar);
+import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
+Vue.component("privacy-settings", PrivacySettings);
+import Carousel from "./app/components/pageDesign/Carousel.vue";
+Vue.component("carousel", Carousel);
+import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
+Vue.component("mobile-navigation", MobileNavigation);
+import Notifications from "./app/components/pageDesign/Notifications.vue";
+Vue.component("notifications", Notifications);
+import Popper from "./app/components/pageDesign/Popper.vue";
+Vue.component("popper", Popper);
+import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
+Vue.component("shipping-country-select", ShippingCountrySelect);
 
 import "./app/components/wishList/WishList";
 import "./app/components/wishList/WishListCount";
@@ -147,12 +179,15 @@ import "./app/filters/truncate.filter";
 // =========================
 // MIXINS
 // =========================
-import "./app/mixins/buttonSizeProperty.mixin";
 import "./app/mixins/getJsonData.mixin";
 import "./app/mixins/template.mixin";
-
 
 // =========================
 // Bootstrap frameworks
 // =========================
 import "./app/main";
+
+import TranslationService from "./app/services/TranslationService";
+window.ceresTranslate = TranslationService.translate;
+
+Vue.prototype.$translate = TranslationService.translate;
