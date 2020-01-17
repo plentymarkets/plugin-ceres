@@ -14,7 +14,6 @@
     {{ Twig.if("(hashData is not null and hashData.newMail is not null) or #{ isPreview | json_encode }") }}
         <div class="widget widget-change-mail widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
                 {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-            {{ Twig.component("Ceres::Customer.Components.ChangeEmailForm") }}
             <div class="widget-inner">
                 <change-email-form
                         :contact-id="{{ Twig.print("contactId") }}"
