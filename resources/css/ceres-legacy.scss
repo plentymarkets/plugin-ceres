@@ -11050,8 +11050,11 @@ $flag-icon-square-path: '/1x1' !default;
 		color: $yiq-text-light !important;
 	}
 }
-body, body .wrapper-main{
+body {
     overflow-x: hidden;
+}
+.wrapper-main {
+    overflow: hidden;
 }
 
 .sb-no-animation.collapsing {
