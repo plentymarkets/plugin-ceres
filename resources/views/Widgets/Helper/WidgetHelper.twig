@@ -1,0 +1,140 @@
+{% macro _getSpacingClasses( spacingValue, classPrefix, direction) %}
+    {%- for d in direction %}
+        {%- if spacingValue[d].unit is defined and spacingValue[d].unit.mobile is null and spacingValue[d].value.mobile is not null %}
+            {{- classPrefix | default("m") }}{{ d | slice(0,1) }}-{{ spacingValue[d].value.mobile ~ " " -}}
+        {% endif -%}
+    {% endfor -%}
+{% endmacro %}
+
+{% macro _getInlineSpacings( spacingValue, spacingType, direction) %}
+    {%- for d in direction %}
+        {% if spacingValue[d].unit is defined and spacingValue[d].unit.mobile is not null %}
+            {{- spacingType | default("margin") }}-{{ d }}: {{ spacingValue[d].value.mobile }}{{ spacingValue[d].unit.mobile ~ "; " -}}
+        {% endif %}
+    {% endfor -%}
+{% endmacro %}
+
+{% macro getInlineSpacings( widgetSettings, paddingKey, marginKey, direction = ['top', 'right', 'bottom', 'left']) %}
+{% set result %}
+    {% import _self as WidgetHelper %}
+
+    {% set padding = "" %}
+    {% if paddingKey != false %}
+        {% set paddingKey = paddingKey | default("padding") %}
+        {% if paddingKey is same as(true) %}
+            {% set paddingKey = "padding" %}
+        {% endif %}
+        {% if widgetSettings[paddingKey] is defined %}
+            {% set padding = WidgetHelper._getInlineSpacings( widgetSettings[paddingKey], "padding", direction) | trim %}
+        {% endif %}
+    {% endif %}
+
+    {% set margin = "" %}
+    {% if marginKey != false %}
+        {% set marginKey = marginKey | default("margin") %}
+        {% if marginKey is same as(true) %}
+            {% set marginKey = "margin" %}
+        {% endif %}
+        {% if widgetSettings[marginKey] is defined %}
+            {% set margin = WidgetHelper._getInlineSpacings( widgetSettings[marginKey], "margin", direction ) | trim %}
+        {% endif %}
+    {% endif %}
+
+    {{- padding | trim ~ " " ~ margin | trim -}}
+    {% endset %}
+{{- result | trim -}}
+{% endmacro %}
+
+{% macro getSpacingClasses( widgetSettings, paddingKey, marginKey, direction = ['top', 'right', 'bottom', 'left'] ) %}
+{% set result %}
+    {% import _self as WidgetHelper %}
+
+    {% set padding = "" %}
+    {% if paddingKey != false %}
+        {% set paddingKey = paddingKey | default("padding") %}
+        {% if paddingKey is same as(true) %}
+            {% set paddingKey = "padding" %}
+        {% endif %}
+        {% if widgetSettings[paddingKey] is defined %}
+            {% set padding = WidgetHelper._getSpacingClasses( widgetSettings[paddingKey], "p", direction ) | trim %}
+        {% endif %}
+    {% endif %}
+
+    {% set margin = "" %}
+    {% if marginKey != false %}
+        {% set marginKey = marginKey | default("margin") %}
+        {% if marginKey is same as(true) %}
+            {% set marginKey = "margin" %}
+        {% endif %}
+        {% if widgetSettings[marginKey] is defined %}
+            {% set margin = WidgetHelper._getSpacingClasses( widgetSettings[marginKey], "m", direction ) | trim %}
+        {% endif %}
+    {% endif %}
+
+    {{- padding | trim ~ " " ~ margin | trim -}}
+{% endset %}
+{{- result | trim -}}
+{% endmacro %}
+
+{% macro getInlineMinHeight( widgetSettings, style = "min-height" ) %}
+    {% set heightValue = widgetSettings.height.top.value.mobile %}
+    {% set heightUnit  = widgetSettings.height.top.unit.mobile %}
+
+    {%- if heightValue is defined and heightUnit is not null %}
+        {{- style }}: {{ heightValue }}{{ heightUnit ~ "; " -}}
+    {% endif -%}
+
+{% endmacro %}
+
+{% macro getMinHeightClass( widgetSettings, classPrefix = "mh" ) %}
+    {% set heightValue = widgetSettings.height.top.value.mobile %}
+    {% set heightUnit  = widgetSettings.height.top.unit.mobile %}
+
+    {%- if heightValue is defined and heightUnit is null and heightValue is not null %}
+        {{- classPrefix }}-{{ heightValue -}}
+    {% endif -%}
+
+{% endmacro %}
+
+{% macro setUrlVariable(variableName, urlValue, urlType) %}
+
+    {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+    {{ Twig.set(variableName, "" | json_encode) }}
+
+    {% if urlType == 'category' %}
+
+        {{ Twig.set("__category", Twig.call("services.category.get", [urlValue])) }}
+        {{ Twig.set(variableName, Twig.call("services.category.getURL", ["$__category"])) }}
+
+    {% elseif urlType == 'item' %}
+
+        {{ Twig.set("__itemData", Twig.call("services.item.getVariation", [urlValue])) }}
+        {{ Twig.set(variableName, "__itemData.documents[0].data | itemURL") }}
+    {% endif %}
+
+    {% if urlType == 'external' or urlType == 'file' %}
+        {{ Twig.set(variableName, urlValue | json_encode) }}
+    {% endif %}
+
+{% endmacro %}
+
+{% macro makeEditable(variableName, toolbarLayout, isPreview, additionalClasses) %}
+    {%- spaceless %}
+        {% if isPreview %} data-builder-editable="{{ variableName }}" data-builder-editor-toolbar="{{ toolbarLayout }}"{% if additionalClasses %} data-builder-editor-classes="{{ additionalClasses }}"{% endif %}{% endif %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro editableTwig(isPreview, template) %}
+    {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+    {% if isPreview %}{{ Twig.do("verbatim") }}{% endif %}
+        {{ template | raw }}
+    {% if isPreview %}{{ Twig.do("endverbatim") }}{% endif %}
+{% endmacro %}
+
+{% macro makeCodeEditable(variableName, labelTranslationKey, isPreview) %}
+    {%- if isPreview %} data-builder-code="{{ variableName }}" data-builder-code-label="{{ trans(labelTranslationKey) }}"{% endif -%}
+{% endmacro %}
+
+{% macro makeClickable(isPreview) %}
+    {%- if isPreview %} data-builder-clickable{% endif -%}
+{% endmacro %}

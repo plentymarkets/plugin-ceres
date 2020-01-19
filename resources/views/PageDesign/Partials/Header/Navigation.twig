@@ -1,32 +1,27 @@
 {% set companyLogo  = config("Ceres.header.company_logo") %}
-{% set lang         = services.sessionStorage.getLang() %}
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set companyName  = trans("Ceres::Template.headerCompanyName") %}
 {% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}
 
-<nav class="navbar{% if useMegaMenu %} megamenu{%endif%}">
+<nav class="navbar header-fw{% if useMegaMenu %} megamenu{%endif%}">
     <div class="container-max">
-        <div class="row">
+        <div class="row mx-0">
             <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
-                <a class="navbar-brand pull-lg-left" href="{{ homepageURL }}">
+                <a class="navbar-brand" href="{{ homepageURL }}">
                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
-                        <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+                        <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
                     {% else %}
-                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid" crossorigin="anonymous" />
+                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid" />
                     {% endif %}
                 </a>
 
-                <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler hidden-lg-up" type="button">
+                <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler d-lg-none" type="button">
                     &#9776;
                 </button>
             </div>
 
-            <div id="mainNavbarCollapsable">
-                <ul class="breadcrumb">
-                    <li class="btnClose"></li>
-                </ul>
+            <div id="mainNavbarCollapsable" class="d-none d-lg-block">
                 {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
-                    {# includeCached('Ceres::PageDesign.Partials.Header.NavigationList.twig') #}
                     {% include "Ceres::PageDesign.Partials.Header.NavigationList" %}
                 {% endif %}
             </div>

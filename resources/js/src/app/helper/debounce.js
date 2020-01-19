@@ -1,10 +1,10 @@
-import {defaultValue, isNullOrUndefined}from "./utils";
+import { defaultValue, isNullOrUndefined } from "./utils";
 
 /**
  * Makes a function executed after defined timeout.
  *
  * @param {function}    callback  The function to be executed after timeout
- * @param {number}      timeout   The timeout
+ * @param {number}      timeout   The timeout in milliseconds
  *
  * @returns {function}
  */

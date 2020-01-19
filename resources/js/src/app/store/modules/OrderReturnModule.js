@@ -1,4 +1,4 @@
-import ApiService from "services/ApiService";
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
@@ -10,32 +10,32 @@ const state =
 const mutations =
     {
         setOrderReturnData(state, orderData)
-		{
+        {
             orderData.order.orderItems = orderData.order.orderItems.filter(orderItem => orderItem.quantity !== 0);
 
             state.orderData = orderData;
         },
 
-        updateOrderReturnItems(state, {quantity, orderItem})
-		{
+        updateOrderReturnItems(state, { quantity, orderItem })
+        {
             if (quantity <= orderItem.quantity)
-			{
+            {
                 const orderItemIndex = state.orderReturnItems.findIndex(entry => entry.orderItem.itemVariationId === orderItem.itemVariationId);
 
                 if (quantity !== 0)
-				{
+                {
                     if (orderItemIndex === -1)
                     {
-                        state.orderReturnItems.push({quantity, orderItem});
+                        state.orderReturnItems.push({ quantity, orderItem });
                     }
                     else
                     {
                         state.orderReturnItems.splice(orderItemIndex, 1);
-                        state.orderReturnItems.splice(orderItemIndex, 0, {quantity, orderItem});
+                        state.orderReturnItems.splice(orderItemIndex, 0, { quantity, orderItem });
                     }
                 }
                 else
-				{
+                {
                     state.orderReturnItems.splice(orderItemIndex, 1);
                 }
             }
@@ -49,8 +49,8 @@ const mutations =
 
 const actions =
     {
-        sendOrderReturn({state})
-		{
+        sendOrderReturn({ state })
+        {
             return new Promise((resolve, reject) =>
             {
                 if (state.orderReturnItems.length > 0)
@@ -62,7 +62,7 @@ const actions =
                         variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
                     }
 
-                    ApiService.post("/rest/io/order/return", {orderId: state.orderData.order.id, variationIds, returnNote: state.orderReturnNote})
+                    ApiService.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds, returnNote: state.orderReturnNote })
                         .done(data =>
                         {
                             resolve(data);
@@ -84,7 +84,9 @@ const getters =
     {
         getOrderItemImage: state => orderItemId => state.orderData.itemImages[orderItemId],
 
-        getOrderItemURL: state => orderItemId => state.orderData.itemURLs[orderItemId]
+        getOrderItemURL: state => orderItemId => state.orderData.itemURLs[orderItemId],
+
+        getOrderItemVariation: state => orderItemId => state.orderData.variations[orderItemId]
     };
 
 export default

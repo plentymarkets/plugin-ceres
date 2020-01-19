@@ -1,0 +1,30 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% set customClass = widget.settings.customClass.mobile %}
+{% set tabs = widget.settings.tabs.mobile %}
+{% set appearance = widget.settings.appearance.mobile %}
+{% set renderContent = false %}
+{% for tab in tabs if tab.title | trim is not empty %}
+    {% set renderContent = true %}
+{% endfor %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+
+{% if renderContent %}
+<div class="widget widget-tab{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <tab-list class="widget-inner" appearance="{{ appearance | default("primary") }}" :render-empty="{{ isPreview | json_encode }}">
+        {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview and tab.title | trim is not empty %}
+            <tab-item class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
+                {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
+                title="{{ tab.title }}"
+                {{ WidgetHelper.makeClickable(isPreview) }}>
+                <div class="my-4" data-builder-child-container="{{ tab.uuid }}">{{ children[tab.uuid] | raw }}</div>
+            </tab-item>
+        {% endfor %}
+    </tab-list>
+</div>
+{% endif %}

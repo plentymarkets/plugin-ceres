@@ -1,0 +1,34 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+
+{{ Twig.component("Ceres::MyAccount.Components.AccountSettings") }}
+
+{{ Twig.set("userObject", Twig.call("services.customer.getContact")) }}
+{% set appearance = widget.settings.appearance.mobile %}
+{% set hintText = widget.settings.text.mobile %}
+
+<div class="widget widget-account-settings widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountSettings")) }}</h3>
+            <p><em>{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</em></p>
+        {% else %}
+            {{ hintText | raw }}
+        {% endif %}
+    </div>
+
+    <div class="card {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
+        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+        <account-settings :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
+    </div>
+</div>

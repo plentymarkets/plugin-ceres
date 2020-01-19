@@ -1,0 +1,38 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set appearance      = widget.settings.appearance.mobile | default("none") %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
+{% set headline = widget.settings.headline.mobile %}
+{% set expandableChildren = widget.settings.expandableChildren.mobile %}
+{% set showItemCount = widget.settings.showItemCount.mobile %}
+
+<div class="widget widget-navigation-tree widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner">
+        <div class="category-title" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
+            {% if headline | trim is empty %}
+                {{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemCategories")) }}
+            {% else %}
+                {{ WidgetHelper.editableTwig(isPreview, headline) }}
+            {% endif %}
+        </div>
+
+        {{ Twig.include("Ceres::PageDesign.Partials.Header.SideNavigation", { 
+            spacingPadding: spacingPadding | json_encode,
+            inlinePadding : inlinePadding | json_encode,
+            expandableChildren: expandableChildren | json_encode,
+            showItemCount : showItemCount | json_encode,
+            customEntries : customEntries | json_encode })
+        }}
+
+        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.SideNavBarBottom"])) }}
+    </div>
+</div>

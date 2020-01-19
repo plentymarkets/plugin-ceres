@@ -1,8 +1,9 @@
-import {isNullOrUndefined}from "../../helper/utils";
-import {findParent}from "../../helper/dom";
+import { isNullOrUndefined } from "../../helper/utils";
+import { findParent } from "../../helper/dom";
+import Vue from "vue";
+import Popper from "popper.js";
 
-const Popper              = require("popper.js");
-const ModalService        = require("services/ModalService");
+const ModalService        = require("../../services/ModalService");
 
 Vue.component("popper", {
 
@@ -20,33 +21,48 @@ Vue.component("popper", {
         trigger: {
             type: String,
             default: "click"
+        },
+        popoverClass: {
+            type: String,
+            default: ""
+        },
+        bodyClass: {
+            type: String,
+            default: ""
+        },
+        bodyStyle: {
+            type: String,
+            default: ""
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
-	{
+    {
         this.$nextTick(() =>
         {
             if (!isNullOrUndefined(this.$refs.node) && !isNullOrUndefined(this.$refs.handle))
             {
                 const node = this.$refs.node;
 
-                node.parentElement.removeChild(node);
-                document.body.appendChild(node);
+                if (!App.isShopBuilder)
+                {
+                    node.parentElement.removeChild(node);
+                    document.body.appendChild(node);
+                }
 
-                this.popper = new Popper(this.$refs.handle, node, {
-                    placement: this.placement,
-                    modifiers: {
-                        arrow: {
-                            element: this.$refs.arrow
-                        }
+                this.popper = new Popper(
+                    (this.$refs.handle.firstElementChild || this.$refs.handle),
+                    node,
+                    {
+                        placement: this.placement,
+                        modifiers: {
+                            arrow: {
+                                element: this.$refs.arrow
+                            }
+                        },
+                        removeOnDestroy: true
                     }
-                });
+                );
 
                 const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
 
@@ -84,6 +100,11 @@ Vue.component("popper", {
         });
     },
 
+    destroyed()
+    {
+        this.popper.destroy();
+    },
+
     data()
     {
         return {
@@ -92,10 +113,18 @@ Vue.component("popper", {
         };
     },
 
+    computed:
+    {
+        classNames()
+        {
+            return this.popoverClass + (!this.isVisible ? " d-none" : "");
+        }
+    },
+
     methods:
     {
         togglePopper()
-		{
+        {
             this.isVisible = !this.isVisible;
             this.update();
         },

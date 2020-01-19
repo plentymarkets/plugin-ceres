@@ -1,0 +1,70 @@
+{{ component("Ceres::MyAccount.Components.OrderDocuments") }}
+{{ component("Ceres::Customer.Components.AddressSelect.AddressHeader") }}
+
+<script type="x/template" id="vue-order-history-list-item">
+    <div :id="'accordion_' + _uid" class="accordion col-sm-12">
+        <div @click="loadOrderDetailTemplate()" class="row container-clickable collapsed border-top-0 border py-3" :id="'heading_' + _uid" data-toggle="collapse" :data-target="'#collapse_'+ _uid" aria-expanded="false" :aria-controls="'collapse_'+ _uid">
+            <div class="col-md-10">
+                <div class="row">
+                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    <div class="col-md-2">
+                        <span>{{ trans("Ceres::Template.orderHistoryOrderId") }}: </span>
+                        <span>${ order.id }</span>
+                    </div>
+                    <div class="col-md-2">
+                        <span>{{ trans("Ceres::Template.orderHistoryTotal") }}: </span>
+                        <span>${ order.total | currency }</span>
+                    </div>
+                    <div class="col-md-2">
+                        <span>{{ trans("Ceres::Template.orderHistoryOrderDate") }}: </span>
+                        <span>${ order.creationDate | moment("{{ trans("Ceres::Template.devDateFormatMoment") }}") }</span>
+                    </div>
+                    <div class="col-md-2">
+                        <span>{{ trans("Ceres::Template.orderHistoryShippingDate") }}: </span>
+                        <span>${ order.shippingDate | moment("{{ trans("Ceres::Template.devDateFormatMoment") }}") }</span>
+                    </div>                    
+                    <div class="col-md-4" v-if="order.status.trim().length > 0">
+                        <span>{{ trans("Ceres::Template.orderHistoryStatus") }}: </span>
+                        <span>${ order.status }</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="icons d-none d-md-block">
+                    <a v-if="!!order.trackingURL" :href="order.trackingURL" @click.stop target="_blank" rel="noopener">
+                        <i class="fa fa-truck fa-flip-horizontal text-primary text-appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryTracking') }}"></i>
+                    </a>
+                    {#
+                        <!-- for "order again" in the future -->
+                        <a href="" @click.stop>
+                            <i class="fa fa-shopping-cart text-primary text-appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryAgain') }}"></i>
+                        </a>
+                    #}
+                </div>
+                <div class="buttons d-block d-md-none mt-2">
+                    <a v-if="!!order.trackingURL" :href="order.trackingURL" @click.stop target="_blank" rel="noopener" class="btn btn-block btn-primary btn-appearance">
+                        <span>{{ trans("Ceres::Template.orderHistoryTracking") }}</span>
+                        <i class="fa fa-truck fa-flip-horizontal" aria-hidden="true"></i>
+                    </a>
+                    {#
+                        <!-- for "order again" in the future -->
+                        <a href="" @click.stop class="btn btn-block btn-primary btn-appearance">
+                            <span>{{ trans("Ceres::Template.orderHistoryAgain") }}</span>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                    #}
+                </div>
+            </div>
+        </div>
+        
+        <div class="collapse" :id="'collapse_'+ _uid" :data-parent="'#accordion_'+ _uid">
+            <div ref="orderDetailsContainer" class="container-main">
+                <div class="loading row border border-top-0">
+                    {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                </div>
+                
+                {# lazy load: Ceres::MyAccount.Partials.OrderHistoryListItemDetails #}
+            </div>
+        </div>
+    </div>
+</script>

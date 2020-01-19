@@ -1,21 +1,18 @@
 <script type="x/template" id="vue-guest-login">
     <div>
-        <form :id="'guest-login-form-' +_uid" class="m-b-1">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="input-unit" data-validate="mail">
-                        {% set uid_mail = uid() %}
-                        <input type="email" name="email" id="{{ uid_mail }}" v-model="email">
-                        <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
-                    </div>
-                </div>
+        <form ref="form" method="post" class="mb-3 login-pwd-reset">
+            <div class="input-unit" data-validate="mail">
+                {% set uid_mail = uid() %}
+                <input type="email" name="email" autocomplete="email" id="{{ uid_mail }}" v-model="email" data-autofocus>
+                <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
+            </div>
+            <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
 
-                <div class="col-xs-4 offset-xs-8">
-                    <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium pull-xs-right">
-                        <i v-waiting-animation="isDisabled" class="fa fa-arrow-right" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.loginNext") }}
-                    </button>
-                </div>
+            <div class="text-right">
+                <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium btn-appearance" :class="buttonSizeClass">
+                    <i v-waiting-animation="isDisabled" class="fa fa-arrow-right" aria-hidden="true"></i>
+                    {{ trans("Ceres::Template.loginNext") }}
+                </button>
             </div>
         </form>
     </div>

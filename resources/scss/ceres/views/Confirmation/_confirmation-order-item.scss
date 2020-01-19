@@ -62,29 +62,17 @@
 		transition: color 250ms;
 
 	    &:hover{
-	    	color: $brand-danger;
+	    	color: $danger;
 	    }
 	}
 
 	@include media-breakpoint-up(sm){
-
-		// .item-name:after{
-		// 	content: none!important;
-		// }
 
 		.item-unit-price,
 		.item-total-price{
 			width: auto!important;
 			text-align: right;
 		}
-
-	}
-
-	@include media-breakpoint-up(md){
-
-	}
-
-	@include media-breakpoint-up(lg){
 
 	}
 
@@ -99,14 +87,10 @@
 }
 
 .payment-link-style {
-	color: $brand-primary !important;
+	color: $primary !important;
 	cursor: pointer!important;
 	padding: 0 15px!important;
 	span {
 		text-decoration: underline!important;
 	}
-}
-
-.top-spacer {
-	margin-top: .5rem;
 }

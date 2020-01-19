@@ -1,7 +1,6 @@
-import ApiService from "services/ApiService";
-import NotificationService from "services/NotificationService";
-import TranslationService from "services/TranslationService";
-import {isNullOrUndefined}from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
+
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
@@ -10,7 +9,8 @@ const state =
             isPostOfficeAvailable: false,
             selectedShippingProfile: null,
             shippingProfileId: null,
-            shippingProfileList: []
+            shippingProfileList: [],
+            maxDeliveryDays: null
         },
         payment: {
             methodOfPaymentId: null,
@@ -35,7 +35,9 @@ const state =
                 showError: false,
                 validate: null
             }
-        }
+        },
+        newsletterSubscription: {},
+        readOnly: false
     };
 
 const mutations =
@@ -45,12 +47,17 @@ const mutations =
             if (shippingProfileId)
             {
                 state.shipping.shippingProfileId = shippingProfileId;
+
+                const selectedShippingProfile = state.shipping.shippingProfileList.find(shipping => shipping.parcelServicePresetId === shippingProfileId);
+
+                state.shipping.selectedShippingProfile = selectedShippingProfile;
             }
         },
 
         setSelectedShippingProfile(state, shippingProfile)
         {
             state.shipping.selectedShippingProfile = shippingProfile;
+            state.shipping.shippingProfileId = shippingProfile.parcelServicePresetId;
         },
 
         setShippingProfileList(state, shippingProfileList)
@@ -59,6 +66,11 @@ const mutations =
             {
                 state.shipping.shippingProfileList = shippingProfileList;
             }
+        },
+
+        setMaxDeliveryDays(state, maxDeliveryDays)
+        {
+            state.shipping.maxDeliveryDays = maxDeliveryDays;
         },
 
         setMethodOfPayment(state, methodOfPaymentId)
@@ -135,24 +147,46 @@ const mutations =
         setPostOfficeAvailability(state, availability)
         {
             state.shipping.isPostOfficeAvailable = availability;
+        },
+
+        setSubscribeNewsletterCheck(state, { emailFolder, value })
+        {
+            Vue.set(state.newsletterSubscription, emailFolder, value);
+        },
+
+        addSubscribeNewsletterValidate(state, { emailFolder, validator })
+        {
+            Vue.set(state.validation, `subscribeNewsletter_${emailFolder}`, { validate: validator, showError: false });
+        },
+
+        setSubscribeNewsletterShowErr(state, { emailFolder, showError })
+        {
+            Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
+        },
+
+        setIsCheckoutReadonly(state, readOnly)
+        {
+            state.readOnly = !!readOnly;
         }
     };
 
 const actions =
     {
-        setCheckout({commit, dispatch}, checkout)
+        setCheckout({ commit, dispatch }, checkout)
         {
             commit("setShippingCountryId", checkout.shippingCountryId);
             commit("setShippingProfile", checkout.shippingProfileId);
             commit("setShippingProfileList", checkout.shippingProfileList);
+            commit("setMaxDeliveryDays", checkout.maxDeliveryDays);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
+            commit("setIsCheckoutReadonly", checkout.readOnly);
 
             dispatch("setShippingProfileById", checkout.shippingProfileId);
             dispatch("initProfileAvailabilities");
         },
 
-        setShippingProfileById({state, commit}, shippingProfileId)
+        setShippingProfileById({ state, commit }, shippingProfileId)
         {
             const shippingProfile = state.shipping.shippingProfileList.find(profile =>
             {
@@ -165,7 +199,7 @@ const actions =
             }
         },
 
-        selectMethodOfPayment({commit, dispatch}, methodOfPaymentId)
+        selectMethodOfPayment({ commit, dispatch }, methodOfPaymentId)
         {
             return new Promise((resolve, reject) =>
             {
@@ -174,7 +208,7 @@ const actions =
                 commit("setIsBasketLoading", true);
                 commit("setMethodOfPayment", methodOfPaymentId);
 
-                ApiService.post("/rest/io/checkout/paymentId/", {paymentId: methodOfPaymentId})
+                ApiService.post("/rest/io/checkout/paymentId/", { paymentId: methodOfPaymentId })
                     .done(response =>
                     {
                         commit("setIsBasketLoading", false);
@@ -189,32 +223,34 @@ const actions =
             });
         },
 
-        selectShippingProfile({commit, dispatch, getters}, shippingProfile)
+        selectShippingProfile({ commit, dispatch, getters }, shippingProfile)
         {
             return new Promise((resolve, reject) =>
             {
                 const oldShippingProfile = state.shipping.shippingProfileId;
 
+                const params = { shippingId: shippingProfile.parcelServicePresetId };
+
                 commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
-                const isPostOfficeAndParcelBoxActive = shippingProfile.isPostOffice && shippingProfile.isParcelBox;
-                const isAddressPostOffice = getters.getSelectedAddress("2").address1 === "POSTFILIALE";
-                const isAddressParcelBox = getters.getSelectedAddress("2").address1 === "PACKSTATION";
-
-                if (!isPostOfficeAndParcelBoxActive && (isAddressPostOffice || isAddressParcelBox))
+                if (shippingProfile.excludedPaymentMethodIds.includes(state.payment.methodOfPaymentId))
                 {
-                    const isUnsupportedPostOffice = isAddressPostOffice && !shippingProfile.isPostOffice;
-                    const isUnsupportedParcelBox = isAddressParcelBox && !shippingProfile.isParcelBox;
+                    const methodOfPaymentList = state.payment.methodOfPaymentList;
 
-                    if (isUnsupportedPostOffice || isUnsupportedParcelBox)
+                    for (let i = 0; i < methodOfPaymentList.length; i++)
                     {
-                        commit("selectDeliveryAddressById", -99);
-                        NotificationService.warn(TranslationService.translate("Ceres::Template.addressChangedWarning"));
+                        const methodOfPayment = methodOfPaymentList[i];
+
+                        if (!shippingProfile.excludedPaymentMethodIds.includes(methodOfPayment.id))
+                        {
+                            params.methodOfPaymentId = methodOfPayment.id;
+                            break;
+                        }
                     }
                 }
 
-                ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
+                ApiService.post("/rest/io/checkout/shippingId/", params)
                     .done(response =>
                     {
                         commit("setSelectedShippingProfile", shippingProfile);
@@ -230,24 +266,24 @@ const actions =
             });
         },
 
-        refreshCheckout({commit, dispatch})
+        refreshCheckout({ commit, dispatch })
         {
             return new Promise((resolve, reject) =>
             {
                 ApiService.get("/rest/io/checkout/")
-                        .done(checkout =>
-                        {
-                            dispatch("setCheckout", checkout);
-                            resolve(checkout);
-                        })
-                        .fail(error =>
-                        {
-                            reject(error);
-                        });
+                    .done(checkout =>
+                    {
+                        dispatch("setCheckout", checkout);
+                        resolve(checkout);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    });
             });
         },
 
-        initProfileAvailabilities({commit, state})
+        initProfileAvailabilities({ commit, state })
         {
             commit("setParcelBoxAvailability", !isNullOrUndefined(state.shipping.shippingProfileList.find(shipping => shipping.isParcelBox)));
 

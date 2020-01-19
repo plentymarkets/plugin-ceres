@@ -1,6 +1,8 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("shipping-privacy-hint-check", {
 
@@ -44,19 +46,14 @@ Vue.component("shipping-privacy-hint-check", {
                 parcelServiceInformation += `<strong>${hint.parcelServiceName}, ${hint.parcelServiceAddress}</strong>`;
             }
 
-            return TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHint", {parcelServiceInformation});
+            return TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHint", { parcelServiceInformation });
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             shippingProfileList: state => state.checkout.shipping.shippingProfileList,
             shippingProfileId: state => state.checkout.shipping.shippingProfileId,
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:
@@ -75,7 +72,7 @@ Vue.component("shipping-privacy-hint-check", {
             {
                 this.setValue(false);
 
-                $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+                $(this.$refs.formCheck).fadeTo(100, 0.1).fadeTo(400, 1.0);
 
                 NotificationService.error(TranslationService.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
             }

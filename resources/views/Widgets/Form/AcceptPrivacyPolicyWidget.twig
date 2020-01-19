@@ -1,0 +1,37 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set formFieldId     = widget.settings.key.mobile | default(uid()) %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+<div class="widget widget-accept-privacy-policy
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+    <div class="select-unit required" data-validate="">
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   name="{{ formFieldId }}"
+                   value="acceptPrivacy"
+                   id="{{ formFieldId }}">
+            <label class="form-check-label {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} for="{{ formFieldId }}">
+                {{ Twig.do("autoescape false") }}
+                    {{ Twig.do("set policyContent") }}<!--
+                    --><a href="{{ Twig.print("urls.privacyPolicy") }}" target="_blank">
+                        <span>{{ Twig.trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
+                    </a><!--
+                -->{{ Twig.do("endset") }}
+                    {{ Twig.trans('Ceres::Template.contactAcceptPrivacyPolicy', { 'policy': Twig.var("policyContent") }) }}<!--
+                --><sup>*</sup>
+                {{ Twig.do("endautoescape") }}
+            </label>
+        </div>
+    </div>
+</div>

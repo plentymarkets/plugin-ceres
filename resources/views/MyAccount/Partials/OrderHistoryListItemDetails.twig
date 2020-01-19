@@ -1,0 +1,209 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
+{% import "Ceres::Checkout.Macros.OrderTotals" as Totals %}
+
+{% set initialMaxItemsPerOrder = 5 %}
+
+<div>
+    <div class="row container-middle border-left border-right">
+        <div class="col-md-7 products border-bottom border-right">
+            <div class="row">
+                {% set rebatedAmountTotalGross = 0 %}
+                {% set rebatedAmountTotalNet = 0 %}
+                {% set rebatedAmountTotal = 0 %}
+
+                {% for item in orderData.order.orderItems %}
+                    
+                    {% if loop.index == initialMaxItemsPerOrder + 1 %}
+                        <div v-if="showAllOrderItems">
+                    {% endif %}
+
+                    {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
+                        {% set currentVariationId = item.itemVariationId | trimNewlines %}
+
+                        {% set itemAmount = item.amounts[0] %}
+                        {% for amount in item.amouts if not amout.isSystemCurrency %}
+                            {% set itemAmount = amount %}
+                        {% endfor %}
+
+                        {% set itemPrice = 0 %}
+                        {% if orderData.highlightNetPrices %}
+                            {% set itemPrice = itemAmount.priceOriginalNet %}
+                            {% set discountAmount = itemAmount.priceOriginalNet - itemAmount.priceNet %}
+                            {% set itemPriceTotal = item.quantity * itemAmount.priceNet %}
+                        {% else %}
+                            {% set itemPrice = itemAmount.priceOriginalGross %}
+                            {% set discountAmount = itemAmount.priceOriginalGross - itemAmount.priceGross %}
+                            {% set itemPriceTotal = item.quantity * itemAmount.priceGross %}
+                        {% endif %}
+
+                        <div class="col-sm-12 item">
+                            <div class="py-3 d-flex align-items-center{% if not loop.first %} border-top{% endif %}">
+                                <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}">
+                                    <img class="d-inline-block" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
+                                </a>
+
+                                <div class="flex-fill item-description pl-3">
+                                    <div><a class="text-primary text-appearance" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
+
+                                    {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
+                                        <div class="item-bundle">
+                                            {% for bundleComponent in item.bundleComponents %}
+                                                <div>
+                                                    <span class="text-muted">{{ bundleComponent.quantity }} x</span>
+                                                    <a href="{{ bundleComponent.data | itemURL }}" class="text-primary text-appearance"> {{ bundleComponent.data | itemName }} </a>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="d-flex">
+                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}</span>
+                                        <span class="flex-fill text-right">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
+                                    </div>
+                                    {% if discountAmount > 0 %}
+                                        <div class="d-flex">
+                                            <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryItemDiscount") }}</span>
+                                            <span class="flex-fill text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <div class="d-flex">
+                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryQuantity") }}</span>
+                                        <span class="flex-fill text-right">{{ item.quantity }}</span>
+                                    </div>
+                                    <div class="d-flex font-weight-bold">
+                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryTotal") }}</span>
+                                        <span class="flex-fill text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</span>
+                                    </div>
+
+                                    {% for attribute in item.attributes %}
+                                        <div class="d-flex">
+                                            <span class="flex-fill">{{ attribute.name }}</span>
+                                            <span class="flex-fill text-right">{{ attribute.value }}</span>
+                                        </div>
+                                    {% endfor %}
+
+                                    {% if item.orderProperties %}
+                                        {% for property in item.orderProperties %}
+                                            <div>
+                                                <strong>{{ property | propertyName }}</strong>
+                                                {% if property.type == 'file' %}
+                                                    <span>
+                                                        {% set splitPath = property.value |split('/') %}
+                                                        {% set filename = '' %}
+                                                        {% set path = '' %}
+
+                                                        {% for temp in splitPath %}
+                                                            {% if loop.first %}
+                                                                {% set path =  temp %}
+                                                            {% elseif loop.last %}
+                                                                {% set filename = temp %}
+                                                            {% else %}
+                                                                {% set path =  path ~ '/' ~ temp %}
+                                                            {% endif %}
+                                                        {% endfor %}
+
+                                                        <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
+                                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            {{ splitPath | last }}
+                                                        </a>
+                                                    </span>
+                                                {% elseif property.type == "selection" %}
+                                                    <span>: {{ property | propertySelectionValueName }}</span>
+                                                {% elseif property.type | length > 0 %}
+                                                    <span>: {{ property.value }}</span>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            {% if orderData.order.orderItems | length > initialMaxItemsPerOrder %}
+                </div>
+            {% endif %}
+
+            </div>
+
+            {% if orderData.order.orderItems | length > initialMaxItemsPerOrder %}
+                <div class="row mb-2">
+                    <div class="col-sm-12 text-center ">
+                        <a class="btn text-primary text-appearance collapsed" @click="showAllOrderItems = !showAllOrderItems">
+                            <template v-if="showAllOrderItems">
+                                {{ trans("Ceres::Template.orderHistoryReturnShowLess") }}
+                            </template>
+                            <template v-else>
+                                {{ trans("Ceres::Template.orderHistoryReturnShowMore") }}
+                            </template>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-5 sum">
+            <div class="cmp cmp-totals pt-3 d-flex" v-stick-in-parent>
+                {{ Totals.forOrder(orderData) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row container-bottom border py-4">
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-sm-4">                            
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</b></h5>
+                    <div class="mb-3" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</div>
+
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</b></h5>
+                    <div class="mb-3" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ orderData.paymentStatus) }}</div>
+
+                    <h5 class="mb-0"><b>{{ trans("Ceres::Template.orderHistoryShippingProfile") }}</b></h5>
+                    <div class="mb-3">{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-6 address-list">
+                            <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryInvoiceAddress") }}</b></h5>
+                            <address-header class="mb-3" :address="{{ orderData.order.billingAddress | json_encode }}"></address-header>
+                        </div>
+                        <div class="col-sm-6 address-list">
+                            <h5 class="mb-3"><b>{{ trans("Ceres::Template.orderHistoryShippingAddress") }}</b></h5>
+                            {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
+                                <span>
+                                    {{ trans("Ceres::Template.orderHistorySameAsInvoice") }}
+                                </span>
+                            {% else %}
+                                <address-header :address="{{orderData.order.deliveryAddress | json_encode }}"></address-header>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 button-container">
+            <template v-if="allowPaymentProviderChange">
+                <change-payment-method
+                    :current-order="{{ orderData.order | json_encode }}"
+                    :change-possible="{{ orderData.allowPaymentMethodSwitchFrom | json_encode }}"
+                    :allowed-payment-methods="{{ orderData.paymentMethodListForSwitch | json_encode }}"
+                    :payment-status="{{ orderData.paymentStatus | json_encode }}"
+                    current-template="tpl.my-account"
+                    :current-payment-method-name="{{ orderData.paymentMethodName | json_encode }}">
+                </change-payment-method>
+                {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
+            </template>
+            
+            {% if orderData.isReturnable %}
+                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="{{ urls.returns(orderData.order.id) }}">
+                    <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
+                    {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
+                </a>
+            {% endif %}
+            
+            <order-documents :documents="{{ orderData.order.documents | json_encode }}"></order-documents>
+        </div>
+    </div>
+</div>

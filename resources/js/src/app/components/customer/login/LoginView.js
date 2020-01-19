@@ -1,20 +1,22 @@
+import Vue from "vue";
+const ModalService = require("../../../services/ModalService");
+
 Vue.component("login-view", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
-
-    data: function()
+    props:
     {
-        return {
-            isGuestMode: false
-        };
+        template:
+        {
+            type: String,
+            default: "#vue-login-view"
+        }
     },
 
-    created: function()
+    methods:
     {
-        this.$options.template = this.template;
+        openGuestModal()
+        {
+            ModalService.findModal(this.$refs.guestModal).show();
+        }
     }
 });

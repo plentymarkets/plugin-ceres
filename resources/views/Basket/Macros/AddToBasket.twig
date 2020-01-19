@@ -1,0 +1,39 @@
+{% macro printTwigComponent( item, useLargeScale, showQuantity ) %}
+    {% set orderProperties = [] %}
+    {% for property in item.properties if property.property.isOderProperty %}
+        {% set orderProperties = orderProperties | merge([property]) %}
+    {% endfor %}
+    <add-to-basket
+            :variation-id="{{ item.variation.id }}"
+            :is-salable="{{ (item.filter is defined and item.filter.isSalable) | json_encode }}"
+            :has-children="{{ (item.filter is defined and item.filter.hasActiveChildren) | json_encode }}"
+            :interval-quantity="{{ item.variation.intervalOrderQuantity | default(1) }}"
+            :minimum-quantity="{{ item.variation.minimumOrderQuantity }}"
+            {% if item.variation.maximumOrderQuantity is defined and item.variation.maximumOrderQuantity > 0 %}
+                :maximum-quantity="{{ item.variation.maximumOrderQuantity }}"
+            {% endif %}
+            :order-properties="{{ orderProperties | json_encode }}"
+            :use-large-scale="{{ useLargeScale | default(false) | json_encode }}"
+            :show-quantity="{{ showQuantity | default(false) | json_encode }}"
+            item-url="{{ item | itemURL }}">
+    </add-to-basket>
+{% endmacro %}
+
+{% macro printVueComponent( itemObject, useLargeScale, showQuantity, options, urlWithVariationId ) %}
+    <add-to-basket
+            :variation-id="{{ itemObject }}.variation.id"
+            :is-salable="!!{{ itemObject }}.filter && {{ itemObject }}.filter.isSalable"
+            :has-children="!!{{ itemObject }}.filter && {{ itemObject }}.filter.hasActiveChildren"
+            :interval-quantity="{{ itemObject }}.variation.intervalOrderQuantity || 1"
+            :minimum-quantity="{{ itemObject }}.variation.minimumOrderQuantity"
+            :maximum-quantity="!!{{ itemObject }}.variation.maximumOrderQuantity && {{ itemObject }}.variation.maximumOrderQuantity > 0 ? {{ itemObject }}.variation.maximumOrderQuantity : null"
+            :order-properties="{{ itemObject }}.properties.filter(function(prop) { return prop.property.isOderProperty })"
+            :use-large-scale="{{ useLargeScale | default(false) | json_encode }}"
+            :show-quantity="{{ showQuantity | default(false) | json_encode }}"
+            :item-url="{{ itemObject }} | itemURL{% if urlWithVariationId is not empty %}({{ urlWithVariationId }}){% endif %}"
+            {% for key, value in options if value is defined and value | length > 0 %}
+            {{ key }}="{{ value }}"
+            {% endfor %}
+    >
+    </add-to-basket>
+{% endmacro %}

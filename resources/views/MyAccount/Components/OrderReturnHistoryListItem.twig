@@ -1,0 +1,74 @@
+{{ component("Ceres::MyAccount.Components.OrderDocuments") }}
+
+<script type="x/template" id="vue-order-return-history-list-item">
+    <div :id="'accordion_' + _uid" class="accordion col-sm-12">
+        <div :id="'heading_' + _uid" class="row container-clickable collapsed border-top-0 border py-3" data-toggle="collapse" :data-target="'#collapse_'+ _uid" aria-expanded="false" :aria-controls="'collapse_'+ _uid">
+            <div class="col-md-10">
+                <div class="row">
+                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    <div class="col-md-2">
+                        <span>{{ trans("Ceres::Template.returnHistoryReturnId") }}: </span>
+                        <span>${ returnOrder.order.id }</span>
+                    </div>
+                    <div class="col-md-2">
+                        <span>{{ trans("Ceres::Template.returnHistoryOrderId") }}: </span>
+                        <span>${ getOriginOrderId(returnOrder.order) }</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span>{{ trans("Ceres::Template.returnHistoryDate") }}: </span>
+                        <span>${ returnOrder.order.createdAt | moment("{{ trans("Ceres::Template.devDateFormatMoment") }}") }</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span>{{ trans("Ceres::Template.returnHistoryPaymentMethod") }}: </span>
+                        <span>${ returnOrder.paymentMethodName }</span>
+                    </div>
+                </div>
+            </div>
+            <order-documents :documents="returnOrder.order.documents" class="col-md-2" type="return"></order-documents>
+        </div>
+        <div :id="'collapse_'+ _uid" class="row container-middle border border-top-0 collapse" :aria-labelledby="'heading_'+ _uid" :data-parent="'#accordion_'+ _uid">
+            <div class="col-sm-12 item py-2" v-for="orderItem in itemsToRender">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a class="d-inline-block" :href="returnOrder.itemURLs[orderItem.itemVariationId]">
+                            <img :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName " :title="orderItem | itemBundleName">
+                        </a>
+                        <div class="d-inline-block item-description">
+                            <div><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]">${ orderItem | itemBundleName }</a></div>
+                            <div>{{ trans("Ceres::Template.returnHistoryQuantity") }}: ${ orderItem.quantity}</div>
+
+                            <div v-for="attribute in orderItem.attributes">
+                                <strong>${ attribute.name }: </strong>
+                                <span>${ attribute.value }</span>
+                            </div>
+
+                            <template v-if="orderItem.orderProperties && orderItem.orderProperties[0]">
+                                <div v-for="property in orderItem.orderProperties">
+                                    <b>${ property.name }</b>
+                                    <span v-if="property.type === 'file'">
+                                        <a :href="property.value | fileUploadPath" target="_blank" class="text-primary text-appearance">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            ${ property.value | fileName }
+                                        </a>
+                                    </span>
+                                    <span v-else-if="property.type === 'selection'">: ${ property.selectionValueName }</span>
+                                    <span v-else-if="!!property.type">: ${ property.value }</span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+            <div class="col-sm-12 text-center mb-2">
+                <a class="text-primary text-appearance" v-if="returnOrder.order.orderItems.length > 5" @click="toggleShowAllOrderItems()" :id="'more-return-text-' + _uid" data-toggle="collapse" :href="'#more-return-items-' + _uid" aria-expanded="false" aria-controls="collapseExample">
+                    <template v-if="showAllOrderItems">
+                        {{ trans("Ceres::Template.returnHistoryReturnShowLess") }}
+                    </template>
+                    <template v-else>
+                        {{ trans("Ceres::Template.returnHistoryReturnShowMore") }}
+                    </template>
+                </a>
+            </div>
+        </div> 
+    </div>
+</script>

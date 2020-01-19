@@ -1,36 +1,82 @@
-const ModalService        = require("services/ModalService");
+import { isNullOrUndefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
+
+const ModalService  = require("../../services/ModalService");
+const ApiService    = require("../../services/ApiService");
 
 Vue.component("add-item-to-basket-overlay", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "basketAddInformation",
-        "template"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-add-item-to-basket-overlay"
+        },
+        defaultTimeToClose: {
+            type: Number,
+            default: 15
+        }
+    },
 
     data()
     {
         return {
-            currency: "",
             price: 0,
-            timeToClose: 0,
-            timerVar: null
+            basketItem: null,
+            countAdditionalBasketItems: 0
         };
+    },
+
+    mounted()
+    {
+        if (App.config.basket.addItemToBasketConfirm === "overlay")
+        {
+            ApiService.listen("AfterBasketItemUpdate", data =>
+            {
+                const updatedBasketItem = data.basketItems[0];
+
+                if (!this.isBasketItemQuantityUpdate)
+                {
+                    const basketItem = this.basketItems.find(item => item.id === updatedBasketItem.id) || {};
+
+                    basketItem.quantity = updatedBasketItem.quantity;
+                    basketItem.price = updatedBasketItem.price;
+                    basketItem.basketItemOrderParams = updatedBasketItem.basketItemOrderParams;
+                    this.showItem(basketItem);
+                }
+            });
+
+            ApiService.listen("AfterBasketItemAdd", data =>
+            {
+                this.showItem(data.basketItems[0], data.basketItems.length - 1);
+            });
+        }
     },
 
     computed:
     {
+        ...mapState({
+            basketItems: state => state.basket.items,
+            isBasketItemQuantityUpdate: state => state.basket.isBasketItemQuantityUpdate
+        }),
+
         isLastBasketEntrySet()
         {
-            return Object.keys(this.latestBasketEntry.item).length !== 0;
+            return !isNullOrUndefined(this.basketItem);
+        },
+
+        variation()
+        {
+            return this.basketItem.variation ? this.basketItem.variation.data : null;
         },
 
         itemName()
         {
             if (this.isLastBasketEntrySet)
             {
-                return this.$options.filters.itemName(this.latestBasketEntry.item);
+                return this.$options.filters.itemName(this.variation);
             }
 
             return "";
@@ -40,10 +86,9 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                const images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
-                const img = this.$options.filters.itemImage(images);
+                const images = this.$options.filters.itemImages(this.variation.images, "urlPreview");
 
-                return img;
+                return this.$options.filters.itemImage(images);
             }
 
             return "";
@@ -52,94 +97,95 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                const images = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview");
+                const images = this.$options.filters.itemImages(this.variation.images, "urlPreview");
 
                 return this.$options.filters.itemImageAlternativeText(images);
             }
 
             return "";
-        },
-
-        ...Vuex.mapState({
-            latestBasketEntry: state => state.basket.latestEntry
-        })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
-    watch:
-    {
-        latestBasketEntry()
-        {
-            if (this.basketAddInformation === "overlay")
-            {
-                this.setPriceFromData();
-
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-
-                this.startCounter();
-            }
-            else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0)
-            {
-                setTimeout(function()
-                {
-                    const vueApp = document.querySelector("#vue-app");
-                    const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
-
-                    if (vueApp)
-                    {
-                        vueApp.classList.add(basketOpenClass);
-                    }
-                }, 1);
-            }
         }
     },
 
     methods:
     {
-        setPriceFromData()
+        showItem(basketItem, countAdditionalBasketItems)
         {
-            if (this.latestBasketEntry.item.prices)
-            {
-                this.currency = this.latestBasketEntry.item.prices.default.currency;
-                const graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
-                const propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
+            this.basketItem = basketItem;
 
-                this.price = graduatedPrice + propertySurcharge;
+            if (this.basketItem && this.variation.prices)
+            {
+                const graduatedPrice = this.$options.filters.graduatedPrice(this.variation, this.basketItem.quantity);
+                const propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
+
+                this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
+                this.countAdditionalBasketItems = countAdditionalBasketItems;
             }
+
+            ModalService
+                .findModal(document.getElementById("add-item-to-basket-overlay"))
+                .setTimeout(this.defaultTimeToClose * 1000)
+                .show();
         },
 
-        closeOverlay()
+        orderParamName(propertyId)
         {
-            if (this.timerVar)
+            if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
             {
-                clearInterval(this.timerVar);
+                return "";
             }
+
+            const property = this.variation.properties.find(property =>
+            {
+                return parseInt(property.property.id) === parseInt(propertyId);
+            });
+
+            if (isNullOrUndefined(property) || !property.property.isOderProperty)
+            {
+                return "";
+            }
+
+            const orderParam = this.basketItem.basketItemOrderParams.find(param =>
+            {
+                return parseInt(param.propertyId) === parseInt(propertyId);
+            });
+
+            return orderParam.name;
         },
 
-        startCounter()
+        orderParamValue(propertyId)
         {
-            if (this.timerVar)
+            if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
             {
-                clearInterval(this.timerVar);
+                return "";
             }
 
-            this.timeToClose = 10;
-
-            this.timerVar = setInterval(() =>
+            const property = this.variation.properties.find(property =>
             {
-                this.timeToClose -= 1;
+                return parseInt(property.property.id) === parseInt(propertyId);
+            });
 
-                if (this.timeToClose === 0)
-                {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
+            if (isNullOrUndefined(property) || !property.property.isOderProperty)
+            {
+                return "";
+            }
 
-                    clearInterval(this.timerVar);
-                }
-            }, 1000);
+            const orderParam = this.basketItem.basketItemOrderParams.find(param =>
+            {
+                return parseInt(param.propertyId) === parseInt(propertyId);
+            });
+
+            if (isNullOrUndefined(orderParam))
+            {
+                return "";
+            }
+
+            const orderParamValue = orderParam.value;
+
+            if (property.property.valueType === "selection" && orderParamValue)
+            {
+                return property.property.selectionValues[orderParamValue].name;
+            }
+            return orderParamValue;
         }
     }
 });

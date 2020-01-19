@@ -50,6 +50,8 @@
 	font-size: 1rem;
     flex-flow: column;
 	display: flex;
+	overflow-y: auto;
+	overflow-x: hidden;
 
 	&.empty {
 		position: relative;
@@ -78,6 +80,7 @@
 		overflow-y: auto;
 		background-attachment: fixed;
 		-webkit-overflow-scrolling: touch;
+		min-height: 150px;
 	}
 
 	.basket-totals {
@@ -91,5 +94,12 @@
 	& > .no-items {
 		text-align: center;
 		padding: 1rem;
+	}
+}
+
+html.ie .basket-preview-hover {
+	@include media-breakpoint-up(sm) {
+		height: 85vh;
+		min-height: 85vh;
 	}
 }

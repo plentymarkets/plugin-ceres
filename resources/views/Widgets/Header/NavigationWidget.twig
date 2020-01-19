@@ -1,40 +1,49 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {% set isFixed              = widget.settings.isFixed.mobile %}
 {% set navigationStyle      = widget.settings.navigationStyle.mobile %}
 {% set companyLogoUrl       = widget.settings.companyLogoUrl.mobile %}
 {% set megaMenuLevels       = widget.settings.megaMenuLevels.mobile %}
-{% set megaMenuMaxItems1    = widget.settings.megaMenuMaxItems.stage1.mobile %}
-{% set megaMenuMaxItems2    = widget.settings.megaMenuMaxItems.stage2.mobile %}
-{% set megaMenuMaxItems3    = widget.settings.megaMenuMaxItems.stage3.mobile %}
+{% set megaMenuMaxItems1    = widget.settings.megaMenuMaxItems.stage1.mobile | default(30) %}
+{% set megaMenuMaxItems2    = widget.settings.megaMenuMaxItems.stage2.mobile | default(3) %}
+{% set megaMenuMaxItems3    = widget.settings.megaMenuMaxItems.stage3.mobile | default(2) %}
 {% set megaMenuMaxItems     = { "1": megaMenuMaxItems1, "2": megaMenuMaxItems2, "3": megaMenuMaxItems3 } %}
 
 {% if companyLogoUrl is empty %}
-    {% set companyLogoUrl = plugin_path('Ceres') ~ "/images/ceres-logo.svg" %}
+    {% set companyLogoUrl = ceresConfig.header.companyLogo %}
+    {% if not (companyLogoUrl starts with 'https://' or companyLogoUrl starts with 'http://' or companyLogoUrl starts with 'layout/') %}
+        {% set companyLogoUrl = plugin_path('Ceres') ~ "/" ~ image %}
+    {% endif %}
 {% endif %}
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
-<nav class="navbar{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max">
-        <div class="row">
+<nav class="navbar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
+    <div class="container-max {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+        <div class="row mx-0">
             <div class="brand-wrapper">
-                <a class="navbar-brand pull-lg-left" href="{{ Twig.print('urls.home') }}">
-                    <img alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}" src="{{ companyLogoUrl }}" class="img-fluid" crossorigin="anonymous" />
+                <a class="navbar-brand" href="{{ Twig.print('urls.home') }}">
+                    <img alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}" src="{{ companyLogoUrl }}" class="img-fluid" />
                 </a>
 
-                <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler hidden-lg-up" type="button">
+                <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler d-lg-none" type="button">
                     &#9776;
                 </button>
             </div>
 
-            <div id="mainNavbarCollapsable">
+            <div id="mainNavbarCollapsable" class="d-none d-lg-block">
                 <ul class="breadcrumb">
                     <li class="btnClose"></li>
                 </ul>
 
-
-                <ul class="mainmenu pull-lg-right">
+                <ul class="mainmenu">
                     {{ Twig.print(Twig.call("Tree.get_nav_bar", [Twig.var("categories"), "", megaMenuLevels, megaMenuMaxItems])) }}
                 </ul>
             </div>

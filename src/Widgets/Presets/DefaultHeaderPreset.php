@@ -39,7 +39,9 @@ class DefaultHeaderPreset implements ContentPreset
         $companyLogo = $config->header->companyLogo;
         if ( strpos($companyLogo, 'http') !== 0 && strpos($companyLogo, 'layout/') !== 0 )
         {
-            $companyLogo = pluginApp(Application::class)->getUrlPath('Ceres') . '/' . $companyLogo;
+            /** @var Application $app */
+            $app = pluginApp(Application::class);
+            $companyLogo = $app->getUrlPath('Ceres') . '/' . $companyLogo;
         }
 
         $preset->createWidget("Ceres::NavigationWidget")
@@ -55,7 +57,8 @@ class DefaultHeaderPreset implements ContentPreset
             ->withSetting("isFixed", false)
             ->withSetting("showOnHomepage", false)
             ->withSetting("showOnMyAccount", false)
-            ->withSetting("showOnCheckout", false);
+            ->withSetting("showOnCheckout", false)
+            ->withSetting("showOnContentCategory", false);
 
         return $preset->toArray();
     }

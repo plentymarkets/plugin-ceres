@@ -1,0 +1,28 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.component( "Ceres::ItemList.Components.Filter.ItemFilterListBulk") }}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set appearance      = widget.settings.appearance.mobile | default("none") %}
+
+{{ Twig.if("services.facet.facetDataExists(facets, #{allowedFacetTypes | json_encode}) or #{ isPreview | json_encode }") }}
+<div class="widget widget-filter-base widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+
+    <item-filter-list
+        class="{{ "widget-filter-" ~ className }}"
+        template="#vue-item-filter-list-bulk"
+        :facet-data="{{ Twig.print('facets | json_encode') }}"
+        :allowed-facets-types="{{ allowedFacetTypes | json_encode }}"
+        :padding-classes="{{ spacingPadding | json_encode }}"
+        :padding-inline-styles="{{ inlinePadding | json_encode }}">
+    </item-filter-list>
+</div>
+{{ Twig.endif() }}

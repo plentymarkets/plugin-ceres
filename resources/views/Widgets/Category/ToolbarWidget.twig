@@ -1,0 +1,62 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.set("overrideSearchFilters", Twig.call("LayoutContainer.show", ["Ceres::Search.Filter", Twig.var("facets")])) }}
+
+{% set icon = widget.settings.icon.mobile | default("fa-sliders") %}
+{% set text = widget.settings.text.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+
+{% set uid = uid() %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+{% set hasCollapsableContent = false %}
+
+{% if children is defined and children.collapsable | trim is not empty %}
+    {% set hasCollapsableContent = true %}
+{% endif %}
+
+<div class="widget widget-toolbar list-controls{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="list-controls-inner{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+        <div class="d-sm-flex p-2">
+
+            <div class="flex-fill" {% if isPreview %}data-builder-child-container="toolbar"{% endif %}>
+                {{ children.toolbar | raw }}
+            </div>
+
+            {{ Twig.if("overrideSearchFilters | trim is empty") }}
+                {% if isPreview or hasCollapsableContent %}
+                <div class="d-flex widget-{{ appearance }}">
+                    <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}">
+                        {%- if icon != "none" -%}
+                            <i class="fa {{ icon }} default-float mr-1" aria-hidden="true" style="line-height: inherit"></i>
+                        {%- endif -%}
+                        {%- if text | trim is empty -%}{{ Twig.trans("Ceres::Template.itemFilter") }}{%- else -%}{{- text -}}{%- endif -%}
+                    </a>
+                </div>
+                {% endif %}
+            {{ Twig.else() }}
+                {{ Twig.print("overrideSearchFilters") }}
+            {{ Twig.endif() }}
+
+        </div>
+    </div>
+    {{ Twig.if("overrideSearchFilters | trim is empty") }}
+    <div id="filter-collapse_{{ uid }}" class="filter-collapse collapse p-0 m-0{% if isPreview %} sb-no-animation{% endif %}" >
+        <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+            <div class="collapse-container" data-translation-empty="{{ trans("Ceres::Template.itemFilterNoContentMessage") }}" {% if isPreview %}data-builder-child-container="collapsable"{% endif %}>
+                {{ children.collapsable | raw }}
+            </div>
+            <div class="text-right mt-3 widget-{{ appearance }}">
+                <button class="btn btn-appearance btn-medium-large" type="button" data-toggle="collapse" href="#filter-collapse_{{ uid }}" aria-controls="filter-collapse_{{ uid }}" aria-expanded="true"><i aria-hidden="true" class="fa fa-times"></i><span>{{ Twig.trans("Ceres::Template.itemClose") }}</span></button>
+            </div>
+        </div>
+    </div>
+    {{ Twig.endif() }}
+</div>

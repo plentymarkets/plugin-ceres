@@ -1,0 +1,10 @@
+// additional compatibility scss to bootstrap's reboot
+
+// prevent iOS standard zoom on input elements on focus
+html.ios {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}

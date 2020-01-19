@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.directive("toggle-basket-preview",
     {
         bind(el)

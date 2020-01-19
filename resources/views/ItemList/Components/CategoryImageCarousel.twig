@@ -1,16 +1,14 @@
-{{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
-
 <script type="x/template" id="vue-category-image-carousel">
     <a :id="'owl-carousel-' + _uid" v-if="$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl">
         <div v-for="(imageUrl, index) in imageUrls">
-            <item-lazy-img ref="itemLazyImage" template="#vue-item-lazy-img" v-if="index === 0 && !disableLazyLoad" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="titleText"></item-lazy-img>
+            <lazy-img ref="itemLazyImage" v-if="index === 0 && !disableLazyLoad" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="titleText"></lazy-img>
             <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="titleText">
             <img v-else class="img-fluid" :src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getAltText(imageUrl)">
         </div>
     </a>
 
     <a v-else :href="itemUrl">
-        <item-lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" template="#vue-item-lazy-img" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="titleText"></item-lazy-img>
+        <lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="titleText"></lazy-img>
         <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="titleText">
     </a>
 </script>

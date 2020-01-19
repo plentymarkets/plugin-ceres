@@ -1,79 +1,114 @@
-import UrlService from "services/UrlService";
+import UrlService from "../../../services/UrlService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("item-filter-list", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "facetData"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-item-filter-list"
+        },
+        facetData: {
+            type: Array,
+            default()
+            {
+                return [];
+            }
+        },
+        allowedFacetsTypes:
+        {
+            type: Array,
+            default: () => []
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        }
+    },
 
     data()
     {
         return {
-            isActive: false
+            initialSelectedFacets: [],
+            initialPriceMin: "",
+            initialPriceMax: ""
         };
     },
 
-    computed: Vuex.mapState({
-        facets(state)
-        {
-            return state.itemList.facets.sort((facetA, facetB) =>
+    computed:
+    {
+        ...mapState({
+            facets(state)
             {
-                if (facetA.position > facetB.position)
+                if (!this.allowedFacetsTypes.length)
                 {
-                    return 1;
-                }
-                if (facetA.position < facetB.position)
-                {
-                    return -1;
+                    return state.itemList.facets;
                 }
 
-                return 0;
-            });
-        }
-    }),
+                return state.itemList.facets
+                    .filter(facet => this.allowedFacetsTypes.includes(facet.id) || this.allowedFacetsTypes.includes(facet.type));
+            },
+            isLoading: state => state.itemList.isLoading,
+            selectedFacets: state => state.itemList.selectedFacets
+        })
+    },
 
     created()
     {
-        this.$store.commit("setFacets", this.facetData);
+        this.$store.commit("addFacets", this.facetData);
 
-        this.$options.template = this.template || "#vue-item-filter-list";
-
-        const urlParams = UrlService.getUrlParams(document.location.search);
-
-        let selectedFacets = [];
-
-        if (urlParams.facets)
-        {
-            selectedFacets = urlParams.facets.split(",");
-        }
-
-        if (urlParams.priceMin || urlParams.priceMax)
-        {
-            const priceMin = urlParams.priceMin || "";
-            const priceMax = urlParams.priceMax || "";
-
-            this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
-
-            selectedFacets.push("price");
-        }
-
-        if (selectedFacets.length > 0)
-        {
-            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
-        }
+        this.initSelectedFacets();
     },
 
     methods:
     {
-        toggleOpeningState()
+        initSelectedFacets()
         {
-            window.setTimeout(() =>
+            const urlParams = UrlService.getUrlParams(document.location.search);
+
+            let selectedFacets = [];
+
+            if (urlParams.facets)
             {
-                this.isActive = !this.isActive;
-            }, 300);
+                selectedFacets = urlParams.facets.split(",");
+            }
+
+            if (this.initPriceFacet(urlParams))
+            {
+                selectedFacets.push("price");
+            }
+
+            if (selectedFacets.length > 0)
+            {
+                this.$store.commit("setSelectedFacetsByIds", selectedFacets);
+            }
+
+            this.initialSelectedFacets = selectedFacets;
+        },
+
+        initPriceFacet(urlParams)
+        {
+            if (urlParams.priceMin || urlParams.priceMax)
+            {
+                const priceMin = urlParams.priceMin || "";
+                const priceMax = urlParams.priceMax || "";
+
+                this.$store.commit("setPriceFacet", { priceMin: priceMin, priceMax: priceMax });
+
+                this.initialPriceMin = priceMin;
+                this.initialPriceMax = priceMax;
+
+                return true;
+            }
+
+            return false;
         }
     }
 });

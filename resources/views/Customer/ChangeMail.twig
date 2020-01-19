@@ -1,0 +1,28 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.myAccountChangeEmail") %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+    {{ component("Ceres::Customer.Components.ChangeEmailForm") }}
+
+    <div class="container-max page-content">
+        <div class="row">
+            <div class="col-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 mb-5">
+                <h1 class="mb-5 mt-4">{{ trans("Ceres::Template.myAccountChangeEmail") }}</h1>
+
+                <p>{{ trans("Ceres::Template.myAccountChangeEmailInfoText") }}</p>
+
+                <change-email-form
+                        :contact-id="{{ contactId }}"
+                        hash="{{ hash }}"
+                        new-mail="{{ newMail }}">
+                </change-email-form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

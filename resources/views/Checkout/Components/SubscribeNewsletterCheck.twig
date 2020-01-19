@@ -1,0 +1,15 @@
+<script type="x/template" id="vue-subscribe-newsletter-check">
+    <div class="form-check" v-bind:class="{ 'error': showError && !hideCheckbox }">
+        <input v-if="!hideCheckbox" class="form-check-input" type="checkbox" :id="'subscribe-newsletter-check' + _uid" :checked="newsletterSubscription" @change="setValue($event.target.checked)">
+        
+        <label class="form-check-label" :for="'subscribe-newsletter-check' + _uid">
+            <template v-if="!customText.length">
+                {{ trans("Ceres::Template.newsletterCheckboxLabel") }}<!--
+             --><template v-if="isRequired && !hideCheckbox">
+                    <sup>*</sup>
+                </template>
+                </template>
+            <span v-if="customText.length" v-html="customText"></span>
+        </label>
+    </div>
+</script>

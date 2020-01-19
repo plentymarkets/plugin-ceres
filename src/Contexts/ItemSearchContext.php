@@ -8,7 +8,7 @@ use IO\Services\ItemSearch\SearchPresets\Facets;
 use IO\Services\ItemSearch\SearchPresets\SearchItems;
 use IO\Services\ItemSearch\Services\ItemSearchService;
 
-class ItemSearchContext extends GlobalContext implements ContextInterface
+class ItemSearchContext extends CategoryContext implements ContextInterface
 {
     use ItemListContext;
 
@@ -21,13 +21,15 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
 
         $itemListOptions = [
             'page'          => $this->getParam( 'page', 1 ),
-            'itemsPerPage'  => $this->getParam( 'itemsPerPage', $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage ),
-            'sorting'       => $this->getParam( 'sorting', $this->ceresConfig->sorting->defaultSortingSearch ),
+            'itemsPerPage'  => $this->getParam( 'itemsPerPage', '' ),
+            'sorting'       => $this->getParam( 'sorting', '' ),
             'facets'        => $this->getParam( 'facets', '' ),
             'query'         => $this->getParam( 'query', '' ),
             'priceMin'      => $this->request->get('priceMin', 0),
             'priceMax'      => $this->request->get('priceMax', 0)
         ];
+
+        $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, SearchOptions::SCOPE_SEARCH);
 
         $this->initItemList(
             [

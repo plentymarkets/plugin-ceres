@@ -1,201 +1,420 @@
 const browserDetect = require("detect-browser");
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("./services/NotificationService");
+const AutoFocusService = require("./services/AutoFocusService");
+
+import { debounce } from "./helper/debounce";
+import Vue from "vue";
+import { getStyle } from "./helper/dom";
+
 // Frontend end scripts
 // eslint-disable-next-line
-var init = (function($, window, document)
-{
-    function CeresMain()
-    {
-        const browser = browserDetect.detect();
+const headerCollapses = [];
 
-        if (browser && browser.name)
+function HeaderCollapse(selector)
+{
+    headerCollapses.push(selector);
+    $(document).ready(function()
+    {
+        $(selector).on("show.bs.collapse", () =>
         {
-            $("html").addClass(browser.name);
-        }
-        else
+            headerCollapses.forEach(element =>
+            {
+                if (!$(element).is(selector))
+                {
+                    $(element).collapse("hide");
+                }
+            });
+        });
+
+    });
+}
+
+function CeresMain()
+{
+    const browser = browserDetect.detect();
+
+    if (browser && browser.name)
+    {
+        $("html").addClass(browser.name);
+    }
+    else
+    {
+        $("html").addClass("unkown-os");
+    }
+
+    // Detect Facebook integrated Browser
+    if (typeof navigator !== "undefined" && /FBA[NV]\/([0-9\.]+)/.test(navigator.userAgent))
+    {
+        document.body.classList.add("facebook");
+    }
+
+    $(window).scroll(function()
+    {
+        if ($(".wrapper-main").hasClass("isSticky"))
         {
-            $("html").addClass("unkown-os");
+            if ($(this).scrollTop() > 1)
+            {
+                $(".wrapper-main").addClass("sticky");
+            }
+            else
+            {
+                $(".wrapper-main").removeClass("sticky");
+            }
         }
+    });
+
+    window.onpopstate = function(event)
+    {
+        if (event.state && event.state.requireReload)
+        {
+            window.location.reload();
+        }
+    };
+
+    // init bootstrap tooltips
+    $("[data-toggle=\"tooltip\"]").tooltip();
+
+    HeaderCollapse("#countrySettings");
+    HeaderCollapse("#currencySelect");
+    HeaderCollapse("#searchBox");
+
+    const $toggleListView = $(".toggle-list-view");
+    const $mainNavbarCollapse = $("#mainNavbarCollapse");
+
+    $(document).on("click", function(evt)
+    {
+        const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
+
+        if ($("#vue-app").hasClass(basketOpenClass))
+        {
+            if ((evt.target != $(".basket-preview")) &&
+                (evt.target != document.querySelector(".basket-preview-hover")) &&
+                (evt.target.classList[0] != "message") &&
+                ($(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0))
+            {
+                evt.preventDefault();
+                $("#vue-app").toggleClass(basketOpenClass || "open-hover");
+            }
+        }
+
+        headerCollapses.forEach(element =>
+        {
+            if (evt.target !== element && $(evt.target).parents(element).length <= 0)
+            {
+                $(element).collapse("hide");
+            }
+        });
+    });
+
+    $toggleListView.on("click", function(evt)
+    {
+        evt.preventDefault();
+
+        // toggle it's own state
+        $toggleListView.toggleClass("grid");
+
+        // toggle internal style of thumbs
+        $(".product-list, .cmp-product-thumb").toggleClass("grid");
+    });
+
+    $mainNavbarCollapse.collapse("hide");
+
+    // Add click listener outside the navigation to close it
+    $mainNavbarCollapse.on("show.bs.collapse", function()
+    {
+        $(".main").one("click", closeNav);
+    });
+
+    $mainNavbarCollapse.on("hide.bs.collapse", function()
+    {
+        $(".main").off("click", closeNav);
+    });
+
+    function closeNav()
+    {
+        $("#mainNavbarCollapse").collapse("hide");
+    }
+
+    $(document).ready(function()
+    {
+        const offset = 250;
+        const duration = 300;
+
+        let isDesktop = window.matchMedia("(min-width: 768px)").matches;
+
+        AutoFocusService.autoFocus();
+
+        $("#searchBox").on("shown.bs.collapse", function()
+        {
+            const searchInput = document.querySelector("input.search-input");
+
+            if (searchInput)
+            {
+                searchInput.focus();
+            }
+        });
 
         $(window).scroll(function()
         {
-            if ($(".wrapper-main").hasClass("isSticky"))
+            if (isDesktop)
             {
-                if ($(this).scrollTop() > 1)
+                if ($(this).scrollTop() > offset)
                 {
-                    $(".wrapper-main").addClass("sticky");
+                    $(".back-to-top").fadeIn(duration);
+                    $(".back-to-top-center").fadeIn(duration);
                 }
                 else
                 {
-                    $(".wrapper-main").removeClass("sticky");
+                    $(".back-to-top").fadeOut(duration);
+                    $(".back-to-top-center").fadeOut(duration);
                 }
             }
         });
 
-        window.onpopstate = function(event)
+        window.addEventListener("resize", function()
         {
-            if (event.state && event.state.requireReload)
-            {
-                window.location.reload();
-            }
-        };
-
-        // init bootstrap tooltips
-        $("[data-toggle=\"tooltip\"]").tooltip();
-
-        // Replace all SVG images with inline SVG, class: svg
-        $("img[src$=\".svg\"]").each(function()
-        {
-            var $img = jQuery(this);
-            var imgURL = $img.attr("src");
-            var attributes = $img.prop("attributes");
-
-            $.get(imgURL, function(data)
-            {
-                // Get the SVG tag, ignore the rest
-                var $svg = jQuery(data).find("svg");
-
-                // Remove any invalid XML tags
-                $svg = $svg.removeAttr("xmlns:a");
-
-                // Loop through IMG attributes and apply on SVG
-                $.each(attributes, function()
-                {
-                    $svg.attr(this.name, this.value);
-                });
-
-                // Replace IMG with SVG
-                $img.replaceWith($svg);
-            }, "xml");
+            isDesktop = window.matchMedia("(min-width: 768px)").matches;
         });
 
-        var $toggleListView = $(".toggle-list-view");
-        var $mainNavbarCollapse = $("#mainNavbarCollapse");
-
-        $(document).on("click", function(evt)
+        $(".back-to-top").click(function(event)
         {
-            const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
+            event.preventDefault();
 
-            if ($("#vue-app").hasClass(basketOpenClass))
-            {
-                if ((evt.target != $(".basket-preview")) &&
-                    (evt.target != document.querySelector(".basket-preview-hover")) &&
-                    (evt.target.classList[0] != "message") &&
-                    ($(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0))
-                {
-                    evt.preventDefault();
-                    $("#vue-app").toggleClass(basketOpenClass || "open-hover");
-                }
-            }
+            $("html, body").animate({ scrollTop: 0 }, duration);
 
-            if ((evt.target.id != "countrySettings") &&
-                ($(evt.target).parents("#countrySettings").length <= 0) &&
-                ($("#countrySettings").attr("aria-expanded") == "true"))
-            {
-                $("#countrySettings").collapse("hide");
-            }
-
-            if ((evt.target.id != "searchBox") &&
-                ($(evt.target).parents("#searchBox").length <= 0) &&
-                ($("#searchBox").attr("aria-expanded") == "true"))
-            {
-                $("#searchBox").collapse("hide");
-            }
-
-            if ((evt.target.id != "currencySelect") &&
-                ($(evt.target).parents("#currencySelect").length <= 0) &&
-                ($("#currencySelect").attr("aria-expanded") == "true"))
-            {
-                $("#currencySelect").collapse("hide");
-            }
+            return false;
         });
 
-        $toggleListView.on("click", function(evt)
+        $(".back-to-top-center").click(function(event)
         {
-            evt.preventDefault();
+            event.preventDefault();
 
-            // toggle it's own state
-            $toggleListView.toggleClass("grid");
+            $("html, body").animate({ scrollTop: 0 }, duration);
 
-            // toggle internal style of thumbs
-            $(".product-list, .cmp-product-thumb").toggleClass("grid");
+            return false;
         });
 
-        $mainNavbarCollapse.collapse("hide");
-
-        // Add click listener outside the navigation to close it
-        $mainNavbarCollapse.on("show.bs.collapse", function()
+        $("#accountMenuList").click(function()
         {
-            $(".main").one("click", closeNav);
+            $("#countrySettings").collapse("hide");
+            $("#searchBox").collapse("hide");
+            $("#currencySelect").collapse("hide");
         });
 
-        $mainNavbarCollapse.on("hide.bs.collapse", function()
-        {
-            $(".main").off("click", closeNav);
-        });
+        fixPopperZIndexes();
+    });
+}
 
-        function closeNav()
+window.CeresMain = new CeresMain();
+window.CeresNotification = NotificationService;
+
+const showShopNotification = function(event)
+{
+    if (event.detail.type)
+    {
+        switch (event.detail.type)
         {
-            $("#mainNavbarCollapse").collapse("hide");
+        case "info":
+            NotificationService.info(event.detail.message);
+            break;
+        case "log":
+            NotificationService.log(event.detail.message);
+            break;
+        case "error":
+            NotificationService.error(event.detail.message);
+            break;
+        case "success":
+            NotificationService.success(event.detail.message);
+            break;
+        case "warning":
+            NotificationService.warn(event.detail.message);
+            break;
+        default:
+            console.log("no type such as:" + event.detail.type);
+            break;
         }
+    }
+};
 
-        $(document).ready(function()
+document.addEventListener("showShopNotification", showShopNotification);
+
+let headerParent = document.querySelector("[data-header-offset]");
+let headerLoaded = false;
+let allHeaderChildrenHeights = [];
+
+if ( headerParent )
+{
+    function calculateBodyOffset()
+    {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
+        if (headerLoaded && headerParent)
         {
-            var offset = 250;
-            var duration = 300;
+            const vueApp = document.getElementById("vue-app");
+            let bodyOffset = 0;
 
-            var isDesktop = window.matchMedia("(min-width: 768px)").matches;
-
-            $(window).scroll(function()
+            for ( let i = 0; i < headerParent.children.length; i++ )
             {
-                if (isDesktop)
+                bodyOffset += headerParent.children[i].getBoundingClientRect().height;
+            }
+            vueApp.style.marginTop = bodyOffset + "px";
+            vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
+        }
+    }
+
+    function getHeaderChildrenHeights()
+    {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
+        allHeaderChildrenHeights = [];
+
+        for (let i = 0; i < headerParent.children.length; i++)
+        {
+            allHeaderChildrenHeights.push(headerParent.children[i].getBoundingClientRect().height);
+        }
+    }
+
+    function scrollHeaderElements()
+    {
+        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
+        if (headerLoaded && !App.isShopBuilder)
+        {
+            let absolutePos = 0;
+            let fixedElementsHeight = 0;
+            let offset = 0;
+            const scrollTop = window.pageYOffset;
+            let zIndex = 100;
+
+            for (let i = 0; i < headerParent.children.length; i++)
+            {
+                const elem = headerParent.children[i];
+                const elemHeight = allHeaderChildrenHeights[i];
+
+                offset = absolutePos - scrollTop;
+                elem.style.position = "absolute";
+                elem.style.zIndex = zIndex;
+                zIndex--;
+
+                if (!elem.classList.contains("unfixed"))
                 {
-                    if ($(this).scrollTop() > offset)
+                    if (offset < 0)
                     {
-                        $(".back-to-top").fadeIn(duration);
-                        $(".back-to-top-center").fadeIn(duration);
+                        elem.style.top = 0;
                     }
                     else
                     {
-                        $(".back-to-top").fadeOut(duration);
-                        $(".back-to-top-center").fadeOut(duration);
+                        elem.style.top = offset + "px";
                     }
+
+                    if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
+                    {
+                        elem.style.top = fixedElementsHeight + "px";
+                    }
+
+                    fixedElementsHeight = fixedElementsHeight + elemHeight;
                 }
-            });
-
-            window.addEventListener("resize", function()
-            {
-                isDesktop = window.matchMedia("(min-width: 768px)").matches;
-            });
-
-            $(".back-to-top").click(function(event)
-            {
-                event.preventDefault();
-
-                $("html, body").animate({scrollTop: 0}, duration);
-
-                return false;
-            });
-
-            $(".back-to-top-center").click(function(event)
-            {
-                event.preventDefault();
-
-                $("html, body").animate({scrollTop: 0}, duration);
-
-                return false;
-            });
-
-            $("#accountMenuList").click(function()
-            {
-                $("#countrySettings").collapse("hide");
-                $("#searchBox").collapse("hide");
-                $("#currencySelect").collapse("hide");
-            });
-        });
+                else
+                {
+                    elem.style.top = offset + "px";
+                }
+                absolutePos = absolutePos + elemHeight;
+            }
+        }
     }
 
-    window.CeresMain = new CeresMain();
-    window.CeresNotification = NotificationService;
+    window.addEventListener("resize", debounce(function()
+    {
+        calculateBodyOffset();
+        getHeaderChildrenHeights();
+        scrollHeaderElements();
+    }, 50));
 
-})(jQuery, window, document);
+    window.addEventListener("scroll", debounce(function()
+    {
+        scrollHeaderElements();
+    }, 10));
+
+    $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
+    {
+        calculateBodyOffset();
+        $(".owl-carousel").trigger("refresh.owl.carousel");
+    });
+
+    const headerImages = headerParent.querySelectorAll("img");
+
+    Promise.all(
+        Array.prototype.slice.call(headerImages).map(function(headerImage)
+        {
+            return new Promise(function(resolve)
+            {
+                if (headerImage.complete)
+                {
+                    resolve();
+                }
+                else
+                {
+                    headerImage.onload = function()
+                    {
+                        resolve();
+                    };
+                    headerImage.onerror = function()
+                    {
+                        resolve();
+                    };
+                }
+            });
+        })
+    ).then(function()
+    {
+        // Initialize
+        headerLoaded = true;
+        getHeaderChildrenHeights();
+        scrollHeaderElements();
+        calculateBodyOffset();
+    });
+
+    calculateBodyOffset();
+}
+
+$(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
+{
+    const compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
+    const component = new Vue({
+        store: window.ceresStore,
+        render: compiled.render,
+        staticRenderFns: compiled.staticRenderFns
+    });
+
+    component.$mount( widgetElement[0] );
+    $(component.$el).find("*").each(function(index, elem)
+    {
+        $(elem).click(function(event)
+        {
+            event.preventDefault();
+        });
+    });
+
+    $(component.$el).find(".owl-carousel").on("resized.owl.carousel", function()
+    {
+        window.dispatchEvent(new Event("resize"));
+    });
+});
+
+function fixPopperZIndexes()
+{
+    const elements = document.querySelectorAll(".popover.d-none");
+    let counter = elements.length;
+
+    elements.forEach(el =>
+    {
+        let zIndex = parseInt(getStyle(el, "z-index"));
+
+        if (!isNaN(zIndex))
+        {
+            zIndex += --counter;
+
+            el.style.zIndex = zIndex;
+        }
+    });
+}

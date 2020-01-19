@@ -1,25 +1,26 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.returnCenter") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.returnCenter") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
 
 	{{ component( "Ceres::OrderReturn.Components.OrderReturn" ) }}
 
-	<div class="page-content basket order-return container-max m-b-3 m-t-1">
+	<div class="page-content basket order-return container-max mb-5 mt-3">
 
-		<div class="row m-t-1">
-            <div class="col-xs-12">
+		<div class="row mt-3">
+            <div class="col-12">
                 <h1 class="h2">{{ trans("Ceres::Template.return") }}</h1>
             </div>
         </div>
 
         <hr>
 
-		<order-return template="#vue-order-return" :init-order-data="{{ orderData | json_encode }}"></order-return>
+		<order-return :init-order-data="{{ orderData | json_encode }}"></order-return>
 
 	</div>
 {% endblock %}

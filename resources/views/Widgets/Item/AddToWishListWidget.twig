@@ -1,0 +1,21 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.component("Ceres::Item.Components.AddToWishList") }}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set appearance = widget.settings.appearance.mobile | default("danger") %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{{ Twig.if("services.url.isRouteEnabled('wish-list') or #{ isPreview | json_encode }") }}
+    <div class="widget widget-add-to-wish-list widget-{{ appearance }}
+        {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+        {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+
+        <add-to-wish-list></add-to-wish-list>
+
+    </div>
+{{ Twig.endif() }}

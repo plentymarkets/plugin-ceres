@@ -1,37 +1,60 @@
 {% extends getPartial('page-design') %}
 
+{% set optionalInvoiceAddressFields = {
+    "de": ceresConfig.addresses.billingAddressShow,
+    "gb": ceresConfig.addresses.billingAddressShow_en
+    }
+%}
+{% set requiredInvoiceAddressFields = {
+    "de": ceresConfig.addresses.billingAddressRequire,
+    "gb": ceresConfig.addresses.billingAddressRequire_en
+    }
+%}
+
 {% block PartialHead %}
-    <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.regRegister") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.regRegister") %}
+    {% endembed %}
 {% endblock %}
 
 {% block PageBody %}   
 
     {{ component( "Ceres::Customer.Components.Registration") }}
-    <div class="registration container-max m-t-1">
-        <div class="row m-b-3">
+    <div class="registration container-max mt-3">
+        <div class="row mb-5">
             <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
                 <h1>
                     {{ trans("Ceres::Template.regRegisterAccount") }}
 
-                     <popper v-cloak class="pull-right">
-                        <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
-                            <i class="fa fa-info"></i>
-                        </button>
-                        <div slot="title">
+                     <popper v-cloak class="float-right">
+                        <template #handle>
+                            <button class="btn btn-icon btn-secondary btn-sm">
+                                <i class="fa fa-info"></i>
+                            </button>
+                        </template>
+                        <template #title>
                             {{ trans("Ceres::Template.regContactInformations") }}
-                        </div>
-                        <ul slot="content" class='p-l-1'>
-                            <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                            <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                            <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                            <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                        </ul>
+                        </template>
+                        <template #content>
+                            <ul class='pl-3'>
+                                <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                            </ul>
+                        </template>
                     </popper>
                 </h1>
 
                 <div class="row">
-                    <registration template="#vue-registration" backlink="{{ request.get("backlink") | url_encode }}"></registration>
+                    <div class="modal-body">
+                        <registration
+                            template="#vue-registration"
+                            backlink="{{ request.get("backlink") | url_encode }}"
+                            :shown-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                            :required-fields="{{ requiredInvoiceAddressFields | json_encode }}">
+                        </registration>
+                    </div>
                 </div>
             </div>
         </div>

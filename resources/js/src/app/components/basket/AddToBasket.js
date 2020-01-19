@@ -1,12 +1,16 @@
-import ExceptionMap from "exceptions/ExceptionMap";
-import TranslationService from "services/TranslationService";
-import {navigateTo}from "services/UrlService";
+import ExceptionMap from "../../exceptions/ExceptionMap";
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import Vue from "vue";
+import { mapState } from "vuex";
+import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
 Vue.component("add-to-basket", {
 
-    delimiters: ["${", "}"],
+    mixins: [ButtonSizePropertyMixin],
 
     props:
     {
@@ -15,7 +19,6 @@ Vue.component("add-to-basket", {
             type: String,
             default: "#vue-add-to-basket"
         },
-        item: Object,
         itemUrl: String,
         showQuantity:
         {
@@ -32,49 +35,118 @@ Vue.component("add-to-basket", {
             type: Array,
             default: () => []
         },
-        isVariationSelected:
+        variationId:
+        {
+            type: Number
+        },
+        isSalable:
+        {
+            type: Boolean,
+            default: false
+        },
+        hasChildren:
+        {
+            type: Boolean,
+            default: false
+        },
+        intervalQuantity:
+        {
+            type: Number,
+            default: 1
+        },
+        minimumQuantity:
+        {
+            type: Number,
+            default: 0
+        },
+        maximumQuantity:
+        {
+            type: Number,
+            default: null
+        },
+        orderProperties:
+        {
+            type: Array,
+            default: () => []
+        },
+        hasPrice:
         {
             type: Boolean,
             default: true
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        },
+        isWishList:
+        {
+            type: String,
+            default: "false"
+        },
+        propQuantity:
+        {
+            type: Number,
+            default: null
         }
     },
     computed:
     {
-        hasChildren()
-        {
-            return this.item.filter && this.item.filter.hasChildren;
-        },
-
         canBeAddedToBasket()
         {
-            const isSalable             = this.item.filter && this.item.filter.isSalable;
-            const hasChildren           = this.item.filter && this.item.filter.hasChildren;
-            const intervalQuantity      = this.item.variation.intervalOrderQuantity || 1;
-            const minimumOrderQuantity  = this.item.variation.minimumOrderQuantity || intervalQuantity;
-            const requiresProperties    = !this.requiresProperties;
-
-            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity && requiresProperties;
-        },
-
-        variationId()
-        {
-            return this.item.variation.id;
+            return this.isSalable &&
+                !this.hasChildren &&
+                !(this.minimumQuantity != 1 || this.intervalQuantity != 1) &&
+                !this.requiresProperties &&
+                this.hasPrice;
         },
 
         requiresProperties()
         {
-            if (App.config.item.requireOrderProperties && this.item.properties)
-            {
-                const availableProperties = this.item.properties.filter(property => property.property.isShownOnItemPage);
-
-                return !!availableProperties.length;
-            }
-
-            return false;
+            return App.config.item.requireOrderProperties &&
+                this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0;
         },
 
-        ...Vuex.mapState({
-            isBasketLoading: state => state.basket.isBasketLoading
+        buttonClasses()
+        {
+            const classes = [];
+
+            if (isDefined(this.buttonSizeClass))
+            {
+                classes.push(this.buttonSizeClass);
+            }
+
+            if (isDefined(this.paddingClasses))
+            {
+                classes.push(this.paddingClasses.split(" "));
+            }
+
+            return classes;
+        },
+
+        tooltipText()
+        {
+            if (this.hasAvailableVariations)
+            {
+                return TranslationService.translate("Ceres::Template.singleItemPleaseSelectValidVariation");
+            }
+            else
+            {
+                return TranslationService.translate("Ceres::Template.singleItemPleaseSelectNotAvailable");
+            }
+        },
+
+        ...mapState({
+            basketItems: state => state.basket.items,
+            isBasketLoading: state => state.basket.isBasketLoading,
+            isVariationSelected: state => state.variationSelect.isVariationSelected,
+            hasAvailableVariations: state => state.variationSelect.variations.some(variation => variation.isSalable),
+            variationOrderQuantity: state => state.item.variationOrderQuantity
         })
     },
     data()
@@ -84,10 +156,6 @@ Vue.component("add-to-basket", {
             buttonLockState: false,
             waiting: false
         };
-    },
-    created()
-    {
-        this.$options.template = this.template;
     },
     methods:
     {
@@ -101,23 +169,32 @@ Vue.component("add-to-basket", {
                 this.showMissingPropertiesError();
             }
 
-            else if (this.item.filter.isSalable)
+            else if (this.isSalable)
             {
                 this.waiting = true;
+
+                this.orderProperties.forEach(function(orderProperty)
+                {
+                    if (orderProperty.property.valueType === "float" &&
+                        !isNullOrUndefined(orderProperty.property.value) &&
+                        orderProperty.property.value.slice(-1) === App.decimalSeparator)
+                    {
+                        orderProperty.property.value = orderProperty.property.value.substr(0, orderProperty.property.value.length - 1);
+                    }
+                });
 
                 const basketObject =
                     {
                         variationId             :   this.variationId,
                         quantity                :   this.quantity,
-                        basketItemOrderParams   :   this.item.properties
+                        basketItemOrderParams   :   this.orderProperties
                     };
 
                 this.$store.dispatch("addBasketItem", basketObject).then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemAdded", {detail: basketObject}));
+                        document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
                         this.waiting = false;
-                        this.openAddToBasketOverlay(basketObject.quantity);
                     },
                     error =>
                     {
@@ -127,7 +204,8 @@ Vue.component("add-to-basket", {
                         {
                             NotificationService.error(
                                 TranslationService.translate(
-                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                                    error.data.placeholder
                                 )
                             ).closeAfter(5000);
                         }
@@ -160,20 +238,6 @@ Vue.component("add-to-basket", {
         },
 
         /**
-         * open the AddItemToBasketOverlay
-         */
-        openAddToBasketOverlay(stashedQuantity)
-        {
-            const latestBasketEntry =
-                {
-                    item: this.item,
-                    quantity: stashedQuantity
-                };
-
-            this.$store.commit("setLatestBasketEntry", latestBasketEntry);
-        },
-
-        /**
          * update the property quantity of the current instance
          * @param value
          */
@@ -184,9 +248,25 @@ Vue.component("add-to-basket", {
     },
     watch:
     {
-        quantity(newValue, oldValue)
+        quantity(value)
         {
-            this.$store.commit("setVariationOrderQuantity", newValue);
+            this.$store.commit("setVariationOrderQuantity", value);
+        },
+
+        variationOrderQuantity(value)
+        {
+            if (this.quantity !== value)
+            {
+                this.quantity = value;
+            }
+        },
+
+        propQuantity(value)
+        {
+            if (!isNaN(value))
+            {
+                this.quantity = value;
+            }
         }
     }
 });

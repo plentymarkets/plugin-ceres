@@ -1,29 +1,57 @@
-const NotificationService = require("services/NotificationService");
+import { isNullOrUndefined } from "../../../../helper/utils";
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
+const NotificationService = require("../../../../services/NotificationService");
+
+import ValidationService from "../../../../services/ValidationService";
+import TranslationService from "../../../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("create-update-address", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "addressData",
-        "addressModal",
-        "modalType",
-        "addressType",
-        "template"
-    ],
+    props: {
+        addressData: {
+            type: Object,
+            default()
+            {
+                return {};
+            }
+        },
+        addressModal: {
+            type: Object,
+            default()
+            {
+                return {};
+            }
+        },
+        modalType: String,
+        addressType: String,
+        template: String,
+        optionalAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        requiredAddressFields: {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        defaultSalutation: {
+            type: String,
+            default: "male"
+        }
+    },
 
     data()
     {
         return {
-            waiting: false,
-            addressFormNames:
-            {
-                1: "#billing_address_form",
-                2: "#delivery_address_form"
-            }
+            waiting: false
         };
     },
 
@@ -35,18 +63,13 @@ Vue.component("create-update-address", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods: {
         /**
          * Validate the address fields
          */
         validate()
         {
-            ValidationService.validate($(this.addressFormNames[this.addressType]))
+            ValidationService.validate(this.$refs.addressForm)
                 .done(() =>
                 {
                     this.saveAddress();
@@ -57,7 +80,7 @@ Vue.component("create-update-address", {
 
                     for (const field of invalidFields)
                     {
-                        let fieldName = field.lastElementChild.innerHTML;
+                        let fieldName = field.lastElementChild.innerHTML.trim();
 
                         fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
                         fieldNames.push(fieldName);
@@ -65,7 +88,7 @@ Vue.component("create-update-address", {
 
                     ValidationService.markInvalidFields(invalidFields, "error");
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", {fields: fieldNames.join(", ")})
+                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
                     );
                 });
         },
@@ -93,7 +116,7 @@ Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
-            this.$store.dispatch("updateAddress", {address: this.addressData, addressType: this.addressType})
+            this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
                     resolve =>
                     {
@@ -108,6 +131,10 @@ Vue.component("create-update-address", {
                         {
                             this._handleValidationErrors(error.validation_errors);
                         }
+                        else if (error.error)
+                        {
+                            this._handleError(error.error);
+                        }
                     }
                 );
         },
@@ -120,7 +147,7 @@ Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
-            this.$store.dispatch("createAddress", {address: this.addressData, addressType: this.addressType})
+            this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
                     response =>
                     {
@@ -135,13 +162,17 @@ Vue.component("create-update-address", {
                         {
                             this._handleValidationErrors(error.validation_errors);
                         }
+                        else if (error.error)
+                        {
+                            this._handleError(error.error);
+                        }
                     }
                 );
         },
 
         _handleValidationErrors(validationErrors)
         {
-            ValidationService.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+            ValidationService.markFailedValidationFields(this.$refs.addressForm, validationErrors);
 
             let errorMessage = "";
 
@@ -151,6 +182,16 @@ Vue.component("create-update-address", {
             }
 
             NotificationService.error(errorMessage);
+        },
+
+        _handleError(error)
+        {
+            if (error.code === 11)
+            {
+                NotificationService.error({ code: error.code, message: "" });
+                window.location.reload();
+            }
+            else this._handleValidationErrors(error);
         },
 
         _syncOptionTypesAddressData()
@@ -163,41 +204,54 @@ Vue.component("create-update-address", {
                     switch (optionType.typeId)
                     {
                     case 1:
+                    {
+                        if (!isNullOrUndefined(this.addressData.vatNumber) && this.addressData.vatNumber !== optionType.value)
                         {
-                            if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value)
-                            {
-                                optionType.value = this.addressData.vatNumber;
-                            }
-
-                            break;
+                            optionType.value = this.addressData.vatNumber;
                         }
 
-                    case 9:
-                        {
-                            if (this.addressData.birthday && this.addressData.birthday !== optionType.value)
-                            {
-                                optionType.value = this.addressData.birthday;
-                            }
-                            break;
-                        }
-
-                    case 11:
-                        {
-                            if (this.addressData.title && this.addressData.title !== optionType.value)
-                            {
-                                optionType.value = this.addressData.title;
-                            }
-                            break;
-                        }
-
+                        break;
+                    }
                     case 4:
+                    {
+                        if (!isNullOrUndefined(this.addressData.telephone) && this.addressData.telephone !== optionType.value)
                         {
-                            if (this.addressData.telephone && this.addressData.telephone !== optionType.value)
-                            {
-                                optionType.value = this.addressData.telephone;
-                            }
-                            break;
+                            optionType.value = this.addressData.telephone;
                         }
+                        break;
+                    }
+                    case 6:
+                    {
+                        if (!isNullOrUndefined(this.addressData.postNumber) && this.addressData.postNumber !== optionType.value)
+                        {
+                            optionType.value = this.addressData.postNumber;
+                        }
+                        break;
+                    }
+                    case 9:
+                    {
+                        if (!isNullOrUndefined(this.addressData.birthday) && this.addressData.birthday !== optionType.value)
+                        {
+                            optionType.value = this.addressData.birthday;
+                        }
+                        break;
+                    }
+                    case 11:
+                    {
+                        if (!isNullOrUndefined(this.addressData.title) && this.addressData.title !== optionType.value)
+                        {
+                            optionType.value = this.addressData.title;
+                        }
+                        break;
+                    }
+                    case 12:
+                    {
+                        if (!isNullOrUndefined(this.addressData.contactPerson) && this.addressData.contactPerson !== optionType.value)
+                        {
+                            optionType.value = this.addressData.contactPerson;
+                        }
+                        break;
+                    }
                     }
                 }
             }
@@ -206,6 +260,20 @@ Vue.component("create-update-address", {
         emitInputEvent(event)
         {
             this.$emit("input", event);
+
+            this.checkInputEventForUnmarkFields(event);
+        },
+
+        checkInputEventForUnmarkFields(event)
+        {
+            const genderCondition = event.field === "gender" && event.field.value !== this.addressData.gender;
+            const countryCondition = event.field === "countryId" && event.field.value !== this.addressData.countryId;
+            const pickupCondition = event.field === "showPickupStation" && event.field.value !== this.addressData.showPickupStation;
+
+            if (genderCondition || countryCondition || pickupCondition)
+            {
+                ValidationService.unmarkAllFields(this.$refs.addressForm);
+            }
         }
     }
 });

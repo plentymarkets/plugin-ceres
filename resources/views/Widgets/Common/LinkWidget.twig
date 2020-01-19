@@ -1,0 +1,45 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set icon            = widget.settings.icon.mobile %}
+{% set buttonSize      = widget.settings.buttonSize.mobile %}
+{% set block           = widget.settings.block.mobile %}
+{% set text            = widget.settings.text.mobile %}
+{% set url             = widget.settings.url %}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set appearance      = widget.settings.appearance.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% if not isPreview %}
+    {% if url.type.mobile == 'internalLink' %}
+        {% if url.value.mobile == 'tracking' %}
+            {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
+        {% elseif url.value.mobile == 'return' %}
+            {{ Twig.if("data.isReturnable") }}
+                {{ Twig.set('real_url', Twig.call("urls.returns", [Twig.var('data.order.id')])) }}
+            {{ Twig.endif() }}
+        {% endif %}
+    {% else %}
+        {{ WidgetHelper.setUrlVariable('real_url', url.value.mobile, url.type.mobile) }}
+    {% endif %}
+{% endif %}
+
+{{ Twig.if("real_url or #{ isPreview | json_encode }") }}
+<div v-truncate-tooltip class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
+    <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+    href="{{ Twig.print("real_url") }}"
+    {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
+    style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
+    data-toggle="tooltip" title="">
+        {%- if icon != "none" -%}
+            <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
+        {%- endif -%}
+        {{- text -}}
+    </a>
+</div>
+{{ Twig.endif() }}

@@ -1,66 +1,78 @@
+import Vue from "vue";
+import { mapState } from "vuex";
+
 Vue.component("category-item", {
-
-    delimiters: ["${", "}"],
-
-    template: "#vue-category-item",
-
-    props: [
-        "decimalCount",
-        "itemData",
-        "imageUrlAccessor"
-    ],
-
-    data()
+    props:
     {
-        return {
-            recommendedRetailPrice: 0,
-            variationRetailPrice  : 0
-        };
+        template:
+        {
+            type: String,
+            default: "#vue-category-item"
+        },
+        decimalCount:
+        {
+            type: Number,
+            default: 0
+        },
+        imageUrlAccessor:
+        {
+            type: String,
+            default: "urlMiddle"
+        },
+        itemData:
+        {
+            type: Object
+        },
+        disableCarouselOnMobile:
+        {
+            type: Boolean
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        },
+        urlWithVariationId:
+        {
+            type: Boolean,
+            default: true
+        }
     },
+
+    jsonDataFields: [
+        "itemDataRef"
+    ],
 
     computed:
     {
+        item()
+        {
+            return this.itemData || this.itemDataRef;
+        },
+
         /**
          * returns itemData.item.storeSpecial
          */
         storeSpecial()
         {
-            return this.itemData.item.storeSpecial;
+            return this.item.item.storeSpecial;
         },
 
         /**
-         * returns itemData.texts[0]
+         * returns itemData.texts
          */
         texts()
         {
-            return this.itemData.texts;
+            return this.item.texts;
         },
 
-        ...Vuex.mapState({
+        ...mapState({
             showNetPrices: state => state.basket.showNetPrices
         })
-    },
-
-    created()
-    {
-        if (this.itemData.prices.rrp)
-        {
-            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
-        }
-        this.variationRetailPrice = this.itemData.prices.default.price.value;
-    },
-
-    methods:
-    {
-        loadFirstImage()
-        {
-            const categoryImageCarousel = this.$refs.categoryImageCarousel;
-
-            if (categoryImageCarousel)
-            {
-                categoryImageCarousel.loadFirstImage();
-            }
-        }
     }
-
 });

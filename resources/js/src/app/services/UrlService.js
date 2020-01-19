@@ -1,63 +1,163 @@
-import $ from "jquery";
-import {isNullOrUndefined}from "../helper/utils";
-import {normalizeUrl}from "../helper/url";
+import { isDefined, isNullOrUndefined } from "../helper/utils";
+import { normalizeUrl } from "../helper/url";
+import store from "../store/index";
+import { set } from "../helper/set";
+
+function _parseUrlParam(paramKey, paramValue, result)
+{
+    if (isNullOrUndefined(result))
+    {
+        result = {};
+    }
+
+    const regex = /(^([^\[]+)|\[([^\]]*)\])/gm;
+    let match;
+    const keyList = [];
+
+    while ((match = regex.exec(paramKey)) !== null)
+    {
+        if (match.index === regex.lastIndex)
+        {
+            regex.lastIndex++;
+        }
+
+        keyList.push(match[2] || match[3]);
+    }
+
+    return set(result, keyList, paramValue);
+}
+
+function _createQueryString(params)
+{
+    const _createParamStrings = function(params, prefix, result)
+    {
+        if ( Array.isArray(params) )
+        {
+            params.forEach(param =>
+            {
+                _createParamStrings(param, prefix + "[]", result);
+            });
+        }
+        else if ( typeof params === "object" )
+        {
+            for ( const key in params)
+            {
+                if ( prefix.length > 0 )
+                {
+                    _createParamStrings(params[key], prefix + "[" + key + "]", result);
+                }
+                else
+                {
+                    _createParamStrings(params[key], key, result);
+                }
+            }
+        }
+        else
+        {
+            result.push(
+                encodeURIComponent(prefix) + "=" + encodeURIComponent(params)
+            );
+        }
+
+        return result;
+    };
+
+    const paramStrings = _createParamStrings(params, "", []);
+
+    if (paramStrings.length > 0)
+    {
+        return "?" + paramStrings.join("&");
+    }
+
+    return "";
+}
 
 export function getUrlParams(urlParams)
 {
-    if (urlParams)
+    if (isNullOrUndefined(urlParams) && isDefined(document.location.search))
     {
-        var tokens;
-        var params = {};
-        var regex = /[?&]?([^=]+)=([^&]*)/g;
-
-        urlParams = urlParams.split("+").join(" ");
-
-        // eslint-disable-next-line
-        while (tokens = regex.exec(urlParams))
-        {
-            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-        }
-
-        return params;
+        urlParams = document.location.search;
     }
 
-    return {};
-}
+    const regex = /[\\?&]([^=&#]+)=([^&#]*)/gm;
+    let result = {};
+    let match;
 
-export function setUrlParams(urlParams)
-{
-    var pathName = window.location.pathname;
-    var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
-    var titleElement = document.getElementsByTagName("title")[0];
-
-    window.history.replaceState({requireReload: true}, titleElement ? titleElement.innerHTML : "", pathName + params);
-
-    $("a[href][data-update-url]").each((i, element) =>
+    while ((match = regex.exec(urlParams)) !== null)
     {
-        const $element  = $(element);
-        const href      = /^([^?]*)(\?.*)?$/.exec($element.attr("href"));
-
-        if (href && href[1])
+        if (match.index === regex.lastIndex)
         {
-            $element.attr("href", href[1] + params);
+            regex.lastIndex++;
         }
-    });
+        result = _parseUrlParam(decodeURIComponent(match[1]), decodeURIComponent(match[2]), result);
+    }
+
+    return result;
 }
 
-export function setUrlParam(key, value)
+export function setUrlParams(urlParams, pushState = true)
 {
-    var urlParams = getUrlParams(document.location.search);
+    const pathName =
+        isDefined(store.state.navigation.currentCategory) &&
+        isDefined(store.state.navigation.currentCategory.url) ?
+            store.state.navigation.currentCategory.url :
+            window.location.pathname;
 
-    if (value !== null)
+    const params = _createQueryString(urlParams);
+    const titleElement = document.getElementsByTagName("title")[0];
+
+    if (pushState)
     {
-        urlParams[key] = value;
+        window.history.pushState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash );
     }
     else
     {
-        delete urlParams[key];
+        window.history.replaceState({ requireReload: true }, titleElement ? titleElement.innerHTML : "", pathName + params + window.location.hash );
     }
 
-    setUrlParams(urlParams);
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title: titleElement ? titleElement.innerHTML : "", url:pathName + params + window.location.hash } }));
+
+    Array.prototype
+        .slice
+        .call(document.querySelectorAll("a[href][data-update-url]"))
+        .forEach(element =>
+        {
+            const href = /^([^?]*)(\?.*)?$/.exec(element.href);
+
+            if (href && href[1])
+            {
+                element.href = href[1] + params;
+            }
+        });
+}
+
+export function setUrlParam(urlParam)
+{
+    const urlParams = getUrlParams();
+
+    for (const key in urlParam)
+    {
+        urlParams[key] = urlParam[key];
+    }
+
+    setUrlParams(urlParams, false);
+}
+
+export function removeUrlParam(urlParamToDelete)
+{
+    removeUrlParams([urlParamToDelete]);
+}
+
+export function removeUrlParams(urlParamsToDelete)
+{
+    const urlParams = getUrlParams();
+
+    for (const param of urlParamsToDelete)
+    {
+        delete urlParams[param];
+    }
+
+    setUrlParams(urlParams, false);
 }
 
 export function navigateTo(url)
@@ -66,14 +166,55 @@ export function navigateTo(url)
     window.location.assign(url);
 }
 
-export function switchUrl(url, title)
+export function navigateToParams(urlParams)
 {
-    if (isNullOrUndefined(title))
-    {
-        title = document.getElementsByTagName("title")[0].innerHTML;
-    }
-    url = normalizeUrl(url);
-    window.history.pushState({requireReload: true}, title, url);
+    const url = normalizeUrl(window.location.pathname + "?" + encodeParams(urlParams));
+
+    window.location.assign(url);
 }
 
-export default {setUrlParam, setUrlParams, getUrlParams, navigateTo, switchUrl};
+export function encodeParams(params, prefix)
+{
+    if (isNullOrUndefined(params))
+    {
+        return "";
+    }
+
+    if (Array.isArray(params))
+    {
+        return params.map((listValue, i) =>
+        {
+            return encodeParams(listValue, `${prefix}[${i}]`);
+        }).join("&");
+    }
+    else if (typeof params === "object")
+    {
+        return Object.keys(params)
+            .filter(key =>
+            {
+                return !(isNaN(params[key]) && typeof params[key] === "number") && !isNullOrUndefined(params[key]);
+            })
+            .map(key =>
+            {
+                return encodeParams(params[key], !isNullOrUndefined(prefix) ? `${prefix}[${key}]` : key);
+            })
+            .join("&");
+    }
+
+    if (isNullOrUndefined(prefix))
+    {
+        return encodeURIComponent(params);
+    }
+    return prefix + "=" + encodeURIComponent(params);
+}
+
+export function setUrlByItem(itemData, keepVariationId)
+{
+    const url = vueApp.$options.filters.itemURL(itemData, keepVariationId);
+    const title = document.getElementsByTagName("title")[0].innerHTML;
+
+    window.history.replaceState({}, title, url);
+    document.dispatchEvent(new CustomEvent("onHistoryChanged", { detail: { title, url } }));
+}
+
+export default { setUrlParams, getUrlParams, navigateTo, setUrlParam, removeUrlParams, removeUrlParam, setUrlByItem };

@@ -1,0 +1,30 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+
+{{ Twig.component("Ceres::MyAccount.Components.BankDataSelect") }}
+
+{{ Twig.set("userBankData", Twig.call("services.contactBank.getBanksOfContact", ["$frontend.Account.AccountContactId"])) }}
+{% set appearance = widget.settings.appearance.mobile %}
+{% set hintText = widget.settings.text.mobile %}
+
+<div class="widget widget-bank-details widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        {% if hintText is empty %}
+            <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountBankDetails")) }}</h3>
+            <p><em>{{ Twig.trans("Ceres::Template.myAccountChangePaymentInformation") }}</em></p>
+        {% else %}
+            {{ hintText | raw }}
+        {% endif %}
+    </div>
+
+    <bank-data-select :user-bank-data="{{ Twig.print("userBankData | json_encode") }}" contact-id="{{ Twig.print("frontend.Account.AccountContactId | json_encode") }}"></bank-data-select>
+</div>

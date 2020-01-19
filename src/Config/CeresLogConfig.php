@@ -9,6 +9,7 @@ class CeresLogConfig extends PluginConfig
 {
     public $data;
     public $performanceLevel;
+    public $checkSyntax;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -31,5 +32,6 @@ class CeresLogConfig extends PluginConfig
         );
 
         $this->performanceLevel = $this->getTextValue( "log.performance.level", "live" );
+        $this->checkSyntax = $this->getBooleanValue("log.check_syntax", true);
     }
 }

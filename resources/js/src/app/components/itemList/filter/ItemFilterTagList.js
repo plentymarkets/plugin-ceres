@@ -1,25 +1,52 @@
+import Vue from "vue";
+import { mapState, mapMutations, mapActions } from "vuex";
+
 Vue.component("item-filter-tag-list", {
 
-    delimiters: ["${", "}"],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-item-filter-tag-list"
+        },
+        marginClasses:
+        {
+            type: String,
+            default: null
+        },
+        marginInlineStyles:
+        {
+            type: String,
+            default: null
+        }
+    },
 
-    props: [
-        "template"
-    ],
-
-    computed: Vuex.mapState({
+    computed: mapState({
         tagList: state => state.itemList.selectedFacets
     }),
-
-    created()
-    {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
-    },
 
     methods:
     {
         removeTag(tag)
         {
-            this.$store.dispatch("selectFacet", tag);
-        }
+            this.selectFacet({ facetValue: tag });
+            this.loadItemList();
+        },
+
+        resetAllTags()
+        {
+            this.resetAllSelectedFacets();
+            this.loadItemList();
+        },
+
+        ...mapMutations([
+            "resetAllSelectedFacets"
+        ]),
+
+        ...mapActions([
+            "selectFacet",
+            "loadItemList"
+        ])
     }
 });

@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "./utils";
+import { isNullOrUndefined } from "./utils";
 
 const MonetaryFormatter = (function()
 {
@@ -36,12 +36,15 @@ const MonetaryFormatter = (function()
                 });
                 pattern = pattern.substr(5);
             }
-            else if (pattern.indexOf(".00") === 0)
+            else if (/^\.0+/.test(pattern))
             {
+                const match = /^\.(0+)/.exec(pattern);
+
                 parsed.push({
-                    type: T_DECIMAL
+                    type: T_DECIMAL,
+                    value: match[1].length
                 });
-                pattern = pattern.substr(3);
+                pattern = pattern.substr(match[0].length);
             }
             else if (pattern.indexOf("-") === 0)
             {
@@ -61,27 +64,6 @@ const MonetaryFormatter = (function()
         }
 
         return parsed;
-    }
-
-    function _getDecimalValue(value)
-    {
-        const extend = 0;
-
-        value += "";
-
-        if (value.length === 1)
-        {
-            value = extend + value;
-        }
-        else
-        {
-            while (value.length < 2)
-            {
-                value += extend;
-            }
-        }
-
-        return value;
     }
 
     MonetaryFormatter.prototype.setPattern = function(pattern)
@@ -128,6 +110,21 @@ const MonetaryFormatter = (function()
             }
         }
 
+        const formatDecimals = (value, numberOfDecimals) =>
+        {
+            // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
+            let result =  Math.round((value + (1/Number.MAX_SAFE_INTEGER)) * Math.pow(10, numberOfDecimals))
+                .toFixed(0)
+                .substr(-1 * numberOfDecimals, numberOfDecimals);
+
+            while (result.length < numberOfDecimals)
+            {
+                result = "0" + result;
+            }
+
+            return result;
+        };
+
         return prefix + this.pattern[patternIndex].map((partial, index, pattern) =>
         {
             switch (partial.type)
@@ -138,7 +135,11 @@ const MonetaryFormatter = (function()
                     value *= -1;
                 }
                 // check if pattern include decimals to decide if digits should be rounded or not
-                const roundDigits = !pattern.some(subpattern => subpattern.type === T_DECIMAL);
+                const roundDigits = !pattern.some(subpattern =>
+                {
+                    return subpattern.type === T_DECIMAL
+                        && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
+                });
 
                 // cut decimal places instead of rounding
                 // revert the value to insert thousands separators next
@@ -158,7 +159,9 @@ const MonetaryFormatter = (function()
                 return digits;
             }
             case T_DECIMAL: {
-                return this.separatorDecimals + _getDecimalValue(Math.floor(value * 1000 / 10).toFixed(0).substr(-2, 2));
+                const numberOfDecimals = parseInt(partial.value);
+
+                return this.separatorDecimals + formatDecimals(value, numberOfDecimals);
             }
             case T_CURRENCY: {
                 return currency;
@@ -170,7 +173,7 @@ const MonetaryFormatter = (function()
                 return partial.value;
             }
             default: {
-                console.warn("Unkown pattern type: " + partial.type);
+                console.warn("Unknown pattern type: " + partial.type);
                 return "";
             }
             }

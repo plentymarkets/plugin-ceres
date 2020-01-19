@@ -1,4 +1,5 @@
-import $ from "jquery";
+import { isMail } from "../helper/strings";
+import { isNull } from "../helper/utils";
 
 let $form;
 
@@ -98,14 +99,23 @@ export function unmarkAllFields(form)
         const $elem = $(elem);
 
         $elem.removeClass("error");
+
+        _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
     });
 }
 
 function _validateElement(elem)
 {
-    const $elem          = $(elem);
+    const $elem = $(elem);
+
+    /** return if the attribute data-validate is not present on the element */
+    if (!$elem[0].attributes.hasOwnProperty("data-validate"))
+    {
+        return true;
+    }
+
     const validationKeys = $elem.attr("data-validate").split("|").map(function(i)
-        {
+    {
         return i.trim();
     }) || ["text"];
     let hasError       = false;
@@ -157,7 +167,7 @@ function _validateGroup($formControl, validationKey)
 {
     const groupName = $formControl.attr("name");
     const $group    = $form.find("[name=\"" + groupName + "\"]");
-    const range     = _eval(validationKey) || {min: 1, max: 1};
+    const range     = _eval(validationKey) || { min: 1, max: 1 };
     const checked   = $group.filter(":checked").length;
 
     return checked >= range.min && checked <= range.max;
@@ -170,6 +180,7 @@ function _validateSelect($formControl, validationKey)
 
 function _validateInput($formControl, validationKey)
 {
+
     switch (validationKey)
     {
     case "text":
@@ -178,17 +189,19 @@ function _validateInput($formControl, validationKey)
         return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
     case "ref":
         return _compareRef($.trim($formControl.val()), $.trim($formControl.attr("data-validate-ref")));
+    case "date":
+        return _isValidDate($formControl);
     case "mail":
         return _isMail($formControl);
     case "password":
         return _isPassword($formControl);
     case "regex":
-        {
-            const ref = $formControl.attr("data-validate-ref");
-            const regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+    {
+        const ref = $formControl.attr("data-validate-ref");
+        const regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
 
-            return _hasValue($formControl) && regex.test($.trim($formControl.val()));
-        }
+        return _hasValue($formControl) && regex.test($.trim($formControl.val()));
+    }
     default:
         console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
         return true;
@@ -201,14 +214,40 @@ function _hasValue($formControl)
 }
 
 /**
+ * @param {any} $formControl - Input inside Formular
+ * @returns value is valid date
+ */
+function _isValidDate($formControl)
+{
+    const string = $formControl.val();
+    const match = string.match(/^(?:(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4}))|(?:(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2}))$/);
+
+    // If match is null date is not valid
+    if (isNull(match))
+    {
+        return false;
+    }
+
+    const year = match[3] || match[4];
+    const month = match[2] || match[5];
+    const day = match[1] || match[6];
+
+    // Additional checks
+    if ((year >= 1901) && (month >= 1 && month <= 12) && (day >= 1 && day <= 31))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+/**
  * @param {any} value
  * @returns value is valid mail
  */
 function _isMail($formControl)
 {
-    const mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-    return mailRegEx.test($formControl.val());
+    return isMail($formControl.val());
 }
 
 /**
@@ -252,7 +291,7 @@ function _isActive($elem)
 function _eval(input)
 {
     // eslint-disable-next-line
-    return (new Function("return " + input))();
+    return (new Function(`return ${ input };`))();
 }
 
-export default {validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields};
+export default { validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields };

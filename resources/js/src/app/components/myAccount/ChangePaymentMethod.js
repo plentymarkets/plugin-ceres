@@ -1,21 +1,43 @@
-const ModalService        = require("services/ModalService");
-const ApiService          = require("services/ApiService");
+const ModalService        = require("../../services/ModalService");
+const ApiService          = require("../../services/ApiService");
 
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("change-payment-method", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template",
-        "currentOrder",
-        "allowedPaymentMethods",
-        "changePossible",
-        "paymentStatus",
-        "currentTemplate",
-        "currentPaymentMethodName"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-change-payment-method"
+        },
+        currentOrder:
+        {
+            type: Object
+        },
+        allowedPaymentMethods:
+        {
+            type: Array
+        },
+        changePossible:
+        {
+            type: Boolean
+        },
+        paymentStatus:
+        {
+            type: String
+        },
+        currentTemplate:
+        {
+            type: String
+        },
+        currentPaymentMethodName:
+        {
+            type: String
+        }
+    },
 
     data()
     {
@@ -26,11 +48,6 @@ Vue.component("change-payment-method", {
             isPending: false,
             showErrorMessage: false
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     /**
@@ -48,7 +65,7 @@ Vue.component("change-payment-method", {
     {
         checkChangeAllowed()
         {
-            ApiService.get("/rest/io/order/payment", {orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod})
+            ApiService.get("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod })
                 .done(response =>
                 {
                     // TODO: research - if response should be false, it returns an object
@@ -103,7 +120,7 @@ Vue.component("change-payment-method", {
         updateAllowedPaymentMethods(paymentMethodId)
         {
 
-            ApiService.get("/rest/io/order/paymentMethods", {orderId: this.currentOrder.id, paymentMethodId: paymentMethodId})
+            ApiService.get("/rest/io/order/paymentMethods", { orderId: this.currentOrder.id, paymentMethodId: paymentMethodId })
                 .done(response =>
                 {
                     this.compAllowedPaymentMethods = response;
@@ -117,10 +134,10 @@ Vue.component("change-payment-method", {
         {
             this.isPending = true;
 
-            ApiService.post("/rest/io/order/payment", {orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod})
+            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod })
                 .done(response =>
                 {
-                    document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", {detail: {oldOrder: this.currentOrder, newOrder: response}}));
+                    document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: this.currentOrder, newOrder: response } }));
 
                     this.updateOrderHistory(response);
                     this.updateAllowedPaymentMethods(this.getPaymentId(response.order.properties));

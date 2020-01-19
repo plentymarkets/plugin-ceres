@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapState } from "vuex";
+
 Vue.component("shipping-address-select", {
 
     delimiters: ["${", "}"],
@@ -6,30 +9,54 @@ Vue.component("shipping-address-select", {
         <address-select
             ref:shipping-address-select
             template="#vue-address-select"
-            v-on:address-changed="addressChanged"
-            address-type="2">
+            @address-changed="addressChanged"
+            address-type="2"
+            :optional-address-fields="optionalAddressFields"
+            :required-address-fields="requiredAddressFields"
+            :default-salutation="defaultSalutation"
+            :padding-classes="paddingClasses"
+            :padding-inline-styles="paddingInlineStyles">
         </address-select>
     `,
 
-    props: [
-        "selectedAddressId",
-        "addressList"
-    ],
+    props:
+    {
+        optionalAddressFields:
+        {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        requiredAddressFields:
+        {
+            type: Object,
+            default: () =>
+            {
+                return {};
+            }
+        },
+        defaultSalutation:
+        {
+            type: String,
+            default: "male"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        }
+    },
 
-    computed: Vuex.mapState({
+    computed: mapState({
         deliveryAddressId: state => state.address.deliveryAddressId
     }),
-
-    created()
-    {
-        if (!this.addressList)
-        {
-            this.addressList = [];
-        }
-        // Adds the dummy entry for "delivery address same as invoice address"
-        this.addressList.unshift({id: -99});
-        this.$store.dispatch("initDeliveryAddress", {id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList});
-    },
 
     methods:
     {
@@ -39,11 +66,11 @@ Vue.component("shipping-address-select", {
          */
         addressChanged(selectedAddress)
         {
-            this.$store.dispatch("selectAddress", {selectedAddress, addressType: "2"})
+            this.$store.dispatch("selectAddress", { selectedAddress, addressType: "2" })
                 .then(
                     response =>
                     {
-                        document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", {detail: this.deliveryAddressId}));
+                        document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: this.deliveryAddressId }));
                     },
                     error =>
                     {

@@ -1,9 +1,17 @@
+import { isNullOrUndefined } from "../../helper/utils";
+import { setUrlByItem } from "../../services/UrlService";
+import Vue from "vue";
+
+const ApiService = require("../../services/ApiService");
+
 const state =
     {
         variation: {},
-        variationList: [],
+        variationCache: {},
+        variationMarkInvalidProperties: false,
         variationOrderQuantity: 1,
-        variationMarkInvalidProperties: false
+        initialVariationId: 0,
+        pleaseSelectVariationId: 0
     };
 
 const mutations =
@@ -15,14 +23,26 @@ const mutations =
             {
                 state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
             }
+
+            state.variationCache[variation.documents[0].id] = variation;
+
+            if (state.initialVariationId <= 0)
+            {
+                state.initialVariationId = variation.documents[0].id;
+            }
+
+
         },
 
-        setVariationList(state, variationList)
+        setPleaseSelectVariationId(state, variationId)
         {
-            state.variationList = variationList;
+            if (state.pleaseSelectVariationId <= 0 && variationId > 0)
+            {
+                state.pleaseSelectVariationId = variationId;
+            }
         },
 
-        setVariationOrderProperty(state, {propertyId, value})
+        setVariationOrderProperty(state, { propertyId, value })
         {
             const index = state.variation.documents[0].data.properties.findIndex(property => property.property.id === propertyId);
 
@@ -49,6 +69,44 @@ const mutations =
 
 const actions =
     {
+        loadVariation({ state, commit }, variationId)
+        {
+            return new Promise(resolve =>
+            {
+                const variation = variationId <= 0
+                    ? state.variationCache[state.pleaseSelectVariationId > 0 ? state.pleaseSelectVariationId : state.initialVariationId]
+                    : state.variationCache[variationId];
+
+                if (variation)
+                {
+                    commit("setVariation", variation);
+
+                    setUrlByItem(variation.documents[0].data, variationId > 0);
+                    resolve(variation);
+                }
+                else
+                {
+                    let keepVariationId = true;
+
+                    if (variationId <= 0)
+                    {
+                        variationId = state.pleaseSelectVariationId;
+                        keepVariationId = false;
+                    }
+
+                    ApiService
+                        .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem" })
+                        .done(response =>
+                        {
+                            // store received variation data for later reuse
+                            commit("setVariation", response);
+
+                            setUrlByItem(response.documents[0].data, keepVariationId);
+                            resolve(response);
+                        });
+                }
+            });
+        }
     };
 
 const getters =
@@ -109,9 +167,16 @@ const getters =
 
         variationTotalPrice(state, getters, rootState, rootGetters)
         {
-            const graduatedPrice = getters.variationGraduatedPrice;
+            const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-            return getters.variationPropertySurcharge + (graduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0);
+            if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
+            {
+                const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+
+                return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+            }
+
+            return null;
         },
 
         variationGroupedProperties(state)
@@ -124,7 +189,7 @@ const getters =
             if (state.variation.documents[0].data.properties)
             {
                 const orderPropertyList = state.variation.documents[0].data.properties.filter(property => property.property.isShownOnItemPage && property.property.isOderProperty);
-                const groupIds = [... new Set(orderPropertyList.map(property => property.group && property.group.id))];
+                const groupIds = [...new Set(orderPropertyList.map(property => property.group && property.group.id))];
                 const groups = [];
 
                 for (const id of groupIds)
@@ -139,7 +204,7 @@ const getters =
                         group: groupProperties[0].group,
                         properties: groupProperties.map(property =>
                         {
-                            return {...property.property, itemSurcharge: property.surcharge};
+                            return { ...property.property, itemSurcharge: property.surcharge };
                         })
                     });
                 }
@@ -156,8 +221,7 @@ const getters =
             {
                 let missingProperties = state.variation.documents[0].data.properties.filter(property =>
                 {
-                    // selection isn't supported yet
-                    return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file" && property.property.isOderProperty;
+                    return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
                 });
 
                 if (missingProperties.length)
@@ -175,11 +239,11 @@ const getters =
                         return null;
                     });
 
-                    radioInformation = [... new Set(radioInformation.filter(id => id))];
+                    radioInformation = [...new Set(radioInformation.filter(id => id))];
 
                     const radioIdsToRemove = [];
 
-                    for (const radioGroupId of [... new Set(radioInformation.map(radio => radio.groupId))])
+                    for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
                     {
                         const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
 
@@ -199,6 +263,11 @@ const getters =
             }
 
             return [];
+        },
+
+        currentItemVariation(state)
+        {
+            return state.variation.documents && state.variation.documents[0] && state.variation.documents[0].data;
         }
     };
 

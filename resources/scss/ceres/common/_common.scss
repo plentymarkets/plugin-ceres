@@ -1,5 +1,11 @@
-body .wrapper-main{
+body, body .wrapper-main{
     overflow-x: hidden;
+}
+
+.sb-no-animation.collapsing {
+    -webkit-transition: none !important;
+    transition: none !important;
+    display: none !important;
 }
 
 .hidden {
@@ -12,12 +18,21 @@ body .wrapper-main{
     }
 }
 
+.category-contact .main .container-max
+{
+    background-color: $white;
+    padding-top: $spacer;
+    margin-top: 2 * $spacer;
+    margin-bottom: 2 * $spacer;
+}
+
 .page-content{
-    @extend .p-t-1;
+    padding-top: $spacer;
     background-color: $gray-lightest;
     &.basket,
     &.checkout,
     &.contact,
+    &.wishlist,
     &.myaccount {
         &:not(.checkout):not(.basket) {
             background-color: $white;
@@ -41,19 +56,25 @@ body .wrapper-main{
     i.fa-search {
         font-size: 10em;
     }
+    i.fa-home {
+        margin-left: 5px;
+        margin-top: 2px;
+    }
     .default-not-found {
         background-color: rgb(247, 247, 249);
     }
-    .not-found-text {
-        font-size: 115px;
-        text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
-    }
+}
+
+.not-found-text {
+    font-size: 115px;
+    text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
 }
 
 .rating{
     line-height: 1;
 
-    .tag{
+    .tag,
+    .badge {
         padding-right: 0;
         overflow: hidden;
         cursor: pointer;
@@ -107,52 +128,42 @@ a:active {
     background-size: 100% 100%;
 }
 
-.pagination > li {
-    cursor: pointer;
+.content-center {
+    margin: 0 auto;
+    float: none;
 }
 
-@include media-breakpoint-up(xl){
-    .page-content{
-        padding-left: 0;
-        padding-right: 0;
-        &.basket,
-        &.checkout,
-        &.contact,
-        &.myaccount {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.text-wrap {
+  white-space: normal;
+}
+
+.is_stuck {
+    z-index: 1;
+}
+
+.sticky-element.is-sticky {
+    z-index: $zindex-sticky !important;
+}
+
+.inline-select {
+    margin-left: -7px;
+    text-decoration: underline;
+    font-weight: inherit;
+}
+
+@each $color, $value in $theme-colors {
+    @include bg-variant(".bg-#{$color}", $value);
+    .bg-#{$color} {
+        @include context-bg($value);
     }
 }
 
-.float-right {
-    float: right !important;
-}
-
-.bg-white {
-    background-color: $white !important;
-}
-
-.text-gray-dark {
-    color: $gray-dark;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.d-table {
-    display: table;
-}
-
-.border-radius-0 {
-    border-radius: 0;
-}
-
-.border-top-0 {
-    border-top: 0 !important;
-}
-
-.position-fixed {
-    position: fixed !important;
+.fa.none {
+    @extend .fa-circle;
+    color: transparent !important;
 }

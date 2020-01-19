@@ -1,0 +1,30 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
+{{ Twig.component("Ceres::Checkout.Components.PlaceOrder") }}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set buttonSize = widget.settings.buttonSize.mobile %}
+{% set appearance = widget.settings.appearance.mobile %}
+
+<div class="widget widget-place-order widget-{{ appearance | default("success") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforePlaceOrder"])) }}
+
+    <place-order
+        {% if buttonSize is not empty %}button-size="{{ buttonSize }}"{% endif %}
+        target-continue="{{ Twig.print("homepageURL") }}{{ Twig.if("homepageURL | last != '/'") }}/{{ Twig.endif() }}place-order{{ Twig.if("urls.appendTrailingSlash") }}/{{ Twig.endif() }}{{ Twig.if("services.checkout.getReadOnlyCheckout() == 1") }}?readonlyCheckout=1{{ Twig.endif() }}"
+        @payment-response="checkoutComp.showModal($event)"
+        {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+        {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+    </place-order>
+    
+    {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterPlaceOrder"])) }}
+</div>

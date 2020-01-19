@@ -1,5 +1,8 @@
-body {
+html {
+	font-size: $font-size-root;
+}
 
+body {
 	background-color: $gray-lightest;
 
 	> #vue-app,
@@ -9,22 +12,17 @@ body {
 		
 		&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 			position 	: absolute;
-			z-index 	: $zIndex-8;
-
-			.wrapper-inner{
-				
-			}
-		} 
-
-		.wrapper-main{
-			position: relative;
-			//z-index: $zIndex-1;
+			z-index 	: $zindex-wrapper;
 		}
-		
-		.wrapper-top {
+		&>.wrapper-top {
+			z-index 	: $zindex-wrapper +1;
 			top 		: 0;
 			right 		: 0;  
 			left 		: 0;
+		}
+
+		.wrapper-main{
+			position: relative;
 		}
 		
 		.wrapper-right {
@@ -65,7 +63,12 @@ body {
 		&.open-left,
 		&.open-top,
 		&.open-bottom{
-			margin-top: 0 !important;
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-top: 0 !important;
+			}
+			
 			// dark overlay on body
 			&::after{
 				content : "";
@@ -116,19 +119,12 @@ body {
 			}
 		}
 
-		@include media-breakpoint-up(sm){
-		}
-
 		@include media-breakpoint-up(md){
 			&.open-right{
 				.wrapper-right{
 					width: $aside-columns-width;
 				}
 			}
-		}
-
-		@include media-breakpoint-up(lg){
-			
 		}
 	}
 }

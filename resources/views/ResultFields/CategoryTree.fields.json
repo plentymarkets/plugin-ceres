@@ -1,0 +1,11 @@
+[
+    "id",
+    "type",
+    "details.name",
+    "details.lang",
+    "details.nameUrl",
+    "details.metaTitle",
+    "details.imagePath",
+    "details.image2Path",
+    "itemCount"
+]

@@ -1,0 +1,27 @@
+.popover[x-placement="bottom"]
+{
+    .arrow::after
+    {
+        border-bottom-color: $popover-header-bg;
+    }
+}
+
+.popover .popover-body > [data-builder-child-container]
+{
+    min-width: 190px;
+}
+
+.popover
+{
+    &.popover-md
+    {
+        width: $popover-max-width-md;
+        max-width: $popover-max-width-md;
+    }
+
+    &.popover-lg
+    {
+        width: $popover-max-width-lg;
+        max-width: $popover-max-width-lg;
+    }
+}

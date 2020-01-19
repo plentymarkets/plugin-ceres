@@ -2,77 +2,39 @@
 
 {% set gCapture = config("Ceres.global.google_recaptcha_api_key") %}
 
-<script type="x/template" id="vue-login">
-    
+<script type="x/template" id="vue-login">  
     <div class="login-pwd-reset">
-        <form :id="'login-form-' + _uid" class="login-container">
+        <form :id="'login-form-' + _uid" method="post" class="login-container">
             <div :class="{'modal-body': modalElement}">
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-12">
                         <div class="input-unit" data-validate="mail">
-                            {% set uid_mail = uid() %}
-                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
-                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
+                            <input type="email" name="email" autocomplete="email" :id="'email' + _uid" v-model="username" data-autofocus>
+                            <label :for="'email' + _uid">{{ trans("Ceres::Template.loginEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
-                            {% set uid_pwd = uid() %}
-                            <input type="password" name="password" id="{{ uid_pwd }}" v-model="password">
-                            <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.loginPassword") }}*</label>
+                            <input type="password" name="password" autocomplete="current-password" :id="'password' + _uid" v-model="password">
+                            <label :for="'password' + _uid">{{ trans("Ceres::Template.loginPassword") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.loginEmptyPassword") }}</span>
                     </div>
                 </div>
             </div>
-            <div :class="{'modal-footer': modalElement, 'row': !modalElement}">
-                <div class="reset-pwd-direction" :class="{'col-xs-7 col-sm-4': !modalElement}">
-                    <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.loginForgotPassword") }}?</a>
-                    {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+            <div :class="{'modal-footer justify-content-between': modalElement, 'row': !modalElement}">
+                <div :class="{'col-7 col-sm-4': !modalElement}">
+                    <a href="javascript:void(0)" @click="showResetPwdView" class="small text-appearance">{{ trans("Ceres::Template.loginForgotPassword") }}?</a>
                 </div>
-                <div :class="{'col-xs-5 col-sm-8 text-sm-right': !modalElement}">
-                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium" :class="{'btn-right': !modalElement}">
+                <div :class="{'col-5 col-sm-8 text-sm-right': !modalElement}">
+                    {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
                         <i class="fa fa-user" v-waiting-animation="isDisabled"></i>
                         {{ trans("Ceres::Template.login") }}
                     </button>
                 </div>
             </div>
         </form>
-    
-
-        <form :id="'reset-pwd-form-' + _uid" class="reset-pwd-container">
-            <div :class="{'modal-body': modalElement}">
-                <div class="alert alert-info alert-dismissible pwd-forgot-info">
-                    <span class="info-badge">{{ trans("Ceres::Template.loginForgotPasswordInfo") }}</span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="mail">
-                            {% set uid_mail = uid() %}
-                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
-                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
-                        </div>
-                        <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
-                    </div>
-                </div>
-            </div>
-            <div :class="{'modal-footer': modalElement, 'row': !modalElement}">
-                <div :class="{'col-xs-12 text-sm-right': !modalElement}">
-                    {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
-
-                    <button type="button" @click.prevent="cancelResetPwd" class="btn btn-secondary btn-medium btn-m-r">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.loginBackToLogin") }}
-                    </button>
-
-                    <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary btn-medium" :class="{'pull-right': !modalElement }">
-                        <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.loginSend") }}
-                    </button>
-                </div>
-            </div>
-        </form>
-
     </div>
 </script>

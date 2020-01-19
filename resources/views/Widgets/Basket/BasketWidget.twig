@@ -1,0 +1,19 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{{ Twig.component("Ceres::Basket.Components.BasketList") }}
+
+{% set appearance        = widget.settings.appearance.mobile %}
+{% set basketDetailsData = widget.settings.basketDetailsData.mobile | default(["basket.item.availability"]) %}
+
+<div class="widget widget-basket widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div class="cmp">
+        <basket-list :basket-details-data="{{ basketDetailsData | json_encode }}"></basket-list>
+    </div>
+</div>

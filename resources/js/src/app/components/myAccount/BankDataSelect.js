@@ -1,19 +1,29 @@
-const ApiService          = require("services/ApiService");
-const NotificationService = require("services/NotificationService");
-const ModalService        = require("services/ModalService");
+const NotificationService = require("../../services/NotificationService");
+const ModalService        = require("../../services/ModalService");
 
-import ValidationService from "services/ValidationService";
-import TranslationService from "services/TranslationService";
+import ApiService from "../../services/ApiService";
+import ValidationService from "../../services/ValidationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("bank-data-select", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "userBankData",
-        "contactId",
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-bank-data-select"
+        },
+        userBankData:
+        {
+            type: Array,
+            default: () => []
+        },
+        contactId:
+        {
+            type: String
+        }
+    },
 
     data()
     {
@@ -24,13 +34,9 @@ Vue.component("bank-data-select", {
             selectedBankData: null,
             updateBankIndex: 0,
             doUpdate: null,
-            headline : ""
+            headline : "",
+            waiting: false
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     /**
@@ -122,6 +128,8 @@ Vue.component("bank-data-select", {
          */
         validateInput()
         {
+            this.waiting = true;
+
             ValidationService.validate($("#my-bankForm"))
                 .done(() =>
                 {
@@ -137,6 +145,7 @@ Vue.component("bank-data-select", {
                 .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
+                    this.waiting = false;
                 });
         },
 
@@ -157,6 +166,8 @@ Vue.component("bank-data-select", {
                     NotificationService.success(
                         TranslationService.translate("Ceres::Template.myAccountBankDataUpdated")
                     ).closeAfter(3000);
+
+                    this.waiting = false;
                 })
                 .fail(() =>
                 {
@@ -165,6 +176,8 @@ Vue.component("bank-data-select", {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.myAccountBankDataNotUpdated")
                     ).closeAfter(5000);
+
+                    this.waiting = false;
                 });
         },
 
@@ -186,6 +199,8 @@ Vue.component("bank-data-select", {
                     NotificationService.success(
                         TranslationService.translate("Ceres::Template.myAccountBankDataAdded")
                     ).closeAfter(3000);
+
+                    this.waiting = false;
                 })
                 .fail(() =>
                 {
@@ -194,6 +209,8 @@ Vue.component("bank-data-select", {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.myAccountBankDataNotAdded")
                     ).closeAfter(5000);
+
+                    this.waiting = false;
                 });
         },
 
@@ -202,7 +219,7 @@ Vue.component("bank-data-select", {
          */
         removeBankInfo()
         {
-            ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id)
+            ApiService.del("/rest/io/customer/bank_data/" + this.updateBankData.id)
                 .done(response =>
                 {
                     this.checkBankDataSelection(false);

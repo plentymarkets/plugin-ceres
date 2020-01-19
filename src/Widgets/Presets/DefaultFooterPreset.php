@@ -52,6 +52,7 @@ class DefaultFooterPreset implements ContentPreset
         $this->createLinkListWidget();
         $this->createLegalInformationWidget();
         $this->createTextWidget();
+        $this->createCookieBar();
 
         return $this->preset->toArray();
     }
@@ -64,13 +65,8 @@ class DefaultFooterPreset implements ContentPreset
 
         if ($numberOfFeatures === 1)
         {
-            $storeFeatureTranslation = $this->translator->trans("Ceres::Template.footerStoreFeature1");
-
             $listGridPreset = $this->preset->createWidget("Ceres::ThreeColumnWidget")
-                ->withSetting("layout", "oneToOneToOne")
-                ->createChild("second", "Ceres::ListWidget")
-                ->withSetting("icon", "fa-check")
-                ->withSetting("text1", $storeFeatureTranslation);
+                ->withSetting("layout", "oneToOneToOne");
         }
         else if ($numberOfFeatures === 2)
         {
@@ -92,7 +88,10 @@ class DefaultFooterPreset implements ContentPreset
                 $listGridPreset
                     ->createChild($this->gridDropzoneNames[$i], "Ceres::ListWidget")
                     ->withSetting("icon", "fa-check")
-                    ->withSetting("texts", [$storeFeatureTranslation]);
+                    ->withSetting("entries", [
+                        ["text" => $storeFeatureTranslation, "url" => ""]
+                    ])
+                    ->withSetting("centered", true);
             }
         }
     }
@@ -140,6 +139,7 @@ class DefaultFooterPreset implements ContentPreset
             }
 
             $linkListPreset->withSetting("entries", $entries);            
+            $linkListPreset->withSetting("centered", false);
         }
     }
 
@@ -158,16 +158,23 @@ class DefaultFooterPreset implements ContentPreset
     private function createTextWidget()
     {
         $defaultText = "";
-        $defaultText .= "<div class=\"copyright text-xs-center\">";
+        $defaultText .= "<div class=\"copyright text-center\">";
         $defaultText .=     "<a rel=\"nofollow\" href=\"https://www.plentymarkets.eu\">";
-        $defaultText .=         "<img alt=\"Plentymarkets GmbH Logo\" class=\"svg plenty-brand\" src=\"{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg\" rel=\"nofollow\" crossorigin=\"anonymous\">";
+        $defaultText .=         "<img alt=\"Plentymarkets GmbH Logo\" class=\"svg plenty-brand\" src=\"{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg\" rel=\"nofollow\">";
         $defaultText .=     "</a>";
         $defaultText .=     "<br>";
         $defaultText .=     "<small>&copy; Copyright {{ \"now\" | date(\"Y\") }} | {{ trans(\"Ceres::Template.footerAllRightsReserved\") }}</small>";
         $defaultText .= "</div>";
 
-        $this->preset->createWidget("Ceres::TextWidget")
+        $this->preset->createWidget("Ceres::CodeWidget")
             ->withSetting("appearance", "none")
             ->withSetting("text", $defaultText);
+    }
+
+    private function createCookieBar()
+    {
+        $this->preset->createWidget("Ceres::CookieBarWidget")
+            ->withSetting("customClass", "")
+            ->withSetting("appearance", "primary");
     }
 }

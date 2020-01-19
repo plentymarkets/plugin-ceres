@@ -1,63 +1,59 @@
 .widget-item-list
 {
+    .widget-inner
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     .widget-caption
     {
-        padding: 1rem 1.5rem;
+        padding: 0.25rem 1.5rem;
         display: flex;
         align-items: center;
 
-        h2, .h2
+        > div
         {
             flex: 1;
-            padding-top: .2rem;
-            margin: 0;
-            text-transform: uppercase;
-            font-size: 1.75rem;
         }
 
-        a
-        {
-            color: #fff;
-        }
+    }
+}
+
+.widget-item-list-caption
+{
+    h1,
+    h2,
+    h3,
+    p
+    {
+        margin: 0;
+        text-transform: uppercase;
     }
 
-    &.widget-inner > .row
+    h1
     {
-        width: 100%;
+        font-size: 2rem;
+        padding-top: .7rem;
+        padding-bottom: .7rem;
     }
 
-    &.widget-primary .widget-caption
+    h2
     {
-        @include widget-bg-variant($brand-primary);
+        font-size: 1.75rem;
+        padding-top: .6rem;
+        padding-bottom: .4rem;
     }
 
-    &.widget-secondary .widget-caption
+    h3
     {
-        @include widget-bg-variant($brand-secondary);
+        font-size: 1.5rem;
+        padding-top: .4rem;
+        padding-bottom: .1rem;
     }
 
-    &.widget-success .widget-caption
+    .widget-item-list-inline-caption *
     {
-        @include widget-bg-variant($brand-success);
-    }
-
-    &.widget-info .widget-caption
-    {
-        @include widget-bg-variant($brand-info);
-    }
-
-    &.widget-warning .widget-caption
-    {
-        @include widget-bg-variant($brand-warning);
-    }
-
-    &.widget-danger .widget-caption
-    {
-        @include widget-bg-variant($brand-danger);
-    }
-
-    &.widget-inverse .widget-caption
-    {
-        @include widget-bg-variant($brand-inverse);
+        text-transform: unset !important;
     }
 }

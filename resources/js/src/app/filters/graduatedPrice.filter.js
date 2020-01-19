@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.filter("graduatedPrice", function(item, quantity)
 {
     const graduatedPrices = item.prices.graduatedPrices;

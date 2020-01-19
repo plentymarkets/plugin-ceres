@@ -2,17 +2,64 @@
 
 namespace Ceres\Widgets\Helper;
 
-use Plenty\Modules\ContentBuilder\Contracts\Widget;
+use Plenty\Modules\ShopBuilder\Contracts\DynamicWidget;
+use Plenty\Plugin\Application;
 use Plenty\Plugin\Templates\Twig;
+use Plenty\Plugin\Log\Loggable;
 
-class BaseWidget implements Widget
+class BaseWidget implements DynamicWidget
 {
+    use Loggable;
+
+    const TOOLBAR_LAYOUT = [
+        "NONE"   => "",
+        "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align|translation",
+        "ALL"    => "bold,italic,underline,strike|headline|link|align,ul,ol|color,background|translation"
+    ];
+
+    public static $mapTypeToTemplate = [
+        'singleitem'    => 'tpl.item',
+        'content'       => 'tpl.category',
+        'myaccount'     => 'tpl.my-account',
+        'checkout'      => 'tpl.checkout'
+    ];
+
     /**
-     * The template to e used for this widget
+     * The template to be used for this widget
      *
      * @var string
      */
     protected $template = "";
+
+    /**
+     * @var Twig $twig
+     */
+    protected $twig = null;
+
+    /** @var Application $app  */
+    protected $app = null;
+
+    public function __construct(Twig $twig, Application $app)
+    {
+        $this->twig = $twig;
+        $this->app = $app;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getData()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSettings()
+    {
+        return [];
+    }
 
     /**
      * Get the html representation of the widget.
@@ -21,15 +68,12 @@ class BaseWidget implements Widget
      * @param array $children
      *
      * @return string
-     *
-     * @throws \ErrorException
      */
     public function getPreview(
         array $widgetSettings = [],
         array $children = []
     ): string
     {
-        $twig = pluginApp(Twig::class);
         $template = $this->renderTemplate(
             $widgetSettings,
             $children,
@@ -38,10 +82,15 @@ class BaseWidget implements Widget
 
         try
         {
-            return $twig->renderString($template);
+            $previewData = $this->getPreviewData($widgetSettings);
+            return $this->twig->renderString($template, $previewData);
         }
         catch(\Exception $e)
         {
+            $this->getLogger(__METHOD__)->error("twig_preview_exception", [
+                'message' => $e->getMessage()
+            ]);
+
             return "";
         }
     }
@@ -73,15 +122,44 @@ class BaseWidget implements Widget
         $isPreview = false
     )
     {
-        $twig = pluginApp(Twig::class);
+        $template = '';
+        if(isset($widgetSettings['template']))
+        {
+            $template = self::$mapTypeToTemplate[$widgetSettings['template']] ?? '';
+            unset($widgetSettings['template']);
+        }
+
         $templateData = $this->getTemplateData($widgetSettings, $isPreview);
+
         $templateData["widget"] = [
             "settings"      => $widgetSettings
         ];
         $templateData["children"]  = $children;
         $templateData["isPreview"] = $isPreview;
+        $templateData["isSafeMode"] = $this->app->isTemplateSafeMode();
+        $templateData["TOOLBAR_LAYOUT"] = self::TOOLBAR_LAYOUT;
 
-        return $twig->render($this->template, $templateData);
+        try
+        {
+            $rendered = $this->twig->render($this->template, $templateData);
+        }
+        catch(\Exception $e)
+        {
+            // Twig_Errors (Syntax or Runtime)
+            $this->getLogger(__METHOD__)->error("twig_render_exception",
+                [
+                    'message' => $e->getMessage()
+                ]);
+
+            return "";
+        }
+
+        if($isPreview && strlen($template))
+        {
+            $rendered = '{{ services.template.setCurrentTemplate("'. $template .'") }}'. $rendered;
+        }
+
+        return $rendered;
     }
 
     /**
@@ -94,5 +172,34 @@ class BaseWidget implements Widget
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         return [];
+    }
+
+    /**
+     * Get additional data to be passed to the template while rendering the preview markup
+     *
+     * @param $widgetSettings
+     * @return array
+     */
+    protected function getPreviewData($widgetSettings)
+    {
+        return [];
+    }
+
+    protected function mockPaginatedResult( \Closure $factory, $itemsPerPage = 10, $currentPage = 1, $pages = 5 )
+    {
+        $entries = [];
+        for( $i = 0; $i < $itemsPerPage; $i++ )
+        {
+            $entries[] = $factory->call($this, $i);
+        }
+
+        return [
+            "page" => $currentPage,
+            "firstOnPage" => (($currentPage - 1) * $itemsPerPage) + 1,
+            "lastOnPage" => $currentPage * $itemsPerPage,
+            "totalsCount" => $pages * $itemsPerPage,
+            "lastPageNumber" => $pages,
+            "entries" => $entries
+        ];
     }
 }

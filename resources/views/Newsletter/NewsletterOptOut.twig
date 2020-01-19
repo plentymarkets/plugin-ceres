@@ -1,0 +1,37 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.newsletterOptOutTitle") %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+
+    <form action="/newsletter/unsubscribe{% if urls.appendTrailingSlash %}/{% endif %}?folderId={{ request.get('folderId') }}" method="POST">
+        <div class="container-max page-content">
+            <div class="row">
+                <div class="col-12 col-sm-8 col-lg-6 mb-5 content-center">
+                    <h1 class="mb-5 mt-4">{{ trans("Ceres::Template.newsletterOptOutTitle") }}</h1>
+
+                    <span>{{ trans("Ceres::Template.newsletterOptOutInfoText") }}</span>
+
+                    <div class="input-unit mt-3">
+                        <label for="email-input-id">{{ trans("Ceres::Template.newsletterEmail") }}</label>
+                        <input type="email" name="email" autocomplete="email" class="form-control" id="email-input-id">
+                    </div>
+
+                    <hr>
+
+                    <span class="input-group-btn">
+                        <button type="submit" v-waiting-animation-infinite class="btn btn-primary float-right btn-medium btn-xs-max-width">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                            <span>{{ trans("Ceres::Template.newsletterUnsubscribeButtonLabel") }}</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

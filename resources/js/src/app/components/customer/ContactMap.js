@@ -1,3 +1,10 @@
+import Vue from "vue";
+
+/**
+ * @deprecated since version 4.5.0
+ *
+ * This component will be removed with the next major release
+ */
 Vue.component("contact-map", {
 
     props: [
@@ -8,11 +15,6 @@ Vue.component("contact-map", {
         "template"
     ],
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>
@@ -22,13 +24,15 @@ Vue.component("contact-map", {
                 this.addScript("https://maps.googleapis.com/maps/api/js?key=" + this.googleApiKey);
             }
         });
+
+        console.warn("contact-map is a deprecated vue component!");
     },
 
     methods:
     {
         initMap()
         {
-            const coordinates = {lat: -34.397, lng: 150.644};
+            const coordinates = { lat: -34.397, lng: 150.644 };
 
             const gMap = new google.maps.Map(document.getElementById("contact-map"),
                 {
@@ -43,7 +47,7 @@ Vue.component("contact-map", {
         {
             const addressData = this.zip + " " + this.street;
 
-            geocoder.geocode({address: addressData}, function(results, status)
+            geocoder.geocode({ address: addressData }, function(results, status)
             {
                 if (status === google.maps.GeocoderStatus.OK)
                 {

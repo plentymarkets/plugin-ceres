@@ -1,0 +1,45 @@
+<script type="x/template" id="vue-address-header">
+    <div>
+        <template v-if="address">
+            <template v-if="isAddressFieldEnabled('name1')">
+                <div class="font-bold" v-if="address && address.name1 && address.name1.length > 0">
+                    ${ address.name1 }
+                </div>
+            </template>
+    
+            <template v-if="isAddressFieldEnabled('contactPerson')">
+                <div>${ address | optionType(12) }</div>
+            </template>
+    
+            <template v-if="isAddressFieldEnabled('title') || isAddressFieldEnabled('name2') || isAddressFieldEnabled('name3')">
+                <div class="font-bold" v-if="!address.name1 || address.name1.length == 0">
+                    <template v-if="isAddressFieldEnabled('title')">${ address | optionType(11) }</template> <template v-if="isAddressFieldEnabled('name2')">${ address.name2 }</template> <template v-if="isAddressFieldEnabled('name3')">${ address.name3 }</template>
+                </div>
+            </template>
+    
+            <div v-if="isAddressFieldEnabled('name4')">${ address.name4 }</div>
+    
+            <div v-if="isAddressFieldEnabled('address1') || isAddressFieldEnabled('address2')">
+                <template v-if="isAddressFieldEnabled('address1')">${ address.address1 }</template>&nbsp;<template v-if="isAddressFieldEnabled('address2')">${ address.address2 }</template>
+            </div>
+    
+            <div v-if="isAddressFieldEnabled('address3')">
+                <template v-if="address.address1 === 'PACKSTATION' || address.address1 === 'POSTFILIALE'">
+                    {{ trans("Ceres::Template.addressPostNummer") }}
+                    ${address | optionType(6)}
+                </template> 
+                ${ address.address3 }
+            </div>
+
+            <div v-if="isAddressFieldEnabled('address4')">
+                ${ address.address4 }
+            </div>
+    
+            <div v-if="isAddressFieldEnabled('postalCode') || isAddressFieldEnabled('town')">
+                <template v-if="isAddressFieldEnabled('postalCode')">${ address.postalCode }</template> <template v-if="isAddressFieldEnabled('town')">${ address.town }</template>
+            </div>
+    
+            <div v-if="isAddressFieldEnabled('country')">${ getCountryName(address.countryId) }</div>
+        </template>
+    </div>
+</script>

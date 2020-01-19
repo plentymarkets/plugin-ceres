@@ -1,0 +1,13 @@
+{{ component( "Ceres::ItemList.Components.Filter.ItemFilter") }}
+{{ component( "Ceres::ItemList.Components.Filter.ItemFilterPrice") }}
+
+<script type="x/template" id="vue-item-filter-list-bulk">
+    <div>
+        <item-filter v-for="facet in facets"
+            :facet="facet"
+            :key="facet.id"
+            :padding-classes="paddingClasses"
+            :padding-inline-styles="paddingInlineStyles">
+        </item-filter>
+    </div>
+</script>

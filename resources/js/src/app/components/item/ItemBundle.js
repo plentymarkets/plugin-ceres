@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.component("item-bundle", {
 
     props:
@@ -6,6 +8,16 @@ Vue.component("item-bundle", {
         {
             type: String,
             default: "#vue-item-bundle"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         },
         bundleType: String,
         bundleComponents: Array
@@ -17,11 +29,6 @@ Vue.component("item-bundle", {
             bundleSetting: null,
             showItemBundleItems: true
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     mounted()
@@ -39,7 +46,7 @@ Vue.component("item-bundle", {
     methods:
     {
         getBundleInnerText(item)
-		{
+        {
             item.variation.bundleType = null;
 
             return item;

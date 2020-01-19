@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 Vue.component("history", {
 
     props: {
@@ -12,11 +14,6 @@ Vue.component("history", {
         return {
             returnsFirstOpened: false
         };
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     methods:

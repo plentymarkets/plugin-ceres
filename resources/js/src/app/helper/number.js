@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "./utils";
+import { isNullOrUndefined } from "./utils";
 
 /**
  * Get the number of decimal places of a float value.

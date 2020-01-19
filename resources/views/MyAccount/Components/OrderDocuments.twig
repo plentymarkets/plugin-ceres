@@ -1,0 +1,31 @@
+{% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
+
+<script type="x/template" id="vue-order-documents">
+    <div>
+        {% if "order-document" in enabledRoutes or "all" in enabledRoutes %}
+            <div v-for="document of activeDocuments">
+                <template v-if="type == 'order'"> <!-- Orderhistory -->
+                    <div class="buttons mb-2">
+                        <a class="btn btn-primary btn-appearance btn-block" :href="'/order-document/preview/' + document.id" target="_blank" @click.stop>
+                            <span>${ getTypeName(document.type) }</span>
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </template>
+                <template v-else> <!-- Returnhistory -->
+                    <div class="icons d-none d-sm-block">
+                        <a class="text-appearance" :href="'/order-document/preview/' + document.id" target="_blank" v-tooltip data-toggle="tooltip" data-placement="top" :title="getDownloadTooltip(document.type)" @click.stop>
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="buttons d-block d-sm-none mt-2">
+                        <a class="btn btn-primary btn-appearance btn-block" :href="'/order-document/preview/' + document.id" target="_blank" @click.stop>
+                            <span>${ getTypeName(document.type) }</span>
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        {% endif %}
+    </div>
+</script>

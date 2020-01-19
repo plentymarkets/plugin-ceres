@@ -1,0 +1,32 @@
+.widget-live-shopping
+{
+    @include media-breakpoint-down(xs)
+    {
+        .thumb-inner
+        {
+            .thumb-image
+            {
+                float: none;
+                width: 100%;
+
+                > .square-container
+                {
+                    padding-bottom: 50%;
+                }
+            }
+
+            .live-shopping
+            {
+                width: 100%;
+
+                .live-shopping-item-name
+                {
+                    > a
+                    {
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,63 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set collapseBoxes = widget.settings.collapseBox.mobile %}
+{% set collapseId    = uid() %}
+{% set renderContent = false %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% for collapseBox in collapseBoxes if collapseBox.headline is not empty %}
+    {% set renderContent = true %}
+{% endfor %}
+
+{% if renderContent %}
+    {% set questions =  [] %}
+    <div class="widget accordion widget-{{ widget.settings.appearance.mobile | default('primary')  }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"  id="accordion_{{ collapseId }}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+        {% for collapseBox in collapseBoxes %}
+            {% set singleQuestion = [
+                {
+                    "@type":            "Question",
+                    "name":             collapseBox.headline,
+                    "answerCount":      1,
+                    "acceptedAnswer":
+                    {
+                        "@type":        "Answer",
+                        "text":         collapseBox.text | striptags
+                    }
+                }
+                ]
+            %}
+
+            {% set questions = questions|merge(singleQuestion) %}
+        <div class="card">
+          <button class="card-header btn btn-link text-appearance collapsed {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} id="heading_{{ collapseId }}_{{ loop.index }}" type="button" data-toggle="collapse" data-target="#collapse_{{ collapseId }}_{{ loop.index }}" aria-expanded="false" aria-controls="collapse_{{ collapseId }}_{{ loop.index }}">
+            <h5 class="h5 pr-5 mb-0">
+                {{ collapseBox.headline | raw }}
+                <i class="fa fa-chevron-down"></i>
+            </h5>
+          </button>
+
+                <div id="collapse_{{ collapseId }}_{{ loop.index }}" class="collapse" aria-labelledby="heading_{{ collapseId }}_{{ loop.index }}" data-parent="#accordion_{{ collapseId }}">
+                    <div class="card-body">
+                        {{ collapseBox.text | raw }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <script type="application/ld+json">
+        {
+            "@context":"http://schema.org/",
+            "@id": "{{ Twig.print("services.url.getCanonicalURL()") }}#faq",
+            "@type":"FAQPage",
+            "mainEntity": {{ questions | json_encode | raw }}
+        }
+    </script>
+{% endif %}

@@ -1,0 +1,21 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set appearance = widget.settings.appearance.mobile | default("danger") %}
+{% set buttonSize = widget.settings.buttonSize.mobile | default("")%}
+
+<div class="widget widget-logout-button{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <a href="#" class="btn btn-block btn-{{ appearance  }} {{ buttonSize }}
+        {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" v-logout
+        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+        <span>{{ trans("Ceres::Template.myAccountLogout") }}</span>
+        <i class="fa fa-sign-out"></i>
+    </a>
+</div>

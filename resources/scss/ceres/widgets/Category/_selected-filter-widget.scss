@@ -1,0 +1,25 @@
+.widget-selected-filter
+{
+    &.widget-alignment-left {
+        span.selected-filter {
+            margin-right: 10px;
+            margin-left: 0;
+        }
+    }
+
+    .selected-filters {
+        float: none;
+        display: block;
+        margin-top: 0;
+        span.selected-filter {
+            margin-bottom: 10px;
+        }
+    }
+
+    &.widget-none {
+        span.selected-filter {
+            color: $black !important;
+            background-color: #efefef !important;
+        }
+    }
+}

@@ -15,7 +15,7 @@
 	    flex-flow: column;
 	    justify-content: flex-end;
 	    
-	    background: rgba($brand-secondary, .8);
+	    background: rgba($secondary, .8);
 	    top: 50%;
     	left: 50%;
     	transform: translate(-50%, -50%);
@@ -57,7 +57,7 @@
 	}
 	&:hover {
 		.featured-category-inner{
-		    background: rgba($brand-secondary, 1);
+		    background: rgba($secondary, 1);
 		    transition: all .3s ease;
 		}
 	}

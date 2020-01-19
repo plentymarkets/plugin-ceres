@@ -1,14 +1,18 @@
-const NotificationService = require("services/NotificationService");
+const NotificationService = require("../../services/NotificationService");
 
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 Vue.component("coupon", {
 
-    delimiters: ["${", "}"],
-
-    props: [
-        "template"
-    ],
+    props: {
+        template:
+        {
+            type: String,
+            default: "#vue-coupon"
+        }
+    },
 
     data()
     {
@@ -38,14 +42,11 @@ Vue.component("coupon", {
             return false;
         },
 
-        ...Vuex.mapState({
-            redeemedCouponCode: state => state.basket.data.couponCode
+        ...mapState({
+            redeemedCouponCode: state => state.basket.data.couponCode,
+            isBasketLoading: state => state.basket.isBasketLoading,
+            isCheckoutReadonly: state => state.checkout.readOnly
         })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
     },
 
     mounted()
@@ -137,9 +138,9 @@ Vue.component("coupon", {
                 343:    "couponCampaignNoWebstoreIdGiven"
             };
 
-            if (error && error.error && error.error.code && errorMessageKeys[error.error.code])
+            if (error && error.error && error.code && errorMessageKeys[error.code])
             {
-                return TranslationService.translate("Ceres::Template." + errorMessageKeys[error.error.code]);
+                return TranslationService.translate("Ceres::Template." + errorMessageKeys[error.code]);
             }
 
             return TranslationService.translate("Ceres::Template.couponRedeemFailure");

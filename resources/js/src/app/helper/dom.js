@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from "./utils";
+
 /**
  * Get first parent element which matches a given selector
  *
@@ -72,4 +74,39 @@ export function textWidth(text, fontFamily)
     document.body.removeChild(tag);
 
     return result;
+}
+
+export function applyStyles(el, styles)
+{
+    Object.keys(styles).forEach(key =>
+    {
+        const value = styles[key];
+
+        if (isNullOrUndefined(value))
+        {
+            const propertyName = key.replace(/[A-Z]/g, match => "-" + match.toLowerCase());
+
+            el.style.removeProperty(propertyName);
+        }
+        else
+        {
+            el.style[key] = value;
+        }
+    });
+}
+
+export function getStyle(el, styleProp)
+{
+    let value;
+
+    if (window.getComputedStyle)
+    {
+        value = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+    }
+    else if (el.currentStyle)
+    {
+        value = el.currentStyle[styleProp];
+    }
+
+    return value;
 }

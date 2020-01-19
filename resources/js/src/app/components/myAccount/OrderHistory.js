@@ -1,6 +1,6 @@
-const ApiService = require("services/ApiService");
+import Vue from "vue";
 
-import TranslationService from "services/TranslationService";
+const ApiService = require("../../services/ApiService");
 
 Vue.component("order-history", {
 
@@ -27,11 +27,6 @@ Vue.component("order-history", {
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         setCurrentOrder(order)
@@ -52,19 +47,6 @@ Vue.component("order-history", {
                     this.isLoading = false;
                     $("#dynamic-twig-content").html(response);
                 });
-        },
-
-        getPaymentStateText(paymentStates)
-        {
-            for (const paymentState in paymentStates)
-            {
-                if (paymentStates[paymentState].typeId == 4)
-                {
-                    return TranslationService.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates[paymentState].value);
-                }
-            }
-
-            return "";
         }
     }
 });

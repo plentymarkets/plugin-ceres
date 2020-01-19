@@ -1,0 +1,32 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{{ Twig.component( 'Ceres::LiveShopping.Components.LiveShoppingItem' ) }}
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+
+<div class="widget-live-shopping widget{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="row clearfix">
+        <div class="col-12">
+            <live-shopping-item
+                :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection }}"
+                :display-settings="{{ liveShoppingConfig | json_encode }}"
+                {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                {% if isPreview %}
+                    <div class="widget-placeholder prop-xs-2-3 proportional-placeholder">
+                        <div>
+                            <p class="title">{{ Twig.trans("Ceres::Widget.liveShoppingPlaceholderTitle") }}</p>
+                            <p class="description">{{ Twig.trans("Ceres::Widget.liveShoppingPlaceholderDescription") }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </live-shopping-item>
+        </div>
+    </div>
+</div>

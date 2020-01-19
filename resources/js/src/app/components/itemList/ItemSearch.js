@@ -1,6 +1,10 @@
-import ApiService from "services/ApiService";
-import TranslationService from "services/TranslationService";
-import UrlService from "services/UrlService";
+import TranslationService from "../../services/TranslationService";
+import UrlService from "../../services/UrlService";
+import { isNullOrUndefined } from "../../helper/utils";
+import { pathnameEquals } from "../../helper/url";
+import Vue from "vue";
+
+const ApiService = require("../../services/ApiService");
 
 Vue.component("item-search", {
 
@@ -25,8 +29,7 @@ Vue.component("item-search", {
     data()
     {
         return {
-            currentSearchString: "",
-            promiseCount: 0,
+            autocompleteRequest: null,
             autocompleteResult: [],
             selectedAutocompleteIndex: -1,
             isSearchFocused: false
@@ -48,11 +51,6 @@ Vue.component("item-search", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     mounted()
     {
         this.$nextTick(() =>
@@ -60,7 +58,8 @@ Vue.component("item-search", {
             const urlParams = UrlService.getUrlParams(document.location.search);
 
             this.$store.commit("setItemListSearchString", urlParams.query);
-            this.currentSearchString = urlParams.query;
+
+            this.$refs.searchInput.value = !isNullOrUndefined(urlParams.query) ? urlParams.query : "";
         });
     },
 
@@ -76,8 +75,8 @@ Vue.component("item-search", {
                 }
                 else
                 {
-                    this.currentSearchString = this.selectedAutocompleteItem.name;
-                    this.$store.commit("setItemListSearchString", this.currentSearchString);
+                    this.$refs.searchInput.value = this.selectedAutocompleteItem.name;
+                    this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                     this.search();
                 }
@@ -92,26 +91,19 @@ Vue.component("item-search", {
 
         search()
         {
-            if (this.currentSearchString.length)
+            if (this.$refs.searchInput.value.length)
             {
-                if (document.location.pathname === "/search")
+                if (pathnameEquals(App.urls.search))
                 {
-                    this.updateTitle(this.currentSearchString);
-                    this.$store.dispatch("searchItems", this.currentSearchString);
+                    this.updateTitle(this.$refs.searchInput.value);
+                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
 
                     this.selectedAutocompleteIndex = -1;
                     this.autocompleteResult = [];
                 }
                 else
                 {
-                    let searchBaseURL = "/search?query=";
-
-                    if (App.defaultLanguage !== App.language)
-                    {
-                        searchBaseURL = `/${App.language}/search?query=`;
-                    }
-
-                    window.open(searchBaseURL + this.currentSearchString, "_self", false);
+                    window.open(`${App.urls.search}?query=${this.$refs.searchInput.value}`, "_self", false);
                 }
             }
             else
@@ -122,65 +114,70 @@ Vue.component("item-search", {
 
         updateTitle(searchString)
         {
-            document.querySelector("#searchPageTitle").appendChild(document.createTextNode(TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString));
-            document.title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            const searchPageTitle = document.querySelector("#searchPageTitle");
+            const title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString;
+
+            if (!isNullOrUndefined(searchPageTitle))
+            {
+                searchPageTitle.innerHTML = "";
+                searchPageTitle.appendChild(document.createTextNode(title));
+            }
+
+            document.title = `${title} | ${TranslationService.translate("Ceres::Template.headerCompanyName")}`;
         },
 
         autocomplete(searchString)
         {
             if (searchString.length >= 2)
             {
-                if (this.promiseCount >= Number.MAX_SAFE_INTEGER)
+                if (!isNullOrUndefined(this.autocompleteRequest) && typeof this.autocompleteRequest.abort === "function")
                 {
-                    this.promiseCount = 0;
+                    this.autocompleteRequest.abort();
                 }
 
-                const promiseCount = ++this.promiseCount;
-
-                ApiService.get("/rest/io/item/search/autocomplete", {template: "Ceres::ItemList.Components.ItemSearch", query: searchString})
-                    .done(response =>
+                this.autocompleteRequest = ApiService.get(
+                    "/rest/io/item/search/autocomplete",
                     {
-                        if (this.promiseCount === promiseCount)
+                        template: "Ceres::ItemList.Components.ItemSearch",
+                        query: searchString
+                    }
+                );
+
+                this.autocompleteRequest.done(response =>
+                {
+                    this.autocompleteRequest = null;
+                    this.autocompleteResult = [];
+                    this.selectedAutocompleteIndex = -1;
+
+                    if (response && response.documents.length)
+                    {
+                        for (const item of response.documents)
                         {
-                            this.transformAutocomplete(response, searchString);
+                            const images = this.$options.filters.itemImages(item.data.images, "urlPreview");
+                            const img = this.$options.filters.itemImage(images);
+                            const url = this.$options.filters.itemURL(item.data);
+                            const name = this.$options.filters.itemName(item.data);
+
+                            let displayName = name;
+
+                            for (const split of searchString.split(" "))
+                            {
+                                displayName = displayName.replace(split, `<strong>${split}</strong>`);
+                            }
+
+                            this.autocompleteResult.push({
+                                img,
+                                url,
+                                name,
+                                displayName
+                            });
                         }
-                    });
+                    }
+                });
             }
             else
             {
                 this.autocompleteResult = [];
-            }
-        },
-
-        // transform the autocomplete result to usable object
-        transformAutocomplete(data, searchString)
-        {
-            this.autocompleteResult = [];
-            this.selectedAutocompleteIndex = -1;
-
-            if (data && data.documents.length)
-            {
-                for (const item of data.documents)
-                {
-                    const images = this.$options.filters.itemImages(item.data.images, "urlPreview");
-                    const img = this.$options.filters.itemImage(images);
-                    const url = this.$options.filters.itemURL(item.data);
-                    const name = this.$options.filters.itemName(item.data);
-
-                    let displayName = name;
-
-                    for (const split of searchString.split(" "))
-                    {
-                        displayName = displayName.replace(split, `<strong>${split}</strong>`);
-                    }
-
-                    this.autocompleteResult.push({
-                        img,
-                        url,
-                        name,
-                        displayName
-                    });
-                }
             }
         },
 
@@ -192,8 +189,8 @@ Vue.component("item-search", {
             }
             else
             {
-                this.currentSearchString = item.name;
-                this.$store.commit("setItemListSearchString", this.currentSearchString);
+                this.$refs.searchInput.value = item.name;
+                this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
 
                 this.search();
             }

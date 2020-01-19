@@ -1,22 +1,24 @@
 <script type="x/template" id="vue-item-image-carousel">
     <div itemscope itemtype="http://schema.org/Thing">
-        <div id="single-carousel" class="owl-carousel owl-theme owl-single-item" ref="single">
-            <div v-for="image in singleImages">
+        <div class="single-carousel owl-carousel owl-theme owl-single-item" ref="single">
+            <div v-for="image in singleImages" class="prop-xs-1-1">
                 <a :href="image.url" data-lightbox="single-big-image-gallery">
-                    <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getItemName()" itemprop="image">
+                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getItemName()"></lazy-img>
                 </a>
             </div>
         </div>
-        <div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
-            <img
-                @click="goTo(index)"
-                class="owl-thumb"
-                v-bind:class="{ 'active': currentItem === index }"
-                :src="imagePreview.url"
-                :alt="getAltText(imagePreview)"
-                :title="getItemName()"
-                v-for="(imagePreview, index) in carouselImages"
-            >
+        <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
+            <div class="prop-xs-1-1" v-for="(imagePreview, index) in carouselImages">
+                <div class="image-container" @click="goTo(index)">
+                    <lazy-img
+                        class="owl-thumb border-appearance"
+                        v-bind:class="{ 'active': currentItem === index}"
+                        :image-url="imagePreview.url"
+                        :alt="getAltText(imagePreview)"
+                        :title="getItemName()">
+                    </lazy-img>
+                </div>  
+            </div>
         </div>
     </div>
 </script>

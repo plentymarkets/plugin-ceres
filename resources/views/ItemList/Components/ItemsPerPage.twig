@@ -1,9 +1,0 @@
-<script type="x/template" id="vue-items-per-page">
-    <div class="list-itemsperpage">
-        <select class="custom-select" v-model="selectedValue" @change="itemsPerPageChanged()">
-            <option :value="value" v-for="value in paginationValues" :selected="value == selectedValue">
-                ${ value }
-            </option>
-        </select>
-    </div>
-</script>

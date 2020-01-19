@@ -1,4 +1,5 @@
-import TranslationService from "services/TranslationService";
+import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 
 Vue.component("order-return-history-item", {
 
@@ -19,15 +20,14 @@ Vue.component("order-return-history-item", {
     },
 
     data()
-	{
+    {
         return {
             itemsToRender: []
         };
     },
 
     created()
-	{
-        this.$options.template = this.template;
+    {
         this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
     },
 

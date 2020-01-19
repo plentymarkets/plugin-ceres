@@ -1,3 +1,6 @@
+import Vue from "vue";
+import { mapMutations } from "vuex";
+
 Vue.component("order-property-list-group", {
 
     props:
@@ -6,6 +9,16 @@ Vue.component("order-property-list-group", {
         {
             type: String,
             default: "#vue-order-property-list-group"
+        },
+        paddingClasses:
+        {
+            type: String,
+            default: null
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
         },
         propertyGroup: Object
     },
@@ -20,11 +33,6 @@ Vue.component("order-property-list-group", {
         }
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
     methods:
     {
         unsetDeselectedRadios(propertyId)
@@ -33,7 +41,7 @@ Vue.component("order-property-list-group", {
 
             for (const property of propertiesToUnselect)
             {
-                this.setVariationOrderProperty({propertyId: property.id, value: null});
+                this.setVariationOrderProperty({ propertyId: property.id, value: null });
             }
         },
 
@@ -50,7 +58,7 @@ Vue.component("order-property-list-group", {
             return false;
         },
 
-        ...Vuex.mapMutations([
+        ...mapMutations([
             "setVariationOrderProperty"
         ])
     }

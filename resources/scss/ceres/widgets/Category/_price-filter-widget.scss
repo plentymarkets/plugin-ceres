@@ -1,0 +1,28 @@
+.widget-grid .col-lg-2,
+.widget-grid .col-lg-3,
+.widget-grid .widget-grid
+{
+    .widget-filter-price
+    {
+        .item-filter-price
+        {
+            display: block;
+            text-align: right;
+
+            > .input-group
+            {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
+.widget-none {
+    .widget-filter-price {
+        .btn-appearance {
+            color: $gray-700;
+            background-color: rgba(0,0,0,0.15);
+            border-color: rgba(0,0,0,0.15);
+        }
+    }
+}

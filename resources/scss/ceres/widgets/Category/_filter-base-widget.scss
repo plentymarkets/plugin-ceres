@@ -1,0 +1,19 @@
+.widget-filter-base
+{
+    padding: 2rem;
+    background-color: $white;
+
+    .form-check-wrapper {
+        padding: 0.25rem 0;
+    }
+    .form-check {
+        margin-bottom: 0;
+    }
+    .form-check-label {
+        cursor: pointer;
+    }
+}
+
+.widget-toolbar .widget-filter-base {
+    padding: 0;
+}

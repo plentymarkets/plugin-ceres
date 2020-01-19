@@ -1,19 +1,18 @@
-import ApiService from "services/ApiService";
-import TranslationService from "services/TranslationService";
-import {navigateTo}from "../../services/UrlService";
-const NotificationService = require("services/NotificationService");
+import TranslationService from "../../services/TranslationService";
+import { navigateTo } from "../../services/UrlService";
+import { pathnameEquals } from "../../helper/url";
+import { isNullOrUndefined } from "../../helper/utils";
+const NotificationService = require("../../services/NotificationService");
+const ApiService = require("../../services/ApiService");
 
 const state =
     {
         data: {},
         items: [],
         showNetPrices: false,
-        latestEntry: {
-            item: {},
-            quantity: null
-        },
         isBasketLoading: false,
         isBasketInitiallyLoaded: false,
+        isBasketItemQuantityUpdate: false,
         basketNotifications: []
     };
 
@@ -23,7 +22,7 @@ const mutations =
         {
             if (state.data.id && JSON.stringify(basket) !== JSON.stringify(state.data))
             {
-                document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: basket}));
+                document.dispatchEvent(new CustomEvent("afterBasketChanged", { detail: basket }));
             }
 
             state.data = basket;
@@ -34,24 +33,65 @@ const mutations =
             state.items = basketItems;
         },
 
-        addBasketItem(state, basketItem)
+        updateBasketItems(state, basketItems)
         {
-            const basketItemIndex = state.items.findIndex(item => basketItem.id === item.id);
+            if (basketItems)
+            {
+                const newItems = [];
 
-            if (basketItemIndex !== -1)
-            {
-                state.items.splice(basketItemIndex, 1);
-                state.items.splice(basketItemIndex, 0, basketItem);
-            }
-            else
-            {
-                state.items.push(basketItem);
+                for (const item of basketItems)
+                {
+                    const oldBasketItem = null;
+
+                    if (isNullOrUndefined(item.variation))
+                    {
+                        oldBasketItem = state.items.find(i => i.id === item.id);
+                        item.variation = oldBasketItem.variation;
+                    }
+                    if (isNullOrUndefined(item.basketItemOrderParams))
+                    {
+                        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
+                        item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
+                    }
+                    newItems.push(item);
+                }
+
+                state.items = newItems;
             }
         },
 
-        addBasketNotification(state, {type, message})
+        addBasketItem(state, basketItems)
         {
-            state.basketNotifications.push({type: type, message: message});
+            for (let i = 0; i < basketItems.length; i++)
+            {
+                const basketItem = basketItems[i];
+                const basketItemIndex = state.items.findIndex(item => basketItem.id === item.id);
+
+                if (basketItemIndex !== -1)
+                {
+                    state.items.splice(basketItemIndex, 1, basketItem);
+                }
+                else
+                {
+                    state.items.push(basketItem);
+                }
+            }
+        },
+
+        updateBasketItem(state, basketItem)
+        {
+            const entry = state.items.find(item => item.id === basketItem.id);
+
+            if (!isNullOrUndefined(entry))
+            {
+                entry.price = basketItem.price;
+                entry.quantity = basketItem.quantity;
+            }
+        },
+
+        addBasketNotification(state, { type, message })
+        {
+            state.basketNotifications.push({ type: type, message: message });
         },
 
         clearOldestNotification(state)
@@ -59,21 +99,21 @@ const mutations =
             state.basketNotifications.splice(0, 1);
         },
 
-        updateBasketItemQuantity(state, {basketItem, quantity})
+        updateBasketItemQuantity(state, basketItem)
         {
             const item = state.items.find(item => basketItem.id === item.id);
 
-            item.quantity = quantity;
+            item.quantity = basketItem.quantity;
+        },
+
+        setIsBasketItemQuantityUpdate(state, isBasketItemQuantityUpdate)
+        {
+            state.isBasketItemQuantityUpdate = isBasketItemQuantityUpdate;
         },
 
         removeBasketItem(state, basketItemId)
         {
             state.items = state.items.filter(item => item.id !== basketItemId);
-        },
-
-        setLatestBasketEntry(state, latestBasketEntry)
-        {
-            state.latestEntry = latestBasketEntry;
         },
 
         setCouponCode(state, couponCode)
@@ -99,41 +139,62 @@ const mutations =
 
 const actions =
     {
-        loadBasketData({commit, state})
+        loadBasketData({ state, commit })
         {
-            const basketPromise = ApiService.get("/rest/io/basket/");
-            const basketItemsPromise = ApiService.get("/rest/io/basket/items", {template: "Ceres::Basket.Basket"});
-
-            Promise.all([basketPromise, basketItemsPromise]).then(
-                ([basket, basketItems]) =>
-                {
-                    commit("setBasket", basket);
-                    commit("setBasketItems", basketItems);
-                    commit("setIsBasketInitiallyLoaded");
-
-                    setTimeout(() =>
+            if ( !state.isBasketInitiallyLoaded )
+            {
+                jQuery
+                    .when(
+                        ApiService.get("/rest/io/basket", {}, { cache: false }),
+                        ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
+                    )
+                    .then((basket, basketItems) =>
                     {
-                        $(document.body).trigger("sticky_kit:recalc");
-                    }, 0);
-                },
-                ([basketError, basketItemsError]) =>
-                {
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.basketOops")
-                    ).closeAfter(10000);
-                });
+                        commit("setBasket", basket);
+                        commit("setBasketItems", basketItems);
+                        commit("setIsBasketInitiallyLoaded");
+                        commit("setWishListIds", basket.itemWishListIds);
+                    })
+                    .catch((error, status) =>
+                    {
+                        console.log(error, status);
+
+                        if (status > 0)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.basketOops")
+                            ).closeAfter(10000);
+                        }
+                    });
+            }
 
             ApiService.listen("AfterBasketChanged", data =>
             {
                 commit("setBasket", data.basket);
                 commit("setShowNetPrices", data.showNetPrices);
-                commit("setBasketItems", data.basketItems);
+                commit("updateBasketItems", data.basketItems);
+                commit("setWishListIds", data.basket.itemWishListIds);
+            });
+
+            ApiService.listen("AfterBasketItemAdd", data =>
+            {
+                commit("addBasketItem", data.basketItems);
+            });
+
+            ApiService.listen("AfterBasketItemUpdate", data =>
+            {
+                commit("updateBasketItem", data.basketItems);
+            });
+
+            ApiService.after(() =>
+            {
+                commit("setIsBasketItemQuantityUpdate", false);
             });
         },
 
-        addBasketNotification({commit}, {type, message})
+        addBasketNotification({ commit }, { type, message })
         {
-            commit("addBasketNotification", {type, message});
+            commit("addBasketNotification", { type, message });
 
             setTimeout(() =>
             {
@@ -141,7 +202,7 @@ const actions =
             }, 5000);
         },
 
-        addBasketItem({commit}, basketItem)
+        addBasketItem({ commit }, basketItem)
         {
             return new Promise((resolve, reject) =>
             {
@@ -149,11 +210,10 @@ const actions =
 
                 basketItem.template = "Ceres::Basket.Basket";
                 ApiService.post("/rest/io/basket/items/", basketItem)
-                    .done(basketItems =>
+                    .done(response =>
                     {
-                        commit("setBasketItems", basketItems);
                         commit("setIsBasketLoading", false);
-                        resolve(basketItems);
+                        resolve(response);
                     })
                     .fail(error =>
                     {
@@ -163,20 +223,20 @@ const actions =
             });
         },
 
-        updateBasketItemQuantity({commit}, {basketItem, quantity})
+        updateBasketItemQuantity({ commit }, basketItem)
         {
             return new Promise((resolve, reject) =>
             {
-                commit("updateBasketItemQuantity", {basketItem, quantity});
+                commit("updateBasketItemQuantity", basketItem);
+                commit("setIsBasketItemQuantityUpdate", true);
                 commit("setIsBasketLoading", true);
 
                 basketItem.template = "Ceres::Basket.Basket";
                 ApiService.put("/rest/io/basket/items/" + basketItem.id, basketItem)
-                    .done(data =>
+                    .done(response =>
                     {
-                        commit("setBasketItems", data);
                         commit("setIsBasketLoading", false);
-                        resolve(data);
+                        resolve(response);
                     })
                     .fail(error =>
                     {
@@ -186,22 +246,22 @@ const actions =
             });
         },
 
-        removeBasketItem({commit}, basketItemId)
+        removeBasketItem({ state, commit }, basketItemId)
         {
             return new Promise((resolve, reject) =>
             {
                 commit("setIsBasketLoading", true);
 
-                ApiService.delete("/rest/io/basket/items/" + basketItemId, {template: "Ceres::Basket.Basket"})
-                    .done(basketItems =>
+                ApiService.del("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" })
+                    .done(response =>
                     {
-                        commit("setBasketItems", basketItems);
                         commit("setIsBasketLoading", false);
-                        resolve(basketItems);
+                        commit("removeBasketItem", basketItemId);
+                        resolve(response);
 
-                        if (window.location.pathname === "/checkout" && !basketItems.length)
+                        if (pathnameEquals(App.urls.checkout) && state.items.length === 0)
                         {
-                            navigateTo("/basket");
+                            navigateTo(App.urls.basket);
                         }
                     })
                     .fail(error =>
@@ -212,13 +272,13 @@ const actions =
             });
         },
 
-        redeemCouponCode({state, commit}, couponCode)
+        redeemCouponCode({ state, commit }, couponCode)
         {
             return new Promise((resolve, reject) =>
             {
                 commit("setIsBasketLoading", true);
 
-                ApiService.post("/rest/io/coupon", {couponCode}, {supressNotifications: true})
+                ApiService.post("/rest/io/coupon", { couponCode }, { supressNotifications: true })
                     .done(data =>
                     {
                         commit("setCouponCode", couponCode);
@@ -233,13 +293,13 @@ const actions =
             });
         },
 
-        removeCouponCode({state, commit}, couponCode)
+        removeCouponCode({ state, commit }, couponCode)
         {
             return new Promise((resolve, reject) =>
             {
                 commit("setIsBasketLoading", true);
 
-                ApiService.delete("/rest/io/coupon/" + couponCode)
+                ApiService.del("/rest/io/coupon/" + couponCode)
                     .done(data =>
                     {
                         commit("setCouponCode", null);
@@ -254,7 +314,7 @@ const actions =
             });
         },
 
-        refreshBasket({commit})
+        refreshBasket({ commit })
         {
             return new Promise((resolve, reject) =>
             {

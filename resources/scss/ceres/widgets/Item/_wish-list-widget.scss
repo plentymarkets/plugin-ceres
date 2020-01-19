@@ -1,0 +1,22 @@
+.widget-wish-list,
+.page-wish-list {
+    .category-list-view-port {
+        button {
+            white-space: nowrap;
+            display: flex;
+            flex-direction: row-reverse;
+
+            i.fa {
+                font-size: inherit;
+                line-height: inherit;
+                margin-left: .25rem;
+            }
+        }
+    }
+
+    .item-additional-information {
+        .badge {
+            font-size: 85%;
+        }
+    }
+}
