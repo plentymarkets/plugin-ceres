@@ -1,9 +1,11 @@
 .qty-box {
     width: fit-content;
+    margin-left: auto;
 
     .qty-input {
         width: $qty-box-width;
         padding: $qty-box-padding-y $qty-box-padding-x;
+        margin-left: auto;
         border: 1px solid $qty-box-border;
         border-right: 0;
         outline: none;

@@ -1,5 +1,5 @@
 <template>
-    <div class="basket-list-item">
+    <div class="basket-list-item py-3">
         <slot name="before-basket-item"></slot>
 
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
@@ -70,15 +70,17 @@
                     </div>
 
                     <div class="basket-item-container-right">
-                        <quantity-input
-                                template="#vue-quantity-input"
-                                @quantity-change="updateQuantity"
-                                :value="basketItem.quantity"
-                                :waiting="isInputLocked || isCheckoutReadonly"
-                                :min="basketItem.variation.data.variation.minimumOrderQuantity"
-                                :max="basketItem.variation.data.variation.maximumOrderQuantity"
-                                :interval="basketItem.variation.data.variation.intervalOrderQuantity">
-                        </quantity-input>
+                        <div class="qty-box-container">
+                            <quantity-input
+                                    template="#vue-quantity-input"
+                                    @quantity-change="updateQuantity"
+                                    :value="basketItem.quantity"
+                                    :waiting="isInputLocked || isCheckoutReadonly"
+                                    :min="basketItem.variation.data.variation.minimumOrderQuantity"
+                                    :max="basketItem.variation.data.variation.maximumOrderQuantity"
+                                    :interval="basketItem.variation.data.variation.intervalOrderQuantity">
+                            </quantity-input>
+                        </div>
 
                         <div class="price-box text-right ml-2 mt-1">
                             <div class="item-total-price font-weight-bold text-nowrap">{{ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>

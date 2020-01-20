@@ -60,14 +60,6 @@
     position: relative;
     overflow: hidden;
 
-    &:first-child {
-        padding-top: 0;
-    }
-
-    &:last-child {
-        padding-bottom: 0;
-    }
-
     &:not(:last-child) {
         border-bottom: 1px solid $gray-300;
     }
@@ -131,13 +123,8 @@
 
 .basket-item-container-right {
 
-    .qty-box {
+    .qty-box-container {
         height: 41px;
-        margin-left: auto;
-
-        .qty-input {
-            margin-left: auto;
-        }
     }
 
     html.ie & { // stylelint-disable-line selector-no-qualifying-type
