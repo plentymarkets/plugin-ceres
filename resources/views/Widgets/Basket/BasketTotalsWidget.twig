@@ -8,7 +8,6 @@
 
 {% set visibleFields = widget.settings.visibleFields.mobile | default([]) %}
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
-{{ Twig.component("Ceres::Basket.Components.BasketTotals") }}
 
 {{ Twig.set("currentTemplate", Twig.call("services.template.getCurrentTemplate")) }}
 
@@ -54,6 +53,6 @@
     {{ Twig.else() }}
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Basket.AfterBasketTotals"])) }}
     {{ Twig.endif() }}
-    
+
 </div>
 {% endif %}

@@ -83,8 +83,10 @@ Vue.component("guest-login", GuestLogin);
 import Login from "./app/components/customer/login/Login.vue";
 Vue.component("login", Login);
 // legacy non-shopbuilder component
-import "./app/components/customer/login/LoginView";
-import "./app/components/customer/login/UserLoginHandler";
+import LoginView from "./app/components/customer/login/LoginView.vue";
+Vue.component("login-view", LoginView);
+import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
+Vue.component("user-login-handler", UserLoginHandler);
 
 import ItemBundle from "./app/components/item/ItemBundle.vue";
 Vue.component("item-bundle", ItemBundle);
