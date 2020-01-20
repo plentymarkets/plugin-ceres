@@ -1,18 +1,18 @@
 <template>
     <div class="mobile-navigation">
         <div v-show="isNavigationInitialized">
-            <ul class="breadcrumb">
+            <ul class="breadcrumb d-block px-3 py-0">
                 <li class="btn-close" @click="closeNavigation()"></li>
 
                 <li class="breadcrumb-item" @click="slideTo(null, true)">
                     <i class="fa fa-home" aria-hidden="true"></i>
                 </li>
 
-                <li  class="breadcrumb-item" v-for="breadcrumb in breadcrumbs" @click="slideTo(breadcrumb.parent, true)">
+                <li class="breadcrumb-item" v-for="breadcrumb in breadcrumbs" @click="slideTo(breadcrumb.parent, true)">
                     {{ breadcrumb.name }}
                 </li>
             </ul>
-            <ul v-menu id="menu-1" class="mainmenu menu-active">
+            <ul v-menu id="menu-1" class="mainmenu w-100 p-0 m-0 menu-active">
                 <li class="ddown" v-if="dataContainer1.parent" @click="slideTo(dataContainer1.parent && dataContainer1.parent.parent || null, true)">
                     <span class="nav-direction btn-up">
                         <i class="fa fa-lg fa-level-up" aria-hidden="true"></i>
@@ -27,17 +27,17 @@
                 </li>
                 <template v-if="dataContainer1.categories[0]">
                     <li class="ddown" v-for="number in dataContainer1.categories[0].siblingCount - dataContainer1.categories.length">
-                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                        <span class="nav-placeholder m-3" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
                     </li>
                 </template>
                 <template v-else-if="dataContainer1.parent">
                     <li class="ddown" v-for="number in dataContainer1.parent.childCount">
-                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                        <span class="nav-placeholder m-3" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
                     </li>
                 </template>
             </ul>
 
-            <ul v-menu id="menu-2" class="mainmenu">
+            <ul v-menu id="menu-2" class="mainmenu w-100 p-0 m-0">
                 <li class="ddown" v-if="dataContainer2.parent" @click="slideTo(dataContainer2.parent && dataContainer2.parent.parent || null, true)">
                     <span class="nav-direction btn-up">
                         <i class="fa fa-lg fa-level-up" aria-hidden="true"></i>
@@ -52,12 +52,12 @@
                 </li>
                 <template v-if="dataContainer2.categories[0]">
                     <li class="ddown" v-for="number in dataContainer2.categories[0].siblingCount - dataContainer2.categories.length">
-                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                        <span class="nav-placeholder m-3" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
                     </li>
                 </template>
                 <template v-else-if="dataContainer2.parent">
                     <li class="ddown" v-for="number in dataContainer2.parent.childCount">
-                        <span class="nav-placeholder" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
+                        <span class="nav-placeholder m-3" :style="{width: (Math.random() * 20 + 60) + '%'}"></span>
                     </li>
                 </template>
             </ul>
@@ -329,13 +329,13 @@ export default {
                 $(el).on("menu-activated", (event, params) =>
                 {
                     $(event.target).addClass("menu-active");
-                    $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
+                    $(event.target).addClass(params.back ? "animate-in-from-left" : "animate-in-from-right");
                 });
                 // add "deactivated" classes when menu is deactivated
                 $(el).on("menu-deactivated", (event, params) =>
                 {
                     $(event.target).removeClass("menu-active");
-                    $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
+                    $(event.target).addClass(params.back ? "animate-out-to-right" : "animate-out-to-left");
                 });
                 // this removes the animation class automatically after the animation has completed
                 $(el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () =>

@@ -43,12 +43,18 @@ import "bootstrap";
 // COMPONENTS
 // =========================
 
-import "./app/components/basket/AddItemToBasketOverlay";
-import "./app/components/basket/AddToBasket";
-import "./app/components/basket/BasketPreview";
-import "./app/components/basket/BasketTotals";
-import "./app/components/basket/Coupon";
-import "./app/components/basket/list/BasketList";
+import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
+Vue.component("add-item-to-basket-overlay", AddItemToBasketOverlay);
+import AddToBasket from "./app/components/basket/AddToBasket.vue";
+Vue.component("add-to-basket", AddToBasket);
+import BasketPreview from "./app/components/basket/BasketPreview.vue";
+Vue.component("basket-preview", BasketPreview);
+import BasketTotals from "./app/components/basket/BasketTotals.vue";
+Vue.component("basket-totals", BasketTotals);
+import Coupon from "./app/components/basket/Coupon.vue";
+Vue.component("coupon", Coupon);
+import BasketList from "./app/components/basket/list/BasketList.vue";
+Vue.component("basket-list", BasketList);
 
 import "./app/components/category/StepByStepNavigation";
 
@@ -73,12 +79,14 @@ import "./app/components/customer/login/Login";
 import "./app/components/customer/login/LoginView";
 import "./app/components/customer/login/UserLoginHandler";
 
-
-import "./app/components/item/ItemBundle";
-
-import "./app/components/item/OrderPropertyValue";
-import "./app/components/item/QuantityInput";
-import "./app/components/item/TagList";
+import ItemBundle from "./app/components/item/ItemBundle.vue";
+Vue.component("item-bundle", ItemBundle);
+import OrderPropertyValue from "./app/components/item/OrderPropertyValue.vue";
+Vue.component("order-property-value", OrderPropertyValue);
+import QuantityInput from "./app/components/item/QuantityInput.vue";
+Vue.component("quantity-input", QuantityInput);
+import TagList from "./app/components/item/TagList.vue";
+Vue.component("tag-list", TagList);
 
 import "./app/components/itemList/CategoryImageCarousel";
 import "./app/components/itemList/CategoryItem";
