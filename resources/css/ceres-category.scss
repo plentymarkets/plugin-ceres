@@ -12002,6 +12002,32 @@ html.ie .confirmation-order-list .cmp-order-item {
     }
 }
 
+// transitions for item lists
+.list-transition-enter-active,
+.list-transition-leave-active {
+    -webkit-animation-name: item-leaving;
+            animation-name: item-leaving;
+    -webkit-animation-duration: .175s;
+            animation-duration: .175s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+}
+
+.list-transition-enter-active {
+    animation-direction: reverse;
+}
+
+@-webkit-keyframes item-leaving {
+    from { max-height: 1000px; }
+    to { max-height: 0; }
+}
+
+@keyframes item-leaving {
+    from { max-height: 1000px; }
+    to { max-height: 0; }
+}
+
+
 // Arrange counter and price side by side
 @include media-breakpoint-up(sm) {
     .main .basket .basket-item-container .basket-item-container-right {
@@ -12048,7 +12074,6 @@ html.ie .confirmation-order-list .cmp-order-item {
 
 .basket-item-container {
     position: relative;
-    padding: 1.5rem 0;
     overflow: hidden;
 
     &:first-child {
@@ -12072,6 +12097,7 @@ html.ie .confirmation-order-list .cmp-order-item {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        padding: 1.5rem 0;
 
         .image-container {
             -ms-flex-negative: 0;
@@ -13002,88 +13028,6 @@ html.ie {
             text-align: center;
         }
     }
-}
-
-.add-to-wish-list {
-    cursor: pointer;
-
-    & i {
-        margin-right: 5px;
-
-        &.fa-circle-o-notch {
-            color: inherit !important;
-        }
-    }
-
-    &:not(.active) {
-        i {
-            color: inherit !important;
-        }
-    }
-
-    &:hover {
-        text-decoration: none;
-
-        i {
-            color: #d9534f !important;
-            &.fa-circle-o-notch {
-                color: inherit !important;
-            }
-        }
-    }
-
-    &.active {
-        i {
-            color: inherit;
-        }
-    }
-}
-
-.wish-list-no-items-transition-enter-active,
-.wish-list-no-items-transition-leave-active {
-    -webkit-transition: margin .1s;
-    transition: margin .1s;
-}
-.wish-list-no-items-transition-enter,
-.wish-list-no-items-transition-leave-to {
-    margin: 0 !important;
-}
-
-.wish-list-item-transition-leave-active {
-    -webkit-animation-name: wish-list-item-leaving;
-            animation-name: wish-list-item-leaving;
-    -webkit-animation-duration: .175s;
-            animation-duration: .175s;
-    -webkit-animation-delay: .175s;
-            animation-delay: .175s;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes wish-list-item-leaving {
-    from { max-height: 130px; padding: 10px 0; }
-    to { max-height: 0; padding: 0; border: none; }
-}
-
-@keyframes wish-list-item-leaving {
-    from { max-height: 130px; padding: 10px 0; }
-    to { max-height: 0; padding: 0; border: none; }
-}
-
-@include media-breakpoint-down(md) {
-    .wish-list-item-transition-leave-active > div.row {
-        -webkit-transition: -webkit-transform 200ms cubic-bezier(0, 0, .82, .1);
-        transition: -webkit-transform 200ms cubic-bezier(0, 0, .82, .1);
-        transition: transform 200ms cubic-bezier(0, 0, .82, .1);
-        transition: transform 200ms cubic-bezier(0, 0, .82, .1), -webkit-transform 200ms cubic-bezier(0, 0, .82, .1);
-        -webkit-transform: translateX(-200%);
-                transform: translateX(-200%);
-    }
-}
-
-.wish-list-no-items-label {
-    margin: 75px 0 100px;
-    text-align: center;
 }
 
 
