@@ -29,7 +29,7 @@ export default Vue.component("google-maps-widget",
             aspectRatio:
             {
                 type: String,
-                default: "prop-xs-3-1"
+                default: "prop-3-1"
             }
         },
 
