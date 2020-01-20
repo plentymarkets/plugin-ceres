@@ -96,7 +96,6 @@ Vue.component("quantity-input", QuantityInput);
 import TagList from "./app/components/item/TagList.vue";
 Vue.component("tag-list", TagList);
 
-import "./app/components/itemList/CategoryImageCarousel";
 import "./app/components/itemList/CategoryItem";
 import "./app/components/itemList/ItemSearch";
 import "./app/components/itemList/ItemStoreSpecial";

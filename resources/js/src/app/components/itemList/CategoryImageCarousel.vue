@@ -1,9 +1,24 @@
-import Vue from "vue";
+<template>
+    <a :id="'owl-carousel-' + _uid" v-if="$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl">
+        <div v-for="(imageUrl, index) in imageUrls" :key="index">
+            <lazy-img ref="itemLazyImage" v-if="index === 0 && !disableLazyLoad" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getImageName(imageUrl)"></lazy-img>
+            <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getImageName(imageUrl)">
+            <img v-else class="img-fluid" :src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getAltText(imageUrl)">
+        </div>
+    </a>
+
+    <a v-else :href="itemUrl">
+        <lazy-img class="img-fluid" v-if="!disableLazyLoad" ref="itemLazyImage" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getImageName(imageUrls[0])"></lazy-img>
+        <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getImageName(imageUrls[0])">
+    </a>
+</template>
+
+<script>
 import "owl.carousel";
 
-export default Vue.component("category-image-carousel", {
+export default {
 
-    delimiters: ["${", "}"],
+    name: "category-image-carousel",
 
     props: {
         imageUrlsData:
@@ -112,13 +127,6 @@ export default Vue.component("category-image-carousel", {
                     `<i id="owl-nav-text-left-${this._uid}" class='fa fa-chevron-left' aria-hidden='true'></i>`,
                     `<i id="owl-nav-text-right-${this._uid}" class='fa fa-chevron-right' aria-hidden='true'></i>`
                 ],
-                onTranslated(event)
-                {
-                    const target = $(event.currentTarget);
-                    const owlItem = $(target.find(".owl-item.active"));
-
-                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold : 100 });
-                },
                 onInitialized: event =>
                 {
                     if (this.showNav)
@@ -144,4 +152,5 @@ export default Vue.component("category-image-carousel", {
             return altText;
         }
     }
-});
+}
+</script>

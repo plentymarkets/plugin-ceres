@@ -1,4 +1,3 @@
-{{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 
 {% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
@@ -21,8 +20,7 @@
 
             <div class="thumb-image">
                 <slot name="item-image">
-                    <category-image-carousel template="#vue-category-image-carousel"
-                                            :image-urls-data="item.images | itemImages(imageUrlAccessor)"
+                    <category-image-carousel :image-urls-data="item.images | itemImages(imageUrlAccessor)"
                                             :alt-text="item | itemName"
                                             :title-text="item | itemName"
                                             :item-url="item | itemURL(urlWithVariationId)"

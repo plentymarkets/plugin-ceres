@@ -1,7 +1,13 @@
 import Vue from "vue";
 import { mapState } from "vuex";
+import CategoryImageCarousel from "./CategoryImageCarousel.vue";
 
 export default Vue.component("category-item", {
+
+    components: {
+        CategoryImageCarousel
+    },
+
     props:
     {
         template:
