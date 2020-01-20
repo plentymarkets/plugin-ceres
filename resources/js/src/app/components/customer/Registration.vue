@@ -86,6 +86,7 @@ import AddressInputGroup from "./AddressInputGroup";
 import ApiService from "../../services/ApiService";
 import NotificationService from "../../services/NotificationService";
 import ModalService from "../../services/ModalService";
+import AcceptPrivacyPolicyCheck from "./AcceptPrivacyPolicyCheck.vue";
 
 export default {
 
@@ -93,7 +94,8 @@ export default {
 
     components:
     {
-        AddressInputGroup
+        AddressInputGroup,
+        AcceptPrivacyPolicyCheck
     },
 
     mixins: [ButtonSizePropertyMixin],
