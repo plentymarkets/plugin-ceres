@@ -219,7 +219,11 @@
         <!-- ./BASKET MODAL -->
 
         <!-- PASSWORD RESET MODAL -->
-        <forgot-password-modal></forgot-password-modal>
+        <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}">
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+            </template>
+        </forgot-password-modal>
         <!-- ./PASSWORD RESET MODAL -->
 
         <!-- SHIPPINGCOSTS MODAL -->
