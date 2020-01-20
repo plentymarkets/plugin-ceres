@@ -1,7 +1,7 @@
 <template>
 <!-- {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }} -->
-    <div v-if="!hover" class="wrapper-inner basket-preview">
+    <div v-if="!hover" class="basket-preview w-100 h-100">
         <header class="basket-header p-3">
             <div class="d-inline-block basket-header-caption">{{ $translate("Ceres::Template.basketPreview") }}</div>
             <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
