@@ -5,8 +5,8 @@
         justify-content: space-between;
 
         .controls {
-            a {
-                padding: 1.2rem .8rem !important; // stylelint-disable-line declaration-no-important
+            .nav-link {
+                padding: 1.2rem .8rem;
             }
         }
     }
