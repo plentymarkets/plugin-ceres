@@ -1,7 +1,7 @@
 {% import "Ceres::Basket.Macros.AddToBasket" as AddToBasket %}
 
 <script type="x/template" id="vue-wish-list-item">
-    <div class="basket-list-item">
+    <div class="basket-list-item py-3">
         <div class="component-loading with-icon d-flex">
             <div class="image-container">
                 <img class="d-block mw-100 mh-100" v-if="image" :src="image" :title="wishListItem | itemName">
