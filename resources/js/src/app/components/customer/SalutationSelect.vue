@@ -1,16 +1,24 @@
-import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
+<template>
+    <select :value="addressData.gender" class="custom-select" @change="emitInputEvent($event.target.value)" data-autofocus>
+        <option
+            :value="salutation.key"
+            :selected="addressData.gender === salutation.key && checkGenderCompany(salutation.key)"
+            v-for="(salutation, index) in currentSalutation"
+            :key="index">
+            {{ salutation.name }}
+        </option>
+    </select>
+</template>
 
-export default Vue.component("salutation-select", {
+<script>
+import { isNullOrUndefined } from "../../helper/utils";
+
+export default {
+
+    name: "salutation-select",
 
     props:
     {
-        template:
-        {
-            type: String,
-            default: "#vue-salutation-select"
-        },
         addressData:
         {
             type: Object,
@@ -68,7 +76,7 @@ export default Vue.component("salutation-select", {
             {
                 return {
                     key: salutation.key,
-                    name: TranslationService.translate("Ceres::Template." + salutation.name)
+                    name: this.$translate("Ceres::Template." + salutation.name)
                 };
             });
 
@@ -136,4 +144,5 @@ export default Vue.component("salutation-select", {
             }
         }
     }
-});
+}
+</script>
