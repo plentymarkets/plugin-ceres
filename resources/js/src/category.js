@@ -97,7 +97,8 @@ import TagList from "./app/components/item/TagList.vue";
 Vue.component("tag-list", TagList);
 
 import "./app/components/itemList/CategoryItem";
-import "./app/components/itemList/ItemSearch";
+import ItemSearch from "./app/components/itemList/ItemSearch.vue";
+Vue.component("item-search", ItemSearch);
 import "./app/components/itemList/ItemStoreSpecial";
 import "./app/components/itemList/filter/ItemFilter";
 

@@ -49,9 +49,7 @@
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
                         <div class="always-visible-search">
-                            <item-search template="#vue-item-search"
-                                         :show-item-images="{{ showItemImages | json_encode }}"
-                                         :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
+                            <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
                                 <div class="search-box-inner">
                                     <div class="search-box-shadow-frame">
                                         <input type="search" class="search-input"/>
@@ -225,9 +223,7 @@
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <item-search
-                            :show-item-images="{{ showItemImages | json_encode }}"
-                            :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
+                        <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
                     {{ Twig.else() }}
                         {{ Twig.print("overrideSearchBar | raw") }}
                     {{ Twig.endif() }}
