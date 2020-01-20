@@ -153,9 +153,9 @@ export default {
                     switch (response.error.code)
                     {
                         case 401:
-                            this.loginFields.addClass("has-login-error");
+                            this.loginFields.forEach(element => element.classList.add("has-login-error"));
 
-                            var translationKey = "Ceres::Template.loginFailed";
+                            let translationKey = "Ceres::Template.loginFailed";
 
                             if (response.error.message.length > 0 && response.error.message === "user is blocked")
                             {
@@ -194,8 +194,8 @@ export default {
 
         resetError()
         {
-            this.loginFields.removeClass("has-login-error");
-            ValidationService.unmarkAllFields($("#login-form-" + this._uid));
+            this.loginFields.forEach( element => element.classList.remove("has-login-error"));
+            ValidationService.unmarkAllFields("#login-form-" + this._uid);
         }
     }
 }
