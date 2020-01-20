@@ -1,11 +1,13 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 import CategoryImageCarousel from "./CategoryImageCarousel.vue";
+import ItemStoreSpecial from "./ItemStoreSpecial.vue";
 
 export default Vue.component("category-item", {
 
     components: {
-        CategoryImageCarousel
+        CategoryImageCarousel,
+        ItemStoreSpecial
     },
 
     props:

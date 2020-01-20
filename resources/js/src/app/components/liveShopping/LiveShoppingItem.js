@@ -3,6 +3,7 @@ import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
 import LiveShoppingDetails from "./LiveShoppingDetails";
+import ItemStoreSpecial from "../itemList/ItemStoreSpecial.vue";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
@@ -10,7 +11,8 @@ export default Vue.component("live-shopping-item", {
 
     components:
     {
-        LiveShoppingDetails
+        LiveShoppingDetails,
+        ItemStoreSpecial
     },
 
     props: {
