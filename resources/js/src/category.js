@@ -66,7 +66,6 @@ import "./app/components/containers/LastSeenItemList";
 
 import ChangeEmailForm from "./app/components/customer/ChangeEmailForm.vue";
 Vue.component("change-email-form", ChangeEmailForm);
-import "./app/components/customer/ContactMap";
 import ReCaptcha from "./app/components/customer/ReCaptcha.vue";
 Vue.component("recaptcha", ReCaptcha);
 
