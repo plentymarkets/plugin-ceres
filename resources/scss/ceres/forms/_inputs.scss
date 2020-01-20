@@ -154,7 +154,7 @@ $border-width: 1px;
 
     &.error,
     .input-feedback-container.has-error > & {
-        z-index: $zIndex-1;
+        z-index: $zindex-1;
         border-color: $danger;
 
         input {
@@ -174,7 +174,7 @@ $border-width: 1px;
 
     &.success,
     .input-feedback-container.has-success > & {
-        z-index: $zIndex-1;
+        z-index: $zindex-1;
         border-color: $success;
 
         input {

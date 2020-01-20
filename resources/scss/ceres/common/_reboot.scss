@@ -10,7 +10,7 @@ a:active {
 }
 
 // prevent iOS standard zoom on input elements on focus
-html.ios {
+html.ios { // stylelint-disable-line selector-no-qualifying-type
     input,
     select,
     textarea {

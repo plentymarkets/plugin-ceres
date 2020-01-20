@@ -4,7 +4,7 @@
             <div v-if="!basketItems.length > 0">
                 <div class="h5">{{ $translate("Ceres::Template.basketNoItems") }}</div>
             </div>
-            <transition-group name="wish-list-item-transition" tag="div">
+            <transition-group name="list-transition" tag="div">
                 <template v-for="basketItem in basketItems">
                     <basket-list-item
                         :key="basketItem.id"
