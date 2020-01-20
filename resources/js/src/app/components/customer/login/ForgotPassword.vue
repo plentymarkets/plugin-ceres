@@ -1,24 +1,61 @@
-const ApiService          = require("../../../services/ApiService");
-const NotificationService = require("../../../services/NotificationService");
-const ModalService        = require("../../../services/ModalService");
+<template>
+	<form :id="'reset-pwd-form-' + _uid" method="post" class="reset-pwd-container login-pwd-reset">
+		<div class="modal fade" id="resetPwd" ref="pwdModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="modal-title h3">{{ $translate("Ceres::Template.loginForgotPassword") }}</div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-info w-100 pwd-forgot-info">
+							<span class="info-badge">{{ $translate("Ceres::Template.loginForgotPasswordInfo") }}</span>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div class="input-unit no-bottom" data-validate="mail">
+									<input type="email" name="email" autocomplete="email" :id="'mail' + _uid" v-model="username" data-autofocus>
+									<label :for="'mail' + _uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
+								</div>
+								<span class="error-msg">{{ $translate("Ceres::Template.loginEnterConfirmEmail") }}</span>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div>
+                            <slot name="extend-overlay-buttons"></slot>
+							
+                            <button v-if="!!currentTemplate && currentTemplate != 'tpl.login'" type="button" @click.prevent="cancelResetPwd" class="btn btn-danger btn-medium mr-2">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                {{ $translate("Ceres::Template.loginBackToLogin") }}
+                            </button>
 
+							<button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary btn-medium">
+								<i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
+								{{ $translate("Ceres::Template.loginSend") }}
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</template>
+
+<script>
+import ApiServicefrom from "../../../services/ApiService";
+import NotificationService from "../../../services/NotificationService";
+import ModalService from "../../../services/ModalService";
 import ValidationService from "../../../services/ValidationService";
-import TranslationService from "../../../services/TranslationService";
 import UrlService from "../../../services/UrlService";
 import { isNullOrUndefined } from "../../../helper/utils";
-import Vue from "vue";
 
-export default Vue.component("forgot-password-modal", {
+export default {
 
-    delimiters: ["${", "}"],
+    name: "forgot-password-modal",
 
-    props:
-    {
-        template:
-        {
-            type: String,
-            default: "#vue-forgot-password-modal"
-        }
+    props: {
+        currentTemplate: String
     },
 
     data()
@@ -88,7 +125,7 @@ export default Vue.component("forgot-password-modal", {
                     this.isDisabled = false;
 
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.loginSendEmailOk")
+                        this.$translate("Ceres::Template.loginSendEmailOk")
                     ).closeAfter(5000);
 
                 })
@@ -97,7 +134,7 @@ export default Vue.component("forgot-password-modal", {
                     this.isDisabled = false;
 
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.loginResetPwDErrorOnSendEmail")
+                        this.$translate("Ceres::Template.loginResetPwDErrorOnSendEmail")
                     ).closeAfter(5000);
                 });
         },
@@ -122,4 +159,5 @@ export default Vue.component("forgot-password-modal", {
             ValidationService.unmarkAllFields(this.$refs.pwdModal);
         }
     }
-});
+}
+</script>

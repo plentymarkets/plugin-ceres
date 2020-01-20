@@ -64,7 +64,6 @@ import "./app/components/common/TabList";
 
 import "./app/components/containers/LastSeenItemList";
 
-import "./app/components/customer/AcceptPrivacyPolicyCheck";
 import ChangeEmailForm from "./app/components/customer/ChangeEmailForm.vue";
 Vue.component("change-email-form", ChangeEmailForm);
 import "./app/components/customer/ContactMap";
@@ -76,7 +75,8 @@ Vue.component("registration", Registration);
 import ResetPasswordForm from "./app/components/customer/ResetPasswordForm.vue";
 Vue.component("reset-password-form", ResetPasswordForm);
 
-import "./app/components/customer/login/ForgotPassword";
+import ForgotPassword from "./app/components/customer/login/ForgotPassword.vue";
+Vue.component("forgot-password-modal", ForgotPassword);
 import GuestLogin from "./app/components/customer/login/GuestLogin.vue";
 Vue.component("guest-login", GuestLogin);
 import Login from "./app/components/customer/login/Login.vue";
