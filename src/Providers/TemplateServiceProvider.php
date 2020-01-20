@@ -7,6 +7,7 @@ use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
 use Ceres\Contexts\ChangeMailContext;
 use Ceres\Contexts\CheckoutContext;
+use Ceres\Contexts\ContactContext;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
 use Ceres\Contexts\MyAccountContext;
@@ -67,7 +68,7 @@ class TemplateServiceProvider extends ServiceProvider
             'tpl.guest' => ['Customer.Guest', GlobalContext::class],
             'tpl.password-reset' => ['Customer.ResetPassword', PasswordResetContext::class],
             'tpl.change-mail' => ['Customer.ChangeMail', ChangeMailContext::class],
-            'tpl.contact' => ['Customer.Contact', GlobalContext::class],
+            'tpl.contact' => ['Customer.Contact', ContactContext::class],
             'tpl.search' => ['Category.Item.CategoryItem', ItemSearchContext::class],
             'tpl.wish-list' => ['WishList.WishListView', GlobalContext::class],
             'tpl.order.return' => ['OrderReturn.OrderReturnView', OrderReturnContext::class],

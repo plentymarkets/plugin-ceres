@@ -76,7 +76,7 @@ class GoogleMapsWidget extends BaseWidget
         /** @var CeresConfig $config */
         $config = pluginApp(CeresConfig::class);
         $address = $widgetSettings['address']['mobile'];
-        $apiKey = $config->contact->apiKey;
+        $apiKey = $config->global->googleMapsApiKey;
 
         if (empty($address) || empty($apiKey)) {
             return [
