@@ -6,12 +6,12 @@ use Ceres\Config\CeresConfig;
 use Ceres\Helper\BuildHash;
 use IO\Extensions\Constants\ShopUrls;
 use IO\Helper\ContextInterface;
+use IO\Helper\Utils;
 use IO\Services\BasketService;
 use IO\Services\CategoryService;
 use IO\Services\CheckoutService;
 use IO\Services\CustomerService;
 use IO\Services\NotificationService;
-use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
@@ -63,10 +63,6 @@ class GlobalContext implements ContextInterface
     {
         $this->params = $params;
 
-        //TODO VDI MEYER
-        /** @var SessionStorageService $sessionStorageService */
-        $sessionStorageService = pluginApp(SessionStorageService::class);
-
         /** @var CategoryService $categoryService */
         $categoryService = pluginApp(CategoryService::class);
 
@@ -102,7 +98,7 @@ class GlobalContext implements ContextInterface
 
         $this->request = pluginApp(Request::class);
 
-        $this->lang = $sessionStorageService->getLang();
+        $this->lang = Utils::getLang();
 
         $this->homepageURL = $shopUrls->home;
         $this->metaLang = 'de';
