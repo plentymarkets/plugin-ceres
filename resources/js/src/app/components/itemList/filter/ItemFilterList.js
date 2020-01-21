@@ -2,12 +2,14 @@ import UrlService from "../../../services/UrlService";
 import Vue from "vue";
 import { mapState } from "vuex";
 import ItemFilterPrice from "./ItemFilterPrice";
+import ItemFilter from "./ItemFilter.vue";
 
 export default Vue.component("item-filter-list", {
 
     components:
     {
-        ItemFilterPrice
+        ItemFilterPrice,
+        ItemFilter
     },
 
     props: {

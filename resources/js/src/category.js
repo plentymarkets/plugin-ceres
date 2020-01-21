@@ -100,7 +100,6 @@ import CategoryItem from "./app/components/itemList/CategoryItem.vue";
 Vue.component("category-item", CategoryItem);
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 Vue.component("item-search", ItemSearch);
-import "./app/components/itemList/filter/ItemFilter";
 
 import "./app/components/itemList/filter/ItemFilterList";
 import "./app/components/itemList/filter/ItemFilterTagList";
