@@ -129,7 +129,8 @@ import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySe
 Vue.component("shipping-country-select", ShippingCountrySelect);
 
 import "./app/components/wishList/WishList";
-import "./app/components/wishList/WishListCount";
+import WishListCount from "./app/components/wishList/WishListCount.vue";
+Vue.component("wish-list-count", WishListCount);
 
 // =========================
 // DIRECTIVES
