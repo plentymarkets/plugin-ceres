@@ -1,17 +1,28 @@
+<template>
+    <table class="table table-striped table-hover table-sm">
+        <tbody>
+        <template v-for="itemDataAccessor in itemInformation">
+            <tr v-if="isCheckedAndNotEmpty(itemDataAccessor)">
+                <td :class="paddingClasses" :style="paddingInlineStyles">
+                    {{ getTranslation(itemDataAccessor) }}
+                </td>
+
+                <td :class="paddingClasses" :style="paddingInlineStyles">
+                    {{ getFieldValue(itemDataAccessor) }}
+                </td>
+            </tr>
+        </template>
+        </tbody>
+    </table>
+</template>
+
+<script>
 import get from "lodash/get";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
-import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
 import { mapState } from "vuex";
 
-export default Vue.component("item-data-table", {
-    props:
-    {
-        template:
-        {
-            type: String,
-            default: "#vue-item-data-table"
-        },
+export default {
+    props: {
         paddingClasses:
         {
             type: String,
@@ -94,8 +105,8 @@ export default Vue.component("item-data-table", {
 
         getTranslation(path)
         {
-            return TranslationService.translate(
-                `Ceres::Template.${this.translationMap[path]}`
+            return this.$translate(
+                "Ceres::Template." + this.translationMap[path]
             );
         },
 
@@ -105,17 +116,18 @@ export default Vue.component("item-data-table", {
 
             if (path === "item.variationDimensions")
             {
-                value = `${ get(this.currentVariation, "variation.lengthMM") }×${ get(this.currentVariation, "variation.widthMM") }×${ get(this.currentVariation, "variation.heightMM") } mm`;
+                value = get(this.currentVariation, "variation.lengthMM") + "×"
+                    + get(this.currentVariation, "variation.widthMM") + "×"
+                    + get(this.currentVariation, "variation.heightMM") + "mm";
             }
             else if (path === "unit.names.name")
             {
-                value = `${ get(this.currentVariation, "unit.content") } ${ get(this.currentVariation, "unit.names.name") }`;
+                value = get(this.currentVariation, "unit.content") + " " + get(this.currentVariation, "unit.names.name");
             }
             else
             {
                 value = get(this.currentVariation, path);
             }
-
 
             return this.formatFieldData(value, path);
         },
@@ -128,16 +140,17 @@ export default Vue.component("item-data-table", {
             {
                 switch (format.type)
                 {
-                case "text":
-                    return value + format.value;
-                case "filter":
-                    var filterMethod = get(this.$options.filters, format.value);
+                    case "text":
+                        return value + format.value;
+                    case "filter":
+                        const filterMethod = get(this.$options.filters, format.value);
 
-                    return isDefined(filterMethod) ? filterMethod(value) : value;
+                        return isDefined(filterMethod) ? filterMethod(value) : value;
                 }
             }
 
             return value;
         }
     }
-});
+}
+</script>

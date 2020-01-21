@@ -15,8 +15,11 @@
 {% set expandableChildren = widget.settings.expandableChildren.mobile %}
 {% set showItemCount = widget.settings.showItemCount.mobile %}
 
-<div class="widget widget-navigation-tree widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div class="widget-inner">
+{% set displayClasses = isPreview ? "" : "d-none d-lg-block" %}
+{% set widgetClasses = WidgetHelper.concatClasses([customClass, spacingMargin, displayClasses]) %}
+
+<div class="widget widget-navigation-tree widget-{{ appearance }}{% if widgetClasses | length > 0 %} {{ widgetClasses }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="widget-inner d-none d-lg-block">
         <div class="category-title" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
             {% if headline | trim is empty %}
                 {{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemCategories")) }}
@@ -35,4 +38,12 @@
 
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.SideNavBarBottom"])) }}
     </div>
+    {% if isPreview %}
+        <div class="widget-placeholder d-block d-lg-none prop-1-1 py-3">
+            <div>
+                <p class="title">{{ Twig.trans("Ceres::Widget.navigationTreePlaceholderTitle") }}</p>
+                <p class="description">{{ Twig.trans("Ceres::Widget.navigationTreePlaceholderDescription") }}</p>
+            </div>
+        </div>
+    {% endif %}
 </div>

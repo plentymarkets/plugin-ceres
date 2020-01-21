@@ -1,14 +1,3 @@
-.to-top {
-    background-color: $gray-700;
-
-    &:hover {
-        background-color: $gray-900;
-    }
-    i {
-        font-size: 1.5em;
-    }
-}
-
 .back-to-top-center {
     position: fixed;
     right: 0;
@@ -18,16 +7,12 @@
     display: none;
     width: 94px;
     height: 50px;
-    background: #fff;
+    background: $white;
     opacity: .5;
-    transition: opacity .3s; // stylelint-disable-line
+    @include transition(opacity .3s);
 
     &:hover {
         opacity: 1;
-    }
-
-    i {
-        color: $gray-700;
     }
 }
 
@@ -38,10 +23,9 @@
     z-index: 100;
     display: none;
     width: 40px;
-    height: 40px;
-    background: $gray-700;
+    height: 42px;
     opacity: .5;
-    transition: opacity 300ms; // stylelint-disable-line
+    @include transition(opacity .3s);
 
     &:hover {
         opacity: 1;
