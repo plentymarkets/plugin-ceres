@@ -18,41 +18,56 @@
 }
 
 .controls-list {
+    i {
+        font-size: 1rem;
+    }
+
+    a {
+        display: inline-block;
+        padding: .5rem .8rem;
+
+        &[aria-expanded="true"] { // stylelint-disable-line selector-no-qualifying-type
+            background: $gray-900;
+        }
+
+        &:hover {
+            color: color-yiq($primary);
+            background-color: $primary;
+        }
+    }
+
+    @include media-breakpoint-only(xs) {
+        a {
+            padding: .5rem;
+        }
+        .pipe {
+            margin: 0 .3em 0 0;
+        }
+        .anicon-search-xcross {
+            width: 2.2rem;
+        }
+        .badge-right {
+            display: none;
+        }
+    }
+
     .list-inline-item {
         margin-right: 0;
         font-size: .8rem;
+    }
 
-        a {
-            display: inline-block;
-            padding: .5rem .8rem;
+    .toggle-basket-preview {
+        color: $top-bar-basket-color;
+        background-color: $top-bar-basket-btn;
 
-            &[aria-expanded="true"] { // stylelint-disable-line selector-no-qualifying-type
-                background: $gray-900;
-            }
-
-            &:hover {
-                color: color-yiq($primary);
-                background-color: $primary;
-            }
-
-            i {
-                font-size: 1rem;
-            }
+        .badge {
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
         }
 
-        @include media-breakpoint-only(xs) {
-            a {
-                padding: .5rem;
-            }
-            .pipe {
-                margin: 0 .3em 0 0;
-            }
-            .anicon-search-xcross {
-                width: 2.2rem;
-            }
-            .badge-right {
-                display: none;
-            }
+        &:hover {
+            background-color: darken($top-bar-basket-btn, 10%);  // stylelint-disable-line declaration-no-important
         }
     }
 }
@@ -109,30 +124,13 @@
 
 .control-languages {
     .flag-icon {
-        font-size: .8rem !important; // stylelint-disable-line declaration-no-important
+        font-size: .8rem;
     }
 }
 
 .control-wish-list {
     .fa-heart {
         color: $red;
-    }
-}
-
-.control-basket {
-    .toggle-basket-preview {
-        color: $top-bar-basket-color;
-        background-color: $top-bar-basket-btn;
-
-        .badge {
-            font-size: inherit;
-            font-weight: inherit;
-            line-height: inherit;
-        }
-
-        &:hover {
-            background-color: darken($top-bar-basket-btn, 10%) !important;  // stylelint-disable-line declaration-no-important
-        }
     }
 }
 
