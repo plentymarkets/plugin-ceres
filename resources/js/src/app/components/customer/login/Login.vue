@@ -75,7 +75,7 @@ export default {
     {
         this.$nextTick(() =>
         {
-            this.loginFields = document.querySelector(".login-container").querySelectorAll(".input-unit");
+            this.loginFields = document.querySelector("#login-form-" + this._uid).querySelectorAll(".input-unit");
 
             AutoFocusService.triggerAutoFocus();
         });
