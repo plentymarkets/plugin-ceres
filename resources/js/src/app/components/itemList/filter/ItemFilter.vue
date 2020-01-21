@@ -20,7 +20,7 @@
 
 <script>
 import { mapState } from "vuex";
-import ItemFilterPrice from "./ItemFilterPrice";
+import ItemFilterPrice from "./ItemFilterPrice.vue";
 
 export default {
 
