@@ -2,12 +2,8 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {% import "Ceres::PageDesign.Macros.Translations" as Translations %}
 {{ component( "Ceres::PageDesign.Components.Notifications" ) }}
-{{ component( "Ceres::Basket.Components.BasketPreview" ) }}
-{{ component( "Ceres::Customer.Components.Login" ) }}
-{{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
-{{ component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
 
 {# TODO: remove if shop builder pages can be rebuild by migrations #}
 {{ component( "Ceres::Containers.Components.LastSeenItemList" ) }}
@@ -15,7 +11,7 @@
 {{ component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
 
 {# TODO REMOVE WHEN CONVERTED TO SFC #}
-{{ component("Ceres::Item.Components.OrderPropertyValue") }}
+{{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
@@ -76,11 +72,7 @@
 
     {% if ceresConfig.basket.previewType == "right" %}
     <div class="wrapper wrapper-right position-fixed bg-white overflow-hidden">
-        <basket-preview
-            :show-net-prices={{ showNetPrices | json_encode }}
-            checkout-url="{{ urls.checkout }}"
-            basket-url="{{ urls.basket }}"
-        >
+        <basket-preview :show-net-prices="{{ showNetPrices | json_encode }}">
             <template #before-basket-item>
                 {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
             </template>
@@ -139,7 +131,11 @@
                         <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
-                    <login modal-element="login-modal-wrapper"></login>
+                    <login modal-element="login-modal-wrapper">
+                        <template #extend-overlay-buttons>
+                            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                        </template>
+                    </login>
                 </div>
             </div>
         </div>
@@ -154,6 +150,7 @@
                     <div class="modal-header">
                         <div class="modal-title h3">
                             {{ trans("Ceres::Template.regCreateAccount") }}
+
                         </div>
 
                         <popper v-cloak class="ml-auto">
@@ -178,13 +175,16 @@
                         <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
+                        <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
+                            <template #extend-overlay-buttons>
+                                {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+                            </template>
+                        </registration>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- ./REGISTRATION MODAL -->
 
     <!-- BASKET MODAL -->
@@ -196,7 +196,11 @@
     <!-- ./BASKET MODAL -->
 
     <!-- PASSWORD RESET MODAL -->
-    <forgot-password-modal></forgot-password-modal>
+    <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}">
+        <template slot="extendOverlayButtons">
+            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+        </template>
+    </forgot-password-modal>
     <!-- ./PASSWORD RESET MODAL -->
 
     <!-- SHIPPINGCOSTS MODAL -->

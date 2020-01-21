@@ -12,7 +12,7 @@
             <strong v-if="showErrorCode">{{ notification.code }}</strong>
 
             <div v-html="notification.message"></div>
-            
+
             <p class="small" v-for="(trace, index) in notification.stackTrace" :key="index">
                 {{ trace.message }}
             </p>
@@ -29,7 +29,10 @@ export default {
 
     props: {
         initialNotifications: Object,
-        logData: Array
+        logData: {
+            type: Array,
+            default: () => []
+        }
     },
 
     data()
