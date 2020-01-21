@@ -21,9 +21,6 @@
 
     {% else %}
 
-        {{ component( "Ceres::ItemList.Components.CategoryItem") }}
-        {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
-
         {% if category is defined and ceresConfig.item.showCategoryImage %}
             {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
         {% endif %}
