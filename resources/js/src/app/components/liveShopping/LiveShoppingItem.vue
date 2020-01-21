@@ -30,7 +30,8 @@
                                        @reload-offer="reloadOffer()"
                                        :display-settings="displaySettings"
                                        :prices="prices"
-                                       :is-active-by-stock="isActiveByStock">
+                                       :is-active-by-stock="isActiveByStock"
+                                       :show-net-prices="showNetPrices">
                     <template #after-item-name>
                         <div class="live-shopping-add-to-basket">
                             <add-to-basket
