@@ -60,7 +60,8 @@ import "./app/components/category/StepByStepNavigation";
 
 import GoogleMapsWidget from "./app/components/common/GoogleMaps.vue";
 Vue.component("google-maps-widget", GoogleMapsWidget);
-import "./app/components/common/LazyImg";
+import LazyImg from "./app/components/common/LazyImg.vue";
+Vue.component("lazy-img", LazyImg);
 import "./app/components/common/TabList";
 
 import "./app/components/containers/LastSeenItemList";
