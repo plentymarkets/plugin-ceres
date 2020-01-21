@@ -56,7 +56,7 @@ Vue.component("coupon", Coupon);
 import BasketList from "./app/components/basket/list/BasketList.vue";
 Vue.component("basket-list", BasketList);
 
-import StepByStepNavigation from "./app/components/category/StepByStepNavigation";
+import StepByStepNavigation from "./app/components/category/StepByStepNavigation.vue";
 Vue.component("step-by-step-navigation", StepByStepNavigation);
 
 import GoogleMapsWidget from "./app/components/common/GoogleMaps.vue";
@@ -66,7 +66,8 @@ Vue.component("lazy-img", LazyImg);
 import TabList from "./app/components/common/TabList.vue";
 Vue.component("tab-list", TabList);
 
-import "./app/components/containers/LastSeenItemList";
+import LastSeenItemList from "./app/components/containers/LastSeenItemList.vue";
+Vue.component("last-seen-item-list", LastSeenItemList);
 
 import ChangeEmailForm from "./app/components/customer/ChangeEmailForm.vue";
 Vue.component("change-email-form", ChangeEmailForm);
