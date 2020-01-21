@@ -5,27 +5,31 @@
         <div v-if="facet.type === 'price'">
             <item-filter-price></item-filter-price>
         </div>
-        
-        <template v-else>
-            <div class="form-check-wrapper" v-for="value in facets" :key="value.id" :class="paddingClasses" :style="paddingInlineStyles">
-                <div class="form-check" >
-                    <input :id="'option-' + value.id" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
-                    <label :for="'option-' + value.id" class="form-check-label">
-                        {{ value.name }}
-                    </label>
-                    <div class="filter-badge bg-appearance">{{ value.count }}</div>
-                </div>
+
+        <div v-else class="form-check-wrapper" v-for="value in facets" :key="value.id" :class="paddingClasses" :style="paddingInlineStyles">
+            <div class="form-check" >
+                <input :id="'option-' + value.id" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
+                <label :for="'option-' + value.id" class="form-check-label">
+                    {{ value.name }}
+                </label>
+                <div class="filter-badge bg-appearance">{{ value.count }}</div>
             </div>
-        </template>
+        </div>
     </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import ItemFilterPrice from "./ItemFilterPrice";
 
 export default {
 
     name: "item-filter",
+
+    components:
+    {
+        ItemFilterPrice
+    },
 
     props:
     {
@@ -82,7 +86,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>
