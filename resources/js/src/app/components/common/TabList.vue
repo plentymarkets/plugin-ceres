@@ -1,8 +1,9 @@
+<script>
 import { isDefined } from "../../helper/utils";
-import Vue from "vue";
 import TabItem from "./TabItem";
 
 const TabNavItem = {
+    
     name: "tab-nav-item",
 
     render(createElement)
@@ -59,7 +60,9 @@ const TabNavItem = {
     }
 };
 
-export default Vue.component("tab-list", {
+export default {
+
+    name: "tab-list",
 
     components:
     {
@@ -214,4 +217,5 @@ export default Vue.component("tab-list", {
             return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe");
         }
     }
-});
+}
+</script>
