@@ -2,7 +2,7 @@ import { isNullOrUndefined } from "../../helper/utils";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
-import LiveShoppingDetails from "./LiveShoppingDetails";
+import LiveShoppingDetails from "./LiveShoppingDetails.vue";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
@@ -19,6 +19,7 @@ export default Vue.component("live-shopping-item", {
             type: String,
             default: "#vue-live-shopping-item"
         },
+
         liveShoppingId:
         {
             type: Number,
@@ -28,15 +29,18 @@ export default Vue.component("live-shopping-item", {
                 return value % 1 === 0 && value >= 1 && value <= 10;
             }
         },
+
         displaySettings:
         {
             type: Object
         },
+
         paddingClasses:
         {
             type: String,
             default: null
         },
+
         paddingInlineStyles:
         {
             type: String,
