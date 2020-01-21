@@ -108,9 +108,10 @@ import "./app/components/itemList/filter/ItemFilterTagList";
 
 import "./app/components/liveShopping/LiveShoppingItem";
 
-import "./app/components/newsletter/NewsletterInput";
-import "./app/components/newsletter/NewsletterUnsubscribeInput";
-
+import NewsletterInput from "./app/components/newsletter/NewsletterInput.vue";
+Vue.component("newsletter-input", NewsletterInput);
+import NewsletterUnsubscribeInput from "./app/components/newsletter/NewsletterUnsubscribeInput.vue";
+Vue.component("newsletter-unsubscribe-input", NewsletterUnsubscribeInput);
 import "./app/components/orderReturn/OrderReturn";
 
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
@@ -201,3 +202,4 @@ import TranslationService from "./app/services/TranslationService";
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
+Vue.prototype.$ceres = App;
