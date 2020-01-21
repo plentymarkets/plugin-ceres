@@ -72,11 +72,7 @@
 
     {% if ceresConfig.basket.previewType == "right" %}
     <div class="wrapper wrapper-right position-fixed bg-white overflow-hidden">
-        <basket-preview
-            :show-net-prices={{ showNetPrices | json_encode }}
-            checkout-url="{{ urls.checkout }}"
-            basket-url="{{ urls.basket }}"
-        >
+        <basket-preview :show-net-prices="{{ showNetPrices | json_encode }}">
             <template #before-basket-item>
                 {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
             </template>

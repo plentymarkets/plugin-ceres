@@ -219,8 +219,6 @@ export default {
             type: Boolean,
             default: false
         },
-        checkoutUrl: String,
-        basketUrl: String,
         hover: Boolean
     },
 
@@ -229,6 +227,17 @@ export default {
         {
             return App.config.basket.showShippingCountrySelect;
         },
+
+        basketUrl()
+        {
+            return App.urls.basket;
+        },
+
+        checkoutUrl()
+        {
+            return App.urls.checkout;
+        },
+
         ...mapState({
             basket: state => state.basket.data,
             basketItems: state => state.basket.items,
