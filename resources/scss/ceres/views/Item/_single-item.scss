@@ -129,16 +129,16 @@
     }
 }
 
-.availability_1 { @include context-bg($availability_1); }
-.availability_2 { @include context-bg($availability_2); }
-.availability_3 { @include context-bg($availability_3); }
-.availability_4 { @include context-bg($availability_4); }
-.availability_5 { @include context-bg($availability_5); }
-.availability_6 { @include context-bg($availability_6); }
-.availability_7 { @include context-bg($availability_7); }
-.availability_8 { @include context-bg($availability_8); }
-.availability_9 { @include context-bg($availability_9); }
-.availability_10 { @include context-bg($availability_10); }
+.availability_1 { @include context-bg($success); }
+.availability_2 { @include context-bg($success); }
+.availability_3 { @include context-bg($warning); }
+.availability_4 { @include context-bg($warning); }
+.availability_5 { @include context-bg($danger); }
+.availability_6 { @include context-bg($danger); }
+.availability_7 { @include context-bg($danger); }
+.availability_8 { @include context-bg($danger); }
+.availability_9 { @include context-bg($gray-900); }
+.availability_10 { @include context-bg($gray-900); }
 
 
 .rating {

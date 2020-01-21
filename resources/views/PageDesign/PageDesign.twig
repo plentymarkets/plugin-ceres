@@ -56,198 +56,181 @@
         document.body.classList.add("no-touch");
     }
 </script>
-<div id="vue-app"{% if openBasketClass is not empty %} class="{{ openBasketClass }}"{% endif %}>
-    <div class="wrapper wrapper-top">
-        <!-- messages -->
-        <notifications :initial-notifications="{{ notifications | json_encode }}" :log-data="{{ config('Ceres.log.data') | split(', ') | json_encode }}"></notifications>
+<div id="vue-app" class="app{% if openBasketClass is not empty %} {{ openBasketClass }}{% endif %}">
+    <!-- messages -->
+    <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+
+    {% include getPartial('header') %}
+
+    <div id="page-body" class="main">
+        {% block PageBody %}{% endblock %}
     </div>
 
-    <div class="wrapper wrapper-left">
-        <!-- filters -->
-    </div>
+    {% include getPartial('footer') %}
 
-    <div class="wrapper wrapper-main {% if ceresConfig.header.fixNavBarPos %}isSticky{% endif %}">
-        {% include getPartial('header') %}
+    {% block PartialFooter %}{% endblock %}
 
-        <div id="page-body" class="main">
-
-            {% block PageBody %}
-                <!-- inject content of inherited templates here -->
-            {% endblock %}
-        </div>
-
-        {% include getPartial('footer') %}
-
-        {% block PartialFooter %}
-        {% endblock %}
-    </div>
-
-    {% if basket is not defined %}
-        {% set basket = services.basket.getBasketForTemplate() %}
-    {% endif %}
     {% if ceresConfig.basket.previewType == "right" %}
-        <div class="wrapper wrapper-right">
-            <basket-preview
-                :show-net-prices={{ showNetPrices | json_encode }}
-                checkout-url="{{ urls.checkout }}"
-                basket-url="{{ urls.basket }}"
-            >
-                <template #before-basket-item>
-                    {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
-                </template>
-                <template #loading-animation>
-                    {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-                </template>
-                <template #after-basket-item>
-                    {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
-                </template>
-                <template #before-basket-totals>
-                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
-                </template>
-                <template #before-item-sum>
-                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
-                </template>
-                <template #after-item-sum>
-                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
-                </template>
-                <template #before-shipping-costs>
-                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
-                </template>
-                <template #after-shipping-costs>
-                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
-                </template>
-                <template #before-total-sum>
-                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
-                </template>
-                <template #before-vat>
-                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
-                </template>
-                <template #after-vat>
-                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
-                </template>
-                <template #after-total-sum>
-                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
-                </template>
-                <template #after-basket-totals>
-                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
-                </template>
-                <template #before-checkout-button>
-                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
-                </template>
-                <template #after-checkout-button>
-                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
-                </template>
-            </basket-preview>
-        </div>
+    <div class="wrapper wrapper-right position-fixed bg-white overflow-hidden">
+        <basket-preview
+            :show-net-prices={{ showNetPrices | json_encode }}
+            checkout-url="{{ urls.checkout }}"
+            basket-url="{{ urls.basket }}"
+        >
+            <template #before-basket-item>
+                {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+            </template>
+            <template #loading-animation>
+                {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+            </template>
+            <template #after-basket-item>
+                {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+            </template>
+            <template #before-basket-totals>
+                {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
+            </template>
+            <template #before-item-sum>
+                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+            </template>
+            <template #after-item-sum>
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+            </template>
+            <template #before-shipping-costs>
+                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+            </template>
+            <template #after-shipping-costs>
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+            </template>
+            <template #before-total-sum>
+                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+            </template>
+            <template #before-vat>
+                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+            </template>
+            <template #after-vat>
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+            </template>
+            <template #after-total-sum>
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+            </template>
+            <template #after-basket-totals>
+                {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
+            </template>
+            <template #before-checkout-button>
+                {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+            </template>
+            <template #after-checkout-button>
+                {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+            </template>
+        </basket-preview>
+    </div>
     {% endif %}
 
-    <div class="wrapper wrapper-bottom">
-        <!-- LOGIN MODAL -->
-        <div id="login-modal-wrapper">
-            <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <login modal-element="login-modal-wrapper">
-                            <template #extend-overlay-buttons>
-                                {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
-                            </template>
-                        </login>
+    <!-- LOGIN MODAL -->
+    <div id="login-modal-wrapper">
+        <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
+                    <login modal-element="login-modal-wrapper">
+                        <template #extend-overlay-buttons>
+                            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                        </template>
+                    </login>
                 </div>
             </div>
         </div>
-        <!-- ./LOGIN MODAL -->
-
-        <!-- REGISTRATION MODAL -->
-        <div id="simple-registration-modal-wrapper">
-            <div class="modal fade" id="registration" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-title h3">
-                                {{ trans("Ceres::Template.regCreateAccount") }}
-
-                            </div>
-
-                            <popper v-cloak class="ml-auto">
-                                <template #handle>
-                                    <button class="btn btn-icon btn-secondary btn-sm">
-                                        <i class="fa fa-info"></i>
-                                    </button>
-                                </template>
-                                <template #title>
-                                    {{ trans("Ceres::Template.regContactInformations") }}
-                                </template>
-                                <template #content>
-                                    <ul class='pl-3'>
-                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                                    </ul>
-                                </template>
-                            </popper>
-
-                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
-                                <template #extend-overlay-buttons>
-                                    {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
-                                </template>
-                            </registration>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ./REGISTRATION MODAL -->
-
-        <!-- BASKET MODAL -->
-        <add-item-to-basket-overlay>
-            <template slot="extendOverlayButtons">
-                {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
-            </template>
-        </add-item-to-basket-overlay>
-        <!-- ./BASKET MODAL -->
-
-        <!-- PASSWORD RESET MODAL -->
-        <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}">
-            <template slot="extendOverlayButtons">
-                {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
-            </template>
-        </forgot-password-modal>
-        <!-- ./PASSWORD RESET MODAL -->
-
-        <!-- SHIPPINGCOSTS MODAL -->
-        {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
-        <div id="shippingscosts-modal-wrapper">
-            <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
-                            {% if shopBuilderShippingTemplate | trim is not empty %}
-                                {{ shopBuilderShippingTemplate | raw }}
-                            {% else %}
-                                {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-        <!-- ./SHIPPINGCOSTS MODAL -->
     </div>
+    <!-- ./LOGIN MODAL -->
+
+    <!-- REGISTRATION MODAL -->
+    <div id="simple-registration-modal-wrapper">
+        <div class="modal fade" id="registration" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title h3">
+                            {{ trans("Ceres::Template.regCreateAccount") }}
+
+                        </div>
+
+                        <popper v-cloak class="ml-auto">
+                            <template #handle>
+                                <button class="btn btn-icon btn-secondary btn-sm">
+                                    <i class="fa fa-info"></i>
+                                </button>
+                            </template>
+                            <template #title>
+                                {{ trans("Ceres::Template.regContactInformations") }}
+                            </template>
+                            <template #content>
+                                <ul class='pl-3'>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                    <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                </ul>
+                            </template>
+                        </popper>
+
+                        <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
+                            <template #extend-overlay-buttons>
+                                {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+                            </template>
+                        </registration>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./REGISTRATION MODAL -->
+
+    <!-- BASKET MODAL -->
+    <add-item-to-basket-overlay>
+        <template slot="extendOverlayButtons">
+            {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
+        </template>
+    </add-item-to-basket-overlay>
+    <!-- ./BASKET MODAL -->
+
+    <!-- PASSWORD RESET MODAL -->
+    <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}">
+        <template slot="extendOverlayButtons">
+            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+        </template>
+    </forgot-password-modal>
+    <!-- ./PASSWORD RESET MODAL -->
+
+    <!-- SHIPPINGCOSTS MODAL -->
+    {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
+    <div id="shippingscosts-modal-wrapper">
+        <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
+                        {% if shopBuilderShippingTemplate | trim is not empty %}
+                            {{ shopBuilderShippingTemplate | raw }}
+                        {% else %}
+                            {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- ./SHIPPINGCOSTS MODAL -->
 </div>
 
 <script>

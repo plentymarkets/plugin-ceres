@@ -154,7 +154,7 @@ $border-width: 1px;
 
     &.error,
     .input-feedback-container.has-error > & {
-        z-index: $zIndex-1;
+        z-index: $zindex-1;
         border-color: $danger;
 
         input {
@@ -174,7 +174,7 @@ $border-width: 1px;
 
     &.success,
     .input-feedback-container.has-success > & {
-        z-index: $zIndex-1;
+        z-index: $zindex-1;
         border-color: $success;
 
         input {
@@ -335,3 +335,66 @@ $border-width: 1px;
         display: block;
     }
 }
+
+.login-pwd-reset {
+    .input-unit {
+        & + .error-msg {
+            display: none;
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #d9534f;
+        }
+
+        &.error {
+            margin-bottom: 2px;
+
+            & + .error-msg {
+                display: block;
+            }
+        }
+    }
+}
+
+#contact-form {
+
+    .input-unit {
+
+        & + .error-feedback {
+            position: relative;
+            display: none;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #d9534f;
+        }
+
+        &.error {
+            margin-bottom: 0;
+
+            & + .error-feedback {
+                display: block;
+            }
+        }
+
+        @include media-breakpoint-up(md) {
+
+            &.error {
+                margin-bottom: 0;
+
+                & + .error-feedback {
+                    margin-bottom: 0;
+                }
+
+                &.input-name-field {
+                    & + .error-feedback {
+                        margin-bottom: -3px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+textarea.no-resize {
+    resize: none;
+}
+

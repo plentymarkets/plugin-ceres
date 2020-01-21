@@ -95,7 +95,7 @@
 
                     <div class="col-12 text-sm-right">* {{ trans("Ceres::Template.contactRequiredField") }}</div>
 
-                    <div class="col-12 re-captcha-container">
+                    <div class="col-12">
                         {% if ceresConfig.global.googleRecaptchaApiKey | trim is not empty %}
                             <recaptcha></recaptcha>
                         {% endif %}
@@ -136,7 +136,7 @@
                         </div>
                     {% endif %}
 
-                    <div class="col-12 col-md-3 offset-md-9 send-mail">
+                    <div class="col-12 col-md-3 offset-md-9">
                         <button type="submit" class="btn btn-primary btn-block">
                             <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.contactSend") }}

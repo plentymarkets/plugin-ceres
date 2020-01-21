@@ -1,0 +1,35 @@
+.search-permanent {
+
+    @include media-breakpoint-up(md) {
+        align-items: center;
+        justify-content: space-between;
+
+        .controls {
+            a {
+                padding: 1.2rem .8rem !important; // stylelint-disable-line declaration-no-important
+            }
+        }
+    }
+
+    .search-input {
+        font-size: 1.3rem;
+        line-height: 1;
+        border: none;
+        outline: none;
+    }
+
+    .search-submit {
+        font-size: 1.3rem;
+        line-height: 1;
+        color: $primary;
+        cursor: pointer;
+        background-color: $gray-200;
+        border: none;
+    }
+}
+
+html.ie {
+    .always-visible-search {
+        min-height: 32px;
+    }
+}

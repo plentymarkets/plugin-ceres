@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!hover" class="wrapper-inner basket-preview">
+    <div v-if="!hover" class="basket-preview w-100 h-100">
         <header class="basket-header p-3">
             <div class="d-inline-block basket-header-caption">{{ $translate("Ceres::Template.basketPreview") }}</div>
             <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
@@ -80,7 +80,7 @@
                         :class="{ 'disabled': basketItems.length <= 0 }"
                         :title="$translate('Ceres::Template.basket')">
                             <i class="fa fa-shopping-cart d-sm-none d-md-inline-block"></i>
-                            {{ $translate("Ceres::Template.basket") }} 
+                            {{ $translate("Ceres::Template.basket") }}
                         </a>
                     </div>
 
@@ -176,7 +176,7 @@
                             <slot name="after-total-sum"></slot>
                         </template>
                     </basket-totals>
-                    
+
                     <slot name="after-basket-totals"></slot>
 
                     <div class="row">
@@ -234,7 +234,7 @@ export default {
             basketItems: state => state.basket.items,
             basketNotifications: state => state.basket.basketNotifications,
             isBasketItemQuantityUpdate: state => state.basket.isBasketItemQuantityUpdate
-        })    
+        })
     },
 
     created()
