@@ -7,8 +7,6 @@
 {% endblock %}
 
 {% block PageBody %}
-    {{ component( "Ceres::WishList.Components.WishList" ) }}
-
     <div class="page-content wishlist container-max mb-5 py-3 bg-white">
         <div class="row mt-3">
             <div class="col-12">
@@ -18,6 +16,10 @@
 
         <hr>
 
-         <wish-list></wish-list>
+         <wish-list>
+            <template #loading-animation>
+                {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
+            </template>
+         </wish-list>
     </div>
 {% endblock %}
