@@ -116,8 +116,9 @@ import NewsletterInput from "./app/components/newsletter/NewsletterInput.vue";
 Vue.component("newsletter-input", NewsletterInput);
 import NewsletterUnsubscribeInput from "./app/components/newsletter/NewsletterUnsubscribeInput.vue";
 Vue.component("newsletter-unsubscribe-input", NewsletterUnsubscribeInput);
-import "./app/components/orderReturn/OrderReturn";
-//Vue.component("order-return", OrderReturn);
+
+import OrderReturn from "./app/components/orderReturn/OrderReturn.vue";
+Vue.component("order-return", OrderReturn);
 
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
 Vue.component("cookie-bar", CookieBar);
