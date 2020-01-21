@@ -1,24 +1,35 @@
-import TranslationService from "../../services/TranslationService";
-import ValidationService from "../../services/ValidationService";
+<template>
+    <form :id="'newsletter-unsubscribe-input-form_' + _uid" method="post" @submit.prevent="validateData">
+        <div class="row">
+            <div class="col-12">
+                <div class="input-unit mt-3" data-validate="mail">
+                    <label for="email-input-id">{{ $translate("Ceres::Template.newsletterEmail") }}</label>
+                    <input type="email" name="email" autocomplete="email" class="form-control" id="email-input-id" v-model="email">
+                </div>
+
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
+                        <i class="fa fa-paper-plane-o" v-waiting-animation="isDisabled" aria-hidden="true"></i>
+                        <span>{{ $translate("Ceres::Template.newsletterUnsubscribeButtonLabel") }}</span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </form>
+</template>
+
+<script>
 import ApiService from "../../services/ApiService";
+import ValidationService from "../../services/ValidationService";
 import NotificationService from "../../services/NotificationService";
 import UrlService from "../../services/UrlService";
 
 import { isUndefined } from "../../helper/utils";
-import Vue from "vue";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
-export default Vue.component("newsletter-unsubscribe-input", {
+export default {
 
     mixins: [ButtonSizePropertyMixin],
-
-    props: {
-        template:
-        {
-            type: String,
-            default: "#vue-newsletter-unsubscribe-input"
-        }
-    },
 
     data()
     {
@@ -45,6 +56,7 @@ export default Vue.component("newsletter-unsubscribe-input", {
                     this.isDisabled = false;
                 });
         },
+
         save()
         {
             const urlParams = UrlService.getUrlParams(document.location.search);
@@ -58,14 +70,14 @@ export default Vue.component("newsletter-unsubscribe-input", {
                 .done(() =>
                 {
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.newsletterOptOutSuccessMessage")
+                        this.$translate("Ceres::Template.newsletterOptOutSuccessMessage")
                     ).closeAfter(3000);
                     this.resetInputs();
                 })
                 .fail(() =>
                 {
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.newsletterOptOutErrorMessage")
+                        this.$translate("Ceres::Template.newsletterOptOutErrorMessage")
                     ).closeAfter(5000);
                 })
                 .always(() =>
@@ -73,9 +85,11 @@ export default Vue.component("newsletter-unsubscribe-input", {
                     this.isDisabled = false;
                 });
         },
+
         resetInputs()
         {
             this.email = "";
         }
     }
-});
+}
+</script>
