@@ -1,6 +1,6 @@
 <script>
 import { isDefined } from "../../helper/utils";
-import TabItem from "./TabItem";
+import TabItem from "./TabItem.vue";
 
 const TabNavItem = {
     
