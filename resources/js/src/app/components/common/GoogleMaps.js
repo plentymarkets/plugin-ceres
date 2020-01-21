@@ -4,7 +4,7 @@ import { isNullOrUndefined } from "../../helper/utils";
 
 export default Vue.component("google-maps-widget",
     {
-        template: `<div :class="aspectRatio" class="maps-component position-relative" ref="googleMapsContainer"><div v-if="scriptBlocked"><slot></slot></div></div>`,
+        template: `<div :class="aspectClass" class="maps-component position-relative" ref="googleMapsContainer"><div v-if="scriptBlocked"><slot></slot></div></div>`,
 
         props:
         {
@@ -29,7 +29,7 @@ export default Vue.component("google-maps-widget",
             aspectRatio:
             {
                 type: String,
-                default: "prop-xs-3-1"
+                default: "3-1"
             }
         },
 
@@ -56,6 +56,11 @@ export default Vue.component("google-maps-widget",
                 }
 
                 return null;
+            },
+
+            aspectClass()
+            {
+                return "prop-" + this.aspectRatio;
             }
         },
 

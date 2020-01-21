@@ -1,21 +1,101 @@
+<template>
+    <form class="w-100" autocomplete="on" method="post" @submit.prevent="validateRegistration()" ref="registrationForm">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="input-unit" data-validate="mail">
+                    <input type="email" name="email" autocomplete="email" :id="'email'+_uid" v-model="username" data-autofocus>
+                    <label :for="'email'+_uid">{{ $translate("Ceres::Template.regEmail") }}*</label>
+                </div>
+            </div>
+
+            <div class="col-sm-6" v-if="!guestMode">
+                <div class="input-unit" :class="{'no-bottom media-xs-d': modalElement}" data-validate="password" ref="passwordInput">
+                    <popper v-cloak trigger="focus" placement="bottom" ref="passwordHint">
+                        <template #handle>
+                            <input type="password" name="password" autocomplete="new-password" :id="'new-password-' + _uid" v-model="password">
+                        </template>
+
+                        <template #title>
+                            <div>
+                                {{ $translate("Ceres::Template.regPasswordHintTitle") }}
+                            </div>
+                        </template>
+
+                        <template #content>
+                            <ul class="pl-3">
+                                <li>{{ $translate("Ceres::Template.regPasswordHintLength") }}</li>
+                                <li>{{ $translate("Ceres::Template.regPasswordHintDigit") }}</li>
+                                <li>{{ $translate("Ceres::Template.regPasswordHintChar") }}</li>
+                            </ul>
+                        </template>
+                    </popper>
+
+                    <label :for="'new-password-' + _uid">{{ $translate("Ceres::Template.regPassword") }}*</label>
+                </div>
+            </div>
+
+            <div class="col-sm-6 input-unit-group" v-if="!guestMode">
+                <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="ref">
+                    <input type="password" name="password-repeat" autocomplete="new-password" :id="'new-password-repeat-' + _uid" v-model="passwordRepeat" :data-validate-ref="'#new-password-' + _uid">
+                    <label :for="'new-password-repeat' + _uid">{{ $translate("Ceres::Template.regRepeatPassword") }}*</label>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <address-input-group
+                    template="#vue-address-input-group"
+                    v-if="!isSimpleRegistration"
+                    address-type="1"
+                    :value="billingAddress"
+                    @input="setAddressDataField($event)"
+                    :optional-address-fields="shownFields"
+                    :required-address-fields="requiredFields"
+                    :default-salutation="defaultSalutation">
+                </address-input-group>
+            </div>
+
+            <div class="col-12" v-if="enableConfirmingPrivacyPolicy">
+                <accept-privacy-policy-check
+                        class="mt-3 mb-0"
+                        v-model="privacyPolicyAccepted"
+                        @input="privacyPolicyValueChanged($event)"
+                        :show-error="privacyPolicyShowError">
+                </accept-privacy-policy-check>
+            </div>
+        </div>
+        <div class="border-top mt-2 text-right">
+            <slot name="extend-overlay-buttons"></slot>
+            
+            <button :disabled="isDisabled" class="btn btn-appearance btn-primary btn-medium mt-3" :class="buttonSizeClass">
+                <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
+                {{ $translate("Ceres::Template.regRegister") }}
+            </button>
+        </div>
+
+        <recaptcha v-if="!!googleRecaptchaApiKey && modalShown"></recaptcha>
+    </form>
+</template>
+
+<script>
 import ValidationService from "../../services/ValidationService";
-import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
-import Vue from "vue";
 import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 import AddressInputGroup from "./AddressInputGroup";
+import ApiService from "../../services/ApiService";
+import NotificationService from "../../services/NotificationService";
+import ModalService from "../../services/ModalService";
+import AcceptPrivacyPolicyCheck from "./AcceptPrivacyPolicyCheck.vue";
 
-const ApiService          = require("../../services/ApiService");
-const NotificationService = require("../../services/NotificationService");
-const ModalService        = require("../../services/ModalService");
+export default {
 
-export default Vue.component("registration", {
+    name: "registration",
 
     components:
     {
-        AddressInputGroup
+        AddressInputGroup,
+        AcceptPrivacyPolicyCheck
     },
 
     mixins: [ButtonSizePropertyMixin],
@@ -45,6 +125,8 @@ export default Vue.component("registration", {
             privacyPolicyAccepted : false,
             privacyPolicyShowError: false,
             enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
+            googleRecaptchaApiKey: App.config.global.googleRecaptchaApiKey,
+            defaultSalutation: App.config.addresses.defaultSalutation,
             modalShown: false
         };
     },
@@ -81,7 +163,7 @@ export default Vue.component("registration", {
                                 this.privacyPolicyShowError = true;
 
                                 NotificationService.error(
-                                    TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                                    this.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
                                 );
                             }
                         })
@@ -97,7 +179,7 @@ export default Vue.component("registration", {
                             if (invalidFieldNames.length > 0)
                             {
                                 NotificationService.error(
-                                    TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: invalidFieldNames.join(", ") })
+                                    this.$translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: invalidFieldNames.join(", ") })
                                 );
                             }
 
@@ -108,7 +190,7 @@ export default Vue.component("registration", {
                                 this.privacyPolicyShowError = true;
 
                                 NotificationService.error(
-                                    TranslationService.translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                                    this.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
                                 );
                             }
                         });
@@ -151,7 +233,7 @@ export default Vue.component("registration", {
                         document.dispatchEvent(new CustomEvent("onSignUpSuccess", { detail: userObject }));
 
                         NotificationService.success(
-                            TranslationService.translate("Ceres::Template.regSuccessful")
+                            this.$translate("Ceres::Template.regSuccessful")
                         ).closeAfter(3000);
 
                         if (document.getElementById(this.modalElement) !== null)
@@ -171,7 +253,7 @@ export default Vue.component("registration", {
                     else
                     {
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.regError")
+                            this.$translate("Ceres::Template.regError")
                         ).closeAfter(10000);
                     }
 
@@ -254,4 +336,5 @@ export default Vue.component("registration", {
             }
         }
     }
-});
+}
+</script>
