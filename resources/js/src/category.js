@@ -129,7 +129,8 @@ Vue.component("popper", Popper);
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
 Vue.component("shipping-country-select", ShippingCountrySelect);
 
-import "./app/components/wishList/WishList";
+import WishList from "./app/components/wishList/WishList.vue";
+Vue.component("wish-list", WishList);
 import WishListCount from "./app/components/wishList/WishListCount.vue";
 Vue.component("wish-list-count", WishListCount);
 
