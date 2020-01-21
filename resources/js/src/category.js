@@ -58,7 +58,8 @@ Vue.component("basket-list", BasketList);
 
 import "./app/components/category/StepByStepNavigation";
 
-import "./app/components/common/GoogleMaps";
+import GoogleMapsWidget from "./app/components/common/GoogleMaps.vue";
+Vue.component("google-maps-widget", GoogleMapsWidget);
 import "./app/components/common/LazyImg";
 import "./app/components/common/TabList";
 
