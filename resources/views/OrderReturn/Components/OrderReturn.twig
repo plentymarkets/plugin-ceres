@@ -1,7 +1,4 @@
 <script type="x/template" id="vue-order-return">
-
-	{{ component( "Ceres::OrderReturn.Components.OrderReturnItem" ) }}
-
 	<div>
 		<order-return-item
 				v-for="(orderItem, index) in orderData.order.orderItems"
@@ -56,4 +53,3 @@
 		{# confirmation modal #}
     </div>
 </script>
-  
