@@ -1,12 +1,70 @@
-import { isNullOrUndefined } from "../../helper/utils";
-import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
+<template>
+    <div>
+        <category-item
+                v-if="!!currentOffer"
+                :item-data="currentOffer.item"
+                :decimal-count="$ceres.config.item.storeSpecial"
+                image-url-accessor="urlMiddle"
+                :padding-classes="paddingClasses"
+                :padding-inline-styles="paddingInlineStyles">
+            <template #store-special>
+                <item-store-special v-if="!!storeSpecial"
+                                    :store-special="storeSpecial"
+                                    :recommended-retail-price="prices.rrp"
+                                    :variation-retail-price="prices.price"
+                                    :decimal-count="$ceres.config.item.storeSpecial ">
+                </item-store-special>
+            </template>
+
+            <template #item-image>
+                <a v-if="!!displaySettings.customImagePath" :href="currentOffer.item | itemURL">
+                    <lazy-img   :image-url="displaySettings.customImagePath"
+                                :alt="currentOffer.item | itemName"
+                                :title="currentOffer.item | itemName">
+                    </lazy-img>
+                </a>
+            </template>
+
+            <template #item-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1 && isActiveByStock">
+                <live-shopping-details :live-shopping-data="currentOffer"
+                                       @reload-offer="reloadOffer()"
+                                       :display-settings="displaySettings"
+                                       :prices="prices"
+                                       :is-active-by-stock="isActiveByStock">
+                    <template #after-item-name>
+                        <div class="live-shopping-add-to-basket">
+                            <add-to-basket
+                                    :variation-id="currentOffer.item.variation.id"
+                                    :is-salable="!!currentOffer.item.filter && currentOffer.item.filter.isSalable"
+                                    :has-children="!!currentOffer.item.filter && currentOffer.item.filter.hasActiveChildren"
+                                    :interval-quantity="currentOffer.item.variation.intervalOrderQuantity || 1"
+                                    :minimum-quantity="currentOffer.item.variation.minimumOrderQuantity"
+                                    :maximum-quantity="!!currentOffer.item.variation.maximumOrderQuantity && currentOffer.item.variation.maximumOrderQuantity > 0 ? currentOffer.item.variation.maximumOrderQuantity : null"
+                                    :order-properties="currentOffer.item.properties.filter(function(prop) { return prop.property.isOderProperty })"
+                                    :has-order-properties="currentOffer.item.hasOrderProperties"
+                                    :use-large-scale="false"
+                                    :show-quantity="false"
+                                    :item-url="currentOffer.item | itemURL">
+                            </add-to-basket>
+                        </div>
+                    </template>
+                </live-shopping-details>
+            </template>
+        </category-item>
+        <div v-else>
+            <slot></slot>
+        </div>
+    </div>
+</template>
+
+<script>
 import { mapState } from "vuex";
+import { isNullOrUndefined } from "../../helper/utils";
 import LiveShoppingDetails from "./LiveShoppingDetails.vue";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
-export default Vue.component("live-shopping-item", {
+export default {
 
     components:
     {
@@ -14,12 +72,6 @@ export default Vue.component("live-shopping-item", {
     },
 
     props: {
-        template:
-        {
-            type: String,
-            default: "#vue-live-shopping-item"
-        },
-
         liveShoppingId:
         {
             type: Number,
@@ -45,6 +97,11 @@ export default Vue.component("live-shopping-item", {
         {
             type: String,
             default: null
+        },
+
+        showNetPrices:
+        {
+            type: Boolean
         }
     },
 
@@ -100,15 +157,15 @@ export default Vue.component("live-shopping-item", {
 
                 if (offerTime === TimeEnum.past)
                 {
-                    name = TranslationService.translate("Ceres::Template.liveShoppingOfferClosed");
+                    name = this.$translate("Ceres::Template.liveShoppingOfferClosed");
                 }
                 else if (offerTime === TimeEnum.future)
                 {
-                    name = TranslationService.translate("Ceres::Template.liveShoppingNextOffer");
+                    name = this.$translate("Ceres::Template.liveShoppingNextOffer");
                 }
                 else if (offerTime === TimeEnum.now)
                 {
-                    name = TranslationService.translate("Ceres::Template.liveShoppingOfferSoldOut");
+                    name = this.$translate("Ceres::Template.liveShoppingOfferSoldOut");
                 }
 
                 return { id: -1, names: { name } };
@@ -172,4 +229,5 @@ export default Vue.component("live-shopping-item", {
             this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
         }
     }
-});
+}
+</script>

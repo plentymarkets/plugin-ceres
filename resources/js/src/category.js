@@ -106,7 +106,8 @@ import "./app/components/itemList/filter/ItemFilter";
 import "./app/components/itemList/filter/ItemFilterList";
 import "./app/components/itemList/filter/ItemFilterTagList";
 
-import "./app/components/liveShopping/LiveShoppingItem";
+import LiveShoppingItem from "./app/components/liveShopping/LiveShoppingItem.vue";
+Vue.component("live-shopping-item", LiveShoppingItem);
 
 import NewsletterInput from "./app/components/newsletter/NewsletterInput.vue";
 Vue.component("newsletter-input", NewsletterInput);
