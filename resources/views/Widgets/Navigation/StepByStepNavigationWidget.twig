@@ -1,8 +1,6 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{{ Twig.component("Ceres::Category.Components.StepByStepNavigation") }}
-
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set appearance      = widget.settings.appearance.mobile | default("none") %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -20,7 +18,7 @@
     <div class="widget-inner">
 
         {% if isPreview %}
-        
+
             <div class="row">
                 {% for i in 1..numberOfColumns * numberOfRows %}
                 <div class="col-{{ 12 / numberOfColumns }} mb-3">
@@ -53,7 +51,7 @@
                     image-source="{{ source }}"
                     :columns="{{ numberOfColumns }}"
                     :children-count="{{ Twig.print("children | length")}}">
-                    
+
                     <div class="row">
                         {{ Twig.for("i", "1..children | length") }}
                             {{ Twig.if("loop.index <= chunkSize") }}
@@ -82,6 +80,6 @@
             {{ Twig.endif() }}
 
         {% endif %}
-    
+
     </div>
 </div>

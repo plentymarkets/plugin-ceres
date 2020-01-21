@@ -56,7 +56,8 @@ Vue.component("coupon", Coupon);
 import BasketList from "./app/components/basket/list/BasketList.vue";
 Vue.component("basket-list", BasketList);
 
-import "./app/components/category/StepByStepNavigation";
+import StepByStepNavigation from "./app/components/category/StepByStepNavigation";
+Vue.component("step-by-step-navigation", StepByStepNavigation);
 
 import GoogleMapsWidget from "./app/components/common/GoogleMaps.vue";
 Vue.component("google-maps-widget", GoogleMapsWidget);
