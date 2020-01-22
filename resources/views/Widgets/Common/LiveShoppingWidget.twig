@@ -15,7 +15,7 @@
             <live-shopping-item
                 :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection }}"
                 :display-settings="{{ liveShoppingConfig | json_encode }}"
-                :show-net-prices="{{ Twig.print("services.customer.showNetPrices()") }}"
+                :show-net-prices="{{ Twig.print("services.customer.showNetPrices() | json_encode") }}"
                 {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
                 {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
                 {% if isPreview %}
