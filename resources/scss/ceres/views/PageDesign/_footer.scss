@@ -1,58 +1,19 @@
-.to-top {
-    display: block;
-    width: 100%;
-    padding: .5rem;
-    text-align: center;
-    text-decoration: none !important;
-    cursor: pointer;
-    background-color: $gray-700;
-
-    &:hover {
-        background-color: $gray-900;
-    }
-    i {
-        padding: .5em 0;
-        font-size: 1.5em;
-        color: white;
-    }
-}
-
 .back-to-top-center {
     position: fixed;
+    right: 0;
     bottom: -17px;
-    left: 50%;
+    left: 0;
     z-index: 1000;
     display: none;
     width: 94px;
     height: 50px;
-    padding: 20px;
-    margin-left: -47px;
-    overflow: hidden;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid $gray-900;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    background: $white;
     opacity: .5;
-    -webkit-transition: opacity .3s;
-    transition: opacity .3s;
+    @include transition(opacity .3s);
 
     &:hover {
         opacity: 1;
     }
-}
-
-.back-to-top-center i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: block;
-    width: 90px;
-    height: 40px;
-    font-size: 29px;
 }
 
 .back-to-top {
@@ -62,139 +23,43 @@
     z-index: 100;
     display: none;
     width: 40px;
-    height: 40px;
-    margin: 0;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    background: $gray-700;
-    border: 1px solid $gray-900;
-    border-radius: $border-radius;
+    height: 42px;
     opacity: .5;
-    transition: opacity 300ms;
+    @include transition(opacity .3s);
 
     &:hover {
         opacity: 1;
     }
 }
 
-.back-to-top i {
-    font-size: 29px;
-    color: $gray-100;
-}
-
 .footer {
-
-    @media print {
-        display: none;
-    }
-
-    display: block;
     background-color: $footer-bg;
 
     a {
         color: $footer-color;
     }
 
-    .svg.plenty-brand {
-        padding: 0 .5em;
-        path {
-            fill: $gray-700;
-        }
+    .plenty-brand {
+        height: 30px;
     }
 
     .footer-features {
-        max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
-        color: $footer-features-color;
         background-color: $footer-features-bg;
-        border-top: 1px solid transparent;
-        i {
-            color: $footer-features-color !important;
-        }
-    }
-
-    .footer-content {
-        max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
     }
 
     .footer-services {
-        display: flex;
         flex-flow: column nowrap;
 
-        .services-payment,
-        .services-shipping,
-        .services-certificate {
-            display: inline-block;
+        div {
             display: inline-flex;
-            flex: 0 1 auto;
             flex-flow: row wrap;
         }
-
-        .services-certificate {
-            flex: 1 0 auto;
-        }
-
-        .services-title {
-            width: 100%;
-        }
-
-        a {
-            display: inline-block;
-            flex: 1 1 auto;
-            max-width: 5rem;
-            margin-right: .5rem;
-        }
-
         img {
             max-height: 4rem;
         }
-    }
 
-    .footer-column {
-
-        h2 {
-            font-weight: 700;
-        }
-    }
-
-    .newsletter{
-
-    }
-
-    .btn-mail {
-        color: white;
-        background-color: $gray-600;
-
-        i {
-            padding: 0 1rem;
-        }
-
-        &:hover {
-            background-color: $gray-500;
-        }
-    }
-
-    @include media-breakpoint-up(sm) {
-        .footer-services {
+        @include media-breakpoint-up(sm) {
             flex-flow: row nowrap;
         }
     }
-
-    @include media-breakpoint-up(md){
-
-    }
-
-    @include media-breakpoint-up(lg){
-
-    }
-}
-
-.plenty-brand {
-    height: 30px;
-    margin: 2em 0 .2em;
-}
-
-.static-link-list a {
-    margin-right: 10px;
-    color: black;
 }

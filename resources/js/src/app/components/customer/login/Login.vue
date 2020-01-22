@@ -1,6 +1,6 @@
 <template>
     <div class="login-pwd-reset">
-        <form :id="'login-form-' + _uid" method="post" class="login-container">
+        <form :id="'login-form-' + _uid" method="post">
             <div :class="{'modal-body': modalElement}">
                 <div class="row">
                     <div class="col-12">
@@ -75,7 +75,7 @@ export default {
     {
         this.$nextTick(() =>
         {
-            this.loginFields = document.querySelector(".login-container").querySelectorAll(".input-unit");
+            this.loginFields = document.querySelector("#login-form-" + this._uid).querySelectorAll(".input-unit");
 
             AutoFocusService.triggerAutoFocus();
         });

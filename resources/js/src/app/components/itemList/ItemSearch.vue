@@ -1,13 +1,13 @@
 <template>
-    <div class="search-box-inner">
-        <div class="search-box-shadow-frame">
-            <input type="search" class="search-input" ref="searchInput" @input="autocomplete($event.target.value)"
+    <div class="search-box-inner w-100">
+        <div class="search-box-shadow-frame d-flex flex-grow-1 position-relative">
+            <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" @input="autocomplete($event.target.value)"
                 @keyup.enter="prepareSearch()" @keyup.down="keydown()" @keyup.up="keyup()"
                 @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)"
                 :autofocus="isShopBuilder">
 
-            <button class="search-submit" type="submit" @click="search()">
-                <i class="fa fa-search sm-up"></i>
+            <button class="search-submit px-3" type="submit" @click="search()">
+                <i class="fa fa-search"></i>
             </button>
 
             <div class="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">

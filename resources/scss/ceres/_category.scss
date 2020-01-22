@@ -40,12 +40,12 @@
 @import "forms/inputs";
 
 // Page Design / Global components
+@import "views/PageDesign/footer";
 @import "views/PageDesign/header";
-@import "views/PageDesign/search-box";
 @import "views/PageDesign/language-select";
 @import "views/PageDesign/navigation";
-@import "views/PageDesign/breadcrumb";
-@import "views/PageDesign/footer";
+@import "views/PageDesign/search-box";
+@import "views/PageDesign/top-bar";
 
 // Templates
 @import "views/Templates/BasketItemList/basket-item";
@@ -54,11 +54,8 @@
 @import "views/Templates/BasketPreview/basket-preview";
 @import "views/Templates/BasketTotalSum/basket-total-sum";
 @import "views/Templates/CategoryListItem/category-list-item";
-@import "views/Templates/Customer/contact";
-@import "views/Templates/Customer/login";
 @import "views/Templates/Item/quantity-input";
 @import "views/Templates/ItemListSort/pagination";
-@import "views/Templates/WishList/wish-list";
 
 // Pages
 @import "views/Category/category-list";

@@ -42,6 +42,7 @@ $yiq-text-dark:             $gray-900 !default;
 $yiq-text-light:            $white !default;
 $yiq-contrasted-threshold:  150 !default;
 
+$body-bg:                   $gray-100 !default;
 
 //
 // Sizes
@@ -67,33 +68,19 @@ $fa-font-path:              "#{$root-directory}/documents/fonts" !default;
 //
 // Top Bar
 //
-$top-bar-bg:                $gray-900;
-$top-bar-color:             color-yiq($top-bar-bg);
-$top-bar-basket-btn:        $primary;
-$top-bar-basket-color:      color-yiq($top-bar-basket-btn);
+$top-bar-bg:                $gray-700 !default;
+$top-bar-color:             color-yiq($top-bar-bg) !default;
+$top-bar-basket-btn:        $primary !default;
+$top-bar-basket-color:      color-yiq($top-bar-basket-btn) !default;
 
 //
 // Footer
 //
-$footer-bg:                 $gray-100;
-$footer-color:              $gray-900;
+$footer-bg:                 $gray-100 !default;
+$footer-color:              $gray-900 !default;
 
-$footer-features-bg:        darken($gray-100, 10%);
-$footer-features-color:     $gray-900;
-
-//
-// Availability
-//
-$availability_1:            $success !default;
-$availability_2:            $success !default;
-$availability_3:            $warning !default;
-$availability_4:            $warning !default;
-$availability_5:            $danger !default;
-$availability_6:            $danger !default;
-$availability_7:            $danger !default;
-$availability_8:            $danger !default;
-$availability_9:            $gray-900 !default;
-$availability_10:           $gray-900 !default;
+$footer-features-bg:        darken($gray-100, 10%) !default;
+$footer-features-color:     $gray-900 !default;
 
 
 //
@@ -101,10 +88,10 @@ $availability_10:           $gray-900 !default;
 //
 $font-family-sans-serif:    custom-font, helvetica, arial, sans-serif !default;
 $font-family-serif:         georgia, "Times New Roman", times, serif !default;
-$font-family-heading:       $font-family-sans-serif;
+$font-family-heading:       $font-family-sans-serif !default;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-$font-size-root:            14px;
+$font-size-root:            14px !default;
 
 $h1-font-size:              2rem !default;
 $h2-font-size:              1.8rem !default;
@@ -181,11 +168,11 @@ $custom-control-indicator-active-bg:            #84c6ff !default;
 
 $custom-checkbox-indicator-indeterminate-bg:    #0074d9 !default;
 
-$custom-select-padding-y:                       .8rem;
-$custom-select-padding-x:                       1rem;
-$custom-select-height:                          auto;
-$custom-select-line-height:                     1.2;
-$custom-select-border-width:                    0;
+$custom-select-padding-y:                       .8rem !default;
+$custom-select-padding-x:                       1rem !default;
+$custom-select-height:                          auto !default;
+$custom-select-line-height:                     1.2 !default;
+$custom-select-border-width:                    0 !default;
 
 $custom-file-height:                            2.5rem !default;
 $custom-file-focus-box-shadow:                  0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
@@ -198,7 +185,7 @@ $custom-file-border-color:                      #ddd !default;
 $custom-file-box-shadow:                        inset 0 .2rem .4rem rgba(0, 0, 0, .05) !default;
 $custom-file-button-bg:                         #eee !default;
 
-$form-check-input-margin-y:                     .2rem;
+$form-check-input-margin-y:                     .2rem !default;
 
 // This allows us to at a glance determine relative layers of our application and prevents bugs
 // arrising from arbitrary z-index values. Do not edit the z-index scale! Only add application
@@ -207,31 +194,31 @@ $form-check-input-margin-y:                     .2rem;
 
 // Z-Index Scale
 // --------------------------------------------------
-$zIndex-0:                          990 !default;
-$zIndex-1:                          1000 !default;
-$zIndex-2:                          1020 !default;
-$zIndex-3:                          1030 !default;
-$zIndex-4:                          1040 !default;
-$zIndex-5:                          1050 !default;
-$zIndex-6:                          1060 !default;
-$zIndex-7:                          1070 !default;
-$zIndex-8:                          1080 !default;
-$zIndex-9:                          1090 !default;
-$zIndex-10:                         10000 !default;
+$zindex-0:                          990 !default;
+$zindex-1:                          1000 !default;
+$zindex-2:                          1020 !default;
+$zindex-3:                          1030 !default;
+$zindex-4:                          1040 !default;
+$zindex-5:                          1050 !default;
+$zindex-6:                          1060 !default;
+$zindex-7:                          1070 !default;
+$zindex-8:                          1080 !default;
+$zindex-9:                          1090 !default;
+$zindex-10:                         10000 !default;
 
 // Z-index master list
 //
 // Warning: Avoid customizing these values. They're used for a bird's eye view
 // of components dependent on the z-axis and are designed to all work together.
 
-$zindex-dropdown:                   $zIndex-1 !default;
-$zindex-fixed:                      $zIndex-3 !default;
-$zindex-modal-backdrop:             $zIndex-7 !default;
-$zindex-modal:                      $zIndex-8 !default;
-$zindex-popover:                    $zIndex-10 !default;
-$zindex-sticky:                     $zIndex-2 !default;
-$zindex-tooltip:                    $zIndex-7 !default;
-$zindex-wrapper:                    $zIndex-10 !default;
+$zindex-dropdown:                   $zindex-1 !default;
+$zindex-fixed:                      $zindex-3 !default;
+$zindex-modal-backdrop:             $zindex-7 !default;
+$zindex-modal:                      $zindex-8 !default;
+$zindex-popover:                    $zindex-10 !default;
+$zindex-sticky:                     $zindex-2 !default;
+$zindex-tooltip:                    $zindex-7 !default;
+$zindex-wrapper:                    $zindex-10 !default;
 
 // Navbar
 $navbar-background-color:           $gray-100 !default;
@@ -267,8 +254,8 @@ $breadcrumb-bg:                     darken($gray-200, 2%) !default;
 $category-text-color:               #fff !default;
 
 // Liveshopping
-$live-shopping-padding-x:           .8rem;
-$live-shopping-padding-y:           1rem;
+$live-shopping-padding-x:           .8rem !default;
+$live-shopping-padding-y:           1rem !default;
 
 $component-active-bg:               $primary !default;
 $component-active-color:            color-yiq($component-active-bg) !default;
@@ -282,12 +269,11 @@ $qty-box-border: $gray-400 !default;
 $qty-box-bg: $gray-200 !default;
 
 // Shopbuilder
-$shop-builder-colors:
-    (
-        "primary":    $primary,
-        "secondary":  $secondary,
-        "success":    $success,
-        "info":       $info,
-        "warning":    $warning,
-        "danger":     $danger
-    );
+$shop-builder-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger
+) !default;
