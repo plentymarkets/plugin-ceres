@@ -1,13 +1,14 @@
-import Vue from "vue";
+<template>
+    <img v-if="!isBackgroundImage" :data-src="imageUrl">
+    <div v-else :data-background-image="imageUrl">
+        <slot></slot>
+    </div>
+</template>
+
+<script>
 import lozad from "lozad";
 
-Vue.component("lazy-img", {
-
-    template:  `<img v-if="!isBackgroundImage" :data-src="imageUrl">
-                <div v-else :data-background-image="imageUrl">
-                    <slot></slot>
-                </div>`,
-
+export default {
     props: {
         imageUrl: String,
         isBackgroundImage: Boolean
@@ -32,4 +33,5 @@ Vue.component("lazy-img", {
             });
         }
     }
-});
+}
+</script>

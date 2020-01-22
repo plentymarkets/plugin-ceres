@@ -61,7 +61,6 @@
     {% endif %}
 {% endif %}
 
-{{ Twig.component( "Ceres::Containers.Components.LastSeenItemList" ) }}
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>

@@ -56,13 +56,18 @@ Vue.component("coupon", Coupon);
 import BasketList from "./app/components/basket/list/BasketList.vue";
 Vue.component("basket-list", BasketList);
 
-import "./app/components/category/StepByStepNavigation";
+import StepByStepNavigation from "./app/components/category/StepByStepNavigation.vue";
+Vue.component("step-by-step-navigation", StepByStepNavigation);
 
-import "./app/components/common/GoogleMaps";
-import "./app/components/common/LazyImg";
-import "./app/components/common/TabList";
+import GoogleMapsWidget from "./app/components/common/GoogleMaps.vue";
+Vue.component("google-maps-widget", GoogleMapsWidget);
+import LazyImg from "./app/components/common/LazyImg.vue";
+Vue.component("lazy-img", LazyImg);
+import TabList from "./app/components/common/TabList.vue";
+Vue.component("tab-list", TabList);
 
-import "./app/components/containers/LastSeenItemList";
+import LastSeenItemList from "./app/components/containers/LastSeenItemList.vue";
+Vue.component("last-seen-item-list", LastSeenItemList);
 
 import ChangeEmailForm from "./app/components/customer/ChangeEmailForm.vue";
 Vue.component("change-email-form", ChangeEmailForm);
@@ -105,12 +110,16 @@ Vue.component("item-filter-list", ItemFilterList);
 import ItemFilterTagList from "./app/components/itemList/filter/ItemFilterTagList.vue";
 Vue.component("item-filter-tag-list", ItemFilterTagList);
 
-import "./app/components/liveShopping/LiveShoppingItem";
+import LiveShoppingItem from "./app/components/liveShopping/LiveShoppingItem.vue";
+Vue.component("live-shopping-item", LiveShoppingItem);
 
-import "./app/components/newsletter/NewsletterInput";
-import "./app/components/newsletter/NewsletterUnsubscribeInput";
+import NewsletterInput from "./app/components/newsletter/NewsletterInput.vue";
+Vue.component("newsletter-input", NewsletterInput);
+import NewsletterUnsubscribeInput from "./app/components/newsletter/NewsletterUnsubscribeInput.vue";
+Vue.component("newsletter-unsubscribe-input", NewsletterUnsubscribeInput);
 
-import "./app/components/orderReturn/OrderReturn";
+import OrderReturn from "./app/components/orderReturn/OrderReturn.vue";
+Vue.component("order-return", OrderReturn);
 
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
 Vue.component("cookie-bar", CookieBar);
@@ -127,8 +136,10 @@ Vue.component("popper", Popper);
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
 Vue.component("shipping-country-select", ShippingCountrySelect);
 
-import "./app/components/wishList/WishList";
-import "./app/components/wishList/WishListCount";
+import WishList from "./app/components/wishList/WishList.vue";
+Vue.component("wish-list", WishList);
+import WishListCount from "./app/components/wishList/WishListCount.vue";
+Vue.component("wish-list-count", WishListCount);
 
 // =========================
 // DIRECTIVES
@@ -199,4 +210,4 @@ import TranslationService from "./app/services/TranslationService";
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
-Vue.prototype.$ceresConfig = App.config;
+Vue.prototype.$ceres = App;
