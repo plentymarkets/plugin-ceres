@@ -1,7 +1,7 @@
 <template>
     <a :id="'owl-carousel-' + _uid" v-if="$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl">
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
-            <lazy-img ref="itemLazyImage" v-if="index === 0 && !disableLazyLoad" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getImageName(imageUrl)"></lazy-img>
+            <lazy-img v-if="index === 0 && !disableLazyLoad" class="img-fluid" ref="itemLazyImage" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getImageName(imageUrl)"></lazy-img>
             <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getImageName(imageUrl)">
             <img v-else class="img-fluid" :src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getAltText(imageUrl)">
         </div>
