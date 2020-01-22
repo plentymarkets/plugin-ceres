@@ -1,6 +1,7 @@
-import Vue from "vue";
+<script>
+export default {
 
-export default Vue.component("tab-item", {
+    name: "tab-item",
 
     render(createElement)
     {
@@ -51,4 +52,5 @@ export default Vue.component("tab-item", {
             this.localActive = isActive;
         }
     }
-});
+}
+</script>

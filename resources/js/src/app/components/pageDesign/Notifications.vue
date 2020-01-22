@@ -28,11 +28,7 @@ import Vue from "vue";
 export default {
 
     props: {
-        initialNotifications: Object,
-        logData: {
-            type: Array,
-            default: () => []
-        }
+        initialNotifications: Object
     },
 
     data()
@@ -45,7 +41,9 @@ export default {
     computed: {
         showErrorCode()
         {
-            return this.logData.includes("show_error_code") || this.logData.includes("all");
+            const logData = this.$ceres.config.log.data;
+
+            return logData.includes("show_error_code") || logData.includes("all");
         },
 
         filteredNotifications()
