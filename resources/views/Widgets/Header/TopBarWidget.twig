@@ -48,7 +48,7 @@
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-permanent d-flex flex-grow-1 flex-column-reverse flex-md-row{% endif %}">
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <div class="always-visible-search m-2 flex-grow-1">
+                        <div class="always-visible-search flex-grow-1">
                             <item-search template="#vue-item-search"
                                          :show-item-images="{{ showItemImages | json_encode }}"
                                          :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
@@ -219,7 +219,7 @@
     <div class="container-max page-header">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if searchStyle == "onDemand" %}
-                <div id="searchBox" class="cmp cmp-search-box collapse">
+                <div id="searchBox" class="cmp cmp-search-box collapse w-100">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
                         <item-search
                             :show-item-images="{{ showItemImages | json_encode }}"

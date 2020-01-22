@@ -10,26 +10,10 @@
             }
         }
     }
-
-    .search-input {
-        font-size: 1.3rem;
-        line-height: 1;
-        border: none;
-        outline: none;
-    }
-
-    .search-submit {
-        font-size: 1.3rem;
-        line-height: 1;
-        color: $primary;
-        cursor: pointer;
-        background-color: $gray-200;
-        border: none;
-    }
 }
 
-html.ie {
-    .always-visible-search {
+html.ie { // stylelint-disable-line selector-no-qualifying-type
+    .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
         min-height: 32px;
     }
 }
