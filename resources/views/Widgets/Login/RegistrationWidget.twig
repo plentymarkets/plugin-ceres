@@ -20,6 +20,7 @@
 %}
 
 {{ Twig.print("services.template.disableCacheForTemplate()") }}
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
 <div class="widget widget-registration widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
@@ -31,6 +32,9 @@
             :required-fields="{{ requiredFields | json_encode }}">
             <template #extend-overlay-buttons>
                 {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::RegistrationOverlay.ExtendOverlayButtons"])) }}
+            </template>
+            <template #custom-address-fields>
+                {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.CustomAddressField"])) }}
             </template>
         </registration>
     </div>

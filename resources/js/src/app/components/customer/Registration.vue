@@ -51,6 +51,9 @@
                     :optional-address-fields="shownFields"
                     :required-address-fields="requiredFields"
                     :default-salutation="defaultSalutation">
+                    <template #custom-address-fields>
+                        <slot name="custom-address-fields"></slot>
+                    </template>
                 </address-input-group>
             </div>
 
@@ -82,7 +85,7 @@ import { navigateTo } from "../../services/UrlService";
 import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
-import AddressInputGroup from "./AddressInputGroup";
+import AddressInputGroup from "./AddressInputGroup.vue";
 import ApiService from "../../services/ApiService";
 import NotificationService from "../../services/NotificationService";
 import ModalService from "../../services/ModalService";
