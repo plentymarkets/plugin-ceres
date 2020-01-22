@@ -1,6 +1,6 @@
 .top-bar {
     color: $top-bar-color;
-    background-color: $top-bar-bg !important; // stylelint-disable-line declaration-no-important
+    background-color: $top-bar-bg;
 
     a {
         color: $top-bar-color;
@@ -55,21 +55,6 @@
         margin-right: 0;
         font-size: .8rem;
     }
-
-    .toggle-basket-preview {
-        color: $top-bar-basket-color;
-        background-color: $top-bar-basket-btn;
-
-        .badge {
-            font-size: inherit;
-            font-weight: inherit;
-            line-height: inherit;
-        }
-
-        &:hover {
-            background-color: darken($top-bar-basket-btn, 10%);  // stylelint-disable-line declaration-no-important
-        }
-    }
 }
 
 .control-user {
@@ -78,6 +63,8 @@
     .dropdown {
 
         .dropdown-toggle {
+            @include transition(all .1s);
+
             &::after {
                 margin-left: 7px;
             }
@@ -97,6 +84,7 @@
             max-height: 0;
             overflow: hidden;
             border: none;
+            @include transition(all .3s);
 
             a {
                 display: block;
@@ -131,6 +119,23 @@
 .control-wish-list {
     .fa-heart {
         color: $red;
+    }
+}
+
+.control-basket {
+    .toggle-basket-preview {
+        color: $top-bar-basket-color;
+        background-color: $top-bar-basket-btn;
+
+        .badge {
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+        }
+
+        &:hover {
+            background-color: darken($top-bar-basket-btn, 10%);  // stylelint-disable-line declaration-no-important
+        }
     }
 }
 
