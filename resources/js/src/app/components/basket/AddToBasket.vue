@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && isWishList !== 'true'">
+        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && !isWishList">
             <div class="btn-group" role="group" aria-label="Thumb Control">
                 <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary btn-outline-appearance mobile-width-button" @click="addToBasket()">
                     <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true" v-waiting-animation="waiting"></i>
@@ -72,7 +72,7 @@
                 </button>
             </div>
         </div>
-        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && isWishList === 'true'">
+        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && isWishList">
             <div class="btn-group" role="group" aria-label="Thumb Control">
                 <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
                     <i class="fa fa-shopping-cart fa-lg mobile-icon-right" aria-hidden="true" v-waiting-animation="waiting"></i>
@@ -173,8 +173,8 @@ export default {
         },
         isWishList:
         {
-            type: String,
-            default: "false"
+            type: Boolean,
+            default: false
         },
         propQuantity:
         {

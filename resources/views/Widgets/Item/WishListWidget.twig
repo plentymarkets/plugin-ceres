@@ -1,8 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{{ Twig.component( "Ceres::WishList.Components.WishList" ) }}
-
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
@@ -17,6 +15,10 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     
     <div class="widget-inner">
-        <wish-list :item-details-data="{{ itemDetailsData | json_encode }}"></wish-list>
+        <wish-list :item-details-data="{{ itemDetailsData | json_encode }}">
+            <template #loading-animation>
+                {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
+            </template>
+        </wish-list>
     </div>
 </div>
