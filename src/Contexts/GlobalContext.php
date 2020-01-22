@@ -14,6 +14,7 @@ use IO\Services\CustomerService;
 use IO\Services\NotificationService;
 use IO\Services\TemplateService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
+use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Http\Request;
@@ -81,6 +82,9 @@ class GlobalContext implements ContextInterface
         /** @var CustomerService $customerService */
         $customerService = pluginApp(CustomerService::class);
 
+        /** @var ContactRepositoryContract $contactRepository */
+        $contactRepository = pluginApp(ContactRepositoryContract::class);
+
         /** @var ShopBuilderRequest $shopBuilderRequest */
         $shopBuilderRequest = pluginApp(ShopBuilderRequest::class);
 
@@ -118,7 +122,7 @@ class GlobalContext implements ContextInterface
             $this->ceresConfig->header->showCategoryTypes,
             $this->lang,
             $this->ceresConfig->header->menuLevels,
-            $customerService->getContactClassId()
+            $contactRepository->getContactClassId()
         );
 
         $this->notifications = $notificationService->getNotifications();

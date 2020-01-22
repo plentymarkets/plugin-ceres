@@ -9,8 +9,8 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 use IO\Helper\Utils;
 use IO\Services\CategoryService;
-use IO\Services\CustomerService;
 use IO\Services\ItemSearch\Factories\Faker\CategoryTreeFaker;
+use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 
 class NavigationTreeWidget extends BaseWidget
 {
@@ -104,15 +104,15 @@ class NavigationTreeWidget extends BaseWidget
         
         /** @var CeresConfig $ceresConfig */
         $ceresConfig = pluginApp(CeresConfig::class);
-        
-        /** @var CustomerService $customerService */
-        $customerService = pluginApp(CustomerService::class);
+
+        /** @var ContactRepositoryContract $contactRepository */
+        $contactRepository = pluginApp(ContactRepositoryContract::class);
         
         $categories = $categoryService->getNavigationTree(
             $ceresConfig->header->showCategoryTypes,
             Utils::getLang(),
             $ceresConfig->header->menuLevels,
-            $customerService->getContactClassId()
+            $contactRepository->getContactClassId()
         );
         
         if (!count($categories)) {
