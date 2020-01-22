@@ -55,15 +55,17 @@
     <!-- messages -->
     <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
 
-    {% include getPartial('header') %}
+    <div class="wrapper wrapper-main {% if ceresConfig.header.fixNavBarPos %}isSticky{% endif %}">
+        {% include getPartial('header') %}
 
-    <div id="page-body" class="main">
-        {% block PageBody %}{% endblock %}
+        <div id="page-body" class="main">
+            {% block PageBody %}{% endblock %}
+        </div>
+
+        {% include getPartial('footer') %}
+
+        {% block PartialFooter %}{% endblock %}
     </div>
-
-    {% include getPartial('footer') %}
-
-    {% block PartialFooter %}{% endblock %}
 
     {% if ceresConfig.basket.previewType == "right" %}
     <div class="wrapper wrapper-right position-fixed bg-white overflow-hidden">
