@@ -67,7 +67,7 @@
 
     {% if ceresConfig.basket.previewType == "right" %}
     <div class="wrapper wrapper-right position-fixed bg-white overflow-hidden">
-        <basket-preview :show-net-prices="{{ showNetPrices | json_encode }}">
+        <basket-preview :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}">
             <template #before-basket-item>
                 {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
             </template>
@@ -173,6 +173,9 @@
                         <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
                             <template #extend-overlay-buttons>
                                 {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+                            </template>
+                            <template #custom-address-fields>
+                                {{ LayoutContainer.show("Ceres::Checkout.CustomAddressField") }}
                             </template>
                         </registration>
                     </div>
