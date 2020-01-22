@@ -1,15 +1,20 @@
-import Vue from "vue";
+<template>
+    <div class="selected-filters clearfix">
+        <span :class="'text-appearance selected-filter filter-' + tag.id + ' ' + marginClasses" :style="marginInlineStyles" v-for="tag in tagList" @click="removeTag(tag)">
+            <i class="fa fa-times" aria-hidden="true"></i> {{ tag.name }}
+        </span>
+
+        <span :class="'bg-appearance selected-filter reset-all' + ' '+ marginClasses" :style="marginInlineStyles" v-if="tagList.length >= 2" @click="resetAllTags()">
+            {{ $translate("Ceres::Template.itemFilterReset") }}
+        </span>
+    </div>
+</template>
+
+<script>
 import { mapState, mapMutations, mapActions } from "vuex";
 
-export default Vue.component("item-filter-tag-list", {
-
-    props:
-    {
-        template:
-        {
-            type: String,
-            default: "#vue-item-filter-tag-list"
-        },
+export default {
+    props: {
         marginClasses:
         {
             type: String,
@@ -49,4 +54,5 @@ export default Vue.component("item-filter-tag-list", {
             "loadItemList"
         ])
     }
-});
+}
+</script>

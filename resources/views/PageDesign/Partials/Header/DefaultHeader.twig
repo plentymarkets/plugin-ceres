@@ -1,6 +1,6 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-<header id="page-header" class="fixed-top default-header">
+<header id="page-header" class="fixed-top default-header d-print-none">
     <div class="container-max">
         <div class="row flex-row-reverse position-relative">
             <div id="page-header-parent" class="col-12" data-header-offset>
@@ -82,8 +82,6 @@
                                             {% if config("Ceres.basket.preview_type") != "right" %}
                                                 <basket-preview 
                                                     :show-net-prices="{{ showNetPrices | json_encode }}"
-                                                    checkout-url="{{ urls.checkout }}"
-                                                    basket-url="{{ urls.basket }}"
                                                     :hover="true">
                                                     <template #before-basket-item>
                                                         {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
@@ -144,7 +142,7 @@
                             <div id="searchBox" class="cmp cmp-search-box collapse">
                                 {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
                                 {% if overrideSearchBar | trim is empty %}
-                                    <item-search template="#vue-item-search"></item-search>
+                                    <item-search></item-search>
                                 {% else %}
                                     {{ overrideSearchBar | raw }}
                                 {% endif %}
