@@ -8,10 +8,6 @@
         outline: none;
     }
 
-    .account-menu {
-        min-width: 100%;
-    }
-
     &.fixed-top {
         position: fixed;
     }
@@ -46,9 +42,6 @@
         .anicon-search-xcross {
             width: 2.2rem;
         }
-        .badge-right {
-            display: none;
-        }
     }
 
     .list-inline-item {
@@ -65,8 +58,10 @@
         .dropdown-toggle {
             @include transition(all .1s);
 
-            &::after {
-                margin-left: 7px;
+            @include media-breakpoint-up(sm) {
+                &::after {
+                    margin-left: 7px;
+                }
             }
         }
 
@@ -99,14 +94,16 @@
                 }
             }
         }
+    }
+}
 
-        .fa-user {
-            margin-right: 5px;
-        }
+.list-group-item {
+    .fa-user {
+        margin-right: 5px;
+    }
 
-        .fa-sign-out {
-            margin-right: 3px;
-        }
+    .fa-sign-out {
+        margin-right: 3px;
     }
 }
 

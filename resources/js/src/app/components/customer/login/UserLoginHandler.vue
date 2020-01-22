@@ -5,7 +5,7 @@
                 <i class="fa fa-user mr-1 d-sm-none" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginHello", {"username": username }) }}</span>
             </a>
-            <div class="dropdown-menu small m-0 p-0">
+            <div class="dropdown-menu small m-0 p-0 mw-100">
                 <div class="list-group" aria-labelledby="accountMenuList" >
                     <a :href="myAccountUrl" class="list-group-item small"><i class="fa fa-user"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
                     <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ $translate("Ceres::Template.loginLogout") }}</a>

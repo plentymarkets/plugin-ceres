@@ -25,7 +25,7 @@
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max">
+    <div class="container-max px-0 px-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if isPreview and not
                 enableLogin and not
@@ -132,7 +132,7 @@
                             <li class="list-inline-item control-wish-list">
                                 <wish-list-count>
                                     <a>
-                                        <span class="badge-right mr-1">0</span>
+                                        <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </wish-list-count>
