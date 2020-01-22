@@ -1,5 +1,5 @@
 <template>
-    <div id="position-relative">
+    <div class="position-relative">
         <div class="dropdown" v-if="isLoggedIn">
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
                 <i class="fa fa-user mr-1 d-sm-none" aria-hidden="true"></i>
