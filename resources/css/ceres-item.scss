@@ -12626,6 +12626,8 @@ html.ie .basket-preview-hover {
     }
 
     .thumb-image {
+        @include img-contain();
+
         position: relative;
         display: inline-block;
         width: 120px;
