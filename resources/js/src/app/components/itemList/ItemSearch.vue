@@ -1,19 +1,38 @@
-import TranslationService from "../../services/TranslationService";
+<template>
+    <div class="search-box-inner w-100">
+        <div class="search-box-shadow-frame d-flex flex-grow-1 position-relative">
+            <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" @input="autocomplete($event.target.value)"
+                @keyup.enter="prepareSearch()" @keyup.down="keydown()" @keyup.up="keyup()"
+                @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)"
+                :autofocus="isShopBuilder">
+
+            <button class="search-submit px-3" type="submit" @click="search()">
+                <i class="fa fa-search"></i>
+            </button>
+
+            <div class="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
+                <div class="autocomplete-suggestion" v-for="(item, index) in autocompleteResult" :key="index" @mousedown="selectAutocompleteItem(item)" :class="{ 'autocomplete-selected': selectedAutocompleteIndex === index }">
+                    <div class="autocomplete-image-container" v-if="showItemImages">
+                        <img class="autocomplete-image" :src="item.img">
+                    </div>
+                    <div class="autocomplete-item-name" v-html="item.displayName"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
 import UrlService from "../../services/UrlService";
 import { isNullOrUndefined } from "../../helper/utils";
 import { pathnameEquals } from "../../helper/url";
-import Vue from "vue";
+import ApiService from "../../services/ApiService";
 
-const ApiService = require("../../services/ApiService");
+export default {
 
-export default Vue.component("item-search", {
+    name: "item-search",
 
     props: {
-        template:
-        {
-            type: String,
-            default: "#vue-item-search"
-        },
         showItemImages:
         {
             type: Boolean,
@@ -48,6 +67,11 @@ export default Vue.component("item-search", {
             }
 
             return selectedAutocompleteItem;
+        },
+
+        isShopBuilder()
+        {
+            return App.isShopBuilder;
         }
     },
 
@@ -115,7 +139,7 @@ export default Vue.component("item-search", {
         updateTitle(searchString)
         {
             const searchPageTitle = document.querySelector("#searchPageTitle");
-            const title = TranslationService.translate("Ceres::Template.itemSearchResults") + " " + searchString;
+            const title = this.$translate("Ceres::Template.itemSearchResults") + " " + searchString;
 
             if (!isNullOrUndefined(searchPageTitle))
             {
@@ -123,7 +147,7 @@ export default Vue.component("item-search", {
                 searchPageTitle.appendChild(document.createTextNode(title));
             }
 
-            document.title = `${title} | ${TranslationService.translate("Ceres::Template.headerCompanyName")}`;
+            document.title = `${title} | ${this.$translate("Ceres::Template.headerCompanyName")}`;
         },
 
         autocomplete(searchString)
@@ -225,4 +249,5 @@ export default Vue.component("item-search", {
             }, 100);
         }
     }
-});
+}
+</script>

@@ -1,12 +1,20 @@
+<template>
+    <div class="special-tags" v-show="label.length || bundleType === 'bundle'">
+        <span v-if="label.length" class="badge" :class="tagClass">
+            {{ label }}
+        </span>
+        <span v-else class="badge badge-bundle bg-info">
+            {{ $translate("Ceres::Template.itemBundle") }}
+        </span>
+    </div>
+</template>
+
+<script>
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
-import TranslationService from "../../services/TranslationService";
-import Vue from "vue";
 
-export default Vue.component("item-store-special", {
+export default {
 
-    delimiters: ["${", "}"],
-
-    template: "#vue-item-store-special",
+    name: "item-store-special",
 
     props: [
         "storeSpecial",
@@ -31,9 +39,9 @@ export default Vue.component("item-store-special", {
             },
             labels:
             {
-                1: TranslationService.translate("Ceres::Template.storeSpecialOffer"),
-                2: TranslationService.translate("Ceres::Template.storeSpecialNew"),
-                3: TranslationService.translate("Ceres::Template.storeSpecialTop")
+                1: this.$translate("Ceres::Template.storeSpecialOffer"),
+                2: this.$translate("Ceres::Template.storeSpecialNew"),
+                3: this.$translate("Ceres::Template.storeSpecialTop")
             }
         };
     },
@@ -104,4 +112,5 @@ export default Vue.component("item-store-special", {
             this.initializeStoreSpecial();
         }
     }
-});
+}
+</script>

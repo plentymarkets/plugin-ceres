@@ -61,7 +61,9 @@
 <script>
 import { mapState } from "vuex";
 import { isNullOrUndefined } from "../../helper/utils";
+
 import LiveShoppingDetails from "./LiveShoppingDetails.vue";
+import ItemStoreSpecial from "../itemList/ItemStoreSpecial.vue";
 
 const TimeEnum = Object.freeze({ past: 1, now: 2, future: 3 });
 
@@ -69,7 +71,8 @@ export default {
 
     components:
     {
-        LiveShoppingDetails
+        LiveShoppingDetails,
+        ItemStoreSpecial
     },
 
     props: {
