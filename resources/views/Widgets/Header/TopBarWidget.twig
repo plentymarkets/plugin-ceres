@@ -159,8 +159,6 @@
                                 {{ Twig.if("basketPreviewType != \"right\"") }}
                                     <basket-preview
                                         :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}"
-                                        checkout-url="{{ Twig.print("urls.checkout | json_encode") }}"
-                                        basket-url="{{ Twig.print("urls.basket | json_encode") }}"
                                         :hover="true"
                                     >
                                         <template #before-basket-item>

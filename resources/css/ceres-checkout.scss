@@ -177,6 +177,7 @@ $yiq-text-dark:             $gray-900 !default;
 $yiq-text-light:            $white !default;
 $yiq-contrasted-threshold:  150 !default;
 
+$body-bg:                   $gray-100 !default;
 
 //
 // Sizes
@@ -9105,13 +9106,6 @@ button:focus {
             align-items: center;
 }
 
-.modal-footer {
-    > .fa {
-        margin-top: 1px;
-        margin-left: 5px;
-    }
-}
-
 @include media-breakpoint-down(xs) {
     html.facebook {
         .checkout .modal.show,
@@ -9127,7 +9121,7 @@ button:focus {
         }
     }
 }
-
+ // TODO: This would better fit into /components
 [class^="prop-"] {
     position: relative;
     width: 100% !important; // stylelint-disable-line declaration-no-important
@@ -9165,7 +9159,7 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     input,
     select,
     textarea {
-        font-size: 16px !important;
+        font-size: 16px !important; // stylelint-disable-line declaration-no-important
     }
 }
 
@@ -9173,169 +9167,66 @@ html {
     font-size: $font-size-root;
 }
 
-body,
-body .wrapper-main {
+body {
     overflow-x: hidden;
 }
 
-body {
-    background-color: $gray-100;
+.app {
+    .wrapper-right {
+        top: 0;
+        bottom: 0;
+        left: 100%;
+        z-index: $zindex-wrapper;
+        width: 0;
 
-    > #vue-app,
-    > #vue-error {
+        @include transition(width 310ms 0ms, transform 300ms ease-in-out);
+        -webkit-transform: translateX(0);
+                transform: translateX(0);
+    }
 
-        background-color: $gray-100;
+    // body state modifiers
+    &.open-right {
 
-        & > .wrapper-top,
-        & > .wrapper-left,
-        & > .wrapper-right,
-        & > .wrapper-bottom {
-            position: absolute;
-            z-index: $zindex-wrapper;
+        overflow: hidden;
+        @include media-breakpoint-down(sm) {
+            position: fixed;
+
+            // disable top offset for fixed navigation on small devices
+            margin-top: 0 !important; // stylelint-disable-line declaration-no-important
         }
-        & > .wrapper-top {
+
+        // dark overlay on body
+        &::after {
+            position: fixed;
             top: 0;
             right: 0;
+            bottom: 0;
             left: 0;
-            z-index: $zindex-wrapper +1;
-        }
-
-        .wrapper-main {
-            position: relative;
+            z-index: $zindex-7;
+            content: "";
+            background-color: rgba(0, 0, 0, .5);
         }
 
         .wrapper-right {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 100%;
-            width: 0;
-
-            overflow: hidden;
-
-            background-color: white;
-
-            -webkit-transition: width 310ms 0ms, -webkit-transform 300ms ease-in-out;
-
-            transition: width 310ms 0ms, -webkit-transform 300ms ease-in-out;
-
-            transition: width 310ms 0ms, transform 300ms ease-in-out;
-
-            transition: width 310ms 0ms, transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
-            -webkit-transform: translateX(0);
-                    transform: translateX(0);
-
-            .wrapper-inner {
-                width: 100%;
-                height: 100%;
-            }
-        }
-
-        .wrapper-bottom {
-            z-index: 2000;
-        }
-
-        .wrapper-left {
-            top: 0;
-            bottom: 0;
-            left: 0;
+            width: 100vw;
             -webkit-transform: translateX(-100%);
                     transform: translateX(-100%);
-        }
-
-        // body state modifiers
-        &.overlay,
-        &.open-right,
-        &.open-left,
-        &.open-top,
-        &.open-bottom {
-
-            @include media-breakpoint-down(sm) {
-                margin-top: 0 !important;
-            }
-
-            // dark overlay on body
-            &::after {
-                position: fixed;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-
-                z-index: $zindex-7;
-                content: "";
-
-                background-color: rgba(0, 0, 0, .5);
-            }
-        }
-
-
-        &.open-right {
-            overflow: hidden;
-
-            @include media-breakpoint-down(sm) {
-                position: fixed;
-            }
-
-            .wrapper-right {
-                @include media-breakpoint-up(md) {
-                    width: 100vw;
-                }
-
-                -webkit-transition: width 0ms, -webkit-transform 300ms 10ms ease-in-out;
-
-                transition: width 0ms, -webkit-transform 300ms 10ms ease-in-out;
-
-                transition: width 0ms, transform 300ms 10ms ease-in-out;
-
-                transition: width 0ms, transform 300ms 10ms ease-in-out, -webkit-transform 300ms 10ms ease-in-out;
-
-                -webkit-transform: translateX(-100%);
-
-                        transform: translateX(-100%);
-
-                @include media-breakpoint-down(md) {
-                    width: 100%;
-                }
-            }
-        }
-
-        &.open-hover {
-            @include media-breakpoint-down(xs) {
-                position: fixed;
-            }
-
-            .basket-preview-hover-wrapper {
-                display: block;
-                -webkit-transform: translateX(0%);
-                        transform: translateX(0%);
-            }
-        }
-
-        @include media-breakpoint-up(md) {
-            &.open-right {
-                .wrapper-right {
-                    width: $aside-columns-width;
-                }
+            @include transition(width 0ms, transform 300ms 10ms ease-in-out);
+            @include media-breakpoint-up(md) {
+                width: $aside-columns-width;
             }
         }
     }
-}
 
-.hidden {
-    display: none;
-}
+    &.open-hover {
+        @include media-breakpoint-down(xs) {
+            position: fixed;
+        }
 
-.hidden-sm {
-    @include media-breakpoint-only(sm) {
-        display: none;
-    }
-}
-
-@each $bp in map-keys($grid-breakpoints) {
-    .hidden-#{$bp}-down {
-        @include media-breakpoint-down($bp) {
-            display: none !important;
+        .basket-preview-hover-wrapper {
+            display: block;
+            -webkit-transform: translateX(0%);
+                    transform: translateX(0%);
         }
     }
 }
@@ -10163,6 +10054,7 @@ html.ie {
     position: fixed;
     top: 10rem;
     right: .5rem;
+    z-index: $zindex-10;
 
     @include media-breakpoint-down(xs) {
         right: auto;
@@ -10752,6 +10644,13 @@ textarea.no-resize {
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
 
+    .container-max > .row {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+    }
+
     &.collapsing {
         overflow: hidden;
     }
@@ -10867,18 +10766,6 @@ textarea.no-resize {
 .fixed-top .cmp-country-settings,
 .fixed-top .cmp-currency-select {
     top: auto;
-}
-
-.wrapper-main header {
-    .cmp-country-settings,
-    .cmp-currency-select {
-        .container-max > .row {
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-                -ms-flex-direction: row;
-                    flex-direction: row;
-        }
-    }
 }
 
 /* settings */
@@ -11675,172 +11562,6 @@ div:not(.top-bar) {
 
 
 // Templates
-.cmp-address-list {
-
-    .items {
-        position: relative;
-
-        @include media-breakpoint-up(md) {
-            display: inline-block;
-            width: 100%;
-            vertical-align: middle;
-        }
-
-        //TODO add class to this div and set this rule by the class
-        & > div:first-child {
-            @extend .card;
-            min-height: 115px;
-            margin-bottom: 0;
-        }
-    }
-
-    .dropdown-toggle {
-        &::after {
-            position: absolute;
-            top: 80%;
-            right: 1.5rem;
-            z-index: 1;
-            -webkit-transform: translateY(-50%);
-                    transform: translateY(-50%);
-        }
-    }
-
-    .items.open {
-        .dropdown-toggle {
-            border-bottom: none;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-    }
-
-    .dropdown-menu {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        border: 1px solid $gray-300;
-        border-top: none;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-
-    ul {
-        width: 100%;
-        max-height: 500px;
-        padding: 0;
-        margin: 0;
-        overflow-x: none;
-        overflow-y: auto;
-        list-style: none;
-        -webkit-box-shadow: $box-shadow;
-                box-shadow: $box-shadow;
-    }
-
-    .item {
-        position: relative;
-        padding: 0;
-        border-bottom: 1px solid $gray-300;
-
-        input { display: none; }
-
-        input:checked {
-
-            & + .item-inner {
-                color: $black;
-                background-color: #d9edf7;
-                -webkit-box-shadow: inset 0 0 0 .1rem $primary;
-                        box-shadow: inset 0 0 0 .1rem $primary;
-            }
-        }
-
-        &:last-of-type {
-            border-bottom: none;
-        }
-    }
-
-
-    .item-inner {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
-        padding: 1em;
-        margin-bottom: 0;
-        cursor: pointer;
-
-        .item-controls {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-
-            .item-edit .fa {
-                padding-top: .3rem;
-                padding-left: .1rem;
-            }
-            .item-remove .fa {
-                padding-top: .1rem;
-            }
-            .fa {
-                float: none;
-                -webkit-transition: all .2s ease-in-out;
-                transition: all .2s ease-in-out;
-            }
-            .btn {
-                width: 2.2rem;
-                height: 2.2rem;
-                padding: 0;
-                margin-left: 5px;
-            }
-        }
-    }
-
-
-    .item-content {
-        display: inline-block;
-        -webkit-box-flex: 1;
-            -ms-flex: 1 1 auto;
-                flex: 1 1 auto;
-        width: 100%;
-
-        strong,
-        span {
-            display: block;
-        }
-    }
-}
-
-.checkout {
-    header {
-        h4 {
-            line-height: 2.5rem;
-        }
-    }
-}
-
-.add-item {
-    position: absolute;
-    cursor: pointer;
-
-    @include media-breakpoint-down(xs) {
-        top: 0;
-        right: 0;
-        bottom: 0;
-
-        & button {
-            width: 50px;
-            min-width: auto !important;
-            height: 74px;
-        }
-    }
-
-    @include media-breakpoint-up(sm) {
-        top: 1em;
-        right: 1em;
-    }
-}
-
 .cmp-basket-item {
     position: relative;
     display: -webkit-box;
@@ -12193,6 +11914,32 @@ html.ie .confirmation-order-list .cmp-order-item {
     }
 }
 
+// transitions for item lists
+.list-transition-enter-active,
+.list-transition-leave-active {
+    -webkit-animation-name: item-leaving;
+            animation-name: item-leaving;
+    -webkit-animation-duration: .175s;
+            animation-duration: .175s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+}
+
+.list-transition-enter-active {
+    animation-direction: reverse;
+}
+
+@-webkit-keyframes item-leaving {
+    from { max-height: 1000px; }
+    to { max-height: 0; }
+}
+
+@keyframes item-leaving {
+    from { max-height: 1000px; }
+    to { max-height: 0; }
+}
+
+
 // Arrange counter and price side by side
 @include media-breakpoint-up(sm) {
     .main .basket .basket-item-container .basket-item-container-right {
@@ -12239,7 +11986,6 @@ html.ie .confirmation-order-list .cmp-order-item {
 
 .basket-item-container {
     position: relative;
-    padding: 1.5rem 0;
     overflow: hidden;
 
     &:first-child {
@@ -12263,6 +12009,7 @@ html.ie .confirmation-order-list .cmp-order-item {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        padding: 1.5rem 0;
 
         .image-container {
             -ms-flex-negative: 0;
@@ -13193,88 +12940,6 @@ html.ie {
             text-align: center;
         }
     }
-}
-
-.add-to-wish-list {
-    cursor: pointer;
-
-    & i {
-        margin-right: 5px;
-
-        &.fa-circle-o-notch {
-            color: inherit !important;
-        }
-    }
-
-    &:not(.active) {
-        i {
-            color: inherit !important;
-        }
-    }
-
-    &:hover {
-        text-decoration: none;
-
-        i {
-            color: #d9534f !important;
-            &.fa-circle-o-notch {
-                color: inherit !important;
-            }
-        }
-    }
-
-    &.active {
-        i {
-            color: inherit;
-        }
-    }
-}
-
-.wish-list-no-items-transition-enter-active,
-.wish-list-no-items-transition-leave-active {
-    -webkit-transition: margin .1s;
-    transition: margin .1s;
-}
-.wish-list-no-items-transition-enter,
-.wish-list-no-items-transition-leave-to {
-    margin: 0 !important;
-}
-
-.wish-list-item-transition-leave-active {
-    -webkit-animation-name: wish-list-item-leaving;
-            animation-name: wish-list-item-leaving;
-    -webkit-animation-duration: .175s;
-            animation-duration: .175s;
-    -webkit-animation-delay: .175s;
-            animation-delay: .175s;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes wish-list-item-leaving {
-    from { max-height: 130px; padding: 10px 0; }
-    to { max-height: 0; padding: 0; border: none; }
-}
-
-@keyframes wish-list-item-leaving {
-    from { max-height: 130px; padding: 10px 0; }
-    to { max-height: 0; padding: 0; border: none; }
-}
-
-@include media-breakpoint-down(md) {
-    .wish-list-item-transition-leave-active > div.row {
-        -webkit-transition: -webkit-transform 200ms cubic-bezier(0, 0, .82, .1);
-        transition: -webkit-transform 200ms cubic-bezier(0, 0, .82, .1);
-        transition: transform 200ms cubic-bezier(0, 0, .82, .1);
-        transition: transform 200ms cubic-bezier(0, 0, .82, .1), -webkit-transform 200ms cubic-bezier(0, 0, .82, .1);
-        -webkit-transform: translateX(-200%);
-                transform: translateX(-200%);
-    }
-}
-
-.wish-list-no-items-label {
-    margin: 75px 0 100px;
-    text-align: center;
 }
 
 
@@ -15928,6 +15593,172 @@ header .widget {
     cursor: pointer !important;
     span {
         text-decoration: underline !important;
+    }
+}
+
+.cmp-address-list {
+
+    .items {
+        position: relative;
+
+        @include media-breakpoint-up(md) {
+            display: inline-block;
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        //TODO add class to this div and set this rule by the class
+        & > div:first-child {
+            @extend .card;
+            min-height: 115px;
+            margin-bottom: 0;
+        }
+    }
+
+    .dropdown-toggle {
+        &::after {
+            position: absolute;
+            top: 80%;
+            right: 1.5rem;
+            z-index: 1;
+            -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+        }
+    }
+
+    .items.open {
+        .dropdown-toggle {
+            border-bottom: none;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: 1px solid $gray-300;
+        border-top: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    ul {
+        width: 100%;
+        max-height: 500px;
+        padding: 0;
+        margin: 0;
+        overflow-x: none;
+        overflow-y: auto;
+        list-style: none;
+        -webkit-box-shadow: $box-shadow;
+                box-shadow: $box-shadow;
+    }
+
+    .item {
+        position: relative;
+        padding: 0;
+        border-bottom: 1px solid $gray-300;
+
+        input { display: none; }
+
+        input:checked {
+
+            & + .item-inner {
+                color: $black;
+                background-color: #d9edf7;
+                -webkit-box-shadow: inset 0 0 0 .1rem $primary;
+                        box-shadow: inset 0 0 0 .1rem $primary;
+            }
+        }
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+
+
+    .item-inner {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        padding: 1em;
+        margin-bottom: 0;
+        cursor: pointer;
+
+        .item-controls {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+
+            .item-edit .fa {
+                padding-top: .3rem;
+                padding-left: .1rem;
+            }
+            .item-remove .fa {
+                padding-top: .1rem;
+            }
+            .fa {
+                float: none;
+                -webkit-transition: all .2s ease-in-out;
+                transition: all .2s ease-in-out;
+            }
+            .btn {
+                width: 2.2rem;
+                height: 2.2rem;
+                padding: 0;
+                margin-left: 5px;
+            }
+        }
+    }
+
+
+    .item-content {
+        display: inline-block;
+        -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+        width: 100%;
+
+        strong,
+        span {
+            display: block;
+        }
+    }
+}
+
+.checkout {
+    header {
+        h4 {
+            line-height: 2.5rem;
+        }
+    }
+}
+
+.add-item {
+    position: absolute;
+    cursor: pointer;
+
+    @include media-breakpoint-down(xs) {
+        top: 0;
+        right: 0;
+        bottom: 0;
+
+        & button {
+            width: 50px;
+            min-width: auto !important;
+            height: 74px;
+        }
+    }
+
+    @include media-breakpoint-up(sm) {
+        top: 1em;
+        right: 1em;
     }
 }
 

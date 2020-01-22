@@ -1,7 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ component( "Ceres::Customer.Components.CountrySelect" ) }}
-
 <script type="x/template" id="vue-address-input-group">
     <div class="row">
         <template v-if="value.showPickupStation && selectedCountry.isoCode2 === 'DE' && addressType === '2'">
@@ -22,7 +20,6 @@
         
         <div class="col-12 col-sm-4">
             <country-select
-                template="#vue-country-select"
                 :selected-country-id="value.countryId"
                 :selected-state-id="value.stateId"
                 @country-changed="onSelectedCountryChanged($event)"

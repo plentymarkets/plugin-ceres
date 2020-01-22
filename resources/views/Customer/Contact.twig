@@ -7,6 +7,8 @@
 {% set mapZoom          = config("Ceres.contact.map_zoom") %}
 {% set showMapInMobile  = config("Ceres.contact.map_show_in_mobile") %}
 
+{% set coordinates = services.contactMap.getMapCoordinates(googleApiKey, street, zip) %}
+
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
         {% block title          trans('Ceres::Template.contact') %}
@@ -16,9 +18,6 @@
 {% endblock %}
 
 {% block PageBody %}
-
-    {{ component("Ceres::Customer.Components.Contact.ContactMap") }}
-
     <div class="page-content container-max contact pt-3 bg-white">
 
         <div class="row cmp-contact">
@@ -40,7 +39,13 @@
 
             {% if googleApiKey and contactConfigSet %}
                 <div class="col-12 col-md-6 pb-5 pt-4{% if showMapInMobile == "false" %} d-none d-md-block{% endif %}">
-                    <contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+                    <google-maps-widget :lat="{{ coordinates.location.lat }}"
+                                        :lng="{{ coordinates.location.lng }}"
+                                        :zoom="{{ mapZoom | default(16) }}">
+                        <div class="d-flex align-items-center justify-content-center h-100 position-absolute w-100 text-muted">
+                            <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
+                        </div>
+                    </google-maps-widget>
                 </div>
             {% endif %}
 
@@ -142,7 +147,13 @@
 
             {% if googleApiKey and not contactConfigSet %}
                 <div class="col-12 mt-5{% if showMapInMobile == "false" %} d-none d-md-block{% endif %}">
-                    <contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+                    <google-maps-widget :lat="{{ coordinates.location.lat }}"
+                                        :lng="{{ coordinates.location.lng }}"
+                                        :zoom="{{ mapZoom | default(16) }}">
+                        <div class="d-flex align-items-center justify-content-center h-100 position-absolute w-100 text-muted">
+                            <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
+                        </div>
+                    </google-maps-widget>
                 </div>
             {% endif %}
 

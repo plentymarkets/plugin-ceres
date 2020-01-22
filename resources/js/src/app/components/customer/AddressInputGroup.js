@@ -1,13 +1,15 @@
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
-import SalutationSelect from "./SalutationSelect";
+import SalutationSelect from "./SalutationSelect.vue";
+import CountrySelect from "../customer/CountrySelect.vue";
 
 export default Vue.component("address-input-group", {
 
     components:
     {
-        SalutationSelect
+        SalutationSelect,
+        CountrySelect
     },
 
     props:
