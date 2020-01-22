@@ -14,7 +14,8 @@ module.exports = env =>
         },
         output: {
             filename: "../../../resources/js/dist/ceres-[name]" + (env.prod ? ".min" : "") + ".js",
-            path: path.resolve(__dirname, "dist")
+            path: path.resolve(__dirname, "dist"),
+            publicPath: '/documents/plugins/Ceres/FOO/BAR'
         },
         resolve: {
             alias: {

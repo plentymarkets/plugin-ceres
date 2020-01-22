@@ -100,8 +100,11 @@ Vue.component("quantity-input", QuantityInput);
 import TagList from "./app/components/item/TagList.vue";
 Vue.component("tag-list", TagList);
 
-import CategoryItem from "./app/components/itemList/CategoryItem.vue";
-Vue.component("category-item", CategoryItem);
+Vue.component("category-item", function(resolve)
+{
+    require(["./app/components/itemList/CategoryItem.vue"], resolve);
+});
+
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 Vue.component("item-search", ItemSearch);
 
