@@ -36,9 +36,6 @@
         a {
             padding: .5rem;
         }
-        .pipe {
-            margin: 0 .3em 0 0;
-        }
         .anicon-search-xcross {
             width: 2.2rem;
         }
@@ -133,6 +130,71 @@
         &:hover {
             background-color: darken($top-bar-basket-btn, 10%);
         }
+    }
+}
+
+// Searchbar
+.cmp-search-box {
+    background-color: $top-bar-bg;
+}
+
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    z-index: $zindex-7;
+    max-height: 310px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.autocomplete-suggestion {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+        background: $gray-300;
+    }
+    &.autocomplete-selected {
+        background: $gray-300;
+    }
+}
+
+.autocomplete-item-name {
+    align-self: center;
+    max-width: 0;
+}
+
+.autocomplete-image-container {
+    position: relative;
+    display: flex;
+    width: 40px;
+    height: 40px;
+}
+
+.autocomplete-image {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.search-input {
+    font-size: 1.3rem;
+    line-height: 1;
+    border: none;
+    outline: none;
+}
+
+.search-submit {
+    font-size: 1.3rem;
+    line-height: 1;
+    color: $primary;
+    background-color: $gray-200;
+    border: none;
+    outline: none;
+    @include transition(all .3s);
+
+    &:hover {
+        color: darken($primary, 20%);
     }
 }
 

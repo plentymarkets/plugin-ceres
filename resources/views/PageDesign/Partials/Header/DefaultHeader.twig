@@ -14,12 +14,11 @@
                                         <li class="list-inline-item control-user">
                                             <user-login-handler>
                                                 <a data-toggle="modal">
-                                                    <i class="fa fa-user mr-1" aria-hidden="true"></i>
+                                                    <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
                                                     <span class="d-none d-sm-inline">{{ trans("Ceres::Template.login") }}</span>
                                                 </a>
-                                                <span class="pipe"></span>
                                                 <a data-toggle="modal">
-                                                    <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
+                                                    <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
                                                     <span class="d-none d-sm-inline">{{ trans("Ceres::Template.loginRegister") }}</span>
                                                 </a>
                                             </user-login-handler>
@@ -137,7 +136,7 @@
                         </div>
                     </div>
 
-                    <div class="container-max page-header">
+                    <div class="container-max px-2 px-lg-3">
                         <div class="row mx-0 flex-row-reverse position-relative">
                             <div id="searchBox" class="cmp cmp-search-box collapse w-100">
                                 {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
