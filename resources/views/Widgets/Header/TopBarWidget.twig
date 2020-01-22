@@ -1,7 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass                  = widget.settings.customClass.mobile %}
 {% set isFixed                      = widget.settings.isFixed.mobile %}
 {% set enableLogin                  = widget.settings.enableLogin.mobile %}
 {% set enableRegistration           = widget.settings.enableRegistration.mobile %}
@@ -25,7 +25,7 @@
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max">
+    <div class="container-max px-0 px-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if isPreview and not
                 enableLogin and not
@@ -103,12 +103,11 @@
 
                         {% if enableCurrencySelect %}
                             <li class="list-inline-item dropdown control-languages">
-                                <a class=""
-                                   data-toggle="collapse"
-                                   href="#currencySelect"
-                                   aria-expanded="false"
-                                   aria-controls="currencySelect"
-                                   data-parent="#controlsList">
+                                <a data-toggle="collapse"
+                                    href="#currencySelect"
+                                    aria-expanded="false"
+                                    aria-controls="currencySelect"
+                                    data-parent="#controlsList">
                                     <span>{{ Twig.print("currencyData") }}</span>
                                 </a>
                             </li>
@@ -117,11 +116,12 @@
                         {% if searchStyle == "onDemand" %}
                             <li class="list-inline-item control-search">
                                 <a class="anicon anicon-search-xcross"
-                                   aria-label="toggle search"
-                                   data-toggle="collapse"
-                                   href="#searchBox"
-                                   aria-controls="searchBox"
-                                   data-parent="#controlsList">
+                                    aria-label="toggle search"
+                                    data-toggle="collapse"
+                                    href="#searchBox"
+                                    aria-expanded="false"
+                                    aria-controls="searchBox"
+                                    data-parent="#controlsList">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
                                 </a>
                             </li>
@@ -132,7 +132,7 @@
                             <li class="list-inline-item control-wish-list">
                                 <wish-list-count>
                                     <a>
-                                        <span class="badge-right mr-1">0</span>
+                                        <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </wish-list-count>
