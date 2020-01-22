@@ -143,7 +143,7 @@
         <div id="searchBox" class="cmp cmp-search-box collapse">
             {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
             {% if overrideSearchBar | trim is empty %}
-                <item-search template="#vue-item-search"></item-search>
+                <item-search></item-search>
             {% else %}
                 {{ overrideSearchBar | raw }}
             {% endif %}

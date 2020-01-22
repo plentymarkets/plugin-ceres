@@ -95,14 +95,15 @@ Vue.component("quantity-input", QuantityInput);
 import TagList from "./app/components/item/TagList.vue";
 Vue.component("tag-list", TagList);
 
-import "./app/components/itemList/CategoryImageCarousel";
-import "./app/components/itemList/CategoryItem";
-import "./app/components/itemList/ItemSearch";
-import "./app/components/itemList/ItemStoreSpecial";
-import "./app/components/itemList/filter/ItemFilter";
+import CategoryItem from "./app/components/itemList/CategoryItem.vue";
+Vue.component("category-item", CategoryItem);
+import ItemSearch from "./app/components/itemList/ItemSearch.vue";
+Vue.component("item-search", ItemSearch);
 
-import "./app/components/itemList/filter/ItemFilterList";
-import "./app/components/itemList/filter/ItemFilterTagList";
+import ItemFilterList from "./app/components/itemList/filter/ItemFilterList.vue";
+Vue.component("item-filter-list", ItemFilterList);
+import ItemFilterTagList from "./app/components/itemList/filter/ItemFilterTagList.vue";
+Vue.component("item-filter-tag-list", ItemFilterTagList);
 
 import "./app/components/liveShopping/LiveShoppingItem";
 
@@ -198,3 +199,4 @@ import TranslationService from "./app/services/TranslationService";
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
+Vue.prototype.$ceresConfig = App.config;

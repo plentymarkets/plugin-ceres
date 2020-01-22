@@ -1,21 +1,55 @@
-import UrlService from "../../../services/UrlService";
-import Vue from "vue";
-import { mapState } from "vuex";
-import ItemFilterPrice from "./ItemFilterPrice";
+<template>
+    <div v-if="filterListBulk">
+        <item-filter v-for="facet in facets"
+            :facet="facet"
+            :key="facet.id"
+            :padding-classes="paddingClasses"
+            :padding-inline-styles="paddingInlineStyles">
+        </item-filter>
+    </div>
 
-export default Vue.component("item-filter-list", {
+    <div v-else class="filter-wrapper" v-show="facets && facets.length > 0">
+        <a class="btn btn-link filter-toggle" data-toggle="collapse" :href="'#filter-collapse_' + _uid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
+            <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
+        </a>
+
+        <div class="filter-collapse collapse" :id="'filter-collapse_' + _uid">
+            <div class="container-max page-content component-loading" :class="{ 'isLoading': isLoading }">
+                <div class="card-columns">
+                    <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-right">
+                        <button type="button" class="btn btn-primary btn-medium-large" data-toggle="collapse" :href="'#filter-collapse_' + _uid" :aria-controls="'filter-collapse_' + _uid">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <span>{{ $translate("Ceres::Template.itemClose") }}&nbsp;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import UrlService from "../../../services/UrlService";
+import { mapState } from "vuex";
+import ItemFilter from "./ItemFilter.vue";
+
+export default {
+
+    name: "item-filter-list",
 
     components:
     {
-        ItemFilterPrice
+        ItemFilter
     },
 
     props: {
-        template: {
-            type: String,
-            default: "#vue-item-filter-list"
-        },
-        facetData: {
+        filterListBulk: Boolean,
+        facetData:
+        {
             type: Array,
             default()
             {
@@ -117,4 +151,5 @@ export default Vue.component("item-filter-list", {
             return false;
         }
     }
-});
+}
+</script>
