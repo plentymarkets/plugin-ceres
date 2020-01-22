@@ -1,8 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
-{{ component( "Ceres::WishList.Components.WishListCount" ) }}
-
 {% set lang = services.sessionStorage.getLang() %}
 {% set activeCurrencies = config("Ceres.currency.available_currencies") | split(', ') %}
 {% set enableCurrencySelect = config("Ceres.currency.enable_selection") == "true" and activeCurrencies | length > 0 %}
