@@ -43,41 +43,56 @@ import "bootstrap";
 // COMPONENTS
 // =========================
 
-import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
-Vue.component("add-item-to-basket-overlay", AddItemToBasketOverlay);
+Vue.component("add-item-to-basket-overlay", function(resolve)
+{
+    require(["./app/components/basket/AddItemToBasketOverlay.vue"], resolve);
+});
 import AddToBasket from "./app/components/basket/AddToBasket.vue";
 Vue.component("add-to-basket", AddToBasket);
 import BasketPreview from "./app/components/basket/BasketPreview.vue";
 Vue.component("basket-preview", BasketPreview);
 import BasketTotals from "./app/components/basket/BasketTotals.vue";
 Vue.component("basket-totals", BasketTotals);
-import Coupon from "./app/components/basket/Coupon.vue";
-Vue.component("coupon", Coupon);
+Vue.component("coupon", function(resolve)
+{
+    require(["./app/components/basket/Coupon.vue"], resolve);
+});
 import BasketList from "./app/components/basket/list/BasketList.vue";
 Vue.component("basket-list", BasketList);
 
 import StepByStepNavigation from "./app/components/category/StepByStepNavigation.vue";
 Vue.component("step-by-step-navigation", StepByStepNavigation);
 
-import GoogleMapsWidget from "./app/components/common/GoogleMaps.vue";
-Vue.component("google-maps-widget", GoogleMapsWidget);
+Vue.component("google-maps-widget", function(resolve)
+{
+    require(["./app/components/common/GoogleMaps.vue"], resolve);
+});
 import LazyImg from "./app/components/common/LazyImg.vue";
 Vue.component("lazy-img", LazyImg);
-import TabList from "./app/components/common/TabList.vue";
-Vue.component("tab-list", TabList);
 
-import LastSeenItemList from "./app/components/containers/LastSeenItemList.vue";
-Vue.component("last-seen-item-list", LastSeenItemList);
+Vue.component("tab-list", function(resolve)
+{
+    require(["./app/components/common/TabList.vue"], resolve);
+});
 
-import ChangeEmailForm from "./app/components/customer/ChangeEmailForm.vue";
-Vue.component("change-email-form", ChangeEmailForm);
+Vue.component("last-seen-item-list", function(resolve)
+{
+    require(["./app/components/containers/LastSeenItemList.vue"], resolve);
+});
+
+Vue.component("change-email-form", function(resolve)
+{
+    require(["./app/components/customer/ChangeEmailForm.vue"], resolve);
+});
 import ReCaptcha from "./app/components/customer/ReCaptcha.vue";
 Vue.component("recaptcha", ReCaptcha);
 
 import Registration from "./app/components/customer/Registration.vue";
 Vue.component("registration", Registration);
-import ResetPasswordForm from "./app/components/customer/ResetPasswordForm.vue";
-Vue.component("reset-password-form", ResetPasswordForm);
+Vue.component("reset-password-form", function(resolve)
+{
+    require(["./app/components/customer/ResetPasswordForm.vue"], resolve);
+});
 
 import ForgotPassword from "./app/components/customer/login/ForgotPassword.vue";
 Vue.component("forgot-password-modal", ForgotPassword);
@@ -91,14 +106,23 @@ Vue.component("login-view", LoginView);
 import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
 Vue.component("user-login-handler", UserLoginHandler);
 
-import ItemBundle from "./app/components/item/ItemBundle.vue";
-Vue.component("item-bundle", ItemBundle);
-import OrderPropertyValue from "./app/components/item/OrderPropertyValue.vue";
-Vue.component("order-property-value", OrderPropertyValue);
-import QuantityInput from "./app/components/item/QuantityInput.vue";
-Vue.component("quantity-input", QuantityInput);
-import TagList from "./app/components/item/TagList.vue";
-Vue.component("tag-list", TagList);
+Vue.component("item-bundle", function(resolve)
+{
+    require(["./app/components/item/ItemBundle.vue"], resolve);
+});
+Vue.component("order-property-value", function(resolve)
+{
+    require(["./app/components/item/OrderPropertyValue.vue"], resolve);
+});
+Vue.component("quantity-input", function(resolve)
+{
+    require(["./app/components/item/QuantityInput.vue"], resolve);
+});
+
+Vue.component("tag-list", function(resolve)
+{
+    require(["./app/components/item/TagList.vue"], resolve);
+});
 
 Vue.component("category-item", function(resolve)
 {
@@ -108,21 +132,33 @@ Vue.component("category-item", function(resolve)
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 Vue.component("item-search", ItemSearch);
 
-import ItemFilterList from "./app/components/itemList/filter/ItemFilterList.vue";
-Vue.component("item-filter-list", ItemFilterList);
-import ItemFilterTagList from "./app/components/itemList/filter/ItemFilterTagList.vue";
-Vue.component("item-filter-tag-list", ItemFilterTagList);
+Vue.component("item-filter-list", function(resolve)
+{
+    require(["./app/components/itemList/filter/ItemFilterList.vue"], resolve);
+});
+Vue.component("item-filter-tag-list", function(resolve)
+{
+    require(["./app/components/itemList/filter/ItemFilterTagList.vue"], resolve);
+});
 
-import LiveShoppingItem from "./app/components/liveShopping/LiveShoppingItem.vue";
-Vue.component("live-shopping-item", LiveShoppingItem);
+Vue.component("live-shopping-item", function(resolve)
+{
+    require(["./app/components/liveShopping/LiveShoppingItem.vue"], resolve);
+});
 
-import NewsletterInput from "./app/components/newsletter/NewsletterInput.vue";
-Vue.component("newsletter-input", NewsletterInput);
-import NewsletterUnsubscribeInput from "./app/components/newsletter/NewsletterUnsubscribeInput.vue";
-Vue.component("newsletter-unsubscribe-input", NewsletterUnsubscribeInput);
+Vue.component("newsletter-input", function(resolve)
+{
+    require(["./app/components/newsletter/NewsletterInput.vue"], resolve);
+});
+Vue.component("newsletter-unsubscribe-input", function(resolve)
+{
+    require(["./app/components/newsletter/NewsletterUnsubscribeInput.vue"], resolve);
+});
 
-import OrderReturn from "./app/components/orderReturn/OrderReturn.vue";
-Vue.component("order-return", OrderReturn);
+Vue.component("order-return", function(resolve)
+{
+    require(["./app/components/orderReturn/OrderReturn.vue"], resolve);
+});
 
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
 Vue.component("cookie-bar", CookieBar);
@@ -139,10 +175,15 @@ Vue.component("popper", Popper);
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
 Vue.component("shipping-country-select", ShippingCountrySelect);
 
-import WishList from "./app/components/wishList/WishList.vue";
-Vue.component("wish-list", WishList);
-import WishListCount from "./app/components/wishList/WishListCount.vue";
-Vue.component("wish-list-count", WishListCount);
+Vue.component("wish-list", function(resolve)
+{
+    require(["./app/components/wishList/WishList.vue"], resolve);
+});
+
+Vue.component("wish-list-count", function(resolve)
+{
+    require(["./app/components/wishList/WishListCount.vue"], resolve);
+});
 
 // =========================
 // DIRECTIVES
