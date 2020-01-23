@@ -47,8 +47,10 @@ Vue.component("add-item-to-basket-overlay", function(resolve)
 {
     require(["./app/components/basket/AddItemToBasketOverlay.vue"], resolve);
 });
-import AddToBasket from "./app/components/basket/AddToBasket.vue";
-Vue.component("add-to-basket", AddToBasket);
+Vue.component("add-to-basket", function(resolve)
+{
+    require(["./app/components/basket/AddToBasket.vue"], resolve);
+});
 import BasketPreview from "./app/components/basket/BasketPreview.vue";
 Vue.component("basket-preview", BasketPreview);
 import BasketTotals from "./app/components/basket/BasketTotals.vue";
