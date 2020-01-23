@@ -1,8 +1,12 @@
 <template>
-    <article class="basket-item-container basket-list-item">
+    <article class="basket-list-item py-3">
         <div class="basket-item d-flex">
             <div class="image-container">
-                <img class="d-block mw-100 mh-100" v-if="orderItemImage" :src="orderItemImage" :alt="orderItem | itemBundleName" :title="orderItem | itemBundleName">
+                <img class="d-block mw-100 mh-100"
+                     v-if="orderItemImage"
+                     :src="orderItemImage"
+                     :alt="orderItem | itemBundleName"
+                     :title="orderItem | itemBundleName">
             </div>
 
             <div class="meta-container-wrapper">

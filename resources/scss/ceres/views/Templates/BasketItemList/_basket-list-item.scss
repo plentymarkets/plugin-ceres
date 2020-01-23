@@ -15,47 +15,6 @@
     to { max-height: 0; }
 }
 
-
-// Arrange counter and price side by side
-@include media-breakpoint-up(sm) {
-    .main .basket .basket-item-container .basket-item-container-right {
-        display: flex;
-
-        .qty-box-container {
-            margin-right: 15px;
-        }
-    }
-}
-// Arrange counter and price side by side
-@include media-breakpoint-only(sm) {
-    .main .checkout .basket-item-container .basket-item-container-right {
-        display: flex;
-
-        .qty-box-container {
-            margin-right: 15px;
-        }
-    }
-}
-
-.top-bar .controls-list > li .basket-preview-hover {
-    .basket-item {
-        a {
-            padding: 0;
-            color: $primary;
-
-            &:hover {
-                color: darken($top-bar-basket-btn, 10%);
-                background-color: transparent;
-            }
-        }
-    }
-
-    .fa:not(.qty-sign) {
-        font-size: 1.2rem;
-        line-height: 1;
-    }
-}
-
 .basket-list-item {
     position: relative;
     overflow: hidden;
@@ -93,17 +52,6 @@
     .meta-container-wrapper {
         width: 100%;
         min-width: 0;
-
-        @include media-breakpoint-only(sm) {
-            .checkout &,
-            .basket & {
-                display: flex;
-
-                .qty-box-container {
-                    margin-right: 15px;
-                }
-            }
-        }
     }
 
     .meta-container-wrapper-inner {
