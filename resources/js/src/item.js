@@ -1,17 +1,29 @@
 // item script extends category script
 import "./category";
 
-import AddToWishList from "./app/components/item/AddToWishList.vue";
-Vue.component("add-to-wish-list", AddToWishList);
-import GraduatedPrices from "./app/components/item/GraduatedPrices.vue";
-Vue.component("graduated-prices", GraduatedPrices);
-import ItemDataTable from "./app/components/item/ItemDataTable.vue";
-Vue.component("item-data-table", ItemDataTable);
-import ItemImageCarousel from "./app/components/item/ItemImageCarousel.vue";
-Vue.component("item-image-carousel", ItemImageCarousel);
-import VariationSelect from "./app/components/item/VariationSelect.vue";
-Vue.component("variation-select", VariationSelect);
+Vue.component("add-to-wish-list", function(resolve)
+{
+    require(["./app/components/item/AddToWishList.vue"], resolve);
+});
+Vue.component("graduated-prices", function(resolve)
+{
+    require(["./app/components/item/GraduatedPrices.vue"], resolve);
+});
+Vue.component("item-data-table", function(resolve)
+{
+    require(["./app/components/item/ItemDataTable.vue"], resolve);
+});
+Vue.component("item-image-carousel", function(resolve)
+{
+    require(["./app/components/item/ItemImageCarousel.vue"], resolve);
+});
+Vue.component("variation-select", function(resolve)
+{
+    require(["./app/components/item/VariationSelect.vue"], resolve);
+});
 import SingleItem from "./app/components/item/SingleItem.vue";
 Vue.component("single-item", SingleItem);
-import OrderPropertyList from "./app/components/item/OrderPropertyList.vue";
-Vue.component("order-property-list", OrderPropertyList);
+Vue.component("order-property-list", function(resolve)
+{
+    require(["./app/components/item/OrderPropertyList.vue"], resolve);
+});
