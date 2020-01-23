@@ -19,17 +19,20 @@
 
             <div class="thumb-background"></div>
 
+            
             <div class="thumb-image">
-                <slot name="item-image">
-                    <category-image-carousel :image-urls-data="item.images | itemImages(imageUrlAccessor)"
-                                             :alt-text="item | itemName"
-                                             :title-text="item | itemName"
-                                             :item-url="item | itemURL(urlWithVariationId)"
-                                             :enable-carousel="$ceres.config.item.enableImageCarousel"
-                                             :disable-carousel-on-mobile="disableCarouselOnMobile"
-                                             ref="categoryImageCarousel">
-                    </category-image-carousel>
-                </slot>
+                <div class="prop-1-1">
+                    <slot name="item-image">
+                        <category-image-carousel :image-urls-data="item.images | itemImages(imageUrlAccessor)"
+                                                :alt-text="item | itemName"
+                                                :title-text="item | itemName"
+                                                :item-url="item | itemURL(urlWithVariationId)"
+                                                :enable-carousel="$ceres.config.item.enableImageCarousel"
+                                                :disable-carousel-on-mobile="disableCarouselOnMobile"
+                                                ref="categoryImageCarousel">
+                        </category-image-carousel>
+                    </slot>
+                </div>
             </div>
 
             <!-- STORE SPECIALS -->
