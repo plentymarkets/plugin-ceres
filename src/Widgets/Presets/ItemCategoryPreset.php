@@ -238,7 +238,9 @@ class ItemCategoryPreset implements ContentPreset
     private function createNavigationTreeWidget()
     {
         $this->twoColumnWidget->createChild('first', 'Ceres::NavigationTreeWidget')
-                              ->withSetting('customClass', '');
+                              ->withSetting('customClass', '')
+                              ->withSetting('expandableChildren', true)
+                              ->withSetting('showItemCount', true);
     }
     
     private function createItemGridWidget()
