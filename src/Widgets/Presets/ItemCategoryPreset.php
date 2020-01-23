@@ -231,7 +231,7 @@ class ItemCategoryPreset implements ContentPreset
     {
         $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
                                               ->withSetting('layout', 'threeToNine')
-                                              ->withSetting('layoutTablet', 'threeToNine')
+                                              ->withSetting('layoutTablet', 'stackedTablet')
                                               ->withSetting('layoutMobile', 'stackedMobile');
     }
     
