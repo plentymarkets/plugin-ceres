@@ -13,9 +13,9 @@ module.exports = env =>
             checkout: "./resources/js/src/checkout.js"
         },
         output: {
-            filename: "../../../resources/js/dist/ceres-[name]" + (env.prod ? ".min" : "") + ".js",
-            path: path.resolve(__dirname, "dist"),
-            publicPath: '/documents/plugins/Ceres/FOO/BAR'
+            filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
+            path: path.resolve(__dirname, "..", "..", "resources/js/dist/"),
+            publicPath: 'https://s3-eu-central-1.amazonaws.com/plentymarkets-public-92/jpx0tvae1136/plugin/26/ceres/FOO/BAR'
         },
         resolve: {
             alias: {
