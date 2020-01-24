@@ -8,7 +8,7 @@
 
 ### Behoben
 
-- Bei Lieferaufträgen und anderen Auftragstypen, die keine Zahlung erfordern, werden Zahlungsinformationen und der Kaufen-Button nicht mehr in der Bestellbestätigung angezeigt.
+- Bei Lieferaufträgen und anderen Auftragstypen, die keine Zahlung erfordern, werden Zahlungsinformationen und der Bezahlen-Button nicht mehr in der Bestellbestätigung angezeigt.
 
 ## v4.5.1 (2020-01-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.0...4.5.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

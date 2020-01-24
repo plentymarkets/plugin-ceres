@@ -8,7 +8,7 @@
 
 ### Fixed
 
-- Payment information and the purchase button are no longer displayed in the order confirmation of delivery orders and other order types that do not require payment.
+- Payment information and the payment button are no longer displayed in the order confirmation of delivery orders and other order types that do not require payment.
 
 ## v4.5.1 (2020-01-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.0...4.5.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
