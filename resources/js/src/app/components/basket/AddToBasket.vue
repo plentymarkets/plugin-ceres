@@ -20,8 +20,8 @@
                                     :min="minimumQuantity"
                                     :max="maximumQuantity"
                                     :interval="intervalQuantity"
-                                    :variation-id="variationId"
-                                    template="#vue-quantity-input"></quantity-input>
+                                    :variation-id="variationId">
+                    </quantity-input>
                 </div>
 
                 <button
