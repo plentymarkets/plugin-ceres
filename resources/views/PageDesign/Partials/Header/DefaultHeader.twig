@@ -74,7 +74,7 @@
                         </a>
 
                         {% if config("Ceres.basket.preview_type") != "right" %}
-                            <basket-preview
+                            <basket-preview v-if="false"
                                 :show-net-prices="{{ showNetPrices | json_encode }}"
                                 :hover="true"
                             >

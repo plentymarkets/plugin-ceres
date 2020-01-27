@@ -155,7 +155,7 @@
                                 </a>
 
                                 {{ Twig.if("basketPreviewType != \"right\"") }}
-                                    <basket-preview
+                                    <basket-preview v-if="false"
                                         :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}"
                                         :hover="true"
                                     >

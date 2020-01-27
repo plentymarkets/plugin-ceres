@@ -49798,6 +49798,12 @@ _services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("Localizatio
   store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
 });
 window.ceresStore = store;
+_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterBasketChanged", function (data) {
+  store.commit("setBasket", data.basket);
+  store.commit("setShowNetPrices", data.showNetPrices);
+  store.commit("setWishListIds", data.basket.itemWishListIds);
+});
+store.dispatch("loadBasketData");
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
 /***/ }),
