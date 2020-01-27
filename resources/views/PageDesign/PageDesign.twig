@@ -188,7 +188,7 @@
     <!-- ./REGISTRATION MODAL -->
 
     <!-- BASKET MODAL -->
-    <add-item-to-basket-overlay>
+    <add-item-to-basket-overlay v-if="renderAddItemToBasketOverlay">
         <template slot="extendOverlayButtons">
             {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
         </template>
@@ -285,6 +285,7 @@
         renderLoginModal: false,
         renderRegisterModal: false,
         renderForgotPasswordModal: false,
+        renderAddItemToBasketOverlay: false,
     };
 
     if (App.config.log.checkSyntax)

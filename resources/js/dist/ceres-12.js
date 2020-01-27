@@ -327,6 +327,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     addToBasket: function addToBasket() {
       var _this = this;
 
+      this.$root.$data.renderAddItemToBasketOverlay = true;
+
       if (this.missingOrderProperties.length) {
         this.showMissingPropertiesError();
       } else if (this.isSalable) {
