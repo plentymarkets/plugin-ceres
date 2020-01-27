@@ -288,6 +288,13 @@
         renderAddItemToBasketOverlay: false,
     };
 
+    let computed = {
+        isMobile()
+        {
+            return !(document.documentElement.clientWidth >= 768);
+        }
+    };
+
     if (App.config.log.checkSyntax)
     {
         var rootElement = document.getElementById("vue-app");
@@ -296,7 +303,8 @@
 
         window.vueApp = new Vue({
             store: window.ceresStore,
-            data: data
+            data: data,
+            computed: computed
         });
 
         vueApp.$mount( rootElement.cloneNode(true) );
@@ -312,7 +320,8 @@
         window.vueApp = new Vue({
             el: "#vue-app",
             store: window.ceresStore,
-            data: data
+            data: data,
+            computed: computed
         });
     }
 </script>
