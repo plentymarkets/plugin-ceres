@@ -51,24 +51,33 @@ Vue.component("add-to-basket", function(resolve)
 {
     require(["./app/components/basket/AddToBasket.vue"], resolve);
 });
-import BasketPreview from "./app/components/basket/BasketPreview.vue";
-Vue.component("basket-preview", BasketPreview);
-import BasketTotals from "./app/components/basket/BasketTotals.vue";
-Vue.component("basket-totals", BasketTotals);
+Vue.component("basket-preview", function(resolve)
+{
+    require(["./app/components/basket/BasketPreview.vue"], resolve);
+});
+Vue.component("basket-totals", function(resolve)
+{
+    require(["./app/components/basket/BasketTotals.vue"], resolve);
+});
 Vue.component("coupon", function(resolve)
 {
     require(["./app/components/basket/Coupon.vue"], resolve);
 });
-import BasketList from "./app/components/basket/list/BasketList.vue";
-Vue.component("basket-list", BasketList);
+Vue.component("basket-list", function(resolve)
+{
+    require(["./app/components/basket/list/BasketList.vue"], resolve);
+});
 
-import StepByStepNavigation from "./app/components/category/StepByStepNavigation.vue";
-Vue.component("step-by-step-navigation", StepByStepNavigation);
+Vue.component("step-by-step-navigation", function(resolve)
+{
+    require(["./app/components/category/StepByStepNavigation.vue"], resolve);
+});
 
 Vue.component("google-maps-widget", function(resolve)
 {
     require(["./app/components/common/GoogleMaps.vue"], resolve);
 });
+
 import LazyImg from "./app/components/common/LazyImg.vue";
 Vue.component("lazy-img", LazyImg);
 
@@ -86,27 +95,39 @@ Vue.component("change-email-form", function(resolve)
 {
     require(["./app/components/customer/ChangeEmailForm.vue"], resolve);
 });
-import ReCaptcha from "./app/components/customer/ReCaptcha.vue";
-Vue.component("recaptcha", ReCaptcha);
-
-import Registration from "./app/components/customer/Registration.vue";
-Vue.component("registration", Registration);
+Vue.component("recaptcha", function(resolve)
+{
+    require(["./app/components/customer/ReCaptcha.vue"], resolve);
+});
+Vue.component("registration", function(resolve)
+{
+    require(["./app/components/customer/Registration.vue"], resolve);
+});
 Vue.component("reset-password-form", function(resolve)
 {
     require(["./app/components/customer/ResetPasswordForm.vue"], resolve);
 });
-
-import ForgotPassword from "./app/components/customer/login/ForgotPassword.vue";
-Vue.component("forgot-password-modal", ForgotPassword);
-import GuestLogin from "./app/components/customer/login/GuestLogin.vue";
-Vue.component("guest-login", GuestLogin);
-import Login from "./app/components/customer/login/Login.vue";
-Vue.component("login", Login);
+Vue.component("forgot-password-modal", function(resolve)
+{
+    require(["./app/components/customer/login/ForgotPassword.vue"], resolve);
+});
+Vue.component("guest-login", function(resolve)
+{
+    require(["./app/components/customer/login/GuestLogin.vue"], resolve);
+});
+Vue.component("login", function(resolve)
+{
+    require(["./app/components/customer/login/Login.vue"], resolve);
+});
 // legacy non-shopbuilder component
-import LoginView from "./app/components/customer/login/LoginView.vue";
-Vue.component("login-view", LoginView);
-import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
-Vue.component("user-login-handler", UserLoginHandler);
+Vue.component("login-view", function(resolve)
+{
+    require(["./app/components/customer/login/LoginView.vue"], resolve);
+});
+Vue.component("user-login-handler", function(resolve)
+{
+    require(["./app/components/customer/login/UserLoginHandler.vue"], resolve);
+});
 
 Vue.component("item-bundle", function(resolve)
 {
@@ -131,8 +152,10 @@ Vue.component("category-item", function(resolve)
     require(["./app/components/itemList/CategoryItem.vue"], resolve);
 });
 
-import ItemSearch from "./app/components/itemList/ItemSearch.vue";
-Vue.component("item-search", ItemSearch);
+Vue.component("item-search", function(resolve)
+{
+    require(["./app/components/itemList/ItemSearch.vue"], resolve);
+});
 
 Vue.component("item-filter-list", function(resolve)
 {
@@ -162,26 +185,39 @@ Vue.component("order-return", function(resolve)
     require(["./app/components/orderReturn/OrderReturn.vue"], resolve);
 });
 
-import CookieBar from "./app/components/pageDesign/CookieBar.vue";
-Vue.component("cookie-bar", CookieBar);
-import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
-Vue.component("privacy-settings", PrivacySettings);
-import Carousel from "./app/components/pageDesign/Carousel.vue";
-Vue.component("carousel", Carousel);
-import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
-Vue.component("mobile-navigation", MobileNavigation);
-import Notifications from "./app/components/pageDesign/Notifications.vue";
-Vue.component("notifications", Notifications);
-import Popper from "./app/components/pageDesign/Popper.vue";
-Vue.component("popper", Popper);
-import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
-Vue.component("shipping-country-select", ShippingCountrySelect);
+Vue.component("cookie-bar", function(resolve)
+{
+    require(["./app/components/pageDesign/CookieBar.vue"], resolve);
+});
+Vue.component("privacy-settings", function(resolve)
+{
+    require(["./app/components/pageDesign/PrivacySettings.vue"], resolve);
+});
+Vue.component("carousel", function(resolve)
+{
+    require(["./app/components/pageDesign/Carousel.vue"], resolve);
+});
+Vue.component("mobile-navigation", function(resolve)
+{
+    require(["./app/components/pageDesign/MobileNavigation.vue"], resolve);
+});
+Vue.component("notifications", function(resolve)
+{
+    require(["./app/components/pageDesign/Notifications.vue"], resolve);
+});
+Vue.component("popper", function(resolve)
+{
+    require(["./app/components/pageDesign/Popper.vue"], resolve);
+});
+Vue.component("shipping-country-select", function(resolve)
+{
+    require(["./app/components/pageDesign/ShippingCountrySelect.vue"], resolve);
+});
 
 Vue.component("wish-list", function(resolve)
 {
     require(["./app/components/wishList/WishList.vue"], resolve);
 });
-
 Vue.component("wish-list-count", function(resolve)
 {
     require(["./app/components/wishList/WishListCount.vue"], resolve);
