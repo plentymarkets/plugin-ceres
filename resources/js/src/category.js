@@ -78,8 +78,10 @@ Vue.component("google-maps-widget", function(resolve)
     require(["./app/components/common/GoogleMaps.vue"], resolve);
 });
 
-import LazyImg from "./app/components/common/LazyImg.vue";
-Vue.component("lazy-img", LazyImg);
+Vue.component("lazy-img", function(resolve)
+{
+    require(["./app/components/common/LazyImg.vue"], resolve);
+});
 
 Vue.component("tab-list", function(resolve)
 {
