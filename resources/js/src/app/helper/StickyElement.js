@@ -214,7 +214,7 @@ export class StickyElement
         if (this.position.isSticky)
         {
             // Fix blur while gpu accelerated
-            const roundedPosition = Math.ceil(this.position.y / 2) * 2;
+            const roundedPosition = Math.round(this.position.y / 2) * 2;
 
             styles = {
                 position:   "fixed",
