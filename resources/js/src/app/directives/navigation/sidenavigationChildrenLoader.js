@@ -1,6 +1,6 @@
 import Vue from "vue";
 import ApiService from "../../services/ApiService";
-import { isDefined } from "../../helper/utils";
+import { isDefined, isNull } from "../../helper/utils";
 
 class SidenavigationChildrenLoader
 {
@@ -47,7 +47,10 @@ class SidenavigationChildrenLoader
             element.style.width = width;
         }
 
-        element.innerText = innerText;
+        if (!isNull(innerText))
+        {
+            element.innerText = innerText;
+        }
 
         if (isDefined(child))
         {
