@@ -60,7 +60,7 @@
                             </wish-list-count>
                         </li>
                     {% endif %}
-                    <li class="list-inline-item control-basket position-relative">
+                    <li class="list-inline-item control-basket position-relative" v-on:mouseover.once="$root.$data.renderBasketPreview = true">
                         <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
                             {% if config("Ceres.header.basket_values") != "sum" %}
                                 <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
@@ -74,7 +74,7 @@
                         </a>
 
                         {% if config("Ceres.basket.preview_type") != "right" %}
-                            <basket-preview v-if="false"
+                            <basket-preview v-if="renderBasketPreview"
                                 :show-net-prices="{{ showNetPrices | json_encode }}"
                                 :hover="true"
                             >

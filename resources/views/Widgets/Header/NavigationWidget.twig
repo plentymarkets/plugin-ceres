@@ -25,7 +25,7 @@
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
 <nav class="navbar header-fw p-0 border-bottom{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{% else %} normalmenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max d-block{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}" 
+    <div class="container-max d-block{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
             <div class="brand-wrapper px-3">
