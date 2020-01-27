@@ -136,6 +136,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     unmarkInputFields: function unmarkInputFields() {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_10__["default"].unmarkAllFields($("#login"));
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_10__["default"].unmarkAllFields($("#registration"));
+    },
+    createLoginModal: function createLoginModal() {
+      this.$root.$data.renderLoginModal = true;
+    },
+    createRegisterModal: function createRegisterModal() {
+      this.$root.$data.renderRegisterModal = true;
     }
   }
 });
@@ -252,7 +258,8 @@ var render = function() {
               },
               on: {
                 click: function($event) {
-                  return _vm.unmarkInputFields()
+                  _vm.createLoginModal()
+                  _vm.unmarkInputFields()
                 }
               }
             },
@@ -282,7 +289,8 @@ var render = function() {
                   },
                   on: {
                     click: function($event) {
-                      return _vm.unmarkInputFields()
+                      _vm.createRegisterModal()
+                      _vm.unmarkInputFields()
                     }
                   }
                 },

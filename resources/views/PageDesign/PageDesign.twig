@@ -126,11 +126,13 @@
                         <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
-                    <login modal-element="login-modal-wrapper">
-                        <template #extend-overlay-buttons>
-                            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
-                        </template>
-                    </login>
+                    <template v-if="renderLoginModal === true">
+                        <login modal-element="login-modal-wrapper">
+                            <template #extend-overlay-buttons>
+                                {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                            </template>
+                        </login>
+                    </template>
                 </div>
             </div>
         </div>
@@ -141,7 +143,7 @@
     <div id="simple-registration-modal-wrapper">
         <div class="modal fade" id="registration" tabindex="-1" role="dialog">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" v-if="renderRegisterModal">
                     <div class="modal-header">
                         <div class="modal-title h3">
                             {{ trans("Ceres::Template.regCreateAccount") }}
@@ -194,7 +196,7 @@
     <!-- ./BASKET MODAL -->
 
     <!-- PASSWORD RESET MODAL -->
-    <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}">
+    <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}" v-if="renderForgotPasswordModal">
         <template slot="extendOverlayButtons">
             {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
         </template>
@@ -279,6 +281,12 @@
 <script>
     window.vueEventHub = new Vue();
 
+    let data = {
+        renderLoginModal: false,
+        renderRegisterModal: false,
+        renderForgotPasswordModal: false,
+    };
+
     if (App.config.log.checkSyntax)
     {
         var rootElement = document.getElementById("vue-app");
@@ -286,7 +294,8 @@
         rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
 
         window.vueApp = new Vue({
-            store: window.ceresStore
+            store: window.ceresStore,
+            data: data
         });
 
         vueApp.$mount( rootElement.cloneNode(true) );
@@ -301,7 +310,8 @@
         // eslint-disable-next-line no-unused-vars
         window.vueApp = new Vue({
             el: "#vue-app",
-            store: window.ceresStore
+            store: window.ceresStore,
+            data: data
         });
     }
 </script>

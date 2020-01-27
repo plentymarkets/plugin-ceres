@@ -13,12 +13,12 @@
             </div>
         </div>
         <div v-if="!isLoggedIn">
-            <a :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="unmarkInputFields()">
+            <a :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="createLoginModal(); unmarkInputFields();">
                 <i class="fa fa-user mr-1" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.login") }}</span>
             </a>
             <span class="pipe" v-if="showRegistration"></span>
-            <a :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="unmarkInputFields()" v-if="showRegistration">
+            <a :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="createRegisterModal(); unmarkInputFields();" v-if="showRegistration">
                 <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginRegister") }}</span>
             </a>
@@ -105,6 +105,16 @@ export default {
         {
             ValidationService.unmarkAllFields($("#login"));
             ValidationService.unmarkAllFields($("#registration"));
+        },
+
+        createLoginModal()
+        {
+            this.$root.$data.renderLoginModal = true;
+        },
+
+        createRegisterModal()
+        {
+            this.$root.$data.renderRegisterModal = true;
         }
     }
 }

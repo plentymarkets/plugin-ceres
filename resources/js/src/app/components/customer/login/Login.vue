@@ -175,6 +175,8 @@ export default {
         {
             this.resetError();
 
+            this.$root.$data.renderForgotPasswordModal = true;
+
             if (this.modalElement)
             {
                 ModalService

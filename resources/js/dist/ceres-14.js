@@ -167,6 +167,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     showResetPwdView: function showResetPwdView() {
       this.resetError();
+      this.$root.$data.renderForgotPasswordModal = true;
 
       if (this.modalElement) {
         _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(document.getElementById(this.modalElement)).hide().then(function () {
