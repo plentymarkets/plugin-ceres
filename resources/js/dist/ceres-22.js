@@ -287,9 +287,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.basket.isBasketItemQuantityUpdate;
     }
   })),
-  created: function created() {
-    this.$store.dispatch("loadBasketData");
-    this.$store.commit("setShowNetPrices", this.showNetPrices);
+  created: function created() {// this.$store.dispatch("loadBasketData");
+    // this.$store.commit("setShowNetPrices", this.showNetPrices);
   },
 
   /**
@@ -298,16 +297,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     var _this = this;
 
-    this.$nextTick(function () {
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_9__["default"].listen("AfterBasketChanged", function (data) {
-        _this.$store.commit("setBasket", data.basket);
-
-        _this.$store.commit("setShowNetPrices", data.showNetPrices);
-
-        _this.$store.commit("setWishListIds", data.basket.itemWishListIds);
-      });
-    });
-
+    /*this.$nextTick(() =>
+    {
+        ApiService.listen("AfterBasketChanged",
+            data =>
+            {
+                this.$store.commit("setBasket", data.basket);
+                this.$store.commit("setShowNetPrices", data.showNetPrices);
+                this.$store.commit("setWishListIds", data.basket.itemWishListIds);
+            });
+    });*/
     if (App.config.basket.addItemToBasketConfirm === "preview") {
       _services_ApiService__WEBPACK_IMPORTED_MODULE_9__["default"].listen("AfterBasketItemAdd", function (data) {
         _this.show();
