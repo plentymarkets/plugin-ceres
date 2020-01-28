@@ -35,12 +35,6 @@
     {% for styleTemplate in get_additional_styles() %}
         {% include styleTemplate.path ignore missing with styleTemplate.params %}
     {% endfor %}
-
-    {% if ceresConfig.log.performanceLevel  == 'development' %}
-        <script async src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
-    {% else %}
-        <script async src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
-    {% endif %}
 </head>
 
 <body class="{{ bodyClasses | join(' ') }}">
@@ -267,6 +261,12 @@
 {{ Translations.add( "Ceres", "Template" ) }}
 
 {{ get_json_data() }}
+
+{% if ceresConfig.log.performanceLevel  == 'development' %}
+    <script async src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
+{% else %}
+    <script async src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
+{% endif %}
 
 {% for scriptTemplate in get_additional_scripts() %}
     {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
