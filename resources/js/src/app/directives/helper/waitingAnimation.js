@@ -1,22 +1,21 @@
 import Vue from "vue";
 
 Vue.directive("waiting-animation", {
-    bind(el)
-    {
-    },
     update(el, binding)
     {
         if (binding.value && !el.waitingClasses)
         {
-            el.waitingClasses = (el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin")
-                .split(/\s+/)
-                .filter(className => !el.classList.contains(className));
+            el.waitingClasses = (el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin");
+            el.className = el.waitingClasses;
 
-            el.classList.add(...el.waitingClasses);
+            if (el._prevClass.includes("fa-lg"))
+            {
+                el.classList.add("fa-lg");
+            }
         }
         else if (el.waitingClasses)
         {
-            el.classList.remove(...el.waitingClasses);
+            el.className = el._prevClass;
             el.waitingClasses = null;
         }
     }
