@@ -1,12 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ component( "Ceres::Customer.Components.UserLoginHandler" ) }}
-{{ component( "Ceres::PageDesign.Components.ShippingCountrySelect" ) }}
-{{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
-{{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
-{{ component( "Ceres::WishList.Components.WishListCount" ) }}
-{{ component( "Ceres::Basket.Components.BasketPreviewHover" ) }}
-
 {% set lang = services.sessionStorage.getLang() %}
 {% set activeCurrencies = config("Ceres.currency.available_currencies") | split(', ') %}
 {% set enableCurrencySelect = config("Ceres.currency.enable_selection") == "true" and activeCurrencies | length > 0 %}

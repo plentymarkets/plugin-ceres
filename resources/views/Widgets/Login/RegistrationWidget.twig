@@ -1,8 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{{ Twig.component("Ceres::Customer.Components.Registration") }}
-
 {% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
@@ -22,16 +20,22 @@
 %}
 
 {{ Twig.print("services.template.disableCacheForTemplate()") }}
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
 <div class="widget widget-registration widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         <registration
-            template="#vue-registration"
             backlink="{{ Twig.print("request.get('backlink') | url_encode") }}"
             :shown-fields="{{ shownFields | json_encode }}"
             :button-size="{{ buttonSize | json_encode }}"
             :required-fields="{{ requiredFields | json_encode }}">
+            <template #extend-overlay-buttons>
+                {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::RegistrationOverlay.ExtendOverlayButtons"])) }}
+            </template>
+            <template #custom-address-fields>
+                {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.CustomAddressField"])) }}
+            </template>
         </registration>
     </div>
 </div>

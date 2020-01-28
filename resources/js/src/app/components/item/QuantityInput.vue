@@ -62,10 +62,6 @@ export default {
             required: false,
             default: 1
         },
-        template: {
-            type: String,
-            required: true
-        },
         waiting: {
             type: Boolean,
             required: false

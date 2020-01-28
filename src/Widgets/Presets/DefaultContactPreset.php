@@ -125,7 +125,7 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting('address', '')
             ->withSetting('zoom', 16)
             ->withSetting('maptype', 'roadmap')
-            ->withSetting('aspectRatio', 'prop-xs-3-1');
+            ->withSetting('aspectRatio', '3-1');
     }
 
     private function createMailForm($parentFactory = null, $parentDropzone = null)

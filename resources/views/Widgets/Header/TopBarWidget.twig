@@ -1,7 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass                  = widget.settings.customClass.mobile %}
 {% set isFixed                      = widget.settings.isFixed.mobile %}
 {% set enableLogin                  = widget.settings.enableLogin.mobile %}
 {% set enableRegistration           = widget.settings.enableRegistration.mobile %}
@@ -25,7 +25,7 @@
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max">
+    <div class="container-max px-0 px-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if isPreview and not
                 enableLogin and not
@@ -49,15 +49,13 @@
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
                         <div class="always-visible-search m-2 flex-grow-1">
-                            <item-search template="#vue-item-search"
-                                         :show-item-images="{{ showItemImages | json_encode }}"
-                                         :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
-                                <div class="position-relative d-flex flex-grow-1">
-                                    <input type="search" class="search-input px-3 py-2 flex-grow-1">
-                                    <button class="search-submit px-3" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
+                            <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
+                                    <div class="position-relative d-flex flex-grow-1">
+                                        <input type="search" class="search-input px-3 py-2 flex-grow-1"/>
+                                        <button class="search-submit px-3" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
                             </item-search>
                         </div>
                     {{ Twig.else() }}
@@ -105,12 +103,11 @@
 
                         {% if enableCurrencySelect %}
                             <li class="list-inline-item dropdown control-languages">
-                                <a class=""
-                                   data-toggle="collapse"
-                                   href="#currencySelect"
-                                   aria-expanded="false"
-                                   aria-controls="currencySelect"
-                                   data-parent="#controlsList">
+                                <a data-toggle="collapse"
+                                    href="#currencySelect"
+                                    aria-expanded="false"
+                                    aria-controls="currencySelect"
+                                    data-parent="#controlsList">
                                     <span>{{ Twig.print("currencyData") }}</span>
                                 </a>
                             </li>
@@ -119,11 +116,12 @@
                         {% if searchStyle == "onDemand" %}
                             <li class="list-inline-item control-search">
                                 <a class="anicon anicon-search-xcross"
-                                   aria-label="toggle search"
-                                   data-toggle="collapse"
-                                   href="#searchBox"
-                                   aria-controls="searchBox"
-                                   data-parent="#controlsList">
+                                    aria-label="toggle search"
+                                    data-toggle="collapse"
+                                    href="#searchBox"
+                                    aria-expanded="false"
+                                    aria-controls="searchBox"
+                                    data-parent="#controlsList">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
                                 </a>
                             </li>
@@ -134,7 +132,7 @@
                             <li class="list-inline-item control-wish-list">
                                 <wish-list-count>
                                     <a>
-                                        <span class="badge-right mr-1">0</span>
+                                        <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </wish-list-count>
@@ -159,8 +157,6 @@
                                 {{ Twig.if("basketPreviewType != \"right\"") }}
                                     <basket-preview
                                         :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}"
-                                        checkout-url="{{ Twig.print("urls.checkout | json_encode") }}"
-                                        basket-url="{{ Twig.print("urls.basket | json_encode") }}"
                                         :hover="true"
                                     >
                                         <template #before-basket-item>
@@ -223,9 +219,7 @@
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <item-search
-                            :show-item-images="{{ showItemImages | json_encode }}"
-                            :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
+                        <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
                     {{ Twig.else() }}
                         {{ Twig.print("overrideSearchBar | raw") }}
                     {{ Twig.endif() }}
