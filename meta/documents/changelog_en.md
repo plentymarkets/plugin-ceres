@@ -1,5 +1,15 @@
 # Release Notes for Ceres
 
+## v4.5.2 (2020-01-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.1...4.5.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to the order data widget, you need to regenerate ShopBuilder contents of the type order confirmation via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Fixed
+
+- Payment information and the payment button are no longer displayed in the order confirmation of delivery orders and other order types that do not require payment.
+
 ## v4.5.1 (2020-01-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.0...4.5.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
