@@ -10,7 +10,6 @@ use IO\Helper\Utils;
 use IO\Services\BasketService;
 use IO\Services\CategoryService;
 use IO\Services\CheckoutService;
-use IO\Services\CustomerService;
 use IO\Services\NotificationService;
 use IO\Services\TemplateService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
@@ -79,8 +78,8 @@ class GlobalContext implements ContextInterface
         /** @var CheckoutService $checkoutService */
         $checkoutService = pluginApp(CheckoutService::class);
 
-        /** @var CustomerService $customerService */
-        $customerService = pluginApp(CustomerService::class);
+        /** @var ContactRepositoryContract $contactRepository */
+        $contactRepository = pluginApp(ContactRepositoryContract::class);
 
         /** @var ContactRepositoryContract $contactRepository */
         $contactRepository = pluginApp(ContactRepositoryContract::class);
@@ -131,7 +130,7 @@ class GlobalContext implements ContextInterface
 
         $this->currencyData = $checkoutService->getCurrencyData();
 
-        $this->showNetPrices = $customerService->showNetPrices();
+        $this->showNetPrices = $contactRepository->showNetPrices();
 
         $this->splitItemBundle = $webstoreConfigurationRepository->getWebstoreConfig()->dontSplitItemBundle;
 
