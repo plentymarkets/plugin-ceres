@@ -37,9 +37,9 @@
     {% endfor %}
 
     {% if ceresConfig.log.performanceLevel  == 'development' %}
-        <script defer src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
+        <script async src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
     {% else %}
-        <script defer src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
+        <script async src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
     {% endif %}
 </head>
 
