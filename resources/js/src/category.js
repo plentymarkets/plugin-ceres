@@ -295,3 +295,41 @@ window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
 Vue.prototype.$ceres = App;
+
+window.vueEventHub = new Vue();
+
+const data = {
+    renderLoginModal: false,
+    renderRegisterModal: false,
+    renderForgotPasswordModal: false,
+    renderAddItemToBasketOverlay: false,
+    renderBasketPreview: false
+};
+
+if (App.config.log.checkSyntax)
+{
+    const rootElement = document.getElementById("vue-app");
+
+    rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
+
+    window.vueApp = new Vue({
+        store: window.ceresStore,
+        data: data
+    });
+
+    vueApp.$mount( rootElement.cloneNode(true) );
+
+    if (vueApp.$el.id === "vue-app")
+    {
+        document.body.replaceChild( vueApp.$el, rootElement );
+    }
+}
+else
+{
+    // eslint-disable-next-line no-unused-vars
+    window.vueApp = new Vue({
+        el: "#vue-app",
+        store: window.ceresStore,
+        data: data
+    });
+}

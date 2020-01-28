@@ -263,9 +263,9 @@
 {{ get_json_data() }}
 
 {% if ceresConfig.log.performanceLevel  == 'development' %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
+    <script defer src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
 {% else %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
+    <script defer src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
 {% endif %}
 
 {% for scriptTemplate in get_additional_scripts() %}
@@ -277,46 +277,6 @@
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
-
-<script>
-    window.vueEventHub = new Vue();
-
-    let data = {
-        renderLoginModal: false,
-        renderRegisterModal: false,
-        renderForgotPasswordModal: false,
-        renderAddItemToBasketOverlay: false,
-        renderBasketPreview: false,
-    };
-
-    if (App.config.log.checkSyntax)
-    {
-        var rootElement = document.getElementById("vue-app");
-
-        rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
-
-        window.vueApp = new Vue({
-            store: window.ceresStore,
-            data: data,
-        });
-
-        vueApp.$mount( rootElement.cloneNode(true) );
-
-        if (vueApp.$el.id === "vue-app")
-        {
-            document.body.replaceChild( vueApp.$el, rootElement );
-        }
-    }
-    else
-    {
-        // eslint-disable-next-line no-unused-vars
-        window.vueApp = new Vue({
-            el: "#vue-app",
-            store: window.ceresStore,
-            data: data,
-        });
-    }
-</script>
 
 {{ get_filtered_tags() }}
 
