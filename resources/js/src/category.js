@@ -43,6 +43,9 @@ import "bootstrap";
 // COMPONENTS
 // =========================
 
+import LazyMountIntersect from "./app/components/common/LazyMountIntersect.vue";
+Vue.component("intersect", LazyMountIntersect);
+
 Vue.component("add-item-to-basket-overlay", function(resolve)
 {
     require(["./app/components/basket/AddItemToBasketOverlay.vue"], resolve);
