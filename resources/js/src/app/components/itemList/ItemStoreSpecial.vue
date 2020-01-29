@@ -1,6 +1,6 @@
 <template>
-    <div class="special-tags" v-show="label.length || bundleType === 'bundle'">
-        <span v-if="label.length" class="badge" :class="tagClass">
+    <div class="special-tags p-2" v-show="label.length || bundleType === 'bundle'">
+        <span v-if="label.length" class="badge shadow-sm" :class="tagClass">
             {{ label }}
         </span>
         <span v-else class="badge badge-bundle bg-info">

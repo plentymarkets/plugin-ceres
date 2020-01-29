@@ -1,6 +1,6 @@
 <template>
     <article class="cmp cmp-product-thumb">
-        <div class="thumb-inner" :class="paddingClasses" :style="paddingInlineStyles">
+        <div :class="paddingClasses" :style="paddingInlineStyles">
 
             <add-to-basket
                     :variation-id="item.variation.id"
@@ -17,9 +17,6 @@
                     :has-price="item | hasItemDefaultPrice">
             </add-to-basket>
 
-            <div class="thumb-background"></div>
-
-            
             <div class="thumb-image">
                 <div class="prop-1-1">
                     <slot name="item-image">
@@ -50,11 +47,11 @@
             <!-- ITEM DETAILS -->
             <slot name="item-details">
                 <div class="thumb-content">
-                    <a :href="item | itemURL(urlWithVariationId)" class="thumb-title small">
+                    <a :href="item | itemURL(urlWithVariationId)" class="thumb-title small stretched-link">
                         {{ item | itemName }}<!--
                     --><span v-for="attribute in item.groupedAttributes">{{ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }}</span>
                     </a>
-                    <div class="thumb-meta">
+                    <div class="thumb-meta mt-2">
                         <slot name="before-prices"></slot>
 
                         <div class="prices">
@@ -75,7 +72,7 @@
 
                     <slot name="after-prices"></slot>
 
-                    <div class="category-unit-price" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
+                    <div class="category-unit-price small" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
                         <span>{{ item.unit.content }}</span>
                         <span>&nbsp;{{ item.unit.names.name }}</span>
                         <span v-if="item.variation.mayShowUnitPrice">&nbsp;| {{ item.prices.default.basePrice }}</span>
