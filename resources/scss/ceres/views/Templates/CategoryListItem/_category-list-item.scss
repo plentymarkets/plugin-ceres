@@ -1,15 +1,15 @@
 .cmp-product-thumb {
     width: 100%;
     padding: .8rem;
-    margin-bottom: $grid-gutter-width/2;
+    margin-bottom: $grid-gutter-width / 2;
     overflow: hidden;
-    background-color: #fff;
+    background-color: $white;
 
-    .tag-list span {
-        text-transform: uppercase;
-        cursor: default;
-        background-color: #4d4f4d;
-    }
+    // .tag-list span {
+    //     text-transform: uppercase;
+    //     cursor: default;
+    //     background-color: #4d4f4d;
+    // }
 
     .prices {
         display: flex;
