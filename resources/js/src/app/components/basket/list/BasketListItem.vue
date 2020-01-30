@@ -72,7 +72,6 @@
                     <div class="basket-item-container-right">
                         <div class="qty-box-container">
                             <quantity-input
-                                    template="#vue-quantity-input"
                                     @quantity-change="updateQuantity"
                                     :value="basketItem.quantity"
                                     :waiting="isInputLocked || isCheckoutReadonly"

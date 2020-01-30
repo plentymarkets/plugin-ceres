@@ -47,7 +47,6 @@
                     <div class="basket-item-container-right">
                         <div class="qty-box-container ml-3">
                             <quantity-input
-                                template="#vue-quantity-input"
                                 @quantity-change="quantity = $event"
                                 :value="quantity"
                                 :min="wishListItem.variation.minimumOrderQuantity"
