@@ -132,7 +132,7 @@ class GlobalContext implements ContextInterface
 
         $this->showNetPrices = $contactRepository->showNetPrices();
 
-        $this->splitItemBundle = $webstoreConfigurationRepository->getWebstoreConfig()->dontSplitItemBundle;
+        $this->splitItemBundle = $webstoreConfigurationRepository->getWebstoreConfiguration()->dontSplitItemBundle;
 
         $this->templateEvent = $templateService->getCurrentTemplate();
 
