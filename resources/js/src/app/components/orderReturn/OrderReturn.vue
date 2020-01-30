@@ -7,14 +7,16 @@
                 :is-net="amount.isNet || showNetPrices"
                 :item-details-data="itemDetailsData"></order-return-item>
 
-        <button class="btn btn-primary btn-appearance btn-medium-large mt-4" @click="selectAllItems()" :class="buttonSizeClass">
-            <i class="fa fa-check-square-o" aria-hidden="true"></i>
-            {{ $translate("Ceres::Template.returnSelectAll") }}
-        </button>
-        <button class="btn btn-primary btn-appearance float-right btn-medium-large mt-4" :disabled="isDisabled || isLoading" @click="showConfirmationModal()" :class="buttonSizeClass">
-            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-            {{ $translate("Ceres::Template.returnTrigger") }}
-        </button>
+        <div class="d-flex flex-wrap flex-column flex-sm-row justify-content-between mt-3">
+            <button class="btn btn-primary btn-appearance mt-1" @click="selectAllItems()" :class="buttonSizeClass">
+                {{ $translate("Ceres::Template.returnSelectAll") }}
+                <i class="fa fa-check-square-o default-float" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-primary btn-appearance mt-1" :disabled="isDisabled || isLoading" @click="showConfirmationModal()" :class="buttonSizeClass">
+                {{ $translate("Ceres::Template.returnTrigger") }}
+                <i class="fa fa-arrow-right default-float" aria-hidden="true"></i>
+            </button>
+        </div>
 
         <div class="modal fade" ref="orderReturnConfirmation" tabindex="-1" role="dialog">
             <div class="modal-dialog">
