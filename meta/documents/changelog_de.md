@@ -1,5 +1,15 @@
 # Release Notes für Ceres
 
+## v4.5.2 (2020-01-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.1...4.5.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen am Auftragsdaten-Widget müssen die ShopBuilder-Inhalte vom Typ Bestellbestätigung im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu bereitstellen** aktualisiert werden.
+
+### Behoben
+
+- Bei Lieferaufträgen und anderen Auftragstypen, die keine Zahlung erfordern, werden Zahlungsinformationen und der Bezahlen-Button nicht mehr in der Bestellbestätigung angezeigt.
+
 ## v4.5.1 (2020-01-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.0...4.5.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben

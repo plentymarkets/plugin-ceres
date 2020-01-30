@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="mb-3 item-bundle" v-if="showItemBundleItems">
+        <div class="small font-weight-bold mb-3" v-if="showItemBundleItems">
             <strong>{{ $translate("Ceres::Template.itemBundleContent") }}</strong>
             <div v-for="item in bundleComponents" :class="paddingClasses" :style="paddingInlineStyles">
                 <span class="text-muted">{{ item.quantity }} x</span>
