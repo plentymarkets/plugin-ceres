@@ -7,7 +7,7 @@
             </a>
             <div class="account-menu dropdown-menu small m-0 p-0">
                 <div class="list-group" aria-labelledby="accountMenuList" >
-                    <a :href="myAccountUrl" class="list-group-item small"><i class="fa fa-user"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
+                    <a :href="$ceres.urls.myAccount" class="list-group-item small"><i class="fa fa-user"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
                     <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ $translate("Ceres::Template.loginLogout") }}</a>
                 </div>
             </div>
@@ -41,20 +41,6 @@ export default {
     },
 
     computed: {
-        myAccountUrl() {
-            return App.urls.myAccount;
-        },
-
-        isLogin()
-        {
-            return App.templateType === "login";
-        },
-
-        isRegister()
-        {
-            return App.templateType === "register";
-        },
-
         ...mapGetters([
            "username",
            "isLoggedIn"
@@ -71,6 +57,9 @@ export default {
                     this.$store.commit("setUserData", response.data);
                 }
             });
+
+        this.isLogin = App.templateType === "login";
+        this.isRegister = App.templateType === "register";
     },
 
     /**
