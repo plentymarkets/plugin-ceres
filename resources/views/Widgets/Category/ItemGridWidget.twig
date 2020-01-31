@@ -24,7 +24,7 @@
             {{ Twig.for("item", "itemList") }}
                 <li class="col-{{ 12 / numberOfColumnsMobile }} col-md-{{ 12 / numberOfColumnsTablet }} col-lg-{{ 12 / numberOfColumnsDesktop }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-                    <intersect>
+                    <lazy-mount-intersect>
                         <template #loading>
                             <div class="w-100" style="height: 370px;"></div>
                         </template>
@@ -41,7 +41,7 @@
                                 <span>{{ Twig.print("item.data | itemName") }}</span>
                             </a>
                         </category-item>
-                    </intersect>
+                    </lazy-mount-intersect>
                 </li>
             {{ Twig.endfor() }}
         </div>
