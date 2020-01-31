@@ -46,10 +46,11 @@ import "bootstrap";
 import LazyMountIntersect from "./app/components/common/LazyMountIntersect.vue";
 Vue.component("intersect", LazyMountIntersect);
 
-Vue.component("add-item-to-basket-overlay", function(resolve)
-{
-    require(["./app/components/basket/AddItemToBasketOverlay.vue"], resolve);
-});
+Vue.component("add-item-to-basket-overlay", () => import("./app/components/basket/AddItemToBasketOverlay.vue"));
+
+console.log("TEST");
+
+
 Vue.component("add-to-basket", function(resolve)
 {
     require(["./app/components/basket/AddToBasket.vue"], resolve);
