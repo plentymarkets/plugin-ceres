@@ -42,14 +42,7 @@ import "bootstrap";
 // =========================
 // COMPONENTS
 // =========================
-
-import LazyMountIntersect from "./app/components/common/LazyMountIntersect.vue";
-Vue.component("intersect", LazyMountIntersect);
-
 Vue.component("add-item-to-basket-overlay", () => import("./app/components/basket/AddItemToBasketOverlay.vue"));
-
-console.log("TEST");
-
 
 Vue.component("add-to-basket", function(resolve)
 {
@@ -82,10 +75,11 @@ Vue.component("google-maps-widget", function(resolve)
     require(["./app/components/common/GoogleMaps.vue"], resolve);
 });
 
-Vue.component("lazy-img", function(resolve)
-{
-    require(["./app/components/common/LazyImg.vue"], resolve);
-});
+import LazyImg from "./app/components/common/LazyImg.vue";
+Vue.component("lazy-img", LazyImg);
+
+import LazyMountIntersect from "./app/components/common/LazyMountIntersect.vue";
+Vue.component("lazy-mount-intersect", LazyMountIntersect);
 
 Vue.component("tab-list", function(resolve)
 {
@@ -130,10 +124,9 @@ Vue.component("login-view", function(resolve)
 {
     require(["./app/components/customer/login/LoginView.vue"], resolve);
 });
-Vue.component("user-login-handler", function(resolve)
-{
-    require(["./app/components/customer/login/UserLoginHandler.vue"], resolve);
-});
+
+import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
+Vue.component("user-login-handler", UserLoginHandler);
 
 Vue.component("item-bundle", function(resolve)
 {
@@ -158,10 +151,8 @@ Vue.component("category-item", function(resolve)
     require(["./app/components/itemList/CategoryItem.vue"], resolve);
 });
 
-Vue.component("item-search", function(resolve)
-{
-    require(["./app/components/itemList/ItemSearch.vue"], resolve);
-});
+import ItemSearch from "./app/components/itemList/ItemSearch.vue";
+Vue.component("item-search", ItemSearch);
 
 Vue.component("item-filter-list", function(resolve)
 {
@@ -203,31 +194,29 @@ Vue.component("carousel", function(resolve)
 {
     require(["./app/components/pageDesign/Carousel.vue"], resolve);
 });
-Vue.component("mobile-navigation", function(resolve)
-{
-    require(["./app/components/pageDesign/MobileNavigation.vue"], resolve);
-});
-Vue.component("notifications", function(resolve)
-{
-    require(["./app/components/pageDesign/Notifications.vue"], resolve);
-});
+
+import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
+Vue.component("mobile-navigation", MobileNavigation);
+
+import Notifications from "./app/components/pageDesign/Notifications.vue";
+Vue.component("notifications", Notifications);
+
 Vue.component("popper", function(resolve)
 {
     require(["./app/components/pageDesign/Popper.vue"], resolve);
 });
-Vue.component("shipping-country-select", function(resolve)
-{
-    require(["./app/components/pageDesign/ShippingCountrySelect.vue"], resolve);
-});
+
+const ShippingCountrySelect = () => import("./app/components/pageDesign/ShippingCountrySelect.vue");
+
+Vue.component("shipping-country-select", ShippingCountrySelect);
 
 Vue.component("wish-list", function(resolve)
 {
     require(["./app/components/wishList/WishList.vue"], resolve);
 });
-Vue.component("wish-list-count", function(resolve)
-{
-    require(["./app/components/wishList/WishListCount.vue"], resolve);
-});
+
+import WishListCount from "./app/components/wishList/WishListCount.vue";
+Vue.component("wish-list-count", WishListCount);
 
 // =========================
 // DIRECTIVES

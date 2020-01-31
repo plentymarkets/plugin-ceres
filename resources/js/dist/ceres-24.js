@@ -1,55 +1,18 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[24],{
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/Coupon.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/Coupon.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.define-properties */ "./node_modules/core-js/modules/es.object.define-properties.js");
-/* harmony import */ var core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.define-property */ "./node_modules/core-js/modules/es.object.define-property.js");
-/* harmony import */ var core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-
-
-
-
-
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 //
 //
@@ -70,128 +33,58 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    template: {
+    contactId: {
+      type: Number,
+      required: true
+    },
+    hash: {
       type: String,
-      default: "#vue-coupon"
+      required: true
+    },
+    newMail: {
+      type: String,
+      required: true
     }
   },
   data: function data() {
     return {
-      waiting: false,
-      couponCode: ""
+      password: "",
+      isDisabled: false
     };
   },
-  watch: {
-    redeemedCouponCode: function redeemedCouponCode(val) {
-      this.couponCode = val;
-    }
-  },
-  computed: _objectSpread({
-    disabled: function disabled() {
-      if (this.redeemedCouponCode) {
-        return true;
-      }
-
-      return false;
-    }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_12__["mapState"])({
-    redeemedCouponCode: function redeemedCouponCode(state) {
-      return state.basket.data.couponCode;
-    },
-    isBasketLoading: function isBasketLoading(state) {
-      return state.basket.isBasketLoading;
-    },
-    isCheckoutReadonly: function isCheckoutReadonly(state) {
-      return state.checkout.readOnly;
-    }
-  })),
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      if (_this.redeemedCouponCode) {
-        _this.couponCode = _this.redeemedCouponCode;
-      }
-    });
-  },
   methods: {
-    redeemCode: function redeemCode() {
-      var _this2 = this;
+    /**
+     * Send the login data
+     */
+    submit: function submit() {
+      var _this = this;
 
-      // remove whitespaces
-      this.couponCode = this.couponCode.replace(/\s/g, "");
-
-      if (this.couponCode.length > 0) {
-        this.waiting = true;
-        this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
-          _this2.waiting = false;
-          NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_11__["default"].translate("Ceres::Template.couponRedeemSuccess")).closeAfter(10000);
-        }, function (error) {
-          _this2.waiting = false;
-          NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
-        });
-      } else {
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_11__["default"].translate("Ceres::Template.couponIsEmpty")).closeAfter(10000);
-      }
-    },
-    removeCode: function removeCode() {
-      var _this3 = this;
-
-      this.waiting = true;
-      this.$store.dispatch("removeCouponCode", this.couponCode).then(function (response) {
-        _this3.waiting = false;
-        NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_11__["default"].translate("Ceres::Template.couponRemoveSuccess")).closeAfter(10000);
-      }, function (error) {
-        _this3.waiting = false;
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_11__["default"].translate("Ceres::Template.couponRemoveFailure")).closeAfter(10000);
+      this.isDisabled = true;
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].put("/rest/io/customer/mail/" + this.contactId, {
+        password: this.password,
+        hash: this.hash
+      }).done(function (response) {
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].success(_this.$translate("Ceres::Template.myAccountChangeEmailSuccessful"));
+        window.location.assign(window.location.origin);
+      }).fail(function () {
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].error(_this.$translate("Ceres::Template.myAccountChangeEmailFailed")).closeAfter(10000);
+      }).always(function () {
+        _this.isDisabled = false;
       });
-    },
-    getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
-      var errorMessageKeys = {
-        18: "couponMinOrderValueNotReached",
-        51: "couponnotUsableForSpecialOffer",
-        70: "couponAlreadyUsedOrInvalidCouponCode",
-        78: "couponCampaignExpired",
-        126: "couponNoMatchingItemInBasket",
-        329: "couponOnlySubscription",
-        330: "couponOnlySingleUsage",
-        331: "couponNoOpenAmount",
-        332: "couponExpired",
-        334: "couponOnlyForNewCustomers",
-        335: "couponOnlyForExistingCustomers",
-        336: "couponWrongCustomerGroup",
-        337: "couponWrongCustomerType",
-        338: "couponNoCustomerTypeProvided",
-        339: "couponNoCustomerTypeActivated",
-        340: "couponNoCustomerGroupActivated",
-        341: "couponCampaignNoWebstoreActivated",
-        342: "couponCampaignWrongWebstoreId",
-        343: "couponCampaignNoWebstoreIdGiven"
-      };
-
-      if (error && error.error && error.code && errorMessageKeys[error.code]) {
-        return _services_TranslationService__WEBPACK_IMPORTED_MODULE_11__["default"].translate("Ceres::Template." + errorMessageKeys[error.code]);
-      }
-
-      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_11__["default"].translate("Ceres::Template.couponRedeemFailure");
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/Coupon.vue?vue&type=template&id=127bda26&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/Coupon.vue?vue&type=template&id=127bda26& ***!
-  \************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -203,133 +96,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cmp" }, [
-    _vm.isCheckoutReadonly &&
-    !!_vm.$translate("Ceres::Template.couponReadonlyInfoText")
-      ? _c("p", [
-          _vm._v("\n        " + _vm._s(_vm.couponReadonlyInfoText) + "\n    ")
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        class: {
-          "input-group": true,
-          "component-loading": _vm.isCheckoutReadonly,
-          isLoading: _vm.isCheckoutReadonly
+  return _c(
+    "form",
+    {
+      staticClass: "clearfix",
+      attrs: { method: "post" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.submit()
         }
-      },
-      [
+      }
+    },
+    [
+      _c("div", { staticClass: "input-unit mt-3" }, [
+        _c(
+          "label",
+          { staticClass: "disabled", attrs: { for: "new-mail" + _vm._uid } },
+          [_vm._v(_vm._s(_vm.$translate("Ceres::Template.myAccountNewEmail")))]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "email",
+            name: "email",
+            id: "new-mail" + _vm._uid,
+            disabled: ""
+          },
+          domProps: { value: _vm.newMail }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-unit" }, [
+        _c("label", { attrs: { for: "password" + _vm._uid } }, [
+          _vm._v(_vm._s(_vm.$translate("Ceres::Template.loginPassword")))
+        ]),
+        _vm._v(" "),
         _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.couponCode,
-              expression: "couponCode"
+              value: _vm.password,
+              expression: "password"
             }
           ],
           staticClass: "form-control",
           attrs: {
-            type: "text",
-            placeholder: _vm.$translate("Ceres::Template.couponEnterCoupon"),
-            disabled: _vm.disabled || _vm.isCheckoutReadonly
+            type: "password",
+            name: "password",
+            autocomplete: "current-password",
+            id: "password" + _vm._uid
           },
-          domProps: { value: _vm.couponCode },
+          domProps: { value: _vm.password },
           on: {
-            keyup: function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
-              }
-              return _vm.redeemCode()
-            },
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.couponCode = $event.target.value
+              _vm.password = $event.target.value
             }
           }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "input-group-btn" }, [
-          !_vm.disabled
-            ? _c(
-                "button",
-                {
-                  staticClass: "btn btn-medium btn-primary btn-appearance",
-                  attrs: {
-                    type: "button",
-                    disabled: _vm.waiting || _vm.isCheckoutReadonly
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.redeemCode()
-                    }
-                  }
-                },
-                [
-                  _c("i", {
-                    directives: [
-                      {
-                        name: "waiting-animation",
-                        rawName: "v-waiting-animation",
-                        value: _vm.waiting,
-                        expression: "waiting"
-                      }
-                    ],
-                    staticClass: "fa fa-gift",
-                    attrs: { "aria-hidden": "true" }
-                  }),
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.$translate("Ceres::Template.couponRedeem")) +
-                      "\n            "
-                  )
-                ]
-              )
-            : _c(
-                "button",
-                {
-                  staticClass: "btn btn-medium btn-danger",
-                  attrs: {
-                    type: "button",
-                    disabled: _vm.waiting || _vm.isCheckoutReadonly
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.removeCode()
-                    }
-                  }
-                },
-                [
-                  _c("i", {
-                    directives: [
-                      {
-                        name: "waiting-animation",
-                        rawName: "v-waiting-animation",
-                        value: _vm.waiting,
-                        expression: "waiting"
-                      }
-                    ],
-                    staticClass: "fa fa-trash",
-                    attrs: { "aria-hidden": "true" }
-                  }),
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.$translate("Ceres::Template.couponRemove")) +
-                      "\n            "
-                  )
-                ]
-              )
-        ])
-      ]
-    )
-  ])
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width",
+          attrs: { type: "submit", disabled: _vm.isDisabled }
+        },
+        [
+          _c("span", [
+            _vm._v(
+              _vm._s(_vm.$translate("Ceres::Template.myAccountChangeEmail"))
+            )
+          ]),
+          _vm._v(" "),
+          _c("i", {
+            directives: [
+              {
+                name: "waiting-animation",
+                rawName: "v-waiting-animation",
+                value: _vm.isDisabled,
+                expression: "isDisabled"
+              }
+            ],
+            staticClass: "fa fa-envelope",
+            attrs: { "aria-hidden": "true" }
+          })
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -338,17 +199,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/Coupon.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/src/app/components/basket/Coupon.vue ***!
-  \***********************************************************/
+/***/ "./resources/js/src/app/components/customer/ChangeEmailForm.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/ChangeEmailForm.vue ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Coupon_vue_vue_type_template_id_127bda26___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Coupon.vue?vue&type=template&id=127bda26& */ "./resources/js/src/app/components/basket/Coupon.vue?vue&type=template&id=127bda26&");
-/* harmony import */ var _Coupon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Coupon.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/Coupon.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChangeEmailForm.vue?vue&type=template&id=0bc3dede& */ "./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede&");
+/* harmony import */ var _ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeEmailForm.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -358,9 +219,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Coupon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Coupon_vue_vue_type_template_id_127bda26___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Coupon_vue_vue_type_template_id_127bda26___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -370,38 +231,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/basket/Coupon.vue"
+component.options.__file = "resources/js/src/app/components/customer/ChangeEmailForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/Coupon.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/Coupon.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
+/***/ "./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Coupon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Coupon.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/Coupon.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Coupon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ChangeEmailForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/Coupon.vue?vue&type=template&id=127bda26&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/Coupon.vue?vue&type=template&id=127bda26& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede& ***!
+  \*****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Coupon_vue_vue_type_template_id_127bda26___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Coupon.vue?vue&type=template&id=127bda26& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/Coupon.vue?vue&type=template&id=127bda26&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Coupon_vue_vue_type_template_id_127bda26___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ChangeEmailForm.vue?vue&type=template&id=0bc3dede& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Coupon_vue_vue_type_template_id_127bda26___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
