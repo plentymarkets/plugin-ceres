@@ -52,6 +52,8 @@
                 <recaptcha></recaptcha>
             {{ Twig.endif() }}
 
+            <input v-cloak type="text" name="phone-number" autocomplete="off" tabindex="-1" style="display: none !important;">
+
             <div class="col-12 text-right">
                 <button type="submit" class="btn btn-{{ appearance }} {{ buttonSize }}">
                     {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}
