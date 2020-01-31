@@ -26,6 +26,11 @@ Vue.component("registration", {
         requiredFields: Object
     },
 
+    mounted()
+    {
+        this.$refs.pin.style.cssText = "display: none !important";
+    },
+
     data()
     {
         return {
@@ -40,7 +45,8 @@ Vue.component("registration", {
             isDisabled: false,
             privacyPolicyAccepted : false,
             privacyPolicyShowError: false,
-            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
+            enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
+            pin: ""
         };
     },
 
@@ -192,7 +198,8 @@ Vue.component("registration", {
                                 priority : 0
                             }
                         }
-                    }
+                    },
+                    pin: this.pin
                 };
 
             if (!this.guestMode)
