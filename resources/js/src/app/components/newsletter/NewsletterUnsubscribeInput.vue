@@ -9,7 +9,7 @@
 
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
-                        <i class="fa fa-paper-plane-o" v-waiting-animation="isDisabled" aria-hidden="true"></i>
+                        <icon class="paper-plane-o" :loading="isDisabled"></icon>
                         <span>{{ $translate("Ceres::Template.newsletterUnsubscribeButtonLabel") }}</span>
                     </button>
                 </span>
