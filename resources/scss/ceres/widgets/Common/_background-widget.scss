@@ -22,7 +22,14 @@
         z-index: 1;
         
         .huge-font {
-            font-size: 35px;
+            font-size: $font-size-base;
+
+            @include media-breakpoint-up(sm) {
+                font-size: 28px;
+            }
+            @include media-breakpoint-up(md) {
+                font-size: 35px;
+            }
     
             .widget-text,
             .widget-code {
