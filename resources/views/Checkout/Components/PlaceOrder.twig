@@ -12,7 +12,8 @@
                 :style="paddingInlineStyles"
                 @click="placeOrder()"
                 :disabled="waiting || isBasketLoading || !isBasketInitiallyLoaded">
-                <i v-waiting-animation="waiting" class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("Ceres::Template.checkoutBuyNow") }}
+                <icon icon="arrow-right" :loading="waiting"></icon>
+                {{ trans("Ceres::Template.checkoutBuyNow") }}
             </button>
         {% endif %}
     </div>

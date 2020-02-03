@@ -71,7 +71,7 @@
                                                     <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
                                                 {% endif %}
 
-                                                <i v-waiting-animation="$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                <icon icon="shopping-cart" class-loading="fa-refresh" :loading="$store.state.basket.isBasketLoading"></icon>
                                                 {% if config("Ceres.header.basket_values") != "quantity" %}
                                                     <span class="badge p-0 ml-2" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
                                                     <span class="badge p-0 ml-2" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>

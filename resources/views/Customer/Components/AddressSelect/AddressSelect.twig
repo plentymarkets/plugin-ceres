@@ -149,7 +149,7 @@
                             </button>
                             <button type="button" class="btn btn-primary btn-appearance btn-medium" :disabled="deleteModalWaiting" @click="deleteAddress">
                                 <span>{{ trans("Ceres::Template.addressDelete") }}</span>
-                                <i v-waiting-animation="deleteModalWaiting" class="fa fa-trash" aria-hidden="true"></i>
+                                <icon icon="trash" :loading="deleteModalWaiting"></icon>
                             </button>
                         </div>
                     </div>

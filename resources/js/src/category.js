@@ -121,12 +121,15 @@ Vue.component("newsletter-unsubscribe-input", NewsletterUnsubscribeInput);
 import OrderReturn from "./app/components/orderReturn/OrderReturn.vue";
 Vue.component("order-return", OrderReturn);
 
+
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
 Vue.component("cookie-bar", CookieBar);
 import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
 Vue.component("privacy-settings", PrivacySettings);
 import Carousel from "./app/components/pageDesign/Carousel.vue";
 Vue.component("carousel", Carousel);
+import Icon from "./app/components/pageDesign/Icon.vue";
+Vue.component("icon", Icon);
 import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
 Vue.component("mobile-navigation", MobileNavigation);
 import Notifications from "./app/components/pageDesign/Notifications.vue";
