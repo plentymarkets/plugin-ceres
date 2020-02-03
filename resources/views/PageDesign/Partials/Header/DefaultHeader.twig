@@ -158,7 +158,7 @@
                                                 </div>
                                                 <ul class="row text-center text-sm-left">
                                                     {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
-                                                        <li class="col-3 col-sm-2{% if currency.name == services.checkout.getCurrencyData().name %} active{% endif %}">
+                                                        <li class="col-2 px-0{% if currency.name == services.checkout.getCurrencyData().name %} active{% endif %}">
                                                             <a href="{{ queryString({"currency": currency.name}) }}" rel="nofollow">
                                                                 {% if currencyFormatSelect == 'all' %}
                                                                     {{ currency.name }} <br class="d-block d-sm-none" />({{ currency.symbol }})
