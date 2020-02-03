@@ -34,12 +34,12 @@
                     {% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification": {
                         "@type": "UnitPriceSpecification",
-                        "price": "{{ item.documents[0].data.prices.default.baseSinglePrice | number_format(2, '.', '') }}",
+                        "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
                         "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
                         "referenceQuantity": {
                             "@type": "QuantitativeValue",
-                            "value": "{{ item.documents[0].data.prices.default.baseLot }}",
-                            "unitCode": "{{ item.documents[0].data.prices.default.baseUnit }}"
+                            "value": "{{ itemData.unit.content }}",
+                            "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
                         }
                     },
                     {% endif %}

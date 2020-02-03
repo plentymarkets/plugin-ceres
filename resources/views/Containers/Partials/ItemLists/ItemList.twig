@@ -1,3 +1,5 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% set listType = config("Ceres.item.lists." ~ itemListNo ~ ".list_type") %}
 {% set tagIds = config("Ceres.item.lists." ~ itemListNo ~ ".tag_ids") | split(",") %}
 {% set tagSorting = config("Ceres.item.lists.tag_sorting") %}
