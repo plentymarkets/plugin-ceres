@@ -27,7 +27,7 @@
                     <slot name="extend-overlay-buttons"></slot>
                     <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
                         {{ $translate("Ceres::Template.login") }}
-                        <icon class="user" :loading="isDisabled"></icon>
+                        <icon icon="user" :loading="isDisabled"></icon>
                     </button>
                 </div>
             </div>
