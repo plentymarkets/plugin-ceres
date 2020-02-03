@@ -97,13 +97,17 @@ function CeresMain()
             }
         }
 
-        headerCollapses.forEach(element =>
+        // prevent hidding collapses in the shopbuilder, for editing search bar results
+        if (!App.isShopBuilder)
         {
-            if (evt.target !== element && $(evt.target).parents(element).length <= 0)
+            headerCollapses.forEach(element =>
             {
-                $(element).collapse("hide");
-            }
-        });
+                if (evt.target !== element && $(evt.target).parents(element).length <= 0)
+                {
+                    $(element).collapse("hide");
+                }
+            });
+        }
     });
 
     $toggleListView.on("click", function(evt)

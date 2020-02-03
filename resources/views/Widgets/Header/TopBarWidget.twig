@@ -134,6 +134,7 @@
                         {% if searchStyle == "onDemand" %}
                             <li class="list-inline-item control-search">
                                 <a class="anicon anicon-search-xcross"
+                                    {{ WidgetHelper.makeClickable(isPreview) }}
                                     aria-label="toggle search"
                                     data-toggle="collapse"
                                     href="#searchBox"
@@ -237,7 +238,16 @@
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse w-100">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
+                        <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
+                            {% if isPreview or children is defined and children.suggestions | trim is not empty %}
+                                <template #autocomplete-suggestions>
+                                    <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto"
+                                        {% if isPreview %} data-builder-child-container="suggestions"{% endif %}>
+                                        {{ children.suggestions | raw }}
+                                    </div>
+                                </template>
+                            {% endif %}
+                        </item-search>
                     {{ Twig.else() }}
                         {{ Twig.print("overrideSearchBar | raw") }}
                     {{ Twig.endif() }}
