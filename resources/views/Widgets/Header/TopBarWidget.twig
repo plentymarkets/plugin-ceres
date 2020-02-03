@@ -272,7 +272,7 @@
                                         {{ Twig.set("languageUrls", Twig.call("services.url.getLanguageURLs")) }}
                                         <ul class="row">
                                             {{ Twig.for("language", "languageList") }}
-                                                <li class="col-6{{ Twig.if("lang == language") }} active{{ Twig.endif() }}">
+                                                <li class="col-6 col-sm-4 px-0{{ Twig.if("lang == language") }} active{{ Twig.endif() }}">
                                                     {{ Twig.set("url", "'/'") }}
                                                     {{ Twig.if("languageUrls[language] is defined") }}
                                                         {{ Twig.set("url", "languageUrls[language] ~ queryString") }}
