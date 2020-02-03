@@ -72,7 +72,6 @@
                     <div class="basket-item-container-right">
                         <div class="qty-box-container">
                             <quantity-input
-                                    template="#vue-quantity-input"
                                     @quantity-change="updateQuantity"
                                     :value="basketItem.quantity"
                                     :waiting="isInputLocked || isCheckoutReadonly"
@@ -87,7 +86,7 @@
 
                             <button class="btn btn-sm text-danger p-0" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
                                 {{ $translate("Ceres::Template.basketDelete") }}
-                                <i v-waiting-animation="waitingForDelete" class="fa fa-trash-o default-float" aria-hidden="true"></i>
+                                <icon icon="trash-o" class="default-float" :loading="waitingForDelete"></icon>
                             </button>
                         </div>
                     </div>

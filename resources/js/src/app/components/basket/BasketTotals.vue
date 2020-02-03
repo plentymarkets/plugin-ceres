@@ -1,7 +1,7 @@
 <template>
     <div class="cmp cmp-totals">
         <div class="h3">{{ $translate("Ceres::Template.basketSum") }}</div>
-        <div class="component-loading with-icon refreshing split-totals-height" :class="{ 'isLoading': isBasketLoading }">
+        <div class="component-loading with-icon refreshing" :class="{ 'isLoading': isBasketLoading }">
             <dl>
                 <slot name="before-item-sum"></slot>
                 

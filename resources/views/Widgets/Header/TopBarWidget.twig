@@ -1,7 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass                  = widget.settings.customClass.mobile %}
 {% set isFixed                      = widget.settings.isFixed.mobile %}
 {% set enableLogin                  = widget.settings.enableLogin.mobile %}
 {% set enableRegistration           = widget.settings.enableRegistration.mobile %}
@@ -25,7 +25,7 @@
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max">
+    <div class="container-max px-0 px-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if isPreview and not
                 enableLogin and not
@@ -48,10 +48,8 @@
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-permanent d-flex flex-grow-1 flex-column-reverse flex-md-row{% endif %}">
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <div class="always-visible-search m-2 flex-grow-1">
-                            <item-search template="#vue-item-search"
-                                         :show-item-images="{{ showItemImages | json_encode }}"
-                                         :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
+                        <div class="always-visible-search flex-grow-1">
+                            <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
                                 <div class="position-relative d-flex flex-grow-1">
                                     <input type="search" class="search-input px-3 py-2 flex-grow-1">
                                     <button class="search-submit px-3" type="submit">
@@ -69,14 +67,13 @@
                         {% if enableLogin %}
                             <li class="list-inline-item control-user">
                                 <user-login-handler :show-registration="{{ enableRegistration | json_encode }}">
-                                    <a data-toggle="modal" class="nav-link">
-                                        <i class="fa fa-user mr-1" aria-hidden="true"></i>
+                                    <a data-toggle="modal">
+                                        <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
                                     </a>
                                     {% if enableRegistration %}
-                                    <span class="pipe"></span>
-                                    <a data-toggle="modal" class="nav-link">
-                                        <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
+                                    <a data-toggle="modal">
+                                        <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                     </a>
                                     {% endif %}
@@ -84,7 +81,7 @@
                             </li>
                         {% elseif enableRegistration %}
                             <li class="list-inline-item control-user">
-                                <a data-toggle="modal" class="nav-link">
+                                <a data-toggle="modal">
                                     <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                                     <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                 </a>
@@ -93,8 +90,7 @@
 
                         {% if enableLanguageSelect or enableShippingCountrySelect %}
                             <li class="list-inline-item dropdown control-languages">
-                                <a class="nav-link"
-                                   data-toggle="collapse"
+                                <a data-toggle="collapse"
                                    href="#countrySettings"
                                    aria-expanded="false"
                                    aria-controls="countrySettings"
@@ -106,12 +102,11 @@
 
                         {% if enableCurrencySelect %}
                             <li class="list-inline-item dropdown control-languages">
-                                <a class="nav-link"
-                                   data-toggle="collapse"
-                                   href="#currencySelect"
-                                   aria-expanded="false"
-                                   aria-controls="currencySelect"
-                                   data-parent="#controlsList">
+                                <a data-toggle="collapse"
+                                    href="#currencySelect"
+                                    aria-expanded="false"
+                                    aria-controls="currencySelect"
+                                    data-parent="#controlsList">
                                     <span>{{ Twig.print("currencyData") }}</span>
                                 </a>
                             </li>
@@ -119,12 +114,13 @@
 
                         {% if searchStyle == "onDemand" %}
                             <li class="list-inline-item control-search">
-                                <a class="anicon anicon-search-xcross nav-link"
-                                   aria-label="toggle search"
-                                   data-toggle="collapse"
-                                   href="#searchBox"
-                                   aria-controls="searchBox"
-                                   data-parent="#controlsList">
+                                <a class="anicon anicon-search-xcross"
+                                    aria-label="toggle search"
+                                    data-toggle="collapse"
+                                    href="#searchBox"
+                                    aria-expanded="false"
+                                    aria-controls="searchBox"
+                                    data-parent="#controlsList">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
                                 </a>
                             </li>
@@ -134,8 +130,8 @@
                             {{ Twig.if("services.url.isRouteEnabled(\"wish-list\")") }}
                             <li class="list-inline-item control-wish-list">
                                 <wish-list-count>
-                                    <a class="nav-link">
-                                        <span class="badge-right mr-1">0</span>
+                                    <a>
+                                        <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </wish-list-count>
@@ -145,12 +141,12 @@
 
                         {% if enableBasketPreview %}
                             <li class="list-inline-item control-basket position-relative">
-                                <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link">
+                                <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
                                     {% if basketValues != "sum" %}
                                         <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
                                     {% endif %}
 
-                                    <i v-waiting-animation="$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                    <icon icon="shopping-cart" class-loading="fa-refresh" :loading="$store.state.basket.isBasketLoading"></icon>
                                     {% if basketValues != "quantity" %}
                                         <span class="badge p-0 ml-2" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 {{ Twig.print("currencyData") }}</span>
                                         <span class="badge p-0 ml-2" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ Twig.print("currencyData") }}</span>
@@ -160,8 +156,6 @@
                                 {{ Twig.if("basketPreviewType != \"right\"") }}
                                     <basket-preview
                                         :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}"
-                                        checkout-url="{{ Twig.print("urls.checkout | json_encode") }}"
-                                        basket-url="{{ Twig.print("urls.basket | json_encode") }}"
                                         :hover="true"
                                     >
                                         <template #before-basket-item>
@@ -219,14 +213,12 @@
         </div>
     </div>
 
-    <div class="container-max page-header">
+    <div class="container-max px-0 px-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if searchStyle == "onDemand" %}
-                <div id="searchBox" class="cmp cmp-search-box collapse">
+                <div id="searchBox" class="cmp cmp-search-box collapse w-100">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <item-search
-                            :show-item-images="{{ showItemImages | json_encode }}"
-                            :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
+                        <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
                     {{ Twig.else() }}
                         {{ Twig.print("overrideSearchBar | raw") }}
                     {{ Twig.endif() }}

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import ApiService from "../../services/ApiService";
-import { isDefined } from "../../helper/utils";
+import { isDefined, isNull } from "../../helper/utils";
 
 class SidenavigationChildrenLoader
 {
@@ -47,7 +47,10 @@ class SidenavigationChildrenLoader
             element.style.width = width;
         }
 
-        element.innerText = innerText;
+        if (!isNull(innerText))
+        {
+            element.innerText = innerText;
+        }
 
         if (isDefined(child))
         {
@@ -88,7 +91,7 @@ class SidenavigationChildrenLoader
     {
         for (const placeholder of this.placeholders)
         {
-            placeholder.remove();
+            placeholder.parentNode.removeChild(placeholder);
         }
     }
 
@@ -119,6 +122,12 @@ class SidenavigationChildrenLoader
 
             this.parent.appendChild(ul);
 
+            // IE11 linebreak entity in string bricks vue compile
+            while (template.includes("&#10;"))
+            {
+                template = template.replace("&#10;", "");
+            }
+
             const compiled = Vue.compile(template);
 
             new Vue({
@@ -132,15 +141,20 @@ class SidenavigationChildrenLoader
     getSplitMarkup()
     {
         const fragment = document.createRange().createContextualFragment(this.template);
-        const elements = fragment.children;
-        const data = [];
+        const elements = fragment.childNodes;
+        const children = [];
+        let i = 0;
+        let node;
 
-        for (const element of elements)
+        while (node = elements[i++])
         {
-            data.push(element.outerHTML);
+            if (node.nodeType === 1)
+            {
+                children.push(node.outerHTML);
+            }
         }
 
-        return data;
+        return children;
     }
 
     toggle()

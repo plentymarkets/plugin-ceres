@@ -7,9 +7,14 @@
 {% endblock %}
 
 {% block PageBody %}
-    {{ component( "Ceres::Customer.Components.LoginView") }}
-    {{ component( "Ceres::Customer.Components.Login") }}
-    {{ component( "Ceres::Customer.Components.GuestLogin") }}
-
-    <login-view></login-view>
+    <login-view
+            backlink="{{ request.get("backlink") | default("") }}"
+            guest-email="{{ services.sessionStorage.getSessionValue("guestEmail") }}">
+        <template #extend-overlay-buttons>
+            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+        </template>
+        <template #additional-content-after-buttons>
+            {{ LayoutContainer.show("Ceres::Login.AdditionalContentAfterButtons") }}
+        </template>
+    </login-view>
 {% endblock %}
