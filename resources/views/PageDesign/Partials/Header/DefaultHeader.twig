@@ -190,7 +190,7 @@
                                                 {% set languageUrls = services.url.getLanguageURLs() %}
                                                 <ul class="row">
                                                     {% for language in languageList %}
-                                                        <li class="col-6{% if lang == language %} active{% endif %}">
+                                                        <li class="col-6 col-sm-4 px-0{% if lang == language %} active{% endif %}">
                                                             <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% elseif language != defaultLanguage %}/{{ language }}{{ urls.trailingSlashSuffix }}{% else %}/{% endif %}" data-update-url>
                                                                 <i class="flag-icon flag-icon-{{ language }}"></i>
                                                                 {{ trans("Ceres::Template.header" ~ language | capitalize) }}
