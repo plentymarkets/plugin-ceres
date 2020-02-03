@@ -2,7 +2,6 @@
 
 namespace Ceres\Config;
 
-
 class CeresConfig
 {
     /** @var CeresAddressConfig  */
@@ -80,7 +79,4 @@ class CeresConfig
         $this->search       = pluginApp( CeresSearchConfig::class );
         $this->sorting      = pluginApp( CeresSortingConfig::class );
     }
-
-
-
 }
