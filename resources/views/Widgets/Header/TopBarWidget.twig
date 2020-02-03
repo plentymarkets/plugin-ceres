@@ -1,6 +1,8 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
+{% set uid = uid() %}
+
 {% set customClass                  = widget.settings.customClass.mobile %}
 {% set isFixed                      = widget.settings.isFixed.mobile %}
 {% set enableLogin                  = widget.settings.enableLogin.mobile %}
@@ -56,6 +58,23 @@
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
+
+                                {% if isPreview %}
+                                    <template #search-button>
+                                        <button class="search-submit px-3" type="submit" {{ WidgetHelper.makeClickable(isPreview) }} data-toggle="collapse" href="#seach-suggestions_{{ uid }}" role="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </template>
+                                {% endif %}
+
+                                {% if isPreview or children is defined and children.suggestions | trim is not empty %}
+                                    <template #autocomplete-suggestions>
+                                        <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto{% if isPreview %} collapse{% endif %}"
+                                            {% if isPreview %} data-builder-child-container="suggestions" id="seach-suggestions_{{ uid }}"{% endif %}>
+                                            {{ children.suggestions | raw }}
+                                        </div>
+                                    </template>
+                                {% endif %}
                             </item-search>
                         </div>
                     {{ Twig.else() }}
