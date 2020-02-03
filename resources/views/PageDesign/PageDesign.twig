@@ -248,11 +248,11 @@
         bundleSetting: {{ services.webstoreConfig.getWebstoreConfig().dontSplitItemBundle }},
         initialData: {
             shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
-            shippingCountryId: {{ services.checkout.getShippingCountryId() | json_encode }}
-        }
+            shippingCountryId: {{ services.checkout.getShippingCountryId() }}
+        },
+        componentsOverride: {{ get_overridden_components() | json_encode | raw }}
     };
 </script>
-
 
 {{ Loader.include_components() }}
 

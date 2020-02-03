@@ -14,9 +14,10 @@ import Vuex from "vuex";
 const mount = Vue.prototype.$mount;
 
 Vue.prototype.$mount =
+    // eslint-disable-next-line complexity
     function(el, hydrating)
     {
-        const templateOverride = this.$props.templateOverride;
+        const templateOverride = this.$props.templateOverride || App.componentsOverride[this.$options._componentTag];
 
         if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
         {
