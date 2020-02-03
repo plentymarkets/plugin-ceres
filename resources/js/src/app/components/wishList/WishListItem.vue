@@ -64,7 +64,7 @@
 
                             <div class="btn btn-sm text-danger p-0" @click="removeItem()">
                                 {{ $translate("Ceres::Template.wishListDelete") }}
-                                <i v-waiting-animation-infinite class="fa fa-trash-o" aria-hidden="true"></i>
+                                <i v-waiting-animation-infinite class="fa fa-trash-o default-float" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>

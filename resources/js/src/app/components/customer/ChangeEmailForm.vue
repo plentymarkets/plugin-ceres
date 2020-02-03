@@ -12,7 +12,7 @@
 
         <button type="submit" :disabled="isDisabled" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width">
             <span>{{ $translate("Ceres::Template.myAccountChangeEmail") }}</span>
-            <i class="fa fa-envelope" v-waiting-animation="isDisabled" aria-hidden="true"></i>
+            <icon icon="envelope" :loading="isDisabled"></icon>
         </button>
     </form>
 </template>

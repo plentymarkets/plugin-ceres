@@ -44,7 +44,7 @@
                             {{ $translate("Ceres::Template.returnCancel") }}
                         </button>
                         <button :disabled="isLoading" @click="sendReturnItems()" type="button" class="btn btn-primary btn-appearance btn-medium" :class="buttonSizeClass">
-                            <i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
+                            <icon icon="check" :loading="isLoading"></icon>
                             {{ $translate("Ceres::Template.returnConfirm") }}
                         </button>
                     </div>

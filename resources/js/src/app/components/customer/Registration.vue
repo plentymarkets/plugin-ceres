@@ -70,8 +70,8 @@
             <slot name="extend-overlay-buttons"></slot>
             
             <button :disabled="isDisabled" class="btn btn-appearance btn-primary btn-medium mt-3" :class="buttonSizeClass">
-                <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
                 {{ $translate("Ceres::Template.regRegister") }}
+                <icon icon="user-plus" class="default-float" :loading="isDisabled"></icon>
             </button>
         </div>
 
