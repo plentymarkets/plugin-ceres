@@ -238,7 +238,7 @@
                                     {{ Twig.set("activeCurrency", Twig.call("services.checkout.getCurrencyData")) }}
                                     {{ Twig.for("currency", Twig.call("services.checkout.getCurrencyList")) }}
                                     {{ Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency.name") }}
-                                        <li class="col-3 col-sm-2{{ Twig.if("currency.name == activeCurrency.name") }} active{{ Twig.endif() }}">
+                                        <li class="col-2 px-0{{ Twig.if("currency.name == activeCurrency.name") }} active{{ Twig.endif() }}">
                                             <a href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
                                                 {{ Twig.if("currencyFormatSelect == 'all'") }}
                                                     {{ Twig.print("currency.name") }} <br class="d-block d-sm-none" />({{ Twig.print("currency.symbol") }})
