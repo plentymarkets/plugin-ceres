@@ -64,11 +64,11 @@
             <div class="btn-group" role="group" aria-label="Thumb Control">
                 <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
                     <i class="fa fa-shopping-cart fa-lg d-none d-sm-block" aria-hidden="true" v-waiting-animation="waiting"></i>
-                    <span>{{ $translate("Ceres::Template.singleItemAddToBasket") }}</span>
+                    {{ $translate("Ceres::Template.singleItemAddToBasket") }}
                 </button>
                 <button type="button" v-if="!canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="directToItem()">
                     <i class="fa fa-arrow-right fa-lg d-none d-sm-block" aria-hidden="true"></i>
-                    <span>{{ $translate("Ceres::Template.itemShowItem") }}</span>
+                    {{ $translate("Ceres::Template.itemShowItem") }}
                 </button>
             </div>
         </div>
