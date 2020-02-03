@@ -231,15 +231,6 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
         overflow: hidden;
     }
 
-    .shipping-settings,
-    .language-settings {
-        ul {
-            @include media-breakpoint-down(sm) {
-                column-count: 2;
-            }
-        }
-    }
-
     .shipping-settings {
         @include media-breakpoint-down(md) {
             margin-top: 1rem;
@@ -254,17 +245,22 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
     }
 
     li {
-        float: left;
-        width: 100%;
-
         a {
             display: inline-block;
             padding: .4rem;
             &:hover {
                 @include context-bg($primary);
             }
+        }
 
-            & .is-disabled {
+        &.active { // stylelint-disable-line selector-no-qualifying-type
+            a {
+                @include context-bg($primary);
+            }
+        }
+
+        &.is-disabled { // stylelint-disable-line selector-no-qualifying-type
+            a {
                 cursor: not-allowed;
 
                 &:hover {
@@ -272,61 +268,5 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
                 }
             }
         }
-
-        & .active {
-            a {
-                @include context-bg($primary);
-            }
-            .is-disabled {
-                @include context-bg($gray-700);
-            }
-        }
     }
-
-
-    @include media-breakpoint-up(md) {
-        ul {
-            li {
-                width: 50%;
-            }
-        }
-    }
-
-    @include media-breakpoint-up(lg) {
-        ul {
-            li {
-                width: 33.33%;
-            }
-        }
-    }
-
-    .currency-list {
-        li {
-            width: 16.666667%;
-        }
-    }
-}
-
-.flag-icon-en {
-    background-image: url("../images/flags/4x3/gb.svg");
-}
-
-.flag-icon-da {
-    background-image: url("../images/flags/4x3/dk.svg");
-}
-
-.flag-icon-nn {
-    background-image: url("../images/flags/4x3/no.svg");
-}
-
-.flag-icon-ic {
-    background-image: url("../images/flags/ic.svg");
-}
-
-.flag-icon-ea {
-    background-image: url("../images/flags/ea.svg");
-}
-
-.flag-icon-an {
-    background-image: url("../images/flags/an.svg");
 }
