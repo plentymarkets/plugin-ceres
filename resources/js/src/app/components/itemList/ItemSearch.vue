@@ -6,18 +6,22 @@
                 @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)"
                 :autofocus="isShopBuilder">
 
-            <button class="search-submit px-3" type="submit" @click="search()">
-                <i class="fa fa-search"></i>
-            </button>
+            <slot name="search-button">
+                <button class="search-submit px-3" type="submit" @click="search()">
+                    <i class="fa fa-search"></i>
+                </button>
+            </slot>
 
-            <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
-                <div class="autocomplete-suggestion px-3 py-2" v-for="(item, index) in autocompleteResult" :key="index" @mousedown="selectAutocompleteItem(item)" :class="{ 'autocomplete-selected': selectedAutocompleteIndex === index }">
-                    <div class="autocomplete-image-container mr-2" v-if="showItemImages">
-                        <img class="autocomplete-image mw-100" :src="item.img">
+            <slot name="autocomplete-suggestions">
+                <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
+                    <div class="autocomplete-suggestion px-3 py-2" v-for="(item, index) in autocompleteResult" :key="index" @mousedown="selectAutocompleteItem(item)" :class="{ 'autocomplete-selected': selectedAutocompleteIndex === index }">
+                        <div class="autocomplete-image-container mr-2" v-if="showItemImages">
+                            <img class="autocomplete-image mw-100" :src="item.img">
+                        </div>
+                        <div class="autocomplete-item-name" v-html="item.displayName"></div>
                     </div>
-                    <div class="autocomplete-item-name" v-html="item.displayName"></div>
                 </div>
-            </div>
+            </slot>
         </div>
     </div>
 </template>
