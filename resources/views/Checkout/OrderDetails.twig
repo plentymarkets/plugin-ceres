@@ -160,7 +160,7 @@
                             </a>
 
                             {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
-                                <div class="mb-3 item-bundle">
+                                <div class="item-bundle small font-weight-bold mb-3">
                                     {% for bundleComponent in item.bundleComponents %}
                                         <div>
                                             <span class="text-muted">{{ bundleComponent.quantity }} x</span>

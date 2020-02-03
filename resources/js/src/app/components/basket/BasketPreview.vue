@@ -15,7 +15,7 @@
 
         <div class="basket-preview-content">
             <!-- BASKET LIST -->
-            <div class="list col-sm-7 col-md-12 py-3">
+            <div class="list col-sm-7 col-md-12">
                 <div class="cmp cmp-basket-preview-list">
                     <basket-list :is-preview="true">
                         <template #before-basket-item>
