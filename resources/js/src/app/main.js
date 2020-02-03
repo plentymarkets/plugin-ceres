@@ -83,20 +83,6 @@ function CeresMain()
 
     $(document).on("click", function(evt)
     {
-        const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
-
-        if ($("#vue-app").hasClass(basketOpenClass))
-        {
-            if ((evt.target != $(".basket-preview")) &&
-                (evt.target != document.querySelector(".basket-preview-hover")) &&
-                (evt.target.classList[0] != "message") &&
-                ($(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0))
-            {
-                evt.preventDefault();
-                $("#vue-app").toggleClass(basketOpenClass || "open-hover");
-            }
-        }
-
         headerCollapses.forEach(element =>
         {
             if (evt.target !== element && $(evt.target).parents(element).length <= 0)

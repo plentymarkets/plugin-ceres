@@ -1,12 +1,12 @@
 <template>
 <!-- {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }} -->
-    <div class="basket-preview-wrapper" :class="{ 'empty': !basketItems.length, 'hover': hover }">
-        <div class="basket-preview-wrapper-inner">
-            <div class="basket-preview bg-white w-100">
+    <div class="basket-preview-wrapper h-100" :class="{ 'empty': !basketItems.length, 'open-hover': hover, 'open-right': !hover }">
+        <div class="position-relative h-100">
+            <div class="basket-preview d-flex flex-column flex-nowrap bg-white shadow w-100">
 
                 <header class="basket-preview-header border-bottom p-3">
-                    <span class="h3">{{ $translate("Ceres::Template.basketPreview") }}</span>
+                    <span class="h3 mb-0">{{ $translate("Ceres::Template.basketPreview") }}</span>
                     <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -18,8 +18,8 @@
                     </div>
                 </div>
 
-                <div class="basket-preview-content">
-                    <basket-list class="item-list px-3" :is-preview="true">
+                <div class="basket-preview-content d-flex flex-fill">
+                    <basket-list class="item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3" :is-preview="true">
                         <template #before-basket-item>
                             <slot name="before-basket-item"></slot>
                         </template>
@@ -31,7 +31,7 @@
                         </template>
                     </basket-list>
 
-                    <div class="basket-preview-totals border-top px-3 pt-3" v-if="basketItems.length">
+                    <div class="totals d-flex flex-fill flex-nowrap flex-column px-3 pt-3">
 
                         <shipping-country-select
                                 v-if="showShippingCountrySelect"
@@ -88,6 +88,7 @@
                 </div>
             </div>
         </div>
+        <div class="basket-preview-overlay" v-toggle-basket-preview></div>
     </div>
 </template>
 
@@ -105,11 +106,14 @@ export default {
             default: false
         },
         checkoutUrl: String,
-        basketUrl: String,
-        hover: Boolean
+        basketUrl: String
     },
 
     computed: {
+        hover()
+        {
+            return App.config.basket.previewType === 'hover';
+        },
         showShippingCountrySelect()
         {
             return App.config.basket.showShippingCountrySelect;
