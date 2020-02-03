@@ -44976,8 +44976,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass:
-          "component-loading with-icon refreshing split-totals-height",
+        staticClass: "component-loading with-icon refreshing",
         class: { isLoading: _vm.isBasketLoading }
       },
       [
@@ -53644,7 +53643,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "my-1" }, [
+  return _c("div", { staticClass: "p-2 px-lg-0" }, [
     _c("div", { staticClass: "d-flex flex-grow-1 position-relative" }, [
       _c("input", {
         ref: "searchInput",
