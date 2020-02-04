@@ -6,7 +6,7 @@ Vue.directive("toggle-basket-preview",
         {
             el.addEventListener("click", event =>
             {
-                document.body.classList.toggle("basket-open" );
+                document.body.classList.toggle("basket-open");
 
                 event.preventDefault();
                 event.stopPropagation();

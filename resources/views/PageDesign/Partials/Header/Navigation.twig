@@ -6,7 +6,7 @@
 <nav class="navbar header-fw p-0 border-bottom{% if useMegaMenu %} megamenu{% else %} normalmenu{% endif %}">
     <div class="container-max d-block">
         <div class="row mx-0 position-relative d-flex">
-            <div class="brand-wrapper px-3{% if showHeaderNavBar == "side" %} position-relative{% endif %}">
+            <div class="brand-wrapper px-lg-3{% if showHeaderNavBar == "side" %} position-relative{% endif %}">
                 <a class="navbar-brand py-2" href="{{ homepageURL }}">
                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
@@ -15,7 +15,7 @@
                     {% endif %}
                 </a>
 
-                <button v-open-mobile-navigation class="navbar-toggler d-lg-none" type="button">
+                <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
                     &#9776;
                 </button>
             </div>

@@ -6,7 +6,7 @@
     z-index: $zindex-modal + 1;
     display: block;
     transform: translateX(100%);
-    @include transition(all 300ms ease-in-out);
+    @include transition(all .3s ease-in-out);
 
     @include media-breakpoint-up(lg) {
         left: auto;
@@ -20,7 +20,7 @@
     .basket-preview-overlay {
         position: fixed;
         top: 0;
-        right: 0;
+        right: -100vw;
         bottom: -100vh;
         left: -100vw;
         z-index: -1;
