@@ -55,16 +55,6 @@ class TopBarWidget extends BaseWidget
                     ->toArray()
             );
 
-        $settingsFactory->createCheckbox("showItemImages")
-            ->withName("Widget.topBarShowItemImagesLabel")
-            ->withDefaultValue(false)
-            ->withCondition("searchStyle !== 'hidden'");
-
-        $settingsFactory->createCheckbox("forwardToSingleItem")
-            ->withName("Widget.topBarForwardToSingleItemLabel")
-            ->withDefaultValue(false)
-            ->withCondition("searchStyle !== 'hidden'");
-
         $settingsFactory->createCheckbox("enableLogin")
             ->withName("Widget.topBarEnableLoginLabel")
             ->withDefaultValue(true);
