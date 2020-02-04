@@ -10,16 +10,14 @@
                 </button>
             </slot>
 
-            <slot name="autocomplete-suggestions">
+            <!-- <slot name="autocomplete-suggestions"> -->
                 <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
-                    <div class="autocomplete-suggestion px-3 py-2" v-for="(item, index) in autocompleteResult" :key="index" @mousedown="selectAutocompleteItem(item)">
-                        <div class="autocomplete-image-container mr-2" v-if="showItemImages">
-                            <img class="autocomplete-image mw-100" :src="item.img">
-                        </div>
-                        <div class="autocomplete-item-name" v-html="item.displayName"></div>
-                    </div>
+                    <search-suggestion-items
+                        :show-item-images="showItemImages"
+                        :forward-to-single-item="forwardToSingleItem">
+                    </search-suggestion-items>
                 </div>
-            </slot>
+            <!-- </slot> -->
         </div>
     </div>
 </template>
@@ -97,7 +95,7 @@ export default {
             }
             else
             {
-                commit("setAutocompleteResult", []);
+                this.$store.commit("setAutocompleteResult", []);
             }
         },
 
