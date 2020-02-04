@@ -30,7 +30,7 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
         $this->initItemList(
             [
                 'itemList' => CategoryItems::getSearchFactory( $itemListOptions ),
-                //'facets'   => Facets::getSearchFactory( $itemListOptions )
+                'facets'   => Facets::getSearchFactory( $itemListOptions )
             ],
             $itemListOptions,
             SearchOptions::SCOPE_CATEGORY
