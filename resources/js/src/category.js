@@ -104,6 +104,8 @@ import CategoryItem from "./app/components/itemList/CategoryItem.vue";
 Vue.component("category-item", CategoryItem);
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 Vue.component("item-search", ItemSearch);
+import SearchSuggestionItems from "./app/components/itemList/SearchSuggestionItems.vue";
+Vue.component("search-suggestion-items", SearchSuggestionItems);
 
 import ItemFilterList from "./app/components/itemList/filter/ItemFilterList.vue";
 Vue.component("item-filter-list", ItemFilterList);
