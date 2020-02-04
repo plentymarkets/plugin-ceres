@@ -229,17 +229,17 @@
             {% if enableCurrencySelect and not isPreview %}
                 <div id="currencySelect" class="cmp cmp-currency-select collapse">
                     <div class="container-max">
-                        <div class="row p-3">
+                        <div class="row py-3">
                             <div class="currency-list col-12">
                                 <div class="list-title">
                                     <strong>{{ Twig.print('trans("Ceres::Template.headerCurrency")') }}</strong>
                                     <hr>
                                 </div>
-                                <ul class="text-center text-sm-left">
+                                <ul class="row text-center text-sm-left">
                                     {{ Twig.set("activeCurrency", Twig.call("services.checkout.getCurrencyData")) }}
                                     {{ Twig.for("currency", Twig.call("services.checkout.getCurrencyList")) }}
                                     {{ Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency.name") }}
-                                        <li{{ Twig.if("currency.name == activeCurrency.name") }} class="active"{{ Twig.endif() }}>
+                                        <li class="col-2 px-0{{ Twig.if("currency.name == activeCurrency.name") }} active{{ Twig.endif() }}">
                                             <a href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
                                                 {{ Twig.if("currencyFormatSelect == 'all'") }}
                                                     {{ Twig.print("currency.name") }} <br class="d-block d-sm-none" />({{ Twig.print("currency.symbol") }})
@@ -260,7 +260,7 @@
             {% if enableLanguageSelect or enableShippingCountrySelect %}
                 <div id="countrySettings" class="cmp cmp-country-settings collapse">
                     <div class="container-max">
-                        <div class="row p-3">
+                        <div class="row py-3">
                             {% if enableLanguageSelect and not isPreview %}
                                 <div class="col-12 {% if enableShippingCountrySelect %}col-lg-6{% else %}col-lg-12{% endif %}">
 
@@ -271,9 +271,9 @@
                                         </div>
                                         {{ Twig.set("languageList", Twig.call("services.webstoreConfig.getActiveLanguageList")) }}
                                         {{ Twig.set("languageUrls", Twig.call("services.url.getLanguageURLs")) }}
-                                        <ul>
+                                        <ul class="row">
                                             {{ Twig.for("language", "languageList") }}
-                                                <li{{ Twig.if("lang == language") }} class="active"{{ Twig.endif() }}>
+                                                <li class="col-6 col-sm-4 px-0{{ Twig.if("lang == language") }} active{{ Twig.endif() }}">
                                                     {{ Twig.set("url", "'/'") }}
                                                     {{ Twig.if("languageUrls[language] is defined") }}
                                                         {{ Twig.set("url", "languageUrls[language] ~ queryString") }}
@@ -285,7 +285,7 @@
                                                         {{ Twig.print('trans("Ceres::Template.header" ~ language | capitalize)') }}
                                                     </a>
                                                 </li>
-                                        {{ Twig.endfor() }}
+                                            {{ Twig.endfor() }}
                                         </ul>
                                     </div>
                                 </div>
