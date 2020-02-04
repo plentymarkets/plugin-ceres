@@ -123,7 +123,7 @@ export default {
             basketItems: state => state.basket.items,
             basketNotifications: state => state.basket.basketNotifications,
             isBasketItemQuantityUpdate: state => state.basket.isBasketItemQuantityUpdate
-        })    
+        })
     },
 
     created()
