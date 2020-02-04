@@ -1,7 +1,8 @@
 <template>
     <ul class="row" v-if="!basketSelect">
         <li class="col-6 col-sm-4 px-0" :class="{'active': localization.shippingCountryId == shippingCountry.id}" v-for="shippingCountry in localization.shippingCountries" :key="shippingCountry.id">
-            <a data-toggle="collapse"
+            <a class="nav-link"
+                data-toggle="collapse"
                 href="#countrySettings"
                 @click="setShippingCountry(shippingCountry.id)"
                 :class="{'is-disabled': isDisabled}"
