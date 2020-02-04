@@ -55,8 +55,8 @@ Vue.component("step-by-step-navigation", () => import("./app/components/category
 Vue.component("google-maps-widget", () => import("./app/components/common/GoogleMaps.vue"));
 import LazyImg from "./app/components/common/LazyImg.vue";
 Vue.component("lazy-img", LazyImg);
-import LazyMountIntersect from "./app/components/common/LazyMountIntersect.vue";
-Vue.component("lazy-mount-intersect", LazyMountIntersect);
+import Intersect from "./app/components/common/Intersect.vue";
+Vue.component("intersect", Intersect);
 Vue.component("tab-list", () => import("./app/components/common/TabList.vue"));
 Vue.component("last-seen-item-list", () => import("./app/components/containers/LastSeenItemList.vue"));
 
