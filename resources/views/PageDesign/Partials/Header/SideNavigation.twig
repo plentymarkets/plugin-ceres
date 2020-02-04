@@ -1,6 +1,6 @@
 {% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 
-{% set lang = services.sessionStorage.getLang() %}
+{% set lang = services.localizationRepository.getLanguage() %}
 {% set categoryBreadcrumbs = services.category.getHierarchy() %}
 
 {{ Tree.get_sidemenu(categoryBreadcrumbs, categories, "", spacingPadding, inlinePadding, showItemCount, expandableChildren, customEntries) }}

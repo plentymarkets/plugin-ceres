@@ -1,10 +1,11 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set lang = services.sessionStorage.getLang() %}
+{% set lang = services.localizationRepository.getLanguage() %}
 {% set activeCurrencies = config("Ceres.currency.available_currencies") | split(', ') %}
 {% set enableCurrencySelect = config("Ceres.currency.enable_selection") == "true" and activeCurrencies | length > 0 %}
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
+
 
 
 {% set headerContainer = LayoutContainer.show("Ceres::Header") | trim %}
