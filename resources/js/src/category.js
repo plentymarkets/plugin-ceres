@@ -14,14 +14,22 @@ import Vuex from "vuex";
 const mount = Vue.prototype.$mount;
 
 Vue.prototype.$mount =
-    // eslint-disable-next-line complexity
     function(el, hydrating)
     {
-        const templateOverride = this.$props.templateOverride || App.componentsOverride[this.$options._componentTag];
+        let compHtml = "";
 
-        if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
+        if (this.$props.templateOverride)
         {
-            const renderFunctions = Vue.compile(document.querySelector(templateOverride).innerHTML);
+            compHtml = document.querySelector(templateOverride).innerHTML;
+        }
+        else if (App.componentsOverride[this.$options._componentTag])
+        {
+            compHtml = document.querySelector([`data-component=${this.$options._componentTag}`]).innerHTML;
+        }
+
+        if (compHtml)
+        {
+            const renderFunctions = Vue.compile(compHtml);
 
             Object.assign(this.$options, renderFunctions);
         }
