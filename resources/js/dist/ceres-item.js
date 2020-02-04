@@ -955,120 +955,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1077,17 +963,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: Boolean,
       default: false
     },
-    hover: Boolean
+    checkoutUrl: String,
+    basketUrl: String
   },
   computed: _objectSpread({
+    hover: function hover() {
+      return App.config.basket.previewType === 'hover';
+    },
     showShippingCountrySelect: function showShippingCountrySelect() {
       return App.config.basket.showShippingCountrySelect;
-    },
-    basketUrl: function basketUrl() {
-      return App.urls.basket;
-    },
-    checkoutUrl: function checkoutUrl() {
-      return App.urls.checkout;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
     basket: function basket(state) {
@@ -12620,6 +12504,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -46866,53 +46751,80 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.hover
-    ? _c("div", { staticClass: "basket-preview w-100 h-100" }, [
-        _c("header", { staticClass: "basket-header p-3" }, [
-          _c("div", { staticClass: "d-inline-block basket-header-caption" }, [
-            _vm._v(_vm._s(_vm.$translate("Ceres::Template.basketPreview")))
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              directives: [
-                {
-                  name: "toggle-basket-preview",
-                  rawName: "v-toggle-basket-preview"
-                }
-              ],
-              staticClass: "close",
-              attrs: { type: "button", "aria-label": "Close" }
-            },
-            [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-          )
-        ]),
-        _vm._v(" "),
-        _vm.basketNotifications.length > 0
-          ? _c(
-              "div",
-              _vm._l(_vm.basketNotifications, function(notification) {
-                return _c(
-                  "div",
+  return _c(
+    "div",
+    {
+      staticClass: "basket-preview-wrapper h-100",
+      class: {
+        empty: !_vm.basketItems.length,
+        "open-hover": _vm.hover,
+        "open-right": !_vm.hover
+      }
+    },
+    [
+      _c("div", { staticClass: "position-relative h-100" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "basket-preview d-flex flex-column flex-nowrap bg-white shadow w-100"
+          },
+          [
+            _c(
+              "header",
+              { staticClass: "basket-preview-header border-bottom p-3" },
+              [
+                _c("span", { staticClass: "h3 mb-0" }, [
+                  _vm._v(
+                    _vm._s(_vm.$translate("Ceres::Template.basketPreview"))
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
                   {
-                    key: notification.id,
-                    staticClass: "w-100 alert alert-danger"
+                    directives: [
+                      {
+                        name: "toggle-basket-preview",
+                        rawName: "v-toggle-basket-preview"
+                      }
+                    ],
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" }
                   },
-                  [_c("div", [_vm._v(_vm._s(notification.message))])]
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
                 )
-              }),
-              0
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "basket-preview-content" }, [
-          _c("div", { staticClass: "list col-sm-7 col-md-12" }, [
+              ]
+            ),
+            _vm._v(" "),
+            _vm.basketNotifications.length > 0
+              ? _c(
+                  "div",
+                  _vm._l(_vm.basketNotifications, function(notification) {
+                    return _c(
+                      "div",
+                      {
+                        key: notification.id,
+                        staticClass: "w-100 alert alert-danger"
+                      },
+                      [_c("div", [_vm._v(_vm._s(notification.message))])]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c(
               "div",
-              { staticClass: "cmp cmp-basket-preview-list" },
+              { staticClass: "basket-preview-content d-flex flex-fill" },
               [
                 _c("basket-list", {
+                  staticClass:
+                    "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3",
                   attrs: { "is-preview": true },
                   scopedSlots: _vm._u(
                     [
@@ -46941,249 +46853,84 @@ var render = function() {
                     null,
                     true
                   )
-                })
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "bg-light totals col-sm-5 col-md-12 pt-3" },
-            [
-              _vm.showShippingCountrySelect
-                ? _c("shipping-country-select", {
-                    attrs: {
-                      "basket-select": true,
-                      "open-basket-preview": true
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _vm._t("before-basket-totals"),
-              _vm._v(" "),
-              _c("basket-totals", {
-                scopedSlots: _vm._u(
-                  [
-                    {
-                      key: "before-item-sum",
-                      fn: function() {
-                        return [_vm._t("before-item-sum")]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "after-item-sum",
-                      fn: function() {
-                        return [_vm._t("after-item-sum")]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "before-shipping-costs",
-                      fn: function() {
-                        return [_vm._t("before-shipping-costs")]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "after-shipping-costs",
-                      fn: function() {
-                        return [_vm._t("after-shipping-costs")]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "before-total-sum",
-                      fn: function() {
-                        return [_vm._t("before-total-sum")]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "before-vat",
-                      fn: function() {
-                        return [_vm._t("before-vat")]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "after-vat",
-                      fn: function() {
-                        return [_vm._t("after-vat")]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "after-total-sum",
-                      fn: function() {
-                        return [_vm._t("after-total-sum")]
-                      },
-                      proxy: true
-                    }
-                  ],
-                  null,
-                  true
-                )
-              }),
-              _vm._v(" "),
-              _vm._t("after-basket-totals"),
-              _vm._v(" "),
-              _c("div", { staticClass: "basket-preview-footer row" }, [
-                _c("div", { staticClass: "col-6 col-sm-6 mb-3" }, [
-                  _c(
-                    "a",
-                    {
-                      directives: [
-                        {
-                          name: "waiting-animation-infinite",
-                          rawName: "v-waiting-animation-infinite"
-                        }
-                      ],
-                      staticClass:
-                        "btn btn-outline-primary btn-block basketBtn",
-                      class: { disabled: _vm.basketItems.length <= 0 },
-                      attrs: {
-                        href: _vm.basketUrl,
-                        rel: "nofollow",
-                        title: _vm.$translate("Ceres::Template.basket")
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass:
-                          "fa fa-shopping-cart d-sm-none d-md-inline-block"
-                      }),
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(_vm.$translate("Ceres::Template.basket")) +
-                          "\n                    "
-                      )
-                    ]
-                  )
-                ]),
+                }),
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "col-6 col-sm-6" },
+                  {
+                    staticClass:
+                      "totals d-flex flex-nowrap flex-column px-3 pt-3"
+                  },
                   [
-                    _vm._t("before-checkout-button"),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c(
-                        "a",
-                        {
-                          directives: [
-                            {
-                              name: "waiting-animation-infinite",
-                              rawName: "v-waiting-animation-infinite"
-                            }
-                          ],
-                          staticClass: "btn btn-primary btn-block checkOutBtn",
-                          class: { disabled: _vm.basketItems.length <= 0 },
+                    _vm.showShippingCountrySelect
+                      ? _c("shipping-country-select", {
                           attrs: {
-                            href: _vm.checkoutUrl,
-                            rel: "nofollow",
-                            title: _vm.$translate(
-                              "Ceres::Template.basketCheckout"
-                            )
+                            "basket-select": true,
+                            "open-basket-preview": true
                           }
-                        },
-                        [
-                          _c("i", {
-                            staticClass:
-                              "fa fa-arrow-right d-sm-none d-md-inline-block",
-                            attrs: { "aria-hidden": "true" }
-                          }),
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.basketCheckout")
-                              ) +
-                              "\n                        "
-                          )
-                        ]
-                      )
-                    ]),
+                        })
+                      : _vm._e(),
                     _vm._v(" "),
-                    _vm._t("after-checkout-button")
-                  ],
-                  2
-                )
-              ])
-            ],
-            2
-          )
-        ])
-      ])
-    : _c(
-        "div",
-        {
-          staticClass: "basket-preview-hover-wrapper",
-          class: { empty: !_vm.basketItems.length }
-        },
-        [
-          _c("div", { staticClass: "basket-preview-hover-wrapper-inner" }, [
-            _c(
-              "div",
-              {
-                staticClass: "basket-preview-hover",
-                class: { empty: !_vm.basketItems.length }
-              },
-              [
-                _c("header", { staticClass: "basket-header mb-4 d-lg-none" }, [
-                  _c("div", { staticClass: "d-inline-block m-a-0 h3" }, [
-                    _vm._v(
-                      _vm._s(_vm.$translate("Ceres::Template.basketPreview"))
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      directives: [
-                        {
-                          name: "toggle-basket-preview",
-                          rawName: "v-toggle-basket-preview"
-                        }
-                      ],
-                      staticClass: "close",
-                      attrs: { type: "button", "aria-label": "Close" }
-                    },
-                    [
-                      _c("span", { attrs: { "aria-hidden": "true" } }, [
-                        _vm._v("×")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.basketItems.length
-                  ? _c("basket-list", {
-                      staticClass: "item-list",
-                      attrs: { "is-preview": true },
+                    _c("hr"),
+                    _vm._v(" "),
+                    _vm._t("before-basket-totals"),
+                    _vm._v(" "),
+                    _c("basket-totals", {
                       scopedSlots: _vm._u(
                         [
                           {
-                            key: "before-basket-item",
+                            key: "before-item-sum",
                             fn: function() {
-                              return [_vm._t("before-basket-item")]
+                              return [_vm._t("before-item-sum")]
                             },
                             proxy: true
                           },
                           {
-                            key: "loading-animation",
+                            key: "after-item-sum",
                             fn: function() {
-                              return [_vm._t("loading-animation")]
+                              return [_vm._t("after-item-sum")]
                             },
                             proxy: true
                           },
                           {
-                            key: "after-basket-item",
+                            key: "before-shipping-costs",
                             fn: function() {
-                              return [_vm._t("after-basket-item")]
+                              return [_vm._t("before-shipping-costs")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-shipping-costs",
+                            fn: function() {
+                              return [_vm._t("after-shipping-costs")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "before-total-sum",
+                            fn: function() {
+                              return [_vm._t("before-total-sum")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "before-vat",
+                            fn: function() {
+                              return [_vm._t("before-vat")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-vat",
+                            fn: function() {
+                              return [_vm._t("after-vat")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-total-sum",
+                            fn: function() {
+                              return [_vm._t("after-total-sum")]
                             },
                             proxy: true
                           }
@@ -47191,216 +46938,101 @@ var render = function() {
                         null,
                         true
                       )
-                    })
-                  : _c("div", { staticClass: "no-items" }, [
-                      _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.basketNoItems"))
-                      )
-                    ]),
-                _vm._v(" "),
-                _vm.basketItems.length
-                  ? _c(
+                    }),
+                    _vm._v(" "),
+                    _vm._t("after-basket-totals"),
+                    _vm._v(" "),
+                    _c(
                       "div",
-                      { staticClass: "basket-totals" },
+                      { staticClass: "basket-preview-footer d-flex pb-3" },
                       [
-                        _c("hr", { staticClass: "mb-4" }),
-                        _vm._v(" "),
-                        _vm.basketNotifications.length > 0
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.basketNotifications, function(
-                                notification
-                              ) {
-                                return _c(
-                                  "div",
-                                  {
-                                    key: notification.id,
-                                    staticClass: "w-100 alert alert-danger"
-                                  },
-                                  [
-                                    _c("div", [
-                                      _vm._v(_vm._s(notification.message))
-                                    ])
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.showShippingCountrySelect
-                          ? _c("shipping-country-select", {
-                              attrs: {
-                                "basket-select": true,
-                                "open-basket-preview": true
-                              }
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _vm._t("before-basket-totals"),
-                        _vm._v(" "),
-                        _c("basket-totals", {
-                          scopedSlots: _vm._u(
-                            [
+                        _c(
+                          "a",
+                          {
+                            directives: [
                               {
-                                key: "before-item-sum",
-                                fn: function() {
-                                  return [_vm._t("before-item-sum")]
-                                },
-                                proxy: true
-                              },
-                              {
-                                key: "after-item-sum",
-                                fn: function() {
-                                  return [_vm._t("after-item-sum")]
-                                },
-                                proxy: true
-                              },
-                              {
-                                key: "before-shipping-costs",
-                                fn: function() {
-                                  return [_vm._t("before-shipping-costs")]
-                                },
-                                proxy: true
-                              },
-                              {
-                                key: "after-shipping-costs",
-                                fn: function() {
-                                  return [_vm._t("after-shipping-costs")]
-                                },
-                                proxy: true
-                              },
-                              {
-                                key: "before-total-sum",
-                                fn: function() {
-                                  return [_vm._t("before-total-sum")]
-                                },
-                                proxy: true
-                              },
-                              {
-                                key: "before-vat",
-                                fn: function() {
-                                  return [_vm._t("before-vat")]
-                                },
-                                proxy: true
-                              },
-                              {
-                                key: "after-vat",
-                                fn: function() {
-                                  return [_vm._t("after-vat")]
-                                },
-                                proxy: true
-                              },
-                              {
-                                key: "after-total-sum",
-                                fn: function() {
-                                  return [_vm._t("after-total-sum")]
-                                },
-                                proxy: true
+                                name: "waiting-animation-infinite",
+                                rawName: "v-waiting-animation-infinite"
                               }
                             ],
-                            null,
-                            true
-                          )
-                        }),
+                            staticClass: "btn btn-outline-primary btn-block",
+                            attrs: {
+                              href: _vm.basketUrl,
+                              rel: "nofollow",
+                              title: _vm.$translate("Ceres::Template.basket")
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fa fa-shopping-cart" }),
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.$translate("Ceres::Template.basket")
+                                ) +
+                                "\n                            "
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
-                        _vm._t("after-basket-totals"),
+                        _vm._t("before-checkout-button"),
                         _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-6" }, [
-                            _c(
-                              "a",
+                        _c(
+                          "a",
+                          {
+                            directives: [
                               {
-                                directives: [
-                                  {
-                                    name: "waiting-animation-infinite",
-                                    rawName: "v-waiting-animation-infinite"
-                                  }
-                                ],
-                                staticClass:
-                                  "btn btn-outline-primary btn-block basketBtn",
-                                attrs: {
-                                  href: _vm.basketUrl,
-                                  rel: "nofollow",
-                                  title: _vm.$translate(
-                                    "Ceres::Template.basket"
+                                name: "waiting-animation-infinite",
+                                rawName: "v-waiting-animation-infinite"
+                              }
+                            ],
+                            staticClass: "btn btn-primary btn-block",
+                            attrs: {
+                              href: _vm.checkoutUrl,
+                              rel: "nofollow",
+                              title: _vm.$translate(
+                                "Ceres::Template.basketCheckout"
+                              )
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-arrow-right",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.basketCheckout"
                                   )
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "fa fa-shopping-cart" }),
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.$translate("Ceres::Template.basket")
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
+                                ) +
+                                "\n                            "
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-6" },
-                            [
-                              _vm._t("before-checkout-button"),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c(
-                                  "a",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "waiting-animation-infinite",
-                                        rawName: "v-waiting-animation-infinite"
-                                      }
-                                    ],
-                                    staticClass:
-                                      "btn btn-primary btn-block checkOutBtn",
-                                    attrs: {
-                                      href: _vm.checkoutUrl,
-                                      rel: "nofollow",
-                                      title: _vm.$translate(
-                                        "Ceres::Template.basketCheckout"
-                                      )
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-arrow-right",
-                                      attrs: { "aria-hidden": "true" }
-                                    }),
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.basketCheckout"
-                                          )
-                                        ) +
-                                        "\n                            "
-                                    )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _vm._t("after-checkout-button")
-                            ],
-                            2
-                          )
-                        ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._t("after-checkout-button")
                       ],
                       2
                     )
-                  : _vm._e()
+                  ],
+                  2
+                )
               ],
               1
             )
-          ])
-        ]
-      )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        directives: [
+          { name: "toggle-basket-preview", rawName: "v-toggle-basket-preview" }
+        ],
+        staticClass: "basket-preview-overlay"
+      })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48097,7 +47729,7 @@ var render = function() {
     !_vm.isBasketInitiallyLoaded
       ? _c(
           "div",
-          { staticClass: "basket-loading-frame loading" },
+          { staticClass: "d-table w-100 loading" },
           [_vm._t("loading-animation")],
           2
         )
@@ -55173,7 +54805,7 @@ var render = function() {
           _c(
             "a",
             {
-              staticClass: "dropdown-toggle",
+              staticClass: "dropdown-toggle nav-link",
               attrs: {
                 href: "#",
                 id: "accountMenuList",
@@ -55250,6 +54882,7 @@ var render = function() {
           _c(
             "a",
             {
+              staticClass: "nav-link",
               attrs: {
                 href: _vm.isLogin ? "javascript:void(0)" : "#login",
                 "data-toggle": _vm.isLogin ? false : "modal"
@@ -55278,6 +54911,7 @@ var render = function() {
             ? _c(
                 "a",
                 {
+                  staticClass: "nav-link",
                   attrs: {
                     href: _vm.isRegister
                       ? "javascript:void(0)"
@@ -61972,6 +61606,7 @@ var render = function() {
                       expression: "isDisabled"
                     }
                   ],
+                  staticClass: "nav-link",
                   class: { "is-disabled": _vm.isDisabled },
                   attrs: {
                     "data-toggle": "collapse",
@@ -62151,20 +61786,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { attrs: { href: _vm.urlWishList, rel: "nofollow" } }, [
-    _c("span", { staticClass: "badge-right mr-1 d-none d-sm-inline" }, [
-      _vm._v(_vm._s(_vm.wishListCount))
-    ]),
-    _vm._v(" "),
-    _c("i", {
-      staticClass: "fa",
-      class: {
-        "fa-heart-o": !_vm.wishListCount,
-        "fa-heart": _vm.wishListCount
-      },
-      attrs: { "aria-hidden": "true" }
-    })
-  ])
+  return _c(
+    "a",
+    {
+      staticClass: "nav-link",
+      attrs: { href: _vm.urlWishList, rel: "nofollow" }
+    },
+    [
+      _c("span", { staticClass: "badge-right mr-1 d-none d-sm-inline" }, [
+        _vm._v(_vm._s(_vm.wishListCount))
+      ]),
+      _vm._v(" "),
+      _c("i", {
+        staticClass: "fa",
+        class: {
+          "fa-heart-o": !_vm.wishListCount,
+          "fa-heart": _vm.wishListCount
+        },
+        attrs: { "aria-hidden": "true" }
+      })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80381,14 +80023,9 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("toggle-basket-preview", {
   bind: function bind(el) {
     el.addEventListener("click", function (event) {
-      var vueApp = document.querySelector("#vue-app");
-
-      if (vueApp) {
-        var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-        vueApp.classList.toggle(basketOpenClass || "open-hover");
-        event.preventDefault();
-        event.stopPropagation();
-      }
+      document.body.classList.toggle("basket-open");
+      event.preventDefault();
+      event.stopPropagation();
     });
   }
 });
@@ -83881,15 +83518,6 @@ function CeresMain() {
   var $toggleListView = $(".toggle-list-view");
   var $mainNavbarCollapse = $("#mainNavbarCollapse");
   $(document).on("click", function (evt) {
-    var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-
-    if ($("#vue-app").hasClass(basketOpenClass)) {
-      if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
-        evt.preventDefault();
-        $("#vue-app").toggleClass(basketOpenClass || "open-hover");
-      }
-    }
-
     headerCollapses.forEach(function (element) {
       if (evt.target !== element && $(evt.target).parents(element).length <= 0) {
         $(element).collapse("hide");
