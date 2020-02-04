@@ -15,8 +15,11 @@ export default {
         component: String
     },
 
-    computed: mapState({
-        isLoaded: state => !!state.lazyComponent.components[this.component]
-    })
+    computed: {
+        isLoaded()
+        {
+            return !!this.$store.state.lazyComponent.components[this.component];
+        }
+    }
 }
 </script>

@@ -103,6 +103,9 @@ Vue.component("shipping-country-select", () => import("./app/components/pageDesi
 Vue.component("wish-list", () => import("./app/components/wishList/WishList.vue"));
 Vue.component("wish-list-count", () => import("./app/components/wishList/WishListCount.vue"));
 
+import LazyLoad from "./app/components/common/LazyLoad.vue";
+Vue.component("lazy-load", LazyLoad);
+
 // =========================
 // DIRECTIVES
 // =========================

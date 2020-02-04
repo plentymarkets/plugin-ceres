@@ -30,7 +30,7 @@
 import ApiService from "../../../services/ApiService";
 import ValidationService from "../../../services/ValidationService";
 import { isDefined } from "../../../helper/utils";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     props: {
@@ -118,7 +118,7 @@ export default {
             this.loadComponent("register-modal");
         },
 
-        ...mapMutations([
+        ...mapActions([
             "loadComponent"
         ])
     }

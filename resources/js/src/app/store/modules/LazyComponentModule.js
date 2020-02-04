@@ -6,15 +6,15 @@ const state =
         }
     };
 
-const actions =
+const mutations =
     {
         setComponent(state, { component, loaded })
         {
-            state.components[component] = loaded;
+            Vue.set(state.components, component, loaded);
         }
     };
 
-const mutations =
+const actions =
     {
         loadComponent({ commit }, component)
         {
