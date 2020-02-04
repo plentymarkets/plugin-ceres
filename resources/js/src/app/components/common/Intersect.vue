@@ -16,7 +16,7 @@
         {
             return {
                 isVisible: false,
-                loadingRendered: false
+                mayObserve: false
             }
         },
 
@@ -31,7 +31,7 @@
             }
 
             this.observer = new IntersectionObserver((entries) => {
-                if(entries[0].intersectionRatio >= this.threshold && this.loadingRendered)
+                if(entries[0].intersectionRatio >= this.threshold)
                 {
                     this.observer.unobserve(this.$el);
                     this.isVisible = true;
@@ -47,12 +47,19 @@
         {
             if(this.featureEnabled)
             {
-                this.$nextTick(() =>
-                {
-                    setTimeout(() => {
-                        this.observer.observe(this.$el);
-                    }, 100);
+                this.$nextTick(() => {
+                    this.mayObserve = true;
                 });
+            }
+
+        },
+
+        updated()
+        {
+            if(this.featureEnabled && this.mayObserve)
+            {
+                this.mayObserve = false;
+                this.observer.observe(this.$el);
             }
         },
 
@@ -72,8 +79,7 @@
             }
             else
             {
-                this.loadingRendered = true;
-                return this.$slots.loading;
+                return this.$slots.loading ? this.$slots.loading : null;
             }
         },
     }
