@@ -9,8 +9,8 @@
     @include transition(all 300ms ease-in-out);
 
     @include media-breakpoint-up(lg) {
-        width: $aside-columns-width;
         left: auto;
+        width: $aside-columns-width;
     }
 
     .basket-open & {
