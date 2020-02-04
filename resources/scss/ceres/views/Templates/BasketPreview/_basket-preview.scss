@@ -20,7 +20,7 @@
         position: fixed;
         top: 0;
         right: 0;
-        bottom: 0;
+        bottom: -100vh;
         left: -100vw;
         z-index: -1;
         display: none;
@@ -98,7 +98,7 @@
         max-width: 440px;
         max-height: 90vh;
 
-        .control-basket:hover &,
+        .no-touch .control-basket:hover &,
         .basket-open & {
             display: block;
             transform: translateX(0%);
@@ -119,7 +119,7 @@
         }
 
         .basket-preview-overlay {
-            display: none;
+            background-color: transparent;
         }
     }
 }
