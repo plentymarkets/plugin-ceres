@@ -7,7 +7,7 @@
 {% endfor %}
 {% if overrideHomepageContainer | trim is empty %}
 
-    {% set lang = services.sessionStorage.getLang() %}
+    {% set lang = services.localizationRepository.getLanguage() %}
 
     {% set slider1 = {
     item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data,
