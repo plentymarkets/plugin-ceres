@@ -31,7 +31,7 @@
                         </template>
                     </basket-list>
 
-                    <div class="totals d-flex flex-fill flex-nowrap flex-column px-3 pt-3">
+                    <div class="totals d-flex flex-nowrap flex-column px-3 pt-3">
 
                         <shipping-country-select
                                 v-if="showShippingCountrySelect"

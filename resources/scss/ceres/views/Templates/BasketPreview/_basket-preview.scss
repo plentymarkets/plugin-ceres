@@ -2,14 +2,15 @@
     position: fixed;
     top: 0;
     right: 0;
+    left: 0;
     z-index: $zindex-modal + 1;
     display: block;
-    width: 100vw;
     transform: translateX(100%);
     @include transition(all 300ms ease-in-out);
 
     @include media-breakpoint-up(lg) {
         width: $aside-columns-width;
+        left: auto;
     }
 
     .basket-open & {
@@ -52,6 +53,7 @@
     overflow-y: auto;
 
     .totals {
+        background-color: $gray-100;
         border-top: 1px solid $gray-300;
     }
 }
@@ -76,6 +78,7 @@
         .totals {
             flex-basis: 45%;
             max-width: 45%;
+            background-color: $white;
             border-top: none;
             border-left: 1px solid $gray-300;
         }
@@ -110,6 +113,10 @@
         &.empty .item-list {
             padding: 1rem 0;
             text-align: center;
+        }
+
+        .totals {
+            background-color: $white;
         }
 
         .basket-preview-overlay {
