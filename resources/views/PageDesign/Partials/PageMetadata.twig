@@ -71,7 +71,7 @@
     "url": {{ url | json_encode | raw }},
     "potentialAction":{
         "@type": "SearchAction",
-        "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl ~ urls.search }}?query={search_term}",
+        "target": "{{ services.webstoreConfig.getWebstoreConfiguration().domainSsl ~ urls.search }}?query={search_term}",
         "query-input": "required name=search_term"
     }
 }
