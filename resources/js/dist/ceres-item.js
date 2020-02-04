@@ -214,7 +214,7 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = "./resources/js/src/item.js");
 /******/ 	})();
 /******/
-/******/ 	webpackJsonpCallback([[], {}, 0, [6,31,0,4,32,1,2,5,8,10,12,13,14,19,20,21,28,29]]);
+/******/ 	webpackJsonpCallback([[], {}, 0, [6,31,0,32,2,10,28,29]]);
 /******/ 	return startupResult;
 /******/ })
 /************************************************************************/
@@ -275,57 +275,66 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    threshold: {
+      type: Number,
+      default: 0.1
+    }
+  },
   data: function data() {
     return {
       isVisible: false,
-      intersectionRatio: 0,
       loadingRendered: false
     };
   },
   created: function created() {
     var _this = this;
 
-    if (!('IntersectionObserver' in window)) {
+    this.featureEnabled = 'IntersectionObserver' in window;
+
+    if (!this.featureEnabled) {
       this.isVisible = true;
       return;
     }
 
     this.observer = new IntersectionObserver(function (entries) {
-      if (entries[0].intersectionRatio >= 0.1 && _this.loadingRendered) {
+      if (entries[0].intersectionRatio >= _this.threshold && _this.loadingRendered) {
         _this.observer.unobserve(_this.$el);
 
-        _this.intersectionRatio = entries[0].intersectionRatio;
         _this.isVisible = true;
       }
     }, {
       root: null,
       rootMargin: '0px',
-      threshold: 0.2
+      threshold: 0.1
     });
   },
-  updated: function updated() {
+  mounted: function mounted() {
     var _this2 = this;
 
-    this.$nextTick(function () {
-      setTimeout(function () {
-        _this2.observer.observe(_this2.$el);
-      }, 100);
-    });
+    if (this.featureEnabled) {
+      this.$nextTick(function () {
+        setTimeout(function () {
+          _this2.observer.observe(_this2.$el);
+        }, 100);
+      });
+    }
   },
   destroyed: function destroyed() {
-    this.observer.disconnect();
+    if (this.featureEnabled) {
+      this.observer.disconnect();
+    }
   },
   render: function render() {
-    try {
-      if (this.isVisible) {
-        return this.$slots.default ? this.$slots.default[1] : null;
-      } else {
-        this.loadingRendered = true;
-        return this.$slots.loading;
-      }
-    } catch (e) {
-      throw new Error("LazyMountIntersect can only mount one single component.");
+    if (this.isVisible) {
+      return this.$slots.default ? this.$slots.default : null;
+    } else {
+      this.loadingRendered = true;
+      return this.$slots.loading;
     }
   }
 });
