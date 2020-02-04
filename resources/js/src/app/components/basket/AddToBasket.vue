@@ -253,7 +253,7 @@ export default {
          */
         addToBasket()
         {
-            this.$root.$data.renderAddItemToBasketOverlay = true;
+            this.$store.dispatch("loadComponent", "add-item-to-basket-overlay");
 
             if (this.missingOrderProperties.length)
             {

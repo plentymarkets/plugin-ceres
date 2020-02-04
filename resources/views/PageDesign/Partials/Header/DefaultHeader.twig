@@ -60,7 +60,7 @@
                             </wish-list-count>
                         </li>
                     {% endif %}
-                    <li class="list-inline-item control-basket position-relative" v-on:mouseover.once="$root.$data.renderBasketPreview = true">
+                    <li class="list-inline-item control-basket position-relative" v-on:mouseover.once="$store.dispatch('loadComponent', 'basket-preview')">
                         <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
                             {% if config("Ceres.header.basket_values") != "sum" %}
                                 <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
@@ -74,56 +74,57 @@
                         </a>
 
                         {% if config("Ceres.basket.preview_type") != "right" %}
-                            <basket-preview v-if="renderBasketPreview"
-                                :show-net-prices="{{ showNetPrices | json_encode }}"
-                                :hover="true"
-                            >
-                                <template #before-basket-item>
-                                    {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
-                                </template>
-                                <template #loading-animation>
-                                    {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-                                </template>
-                                <template #after-basket-item>
-                                    {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
-                                </template>
-                                <template #before-basket-totals>
-                                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
-                                </template>
-                                <template #before-item-sum>
-                                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
-                                </template>
-                                <template #after-item-sum>
-                                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
-                                </template>
-                                <template #before-shipping-costs>
-                                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
-                                </template>
-                                <template #after-shipping-costs>
-                                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
-                                </template>
-                                <template #before-total-sum>
-                                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
-                                </template>
-                                <template #before-vat>
-                                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
-                                </template>
-                                <template #after-vat>
-                                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
-                                </template>
-                                <template #after-total-sum>
-                                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
-                                </template>
-                                <template #after-basket-totals>
-                                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
-                                </template>
-                                <template #before-checkout-button>
-                                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
-                                </template>
-                                <template #after-checkout-button>
-                                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
-                                </template>
-                            </basket-preview>
+                            <lazy-componen component="basket-preview">
+                                <basket-preview
+                                    :show-net-prices="{{ showNetPrices | json_encode }}"
+                                    :hover="true">
+                                    <template #before-basket-item>
+                                        {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+                                    </template>
+                                    <template #loading-animation>
+                                        {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                                    </template>
+                                    <template #after-basket-item>
+                                        {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+                                    </template>
+                                    <template #before-basket-totals>
+                                        {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
+                                    </template>
+                                    <template #before-item-sum>
+                                        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                                    </template>
+                                    <template #after-item-sum>
+                                        {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+                                    </template>
+                                    <template #before-shipping-costs>
+                                        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+                                    </template>
+                                    <template #after-shipping-costs>
+                                        {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                                    </template>
+                                    <template #before-total-sum>
+                                        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+                                    </template>
+                                    <template #before-vat>
+                                        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                                    </template>
+                                    <template #after-vat>
+                                        {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+                                    </template>
+                                    <template #after-total-sum>
+                                        {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+                                    </template>
+                                    <template #after-basket-totals>
+                                        {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
+                                    </template>
+                                    <template #before-checkout-button>
+                                        {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+                                    </template>
+                                    <template #after-checkout-button>
+                                        {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+                                    </template>
+                                </basket-preview>
+                            </lazy-componen>
                         {% endif %}
                     </li>
                 </ul>
