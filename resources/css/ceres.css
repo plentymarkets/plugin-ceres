@@ -14501,6 +14501,10 @@ html.ie .single-carousel .owl-item > div {
 html.ie .always-visible-search {
   min-height: 32px; }
 
+html.ie .navbar-brand img[src*="svg"] {
+  width: 100%;
+  height: 100%; }
+
 .top-bar .cmp-search-box {
   position: relative;
   top: auto;
