@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <div class="category-unit-price" v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
+                <div class="category-unit-price small" v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
                     <span>{{ liveShoppingData.item.unit.content }}</span>
                     <span>{{ liveShoppingData.item.unit.names.name }}</span>
                     <span v-if="liveShoppingData.item.variation.mayShowUnitPrice">| {{ prices.price.basePrice }}</span>

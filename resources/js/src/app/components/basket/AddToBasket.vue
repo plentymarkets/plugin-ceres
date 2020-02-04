@@ -7,10 +7,10 @@
 
         <div class="add-to-basket-lg-container d-none d-lg-block" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket"
              v-tooltip data-toggle="tooltip" data-placement="top" :title="$translate('Ceres::Template.itemShowItem')" @click="directToItem()">
-            <i class="fa fa-arrow-right fa-lg mobile-icon-right"></i>
+            <i class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>
         </div>
 
-        <div class="category-list-view-port" v-if="showQuantity && !useLargeScale">
+        <div class="d-inline d-lg-none" v-if="showQuantity && !useLargeScale">
             <div class="add-to-basket-container">
                 <div class="quantity-input-container">
                     <quantity-input :value="quantity"
@@ -60,27 +60,15 @@
             </div>
         </div>
 
-        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && !isWishList">
-            <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary btn-outline-appearance mobile-width-button" @click="addToBasket()">
-                    <icon icon="cart-plus" class="fa-lg mobile-icon-right" :loading="waiting"></icon>
-                    <span class="mobile-text-only">{{ $translate("Ceres::Template.singleItemAddToBasket") }}</span>
-                </button>
-                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-outline-primary btn-outline-appearance mobile-width-button" @click="directToItem()">
-                    <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
-                    <span class="mobile-text-only">{{ $translate("Ceres::Template.itemShowItem") }}</span>
-                </button>
-            </div>
-        </div>
-        <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale && isWishList">
+        <div class="d-inline d-lg-none" v-if="!showQuantity && !useLargeScale">
             <div class="btn-group" role="group" aria-label="Thumb Control">
                 <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
                     <icon icon="shopping-cart" class="fa-lg mobile-icon-right" :loading="waiting"></icon>
-                    <span class="mobile-text-only">{{ $translate("Ceres::Template.singleItemAddToBasket") }}</span>
+                    {{ $translate("Ceres::Template.singleItemAddToBasket") }}
                 </button>
                 <button type="button" v-if="!canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="directToItem()">
-                    <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
-                    <span class="mobile-text-only">{{ $translate("Ceres::Template.itemShowItem") }}</span>
+                    <i class="fa fa-arrow-right fa-lg d-none d-sm-block" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.itemShowItem") }}
                 </button>
             </div>
         </div>
