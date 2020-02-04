@@ -5,6 +5,10 @@
             threshold: {
                 type: Number,
                 default: 0.1
+            },
+            margin: {
+                type: String,
+                default: "0px"
             }
         },
 
@@ -34,7 +38,7 @@
                 }
             }, {
                 root: null,
-                rootMargin: '0px',
+                rootMargin: this.margin,
                 threshold: 0.1
             });
         },
