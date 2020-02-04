@@ -69,7 +69,7 @@ var render = function() {
     _vm.showItemBundleItems
       ? _c(
           "div",
-          { staticClass: "mb-3 item-bundle" },
+          { staticClass: "small font-weight-bold mb-3" },
           [
             _c("strong", [
               _vm._v(

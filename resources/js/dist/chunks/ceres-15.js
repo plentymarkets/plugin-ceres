@@ -358,17 +358,8 @@ var render = function() {
                 on: { click: _vm.validateData }
               },
               [
-                _c("i", {
-                  directives: [
-                    {
-                      name: "waiting-animation",
-                      rawName: "v-waiting-animation",
-                      value: _vm.isDisabled,
-                      expression: "isDisabled"
-                    }
-                  ],
-                  staticClass: "fa fa-paper-plane-o",
-                  attrs: { "aria-hidden": "true" }
+                _c("icon", {
+                  attrs: { icon: "paper-plane-o", loading: _vm.isDisabled }
                 }),
                 _vm._v(
                   "\n                    " +
@@ -379,7 +370,8 @@ var render = function() {
                     ) +
                     "\n                "
                 )
-              ]
+              ],
+              1
             )
           ])
         ])

@@ -118,10 +118,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: false,
       default: 1
     },
-    template: {
-      type: String,
-      required: true
-    },
     waiting: {
       type: Boolean,
       required: false

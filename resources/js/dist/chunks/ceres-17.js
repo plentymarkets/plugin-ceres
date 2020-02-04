@@ -298,21 +298,15 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("i", {
-                      directives: [
-                        {
-                          name: "waiting-animation",
-                          rawName: "v-waiting-animation",
-                          value: _vm.isWaiting,
-                          expression: "isWaiting"
-                        }
-                      ],
-                      staticClass: "fa fa-plus-circle fa-fw my-1",
+                    _c("icon", {
+                      staticClass: "fa-fw my-1",
                       attrs: {
-                        "waiting-class": "fa fa-repeat fa-fw my-1 fa-spin"
+                        icon: "plus-circle",
+                        "class-loading": "fa-repeat"
                       }
                     })
-                  ]
+                  ],
+                  1
                 )
               ])
             : _vm._e()

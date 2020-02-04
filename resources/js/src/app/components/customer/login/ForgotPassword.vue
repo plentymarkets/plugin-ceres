@@ -31,8 +31,8 @@
                             </button>
 
 							<button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary btn-medium">
-								<i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
 								{{ $translate("Ceres::Template.loginSend") }}
+								<icon icon="paper-plane-o" :loading="isDisabled"></icon>
 							</button>
 						</div>
 					</div>

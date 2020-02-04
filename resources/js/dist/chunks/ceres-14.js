@@ -357,23 +357,16 @@ var render = function() {
                   }
                 },
                 [
-                  _c("i", {
-                    directives: [
-                      {
-                        name: "waiting-animation",
-                        rawName: "v-waiting-animation",
-                        value: _vm.isDisabled,
-                        expression: "isDisabled"
-                      }
-                    ],
-                    staticClass: "fa fa-user"
-                  }),
                   _vm._v(
                     "\n                    " +
                       _vm._s(_vm.$translate("Ceres::Template.login")) +
-                      "\n                "
-                  )
-                ]
+                      "\n                    "
+                  ),
+                  _c("icon", {
+                    attrs: { icon: "user", loading: _vm.isDisabled }
+                  })
+                ],
+                1
               )
             ],
             2

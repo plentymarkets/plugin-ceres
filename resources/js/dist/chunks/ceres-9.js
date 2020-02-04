@@ -265,13 +265,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -421,161 +414,180 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "basket-item-container basket-list-item" }, [
-    _c("div", { staticClass: "basket-item component-loading with-icon" }, [
-      _c("div", { staticClass: "image-container" }, [
-        _vm.image
-          ? _c("img", {
-              staticClass: "img-basket-small",
-              attrs: {
-                src: _vm.image,
-                title: _vm._f("itemName")(_vm.wishListItem)
-              }
-            })
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "meta-container-wrapper" }, [
-        _c("div", { staticClass: "meta-container-wrapper-inner mb-2" }, [
-          _c("div", { staticClass: "meta-container" }, [
-            _c("div", [
-              _c(
-                "a",
-                {
-                  staticClass: "item-name text-primary text-appearance",
-                  attrs: { href: _vm._f("itemURL")(_vm.wishListItem) }
-                },
-                [
+  return _c("div", { staticClass: "basket-list-item py-3" }, [
+    _c(
+      "div",
+      { staticClass: "basket-item component-loading with-icon d-flex" },
+      [
+        _c("div", { staticClass: "image-container" }, [
+          _vm.image
+            ? _c("img", {
+                staticClass: "d-block mw-100 mh-100",
+                attrs: {
+                  src: _vm.image,
+                  title: _vm._f("itemName")(_vm.wishListItem)
+                }
+              })
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "meta-container-wrapper" }, [
+          _c("div", { staticClass: "meta-container-wrapper-inner mb-2" }, [
+            _c("div", { staticClass: "meta-container" }, [
+              _c("div", { staticClass: "position-relative w-100" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "item-name text-primary text-appearance small font-weight-bold text-break",
+                    attrs: { href: _vm._f("itemURL")(_vm.wishListItem) }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm._f("itemName")(_vm.wishListItem)) +
+                        "\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "item-base-price small" }, [
                   _vm._v(
                     "\n                            " +
-                      _vm._s(_vm._f("itemName")(_vm.wishListItem)) +
+                      _vm._s(_vm._f("currency")(_vm.unitPrice)) +
                       "\n                        "
                   )
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "item-base-price" }, [
-                _vm._v(
-                  "\n                            " +
-                    _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                    "\n                        "
-                )
-              ]),
-              _vm._v(" "),
-              !(
-                _vm.wishListItem.unit.unitOfMeasurement === "C62" &&
-                _vm.wishListItem.unit.content === 1
-              ) && _vm.wishListItem.variation.mayShowUnitPrice
-                ? _c("div", { staticClass: "item-small-prices text-muted" }, [
-                    _c("div", [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(_vm.basePrice) +
-                          "\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("strong", [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.wishListContent")
-                          ) + ": "
-                        )
-                      ]),
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(_vm.wishListItem.unit.content) +
-                          " " +
-                          _vm._s(_vm.wishListItem.unit.names.name) +
-                          "\n                            "
-                      )
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "item-small-prices" },
-                _vm._l(_vm.wishListItem.attributes, function(attribute, index) {
-                  return _c("div", { key: index }, [
-                    _c("strong", [
-                      _vm._v(_vm._s(attribute.attribute.names.name) + ": ")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(attribute.value.names.name))])
-                  ])
-                }),
-                0
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "item-small-prices text-muted" },
-                [
-                  _vm._l(_vm.transformedVariationProperties, function(
-                    propertyGroup
-                  ) {
-                    return _vm._l(propertyGroup.properties, function(
-                      property,
-                      index
-                    ) {
-                      return _c("div", { key: index }, [
-                        propertyGroup.name
-                          ? _c("strong", [
-                              _vm._v(_vm._s(propertyGroup.name) + ": ")
-                            ])
-                          : _vm._e(),
+                ]),
+                _vm._v(" "),
+                !(
+                  _vm.wishListItem.unit.unitOfMeasurement === "C62" &&
+                  _vm.wishListItem.unit.content === 1
+                ) && _vm.wishListItem.variation.mayShowUnitPrice
+                  ? _c(
+                      "div",
+                      { staticClass: "item-small-prices text-muted small" },
+                      [
+                        _c("div", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.basePrice) +
+                              "\n                            "
+                          )
+                        ]),
                         _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(property.names.name))])
-                      ])
+                        _c("div", [
+                          _c("strong", [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.wishListContent"
+                                )
+                              ) + ": "
+                            )
+                          ]),
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.wishListItem.unit.content) +
+                              " " +
+                              _vm._s(_vm.wishListItem.unit.names.name) +
+                              "\n                            "
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item-small-prices small" },
+                  _vm._l(_vm.wishListItem.attributes, function(
+                    attribute,
+                    index
+                  ) {
+                    return _c("div", { key: index }, [
+                      _c("strong", [
+                        _vm._v(_vm._s(attribute.attribute.names.name) + ": ")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(attribute.value.names.name))])
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item-small-prices text-muted small" },
+                  [
+                    _vm._l(_vm.transformedVariationProperties, function(
+                      propertyGroup
+                    ) {
+                      return _vm._l(propertyGroup.properties, function(
+                        property,
+                        index
+                      ) {
+                        return _c("div", { key: index }, [
+                          propertyGroup.name
+                            ? _c("strong", [
+                                _vm._v(_vm._s(propertyGroup.name) + ": ")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("span", [_vm._v(_vm._s(property.names.name))])
+                        ])
+                      })
                     })
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "basket-item-container-right" }, [
+              _c(
+                "div",
+                { staticClass: "qty-box-container ml-3" },
+                [
+                  _c("quantity-input", {
+                    attrs: {
+                      value: _vm.quantity,
+                      min: _vm.wishListItem.variation.minimumOrderQuantity,
+                      max: _vm.wishListItem.variation.maximumOrderQuantity,
+                      timeout: 0,
+                      interval: _vm.wishListItem.variation.intervalQuantity,
+                      "variation-id": _vm.wishListItem.variation.id
+                    },
+                    on: {
+                      "quantity-change": function($event) {
+                        _vm.quantity = $event
+                      }
+                    }
                   })
                 ],
-                2
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "basket-item-container-right" }, [
-            _c(
-              "div",
-              { staticClass: "qty-box-container" },
-              [
-                _c("quantity-input", {
-                  attrs: {
-                    template: "#vue-quantity-input",
-                    value: _vm.quantity,
-                    min: _vm.wishListItem.variation.minimumOrderQuantity,
-                    max: _vm.wishListItem.variation.maximumOrderQuantity,
-                    timeout: 0,
-                    interval: _vm.wishListItem.variation.intervalQuantity,
-                    "variation-id": _vm.wishListItem.variation.id
-                  },
-                  on: {
-                    "quantity-change": function($event) {
-                      _vm.quantity = $event
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "price-box mb-1" }, [
-              _c("div", { staticClass: "item-total-price" }, [
-                _vm._v(
-                  "\n                            " +
-                    _vm._s(_vm._f("currency")(_vm.quantity * _vm.unitPrice)) +
-                    "\n                        "
-                )
-              ]),
+                1
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "item-remove-container" }, [
+              _c("div", { staticClass: "price-box text-right my-1 ml-2" }, [
                 _c(
                   "div",
                   {
-                    staticClass: "btn btn-sm item-remove-button",
+                    staticClass: "item-total-price font-weight-bold text-nowrap"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(
+                          _vm._f("currency")(_vm.quantity * _vm.unitPrice)
+                        ) +
+                        "\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-sm text-danger p-0",
                     on: {
                       click: function($event) {
                         return _vm.removeItem()
@@ -583,76 +595,72 @@ var render = function() {
                     }
                   },
                   [
-                    _c("span", [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.wishListDelete")
-                          ) +
-                          "\n                                    "
-                      ),
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "waiting-animation-infinite",
-                            rawName: "v-waiting-animation-infinite"
-                          }
-                        ],
-                        staticClass: "fa fa-trash-o",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ])
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.wishListDelete")
+                        ) +
+                        "\n                            "
+                    ),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "waiting-animation-infinite",
+                          rawName: "v-waiting-animation-infinite"
+                        }
+                      ],
+                      staticClass: "fa fa-trash-o default-float",
+                      attrs: { "aria-hidden": "true" }
+                    })
                   ]
                 )
               ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "text-right" },
-          [
-            _c("add-to-basket", {
-              attrs: {
-                "variation-id": _vm.wishListItem.variation.id,
-                "is-salable":
-                  !!_vm.wishListItem.filter &&
-                  _vm.wishListItem.filter.isSalable,
-                "has-children":
-                  !!_vm.wishListItem.filter &&
-                  _vm.wishListItem.filter.hasActiveChildren,
-                "interval-quantity":
-                  _vm.wishListItem.variation.intervalOrderQuantity || 1,
-                "minimum-quantity":
-                  _vm.wishListItem.variation.minimumOrderQuantity,
-                "maximum-quantity":
-                  !!_vm.wishListItem.variation.maximumOrderQuantity &&
-                  _vm.wishListItem.variation.maximumOrderQuantity > 0
-                    ? _vm.wishListItem.variation.maximumOrderQuantity
-                    : null,
-                "order-properties": _vm.wishListItem.properties.filter(function(
-                  prop
-                ) {
-                  return prop.property.isOderProperty
-                }),
-                "has-order-properties": _vm.wishListItem.hasOrderProperties,
-                "use-large-scale": false,
-                "show-quantity": false,
-                "item-url": _vm._f("itemURL")(_vm.wishListItem),
-                "has-price": _vm._f("hasItemDefaultPrice")(_vm.wishListItem),
-                "is-wish-list": true,
-                "prop-quantity": _vm.quantity
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "item-additional-information-container" }, [
+          ]),
+          _vm._v(" "),
           _c(
             "div",
-            { staticClass: "item-additional-information" },
+            { staticClass: "text-right" },
+            [
+              _c("add-to-basket", {
+                attrs: {
+                  "variation-id": _vm.wishListItem.variation.id,
+                  "is-salable":
+                    !!_vm.wishListItem.filter &&
+                    _vm.wishListItem.filter.isSalable,
+                  "has-children":
+                    !!_vm.wishListItem.filter &&
+                    _vm.wishListItem.filter.hasActiveChildren,
+                  "interval-quantity":
+                    _vm.wishListItem.variation.intervalOrderQuantity || 1,
+                  "minimum-quantity":
+                    _vm.wishListItem.variation.minimumOrderQuantity,
+                  "maximum-quantity":
+                    !!_vm.wishListItem.variation.maximumOrderQuantity &&
+                    _vm.wishListItem.variation.maximumOrderQuantity > 0
+                      ? _vm.wishListItem.variation.maximumOrderQuantity
+                      : null,
+                  "order-properties": _vm.wishListItem.properties.filter(
+                    function(prop) {
+                      return prop.property.isOderProperty
+                    }
+                  ),
+                  "has-order-properties": _vm.wishListItem.hasOrderProperties,
+                  "use-large-scale": false,
+                  "show-quantity": false,
+                  "item-url": _vm._f("itemURL")(_vm.wishListItem),
+                  "has-price": _vm._f("hasItemDefaultPrice")(_vm.wishListItem),
+                  "is-wish-list": true,
+                  "prop-quantity": _vm.quantity
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "small" },
             [
               _vm.isDataFieldVisible("wishListItem.item.id")
                 ? [
@@ -761,8 +769,8 @@ var render = function() {
             2
           )
         ])
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []

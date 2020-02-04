@@ -182,24 +182,16 @@ var render = function() {
               }
             },
             [
-              _c("i", {
-                directives: [
-                  {
-                    name: "waiting-animation",
-                    rawName: "v-waiting-animation",
-                    value: _vm.isDisabled,
-                    expression: "isDisabled"
-                  }
-                ],
-                staticClass: "fa fa-arrow-right",
-                attrs: { "aria-hidden": "true" }
-              }),
               _vm._v(
                 "\n                " +
                   _vm._s(_vm.$translate("Ceres::Template.loginNext")) +
-                  "\n            "
-              )
-            ]
+                  "\n                "
+              ),
+              _c("icon", {
+                attrs: { icon: "arrow-right", loading: _vm.isDisabled }
+              })
+            ],
+            1
           )
         ])
       ]

@@ -384,7 +384,7 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "basket-preview-content" }, [
-          _c("div", { staticClass: "list col-sm-7 col-md-12 py-3" }, [
+          _c("div", { staticClass: "list col-sm-7 col-md-12" }, [
             _c(
               "div",
               { staticClass: "cmp cmp-basket-preview-list" },

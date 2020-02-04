@@ -79,8 +79,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -137,62 +135,62 @@ var render = function() {
   return !_vm.basketSelect
     ? _c(
         "ul",
+        { staticClass: "row" },
         _vm._l(_vm.localization.shippingCountries, function(shippingCountry) {
-          return _c("div", { key: shippingCountry.id }, [
-            _c(
-              "li",
-              {
-                class: {
-                  active:
-                    _vm.localization.shippingCountryId == shippingCountry.id
-                }
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    directives: [
-                      {
-                        name: "tooltip",
-                        rawName: "v-tooltip",
-                        value: _vm.isDisabled,
-                        expression: "isDisabled"
-                      }
-                    ],
-                    class: { "is-disabled": _vm.isDisabled },
-                    attrs: {
-                      "data-toggle": "collapse",
-                      href: "#countrySettings",
-                      disabled: _vm.isDisabled,
-                      "data-placement": "top",
-                      "data-trigger": "hover",
-                      "data-boundary": "window",
-                      "data-title": _vm.$translate(
-                        "Ceres::Template.headerChangeDeliveryCountry"
-                      )
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.setShippingCountry(shippingCountry.id)
-                      }
+          return _c(
+            "li",
+            {
+              key: shippingCountry.id,
+              staticClass: "col-6 col-sm-4 px-0",
+              class: {
+                active: _vm.localization.shippingCountryId == shippingCountry.id
+              }
+            },
+            [
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "tooltip",
+                      rawName: "v-tooltip",
+                      value: _vm.isDisabled,
+                      expression: "isDisabled"
                     }
-                  },
-                  [
-                    _c("i", {
-                      class:
-                        "flag-icon flag-icon-" +
-                        shippingCountry.isoCode2.toLowerCase()
-                    }),
-                    _vm._v(
-                      "\n                  " +
-                        _vm._s(shippingCountry.currLangName) +
-                        "\n              "
+                  ],
+                  class: { "is-disabled": _vm.isDisabled },
+                  attrs: {
+                    "data-toggle": "collapse",
+                    href: "#countrySettings",
+                    disabled: _vm.isDisabled,
+                    "data-placement": "top",
+                    "data-trigger": "hover",
+                    "data-boundary": "window",
+                    "data-title": _vm.$translate(
+                      "Ceres::Template.headerChangeDeliveryCountry"
                     )
-                  ]
-                )
-              ]
-            )
-          ])
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.setShippingCountry(shippingCountry.id)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    class:
+                      "flag-icon flag-icon-" +
+                      shippingCountry.isoCode2.toLowerCase()
+                  }),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(shippingCountry.currLangName) +
+                      "\n        "
+                  )
+                ]
+              )
+            ]
+          )
         }),
         0
       )
@@ -241,9 +239,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n              " +
+                      "\n            " +
                         _vm._s(shippingCountry.currLangName) +
-                        "\n          "
+                        "\n        "
                     )
                   ]
                 )
@@ -252,11 +250,11 @@ var render = function() {
             )
           : _c("div", [
               _vm._v(
-                "\n          " +
+                "\n        " +
                   _vm._s(
                     _vm.getCountryName(_vm.localization.shippingCountryId)
                   ) +
-                  "\n      "
+                  "\n    "
               )
             ])
       ])

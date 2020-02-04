@@ -1,11 +1,11 @@
 <template>
-    <div id="position-relative">
+    <div class="position-relative">
         <div class="dropdown" v-if="isLoggedIn">
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
                 <i class="fa fa-user mr-1 d-sm-none" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginHello", {"username": username }) }}</span>
             </a>
-            <div class="account-menu dropdown-menu small m-0 p-0">
+            <div class="dropdown-menu small m-0 p-0 mw-100">
                 <div class="list-group" aria-labelledby="accountMenuList" >
                     <a :href="$ceres.urls.myAccount" class="list-group-item small"><i class="fa fa-user"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
                     <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ $translate("Ceres::Template.loginLogout") }}</a>

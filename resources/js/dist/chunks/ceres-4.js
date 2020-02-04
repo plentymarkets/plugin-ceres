@@ -295,6 +295,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -610,33 +613,35 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "thumb-background" }),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "thumb-image" },
-            [
-              _vm._t("item-image", [
-                _c("category-image-carousel", {
-                  ref: "categoryImageCarousel",
-                  attrs: {
-                    "image-urls-data": _vm._f("itemImages")(
-                      _vm.item.images,
-                      _vm.imageUrlAccessor
-                    ),
-                    "alt-text": _vm._f("itemName")(_vm.item),
-                    "title-text": _vm._f("itemName")(_vm.item),
-                    "item-url": _vm._f("itemURL")(
-                      _vm.item,
-                      _vm.urlWithVariationId
-                    ),
-                    "enable-carousel":
-                      _vm.$ceres.config.item.enableImageCarousel,
-                    "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
-                  }
-                })
-              ])
-            ],
-            2
-          ),
+          _c("div", { staticClass: "thumb-image" }, [
+            _c(
+              "div",
+              { staticClass: "prop-1-1" },
+              [
+                _vm._t("item-image", [
+                  _c("category-image-carousel", {
+                    ref: "categoryImageCarousel",
+                    attrs: {
+                      "image-urls-data": _vm._f("itemImages")(
+                        _vm.item.images,
+                        _vm.imageUrlAccessor
+                      ),
+                      "alt-text": _vm._f("itemName")(_vm.item),
+                      "title-text": _vm._f("itemName")(_vm.item),
+                      "item-url": _vm._f("itemURL")(
+                        _vm.item,
+                        _vm.urlWithVariationId
+                      ),
+                      "enable-carousel":
+                        _vm.$ceres.config.item.enableImageCarousel,
+                      "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
+                    }
+                  })
+                ])
+              ],
+              2
+            )
+          ]),
           _vm._v(" "),
           _vm._t("store-special", [
             _vm.storeSpecial || _vm.item.variation.bundleType === "bundle"

@@ -99,6 +99,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -312,6 +314,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     orderItem: {
@@ -413,51 +417,59 @@ var render = function() {
       }),
       _vm._v(" "),
       _c(
-        "button",
-        {
-          staticClass: "btn btn-primary btn-appearance btn-medium-large mt-4",
-          class: _vm.buttonSizeClass,
-          on: {
-            click: function($event) {
-              return _vm.selectAllItems()
-            }
-          }
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-check-square-o",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.$translate("Ceres::Template.returnSelectAll")) +
-              "\n    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
+        "div",
         {
           staticClass:
-            "btn btn-primary btn-appearance float-right btn-medium-large mt-4",
-          class: _vm.buttonSizeClass,
-          attrs: { disabled: _vm.isDisabled || _vm.isLoading },
-          on: {
-            click: function($event) {
-              return _vm.showConfirmationModal()
-            }
-          }
+            "d-flex flex-wrap flex-column flex-sm-row justify-content-between mt-3"
         },
         [
-          _c("i", {
-            staticClass: "fa fa-arrow-right",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.$translate("Ceres::Template.returnTrigger")) +
-              "\n    "
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-appearance mt-1",
+              class: _vm.buttonSizeClass,
+              on: {
+                click: function($event) {
+                  return _vm.selectAllItems()
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.$translate("Ceres::Template.returnSelectAll")) +
+                  "\n            "
+              ),
+              _c("i", {
+                staticClass: "fa fa-check-square-o default-float",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-appearance mt-1",
+              class: _vm.buttonSizeClass,
+              attrs: { disabled: _vm.isDisabled || _vm.isLoading },
+              on: {
+                click: function($event) {
+                  return _vm.showConfirmationModal()
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.$translate("Ceres::Template.returnTrigger")) +
+                  "\n            "
+              ),
+              _c("i", {
+                staticClass: "fa fa-arrow-right default-float",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
           )
         ]
       ),
@@ -569,17 +581,8 @@ var render = function() {
                     }
                   },
                   [
-                    _c("i", {
-                      directives: [
-                        {
-                          name: "waiting-animation",
-                          rawName: "v-waiting-animation",
-                          value: _vm.isLoading,
-                          expression: "isLoading"
-                        }
-                      ],
-                      staticClass: "fa fa-check",
-                      attrs: { "aria-hidden": "true" }
+                    _c("icon", {
+                      attrs: { icon: "check", loading: _vm.isLoading }
                     }),
                     _vm._v(
                       "\n                        " +
@@ -588,7 +591,8 @@ var render = function() {
                         ) +
                         "\n                    "
                     )
-                  ]
+                  ],
+                  1
                 )
               ])
             ])
@@ -621,337 +625,330 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "article",
-    { staticClass: "basket-item-container basket-list-item" },
-    [
-      _c("div", { staticClass: "basket-item" }, [
-        _c("div", { staticClass: "image-container" }, [
-          _vm.orderItemImage
-            ? _c("img", {
-                staticClass: "img-basket-small",
-                attrs: {
-                  src: _vm.orderItemImage,
-                  alt: _vm._f("itemBundleName")(_vm.orderItem),
-                  title: _vm._f("itemBundleName")(_vm.orderItem)
-                }
-              })
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "meta-container-wrapper" }, [
-          _c("div", { staticClass: "meta-container-wrapper-inner" }, [
-            _c("div", { staticClass: "meta-container" }, [
-              _c(
-                "div",
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "item-name text-primary text-appearance",
-                      attrs: { href: _vm.orderItemURL }
-                    },
-                    [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(_vm._f("itemBundleName")(_vm.orderItem)) +
-                          "\n                            "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "item-base-price" },
-                    [
-                      _vm.isNet
-                        ? [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(
-                                  _vm._f("currency")(
-                                    _vm.amount.priceNet,
-                                    _vm.amount.currency
-                                  )
-                                ) +
-                                "\n                                "
-                            )
-                          ]
-                        : _vm._e(),
+  return _c("article", { staticClass: "basket-list-item py-3" }, [
+    _c("div", { staticClass: "basket-item d-flex" }, [
+      _c("div", { staticClass: "image-container" }, [
+        _vm.orderItemImage
+          ? _c("img", {
+              staticClass: "d-block mw-100 mh-100",
+              attrs: {
+                src: _vm.orderItemImage,
+                alt: _vm._f("itemBundleName")(_vm.orderItem),
+                title: _vm._f("itemBundleName")(_vm.orderItem)
+              }
+            })
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "meta-container-wrapper" }, [
+        _c("div", { staticClass: "meta-container-wrapper-inner" }, [
+          _c("div", { staticClass: "meta-container" }, [
+            _c(
+              "div",
+              { staticClass: "position-relative w-100" },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "item-name text-primary text-appearance small font-weight-bold text-break",
+                    attrs: { href: _vm.orderItemURL }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm._f("itemBundleName")(_vm.orderItem)) +
+                        "\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item-base-price small" },
+                  [
+                    _vm.isNet
+                      ? [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                _vm._f("currency")(
+                                  _vm.amount.priceNet,
+                                  _vm.amount.currency
+                                )
+                              ) +
+                              "\n                            "
+                          )
+                        ]
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.isNet
+                      ? [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                _vm._f("currency")(
+                                  _vm.amount.priceGross,
+                                  _vm.amount.currency
+                                )
+                              ) +
+                              "\n                            "
+                          )
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("item-bundle", {
+                  attrs: {
+                    "bundle-type": _vm.orderItem.bundleType,
+                    "bundle-components": _vm.orderItem.bundleComponents
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item-small-prices small" },
+                  _vm._l(_vm.variation.attributes, function(attribute) {
+                    return _c("div", [
+                      _c("strong", [
+                        _vm._v(_vm._s(attribute.attribute.names.name) + ": ")
+                      ]),
                       _vm._v(" "),
-                      !_vm.isNet
-                        ? [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(
-                                  _vm._f("currency")(
-                                    _vm.amount.priceGross,
-                                    _vm.amount.currency
-                                  )
-                                ) +
-                                "\n                                "
-                            )
-                          ]
-                        : _vm._e()
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c("item-bundle", {
-                    attrs: {
-                      "bundle-type": _vm.orderItem.bundleType,
-                      "bundle-components": _vm.orderItem.bundleComponents
-                    }
+                      _c("span", [_vm._v(_vm._s(attribute.value.names.name))])
+                    ])
                   }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "item-small-prices" },
-                    _vm._l(_vm.variation.attributes, function(attribute) {
-                      return _c("div", [
-                        _c("strong", [
-                          _vm._v(_vm._s(attribute.attribute.names.name) + ": ")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(attribute.value.names.name))])
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _vm.orderItem.orderProperties
-                    ? _c(
-                        "div",
-                        { staticClass: "item-small-prices text-muted" },
-                        _vm._l(_vm.orderItem.orderProperties, function(
-                          property
-                        ) {
-                          return _c("div", [
-                            _c("strong", [
-                              _vm._v(_vm._s(property.name) + ": ")
-                            ]),
-                            _vm._v(" "),
-                            property.type === "file"
-                              ? _c("span", [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "text-primary text-appearance",
-                                      attrs: {
-                                        href: _vm._f("fileUploadPath")(
-                                          property.value
-                                        ),
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fa fa-external-link",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(
-                                        "\n                                            " +
-                                          _vm._s(
-                                            _vm._f("fileName")(property.value)
-                                          ) +
-                                          "\n                                        "
-                                      )
-                                    ]
-                                  )
-                                ])
-                              : property.type === "selection"
-                              ? _c("span", [
-                                  _vm._v(_vm._s(property.selectionValueName))
-                                ])
-                              : !!property.type
-                              ? _c("span", [_vm._v(_vm._s(property.value))])
-                              : _vm._e()
-                          ])
-                        }),
-                        0
-                      )
-                    : _vm._e()
-                ],
-                1
-              )
-            ]),
+                  0
+                ),
+                _vm._v(" "),
+                _vm.orderItem.orderProperties
+                  ? _c(
+                      "div",
+                      { staticClass: "item-small-prices text-muted small" },
+                      _vm._l(_vm.orderItem.orderProperties, function(property) {
+                        return _c("div", [
+                          _c("strong", [_vm._v(_vm._s(property.name) + ": ")]),
+                          _vm._v(" "),
+                          property.type === "file"
+                            ? _c("span", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-primary text-appearance",
+                                    attrs: {
+                                      href: _vm._f("fileUploadPath")(
+                                        property.value
+                                      ),
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-external-link",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(
+                                          _vm._f("fileName")(property.value)
+                                        ) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : property.type === "selection"
+                            ? _c("span", [
+                                _vm._v(_vm._s(property.selectionValueName))
+                              ])
+                            : !!property.type
+                            ? _c("span", [_vm._v(_vm._s(property.value))])
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  : _vm._e()
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "basket-item-container-right ml-3" }, [
+            _c(
+              "div",
+              { staticClass: "qty-box-container" },
+              [
+                _c("quantity-input", {
+                  attrs: {
+                    value: _vm.returnCount,
+                    min: 0,
+                    max: _vm.orderItem.quantity
+                  },
+                  on: { "quantity-change": _vm.updateQuantity }
+                })
+              ],
+              1
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "basket-item-container-right" }, [
-              _c(
-                "div",
-                { staticClass: "qty-box-container" },
-                [
-                  _c("quantity-input", {
-                    attrs: {
-                      value: _vm.returnCount,
-                      min: 0,
-                      max: _vm.orderItem.quantity
+            _c("div", { staticClass: "price-box ml-2" }, [
+              _vm.isNet
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "item-total-price font-weight-bold text-right text-nowrap"
                     },
-                    on: { "quantity-change": _vm.updateQuantity }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "price-box" }, [
-                _vm.isNet
-                  ? _c("div", { staticClass: "item-total-price" }, [
+                    [
                       _vm._v(
-                        "\n                                " +
+                        "\n                            " +
                           _vm._s(
                             _vm._f("currency")(
                               _vm.orderItem.quantity * _vm.amount.priceNet,
                               _vm.amount.currency
                             )
                           ) +
-                          "\n                            "
+                          "\n                        "
                       )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.isNet
-                  ? _c("div", { staticClass: "item-total-price" }, [
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isNet
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "item-total-price font-weight-bold text-right text-nowrap"
+                    },
+                    [
                       _vm._v(
-                        "\n                                " +
+                        "\n                            " +
                           _vm._s(
                             _vm._f("currency")(
                               _vm.orderItem.quantity * _vm.amount.priceGross,
                               _vm.amount.currency
                             )
                           ) +
-                          "\n                            "
+                          "\n                        "
                       )
-                    ])
-                  : _vm._e()
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _vm.variation
-            ? _c(
-                "div",
-                { staticClass: "item-additional-information-container" },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "item-additional-information" },
-                    [
-                      _vm.isDataFieldVisible("item_id") && _vm.variation.item.id
-                        ? [
-                            _c("div", { staticClass: "mt-3" }, [
-                              _c("strong", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.basketItemId"
-                                    )
-                                  ) + ":"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("span", [
-                                _vm._v(_vm._s(_vm.variation.item.id))
-                              ])
-                            ])
-                          ]
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.isDataFieldVisible("custom_number") &&
-                      _vm.variation.variation.number
-                        ? [
-                            _c("div", [
-                              _c("strong", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.basketItemNumber"
-                                    )
-                                  ) + ":"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("span", [
-                                _vm._v(_vm._s(_vm.variation.variation.number))
-                              ])
-                            ])
-                          ]
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.isDataFieldVisible("availability") &&
-                      _vm.variation.variation.availability.names.name
-                        ? [
-                            _c("div", [
-                              _c("strong", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.basketAvailability"
-                                    )
-                                  ) + ":"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "badge",
-                                  class:
-                                    "availability_" +
-                                    _vm.variation.variation.availability.id
-                                },
-                                [
-                                  _vm._v(
-                                    "\n\t\t\t\t\t\t\t\t\t" +
-                                      _vm._s(
-                                        _vm.variation.variation.availability
-                                          .names.name
-                                      ) +
-                                      "\n\t\t\t\t\t\t\t\t"
-                                  )
-                                ]
-                              )
-                            ])
-                          ]
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.isDataFieldVisible("description_long") &&
-                      _vm.variation.texts.description
-                        ? [
-                            _c("p", {
-                              staticClass: "my-3",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.variation.texts.description
-                                )
-                              }
-                            })
-                          ]
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.isDataFieldVisible("description_short") &&
-                      _vm.variation.texts.shortDescription
-                        ? [
-                            _c("p", {
-                              staticClass: "my-3",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.variation.texts.shortDescription
-                                )
-                              }
-                            })
-                          ]
-                        : _vm._e()
-                    ],
-                    2
+                    ]
                   )
-                ]
-              )
-            : _vm._e()
-        ])
+                : _vm._e()
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.variation
+          ? _c(
+              "div",
+              { staticClass: "small" },
+              [
+                _vm.isDataFieldVisible("item_id") && _vm.variation.item.id
+                  ? [
+                      _c("div", { staticClass: "mt-3" }, [
+                        _c("strong", [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.basketItemId")
+                            ) + ":"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v(_vm._s(_vm.variation.item.id))])
+                      ])
+                    ]
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isDataFieldVisible("custom_number") &&
+                _vm.variation.variation.number
+                  ? [
+                      _c("div", [
+                        _c("strong", [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.basketItemNumber")
+                            ) + ":"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(_vm._s(_vm.variation.variation.number))
+                        ])
+                      ])
+                    ]
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isDataFieldVisible("availability") &&
+                _vm.variation.variation.availability.names.name
+                  ? [
+                      _c("div", [
+                        _c("strong", [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.basketAvailability"
+                              )
+                            ) + ":"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "badge",
+                            class:
+                              "availability_" +
+                              _vm.variation.variation.availability.id
+                          },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  _vm.variation.variation.availability.names
+                                    .name
+                                ) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isDataFieldVisible("description_long") &&
+                _vm.variation.texts.description
+                  ? [
+                      _c("p", {
+                        staticClass: "my-3",
+                        domProps: {
+                          innerHTML: _vm._s(_vm.variation.texts.description)
+                        }
+                      })
+                    ]
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isDataFieldVisible("description_short") &&
+                _vm.variation.texts.shortDescription
+                  ? [
+                      _c("p", {
+                        staticClass: "my-3",
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.variation.texts.shortDescription
+                          )
+                        }
+                      })
+                    ]
+                  : _vm._e()
+              ],
+              2
+            )
+          : _vm._e()
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

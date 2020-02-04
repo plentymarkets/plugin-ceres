@@ -20,8 +20,8 @@
         {% set shopBuilderTemplate = shop_builder_category_template(category.id, "content") %}
         {% if shopBuilderTemplate | trim is not empty %}
             {% set hasShopBuilderContent = true %}
-            <div class="page-content myaccount container-max mb-5 mt-3 pb-5">
-                <div class="row mb-5">
+            <div class="page-content myaccount container-max mt-3">
+                <div class="row">
                     <div class="col-12">
                         {{ shopBuilderTemplate | raw }}
                     </div>
@@ -35,8 +35,8 @@
         {% set overrideConfirmation = LayoutContainer.show("Ceres::OrderConfirmation.Override") %}
         {% set addContentAfterOrderDetailsRow = LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterOrderDetailsRow") %}
         {% if overrideConfirmation|trim is empty %}
-            <div class="page-content myaccount container-max mb-5 mt-3 pb-5">
-                <div class="row mb-5">
+            <div class="page-content myaccount container-max mt-3">
+                <div class="row">
                     <div class="col-12">
                         <h1 class="h2">{{ trans("Ceres::Template.orderConfirmationThanks") }}</h1>
                         <p>{{ trans("Ceres::Template.orderConfirmationWillBeProcessed") }}</p>

@@ -1,32 +1,4 @@
 .cmp-totals {
-
-
-    // .totalSum {
-    // 	clear: right;
-
-
-    // 	dt{
-    // 		width: 68%;
-    // 		float:left;
-    // 	}
-
-    // 	dd{
-    // 		float: right;
-    // 	}
-    // }
-
-    // .vatTotals {
-
-    // 	dt{
-    // 		width: 68%;
-    // 		float:left;
-    // 	}
-
-    // 	dd{
-    // 		float: right;
-    // 	}
-    // }
-
     dt,
     dd {
         display: inline-block;
@@ -48,16 +20,7 @@
 
     hr {
         @include media-breakpoint-down(xs) {
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-    }
-
-    .split-totals-height {
-        @include media-breakpoint-only(sm) {
-            // height: calc(100vh - 135px);
-            // overflow: auto;
-            // overflow-x: hidden;
+            margin: 5px 0;
         }
     }
 }

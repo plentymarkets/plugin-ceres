@@ -288,8 +288,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass:
-          "component-loading with-icon refreshing split-totals-height",
+        staticClass: "component-loading with-icon refreshing",
         class: { isLoading: _vm.isBasketLoading }
       },
       [

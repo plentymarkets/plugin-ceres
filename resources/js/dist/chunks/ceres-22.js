@@ -267,24 +267,14 @@ var render = function() {
                   }
                 },
                 [
-                  _c("i", {
-                    directives: [
-                      {
-                        name: "waiting-animation",
-                        rawName: "v-waiting-animation",
-                        value: _vm.waiting,
-                        expression: "waiting"
-                      }
-                    ],
-                    staticClass: "fa fa-gift",
-                    attrs: { "aria-hidden": "true" }
-                  }),
+                  _c("icon", { attrs: { icon: "gift", loading: _vm.waiting } }),
                   _vm._v(
                     "\n                " +
                       _vm._s(_vm.$translate("Ceres::Template.couponRedeem")) +
                       "\n            "
                   )
-                ]
+                ],
+                1
               )
             : _c(
                 "button",
@@ -301,24 +291,16 @@ var render = function() {
                   }
                 },
                 [
-                  _c("i", {
-                    directives: [
-                      {
-                        name: "waiting-animation",
-                        rawName: "v-waiting-animation",
-                        value: _vm.waiting,
-                        expression: "waiting"
-                      }
-                    ],
-                    staticClass: "fa fa-trash",
-                    attrs: { "aria-hidden": "true" }
+                  _c("icon", {
+                    attrs: { icon: "trash", loading: _vm.waiting }
                   }),
                   _vm._v(
                     "\n                " +
                       _vm._s(_vm.$translate("Ceres::Template.couponRemove")) +
                       "\n            "
                   )
-                ]
+                ],
+                1
               )
         ])
       ]

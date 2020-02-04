@@ -3386,9 +3386,28 @@ var render = function() {
                             attrs: { "data-model": "birthday" }
                           },
                           [
-                            _vm._v(
-                              '") }}" :id="\'txtBirthdate\' + _uid" :value="value.birthday" @input="emitInputEvent(\'birthday\', $event.target.value)">\n                        '
-                            ),
+                            _c("input", {
+                              attrs: {
+                                type: "date",
+                                min: "1901-12-14",
+                                max: new Date().toISOString().split("T")[0],
+                                name: "birthday",
+                                placeholder: _vm.$translate(
+                                  "Ceres::Template.addressBirthdatePlaceholder"
+                                ),
+                                id: "txtBirthdate" + _vm._uid
+                              },
+                              domProps: { value: _vm.value.birthday },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "birthday",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
                             _c(
                               "label",
                               { attrs: { for: "txtBirthdate" + _vm._uid } },
@@ -4285,9 +4304,28 @@ var render = function() {
                             attrs: { "data-model": "birthday" }
                           },
                           [
-                            _vm._v(
-                              '") }}" :id="\'txtBirthdate\' + _uid" :value="value.birthday" @input="emitInputEvent(\'birthday\', $event.target.value)">\n                        '
-                            ),
+                            _c("input", {
+                              attrs: {
+                                type: "date",
+                                min: "1901-12-14",
+                                max: new Date().toISOString().split("T")[0],
+                                name: "birthday",
+                                placeholder: _vm.$translate(
+                                  "Ceres::Template.addressBirthdatePlaceholder"
+                                ),
+                                id: "txtBirthdate" + _vm._uid
+                              },
+                              domProps: { value: _vm.value.birthday },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "birthday",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
                             _c(
                               "label",
                               { attrs: { for: "txtBirthdate" + _vm._uid } },
@@ -6954,24 +6992,17 @@ var render = function() {
               attrs: { disabled: _vm.isDisabled }
             },
             [
-              _c("i", {
-                directives: [
-                  {
-                    name: "waiting-animation",
-                    rawName: "v-waiting-animation",
-                    value: _vm.isDisabled,
-                    expression: "isDisabled"
-                  }
-                ],
-                staticClass: "fa fa-user-plus",
-                attrs: { "aria-hidden": "true" }
-              }),
               _vm._v(
-                " \n            " +
+                "\n            " +
                   _vm._s(_vm.$translate("Ceres::Template.regRegister")) +
-                  "\n        "
-              )
-            ]
+                  "\n            "
+              ),
+              _c("icon", {
+                staticClass: "default-float",
+                attrs: { icon: "user-plus", loading: _vm.isDisabled }
+              })
+            ],
+            1
           )
         ],
         2

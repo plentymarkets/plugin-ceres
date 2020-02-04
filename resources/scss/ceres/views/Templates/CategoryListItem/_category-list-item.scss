@@ -83,24 +83,6 @@
 
     .thumb-image {
         @include img-contain();
-
-        position: relative;
-        display: inline-block;
-        width: 120px;
-        min-height: auto;
-        padding-bottom: 100%;
-        vertical-align: top;
-        cursor: pointer;
-
-        > * {
-            @extend .center-xy;
-
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
     }
 
     //TODO create separate mixin
@@ -218,6 +200,7 @@
 
         .thumb-image {
             float: left;
+            width: 120px;
         }
     }
 
@@ -324,4 +307,8 @@
             }
         }
     }
+}
+
+.no-pointer-events {
+    pointer-events: none;
 }

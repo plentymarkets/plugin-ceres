@@ -762,20 +762,8 @@ var render = function() {
           }
         }
       },
-      [
-        _c("i", {
-          directives: [
-            {
-              name: "waiting-animation",
-              rawName: "v-waiting-animation",
-              value: _vm.isLoading,
-              expression: "isLoading"
-            }
-          ],
-          staticClass: "fa fa-check",
-          attrs: { "aria-hidden": "true" }
-        })
-      ]
+      [_c("icon", { attrs: { icon: "check", loading: _vm.isLoading } })],
+      1
     )
   ])
 }

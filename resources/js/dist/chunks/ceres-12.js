@@ -463,18 +463,12 @@ var render = function() {
             }
           },
           [
-            _c("i", {
-              directives: [
-                {
-                  name: "waiting-animation",
-                  rawName: "v-waiting-animation",
-                  value: _vm.waiting,
-                  expression: "waiting"
-                }
-              ],
-              staticClass: "fa fa-cart-plus fa-lg mobile-icon-right"
+            _c("icon", {
+              staticClass: "fa-lg mobile-icon-right",
+              attrs: { icon: "cart-plus", loading: _vm.waiting }
             })
-          ]
+          ],
+          1
         )
       : _vm._e(),
     _vm._v(" "),
@@ -517,8 +511,7 @@ var render = function() {
                     min: _vm.minimumQuantity,
                     max: _vm.maximumQuantity,
                     interval: _vm.intervalQuantity,
-                    "variation-id": _vm.variationId,
-                    template: "#vue-quantity-input"
+                    "variation-id": _vm.variationId
                   },
                   on: {
                     "quantity-change": _vm.updateQuantity,
@@ -575,17 +568,8 @@ var render = function() {
                     }
                   },
                   [
-                    _c("i", {
-                      directives: [
-                        {
-                          name: "waiting-animation",
-                          rawName: "v-waiting-animation",
-                          value: _vm.waiting,
-                          expression: "waiting"
-                        }
-                      ],
-                      staticClass: "fa fa-shopping-cart",
-                      attrs: { "aria-hidden": "true" }
+                    _c("icon", {
+                      attrs: { icon: "shopping-cart", loading: _vm.waiting }
                     }),
                     _vm._v(
                       "\n                " +
@@ -596,7 +580,8 @@ var render = function() {
                         ) +
                         "\n            "
                     )
-                  ]
+                  ],
+                  1
                 )
               : _c(
                   "button",
@@ -617,17 +602,8 @@ var render = function() {
                     }
                   },
                   [
-                    _c("i", {
-                      directives: [
-                        {
-                          name: "waiting-animation",
-                          rawName: "v-waiting-animation",
-                          value: _vm.waiting,
-                          expression: "waiting"
-                        }
-                      ],
-                      staticClass: "fa fa-shopping-cart",
-                      attrs: { "aria-hidden": "true" }
+                    _c("icon", {
+                      attrs: { icon: "shopping-cart", waiting: _vm.waiting }
                     }),
                     _vm._v(
                       "\n                " +
@@ -638,7 +614,8 @@ var render = function() {
                         ) +
                         "\n            "
                     )
-                  ]
+                  ],
+                  1
                 )
           ])
         ])
@@ -668,17 +645,9 @@ var render = function() {
                       }
                     },
                     [
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "waiting-animation",
-                            rawName: "v-waiting-animation",
-                            value: _vm.waiting,
-                            expression: "waiting"
-                          }
-                        ],
-                        staticClass: "fa fa-cart-plus fa-lg mobile-icon-right",
-                        attrs: { "aria-hidden": "true" }
+                      _c("icon", {
+                        staticClass: "fa-lg mobile-icon-right",
+                        attrs: { icon: "cart-plus", loading: _vm.waiting }
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "mobile-text-only" }, [
@@ -690,7 +659,8 @@ var render = function() {
                           )
                         )
                       ])
-                    ]
+                    ],
+                    1
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -751,18 +721,9 @@ var render = function() {
                       }
                     },
                     [
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "waiting-animation",
-                            rawName: "v-waiting-animation",
-                            value: _vm.waiting,
-                            expression: "waiting"
-                          }
-                        ],
-                        staticClass:
-                          "fa fa-shopping-cart fa-lg mobile-icon-right",
-                        attrs: { "aria-hidden": "true" }
+                      _c("icon", {
+                        staticClass: "fa-lg mobile-icon-right",
+                        attrs: { icon: "shopping-cart", loading: _vm.waiting }
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "mobile-text-only" }, [
@@ -774,7 +735,8 @@ var render = function() {
                           )
                         )
                       ])
-                    ]
+                    ],
+                    1
                   )
                 : _vm._e(),
               _vm._v(" "),

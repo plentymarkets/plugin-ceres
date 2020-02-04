@@ -177,24 +177,18 @@ var render = function() {
       }
     },
     [
-      _c("i", {
-        directives: [
-          {
-            name: "waiting-animation",
-            rawName: "v-waiting-animation",
-            value: _vm.isLoading,
-            expression: "isLoading"
-          }
-        ],
-        staticClass: "fa fa-heart default-float",
-        class: { "text-appearance text-danger": _vm.isVariationInWishList }
+      _c("icon", {
+        staticClass: "default-float",
+        class: { "text-appearance text-danger": _vm.isVariationInWishList },
+        attrs: { icon: "heart", loading: _vm.isLoading }
       }),
       _vm._v(
         "\n    " +
           _vm._s(_vm.$translate("Ceres::Template.singleItemWishList")) +
           "\n"
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = []

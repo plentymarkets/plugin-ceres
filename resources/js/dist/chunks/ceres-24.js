@@ -175,19 +175,9 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("i", {
-            directives: [
-              {
-                name: "waiting-animation",
-                rawName: "v-waiting-animation",
-                value: _vm.isDisabled,
-                expression: "isDisabled"
-              }
-            ],
-            staticClass: "fa fa-envelope",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
+          _c("icon", { attrs: { icon: "envelope", loading: _vm.isDisabled } })
+        ],
+        1
       )
     ]
   )

@@ -327,26 +327,21 @@ var render = function() {
                         }
                       },
                       [
-                        _c("i", {
-                          directives: [
-                            {
-                              name: "waiting-animation",
-                              rawName: "v-waiting-animation",
-                              value: _vm.isDisabled,
-                              expression: "isDisabled"
-                            }
-                          ],
-                          staticClass: "fa fa-paper-plane-o",
-                          attrs: { "aria-hidden": "true" }
-                        }),
                         _vm._v(
                           "\n\t\t\t\t\t\t\t\t" +
                             _vm._s(
                               _vm.$translate("Ceres::Template.loginSend")
                             ) +
-                            "\n\t\t\t\t\t\t\t"
-                        )
-                      ]
+                            "\n\t\t\t\t\t\t\t\t"
+                        ),
+                        _c("icon", {
+                          attrs: {
+                            icon: "paper-plane-o",
+                            loading: _vm.isDisabled
+                          }
+                        })
+                      ],
+                      1
                     )
                   ],
                   2

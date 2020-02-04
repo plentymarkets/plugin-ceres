@@ -128,7 +128,7 @@
         {% endfor %}
 
         <ul>
-            <li class="nav-item{% if isCategoryActive %} active{% endif %}">
+            <li class="nav-item{% if isCategoryActive %} active is-open{% endif %}">
                 {% if category.children is not empty and expandableChildren %}
                     <div v-sidenavigation-children="{ 
                             categoryId: {{ category.id }}, 
@@ -140,7 +140,6 @@
                             inlinePadding: {{ inlinePadding | json_encode }} }"
                          class="expand_nav{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                          {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-
                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                     </div>
                 {% endif %}
