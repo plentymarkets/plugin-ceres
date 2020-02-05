@@ -14,7 +14,14 @@ import Vuex from "vuex";
 
 const mount = Vue.prototype.$mount;
 const dataComponentElements = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"));
-const overriddenComponents = dataComponentElements.reduce(object, el => object[el.dataset.component] = el, object, {}) || {};
+const overriddenComponents = dataComponentElements.reduce(
+    (obj, el) =>
+    {
+        return {
+            ...obj,
+            [el.dataset.component]: el
+        };
+    }, {});
 
 Vue.prototype.$mount =
     // eslint-disable-next-line complexity
