@@ -141,7 +141,7 @@
                         {% endif %}
 
                         {% if enableBasketPreview %}
-                            <li class="list-inline-item control-basket position-relative">
+                            <li class="list-inline-item control-basket position-relative" v-on:mouseover.once="$root.$data.renderBasketPreview = true">
                                 <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link">
                                     {% if basketValues != "sum" %}
                                         <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
@@ -155,7 +155,7 @@
                                 </a>
 
                                 {{ Twig.if("basketPreviewType != \"right\"") }}
-                                    <basket-preview
+                                    <basket-preview v-if="renderBasketPreview"
                                         :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}"
                                         checkout-url="{{ Twig.print("urls.checkout | json_encode") }}"
                                         basket-url="{{ Twig.print("urls.basket | json_encode") }}">

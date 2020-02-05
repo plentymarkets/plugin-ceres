@@ -126,28 +126,11 @@ export default {
         })
     },
 
-    created()
-    {
-        this.$store.dispatch("loadBasketData");
-        this.$store.commit("setShowNetPrices", this.showNetPrices);
-    },
-
     /**
      * Bind to basket and bind the basket items
      */
     mounted()
     {
-        this.$nextTick(() =>
-        {
-            ApiService.listen("AfterBasketChanged",
-                data =>
-                {
-                    this.$store.commit("setBasket", data.basket);
-                    this.$store.commit("setShowNetPrices", data.showNetPrices);
-                    this.$store.commit("setWishListIds", data.basket.itemWishListIds);
-                });
-        });
-
         if (App.config.basket.addItemToBasketConfirm === "preview")
         {
             ApiService.listen("AfterBasketItemAdd", data =>

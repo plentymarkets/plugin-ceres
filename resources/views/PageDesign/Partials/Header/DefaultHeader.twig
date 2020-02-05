@@ -67,7 +67,7 @@
                                                 </wish-list-count>
                                             </li>
                                         {% endif %}
-                                        <li class="list-inline-item control-basket position-relative">
+                                        <li class="list-inline-item control-basket position-relative" v-on:mouseover.once="$root.$data.renderBasketPreview = true">
                                             <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link">
                                                 {% if config("Ceres.header.basket_values") != "sum" %}
                                                     <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
@@ -81,7 +81,7 @@
                                             </a>
 
                                             {% if config("Ceres.basket.preview_type") != "right" %}
-                                                <basket-preview 
+                                                <basket-preview v-if="renderBasketPreview"
                                                     :show-net-prices="{{ showNetPrices | json_encode }}"
                                                     checkout-url="{{ urls.checkout | json_encode }}"
                                                     basket-url="{{ urls.basket | json_encode }}">
@@ -135,7 +135,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
                     </div>
 
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {% include "Ceres::PageDesign.Partials.Header.Navigation" %}
 
                 <!-- breadcrumb -->

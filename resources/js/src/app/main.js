@@ -225,7 +225,9 @@ const showShopNotification = function(event)
 document.addEventListener("showShopNotification", showShopNotification);
 
 let headerParent = document.querySelector("[data-header-offset]");
+
 let headerLoaded = false;
+
 let allHeaderChildrenHeights = [];
 
 if ( headerParent )
@@ -237,6 +239,7 @@ if ( headerParent )
         if (headerLoaded && headerParent)
         {
             const vueApp = document.getElementById("vue-app");
+
             let bodyOffset = 0;
 
             for ( let i = 0; i < headerParent.children.length; i++ )
@@ -267,9 +270,12 @@ if ( headerParent )
         if (headerLoaded && !App.isShopBuilder)
         {
             let absolutePos = 0;
+
             let fixedElementsHeight = 0;
+
             let offset = 0;
             const scrollTop = window.pageYOffset;
+
             let zIndex = 100;
 
             for (let i = 0; i < headerParent.children.length; i++)
@@ -389,6 +395,7 @@ $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", functi
 function fixPopperZIndexes()
 {
     const elements = document.querySelectorAll(".popover.d-none");
+
     let counter = elements.length;
 
     elements.forEach(el =>

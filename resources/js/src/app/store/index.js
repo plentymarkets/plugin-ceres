@@ -85,4 +85,14 @@ ApiService.listen("LocalizationChanged",
 
 window.ceresStore = store;
 
+ApiService.listen("AfterBasketChanged",
+    data =>
+    {
+        store.commit("setBasket", data.basket);
+        store.commit("setShowNetPrices", data.showNetPrices);
+        store.commit("setWishListIds", data.basket.itemWishListIds);
+    });
+
+store.dispatch("loadBasketData");
+
 export default store;
