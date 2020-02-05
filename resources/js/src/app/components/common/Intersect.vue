@@ -31,7 +31,8 @@
             }
 
             this.observer = new IntersectionObserver((entries) => {
-                if(entries[0].intersectionRatio >= this.threshold)
+                let quasiIntersecting = Math.abs(entries[0].intersectionRatio - this.threshold) <= 0.05;
+                if(entries[0].intersectionRatio >= this.threshold || quasiIntersecting)
                 {
                     this.observer.unobserve(this.$el);
                     this.isVisible = true;
