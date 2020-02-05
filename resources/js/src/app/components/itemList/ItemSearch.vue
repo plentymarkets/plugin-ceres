@@ -1,7 +1,7 @@
 <template>
     <div class="p-2 px-lg-0">
         <div class="d-flex flex-grow-1 position-relative">
-            <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" @input="autocomplete($event.target.value)"
+            <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" @input="onValueChanged($event.target.value)"
                 @keyup.enter="search()" @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)" :autofocus="isShopBuilder">
 
             <slot name="search-button">
@@ -10,7 +10,7 @@
                 </button>
             </slot>
 
-            <slot name="autocomplete-suggestions">
+            <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
                 <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
                     <search-suggestion-items
                         :show-item-images="showItemImages"
@@ -24,10 +24,11 @@
 
 <script>
 import UrlService from "../../services/UrlService";
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, defaultValue } from "../../helper/utils";
 import { pathnameEquals } from "../../helper/url";
 import ApiService from "../../services/ApiService";
 import { mapState } from 'vuex';
+import { debounce } from '../../helper/debounce';
 
 export default {
 
@@ -43,6 +44,11 @@ export default {
         {
             type: Boolean,
             default: App.config.search.forwardToSingleItem
+        },
+        timeout:
+        {
+            type: Number,
+            default: 500
         }
     },
 
@@ -50,7 +56,16 @@ export default {
     {
         return {
             isSearchFocused: false,
+            onValueChanged: null
         };
+    },
+
+    created()
+    {
+        this.onValueChanged = debounce(searchString =>
+        {
+            this.autocomplete(searchString);
+        }, defaultValue(this.timeout, 500));
     },
 
     computed:
