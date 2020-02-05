@@ -44,7 +44,7 @@
 
 {% set showPlaceholder = isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %}
 
-<div class="widget widget-background d-flex parallax-img-container
+<div class="widget widget-background d-flex parallax-img-container overflow-hidden
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if minHeightClass | length > 0 %}{{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }} {{ minHeightClass }}{{ Twig.endif() }}{% endif %}
     {% if fullWidth %} widget-fw{% endif %}

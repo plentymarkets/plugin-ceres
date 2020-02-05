@@ -11911,8 +11911,11 @@ a.text-dark:hover, a.color-dark:hover, a.text-dark:focus, a.color-dark:focus {
   .text-context-light:hover {
     color: #fff !important; }
 
-body, body .wrapper-main {
+body {
   overflow-x: hidden; }
+
+.wrapper-main {
+  overflow: hidden; }
 
 .sb-no-animation.collapsing {
   -webkit-transition: none !important;
@@ -13284,15 +13287,6 @@ html.ie .single-carousel .owl-item img {
 html.ie .single-carousel .owl-item > div {
   text-align: center; }
 
-html.ie #thumb-carousel .owl-stage {
-  display: -webkit-box;
-  display: flex; }
-  html.ie #thumb-carousel .owl-stage .owl-item {
-    width: auto !important; }
-    html.ie #thumb-carousel .owl-stage .owl-item img {
-      width: auto;
-      margin-right: 0 !important; }
-
 .cmp-accordion .accordion-control {
   display: none; }
 
@@ -14506,10 +14500,6 @@ html.ie #thumb-carousel .owl-stage {
 
 html.ie .always-visible-search {
   min-height: 32px; }
-
-html.ie .navbar-brand img[src*="svg"] {
-  width: 100%;
-  height: 100%; }
 
 .top-bar .cmp-search-box {
   position: relative;

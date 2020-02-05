@@ -9,8 +9,8 @@
 
             <div class="text-right">
                 <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium btn-appearance" :class="buttonSizeClass">
-                    <i v-waiting-animation="isDisabled" class="fa fa-arrow-right" aria-hidden="true"></i>
                     {{ $translate("Ceres::Template.loginNext") }}
+                    <icon icon="arrow-right" :loading="isDisabled"></icon>
                 </button>
             </div>
         </form>

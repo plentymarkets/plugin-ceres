@@ -1,3 +1,11 @@
+html {
+    font-size: $font-size-root;
+}
+
+body {
+    overflow-x: hidden;
+}
+
 // additional compatibility scss to bootstrap's reboot
 dt {
     font-weight: 400;

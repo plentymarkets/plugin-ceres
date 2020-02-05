@@ -108,7 +108,7 @@
 }
 
 .owl-carousel.owl-loaded {
-    display: flex;
+    display: block;
 }
 
 .owl-carousel.owl-loading {
@@ -448,20 +448,4 @@ html.ie {
     .single-carousel .owl-item > div {
         text-align: center;
     }
-
-    // prevent wrap
-    #thumb-carousel .owl-stage {
-        display: flex;
-
-        // thumb-image takes assigned height of parent and displays optimal width
-        .owl-item {
-            width: auto !important;
-
-            img {
-                width: auto;
-                margin-right: 0 !important;
-            }
-        }
-    }
 }
-

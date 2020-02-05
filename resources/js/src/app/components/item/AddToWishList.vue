@@ -5,7 +5,7 @@
         data-placement="top"
         ref="addToWishList"
         title="">
-        <i v-waiting-animation="isLoading" class="fa fa-heart default-float" :class="{'text-appearance text-danger': isVariationInWishList}"></i>
+        <icon icon="heart" class="default-float" :class="{'text-appearance text-danger': isVariationInWishList}" :loading="isLoading"></icon>
         {{ $translate("Ceres::Template.singleItemWishList") }}
     </a>
 </template>

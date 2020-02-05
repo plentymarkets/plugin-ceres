@@ -1,22 +1,18 @@
 .cmp-product-thumb {
     width: 100%;
     padding: .8rem;
-    margin-bottom: $grid-gutter-width/2;
+    margin-bottom: $grid-gutter-width / 2;
     overflow: hidden;
-    background-color: #fff;
-
-    .tag-list span {
-        text-transform: uppercase;
-        cursor: default;
-        background-color: #4d4f4d;
-    }
+    background-color: $white;
 
     .prices {
         display: flex;
     }
 
     .crossprice {
-        font-size: 1rem;
+        font-size: .81em;
+        font-weight: 700;
+        color: $gray-500;
     }
 
     .price-view-port {
@@ -24,7 +20,12 @@
     }
 
     .thumb-title {
+        display: block;
         min-height: 32px;
+        font-weight: 700;
+        line-height: 1.1em;
+        color: $gray-600;
+        text-align: left;
     }
 
     .add-to-basket-lg-container {
@@ -36,90 +37,35 @@
         border-color: transparent #f7f7f9 transparent transparent;
         border-style: solid;
         border-width: 0 70px 70px 0;
-        transition: 300ms ease-out;
-        -webkit-transform: rotate(360deg);
+        @include transition(.3s ease-out);
 
-        & > i {
+        i {
             position: absolute;
             top: 11px;
             right: -56px;
-            transition: 300ms ease-out;
+            @include transition(.3s ease-out);
         }
 
         &:hover {
             border-color: transparent $primary transparent transparent;
 
-            & > i {
+            i {
                 color: color-yiq($primary);
             }
         }
     }
 
-    .category-list-view-port {
-        display: none;
-    }
-
-    .thumb-background {
-        position: absolute;
-        top: -1px;
-        right: -1px;
-        bottom: -2px;
-        left: -1px;
-        background-color: #fff;
-        border: 1px solid transparent;
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-
-        transition: all 200ms ease-in-out;
-        transform: scaleX(1) scaleY(1);
-
-        transform-origin: top right;
-    }
-
-    .thumb-inner {
-        position: relative;
-        height: 100%;
-        transition: all 400ms;
-    }
-
     .thumb-image {
         @include img-contain();
-
-        position: relative;
-        display: inline-block;
-        width: 120px;
-        min-height: auto;
-        padding-bottom: 100%;
-        vertical-align: top;
-        cursor: pointer;
-
-        > * {
-            @extend .center-xy;
-
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
     }
 
     //TODO create separate mixin
     .special-tags {
         position: absolute;
         top: 0;
-        right: auto;
-        bottom: auto;
         left: 0;
-        z-index: 100;
 
-        padding: .5rem;
-
-        .special-tag,
-        .tag,
         .badge {
-            display: block;
-            padding: .3em .5em .2rem;
-            margin-bottom: 5px;
             font-size: .9rem;
             font-weight: 300;
             box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
@@ -127,47 +73,14 @@
     }
 
     .thumb-content {
-        position: relative;
         display: inline-block;
-        width: calc(100% - 120px);
-        height: auto;
+        width: calc(100% - 120px); // stylelint-disable-line function-blacklist
         padding: 0 .8rem;
-        margin-left: -.3em;
         vertical-align: top;
-        background-color: #fff;
-
-        transition: all 200ms ease-in-out;
-    }
-
-    .thumb-title {
-        position: relative;
-        display: block;
-        font-weight: 700;
-        line-height: 1.1em;
-        color: $gray-600;
-        text-align: left;
-    }
-
-    .thumb-meta {
-        margin-top: .5rem;
-        text-align: left;
-
-        .vat-porto-info {
-            display: block;
-            margin-top: 5px;
-            white-space: nowrap;
-        }
-
-    }
-
-    .crossprice {
-        font-size: .81em;
-        font-weight: 700;
-        color: $gray-500;
+        background-color: $white;
     }
 
     .price {
-        min-height: 21px;
         font-size: 1.2rem;
         font-weight: 700;
         line-height: 1.1;
@@ -175,114 +88,24 @@
     }
 
     .category-unit-price {
-        font-size: .81em;
         color: $gray-500;
     }
 
-    .thumb-buy {
-        display: block;
-    }
-
     .btn-group {
-        position: absolute;
-        bottom: 0;
-        left: calc(120px + .8rem);
-        z-index: 1000;
-        opacity: 1;
-        transition: all .3s ease;
-    }
-
-    .mobile-text-only {
-        display: none;
-    }
-
-    @include media-breakpoint-up(lg) {
-        .btn-group {
-            position: absolute;
-            right: 15px;
-        }
-    }
-
-    @include media-breakpoint-down(xs) {
-        .btn-group {
-            width: 52%;
-        }
-
-        .mobile-icon-right {
-            display: none;
-        }
-
-        .vat-porto-info {
-            white-space: normal !important;
-        }
-
-        .thumb-image {
-            float: left;
-        }
-    }
-
-    @include media-breakpoint-down(md) {
-        .btn-group {
-            position: inherit;
-            width: 100%;
-            margin-top: 5px;
-        }
-
-        .mobile-text-only {
-            display: inline;
-            margin-left: -8px;
-        }
-
-        .mobile-width-button {
-            width: 100%;
-        }
-
-        .mobile-icon-right {
-            float: right;
-        }
-
-        .thumb-title {
-            min-height: 32px;
-        }
-
-        .category-list-view-port {
-            display: inline;
-        }
+        margin-top: 5px;
     }
 
     @include media-breakpoint-up(sm) {
         padding: 0;
         margin-bottom: $grid-gutter-width;
 
-        .thumb-background {
-            display: block;
-        }
-
-        .thumb-scroll-cmd {
-            flex: 0 0 auto;
-            padding: .4rem;
-            text-align: center;
-        }
-
-        .thumb-btn-buy {
-            min-height: 2rem;
-        }
-
         .thumb-content {
             width: 100%;
             padding: .8rem;
-            margin: 0;
-        }
-
-        .btn-group {
-            right: .8rem;
-            bottom: 2.5rem;
-            left: auto;
         }
 
         .thumb-title {
             font-weight: 400;
-            line-height: 1.5em;
         }
 
         .thumb-image {
@@ -290,38 +113,30 @@
         }
 
         .img-fluid {
-            transition: transform .4s cubic-bezier(0, 0, .26, 1), opacity .3s cubic-bezier(0, 0, .26, 1), -webkit-transform .3s cubic-bezier(0, 0, .26, 1);
+            @include transition(.4s cubic-bezier(0, 0, .26, 1));
         }
 
         &:hover {
-            z-index: 1000;
-
             .img-fluid {
                 transform: scale(1.05);
             }
-
-            .owl-nav [class*="owl-"] {
-                opacity: 1;
-            }
         }
     }
 
-    @include media-breakpoint-up(md){
-
-    }
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-down(md) {
         .btn-group {
-            bottom: .8rem;
-        }
-        .btn-group {
-            opacity: 0;
-            transition: all .3s ease;
-        }
-        &:hover {
-            .btn-group {
-                opacity: 1;
-                transition: all .3s ease;
-            }
+            width: 100%;
         }
     }
+
+    @include media-breakpoint-down(xs) {
+        .thumb-image {
+            float: left;
+            width: 120px;
+        }
+    }
+}
+
+.no-pointer-events {
+    pointer-events: none;
 }

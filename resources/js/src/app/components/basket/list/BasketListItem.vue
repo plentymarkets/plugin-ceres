@@ -1,11 +1,11 @@
 <template>
-    <div class="basket-item-container basket-list-item">
+    <div class="basket-list-item py-3">
         <slot name="before-basket-item"></slot>
 
-        <div class="basket-item component-loading with-icon" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
+        <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
             <div class="image-container">
                 <lazy-img
-                    class="img-basket-small"
+                    class="d-block mw-100 mh-100"
                     v-if="image"
                     :image-url="image"
                     :alt="altText"
@@ -16,12 +16,12 @@
             <div class="meta-container-wrapper">
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
-                        <div>
-                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance">
+                        <div class="position-relative w-100">
+                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance small font-weight-bold text-break">
                                 {{ basketItem.variation.data | itemName }}
                             </a>
 
-                            <div class="item-base-price">
+                            <div class="item-base-price small">
                                 {{ unitPrice | currency }}
                             </div>
 
@@ -30,7 +30,7 @@
                                     :bundle-components="basketItem.variation.data.bundleComponents">
                             </item-bundle>
 
-                            <div class="item-small-prices text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
+                            <div class="text-muted small" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
                                 <div>
                                     {{ basePrice }}
                                 </div>
@@ -40,21 +40,21 @@
                                 </div>
                             </div>
 
-                            <div class="item-small-prices" v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
+                            <div class="small" v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
                                 <div>
                                     <strong>{{ $translate("Ceres::Template.itemInput") }} {{ basketItem | inputUnit(true)}}: </strong>
                                     {{ basketItem | inputUnit}}
                                 </div>
                             </div>
 
-                            <div class="item-small-prices">
+                            <div class="small">
                                 <div v-for="attribute in basketItem.variation.data.attributes">
                                     <strong>{{ attribute.attribute.names.name }}: </strong>
                                     <span>{{ attribute.value.names.name }}</span>
                                 </div>
                             </div>
 
-                                <div class="item-small-prices text-muted">
+                                <div class="text-muted small">
                                     <template v-for="propertyGroup in transformedVariationProperties">
                                         <div v-for="property in propertyGroup.properties">
                                             <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
@@ -72,7 +72,6 @@
                     <div class="basket-item-container-right">
                         <div class="qty-box-container">
                             <quantity-input
-                                    template="#vue-quantity-input"
                                     @quantity-change="updateQuantity"
                                     :value="basketItem.quantity"
                                     :waiting="isInputLocked || isCheckoutReadonly"
@@ -82,26 +81,22 @@
                             </quantity-input>
                         </div>
 
-                        <div class="price-box">
-                            <div class="item-total-price">{{ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
+                        <div class="price-box text-right ml-2 mt-1">
+                            <div class="item-total-price font-weight-bold text-nowrap">{{ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
 
-                            <div class="item-remove-container">
-                                <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
-                                    <span>
-                                        {{ $translate("Ceres::Template.basketDelete") }}
-                                        <i v-waiting-animation="waitingForDelete" class="fa fa-trash-o" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            <button class="btn btn-sm text-danger p-0" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
+                                {{ $translate("Ceres::Template.basketDelete") }}
+                                <icon icon="trash-o" class="default-float" :loading="waitingForDelete"></icon>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="item-properties" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
-                    <div class="item-properties-header">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
+                <div class="small" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
+                    <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
                     <ul class="ml-3">
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
-                            <span class="item-property-value">
+                            <span class="d-block text-truncate">
                                 <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</strong>
                                 <span>
                                     <order-property-value :property="property"></order-property-value>
@@ -111,40 +106,36 @@
                     </ul>
                 </div>
 
-                <template>
-                    <div class="item-additional-information-container">
-                        <div class="item-additional-information" v-if="showMoreInformation">
-                            <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.variation.data.item.id">
-                                <div class="mt-3">
-                                    <strong>{{ $translate("Ceres::Template.basketItemId") }}:</strong>
-                                    <span>{{ basketItem.variation.data.item.id }}</span>
-                                </div>
-                            </template>
-
-                            <template v-if="isDataFieldVisible('basket.item.customNumber')">
-                                <div v-if="basketItem.variation.data.variation.number">
-                                    <strong>{{ $translate("Ceres::Template.basketItemNumber") }}:</strong>
-                                    <span>{{ basketItem.variation.data.variation.number }}</span>
-                                </div>
-                            </template>
-
-                            <template v-if="isDataFieldVisible('basket.item.availability')">
-                                <div v-if="basketItem.variation.data.variation.availability.names.name">
-                                    <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
-                                    <span>{{ basketItem.variation.data.variation.availability.names.name }}</span>
-                                </div>
-                            </template>
-
-                            <template v-if="isDataFieldVisible('basket.item.description_long')">
-                                <p class="my-3" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.description"></p>
-                            </template>
-
-                            <template v-if="isDataFieldVisible('basket.item.description_short')">
-                                <p class="my-3" v-if="basketItem.variation.data.texts.shortDescription" v-html="basketItem.variation.data.texts.shortDescription"></p>
-                            </template>
+                <div class="small" v-if="showMoreInformation">
+                    <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.variation.data.item.id">
+                        <div class="mt-3">
+                            <strong>{{ $translate("Ceres::Template.basketItemId") }}:</strong>
+                            <span>{{ basketItem.variation.data.item.id }}</span>
                         </div>
-                    </div>
-                </template>
+                    </template>
+
+                    <template v-if="isDataFieldVisible('basket.item.customNumber')">
+                        <div v-if="basketItem.variation.data.variation.number">
+                            <strong>{{ $translate("Ceres::Template.basketItemNumber") }}:</strong>
+                            <span>{{ basketItem.variation.data.variation.number }}</span>
+                        </div>
+                    </template>
+
+                    <template v-if="isDataFieldVisible('basket.item.availability')">
+                        <div v-if="basketItem.variation.data.variation.availability.names.name">
+                            <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
+                            <span>{{ basketItem.variation.data.variation.availability.names.name }}</span>
+                        </div>
+                    </template>
+
+                    <template v-if="isDataFieldVisible('basket.item.description_long')">
+                        <p class="my-3" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.description"></p>
+                    </template>
+
+                    <template v-if="isDataFieldVisible('basket.item.description_short')">
+                        <p class="my-3" v-if="basketItem.variation.data.texts.shortDescription" v-html="basketItem.variation.data.texts.shortDescription"></p>
+                    </template>
+                </div>
 
                 <label v-if="isMoreButtonVisible"
                     class="btn-collapse"

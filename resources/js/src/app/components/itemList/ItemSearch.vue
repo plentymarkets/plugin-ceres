@@ -1,6 +1,6 @@
 <template>
-    <div class="search-box-inner w-100">
-        <div class="search-box-shadow-frame d-flex flex-grow-1 position-relative">
+    <div class="container-max">
+        <div class="d-flex flex-grow-1 position-relative my-2">
             <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" @input="autocomplete($event.target.value)"
                 @keyup.enter="prepareSearch()" @keyup.down="keydown()" @keyup.up="keyup()"
                 @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)"
@@ -10,10 +10,10 @@
                 <i class="fa fa-search"></i>
             </button>
 
-            <div class="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
-                <div class="autocomplete-suggestion" v-for="(item, index) in autocompleteResult" :key="index" @mousedown="selectAutocompleteItem(item)" :class="{ 'autocomplete-selected': selectedAutocompleteIndex === index }">
-                    <div class="autocomplete-image-container" v-if="showItemImages">
-                        <img class="autocomplete-image" :src="item.img">
+            <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
+                <div class="autocomplete-suggestion px-3 py-2" v-for="(item, index) in autocompleteResult" :key="index" @mousedown="selectAutocompleteItem(item)" :class="{ 'autocomplete-selected': selectedAutocompleteIndex === index }">
+                    <div class="autocomplete-image-container mr-2" v-if="showItemImages">
+                        <img class="autocomplete-image mw-100" :src="item.img">
                     </div>
                     <div class="autocomplete-item-name" v-html="item.displayName"></div>
                 </div>

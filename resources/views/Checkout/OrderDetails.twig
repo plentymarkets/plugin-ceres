@@ -75,42 +75,44 @@
 
                 <hr>
 
-                <div>
-                    <div class="row">
-                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>
-                        <span class="col-6 col-sm-7" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</span>
+                {% if orderData.order.typeId == 1 %}
+                    <div>
+                        <div class="row">
+                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>
+                            <span class="col-6 col-sm-7" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</span>
+                        </div>
+                        <div class="row">
+                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentStatus") }}</strong>
+                            {% set paymentMethodId = -1 %}
+                            {% for propertyKey in orderData.order.properties %}
+                                {% if orderData.order.properties[loop.index0].typeId == 4 %}
+                                    {% set paymentStatus = entry.order.properties[loop.index0].value %}
+                                    <span class="col-6 col-sm-7" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderConfirmationPaymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
+                                {% elseif orderData.order.properties[loop.index0].typeId == 3 %}
+                                    {% set paymentMethodId = orderData.order.properties[loop.index0].value %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        {% set currentTemplate = services.template.getCurrentTemplate() %}
+
+                        {% if paymentMethodId != -1 and showAdditionalPaymentInformation == true %}
+                            <change-payment-method
+                                :current-order="{{ orderData.order | json_encode() }}"
+                                :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
+                                :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
+                                :payment-status="{{ paymentStatus | json_encode() }}"
+                                :current-payment-method-name="{{ orderData.paymentMethodName | json_encode() }}"
+                                :current-template="{{ currentTemplate | json_encode() }}">
+                            </change-payment-method>
+                        {% endif %}
+
+                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", orderData.order) }}
+
                     </div>
-                    <div class="row">
-                        <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentStatus") }}</strong>
-                        {% set paymentMethodId = -1 %}
-                        {% for propertyKey in orderData.order.properties %}
-                            {% if orderData.order.properties[loop.index0].typeId == 4 %}
-                                {% set paymentStatus = entry.order.properties[loop.index0].value %}
-                                <span class="col-6 col-sm-7" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.orderConfirmationPaymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
-                            {% elseif orderData.order.properties[loop.index0].typeId == 3 %}
-                                {% set paymentMethodId = orderData.order.properties[loop.index0].value %}
-                            {% endif %}
-                        {% endfor %}
-                    </div>
 
-                    {% set currentTemplate = services.template.getCurrentTemplate() %}
-
-                    {% if paymentMethodId != -1 and showAdditionalPaymentInformation == true %}
-                        <change-payment-method
-                            :current-order="{{ orderData.order | json_encode() }}"
-                            :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
-                            :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
-                            :payment-status="{{ paymentStatus | json_encode() }}"
-                            :current-payment-method-name="{{ orderData.paymentMethodName | json_encode() }}"
-                            :current-template="{{ currentTemplate | json_encode() }}">
-                        </change-payment-method>
-                    {% endif %}
-
-                    {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", orderData.order) }}
-
-                </div>
-
-                <hr>
+                    <hr>
+                {% endif %}
 
                 <div>
                     <div class="row">
@@ -158,7 +160,7 @@
                             </a>
 
                             {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
-                                <div class="mb-3 item-bundle">
+                                <div class="item-bundle small font-weight-bold mb-3">
                                     {% for bundleComponent in item.bundleComponents %}
                                         <div>
                                             <span class="text-muted">{{ bundleComponent.quantity }} x</span>

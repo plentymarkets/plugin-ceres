@@ -19,7 +19,6 @@
 @import "common/modal"; // TODO: This would better fit into /components
 @import "common/proportional-boxes";
 @import "common/reboot";
-@import "common/structure";
 
 // External plugins overrides
 @import "plugins/owl-carousel";
@@ -42,20 +41,13 @@
 // Page Design / Global components
 @import "views/PageDesign/footer";
 @import "views/PageDesign/header";
-@import "views/PageDesign/language-select";
-@import "views/PageDesign/navigation";
-@import "views/PageDesign/search-box";
-@import "views/PageDesign/top-bar";
 
 // Templates
-@import "views/Templates/BasketItemList/basket-item";
 @import "views/Templates/BasketItemList/basket-list-item";
-@import "views/Templates/BasketPreview/basket-preview-hover";
 @import "views/Templates/BasketPreview/basket-preview";
 @import "views/Templates/BasketTotalSum/basket-total-sum";
 @import "views/Templates/CategoryListItem/category-list-item";
 @import "views/Templates/Item/quantity-input";
-@import "views/Templates/ItemListSort/pagination";
 
 // Pages
 @import "views/Category/category-list";
