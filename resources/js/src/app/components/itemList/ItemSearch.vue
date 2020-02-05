@@ -1,7 +1,7 @@
 <template>
     <div class="p-2 px-lg-0">
         <div class="d-flex flex-grow-1 position-relative">
-            <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" @input="onValueChanged($event.target.value)"
+            <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" v-model="searchString" @input="onValueChanged($event.target.value)"
                 @keyup.enter="search()" @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)" :autofocus="isShopBuilder">
 
             <slot name="search-button">
@@ -56,7 +56,8 @@ export default {
     {
         return {
             isSearchFocused: false,
-            onValueChanged: null
+            onValueChanged: null,
+            searchString: ""
         };
     },
 
@@ -76,7 +77,8 @@ export default {
         },
 
         ...mapState({
-            autocompleteResult: state => state.itemSearch.autocompleteResult
+            autocompleteResult: state => state.itemSearch.autocompleteResult,
+            moduleSearchString: state => state.itemList.searchString
         })
     },
 
@@ -114,21 +116,6 @@ export default {
             }
         },
 
-        // selectAutocompleteItem(item)
-        // {
-        //     if (this.forwardToSingleItem)
-        //     {
-        //         window.open(item.url, "_self", false);
-        //     }
-        //     else
-        //     {
-        //         this.$refs.searchInput.value = item.name;
-        //         this.$store.commit("setItemListSearchString", this.$refs.searchInput.value);
-
-        //         this.search();
-        //     }
-        // },
-
         // hide autocomplete after 100ms to make clicking on it possible
         setIsSearchFocused(value)
         {
@@ -137,6 +124,18 @@ export default {
                 this.isSearchFocused = !!value;
             }, 100);
         }
+    },
+
+    watch:
+    {
+        // set the current search string, after clicking on a suggestion
+        moduleSearchString(newVal)
+        {
+            if (newVal && newVal.length)
+            {
+                this.searchString = newVal;
+            }
+        }        
     }
 }
 </script>
