@@ -40,7 +40,7 @@
                         </category-item>
                         <template #loading>
                             <div class="category-item-placeholder w-100 invisible">
-                                <a href="#" class="small">
+                                <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
                                     <i class="fa fa-image"></i>
                                     <span>{{ Twig.print("item.data | itemName") }}</span>
                                 </a>
