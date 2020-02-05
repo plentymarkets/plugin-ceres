@@ -9,16 +9,16 @@
                     <i class="fa fa-search"></i>
                 </button>
             </slot>
-
-            <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
-                <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
-                    <search-suggestion-items
-                        :show-item-images="showItemImages"
-                        :forward-to-single-item="forwardToSingleItem">
-                    </search-suggestion-items>
-                </div>
-            </slot>
         </div>
+
+        <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
+            <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
+                <search-suggestion-items
+                    :show-item-images="showItemImages"
+                    :forward-to-single-item="forwardToSingleItem">
+                </search-suggestion-items>
+            </div>
+        </slot>
     </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
     data()
     {
         return {
-            isSearchFocused: false,
+            isSearchFocused: App.isShopBuilder,
             onValueChanged: null,
             searchString: ""
         };
