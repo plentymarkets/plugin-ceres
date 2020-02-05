@@ -11,6 +11,23 @@
     &.fixed-top {
         position: fixed;
     }
+
+    .collapse {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: $zindex-7;
+        width: 100%;
+        background-color: $gray-900;
+
+        &.collapsing {
+            overflow: hidden;
+        }
+    }
+
+    .cmp-search-box {
+        background-color: $top-bar-bg;
+    }
 }
 
 .controls-list {
@@ -135,18 +152,7 @@
 
 // Currency & Country Select
 .cmp-country-settings,
-.cmp-currency-select,
-.cmp-search-box {
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: $zindex-7;
-    width: 100%;
-    background-color: $gray-900;
-
-    &.collapsing {
-        overflow: hidden;
-    }
+.cmp-currency-select {
 
     .shipping-settings {
         @include media-breakpoint-down(md) {
@@ -189,10 +195,6 @@
 }
 
 // Searchbar
-.cmp-search-box {
-    background-color: $top-bar-bg;
-}
-
 .autocomplete-suggestions {
     position: absolute;
     top: 100%;
@@ -266,8 +268,6 @@
     }
 }
 
-html.ie { // stylelint-disable-line selector-no-qualifying-type
-    .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
-        min-height: 32px;
-    }
+html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
+    min-height: 32px;
 }
