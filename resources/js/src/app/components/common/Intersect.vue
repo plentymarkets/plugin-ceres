@@ -39,7 +39,7 @@
             }, {
                 root: null,
                 rootMargin: this.margin,
-                threshold: 0.1
+                threshold: this.threshold
             });
         },
 
