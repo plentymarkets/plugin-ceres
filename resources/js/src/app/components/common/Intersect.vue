@@ -1,4 +1,6 @@
 <script>
+    const FEATURE_ENABLED = 'IntersectionObserver' in window;
+
     export default {
         props:
         {
@@ -22,9 +24,7 @@
 
         created()
         {
-            this.featureEnabled = 'IntersectionObserver' in window;
-
-            if(!this.featureEnabled)
+            if(!FEATURE_ENABLED)
             {
                 this.isVisible = true;
                 return;
@@ -45,7 +45,7 @@
 
         mounted()
         {
-            if(this.featureEnabled)
+            if(FEATURE_ENABLED)
             {
                 this.$nextTick(() => {
                     this.mayObserve = true;
@@ -56,7 +56,7 @@
 
         updated()
         {
-            if(this.featureEnabled && this.mayObserve)
+            if(FEATURE_ENABLED && this.mayObserve)
             {
                 this.mayObserve = false;
                 this.observer.observe(this.$el);
@@ -65,7 +65,7 @@
 
         destroyed()
         {
-            if(this.featureEnabled)
+            if(FEATURE_ENABLED)
             {
                 this.observer.disconnect();
             }
