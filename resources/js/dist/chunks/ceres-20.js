@@ -281,9 +281,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.basket.isBasketItemQuantityUpdate;
     }
   })),
-  created: function created() {// this.$store.dispatch("loadBasketData");
-    // this.$store.commit("setShowNetPrices", this.showNetPrices);
-  },
 
   /**
    * Bind to basket and bind the basket items
@@ -291,16 +288,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     var _this = this;
 
-    /*this.$nextTick(() =>
-    {
-        ApiService.listen("AfterBasketChanged",
-            data =>
-            {
-                this.$store.commit("setBasket", data.basket);
-                this.$store.commit("setShowNetPrices", data.showNetPrices);
-                this.$store.commit("setWishListIds", data.basket.itemWishListIds);
-            });
-    });*/
     if (App.config.basket.addItemToBasketConfirm === "preview") {
       _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].listen("AfterBasketItemAdd", function (data) {
         _this.show();

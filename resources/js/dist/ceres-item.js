@@ -4,7 +4,7 @@
 /******/ 		var chunkIds = data[0];
 /******/ 		var moreModules = data[1];
 /******/
-/******/ 		var prefetchChunks = data[3] || [];
+/******/
 /******/ 		// add "moreModules" to the modules object,
 /******/ 		// then flag all "chunkIds" as loaded and fire callback
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
@@ -21,21 +21,7 @@
 /******/ 			}
 /******/ 		}
 /******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
-/******/ 		// chunk prefetching for javascript
-/******/ 		prefetchChunks.forEach(function(chunkId) {
-/******/ 			if(installedChunks[chunkId] === undefined) {
-/******/ 				installedChunks[chunkId] = null;
-/******/ 				var link = document.createElement('link');
 /******/
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					link.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				link.rel = "prefetch";
-/******/ 				link.as = "script";
-/******/ 				link.href = jsonpScriptSrc(chunkId);
-/******/ 				document.head.appendChild(link);
-/******/ 			}
-/******/ 		});
 /******/ 		while(resolves.length) {
 /******/ 			resolves.shift()();
 /******/ 		}
@@ -196,7 +182,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/documents/plugins/Ceres/resources/js/dist/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -209,16 +195,92 @@
 /******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
-/******/ 	var startupResult = (function() {
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = "./resources/js/src/item.js");
-/******/ 	})();
-/******/
-/******/ 	webpackJsonpCallback([[], {}, 0, [6,31,0,32,2,10,28,29]]);
-/******/ 	return startupResult;
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/Intersect.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/common/Intersect.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
+
+var FEATURE_ENABLED = 'IntersectionObserver' in window;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    threshold: {
+      type: Number,
+      default: 0.1
+    },
+    margin: {
+      type: String,
+      default: "0px"
+    }
+  },
+  data: function data() {
+    return {
+      isVisible: false,
+      mayObserve: false
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    if (!FEATURE_ENABLED) {
+      this.isVisible = true;
+      return;
+    }
+
+    this.observer = new IntersectionObserver(function (entries) {
+      if (entries[0].intersectionRatio >= _this.threshold) {
+        _this.observer.unobserve(_this.$el);
+
+        _this.isVisible = true;
+      }
+    }, {
+      root: null,
+      rootMargin: this.margin,
+      threshold: this.threshold
+    });
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    if (FEATURE_ENABLED) {
+      this.$nextTick(function () {
+        _this2.mayObserve = true;
+      });
+    }
+  },
+  updated: function updated() {
+    if (FEATURE_ENABLED && this.mayObserve) {
+      this.mayObserve = false;
+      this.observer.observe(this.$el);
+    }
+  },
+  destroyed: function destroyed() {
+    if (FEATURE_ENABLED) {
+      this.observer.disconnect();
+    }
+  },
+  render: function render() {
+    if (this.isVisible) {
+      return this.$slots.default ? this.$slots.default : null;
+    } else {
+      return this.$slots.loading ? this.$slots.loading : null;
+    }
+  }
+});
+
+/***/ }),
 
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/LazyImg.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
@@ -260,81 +322,6 @@ __webpack_require__.r(__webpack_exports__);
 
         lozad__WEBPACK_IMPORTED_MODULE_0___default()(_this2.$el).triggerLoad(_this2.$el);
       });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/LazyMountIntersect.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/common/LazyMountIntersect.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    threshold: {
-      type: Number,
-      default: 0.1
-    }
-  },
-  data: function data() {
-    return {
-      isVisible: false,
-      loadingRendered: false
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    this.featureEnabled = 'IntersectionObserver' in window;
-
-    if (!this.featureEnabled) {
-      this.isVisible = true;
-      return;
-    }
-
-    this.observer = new IntersectionObserver(function (entries) {
-      if (entries[0].intersectionRatio >= _this.threshold && _this.loadingRendered) {
-        _this.observer.unobserve(_this.$el);
-
-        _this.isVisible = true;
-      }
-    }, {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    });
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    if (this.featureEnabled) {
-      this.$nextTick(function () {
-        setTimeout(function () {
-          _this2.observer.observe(_this2.$el);
-        }, 100);
-      });
-    }
-  },
-  destroyed: function destroyed() {
-    if (this.featureEnabled) {
-      this.observer.disconnect();
-    }
-  },
-  render: function render() {
-    if (this.isVisible) {
-      return this.$slots.default ? this.$slots.default : null;
-    } else {
-      this.loadingRendered = true;
-      return this.$slots.loading;
     }
   }
 });
@@ -46306,6 +46293,56 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/src/app/components/common/Intersect.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/src/app/components/common/Intersect.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Intersect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Intersect.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/common/Intersect.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _Intersect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/app/components/common/Intersect.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/common/Intersect.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/src/app/components/common/Intersect.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Intersect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Intersect.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/Intersect.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Intersect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/src/app/components/common/LazyImg.vue":
 /*!************************************************************!*\
   !*** ./resources/js/src/app/components/common/LazyImg.vue ***!
@@ -46372,56 +46409,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LazyImg_vue_vue_type_template_id_48a7661d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/common/LazyMountIntersect.vue":
-/*!***********************************************************************!*\
-  !*** ./resources/js/src/app/components/common/LazyMountIntersect.vue ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _LazyMountIntersect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LazyMountIntersect.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/common/LazyMountIntersect.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  _LazyMountIntersect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/common/LazyMountIntersect.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/common/LazyMountIntersect.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/src/app/components/common/LazyMountIntersect.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LazyMountIntersect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LazyMountIntersect.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/LazyMountIntersect.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LazyMountIntersect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -55812,7 +55799,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _app_components_common_LazyImg_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/components/common/LazyImg.vue */ "./resources/js/src/app/components/common/LazyImg.vue");
-/* harmony import */ var _app_components_common_LazyMountIntersect_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/components/common/LazyMountIntersect.vue */ "./resources/js/src/app/components/common/LazyMountIntersect.vue");
+/* harmony import */ var _app_components_common_Intersect_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/components/common/Intersect.vue */ "./resources/js/src/app/components/common/Intersect.vue");
 /* harmony import */ var _app_components_customer_ReCaptcha_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/components/customer/ReCaptcha.vue */ "./resources/js/src/app/components/customer/ReCaptcha.vue");
 /* harmony import */ var _app_components_customer_login_UserLoginHandler_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/components/customer/login/UserLoginHandler.vue */ "./resources/js/src/app/components/customer/login/UserLoginHandler.vue");
 /* harmony import */ var _app_components_itemList_ItemSearch_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/components/itemList/ItemSearch.vue */ "./resources/js/src/app/components/itemList/ItemSearch.vue");
@@ -55926,7 +55913,7 @@ vue__WEBPACK_IMPORTED_MODULE_5___default.a.component("google-maps-widget", funct
 
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component("lazy-img", _app_components_common_LazyImg_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
-vue__WEBPACK_IMPORTED_MODULE_5___default.a.component("lazy-mount-intersect", _app_components_common_LazyMountIntersect_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.component("intersect", _app_components_common_Intersect_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_5___default.a.component("tab-list", function () {
   return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./app/components/common/TabList.vue */ "./resources/js/src/app/components/common/TabList.vue"));
 });
