@@ -12,23 +12,23 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 const mount = Vue.prototype.$mount;
-const overriddenComponents = [].slice.call(document.querySelectorAll("[data-component]"));
+const dataComponentElements = [].slice.call(document.querySelectorAll("[data-component]"));
+const overriddenComponents = dataComponentElements.reduce(object, el => object[el.dataset.component] = el, object, {}) || {};
 
 Vue.prototype.$mount =
     // eslint-disable-next-line complexity
     function(el, hydrating)
     {
-        const templateOverride = this.$props.templateOverride || App.componentsOverride[this.$options._componentTag];
+        let compHtml = null;
+        const templateOverride = this.$props.templateOverride;
 
         if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
         {
             compHtml = document.querySelector(templateOverride).innerHTML;
         }
-        else if (overriddenComponents.some((comp) => comp.dataset.component === this.$options._componentTag))
+        else if (overriddenComponents && overriddenComponents[this.$options._componentTag])
         {
-            const comp = overriddenComponents.find((comp) => comp.dataset.component === this.$options._componentTag);
-
-            compHtml = comp.innerHTML;
+            compHtml = overriddenComponents[this.$options._componentTag].innerHTML;
         }
 
         if (compHtml)
