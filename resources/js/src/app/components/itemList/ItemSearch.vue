@@ -19,16 +19,6 @@
                 </div>
             </slot>
         </div>
-
-        <slot name="autocomplete-suggestions">
-            <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
-                <search-suggestion-items
-                    :show-item-images="showItemImages"
-                    :forward-to-single-item="forwardToSingleItem">
-                </search-suggestion-items>
-            </div>
-        </slot>
-
     </div>
 </template>
 
