@@ -13,19 +13,29 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 const mount = Vue.prototype.$mount;
+const dataComponentElements = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"));
+const overriddenComponents = dataComponentElements.reduce(
+    (obj, el) =>
+    {
+        return {
+            ...obj,
+            [el.dataset.component]: el
+        };
+    }, {});
 
 Vue.prototype.$mount =
     function(el, hydrating)
     {
-        let compHtml = "";
+        let compHtml = null;
+        const templateOverride = this.$props.templateOverride;
 
         if (this.$props.templateOverride)
         {
             compHtml = document.querySelector(templateOverride).innerHTML;
         }
-        else if (App.componentsOverride[this.$options._componentTag])
+        else if (overriddenComponents && overriddenComponents[this.$options._componentTag])
         {
-            compHtml = document.querySelector([`data-component=${this.$options._componentTag}`]).innerHTML;
+            compHtml = overriddenComponents[this.$options._componentTag].innerHTML;
         }
 
         if (compHtml)
