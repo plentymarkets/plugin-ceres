@@ -37695,7 +37695,7 @@ var render = function() {
           _c(
             "a",
             {
-              staticClass: "dropdown-toggle",
+              staticClass: "dropdown-toggle nav-link",
               attrs: {
                 href: "#",
                 id: "accountMenuList",
@@ -37772,6 +37772,7 @@ var render = function() {
           _c(
             "a",
             {
+              staticClass: "nav-link",
               attrs: {
                 href: _vm.isLogin ? "javascript:void(0)" : "#login",
                 "data-toggle": _vm.isLogin ? false : "modal"
@@ -37801,6 +37802,7 @@ var render = function() {
             ? _c(
                 "a",
                 {
+                  staticClass: "nav-link",
                   attrs: {
                     href: _vm.isRegister
                       ? "javascript:void(0)"
@@ -38415,20 +38417,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { attrs: { href: _vm.urlWishList, rel: "nofollow" } }, [
-    _c("span", { staticClass: "badge-right mr-1 d-none d-sm-inline" }, [
-      _vm._v(_vm._s(_vm.wishListCount))
-    ]),
-    _vm._v(" "),
-    _c("i", {
-      staticClass: "fa",
-      class: {
-        "fa-heart-o": !_vm.wishListCount,
-        "fa-heart": _vm.wishListCount
-      },
-      attrs: { "aria-hidden": "true" }
-    })
-  ])
+  return _c(
+    "a",
+    {
+      staticClass: "nav-link",
+      attrs: { href: _vm.urlWishList, rel: "nofollow" }
+    },
+    [
+      _c("span", { staticClass: "badge-right mr-1 d-none d-sm-inline" }, [
+        _vm._v(_vm._s(_vm.wishListCount))
+      ]),
+      _vm._v(" "),
+      _c("i", {
+        staticClass: "fa",
+        class: {
+          "fa-heart-o": !_vm.wishListCount,
+          "fa-heart": _vm.wishListCount
+        },
+        attrs: { "aria-hidden": "true" }
+      })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -56429,14 +56438,9 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("toggle-basket-preview", {
   bind: function bind(el) {
     el.addEventListener("click", function (event) {
-      var vueApp = document.querySelector("#vue-app");
-
-      if (vueApp) {
-        var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-        vueApp.classList.toggle(basketOpenClass || "open-hover");
-        event.preventDefault();
-        event.stopPropagation();
-      }
+      document.body.classList.toggle("basket-open");
+      event.preventDefault();
+      event.stopPropagation();
     });
   }
 });
@@ -59818,15 +59822,6 @@ function CeresMain() {
   var $toggleListView = $(".toggle-list-view");
   var $mainNavbarCollapse = $("#mainNavbarCollapse");
   $(document).on("click", function (evt) {
-    var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-
-    if ($("#vue-app").hasClass(basketOpenClass)) {
-      if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
-        evt.preventDefault();
-        $("#vue-app").toggleClass(basketOpenClass || "open-hover");
-      }
-    }
-
     headerCollapses.forEach(function (element) {
       if (evt.target !== element && $(evt.target).parents(element).length <= 0) {
         $(element).collapse("hide");

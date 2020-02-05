@@ -65,58 +65,6 @@
 
     {% block PartialFooter %}{% endblock %}
 
-    {% if ceresConfig.basket.previewType == "right" %}
-    <div class="wrapper wrapper-right position-fixed bg-white overflow-hidden">
-        <basket-preview :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}" v-if="renderBasketPreview">
-            <template #before-basket-item>
-                {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
-            </template>
-            <template #loading-animation>
-                {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-            </template>
-            <template #after-basket-item>
-                {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
-            </template>
-            <template #before-basket-totals>
-                {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
-            </template>
-            <template #before-item-sum>
-                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
-            </template>
-            <template #after-item-sum>
-                {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
-            </template>
-            <template #before-shipping-costs>
-                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
-            </template>
-            <template #after-shipping-costs>
-                {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
-            </template>
-            <template #before-total-sum>
-                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
-            </template>
-            <template #before-vat>
-                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
-            </template>
-            <template #after-vat>
-                {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
-            </template>
-            <template #after-total-sum>
-                {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
-            </template>
-            <template #after-basket-totals>
-                {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
-            </template>
-            <template #before-checkout-button>
-                {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
-            </template>
-            <template #after-checkout-button>
-                {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
-            </template>
-        </basket-preview>
-    </div>
-    {% endif %}
-
     <!-- LOGIN MODAL -->
     <div id="login-modal-wrapper">
         <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">

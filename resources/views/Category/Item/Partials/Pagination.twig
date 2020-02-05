@@ -35,16 +35,16 @@
 
 {% set isFirstLastPagePossible = pageMax > (pageLimit * 2 + 1) %}
 
-<nav class="cmp cmp-paginator text-center">
+<nav>
     {% if pageMax > 1 %}
-        <ul class="pagination col-12 m-y-0 widget-alignment">
+        <ul class="pagination widget-alignment">
 
             <!-- FIRST PAGE LINK -->
             {% if showFirstPage and isFirstLastPagePossible and currentPage > pageLimit + 1 and currentPage != 2 %}
                 <li class="page-item">
                     <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
-                        {% if not isPreview %}href="{{ baseURL ~ queryString({ 'page': null }) }}"{% endif %}>
+                        {% if not isPreview %} href="{{ baseURL ~ queryString({ 'page': null }) }}"{% endif %}>
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 </li>

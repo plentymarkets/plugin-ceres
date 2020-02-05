@@ -568,7 +568,7 @@ var render = function() {
     !_vm.isBasketInitiallyLoaded
       ? _c(
           "div",
-          { staticClass: "basket-loading-frame loading" },
+          { staticClass: "d-table w-100 loading" },
           [_vm._t("loading-animation")],
           2
         )

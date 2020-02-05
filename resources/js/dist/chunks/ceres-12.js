@@ -164,18 +164,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -491,14 +479,14 @@ var render = function() {
           },
           [
             _c("i", {
-              staticClass: "fa fa-arrow-right fa-lg mobile-icon-right"
+              staticClass: "fa fa-arrow-right fa-lg d-none d-sm-block"
             })
           ]
         )
       : _vm._e(),
     _vm._v(" "),
     _vm.showQuantity && !_vm.useLargeScale
-      ? _c("div", { staticClass: "category-list-view-port" }, [
+      ? _c("div", { staticClass: "d-inline d-lg-none" }, [
           _c("div", { staticClass: "add-to-basket-container" }, [
             _c(
               "div",
@@ -621,84 +609,8 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !_vm.showQuantity && !_vm.useLargeScale && !_vm.isWishList
-      ? _c("div", { staticClass: "category-list-view-port" }, [
-          _c(
-            "div",
-            {
-              staticClass: "btn-group",
-              attrs: { role: "group", "aria-label": "Thumb Control" }
-            },
-            [
-              _vm.canBeAddedToBasket
-                ? _c(
-                    "button",
-                    {
-                      staticClass:
-                        "btn btn-outline-primary btn-outline-appearance mobile-width-button",
-                      class: { "no-pointer-events": _vm.waiting },
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.addToBasket()
-                        }
-                      }
-                    },
-                    [
-                      _c("icon", {
-                        staticClass: "fa-lg mobile-icon-right",
-                        attrs: { icon: "cart-plus", loading: _vm.waiting }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "mobile-text-only" }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.singleItemAddToBasket"
-                            )
-                          )
-                        )
-                      ])
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              !_vm.canBeAddedToBasket
-                ? _c(
-                    "button",
-                    {
-                      staticClass:
-                        "btn btn-outline-primary btn-outline-appearance mobile-width-button",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.directToItem()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass:
-                          "fa fa-arrow-right fa-lg mobile-icon-right",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "mobile-text-only" }, [
-                        _vm._v(
-                          _vm._s(_vm.$translate("Ceres::Template.itemShowItem"))
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            ]
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.showQuantity && !_vm.useLargeScale && _vm.isWishList
-      ? _c("div", { staticClass: "category-list-view-port" }, [
+    !_vm.showQuantity && !_vm.useLargeScale
+      ? _c("div", { staticClass: "d-inline d-lg-none" }, [
           _c(
             "div",
             {
@@ -725,16 +637,15 @@ var render = function() {
                         staticClass: "fa-lg mobile-icon-right",
                         attrs: { icon: "shopping-cart", loading: _vm.waiting }
                       }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "mobile-text-only" }, [
-                        _vm._v(
+                      _vm._v(
+                        "\n                " +
                           _vm._s(
                             _vm.$translate(
                               "Ceres::Template.singleItemAddToBasket"
                             )
-                          )
-                        )
-                      ])
+                          ) +
+                          "\n            "
+                      )
                     ],
                     1
                   )
@@ -756,15 +667,16 @@ var render = function() {
                     [
                       _c("i", {
                         staticClass:
-                          "fa fa-arrow-right fa-lg mobile-icon-right",
+                          "fa fa-arrow-right fa-lg d-none d-sm-block",
                         attrs: { "aria-hidden": "true" }
                       }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "mobile-text-only" }, [
-                        _vm._v(
-                          _vm._s(_vm.$translate("Ceres::Template.itemShowItem"))
-                        )
-                      ])
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.itemShowItem")
+                          ) +
+                          "\n            "
+                      )
                     ]
                   )
                 : _vm._e()

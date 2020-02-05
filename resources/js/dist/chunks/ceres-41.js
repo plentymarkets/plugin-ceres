@@ -79,6 +79,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -158,6 +159,7 @@ var render = function() {
                       expression: "isDisabled"
                     }
                   ],
+                  staticClass: "nav-link",
                   class: { "is-disabled": _vm.isDisabled },
                   attrs: {
                     "data-toggle": "collapse",

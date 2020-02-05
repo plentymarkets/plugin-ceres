@@ -2,7 +2,7 @@
     color: $top-bar-color;
     background-color: $top-bar-bg;
 
-    a {
+    .nav-link {
         color: $top-bar-color;
         text-decoration: none;
         outline: none;
@@ -18,11 +18,11 @@
         font-size: 1rem;
     }
 
-    a {
+    .nav-link {
         display: inline-block;
         padding: .5rem .8rem;
 
-        &[aria-expanded="true"] { // stylelint-disable-line selector-no-qualifying-type
+        &[aria-expanded="true"] {
             background: $gray-900;
         }
 
@@ -33,7 +33,7 @@
     }
 
     @include media-breakpoint-only(xs) {
-        a {
+        .nav-link {
             padding: .5rem;
         }
         .anicon-search-xcross {
@@ -204,8 +204,8 @@
         justify-content: space-between;
 
         .controls {
-            a {
-                padding: 1.2rem .8rem !important; // stylelint-disable-line declaration-no-important
+            .nav-link {
+                padding: 1.2rem .8rem;
             }
         }
     }

@@ -687,7 +687,7 @@ var render = function() {
           expression: "label.length || bundleType === 'bundle'"
         }
       ],
-      staticClass: "special-tags"
+      staticClass: "special-tags p-2"
     },
     [
       _vm.label.length
@@ -1131,7 +1131,7 @@ var render = function() {
                 _vm.liveShoppingData.item.unit.unitOfMeasurement === "C62" &&
                 _vm.liveShoppingData.item.unit.content === 1
               )
-                ? _c("div", { staticClass: "category-unit-price" }, [
+                ? _c("div", { staticClass: "category-unit-price small" }, [
                     _c("span", [
                       _vm._v(_vm._s(_vm.liveShoppingData.item.unit.content))
                     ]),
