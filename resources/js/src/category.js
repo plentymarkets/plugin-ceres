@@ -12,6 +12,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 const mount = Vue.prototype.$mount;
+const overriddenComponents = [].slice.call(document.querySelectorAll("[data-component]"));
 
 Vue.prototype.$mount =
     // eslint-disable-next-line complexity
@@ -21,7 +22,18 @@ Vue.prototype.$mount =
 
         if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
         {
-            const renderFunctions = Vue.compile(document.querySelector(templateOverride).innerHTML);
+            compHtml = document.querySelector(templateOverride).innerHTML;
+        }
+        else if (overriddenComponents.some((comp) => comp.dataset.component === this.$options._componentTag))
+        {
+            const comp = overriddenComponents.find((comp) => comp.dataset.component === this.$options._componentTag);
+
+            compHtml = comp.innerHTML;
+        }
+
+        if (compHtml)
+        {
+            const renderFunctions = Vue.compile(compHtml);
 
             Object.assign(this.$options, renderFunctions);
         }
