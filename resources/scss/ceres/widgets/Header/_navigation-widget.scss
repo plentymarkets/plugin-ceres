@@ -27,9 +27,9 @@ $normalmenu-color: $primary !default;
 
 .navbar-toggler {
     position: absolute;
-    top: 50%;
-    right: 1rem;
-    transform: translate(0, -50%);
+    top: 0;
+    right: 0;
+    bottom: 0;
 }
 
 // When mobile navigation is open

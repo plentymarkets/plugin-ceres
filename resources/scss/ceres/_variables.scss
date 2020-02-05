@@ -1,7 +1,7 @@
 //
 // Variables
 // --------------------------------------------------
-// $enable-deprecation-messages: false;
+$enable-deprecation-messages: false !default;
 
 //
 // Colors
@@ -123,8 +123,8 @@ $border-radius-lg:          .2rem !default;
 
 $progress-border-radius:    .25rem !default;
 
-//Ceres 4 variables
-$aside-columns-width: 30em !default;
+//Ceres variables
+$aside-columns-width: 30rem !default;
 
 // Buttons
 //

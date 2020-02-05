@@ -1,7 +1,7 @@
 <template>
     <div class="position-relative">
         <div class="dropdown" v-if="isLoggedIn">
-            <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
+            <a href="#" class="dropdown-toggle nav-link" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
                 <i class="fa fa-user mr-1 d-sm-none" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginHello", {"username": username }) }}</span>
             </a>
@@ -13,12 +13,12 @@
             </div>
         </div>
         <div v-if="!isLoggedIn">
-            <a :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="unmarkInputFields()">
+            <a class="nav-link" :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="unmarkInputFields()">
                 <i class="fa fa-user mr-1" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.login") }}</span>
             </a>
             <span class="pipe" v-if="showRegistration"></span>
-            <a :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="unmarkInputFields()" v-if="showRegistration">
+            <a class="nav-link" :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="unmarkInputFields()" v-if="showRegistration">
                 <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginRegister") }}</span>
             </a>

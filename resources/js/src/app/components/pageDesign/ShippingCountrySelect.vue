@@ -1,23 +1,22 @@
 <template>
-  <ul v-if="!basketSelect">
-        <div v-for="shippingCountry in localization.shippingCountries" :key="shippingCountry.id">
-            <li :class="{'active': localization.shippingCountryId == shippingCountry.id}">
-                <a data-toggle="collapse"
-                   href="#countrySettings"
-                   @click="setShippingCountry(shippingCountry.id)"
-                   :class="{'is-disabled': isDisabled}"
-                   :disabled="isDisabled"
-                   v-tooltip="isDisabled"
-                   data-placement="top"
-                   data-trigger="hover"
-                   data-boundary="window"
-                   :data-title="$translate('Ceres::Template.headerChangeDeliveryCountry')">
+    <ul class="row" v-if="!basketSelect">
+        <li class="col-6 col-sm-4 px-0" :class="{'active': localization.shippingCountryId == shippingCountry.id}" v-for="shippingCountry in localization.shippingCountries" :key="shippingCountry.id">
+            <a class="nav-link"
+                data-toggle="collapse"
+                href="#countrySettings"
+                @click="setShippingCountry(shippingCountry.id)"
+                :class="{'is-disabled': isDisabled}"
+                :disabled="isDisabled"
+                v-tooltip="isDisabled"
+                data-placement="top"
+                data-trigger="hover"
+                data-boundary="window"
+                :data-title="$translate('Ceres::Template.headerChangeDeliveryCountry')">
 
-                    <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()"></i>
-                    {{ shippingCountry.currLangName }}
-                </a>
-            </li>
-        </div>
+                <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()"></i>
+                {{ shippingCountry.currLangName }}
+            </a>
+        </li>
     </ul>
     <div v-else>
         <div class="h3">{{ $translate('Ceres::Template.headerSelectShippingCountry') }}</div>

@@ -35,7 +35,8 @@
     overflow: hidden;
 
     & > noscript,
-    a > img {
+    a img,
+    .owl-carousel {
         position: absolute;
         top: -9999px;
         right: -9999px;
@@ -53,19 +54,6 @@
     & .owl-stage,
     & .owl-item {
         height: 100%;
-    }
-
-    & .owl-item img {
-        position: absolute;
-        top: -9999px;
-        right: -9999px;
-        bottom: -9999px;
-        left: -9999px;
-        width: auto;
-        max-width: 100%;
-        height: auto;
-        max-height: 100%;
-        margin: auto;
     }
 }
 
