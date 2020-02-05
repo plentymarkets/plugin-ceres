@@ -105,6 +105,11 @@
 
         {{ Twig.set("__category", Twig.call("services.category.get", [urlValue])) }}
         {{ Twig.set(variableName, Twig.call("services.category.getURL", ["$__category"])) }}
+        {{ Twig.set("backlink", "request.get('backlink')") }}
+
+        {{Twig.if("backlink | trim is not empty and urls.login == " ~ variableName ~ " or urls.registration == " ~ variableName)}}
+            {{ Twig.set(variableName, variableName ~ "~ '?backlink=' ~ backlink | url_encode") }}
+        {{Twig.endif()}}
 
     {% elseif urlType == 'item' %}
 
@@ -115,7 +120,6 @@
     {% if urlType == 'external' or urlType == 'file' %}
         {{ Twig.set(variableName, urlValue | json_encode) }}
     {% endif %}
-
 {% endmacro %}
 
 {% macro makeEditable(variableName, toolbarLayout, isPreview, additionalClasses) %}
