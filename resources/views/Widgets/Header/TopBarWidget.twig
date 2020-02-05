@@ -24,7 +24,7 @@
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max px-0 px-lg-3">
+    <div class="container-max px-0 pr-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if isPreview and not
                 enableLogin and not
@@ -62,7 +62,7 @@
                     {{ Twig.endif() }}
                 {% endif %}
                 <div class="controls">
-                    <ul id="controlsList" class="controls-list mb-0 d-flex list-inline">
+                    <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
                         {% if enableLogin %}
                             <li class="list-inline-item control-user">
                                 <user-login-handler :show-registration="{{ enableRegistration | json_encode }}">
@@ -217,7 +217,7 @@
     <div class="container-max px-0 px-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if searchStyle == "onDemand" %}
-                <div id="searchBox" class="cmp cmp-search-box collapse w-100">
+                <div id="searchBox" class="cmp cmp-search-box collapse">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
                         <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"></item-search>
                     {{ Twig.else() }}

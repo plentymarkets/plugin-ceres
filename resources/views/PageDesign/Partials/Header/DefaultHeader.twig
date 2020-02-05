@@ -5,12 +5,12 @@
         <div class="row flex-row-reverse position-relative">
             <div id="page-header-parent" class="col-12" data-header-offset>
                 <div class="top-bar header-fw">
-                    <div class="container-max px-0 px-lg-3">
+                    <div class="container-max px-0 pr-lg-3">
                         <div class="row mx-0 flex-row-reverse position-relative">
                             {{ LayoutContainer.show("Ceres::Header.LeftSide") }}
                             <div class="top-bar-items">
                                 <div class="controls">
-                                    <ul id="controlsList" class="controls-list mb-0 d-flex list-inline">
+                                    <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
                                         <li class="list-inline-item control-user">
                                             <user-login-handler>
                                                 <a class="nav-link" data-toggle="modal">
@@ -141,7 +141,7 @@
 
                     <div class="container-max px-0 px-lg-3">
                         <div class="row mx-0 flex-row-reverse position-relative">
-                            <div id="searchBox" class="cmp cmp-search-box collapse w-100">
+                            <div id="searchBox" class="cmp cmp-search-box collapse">
                                 {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
                                 {% if overrideSearchBar | trim is empty %}
                                     <item-search></item-search>
