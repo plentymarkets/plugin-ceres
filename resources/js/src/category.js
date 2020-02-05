@@ -13,15 +13,28 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 const mount = Vue.prototype.$mount;
+const dataComponentElements = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"));
+const overriddenComponents = dataComponentElements.reduce(object, el => object[el.dataset.component] = el, object, {}) || {};
 
 Vue.prototype.$mount =
+    // eslint-disable-next-line complexity
     function(el, hydrating)
     {
+        let compHtml = null;
         const templateOverride = this.$props.templateOverride;
 
         if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
         {
-            const renderFunctions = Vue.compile(document.querySelector(templateOverride).innerHTML);
+            compHtml = document.querySelector(templateOverride).innerHTML;
+        }
+        else if (overriddenComponents && overriddenComponents[this.$options._componentTag])
+        {
+            compHtml = overriddenComponents[this.$options._componentTag].innerHTML;
+        }
+
+        if (compHtml)
+        {
+            const renderFunctions = Vue.compile(compHtml);
 
             Object.assign(this.$options, renderFunctions);
         }
