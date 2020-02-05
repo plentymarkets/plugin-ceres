@@ -296,8 +296,7 @@
         rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
 
         window.vueApp = new Vue({
-            store: window.ceresStore,
-            data: data
+            store: window.ceresStore
         });
 
         vueApp.$mount( rootElement.cloneNode(true) );
@@ -312,8 +311,7 @@
         // eslint-disable-next-line no-unused-vars
         window.vueApp = new Vue({
             el: "#vue-app",
-            store: window.ceresStore,
-            data: data
+            store: window.ceresStore
         });
     }
 </script>
