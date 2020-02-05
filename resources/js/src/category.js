@@ -13,7 +13,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 const mount = Vue.prototype.$mount;
-const dataComponentElements = [].slice.call(document.querySelectorAll("[data-component]"));
+const dataComponentElements = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"));
 const overriddenComponents = dataComponentElements.reduce(object, el => object[el.dataset.component] = el, object, {}) || {};
 
 Vue.prototype.$mount =
