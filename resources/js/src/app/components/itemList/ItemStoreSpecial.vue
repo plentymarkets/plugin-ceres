@@ -1,5 +1,5 @@
 <template>
-    <div class="special-tags" v-show="label.length || bundleType === 'bundle'">
+    <div class="special-tags p-2" v-show="label.length || bundleType === 'bundle'">
         <span v-if="label.length" class="badge" :class="tagClass">
             {{ label }}
         </span>

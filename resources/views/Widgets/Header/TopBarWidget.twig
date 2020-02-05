@@ -1,7 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass                  = widget.settings.customClass.mobile %}
 {% set isFixed                      = widget.settings.isFixed.mobile %}
 {% set enableLogin                  = widget.settings.enableLogin.mobile %}
 {% set enableRegistration           = widget.settings.enableRegistration.mobile %}
@@ -19,13 +19,12 @@
 {{ Twig.set("currencyFormat", Twig.call("config", ["Ceres.currency.format"])) }}
 {{ Twig.set("currencyFormatSelect", Twig.call("config", ["Ceres.currency.format_selection"])) }}
 {{ Twig.set("currencyData", Twig.call("services.checkout.getCurrencyData") ~ "[currencyFormat]") }}
-{{ Twig.set("basketPreviewType", Twig.call("config", ["Ceres.basket.preview_type"])) }}
 {{ Twig.set("activeCurrencies", Twig.call("config", ["Ceres.currency.available_currencies"]) ~ " | split(\", \")") }}
 {{ Twig.set("defaultLanguage", Twig.call("services.webstoreConfig.getDefaultLanguage")) }}
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
-    <div class="container-max">
+    <div class="container-max px-0 pr-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if isPreview and not
                 enableLogin and not
@@ -48,14 +47,14 @@
             <div class="top-bar-items {% if searchStyle == "permanent" %}search-permanent d-flex flex-grow-1 flex-column-reverse flex-md-row{% endif %}">
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <div class="always-visible-search m-2 flex-grow-1">
+                        <div class="always-visible-search flex-grow-1">
                             <item-search :show-item-images="{{ showItemImages | json_encode }}" :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
-                                    <div class="position-relative d-flex flex-grow-1">
-                                        <input type="search" class="search-input px-3 py-2 flex-grow-1"/>
-                                        <button class="search-submit px-3" type="submit">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
+                                <div class="position-relative d-flex flex-grow-1">
+                                    <input type="search" class="search-input px-3 py-2 flex-grow-1">
+                                    <button class="search-submit px-3" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
                             </item-search>
                         </div>
                     {{ Twig.else() }}
@@ -63,18 +62,17 @@
                     {{ Twig.endif() }}
                 {% endif %}
                 <div class="controls">
-                    <ul id="controlsList" class="controls-list mb-0 d-flex list-inline">
+                    <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
                         {% if enableLogin %}
                             <li class="list-inline-item control-user">
                                 <user-login-handler :show-registration="{{ enableRegistration | json_encode }}">
-                                    <a data-toggle="modal">
-                                        <i class="fa fa-user mr-1" aria-hidden="true"></i>
+                                    <a class="nav-link" data-toggle="modal">
+                                        <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
                                     </a>
                                     {% if enableRegistration %}
-                                    <span class="pipe"></span>
-                                    <a data-toggle="modal">
-                                        <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
+                                    <a class="nav-link" data-toggle="modal">
+                                        <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                     </a>
                                     {% endif %}
@@ -82,7 +80,7 @@
                             </li>
                         {% elseif enableRegistration %}
                             <li class="list-inline-item control-user">
-                                <a data-toggle="modal">
+                                <a class="nav-link" data-toggle="modal">
                                     <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                                     <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                 </a>
@@ -91,7 +89,8 @@
 
                         {% if enableLanguageSelect or enableShippingCountrySelect %}
                             <li class="list-inline-item dropdown control-languages">
-                                <a data-toggle="collapse"
+                                <a class="nav-link"
+                                   data-toggle="collapse"
                                    href="#countrySettings"
                                    aria-expanded="false"
                                    aria-controls="countrySettings"
@@ -103,7 +102,7 @@
 
                         {% if enableCurrencySelect %}
                             <li class="list-inline-item dropdown control-languages">
-                                <a class=""
+                                <a class="nav-link"
                                    data-toggle="collapse"
                                    href="#currencySelect"
                                    aria-expanded="false"
@@ -116,10 +115,11 @@
 
                         {% if searchStyle == "onDemand" %}
                             <li class="list-inline-item control-search">
-                                <a class="anicon anicon-search-xcross"
+                                <a class="anicon anicon-search-xcross nav-link"
                                    aria-label="toggle search"
                                    data-toggle="collapse"
                                    href="#searchBox"
+                                   aria-expanded="false"
                                    aria-controls="searchBox"
                                    data-parent="#controlsList">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
@@ -131,8 +131,8 @@
                             {{ Twig.if("services.url.isRouteEnabled(\"wish-list\")") }}
                             <li class="list-inline-item control-wish-list">
                                 <wish-list-count>
-                                    <a>
-                                        <span class="badge-right mr-1">0</span>
+                                    <a class="nav-link">
+                                        <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </wish-list-count>
@@ -142,12 +142,12 @@
 
                         {% if enableBasketPreview %}
                             <li class="list-inline-item control-basket position-relative" v-on:mouseover.once="$root.$data.renderBasketPreview = true">
-                                <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
+                                <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link">
                                     {% if basketValues != "sum" %}
                                         <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
                                     {% endif %}
 
-                                    <i v-waiting-animation="$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                    <icon icon="shopping-cart" class-loading="fa-refresh" :loading="$store.state.basket.isBasketLoading"></icon>
                                     {% if basketValues != "quantity" %}
                                         <span class="badge p-0 ml-2" v-if="!$store.state.basket.showNetPrices" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 {{ Twig.print("currencyData") }}</span>
                                         <span class="badge p-0 ml-2" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ Twig.print("currencyData") }}</span>
@@ -157,8 +157,8 @@
                                 {{ Twig.if("basketPreviewType != \"right\"") }}
                                     <basket-preview v-if="renderBasketPreview"
                                         :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}"
-                                        :hover="true"
-                                    >
+                                        checkout-url="{{ Twig.print("urls.checkout | json_encode") }}"
+                                        basket-url="{{ Twig.print("urls.basket | json_encode") }}">
                                         <template #before-basket-item>
                                             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
                                         </template>
@@ -214,7 +214,7 @@
         </div>
     </div>
 
-    <div class="container-max page-header">
+    <div class="container-max px-0 px-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse">
@@ -229,18 +229,18 @@
             {% if enableCurrencySelect and not isPreview %}
                 <div id="currencySelect" class="cmp cmp-currency-select collapse">
                     <div class="container-max">
-                        <div class="row p-3">
+                        <div class="row py-3">
                             <div class="currency-list col-12">
                                 <div class="list-title">
                                     <strong>{{ Twig.print('trans("Ceres::Template.headerCurrency")') }}</strong>
                                     <hr>
                                 </div>
-                                <ul class="text-center text-sm-left">
+                                <ul class="row text-center text-sm-left">
                                     {{ Twig.set("activeCurrency", Twig.call("services.checkout.getCurrencyData")) }}
                                     {{ Twig.for("currency", Twig.call("services.checkout.getCurrencyList")) }}
                                     {{ Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency.name") }}
-                                        <li{{ Twig.if("currency.name == activeCurrency.name") }} class="active"{{ Twig.endif() }}>
-                                            <a href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
+                                        <li class="col-2 px-0{{ Twig.if("currency.name == activeCurrency.name") }} active{{ Twig.endif() }}">
+                                            <a class="nav-link" href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
                                                 {{ Twig.if("currencyFormatSelect == 'all'") }}
                                                     {{ Twig.print("currency.name") }} <br class="d-block d-sm-none" />({{ Twig.print("currency.symbol") }})
                                                 {{ Twig.else() }}
@@ -260,7 +260,7 @@
             {% if enableLanguageSelect or enableShippingCountrySelect %}
                 <div id="countrySettings" class="cmp cmp-country-settings collapse">
                     <div class="container-max">
-                        <div class="row p-3">
+                        <div class="row py-3">
                             {% if enableLanguageSelect and not isPreview %}
                                 <div class="col-12 {% if enableShippingCountrySelect %}col-lg-6{% else %}col-lg-12{% endif %}">
 
@@ -271,21 +271,21 @@
                                         </div>
                                         {{ Twig.set("languageList", Twig.call("services.webstoreConfig.getActiveLanguageList")) }}
                                         {{ Twig.set("languageUrls", Twig.call("services.url.getLanguageURLs")) }}
-                                        <ul>
+                                        <ul class="row">
                                             {{ Twig.for("language", "languageList") }}
-                                                <li{{ Twig.if("lang == language") }} class="active"{{ Twig.endif() }}>
+                                                <li class="col-6 col-sm-4 px-0{{ Twig.if("lang == language") }} active{{ Twig.endif() }}">
                                                     {{ Twig.set("url", "'/'") }}
                                                     {{ Twig.if("languageUrls[language] is defined") }}
                                                         {{ Twig.set("url", "languageUrls[language] ~ queryString") }}
                                                     {{ Twig.elseif("language != defaultLanguage") }}
                                                         {{ Twig.set("url", "'/' ~ language ~ urls.trailingSlashSuffix") }}
                                                     {{ Twig.endif() }}
-                                                    <a href="{{ Twig.print("url") }}" data-update-url>
+                                                    <a class="nav-link" href="{{ Twig.print("url") }}" data-update-url>
                                                         <i class="flag-icon flag-icon-{{ Twig.print("language") }}"></i>
                                                         {{ Twig.print('trans("Ceres::Template.header" ~ language | capitalize)') }}
                                                     </a>
                                                 </li>
-                                        {{ Twig.endfor() }}
+                                            {{ Twig.endfor() }}
                                         </ul>
                                     </div>
                                 </div>

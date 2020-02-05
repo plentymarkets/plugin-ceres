@@ -24,14 +24,11 @@
             {{ Twig.for("item", "itemList") }}
                 <li class="col-{{ 12 / numberOfColumnsMobile }} col-md-{{ 12 / numberOfColumnsTablet }} col-lg-{{ 12 / numberOfColumnsDesktop }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-                    <lazy-mount-intersect>
-                        <template #loading>
-                            <div class="w-100" style="height: 370px;"></div>
-                        </template>
+                    <intersect>
                         <category-item v-cloak
-                            :item-data="{{ Twig.print("item.data | json_encode") }}"
-                            :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}"
-                            :url-with-variation-id="{{ Twig.print("buildUrlWithVariationId | json_encode") }}">
+                                       :item-data="{{ Twig.print("item.data | json_encode") }}"
+                                       :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}"
+                                       :url-with-variation-id="{{ Twig.print("buildUrlWithVariationId | json_encode") }}">
 
                             <template #before-prices>  {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", Twig.var("item.data")])) }}</template>
                             <template #after-prices> {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", Twig.var("item.data")])) }}</template>
@@ -41,7 +38,15 @@
                                 <span>{{ Twig.print("item.data | itemName") }}</span>
                             </a>
                         </category-item>
-                    </lazy-mount-intersect>
+                        <template #loading>
+                            <div class="category-item-placeholder w-100 invisible">
+                                <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
+                                    <i class="fa fa-image"></i>
+                                    <span>{{ Twig.print("item.data | itemName") }}</span>
+                                </a>
+                            </div>
+                        </template>
+                    </intersect>
                 </li>
             {{ Twig.endfor() }}
         </div>

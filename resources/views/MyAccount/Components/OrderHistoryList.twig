@@ -3,7 +3,7 @@
 
 <script type="x/template" id="vue-order-history-list">
     <div class="order-history-list">
-        <div class="row history-pagination mb-2" v-if="orderList.totalsCount > ordersPerPage">
+        <div class="row mt-3 mb-2" v-if="orderList.totalsCount > ordersPerPage">
             <div class="col-sm-12">
                 <div class="float-left counter">
                     {{ trans("Ceres::Template.orderHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}

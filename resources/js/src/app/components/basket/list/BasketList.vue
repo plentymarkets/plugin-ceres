@@ -2,7 +2,7 @@
     <div>
         <div>
             <div v-if="!basketItems.length > 0">
-                <div class="h5">{{ $translate("Ceres::Template.basketNoItems") }}</div>
+                <div class="h5 py-3">{{ $translate("Ceres::Template.basketNoItems") }}</div>
             </div>
             <transition-group name="list-transition" tag="div">
                 <template v-for="basketItem in basketItems">
@@ -23,7 +23,7 @@
             </transition-group>
         </div>
 
-        <div v-if="!isBasketInitiallyLoaded" class="basket-loading-frame loading">
+        <div v-if="!isBasketInitiallyLoaded" class="d-table w-100 loading">
             <slot name="loading-animation"></slot>
         </div>
     </div>

@@ -1,19 +1,23 @@
 <template>
-    <article class="basket-item-container basket-list-item">
-        <div class="basket-item">
+    <article class="basket-list-item py-3">
+        <div class="basket-item d-flex">
             <div class="image-container">
-                <img class="img-basket-small" v-if="orderItemImage" :src="orderItemImage" :alt="orderItem | itemBundleName" :title="orderItem | itemBundleName">
+                <img class="d-block mw-100 mh-100"
+                     v-if="orderItemImage"
+                     :src="orderItemImage"
+                     :alt="orderItem | itemBundleName"
+                     :title="orderItem | itemBundleName">
             </div>
 
             <div class="meta-container-wrapper">
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
-                        <div>
-                            <a :href="orderItemURL" class="item-name text-primary text-appearance">
+                        <div class="position-relative w-100">
+                            <a :href="orderItemURL" class="item-name text-primary text-appearance small font-weight-bold text-break">
                                 {{ orderItem | itemBundleName }}
                             </a>
 
-                            <div class="item-base-price">
+                            <div class="item-base-price small">
                                 <template v-if="isNet">
                                     {{ amount.priceNet | currency(amount.currency) }}
                                 </template>
@@ -26,14 +30,14 @@
                                     :bundle-type="orderItem.bundleType"
                                     :bundle-components="orderItem.bundleComponents"></item-bundle>
 
-                            <div class="item-small-prices">
+                            <div class="item-small-prices small">
                                 <div v-for="attribute in variation.attributes">
                                     <strong>{{ attribute.attribute.names.name }}: </strong>
                                     <span>{{ attribute.value.names.name }}</span>
                                 </div>
                             </div>
 
-                            <div class="item-small-prices text-muted" v-if="orderItem.orderProperties">
+                            <div class="item-small-prices text-muted small" v-if="orderItem.orderProperties">
                                 <div v-for="property in orderItem.orderProperties">
                                     <strong>{{ property.name }}: </strong>
                                     <span v-if="property.type === 'file'">
@@ -49,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="basket-item-container-right">
+                    <div class="basket-item-container-right ml-3">
                         <div class="qty-box-container">
                             <quantity-input
                                     @quantity-change="updateQuantity"
@@ -58,52 +62,50 @@
                                     :max="orderItem.quantity"></quantity-input>
                         </div>
 
-                        <div class="price-box">
-                            <div class="item-total-price" v-if="isNet">
+                        <div class="price-box ml-2">
+                            <div class="item-total-price font-weight-bold text-right text-nowrap" v-if="isNet">
                                 {{ orderItem.quantity * amount.priceNet | currency(amount.currency) }}
                             </div>
 
-                            <div class="item-total-price" v-if="!isNet">
+                            <div class="item-total-price font-weight-bold text-right text-nowrap" v-if="!isNet">
                                 {{ orderItem.quantity * amount.priceGross | currency(amount.currency) }}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="item-additional-information-container" v-if="variation">
-                    <div class="item-additional-information">
+                <div class="small" v-if="variation">
 
-                        <template v-if="isDataFieldVisible('item_id') && variation.item.id">
-                            <div class="mt-3">
-                                <strong>{{ $translate("Ceres::Template.basketItemId") }}:</strong>
-                                <span>{{ variation.item.id }}</span>
-                            </div>
-                        </template>
+                    <template v-if="isDataFieldVisible('item_id') && variation.item.id">
+                        <div class="mt-3">
+                            <strong>{{ $translate("Ceres::Template.basketItemId") }}:</strong>
+                            <span>{{ variation.item.id }}</span>
+                        </div>
+                    </template>
 
-                        <template v-if="isDataFieldVisible('custom_number') && variation.variation.number">
-                            <div>
-                                <strong>{{ $translate("Ceres::Template.basketItemNumber") }}:</strong>
-                                <span>{{ variation.variation.number }}</span>
-                            </div>
-                        </template>
+                    <template v-if="isDataFieldVisible('custom_number') && variation.variation.number">
+                        <div>
+                            <strong>{{ $translate("Ceres::Template.basketItemNumber") }}:</strong>
+                            <span>{{ variation.variation.number }}</span>
+                        </div>
+                    </template>
 
-                        <template v-if="isDataFieldVisible('availability') && variation.variation.availability.names.name">
-                            <div>
-                                <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
-                                <span class="badge" :class="'availability_' + variation.variation.availability.id">
-									{{ variation.variation.availability.names.name }}
-								</span>
-                            </div>
-                        </template>
+                    <template v-if="isDataFieldVisible('availability') && variation.variation.availability.names.name">
+                        <div>
+                            <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
+                            <span class="badge" :class="'availability_' + variation.variation.availability.id">
+                                {{ variation.variation.availability.names.name }}
+                            </span>
+                        </div>
+                    </template>
 
-                        <template v-if="isDataFieldVisible('description_long') && variation.texts.description">
-                            <p class="my-3" v-html="variation.texts.description"></p>
-                        </template>
+                    <template v-if="isDataFieldVisible('description_long') && variation.texts.description">
+                        <p class="my-3" v-html="variation.texts.description"></p>
+                    </template>
 
-                        <template v-if="isDataFieldVisible('description_short') && variation.texts.shortDescription">
-                            <p class="my-3" v-html="variation.texts.shortDescription"></p>
-                        </template>
-                    </div>
+                    <template v-if="isDataFieldVisible('description_short') && variation.texts.shortDescription">
+                        <p class="my-3" v-html="variation.texts.shortDescription"></p>
+                    </template>
                 </div>
             </div>
         </div>

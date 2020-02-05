@@ -28,12 +28,12 @@
     <div class="container-max d-block{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
-            <div class="brand-wrapper px-3">
+            <div class="brand-wrapper px-lg-3">
                 <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                     <img alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}" src="{{ companyLogoUrl }}" class="img-fluid" />
                 </a>
 
-                <button v-open-mobile-navigation class="navbar-toggler d-lg-none" type="button">
+                <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
                     &#9776;
                 </button>
             </div>

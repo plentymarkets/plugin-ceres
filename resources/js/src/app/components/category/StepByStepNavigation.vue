@@ -16,7 +16,7 @@
             <div class="mb-3 m-x-auto" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
                 <button type="button" class="btn btn-appearance px-4 py-3" @click="loadChunk()" :class="{ 'disabled': isWaiting }">
                     <span>{{ $translate("Ceres::Template.stepByStepNavigationShowMore") }}</span>
-                    <i v-waiting-animation="isWaiting" class="fa fa-plus-circle fa-fw my-1" waiting-class="fa fa-repeat fa-fw my-1 fa-spin"></i>
+                    <icon icon="plus-circle" class="fa-fw my-1" class-loading="fa-repeat"></icon>
                 </button>
             </div>
         </div>

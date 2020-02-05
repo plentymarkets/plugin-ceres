@@ -1,79 +1,126 @@
-.basket-preview {
-    display: flex;
-    flex-flow: column nowrap;
+.basket-preview-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: $zindex-modal + 1;
+    display: block;
+    transform: translateX(100%);
+    @include transition(all .3s ease-in-out);
 
-    .basket-header {
-        position: relative;
-        flex: 0 0 auto;
-        border-bottom: 1px solid $gray-300;
-
-        .basket-header-caption {
-            @include media-breakpoint-up(md) {
-                font-size: 1.5rem;
-            }
-
-            font-size: 1.25rem;
-        }
-
-        .close {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50px;
-            height: 100%;
-        }
+    @include media-breakpoint-up(lg) {
+        left: auto;
+        width: $aside-columns-width;
     }
 
-    .basket-preview-content {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        @include media-breakpoint-only(sm) {
-            flex-direction: row;
-        }
+    .basket-open & {
+        transform: translateX(0);
     }
 
-    .list {
-        display: flex;
-        flex: 1 1 auto;
-        flex-flow: column nowrap;
-        min-height: 150px;
-        overflow: auto;
-    }
+    .basket-preview-overlay {
+        position: fixed;
+        top: 0;
+        right: -100vw;
+        bottom: -100vh;
+        left: -100vw;
+        z-index: -1;
+        display: none;
+        content: "";
+        background-color: rgba(0, 0, 0, .5);
 
-    .totals {
-        display: flex;
-        flex: 0 0 auto;
-        flex-flow: column nowrap;
-        border-top: 1px solid $gray-300;
-
-        @extend .small;
-
-        dd,
-        dt {
-            margin-bottom: 0;
-        }
-
-        @include media-breakpoint-only(sm) {
-            border-top: 0;
-            border-left: 1px solid $gray-300;
-        }
-    }
-
-    @include media-breakpoint-only(sm) {
-        .totals {
-            overflow-y: auto;
-        }
-        .basket-preview-content {
-            overflow: hidden;
+        .basket-open & {
+            display: block;
         }
     }
 }
 
-.basket-loading-frame {
-    display: table;
-    width: 100%;
+.basket-preview {
+    position: absolute;
+    height: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 1rem;
+}
+
+.basket-preview-header {
+    @extend .modal-header;
+}
+
+.basket-preview-content {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .totals {
+        background-color: $gray-100;
+        border-top: 1px solid $gray-300;
+    }
+}
+
+.basket-preview-footer {
+    .btn + .btn {
+        margin-top: 0;
+        margin-left: $spacer;
+    }
+}
+
+@include media-breakpoint-between(sm, md) {
+    // horizontal view on small devices
+    .basket-preview-content {
+        flex-direction: row;
+
+        .item-list {
+            flex-basis: 55%;
+            max-width: 55%;
+        }
+
+        .totals {
+            flex-basis: 45%;
+            max-width: 45%;
+            background-color: $white;
+            border-top: none;
+            border-left: 1px solid $gray-300;
+        }
+    }
+}
+
+
+// hover style basket preview
+@include media-breakpoint-up(lg) {
+    .basket-preview-wrapper.open-hover {
+        position: absolute;
+        top: auto;
+        display: none;
+        max-width: 440px;
+        max-height: 90vh;
+
+        .no-touch .control-basket:hover &,
+        .basket-open & {
+            display: block;
+            transform: translateX(0%);
+        }
+
+        .basket-preview {
+            height: auto;
+            max-height: 90vh;
+        }
+
+        .basket-preview-header {
+            display: none;
+        }
+
+        &.empty .item-list {
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .totals {
+            background-color: $white;
+        }
+
+        .basket-preview-overlay {
+            background-color: transparent;
+        }
+    }
 }
