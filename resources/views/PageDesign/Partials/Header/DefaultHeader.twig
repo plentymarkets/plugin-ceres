@@ -67,7 +67,7 @@
                                                 </wish-list-count>
                                             </li>
                                         {% endif %}
-                                        <li class="list-inline-item control-basket position-relative" v-on:mouseover.once="$root.$data.renderBasketPreview = true">
+                                        <li class="list-inline-item control-basket position-relative" @mouseover.once="$store.dispatch('loadComponent', 'basket-preview')">
                                             <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link">
                                                 {% if config("Ceres.header.basket_values") != "sum" %}
                                                     <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
@@ -82,8 +82,7 @@
 
                                             {% if config("Ceres.basket.preview_type") != "right" %}
                                                 <lazy-load component="basket-preview">
-                                                    <basket-preview v-if="renderBasketPreview"
-                                                        :show-net-prices="{{ showNetPrices | json_encode }}"
+                                                    <basket-preview :show-net-prices="{{ showNetPrices | json_encode }}"
                                                         checkout-url="{{ urls.checkout | json_encode }}"
                                                         basket-url="{{ urls.basket | json_encode }}">
                                                         <template #before-basket-item>
