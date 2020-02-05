@@ -4,8 +4,9 @@
 {% set showItemImages      = widget.settings.showItemImages.mobile is same as (true) %}
 {% set forwardToSingleItem = widget.settings.forwardToSingleItem.mobile is same as (true) %}
 
-{% set customClass = widget.settings.customClass.mobile %}
-{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set appearance      = widget.settings.appearance.mobile | default("primary") %}
+{% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
@@ -26,6 +27,8 @@
 
     <search-suggestion-items
         :show-item-images="{{ showItemImages | json_encode }}"
-        :forward-to-single-item="{{ forwardToSingleItem | json_encode }}">
+        :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"
+        {% if spacingSettings.customPadding.mobile %}:padding-classes="{{ spacingPadding | json_encode }}"
+        :padding-inline-styles="{{ inlinePadding | json_encode }}"{% endif %}>
     </search-suggestion-items>
 </div>

@@ -30,7 +30,7 @@ class SearchSuggestionItemsWidget extends BaseWidget
 
         $settingsFactory->createCustomClass();
 
-        $settingsFactory->createAppearance();
+        $settingsFactory->createAppearance(true);
 
         $settingsFactory->createCheckbox("showItemImages")
             ->withName("Widget.searchSuggestionItemsShowItemImagesLabel")

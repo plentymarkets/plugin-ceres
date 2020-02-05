@@ -1,8 +1,10 @@
 <template>
     <div>
         <a
-            class="autocomplete-suggestion px-3 py-2"
             v-for="(item, index) in autocompleteResult"
+            class="autocomplete-suggestion"
+            :class="paddingClasses"
+            :style="paddingInlineStyles"
             :key="index"
             :href="getTargetUrl(item.data)"
         >
@@ -33,7 +35,18 @@ export default {
         {
             type: Boolean,
             default: App.config.search.forwardToSingleItem
-        }
+        },
+
+        paddingClasses:
+        {
+            type: String,
+            default: "px-3 py-2"
+        },
+        paddingInlineStyles:
+        {
+            type: String,
+            default: null
+        },
     },
 
     computed:
@@ -50,7 +63,7 @@ export default {
             let displayName = this.$options.filters.itemName(itemData);
 
             for (const split of this.autocompleteSearchString.split(" ")) {
-                displayName = displayName.replace(split, `<strong>${split}</strong>`);
+                displayName = displayName.replace(split, `<strong class="text-appearance">${split}</strong>`);
             }
 
             return displayName;
