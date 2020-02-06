@@ -100,7 +100,14 @@ export default {
         {
             if (this.$refs.searchInput.value.length)
             {
-                this.$store.dispatch("searchItems", this.$refs.searchInput.value);
+                if (pathnameEquals(App.urls.search))
+                {
+                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
+                }
+                else
+                {
+                    window.open(`${App.urls.search}?query=${ this.searchString }`, "_self", false);
+                }
             }
         },
 

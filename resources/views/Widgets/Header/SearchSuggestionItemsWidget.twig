@@ -17,9 +17,9 @@
 {% set headline = widget.settings.headline.mobile %}
 
 <div class="widget widget-search-suggestion-items {{ widgetClasses }}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+    <div class="px-3 pt-3" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if headline is empty %}
-            <h4>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemSearchProducts")) }}</h4>
+            <h4 class="m-0">{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemSearchProducts")) }}</h4>
         {% else %}
             {{ WidgetHelper.editableTwig(isPreview, headline) }}
         {% endif %}
