@@ -7,10 +7,11 @@ import address from "./modules/AddressModule";
 import basket from "./modules/BasketModule";
 import checkout from "./modules/CheckoutModule";
 import consents from "./modules/ConsentModule";
-import contactForm from "./modules/ContactForm";
+import contactForm from "./modules/ContactFormModule";
 import item from "./modules/SingleItemModule";
 import itemList from "./modules/ItemListModule";
 import lastSeen from "./modules/LastSeenModule";
+import lazyComponent from "./modules/LazyComponentModule";
 import liveShopping from "./modules/LiveShoppingModule";
 import localization from "./modules/LocalizationModule";
 import navigation from "./modules/NavigationModule";
@@ -42,6 +43,7 @@ const store = new Vuex.Store(
             item,
             itemList,
             lastSeen,
+            lazyComponent,
             liveShopping,
             localization,
             navigation,

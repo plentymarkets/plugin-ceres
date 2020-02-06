@@ -175,7 +175,7 @@ export default {
         {
             this.resetError();
 
-            this.$root.$data.renderForgotPasswordModal = true;
+            this.$store.dispatch("loadComponent", "forgot-password-modal");
 
             if (this.modalElement)
             {

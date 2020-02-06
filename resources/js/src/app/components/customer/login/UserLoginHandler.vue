@@ -30,7 +30,7 @@
 import ApiService from "../../../services/ApiService";
 import ValidationService from "../../../services/ValidationService";
 import { isDefined } from "../../../helper/utils";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     props: {
@@ -98,13 +98,18 @@ export default {
 
         createLoginModal()
         {
-            this.$root.$data.renderLoginModal = true;
+            this.loadComponent("login-modal");
+
         },
 
         createRegisterModal()
         {
-            this.$root.$data.renderRegisterModal = true;
-        }
+            this.loadComponent("register-modal");
+        },
+
+        ...mapActions([
+            "loadComponent"
+        ])
     }
 }
 </script>

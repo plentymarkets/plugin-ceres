@@ -5,9 +5,6 @@
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
 {{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
 
-{# TODO REMOVE WHEN CONVERTED TO SFC #}
-{{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
-
 {% if isShopBuilder %}
     {% include "Ceres::Widgets.WidgetComponents" %}
 {% endif %}
@@ -74,13 +71,13 @@
                         <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
-                    <template v-if="renderLoginModal === true">
+                    <lazy-load component="login-modal">
                         <login modal-element="login-modal-wrapper">
                             <template #extend-overlay-buttons>
                                 {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
                             </template>
                         </login>
-                    </template>
+                    </lazy-load>
                 </div>
             </div>
         </div>
@@ -91,64 +88,70 @@
     <div id="simple-registration-modal-wrapper">
         <div class="modal fade" id="registration" tabindex="-1" role="dialog">
             <div class="modal-dialog">
-                <div class="modal-content" v-if="renderRegisterModal">
-                    <div class="modal-header">
-                        <div class="modal-title h3">
-                            {{ trans("Ceres::Template.regCreateAccount") }}
+                <lazy-load component="register-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title h3">
+                                {{ trans("Ceres::Template.regCreateAccount") }}
 
+                            </div>
+
+                            <popper v-cloak class="ml-auto">
+                                <template #handle>
+                                    <button class="btn btn-icon btn-secondary btn-sm">
+                                        <i class="fa fa-info"></i>
+                                    </button>
+                                </template>
+                                <template #title>
+                                    {{ trans("Ceres::Template.regContactInformations") }}
+                                </template>
+                                <template #content>
+                                    <ul class='pl-3'>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                    </ul>
+                                </template>
+                            </popper>
+
+                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-
-                        <popper v-cloak class="ml-auto">
-                            <template #handle>
-                                <button class="btn btn-icon btn-secondary btn-sm">
-                                    <i class="fa fa-info"></i>
-                                </button>
-                            </template>
-                            <template #title>
-                                {{ trans("Ceres::Template.regContactInformations") }}
-                            </template>
-                            <template #content>
-                                <ul class='pl-3'>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
-                                    <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
-                                    <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
-                                </ul>
-                            </template>
-                        </popper>
-
-                        <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <div class="modal-body">
+                            <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
+                                <template #extend-overlay-buttons>
+                                    {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+                                </template>
+                                <template #custom-address-fields>
+                                    {{ LayoutContainer.show("Ceres::Checkout.CustomAddressField") }}
+                                </template>
+                            </registration>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
-                            <template #extend-overlay-buttons>
-                                {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
-                            </template>
-                            <template #custom-address-fields>
-                                {{ LayoutContainer.show("Ceres::Checkout.CustomAddressField") }}
-                            </template>
-                        </registration>
-                    </div>
-                </div>
+                </lazy-load>
             </div>
         </div>
     </div>
     <!-- ./REGISTRATION MODAL -->
 
     <!-- BASKET MODAL -->
-    <add-item-to-basket-overlay v-if="renderAddItemToBasketOverlay">
-        <template slot="extendOverlayButtons">
-            {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
-        </template>
-    </add-item-to-basket-overlay>
+    <lazy-load component="add-item-to-basket-overlay">
+        <add-item-to-basket-overlay>
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
+            </template>
+        </add-item-to-basket-overlay>
+    </lazy-load>
     <!-- ./BASKET MODAL -->
 
     <!-- PASSWORD RESET MODAL -->
-    <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}" v-if="renderForgotPasswordModal">
-        <template slot="extendOverlayButtons">
-            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
-        </template>
-    </forgot-password-modal>
+    <lazy-load component="forgot-password-modal">
+        <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}">
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+            </template>
+        </forgot-password-modal>
+    </lazy-load>
     <!-- ./PASSWORD RESET MODAL -->
 
     <!-- SHIPPINGCOSTS MODAL -->
@@ -229,23 +232,14 @@
 <script>
     window.vueEventHub = new Vue();
 
-    var data = {
-        renderLoginModal: false,
-        renderRegisterModal: false,
-        renderForgotPasswordModal: false,
-        renderAddItemToBasketOverlay: false,
-        renderBasketPreview: false
-    };
-
     if (App.config.log.checkSyntax)
     {
-        const rootElement = document.getElementById("vue-app");
+        var rootElement = document.getElementById("vue-app");
 
         rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
 
         window.vueApp = new Vue({
-            store: window.ceresStore,
-            data: data
+            store: window.ceresStore
         });
 
         vueApp.$mount( rootElement.cloneNode(true) );
@@ -260,8 +254,7 @@
         // eslint-disable-next-line no-unused-vars
         window.vueApp = new Vue({
             el: "#vue-app",
-            store: window.ceresStore,
-            data: data
+            store: window.ceresStore
         });
     }
 </script>

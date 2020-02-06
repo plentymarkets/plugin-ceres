@@ -1,6 +1,4 @@
 <template>
-<!-- {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
-{{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }} -->
     <div class="basket-preview-wrapper h-100" :class="{ 'empty': !basketItems.length, 'open-hover': hover, 'open-right': !hover }">
         <div class="position-relative h-100">
             <div class="basket-preview d-flex flex-column flex-nowrap bg-white shadow w-100">

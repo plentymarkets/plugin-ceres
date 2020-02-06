@@ -24,13 +24,12 @@ const overriddenComponents = dataComponentElements.reduce(
     }, {});
 
 Vue.prototype.$mount =
-    // eslint-disable-next-line complexity
     function(el, hydrating)
     {
         let compHtml = null;
         const templateOverride = this.$props.templateOverride;
 
-        if (templateOverride && typeof templateOverride === "string" && templateOverride.charAt(0) === "#" && document.querySelector(templateOverride))
+        if (this.$props.templateOverride)
         {
             compHtml = document.querySelector(templateOverride).innerHTML;
         }
@@ -127,6 +126,9 @@ Vue.component("shipping-country-select", () => import("./app/components/pageDesi
 Vue.component("wish-list", () => import("./app/components/wishList/WishList.vue"));
 import WishListCount from "./app/components/wishList/WishListCount.vue";
 Vue.component("wish-list-count", WishListCount);
+
+import LazyLoad from "./app/components/common/LazyLoad.vue";
+Vue.component("lazy-load", LazyLoad);
 
 // =========================
 // DIRECTIVES
