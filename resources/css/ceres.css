@@ -18708,25 +18708,29 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
   bottom: 0;
   height: 100% !important; }
 
-.widget-background .container-max {
-  z-index: 1; }
-  .widget-background .container-max .huge-font {
-    font-size: 35px; }
-    .widget-background .container-max .huge-font .widget-text h1,
-    .widget-background .container-max .huge-font .widget-code h1 {
-      font-size: 2em; }
-    .widget-background .container-max .huge-font .widget-text h2,
-    .widget-background .container-max .huge-font .widget-code h2 {
-      font-size: 1.8em; }
-    .widget-background .container-max .huge-font .widget-text h3,
-    .widget-background .container-max .huge-font .widget-code h3 {
-      font-size: 1.5em; }
-    .widget-background .container-max .huge-font .widget-text h4,
-    .widget-background .container-max .huge-font .widget-code h4 {
-      font-size: 1.25em; }
-    .widget-background .container-max .huge-font .widget-text *,
-    .widget-background .container-max .huge-font .widget-code * {
-      font-size: 1em; }
+.widget-background .huge-font {
+  font-size: 1rem; }
+  @media (min-width: 576px) {
+    .widget-background .huge-font {
+      font-size: 28px; } }
+  @media (min-width: 768px) {
+    .widget-background .huge-font {
+      font-size: 35px; } }
+  .widget-background .huge-font .widget-text h1,
+  .widget-background .huge-font .widget-code h1 {
+    font-size: 2em; }
+  .widget-background .huge-font .widget-text h2,
+  .widget-background .huge-font .widget-code h2 {
+    font-size: 1.8em; }
+  .widget-background .huge-font .widget-text h3,
+  .widget-background .huge-font .widget-code h3 {
+    font-size: 1.5em; }
+  .widget-background .huge-font .widget-text h4,
+  .widget-background .huge-font .widget-code h4 {
+    font-size: 1.25em; }
+  .widget-background .huge-font .widget-text *,
+  .widget-background .huge-font .widget-code * {
+    font-size: 1em; }
 
 .widget.accordion div.card:first-of-type, .widget.accordion .cmp-address-list .items > div:first-of-type:first-child, .cmp-address-list .widget.accordion .items > div:first-of-type:first-child {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125); }

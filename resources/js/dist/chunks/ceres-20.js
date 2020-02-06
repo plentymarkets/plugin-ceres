@@ -131,8 +131,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -428,11 +426,11 @@ var render = function() {
                           [
                             _c("i", { staticClass: "fa fa-shopping-cart" }),
                             _vm._v(
-                              "\n                                " +
+                              "\n                            " +
                                 _vm._s(
                                   _vm.$translate("Ceres::Template.basket")
                                 ) +
-                                "\n                            "
+                                "\n                        "
                             )
                           ]
                         ),
@@ -463,13 +461,13 @@ var render = function() {
                               attrs: { "aria-hidden": "true" }
                             }),
                             _vm._v(
-                              "\n                                " +
+                              "\n                            " +
                                 _vm._s(
                                   _vm.$translate(
                                     "Ceres::Template.basketCheckout"
                                   )
                                 ) +
-                                "\n                            "
+                                "\n                        "
                             )
                           ]
                         ),
