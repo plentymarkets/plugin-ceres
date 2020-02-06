@@ -241,11 +241,12 @@ export default {
          */
         addToBasket()
         {
+            this.$store.dispatch("loadComponent", "add-item-to-basket-overlay");
+
             if (this.missingOrderProperties.length)
             {
                 this.showMissingPropertiesError();
             }
-
             else if (this.isSalable)
             {
                 this.waiting = true;

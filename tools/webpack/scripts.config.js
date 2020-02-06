@@ -13,8 +13,9 @@ module.exports = env =>
             checkout: "./resources/js/src/checkout.js"
         },
         output: {
-            filename: "../../../resources/js/dist/ceres-[name]" + (env.prod ? ".min" : "") + ".js",
-            path: path.resolve(__dirname, "dist")
+            filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
+            chunkFilename: "chunks/ceres-[name]"+ (env.prod ? ".min" : "") + ".js",
+            path: path.resolve(__dirname, "..", "..", "resources/js/dist/")
         },
         resolve: {
             alias: {
@@ -61,7 +62,9 @@ module.exports = env =>
             ]
         },
         plugins: [
-            new VueLoaderPlugin()
-        ]
+            new VueLoaderPlugin({
+                exposeFilename: true
+            })
+        ],
     };
 };

@@ -67,26 +67,36 @@
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
-            <last-seen-item-list
-                :items-per-page="{{ itemsPerPage }}"
-                :max-items="{{ maxItems }}"
-                {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}
-                v-cloak>
-                <template #heading>
-                    <div class="widget-caption bg-appearance widget-item-list-caption mb-3">
-                        {% if headlineStyle == "custom-caption" %}
-                            <div class="widget-item-list-inline-caption" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-inline-caption") }}>
-                                {{ headline | raw }}
-                            </div>
-                        {% else %}
-                            <div>
-                                <h2>{{ Twig.print("title") }}</h2>
-                            </div>
-                        {% endif %}
+            <intersect>
+                <last-seen-item-list
+                    :items-per-page="{{ itemsPerPage }}"
+                    :max-items="{{ maxItems }}"
+                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}
+                    v-cloak>
+                    <template #heading>
+                        <div class="widget-caption bg-appearance widget-item-list-caption mb-3">
+                            {% if headlineStyle == "custom-caption" %}
+                                <div class="widget-item-list-inline-caption" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-inline-caption") }}>
+                                    {{ headline | raw }}
+                                </div>
+                            {% else %}
+                                <div>
+                                    <h2>{{ Twig.print("title") }}</h2>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </template>
+                </last-seen-item-list>
+                <template #loading>
+                    <div class="category-item-placeholder w-100 invisible">
+                        <a href="#" class="small">
+                            <i class="fa fa-image"></i>
+                            <span></span>
+                        </a>
                     </div>
                 </template>
-            </last-seen-item-list>
+            </intersect>
         {% else %}
             {{ Twig.if("itemList.documents is not empty or #{ isPreview | json_encode }") }}
 
@@ -111,6 +121,7 @@
                     </div>
                 {% endif %}
                 {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isCurrentTemplate('tpl.item')") }}
+                    <intersect>
                         <carousel :items-per-page="{{ itemsPerPage }}">
                             {{ Twig.for("item", "itemList.documents") }}
                                 <template slot="items">
@@ -135,6 +146,19 @@
                                 </template>
                             {{ Twig.endfor() }}
                         </carousel>
+                        <template #loading>
+                            <div class="row">
+                                {{ Twig.for("item", "itemList.documents") }}
+                                <div class="category-item-placeholder invisible col-12 col-sm-6 col-md-3">
+                                    <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
+                                        <i class="fa fa-image"></i>
+                                        <span>{{ Twig.print("item.data | itemName") }}</span>
+                                    </a>
+                                </div>
+                                {{ Twig.endfor() }}
+                            </div>
+                        </template>
+                    </intersect>
                 {{ Twig.elseif("#{ isPreview | json_encode }") }}
                     <div class="widget-placeholder prop-3-1 proportional-placeholder">
                         <div>

@@ -7,18 +7,18 @@
             </a>
             <div class="dropdown-menu small m-0 p-0 mw-100">
                 <div class="list-group" aria-labelledby="accountMenuList" >
-                    <a :href="myAccountUrl" class="list-group-item small"><i class="fa fa-user"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
+                    <a :href="$ceres.urls.myAccount" class="list-group-item small"><i class="fa fa-user"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
                     <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ $translate("Ceres::Template.loginLogout") }}</a>
                 </div>
             </div>
         </div>
         <div v-if="!isLoggedIn">
-            <a class="nav-link" :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="unmarkInputFields()">
+            <a class="nav-link" :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="createLoginModal(); unmarkInputFields();">
                 <i class="fa fa-user mr-1" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.login") }}</span>
             </a>
             <span class="pipe" v-if="showRegistration"></span>
-            <a class="nav-link" :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="unmarkInputFields()" v-if="showRegistration">
+            <a class="nav-link" :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="createRegisterModal(); unmarkInputFields();" v-if="showRegistration">
                 <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginRegister") }}</span>
             </a>
@@ -30,7 +30,7 @@
 import ApiService from "../../../services/ApiService";
 import ValidationService from "../../../services/ValidationService";
 import { isDefined } from "../../../helper/utils";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     props: {
@@ -41,20 +41,6 @@ export default {
     },
 
     computed: {
-        myAccountUrl() {
-            return App.urls.myAccount;
-        },
-
-        isLogin()
-        {
-            return App.templateType === "login";
-        },
-
-        isRegister()
-        {
-            return App.templateType === "register";
-        },
-
         ...mapGetters([
            "username",
            "isLoggedIn"
@@ -71,6 +57,9 @@ export default {
                     this.$store.commit("setUserData", response.data);
                 }
             });
+
+        this.isLogin = App.templateType === "login";
+        this.isRegister = App.templateType === "register";
     },
 
     /**
@@ -105,7 +94,22 @@ export default {
         {
             ValidationService.unmarkAllFields($("#login"));
             ValidationService.unmarkAllFields($("#registration"));
-        }
+        },
+
+        createLoginModal()
+        {
+            this.loadComponent("login-modal");
+
+        },
+
+        createRegisterModal()
+        {
+            this.loadComponent("register-modal");
+        },
+
+        ...mapActions([
+            "loadComponent"
+        ])
     }
 }
 </script>

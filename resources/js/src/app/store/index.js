@@ -7,11 +7,12 @@ import address from "./modules/AddressModule";
 import basket from "./modules/BasketModule";
 import checkout from "./modules/CheckoutModule";
 import consents from "./modules/ConsentModule";
-import contactForm from "./modules/ContactForm";
+import contactForm from "./modules/ContactFormModule";
 import item from "./modules/SingleItemModule";
 import itemList from "./modules/ItemListModule";
 import itemSearch from "./modules/ItemSearchModule";
 import lastSeen from "./modules/LastSeenModule";
+import lazyComponent from "./modules/LazyComponentModule";
 import liveShopping from "./modules/LiveShoppingModule";
 import localization from "./modules/LocalizationModule";
 import navigation from "./modules/NavigationModule";
@@ -44,6 +45,7 @@ const store = new Vuex.Store(
             itemList,
             itemSearch,
             lastSeen,
+            lazyComponent,
             liveShopping,
             localization,
             navigation,
@@ -86,5 +88,15 @@ ApiService.listen("LocalizationChanged",
 
 
 window.ceresStore = store;
+
+ApiService.listen("AfterBasketChanged",
+    data =>
+    {
+        store.commit("setBasket", data.basket);
+        store.commit("setShowNetPrices", data.showNetPrices);
+        store.commit("setWishListIds", data.basket.itemWishListIds);
+    });
+
+store.dispatch("loadBasketData");
 
 export default store;

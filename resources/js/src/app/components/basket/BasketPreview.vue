@@ -1,6 +1,4 @@
 <template>
-<!-- {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
-{{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }} -->
     <div class="basket-preview-wrapper h-100" :class="{ 'empty': !basketItems.length, 'open-hover': hover, 'open-right': !hover }">
         <div class="position-relative h-100">
             <div class="basket-preview d-flex flex-column flex-nowrap bg-white shadow w-100">
@@ -126,28 +124,11 @@ export default {
         })
     },
 
-    created()
-    {
-        this.$store.dispatch("loadBasketData");
-        this.$store.commit("setShowNetPrices", this.showNetPrices);
-    },
-
     /**
      * Bind to basket and bind the basket items
      */
     mounted()
     {
-        this.$nextTick(() =>
-        {
-            ApiService.listen("AfterBasketChanged",
-                data =>
-                {
-                    this.$store.commit("setBasket", data.basket);
-                    this.$store.commit("setShowNetPrices", data.showNetPrices);
-                    this.$store.commit("setWishListIds", data.basket.itemWishListIds);
-                });
-        });
-
         if (App.config.basket.addItemToBasketConfirm === "preview")
         {
             ApiService.listen("AfterBasketItemAdd", data =>
