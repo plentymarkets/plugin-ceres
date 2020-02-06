@@ -11,12 +11,15 @@
     text-align: center;
     opacity: .5;
 }
+
 .carousel-control-prev {
     left: 0;
 }
+
 .carousel-control-next {
     right: 0;
 }
+
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
     display: inline-block;
@@ -30,12 +33,12 @@
     .widget-image-carousel#{$parent} {
         .widget-caption h2,
         .widget-caption .h2 {
-            @include widget-bg-variant( rgba($color, .8) );
+            @include widget-bg-variant(rgba($color, .8));
         }
 
         &:hover .widget-caption h2,
         &:hover .widget-caption .h2 {
-            @include widget-bg-variant( rgba($color, .9) );
+            @include widget-bg-variant(rgba($color, .9));
         }
 
         .carousel-indicators li {
@@ -54,8 +57,8 @@
 
 .widget-image-carousel {
     .widget-inner {
-        padding-right: 0 !important;
-        padding-left: 0 !important;
+        padding-right: 0 !important; // stylelint-disable-line declaration-no-important
+        padding-left: 0 !important; // stylelint-disable-line declaration-no-important
 
         .widget-caption {
             position: absolute;
@@ -71,7 +74,7 @@
                 padding: .5rem 1rem;
                 margin: 0;
                 font-size: 1.75rem;
-                transition: 300ms all ease;
+                @include transition(300ms all ease);
 
                 @include media-breakpoint-up(md) {
                     font-size: 3rem;
@@ -83,10 +86,12 @@
             display: flex;
             height: 100%;
         }
+
         .carousel-item {
             width: 100%;
             height: 100%;
 
+            // stylelint-disable selector-no-qualifying-type
             img {
                 position: absolute;
                 top: 50%;
@@ -101,6 +106,7 @@
                     object-fit: cover;
                 }
             }
+            // stylelint-enable selector-no-qualifying-type
         }
 
         .carousel-indicators {
@@ -115,13 +121,13 @@
                 margin: 2px;
                 background-color: transparent;
                 border: 1px solid #fff;
-                border-radius: .8rem;
+                @include border-radius(.8rem);
             }
         }
 
         .carousel-control {
             background-image: none;
-            transition: 300ms all ease;
+            @include transition(300ms all ease);
 
             .fa {
                 position: absolute;
@@ -133,6 +139,7 @@
         }
     }
 }
+
 @include media-breakpoint-up(md) {
     .widget-inner-stacked .widget-image-carousel {
         .widget-caption {
@@ -159,12 +166,14 @@
 /* Compatibility for IE */
 
 /* display img with optimal aspect ratio */
+// stylelint-disable
 html.ie {
     .widget-image-carousel .widget-inner .carousel-item .img-cover {
         min-width: auto;
         min-height: auto;
     }
 }
+// stylelint-enable
 
 @include widget-carousel-variant(".widget-primary", $primary);
 @include widget-carousel-variant(".widget-secondary", $secondary);

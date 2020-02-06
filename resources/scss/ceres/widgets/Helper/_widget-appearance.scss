@@ -1,3 +1,4 @@
+// stylelint-disable declaration-no-important
 @each $color, $value in $shop-builder-colors {
     .widget-#{$color} {
         @include text-emphasis-variant(".text-appearance", $value);
@@ -58,7 +59,7 @@
                     }
                 }
 
-                &.active .page-link {
+                &.active .page-link { // stylelint-disable-line
                     border-color: $value;
                     @include context-bg($value);
                 }

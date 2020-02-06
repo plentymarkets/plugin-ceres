@@ -1,10 +1,10 @@
 .input-group {
 
     .input-unit + .input-group-btn {
-        padding-bottom: $grid-gutter-width/2;
+        padding-bottom: $grid-gutter-width / 2;
 
         .btn {
-            height: calc(2.8em + 1px);
+            height: calc(2.8em + 1px); // stylelint-disable-line function-blacklist
         }
     }
 
@@ -51,7 +51,7 @@
         .form-control {
             display: block;
             float: none;
-            border-radius: 0 !important;
+            border-radius: 0 !important; // stylelint-disable-line
         }
     }
 }
@@ -80,7 +80,7 @@ button:focus {
 
 .btn {
     word-break: break-word;
-    outline: 0 !important;
+    outline: 0 !important; // stylelint-disable-line declaration-no-important
 
     & .btn-label {
         &.btn-trans {
@@ -128,7 +128,7 @@ button:focus {
 
 .btn-xs-max-width {
     @include media-breakpoint-down(xs) {
-        width: 100% !important;
+        width: 100% !important; // stylelint-disable-line declaration-no-important
     }
 }
 
@@ -138,7 +138,7 @@ button:focus {
 
     @extend .small;
 
-    transition: all 200ms;
+    @include transition(all .2s);
 
     .btn-label {
         position: relative;
@@ -146,8 +146,8 @@ button:focus {
         display: inline-block;
         padding: $btn-padding-y-sm $btn-padding-x-sm;
         background-color: rgba(0, 0, 0, .15);
-        border-top-right-radius: $border-radius-sm;
-        border-bottom-right-radius: $border-radius-sm;
+        @include border-top-right-radius($border-radius-sm);
+        @include border-bottom-right-radius($border-radius-sm);
     }
 
     &.label-right {
@@ -184,7 +184,7 @@ button:focus {
     }
 
     &.btn-circle {
-        border-radius: 50%;
+        border-radius: 50%; // stylelint-disable-line property-blacklist
     }
 }
 
@@ -218,7 +218,7 @@ button:focus {
         font-weight: 700;
         color: $gray-500;
         content: attr(data-show-more);
-        background-color: white;
+        background-color: $white;
     }
 
     i {
@@ -243,8 +243,8 @@ button:focus {
     }
 }
 
-// Responsive button text and icon visibility
-
+// TODO: Replace classes with default bootstrap visibility classes
+// stylelint-disable
 @each $bp in map-keys($grid-breakpoints) {
     .btn-only-icon-#{$bp}-up {
         @include media-breakpoint-up($bp) {

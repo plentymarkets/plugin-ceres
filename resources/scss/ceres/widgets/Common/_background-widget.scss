@@ -15,7 +15,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        height: 100% !important;
+        height: 100% !important; // stylelint-disable-line declaration-no-important
     }
 
     .huge-font {
@@ -30,11 +30,11 @@
 
         .widget-text,
         .widget-code {
-            h1 { font-size: 2em };
-            h2 { font-size: 1.8em };
-            h3 { font-size: 1.5em };
-            h4 { font-size: 1.25em };
-            * { font-size: 1em };
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.5em; }
+            h4 { font-size: 1.25em; }
+            * { font-size: 1em; }
         }
     }
 }

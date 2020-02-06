@@ -38,14 +38,17 @@
         line-height: 1.1;
         text-decoration: none;
     }
+
     .single-description {
         font-size: .85rem;
     }
+
     .price {
         display: block;
-        font-weight: bold;
+        font-weight: $font-weight-bold;
         line-height: 1;
     }
+
     .input-number {
         text-align: center;
     }
@@ -62,19 +65,24 @@
             width: auto;
             max-width: 100%;
         }
+
         .special-tags {
             padding: .3rem;
         }
     }
+
     .nav-tabs {
         @include media-breakpoint-only(xs) {
             display: block;
         }
+
         .nav-item {
             float: none;
             cursor: pointer;
+
             .nav-link {
                 border: 1px solid $nav-tabs-border-color;
+
                 &.active,
                 &:hover {
                     color: $gray-900;
@@ -82,6 +90,7 @@
                     border: 1px solid $nav-tabs-border-color;
                 }
             }
+
             & + .nav-item {
                 margin-left: 0;
             }
@@ -107,15 +116,16 @@
 
     .fade-enter-active,
     .fade-leave-active {
-        transition: opacity .3s ease-out;
+        @include transition(opacity .3s ease-out);
     }
+
     .fade-enter,
     .fade-leave-to {
         opacity: 0;
     }
 
     .order-property-input {
-        transition: border-color .3s ease-out;
+        @include transition(border-color .3s ease-out);
 
         &.active {
             border-color: $success;
@@ -129,16 +139,45 @@
     }
 }
 
-.availability_1 { @include context-bg($success); }
-.availability_2 { @include context-bg($success); }
-.availability_3 { @include context-bg($warning); }
-.availability_4 { @include context-bg($warning); }
-.availability_5 { @include context-bg($danger); }
-.availability_6 { @include context-bg($danger); }
-.availability_7 { @include context-bg($danger); }
-.availability_8 { @include context-bg($danger); }
-.availability_9 { @include context-bg($gray-900); }
-.availability_10 { @include context-bg($gray-900); }
+.availability_1 {
+    @include context-bg($success);
+}
+
+.availability_2 {
+    @include context-bg($success);
+}
+
+.availability_3 {
+    @include context-bg($warning);
+}
+
+.availability_4 {
+    @include context-bg($warning);
+}
+
+.availability_5 {
+    @include context-bg($danger);
+}
+
+.availability_6 {
+    @include context-bg($danger);
+}
+
+.availability_7 {
+    @include context-bg($danger);
+}
+
+.availability_8 {
+    @include context-bg($danger);
+}
+
+.availability_9 {
+    @include context-bg($gray-900);
+}
+
+.availability_10 {
+    @include context-bg($gray-900);
+}
 
 
 .rating {
@@ -163,7 +202,7 @@
 .img-thumbnail {
     padding: .75rem .45rem .25rem 0;
     border: none;
-    border-radius: none;
+    border-radius: 0; // stylelint-disable-line property-blacklist
 }
 
 @include media-breakpoint-only(md) {
@@ -180,18 +219,22 @@
         .nav-tabs {
             .nav-item {
                 float: left;
+
                 .nav-link {
                     border: 1px solid $nav-tabs-border-color;
+
                     &.active,
                     &:hover {
                         color: $gray-600;
-                        background: white;
+                        background: $white;
                         border: 1px solid $nav-tabs-border-color;
                     }
+
                     &.active {
                         border-bottom: 1px solid transparent;
                     }
                 }
+
                 & + .nav-item {
                     margin-left: -1px;
                 }
@@ -205,7 +248,7 @@
 
     .order-property-slider-inner {
         white-space: nowrap;
-        transition: transform 300ms ease;
+        @include transition(transform 300ms ease);
 
         > div {
             display: inline-block;
@@ -238,8 +281,8 @@
                 cursor: pointer;
                 background-color: #fff;
                 border: 1px solid $gray-300;
-                border-radius: 50%;
-                transition: all .3s ease;
+                @include border-radius(50%);
+                @include transition(all .3s ease);
 
                 &.active {
                     background-color: $gray-300;
@@ -264,8 +307,7 @@
         }
     }
 
-    .form-check input:checked + label
-    {
+    .form-check input:checked + label {
         @extend .text-success;
     }
 }
@@ -293,7 +335,7 @@
         margin: .5rem;
         cursor: pointer;
         border: 1px solid $gray-300;
-        border-radius: $border-radius;
+        @include border-radius($border-radius);
 
         &.active {
             color: $primary;
@@ -314,15 +356,14 @@
                 width: 100%;
                 height: 100%;
                 content: "";
-                background:
-                    linear-gradient(
-                        to top left,
-                        rgba(0, 0, 0, 0) 0%,
-                        rgba(0, 0, 0, 0) calc(50% - .8px),
-                        $gray-300 50%,
-                        rgba(0, 0, 0, 0) calc(50% + .8px),
-                        rgba(0, 0, 0, 0) 100%
-                    );
+                background: linear-gradient(
+                                to top left,
+                                rgba(0, 0, 0, 0) 0%,
+                                rgba(0, 0, 0, 0) calc(50% - .8px),
+                                $gray-300 50%,
+                                rgba(0, 0, 0, 0) calc(50% + .8px),
+                                rgba(0, 0, 0, 0) 100%
+                );
             }
         }
     }
@@ -335,7 +376,7 @@
             > img {
                 width: 100%;
                 height: 100%;
-                border-radius: $border-radius;
+                @include border-radius($border-radius);
                 object-fit: contain;
             }
         }

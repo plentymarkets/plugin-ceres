@@ -24,14 +24,14 @@
     }
 
     .item-name {
-        display: -webkit-box;
+        display: -webkit-box; // stylelint-disable-line value-no-vendor-prefix
         max-height: 3em;
         margin-bottom: .25rem;
         overflow: hidden;
         font-weight: 700;
         text-overflow: ellipsis;
         -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        -webkit-box-orient: vertical; // stylelint-disable-line property-no-vendor-prefix
 
         &::after {
             position: absolute;
@@ -40,7 +40,7 @@
             display: inline-block;
             height: 50%;
             content: "…";
-            background-color: white;
+            background-color: $white;
         }
     }
 
@@ -57,7 +57,7 @@
         line-height: 1;
         color: $gray-300;
         cursor: pointer;
-        transition: color 250ms;
+        @include transition(color 250ms);
 
         &:hover {
             color: $danger;
@@ -84,11 +84,14 @@
 
 }
 
+// stylelint-disable declaration-no-important
 .payment-link-style {
     padding: 0 15px !important;
     color: $primary !important;
     cursor: pointer !important;
+
     span {
         text-decoration: underline !important;
     }
 }
+// stylelint-enable declaration-no-important
