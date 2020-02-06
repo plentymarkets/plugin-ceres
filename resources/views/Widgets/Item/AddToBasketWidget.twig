@@ -23,21 +23,28 @@
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", Twig.var("item.documents[0].data")])) }}
 
-    <div class="w-100" v-if="$store.state.item.variation.documents">
+    <intersect>
+        <div class="w-100" v-if="$store.state.item.variation.documents">
 
-        {{ AddToBasket.printVueComponent(
-            "$store.state.item.variation.documents[0].data",
-            false,
-            true,
-            {
-                ":missing-order-properties":"$store.getters.variationMissingProperties",
-                ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice",
-                "button-size": buttonSize,
-                "padding-classes": spacingPadding,
-                "padding-inline-styles": inlinePadding
-            }
-        ) }}
-    </div>
+            {{ AddToBasket.printVueComponent(
+                "$store.state.item.variation.documents[0].data",
+                false,
+                true,
+                {
+                    ":missing-order-properties":"$store.getters.variationMissingProperties",
+                    ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice",
+                    "button-size": buttonSize,
+                    "padding-classes": spacingPadding,
+                    "padding-inline-styles": inlinePadding
+                }
+            ) }}
+        </div>
+        <template #loading>
+            <div class="w-100 invisible">
+                <button class="btn btn-block"></button>
+            </div>
+        </template>
+    </intersect>
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.AfterAddToBasket", Twig.var("item.documents[0].data")])) }}
 </div>
