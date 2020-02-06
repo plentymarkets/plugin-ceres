@@ -33,7 +33,7 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentWidgetRepositoryContract;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
 use Plenty\Modules\Webshop\Helpers\UrlQuery;
-use Plenty\Modules\Webshop\ItemSearch\Helper\ResultFieldTemplate;
+use Plenty\Modules\Webshop\ItemSearch\Helpers\ResultFieldTemplate;
 use Plenty\Modules\Webshop\Template\Contracts\TemplateConfigRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
 use Plenty\Plugin\ServiceProvider;
