@@ -13569,6 +13569,23 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
     &.fixed-top {
         position: fixed;
     }
+
+    .collapse {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: $zindex-7;
+        width: 100%;
+        background-color: $gray-900;
+
+        &.collapsing {
+            overflow: hidden;
+        }
+    }
+
+    .cmp-search-box {
+        background-color: $top-bar-bg;
+    }
 }
 
 .controls-list {
@@ -13693,11 +13710,51 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
     }
 }
 
-// Searchbar
-.cmp-search-box {
-    background-color: $top-bar-bg;
+// Currency & Country Select
+.cmp-country-settings,
+.cmp-currency-select {
+
+    .shipping-settings {
+        @include media-breakpoint-down(md) {
+            margin-top: 1rem;
+        }
+    }
+
+    ul {
+        @include reset-list();
+        max-height: 50vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    li {
+        a {
+            display: inline-block;
+            padding: .4rem;
+            &:hover {
+                @include context-bg($primary);
+            }
+        }
+
+        &.active { // stylelint-disable-line selector-no-qualifying-type
+            a {
+                @include context-bg($primary);
+            }
+        }
+
+        &.is-disabled { // stylelint-disable-line selector-no-qualifying-type
+            a {
+                cursor: not-allowed;
+
+                &:hover {
+                    @include context-bg($gray-700);
+                }
+            }
+        }
+    }
 }
 
+// Searchbar
 .autocomplete-suggestions {
     position: absolute;
     top: 100%;
@@ -13781,64 +13838,8 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
     }
 }
 
-html.ie { // stylelint-disable-line selector-no-qualifying-type
-    .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
-        min-height: 32px;
-    }
-}
-
-// Currency & Country Select
-.cmp-country-settings,
-.cmp-currency-select {
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: $zindex-7;
-    width: 100%;
-    background-color: $gray-900;
-
-    &.collapsing {
-        overflow: hidden;
-    }
-
-    .shipping-settings {
-        @include media-breakpoint-down(md) {
-            margin-top: 1rem;
-        }
-    }
-
-    ul {
-        @include reset-list();
-        max-height: 50vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    li {
-        a {
-            display: inline-block;
-            padding: .4rem;
-            &:hover {
-                @include context-bg($primary);
-            }
-        }
-
-        &.active { // stylelint-disable-line selector-no-qualifying-type
-            a {
-                @include context-bg($primary);
-            }
-        }
-
-        &.is-disabled { // stylelint-disable-line selector-no-qualifying-type
-            a {
-                cursor: not-allowed;
-
-                &:hover {
-                    @include context-bg($gray-700);
-                }
-            }
-        }
-    }
+html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
+    min-height: 32px;
 }
 
 .widget {
