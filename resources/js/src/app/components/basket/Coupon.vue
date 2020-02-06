@@ -7,11 +7,11 @@
             <input type="text" class="form-control" v-model="couponCode" :placeholder="$translate('Ceres::Template.couponEnterCoupon')" @keyup.enter="redeemCode()" :disabled="disabled || isCheckoutReadonly">
             <span class="input-group-btn">
                 <button class="btn btn-medium btn-primary btn-appearance" type="button" @click="redeemCode()" :disabled="waiting || isCheckoutReadonly" v-if="!disabled">
-                    <i v-waiting-animation="waiting" class="fa fa-gift" aria-hidden="true"></i>
+                    <icon icon="gift" :loading="waiting"></icon>
                     {{ $translate("Ceres::Template.couponRedeem") }}
                 </button>
                 <button class="btn btn-medium btn-danger" type="button" @click="removeCode()" :disabled="waiting || isCheckoutReadonly" v-else>
-                    <i v-waiting-animation="waiting" class="fa fa-trash" aria-hidden="true"></i>
+                    <icon icon="trash" :loading="waiting"></icon>
                     {{ $translate("Ceres::Template.couponRemove") }}
                 </button>
             </span>

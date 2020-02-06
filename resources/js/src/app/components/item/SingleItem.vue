@@ -2,13 +2,13 @@
     <div>
         <slot :getDataField="getDataField" :getFilteredDataField="getFilteredDataField">
             <div class="single container-max page-content">
-                <div class="row mt-5 position-relative">
+                <div class="row position-relative">
 
-                    <div class="col-12 col-md-7">
+                    <div class="col-12 col-md-7 mt-5">
                         <slot name="image-carousel"></slot>
                     </div>
 
-                    <div class="col-12 col-md-5">
+                    <div class="col-12 col-md-5 mt-md-5">
                         <div v-stick-in-parent>
                             <!-- START SINGLEITEM_DETAILS -->
                             <div class="producertag h6 producer text-muted" v-if="currentVariation.filter.hasManufacturer">

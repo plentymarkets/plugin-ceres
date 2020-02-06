@@ -3969,3 +3969,27 @@ $flag-icon-square-path: '/1x1' !default;
     @extend .fa-circle;
     color: transparent !important; // stylelint-disable-line declaration-no-important
 }
+
+.flag-icon-en {
+    background-image: url("../images/flags/4x3/gb.svg");
+}
+
+.flag-icon-da {
+    background-image: url("../images/flags/4x3/dk.svg");
+}
+
+.flag-icon-nn {
+    background-image: url("../images/flags/4x3/no.svg");
+}
+
+.flag-icon-ic {
+    background-image: url("../images/flags/ic.svg");
+}
+
+.flag-icon-ea {
+    background-image: url("../images/flags/ea.svg");
+}
+
+.flag-icon-an {
+    background-image: url("../images/flags/an.svg");
+}

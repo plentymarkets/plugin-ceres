@@ -1,6 +1,6 @@
 <template>
-    <div class="p-2 px-lg-0">
-        <div class="d-flex flex-grow-1 position-relative">
+    <div class="container-max">
+        <div class="d-flex flex-grow-1 position-relative my-2">
             <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" @input="autocomplete($event.target.value)"
                 @keyup.enter="prepareSearch()" @keyup.down="keydown()" @keyup.up="keyup()"
                 @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)"

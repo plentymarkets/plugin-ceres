@@ -26,8 +26,8 @@
                 <div :class="{'col-5 col-sm-8 text-sm-right': !modalElement}">
                     <slot name="extend-overlay-buttons"></slot>
                     <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
-                        <i class="fa fa-user" v-waiting-animation="isDisabled"></i>
                         {{ $translate("Ceres::Template.login") }}
+                        <icon icon="user" :loading="isDisabled"></icon>
                     </button>
                 </div>
             </div>
@@ -174,6 +174,8 @@ export default {
         showResetPwdView()
         {
             this.resetError();
+
+            this.$store.dispatch("loadComponent", "forgot-password-modal");
 
             if (this.modalElement)
             {

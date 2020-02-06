@@ -2,7 +2,7 @@
     color: $top-bar-color;
     background-color: $top-bar-bg;
 
-    a {
+    .nav-link {
         color: $top-bar-color;
         text-decoration: none;
         outline: none;
@@ -11,6 +11,23 @@
     &.fixed-top {
         position: fixed;
     }
+
+    .collapse {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: $zindex-7;
+        width: 100%;
+        background-color: $gray-900;
+
+        &.collapsing {
+            overflow: hidden;
+        }
+    }
+
+    .cmp-search-box {
+        background-color: $top-bar-bg;
+    }
 }
 
 .controls-list {
@@ -18,11 +35,11 @@
         font-size: 1rem;
     }
 
-    a {
+    .nav-link {
         display: inline-block;
         padding: .5rem .8rem;
 
-        &[aria-expanded="true"] { // stylelint-disable-line selector-no-qualifying-type
+        &[aria-expanded="true"] {
             background: $gray-900;
         }
 
@@ -33,7 +50,7 @@
     }
 
     @include media-breakpoint-only(xs) {
-        a {
+        .nav-link {
             padding: .5rem;
         }
         .anicon-search-xcross {
@@ -133,11 +150,51 @@
     }
 }
 
-// Searchbar
-.cmp-search-box {
-    background-color: $top-bar-bg;
+// Currency & Country Select
+.cmp-country-settings,
+.cmp-currency-select {
+
+    .shipping-settings {
+        @include media-breakpoint-down(md) {
+            margin-top: 1rem;
+        }
+    }
+
+    ul {
+        @include reset-list();
+        max-height: 50vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    li {
+        a {
+            display: inline-block;
+            padding: .4rem;
+            &:hover {
+                @include context-bg($primary);
+            }
+        }
+
+        &.active { // stylelint-disable-line selector-no-qualifying-type
+            a {
+                @include context-bg($primary);
+            }
+        }
+
+        &.is-disabled { // stylelint-disable-line selector-no-qualifying-type
+            a {
+                cursor: not-allowed;
+
+                &:hover {
+                    @include context-bg($gray-700);
+                }
+            }
+        }
+    }
 }
 
+// Searchbar
 .autocomplete-suggestions {
     position: absolute;
     top: 100%;
@@ -204,15 +261,13 @@
         justify-content: space-between;
 
         .controls {
-            a {
-                padding: 1.2rem .8rem !important; // stylelint-disable-line declaration-no-important
+            .nav-link {
+                padding: 1.2rem .8rem;
             }
         }
     }
 }
 
-html.ie { // stylelint-disable-line selector-no-qualifying-type
-    .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
-        min-height: 32px;
-    }
+html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
+    min-height: 32px;
 }
