@@ -22,6 +22,44 @@
             }
         }
     }
+
+    .carousel-control {
+        display: block;
+        text-align: left;
+        background-image: none !important; // stylelint-disable-line declaration-no-important
+        opacity: 1;
+
+        &.right {
+            right: 0;
+            text-align: right;
+
+            .owl-single-item-control {
+                right: 0;
+            }
+        }
+
+        &:hover {
+            opacity: 1 !important; // stylelint-disable-line declaration-no-important
+            i {
+                color: $primary;
+            }
+        }
+    }
+
+    .owl-single-item-control {
+        font-size: 3rem;
+        color: $gray-700;
+        text-shadow: none;
+
+        @include media-breakpoint-down(sm) {
+            padding: 0 .5rem;
+            font-size: 1.5rem;
+        }
+    }
+
+    .owl-dots {
+        display: block;
+    }
 }
 
 .owl-carousel .owl-stage {
@@ -157,7 +195,7 @@
     z-index: 1;
 }
 
-.owl-carousel .fadeOut {
+.owl-carousel .fade-out {
     animation-name: fadeOut;
 }
 
@@ -195,21 +233,6 @@
     position: relative;
     height: 100%;
     background: #000;
-}
-
-.owl-carousel .owl-video-play-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 1;
-    width: 80px;
-    height: 80px;
-    margin-top: -40px;
-    margin-left: -40px;
-    cursor: pointer;
-    background: url("owl.video.play.png") no-repeat;
-    @include transition(transform 100ms ease);
-    -webkit-backface-visibility: hidden; // stylelint-disable-line property-no-vendor-prefix
 }
 
 .owl-carousel .owl-video-play-icon:hover {
@@ -360,55 +383,6 @@ Custom classes
 
 .owl-thumbs {
     display: none;
-}
-
-.owl-carousel {
-    .carousel-control {
-        display: block;
-        text-align: left;
-        background-image: none !important; // stylelint-disable-line declaration-no-important
-        opacity: 1;
-
-        &.right {
-            right: 0;
-            text-align: right;
-
-            .owl-single-item-control {
-                right: 0;
-            }
-        }
-
-        &:hover {
-            opacity: 1 !important; // stylelint-disable-line declaration-no-important
-            i {
-                color: $primary;
-            }
-        }
-    }
-
-    .owl-single-item-control {
-        font-size: 3rem;
-        color: $gray-700;
-        text-shadow: none;
-
-        @include media-breakpoint-down(sm) {
-            padding: 0 .5rem;
-            font-size: 1.5rem;
-        }
-    }
-
-    .owl-dots {
-        display: block;
-    }
-}
-
-#thumb-carousel {
-    .carousel-control {
-        width: 5%;
-    }
-}
-
-.owl-thumbs {
     margin-top: .5rem;
 
     .owl-thumb {
@@ -421,10 +395,14 @@ Custom classes
             border: 1px solid $primary;
         }
     }
+
+    .carousel-control {
+        width: 5%;
+    }
 }
 
 /* Compatibility for IE */
-// stylelint-disable
+// stylelint-disable selector-no-qualifying-type
 html.ie {
     // set width to maximal available size
     .single-carousel .owl-item img {
@@ -437,3 +415,4 @@ html.ie {
         text-align: center;
     }
 }
+// stylelint-enable selector-no-qualifying-type

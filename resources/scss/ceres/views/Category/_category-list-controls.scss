@@ -112,7 +112,7 @@
         position: relative;
         cursor: pointer;
 
-        .expand_nav {
+        .expand-nav {
             position: relative;
             z-index: 1;
             float: left;
@@ -249,45 +249,45 @@
 
         .form-check {
             padding-left: 0;
+        }
 
-            .form-check-input {
-                &:checked + label {
-                    padding-left: 1.75rem;
-                    color: $gray-900;
-                    background: $gray-200;
+        .form-check-input {
+            &:checked + label {
+                padding-left: 1.75rem;
+                color: $gray-900;
+                background: $gray-200;
 
-                    &::before {
-                        font-family: "FontAwesome";
-                        content: "\f046";
-                        opacity: 1;
-                    }
-                }
-
-                &:disabled + label {
-                    cursor: not-allowed;
+                &::before {
+                    font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+                    content: "\f046";
+                    opacity: 1;
                 }
             }
 
-            .form-check-label {
-                display: block;
-                padding: .5rem 0;
+            &:disabled + label {
+                cursor: not-allowed;
+            }
+        }
+
+        .form-check-label {
+            display: block;
+            padding: .5rem 0;
+            color: $gray-700;
+            @include transition(all .1s ease);
+
+            &:hover {
+                padding-left: .5rem;
                 color: $gray-700;
+                background: $gray-100;
                 @include transition(all .1s ease);
+            }
 
-                &:hover {
-                    padding-left: .5rem;
-                    color: $gray-700;
-                    background: $gray-100;
-                    @include transition(all .1s ease);
-                }
-
-                &::before {
-                    position: absolute;
-                    left: .5rem;
-                    font-family: "FontAwesome";
-                    content: "\f046";
-                    opacity: 0;
-                }
+            &::before {
+                position: absolute;
+                left: .5rem;
+                font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+                content: "\f046";
+                opacity: 0;
             }
         }
     }

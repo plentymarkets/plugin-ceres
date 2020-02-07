@@ -80,19 +80,19 @@
             float: none;
             cursor: pointer;
 
-            .nav-link {
-                border: 1px solid $nav-tabs-border-color;
-
-                &.active,
-                &:hover {
-                    color: $gray-900;
-                    background: $gray-200;
-                    border: 1px solid $nav-tabs-border-color;
-                }
-            }
-
             & + .nav-item {
                 margin-left: 0;
+            }
+        }
+
+        .nav-link {
+            border: 1px solid $nav-tabs-border-color;
+
+            &.active,
+            &:hover {
+                color: $gray-900;
+                background: $gray-200;
+                border: 1px solid $nav-tabs-border-color;
             }
         }
     }
@@ -133,49 +133,49 @@
     }
 
     .order-property-selection-info-popper {
-        button.btn {
+        .btn {
             margin: 5px;
         }
     }
 }
 
-.availability_1 {
+.availability-1 {
     @include context-bg($success);
 }
 
-.availability_2 {
+.availability-2 {
     @include context-bg($success);
 }
 
-.availability_3 {
+.availability-3 {
     @include context-bg($warning);
 }
 
-.availability_4 {
+.availability-4 {
     @include context-bg($warning);
 }
 
-.availability_5 {
+.availability-5 {
     @include context-bg($danger);
 }
 
-.availability_6 {
+.availability-6 {
     @include context-bg($danger);
 }
 
-.availability_7 {
+.availability-7 {
     @include context-bg($danger);
 }
 
-.availability_8 {
+.availability-8 {
     @include context-bg($danger);
 }
 
-.availability_9 {
+.availability-9 {
     @include context-bg($gray-900);
 }
 
-.availability_10 {
+.availability-10 {
     @include context-bg($gray-900);
 }
 
@@ -220,23 +220,23 @@
             .nav-item {
                 float: left;
 
-                .nav-link {
-                    border: 1px solid $nav-tabs-border-color;
-
-                    &.active,
-                    &:hover {
-                        color: $gray-600;
-                        background: $white;
-                        border: 1px solid $nav-tabs-border-color;
-                    }
-
-                    &.active {
-                        border-bottom: 1px solid transparent;
-                    }
-                }
-
                 & + .nav-item {
                     margin-left: -1px;
+                }
+            }
+
+            .nav-link {
+                border: 1px solid $nav-tabs-border-color;
+
+                &.active,
+                &:hover {
+                    color: $gray-600;
+                    background: $white;
+                    border: 1px solid $nav-tabs-border-color;
+                }
+
+                &.active {
+                    border-bottom: 1px solid transparent;
                 }
             }
         }
@@ -255,7 +255,7 @@
             width: 100%;
             visibility: hidden;
 
-            &.active {
+            &.active { // stylelint-disable-line selector-no-qualifying-type
                 visibility: visible;
             }
         }
@@ -268,42 +268,44 @@
     .order-property-slider-controls {
         display: flex;
         flex-direction: row;
+    }
 
-        .slider-nav {
-            flex: 1;
-            text-align: center;
+    .slider-nav {
+        flex: 1;
+        text-align: center;
 
-            span {
-                display: inline-block;
-                width: 12px;
-                height: 12px;
-                margin: 12px 5px 0;
-                cursor: pointer;
-                background-color: #fff;
-                border: 1px solid $gray-300;
-                @include border-radius(50%);
-                @include transition(all .3s ease);
+        span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 12px 5px 0;
+            cursor: pointer;
+            background-color: #fff;
+            border: 1px solid $gray-300;
+            @include border-radius(50%);
+            @include transition(all .3s ease);
 
-                &.active {
-                    background-color: $gray-300;
-
-                    &.error {
-                        // background-color: lighten($danger, 25%);
-                        background-color: mix($danger, $gray-300);
-                        border-color: mix(lighten($danger, 25%), $gray-300);
-                    }
-                }
-
-                &.highlight {
-                    background-color: $primary;
-                    border-color: lighten($primary, 25%);
-                }
+            // stylelint-disable selector-no-qualifying-type
+            &.active {
+                background-color: $gray-300;
 
                 &.error {
-                    background-color: $danger;
-                    border-color: lighten($danger, 25%);
+                    // background-color: lighten($danger, 25%);
+                    background-color: mix($danger, $gray-300);
+                    border-color: mix(lighten($danger, 25%), $gray-300);
                 }
             }
+
+            &.highlight {
+                background-color: $primary;
+                border-color: lighten($primary, 25%);
+            }
+
+            &.error {
+                background-color: $danger;
+                border-color: lighten($danger, 25%);
+            }
+            // stylelint-enable selector-no-qualifying-type
         }
     }
 
@@ -351,20 +353,23 @@
                 opacity: .5;
             }
 
+            // stylelint-disable function-blacklist
             &::after {
                 position: absolute;
                 width: 100%;
                 height: 100%;
                 content: "";
-                background: linear-gradient(
-                                to top left,
-                                rgba(0, 0, 0, 0) 0%,
-                                rgba(0, 0, 0, 0) calc(50% - .8px),
-                                $gray-300 50%,
-                                rgba(0, 0, 0, 0) calc(50% + .8px),
-                                rgba(0, 0, 0, 0) 100%
-                );
+                background:
+                    linear-gradient(
+                        to top left,
+                        rgba(0, 0, 0, 0) 0%,
+                        rgba(0, 0, 0, 0) calc(50% - .8px),
+                        $gray-300 50%,
+                        rgba(0, 0, 0, 0) calc(50% + .8px),
+                        rgba(0, 0, 0, 0) 100%
+                    );
             }
+            // stylelint-enable function-blacklist
         }
     }
 
@@ -383,7 +388,7 @@
     }
 }
 
-html.ie .v-s-boxes .v-s-box.invalid {
+html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qualifying-type
     &::after {
         background: rgba(255, 255, 255, .7);
     }

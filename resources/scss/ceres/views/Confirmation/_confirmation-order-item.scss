@@ -68,7 +68,7 @@
 
         .item-unit-price,
         .item-total-price {
-            width: auto !important;
+            width: auto !important; // stylelint-disable-line declaration-no-important
             text-align: right;
         }
 
