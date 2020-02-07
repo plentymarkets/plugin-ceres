@@ -79,7 +79,7 @@ import { mapMutations } from "vuex";
 export default {
     props: {
         consentGroups: {
-            type: Array
+            type: Object
         },
         cardClass: {
             type: String
