@@ -81,6 +81,7 @@ export default Vue.component("address-select", {
             {
                 1: "vatNumber",
                 4: "telephone",
+                5: "email",
                 6: "postNumber",
                 9: "birthday",
                 11: "title",

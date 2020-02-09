@@ -1027,6 +1027,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3771,6 +3785,35 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
+            _c("div", { staticClass: "col-12 col-sm-8" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-unit",
+                  attrs: { "data-validate": "mail", "data-model": "email" }
+                },
+                [
+                  _c("input", {
+                    attrs: {
+                      type: "email",
+                      name: "email",
+                      id: "txtEmail" + _vm._uid
+                    },
+                    domProps: { value: _vm.value.email },
+                    on: {
+                      input: function($event) {
+                        return _vm.emitInputEvent("email", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "txtEmail" + _vm._uid } }, [
+                    _vm._v(_vm._s(_vm.$translate("Ceres::Template.loginEmail")))
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
             _vm._t("custom-address-fields")
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "1"
@@ -4707,6 +4750,37 @@ var render = function() {
                   _c("label", { attrs: { for: "txtZip" + _vm._uid } }, [
                     _vm._v(
                       _vm._s(_vm.$translate("Ceres::Template.addressZip")) + "*"
+                    )
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12 col-sm-8" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-unit",
+                  attrs: { "data-validate": "mail", "data-model": "email" }
+                },
+                [
+                  _c("input", {
+                    attrs: {
+                      type: "email",
+                      name: "email",
+                      id: "txtEmail" + _vm._uid
+                    },
+                    domProps: { value: _vm.value.email },
+                    on: {
+                      input: function($event) {
+                        return _vm.emitInputEvent("email", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "txtEmail" + _vm._uid } }, [
+                    _vm._v(
+                      _vm._s(_vm.$translate("Ceres::Template.loginEmail")) + "*"
                     )
                   ])
                 ]

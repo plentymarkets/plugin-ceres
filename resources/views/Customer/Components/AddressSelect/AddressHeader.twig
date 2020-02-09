@@ -40,6 +40,7 @@
             </div>
     
             <div v-if="isAddressFieldEnabled('country')">${ getCountryName(address.countryId) }</div>
+            <div>${ address | optionType(5) }</div>
         </template>
     </div>
 </script>

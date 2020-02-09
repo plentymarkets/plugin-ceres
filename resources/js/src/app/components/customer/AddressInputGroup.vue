@@ -358,6 +358,13 @@
                 </div>
             </div>
 
+            <div class="col-12 col-sm-8">
+                <div class="input-unit" data-validate="mail" data-model="email">
+                    <input type="email" name="email" :id="'txtEmail' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)">
+                    <label :for="'txtEmail' + _uid">{{ $translate("Ceres::Template.loginEmail") }}</label>
+                </div>
+            </div>
+
             <slot name="custom-address-fields"></slot>
         </template>
         <!-- BillingAddressGB -->
@@ -549,6 +556,13 @@
                 <div class="input-unit" data-validate="text" data-model="postalCode">
                     <input type="text" name="zip" :id="'txtZip' + _uid" :value="value.postalCode"  @input="emitInputEvent('postalCode', $event.target.value)">
                     <label :for="'txtZip' + _uid">{{ $translate("Ceres::Template.addressZip") }}*</label>
+                </div>
+            </div>
+            
+            <div class="col-12 col-sm-8">
+                <div class="input-unit" data-validate="mail" data-model="email">
+                    <input type="email" name="email" :id="'txtEmail' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)">
+                    <label :for="'txtEmail' + _uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
                 </div>
             </div>
 
@@ -932,17 +946,13 @@
 import { mapState } from "vuex";
 import SalutationSelect from "./SalutationSelect.vue";
 import CountrySelect from "../customer/CountrySelect.vue";
-
 export default {
-
     name: "address-input-group",
-
     components:
     {
         SalutationSelect,
         CountrySelect
     },
-
     props:
     {
         defaultCountry: {
@@ -984,35 +994,29 @@ export default {
             default: "male"
         }
     },
-
     computed:
     {
         isMyAccount()
         {
             return App.templateType === "my-account";
         },
-
         isPickupStation()
         {
             return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
         },
-
         isPostOffice()
         {
             return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
         },
-
         isParcelOrOfficeAvailable()
         {
             return (this.isParcelBoxAvailable || this.isPostOfficeAvailable || this.isMyAccount) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
         },
-
         ...mapState({
             isParcelBoxAvailable: state => state.checkout.shipping.isParcelBoxAvailable,
             isPostOfficeAvailable: state => state.checkout.shipping.isPostOfficeAvailable
         })
     },
-
     data()
     {
         return {
@@ -1022,7 +1026,6 @@ export default {
             selectedCountry: null
         };
     },
-
     methods:
     {
         /**
@@ -1032,7 +1035,6 @@ export default {
         onSelectedCountryChanged(shippingCountry)
         {
             this.selectedCountry = shippingCountry;
-
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
             {
                 this.localeToShow = shippingCountry.isoCode2;
@@ -1041,15 +1043,12 @@ export default {
             {
                 this.localeToShow = this.defaultCountry;
             }
-
             this.emitInputEvent("countryId", shippingCountry.id);
-
             if (this.isPickupStation || this.isPostOffice)
             {
                 this.togglePickupStation(false);
             }
         },
-
         togglePickupStation(showPickupStation)
         {
             const emitInputs =
@@ -1059,18 +1058,15 @@ export default {
                     address3: "",
                     showPickupStation: showPickupStation
                 };
-
             if (showPickupStation)
             {
                 emitInputs.address1 = this.isParcelBoxAvailable ? "PACKSTATION" : "POSTFILIALE";
             }
-
             for (const input in emitInputs)
             {
                 this.emitInputEvent(input, emitInputs[input]);
             }
         },
-
         /**
          * @param {string} field
          * @param {number} value
@@ -1079,50 +1075,40 @@ export default {
         {
             this.$emit("input", { field, value });
         },
-
         isInOptionalFields(locale, key)
         {
             return this.optionalAddressFields[locale].includes(key);
         },
-
         isInRequiredFields(locale, key)
         {
             return (this.requiredAddressFields && this.requiredAddressFields[locale] && this.requiredAddressFields[locale].includes(key));
         },
-
         transformTranslation(translationKey, locale, addressKey)
         {
             const translation = this.$translate(translationKey);
             const isRequired = this.isInRequiredFields(locale, addressKey);
-
             return translation + (isRequired ? "*" : "");
         },
-
         areNameFieldsShown(locale, keyPrefix)
         {
             const isSalutationActive = this.isInOptionalFields(locale, `${keyPrefix}.salutation`);
             const isContactPersonActive = this.isInOptionalFields(locale, `${keyPrefix}.contactPerson`);
             const isName1Active = this.isInOptionalFields(locale, `${keyPrefix}.name1`);
             const isSelectedSalutationCompany = this.value.gender === "company";
-
             const condition1 = isSalutationActive && isContactPersonActive && isSelectedSalutationCompany;
             const condition2 = !isSalutationActive && isName1Active && isContactPersonActive;
-
             return !(condition1 || condition2);
         },
-
         areNameFieldsRequired(locale, keyPrefix)
         {
             const isSalutationActive = this.isInOptionalFields(locale, `${keyPrefix}.salutation`);
             const isName1Active = this.isInOptionalFields(locale, `${keyPrefix}.name1`);
             const isContactPersonRequired = this.isInRequiredFields(locale, `${keyPrefix}.contactPerson`);
             const isSelectedSalutationCompany = this.value.gender === "company";
-
             const condition1 = isSalutationActive && !isSelectedSalutationCompany;
             const condition2 = isSalutationActive && isSelectedSalutationCompany && isContactPersonRequired;
             const condition3 = !isSalutationActive && isName1Active && isContactPersonRequired;
             const condition4 = !isSalutationActive && !isName1Active;
-
             return condition1 || condition2 || condition3 || condition4;
         }
     }

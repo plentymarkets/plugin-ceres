@@ -2670,6 +2670,15 @@
                       "defaultValue": "false"
                     }
                 },
+                "checkout.skip_login": {
+                    "type": "checkBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.checkoutSkipLogin",
+                    "options": {
+                      "defaultValue": "false"
+                    }
+                },
                 "my_account.confirmation_link_expiration": {
                     "type": "selectBox",
                     "required": false,

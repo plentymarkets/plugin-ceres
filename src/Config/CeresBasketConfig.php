@@ -14,6 +14,7 @@ class CeresBasketConfig extends PluginConfig
     public $addItemToBasketConfirm;
     public $previewType;
     public $showShippingCountrySelect;
+    public $skipCheckoutLogin;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -67,5 +68,7 @@ class CeresBasketConfig extends PluginConfig
         $this->previewType = $this->getTextValue( "basket.preview_type", "right" );
         
         $this->showShippingCountrySelect = $this->getBooleanValue('basket.show_shipping_country_select', true);
+        
+        $this->skipCheckoutLogin = $this->getBooleanValue( "checkout.skip_login", false );
     }
 }

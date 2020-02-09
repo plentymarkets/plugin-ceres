@@ -22,10 +22,12 @@
                     </div>
 
                     <div v-if="!myAccountInBacklink" class="col-sm-6">
-                        <button class="btn btn-primary btn-block mb-3" @click="openGuestModal()">
-                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                            {{ $translate("Ceres::Template.loginOrderAsGuest") }}
-                        </button>
+                        <a :href="sanitizedBacklink" rel="nofollow">
+                            <button class="btn btn-primary btn-block mb-3" >
+                                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                {{ $translate("Ceres::Template.loginOrderAsGuest") }}
+                            </button>
+                        </a>
                     </div>
                 </div>
 
@@ -33,19 +35,7 @@
             </div>
         </div>
 
-        <div class="modal fade" ref="guestModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="modal-title h3">{{ $translate("Ceres::Template.loginOrderAsGuest") }}</div>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <guest-login :backlink="sanitizedBacklink" :initial-email="guestEmail"></guest-login>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </template>
 
@@ -82,13 +72,6 @@ export default {
         myAccountInBacklink()
         {
             return this.backlink.includes(App.urls.myAccount);
-        }
-    },
-
-    methods:
-    {
-        openGuestModal() {
-            ModalService.findModal(this.$refs.guestModal).show();
         }
     }
 }

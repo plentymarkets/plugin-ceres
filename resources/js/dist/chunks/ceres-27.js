@@ -57,16 +57,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -91,11 +81,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     myAccountInBacklink: function myAccountInBacklink() {
       return this.backlink.includes(App.urls.myAccount);
-    }
-  },
-  methods: {
-    openGuestModal: function openGuestModal() {
-      _services_ModalService__WEBPACK_IMPORTED_MODULE_2__["default"].findModal(this.$refs.guestModal).show();
     }
   }
 });
@@ -193,26 +178,27 @@ var render = function() {
             !_vm.myAccountInBacklink
               ? _c("div", { staticClass: "col-sm-6" }, [
                   _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary btn-block mb-3",
-                      on: {
-                        click: function($event) {
-                          return _vm.openGuestModal()
-                        }
-                      }
-                    },
+                    "a",
+                    { attrs: { href: _vm.sanitizedBacklink, rel: "nofollow" } },
                     [
-                      _c("i", {
-                        staticClass: "fa fa-shopping-bag",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.loginOrderAsGuest")
-                          ) +
-                          "\n                    "
+                      _c(
+                        "button",
+                        { staticClass: "btn btn-primary btn-block mb-3" },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-shopping-bag",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.loginOrderAsGuest"
+                                )
+                              ) +
+                              "\n                        "
+                          )
+                        ]
                       )
                     ]
                   )
@@ -224,56 +210,7 @@ var render = function() {
         ],
         2
       )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        ref: "guestModal",
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog" }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-header" }, [
-              _c("div", { staticClass: "modal-title h3" }, [
-                _vm._v(
-                  _vm._s(_vm.$translate("Ceres::Template.loginOrderAsGuest"))
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "close",
-                  attrs: {
-                    type: "button",
-                    "data-dismiss": "modal",
-                    "aria-hidden": "true"
-                  }
-                },
-                [_vm._v("×")]
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "modal-body" },
-              [
-                _c("guest-login", {
-                  attrs: {
-                    backlink: _vm.sanitizedBacklink,
-                    "initial-email": _vm.guestEmail
-                  }
-                })
-              ],
-              1
-            )
-          ])
-        ])
-      ]
-    )
+    ])
   ])
 }
 var staticRenderFns = []
