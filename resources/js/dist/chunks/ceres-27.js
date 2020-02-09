@@ -69,6 +69,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    checkoutLink: function checkoutLink() {
+      return App.urls.checkout;
+    },
     registrationUrl: function registrationUrl() {
       if (this.backlink !== "") {
         return App.urls.registration + "?backlink=" + this.sanitizedBacklink;
@@ -179,7 +182,7 @@ var render = function() {
               ? _c("div", { staticClass: "col-sm-6" }, [
                   _c(
                     "a",
-                    { attrs: { href: _vm.sanitizedBacklink, rel: "nofollow" } },
+                    { attrs: { href: _vm.checkoutLink, rel: "nofollow" } },
                     [
                       _c(
                         "button",
