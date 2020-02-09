@@ -70,13 +70,13 @@
                         <slot name="after-basket-totals"></slot>
 
                         <div class="basket-preview-footer d-flex pb-3">
-                            <a v-waiting-animation-infinite :href="basketUrl" rel="nofollow" class="btn btn-outline-primary btn-block" :title="$translate('Ceres::Template.basket')">
+                            <a v-waiting-animation-infinite :href="getBasketUrlFromApp" rel="nofollow" class="btn btn-outline-primary btn-block" :title="$translate('Ceres::Template.basket')">
                                 <i class="fa fa-shopping-cart"></i>
                                 {{ $translate("Ceres::Template.basket") }}
                             </a>
 
                             <slot name="before-checkout-button"></slot>
-                            <a v-waiting-animation-infinite :href="checkoutUrl" rel="nofollow" class="btn btn-primary btn-block" :title="$translate('Ceres::Template.basketCheckout')">
+                            <a v-waiting-animation-infinite :href="getCheckoutUrlFromApp" rel="nofollow" class="btn btn-primary btn-block" :title="$translate('Ceres::Template.basketCheckout')">
                                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                 {{ $translate("Ceres::Template.basketCheckout") }}
                             </a>
@@ -108,6 +108,14 @@ export default {
     },
 
     computed: {
+        getBasketUrlFromApp()
+        {
+            return App.urls.basket;
+        },
+        getCheckoutUrlFromApp()
+        {
+            return App.urls.checkout;
+        },
         hover()
         {
             return App.config.basket.previewType === 'hover';

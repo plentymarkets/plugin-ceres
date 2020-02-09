@@ -143,6 +143,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     basketUrl: String
   },
   computed: _objectSpread({
+    getBasketUrlFromApp: function getBasketUrlFromApp() {
+      return App.urls.basket;
+    },
+    getCheckoutUrlFromApp: function getCheckoutUrlFromApp() {
+      return App.urls.checkout;
+    },
     hover: function hover() {
       return App.config.basket.previewType === 'hover';
     },
@@ -418,7 +424,7 @@ var render = function() {
                             ],
                             staticClass: "btn btn-outline-primary btn-block",
                             attrs: {
-                              href: _vm.basketUrl,
+                              href: _vm.getBasketUrlFromApp,
                               rel: "nofollow",
                               title: _vm.$translate("Ceres::Template.basket")
                             }
@@ -448,7 +454,7 @@ var render = function() {
                             ],
                             staticClass: "btn btn-primary btn-block",
                             attrs: {
-                              href: _vm.checkoutUrl,
+                              href: _vm.getCheckoutUrlFromApp,
                               rel: "nofollow",
                               title: _vm.$translate(
                                 "Ceres::Template.basketCheckout"
