@@ -75,8 +75,8 @@
 {# fallback for disabled javascript #}
 <noscript><link rel="stylesheet" href="{{ iconCSS }}"></noscript>
 
-{% set defaultCSS = plugin_path("Ceres") ~ "/css/ceres.css?v=" ~ buildHash %}
-{% set defaultSCSS = plugin_path("Ceres") ~ "/css/ceres.scss?v=" ~ buildHash %}
+{% set defaultCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".css?v=" ~ buildHash %}
+{% set defaultSCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".scss?v=" ~ buildHash %}
 
 <link rel="preload" as="style" href="{{ defaultCSS }}">
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
