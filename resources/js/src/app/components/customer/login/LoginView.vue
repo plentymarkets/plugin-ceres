@@ -22,7 +22,7 @@
                     </div>
 
                     <div v-if="!myAccountInBacklink" class="col-sm-6">
-                        <a :href="checkoutLink" rel="nofollow">
+                        <a :href="checkoutLink + '?isGuest=1'" rel="nofollow">
                             <button class="btn btn-primary btn-block mb-3" >
                                 <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                 {{ $translate("Ceres::Template.loginOrderAsGuest") }}

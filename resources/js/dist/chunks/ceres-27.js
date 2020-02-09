@@ -182,7 +182,12 @@ var render = function() {
               ? _c("div", { staticClass: "col-sm-6" }, [
                   _c(
                     "a",
-                    { attrs: { href: _vm.checkoutLink, rel: "nofollow" } },
+                    {
+                      attrs: {
+                        href: _vm.checkoutLink + "?isGuest=1",
+                        rel: "nofollow"
+                      }
+                    },
                     [
                       _c(
                         "button",
