@@ -9068,6 +9068,11 @@ button:focus {
     max-width: 1200px;
 }
 
+// Owl-Navigation above .stretched-link
+.owl-carousel {
+    z-index: 2;
+}
+
 [v-cloak] {
     display: none;
 }
@@ -13573,7 +13578,7 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
         position: fixed;
     }
 
-    .collapse {
+    .cmp {
         position: fixed;
         right: 0;
         left: 0;
@@ -13777,12 +13782,10 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
     &:hover {
         background: $gray-300;
     }
-    &.autocomplete-selected {
-        background: $gray-300;
-    }
 }
 
 .autocomplete-item-name {
+    color: $gray-900;
     -ms-flex-item-align: center;
         align-self: center;
     max-width: 0;
