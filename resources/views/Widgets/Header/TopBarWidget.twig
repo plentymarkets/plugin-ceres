@@ -240,7 +240,7 @@
                             {% if isPreview or children is defined and children.suggestions | trim is not empty %}
                                 <template #autocomplete-suggestions>
                                     <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto{% if isPreview %} position-relative{% endif %}"
-                                            {% if isPreview %} data-builder-child-container="suggestions"{% endif %}>
+                                        {% if isPreview %} data-builder-child-container="suggestions"{% endif %}>
                                         {{ children.suggestions | raw }}
                                     </div>
                                 </template>
