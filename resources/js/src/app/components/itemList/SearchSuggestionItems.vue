@@ -43,6 +43,7 @@ export default {
             type: String,
             default: "px-3 py-2"
         },
+        
         paddingInlineStyles:
         {
             type: String,
