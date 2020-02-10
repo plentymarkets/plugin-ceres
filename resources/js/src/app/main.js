@@ -81,16 +81,20 @@ function CeresMain()
     const $toggleListView = $(".toggle-list-view");
     const $mainNavbarCollapse = $("#mainNavbarCollapse");
 
-    $(document).on("click", function(evt)
+    // prevent hidding collapses in the shopbuilder, for editing search bar results
+    if (!App.isShopBuilder)
     {
-        headerCollapses.forEach(element =>
+        $(document).on("click", function(evt)
         {
-            if (evt.target !== element && $(evt.target).parents(element).length <= 0)
+            headerCollapses.forEach(element =>
             {
-                $(element).collapse("hide");
-            }
+                if (evt.target !== element && $(evt.target).parents(element).length <= 0)
+                {
+                    $(element).collapse("hide");
+                }
+            });
         });
-    });
+    }
 
     $toggleListView.on("click", function(evt)
     {

@@ -13782,12 +13782,10 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
     &:hover {
         background: $gray-300;
     }
-    &.autocomplete-selected {
-        background: $gray-300;
-    }
 }
 
 .autocomplete-item-name {
+    color: $gray-900;
     -ms-flex-item-align: center;
         align-self: center;
     max-width: 0;
