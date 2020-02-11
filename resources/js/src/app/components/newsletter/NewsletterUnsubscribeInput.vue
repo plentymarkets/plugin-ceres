@@ -7,6 +7,8 @@
                     <input type="email" name="email" autocomplete="email" class="form-control" id="email-input-id" v-model="email">
                 </div>
 
+                <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1" v-model="honeypot">
+
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
                         <icon icon="paper-plane-o" :loading="isDisabled"></icon>
@@ -35,7 +37,8 @@ export default {
     {
         return {
             email: "",
-            isDisabled: false
+            isDisabled: false,
+            honeypot: ""
         };
     },
 
@@ -66,7 +69,7 @@ export default {
                 urlParams.folderId = 0;
             }
 
-            ApiService.del("/rest/io/customer/newsletter/" + this.email, { "emailFolder": urlParams.folderId })
+            ApiService.del("/rest/io/customer/newsletter/" + this.email, { "emailFolder": urlParams.folderId, "honeypot": this.honeypot })
                 .done(() =>
                 {
                     NotificationService.success(

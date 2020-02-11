@@ -62,6 +62,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -88,7 +89,8 @@ __webpack_require__.r(__webpack_exports__);
       lastName: "",
       email: "",
       isDisabled: false,
-      privacyPolicyValue: false
+      privacyPolicyValue: false,
+      honeypot: ""
     };
   },
   computed: {
@@ -120,7 +122,8 @@ __webpack_require__.r(__webpack_exports__);
         email: this.email,
         firstName: this.firstName,
         lastName: this.lastName,
-        emailFolder: this.emailFolder
+        emailFolder: this.emailFolder,
+        honeypot: this.honeypot
       }).done(function () {
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].success(_this2.$translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
 
@@ -280,7 +283,34 @@ var render = function() {
                   }
                 })
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.honeypot,
+                  expression: "honeypot"
+                }
+              ],
+              staticClass: "honey",
+              attrs: {
+                type: "text",
+                name: "username",
+                autocomplete: "off",
+                tabindex: "-1"
+              },
+              domProps: { value: _vm.honeypot },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.honeypot = $event.target.value
+                }
+              }
+            })
           ])
         ]),
         _vm._v(" "),
