@@ -11233,6 +11233,11 @@ a:active {
     color: transparent !important;
 }
 
+[v-cloak],
+script2,
+style2 {
+    display: none !important;
+}
 html {
 	font-size: $font-size-root;
 }
@@ -18939,10 +18944,6 @@ html.crios {
 			margin:0 -15px;
 		}
 	}
-}
-
-[v-cloak] {
-	display: none;
 }
 
 .mkt-homepage

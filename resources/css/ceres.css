@@ -12140,6 +12140,11 @@ button.bg-dark:focus {
 .fa.none {
   color: transparent !important; }
 
+[v-cloak],
+script2,
+style2 {
+  display: none !important; }
+
 html {
   font-size: 14px; }
 
@@ -17782,9 +17787,6 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
 @media (min-width: 1200px) {
   .home .product-list {
     margin: 0 -15px; } }
-
-[v-cloak] {
-  display: none; }
 
 .mkt-homepage {
   margin-bottom: 2rem; }
