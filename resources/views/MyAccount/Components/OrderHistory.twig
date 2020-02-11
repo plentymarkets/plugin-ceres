@@ -8,7 +8,7 @@
 
 {% set query = [] %}
 {% set page = request.get("page") | default(1) %}
-{% set orderList = services.customer.getOrders(page, ordersPerPage).toArray() %}
+{% set orderList = services.customer.getOrders(page, ordersPerPage, {"orderTypes": [1, 5]}).toArray() %}
 {% set pageMax = orderList.lastPageNumber %}
 
 {% set paymentMethodId = 0 %}
@@ -40,7 +40,15 @@
                         <article class="cmp cmp-order-item">
                             <div class="item-details small">
                                 <div class="mb-3">
-                                    <h5>{{ trans("Ceres::Template.orderHistoryOrderId") }} {{ entry.order.id }}</h5>
+                                    {% if entry.order.typeId == 1 %}
+                                        <h5>{{ trans("Ceres::Template.orderHistoryOrderId") }} {{ entry.order.id }}</h5>
+                                    {% endif %}
+                                    {% if entry.order.typeId == 5 %}
+                                        <h5>
+                                            {{ trans("Ceres::Template.orderHistoryOrderId") }} {{ entry.order.id }}
+                                            {{ trans("Ceres::Template.warranty") }} <i class="fa fa-arrow-right"></i> {{ entry.order.parentOrder.id }}
+                                        </h5>
+                                    {% endif %}
                                 </div>
 
                                 <div class="row">
