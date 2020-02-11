@@ -57595,7 +57595,8 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
       isDisabled: false,
       privacyPolicyAccepted: false,
       privacyPolicyShowError: false,
-      enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation
+      enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
+      honeypot: ""
     };
   },
   methods: {
@@ -57716,7 +57717,7 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
 
     /**
      * Handle the user object which is send to the server
-     * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+     * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}}
      */
     getUserObject: function getUserObject() {
       var userObject = {
@@ -57731,7 +57732,8 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
               priority: 0
             }
           }
-        }
+        },
+        honeypot: this.honeypot
       };
 
       if (!this.guestMode) {
@@ -58054,9 +58056,9 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("forgot-password-modal", {
   },
   data: function data() {
     return {
-      password: "",
       username: "",
-      isDisabled: false
+      isDisabled: false,
+      honeypot: ""
     };
   },
   mounted: function mounted() {
@@ -58098,7 +58100,8 @@ vue__WEBPACK_IMPORTED_MODULE_6___default.a.component("forgot-password-modal", {
 
       this.isDisabled = true;
       ApiService.post("/rest/io/customer/password_reset", {
-        email: this.username
+        email: this.username,
+        honeypot: this.honeypot
       }).done(function () {
         ModalService.findModal(_this3.$refs.pwdModal).hide();
         _this3.isDisabled = false;
@@ -64156,7 +64159,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("newsletter-input", {
       lastName: "",
       email: "",
       isDisabled: false,
-      privacyPolicyValue: false
+      privacyPolicyValue: false,
+      honeypot: ""
     };
   },
   methods: {
@@ -64178,7 +64182,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("newsletter-input", {
         email: this.email,
         firstName: this.firstName,
         lastName: this.lastName,
-        emailFolder: this.emailFolder
+        emailFolder: this.emailFolder,
+        honeypot: this.honeypot
       }).done(function () {
         NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
 
@@ -64243,7 +64248,8 @@ vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("newsletter-unsubscribe-inp
   data: function data() {
     return {
       email: "",
-      isDisabled: false
+      isDisabled: false,
+      honeypot: ""
     };
   },
   methods: {
@@ -64268,7 +64274,8 @@ vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("newsletter-unsubscribe-inp
       }
 
       _services_ApiService__WEBPACK_IMPORTED_MODULE_4__["default"].del("/rest/io/customer/newsletter/" + this.email, {
-        "emailFolder": urlParams.folderId
+        "emailFolder": urlParams.folderId,
+        "honeypot": this.honeypot
       }).done(function () {
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_5__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_2__["default"].translate("Ceres::Template.newsletterOptOutSuccessMessage")).closeAfter(3000);
 
