@@ -13,10 +13,7 @@
                     </div>
                     <div class="col-md-2" v-if="order.type === 5">
                         <span>{{ trans("Ceres::Template.orderHistoryOrderId") }}: </span>
-                        <span>
-                            ${ order.id }
-                            {{ trans("Ceres::Template.warranty") }} <i class="fa fa-arrow-right"></i> ${ order.parentOrderId }
-                        </span>
+                        <span>${ order.id }</span>
                     </div>
                     <div class="col-md-2">
                         <span>{{ trans("Ceres::Template.orderHistoryTotal") }}: </span>
@@ -61,6 +58,9 @@
                         </a>
                     #}
                 </div>
+            </div>
+            <div class="col-12 mt-2 align-left" v-if="order.type === 5">
+                {{ trans("Ceres::Template.warranty") }} <i class="fa fa-long-arrow-right"></i> ${ order.parentOrderId }
             </div>
         </div>
         
