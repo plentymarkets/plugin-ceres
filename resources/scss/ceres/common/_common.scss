@@ -170,3 +170,9 @@ a:active {
     @extend .fa-circle;
     color: transparent !important;
 }
+
+[v-cloak],
+script2,
+style2 {
+    display: none !important;
+}
