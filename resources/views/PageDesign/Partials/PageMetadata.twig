@@ -69,7 +69,7 @@
     "@context": "http://schema.org",
     "@type": "WebSite",
     "url": {{ url | json_encode | raw }}
-    {% if urls.is("home")%}
+    {% if services.template.isHome() %}
     ,"potentialAction":{
         "@type": "SearchAction",
         "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl ~ urls.search }}?query={search_term}",
