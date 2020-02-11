@@ -39,7 +39,8 @@ Vue.component("registration", {
             privacyPolicyAccepted : false,
             privacyPolicyShowError: false,
             enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
-            modalShown: false
+            modalShown: false,
+            honeypot: ""
         };
     },
 
@@ -185,7 +186,7 @@ Vue.component("registration", {
 
         /**
          * Handle the user object which is send to the server
-         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}}
          */
         getUserObject()
         {
@@ -202,7 +203,8 @@ Vue.component("registration", {
                                 priority : 0
                             }
                         }
-                    }
+                    },
+                    honeypot: this.honeypot
                 };
 
             if (!this.guestMode)

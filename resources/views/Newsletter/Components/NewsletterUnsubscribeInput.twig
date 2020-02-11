@@ -7,6 +7,8 @@
                     <input type="email" name="email" autocomplete="email" class="form-control" id="email-input-id" v-model="email">
                 </div>
 
+                <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1" v-model="honeypot">
+
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
                         <i class="fa fa-paper-plane-o" v-waiting-animation="isDisabled" aria-hidden="true"></i>

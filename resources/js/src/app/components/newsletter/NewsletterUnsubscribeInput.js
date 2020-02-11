@@ -24,7 +24,8 @@ Vue.component("newsletter-unsubscribe-input", {
     {
         return {
             email: "",
-            isDisabled: false
+            isDisabled: false,
+            honeypot: ""
         };
     },
 
@@ -45,6 +46,7 @@ Vue.component("newsletter-unsubscribe-input", {
                     this.isDisabled = false;
                 });
         },
+
         save()
         {
             const urlParams = UrlService.getUrlParams(document.location.search);
@@ -54,7 +56,7 @@ Vue.component("newsletter-unsubscribe-input", {
                 urlParams.folderId = 0;
             }
 
-            ApiService.del("/rest/io/customer/newsletter/" + this.email, { "emailFolder": urlParams.folderId })
+            ApiService.del("/rest/io/customer/newsletter/" + this.email, { "emailFolder": urlParams.folderId, "honeypot": this.honeypot })
                 .done(() =>
                 {
                     NotificationService.success(
@@ -73,6 +75,7 @@ Vue.component("newsletter-unsubscribe-input", {
                     this.isDisabled = false;
                 });
         },
+
         resetInputs()
         {
             this.email = "";
