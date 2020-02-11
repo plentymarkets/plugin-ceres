@@ -26,11 +26,6 @@ Vue.component("registration", {
         requiredFields: Object
     },
 
-    mounted()
-    {
-        this.$refs.pin.style.cssText = "display: none !important";
-    },
-
     data()
     {
         return {
@@ -46,7 +41,7 @@ Vue.component("registration", {
             privacyPolicyAccepted : false,
             privacyPolicyShowError: false,
             enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
-            pin: ""
+            honeypot: ""
         };
     },
 
@@ -181,7 +176,7 @@ Vue.component("registration", {
 
         /**
          * Handle the user object which is send to the server
-         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}}
          */
         getUserObject()
         {
@@ -199,7 +194,7 @@ Vue.component("registration", {
                             }
                         }
                     },
-                    pin: this.pin
+                    honeypot: this.honeypot
                 };
 
             if (!this.guestMode)

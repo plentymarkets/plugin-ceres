@@ -25,8 +25,7 @@ Vue.component("newsletter-unsubscribe-input", {
         return {
             email: "",
             isDisabled: false,
-            // Honeypot
-            username: ""
+            honeypot: ""
         };
     },
 
@@ -57,7 +56,7 @@ Vue.component("newsletter-unsubscribe-input", {
                 urlParams.folderId = 0;
             }
 
-            ApiService.del("/rest/io/customer/newsletter/" + this.email, { "emailFolder": urlParams.folderId, "username": this.username })
+            ApiService.del("/rest/io/customer/newsletter/" + this.email, { "emailFolder": urlParams.folderId, "honeypot": this.honeypot })
                 .done(() =>
                 {
                     NotificationService.success(

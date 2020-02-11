@@ -41,14 +41,8 @@ Vue.component("newsletter-input", {
             email: "",
             isDisabled: false,
             privacyPolicyValue: false,
-            // honeypot field
-            phonenumber: ""
+            honeypot: ""
         };
-    },
-
-    mounted()
-    {
-        this.$refs.phonenumber.style.cssText = "display: none !important";
     },
 
     methods: {
@@ -70,7 +64,7 @@ Vue.component("newsletter-input", {
         },
         save()
         {
-            ApiService.post("/rest/io/customer/newsletter", { email: this.email, firstName: this.firstName, lastName: this.lastName, emailFolder: this.emailFolder, phone: this.phonenumber })
+            ApiService.post("/rest/io/customer/newsletter", { email: this.email, firstName: this.firstName, lastName: this.lastName, emailFolder: this.emailFolder, honeypot: this.honeypot })
                 .done(() =>
                 {
                     NotificationService.success(

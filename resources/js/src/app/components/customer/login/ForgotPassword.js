@@ -24,9 +24,9 @@ Vue.component("forgot-password-modal", {
     data()
     {
         return {
-            phonenumber: "",
-            username: "",
-            isDisabled: false
+            email: "",
+            isDisabled: false,
+            honeypot: ""
         };
     },
 
@@ -48,8 +48,6 @@ Vue.component("forgot-password-modal", {
                 this.username = !isNullOrUndefined(urlParams.email) ? urlParams.email : "";
             }
         });
-
-        this.$refs.phonenumber.style.cssText = "display: none !important";
     },
 
     watch:
