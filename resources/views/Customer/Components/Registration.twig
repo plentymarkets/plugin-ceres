@@ -45,6 +45,8 @@
                 </div>
             </div>
 
+            <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1" v-model="honeypot">
+
             <div class="col-12">
                 <address-input-group
                     template="#vue-address-input-group"
@@ -69,9 +71,9 @@
         </div>
         <div class="border-top mt-2 text-right">
             {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
-            
+
             <button :disabled="isDisabled" class="btn btn-appearance btn-primary btn-medium mt-3" :class="buttonSizeClass">
-                <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
+                <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i>
                 {{ trans("Ceres::Template.regRegister") }}
             </button>
         </div>
