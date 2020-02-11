@@ -9077,6 +9077,11 @@ button:focus {
     display: none;
 }
 
+[v-cloak],
+script2,
+style2 {
+    display: none !important;
+}
 @each $breakpoint in map-keys($grid-breakpoints) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 

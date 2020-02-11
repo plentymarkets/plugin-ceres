@@ -29,3 +29,9 @@
 [v-cloak] {
     display: none;
 }
+
+[v-cloak],
+script2,
+style2 {
+    display: none !important;
+}
