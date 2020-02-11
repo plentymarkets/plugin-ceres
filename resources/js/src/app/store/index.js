@@ -10,6 +10,7 @@ import consents from "./modules/ConsentModule";
 import contactForm from "./modules/ContactFormModule";
 import item from "./modules/SingleItemModule";
 import itemList from "./modules/ItemListModule";
+import itemSearch from "./modules/ItemSearchModule";
 import lastSeen from "./modules/LastSeenModule";
 import lazyComponent from "./modules/LazyComponentModule";
 import liveShopping from "./modules/LiveShoppingModule";
@@ -42,6 +43,7 @@ const store = new Vuex.Store(
             contactForm,
             item,
             itemList,
+            itemSearch,
             lastSeen,
             lazyComponent,
             liveShopping,

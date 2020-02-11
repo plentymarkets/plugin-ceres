@@ -1,0 +1,34 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set showItemImages      = widget.settings.showItemImages.mobile is same as (true) %}
+{% set forwardToSingleItem = widget.settings.forwardToSingleItem.mobile is same as (true) %}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set appearance      = widget.settings.appearance.mobile | default("primary") %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set widgetClasses = WidgetHelper.concatClasses(["widget-#{ appearance }", customClass, spacingMargin]) %}
+
+{% set headline = widget.settings.headline.mobile %}
+
+<div class="widget widget-search-suggestion-items {{ widgetClasses }}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="px-3 pt-3" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        {% if headline is empty %}
+            <h4 class="m-0">{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemSearchProducts")) }}</h4>
+        {% else %}
+            {{ WidgetHelper.editableTwig(isPreview, headline) }}
+        {% endif %}
+    </div>
+
+    <search-suggestion-items
+        :show-item-images="{{ showItemImages | json_encode }}"
+        :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"
+        {% if spacingSettings.customPadding.mobile %}:padding-classes="{{ spacingPadding | json_encode }}"
+        :padding-inline-styles="{{ inlinePadding | json_encode }}"{% endif %}>
+    </search-suggestion-items>
+</div>

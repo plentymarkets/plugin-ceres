@@ -65,6 +65,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -78,9 +79,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      password: "",
       username: "",
-      isDisabled: false
+      isDisabled: false,
+      honeypot: ""
     };
   },
   mounted: function mounted() {
@@ -122,7 +123,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.isDisabled = true;
       ApiService.post("/rest/io/customer/password_reset", {
-        email: this.username
+        email: this.username,
+        honeypot: this.honeypot
       }).done(function () {
         _services_ModalService__WEBPACK_IMPORTED_MODULE_4__["default"].findModal(_this3.$refs.pwdModal).hide();
         _this3.isDisabled = false;
@@ -220,6 +222,33 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.honeypot,
+                          expression: "honeypot"
+                        }
+                      ],
+                      staticClass: "honey",
+                      attrs: {
+                        type: "text",
+                        name: "username",
+                        autocomplete: "off",
+                        tabindex: "-1"
+                      },
+                      domProps: { value: _vm.honeypot },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.honeypot = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
                     _c(
                       "div",
                       {

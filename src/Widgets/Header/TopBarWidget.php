@@ -21,6 +21,14 @@ class TopBarWidget extends BaseWidget
             ->withType(WidgetTypes::HEADER)
             ->withCategory(WidgetCategories::HEADER)
             ->withPosition(0)
+            ->withAllowedNestingTypes(
+                [
+                    WidgetTypes::STRUCTURE,
+                    WidgetTypes::STATIC,
+                    WidgetTypes::DEFAULT,
+                    WidgetTypes::ITEM_SEARCH
+                ]
+            )
             ->toArray();
     }
 
@@ -46,16 +54,6 @@ class TopBarWidget extends BaseWidget
                     ->addEntry("permanent", "Widget.topBarSearchStylePermanent")
                     ->toArray()
             );
-
-        $settingsFactory->createCheckbox("showItemImages")
-            ->withName("Widget.topBarShowItemImagesLabel")
-            ->withDefaultValue(false)
-            ->withCondition("searchStyle !== 'hidden'");
-
-        $settingsFactory->createCheckbox("forwardToSingleItem")
-            ->withName("Widget.topBarForwardToSingleItemLabel")
-            ->withDefaultValue(false)
-            ->withCondition("searchStyle !== 'hidden'");
 
         $settingsFactory->createCheckbox("enableLogin")
             ->withName("Widget.topBarEnableLoginLabel")

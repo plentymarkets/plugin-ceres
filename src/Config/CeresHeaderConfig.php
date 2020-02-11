@@ -17,7 +17,7 @@ class CeresHeaderConfig extends PluginConfig
     public $megamenuItemsStage1;
     public $megamenuItemsStage2;
     public $megamenuItemsStage3;
-    
+
     protected function getPluginName()
     {
         return 'Ceres';
@@ -29,7 +29,7 @@ class CeresHeaderConfig extends PluginConfig
         $this->companyLogo          = $this->getTextValue( 'header.company_logo', 'images/ceres-logo.svg' );
         $this->showNavBars          = $this->getTextValue( 'header.show_navbars', 'top' );
         $this->fixedNavBar          = $this->getBooleanValue( 'header.fixed_navbar', true );
-        $this->showCategoryTypes    = $this->getMultiSelectValue( 'header.show_category_types', ['item', 'content', 'blog'] );
+        $this->showCategoryTypes    = $this->getMultiSelectValue( 'header.show_category_types', ['item', 'content', 'blog'], []);
         $this->basketValues         = $this->getTextValue( 'header.basket_values', 'sum' );
         $this->menuLevels           = $this->getIntegerValue( 'header.menu_levels', 4 );
         $this->megamenuLevels       = $this->getIntegerValue( 'header.megamenu_levels', 1 );
