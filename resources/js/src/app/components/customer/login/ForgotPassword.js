@@ -36,7 +36,7 @@ Vue.component("forgot-password-modal", {
         {
             $(this.$refs.pwdModal).on("hidden.bs.modal", () =>
             {
-                this.username = "";
+                this.email = "";
             });
 
             const urlParams = UrlService.getUrlParams(document.location.search);
@@ -45,14 +45,14 @@ Vue.component("forgot-password-modal", {
             {
                 ModalService.findModal(this.$refs.pwdModal).show();
 
-                this.username = !isNullOrUndefined(urlParams.email) ? urlParams.email : "";
+                this.email = !isNullOrUndefined(urlParams.email) ? urlParams.email : "";
             }
         });
     },
 
     watch:
     {
-        username(val, oldVal)
+        email(val, oldVal)
         {
             this.resetError();
         }
@@ -81,7 +81,7 @@ Vue.component("forgot-password-modal", {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username, phonenumber: this.phonenumber })
+            ApiService.post("/rest/io/customer/password_reset", { email: this.email, honeypot: this.honeypot })
                 .done(() =>
                 {
                     ModalService.findModal(this.$refs.pwdModal).hide();
