@@ -41,6 +41,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -52,7 +54,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       email: "",
-      isDisabled: false
+      isDisabled: false,
+      honeypot: ""
     };
   },
   methods: {
@@ -77,7 +80,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].del("/rest/io/customer/newsletter/" + this.email, {
-        "emailFolder": urlParams.folderId
+        "emailFolder": urlParams.folderId,
+        "honeypot": this.honeypot
       }).done(function () {
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].success(_this2.$translate("Ceres::Template.newsletterOptOutSuccessMessage")).closeAfter(3000);
 
@@ -169,6 +173,33 @@ var render = function() {
               })
             ]
           ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.honeypot,
+                expression: "honeypot"
+              }
+            ],
+            staticClass: "honey",
+            attrs: {
+              type: "text",
+              name: "username",
+              autocomplete: "off",
+              tabindex: "-1"
+            },
+            domProps: { value: _vm.honeypot },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.honeypot = $event.target.value
+              }
+            }
+          }),
           _vm._v(" "),
           _c("span", { staticClass: "input-group-btn" }, [
             _c(

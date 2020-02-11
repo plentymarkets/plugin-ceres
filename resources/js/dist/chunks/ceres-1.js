@@ -1531,6 +1531,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -1579,7 +1581,8 @@ __webpack_require__.r(__webpack_exports__);
       enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
       googleRecaptchaApiKey: App.config.global.googleRecaptchaApiKey,
       defaultSalutation: App.config.addresses.defaultSalutation,
-      modalShown: false
+      modalShown: false,
+      honeypot: ""
     };
   },
   mounted: function mounted() {
@@ -1709,7 +1712,7 @@ __webpack_require__.r(__webpack_exports__);
 
     /**
      * Handle the user object which is send to the server
-     * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+     * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}}
      */
     getUserObject: function getUserObject() {
       var userObject = {
@@ -1724,7 +1727,8 @@ __webpack_require__.r(__webpack_exports__);
               priority: 0
             }
           }
-        }
+        },
+        honeypot: this.honeypot
       };
 
       if (!this.guestMode) {
@@ -6912,6 +6916,33 @@ var render = function() {
               )
             ])
           : _vm._e(),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.honeypot,
+              expression: "honeypot"
+            }
+          ],
+          staticClass: "honey",
+          attrs: {
+            type: "text",
+            name: "username",
+            autocomplete: "off",
+            tabindex: "-1"
+          },
+          domProps: { value: _vm.honeypot },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.honeypot = $event.target.value
+            }
+          }
+        }),
         _vm._v(" "),
         _c(
           "div",
