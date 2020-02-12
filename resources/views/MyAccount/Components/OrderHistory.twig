@@ -8,7 +8,7 @@
 
 {% set query = [] %}
 {% set page = request.get("page") | default(1) %}
-{% set orderList = services.customer.getOrders(page, ordersPerPage, {"orderTypes": [1, 5]}).toArray() %}
+{% set orderList = services.customer.getOrders(page, ordersPerPage).toArray() %}
 {% set pageMax = orderList.lastPageNumber %}
 
 {% set paymentMethodId = 0 %}
@@ -47,7 +47,7 @@
                                         <h5>
                                             {{ trans("Ceres::Template.orderHistoryOrderId") }} {{ entry.order.id }}
                                         </h5>
-                                        <div class="h5">{{ trans("Ceres::Template.warranty") }} <i class="fa fa-long-arrow-right"></i> {{ entry.order.parentOrder.id }}</div>
+                                        <div class="h5">{{ trans("Ceres::Template.orderHistoryWarranty") }} <i class="fa fa-long-arrow-right"></i> {{ entry.order.parentOrder.id }}</div>
                                     {% endif %}
                                 </div>
 
