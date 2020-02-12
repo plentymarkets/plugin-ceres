@@ -40,9 +40,15 @@
                         <article class="cmp cmp-order-item">
                             <div class="item-details small">
                                 <div class="mb-3">
-                                    <h5>{{ trans("Ceres::Template.orderHistoryOrderId") }} {{ entry.order.id }}</h5>
+                                    <h5 class="d-inline">{{ trans("Ceres::Template.orderHistoryOrderId") }} {{ entry.order.id }}</h5>
                                     {% if entry.order.typeId == 5 %}
-                                        <div class="h5">{{ trans("Ceres::Template.orderHistoryWarranty") }} <i class="fa fa-long-arrow-right"></i> {{ entry.order.parentOrder.id }}</div>
+                                        <i class="fa fa-info d-inline ml-1"
+                                            v-tooltip
+                                            data-placement="top"
+                                            data-trigger="hover"
+                                            data-boundary="window"
+                                            :data-title="'{{ trans("Ceres::Template.orderHistoryWarranty") }}' + {{ entry.order.parentOrder.id }}">
+                                        </i>
                                     {% endif %}
                                 </div>
 
