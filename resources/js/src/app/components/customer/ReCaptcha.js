@@ -1,6 +1,7 @@
 let gRecaptchaApiLoaded;
 
 import Vue from "vue";
+import { whenConsented } from "../../helper/whenConsented";
 
 Vue.component("recaptcha", {
 
@@ -18,7 +19,15 @@ Vue.component("recaptcha", {
     {
         this.$nextTick(() =>
         {
-            this.createScript().then(() => this.initializeV3());
+            whenConsented(
+                "media.reCaptcha",
+                () =>
+                {
+                    this.createScript().then(() => this.initializeV3());
+                },
+                () =>
+                {
+                });
         });
     },
 
