@@ -195,6 +195,10 @@ export default Vue.component("create-update-address", {
                 NotificationService.error({ code: error.code, message: "" });
                 window.location.reload();
             }
+            else if ([210, 211].indexOf(error.code) !== -1)
+            {
+                NotificationService.error({ code: error.code, message: error.message });
+            }
             else this._handleValidationErrors(error);
         },
 

@@ -18,13 +18,13 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    public function generateStep():array
+    public function generateStep(): array
     {
         return [
-            "title"       => "Wizard.onlineStoreSettings",
+            "title" => "Wizard.onlineStoreSettings",
             "description" => "Wizard.onlineStoreSettingsDescription",
-            "condition"   => $this->hasRequiredSettings(),
-            "sections"    => [
+            "condition" => $this->hasRequiredSettings(),
+            "sections" => [
                 $this->buildStoreNameStructure(),
                 $this->buildStoreFaviconStructure(),
                 $this->buildStoreCategoryTypesStructure(),
@@ -36,6 +36,7 @@ class OnlineStoreStep extends Step
                 $this->buildGoogleRecaptchaSettings(),
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
+                $this->buildExternalVatIdCheckSettings(),
             ]
         ];
     }
@@ -43,7 +44,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreNameStructure():array
+    private function buildStoreNameStructure(): array
     {
         return [
             "title" => "Wizard.storeName",
@@ -61,7 +62,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreFaviconStructure():array
+    private function buildStoreFaviconStructure(): array
     {
         return [
             "title" => "Wizard.storeFavicon",
@@ -79,12 +80,12 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreCategoryTypesStructure():array
+    private function buildStoreCategoryTypesStructure(): array
     {
-        $catTypes      = OnlineStoreConfig::getCategoryTypes();
-        $depths        = OnlineStoreConfig::getCategoryTreeDepths();
+        $catTypes = OnlineStoreConfig::getCategoryTypes();
+        $depths = OnlineStoreConfig::getCategoryTreeDepths();
         $categoryTypes = StepHelper::generateTranslatedListBoxValues($catTypes);
-        $treeDepths    = StepHelper::generateTranslatedListBoxValues($depths);
+        $treeDepths = StepHelper::generateTranslatedListBoxValues($depths);
 
         return [
             "title" => "Wizard.storeCategoryTypes",
@@ -113,10 +114,10 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreBack2Top():array
+    private function buildStoreBack2Top(): array
     {
         $top2bottomPositions = OnlineStoreConfig::getToTopButtonPosition();
-        $positions           = StepHelper::generateTranslatedListBoxValues($top2bottomPositions);
+        $positions = StepHelper::generateTranslatedListBoxValues($top2bottomPositions);
 
         return [
             "title" => "Wizard.back2Top",
@@ -136,12 +137,12 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreEmailSettings():array
+    private function buildStoreEmailSettings(): array
     {
         $confirmationLinkExpiration = OnlineStoreConfig::getConfirmationLinkExpiration();
-        $confirmationList           = StepHelper::generateTranslatedListBoxValues($confirmationLinkExpiration);
-        $globaUserHashMax           = OnlineStoreConfig::getUserHashMaxAge();
-        $globaUserHashMaxList       = StepHelper::generateTranslatedListBoxValues($globaUserHashMax);
+        $confirmationList = StepHelper::generateTranslatedListBoxValues($confirmationLinkExpiration);
+        $globaUserHashMax = OnlineStoreConfig::getUserHashMaxAge();
+        $globaUserHashMaxList = StepHelper::generateTranslatedListBoxValues($globaUserHashMax);
 
         return [
             "title" => "Wizard.emailSettings",
@@ -177,11 +178,11 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreOrderSettings():array
+    private function buildStoreOrderSettings(): array
     {
-        $itemBundles     = OnlineStoreConfig::getItemBundles();
+        $itemBundles = OnlineStoreConfig::getItemBundles();
         $itemBundlesList = StepHelper::generateTranslatedListBoxValues($itemBundles);
-        
+
         return [
             "title" => "Wizard.ordersSettings",
             "description" => "Wizard.ordersSettingsDescription",
@@ -217,7 +218,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreShippingSettings():array
+    private function buildStoreShippingSettings(): array
     {
         return [
             "title" => "Wizard.shippingSettings",
@@ -237,7 +238,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildGoogleMapsSettings():array
+    private function buildGoogleMapsSettings(): array
     {
         return [
             "title" => "Wizard.settingsGoogleMaps",
@@ -256,7 +257,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildGoogleRecaptchaSettings():array
+    private function buildGoogleRecaptchaSettings(): array
     {
         return [
             "title" => "Wizard.settingsRecaptcha",
@@ -316,7 +317,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreCallistoSettings():array
+    private function buildStoreCallistoSettings(): array
     {
         $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
         $webstoreActive = $moduleRepo->isActive("webstore.cms");
@@ -369,27 +370,55 @@ class OnlineStoreStep extends Step
         ];
     }
 
-    
+    private function buildExternalVatIdCheckSettings()
+    {
+        $listValues[] = [
+            "value" => 0,
+            "caption" => "Wizard.active"
+        ];
+        return [
+            "title" => "Wizard.externalVatIdCheckTitle",
+            "description" => "Wizard.externalVatIdCheckDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_externalVatIdCheck" => [
+                    "type" => "select",
+                    "defaultValue" => 0,
+                    "options" => [
+                        "name" => "Wizard.externalVatIdCheck",
+                        "listBoxValues" => [
+                            [
+                                "value" => 0,
+                                "caption" => "Wizard.active"
+                            ],
+                            [
+                                "value" => 1,
+                                "caption" => "Wizard.inactive"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+    }
+
     /**
      * @return array
      */
     private function getOrderStatusListBoxValues()
     {
         $currentLang = LanguagesHelper::getUserLang();
-        
+
         /** @var OrderStatusRepositoryContract $orderStatusRepo */
         $orderStatusRepo = pluginApp(OrderStatusRepositoryContract::class);
         $orderStatusCollection = $orderStatusRepo->all();
-        
+
         $orderStatusList = [];
-        foreach($orderStatusCollection as $status)
-        {
-            if($status->statusId >= 9 && $status->statusId < 10)
-            {
+        foreach ($orderStatusCollection as $status) {
+            if ($status->statusId >= 9 && $status->statusId < 10) {
                 $statusName = $status->names[$currentLang] ?? '';
                 $prefix = '[' . $status->statusId . ']';
-                if(substr($statusName, 0, strlen($prefix)) !== $prefix)
-                {
+                if (substr($statusName, 0, strlen($prefix)) !== $prefix) {
                     $statusName = $prefix . $statusName;
                 }
 
@@ -399,7 +428,9 @@ class OnlineStoreStep extends Step
                 ];
             }
         }
-        
+
         return $orderStatusList;
     }
+
+
 }
