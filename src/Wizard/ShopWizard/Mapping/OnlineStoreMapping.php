@@ -128,6 +128,12 @@ class OnlineStoreMapping
             'type'      => 'boolean',
             'global'    => false,
             'optional'  => false
+        ],
+        'onlineStore_externalVatIdCheck' => [
+            'field'     => 'externalVatCheckInactive',
+            'type'      => 'integer',
+            'global'    => true,
+            'optional'  => false
         ]
     ];
 
