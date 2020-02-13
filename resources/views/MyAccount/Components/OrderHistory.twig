@@ -47,7 +47,7 @@
                                             data-placement="top"
                                             data-trigger="hover"
                                             data-boundary="window"
-                                            :data-title="'{{ trans("Ceres::Template.orderHistoryWarranty") }}' + {{ entry.order.parentOrder.id }}">
+                                            :data-title="'{{ trans("Ceres::Template.orderHistoryWarranty", {id: entry.order.parentOrder.id}) }}'">
                                         </i>
                                     {% endif %}
                                 </div>

@@ -17,7 +17,7 @@
                             data-placement="top"
                             data-trigger="hover"
                             data-boundary="window"
-                            :data-title="'{{ trans("Ceres::Template.orderHistoryWarranty") }}' + order.parentOrderId">
+                            :data-title="getWarrantyTooltip(order.parentOrderId)">
                         </i>
                     </div>
                     <div class="col-md-2">
