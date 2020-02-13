@@ -125,14 +125,14 @@ export default {
             }
         },
 
-        // // hide autocomplete after 100ms to make clicking on it possible
-        // setIsSearchFocused(value)
-        // {
-        //     setTimeout(() =>
-        //     {
-        //         this.isSearchFocused = !!value;
-        //     }, 100);
-        // }
+        // hide autocomplete after 100ms to make clicking on it possible
+        setIsSearchFocused(value)
+        {
+            setTimeout(() =>
+            {
+                this.isSearchFocused = !!value;
+            }, 100);
+        }
     },
 
     watch:
