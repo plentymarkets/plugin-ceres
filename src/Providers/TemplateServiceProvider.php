@@ -313,5 +313,20 @@ class TemplateServiceProvider extends ServiceProvider
                 ]
             );
         }
+
+        if (strlen($config->get('Ceres.global.google_recaptcha_secret'))) {
+            $consentRepository->registerConsent(
+                'reCaptcha',
+                'Ceres::Template.consentReCaptchaLabel',
+                [
+                    'position' => 200,
+                    'description' => 'Ceres::Template.consentReCaptchaDescription',
+                    'provider' => 'Ceres::Template.consentReCaptchaProvider',
+                    'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
+                    'policyUrl' => 'Ceres::Template.consentReCaptchaPolicyUrl',
+                    'group' => 'media'
+                ]
+            );
+        }
     }
 }
