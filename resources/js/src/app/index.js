@@ -14,7 +14,8 @@ import Vuex from "vuex";
 window.Vue = Vue;
 window.Vuex = Vuex;
 
-Vue.use(require("vue-script2"));
+import script2 from "./plugins/script2";
+Vue.use(script2);
 
 import jQuery from "jquery";
 window.jQuery = jQuery;
