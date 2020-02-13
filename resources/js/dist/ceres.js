@@ -57416,9 +57416,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _helper_whenConsented__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/whenConsented */ "./resources/js/src/app/helper/whenConsented.js");
 
 
 var gRecaptchaApiLoaded;
+
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("recaptcha", {
   template: "<div data-recaptcha></div>",
@@ -57432,9 +57434,11 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("recaptcha", {
     var _this = this;
 
     this.$nextTick(function () {
-      _this.createScript().then(function () {
-        return _this.initializeV3();
-      });
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_3__["whenConsented"])("media.reCaptcha", function () {
+        _this.createScript().then(function () {
+          return _this.initializeV3();
+        });
+      }, function () {});
     });
   },
   methods: {
@@ -57704,7 +57708,8 @@ vue__WEBPACK_IMPORTED_MODULE_15___default.a.component("registration", {
         }
 
         _this2.isDisabled = false;
-      }).fail(function () {
+      }).fail(function (error) {
+        NotificationService.error(error.error).closeAfter(10000);
         _this2.isDisabled = false;
       });
     },
@@ -63695,6 +63700,8 @@ vue__WEBPACK_IMPORTED_MODULE_8___default.a.component("order-history-list", {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+
 
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
@@ -63753,6 +63760,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("order-history-list-item", 
           _this.waiting = true;
         });
       }
+    },
+    getWarrantyTooltip: function getWarrantyTooltip(referenceOrderId) {
+      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template.orderHistoryWarranty", {
+        id: referenceOrderId
+      });
     }
   }
 });
@@ -66504,7 +66516,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"]]);
 /* harmony default export */ __webpack_exports__["default"] = (exceptionMap);
 
 /***/ }),
@@ -73288,7 +73300,8 @@ var actions = {
           _services_NotificationService__WEBPACK_IMPORTED_MODULE_13__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_14__["default"].translate("Ceres::Template.contactSendSuccess"));
         }).fail(function (response) {
           disableForm(event.target, false);
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_13__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_14__["default"].translate("Ceres::Template.contactSendFail"));
+          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_14__["default"].translate("Ceres::Template.contactSendFail");
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_13__["default"].error(response.error);
         });
       }).fail(function (invalidFields) {
         var fieldNames = [];
