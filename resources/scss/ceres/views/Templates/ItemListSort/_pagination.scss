@@ -3,6 +3,12 @@
 	min-height: calc(#{$font-size-base} + #{$pagination-padding-y * 2} + #{$pagination-border-width * 2});
 }
 
+.page-item {
+    &:not(.disabled):not(.active) {
+        cursor: pointer;
+    }
+}
+
 // IE compatibility
 html.ie {
     .cmp-paginator {
