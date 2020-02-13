@@ -172,8 +172,10 @@ Vue.component("registration", {
 
                     this.isDisabled = false;
                 })
-                .fail(() =>
+                .fail((error) =>
                 {
+                    NotificationService.error(error.error).closeAfter(10000);
+
                     this.isDisabled = false;
                 });
         },
