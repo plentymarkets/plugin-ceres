@@ -1,5 +1,5 @@
 <template>
-    <div class="container-max">
+    <div class="container-max" :class="{'p-0' : $ceres.isShopBuilder}"> 
         <div class="position-relative">
             <div class="d-flex flex-grow-1 position-relative my-2">
                 <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" v-model="searchString" @input="onValueChanged($event.target.value)"

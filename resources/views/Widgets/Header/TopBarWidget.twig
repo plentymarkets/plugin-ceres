@@ -66,7 +66,7 @@
 
                                 {% if isPreview or children is defined and children.suggestions | trim is not empty %}
                                     <template #autocomplete-suggestions>
-                                        <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto{% if isPreview %} collapse position-relative{% endif %}"
+                                        <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto{% if isPreview %} collapse position-relative mh-100{% endif %}"
                                             {% if isPreview %} data-builder-child-container="suggestions" id="search-suggestions_{{ uid }}"{% endif %}>
                                             {{ children.suggestions | raw }}
                                         </div>
@@ -234,12 +234,12 @@
     <div class="container-max px-0 px-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
             {% if searchStyle == "onDemand" %}
-                <div id="searchBox" class="cmp cmp-search-box collapse">
+                <div id="searchBox" class="cmp cmp-search-box collapse{% if isPreview %} position-relative{% endif %}">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
                         <item-search>
                             {% if isPreview or children is defined and children.suggestions | trim is not empty %}
                                 <template #autocomplete-suggestions>
-                                    <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto{% if isPreview %} position-relative{% endif %}"
+                                    <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto{% if isPreview %} position-relative mh-100{% endif %}"
                                         {% if isPreview %} data-builder-child-container="suggestions"{% endif %}>
                                         {{ children.suggestions | raw }}
                                     </div>
