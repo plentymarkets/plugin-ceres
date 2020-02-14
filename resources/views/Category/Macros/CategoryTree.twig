@@ -21,7 +21,7 @@
                 {% endif %}
                 {% set counter = counter + 1 %}
                 {% if counter == maxItems[level]%}
-                    <li class="level{{ level }} bt-more"><a @touchstart.stop href="{{ currentScopeUrl }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
+                    <li class="level{{ level }} bt-more"><a @touchstart.stop href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -133,17 +133,18 @@
         {% endfor %}
 
         <ul>
-            <li class="nav-item{% if isCategoryActive %} active{% endif %}">
+            <li class="nav-item{% if isCategoryActive %} active is-open{% endif %}">
                 {% if category.children is not empty and expandableChildren %}
                     <div v-sidenavigation-children="{ 
                             categoryId: {{ category.id }}, 
                             currentUrl: {{ currentUrl | json_encode }}, 
                             isActive: {{ isCategoryActive | json_encode }}, 
                             showItemCount: {{ showItemCount | json_encode }},
-                            childCount: {{ category.children | length }} }"
+                            childCount: {{ category.children | length }},
+                            spacingPadding: {{ spacingPadding | json_encode }},
+                            inlinePadding: {{ inlinePadding | json_encode }} }"
                          class="expand_nav{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                          {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-
                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                     </div>
                 {% endif %}

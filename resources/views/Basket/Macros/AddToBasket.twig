@@ -28,6 +28,7 @@
             :minimum-quantity="{{ itemObject }}.variation.minimumOrderQuantity"
             :maximum-quantity="!!{{ itemObject }}.variation.maximumOrderQuantity && {{ itemObject }}.variation.maximumOrderQuantity > 0 ? {{ itemObject }}.variation.maximumOrderQuantity : null"
             :order-properties="{{ itemObject }}.properties.filter(function(prop) { return prop.property.isOderProperty })"
+            :has-order-properties="{{ itemObject }}.hasOrderProperties"
             :use-large-scale="{{ useLargeScale | default(false) | json_encode }}"
             :show-quantity="{{ showQuantity | default(false) | json_encode }}"
             :item-url="{{ itemObject }} | itemURL{% if urlWithVariationId is not empty %}({{ urlWithVariationId }}){% endif %}"

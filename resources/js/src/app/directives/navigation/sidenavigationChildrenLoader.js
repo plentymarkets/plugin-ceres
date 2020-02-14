@@ -1,10 +1,10 @@
 import Vue from "vue";
 import ApiService from "../../services/ApiService";
-import { isDefined } from "../../helper/utils";
+import { isDefined, isNull } from "../../helper/utils";
 
 class SidenavigationChildrenLoader
 {
-    constructor(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName)
+    constructor(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding)
     {
         this.categoryId = categoryId;
         this.element = element;
@@ -12,6 +12,8 @@ class SidenavigationChildrenLoader
         this.showItemCount = showItemCount;
         this.childCount = childCount;
         this.openClassName = openClassName || "is-open";
+        this.spacingPadding = spacingPadding || "";
+        this.inlinePadding = inlinePadding || "";
 
         this.template = "";
         this.placeholders = [];
@@ -31,7 +33,7 @@ class SidenavigationChildrenLoader
         return this.element.parentElement;
     }
 
-    createElement(tag, classes, width, innerText, child)
+    createElement(tag, classes, width, innerText, child, spacingPadding, inlinePadding)
     {
         const element = document.createElement(tag);
 
@@ -45,11 +47,26 @@ class SidenavigationChildrenLoader
             element.style.width = width;
         }
 
-        element.innerText = innerText;
+        if (!isNull(innerText))
+        {
+            element.innerText = innerText;
+        }
 
         if (isDefined(child))
         {
             element.appendChild(child);
+        }
+
+        if (isDefined(spacingPadding) && spacingPadding.length > 0)
+        {
+            const paddingClasses = spacingPadding.split(" ");
+
+            element.classList.add(paddingClasses);
+        }
+
+        if (isDefined(inlinePadding) && inlinePadding.length > 0)
+        {
+            element.style = inlinePadding;
         }
 
         return element;
@@ -63,7 +80,7 @@ class SidenavigationChildrenLoader
                 this.createElement("li", "nav-item", null, null,
                     this.createElement("a", "nav-link", null, null,
                         this.createElement("span", "placeholder",
-                            Math.floor((Math.random() * 20) + 10) + "%", "."))));
+                            Math.floor((Math.random() * 20) + 10) + "%", "."), this.spacingPadding, this.inlinePadding)));
 
             this.placeholders.push(placeholder);
             this.parent.appendChild(placeholder);
@@ -74,7 +91,7 @@ class SidenavigationChildrenLoader
     {
         for (const placeholder of this.placeholders)
         {
-            placeholder.remove();
+            placeholder.parentNode.removeChild(placeholder);
         }
     }
 
@@ -85,7 +102,9 @@ class SidenavigationChildrenLoader
             ApiService.get("/rest/io/categorytree/template_for_children", {
                 categoryId: this.categoryId,
                 currentUrl: this.currentUrl,
-                showItemCount: this.showItemCount ? 1 : 0
+                showItemCount: this.showItemCount ? 1 : 0,
+                spacingPadding: this.spacingPadding,
+                inlinePadding: this.inlinePadding
             })
                 .then(result =>
                 {
@@ -103,6 +122,12 @@ class SidenavigationChildrenLoader
 
             this.parent.appendChild(ul);
 
+            // IE11 linebreak entity in string bricks vue compile
+            while (template.includes("&#10;"))
+            {
+                template = template.replace("&#10;", "");
+            }
+
             const compiled = Vue.compile(template);
 
             new Vue({
@@ -116,15 +141,20 @@ class SidenavigationChildrenLoader
     getSplitMarkup()
     {
         const fragment = document.createRange().createContextualFragment(this.template);
-        const elements = fragment.children;
-        const data = [];
+        const elements = fragment.childNodes;
+        const children = [];
+        let i = 0;
+        let node;
 
-        for (const element of elements)
+        while (node = elements[i++])
         {
-            data.push(element.outerHTML);
+            if (node.nodeType === 1)
+            {
+                children.push(node.outerHTML);
+            }
         }
 
-        return data;
+        return children;
     }
 
     toggle()
@@ -152,6 +182,9 @@ Vue.directive("sidenavigation-children", {
         const isActive   = binding.value.isActive;
         const showItemCount = binding.value.showItemCount;
         const childCount = binding.value.childCount;
+        const openClassName = binding.value.openClassName;
+        const spacingPadding = binding.value.spacingPadding;
+        const inlinePadding = binding.value.inlinePadding;
 
         const sidenavigationChildrenLoader = new SidenavigationChildrenLoader(
             el,
@@ -159,7 +192,10 @@ Vue.directive("sidenavigation-children", {
             currentUrl,
             isActive,
             showItemCount,
-            childCount
+            childCount,
+            openClassName,
+            spacingPadding,
+            inlinePadding
         );
 
         el.addEventListener("click", () =>

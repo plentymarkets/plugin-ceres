@@ -20,7 +20,9 @@
                             <label :for="'email-input-id_' + _uid">{{ trans("Ceres::Template.newsletterEmail") }} *</label>
                             <input type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
                         </div>
+                        <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1" v-model="honeypot">
                     </div>
+
                 </div>
 
                 <div class="col-xs-12" v-if="showPrivacyPolicyCheckbox">

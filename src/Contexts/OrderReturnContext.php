@@ -4,7 +4,7 @@ namespace Ceres\Contexts;
 
 use IO\Helper\ContextInterface;
 
-class OrderReturnContext extends GlobalContext implements ContextInterface
+class OrderReturnContext extends CategoryContext implements ContextInterface
 {
     public $orderData;
     

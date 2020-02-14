@@ -24,9 +24,9 @@ Vue.component("forgot-password-modal", {
     data()
     {
         return {
-            password: "",
             username: "",
-            isDisabled: false
+            isDisabled: false,
+            honeypot: ""
         };
     },
 
@@ -81,7 +81,7 @@ Vue.component("forgot-password-modal", {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username })
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username, honeypot: this.honeypot })
                 .done(() =>
                 {
                     ModalService.findModal(this.$refs.pwdModal).hide();

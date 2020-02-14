@@ -1,5 +1,8 @@
-body, body .wrapper-main{
+body {
     overflow-x: hidden;
+}
+.wrapper-main {
+    overflow: hidden;
 }
 
 .sb-no-animation.collapsing {
@@ -166,4 +169,10 @@ a:active {
 .fa.none {
     @extend .fa-circle;
     color: transparent !important;
+}
+
+[v-cloak],
+script2,
+style2 {
+    display: none !important;
 }

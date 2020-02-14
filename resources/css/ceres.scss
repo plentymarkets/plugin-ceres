@@ -11050,8 +11050,11 @@ $flag-icon-square-path: '/1x1' !default;
 		color: $yiq-text-light !important;
 	}
 }
-body, body .wrapper-main{
+body {
     overflow-x: hidden;
+}
+.wrapper-main {
+    overflow: hidden;
 }
 
 .sb-no-animation.collapsing {
@@ -11230,6 +11233,11 @@ a:active {
     color: transparent !important;
 }
 
+[v-cloak],
+script2,
+style2 {
+    display: none !important;
+}
 html {
 	font-size: $font-size-root;
 }
@@ -12384,26 +12392,7 @@ html.ie {
   .single-carousel .owl-item > div {
     text-align: center;
   }
-
-  // prevent wrap
-  #thumb-carousel .owl-stage {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    
-    // thumb-image takes assigned height of parent and displays optimal width
-    .owl-item {
-      width: auto !important;
-
-      img {
-        width: auto;
-        margin-right: 0 !important;
-      }
-    }
-  }
 }
-
-
 
 
 // Components
@@ -13567,6 +13556,18 @@ $border-width: 1px;
     }
 }
 
+.honey
+{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    z-index: -1;
+}
+
+
 // Page Design / Global components
 .top-bar{
 	@media print {
@@ -14160,11 +14161,6 @@ $border-width: 1px;
  html.ie {
 	.always-visible-search {
 		min-height: 32px;
-	}
-
-	.navbar-brand img[src*="svg"] {
-		width: 100%;
-		height: 100%;
 	}
  }
 
@@ -18950,10 +18946,6 @@ html.crios {
 	}
 }
 
-[v-cloak] {
-	display: none;
-}
-
 .mkt-homepage
 {
 	margin-bottom: 2rem;
@@ -20128,20 +20120,23 @@ html.ie .v-s-boxes .v-s-box.invalid {
         height: 100% !important;
     }
 
-    .container-max {
-        z-index: 1;
-        
-        .huge-font {
+    .huge-font {
+        font-size: $font-size-base;
+
+        @include media-breakpoint-up(sm) {
+            font-size: 28px;
+        }
+        @include media-breakpoint-up(md) {
             font-size: 35px;
-    
-            .widget-text,
-            .widget-code {
-                h1 { font-size: 2em };
-                h2 { font-size: 1.8em };
-                h3 { font-size: 1.5em };
-                h4 { font-size: 1.25em };
-                * { font-size: 1em };
-            }
+        }
+
+        .widget-text,
+        .widget-code {
+            h1 { font-size: 2em };
+            h2 { font-size: 1.8em };
+            h3 { font-size: 1.5em };
+            h4 { font-size: 1.25em };
+            * { font-size: 1em };
         }
     }
 }
