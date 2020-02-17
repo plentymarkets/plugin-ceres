@@ -35,6 +35,11 @@ Vue.component("live-shopping-item", {
         {
             type: String,
             default: null
+        },
+        sorting:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -133,7 +138,7 @@ Vue.component("live-shopping-item", {
 
     created()
     {
-        this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
+        this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting });
     },
 
     methods:
@@ -159,7 +164,7 @@ Vue.component("live-shopping-item", {
 
         reloadOffer()
         {
-            this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
+            this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting });
         }
     }
 });
