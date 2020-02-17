@@ -62872,6 +62872,10 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("live-shopping-item", {
     paddingInlineStyles: {
       type: String,
       default: null
+    },
+    sorting: {
+      type: String,
+      default: null
     }
   },
   computed: _objectSpread({
@@ -62950,7 +62954,10 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("live-shopping-item", {
     }
   })),
   created: function created() {
-    this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
+    this.$store.dispatch("retrieveLiveShoppingOffer", {
+      liveShoppingId: this.liveShoppingId,
+      sorting: this.sorting
+    });
   },
   methods: {
     whenIsCurrentOffer: function whenIsCurrentOffer() {
@@ -62969,7 +62976,10 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("live-shopping-item", {
       return TimeEnum.future;
     },
     reloadOffer: function reloadOffer() {
-      this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
+      this.$store.dispatch("retrieveLiveShoppingOffer", {
+        liveShoppingId: this.liveShoppingId,
+        sorting: this.sorting
+      });
     }
   }
 });
@@ -74354,10 +74364,12 @@ var mutations = {
   }
 };
 var actions = {
-  retrieveLiveShoppingOffer: function retrieveLiveShoppingOffer(_ref2, liveShoppingId) {
+  retrieveLiveShoppingOffer: function retrieveLiveShoppingOffer(_ref2, params) {
     var commit = _ref2.commit;
+    var liveShoppingId = params.liveShoppingId;
+    var sorting = params.sorting;
     return new Promise(function (resolve, reject) {
-      ApiService.get("/rest/io/live-shopping/" + liveShoppingId).done(function (liveShoppingOffer) {
+      ApiService.get("/rest/io/live-shopping/" + liveShoppingId + "?sorting=" + sorting).done(function (liveShoppingOffer) {
         if (liveShoppingOffer.item) {
           commit("setLiveShoppingOffer", {
             liveShoppingId: liveShoppingId,
