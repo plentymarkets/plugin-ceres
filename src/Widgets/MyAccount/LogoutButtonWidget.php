@@ -28,7 +28,8 @@ class LogoutButtonWidget extends BaseWidget
         $settings = pluginApp(WidgetSettingsFactory::class);
 
         $settings->createCustomClass();
-        $settings->createAppearance();
+        $settings->createAppearance()
+                 ->withDefaultValue("danger");
 
         $settings->createButtonSize();
         $settings->createSpacing();
