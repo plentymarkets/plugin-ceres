@@ -1,5 +1,66 @@
 # Release Notes for Ceres
 
+## v4.6.0 (2020-02-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.2...4.6.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to re-generate the ShopBuilder contents for single item views via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- Google reCAPTCHA is now only carried out after the online store user accepts the corresponding cookies. Forms that are subject to reCAPTCHA, such as the contact form or the customer registration, can therefore only be sent after the user's consent.
+
+### Added
+
+- We added the Your reference widget to the ShopBuilder.
+- We added the step-by-step navigation widget to the ShopBuilder.
+- We added settings for custom CSS classes, paddings, and margins to the Google Maps widget.
+- The assistant now contains a setting via which you can activate the VAT number verification for the checkout, the creation of new addresses and changes to existing addresses.
+
+### Changed
+
+- Filters of the type category are now also available in the category view.
+- The navigation tree widget is no longer displayed on display sizes on which the mobile navigation is used. A corresponding notification is displayed in the ShopBuilder.
+- Properties are no longer output in the data set for item lists in order to reduce the quantity of data.
+- The category image is now loaded via lazy load when it enters the visible area. This improves the performance.
+- The image of the background image widget is now loaded via lazy load.
+- The transmitted data for items with order characteristics has been optimised.
+- E-mails are now sent in the language selected in the online store.
+- The setting for entering the Google Maps API key has been moved from the Google Maps widget to the Ceres configuration. The checkbox for Google Maps cookies in the cookie bar will only be displayed if the key is stored there.
+- The text that links to information pages of payment providers has been added to the multilingual language packages. The corresponding key is "checkoutPaymentMethodDetailsLinks".
+- The name of the item image is now used as the title in the widgets image box, item image and image carousel.
+- The type attribute of `<script2>` tags is no longer defaulted to "text/javascript".
+
+### Fixed
+
+- Due to an error, the VAT number was always displayed in the address selection widget. This has been fixed.
+- script2 and style2 tags are no longer displayed as clear text before being translated into native tags.
+- Base prices are now correctly output in the JSON for Schema.org.
+- Preview images of the image carousel were not displayed in the Internet Explorer. This has been fixed.
+- Child elements of the navigation tree widget were not displayed in the Internet Explorer. This has been fixed.
+- Under certain circumstances, a horizontal scrollbar was displayed in the ShopBuilder. This has been fixed.
+- Due to an error, online store visitors were unable to expand the subcategories of the current category in the navigation tree widget. This has been fixed.
+- ShopBuilder contents for the returns page were not displayed in the online store. This has been fixed.
+- Invalid elements are now removed from customised titles of the image box and image carousel widgets in order to prevent inline editing errors.
+- Images in the image carousel widget were reloaded whenever a cursor moved over a button. This has been fixed.
+- Tabs in the tab widget now become visible at a later time if their content becomes visible through user interaction or is delayed for other reasons.
+- Widgets for the contact page did not recognise the input field for custom CSS classes. This has been fixed.
+- Translations for store specials are now output correctly.
+- We improved the usability of the toolbar widget of the ShopBuilder.
+- The configured status for returns is now checked before the creation of the return. In case of an error, the default status for returns (9.0) is used instead.
+- Registered customers can now create returns via the order confirmation link without having to log in.
+- The conversion of special characters was not working properly for the category field in the structured data of an item. This has been fixed.
+- The numerical value was missing from the field content of the additional details tab in the tab widget. This has been fixed.
+- Due to an error, the Google reCAPTCHA was loaded on every page. This has been fixed.
+- The checkbox for Packstation/post office was not displayed in the my account area. This has been fixed.
+- The timer of the live shopping widget could not display a running time of more than 30 days. This has been fixed.
+- The widgets item per page and item sorting could only be placed in the toolbar widget. This has been fixed.
+- The settings for paddings did not affect list elements of the navigation tree widget that were loaded at a later time. This has been fixed.
+- Due to an error, the backlink of the link widget was passed on to the registration and login pages. This has been fixed. 
+- The navigation bar no longer displays categories if no category type has been activated in the Ceres setting **Type of categories rendered in the navigation**.
+- The potentialAction element in the structured data is now only output on the homepage.
+- Categories whose URL name is already used for system-internal URLs (such as /basket) can now be accessed as long as an alternative category has been linked for these system-internal URLs in the ShopBuilder.
+- The setting **Always append trailing slashes** is now effective for pages that are accessed via the **More** button in the nevigation bar.
+- Orders of the type warranty are now displayed and can be returned in the my account area.
+- If the automatic language recognition of browsers is used, pages could be displayed in a different language than specified in the URL slug. In such cases, the pages are no longer written into the ShopBooster cache.
+
 ## v4.5.2 (2020-01-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.1...4.5.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

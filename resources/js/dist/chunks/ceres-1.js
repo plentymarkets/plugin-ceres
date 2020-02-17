@@ -1699,7 +1699,8 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         _this3.isDisabled = false;
-      }).fail(function () {
+      }).fail(function (error) {
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_19__["default"].error(error.error).closeAfter(10000);
         _this3.isDisabled = false;
       });
     },
@@ -7039,7 +7040,10 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      !!_vm.googleRecaptchaApiKey && _vm.modalShown ? _c("recaptcha") : _vm._e()
+      !!_vm.googleRecaptchaApiKey &&
+      (_vm.modalShown || !_vm.isSimpleRegistration)
+        ? _c("recaptcha")
+        : _vm._e()
     ],
     1
   )

@@ -77,7 +77,7 @@
             </button>
         </div>
 
-        <recaptcha v-if="!!googleRecaptchaApiKey && modalShown"></recaptcha>
+        <recaptcha v-if="!!googleRecaptchaApiKey && (modalShown || !isSimpleRegistration)"></recaptcha>
     </form>
 </template>
 
@@ -265,8 +265,10 @@ export default {
 
                     this.isDisabled = false;
                 })
-                .fail(() =>
+                .fail((error) =>
                 {
+                    NotificationService.error(error.error).closeAfter(10000);
+
                     this.isDisabled = false;
                 });
         },

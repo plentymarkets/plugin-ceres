@@ -166,9 +166,8 @@ const actions =
                                 .fail(response =>
                                 {
                                     disableForm(event.target, false);
-                                    NotificationService.error(
-                                        TranslationService.translate("Ceres::Template.contactSendFail")
-                                    );
+                                    response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
+                                    NotificationService.error(response.error);
                                 });
                         })
                         .fail(invalidFields =>

@@ -528,6 +528,10 @@ var TimeEnum = Object.freeze({
       type: String,
       default: null
     },
+    sorting: {
+      type: String,
+      default: null
+    },
     showNetPrices: {
       type: Boolean
     }
@@ -608,7 +612,10 @@ var TimeEnum = Object.freeze({
     }
   })),
   created: function created() {
-    this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
+    this.$store.dispatch("retrieveLiveShoppingOffer", {
+      liveShoppingId: this.liveShoppingId,
+      sorting: this.sorting
+    });
   },
   methods: {
     whenIsCurrentOffer: function whenIsCurrentOffer() {
@@ -627,7 +634,10 @@ var TimeEnum = Object.freeze({
       return TimeEnum.future;
     },
     reloadOffer: function reloadOffer() {
-      this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
+      this.$store.dispatch("retrieveLiveShoppingOffer", {
+        liveShoppingId: this.liveShoppingId,
+        sorting: this.sorting
+      });
     }
   }
 });

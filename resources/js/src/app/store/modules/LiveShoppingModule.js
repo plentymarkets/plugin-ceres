@@ -15,11 +15,14 @@ const mutations =
 
 const actions =
     {
-        retrieveLiveShoppingOffer({ commit }, liveShoppingId)
+        retrieveLiveShoppingOffer({ commit }, params)
         {
+            const liveShoppingId = params.liveShoppingId;
+            const sorting = params.sorting;
+
             return new Promise((resolve, reject) =>
             {
-                ApiService.get("/rest/io/live-shopping/" + liveShoppingId)
+                ApiService.get("/rest/io/live-shopping/" + liveShoppingId + "?sorting=" + sorting)
                     .done(liveShoppingOffer =>
                     {
                         if (liveShoppingOffer.item)

@@ -10252,7 +10252,12 @@ $border-width: 1px;
         height: 38px;
     }
 
+    > .input-unit-label {
+        padding-right: calc(1rem + 38px);
+    }
+
     > .input-unit-btn {
+        content: "";
         position: absolute;
         top: 0;
         right: 0;

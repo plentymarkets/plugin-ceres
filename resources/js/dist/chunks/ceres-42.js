@@ -144,7 +144,7 @@ var render = function() {
               key: shippingCountry.id,
               staticClass: "col-6 col-sm-4 px-0",
               class: {
-                active: _vm.localization.shippingCountryId == shippingCountry.id
+                active: _vm.basket.shippingCountryId == shippingCountry.id
               }
             },
             [
@@ -236,7 +236,7 @@ var render = function() {
                     domProps: {
                       value: shippingCountry.id,
                       selected:
-                        _vm.localization.shippingCountryId == shippingCountry.id
+                        _vm.basket.shippingCountryId == shippingCountry.id
                     }
                   },
                   [
