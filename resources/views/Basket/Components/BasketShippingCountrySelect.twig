@@ -7,12 +7,12 @@
                     :class="{'is-disabled': isDisabled}"
                     :disabled="isDisabled"
                     v-tooltip="isDisabled"
-                    :selected="localization.shippingCountryId == shippingCountry.id">
+                    :selected="basket.shippingCountryId == shippingCountry.id">
                 ${shippingCountry.currLangName}
             </option>
         </select>
         <div v-else>
-            ${ getCountryName(localization.shippingCountryId) }
+            ${ getCountryName(basket.shippingCountryId) }
         </div>
     </div>
 </script>
