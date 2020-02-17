@@ -299,7 +299,7 @@ class TemplateServiceProvider extends ServiceProvider
          * Cannot use CeresConfig since it depends on IO helper class
          */
         $config = pluginApp(ConfigRepository::class);
-        if (strlen($config->get('Ceres.contact.apiKey'))) {
+        if (strlen($config->get('Ceres.contact.api_key'))) {
             $consentRepository->registerConsent(
                 'googleMaps',
                 'Ceres::Template.consentGoogleMapsLabel',
