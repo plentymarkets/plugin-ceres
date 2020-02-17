@@ -1,24 +1,26 @@
 <template>
     <div class="container-max" :class="{'p-0' : $ceres.isShopBuilder}"> 
-        <div class="d-flex flex-grow-1 position-relative my-2">
-            <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" v-model="searchString" @input="onValueChanged($event.target.value)"
-                @keyup.enter="search()" @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)" :autofocus="isShopBuilder">
+        <div class="position-relative">
+            <div class="d-flex flex-grow-1 position-relative my-2">
+                <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" v-model="searchString" @input="onValueChanged($event.target.value)"
+                    @keyup.enter="search()" @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)" :autofocus="isShopBuilder">
 
-            <slot name="search-button">
-                <button class="search-submit px-3" type="submit" @click="search()">
-                    <i class="fa fa-search"></i>
-                </button>
+                <slot name="search-button">
+                    <button class="search-submit px-3" type="submit" @click="search()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </slot>
+            </div>
+
+            <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
+                <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
+                    <search-suggestion-items
+                        :show-item-images="showItemImages"
+                        :forward-to-single-item="forwardToSingleItem">
+                    </search-suggestion-items>
+                </div>
             </slot>
         </div>
-
-        <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
-            <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
-                <search-suggestion-items
-                    :show-item-images="showItemImages"
-                    :forward-to-single-item="forwardToSingleItem">
-                </search-suggestion-items>
-            </div>
-        </slot>
     </div>
 </template>
 
