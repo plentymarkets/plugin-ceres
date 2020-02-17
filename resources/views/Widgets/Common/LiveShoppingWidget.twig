@@ -8,6 +8,7 @@
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set sorting         = widget.settings.sorting.mobile %}
 
 <div class="widget-live-shopping widget{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
@@ -16,6 +17,7 @@
             <live-shopping-item
                 :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection }}"
                 :display-settings="{{ liveShoppingConfig | json_encode }}"
+                :sorting="{{ sorting | json_encode }}"
                 {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
                 {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
                 {% if isPreview %}
