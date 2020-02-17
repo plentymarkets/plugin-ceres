@@ -3,9 +3,10 @@
 
         <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }" data-validate="text">
             <input type="text" @input="onInputValueChanged($event.target.value)" v-model="inputValue" v-tooltip data-toggle="tooltip" :title="property.names.description">
-            <label>${property.names.name}
-                <strong v-if="surcharge > 0">(+ ${ surcharge | currency})</strong>
-            *</label>
+            <label class="d-flex">
+                <span class="text-truncate">${property.names.name}</span>
+                <strong class="ml-1" v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
+            </label>
         </div>
 
         <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
@@ -38,10 +39,9 @@
                     <option :selected="true" :value="null">{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
                     <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues">${ value.name }</option>
                 </select>
-                <label>
-                    ${property.names.name}
-                    <strong v-if="surcharge > 0">(+ ${ surcharge | currency})</strong>
-                    *
+                <label class="d-flex w-100">
+                    <span class="text-truncate">${property.names.name}</span>
+                    <strong class="ml-1" v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
                 </label>
             </div>
             <popper class="order-property-selection-info-popper" v-cloak v-if="selectedDescription" placement="bottom">
@@ -59,9 +59,9 @@
         <div v-else-if="inputType === 'file'">
             <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'isLoading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">${selectedFileName}</span>
-                <span class="input-unit-label">
-                    ${property.names.name}
-                    <strong v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
+                <span class="input-unit-label d-flex">
+                    <span class="text-truncate">${property.names.name}</span>
+                    <strong class="ml-1" v-if="surcharge > 0">(+ ${ surcharge | currency}) *</strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
                     <i class="fa fa-ellipsis-h"></i>
