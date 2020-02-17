@@ -1,5 +1,66 @@
 # Release Notes für Ceres
 
+## v4.6.0 (2020-02-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.2...4.6.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte für Artikelansichten im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu bereitstellen** aktualisiert werden.
+- Google reCAPTCHA wird ab sofort erst nach der Zustimmung zur Verwendung der entsprechenden Cookies durch den Webshop-Besucher ausgeführt. Demzufolge können Formulare, die über das reCAPTCHA abgesichert sind, erst nach Zustimmung des Benutzers abgeschickt werden. Dazu zählen das Kontaktformular und die Kundenregistrierung.
+
+### Hinzugefügt
+
+- Das Ihr Zeichen-Widget wurde zum ShopBuilder hinzugefügt.
+- Das Widget Step-By-Step-Navigation wurde zum ShopBuilder hinzugefügt.
+- Dem Google Maps-Widget wurden Einstellungen für eigene CSS-Klassen und Abstände hinzugefügt.
+- Der Assistent enthält nun eine Einstellung mit der man die Umsatzsteueridentifikationsnummerprüfung für die Anlage/Änderung von Addressen und den Bestellabschluss aktivieren kann.
+
+### Geändert
+
+- Filter vom Typ Kategorie sind nun auch in der Kategorieansicht verfügbar.
+- Das Navigationsbaum-Widget wird auf Displaygrößen, auf denen die mobile Navigation verwendet wird, nicht angezeigt. Im ShopBuilder wird ein entsprechender Hinweis angezeigt.
+- Eigenschaften werden in den Datensätzen für Artikellisten nicht mehr ausgegeben, um die Datenmenge zu reduzieren.
+- Das Kategoriebild wird nun aus Gründen der Performance per Lazy Load nachgeladen, wenn es im sichtbaren Bereich ist.
+- Das Bild des Hintergrundbild-Widgets wird nun per Lazy Load nachgeladen.
+- Die übertragenen Daten bei Artikeln mit Bestellmerkmalen wurden optimiert.
+- E-Mails werden ab sofort in der ausgewählten Shop-Sprache versendet.
+- Die Einstellung für den Google Maps API-Schlüssel wurde aus dem Google Maps-Widget in die Ceres-Einstellungen überführt. Die Checkbox für die Google Maps-Cookies in der CookieBar wird erst angezeigt, sobald dort ein Schlüssel hinterlegt wurde.
+- Der Text der Verlinkung zu Informationsseiten von Zahlungsanbietern wurde in die Sprachpakete für Mehrsprachigkeit aufgenommen. Der betreffende Eintrag ist "checkoutPaymentMethodDetailsLink".
+- Für Bilderbox-, Artikelbild- und Bilderkarussell-Widgets werden nun die am Artikelbild hinterlegten Namen als Titel verwendet.
+- Das Type-Attribut von `<script2>`-Tags wird nun nicht mehr automatisch auf "text/javascript" umgewandelt.
+
+### Behoben
+
+- Durch einen Fehler konnte die USt-IdNr. im Adressauswahl-Widget nicht ausgeblendet werden. Dies wurde behoben.
+- script2- und style2-Tags werden nun nicht mehr als Klartext angezeigt, bevor sie in native Tags umgewandelt werden.
+- Im JSON für Schema.org werden Grundpreise nun korrekt ausgegeben.
+- Im Internet Explorer wurden die Vorschaubilder des Bilderkarussells nicht angezeigt. Dies wurde behoben.
+- Im Internet Explorer wurden Kindelemente des Navigationsbaum-Widgets nicht angezeigt. Dies wurde behoben.
+- Unter bestimmten Umständen wurde eine horizontale Scrollbar im ShopBuilder angezeigt. Dies wurde behoben.
+- Durch einen Fehler konnten Webshop-Besucher Unterkategorien der aktuellen Kategorie im Navigationsbaum-Widget nicht aufklappen. Dies wurde behoben.
+- Erstellte ShopBuilder-Inhalte für die Retourenseite wurden im Webshop nicht ausgegeben. Dies wurde behoben.
+- Im Bilderbox- und Bilderkarusell-Widget werden ungültige Elemente aus angepassten Überschriften jetzt herausgefiltert, um Fehler beim Inline-Editing zu vermeiden.
+- Im Bilderkarussell-Widget wurden Bilder bei jeder Mausbewegung über eine Bedienfläche neu geladen. Dies wurde behoben.
+- Tabs des Tab-Widgets werden jetzt auch nachträglich sichtbar, wenn der darin enthaltene Inhalt zeitverzögert oder durch Benutzerinteraktion sichtbar wird.
+- Das Feld für eigene CSS-Klassen wurde bei Widgets auf der Kontaktseite nicht berücksichtigt. Dies wurde behoben.
+- Die Übersetzungen für Shop-Aktionen werden wieder korrekt ausgegeben.
+- Die Bedienbarkeit des Toolbar-Widgets im ShopBuilder wurde verbessert.
+- Der konfigurierte Auftragsstatus für Retouren wird vor Anlage der Retoure geprüft. Im Fehlerfall wird der Standardstatus für Retouren (9.0) verwendet.
+- Registrierte Kunden können ab sofort Retouren über den Bestellbestätigungslink anlegen, ohne angemeldet zu sein.
+- In den strukturierten Daten eines Artikels kam es zu einen Fehler bei der Umwandlung von Sonderzeichen im Feld "category". Dies wurde behoben.
+- Im Feld "Inhalt" im Tab "Weitere Details" des Tab-Widgets wurde kein Wert vor der Einheit angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde das Google reCAPTCHA auf allen Seiten geladen. Dies wurde behoben.
+- Im Lieferadressen-Widget des Mein Konto-Bereichs wurde die Checkbox für Paketstation/Postfiliale nicht angezeigt. Dies wurde behoben.
+- Im Live-Shopping-Widget konnte die Laufzeitanzeige nicht mehr als 30 Tage darstellen. Dies wurde behoben.
+- Die Widgets Artikel pro Seite und Artikelsortierung konnten nur in das Toolbar-Widget gezogen werden. Dies wurde behoben.
+- Im Navigationsbaum-Widget wurden die Einstellungen für Innenabstände nicht auf nachgeladene Listenelemente angewendet. Dies wurde behoben.
+- Durch einen Fehler wurde der Backlink des Link-Widgets fälschlicherweise an Registrierungs- und Login-Seiten weitergereicht. Dies wurde behoben.
+- Es werden nun keine Kategorien mehr in der Navigationsleiste ausgegeben, wenn alle Kategorietypen in der Ceres-Einstellung **Kategorietypen, die in der Navigationsleiste angezeigt werden** deaktiviert sind.
+- Das potentialAction-Element in den strukturierten Daten wird nun nur noch auf der Startseite ausgegeben.
+- Kategorien, deren URL-Name bereits für systeminterne URLs in Verwendung ist, sind ab sofort erreichbar, wenn für diese systeminternen URLs eine alternative Kategorie im ShopBuilder verknüpft ist.
+- Die Einstellung **Slash (/) am Ende von URLs** wird jetzt auch bei Seiten, die über den **Mehr**-Button in der Navigation aufgerufen werden, berücksichtigt.
+- Aufträge vom Typ Gewährleistung werden jetzt im Mein Konto-Bereich angezeigt und können retourniert werden.
+- Seiten, die aufgrund der automatischen Erkennung der Browsersprache in einer anderen Sprache angezeigt werden, als in der URL angegeben ist, werden nicht mehr im ShopBooster-Cache gespeichert.
+
 ## v4.5.2 (2020-01-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.1...4.5.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
