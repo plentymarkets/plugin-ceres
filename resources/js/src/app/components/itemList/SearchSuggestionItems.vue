@@ -49,6 +49,12 @@ export default {
             type: String,
             default: null
         },
+
+        suggestionType:
+        {
+            type: String,
+            required: true
+        }
     },
 
     computed:
@@ -57,6 +63,11 @@ export default {
             autocompleteResult: state => state.itemSearch.autocompleteResult,
             autocompleteSearchString: state => state.itemSearch.autocompleteSearchString
         })
+    },
+
+    created()
+    {
+        this.$store.commit("addAutocompleteType", this.suggestionType);
     },
 
     methods:

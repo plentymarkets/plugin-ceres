@@ -29,6 +29,7 @@
         :show-item-images="{{ showItemImages | json_encode }}"
         :forward-to-single-item="{{ forwardToSingleItem | json_encode }}"
         {% if spacingSettings.customPadding.mobile %}:padding-classes="{{ spacingPadding | json_encode }}"
-        :padding-inline-styles="{{ inlinePadding | json_encode }}"{% endif %}>
+        :padding-inline-styles="{{ inlinePadding | json_encode }}"{% endif %}
+        suggestion-type="item">
     </search-suggestion-items>
 </div>
