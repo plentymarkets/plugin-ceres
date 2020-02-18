@@ -63,14 +63,15 @@ export default {
     {
         getDisplayName(itemData)
         {
-            let displayName = this.$options.filters.itemName(itemData);
+            const search = this.autocompleteSearchString.split(" ")
+                .filter(word => word.length)
+                .join("|");
 
-            for (const split of this.autocompleteSearchString.split(" "))
-            {
-                displayName = displayName.replace(split, `<strong class="text-appearance">${split}</strong>`);
-            }
-
-            return displayName;
+            return this.$options.filters.itemName(itemData)
+                .replace(new RegExp(search, "ig"), match =>
+                {
+                    return `<strong class="text-appearance">${ match }</strong>`;
+                });
         },
 
         getTargetUrl(itemData)
