@@ -63,7 +63,7 @@ export default {
     {
         getDisplayName(itemData)
         {
-            const search = this.autocompleteSearchString.split(" ")
+            const search = this.autocompleteSearchString.split(/\s+/)
                 .filter(word => word.length)
                 .join("|");
 
