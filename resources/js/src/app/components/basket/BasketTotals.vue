@@ -1,5 +1,5 @@
 <template>
-    <div class="cmp cmp-totals">
+    <div class="cmp-totals">
         <div class="h3">{{ $translate("Ceres::Template.basketSum") }}</div>
         <div class="component-loading with-icon refreshing" :class="{ 'isLoading': isBasketLoading }">
             <dl>
