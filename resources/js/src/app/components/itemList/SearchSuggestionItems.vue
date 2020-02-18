@@ -6,17 +6,14 @@
             :class="paddingClasses"
             :style="paddingInlineStyles"
             :key="index"
-            :href="getTargetUrl(item.data)"
-            @mousedown.prevent="onSuggestionSelected(item.data)"
+            :href="getTargetUrl(item)"
+            @mousedown.prevent="onSuggestionSelected(item)"
         >
-            <div class="autocomplete-image-container mr-2" v-if="showItemImages">
-                <img
-                    class="autocomplete-image mw-100"
-                    :src="item.data.images | itemImages('urlPreview') | itemImage"
-                />
+            <div class="autocomplete-image-container mr-2" v-if="suggestionType === 'item' && showItemImages">
+                <img class="autocomplete-image mw-100" :src="item.image"/>
             </div>
 
-            <div class="autocomplete-item-name" v-html="getDisplayName(item.data)"></div>
+            <div class="autocomplete-item-name" v-html="getHighlightedLabel(item.label)"></div>
         </a>
     </div>
 </template>
@@ -30,12 +27,6 @@ export default {
         showItemImages:
         {
             type: Boolean
-        },
-
-        forwardToSingleItem:
-        {
-            type: Boolean,
-            default: App.config.search.forwardToSingleItem
         },
 
         paddingClasses:
@@ -72,32 +63,33 @@ export default {
 
     methods:
     {
-        getDisplayName(itemData)
+        getHighlightedLabel(label)
         {
-            let displayName = this.$options.filters.itemName(itemData);
+            const search = this.autocompleteSearchString.split(/\s+/)
+                .filter(word => word.length)
+                .join("|");
 
-            for (const split of this.autocompleteSearchString.split(" "))
-            {
-                displayName = displayName.replace(split, `<strong class="text-appearance">${split}</strong>`);
-            }
-
-            return displayName;
+            return label
+                .replace(new RegExp(search, "ig"), match =>
+                {
+                    return `<strong class="text-appearance">${ match }</strong>`;
+                });
         },
 
-        getTargetUrl(itemData)
+        getTargetUrl(item)
         {
-            if (this.forwardToSingleItem) 
+            if (this.suggestionType === "item")
             {
-                return this.$options.filters.itemURL(itemData);
+                return item.url;
             }
 
-            return `${App.urls.search}?query=${this.$options.filters.itemName(itemData)}`
+            return `${ App.urls.search }?query=${ item.label }`
         },
 
-        onSuggestionSelected(itemData)
+        onSuggestionSelected(item)
         {
-            this.$store.commit("setItemListSearchString", this.$options.filters.itemName(itemData));
-            window.open(this.getTargetUrl(itemData), "_self", false);
+            this.$store.commit("setItemListSearchString", item.label);
+            window.open(this.getTargetUrl(item), "_self", false);
         }
     }
 }

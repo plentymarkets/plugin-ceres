@@ -12,6 +12,12 @@ class SearchSuggestionItemsWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Header.SearchSuggestionItemsWidget";
 
+    protected $types = ["autocomplete", "category", "item"];
+
+    protected $suggestionType = "item";
+
+    protected $headline = "Artikel";
+
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::SearchSuggestionItemsWidget")
@@ -43,5 +49,10 @@ class SearchSuggestionItemsWidget extends BaseWidget
         $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
+    }
+
+    protected function getTemplateData($widgetSettings, $isPreview)
+    {
+        return ['suggestionType' => $this->suggestionType];
     }
 }

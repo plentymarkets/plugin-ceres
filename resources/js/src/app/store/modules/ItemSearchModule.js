@@ -20,7 +20,30 @@ const mutations =
 
         setAutocompleteResult(state, result = [])
         {
-            Vue.set(state, "autocompleteResult", result);
+            /**
+             * create dummy data for development purpose
+             */
+            const data = [];
+            const itemNameFilter = Vue.options.filters.itemName;
+            const itemImagesFilter = Vue.options.filters.itemImages;
+            const itemImageFilter = Vue.options.filters.itemImage;
+            const itemURLFilter = Vue.options.filters.itemURL;
+
+            for (const item of result)
+            {
+                data.push({
+                    label: itemNameFilter(item.data),
+                    image: itemImageFilter(itemImagesFilter(item.data.images, "urlPreview")),
+                    url: itemURLFilter(item.data),
+                    subtitle: "",
+                    count: null
+                });
+            }
+            /**
+             * end of dummy data
+             */
+
+            Vue.set(state, "autocompleteResult", data);
         },
 
         setAutocompleteSearchString(state, searchString)
