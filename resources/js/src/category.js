@@ -77,6 +77,7 @@ Vue.component("lazy-img", LazyImg);
 import Intersect from "./app/components/common/Intersect.vue";
 Vue.component("intersect", Intersect);
 Vue.component("tab-list", () => import("./app/components/common/TabList.vue"));
+Vue.component("tab-item", () => import("./app/components/common/TabItem.vue"));
 Vue.component("last-seen-item-list", () => import("./app/components/containers/LastSeenItemList.vue"));
 
 Vue.component("change-email-form", () => import("./app/components/customer/ChangeEmailForm.vue"));
