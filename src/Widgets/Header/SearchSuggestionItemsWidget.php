@@ -14,7 +14,7 @@ class SearchSuggestionItemsWidget extends BaseWidget
 
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::SearchSuggestionItems")
+        return WidgetDataFactory::make("Ceres::SearchSuggestionItemsWidget")
             ->withLabel("Widget.searchSuggestionItemsLabel")
             ->withPreviewImageUrl("/images/widgets/search-suggestion-items.svg")
             ->withType(WidgetTypes::ITEM_SEARCH)

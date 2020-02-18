@@ -6,7 +6,9 @@ const state =
     {
         autocompleteRequest: null,
         autocompleteResult: [],
-        autocompleteSearchString: ""
+        autocompleteSearchString: "",
+        // item, category, autocomplete
+        autocompleteTypes: new Set()
     };
 
 const mutations =
@@ -24,6 +26,11 @@ const mutations =
         setAutocompleteSearchString(state, searchString)
         {
             state.autocompleteSearchString = searchString;
+        },
+
+        addAutocompleteType(state, type)
+        {
+            state.autocompleteTypes.add(type);
         }
     };
 
@@ -42,7 +49,8 @@ const actions =
                 "/rest/io/item/search/autocomplete",
                 {
                     template: "Ceres::ItemList.Components.ItemSearch",
-                    query: searchString
+                    query: searchString,
+                    types: [...state.autocompleteTypes]
                 }
             );
 
