@@ -9173,6 +9173,91 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     }
 }
 
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    z-index: $zindex-7;
+    max-height: 310px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.autocomplete-suggestion {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+        background: $gray-300;
+    }
+}
+
+.autocomplete-item-name {
+    -ms-flex-item-align: center;
+        align-self: center;
+    max-width: 0;
+    color: $gray-900;
+}
+
+.autocomplete-image-container {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 40px;
+    height: 40px;
+}
+
+.autocomplete-image {
+    max-width: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
+.search-input {
+    font-size: 1.3rem;
+    line-height: 1;
+    border: none;
+    outline: none;
+}
+
+.search-submit {
+    font-size: 1.3rem;
+    line-height: 1;
+    color: $primary;
+    background-color: $gray-200;
+    border: none;
+    outline: none;
+    @include transition(all .3s);
+
+    &:hover {
+        color: darken($primary, 20%);
+    }
+}
+
+.search-permanent {
+    @include media-breakpoint-up(md) {
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+
+        .controls {
+            .nav-link {
+                padding: 1.2rem .8rem;
+            }
+        }
+    }
+}
+
+html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
+    min-height: 32px;
+}
+
 
 // External plugins overrides
 /**
