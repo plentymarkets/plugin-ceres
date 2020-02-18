@@ -234,7 +234,7 @@ var FEATURE_ENABLED = 'IntersectionObserver' in window;
   created: function created() {
     var _this = this;
 
-    if (!FEATURE_ENABLED) {
+    if (!FEATURE_ENABLED || App.isShopBuilder) {
       this.isVisible = true;
       return;
     }
@@ -256,20 +256,20 @@ var FEATURE_ENABLED = 'IntersectionObserver' in window;
   mounted: function mounted() {
     var _this2 = this;
 
-    if (FEATURE_ENABLED) {
+    if (FEATURE_ENABLED && !App.isShopBuilder) {
       this.$nextTick(function () {
         _this2.mayObserve = true;
       });
     }
   },
   updated: function updated() {
-    if (FEATURE_ENABLED && this.mayObserve) {
+    if (FEATURE_ENABLED && this.mayObserve && !App.isShopBuilder) {
       this.mayObserve = false;
       this.observer.observe(this.$el);
     }
   },
   destroyed: function destroyed() {
-    if (FEATURE_ENABLED) {
+    if (FEATURE_ENABLED && !App.isShopBuilder) {
       this.observer.disconnect();
     }
   },
