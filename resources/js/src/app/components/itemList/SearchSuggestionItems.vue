@@ -34,8 +34,7 @@ export default {
 
         forwardToSingleItem:
         {
-            type: Boolean,
-            default: App.config.search.forwardToSingleItem
+            type: Boolean
         },
 
         paddingClasses:

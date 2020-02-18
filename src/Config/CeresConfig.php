@@ -50,9 +50,6 @@ class CeresConfig
     /** @var CeresPaginationConfig  */
     public $pagination;
 
-    /** @var CeresSearchConfig */
-    public $search;
-
     /** @var CeresSortingConfig  */
     public $sorting;
 
@@ -73,10 +70,6 @@ class CeresConfig
         $this->meta         = pluginApp( CeresMetaConfig::class );
         $this->myAccount    = pluginApp( CeresMyAccountConfig::class );
         $this->pagination   = pluginApp( CeresPaginationConfig::class );
-        $this->search       = pluginApp( CeresSearchConfig::class );
         $this->sorting      = pluginApp( CeresSortingConfig::class );
     }
-
-
-
 }

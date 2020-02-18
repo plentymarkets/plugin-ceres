@@ -32,9 +32,7 @@ class DefaultHeaderPreset implements ContentPreset
             ->withSetting("enableCurrencySelect", true)
             ->withSetting("enableWishList", true)
             ->withSetting("enableBasketPreview", true)
-            ->withSetting("basketValues", $config->header->basketValues)
-            ->withSetting("showItemImages", false)
-            ->withSetting("forwardToSingleItem", $config->search->forwardToSingleItem);
+            ->withSetting("basketValues", $config->header->basketValues);
 
         $companyLogo = $config->header->companyLogo;
         if ( strpos($companyLogo, 'http') !== 0 && strpos($companyLogo, 'layout/') !== 0 )

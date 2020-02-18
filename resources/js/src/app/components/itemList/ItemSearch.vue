@@ -14,10 +14,7 @@
 
             <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
                 <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
-                    <search-suggestion-items
-                        :show-item-images="showItemImages"
-                        :forward-to-single-item="forwardToSingleItem">
-                    </search-suggestion-items>
+                    <search-suggestion-items></search-suggestion-items>
                 </div>
             </slot>
         </div>
@@ -37,16 +34,6 @@ export default {
     name: "item-search",
 
     props: {
-        showItemImages:
-        {
-            type: Boolean,
-            default: false
-        },
-        forwardToSingleItem:
-        {
-            type: Boolean,
-            default: App.config.search.forwardToSingleItem
-        },
         timeout:
         {
             type: Number,

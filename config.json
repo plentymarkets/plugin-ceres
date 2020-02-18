@@ -2595,15 +2595,6 @@
                             }
                         ]
                     }
-                },
-                "search.forwardToSingleItem": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.searchForwardToSingleItemLabel",
-                    "deprecated": true,
-                    "options": {
-                        "defaultValue": false
-                    }
                 }
             }
         },
