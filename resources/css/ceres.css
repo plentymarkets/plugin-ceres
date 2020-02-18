@@ -14080,6 +14080,8 @@ html.ie .single-carousel .owl-item > div {
     visibility: hidden; }
   .file-input > .input-unit-preview {
     height: 38px; }
+  .file-input > .input-unit-label {
+    padding-right: calc(1rem + 38px); }
   .file-input > .input-unit-btn {
     content: "";
     position: absolute;

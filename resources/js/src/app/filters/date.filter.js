@@ -7,6 +7,7 @@ const dateFilter = function()
 {
     const args = Array.prototype.slice.call(arguments);
     const input = args.shift();
+
     let date;
 
     if (isNaN(new Date(input).getTime()))

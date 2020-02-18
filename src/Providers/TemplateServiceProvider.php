@@ -300,7 +300,7 @@ class TemplateServiceProvider extends ServiceProvider
          * Cannot use CeresConfig since it depends on IO helper class
          */
         $config = pluginApp(ConfigRepository::class);
-        if (strlen($config->get('Ceres.contact.apiKey'))) {
+        if (strlen($config->get('Ceres.contact.api_key'))) {
             $consentRepository->registerConsent(
                 'googleMaps',
                 'Ceres::Template.consentGoogleMapsLabel',
@@ -310,6 +310,21 @@ class TemplateServiceProvider extends ServiceProvider
                     'provider' => 'Ceres::Template.consentGoogleMapsProvider',
                     'lifespan' => 'Ceres::Template.consentGoogleMapsLifespan',
                     'policyUrl' => 'Ceres::Template.consentGoogleMapsPolicyUrl',
+                    'group' => 'media'
+                ]
+            );
+        }
+
+        if (strlen($config->get('Ceres.global.google_recaptcha_secret'))) {
+            $consentRepository->registerConsent(
+                'reCaptcha',
+                'Ceres::Template.consentReCaptchaLabel',
+                [
+                    'position' => 200,
+                    'description' => 'Ceres::Template.consentReCaptchaDescription',
+                    'provider' => 'Ceres::Template.consentReCaptchaProvider',
+                    'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
+                    'policyUrl' => 'Ceres::Template.consentReCaptchaPolicyUrl',
                     'group' => 'media'
                 ]
             );
