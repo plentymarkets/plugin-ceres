@@ -6,19 +6,19 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 
 class SearchSuggestionItemWidget extends SearchSuggestionBaseWidget
 {
-    public $suggestionType = "item";
+    public $suggestionType = 'item';
 
     public function getSettings()
     {
-        /** @var WidgetSettingsFactory $settingsFactory */
-        $settingsFactory = pluginApp(WidgetSettingsFactory::class);
+        /** @var WidgetSettingsFactory $settings **/
+        $settings = WidgetSettingsFactory::create(parent::getSettings());
 
-        $settingsFactory->createCheckbox("showItemImages")
-            ->withName("Widget.searchSuggestionItemsShowItemImagesLabel")
+        $settings->withPointer('appearance');
+
+        $settings->createCheckbox('showItemImages')
+            ->withName('Widget.searchSuggestionItemsShowItemImagesLabel')
             ->withDefaultValue(false);
 
-        $parentSettings = parent::getSettings();
-
-        return array_merge($parentSettings, $settingsFactory->toArray());
+        return $settings->toArray();
     }
 }
