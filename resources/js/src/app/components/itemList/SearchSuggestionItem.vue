@@ -6,14 +6,21 @@
             :class="paddingClasses"
             :style="paddingInlineStyles"
             :key="index"
-            :href="getTargetUrl(item)"
-            @mousedown.prevent="onSuggestionSelected(item)"
-        >
-            <div class="autocomplete-image-container mr-2" v-if="suggestionType === 'item' && showItemImages">
-                <img class="autocomplete-image mw-100" :src="item.image"/>
+            :href="getTargetUrl(item)">
+
+            <div class="image mr-3" v-if="!showItemImages">
+                <img v-if="item.image" :src="item.image">
             </div>
 
-            <div class="autocomplete-item-name" v-html="getHighlightedLabel(item.label)"></div>
+            <div class="label" :class="{ 'compact': item.beforeLabel && item.afterLabel }">
+                <p class="small mb-0" v-if="item.beforeLabel">{{ item.beforeLabel }}</p>
+                <p class="mb-0" v-html="getHighlightedLabel(item.label)"></p>
+                <p class="small mb-0" v-if="item.afterLabel">{{ item.beforeLabel }}</p>
+            </div>
+
+            <div class="count" v-if="item.count > 0">
+                <span>{{ item.count }}</span>
+            </div>
         </a>
     </div>
 </template>

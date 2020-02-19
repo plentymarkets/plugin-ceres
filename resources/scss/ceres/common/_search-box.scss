@@ -8,6 +8,7 @@
 
 .autocomplete-suggestion {
     display: flex;
+    align-items: center;
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
@@ -15,24 +16,42 @@
     &:hover {
         background: $gray-300;
     }
-}
 
-.autocomplete-item-name {
-    align-self: center;
-    max-width: 0;
-    color: $gray-900;
-}
+    .label {
+        flex: 1;
+        color: $gray-900;
 
-.autocomplete-image-container {
-    position: relative;
-    display: flex;
-    width: 40px;
-    height: 40px;
-}
+        .small {
+            color: $gray-600;
+        }
 
-.autocomplete-image {
-    max-width: 100%;
-    object-fit: contain;
+        &.compact .small {
+            line-height: .85;
+        }
+    }
+
+    .image {
+        position: relative;
+        display: flex;
+        width: 40px;
+        height: 40px;
+
+    }
+
+    img {
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    .count span {
+        display: inline-block;
+        min-width: 3em;
+        padding: .1rem 0;
+        font-size: .85rem;
+        color: $gray-600;
+        text-align: center;
+        background: $gray-200;
+    }
 }
 
 .search-input {
