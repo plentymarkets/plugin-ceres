@@ -75,8 +75,7 @@
     {% set currentCategory = services.category.getCurrentCategory() %}
 
     {% if currentCategory is defined %}
-        {# Check for item template for specific category first #}
-        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, "singleitem") %}
+        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, isItemSet ? "itemset" : "singleitem") %}
     {% endif %}
 
     {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
