@@ -52,7 +52,7 @@
 
     <mobile-navigation :initial-category="{{ initialCategory | json_encode }}" :include-language="{{ urls.includeLanguage | json_encode }}">
         <template #loading-animation>
-            {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
+            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
         </template>
     </mobile-navigation>
 </div>
