@@ -15,7 +15,9 @@ class SearchSuggestionCategoryWidget extends SearchSuggestionBaseWidget
 
     public $previewImageUrl = '/images/widgets/search-suggestion-category.svg';
 
-    public $headline = 'Ceres::Widget.searchSuggestionCategoryHeadline';
+    public $headline = 'Ceres::Template.itemSearchCategories';
+
+    public $position = 200;
 
     public function getSettings()
     {

@@ -14,7 +14,7 @@ class SearchSuggestionItemWidget extends SearchSuggestionBaseWidget
 
     public $previewImageUrl = '/images/widgets/search-suggestion-item.svg';
 
-    public $headline = 'Ceres::Widget.searchSuggestionItemHeadline';
+    public $headline = 'Ceres::Template.itemSearchProducts';
 
     public function getSettings()
     {

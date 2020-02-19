@@ -51,6 +51,6 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
-        return ['suggestionType' => $this->suggestionType, 'headline' => $this->headline];
+        return ['suggestionType' => $this->suggestionType, 'defaultHeadline' => $this->headline];
     }
 }
