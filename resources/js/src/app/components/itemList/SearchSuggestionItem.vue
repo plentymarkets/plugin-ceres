@@ -58,7 +58,10 @@ export default {
     computed:
     {
         ...mapState({
-            autocompleteResult: state => state.itemSearch.autocompleteResult,
+            autocompleteResult(state)
+            {
+                return state.itemSearch.autocompleteResult[this.suggestionType];
+            },
             autocompleteSearchString: state => state.itemSearch.autocompleteSearchString
         })
     },

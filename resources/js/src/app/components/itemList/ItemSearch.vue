@@ -12,8 +12,8 @@
                 </slot>
             </div>
 
-            <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
-                <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
+            <slot name="autocomplete-suggestions" v-if="isSearchFocused && hasAutocompleteResults">
+                <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && hasAutocompleteResults">
                     <search-suggestion-item
                         :show-item-images="showItemImages"
                         suggestion-type="item">
@@ -72,6 +72,11 @@ export default {
 
     computed:
     {
+        hasAutocompleteResults()
+        {
+            return this.autocompleteResult.item.length || this.autocompleteResult.category.length || this.autocompleteResult.suggestion.length;
+        },
+
         isShopBuilder()
         {
             return App.isShopBuilder;
@@ -120,7 +125,7 @@ export default {
             }
             else
             {
-                this.$store.commit("setAutocompleteResult", []);
+                this.$store.commit("setAutocompleteResult", { item: [], category: [], suggestion: [] });
             }
         },
 
@@ -129,6 +134,7 @@ export default {
         {
             setTimeout(() =>
             {
+                this.isSearchFocused = false;
             }, 100);
         }
     },
