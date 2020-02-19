@@ -97,7 +97,7 @@
                                     <slot name="before-add-to-basket"></slot>
                                 </div>
 
-                                <div v-if="currentVariation.item.itemType === 'set' || currentVariation.item.itemType === 'multiPack'" class="alert alert-info w-100">
+                                <div v-if="currentVariation.item.itemType === 'set'" class="alert alert-info w-100">
                                     {{ $translate("Ceres::Template.singleItemSetInfo") }}
                                 </div>
                                 <div v-else class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
