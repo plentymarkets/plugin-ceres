@@ -2595,7 +2595,7 @@
                             }
                         ]
                     }
-                },	
+                },
                 "search.forwardToSingleItem": {
                     "type": "checkBox",
                     "required": false,
