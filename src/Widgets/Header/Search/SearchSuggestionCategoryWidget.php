@@ -13,7 +13,7 @@ class SearchSuggestionCategoryWidget extends SearchSuggestionBaseWidget
 
     public $widgetLabel = 'Widget.searchSuggestionCategoryLabel';
 
-    public $previewImageUrl = '/images/widgets/search-suggestion-items.svg';
+    public $previewImageUrl = '/images/widgets/search-suggestion-category.svg';
 
     public $headline = 'Ceres::Widget.searchSuggestionCategoryHeadline';
 
