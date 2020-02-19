@@ -1,6 +1,6 @@
 <?php
 
-namespace Ceres\Widgets\Header;
+namespace Ceres\Widgets\Header\Search;
 
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
@@ -8,13 +8,11 @@ use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
-class SearchSuggestionItemsWidget extends BaseWidget
+abstract class SearchSuggestionBaseWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Header.SearchSuggestionItemsWidget";
 
-    protected $types = ["autocomplete", "category", "item"];
-
-    protected $suggestionType = "item";
+    protected $suggestionType = "";
 
     protected $headline = "Artikel";
 
@@ -37,10 +35,6 @@ class SearchSuggestionItemsWidget extends BaseWidget
         $settingsFactory->createCustomClass();
 
         $settingsFactory->createAppearance(true);
-
-        $settingsFactory->createCheckbox("showItemImages")
-            ->withName("Widget.searchSuggestionItemsShowItemImagesLabel")
-            ->withDefaultValue(false);
 
         $settingsFactory->createCheckbox("forwardToSingleItem")
             ->withName("Widget.searchSuggestionItemsForwardToSingleItemLabel")
