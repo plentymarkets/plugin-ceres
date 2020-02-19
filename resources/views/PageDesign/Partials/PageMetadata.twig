@@ -72,7 +72,7 @@
     {% if services.template.isHome() %}
     ,"potentialAction":{
         "@type": "SearchAction",
-        "target": "{{ services.webstoreConfig.getWebstoreConfiguration().domainSsl ~ urls.search }}?query={search_term}",
+        "target": "{{ webstoreConfig.domainSsl ~ urls.search }}?query={search_term}",
         "query-input": "required name=search_term"
     {% endif %}
     }

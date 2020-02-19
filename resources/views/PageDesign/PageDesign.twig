@@ -10,7 +10,7 @@
 {% endif %}
 
 {% set currencyFormat = config("Ceres.currency.format") %}
-{% set defaultLanguage = services.webstoreConfig.getDefaultLanguage() %}
+{% set defaultLanguage = webstoreConfig.defaultLanguage %}
 
 {% if request.get('openBasketPreview') == 1 %}
     {% set openBasketClass = "open-" ~ ceresConfig.basket.previewType %}
@@ -196,7 +196,7 @@
         urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
         propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
         isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
-        bundleSetting: {{ services.webstoreConfig.getWebstoreConfiguration().dontSplitItemBundle }},
+        bundleSetting: {{ webstoreConfig.dontSplitItemBundle }},
         publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         initialData: {
             shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},

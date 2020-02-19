@@ -30,8 +30,8 @@ use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Modules\ShopBuilder\Contracts\ContentWidgetRepositoryContract;
-use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Helpers\UrlQuery;
 use Plenty\Modules\Webshop\ItemSearch\Helpers\ResultFieldTemplate;
 use Plenty\Modules\Webshop\Template\Contracts\TemplateConfigRepositoryContract;
@@ -232,7 +232,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
         $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
-        $webstoreConfig = $webstoreRepository->findByPlentyId($this->getApplication()->getPlentyId());
+        $webstoreConfig = $webstoreRepository->getWebstoreConfiguration();
 
         $consentRepository->registerConsent(
             'consent',
