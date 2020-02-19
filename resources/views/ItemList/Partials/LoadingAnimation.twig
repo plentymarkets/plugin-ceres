@@ -1,14 +1,9 @@
 <div class="loading-animation-frame col-12 col-lg-12">
-
-    {% if ceresConfig.item.loadingAnimationType == "bars" %}
-        {% include "Ceres::ItemList.Partials.LoadingAnimationBars" %}
-
-    {% elseif ceresConfig.item.loadingAnimationType == "spinner" %}
-        {% include "Ceres::ItemList.Partials.LoadingAnimationSpinner" %}
-
-    {% else %}
-        {% include "Ceres::ItemList.Partials.LoadingAnimationBars" %}
-
-    {% endif %}
-
+    <div class="loading-animation">
+        <div class="rect1 bg-appearance"></div>
+        <div class="rect2 bg-appearance"></div>
+        <div class="rect3 bg-appearance"></div>
+        <div class="rect4 bg-appearance"></div>
+        <div class="rect5 bg-appearance"></div>
+    </div>
 </div>

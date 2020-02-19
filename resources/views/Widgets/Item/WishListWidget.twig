@@ -13,11 +13,11 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    
+
     <div class="widget-inner">
         <wish-list :item-details-data="{{ itemDetailsData | json_encode }}">
             <template #loading-animation>
-                {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
+                {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
             </template>
         </wish-list>
     </div>
