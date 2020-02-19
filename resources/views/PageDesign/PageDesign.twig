@@ -196,7 +196,7 @@
         urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
         propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
         isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
-        bundleSetting: {{ services.webstoreConfig.getWebstoreConfig().dontSplitItemBundle }},
+        bundleSetting: {{ services.webstoreConfig.getWebstoreConfiguration().dontSplitItemBundle }},
         publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         initialData: {
             shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},

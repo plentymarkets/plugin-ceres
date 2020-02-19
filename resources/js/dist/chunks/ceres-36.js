@@ -111,6 +111,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     paddingInlineStyles: {
       type: String,
       default: null
+    },
+    suggestionType: {
+      type: String,
+      required: true
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_18__["mapState"])({
@@ -121,6 +125,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemSearch.autocompleteSearchString;
     }
   })),
+  created: function created() {
+    this.$store.commit("addAutocompleteType", this.suggestionType);
+  },
   methods: {
     getDisplayName: function getDisplayName(itemData) {
       var displayName = this.$options.filters.itemName(itemData);
