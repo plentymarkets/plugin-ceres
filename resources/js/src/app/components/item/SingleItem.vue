@@ -97,7 +97,10 @@
                                     <slot name="before-add-to-basket"></slot>
                                 </div>
 
-                                <div class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
+                                <div v-if="currentVariation.item.itemType === 'set'" class="alert alert-info w-100">
+                                    {{ $translate("Ceres::Template.singleItemSetInfo") }}
+                                </div>
+                                <div v-else class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
                                     <add-to-basket
                                             :variation-id="currentVariation.variation.id"
                                             :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"
