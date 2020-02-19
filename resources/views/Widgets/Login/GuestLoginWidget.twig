@@ -15,7 +15,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         <guest-login :button-size="{{ buttonSize | json_encode }}"
-                     :initial-email="{{ Twig.print(Twig.call("services.sessionStorage.getSessionValue", ['guestEmail']) ~ " | json_encode") }}"
+                     :initial-email="{{ Twig.print(Twig.call("services.sessionStorageRepository.getSessionValue", ['guestEmail']) ~ " | json_encode") }}"
                      backlink="{{ Twig.print("backlink | url_encode") }}">
         </guest-login>
     </div>
