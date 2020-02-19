@@ -8,7 +8,7 @@
             :key="index"
             :href="getTargetUrl(item)">
 
-            <div class="image mr-3" v-if="!showItemImages">
+            <div class="image mr-3" v-if="showItemImages">
                 <img v-if="item.image" :src="item.image">
             </div>
 
