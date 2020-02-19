@@ -10,20 +10,28 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 abstract class SearchSuggestionBaseWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Header.SearchSuggestionItemsWidget";
+    protected $template = 'Ceres::Widgets.Header.SearchSuggestionWidget';
 
-    protected $suggestionType = "";
+    protected $widgetKey = '';
 
-    protected $headline = "Artikel";
+    protected $widgetLabel = '';
+
+    protected $previewImageUrl = '';
+
+    protected $position = 100;
+
+    protected $suggestionType = '';
+
+    protected $headline = '';
 
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::SearchSuggestionItemsWidget")
-            ->withLabel("Widget.searchSuggestionItemsLabel")
-            ->withPreviewImageUrl("/images/widgets/search-suggestion-items.svg")
+        return WidgetDataFactory::make($this->widgetKey)
+            ->withLabel($this->widgetLabel)
+            ->withPreviewImageUrl($this->previewImageUrl)
             ->withType(WidgetTypes::ITEM_SEARCH)
             ->withCategory(WidgetCategories::HEADER)
-            ->withPosition(100)
+            ->withPosition($this->position)
             ->toArray();
     }
 
@@ -36,10 +44,6 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
 
         $settingsFactory->createAppearance(true);
 
-        $settingsFactory->createCheckbox("forwardToSingleItem")
-            ->withName("Widget.searchSuggestionItemsForwardToSingleItemLabel")
-            ->withDefaultValue(false);
-
         $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
@@ -47,6 +51,6 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
-        return ['suggestionType' => $this->suggestionType];
+        return ['suggestionType' => $this->suggestionType, 'headline' => $this->headline];
     }
 }

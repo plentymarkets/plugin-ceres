@@ -102,7 +102,7 @@ Vue.component("tag-list", () => import("./app/components/item/TagList.vue"));
 Vue.component("category-item", () => import("./app/components/itemList/CategoryItem.vue"));
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 Vue.component("item-search", ItemSearch);
-Vue.component("search-suggestion-items", () => import("./app/components/itemList/SearchSuggestionItems.vue"));
+Vue.component("search-suggestion-item", () => import("./app/components/itemList/SearchSuggestionItem.vue"));
 Vue.component("item-filter-list", () => import("./app/components/itemList/filter/ItemFilterList.vue"));
 Vue.component("item-filter-tag-list", () => import("./app/components/itemList/filter/ItemFilterTagList.vue"));
 

@@ -8,6 +8,14 @@ class SearchSuggestionItemWidget extends SearchSuggestionBaseWidget
 {
     public $suggestionType = 'item';
 
+    public $widgetKey = 'Ceres::SearchSuggestionItemWidget';
+
+    public $widgetLabel = 'Widget.searchSuggestionItemLabel';
+
+    public $previewImageUrl = '/images/widgets/search-suggestion-items.svg';
+
+    public $headline = 'Ceres::Widget.searchSuggestionItemHeadline';
+
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings **/
@@ -16,7 +24,7 @@ class SearchSuggestionItemWidget extends SearchSuggestionBaseWidget
         $settings->withPointer('appearance');
 
         $settings->createCheckbox('showItemImages')
-            ->withName('Widget.searchSuggestionItemsShowItemImagesLabel')
+            ->withName('Widget.searchSuggestionItemShowItemImagesLabel')
             ->withDefaultValue(false);
 
         return $settings->toArray();
