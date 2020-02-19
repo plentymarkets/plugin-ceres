@@ -1158,6 +1158,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -31779,60 +31782,77 @@ var render = function() {
                           2
                         ),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "col-12 col-sm-7 col-md-12 col-lg-8 my-3"
-                          },
-                          [
-                            _c("add-to-basket", {
-                              attrs: {
-                                "variation-id":
-                                  _vm.currentVariation.variation.id,
-                                "is-salable":
-                                  !!_vm.currentVariation.filter &&
-                                  _vm.currentVariation.filter.isSalable,
-                                "has-children":
-                                  !!_vm.currentVariation.filter &&
-                                  _vm.currentVariation.filter.hasActiveChildren,
-                                "interval-quantity":
-                                  _vm.currentVariation.variation
-                                    .intervalOrderQuantity || 1,
-                                "minimum-quantity":
-                                  _vm.currentVariation.variation
-                                    .minimumOrderQuantity,
-                                "maximum-quantity":
-                                  !!_vm.currentVariation.variation
-                                    .maximumOrderQuantity &&
-                                  _vm.currentVariation.variation
-                                    .maximumOrderQuantity > 0
-                                    ? _vm.currentVariation.variation
-                                        .maximumOrderQuantity
-                                    : null,
-                                "order-properties": _vm.currentVariation.properties.filter(
-                                  function(prop) {
-                                    return prop.property.isOderProperty
-                                  }
-                                ),
-                                "use-large-scale": false,
-                                "show-quantity": true,
-                                "item-url": _vm._f("itemURL")(
-                                  _vm.currentVariation
-                                ),
-                                "missing-order-properties":
-                                  _vm.variationMissingProperties,
-                                "is-variation-selected":
-                                  _vm.isVariationSelected &&
-                                  _vm.currentVariation.filter.isSalable,
-                                "has-price": _vm._f("hasItemDefaultPrice")(
-                                  _vm.currentVariation
+                        _vm.currentVariation.item.itemType === "set"
+                          ? _c(
+                              "div",
+                              { staticClass: "alert alert-info w-100" },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemSetInfo"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
-                              }
-                            })
-                          ],
-                          1
-                        ),
+                              ]
+                            )
+                          : _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col-12 col-sm-7 col-md-12 col-lg-8 my-3"
+                              },
+                              [
+                                _c("add-to-basket", {
+                                  attrs: {
+                                    "variation-id":
+                                      _vm.currentVariation.variation.id,
+                                    "is-salable":
+                                      !!_vm.currentVariation.filter &&
+                                      _vm.currentVariation.filter.isSalable,
+                                    "has-children":
+                                      !!_vm.currentVariation.filter &&
+                                      _vm.currentVariation.filter
+                                        .hasActiveChildren,
+                                    "interval-quantity":
+                                      _vm.currentVariation.variation
+                                        .intervalOrderQuantity || 1,
+                                    "minimum-quantity":
+                                      _vm.currentVariation.variation
+                                        .minimumOrderQuantity,
+                                    "maximum-quantity":
+                                      !!_vm.currentVariation.variation
+                                        .maximumOrderQuantity &&
+                                      _vm.currentVariation.variation
+                                        .maximumOrderQuantity > 0
+                                        ? _vm.currentVariation.variation
+                                            .maximumOrderQuantity
+                                        : null,
+                                    "order-properties": _vm.currentVariation.properties.filter(
+                                      function(prop) {
+                                        return prop.property.isOderProperty
+                                      }
+                                    ),
+                                    "use-large-scale": false,
+                                    "show-quantity": true,
+                                    "item-url": _vm._f("itemURL")(
+                                      _vm.currentVariation
+                                    ),
+                                    "missing-order-properties":
+                                      _vm.variationMissingProperties,
+                                    "is-variation-selected":
+                                      _vm.isVariationSelected &&
+                                      _vm.currentVariation.filter.isSalable,
+                                    "has-price": _vm._f("hasItemDefaultPrice")(
+                                      _vm.currentVariation
+                                    )
+                                  }
+                                })
+                              ],
+                              1
+                            ),
                         _vm._v(" "),
                         _c(
                           "div",
