@@ -14,9 +14,10 @@
 
             <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
                 <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
-                    <search-suggestion-items
-                        :show-item-images="showItemImages">
-                    </search-suggestion-items>
+                    <search-suggestion-item
+                        :show-item-images="showItemImages"
+                        suggestion-type="item">
+                    </search-suggestion-item>
                 </div>
             </slot>
         </div>
@@ -128,7 +129,6 @@ export default {
         {
             setTimeout(() =>
             {
-                this.isSearchFocused = !!value;
             }, 100);
         }
     },
