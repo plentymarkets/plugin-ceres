@@ -340,7 +340,6 @@ class TemplateServiceProvider extends ServiceProvider
         $templateConfigRepo = pluginApp(TemplateConfigRepositoryContract::class);
 
         $templateConfigRepo
-            ->registerConfigValue('global.google_recaptcha_threshold', $ceresConfig->global->googleRecaptchaThreshold)
             ->registerConfigValue('sorting.prioritySearch1', $ceresConfig->sorting->prioritySearch1)
             ->registerConfigValue('sorting.prioritySearch2', $ceresConfig->sorting->prioritySearch2)
             ->registerConfigValue('sorting.prioritySearch3', $ceresConfig->sorting->priorityCategory3)
@@ -348,36 +347,7 @@ class TemplateServiceProvider extends ServiceProvider
             ->registerConfigValue('sorting.priorityCategory2', $ceresConfig->sorting->priorityCategory2)
             ->registerConfigValue('sorting.priorityCategory3', $ceresConfig->sorting->priorityCategory3)
             ->registerConfigValue('item.name', $ceresConfig->item->itemName)
-            ->registerConfigValue(
-                'my_account.confirmation_link_expiration',
-                $ceresConfig->myAccount->confirmationLinkExpiration
-            )
-            ->registerConfigValue('item.show_please_select', $ceresConfig->item->showPleaseSelect)
-            ->registerConfigValue('item.show_category_filter', $ceresConfig->item->showCategoryFilter)
             ->registerConfigValue('global.enableOldUrlPattern', $ceresConfig->global->enableOldUrlPattern)
-            ->registerConfigValue('item.variation_show_type', $ceresConfig->item->variationShowType)
-            ->registerConfigValue('global.google_recaptcha_secret', $ceresConfig->global->googleRecaptchaSecret)
-            ->registerConfigValue('currency.available_currencies', $ceresConfig->currency->availableCurrencies)
-            ->registerConfigValue('my_account.order_return_days', $ceresConfig->myAccount->orderReturnDays)
-            ->registerConfigValue(
-                'checkout.show_all_shipping_profiles',
-                $ceresConfig->checkout->showAllShippingProfiles
-            )
-            ->registerConfigValue('contact.shop_mail', $ceresConfig->contact->shopMail)
-            ->registerConfigValue('global.default_contact_class_b2b', $ceresConfig->global->defaultContactClassB2B)
-            ->registerConfigValue('item.lists.cross_selling_type', $ceresConfig->itemLists->crossSellingType)
-            ->registerConfigValue('item.lists.cross_selling_sorting', $ceresConfig->itemLists->crossSellingSorting)
-            ->registerConfigValue(
-                'my_account.confirmation_link_login_redirect',
-                $ceresConfig->myAccount->confirmationLinkLoginRedirect
-            )
-            ->registerConfigValue('my_account.change_payment', $ceresConfig->myAccount->changePayment)
-            ->registerConfigValue(
-                'my_account.order_return_initial_status',
-                $ceresConfig->myAccount->orderReturnInitialStatus
-            )
-            ->registerConfigValue('global.user_data_hash_max_age', $ceresConfig->global->userDataHashMaxAge)
-            ->registerConfigValue('language.active_languages', $ceresConfig->language->activeLanguages)
-            ->registerConfigValue('basket.split_bundles', $ceresConfig->basket->splitBundles);
+            ->registerConfigValue('language.activeLanguages', $ceresConfig->language->activeLanguages);
     }
 }
