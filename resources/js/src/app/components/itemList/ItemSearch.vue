@@ -12,14 +12,18 @@
                 </slot>
             </div>
 
-            <slot name="autocomplete-suggestions" v-if="isSearchFocused && hasAutocompleteResults">
-                <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && hasAutocompleteResults">
-                    <search-suggestion-item
-                        :show-item-images="showItemImages"
-                        suggestion-type="item">
-                    </search-suggestion-item>
+            <template v-if="isSearchFocused">
+                <div v-show="hasAutocompleteResults">
+                    <slot name="autocomplete-suggestions">
+                        <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto">
+                            <search-suggestion-item
+                                :show-item-images="showItemImages"
+                                suggestion-type="item">
+                            </search-suggestion-item>
+                        </div>
+                    </slot>
                 </div>
-            </slot>
+            </template>
         </div>
     </div>
 </template>
@@ -74,7 +78,11 @@ export default {
     {
         hasAutocompleteResults()
         {
-            return this.autocompleteResult.item.length || this.autocompleteResult.category.length || this.autocompleteResult.suggestion.length;
+            const item       = this.autocompleteResult.item;
+            const category   = this.autocompleteResult.category;
+            const suggestion = this.autocompleteResult.suggestion;
+
+            return (item && item.length) || (category && category.length) || (suggestion && suggestion.length);
         },
 
         isShopBuilder()
