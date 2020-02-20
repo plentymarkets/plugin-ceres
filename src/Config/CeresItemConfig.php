@@ -64,6 +64,5 @@ class CeresItemConfig extends PluginConfig
         $this->showCategoryDescriptionTop       = $this->getTextValue( "item.show_category_description_top", "description1" );
         $this->showCategoryDescriptionBottom    = $this->getTextValue( "item.show_category_description_bottom", "none" );
         $this->requireOrderProperties           = $this->getBooleanValue( "item.require_all_properties", false );
-        $this->loadingAnimationType             = $this->getTextValue( "item.loading_animation_type", "bars" );
     }
 }
