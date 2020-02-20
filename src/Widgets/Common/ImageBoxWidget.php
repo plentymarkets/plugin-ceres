@@ -83,6 +83,12 @@ class ImageBoxWidget extends BaseWidget
             ->withDefaultValue("")
             ->withName("Widget.imageBoxCustomImagePathLabel")
             ->withTooltip("Widget.imageBoxCustomImagePathTooltip");
+        
+        $settings->createFile("fallbackImagePatch")
+            ->withDefaultValue("")
+            ->withName("Widget.imageBoxFallbackImagePathLabel")
+            ->withTooltip("Widget.imageBoxFallbackImagePathTooltip")
+            ->withCondition("!!customImagePath");
 
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageBoxLazyLoadingName")
