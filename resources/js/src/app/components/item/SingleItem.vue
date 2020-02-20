@@ -112,7 +112,6 @@
                                             :missing-order-properties="variationMissingProperties"
                                             :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
                                             :has-price="currentVariation | hasItemDefaultPrice"
-                                            :is-single-item="true"
                                         >
                                     </add-to-basket>
                                 </div>

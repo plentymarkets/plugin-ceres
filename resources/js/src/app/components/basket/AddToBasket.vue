@@ -10,7 +10,7 @@
             <i class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>
         </div>
 
-        <div class="d-inline" v-if="showQuantity && !useLargeScale" :class="{'d-lg-none': !isSingleItem }">
+        <div class="d-inline" v-if="showQuantity && !useLargeScale" :class="{'d-lg-none': !$ceres.isItemView }">
             <div class="add-to-basket-container">
                 <div class="quantity-input-container">
                     <quantity-input :value="quantity"
@@ -160,11 +160,6 @@ export default {
             default: null
         },
         isWishList:
-        {
-            type: Boolean,
-            default: false
-        },
-        isSingleItem:
         {
             type: Boolean,
             default: false
