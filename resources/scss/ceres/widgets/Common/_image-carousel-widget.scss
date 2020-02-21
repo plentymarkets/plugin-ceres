@@ -74,7 +74,7 @@
                 padding: .5rem 1rem;
                 margin: 0;
                 font-size: 1.75rem;
-                @include transition(300ms all ease);
+                @include transition(.3s all ease);
 
                 @include media-breakpoint-up(md) {
                     font-size: 3rem;
@@ -127,7 +127,7 @@
 
         .carousel-control {
             background-image: none;
-            @include transition(300ms all ease);
+            @include transition(.3s all ease);
 
             .fa {
                 position: absolute;

@@ -110,7 +110,7 @@
 
     .varianten-content {
         padding-top: 0;
-        @include transition(all 300ms);
+        @include transition(all .3s);
     }
 
     .varianten-content,
@@ -119,7 +119,7 @@
         max-height: 0;
         margin-bottom: 0;
         overflow: hidden;
-        @include transition(max-height 300ms);
+        @include transition(max-height .3s);
     }
 
     .toggle-description:checked {

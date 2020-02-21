@@ -42,7 +42,7 @@
         max-height: 0;
 
         border-top: 1px solid $gray-300;
-        @include transition(all 300ms);
+        @include transition(all .3s);
 
         span {
             display: block;

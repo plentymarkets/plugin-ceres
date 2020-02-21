@@ -174,7 +174,7 @@
             }
 
             &.is-open {
-                > .expand_nav {
+                > .expand-nav {
                     i {
                         transform: rotate(90deg);
                     }
@@ -189,7 +189,7 @@
                         padding-left: 3rem !important;
                     }
 
-                    .expand_nav {
+                    .expand-nav {
                         margin-left: $nav-link-expandable-margin;
                     }
 
@@ -198,7 +198,7 @@
                             padding-left: 4.25rem !important;
                         }
 
-                        .expand_nav {
+                        .expand-nav {
                             margin-left: $nav-link-expandable-margin * 2;
                         }
 
@@ -207,7 +207,7 @@
                                 padding-left: 5.5rem !important;
                             }
 
-                            .expand_nav {
+                            .expand-nav {
                                 margin-left: $nav-link-expandable-margin * 3;
                             }
 
@@ -216,7 +216,7 @@
                                     padding-left: 6.75rem !important;
                                 }
 
-                                .expand_nav {
+                                .expand-nav {
                                     margin-left: $nav-link-expandable-margin * 4;
                                 }
                             }

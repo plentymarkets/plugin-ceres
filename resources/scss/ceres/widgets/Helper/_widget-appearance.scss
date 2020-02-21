@@ -59,7 +59,7 @@
                     }
                 }
 
-                &.active .page-link { // stylelint-disable-line
+                &.active .page-link { // stylelint-disable-line selector-max-class
                     border-color: $value;
                     @include context-bg($value);
                 }

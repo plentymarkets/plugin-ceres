@@ -4,7 +4,7 @@
     .order-item {
         > div:nth-child(odd) {
             > div.container-clickable {
-                background: $gray-100; // stylelint-disable-line selector-no-qualifying-type
+                background-color: $gray-100; // stylelint-disable-line selector-no-qualifying-type
             }
         }
     }
@@ -34,7 +34,7 @@
         @include media-breakpoint-up(md) {
             text-align: right;
 
-            .row div span:first-child { // stylelint-disable-line
+            .row div span:first-child { // stylelint-disable-line selector-max-compound-selectors
                 display: none;
             }
             .icons {
@@ -49,7 +49,7 @@
 
         @include media-breakpoint-down(sm) {
             .row div {
-                span:first-child { // stylelint-disable-line
+                span:first-child { // stylelint-disable-line selector-max-compound-selectors
                     text-align: left;
                 }
             }
@@ -78,7 +78,7 @@
             }
         }
         .order-item {
-            .row div:first-child { // stylelint-disable-line
+            .row div:first-child { // stylelint-disable-line selector-max-compound-selectors
                 border-top: 0 !important; // stylelint-disable-line declaration-no-important
             }
 
