@@ -109,7 +109,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: {
     styles: String,
     classes: String,
-    consentGroups: Array
+    consentGroups: Object
   },
   data: function data() {
     return {

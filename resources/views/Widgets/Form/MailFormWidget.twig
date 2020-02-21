@@ -52,6 +52,8 @@
                 <recaptcha></recaptcha>
             {{ Twig.endif() }}
 
+            <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1">
+
             <div class="col-12 text-right">
                 <button type="submit" class="btn btn-{{ appearance }} {{ buttonSize }}">
                     {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}

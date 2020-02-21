@@ -27,157 +27,52 @@
     height: 100%;
     margin: 0 .1rem;
     background-color: $primary;
+
+    -webkit-animation: sk-stretchdelay .8s infinite ease-in-out;
     animation: sk-stretchdelay .8s infinite ease-in-out;
 }
 
 .loading-animation .rect2 {
+    -webkit-animation-delay: -.7s;
     animation-delay: -.7s;
 }
 
 .loading-animation .rect3 {
+    -webkit-animation-delay: -.6s;
     animation-delay: -.6s;
 }
 
 .loading-animation .rect4 {
+    -webkit-animation-delay: -.5s;
     animation-delay: -.5s;
 }
 
 .loading-animation .rect5 {
+    -webkit-animation-delay: -.4s;
     animation-delay: -.4s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        -webkit-transform: scaleY(.2);
+    }
+    20% {
+        -webkit-transform: scaleY(.5);
+    }
 }
 
 @keyframes sk-stretchdelay {
     0%,
     40%,
     100% {
+        -webkit-transform: scaleY(.2);
         transform: scaleY(.2);
     }
     20% {
+        -webkit-transform: scaleY(.5);
         transform: scaleY(.5);
     }
 }
 
-.sk-fading-circle {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin: 100px auto;
-}
-
-.sk-fading-circle .sk-circle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.sk-fading-circle .sk-circle::before {
-    display: block;
-    width: 15%;
-    height: 15%;
-    margin: 0 auto;
-    content: "";
-    background-color: $primary;
-    border-radius: 100%; // stylelint-disable-line property-blacklist
-    animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
-}
-
-.sk-fading-circle .sk-circle2 {
-    transform: rotate(30deg);
-}
-
-.sk-fading-circle .sk-circle3 {
-    transform: rotate(60deg);
-}
-
-.sk-fading-circle .sk-circle4 {
-    transform: rotate(90deg);
-}
-
-.sk-fading-circle .sk-circle5 {
-    transform: rotate(120deg);
-}
-
-.sk-fading-circle .sk-circle6 {
-    transform: rotate(150deg);
-}
-
-.sk-fading-circle .sk-circle7 {
-    transform: rotate(180deg);
-}
-
-.sk-fading-circle .sk-circle8 {
-    transform: rotate(210deg);
-}
-
-.sk-fading-circle .sk-circle9 {
-    transform: rotate(240deg);
-}
-
-.sk-fading-circle .sk-circle10 {
-    transform: rotate(270deg);
-}
-
-.sk-fading-circle .sk-circle11 {
-    transform: rotate(300deg);
-}
-
-.sk-fading-circle .sk-circle12 {
-    transform: rotate(330deg);
-}
-
-.sk-fading-circle .sk-circle2::before {
-    animation-delay: -1.1s;
-}
-
-.sk-fading-circle .sk-circle3::before {
-    animation-delay: -1s;
-}
-
-.sk-fading-circle .sk-circle4::before {
-    animation-delay: -.9s;
-}
-
-.sk-fading-circle .sk-circle5::before {
-    animation-delay: -.8s;
-}
-
-.sk-fading-circle .sk-circle6::before {
-    animation-delay: -.7s;
-}
-
-.sk-fading-circle .sk-circle7::before {
-    animation-delay: -.6s;
-}
-
-.sk-fading-circle .sk-circle8::before {
-    animation-delay: -.5s;
-}
-
-.sk-fading-circle .sk-circle9::before {
-    animation-delay: -.4s;
-}
-
-.sk-fading-circle .sk-circle10::before {
-    animation-delay: -.3s;
-}
-
-.sk-fading-circle .sk-circle11::before {
-    animation-delay: -.2s;
-}
-
-.sk-fading-circle .sk-circle12::before {
-    animation-delay: -.1s;
-}
-
-@keyframes sk-circleFadeDelay {
-    0%,
-    39%,
-    100% {
-        opacity: 0;
-    }
-    40% {
-        opacity: 1;
-    }
-}

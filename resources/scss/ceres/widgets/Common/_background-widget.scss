@@ -15,7 +15,8 @@
         right: 0;
         bottom: 0;
         left: 0;
-        height: 100% !important; // stylelint-disable-line declaration-no-important
+        z-index: -1;
+        height: 100% !important;
     }
 
     .huge-font {

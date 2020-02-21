@@ -5,6 +5,8 @@
 <script>
 let gRecaptchaApiLoaded;
 
+import { whenConsented } from "../../helper/whenConsented";
+
 export default {
 
     name: "recaptcha",
@@ -21,7 +23,15 @@ export default {
     {
         this.$nextTick(() =>
         {
-            this.createScript().then(() => this.initializeV3());
+            whenConsented(
+                "media.reCaptcha",
+                () =>
+                {
+                    this.createScript().then(() => this.initializeV3());
+                },
+                () =>
+                {
+                });
         });
     },
 
@@ -96,7 +106,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

@@ -12140,6 +12140,11 @@ button.bg-dark:focus {
 .fa.none {
   color: transparent !important; }
 
+[v-cloak],
+script2,
+style2 {
+  display: none !important; }
+
 html {
   font-size: 14px; }
 
@@ -14075,6 +14080,8 @@ html.ie .single-carousel .owl-item > div {
     visibility: hidden; }
   .file-input > .input-unit-preview {
     height: 38px; }
+  .file-input > .input-unit-label {
+    padding-right: calc(1rem + 38px); }
   .file-input > .input-unit-btn {
     content: "";
     position: absolute;
@@ -14160,6 +14167,15 @@ html.ie .single-carousel .owl-item > div {
   .input-feedback-container.has-error .feedback-error,
   .input-feedback-container.has-success .feedback-success {
     display: block; }
+
+.honey {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+  z-index: -1; }
 
 .top-bar {
   color: #fff;
@@ -17773,9 +17789,6 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
 @media (min-width: 1200px) {
   .home .product-list {
     margin: 0 -15px; } }
-
-[v-cloak] {
-  display: none; }
 
 .mkt-homepage {
   margin-bottom: 2rem; }

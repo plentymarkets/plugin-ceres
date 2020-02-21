@@ -10,4 +10,6 @@
     {% set fakeFacets = services.faker.getFacets() %}
     window.ceresStore.commit("addFacets", {{ fakeFacets | json_encode | raw }});
     window.ceresStore.commit("setSelectedFacetsByIds", window.ceresStore.state.itemList.facets[0].values.map(value => value.id));
+
+    window.ceresStore.commit("setAutocompleteResult", {{ services.itemList.getItemList("random", null, null, 5).documents | json_encode | raw }});
 </script>

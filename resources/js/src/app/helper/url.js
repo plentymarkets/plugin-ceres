@@ -4,6 +4,7 @@ export function normalizeUrl(url)
 {
     const urlParts = url.split("?");
     const urlParams = urlParts[1];
+
     let urlPath = urlParts[0];
 
     if (App.urlTrailingSlash && urlPath.substr(-1, 1) !== "/")

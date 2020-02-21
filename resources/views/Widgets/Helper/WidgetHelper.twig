@@ -107,7 +107,7 @@
         {{ Twig.set(variableName, Twig.call("services.category.getURL", ["$__category"])) }}
         {{ Twig.set("backlink", "request.get('backlink')") }}
 
-        {{Twig.if("backlink | trim is not empty and urls.login == " ~ variableName ~ " or urls.registration == " ~ variableName)}}
+        {{Twig.if("backlink | trim is not empty and (urls.login == " ~ variableName ~ " or urls.registration == " ~ variableName ~ ")")}}
             {{ Twig.set(variableName, variableName ~ "~ '?backlink=' ~ backlink | url_encode") }}
         {{Twig.endif()}}
 

@@ -41,6 +41,8 @@
                 </div>
             </div>
 
+            <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1" v-model="honeypot">
+
             <div class="col-12">
                 <address-input-group
                     template="#vue-address-input-group"
@@ -68,14 +70,14 @@
         </div>
         <div class="border-top mt-2 text-right">
             <slot name="extend-overlay-buttons"></slot>
-            
+
             <button :disabled="isDisabled" class="btn btn-appearance btn-primary btn-medium mt-3" :class="buttonSizeClass">
                 {{ $translate("Ceres::Template.regRegister") }}
                 <icon icon="user-plus" class="default-float" :loading="isDisabled"></icon>
             </button>
         </div>
 
-        <recaptcha v-if="!!googleRecaptchaApiKey && modalShown"></recaptcha>
+        <recaptcha v-if="!!googleRecaptchaApiKey && (modalShown || !isSimpleRegistration)"></recaptcha>
     </form>
 </template>
 
@@ -130,7 +132,8 @@ export default {
             enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
             googleRecaptchaApiKey: App.config.global.googleRecaptchaApiKey,
             defaultSalutation: App.config.addresses.defaultSalutation,
-            modalShown: false
+            modalShown: false,
+            honeypot: ""
         };
     },
 
@@ -262,8 +265,10 @@ export default {
 
                     this.isDisabled = false;
                 })
-                .fail(() =>
+                .fail((error) =>
                 {
+                    NotificationService.error(error.error).closeAfter(10000);
+
                     this.isDisabled = false;
                 });
         },
@@ -276,7 +281,7 @@ export default {
 
         /**
          * Handle the user object which is send to the server
-         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}, honeypot: string}}
          */
         getUserObject()
         {
@@ -293,7 +298,8 @@ export default {
                                 priority : 0
                             }
                         }
-                    }
+                    },
+                    honeypot: this.honeypot
                 };
 
             if (!this.guestMode)

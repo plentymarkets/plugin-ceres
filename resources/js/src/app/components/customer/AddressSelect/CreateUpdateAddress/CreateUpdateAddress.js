@@ -63,7 +63,7 @@ export default Vue.component("create-update-address", {
     {
         addressList()
         {
-            this.$store.getters.getAddressList(this.addressType);
+            return this.$store.getters.getAddressList(this.addressType);
         }
     },
 
@@ -122,7 +122,7 @@ export default Vue.component("create-update-address", {
 
             this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
-                    resolve =>
+                    () =>
                     {
                         this.addressModal.hide();
                         this.waiting = false;
@@ -153,7 +153,7 @@ export default Vue.component("create-update-address", {
 
             this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
-                    response =>
+                    () =>
                     {
                         this.addressModal.hide();
                         this.waiting = false;
@@ -194,6 +194,10 @@ export default Vue.component("create-update-address", {
             {
                 NotificationService.error({ code: error.code, message: "" });
                 window.location.reload();
+            }
+            else if ([210, 211].indexOf(error.code) !== -1)
+            {
+                NotificationService.error({ code: error.code, message: error.message });
             }
             else this._handleValidationErrors(error);
         },

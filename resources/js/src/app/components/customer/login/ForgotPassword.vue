@@ -13,6 +13,7 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
+                                <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1" v-model="honeypot">
 								<div class="input-unit no-bottom" data-validate="mail">
 									<input type="email" name="email" autocomplete="email" :id="'mail' + _uid" v-model="username" data-autofocus>
 									<label :for="'mail' + _uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
@@ -24,7 +25,7 @@
 					<div class="modal-footer">
 						<div>
                             <slot name="extend-overlay-buttons"></slot>
-							
+
                             <button v-if="!!currentTemplate && currentTemplate != 'tpl.login'" type="button" @click.prevent="cancelResetPwd" class="btn btn-danger btn-medium mr-2">
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                 {{ $translate("Ceres::Template.loginBackToLogin") }}
@@ -61,9 +62,9 @@ export default {
     data()
     {
         return {
-            password: "",
             username: "",
-            isDisabled: false
+            isDisabled: false,
+            honeypot: ""
         };
     },
 
@@ -118,7 +119,7 @@ export default {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username })
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username, honeypot: this.honeypot })
                 .done(() =>
                 {
                     ModalService.findModal(this.$refs.pwdModal).hide();

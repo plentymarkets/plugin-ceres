@@ -997,16 +997,18 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _c("label", [
-              _vm._v(_vm._s(_vm.property.names.name) + "\n            "),
+            _c("label", { staticClass: "d-flex" }, [
+              _c("span", { staticClass: "text-truncate" }, [
+                _vm._v(_vm._s(_vm.property.names.name))
+              ]),
+              _vm._v(" "),
               _vm.surcharge > 0
-                ? _c("strong", [
+                ? _c("strong", { staticClass: "ml-1" }, [
                     _vm._v(
-                      "(+ " + _vm._s(_vm._f("currency")(_vm.surcharge)) + ")"
+                      "(+ " + _vm._s(_vm._f("currency")(_vm.surcharge)) + ") *"
                     )
                   ])
-                : _vm._e(),
-              _vm._v("\n        *")
+                : _vm._e()
             ])
           ]
         )
@@ -1140,7 +1142,7 @@ var render = function() {
             "label",
             {
               directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-              staticClass: "form-check-label text-appearance",
+              staticClass: "form-check-label text-appearance d-flex",
               class: { "text-danger": _vm.hasError },
               attrs: {
                 for: "check" + _vm._uid,
@@ -1149,13 +1151,12 @@ var render = function() {
               }
             },
             [
-              _vm._v(
-                "\n            " +
-                  _vm._s(_vm.property.names.name) +
-                  "\n            "
-              ),
+              _c("span", { staticClass: "text-wrap" }, [
+                _vm._v(_vm._s(_vm.property.names.name))
+              ]),
+              _vm._v(" "),
               _vm.surcharge > 0
-                ? _c("strong", [
+                ? _c("strong", { staticClass: "ml-1" }, [
                     _vm._v(
                       "(+ " + _vm._s(_vm._f("currency")(_vm.surcharge)) + ") *"
                     )
@@ -1246,22 +1247,20 @@ var render = function() {
                   2
                 ),
                 _vm._v(" "),
-                _c("label", [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.property.names.name) +
-                      "\n                "
-                  ),
+                _c("label", { staticClass: "d-flex w-100" }, [
+                  _c("span", { staticClass: "text-truncate" }, [
+                    _vm._v(_vm._s(_vm.property.names.name))
+                  ]),
+                  _vm._v(" "),
                   _vm.surcharge > 0
-                    ? _c("strong", [
+                    ? _c("strong", { staticClass: "ml-1" }, [
                         _vm._v(
                           "(+ " +
                             _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                            ")"
+                            ") *"
                         )
                       ])
-                    : _vm._e(),
-                  _vm._v("\n                *\n            ")
+                    : _vm._e()
                 ])
               ]
             ),
@@ -1339,14 +1338,13 @@ var render = function() {
                 [_vm._v(_vm._s(_vm.selectedFileName))]
               ),
               _vm._v(" "),
-              _c("span", { staticClass: "input-unit-label" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.property.names.name) +
-                    "\n                "
-                ),
+              _c("span", { staticClass: "input-unit-label d-flex" }, [
+                _c("span", { staticClass: "text-truncate" }, [
+                  _vm._v(_vm._s(_vm.property.names.name))
+                ]),
+                _vm._v(" "),
                 _vm.surcharge > 0
-                  ? _c("strong", [
+                  ? _c("strong", { staticClass: "ml-1" }, [
                       _vm._v(
                         "(+ " +
                           _vm._s(_vm._f("currency")(_vm.surcharge)) +

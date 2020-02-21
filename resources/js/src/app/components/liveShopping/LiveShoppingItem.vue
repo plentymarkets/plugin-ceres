@@ -85,24 +85,25 @@ export default {
                 return value % 1 === 0 && value >= 1 && value <= 10;
             }
         },
-
         displaySettings:
         {
             type: Object
         },
-
         paddingClasses:
         {
             type: String,
             default: null
         },
-
         paddingInlineStyles:
         {
             type: String,
             default: null
         },
-
+        sorting:
+        {
+            type: String,
+            default: null
+        },
         showNetPrices:
         {
             type: Boolean
@@ -204,7 +205,7 @@ export default {
 
     created()
     {
-        this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
+        this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting });
     },
 
     methods:
@@ -230,7 +231,7 @@ export default {
 
         reloadOffer()
         {
-            this.$store.dispatch("retrieveLiveShoppingOffer", this.liveShoppingId);
+            this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting });
         }
     }
 }

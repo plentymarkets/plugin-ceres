@@ -38,6 +38,7 @@ export function is(element, selector)
             function(sel)
             {
                 const matches = (this.document || this.ownerDocument).querySelectorAll(sel);
+
                 let i = matches.length;
 
                 // eslint-disable-next-line brace-style

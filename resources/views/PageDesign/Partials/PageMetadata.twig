@@ -68,11 +68,13 @@
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "url": {{ url | json_encode | raw }},
-    "potentialAction":{
+    "url": {{ url | json_encode | raw }}
+    {% if services.template.isHome() %}
+    ,"potentialAction":{
         "@type": "SearchAction",
         "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl ~ urls.search }}?query={search_term}",
         "query-input": "required name=search_term"
+    {% endif %}
     }
 }
 {% endblock %}

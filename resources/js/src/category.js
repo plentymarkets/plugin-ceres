@@ -51,7 +51,8 @@ Vue.prototype.$mount =
 window.Vue = Vue;
 window.Vuex = Vuex;
 
-Vue.use(require("vue-script2"));
+import script2 from "./app/plugins/script2";
+Vue.use(script2);
 
 import jQuery from "jquery";
 window.jQuery = jQuery;
@@ -76,7 +77,10 @@ import LazyImg from "./app/components/common/LazyImg.vue";
 Vue.component("lazy-img", LazyImg);
 import Intersect from "./app/components/common/Intersect.vue";
 Vue.component("intersect", Intersect);
-Vue.component("tab-list", () => import("./app/components/common/TabList.vue"));
+import TabList from "./app/components/common/TabList.vue";
+Vue.component("tab-list", TabList);
+import TabItem from "./app/components/common/TabItem.vue";
+Vue.component("tab-item", TabItem);
 Vue.component("last-seen-item-list", () => import("./app/components/containers/LastSeenItemList.vue"));
 
 Vue.component("change-email-form", () => import("./app/components/customer/ChangeEmailForm.vue"));
@@ -101,6 +105,7 @@ Vue.component("tag-list", () => import("./app/components/item/TagList.vue"));
 Vue.component("category-item", () => import("./app/components/itemList/CategoryItem.vue"));
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 Vue.component("item-search", ItemSearch);
+Vue.component("search-suggestion-items", () => import("./app/components/itemList/SearchSuggestionItems.vue"));
 Vue.component("item-filter-list", () => import("./app/components/itemList/filter/ItemFilterList.vue"));
 Vue.component("item-filter-tag-list", () => import("./app/components/itemList/filter/ItemFilterTagList.vue"));
 

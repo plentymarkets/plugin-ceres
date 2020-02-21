@@ -215,7 +215,12 @@ $border-width: 1px;
         height: 38px;
     }
 
+    > .input-unit-label {
+        padding-right: calc(1rem + 38px);
+    }
+
     > .input-unit-btn {
+        content: "";
         position: absolute;
         top: 0;
         right: 0;
@@ -400,3 +405,13 @@ textarea.no-resize {
     resize: none;
 }
 
+.honey
+{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    z-index: -1;
+}
