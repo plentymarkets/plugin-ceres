@@ -1,24 +1,15 @@
 .anicon {
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: center;
-    -ms-flex-pack: center;
     align-items: center;
     justify-content: center;
     width: 40px;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     background: transparent;
     border: none;
     outline: none;
-    transition: .3s;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    @include transition(.3s);
     appearance: none;
-    -webkit-tap-highlight-color: transparent;
     -webkit-tap-highlight-color: transparent;
 
     & > * {
@@ -36,8 +27,8 @@
         width: 18px;
         margin-bottom: 3px;
         background: transparent;
-        border-radius: 0;
-        transition: .3s;
+        border-radius: 0; // stylelint-disable-line property-blacklist
+        transition: .3s; // stylelint-disable-line property-blacklist
         transform: rotateZ(225deg);
 
         &::before {
@@ -51,8 +42,8 @@
             margin: auto;
             content: "";
             background: $white;
-            border-radius: 2.85714px;
-            transition: .3s;
+            border-radius: 2.85714px; // stylelint-disable-line property-blacklist
+            transition: .3s; // stylelint-disable-line property-blacklist
         }
 
         &::after {
@@ -67,8 +58,8 @@
             content: "";
             background: $top-bar-bg;
             border: 1px solid $white;
-            border-radius: 50%;
-            transition: .3s;
+            border-radius: 50%; // stylelint-disable-line property-blacklist
+            transition: .3s; // stylelint-disable-line property-blacklist
             transform-origin: 50% 50%;
         }
     }
@@ -93,7 +84,7 @@
 
                 &::before {
                     background: $white;
-                    border-radius: 2.85714px;
+                    border-radius: 2.85714px; // stylelint-disable-line property-blacklist
                 }
 
                 &::after {
@@ -103,7 +94,7 @@
                     height: 1px;
                     background: $white;
                     border: 0;
-                    border-radius: 2.85714px;
+                    border-radius: 2.85714px; // stylelint-disable-line property-blacklist
                     transform: rotate3d(0, 0, 1, 90deg);
                 }
             }

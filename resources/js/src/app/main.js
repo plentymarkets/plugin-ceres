@@ -78,7 +78,6 @@ function CeresMain()
     HeaderCollapse("#currencySelect");
     HeaderCollapse("#searchBox");
 
-    const $toggleListView = $(".toggle-list-view");
     const $mainNavbarCollapse = $("#mainNavbarCollapse");
 
     // prevent hidding collapses in the shopbuilder, for editing search bar results
@@ -95,17 +94,6 @@ function CeresMain()
             });
         });
     }
-
-    $toggleListView.on("click", function(evt)
-    {
-        evt.preventDefault();
-
-        // toggle it's own state
-        $toggleListView.toggleClass("grid");
-
-        // toggle internal style of thumbs
-        $(".product-list, .cmp-product-thumb").toggleClass("grid");
-    });
 
     $mainNavbarCollapse.collapse("hide");
 

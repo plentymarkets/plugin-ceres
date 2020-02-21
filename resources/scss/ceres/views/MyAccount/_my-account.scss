@@ -10,6 +10,7 @@
     padding: 5px;
     font-size: 1rem;
     cursor: default;
+
     .info-badge {
         margin-left: .2rem;
     }
@@ -45,8 +46,6 @@
 
 .switchable-warning {
     display: flex;
-    display: -webkit-flex;
-    -webkit-flex-direction: row;
     flex-direction: row;
     margin-bottom: 10px;
     border-style: solid;
@@ -66,11 +65,7 @@
 
 .current-payment-text {
     border: 1px solid $gray-300;
-    border-radius: $border-radius;
-}
-
-.current-payment-width {
-    width: 100% !important;
+    @include border-radius($border-radius);
 }
 
 .card-body {
@@ -80,9 +75,9 @@
         @include media-breakpoint-down(xs) {
             .item-edit {
                 height: 45%;
-                margin-bottom: 0 !important;
+                margin-bottom: 0 !important; // stylelint-disable-line declaration-no-important
             }
-            span.item-edit:nth-of-type(2) {
+            .item-edit:nth-of-type(2) {
                 position: absolute;
                 bottom: 0;
             }

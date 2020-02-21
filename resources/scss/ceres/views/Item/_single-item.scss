@@ -38,14 +38,17 @@
         line-height: 1.1;
         text-decoration: none;
     }
+
     .single-description {
         font-size: .85rem;
     }
+
     .price {
         display: block;
-        font-weight: bold;
+        font-weight: $font-weight-bold;
         line-height: 1;
     }
+
     .input-number {
         text-align: center;
     }
@@ -62,28 +65,34 @@
             width: auto;
             max-width: 100%;
         }
+
         .special-tags {
             padding: .3rem;
         }
     }
+
     .nav-tabs {
         @include media-breakpoint-only(xs) {
             display: block;
         }
+
         .nav-item {
             float: none;
             cursor: pointer;
-            .nav-link {
-                border: 1px solid $nav-tabs-border-color;
-                &.active,
-                &:hover {
-                    color: $gray-900;
-                    background: $gray-200;
-                    border: 1px solid $nav-tabs-border-color;
-                }
-            }
+
             & + .nav-item {
                 margin-left: 0;
+            }
+        }
+
+        .nav-link {
+            border: 1px solid $nav-tabs-border-color;
+
+            &.active,
+            &:hover {
+                color: $gray-900;
+                background: $gray-200;
+                border: 1px solid $nav-tabs-border-color;
             }
         }
     }
@@ -107,15 +116,16 @@
 
     .fade-enter-active,
     .fade-leave-active {
-        transition: opacity .3s ease-out;
+        @include transition(opacity .3s ease-out);
     }
+
     .fade-enter,
     .fade-leave-to {
         opacity: 0;
     }
 
     .order-property-input {
-        transition: border-color .3s ease-out;
+        @include transition(border-color .3s ease-out);
 
         &.active {
             border-color: $success;
@@ -123,22 +133,51 @@
     }
 
     .order-property-selection-info-popper {
-        button.btn {
+        .btn {
             margin: 5px;
         }
     }
 }
 
-.availability_1 { @include context-bg($success); }
-.availability_2 { @include context-bg($success); }
-.availability_3 { @include context-bg($warning); }
-.availability_4 { @include context-bg($warning); }
-.availability_5 { @include context-bg($danger); }
-.availability_6 { @include context-bg($danger); }
-.availability_7 { @include context-bg($danger); }
-.availability_8 { @include context-bg($danger); }
-.availability_9 { @include context-bg($gray-900); }
-.availability_10 { @include context-bg($gray-900); }
+.availability-1 {
+    @include context-bg($success);
+}
+
+.availability-2 {
+    @include context-bg($success);
+}
+
+.availability-3 {
+    @include context-bg($warning);
+}
+
+.availability-4 {
+    @include context-bg($warning);
+}
+
+.availability-5 {
+    @include context-bg($danger);
+}
+
+.availability-6 {
+    @include context-bg($danger);
+}
+
+.availability-7 {
+    @include context-bg($danger);
+}
+
+.availability-8 {
+    @include context-bg($danger);
+}
+
+.availability-9 {
+    @include context-bg($gray-900);
+}
+
+.availability-10 {
+    @include context-bg($gray-900);
+}
 
 
 .rating {
@@ -163,7 +202,7 @@
 .img-thumbnail {
     padding: .75rem .45rem .25rem 0;
     border: none;
-    border-radius: none;
+    border-radius: 0; // stylelint-disable-line property-blacklist
 }
 
 @include media-breakpoint-only(md) {
@@ -180,20 +219,24 @@
         .nav-tabs {
             .nav-item {
                 float: left;
-                .nav-link {
-                    border: 1px solid $nav-tabs-border-color;
-                    &.active,
-                    &:hover {
-                        color: $gray-600;
-                        background: white;
-                        border: 1px solid $nav-tabs-border-color;
-                    }
-                    &.active {
-                        border-bottom: 1px solid transparent;
-                    }
-                }
+
                 & + .nav-item {
                     margin-left: -1px;
+                }
+            }
+
+            .nav-link {
+                border: 1px solid $nav-tabs-border-color;
+
+                &.active,
+                &:hover {
+                    color: $gray-600;
+                    background: $white;
+                    border: 1px solid $nav-tabs-border-color;
+                }
+
+                &.active {
+                    border-bottom: 1px solid transparent;
                 }
             }
         }
@@ -205,14 +248,14 @@
 
     .order-property-slider-inner {
         white-space: nowrap;
-        transition: transform 300ms ease;
+        @include transition(transform 300ms ease);
 
         > div {
             display: inline-block;
             width: 100%;
             visibility: hidden;
 
-            &.active {
+            &.active { // stylelint-disable-line selector-no-qualifying-type
                 visibility: visible;
             }
         }
@@ -225,47 +268,48 @@
     .order-property-slider-controls {
         display: flex;
         flex-direction: row;
+    }
 
-        .slider-nav {
-            flex: 1;
-            text-align: center;
+    .slider-nav {
+        flex: 1;
+        text-align: center;
 
-            span {
-                display: inline-block;
-                width: 12px;
-                height: 12px;
-                margin: 12px 5px 0;
-                cursor: pointer;
-                background-color: #fff;
-                border: 1px solid $gray-300;
-                border-radius: 50%;
-                transition: all .3s ease;
+        span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 12px 5px 0;
+            cursor: pointer;
+            background-color: #fff;
+            border: 1px solid $gray-300;
+            @include border-radius(50%);
+            @include transition(all .3s ease);
 
-                &.active {
-                    background-color: $gray-300;
-
-                    &.error {
-                        // background-color: lighten($danger, 25%);
-                        background-color: mix($danger, $gray-300);
-                        border-color: mix(lighten($danger, 25%), $gray-300);
-                    }
-                }
-
-                &.highlight {
-                    background-color: $primary;
-                    border-color: lighten($primary, 25%);
-                }
+            // stylelint-disable selector-no-qualifying-type
+            &.active {
+                background-color: $gray-300;
 
                 &.error {
-                    background-color: $danger;
-                    border-color: lighten($danger, 25%);
+                    // background-color: lighten($danger, 25%);
+                    background-color: mix($danger, $gray-300);
+                    border-color: mix(lighten($danger, 25%), $gray-300);
                 }
             }
+
+            &.highlight {
+                background-color: $primary;
+                border-color: lighten($primary, 25%);
+            }
+
+            &.error {
+                background-color: $danger;
+                border-color: lighten($danger, 25%);
+            }
+            // stylelint-enable selector-no-qualifying-type
         }
     }
 
-    .form-check input:checked + label
-    {
+    .form-check input:checked + label {
         @extend .text-success;
     }
 }
@@ -293,7 +337,7 @@
         margin: .5rem;
         cursor: pointer;
         border: 1px solid $gray-300;
-        border-radius: $border-radius;
+        @include border-radius($border-radius);
 
         &.active {
             color: $primary;
@@ -309,6 +353,7 @@
                 opacity: .5;
             }
 
+            // stylelint-disable function-blacklist
             &::after {
                 position: absolute;
                 width: 100%;
@@ -324,6 +369,7 @@
                         rgba(0, 0, 0, 0) 100%
                     );
             }
+            // stylelint-enable function-blacklist
         }
     }
 
@@ -335,14 +381,14 @@
             > img {
                 width: 100%;
                 height: 100%;
-                border-radius: $border-radius;
+                @include border-radius($border-radius);
                 object-fit: contain;
             }
         }
     }
 }
 
-html.ie .v-s-boxes .v-s-box.invalid {
+html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qualifying-type
     &::after {
         background: rgba(255, 255, 255, .7);
     }

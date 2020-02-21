@@ -1,6 +1,5 @@
-
-
-body.lb-disable-scrolling {
+// stylelint-disable selector-class-pattern
+body.lb-disable-scrolling { // stylelint-disable-line selector-no-qualifying-type
     overflow: hidden;
 }
 
@@ -10,7 +9,7 @@ body.lb-disable-scrolling {
     left: 0;
     z-index: 9999;
     display: none;
-    background-color: black;
+    background-color: $black;
     filter: progid:dximagetransform.microsoft.alpha(opacity=80);
     opacity: .8;
 }
@@ -20,7 +19,7 @@ body.lb-disable-scrolling {
     left: 0;
     z-index: 10000;
     width: 100%;
-    font-weight: normal;
+    font-weight: $font-weight-normal;
     line-height: 0;
     text-align: center;
 }
@@ -41,7 +40,7 @@ body.lb-disable-scrolling {
     height: 250px;
     margin: 0 auto;
     *zoom: 1;
-    background-color: white;
+    background-color: $white;
 }
 
 .lb-outerContainer::after {
@@ -69,7 +68,7 @@ body.lb-disable-scrolling {
     width: 32px;
     height: 32px;
     margin: 0 auto;
-    background: url(../images/loading.gif) no-repeat;
+    background: url("../images/loading.gif") no-repeat;
 }
 
 .lb-nav {
@@ -97,13 +96,13 @@ body.lb-disable-scrolling {
     cursor: pointer;
 }
 
-.lb-nav a.lb-prev {
+.lb-nav .lb-prev {
     left: 0;
     float: left;
     width: 50%;
 }
 
-.lb-nav a.lb-next {
+.lb-nav .lb-next {
     right: 0;
     float: right;
     width: 50%;
@@ -136,7 +135,7 @@ body.lb-disable-scrolling {
 
 .lb-data .lb-caption {
     font-size: 13px;
-    font-weight: bold;
+    font-weight: $font-weight-bold;
     line-height: 1em;
 }
 

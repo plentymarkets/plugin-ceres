@@ -12,7 +12,7 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <span 
         v-if="$store.getters.currentItemVariation && $store.getters.currentItemVariation.variation && $store.getters.currentItemVariation.variation.availability" 
-        :class="'availability badge availability_' + $store.getters.currentItemVariation.variation.availability.id"
+        :class="'availability badge availability-' + $store.getters.currentItemVariation.variation.availability.id"
         {% if spacingPadding | length > 0 %}class="{{ spacingPadding }}"{% endif %}
         {% if inlinePadding | length > 0 %}style="{{ inlinePadding }}"{% endif %}>
         <span>
