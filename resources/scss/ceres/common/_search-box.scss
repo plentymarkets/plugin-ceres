@@ -4,6 +4,7 @@
     z-index: $zindex-7;
     max-height: 310px;
     -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
 }
 
 .autocomplete-suggestion {
