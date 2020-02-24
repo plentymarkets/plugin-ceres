@@ -39,7 +39,7 @@
         content: "Loading…";
         opacity: 0;
 
-        @include transition(opacity 300ms, visibility 0ms 310ms,);
+        @include transition(opacity 300ms, visibility 0ms 310ms);
         transform: translate(-50%, -50%);
     }
 
