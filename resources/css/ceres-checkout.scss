@@ -9380,6 +9380,10 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     -o-object-fit: contain;
        object-fit: contain;
     height: 100%;
+
+    &:not([src]) {
+      opacity: 0;
+    }
 }
 
 .owl-carousel .owl-nav.disabled,
