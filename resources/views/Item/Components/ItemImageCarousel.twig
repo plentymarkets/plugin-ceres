@@ -3,7 +3,7 @@
         <div class="single-carousel owl-carousel owl-theme owl-single-item" ref="single">
             <div v-for="image in singleImages" class="prop-xs-1-1">
                 <a :href="image.url" data-lightbox="single-big-image-gallery">
-                    <lazy-img :image-url="image.url" :alt="getAltText(image)" :title="getImageName(image)"></lazy-img>
+                    <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)">
                 </a>
             </div>
         </div>
