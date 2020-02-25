@@ -12988,6 +12988,8 @@ body.lb-disable-scrolling {
   -o-object-fit: contain;
      object-fit: contain;
   height: 100%; }
+  .owl-carousel .owl-item img:not([src]) {
+    opacity: 0; }
 
 .owl-carousel .owl-nav.disabled,
 .owl-carousel .owl-dots.disabled,
