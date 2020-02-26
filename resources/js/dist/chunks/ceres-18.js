@@ -138,9 +138,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     showNetPrices: {
       type: Boolean,
       default: false
-    },
-    checkoutUrl: String,
-    basketUrl: String
+    }
   },
   computed: _objectSpread({
     hover: function hover() {
@@ -418,7 +416,7 @@ var render = function() {
                             ],
                             staticClass: "btn btn-outline-primary btn-block",
                             attrs: {
-                              href: _vm.basketUrl,
+                              href: _vm.$ceres.urls.basket,
                               rel: "nofollow",
                               title: _vm.$translate("Ceres::Template.basket")
                             }
@@ -448,7 +446,7 @@ var render = function() {
                             ],
                             staticClass: "btn btn-primary btn-block",
                             attrs: {
-                              href: _vm.checkoutUrl,
+                              href: _vm.$ceres.urls.checkout,
                               rel: "nofollow",
                               title: _vm.$translate(
                                 "Ceres::Template.basketCheckout"

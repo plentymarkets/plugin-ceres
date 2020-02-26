@@ -173,9 +173,7 @@
                                 </a>
 
                                 <lazy-load component="basket-preview">
-                                    <basket-preview :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}"
-                                        checkout-url="{{ Twig.print("urls.checkout | json_encode") }}"
-                                        basket-url="{{ Twig.print("urls.basket | json_encode") }}">
+                                    <basket-preview :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
                                         <template #before-basket-item>
                                             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
                                         </template>
