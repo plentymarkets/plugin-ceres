@@ -63760,7 +63760,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-documents", {
     allowedTypesForOrders: {
       type: Array,
       default: function _default() {
-        return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery", "reversal_document"];
+        return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery", "reversal_document", "return_note"];
       }
     },
     allowedTypesForReturns: {
