@@ -2,10 +2,6 @@
     padding: 2rem 0;
     background-color: $white;
 
-    .form-check-wrapper {
-        // padding: .25rem 0;
-    }
-
     .form-check {
         margin-bottom: 0;
     }
@@ -20,5 +16,14 @@
 }
 
 .widget-toolbar .widget-filter-base {
-    padding: 0;
+    padding: 0 0 2rem 0;
+
+    .form-check-input:checked + label {
+        margin-left: 1.75rem;
+        padding-left: 1.75rem;
+    }
+    .form-check-input:hover + label {
+        margin-left: 1.75rem;
+        padding-left: 1.75rem;
+    }
 }

@@ -277,7 +277,7 @@
             @include transition(all .1s ease);
 
             &:hover {
-                padding-left: .5rem;
+                padding-left: 2.25rem;
                 color: $gray-700;
                 background: $gray-100;
                 @include transition(all .1s ease);
