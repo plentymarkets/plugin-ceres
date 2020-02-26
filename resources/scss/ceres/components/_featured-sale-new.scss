@@ -1,3 +1,5 @@
+// stylelint-disable
+
 .featured-sale-new {
     display: block;
     height: 100%;
@@ -18,7 +20,7 @@
         height: calc(100% - 2rem);
 
         background: rgba($secondary, .8);
-        transition: all .3s ease;
+        @include transition(all .3s ease);
         transform: translate(-50%, -50%);
     }
 
@@ -58,7 +60,7 @@
     &:hover {
         .featured-category-inner {
             background: rgba($secondary, 1);
-            transition: all .3s ease;
+            @include transition(all .3s ease);
         }
     }
 }

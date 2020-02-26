@@ -30,8 +30,8 @@
     .items.open {
         .dropdown-toggle {
             border-bottom: none;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0; // stylelint-disable-line property-blacklist
+            border-bottom-left-radius: 0; // stylelint-disable-line property-blacklist
         }
     }
 
@@ -41,8 +41,8 @@
         margin: 0;
         border: 1px solid $gray-300;
         border-top: none;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+        border-top-left-radius: 0; // stylelint-disable-line property-blacklist
+        border-top-right-radius: 0; // stylelint-disable-line property-blacklist
     }
 
     ul {
@@ -50,7 +50,6 @@
         max-height: 500px;
         padding: 0;
         margin: 0;
-        overflow-x: none;
         overflow-y: auto;
         list-style: none;
         box-shadow: $box-shadow;
@@ -85,29 +84,29 @@
         margin-bottom: 0;
         cursor: pointer;
 
-        .item-controls {
-            display: flex;
-
-            .item-edit .fa {
-                padding-top: .3rem;
-                padding-left: .1rem;
-            }
-            .item-remove .fa {
-                padding-top: .1rem;
-            }
-            .fa {
-                float: none;
-                transition: all .2s ease-in-out;
-            }
-            .btn {
-                width: 2.2rem;
-                height: 2.2rem;
-                padding: 0;
-                margin-left: 5px;
-            }
-        }
     }
 
+    .item-controls {
+        display: flex;
+
+        .item-edit .fa {
+            padding-top: .3rem;
+            padding-left: .1rem;
+        }
+        .item-remove .fa {
+            padding-top: .1rem;
+        }
+        .fa {
+            float: none;
+            @include transition(all .2s ease-in-out);
+        }
+        .btn {
+            width: 2.2rem;
+            height: 2.2rem;
+            padding: 0;
+            margin-left: 5px;
+        }
+    }
 
     .item-content {
         display: inline-block;
@@ -140,7 +139,7 @@
 
         & button {
             width: 50px;
-            min-width: auto !important;
+            min-width: auto !important; // stylelint-disable-line declaration-no-important
             height: 74px;
         }
     }

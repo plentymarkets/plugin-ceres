@@ -1,19 +1,13 @@
-.widget.accordion {
-    div.card {
+.widget-accordion {
+    .card {
         &:first-of-type {
             border-bottom: $card-border-width solid $card-border-color;
         }
+
         &:nth-of-type(2) {
             border-top: 0;
         }
 
-        button.collapsed {
-            h5 {
-                > .fa {
-                    transform: scaleY(1);
-                }
-            }
-        }
         button {
             padding: $card-spacer-x;
             text-align: left;
@@ -21,32 +15,38 @@
 
             h5 {
                 position: relative;
-                font-weight: bold;
+                font-weight: $font-weight-bold;
+            }
 
-                > .fa {
-                    position: absolute;
-                    top: -4px;
-                    right: 0;
-                    font-size: 1.5rem;
-                    transition-timing-function: ease;
-                    transition-duration: .35s;
-                    transform: scaleY(-1);
-                    transform-origin: 50% 60%;
-                }
+            .fa {
+                position: absolute;
+                top: -4px;
+                right: 0;
+                font-size: 1.5rem;
+                transition-timing-function: ease;
+                transition-duration: .35s;
+                transform: scaleY(-1);
+                transform-origin: 50% 60%;
+            }
+
+            &.collapsed .fa { // stylelint-disable-line selector-no-qualifying-type
+                transform: scaleY(1);
             }
         }
+
         button:hover,
         button:focus {
-            color: black;
+            color: $black;
         }
 
-        div .card-body {
-            margin-top: 1px;
+    }
 
-            p {
-                margin: 0;
-                line-height: $headings-line-height;
-            }
+    .card-body {
+        margin-top: 1px;
+
+        p {
+            margin: 0;
+            line-height: $headings-line-height;
         }
     }
 }

@@ -44,6 +44,6 @@
     }
 
     .widget-item-list-inline-caption * {
-        text-transform: unset !important;
+        text-transform: unset !important; // stylelint-disable-line declaration-no-important
     }
 }

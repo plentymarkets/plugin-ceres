@@ -1,3 +1,4 @@
+// stylelint-disable
 .homepage-title {
     position: relative;
     display: flex;
@@ -23,6 +24,7 @@
         }
     }
 }
+
 .cmp-hero {
     // margin: 0 -15px;
     .hero-main {
@@ -33,6 +35,7 @@
                     .carousel-caption {
                         bottom: 0;
                         padding-bottom: 10px;
+
                         h3,
                         h2,
                         h1 {
@@ -44,59 +47,70 @@
                             color: $white;
                             text-shadow: none;
                             background: rgba($primary, .8);
-                            transition: all .3s ease;
+                            @include transition(all .3s ease);
                         }
+
                         h3 {
                             font-size: 1rem;
                             text-transform: uppercase;
                         }
                     }
+
                     .hero-category:hover {
                         h3,
                         h2,
                         h1 {
                             background: rgba($primary, 1);
-                            transition: all .3s ease;
+                            @include transition(all .3s ease);
                         }
                     }
 
                 }
             }
+
             .carousel-indicators {
                 right: auto;
                 left: 50%;
                 background: transparent;
                 transform: translateX(-50%);
+
                 li {
                     border-color: $primary;
+
                     &.active {
                         background: $primary;
                     }
                 }
             }
+
             .carousel-control {
                 background-image: none;
+
                 span {
                     top: 50%;
                     font-size: 30px;
                     text-shadow: none;
                     transform: translateY(-50%);
                 }
+
                 span::before {
                     font-family: "FontAwesome";
                     color: $primary;
                     content: "\f053";
                 }
+
                 .icon-next::before {
                     content: "\f054";
                 }
             }
         }
     }
+
     .hero-xtras {
         .hero-category {
             .hero-category-inner {
                 padding: .5rem 1rem;
+
                 .hero-category-headline {
                     display: block;
                     align-self: flex-start;
@@ -110,18 +124,20 @@
                     text-align: left;
                     background: rgba($primary, .8);
                     box-shadow: none;
-                    transition: all .3s ease;
+                    @include transition(all .3s ease);
                 }
             }
+
             &:hover {
                 .hero-category-headline {
                     background: rgba($primary, 1);
-                    transition: all .3s ease;
+                    @include transition(all .3s ease);
                 }
             }
         }
     }
 }
+
 .featured-categories {
     .col-md-8 .prop-inner,
     .col-md-4 .prop-inner {
@@ -141,6 +157,7 @@
         }
     }
 }
+
 .sale-new {
     .col-6 {
         .prop-inner {
@@ -148,6 +165,7 @@
             width: calc(100% - 15px);
             padding: 15px 0;
         }
+
         &:last-child {
             .prop-inner {
                 left: 0;
@@ -162,6 +180,7 @@
     font-family: $font-family-heading;
     background: $primary;
     border-bottom: 0;
+
     h1,
     h2,
     h3,
@@ -174,27 +193,32 @@
         color: $white;
         text-transform: uppercase;
     }
+
     a.section-link-all {
         position: absolute;
         top: 50%;
         right: 1.5rem;
         color: $white;
         transform: translateY(-50%);
+
         &:hover {
             color: $gray-900;
         }
     }
 }
+
 @include media-breakpoint-up(sm) {
     .home {
         .product-list {
             margin: 0;
+
             .col-12 {
                 margin: 0;
             }
         }
     }
 }
+
 @include media-breakpoint-up(md) {
 
     .home {
@@ -209,6 +233,7 @@
             padding: 15px;
             padding-right: 7.5px;
         }
+
         .col-md-4 .prop-inner {
             padding: 15px 0 15px 7.5px;
         }
@@ -220,6 +245,7 @@
                 width: 100%;
                 padding: 15px 7.5px 15px 15px;
             }
+
             &:last-child {
                 .prop-inner {
                     left: 0;
@@ -238,6 +264,7 @@
     }
     .cmp-hero {
         margin: 0;
+
         .hero-main {
 
             .carousel {
@@ -246,32 +273,39 @@
                         .carousel-caption {
                             bottom: 20px;
                             padding-bottom: 20px;
+
                             h3,
                             h2,
                             h1 {
                                 font-size: 3rem;
                             }
+
                             h3 {
                                 font-size: 2rem;
                             }
                         }
                     }
                 }
+
                 .carousel-indicators {
                     top: auto;
                     bottom: 0;
+
                     li {
                         border-color: $primary;
+
                         &.active {
                             background: $primary;
                         }
                     }
                 }
+
                 .carousel-control {
                     span {
                         top: auto;
                         bottom: 10%;
                         font-size: 60px;
+
                         &::before {
                             color: $primary;
                         }
@@ -279,10 +313,12 @@
                 }
             }
         }
+
         .hero-xtras {
             .hero-category {
                 .hero-category-inner {
                     padding: 0;
+
                     .hero-category-headline {
                         width: 100%;
                         margin: 0;
@@ -293,6 +329,7 @@
         }
     }
 }
+
 @include media-breakpoint-up(xl) {
     .home {
         .product-list {

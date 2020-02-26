@@ -38,7 +38,7 @@ class ItemImageWidget extends BaseWidget
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("standard", "Widget.itemImageAnimationStyleSlide")
-                    ->addEntry("fadeOut", "Widget.itemImageAnimationStyleFade")
+                    ->addEntry("fade-out", "Widget.itemImageAnimationStyleFade")
                     ->toArray()
             );
 
