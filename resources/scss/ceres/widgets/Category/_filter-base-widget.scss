@@ -10,7 +10,8 @@
         cursor: pointer;
     }
 
-    .title, .card .form-check-label {
+    .title,
+    .card .form-check-label {
         padding-left: 1.75rem;
     }
 }
@@ -18,12 +19,9 @@
 .widget-toolbar .widget-filter-base {
     padding: 0;
 
-    .form-check-input:checked + label {
-        margin-left: 1.75rem;
-        padding-left: 1.75rem;
-    }
+    .form-check-input:checked + label,
     .form-check-input:hover + label {
-        margin-left: 1.75rem;
         padding-left: 1.75rem;
+        margin-left: 1.75rem;
     }
 }
