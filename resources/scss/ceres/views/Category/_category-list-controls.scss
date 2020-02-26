@@ -100,7 +100,7 @@
     background: $white;
 
     .category-title {
-        padding: 1.2rem 2rem;
+        padding: 1.2rem 1.75rem;
         background: #efefef;
 
         p:first-child {
@@ -253,7 +253,7 @@
 
         .form-check-input {
             &:checked + label {
-                padding-left: 1.75rem;
+                padding-left: 3.5rem;
                 color: $gray-900;
                 background: $gray-200;
 
@@ -261,6 +261,7 @@
                     font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                     content: "\f046";
                     opacity: 1;
+                    padding-left: 1.75rem;
                 }
             }
 
