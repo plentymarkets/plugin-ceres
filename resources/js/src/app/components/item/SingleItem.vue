@@ -265,7 +265,6 @@
 </template>
 
 <script>
-import { transformVariationProperties } from "../../services/VariationPropertyService";
 import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
 import { mapState, mapGetters } from "vuex";
@@ -328,11 +327,6 @@ export default {
         {
             return (App.config.item.itemData.includes("item.technical_data") || App.config.item.itemData.includes("all"))
                 && !!this.currentVariation.texts.technicalData.length;
-        },
-
-        transformedVariationProperties()
-        {
-            return transformVariationProperties(this.currentVariation, [], "showInItemListing");
         },
 
         addPleaseSelectOption()
