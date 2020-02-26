@@ -36,7 +36,7 @@ class PaginationConfig
     ];
 
     private static $dynamicSortingByRules = [
-        "isMain"                 => "filter.isMain_desc",
+        "isMainDesc"                 => "filter.isMain_desc",
         "priceAsc"               => "filter.prices.price_asc",
         "priceDesc"              => "filter.prices.price_desc",
         "topsellerAsc"           => "filter.position_asc",

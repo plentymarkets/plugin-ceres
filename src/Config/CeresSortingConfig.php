@@ -64,6 +64,6 @@ class CeresSortingConfig extends PluginConfig
         $this->prioritySearch2 = $this->getTextValue('sorting.prioritySearch2', 'notSelected');
         $this->prioritySearch3 = $this->getTextValue('sorting.prioritySearch3', 'notSelected');
         $this->dynamicPrio1 = $this->getTextValue('sorting.dynamicPrio1', 'filter.prices.price_asc');
-        $this->dynamicPrio2 = $this->getTextValue('sorting.dynamicPrio2', 'notSelected');
+        $this->dynamicPrio2 = $this->getTextValue('sorting.dynamicPrio2', 'variationId_asc');
     }
 }
