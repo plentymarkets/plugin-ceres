@@ -13,7 +13,7 @@
 <header id="page-header" class="fixed-top">
     <div class="container-max">
         <div class="row flex-row-reverse position-relative">
-            <div id="page-header-parent" class="col-12" data-header-offset>
+            <div id="page-header-parent" class="col-12 header-container" data-header-offset>
                 {{ headerContainer | raw }}
             </div>
         </div>
@@ -51,7 +51,7 @@
 
     <mobile-navigation :initial-category="{{ initialCategory | json_encode }}" :include-language="{{ urls.includeLanguage | json_encode }}">
         <template #loading-animation>
-            {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
+            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
         </template>
     </mobile-navigation>
 </div>

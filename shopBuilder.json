@@ -622,7 +622,7 @@
         "categoryItemContent": true,
         "itemSearchContent": true,
         "singleItemContent": true,
-        "itemSetContent": false,
+        "itemSetContent": true,
         "globalElementsOverride": true,
         "safeMode" : true
     }

@@ -87,7 +87,7 @@
 
                             <slot name="after-price"></slot>
 
-                            <span v-if="currentVariation.variation.availability" :class="'availability badge availability_' + currentVariation.variation.availability.id">
+                            <span v-if="currentVariation.variation.availability" :class="'availability badge availability-' + currentVariation.variation.availability.id">
                                 <span>
                                     {{ currentVariation.variation.availability.names.name }}
                                 </span>

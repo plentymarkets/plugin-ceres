@@ -70,13 +70,13 @@
                         <slot name="after-basket-totals"></slot>
 
                         <div class="basket-preview-footer d-flex pb-3">
-                            <a v-waiting-animation-infinite :href="basketUrl" rel="nofollow" class="btn btn-outline-primary btn-block" :title="$translate('Ceres::Template.basket')">
+                            <a v-waiting-animation-infinite :href="$ceres.urls.basket" rel="nofollow" class="btn btn-outline-primary btn-block" :title="$translate('Ceres::Template.basket')">
                                 <i class="fa fa-shopping-cart"></i>
                                 {{ $translate("Ceres::Template.basket") }}
                             </a>
 
                             <slot name="before-checkout-button"></slot>
-                            <a v-waiting-animation-infinite :href="checkoutUrl" rel="nofollow" class="btn btn-primary btn-block" :title="$translate('Ceres::Template.basketCheckout')">
+                            <a v-waiting-animation-infinite :href="$ceres.urls.checkout" rel="nofollow" class="btn btn-primary btn-block" :title="$translate('Ceres::Template.basketCheckout')">
                                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                 {{ $translate("Ceres::Template.basketCheckout") }}
                             </a>
@@ -102,9 +102,7 @@ export default {
         {
             type: Boolean,
             default: false
-        },
-        checkoutUrl: String,
-        basketUrl: String
+        }
     },
 
     computed: {
@@ -112,10 +110,12 @@ export default {
         {
             return App.config.basket.previewType === 'hover';
         },
+
         showShippingCountrySelect()
         {
             return App.config.basket.showShippingCountrySelect;
         },
+
         ...mapState({
             basket: state => state.basket.data,
             basketItems: state => state.basket.items,

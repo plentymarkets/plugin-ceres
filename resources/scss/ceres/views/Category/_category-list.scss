@@ -17,7 +17,8 @@
     list-style-type: none;
 }
 
-category-item, .category-item-placeholder {
+category-item,
+.category-item-placeholder {
     display: block;
     width: 100%;
     height: 145px;
@@ -33,7 +34,7 @@ category-item, .category-item-placeholder {
             color: $gray-600;
         }
 
-        span {
+        span { // stylelint-disable-line selector-max-type
             display: block;
             padding: .8rem .8rem 74px;
         }
@@ -179,6 +180,7 @@ category-item, .category-item-placeholder {
 }
 
 /* IOS compatibility, missing background-attachment:fixed support */
+// stylelint-disable selector-no-qualifying-type
 html.ios,
 html.crios {
     .parallax-img-container .parallax-img-container-inner[style^="background-image"] {
@@ -186,3 +188,4 @@ html.crios {
         background-size: cover;
     }
 }
+// stylelint-enable selector-no-qualifying-type

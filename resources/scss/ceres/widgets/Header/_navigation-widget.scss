@@ -260,7 +260,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
                 pointer-events: none;
             }
 
-            &.btn-close {
+            &.btn-close { // stylelint-disable-line selector-no-qualifying-type
                 float: right;
                 padding-top: .6em;
                 &::before {
@@ -329,7 +329,6 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     100% { opacity: .1; }
 }
 
-.mainmenu-[class^="animate-"], // stylelint-disable-line selector-class-pattern
 .mainmenu[class*=" animate-"] {
     display: block !important; // stylelint-disable-line declaration-no-important
 }

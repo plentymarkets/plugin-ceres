@@ -34,6 +34,6 @@
     }
 }
 
-html.ie .widget-grid .widget-inner-stacked {
+html.ie .widget-grid .widget-inner-stacked { // stylelint-disable-line selector-no-qualifying-type
     display: block;
 }

@@ -21,12 +21,6 @@ class DisplayInfoMapping
             "global"   => false,
             "optional" => true,
         ],
-        "displayInfo_loadingAnimation" => [
-            "field"    => "item.loading_animation_type",
-            "type"     => "string",
-            "global"   => false,
-            "optional" => true,
-        ],
         "displayInfo_showCategoryImage" => [
             "field"    => "item.show_category_image",
             "type"     => "boolean",
