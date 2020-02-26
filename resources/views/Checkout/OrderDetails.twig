@@ -250,7 +250,6 @@
                                                     {% endif %}
                                                 {% endfor %}
 
-
                                                 <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}" target="_blank">
                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                                     {{ splitPath | last }}
