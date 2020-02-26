@@ -55637,7 +55637,7 @@ __webpack_require__.r(__webpack_exports__);
     allowedTypesForOrders: {
       type: Array,
       default: function _default() {
-        return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery", "reversal_document"];
+        return ["invoice", "invoice_external", "delivery_note", "order_confirmation", "pickup_delivery", "reversal_document", "return_note"];
       }
     },
     allowedTypesForReturns: {
