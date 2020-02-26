@@ -11419,7 +11419,7 @@ html.crios {
     background: $white;
 
     .category-title {
-        padding: 1.2rem 2rem;
+        padding: 1.2rem 1.75rem;
         background: #efefef;
 
         p:first-child {
@@ -11574,11 +11574,12 @@ html.crios {
 
         .form-check-input {
             &:checked + label {
-                padding-left: 1.75rem;
+                padding-left: 3.5rem;
                 color: $gray-900;
                 background: $gray-200;
 
                 &::before {
+                    padding-left: 1.75rem;
                     font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                     content: "\f046";
                     opacity: 1;
@@ -11597,7 +11598,7 @@ html.crios {
             @include transition(all .1s ease);
 
             &:hover {
-                padding-left: .5rem;
+                padding-left: 2.25rem;
                 color: $gray-700;
                 background: $gray-100;
                 @include transition(all .1s ease);
@@ -12156,22 +12157,31 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 
 .widget-filter-base {
-    padding: 2rem;
+    padding: 2rem 0;
     background-color: $white;
 
-    .form-check-wrapper {
-        padding: .25rem 0;
-    }
     .form-check {
         margin-bottom: 0;
     }
+
     .form-check-label {
         cursor: pointer;
+    }
+
+    .title,
+    .card .form-check-label {
+        padding-left: 1.75rem;
     }
 }
 
 .widget-toolbar .widget-filter-base {
     padding: 0;
+
+    .form-check-input:checked + label,
+    .form-check-input:hover + label {
+        padding-left: 1.75rem;
+        margin-left: 1.75rem;
+    }
 }
 
 .widget-item-grid {
