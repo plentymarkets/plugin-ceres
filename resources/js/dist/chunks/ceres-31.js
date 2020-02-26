@@ -338,15 +338,15 @@ var render = function() {
                 }
               },
               [
-                _c("lazy-img", {
+                _c("img", {
+                  staticClass: "owl-lazy",
                   attrs: {
-                    "image-url": image.url,
+                    "data-src": image.url,
                     alt: _vm.getAltText(image),
                     title: _vm.getImageName(image)
                   }
                 })
-              ],
-              1
+              ]
             )
           ])
         }),

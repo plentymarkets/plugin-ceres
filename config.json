@@ -798,6 +798,7 @@
                 "item.loading_animation_type": {
                     "type": "selectBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemLoadingAnimationTypeLabel",
                     "options": {
                         "defaultValue": "bars",

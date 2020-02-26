@@ -9,9 +9,9 @@
 
         &.preview svg {
             position: absolute;
-            left: 0;
             right: 0;
-            display: block !important;
+            left: 0;
+            display: block !important; // stylelint-disable-line declaration-no-important
             fill: $gray-100;
         }
     }

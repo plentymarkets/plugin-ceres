@@ -719,7 +719,7 @@ var render = function() {
                             {
                               staticClass: "badge",
                               class:
-                                "availability_" +
+                                "availability-" +
                                 _vm.wishListItem.variation.availability.id
                             },
                             [

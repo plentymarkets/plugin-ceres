@@ -49096,7 +49096,6 @@ function CeresMain() {
   HeaderCollapse("#countrySettings");
   HeaderCollapse("#currencySelect");
   HeaderCollapse("#searchBox");
-  var $toggleListView = $(".toggle-list-view");
   var $mainNavbarCollapse = $("#mainNavbarCollapse"); // prevent hidding collapses in the shopbuilder, for editing search bar results
 
   if (!App.isShopBuilder) {
@@ -49109,13 +49108,6 @@ function CeresMain() {
     });
   }
 
-  $toggleListView.on("click", function (evt) {
-    evt.preventDefault(); // toggle it's own state
-
-    $toggleListView.toggleClass("grid"); // toggle internal style of thumbs
-
-    $(".product-list, .cmp-product-thumb").toggleClass("grid");
-  });
   $mainNavbarCollapse.collapse("hide"); // Add click listener outside the navigation to close it
 
   $mainNavbarCollapse.on("show.bs.collapse", function () {

@@ -17,11 +17,11 @@
     > div {
         padding: 1rem;
 
-        > p.title {
-            font-weight: bold;
+        > .title {
+            font-weight: $font-weight-bold;
         }
 
-        > p.description {
+        > .description {
             margin-bottom: 0;
             font-size: .9rem;
             font-style: italic;

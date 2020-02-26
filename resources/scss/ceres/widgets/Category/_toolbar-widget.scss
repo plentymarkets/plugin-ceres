@@ -7,7 +7,7 @@
         .flex-fill {
             > div {
                 @include media-breakpoint-up(sm) {
-                    display: inline-block !important;
+                    display: inline-block !important; // stylelint-disable-line declaration-no-important
                 }
             }
         }

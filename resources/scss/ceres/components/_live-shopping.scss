@@ -2,106 +2,108 @@
     position: relative;
     padding: 0;
     margin: 0;
+}
 
-    .live-shopping-item-name {
-        padding: $live-shopping-padding-x;
-        margin: 0;
+.live-shopping-item-name {
+    padding: $live-shopping-padding-x;
+    margin: 0;
 
-        > a {
-            position: relative;
-            display: block;
-            font-weight: normal;
-            line-height: 1.5em;
-            color: $gray-600;
-            text-align: center;
-        }
+    > a {
+        position: relative;
+        display: block;
+        font-weight: $font-weight-normal;
+        line-height: 1.5em;
+        color: $gray-600;
+        text-align: center;
+    }
+}
+
+.live-shopping-countdown {
+    padding: $live-shopping-padding-y $live-shopping-padding-x;
+    padding-top: .6rem;
+    @include border-top-left-radius(.25rem);
+    @include border-top-right-radius(.25rem);
+
+}
+
+.live-shopping-countdown-separator {
+    margin-top: 0;
+    margin-bottom: .5rem;
+}
+
+.live-shopping-countdown-heading {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.live-shopping-countdown-thread-container {
+    display: flex;
+
+    &:not(:last-child) {
+        margin-bottom: .5rem;
     }
 
-    .live-shopping-countdown {
-        padding: $live-shopping-padding-y $live-shopping-padding-x;
-        padding-top: .6rem;
-        border-top-left-radius: .25rem;
-        border-top-right-radius: .25rem;
+}
 
-        .live-shopping-countdown-separator {
-            margin-top: 0;
-            margin-bottom: .5rem;
-        }
+.live-shopping-countdown-thread {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
 
-        .live-shopping-countdown-heading {
-            margin-bottom: 5px;
-            text-align: center;
-        }
+.live-shopping-countdown-thread-number {
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+    line-height: 1.1;
+}
 
-        .live-shopping-countdown-thread-container {
-            display: flex;
+.live-shopping-prices {
+    padding: .5rem 1rem .8rem;
+}
 
-            &:not(:last-child) {
-                margin-bottom: .5rem;
-            }
+.live-shopping-prices-inner {
+    display: grid;
+    grid-template-areas: "top" "bottom";
 
-            .live-shopping-countdown-thread {
-                margin-right: auto;
-                margin-left: auto;
-                text-align: center;
-
-                .live-shopping-countdown-thread-number {
-                    font-size: 2rem;
-                    font-weight: bold;
-                    line-height: 1.1;
-                }
-            }
-        }
+    .live-shopping-prices-rebate {
+        grid-area: bottom;
     }
 
-    .live-shopping-prices {
-        padding: .5rem 1rem .8rem;
+    .live-shopping-prices-container {
+        grid-area: top;
+        margin-left: 0;
 
-        .live-shopping-prices-inner {
-            display: grid;
-            grid-template-areas:
-                "top"
-                "bottom";
-
-            .live-shopping-prices-rebate {
-                grid-area: bottom;
-            }
-
-            .live-shopping-prices-container {
-                grid-area: top;
-                margin-left: 0;
-
-                .live-shopping-price {
-                    font-size: 2rem;
-                    line-height: 1.1;
-                }
-            }
-        }
-
-        .live-shopping-prices-additional-info {
-            margin-top: .25rem;
-            font-size: $small-font-size;
-            font-weight: normal;
-            text-align: left;
-
-            a {
-                font-weight: bold;
-                color: inherit;
-            }
-        }
     }
-    .live-shopping-progress {
-        &:not(:last-child) {
-            margin-bottom: .5rem;
-        }
 
-        .live-shopping-progress-heading {
-            text-align: center;
+    .live-shopping-price {
+        font-size: 2rem;
+        line-height: 1.1;
+    }
+}
 
-            &:not(:last-child) {
-                margin-bottom: .5rem;
-            }
-        }
+.live-shopping-prices-additional-info {
+    margin-top: .25rem;
+    font-size: $small-font-size;
+    font-weight: $font-weight-normal;
+    text-align: left;
+
+    a {
+        font-weight: $font-weight-bold;
+        color: inherit;
+    }
+}
+
+.live-shopping-progress {
+    &:not(:last-child) {
+        margin-bottom: .5rem;
+    }
+}
+
+.live-shopping-progress-heading {
+    text-align: center;
+
+    &:not(:last-child) {
+        margin-bottom: .5rem;
     }
 }
 
