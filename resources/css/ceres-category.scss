@@ -9382,7 +9382,7 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     height: 100%;
 
     &:not([src]) {
-      opacity: 0;
+        opacity: 0;
     }
 }
 
