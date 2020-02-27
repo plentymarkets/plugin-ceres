@@ -7,6 +7,7 @@
 {% set appearance      = widget.settings.appearance.mobile %}
 {% set aspectRatio     = widget.settings.aspectRatio.mobile %}
 {% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set fallbackImagePath = widget.settings.fallbackImagePath.mobile %}
 {% set headline         = widget.settings.headline.mobile %}
 {% set imageSize        = widget.settings.imageSize.mobile %}
 {% set openInNewTab     = widget.settings.url.openInNewTab.mobile %}
@@ -21,6 +22,7 @@
 {{ Twig.set("name", "" | json_encode) }}
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("imageUrl", "" | json_encode) }}
+{{ Twig.set("fallbackImageUrl", "" | json_encode) }}
 {{ Twig.set("imageAltText", "" | json_encode) }}
 {{ Twig.set("imageName", "" | json_encode) }}
 
@@ -62,6 +64,7 @@
 
 {% if customImagePath | trim is not empty %}
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
+    {{ Twig.set("fallbackImageUrl", fallbackImagePath | json_encode) }}
     {{ Twig.if("imageAltText is empty") }}
         {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
     {{ Twig.endif() }}
@@ -87,6 +90,7 @@
             <lazy-img
                 class="img-{{ imageSize }}"
                 image-url="{{ Twig.print("imageUrl") }}"
+                fallback-url="{{ Twig.print("fallbackImageUrl") }}"
                 alt="{{ Twig.print("imageAltText") }}"
                 {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </lazy-img>
