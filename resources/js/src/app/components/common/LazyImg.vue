@@ -1,6 +1,8 @@
 <template>
-    <img v-if="!isBackgroundImage" :data-src="imageUrl">
-    <div v-else :data-background-image="imageUrl">
+    <picture class="lozad" data-alt="" :data-iesrc="fallbackUrl || imageUrl">
+        <source :srcset="imageUrl">
+    </picture>
+    <div v-else :data-background-image="backgroundSource">
         <slot></slot>
     </div>
 </template>
@@ -10,7 +12,11 @@ import lozad from "lozad";
 
 export default {
     props: {
-        imageUrl: String,
+        imageUrl: {
+            type: String,
+            required: true
+        },
+        fallbackUrl: String,
         isBackgroundImage: Boolean
     },
 
@@ -31,6 +37,12 @@ export default {
                 this.$el.setAttribute("data-loaded", false);
                 lozad(this.$el).triggerLoad(this.$el);
             });
+        }
+    },
+
+    computed: {
+        backgroundSource() {
+            return this.imageUrl;
         }
     }
 }
