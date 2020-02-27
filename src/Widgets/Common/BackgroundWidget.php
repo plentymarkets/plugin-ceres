@@ -40,7 +40,7 @@ class BackgroundWidget extends BaseWidget
             ->withDefaultValue(false)
             ->withName("Widget.backgroundHugeFontLabel")
             ->withTooltip("Widget.backgroundHugeFontTooltip");
-            
+
         $settings->createCheckbox("backgroundFixed")
             ->withDefaultValue(false)
             ->withName("Widget.backgroundFixedLabel")
@@ -88,6 +88,10 @@ class BackgroundWidget extends BaseWidget
         $settings->createFile('customImagePath')
             ->withCondition('sourceType === "custom-image"')
             ->withName('Widget.backgroundImageSource');
+
+        $settings->createFile('fallbackImagePath')
+            ->withCondition('sourceType === "custom-image"')
+            ->withName('Widget.backgroundFallbackImageSource');
 
         $settings->createSelect('backgroundSize')
             ->withCondition('sourceType !== "none"')
