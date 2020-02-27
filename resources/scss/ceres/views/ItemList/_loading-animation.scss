@@ -28,50 +28,32 @@
     margin: 0 .1rem;
     background-color: $primary;
 
-    -webkit-animation: sk-stretchdelay .8s infinite ease-in-out;
     animation: sk-stretchdelay .8s infinite ease-in-out;
 }
 
 .loading-animation .rect2 {
-    -webkit-animation-delay: -.7s;
     animation-delay: -.7s;
 }
 
 .loading-animation .rect3 {
-    -webkit-animation-delay: -.6s;
     animation-delay: -.6s;
 }
 
 .loading-animation .rect4 {
-    -webkit-animation-delay: -.5s;
     animation-delay: -.5s;
 }
 
 .loading-animation .rect5 {
-    -webkit-animation-delay: -.4s;
     animation-delay: -.4s;
-}
-
-@-webkit-keyframes sk-stretchdelay {
-    0%,
-    40%,
-    100% {
-        -webkit-transform: scaleY(.2);
-    }
-    20% {
-        -webkit-transform: scaleY(.5);
-    }
 }
 
 @keyframes sk-stretchdelay {
     0%,
     40%,
     100% {
-        -webkit-transform: scaleY(.2);
         transform: scaleY(.2);
     }
     20% {
-        -webkit-transform: scaleY(.5);
         transform: scaleY(.5);
     }
 }

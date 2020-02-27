@@ -9,7 +9,7 @@
 {% block PageBody %}
     <login-view
             backlink="{{ request.get("backlink") | default("") }}"
-            guest-email="{{ services.sessionStorage.getSessionValue("guestEmail") }}">
+            guest-email="{{ services.sessionStorageRepository.getSessionValue("guestEmail") }}">
         <template #extend-overlay-buttons>
             {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
         </template>

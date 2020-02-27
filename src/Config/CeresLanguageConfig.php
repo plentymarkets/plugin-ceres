@@ -2,42 +2,44 @@
 
 namespace Ceres\Config;
 
-use IO\Helper\PluginConfig;
-use Plenty\Plugin\ConfigRepository;
+use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 class CeresLanguageConfig extends PluginConfig
 {
     public $activeLanguages;
-
-    public function __construct(ConfigRepository $configRepository)
+    
+    protected function getPluginName()
     {
-        parent::__construct($configRepository, "Ceres");
+        return 'Ceres';
+    }
 
+    protected function load()
+    {
         $this->activeLanguages = $this->getMultiSelectValue(
-            "language.active_languages",
+            'language.active_languages',
             [
-                "de",
-                "en",
-                "bg",
-                "fr",
-                "it",
-                "es",
-                "tr",
-                "nl",
-                "pl",
-                "pt",
-                "nn",
-                "ro",
-                "da",
-                "se",
-                "cz",
-                "ru",
-                "sk",
-                "cn",
-                "vn"
+                'de',
+                'en',
+                'bg',
+                'fr',
+                'it',
+                'es',
+                'tr',
+                'nl',
+                'pl',
+                'pt',
+                'nn',
+                'ro',
+                'da',
+                'se',
+                'cz',
+                'ru',
+                'sk',
+                'cn',
+                'vn'
             ],
             [
-                "de"
+                'de'
             ]
         );
     }

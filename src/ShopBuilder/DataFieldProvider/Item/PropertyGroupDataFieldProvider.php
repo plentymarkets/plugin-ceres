@@ -3,7 +3,6 @@
 namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 
 use IO\Helper\Utils;
-use IO\Services\SessionStorageService;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Property\Contracts\PropertyGroupRepositoryContract;
 use Plenty\Modules\Item\Property\Models\Property;

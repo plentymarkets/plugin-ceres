@@ -6,13 +6,13 @@ use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\BaseWidget;
 use IO\Helper\Utils;
 use IO\Services\CategoryService;
-use IO\Services\CustomerService;
 use IO\Services\ItemSearch\Factories\Faker\CategoryTreeFaker;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 
 class NavigationWidget extends BaseWidget
 {
@@ -25,15 +25,15 @@ class NavigationWidget extends BaseWidget
         
         /** @var CeresConfig $ceresConfig */
         $ceresConfig = pluginApp(CeresConfig::class);
-        
-        /** @var CustomerService $customerService */
-        $customerService = pluginApp(CustomerService::class);
+
+        /** @var ContactRepositoryContract $contactRepository */
+        $contactRepository = pluginApp(ContactRepositoryContract::class);
         
         $categories = $categoryService->getNavigationTree(
             $ceresConfig->header->showCategoryTypes,
             Utils::getLang(),
             $ceresConfig->header->menuLevels,
-            $customerService->getContactClassId()
+            $contactRepository->getContactClassId()
         );
         
         if (!count($categories)) {
