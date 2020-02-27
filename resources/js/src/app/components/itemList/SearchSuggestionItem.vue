@@ -1,27 +1,36 @@
 <template>
     <div>
-        <a
-            v-for="(item, index) in autocompleteResult"
-            class="autocomplete-suggestion"
-            :class="paddingClasses"
-            :style="paddingInlineStyles"
-            :key="index"
-            :href="getTargetUrl(item)">
+        <template v-if="autocompleteResult.length">
+            <div>
+                <a
+                    v-for="(item, index) in autocompleteResult"
+                    class="autocomplete-suggestion"
+                    :class="paddingClasses"
+                    :style="paddingInlineStyles"
+                    :key="index"
+                    :href="getTargetUrl(item)">
 
-            <div class="image mr-3" v-if="showItemImages">
-                <img v-if="item.image" :src="item.image">
-            </div>
+                    <div class="image mr-3" v-if="showItemImages">
+                        <img v-if="item.image" :src="item.image">
+                    </div>
 
-            <div class="label" :class="{ 'compact': item.beforeLabel && item.afterLabel }">
-                <p class="small mb-0" v-if="item.beforeLabel">{{ item.beforeLabel }}</p>
-                <p class="mb-0" v-html="getHighlightedLabel(item.label)"></p>
-                <p class="small mb-0" v-if="item.afterLabel">{{ item.beforeLabel }}</p>
-            </div>
+                    <div class="label" :class="{ 'compact': item.beforeLabel && item.afterLabel }">
+                        <p class="small mb-0" v-if="item.beforeLabel">{{ item.beforeLabel }}</p>
+                        <p class="mb-0" v-html="getHighlightedLabel(item.label)"></p>
+                        <p class="small mb-0" v-if="item.afterLabel">{{ item.beforeLabel }}</p>
+                    </div>
 
-            <div class="count" v-if="item.count > 0">
-                <span>{{ item.count }}</span>
+                    <div class="count" v-if="item.count > 0">
+                        <span>{{ item.count }}</span>
+                    </div>
+                </a>
             </div>
-        </a>
+        </template>
+        <template v-else>
+            <p class="text-muted" :class="paddingClasses" :style="paddingInlineStyles">
+                {{ $translate("Ceres::Template.itemSearchSuggestionNoResults") }}
+            </p>
+        </template>
     </div>
 </template>
 

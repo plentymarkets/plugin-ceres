@@ -82,7 +82,7 @@ export default {
             const category   = this.autocompleteResult.category;
             const suggestion = this.autocompleteResult.suggestion;
 
-            return (item && item.length) || (category && category.length) || (suggestion && suggestion.length);
+            return App.isShopBuilder || (item && item.length) || (category && category.length) || (suggestion && suggestion.length);
         },
 
         isShopBuilder()
