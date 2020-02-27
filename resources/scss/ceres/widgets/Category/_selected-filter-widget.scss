@@ -1,6 +1,6 @@
 .widget-selected-filter {
     &.widget-alignment-left {
-        span.selected-filter {
+        .selected-filter {
             margin-right: 10px;
             margin-left: 0;
         }
@@ -10,15 +10,15 @@
         display: block;
         float: none;
         margin-top: 0;
-        span.selected-filter {
+        .selected-filter {
             margin-bottom: 10px;
         }
     }
 
     &.widget-none {
-        span.selected-filter {
-            color: $black !important;
-            background-color: #efefef !important;
+        .selected-filter {
+            color: $black !important; // stylelint-disable-line declaration-no-important
+            background-color: #efefef !important; // stylelint-disable-line declaration-no-important
         }
     }
 }

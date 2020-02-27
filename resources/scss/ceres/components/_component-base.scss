@@ -24,7 +24,7 @@
         background-color: rgba(0, 0, 0, .6);
         opacity: 0;
 
-        transition: opacity 300ms, width 0ms 310ms, height 0ms 310ms;
+        @include transition(opacity 300ms, width 0ms 310ms, height 0ms 310ms);
     }
 
     &::after {
@@ -34,12 +34,12 @@
         z-index: $zindex-9;
         display: inline-block;
         font-weight: 700;
-        color: white;
+        color: $white;
         visibility: hidden;
         content: "Loading…";
         opacity: 0;
 
-        transition: opacity 300ms, visibility 0ms 310ms,;
+        @include transition(opacity 300ms, visibility 0ms 310ms);
         transform: translate(-50%, -50%);
     }
 
@@ -51,20 +51,15 @@
             height: 100%;
             opacity: 1;
 
-            transition: width 0ms, height 0ms, opacity 300ms 10ms;
+            @include transition(width 0ms, height 0ms, opacity 300ms 10ms);
         }
 
         &::after {
             visibility: visible;
             opacity: 1;
-            transition: visibility 0ms, opacity 300ms 100ms;
+            @include transition(visibility 0ms, opacity 300ms 100ms);
         }
     }
-
-    &.done{
-
-    }
-
 }
 
 .cmp {

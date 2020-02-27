@@ -899,7 +899,7 @@ var render = function() {
                           {
                             staticClass: "badge",
                             class:
-                              "availability_" +
+                              "availability-" +
                               _vm.variation.variation.availability.id
                           },
                           [

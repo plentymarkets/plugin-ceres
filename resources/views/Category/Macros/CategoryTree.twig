@@ -138,7 +138,7 @@
                             childCount: {{ category.children | length }},
                             spacingPadding: {{ spacingPadding | json_encode }},
                             inlinePadding: {{ inlinePadding | json_encode }} }"
-                         class="expand_nav{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                         class="expand-nav{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                          {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                     </div>

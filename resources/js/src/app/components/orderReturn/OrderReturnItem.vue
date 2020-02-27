@@ -93,7 +93,7 @@
                     <template v-if="isDataFieldVisible('availability') && variation.variation.availability.names.name">
                         <div>
                             <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
-                            <span class="badge" :class="'availability_' + variation.variation.availability.id">
+                            <span class="badge" :class="'availability-' + variation.variation.availability.id">
                                 {{ variation.variation.availability.names.name }}
                             </span>
                         </div>

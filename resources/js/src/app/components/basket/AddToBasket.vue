@@ -10,7 +10,7 @@
             <i class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>
         </div>
 
-        <div class="d-inline d-lg-none" v-if="showQuantity && !useLargeScale">
+        <div class="d-inline" v-if="showQuantity && !useLargeScale" :class="{'d-lg-none': !$ceres.isItemView }">
             <div class="add-to-basket-container">
                 <div class="quantity-input-container">
                     <quantity-input :value="quantity"
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="d-inline d-lg-none" v-if="!showQuantity && !useLargeScale">
+        <div class="d-inline" v-if="!showQuantity && !useLargeScale" :class="{'d-lg-none': !isWishList }">
             <div class="btn-group" role="group" aria-label="Thumb Control">
                 <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
                     <icon icon="shopping-cart" class="fa-lg mobile-icon-right" :loading="waiting"></icon>

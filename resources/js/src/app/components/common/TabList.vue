@@ -1,6 +1,5 @@
 <script>
 import { isDefined } from "../../helper/utils";
-import TabItem from "./TabItem.vue";
 
 const TabNavItem = {
     
@@ -63,11 +62,6 @@ const TabNavItem = {
 export default {
 
     name: "tab-list",
-
-    components:
-    {
-        TabItem
-    },
 
     render(createElement)
     {

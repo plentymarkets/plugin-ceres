@@ -11,7 +11,7 @@
     }
 
     .cmp-address-list {
-        transition: all .3s ease;
+        @include transition(all .3s ease);
     }
 }
 
@@ -40,10 +40,12 @@
     .payment-change-box-item:nth-child(2) {
         order: 1;
     }
+
     .cannot-change-payment {
         width: 100%;
         padding: 5px;
         font-size: 1rem;
+
         .info-badge {
             margin-left: .2rem;
         }

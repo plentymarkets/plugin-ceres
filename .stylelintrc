@@ -21,6 +21,12 @@
             {
                 "ignore": "local"
             }
+        ],
+        "selector-type-no-unknown": [
+            true,
+            {
+                "ignoreTypes": ["category-item"]
+            }
         ]
     }
 }
