@@ -16,6 +16,7 @@
 
 {% set sourceType = widget.settings.sourceType.mobile %}
 {% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set fallbackImagePath = widget.settings.fallbackImagePath.mobile | default("") %}
 {% set colorPalette = widget.settings.colorPalette.mobile | default("none") %}
 {% set customColor = widget.settings.customColor.mobile %}
 
@@ -29,6 +30,7 @@
     {{ Twig.set("url", "category.details[0].image2Path") }}
 {% elseif sourceType == "custom-image" %}
     {{ Twig.set("url", customImagePath | json_encode) }}
+    {{ Twig.set("fallbackUrl", customImagePath | json_encode) }}
 {% endif %}
 
 {{ Twig.if("url | trim is not empty") }}
@@ -60,6 +62,7 @@
 
             {{ Twig.if("hasUrl") }}
                 image-url="{{ Twig.print("url") }}"
+                fallback-url="{{ Twig.print("fallbackUrl") }}"
             {{ Twig.endif() }}
             :is-background-image="true"
 
