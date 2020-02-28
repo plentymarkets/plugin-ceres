@@ -97,7 +97,7 @@ export default {
 
         getTargetUrl(item)
         {
-            if (this.suggestionType === "item")
+            if (item.url && item.url.length)
             {
                 return item.url;
             }
