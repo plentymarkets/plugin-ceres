@@ -17,7 +17,7 @@
                     <div class="label" :class="{ 'compact': item.beforeLabel && item.afterLabel }">
                         <p class="small mb-0" v-if="item.beforeLabel">{{ item.beforeLabel }}</p>
                         <p class="mb-0" v-html="getHighlightedLabel(item.label)"></p>
-                        <p class="small mb-0" v-if="item.afterLabel">{{ item.beforeLabel }}</p>
+                        <p class="small mb-0" v-if="item.afterLabel">{{ item.afterLabel }}</p>
                     </div>
 
                     <div class="count" v-if="item.count > 0">
