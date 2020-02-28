@@ -11,5 +11,12 @@
     window.ceresStore.commit("addFacets", {{ fakeFacets | json_encode | raw }});
     window.ceresStore.commit("setSelectedFacetsByIds", window.ceresStore.state.itemList.facets[0].values.map(value => value.id));
 
-    window.ceresStore.commit("setAutocompleteResult", {{ services.itemList.getItemList("random", null, null, 5).documents | json_encode | raw }});
+    {% set searchAutocompleteResult =  services.searchAutocomplete.transformResult(services.itemList.getItemList("random", null, null, 5, null, true)) %}
+    {% set searchAutocompleteItems = searchAutocompleteResult["item"] %}
+    {% set searchAutocompleteCategories = searchAutocompleteResult["category"] %}
+
+    window.ceresStore.commit("setAutocompleteResult", {
+        "item": {{ searchAutocompleteItems | json_encode | raw }},
+        "category": {{ searchAutocompleteCategories | json_encode | raw }}
+    });
 </script>

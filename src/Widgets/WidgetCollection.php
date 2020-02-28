@@ -65,7 +65,9 @@ use Ceres\Widgets\Grid\ThreeColumnWidget;
 use Ceres\Widgets\Grid\TwoColumnWidget;
 use Ceres\Widgets\Header\BreadcrumbWidget;
 use Ceres\Widgets\Header\NavigationWidget;
-use Ceres\Widgets\Header\SearchSuggestionItemsWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionCategoryWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionItemWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionSuggestionWidget;
 use Ceres\Widgets\Header\TopBarWidget;
 use Ceres\Widgets\Item\AddToBasketWidget;
 use Ceres\Widgets\Item\AddToWishListWidget;
@@ -176,7 +178,9 @@ class WidgetCollection
     const HEADER_WIDGETS = [
         BreadcrumbWidget::class,
         NavigationWidget::class,
-        SearchSuggestionItemsWidget::class,
+        SearchSuggestionCategoryWidget::class,
+        SearchSuggestionItemWidget::class,
+        SearchSuggestionSuggestionWidget::class,
         TopBarWidget::class
     ];
 

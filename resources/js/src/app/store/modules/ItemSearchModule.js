@@ -5,9 +5,8 @@ import Vue from "vue";
 const state =
     {
         autocompleteRequest: null,
-        autocompleteResult: [],
+        autocompleteResult: { item: [], category: [], suggestion: [] },
         autocompleteSearchString: "",
-        // item, category, autocomplete
         autocompleteTypes: new Set()
     };
 
@@ -18,9 +17,9 @@ const mutations =
             state.autocompleteRequest = request;
         },
 
-        setAutocompleteResult(state, result = [])
+        setAutocompleteResult(state, data)
         {
-            Vue.set(state, "autocompleteResult", result);
+            Vue.set(state, "autocompleteResult", data);
         },
 
         setAutocompleteSearchString(state, searchString)
@@ -59,7 +58,7 @@ const actions =
             newRequest.done(response =>
             {
                 commit("setAutocompleteRequest", null);
-                commit("setAutocompleteResult", response.documents);
+                commit("setAutocompleteResult", response);
             });
         }
     };
