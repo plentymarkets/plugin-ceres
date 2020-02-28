@@ -102,7 +102,7 @@ export default {
                 return item.url;
             }
 
-            return `${ App.urls.search }?query=${ item.label }`
+            return `${ App.urls.search }?query=${ encodeURIComponent(item.label) }`
         },
 
         onSuggestionSelected(item)
