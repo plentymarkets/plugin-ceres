@@ -1,14 +1,14 @@
 <template>
-    <picture v-if="!isBackgroundImage" class="lozad" style="display:block; min-height:1rem;" :data-iesrc="fallbackUrl || imageUrl">
+    <picture v-if="!isBackgroundImage" class="lozad d-block" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="sizingClass">
         <source :srcset="imageUrl" :type="mimeType">
     </picture>
-    <div v-else :data-background-image="backgroundSource">
+    <div v-else :data-background-image="backgroundSource" :class="sizingClass">
         <slot></slot>
     </div>
 </template>
 
 <script>
-import lozad from "lozad";
+import lozad from "../../plugins/lozad";
 
 export default {
     props: {
@@ -17,7 +17,8 @@ export default {
             required: true
         },
         fallbackUrl: String,
-        isBackgroundImage: Boolean
+        isBackgroundImage: Boolean,
+        sizingClass: String
     },
 
     mounted()

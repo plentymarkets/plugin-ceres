@@ -95,7 +95,7 @@
     {{ Twig.if("imageUrl | trim is not empty") }}
         {% if widget.settings.lazyLoading.mobile %}
             <lazy-img
-                class="img-{{ imageSize }}"
+                sizing-class="img-{{ imageSize }}"
                 image-url="{{ Twig.print("imageUrl") }}"
                 fallback-url="{{ Twig.print("fallbackImageUrl") }}"
                 alt="{{ Twig.print("imageAltText") }}"
