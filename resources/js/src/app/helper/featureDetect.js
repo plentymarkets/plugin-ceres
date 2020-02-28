@@ -16,10 +16,13 @@ export function detectWebP(browser)
     }
 
     // Firefox 65 returns a false negative, even though it supports WebP
-    if (browser.name === "firefox" && browser.version === 65)
+    const version = browser.version.split(".")[0];
+
+    if (browser.name === "firefox" && parseInt(version) >= 65)
     {
         isSupported = true;
     }
+    console.log(browser);
 
     return isSupported;
 }
