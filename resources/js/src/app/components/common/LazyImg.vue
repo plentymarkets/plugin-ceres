@@ -47,7 +47,8 @@ export default {
          */
         backgroundSource() {
             // Add check for webp support, if true return modern, else fallbaclk
-            return this.imageUrl;
+
+            return App.features.webp ? this.imageUrl : this.fallbackUrl;
         },
 
         /**
