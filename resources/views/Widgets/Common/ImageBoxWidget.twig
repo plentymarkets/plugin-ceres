@@ -32,6 +32,7 @@
     {{ Twig.set("name", "category.details[0].name") }}
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
+    {{ Twig.set("fallbackImageUrl", "imageUrl") }}
     {{ Twig.set("imageAltText", "category.details[0].name") }}
 
     {{ Twig.if("imageUrl | trim is not empty") }}
@@ -47,6 +48,7 @@
     {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
     {{ Twig.set("url", "itemData | itemURL") }}
     {{ Twig.set("imageUrl", "itemImage.url") }}
+    {{ Twig.set("fallbackImageUrl", "imageUrl") }}
     {{ Twig.set("imageAltText", "itemImage.alternate") }}
     {{ Twig.set("imageName", "itemImage.name") }}
 
@@ -54,6 +56,7 @@
 
     {{ Twig.set("url", urlValue | json_encode) }}
     {{ Twig.set("imageUrl", urlValue | json_encode) }}
+    {{ Twig.set("fallbackImageUrl", "imageUrl") }}
     {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
 
 {% elseif urlType == 'external' and urlValue | trim is not empty %}
@@ -64,7 +67,11 @@
 
 {% if customImagePath | trim is not empty %}
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
-    {{ Twig.set("fallbackImageUrl", fallbackImagePath | json_encode) }}
+    {% if fallbackImagePath | trim is not empty %}
+        {{ Twig.set("fallbackImageUrl", fallbackImagePath | json_encode) }}
+    {% else %}
+        {{ Twig.set("fallbackImageUrl", customImagePath | json_encode) }}
+    {% endif %}
     {{ Twig.if("imageAltText is empty") }}
         {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
     {{ Twig.endif() }}
@@ -95,12 +102,15 @@
                 {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </lazy-img>
         {% else %}
-            <img
-                class="img-{{ imageSize }}"
-                src="{{ Twig.print("imageUrl") }}"
-                alt="{{ Twig.print("imageAltText") }}"
-                {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
-            />
+            <picture>
+                <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("'.webp' in imageUrl") }} type="image/webp" {{ Twig.endif() }}>
+                <img
+                        class="img-{{ imageSize }}"
+                        src="{{ Twig.print("fallbackImageUrl") }}"
+                        alt="{{ Twig.print("imageAltText") }}"
+                        {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
+                />
+            </picture>
         {% endif %}
     {{ Twig.endif() }}
 

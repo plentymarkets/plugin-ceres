@@ -1,6 +1,6 @@
 <template>
-    <picture class="lozad" data-alt="" :data-iesrc="fallbackUrl || imageUrl">
-        <source :srcset="imageUrl">
+    <picture v-if="!isBackgroundImage" class="lozad" style="display:block; min-height:1rem;" :data-iesrc="fallbackUrl || imageUrl">
+        <source :srcset="imageUrl" :type="mimeType">
     </picture>
     <div v-else :data-background-image="backgroundSource">
         <slot></slot>
@@ -41,8 +41,19 @@ export default {
     },
 
     computed: {
+        /**
+         *  Determine appropriate image url to use as background source
+         */
         backgroundSource() {
+            // Add check for webp support, if true return modern, else fallbaclk
             return this.imageUrl;
+        },
+
+        /**
+         * Check if url points to a .webp image and return appropriate mime-type
+         */
+        mimeType() {
+            return this.imageUrl.toLowerCase().includes(".webp") ? 'image/webp' : null;
         }
     }
 }

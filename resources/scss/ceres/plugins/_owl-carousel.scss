@@ -107,15 +107,17 @@
     }
 }
 
-.owl-carousel .owl-item img {
-    // display block is required for lozad framework
-    display: block;
-    width: 100%;
-    object-fit: contain;
-    height: 100%;
+.owl-carousel .owl-item {
+    img, picture {
+        // display block is required for lozad framework
+        display: block;
+        width: 100%;
+        object-fit: contain;
+        height: 100%;
 
-    &:not([src]) {
-        opacity: 0;
+        &:not([src]) {
+            opacity: 0;
+        }
     }
 }
 

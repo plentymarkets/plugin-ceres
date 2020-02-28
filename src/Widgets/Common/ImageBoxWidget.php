@@ -83,8 +83,8 @@ class ImageBoxWidget extends BaseWidget
             ->withDefaultValue("")
             ->withName("Widget.imageBoxCustomImagePathLabel")
             ->withTooltip("Widget.imageBoxCustomImagePathTooltip");
-        
-        $settings->createFile("fallbackImagePatch")
+
+        $settings->createFile("fallbackImagePath")
             ->withDefaultValue("")
             ->withName("Widget.imageBoxFallbackImagePathLabel")
             ->withTooltip("Widget.imageBoxFallbackImagePathTooltip")
