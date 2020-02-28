@@ -103,12 +103,6 @@ export default {
             }
 
             return `${ App.urls.search }?query=${ encodeURIComponent(item.label) }`
-        },
-
-        onSuggestionSelected(item)
-        {
-            this.$store.commit("setItemListSearchString", item.label);
-            window.open(this.getTargetUrl(item), "_self", false);
         }
     }
 }
