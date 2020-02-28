@@ -116,9 +116,13 @@ const onIntersection = (load, loaded) => (entries, observer) =>
 
             if (!isLoaded(entry.target))
             {
-                load(entry.target);
-                markAsLoaded(entry.target);
-                loaded(entry.target);
+                entry.target.classList.toggle("lozad");
+                requestAnimationFrame(() =>
+                {
+                    load(entry.target);
+                    markAsLoaded(entry.target);
+                    loaded(entry.target);
+                });
             }
         }
     });
