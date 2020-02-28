@@ -2,7 +2,6 @@
     position: absolute;
     top: 100%;
     z-index: $zindex-7;
-    max-height: 310px;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
 }
@@ -53,6 +52,11 @@
         text-align: center;
         background: $gray-200;
     }
+}
+
+.autocomplete-suggestion:nth-child(n + #{$autocomplete-max-items + 1}),
+.widget-inner-stacked .autocomplete-suggestion:nth-child(n + #{($autocomplete-max-items / 2)}) {
+    display: none;
 }
 
 .search-input {
