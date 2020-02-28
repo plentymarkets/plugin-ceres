@@ -460,19 +460,16 @@ var render = function() {
         "div",
         { staticClass: "card" },
         [
-          _c("div", { staticClass: "h3" }, [_vm._v(_vm._s(_vm.facetName))]),
+          _c("div", { staticClass: "h3 title" }, [
+            _vm._v(_vm._s(_vm.facetName))
+          ]),
           _vm._v(" "),
           _vm.facet.type === "price"
             ? _c("div", [_c("item-filter-price")], 1)
             : _vm._l(_vm.facets, function(value) {
                 return _c(
                   "div",
-                  {
-                    key: value.id,
-                    staticClass: "form-check-wrapper",
-                    class: _vm.paddingClasses,
-                    style: _vm.paddingInlineStyles
-                  },
+                  { key: value.id, staticClass: "form-check-wrapper" },
                   [
                     _c("div", { staticClass: "form-check" }, [
                       _c("input", {
@@ -494,6 +491,11 @@ var render = function() {
                         "label",
                         {
                           staticClass: "form-check-label",
+                          class: [
+                            _vm.paddingClasses,
+                            _vm.isSelected(value.id) ? "bg-appearance" : ""
+                          ],
+                          style: _vm.paddingInlineStyles,
                           attrs: { for: "option-" + value.id }
                         },
                         [
@@ -505,7 +507,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "filter-badge bg-appearance" }, [
+                      _c("div", { staticClass: "filter-badge" }, [
                         _vm._v(_vm._s(value.count))
                       ])
                     ])

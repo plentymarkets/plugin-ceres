@@ -2,6 +2,7 @@
     align-items: center;
 }
 
+// stylelint-disable
 @include media-breakpoint-down(xs) {
     html.facebook {
         .checkout .modal.show,

@@ -31,7 +31,8 @@ export default Vue.component("order-documents", {
                 "delivery_note",
                 "order_confirmation",
                 "pickup_delivery",
-                "reversal_document"
+                "reversal_document",
+                "return_note"
             ]
         },
 

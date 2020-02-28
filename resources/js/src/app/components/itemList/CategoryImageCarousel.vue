@@ -127,6 +127,16 @@ export default {
                     `<i id="owl-nav-text-left-${this._uid}" class='fa fa-chevron-left' aria-hidden='true'></i>`,
                     `<i id="owl-nav-text-right-${this._uid}" class='fa fa-chevron-right' aria-hidden='true'></i>`
                 ],
+                onTranslated(event)
+                {
+                    const element = event.target.querySelector(".owl-item.active img");
+
+                    if (element && element.dataset.src && !element.src)
+                    {
+                        element.src = element.dataset.src;
+                        element.removeAttribute("data-src");
+                    }
+                },
                 onInitialized: event =>
                 {
                     if (this.showNav)
