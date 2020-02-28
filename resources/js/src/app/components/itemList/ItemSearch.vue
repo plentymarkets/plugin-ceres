@@ -142,7 +142,7 @@ export default {
         {
             setTimeout(() =>
             {
-                this.isSearchFocused = false;
+                this.isSearchFocused = !!value;
             }, 100);
         }
     },
