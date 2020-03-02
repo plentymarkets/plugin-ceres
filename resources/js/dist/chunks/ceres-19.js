@@ -685,7 +685,8 @@ var render = function() {
                           "\n                        " +
                             _vm._s(
                               _vm.$translate("Ceres::Template.basketCoupon")
-                            )
+                            ) +
+                            "\n                    "
                         )
                       ]),
                       _c("dd", { staticClass: "font-weight-bold" }, [
