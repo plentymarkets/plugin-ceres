@@ -104,7 +104,7 @@
         <div class="widget-caption widget-image-box-caption {{ style }}">
             {% if customCaption %}
                 <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-image-box-caption " ~ style ) }}>
-                    {{ headline | striptags('<p><br><span><h1><h2><h3><h4><h5><h6>') | raw }}
+                    {{ headline | striptags('<p><strong><br><span><h1><h2><h3><h4><h5><h6>') | raw }}
                 </div>
             {% else %}
                 {{ Twig.if("name | trim is not empty") }}
