@@ -1,4 +1,11 @@
 /**
+ * Lozad.js
+ * We have found a limitation in lozad.js in connection with HTML5s <picture> tags.
+ * Therefore we've decided to directly integrate lozad into our code and adapt it
+ * to better fit our use cases.
+ */
+
+/**
  * Detect IE browser
  * @const {boolean}
  * @private
