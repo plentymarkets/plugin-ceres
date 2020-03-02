@@ -1,5 +1,5 @@
 <template>
-    <picture v-if="!isBackgroundImage" class="lozad d-block" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="sizingClass">
+    <picture v-if="!isBackgroundImage" class="lozad" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="sizingClass">
         <source :srcset="imageUrl" :type="mimeType">
     </picture>
     <div v-else :data-background-image="backgroundSource" :class="sizingClass">

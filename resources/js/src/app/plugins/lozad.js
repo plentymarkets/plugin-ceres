@@ -26,7 +26,14 @@ const defaultConfig = {
 
             if (element.getAttribute("data-picture-class"))
             {
-                img.classList.toggle(element.getAttribute("data-picture-class"));
+                let classes = element.getAttribute("data-picture-class");
+
+                classes = classes.split(" ");
+
+                for (let selector of classes)
+                {
+                    img.classList.toggle(selector);
+                }
             }
 
             element.append(img);
@@ -91,7 +98,12 @@ const defaultConfig = {
 
         if (element.getAttribute("data-toggle-class"))
         {
-            element.classList.toggle(element.getAttribute("data-toggle-class"));
+            const classes = element.getAttribute("data-toggle-class").split(" ");
+
+            for (let selector of classes)
+            {
+                element.classList.toggle(selector);
+            }
         }
     },
     loaded()
