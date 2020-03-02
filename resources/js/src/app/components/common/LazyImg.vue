@@ -50,7 +50,7 @@ export default {
          *  Determine appropriate image url to use as background source
          */
         backgroundSource() {
-            // Add check for webp support, if true return modern, else fallbaclk
+            // Add check for webp support, if true return modern, else fallback
 
             return App.features.webp ? this.imageUrl : this.fallbackUrl;
         },
