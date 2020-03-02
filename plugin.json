@@ -258,7 +258,7 @@
         },
         {
             "key"           : "SingleItem.AfterScriptsLoaded",
-            "name"          : "Script loader: After scripts loaded",
+            "name"          : "Single item: After scripts loaded",
             "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised on the single item."
         },
         {
@@ -477,7 +477,7 @@
         },
         {
             "key"           : "Checkout.AfterScriptsLoaded",
-            "name"          : "Script loader: After scripts loaded",
+            "name"          : "Checkout: After scripts loaded",
             "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised in the checkout."
         },
         {

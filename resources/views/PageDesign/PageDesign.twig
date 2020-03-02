@@ -32,6 +32,13 @@
     {% for styleTemplate in get_additional_styles() %}
         {% include styleTemplate.path ignore missing with styleTemplate.params %}
     {% endfor %}
+
+    {% if assetName == 'ceres-checkout' %}
+        {{ LayoutContainer.show("Ceres::Checkout.Styles") }}
+    {% endif %}
+    {% if assetName == 'ceres-item' %}
+        {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
+    {% endif %}
 </head>
 
 <body class="{{ bodyClasses | join(' ') }}">
@@ -232,11 +239,15 @@
 
 {% if assetName == 'ceres-checkout' %}
     {{ LayoutContainer.show("Ceres::Checkout.AfterScriptsLoaded") }}
-    {{ LayoutContainer.show("Ceres::Checkout.Styles") }}
+    <div>Detlef2002</div>
+    <div>{{ assetName }}</div>
+    <script>console.log("detlef2000");</script>
 {% endif %}
 {% if assetName == 'ceres-item' %}
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
-    {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
+    <div>Detlef3003</div>
+    <div>{{ assetName }}</div>
+    <script>console.log("detlef3000");</script>
 {% endif %}
 
 <script>
