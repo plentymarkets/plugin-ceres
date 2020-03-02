@@ -22,7 +22,6 @@ export function detectWebP(browser)
     {
         isSupported = true;
     }
-    console.log(browser);
 
     return isSupported;
 }
