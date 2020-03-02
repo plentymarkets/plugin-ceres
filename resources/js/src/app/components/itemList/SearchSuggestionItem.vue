@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="autocompleteResult.length">
+        <template v-if="autocompleteResult && autocompleteResult.length">
             <div>
                 <a
                     v-for="(item, index) in autocompleteResult"
@@ -10,7 +10,7 @@
                     :key="index"
                     :href="getTargetUrl(item)">
 
-                    <div class="image mr-3" v-if="showItemImages">
+                    <div class="image mr-3" v-if="showImages">
                         <img v-if="item.image" :src="item.image">
                     </div>
 
@@ -20,7 +20,7 @@
                         <p class="small mb-0" v-if="item.afterLabel">{{ item.afterLabel }}</p>
                     </div>
 
-                    <div class="count" v-if="showCategoryCount && item.count > 0">
+                    <div class="count" v-if="showCount && item.count > 0">
                         <span>{{ item.count }}</span>
                     </div>
                 </a>
@@ -40,7 +40,7 @@ import { mapState } from 'vuex';
 export default {
     props:
     {
-        showItemImages: Boolean,
+        showImages: Boolean,
 
         paddingClasses:
         {
@@ -60,7 +60,7 @@ export default {
             required: true
         },
 
-        showCategoryCount: Boolean
+        showCount: Boolean
     },
 
     computed:
