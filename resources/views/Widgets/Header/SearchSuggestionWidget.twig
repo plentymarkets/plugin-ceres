@@ -2,7 +2,7 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set showItemImages    = widget.settings.showItemImages.mobile is same as (true) %}
-{% set showCategoryCount = widget.settings.showCount.mobile is same as (true) %}
+{% set showCategoryCount = widget.settings.showCategoryCount.mobile is same as (true) %}
 
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set appearance      = widget.settings.appearance.mobile | default("primary") %}
