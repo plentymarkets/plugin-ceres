@@ -1,8 +1,8 @@
 .autocomplete-suggestions {
     position: absolute;
     top: 100%;
-    max-height: 80vh;
     z-index: $zindex-7;
+    max-height: 80vh;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
 }
