@@ -12,14 +12,18 @@
                 </slot>
             </div>
 
-            <slot name="autocomplete-suggestions" v-if="isSearchFocused && autocompleteResult.length">
-                <div class="autocomplete-suggestions shadow bg-white w-100 overflow-auto" v-if="isSearchFocused && autocompleteResult.length">
-                    <search-suggestion-items
-                        :show-item-images="showItemImages"
-                        :forward-to-single-item="forwardToSingleItem">
-                    </search-suggestion-items>
+            <template v-if="isSearchFocused">
+                <div v-show="hasAutocompleteResults">
+                    <slot name="autocomplete-suggestions">
+                        <div class="autocomplete-suggestions shadow bg-white w-100 ">
+                            <search-suggestion-item
+                                :show-item-images="showItemImages"
+                                suggestion-type="item">
+                            </search-suggestion-item>
+                        </div>
+                    </slot>
                 </div>
-            </slot>
+            </template>
         </div>
     </div>
 </template>
@@ -39,8 +43,7 @@ export default {
     props: {
         showItemImages:
         {
-            type: Boolean,
-            default: false
+            type: Boolean
         },
         forwardToSingleItem:
         {
@@ -73,6 +76,15 @@ export default {
 
     computed:
     {
+        hasAutocompleteResults()
+        {
+            const item       = this.autocompleteResult.item;
+            const category   = this.autocompleteResult.category;
+            const suggestion = this.autocompleteResult.suggestion;
+
+            return App.isShopBuilder || (item && item.length) || (category && category.length) || (suggestion && suggestion.length);
+        },
+
         isShopBuilder()
         {
             return App.isShopBuilder;
@@ -121,7 +133,7 @@ export default {
             }
             else
             {
-                this.$store.commit("setAutocompleteResult", []);
+                this.$store.commit("setAutocompleteResult", { item: [], category: [], suggestion: [] });
             }
         },
 

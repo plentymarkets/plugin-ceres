@@ -1352,6 +1352,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -1362,8 +1366,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "item-search",
   props: {
     showItemImages: {
-      type: Boolean,
-      default: false
+      type: Boolean
     },
     forwardToSingleItem: {
       type: Boolean,
@@ -1389,6 +1392,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.timeout, 500));
   },
   computed: _objectSpread({
+    hasAutocompleteResults: function hasAutocompleteResults() {
+      var item = this.autocompleteResult.item;
+      var category = this.autocompleteResult.category;
+      var suggestion = this.autocompleteResult.suggestion;
+      return App.isShopBuilder || item && item.length || category && category.length || suggestion && suggestion.length;
+    },
     isShopBuilder: function isShopBuilder() {
       return App.isShopBuilder;
     }
@@ -1425,7 +1434,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (searchString.length >= 2) {
         this.$store.dispatch("loadItemSearchAutocomplete", searchString);
       } else {
-        this.$store.commit("setAutocompleteResult", []);
+        this.$store.commit("setAutocompleteResult", {
+          item: [],
+          category: [],
+          suggestion: []
+        });
       }
     },
     // hide autocomplete after 100ms to make clicking on it possible
@@ -32630,27 +32643,43 @@ var render = function() {
             2
           ),
           _vm._v(" "),
-          _vm.isSearchFocused && _vm.autocompleteResult.length
-            ? _vm._t("autocomplete-suggestions", [
-                _vm.isSearchFocused && _vm.autocompleteResult.length
-                  ? _c(
-                      "div",
+          _vm.isSearchFocused
+            ? [
+                _c(
+                  "div",
+                  {
+                    directives: [
                       {
-                        staticClass:
-                          "autocomplete-suggestions shadow bg-white w-100 overflow-auto"
-                      },
-                      [
-                        _c("search-suggestion-items", {
-                          attrs: {
-                            "show-item-images": _vm.showItemImages,
-                            "forward-to-single-item": _vm.forwardToSingleItem
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ])
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.hasAutocompleteResults,
+                        expression: "hasAutocompleteResults"
+                      }
+                    ]
+                  },
+                  [
+                    _vm._t("autocomplete-suggestions", [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "autocomplete-suggestions shadow bg-white w-100 "
+                        },
+                        [
+                          _c("search-suggestion-item", {
+                            attrs: {
+                              "show-item-images": _vm.showItemImages,
+                              "suggestion-type": "item"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ],
+                  2
+                )
+              ]
             : _vm._e()
         ],
         2
@@ -54847,18 +54876,20 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var state = {
   autocompleteRequest: null,
-  autocompleteResult: [],
+  autocompleteResult: {
+    item: [],
+    category: [],
+    suggestion: []
+  },
   autocompleteSearchString: "",
-  // item, category, autocomplete
   autocompleteTypes: new Set()
 };
 var mutations = {
   setAutocompleteRequest: function setAutocompleteRequest(state, request) {
     state.autocompleteRequest = request;
   },
-  setAutocompleteResult: function setAutocompleteResult(state) {
-    var result = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-    vue__WEBPACK_IMPORTED_MODULE_12___default.a.set(state, "autocompleteResult", result);
+  setAutocompleteResult: function setAutocompleteResult(state, data) {
+    vue__WEBPACK_IMPORTED_MODULE_12___default.a.set(state, "autocompleteResult", data);
   },
   setAutocompleteSearchString: function setAutocompleteSearchString(state, searchString) {
     state.autocompleteSearchString = searchString;
@@ -54885,7 +54916,7 @@ var actions = {
     commit("setAutocompleteRequest", newRequest);
     newRequest.done(function (response) {
       commit("setAutocompleteRequest", null);
-      commit("setAutocompleteResult", response.documents);
+      commit("setAutocompleteResult", response);
     });
   }
 };
@@ -56632,8 +56663,8 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("category-item", function 
 });
 
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("item-search", _app_components_itemList_ItemSearch_vue__WEBPACK_IMPORTED_MODULE_25__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("search-suggestion-items", function () {
-  return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./app/components/itemList/SearchSuggestionItems.vue */ "./resources/js/src/app/components/itemList/SearchSuggestionItems.vue"));
+vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("search-suggestion-item", function () {
+  return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./app/components/itemList/SearchSuggestionItem.vue */ "./resources/js/src/app/components/itemList/SearchSuggestionItem.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("item-filter-list", function () {
   return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./app/components/itemList/filter/ItemFilterList.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilterList.vue"));
