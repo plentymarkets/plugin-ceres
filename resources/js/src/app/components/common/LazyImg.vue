@@ -1,6 +1,7 @@
 <template>
     <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="sizingClass">
         <source :srcset="imageUrl" :type="mimeType">
+        <noscript><img :src="fallbackUrl || imageUrl"></noscript>
     </picture>
     <div v-else :data-background-image="backgroundSource" :class="sizingClass">
         <slot></slot>
@@ -65,7 +66,7 @@ export default {
             {
                 return matches[1] === '.webp' ? 'image/webp' : null;
             }
-            
+
             return null;
         }
     }
