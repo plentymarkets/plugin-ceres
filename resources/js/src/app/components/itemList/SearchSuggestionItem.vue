@@ -20,7 +20,7 @@
                         <p class="small mb-0" v-if="item.afterLabel">{{ item.afterLabel }}</p>
                     </div>
 
-                    <div class="count" v-if="item.count > 0">
+                    <div class="count" v-if="showCategoryCount && item.count > 0">
                         <span>{{ item.count }}</span>
                     </div>
                 </a>
@@ -40,10 +40,7 @@ import { mapState } from 'vuex';
 export default {
     props:
     {
-        showItemImages:
-        {
-            type: Boolean
-        },
+        showItemImages: Boolean,
 
         paddingClasses:
         {
@@ -61,7 +58,9 @@ export default {
         {
             type: String,
             required: true
-        }
+        },
+
+        showCategoryCount: Boolean
     },
 
     computed:
