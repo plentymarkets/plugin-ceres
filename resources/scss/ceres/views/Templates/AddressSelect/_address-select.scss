@@ -15,6 +15,10 @@
             margin-bottom: 0;
             min-height: 115px;
         }
+
+        &:not(.items-empty){
+            cursor: pointer;
+        }
     }
 
     .dropdown-toggle{
@@ -81,7 +85,6 @@
     .item-inner{
         display: flex;
         flex-direction: row;
-        cursor: pointer;
         padding: 1em;
         margin-bottom: 0;
 
