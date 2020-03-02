@@ -25,3 +25,22 @@ export function detectWebP(browser)
 
     return isSupported;
 }
+
+export function detectWebPAsync()
+{
+    const testUri = "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA";
+
+    const img = new Image();
+
+    img.onload = function()
+    {
+        App.features.webp = (img.width > 0) && (img.height > 0);
+    };
+
+    img.onerror = function()
+    {
+        App.features.webp = false;
+    };
+
+    img.src = "data:image/webp;base64," + testUri;
+}
