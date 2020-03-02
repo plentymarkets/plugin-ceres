@@ -28,7 +28,7 @@
 
 .lozad {
     display: block;
-    height: 1px !important;
+    height: 1px !important; // stylelint-disable-line declaration-no-important
 }
 
 // stylelint-disable selector-type-no-unknown
