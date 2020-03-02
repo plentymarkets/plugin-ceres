@@ -5,7 +5,6 @@ const AutoFocusService = require("./services/AutoFocusService");
 import { debounce } from "./helper/debounce";
 import Vue from "vue";
 import { getStyle } from "./helper/dom";
-import { detectWebPAsync } from "./helper/featureDetect";
 
 // Frontend end scripts
 // eslint-disable-next-line
@@ -42,9 +41,6 @@ function CeresMain()
     {
         $("html").addClass("unkown-os");
     }
-
-    // App.features.webp = detectWebP(browser);
-    detectWebPAsync();
 
     $(window).scroll(function()
     {

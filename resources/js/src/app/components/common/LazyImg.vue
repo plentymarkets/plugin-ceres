@@ -10,6 +10,7 @@
 
 <script>
 import lozad from "../../plugins/lozad";
+import { detectWebP } from "../../helper/featureDetect";
 
 export default {
     props: {
@@ -20,6 +21,20 @@ export default {
         fallbackUrl: String,
         isBackgroundImage: Boolean,
         sizingClass: String
+    },
+
+    data()
+    {
+        return {
+            supported: undefined
+        }
+    },
+
+    beforeCreate() {
+        detectWebP(((supported) =>
+        {
+            this.supported = supported;
+        }));
     },
 
     mounted()
@@ -51,9 +66,7 @@ export default {
          *  Determine appropriate image url to use as background source
          */
         backgroundSource() {
-            // Add check for webp support, if true return modern, else fallback
-
-            return App.features.webp ? this.imageUrl : this.fallbackUrl;
+            return this.supported ? this.imageUrl : this.fallbackUrl;
         },
 
         /**

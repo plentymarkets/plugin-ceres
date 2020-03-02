@@ -1,46 +1,63 @@
+import { isNullOrUndefined } from "./utils";
+
 /**
- * Synchronous function to detect if WebP images are supported.
- *
- * @param browser object delivered by detect-browser
- * @returns {boolean}
+ * Asynchronous function to detect webP support
+ * @param callback
  */
-export function detectWebP(browser)
+export function detectWebP(callback)
 {
-    let isSupported = false;
-    const canvas = document.createElement("canvas");
-
-    // If canvas can return a WebP image, it is supported
-    if (canvas.getContext && canvas.getContext("2d"))
+    if (!isNullOrUndefined(App.features.webp))
     {
-        isSupported = canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0;
+        callback(App.features.webp);
+        return;
     }
 
-    // Firefox 65 returns a false negative, even though it supports WebP
-    const version = browser.version.split(".")[0];
+    const testUris = {
+        "lossy" : "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
+        "lossless": "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
+        "alpha": "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
+        "animation": "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
+    };
 
-    if (browser.name === "firefox" && parseInt(version) >= 65)
+    const promises = [];
+
+    for (const uri in testUris)
     {
-        isSupported = true;
+        promises.push(new Promise((resolve, reject) =>
+        {
+            _detectWebPSupport(testUris[uri], resolve);
+        }));
     }
 
-    return isSupported;
+    let isSupported = true;
+
+    Promise.all(promises)
+        .then(values =>
+        {
+            for (const value of values)
+            {
+                isSupported = isSupported && value;
+            }
+
+            App.features.webp = isSupported;
+
+            callback(isSupported);
+        });
 }
 
-export function detectWebPAsync()
+function _detectWebPSupport(uri, resolve)
 {
-    const testUri = "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA";
-
     const img = new Image();
 
     img.onload = function()
     {
-        App.features.webp = (img.width > 0) && (img.height > 0);
+        resolve((img.width > 0) && (img.height > 0));
     };
 
     img.onerror = function()
     {
-        App.features.webp = false;
+        resolve(false);
     };
 
-    img.src = "data:image/webp;base64," + testUri;
+    img.src = "data:image/webp;base64," + uri;
 }
