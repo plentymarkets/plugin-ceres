@@ -87,11 +87,13 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createFile('customImagePath')
             ->withCondition('sourceType === "custom-image"')
-            ->withName('Widget.backgroundImageSource');
+            ->withName('Widget.backgroundImageSourceLabel')
+            ->withTooltip('Widget.backgroundImageSourceTooltip');
 
         $settings->createFile('fallbackImagePath')
             ->withCondition('sourceType === "custom-image"')
-            ->withName('Widget.backgroundFallbackImageSource');
+            ->withName('Widget.backgroundFallbackImageSourceLabel')
+            ->withTooltip('Widget.backgroundFallbackImageSourceTooltip');
 
         $settings->createSelect('backgroundSize')
             ->withCondition('sourceType !== "none"')
