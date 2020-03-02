@@ -1,5 +1,5 @@
 <template>
-    <picture v-if="!isBackgroundImage" class="lozad" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="sizingClass">
+    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="sizingClass">
         <source :srcset="imageUrl" :type="mimeType">
     </picture>
     <div v-else :data-background-image="backgroundSource" :class="sizingClass">
@@ -25,6 +25,10 @@ export default {
     {
         this.$nextTick(() =>
         {
+            if(!this.isBackgroundImage)
+            {
+                this.$el.classList.toggle("lozad");
+            }
             lozad(this.$el).observe();
         });
     },
