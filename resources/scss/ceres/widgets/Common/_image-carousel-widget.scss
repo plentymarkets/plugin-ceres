@@ -92,6 +92,7 @@
             height: 100%;
 
             // stylelint-disable selector-no-qualifying-type
+            // stylelint-disable selector-max-compound-selectors
             img,
             picture img {
                 position: absolute;
@@ -107,6 +108,7 @@
                     object-fit: cover;
                 }
             }
+            // stylelint-enable selector-max-compound-selectors
             // stylelint-enable selector-no-qualifying-type
         }
 
