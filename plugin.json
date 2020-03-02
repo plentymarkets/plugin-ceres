@@ -257,6 +257,16 @@
             "description"   : "Override the image carousel on the single item."
         },
         {
+            "key"           : "SingleItem.AfterScriptsLoaded",
+            "name"          : "Script loader: After scripts loaded",
+            "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised on the single item."
+        },
+        {
+            "key"           : "SingleItem.Styles",
+            "name"          : "",
+            "description"   : ""
+        },
+        {
             "key"           : "BasketTotals.BeforeItemSum",
             "name"          : "Shopping cart: Before \"Value of items\"",
             "description"   : "Add content before the value of items in the Total column of the shopping cart."
@@ -464,6 +474,16 @@
             "key"           : "Checkout.CustomAddressField",
             "name"          : "Checkout: Address field container",
             "description"   : "Add content, e.g. one or multiple custom address fields, at the bottom of the address form."
+        },
+        {
+            "key"           : "Checkout.AfterScriptsLoaded",
+            "name"          : "Script loader: After scripts loaded",
+            "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised in the checkout."
+        },
+        {
+            "key"           : "Checkout.Styles",
+            "name"          : "",
+            "description"   : ""
         },
         {
             "key"           : "Ceres::Checkout.Headline",
