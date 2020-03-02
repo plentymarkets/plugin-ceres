@@ -260,6 +260,7 @@ $progress-border-radius:    .25rem !default;
 
 //Ceres variables
 $aside-columns-width: 30rem !default;
+$autocomplete-max-items: 10 !default;
 
 // Buttons
 //
@@ -9181,14 +9182,17 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     position: absolute;
     top: 100%;
     z-index: $zindex-7;
-    max-height: 310px;
     -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
 }
 
 .autocomplete-suggestion {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
@@ -9196,28 +9200,52 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     &:hover {
         background: $gray-300;
     }
+
+    .label {
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+        color: $gray-900;
+
+        .small {
+            color: $gray-600;
+        }
+
+        &.compact .small {
+            line-height: .85;
+        }
+    }
+
+    .image {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 40px;
+        height: 40px;
+
+    }
+
+    img {
+        max-width: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+    }
+
+    .count span {
+        display: inline-block;
+        min-width: 3em;
+        padding: .1rem 0;
+        font-size: .85rem;
+        color: $gray-600;
+        text-align: center;
+        background: $gray-200;
+    }
 }
 
-.autocomplete-item-name {
-    -ms-flex-item-align: center;
-        align-self: center;
-    max-width: 0;
-    color: $gray-900;
-}
-
-.autocomplete-image-container {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 40px;
-    height: 40px;
-}
-
-.autocomplete-image {
-    max-width: 100%;
-    -o-object-fit: contain;
-       object-fit: contain;
+.autocomplete-suggestion:nth-child(n + #{$autocomplete-max-items + 1}),
+.widget-inner-stacked .autocomplete-suggestion:nth-child(n + #{($autocomplete-max-items / 2)}) {
+    display: none;
 }
 
 .search-input {
