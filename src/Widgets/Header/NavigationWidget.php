@@ -121,6 +121,12 @@ class NavigationWidget extends BaseWidget
             ->withTooltip("Widget.navigationCompanyLogoUrlTooltip")
             ->withDefaultValue("");
 
+        $settingsFactory->createFile('fallbackImagePath')
+            ->withCondition("!!companyLogoUrl")
+            ->withName('Widget.navigationFallbackImagePathLabel')
+            ->withTooltip("Widget.navigationFallbackImagePathTooltip")
+            ->withDefaultValue("");
+
         $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
