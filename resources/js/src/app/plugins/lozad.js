@@ -30,7 +30,7 @@ const defaultConfig = {
 
                 classes = classes.split(" ");
 
-                for (let selector of classes)
+                for (const selector of classes)
                 {
                     img.classList.toggle(selector);
                 }
@@ -100,7 +100,7 @@ const defaultConfig = {
         {
             const classes = element.getAttribute("data-toggle-class").split(" ");
 
-            for (let selector of classes)
+            for (const selector of classes)
             {
                 element.classList.toggle(selector);
             }
