@@ -11541,7 +11541,9 @@ html.ios {
 }
 
 button:focus {
-	outline:none;
+    outline:none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }
 
 // button combinations 

@@ -12590,7 +12590,8 @@ html.ios textarea {
   border-radius: 0 !important; }
 
 button:focus {
-  outline: none; }
+  outline: none;
+  box-shadow: none; }
 
 .btn-group.extended,
 .input-group.extended {
