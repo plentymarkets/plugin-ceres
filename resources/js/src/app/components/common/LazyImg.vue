@@ -1,9 +1,9 @@
 <template>
-    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="sizingClass">
-        <source :srcset="imageUrl" :type="mimeType">
+    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass">
+        <source v-if="isWebP" :srcset="imageUrl" type="image/webp">
         <noscript><img :src="fallbackUrl || imageUrl"></noscript>
     </picture>
-    <div v-else :data-background-image="backgroundSource" :class="sizingClass">
+    <div v-else :data-background-image="backgroundSource" :class="pictureClass">
         <slot></slot>
     </div>
 </template>
@@ -20,7 +20,7 @@ export default {
         },
         fallbackUrl: String,
         isBackgroundImage: Boolean,
-        sizingClass: String
+        pictureClass: String
     },
 
     data()
@@ -72,15 +72,15 @@ export default {
         /**
          * Check if url points to a .webp image and return appropriate mime-type
          */
-        mimeType() {
+        isWebP() {
             const matches = this.imageUrl.match(/.?(\.\w+)(?:$|\?)/);
 
             if(matches)
             {
-                return matches[1] === '.webp' ? 'image/webp' : null;
+                return matches[1] === '.webp';
             }
 
-            return null;
+            return false;
         }
     }
 }
