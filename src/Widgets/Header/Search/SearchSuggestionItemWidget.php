@@ -23,8 +23,8 @@ class SearchSuggestionItemWidget extends SearchSuggestionBaseWidget
 
         $settings->withPointer('appearance');
 
-        $settings->createCheckbox('showItemImages')
-            ->withName('Widget.searchSuggestionItemShowItemImagesLabel')
+        $settings->createCheckbox('showImages')
+            ->withName('Widget.searchSuggestionShowImagesLabel')
             ->withDefaultValue(false);
 
         return $settings->toArray();
