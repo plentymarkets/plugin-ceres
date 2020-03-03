@@ -1,6 +1,6 @@
 <template>
     <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass">
-        <source v-if="isWebP" :srcset="imageUrl" type="image/webp">
+        <source :srcset="imageUrl" :type="mimeType">
         <noscript><img :src="fallbackUrl || imageUrl"></noscript>
     </picture>
     <div v-else :data-background-image="backgroundSource" :class="pictureClass">
@@ -30,23 +30,31 @@ export default {
         }
     },
 
-    beforeCreate() {
-        detectWebP(((supported) =>
-        {
-            this.supported = supported;
-        }));
-    },
-
     mounted()
     {
-        this.$nextTick(() =>
-        {
-            if(!this.isBackgroundImage)
+        const mount = () => {
+            this.$nextTick(() =>
             {
-                this.$el.classList.toggle("lozad");
-            }
-            lozad(this.$el).observe();
-        });
+                if(!this.isBackgroundImage)
+                {
+                    this.$el.classList.toggle("lozad");
+                }
+                lozad(this.$el).observe();
+            });
+        };
+
+        if(this.isBackgroundImage)
+        {
+            detectWebP(((supported) =>
+            {
+                this.supported = supported;
+                mount();
+            }));
+        }
+        else
+        {
+            mount();
+        }
     },
 
     watch:
@@ -72,15 +80,15 @@ export default {
         /**
          * Check if url points to a .webp image and return appropriate mime-type
          */
-        isWebP() {
+        mimeType() {
             const matches = this.imageUrl.match(/.?(\.\w+)(?:$|\?)/);
 
             if(matches)
             {
-                return matches[1] === '.webp';
+                return matches[1] === ".webp" ? "image/webp" : null;
             }
 
-            return false;
+            return null;
         }
     }
 }
