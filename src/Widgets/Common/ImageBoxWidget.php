@@ -88,7 +88,7 @@ class ImageBoxWidget extends BaseWidget
             ->withDefaultValue("")
             ->withName("Widget.imageBoxFallbackImagePathLabel")
             ->withTooltip("Widget.imageBoxFallbackImagePathTooltip")
-            ->withCondition("!!customImagePath");
+            ->withCondition("!!customImagePath && /.?(\.webp)(?:$|\?)/.test(customImagePath)");
 
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageBoxLazyLoadingName")
