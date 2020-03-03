@@ -19,7 +19,7 @@
 {% set languageUrls = services.url.getLanguageURLs() %}
 
 {% if canonicalUrl is not null %}
-    <link rel="canonical" href="{{ canonicalUrl }}">
+    <link rel="canonical" href="{{ canonicalUrl  ~ queryString() }}">
 {% endif %}
 
 {% if services.url.isCanonical() %}

@@ -12,7 +12,7 @@
 {% if block('robots') is defined %}
     {% set robots = block('robots') | default('NOINDEX, NOFOLLOW') %}
 {% elseif details is not null %}
-    {% set robots = details.metaRobots | replace({'_': ', '}) %}
+    {% set robots = services.SEO.getRobotsInformation() %}
 {% endif %}
 
 {% if block('description') is defined %}
