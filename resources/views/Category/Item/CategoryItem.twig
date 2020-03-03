@@ -5,7 +5,6 @@
 {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets ) %}
 
 {% block PageBody %}
-
     {% set listType = isSearch ? "itemsearch" : "categoryitem" %}
     {% set shopBuilderTemplate = shop_builder_category_template(category.id, listType) %}
 
@@ -161,7 +160,7 @@
 {% endblock %}
 
 {% block PartialHead %}
-    {% set canonicalUrl = services.url.getCanonicalURL() %}
+    {% set canonicalUrl = services.url.getCanonicalURL(null, true) %}
     {% if currentPage - 1 > 0 %}
         <link rel="prev" href="{{ canonicalUrl ~ queryString({'page': currentPage - 1}) }}" />
     {% endif %}
@@ -170,10 +169,16 @@
         <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}" />
     {% endif %}
 
-    {% if category is not defined %}
+    {% if category is null %}
+        {% if '&' in queryString() %}
+            {% set robotsValue = 'NOINDEX' %}
+        {% else %}
+             {% set robotsValue = ceresConfig.meta.robotsSearchResult %}
+        {% endif %}
+
       {% embed getPartial('page-metadata') %}
               {% block title      trans("Ceres::Template.itemSearchResults") ~ " " ~ searchString %}
-              {% block robots     ceresConfig.meta.robotsSearchResult %}
+              {% block robots     robotsValue %}
       {% endembed %}
     {% else %}
       {% embed getPartial('page-metadata') %}
