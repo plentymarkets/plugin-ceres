@@ -29,7 +29,7 @@ class LogoutButtonWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance()
-            ->withDefaultValue("danger");
+                 ->withDefaultValue("danger");
 
         $settings->createButtonSize();
         $settings->createSpacing();

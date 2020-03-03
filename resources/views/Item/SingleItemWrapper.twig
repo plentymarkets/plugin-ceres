@@ -5,12 +5,18 @@
 {% block PartialHead %}
 
     {% set itemData = item.documents[0].data %}
+
+    {% if queryString() | length > 0 %}
+        {% set robotsValue = 'NOINDEX' %}
+    {% else %}
+        {% set robotsValue = 'ALL' %}
+    {% endif %}
     {% embed getPartial('page-metadata') %}
         {% block title          ItemName.get(itemData | itemName, itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
         {% block keywords       itemData.texts.keywords %}
         {% block image          itemData.images.all[0].url %}
-        {% block robots         "ALL" %}
+        {% block robots         robotsValue %}
         {% block schemaOrg %}
             {
                 "@context"      : "http://schema.org/",
