@@ -15487,6 +15487,8 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .cmp-address-list .items > div:first-child {
     margin-bottom: 0;
     min-height: 115px; }
+  .cmp-address-list .items:not(.items-empty) {
+    cursor: pointer; }
 
 .cmp-address-list .dropdown-toggle:after {
   position: absolute;
@@ -15539,7 +15541,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
           flex-direction: row;
-  cursor: pointer;
   padding: 1em;
   margin-bottom: 0; }
   .cmp-address-list .item-inner .item-controls {
@@ -16895,6 +16896,9 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right {
 .cmp-paginator {
   line-height: 1;
   min-height: calc(1rem + 1rem + 2px); }
+
+.page-item:not(.disabled):not(.active) {
+  cursor: pointer; }
 
 html.ie .cmp-paginator {
   display: block !important; }

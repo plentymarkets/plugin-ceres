@@ -14396,6 +14396,10 @@ header .widget {
             min-height: 115px;
             margin-bottom: 0;
         }
+
+        &:not(.items-empty){
+            cursor: pointer;
+        }
     }
 
     .dropdown-toggle {
@@ -15277,6 +15281,12 @@ html.ie .confirmation-order-list .cmp-order-item {
 .widget-account-settings {
     .card {
         min-height: 115px;
+    }
+}
+
+.page-item {
+    &:not(.disabled):not(.active) {
+        cursor: pointer;
     }
 }
 
