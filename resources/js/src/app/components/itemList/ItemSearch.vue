@@ -17,7 +17,7 @@
                     <slot name="autocomplete-suggestions">
                         <div class="autocomplete-suggestions shadow bg-white w-100 ">
                             <search-suggestion-item
-                                :show-item-images="showItemImages"
+                                :show-images="showItemImages"
                                 suggestion-type="item">
                             </search-suggestion-item>
                         </div>

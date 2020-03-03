@@ -26,8 +26,8 @@ class SearchSuggestionCategoryWidget extends SearchSuggestionBaseWidget
 
         $settings->withPointer('appearance');
 
-        $settings->createCheckbox('showCategoryCount')
-            ->withName('Widget.searchSuggestionCategoryShowCategoryCountLabel')
+        $settings->createCheckbox('showCount')
+            ->withName('Widget.searchSuggestionShowCountLabel')
             ->withDefaultValue(false);
 
         return $settings->toArray();
