@@ -18415,7 +18415,7 @@ html.crios {
 
     .filter-collapse {
         position: absolute;
-        z-index: 1050;
+        z-index: $zIndex-1;
         width: 100%;
         margin-left: -15px;
         padding-right: 15px;
@@ -20141,17 +20141,17 @@ html.ie .v-s-boxes .v-s-box.invalid {
     }
 
     .huge-font {
-        font-size: $font-size-base;
-
-        @include media-breakpoint-up(sm) {
-            font-size: 28px;
-        }
-        @include media-breakpoint-up(md) {
-            font-size: 35px;
-        }
-
         .widget-text,
         .widget-code {
+            font-size: $font-size-base;
+
+            @include media-breakpoint-up(sm) {
+                font-size: 28px;
+            }
+            @include media-breakpoint-up(md) {
+                font-size: 35px;
+            }
+
             h1 { font-size: 2em };
             h2 { font-size: 1.8em };
             h3 { font-size: 1.5em };
