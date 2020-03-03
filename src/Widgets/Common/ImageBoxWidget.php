@@ -12,6 +12,14 @@ use Ceres\Widgets\Helper\WidgetTypes;
 class ImageBoxWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Common.ImageBoxWidget";
+    protected $imageExtensons = [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'svg',
+        'webp',
+    ];
 
     public function getData()
     {
@@ -82,13 +90,28 @@ class ImageBoxWidget extends BaseWidget
         $settings->createFile("customImagePath")
             ->withDefaultValue("")
             ->withName("Widget.imageBoxCustomImagePathLabel")
-            ->withTooltip("Widget.imageBoxCustomImagePathTooltip");
+            ->withTooltip("Widget.imageBoxCustomImagePathTooltip")
+            ->withAllowedExtensions([
+                                        'jpg',
+                                        'jpeg',
+                                        'png',
+                                        'gif',
+                                        'svg',
+                                        'webp'
+                                    ]);
 
         $settings->createFile("fallbackImagePath")
             ->withDefaultValue("")
             ->withName("Widget.imageBoxFallbackImagePathLabel")
             ->withTooltip("Widget.imageBoxFallbackImagePathTooltip")
-            ->withCondition("!!customImagePath && /.?(\.webp)(?:$|\?)/.test(customImagePath)");
+            ->withCondition("!!customImagePath && /.?(\.webp)(?:$|\?)/.test(customImagePath)")
+            ->withAllowedExtensions([
+                                        'jpg',
+                                        'jpeg',
+                                        'png',
+                                        'gif',
+                                        'svg'
+                                    ]);
 
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageBoxLazyLoadingName")
