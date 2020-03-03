@@ -12,13 +12,22 @@ use Ceres\Widgets\Helper\WidgetTypes;
 class ImageBoxWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Common.ImageBoxWidget";
-    protected $imageExtensons = [
+    const IMAGE_EXTENSIONS = [
         'jpg',
         'jpeg',
         'png',
         'gif',
         'svg',
-        'webp',
+        'apng'
+    ];
+    const MODERN_IMAGE_EXTENSIONS = [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'svg',
+        'apng',
+        'webp'
     ];
 
     public function getData()
@@ -91,27 +100,14 @@ class ImageBoxWidget extends BaseWidget
             ->withDefaultValue("")
             ->withName("Widget.imageBoxCustomImagePathLabel")
             ->withTooltip("Widget.imageBoxCustomImagePathTooltip")
-            ->withAllowedExtensions([
-                                        'jpg',
-                                        'jpeg',
-                                        'png',
-                                        'gif',
-                                        'svg',
-                                        'webp'
-                                    ]);
+            ->withAllowedExtensions(self::MODERN_IMAGE_EXTENSIONS);
 
         $settings->createFile("fallbackImagePath")
             ->withDefaultValue("")
             ->withName("Widget.imageBoxFallbackImagePathLabel")
             ->withTooltip("Widget.imageBoxFallbackImagePathTooltip")
             ->withCondition("!!customImagePath && /.?(\.webp)(?:$|\?)/.test(customImagePath)")
-            ->withAllowedExtensions([
-                                        'jpg',
-                                        'jpeg',
-                                        'png',
-                                        'gif',
-                                        'svg'
-                                    ]);
+            ->withAllowedExtensions(self::IMAGE_EXTENSIONS);
 
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageBoxLazyLoadingName")

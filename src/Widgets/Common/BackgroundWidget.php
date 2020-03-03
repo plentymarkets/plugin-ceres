@@ -8,6 +8,7 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use PayPal\Api\Image;
 
 class BackgroundWidget extends BaseWidget
 {
@@ -89,26 +90,13 @@ class BackgroundWidget extends BaseWidget
             ->withCondition('sourceType === "custom-image"')
             ->withName('Widget.backgroundImageSourceLabel')
             ->withTooltip('Widget.backgroundImageSourceTooltip')
-            ->withAllowedExtensions([
-                                        'jpg',
-                                        'jpeg',
-                                        'png',
-                                        'gif',
-                                        'svg',
-                                        'webp'
-                                    ]);
+            ->withAllowedExtensions(ImageBoxWidget::MODERN_IMAGE_EXTENSIONS);
 
         $settings->createFile('fallbackImagePath')
             ->withCondition('sourceType === "custom-image" && /.?(\.webp)(?:$|\?)/.test(customImagePath)')
             ->withName('Widget.backgroundFallbackImageSourceLabel')
             ->withTooltip('Widget.backgroundFallbackImageSourceTooltip')
-            ->withAllowedExtensions([
-                                        'jpg',
-                                        'jpeg',
-                                        'png',
-                                        'gif',
-                                        'svg',
-                                    ]);
+            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
 
         $settings->createSelect('backgroundSize')
             ->withCondition('sourceType !== "none"')
