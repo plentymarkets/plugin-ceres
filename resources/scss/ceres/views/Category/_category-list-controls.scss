@@ -158,6 +158,8 @@
             }
 
             a {
+                @include transition(all .1s ease);
+
                 span.placeholder {
                     display: inline-block;
                     width: 10%;
@@ -280,7 +282,6 @@
                 padding-left: 2.25rem;
                 color: $gray-700;
                 background: $gray-100;
-                @include transition(all .1s ease);
             }
 
             &::before {
@@ -295,17 +296,13 @@
 }
 
 .filter-badge {
-    position: absolute;
-    top: 50%;
-    right: .5rem;
-    display: inline-block;
+    float: right;
     min-width: 3em;
     padding: .1rem 0;
     font-size: .85rem;
     color: $gray-600;
     text-align: center;
     background: $gray-200;
-    transform: translateY(-50%);
 }
 
 .item-filter-price {

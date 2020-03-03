@@ -1,6 +1,6 @@
 <template>
     <div v-if="facet.name" class="card">
-        <div class="h3 title">{{ facetName }}</div>
+        <div class="h3 title pt-3 pb-0">{{ facetName }}</div>
 
         <div v-if="facet.type === 'price'">
             <item-filter-price></item-filter-price>
@@ -11,8 +11,8 @@
                 <input :id="'option-' + value.id" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
                 <label :for="'option-' + value.id" class="form-check-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '']" :style="paddingInlineStyles">
                     {{ value.name }}
+                    <div class="filter-badge">{{ value.count }}</div>
                 </label>
-                <div class="filter-badge">{{ value.count }}</div>
             </div>
         </div>
     </div>
