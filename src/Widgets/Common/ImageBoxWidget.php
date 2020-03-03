@@ -21,12 +21,6 @@ class ImageBoxWidget extends BaseWidget
         'apng'
     ];
     const MODERN_IMAGE_EXTENSIONS = [
-        'jpg',
-        'jpeg',
-        'png',
-        'gif',
-        'svg',
-        'apng',
         'webp'
     ];
 
@@ -100,7 +94,7 @@ class ImageBoxWidget extends BaseWidget
             ->withDefaultValue('')
             ->withName('Widget.imageBoxCustomImagePathLabel')
             ->withTooltip('Widget.imageBoxCustomImagePathTooltip')
-            ->withAllowedExtensions(self::MODERN_IMAGE_EXTENSIONS);
+            ->withAllowedExtensions(array_merge(self::IMAGE_EXTENSIONS, self::MODERN_IMAGE_EXTENSIONS));
 
         $settings->createFile('fallbackImagePath')
             ->withDefaultValue('')
