@@ -9182,6 +9182,7 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     position: absolute;
     top: 100%;
     z-index: $zindex-7;
+    max-height: 80vh;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
 }
@@ -14397,7 +14398,7 @@ header .widget {
             margin-bottom: 0;
         }
 
-        &:not(.items-empty){
+        &:not(.items-empty) {
             cursor: pointer;
         }
     }
