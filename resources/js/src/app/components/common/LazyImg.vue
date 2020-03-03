@@ -33,7 +33,9 @@ export default {
 
     mounted()
     {
-        const mount = () => {
+        detectWebP(((supported) =>
+        {
+            this.supported = supported;
             this.$nextTick(() =>
             {
                 if(!this.isBackgroundImage)
@@ -42,20 +44,7 @@ export default {
                 }
                 lozad(this.$el).observe();
             });
-        };
-
-        if(this.isBackgroundImage)
-        {
-            detectWebP(((supported) =>
-            {
-                this.supported = supported;
-                mount();
-            }));
-        }
-        else
-        {
-            mount();
-        }
+        }));
     },
 
     watch:
