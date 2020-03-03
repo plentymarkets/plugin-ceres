@@ -259,12 +259,12 @@
         {
             "key"           : "SingleItem.AfterScriptsLoaded",
             "name"          : "Single item: After scripts loaded",
-            "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised on the single item."
+            "description"   : "Load scripts, events and other Javascript related items, such as Vue components, after frameworks and scripts have been initialised on the single item view."
         },
         {
             "key"           : "SingleItem.Styles",
-            "name"          : "",
-            "description"   : ""
+            "name"          : "Single item: Styles",
+            "description"   : "Load CSS in the head after all other styles have been loaded."
         },
         {
             "key"           : "BasketTotals.BeforeItemSum",
@@ -478,12 +478,12 @@
         {
             "key"           : "Checkout.AfterScriptsLoaded",
             "name"          : "Checkout: After scripts loaded",
-            "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised in the checkout."
+            "description"   : "Load scripts, events and other Javascript related items, such as Vue components, after frameworks and scripts have been initialised in the checkout."
         },
         {
             "key"           : "Checkout.Styles",
-            "name"          : "",
-            "description"   : ""
+            "name"          : "Checkout: Styles",
+            "description"   : "Load CSS in the head after all other styles have been loaded."
         },
         {
             "key"           : "Ceres::Checkout.Headline",
