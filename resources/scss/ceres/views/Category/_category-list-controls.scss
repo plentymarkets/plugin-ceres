@@ -52,7 +52,7 @@
 
     .filter-collapse {
         position: absolute;
-        z-index: 1050;
+        z-index: $zIndex-1;
         width: 100%;
         margin-left: -15px;
         padding-right: 15px;
