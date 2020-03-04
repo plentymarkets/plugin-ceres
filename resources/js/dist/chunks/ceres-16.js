@@ -259,7 +259,10 @@ var render = function() {
                           [
                             _c(
                               "span",
-                              { staticClass: "text-appearance m-x-auto" },
+                              {
+                                staticClass:
+                                  "text-appearance m-x-auto text-truncate"
+                              },
                               [_vm._v(_vm._s(category.details[0].name))]
                             )
                           ]
