@@ -18,4 +18,6 @@ class SearchSuggestionCategoryWidget extends SearchSuggestionBaseWidget
     public $position = 200;
 
     public $hasCountOption = true;
+
+    protected $hasAdditionalInformationOption = true;
 }

@@ -28,6 +28,8 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
 
     protected $hasImagesOption = false;
 
+    protected $hasAdditionalInformationOption = false;
+
     public function getData()
     {
         return WidgetDataFactory::make($this->widgetKey)
@@ -57,6 +59,12 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
         if ($this->hasImagesOption) {
             $settingsFactory->createCheckbox('showImages')
                 ->withName('Widget.searchSuggestionShowImagesLabel')
+                ->withDefaultValue(false);
+        }
+
+        if ($this->hasAdditionalInformationOption) {
+            $settingsFactory->createCheckbox('showAdditionalInformation')
+                ->withName('Widget.searchSuggestionShowAdditionalInformationLabel')
                 ->withDefaultValue(false);
         }
 
