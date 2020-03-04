@@ -96,10 +96,10 @@
             <picture>
                 <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                 <img
-                        class="img-{{ imageSize }}"
-                        src="{{ fallbackImagePath }}"
-                        alt="{{ Twig.print("imageAltText") }}"
-                        {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
+                    class="img-{{ imageSize }}"
+                    src="{{ fallbackImagePath }}"
+                    alt="{{ Twig.print("imageAltText") }}"
+                    {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
                 />
             </picture>
         {% endif %}

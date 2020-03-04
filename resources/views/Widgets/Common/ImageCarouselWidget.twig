@@ -78,6 +78,12 @@
 
     {% endif %}
 
+    {% if slideSettings.fallbackImagePath | trim is not empty %}
+
+        {{ Twig.set("slide", "slide | merge({ fallbackImageUrl: #{ slideSettings.fallbackImagePath | json_encode } })") }}
+
+    {% endif %}
+
     {% if slideSettings.headline | trim is not empty and slideSettings.headlineStyle == "custom-caption" %}
 
         {{ Twig.setEscaped("customCaption", slideSettings.headline) }}
@@ -126,11 +132,20 @@
                             <lazy-img
                                 picture-class="img-cover"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
+                                fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
                                 title="{{ Twig.print("imgTitle") }}">
                             </lazy-img>
                         {% else %}
-                            <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("imgTitle") }}" class="img-cover">
+                            <picture>
+                                <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
+                                <img
+                                    class="img-cover"
+                                    src="{{ Twig.print("slide.fallbackImageUrl") }}"
+                                    alt="{{ Twig.print("altText") }}"
+                                    title="{{ Twig.print("imgTitle") }}"
+                                />
+                            </picture>
                         {% endif %}
                     {{ Twig.endif() }}
 

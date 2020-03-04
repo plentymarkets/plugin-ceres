@@ -12,6 +12,17 @@ use Ceres\Widgets\Helper\WidgetTypes;
 class ImageCarouselWidget extends BaseWidget
 {
     protected $template = "Ceres::Widgets.Common.ImageCarouselWidget";
+    const IMAGE_EXTENSIONS = [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'svg',
+        'apng'
+    ];
+    const MODERN_IMAGE_EXTENSIONS = [
+        'webp'
+    ];
 
     public function getData()
     {
@@ -93,7 +104,15 @@ class ImageCarouselWidget extends BaseWidget
         $container->children->createFile("customImagePath")
             ->withDefaultValue("")
             ->withName("Widget.imageCarouselCustomImagePathLabel")
-            ->withTooltip("Widget.imageCarouselCustomImagePathTooltip");
+            ->withTooltip("Widget.imageCarouselCustomImagePathTooltip")
+            ->withAllowedExtensions(array_merge(self::IMAGE_EXTENSIONS, self::MODERN_IMAGE_EXTENSIONS));
+        
+        $container->children->createFile("fallbackImagePath")
+            ->withDefaultValue("")
+            ->withName("Widget.imageCarouselFallbackImagePathLabel")
+            ->withTooltip("Widget.imageCarouselFallbackImagePathTooltip")
+            ->withCondition("!!\$slides.customImagePath && /.?(\.webp)(?:$|\?)/.test(\$slides.customImagePath)")
+            ->withAllowedExtensions(self::IMAGE_EXTENSIONS);
 
         $settings->createSpacing(false, true);
         return $settings->toArray();
