@@ -139,6 +139,24 @@
                             <strong class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPriceTotal | formatMonetary( itemAmount.currency )') }}</strong>
                         </div>
 
+                        {{ Twig.for("propertyGroup", "item.variationProperties") }}
+                            <div>
+                                {{ Twig.for("property", "propertyGroup.properties") }}
+                                    <div>
+                                        <strong>{{ Twig.print("propertyGroup.name") }}</strong>
+                                        <span>{{ Twig.print("property.names.name") }}</span>
+                                        <span>
+                                            {{ Twig.if('property.cast == "file"') }}
+                                                <a :href="'{{ Twig.print("property.values.value") }}' | propertyFileUrl" v-html="'{{ Twig.print("property.values.value") }}'" target="_blank"></a>
+                                            {{ Twig.else() }}
+                                                {{ Twig.print("property.values.value") }}
+                                            {{ Twig.endif() }}
+                                        </span>
+                                    </div>
+                                {{ Twig.endfor() }}
+                            </div>
+                        {{ Twig.endfor() }}
+
                         {{ Twig.for("attribute", "item.attributes") }}
                             <div>
                                 <strong>{{ Twig.print("attribute.name") }}: </strong>

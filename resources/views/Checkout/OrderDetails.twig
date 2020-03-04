@@ -205,6 +205,24 @@
                                 <strong class="col-6 col-sm-9 col-md-7 text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</strong>
                             </div>
 
+                            {% for propertyGroup in item.variationProperties %}
+                                <div>
+                                    {% for property in propertyGroup.properties %}
+                                        <div>
+                                            <strong>{{ propertyGroup.name }}</strong>
+                                            <span>{{ property.names.name }}</span>
+                                            <span>
+                                                {% if property.cast == "file" %}
+                                                    <a :href="'{{ property.values.value }}' | propertyFileUrl" v-html="'{{ property.values.value }}'" target="_blank"></a>
+                                                {% else %}
+                                                    {{ property.values.value }}
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+
                             {% for attribute in item.attributes %}
                                 <div>
                                     <strong>{{ attribute.name }}: </strong>
@@ -231,7 +249,6 @@
                                                         {% set path =  path ~ '/' ~ temp %}
                                                     {% endif %}
                                                 {% endfor %}
-
 
                                                 <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}" target="_blank">
                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
