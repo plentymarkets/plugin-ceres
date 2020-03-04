@@ -11001,6 +11001,7 @@ textarea.no-resize {
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 10;
 
         .badge {
             font-size: .9rem;
