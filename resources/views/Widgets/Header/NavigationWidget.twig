@@ -23,11 +23,6 @@
     {% endif %}
 {% endif %}
 
-{% if fallbackImagePath | trim is not empty %}
-    {% set fallbackImageUrl = fallbackImagePath %}
-{% else %}
-    {% set fallbackImageUrl = companyLogoUrl %}
-{% endif %}
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
@@ -38,10 +33,10 @@
             <div class="brand-wrapper px-lg-3">
                 <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                     <picture>
-                        <source srcset="{{ companyLogoUrl }}"{% if '.webp' in companyLogoUrl %} type="image/webp"{% endif %}>
-                        <img 
+                        <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
+                        <img
                             class="img-fluid"
-                            src="{{ fallbackImageUrl }}"
+                            src="{{ fallbackImagePath }}"
                             alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}"
                         />
                     </picture>

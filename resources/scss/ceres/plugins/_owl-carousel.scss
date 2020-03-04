@@ -390,8 +390,8 @@ Custom classes
         background: $white;
         border: 1px solid transparent;
 
-        picture.active,
-        picture:hover { // stylelint-disable-line selector-no-qualifying-type
+        &.active,
+        &:hover { // stylelint-disable-line selector-no-qualifying-type
             img {
                 cursor: pointer;
                 border: 1px solid $primary;

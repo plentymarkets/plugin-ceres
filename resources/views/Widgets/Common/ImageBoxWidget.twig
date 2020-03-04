@@ -22,7 +22,6 @@
 {{ Twig.set("name", "" | json_encode) }}
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("imageUrl", "" | json_encode) }}
-{{ Twig.set("fallbackImageUrl", "" | json_encode) }}
 {{ Twig.set("imageAltText", "" | json_encode) }}
 {{ Twig.set("imageName", "" | json_encode) }}
 
@@ -32,7 +31,6 @@
     {{ Twig.set("name", "category.details[0].name") }}
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
-    {{ Twig.set("fallbackImageUrl", "imageUrl") }}
     {{ Twig.set("imageAltText", "category.details[0].name") }}
 
     {{ Twig.if("imageUrl | trim is not empty") }}
@@ -48,7 +46,6 @@
     {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
     {{ Twig.set("url", "itemData | itemURL") }}
     {{ Twig.set("imageUrl", "itemImage.url") }}
-    {{ Twig.set("fallbackImageUrl", "imageUrl") }}
     {{ Twig.set("imageAltText", "itemImage.alternate") }}
     {{ Twig.set("imageName", "itemImage.name") }}
 
@@ -56,7 +53,6 @@
 
     {{ Twig.set("url", urlValue | json_encode) }}
     {{ Twig.set("imageUrl", urlValue | json_encode) }}
-    {{ Twig.set("fallbackImageUrl", "imageUrl") }}
     {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
 
 {% elseif urlType == 'external' and urlValue | trim is not empty %}
@@ -67,11 +63,6 @@
 
 {% if customImagePath | trim is not empty %}
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
-    {% if fallbackImagePath | trim is not empty %}
-        {{ Twig.set("fallbackImageUrl", fallbackImagePath | json_encode) }}
-    {% else %}
-        {{ Twig.set("fallbackImageUrl", customImagePath | json_encode) }}
-    {% endif %}
     {{ Twig.if("imageAltText is empty") }}
         {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
     {{ Twig.endif() }}

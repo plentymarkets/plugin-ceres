@@ -99,10 +99,6 @@ class BackgroundWidget extends BaseWidget
             ->withTooltip('Widget.backgroundFallbackImageSourceTooltip')
             ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
 
-        $settings->createFile('fallbackImagePath')
-            ->withCondition('sourceType === "custom-image"')
-            ->withName('Widget.backgroundFallbackImageSource');
-
         $settings->createSelect('backgroundSize')
             ->withCondition("sourceType !== 'none'")
             ->withDefaultValue('bg-cover')
