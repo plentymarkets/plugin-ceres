@@ -391,7 +391,7 @@ Custom classes
         border: 1px solid transparent;
 
         &.active,
-        &:hover { // stylelint-disable-line selector-no-qualifying-type
+        &:hover {
             img {
                 cursor: pointer;
                 border: 1px solid $primary;
