@@ -96,7 +96,7 @@
             {{ Twig.set("fallbackUrl", fallbackImagePath) }}
             {{ Twig.if("fallbackUrl | trim is empty") }}
                 {{ Twig.set("fallbackUrl", "imageUrl") }}
-            {{ Twig.endif }}
+            {{ Twig.endif() }}
             <picture>
                 <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                 <img
