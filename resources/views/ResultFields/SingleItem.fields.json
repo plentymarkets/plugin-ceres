@@ -89,15 +89,7 @@
     "variation.weightG",
     "variation.weightNetG",
     "variation.widthMM",
-    "variationProperties.id",
-    "variationProperties.values",
-    "variationProperties.property.id",
-    "variationProperties.property.values",
-    "variationProperties.property.cast",
-    "variationProperties.property.display",
-    "variationProperties.property.groups",
-    "variationProperties.property.names.*",
-    "variationProperties.property.position",
+    "variationProperties.*",
     "tags.id",
     "tags.names.*"
 ]
