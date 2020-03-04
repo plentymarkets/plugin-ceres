@@ -62,7 +62,7 @@
 
             {{ Twig.if("hasUrl") }}
                 image-url="{{ Twig.print("url") }}"
-                fallback-url="{{ Twig.print("fallbackUrl") }}"
+                fallback-url="{{ fallbackImagePath }}"
             {{ Twig.endif() }}
             :is-background-image="true"
 

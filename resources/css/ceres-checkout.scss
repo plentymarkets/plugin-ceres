@@ -9182,6 +9182,7 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     position: absolute;
     top: 100%;
     z-index: $zindex-7;
+    max-height: 80vh;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
 }
@@ -11000,6 +11001,7 @@ textarea.no-resize {
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 10;
 
         .badge {
             font-size: .9rem;
@@ -14396,6 +14398,10 @@ header .widget {
             min-height: 115px;
             margin-bottom: 0;
         }
+
+        &:not(.items-empty) {
+            cursor: pointer;
+        }
     }
 
     .dropdown-toggle {
@@ -15277,6 +15283,12 @@ html.ie .confirmation-order-list .cmp-order-item {
 .widget-account-settings {
     .card {
         min-height: 115px;
+    }
+}
+
+.page-item {
+    &:not(.disabled):not(.active) {
+        cursor: pointer;
     }
 }
 

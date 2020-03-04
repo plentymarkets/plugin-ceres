@@ -43,9 +43,6 @@ function CeresMain()
         $("html").addClass("unkown-os");
     }
 
-    App.features.webp = detectWebP(browser);
-
-
     $(window).scroll(function()
     {
         if ($(".wrapper-main").hasClass("isSticky"))

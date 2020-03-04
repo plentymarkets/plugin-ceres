@@ -32668,7 +32668,7 @@ var render = function() {
                         [
                           _c("search-suggestion-item", {
                             attrs: {
-                              "show-item-images": _vm.showItemImages,
+                              "show-images": _vm.showItemImages,
                               "suggestion-type": "item"
                             }
                           })
