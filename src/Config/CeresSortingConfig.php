@@ -16,7 +16,10 @@ class CeresSortingConfig extends PluginConfig
     public $prioritySearch1;
     public $prioritySearch2;
     public $prioritySearch3;
-    
+
+    public $dynamicPrio1;
+    public $dynamicPrio2;
+
     protected function getPluginName()
     {
         return 'Ceres';
@@ -24,7 +27,7 @@ class CeresSortingConfig extends PluginConfig
 
     protected function load()
     {
-        $this->data                 = $this->getMultiSelectValue(
+        $this->data = $this->getMultiSelectValue(
             'sort.data',
             [
                 'default.recommended_sorting',
@@ -52,14 +55,15 @@ class CeresSortingConfig extends PluginConfig
                 'sorting.price.avg_desc'
             ]
         );
-        $this->defaultSorting       = $this->getTextValue( 'sort.defaultSorting', 'texts.name1_asc' );
-        $this->priorityCategory1    = $this->getTextValue( 'sorting.priorityCategory1', 'texts.name_asc' );
-        $this->priorityCategory2    = $this->getTextValue( 'sorting.priorityCategory2', 'notSelected' );
-        $this->priorityCategory3    = $this->getTextValue( 'sorting.priorityCategory3', 'notSelected' );
-        $this->defaultSortingSearch = $this->getTextValue( 'sort.defaultSortingSearch', 'item.score' );
-        $this->prioritySearch1      = $this->getTextValue( 'sorting.prioritySearch1', 'item.score' );
-        $this->prioritySearch2      = $this->getTextValue( 'sorting.prioritySearch2', 'notSelected' );
-        $this->prioritySearch3      = $this->getTextValue( 'sorting.prioritySearch3', 'notSelected' );
-
+        $this->defaultSorting = $this->getTextValue('sort.defaultSorting', 'texts.name1_asc');
+        $this->priorityCategory1 = $this->getTextValue('sorting.priorityCategory1', 'texts.name_asc');
+        $this->priorityCategory2 = $this->getTextValue('sorting.priorityCategory2', 'notSelected');
+        $this->priorityCategory3 = $this->getTextValue('sorting.priorityCategory3', 'notSelected');
+        $this->defaultSortingSearch = $this->getTextValue('sort.defaultSortingSearch', 'item.score');
+        $this->prioritySearch1 = $this->getTextValue('sorting.prioritySearch1', 'item.score');
+        $this->prioritySearch2 = $this->getTextValue('sorting.prioritySearch2', 'notSelected');
+        $this->prioritySearch3 = $this->getTextValue('sorting.prioritySearch3', 'notSelected');
+        $this->dynamicPrio1 = $this->getTextValue('sorting.dynamicPrio1', 'filter.prices.price_asc');
+        $this->dynamicPrio2 = $this->getTextValue('sorting.dynamicPrio2', 'variationId_asc');
     }
 }

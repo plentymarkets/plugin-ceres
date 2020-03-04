@@ -75,6 +75,12 @@ class OnlineStoreMapping
             'global'   => false,
             'optional' => false,
         ],
+        'onlineStore_minimumOrderAmount' => [
+            'field'    => 'minimumOrderValue',
+            'type'     => 'integer',
+            'global'   => true,
+            'optional' => false,
+        ],
         'onlineStore_enableCallisto' => [
             'field'    => 'global.enableOldUrlPattern',
             'type'     => 'boolean',
