@@ -14,5 +14,7 @@ class SearchSuggestionSuggestionWidget extends SearchSuggestionBaseWidget
 
     public $headline = 'Ceres::Template.itemSearchSuggestion';
 
-    public $position = 200;
+    public $position = 300;
+
+    public $hasCountOption = true;
 }
