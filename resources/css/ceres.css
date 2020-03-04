@@ -12590,7 +12590,8 @@ html.ios textarea {
   border-radius: 0 !important; }
 
 button:focus {
-  outline: none; }
+  outline: none;
+  box-shadow: none; }
 
 .btn-group.extended,
 .input-group.extended {
@@ -17391,7 +17392,7 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
               transform: rotate(-90deg); }
   .list-controls .filter-collapse {
     position: absolute;
-    z-index: 1050;
+    z-index: 1000;
     width: 100%;
     margin-left: -15px;
     padding-right: 15px;
@@ -18725,13 +18726,16 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
   bottom: 0;
   height: 100% !important; }
 
-.widget-background .huge-font {
+.widget-background .huge-font .widget-text,
+.widget-background .huge-font .widget-code {
   font-size: 1rem; }
   @media (min-width: 576px) {
-    .widget-background .huge-font {
+    .widget-background .huge-font .widget-text,
+    .widget-background .huge-font .widget-code {
       font-size: 28px; } }
   @media (min-width: 768px) {
-    .widget-background .huge-font {
+    .widget-background .huge-font .widget-text,
+    .widget-background .huge-font .widget-code {
       font-size: 35px; } }
   .widget-background .huge-font .widget-text h1,
   .widget-background .huge-font .widget-code h1 {
