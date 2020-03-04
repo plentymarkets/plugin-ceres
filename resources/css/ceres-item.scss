@@ -9074,8 +9074,9 @@ button:focus {
     z-index: 2;
 }
 
-[v-cloak] {
-    display: none;
+.lozad {
+    display: block;
+    min-height: 1px;
 }
 
 // stylelint-disable selector-type-no-unknown
@@ -9386,6 +9387,16 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     -webkit-backface-visibility: hidden; // stylelint-disable-line property-no-vendor-prefix
     -webkit-tap-highlight-color: transparent; // stylelint-disable-line property-no-vendor-prefix
     -webkit-touch-callout: none; // stylelint-disable-line property-no-vendor-prefix
+
+    img {
+        // display block is required for lozad framework
+        display: block;
+        width: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+        height: 100%;
+
+    }
 }
 
 .single-carousel,
@@ -9399,19 +9410,6 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
             width: 100%;
             height: 100%;
         }
-    }
-}
-
-.owl-carousel .owl-item img {
-    // display block is required for lozad framework
-    display: block;
-    width: 100%;
-    -o-object-fit: contain;
-       object-fit: contain;
-    height: 100%;
-
-    &:not([src]) {
-        opacity: 0;
     }
 }
 
@@ -12525,6 +12523,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         padding-bottom: 0;
     }
 
+    > picture img,
     > img {
         position: absolute;
         top: 50%;
