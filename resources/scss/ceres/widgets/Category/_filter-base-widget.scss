@@ -19,7 +19,7 @@
 
     .form-check-input:checked + label,
     .form-check-input:hover + label {
-        padding-left: .75rem !important;
-        margin-left: .75rem !important;
+        padding-left: .75rem !important; // stylelint-disable-line declaration-no-important
+        margin-left: .75rem !important; // stylelint-disable-line declaration-no-important
     }
 }
