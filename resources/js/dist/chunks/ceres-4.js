@@ -501,8 +501,8 @@ var render = function() {
                 ? _c("lazy-img", {
                     ref: "itemLazyImage",
                     refInFor: true,
-                    staticClass: "img-fluid",
                     attrs: {
+                      "picture-class": "img-fluid",
                       "image-url": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
                       title: _vm.getImageName(imageUrl)
@@ -538,8 +538,8 @@ var render = function() {
           !_vm.disableLazyLoad
             ? _c("lazy-img", {
                 ref: "itemLazyImage",
-                staticClass: "img-fluid",
                 attrs: {
+                  "picture-class": "img-fluid",
                   "image-url": _vm._f("itemImage")(_vm.imageUrls),
                   alt: _vm.getAltText(_vm.imageUrls[0]),
                   title: _vm.getImageName(_vm.imageUrls[0])
