@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="item-small-prices text-muted small">
-                                <template v-for="propertyGroup in transformedVariationProperties">
+                                <template v-for="propertyGroup in wishListItem.variationProperties">
                                     <div v-for="(property, index) in propertyGroup.properties" :key="index">
                                         <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
                                         <span>{{ property.names.name }}</span>
@@ -128,7 +128,6 @@
 import NotificationService from "../../services/NotificationService";
 import { mapState, mapActions } from "vuex";
 import { isNullOrUndefined } from "../../helper/utils";
-import { transformVariationProperties } from "../../services/VariationPropertyService";
 
 export default {
     
@@ -184,11 +183,6 @@ export default {
             }
 
             return this.wishListItem.prices.default.basePrice;
-        },
-
-        transformedVariationProperties()
-        {
-            return transformVariationProperties(this.wishListItem, [], "showInItemListing");
         },
 
         ...mapState({
