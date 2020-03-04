@@ -137,6 +137,10 @@
                                 title="{{ Twig.print("imgTitle") }}">
                             </lazy-img>
                         {% else %}
+                            {{ Twig.set("fallbackUrl", "slide.fallbackImageUrl") }}
+                            {{ Twig.if("fallbackUrl | trim is empty") }}
+                                {{ Twig.set("fallbackUrl", "slide.imageUrl") }}
+                            {{ Twig.endif }}
                             <picture>
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                                 <img
