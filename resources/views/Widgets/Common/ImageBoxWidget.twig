@@ -93,7 +93,7 @@
                 {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </lazy-img>
         {% else %}
-            {{ Twig.set("fallbackUrl", "#{ fallbackImagePath }") }}
+            {{ Twig.set("fallbackUrl", fallbackImagePath | json_encode ) }}
             {{ Twig.if("fallbackUrl | trim is empty") }}
                 {{ Twig.set("fallbackUrl", "imageUrl") }}
             {{ Twig.endif() }}
