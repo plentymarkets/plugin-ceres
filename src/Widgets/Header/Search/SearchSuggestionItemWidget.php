@@ -15,4 +15,6 @@ class SearchSuggestionItemWidget extends SearchSuggestionBaseWidget
     public $headline = 'Ceres::Template.itemSearchProducts';
 
     public $hasImagesOption = true;
+
+    public $hasAdditionalInformationOption = true;
 }
