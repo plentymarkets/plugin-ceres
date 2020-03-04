@@ -5,7 +5,7 @@
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
             <div class="image-container">
                 <lazy-img
-                    class="d-block mw-100 mh-100"
+                    picture-class="d-block mw-100 mh-100"
                     v-if="image"
                     :image-url="image"
                     :alt="altText"
