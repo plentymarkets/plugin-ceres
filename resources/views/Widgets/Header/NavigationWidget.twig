@@ -23,6 +23,9 @@
     {% endif %}
 {% endif %}
 
+{% if fallbackImagePath | trim is empty %}
+    {% set fallbackImagePath = companyLogoUrl %}
+{% endif %}
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
