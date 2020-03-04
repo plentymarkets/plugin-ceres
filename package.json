@@ -29,12 +29,12 @@
     "> .25%"
   ],
   "devDependencies": {
-    "@babel/core": "^7.8.4",
+    "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-env": "^7.8.6",
     "autoprefixer": "^8.6.5",
-    "babel-eslint": "^10.0.3",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
     "del": "^2.2.0",
@@ -54,27 +54,25 @@
     "sass-loader": "^7.3.1",
     "stylelint": "^12.0.1",
     "stylelint-config-twbs-bootstrap": "^1.1.0",
-    "vue-loader": "^15.8.3",
+    "vue-loader": "^15.9.0",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
     "webpack-fix-style-only-entries": "^0.3.1"
   },
   "dependencies": {
     "bootstrap": "4.4.1",
     "core-js": "^3.6.4",
     "custom-event-polyfill": "^0.3.0",
-    "dayjs": "^1.8.19",
-    "detect-browser": "^2.3.0",
+    "dayjs": "^1.8.21",
+    "detect-browser": "^4.8.0",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
     "jquery": "^3.4.0",
     "lodash": "^4.17.15",
-    "lozad": "^1.14.0",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.16.1",
     "vue": "^2.6.11",
-    "vue-script2": "2.0.3",
     "vuex": "^3.1.2"
   }
 }

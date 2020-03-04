@@ -1,25 +1,50 @@
 <template>
-    <img v-if="!isBackgroundImage" :data-src="imageUrl">
-    <div v-else :data-background-image="imageUrl">
+    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass">
+        <source :srcset="imageUrl" :type="mimeType">
+        <source v-if="fallbackUrl" :srcset="fallbackUrl">
+        <noscript><img :src="fallbackUrl || imageUrl"></noscript>
+    </picture>
+    <div v-else :data-background-image="backgroundSource" :class="pictureClass">
         <slot></slot>
     </div>
 </template>
 
 <script>
-import lozad from "lozad";
+import lozad from "../../plugins/lozad";
+import { detectWebP } from "../../helper/featureDetect";
 
 export default {
     props: {
-        imageUrl: String,
-        isBackgroundImage: Boolean
+        imageUrl: {
+            type: String,
+            required: true
+        },
+        fallbackUrl: String,
+        isBackgroundImage: Boolean,
+        pictureClass: String
+    },
+
+    data()
+    {
+        return {
+            supported: undefined
+        }
     },
 
     mounted()
     {
-        this.$nextTick(() =>
+        detectWebP(((supported) =>
         {
-            lozad(this.$el).observe();
-        });
+            this.supported = supported;
+            this.$nextTick(() =>
+            {
+                if(!this.isBackgroundImage)
+                {
+                    this.$el.classList.toggle("lozad");
+                }
+                lozad(this.$el).observe();
+            });
+        }));
     },
 
     watch:
@@ -31,6 +56,29 @@ export default {
                 this.$el.setAttribute("data-loaded", false);
                 lozad(this.$el).triggerLoad(this.$el);
             });
+        }
+    },
+
+    computed: {
+        /**
+         *  Determine appropriate image url to use as background source
+         */
+        backgroundSource() {
+            return this.supported ? this.imageUrl : this.fallbackUrl;
+        },
+
+        /**
+         * Check if url points to a .webp image and return appropriate mime-type
+         */
+        mimeType() {
+            const matches = this.imageUrl.match(/.?(\.\w+)(?:$|\?)/);
+
+            if(matches)
+            {
+                return matches[1] === ".webp" ? "image/webp" : null;
+            }
+
+            return null;
         }
     }
 }
