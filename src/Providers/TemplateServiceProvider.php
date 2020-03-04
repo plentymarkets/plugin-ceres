@@ -346,6 +346,8 @@ class TemplateServiceProvider extends ServiceProvider
             ->registerConfigValue('sorting.priorityCategory1', $ceresConfig->sorting->priorityCategory1)
             ->registerConfigValue('sorting.priorityCategory2', $ceresConfig->sorting->priorityCategory2)
             ->registerConfigValue('sorting.priorityCategory3', $ceresConfig->sorting->priorityCategory3)
+            ->registerConfigValue('sorting.dynamicPrio1', $ceresConfig->sorting->dynamicPrio1)
+            ->registerConfigValue('sorting.dynamicPrio2', $ceresConfig->sorting->dynamicPrio2)
             ->registerConfigValue('item.name', $ceresConfig->item->itemName)
             ->registerConfigValue('global.enableOldUrlPattern', $ceresConfig->global->enableOldUrlPattern)
             ->registerConfigValue('language.activeLanguages', $ceresConfig->language->activeLanguages);
