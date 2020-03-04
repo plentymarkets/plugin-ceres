@@ -10,14 +10,14 @@
                     :key="index"
                     :href="getTargetUrl(item)">
 
-                    <div class="image mr-3" v-if="showImages">
+                    <div class="image flex-shrink-0 mr-3" v-if="showImages">
                         <img v-if="item.image" :src="item.image">
                     </div>
 
-                    <div class="label" :class="{ 'compact': item.beforeLabel && item.afterLabel }">
-                        <p class="small mb-0" v-if="item.beforeLabel">{{ item.beforeLabel }}</p>
-                        <p class="mb-0" v-html="getHighlightedLabel(item.label)"></p>
-                        <p class="small mb-0" v-if="item.afterLabel">{{ item.afterLabel }}</p>
+                    <div class="label overflow-hidden" :class="{ 'compact': item.beforeLabel && item.afterLabel }">
+                        <p class="small mb-0 text-truncate" v-if="item.beforeLabel">{{ item.beforeLabel }}</p>
+                        <p class="mb-0 text-truncate" v-html="getHighlightedLabel(item.label)"></p>
+                        <p class="small mb-0 text-truncate" v-if="item.afterLabel">{{ item.afterLabel }}</p>
                     </div>
 
                     <div class="count" v-if="showCount && item.count > 0">
