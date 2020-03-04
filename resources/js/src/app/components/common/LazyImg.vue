@@ -1,6 +1,7 @@
 <template>
     <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass">
         <source :srcset="imageUrl" :type="mimeType">
+        <source v-if="fallbackUrl" :srcset="fallbackUrl">
         <noscript><img :src="fallbackUrl || imageUrl"></noscript>
         <img v-if="$ceres.isShopBuilder" :src="fallbackUrl || imageUrl">
     </picture>

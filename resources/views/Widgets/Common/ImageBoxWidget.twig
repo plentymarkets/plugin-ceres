@@ -94,7 +94,7 @@
             </lazy-img>
         {% else %}
             <picture>
-                <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\.webp)(?:$|\?)/'") }} type="image/webp" {{ Twig.endif() }}>
+                <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                 <img
                         class="img-{{ imageSize }}"
                         src="{{ fallbackImagePath }}"
