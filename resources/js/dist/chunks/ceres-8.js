@@ -614,8 +614,8 @@ var render = function() {
             [
               _vm.image
                 ? _c("lazy-img", {
-                    staticClass: "d-block mw-100 mh-100",
                     attrs: {
+                      "picture-class": "d-block mw-100 mh-100",
                       "image-url": _vm.image,
                       alt: _vm.altText,
                       title: _vm.itemName
