@@ -241,13 +241,7 @@
 .filter-collapse,
 .widget-filter-base {
     .card {
-        padding-right: 0;
-        background-color: transparent;
         border: 0;
-
-        &:not(:last-child) {
-            padding-bottom: .75rem;
-        }
 
         .form-check {
             padding-left: 0;
@@ -255,12 +249,12 @@
 
         .form-check-input {
             &:checked + label {
-                padding-left: 3.5rem;
+                padding-left: 1.75rem;
                 color: $gray-900;
                 background: $gray-200;
 
                 &::before {
-                    padding-left: 1.75rem;
+                    position: relative;
                     font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                     content: "\f046";
                     opacity: 1;
@@ -286,7 +280,6 @@
 
             &::before {
                 position: absolute;
-                left: .5rem;
                 font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                 content: "\f046";
                 opacity: 0;
