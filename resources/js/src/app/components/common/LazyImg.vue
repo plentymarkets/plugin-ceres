@@ -3,7 +3,6 @@
         <source :srcset="imageUrl" :type="mimeType">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
         <noscript><img :src="fallbackUrl || imageUrl"></noscript>
-        <img v-if="$ceres.isShopBuilder" :src="fallbackUrl || imageUrl">
     </picture>
     <div v-else :data-background-image="backgroundSource" :class="pictureClass">
         <slot></slot>
