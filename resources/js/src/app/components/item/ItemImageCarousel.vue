@@ -11,7 +11,7 @@
             <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
                 <div class="image-container" @click="goTo(index)">
                     <lazy-img
-                        class="owl-thumb border-appearance"
+                        picture-class="owl-thumb border-appearance"
                         v-bind:class="{ 'active': currentItem === index}"
                         :image-url="imagePreview.url"
                         :alt="getAltText(imagePreview)"

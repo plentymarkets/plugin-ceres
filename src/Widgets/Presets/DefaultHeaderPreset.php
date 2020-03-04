@@ -50,7 +50,7 @@ class DefaultHeaderPreset implements ContentPreset
             $companyLogo = $app->getUrlPath('Ceres') . '/' . $companyLogo;
         }
 
-        $this->topBarWidget->createChild('suggestions', 'Ceres::SearchSuggestionItemsWidget')
+        $this->topBarWidget->createChild('suggestions', 'Ceres::SearchSuggestionItemWidget')
             ->withSetting('customClass', '');
 
         $preset->createWidget("Ceres::NavigationWidget")

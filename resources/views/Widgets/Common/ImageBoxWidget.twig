@@ -7,6 +7,7 @@
 {% set appearance      = widget.settings.appearance.mobile %}
 {% set aspectRatio     = widget.settings.aspectRatio.mobile %}
 {% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set fallbackImagePath = widget.settings.fallbackImagePath.mobile %}
 {% set headline         = widget.settings.headline.mobile %}
 {% set imageSize        = widget.settings.imageSize.mobile %}
 {% set openInNewTab     = widget.settings.url.openInNewTab.mobile %}
@@ -85,18 +86,22 @@
     {{ Twig.if("imageUrl | trim is not empty") }}
         {% if widget.settings.lazyLoading.mobile %}
             <lazy-img
-                class="img-{{ imageSize }}"
+                picture-class="img-{{ imageSize }}"
                 image-url="{{ Twig.print("imageUrl") }}"
+                fallback-url="{{ fallbackImagePath }}"
                 alt="{{ Twig.print("imageAltText") }}"
                 {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </lazy-img>
         {% else %}
-            <img
-                class="img-{{ imageSize }}"
-                src="{{ Twig.print("imageUrl") }}"
-                alt="{{ Twig.print("imageAltText") }}"
-                {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
-            />
+            <picture>
+                <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
+                <img
+                        class="img-{{ imageSize }}"
+                        src="{{ fallbackImagePath }}"
+                        alt="{{ Twig.print("imageAltText") }}"
+                        {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
+                />
+            </picture>
         {% endif %}
     {{ Twig.endif() }}
 
@@ -104,7 +109,7 @@
         <div class="widget-caption widget-image-box-caption {{ style }}">
             {% if customCaption %}
                 <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-image-box-caption " ~ style ) }}>
-                    {{ headline | striptags('<p><br><span><h1><h2><h3><h4><h5><h6>') | raw }}
+                    {{ headline | striptags('<p><strong><br><span><h1><h2><h3><h4><h5><h6>') | raw }}
                 </div>
             {% else %}
                 {{ Twig.if("name | trim is not empty") }}

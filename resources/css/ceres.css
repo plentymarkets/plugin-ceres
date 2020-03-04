@@ -12590,7 +12590,8 @@ html.ios textarea {
   border-radius: 0 !important; }
 
 button:focus {
-  outline: none; }
+  outline: none;
+  box-shadow: none; }
 
 .btn-group.extended,
 .input-group.extended {
@@ -15487,6 +15488,8 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   .cmp-address-list .items > div:first-child {
     margin-bottom: 0;
     min-height: 115px; }
+  .cmp-address-list .items:not(.items-empty) {
+    cursor: pointer; }
 
 .cmp-address-list .dropdown-toggle:after {
   position: absolute;
@@ -15539,7 +15542,6 @@ html.ie .mobile-navigation ul.mainmenu li .nav-direction {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
           flex-direction: row;
-  cursor: pointer;
   padding: 1em;
   margin-bottom: 0; }
   .cmp-address-list .item-inner .item-controls {
@@ -16896,6 +16898,9 @@ html.ie .wrapper-main .basket-item-container .basket-item-container-right {
   line-height: 1;
   min-height: calc(1rem + 1rem + 2px); }
 
+.page-item:not(.disabled):not(.active) {
+  cursor: pointer; }
+
 html.ie .cmp-paginator {
   display: block !important; }
 
@@ -17387,7 +17392,7 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^='backgro
               transform: rotate(-90deg); }
   .list-controls .filter-collapse {
     position: absolute;
-    z-index: 1050;
+    z-index: 1000;
     width: 100%;
     margin-left: -15px;
     padding-right: 15px;
@@ -18721,13 +18726,16 @@ html.ie .v-s-boxes .v-s-box.invalid:after {
   bottom: 0;
   height: 100% !important; }
 
-.widget-background .huge-font {
+.widget-background .huge-font .widget-text,
+.widget-background .huge-font .widget-code {
   font-size: 1rem; }
   @media (min-width: 576px) {
-    .widget-background .huge-font {
+    .widget-background .huge-font .widget-text,
+    .widget-background .huge-font .widget-code {
       font-size: 28px; } }
   @media (min-width: 768px) {
-    .widget-background .huge-font {
+    .widget-background .huge-font .widget-text,
+    .widget-background .huge-font .widget-code {
       font-size: 35px; } }
   .widget-background .huge-font .widget-text h1,
   .widget-background .huge-font .widget-code h1 {

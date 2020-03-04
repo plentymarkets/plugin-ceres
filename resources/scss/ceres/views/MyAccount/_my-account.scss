@@ -94,3 +94,9 @@
         min-height: 115px;
     }
 }
+
+.page-item {
+    &:not(.disabled):not(.active) {
+        cursor: pointer;
+    }
+}
