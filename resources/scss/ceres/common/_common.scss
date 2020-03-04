@@ -26,8 +26,9 @@
     z-index: 2;
 }
 
-[v-cloak] {
-    display: none;
+.lozad {
+    display: block;
+    min-height: 1px;
 }
 
 // stylelint-disable selector-type-no-unknown

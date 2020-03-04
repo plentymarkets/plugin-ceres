@@ -375,9 +375,9 @@ var render = function() {
                   },
                   [
                     _c("lazy-img", {
-                      staticClass: "owl-thumb border-appearance",
                       class: { active: _vm.currentItem === index },
                       attrs: {
+                        "picture-class": "owl-thumb border-appearance",
                         "image-url": imagePreview.url,
                         alt: _vm.getAltText(imagePreview),
                         title: _vm.getImageName(imagePreview)
