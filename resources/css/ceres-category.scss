@@ -8819,7 +8819,9 @@ a.close.disabled {
 }
 
 button:focus {
-    outline: none;
+    outline:none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }
 
 // button combinations
@@ -11403,7 +11405,7 @@ html.crios {
     .filter-collapse {
         position: absolute;
         top: 100%;
-        z-index: 1050;
+        z-index: $zindex-1;
         width: 100%;
         padding-right: 15px;
         margin-left: -15px;
@@ -12438,15 +12440,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     }
 
     .huge-font {
-        font-size: $font-size-base;
-
-        @include media-breakpoint-up(sm) {
-            font-size: 28px;
-        }
-        @include media-breakpoint-up(md) {
-            font-size: 35px;
-        }
-
         .widget-text,
         .widget-code {
             h1 { font-size: 2em; }
@@ -12454,6 +12447,15 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
             h3 { font-size: 1.5em; }
             h4 { font-size: 1.25em; }
             * { font-size: 1em; }
+
+            font-size: $font-size-base;
+
+            @include media-breakpoint-up(sm) {
+                font-size: 28px;
+            }
+            @include media-breakpoint-up(md) {
+                font-size: 35px;
+            }
         }
     }
 }

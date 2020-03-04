@@ -20,15 +20,6 @@
     }
 
     .huge-font {
-        font-size: $font-size-base;
-
-        @include media-breakpoint-up(sm) {
-            font-size: 28px;
-        }
-        @include media-breakpoint-up(md) {
-            font-size: 35px;
-        }
-
         .widget-text,
         .widget-code {
             h1 { font-size: 2em; }
@@ -36,6 +27,15 @@
             h3 { font-size: 1.5em; }
             h4 { font-size: 1.25em; }
             * { font-size: 1em; }
+
+            font-size: $font-size-base;
+
+            @include media-breakpoint-up(sm) {
+                font-size: 28px;
+            }
+            @include media-breakpoint-up(md) {
+                font-size: 35px;
+            }
         }
     }
 }
