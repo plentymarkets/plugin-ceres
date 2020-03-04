@@ -11,13 +11,24 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ImageBoxWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Common.ImageBoxWidget";
+    protected $template = 'Ceres::Widgets.Common.ImageBoxWidget';
+    const IMAGE_EXTENSIONS = [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'svg',
+        'apng'
+    ];
+    const MODERN_IMAGE_EXTENSIONS = [
+        'webp'
+    ];
 
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::ImageBoxWidget")
-            ->withLabel("Widget.imageBoxLabel")
-            ->withPreviewImageUrl("/images/widgets/image-box.svg")
+        return WidgetDataFactory::make('Ceres::ImageBoxWidget')
+            ->withLabel('Widget.imageBoxLabel')
+            ->withPreviewImageUrl('/images/widgets/image-box.svg')
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(600)
@@ -31,62 +42,70 @@ class ImageBoxWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance();
-        $settings->createSelect("aspectRatio")
-            ->withDefaultValue("auto")
-            ->withName("Widget.imageBoxAspectRatioLabel")
-            ->withTooltip("Widget.imageBoxAspectRatioTooltip")
+        $settings->createSelect('aspectRatio')
+            ->withDefaultValue('auto')
+            ->withName('Widget.imageBoxAspectRatioLabel')
+            ->withTooltip('Widget.imageBoxAspectRatioTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
-                    ->addEntry("auto", "Widget.imageBoxAspectRatioAuto")
-                    ->addEntry("3-1", "Widget.imageBoxAspectRatioThreeToOne")
-                    ->addEntry("2-1", "Widget.imageBoxAspectRatioTwoToOne")
-                    ->addEntry("3-2", "Widget.imageBoxAspectRatioThreeToTwo")
-                    ->addEntry("1-1", "Widget.imageBoxAspectRatioOneToOne")
-                    ->addEntry("2-3", "Widget.imageBoxAspectRatioTwoToThree")
-                    ->addEntry("1-2", "Widget.imageBoxAspectRatioOneToTwo")
-                    ->addEntry("1-3", "Widget.imageBoxAspectRatioOneToThree")
+                    ->addEntry('auto', 'Widget.imageBoxAspectRatioAuto')
+                    ->addEntry('3-1', 'Widget.imageBoxAspectRatioThreeToOne')
+                    ->addEntry('2-1', 'Widget.imageBoxAspectRatioTwoToOne')
+                    ->addEntry('3-2', 'Widget.imageBoxAspectRatioThreeToTwo')
+                    ->addEntry('1-1', 'Widget.imageBoxAspectRatioOneToOne')
+                    ->addEntry('2-3', 'Widget.imageBoxAspectRatioTwoToThree')
+                    ->addEntry('1-2', 'Widget.imageBoxAspectRatioOneToTwo')
+                    ->addEntry('1-3', 'Widget.imageBoxAspectRatioOneToThree')
                     ->toArray()
             );
 
-        $settings->createSelect("style")
-            ->withDefaultValue("block-caption")
-            ->withName("Widget.imageBoxStyleLabel")
-            ->withTooltip("Widget.imageBoxStyleTooltip")
+        $settings->createSelect('style')
+            ->withDefaultValue('block-caption')
+            ->withName('Widget.imageBoxStyleLabel')
+            ->withTooltip('Widget.imageBoxStyleTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
-                    ->addEntry("block-caption", "Widget.imageBoxStyleBlockCaption")
-                    ->addEntry("inline-caption", "Widget.imageBoxStyleInlineCaption")
-                    ->addEntry("fullwidth", "Widget.imageBoxStyleFullwidth")
-                    ->addEntry("no-caption", "Widget.imageBoxStyleNoCaption")
+                    ->addEntry('block-caption', 'Widget.imageBoxStyleBlockCaption')
+                    ->addEntry('inline-caption', 'Widget.imageBoxStyleInlineCaption')
+                    ->addEntry('fullwidth', 'Widget.imageBoxStyleFullwidth')
+                    ->addEntry('no-caption', 'Widget.imageBoxStyleNoCaption')
                     ->toArray()
             );
 
-        $settings->createSelect("imageSize")
-            ->withDefaultValue("cover")
-            ->withName("Widget.imageBoxImageSizeLabel")
-            ->withTooltip("Widget.imageBoxImageSizeTooltip")
+        $settings->createSelect('imageSize')
+            ->withDefaultValue('cover')
+            ->withName('Widget.imageBoxImageSizeLabel')
+            ->withTooltip('Widget.imageBoxImageSizeTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
-                    ->addEntry("cover", "Widget.imageBoxImageSizeCover")
-                    ->addEntry("contain", "Widget.imageBoxImageSizeContain")
+                    ->addEntry('cover', 'Widget.imageBoxImageSizeCover')
+                    ->addEntry('contain', 'Widget.imageBoxImageSizeContain')
                     ->toArray()
             );
 
-        $settings->createUrl("url")
-            ->withName("Widget.imageBoxUrlLabel");
+        $settings->createUrl('url')
+            ->withName('Widget.imageBoxUrlLabel');
 
-        $settings->createCheckbox("customCaption")
+        $settings->createCheckbox('customCaption')
             ->withCondition("style !== 'no-caption'")
-            ->withName("Widget.imageBoxCustomCaption");
+            ->withName('Widget.imageBoxCustomCaption');
 
-        $settings->createFile("customImagePath")
-            ->withDefaultValue("")
-            ->withName("Widget.imageBoxCustomImagePathLabel")
-            ->withTooltip("Widget.imageBoxCustomImagePathTooltip");
+        $settings->createFile('customImagePath')
+            ->withDefaultValue('')
+            ->withName('Widget.imageBoxCustomImagePathLabel')
+            ->withTooltip('Widget.imageBoxCustomImagePathTooltip')
+            ->withAllowedExtensions(array_merge(self::IMAGE_EXTENSIONS, self::MODERN_IMAGE_EXTENSIONS));
 
-        $settings->createCheckbox("lazyLoading")
-            ->withName("Widget.imageBoxLazyLoadingName")
-            ->withTooltip("Widget.imageBoxLazyLoadingTooltip")
+        $settings->createFile('fallbackImagePath')
+            ->withDefaultValue('')
+            ->withName('Widget.imageBoxFallbackImagePathLabel')
+            ->withTooltip('Widget.imageBoxFallbackImagePathTooltip')
+            ->withCondition('!!customImagePath && /.?(\.webp)(?:$|\?)/.test(customImagePath)')
+            ->withAllowedExtensions(self::IMAGE_EXTENSIONS);
+
+        $settings->createCheckbox('lazyLoading')
+            ->withName('Widget.imageBoxLazyLoadingName')
+            ->withTooltip('Widget.imageBoxLazyLoadingTooltip')
             ->withDefaultValue(true);
 
         $settings->createSpacing(false, true);
@@ -96,30 +115,24 @@ class ImageBoxWidget extends BaseWidget
 
     protected function getTemplateData($widgetSettings, $isPreview)
     {
-        $urlType = "";
-        $urlValue = "";
+        $urlType = '';
+        $urlValue = '';
 
-        if ( array_key_exists("url", $widgetSettings) && $widgetSettings["url"]["value"]["mobile"] )
-        {
-            $urlType  = $widgetSettings["url"]["type"]["mobile"];
-            $urlValue = $widgetSettings["url"]["value"]["mobile"];
-        }
-        else
-        {
-            if ( $widgetSettings["categoryId"]["mobile"] )
-            {
-                $urlType = "category";
-                $urlValue = $widgetSettings["categoryId"]["mobile"];
-            }
-            else
-            {
-                $urlType = "item";
-                $urlValue = $widgetSettings["variationId"]["mobile"];
+        if (array_key_exists('url', $widgetSettings) && $widgetSettings['url']['value']['mobile']) {
+            $urlType = $widgetSettings['url']['type']['mobile'];
+            $urlValue = $widgetSettings['url']['value']['mobile'];
+        } else {
+            if ($widgetSettings['categoryId']['mobile']) {
+                $urlType = 'category';
+                $urlValue = $widgetSettings['categoryId']['mobile'];
+            } else {
+                $urlType = 'item';
+                $urlValue = $widgetSettings['variationId']['mobile'];
             }
         }
 
         return [
-            'urlType'  => $urlType,
+            'urlType' => $urlType,
             'urlValue' => $urlValue
         ];
     }

@@ -138,7 +138,7 @@
                     <!-- Coupon -->
                     <template v-if="visibleFields.includes('salesCoupon') && basket.couponCode && basket.couponCampaignType === 'sales'">
                         <dt class="font-weight-bold">
-                            {{ $translate("Ceres::Template.basketCoupon") }}</strong>
+                            {{ $translate("Ceres::Template.basketCoupon") }}
                         </dt><!--
                      --><dd class="font-weight-bold">
                             {{ basket.couponDiscount | currency }}

@@ -16,6 +16,7 @@
 
 {% set sourceType = widget.settings.sourceType.mobile %}
 {% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set fallbackImagePath = widget.settings.fallbackImagePath.mobile | default(customImagePath) %}
 {% set colorPalette = widget.settings.colorPalette.mobile | default("none") %}
 {% set customColor = widget.settings.customColor.mobile %}
 
@@ -60,6 +61,7 @@
 
             {{ Twig.if("hasUrl") }}
                 image-url="{{ Twig.print("url") }}"
+                fallback-url="{{ fallbackImagePath }}"
             {{ Twig.endif() }}
             :is-background-image="true"
 

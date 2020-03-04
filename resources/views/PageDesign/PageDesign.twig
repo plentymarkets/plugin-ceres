@@ -32,6 +32,13 @@
     {% for styleTemplate in get_additional_styles() %}
         {% include styleTemplate.path ignore missing with styleTemplate.params %}
     {% endfor %}
+
+    {% if assetName == 'ceres-checkout' %}
+        {{ LayoutContainer.show("Ceres::Checkout.Styles") }}
+    {% endif %}
+    {% if assetName == 'ceres-item' %}
+        {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
+    {% endif %}
 </head>
 
 <body class="{{ bodyClasses | join(' ') }}">
@@ -202,7 +209,8 @@
         initialData: {
             shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
             shippingCountryId: {{ services.checkout.getShippingCountryId() }}
-        }
+        },
+        features: {}
     };
 </script>
 
@@ -229,6 +237,13 @@
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
+
+{% if assetName == 'ceres-checkout' %}
+    {{ LayoutContainer.show("Ceres::Checkout.AfterScriptsLoaded") }}
+{% endif %}
+{% if assetName == 'ceres-item' %}
+    {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
+{% endif %}
 
 <script>
     window.vueEventHub = new Vue();

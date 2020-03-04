@@ -260,6 +260,7 @@ $progress-border-radius:    .25rem !default;
 
 //Ceres variables
 $aside-columns-width: 30rem !default;
+$autocomplete-max-items: 10 !default;
 
 // Buttons
 //
@@ -9073,8 +9074,9 @@ button:focus {
     z-index: 2;
 }
 
-[v-cloak] {
-    display: none;
+.lozad {
+    display: block;
+    min-height: 1px;
 }
 
 // stylelint-disable selector-type-no-unknown
@@ -9181,14 +9183,18 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     position: absolute;
     top: 100%;
     z-index: $zindex-7;
-    max-height: 310px;
+    max-height: 80vh;
     -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
 }
 
 .autocomplete-suggestion {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
@@ -9196,28 +9202,52 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     &:hover {
         background: $gray-300;
     }
+
+    .label {
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+        color: $gray-900;
+
+        .small {
+            color: $gray-600;
+        }
+
+        &.compact .small {
+            line-height: .85;
+        }
+    }
+
+    .image {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 40px;
+        height: 40px;
+
+    }
+
+    img {
+        max-width: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+    }
+
+    .count span {
+        display: inline-block;
+        min-width: 3em;
+        padding: .1rem 0;
+        font-size: .85rem;
+        color: $gray-600;
+        text-align: center;
+        background: $gray-200;
+    }
 }
 
-.autocomplete-item-name {
-    -ms-flex-item-align: center;
-        align-self: center;
-    max-width: 0;
-    color: $gray-900;
-}
-
-.autocomplete-image-container {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 40px;
-    height: 40px;
-}
-
-.autocomplete-image {
-    max-width: 100%;
-    -o-object-fit: contain;
-       object-fit: contain;
+.autocomplete-suggestion:nth-child(n + #{$autocomplete-max-items + 1}),
+.widget-inner-stacked .autocomplete-suggestion:nth-child(n + #{($autocomplete-max-items / 2)}) {
+    display: none;
 }
 
 .search-input {
@@ -9357,6 +9387,16 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     -webkit-backface-visibility: hidden; // stylelint-disable-line property-no-vendor-prefix
     -webkit-tap-highlight-color: transparent; // stylelint-disable-line property-no-vendor-prefix
     -webkit-touch-callout: none; // stylelint-disable-line property-no-vendor-prefix
+
+    img {
+        // display block is required for lozad framework
+        display: block;
+        width: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+        height: 100%;
+
+    }
 }
 
 .single-carousel,
@@ -9370,19 +9410,6 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
             width: 100%;
             height: 100%;
         }
-    }
-}
-
-.owl-carousel .owl-item img {
-    // display block is required for lozad framework
-    display: block;
-    width: 100%;
-    -o-object-fit: contain;
-       object-fit: contain;
-    height: 100%;
-
-    &:not([src]) {
-        opacity: 0;
     }
 }
 
@@ -10972,6 +10999,7 @@ textarea.no-resize {
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 10;
 
         .badge {
             font-size: .9rem;
@@ -11419,7 +11447,7 @@ html.crios {
     background: $white;
 
     .category-title {
-        padding: 1.2rem 2rem;
+        padding: 1.2rem 1.75rem;
         background: #efefef;
 
         p:first-child {
@@ -11574,11 +11602,12 @@ html.crios {
 
         .form-check-input {
             &:checked + label {
-                padding-left: 1.75rem;
+                padding-left: 3.5rem;
                 color: $gray-900;
                 background: $gray-200;
 
                 &::before {
+                    padding-left: 1.75rem;
                     font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                     content: "\f046";
                     opacity: 1;
@@ -11597,7 +11626,7 @@ html.crios {
             @include transition(all .1s ease);
 
             &:hover {
-                padding-left: .5rem;
+                padding-left: 2.25rem;
                 color: $gray-700;
                 background: $gray-100;
                 @include transition(all .1s ease);
@@ -12156,22 +12185,31 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 
 .widget-filter-base {
-    padding: 2rem;
+    padding: 2rem 0;
     background-color: $white;
 
-    .form-check-wrapper {
-        padding: .25rem 0;
-    }
     .form-check {
         margin-bottom: 0;
     }
+
     .form-check-label {
         cursor: pointer;
+    }
+
+    .title,
+    .card .form-check-label {
+        padding-left: 1.75rem;
     }
 }
 
 .widget-toolbar .widget-filter-base {
     padding: 0;
+
+    .form-check-input:checked + label,
+    .form-check-input:hover + label {
+        padding-left: 1.75rem;
+        margin-left: 1.75rem;
+    }
 }
 
 .widget-item-grid {
@@ -12485,6 +12523,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         padding-bottom: 0;
     }
 
+    > picture img,
     > img {
         position: absolute;
         top: 50%;
@@ -14358,6 +14397,10 @@ header .widget {
             min-height: 115px;
             margin-bottom: 0;
         }
+
+        &:not(.items-empty) {
+            cursor: pointer;
+        }
     }
 
     .dropdown-toggle {
@@ -15239,6 +15282,12 @@ html.ie .confirmation-order-list .cmp-order-item {
 .widget-account-settings {
     .card {
         min-height: 115px;
+    }
+}
+
+.page-item {
+    &:not(.disabled):not(.active) {
+        cursor: pointer;
     }
 }
 
