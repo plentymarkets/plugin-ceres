@@ -392,10 +392,8 @@ Custom classes
 
         &.active,
         &:hover {
-            img {
-                cursor: pointer;
-                border: 1px solid $primary;
-            }
+            cursor: pointer;
+            border: 1px solid $primary;
         }
     }
 
