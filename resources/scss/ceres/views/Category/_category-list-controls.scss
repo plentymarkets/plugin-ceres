@@ -240,50 +240,48 @@
 
 .filter-collapse,
 .widget-filter-base {
-    .card {
-        border: 0;
 
-        .form-check {
-            padding-left: 0;
-        }
+    .form-check {
+        padding-left: 0;
+    }
 
-        .form-check-input {
-            &:checked + label {
-                padding-left: 1.75rem;
-                color: $gray-900;
-                background: $gray-200;
+    .form-check-input {
+        &:checked + label {
+            padding-left: 1.75rem;
+            color: $gray-900;
+            background: $gray-200;
 
-                &::before {
-                    position: relative;
-                    font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
-                    content: "\f046";
-                    opacity: 1;
-                }
-            }
-
-            &:disabled + label {
-                cursor: not-allowed;
-            }
-        }
-
-        .form-check-label {
-            display: block;
-            padding: .5rem 0;
-            color: $gray-700;
-            @include transition(all .1s ease);
-
-            &:hover {
-                padding-left: 2.25rem;
-                color: $gray-700;
-                background: $gray-100;
-            }
-
-            &::before {
-                position: absolute;
+            span::before {
+                position: relative;
+                margin-right: 5px;
                 font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                 content: "\f046";
-                opacity: 0;
+                opacity: 1;
             }
+        }
+
+        &:disabled + label {
+            cursor: not-allowed;
+        }
+    }
+
+    .form-check-label {
+        display: block;
+        padding: .5rem 0;
+        color: $gray-700;
+        @include transition(all .1s ease);
+
+        &:hover {
+            padding-left: 2.25rem;
+            color: $gray-700;
+            background: $gray-100;
+        }
+
+        span::before {
+            position: absolute;
+            font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+            content: "\f046";
+            opacity: 0;
         }
     }
 }
@@ -292,6 +290,7 @@
     min-width: 3em;
     padding: .1rem 0;
     font-size: .85rem;
+    line-height: 18px;
     color: $gray-600;
     text-align: center;
     background: $gray-200;

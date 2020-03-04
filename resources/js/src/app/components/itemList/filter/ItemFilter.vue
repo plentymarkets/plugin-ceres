@@ -1,5 +1,5 @@
 <template>
-    <div v-if="facet.name" class="card pt-4">
+    <div v-if="facet.name" class="card pt-4 border-0">
         <div class="h3 title py-0">{{ facetName }}</div>
 
         <div v-if="facet.type === 'price'">
