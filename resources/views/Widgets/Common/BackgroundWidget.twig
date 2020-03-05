@@ -66,7 +66,7 @@
             style="{% if opacity < 1 %}opacity:{{ opacity }};{% endif %}{% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
         </lazy-img>
     </div>
-    <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}{% if not fullWidth %} px-0{% endif %}">
+    <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}">
         {% if showPlaceholder %}
             <div class="widget-placeholder">
                 <div>
