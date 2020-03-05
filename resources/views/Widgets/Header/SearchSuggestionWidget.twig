@@ -1,8 +1,9 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set showImages = widget.settings.showImages.mobile is same as (true) %}
-{% set showCount  = widget.settings.showCount.mobile is same as (true) %}
+{% set showImages                 = widget.settings.showImages.mobile is same as (true) %}
+{% set showCount                  = widget.settings.showCount.mobile is same as (true) %}
+{% set showAdditionalInformation  = widget.settings.showAdditionalInformation.mobile is same as (true) %}
 
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set appearance      = widget.settings.appearance.mobile | default("primary") %}
@@ -32,6 +33,7 @@
         {% if spacingSettings.customPadding.mobile %}:padding-classes="{{ spacingPadding | json_encode }}"
         :padding-inline-styles="{{ inlinePadding | json_encode }}"{% endif %}
         suggestion-type="{{ suggestionType | default("item") }}"
-        :show-count="{{ showCount | json_encode }}">
+        :show-count="{{ showCount | json_encode }}"
+        :show-additional-information="{{ showAdditionalInformation | json_encode }}">
     </search-suggestion-item>
 </div>

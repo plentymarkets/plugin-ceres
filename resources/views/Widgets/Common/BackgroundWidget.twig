@@ -55,7 +55,7 @@
                 {% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}
             {{ Twig.endif() }}{% endif %}">
     <div>
-        <lazy-img class="parallax-img-container-inner
+        <lazy-img picture-class="parallax-img-container-inner
             {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
             {% if colorPalette != "custom" and colorPalette != "none" %} bg-{{ colorPalette | default("none") }}{% endif %}"
 

@@ -78,6 +78,12 @@
 
     {% endif %}
 
+    {% if slideSettings.fallbackImagePath | trim is not empty %}
+
+        {{ Twig.set("slide", "slide | merge({ fallbackImageUrl: #{ slideSettings.fallbackImagePath | json_encode } })") }}
+
+    {% endif %}
+
     {% if slideSettings.headline | trim is not empty and slideSettings.headlineStyle == "custom-caption" %}
 
         {{ Twig.setEscaped("customCaption", slideSettings.headline) }}
@@ -107,7 +113,7 @@
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide{% if animationStyle == 'fade' %} carousel-fade{% endif %}" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
             {{ Twig.for("slide", "slides") }}
-            
+
             <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}
                     {{ Twig.if("slide.openInNewTab is not empty") }} target="_blank" {{ Twig.endif() }}>
@@ -115,22 +121,35 @@
                         {{ Twig.set("altText", "slide.imageAltText") }}
                         {{ Twig.if("altText | trim is empty") }}
                             {{ Twig.set("altText", "slide.name") }}
-                        {{ Twig.endif }}
-                        
+                        {{ Twig.endif() }}
+
                         {{ Twig.set("imgTitle", "slide.imageName") }}
                         {{ Twig.if("imgTitle | trim is empty") }}
                             {{ Twig.set("imgTitle", "slide.name") }}
-                        {{ Twig.endif }}
-                        
+                        {{ Twig.endif() }}
+
                         {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img
-                                class="img-cover"
+                                picture-class="img-cover"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
+                                fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
                                 title="{{ Twig.print("imgTitle") }}">
                             </lazy-img>
                         {% else %}
-                            <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("imgTitle") }}" class="img-cover">
+                            {{ Twig.set("fallbackUrl", "slide.fallbackImageUrl") }}
+                            {{ Twig.if("fallbackUrl | trim is empty") }}
+                                {{ Twig.set("fallbackUrl", "slide.imageUrl") }}
+                            {{ Twig.endif() }}
+                            <picture>
+                                <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
+                                <img
+                                    class="img-cover"
+                                    src="{{ Twig.print("fallbackUrl") }}"
+                                    alt="{{ Twig.print("altText") }}"
+                                    title="{{ Twig.print("imgTitle") }}"
+                                />
+                            </picture>
                         {% endif %}
                     {{ Twig.endif() }}
 
@@ -145,7 +164,7 @@
             </div>
             {{ Twig.endfor() }}
         </div>
-        
+
         {{ Twig.if("slides | length > 1") }}
             <ol class="carousel-indicators">
                 {{ Twig.for("i", "1..slides | length") }}

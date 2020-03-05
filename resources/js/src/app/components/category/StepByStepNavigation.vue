@@ -8,7 +8,7 @@
                         <div v-if="category.details[0][imageSource]" class="prop-1-1">
                             <img v-if="imageSource !== 'none'" :src="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
                         </div>
-                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">{{ category.details[0].name }}</span></div>
+                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto text-truncate">{{ category.details[0].name }}</span></div>
                     </div>
                 </a>
             </div>

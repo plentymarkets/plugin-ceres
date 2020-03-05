@@ -9,6 +9,7 @@
 {% set isFixed              = widget.settings.isFixed.mobile %}
 {% set navigationStyle      = widget.settings.navigationStyle.mobile %}
 {% set companyLogoUrl       = widget.settings.companyLogoUrl.mobile %}
+{% set fallbackImagePath    = widget.settings.fallbackImagePath.mobile %}
 {% set megaMenuLevels       = widget.settings.megaMenuLevels.mobile %}
 {% set megaMenuMaxItems1    = widget.settings.megaMenuMaxItems.stage1.mobile | default(30) %}
 {% set megaMenuMaxItems2    = widget.settings.megaMenuMaxItems.stage2.mobile | default(3) %}
@@ -22,6 +23,10 @@
     {% endif %}
 {% endif %}
 
+{% if fallbackImagePath | trim is empty %}
+    {% set fallbackImagePath = companyLogoUrl %}
+{% endif %}
+
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
 <nav class="navbar header-fw p-0 border-bottom{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{% else %} normalmenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
@@ -30,7 +35,14 @@
         <div class="row mx-0 position-relative d-flex">
             <div class="brand-wrapper px-lg-3">
                 <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
-                    <img alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}" src="{{ companyLogoUrl }}" class="img-fluid" />
+                    <picture>
+                        <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
+                        <img
+                            class="img-fluid"
+                            src="{{ fallbackImagePath }}"
+                            alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}"
+                        />
+                    </picture>
                 </a>
 
                 <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">

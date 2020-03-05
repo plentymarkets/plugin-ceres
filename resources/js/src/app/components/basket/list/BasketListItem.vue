@@ -5,7 +5,7 @@
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending isLoading': waiting, 'isLoading': isCheckoutReadonly }">
             <div class="image-container">
                 <lazy-img
-                    class="d-block mw-100 mh-100"
+                    picture-class="d-block mw-100 mh-100"
                     v-if="image"
                     :image-url="image"
                     :alt="altText"
@@ -55,7 +55,7 @@
                             </div>
 
                                 <div class="text-muted small">
-                                    <template v-for="propertyGroup in transformedVariationProperties">
+                                    <template v-for="propertyGroup in basketItem.variation.data.variationProperties">
                                         <div v-for="property in propertyGroup.properties">
                                             <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
                                             <span>{{ property.names.name }}</span>
@@ -155,7 +155,6 @@
 import ExceptionMap from "../../../exceptions/ExceptionMap";
 import TranslationService from "../../../services/TranslationService";
 import { isNullOrUndefined } from "../../../helper/utils";
-import { transformBasketItemProperties } from "../../../services/VariationPropertyService";
 import { mapState } from "vuex";
 
 const NotificationService = require("../../../services/NotificationService");
@@ -211,7 +210,6 @@ export default {
             }
 
             return this.itemName;
-
         },
 
         itemName()
@@ -254,11 +252,6 @@ export default {
             }
 
             return this.basketItem.variation.data.prices.default.basePrice;
-        },
-
-        transformedVariationProperties()
-        {
-            return transformBasketItemProperties(this.basketItem, [], "displayInOrderProcess");
         },
 
         // eslint-disable-next-line complexity
