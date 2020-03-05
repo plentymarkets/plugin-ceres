@@ -14,10 +14,10 @@
                         <img v-if="item.image" :src="item.image">
                     </div>
 
-                    <div class="label overflow-hidden" :class="{ 'compact': item.beforeLabel && item.afterLabel }">
-                        <p class="small mb-0 text-truncate" v-if="item.beforeLabel">{{ item.beforeLabel }}</p>
+                    <div class="label overflow-hidden" :class="{ 'compact': showAdditionalInformation && item.beforeLabel && item.afterLabel }">
+                        <p class="small mb-0 text-truncate" v-if="showAdditionalInformation && item.beforeLabel">{{ item.beforeLabel }}</p>
                         <p class="mb-0 text-truncate" v-html="getHighlightedLabel(item.label)"></p>
-                        <p class="small mb-0 text-truncate" v-if="item.afterLabel">{{ item.afterLabel }}</p>
+                        <p class="small mb-0 text-truncate" v-if="showAdditionalInformation && item.afterLabel">{{ item.afterLabel }}</p>
                     </div>
 
                     <div class="count" v-if="showCount && item.count > 0">
@@ -60,7 +60,9 @@ export default {
             required: true
         },
 
-        showCount: Boolean
+        showCount: Boolean,
+
+        showAdditionalInformation: Boolean
     },
 
     computed:
