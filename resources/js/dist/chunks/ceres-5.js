@@ -74,6 +74,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -458,9 +460,9 @@ var render = function() {
   return _vm.facet.name
     ? _c(
         "div",
-        { staticClass: "card" },
+        { staticClass: "card pt-4 border-0" },
         [
-          _c("div", { staticClass: "h3 title" }, [
+          _c("div", { staticClass: "h3 title py-0" }, [
             _vm._v(_vm._s(_vm.facetName))
           ]),
           _vm._v(" "),
@@ -471,7 +473,7 @@ var render = function() {
                   "div",
                   { key: value.id, staticClass: "form-check-wrapper" },
                   [
-                    _c("div", { staticClass: "form-check" }, [
+                    _c("div", { staticClass: "form-check mb-0 pl-0" }, [
                       _c("input", {
                         staticClass: "form-check-input d-none",
                         attrs: {
@@ -499,17 +501,17 @@ var render = function() {
                           attrs: { for: "option-" + value.id }
                         },
                         [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(value.name) +
-                              "\n            "
-                          )
+                          _c("div", { staticClass: "d-flex" }, [
+                            _c("span", { staticClass: "flex-grow-1" }, [
+                              _vm._v(_vm._s(value.name))
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "filter-badge" }, [
+                              _vm._v(_vm._s(value.count))
+                            ])
+                          ])
                         ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "filter-badge" }, [
-                        _vm._v(_vm._s(value.count))
-                      ])
+                      )
                     ])
                   ]
                 )
