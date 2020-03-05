@@ -93,13 +93,17 @@
                 {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </lazy-img>
         {% else %}
+            {{ Twig.set("fallbackUrl", fallbackImagePath | json_encode ) }}
+            {{ Twig.if("fallbackUrl | trim is empty") }}
+                {{ Twig.set("fallbackUrl", "imageUrl") }}
+            {{ Twig.endif() }}
             <picture>
                 <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                 <img
-                        class="img-{{ imageSize }}"
-                        src="{{ fallbackImagePath }}"
-                        alt="{{ Twig.print("imageAltText") }}"
-                        {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
+                    class="img-{{ imageSize }}"
+                    src="{{ Twig.print("fallbackUrl") }}"
+                    alt="{{ Twig.print("imageAltText") }}"
+                    {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
                 />
             </picture>
         {% endif %}
