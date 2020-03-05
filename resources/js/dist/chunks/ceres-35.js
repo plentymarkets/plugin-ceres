@@ -114,7 +114,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: String,
       required: true
     },
-    showCount: Boolean
+    showCount: Boolean,
+    showAdditionalInformation: Boolean
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapState"])({
     autocompleteResult: function autocompleteResult(state) {
@@ -193,10 +194,15 @@ var render = function() {
                       "div",
                       {
                         staticClass: "label overflow-hidden",
-                        class: { compact: item.beforeLabel && item.afterLabel }
+                        class: {
+                          compact:
+                            _vm.showAdditionalInformation &&
+                            item.beforeLabel &&
+                            item.afterLabel
+                        }
                       },
                       [
-                        item.beforeLabel
+                        _vm.showAdditionalInformation && item.beforeLabel
                           ? _c(
                               "p",
                               { staticClass: "small mb-0 text-truncate" },
@@ -213,7 +219,7 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        item.afterLabel
+                        _vm.showAdditionalInformation && item.afterLabel
                           ? _c(
                               "p",
                               { staticClass: "small mb-0 text-truncate" },
