@@ -316,10 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    imageUrl: {
-      type: String,
-      required: true
-    },
+    imageUrl: String,
     fallbackUrl: String,
     isBackgroundImage: Boolean,
     pictureClass: String
