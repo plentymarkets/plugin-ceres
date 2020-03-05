@@ -20138,6 +20138,8 @@ html.ie .v-s-boxes .v-s-box.invalid {
         top: 0;
         bottom: 0;
         height: 100% !important;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .huge-font {
@@ -20157,6 +20159,15 @@ html.ie .v-s-boxes .v-s-box.invalid {
             h3 { font-size: 1.5em };
             h4 { font-size: 1.25em };
             * { font-size: 1em };
+        }
+    }
+}
+
+.widget-grid {
+    .widget-background {
+        .container-max {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
         }
     }
 }
@@ -20879,6 +20890,15 @@ html.ie {
         }
     }
 
+    .widget-fw {
+        width: unset !important;
+        left: unset !important;
+        right: unset !important;
+        margin-left: unset;
+        margin-right: unset;
+        max-width: unset !important;
+    }
+
     .widget-inner-stacked
     {
         display: -webkit-box;
@@ -20997,8 +21017,7 @@ html.ie .widget-grid .widget-inner-stacked {
 {
     margin-bottom: 2rem;
 
-    .widget-inner
-    {
+    .widget-inner {
         position: relative;
 
         .widget
@@ -21097,20 +21116,6 @@ html.ie .widget-grid .widget-inner-stacked {
     &.widget-grid {
         width: calc(100vw + 30px) !important;
         margin-left: -15px;
-    }
-}
-.widget .widget-fw {
-    position: unset;
-    width: unset;
-    left: unset !important;
-    right: unset !important;
-    margin-left: unset;
-    margin-right: unset;
-    max-width: unset !important;
-
-    &.widget-grid {
-        width: unset !important;
-        margin-left: unset;
     }
 }
 
