@@ -29,12 +29,21 @@ $green:                     #28a745 !default;
 $teal:                      #20c997 !default;
 $cyan:                      #17a2b8 !default;
 
-$primary:                   $blue !default;
-$secondary:                 $gray-600 !default;
-$success:                   $green !default;
-$info:                      $cyan !default;
-$warning:                   $yellow !default;
-$danger:                    $red !default;
+// Legacy: Do not remove!
+// This variables are filled with the values from the plugin config
+$brand-primary:             $blue !default;
+$brand-secondary:           $gray-600 !default;
+$brand-success:             $green !default;
+$brand-info:                $cyan !default;
+$brand-warning:             $yellow !default;
+$brand-danger:              $red !default;
+
+$primary:                   $brand-primary !default;
+$secondary:                 $brand-secondary !default;
+$success:                   $brand-success !default;
+$info:                      $brand-info !default;
+$warning:                   $brand-warning !default;
+$danger:                    $brand-danger !default;
 $light:                     $gray-100 !default;
 $dark:                      $gray-800 !default;
 
