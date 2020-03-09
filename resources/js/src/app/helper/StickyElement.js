@@ -55,8 +55,15 @@ export class StickyElement
             {
                 if (this.shouldUpdate())
                 {
-                    this.checkElement();
-                    this.updateStyles();
+                    if (this.checkElement())
+                    {
+                        if (this.animationFrame > 0)
+                        {
+                            cancelAnimationFrame(this.animationFrame);
+                            this.animationFrame = 0;
+                        }
+                        this.animationFrame = requestAnimationFrame(this.updateStyles.bind(this));
+                    }
                 }
             };
 
@@ -68,7 +75,6 @@ export class StickyElement
 
             this.enabled = true;
             this.calculateOffset();
-            this.tick();
         });
     }
 
@@ -105,15 +111,6 @@ export class StickyElement
         this.enabled = false;
     }
 
-    tick()
-    {
-        if (this.shouldUpdate())
-        {
-            this.updateStyles();
-        }
-        this.animationFrame = requestAnimationFrame(this.tick.bind(this));
-    }
-
     shouldUpdate()
     {
         return (this.enabled && this.isMinWidth) || (this.position || {}).isSticky;
@@ -142,6 +139,10 @@ export class StickyElement
             origY: placeholderRect.top,
             isSticky: elementRect.height < containerRect.height && placeholderRect.top <= this.offsetTop
         };
+
+        // check if any property has changed
+        return ["width", "height", "x", "y", "origY", "isSticky"]
+            .some(property => oldValue[property] !== this.position[property]);
     }
 
     calculateOffset()
