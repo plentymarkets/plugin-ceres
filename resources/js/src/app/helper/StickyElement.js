@@ -23,16 +23,7 @@ export class StickyElement
         this.isMinWidth = true;
         this.checkMinWidth();
 
-        this.resizeListener = () =>
-        {
-            this.checkMinWidth();
-
-            if (this.enabled && this.position.isSticky)
-            {
-                this.checkElement();
-                this.updateStyles();
-            }
-        };
+        this.resizeListener = this.checkMinWidth.bind(this);
 
         window.addEventListener("resize", this.resizeListener);
 
@@ -65,6 +56,7 @@ export class StickyElement
                 if (this.shouldUpdate())
                 {
                     this.checkElement();
+                    this.updateStyles();
                 }
             };
 
