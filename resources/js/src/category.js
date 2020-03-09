@@ -40,7 +40,7 @@ Vue.prototype.$mount =
 
         if (compHtml)
         {
-            const renderFunctions = Vue.compile(compHtml);
+            const renderFunctions = Vue.compile(compHtml, { delimiters: Vue.options.delimiters });
 
             Object.assign(this.$options, renderFunctions);
         }

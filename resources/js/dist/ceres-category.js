@@ -55115,7 +55115,9 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$mount = function (el, hyd
   }
 
   if (compHtml) {
-    var renderFunctions = vue__WEBPACK_IMPORTED_MODULE_14___default.a.compile(compHtml);
+    var renderFunctions = vue__WEBPACK_IMPORTED_MODULE_14___default.a.compile(compHtml, {
+      delimiters: vue__WEBPACK_IMPORTED_MODULE_14___default.a.options.delimiters
+    });
     Object.assign(this.$options, renderFunctions);
   }
 
