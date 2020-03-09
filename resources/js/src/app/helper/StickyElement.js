@@ -52,7 +52,7 @@ export class StickyElement
     {
         this.vm.$nextTick(() =>
         {
-            if (this.enabled || !this.isMinWidth || App.isShopBuilder)
+            if (this.enabled || App.isShopBuilder)
             {
                 return;
             }
