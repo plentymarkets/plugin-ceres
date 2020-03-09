@@ -23,7 +23,16 @@ export class StickyElement
         this.isMinWidth = true;
         this.checkMinWidth();
 
-        this.resizeListener = this.checkMinWidth.bind(this);
+        this.resizeListener = () =>
+        {
+            this.checkMinWidth();
+
+            if (this.enabled && this.position.isSticky)
+            {
+                this.checkElement();
+                this.updateStyles();
+            }
+        };
 
         window.addEventListener("resize", this.resizeListener);
 
@@ -43,7 +52,7 @@ export class StickyElement
     {
         this.vm.$nextTick(() =>
         {
-            if (this.enabled || this.isMinWidth || App.isShopBuilder)
+            if (this.enabled || !this.isMinWidth || App.isShopBuilder)
             {
                 return;
             }
@@ -102,7 +111,6 @@ export class StickyElement
         }
         this.animationFrame = 0;
         this.enabled = false;
-
     }
 
     tick()
@@ -116,7 +124,7 @@ export class StickyElement
 
     shouldUpdate()
     {
-        return (this.enabled && !this.isMinWidth) || (this.position || {}).isSticky;
+        return (this.enabled && this.isMinWidth) || (this.position || {}).isSticky;
     }
 
     checkElement(skipOffsetCalculation)
@@ -241,7 +249,7 @@ export class StickyElement
 
     checkMinWidth()
     {
-        this.isMinWidth = !window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
+        this.isMinWidth = window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
     }
 
     getSiblingStickies()
