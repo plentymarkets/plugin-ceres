@@ -260,6 +260,13 @@ export default {
         }
     },
 
+    provide()
+    {
+        return {
+            itemId: this.itemData.documents[0].data.item.id
+        }
+    },
+
     jsonDataFields: [
         "itemData",
         "attributesData",
@@ -340,13 +347,6 @@ export default {
             "variationMissingProperties",
             "variationGroupedProperties",
         ])
-    },
-
-    provide()
-    {
-        return {
-            itemId: this.itemData.documents[0].data.item.id
-        }
     },
 
     created()
