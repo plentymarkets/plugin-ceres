@@ -54,36 +54,7 @@
 
                             <graduated-prices></graduated-prices>
 
-                            <div class="crossprice" v-if="isRecommendedPriceActive && currentVariation.prices.rrp && currentVariation.prices.rrp.unitPrice.value > 0 && currentVariation.prices.rrp.unitPrice.value > currentVariation.prices.default.unitPrice.value">
-                                <del class="text-muted small">
-                                    {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
-                                </del>
-                            </div>
-
-                            <span class="price h1">
-                                <span v-if="addPleaseSelectOption && $store.state.variationSelect.isVariationSelected === false && ($store.state.item.pleaseSelectVariationId === currentVariation.variation.id || $store.state.item.pleaseSelectVariationId === 0)" :content="currentVariation.prices.default.price.value">
-                                    {{ $translate("Ceres::Template.dynamicVariationPrice", {price: variationTotalPrice | currency(currentVariation.prices.default.currency)}) }}
-                                </span>
-                                <span v-else :content="currentVariation.prices.default.price.value">
-                                    {{ variationTotalPrice | currency(currentVariation.prices.default.currency) }}
-                                </span>
-                                <sup>*</sup>
-                                <span :content="currentVariation.prices.default.currency"></span>
-                            </span>
-
-                            <div class="base-price text-muted my-3" v-if="currentVariation.unit">
-                                <div>
-                                    {{ $translate("Ceres::Template.singleItemContent") }}
-                                    <span>{{ currentVariation.unit.content | numberFormat }} </span>
-                                    <span>{{ currentVariation.unit.names.name }}</span>
-                                </div>
-                                <div v-if="currentVariation.variation.mayShowUnitPrice">
-                                    {{ $translate("Ceres::Template.singleItemUnitPrice") }}
-                                    <span class="base-price-value">
-                                        {{ variationGraduatedPrice.basePrice | specialOffer(currentVariation.prices, "basePrice") }}
-                                    </span>
-                                </div>
-                            </div>
+                            <item-price :show-cross-price="isRecommendedPriceActive"></item-price>
 
                             <slot name="after-price"></slot>
 
@@ -329,11 +300,6 @@ export default {
                 && !!this.currentVariation.texts.technicalData.length;
         },
 
-        addPleaseSelectOption()
-        {
-            return App.config.item.showPleaseSelect;
-        },
-
         ageRestriction()
         {
             let translationKey = "";
@@ -371,10 +337,8 @@ export default {
         }),
 
         ...mapGetters([
-            "variationTotalPrice",
             "variationMissingProperties",
             "variationGroupedProperties",
-            "variationGraduatedPrice"
         ])
     },
 
