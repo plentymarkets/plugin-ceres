@@ -42,6 +42,7 @@
 import { mapState, mapGetters } from "vuex";
 
 export default {
+    name: "item-price",
     props:
     {
         showCrossPrice:
