@@ -13,15 +13,28 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 const mount = Vue.prototype.$mount;
-const dataComponentElements = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"));
-const overriddenComponents = dataComponentElements.reduce(
-    (obj, el) =>
+
+let componentOverrides = null;
+
+function getComponentOverride(tagName)
+{
+    if (isNullOrUndefined(componentOverrides))
     {
-        return {
-            ...obj,
-            [el.dataset.component]: el
-        };
-    }, {});
+        componentOverrides = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"))
+            .reduce(
+                (obj, el) =>
+                {
+                    return {
+                        ...obj,
+                        [el.dataset.component]: el
+                    };
+                },
+                {}
+            );
+    }
+
+    return (componentOverrides && componentOverrides[tagName]) ? componentOverrides[tagName].innerHTML : null;
+}
 
 Vue.prototype.$mount =
     function(el, hydrating)
@@ -33,9 +46,9 @@ Vue.prototype.$mount =
         {
             compHtml = document.querySelector(templateOverride).innerHTML;
         }
-        else if (overriddenComponents && overriddenComponents[this.$options._componentTag])
+        else
         {
-            compHtml = overriddenComponents[this.$options._componentTag].innerHTML;
+            compHtml = getComponentOverride(this.$options._componentTag);
         }
 
         if (compHtml)
@@ -201,6 +214,7 @@ import "./app/mixins/template.mixin";
 import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
+import {isNullOrUndefined} from "./app/helper/utils";
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
