@@ -342,6 +342,13 @@ export default {
         ])
     },
 
+    provide()
+    {
+        return {
+            itemId: this.itemData.documents[0].data.item.id
+        }
+    },
+
     created()
     {
         this.$store.commit("setVariation", this.itemData);
