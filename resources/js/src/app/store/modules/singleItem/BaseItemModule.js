@@ -1,3 +1,4 @@
+import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
 
 const state =
@@ -29,13 +30,23 @@ const actions =
             commit(`${itemId}/setVariation`, variation);
 
             // rest call for sets if set comps set
-            // for (const variant of Object.values(vars))
-            // {
-            //     const itemId = variant.documents[0].data.item.id;
+            const setComponentIds = variation.documents[0].data.setComponentVariationIds;
 
-            //     ceresStore.registerModule(["items", variant.documents[0].data.item.id], ItemModule);
-            //     commit(`${itemId}/setVariation`, variant);
-            // }
+            if (setComponentIds.length > 0)
+            {
+                ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem" })
+                    .done(components =>
+                    {
+                        for (const component of Object.values(components.documents))
+                        {
+                            const itemId = component.data.item.id;
+                            const whackData = { documents: [component] };
+
+                            ceresStore.registerModule(["items", itemId], ItemModule);
+                            commit(`${itemId}/setVariation`, whackData);
+                        }
+                    });
+            }
         }
     };
 
