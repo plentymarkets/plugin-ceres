@@ -170,6 +170,9 @@ export default {
             default: null
         }
     },
+
+    inject: ["itemId"],
+
     computed:
     {
         canBeAddedToBasket()
@@ -218,7 +221,10 @@ export default {
 
         ...mapState({
             basketItems: state => state.basket.items,
-            isBasketLoading: state => state.basket.isBasketLoading,
+            isBasketLoading: state => state.basket.isBasketLoading
+        }),
+
+        ...mapState(`items/${this.itemId}`, {
             isVariationSelected: state => state.variationSelect.isVariationSelected,
             hasAvailableVariations: state => state.variationSelect.variations.some(variation => variation.isSalable),
             variationOrderQuantity: state => state.item.variationOrderQuantity
