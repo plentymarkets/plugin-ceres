@@ -25,12 +25,7 @@ export default {
     {
         variationId()
         {
-            if (this.variation)
-            {
-                return this.variation.variation.id;
-            }
-
-            return null;
+            return this.variation && this.variation.variation.id;
         },
 
         ...mapState({
