@@ -390,6 +390,8 @@ export default {
             initialVariationId: this.currentVariation.variation.id,
             isPleaseSelectOption: this.initPleaseSelectOption
         });
+
+        this.$store.dispatch("initVariation", this.itemData);
     },
 
     methods:

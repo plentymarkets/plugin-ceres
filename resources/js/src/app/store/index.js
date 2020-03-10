@@ -20,6 +20,7 @@ import orderReturn from "./modules/OrderReturnModule";
 import user from "./modules/UserModule";
 import variationSelect from "./modules/VariationSelectModule";
 import wishList from "./modules/WishListModule";
+import items from "./modules/singleItem/BaseItemModule";
 
 import eventPropagation from "./plugins/EventPropagationPlugin";
 
@@ -43,6 +44,7 @@ const store = new Vuex.Store(
             contactForm,
             item,
             itemList,
+            items,
             itemSearch,
             lastSeen,
             lazyComponent,
