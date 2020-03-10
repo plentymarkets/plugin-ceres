@@ -20,16 +20,22 @@ const mutations =
 
 const actions =
     {
-        initVariation(state, variation)
+        initVariation({ state, commit }, variation)
         {
-            // rest call for sets if set comps set
-            // register a nested module `nested/myModule`
-            ceresStore.registerModule(["baseItem", variation.documents[0].data.item.id], ItemModule);
+            // register a nested module for the main item
+            const itemId = variation.documents[0].data.item.id;
 
-            for (let i = 0; i <= 10; i++)
-            {
-                ceresStore.registerModule(["baseItem", i], ItemModule);
-            }
+            ceresStore.registerModule(["items", itemId], ItemModule);
+            commit(`${itemId}/setVariation`, variation);
+
+            // rest call for sets if set comps set
+            // for (const variant of Object.values(vars))
+            // {
+            //     const itemId = variant.documents[0].data.item.id;
+
+            //     ceresStore.registerModule(["items", variant.documents[0].data.item.id], ItemModule);
+            //     commit(`${itemId}/setVariation`, variant);
+            // }
         }
     };
 
