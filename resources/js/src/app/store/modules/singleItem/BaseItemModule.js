@@ -32,7 +32,7 @@ const actions =
             // rest call for sets if set comps set
             const setComponentIds = variation.documents[0].data.setComponentVariationIds;
 
-            if (setComponentIds.length > 0)
+            if (setComponentIds && setComponentIds.length)
             {
                 ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem" })
                     .done(components =>
