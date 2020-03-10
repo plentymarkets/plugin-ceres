@@ -214,7 +214,7 @@ import "./app/mixins/template.mixin";
 import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
-import {isNullOrUndefined} from "./app/helper/utils";
+import { isNullOrUndefined } from "./app/helper/utils";
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
