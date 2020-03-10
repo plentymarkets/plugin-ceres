@@ -1,12 +1,12 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set appearance = widget.settings.appearance.mobile | default("none") %}
-{% set showCrossPrice = widget.settings.showCrossPrice.mobile %}
+{% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set appearance      = widget.settings.appearance.mobile | default("none") %}
+{% set showCrossPrice  = widget.settings.showCrossPrice.mobile is same as (true) %}
 
 {% set priceTranslation = trans("Ceres::Template.dynamicVariationPrice", {price: "'+$options.filters.currency($store.getters.variationTotalPrice, $store.getters.currentItemVariation.prices.default.currency)+'"}) %}
 
@@ -18,5 +18,5 @@
     {% endif %}
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
-    <item-price></item-price>
+    <item-price :show-cross-price="{{ showCrossPrice | json_encode }}"></item-price>
 </div>

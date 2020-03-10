@@ -1,8 +1,8 @@
 <template>
     <div>
 
-        <div class="crossprice" v-if="showRrp && hasRrp">
-            <del class="text-muted small">
+        <div class="crossprice" v-if="showCrossPrice && hasCrossPrice">
+            <del class="text-muted small text-appearance">
                 {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
             </del>
         </div>
@@ -44,7 +44,7 @@ import { mapState, mapGetters } from "vuex";
 export default {
     props:
     {
-        showRrp:
+        showCrossPrice:
         {
             type: Boolean,
             default: true
@@ -56,7 +56,7 @@ export default {
     },
     computed:
     {
-        hasRrp()
+        hasCrossPrice()
         {
             return !!this.currentVariation.prices.rrp &&
                 this.currentVariation.prices.rrp.unitPrice.value > 0 &&
