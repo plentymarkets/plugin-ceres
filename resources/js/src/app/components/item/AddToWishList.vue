@@ -17,8 +17,17 @@ import { mapState } from "vuex";
 const NotificationService = require("../../services/NotificationService");
 
 export default {
+    
+    name: "add-to-wish-list",
+
     props: {
         variationId: Number
+    },
+
+    inject: {
+        itemId: {
+            default: null
+        }
     },
 
     data()
@@ -43,7 +52,9 @@ export default {
         ...mapState({
             currentVariationVariationId(state)
             {
-                const currentVariation = state.item.variation && state.item.variation.documents && state.item.variation.documents[0].data;
+                const currentVariation =    state.items[this.itemId].variation &&
+                                            state.items[this.itemId].variation.documents &&
+                                            state.items[this.itemId].variation.documents[0].data;
 
                 if (isNullOrUndefined(currentVariation))
                 {
