@@ -92,11 +92,19 @@ const NotificationService = require("../../services/NotificationService");
 
 export default {
 
+    name: "variation-select",
+
     props: {
         forceContent:
         {
             type: Boolean,
             default: false
+        }
+    },
+
+    inject: {
+        itemId: {
+            default: null
         }
     },
 
@@ -174,7 +182,9 @@ export default {
 
         ...mapState({
             attributes: state => state.variationSelect.attributes,
-            currentVariation: state => state.item.variation.documents[0].data,
+            currentVariation(state) {
+                return state.items[this.itemId].variation && state.items[this.itemId].variation.documents[0].data;
+            },
             selectedAttributes: state => state.variationSelect.selectedAttributes,
             selectedUnit: state => state.variationSelect.selectedUnit,
             units: state => state.variationSelect.units,
