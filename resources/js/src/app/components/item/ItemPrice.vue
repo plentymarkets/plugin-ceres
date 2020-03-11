@@ -43,6 +43,7 @@ import { mapState, mapGetters } from "vuex";
 
 export default {
     name: "item-price",
+
     props:
     {
         showCrossPrice:
@@ -51,10 +52,18 @@ export default {
             default: true
         }
     },
+
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     data()
     {
         return {}
     },
+
     computed:
     {
         hasCrossPrice()
@@ -65,7 +74,9 @@ export default {
         },
 
         ...mapState({
-            currentVariation: state => state.item.variation.documents[0].data,
+            currentVariation(state) {
+                return state.items[this.itemId] && state.items[this.itemId].variation.documents[0].data;
+            }
         }),
 
         ...mapGetters([

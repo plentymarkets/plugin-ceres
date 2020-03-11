@@ -100,7 +100,7 @@ export default {
         ...mapState({
             currentVariation(state)
             {
-                return state.items[this.itemId].variation;
+                return state.items[this.itemId] && state.items[this.itemId].variation;
             }
         })
     },
