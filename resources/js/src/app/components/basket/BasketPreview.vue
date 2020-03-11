@@ -152,13 +152,7 @@ export default {
         {
             setTimeout(function()
             {
-                const vueApp = document.querySelector("#vue-app");
-                const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
-
-                if (vueApp)
-                {
-                    vueApp.classList.add(basketOpenClass);
-                }
+                document.body.classList.add("basket-open");
             }, 1);
         }
     }
