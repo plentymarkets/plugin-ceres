@@ -318,7 +318,7 @@ export default {
         },
         showMissingPropertiesError()
         {
-            this.$store.commit("setVariationMarkInvalidProps", true);
+            this.$store.commit(`${this.itemId}/setVariationMarkInvalidProps`, true);
 
             const propertyNames = this.missingOrderProperties.map(property => property.property.names.name);
             let errorMsgContent = "";
@@ -350,6 +350,7 @@ export default {
             this.quantity = value;
         }
     },
+    
     watch:
     {
         quantity(value)
