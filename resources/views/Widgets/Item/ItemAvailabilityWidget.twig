@@ -1,4 +1,5 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
 {% set customClass = widget.settings.customClass.mobile %}
 
@@ -8,10 +9,12 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
+{# Twig.set("currentVariation", "\"$store.getters.[\"#{item.documents[0].data.item.id}/currentVariation\"]\"") #}
+
 <div class="widget widget-availability {% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <span 
-        v-if="$store.getters.currentItemVariation && $store.getters.currentItemVariation.variation && $store.getters.currentItemVariation.variation.availability" 
+    <span
+        v-if="{{ WidgetHelper.vueCurrentVariation() }}.variation.availability"
         :class="'availability badge availability-' + $store.getters.currentItemVariation.variation.availability.id"
         {% if spacingPadding | length > 0 %}class="{{ spacingPadding }}"{% endif %}
         {% if inlinePadding | length > 0 %}style="{{ inlinePadding }}"{% endif %}>
