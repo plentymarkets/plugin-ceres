@@ -62,6 +62,12 @@ export default {
         }
     },
 
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     data()
     {
         return {
@@ -92,7 +98,10 @@ export default {
         },
 
         ...mapState({
-            currentVariation: state => state.item.variation
+            currentVariation(state)
+            {
+                return state.items[this.itemId].variation;
+            }
         })
     },
 
