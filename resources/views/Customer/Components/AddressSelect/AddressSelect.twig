@@ -9,7 +9,7 @@
                 <div
                     class="component-loading"
                     :id="'addressMultiSelect' + _uid"
-                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'isLoading disabled': isBasketLoading || isCheckoutReadonly}"
+                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'is-loading disabled': isBasketLoading || isCheckoutReadonly}"
                     @click="onDropdownClicked($event)"
                     data-toggle="dropdown"
                     aria-haspopup="true"
