@@ -83,10 +83,18 @@ import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
 
+    name: "order-property-list-item",
+
     props:
     {
         group: Object,
         property: Object
+    },
+
+    inject: {
+        itemId: {
+            default: null
+        }
     },
 
     data()
@@ -174,7 +182,9 @@ export default {
 
         ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
-            variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
+            variationMarkInvalidProperties(state) {
+                return state.items[this.itemId] && state.items[this.itemId].variationMarkInvalidProperties;
+            }
         }),
 
         ...mapGetters([
