@@ -71,6 +71,10 @@ export default {
             return this.$store.getters[`${this.itemId}/variationGraduatedPrice`];
         },
 
+        variationTotalPrice() {
+            return this.$store.getters[`${this.itemId}/variationTotalPrice`]
+        }
+
         ...mapState({
             currentVariation(state) {
                 return state.items[this.itemId] && state.items[this.itemId].variation.documents[0].data;
@@ -79,7 +83,6 @@ export default {
 
         ...mapGetters([
             "showDynamicPrice",
-            "variationTotalPrice"
         ])
     }
 }
