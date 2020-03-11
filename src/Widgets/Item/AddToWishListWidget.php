@@ -17,7 +17,7 @@ class AddToWishListWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::AddToWishListWidget")
             ->withLabel("Widget.addToWishListLabel")
             ->withPreviewImageUrl("/images/widgets/add-to-wishlist.svg")
-            ->withType(WidgetTypes::SINGLE_ITEM)
+            ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
             ->toArray();

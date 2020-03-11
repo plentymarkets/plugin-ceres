@@ -17,7 +17,7 @@ class ItemAvailabilityWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::ItemAvailabilityWidget")
             ->withLabel("Widget.itemAvailabilityLabel")
             ->withPreviewImageUrl("/images/widgets/availability.svg")
-            ->withType(WidgetTypes::SINGLE_ITEM)
+            ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
             ->toArray();

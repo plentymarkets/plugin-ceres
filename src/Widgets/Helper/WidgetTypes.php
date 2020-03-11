@@ -12,6 +12,8 @@ class WidgetTypes
     const ITEM = 'item';
     const SINGLE_ITEM = 'singleitem';
     const SET_ITEM = 'setitem';
+    const SET_COMPONENT = 'setcomponent';
+    const ITEM_CONTENT = 'itemcontent';
     const CATEGORY_ITEM = 'categoryitem';
     const ITEM_SEARCH = 'itemsearch';
     const TOOLBAR = 'toolbar';

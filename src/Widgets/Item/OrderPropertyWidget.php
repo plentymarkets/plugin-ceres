@@ -17,7 +17,7 @@ class OrderPropertyWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::OrderPropertyWidget")
             ->withLabel("Widget.orderPropertyLabel")
             ->withPreviewImageUrl("/images/widgets/order-property.svg")
-            ->withType(WidgetTypes::SINGLE_ITEM)
+            ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(300)
             ->toArray();

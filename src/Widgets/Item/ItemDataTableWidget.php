@@ -18,7 +18,7 @@ class ItemDataTableWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::ItemDataTableWidget")
             ->withLabel("Widget.itemDataTableLabel")
             ->withPreviewImageUrl("/images/widgets/item-data-table.svg")
-            ->withType(WidgetTypes::SINGLE_ITEM)
+            ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(600)
             ->toArray();

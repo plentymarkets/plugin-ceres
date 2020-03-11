@@ -18,7 +18,7 @@ class TagsWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::TagsWidget")
             ->withLabel("Widget.tagsLabel")
             ->withPreviewImageUrl("/images/widgets/tags.svg")
-            ->withType(WidgetTypes::SINGLE_ITEM)
+            ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(600)
             ->toArray();

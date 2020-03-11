@@ -17,7 +17,7 @@ class AddToBasketWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::AddToBasketWidget")
             ->withLabel("Widget.addtoBasketLabel")
             ->withPreviewImageUrl("/images/widgets/add-to-basket.svg")
-            ->withType(WidgetTypes::SINGLE_ITEM)
+            ->withType(WidgetTypes::ITEM_CONTENT)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
             ->toArray();
