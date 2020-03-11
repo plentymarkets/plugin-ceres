@@ -225,7 +225,7 @@ export default {
 
         variationOrderQuantity()
         {
-            return this.$store.state.items[this.itemId] && state.items[this.itemId].variationOrderQuantity;
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationOrderQuantity;
         },
 
         ...mapState({
