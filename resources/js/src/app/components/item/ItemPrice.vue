@@ -59,18 +59,16 @@ export default {
         }
     },
 
-    data()
-    {
-        return {}
-    },
-
     computed:
     {
-        hasCrossPrice()
-        {
+        hasCrossPrice() {
             return !!this.currentVariation.prices.rrp &&
                 this.currentVariation.prices.rrp.unitPrice.value > 0 &&
                 this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
+        },
+
+        variationGraduatedPrice() {
+            return this.$store.getters[`${this.itemId}/variationGraduatedPrice`];
         },
 
         ...mapState({
@@ -81,7 +79,6 @@ export default {
 
         ...mapGetters([
             "showDynamicPrice",
-            "variationGraduatedPrice",
             "variationTotalPrice"
         ])
     }

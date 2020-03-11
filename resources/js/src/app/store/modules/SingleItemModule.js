@@ -178,7 +178,7 @@ const getters =
             return returnPrice || calculatedPrices.default;
         },
 
-        variationTotalPrice(state, getters, rootState, rootGetters)
+        variationTotalPrice(state, getters)
         {
             const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
