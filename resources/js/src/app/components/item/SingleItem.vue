@@ -83,7 +83,7 @@
                                             :use-large-scale="false"
                                             :show-quantity="true"
                                             :item-url="currentVariation | itemURL"
-                                            :missing-order-properties="variationMissingProperties"
+                                            :missing-order-properties="true"
                                             :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
                                             :has-price="currentVariation | hasItemDefaultPrice"
                                         >
@@ -352,9 +352,13 @@ export default {
             units: state => state.variationSelect.units
         }),
 
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
         ...mapGetters([
-            "variationMissingProperties",
-            "variationGroupedProperties",
+            "variationGroupedProperties"
         ])
     },
 

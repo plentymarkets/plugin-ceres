@@ -98,6 +98,11 @@ export default {
             return [];
         },
 
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
         ...mapState({
             variationMarkInvalidProperties(state) {
                 return state.items[this.itemId] && state.items[this.itemId].variationMarkInvalidProperties;
@@ -105,8 +110,7 @@ export default {
         }),
 
         ...mapGetters([
-            "variationGroupedProperties",
-            "variationMissingProperties"
+            "variationGroupedProperties"
         ])
     },
 
