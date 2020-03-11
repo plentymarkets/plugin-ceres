@@ -257,13 +257,17 @@ export default {
         isWishListEnabled: {
             type: Boolean,
             default: false
+        },
+        itemId: {
+            type: Number,
+            required: true
         }
     },
 
     provide()
     {
         return {
-            itemId: this.itemData.documents[0].data.item.id
+            itemId: this.$props.itemId
         }
     },
 

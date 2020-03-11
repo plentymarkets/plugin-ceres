@@ -171,7 +171,11 @@ export default {
         }
     },
 
-    inject: ["itemId"],
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
 
     computed:
     {
@@ -219,15 +223,16 @@ export default {
             }
         },
 
+        variationOrderQuantity()
+        {
+            return this.$store.state.items[this.itemId] && state.items[this.itemId].variationOrderQuantity;
+        },
+
         ...mapState({
             basketItems: state => state.basket.items,
-            isBasketLoading: state => state.basket.isBasketLoading
-        }),
-
-        ...mapState(`items/${this.itemId}`, {
+            isBasketLoading: state => state.basket.isBasketLoading,
             isVariationSelected: state => state.variationSelect.isVariationSelected,
             hasAvailableVariations: state => state.variationSelect.variations.some(variation => variation.isSalable),
-            variationOrderQuantity: state => state.item.variationOrderQuantity
         })
     },
 
