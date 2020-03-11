@@ -60,6 +60,12 @@ export default {
         }
     },
 
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     data()
     {
         return {
@@ -93,7 +99,9 @@ export default {
         },
 
         ...mapState({
-            variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
+            variationMarkInvalidProperties(state) {
+                return state.items[this.itemId] && state.items[this.itemId].variationMarkInvalidProperties;
+            }
         }),
 
         ...mapGetters([
