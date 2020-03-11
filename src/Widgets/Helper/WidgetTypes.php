@@ -10,8 +10,8 @@ class WidgetTypes
     const HEADER = 'header';
     const FOOTER = 'footer';
     const ITEM = 'item';
+    const SINGLE_ITEM = 'singleitem';
     const SET_ITEM = 'setitem';
-    const SET_ONLY = 'setonly';
     const CATEGORY_ITEM = 'categoryitem';
     const ITEM_SEARCH = 'itemsearch';
     const TOOLBAR = 'toolbar';

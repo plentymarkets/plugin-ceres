@@ -17,7 +17,7 @@ class ItemPriceWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::ItemPriceWidget")
             ->withLabel("Widget.itemPriceLabel")
             ->withPreviewImageUrl("/images/widgets/item-price.svg")
-            ->withType(WidgetTypes::ITEM)
+            ->withType(WidgetTypes::SINGLE_ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(400)
             ->toArray();

@@ -18,7 +18,7 @@ class ItemImageWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::ItemImageWidget")
             ->withLabel("Widget.itemImageLabel")
             ->withPreviewImageUrl("/images/widgets/item-image.svg")
-            ->withType(WidgetTypes::SET_ITEM)
+            ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
             ->toArray();
