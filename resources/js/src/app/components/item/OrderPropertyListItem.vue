@@ -261,10 +261,9 @@ export default {
             return value;
         },
 
-        ...mapMutations([
-            "setVariationOrderProperty",
-            "setIsBasketLoading"
-        ]),
+        setVariationOrderProperty(orderProperty) {
+            return this.$store.commit(`${this.itemId}/setVariationOrderProperty`, orderProperty);
+        },
 
         setPropertyFile(event)
         {
@@ -317,7 +316,11 @@ export default {
                     NotificationService.error(err[0]);
                 }
             }
-        }
+        },
+
+        ...mapMutations([
+            "setIsBasketLoading"
+        ]),
     }
 }
 </script>
