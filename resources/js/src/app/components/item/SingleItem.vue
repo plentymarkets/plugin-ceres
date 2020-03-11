@@ -241,6 +241,9 @@ import { isNullOrUndefined } from "../../helper/utils";
 import { mapState, mapGetters } from "vuex";
 
 export default {
+
+    name: "single-item",
+
     props: {
         pleaseSelectOptionVariationId: {
             type: Number,
@@ -341,7 +344,9 @@ export default {
         },
 
         ...mapState({
-            currentVariation: state => state.item.variation.documents[0].data,
+            currentVariation(state) {
+                return state.items[this.$props.itemId] && state.items[this.$props.itemId].variation.documents[0].data;
+            },
             isVariationSelected: state => state.variationSelect.isVariationSelected,
             attributes: state => state.variationSelect.attributes,
             units: state => state.variationSelect.units
@@ -356,6 +361,7 @@ export default {
     created()
     {
         this.$store.commit("setVariation", this.itemData);
+        this.$store.dispatch("initVariation", this.itemData);
         this.$store.commit("setPleaseSelectVariationId", this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
@@ -365,8 +371,6 @@ export default {
             initialVariationId: this.currentVariation.variation.id,
             isPleaseSelectOption: this.initPleaseSelectOption
         });
-
-        this.$store.dispatch("initVariation", this.itemData);
     },
 
     methods:
