@@ -98,7 +98,7 @@ export default {
                     .finally(() =>
                     {
                         this.isWaiting = false;
-                        this.isInitialyLoaded = true;
+                        this.isInitiallyLoaded = true;
                     });
             }
         }
