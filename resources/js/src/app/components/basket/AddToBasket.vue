@@ -354,7 +354,7 @@ export default {
     {
         quantity(value)
         {
-            this.$store.commit("setVariationOrderQuantity", value);
+            this.$store.commit(`${this.itemId}/setVariationOrderQuantity`, value);
         },
 
         variationOrderQuantity(value)
