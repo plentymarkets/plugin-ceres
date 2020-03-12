@@ -36,6 +36,12 @@ export default {
                 return itemModule && itemModule.variation.documents[0].data;
             }
         })
-    }
+    },
+    provide()
+    {
+        return {
+            itemId: this.itemId
+        }
+    },
 }
 </script>
