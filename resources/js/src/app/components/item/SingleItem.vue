@@ -361,7 +361,7 @@ export default {
         },
 
         attributes() {
-            return get(this.$store.state,`items[${this.itemId}].variationSelect.attributes`);
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.attributes`);
         },
 
         units() {

@@ -86,7 +86,7 @@
 <script>
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
-import { mapState } from "vuex";
+import {get} from "../../helper/get";
 
 const NotificationService = require("../../services/NotificationService");
 
@@ -124,6 +124,10 @@ export default {
 
     computed:
     {
+        currentVariation() {
+            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`);
+        },
+
         /**
          * returns true if any variation has no attributes
          */
@@ -180,16 +184,25 @@ export default {
             return !isNullOrUndefined(this.selectedAttributes) && !Object.values(this.selectedAttributes).some((value) => value < 0);
         },
 
-        ...mapState({
-            attributes: state => state.variationSelect.attributes,
-            currentVariation(state) {
-                return state.items[this.itemId].variation && state.items[this.itemId].variation.documents[0].data;
-            },
-            selectedAttributes: state => state.variationSelect.selectedAttributes,
-            selectedUnit: state => state.variationSelect.selectedUnit,
-            units: state => state.variationSelect.units,
-            variations: state => state.variationSelect.variations
-        })
+        attributes() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.attributes`);
+        },
+
+        units() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.units`);
+        },
+
+        selectedAttributes() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.selectedAttributes`);
+        },
+
+        selectedUnit() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.selectedUnit`);
+        },
+
+        variations() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.variations`);
+        }
     },
 
     methods:
