@@ -17,7 +17,6 @@ import localization from "./modules/LocalizationModule";
 import navigation from "./modules/NavigationModule";
 import orderReturn from "./modules/OrderReturnModule";
 import user from "./modules/UserModule";
-import variationSelect from "./modules/VariationSelectModule";
 import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
@@ -51,7 +50,6 @@ const store = new Vuex.Store(
             navigation,
             orderReturn,
             user,
-            variationSelect,
             wishList
         },
 
