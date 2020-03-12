@@ -233,11 +233,23 @@ export default {
             return this.$store.getters[`${this.itemId}/variationMissingProperties`];
         },
 
+        isVariationSelected()
+        {
+            return this.$store.state.items[this.itemId]
+                && this.$store.state.items[this.itemId].variationSelect
+                && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
+        },
+
+        hasAvailableVariations()
+        {
+            return this.$store.state.items[this.itemId]
+                && this.$store.state.items[this.itemId].variationSelect
+                && this.$store.state.items[this.itemId].variationSelect.variations.some(variation => variation.isSalable);
+        },
+
         ...mapState({
             basketItems: state => state.basket.items,
-            isBasketLoading: state => state.basket.isBasketLoading,
-            isVariationSelected: state => state.variationSelect.isVariationSelected,
-            hasAvailableVariations: state => state.variationSelect.variations.some(variation => variation.isSalable),
+            isBasketLoading: state => state.basket.isBasketLoading
         })
     },
 
