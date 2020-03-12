@@ -353,7 +353,7 @@ export default {
         },
 
         currentVariation() {
-            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`);
+            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`, {});
         },
 
         isVariationSelected() {
@@ -371,7 +371,6 @@ export default {
 
     created()
     {
-        this.$store.commit("setVariation", this.itemData);
         this.$store.dispatch("initVariation", this.itemData);
         this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);

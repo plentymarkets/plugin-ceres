@@ -22,10 +22,10 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", Twig.var("item.documents[0].data")])) }}
+    {{ Twig.set("itemId", "item.documents[0].data.item.id") }}
 
     <intersect>
-        <div class="w-100" v-if="$store.state.item.variation.documents">
-            {{ Twig.set("itemId", "item.documents[0].data.item.id") }}
+        <div class="w-100" v-if="$store.state.items[{{ Twig.print("itemId") }}].variation.documents">
             <add-to-basket
                     :variation-id="$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.variation.id"
                     :is-salable="!!$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.filter && $store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.filter.isSalable"
