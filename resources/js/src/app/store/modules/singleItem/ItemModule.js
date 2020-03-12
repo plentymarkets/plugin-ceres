@@ -282,14 +282,6 @@ const getters =
         currentItemVariation(state)
         {
             return state.variation.documents && state.variation.documents[0] && state.variation.documents[0].data;
-        },
-
-        showDynamicPrice(state, getters)
-        {
-            return App.config.item.showPleaseSelect
-                && (state.variationSelect && !state.variationSelect.isVariationSelected)
-                && (state.pleaseSelectVariationId === getters.currentItemVariation.variation.id
-                    || state.pleaseSelectVariationId === 0);
         }
     };
 

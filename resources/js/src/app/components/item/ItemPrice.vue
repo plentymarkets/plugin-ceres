@@ -77,7 +77,11 @@ export default {
         },
 
         showDynamicPrice() {
-            return this.$store.getters[`${this.itemId}/showDynamicPrice`];
+            const state = this.$store.state.items[this.itemId];
+            return App.config.item.showPleaseSelect
+                && (state.variationSelect && !state.variationSelect.isVariationSelected)
+                && (state.pleaseSelectVariationId === this.currentVariation.variation.id
+                    || state.pleaseSelectVariationId === 0);
         }
     }
 }
