@@ -58,11 +58,8 @@
 
                             <slot name="after-price"></slot>
 
-                            <span v-if="currentVariation.variation.availability" :class="'availability badge availability-' + currentVariation.variation.availability.id">
-                                <span>
-                                    {{ currentVariation.variation.availability.names.name }}
-                                </span>
-                            </span>
+                            <item-availability></item-availability>
+
                             <div class="my-3">
                                 <div class="w-100">
                                     <slot name="before-add-to-basket"></slot>
