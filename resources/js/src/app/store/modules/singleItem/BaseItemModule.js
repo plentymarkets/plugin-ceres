@@ -45,6 +45,7 @@ const actions =
                             const whackData = { documents: [component] };
 
                             ceresStore.registerModule(["items", itemId], ItemModule);
+                            ceresStore.registerModule(["items", itemId, "variationSelect"], VariationSelectModule);
                             commit(`${itemId}/setVariation`, whackData);
                         }
                     });
