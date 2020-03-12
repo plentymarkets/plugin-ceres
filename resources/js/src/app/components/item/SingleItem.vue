@@ -343,6 +343,16 @@ export default {
             return this.$translate(translationKey, {"age": age })
         },
 
+        variationGroupedProperties()
+        {
+            return this.$store.getters[`${this.$props.itemId}/variationGroupedProperties`];
+        },
+
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
         ...mapState({
             currentVariation(state) {
                 return state.items[this.$props.itemId] && state.items[this.$props.itemId].variation.documents[0].data;
@@ -351,15 +361,6 @@ export default {
             attributes: state => state.variationSelect.attributes,
             units: state => state.variationSelect.units
         }),
-
-        variationMissingProperties()
-        {
-            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
-        },
-
-        ...mapGetters([
-            "variationGroupedProperties"
-        ])
     },
 
     created()

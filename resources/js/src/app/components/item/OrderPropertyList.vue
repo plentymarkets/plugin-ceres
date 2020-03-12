@@ -1,5 +1,5 @@
 <template>
-    <div class="order-property-slider mb-3">
+    <div class="order-property-slider mb-3" v-if="renderOrderPropertyList">
         <div class="order-property-slider-inner" :style="{transform: 'translateX(-' + (activeSlide * 100) + '%)'}">
             <div v-for="(propertyGroup, index) in sortedGroupedProperties" :class="{'active': index === activeSlide}" :key="index">
                 <order-property-list-group
@@ -57,7 +57,8 @@ export default {
         {
             type: String,
             default: null
-        }
+        },
+        isPreview: Boolean
     },
 
     inject: {
@@ -98,6 +99,16 @@ export default {
             return [];
         },
 
+        variationGroupedProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationGroupedProperties`];
+        },
+
+        renderOrderPropertyList()
+        {
+            return (this.$store.getters[`${this.itemId}/currentItemVariation`].filter.isSalable && this.variationGroupedProperties.length) || this.isPreview;
+        },
+
         variationMissingProperties()
         {
             return this.$store.getters[`${this.itemId}/variationMissingProperties`];
@@ -107,11 +118,7 @@ export default {
             variationMarkInvalidProperties(state) {
                 return state.items[this.itemId] && state.items[this.itemId].variationMarkInvalidProperties;
             }
-        }),
-
-        ...mapGetters([
-            "variationGroupedProperties"
-        ])
+        })
     },
 
     methods:
