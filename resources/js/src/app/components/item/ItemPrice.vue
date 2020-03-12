@@ -1,6 +1,5 @@
 <template>
-    <div>
-
+    <div :class="{ 'has-crossprice': hasCrossPrice }">
         <div class="crossprice" v-if="showCrossPrice && hasCrossPrice">
             <del class="text-muted small text-appearance">
                 {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}

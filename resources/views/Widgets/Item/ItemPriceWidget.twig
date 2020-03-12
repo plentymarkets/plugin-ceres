@@ -11,10 +11,6 @@
 <div class="widget widget-item-price widget-{{ appearance }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
-    {% if showCrossPrice %}
-        :class="{ 'has-crossprice': $store.getters.currentItemVariation.prices.rrp && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > 0 && $store.getters.currentItemVariation.prices.rrp.unitPrice.value > $store.getters.currentItemVariation.prices.default.unitPrice.value }"
-    {% endif %}
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-
     <item-price :show-cross-price="{{ showCrossPrice | json_encode }}"></item-price>
 </div>
