@@ -289,7 +289,7 @@ var render = function() {
       "div",
       {
         staticClass: "component-loading with-icon refreshing",
-        class: { isLoading: _vm.isBasketLoading }
+        class: { "is-loading": _vm.isBasketLoading }
       },
       [
         _c(

@@ -17,7 +17,7 @@ class AttributeWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::AttributeWidget")
             ->withLabel("Widget.attributeLabel")
             ->withPreviewImageUrl("/images/widgets/attribute.svg")
-            ->withType(WidgetTypes::ITEM)
+            ->withType(WidgetTypes::SET_COMPONENT)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(100)
             ->toArray();
