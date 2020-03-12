@@ -58,6 +58,10 @@ export default {
 
     computed:
     {
+        currentVariation() {
+            return this.$store.getters[`${this.itemId}/currentItemVariation`]
+        },
+
         hasCrossPrice() {
             return !!this.currentVariation.prices.rrp &&
                 this.currentVariation.prices.rrp.unitPrice.value > 0 &&
@@ -70,10 +74,6 @@ export default {
 
         variationTotalPrice() {
             return this.$store.getters[`${this.itemId}/variationTotalPrice`]
-        },
-
-        currentVariation() {
-            return this.$store.getters[`${this.itemId}/currentItemVariation`]
         },
 
         showDynamicPrice() {
