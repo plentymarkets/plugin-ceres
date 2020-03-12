@@ -11,9 +11,7 @@
 
         <p class="h4 text-muted text-center my-5" v-if="!isLoading && !wishListItems[0]">{{ $translate("Ceres::Template.wishListNoItems") }}</p>
 
-        <div :class="{'loading': isLoading}">
-            <slot name="loading-animation"></slot>
-        </div>
+        <loading-animation v-if="isLoading"></loading-animation>
     </div>
 </template>
 
