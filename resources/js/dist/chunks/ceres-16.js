@@ -132,7 +132,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           size: this.chunkSize
         }).finally(function () {
           _this.isWaiting = false;
-          _this.isInitialyLoaded = true;
+          _this.isInitiallyLoaded = true;
         });
       }
     }
