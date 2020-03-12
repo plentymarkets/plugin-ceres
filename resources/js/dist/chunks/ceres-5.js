@@ -607,7 +607,7 @@ var render = function() {
                 "div",
                 {
                   staticClass: "container-max page-content component-loading",
-                  class: { isLoading: _vm.isLoading }
+                  class: { "is-loading": _vm.isLoading }
                 },
                 [
                   _c(

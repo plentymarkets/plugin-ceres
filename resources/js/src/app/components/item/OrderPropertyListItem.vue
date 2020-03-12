@@ -56,7 +56,7 @@
         </div>
 
         <div v-else-if="inputType === 'file'">
-            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'isLoading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
+            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
                 <span class="input-unit-label d-flex">
                     <span class="text-truncate">{{ property.names.name }}</span>
