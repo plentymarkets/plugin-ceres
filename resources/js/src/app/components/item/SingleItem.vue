@@ -353,7 +353,7 @@ export default {
         },
 
         currentVariation() {
-            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`, {});
+            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`);
         },
 
         isVariationSelected() {
