@@ -44,7 +44,7 @@ export default {
 
     computed: {
         bundleType() {
-            return isPreview ? 'bundle' : this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType
+            return this.isPreview ? 'bundle' : this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType
         },
 
         bundleComponents () {
