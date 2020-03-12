@@ -1,5 +1,6 @@
 import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
+import VariationSelectModule from "../VariationSelectModule";
 
 const state =
     {
@@ -27,6 +28,7 @@ const actions =
             const itemId = variation.documents[0].data.item.id;
 
             ceresStore.registerModule(["items", itemId], ItemModule);
+            ceresStore.registerModule(["items", itemId, "variationSelect"], VariationSelectModule);
             commit(`${itemId}/setVariation`, variation);
 
             // rest call for sets if set comps set
