@@ -8,6 +8,7 @@ Vue.component("item-image-carousel", () => import("./app/components/item/ItemIma
 Vue.component("item-price", () => import("./app/components/item/ItemPrice.vue"));
 Vue.component("order-property-list", () => import("./app/components/item/OrderPropertyList.vue"));
 Vue.component("variation-select", () => import("./app/components/item/VariationSelect.vue"));
+Vue.component("item-availability", () => import("./app/components/item/ItemAvailability.vue"));
 
 import SingleItem from "./app/components/item/SingleItem.vue";
 Vue.component("single-item", SingleItem);
