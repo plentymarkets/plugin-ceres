@@ -89,13 +89,6 @@ const actions =
 
 const getters =
     {
-        showDynamicPrice(state, getters, rootState, rootGetters)
-        {
-            return App.config.item.showPleaseSelect
-                && !state.isVariationSelected
-                && (rootState.item.pleaseSelectVariationId === rootGetters.currentItemVariation.variation.id
-                    || rootState.item.pleaseSelectVariationId === 0);
-        }
     };
 
 export default
