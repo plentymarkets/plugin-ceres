@@ -109,15 +109,16 @@ export default {
             return (this.$store.getters[`${this.itemId}/currentItemVariation`].filter.isSalable && this.variationGroupedProperties.length) || this.isPreview;
         },
 
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
         ...mapState({
             variationMarkInvalidProperties(state) {
                 return state.items[this.itemId] && state.items[this.itemId].variationMarkInvalidProperties;
             }
-        }),
-
-        ...mapGetters([
-            "variationMissingProperties"
-        ])
+        })
     },
 
     methods:

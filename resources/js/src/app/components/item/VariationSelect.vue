@@ -547,7 +547,7 @@ export default {
 
             if (isDefined(variationId))
             {
-                this.$store.dispatch("loadVariation", variationId).then(variation =>
+                this.$store.dispatch(`${this.itemId}/loadVariation`, variationId).then(variation =>
                 {
                     document.dispatchEvent(new CustomEvent("onVariationChanged",
                         {

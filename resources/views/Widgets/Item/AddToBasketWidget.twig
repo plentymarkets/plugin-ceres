@@ -25,19 +25,25 @@
 
     <intersect>
         <div class="w-100" v-if="$store.state.item.variation.documents">
-
-            {{ AddToBasket.printVueComponent(
-                "$store.state.item.variation.documents[0].data",
-                false,
-                true,
-                {
-                    ":missing-order-properties":"$store.getters.variationMissingProperties",
-                    ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice",
-                    "button-size": buttonSize,
-                    "padding-classes": spacingPadding,
-                    "padding-inline-styles": inlinePadding
-                }
-            ) }}
+            {{ Twig.set("itemId", "item.documents[0].data.item.id") }}
+            <add-to-basket
+                    :variation-id="$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.variation.id"
+                    :is-salable="!!$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.filter && $store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.filter.isSalable"
+                    :has-children="!!$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.filter && $store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.filter.hasActiveChildren"
+                    :interval-quantity="$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.variation.intervalOrderQuantity || 1"
+                    :minimum-quantity="$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.variation.minimumOrderQuantity"
+                    :maximum-quantity="!!$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.variation.maximumOrderQuantity && $store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.variation.maximumOrderQuantity > 0 ? $store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.variation.maximumOrderQuantity : null"
+                    :order-properties="$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.properties.filter(function(prop) { return prop.property.isOderProperty })"
+                    :has-order-properties="$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data.hasOrderProperties"
+                    :use-large-scale="false"
+                    :show-quantity="true"
+                    :item-url="$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data | itemURL"
+                    :missing-order-properties="true"
+                    :has-price="$store.state.items[{{ Twig.print("itemId") }}].variation.documents[0].data | hasItemDefaultPrice"
+                    button-size="{{ buttonSize }}"
+                    padding-classes="{{ spacingPadding }}"
+                    padding-inline-styles="{{ inlinePadding }}">
+            </add-to-basket>
         </div>
         <template #loading>
             <div class="w-100 invisible">

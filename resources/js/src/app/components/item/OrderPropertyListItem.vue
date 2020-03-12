@@ -180,6 +180,11 @@ export default {
             return selectedProperty.description;
         },
 
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
         ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             variationMarkInvalidProperties(state) {

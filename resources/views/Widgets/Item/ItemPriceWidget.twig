@@ -8,8 +8,6 @@
 {% set appearance      = widget.settings.appearance.mobile | default("none") %}
 {% set showCrossPrice  = widget.settings.showCrossPrice.mobile is same as (true) %}
 
-{% set priceTranslation = trans("Ceres::Template.dynamicVariationPrice", {price: "'+$options.filters.currency($store.getters.variationTotalPrice, $store.getters.currentItemVariation.prices.default.currency)+'"}) %}
-
 <div class="widget widget-item-price widget-{{ appearance }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"

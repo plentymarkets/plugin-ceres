@@ -102,8 +102,8 @@ export default {
         },
         missingOrderProperties:
         {
-            type: Array,
-            default: () => []
+            type: Boolean,
+            default: false
         },
         variationId:
         {
@@ -228,6 +228,11 @@ export default {
             return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationOrderQuantity;
         },
 
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
         ...mapState({
             basketItems: state => state.basket.items,
             isBasketLoading: state => state.basket.isBasketLoading,
@@ -254,7 +259,7 @@ export default {
         {
             this.$store.dispatch("loadComponent", "add-item-to-basket-overlay");
 
-            if (this.missingOrderProperties.length)
+            if (this.missingOrderProperties && this.variationMissingProperties.length)
             {
                 this.showMissingPropertiesError();
             }
@@ -320,7 +325,7 @@ export default {
         {
             this.$store.commit(`${this.itemId}/setVariationMarkInvalidProps`, true);
 
-            const propertyNames = this.missingOrderProperties.map(property => property.property.names.name);
+            const propertyNames = this.variationMissingProperties.map(property => property.property.names.name);
             let errorMsgContent = "";
 
             for (const name of propertyNames)
@@ -350,7 +355,7 @@ export default {
             this.quantity = value;
         }
     },
-    
+
     watch:
     {
         quantity(value)

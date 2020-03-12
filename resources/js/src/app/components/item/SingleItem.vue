@@ -83,7 +83,7 @@
                                             :use-large-scale="false"
                                             :show-quantity="true"
                                             :item-url="currentVariation | itemURL"
-                                            :missing-order-properties="variationMissingProperties"
+                                            :missing-order-properties="true"
                                             :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
                                             :has-price="currentVariation | hasItemDefaultPrice"
                                         >
@@ -348,6 +348,11 @@ export default {
             return this.$store.getters[`${this.$props.itemId}/variationGroupedProperties`];
         },
 
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
         ...mapState({
             currentVariation(state) {
                 return state.items[this.$props.itemId] && state.items[this.$props.itemId].variation.documents[0].data;
@@ -356,17 +361,13 @@ export default {
             attributes: state => state.variationSelect.attributes,
             units: state => state.variationSelect.units
         }),
-
-        ...mapGetters([
-            "variationMissingProperties"
-        ])
     },
 
     created()
     {
         this.$store.commit("setVariation", this.itemData);
         this.$store.dispatch("initVariation", this.itemData);
-        this.$store.commit("setPleaseSelectVariationId", this.pleaseSelectOptionVariationId);
+        this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch("setVariationSelect", {
