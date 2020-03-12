@@ -119,7 +119,7 @@ export default {
     mounted()
     {
         // initially check for valid selection and disable add to basket button
-        this.$store.commit("setIsVariationSelected", !!this.currentSelection);
+        this.$store.commit(`${this.itemId}/variationSelect/setIsVariationSelected`, !!this.currentSelection);
     },
 
     computed:
@@ -218,7 +218,7 @@ export default {
 
             if (this.selectedAttributes[attributeId] !== attributeValueId)
             {
-                this.$store.commit("selectItemAttribute", { attributeId, attributeValueId });
+                this.$store.commit(`${this.itemId}/variationSelect/selectItemAttribute`, { attributeId, attributeValueId });
                 this.onSelectionChange(attributeId, attributeValueId, null);
             }
         },
@@ -230,7 +230,7 @@ export default {
         selectUnit(unitId)
         {
             unitId = parseInt(unitId);
-            this.$store.commit("selectItemUnit", unitId);
+            this.$store.commit(`${this.itemId}/variationSelect/selectItemUnit`, unitId);
             this.onSelectionChange(null, null, unitId);
         },
 
@@ -439,7 +439,7 @@ export default {
                 this.$store.commit("selectItemUnit", invalidSelection.newUnit);
             }
 
-            this.$store.commit("setItemSelectedAttributes", attributes);
+            this.$store.commit(`${this.itemId}/variationSelect/setItemSelectedAttributes`, attributes);
 
             this.setVariation(this.currentSelection ? this.currentSelection.variationId : 0);
 
@@ -605,7 +605,7 @@ export default {
     {
         currentSelection(value)
         {
-            this.$store.commit("setIsVariationSelected", !!value);
+            this.$store.commit(`${this.itemId}/variationSelect/setIsVariationSelected`, !!value);
         }
     }
 }
