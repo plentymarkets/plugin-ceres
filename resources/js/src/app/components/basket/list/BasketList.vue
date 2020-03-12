@@ -23,9 +23,7 @@
             </transition-group>
         </div>
 
-        <div v-if="!isBasketInitiallyLoaded" class="d-table w-100">
-            <loading-animation></loading-animation>
-        </div>
+        <loading-animation v-if="!isBasketInitiallyLoaded" class="d-table w-100"></loading-animation>
     </div>
 </template>
 
