@@ -238,7 +238,6 @@
 <script>
 import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
-import { mapState, mapGetters } from "vuex";
 
 export default {
 
@@ -345,7 +344,7 @@ export default {
 
         variationGroupedProperties()
         {
-            return this.$store.getters[`${this.$props.itemId}/variationGroupedProperties`];
+            return this.$store.getters[`${this.itemId}/variationGroupedProperties`];
         },
 
         variationMissingProperties()
@@ -353,14 +352,21 @@ export default {
             return this.$store.getters[`${this.itemId}/variationMissingProperties`];
         },
 
-        ...mapState({
-            currentVariation(state) {
-                return state.items[this.$props.itemId] && state.items[this.$props.itemId].variation.documents[0].data;
-            },
-            isVariationSelected: state => state.variationSelect.isVariationSelected,
-            attributes: state => state.variationSelect.attributes,
-            units: state => state.variationSelect.units
-        }),
+        currentVariation() {
+            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`);
+        },
+
+        isVariationSelected() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.isVariationSelected`);
+        },
+
+        attributes() {
+            return get(this.$store.state,`items[${this.itemId}].variationSelect.attributes`);
+        },
+
+        units() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.units`);
+        }
     },
 
     created()
