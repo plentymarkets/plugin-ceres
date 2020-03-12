@@ -14,7 +14,7 @@
         </a>
 
         <div class="filter-collapse collapse" :id="'filter-collapse_' + _uid">
-            <div class="container-max page-content component-loading" :class="{ 'isLoading': isLoading }">
+            <div class="container-max page-content component-loading" :class="{ 'is-loading': isLoading }">
                 <div class="card-columns">
                     <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
                 </div>

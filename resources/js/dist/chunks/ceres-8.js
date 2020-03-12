@@ -603,8 +603,8 @@ var render = function() {
         {
           staticClass: "basket-item component-loading with-icon d-flex",
           class: {
-            "sending isLoading": _vm.waiting,
-            isLoading: _vm.isCheckoutReadonly
+            "sending is-loading": _vm.waiting,
+            "is-loading": _vm.isCheckoutReadonly
           }
         },
         [

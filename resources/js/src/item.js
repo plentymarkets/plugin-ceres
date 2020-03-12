@@ -6,6 +6,7 @@ Vue.component("graduated-prices", () => import("./app/components/item/GraduatedP
 Vue.component("item-data-table", () => import("./app/components/item/ItemDataTable.vue"));
 Vue.component("item-image-carousel", () => import("./app/components/item/ItemImageCarousel.vue"));
 Vue.component("item-price", () => import("./app/components/item/ItemPrice.vue"));
+Vue.component("item-set-component", () => import("./app/components/item/ItemSetComponent.vue"));
 Vue.component("order-property-list", () => import("./app/components/item/OrderPropertyList.vue"));
 Vue.component("variation-select", () => import("./app/components/item/VariationSelect.vue"));
 Vue.component("item-availability", () => import("./app/components/item/ItemAvailability.vue"));
