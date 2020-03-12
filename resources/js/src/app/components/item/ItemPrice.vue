@@ -38,8 +38,6 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-
 export default {
     name: "item-price",
 
@@ -75,12 +73,12 @@ export default {
         },
 
         currentVariation() {
-            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variation.documents[0].data;
+            return this.$store.getters[`${this.itemId}/currentItemVariation`]
         },
 
-        ...mapGetters([
-            "showDynamicPrice",
-        ])
+        showDynamicPrice() {
+            return this.$store.getters[`${this.itemId}/showDynamicPrice`];
+        }
     }
 }
 </script>
