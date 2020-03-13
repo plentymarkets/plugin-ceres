@@ -150,7 +150,7 @@
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     <div class="d-flex">
                         <span class="flex-grow-1">{{ category.details[0].name }}</span>
-                        {% if showItemCount == true and category.itemCount[0].count > 0 %}<div class="filter-badge">{{ category.itemCount[0].count }}</div>{% endif %}
+                        {% if showItemCount == true and category.itemCount[0].count > 0 %}<div class="filter-badge align-self-center">{{ category.itemCount[0].count }}</div>{% endif %}
                     </div>
                 </a>
 
