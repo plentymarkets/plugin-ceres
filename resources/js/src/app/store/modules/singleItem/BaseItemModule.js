@@ -4,20 +4,10 @@ import VariationSelectModule from "../VariationSelectModule";
 
 const state =
     {
-        cachedVariations: {}
     };
 
 const mutations =
     {
-        addVariationToCache(state, variation)
-        {
-            const variationId = variation.documents[0].data.variation.id;
-
-            if (!state.cachedVariations[variationId])
-            {
-                state.cachedVariations[variationId] = variation;
-            }
-        }
     };
 
 const actions =
@@ -47,6 +37,7 @@ const actions =
                             ceresStore.registerModule(["items", itemId], ItemModule);
                             ceresStore.registerModule(["items", itemId, "variationSelect"], VariationSelectModule);
                             commit(`${itemId}/setVariation`, whackData);
+                            commit(`${itemId}/setPleaseSelectVariationId`, component.data.variation.id);
                         }
                     });
             }
