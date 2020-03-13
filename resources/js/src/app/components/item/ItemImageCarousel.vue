@@ -77,11 +77,15 @@ export default {
 
     computed:
     {
+        currentVariation() {
+            return this.$store.getters[`${this.itemId}/currentItemVariation`]
+        },
+
         carouselImages()
         {
             return this.orderByPosition(
                 this.$options.filters.itemImages(
-                    this.currentVariation.documents[0].data.images,
+                    this.currentVariation.images,
                     "urlPreview"
                 )
             ).slice(0, this.maxQuantity);
@@ -91,7 +95,7 @@ export default {
         {
             return this.orderByPosition(
                 this.$options.filters.itemImages(
-                    this.currentVariation.documents[0].data.images,
+                    this.currentVariation.images,
                     this.imageUrlAccessor
                 )
             ).slice(0, this.maxQuantity);

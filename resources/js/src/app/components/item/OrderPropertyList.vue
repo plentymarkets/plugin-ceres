@@ -114,11 +114,10 @@ export default {
             return this.$store.getters[`${this.itemId}/variationMissingProperties`];
         },
 
-        ...mapState({
-            variationMarkInvalidProperties(state) {
-                return state.items[this.itemId] && state.items[this.itemId].variationMarkInvalidProperties;
-            }
-        })
+        variationMarkInvalidProperties() {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            return currentVariation && currentVariation.variationMarkInvalidProperties;
+        }
     },
 
     methods:

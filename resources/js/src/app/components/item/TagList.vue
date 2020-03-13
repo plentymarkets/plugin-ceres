@@ -65,11 +65,12 @@ export default {
         {
             return this.enabledRoutes.includes("all") || this.enabledRoutes.includes("tags");
         },
-        ...mapState({
-            tags(state) {
-                return state.items[this.itemId] &&state.items[this.itemId].variation.documents[0].data.tags
-            } 
-        })
+
+        tags()
+        {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            return currentVariation && currentVariation.tags;
+        }
     },
 
     methods:

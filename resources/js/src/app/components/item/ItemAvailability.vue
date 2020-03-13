@@ -1,5 +1,5 @@
 <template>
-    <span v-if="currentVariation.variation.availability"
+    <span v-if="availability"
         :class="classes"
         :style="paddingStyles">
         <span>
@@ -23,23 +23,22 @@ export default {
 
     computed:
     {
-        currentVariation() {
-            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variation.documents[0].data;
+        availability() {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            return currentVariation && currentVariation.variation && currentVariation.variation.availability;
         },
 
         classes() {
             return [
                 "availability",
                 "badge",
-                "availability-" + this.currentVariation.variation.availability.id,
+                "availability-" + this.availability && this.availability.id,
                 this.paddingClasses
             ];
         },
 
         name() {
-            return this.currentVariation.variation.availability
-            && this.currentVariation.variation.availability.names
-            && this.currentVariation.variation.availability.names.name;
+            return this.availability && this.availability.names && this.availability.names.name;
         }
     }
 }

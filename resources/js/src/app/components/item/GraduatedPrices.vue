@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
 
     name: "graduated-prices",
@@ -41,8 +39,10 @@ export default {
     {
         graduatedPrices()
         {
-            let prices = this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variation.documents[0].data.prices.graduatedPrices;
-            const minQuantity = this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variation.documents[0].data.variation.minimumOrderQuantity;
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+
+            let prices = currentVariation && currentVariation.variation.documents[0].data.prices.graduatedPrices;
+            const minQuantity = currentVariation && currentVariation.variation.documents[0].data.variation.minimumOrderQuantity;
 
             prices = prices.filter(price => price.minimumOrderQuantity > minQuantity);
 
@@ -66,12 +66,10 @@ export default {
             return this.graduatedPrices.indexOf(price);
         },
 
-        ...mapState({
-            variationOrderQuantity(state)
-            {
-                return state.items[this.itemId] && state.items[this.itemId].variationOrderQuantity
-            }
-        })
+        variationOrderQuantity()
+        {
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationOrderQuantity
+        }
     }
 }
 </script>

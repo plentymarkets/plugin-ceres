@@ -79,7 +79,7 @@ const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
 import { isNullOrUndefined } from "../../helper/utils";
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
 
@@ -185,16 +185,14 @@ export default {
             return this.$store.getters[`${this.itemId}/variationMissingProperties`];
         },
 
+        variationMarkInvalidProperties() {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            return currentVariation && currentVariation.variationMarkInvalidProperties;
+        },
+
         ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
-            variationMarkInvalidProperties(state) {
-                return state.items[this.itemId] && state.items[this.itemId].variationMarkInvalidProperties;
-            }
-        }),
-
-        ...mapGetters([
-            "variationMissingProperties"
-        ])
+        })
     },
 
     methods:
