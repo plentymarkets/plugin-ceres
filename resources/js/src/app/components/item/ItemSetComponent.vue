@@ -4,7 +4,9 @@
             v-if="variation && !isLoading"
             :itemId="itemId"
             :variationId="variationId"
-            :variation="variation">
+            :variation="variation"
+            :getDataField="getDataField"
+            :getFilteredDataField="getFilteredDataField">
         </slot>
 
         <div v-else-if="isLoading" class="prop-3-1 loading">
@@ -23,6 +25,8 @@
 </template>
 
 <script>
+import { get } from "../../helper/get";
+import { isNullOrUndefined } from "../../helper/utils";
 import { mapState } from 'vuex'
 export default {
     name: "item-set-component",
@@ -56,7 +60,7 @@ export default {
         setTimeout(() =>
         {
             this.isLoading = false;
-        }, 5 * 1000);
+        }, 0 * 1000);
     },
 
     computed:
@@ -74,6 +78,24 @@ export default {
                 return itemModule && itemModule.variation.documents[0].data;
             }
         })
+    },
+
+    methods:
+    {
+        getDataField(field)
+        {
+            return get(this.variation, field);
+        },
+
+        getFilteredDataField(field, filter)
+        {
+            if (!isNullOrUndefined(this.$options.filters[filter]))
+            {
+                return this.$options.filters[filter](this.getDataField(field));
+            }
+
+            return this.getDataField(field);
+        }
     }
 }
 </script>
