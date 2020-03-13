@@ -192,6 +192,8 @@ button:focus {
 
 	&.btn-circle
 	{
+        width: 33px;
+        height: 33px;
 		border-radius: 50%;
 	}
 }
