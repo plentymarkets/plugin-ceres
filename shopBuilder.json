@@ -141,7 +141,8 @@
         ]
     },
     "dataFieldProviders": {
-        "singleitem": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider"
+        "singleitem": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider",
+        "itemset": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider"
     },
     "categories": [
         {
