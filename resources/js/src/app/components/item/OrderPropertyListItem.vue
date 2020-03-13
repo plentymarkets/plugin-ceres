@@ -45,8 +45,8 @@
             </div>
             <popper class="order-property-selection-info-popper" v-cloak v-if="selectedDescription" placement="bottom">
                 <template #handle>
-                    <button class="btn btn-icon btn-circle btn-default">
-                        <i class="fa fa-info"></i>
+                    <button class="btn btn-icon btn-circle btn-default m-1">
+                        <i class="fa fa-info default-float"></i>
                     </button>
                 </template>
                 <template #content>
@@ -168,6 +168,8 @@ export default {
             }
 
             const selectedProperty = this.property.selectionValues[this.selectionValue];
+
+            console.log(selectedProperty);
 
             return selectedProperty.description;
         },

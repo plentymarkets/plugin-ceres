@@ -187,7 +187,9 @@ button:focus {
     }
 
     &.btn-circle {
-        border-radius: 50%; // stylelint-disable-line property-blacklist
+        width: 33px;
+        height: 33px;
+        @include border-radius(50%);
     }
 }
 
