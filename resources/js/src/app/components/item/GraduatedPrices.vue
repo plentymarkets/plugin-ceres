@@ -41,8 +41,8 @@ export default {
         {
             const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
 
-            let prices = currentVariation && currentVariation.variation.documents[0].data.prices.graduatedPrices;
-            const minQuantity = currentVariation && currentVariation.variation.documents[0].data.variation.minimumOrderQuantity;
+            let prices = currentVariation && currentVariation.prices.graduatedPrices;
+            const minQuantity = currentVariation && currentVariation.variation.minimumOrderQuantity;
 
             prices = prices.filter(price => price.minimumOrderQuantity > minQuantity);
 

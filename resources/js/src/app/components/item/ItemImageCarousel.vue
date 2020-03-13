@@ -99,14 +99,7 @@ export default {
                     this.imageUrlAccessor
                 )
             ).slice(0, this.maxQuantity);
-        },
-
-        ...mapState({
-            currentVariation(state)
-            {
-                return state.items[this.itemId] && state.items[this.itemId].variation;
-            }
-        })
+        }
     },
 
     watch: {
@@ -304,12 +297,12 @@ export default {
 
         getAltText(image)
         {
-            return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+            return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation);
         },
 
         getImageName(image)
         {
-            return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+            return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
         },
 
         loadLightbox()

@@ -32,7 +32,7 @@ export default {
             return [
                 "availability",
                 "badge",
-                "availability-" + this.availability && this.availability.id,
+                "availability-" + (this.availability && this.availability.id),
                 this.paddingClasses
             ];
         },
