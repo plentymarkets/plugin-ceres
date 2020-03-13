@@ -169,8 +169,6 @@ export default {
 
             const selectedProperty = this.property.selectionValues[this.selectionValue];
 
-            console.log(selectedProperty);
-
             return selectedProperty.description;
         },
 
