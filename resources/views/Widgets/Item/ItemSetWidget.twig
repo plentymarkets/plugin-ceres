@@ -14,7 +14,7 @@
     {{ Twig.for("setComponent", "setComponents") }}
         {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
 
-        <item-set-component :item-id="{{ Twig.print("setComponent.item.id") }}">
+        <item-set-component :item-id="{{ Twig.print("setComponent.item.id") }}" v-slot="slotProps">
             <div {% if isPreview %}data-builder-child-container="itemSet"{% endif %}>
                 {{ children.itemSet | raw }}
             </div>

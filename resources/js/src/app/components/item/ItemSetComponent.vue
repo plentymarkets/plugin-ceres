@@ -1,7 +1,7 @@
 <template>
     <div>
         <slot
-            v-if="variation && !isLoading"
+            v-if="variation && !isLoading || $ceres.isShopBuilder"
             :itemId="itemId"
             :variationId="variationId"
             :variation="variation"
