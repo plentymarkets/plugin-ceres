@@ -7,6 +7,7 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use IO\Services\ItemListService;
 
 class ItemSetWidget extends BaseWidget
 {
@@ -14,6 +15,7 @@ class ItemSetWidget extends BaseWidget
 
     public function getData()
     {
+        $test = $this->getPreviewData([]);
         return WidgetDataFactory::make("Ceres::ItemSetWidget")
             ->withLabel("Widget.itemSetLabel")
             ->withPreviewImageUrl("/images/widgets/item-set.svg")
@@ -41,5 +43,14 @@ class ItemSetWidget extends BaseWidget
         $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
+    }
+
+    protected function getPreviewData($widgetSettings)
+    {
+        /** @var ItemListService $itemListService */
+        $itemListService = pluginApp(ItemListService::class);
+
+        $itemResult = $itemListService->getItemList("random", null, null, 5, null, true);
+        return ['setComponents' => [$itemResult['documents'][0]['data']]];
     }
 }

@@ -11,10 +11,14 @@
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
-    <item-set-component :item-id="{{ Twig.print("item.id | defaul(109)") }}">
-        <div {% if isPreview %}data-builder-child-container="itemSet"{% endif %}>
-            {{ children.itemSet | raw }}
-        </div>
-    </item-set-component>
+    {{ Twig.for("setComponent", "setComponents") }}
+        {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
+
+        <item-set-component :item-id="{{ Twig.print("setComponent.item.id") }}">
+            <div {% if isPreview %}data-builder-child-container="itemSet"{% endif %}>
+                {{ children.itemSet | raw }}
+            </div>
+        </item-set-component>
+    {{ Twig.endfor() }}
 
 </div>

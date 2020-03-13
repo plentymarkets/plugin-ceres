@@ -20,6 +20,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $dynamicVariationId;
     public $initPleaseSelectOption;
     public $isItemSet;
+    public $setComponents;
 
     public function init($params)
     {
@@ -45,6 +46,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->attributes = $params['variationAttributeMap']['attributes'];
         $this->variations = $params['variationAttributeMap']['variations'];
         $this->customerShowNetPrices = $customerService->showNetPrices();
+
+        $this->setComponents = $params['setComponents'];
 
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
