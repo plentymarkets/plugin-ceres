@@ -15,7 +15,6 @@ class ItemSetWidget extends BaseWidget
 
     public function getData()
     {
-        $test = $this->getPreviewData([]);
         return WidgetDataFactory::make("Ceres::ItemSetWidget")
             ->withLabel("Widget.itemSetLabel")
             ->withPreviewImageUrl("/images/widgets/item-set.svg")
