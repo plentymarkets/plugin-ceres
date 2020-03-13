@@ -16,7 +16,7 @@
     <div class="widget-inner">
         <div class="row">
             {# The 'hintText' variable gets filled at src/Widgets/Common/NewsletterWidget.php to migrate widget settings #}
-            <div class="col-xs-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            <div class="col-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
                 {{ hintText | raw }}
             </div>
         </div>
