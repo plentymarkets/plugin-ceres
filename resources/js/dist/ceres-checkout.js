@@ -316,10 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    imageUrl: {
-      type: String,
-      required: true
-    },
+    imageUrl: String,
     fallbackUrl: String,
     isBackgroundImage: Boolean,
     pictureClass: String
@@ -66131,6 +66128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
 /* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
 /* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _app_helper_utils__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./app/helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -66161,10 +66159,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var mount = vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$mount;
-var dataComponentElements = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"));
-var overriddenComponents = dataComponentElements.reduce(function (obj, el) {
-  return _objectSpread({}, obj, _defineProperty({}, el.dataset.component, el));
-}, {});
+var componentOverrides = null;
+
+function getComponentOverride(tagName) {
+  if (Object(_app_helper_utils__WEBPACK_IMPORTED_MODULE_74__["isNullOrUndefined"])(componentOverrides)) {
+    componentOverrides = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]")).reduce(function (obj, el) {
+      return _objectSpread({}, obj, _defineProperty({}, el.dataset.component, el));
+    }, {});
+  }
+
+  return componentOverrides && componentOverrides[tagName] ? componentOverrides[tagName].innerHTML : null;
+}
 
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$mount = function (el, hydrating) {
   var compHtml = null;
@@ -66172,12 +66177,14 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$mount = function (el, hyd
 
   if (this.$props.templateOverride) {
     compHtml = document.querySelector(templateOverride).innerHTML;
-  } else if (overriddenComponents && overriddenComponents[this.$options._componentTag]) {
-    compHtml = overriddenComponents[this.$options._componentTag].innerHTML;
+  } else {
+    compHtml = getComponentOverride(this.$options._componentTag);
   }
 
   if (compHtml) {
-    var renderFunctions = vue__WEBPACK_IMPORTED_MODULE_14___default.a.compile(compHtml);
+    var renderFunctions = vue__WEBPACK_IMPORTED_MODULE_14___default.a.compile(compHtml, {
+      delimiters: vue__WEBPACK_IMPORTED_MODULE_14___default.a.options.delimiters
+    });
     Object.assign(this.$options, renderFunctions);
   }
 
@@ -66374,6 +66381,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("lazy-load", _app_componen
  // =========================
 // Bootstrap frameworks
 // =========================
+
 
 
 

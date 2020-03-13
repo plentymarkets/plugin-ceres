@@ -15,10 +15,7 @@ import { detectWebP } from "../../helper/featureDetect";
 
 export default {
     props: {
-        imageUrl: {
-            type: String,
-            required: true
-        },
+        imageUrl: String,
         fallbackUrl: String,
         isBackgroundImage: Boolean,
         pictureClass: String

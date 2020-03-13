@@ -114,7 +114,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: String,
       required: true
     },
-    showCount: Boolean
+    showCount: Boolean,
+    showAdditionalInformation: Boolean
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapState"])({
     autocompleteResult: function autocompleteResult(state) {
@@ -182,7 +183,7 @@ var render = function() {
                   },
                   [
                     _vm.showImages
-                      ? _c("div", { staticClass: "image mr-3" }, [
+                      ? _c("div", { staticClass: "image flex-shrink-0 mr-3" }, [
                           item.image
                             ? _c("img", { attrs: { src: item.image } })
                             : _vm._e()
@@ -192,18 +193,25 @@ var render = function() {
                     _c(
                       "div",
                       {
-                        staticClass: "label",
-                        class: { compact: item.beforeLabel && item.afterLabel }
+                        staticClass: "label overflow-hidden",
+                        class: {
+                          compact:
+                            _vm.showAdditionalInformation &&
+                            item.beforeLabel &&
+                            item.afterLabel
+                        }
                       },
                       [
-                        item.beforeLabel
-                          ? _c("p", { staticClass: "small mb-0" }, [
-                              _vm._v(_vm._s(item.beforeLabel))
-                            ])
+                        _vm.showAdditionalInformation && item.beforeLabel
+                          ? _c(
+                              "p",
+                              { staticClass: "small mb-0 text-truncate" },
+                              [_vm._v(_vm._s(item.beforeLabel))]
+                            )
                           : _vm._e(),
                         _vm._v(" "),
                         _c("p", {
-                          staticClass: "mb-0",
+                          staticClass: "mb-0 text-truncate",
                           domProps: {
                             innerHTML: _vm._s(
                               _vm.getHighlightedLabel(item.label)
@@ -211,10 +219,12 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        item.afterLabel
-                          ? _c("p", { staticClass: "small mb-0" }, [
-                              _vm._v(_vm._s(item.afterLabel))
-                            ])
+                        _vm.showAdditionalInformation && item.afterLabel
+                          ? _c(
+                              "p",
+                              { staticClass: "small mb-0 text-truncate" },
+                              [_vm._v(_vm._s(item.afterLabel))]
+                            )
                           : _vm._e()
                       ]
                     ),

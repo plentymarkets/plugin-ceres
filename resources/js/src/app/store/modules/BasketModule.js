@@ -41,7 +41,7 @@ const mutations =
 
                 for (const item of basketItems)
                 {
-                    const oldBasketItem = null;
+                    let oldBasketItem = null;
 
                     if (isNullOrUndefined(item.variation))
                     {

@@ -24,6 +24,12 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
 
     protected $headline = '';
 
+    protected $hasCountOption = false;
+
+    protected $hasImagesOption = false;
+
+    protected $hasAdditionalInformationOption = false;
+
     public function getData()
     {
         return WidgetDataFactory::make($this->widgetKey)
@@ -43,6 +49,24 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
         $settingsFactory->createCustomClass();
 
         $settingsFactory->createAppearance(true);
+
+        if ($this->hasCountOption) {
+            $settingsFactory->createCheckbox('showCount')
+                ->withName('Widget.searchSuggestionShowCountLabel')
+                ->withDefaultValue(false);
+        }
+
+        if ($this->hasImagesOption) {
+            $settingsFactory->createCheckbox('showImages')
+                ->withName('Widget.searchSuggestionShowImagesLabel')
+                ->withDefaultValue(false);
+        }
+
+        if ($this->hasAdditionalInformationOption) {
+            $settingsFactory->createCheckbox('showAdditionalInformation')
+                ->withName('Widget.searchSuggestionShowAdditionalInformationLabel')
+                ->withDefaultValue(false);
+        }
 
         $settingsFactory->createSpacing();
 

@@ -3,8 +3,6 @@
 
 namespace Ceres\Widgets\Header\Search;
 
-use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
-
 class SearchSuggestionCategoryWidget extends SearchSuggestionBaseWidget
 {
     public $suggestionType = 'category';
@@ -19,17 +17,7 @@ class SearchSuggestionCategoryWidget extends SearchSuggestionBaseWidget
 
     public $position = 200;
 
-    public function getSettings()
-    {
-        /** @var WidgetSettingsFactory $settings * */
-        $settings = WidgetSettingsFactory::create(parent::getSettings());
+    public $hasCountOption = true;
 
-        $settings->withPointer('appearance');
-
-        $settings->createCheckbox('showCount')
-            ->withName('Widget.searchSuggestionShowCountLabel')
-            ->withDefaultValue(false);
-
-        return $settings->toArray();
-    }
+    public $hasAdditionalInformationOption = true;
 }

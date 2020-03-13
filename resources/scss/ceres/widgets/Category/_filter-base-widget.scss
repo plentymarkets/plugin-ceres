@@ -1,27 +1,24 @@
 .widget-filter-base {
-    padding: 2rem 0;
-    background-color: $white;
-
-    .form-check {
-        margin-bottom: 0;
-    }
-
     .form-check-label {
         cursor: pointer;
     }
 
     .title,
-    .card .form-check-label {
-        padding-left: 1.75rem;
+    .card .form-check-label,
+    .item-filter-price {
+        padding: .75rem 1.75rem;
     }
 }
 
-.widget-toolbar .widget-filter-base {
-    padding: 0;
+.widget-toolbar {
+    .title,
+    .card .form-check-label,
+    .item-filter-price {
+        padding: .75rem;
+    }
 
     .form-check-input:checked + label,
     .form-check-input:hover + label {
-        padding-left: 1.75rem;
-        margin-left: 1.75rem;
+        padding-left: .75rem !important; // stylelint-disable-line declaration-no-important
     }
 }

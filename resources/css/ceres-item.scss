@@ -164,12 +164,21 @@ $green:                     #28a745 !default;
 $teal:                      #20c997 !default;
 $cyan:                      #17a2b8 !default;
 
-$primary:                   $blue !default;
-$secondary:                 $gray-600 !default;
-$success:                   $green !default;
-$info:                      $cyan !default;
-$warning:                   $yellow !default;
-$danger:                    $red !default;
+// Legacy: Do not remove!
+// This variables are filled with the values from the plugin config
+$brand-primary:             $blue !default;
+$brand-secondary:           $gray-600 !default;
+$brand-success:             $green !default;
+$brand-info:                $cyan !default;
+$brand-warning:             $yellow !default;
+$brand-danger:              $red !default;
+
+$primary:                   $brand-primary !default;
+$secondary:                 $brand-secondary !default;
+$success:                   $brand-success !default;
+$info:                      $brand-info !default;
+$warning:                   $brand-warning !default;
+$danger:                    $brand-danger !default;
 $light:                     $gray-100 !default;
 $dark:                      $gray-800 !default;
 
@@ -8820,6 +8829,8 @@ a.close.disabled {
 
 button:focus {
     outline: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }
 
 // button combinations
@@ -11079,6 +11090,84 @@ textarea.no-resize {
     pointer-events: none;
 }
 
+.component-loading {
+    position: relative;
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        content: "";
+        background: $gray-100;
+        @include border-radius(1px);
+        opacity: 0;
+        @include transition(opacity .1s ease-out);
+    }
+
+    &.with-icon {
+        &::after {
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            bottom: 50%;
+            left: 50%;
+            z-index: 10;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
+            width: auto;
+            height: auto;
+            font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+            font-size: 2rem;
+            color: $gray-200;
+            visibility: hidden;
+            content: "";
+            opacity: 0;
+            -webkit-animation: fa-spin 1.5s infinite linear;
+                    animation: fa-spin 1.5s infinite linear;
+            @include transition(opacity .1s ease-out);
+        }
+
+        &.refreshing {
+            &::after {
+                content: "\f021";
+            }
+        }
+
+        &.sending {
+            &::after {
+                content: "\f1ce";
+                -webkit-animation: fa-spin 1s infinite linear;
+                        animation: fa-spin 1s infinite linear;
+            }
+        }
+    }
+
+    &.is-loading {
+        cursor: not-allowed;
+
+        &::before {
+            visibility: visible;
+            opacity: .5;
+        }
+
+        &::after {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
 .qty-box {
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -11403,7 +11492,7 @@ html.crios {
     .filter-collapse {
         position: absolute;
         top: 100%;
-        z-index: 1050;
+        z-index: $zindex-1;
         width: 100%;
         padding-right: 15px;
         margin-left: -15px;
@@ -11505,6 +11594,8 @@ html.crios {
             }
 
             a {
+                @include transition(all .1s ease);
+
                 span.placeholder {
                     display: inline-block;
                     width: 10%;
@@ -11587,75 +11678,60 @@ html.crios {
 
 .filter-collapse,
 .widget-filter-base {
-    .card {
-        padding-right: 0;
-        background-color: transparent;
-        border: 0;
 
-        &:not(:last-child) {
-            padding-bottom: .75rem;
-        }
+    .form-check {
+        padding-left: 0;
+    }
 
-        .form-check {
-            padding-left: 0;
-        }
+    .form-check-input {
+        &:checked + label {
+            padding-left: 1.75rem;
+            color: $gray-900;
+            background: $gray-200;
 
-        .form-check-input {
-            &:checked + label {
-                padding-left: 3.5rem;
-                color: $gray-900;
-                background: $gray-200;
-
-                &::before {
-                    padding-left: 1.75rem;
-                    font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
-                    content: "\f046";
-                    opacity: 1;
-                }
-            }
-
-            &:disabled + label {
-                cursor: not-allowed;
-            }
-        }
-
-        .form-check-label {
-            display: block;
-            padding: .5rem 0;
-            color: $gray-700;
-            @include transition(all .1s ease);
-
-            &:hover {
-                padding-left: 2.25rem;
-                color: $gray-700;
-                background: $gray-100;
-                @include transition(all .1s ease);
-            }
-
-            &::before {
-                position: absolute;
-                left: .5rem;
+            span::before {
+                position: relative;
+                margin-right: 5px;
                 font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
                 content: "\f046";
-                opacity: 0;
+                opacity: 1;
             }
+        }
+
+        &:disabled + label {
+            cursor: not-allowed;
+        }
+    }
+
+    .form-check-label {
+        display: block;
+        padding: .5rem 0;
+        color: $gray-700;
+        @include transition(all .1s ease);
+
+        &:hover {
+            padding-left: 2.25rem;
+            color: $gray-700;
+            background: $gray-100;
+        }
+
+        span::before {
+            position: absolute;
+            font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+            content: "\f046";
+            opacity: 0;
         }
     }
 }
 
 .filter-badge {
-    position: absolute;
-    top: 50%;
-    right: .5rem;
-    display: inline-block;
     min-width: 3em;
     padding: .1rem 0;
     font-size: .85rem;
+    line-height: 18px;
     color: $gray-600;
     text-align: center;
     background: $gray-200;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
 }
 
 .item-filter-price {
@@ -12185,30 +12261,27 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 
 .widget-filter-base {
-    padding: 2rem 0;
-    background-color: $white;
-
-    .form-check {
-        margin-bottom: 0;
-    }
-
     .form-check-label {
         cursor: pointer;
     }
 
     .title,
-    .card .form-check-label {
-        padding-left: 1.75rem;
+    .card .form-check-label,
+    .item-filter-price {
+        padding: .75rem 1.75rem;
     }
 }
 
-.widget-toolbar .widget-filter-base {
-    padding: 0;
+.widget-toolbar {
+    .title,
+    .card .form-check-label,
+    .item-filter-price {
+        padding: .75rem;
+    }
 
     .form-check-input:checked + label,
     .form-check-input:hover + label {
-        padding-left: 1.75rem;
-        margin-left: 1.75rem;
+        padding-left: .75rem !important; // stylelint-disable-line declaration-no-important
     }
 }
 
@@ -12266,6 +12339,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 }
 
 .widget-grid .col-md-3,
+.widget-grid .col-lg-3,
 .widget-grid .col-md-4,
 .widget-grid .widget-grid {
     .widget-filter-price {
@@ -12438,15 +12512,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     }
 
     .huge-font {
-        font-size: $font-size-base;
-
-        @include media-breakpoint-up(sm) {
-            font-size: 28px;
-        }
-        @include media-breakpoint-up(md) {
-            font-size: 35px;
-        }
-
         .widget-text,
         .widget-code {
             h1 { font-size: 2em; }
@@ -12454,6 +12519,15 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
             h3 { font-size: 1.5em; }
             h4 { font-size: 1.25em; }
             * { font-size: 1em; }
+
+            font-size: $font-size-base;
+
+            @include media-breakpoint-up(sm) {
+                font-size: 28px;
+            }
+            @include media-breakpoint-up(md) {
+                font-size: 35px;
+            }
         }
     }
 }

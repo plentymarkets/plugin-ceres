@@ -211,7 +211,7 @@ var render = function() {
         class: {
           "input-group": true,
           "component-loading": _vm.isCheckoutReadonly,
-          isLoading: _vm.isCheckoutReadonly
+          "is-loading": _vm.isCheckoutReadonly
         }
       },
       [

@@ -6,8 +6,7 @@ branches:
   only:
     - stable
     - beta
-    - beta5
-    - feature/beta/.*
+    - /^feature\/beta\/.*/
 
 language: node_js
 node_js:

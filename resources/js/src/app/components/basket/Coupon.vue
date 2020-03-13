@@ -3,7 +3,7 @@
         <p v-if="isCheckoutReadonly && !!$translate('Ceres::Template.couponReadonlyInfoText')">
             {{ couponReadonlyInfoText }}
         </p>
-        <div :class="{'input-group':true, 'component-loading':isCheckoutReadonly, 'isLoading':isCheckoutReadonly}">
+        <div :class="{'input-group':true, 'component-loading':isCheckoutReadonly, 'is-loading':isCheckoutReadonly}">
             <input type="text" class="form-control" v-model="couponCode" :placeholder="$translate('Ceres::Template.couponEnterCoupon')" @keyup.enter="redeemCode()" :disabled="disabled || isCheckoutReadonly">
             <span class="input-group-btn">
                 <button class="btn btn-medium btn-primary btn-appearance" type="button" @click="redeemCode()" :disabled="waiting || isCheckoutReadonly" v-if="!disabled">

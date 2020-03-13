@@ -1320,7 +1320,7 @@ var render = function() {
                 "input-unit file-input order-property-input component-loading with-icon sending",
               class: {
                 active: _vm.property.value,
-                isLoading: _vm.waiting,
+                "is-loading": _vm.waiting,
                 error: _vm.hasError
               },
               attrs: {
