@@ -52,7 +52,7 @@ export default {
     {
         currentVariation() {
             return this.$store.getters[`${this.itemId}/currentItemVariation`]
-        },
+        }
     },
 
     data()
