@@ -121,10 +121,6 @@ export default {
 
                 this.clearSelectedFile();
             }
-            else if (this.inputType === "radio")
-            {
-                // TODO: has to be implemented
-            }
             else
             {
                 this.inputValue = this.property.value || "";
