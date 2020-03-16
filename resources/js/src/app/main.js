@@ -356,11 +356,27 @@ if ( headerParent )
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
 {
+    let parent = widgetElement[1];
+
+    let parentComponent = null;
+
+    while (parent)
+    {
+        if (parent.__vue__)
+        {
+            console.log(parent.__vue__);
+            parentComponent = parent.__vue__.componentInstance;
+            break;
+        }
+        parent = parent.parentElement;
+    }
+
     const compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
     const component = new Vue({
         store: window.ceresStore,
         render: compiled.render,
-        staticRenderFns: compiled.staticRenderFns
+        staticRenderFns: compiled.staticRenderFns,
+        parent: parentComponent
     });
 
     component.$mount( widgetElement[0] );
