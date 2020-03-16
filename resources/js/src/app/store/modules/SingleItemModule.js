@@ -53,13 +53,12 @@ const mutations =
 
                 if (group && group.orderPropertyGroupingType === "single")
                 {
-                    properties.forEach(prop =>
-                    {
-                        if (prop.group && prop.group.id === group.id)
+                    // reset all other radios in the group
+                    properties.filter(prop => prop.group && prop.group.id === group.id && prop.property.id !== propertyId && prop.property.valueType === "empty")
+                        .forEach(prop =>
                         {
                             prop.property.value = null;
-                        }
-                    });
+                        });
                 }
 
                 Vue.set(properties[index], "property",
