@@ -21,9 +21,6 @@
                         <template #before-basket-item>
                             <slot name="before-basket-item"></slot>
                         </template>
-                        <template #loading-animation>
-                            <slot name="loading-animation"></slot>
-                        </template>
                         <template #after-basket-item>
                             <slot name="after-basket-item"></slot>
                         </template>
