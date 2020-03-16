@@ -365,7 +365,7 @@ $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", functi
         if (parent.__vue__)
         {
             console.log(parent.__vue__);
-            parentComponent = parent.__vue__.componentInstance;
+            parentComponent = parent.__vue__;
             break;
         }
         parent = parent.parentElement;
