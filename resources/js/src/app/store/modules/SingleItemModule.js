@@ -50,13 +50,15 @@ const mutations =
             if (index >= 0)
             {
                 const group = properties[index].group;
+                const property = properties.find(prop => prop.property.id === propertyId);
 
-                if (group && group.orderPropertyGroupingType === "single")
+                if (property && property.property.valueType === "empty" && group && group.orderPropertyGroupingType === "single")
                 {
                     // reset all other radios in the group
                     properties.filter(prop => prop.group && prop.group.id === group.id && prop.property.id !== propertyId && prop.property.valueType === "empty")
                         .forEach(prop =>
                         {
+                            console.log("reset", prop.property.id, "from", propertyId)
                             prop.property.value = null;
                         });
                 }
