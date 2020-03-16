@@ -80,6 +80,7 @@ const NotificationService = require("../../services/NotificationService");
 
 import { isNullOrUndefined } from "../../helper/utils";
 import { mapState, mapGetters, mapMutations } from "vuex";
+import TranslationService from '../../services/TranslationService';
 
 export default {
 
@@ -101,17 +102,33 @@ export default {
 
     mounted()
     {
-        document.addEventListener("onVariationChanged", () =>
+        document.addEventListener("onVariationChanged", event =>
         {
-            if (this.property.valueType !== "file")
+            // clear type specific bindings
+            if (this.property.valueType === "selection")
             {
-                this.inputValue = "";
+                this.selectionValue = this.property.value || null;
+            }
+            else if (this.property.valueType === "file")
+            {
+                if (this.property.value && this.property.value.length)
+                {
+                    NotificationService.warn(
+                        TranslationService.translate("Ceres::Template.singleItemOrderPropertyFileHasReset",
+                            { propertyName: this.property.names.name })
+                    ).closeAfter(5000);
+                }
+
+                this.clearSelectedFile();
+            }
+            else if (this.inputType === "radio")
+            {
+                // TODO: has to be implemented
             }
             else
             {
-                this.clearSelectedFile();
+                this.inputValue = this.property.value || "";
             }
-            this.setVariationOrderProperty({ propertyId: this.property.id, value: null });
         });
     },
 
