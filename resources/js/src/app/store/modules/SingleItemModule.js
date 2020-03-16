@@ -58,7 +58,6 @@ const mutations =
                     properties.filter(prop => prop.group && prop.group.id === group.id && prop.property.id !== propertyId && prop.property.valueType === "empty")
                         .forEach(prop =>
                         {
-                            console.log("reset", prop.property.id, "from", propertyId)
                             prop.property.value = null;
                         });
                 }
