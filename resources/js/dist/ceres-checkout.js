@@ -33489,7 +33489,7 @@ var render = function() {
                           )
                         ])
                       ]
-                    : _c("div", { staticClass: "col-xs-12 col-sm-8" }, [
+                    : _c("div", { staticClass: "col-12 col-sm-8" }, [
                         _c(
                           "div",
                           {
@@ -34409,7 +34409,7 @@ var render = function() {
                           )
                         ])
                       ]
-                    : _c("div", { staticClass: "col-xs-12 col-sm-8" }, [
+                    : _c("div", { staticClass: "col-12 col-sm-8" }, [
                         _c(
                           "div",
                           {
@@ -35327,7 +35327,7 @@ var render = function() {
                           )
                         ])
                       ]
-                    : _c("div", { staticClass: "col-xs-12 col-sm-8" }, [
+                    : _c("div", { staticClass: "col-12 col-sm-8" }, [
                         _c(
                           "div",
                           {
@@ -36267,7 +36267,7 @@ var render = function() {
                           )
                         ])
                       ]
-                    : _c("div", { staticClass: "col-xs-12 col-sm-8" }, [
+                    : _c("div", { staticClass: "col-12 col-sm-8" }, [
                         _c(
                           "div",
                           {
@@ -37148,7 +37148,7 @@ var render = function() {
                           )
                         ])
                       ]
-                    : _c("div", { staticClass: "col-xs-12 col-sm-8" }, [
+                    : _c("div", { staticClass: "col-12 col-sm-8" }, [
                         _c(
                           "div",
                           {
