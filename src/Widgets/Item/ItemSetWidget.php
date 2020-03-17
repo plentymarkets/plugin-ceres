@@ -20,7 +20,7 @@ class ItemSetWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/item-set.svg")
             ->withType(WidgetTypes::SET_ITEM)
             ->withCategory(WidgetCategories::ITEM)
-            ->withPosition(800)
+            ->withPosition(0)
             ->withMaxPerPage(1)
             ->withAllowedNestingTypes(
                 [
