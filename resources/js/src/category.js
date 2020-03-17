@@ -140,6 +140,7 @@ import Notifications from "./app/components/pageDesign/Notifications.vue";
 Vue.component("notifications", Notifications);
 Vue.component("popper", () => import("./app/components/pageDesign/Popper.vue"));
 Vue.component("shipping-country-select", () => import("./app/components/pageDesign/ShippingCountrySelect.vue"));
+Vue.component("loading-animation", () => import("./app/components/pageDesign/LoadingAnimation.vue"));
 
 Vue.component("wish-list", () => import("./app/components/wishList/WishList.vue"));
 import WishListCount from "./app/components/wishList/WishListCount.vue";
