@@ -152,10 +152,3 @@
         {{ classes | trim }}
     {% endspaceless -%}
 {% endmacro %}
-
-{% macro vueCurrentVariation() %}
-    {%- spaceless %}
-        {% set getter = "$store.getters[\'#{item.documents[0].data.item.id}/currentItemVariation\']"%}
-        {{ getter | raw}}
-    {% endspaceless -%}
-{% endmacro %}
