@@ -9,18 +9,7 @@
             :getFilteredDataField="getFilteredDataField">
         </slot>
 
-        <div v-else-if="isLoading" class="prop-3-1 loading">
-            <div class="loading-animation-frame col-12 col-lg-12" style="position: absolute; top: 50%; transform: translateY(-50%);">
-                <div class="loading-animation">
-                    <div class="rect1 bg-appearance"></div>
-                    <div class="rect2 bg-appearance"></div>
-                    <div class="rect3 bg-appearance"></div>
-                    <div class="rect4 bg-appearance"></div>
-                    <div class="rect5 bg-appearance"></div>
-                </div>
-            </div>
-        </div>
-
+        <loading-animation v-else class="prop-3-1"></loading-animation>
     </div>
 </template>
 
