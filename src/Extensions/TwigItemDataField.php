@@ -98,8 +98,7 @@ class TwigItemDataField extends Twig_Extension
      */
     public function getDataField($field, $filter = null, $directiveType = "text", $htmlTagType = "span", $linkType = "")
     {
-        $itemData = end($this->itemData);
-        reset($this->itemData);
+        $itemData = $this->itemData[count($this->itemData)-1];
         $twigPrint = SafeGetter::get($itemData, $field);
         if (!is_null($filter)) {
             try {
