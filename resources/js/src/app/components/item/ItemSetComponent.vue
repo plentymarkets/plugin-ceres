@@ -1,7 +1,8 @@
 <template>
     <div>
+
         <slot
-            v-if="variation && !isLoading || $ceres.isShopBuilder"
+            v-if="!isSetLoading && variation || $ceres.isShopBuilder"
             :itemId="itemId"
             :variationId="variationId"
             :variation="variation"
@@ -9,7 +10,7 @@
             :getFilteredDataField="getFilteredDataField">
         </slot>
 
-        <loading-animation v-else class="prop-3-1"></loading-animation>
+        <loading-animation v-else-if="isSetLoading" class="prop-3-1"></loading-animation>
     </div>
 </template>
 
@@ -36,22 +37,6 @@ export default {
         }
     },
 
-    data()
-    {
-        return {
-            isLoading: true
-        }
-    },
-
-    created()
-    {
-        // this timeout represents the time while data is loading
-        setTimeout(() =>
-        {
-            this.isLoading = false;
-        }, 0 * 1000);
-    },
-
     computed:
     {
         variationId()
@@ -65,7 +50,8 @@ export default {
                 const itemModule = state.items[this.itemId];
 
                 return itemModule && itemModule.variation.documents[0].data;
-            }
+            },
+            isSetLoading: state => state.items.isSetLoading
         })
     },
 

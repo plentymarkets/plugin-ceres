@@ -2,6 +2,19 @@ import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
 import VariationSelectModule from "../VariationSelectModule";
 
+const state =
+    {
+        isSetLoading: false
+    };
+
+const mutations =
+    {
+        setIsSetLoading(state, isSetLoading)
+        {
+            state.isSetLoading = isSetLoading;
+        }
+    };
+
 const actions =
     {
         initVariation({ commit, dispatch }, variation)
@@ -14,9 +27,13 @@ const actions =
 
             if (!App.isShopbuilder && setComponentIds && setComponentIds.length)
             {
+                commit("setIsSetLoading", true);
+
                 ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem" })
                     .done(components =>
                     {
+                        commit("setIsSetLoading", false);
+
                         for (const component of components.documents)
                         {
                             const itemId = component.data.item.id;
@@ -43,5 +60,7 @@ const actions =
 
 export default
 {
+    state,
+    mutations,
     actions
 };
