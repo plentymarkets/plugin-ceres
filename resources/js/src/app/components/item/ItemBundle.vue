@@ -13,6 +13,9 @@
 
 <script>
 export default {
+
+    name: "item-bundle",
+
     props: {
         paddingClasses: {
             type: String,

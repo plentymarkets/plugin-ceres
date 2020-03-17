@@ -62,6 +62,12 @@ export default {
         }
     },
 
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     data()
     {
         return {
@@ -71,11 +77,15 @@ export default {
 
     computed:
     {
+        currentVariation() {
+            return this.$store.getters[`${this.itemId}/currentItemVariation`]
+        },
+
         carouselImages()
         {
             return this.orderByPosition(
                 this.$options.filters.itemImages(
-                    this.currentVariation.documents[0].data.images,
+                    this.currentVariation.images,
                     "urlPreview"
                 )
             ).slice(0, this.maxQuantity);
@@ -85,15 +95,11 @@ export default {
         {
             return this.orderByPosition(
                 this.$options.filters.itemImages(
-                    this.currentVariation.documents[0].data.images,
+                    this.currentVariation.images,
                     this.imageUrlAccessor
                 )
             ).slice(0, this.maxQuantity);
-        },
-
-        ...mapState({
-            currentVariation: state => state.item.variation
-        })
+        }
     },
 
     watch: {
@@ -291,12 +297,12 @@ export default {
 
         getAltText(image)
         {
-            return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+            return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation);
         },
 
         getImageName(image)
         {
-            return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation.documents[0].data);
+            return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
         },
 
         loadLightbox()

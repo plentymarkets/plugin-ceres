@@ -100,11 +100,6 @@ export default {
             type: Boolean,
             default: false
         },
-        missingOrderProperties:
-        {
-            type: Array,
-            default: () => []
-        },
         variationId:
         {
             type: Number
@@ -170,6 +165,13 @@ export default {
             default: null
         }
     },
+
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     computed:
     {
         canBeAddedToBasket()
@@ -216,12 +218,33 @@ export default {
             }
         },
 
+        variationOrderQuantity()
+        {
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationOrderQuantity;
+        },
+
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
+        isVariationSelected()
+        {
+            return this.$store.state.items[this.itemId]
+                && this.$store.state.items[this.itemId].variationSelect
+                && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
+        },
+
+        hasAvailableVariations()
+        {
+            return this.$store.state.items[this.itemId]
+                && this.$store.state.items[this.itemId].variationSelect
+                && this.$store.state.items[this.itemId].variationSelect.variations.some(variation => variation.isSalable);
+        },
+
         ...mapState({
             basketItems: state => state.basket.items,
-            isBasketLoading: state => state.basket.isBasketLoading,
-            isVariationSelected: state => state.variationSelect.isVariationSelected,
-            hasAvailableVariations: state => state.variationSelect.variations.some(variation => variation.isSalable),
-            variationOrderQuantity: state => state.item.variationOrderQuantity
+            isBasketLoading: state => state.basket.isBasketLoading
         })
     },
 
@@ -243,7 +266,7 @@ export default {
         {
             this.$store.dispatch("loadComponent", "add-item-to-basket-overlay");
 
-            if (this.missingOrderProperties.length)
+            if (this.variationMissingProperties !== undefined && this.variationMissingProperties.length)
             {
                 this.showMissingPropertiesError();
             }
@@ -307,9 +330,9 @@ export default {
         },
         showMissingPropertiesError()
         {
-            this.$store.commit("setVariationMarkInvalidProps", true);
+            this.$store.commit(`${this.itemId}/setVariationMarkInvalidProps`, true);
 
-            const propertyNames = this.missingOrderProperties.map(property => property.property.names.name);
+            const propertyNames = this.variationMissingProperties.map(property => property.property.names.name);
             let errorMsgContent = "";
 
             for (const name of propertyNames)
@@ -339,11 +362,12 @@ export default {
             this.quantity = value;
         }
     },
+
     watch:
     {
         quantity(value)
         {
-            this.$store.commit("setVariationOrderQuantity", value);
+            this.$store.commit(`${this.itemId}/setVariationOrderQuantity`, value);
         },
 
         variationOrderQuantity(value)

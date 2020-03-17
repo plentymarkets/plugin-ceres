@@ -1,6 +1,5 @@
 <template>
-    <div>
-
+    <div :class="{ 'has-crossprice': hasCrossPrice }">
         <div class="crossprice" v-if="showCrossPrice && hasCrossPrice">
             <del class="text-muted small text-appearance">
                 {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
@@ -39,10 +38,9 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-
 export default {
     name: "item-price",
+
     props:
     {
         showCrossPrice:
@@ -51,28 +49,40 @@ export default {
             default: true
         }
     },
-    data()
-    {
-        return {}
+
+    inject: {
+        itemId: {
+            default: null
+        }
     },
+
     computed:
     {
-        hasCrossPrice()
-        {
+        currentVariation() {
+            return this.$store.getters[`${this.itemId}/currentItemVariation`]
+        },
+
+        hasCrossPrice() {
             return !!this.currentVariation.prices.rrp &&
                 this.currentVariation.prices.rrp.unitPrice.value > 0 &&
                 this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
         },
 
-        ...mapState({
-            currentVariation: state => state.item.variation.documents[0].data,
-        }),
+        variationGraduatedPrice() {
+            return this.$store.getters[`${this.itemId}/variationGraduatedPrice`];
+        },
 
-        ...mapGetters([
-            "showDynamicPrice",
-            "variationGraduatedPrice",
-            "variationTotalPrice"
-        ])
+        variationTotalPrice() {
+            return this.$store.getters[`${this.itemId}/variationTotalPrice`]
+        },
+
+        showDynamicPrice() {
+            const state = this.$store.state.items[this.itemId];
+            return App.config.item.showPleaseSelect
+                && (state.variationSelect && !state.variationSelect.isVariationSelected)
+                && (state.pleaseSelectVariationId === this.currentVariation.variation.id
+                    || state.pleaseSelectVariationId === 0);
+        }
     }
 }
 </script>

@@ -86,17 +86,24 @@
 <script>
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
-import { mapState } from "vuex";
 
 const NotificationService = require("../../services/NotificationService");
 
 export default {
+
+    name: "variation-select",
 
     props: {
         forceContent:
         {
             type: Boolean,
             default: false
+        }
+    },
+
+    inject: {
+        itemId: {
+            default: null
         }
     },
 
@@ -111,11 +118,19 @@ export default {
     mounted()
     {
         // initially check for valid selection and disable add to basket button
-        this.$store.commit("setIsVariationSelected", !!this.currentSelection);
+        this.$store.commit(`${this.itemId}/variationSelect/setIsVariationSelected`, !!this.currentSelection);
     },
 
     computed:
     {
+        currentVariation() {
+            return this.$store.getters(`${this.itemId}/currentItemVariation`);
+        },
+
+        currentVariationSelect() {
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationSelect;
+        },
+
         /**
          * returns true if any variation has no attributes
          */
@@ -172,14 +187,25 @@ export default {
             return !isNullOrUndefined(this.selectedAttributes) && !Object.values(this.selectedAttributes).some((value) => value < 0);
         },
 
-        ...mapState({
-            attributes: state => state.variationSelect.attributes,
-            currentVariation: state => state.item.variation.documents[0].data,
-            selectedAttributes: state => state.variationSelect.selectedAttributes,
-            selectedUnit: state => state.variationSelect.selectedUnit,
-            units: state => state.variationSelect.units,
-            variations: state => state.variationSelect.variations
-        })
+        attributes() {
+            return this.currentVariationSelect && this.currentVariationSelect.attributes;
+        },
+
+        units() {
+            return this.currentVariationSelect && this.currentVariationSelect.units;
+        },
+
+        selectedAttributes() {
+            return this.currentVariationSelect && this.currentVariationSelect.selectedAttributes;
+        },
+
+        selectedUnit() {
+            return this.currentVariationSelect && this.currentVariationSelect.selectedUnit;
+        },
+
+        variations() {
+            return this.currentVariationSelect && this.currentVariationSelect.variations;
+        }
     },
 
     methods:
@@ -195,7 +221,7 @@ export default {
 
             if (this.selectedAttributes[attributeId] !== attributeValueId)
             {
-                this.$store.commit("selectItemAttribute", { attributeId, attributeValueId });
+                this.$store.commit(`${this.itemId}/variationSelect/selectItemAttribute`, { attributeId, attributeValueId });
                 this.onSelectionChange(attributeId, attributeValueId, null);
             }
         },
@@ -207,7 +233,7 @@ export default {
         selectUnit(unitId)
         {
             unitId = parseInt(unitId);
-            this.$store.commit("selectItemUnit", unitId);
+            this.$store.commit(`${this.itemId}/variationSelect/selectItemUnit`, unitId);
             this.onSelectionChange(null, null, unitId);
         },
 
@@ -416,7 +442,7 @@ export default {
                 this.$store.commit("selectItemUnit", invalidSelection.newUnit);
             }
 
-            this.$store.commit("setItemSelectedAttributes", attributes);
+            this.$store.commit(`${this.itemId}/variationSelect/setItemSelectedAttributes`, attributes);
 
             this.setVariation(this.currentSelection ? this.currentSelection.variationId : 0);
 
@@ -537,7 +563,7 @@ export default {
 
             if (isDefined(variationId))
             {
-                this.$store.dispatch("loadVariation", variationId).then(variation =>
+                this.$store.dispatch(`${this.itemId}/loadVariation`, variationId).then(variation =>
                 {
                     document.dispatchEvent(new CustomEvent("onVariationChanged",
                         {
@@ -582,7 +608,7 @@ export default {
     {
         currentSelection(value)
         {
-            this.$store.commit("setIsVariationSelected", !!value);
+            this.$store.commit(`${this.itemId}/variationSelect/setIsVariationSelected`, !!value);
         }
     }
 }

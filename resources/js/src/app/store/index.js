@@ -8,7 +8,6 @@ import basket from "./modules/BasketModule";
 import checkout from "./modules/CheckoutModule";
 import consents from "./modules/ConsentModule";
 import contactForm from "./modules/ContactFormModule";
-import item from "./modules/SingleItemModule";
 import itemList from "./modules/ItemListModule";
 import itemSearch from "./modules/ItemSearchModule";
 import lastSeen from "./modules/LastSeenModule";
@@ -18,7 +17,6 @@ import localization from "./modules/LocalizationModule";
 import navigation from "./modules/NavigationModule";
 import orderReturn from "./modules/OrderReturnModule";
 import user from "./modules/UserModule";
-import variationSelect from "./modules/VariationSelectModule";
 import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
@@ -42,7 +40,6 @@ const store = new Vuex.Store(
             checkout,
             consents,
             contactForm,
-            item,
             itemList,
             items,
             itemSearch,
@@ -53,7 +50,6 @@ const store = new Vuex.Store(
             navigation,
             orderReturn,
             user,
-            variationSelect,
             wishList
         },
 

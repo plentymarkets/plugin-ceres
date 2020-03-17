@@ -58,11 +58,8 @@
 
                             <slot name="after-price"></slot>
 
-                            <span v-if="currentVariation.variation.availability" :class="'availability badge availability-' + currentVariation.variation.availability.id">
-                                <span>
-                                    {{ currentVariation.variation.availability.names.name }}
-                                </span>
-                            </span>
+                            <item-availability></item-availability>
+
                             <div class="my-3">
                                 <div class="w-100">
                                     <slot name="before-add-to-basket"></slot>
@@ -83,7 +80,6 @@
                                             :use-large-scale="false"
                                             :show-quantity="true"
                                             :item-url="currentVariation | itemURL"
-                                            :missing-order-properties="variationMissingProperties"
                                             :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
                                             :has-price="currentVariation | hasItemDefaultPrice"
                                         >
@@ -238,9 +234,11 @@
 <script>
 import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
-import { mapState, mapGetters } from "vuex";
 
 export default {
+
+    name: "single-item",
+
     props: {
         pleaseSelectOptionVariationId: {
             type: Number,
@@ -257,6 +255,17 @@ export default {
         isWishListEnabled: {
             type: Boolean,
             default: false
+        },
+        itemId: {
+            type: Number,
+            required: true
+        }
+    },
+
+    provide()
+    {
+        return {
+            itemId: this.$props.itemId
         }
     },
 
@@ -329,33 +338,45 @@ export default {
             return this.$translate(translationKey, {"age": age })
         },
 
-        ...mapState({
-            currentVariation: state => state.item.variation.documents[0].data,
-            isVariationSelected: state => state.variationSelect.isVariationSelected,
-            attributes: state => state.variationSelect.attributes,
-            units: state => state.variationSelect.units
-        }),
+        variationGroupedProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationGroupedProperties`];
+        },
 
-        ...mapGetters([
-            "variationMissingProperties",
-            "variationGroupedProperties",
-        ])
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
+        currentVariation() {
+            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`);
+        },
+
+        isVariationSelected() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.isVariationSelected`);
+        },
+
+        attributes() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.attributes`);
+        },
+
+        units() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.units`);
+        }
     },
 
     created()
     {
-        this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setPleaseSelectVariationId", this.pleaseSelectOptionVariationId);
+        this.$store.dispatch("initVariation", this.itemData);
+        this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
-        this.$store.dispatch("setVariationSelect", {
+        this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
             attributes:         this.attributesData,
             variations:         this.variations,
             initialVariationId: this.currentVariation.variation.id,
             isPleaseSelectOption: this.initPleaseSelectOption
         });
-
-        this.$store.dispatch("initVariation", this.itemData);
     },
 
     methods:

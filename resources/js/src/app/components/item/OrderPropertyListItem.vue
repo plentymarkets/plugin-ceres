@@ -79,14 +79,22 @@ const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
 import { isNullOrUndefined } from "../../helper/utils";
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
+
+    name: "order-property-list-item",
 
     props:
     {
         group: Object,
         property: Object
+    },
+
+    inject: {
+        itemId: {
+            default: null
+        }
     },
 
     data()
@@ -172,14 +180,19 @@ export default {
             return selectedProperty.description;
         },
 
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
+        variationMarkInvalidProperties() {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            return currentVariation && currentVariation.variationMarkInvalidProperties;
+        },
+
         ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
-            variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
-        }),
-
-        ...mapGetters([
-            "variationMissingProperties"
-        ])
+        })
     },
 
     methods:
@@ -251,10 +264,9 @@ export default {
             return value;
         },
 
-        ...mapMutations([
-            "setVariationOrderProperty",
-            "setIsBasketLoading"
-        ]),
+        setVariationOrderProperty(orderProperty) {
+            return this.$store.commit(`${this.itemId}/setVariationOrderProperty`, orderProperty);
+        },
 
         setPropertyFile(event)
         {
@@ -307,7 +319,11 @@ export default {
                     NotificationService.error(err[0]);
                 }
             }
-        }
+        },
+
+        ...mapMutations([
+            "setIsBasketLoading"
+        ]),
     }
 }
 </script>

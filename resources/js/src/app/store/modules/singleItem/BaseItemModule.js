@@ -1,64 +1,72 @@
 import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
+import VariationSelectModule from "../VariationSelectModule";
 
 const state =
     {
-        cachedVariations: {}
+        isSetLoading: false,
+        previewItemId: 0
     };
 
 const mutations =
     {
-        addVariationToCache(state, variation)
+        setIsSetLoading(state, isSetLoading)
         {
-            const variationId = variation.documents[0].data.variation.id;
+            state.isSetLoading = isSetLoading;
+        },
 
-            if (!state.cachedVariations[variationId])
-            {
-                state.cachedVariations[variationId] = variation;
-            }
+        setPreviewItemId(state, itemId)
+        {
+            state.previewItemId = itemId;
         }
     };
 
 const actions =
     {
-        initVariation({ state, commit }, variation)
+        initVariation({ commit, dispatch }, variation)
         {
             // register a nested module for the main item
-            const itemId = variation.documents[0].data.item.id;
+            dispatch("registerItem", variation.documents[0]);
 
-            ceresStore.registerModule(["items", itemId], ItemModule);
-            commit(`${itemId}/setVariation`, variation);
-
-            // rest call for sets if set comps set
+            // rest call for sets if set comps are set
             const setComponentIds = variation.documents[0].data.setComponentVariationIds;
 
-            if (setComponentIds && setComponentIds.length)
+            if (!App.isShopBuilder && setComponentIds && setComponentIds.length)
             {
+                commit("setIsSetLoading", true);
+
                 ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem" })
                     .done(components =>
                     {
-                        for (const component of Object.values(components.documents))
+                        commit("setIsSetLoading", false);
+
+                        for (const component of components.documents)
                         {
                             const itemId = component.data.item.id;
-                            const whackData = { documents: [component] };
 
-                            ceresStore.registerModule(["items", itemId], ItemModule);
-                            commit(`${itemId}/setVariation`, whackData);
+                            // register a module for every set item
+                            dispatch("registerItem", component);
+                            commit(`${itemId}/setPleaseSelectVariationId`, itemId);
                         }
                     });
             }
+        },
+
+        registerItem({ commit }, item)
+        {
+            const itemId = item.data.item.id;
+            // extend the structur of the object to match the old objects
+            const extendedData = { documents: [item] };
+
+            ceresStore.registerModule(["items", itemId], ItemModule);
+            ceresStore.registerModule(["items", itemId, "variationSelect"], VariationSelectModule);
+            commit(`${itemId}/setVariation`, extendedData);
         }
-    };
-
-const getters =
-    {
-
     };
 
 export default
 {
     state,
-    actions,
     mutations,
-    getters
+    actions
 };

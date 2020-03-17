@@ -11,16 +11,23 @@
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
-    {{ Twig.for("setComponent", "setComponents") }}
-        {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
-
-        <item-set-component :item-id="{{ Twig.print("setComponent.item.id") }}" v-slot="slotProps">
-            <div {% if isPreview %}data-builder-child-container="itemSet"{% endif %}>
+    {% if isPreview %}
+        <item-set-component v-slot="slotProps">
+            <div data-builder-child-container="itemSet">
                 {{ children.itemSet | raw }}
             </div>
         </item-set-component>
+    {% else %}
+        {{ Twig.for("setComponent", "setComponents") }}
+            {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
 
-        {{ Twig.print(Twig.call("pop_item_data_base")) }}
-    {{ Twig.endfor() }}
-
+            <item-set-component :item-id="{{ Twig.print("setComponent.item.id") }}" v-slot="slotProps">
+                <div>
+                    {{ children.itemSet | raw }}
+                </div>
+            </item-set-component>
+            
+            {{ Twig.print(Twig.call("pop_item_data_base")) }}
+        {{ Twig.endfor() }}
+    {% endif %}
 </div>
