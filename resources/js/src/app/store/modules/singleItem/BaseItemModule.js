@@ -5,7 +5,8 @@ import VariationSelectModule from "../VariationSelectModule";
 const state =
     {
         isSetLoading: false,
-        previewItemId: 0
+        previewItemId: 0,
+        componentItems: []
     };
 
 const mutations =
@@ -18,6 +19,12 @@ const mutations =
         setPreviewItemId(state, itemId)
         {
             state.previewItemId = itemId;
+        },
+
+        addComponent(state, itemId)
+        {
+            state.componentItems = state.componentItems || [];
+            state.componentItems.push(itemId);
         }
     };
 
@@ -61,6 +68,7 @@ const actions =
             ceresStore.registerModule(["items", itemId], ItemModule);
             ceresStore.registerModule(["items", itemId, "variationSelect"], VariationSelectModule);
             commit(`${itemId}/setVariation`, extendedData);
+            commit("addComponent", itemId);
         }
     };
 

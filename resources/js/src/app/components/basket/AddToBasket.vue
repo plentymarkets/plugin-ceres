@@ -25,7 +25,7 @@
                 </div>
 
                 <button
-                        v-if="!isVariationSelected || !isSalable"
+                        v-if="(!isVariationSelected || !isSalable) && !isSet"
                         class="btn btn-block btn-primary btn-appearance disabled"
                         v-tooltip
                         data-toggle="tooltip"
@@ -179,6 +179,13 @@ export default {
 
     computed:
     {
+        isSet()
+        {
+            return this.$store.state.items[this.itemId]
+                && this.$store.state.items[this.itemId].variation
+                && this.$store.state.items[this.itemId].variation.documents[0].data.item.itemType === "set";
+        },
+
         canBeAddedToBasket()
         {
             return this.isSalable &&
@@ -275,7 +282,7 @@ export default {
             {
                 this.showMissingPropertiesError();
             }
-            else if (this.isSalable)
+            else if (this.isSalable || this.isSet)
             {
                 this.waiting = true;
 
@@ -310,6 +317,23 @@ export default {
                         basketItemOrderParams   :   orderParams,
                         totalOrderParamsMarkup  :   totalSurcharge
                     };
+
+                if(this.isSet)
+                {
+                    const setComponents = [];
+                    this.$store.state.items.componentItems.forEach(itemId =>
+                    {
+                        const variationId = this.$store.state.items[itemId]
+                            && this.$store.state.items[itemId].variation
+                            && this.$store.state.items[itemId].variation.documents[0].data.variation.id;
+
+                        setComponents.push({
+                            variationId: variationId,
+                            quantity: 1
+                        });
+                    });
+                    basketObject.setComponents = setComponents;
+                }
 
                 this.$store.dispatch("addBasketItem", basketObject).then(
                     response =>
