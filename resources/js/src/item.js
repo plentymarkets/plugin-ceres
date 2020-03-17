@@ -11,6 +11,7 @@ Vue.component("order-property-list", () => import("./app/components/item/OrderPr
 Vue.component("variation-select", () => import("./app/components/item/VariationSelect.vue"));
 Vue.component("item-availability", () => import("./app/components/item/ItemAvailability.vue"));
 Vue.component("single-item-bundle", () => import("./app/components/item/SingleItemBundle.vue"));
+Vue.component("single-add-to-basket", () => import("./app/components/item/SingleAddToBasket.vue"));
 
 import SingleItem from "./app/components/item/SingleItem.vue";
 Vue.component("single-item", SingleItem);
