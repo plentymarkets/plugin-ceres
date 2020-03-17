@@ -26,14 +26,14 @@ export default {
         itemId:
         {
             type: Number,
-            required: true
+            required: !App.isShopBuilder
         }
     },
 
     provide()
     {
         return {
-            itemId: this.itemId
+            itemId: App.isShopBuilder ? this.previewItemId : this.itemId
         }
     },
 
@@ -51,7 +51,8 @@ export default {
 
                 return itemModule && itemModule.variation.documents[0].data;
             },
-            isSetLoading: state => state.items.isSetLoading
+            isSetLoading: state => state.items.isSetLoading,
+            previewItemId : state => state.items.previewItemId
         })
     },
 

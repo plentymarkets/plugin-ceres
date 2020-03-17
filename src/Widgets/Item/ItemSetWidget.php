@@ -43,13 +43,4 @@ class ItemSetWidget extends BaseWidget
 
         return $settingsFactory->toArray();
     }
-
-    protected function getPreviewData($widgetSettings)
-    {
-        /** @var ItemListService $itemListService */
-        $itemListService = pluginApp(ItemListService::class);
-
-        $itemResult = $itemListService->getItemList("random", null, null, 5, null, true);
-        return ['setComponents' => [$itemResult['documents'][0]['data']]];
-    }
 }

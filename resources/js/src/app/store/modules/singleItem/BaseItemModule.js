@@ -4,7 +4,8 @@ import VariationSelectModule from "../VariationSelectModule";
 
 const state =
     {
-        isSetLoading: false
+        isSetLoading: false,
+        previewItemId: 0
     };
 
 const mutations =
@@ -12,6 +13,11 @@ const mutations =
         setIsSetLoading(state, isSetLoading)
         {
             state.isSetLoading = isSetLoading;
+        },
+
+        setPreviewItemId(state, itemId)
+        {
+            state.previewItemId = itemId;
         }
     };
 
@@ -25,7 +31,7 @@ const actions =
             // rest call for sets if set comps are set
             const setComponentIds = variation.documents[0].data.setComponentVariationIds;
 
-            if (!App.isShopbuilder && setComponentIds && setComponentIds.length)
+            if (!App.isShopBuilder && setComponentIds && setComponentIds.length)
             {
                 commit("setIsSetLoading", true);
 
