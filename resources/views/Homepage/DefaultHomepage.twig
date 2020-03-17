@@ -232,7 +232,7 @@
                 {% if category1.details is not empty or homepageContainer4 | trim is not empty or category2.details is not empty or homepageContainer5 | trim is not empty %}
                     <div class="row prop-row my-4 sale-new">
                         {% if category1.details is not empty or homepageContainer4 | trim is not empty %}
-                            <div class="col-xs-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
+                            <div class="col-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
                                 <div class="prop-6-4 prop-md-3-1">
                                     {% if homepageContainer4 | trim is empty %}
                                         <div class="prop-inner">
@@ -259,7 +259,7 @@
                         {% endif %}
 
                         {% if category2.details is not empty or homepageContainer5 | trim is not empty %}
-                            <div class="col-xs-{% if category1 is empty and homepageContainer4 | trim is empty %}12{% else %}6{% endif %}">
+                            <div class="col-{% if category1 is empty and homepageContainer4 | trim is empty %}12{% else %}6{% endif %}">
                                 <div class="prop-6-4 prop-md-3-1">
                                     {% if homepageContainer5 | trim is empty %}
                                         <div class="prop-inner">
