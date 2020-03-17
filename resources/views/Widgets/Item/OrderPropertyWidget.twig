@@ -12,7 +12,6 @@
 
 <div class="widget widget-order-property widget-{{ appearance }} {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <order-property-list
-        :is-preview="{{ isPreview | json_encode }}"
         {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
         {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
     </order-property-list>
