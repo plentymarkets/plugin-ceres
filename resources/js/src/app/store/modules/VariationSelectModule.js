@@ -49,11 +49,11 @@ const mutations =
 const actions =
     {
         // eslint-disable-next-line complexity
-        setVariationSelect({ commit }, state)
+        setVariationSelect({ commit }, variationSelect)
         {
-            const attributes         = state.attributes;
-            const variations         = state.variations;
-            const initialVariation   = variations.find(variation => state.initialVariationId === parseInt(variation.variationId));
+            const attributes         = variationSelect.attributes;
+            const variations         = variationSelect.variations;
+            const initialVariation   = variations.find(variation => variationSelect.initialVariationId === parseInt(variation.variationId));
             const initialUnit        = initialVariation && initialVariation.unitCombinationId || null;
             const selectedAttributes = {};
             const units              = {};
@@ -62,7 +62,7 @@ const actions =
             {
                 let variationAttribute;
 
-                if ((App.config.item.showPleaseSelect && state.isPleaseSelectOption) || !initialVariation)
+                if ((App.config.item.showPleaseSelect && variationSelect.isPleaseSelectOption) || !initialVariation)
                 {
                     selectedAttributes[attribute.attributeId] = -1;
                 }

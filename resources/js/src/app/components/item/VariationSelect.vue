@@ -86,7 +86,6 @@
 <script>
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
-import {get} from "../../helper/get";
 
 const NotificationService = require("../../services/NotificationService");
 
