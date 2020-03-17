@@ -57,13 +57,12 @@
             </div>
         {% endfor %}
     </div>
-    <script type="application/ld+json">
+    <script2 type="application/ld+json">
         {
             "@context":"http://schema.org/",
             "@id": "{{ Twig.print("services.url.getCanonicalURL()") }}#faq",
             "@type":"FAQPage",
             "mainEntity": {{ questions | json_encode | raw }}
         }
-
-    </script>
+    </script2>
 {% endif %}

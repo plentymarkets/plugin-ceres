@@ -8,6 +8,15 @@
         }
     }
 
+    .widget-fw {
+        width: unset !important;
+        left: unset !important;
+        right: unset !important;
+        margin-left: unset;
+        margin-right: unset;
+        max-width: unset !important;
+    }
+
     .widget-inner-stacked {
         display: flex;
         flex-direction: column;

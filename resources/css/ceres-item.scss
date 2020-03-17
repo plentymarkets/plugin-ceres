@@ -12509,6 +12509,8 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         left: 0;
         z-index: -1;
         height: 100% !important; // stylelint-disable-line declaration-no-important
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .huge-font {
@@ -12528,6 +12530,15 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
             @include media-breakpoint-up(md) {
                 font-size: 35px;
             }
+        }
+    }
+}
+
+.widget-grid {
+    .widget-background {
+        .container-max {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
         }
     }
 }
@@ -13174,6 +13185,15 @@ html.ie {
                     flex: 1;
             max-width: 100%;
         }
+    }
+
+    .widget-fw {
+        width: unset !important;
+        left: unset !important;
+        right: unset !important;
+        margin-left: unset;
+        margin-right: unset;
+        max-width: unset !important;
     }
 
     .widget-inner-stacked {
@@ -14006,6 +14026,7 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
         margin-left: -15px;
     }
 }
+
 .widget .widget-fw {
     position: unset;
     right: unset !important; // stylelint-disable-line declaration-no-important

@@ -17,6 +17,8 @@
         left: 0;
         z-index: -1;
         height: 100% !important; // stylelint-disable-line declaration-no-important
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .huge-font {
@@ -36,6 +38,15 @@
             @include media-breakpoint-up(md) {
                 font-size: 35px;
             }
+        }
+    }
+}
+
+.widget-grid {
+    .widget-background {
+        .container-max {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
         }
     }
 }
