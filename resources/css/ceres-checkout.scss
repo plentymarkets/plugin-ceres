@@ -12509,8 +12509,8 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         left: 0;
         z-index: -1;
         height: 100% !important; // stylelint-disable-line declaration-no-important
-        background-position: center;
         background-repeat: no-repeat;
+        background-position: center;
     }
 
     .huge-font {
@@ -12537,8 +12537,8 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 .widget-grid {
     .widget-background {
         .container-max {
-            padding-right: 0 !important;
-            padding-left: 0 !important;
+            padding-right: 0 !important; // stylelint-disable-line declaration-no-important
+            padding-left: 0 !important; // stylelint-disable-line declaration-no-important
         }
     }
 }
@@ -13188,12 +13188,12 @@ html.ie {
     }
 
     .widget-fw {
-        width: unset !important;
-        left: unset !important;
-        right: unset !important;
-        margin-left: unset;
+        right: unset !important; // stylelint-disable-line declaration-no-important
+        left: unset !important; // stylelint-disable-line declaration-no-important
+        width: unset !important; // stylelint-disable-line declaration-no-important
+        max-width: unset !important; // stylelint-disable-line declaration-no-important
         margin-right: unset;
-        max-width: unset !important;
+        margin-left: unset;
     }
 
     .widget-inner-stacked {
