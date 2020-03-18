@@ -5,7 +5,8 @@ import VariationSelectModule from "../VariationSelectModule";
 const state =
     {
         isSetLoading: false,
-        previewItemId: 0
+        previewItemId: 0,
+        componentItems: []
     };
 
 const mutations =
@@ -18,6 +19,12 @@ const mutations =
         setPreviewItemId(state, itemId)
         {
             state.previewItemId = itemId;
+        },
+
+        addComponent(state, itemId)
+        {
+            state.componentItems = state.componentItems || [];
+            state.componentItems.push(itemId);
         }
     };
 
@@ -47,6 +54,7 @@ const actions =
                             // register a module for every set item
                             dispatch("registerItem", component);
                             commit(`${itemId}/setPleaseSelectVariationId`, itemId);
+                            commit("addComponent", itemId);
                         }
                     });
             }
