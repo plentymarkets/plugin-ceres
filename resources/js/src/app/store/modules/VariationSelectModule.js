@@ -1,5 +1,6 @@
-const state =
-    {
+const state = () =>
+{
+    return {
         attributes: [],
         isVariationSelected: true,
         selectedAttributes: {},
@@ -7,6 +8,7 @@ const state =
         units: [],
         variations: []
     };
+};
 
 const mutations =
     {

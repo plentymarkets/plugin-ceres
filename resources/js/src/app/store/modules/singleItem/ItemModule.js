@@ -4,7 +4,7 @@ import Vue from "vue";
 
 const ApiService = require("../../../services/ApiService");
 
-const state = function()
+const state = () =>
 {
     return {
         variation: {},
