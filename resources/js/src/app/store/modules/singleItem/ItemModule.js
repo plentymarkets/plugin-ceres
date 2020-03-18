@@ -83,7 +83,7 @@ const mutations =
 
 const actions =
     {
-        loadVariation({ state, commit }, variationId)
+        loadVariation({ state, commit, rootState }, variationId)
         {
             return new Promise(resolve =>
             {
@@ -95,7 +95,11 @@ const actions =
                 {
                     commit("setVariation", variation);
 
-                    setUrlByItem(variation.documents[0].data, variationId > 0);
+                    if (!rootState.items.isItemSet)
+                    {
+                        setUrlByItem(variation.documents[0].data, variationId > 0);
+                    }
+
                     resolve(variation);
                 }
                 else
@@ -115,7 +119,11 @@ const actions =
                             // store received variation data for later reuse
                             commit("setVariation", response);
 
-                            setUrlByItem(response.documents[0].data, keepVariationId);
+                            if (!rootState.items.isItemSet)
+                            {
+                                setUrlByItem(response.documents[0].data, keepVariationId);
+                            }
+
                             resolve(response);
                         });
                 }

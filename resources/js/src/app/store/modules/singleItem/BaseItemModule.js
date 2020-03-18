@@ -4,9 +4,10 @@ import VariationSelectModule from "../VariationSelectModule";
 
 const state =
     {
+        componentItems: [],
+        isItemSet: false,
         isSetLoading: false,
-        previewItemId: 0,
-        componentItems: []
+        previewItemId: 0
     };
 
 const mutations =
@@ -14,6 +15,11 @@ const mutations =
         setIsSetLoading(state, isSetLoading)
         {
             state.isSetLoading = isSetLoading;
+        },
+
+        setIsItemSet(state, isItemSet)
+        {
+            state.isItemSet = !!isItemSet;
         },
 
         setPreviewItemId(state, itemId)
@@ -40,6 +46,7 @@ const actions =
 
             if (!App.isShopBuilder && setComponentIds && setComponentIds.length)
             {
+                commit("setIsItemSet", true);
                 commit("setIsSetLoading", true);
 
                 ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem" })
