@@ -21,7 +21,14 @@
         {{ Twig.for("setComponent", "setComponents") }}
             {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
 
-            <item-set-component :item-id="{{ Twig.print("setComponent.item.id") }}" v-slot="slotProps">
+            <item-set-component
+                    :item-id="{{ Twig.print("setComponent.item.id") }}"
+                    {{ Twig.if("setAttributeMap[setComponent.item.id] is defined") }}
+                        :initial-variation-id="{{ Twig.print("setComponent.variation.id") }}"
+                        :attributes="{{ Twig.print("setAttributeMap[setComponent.item.id].attributes | json_encode") }}"
+                        :variations="{{ Twig.print("setAttributeMap[setComponent.item.id].variations | json_encode") }}"
+                    {{ Twig.endif() }}
+                    v-slot="slotProps">
                 <div>
                     {{ children.itemSet | raw }}
                 </div>

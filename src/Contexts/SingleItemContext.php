@@ -21,6 +21,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $initPleaseSelectOption;
     public $isItemSet;
     public $setComponents;
+    public $setAttributeMap = [];
 
     public function init($params)
     {
@@ -48,6 +49,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->customerShowNetPrices = $customerService->showNetPrices();
 
         $this->setComponents = $params['setComponents'];
+        $this->setAttributeMap = $params['setAttributeMap'];
 
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
