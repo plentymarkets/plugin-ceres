@@ -124,7 +124,7 @@ export default {
     computed:
     {
         currentVariation() {
-            return this.$store.getters(`${this.itemId}/currentItemVariation`);
+            return this.$store.getters[`${this.itemId}/currentItemVariation`];
         },
 
         currentVariationSelect() {
@@ -439,7 +439,7 @@ export default {
                     );
                 }
 
-                this.$store.commit("selectItemUnit", invalidSelection.newUnit);
+                this.$store.commit(`${this.itemId}/variationSelect/selectItemUnit`, invalidSelection.newUnit);
             }
 
             this.$store.commit(`${this.itemId}/variationSelect/setItemSelectedAttributes`, attributes);
