@@ -11,7 +11,6 @@
         :use-large-scale="false"
         :show-quantity="true"
         :item-url="currentVariation | itemURL"
-        :missing-order-properties="true"
         :has-price="currentVariation | hasItemDefaultPrice"
         :button-size="buttonSize"
         :padding-classes="paddingClasses"

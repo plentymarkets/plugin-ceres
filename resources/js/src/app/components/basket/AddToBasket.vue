@@ -100,11 +100,6 @@ export default {
             type: Boolean,
             default: false
         },
-        missingOrderProperties:
-        {
-            type: Boolean,
-            default: false
-        },
         variationId:
         {
             type: Number
@@ -278,7 +273,7 @@ export default {
         {
             this.$store.dispatch("loadComponent", "add-item-to-basket-overlay");
 
-            if (this.missingOrderProperties && this.variationMissingProperties.length)
+            if (this.variationMissingProperties !== undefined && this.variationMissingProperties.length)
             {
                 this.showMissingPropertiesError();
             }

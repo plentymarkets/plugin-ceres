@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
 import OrderPropertyListGroup from "./OrderPropertyListGroup.vue";
 
 export default {
@@ -58,7 +57,6 @@ export default {
             type: String,
             default: null
         },
-        isPreview: Boolean
     },
 
     inject: {
@@ -106,7 +104,7 @@ export default {
 
         renderOrderPropertyList()
         {
-            return (this.$store.getters[`${this.itemId}/currentItemVariation`].filter.isSalable && this.variationGroupedProperties.length) || this.isPreview;
+            return (this.$store.getters[`${this.itemId}/currentItemVariation`].filter.isSalable && this.variationGroupedProperties.length) || App.isShopBuilder;
         },
 
         variationMissingProperties()
