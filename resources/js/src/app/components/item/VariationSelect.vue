@@ -86,7 +86,6 @@
 <script>
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
-import {get} from "../../helper/get";
 
 const NotificationService = require("../../services/NotificationService");
 
@@ -125,7 +124,11 @@ export default {
     computed:
     {
         currentVariation() {
-            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`);
+            return this.$store.getters(`${this.itemId}/currentItemVariation`);
+        },
+
+        currentVariationSelect() {
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationSelect;
         },
 
         /**
@@ -185,23 +188,23 @@ export default {
         },
 
         attributes() {
-            return get(this.$store.state, `items[${this.itemId}].variationSelect.attributes`);
+            return this.currentVariationSelect && this.currentVariationSelect.attributes;
         },
 
         units() {
-            return get(this.$store.state, `items[${this.itemId}].variationSelect.units`);
+            return this.currentVariationSelect && this.currentVariationSelect.units;
         },
 
         selectedAttributes() {
-            return get(this.$store.state, `items[${this.itemId}].variationSelect.selectedAttributes`);
+            return this.currentVariationSelect && this.currentVariationSelect.selectedAttributes;
         },
 
         selectedUnit() {
-            return get(this.$store.state, `items[${this.itemId}].variationSelect.selectedUnit`);
+            return this.currentVariationSelect && this.currentVariationSelect.selectedUnit;
         },
 
         variations() {
-            return get(this.$store.state, `items[${this.itemId}].variationSelect.variations`);
+            return this.currentVariationSelect && this.currentVariationSelect.variations;
         }
     },
 

@@ -54,6 +54,7 @@ const actions =
                             // register a module for every set item
                             dispatch("registerItem", component);
                             commit(`${itemId}/setPleaseSelectVariationId`, itemId);
+                            commit("addComponent", itemId);
                         }
                     });
             }
@@ -68,7 +69,6 @@ const actions =
             ceresStore.registerModule(["items", itemId], ItemModule);
             ceresStore.registerModule(["items", itemId, "variationSelect"], VariationSelectModule);
             commit(`${itemId}/setVariation`, extendedData);
-            commit("addComponent", itemId);
         }
     };
 

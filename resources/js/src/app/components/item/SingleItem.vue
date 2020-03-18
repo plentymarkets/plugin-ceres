@@ -80,7 +80,6 @@
                                             :use-large-scale="false"
                                             :show-quantity="true"
                                             :item-url="currentVariation | itemURL"
-                                            :missing-order-properties="true"
                                             :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
                                             :has-price="currentVariation | hasItemDefaultPrice"
                                         >
