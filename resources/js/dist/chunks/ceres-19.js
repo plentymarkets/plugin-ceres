@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[19],{
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13,20 +13,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
 
 
 
@@ -130,145 +128,74 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    visibleFields: {
-      type: Array,
-      default: function _default() {
-        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount"];
-      }
+    showNetPrices: {
+      type: Boolean,
+      default: false
     }
   },
   computed: _objectSpread({
-    currentShippingCountry: function currentShippingCountry() {
-      var shippingCountryId = this.basket.shippingCountryId;
-      return this.shippingCountries.find(function (country) {
-        return country.id === shippingCountryId;
-      });
+    hover: function hover() {
+      return App.config.basket.previewType === 'hover';
     },
-    shopCountry: function shopCountry() {
-      var shopCountryId = this.basket.shopCountryId;
-      return this.shippingCountries.find(function (country) {
-        return country.id === shopCountryId;
-      });
-    },
-    deliveryExportTranslation: function deliveryExportTranslation() {
-      var shopCountry = this.shopCountry && this.shopCountry.currLangName;
-      var currentShippingCountry = this.currentShippingCountry && this.currentShippingCountry.currLangName;
-      return this.$translate("Ceres::Template.basketExportDeliveryWarning", {
-        from: shopCountry,
-        to: currentShippingCountry
-      });
+    showShippingCountrySelect: function showShippingCountrySelect() {
+      return App.config.basket.showShippingCountrySelect;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     basket: function basket(state) {
       return state.basket.data;
     },
-    isBasketLoading: function isBasketLoading(state) {
-      return state.basket.isBasketLoading;
+    basketItems: function basketItems(state) {
+      return state.basket.items;
     },
-    shippingCountries: function shippingCountries(state) {
-      return state.localization.shippingCountries;
+    basketNotifications: function basketNotifications(state) {
+      return state.basket.basketNotifications;
     },
-    showNetPrices: function showNetPrices(state) {
-      return state.basket.showNetPrices;
+    isBasketItemQuantityUpdate: function isBasketItemQuantityUpdate(state) {
+      return state.basket.isBasketItemQuantityUpdate;
     }
   })),
+
+  /**
+   * Bind to basket and bind the basket items
+   */
+  mounted: function mounted() {
+    var _this = this;
+
+    if (App.config.basket.addItemToBasketConfirm === "preview") {
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].listen("AfterBasketItemAdd", function (data) {
+        _this.show();
+      });
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].listen("AfterBasketItemUpdate", function (data) {
+        if (!_this.isBasketItemQuantityUpdate) {
+          _this.show();
+        }
+      });
+    }
+  },
   methods: {
-    calculateBaseValue: function calculateBaseValue(value, percent) {
-      return value / (100 - percent) * 100;
+    show: function show() {
+      setTimeout(function () {
+        var vueApp = document.querySelector("#vue-app");
+        var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
+
+        if (vueApp) {
+          vueApp.classList.add(basketOpenClass);
+        }
+      }, 1);
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -280,467 +207,281 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cmp-totals" }, [
-    _c("div", { staticClass: "h3" }, [
-      _vm._v(_vm._s(_vm.$translate("Ceres::Template.basketSum")))
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "component-loading with-icon refreshing",
-        class: { "is-loading": _vm.isBasketLoading }
-      },
-      [
+  return _c(
+    "div",
+    {
+      staticClass: "basket-preview-wrapper h-100",
+      class: {
+        empty: !_vm.basketItems.length,
+        "open-hover": _vm.hover,
+        "open-right": !_vm.hover
+      }
+    },
+    [
+      _c("div", { staticClass: "position-relative h-100" }, [
         _c(
-          "dl",
+          "div",
+          {
+            staticClass:
+              "basket-preview d-flex flex-column flex-nowrap bg-white shadow w-100"
+          },
           [
-            _vm._t("before-item-sum"),
-            _vm._v(" "),
-            _vm.visibleFields.includes("basketValueNet")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketValue")
-                          ) +
-                          " (" +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(
-                              _vm.calculateBaseValue(
-                                _vm.basket.itemSumNet,
-                                _vm.basket.basketRebate
-                              )
-                            )
-                          ) +
-                          "\n                "
-                      )
-                    ]
+            _c(
+              "header",
+              { staticClass: "basket-preview-header border-bottom p-3" },
+              [
+                _c("span", { staticClass: "h3 mb-0" }, [
+                  _vm._v(
+                    _vm._s(_vm.$translate("Ceres::Template.basketPreview"))
                   )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("basketValueGross")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketValue")
-                          ) +
-                          " (" +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketGross")
-                          ) +
-                          ")\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(
-                              _vm.calculateBaseValue(
-                                _vm.basket.itemSum,
-                                _vm.basket.basketRebate
-                              )
-                            )
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("rebate") && _vm.basket.basketRebate
-              ? [
-                  _c("dt", { staticClass: "rebate-hint" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.$translate("Ceres::Template.basketRebate")) +
-                        "\n                "
-                    )
-                  ]),
-                  !_vm.showNetPrices
-                    ? _c("dd", { staticClass: "rebate-hint" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.calculateBaseValue(
-                                  _vm.basket.itemSum,
-                                  _vm.basket.basketRebate
-                                ) - _vm.basket.itemSum
-                              )
-                            ) +
-                            "\n                "
-                        )
-                      ])
-                    : _c("dd", { staticClass: "rebate-hint" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.calculateBaseValue(
-                                  _vm.basket.itemSumNet,
-                                  _vm.basket.basketRebate
-                                ) - _vm.basket.itemSumNet
-                              )
-                            ) +
-                            "\n                "
-                        )
-                      ]),
-                  _vm._v(" "),
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketSubTotal")
-                          ) +
-                          " (" +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.itemSumNet)) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketSubTotal")
-                          ) +
-                          " (" +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketGross")
-                          ) +
-                          ")\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.itemSum)) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("after-item-sum"),
-            _vm._v(" "),
-            _vm._t("before-shipping-costs"),
-            _vm._v(" "),
-            _vm.visibleFields.includes("shippingCostsNet")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.basketShippingCosts"
-                            )
-                          ) +
-                          " (" +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.shippingAmountNet)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("shippingCostsGross")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.basketShippingCosts"
-                            )
-                          ) +
-                          " (" +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketGross")
-                          ) +
-                          ")\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.shippingAmount)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("after-shipping-costs"),
-            _vm._v(" "),
-            _vm.visibleFields.includes("promotionCoupon") &&
-            _vm.basket.couponCode &&
-            _vm.basket.couponCampaignType === "promotion"
-              ? [
-                  _c("dt", { staticClass: "font-weight-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.$translate("Ceres::Template.basketCoupon")) +
-                        "\n                "
-                    )
-                  ]),
-                  _c("dd", { staticClass: "font-weight-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm._f("currency")(_vm.basket.couponDiscount)) +
-                        "\n                "
-                    )
-                  ])
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _vm._t("before-total-sum"),
-            _vm._v(" "),
-            _vm.visibleFields.includes("totalSumNet")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketTotalSum")
-                          ) +
-                          " (" +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.basketAmountNet)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("before-vat"),
-            _vm._v(" "),
-            _vm._l(_vm.basket.totalVats, function(totalVat) {
-              return _vm.visibleFields.includes("vats")
-                ? _c("div", { staticClass: "vatTotals" }, [
-                    _c("dt", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketVAT")) +
-                          " " +
-                          _vm._s(totalVat.vatValue) +
-                          "%\n                "
-                      )
-                    ]),
-                    _c("dd", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
-                          "\n                "
-                      )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    directives: [
+                      {
+                        name: "toggle-basket-preview",
+                        rawName: "v-toggle-basket-preview"
+                      }
+                    ],
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
                     ])
-                  ])
-                : _vm._e()
-            }),
+                  ]
+                )
+              ]
+            ),
             _vm._v(" "),
-            _vm._t("after-vat"),
+            _vm.basketNotifications.length > 0
+              ? _c(
+                  "div",
+                  _vm._l(_vm.basketNotifications, function(notification) {
+                    return _c(
+                      "div",
+                      {
+                        key: notification.id,
+                        staticClass: "w-100 alert alert-danger"
+                      },
+                      [_c("div", [_vm._v(_vm._s(notification.message))])]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "totalSum" },
+              { staticClass: "basket-preview-content d-flex flex-fill" },
               [
-                _c("hr"),
+                _c("basket-list", {
+                  staticClass:
+                    "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3",
+                  attrs: { "is-preview": true },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "before-basket-item",
+                        fn: function() {
+                          return [_vm._t("before-basket-item")]
+                        },
+                        proxy: true
+                      },
+                      {
+                        key: "after-basket-item",
+                        fn: function() {
+                          return [_vm._t("after-basket-item")]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                }),
                 _vm._v(" "),
-                _vm.visibleFields.includes("totalSumGross")
-                  ? [
-                      _c(
-                        "dt",
-                        { class: { "font-weight-bold": !_vm.showNetPrices } },
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "totals d-flex flex-nowrap flex-column px-3 pt-3"
+                  },
+                  [
+                    _vm.showShippingCountrySelect
+                      ? _c("shipping-country-select", {
+                          attrs: {
+                            "basket-select": true,
+                            "open-basket-preview": true
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _vm._t("before-basket-totals"),
+                    _vm._v(" "),
+                    _c("basket-totals", {
+                      scopedSlots: _vm._u(
                         [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.basketTotalSum")
-                              ) +
-                              " (" +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.basketGross")
-                              ) +
-                              ")\n                    "
-                          )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        { class: { "font-weight-bold": !_vm.showNetPrices } },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm._f("currency")(_vm.basket.basketAmount)
-                              ) +
-                              "\n                    "
-                          )
-                        ]
+                          {
+                            key: "before-item-sum",
+                            fn: function() {
+                              return [_vm._t("before-item-sum")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-item-sum",
+                            fn: function() {
+                              return [_vm._t("after-item-sum")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "before-shipping-costs",
+                            fn: function() {
+                              return [_vm._t("before-shipping-costs")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-shipping-costs",
+                            fn: function() {
+                              return [_vm._t("after-shipping-costs")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "before-total-sum",
+                            fn: function() {
+                              return [_vm._t("before-total-sum")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "before-vat",
+                            fn: function() {
+                              return [_vm._t("before-vat")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-vat",
+                            fn: function() {
+                              return [_vm._t("after-vat")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-total-sum",
+                            fn: function() {
+                              return [_vm._t("after-total-sum")]
+                            },
+                            proxy: true
+                          }
+                        ],
+                        null,
+                        true
                       )
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.visibleFields.includes("salesCoupon") &&
-                _vm.basket.couponCode &&
-                _vm.basket.couponCampaignType === "sales"
-                  ? [
-                      _c("dt", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketCoupon")
-                            ) +
-                            "\n                    "
-                        )
-                      ]),
-                      _c("dd", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm._f("currency")(_vm.basket.couponDiscount)
-                            ) +
-                            "\n                    "
-                        )
-                      ])
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.visibleFields.includes("openAmount") &&
-                _vm.basket.couponCampaignType === "sales"
-                  ? [
-                      _c("dt", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketOpenAmount")
-                            ) +
-                            "\n                    "
-                        )
-                      ]),
-                      _c("dd", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm._f("currency")(_vm.basket.openAmount)) +
-                            "\n                    "
-                        )
-                      ])
-                    ]
-                  : _vm._e()
+                    }),
+                    _vm._v(" "),
+                    _vm._t("after-basket-totals"),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "basket-preview-footer d-flex pb-3" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "waiting-animation-infinite",
+                                rawName: "v-waiting-animation-infinite"
+                              }
+                            ],
+                            staticClass: "btn btn-outline-primary btn-block",
+                            attrs: {
+                              href: _vm.$ceres.urls.basket,
+                              rel: "nofollow",
+                              title: _vm.$translate("Ceres::Template.basket")
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fa fa-shopping-cart" }),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  _vm.$translate("Ceres::Template.basket")
+                                ) +
+                                "\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._t("before-checkout-button"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "waiting-animation-infinite",
+                                rawName: "v-waiting-animation-infinite"
+                              }
+                            ],
+                            staticClass: "btn btn-primary btn-block",
+                            attrs: {
+                              href: _vm.$ceres.urls.checkout,
+                              rel: "nofollow",
+                              title: _vm.$translate(
+                                "Ceres::Template.basketCheckout"
+                              )
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-arrow-right",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.basketCheckout"
+                                  )
+                                ) +
+                                "\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._t("after-checkout-button")
+                      ],
+                      2
+                    )
+                  ],
+                  2
+                )
               ],
-              2
-            ),
-            _vm._v(" "),
-            _vm._t("after-total-sum")
-          ],
-          2
+              1
+            )
+          ]
         )
-      ]
-    ),
-    _vm._v(" "),
-    _vm.basket.isExportDelivery && _vm.deliveryExportTranslation
-      ? _c("div", { staticClass: "alert alert-info w-100" }, [
-          _vm._v(
-            "\n        " + _vm._s(_vm.deliveryExportTranslation) + "\n    "
-          )
-        ])
-      : _vm._e()
-  ])
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        directives: [
+          { name: "toggle-basket-preview", rawName: "v-toggle-basket-preview" }
+        ],
+        staticClass: "basket-preview-overlay"
+      })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -749,17 +490,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/BasketTotals.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/BasketTotals.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/src/app/components/basket/BasketPreview.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/BasketPreview.vue ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BasketTotals.vue?vue&type=template&id=3765131c& */ "./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c&");
-/* harmony import */ var _BasketTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BasketTotals.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js&");
+/* harmony import */ var _BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BasketPreview.vue?vue&type=template&id=614a7aab& */ "./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab&");
+/* harmony import */ var _BasketPreview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BasketPreview.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -769,9 +510,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _BasketTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _BasketPreview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -781,38 +522,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/basket/BasketTotals.vue"
+component.options.__file = "resources/js/src/app/components/basket/BasketPreview.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BasketTotals.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BasketPreview.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab& ***!
+  \*************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BasketTotals.vue?vue&type=template&id=3765131c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BasketPreview.vue?vue&type=template&id=614a7aab& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
