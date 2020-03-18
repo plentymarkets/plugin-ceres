@@ -49,11 +49,12 @@ const actions =
 
                         for (const component of components.documents)
                         {
-                            const itemId = component.data.item.id;
+                            const itemId      = component.data.item.id;
+                            const variationId = component.data.variation.id;
 
                             // register a module for every set item
                             dispatch("registerItem", component);
-                            commit(`${itemId}/setPleaseSelectVariationId`, itemId);
+                            commit(`${itemId}/setPleaseSelectVariationId`, variationId);
                             commit("addComponent", itemId);
                         }
                     });
