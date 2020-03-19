@@ -8,7 +8,7 @@
 
 {% block PageBody %}
 
-    {% if ceresConfig.homepage.showShopBuilderContent and request.get('isContentBuilder') == 1 %}
+    {% if request.get('isContentBuilder') == 1 %}
         <div class="container-max">
             <div class="row">
                 <div class="col">

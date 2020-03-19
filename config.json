@@ -161,18 +161,16 @@
                 "homepage.showShopBuilderContent": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageShowShopBuilderContentLabel",
-                    "options": {
-                        "defaultValue": "false"
-                    }
+                    "options": {}
                 },
                 "default.homepage": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.defaultHomepageLabel",
-                    "options": {
-                        "defaultValue": "true"
-                    }
+                    "options": {}
                 },
                 "homepage.sliderItemId1": {
                     "type": "inputText",
@@ -221,9 +219,7 @@
                     "required": false,
                     "deprecated": true,
                     "label": "Config.homepageHeroExtraItemId1Label",
-                    "options": {
-                        "defaultValue": ""
-                    }
+                    "options": {}
                 },
                 "homepage.heroExtraImageUrl1": {
                     "type": "inputText",
@@ -237,9 +233,7 @@
                     "required": false,
                     "deprecated": true,
                     "label": "Config.homepageHeroExtraItemId2Label",
-                    "options": {
-                        "defaultValue": ""
-                    }
+                    "options": {}
                 },
                 "homepage.heroExtraImageUrl2": {
                     "type": "inputText",

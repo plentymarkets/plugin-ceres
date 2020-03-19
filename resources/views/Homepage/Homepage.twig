@@ -2,7 +2,7 @@
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set showDefaultHomepage = config("Ceres.default.homepage") %}
+{% set overrideHomepage = LayoutContainer.show("Ceres::Homepage") %}
 
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
@@ -12,28 +12,10 @@
 {% endblock %}
 
 {% block PageBody %}
-
-    {% if ceresConfig.homepage.showShopBuilderContent or request.get('isContentBuilder') == 1 %}
-        <div class="container-max">
-            <div class="row">
-                <div class="col">
-                    {% for content in container("Ceres::Homepage") if content.plugin == "Plenty" %}
-                        {{ content.result|raw }}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
+    {% set overrideHomepage = LayoutContainer.show("Ceres::Homepage") %}
+    {% if overrideHomepage | trim is empty %}
+        {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
     {% else %}
-
-        {% if showDefaultHomepage == "true" %}
-            {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
-        {% else %}
-            {% block ThemeHomepage %}
-                {% include 'Ceres::Homepage.DefaultHomepage.twig' %}
-            {% endblock %}
-        {% endif %}
-
+        {{ LayoutContainer.show("Ceres::Homepage") }}
     {% endif %}
-
 {% endblock %}

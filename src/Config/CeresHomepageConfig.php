@@ -4,6 +4,12 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresContactConfig
+ * @package Ceres\Config
+ *
+ * @deprecated since 5.0.0. This class will be removed in 6.0.0
+ */
 class CeresHomepageConfig extends PluginConfig
 {
     public $showShopBuilderContent;
