@@ -179,12 +179,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     show: function show() {
       setTimeout(function () {
-        var vueApp = document.querySelector("#vue-app");
-        var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
-
-        if (vueApp) {
-          vueApp.classList.add(basketOpenClass);
-        }
+        document.body.classList.add("basket-open");
       }, 1);
     }
   }

@@ -312,6 +312,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       var _this = this;
 
       this.$store.dispatch("loadComponent", "add-item-to-basket-overlay");
+      this.$store.dispatch("loadComponent", "basket-preview");
 
       if (this.variationMissingProperties !== undefined && this.variationMissingProperties.length) {
         this.showMissingPropertiesError();

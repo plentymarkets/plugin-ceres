@@ -174,7 +174,7 @@ var render = function() {
     [
       _c("div", { staticClass: "row" }, [
         _vm.showNameInputs
-          ? _c("div", { staticClass: "col-xs-6" }, [
+          ? _c("div", { staticClass: "col-6" }, [
               _c("div", { staticClass: "input-unit" }, [
                 _c(
                   "label",
@@ -213,7 +213,7 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _vm.showNameInputs
-          ? _c("div", { staticClass: "col-xs-6 pl-0" }, [
+          ? _c("div", { staticClass: "col-6 pl-0" }, [
               _c("div", { staticClass: "input-unit" }, [
                 _c("label", { attrs: { for: "last-name-input_" + _vm._uid } }, [
                   _vm._v(
@@ -245,7 +245,7 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12" }, [
+        _c("div", { staticClass: "col-12" }, [
           _c("div", { staticClass: "input-group" }, [
             _c(
               "div",
@@ -315,7 +315,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm.showPrivacyPolicyCheckbox
-          ? _c("div", { staticClass: "col-xs-12" }, [
+          ? _c("div", { staticClass: "col-12" }, [
               _c(
                 "div",
                 {
@@ -377,7 +377,7 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 mt-3" }, [
+        _c("div", { staticClass: "col-12 mt-3" }, [
           _c("div", { staticClass: "input-group-btn" }, [
             _c(
               "button",

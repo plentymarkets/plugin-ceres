@@ -49380,12 +49380,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ "./node_modules/core-js/modules/es.array.index-of.js");
 /* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
+/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dom */ "./resources/js/src/app/helper/dom.js");
+
 
 
 
@@ -49434,7 +49437,7 @@ var StickyElement = /*#__PURE__*/function () {
       var _this2 = this;
 
       this.vm.$nextTick(function () {
-        if (_this2.enabled || _this2.isMinWidth || App.isShopBuilder) {
+        if (_this2.enabled || App.isShopBuilder) {
           return;
         }
 
@@ -49445,7 +49448,14 @@ var StickyElement = /*#__PURE__*/function () {
 
         _this2.eventListener = function () {
           if (_this2.shouldUpdate()) {
-            _this2.checkElement();
+            if (_this2.checkElement()) {
+              if (_this2.animationFrame > 0) {
+                cancelAnimationFrame(_this2.animationFrame);
+                _this2.animationFrame = 0;
+              }
+
+              _this2.animationFrame = requestAnimationFrame(_this2.updateStyles.bind(_this2));
+            }
           }
         };
 
@@ -49456,8 +49466,6 @@ var StickyElement = /*#__PURE__*/function () {
         _this2.enabled = true;
 
         _this2.calculateOffset();
-
-        _this2.tick();
       });
     }
   }, {
@@ -49466,13 +49474,13 @@ var StickyElement = /*#__PURE__*/function () {
       var _this3 = this;
 
       this.vm.$nextTick(function () {
-        if (!Object(_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(_this3.placeholder)) {
+        if (!Object(_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(_this3.placeholder)) {
           _this3.getContainerElement().removeChild(_this3.placeholder);
         }
 
         _this3.placeholder = null;
       });
-      Object(_dom__WEBPACK_IMPORTED_MODULE_5__["applyStyles"])(this.el, {
+      Object(_dom__WEBPACK_IMPORTED_MODULE_6__["applyStyles"])(this.el, {
         position: null,
         top: null,
         left: null,
@@ -49493,22 +49501,15 @@ var StickyElement = /*#__PURE__*/function () {
       this.enabled = false;
     }
   }, {
-    key: "tick",
-    value: function tick() {
-      if (this.shouldUpdate()) {
-        this.updateStyles();
-      }
-
-      this.animationFrame = requestAnimationFrame(this.tick.bind(this));
-    }
-  }, {
     key: "shouldUpdate",
     value: function shouldUpdate() {
-      return this.enabled && !this.isMinWidth || (this.position || {}).isSticky;
+      return this.enabled && this.isMinWidth || (this.position || {}).isSticky;
     }
   }, {
     key: "checkElement",
     value: function checkElement(skipOffsetCalculation) {
+      var _this4 = this;
+
       var oldValue = this.position || {};
       var elementRect = this.el.getBoundingClientRect();
       var placeholderRect = this.placeholder.getBoundingClientRect();
@@ -49528,12 +49529,16 @@ var StickyElement = /*#__PURE__*/function () {
         y: maxBottom + this.offsetTop,
         origY: placeholderRect.top,
         isSticky: elementRect.height < containerRect.height && placeholderRect.top <= this.offsetTop
-      };
+      }; // check if any property has changed
+
+      return ["width", "height", "x", "y", "origY", "isSticky"].some(function (property) {
+        return oldValue[property] !== _this4.position[property];
+      });
     }
   }, {
     key: "calculateOffset",
     value: function calculateOffset() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (!this.enabled) {
         return;
@@ -49555,19 +49560,19 @@ var StickyElement = /*#__PURE__*/function () {
 
       this.offsetBottom = 0;
 
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.position)) {
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(this.position)) {
         this.checkElement(true);
       }
 
       this.getSiblingStickies().forEach(function (stickyElement) {
-        if (Object(_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(stickyElement.position)) {
+        if (Object(_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(stickyElement.position)) {
           stickyElement.checkElement(true);
         }
 
-        if (stickyElement.position.origY + stickyElement.position.height <= _this4.position.origY) {
-          _this4.offsetTop += stickyElement.position.height;
-        } else if (stickyElement.position.origY >= _this4.position.origY + _this4.position.height) {
-          _this4.offsetBottom += stickyElement.position.height;
+        if (stickyElement.position.origY + stickyElement.position.height <= _this5.position.origY) {
+          _this5.offsetTop += stickyElement.position.height;
+        } else if (stickyElement.position.origY >= _this5.position.origY + _this5.position.height) {
+          _this5.offsetBottom += stickyElement.position.height;
         }
       });
     }
@@ -49604,24 +49609,24 @@ var StickyElement = /*#__PURE__*/function () {
         this.el.classList.remove("is-sticky");
       }
 
-      Object(_dom__WEBPACK_IMPORTED_MODULE_5__["applyStyles"])(this.el, styles);
-      Object(_dom__WEBPACK_IMPORTED_MODULE_5__["applyStyles"])(this.placeholder, placeholderStyles);
+      Object(_dom__WEBPACK_IMPORTED_MODULE_6__["applyStyles"])(this.el, styles);
+      Object(_dom__WEBPACK_IMPORTED_MODULE_6__["applyStyles"])(this.placeholder, placeholderStyles);
     }
   }, {
     key: "checkMinWidth",
     value: function checkMinWidth() {
-      this.isMinWidth = !window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
+      this.isMinWidth = window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
     }
   }, {
     key: "getSiblingStickies",
     value: function getSiblingStickies() {
       var container = this.getContainerElement();
 
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(container)) {
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(container)) {
         return [];
       }
 
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(container.__stickyElements)) {
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(container.__stickyElements)) {
         container.__stickyElements = [];
       }
 
@@ -49633,7 +49638,7 @@ var StickyElement = /*#__PURE__*/function () {
       if (this.el.dataset.hasOwnProperty("stickyContainer")) {
         var container = document.querySelector(this.el.dataset.stickyContainer);
 
-        if (!Object(_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(container)) {
+        if (!Object(_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(container)) {
           return container;
         }
       }
