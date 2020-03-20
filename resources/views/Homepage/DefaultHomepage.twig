@@ -7,7 +7,7 @@
 {% endfor %}
 {% if overrideHomepageContainer | trim is empty %}
 
-    {% set lang = services.sessionStorage.getLang() %}
+    {% set lang = services.localizationRepository.getLanguage() %}
 
     {% set slider1 = {
     item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data,
@@ -69,9 +69,6 @@
 
     {% set categoryList1 = paginatedCategoryList1.documents %}
     {% set categoryList2 = paginatedCategoryList2.documents %}
-
-    {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
-    {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <div class="home container-max">
         <div class="row">
@@ -236,14 +233,14 @@
                     <div class="row prop-row my-4 sale-new">
                         {% if category1.details is not empty or homepageContainer4 | trim is not empty %}
                             <div class="col-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
-                                <div class="prop-xs-6-4 prop-md-3-1">
+                                <div class="prop-md-3-1">
                                     {% if homepageContainer4 | trim is empty %}
                                         <div class="prop-inner">
                                             <a class="featured-sale-new"
                                                href="{{ services.category.getURL(category1, lang) }}">
                                                 {% if category1.details[0].imagePath %}
                                                     <img src="documents/{{ category1.details[0].imagePath }}"
-                                                         alt="{{ category1.details[0].name }}">
+                                                         alt="{{ category1.details[0].name }}"
                                                          title="{{ category1.details[0].name }}">
                                                 {% endif %}
                                                 <div class="featured-category-inner">
@@ -263,7 +260,7 @@
 
                         {% if category2.details is not empty or homepageContainer5 | trim is not empty %}
                             <div class="col-{% if category1 is empty and homepageContainer4 | trim is empty %}12{% else %}6{% endif %}">
-                                <div class="prop-xs-6-4 prop-md-3-1">
+                                <div class="prop-md-3-1">
                                     {% if homepageContainer5 | trim is empty %}
                                         <div class="prop-inner">
                                             <a class="featured-sale-new"
@@ -321,7 +318,7 @@
                     <div class="row prop-row my-4 featured-categories">
                         {% if category4.details is not empty or homepageContainer7 | trim is not empty %}
                             <div class="col-12 col-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}8{% else %}12{% endif %}">
-                                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
+                                <div class="prop-md-3-1 prop-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
                                     {% if homepageContainer7 | trim is empty %}
                                         <div class="prop-inner">
                                             <a class="featured-category"
@@ -349,7 +346,7 @@
 
                         {% if category5.details is not empty or homepageContainer8 | trim is not empty %}
                             <div class="col-12 col-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}4{% else %}12{% endif %}">
-                                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}1{% else %}3{% endif %}-1">
+                                <div class="prop-md-3-1 prop-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}1{% else %}3{% endif %}-1">
                                     {% if homepageContainer8 | trim is empty %}
                                         <div class="prop-inner">
                                             <a class="featured-category"
