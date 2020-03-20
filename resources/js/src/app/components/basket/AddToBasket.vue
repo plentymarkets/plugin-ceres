@@ -317,7 +317,7 @@ export default {
                 if(this.isSet)
                 {
                     const setComponents = [];
-                    this.$store.state.items.componentItems.forEach(itemId =>
+                    this.$store.state.items.setComponentIds.forEach(itemId =>
                     {
                         const variationId = this.$store.state.items[itemId]
                             && this.$store.state.items[itemId].variation
