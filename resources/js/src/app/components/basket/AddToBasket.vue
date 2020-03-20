@@ -187,7 +187,8 @@ export default {
                 !this.hasChildren &&
                 !(this.minimumQuantity != 1 || this.intervalQuantity != 1) &&
                 !this.requiresProperties &&
-                this.hasPrice;
+                this.hasPrice &&
+                !this.isSet;
         },
 
         requiresProperties()
