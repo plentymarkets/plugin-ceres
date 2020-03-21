@@ -78,6 +78,7 @@ export default {
         {
             if (!this.isDisabled)
             {
+                window.localStorage.setItem("openFilterToolbar", true);
                 this.$store.dispatch("selectPriceFacet", { priceMin: this.priceMin, priceMax: this.priceMax });
             }
         }

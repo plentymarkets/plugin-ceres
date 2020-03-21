@@ -117,6 +117,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     updateFacet: function updateFacet(facetValue) {
+      window.localStorage.setItem("openFilterToolbar", true);
       this.$store.dispatch("selectFacet", {
         facetValue: facetValue
       });
@@ -431,6 +432,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     triggerFilter: function triggerFilter() {
       if (!this.isDisabled) {
+        window.localStorage.setItem("openFilterToolbar", true);
         this.$store.dispatch("selectPriceFacet", {
           priceMin: this.priceMin,
           priceMax: this.priceMax
@@ -599,6 +601,12 @@ var render = function() {
           _c(
             "div",
             {
+              directives: [
+                {
+                  name: "open-filter-toolbar",
+                  rawName: "v-open-filter-toolbar"
+                }
+              ],
               staticClass: "filter-collapse collapse",
               attrs: { id: "filter-collapse_" + _vm._uid }
             },
