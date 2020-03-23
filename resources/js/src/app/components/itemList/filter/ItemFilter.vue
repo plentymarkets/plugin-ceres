@@ -78,6 +78,7 @@ export default {
     {
         updateFacet(facetValue)
         {
+            window.localStorage.setItem("openFilterToolbar", true);
             this.$store.dispatch("selectFacet", { facetValue });
         },
 

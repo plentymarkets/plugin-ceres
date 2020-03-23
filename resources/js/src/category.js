@@ -156,6 +156,8 @@ import "./app/directives/basket/basketItemQuantity";
 import "./app/directives/basket/basketItemSum";
 import "./app/directives/basket/toggleBasketPreview";
 
+import "./app/directives/category/openFilterToolbar";
+
 import "./app/directives/common/truncateTooltip";
 
 import "./app/directives/customer/logout";

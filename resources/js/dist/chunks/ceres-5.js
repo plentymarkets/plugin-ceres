@@ -303,6 +303,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -400,10 +402,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-store-special",
-  props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "specialOfferPrice", "decimalCount", "bundleType"],
+  props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "specialOfferPrice", "decimalCount", "bundleType", "itemType"],
   data: function data() {
     return {
       tagClass: "",
@@ -412,7 +417,9 @@ __webpack_require__.r(__webpack_exports__);
         1: "badge-offer badge-danger",
         2: "badge-new badge-primary",
         3: "badge-top badge-success",
-        default: "badge-success"
+        default: "badge-success",
+        itemBundle: "badge badge-bundle bg-info",
+        itemSet: "badge badge-dark"
       },
       labels: {
         1: this.$translate("Ceres::Template.storeSpecialOffer"),
@@ -639,7 +646,9 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm._t("store-special", [
-          _vm.storeSpecial || _vm.item.variation.bundleType === "bundle"
+          _vm.storeSpecial ||
+          _vm.item.variation.bundleType === "bundle" ||
+          _vm.item.item.itemType === "set"
             ? _c("item-store-special", {
                 attrs: {
                   "store-special": _vm.storeSpecial,
@@ -647,7 +656,8 @@ var render = function() {
                   "variation-retail-price": _vm.item.prices.default,
                   "special-offer-price": _vm.item.prices.specialOffer,
                   "decimal-count": _vm.decimalCount,
-                  "bundle-type": _vm.item.variation.bundleType
+                  "bundle-type": _vm.item.variation.bundleType,
+                  "item-type": _vm.item.item.itemType
                 }
               })
             : _vm._e()
@@ -887,33 +897,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.label.length || _vm.bundleType === "bundle",
-          expression: "label.length || bundleType === 'bundle'"
-        }
-      ],
-      staticClass: "special-tags p-2"
-    },
-    [
-      _vm.label.length
-        ? _c("span", { staticClass: "badge", class: _vm.tagClass }, [
-            _vm._v("\n        " + _vm._s(_vm.label) + "\n    ")
-          ])
-        : _c("span", { staticClass: "badge badge-bundle bg-info" }, [
-            _vm._v(
-              "\n        " +
-                _vm._s(_vm.$translate("Ceres::Template.itemBundle")) +
-                "\n    "
-            )
-          ])
-    ]
-  )
+  return _vm.label.length ||
+    _vm.bundleType === "bundle" ||
+    _vm.itemType === "set"
+    ? _c("div", { staticClass: "special-tags p-2" }, [
+        _vm.label.length
+          ? _c("span", { staticClass: "badge", class: _vm.tagClass }, [
+              _vm._v("\n        " + _vm._s(_vm.label) + "\n    ")
+            ])
+          : _vm.bundleType === "bundle"
+          ? _c("span", { class: _vm.tagClasses.itemBundle }, [
+              _vm._v(
+                "\n        " +
+                  _vm._s(_vm.$translate("Ceres::Template.itemBundle")) +
+                  "\n    "
+              )
+            ])
+          : _vm.itemType === "set"
+          ? _c("span", { class: _vm.tagClasses.itemSet }, [
+              _vm._v(
+                "\n        " +
+                  _vm._s(_vm.$translate("Ceres::Template.itemSet")) +
+                  "\n    "
+              )
+            ])
+          : _vm._e()
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
