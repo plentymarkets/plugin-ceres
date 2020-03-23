@@ -33,9 +33,10 @@
     "properties.group.orderPropertyGroupingType",
 
     "item.id",
-    "item.storeSpecial",
-    "item.manufacturer.position",
+    "item.itemType",
     "item.manufacturer.externalName",
+    "item.manufacturer.position",
+    "item.storeSpecial",
 
     "texts.lang",
     "texts.name1",

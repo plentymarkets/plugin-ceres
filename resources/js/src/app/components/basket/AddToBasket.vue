@@ -163,6 +163,11 @@ export default {
         {
             type: Number,
             default: null
+        },
+        itemType:
+        {
+            type: String,
+            default: null
         }
     },
 
@@ -176,9 +181,11 @@ export default {
     {
         isSet()
         {
-            return this.$store.state.items[this.itemId]
+            return (
+                this.$store.state.items[this.itemId]
                 && this.$store.state.items[this.itemId].variation
-                && this.$store.state.items[this.itemId].variation.documents[0].data.item.itemType === "set";
+                && this.$store.state.items[this.itemId].variation.documents[0].data.item.itemType === "set"
+            ) || this.itemType === "set";
         },
 
         canBeAddedToBasket()
@@ -187,7 +194,8 @@ export default {
                 !this.hasChildren &&
                 !(this.minimumQuantity != 1 || this.intervalQuantity != 1) &&
                 !this.requiresProperties &&
-                this.hasPrice;
+                this.hasPrice &&
+                !this.isSet;
         },
 
         requiresProperties()
@@ -272,6 +280,7 @@ export default {
         addToBasket()
         {
             this.$store.dispatch("loadComponent", "add-item-to-basket-overlay");
+            this.$store.dispatch("loadComponent", "basket-preview");
 
             if (this.variationMissingProperties !== undefined && this.variationMissingProperties.length)
             {
@@ -316,7 +325,7 @@ export default {
                 if(this.isSet)
                 {
                     const setComponents = [];
-                    this.$store.state.items.componentItems.forEach(itemId =>
+                    this.$store.state.items.setComponentIds.forEach(itemId =>
                     {
                         const variationId = this.$store.state.items[itemId]
                             && this.$store.state.items[itemId].variation

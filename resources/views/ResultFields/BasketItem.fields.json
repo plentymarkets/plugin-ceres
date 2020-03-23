@@ -21,6 +21,7 @@
     "variation.vatId",
     "variationProperties.*",
     "item.id",
+    "item.itemType",
     "images.all.url*",
     "images.all.position",
     "images.all.path",

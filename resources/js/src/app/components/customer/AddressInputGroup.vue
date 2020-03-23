@@ -62,7 +62,7 @@
                         </div>
                     </template>
 
-                    <div v-else class="col-xs-12 col-sm-8">
+                    <div v-else class="col-12 col-sm-8">
                         <div
                             class="input-unit"
                             data-model="contactPerson"
@@ -249,7 +249,7 @@
                         </div>
                     </template>
 
-                    <div v-else class="col-xs-12 col-sm-8">
+                    <div v-else class="col-12 col-sm-8">
                         <div
                             class="input-unit"
                             data-model="contactPerson"
@@ -436,7 +436,7 @@
                         </div>
                     </template>
 
-                    <div v-else class="col-xs-12 col-sm-8">
+                    <div v-else class="col-12 col-sm-8">
                         <div
                             class="input-unit"
                             data-model="contactPerson"
@@ -626,7 +626,7 @@
                         </div>
                     </template>
 
-                    <div v-else class="col-xs-12 col-sm-8">
+                    <div v-else class="col-12 col-sm-8">
                         <div
                             class="input-unit"
                             data-model="contactPerson"
@@ -808,7 +808,7 @@
                         </div>
                     </template>
 
-                    <div v-else class="col-xs-12 col-sm-8">
+                    <div v-else class="col-12 col-sm-8">
                         <div
                             class="input-unit"
                             data-model="contactPerson"

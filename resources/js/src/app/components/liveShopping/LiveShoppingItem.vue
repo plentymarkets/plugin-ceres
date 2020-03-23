@@ -45,7 +45,8 @@
                                     :has-order-properties="currentOffer.item.hasOrderProperties"
                                     :use-large-scale="false"
                                     :show-quantity="false"
-                                    :item-url="currentOffer.item | itemURL">
+                                    :item-url="currentOffer.item | itemURL"
+                                    :item-type="currentOffer.item.item.itemType">
                             </add-to-basket>
                         </div>
                     </template>

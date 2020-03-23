@@ -189,13 +189,20 @@ const getters =
 
         variationTotalPrice(state, getters, rootState, rootGetters)
         {
-            const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
-
-            if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
+            if (getters.currentItemVariation.item.itemType === "set")
             {
-                const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+                return rootGetters.itemSetTotalPrice;
+            }
+            else
+            {
+                const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-                return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+                if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
+                {
+                    const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+
+                    return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+                }
             }
 
             return null;

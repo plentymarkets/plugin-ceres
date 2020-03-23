@@ -8,6 +8,15 @@
         }
     }
 
+    .widget-fw {
+        right: unset !important; // stylelint-disable-line declaration-no-important
+        left: unset !important; // stylelint-disable-line declaration-no-important
+        width: unset !important; // stylelint-disable-line declaration-no-important
+        max-width: unset !important; // stylelint-disable-line declaration-no-important
+        margin-right: unset;
+        margin-left: unset;
+    }
+
     .widget-inner-stacked {
         display: flex;
         flex-direction: column;
