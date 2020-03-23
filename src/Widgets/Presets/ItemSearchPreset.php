@@ -48,28 +48,34 @@ class ItemSearchPreset implements ContentPreset
     private function createSearchStringCodeWidget()
     {
         $this->preset->createWidget('Ceres::CodeWidget')
-                     ->withSetting('text', '
-                                            {% if category is empty and searchString is empty %}{% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}{% endif %}
-                                            <div class="row mt-3">
-                                                <div class="col-12">
-                                                    <h1 class="h2">
-                                                        {% if isTag %}
-                                                                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
-                                                            {% else %}
-                                                                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
-                                                        {% endif %}
-                                                    </h1>
-                                                </div>
-                                            </div>');
+                     ->withSetting('text',
+'{% if category is empty and searchString is empty %}{% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}{% set itemCountTotal = 20 %}{% endif %}
+<div class="row mt-3">
+    <div class="col-12">
+        <h1 class="h2">
+            {% if isTag %}
+                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
+            {% elseif itemCountTotal > 0 and suggestionString | length > 0 %}
+                {{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}
+                <br>
+                Meinten Sie "{{suggestionString}}"?
+                {{ trans("Ceres::Template.itemSearchDidYouMean", {"searchString": searchString}) }}
+            {% elseif itemCountTotal > 0 %}
+                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
+            {% endif %}
+        </h1>
+    </div>
+</div>');
     }
 
     private function createNoResultCodeWidget()
     {
         $this->preset->createWidget('Ceres::CodeWidget')
-                     ->withSetting('text', '
-                                            {% if itemCountTotal <= 0 %}
-                                                <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
-                                            {% endif%}');
+                     ->withSetting('text',
+'{% if itemCountTotal <= 0 %}
+    {% if category is empty and searchString is empty %}{% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}{% endif %}
+    <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
+{% endif%}');
     }
 
     private function createToolbarWidget()
