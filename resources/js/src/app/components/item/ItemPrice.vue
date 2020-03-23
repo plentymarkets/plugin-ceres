@@ -7,17 +7,17 @@
         </div>
 
         <span class="price h1">
-            <span :content="currentVariation.prices.default.price.value">
+            <span :content="currentPrice.price.value">
                 <template v-if="showDynamicPrice">
-                    {{ $translate("Ceres::Template.dynamicVariationPrice", { price: variationTotalPrice | currency(currentVariation.prices.default.currency) }) }}
+                    {{ $translate("Ceres::Template.dynamicVariationPrice", { price: variationTotalPrice | currency(currentPrice.currency) }) }}
                 </template>
 
                 <template v-else>
-                    {{ variationTotalPrice | currency(currentVariation.prices.default.currency) }}
+                    {{ variationTotalPrice | currency(currentPrice.currency) }}
                 </template>
             </span>
             <sup>*</sup>
-            <span :content="currentVariation.prices.default.currency"></span>
+            <span :content="currentPrice.currency"></span>
         </span>
 
         <div class="base-price text-muted my-3" v-if="currentVariation.unit">
@@ -82,6 +82,24 @@ export default {
                 && (state.variationSelect && !state.variationSelect.isVariationSelected)
                 && (state.pleaseSelectVariationId === this.currentVariation.variation.id
                     || state.pleaseSelectVariationId === 0);
+        },
+
+        isSetComponent()
+        {
+            return this.currentVariation.item.itemType !== "set" &&
+                this.$store.state.items.setComponentIds.length > 0;
+        },
+
+        currentPrice()
+        {
+            if (this.isSetComponent)
+            {
+                return this.currentVariation.prices.set;
+            }
+            else // default
+            {
+                return this.currentVariation.prices.default;
+            }
         }
     }
 }

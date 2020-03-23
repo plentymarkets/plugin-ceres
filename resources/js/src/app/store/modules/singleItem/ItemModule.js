@@ -185,6 +185,10 @@ const getters =
             {
                 return rootGetters.itemSetTotalPrice;
             }
+            else if (getters.currentItemVariation.item.itemType !== "set")  // TODO: Add check for isItemSet
+            {
+                return state.variation.documents[0].data.prices.set.price.value;
+            }
             else
             {
                 const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
