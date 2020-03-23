@@ -18,12 +18,6 @@
 	.shipping-settings, 
 	.language-settings{
 		width: 100%;
-
-		& ul {
-			@include media-breakpoint-down(sm) {
-				column-count: 2;
-			}
-		}
 	}
 
 	.shipping-settings {
