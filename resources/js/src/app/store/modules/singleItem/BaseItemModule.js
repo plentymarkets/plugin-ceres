@@ -1,6 +1,6 @@
 import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
-import VariationSelectModule from "../VariationSelectModule";
+import VariationSelectModule from "./VariationSelectModule";
 
 const state =
     {
@@ -86,6 +86,11 @@ const getters =
             }
 
             return totalPrice;
+        },
+
+        itemSetAllVariationSelected(statem, getters)
+        {
+
         }
     };
 
