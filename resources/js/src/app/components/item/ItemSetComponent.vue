@@ -27,7 +27,10 @@ export default {
         {
             type: Number,
             required: !App.isShopBuilder
-        }
+        },
+        initialVariationId: Number,
+        attributes: Array,
+        variations: Array
     },
 
     provide()
@@ -49,15 +52,33 @@ export default {
             {
                 const itemModule = state.items[this.itemId];
 
+                this.ready();
+
                 return itemModule && itemModule.variation.documents[0].data;
             },
-            isSetLoading: state => state.items.isSetLoading,
+            isSetLoading(state)
+            {
+                return state.items.isSetLoading;
+            },
             previewItemId : state => state.items.previewItemId
         })
     },
 
     methods:
     {
+        ready()
+        {
+            this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
+                attributes:         this.attributes,
+                variations:         this.variations,
+                initialVariationId: this.initialVariationId,
+                isPleaseSelectOption: true
+            });
+
+            // function should only be executed once
+            this.ready = () => {};
+        },
+
         getDataField(field)
         {
             return get(this.variation, field);
