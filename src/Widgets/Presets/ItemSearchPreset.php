@@ -51,7 +51,10 @@ class ItemSearchPreset implements ContentPreset
         // Leading whitespaces will be displayed in code editor of the shopbuilder
         $this->preset->createWidget('Ceres::CodeWidget')
                      ->withSetting('text',
-'{% if category is empty and searchString is empty %}{% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}{% endif %}
+'{% if category is empty and searchString is empty %}
+    {% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}
+    {% set itemCountTotal = 20 %}
+{% endif %}
 <div class="row mt-3">
     <div class="col-12">
         <h1 class="h2">
