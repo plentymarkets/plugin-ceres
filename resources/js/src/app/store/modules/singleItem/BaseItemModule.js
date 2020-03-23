@@ -6,7 +6,7 @@ const state =
     {
         isSetLoading: false,
         previewItemId: 0,
-        componentItems: []
+        setComponentIds: []
     };
 
 const mutations =
@@ -23,8 +23,8 @@ const mutations =
 
         addComponent(state, itemId)
         {
-            state.componentItems = state.componentItems || [];
-            state.componentItems.push(itemId);
+            state.setComponentIds = state.setComponentIds || [];
+            state.setComponentIds.push(itemId);
         }
     };
 
@@ -72,9 +72,27 @@ const actions =
         }
     };
 
+const getters =
+    {
+        itemSetTotalPrice(state, getters)
+        {
+            let totalPrice = 0;
+
+            for (const itemId of state.setComponentIds)
+            {
+                const price = getters[`${ itemId }/variationTotalPrice`];
+
+                totalPrice += price;
+            }
+
+            return totalPrice;
+        }
+    };
+
 export default
 {
     state,
     mutations,
-    actions
+    actions,
+    getters
 };

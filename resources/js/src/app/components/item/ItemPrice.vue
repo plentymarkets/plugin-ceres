@@ -73,7 +73,7 @@ export default {
         },
 
         variationTotalPrice() {
-            return this.$store.getters[`${this.itemId}/variationTotalPrice`]
+            return this.$store.getters[`${this.itemId}/variationTotalPrice`];
         },
 
         showDynamicPrice() {

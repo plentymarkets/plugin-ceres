@@ -160,7 +160,7 @@
 
                                             <tr v-if="itemConfig.includes('item.age_rating') || itemConfig.includes('all')">
                                                 <td>{{ $translate("Ceres::Template.singleItemAge") }}</td>
-                                                <td>{{ ageRestriction }}</td>
+                                                <td>{{ currentVariation.item.ageRestriction | ageRestriction }}</td>
                                             </tr>
 
                                             <tr v-if="currentVariation.variation.externalId !== '' && (itemConfig.includes('item.external_id') || itemConfig.includes('all'))">
@@ -307,35 +307,6 @@ export default {
         {
             return (App.config.item.itemData.includes("item.technical_data") || App.config.item.itemData.includes("all"))
                 && !!this.currentVariation.texts.technicalData.length;
-        },
-
-        ageRestriction()
-        {
-            let translationKey = "";
-            const age = this.currentVariation.item.ageRestriction;
-
-            if(age === 0)
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestrictionNone";
-            }
-            else if(age > 0 && age <= 18)
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestriction";
-            }
-            else if(age === 50)
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestrictionNotFlagged";
-            }
-            else if(age === 88)
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestrictionNotRequired";
-            }
-            else
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestrictionUnknown";
-            }
-
-            return this.$translate(translationKey, {"age": age })
         },
 
         variationGroupedProperties()
