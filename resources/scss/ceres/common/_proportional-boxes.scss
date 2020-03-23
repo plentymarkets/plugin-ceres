@@ -12,7 +12,7 @@
         @each $i in 1, 2, 3 {
             @each $j in 1, 2, 3 {
                 .prop#{$infix}-#{$i}-#{$j} {
-                    padding-bottom: percentage($j / $i) !important; // stylelint-disable-line declaration-no-important
+                    padding-bottom: percentage($j / $i) // stylelint-disable-line declaration-no-important;
                 }
             }
         }
