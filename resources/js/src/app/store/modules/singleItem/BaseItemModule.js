@@ -88,9 +88,18 @@ const getters =
             return totalPrice;
         },
 
-        itemSetAllVariationSelected(statem, getters)
+        itemSetAllVariationSelected(state)
         {
+            let allVariationSelected = true;
 
+            for (const itemId of state.setComponentIds)
+            {
+                const isSelected = state[itemId].variationSelect.isVariationSelected;
+
+                allVariationSelected = allVariationSelected && isSelected;
+            }
+
+            return allVariationSelected;
         }
     };
 
