@@ -4,7 +4,6 @@ namespace Ceres\Contexts;
 
 use Ceres\Helper\SearchOptions;
 use IO\Helper\ContextInterface;
-use IO\Services\ItemSearchAutocompleteService;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 
@@ -43,27 +42,5 @@ class ItemSearchContext extends CategoryContext implements ContextInterface
             $itemListOptions,
             SearchOptions::SCOPE_SEARCH
         );
-
-        //try to get results for the did you mean search
-        if ((int)$this->itemCountTotal === 0 && !is_null($this->itemListAdditional)) {
-            /** @var ItemSearchAutocompleteService $itemSearchAutocompleteService */
-            $itemSearchAutocompleteService = pluginApp(ItemSearchAutocompleteService::class);
-            $itemListOptions['query'] = $itemSearchAutocompleteService->getDidYouMeanSuggestionSearchString(
-                $this->searchString,
-                $this->itemListAdditional['suggestions']
-            );
-
-            if (strlen($itemListOptions['query']) && $itemListOptions['query'] !== $this->searchString) {
-                $this->suggestionString = $itemListOptions['query'];
-                $this->initItemList(
-                    [
-                        'itemList' => SearchItems::getSearchFactory($itemListOptions),
-                        'facets'   => Facets::getSearchFactory($itemListOptions)
-                    ],
-                    $itemListOptions,
-                    SearchOptions::SCOPE_SEARCH
-                );
-            }
-        }
     }
 }

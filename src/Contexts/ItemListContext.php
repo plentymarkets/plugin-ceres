@@ -4,6 +4,9 @@ namespace Ceres\Contexts;
 
 use Ceres\Helper\ExternalSearch;
 use Ceres\Helper\SearchOptions;
+use IO\Services\ItemSearchAutocompleteService;
+use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
+use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\VariationList;
 use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
 
@@ -18,7 +21,6 @@ trait ItemListContext
     public $query;
 
     public $itemList;
-    public $itemListAdditional;
     public $facets;
 
     /** @var SearchOptions */
@@ -76,6 +78,26 @@ trait ItemListContext
 
         $searchResults = $itemSearchService->getResults($defaultSearchFactories);
 
+        //try to get result for the "did you mean?" search if there is no result for the original search string
+        if($scope === SearchOptions::SCOPE_SEARCH && (int)$searchResults['itemList']['total'] === 0) {
+            /** @var ItemSearchAutocompleteService $itemSearchAutocompleteService */
+            $itemSearchAutocompleteService = pluginApp(ItemSearchAutocompleteService::class);
+            $options['query'] = $itemSearchAutocompleteService->getDidYouMeanSuggestionSearchString(
+                $this->searchString,
+                $searchResults['itemList']['suggestions']
+            );
+
+            if (strlen($options['query']) && $options['query'] !== $this->searchString) {
+                $this->suggestionString = $options['query'];
+                $searchResults = $itemSearchService->getResults(
+                    [
+                        'itemList' => SearchItems::getSearchFactory($options),
+                        'facets'   => Facets::getSearchFactory($options)
+                    ]
+                );
+            }
+        }
+
         $this->itemCountTotal = $searchResults['itemList']['total'];
         $this->itemCountTotal = $this->itemCountTotal > 10000 ? 10000 : $this->itemCountTotal;
 
@@ -83,9 +105,5 @@ trait ItemListContext
         $this->itemCountPage = count($searchResults['itemList']['documents']);
         $this->itemList      = $searchResults['itemList']['documents'];
         $this->facets        = $searchResults['facets'];
-
-        if ($scope === SearchOptions::SCOPE_SEARCH) {
-            $this->itemListAdditional['suggestions'] = $searchResults['itemList']['suggestions'];
-        }
     }
 }
