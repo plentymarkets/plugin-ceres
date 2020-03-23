@@ -58,8 +58,7 @@ class ItemSearchPreset implements ContentPreset
             {% elseif itemCountTotal > 0 and suggestionString | length > 0 %}
                 {{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}
                 <br>
-                Meinten Sie "{{suggestionString}}"?
-                {{ trans("Ceres::Template.itemSearchDidYouMean", {"searchString": searchString}) }}
+                {{ trans("Ceres::Template.itemSearchDidYouMean", {"suggestionString": suggestionString}) }}
             {% elseif itemCountTotal > 0 %}
                 {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
             {% endif %}
