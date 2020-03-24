@@ -2,7 +2,7 @@
     <div class="has-crossprice">
         <div class="crossprice" v-if="showCrossPrice && isSet">
             <del class="text-muted small text-appearance">
-                {{ variationTotalPrice + " EUR" | itemCrossPrice }}
+                {{ variationTotalPrice | currency | itemCrossPrice }}
             </del>
         </div>
 
@@ -11,7 +11,7 @@
                 <template v-if="isSet && !allVariationSelected">
                     {{ $translate("Ceres::Template.dynamicSetPrice",
                         {
-                            price: $options.filters.currency(variationSetRebatePrice, "EUR")
+                            price: $options.filters.currency(variationSetRebatePrice, $ceres.activeCurrency)
                         }
                     ) }}
                 </template>
@@ -21,12 +21,12 @@
                         {{ variationTotalPrice | currency(currentVariation.prices.set.currency) }}
                     </template>
                     <template v-else>
-                        {{ variationSetRebatePrice | currency("EUR") }}
+                        {{ variationSetRebatePrice | currency($ceres.activeCurrency) }}
                     </template>
                 </template>
             </span>
             <sup>*</sup>
-            <span content="EUR"></span>
+            <span :content="$ceres.activeCurrency"></span>
         </span>
     </div>
 </template>
@@ -68,7 +68,8 @@ export default {
         },
 
         isSet() {
-            return this.currentVariation.item.itemType === "set";
+            return this.currentVariation.item.itemType === "set" ||
+                (App.isShopBuilder && this.currentVariation.item.itemType !== undefined);
         }
     }
 }
