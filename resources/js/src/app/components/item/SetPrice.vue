@@ -1,6 +1,6 @@
 <template>
     <div class="has-crossprice">
-        <div class="crossprice" v-if="showCrossPrice && isSet">
+        <div class="crossprice" v-if="showCrossPrice && isSet && this.currentVariation.item.rebate > 0">
             <del class="text-muted small text-appearance">
                 {{ variationTotalPrice | currency | itemCrossPrice }}
             </del>
