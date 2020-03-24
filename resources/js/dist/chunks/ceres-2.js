@@ -787,7 +787,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "btn",
+                staticClass: "btn shadow-none",
                 class: {
                   "btn-primary": _vm.activeSlide > 0,
                   "btn-secondary disabled": _vm.activeSlide === 0
@@ -839,7 +839,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "btn float-right",
+                staticClass: "btn float-right shadow-none",
                 class: {
                   "btn-primary":
                     _vm.activeSlide < _vm.sortedGroupedProperties.length - 1,
@@ -1285,9 +1285,13 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "btn btn-icon btn-circle btn-default"
+                                  "btn btn-icon btn-circle btn-default m-1"
                               },
-                              [_c("i", { staticClass: "fa fa-info" })]
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-info default-float"
+                                })
+                              ]
                             )
                           ]
                         },
@@ -1309,7 +1313,7 @@ var render = function() {
                     ],
                     null,
                     false,
-                    1411562761
+                    2859289774
                   )
                 })
               : _vm._e()
