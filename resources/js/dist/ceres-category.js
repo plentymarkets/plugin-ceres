@@ -54286,14 +54286,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var state = {
-  attributes: [],
-  isVariationSelected: true,
-  selectedAttributes: {},
-  selectedUnit: null,
-  units: [],
-  variations: []
+
+var state = function state() {
+  return {
+    attributes: [],
+    isVariationSelected: true,
+    selectedAttributes: {},
+    selectedUnit: null,
+    units: [],
+    variations: []
+  };
 };
+
 var mutations = {
   setIsVariationSelected: function setIsVariationSelected(state, isVariationSelected) {
     state.isVariationSelected = !!isVariationSelected;
@@ -54585,20 +54589,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var state = {
+  componentItems: [],
+  isItemSet: false,
   isSetLoading: false,
   previewItemId: 0,
-  componentItems: []
+  setComponentIds: []
 };
 var mutations = {
   setIsSetLoading: function setIsSetLoading(state, isSetLoading) {
     state.isSetLoading = isSetLoading;
   },
+  setIsItemSet: function setIsItemSet(state, isItemSet) {
+    state.isItemSet = !!isItemSet;
+  },
   setPreviewItemId: function setPreviewItemId(state, itemId) {
     state.previewItemId = itemId;
   },
   addComponent: function addComponent(state, itemId) {
-    state.componentItems = state.componentItems || [];
-    state.componentItems.push(itemId);
+    state.setComponentIds = state.setComponentIds || [];
+    state.setComponentIds.push(itemId);
   }
 };
 var actions = {
@@ -54611,6 +54620,7 @@ var actions = {
     var setComponentIds = variation.documents[0].data.setComponentVariationIds;
 
     if (!App.isShopBuilder && setComponentIds && setComponentIds.length) {
+      commit("setIsItemSet", true);
       commit("setIsSetLoading", true);
       _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].get("/rest/io/variations", {
         variationIds: setComponentIds,
@@ -54624,10 +54634,11 @@ var actions = {
         try {
           for (var _iterator = components.documents[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var component = _step.value;
-            var itemId = component.data.item.id; // register a module for every set item
+            var itemId = component.data.item.id;
+            var variationId = component.data.variation.id; // register a module for every set item
 
             dispatch("registerItem", component);
-            commit("".concat(itemId, "/setPleaseSelectVariationId"), itemId);
+            commit("".concat(itemId, "/setPleaseSelectVariationId"), variationId);
             commit("addComponent", itemId);
           }
         } catch (err) {
@@ -54659,10 +54670,42 @@ var actions = {
     commit("".concat(itemId, "/setVariation"), extendedData);
   }
 };
+var getters = {
+  itemSetTotalPrice: function itemSetTotalPrice(state, getters) {
+    var totalPrice = 0;
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      for (var _iterator2 = state.setComponentIds[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var itemId = _step2.value;
+        var price = getters["".concat(itemId, "/variationTotalPrice")];
+        totalPrice += price;
+      }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
+      }
+    }
+
+    return totalPrice;
+  }
+};
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   mutations: mutations,
-  actions: actions
+  actions: actions,
+  getters: getters
 });
 
 /***/ }),
@@ -54804,22 +54847,27 @@ var mutations = {
   setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
     var propertyId = _ref.propertyId,
         value = _ref.value;
-    var index = state.variation.documents[0].data.properties.findIndex(function (property) {
+    var properties = state.variation.documents[0].data.properties;
+    var index = properties.findIndex(function (property) {
       return property.property.id === propertyId;
     });
 
     if (index >= 0) {
-      var group = state.variation.documents[0].data.properties[index].group;
+      var group = properties[index].group;
+      var property = properties.find(function (prop) {
+        return prop.property.id === propertyId;
+      });
 
-      if (group && group.orderPropertyGroupingType === "single") {
-        state.variation.documents[0].data.properties.forEach(function (prop) {
-          if (prop.group && prop.group.id === group.id) {
-            prop.property.value = null;
-          }
+      if (property && property.property.valueType === "empty" && group && group.orderPropertyGroupingType === "single") {
+        // reset all other radios in the group
+        properties.filter(function (prop) {
+          return prop.group && prop.group.id === group.id && prop.property.id !== propertyId && prop.property.valueType === "empty";
+        }).forEach(function (prop) {
+          prop.property.value = null;
         });
       }
 
-      vue__WEBPACK_IMPORTED_MODULE_25___default.a.set(state.variation.documents[0].data.properties[index], "property", _objectSpread({}, state.variation.documents[0].data.properties[index].property, {
+      vue__WEBPACK_IMPORTED_MODULE_25___default.a.set(properties[index], "property", _objectSpread({}, properties[index].property, {
         value: value
       }));
     }
@@ -54834,13 +54882,18 @@ var mutations = {
 var actions = {
   loadVariation: function loadVariation(_ref2, variationId) {
     var state = _ref2.state,
-        commit = _ref2.commit;
+        commit = _ref2.commit,
+        rootState = _ref2.rootState;
     return new Promise(function (resolve) {
       var variation = variationId <= 0 ? state.variationCache[state.pleaseSelectVariationId > 0 ? state.pleaseSelectVariationId : state.initialVariationId] : state.variationCache[variationId];
 
       if (variation) {
         commit("setVariation", variation);
-        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_24__["setUrlByItem"])(variation.documents[0].data, variationId > 0);
+
+        if (!rootState.items.isItemSet) {
+          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_24__["setUrlByItem"])(variation.documents[0].data, variationId > 0);
+        }
+
         resolve(variation);
       } else {
         var keepVariationId = true;
@@ -54855,7 +54908,11 @@ var actions = {
         }).done(function (response) {
           // store received variation data for later reuse
           commit("setVariation", response);
-          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_24__["setUrlByItem"])(response.documents[0].data, keepVariationId);
+
+          if (!rootState.items.isItemSet) {
+            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_24__["setUrlByItem"])(response.documents[0].data, keepVariationId);
+          }
+
           resolve(response);
         });
       }
@@ -54925,11 +54982,15 @@ var getters = {
     return returnPrice || calculatedPrices.default;
   },
   variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
-    var graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
+    if (getters.currentItemVariation.item.itemType === "set") {
+      return rootGetters.itemSetTotalPrice;
+    } else {
+      var graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(graduatedPrice) && state.variation.documents) {
-      var specialOfferPrice = vue__WEBPACK_IMPORTED_MODULE_25___default.a.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
-      return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(graduatedPrice) && state.variation.documents) {
+        var specialOfferPrice = vue__WEBPACK_IMPORTED_MODULE_25___default.a.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+        return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+      }
     }
 
     return null;

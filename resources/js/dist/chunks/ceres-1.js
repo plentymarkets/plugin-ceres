@@ -236,6 +236,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     propQuantity: {
       type: Number,
       default: null
+    },
+    itemType: {
+      type: String,
+      default: null
     }
   },
   inject: {
@@ -245,10 +249,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   },
   computed: _objectSpread({
     isSet: function isSet() {
-      return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variation && this.$store.state.items[this.itemId].variation.documents[0].data.item.itemType === "set";
+      return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variation && this.$store.state.items[this.itemId].variation.documents[0].data.item.itemType === "set" || this.itemType === "set";
     },
     canBeAddedToBasket: function canBeAddedToBasket() {
-      return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice;
+      return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice && !this.isSet;
     },
     requiresProperties: function requiresProperties() {
       return App.config.item.requireOrderProperties && (this.hasOrderProperties || this.orderProperties.filter(function (property) {
@@ -345,7 +349,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
         if (this.isSet) {
           var setComponents = [];
-          this.$store.state.items.componentItems.forEach(function (itemId) {
+          this.$store.state.items.setComponentIds.forEach(function (itemId) {
             var variationId = _this.$store.state.items[itemId] && _this.$store.state.items[itemId].variation && _this.$store.state.items[itemId].variation.documents[0].data.variation.id;
             setComponents.push({
               variationId: variationId,
