@@ -4,6 +4,8 @@ import VariationSelectModule from "../VariationSelectModule";
 
 const state =
     {
+        componentItems: [],
+        isItemSet: false,
         isSetLoading: false,
         previewItemId: 0,
         setComponentIds: []
@@ -14,6 +16,11 @@ const mutations =
         setIsSetLoading(state, isSetLoading)
         {
             state.isSetLoading = isSetLoading;
+        },
+
+        setIsItemSet(state, isItemSet)
+        {
+            state.isItemSet = !!isItemSet;
         },
 
         setPreviewItemId(state, itemId)
@@ -40,6 +47,7 @@ const actions =
 
             if (!App.isShopBuilder && setComponentIds && setComponentIds.length)
             {
+                commit("setIsItemSet", true);
                 commit("setIsSetLoading", true);
 
                 ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem" })
@@ -49,11 +57,12 @@ const actions =
 
                         for (const component of components.documents)
                         {
-                            const itemId = component.data.item.id;
+                            const itemId      = component.data.item.id;
+                            const variationId = component.data.variation.id;
 
                             // register a module for every set item
                             dispatch("registerItem", component);
-                            commit(`${itemId}/setPleaseSelectVariationId`, itemId);
+                            commit(`${itemId}/setPleaseSelectVariationId`, variationId);
                             commit("addComponent", itemId);
                         }
                     });
