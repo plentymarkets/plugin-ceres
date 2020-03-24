@@ -56436,22 +56436,27 @@ var mutations = {
   setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
     var propertyId = _ref.propertyId,
         value = _ref.value;
-    var index = state.variation.documents[0].data.properties.findIndex(function (property) {
+    var properties = state.variation.documents[0].data.properties;
+    var index = properties.findIndex(function (property) {
       return property.property.id === propertyId;
     });
 
     if (index >= 0) {
-      var group = state.variation.documents[0].data.properties[index].group;
+      var group = properties[index].group;
+      var property = properties.find(function (prop) {
+        return prop.property.id === propertyId;
+      });
 
-      if (group && group.orderPropertyGroupingType === "single") {
-        state.variation.documents[0].data.properties.forEach(function (prop) {
-          if (prop.group && prop.group.id === group.id) {
-            prop.property.value = null;
-          }
+      if (property && property.property.valueType === "empty" && group && group.orderPropertyGroupingType === "single") {
+        // reset all other radios in the group
+        properties.filter(function (prop) {
+          return prop.group && prop.group.id === group.id && prop.property.id !== propertyId && prop.property.valueType === "empty";
+        }).forEach(function (prop) {
+          prop.property.value = null;
         });
       }
 
-      vue__WEBPACK_IMPORTED_MODULE_25___default.a.set(state.variation.documents[0].data.properties[index], "property", _objectSpread({}, state.variation.documents[0].data.properties[index].property, {
+      vue__WEBPACK_IMPORTED_MODULE_25___default.a.set(properties[index], "property", _objectSpread({}, properties[index].property, {
         value: value
       }));
     }

@@ -45,26 +45,27 @@ const mutations =
 
         setVariationOrderProperty(state, { propertyId, value })
         {
-            const index = state.variation.documents[0].data.properties.findIndex(property => property.property.id === propertyId);
+            const properties = state.variation.documents[0].data.properties;
+            const index = properties.findIndex(property => property.property.id === propertyId);
 
             if (index >= 0)
             {
-                const group = state.variation.documents[0].data.properties[index].group;
+                const group = properties[index].group;
+                const property = properties.find(prop => prop.property.id === propertyId);
 
-                if (group && group.orderPropertyGroupingType === "single")
+                if (property && property.property.valueType === "empty" && group && group.orderPropertyGroupingType === "single")
                 {
-                    state.variation.documents[0].data.properties.forEach(prop =>
-                    {
-                        if (prop.group && prop.group.id === group.id)
+                    // reset all other radios in the group
+                    properties.filter(prop => prop.group && prop.group.id === group.id && prop.property.id !== propertyId && prop.property.valueType === "empty")
+                        .forEach(prop =>
                         {
                             prop.property.value = null;
-                        }
-                    });
+                        });
                 }
 
-                Vue.set(state.variation.documents[0].data.properties[index], "property",
+                Vue.set(properties[index], "property",
                     {
-                        ...state.variation.documents[0].data.properties[index].property,
+                        ...properties[index].property,
                         value: value
                     });
             }
