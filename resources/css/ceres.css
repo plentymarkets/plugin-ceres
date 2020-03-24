@@ -12669,6 +12669,8 @@ button:focus {
   .btn-icon.btn-lg, .btn-group-lg > .btn-icon.btn {
     padding: .95rem; }
   .btn-icon.btn-circle {
+    width: 33px;
+    height: 33px;
     border-radius: 50%; }
 
 .btn-default {

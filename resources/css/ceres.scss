@@ -11681,7 +11681,9 @@ button:focus {
 
 	&.btn-circle
 	{
-		border-radius: 50%;
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
 	}
 }
 
