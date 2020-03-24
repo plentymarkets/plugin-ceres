@@ -13,7 +13,6 @@ class ItemSearchContext extends CategoryContext implements ContextInterface
 
     public $isSearch;
     public $searchString;
-    public $suggestionString;
 
     public function init($params)
     {
