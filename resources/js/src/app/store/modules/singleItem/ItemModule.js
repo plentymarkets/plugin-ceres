@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from "../../../helper/utils";
+import {isDefined, isNullOrUndefined} from "../../../helper/utils";
 import { setUrlByItem } from "../../../services/UrlService";
 import Vue from "vue";
 
@@ -197,7 +197,14 @@ const getters =
             else if (getters.currentItemVariation.item.itemType !== "set"
                 && rootState.items.isItemSet)
             {
-                return state.variation.documents[0].data.prices.set.price.value;
+                if(!isNullOrUndefined(state.variation.documents[0].data.prices.set))
+                {
+                    return state.variation.documents[0].data.prices.set.price.value;
+                }
+                else
+                {
+                    return state.variation.documents[0].data.prices.default.price.value;
+                }
             }
             else
             {
