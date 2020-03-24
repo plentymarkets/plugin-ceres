@@ -31,7 +31,3 @@
         window.ceresStore.commit("setIsItemSet", {{ true | json_encode | raw }});
     {% endif %}
 </script>
-
-{{ dump(_context | keys) }}
-
-{{ isItemSet | json_encode | raw}}
