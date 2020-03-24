@@ -1,4 +1,4 @@
-import {isDefined, isNullOrUndefined} from "../../../helper/utils";
+import { isNullOrUndefined } from "../../../helper/utils";
 import { setUrlByItem } from "../../../services/UrlService";
 import Vue from "vue";
 
