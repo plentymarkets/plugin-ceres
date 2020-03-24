@@ -262,6 +262,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -639,7 +640,8 @@ var render = function() {
                   "item-url": _vm._f("itemURL")(_vm.wishListItem),
                   "has-price": _vm._f("hasItemDefaultPrice")(_vm.wishListItem),
                   "is-wish-list": true,
-                  "prop-quantity": _vm.quantity
+                  "prop-quantity": _vm.quantity,
+                  "item-type": _vm.wishListItem.item.itemType
                 }
               })
             ],
