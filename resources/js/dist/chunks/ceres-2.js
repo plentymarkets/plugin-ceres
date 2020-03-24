@@ -370,6 +370,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
 
 
 
@@ -477,6 +478,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     group: Object,
@@ -493,17 +495,21 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   mounted: function mounted() {
     var _this = this;
 
-    document.addEventListener("onVariationChanged", function () {
-      if (_this.property.valueType !== "file") {
-        _this.inputValue = "";
-      } else {
-        _this.clearSelectedFile();
-      }
+    document.addEventListener("onVariationChanged", function (event) {
+      // clear type specific bindings
+      if (_this.property.valueType === "selection") {
+        _this.selectionValue = _this.property.value || null;
+      } else if (_this.property.valueType === "file") {
+        if (_this.property.value && _this.property.value.length) {
+          NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_20__["default"].translate("Ceres::Template.singleItemOrderPropertyFileHasReset", {
+            propertyName: _this.property.names.name
+          })).closeAfter(5000);
+        }
 
-      _this.setVariationOrderProperty({
-        propertyId: _this.property.id,
-        value: null
-      });
+        _this.clearSelectedFile();
+      } else {
+        _this.inputValue = _this.property.value || "";
+      }
     });
   },
   computed: _objectSpread({
@@ -781,7 +787,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "btn",
+                staticClass: "btn shadow-none",
                 class: {
                   "btn-primary": _vm.activeSlide > 0,
                   "btn-secondary disabled": _vm.activeSlide === 0
@@ -833,7 +839,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "btn float-right",
+                staticClass: "btn float-right shadow-none",
                 class: {
                   "btn-primary":
                     _vm.activeSlide < _vm.sortedGroupedProperties.length - 1,
@@ -1279,9 +1285,13 @@ var render = function() {
                               "button",
                               {
                                 staticClass:
-                                  "btn btn-icon btn-circle btn-default"
+                                  "btn btn-icon btn-circle btn-default m-1"
                               },
-                              [_c("i", { staticClass: "fa fa-info" })]
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-info default-float"
+                                })
+                              ]
                             )
                           ]
                         },
@@ -1303,7 +1313,7 @@ var render = function() {
                     ],
                     null,
                     false,
-                    1411562761
+                    2859289774
                   )
                 })
               : _vm._e()
