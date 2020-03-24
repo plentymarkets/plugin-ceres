@@ -197,14 +197,7 @@ const getters =
             else if (getters.currentItemVariation.item.itemType !== "set"
                 && rootState.items.isItemSet)
             {
-                if(!isNullOrUndefined(state.variation.documents[0].data.prices.set))
-                {
-                    return state.variation.documents[0].data.prices.set.price.value;
-                }
-                else
-                {
-                    return state.variation.documents[0].data.prices.default.price.value;
-                }
+                return state.variation.documents[0].data.prices.set.price.value;
             }
             else
             {
