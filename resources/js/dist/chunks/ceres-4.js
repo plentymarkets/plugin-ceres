@@ -500,6 +500,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -1399,7 +1400,10 @@ var render = function() {
                                               "show-quantity": false,
                                               "item-url": _vm._f("itemURL")(
                                                 _vm.currentOffer.item
-                                              )
+                                              ),
+                                              "item-type":
+                                                _vm.currentOffer.item.item
+                                                  .itemType
                                             }
                                           })
                                         ],
@@ -1412,7 +1416,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              2243585629
+                              741665433
                             )
                           })
                         ]

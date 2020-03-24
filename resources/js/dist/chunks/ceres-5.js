@@ -305,6 +305,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -611,7 +613,8 @@ var render = function() {
             "use-large-scale": true,
             "show-quantity": false,
             "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
-            "has-price": _vm._f("hasItemDefaultPrice")(_vm.item)
+            "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+            "item-type": _vm.item.item.itemType
           }
         }),
         _vm._v(" "),
@@ -805,7 +808,8 @@ var render = function() {
                     _vm.item,
                     _vm.urlWithVariationId
                   ),
-                  "has-price": _vm._f("hasItemDefaultPrice")(_vm.item)
+                  "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+                  "item-type": _vm.item.item.itemType
                 }
               }),
               _vm._v(" "),

@@ -191,7 +191,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   },
   computed: {
     currentVariation: function currentVariation() {
-      return this.$store.getters("".concat(this.itemId, "/currentItemVariation"));
+      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
     currentVariationSelect: function currentVariationSelect() {
       return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationSelect;
@@ -571,7 +571,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           }));
         }
 
-        this.$store.commit("selectItemUnit", invalidSelection.newUnit);
+        this.$store.commit("".concat(this.itemId, "/variationSelect/selectItemUnit"), invalidSelection.newUnit);
       }
 
       this.$store.commit("".concat(this.itemId, "/variationSelect/setItemSelectedAttributes"), attributes);

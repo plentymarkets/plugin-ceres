@@ -48,6 +48,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
   props: {
@@ -126,11 +130,10 @@ var render = function() {
                   "\n                " +
                     _vm._s(
                       _vm.$translate("Ceres::Template.dynamicVariationPrice", {
-                        price:
-                          _vm.variationTotalPrice |
-                          _vm.currency(
-                            _vm.currentVariation.prices.default.currency
-                          )
+                        price: _vm.$options.filters.currency(
+                          _vm.variationTotalPrice,
+                          _vm.currentVariation.prices.default.currency
+                        )
                       })
                     ) +
                     "\n            "
