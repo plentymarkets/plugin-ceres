@@ -19,6 +19,7 @@ trait ItemListContext
     public $itemCountTotal;
     public $itemSorting;
     public $query;
+    public $suggestionString;
 
     public $itemList;
     public $facets;
@@ -80,14 +81,15 @@ trait ItemListContext
 
         //try to get result for the "did you mean?" search if there is no result for the original search string
         if($scope === SearchOptions::SCOPE_SEARCH && (int)$searchResults['itemList']['total'] === 0) {
+            $originalSearchString = $options['query'];
             /** @var ItemSearchAutocompleteService $itemSearchAutocompleteService */
             $itemSearchAutocompleteService = pluginApp(ItemSearchAutocompleteService::class);
             $options['query'] = $itemSearchAutocompleteService->getDidYouMeanSuggestionSearchString(
-                $this->searchString,
+                $originalSearchString,
                 $searchResults['itemList']['suggestions']
             );
 
-            if (strlen($options['query']) && $options['query'] !== $this->searchString) {
+            if (strlen($options['query']) && $options['query'] !== $originalSearchString) {
                 $this->suggestionString = $options['query'];
                 $searchResults = $itemSearchService->getResults(
                     [
