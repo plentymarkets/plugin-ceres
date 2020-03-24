@@ -1,17 +1,25 @@
 <template>
     <div :class="{ 'has-crossprice': hasCrossPrice }">
-        <div class="crossprice" v-if="showCrossPrice && hasCrossPrice">
+        <div class="crossprice" v-if="showCrossPrice && hasCrossPrice && !isSetComponent && !isSet">
             <del class="text-muted small text-appearance">
                 {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
             </del>
         </div>
 
         <span class="price h1">
-            <span :content="currentPrice.price.value">
+            <span :content="currentPrice.value">
                 <template v-if="showDynamicPrice">
                     {{ $translate("Ceres::Template.dynamicVariationPrice",
                         {
-                            price: $options.filters.currency(variationTotalPrice, currentVariation.prices.default.currency)
+                            price: $options.filters.currency(variationTotalPrice, currentPrice.currency)
+                        }
+                    ) }}
+                </template>
+
+                <template v-else-if="isSet && !allVariationSelected">
+                    {{ $translate("Ceres::Template.dynamicSetPrice",
+                        {
+                            price: $options.filters.currency(variationTotalPrice, currentPrice.currency)
                         }
                     ) }}
                 </template>
@@ -24,7 +32,7 @@
             <span :content="currentPrice.currency"></span>
         </span>
 
-        <div class="base-price text-muted my-3" v-if="currentVariation.unit">
+        <div class="base-price text-muted my-3" v-if="currentVariation.unit && !isSetComponent && !isSet">
             <div>
                 {{ $translate("Ceres::Template.singleItemContent") }}
                 <span>{{ currentVariation.unit.content | numberFormat }} </span>
@@ -88,9 +96,19 @@ export default {
                     || state.pleaseSelectVariationId === 0);
         },
 
+        allVariationSelected()
+        {
+            return this.$store.getters["itemSetAllVariationSelected"];
+        },
+
+        isSet()
+        {
+            return this.currentVariation.item.itemType === "set";
+        },
+
         isSetComponent()
         {
-            return this.currentVariation.item.itemType !== "set" &&
+            return !this.isSet &&
                 this.$store.state.items.setComponentIds.length > 0;
         },
 

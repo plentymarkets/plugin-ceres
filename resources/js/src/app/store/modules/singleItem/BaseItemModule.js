@@ -4,7 +4,6 @@ import VariationSelectModule from "./VariationSelectModule";
 
 const state =
     {
-        componentItems: [],
         isItemSet: false,
         isSetLoading: false,
         previewItemId: 0,
