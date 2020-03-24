@@ -1,38 +1,30 @@
 <template>
     <div :class="{ 'has-crossprice': hasCrossPrice }">
-        <div class="crossprice" v-if="showCrossPrice && hasCrossPrice && !isSetComponent && !isSet">
+        <div class="crossprice" v-if="showCrossPrice && hasCrossPrice">
             <del class="text-muted small text-appearance">
                 {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
             </del>
         </div>
 
         <span class="price h1">
-            <span :content="currentPrice.value">
+            <span :content="currentVariation.prices.default.value">
                 <template v-if="showDynamicPrice">
                     {{ $translate("Ceres::Template.dynamicVariationPrice",
                         {
-                            price: $options.filters.currency(variationTotalPrice, currentPrice.currency)
-                        }
-                    ) }}
-                </template>
-
-                <template v-else-if="isSet && !allVariationSelected">
-                    {{ $translate("Ceres::Template.dynamicSetPrice",
-                        {
-                            price: $options.filters.currency(variationTotalPrice, currentPrice.currency)
+                            price: $options.filters.currency(variationTotalPrice, currentVariation.prices.default.currency)
                         }
                     ) }}
                 </template>
 
                 <template v-else>
-                    {{ variationTotalPrice | currency(currentPrice.currency) }}
+                    {{ variationTotalPrice | currency(currentVariation.prices.default.currency) }}
                 </template>
             </span>
             <sup>*</sup>
-            <span :content="currentPrice.currency"></span>
+            <span :content="currentVariation.prices.default.currency"></span>
         </span>
 
-        <div class="base-price text-muted my-3" v-if="currentVariation.unit && !isSetComponent && !isSet">
+        <div class="base-price text-muted my-3" v-if="currentVariation.unit">
             <div>
                 {{ $translate("Ceres::Template.singleItemContent") }}
                 <span>{{ currentVariation.unit.content | numberFormat }} </span>
@@ -94,34 +86,6 @@ export default {
                 && (state.variationSelect && !state.variationSelect.isVariationSelected)
                 && (state.pleaseSelectVariationId === this.currentVariation.variation.id
                     || state.pleaseSelectVariationId === 0);
-        },
-
-        allVariationSelected()
-        {
-            return this.$store.getters["itemSetAllVariationSelected"];
-        },
-
-        isSet()
-        {
-            return this.currentVariation.item.itemType === "set";
-        },
-
-        isSetComponent()
-        {
-            return !this.isSet &&
-                this.$store.state.items.setComponentIds.length > 0;
-        },
-
-        currentPrice()
-        {
-            if (this.isSetComponent)
-            {
-                return this.currentVariation.prices.set;
-            }
-            else // default
-            {
-                return this.currentVariation.prices.default;
-            }
         }
     }
 }
