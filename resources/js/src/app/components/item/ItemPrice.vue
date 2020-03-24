@@ -7,7 +7,7 @@
         </div>
 
         <span class="price h1">
-            <span :content="currentVariation.prices.default.value">
+            <span :content="currentVariation.prices.default.price.value">
                 <template v-if="showDynamicPrice">
                     {{ $translate("Ceres::Template.dynamicVariationPrice",
                         {
