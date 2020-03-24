@@ -2,20 +2,43 @@
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set overrideHomepage = LayoutContainer.show("Ceres::Homepage") %}
-
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
-        {% block description    trans('Ceres::Template.homepageMetaDescription') %}
-        {% block robots         ceresConfig.meta.robotsHome %}
+        {% if category is defined and category is not null %}
+            {# Override default behaviour: Use empty title if no explicit meta title is defined #}
+            {% block title          category.details[0].metaTitle | default('') %}
+        {% else %}
+            {% block description    trans('Ceres::Template.homepageMetaDescription') %}
+            {% block robots         ceresConfig.meta.robotsHome %}
+        {% endif %}
     {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
-    {% set overrideHomepage = LayoutContainer.show("Ceres::Homepage") %}
-    {% if overrideHomepage | trim is empty %}
-        {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
-    {% else %}
-        {{ LayoutContainer.show("Ceres::Homepage") }}
+    {% set shopBuilderTemplate = "" %}
+    {% if category is defined and category is not null %}
+        {# get shopbuilder template for category if defined #}
+        {% set shopBuilderTemplate = shop_builder_category_template(category.id) %}
     {% endif %}
+
+    {% if shopBuilderTemplate | trim is not empty %}
+        {# show shopbuilder content for homepage category #}
+        <div class="container-max">
+            <div class="row">
+                <div class="col">
+                    {{ shopBuilderTemplate | raw }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {% set overrideHomepage = LayoutContainer.show("Ceres::Homepage") %}
+        {% if overrideHomepage | trim is not empty %}
+            {# Show contents for container Ceres::Homepage #}
+            {{ overrideHomepage }}
+        {% else %}
+            {# Show default homepage #}
+            {% include "Ceres::Homepage.MarketingHomepage.twig" %}
+        {% endif %}
+    {% endif %}
+
 {% endblock %}
