@@ -42,7 +42,7 @@
 <script>
 export default {
 
-    name: "set-component-data",
+    name: "basket-set-component-list",
 
     props: {
         setComponents: {
