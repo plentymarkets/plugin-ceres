@@ -1,0 +1,2189 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <title>Ceres 5 CSS Änderungen</title>
+        <style>
+            td {
+                width: 50%;
+            }
+
+            tr[todo] {
+                background-color: var(--danger);
+                color: var(--light);
+            }
+
+            tr[todo] td + td:before {
+                content: "Noch nicht geprüft!";
+            }
+
+            tr:not([todo]) td + td:empty {
+                color: #ccc;
+            }
+
+            tr:not([todo]) td + td:empty:before {
+                content: "Die Klasse wurde entfernt.";
+            }
+        </style>
+    </head>
+    <body>
+        <div class="fixed-top bg-white border-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="search">CSS-Selektor suchen</label>
+                            <input type="text" class="form-control" id="search" placeholder=".meine-css-klasse">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <p class="font-weight-bold mb-1">Ceres 4</p>
+                    </div>
+
+                    <div class="col-6 pl-0">
+                        <p class="font-weight-bold mb-1">Ceres 5</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 114px">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr data-selector=".accordion-content">
+                                <td>.accordion-content</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".accordion-control">
+                                <td>.accordion-control</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".accordion-header">
+                                <td>.accordion-header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".account-menu">
+                                <td>.account-menu</td>
+                                <td>mw-100</td>
+                            </tr>
+                            <tr data-selector=".active-lg-down">
+                                <td>.active-lg-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-lg-up">
+                                <td>.active-lg-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-md-down">
+                                <td>.active-md-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-md-up">
+                                <td>.active-md-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-sm-down">
+                                <td>.active-sm-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-sm-up">
+                                <td>.active-sm-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-xl-down">
+                                <td>.active-xl-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-xl-up">
+                                <td>.active-xl-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-xs-down">
+                                <td>.active-xs-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".active-xs-up">
+                                <td>.active-xs-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".add-to-wish-list" todo>
+                                <td>.add-to-wish-list</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".alert-dynamic" todo>
+                                <td>.alert-dynamic</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".animate-inFromLeft">
+                                <td>.animate-inFromLeft</td>
+                                <td>.animate-in-from-left</td>
+                            </tr>
+                            <tr data-selector=".animate-inFromRight">
+                                <td>.animate-inFromRight</td>
+                                <td>.animate-in-from-right</td>
+                            </tr>
+                            <tr data-selector=".animate-outToLeft">
+                                <td>.animate-outToLeft</td>
+                                <td>.animate-out-to-left</td>
+                            </tr>
+                            <tr data-selector=".animate-outToRight">
+                                <td>.animate-outToRight</td>
+                                <td>.animate-out-to-right</td>
+                            </tr>
+                            <tr data-selector=".autocomplete-image" todo>
+                                <td>.autocomplete-image</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".autocomplete-image-container" todo>
+                                <td>.autocomplete-image-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".autocomplete-item-name" todo>
+                                <td>.autocomplete-item-name</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".autocomplete-selected" todo>
+                                <td>.autocomplete-selected</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".availability_1">
+                                <td>.availability_1</td>
+                                <td>.availability-1</td>
+                            </tr>
+                            <tr data-selector=".availability_2">
+                                <td>.availability_2</td>
+                                <td>.availability-2</td>
+                            </tr>
+                            <tr data-selector=".availability_3">
+                                <td>.availability_3</td>
+                                <td>.availability-3</td>
+                            </tr>
+                            <tr data-selector=".availability_4">
+                                <td>.availability_4</td>
+                                <td>.availability-4</td>
+                            </tr>
+                            <tr data-selector=".availability_5">
+                                <td>.availability_5</td>
+                                <td>.availability-5</td>
+                            </tr>
+                            <tr data-selector=".availability_6">
+                                <td>.availability_6</td>
+                                <td>.availability-6</td>
+                            </tr>
+                            <tr data-selector=".availability_7">
+                                <td>.availability_7</td>
+                                <td>.availability-7</td>
+                            </tr>
+                            <tr data-selector=".availability_8">
+                                <td>.availability_8</td>
+                                <td>.availability-8</td>
+                            </tr>
+                            <tr data-selector=".availability_9">
+                                <td>.availability_9</td>
+                                <td>.availability-9</td>
+                            </tr>
+                            <tr data-selector=".availability_10">
+                                <td>.availability_10</td>
+                                <td>.availability-10</td>
+                            </tr>
+                            <tr data-selector=".badge-right">
+                                <td>.badge-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket">
+                                <td>.basket</td>
+                                <td>.pt-3</td>
+                            </tr>
+                            <tr data-selector=".basket-header" todo>
+                                <td>.basket-header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-header-caption" todo>
+                                <td>.basket-header-caption</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-item" todo>
+                                <td>.basket-item</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-item-container" todo>
+                                <td>.basket-item-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-loading-frame" todo>
+                                <td>.basket-loading-frame</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-preview-hover" todo>
+                                <td>.basket-preview-hover</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-preview-hover-wrapper" todo>
+                                <td>.basket-preview-hover-wrapper</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-preview-hover-wrapper-inner" todo>
+                                <td>.basket-preview-hover-wrapper-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-seperator" todo>
+                                <td>.basket-seperator</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".basket-totals" todo>
+                                <td>.basket-totals</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".bg-faded">
+                                <td>.bg-faded</td>
+                                <td>.bg-light</td>
+                            </tr>
+                            <tr data-selector=".brand-wrapper">
+                                <td>.brand-wrapper</td>
+                                <td>.px-lg-3</td>
+                            </tr>
+                            <tr data-selector=".btn-mail">
+                                <td>.btn-mail</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".btnClose">
+                                <td>.btnClose</td>
+                                <td>.btn-close</td>
+                            </tr>
+                            <tr data-selector=".cancel-reset-pwd-btn" todo>
+                                <td>.cancel-reset-pwd-btn</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".card-block">
+                                <td>.card-block</td>
+                                <td>.card-body</td>
+                            </tr>
+                            <tr data-selector=".category-contact" todo>
+                                <td>.category-contact</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".checkout-rightside" todo>
+                                <td>.checkout-rightside</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".cmp-accordion" todo>
+                                <td>.cmp-accordion</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".cmp-basket-item" todo>
+                                <td>.cmp-basket-item</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".cmp-contact" todo>
+                                <td>.cmp-contact</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".cmp-filters" todo>
+                                <td>.cmp-filters</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".cmp-hero" todo>
+                                <td>.cmp-hero</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".cmp-paginator" todo>
+                                <td>.cmp-paginator</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".cmp-ratings-roll" todo>
+                                <td>.cmp-ratings-roll</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".col-xs-1">
+                                <td>.col-xs-1</td>
+                                <td>.col-1</td>
+                            </tr>
+                            <tr data-selector=".col-xs-2">
+                                <td>.col-xs-2</td>
+                                <td>.col-2</td>
+                            </tr>
+                            <tr data-selector=".col-xs-3">
+                                <td>.col-xs-3</td>
+                                <td>.col-3</td>
+                            </tr>
+                            <tr data-selector=".col-xs-4">
+                                <td>.col-xs-4</td>
+                                <td>.col-4</td>
+                            </tr>
+                            <tr data-selector=".col-xs-5">
+                                <td>.col-xs-5</td>
+                                <td>.col-5</td>
+                            </tr>
+                            <tr data-selector=".col-xs-6">
+                                <td>.col-xs-6</td>
+                                <td>.col-6</td>
+                            </tr>
+                            <tr data-selector=".col-xs-7">
+                                <td>.col-xs-7</td>
+                                <td>.col-7</td>
+                            </tr>
+                            <tr data-selector=".col-xs-8">
+                                <td>.col-xs-8</td>
+                                <td>.col-8</td>
+                            </tr>
+                            <tr data-selector=".col-xs-9">
+                                <td>.col-xs-9</td>
+                                <td>.col-9</td>
+                            </tr>
+                            <tr data-selector=".col-xs-10">
+                                <td>.col-xs-10</td>
+                                <td>.col-10</td>
+                            </tr>
+                            <tr data-selector=".col-xs-11">
+                                <td>.col-xs-11</td>
+                                <td>.col-11</td>
+                            </tr>
+                            <tr data-selector=".col-xs-12">
+                                <td>.col-xs-12</td>
+                                <td>.col-12</td>
+                            </tr>
+                            <tr data-selector=".color" todo>
+                                <td>.color</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".contact" todo>
+                                <td>.contact</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".contact-address" todo>
+                                <td>.contact-address</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".contact-card" todo>
+                                <td>.contact-card</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".contact-vat-number" todo>
+                                <td>.contact-vat-number</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".contain" todo>
+                                <td>.contain</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".content-center" todo>
+                                <td>.content-center</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".control-search" todo>
+                                <td>.control-search</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".currency-list" todo>
+                                <td>.currency-list</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".current-payment-width" todo>
+                                <td>.current-payment-width</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".default-not-found" todo>
+                                <td>.default-not-found</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".expand_nav">
+                                <td>.expand_nav</td>
+                                <td>.expand-nav</td>
+                            </tr>
+                            <tr data-selector=".fadeOut">
+                                <td>.fadeOut</td>
+                                <td>.fade-out</td>
+                            </tr>
+                            <tr data-selector=".featured-categories" todo>
+                                <td>.featured-categories</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".featured-category" todo>
+                                <td>.featured-category</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".featured-category-cta" todo>
+                                <td>.featured-category-cta</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".featured-category-headline" todo>
+                                <td>.featured-category-headline</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".featured-category-inner" todo>
+                                <td>.featured-category-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".featured-image" todo>
+                                <td>.featured-image</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".featured-sale-new" todo>
+                                <td>.featured-sale-new</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".filter-content" todo>
+                                <td>.filter-content</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".filter-group" todo>
+                                <td>.filter-group</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".filters-colors" todo>
+                                <td>.filters-colors</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".filters-header" todo>
+                                <td>.filters-header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".filters-section" todo>
+                                <td>.filters-section</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".flex-align-bottom" todo>
+                                <td>.flex-align-bottom</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".flex-center" todo>
+                                <td>.flex-center</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".flex-container" todo>
+                                <td>.flex-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".flex-image" todo>
+                                <td>.flex-image</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".flex-item" todo>
+                                <td>.flex-item</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".flex-style" todo>
+                                <td>.flex-style</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".flex-text" todo>
+                                <td>.flex-text</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".flex-title" todo>
+                                <td>.flex-title</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".footer-column" todo>
+                                <td>.footer-column</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".footer-content" todo>
+                                <td>.footer-content</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".form-check-wrapper" todo>
+                                <td>.form-check-wrapper</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".has-login-error" todo>
+                                <td>.has-login-error</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".header" todo>
+                                <td>.header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hero-category" todo>
+                                <td>.hero-category</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hero-category-cta" todo>
+                                <td>.hero-category-cta</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hero-category-headline" todo>
+                                <td>.hero-category-headline</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hero-category-inner" todo>
+                                <td>.hero-category-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hero-image" todo>
+                                <td>.hero-image</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hero-main" todo>
+                                <td>.hero-main</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hero-xtras" todo>
+                                <td>.hero-xtras</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden" todo>
+                                <td>.hidden</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-lg-down" todo>
+                                <td>.hidden-lg-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-lg-up" todo>
+                                <td>.hidden-lg-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-md-down" todo>
+                                <td>.hidden-md-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-md-up" todo>
+                                <td>.hidden-md-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-sm" todo>
+                                <td>.hidden-sm</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-sm-down" todo>
+                                <td>.hidden-sm-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-sm-up" todo>
+                                <td>.hidden-sm-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-xl-down" todo>
+                                <td>.hidden-xl-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-xl-up" todo>
+                                <td>.hidden-xl-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-xs-down" todo>
+                                <td>.hidden-xs-down</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".hidden-xs-up" todo>
+                                <td>.hidden-xs-up</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".history" todo>
+                                <td>.history</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".history-pagination" todo>
+                                <td>.history-pagination</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".home" todo>
+                                <td>.home</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".homepage-title" todo>
+                                <td>.homepage-title</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".icon-next" todo>
+                                <td>.icon-next</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".img-basket-small" todo>
+                                <td>.img-basket-small</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".img-contain-container" todo>
+                                <td>.img-contain-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".img-cover-container" todo>
+                                <td>.img-cover-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".inline-select" todo>
+                                <td>.inline-select</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".input-group-v" todo>
+                                <td>.input-group-v</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".input-unit-v1" todo>
+                                <td>.input-unit-v1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".is_stuck" todo>
+                                <td>.is_stuck</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".isLoading" todo>
+                                <td>.isLoading</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".item-additional-information-container" todo>
+                                <td>.item-additional-information-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".item-base-price" todo>
+                                <td>.item-base-price</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".item-properties" todo>
+                                <td>.item-properties</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".item-properties-header" todo>
+                                <td>.item-properties-header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".item-property-value" todo>
+                                <td>.item-property-value</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".item-remove-button" todo>
+                                <td>.item-remove-button</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".item-remove-container" todo>
+                                <td>.item-remove-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".item-small-prices" todo>
+                                <td>.item-small-prices</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".jumbotron-sm" todo>
+                                <td>.jumbotron-sm</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".language-settings" todo>
+                                <td>.language-settings</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".live-shopping" todo>
+                                <td>.live-shopping</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".login" todo>
+                                <td>.login</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".login-container" todo>
+                                <td>.login-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".m-b-0">
+                                <td>.m-b-0</td>
+                                <td>.mb-0</td>
+                            </tr>
+                            <tr data-selector=".m-b-1">
+                                <td>.m-b-1</td>
+                                <td>.mb-3</td>
+                            </tr>
+                            <tr data-selector=".m-b-2">
+                                <td>.m-b-2</td>
+                                <td>.mb-4</td>
+                            </tr>
+                            <tr data-selector=".m-b-3">
+                                <td>.m-b-3</td>
+                                <td>.mb-5</td>
+                            </tr>
+                            <tr data-selector=".m-b-5">
+                                <td>.m-b-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".m-l-0">
+                                <td>.m-l-0</td>
+                                <td>.ml-0</td>
+                            </tr>
+                            <tr data-selector=".m-l-1">
+                                <td>.m-l-1</td>
+                                <td>.ml-3</td>
+                            </tr>
+                            <tr data-selector=".m-l-2">
+                                <td>.m-l-2</td>
+                                <td>.ml-4</td>
+                            </tr>
+                            <tr data-selector=".m-l-3">
+                                <td>.m-l-3</td>
+                                <td>.ml-5</td>
+                            </tr>
+                            <tr data-selector=".m-l-5">
+                                <td>.m-l-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".m-r-0">
+                                <td>.m-r-0</td>
+                                <td>.mr-0</td>
+                            </tr>
+                            <tr data-selector=".m-r-1">
+                                <td>.m-r-1</td>
+                                <td>.mr-3</td>
+                            </tr>
+                            <tr data-selector=".m-r-2">
+                                <td>.m-r-2</td>
+                                <td>.mr-4</td>
+                            </tr>
+                            <tr data-selector=".m-r-3">
+                                <td>.m-r-3</td>
+                                <td>.mr-5</td>
+                            </tr>
+                            <tr data-selector=".m-r-5">
+                                <td>.m-r-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".m-t-0">
+                                <td>.m-t-0</td>
+                                <td>.mt-0</td>
+                            </tr>
+                            <tr data-selector=".m-t-1">
+                                <td>.m-t-1</td>
+                                <td>.mt-3</td>
+                            </tr>
+                            <tr data-selector=".m-t-2">
+                                <td>.m-t-2</td>
+                                <td>.mt-4</td>
+                            </tr>
+                            <tr data-selector=".m-t-3">
+                                <td>.m-t-3</td>
+                                <td>.mt-5</td>
+                            </tr>
+                            <tr data-selector=".m-t-5">
+                                <td>.m-t-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".m-x-0">
+                                <td>.m-x-0</td>
+                                <td>.mx-0</td>
+                            </tr>
+                            <tr data-selector=".m-x-1">
+                                <td>.m-x-1</td>
+                                <td>.mx-3</td>
+                            </tr>
+                            <tr data-selector=".m-x-2">
+                                <td>.m-x-2</td>
+                                <td>.mx-4</td>
+                            </tr>
+                            <tr data-selector=".m-x-3">
+                                <td>.m-x-3</td>
+                                <td>.mx-5</td>
+                            </tr>
+                            <tr data-selector=".m-x-5">
+                                <td>.m-x-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".m-x-auto">
+                                <td>.m-x-auto</td>
+                                <td>.mx-auto</td>
+                            </tr>
+                            <tr data-selector=".m-y-0">
+                                <td>.m-y-0</td>
+                                <td>.my-0</td>
+                            </tr>
+                            <tr data-selector=".m-y-1">
+                                <td>.m-y-1</td>
+                                <td>.my-3</td>
+                            </tr>
+                            <tr data-selector=".m-y-2">
+                                <td>.m-y-2</td>
+                                <td>.my-4</td>
+                            </tr>
+                            <tr data-selector=".m-y-3">
+                                <td>.m-y-3</td>
+                                <td>.my-5</td>
+                            </tr>
+                            <tr data-selector=".m-y-5">
+                                <td>.m-y-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".m-y-auto">
+                                <td>.m-y-auto</td>
+                                <td>.my-auto</td>
+                            </tr>
+                            <tr data-selector=".mainmenu-" todo>
+                                <td>.mainmenu-</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".mkt-homepage" todo>
+                                <td>.mkt-homepage</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".mobile-icon-right" todo>
+                                <td>.mobile-icon-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".mobile-text-only" todo>
+                                <td>.mobile-text-only</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".mobile-width-button" todo>
+                                <td>.mobile-width-button</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".mt-xs-0_5" todo>
+                                <td>.mt-xs-0_5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".nav-dropdown-inner" todo>
+                                <td>.nav-dropdown-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".no-items" todo>
+                                <td>.no-items</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".no-padding" todo>
+                                <td>.no-padding</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".no-print" todo>
+                                <td>.no-print</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".none" todo>
+                                <td>.none</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".open-bottom" todo>
+                                <td>.open-bottom</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".open-left" todo>
+                                <td>.open-left</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".open-right" todo>
+                                <td>.open-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".open-top" todo>
+                                <td>.open-top</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".overlay" todo>
+                                <td>.overlay</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".p-b-0">
+                                <td>.p-b-0</td>
+                                <td>.pb-0</td>
+                            </tr>
+                            <tr data-selector=".p-b-1">
+                                <td>.p-b-1</td>
+                                <td>.pb-3</td>
+                            </tr>
+                            <tr data-selector=".p-b-2">
+                                <td>.p-b-2</td>
+                                <td>.pb-4</td>
+                            </tr>
+                            <tr data-selector=".p-b-3">
+                                <td>.p-b-3</td>
+                                <td>.pb-5</td>
+                            </tr>
+                            <tr data-selector=".p-b-5">
+                                <td>.p-b-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".p-l-0">
+                                <td>.p-l-0</td>
+                                <td>.pl-0</td>
+                            </tr>
+                            <tr data-selector=".p-l-1">
+                                <td>.p-l-1</td>
+                                <td>.pl-3</td>
+                            </tr>
+                            <tr data-selector=".p-l-2">
+                                <td>.p-l-2</td>
+                                <td>.pl-4</td>
+                            </tr>
+                            <tr data-selector=".p-l-3">
+                                <td>.p-l-3</td>
+                                <td>.pl-5</td>
+                            </tr>
+                            <tr data-selector=".p-l-5">
+                                <td>.p-l-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".p-r-0">
+                                <td>.p-r-0</td>
+                                <td>.pr-0</td>
+                            </tr>
+                            <tr data-selector=".p-r-1">
+                                <td>.p-r-1</td>
+                                <td>.pr-3</td>
+                            </tr>
+                            <tr data-selector=".p-r-2">
+                                <td>.p-r-2</td>
+                                <td>.pr-4</td>
+                            </tr>
+                            <tr data-selector=".p-r-3">
+                                <td>.p-r-3</td>
+                                <td>.pr-5</td>
+                            </tr>
+                            <tr data-selector=".p-r-5">
+                                <td>.p-r-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".p-t-0">
+                                <td>.p-t-0</td>
+                                <td>.pt-0</td>
+                            </tr>
+                            <tr data-selector=".p-t-1">
+                                <td>.p-t-1</td>
+                                <td>.pt-3</td>
+                            </tr>
+                            <tr data-selector=".p-t-2">
+                                <td>.p-t-2</td>
+                                <td>.pt-4</td>
+                            </tr>
+                            <tr data-selector=".p-t-3">
+                                <td>.p-t-3</td>
+                                <td>.pt-5</td>
+                            </tr>
+                            <tr data-selector=".p-t-5">
+                                <td>.p-t-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".p-x-0">
+                                <td>.p-x-0</td>
+                                <td>.px-0</td>
+                            </tr>
+                            <tr data-selector=".p-x-1">
+                                <td>.p-x-1</td>
+                                <td>.px-3</td>
+                            </tr>
+                            <tr data-selector=".p-x-2">
+                                <td>.p-x-2</td>
+                                <td>.px-4</td>
+                            </tr>
+                            <tr data-selector=".p-x-3">
+                                <td>.p-x-3</td>
+                                <td>.px-5</td>
+                            </tr>
+                            <tr data-selector=".p-x-5">
+                                <td>.p-x-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".p-y-0">
+                                <td>.p-y-0</td>
+                                <td>.py-0</td>
+                            </tr>
+                            <tr data-selector=".p-y-1">
+                                <td>.p-y-1</td>
+                                <td>.py-3</td>
+                            </tr>
+                            <tr data-selector=".p-y-2">
+                                <td>.p-y-2</td>
+                                <td>.py-4</td>
+                            </tr>
+                            <tr data-selector=".p-y-3">
+                                <td>.p-y-3</td>
+                                <td>.py-5</td>
+                            </tr>
+                            <tr data-selector=".p-y-5">
+                                <td>.p-y-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".page-header" todo>
+                                <td>.page-header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".page-not-found" todo>
+                                <td>.page-not-found</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".password-info" todo>
+                                <td>.password-info</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pipe" todo>
+                                <td>.pipe</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pos-f-t" todo>
+                                <td>.pos-f-t</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".price-box" todo>
+                                <td>.price-box</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".print-header" todo>
+                                <td>.print-header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-inner" todo>
+                                <td>.prop-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-1-4">
+                                <td>.prop-lg-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-1-5">
+                                <td>.prop-lg-1-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-1-6">
+                                <td>.prop-lg-1-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-2-4">
+                                <td>.prop-lg-2-4</td>
+                                <td>.prop-lg-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-2-5">
+                                <td>.prop-lg-2-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-2-6">
+                                <td>.prop-lg-2-6</td>
+                                <td>.prop-lg-1-3</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-3-4">
+                                <td>.prop-lg-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-3-5">
+                                <td>.prop-lg-3-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-3-6">
+                                <td>.prop-lg-3-6</td>
+                                <td>.prop-lg-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-4-1">
+                                <td>.prop-lg-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-4-2">
+                                <td>.prop-lg-4-2</td>
+                                <td>.prop-lg-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-4-3">
+                                <td>.prop-lg-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-4-4">
+                                <td>.prop-lg-4-4</td>
+                                <td>.prop-lg-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-4-5">
+                                <td>.prop-lg-4-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-4-6">
+                                <td>.prop-lg-4-6</td>
+                                <td>.prop-lg-2-3</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-5-1">
+                                <td>.prop-lg-5-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-5-2">
+                                <td>.prop-lg-5-2</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-5-3">
+                                <td>.prop-lg-5-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-5-4">
+                                <td>.prop-lg-5-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-5-5">
+                                <td>.prop-lg-5-5</td>
+                                <td>.prop-lg-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-5-6">
+                                <td>.prop-lg-5-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-6-1">
+                                <td>.prop-lg-6-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-6-2">
+                                <td>.prop-lg-6-2</td>
+                                <td>.prop-lg-3-1</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-6-3">
+                                <td>.prop-lg-6-3</td>
+                                <td>.prop-lg-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-6-4">
+                                <td>.prop-lg-6-4</td>
+                                <td>.prop-lg-3-2</td>
+                            </tr>
+                            <tr data-selector=".prop-lg-6-5">
+                                <td>.prop-lg-6-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-lg-6-6">
+                                <td>.prop-lg-6-6</td>
+                                <td>.prop-lg-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-md-1-4">
+                                <td>.prop-md-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-1-5">
+                                <td>.prop-md-1-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-1-6">
+                                <td>.prop-md-1-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-2-4">
+                                <td>.prop-md-2-4</td>
+                                <td>.prop-md-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-md-2-5">
+                                <td>.prop-md-2-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-2-6">
+                                <td>.prop-md-2-6</td>
+                                <td>.prop-md-1-3</td>
+                            </tr>
+                            <tr data-selector=".prop-md-3-4">
+                                <td>.prop-md-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-3-5">
+                                <td>.prop-md-3-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-3-6">
+                                <td>.prop-md-3-6</td>
+                                <td>.prop-md-1-3</td>
+                            </tr>
+                            <tr data-selector=".prop-md-4-1">
+                                <td>.prop-md-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-4-2">
+                                <td>.prop-md-4-2</td>
+                                <td>.prop-md-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-md-4-3">
+                                <td>.prop-md-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-4-4">
+                                <td>.prop-md-4-4</td>
+                                <td>.prop-md-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-md-4-5">
+                                <td>.prop-md-4-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-4-6">
+                                <td>.prop-md-4-6</td>
+                                <td>.prop-md-2-3</td>
+                            </tr>
+                            <tr data-selector=".prop-md-5-1">
+                                <td>.prop-md-5-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-5-2">
+                                <td>.prop-md-5-2</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-5-3">
+                                <td>.prop-md-5-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-5-4">
+                                <td>.prop-md-5-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-5-5">
+                                <td>.prop-md-5-5</td>
+                                <td>.prop-md-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-md-5-6">
+                                <td>.prop-md-5-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-6-1">
+                                <td>.prop-md-6-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-6-2">
+                                <td>.prop-md-6-2</td>
+                                <td>.prop-md-3-1</td>
+                            </tr>
+                            <tr data-selector=".prop-md-6-3">
+                                <td>.prop-md-6-3</td>
+                                <td>.prop-md-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-md-6-4">
+                                <td>.prop-md-6-4</td>
+                                <td>.prop-md-3-2</td>
+                            </tr>
+                            <tr data-selector=".prop-md-6-5">
+                                <td>.prop-md-6-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-md-6-6">
+                                <td>.prop-md-6-6</td>
+                                <td>.prop-md-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-row">
+                                <td>.prop-row</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-1-4">
+                                <td>.prop-sm-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-1-5">
+                                <td>.prop-sm-1-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-1-6">
+                                <td>.prop-sm-1-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-2-4">
+                                <td>.prop-sm-2-4</td>
+                                <td>.prop-sm-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-2-5">
+                                <td>.prop-sm-2-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-2-6">
+                                <td>.prop-sm-2-6</td>
+                                <td>.prop-sm-1-3</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-3-4">
+                                <td>.prop-sm-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-3-5">
+                                <td>.prop-sm-3-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-3-6">
+                                <td>.prop-sm-3-6</td>
+                                <td>.prop-sm-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-4-1">
+                                <td>.prop-sm-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-4-2">
+                                <td>.prop-sm-4-2</td>
+                                <td>.prop-sm-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-4-3">
+                                <td>.prop-sm-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-4-4">
+                                <td>.prop-sm-4-4</td>
+                                <td>.prop-sm-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-4-5">
+                                <td>.prop-sm-4-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-4-6">
+                                <td>.prop-sm-4-6</td>
+                                <td>.prop-sm-2-3</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-5-1">
+                                <td>.prop-sm-5-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-5-2">
+                                <td>.prop-sm-5-2</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-5-3">
+                                <td>.prop-sm-5-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-5-4">
+                                <td>.prop-sm-5-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-5-5">
+                                <td>.prop-sm-5-5</td>
+                                <td>.prop-sm-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-5-6">
+                                <td>.prop-sm-5-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-6-1">
+                                <td>.prop-sm-6-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-6-2">
+                                <td>.prop-sm-6-2</td>
+                                <td>.prop-sm-3-1</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-6-3">
+                                <td>.prop-sm-6-3</td>
+                                <td>.prop-sm-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-6-4">
+                                <td>.prop-sm-6-4</td>
+                                <td>.prop-sm-3-2</td>
+                            </tr>
+                            <tr data-selector=".prop-sm-6-5">
+                                <td>.prop-sm-6-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-sm-6-6">
+                                <td>.prop-sm-6-6</td>
+                                <td>.prop-sm-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-1-4">
+                                <td>.prop-xl-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-1-5">
+                                <td>.prop-xl-1-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-1-6">
+                                <td>.prop-xl-1-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-2-4">
+                                <td>.prop-xl-2-4</td>
+                                <td>.prop-xl-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-2-5">
+                                <td>.prop-xl-2-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-2-6">
+                                <td>.prop-xl-2-6</td>
+                                <td>.prop-xl-1-3</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-3-4">
+                                <td>.prop-xl-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-3-5">
+                                <td>.prop-xl-3-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-3-6">
+                                <td>.prop-xl-3-6</td>
+                                <td>.prop-xl-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-4-1">
+                                <td>.prop-xl-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-4-2">
+                                <td>.prop-xl-4-2</td>
+                                <td>.prop-xl-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-4-3">
+                                <td>.prop-xl-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-4-4">
+                                <td>.prop-xl-4-4</td>
+                                <td>.prop-xl-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-4-5">
+                                <td>.prop-xl-4-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-4-6">
+                                <td>.prop-xl-4-6</td>
+                                <td>.prop-xl-2-3</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-5-1">
+                                <td>.prop-xl-5-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-5-2">
+                                <td>.prop-xl-5-2</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-5-3">
+                                <td>.prop-xl-5-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-5-4">
+                                <td>.prop-xl-5-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-5-5">
+                                <td>.prop-xl-5-5</td>
+                                <td>.prop-xl-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-5-6">
+                                <td>.prop-xl-5-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-6-1">
+                                <td>.prop-xl-6-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-6-2">
+                                <td>.prop-xl-6-2</td>
+                                <td>.prop-xl-3-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-6-3">
+                                <td>.prop-xl-6-3</td>
+                                <td>.prop-xl-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-6-4">
+                                <td>.prop-xl-6-4</td>
+                                <td>.prop-xl-3-2</td>
+                            </tr>
+                            <tr data-selector=".prop-xl-6-5">
+                                <td>.prop-xl-6-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xl-6-6">
+                                <td>.prop-xl-6-6</td>
+                                <td>.prop-xl-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-1-1">
+                                <td>.prop-xs-1-1</td>
+                                <td>.prop-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-1-2">
+                                <td>.prop-xs-1-2</td>
+                                <td>.prop-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-1-3">
+                                <td>.prop-xs-1-3</td>
+                                <td>.prop-1-3</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-1-4">
+                                <td>.prop-xs-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-1-5">
+                                <td>.prop-xs-1-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-1-6">
+                                <td>.prop-xs-1-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-2-1">
+                                <td>.prop-xs-2-1</td>
+                                <td>.prop-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-2-2">
+                                <td>.prop-xs-2-2</td>
+                                <td>.prop-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-2-3">
+                                <td>.prop-xs-2-3</td>
+                                <td>.prop-2-3</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-2-4">
+                                <td>.prop-xs-2-4</td>
+                                <td>.prop-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-2-5">
+                                <td>.prop-xs-2-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-2-6">
+                                <td>.prop-xs-2-6</td>
+                                <td>.prop-1-3</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-3-1">
+                                <td>.prop-xs-3-1</td>
+                                <td>.prop-3-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-3-2">
+                                <td>.prop-xs-3-2</td>
+                                <td>.prop-3-2</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-3-3">
+                                <td>.prop-xs-3-3</td>
+                                <td>.prop-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-3-4">
+                                <td>.prop-xs-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-3-5">
+                                <td>.prop-xs-3-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-3-6">
+                                <td>.prop-xs-3-6</td>
+                                <td>.prop-1-2</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-4-1">
+                                <td>.prop-xs-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-4-2">
+                                <td>.prop-xs-4-2</td>
+                                <td>.prop-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-4-3">
+                                <td>.prop-xs-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-4-4">
+                                <td>.prop-xs-4-4</td>
+                                <td>.prop-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-4-5">
+                                <td>.prop-xs-4-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-4-6">
+                                <td>.prop-xs-4-6</td>
+                                <td>.prop-2-3</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-5-1">
+                                <td>.prop-xs-5-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-5-2">
+                                <td>.prop-xs-5-2</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-5-3">
+                                <td>.prop-xs-5-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-5-4">
+                                <td>.prop-xs-5-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-5-5">
+                                <td>.prop-xs-5-5</td>
+                                <td>.prop-1-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-5-6">
+                                <td>.prop-xs-5-6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-6-1">
+                                <td>.prop-xs-6-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-6-2">
+                                <td>.prop-xs-6-2</td>
+                                <td>.prop-3-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-6-3">
+                                <td>.prop-xs-6-3</td>
+                                <td>.prop-2-1</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-6-4">
+                                <td>.prop-xs-6-4</td>
+                                <td>.prop-3-2</td>
+                            </tr>
+                            <tr data-selector=".prop-xs-6-5">
+                                <td>.prop-xs-6-5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".prop-xs-6-6">
+                                <td>.prop-xs-6-6</td>
+                                <td>.prop-1-1</td>
+                            </tr>
+                            <tr data-selector=".pull-left">
+                                <td>.pull-left</td>
+                                <td>.float-left</td>
+                            </tr>
+                            <tr data-selector=".pull-lg-left">
+                                <td>.pull-lg-left</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-lg-right">
+                                <td>.pull-lg-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-md-left">
+                                <td>.pull-md-left</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-md-right">
+                                <td>.pull-md-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-right">
+                                <td>.pull-right</td>
+                                <td>.float-right</td>
+                            </tr>
+                            <tr data-selector=".pull-sm-left">
+                                <td>.pull-sm-left</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-sm-right">
+                                <td>.pull-sm-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-xl-left">
+                                <td>.pull-xl-left</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-xl-right">
+                                <td>.pull-xl-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-xs-left">
+                                <td>.pull-xs-left</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".pull-xs-right">
+                                <td>.pull-xs-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".qty-btn-seperator" todo>
+                                <td>.qty-btn-seperator</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".qty-sign" todo>
+                                <td>.qty-sign</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".rate-link" todo>
+                                <td>.rate-link</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".rating-form" todo>
+                                <td>.rating-form</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".re-captcha-container" todo>
+                                <td>.re-captcha-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".reset-pwd-container" todo>
+                                <td>.reset-pwd-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sale-new" todo>
+                                <td>.sale-new</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sb-no-animation" todo>
+                                <td>.sb-no-animation</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".search-box-inner" todo>
+                                <td>.search-box-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".search-box-shadow-frame" todo>
+                                <td>.search-box-shadow-frame</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".search-shown" todo>
+                                <td>.search-shown</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".section-header" todo>
+                                <td>.section-header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".section-link-all" todo>
+                                <td>.section-link-all</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".send-login-btn" todo>
+                                <td>.send-login-btn</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".send-mail" todo>
+                                <td>.send-mail</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".send-reset-pwd-btn" todo>
+                                <td>.send-reset-pwd-btn</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".services-certificate" todo>
+                                <td>.services-certificate</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".services-payment" todo>
+                                <td>.services-payment</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".services-shipping" todo>
+                                <td>.services-shipping</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".services-title" todo>
+                                <td>.services-title</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle10" todo>
+                                <td>.sk-circle10</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle11" todo>
+                                <td>.sk-circle11</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle12" todo>
+                                <td>.sk-circle12</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle2" todo>
+                                <td>.sk-circle2</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle3" todo>
+                                <td>.sk-circle3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle4" todo>
+                                <td>.sk-circle4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle5" todo>
+                                <td>.sk-circle5</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle6" todo>
+                                <td>.sk-circle6</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle7" todo>
+                                <td>.sk-circle7</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle8" todo>
+                                <td>.sk-circle8</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sk-circle9" todo>
+                                <td>.sk-circle9</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".special-tag" todo>
+                                <td>.special-tag</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sqr-lg-reset" todo>
+                                <td>.sqr-lg-reset</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sqr-md-reset" todo>
+                                <td>.sqr-md-reset</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sqr-sm-reset" todo>
+                                <td>.sqr-sm-reset</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sqr-xl-reset" todo>
+                                <td>.sqr-xl-reset</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sqr-xs-reset" todo>
+                                <td>.sqr-xs-reset</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".square-container" todo>
+                                <td>.square-container</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".square-inner" todo>
+                                <td>.square-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".star-rating" todo>
+                                <td>.star-rating</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".static-link-list" todo>
+                                <td>.static-link-list</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".static-page-plain-text" todo>
+                                <td>.static-page-plain-text</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".sticky" todo>
+                                <td>.sticky</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".tag-danger">
+                                <td>.tag-danger</td>
+                                <td>.badge-danger</td>
+                            </tr>
+                            <tr data-selector=".tag-info">
+                                <td>.tag-info</td>
+                                <td>.badge-info</td>
+                            </tr>
+                            <tr data-selector=".tag-list">
+                                <td>.tag-list</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".tag-primary">
+                                <td>.tag-primary</td>
+                                <td>.badge-primary</td>
+                            </tr>
+                            <tr data-selector=".tag-secondary">
+                                <td>.tag-secondary</td>
+                                <td>.badge-secondary</td>
+                            </tr>
+                            <tr data-selector=".tag-success">
+                                <td>.tag-success</td>
+                                <td>.badge-success</td>
+                            </tr>
+                            <tr data-selector=".tag-warning">
+                                <td>.tag-warning</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".text-context-dark">
+                                <td>.text-context-dark</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".text-context-light">
+                                <td>.text-context-light</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".thumb-background" todo>
+                                <td>.thumb-background</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".thumb-btn-buy" todo>
+                                <td>.thumb-btn-buy</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".thumb-buy" todo>
+                                <td>.thumb-buy</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".thumb-inner" todo>
+                                <td>.thumb-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".thumb-meta" todo>
+                                <td>.thumb-meta</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".thumb-scroll-cmd" todo>
+                                <td>.thumb-scroll-cmd</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".to-top" todo>
+                                <td>.to-top</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".toggle-list-view" todo>
+                                <td>.toggle-list-view</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".touch" todo>
+                                <td>.touch</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".vat-number-field" todo>
+                                <td>.vat-number-field</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".vat-porto-info" todo>
+                                <td>.vat-porto-info</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-pagination" todo>
+                                <td>.widget-pagination</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-1-4">
+                                <td>.widget-prop-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-2-4">
+                                <td>.widget-prop-2-4</td>
+                                <td>.widget-prop-1-2</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-3-4">
+                                <td>.widget-prop-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-4-1">
+                                <td>.widget-prop-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-4-2">
+                                <td>.widget-prop-4-2</td>
+                                <td>.widget-prop-2-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-4-3">
+                                <td>.widget-prop-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-4-4">
+                                <td>.widget-prop-4-4</td>
+                                <td>.widget-prop-1-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-lg-1-4">
+                                <td>.widget-prop-lg-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-lg-2-4">
+                                <td>.widget-prop-lg-2-4</td>
+                                <td>.widget-prop-1-2</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-lg-3-4">
+                                <td>.widget-prop-lg-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-lg-4-1">
+                                <td>.widget-prop-lg-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-lg-4-2">
+                                <td>.widget-prop-lg-4-2</td>
+                                <td>.widget-prop-lg-2-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-lg-4-3">
+                                <td>.widget-prop-lg-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-lg-4-4">
+                                <td>.widget-prop-lg-4-4</td>
+                                <td>.widget-prop-lg-1-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-md-1-4">
+                                <td>.widget-prop-md-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-md-2-4">
+                                <td>.widget-prop-md-2-4</td>
+                                <td>.widget-prop-lg-1-2</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-md-3-4">
+                                <td>.widget-prop-md-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-md-4-1">
+                                <td>.widget-prop-md-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-md-4-2">
+                                <td>.widget-prop-md-4-2</td>
+                                <td>.widget-prop-lg-2-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-md-4-3">
+                                <td>.widget-prop-md-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-md-4-4">
+                                <td>.widget-prop-md-4-4</td>
+                                <td>.widget-prop-lg-1-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-sm-1-4">
+                                <td>.widget-prop-sm-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-sm-2-4">
+                                <td>.widget-prop-sm-2-4</td>
+                                <td>.widget-prop-lg-1-2</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-sm-3-4">
+                                <td>.widget-prop-sm-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-sm-4-1">
+                                <td>.widget-prop-sm-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-sm-4-2">
+                                <td>.widget-prop-sm-4-2</td>
+                                <td>.widget-prop-sm-2-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-sm-4-3">
+                                <td>.widget-prop-sm-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-sm-4-4">
+                                <td>.widget-prop-sm-4-4</td>
+                                <td>.widget-prop-sm-1-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-xl-1-4">
+                                <td>.widget-prop-xl-1-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-xl-2-4">
+                                <td>.widget-prop-xl-2-4</td>
+                                <td>.widget-prop-sm-1-2</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-xl-3-4">
+                                <td>.widget-prop-xl-3-4</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-xl-4-1">
+                                <td>.widget-prop-xl-4-1</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-xl-4-2">
+                                <td>.widget-prop-xl-4-2</td>
+                                <td>.widget-prop-xl-2-1</td>
+                            </tr>
+                            <tr data-selector=".widget-prop-xl-4-3">
+                                <td>.widget-prop-xl-4-3</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".widget-prop-xl-4-4">
+                                <td>.widget-prop-xl-4-4</td>
+                                <td>.widget-prop-xl-1-1</td>
+                            </tr>
+                            <tr data-selector=".wish-list-item-transition-leave-active" todo>
+                                <td>.wish-list-item-transition-leave-active</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wish-list-no-items-label" todo>
+                                <td>.wish-list-no-items-label</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wish-list-no-items-transition-enter" todo>
+                                <td>.wish-list-no-items-transition-enter</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wish-list-no-items-transition-enter-active" todo>
+                                <td>.wish-list-no-items-transition-enter-active</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wish-list-no-items-transition-leave-active" todo>
+                                <td>.wish-list-no-items-transition-leave-active</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wish-list-no-items-transition-leave-to" todo>
+                                <td>.wish-list-no-items-transition-leave-to</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wishlist" todo>
+                                <td>.wishlist</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wrapper-bottom" todo>
+                                <td>.wrapper-bottom</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wrapper-inner" todo>
+                                <td>.wrapper-inner</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wrapper-left" todo>
+                                <td>.wrapper-left</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wrapper-right" todo>
+                                <td>.wrapper-right</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".wrapper-top" todo>
+                                <td>.wrapper-top</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector=".xs-center" todo>
+                                <td>.xs-center</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#contact-map" todo>
+                                <td>#contact-map</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#login-change" todo>
+                                <td>#login-change</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#mainNavbarCollapsable" todo>
+                                <td>#mainNavbarCollapsable</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#page-body" todo>
+                                <td>#page-body</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#page-header" todo>
+                                <td>#page-header</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#page-header-parent" todo>
+                                <td>#page-header-parent</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#ratingText" todo>
+                                <td>#ratingText</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#recommend-text" todo>
+                                <td>#recommend-text</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#thumb-carousel" todo>
+                                <td>#thumb-carousel</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#vue-app" todo>
+                                <td>#vue-app</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#vue-error" todo>
+                                <td>#vue-error</td>
+                                <td></td>
+                            </tr>
+                            <tr data-selector="#welcome-text" todo>
+                                <td>#welcome-text</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+        
+        <script>
+            (function() {
+                var searchInput = document.getElementById("search");
+                var rows = [].slice.call(document.querySelectorAll("[data-selector]"));
+
+                searchInput.addEventListener("keyup", function(evt) {
+                    let query = evt.target.value;
+                    if(query.charAt(0) === "." || query.charAt(0) === "#")
+                    {
+                        query = query.substr(1);
+                    }
+
+                    rows.forEach(function(row) {
+                        let selector = (row.dataset || {}).selector;
+                        if(query.length <= 0 || selector.indexOf(query) === 1)
+                        {
+                            row.style.display = "table-row";
+                        }
+                        else
+                        {
+                            row.style.display = "none";
+                        }
+                    });
+                });
+            })();
+        </script>
+    </body>
+</html>
