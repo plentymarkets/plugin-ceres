@@ -161,7 +161,7 @@ import { mapState } from "vuex";
 
 const NotificationService = require("../../../services/NotificationService");
 
-import BasketSetComponentList from "./BasketSetComponentList";
+import BasketSetComponentList from "./BasketSetComponentList.vue";
 
 export default {
     components:
