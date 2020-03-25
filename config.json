@@ -161,6 +161,7 @@
                 "homepage.showShopBuilderContent": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.homepageShowShopBuilderContentLabel",
                     "options": {
                         "defaultValue": "false"
@@ -169,6 +170,7 @@
                 "default.homepage": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.defaultHomepageLabel",
                     "options": {
                         "defaultValue": "true"
