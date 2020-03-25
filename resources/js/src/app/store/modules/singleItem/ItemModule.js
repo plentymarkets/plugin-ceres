@@ -249,54 +249,70 @@ const getters =
             return [];
         },
 
-        variationMissingProperties(state, getters)
+        variationMissingProperties(state, getters, rootState, rootGetters)
         {
-            if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties)
+            if (getters.currentItemVariation.item.itemType === "set")
             {
-                let missingProperties = state.variation.documents[0].data.properties.filter(property =>
+                let setMissingProperties = [];
+
+                for (const itemId of rootState.items.setComponentIds)
                 {
-                    return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
-                });
+                    const componentMissingProperties = rootGetters[`${ itemId }/variationMissingProperties`];
 
-                if (missingProperties.length)
-                {
-                    let radioInformation = state.variation.documents[0].data.properties.map(property =>
-                    {
-                        if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty")
-                        {
-                            return {
-                                groupId: property.group.id,
-                                propertyId: property.property.id,
-                                hasValue: !!property.property.value
-                            };
-                        }
-                        return null;
-                    });
-
-                    radioInformation = [...new Set(radioInformation.filter(id => id))];
-
-                    const radioIdsToRemove = [];
-
-                    for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
-                    {
-                        const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
-
-                        if (radioGroupToClean)
-                        {
-                            for (const radio of radioInformation.filter(radio => radio.groupId === radioGroupToClean.groupId && !radio.hasValue))
-                            {
-                                radioIdsToRemove.push(radio.propertyId);
-                            }
-                        }
-                    }
-
-                    missingProperties = missingProperties.filter(property => !radioIdsToRemove.includes(property.property.id));
+                    setMissingProperties = [...setMissingProperties, ...componentMissingProperties];
                 }
 
-                return missingProperties;
+                return setMissingProperties;
             }
+            else
+            {
+                if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties)
+                {
+                    let missingProperties = state.variation.documents[0].data.properties.filter(property =>
+                    {
+                        return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
+                    });
 
-            return [];
+                    if (missingProperties.length)
+                    {
+                        let radioInformation = state.variation.documents[0].data.properties.map(property =>
+                        {
+                            if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty")
+                            {
+                                return {
+                                    groupId: property.group.id,
+                                    propertyId: property.property.id,
+                                    hasValue: !!property.property.value
+                                };
+                            }
+                            return null;
+                        });
+
+                        radioInformation = [...new Set(radioInformation.filter(id => id))];
+
+                        const radioIdsToRemove = [];
+
+                        for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
+                        {
+                            const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
+
+                            if (radioGroupToClean)
+                            {
+                                for (const radio of radioInformation.filter(radio => radio.groupId === radioGroupToClean.groupId && !radio.hasValue))
+                                {
+                                    radioIdsToRemove.push(radio.propertyId);
+                                }
+                            }
+                        }
+
+                        missingProperties = missingProperties.filter(property => !radioIdsToRemove.includes(property.property.id));
+                    }
+
+                    return missingProperties;
+                }
+
+                return [];
+            }
         },
 
         currentItemVariation(state)
