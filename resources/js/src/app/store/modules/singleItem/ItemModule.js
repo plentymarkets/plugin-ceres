@@ -20,7 +20,6 @@ const mutations =
     {
         setVariation(state, variation)
         {
-            // TODO cached variation to root state
             state.variation = variation;
             if (variation.documents.length > 0 && variation.documents[0].data.variation)
             {
