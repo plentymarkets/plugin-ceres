@@ -124,7 +124,7 @@
                     </template>
 
                     <template v-if="isDataFieldVisible('basket.item.availability')">
-                        <div v-if="basketItem.variation.data.variation.availability.names.name">
+                        <div v-if="basketItem.variation.data.variation.availability && basketItem.variation.data.variation.availability.names.name">
                             <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
                             <span>{{ basketItem.variation.data.variation.availability.names.name }}</span>
                         </div>
