@@ -12,5 +12,6 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <item-price :show-cross-price="{{ showCrossPrice | json_encode }}"></item-price>
+        <set-price v-if="$store.state.items.isItemSet" :show-cross-price="{{ showCrossPrice | json_encode }}"></set-price>
+        <item-price v-else :show-cross-price="{{ showCrossPrice | json_encode }}"></item-price>
 </div>

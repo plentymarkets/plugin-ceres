@@ -1,10 +1,9 @@
 import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
-import VariationSelectModule from "../VariationSelectModule";
+import VariationSelectModule from "./VariationSelectModule";
 
 const state =
     {
-        componentItems: [],
         isItemSet: false,
         isSetLoading: false,
         previewItemId: 0,
@@ -95,6 +94,20 @@ const getters =
             }
 
             return totalPrice;
+        },
+
+        itemSetAllVariationSelected(state)
+        {
+            let allVariationSelected = true;
+
+            for (const itemId of state.setComponentIds)
+            {
+                const isSelected = state[itemId].variationSelect.isVariationSelected;
+
+                allVariationSelected = allVariationSelected && isSelected;
+            }
+
+            return allVariationSelected;
         }
     };
 
