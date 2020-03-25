@@ -110,7 +110,7 @@ import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.v
 Vue.component("user-login-handler", UserLoginHandler);
 
 Vue.component("item-bundle", () => import("./app/components/item/ItemBundle.vue"));
-Vue.component("set-component-data", () => import("./app/components/item/SetComponentData.vue"));
+Vue.component("basket-set-component-list", () => import("./app/components/basket/list/BasketSetComponentList.vue"));
 Vue.component("order-property-value", () => import("./app/components/item/OrderPropertyValue.vue"));
 Vue.component("quantity-input", () => import("./app/components/item/QuantityInput.vue"));
 

@@ -55,7 +55,6 @@ export default {
     {
         getImage(setComponent)
         {
-            
             const itemImages = this.$options.filters.itemImages(setComponent.variation.data.images, "urlPreview");
 
             return this.$options.filters.itemImage(itemImages);
