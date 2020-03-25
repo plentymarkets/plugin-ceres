@@ -132,7 +132,8 @@ header .widget {
         @each $j in 1, 2, 3 {
             .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional,
             .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j},
-            .widget.widget-proportional.widget-prop-#{$i}-#{$j} {
+            .widget.widget-proportional.widget-prop-#{$i}-#{$j},
+            .widget.widget-proportional .widget-prop-#{$i}-#{$j} {
                 @extend .prop#{$infix}-#{$i}-#{$j};
             }
         }
