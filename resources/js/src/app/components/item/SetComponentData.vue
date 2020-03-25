@@ -1,20 +1,20 @@
 <template>
-    <div v-if="setComponents.length > 0" class="set-data small" :class="paddingClasses" :style="paddingInlineStyles">
+    <div v-if="setComponents.length > 0" class="set-data small">
         <div class="mb-2"><strong>{{ $translate("Ceres::Template.itemSetContent") }}</strong></div>
         <div class="d-flex mb-2" v-for="setComponent in setComponents">
             <span class="text-muted">{{ setComponent.quantity }}x</span>
             <div class="image-container mx-1">
                 <lazy-img
                     picture-class="d-block mw-100 mh-100"
-                    v-if="true"
-                    :image-url="setComponent.variation.data.images | itemImages('urlPreview') | itemImage"
-                    :alt="altText"
-                    :title="setComponent.variation.data | itemName">
+                    v-if="getImage(setComponent)"
+                    :image-url="getImage(setComponent)"
+                    :alt="getAltText(setComponent)"
+                    :title="getItemName(setComponent)">
                 </lazy-img>
             </div>
             <div>
                 <a :href="setComponent.variation.data | itemURL" class="item-name text-primary text-appearance font-weight-bold text-break">
-                    {{ setComponent.variation.data | itemName }}
+                    {{ getItemName(setComponent) }}
                 </a>
                 <div class="small" v-for="attribute in setComponent.variation.data.attributes">
                     <strong>{{ attribute.attribute.names.name }}: </strong>
@@ -45,16 +45,40 @@ export default {
     name: "set-component-data",
 
     props: {
-        paddingClasses: {
-            type: String,
-            default: null
+        setComponents: {
+            type: Array,
+            default: () => []
+        }
+    },
+
+    methods:
+    {
+        getImage(setComponent)
+        {
+            
+            const itemImages = this.$options.filters.itemImages(setComponent.variation.data.images, "urlPreview");
+
+            return this.$options.filters.itemImage(itemImages);
         },
-        paddingInlineStyles: {
-            type: String,
-            default: null
+
+        getAltText(setComponent)
+        {
+            const images = this.$options.filters.itemImages(setComponent.variation.data.images, "urlPreview");
+            const altText =  this.$options.filters.itemImageAlternativeText(images);
+
+            if (altText)
+            {
+                return altText;
+            }
+
+            return this.getItemName(setComponent);
         },
-        altText: String,
-        setComponents: Array
+
+        getItemName(setComponent)
+        {
+            return this.$options.filters.itemName(setComponent.variation.data);
+        }
     }
+
 }
 </script>

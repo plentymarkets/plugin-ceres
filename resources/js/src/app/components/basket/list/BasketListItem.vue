@@ -43,7 +43,7 @@
                             <div class="small" v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
                                 <div>
                                     <strong>{{ $translate("Ceres::Template.itemInput") }} {{ basketItem | inputUnit(true)}}: </strong>
-                                    {{ basketItem | inputUnit}}
+                                    {{ basketItem | inputUnit }}
                                 </div>
                             </div>
 
@@ -92,10 +92,7 @@
                     </div>
                 </div>
 
-                <set-component-data 
-                    :set-components="basketItem.setComponents"
-                    :altText="altText">
-                </set-component-data>
+                <set-component-data :set-components="basketItem.setComponents"></set-component-data>
 
                 <div class="small" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
                     <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
