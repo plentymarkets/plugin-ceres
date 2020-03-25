@@ -1,7 +1,7 @@
 <template>
     <div v-if="setComponents.length > 0" class="set-data small">
         <div class="mb-2"><strong>{{ $translate("Ceres::Template.itemSetContent") }}</strong></div>
-        <div class="d-flex mb-2 test" v-for="setComponent in setComponents">
+        <div class="d-flex mb-2" v-for="setComponent in setComponents">
             <span class="text-muted">{{ setComponent.quantity }}x</span>
             <div class="image-container mx-1">
                 <lazy-img
