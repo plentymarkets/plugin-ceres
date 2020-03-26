@@ -52,7 +52,7 @@ class TemplateServiceProvider extends ServiceProvider
     private static $templateKeyToViewMap =
         [
             'tpl.home' => ['Homepage.Homepage', GlobalContext::class],
-            'tpl.home.category' => ['Homepage.HomepageCategory', CategoryContext::class],
+            'tpl.home.category' => ['Homepage.Homepage', CategoryContext::class],
             'tpl.category.content' => ['Category.Content.CategoryContent', CategoryContext::class],
             'tpl.category.item' => ['Category.Item.CategoryItem', CategoryItemContext::class],
             'tpl.category.blog' => ['PageDesign.PageDesign', GlobalContext::class],
