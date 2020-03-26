@@ -8,12 +8,7 @@
             "label":            "Widget.containerFooter",
             "name":             "Ceres::Footer"
         },
-        "content": [
-            {
-                "label":        "Widget.containerHomepage",
-                "name":         "Ceres::Homepage"
-            }
-        ]
+        "content": []
     },
     "allowedTypes": {
         "header":       ["header", "static", "structure", "default"],
