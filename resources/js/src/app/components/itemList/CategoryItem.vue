@@ -5,7 +5,7 @@
             <add-to-basket
                     :variation-id="item.variation.id"
                     :is-salable="!!item.filter && item.filter.isSalable"
-                    :has-children="!!item.item && item.item.salableVariationCount > 1"
+                    :has-children="!!item.filter && item.filter.hasActiveChildren"
                     :interval-quantity="item.variation.intervalOrderQuantity || 1"
                     :minimum-quantity="item.variation.minimumOrderQuantity"
                     :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
@@ -81,7 +81,7 @@
                     <add-to-basket
                             :variation-id="item.variation.id"
                             :is-salable="!!item.filter && item.filter.isSalable"
-                            :has-children="!!item.item && item.item.salableVariationCount > 1"
+                            :has-children="!!item.filter && item.filter.hasActiveChildren"
                             :interval-quantity="item.variation.intervalOrderQuantity || 1"
                             :minimum-quantity="item.variation.minimumOrderQuantity"
                             :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
