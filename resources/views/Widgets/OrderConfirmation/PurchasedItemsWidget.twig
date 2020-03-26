@@ -3,6 +3,8 @@
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
+{{ Twig.component("Ceres::Customer.Components.Item.SetComponentData") }}
+
 {% set customClass      = widget.settings.customClass.mobile %}
 {% set spacingSettings  = widget.settings.spacing %}
 {% set inlinePadding    = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
@@ -18,22 +20,84 @@
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-
+    
     <div class="widget-inner confirmation-order-list">
         {{ Twig.for("item", "data.order.orderItems") }}
             {{ Twig.if("item.itemVariationId > 0 and not ('[-]' in item.orderItemName)") }}
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
+                
+                {# <div>{{ Twig.PRINT("data.variations | json_encode") }}</div> #}
 
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         <img src="{{ Twig.print('data.itemImages | getObjectValue(currentVariationId)') }}" alt="{{ Twig.print('item.orderItemName') }}" title="{{ Twig.print('item.orderItemName') }}">
                     </a>
+
                     <div class="item-details mt-0">
                         <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="clearfix">
                             <div class="item-name text-appearance">
                                 {{ Twig.print(Twig.call("ItemName.get", ["$item.orderItemName", "$item.bundleType"])) }}
                             </div>
                         </a>
+
+                        {{ Twig.if("item.setComponents") }}
+                            <div class="set-data small">
+                                <div class="mb-2"><strong>{{ Twig.trans("Ceres::Template.itemSetContent") }}</strong></div>
+                                {{ Twig.for("setComponent", "item.setComponents") }}
+                                
+                                {# <div>{{ Twig.PRINT("setComponent.itemVariationId | json_encode") }}</div>
+                                <div>{{ Twig.PRINT("data.variations[setComponent.itemVariationId].images | itemImages('urlPreview') | json_encode") }}</div> #}
+                                {{ Twig.set("imageData", "data.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview')") }}
+                                {{ Twig.set("altText", "imageData.alternate ? imageData.alternate : setComponent.orderItemName") }}
+                                {# <div>{{ Twig.print("imageData") }}</div>
+                                <div>{{ Twig.print("imageData | json_encode") }}</div>
+                                <div>{{ Twig.print("altText") }}</div> #}
+                                <div>{{ Twig.print("setComponent.variation.data | itemURL") }}</div>
+
+                                <div class="d-flex mb-2">
+                                    <span class="text-muted">{{ Twig.print("setComponent.quantity") }}x</span>
+                                    <div class="image-container mx-1">
+                                        {{ Twig.if("imageData") }}
+                                            <lazy-img
+                                                picture-class="d-block mw-100 mh-100"
+                                                :image-url="{{ Twig.print("imageData.url | json_encode") }}"
+                                                :alt="{{ Twig.print("altText | json_encode") }}"
+                                                :title="{{ Twig.print("setComponent.orderItemName | json_encode") }}">
+                                            </lazy-img>
+                                        {{ Twig.endif() }}
+                                    </div>
+                                    <div>
+                                        <a :href="{{ Twig.print("setComponent.variation.data | itemURL") }}" class="item-name text-primary text-appearance font-weight-bold text-break">
+                                            {{ Twig.print("setComponent.orderItemName") }}
+                                        </a>
+                                        {{ Twig.for("attribute", "data.variations[setComponent.itemVariationId].attributes") }}
+                                        <div class="small">Detlef
+                                            <strong>{{ Twig.print("attribute.attribute.names.name") }}: </strong>
+                                            <span>{{ Twig.print("attribute.names.name") }}</span>
+                                        </div>
+                                        {{ Twig.endfor() }}
+
+                                        {{ Twig.for("attribute", "data.variations[setComponent.itemVariationId].properties") }}
+                                        <div class="text-muted small">
+
+                                            {# <template v-for="propertyGroup in setComponent.variation.data.variationProperties">
+                                                <div v-for="property in propertyGroup.properties">
+                                                    <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
+                                                    <span>{{ property.names.name }}</span>
+                                                    <span v-if="property.cast == 'file'">
+                                                        <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
+                                                    </span>
+                                                    <span v-else v-html="property.values.value"></span>
+                                                </div>
+                                            </template> #}
+                                        </div>
+                                        {{ Twig.endfor() }}
+                                    </div>
+                                </div>
+                                {{ Twig.endfor() }}
+                            </div>
+                            
+                        {{ Twig.endif() }}
 
                         {{ Twig.if("splitItemBundle != '1' and item.bundleType == 'bundle'") }}
                             <div class="mb-3 small">
