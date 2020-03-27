@@ -49,7 +49,7 @@ const actions =
                 commit("setIsItemSet", true);
                 commit("setIsSetLoading", true);
 
-                ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem" })
+                ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
                     .done(components =>
                     {
                         commit("setIsSetLoading", false);
