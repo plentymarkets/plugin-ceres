@@ -38,15 +38,18 @@
                         <span>{{ trans("Ceres::Template.orderHistoryStatus") }}: </span>
                         <span>${ order.status }</span>
                     </div>
+                    <div class="col-md-2">
+                        <span>{{ trans("Ceres::Template.orderHistory>ShowOrder") }}</span>
+                        <a :href="$ceres.urls.confirmation + '/?orderId=' + order.id" target="_blank" rel="noopener">
+                            <i class="fa fa-eye fa-flip-horizontal text-primary text-appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryOrderDetails') }}"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="icons d-none d-md-block">
                     <a v-if="!!order.trackingURL" :href="order.trackingURL" @click.stop target="_blank" rel="noopener">
                         <i class="fa fa-truck fa-flip-horizontal text-primary text-appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryTracking') }}"></i>
-                    </a>
-                    <a :href="$ceres.urls.confirmation + '/?orderId=' + order.id" target="_blank" rel="noopener">
-                        <i class="fa fa-eye fa-flip-horizontal text-primary text-appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryOrderDetails') }}"></i>
                     </a>
                     {#
                         <!-- for "order again" in the future -->
