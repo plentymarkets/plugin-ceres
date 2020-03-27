@@ -38,6 +38,8 @@ import { debounce } from "../../helper/debounce";
 import { mapState } from "vuex";
 
 export default {
+    name: "quantity-input",
+
     props: {
         value: {
             type: Number,
