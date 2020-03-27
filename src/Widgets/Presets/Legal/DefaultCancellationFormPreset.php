@@ -27,7 +27,7 @@ class DefaultCancellationFormPreset implements ContentPreset
     {
         $text = '';
         $text .= '{% autoescape false %}';
-        $text .= '<h1 class="print-header">{{ trans("Ceres::Template.cancellationForm", {"hyphen": "&shy;"}) }}</h1>';
+        $text .= '<h1>{{ trans("Ceres::Template.cancellationForm", {"hyphen": "&shy;"}) }}</h1>';
         $text .= '{% endautoescape %}';
 
         $this->preset->createWidget('Ceres::CodeWidget')

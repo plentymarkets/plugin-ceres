@@ -1,5 +1,5 @@
 <template>
-    <a class="btn btn-link btn-sm text-muted" 
+    <a class="btn btn-link btn-sm text-muted add-to-wish-list" 
         @click.prevent="switchState()"
         data-toggle="tooltip"
         data-placement="top"

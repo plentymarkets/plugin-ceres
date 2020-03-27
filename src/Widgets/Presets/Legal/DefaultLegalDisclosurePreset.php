@@ -25,7 +25,7 @@ class DefaultLegalDisclosurePreset implements ContentPreset
     {
         $text = '';
         $text .= '{% autoescape false %}';
-        $text .= '<h1 class="print-header">{{ trans("Ceres::Template.legalDisclosure") }}</h1>';
+        $text .= '<h1>{{ trans("Ceres::Template.legalDisclosure") }}</h1>';
         $text .= '{% endautoescape %}';
 
         $this->preset->createWidget('Ceres::CodeWidget')

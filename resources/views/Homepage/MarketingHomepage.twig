@@ -17,9 +17,9 @@
             {% endfor %}
         </div>
         <a class="left carousel-control carousel-control-prev" href="#carousel-example" data-slide="prev"><i
-                    class="icon-prev  fa fa-angle-left"></i></a>
+                    class="fa fa-angle-left"></i></a>
         <a class="right carousel-control carousel-control-next" href="#carousel-example" data-slide="next"><i
-                    class="icon-next fa fa-angle-right"></i></a>
+                    class="fa fa-angle-right"></i></a>
     </div>
 
     <div class="row">
@@ -27,7 +27,7 @@
             <h1 id="welcome-text">{% autoescape false %}{{ homepageData.texts.welcome }}{% endautoescape %}</h1>
         </div>
         <div class="col-lg-6">
-            <p id="short-description">{% autoescape false %}{{ homepageData.texts.shortDescription }}{% endautoescape %}</p>
+            <p>{% autoescape false %}{{ homepageData.texts.shortDescription }}{% endautoescape %}</p>
         </div>
     </div>
 
@@ -35,14 +35,14 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h2 id="recommend-text">{% autoescape false %}{{ homepageData.texts.recommendText }}{% endautoescape %}</h2>
+            <h2 class="text-center">{% autoescape false %}{{ homepageData.texts.recommendText }}{% endautoescape %}</h2>
         </div>
     </div>
 
     <hr class="my-2">
 
     <div class="row">
-        <div class="row mt-xs-0_5">
+        <div class="row mt-2">
             <ul class="flex-container" id="recommended-plugins">
                 {% for plugin in homepageData.recommended | shuffle %}
                     <li class="flex-item">

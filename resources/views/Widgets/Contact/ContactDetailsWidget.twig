@@ -17,7 +17,7 @@
 {% set appearance = widget.settings.appearance.mobile | default("none") %}
 
 {% if isPreview or address | trim is not empty or phone | trim is not empty or fax | trim is not empty or email | trim is not empty or businessTimes | trim is not empty %}
-    <div class="widget widget-contact-details cmp-contact widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    <div class="widget widget-contact-details widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
             {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="contact-card">
             <div>

@@ -95,9 +95,6 @@ $contexts:
     padding: $grid-gutter-width/2;
 }
 
-@import "components/featured-category";
-@import "components/featured-sale-new";
-
 @import "views/Templates/Hero/component-hero";
 @import "views/Templates/ItemRating/item-rating-roll";
 @import "views/Templates/ItemRating/item-rating-section";

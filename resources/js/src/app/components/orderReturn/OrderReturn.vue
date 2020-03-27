@@ -32,7 +32,7 @@
                             </li>
                         </ul>
 
-                        <div class="input-unit textarea cmp-contact mt-4">
+                        <div class="input-unit textarea mt-4">
                             <textarea id="contact_wish" class="no-resize" rows="5" @change="updateOrderReturnNote($event.target.value)"></textarea>
                             <label for="contact_wish">{{ $translate("Ceres::Template.returnReason") }}</label>
                         </div>

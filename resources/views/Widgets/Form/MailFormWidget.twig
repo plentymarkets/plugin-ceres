@@ -44,7 +44,7 @@
                 <input type="hidden" data-mail="bcc" value="{{ bccAddress }}">
             {% endfor %}
 
-            <div class="col-12 cmp-contact"{% if isPreview %} data-builder-child-container="formFields"{% endif %}>
+            <div class="col-12"{% if isPreview %} data-builder-child-container="formFields"{% endif %}>
                 {{ children.formFields | raw }}
             </div>
 

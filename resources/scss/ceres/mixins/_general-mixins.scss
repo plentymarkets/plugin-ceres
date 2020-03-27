@@ -2,10 +2,6 @@
 ///
 /// @author Bruno Fenzl
 ///
-/// @example scss - Basic Usage HTML
-///     <div class="img-cover-container">
-///         img class="" src="">
-///     </div>
 @mixin img-cover {
     position: relative;
     overflow: hidden;
@@ -26,10 +22,6 @@
 ///
 /// @author Bruno Fenzl
 ///
-/// @example scss - Basic Usage HTML
-///     <div class="img-contain-container">
-///         img src="">
-///     </div>
 @mixin img-contain {
     position: relative;
     overflow: hidden;
