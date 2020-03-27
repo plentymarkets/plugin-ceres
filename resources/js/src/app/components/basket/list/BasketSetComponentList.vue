@@ -21,18 +21,20 @@
                     <span>{{ attribute.value.names.name }}</span>
                 </div>
 
-                <div class="text-muted small">
-                    <template v-for="propertyGroup in setComponent.variation.data.variationProperties">
-                        <div v-for="property in propertyGroup.properties">
-                            <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
-                            <span>{{ property.names.name }}</span>
-                            <span v-if="property.cast == 'file'">
-                                <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
+                <div class="small" v-if="setComponent.basketItemOrderParams && setComponent.basketItemOrderParams.length">
+                    <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
+                    <ul class="ml-3">
+                        <li v-for="property in setComponent.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
+                            <span class="d-block text-truncate">
+                                <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ setComponent.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</strong>
+                                <span>
+                                    <order-property-value :property="property"></order-property-value>
+                                </span>
                             </span>
-                            <span v-else v-html="property.values.value"></span>
-                        </div>
-                    </template>
+                        </li>
+                    </ul>
                 </div>
+
             </div>
         </div>
     </div>
@@ -41,7 +43,6 @@
 
 <script>
 export default {
-
     name: "basket-set-component-list",
 
     props: {
