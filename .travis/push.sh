@@ -1,5 +1,7 @@
 #!/bin/sh
 
+pwd
+
 git config --global user.email $GITHUB_MAIL
 git config --global user.name $GITHUB_USERNAME
 
