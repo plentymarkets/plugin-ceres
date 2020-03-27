@@ -17,16 +17,16 @@
         </div>
         <template v-else-if="orderList.totalsCount > 0">
             <div class="container-header d-none d-md-flex mb-2">
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-2">{{ trans("Ceres::Template.orderHistoryOrderId") }}</div>
                         <div class="col-md-2">{{ trans("Ceres::Template.orderHistoryTotal") }}</div>
                         <div class="col-md-2">{{ trans("Ceres::Template.orderHistoryOrderDate") }}</div>
                         <div class="col-md-2">{{ trans("Ceres::Template.orderHistoryShippingDate") }}</div>
-                        <div class="col-md-2">{{ trans("Ceres::Template.orderHistoryStatus") }}</div>
-                        <div class="col-md-2">{{ trans("Ceres::Template.orderHistoryShowOrder") }}</div>
+                        <div class="col-md-4">{{ trans("Ceres::Template.orderHistoryStatus") }}</div>
                     </div>
                 </div>
+                <div class="col-md-2">{{ trans("Ceres::Template.orderHistoryShowOrder") }}</div>
                 <div class="col-md-2"><template v-if="showTrackingColumn">{{ trans("Ceres::Template.orderHistoryTracking") }}</template></div>
             </div>
 
