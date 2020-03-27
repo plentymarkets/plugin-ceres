@@ -63,18 +63,6 @@ export default Vue.component("order-history-list", {
         }
     },
 
-    computed:
-    {
-        showTrackingColumn()
-        {
-            if (isDefined(this.orderList.entries))
-            {
-                return this.orderList.entries.filter(entry => !!entry.trackingURL).length;
-            }
-            return false;
-        }
-    },
-
     methods:
     {
         setPage(page = 1)
