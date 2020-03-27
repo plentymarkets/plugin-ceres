@@ -21,9 +21,4 @@ jobs:
     - name: 'Run test scripts'
       script: npm run test
     - name: 'Build assets'
-      script: npm run build
-      deploy:
-        provider: script
-        script: bash .travis/push.sh
-        on:
-          all_branches: true
+      script: npm run build:prod
