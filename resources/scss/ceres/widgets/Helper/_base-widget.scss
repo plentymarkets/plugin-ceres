@@ -140,8 +140,6 @@ header .widget {
         }
     }
 
-    
-
     @include media-breakpoint-only($breakpoint) {
         .widget-prop#{$infix}-auto > div > .widget-proportional {
             min-height: 100%;
