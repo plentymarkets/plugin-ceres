@@ -101,25 +101,6 @@ trait ItemListContext
             }
         }
 
-        $itemIds = [];
-        foreach ($searchResults['itemList']['documents'] as $item) {
-            $itemIds[] = $item['data']['item']['id'];
-        }
-        $optionsVariationCount['itemIds'] = array_unique($itemIds);
-        $variationCount = $itemSearchService->getResults(
-            CategoryItemsVariationCount::getSearchFactory($optionsVariationCount)
-        );
-
-        if (isset($variationCount['itemIds']) &&
-            is_array($variationCount['itemIds']) &&
-            isset($searchResults['itemList']['documents']) &&
-            is_array($searchResults['itemList']['documents'])) {
-
-            foreach ($searchResults['itemList']['documents'] as $key => $entry) {
-                $searchResults['itemList']['documents'][$key]['data']['item']['salableVariationCount'] = $variationCount['itemIds'][$entry['data']['item']['id']] ?? 1;
-            }
-        }
-
         $this->itemCountTotal = $searchResults['itemList']['total'];
         $this->itemCountTotal = $this->itemCountTotal > 10000 ? 10000 : $this->itemCountTotal;
 
