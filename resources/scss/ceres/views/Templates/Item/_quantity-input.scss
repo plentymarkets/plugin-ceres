@@ -15,7 +15,11 @@
         }
     }
 
+    &.qty-set {
+        width: unset;
+    }
 }
+
 .qty-btn-container {
     width: $qty-box-btn-width;
     @include border-radius(0 $border-radius $border-radius 0);
