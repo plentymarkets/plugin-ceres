@@ -18,6 +18,8 @@
     "build:sass:dev": "webpack --config-name styles --progress",
     "build:sass:prod": "webpack --config-name styles --env.prod --progress",
     "build:sass-vendor": "node tools/bundleSass.js",
+    "lint": "npm run lint:js && npm run lint:sass",
+    "lint:js": "eslint resources/js/src",
     "lint:sass": "stylelint \"resources/scss/**/*.scss\"",
     "prebuild": "npm run build:sass-vendor",
     "postbuild": "",

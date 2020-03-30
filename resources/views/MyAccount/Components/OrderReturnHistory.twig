@@ -12,9 +12,7 @@
 					{% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'returnsList.page', 'pageMax': 'returnsList.lastPageNumber', 'setPage': 'setPage' } %}
                 </div>
 				<hr>
-				<div :class="{ 'loading': waiting }">
-					{% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-				</div>
+				<loading-animation v-if="waiting"></loading-animation>
 
 				<div v-if="!waiting" class="order-list">
 					<order-return-history-item v-for="returnOrder in returnsList.entries" :returnOrder="returnOrder" :key="returnOrder.order.id"></order-return-history-item>

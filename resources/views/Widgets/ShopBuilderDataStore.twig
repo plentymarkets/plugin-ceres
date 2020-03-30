@@ -15,9 +15,19 @@
         "items": services.itemList.getItemList("random", null, null, 5, null, true),
         "suggestions": services.itemList.getItemList("search_suggestions")})
     %}
+
     window.ceresStore.commit("setAutocompleteResult", {
         "item": {{ searchAutocompleteResult["item"] | json_encode | raw }},
         "category": {{ searchAutocompleteResult["category"] | json_encode | raw }},
         "suggestion": {{ searchAutocompleteResult["suggestion"] | json_encode | raw }}
     });
+
+    {% for variation in setComponents %}
+        window.ceresStore.dispatch("registerItem", {{ { data: variation } | json_encode | raw }});
+        window.ceresStore.commit("setPreviewItemId", {{ variation.item.id }});
+    {% endfor %}
+
+    {% if setComponents | length > 0 %}
+        window.ceresStore.commit("setIsItemSet", {{ true | json_encode | raw }});
+    {% endif %}
 </script>

@@ -43,7 +43,7 @@
                             <div class="small" v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
                                 <div>
                                     <strong>{{ $translate("Ceres::Template.itemInput") }} {{ basketItem | inputUnit(true)}}: </strong>
-                                    {{ basketItem | inputUnit}}
+                                    {{ basketItem | inputUnit }}
                                 </div>
                             </div>
 
@@ -54,18 +54,18 @@
                                 </div>
                             </div>
 
-                                <div class="text-muted small">
-                                    <template v-for="propertyGroup in basketItem.variation.data.variationProperties">
-                                        <div v-for="property in propertyGroup.properties">
-                                            <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
-                                            <span>{{ property.names.name }}</span>
-                                            <span v-if="property.cast == 'file'">
-                                                <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
-                                            </span>
-                                            <span v-else v-html="property.values.value"></span>
-                                        </div>
-                                    </template>
-                                </div>
+                            <div class="text-muted small">
+                                <template v-for="propertyGroup in basketItem.variation.data.variationProperties">
+                                    <div v-for="property in propertyGroup.properties">
+                                        <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
+                                        <span>{{ property.names.name }}</span>
+                                        <span v-if="property.cast == 'file'">
+                                            <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
+                                        </span>
+                                        <span v-else v-html="property.values.value"></span>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                     </div>
 
@@ -91,6 +91,8 @@
                         </div>
                     </div>
                 </div>
+
+                <basket-set-component-list :set-components="basketItem.setComponents"></basket-set-component-list>
 
                 <div class="small" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
                     <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
@@ -122,7 +124,7 @@
                     </template>
 
                     <template v-if="isDataFieldVisible('basket.item.availability')">
-                        <div v-if="basketItem.variation.data.variation.availability.names.name">
+                        <div v-if="basketItem.variation.data.variation.availability && basketItem.variation.data.variation.availability.names.name">
                             <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
                             <span>{{ basketItem.variation.data.variation.availability.names.name }}</span>
                         </div>
@@ -159,7 +161,13 @@ import { mapState } from "vuex";
 
 const NotificationService = require("../../../services/NotificationService");
 
+import BasketSetComponentList from "./BasketSetComponentList.vue";
+
 export default {
+    components:
+    {
+        BasketSetComponentList
+    },
     props:
     {
         template:

@@ -10720,6 +10720,12 @@ textarea.no-resize {
         }
     }
 
+    .set-data {
+        .image-container {
+            width: 55px;
+        }
+    }
+
     .meta-container {
         width: 100%;
         min-width: 0;
@@ -12168,26 +12174,11 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 }
 
 .loading {
-    & .loading-animation-frame {
-        display: block;
-    }
-}
-
-.loading-animation-frame {
-    position: relative;
-    z-index: 1000;
-    display: none;
-    width: 100%;
     min-height: 200px;
-    padding-top: 50px;
 }
 
 .loading-animation {
-    width: 150px;
     height: 120px;
-    margin: auto;
-    font-size: 15px;
-    text-align: center;
 }
 
 .loading-animation > div {

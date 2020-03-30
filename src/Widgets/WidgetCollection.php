@@ -78,6 +78,7 @@ use Ceres\Widgets\Item\ItemBundleWidget;
 use Ceres\Widgets\Item\ItemDataTableWidget;
 use Ceres\Widgets\Item\ItemImageWidget;
 use Ceres\Widgets\Item\ItemPriceWidget;
+use Ceres\Widgets\Item\ItemSetWidget;
 use Ceres\Widgets\Item\OrderPropertyWidget;
 use Ceres\Widgets\Item\TagsWidget;
 use Ceres\Widgets\Item\WishListWidget;
@@ -199,6 +200,10 @@ class WidgetCollection
         TagsWidget::class
     ];
 
+    const ITEM_SET_WIDGETS = [
+        ItemSetWidget::class
+    ];
+
     const LEGAL_WIDGETS = [
         LegalTextsWidget::class
     ];
@@ -255,6 +260,7 @@ class WidgetCollection
             self::GRID_WIDGETS,
             self::HEADER_WIDGETS,
             self::ITEM_WIDGETS,
+            self::ITEM_SET_WIDGETS,
             self::LEGAL_WIDGETS,
             self::LOGIN_WIDGETS,
             self::MY_ACCOUNT_WIDGETS,

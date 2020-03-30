@@ -85,7 +85,8 @@
                         :item-url="wishListItem | itemURL"
                         :has-price="wishListItem | hasItemDefaultPrice"
                         :is-wish-list="true"
-                        :prop-quantity="quantity">
+                        :prop-quantity="quantity"
+                        :item-type="wishListItem.item.itemType">
                     </add-to-basket>
                 </div>
 
@@ -130,9 +131,9 @@ import { mapState, mapActions } from "vuex";
 import { isNullOrUndefined } from "../../helper/utils";
 
 export default {
-    
+
     name: "wish-list-item",
-    
+
     props:
     {
         imageAccessor:
