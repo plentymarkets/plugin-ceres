@@ -115,13 +115,22 @@ export default {
 
             if(this.itemSetVariationId > 0 && this.variationId !== this.itemSetVariationId)    // Set-component
             {
-                // Fetch set object from basket
-                const basketObject = this.$store.state.basket.items.find(variations => variations.variationId === this.itemSetVariationId);
+                let totalQuantity = 0;
 
-                // Search for set component in basketObject
-                const setObject = basketObject.find(setComponents => setComponents.variationId === this.variationId);
+                this.$store.state.basket.items.forEach((basketItem) =>
+                {
+                    if(basketItem.variationId === this.itemSetVariationId)
+                    {
+                        basketItem.setComponents.forEach((setComponent) =>{
+                            if(setComponent.variationId === this.variationId)
+                            {
+                                totalQuantity += setComponent.quantity;
+                            }
+                        });
+                    }
+                });
 
-                return setObject ? setObject.quantity : 0;
+                return totalQuantity;
             }
             else    // Single- or Set-item
             {
