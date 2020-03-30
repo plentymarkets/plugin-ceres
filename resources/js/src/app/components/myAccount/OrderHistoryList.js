@@ -1,6 +1,6 @@
 import TranslationService from "../../services/TranslationService";
 import NotificationService from "../../services/NotificationService";
-import { isNullOrUndefined, isDefined } from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 import Vue from "vue";
 import OrderHistoryListItem from "./OrderHistoryListItem";
 
