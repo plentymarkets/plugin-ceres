@@ -409,9 +409,11 @@ export default {
 function extractPropertiesAndSurcharge(orderProperties)
 {
     let totalSurcharge = 0;
-    const orderParams = orderProperties
-        .filter((orderProperty) => !isNullOrUndefined(orderProperty.property.value))
-        .map((orderProperty) =>
+    const orderParams = [];
+
+    orderProperties.forEach((orderProperty) =>
+    {
+        if(!isNullOrUndefined(orderProperty.property.value))
         {
             const property = orderProperty.property;
 
@@ -424,13 +426,14 @@ function extractPropertiesAndSurcharge(orderProperties)
 
             totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
 
-            return {
+            orderParams.push({
                 propertyId: property.id,
                 type: property.valueType,
                 name: property.names.name,
                 value: property.value
-            };
-        });
+            });
+        }
+    });
 
     return {
         orderParams: orderParams,
