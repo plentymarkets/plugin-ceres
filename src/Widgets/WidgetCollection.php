@@ -198,7 +198,7 @@ class WidgetCollection
         ItemPriceWidget::class,
         OrderPropertyWidget::class,
         WishListWidget::class,
-        TagsWidget::class,
+        TagsWidget::class
     ];
 
     const ITEM_SET_WIDGETS = [
