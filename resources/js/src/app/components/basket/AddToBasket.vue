@@ -333,7 +333,7 @@ export default {
 
                         setComponents.push({
                             variationId: variationId,
-                            quantity: 1
+                            quantity: this.$store.state.items[itemId].variationOrderQuantity
                         });
                     });
                     basketObject.setComponents = setComponents;
