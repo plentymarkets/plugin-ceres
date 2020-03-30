@@ -179,7 +179,7 @@ export default {
         {
             if(this.$store.state.items.itemSetId > 0)
             {
-                return this.$store.getters[`${this.itemSetId}/currentItemVariation`].variation.id;
+                return this.$store.getters[`${this.$store.state.items.itemSetId}/currentItemVariation`].variation.id;
             }
 
             return 0;
