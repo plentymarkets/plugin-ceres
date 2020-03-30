@@ -1,5 +1,6 @@
 <template>
     <quantity-input
+        @quantity-change="currentQuantity = $event"
         :value="currentQuantity"
         :min="minimumQuantity"
         :max="maximumQuantity"
