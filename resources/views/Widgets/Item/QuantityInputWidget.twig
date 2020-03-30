@@ -7,7 +7,7 @@
 {% set marginClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 
-<div class="widget widget-item-data-table widget-{{ appearance }}
+<div class="widget widget-quantity-input widget-{{ appearance }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if marginClasses | length > 0 %} {{ marginClasses }}{% endif %}"
         {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>

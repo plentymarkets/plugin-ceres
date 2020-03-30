@@ -37,12 +37,12 @@ export default {
 
         currentQuantity:
         {
-            get: function()
+            get()
             {
                 return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationOrderQuantity;
             },
 
-            set: function(quantity)
+            set(quantity)
             {
                 this.$store.commit(`${this.itemId}/setVariationOrderQuantity`, quantity);
             }

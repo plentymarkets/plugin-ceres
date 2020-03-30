@@ -8,7 +8,7 @@
                ref="quantityInputField">
 
         <div class="qty-btn-container d-flex flex-column">
-            <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
+            <button class="btn btn-appearance qty-btn flex-fill d-flex justify-content-center p-0"
                  @click="increaseValue()"
                  :class="{ 'disabled': isMaximum || waiting }"
                  v-tooltip="isMaximum && compMax !== 0"
@@ -18,7 +18,7 @@
                 <i class="fa fa-plus default-float" aria-hidden="true"></i>
             </button>
 
-            <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
+            <button class="btn btn-appearance qty-btn flex-fill d-flex justify-content-center p-0"
                  @click="decreaseValue()"
                  :class="{ 'disabled': isMinimum || waiting }"
                  v-tooltip="isMinimum"
@@ -113,7 +113,7 @@ export default {
                 return 0;
             }
 
-            if(this.itemSetVariationId > 0 && this.variationId !== this.itemSetVariationId)    // Set-component
+            if(this.itemSetVariationId > 0 && this.variationId !== this.itemSetVariationId)
             {
                 let totalQuantity = 0;
 
@@ -121,7 +121,8 @@ export default {
                 {
                     if(basketItem.variationId === this.itemSetVariationId)
                     {
-                        basketItem.setComponents.forEach((setComponent) =>{
+                        basketItem.setComponents.forEach((setComponent) =>
+                        {
                             if(setComponent.variationId === this.variationId)
                             {
                                 totalQuantity += setComponent.quantity;
@@ -132,7 +133,7 @@ export default {
 
                 return totalQuantity;
             }
-            else    // Single- or Set-item
+            else
             {
                 const basketObject = this.$store.state.basket.items.find(variations => variations.variationId === this.variationId);
 
