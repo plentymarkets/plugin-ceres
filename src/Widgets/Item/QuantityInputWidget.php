@@ -29,7 +29,8 @@ class QuantityInputWidget extends BaseWidget
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
         $settingsFactory->createCustomClass();
-        $settingsFactory->createAppearance();
+        $settings->createAppearance(true)
+                 ->withDefaultValue('none');
         $settingsFactory->createSpacing(false, true);
 
         return $settingsFactory->toArray();
