@@ -113,17 +113,17 @@ export default {
                 return 0;
             }
 
-            if(this.itemSetVariationId > 0 && this.variationId !== this.itemSetVariationId)
+            if (this.itemSetVariationId > 0 && this.variationId !== this.itemSetVariationId)
             {
                 let totalQuantity = 0;
 
                 this.$store.state.basket.items.forEach((basketItem) =>
                 {
-                    if(basketItem.variationId === this.itemSetVariationId)
+                    if (basketItem.variationId === this.itemSetVariationId)
                     {
                         basketItem.setComponents.forEach((setComponent) =>
                         {
-                            if(setComponent.variationId === this.variationId)
+                            if (setComponent.variationId === this.variationId)
                             {
                                 totalQuantity += setComponent.quantity;
                             }
@@ -178,7 +178,7 @@ export default {
 
         itemSetVariationId()
         {
-            if(this.$store.state.items.itemSetId > 0)
+            if (this.$store.state.items.itemSetId > 0)
             {
                 return this.$store.getters[`${this.$store.state.items.itemSetId}/currentItemVariation`].variation.id;
             }
