@@ -80,6 +80,7 @@ use Ceres\Widgets\Item\ItemImageWidget;
 use Ceres\Widgets\Item\ItemPriceWidget;
 use Ceres\Widgets\Item\ItemSetWidget;
 use Ceres\Widgets\Item\OrderPropertyWidget;
+use Ceres\Widgets\Item\QuantityInputWidget;
 use Ceres\Widgets\Item\TagsWidget;
 use Ceres\Widgets\Item\WishListWidget;
 use Ceres\Widgets\Legal\LegalTextsWidget;
@@ -201,7 +202,8 @@ class WidgetCollection
     ];
 
     const ITEM_SET_WIDGETS = [
-        ItemSetWidget::class
+        ItemSetWidget::class,
+        QuantityInputWidget::class
     ];
 
     const LEGAL_WIDGETS = [
