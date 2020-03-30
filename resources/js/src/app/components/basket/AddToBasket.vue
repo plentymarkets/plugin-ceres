@@ -311,10 +311,7 @@ export default {
 
                         // Extract order properties and total surcharge for set components
                         const setComponentOrderParamsAndSurcharge = extractPropertiesAndSurcharge(
-                            setComponent.properties.filter(function(prop)
-                            {
-                                return prop.property.isOderProperty;
-                            })
+                            setComponent.properties.filter(prop => prop.property.isOderProperty)
                         );
 
                         setComponents.push({
