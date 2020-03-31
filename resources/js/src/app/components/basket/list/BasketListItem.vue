@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                <basket-set-component-list :set-components="basketItem.setComponents"></basket-set-component-list>
+                <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents"></basket-set-component-list>
 
                 <div class="small" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
                     <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
