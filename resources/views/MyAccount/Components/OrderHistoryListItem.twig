@@ -60,7 +60,7 @@
                         <span>{{ trans("Ceres::Template.orderHistoryTracking") }}</span>
                         <i class="fa fa-truck fa-flip-horizontal" aria-hidden="true"></i>
                     </a>
-                    <a :href="$ceres.urls.confirmation + '/?orderId=' + order.id" target="_blank" rel="noopener" class="btn btn-block btn-primary btn-appearance">
+                    <a :href="$ceres.urls.confirmation + '?orderId=' + order.id" target="_blank" rel="noopener" class="btn btn-block btn-primary btn-appearance">
                         <span>{{ trans("Ceres::Template.orderHistoryOrderDetails") }}</span>
                         <i class="fa fa-eye fa-flip-horizontal" aria-hidden="true"></i>
                     {#
