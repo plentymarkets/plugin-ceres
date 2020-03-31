@@ -40,7 +40,7 @@
 
                         {{ Twig.if("item.setComponents") }}
                             <div class="set-data small">
-                                <div class="mb-2"><strong>{{ trans("Ceres::Template.itemSetContent") }}</strong></div>
+                                <div class="mb-2"><strong>{{ Twig.trans("Ceres::Template.itemSetContent") }}</strong></div>
                                 {{ Twig.for("setComponent", "item.setComponents") }}
                                     {{ Twig.set("imageData", "data.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview')") }}
                                     {{ Twig.set("altText", "imageData.alternate ? imageData.alternate : setComponent.orderItemName") }}
@@ -155,25 +155,25 @@
                         {{ Twig.endif() }}
 
                         <div class="row">
-                            <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
+                            <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPrice | formatMonetary( itemAmount.currency )') }}</span>
                         </div>
 
                         {{ Twig.if("discountAmount > 0") }}
                             <div class="row rebate-hint">
-                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
                                 <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('discountAmount | formatMonetary( itemAmount.currency )') }}</span>
                             </div>
                         {{ Twig.endif() }}
 
                         <div class="row">
-                            <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
+                            <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('item.quantity') }}</span>
                         </div>
 
                         {{ Twig.if("item.orderProperties") }}
                             <div class="row mb-1">
-                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationProperties") }}</strong>
+                                <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationProperties") }}</strong>
                             </div>
 
                             <div id="collapseOrderProperties" class="collapse row small pl-4{% if isPreview %} show{% endif %}">
@@ -219,14 +219,14 @@
                                 data-target="#collapseOrderProperties"
                                 aria-expanded="false"
                                 aria-controls="collapseOrderProperties"
-                                data-show-more="{{ trans("Ceres::Template.basketShowMore") }}"
-                                data-show-less="{{ trans("Ceres::Template.basketShowLess") }}">
+                                data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
+                                data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
                                 <i class="fa fa-caret-down fa-lg"></i>
                             </label>
                         {{ Twig.endif() }}
 
                         <div class="row">
-                            <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
+                            <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationTotal") }}</strong>
                             <strong class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPriceTotal | formatMonetary( itemAmount.currency )') }}</strong>
                         </div>
 
