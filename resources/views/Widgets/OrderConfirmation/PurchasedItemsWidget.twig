@@ -119,24 +119,25 @@
                                                     <i class="fa fa-caret-down fa-lg"></i>
                                                 </label>
 
-                                                {{ Twig.for("propertyGroup", "setComponent.variationProperties") }}
-                                                    <div>
-                                                        {{ Twig.for("property", "propertyGroup.properties") }}
-                                                            <div>
-                                                                <strong>{{ Twig.print("propertyGroup.name") }}</strong>
-                                                                <span>{{ Twig.print("property.names.name") }}</span>
-                                                                <span>
-                                                                    {{ Twig.if('property.cast == "file"') }}
-                                                                        <a :href="'{{ Twig.print("property.values.value") }}' | propertyFileUrl" v-html="'{{ Twig.print("property.values.value") }}'" target="_blank"></a>
-                                                                    {{ Twig.else() }}
-                                                                        {{ Twig.print("property.values.value | raw") }}
-                                                                    {{ Twig.endif() }}
-                                                                </span>
-                                                            </div>
-                                                        {{ Twig.endfor() }}
-                                                    </div>
-                                                {{ Twig.endfor() }}
                                             {{ Twig.endif() }}
+                                            
+                                            {{ Twig.for("propertyGroup", "setComponent.variationProperties") }}
+                                                <div>
+                                                    {{ Twig.for("property", "propertyGroup.properties") }}
+                                                        <div>
+                                                            <strong>{{ Twig.print("propertyGroup.name") }}</strong>
+                                                            <span>{{ Twig.print("property.names.name") }}</span>
+                                                            <span>
+                                                                {{ Twig.if('property.cast == "file"') }}
+                                                                    <a :href="'{{ Twig.print("property.values.value") }}' | propertyFileUrl" v-html="'{{ Twig.print("property.values.value") }}'" target="_blank"></a>
+                                                                {{ Twig.else() }}
+                                                                    {{ Twig.print("property.values.value | raw") }}
+                                                                {{ Twig.endif() }}
+                                                            </span>
+                                                        </div>
+                                                    {{ Twig.endfor() }}
+                                                </div>
+                                            {{ Twig.endfor() }}
                                         </div>
                                     </div>
                                 {{ Twig.endfor() }}
