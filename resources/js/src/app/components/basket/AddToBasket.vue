@@ -316,9 +316,9 @@ export default {
 
                         setComponents.push({
                             variationId: variationId,
-                            quantity: 1,
-                            basketItemOrderParams   :   setComponentOrderParamsAndSurcharge.orderParams,
-                            totalOrderParamsMarkup  :   setComponentOrderParamsAndSurcharge.totalSurcharge
+                            quantity: this.$store.state.items[itemId].variationOrderQuantity,
+                            basketItemOrderParams: setComponentOrderParamsAndSurcharge.orderParams,
+                            totalOrderParamsMarkup: setComponentOrderParamsAndSurcharge.totalSurcharge
                         });
                     });
                     basketObject.setComponents = setComponents;
