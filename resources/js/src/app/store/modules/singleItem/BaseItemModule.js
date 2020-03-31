@@ -91,16 +91,23 @@ const getters =
     {
         itemSetTotalPrice(state, getters)
         {
-            let totalPrice = 0;
-
-            for (const itemId of state.setComponentIds)
+            if (!state.isSetLoading)
             {
-                const price = getters[`${ itemId }/variationTotalPrice`] * state[itemId].variationOrderQuantity;
+                let totalPrice = 0;
 
-                totalPrice += price;
+                for (const itemId of state.setComponentIds)
+                {
+                    const price = getters[`${ itemId }/variationTotalPrice`] * state[itemId].variationOrderQuantity;
+
+                    totalPrice += price;
+                }
+
+                return totalPrice;
             }
-
-            return totalPrice;
+            else
+            {
+                return state[state.itemSetId].variation.documents[0].data.prices.default.price.value;
+            }
         },
 
         itemSetAllVariationSelected(state)
