@@ -5,7 +5,8 @@
         :min="setComponentConfig.minimumOrderQuantity"
         :max="setComponentConfig.maximumOrderQuantity"
         :variation-id="currentVariationId"
-        :waiting="!setComponentConfig.orderQuantityPossible">
+        :waiting="!setComponentConfig.orderQuantityPossible"
+        :use-appearance="true">
     </quantity-input>
 </template>
 
