@@ -38,7 +38,7 @@
                             </div>
                         </a>
                         {{ Twig.if("item.setComponents") }}
-                            <div class="set-data small">
+                            <div class="set-data">
                                 <div class="mb-2"><strong>{{ Twig.trans("Ceres::Template.itemSetContent") }}</strong></div>
                                 {{ Twig.for("setComponent", "item.setComponents") }}
                                     {{ Twig.set("imageData", "data.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview')") }}
@@ -193,7 +193,7 @@
                                 <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationProperties") }}</strong>
                             </div>
 
-                            <div id="collapseOrderProperties" class="collapse row small pl-4{% if isPreview %} show{% endif %}">
+                            <div id="collapseOrderProperties" class="collapse row pl-4{% if isPreview %} show{% endif %}">
                                 {{ Twig.for("property", "item.orderProperties") }}
                                 <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }}</strong>
                                     {{ Twig.if("property.type == 'file'") }}
