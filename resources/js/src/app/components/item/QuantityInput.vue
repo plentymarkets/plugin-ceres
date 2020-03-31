@@ -72,9 +72,7 @@ export default {
             type: Number,
             required: false
         },
-        useAppearance: {
-            type: Boolean
-        }
+        useAppearance: Boolean
     },
 
     data()
