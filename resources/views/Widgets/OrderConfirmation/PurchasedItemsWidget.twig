@@ -20,7 +20,7 @@
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    
+
     <div class="widget-inner confirmation-order-list">
         {{ Twig.for("item", "data.order.orderItems") }}
             {{ Twig.if("item.itemVariationId > 0 and not ('[-]' in item.orderItemName)") }}
