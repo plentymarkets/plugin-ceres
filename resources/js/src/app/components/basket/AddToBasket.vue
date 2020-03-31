@@ -290,36 +290,14 @@ export default {
             {
                 this.waiting = true;
 
-                let totalSurcharge = 0;
-                const orderParams = this.orderProperties
-                    .filter((orderProperty) => !isNullOrUndefined(orderProperty.property.value))
-                    .map((orderProperty) =>
-                    {
-                        const property = orderProperty.property;
-
-                        if (property.valueType === "float" &&
-                            !isNullOrUndefined(property.value) &&
-                            property.value.slice(-1) === App.decimalSeparator)
-                        {
-                            property.value = property.value.substr(0, property.value.length - 1);
-                        }
-
-                        totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
-
-                        return {
-                            propertyId: property.id,
-                            type: property.valueType,
-                            name: property.names.name,
-                            value: property.value
-                        };
-                    });
+                const orderParamsAndSurcharge = extractPropertiesAndSurcharge(this.orderProperties);
 
                 const basketObject =
                     {
                         variationId             :   this.variationId,
                         quantity                :   this.quantity,
-                        basketItemOrderParams   :   orderParams,
-                        totalOrderParamsMarkup  :   totalSurcharge
+                        basketItemOrderParams   :   orderParamsAndSurcharge.orderParams,
+                        totalOrderParamsMarkup  :   orderParamsAndSurcharge.totalSurcharge
                     };
 
                 if(this.isSet)
@@ -327,13 +305,20 @@ export default {
                     const setComponents = [];
                     this.$store.state.items.setComponentIds.forEach(itemId =>
                     {
-                        const variationId = this.$store.state.items[itemId]
-                            && this.$store.state.items[itemId].variation
-                            && this.$store.state.items[itemId].variation.documents[0].data.variation.id;
+                        const setComponent = this.$store.getters[`${itemId}/currentItemVariation`];
+
+                        const variationId = setComponent && setComponent.variation.id;
+
+                        // Extract order properties and total surcharge for set components
+                        const setComponentOrderParamsAndSurcharge = extractPropertiesAndSurcharge(
+                            setComponent.properties.filter(prop => prop.property.isOderProperty)
+                        );
 
                         setComponents.push({
                             variationId: variationId,
-                            quantity: 1
+                            quantity: this.$store.state.items[itemId].variationOrderQuantity,
+                            basketItemOrderParams: setComponentOrderParamsAndSurcharge.orderParams,
+                            totalOrderParamsMarkup: setComponentOrderParamsAndSurcharge.totalSurcharge
                         });
                     });
                     basketObject.setComponents = setComponents;
@@ -419,5 +404,40 @@ export default {
             }
         }
     }
+}
+
+function extractPropertiesAndSurcharge(orderProperties)
+{
+    let totalSurcharge = 0;
+    const orderParams = [];
+
+    orderProperties.forEach((orderProperty) =>
+    {
+        if(!isNullOrUndefined(orderProperty.property.value))
+        {
+            const property = orderProperty.property;
+
+            if (property.valueType === "float" &&
+                !isNullOrUndefined(property.value) &&
+                property.value.slice(-1) === App.decimalSeparator)
+            {
+                property.value = property.value.substr(0, property.value.length - 1);
+            }
+
+            totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
+
+            orderParams.push({
+                propertyId: property.id,
+                type: property.valueType,
+                name: property.names.name,
+                value: property.value
+            });
+        }
+    });
+
+    return {
+        orderParams: orderParams,
+        totalSurcharge: totalSurcharge
+    };
 }
 </script>

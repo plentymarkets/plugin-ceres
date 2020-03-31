@@ -27,7 +27,8 @@ class ItemSetWidget extends BaseWidget
                     WidgetTypes::STRUCTURE,
                     WidgetTypes::STATIC,
                     WidgetTypes::ITEM,
-                    WidgetTypes::SET_COMPONENT
+                    WidgetTypes::SET_COMPONENT,
+                    WidgetTypes::SET_COMPONENT_ONLY
                 ]
             )
             ->toArray();
