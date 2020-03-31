@@ -2,10 +2,10 @@
     <quantity-input class="widget-alignment qty-set"
         @quantity-change="currentQuantity = $event"
         :value="currentQuantity"
-        :min="itemSetVariation.minimumOrderQuantity"
-        :max="itemSetVariation.maximumOrderQuantity"
+        :min="setComponentConfig.minimumOrderQuantity"
+        :max="setComponentConfig.maximumOrderQuantity"
         :variation-id="currentVariationId"
-        :waiting="!itemSetVariation.orderQuantityPossible">
+        :waiting="!setComponentConfig.orderQuantityPossible">
     </quantity-input>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 
     computed:
     {
-        itemSetVariation()
+        setComponentConfig()
         {
             const itemSetId = this.$store.state.items.itemSetId;
 
