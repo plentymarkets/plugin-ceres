@@ -78,6 +78,15 @@ export default {
         {
             return this.$options.filters.itemName(this.variation);
         }
+    },
+
+    methods: {
+        isPropertyVisible(propertyId)
+        {
+            const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(propertyId));
+
+            return property ? property.property.isShownAtCheckout : false;
+        }
     }
 }
 </script>
