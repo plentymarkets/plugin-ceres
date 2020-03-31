@@ -10720,12 +10720,6 @@ textarea.no-resize {
         }
     }
 
-    .set-data {
-        .image-container {
-            width: 55px;
-        }
-    }
-
     .meta-container {
         width: 100%;
         min-width: 0;
@@ -10793,6 +10787,12 @@ textarea.no-resize {
     -webkit-transform: translateX(100%);
             transform: translateX(100%);
     @include transition(all .3s ease-in-out);
+
+    @include media-breakpoint-up(md) {
+        .item-list {
+            min-height: 200px;
+        }
+    }
 
     @include media-breakpoint-up(lg) {
         left: auto;
@@ -11195,7 +11195,11 @@ textarea.no-resize {
         }
     }
 
+    &.qty-set {
+        width: auto;
+    }
 }
+
 .qty-btn-container {
     width: $qty-box-btn-width;
     @include border-radius(0 $border-radius $border-radius 0);
@@ -11753,6 +11757,12 @@ html.crios {
 
     > .input-group {
         margin-right: $spacer;
+    }
+}
+
+.set-data {
+    .image-container {
+        width: 55px;
     }
 }
 
@@ -14704,7 +14714,7 @@ header .widget {
         .item {
             img {
                 width: 80px;
-                height: 80px;
+                max-height: 80px;
                 vertical-align: middle;
                 -o-object-fit: contain;
                    object-fit: contain;
