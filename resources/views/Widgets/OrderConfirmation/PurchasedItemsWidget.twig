@@ -42,99 +42,88 @@
                             <div class="set-data small">
                                 <div class="mb-2"><strong>{{ trans("Ceres::Template.itemSetContent") }}</strong></div>
                                 {{ Twig.for("setComponent", "item.setComponents") }}
-                                
-                                {{ Twig.set("imageData", "data.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview')") }}
-                                {{ Twig.set("altText", "imageData.alternate ? imageData.alternate : setComponent.orderItemName") }}
-                                <div>{{ Twig.print("setComponent.variation.data | itemURL") }}</div>
+                                    {{ Twig.set("imageData", "data.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview')") }}
+                                    {{ Twig.set("altText", "imageData.alternate ? imageData.alternate : setComponent.orderItemName") }}
 
-                                <div class="d-flex mb-2">
-                                    <span class="text-muted">{{ Twig.print("setComponent.quantity") }}x</span>
-                                    <div class="image-container mx-1">
-                                        {{ Twig.if("imageData") }}
-                                            <lazy-img
-                                                picture-class="d-block mw-100 mh-100"
-                                                :image-url="{{ Twig.print("imageData.url | json_encode") }}"
-                                                :alt="{{ Twig.print("altText | json_encode") }}"
-                                                :title="{{ Twig.print("setComponent.orderItemName | json_encode") }}">
-                                            </lazy-img>
-                                        {{ Twig.endif() }}
-                                    </div>
-                                    <div>
-                                        <a :href="{{ Twig.print("setComponent.variation.data | itemURL") }}" class="item-name text-primary text-appearance font-weight-bold text-break">
-                                            {{ Twig.print("setComponent.orderItemName") }}
-                                        </a>
-                                        {{ Twig.for("attribute", "data.variations[setComponent.itemVariationId].attributes") }}
-                                        <div class="small">
-                                            <strong>{{ Twig.print("attribute.name") }}: </strong>
+                                    <div class="d-flex mb-2">
+                                        <span class="text-muted">{{ Twig.print("setComponent.quantity") }}x</span>
+                                        <div class="image-container mx-1">
+                                            {{ Twig.if("imageData") }}
+                                                <lazy-img
+                                                    picture-class="d-block mw-100 mh-100"
+                                                    :image-url="{{ Twig.print("imageData.url | json_encode") }}"
+                                                    :alt="{{ Twig.print("altText | json_encode") }}"
+                                                    :title="{{ Twig.print("setComponent.orderItemName | json_encode") }}">
+                                                </lazy-img>
+                                            {{ Twig.endif() }}
                                         </div>
-                                        {{ Twig.endfor() }}
-
-                                        {{ Twig.if("setComponent.variation.data.properties") }}
-                                        <div class="row mb-1">
-                                            <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationProperties") }}</strong>
-                                        </div>
-
-                                        <div id="collapseOrderProperties" class="collapse row small pl-4{% if isPreview %} show{% endif %}">
-                                            {{ Twig.for("property", "setComponent.properties") }}
-                                            <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }}</strong>
-                                                {{ Twig.if("property.type == 'file'") }}
-                                                <span class="col-12 item-word-break">
-                                                    {{ Twig.set("splitPath", "property.value | split('/')") }}
-                                                    {{ Twig.set("filename", "''") }}
-                                                    {{ Twig.set("path", "''") }}
-
-                                                    {{ Twig.for("temp", "splitPath") }}
-                                                        {{ Twig.if("loop.first") }}
-                                                            {{ Twig.set("path", "temp") }}
-                                                        {{ Twig.elseif("loop.last") }}
-                                                            {{ Twig.set("filename", "temp") }}
-                                                        {{ Twig.else() }}
-                                                            {{ Twig.set("path", "path ~ '/' ~ temp") }}
-                                                        {{ Twig.endif() }}
-                                                    {{ Twig.endfor() }}
-
-                                                    <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
-                                                    target="_blank">
-                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                        {{ Twig.print('splitPath | last') }}
-                                                    </a>
-                                                </span>
-                                                {{ Twig.elseif("property.type == 'selection'") }}
-                                                <span class="col-12 item-word-break">
-                                                    {{ Twig.print('property | propertySelectionValueName') }}
-                                                </span>
-                                                {{ Twig.elseif("property.type | length > 0") }}
-                                                <span class="col-12 item-word-break">
-                                                    {{ Twig.print('property.value') }}
-                                                </span>
-                                                {{ Twig.endif() }}
+                                        <div>
+                                            <a href="{{ Twig.print("data.itemURLs | getObjectValue(setComponent.itemVariationId)") }}" class="item-name text-primary text-appearance font-weight-bold text-break mb-0">
+                                                {{ Twig.print("setComponent.orderItemName") }}
+                                            </a>
+                                            {{ Twig.for("attribute", "data.variations[setComponent.itemVariationId].attributes") }}
+                                                {{ Twig.if("loop.index0 > 0") }}, {{ Twig.endif() }}
+                                                <strong>{{ Twig.print("attribute.attribute.names.name") }}: </strong>
+                                                {{- Twig.print("attribute.value.names.name") -}}
                                             {{ Twig.endfor() }}
+
+                                            {{ Twig.if("setComponent.orderProperties") }}
+                                            <div><strong>{{ Twig.trans("Ceres::Template.basketAdditionalOptionsWithoutPrice") }}</strong></div>
+
+                                            <div id="collapseOrderProperties" class="collapse{% if isPreview %} show{% endif %}">
+                                                {{ Twig.for("property", "setComponent.orderProperties") }}
+                                                    <div>
+                                                        <strong class="item-word-break">{{ Twig.print('property | propertyName') }}</strong>
+                                                        {{ Twig.if("property.type == 'file'") }}
+                                                            <span class="item-word-break">
+                                                                {{ Twig.set("splitPath", "property.value | split('/')") }}
+                                                                {{ Twig.set("filename", "''") }}
+                                                                {{ Twig.set("path", "''") }}
+
+                                                                {{ Twig.for("temp", "splitPath") }}
+                                                                    {{ Twig.if("loop.first") }}
+                                                                        {{ Twig.set("path", "temp") }}
+                                                                    {{ Twig.elseif("loop.last") }}
+                                                                        {{ Twig.set("filename", "temp") }}
+                                                                    {{ Twig.else() }}
+                                                                        {{ Twig.set("path", "path ~ '/' ~ temp") }}
+                                                                    {{ Twig.endif() }}
+                                                                {{ Twig.endfor() }}
+
+                                                                <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
+                                                                target="_blank">
+                                                                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                    {{ Twig.print('splitPath | last') }}
+                                                                </a>
+                                                            </span>
+                                                            {{ Twig.elseif("property.type == 'selection'") }}
+                                                            <span class="item-word-break">
+                                                                {{ Twig.print('property | propertySelectionValueName') }}
+                                                            </span>
+                                                            {{ Twig.elseif("property.type | length > 0") }}
+                                                            <span class="item-word-break">
+                                                                {{ Twig.print('property.value') }}
+                                                            </span>
+                                                        {{ Twig.endif() }}
+                                                    </div>
+                                                {{ Twig.endfor() }}
+                                            </div>
+
+                                            <label
+                                                class="btn-collapse mb-0 collapsed"
+                                                data-toggle="collapse"
+                                                data-target="#collapseOrderProperties"
+                                                aria-expanded="false"
+                                                aria-controls="collapseOrderProperties"
+                                                data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
+                                                data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
+                                                <i class="fa fa-caret-down fa-lg"></i>
+                                            </label>
+                                            {{ Twig.endif() }}
                                         </div>
-
-                                        <label
-                                            class="btn-collapse mb-0 collapsed"
-                                            data-toggle="collapse"
-                                            data-target="#collapseOrderProperties"
-                                            aria-expanded="false"
-                                            aria-controls="collapseOrderProperties"
-                                            data-show-more="{{ trans("Ceres::Template.basketShowMore") }}"
-                                            data-show-less="{{ trans("Ceres::Template.basketShowLess") }}">
-                                            <i class="fa fa-caret-down fa-lg"></i>
-                                        </label>
-                                        {{ Twig.endif() }}
-
-                                        <div class="row">
-                                            <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
-                                            <strong class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPriceTotal | formatMonetary( itemAmount.currency )') }}</strong>
-                                        </div>
-
-
-                                        <!-- properties -->
                                     </div>
-                                </div>
                                 {{ Twig.endfor() }}
                             </div>
-                            
                         {{ Twig.endif() }}
 
                         {{ Twig.if("splitItemBundle != '1' and item.bundleType == 'bundle'") }}
