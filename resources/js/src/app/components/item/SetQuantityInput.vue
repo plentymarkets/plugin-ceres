@@ -2,9 +2,10 @@
     <quantity-input class="widget-alignment qty-set"
         @quantity-change="currentQuantity = $event"
         :value="currentQuantity"
-        :min="minimumQuantity"
-        :max="maximumQuantity"
-        :variation-id="currentVariation.variation.id"
+        :min="setComponentConfig.minimumOrderQuantity"
+        :max="setComponentConfig.maximumOrderQuantity"
+        :variation-id="currentVariationId"
+        :waiting="!setComponentConfig.orderQuantityPossible"
         :use-appearance="true">
     </quantity-input>
 </template>
@@ -21,19 +22,18 @@ export default {
 
     computed:
     {
-        currentVariation()
+        setComponentConfig()
         {
-            return this.$store.getters[`${this.itemId}/currentItemVariation`]
+            const itemSetId = this.$store.state.items.itemSetId;
+
+            const setComponents = this.$store.getters[`${itemSetId}/currentItemVariation`].setComponents;
+
+            return setComponents.find(setComponent => setComponent.itemId === this.itemId);
         },
 
-        minimumQuantity()
+        currentVariationId()
         {
-            return this.currentVariation.variation.minimumOrderQuantity;
-        },
-
-        maximumQuantity()
-        {
-            return this.currentVariation.variation.maximumOrderQuantity;
+            return this.$store.getters[`${this.itemId}/currentItemVariation`].variation.id;
         },
 
         currentQuantity:
@@ -47,7 +47,7 @@ export default {
             {
                 this.$store.commit(`${this.itemId}/setVariationOrderQuantity`, quantity);
             }
-        },
+        }
     }
 }
 </script>
