@@ -13,7 +13,7 @@
             min-height: 200px;
         }
     }
-    
+
     @include media-breakpoint-up(lg) {
         left: auto;
         width: $aside-columns-width;
