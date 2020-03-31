@@ -25,9 +25,7 @@
     {% for variation in setComponents %}
         window.ceresStore.dispatch("registerItem", {{ { data: variation } | json_encode | raw }});
         window.ceresStore.commit("setPreviewItemId", {{ variation.item.id }});
-    {% endfor %}
-
-    {% if setComponents | length > 0 %}
         window.ceresStore.commit("setIsItemSet", {{ true | json_encode | raw }});
-    {% endif %}
+        window.ceresStore.commit("setItemSetId", {{ variation.item.id }});
+    {% endfor %}
 </script>
