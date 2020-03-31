@@ -65,7 +65,7 @@
                                             {{ Twig.endfor() }}
 
                                             {{ Twig.if("setComponent.orderProperties") }}
-                                                <div><strong>{{ Twig.trans("Ceres::Template.basketAdditionalOptionsWithoutPrice") }}</strong></div>
+                                                <div><strong>{{ Twig.trans("Ceres::Template.orderConfirmationProperties") }}</strong></div>
 
                                                 <div id="collapseOrderProperties" class="collapse{% if isPreview %} show{% endif %}">
                                                     {{ Twig.for("property", "setComponent.orderProperties") }}
