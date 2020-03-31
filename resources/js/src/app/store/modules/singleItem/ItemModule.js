@@ -195,7 +195,7 @@ const getters =
             }
             else if (getters.currentItemVariation.item.itemType !== "set" && rootState.items.isItemSet)
             {
-                return (state.variation.documents[0].data.prices.set.price.value + getters.variationPropertySurcharge) * state.variationOrderQuantity;
+                return state.variation.documents[0].data.prices.set.price.value + getters.variationPropertySurcharge;
             }
             else
             {
