@@ -143,7 +143,7 @@ export default {
 
         variation()
         {
-            if(this.basketItem)
+            if (this.basketItem)
             {
                 return this.basketItem.variation ? this.basketItem.variation.data : null;
             }
@@ -199,14 +199,19 @@ export default {
         showItem(basketItem, countAdditionalBasketItems)
         {
             this.basketItem = basketItem;
+            this.countAdditionalBasketItems = countAdditionalBasketItems;
+            const isBasketItemSet = basketItem.variation.data.item.itemType === "set";
 
-            if (this.basketItem && this.variation.prices)
+            if (!isBasketItemSet && this.basketItem && this.variation.prices)
             {
                 const graduatedPrice = this.$options.filters.graduatedPrice(this.variation, this.basketItem.quantity);
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
 
                 this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
-                this.countAdditionalBasketItems = countAdditionalBasketItems;
+            }
+            else if (isBasketItemSet)
+            {
+                this.price = basketItem.price;
             }
 
             ModalService
