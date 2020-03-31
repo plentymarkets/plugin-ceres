@@ -95,7 +95,7 @@ const getters =
 
             for (const itemId of state.setComponentIds)
             {
-                const price = getters[`${ itemId }/variationTotalPrice`];
+                const price = getters[`${ itemId }/variationTotalPrice`] * state[itemId].variationOrderQuantity;
 
                 totalPrice += price;
             }
