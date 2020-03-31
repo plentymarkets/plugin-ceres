@@ -1,6 +1,6 @@
 <template>
     <div itemscope itemtype="http://schema.org/Thing">
-        <div class="single-carousel owl-carousel owl-theme owl-single-item" ref="single">
+        <div class="single-carousel owl-carousel owl-theme owl-single-item mt-0" ref="single">
             <div v-for="image in singleImages" class="prop-1-1">
                 <a :href="image.url" data-lightbox="single-big-image-gallery">
                     <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)">

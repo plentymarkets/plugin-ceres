@@ -26,6 +26,9 @@ class ItemSetPreset implements ContentPreset
     private $secondTwoColumnWidget;
 
     /** @var PresetWidgetFactory */
+    private $setItemBackgroundWidget;
+
+    /** @var PresetWidgetFactory */
     private $setComponentWidget;
 
     /** @var PresetWidgetFactory */
@@ -44,16 +47,19 @@ class ItemSetPreset implements ContentPreset
 
         $this->createItemImageWidget();
 
+        $this->createSetItemBackgroundWidget();
+
         $this->createNameHeader();
         $this->createNameSeparatorWidget();
         $this->createManufacturer();
-        $this->createItemAvailabilityWidget();
         $this->createSetDescriptionWidget();
         $this->createSetDescriptionSeparatorWidget();
         $this->createSetPriceWidget();
+        $this->createItemAvailabilityWidget();
+        $this->createItemWishListWidget();
 
-        $this->createSetComponentBackgroundWidget();
         $this->createSetComponentWidget();
+        $this->createSetComponentBackgroundWidget();
         $this->createSetComponentThreeColumnWidget();
 
         $this->createSetComponentItemName();
@@ -64,12 +70,12 @@ class ItemSetPreset implements ContentPreset
         $this->createSetComponentAttributeSelectWidget();
         $this->createOrderPropertyWidget();
         $this->createSetComponentPriceWidget();
-        $this->createSetComponentSeparatorWidget();
+        $this->createSetComponentAvailabilityWidget();
+        $this->createSetComponentWishList();
 
         $this->createSecondTwoColumnWidget();
         $this->createSecondSetPriceWidget();
         $this->createAddToBasketWidget();
-
 
         return $this->preset->toArray();
     }
@@ -91,6 +97,30 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('showDots', true);
     }
 
+    private function createSetItemBackgroundWidget()
+    {
+        $this->setItemBackgroundWidget = $this->twoColumnWidget->createChild('second', 'Ceres::BackgroundWidget')
+            ->withSetting('customClass', '')
+            ->withSetting('opacity', 100)
+            ->withSetting('fullWidth', false)
+            ->withSetting('backgroundFixed', true)
+            ->withSetting('backgroundRepeat', false)
+            ->withSetting('backgroundSize', 'bg-cover')
+            ->withSetting('sourceType', 'none')
+            ->withSetting('hugeFont', false)
+            ->withSetting('colorPalette', 'custom')
+            ->withSetting('customColor', '#FFFFFF')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 4)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 4)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 4)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 4)
+            ->withSetting('spacing.padding.bottom.unit', null);
+    }
+
     private function createNameHeader()
     {
         switch($this->ceresConfig->item->itemName)
@@ -108,7 +138,7 @@ class ItemSetPreset implements ContentPreset
                 $itemName = 'name1';
         }
         $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
-        $this->twoColumnWidget->createChild('second', 'Ceres::InlineTextWidget')
+        $this->setItemBackgroundWidget->createChild('background', 'Ceres::InlineTextWidget')
             ->withSetting('customClass', 'title-outer')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -125,7 +155,7 @@ class ItemSetPreset implements ContentPreset
 
     private function createNameSeparatorWidget()
     {
-        $this->twoColumnWidget->createChild('second', 'Ceres::SeparatorWidget')
+        $this->setItemBackgroundWidget->createChild('background', 'Ceres::SeparatorWidget')
             ->withSetting('customClass','');
     }
 
@@ -133,7 +163,7 @@ class ItemSetPreset implements ContentPreset
     {
         $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
 
-        $this->twoColumnWidget->createChild('second','Ceres::InlineTextWidget')
+        $this->setItemBackgroundWidget->createChild('background', 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
             ->withSetting('customClass', 'producertag h6 producer text-muted')
             ->withSetting('spacing.customPadding', true)
@@ -148,15 +178,9 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('text', $dataProvider);
     }
 
-    private function createItemAvailabilityWidget()
-    {
-        $this->twoColumnWidget->createChild('second', 'Ceres::ItemAvailabilityWidget')
-            ->withSetting('customClass','');
-    }
-
     private function createSetDescriptionWidget()
     {
-        $this->twoColumnWidget->createChild('second', 'Ceres::InlineTextWidget')
+        $this->setItemBackgroundWidget->createChild('background', 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -172,39 +196,32 @@ class ItemSetPreset implements ContentPreset
 
     private function createSetDescriptionSeparatorWidget()
     {
-        $this->twoColumnWidget->createChild('second', 'Ceres::SeparatorWidget')
+        $this->setItemBackgroundWidget->createChild('background', 'Ceres::SeparatorWidget')
             ->withSetting('customClass','');
     }
 
     private function createSetPriceWidget()
     {
-        $this->twoColumnWidget->createChild('second', 'Ceres::ItemPriceWidget')
+        $this->setItemBackgroundWidget->createChild('background', 'Ceres::ItemPriceWidget')
             ->withSetting('showCrossPrice', false)
             ->withSetting('appearance', 'none');
     }
 
-    private function createSetComponentBackgroundWidget()
+    private function createItemAvailabilityWidget()
     {
-        $this->setComponentBackgroundWidget = $this->preset->createWidget('Ceres::BackgroundWidget')
-            ->withSetting('customClass', '')
-            ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.bottom.value', 3)
-            ->withSetting('spacing.margin.bottom.unit', null)
-            ->withSetting('opacity', 100)
-            ->withSetting('fullWidth', false)
-            ->withSetting('backgroundFixed', true)
-            ->withSetting('backgroundRepeat', false)
-            ->withSetting('backgroundSize', 'bg-cover')
-            ->withSetting('sourceType', 'none')
-            ->withSetting('hugeFont', false)
-            ->withSetting('colorPalette', 'custom')
-            ->withSetting('customColor', '#FFFFFF')
-            ->withSetting('height.top.value', 4);
+        $this->setItemBackgroundWidget->createChild('background', 'Ceres::ItemAvailabilityWidget')
+            ->withSetting('customClass','');
+    }
+
+    private function createItemWishListWidget()
+    {
+        $this->setItemBackgroundWidget->createChild('background', 'Ceres::AddToWishListWidget')
+            ->withSetting('customClass','');
     }
 
     private function createSetComponentWidget()
     {
-        $this->setComponentWidget = $this->setComponentBackgroundWidget->createChild('background', 'Ceres::ItemSetWidget')
+        $this->setComponentWidget = $this->preset->createWidget('Ceres::ItemSetWidget')
             ->withSetting('customClass', '')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -214,14 +231,42 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('spacing.padding.top.value', 0)
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.bottom.value', 3)
+            ->withSetting('spacing.margin.bottom.unit', null);
+    }
+
+    private function createSetComponentBackgroundWidget()
+    {
+        $this->setComponentBackgroundWidget = $this->setComponentWidget->createChild('itemSet', 'Ceres::BackgroundWidget')
+            ->withSetting('customClass', '')
+            ->withSetting('opacity', 100)
+            ->withSetting('fullWidth', false)
+            ->withSetting('backgroundFixed', true)
+            ->withSetting('backgroundRepeat', false)
+            ->withSetting('backgroundSize', 'bg-cover')
+            ->withSetting('sourceType', 'none')
+            ->withSetting('hugeFont', false)
+            ->withSetting('colorPalette', 'custom')
+            ->withSetting('customColor', '#FFFFFF')
+            ->withSetting('height.top.value', 4)
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 2)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 2)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 4)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 4)
             ->withSetting('spacing.padding.bottom.unit', null);
     }
 
     private function createSetComponentThreeColumnWidget()
     {
-        $this->setComponentThreeColumnWidget = $this->setComponentWidget->createChild('itemSet', 'Ceres::ThreeColumnWidget')
+        $this->setComponentThreeColumnWidget = $this->setComponentBackgroundWidget->createChild('background', 'Ceres::ThreeColumnWidget')
             ->withSetting('layout', 'oneToOneToOne')
-            ->withSetting('customClass','mt-5');
+            ->withSetting('customClass','mb-0');
     }
 
     private function createSetComponentItemName()
@@ -287,9 +332,6 @@ class ItemSetPreset implements ContentPreset
     {
         $this->setComponentThreeColumnWidget->createChild('third', 'Ceres::AttributeWidget')
             ->withSetting('appearance', 'primary')
-            ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.bottom.value', 3)
-            ->withSetting('spacing.margin.bottom.unit', null)
             ->withSetting('forceContent', false);
     }
 
@@ -306,9 +348,15 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('appearance', 'none');
     }
 
-    private function createSetComponentSeparatorWidget()
+    private function createSetComponentAvailabilityWidget()
     {
-        $this->setComponentWidget->createChild('itemSet', 'Ceres::SeparatorWidget')
+        $this->setComponentThreeColumnWidget->createChild('third', 'Ceres::ItemAvailabilityWidget')
+            ->withSetting('customClass','');
+    }
+
+    private function createSetComponentWishList()
+    {
+        $this->setComponentThreeColumnWidget->createChild('third', 'Ceres::AddToWishListWidget')
             ->withSetting('customClass','');
     }
 
