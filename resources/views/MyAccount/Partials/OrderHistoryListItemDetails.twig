@@ -38,13 +38,119 @@
                         {% endif %}
 
                         <div class="col-sm-12 item">
-                            <div class="py-3 d-flex align-items-center{% if not loop.first %} border-top{% endif %}">
+                            <div class="py-3 d-flex{% if not loop.first %} border-top{% endif %}">
                                 <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}">
                                     <img class="d-inline-block" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
                                 </a>
 
                                 <div class="flex-fill item-description pl-3">
                                     <div><a class="text-primary text-appearance" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
+
+                                    {% if item.setComponents %}
+                                        <div class="set-data small">
+                                            <div class="mb-2"><strong>{{ trans("Ceres::Template.itemSetContent") }}</strong></div>
+                                            {% for setComponent in item.setComponents %}
+                                                {% set imageData = orderData.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview') %}
+                                                {% set altText = imageData.alternate ? imageData.alternate : setComponent.orderItemName %}
+
+                                                <div class="d-flex mb-2">
+                                                    <span class="text-muted">{{ setComponent.quantity }}x</span>
+                                                    <div class="image-container mx-1">
+                                                        {% if imageData %}
+                                                            <lazy-img
+                                                                picture-class="d-block mw-100 mh-100"
+                                                                :image-url="{{ imageData.url | json_encode }}"
+                                                                :alt="{{ altText | json_encode }}"
+                                                                :title="{{ setComponent.orderItemName | json_encode }}">
+                                                            </lazy-img>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div>
+                                                        <a href="{{ orderData.itemURLs | getObjectValue(setComponent.itemVariationId) }}" class="d-block item-name text-primary text-appearance font-weight-bold text-break mb-0">
+                                                            {{ setComponent.orderItemName }}
+                                                        </a>
+                                                        {% for attribute in orderData.variations[setComponent.itemVariationId].attributes %}
+                                                            {% if loop.index0 > 0 %}, {% endif %}
+                                                            <strong>{{ attribute.attribute.names.name }}: </strong>
+                                                            {{- attribute.value.names.name -}}
+                                                        {% endfor %}
+
+                                                        {% if setComponent.orderProperties %}
+                                                            <div><strong>{{ trans("Ceres::Template.basketAdditionalOptionsWithoutPrice") }}</strong></div>
+
+                                                            <div id="collapseOrderProperties" class="collapse{% if isPreview %} show{% endif %}">
+                                                                {% for property in setComponent.orderProperties %}
+                                                                    <div>
+                                                                        <strong class="item-word-break">{{ property | propertyName }}</strong>
+                                                                        {% if property.type == 'file' %}
+                                                                            <span class="item-word-break">
+                                                                                {% set splitPath = property.value | split('/') %}
+                                                                                {% set filename = '' %}
+                                                                                {% set path = '' %}
+
+                                                                                {% for temp in splitPath %}
+                                                                                    {% if loop.first %}
+                                                                                        {% set path = temp %}
+                                                                                    {% elseif loop.last %}
+                                                                                        {% set filename = temp %}
+                                                                                    {% else %}
+                                                                                        {% set path = path ~ '/' ~ temp %}
+                                                                                    {% endif %}
+                                                                                {% endfor %}
+
+                                                                                <a class="text-appearance" href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}"
+                                                                                target="_blank">
+                                                                                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                                    {{ splitPath | last }}
+                                                                                </a>
+                                                                            </span>
+                                                                        {% elseif property.type == 'selection' %}
+                                                                            <span class="item-word-break">
+                                                                                {{ property | propertySelectionValueName }}
+                                                                            </span>
+                                                                        {% elseif property.type | length > 0 %}
+                                                                            <span class="item-word-break">
+                                                                                {{ property.value }}
+                                                                            </span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+
+                                                            <label
+                                                                class="btn-collapse mb-0 collapsed"
+                                                                data-toggle="collapse"
+                                                                data-target="#collapseOrderProperties"
+                                                                aria-expanded="false"
+                                                                aria-controls="collapseOrderProperties"
+                                                                data-show-more="{{ trans("Ceres::Template.basketShowMore") }}"
+                                                                data-show-less="{{ trans("Ceres::Template.basketShowLess") }}">
+                                                                <i class="fa fa-caret-down fa-lg"></i>
+                                                            </label>
+                                                        {% endif %}
+
+                                                        {% for propertyGroup in setComponent.variationProperties %}
+                                                            <div>
+                                                                {% for property in propertyGroup.properties %}
+                                                                    <div>
+                                                                        <strong>{{ propertyGroup.name }}</strong>
+                                                                        <span>{{ property.names.name }}</span>
+                                                                        <span>
+                                                                            {% if property.cast == "file" %}
+                                                                                <a :href="'{{ property.values.value }}' | propertyFileUrl" v-html="'{{ property.values.value }}'" target="_blank"></a>
+                                                                            {% else %}
+                                                                                {{ property.values.value | raw }}
+                                                                            {% endif %}
+                                                                        </span>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
 
                                     {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
                                         <div class="item-bundle">
@@ -181,7 +287,7 @@
                                     {{ trans("Ceres::Template.orderHistorySameAsInvoice") }}
                                 </span>
                             {% else %}
-                                <address-header :address="{{orderData.order.deliveryAddress | json_encode }}"></address-header>
+                                <address-header :address="{{ orderData.order.deliveryAddress | json_encode }}"></address-header>
                             {% endif %}
                         </div>
                     </div>
