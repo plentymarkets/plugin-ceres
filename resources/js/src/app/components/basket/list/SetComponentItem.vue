@@ -83,7 +83,7 @@ export default {
     methods: {
         isPropertyVisible(propertyId)
         {
-            const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(propertyId));
+            const property = this.variation.properties.find(property => property.property.id === parseInt(propertyId));
 
             return property ? property.property.isShownAtCheckout : false;
         }
