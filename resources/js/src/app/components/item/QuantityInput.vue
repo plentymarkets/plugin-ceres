@@ -8,9 +8,9 @@
                ref="quantityInputField">
 
         <div class="qty-btn-container d-flex flex-column">
-            <button class="btn btn-appearance qty-btn flex-fill d-flex justify-content-center p-0"
+            <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
                  @click="increaseValue()"
-                 :class="{ 'disabled': isMaximum || waiting }"
+                 :class="{ 'disabled': isMaximum || waiting, 'btn-appearance': useAppearance }"
                  v-tooltip="isMaximum && compMax !== 0"
                  data-toggle="tooltip"
                  data-placement="top"
@@ -18,9 +18,9 @@
                 <i class="fa fa-plus default-float" aria-hidden="true"></i>
             </button>
 
-            <button class="btn btn-appearance qty-btn flex-fill d-flex justify-content-center p-0"
+            <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
                  @click="decreaseValue()"
-                 :class="{ 'disabled': isMinimum || waiting }"
+                 :class="{ 'disabled': isMinimum || waiting, 'btn-appearance': useAppearance }"
                  v-tooltip="isMinimum"
                  data-toggle="tooltip"
                  data-placement="bottom"
@@ -71,6 +71,11 @@ export default {
         variationId: {
             type: Number,
             required: false
+        },
+        useAppearance: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     },
 

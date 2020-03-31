@@ -4,7 +4,8 @@
         :value="currentQuantity"
         :min="minimumQuantity"
         :max="maximumQuantity"
-        :variation-id="currentVariation.variation.id">
+        :variation-id="currentVariation.variation.id"
+        :use-appearance="true">
     </quantity-input>
 </template>
 
