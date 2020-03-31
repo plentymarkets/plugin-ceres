@@ -3,8 +3,6 @@
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
-{{ Twig.component("Ceres::Customer.Components.Item.SetComponentData") }}
-
 {% set customClass      = widget.settings.customClass.mobile %}
 {% set spacingSettings  = widget.settings.spacing %}
 {% set inlinePadding    = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
