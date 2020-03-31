@@ -65,7 +65,7 @@
         .item {
             img {
                 width: 80px;
-                height: 80px;
+                max-height: 80px;
                 vertical-align: middle;
                 object-fit: contain;
             }
