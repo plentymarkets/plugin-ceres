@@ -227,12 +227,15 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
   methods: {
     showItem: function showItem(basketItem, countAdditionalBasketItems) {
       this.basketItem = basketItem;
+      this.countAdditionalBasketItems = countAdditionalBasketItems;
+      var isBasketItemSet = basketItem.variation.data.item.itemType === "set";
 
-      if (this.basketItem && this.variation.prices) {
+      if (!isBasketItemSet && this.basketItem && this.variation.prices) {
         var graduatedPrice = this.$options.filters.graduatedPrice(this.variation, this.basketItem.quantity);
         var propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
         this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
-        this.countAdditionalBasketItems = countAdditionalBasketItems;
+      } else if (isBasketItemSet) {
+        this.price = basketItem.price;
       }
 
       ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();

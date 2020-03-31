@@ -94,6 +94,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "quantity-input",
   props: {
     value: {
       type: Number,
@@ -125,7 +126,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     variationId: {
       type: Number,
       required: false
-    }
+    },
+    useAppearance: Boolean
   },
   data: function data() {
     return {
@@ -159,10 +161,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return 0;
       }
 
-      var basketObject = this.$store.state.basket.items.find(function (variations) {
-        return variations.variationId === _this2.variationId;
-      });
-      return basketObject ? basketObject.quantity : 0;
+      if (this.itemSetVariationId > 0 && this.variationId !== this.itemSetVariationId) {
+        var totalQuantity = 0;
+        this.$store.state.basket.items.forEach(function (basketItem) {
+          if (basketItem.variationId === _this2.itemSetVariationId) {
+            basketItem.setComponents.forEach(function (setComponent) {
+              if (setComponent.variationId === _this2.variationId) {
+                totalQuantity += setComponent.quantity;
+              }
+            });
+          }
+        });
+        return totalQuantity;
+      } else {
+        var basketObject = this.$store.state.basket.items.find(function (variations) {
+          return variations.variationId === _this2.variationId;
+        });
+        return basketObject ? basketObject.quantity : 0;
+      }
     },
     isMinimum: function isMinimum() {
       return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(this.compMin) && this.compValue - this.compInterval < this.compMin;
@@ -182,6 +198,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     displayValue: function displayValue() {
       return this.$options.filters.numberFormat(this.compValue);
+    },
+    itemSetVariationId: function itemSetVariationId() {
+      if (this.$store.state.items.itemSetId > 0) {
+        return this.$store.getters["".concat(this.$store.state.items.itemSetId, "/currentItemVariation")].variation.id;
+      }
+
+      return 0;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapState"])({
     basketItems: function basketItems(state) {
@@ -331,7 +354,10 @@ var render = function() {
           ],
           staticClass:
             "btn qty-btn flex-fill d-flex justify-content-center p-0",
-          class: { disabled: _vm.isMaximum || _vm.waiting },
+          class: {
+            disabled: _vm.isMaximum || _vm.waiting,
+            "btn-appearance": _vm.useAppearance
+          },
           attrs: {
             "data-toggle": "tooltip",
             "data-placement": "top",
@@ -364,7 +390,10 @@ var render = function() {
           ],
           staticClass:
             "btn qty-btn flex-fill d-flex justify-content-center p-0",
-          class: { disabled: _vm.isMinimum || _vm.waiting },
+          class: {
+            disabled: _vm.isMinimum || _vm.waiting,
+            "btn-appearance": _vm.useAppearance
+          },
           attrs: {
             "data-toggle": "tooltip",
             "data-placement": "bottom",
