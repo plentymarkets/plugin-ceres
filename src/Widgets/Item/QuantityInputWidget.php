@@ -31,6 +31,7 @@ class QuantityInputWidget extends BaseWidget
         $settingsFactory->createCustomClass();
         $settingsFactory->createAppearance(true)
                  ->withDefaultValue('none');
+        $settingsFactory->createAlignment();
         $settingsFactory->createSpacing(false, true);
 
         return $settingsFactory->toArray();
