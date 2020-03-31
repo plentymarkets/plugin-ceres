@@ -30,7 +30,7 @@
                                     :bundle-type="orderItem.bundleType"
                                     :bundle-components="orderItem.bundleComponents"></item-bundle>
 
-                            <order-return-set-component-list :set-components="orderItem.setComponents" :variations="variations"></order-return-set-component-list>
+                            <order-return-set-component-list v-if="orderItem.setComponents" :set-components="orderItem.setComponents" :variations="variations"></order-return-set-component-list>
 
                             <div class="item-small-prices small">
                                 <div v-for="attribute in variation.attributes">
