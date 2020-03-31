@@ -55,6 +55,8 @@
                                     <span v-else-if="!!property.type">: ${ property.value }</span>
                                 </div>
                             </template>
+
+                            <order-return-set-component-list :set-components="orderItem.setComponents" :variations="returnOrder.variations"></order-return-set-component-list>
                         </div>
                     </div>
                 </div> 
