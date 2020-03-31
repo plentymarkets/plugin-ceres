@@ -12,16 +12,16 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
     {% if isPreview %}
-        <item-set-component v-slot="slotProps">
+        <single-item-set-component v-slot="slotProps">
             <div data-builder-child-container="itemSet">
                 {{ children.itemSet | raw }}
             </div>
-        </item-set-component>
+        </single-item-set-component>
     {% else %}
         {{ Twig.for("setComponent", "setComponents") }}
             {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
 
-            <item-set-component
+            <single-item-set-component
                     :item-id="{{ Twig.print("setComponent.item.id") }}"
                     {{ Twig.if("setAttributeMap[setComponent.item.id] is defined") }}
                         :initial-variation-id="{{ Twig.print("setComponent.variation.id") }}"
@@ -32,7 +32,7 @@
                 <div>
                     {{ children.itemSet | raw }}
                 </div>
-            </item-set-component>
+            </single-item-set-component>
             
             {{ Twig.print(Twig.call("pop_item_data_base")) }}
         {{ Twig.endfor() }}

@@ -16,5 +16,5 @@ Vue.component("set-quantity-input", () => import("./app/components/item/SetQuant
 
 import SingleItem from "./app/components/item/SingleItem.vue";
 Vue.component("single-item", SingleItem);
-import ItemSetComponent from "./app/components/item/ItemSetComponent.vue";
-Vue.component("item-set-component", ItemSetComponent);
+import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
+Vue.component("single-item-set-component", SingleItemSetComponent);

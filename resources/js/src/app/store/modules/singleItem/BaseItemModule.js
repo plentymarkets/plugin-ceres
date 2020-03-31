@@ -48,7 +48,7 @@ const actions =
             dispatch("registerItem", variation.documents[0]);
 
             // rest call for sets if set comps are set
-            const setComponentIds = variation.documents[0].data.setComponentVariationIds;
+            const setComponentIds = (variation.documents[0].data.setComponents || []).map(component => component.defaultVariationId);
 
             if (!App.isShopBuilder && setComponentIds && setComponentIds.length)
             {
@@ -95,7 +95,7 @@ const getters =
 
             for (const itemId of state.setComponentIds)
             {
-                const price = getters[`${ itemId }/variationTotalPrice`];
+                const price = getters[`${ itemId }/variationTotalPrice`] * state[itemId].variationOrderQuantity;
 
                 totalPrice += price;
             }

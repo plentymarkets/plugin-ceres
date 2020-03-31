@@ -19,7 +19,7 @@ import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
 import { mapState } from 'vuex'
 export default {
-    name: "item-set-component",
+    name: "single-item-set-component",
 
     props:
     {
