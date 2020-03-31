@@ -113,7 +113,7 @@ const actions =
                     }
 
                     ApiService
-                        .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem" })
+                        .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem", setPriceOnly: rootState.items.isItemSet })
                         .done(response =>
                         {
                             // store received variation data for later reuse

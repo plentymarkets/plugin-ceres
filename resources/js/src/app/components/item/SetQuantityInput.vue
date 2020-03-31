@@ -1,5 +1,5 @@
 <template>
-    <quantity-input
+    <quantity-input class="widget-alignment qty-set"
         @quantity-change="currentQuantity = $event"
         :value="currentQuantity"
         :min="minimumQuantity"
