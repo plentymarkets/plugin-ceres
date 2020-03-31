@@ -73,9 +73,7 @@ export default {
             required: false
         },
         useAppearance: {
-            type: Boolean,
-            required: false,
-            default: false
+            type: Boolean
         }
     },
 
