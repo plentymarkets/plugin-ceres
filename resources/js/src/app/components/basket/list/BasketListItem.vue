@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents"></basket-set-component-list>
+                <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
 
                 <div class="small" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
                     <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
@@ -156,7 +156,7 @@
 <script>
 import ExceptionMap from "../../../exceptions/ExceptionMap";
 import TranslationService from "../../../services/TranslationService";
-import { isNullOrUndefined } from "../../../helper/utils";
+import {isDefined, isNullOrUndefined} from "../../../helper/utils";
 import { mapState } from "vuex";
 
 const NotificationService = require("../../../services/NotificationService");
@@ -244,7 +244,14 @@ export default {
 
         itemTotalPrice()
         {
-            return this.basketItem.quantity * this.basketItem.price;
+            let setComponentsParamSurcharge = 0;
+            if(isDefined(this.basketItem.setComponents))
+            {
+                setComponentsParamSurcharge = this.basketItem.setComponents
+                    .map(component => component.attributeTotalMarkup)
+                    .reduce((sum, i) => sum + i, 0);
+            }
+            return this.basketItem.quantity * (this.basketItem.price + setComponentsParamSurcharge);
         },
 
         unitPrice()
