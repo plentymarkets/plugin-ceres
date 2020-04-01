@@ -69,7 +69,7 @@
 
                             <div class="price">
                                 <template v-if="item.item.itemType === 'set'">
-                                    {{ $translate("Ceres::Template.itemSetPrice", { price: item.prices.default.unitPrice.formatted }) }} *
+                                    {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} *
                                 </template>
                                 <template v-else>
                                     {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} *
@@ -188,6 +188,14 @@ export default {
         texts()
         {
             return this.item.texts;
+        },
+
+        itemSetPrice()
+        {
+            return this.$options.filters.currency(
+                this.item.prices.default.price.value * (1 - (this.item.item.rebate / 100)),
+                this.item.prices.default.currency
+            );
         },
 
         ...mapState({
