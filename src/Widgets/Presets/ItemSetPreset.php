@@ -69,7 +69,7 @@ class ItemSetPreset implements ContentPreset
 
         $this->createSetComponentAttributeSelectWidget();
         $this->createOrderPropertyWidget();
-        $this->createSetComponentPriceWidget();
+        $this->createSetComponentQuantityAndPriceWidget();
         $this->createSetComponentAvailabilityWidget();
         $this->createSetComponentWishList();
 
@@ -341,17 +341,31 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('appearance', 'none');
     }
 
-    private function createSetComponentPriceWidget()
+    private function createSetComponentQuantityAndPriceWidget()
     {
-        $this->setComponentThreeColumnWidget->createChild('third', 'Ceres::ItemPriceWidget')
-            ->withSetting('showCrossPrice', false)
+        $grid = $this->setComponentThreeColumnWidget->createChild('third', 'Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'threeToNine')
+            ->withSetting('layoutTablet', 'oneToTwo')
+            ->withSetting('layoutMobile', 'stackedMobile');
+
+        $grid->createChild('first', 'Ceres::QuantityInputWidget')
             ->withSetting('appearance', 'none');
+
+        $grid->createChild('second', 'Ceres::ItemPriceWidget')
+            ->withSetting('showCrossPrice', false)
+            ->withSetting('appearance', 'none')
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 2)
+            ->withSetting('spacing.margin.top.unit', null);
     }
 
     private function createSetComponentAvailabilityWidget()
     {
         $this->setComponentThreeColumnWidget->createChild('third', 'Ceres::ItemAvailabilityWidget')
-            ->withSetting('customClass','');
+            ->withSetting('customClass','')
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 3)
+            ->withSetting('spacing.margin.top.unit', null);
     }
 
     private function createSetComponentWishList()
