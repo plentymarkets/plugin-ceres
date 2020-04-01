@@ -366,6 +366,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      */
     texts: function texts() {
       return this.item.texts;
+    },
+    itemSetPrice: function itemSetPrice() {
+      return this.$options.filters.currency(this.item.prices.default.price.value * (1 - this.item.item.rebate / 100), this.item.prices.default.currency);
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     showNetPrices: function showNetPrices(state) {
@@ -756,11 +759,7 @@ var render = function() {
                                   _vm._s(
                                     _vm.$translate(
                                       "Ceres::Template.itemSetPrice",
-                                      {
-                                        price:
-                                          _vm.item.prices.default.unitPrice
-                                            .formatted
-                                      }
+                                      { price: _vm.itemSetPrice }
                                     )
                                   ) +
                                   " *\n                            "

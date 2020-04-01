@@ -301,7 +301,8 @@ var render = function() {
         "div",
         {
           ref: "single",
-          staticClass: "single-carousel owl-carousel owl-theme owl-single-item"
+          staticClass:
+            "single-carousel owl-carousel owl-theme owl-single-item mt-0"
         },
         _vm._l(_vm.singleImages, function(image) {
           return _c("div", { staticClass: "prop-1-1" }, [

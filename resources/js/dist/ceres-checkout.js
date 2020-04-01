@@ -275,7 +275,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     variation: Object,
     quantity: Number,
-    orderProperties: Array
+    orderProperties: Array,
+    rebate: Number
   },
   computed: {
     itemImage: function itemImage() {
@@ -33359,7 +33360,8 @@ var render = function() {
                                   _vm._f("currency")(
                                     _vm._f("propertySurcharge")(
                                       _vm.variation.properties,
-                                      property.propertyId
+                                      property.propertyId,
+                                      _vm.rebate
                                     )
                                   )
                                 ) +
@@ -58760,16 +58762,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.filter("propertySurcharge", function (properties, propertyId) {
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.filter("propertySurcharge", function (properties, propertyId, rebate) {
   var property = properties.find(function (prop) {
     return prop.property.id === parseInt(propertyId);
   });
+  rebate = rebate || 0;
 
   if (property) {
     if (property.surcharge > 0) {
-      return property.surcharge;
+      return property.surcharge * (1 - rebate / 100);
     } else if (property.property.surcharge > 0) {
-      return property.property.surcharge;
+      return property.property.surcharge * (1 - rebate / 100);
     }
   }
 
@@ -63956,9 +63959,14 @@ function _fillMissingData(item) {
       try {
         var _loop2 = function _loop2() {
           var setComponent = _step2.value;
-          setComponent.variation = oldBasketItem.setComponents.find(function (comp) {
+          var oldComp = oldBasketItem.setComponents.find(function (comp) {
             return comp.variationId === setComponent.variationId;
-          }).variation;
+          });
+          setComponent.variation = oldComp.variation;
+
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_15__["isNullOrUndefined"])(setComponent.basketItemOrderParams)) {
+            setComponent.basketItemOrderParams = oldComp.basketItemOrderParams;
+          }
         };
 
         for (var _iterator2 = item.setComponents[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {

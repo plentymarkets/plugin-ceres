@@ -37,9 +37,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var itemSetId = this.$store.state.items.itemSetId;
       var setComponents = this.$store.getters["".concat(itemSetId, "/currentItemVariation")].setComponents;
-      return setComponents.find(function (setComponent) {
-        return setComponent.itemId === _this.itemId;
-      });
+
+      if (App.isShopBuilder) {
+        return setComponents[0];
+      } else {
+        return setComponents.find(function (setComponent) {
+          return setComponent.itemId === _this.itemId;
+        });
+      }
     },
     currentVariationId: function currentVariationId() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].variation.id;

@@ -74,7 +74,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     variation: Object,
     quantity: Number,
-    orderProperties: Array
+    orderProperties: Array,
+    rebate: Number
   },
   computed: {
     itemImage: function itemImage() {
@@ -682,7 +683,8 @@ var render = function() {
                                   _vm._f("currency")(
                                     _vm._f("propertySurcharge")(
                                       _vm.variation.properties,
-                                      property.propertyId
+                                      property.propertyId,
+                                      _vm.rebate
                                     )
                                   )
                                 ) +
