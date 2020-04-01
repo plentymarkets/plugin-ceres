@@ -37,7 +37,7 @@
                 <ul class="pl-3">
                     <li v-for="property in orderProperties" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
                         <span class="d-block text-truncate">
-                            <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ variation.properties | propertySurcharge(property.propertyId) | currency }})</strong>
+                            <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ variation.properties | propertySurcharge(property.propertyId, rebate) | currency }})</strong>
                             <span>
                                 <order-property-value :property="property"></order-property-value>
                             </span>
@@ -56,7 +56,8 @@ export default {
     props: {
         variation: Object,
         quantity: Number,
-        orderProperties: Array
+        orderProperties: Array,
+        rebate: Number
     },
 
     computed: {
