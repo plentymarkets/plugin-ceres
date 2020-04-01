@@ -347,7 +347,14 @@ function _fillMissingData(item)
         {
             for (const setComponent of item.setComponents)
             {
-                setComponent.variation = oldBasketItem.setComponents.find(comp => comp.variationId === setComponent.variationId).variation;
+                const oldComp = oldBasketItem.setComponents.find(comp => comp.variationId === setComponent.variationId);
+
+                setComponent.variation = oldComp.variation;
+
+                if (isNullOrUndefined(setComponent.basketItemOrderParams))
+                {
+                    setComponent.basketItemOrderParams = oldComp.basketItemOrderParams;
+                }
             }
         }
     }
