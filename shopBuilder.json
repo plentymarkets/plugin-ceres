@@ -133,6 +133,12 @@
                 "label":"Widget.presetSingleItemDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleItemPreset"
             }
+        ],
+        "itemset": [
+            {
+                "label":"Widget.presetItemSetDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\ItemSetPreset"
+            }
         ]
     },
     "dataFieldProviders": {
