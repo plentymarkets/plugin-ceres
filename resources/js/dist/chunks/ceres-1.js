@@ -322,38 +322,29 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         this.showMissingPropertiesError();
       } else if (this.isSalable || this.isSet) {
         this.waiting = true;
-        var totalSurcharge = 0;
-        var orderParams = this.orderProperties.filter(function (orderProperty) {
-          return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(orderProperty.property.value);
-        }).map(function (orderProperty) {
-          var property = orderProperty.property;
-
-          if (property.valueType === "float" && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(property.value) && property.value.slice(-1) === App.decimalSeparator) {
-            property.value = property.value.substr(0, property.value.length - 1);
-          }
-
-          totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
-          return {
-            propertyId: property.id,
-            type: property.valueType,
-            name: property.names.name,
-            value: property.value
-          };
-        });
+        var orderParamsAndSurcharge = extractPropertiesAndSurcharge(this.orderProperties);
         var basketObject = {
           variationId: this.variationId,
           quantity: this.quantity,
-          basketItemOrderParams: orderParams,
-          totalOrderParamsMarkup: totalSurcharge
+          basketItemOrderParams: orderParamsAndSurcharge.orderParams,
+          totalOrderParamsMarkup: orderParamsAndSurcharge.totalSurcharge
         };
 
         if (this.isSet) {
           var setComponents = [];
           this.$store.state.items.setComponentIds.forEach(function (itemId) {
-            var variationId = _this.$store.state.items[itemId] && _this.$store.state.items[itemId].variation && _this.$store.state.items[itemId].variation.documents[0].data.variation.id;
+            var setComponent = _this.$store.getters["".concat(itemId, "/currentItemVariation")];
+
+            var variationId = setComponent && setComponent.variation.id; // Extract order properties and total surcharge for set components
+
+            var setComponentOrderParamsAndSurcharge = extractPropertiesAndSurcharge(setComponent.properties.filter(function (prop) {
+              return prop.property.isOderProperty;
+            }));
             setComponents.push({
               variationId: variationId,
-              quantity: 1
+              quantity: _this.$store.state.items[itemId].variationOrderQuantity,
+              basketItemOrderParams: setComponentOrderParamsAndSurcharge.orderParams,
+              totalOrderParamsMarkup: setComponentOrderParamsAndSurcharge.totalSurcharge
             });
           });
           basketObject.setComponents = setComponents;
@@ -436,6 +427,32 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     }
   }
 });
+
+function extractPropertiesAndSurcharge(orderProperties) {
+  var totalSurcharge = 0;
+  var orderParams = [];
+  orderProperties.forEach(function (orderProperty) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(orderProperty.property.value)) {
+      var property = orderProperty.property;
+
+      if (property.valueType === "float" && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(property.value) && property.value.slice(-1) === App.decimalSeparator) {
+        property.value = property.value.substr(0, property.value.length - 1);
+      }
+
+      totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
+      orderParams.push({
+        propertyId: property.id,
+        type: property.valueType,
+        name: property.names.name,
+        value: property.value
+      });
+    }
+  });
+  return {
+    orderParams: orderParams,
+    totalSurcharge: totalSurcharge
+  };
+}
 
 /***/ }),
 

@@ -70,6 +70,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     isSet: function isSet() {
       return this.currentVariation.item.itemType === "set" || App.isShopBuilder && this.currentVariation.item.itemType !== undefined;
+    },
+    isSetLoading: function isSetLoading() {
+      return this.$store.state.items.isSetLoading;
     }
   }
 });
@@ -113,7 +116,7 @@ var render = function() {
         "span",
         { attrs: { content: _vm.variationSetRebatePrice } },
         [
-          _vm.isSet && !_vm.allVariationSelected
+          _vm.isSet && (!_vm.allVariationSelected || _vm.isSetLoading)
             ? [
                 _vm._v(
                   "\n                " +

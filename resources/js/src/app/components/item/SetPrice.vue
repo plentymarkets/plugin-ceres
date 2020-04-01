@@ -8,7 +8,7 @@
 
         <span class="price h1">
             <span :content="variationSetRebatePrice">
-                <template v-if="isSet && !allVariationSelected">
+                <template v-if="isSet && (!allVariationSelected || isSetLoading)">
                     {{ $translate("Ceres::Template.dynamicSetPrice",
                         {
                             price: $options.filters.currency(variationSetRebatePrice, $ceres.activeCurrency)
@@ -70,6 +70,10 @@ export default {
         isSet() {
             return this.currentVariation.item.itemType === "set" ||
                 (App.isShopBuilder && this.currentVariation.item.itemType !== undefined);
+        },
+
+        isSetLoading() {
+            return this.$store.state.items.isSetLoading;
         }
     }
 }
