@@ -28,7 +28,14 @@ export default {
 
             const setComponents = this.$store.getters[`${itemSetId}/currentItemVariation`].setComponents;
 
-            return setComponents.find(setComponent => setComponent.itemId === this.itemId);
+            if(App.isShopBuilder)
+            {
+                return setComponents[0];
+            }
+            else
+            {
+                return setComponents.find(setComponent => setComponent.itemId === this.itemId);
+            }
         },
 
         currentVariationId()
