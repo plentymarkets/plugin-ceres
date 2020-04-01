@@ -345,18 +345,23 @@ class ItemSetPreset implements ContentPreset
     {
         $grid = $this->setComponentThreeColumnWidget->createChild('third', 'Ceres::TwoColumnWidget')
             ->withSetting('layout', 'threeToNine')
-            ->withSetting('layoutTablet', 'oneToTwo')
+            ->withSetting('layoutTablet', 'stackedTablet')
             ->withSetting('layoutMobile', 'stackedMobile');
 
         $grid->createChild('first', 'Ceres::QuantityInputWidget')
-            ->withSetting('appearance', 'none');
+            ->withSetting('appearance', 'none')
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.bottom.value', 0)
+            ->withSetting('spacing.margin.bottom.unit', null);
 
         $grid->createChild('second', 'Ceres::ItemPriceWidget')
             ->withSetting('showCrossPrice', false)
             ->withSetting('appearance', 'none')
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 2)
-            ->withSetting('spacing.margin.top.unit', null);
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('spacing.margin.bottom.value', 0)
+            ->withSetting('spacing.margin.bottom.unit', null);
     }
 
     private function createSetComponentAvailabilityWidget()
@@ -365,7 +370,10 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('customClass','')
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 3)
-            ->withSetting('spacing.margin.top.unit', null);
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.bottom.value', 0)
+            ->withSetting('spacing.margin.bottom.unit', null);
     }
 
     private function createSetComponentWishList()
