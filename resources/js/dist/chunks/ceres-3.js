@@ -464,6 +464,9 @@ __webpack_require__.r(__webpack_exports__);
     variation: function variation() {
       return this.$store.getters.getOrderItemVariation(this.orderItem.itemVariationId);
     },
+    variations: function variations() {
+      return this.$store.state.orderReturn.orderData.variations;
+    },
     amount: function amount() {
       return this.orderItem.amounts.find(function (amount) {
         return !amount.isSystemCurrency;
@@ -527,11 +530,10 @@ __webpack_require__.r(__webpack_exports__);
       default: function _default() {
         return [];
       }
-    }
-  },
-  methods: {
-    getVariation: function getVariation(variationId) {
-      return this.$store.getters.getOrderItemVariation(variationId);
+    },
+    variations: {
+      type: Object,
+      default: function _default() {}
     }
   }
 });
@@ -1038,9 +1040,14 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("order-return-set-component-list", {
-                  attrs: { "set-components": _vm.orderItem.setComponents }
-                }),
+                _vm.orderItem.setComponents
+                  ? _c("order-return-set-component-list", {
+                      attrs: {
+                        "set-components": _vm.orderItem.setComponents,
+                        variations: _vm.variations
+                      }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -1322,7 +1329,7 @@ var render = function() {
             return [
               _c("set-component-item", {
                 attrs: {
-                  variation: _vm.getVariation(setComponent.itemVariationId),
+                  variation: _vm.variations[setComponent.itemVariationId],
                   quantity: setComponent.quantity,
                   "order-properties": setComponent.orderProperties
                 }

@@ -25,9 +25,9 @@
                         <div class="col-md-4">{{ trans("Ceres::Template.orderHistoryStatus") }}</div>
                     </div>
                 </div>
-                <div class="col-md-2"><template v-if="showTrackingColumn">{{ trans("Ceres::Template.orderHistoryTracking") }}</template></div>
+                <div class="col-md-2">{{ trans("Ceres::Template.orderHistoryFurtherActions") }}</div>
             </div>
-            
+
             <div class="order-item border-top">
                 <order-history-list-item
                     v-for="order in orderList.entries"

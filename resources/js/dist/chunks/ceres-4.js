@@ -1047,9 +1047,11 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("basket-set-component-list", {
-                attrs: { "set-components": _vm.basketItem.setComponents }
-              }),
+              _vm.basketItem.setComponents
+                ? _c("basket-set-component-list", {
+                    attrs: { "set-components": _vm.basketItem.setComponents }
+                  })
+                : _vm._e(),
               _vm._v(" "),
               _vm.basketItem.basketItemOrderParams &&
               _vm.basketItem.basketItemOrderParams.length
