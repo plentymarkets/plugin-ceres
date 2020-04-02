@@ -21,6 +21,11 @@
     max-width: 1200px;
 }
 
+// Owl-Navigation above .stretched-link
+.owl-dots {
+    z-index: 2;
+}
+
 .lozad {
     display: block;
     min-height: 1px;
