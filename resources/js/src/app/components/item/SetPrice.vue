@@ -21,7 +21,7 @@
                 </template>
             </span>
             <sup>*</sup>
-            <span :content="$ceres.activeCurrency"></span>
+            <span :content="currentVariation.prices.set.currency"></span>
         </span>
     </div>
 </template>
