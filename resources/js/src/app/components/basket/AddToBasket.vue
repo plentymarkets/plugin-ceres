@@ -257,6 +257,11 @@ export default {
                 && this.$store.state.items[this.itemId].variationSelect.variations.some(variation => variation.isSalable);
         },
 
+        allVariationSelected()
+        {
+            return this.$store.getters["itemSetAllVariationSelected"];
+        },
+
         ...mapState({
             basketItems: state => state.basket.items,
             isBasketLoading: state => state.basket.isBasketLoading
