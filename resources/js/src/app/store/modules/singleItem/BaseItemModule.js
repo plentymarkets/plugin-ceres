@@ -7,6 +7,7 @@ const state =
         isItemSet: false,
         itemSetId: 0,
         isSetLoading: false,
+        isAddToBasketLoading: false,
         previewItemId: 0,
         setComponentIds: []
     };
@@ -16,6 +17,11 @@ const mutations =
         setIsSetLoading(state, isSetLoading)
         {
             state.isSetLoading = isSetLoading;
+        },
+
+        setIsAddToBasketLoading(state, isAddToBasketLoading)
+        {
+            state.isAddToBasketLoading = isAddToBasketLoading;
         },
 
         setIsItemSet(state, isItemSet)

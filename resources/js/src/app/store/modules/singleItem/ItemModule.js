@@ -112,12 +112,15 @@ const actions =
                         keepVariationId = false;
                     }
 
+                    commit("setIsAddToBasketLoading", true);
+
                     ApiService
                         .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem", setPriceOnly: rootState.items.isItemSet })
                         .done(response =>
                         {
                             // store received variation data for later reuse
                             commit("setVariation", response);
+                            commit("setIsAddToBasketLoading", false);
 
                             if (!rootState.items.isItemSet)
                             {
