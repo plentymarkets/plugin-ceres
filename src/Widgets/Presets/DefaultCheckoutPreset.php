@@ -147,6 +147,7 @@ class DefaultCheckoutPreset implements ContentPreset
     {
         $bgContainer = $twoColumnWidget->createChild('second', 'Ceres::BackgroundWidget');
         $this->setBackgroundWidgetSettings($bgContainer)
+            ->withSetting('customClass', 'h-100')
             ->withSetting("spacing.margin.top.value", 0)
             ->withSetting("spacing.margin.bottom.value", 0);
 
