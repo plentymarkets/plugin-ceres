@@ -85,8 +85,7 @@
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationProperties") }}</strong>
                             </div>
 
-                            {{ Twig.set("uid", "uid()") }}
-                            <div id="collapse-{{ Twig.print('uid') }}" class="collapse row small pl-4{% if isPreview %} show{% endif %}">
+                            <div id="collapseOrderProperties" class="collapse row small pl-4{% if isPreview %} show{% endif %}">
                                 {{ Twig.for("property", "item.orderProperties") }}
                                 <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }}</strong>
                                     {{ Twig.if("property.type == 'file'") }}
@@ -126,9 +125,9 @@
                             <label
                                 class="btn-collapse mb-0 collapsed"
                                 data-toggle="collapse"
-                                data-target="#collapse-{{ Twig.print('uid') }}"
+                                data-target="#collapseOrderProperties"
                                 aria-expanded="false"
-                                aria-controls="collapse-{{ Twig.print('uid') }}"
+                                aria-controls="collapseOrderProperties"
                                 data-show-more="{{ trans("Ceres::Template.basketShowMore") }}"
                                 data-show-less="{{ trans("Ceres::Template.basketShowLess") }}">
                                 <i class="fa fa-caret-down fa-lg"></i>
