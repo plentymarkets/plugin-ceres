@@ -25,7 +25,7 @@
                 </div>
 
                 <button
-                        v-if="(!isVariationSelected || !isSalable) && !isSet"
+                        v-if="!allVariationsSelected || !isSalable"
                         class="btn btn-block btn-primary btn-appearance disabled"
                         v-tooltip
                         data-toggle="tooltip"
@@ -243,13 +243,6 @@ export default {
             return this.$store.getters[`${this.itemId}/variationMissingProperties`];
         },
 
-        isVariationSelected()
-        {
-            return this.$store.state.items[this.itemId]
-                && this.$store.state.items[this.itemId].variationSelect
-                && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
-        },
-
         hasAvailableVariations()
         {
             return this.$store.state.items[this.itemId]
@@ -257,15 +250,19 @@ export default {
                 && this.$store.state.items[this.itemId].variationSelect.variations.some(variation => variation.isSalable);
         },
 
-        allVariationSelected()
+        allVariationsSelected()
         {
             return this.$store.getters["itemSetAllVariationSelected"];
         },
 
+        isLoading()
+        {
+            return state.items.isAddToBasketLoading || state.items.isSetLoading;
+        },
+
         ...mapState({
             basketItems: state => state.basket.items,
-            isBasketLoading: state => state.basket.isBasketLoading,
-            isLoading: state => state.items.isAddToBasketLoading
+            isBasketLoading: state => state.basket.isBasketLoading
         })
     },
 
