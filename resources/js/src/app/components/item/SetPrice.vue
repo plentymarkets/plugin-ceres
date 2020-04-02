@@ -2,27 +2,22 @@
     <div class="has-crossprice">
         <div class="crossprice" v-if="showCrossPrice && isSet && this.currentVariation.item.rebate > 0">
             <del class="text-muted small text-appearance">
-                {{ variationTotalPrice | currency | itemCrossPrice }}
+                {{ variationTotalPrice | currency(currentVariation.prices.set.currency) | itemCrossPrice }}
             </del>
         </div>
 
         <span class="price h1">
-            <span :content="variationSetRebatePrice">
-                <template v-if="isSet && (!allVariationSelected || isSetLoading)">
+            <span :content="dynamicPrice">
+                <template v-if="!isVariationSelected || isSetLoading">
                     {{ $translate("Ceres::Template.dynamicSetPrice",
                         {
-                            price: $options.filters.currency(variationSetRebatePrice, $ceres.activeCurrency)
+                            price: $options.filters.currency(dynamicPrice, currentVariation.prices.set.currency)
                         }
                     ) }}
                 </template>
 
                 <template v-else>
-                    <template v-if="!isSet">
-                        {{ variationTotalPrice | currency(currentVariation.prices.set.currency) }}
-                    </template>
-                    <template v-else>
-                        {{ variationSetRebatePrice | currency($ceres.activeCurrency) }}
-                    </template>
+                    {{ dynamicPrice | currency(currentVariation.prices.set.currency) }}
                 </template>
             </span>
             <sup>*</sup>
@@ -63,8 +58,15 @@ export default {
             return this.variationTotalPrice * (1 - (this.currentVariation.item.rebate / 100));
         },
 
-        allVariationSelected() {
-            return this.$store.getters["itemSetAllVariationSelected"];
+        isVariationSelected() {
+            if(this.isSet)
+            {
+                return this.$store.getters["itemSetAllVariationSelected"];
+            }
+            else
+            {
+                return this.$store.state.items[this.itemId].variationSelect.isVariationSelected
+            }
         },
 
         isSet() {
@@ -74,6 +76,10 @@ export default {
 
         isSetLoading() {
             return this.$store.state.items.isSetLoading;
+        },
+
+        dynamicPrice() {
+            return this.isSet ? this.variationSetRebatePrice : this.variationTotalPrice;
         }
     }
 }
