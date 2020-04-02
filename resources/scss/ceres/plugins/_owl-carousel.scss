@@ -45,10 +45,6 @@
         }
     }
 
-    .owl-dots {
-        z-index: 2;
-    }
-
     .owl-single-item-control {
         font-size: 3rem;
         color: $gray-700;
@@ -61,6 +57,7 @@
     }
 
     .owl-dots {
+        z-index: 2;
         display: block;
     }
 }
