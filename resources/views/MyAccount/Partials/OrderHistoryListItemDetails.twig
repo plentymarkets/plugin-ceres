@@ -198,9 +198,10 @@
                     current-template="tpl.my-account"
                     :current-payment-method-name="{{ orderData.paymentMethodName | json_encode }}">
                 </change-payment-method>
-                {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
             </template>
-            
+
+            {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
+
             {% if orderData.isReturnable %}
                 <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="{{ urls.returns(orderData.order.id) }}">
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
