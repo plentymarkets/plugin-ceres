@@ -7,7 +7,7 @@ const state =
         isItemSet: false,
         itemSetId: 0,
         isSetLoading: false,
-        isAddToBasketLoading: false,
+        isAddToBasketLoading: 0,
         previewItemId: 0,
         setComponentIds: []
     };

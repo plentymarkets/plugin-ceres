@@ -257,7 +257,7 @@ export default {
 
         isLoading()
         {
-            return this.$store.state.items.isAddToBasketLoading || this.$store.state.items.isSetLoading;
+            return this.$store.state.items.isAddToBasketLoading === this.variationId || this.$store.state.items.isSetLoading;
         },
 
         ...mapState({
@@ -290,7 +290,7 @@ export default {
             }
             else if (this.isSalable || this.isSet)
             {
-                this.$store.commit("setIsAddToBasketLoading", true);
+                this.$store.commit("setIsAddToBasketLoading", this.variationId);
 
                 const orderParamsAndSurcharge = extractPropertiesAndSurcharge(this.orderProperties);
 
@@ -330,11 +330,11 @@ export default {
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
-                        this.$store.commit("setIsAddToBasketLoading", false);
+                        this.$store.commit("setIsAddToBasketLoading", 0);
                     },
                     error =>
                     {
-                        this.$store.commit("setIsAddToBasketLoading", false);
+                        this.$store.commit("setIsAddToBasketLoading", 0);
 
                         if (error.data)
                         {
