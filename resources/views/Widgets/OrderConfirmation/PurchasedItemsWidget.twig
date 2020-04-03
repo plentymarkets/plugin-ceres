@@ -274,6 +274,32 @@
                     </div>
                 </article>
             {{ Twig.endif() }}
+
+            {{ Twig.if("item.typeId == 1") }} <!-- muss noch auf type coupon geändert werden -->
+            {# <lazy-load component="edit-coupon-overlay"> #}
+                <edit-coupon-overlay :order-item="{{ Twig.print("item | json_encode") }}"></edit-coupon-overlay>
+                
+                <div class="row">
+                {{ Twig.if("true") }} <!-- Nur anzeigen wenn Coupon noch nicht generiert -->
+                    <div class="col-12 col-sm-6 mb-2">
+                        <button type="button" class="btn btn-primary btn-appearance btn-block" data-toggle="modal" data-target="#edit-coupon-overlay">
+                            <span>{{ Twig.trans("Ceres::Template.orderConfirmationCouponEdit") }}</span>
+                            <i class="fa fa-gift default-float" aria-hidden="true"></i> 
+                        </button>
+                    </div>
+                {{ Twig.endif() }}
+                {{ Twig.if("true") }} <!-- Nur anzeigen wenn Coupon noch nicht generiert -->
+                    <div class="col-12 col-sm-6 mb-2">
+                        <button type="submit" class="btn btn-success btn-block">
+                            <span>{{ Twig.trans("Ceres::Template.orderConfirmationCouponComplete") }}</span>
+                            <i class="fa fa-check default-float" aria-hidden="true"></i> 
+                        </button>
+                    </div>
+                {{ Twig.endif() }}
+                </div>
+            {# </lazy-load> #}
+            {{ Twig.endif() }}
+
         {{ Twig.endfor() }}
     </div>
 </div>

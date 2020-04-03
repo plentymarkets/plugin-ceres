@@ -13,11 +13,6 @@
 
 {% block PageBody %}
 
-
-    <lazy-load component="edit-coupon-overlay">
-        <edit-coupon-overlay></edit-coupon-overlay>
-    </lazy-load>
-
     {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
     {% set hasShopBuilderContent = false %}
 
