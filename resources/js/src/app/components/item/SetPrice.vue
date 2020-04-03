@@ -9,7 +9,7 @@
         <span class="price h1">
             <span :content="dynamicPrice">
                 <template v-if="!isVariationSelected || isSetLoading">
-                    {{ $translate("Ceres::Template.dynamicSetPrice",
+                    {{ $translate("Ceres::Template." + dynamicTranslationKey,
                         {
                             price: $options.filters.currency(dynamicPrice, currentVariation.prices.set.currency)
                         }
@@ -80,6 +80,11 @@ export default {
 
         dynamicPrice() {
             return this.isSet ? this.variationSetRebatePrice : this.variationTotalPrice;
+        },
+
+        dynamicTranslationKey()
+        {
+            return this.isSet ? "dynamicSetPrice" : "dynamicSetComponentPrice";
         }
     }
 }
