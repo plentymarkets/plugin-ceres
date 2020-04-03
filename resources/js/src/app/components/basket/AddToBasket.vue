@@ -51,7 +51,7 @@
                         v-tooltip
                         data-toggle="tooltip"
                         data-placement="top"
-                        :title="'Ceres::Template.singleItemQuantityMax' | translate({max: item.variation.maximumOrderQuantity})"
+                        :title="'Ceres::Template.singleItemQuantityMax' | translate({ max: maximumQuantity })"
                         :class="buttonClasses"
                         :style="paddingInlineStyles">
                     <icon icon="shopping-cart" :waiting="waiting"></icon>
