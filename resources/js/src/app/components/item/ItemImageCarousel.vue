@@ -2,7 +2,7 @@
     <div itemscope itemtype="http://schema.org/Thing">
         <div class="single-carousel owl-carousel owl-theme owl-single-item mt-0" ref="single">
             <div v-for="image in singleImages" class="prop-1-1">
-                <a :href="image.url" data-lightbox="single-big-image-gallery">
+                <a :href="image.url" :data-lightbox="'single-item-image' + _uid">
                     <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)">
                 </a>
             </div>
@@ -118,17 +118,20 @@ export default {
             deep: true
         }
     },
-    created()
-    {
-        this.loadLightbox();
-    },
 
     mounted()
     {
         this.$nextTick(() =>
         {
-            this.initCarousel();
-            this.initThumbCarousel();
+            this.loadLightbox().then(() =>
+                {
+                    this.initCarousel();
+                    this.initThumbCarousel();
+                })
+                .catch(event =>
+                {
+                    console.log("error while loading lightbox", event);
+                });
         });
     },
 
@@ -307,14 +310,28 @@ export default {
 
         loadLightbox()
         {
-            const scriptSource = this.pluginPath + "/js/dist/lightbox.min.js";
-            const script = document.createElement("script");
-
-            script.type = "text/javascript";
-            script.src = scriptSource;
-            script.addEventListener("load", () => this.reInitialize(), false);
-            script.addEventListener("error", () => console.warn("lightbox could not be initialized"), false);
-            document.body.appendChild(script);
+            return new Promise((resolve, reject) =>
+            {
+                const script = document.querySelector("script#lightboxscript");
+    
+                if (!isNullOrUndefined(script))
+                {
+                    resolve();
+                }
+                else
+                {
+                    const script = document.createElement("script");
+    
+                    script.type = "text/javascript";
+                    script.id = "lightboxscript";
+                    script.src = `${ this.pluginPath }/js/dist/lightbox.min.js`;
+    
+                    script.addEventListener("load", () => resolve(), false);
+                    script.addEventListener("error", event => reject(event), false);
+    
+                    document.body.appendChild(script);
+                }
+            });
         }
     }
 }
