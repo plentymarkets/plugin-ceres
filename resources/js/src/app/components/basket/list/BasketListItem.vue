@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="price-box text-right ml-2 mt-1">
-                            <div class="item-total-price font-weight-bold text-nowrap">{{ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
+                            <div class="item-total-price font-weight-bold text-nowrap">{{ basketItem.quantity * unitPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
 
                             <button class="btn btn-sm text-danger p-0" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
                                 {{ $translate("Ceres::Template.basketDelete") }}
@@ -242,21 +242,16 @@ export default {
             return sum;
         },
 
-        itemTotalPrice()
+        unitPrice()
         {
             let setComponentsParamSurcharge = 0;
             if(isDefined(this.basketItem.setComponents))
             {
                 setComponentsParamSurcharge = this.basketItem.setComponents
-                    .map(component => component.attributeTotalMarkup)
+                    .map(component => component.quantity * component.attributeTotalMarkup)
                     .reduce((sum, i) => sum + i, 0);
             }
-            return this.basketItem.quantity * (this.basketItem.price + setComponentsParamSurcharge);
-        },
-
-        unitPrice()
-        {
-            return this.basketItem.price;
+            return this.basketItem.price + setComponentsParamSurcharge;
         },
 
         basePrice()
