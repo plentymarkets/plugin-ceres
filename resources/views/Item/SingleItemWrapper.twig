@@ -110,6 +110,7 @@
                         :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"
                         :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
                         :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"
+                        :item-id="{{ item.documents[0].data.item.id }}"
                         v-slot="slotProps">
                         {{ shopBuilderTemplate | raw }}
                     </single-item>

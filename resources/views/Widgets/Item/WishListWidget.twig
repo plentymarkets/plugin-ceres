@@ -15,10 +15,6 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
     <div class="widget-inner">
-        <wish-list :item-details-data="{{ itemDetailsData | json_encode }}">
-            <template #loading-animation>
-                {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-            </template>
-        </wish-list>
+        <wish-list :item-details-data="{{ itemDetailsData | json_encode }}"></wish-list>
     </div>
 </div>

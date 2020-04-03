@@ -77,10 +77,7 @@
 
         <div class="collapse" :id="'collapse_'+ _uid" :data-parent="'#accordion_'+ _uid">
             <div ref="orderDetailsContainer" class="container-main">
-                <div class="loading row border border-top-0">
-                    {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-                </div>
-
+                <loading-animation class="row border border-top-0"></loading-animation>
                 {# lazy load: Ceres::MyAccount.Partials.OrderHistoryListItemDetails #}
             </div>
         </div>

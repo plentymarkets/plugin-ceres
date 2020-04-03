@@ -54,44 +54,12 @@
 
                             <graduated-prices></graduated-prices>
 
-                            <div class="crossprice" v-if="isRecommendedPriceActive && currentVariation.prices.rrp && currentVariation.prices.rrp.unitPrice.value > 0 && currentVariation.prices.rrp.unitPrice.value > currentVariation.prices.default.unitPrice.value">
-                                <del class="text-muted small">
-                                    {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
-                                </del>
-                            </div>
-
-                            <span class="price h1">
-                                <span v-if="addPleaseSelectOption && $store.state.variationSelect.isVariationSelected === false && ($store.state.item.pleaseSelectVariationId === currentVariation.variation.id || $store.state.item.pleaseSelectVariationId === 0)" :content="currentVariation.prices.default.price.value">
-                                    {{ $translate("Ceres::Template.dynamicVariationPrice", {price: variationTotalPrice | currency(currentVariation.prices.default.currency)}) }}
-                                </span>
-                                <span v-else :content="currentVariation.prices.default.price.value">
-                                    {{ variationTotalPrice | currency(currentVariation.prices.default.currency) }}
-                                </span>
-                                <sup>*</sup>
-                                <span :content="currentVariation.prices.default.currency"></span>
-                            </span>
-
-                            <div class="base-price text-muted my-3" v-if="currentVariation.unit">
-                                <div>
-                                    {{ $translate("Ceres::Template.singleItemContent") }}
-                                    <span>{{ currentVariation.unit.content | numberFormat }} </span>
-                                    <span>{{ currentVariation.unit.names.name }}</span>
-                                </div>
-                                <div v-if="currentVariation.variation.mayShowUnitPrice">
-                                    {{ $translate("Ceres::Template.singleItemUnitPrice") }}
-                                    <span class="base-price-value">
-                                        {{ variationGraduatedPrice.basePrice | specialOffer(currentVariation.prices, "basePrice") }}
-                                    </span>
-                                </div>
-                            </div>
+                            <item-price :show-cross-price="isRecommendedPriceActive"></item-price>
 
                             <slot name="after-price"></slot>
 
-                            <span v-if="currentVariation.variation.availability" :class="'availability badge availability-' + currentVariation.variation.availability.id">
-                                <span>
-                                    {{ currentVariation.variation.availability.names.name }}
-                                </span>
-                            </span>
+                            <item-availability></item-availability>
+
                             <div class="my-3">
                                 <div class="w-100">
                                     <slot name="before-add-to-basket"></slot>
@@ -112,7 +80,6 @@
                                             :use-large-scale="false"
                                             :show-quantity="true"
                                             :item-url="currentVariation | itemURL"
-                                            :missing-order-properties="variationMissingProperties"
                                             :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
                                             :has-price="currentVariation | hasItemDefaultPrice"
                                         >
@@ -193,7 +160,7 @@
 
                                             <tr v-if="itemConfig.includes('item.age_rating') || itemConfig.includes('all')">
                                                 <td>{{ $translate("Ceres::Template.singleItemAge") }}</td>
-                                                <td>{{ ageRestriction }}</td>
+                                                <td>{{ currentVariation.item.ageRestriction | ageRestriction }}</td>
                                             </tr>
 
                                             <tr v-if="currentVariation.variation.externalId !== '' && (itemConfig.includes('item.external_id') || itemConfig.includes('all'))">
@@ -267,9 +234,11 @@
 <script>
 import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
-import { mapState, mapGetters } from "vuex";
 
 export default {
+
+    name: "single-item",
+
     props: {
         pleaseSelectOptionVariationId: {
             type: Number,
@@ -286,6 +255,17 @@ export default {
         isWishListEnabled: {
             type: Boolean,
             default: false
+        },
+        itemId: {
+            type: Number,
+            required: true
+        }
+    },
+
+    provide()
+    {
+        return {
+            itemId: this.$props.itemId
         }
     },
 
@@ -329,62 +309,40 @@ export default {
                 && !!this.currentVariation.texts.technicalData.length;
         },
 
-        addPleaseSelectOption()
+        variationGroupedProperties()
         {
-            return App.config.item.showPleaseSelect;
+            return this.$store.getters[`${this.itemId}/variationGroupedProperties`];
         },
 
-        ageRestriction()
+        variationMissingProperties()
         {
-            let translationKey = "";
-            const age = this.currentVariation.item.ageRestriction;
-
-            if(age === 0)
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestrictionNone";
-            }
-            else if(age > 0 && age <= 18)
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestriction";
-            }
-            else if(age === 50)
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestrictionNotFlagged";
-            }
-            else if(age === 88)
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestrictionNotRequired";
-            }
-            else
-            {
-                translationKey = "Ceres::Template.singleItemAgeRestrictionUnknown";
-            }
-
-            return this.$translate(translationKey, {"age": age })
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
         },
 
-        ...mapState({
-            currentVariation: state => state.item.variation.documents[0].data,
-            isVariationSelected: state => state.variationSelect.isVariationSelected,
-            attributes: state => state.variationSelect.attributes,
-            units: state => state.variationSelect.units
-        }),
+        currentVariation() {
+            return get(this.$store.state, `items[${this.itemId}].variation.documents[0].data`);
+        },
 
-        ...mapGetters([
-            "variationTotalPrice",
-            "variationMissingProperties",
-            "variationGroupedProperties",
-            "variationGraduatedPrice"
-        ])
+        isVariationSelected() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.isVariationSelected`);
+        },
+
+        attributes() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.attributes`);
+        },
+
+        units() {
+            return get(this.$store.state, `items[${this.itemId}].variationSelect.units`);
+        }
     },
 
     created()
     {
-        this.$store.commit("setVariation", this.itemData);
-        this.$store.commit("setPleaseSelectVariationId", this.pleaseSelectOptionVariationId);
+        this.$store.dispatch("initVariation", this.itemData);
+        this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
-        this.$store.dispatch("setVariationSelect", {
+        this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
             attributes:         this.attributesData,
             variations:         this.variations,
             initialVariationId: this.currentVariation.variation.id,
