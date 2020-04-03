@@ -257,7 +257,7 @@ export default {
 
         isLoading()
         {
-            return state.items.isAddToBasketLoading || state.items.isSetLoading;
+            return this.$store.state.items.isAddToBasketLoading || this.$store.state.items.isSetLoading;
         },
 
         ...mapState({
