@@ -43,7 +43,7 @@
                             <div class="small" v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
                                 <div>
                                     <strong>{{ $translate("Ceres::Template.itemInput") }} {{ basketItem | inputUnit(true)}}: </strong>
-                                    {{ basketItem | inputUnit}}
+                                    {{ basketItem | inputUnit }}
                                 </div>
                             </div>
 
@@ -54,18 +54,18 @@
                                 </div>
                             </div>
 
-                                <div class="text-muted small">
-                                    <template v-for="propertyGroup in basketItem.variation.data.variationProperties">
-                                        <div v-for="property in propertyGroup.properties">
-                                            <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
-                                            <span>{{ property.names.name }}</span>
-                                            <span v-if="property.cast == 'file'">
-                                                <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
-                                            </span>
-                                            <span v-else v-html="property.values.value"></span>
-                                        </div>
-                                    </template>
-                                </div>
+                            <div class="text-muted small">
+                                <template v-for="propertyGroup in basketItem.variation.data.variationProperties">
+                                    <div v-for="property in propertyGroup.properties">
+                                        <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
+                                        <span>{{ property.names.name }}</span>
+                                        <span v-if="property.cast == 'file'">
+                                            <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
+                                        </span>
+                                        <span v-else v-html="property.values.value"></span>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                     </div>
 
@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="price-box text-right ml-2 mt-1">
-                            <div class="item-total-price font-weight-bold text-nowrap">{{ itemTotalPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
+                            <div class="item-total-price font-weight-bold text-nowrap">{{ basketItem.quantity * unitPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
 
                             <button class="btn btn-sm text-danger p-0" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
                                 {{ $translate("Ceres::Template.basketDelete") }}
@@ -91,6 +91,8 @@
                         </div>
                     </div>
                 </div>
+
+                <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
 
                 <div class="small" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
                     <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
@@ -122,7 +124,7 @@
                     </template>
 
                     <template v-if="isDataFieldVisible('basket.item.availability')">
-                        <div v-if="basketItem.variation.data.variation.availability.names.name">
+                        <div v-if="basketItem.variation.data.variation.availability && basketItem.variation.data.variation.availability.names.name">
                             <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
                             <span>{{ basketItem.variation.data.variation.availability.names.name }}</span>
                         </div>
@@ -154,12 +156,18 @@
 <script>
 import ExceptionMap from "../../../exceptions/ExceptionMap";
 import TranslationService from "../../../services/TranslationService";
-import { isNullOrUndefined } from "../../../helper/utils";
+import {isDefined, isNullOrUndefined} from "../../../helper/utils";
 import { mapState } from "vuex";
 
 const NotificationService = require("../../../services/NotificationService");
 
+import BasketSetComponentList from "./BasketSetComponentList.vue";
+
 export default {
+    components:
+    {
+        BasketSetComponentList
+    },
     props:
     {
         template:
@@ -234,14 +242,16 @@ export default {
             return sum;
         },
 
-        itemTotalPrice()
-        {
-            return this.basketItem.quantity * this.basketItem.price;
-        },
-
         unitPrice()
         {
-            return this.basketItem.price;
+            let setComponentsParamSurcharge = 0;
+            if(isDefined(this.basketItem.setComponents))
+            {
+                setComponentsParamSurcharge = this.basketItem.setComponents
+                    .map(component => component.quantity * component.attributeTotalMarkup)
+                    .reduce((sum, i) => sum + i, 0);
+            }
+            return this.basketItem.price + setComponentsParamSurcharge;
         },
 
         basePrice()

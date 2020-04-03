@@ -72,9 +72,7 @@
                 </li>
             </ul>
 
-            <div class="loading">
-                <slot name="loading-animation"></slot>
-            </div>
+            <loading-animation></loading-animation>
         </template>
     </div>
 </template>

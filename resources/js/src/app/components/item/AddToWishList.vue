@@ -1,5 +1,5 @@
 <template>
-    <a class="btn btn-link btn-sm text-muted" 
+    <a class="btn btn-link btn-sm text-muted"
         @click.prevent="switchState()"
         data-toggle="tooltip"
         data-placement="top"
@@ -17,8 +17,17 @@ import { mapState } from "vuex";
 const NotificationService = require("../../services/NotificationService");
 
 export default {
+
+    name: "add-to-wish-list",
+
     props: {
         variationId: Number
+    },
+
+    inject: {
+        itemId: {
+            default: null
+        }
     },
 
     data()
@@ -40,18 +49,19 @@ export default {
             return !isNullOrUndefined(this.variationId) ? this.variationId : this.currentVariationVariationId;
         },
 
-        ...mapState({
-            currentVariationVariationId(state)
+        currentVariationVariationId()
+        {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+
+            if (isNullOrUndefined(currentVariation))
             {
-                const currentVariation = state.item.variation && state.item.variation.documents && state.item.variation.documents[0].data;
+                return null;
+            }
 
-                if (isNullOrUndefined(currentVariation))
-                {
-                    return null;
-                }
+            return currentVariation && currentVariation.variation && currentVariation.variation.id;
+        },
 
-                return currentVariation && currentVariation.variation && currentVariation.variation.id;
-            },
+        ...mapState({
             wishListIds: state => state.wishList.wishListIds
         })
     },

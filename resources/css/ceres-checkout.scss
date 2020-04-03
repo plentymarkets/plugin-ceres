@@ -10788,6 +10788,12 @@ textarea.no-resize {
             transform: translateX(100%);
     @include transition(all .3s ease-in-out);
 
+    @include media-breakpoint-up(md) {
+        .item-list {
+            min-height: 200px;
+        }
+    }
+
     @include media-breakpoint-up(lg) {
         left: auto;
         width: $aside-columns-width;
@@ -11189,7 +11195,11 @@ textarea.no-resize {
         }
     }
 
+    &.qty-set {
+        width: auto;
+    }
 }
+
 .qty-btn-container {
     width: $qty-box-btn-width;
     @include border-radius(0 $border-radius $border-radius 0);
@@ -11199,10 +11209,11 @@ textarea.no-resize {
         border: 1px solid $qty-box-border;
         -webkit-box-shadow: none;
                 box-shadow: none;
-        @include border-radius(0 $border-radius $border-radius 0);
+        @include border-radius(0 $border-radius 0 0);
 
         + .qty-btn {
             border-top: 0;
+            @include border-radius(0 0 $border-radius 0);
         }
 
         &.disabled {
@@ -11750,6 +11761,12 @@ html.crios {
     }
 }
 
+.set-data {
+    .image-container {
+        width: 55px;
+    }
+}
+
 .single,
 .page-singleitem {
     .list-item-carousel {
@@ -12168,26 +12185,11 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 }
 
 .loading {
-    & .loading-animation-frame {
-        display: block;
-    }
-}
-
-.loading-animation-frame {
-    position: relative;
-    z-index: 1000;
-    display: none;
-    width: 100%;
     min-height: 200px;
-    padding-top: 50px;
 }
 
 .loading-animation {
-    width: 150px;
     height: 120px;
-    margin: auto;
-    font-size: 15px;
-    text-align: center;
 }
 
 .loading-animation > div {
@@ -14716,7 +14718,7 @@ header .widget {
         .item {
             img {
                 width: 80px;
-                height: 80px;
+                max-height: 80px;
                 vertical-align: middle;
                 -o-object-fit: contain;
                    object-fit: contain;

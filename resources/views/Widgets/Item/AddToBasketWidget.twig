@@ -24,20 +24,12 @@
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", Twig.var("item.documents[0].data")])) }}
 
     <intersect>
-        <div class="w-100" v-if="$store.state.item.variation.documents">
-
-            {{ AddToBasket.printVueComponent(
-                "$store.state.item.variation.documents[0].data",
-                false,
-                true,
-                {
-                    ":missing-order-properties":"$store.getters.variationMissingProperties",
-                    ":has-price": "$store.state.item.variation.documents[0].data | hasItemDefaultPrice",
-                    "button-size": buttonSize,
-                    "padding-classes": spacingPadding,
-                    "padding-inline-styles": inlinePadding
-                }
-            ) }}
+        <div class="w-100">
+            <single-add-to-basket
+                    button-size="{{ buttonSize }}"
+                    padding-classes="{{ spacingPadding }}"
+                    padding-inline-styles="{{ inlinePadding }}">
+            </single-add-to-basket>
         </div>
         <template #loading>
             <div class="w-100 invisible">

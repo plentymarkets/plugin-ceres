@@ -1,11 +1,12 @@
-import { isNullOrUndefined } from "../../helper/utils";
-import { setUrlByItem } from "../../services/UrlService";
+import { isNullOrUndefined } from "../../../helper/utils";
+import { setUrlByItem } from "../../../services/UrlService";
 import Vue from "vue";
 
-const ApiService = require("../../services/ApiService");
+const ApiService = require("../../../services/ApiService");
 
-const state =
-    {
+const state = () =>
+{
+    return {
         variation: {},
         variationCache: {},
         variationMarkInvalidProperties: false,
@@ -13,6 +14,7 @@ const state =
         initialVariationId: 0,
         pleaseSelectVariationId: 0
     };
+};
 
 const mutations =
     {
@@ -30,8 +32,6 @@ const mutations =
             {
                 state.initialVariationId = variation.documents[0].id;
             }
-
-
         },
 
         setPleaseSelectVariationId(state, variationId)
@@ -83,7 +83,7 @@ const mutations =
 
 const actions =
     {
-        loadVariation({ state, commit }, variationId)
+        loadVariation({ state, commit, getters, rootState, rootGetters }, variationId)
         {
             return new Promise(resolve =>
             {
@@ -95,7 +95,11 @@ const actions =
                 {
                     commit("setVariation", variation);
 
-                    setUrlByItem(variation.documents[0].data, variationId > 0);
+                    if (!rootState.items.isItemSet)
+                    {
+                        setUrlByItem(variation.documents[0].data, variationId > 0);
+                    }
+
                     resolve(variation);
                 }
                 else
@@ -108,14 +112,23 @@ const actions =
                         keepVariationId = false;
                     }
 
+                    const addToBasketLoadingId = rootState.items.isItemSet ? rootGetters[`${ rootState.items.itemSetId }/currentItemVariation`].variation.id : getters.currentItemVariation.variation.id;
+
+                    commit("setIsAddToBasketLoading", addToBasketLoadingId, { root: true });
+
                     ApiService
-                        .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem" })
+                        .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem", setPriceOnly: rootState.items.isItemSet })
                         .done(response =>
                         {
                             // store received variation data for later reuse
                             commit("setVariation", response);
+                            commit("setIsAddToBasketLoading", 0, { root: true });
 
-                            setUrlByItem(response.documents[0].data, keepVariationId);
+                            if (!rootState.items.isItemSet)
+                            {
+                                setUrlByItem(response.documents[0].data, keepVariationId);
+                            }
+
                             resolve(response);
                         });
                 }
@@ -181,13 +194,24 @@ const getters =
 
         variationTotalPrice(state, getters, rootState, rootGetters)
         {
-            const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
-
-            if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
+            if (getters.currentItemVariation.item.itemType === "set")
             {
-                const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+                return rootGetters.itemSetTotalPrice;
+            }
+            else if (getters.currentItemVariation.item.itemType !== "set" && rootState.items.isItemSet)
+            {
+                return state.variation.documents[0].data.prices.set.price.value + getters.variationPropertySurcharge;
+            }
+            else
+            {
+                const graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
-                return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+                if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
+                {
+                    const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+
+                    return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+                }
             }
 
             return null;
@@ -229,51 +253,72 @@ const getters =
             return [];
         },
 
-        variationMissingProperties(state, getters)
+        variationMissingProperties(state, getters, rootState, rootGetters)
         {
-            if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.item.requireOrderProperties)
+            if (App.config.item.requireOrderProperties)
             {
-                let missingProperties = state.variation.documents[0].data.properties.filter(property =>
+                if (getters.currentItemVariation.item.itemType === "set")
                 {
-                    return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
-                });
+                    let setMissingProperties = [];
 
-                if (missingProperties.length)
-                {
-                    let radioInformation = state.variation.documents[0].data.properties.map(property =>
+                    for (const itemId of rootState.items.setComponentIds)
                     {
-                        if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty")
-                        {
-                            return {
-                                groupId: property.group.id,
-                                propertyId: property.property.id,
-                                hasValue: !!property.property.value
-                            };
-                        }
-                        return null;
-                    });
+                        const componentMissingProperties = rootGetters[`${ itemId }/variationMissingProperties`];
 
-                    radioInformation = [...new Set(radioInformation.filter(id => id))];
-
-                    const radioIdsToRemove = [];
-
-                    for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
-                    {
-                        const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
-
-                        if (radioGroupToClean)
-                        {
-                            for (const radio of radioInformation.filter(radio => radio.groupId === radioGroupToClean.groupId && !radio.hasValue))
-                            {
-                                radioIdsToRemove.push(radio.propertyId);
-                            }
-                        }
+                        setMissingProperties = [...setMissingProperties, ...componentMissingProperties];
                     }
 
-                    missingProperties = missingProperties.filter(property => !radioIdsToRemove.includes(property.property.id));
+                    return setMissingProperties;
                 }
+                else
+                {
+                    if (state && state.variation.documents && state.variation.documents[0].data.properties)
+                    {
+                        let missingProperties = state.variation.documents[0].data.properties.filter(property =>
+                        {
+                            return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
+                        });
 
-                return missingProperties;
+                        if (missingProperties.length)
+                        {
+                            let radioInformation = state.variation.documents[0].data.properties.map(property =>
+                            {
+                                if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty")
+                                {
+                                    return {
+                                        groupId: property.group.id,
+                                        propertyId: property.property.id,
+                                        hasValue: !!property.property.value
+                                    };
+                                }
+                                return null;
+                            });
+
+                            radioInformation = [...new Set(radioInformation.filter(id => id))];
+
+                            const radioIdsToRemove = [];
+
+                            for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
+                            {
+                                const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
+
+                                if (radioGroupToClean)
+                                {
+                                    for (const radio of radioInformation.filter(radio => radio.groupId === radioGroupToClean.groupId && !radio.hasValue))
+                                    {
+                                        radioIdsToRemove.push(radio.propertyId);
+                                    }
+                                }
+                            }
+
+                            missingProperties = missingProperties.filter(property => !radioIdsToRemove.includes(property.property.id));
+                        }
+
+                        return missingProperties;
+                    }
+
+                    return [];
+                }
             }
 
             return [];
@@ -287,6 +332,7 @@ const getters =
 
 export default
 {
+    namespaced: true,
     state,
     mutations,
     actions,
