@@ -399,21 +399,18 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
 
       return sum;
     },
-    itemTotalPrice: function itemTotalPrice() {
+    unitPrice: function unitPrice() {
       var setComponentsParamSurcharge = 0;
 
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isDefined"])(this.basketItem.setComponents)) {
         setComponentsParamSurcharge = this.basketItem.setComponents.map(function (component) {
-          return component.attributeTotalMarkup;
+          return component.quantity * component.attributeTotalMarkup;
         }).reduce(function (sum, i) {
           return sum + i;
         }, 0);
       }
 
-      return this.basketItem.quantity * (this.basketItem.price + setComponentsParamSurcharge);
-    },
-    unitPrice: function unitPrice() {
-      return this.basketItem.price;
+      return this.basketItem.price + setComponentsParamSurcharge;
     },
     basePrice: function basePrice() {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(this.basketItem.variation.data.prices.specialOffer)) {
@@ -1021,7 +1018,7 @@ var render = function() {
                         _vm._v(
                           _vm._s(
                             _vm._f("currency")(
-                              _vm.itemTotalPrice,
+                              _vm.basketItem.quantity * _vm.unitPrice,
                               _vm.basketItem.variation.data.prices.default
                                 .currency
                             )

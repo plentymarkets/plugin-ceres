@@ -56110,12 +56110,16 @@ var state = {
   isItemSet: false,
   itemSetId: 0,
   isSetLoading: false,
+  isAddToBasketLoading: 0,
   previewItemId: 0,
   setComponentIds: []
 };
 var mutations = {
   setIsSetLoading: function setIsSetLoading(state, isSetLoading) {
     state.isSetLoading = isSetLoading;
+  },
+  setIsAddToBasketLoading: function setIsAddToBasketLoading(state, isAddToBasketLoading) {
+    state.isAddToBasketLoading = isAddToBasketLoading;
   },
   setIsItemSet: function setIsItemSet(state, isItemSet) {
     state.isItemSet = !!isItemSet;
@@ -56443,7 +56447,9 @@ var actions = {
   loadVariation: function loadVariation(_ref2, variationId) {
     var state = _ref2.state,
         commit = _ref2.commit,
-        rootState = _ref2.rootState;
+        getters = _ref2.getters,
+        rootState = _ref2.rootState,
+        rootGetters = _ref2.rootGetters;
     return new Promise(function (resolve) {
       var variation = variationId <= 0 ? state.variationCache[state.pleaseSelectVariationId > 0 ? state.pleaseSelectVariationId : state.initialVariationId] : state.variationCache[variationId];
 
@@ -56463,12 +56469,19 @@ var actions = {
           keepVariationId = false;
         }
 
+        var addToBasketLoadingId = rootState.items.isItemSet ? rootGetters["".concat(rootState.items.itemSetId, "/currentItemVariation")].variation.id : getters.currentItemVariation.variation.id;
+        commit("setIsAddToBasketLoading", addToBasketLoadingId, {
+          root: true
+        });
         ApiService.get("/rest/io/variations/".concat(variationId), {
           template: "Ceres::Item.SingleItem",
           setPriceOnly: rootState.items.isItemSet
         }).done(function (response) {
           // store received variation data for later reuse
           commit("setVariation", response);
+          commit("setIsAddToBasketLoading", 0, {
+            root: true
+          });
 
           if (!rootState.items.isItemSet) {
             Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_25__["setUrlByItem"])(response.documents[0].data, keepVariationId);

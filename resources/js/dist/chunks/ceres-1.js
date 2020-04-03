@@ -285,13 +285,20 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     variationMissingProperties: function variationMissingProperties() {
       return this.$store.getters["".concat(this.itemId, "/variationMissingProperties")];
     },
-    isVariationSelected: function isVariationSelected() {
-      return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationSelect && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
-    },
     hasAvailableVariations: function hasAvailableVariations() {
       return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationSelect && this.$store.state.items[this.itemId].variationSelect.variations.some(function (variation) {
         return variation.isSalable;
       });
+    },
+    allVariationsSelected: function allVariationsSelected() {
+      if (this.isSet) {
+        return this.$store.getters["itemSetAllVariationSelected"];
+      } else {
+        return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationSelect && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
+      }
+    },
+    isLoading: function isLoading() {
+      return this.$store.state.items.isAddToBasketLoading === this.variationId || this.$store.state.items.isSetLoading;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_25__["mapState"])({
     basketItems: function basketItems(state) {
@@ -304,8 +311,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   data: function data() {
     return {
       quantity: 1,
-      buttonLockState: false,
-      waiting: false
+      buttonLockState: false
     };
   },
   methods: {
@@ -321,7 +327,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       if (this.variationMissingProperties !== undefined && this.variationMissingProperties.length) {
         this.showMissingPropertiesError();
       } else if (this.isSalable || this.isSet) {
-        this.waiting = true;
+        this.$store.commit("setIsAddToBasketLoading", this.variationId);
         var orderParamsAndSurcharge = extractPropertiesAndSurcharge(this.orderProperties);
         var basketObject = {
           variationId: this.variationId,
@@ -354,9 +360,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           document.dispatchEvent(new CustomEvent("afterBasketItemAdded", {
             detail: basketObject
           }));
-          _this.waiting = false;
+
+          _this.$store.commit("setIsAddToBasketLoading", 0);
         }, function (error) {
-          _this.waiting = false;
+          _this.$store.commit("setIsAddToBasketLoading", 0);
 
           if (error.data) {
             NotificationService.error(_this.$translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_22__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)).closeAfter(5000);
@@ -478,7 +485,7 @@ var render = function() {
           {
             directives: [{ name: "tooltip", rawName: "v-tooltip" }],
             staticClass: "add-to-basket-lg-container d-none d-lg-block",
-            class: { "no-pointer-events": _vm.waiting },
+            class: { "no-pointer-events": _vm.isLoading },
             attrs: {
               "data-toggle": "tooltip",
               "data-placement": "top",
@@ -493,7 +500,7 @@ var render = function() {
           [
             _c("icon", {
               staticClass: "fa-lg mobile-icon-right",
-              attrs: { icon: "cart-plus", loading: _vm.waiting }
+              attrs: { icon: "cart-plus", loading: _vm.isLoading }
             })
           ],
           1
@@ -556,7 +563,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              (!_vm.isVariationSelected || !_vm.isSalable) && !_vm.isSet
+              !_vm.allVariationsSelected || !_vm.isSalable
                 ? _c(
                     "button",
                     {
@@ -594,7 +601,7 @@ var render = function() {
                       staticClass: "btn btn-block btn-primary btn-appearance",
                       class: _vm.buttonClasses,
                       style: _vm.paddingInlineStyles,
-                      attrs: { disabled: _vm.waiting || !_vm.hasPrice },
+                      attrs: { disabled: _vm.isLoading || !_vm.hasPrice },
                       on: {
                         click: function($event) {
                           return _vm.addToBasket()
@@ -603,7 +610,7 @@ var render = function() {
                     },
                     [
                       _c("icon", {
-                        attrs: { icon: "shopping-cart", loading: _vm.waiting }
+                        attrs: { icon: "shopping-cart", loading: _vm.isLoading }
                       }),
                       _vm._v(
                         "\n                " +
@@ -637,7 +644,7 @@ var render = function() {
                     },
                     [
                       _c("icon", {
-                        attrs: { icon: "shopping-cart", waiting: _vm.waiting }
+                        attrs: { icon: "shopping-cart", waiting: _vm.isLoading }
                       }),
                       _vm._v(
                         "\n                " +
@@ -674,7 +681,7 @@ var render = function() {
                       {
                         staticClass:
                           "btn btn-primary btn-appearance mobile-width-button",
-                        class: { "no-pointer-events": _vm.waiting },
+                        class: { "no-pointer-events": _vm.isLoading },
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
@@ -685,7 +692,10 @@ var render = function() {
                       [
                         _c("icon", {
                           staticClass: "fa-lg mobile-icon-right",
-                          attrs: { icon: "shopping-cart", loading: _vm.waiting }
+                          attrs: {
+                            icon: "shopping-cart",
+                            loading: _vm.isLoading
+                          }
                         }),
                         _vm._v(
                           "\n                " +

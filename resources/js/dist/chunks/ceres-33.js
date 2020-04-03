@@ -19,10 +19,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
 /* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
 
 
 
@@ -118,16 +124,17 @@ __webpack_require__.r(__webpack_exports__);
       deep: true
     }
   },
-  created: function created() {
-    this.loadLightbox();
-  },
   mounted: function mounted() {
     var _this2 = this;
 
     this.$nextTick(function () {
-      _this2.initCarousel();
+      _this2.loadLightbox().then(function () {
+        _this2.initCarousel();
 
-      _this2.initThumbCarousel();
+        _this2.initThumbCarousel();
+      }).catch(function (event) {
+        console.log("error while loading lightbox", event);
+      });
     });
   },
   methods: {
@@ -175,13 +182,13 @@ __webpack_require__.r(__webpack_exports__);
 
       $(this.$refs.single).owlCarousel(carouselSettings);
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(window.lightbox)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(window.lightbox)) {
         lightbox.option({
           wrapAround: true
         });
 
         lightbox.imageCountLabel = function (current, total) {
-          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(imageCount) || imageCount <= 1) {
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(imageCount) || imageCount <= 1) {
             return "";
           }
 
@@ -261,17 +268,29 @@ __webpack_require__.r(__webpack_exports__);
     loadLightbox: function loadLightbox() {
       var _this4 = this;
 
-      var scriptSource = this.pluginPath + "/js/dist/lightbox.min.js";
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = scriptSource;
-      script.addEventListener("load", function () {
-        return _this4.reInitialize();
-      }, false);
-      script.addEventListener("error", function () {
-        return console.warn("lightbox could not be initialized");
-      }, false);
-      document.body.appendChild(script);
+      return new Promise(function (resolve, reject) {
+        var script = document.querySelector("script#lightboxscript");
+
+        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(script)) {
+          resolve();
+        } else {
+          var _script = document.createElement("script");
+
+          _script.type = "text/javascript";
+          _script.id = "lightboxscript";
+          _script.src = "".concat(_this4.pluginPath, "/js/dist/lightbox.min.js");
+
+          _script.addEventListener("load", function () {
+            return resolve();
+          }, false);
+
+          _script.addEventListener("error", function (event) {
+            return reject(event);
+          }, false);
+
+          document.body.appendChild(_script);
+        }
+      });
     }
   }
 });
@@ -311,7 +330,7 @@ var render = function() {
               {
                 attrs: {
                   href: image.url,
-                  "data-lightbox": "single-big-image-gallery"
+                  "data-lightbox": "single-item-image" + _vm._uid
                 }
               },
               [

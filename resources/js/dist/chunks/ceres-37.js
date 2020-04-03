@@ -37,11 +37,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "set-price",
   props: {
@@ -65,14 +60,24 @@ __webpack_require__.r(__webpack_exports__);
     variationSetRebatePrice: function variationSetRebatePrice() {
       return this.variationTotalPrice * (1 - this.currentVariation.item.rebate / 100);
     },
-    allVariationSelected: function allVariationSelected() {
-      return this.$store.getters["itemSetAllVariationSelected"];
+    isVariationSelected: function isVariationSelected() {
+      if (this.isSet) {
+        return this.$store.getters["itemSetAllVariationSelected"];
+      } else {
+        return this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
+      }
     },
     isSet: function isSet() {
       return this.currentVariation.item.itemType === "set" || App.isShopBuilder && this.currentVariation.item.itemType !== undefined;
     },
     isSetLoading: function isSetLoading() {
       return this.$store.state.items.isSetLoading;
+    },
+    dynamicPrice: function dynamicPrice() {
+      return this.isSet ? this.variationSetRebatePrice : this.variationTotalPrice;
+    },
+    dynamicTranslationKey: function dynamicTranslationKey() {
+      return this.isSet ? "dynamicSetPrice" : "dynamicSetComponentPrice";
     }
   }
 });
@@ -102,7 +107,10 @@ var render = function() {
               "\n            " +
                 _vm._s(
                   _vm._f("itemCrossPrice")(
-                    _vm._f("currency")(_vm.variationTotalPrice)
+                    _vm._f("currency")(
+                      _vm.variationTotalPrice,
+                      _vm.currentVariation.prices.set.currency
+                    )
                   )
                 ) +
                 "\n        "
@@ -114,49 +122,37 @@ var render = function() {
     _c("span", { staticClass: "price h1" }, [
       _c(
         "span",
-        { attrs: { content: _vm.variationSetRebatePrice } },
+        { attrs: { content: _vm.dynamicPrice } },
         [
-          _vm.isSet && (!_vm.allVariationSelected || _vm.isSetLoading)
+          !_vm.isVariationSelected || _vm.isSetLoading
             ? [
                 _vm._v(
                   "\n                " +
                     _vm._s(
-                      _vm.$translate("Ceres::Template.dynamicSetPrice", {
-                        price: _vm.$options.filters.currency(
-                          _vm.variationSetRebatePrice,
-                          _vm.$ceres.activeCurrency
-                        )
-                      })
+                      _vm.$translate(
+                        "Ceres::Template." + _vm.dynamicTranslationKey,
+                        {
+                          price: _vm.$options.filters.currency(
+                            _vm.dynamicPrice,
+                            _vm.currentVariation.prices.set.currency
+                          )
+                        }
+                      )
                     ) +
                     "\n            "
                 )
               ]
             : [
-                !_vm.isSet
-                  ? [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(
-                              _vm.variationTotalPrice,
-                              _vm.currentVariation.prices.set.currency
-                            )
-                          ) +
-                          "\n                "
+                _vm._v(
+                  "\n                " +
+                    _vm._s(
+                      _vm._f("currency")(
+                        _vm.dynamicPrice,
+                        _vm.currentVariation.prices.set.currency
                       )
-                    ]
-                  : [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(
-                              _vm.variationSetRebatePrice,
-                              _vm.$ceres.activeCurrency
-                            )
-                          ) +
-                          "\n                "
-                      )
-                    ]
+                    ) +
+                    "\n            "
+                )
               ]
         ],
         2
@@ -164,7 +160,9 @@ var render = function() {
       _vm._v(" "),
       _c("sup", [_vm._v("*")]),
       _vm._v(" "),
-      _c("span", { attrs: { content: _vm.$ceres.activeCurrency } })
+      _c("span", {
+        attrs: { content: _vm.currentVariation.prices.set.currency }
+      })
     ])
   ])
 }
