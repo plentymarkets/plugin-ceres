@@ -1,5 +1,5 @@
 <template>
-    <div class="order-property-slider mb-3">
+    <div class="order-property-slider mb-3" v-if="renderOrderPropertyList">
         <div class="order-property-slider-inner" :style="{transform: 'translateX(-' + (activeSlide * 100) + '%)'}">
             <div v-for="(propertyGroup, index) in sortedGroupedProperties" :class="{'active': index === activeSlide}" :key="index">
                 <order-property-list-group
@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
 import OrderPropertyListGroup from "./OrderPropertyListGroup.vue";
 
 export default {
@@ -56,6 +55,12 @@ export default {
         paddingInlineStyles:
         {
             type: String,
+            default: null
+        },
+    },
+
+    inject: {
+        itemId: {
             default: null
         }
     },
@@ -92,14 +97,25 @@ export default {
             return [];
         },
 
-        ...mapState({
-            variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
-        }),
+        variationGroupedProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationGroupedProperties`];
+        },
 
-        ...mapGetters([
-            "variationGroupedProperties",
-            "variationMissingProperties"
-        ])
+        renderOrderPropertyList()
+        {
+            return (this.$store.getters[`${this.itemId}/currentItemVariation`].filter.isSalable && this.variationGroupedProperties.length) || App.isShopBuilder;
+        },
+
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
+        variationMarkInvalidProperties() {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            return currentVariation && currentVariation.variationMarkInvalidProperties;
+        }
     },
 
     methods:

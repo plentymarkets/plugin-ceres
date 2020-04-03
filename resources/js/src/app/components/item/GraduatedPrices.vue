@@ -16,9 +16,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
+
+    name: "graduated-prices",
+
     props: {
         paddingClasses: {
             type: String
@@ -27,12 +28,21 @@ export default {
             type: String
         }
     },
+
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     computed:
     {
         graduatedPrices()
         {
-            let prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
-            const minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+
+            let prices = currentVariation && currentVariation.prices.graduatedPrices;
+            const minQuantity = currentVariation && currentVariation.variation.minimumOrderQuantity;
 
             prices = prices.filter(price => price.minimumOrderQuantity > minQuantity);
 
@@ -56,9 +66,10 @@ export default {
             return this.graduatedPrices.indexOf(price);
         },
 
-        ...mapState({
-            variationOrderQuantity: state => state.item.variationOrderQuantity
-        })
+        variationOrderQuantity()
+        {
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationOrderQuantity
+        }
     }
 }
 </script>

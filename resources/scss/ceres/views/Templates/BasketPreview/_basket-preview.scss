@@ -8,6 +8,12 @@
     transform: translateX(100%);
     @include transition(all .3s ease-in-out);
 
+    @include media-breakpoint-up(md) {
+        .item-list {
+            min-height: 200px;
+        }
+    }
+
     @include media-breakpoint-up(lg) {
         left: auto;
         width: $aside-columns-width;

@@ -29,6 +29,8 @@ import { mapState } from "vuex";
 
 export default {
 
+    name: "tag-list",
+
     props: {
         tagAppearance:
         {
@@ -51,15 +53,26 @@ export default {
             default: () => []
         }
     },
+
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     computed: {
         isTagRouteEnabled()
         {
             return this.enabledRoutes.includes("all") || this.enabledRoutes.includes("tags");
         },
-        ...mapState({
-            tags: state => state.item.variation.documents[0].data.tags
-        })
+
+        tags()
+        {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            return currentVariation && currentVariation.tags;
+        }
     },
+
     methods:
     {
         getTextColorClass(bgColor)

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div :class="{'no-pointer-events': waiting}" class="add-to-basket-lg-container d-none d-lg-block" v-if="!showQuantity && useLargeScale && canBeAddedToBasket"
+        <div :class="{'no-pointer-events': isLoading}" class="add-to-basket-lg-container d-none d-lg-block" v-if="!showQuantity && useLargeScale && canBeAddedToBasket"
              v-tooltip data-toggle="tooltip" data-placement="top" :title="$translate('Ceres::Template.singleItemAddToBasket')" @click="addToBasket()">
-            <icon icon="cart-plus" class="fa-lg mobile-icon-right" :loading="waiting"></icon>
+            <icon icon="cart-plus" class="fa-lg mobile-icon-right" :loading="isLoading"></icon>
         </div>
 
         <div class="add-to-basket-lg-container d-none d-lg-block" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket"
@@ -25,7 +25,7 @@
                 </div>
 
                 <button
-                        v-if="!isVariationSelected || !isSalable"
+                        v-if="!allVariationsSelected || !isSalable"
                         class="btn btn-block btn-primary btn-appearance disabled"
                         v-tooltip
                         data-toggle="tooltip"
@@ -38,12 +38,12 @@
                 </button>
                 <button
                         v-else-if="!buttonLockState"
-                        :disabled="waiting || !hasPrice"
+                        :disabled="isLoading || !hasPrice"
                         class="btn btn-block btn-primary btn-appearance"
                         @click="addToBasket()"
                         :class="buttonClasses"
                         :style="paddingInlineStyles">
-                    <icon icon="shopping-cart" :loading="waiting"></icon>
+                    <icon icon="shopping-cart" :loading="isLoading"></icon>
                     {{ $translate("Ceres::Template.singleItemAddToBasket") }}
                 </button>
                 <button v-else
@@ -54,7 +54,7 @@
                         :title="'Ceres::Template.singleItemQuantityMax' | translate({max: item.variation.maximumOrderQuantity})"
                         :class="buttonClasses"
                         :style="paddingInlineStyles">
-                    <icon icon="shopping-cart" :waiting="waiting"></icon>
+                    <icon icon="shopping-cart" :waiting="isLoading"></icon>
                     {{ $translate("Ceres::Template.singleItemAddToBasket") }}
                 </button>
             </div>
@@ -62,8 +62,8 @@
 
         <div class="d-inline" v-if="!showQuantity && !useLargeScale" :class="{'d-lg-none': !isWishList }">
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
-                    <icon icon="shopping-cart" class="fa-lg mobile-icon-right" :loading="waiting"></icon>
+                <button type="button" :class="{'no-pointer-events': isLoading}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
+                    <icon icon="shopping-cart" class="fa-lg mobile-icon-right" :loading="isLoading"></icon>
                     {{ $translate("Ceres::Template.singleItemAddToBasket") }}
                 </button>
                 <button type="button" v-if="!canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="directToItem()">
@@ -99,11 +99,6 @@ export default {
         {
             type: Boolean,
             default: false
-        },
-        missingOrderProperties:
-        {
-            type: Array,
-            default: () => []
         },
         variationId:
         {
@@ -168,17 +163,39 @@ export default {
         {
             type: Number,
             default: null
+        },
+        itemType:
+        {
+            type: String,
+            default: null
         }
     },
+
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     computed:
     {
+        isSet()
+        {
+            return (
+                this.$store.state.items[this.itemId]
+                && this.$store.state.items[this.itemId].variation
+                && this.$store.state.items[this.itemId].variation.documents[0].data.item.itemType === "set"
+            ) || this.itemType === "set";
+        },
+
         canBeAddedToBasket()
         {
             return this.isSalable &&
                 !this.hasChildren &&
                 !(this.minimumQuantity != 1 || this.intervalQuantity != 1) &&
                 !this.requiresProperties &&
-                this.hasPrice;
+                this.hasPrice &&
+                !this.isSet;
         },
 
         requiresProperties()
@@ -216,12 +233,45 @@ export default {
             }
         },
 
+        variationOrderQuantity()
+        {
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationOrderQuantity;
+        },
+
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
+        hasAvailableVariations()
+        {
+            return this.$store.state.items[this.itemId]
+                && this.$store.state.items[this.itemId].variationSelect
+                && this.$store.state.items[this.itemId].variationSelect.variations.some(variation => variation.isSalable);
+        },
+
+        allVariationsSelected()
+        {
+            if (this.isSet)
+            {
+                return this.$store.getters["itemSetAllVariationSelected"];
+            }
+            else
+            {
+                return this.$store.state.items[this.itemId]
+                    && this.$store.state.items[this.itemId].variationSelect
+                    && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
+            }
+        },
+
+        isLoading()
+        {
+            return this.$store.state.items.isAddToBasketLoading === this.variationId || this.$store.state.items.isSetLoading;
+        },
+
         ...mapState({
             basketItems: state => state.basket.items,
-            isBasketLoading: state => state.basket.isBasketLoading,
-            isVariationSelected: state => state.variationSelect.isVariationSelected,
-            hasAvailableVariations: state => state.variationSelect.variations.some(variation => variation.isSalable),
-            variationOrderQuantity: state => state.item.variationOrderQuantity
+            isBasketLoading: state => state.basket.isBasketLoading
         })
     },
 
@@ -229,8 +279,7 @@ export default {
     {
         return {
             quantity: 1,
-            buttonLockState: false,
-            waiting: false
+            buttonLockState: false
         };
     },
 
@@ -244,55 +293,57 @@ export default {
             this.$store.dispatch("loadComponent", "add-item-to-basket-overlay");
             this.$store.dispatch("loadComponent", "basket-preview");
 
-            if (this.missingOrderProperties.length)
+            if (this.variationMissingProperties !== undefined && this.variationMissingProperties.length)
             {
                 this.showMissingPropertiesError();
             }
-            else if (this.isSalable)
+            else if (this.isSalable || this.isSet)
             {
-                this.waiting = true;
+                this.$store.commit("setIsAddToBasketLoading", this.variationId);
 
-                let totalSurcharge = 0;
-                const orderParams = this.orderProperties
-                    .filter((orderProperty) => !isNullOrUndefined(orderProperty.property.value))
-                    .map((orderProperty) =>
-                    {
-                        const property = orderProperty.property;
-
-                        if (property.valueType === "float" &&
-                            !isNullOrUndefined(property.value) &&
-                            property.value.slice(-1) === App.decimalSeparator)
-                        {
-                            property.value = property.value.substr(0, property.value.length - 1);
-                        }
-
-                        totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
-
-                        return {
-                            propertyId: property.id,
-                            type: property.valueType,
-                            name: property.names.name,
-                            value: property.value
-                        };
-                    });
+                const orderParamsAndSurcharge = extractPropertiesAndSurcharge(this.orderProperties);
 
                 const basketObject =
                     {
                         variationId             :   this.variationId,
                         quantity                :   this.quantity,
-                        basketItemOrderParams   :   orderParams,
-                        totalOrderParamsMarkup  :   totalSurcharge
+                        basketItemOrderParams   :   orderParamsAndSurcharge.orderParams,
+                        totalOrderParamsMarkup  :   orderParamsAndSurcharge.totalSurcharge
                     };
+
+                if(this.isSet)
+                {
+                    const setComponents = [];
+                    this.$store.state.items.setComponentIds.forEach(itemId =>
+                    {
+                        const setComponent = this.$store.getters[`${itemId}/currentItemVariation`];
+
+                        const variationId = setComponent && setComponent.variation.id;
+
+                        // Extract order properties and total surcharge for set components
+                        const setComponentOrderParamsAndSurcharge = extractPropertiesAndSurcharge(
+                            setComponent.properties.filter(prop => prop.property.isOderProperty)
+                        );
+
+                        setComponents.push({
+                            variationId: variationId,
+                            quantity: this.$store.state.items[itemId].variationOrderQuantity,
+                            basketItemOrderParams: setComponentOrderParamsAndSurcharge.orderParams,
+                            totalOrderParamsMarkup: setComponentOrderParamsAndSurcharge.totalSurcharge
+                        });
+                    });
+                    basketObject.setComponents = setComponents;
+                }
 
                 this.$store.dispatch("addBasketItem", basketObject).then(
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemAdded", { detail: basketObject }));
-                        this.waiting = false;
+                        this.$store.commit("setIsAddToBasketLoading", 0);
                     },
                     error =>
                     {
-                        this.waiting = false;
+                        this.$store.commit("setIsAddToBasketLoading", 0);
 
                         if (error.data)
                         {
@@ -308,9 +359,9 @@ export default {
         },
         showMissingPropertiesError()
         {
-            this.$store.commit("setVariationMarkInvalidProps", true);
+            this.$store.commit(`${this.itemId}/setVariationMarkInvalidProps`, true);
 
-            const propertyNames = this.missingOrderProperties.map(property => property.property.names.name);
+            const propertyNames = this.variationMissingProperties.map(property => property.property.names.name);
             let errorMsgContent = "";
 
             for (const name of propertyNames)
@@ -340,11 +391,12 @@ export default {
             this.quantity = value;
         }
     },
+
     watch:
     {
         quantity(value)
         {
-            this.$store.commit("setVariationOrderQuantity", value);
+            this.$store.commit(`${this.itemId}/setVariationOrderQuantity`, value);
         },
 
         variationOrderQuantity(value)
@@ -363,5 +415,40 @@ export default {
             }
         }
     }
+}
+
+function extractPropertiesAndSurcharge(orderProperties)
+{
+    let totalSurcharge = 0;
+    const orderParams = [];
+
+    orderProperties.forEach((orderProperty) =>
+    {
+        if(!isNullOrUndefined(orderProperty.property.value))
+        {
+            const property = orderProperty.property;
+
+            if (property.valueType === "float" &&
+                !isNullOrUndefined(property.value) &&
+                property.value.slice(-1) === App.decimalSeparator)
+            {
+                property.value = property.value.substr(0, property.value.length - 1);
+            }
+
+            totalSurcharge += (orderProperty.surcharge || 0) + (property.surcharge || 0);
+
+            orderParams.push({
+                propertyId: property.id,
+                type: property.valueType,
+                name: property.names.name,
+                value: property.value
+            });
+        }
+    });
+
+    return {
+        orderParams: orderParams,
+        totalSurcharge: totalSurcharge
+    };
 }
 </script>

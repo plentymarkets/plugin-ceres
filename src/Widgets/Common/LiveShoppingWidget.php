@@ -20,6 +20,7 @@ class LiveShoppingWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/live-shopping.svg")
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::ITEM)
+            ->withPosition(800)
             ->toArray();
     }
 
