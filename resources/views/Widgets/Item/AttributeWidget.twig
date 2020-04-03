@@ -10,8 +10,6 @@
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{{ Twig.component("Ceres::Item.Components.VariationSelect") }}
-
 <div class="widget widget-attribute widget-{{ appearance }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"

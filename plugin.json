@@ -1,5 +1,5 @@
 {
-    "version"           : "4.6.0",
+    "version"           : "5.0.0",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -15,7 +15,7 @@
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
     "require"           : {
-        "IO": ">= 4.3.3"
+        "IO": ">= 5.0.0"
     },
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
@@ -257,6 +257,16 @@
             "description"   : "Override the image carousel on the single item."
         },
         {
+            "key"           : "SingleItem.AfterScriptsLoaded",
+            "name"          : "Single item: After scripts loaded",
+            "description"   : "Load scripts, events and other Javascript related items, such as Vue components, after frameworks and scripts have been initialised on the single item view."
+        },
+        {
+            "key"           : "SingleItem.Styles",
+            "name"          : "Single item: Styles",
+            "description"   : "Load CSS in the head after all other styles have been loaded."
+        },
+        {
             "key"           : "BasketTotals.BeforeItemSum",
             "name"          : "Shopping cart: Before \"Value of items\"",
             "description"   : "Add content before the value of items in the Total column of the shopping cart."
@@ -464,6 +474,16 @@
             "key"           : "Checkout.CustomAddressField",
             "name"          : "Checkout: Address field container",
             "description"   : "Add content, e.g. one or multiple custom address fields, at the bottom of the address form."
+        },
+        {
+            "key"           : "Checkout.AfterScriptsLoaded",
+            "name"          : "Checkout: After scripts loaded",
+            "description"   : "Load scripts, events and other Javascript related items, such as Vue components, after frameworks and scripts have been initialised in the checkout."
+        },
+        {
+            "key"           : "Checkout.Styles",
+            "name"          : "Checkout: Styles",
+            "description"   : "Load CSS in the head after all other styles have been loaded."
         },
         {
             "key"           : "Ceres::Checkout.Headline",

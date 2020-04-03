@@ -1,32 +1,31 @@
 .widget-placeholder {
-    background-color: $gray-lighter;
-    text-align: center;
     padding: 0;
+    text-align: center;
+    background-color: $gray-300;
 
     // needed if placeholder uses .prop-x-x-x classes
     &.proportional-placeholder {
         > div {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
-            left: 0;
             right: 0;
+            left: 0;
+            transform: translateY(-50%);
         }
     }
 
     > div {
         padding: 1rem;
 
-        > p.title {
-            font-weight: bold;
+        > .title {
+            font-weight: $font-weight-bold;
         }
 
-        > p.description {
-            font-size: .9rem;
+        > .description {
             margin-bottom: 0;
+            font-size: .9rem;
             font-style: italic;
         }
     }
 }
-
 

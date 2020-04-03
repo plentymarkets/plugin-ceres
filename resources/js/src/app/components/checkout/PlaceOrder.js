@@ -7,7 +7,7 @@ import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("place-order", {
+export default Vue.component("place-order", {
 
     mixins: [ButtonSizePropertyMixin],
 

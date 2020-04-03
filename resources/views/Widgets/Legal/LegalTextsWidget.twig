@@ -39,7 +39,7 @@
         {{ Twig.if("legalInformation.htmlText") }}
             {{ Twig.print("legalInformation.htmlText | raw") }}
         {{ Twig.else() }}
-            <p class="static-page-plain-text">{{ Twig.print("legalInformation.plainText") }}</p>
+            <p>{{ Twig.print("legalInformation.plainText") }}</p>
         {{ Twig.endif() }}
 
         {{ Twig.print("layoutContainerContent") }}

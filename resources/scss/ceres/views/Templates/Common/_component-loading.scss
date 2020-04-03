@@ -1,0 +1,69 @@
+.component-loading {
+    position: relative;
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        content: "";
+        background: $gray-100;
+        @include border-radius(1px);
+        opacity: 0;
+        @include transition(opacity .1s ease-out);
+    }
+
+    &.with-icon {
+        &::after {
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            bottom: 50%;
+            left: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            height: auto;
+            font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+            font-size: 2rem;
+            color: $gray-200;
+            visibility: hidden;
+            content: "";
+            opacity: 0;
+            animation: fa-spin 1.5s infinite linear;
+            @include transition(opacity .1s ease-out);
+        }
+
+        &.refreshing {
+            &::after {
+                content: "\f021";
+            }
+        }
+
+        &.sending {
+            &::after {
+                content: "\f1ce";
+                animation: fa-spin 1s infinite linear;
+            }
+        }
+    }
+
+    &.is-loading {
+        cursor: not-allowed;
+
+        &::before {
+            visibility: visible;
+            opacity: .5;
+        }
+
+        &::after {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}

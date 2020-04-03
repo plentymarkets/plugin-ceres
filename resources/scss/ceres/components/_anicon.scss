@@ -1,109 +1,100 @@
 .anicon {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: none;
-    cursor: pointer;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -ms-flex-align: center;
     align-items: center;
-    transition: 0.3s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    justify-content: center;
     width: 40px;
+    cursor: pointer;
+    user-select: none;
     background: transparent;
+    border: none;
     outline: none;
+    @include transition(.3s);
+    appearance: none;
     -webkit-tap-highlight-color: transparent;
-	-webkit-tap-highlight-color: transparent;
-	
+
     & > * {
         display: block;
-	}
-	
+    }
+
     &:hover,
     &:focus {
         outline: none;
-	}
-	
+    }
+
     & > .anicon-search-item {
-        display: inline-block;
-        border-radius: 0;
-        transition: 0.3s;
-        background: transparent;
         position: relative;
-        transform: rotateZ(225deg);
+        display: inline-block;
+        width: 18px;
         margin-bottom: 3px;
-		width: 18px;
-		
-        &:before {
-            display: inline-block;
-            height: 1px;
-            width: 15px;
-            border-radius: 2.85714px;
-            transition: 0.3s;
-            content: '';
+        background: transparent;
+        border-radius: 0; // stylelint-disable-line property-blacklist
+        transition: .3s; // stylelint-disable-line property-blacklist
+        transform: rotateZ(225deg);
+
+        &::before {
             position: absolute;
             top: 0;
-            left: 0;
             bottom: 0;
+            left: 0;
+            display: inline-block;
+            width: 15px;
+            height: 1px;
             margin: auto;
+            content: "";
             background: $white;
-		}
-		
-        &:after {
+            border-radius: 2.85714px; // stylelint-disable-line property-blacklist
+            transition: .3s; // stylelint-disable-line property-blacklist
+        }
+
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
             display: inline-block;
             width: 11px;
             height: 11px;
-            border-radius: 50%;
-            transition: 0.3s;
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
             margin: auto;
+            content: "";
             background: $top-bar-bg;
             border: 1px solid $white;
+            border-radius: 50%; // stylelint-disable-line property-blacklist
+            transition: .3s; // stylelint-disable-line property-blacklist
             transform-origin: 50% 50%;
         }
-	}
-	
+    }
+
     &.anicon-search-xcross {
         &[aria-expanded="false"] {
             @include media-breakpoint-up(md) {
                 &:hover {
                     & > .anicon-search-item {
-                        &:after {
+                        &::after {
                             background: $primary;
                         }
                     }
                 }
             }
-		}
-		
+        }
+
         &[aria-expanded="true"] {
             & > .anicon-search-item {
                 width: 15px;
-				margin-left: 1px;
-				
-                &:before {
-                    border-radius: 2.85714px;
+                margin-left: 1px;
+
+                &::before {
                     background: $white;
-				}
-				
-                &:after {
-                    border-radius: 2.85714px;
-                    background: $white;
-                    height: 1px;
-                    width: 100%;
+                    border-radius: 2.85714px; // stylelint-disable-line property-blacklist
+                }
+
+                &::after {
                     top: 0;
                     right: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: $white;
                     border: 0;
+                    border-radius: 2.85714px; // stylelint-disable-line property-blacklist
                     transform: rotate3d(0, 0, 1, 90deg);
                 }
             }

@@ -26,7 +26,7 @@
                 {% if legalDisclosure.htmlText %}
                     {{ legalDisclosure.htmlText | raw }}
                 {% else %}
-                    <p class="static-page-plain-text">{{ legalDisclosure.plainText }}</p>
+                    <p>{{ legalDisclosure.plainText }}</p>
                 {% endif %}
 
                 {{ LayoutContainer.show("Ceres::StaticPages.LegalDisclosure") }}

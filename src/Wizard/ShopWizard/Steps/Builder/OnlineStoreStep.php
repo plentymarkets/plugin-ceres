@@ -211,6 +211,13 @@ class OnlineStoreStep extends Step
                         "listBoxValues" => $this->getOrderStatusListBoxValues()
                     ]
                 ],
+                "onlineStore_minimumOrderAmount" => [
+                    "type" => "number",
+                    "defaultValue" => "0",
+                    "options" => [
+                        "name" => "Wizard.minimumOrderAmount"
+                    ]
+                ]
             ]
         ];
     }

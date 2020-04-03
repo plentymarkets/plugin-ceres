@@ -1,178 +1,35 @@
-body {
-    overflow-x: hidden;
-}
-.wrapper-main {
-    overflow: hidden;
-}
+.center-xy {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center; // center on the x axys
 
-.sb-no-animation.collapsing {
-    -webkit-transition: none !important;
-    transition: none !important;
-    display: none !important;
-}
-
-.hidden {
-    display: none;
-}
-
-.hidden-sm {
-    @include media-breakpoint-only(sm) {
-        display: none;
-    }
-}
-
-.category-contact .main .container-max
-{
-    background-color: $white;
-    padding-top: $spacer;
-    margin-top: 2 * $spacer;
-    margin-bottom: 2 * $spacer;
-}
-
-.page-content{
-    padding-top: $spacer;
-    background-color: $gray-lightest;
-    &.basket,
-    &.checkout,
-    &.contact,
-    &.wishlist,
-    &.myaccount {
-        &:not(.checkout):not(.basket) {
-            background-color: $white;
-        }
-        color: $gray-darker;
-        margin-top: 30px;
-        padding-bottom: 30px;
-    }
-}
-.container-max{
-    @extend .container-fluid;
-    max-width: 1200px;
-    z-index: auto;
-
-    &.login {
-        margin-top: 2rem;
-    }
-}
-
-.page-not-found {
-    i.fa-search {
-        font-size: 10em;
-    }
-    i.fa-home {
-        margin-left: 5px;
-        margin-top: 2px;
-    }
-    .default-not-found {
-        background-color: rgb(247, 247, 249);
+    img,
+    .owl-stage-outer {
+        align-self: center; // center on the y axys
     }
 }
 
 .not-found-text {
     font-size: 115px;
-    text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
+    text-shadow: 4px 3px 0 $gray-100, 9px 8px 0 $gray-300;
 }
 
-.rating{
-    line-height: 1;
-
-    .tag,
-    .badge {
-        padding-right: 0;
-        overflow: hidden;
-        cursor: pointer;
-
-        .amount{
-            padding: 0.1rem .6rem 0.1rem .4rem;
-            margin-left: .2rem;
-            background-color: $gray;
-        }
-    }
+// TODO: resolve usages to .container
+.container-max {
+    @extend .container-fluid;
+    z-index: auto;
+    max-width: 1200px;
 }
 
-dt {
-    font-weight: 400;
+.lozad {
+    display: block;
+    min-height: 1px;
 }
 
-a:hover,
-a:focus,
-a:active {
-    text-decoration: none;
-}
-
-.border-left {
-    border-left: 1px solid $gray-dark;
-}
-
-
-.carousel-control-next, .carousel-control-prev {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 15%;
-    color: #fff;
-    text-align: center;
-    opacity: .5;
-}
-.carousel-control-prev {
-    left: 0;
-}
-.carousel-control-next {
-    right: 0;
-}
-.carousel-control-next-icon, .carousel-control-prev-icon {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background: transparent no-repeat center center;
-    background-size: 100% 100%;
-}
-
-.content-center {
-    margin: 0 auto;
-    float: none;
-}
-
-.flex-center {
-    align-items: center;
-    justify-content: center;
-}
-
-.text-wrap {
-  white-space: normal;
-}
-
-.is_stuck {
-    z-index: 1;
-}
-
-.sticky-element.is-sticky {
-    z-index: $zindex-sticky !important;
-}
-
-.inline-select {
-    margin-left: -7px;
-    text-decoration: underline;
-    font-weight: inherit;
-}
-
-@each $color, $value in $theme-colors {
-    @include bg-variant(".bg-#{$color}", $value);
-    .bg-#{$color} {
-        @include context-bg($value);
-    }
-}
-
-.fa.none {
-    @extend .fa-circle;
-    color: transparent !important;
-}
-
+// stylelint-disable selector-type-no-unknown
 [v-cloak],
 script2,
 style2 {
-    display: none !important;
+    display: none !important; // stylelint-disable-line declaration-no-important
 }
+// stylelint-enable selector-type-no-unknown

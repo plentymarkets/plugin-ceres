@@ -18,6 +18,7 @@ class BaseWidget implements DynamicWidget
     ];
 
     public static $mapTypeToTemplate = [
+        'itemset'       => 'tpl.item',
         'singleitem'    => 'tpl.item',
         'content'       => 'tpl.category',
         'myaccount'     => 'tpl.my-account',

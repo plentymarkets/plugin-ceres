@@ -93,7 +93,15 @@ class ImageCarouselWidget extends BaseWidget
         $container->children->createFile("customImagePath")
             ->withDefaultValue("")
             ->withName("Widget.imageCarouselCustomImagePathLabel")
-            ->withTooltip("Widget.imageCarouselCustomImagePathTooltip");
+            ->withTooltip("Widget.imageCarouselCustomImagePathTooltip")
+            ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
+        
+        $container->children->createFile("fallbackImagePath")
+            ->withDefaultValue("")
+            ->withName("Widget.imageCarouselFallbackImagePathLabel")
+            ->withTooltip("Widget.imageCarouselFallbackImagePathTooltip")
+            ->withCondition("!!\$slides.customImagePath && /.?(\.webp)(?:$|\?)/.test(\$slides.customImagePath)")
+            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
 
         $settings->createSpacing(false, true);
         return $settings->toArray();

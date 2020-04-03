@@ -25,7 +25,6 @@ class DisplayedInformationStep extends Step
             "sections" => [
                 $this->generateItemSection(),
                 $this->generateDecimalPlacesSection(),
-                $this->generateLoadingAnimationSection(),
                 $this->generateCategoryView(),
                 $this->generateItemView(),
                 $this->generateShoppingCartView(),
@@ -84,30 +83,6 @@ class DisplayedInformationStep extends Step
                     "options" => [
                         "name" => "Wizard.numberOfDecimals",
                         "listBoxValues" => $itemDecimalList
-                    ]
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    private function generateLoadingAnimationSection():array
-    {
-        $loadingAnimationTypes = ItemViewConfig::getLoadingAnimationTypes();
-        $loadingAnimationTypesList = StepHelper::generateTranslatedListBoxValues($loadingAnimationTypes);
-
-        return [
-            "title" => "Wizard.displayedInfoLoadingAnimation",
-            "description" => "Wizard.displayedInfoLoadingAnimationDescription",
-            "form" => [
-                "displayInfo_loadingAnimation" => [
-                    "type" => "select",
-                    "defaultValue" => $loadingAnimationTypesList[0]['value'],
-                    "options" => [
-                        "name" => "Wizard.loadingAnimation",
-                        "listBoxValues" => $loadingAnimationTypesList
                     ]
                 ]
             ]

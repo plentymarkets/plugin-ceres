@@ -9,8 +9,11 @@ module.exports = env =>
         name: "styles",
         mode: env.prod ? "production" : "development",
         entry: {
-            "ceres": "./resources/scss/ceres.scss",
-            "ceres-legacy": "./resources/scss/ceres-legacy.scss"
+            category: "./resources/scss/category.scss",
+            item: "./resources/scss/item.scss",
+            checkout: "./resources/scss/checkout.scss",
+            icons: "./resources/scss/icons.scss",
+            shopbuilder: "./resources/scss/shopbuilder.scss"
         },
         module: {
             rules: [
@@ -48,7 +51,7 @@ module.exports = env =>
         plugins: [
             new FixStyleOnlyEntriesPlugin(),
             new MiniCssExtractPlugin({
-                filename: "../../css/[name]" + (env.prod ? ".min" : "") + ".css",
+                filename: "../../css/ceres-[name]" + (env.prod ? ".min" : "") + ".css",
             })
         ],
         output: {

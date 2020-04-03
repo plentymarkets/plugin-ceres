@@ -1,8 +1,6 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{{ Twig.component("Ceres::Category.Components.StepByStepNavigation") }}
-
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set appearance      = widget.settings.appearance.mobile | default("none") %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -20,13 +18,15 @@
     <div class="widget-inner">
 
         {% if isPreview %}
-        
+
             <div class="row">
                 {% for i in 1..numberOfColumns * numberOfRows %}
                 <div class="col-{{ 12 / numberOfColumns }} mb-3">
                     <div class="nav-item border d-flex{% if source != "none" %} preview{% endif %}">
                         {% if source != "none" %}
-                            <div class="prop-xs-1-1"><svg class="d-none mx-auto w-75"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 336H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v276a6 6 0 0 1-6 6zM128 152c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zM96 352h320v-80l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L192 304l-39.515-39.515c-4.686-4.686-12.284-4.686-16.971 0L96 304v48z"/></svg></div>
+                            <div class="prop-1-1">
+                                <svg class="d-none mx-auto w-75" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 336H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v276a6 6 0 0 1-6 6zM128 152c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zM96 352h320v-80l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L192 304l-39.515-39.515c-4.686-4.686-12.284-4.686-16.971 0L96 304v48z"/></svg>
+                            </div>
                         {% endif %}
                         <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto">{{ trans("IO::Faker.categoryName", {"count": loop.index}) }}</span></div>
                     </div>
@@ -51,14 +51,14 @@
                     image-source="{{ source }}"
                     :columns="{{ numberOfColumns }}"
                     :children-count="{{ Twig.print("children | length")}}">
-                    
+
                     <div class="row">
                         {{ Twig.for("i", "1..children | length") }}
                             {{ Twig.if("loop.index <= chunkSize") }}
                                 <div class="col-{{ 12 / numberOfColumns }} mb-3">
-                                    <div class="nav-item border d-flex isLoading refreshing with-icon component-loading">
+                                    <div class="nav-item border d-flex is-loading refreshing with-icon component-loading">
                                         {{ Twig.if("hasImg") }}
-                                            <div class="prop-xs-1-1"></div>
+                                            <div class="prop-1-1"></div>
                                         {{ Twig.endif() }}
                                         <div class="nav-text d-flex align-center p-2">&nbsp;</div>
                                     </div>
@@ -80,6 +80,6 @@
             {{ Twig.endif() }}
 
         {% endif %}
-    
+
     </div>
 </div>

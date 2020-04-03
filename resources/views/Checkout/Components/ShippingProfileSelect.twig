@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-shipping-profile-select">
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
-        <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading || isCheckoutReadonly }">
+        <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
             <li v-for="shippingProfile in shippingProfileList" class="method-list-item" :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
@@ -23,11 +23,7 @@
                        :data-title="getTooltip(shippingProfile.parcelServicePresetId, selectedPaymentMethodId)"
                     >
                     <div class="icon">
-                        <div class="square-container" v-if="shippingProfile.icon">
-                            <div class="square-inner center-xy">
-                                <img :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName" :title="shippingProfile.parcelServiceName" >
-                            </div>
-                        </div>
+                        <img class="img-fluid" v-if="shippingProfile.icon" :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName" :title="shippingProfile.parcelServiceName">
                     </div><!--
                     --><div class="content">
                         ${ shippingProfile.parcelServiceName } - ${ shippingProfile.parcelServicePresetName }

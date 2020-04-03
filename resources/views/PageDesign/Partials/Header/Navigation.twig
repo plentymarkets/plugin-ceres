@@ -3,11 +3,11 @@
 {% set companyName  = trans("Ceres::Template.headerCompanyName") %}
 {% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}
 
-<nav class="navbar header-fw{% if useMegaMenu %} megamenu{%endif%}">
-    <div class="container-max">
-        <div class="row mx-0">
-            <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
-                <a class="navbar-brand" href="{{ homepageURL }}">
+<nav class="navbar header-fw p-0 border-bottom{% if useMegaMenu %} megamenu{% else %} normalmenu{% endif %}">
+    <div class="container-max d-block">
+        <div class="row mx-0 position-relative d-flex">
+            <div class="brand-wrapper px-lg-3{% if showHeaderNavBar == "side" %} position-relative{% endif %}">
+                <a class="navbar-brand py-2" href="{{ homepageURL }}">
                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
                     {% else %}
@@ -15,12 +15,12 @@
                     {% endif %}
                 </a>
 
-                <button id="btnMainMenuToggler" v-open-mobile-navigation class="navbar-toggler d-lg-none" type="button">
+                <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
                     &#9776;
                 </button>
             </div>
 
-            <div id="mainNavbarCollapsable" class="d-none d-lg-block">
+            <div class="main-navbar-collapsable d-none d-lg-block">
                 {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
                     {% include "Ceres::PageDesign.Partials.Header.NavigationList" %}
                 {% endif %}

@@ -1,6 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass             = widget.settings.customClass.mobile %}
 {% set isFixed                 = widget.settings.isFixed.mobile %}
 {% set showOnHomepage          = widget.settings.showOnHomepage.mobile %}
 {% set showOnMyAccount         = widget.settings.showOnMyAccount.mobile %}
@@ -24,9 +24,9 @@
 {% endif %}
 
 <div class="breadcrumbs header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
-    <nav class="small hidden-sm-down px-0" data-component="breadcrumbs" data-renderer="twig">
+    <nav class="small d-none d-md-block px-0" data-component="breadcrumbs" data-renderer="twig">
         {{ Twig.set('crumbs', '[]') }}
-        <ul class="breadcrumb container-max">
+        <ul class="breadcrumb container-max px-3 py-2 my-0 mx-auto">
             <li class="breadcrumb-item">
                 <a href="{{ Twig.print('urls.home') }}">
                     <i class="fa fa-home" aria-hidden="true"></i>
@@ -78,7 +78,9 @@
 
                 {{ Twig.set("lastCategory", "categoryBreadcrumbs | last") }}
                 {{ Twig.if("lastCategory.details is defined") }}
-                    <li class="breadcrumb-item active"><span>{{ Twig.print("lastCategory.details[0].name") }}</span></li>
+                    <li class="breadcrumb-item active">
+                        <span>{{ Twig.print("lastCategory.details[0].name") }}</span>
+                    </li>
                 {{ Twig.elseif("item.documents[0].data is defined") }}
                     <li class="breadcrumb-item active">
                         <span>{{ Twig.print("item.documents[0].data | itemName") }}</span>

@@ -1,62 +1,26 @@
-.cmp-totals{
+.cmp-totals {
+    dt,
+    dd {
+        display: inline-block;
+        vertical-align: top;
+    }
 
+    dt {
+        width: 70%;
+    }
 
-	// .totalSum {
-	// 	clear: right;
+    dd {
+        width: 30%;
+        text-align: right;
+    }
 
+    .rebate-hint {
+        color: $gray-600;
+    }
 
-	// 	dt{
-	// 		width: 68%;
-	// 		float:left;
-	// 	}
-
-	// 	dd{
-	// 		float: right;
-	// 	}
-	// }
-
-	// .vatTotals {
-
-	// 	dt{
-	// 		width: 68%;
-	// 		float:left;
-	// 	}
-
-	// 	dd{
-	// 		float: right;
-	// 	}
-	// }
-
-	dt, dd{
-		display: inline-block;
-		vertical-align: top;
-	}
-
-	dt{
-		width: 70%;
-	}
-
-	dd{
-		text-align: right;
-		width: 30%;
-	}
-	
-	.rebate-hint{
-		color: $gray;
-	}
-
-	hr {
-		@include media-breakpoint-down(xs) {
-			margin-top: 5px;
-			margin-bottom: 5px;
-		}
-	}
-
-	.split-totals-height {
-		@include media-breakpoint-only(sm) {
-			// height: calc(100vh - 135px);
-			// overflow: auto;
-			// overflow-x: hidden;
-		}
-	}
+    hr {
+        @include media-breakpoint-down(xs) {
+            margin: 5px 0;
+        }
+    }
 }

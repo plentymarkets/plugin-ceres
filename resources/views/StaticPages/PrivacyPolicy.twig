@@ -26,7 +26,7 @@
                 {% if privacyPolicy.htmlText %}
                     {{ privacyPolicy.htmlText | raw }}
                 {% else %}
-                    <p class="static-page-plain-text">{{ privacyPolicy.plainText }}</p>
+                    <p>{{ privacyPolicy.plainText }}</p>
                 {% endif %}
 
                 {{ LayoutContainer.show("Ceres::StaticPages.PrivacyPolicy") }}

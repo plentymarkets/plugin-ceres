@@ -4,7 +4,7 @@ import { mapState } from "vuex";
 
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("shipping-privacy-hint-check", {
+export default Vue.component("shipping-privacy-hint-check", {
 
     props: {
         template:
@@ -34,6 +34,7 @@ Vue.component("shipping-privacy-hint-check", {
         privacyHintContent()
         {
             const andTranslation = TranslationService.translate("Ceres::Template.checkoutShippingPrivacyHintAnd");
+
             let parcelServiceInformation = "";
 
             for (const hint of this.currentPrivacyHints)
