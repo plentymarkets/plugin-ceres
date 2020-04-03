@@ -279,6 +279,8 @@ export default {
                     }
                     else
                     {
+                        // set compMin, if it is 0
+                        this.compMin = this.compMin || this.min;
                         this.$emit("out-of-stock", false);
                     }
                 }
