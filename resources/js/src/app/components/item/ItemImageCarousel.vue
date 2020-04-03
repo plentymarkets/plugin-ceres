@@ -127,6 +127,10 @@ export default {
                 {
                     this.initCarousel();
                     this.initThumbCarousel();
+                })
+                .catch(event =>
+                {
+                    console.log("error while loading lightbox", event);
                 });
         });
     },
@@ -306,7 +310,7 @@ export default {
 
         loadLightbox()
         {
-            return new Promise(resolve =>
+            return new Promise((resolve, reject) =>
             {
                 const script = document.querySelector("script#lightboxscript");
     
@@ -323,6 +327,7 @@ export default {
                     script.src = `${ this.pluginPath }/js/dist/lightbox.min.js`;
     
                     script.addEventListener("load", () => resolve(), false);
+                    script.addEventListener("error", event => reject(event), false);
     
                     document.body.appendChild(script);
                 }
