@@ -112,26 +112,29 @@ export default {
     {
         document.addEventListener("onVariationChanged", event =>
         {
-            // clear type specific bindings
-            if (this.property.valueType === "selection")
+            if(event.itemId === this.itemId)
             {
-                this.selectionValue = this.property.value || null;
-            }
-            else if (this.property.valueType === "file")
-            {
-                if (this.property.value && this.property.value.length)
+                // clear type specific bindings
+                if (this.property.valueType === "selection")
                 {
-                    NotificationService.warn(
-                        TranslationService.translate("Ceres::Template.singleItemOrderPropertyFileHasReset",
-                            { propertyName: this.property.names.name })
-                    ).closeAfter(5000);
+                    this.selectionValue = this.property.value || null;
                 }
+                else if (this.property.valueType === "file")
+                {
+                    if (this.property.value && this.property.value.length)
+                    {
+                        NotificationService.warn(
+                            TranslationService.translate("Ceres::Template.singleItemOrderPropertyFileHasReset",
+                                { propertyName: this.property.names.name })
+                        ).closeAfter(5000);
+                    }
 
-                this.clearSelectedFile();
-            }
-            else
-            {
-                this.inputValue = this.property.value || "";
+                    this.clearSelectedFile();
+                }
+                else
+                {
+                    this.inputValue = this.property.value || "";
+                }
             }
         });
     },
