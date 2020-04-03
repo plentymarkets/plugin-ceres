@@ -112,6 +112,7 @@ Vue.component("user-login-handler", UserLoginHandler);
 Vue.component("item-bundle", () => import("./app/components/item/ItemBundle.vue"));
 Vue.component("order-property-value", () => import("./app/components/item/OrderPropertyValue.vue"));
 Vue.component("quantity-input", () => import("./app/components/item/QuantityInput.vue"));
+Vue.component("edit-coupon-overlay", () => import("./app/components/item/EditCouponOverlay.vue"));
 
 Vue.component("tag-list", () => import("./app/components/item/TagList.vue"));
 
