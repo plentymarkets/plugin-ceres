@@ -9082,11 +9082,6 @@ button:focus {
     max-width: 1200px;
 }
 
-// Owl-Navigation above .stretched-link
-.owl-carousel {
-    z-index: 2;
-}
-
 .lozad {
     display: block;
     min-height: 1px;
@@ -9319,7 +9314,6 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
 .owl-carousel {
     /* position relative and z-index fix webkit rendering fonts issue */
     position: relative;
-    z-index: 1;
     display: none;
     width: 100%;
     -webkit-tap-highlight-color: transparent;
@@ -9367,6 +9361,7 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     }
 
     .owl-dots {
+        z-index: 2;
         display: block;
     }
 }
@@ -11034,6 +11029,11 @@ textarea.no-resize {
         padding: 0 .8rem;
         vertical-align: top;
         background-color: $white;
+
+        /* addToBasket */
+        .btn {
+            z-index: 1;
+        }
     }
 
     .price {
