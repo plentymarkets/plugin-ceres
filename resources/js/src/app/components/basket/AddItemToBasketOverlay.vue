@@ -115,9 +115,6 @@ export default {
                 {
                     const basketItem = this.basketItems.find(item => item.id === updatedBasketItem.id) || {};
 
-                    basketItem.quantity = updatedBasketItem.quantity;
-                    basketItem.price = updatedBasketItem.price;
-                    basketItem.basketItemOrderParams = updatedBasketItem.basketItemOrderParams;
                     this.showItem(basketItem);
                 }
             });
