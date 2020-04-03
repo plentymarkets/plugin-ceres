@@ -83,7 +83,7 @@ const mutations =
 
 const actions =
     {
-        loadVariation({ state, commit, rootState }, variationId)
+        loadVariation({ state, commit, getters, rootState, rootGetters }, variationId)
         {
             return new Promise(resolve =>
             {
@@ -112,12 +112,17 @@ const actions =
                         keepVariationId = false;
                     }
 
+                    const addToBasketLoadingId = rootState.items.isItemSet ? rootGetters[`${ rootState.items.itemSetId }/currentItemVariation`].variation.id : getters.currentItemVariation.variation.id;
+
+                    commit("setIsAddToBasketLoading", addToBasketLoadingId, { root: true });
+
                     ApiService
                         .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem", setPriceOnly: rootState.items.isItemSet })
                         .done(response =>
                         {
                             // store received variation data for later reuse
                             commit("setVariation", response);
+                            commit("setIsAddToBasketLoading", 0, { root: true });
 
                             if (!rootState.items.isItemSet)
                             {
