@@ -83,7 +83,7 @@ const mutations =
 
 const actions =
     {
-        loadVariation({ state, commit, rootState, rootGetters }, variationId)
+        loadVariation({ state, commit, getters, rootState, rootGetters }, variationId)
         {
             return new Promise(resolve =>
             {
@@ -112,7 +112,7 @@ const actions =
                         keepVariationId = false;
                     }
 
-                    const addToBasketLoadingId = rootState.items.isItemSet ? rootGetters[`${ rootState.items.itemSetId }/currentItemVariation`].variation.id : variationId;
+                    const addToBasketLoadingId = rootState.items.isItemSet ? rootGetters[`${ rootState.items.itemSetId }/currentItemVariation`].variation.id : getters.currentItemVariation.variation.id;
 
                     commit("setIsAddToBasketLoading", addToBasketLoadingId, { root: true });
 
