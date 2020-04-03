@@ -252,7 +252,16 @@ export default {
 
         allVariationsSelected()
         {
-            return this.$store.getters["itemSetAllVariationSelected"];
+            if (this.isSet)
+            {
+                return this.$store.getters["itemSetAllVariationSelected"];
+            }
+            else
+            {
+                return this.$store.state.items[this.itemId]
+                    && this.$store.state.items[this.itemId].variationSelect
+                    && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
+            }
         },
 
         isLoading()
