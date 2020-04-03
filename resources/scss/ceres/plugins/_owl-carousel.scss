@@ -10,7 +10,6 @@
 .owl-carousel {
     /* position relative and z-index fix webkit rendering fonts issue */
     position: relative;
-    z-index: 1;
     display: none;
     width: 100%;
     -webkit-tap-highlight-color: transparent;
@@ -58,6 +57,7 @@
     }
 
     .owl-dots {
+        z-index: 2;
         display: block;
     }
 }

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 const ApiService = require("../../services/ApiService");
 
 const state =
@@ -213,6 +214,17 @@ const actions =
     {
         initBillingAddress({ commit }, { id, addressList })
         {
+            // format dates from the old ui into ISO
+            addressList.forEach(address =>
+            {
+                const option = address.options.find(option => option.typeId === 9);
+
+                if (option && isNaN(Date.parse(option.value)))
+                {
+                    option.value = dayjs(option.value * 1000).format("YYYY-MM-DD");
+                }
+            });
+
             commit("setBillingAddressList", addressList);
             commit("selectBillingAddress", addressList.find(address => address.id === id));
         },
