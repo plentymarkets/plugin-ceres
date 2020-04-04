@@ -1,10 +1,13 @@
 <template>
-    <div class="special-tags p-2" v-show="label.length || bundleType === 'bundle'">
+    <div class="special-tags p-2" v-if="label.length || bundleType === 'bundle' || itemType === 'set'">
         <span v-if="label.length" class="badge" :class="tagClass">
             {{ label }}
         </span>
-        <span v-else class="badge badge-bundle bg-info">
+        <span v-else-if="bundleType === 'bundle'" :class="tagClasses.itemBundle">
             {{ $translate("Ceres::Template.itemBundle") }}
+        </span>
+        <span v-else-if="itemType === 'set'" :class="tagClasses.itemSet">
+            {{ $translate("Ceres::Template.itemSet") }}
         </span>
     </div>
 </template>
@@ -22,7 +25,8 @@ export default {
         "variationRetailPrice",
         "specialOfferPrice",
         "decimalCount",
-        "bundleType"
+        "bundleType",
+        "itemType"
     ],
 
     data()
@@ -35,7 +39,9 @@ export default {
                 1: "badge-offer badge-danger",
                 2: "badge-new badge-primary",
                 3: "badge-top badge-success",
-                default: "badge-success"
+                default: "badge-success",
+                itemBundle: "badge badge-bundle bg-info",
+                itemSet: "badge badge-dark"
             },
             labels:
             {
@@ -69,8 +75,7 @@ export default {
 
         getLabel()
         {
-            if (!isNullOrUndefined(this.storeSpecial) && this.storeSpecial.id === 1 && !isNullOrUndefined(this.recommendedRetailPrice)
-            )
+            if (!isNullOrUndefined(this.storeSpecial) && this.storeSpecial.id === 1 && !isNullOrUndefined(this.recommendedRetailPrice))
             {
                 return this.getPercentageSale();
             }

@@ -69,7 +69,7 @@
     ],
     "complexity"              : [
       "warn",
-      5
+      15
     ],
     "radix"                   : "off",
     "consistent-return"       : "error",
