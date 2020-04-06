@@ -22,6 +22,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $isItemSet;
     public $setComponents;
     public $setAttributeMap = [];
+    public $requestedVariationUrl;
+
 
     public function init($params)
     {
@@ -50,7 +52,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->setComponents = $params['setComponents'];
         $this->setAttributeMap = $params['setAttributeMap'];
-
+        $this->requestedVariationUrl = explode('?', $this->request->getUri())[0];
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
         foreach ($this->item['documents'][0]['data']['defaultCategories'] as $category) {
