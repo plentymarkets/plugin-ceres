@@ -155,11 +155,6 @@ export default {
         {
             type: String,
             default: null
-        },
-        urlWithVariationId:
-        {
-            type: Boolean,
-            default: true
         }
     },
 
@@ -196,6 +191,11 @@ export default {
                 this.item.prices.default.price.value * (1 - (this.item.item.rebate / 100)),
                 this.item.prices.default.currency
             );
+        },
+
+        urlWithVariationId()
+        {
+            return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0;
         },
 
         ...mapState({
