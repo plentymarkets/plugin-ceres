@@ -33,7 +33,6 @@ Vue.use(Vuex);
 // eslint-disable-next-line
 const store = new Vuex.Store(
     {
-        strict: true,
         modules:
         {
             address,
