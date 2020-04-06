@@ -1,7 +1,7 @@
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
 import { pathnameEquals } from "../../helper/url";
-import { isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
 const ApiService = require("../../services/ApiService");
 
@@ -41,18 +41,7 @@ const mutations =
 
                 for (const item of basketItems)
                 {
-                    let oldBasketItem = null;
-
-                    if (isNullOrUndefined(item.variation))
-                    {
-                        oldBasketItem = state.items.find(i => i.id === item.id);
-                        item.variation = oldBasketItem.variation;
-                    }
-                    if (isNullOrUndefined(item.basketItemOrderParams))
-                    {
-                        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
-                        item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
-                    }
+                    _fillMissingData(item);
                     newItems.push(item);
                 }
 
@@ -331,6 +320,45 @@ const actions =
             });
         }
     };
+
+function _fillMissingData(item)
+{
+    let oldBasketItem = null;
+
+    if (isNullOrUndefined(item.variation))
+    {
+        oldBasketItem = state.items.find(i => i.id === item.id);
+        item.variation = oldBasketItem.variation;
+    }
+
+    if (isNullOrUndefined(item.basketItemOrderParams))
+    {
+        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
+        item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
+    }
+
+    if (isDefined(item.setComponents) &&
+        item.setComponents.length > 0 &&
+        isNullOrUndefined(item.setComponents[0].variation))
+    {
+        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
+
+        if (oldBasketItem.setComponents && oldBasketItem.setComponents.length > 0)
+        {
+            for (const setComponent of item.setComponents)
+            {
+                const oldComp = oldBasketItem.setComponents.find(comp => comp.variationId === setComponent.variationId);
+
+                setComponent.variation = oldComp.variation;
+
+                if (isNullOrUndefined(setComponent.basketItemOrderParams))
+                {
+                    setComponent.basketItemOrderParams = oldComp.basketItemOrderParams;
+                }
+            }
+        }
+    }
+}
 
 export default
 {

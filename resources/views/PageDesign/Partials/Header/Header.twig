@@ -49,9 +49,5 @@
         {% set initialCategory = null %}
     {% endif %}
 
-    <mobile-navigation :initial-category="{{ initialCategory | json_encode }}" :include-language="{{ urls.includeLanguage | json_encode }}">
-        <template #loading-animation>
-            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-        </template>
-    </mobile-navigation>
+    <mobile-navigation :initial-category="{{ initialCategory | json_encode }}" :include-language="{{ urls.includeLanguage | json_encode }}"></mobile-navigation>
 </div>
