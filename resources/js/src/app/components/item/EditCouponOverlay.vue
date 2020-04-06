@@ -1,63 +1,89 @@
 <template>
-    <form method="post" @submit.prevent="submit()">
-        <div id="edit-coupon-overlay" class="modal fade" tabindex="-1" role="dialog" ref="editCouponOverlay">
-            <div class="modal-dialog modal-lg mx-auto modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    
-                    <!-- MODAL HEADER -->
-                    <div class="modal-header">
-                        <div class="modal-title h4">{{ $translate("Ceres::Template.orderConfirmationCouponEdit") }}</div>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!-- ./MODAL HEADER -->
-
-                    <!-- MODAL BODY -->
-                    <div class="modal-body overflow-x-hidden modal-multi-row">
-                        <template v-for="coupon in couponData">
-                            <div class="row">
-                                <div v-if="true" class="col-12 h5">Gutschein</div>
-                                <div class="col-6">
-                                    <div class="input-unit">
-                                        <input type="text" name="sender" autocomplete="off" data-validate="text" data-autofocus v-model="coupon.sender">
-                                        <label for="sender">{{ $translate("Ceres::Template.orderConfirmationCouponSender") }}*</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-unit">
-                                        <input type="text" name="recipient" autocomplete="off" data-validate="text" v-model="coupon.recipient">
-                                        <label for="recipient">{{ $translate("Ceres::Template.orderConfirmationCouponRecipient") }}*</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-unit">
-                                        <textarea name="content" rows="3" autocomplete="off" v-model="coupon.content"></textarea>
-                                        <label for="content">{{ $translate("Ceres::Template.orderConfirmationCouponContent") }}</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <!-- ./MODAL BODY -->
-
-                    <!-- MODAL FOOTER -->
-                    <div class="modal-footer">
-                        <button type="reset" :disabled="isDisabled" class="btn btn-danger" data-dismiss="modal" aria-label="Close" @click="closeModal()">
-                            <span>{{ $translate("Ceres::Template.orderConfirmationCouponCancel") }}</span>
-                            <i class="fa fa-times default-float" aria-hidden="true"></i> 
-                        </button>
-                        <button type="submit" :disabled="isDisabled" class="btn btn-primary">
-                            <span>{{ $translate("Ceres::Template.orderConfirmationCouponSave") }}</span>
-                            <i class="fa fa-check default-float" aria-hidden="true"></i> 
-                        </button>
-                    </div>
-                    <!-- ./MODAL FOOTER -->
-                
-                </div>
+    <div>
+        <div class="row">
+            <div class="col-12 col-sm-6 mb-2">
+                <button type="button" class="btn btn-primary btn-appearance btn-block" data-toggle="modal" data-target="#edit-coupon-overlay">
+                    <span>{{ $translate("Ceres::Template.couponEdit") }}</span>
+                    <i class="fa fa-gift default-float" aria-hidden="true"></i> 
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 mb-2">
+                <button v-if="!isFinalized" type="submit" class="btn btn-success btn-block" @click="finalize()">
+                    <span>{{ $translate("Ceres::Template.couponFinalize") }}</span>
+                    <icon icon="check" :loading="isLoading"></icon>
+                </button>
+                <!-- <button type="button" class="btn btn-primary btn-appearance btn-block">
+                    <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
+                    <i class="fa fa-download default-float" aria-hidden="true"></i> 
+                </button> -->
+                <a v-if="!!isFinalized" href="#" class="btn btn-primary btn-appearance btn-block"
+                    title="$translate('Ceres::Template.couponDownload')">
+                    <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
+                    <i class="fa fa-download default-float" aria-hidden="true"></i> 
+                </a>
             </div>
         </div>
-    </form>
+        <form method="post" @submit.prevent="submit()">
+            <div id="edit-coupon-overlay" class="modal fade" tabindex="-1" role="dialog" ref="editCouponOverlay">
+                <div class="modal-dialog modal-lg mx-auto modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        
+                        <!-- MODAL HEADER -->
+                        <div class="modal-header">
+                            <div class="modal-title h4">{{ $translate("Ceres::Template.couponEdit") }}</div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!-- ./MODAL HEADER -->
+
+                        <!-- MODAL BODY -->
+                        <div class="modal-body overflow-x-hidden modal-multi-row">
+                            <template v-for="coupon in couponData">
+                                <div class="row">
+                                    <div v-if="true" class="col-12 h5">Gutschein</div>
+                                    <div class="col-6">
+                                        <div class="input-unit">
+                                            <input :disabled="isLoading || !!isFinalized" type="text" name="sender" autocomplete="off" data-validate="text" data-autofocus v-model="coupon.sender">
+                                            <label for="sender">{{ $translate("Ceres::Template.couponSender") }}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="input-unit">
+                                            <input :disabled="isLoading || !!isFinalized" type="text" name="recipient" autocomplete="off" data-validate="text" v-model="coupon.recipient">
+                                            <label for="recipient">{{ $translate("Ceres::Template.couponRecipient") }}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-unit">
+                                            <textarea :disabled="isLoading || !!isFinalized" name="content" rows="3" autocomplete="off" v-model="coupon.content"></textarea>
+                                            <label for="content">{{ $translate("Ceres::Template.couponContent") }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <!-- ./MODAL BODY -->
+
+                        <!-- MODAL FOOTER -->
+                        <div class="modal-footer">
+                            <button type="reset" :disabled="isLoading || !!isFinalized" class="btn btn-danger" data-dismiss="modal" aria-label="Close" @click="closeModal()">
+                                <span>{{ $translate("Ceres::Template.couponCancel") }}</span>
+                                <i class="fa fa-times default-float" aria-hidden="true"></i> 
+                            </button>
+                            <button type="submit" :disabled="isLoading || !!isFinalized" class="btn btn-primary">
+                                <span>{{ $translate("Ceres::Template.couponSave") }}</span>
+                                <!-- <i class="fa fa-check default-float" aria-hidden="true"></i> -->
+                                <icon icon="floppy-o" :loading="isLoading"></icon>
+                            </button>
+                        </div>
+                        <!-- ./MODAL FOOTER -->
+                    
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -68,14 +94,19 @@ const ApiService    = require("../../services/ApiService");
 
 export default {
     props: {
-        orderItem: Object
+        orderItem: Object,
+        
+        isFinalized: {
+            type: Boolean,
+            default: false
+        }
     },
     
     data()
     {
         return {
             couponData: [],
-            isDisabled: false
+            isLoading: false
         };
     },
 
@@ -95,25 +126,49 @@ export default {
     {
         submit()
         {
-            this.isDisabled = true;
+            this.isLoading = true;
 
             ApiService.put("/rest/webshop/coupon_document", {couponData: this.couponData})
                 .done(response =>
                 {
                     NotificationService.success(
-                        this.$translate("Ceres::Template.orderConfirmationCouponSuccessful")
+                        this.$translate("Ceres::Template.couponSuccessful")
                     );
                     this.closeModal();
                 })
                 .fail(() =>
                 {
                     NotificationService.error(
-                        this.$translate("Ceres::Template.orderConfirmationCouponFailed")
+                        this.$translate("Ceres::Template.couponFailed")
                     ).closeAfter(10000);
                 })
                 .always(() =>
                 {
-                    this.isDisabled = false;
+                    this.isLoading = false;
+                });
+        },
+
+        finalize()
+        {
+            this.isLoading = true;
+
+            ApiService.put("") // Route and Params missing
+                .done(response =>
+                {
+                    NotificationService.success(
+                        this.$translate("Ceres::Template.couponFinalizeSuccess")
+                    );
+                    this.closeModal();
+                })
+                .fail(() =>
+                {
+                    NotificationService.error(
+                        this.$translate("Ceres::Template.couponFinalizeFailure")
+                    ).closeAfter(10000);
+                })
+                .always(() =>
+                {
+                    this.isLoading = false;
                 });
         },
 
