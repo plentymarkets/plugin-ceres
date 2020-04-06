@@ -214,7 +214,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     basketItems: {
       handler: function handler(newValue, oldValue) {
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(this.variationId) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(oldValue) && JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(this.variationId)) {
           this.fetchQuantityFromBasket();
         }
       },
@@ -290,6 +290,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min) {
         // minimum quantity already in basket
         this.compMin = this.compInterval;
+      } else if (this.variationBasketQuantity === 0) {
+        this.compMin = this.min;
       }
 
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.max)) {
@@ -384,8 +386,8 @@ var render = function() {
             {
               name: "tooltip",
               rawName: "v-tooltip",
-              value: _vm.isMinimum,
-              expression: "isMinimum"
+              value: _vm.isMinimum && _vm.compMax !== 0,
+              expression: "isMinimum && compMax !== 0"
             }
           ],
           staticClass:
