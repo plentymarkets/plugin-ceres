@@ -45,6 +45,28 @@
 /******/ 	function jsonpScriptSrc(chunkId) {
 /******/ 		return __webpack_require__.p + "chunks/ceres-" + ({}[chunkId]||chunkId) + ".js"
 /******/ 	}
+/******/ 	// WebpackRequireFrom - monkey-patching
+/******/ 	if (typeof jsonpScriptSrc === 'function') {
+/******/ 	  var original_jsonpScriptSrc = jsonpScriptSrc;
+/******/ 	  function patchJsonpScriptSrc () {
+/******/ 	    try {
+/******/ 	      if (typeof __loadPluginChunk !== "function") {
+/******/ 	        throw new Error("WebpackRequireFrom: '__loadPluginChunk' is not a function or not available at runtime. See https://github.com/agoldis/webpack-require-from#troubleshooting");
+/******/ 	      }
+/******/ 	      var newSrc = __loadPluginChunk(original_jsonpScriptSrc.apply(this, arguments));
+/******/ 	      if (!newSrc || typeof newSrc !== 'string') {
+/******/ 	        throw new Error("WebpackRequireFrom: '__loadPluginChunk' does not return string. See https://github.com/agoldis/webpack-require-from#troubleshooting");
+/******/ 	      }
+/******/ 	      return newSrc;
+/******/ 	    } catch (e) {
+/******/ 	      if (!false) {
+/******/ 	        console.error(e);
+/******/ 	      }
+/******/ 	      return original_jsonpScriptSrc.apply(this, arguments);
+/******/ 	    }
+/******/ 	  }
+/******/ 	  jsonpScriptSrc = patchJsonpScriptSrc
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
