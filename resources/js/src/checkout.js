@@ -1,5 +1,5 @@
 // checkout script extends category script
-import "./category";
+import "./base";
 
 import "./app/components/checkout/AcceptGtcCheck";
 import "./app/components/checkout/Checkout";
