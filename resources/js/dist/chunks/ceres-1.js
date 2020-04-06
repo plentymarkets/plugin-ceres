@@ -638,7 +638,7 @@ var render = function() {
                         title: _vm._f(
                           "translate"
                         )("Ceres::Template.singleItemQuantityMax", {
-                          max: _vm.item.variation.maximumOrderQuantity
+                          max: _vm.maximumQuantity
                         })
                       }
                     },
