@@ -199,7 +199,6 @@ import "./app/filters/itemPrice.filter";
 import "./app/filters/itemUrl.filter";
 import "./app/filters/numberFormat.filter";
 import "./app/filters/propertySurcharge.filter";
-import "./app/filters/propertySurchargeSum.filter";
 import "./app/filters/propertyFileUrl.filter";
 import "./app/filters/translate.filter";
 import "./app/filters/truncate.filter";
