@@ -60,7 +60,8 @@
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
-    "webpack-fix-style-only-entries": "^0.3.1"
+    "webpack-fix-style-only-entries": "^0.3.1",
+    "webpack-require-from": "^1.8.1"
   },
   "dependencies": {
     "bootstrap": "4.4.1",
