@@ -36,7 +36,7 @@
     {% if assetName == 'ceres-checkout' %}
         {{ LayoutContainer.show("Ceres::Checkout.Styles") }}
     {% endif %}
-    {% if assetName == 'ceres-item' %}
+    {% if services.template.getCurrentTemplate() == "tpl.item" %}
         {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
     {% endif %}
 </head>
@@ -242,7 +242,7 @@
 {% if assetName == 'ceres-checkout' %}
     {{ LayoutContainer.show("Ceres::Checkout.AfterScriptsLoaded") }}
 {% endif %}
-{% if assetName == 'ceres-item' %}
+{% if services.template.getCurrentTemplate() == "tpl.item" %}
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
 {% endif %}
 
@@ -283,6 +283,8 @@
 {% if not services.template.shouldBeCached() %}
     <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
 {% endif %}
+
+{{ dump(templateName) }}
 
 </body>
 </html>
