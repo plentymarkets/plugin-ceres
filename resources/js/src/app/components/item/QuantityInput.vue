@@ -21,7 +21,7 @@
             <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
                  @click="decreaseValue()"
                  :class="{ 'disabled': isMinimum || waiting, 'btn-appearance': useAppearance }"
-                 v-tooltip="isMinimum"
+                 v-tooltip="isMinimum && compMax !== 0"
                  data-toggle="tooltip"
                  data-placement="bottom"
                  :title="minimumHint">
@@ -198,9 +198,7 @@ export default {
         {
             handler(newValue, oldValue)
             {
-                if (isDefined(this.variationId) &&
-                    isDefined(oldValue) &&
-                    JSON.stringify(newValue) !== JSON.stringify(oldValue))
+                if (isDefined(this.variationId))
                 {
                     this.fetchQuantityFromBasket();
                 }
@@ -304,6 +302,10 @@ export default {
             {
                 // minimum quantity already in basket
                 this.compMin = this.compInterval;
+            }
+            else if (this.variationBasketQuantity === 0)
+            {
+                this.compMin = this.min;
             }
 
             if (!isNullOrUndefined(this.max))

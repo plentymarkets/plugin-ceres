@@ -164,9 +164,6 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
           var basketItem = _this.basketItems.find(function (item) {
             return item.id === updatedBasketItem.id;
           }) || {};
-          basketItem.quantity = updatedBasketItem.quantity;
-          basketItem.price = updatedBasketItem.price;
-          basketItem.basketItemOrderParams = updatedBasketItem.basketItemOrderParams;
 
           _this.showItem(basketItem);
         }
