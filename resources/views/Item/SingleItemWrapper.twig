@@ -37,7 +37,8 @@
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
                     "price"         : "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
-                    {% if itemData.prices.default.baseLot > 0 %}
+                    "url"           : "{{ requestedVariationUrl }},
+{% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification": {
                         "@type": "UnitPriceSpecification",
                         "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
@@ -48,7 +49,7 @@
                             "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
                         }
                     },
-                    {% endif %}
+{% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ itemData.item.condition.names.name }}",
                     "serialNumber"  : "{{ itemData.variation.number }}"
