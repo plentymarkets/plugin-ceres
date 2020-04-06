@@ -62,7 +62,11 @@ const mutations =
                 }
                 else
                 {
-                    state.items.push(basketItem);
+                    // use array clone to keep activity, could be removed with usage of vue3
+                    const clonedItems = state.items.slice(0);
+
+                    clonedItems.push(basketItem);
+                    state.items = clonedItems;
                 }
             }
         },
@@ -172,7 +176,7 @@ const actions =
 
             ApiService.listen("AfterBasketItemUpdate", data =>
             {
-                commit("updateBasketItem", data.basketItems);
+                commit("updateBasketItem", data.basketItems[0]);
             });
 
             ApiService.after(() =>
