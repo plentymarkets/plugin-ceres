@@ -606,7 +606,7 @@ var render = function() {
             "variation-id": _vm.item.variation.id,
             "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
             "has-children":
-              !!_vm.item.filter && _vm.item.filter.hasActiveChildren,
+              !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
             "interval-quantity": _vm.item.variation.intervalOrderQuantity || 1,
             "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
             "maximum-quantity":
@@ -816,7 +816,7 @@ var render = function() {
                   "variation-id": _vm.item.variation.id,
                   "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
                   "has-children":
-                    !!_vm.item.filter && _vm.item.filter.hasActiveChildren,
+                    !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
                   "interval-quantity":
                     _vm.item.variation.intervalOrderQuantity || 1,
                   "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
