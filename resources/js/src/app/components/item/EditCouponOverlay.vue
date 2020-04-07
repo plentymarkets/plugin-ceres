@@ -117,7 +117,9 @@ export default {
             this.couponData.push({
                 sender: "",
                 recipient: "",
-                content: ""
+                content: "",
+                campaignCodeOrderId: this.orderItem.giftCard.information[0].id,
+                accessKey: ""
             });
         }
     },
@@ -128,18 +130,18 @@ export default {
         {
             this.isLoading = true;
 
-            ApiService.put("/rest/webshop/coupon_document", {couponData: this.couponData})
+            ApiService.put("/rest/online_store/gift_card/information", {giftCardInformation: this.couponData})
                 .done(response =>
                 {
                     NotificationService.success(
-                        this.$translate("Ceres::Template.couponSuccessful")
+                        this.$translate("Ceres::Template.couponChangeSuccess")
                     );
                     this.closeModal();
                 })
                 .fail(() =>
                 {
                     NotificationService.error(
-                        this.$translate("Ceres::Template.couponFailed")
+                        this.$translate("Ceres::Template.couponChangeFailure")
                     ).closeAfter(10000);
                 })
                 .always(() =>
@@ -152,13 +154,35 @@ export default {
         {
             this.isLoading = true;
 
-            ApiService.put("") // Route and Params missing
+            ApiService.post("/rest/online_store/gift_card/generate_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.couponData.accessKey}) // Route and Params missing
                 .done(response =>
                 {
                     NotificationService.success(
                         this.$translate("Ceres::Template.couponFinalizeSuccess")
                     );
-                    this.closeModal();
+                })
+                .fail(() =>
+                {
+                    NotificationService.error(
+                        this.$translate("Ceres::Template.couponFinalizeFailure")
+                    ).closeAfter(10000);
+                })
+                .always(() =>
+                {
+                    this.isLoading = false;
+                });
+        },
+
+        download()
+        {
+            this.isLoading = true;
+
+            ApiService.get("/rest/online_store/gift_card/download_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.couponData.accessKey}) // Route and Params missing
+                .done(response =>
+                {
+                    NotificationService.success(
+                        this.$translate("Ceres::Template.couponFinalizeSuccess")
+                    );
                 })
                 .fail(() =>
                 {

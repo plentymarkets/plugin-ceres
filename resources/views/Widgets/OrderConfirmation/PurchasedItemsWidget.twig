@@ -276,8 +276,8 @@
                 </article>
             {{ Twig.endif() }}
 
-            {{ Twig.if("item.typeId == 1") }} <!-- muss noch auf type coupon geändert werden oder auf flag überprüfen-->
-                <edit-coupon-overlay :order-item="{{ Twig.print("item | json_encode") }}" :is-finalized="false"></edit-coupon-overlay>
+            {{ Twig.if("item.giftCard.isGiftCard") }}
+                <edit-coupon-overlay :order-item="{{ Twig.print("item | json_encode") }}" :is-finalized="{{ Twig.print("item.giftCard.hasPdf | json_encode") }}"></edit-coupon-overlay>
             {{ Twig.endif() }}
 
         {{ Twig.endfor() }}
