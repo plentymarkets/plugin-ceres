@@ -10,17 +10,12 @@
             <div class="col-12 col-sm-6 mb-2">
                 <button v-if="!isFinalized" type="submit" class="btn btn-success btn-block" @click="finalize()">
                     <span>{{ $translate("Ceres::Template.couponFinalize") }}</span>
-                    <icon icon="check" :loading="isLoading"></icon>
+                    <icon icon="check" class="default-float" :loading="isLoading"></icon>
                 </button>
-                <!-- <button type="button" class="btn btn-primary btn-appearance btn-block">
+                <button v-if="!!isFinalized" type="button" class="btn btn-primary btn-appearance btn-block" @click="download()">
                     <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
                     <i class="fa fa-download default-float" aria-hidden="true"></i> 
-                </button> -->
-                <a v-if="!!isFinalized" href="#" class="btn btn-primary btn-appearance btn-block"
-                    title="$translate('Ceres::Template.couponDownload')">
-                    <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
-                    <i class="fa fa-download default-float" aria-hidden="true"></i> 
-                </a>
+                </button>
             </div>
         </div>
         <form method="post" @submit.prevent="submit()">
@@ -73,8 +68,7 @@
                             </button>
                             <button type="submit" :disabled="isLoading || !!isFinalized" class="btn btn-primary">
                                 <span>{{ $translate("Ceres::Template.couponSave") }}</span>
-                                <!-- <i class="fa fa-check default-float" aria-hidden="true"></i> -->
-                                <icon icon="floppy-o" :loading="isLoading"></icon>
+                                <icon icon="floppy-o" class="default-float" :loading="isLoading"></icon>
                             </button>
                         </div>
                         <!-- ./MODAL FOOTER -->
@@ -115,10 +109,10 @@ export default {
         for(let i=0; i < this.orderItem.quantity; i++)
         {
             this.couponData.push({
-                sender: "",
-                recipient: "",
-                content: "",
-                campaignCodeOrderId: this.orderItem.giftCard.information[0].id,
+                sender: this.orderItem.giftCard.information[i].sender,
+                recipient: this.orderItem.giftCard.information[i].recipient,
+                content: this.orderItem.giftCard.information[i].content,
+                campaignCodeOrderId: this.orderItem.giftCard.information[i].id,
                 accessKey: ""
             });
         }
