@@ -6,7 +6,7 @@
 {% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set appearance       = widget.settings.appearance.mobile | default("primary") %}
-{% set itemDetailsData  = widget.settings.itemDetailsData.mobile | default(["availability"]) %}
+{% set itemDetailsData  = widget.settings.itemDetailsData.mobile | default([]) %}
 {% set buttonSize       = widget.settings.buttonSize.mobile | default("") %}
 
 {{ Twig.if("orderData") }}
