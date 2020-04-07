@@ -13,7 +13,7 @@
                 {% set rebatedAmountTotal = 0 %}
 
                 {% for item in orderData.order.orderItems %}
-                    
+
                     {% if loop.index == initialMaxItemsPerOrder + 1 %}
                         <div v-if="showAllOrderItems">
                     {% endif %}
@@ -177,17 +177,16 @@
                                         <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryQuantity") }}</span>
                                         <span class="flex-fill text-right">{{ item.quantity }}</span>
                                     </div>
-                                    <div class="d-flex font-weight-bold">
-                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryTotal") }}</span>
-                                        <span class="flex-fill text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</span>
-                                    </div>
-
                                     {% for attribute in item.attributes %}
                                         <div class="d-flex">
                                             <span class="flex-fill">{{ attribute.name }}</span>
                                             <span class="flex-fill text-right">{{ attribute.value }}</span>
                                         </div>
                                     {% endfor %}
+                                    <div class="d-flex font-weight-bold">
+                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryTotal") }}</span>
+                                        <span class="flex-fill text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</span>
+                                    </div>
 
                                     {% if item.orderProperties %}
                                         {% for property in item.orderProperties %}
@@ -259,7 +258,7 @@
     <div class="row container-bottom border py-4">
         <div class="col-md-7">
             <div class="row">
-                <div class="col-sm-4">                            
+                <div class="col-sm-4">
                     {% for property in orderData.order.properties if property.typeId == 8 and property.value | trim is not empty %}
                         <h5 class="mb-0"><b>{{ trans("Ceres::Template.myAccountCustomerSign") }}</b></h5>
                         <div class="mb-3" id="customer_sign_{{ orderData.order.id }}">{{ property.value }}</div>
@@ -306,14 +305,14 @@
                 </change-payment-method>
                 {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
             </template>
-            
+
             {% if orderData.isReturnable %}
                 <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="{{ urls.returns(orderData.order.id) }}">
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
             {% endif %}
-            
+
             <order-documents :documents="{{ orderData.order.documents | json_encode }}"></order-documents>
         </div>
     </div>
