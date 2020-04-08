@@ -13,14 +13,14 @@ class CategoryContext extends GlobalContext implements ContextInterface
 
     public $metaRobots;
 
-    public $assetName = "ceres-category";
+    public $assetName = "ceres-base";
 
     public function init($params)
     {
         parent::init($params);
-        
+
         $this->category = $params['category'];
-        
+
         $this->metaRobots = str_replace('_', ', ', $this->category->details[0]->metaRobots);
 
         $this->bodyClasses[] = "page-category";
