@@ -1,6 +1,12 @@
 <template>
     <div>
-        <div class="row flex-row-reverse">
+        <div class="row">
+            <div class="col-12 col-sm-6 mb-2">
+                <button type="button" class="btn btn-primary btn-appearance btn-block" data-toggle="modal" data-target="#edit-coupon-overlay">
+                    <span>{{ $translate("Ceres::Template.couponEdit") }}</span>
+                    <i class="fa fa-gift default-float" aria-hidden="true"></i> 
+                </button>
+            </div>
             <div class="col-12 col-sm-6 mb-2">
                 <button v-if="!isFinalized" 
                         type="button" 
@@ -18,12 +24,6 @@
                     <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
                     <i class="fa fa-download default-float" aria-hidden="true"></i> 
                 </a>
-            </div>
-            <div class="col-12 col-sm-6 mb-2">
-                <button type="button" class="btn btn-primary btn-appearance btn-block" data-toggle="modal" data-target="#edit-coupon-overlay">
-                    <span>{{ $translate("Ceres::Template.couponEdit") }}</span>
-                    <i class="fa fa-gift default-float" aria-hidden="true"></i> 
-                </button>
             </div>
         </div>
         <form method="post" @submit.prevent="submit()">
@@ -135,11 +135,6 @@ const ApiService    = require("../../services/ApiService");
 export default {
     props: {
         orderItem: Object,
-        
-        isFinalized: {
-            type: Boolean,
-            default: false
-        },
 
         paymentStatus: {
             type: String,
@@ -157,6 +152,7 @@ export default {
     {
         return {
             couponData: [],
+            isFinalized: this.orderItem.giftCard.hasPdf,
             isLoading: false
         };
     },
@@ -213,8 +209,6 @@ export default {
                         this.$translate("Ceres::Template.couponChangeSuccess")
                     );
                     this.closeModal();
-
-                    this.isFinalized = true;
                 })
                 .fail(() =>
                 {
@@ -243,6 +237,8 @@ export default {
                     NotificationService.success(
                         this.$translate("Ceres::Template.couponFinalizeSuccess")
                     );
+
+                    this.isFinalized = true;
                 })
                 .fail(() =>
                 {

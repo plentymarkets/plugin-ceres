@@ -128,8 +128,8 @@ button:focus {
         }
     }
 
-    [disabled],
-    .disabled {
+    &[disabled],
+    &.disabled {
         cursor: not-allowed;
     }
 }
