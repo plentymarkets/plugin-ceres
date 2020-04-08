@@ -20,8 +20,11 @@
                     <span>{{ $translate("Ceres::Template.couponFinalize") }}</span>
                     <icon icon="check" class="default-float" :loading="isLoading"></icon>
                 </button>
-                <a v-if="isFinalized && isPaid" :href="pdfLink" class="btn btn-primary btn-appearance btn-block" target="_blank"
-                    title="$translate('Ceres::Template.couponDownload')">
+                <a v-if="isFinalized && isPaid" 
+                    :href="pdfLink"
+                    class="btn btn-primary btn-appearance btn-block"
+                    target="_blank"
+                    :title="$translate('Ceres::Template.couponDownload')">
                     <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
                     <i class="fa fa-download default-float" aria-hidden="true"></i> 
                 </a>
@@ -150,7 +153,7 @@
                                 class="btn btn-primary"
                                 :class="{ 'disabled': isLoading }"
                                 @click="finalize()">
-                            <span>Ja</span>
+                            <span>{{ $translate("Ceres::Template.couponFinalizeConfirmYes") }}</span>
                             <icon icon="check" class="default-float" :loading="isLoading"></icon>
                         </button>
                         <button type="button" 
@@ -159,7 +162,7 @@
                                 data-dismiss="modal"
                                 aria-label="Close"
                                 @click="closeConfirmModal()">
-                            <span>Nein</span>
+                            <span>{{ $translate("Ceres::Template.couponFinalizeConfirmNo") }}</span>
                             <i class="fa fa-times default-float" aria-hidden="true"></i> 
                         </button>
                     </div>
@@ -219,7 +222,7 @@ export default {
 
         isPaid()
         {
-            return this.paymentStatus === ("fullyPaid" || "overpaid");
+            return this.paymentStatus === "fullyPaid" || this.paymentStatus === "overpaid";
         }
     },
 
@@ -277,12 +280,13 @@ export default {
 
             this.isLoading = true;
 
-            ApiService.post("/rest/online_store/gift_card/generate_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.orderAccessKey}) // Route and Params missing
+            ApiService.post("/rest/online_store/gift_card/generate_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.orderAccessKey})
                 .done(response =>
                 {
                     NotificationService.success(
                         this.$translate("Ceres::Template.couponFinalizeSuccess")
                     );
+                    this.closeConfirmModal();
 
                     this.isFinalized = true;
                 })
@@ -297,7 +301,7 @@ export default {
                     this.isLoading = false;
                 });
         },
-        
+
         closeEditModal()
         {
             ModalService.findModal(this.$refs.editCouponOverlay).hide();
