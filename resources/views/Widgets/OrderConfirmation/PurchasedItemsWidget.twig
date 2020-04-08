@@ -274,7 +274,6 @@
                 </article>
             {{ Twig.endif() }}
 
-            <div>{{ Twig.print("item.giftCard.isGiftCard") }}</div>
             {{ Twig.if("item.giftCard.isGiftCard") }}
                 <edit-coupon-overlay
                     :order-item="{{ Twig.print("item | json_encode") }}" 
