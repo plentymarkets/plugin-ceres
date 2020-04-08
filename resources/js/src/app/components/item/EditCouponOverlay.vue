@@ -10,12 +10,13 @@
             <div class="col-12 col-sm-6 mb-2">
                 <button v-if="!isFinalized" 
                         type="button" 
-                        class="btn btn-success btn-block"
+                        class="btn btn-primary btn-appearance btn-block"
                         :class="{ 'disabled': isLoading || !isPaid }"
                         v-tooltip="!isPaid"
                         data-placement="top"
                         :title="$translate('Ceres::Template.couponNotPaid')"
-                        @click="finalize()">
+                        data-toggle="modal"
+                        data-target="#confirm-finalization-overlay">
                     <span>{{ $translate("Ceres::Template.couponFinalize") }}</span>
                     <icon icon="check" class="default-float" :loading="isLoading"></icon>
                 </button>
@@ -34,7 +35,7 @@
                         <!-- MODAL HEADER -->
                         <div class="modal-header">
                             <div class="modal-title h4">{{ $translate("Ceres::Template.couponEdit") }}</div>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal()">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeEditModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -45,7 +46,7 @@
                             <template v-for="coupon in couponData">
                                 <div class="row">
                                     <div class="col-12 h5">Gutschein</div>
-                                    <div class="col-6">
+                                    <div class="col-12 col-sm-6">
                                         <div class="input-unit">
                                             <input :class="{ 'disabled': isLoading || isFinalized }"
                                                     :readonly="isFinalized"
@@ -61,7 +62,7 @@
                                             <label for="sender">{{ $translate("Ceres::Template.couponSender") }}*</label>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-12 col-sm-6">
                                         <div class="input-unit">
                                             <input :class="{ 'disabled': isLoading || isFinalized }"
                                                     :readonly="isFinalized"
@@ -103,7 +104,7 @@
                                     :disabled="isLoading"
                                     data-dismiss="modal"
                                     aria-label="Close"
-                                    @click="closeModal()">
+                                    @click="closeEditModal()">
                                 <span>{{ $translate("Ceres::Template.couponCancel") }}</span>
                                 <i class="fa fa-times default-float" aria-hidden="true"></i> 
                             </button>
@@ -114,7 +115,7 @@
                                     data-placement="top"
                                     :title="$translate('Ceres::Template.couponAlreadyFinalized')">
                                 <span>{{ $translate("Ceres::Template.couponSave") }}</span>
-                                <icon icon="floppy-o" class="default-float" :loading="isLoading"></icon>
+                                <icon icon="check" class="default-float" :loading="isLoading"></icon>
                             </button>
                         </div>
                         <!-- ./MODAL FOOTER -->
@@ -123,6 +124,51 @@
                 </div>
             </div>
         </form>
+
+        <div id="confirm-finalization-overlay" class="modal fade" tabindex="-1" role="dialog" ref="confirmFinalizationOverlay">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    
+                    <!-- MODAL HEADER -->
+                    <div class="modal-header">
+                        <div class="modal-title h4">{{ $translate("Ceres::Template.couponFinalize") }}</div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeConfirmModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- ./MODAL HEADER -->
+
+                    <!-- MODAL BODY -->
+                    <div class="modal-body">
+                        <div class="my-2">{{ $translate("Ceres::Template.couponFinalizeConfirm") }}</div>
+                    </div>
+                    <!-- ./MODAL BODY -->
+
+                    <!-- MODAL FOOTER -->
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-primary"
+                                :class="{ 'disabled': isLoading }"
+                                @click="finalize()">
+                            <span>Ja</span>
+                            <icon icon="check" class="default-float" :loading="isLoading"></icon>
+                        </button>
+                        <button type="button" 
+                                class="btn btn-danger"
+                                :disabled="isLoading"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                @click="closeConfirmModal()">
+                            <span>Nein</span>
+                            <i class="fa fa-times default-float" aria-hidden="true"></i> 
+                        </button>
+                    </div>
+                    <!-- ./MODAL FOOTER -->
+                
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -195,7 +241,7 @@ export default {
     {
         submit()
         {
-            if (this.isFinalized)
+            if (this.isFinalized || this.isLoading)
             {
                 return;
             }
@@ -208,7 +254,7 @@ export default {
                     NotificationService.success(
                         this.$translate("Ceres::Template.couponChangeSuccess")
                     );
-                    this.closeModal();
+                    this.closeConfirmModal();
                 })
                 .fail(() =>
                 {
@@ -224,7 +270,7 @@ export default {
 
         finalize()
         {
-            if (!this.isPaid)
+            if (!this.isPaid || this.isLoading)
             {
                 return;
             }
@@ -252,32 +298,14 @@ export default {
                 });
         },
 
-        download()
-        {
-            this.isLoading = true;
-
-            ApiService.get("/rest/online_store/gift_card/download_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.orderAccessKey}) // Route and Params missing
-                .done(response =>
-                {
-                    NotificationService.success(
-                        this.$translate("Ceres::Template.couponFinalizeSuccess")
-                    );
-                })
-                .fail(() =>
-                {
-                    NotificationService.error(
-                        this.$translate("Ceres::Template.couponFinalizeFailure")
-                    ).closeAfter(10000);
-                })
-                .always(() =>
-                {
-                    this.isLoading = false;
-                });
-        },
-
-        closeModal()
+        closeEditModal()
         {
             ModalService.findModal(this.$refs.editCouponOverlay).hide();
+        },
+
+        closeConfirmModal()
+        {
+            ModalService.findModal(this.$refs.confirmFinalizationOverlay).hide();
         }
     }
 }
