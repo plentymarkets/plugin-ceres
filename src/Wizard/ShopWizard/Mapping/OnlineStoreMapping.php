@@ -15,12 +15,6 @@ class OnlineStoreMapping
             'global'   => true,
             'optional' => false,
         ],
-        'onlineStore_storeName' => [
-            'field'    => 'header.company_name',
-            'type'     => 'string',
-            'global'   => false,
-            'optional' => false,
-        ],
         'onlineStore_storeFavicon' => [
             'field'    => 'global.favicon',
             'type'     => 'string',
