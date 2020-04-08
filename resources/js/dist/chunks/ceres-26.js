@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.isDisabled = true;
-      ApiService.post("/rest/io/customer/password_reset", {
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].post("/rest/io/customer/password_reset", {
         email: this.username,
         honeypot: this.honeypot
       }).done(function () {

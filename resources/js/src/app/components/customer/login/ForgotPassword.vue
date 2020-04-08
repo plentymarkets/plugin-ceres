@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import ApiServicefrom from "../../../services/ApiService";
+import ApiService from "../../../services/ApiService";
 import NotificationService from "../../../services/NotificationService";
 import ModalService from "../../../services/ModalService";
 import ValidationService from "../../../services/ValidationService";
