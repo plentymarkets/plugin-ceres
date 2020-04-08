@@ -66,7 +66,9 @@ trait ItemListContext
                 $searchResults = $itemSearchService->getResults($externalSearchFactories);
 
                 foreach ($resultVariationIds as $variationId) {
-                    $this->itemList[] = $searchResults[$variationId]['documents'][0];
+                    if (!is_null($searchResults[$variationId])) {
+                        $this->itemList[] = $searchResults[$variationId]['documents'][0];
+                    }
                 }
                 $this->pageMax        = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
                 $this->itemCountPage  = count($resultVariationIds);
