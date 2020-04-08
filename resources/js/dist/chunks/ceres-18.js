@@ -17,21 +17,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
@@ -48,6 +45,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -170,7 +169,7 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
       });
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapState"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
     basketItems: function basketItems(state) {
       return state.basket.items;
     },
@@ -179,7 +178,7 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
     }
   }), {
     isLastBasketEntrySet: function isLastBasketEntrySet() {
-      return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(this.basketItem);
+      return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isNullOrUndefined"])(this.basketItem);
     },
     variation: function variation() {
       if (this.basketItem) {
@@ -216,70 +215,23 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
         basket: App.urls.basket,
         checkout: App.urls.checkout
       };
+    },
+    shownOrderProperties: function shownOrderProperties() {
+      var _this2 = this;
+
+      return this.basketItem.basketItemOrderParams.filter(function (property) {
+        return !!_this2.variation.properties.find(function (prop) {
+          return prop.propertyId == property.propertyId;
+        });
+      });
     }
   }),
   methods: {
     showItem: function showItem(basketItem, countAdditionalBasketItems) {
       this.basketItem = basketItem;
       this.countAdditionalBasketItems = countAdditionalBasketItems;
-      var isBasketItemSet = basketItem.variation.data.item.itemType === "set";
-
-      if (!isBasketItemSet && this.basketItem && this.variation.prices) {
-        var graduatedPrice = this.$options.filters.graduatedPrice(this.variation, this.basketItem.quantity);
-        var propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
-        this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
-      } else if (isBasketItemSet) {
-        this.price = basketItem.price;
-      }
-
+      this.price = basketItem.price;
       ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
-    },
-    orderParamName: function orderParamName(propertyId) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(this.basketItem.basketItemOrderParams)) {
-        return "";
-      }
-
-      var property = this.variation.properties.find(function (property) {
-        return parseInt(property.property.id) === parseInt(propertyId);
-      });
-
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(property) || !property.property.isOderProperty) {
-        return "";
-      }
-
-      var orderParam = this.basketItem.basketItemOrderParams.find(function (param) {
-        return parseInt(param.propertyId) === parseInt(propertyId);
-      });
-      return orderParam.name;
-    },
-    orderParamValue: function orderParamValue(propertyId) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(this.basketItem.basketItemOrderParams)) {
-        return "";
-      }
-
-      var property = this.variation.properties.find(function (property) {
-        return parseInt(property.property.id) === parseInt(propertyId);
-      });
-
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(property) || !property.property.isOderProperty) {
-        return "";
-      }
-
-      var orderParam = this.basketItem.basketItemOrderParams.find(function (param) {
-        return parseInt(param.propertyId) === parseInt(propertyId);
-      });
-
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(orderParam)) {
-        return "";
-      }
-
-      var orderParamValue = orderParam.value;
-
-      if (property.property.valueType === "selection" && orderParamValue) {
-        return property.property.selectionValues[orderParamValue].name;
-      }
-
-      return orderParamValue;
     }
   }
 });
@@ -389,85 +341,89 @@ var render = function() {
                           ])
                         }),
                         _vm._v(" "),
-                        _vm._l(_vm.variation.properties, function(property) {
-                          return _c(
-                            "p",
-                            { staticClass: "small" },
-                            [
-                              _vm.orderParamValue(property.property.id)
-                                ? [
-                                    _c("strong", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.orderParamName(
-                                            property.property.id
-                                          )
-                                        ) +
-                                          " (+ " +
-                                          _vm._s(
-                                            _vm._f("currency")(
-                                              _vm._f("propertySurcharge")(
-                                                _vm.variation.properties,
-                                                property.property.id
-                                              )
-                                            )
-                                          ) +
-                                          " )"
+                        _vm.shownOrderProperties.length
+                          ? _c("div", { staticClass: "small" }, [
+                              _c(
+                                "div",
+                                { staticClass: "font-weight-bold my-1" },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemAdditionalOptions"
                                       )
-                                    ]),
-                                    _vm._v(" "),
-                                    property.property.valueType === "file"
-                                      ? _c("span", [
+                                    ) + ":"
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "ul",
+                                { staticClass: "ml-0 pl-3" },
+                                _vm._l(_vm.shownOrderProperties, function(
+                                  property
+                                ) {
+                                  return _c(
+                                    "li",
+                                    { key: property.propertyId },
+                                    [
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass: "d-block text-truncate"
+                                        },
+                                        [
                                           _c(
-                                            "a",
+                                            "strong",
                                             {
-                                              attrs: {
-                                                href: _vm._f("fileUploadPath")(
-                                                  _vm.orderParamValue(
-                                                    property.property.id
-                                                  )
-                                                ),
-                                                target: "_blank"
+                                              class: {
+                                                colon: property.type.length > 0
                                               }
                                             },
                                             [
-                                              _c("i", {
-                                                staticClass:
-                                                  "fa fa-external-link",
-                                                attrs: { "aria-hidden": "true" }
-                                              }),
                                               _vm._v(
-                                                "\n                                            : " +
+                                                _vm._s(property.name) +
+                                                  " (" +
                                                   _vm._s(
-                                                    _vm._f("fileName")(
-                                                      _vm.orderParamValue(
-                                                        property.property.id
+                                                    _vm.$translate(
+                                                      "Ceres::Template.singleItemIncludeAbbr"
+                                                    )
+                                                  ) +
+                                                  " " +
+                                                  _vm._s(
+                                                    _vm._f("currency")(
+                                                      _vm._f(
+                                                        "propertySurcharge"
+                                                      )(
+                                                        _vm.basketItem.variation
+                                                          .data.properties,
+                                                        property.propertyId
                                                       )
                                                     )
                                                   ) +
-                                                  "\n                                        "
+                                                  ")"
                                               )
                                             ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            [
+                                              _c("order-property-value", {
+                                                attrs: { property: property }
+                                              })
+                                            ],
+                                            1
                                           )
-                                        ])
-                                      : property.property.valueType !== "empty"
-                                      ? _c("span", [
-                                          _c("b", [_vm._v(": ")]),
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.orderParamValue(
-                                                property.property.id
-                                              )
-                                            )
-                                          )
-                                        ])
-                                      : _vm._e()
-                                  ]
-                                : _vm._e()
-                            ],
-                            2
-                          )
-                        })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ])
+                          : _vm._e()
                       ],
                       2
                     )
