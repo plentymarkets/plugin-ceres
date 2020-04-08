@@ -195,7 +195,7 @@ export default {
     {
         submit()
         {
-            if (this.isFinalized)
+            if (this.isFinalized || this.isLoading)
             {
                 return;
             }
@@ -224,7 +224,7 @@ export default {
 
         finalize()
         {
-            if (!this.isPaid)
+            if (!this.isPaid || this.isLoading)
             {
                 return;
             }
@@ -239,29 +239,6 @@ export default {
                     );
 
                     this.isFinalized = true;
-                })
-                .fail(() =>
-                {
-                    NotificationService.error(
-                        this.$translate("Ceres::Template.couponFinalizeFailure")
-                    ).closeAfter(10000);
-                })
-                .always(() =>
-                {
-                    this.isLoading = false;
-                });
-        },
-
-        download()
-        {
-            this.isLoading = true;
-
-            ApiService.get("/rest/online_store/gift_card/download_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.orderAccessKey}) // Route and Params missing
-                .done(response =>
-                {
-                    NotificationService.success(
-                        this.$translate("Ceres::Template.couponFinalizeSuccess")
-                    );
                 })
                 .fail(() =>
                 {
