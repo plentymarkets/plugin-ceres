@@ -821,6 +821,7 @@
                 "item.show_category_image": {
                     "type": "checkBox",
                     "required": false,
+                    "deprecated": true,
                     "label": "Config.itemShowCategoryImageLabel",
                     "options": {
                         "defaultValue": "true"
