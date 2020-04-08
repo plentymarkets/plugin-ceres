@@ -48,7 +48,7 @@
                         <div class="modal-body overflow-x-hidden modal-multi-row">
                             <template v-for="coupon in couponData">
                                 <div class="row">
-                                    <div class="col-12 h5">Gutschein</div>
+                                    <div class="col-12 h5">{{ $translate("Ceres::Template.couponLabel") }}</div>
                                     <div class="col-12 col-sm-6">
                                         <div class="input-unit">
                                             <input :class="{ 'disabled': isLoading || isFinalized }"
