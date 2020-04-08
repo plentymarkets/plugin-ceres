@@ -177,9 +177,8 @@
 
 <script>
 import NotificationService from "../../services/NotificationService";
-
-const ModalService  = require("../../services/ModalService");
-const ApiService    = require("../../services/ApiService");
+import ModalService from "../../services/ModalService";
+import ApiService from "../../services/ApiService";
 
 export default {
     props: {
