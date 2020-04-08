@@ -450,6 +450,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -480,19 +488,21 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     var _this = this;
 
     document.addEventListener("onVariationChanged", function (event) {
-      // clear type specific bindings
-      if (_this.property.valueType === "selection") {
-        _this.selectionValue = _this.property.value || null;
-      } else if (_this.property.valueType === "file") {
-        if (_this.property.value && _this.property.value.length) {
-          NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.singleItemOrderPropertyFileHasReset", {
-            propertyName: _this.property.names.name
-          })).closeAfter(5000);
-        }
+      if (event.itemId === _this.itemId) {
+        // clear type specific bindings
+        if (_this.property.valueType === "selection") {
+          _this.selectionValue = _this.property.value || null;
+        } else if (_this.property.valueType === "file") {
+          if (_this.property.value && _this.property.value.length) {
+            NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.singleItemOrderPropertyFileHasReset", {
+              propertyName: _this.property.names.name
+            })).closeAfter(5000);
+          }
 
-        _this.clearSelectedFile();
-      } else {
-        _this.inputValue = _this.property.value || "";
+          _this.clearSelectedFile();
+        } else {
+          _this.inputValue = _this.property.value || "";
+        }
       }
     });
   },
@@ -1016,124 +1026,33 @@ var render = function() {
       ? _c("div", { staticClass: "form-check" }, [
           _vm.inputType === "checkbox"
             ? _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.property.value,
-                    expression: "property.value"
-                  }
-                ],
                 staticClass: "form-check-input",
                 attrs: {
+                  type: "checkbox",
                   name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                  id: "check" + _vm._uid,
-                  type: "checkbox"
+                  id: "check" + _vm._uid
                 },
                 domProps: {
                   value: _vm.property.id,
-                  checked: Array.isArray(_vm.property.value)
-                    ? _vm._i(_vm.property.value, _vm.property.id) > -1
-                    : _vm.property.value
+                  checked: _vm.property.value
                 },
                 on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.property.value,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = _vm.property.id,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.property, "value", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.property,
-                              "value",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.property, "value", $$c)
-                      }
-                    },
-                    function($event) {
-                      return _vm.onInputValueChanged(
-                        _vm.inputType === "checkbox"
-                          ? $event.target.checked
-                          : $event.target.value
-                      )
-                    }
-                  ]
-                }
-              })
-            : _vm.inputType === "radio"
-            ? _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.property.value,
-                    expression: "property.value"
+                  change: function($event) {
+                    return _vm.onInputValueChanged($event.target.checked)
                   }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                  id: "check" + _vm._uid,
-                  type: "radio"
-                },
-                domProps: {
-                  value: _vm.property.id,
-                  checked: _vm._q(_vm.property.value, _vm.property.id)
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      return _vm.$set(_vm.property, "value", _vm.property.id)
-                    },
-                    function($event) {
-                      return _vm.onInputValueChanged(
-                        _vm.inputType === "checkbox"
-                          ? $event.target.checked
-                          : $event.target.value
-                      )
-                    }
-                  ]
                 }
               })
             : _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.property.value,
-                    expression: "property.value"
-                  }
-                ],
                 staticClass: "form-check-input",
                 attrs: {
+                  type: "radio",
                   name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                  id: "check" + _vm._uid,
-                  type: _vm.inputType
+                  id: "check" + _vm._uid
                 },
-                domProps: { value: _vm.property.id, value: _vm.property.value },
+                domProps: { value: _vm.property.id },
                 on: {
                   change: function($event) {
-                    return _vm.onInputValueChanged(
-                      _vm.inputType === "checkbox"
-                        ? $event.target.checked
-                        : $event.target.value
-                    )
-                  },
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.property, "value", $event.target.value)
+                    return _vm.onInputValueChanged($event.target.value)
                   }
                 }
               }),
