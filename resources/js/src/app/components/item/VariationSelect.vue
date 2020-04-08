@@ -571,7 +571,8 @@ export default {
                                 {
                                     attributes: variation.attributes,
                                     documents: variation.documents
-                                }
+                                },
+                            itemId: this.itemId
                         }));
                 });
             }

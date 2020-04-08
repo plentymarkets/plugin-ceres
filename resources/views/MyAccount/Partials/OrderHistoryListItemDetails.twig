@@ -13,7 +13,7 @@
                 {% set rebatedAmountTotal = 0 %}
 
                 {% for item in orderData.order.orderItems %}
-                    
+
                     {% if loop.index == initialMaxItemsPerOrder + 1 %}
                         <div v-if="showAllOrderItems">
                     {% endif %}
@@ -164,64 +164,69 @@
                                     {% endif %}
 
                                     <div class="d-flex">
-                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}</span>
+                                        <span class="flex-fill font-weight-bold">{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}</span>
                                         <span class="flex-fill text-right">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
                                     </div>
                                     {% if discountAmount > 0 %}
                                         <div class="d-flex">
-                                            <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryItemDiscount") }}</span>
+                                            <span class="flex-fill font-weight-bold">{{ trans("Ceres::Template.orderHistoryItemDiscount") }}</span>
                                             <span class="flex-fill text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>
                                         </div>
                                     {% endif %}
                                     <div class="d-flex">
-                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryQuantity") }}</span>
+                                        <span class="flex-fill font-weight-bold">{{ trans("Ceres::Template.orderHistoryQuantity") }}</span>
                                         <span class="flex-fill text-right">{{ item.quantity }}</span>
                                     </div>
-                                    <div class="d-flex font-weight-bold">
-                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryTotal") }}</span>
-                                        <span class="flex-fill text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</span>
-                                    </div>
-
                                     {% for attribute in item.attributes %}
                                         <div class="d-flex">
-                                            <span class="flex-fill">{{ attribute.name }}</span>
+                                            <span class="flex-fill font-weight-bold">{{ attribute.name }}:</span>
                                             <span class="flex-fill text-right">{{ attribute.value }}</span>
                                         </div>
                                     {% endfor %}
-
                                     {% if item.orderProperties %}
-                                        {% for property in item.orderProperties %}
-                                            <div>
-                                                <strong>{{ property | propertyName }}</strong>
-                                                {% if property.type == 'file' %}
-                                                    <span>
+                                        <div>
+                                            <div class="mb-1">
+                                                <strong> {{ trans("Ceres::Template.orderConfirmationProperties") }}</strong>
+                                            </div>
+                                            {% for property in item.orderProperties %}
+                                                <div class="pl-4">
+                                                    <strong>{{ property | propertyName }}</strong>
+                                                    {% if property.type == 'file' %}
+                                                        <span>
                                                         {% set splitPath = property.value |split('/') %}
-                                                        {% set filename = '' %}
-                                                        {% set path = '' %}
+                                                            {% set filename = '' %}
+                                                            {% set path = '' %}
 
-                                                        {% for temp in splitPath %}
-                                                            {% if loop.first %}
-                                                                {% set path =  temp %}
-                                                            {% elseif loop.last %}
-                                                                {% set filename = temp %}
-                                                            {% else %}
-                                                                {% set path =  path ~ '/' ~ temp %}
-                                                            {% endif %}
-                                                        {% endfor %}
+                                                            {% for temp in splitPath %}
+                                                                {% if loop.first %}
+                                                                    {% set path =  temp %}
+                                                                {% elseif loop.last %}
+                                                                    {% set filename = temp %}
+                                                                {% else %}
+                                                                    {% set path =  path ~ '/' ~ temp %}
+                                                                {% endif %}
+                                                            {% endfor %}
 
                                                         <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
                                                             <i class="fa fa-external-link" aria-hidden="true"></i>
                                                             {{ splitPath | last }}
                                                         </a>
                                                     </span>
-                                                {% elseif property.type == "selection" %}
-                                                    <span>: {{ property | propertySelectionValueName }}</span>
-                                                {% elseif property.type | length > 0 %}
-                                                    <span>: {{ property.value }}</span>
-                                                {% endif %}
-                                            </div>
-                                        {% endfor %}
+                                                    {% elseif property.type == "selection" %}
+                                                        <br>
+                                                        <span> {{ property | propertySelectionValueName }}</span>
+                                                    {% elseif property.type | length > 0 %}
+                                                        <br>
+                                                        <span> {{ property.value }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
                                     {% endif %}
+                                    <div class="d-flex font-weight-bold">
+                                        <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryTotal") }}</span>
+                                        <span class="flex-fill text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +264,7 @@
     <div class="row container-bottom border py-4">
         <div class="col-md-7">
             <div class="row">
-                <div class="col-sm-4">                            
+                <div class="col-sm-4">
                     {% for property in orderData.order.properties if property.typeId == 8 and property.value | trim is not empty %}
                         <h5 class="mb-0"><b>{{ trans("Ceres::Template.myAccountCustomerSign") }}</b></h5>
                         <div class="mb-3" id="customer_sign_{{ orderData.order.id }}">{{ property.value }}</div>
@@ -314,7 +319,7 @@
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
             {% endif %}
-            
+
             <order-documents :documents="{{ orderData.order.documents | json_encode }}"></order-documents>
         </div>
     </div>
