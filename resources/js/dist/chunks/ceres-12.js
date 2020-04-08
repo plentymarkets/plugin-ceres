@@ -636,6 +636,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      * @param {[string, number, null]} variationId
      */
     setVariation: function setVariation(variationId) {
+      var _this3 = this;
+
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(variationId) && this.currentSelection) {
         variationId = this.currentSelection.variationId;
       }
@@ -646,7 +648,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
             detail: {
               attributes: variation.attributes,
               documents: variation.documents
-            }
+            },
+            itemId: _this3.itemId
           }));
         });
       }
