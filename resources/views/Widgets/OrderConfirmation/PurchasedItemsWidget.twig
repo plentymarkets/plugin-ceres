@@ -273,6 +273,16 @@
                     </div>
                 </article>
             {{ Twig.endif() }}
+
+            <div>{{ Twig.print("item.giftCard.isGiftCard") }}</div>
+            {{ Twig.if("item.giftCard.isGiftCard") }}
+                <edit-coupon-overlay
+                    :order-item="{{ Twig.print("item | json_encode") }}" 
+                    order-access-key="{{ Twig.print("request.get('accessKey')") }}"
+                    payment-status="{{ Twig.print("data.paymentStatus") }}">
+                </edit-coupon-overlay>
+            {{ Twig.endif() }}
+
         {{ Twig.endfor() }}
     </div>
 </div>
