@@ -277,7 +277,12 @@
             {{ Twig.endif() }}
 
             {{ Twig.if("item.giftCard.isGiftCard") }}
-                <edit-coupon-overlay :order-item="{{ Twig.print("item | json_encode") }}" :is-finalized="{{ Twig.print("item.giftCard.hasPdf | json_encode") }}"></edit-coupon-overlay>
+                <edit-coupon-overlay
+                    :order-item="{{ Twig.print("item | json_encode") }}" 
+                    :is-finalized="{{ Twig.print("item.giftCard.hasPdf | json_encode") }}"
+                    order-access-key="{{ Twig.print("request.get('orderAccessKey')") }}"
+                    payment-status="{{ Twig.print("data.paymentStatus") }}">
+                </edit-coupon-overlay>
             {{ Twig.endif() }}
 
         {{ Twig.endfor() }}

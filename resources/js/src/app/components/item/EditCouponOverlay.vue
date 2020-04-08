@@ -1,20 +1,28 @@
 <template>
     <div>
-        <div class="row">
+        <div class="row flex-row-reverse">
+            <div class="col-12 col-sm-6 mb-2">
+                <button v-if="!isFinalized" 
+                        type="button" 
+                        class="btn btn-success btn-block"
+                        :class="{ 'disabled': isLoading || !isPaid }"
+                        v-tooltip="!isPaid"
+                        data-placement="top"
+                        :title="$translate('Ceres::Template.couponNotPaid')"
+                        @click="finalize()">
+                    <span>{{ $translate("Ceres::Template.couponFinalize") }}</span>
+                    <icon icon="check" class="default-float" :loading="isLoading"></icon>
+                </button>
+                <a v-if="isFinalized && isPaid" :href="pdfLink" class="btn btn-primary btn-appearance btn-block" target="_blank"
+                    title="$translate('Ceres::Template.couponDownload')">
+                    <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
+                    <i class="fa fa-download default-float" aria-hidden="true"></i> 
+                </a>
+            </div>
             <div class="col-12 col-sm-6 mb-2">
                 <button type="button" class="btn btn-primary btn-appearance btn-block" data-toggle="modal" data-target="#edit-coupon-overlay">
                     <span>{{ $translate("Ceres::Template.couponEdit") }}</span>
                     <i class="fa fa-gift default-float" aria-hidden="true"></i> 
-                </button>
-            </div>
-            <div class="col-12 col-sm-6 mb-2">
-                <button v-if="!isFinalized" type="submit" class="btn btn-success btn-block" @click="finalize()">
-                    <span>{{ $translate("Ceres::Template.couponFinalize") }}</span>
-                    <icon icon="check" class="default-float" :loading="isLoading"></icon>
-                </button>
-                <button v-if="!!isFinalized" type="button" class="btn btn-primary btn-appearance btn-block" @click="download()">
-                    <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
-                    <i class="fa fa-download default-float" aria-hidden="true"></i> 
                 </button>
             </div>
         </div>
@@ -36,22 +44,50 @@
                         <div class="modal-body overflow-x-hidden modal-multi-row">
                             <template v-for="coupon in couponData">
                                 <div class="row">
-                                    <div v-if="true" class="col-12 h5">Gutschein</div>
+                                    <div class="col-12 h5">Gutschein</div>
                                     <div class="col-6">
                                         <div class="input-unit">
-                                            <input :disabled="isLoading || !!isFinalized" type="text" name="sender" autocomplete="off" data-validate="text" data-autofocus v-model="coupon.sender">
+                                            <input :class="{ 'disabled': isLoading || isFinalized }"
+                                                    :readonly="isFinalized"
+                                                    v-tooltip="isFinalized"
+                                                    data-placement="top"
+                                                    :title="$translate('Ceres::Template.couponAlreadyFinalized')"
+                                                    type="text"
+                                                    name="sender"
+                                                    autocomplete="off"
+                                                    data-validate="text"
+                                                    data-autofocus
+                                                    v-model="coupon.sender">
                                             <label for="sender">{{ $translate("Ceres::Template.couponSender") }}*</label>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="input-unit">
-                                            <input :disabled="isLoading || !!isFinalized" type="text" name="recipient" autocomplete="off" data-validate="text" v-model="coupon.recipient">
+                                            <input :class="{ 'disabled': isLoading || isFinalized }"
+                                                    :readonly="isFinalized"
+                                                    v-tooltip="isFinalized"
+                                                    data-placement="top"
+                                                    :title="$translate('Ceres::Template.couponAlreadyFinalized')"
+                                                    type="text"
+                                                    name="recipient"
+                                                    autocomplete="off"
+                                                    data-validate="text"
+                                                    v-model="coupon.recipient">
                                             <label for="recipient">{{ $translate("Ceres::Template.couponRecipient") }}*</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="input-unit">
-                                            <textarea :disabled="isLoading || !!isFinalized" name="content" rows="3" autocomplete="off" v-model="coupon.content"></textarea>
+                                            <textarea :class="{ 'disabled': isLoading || isFinalized }"
+                                                    :readonly="isFinalized"
+                                                    v-tooltip="isFinalized"
+                                                    data-placement="top"
+                                                    :title="$translate('Ceres::Template.couponAlreadyFinalized')"
+                                                    name="content"
+                                                    rows="3"
+                                                    autocomplete="off"
+                                                    v-model="coupon.content">
+                                            </textarea>
                                             <label for="content">{{ $translate("Ceres::Template.couponContent") }}</label>
                                         </div>
                                     </div>
@@ -62,11 +98,21 @@
 
                         <!-- MODAL FOOTER -->
                         <div class="modal-footer">
-                            <button type="reset" :disabled="isLoading || !!isFinalized" class="btn btn-danger" data-dismiss="modal" aria-label="Close" @click="closeModal()">
+                            <button type="reset" 
+                                    class="btn btn-danger"
+                                    :disabled="isLoading"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                    @click="closeModal()">
                                 <span>{{ $translate("Ceres::Template.couponCancel") }}</span>
                                 <i class="fa fa-times default-float" aria-hidden="true"></i> 
                             </button>
-                            <button type="submit" :disabled="isLoading || !!isFinalized" class="btn btn-primary">
+                            <button type="submit"
+                                    class="btn btn-primary"
+                                    :class="{ 'disabled': isLoading || isFinalized }"
+                                    v-tooltip="isFinalized"
+                                    data-placement="top"
+                                    :title="$translate('Ceres::Template.couponAlreadyFinalized')">
                                 <span>{{ $translate("Ceres::Template.couponSave") }}</span>
                                 <icon icon="floppy-o" class="default-float" :loading="isLoading"></icon>
                             </button>
@@ -93,6 +139,17 @@ export default {
         isFinalized: {
             type: Boolean,
             default: false
+        },
+
+        paymentStatus: {
+            type: String,
+            default: "unpaid"
+        },
+
+        orderAccessKey:
+        {
+            type: String,
+            default: ""
         }
     },
     
@@ -104,6 +161,26 @@ export default {
         };
     },
 
+    computed:
+    {
+        pdfLink()
+        {
+            let pdfLink = '/rest/online_store/gift_card/download_pdf/?orderId=' + this.orderItem.orderId + '&orderItemId=' + this.orderItem.id;
+            
+            if(this.orderAccessKey)
+            {
+                pdfLink += '&accessKey=' + this.orderAccessKey;
+            }
+ 
+            return pdfLink;
+        },
+
+        isPaid()
+        {
+            return this.paymentStatus === ("fullyPaid" || "overpaid");
+        }
+    },
+
     created()
     {
         for(let i=0; i < this.orderItem.quantity; i++)
@@ -113,7 +190,7 @@ export default {
                 recipient: this.orderItem.giftCard.information[i].recipient,
                 content: this.orderItem.giftCard.information[i].content,
                 campaignCodeOrderId: this.orderItem.giftCard.information[i].id,
-                accessKey: ""
+                accessKey: this.orderAccessKey
             });
         }
     },
@@ -122,6 +199,11 @@ export default {
     {
         submit()
         {
+            if (this.isFinalized)
+            {
+                return;
+            }
+
             this.isLoading = true;
 
             ApiService.put("/rest/online_store/gift_card/information", {giftCardInformation: this.couponData})
@@ -131,6 +213,8 @@ export default {
                         this.$translate("Ceres::Template.couponChangeSuccess")
                     );
                     this.closeModal();
+
+                    this.isFinalized = true;
                 })
                 .fail(() =>
                 {
@@ -146,9 +230,14 @@ export default {
 
         finalize()
         {
+            if (!this.isPaid)
+            {
+                return;
+            }
+
             this.isLoading = true;
 
-            ApiService.post("/rest/online_store/gift_card/generate_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.couponData.accessKey}) // Route and Params missing
+            ApiService.post("/rest/online_store/gift_card/generate_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.orderAccessKey}) // Route and Params missing
                 .done(response =>
                 {
                     NotificationService.success(
@@ -171,7 +260,7 @@ export default {
         {
             this.isLoading = true;
 
-            ApiService.get("/rest/online_store/gift_card/download_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.couponData.accessKey}) // Route and Params missing
+            ApiService.get("/rest/online_store/gift_card/download_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.orderAccessKey}) // Route and Params missing
                 .done(response =>
                 {
                     NotificationService.success(
