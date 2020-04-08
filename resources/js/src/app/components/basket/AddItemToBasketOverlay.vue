@@ -42,10 +42,10 @@
                                     <span>{{ attribute.value.names.name }}</span>
                                 </p>
 
-                                <div class="small" v-if="basketItem.basketItemOrderParams.length">
+                                <div class="small" v-if="shownOrderProperties.length">
                                     <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.singleItemAdditionalOptions") }}:</div>
                                     <ul class="ml-0 pl-3">
-                                        <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
+                                        <li v-for="property in shownOrderProperties" :key="property.propertyId">
                                             <span class="d-block text-truncate">
                                                 <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.singleItemIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</strong>
                                                 <span>
@@ -190,6 +190,14 @@ export default {
                 basket: App.urls.basket,
                 checkout: App.urls.checkout
             }
+        },
+
+        shownOrderProperties()
+        {
+            return this.basketItem.basketItemOrderParams.filter(property =>
+            {
+                return !!this.variation.properties.find(prop => prop.propertyId == property.propertyId);
+            });
         }
     },
 
@@ -205,31 +213,6 @@ export default {
                 .findModal(document.getElementById("add-item-to-basket-overlay"))
                 .setTimeout(this.defaultTimeToClose * 1000)
                 .show();
-        },
-
-        orderParamName(propertyId)
-        {
-            if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
-            {
-                return "";
-            }
-
-            const property = this.variation.properties.find(property =>
-            {
-                return parseInt(property.property.id) === parseInt(propertyId);
-            });
-
-            if (isNullOrUndefined(property) || !property.property.isOderProperty)
-            {
-                return "";
-            }
-
-            const orderParam = this.basketItem.basketItemOrderParams.find(param =>
-            {
-                return parseInt(param.propertyId) === parseInt(propertyId);
-            });
-
-            return orderParam.name;
         }
     }
 }
