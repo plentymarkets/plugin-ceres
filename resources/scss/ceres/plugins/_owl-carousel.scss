@@ -273,6 +273,7 @@
 .owl-theme .owl-nav {
     position: absolute;
     top: 50%;
+    z-index: 2;
     width: 100%;
     margin-top: 10px;
     -webkit-tap-highlight-color: transparent;
@@ -372,12 +373,6 @@ Custom classes
 
 .disabled {
     .owl-single-item-nav {
-        display: none;
-    }
-}
-
-.owl-single-item {
-    .owl-dots {
         display: none;
     }
 }
