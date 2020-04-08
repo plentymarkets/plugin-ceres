@@ -127,6 +127,11 @@ button:focus {
             line-height: inherit;
         }
     }
+
+    [disabled],
+    .disabled {
+        cursor: not-allowed;
+    }
 }
 
 .btn-xs-max-width {
