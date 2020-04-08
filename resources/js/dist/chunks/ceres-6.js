@@ -415,15 +415,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.parse-int */ "./node_modules/core-js/modules/es.parse-int.js");
-/* harmony import */ var core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _LiveShoppingDetails_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./LiveShoppingDetails.vue */ "./resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue");
-/* harmony import */ var _itemList_ItemStoreSpecial_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../itemList/ItemStoreSpecial.vue */ "./resources/js/src/app/components/itemList/ItemStoreSpecial.vue");
-
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _LiveShoppingDetails_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./LiveShoppingDetails.vue */ "./resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue");
+/* harmony import */ var _itemList_ItemStoreSpecial_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../itemList/ItemStoreSpecial.vue */ "./resources/js/src/app/components/itemList/ItemStoreSpecial.vue");
 
 
 
@@ -512,8 +509,8 @@ var TimeEnum = Object.freeze({
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    LiveShoppingDetails: _LiveShoppingDetails_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
-    ItemStoreSpecial: _itemList_ItemStoreSpecial_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
+    LiveShoppingDetails: _LiveShoppingDetails_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+    ItemStoreSpecial: _itemList_ItemStoreSpecial_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   },
   props: {
     liveShoppingId: {
@@ -550,7 +547,7 @@ var TimeEnum = Object.freeze({
       return this.isActiveByTime && this.isActiveByStock;
     },
     isActiveByTime: function isActiveByTime() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.currentOffer)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(this.currentOffer)) {
         var begin = parseInt(this.currentOffer.liveShopping.fromTime) * 1000;
         var end = parseInt(this.currentOffer.liveShopping.toTime) * 1000;
         var now = Date.now();
@@ -560,7 +557,7 @@ var TimeEnum = Object.freeze({
       return false;
     },
     isActiveByStock: function isActiveByStock() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.currentOffer)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(this.currentOffer)) {
         var liveShopping = this.currentOffer.liveShopping;
         return liveShopping.quantitySold < liveShopping.quantityMax;
       }
@@ -568,7 +565,7 @@ var TimeEnum = Object.freeze({
       return false;
     },
     storeSpecial: function storeSpecial() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.currentOffer)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(this.currentOffer)) {
         if (this.isActive) {
           return {
             id: 1
@@ -604,7 +601,7 @@ var TimeEnum = Object.freeze({
         isRrpDefaultPrice: false
       };
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(itemPrices.specialOffer)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(itemPrices.specialOffer)) {
         prices.price = itemPrices.specialOffer;
         prices.rrp = itemPrices.default || itemPrices.rrp;
         prices.isRrpDefaultPrice = !!itemPrices.default;
@@ -612,7 +609,7 @@ var TimeEnum = Object.freeze({
 
       return prices;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapState"])({
     liveShoppingOffers: function liveShoppingOffers(state) {
       return state.liveShopping.liveShoppingOffers;
     }

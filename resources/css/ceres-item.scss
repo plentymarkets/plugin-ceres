@@ -8901,6 +8901,11 @@ button:focus {
             line-height: inherit;
         }
     }
+
+    &[disabled],
+    &.disabled {
+        cursor: not-allowed;
+    }
 }
 
 .btn-xs-max-width {
@@ -9082,9 +9087,8 @@ button:focus {
     max-width: 1200px;
 }
 
-// Owl-Navigation above .stretched-link
-.owl-carousel {
-    z-index: 2;
+.overflow-x-hidden {
+    overflow-x: hidden;
 }
 
 .lozad {
@@ -9142,6 +9146,15 @@ style2 {
         }
     }
 }
+
+.modal-multi-row {
+    .row {
+        background-color: $gray-100;
+        border: 1px solid $gray-300;
+        margin: 0 0 1rem 0;
+        padding-top: 1rem;
+    }
+}
  // TODO: This would better fit into /components
 [class^="prop-"] {
     position: relative;
@@ -9181,6 +9194,10 @@ a:hover,
 a:focus,
 a:active {
     text-decoration: none;
+}
+
+.tooltip {
+    z-index: $zindex-9;
 }
 
 // prevent iOS standard zoom on input elements on focus
@@ -9319,7 +9336,6 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
 .owl-carousel {
     /* position relative and z-index fix webkit rendering fonts issue */
     position: relative;
-    z-index: 1;
     display: none;
     width: 100%;
     -webkit-tap-highlight-color: transparent;
@@ -9367,6 +9383,7 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     }
 
     .owl-dots {
+        z-index: 2;
         display: block;
     }
 }
@@ -9606,6 +9623,7 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
 .owl-theme .owl-nav {
     position: absolute;
     top: 50%;
+    z-index: 2;
     width: 100%;
     margin-top: 10px;
     -webkit-tap-highlight-color: transparent;
@@ -9706,12 +9724,6 @@ Custom classes
 
 .disabled {
     .owl-single-item-nav {
-        display: none;
-    }
-}
-
-.owl-single-item {
-    .owl-dots {
         display: none;
     }
 }
@@ -11034,6 +11046,11 @@ textarea.no-resize {
         padding: 0 .8rem;
         vertical-align: top;
         background-color: $white;
+
+        /* addToBasket */
+        .btn {
+            z-index: 1;
+        }
     }
 
     .price {
@@ -11076,6 +11093,10 @@ textarea.no-resize {
             .img-fluid {
                 -webkit-transform: scale(1.05);
                         transform: scale(1.05);
+            }
+
+            .owl-nav [class*="owl-"] {
+                opacity: 1;
             }
         }
     }
@@ -11209,10 +11230,11 @@ textarea.no-resize {
         border: 1px solid $qty-box-border;
         -webkit-box-shadow: none;
                 box-shadow: none;
-        @include border-radius(0 $border-radius $border-radius 0);
+        @include border-radius(0 $border-radius 0 0);
 
         + .qty-btn {
             border-top: 0;
+            @include border-radius(0 0 $border-radius 0);
         }
 
         &.disabled {
@@ -14069,9 +14091,12 @@ header .widget {
 
     @each $i in 1, 2, 3 {
         @each $j in 1, 2, 3 {
-            .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional,
-            .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
+            .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional {
                 @extend .prop#{$infix}-#{$i}-#{$j};
+            }
+
+            .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
+                padding-bottom: percentage($j / $i) !important; // stylelint-disable-line declaration-no-important
             }
         }
     }
