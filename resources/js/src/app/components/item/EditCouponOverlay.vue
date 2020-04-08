@@ -98,7 +98,7 @@
 
                         <!-- MODAL FOOTER -->
                         <div class="modal-footer">
-                            <button type="reset" 
+                            <button type="button" 
                                     class="btn btn-danger"
                                     :disabled="isLoading"
                                     data-dismiss="modal"
