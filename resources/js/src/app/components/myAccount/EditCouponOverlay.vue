@@ -256,7 +256,7 @@ export default {
                     NotificationService.success(
                         this.$translate("Ceres::Template.couponChangeSuccess")
                     );
-                    this.closeConfirmModal();
+                    this.closeEditModal();
                 })
                 .fail(() =>
                 {
