@@ -16,10 +16,14 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $variations;
     public $customerShowNetPrices;
     public $defaultCategory;
-    public $assetName = "ceres-item";
+    public $assetName = "ceres-base";
     public $dynamicVariationId;
     public $initPleaseSelectOption;
     public $isItemSet;
+    public $setComponents;
+    public $setAttributeMap = [];
+    public $requestedVariationUrl;
+
 
     public function init($params)
     {
@@ -46,6 +50,9 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->variations = $params['variationAttributeMap']['variations'];
         $this->customerShowNetPrices = $customerService->showNetPrices();
 
+        $this->setComponents = $params['setComponents'];
+        $this->setAttributeMap = $params['setAttributeMap'];
+        $this->requestedVariationUrl = explode('?', $this->request->getUri())[0];
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
         foreach ($this->item['documents'][0]['data']['defaultCategories'] as $category) {

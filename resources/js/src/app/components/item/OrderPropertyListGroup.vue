@@ -24,7 +24,7 @@ export default {
 
     components:
     {
-        "order-property-list-item": OrderPropertyListItem
+        OrderPropertyListItem
     },
 
     props:

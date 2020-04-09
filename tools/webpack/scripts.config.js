@@ -1,5 +1,6 @@
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const WebpackRequireFrom = require("webpack-require-from");
 
 module.exports = env =>
 {
@@ -8,8 +9,7 @@ module.exports = env =>
         name: "scripts",
         mode: env.prod ? "production" : "development",
         entry: {
-            category: "./resources/js/src/category.js",
-            item: "./resources/js/src/item.js",
+            base: "./resources/js/src/base.js",
             checkout: "./resources/js/src/checkout.js"
         },
         output: {
@@ -64,7 +64,10 @@ module.exports = env =>
         plugins: [
             new VueLoaderPlugin({
                 exposeFilename: true
+            }),
+            new WebpackRequireFrom({
+                replaceSrcMethodName: "__loadPluginChunk"
             })
-        ],
+        ]
     };
 };

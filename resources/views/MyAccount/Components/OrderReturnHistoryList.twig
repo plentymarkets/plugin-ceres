@@ -12,9 +12,8 @@
 			</div>
 		</div>
 
-		<div v-if="waiting" class="row loading">
-			{% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-		</div>
+		<loading-animation v-if="waiting" class="row"></loading-animation>
+
 		<template v-else-if="returnsList.totalsCount > 0">
 			<div class="container-header d-none d-md-flex pb-2">
 				<div class="col-md-10">

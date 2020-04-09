@@ -36,7 +36,7 @@
                 enableBasketPreview and
                 searchStyle == "hidden"
             %}
-                <div class="widget-placeholder w-100 text-dark">
+                <div class="widget-placeholder p-0 w-100 text-dark">
                     <div>
                         <p class="title">{{ Twig.trans("Ceres::Widget.topBarPlaceholderTitle") }}</p>
                         <p class="description">{{ Twig.trans("Ceres::Widget.topBarPlaceholderDescription") }}</p>
@@ -176,9 +176,6 @@
                                     <basket-preview :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
                                         <template #before-basket-item>
                                             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
-                                        </template>
-                                        <template #loading-animation>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.LoadingAnimation"])) }}
                                         </template>
                                         <template #after-basket-item>
                                             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.AfterItem"])) }}

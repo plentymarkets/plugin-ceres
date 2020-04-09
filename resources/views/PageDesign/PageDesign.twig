@@ -36,7 +36,7 @@
     {% if assetName == 'ceres-checkout' %}
         {{ LayoutContainer.show("Ceres::Checkout.Styles") }}
     {% endif %}
-    {% if assetName == 'ceres-item' %}
+    {% if services.template.getCurrentTemplate() == "tpl.item" %}
         {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
     {% endif %}
 </head>
@@ -242,11 +242,15 @@
 {% if assetName == 'ceres-checkout' %}
     {{ LayoutContainer.show("Ceres::Checkout.AfterScriptsLoaded") }}
 {% endif %}
-{% if assetName == 'ceres-item' %}
+{% if services.template.getCurrentTemplate() == "tpl.item" %}
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
 {% endif %}
 
 <script>
+    window.__loadPluginChunk = function(source) {
+        return source += "?v={{ buildHash }}";
+    };
+
     window.vueEventHub = new Vue();
 
     if (App.config.log.checkSyntax)

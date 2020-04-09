@@ -19,9 +19,11 @@
 <script>
 import get from "lodash/get";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
-import { mapState } from "vuex";
 
 export default {
+
+    name: "item-data-table",
+
     props: {
         paddingClasses:
         {
@@ -40,11 +42,17 @@ export default {
         }
     },
 
+    inject: {
+        itemId: {
+            default: null
+        }
+    },
+
     computed:
     {
-        ...mapState({
-            currentVariation: state => state.item.variation.documents[0].data
-        })
+        currentVariation() {
+            return this.$store.getters[`${this.itemId}/currentItemVariation`]
+        }
     },
 
     data()

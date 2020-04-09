@@ -9,13 +9,21 @@
         </div>
 
         <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
-            <input :name="group ? group.id : 'check' + _uid"
+            <input v-if="inputType === 'checkbox'"
+                   type="checkbox"
+                   :name="group ? group.id : 'check' + _uid"
                    :id="'check' + _uid"
                    :value="property.id"
-                   v-model="property.value"
-                   @change="onInputValueChanged(inputType === 'checkbox' ? $event.target.checked : $event.target.value)"
-                   class="form-check-input"
-                   :type="inputType">
+                   :checked="property.value"
+                   @change="onInputValueChanged($event.target.checked)"
+                   class="form-check-input">
+            <input v-else
+                   type="radio"
+                   :name="group ? group.id : 'check' + _uid"
+                   :id="'check' + _uid"
+                   :value="property.id"
+                   @change="onInputValueChanged($event.target.value)"
+                   class="form-check-input">
 
             <label class="form-check-label text-appearance d-flex"
                    :for="'check' + _uid"
@@ -79,15 +87,23 @@ const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
 import { isNullOrUndefined } from "../../helper/utils";
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import TranslationService from '../../services/TranslationService';
 
 export default {
+
+    name: "order-property-list-item",
 
     props:
     {
         group: Object,
         property: Object
+    },
+
+    inject: {
+        itemId: {
+            default: null
+        }
     },
 
     data()
@@ -104,26 +120,29 @@ export default {
     {
         document.addEventListener("onVariationChanged", event =>
         {
-            // clear type specific bindings
-            if (this.property.valueType === "selection")
+            if(event.itemId === this.itemId)
             {
-                this.selectionValue = this.property.value || null;
-            }
-            else if (this.property.valueType === "file")
-            {
-                if (this.property.value && this.property.value.length)
+                // clear type specific bindings
+                if (this.property.valueType === "selection")
                 {
-                    NotificationService.warn(
-                        TranslationService.translate("Ceres::Template.singleItemOrderPropertyFileHasReset",
-                            { propertyName: this.property.names.name })
-                    ).closeAfter(5000);
+                    this.selectionValue = this.property.value || null;
                 }
+                else if (this.property.valueType === "file")
+                {
+                    if (this.property.value && this.property.value.length)
+                    {
+                        NotificationService.warn(
+                            TranslationService.translate("Ceres::Template.singleItemOrderPropertyFileHasReset",
+                                { propertyName: this.property.names.name })
+                        ).closeAfter(5000);
+                    }
 
-                this.clearSelectedFile();
-            }
-            else
-            {
-                this.inputValue = this.property.value || "";
+                    this.clearSelectedFile();
+                }
+                else
+                {
+                    this.inputValue = this.property.value || "";
+                }
             }
         });
     },
@@ -185,14 +204,19 @@ export default {
             return selectedProperty.description;
         },
 
+        variationMissingProperties()
+        {
+            return this.$store.getters[`${this.itemId}/variationMissingProperties`];
+        },
+
+        variationMarkInvalidProperties() {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            return currentVariation && currentVariation.variationMarkInvalidProperties;
+        },
+
         ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
-            variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
-        }),
-
-        ...mapGetters([
-            "variationMissingProperties"
-        ])
+        })
     },
 
     methods:
@@ -264,10 +288,9 @@ export default {
             return value;
         },
 
-        ...mapMutations([
-            "setVariationOrderProperty",
-            "setIsBasketLoading"
-        ]),
+        setVariationOrderProperty(orderProperty) {
+            return this.$store.commit(`${this.itemId}/setVariationOrderProperty`, orderProperty);
+        },
 
         setPropertyFile(event)
         {
@@ -320,7 +343,11 @@ export default {
                     NotificationService.error(err[0]);
                 }
             }
-        }
+        },
+
+        ...mapMutations([
+            "setIsBasketLoading"
+        ]),
     }
 }
 </script>

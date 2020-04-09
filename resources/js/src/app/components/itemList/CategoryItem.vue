@@ -5,7 +5,7 @@
             <add-to-basket
                     :variation-id="item.variation.id"
                     :is-salable="!!item.filter && item.filter.isSalable"
-                    :has-children="!!item.filter && item.filter.hasActiveChildren"
+                    :has-children="!!item.item && item.item.salableVariationCount > 1"
                     :interval-quantity="item.variation.intervalOrderQuantity || 1"
                     :minimum-quantity="item.variation.minimumOrderQuantity"
                     :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
@@ -14,7 +14,8 @@
                     :use-large-scale="true"
                     :show-quantity="false"
                     :item-url="item | itemURL(urlWithVariationId)"
-                    :has-price="item | hasItemDefaultPrice">
+                    :has-price="item | hasItemDefaultPrice"
+                    :item-type="item.item.itemType">
             </add-to-basket>
 
             <div class="thumb-image">
@@ -34,13 +35,15 @@
 
             <!-- STORE SPECIALS -->
             <slot name="store-special">
-                <item-store-special v-if="storeSpecial || item.variation.bundleType === 'bundle'"
+                <item-store-special v-if="storeSpecial || item.variation.bundleType === 'bundle' || item.item.itemType === 'set'"
                                     :store-special="storeSpecial"
                                     :recommended-retail-price="item.prices.rrp"
                                     :variation-retail-price="item.prices.default"
                                     :special-offer-price="item.prices.specialOffer"
                                     :decimal-count="decimalCount"
-                                    :bundle-type="item.variation.bundleType"></item-store-special>
+                                    :bundle-type="item.variation.bundleType"
+                                    :item-type="item.item.itemType">
+                </item-store-special>
             </slot>
             <!-- ./STORE SPECIALS -->
 
@@ -65,7 +68,12 @@
                             </div>
 
                             <div class="price">
-                                {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} *
+                                <template v-if="item.item.itemType === 'set'">
+                                    {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} *
+                                </template>
+                                <template v-else>
+                                    {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} *
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -81,7 +89,7 @@
                     <add-to-basket
                             :variation-id="item.variation.id"
                             :is-salable="!!item.filter && item.filter.isSalable"
-                            :has-children="!!item.filter && item.filter.hasActiveChildren"
+                            :has-children="!!item.item && item.item.salableVariationCount > 1"
                             :interval-quantity="item.variation.intervalOrderQuantity || 1"
                             :minimum-quantity="item.variation.minimumOrderQuantity"
                             :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
@@ -90,7 +98,8 @@
                             :use-large-scale="false"
                             :show-quantity="false"
                             :item-url="item | itemURL(urlWithVariationId)"
-                            :has-price="item | hasItemDefaultPrice">
+                            :has-price="item | hasItemDefaultPrice"
+                            :item-type="item.item.itemType">
                     </add-to-basket>
 
                     <span class="vat small text-muted">
@@ -179,6 +188,14 @@ export default {
         texts()
         {
             return this.item.texts;
+        },
+
+        itemSetPrice()
+        {
+            return this.$options.filters.currency(
+                this.item.prices.default.price.value * (1 - (this.item.item.rebate / 100)),
+                this.item.prices.default.currency
+            );
         },
 
         ...mapState({
