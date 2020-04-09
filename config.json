@@ -27,7 +27,7 @@
                     "required": false,
                     "label": "Config.globalFaviconLabel",
                     "options": {
-                        "defaultValue": "images/favicon.ico"
+                        "defaultValue": ""
                     }
                 },
                 "global.shippingCostsCategoryId": {
