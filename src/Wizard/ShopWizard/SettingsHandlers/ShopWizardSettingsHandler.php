@@ -146,6 +146,14 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['externalVatCheckInactive'] = $data['onlineStore_externalVatIdCheck'];
                 }
 
+                if (isset($data['pagination_sortingMonthlySales'])) {
+                    $webstoreData['itemSortByMonthlySales'] = $data['pagination_sortingMonthlySales'];
+                }
+
+                if (isset($data['onlineStore_minimumOrderValue'])) {
+                    $webstoreData['minimumOrderValue'] = $data['onlineStore_minimumOrderValue'];
+                }
+
                 if (isset($data['displayInfo_attributeSelectDefaultOption'])) {
                     $webstoreData['attributeSelectDefaultOption'] = 0;
                     if ($data['displayInfo_attributeSelectDefaultOption'] !== false) {

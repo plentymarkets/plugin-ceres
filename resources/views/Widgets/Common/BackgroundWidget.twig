@@ -16,6 +16,7 @@
 
 {% set sourceType = widget.settings.sourceType.mobile %}
 {% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set fallbackImagePath = widget.settings.fallbackImagePath.mobile | default(customImagePath) %}
 {% set colorPalette = widget.settings.colorPalette.mobile | default("none") %}
 {% set customColor = widget.settings.customColor.mobile %}
 
@@ -44,7 +45,7 @@
 
 {% set showPlaceholder = isPreview and (sourceType == "category-image1" or sourceType == "category-image2") %}
 
-<div class="widget widget-background d-flex parallax-img-container
+<div class="widget widget-background d-flex parallax-img-container overflow-hidden
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if minHeightClass | length > 0 %}{{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }} {{ minHeightClass }}{{ Twig.endif() }}{% endif %}
     {% if fullWidth %} widget-fw{% endif %}
@@ -54,12 +55,13 @@
                 {% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}
             {{ Twig.endif() }}{% endif %}">
     <div>
-        <lazy-img class="parallax-img-container-inner
+        <lazy-img picture-class="parallax-img-container-inner
             {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
             {% if colorPalette != "custom" and colorPalette != "none" %} bg-{{ colorPalette | default("none") }}{% endif %}"
 
             {{ Twig.if("hasUrl") }}
                 image-url="{{ Twig.print("url") }}"
+                fallback-url="{{ fallbackImagePath }}"
             {{ Twig.endif() }}
             :is-background-image="true"
 
@@ -68,7 +70,7 @@
     </div>
     <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}">
         {% if showPlaceholder %}
-            <div class="widget-placeholder">
+            <div class="widget-placeholder p-0">
                 <div>
                     <p class="title mb-0">{{ trans("Ceres::Widget.backgroundPlaceholderTitle") }}</p>
                     <p class="description mt-3">{{ trans("Ceres::Widget.backgroundPlaceholderDescription") }}</p>

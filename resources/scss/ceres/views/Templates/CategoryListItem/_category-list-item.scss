@@ -1,321 +1,156 @@
-.cmp-product-thumb{
-    padding: .8rem;
+.cmp-product-thumb {
     width: 100%;
+    padding: .8rem;
+    margin-bottom: $grid-gutter-width / 2;
     overflow: hidden;
-    background-color: #fff;
-    margin-bottom: $grid-gutter-width/2;
+    background-color: $white;
 
-    .tag-list span{
-        background-color: #4D4F4D;
-        text-transform: uppercase;
-        cursor: default;
-    }
-
-    .prices{
+    .prices {
         display: flex;
     }
 
-    .crossprice{
-        font-size: 1rem;
+    .crossprice {
+        font-size: .81em;
+        font-weight: 700;
+        color: $gray-500;
     }
 
-    .price-view-port{
+    .price-view-port {
         flex: 1 0 0;
     }
 
-    .thumb-title{
+    .thumb-title {
+        display: block;
         min-height: 32px;
+        font-weight: 700;
+        line-height: 1.1em;
+        color: $gray-600;
+        text-align: left;
     }
 
-    .add-to-basket-lg-container{
-        -webkit-transform: rotate(360deg);
-        border-style: solid;
-        border-width: 0px 70px 70px 0;
-        border-color: transparent #F7F7F9 transparent transparent;
+    .add-to-basket-lg-container {
         position: absolute;
-        z-index: 99;
         top: 0;
         right: 0;
-        transition: 300ms ease-out;
+        z-index: 99;
         cursor: pointer;
+        border-color: transparent #f7f7f9 transparent transparent;
+        border-style: solid;
+        border-width: 0 70px 70px 0;
+        @include transition(.3s ease-out);
 
-        & > i{
-            right: -56px;
-            top: 11px;
+        i {
             position: absolute;
-            transition: 300ms ease-out;
+            top: 11px;
+            right: -56px;
+            @include transition(.3s ease-out);
         }
 
-        &:hover{
+        &:hover {
             border-color: transparent $primary transparent transparent;
 
-            & > i{
+            i {
                 color: color-yiq($primary);
             }
         }
     }
 
-    .category-list-view-port{
-            display: none;
-    }
-
-    .thumb-background{
-        position: absolute;
-        top: -1px;
-        right: -1px;
-        bottom: -2px;
-        left: -1px;
-        background-color: #fff;
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-        border: 1px solid transparent;
-
-        transform-origin: top right;
-        transform: scaleX(1) scaleY(1);
-
-        transition: all 200ms ease-in-out;
-    }
-
-    .thumb-inner{
-        position: relative;
-        height: 100%;
-        transition: all 400ms;
-    }
-
-    .thumb-image{
-        position: relative;
-        width: 120px;
-        display: inline-block;
-        vertical-align: top;
-        cursor: pointer;
-    }
-
-    .main-image{
+    .thumb-image {
         @include img-contain();
-        position: absolute;
-        background-color: #fff;
-        display: flex;
-        align-items: center;
     }
 
     //TODO create separate mixin
-    .special-tags{
-        z-index: 100;
+    .special-tags {
         position: absolute;
         top: 0;
-        right: auto;
-        bottom: auto;
         left: 0;
+        z-index: 10;
 
-        padding: .5rem;
-
-        .special-tag,
-        .tag,
         .badge {
-            display: block;
-            padding: .3em .5em .2rem;
             font-size: .9rem;
             font-weight: 300;
-            box-shadow: 0 0 3px 0 rgba(0,0,0,.4);
-            margin-bottom: 5px;
+            box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
         }
     }
 
-    .thumb-content{
-        position: relative;
+    .thumb-content {
         display: inline-block;
-        vertical-align: top;
-        width: calc( 100% - 120px );
-        height: auto;
+        width: calc(100% - 120px); // stylelint-disable-line function-blacklist
         padding: 0 .8rem;
-        margin-left: -.3em;
-        background-color: #fff;
+        vertical-align: top;
+        background-color: $white;
 
-        transition: all 200ms ease-in-out;
-    }
-
-    .thumb-title{
-        display: block;
-        position: relative;
-        text-align:left;
-        font-weight: 700;
-        color: $gray;
-        line-height: 1.1em;
-    }
-
-    .thumb-meta{
-        margin-top: .5rem;
-        text-align:left;
-
-        .vat-porto-info{
-            display: block;
-            white-space: nowrap;
-            margin-top: 5px;
+        /* addToBasket */
+        .btn {
+            z-index: 1;
         }
 
-    }
-
-    .crossprice{
-        font-size: .81em;
-        font-weight: 700;
-        color: $gray-light;
+        .vat a {
+            z-index: 1;
+        }
     }
 
     .price {
-        color: $gray;
-        line-height: 1.1;
-        font-weight: 700;
         font-size: 1.2rem;
-        min-height: 21px;
+        font-weight: 700;
+        line-height: 1.1;
+        color: $gray-600;
     }
 
     .category-unit-price {
-        font-size: .81em;
-        color: $gray-light;
-    }
-
-    .thumb-buy{
-        display: block;
+        color: $gray-500;
     }
 
     .btn-group {
-        position: absolute;
-        bottom: 0;
-        left: calc(120px + 0.8rem);
-        z-index: 1000;
-        transition:all .3s ease;
-        opacity: 1;
+        margin-top: 5px;
     }
 
-    .mobile-text-only{
-        display: none;
-    }
-
-    @include media-breakpoint-up(lg){
-        .btn-group{
-            right: 15px;
-            position: absolute;
-        }
-    }
-
-    @include media-breakpoint-down(xs){
-        .btn-group {
-            width: 52%;
-        }
-
-        .mobile-icon-right {
-            display: none;
-        }
-
-        .vat-porto-info {
-            white-space: normal !important;
-        }
-
-        .thumb-image {
-            float: left;
-        }
-    }
-
-    @include media-breakpoint-down(md){
-        .btn-group{
-            margin-top: 5px;
-            position: inherit;
-            width: 100%;
-        }
-
-        .mobile-text-only{
-            display: inline;
-            margin-left: -8px;
-        }
-
-        .mobile-width-button {
-            width: 100%;
-        }
-
-        .mobile-icon-right {
-            float: right;
-        }
-
-        .thumb-title {
-            min-height: 32px;
-        }
-
-        .category-list-view-port{
-            display: inline;
-        }
-    }
-    
-    @include media-breakpoint-up(sm){
+    @include media-breakpoint-up(sm) {
         padding: 0;
         margin-bottom: $grid-gutter-width;
 
-        .thumb-background{
-            display: block;
-        }
-
-        .thumb-scroll-cmd {
-            flex: 0 0 auto;
-            text-align: center;
-            padding: .4rem;
-        }
-
-        .thumb-btn-buy{
-            min-height: 2rem;
-        }
-
-        .thumb-content{
-            padding: .8rem;
+        .thumb-content {
             width: 100%;
-            margin: 0;
+            padding: .8rem;
         }
 
-        .btn-group {
-            bottom: 2.5rem;
-            left: auto;
-            right: .8rem;
-        }
-
-        .thumb-title{
+        .thumb-title {
             font-weight: 400;
-            line-height: 1.5em;
         }
 
-        .thumb-image{
+        .thumb-image {
             width: 100%;
         }
 
         .img-fluid {
-            transition: transform .4s cubic-bezier(0, 0, .26, 1), opacity .3s cubic-bezier(0, 0, .26, 1), -webkit-transform .3s cubic-bezier(0, 0, .26, 1);
+            @include transition(.4s cubic-bezier(0, 0, .26, 1));
         }
 
         &:hover {
-            z-index: 1000;
-
             .img-fluid {
                 transform: scale(1.05);
             }
 
-            .owl-nav [class*='owl-'] {
+            .owl-nav [class*="owl-"] {
                 opacity: 1;
             }
         }
     }
 
-    @include media-breakpoint-up(md){
+    @include media-breakpoint-down(md) {
+        .btn-group {
+            width: 100%;
+        }
+    }
 
-    }
-    @include media-breakpoint-up(lg){
-        .btn-group {
-            bottom: .8rem;
-        }
-        .btn-group {
-            transition:all .3s ease;
-            opacity: 0;
-        }
-        &:hover {
-            .btn-group {
-                transition:all .3s ease;
-                opacity: 1;
-            }
+    @include media-breakpoint-down(xs) {
+        .thumb-image {
+            float: left;
+            width: 120px;
         }
     }
+}
+
+.no-pointer-events {
+    pointer-events: none;
 }

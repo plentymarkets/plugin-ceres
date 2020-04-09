@@ -9,7 +9,7 @@
                 <div
                     class="component-loading"
                     :id="'addressMultiSelect' + _uid"
-                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'isLoading disabled': isBasketLoading || isCheckoutReadonly}"
+                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'is-loading disabled': isBasketLoading || isCheckoutReadonly}"
                     @click="onDropdownClicked($event)"
                     data-toggle="dropdown"
                     aria-haspopup="true"
@@ -149,7 +149,7 @@
                             </button>
                             <button type="button" class="btn btn-primary btn-appearance btn-medium" :disabled="deleteModalWaiting" @click="deleteAddress">
                                 <span>{{ trans("Ceres::Template.addressDelete") }}</span>
-                                <i v-waiting-animation="deleteModalWaiting" class="fa fa-trash" aria-hidden="true"></i>
+                                <icon icon="trash" :loading="deleteModalWaiting"></icon>
                             </button>
                         </div>
                     </div>

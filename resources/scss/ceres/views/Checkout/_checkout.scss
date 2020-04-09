@@ -1,51 +1,53 @@
-.checkout{
-	.basket-items-list .item{
-		padding-left: 0;
-		padding-right: 0;
-	}
+.checkout {
+    .basket-items-list .item {
+        padding-right: 0;
+        padding-left: 0;
+    }
 
-	.login-register-title {
-		font-size: 1em;
-		text-transform: uppercase;
-		text-align: center;
-	}
+    .login-register-title {
+        font-size: 1em;
+        text-align: center;
+        text-transform: uppercase;
+    }
 
-	.cmp-address-list {
-		transition: all .3s ease;
-	}
+    .cmp-address-list {
+        @include transition(all .3s ease);
+    }
 }
 
 .my-account-no-line {
-	padding-bottom: 15px;
+    padding-bottom: 15px;
 }
 
 .payment-change-text {
-	color: $gray-light;
-	padding-top: 15px;
+    padding-top: 15px;
+    color: $gray-500;
 }
 
 .payment-align-center {
-	text-align: center;
+    text-align: center;
 }
 
 .payment-change-box {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	
-	@include media-breakpoint-down(sm){
-		margin-top: 15px;
-	}
+    position: relative;
+    display: flex;
+    flex-direction: column;
 
-	.payment-change-box-item:nth-child(2) {
-		order: 1;
-	}
-	.cannot-change-payment {
-		font-size: 1rem;
-		padding: 5px;
-		width: 100%;
-		.info-badge {
-			margin-left: .2rem;
-		}
-	}
+    @include media-breakpoint-down(sm) {
+        margin-top: 15px;
+    }
+
+    .payment-change-box-item:nth-child(2) {
+        order: 1;
+    }
+
+    .cannot-change-payment {
+        width: 100%;
+        padding: 5px;
+        font-size: 1rem;
+
+        .info-badge {
+            margin-left: .2rem;
+        }
+    }
 }

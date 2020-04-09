@@ -148,7 +148,7 @@ glob.sync(path.resolve(__dirname, '../resources/scss/*.scss')).forEach(file =>
             path.resolve(
                 __dirname,
                 '../resources/css',
-                path.basename(file)
+                'ceres-' + path.basename(file)
             )
         );
     }

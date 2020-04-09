@@ -6,7 +6,7 @@ const ValidationService   = require("../../services/ValidationService");
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("account-settings", {
+export default Vue.component("account-settings", {
 
     props: {
         template:

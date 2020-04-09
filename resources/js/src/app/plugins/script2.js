@@ -36,6 +36,7 @@ const Script2 = {
                     Script2.p = Script2.p.then(() =>
                     {
                         const s = document.createElement("script");
+
                         let h = this.$el.innerHTML;
 
                         h = h.replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&amp;/gi, "&");

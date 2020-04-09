@@ -3,8 +3,8 @@
 namespace Ceres\Containers;
 
 use Ceres\Config\CeresConfig;
-use IO\Services\ItemSearch\SearchPresets\TagItems;
-use IO\Services\ItemSearch\Services\ItemSearchService;
+use Plenty\Modules\Webshop\ItemSearch\SearchPresets\TagItems;
+use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
 use Plenty\Plugin\Templates\Twig;
 
 class CeresItemListContainer1

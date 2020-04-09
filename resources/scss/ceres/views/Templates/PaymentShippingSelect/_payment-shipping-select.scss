@@ -1,109 +1,100 @@
-.cmp-method-list{
+.cmp-method-list {
 
-	.method-list{
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		width: 100%;
-	}
+    .method-list {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
 
-	.method-list-item{
-		width: 100%;
-		display: inline-block;
-		vertical-align:top;
-		margin-top: -1px;
-		margin-left: -1px;
+    .method-list-item {
+        display: inline-block;
+        width: 100%;
+        margin-top: -1px;
+        margin-left: -1px;
+        vertical-align: top;
 
-		& > input:disabled ~ label,
-		& > input:disabled ~ .label {
-			opacity: .5;
-			cursor: not-allowed;
-		}
+        & > input:disabled ~ label,
+        & > input:disabled ~ .label {
+            cursor: not-allowed;
+            opacity: .5;
+        }
 
-		input{
-			display: none;
-			transition: box-shadow 2s;
-		}
+        input {
+            display: none;
+            @include transition(box-shadow 2s);
+        }
 
-		input:checked + label,
-		input:checked + .label {
-			box-shadow: inset 0 0 0 .1rem $primary;
-		}
+        input:checked + label,
+        input:checked + .label {
+            box-shadow: inset 0 0 0 .1rem $primary;
+        }
 
-		label,
-		.label {
-			border: 1px solid $gray-lighter;
-			border-radius: $border-radius;
-			cursor: pointer;
-			height: 5rem;
-			padding: .5em;
-			margin-bottom: 0;
-			width:100%;
-			overflow: hidden;
-			background-color: $card-bg;
-			display: flex;
-			align-items: center;
-		}
+        label,
+        .label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 5rem;
+            padding: .5em;
+            margin-bottom: 0;
+            overflow: hidden;
+            cursor: pointer;
+            background-color: $card-bg;
+            border: 1px solid $gray-300;
+            @include border-radius($border-radius);
+        }
 
-		&.has-error label,
-		&.has-error .label {
-			box-shadow: inset 0 0 0 .1rem theme-color-level("danger", 6);
-			color: theme-color-level("danger", 6);
-			background-color: theme-color-level("danger", -10);
-		}
+        &.has-error label,
+        &.has-error .label {
+            color: theme-color-level("danger", 6);
+            background-color: theme-color-level("danger", -10);
+            box-shadow: inset 0 0 0 .1rem theme-color-level("danger", 6);
+        }
 
-		.content,
-		.icon{
-			display: inline-block;
-			vertical-align: middle;
-		}
+        .content,
+        .icon {
+            display: inline-block;
+            vertical-align: middle;
+        }
 
-		.content{
-			width: calc( 100% - 3.5rem );
-			padding-left: .5rem;
-		}
+        .content {
+            width: calc(100% - 3.5rem); // stylelint-disable-line function-blacklist
+            padding-left: .5rem;
+        }
+    }
+    &.list {
+        .method-list-item:not(:last-child) {
+            margin-bottom: 1em;
+        }
+        .content {
+            position: relative;
+            width: calc(100% - 4rem); // stylelint-disable-line function-blacklist
+            padding-left: .5rem;
+        }
+        .icon {
+            display: flex;
+            width: 4rem;
+            max-height: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        .method-list {
+            display: flex;
+            flex-flow: row wrap;
+        }
+        .method-list-item {
+            display: flex;
+            flex-flow: row nowrap;
+            width: 50%;
         }
         &.list {
-		.method-list-item:not(:last-child){
-			margin-bottom: 1em;
-		}
-		.content{
-			width: calc( 100% - 4rem );
-			padding-left: .5rem;
-			position: relative;
-		}
-		.icon{
-			width: 4rem;
-
-			img{
-				width: 100%;
-				height: auto;
-			}
-		}
-	}
-
-	@include media-breakpoint-up(sm){
-
-	}
-
-	@include media-breakpoint-up(md){
-		.method-list{
-			display: flex;
-			flex-flow: row wrap;
-		}
-		.method-list-item{
-			width: 50%;
-			display: flex;
-			flex-flow: row nowrap;
-		}
-		&.list {
-			.method-list-item{
-				width: 100%;
-			}
-		}
-	}
-
-	@include media-breakpoint-up(lg){
-
-	}
+            .method-list-item {
+                width: 100%;
+            }
+        }
+    }
 }

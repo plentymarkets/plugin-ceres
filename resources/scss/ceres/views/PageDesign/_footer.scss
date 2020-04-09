@@ -1,200 +1,65 @@
-.to-top {
-    display: block;
-    background-color: $gray-dark;
-    text-align: center;
-    padding: .5rem .5rem;
-	text-decoration:none!important;
-	cursor: pointer;
-	width: 100%;
+.back-to-top-center {
+    position: fixed;
+    right: 0;
+    bottom: -17px;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    width: 94px;
+    height: 50px;
+    background: $white;
+    opacity: .5;
+    @include transition(opacity .3s);
 
     &:hover {
-    	background-color: $gray-darker;
+        opacity: 1;
     }
-    i {
-    	color: white;
-	    font-size: 1.5em;
-	    padding: .5em 0;
-    }
-}
-
-.back-to-top-center {
-	text-decoration: none;
-	opacity: .5;
-	-webkit-transition: opacity .3s;
-	transition: opacity .3s;
-	border: 1px solid $gray-darker;
-	cursor: pointer;
-	text-align: center;
-	position: fixed;
-	bottom: -17px;
-	left: 50%;
-	width: 94px;
-	height: 50px;
-	margin-left: -47px;
-	z-index: 1000;
-	overflow: hidden;
-	background: #fff;
-	padding: 20px;
-	display: none;
-	border-top-left-radius: 25px;
-	border-top-right-radius: 25px;
-
-	&:hover {
-		opacity: 1;
-	}
-}
-
-.back-to-top-center i {
-	font-size: 29px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 90px;
-	height: 40px;
-	display: block;
-	z-index: 1;
 }
 
 .back-to-top {
-	margin: 0;
-	position: fixed;
-	bottom: 2rem;
-	right: 2rem;
-	width: 40px;
-	height: 40px;
-	z-index: 100;
-	display: none;
-	text-decoration: none;
-	opacity: 0.5;
-	transition: opacity 300ms;
-	border: 1px solid $gray-darker;
-	background: $gray-dark;
-	border-radius: $border-radius;
-	cursor: pointer;
-	text-align: center;
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 100;
+    display: none;
+    width: 40px;
+    height: 42px;
+    opacity: .5;
+    @include transition(opacity .3s);
 
-	&:hover {
-		opacity: 1;
-	}
+    &:hover {
+        opacity: 1;
+    }
 }
 
-.back-to-top i {
-	font-size: 29px;
-	color: $gray-lightest;
-}
+.footer {
+    background-color: $footer-bg;
 
-.footer{
+    a {
+        color: $footer-color;
+    }
 
-	@media print {
-		display: none;
-	}
+    .plenty-brand {
+        height: 30px;
+    }
 
-	display: block;
-	background-color: $footer-bg;
-	
-	a{
-		color: $footer-color;
-	}
+    .footer-features {
+        background-color: $footer-features-bg;
+    }
 
-	.svg.plenty-brand {
- 		padding:0 .5em;
- 		path {
- 			fill: $gray-dark;
- 		}
- 	}
+    .footer-services {
+        flex-flow: column nowrap;
 
-	.footer-features{
-		border-top: 1px solid transparent;
-		background-color: $footer-features-bg;
-		color: $footer-features-color;
-		max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
-		i {
-			color:$footer-features-color !important;
-		}
-	}
+        div {
+            display: inline-flex;
+            flex-flow: row wrap;
+        }
+        img {
+            max-height: 4rem;
+        }
 
-	.footer-content {
-		max-width: map-get($grid-breakpoints, "xl") - $grid-gutter-width;
-	}
-
-	.footer-services {
-		display: flex;
-		flex-flow: column nowrap;
-		
-		.services-payment,
-		.services-shipping,
-		.services-certificate{
-			display: inline-block;
-			display: inline-flex;
-			flex-flow: row wrap;
-			flex: 0 1 auto;
-		}
-
-		.services-certificate{
-			flex: 1 0 auto;
-		}
-
-		.services-title{
-			width: 100%;
-		}
-
-		a{
-			flex: 1 1 auto;
-			display: inline-block;
-			max-width: 5rem;
-    		margin-right: .5rem;
-		}
-
-		img{
-			max-height: 4rem;
-		}
-	}
-
-	.footer-column{
-
-		h2{
-			font-weight: 700;
-		}
-	}
-
-	.newsletter{
-		
-	}
-
-	.btn-mail {
-	    background-color: $gray;
-	    color: white;
-
-		i {
-	    	padding: 0 1rem;
-		}
-
-		&:hover {
-			background-color: $gray-light;
-		}
-	}
-
-	@include media-breakpoint-up(sm){
-		.footer-services{
-			flex-flow: row nowrap;
-		}
-	}
-
-	@include media-breakpoint-up(md){
-
-	}
-
-	@include media-breakpoint-up(lg){
-
-	}
-}
-
-.plenty-brand {
-	height: 30px;
-	margin: 2em 0 0.2em;
-}
-
-.static-link-list a {
-	color: black;
-	margin-right: 10px;
+        @include media-breakpoint-up(sm) {
+            flex-flow: row nowrap;
+        }
+    }
 }

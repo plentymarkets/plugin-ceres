@@ -1,25 +1,28 @@
 .modal-header {
-  align-items: center;
+    align-items: center;
 }
 
-.modal-footer {
-  >.fa {
-    margin-top: 1px;
-    margin-left: 5px;
-  }
-}
-
-@include media-breakpoint-down(xs) {     
+// stylelint-disable
+@include media-breakpoint-down(xs) {
     html.facebook {
         .checkout .modal.show,
         .myaccount .modal.show {
             position: absolute !important;
-            transform: translateZ(0);
             min-height: 100vh;
+            transform: translateZ(0);
         }
         body.modal-open {
             position: relative !important;
             overflow: auto !important;
         }
+    }
+}
+
+.modal-multi-row {
+    .row {
+        background-color: $gray-100;
+        border: 1px solid $gray-300;
+        margin: 0 0 1rem 0;
+        padding-top: 1rem;
     }
 }

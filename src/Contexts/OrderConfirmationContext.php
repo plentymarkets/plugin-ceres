@@ -10,6 +10,7 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
     public $data;
     public $totals;
     public $showAdditionalPaymentInformation;
+    public $assetName = "ceres-checkout";
     
     public function init($params)
     {

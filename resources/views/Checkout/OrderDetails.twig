@@ -3,8 +3,6 @@
 
 {% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
 
-{{ component( "Ceres::Item.Components.ItemBundle" ) }}
-
 {% set basketTotalsCurrency = totals.currency %}
 
 <div class="row">
@@ -64,7 +62,7 @@
                                             {{ trans("Ceres::Template.addressPostNummer") }}
                                             {{ orderData.order.deliveryAddress | addressOptionType(6) }}
                                         {% endif %}
-                                        
+
                                         {{ orderData.order.deliveryAddress.address3 }}
                                     </div>
                                     <div>{{ orderData.order.deliveryAddress.postalCode }} {{ orderData.order.deliveryAddress.town }}</div>
@@ -121,7 +119,7 @@
                         <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
                         <span class="col-6 col-sm-7">{{ orderData.shippingProvider }} - {{ orderData.shippingProfileName }}</span>
                     </div>
-                    
+
                     {% set shippingDate = "" %}
                     {% for date in orderData.order.dates %}
                         {% if date.typeId == 8 %}
@@ -162,7 +160,7 @@
                             </a>
 
                             {% if splitItemBundle != "1" and item.bundleType == "bundle" %}
-                                <div class="mb-3 item-bundle">
+                                <div class="item-bundle small font-weight-bold mb-3">
                                     {% for bundleComponent in item.bundleComponents %}
                                         <div>
                                             <span class="text-muted">{{ bundleComponent.quantity }} x</span>
@@ -207,6 +205,24 @@
                                 <strong class="col-6 col-sm-9 col-md-7 text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</strong>
                             </div>
 
+                            {% for propertyGroup in item.variationProperties %}
+                                <div>
+                                    {% for property in propertyGroup.properties %}
+                                        <div>
+                                            <strong>{{ propertyGroup.name }}</strong>
+                                            <span>{{ property.names.name }}</span>
+                                            <span>
+                                                {% if property.cast == "file" %}
+                                                    <a :href="'{{ property.values.value }}' | propertyFileUrl" v-html="'{{ property.values.value }}'" target="_blank"></a>
+                                                {% else %}
+                                                    {{ property.values.value }}
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+
                             {% for attribute in item.attributes %}
                                 <div>
                                     <strong>{{ attribute.name }}: </strong>
@@ -234,7 +250,6 @@
                                                     {% endif %}
                                                 {% endfor %}
 
-
                                                 <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}" target="_blank">
                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                                     {{ splitPath | last }}
@@ -256,7 +271,7 @@
             {% endfor %}
 
         </div>
-        
+
         {{ Totals.forOrder(orderData) }}
     </div>
 </div>

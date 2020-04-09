@@ -1,30 +1,30 @@
-.widget-title-bar
-{
-    .widget-inner
-    {
+.widget-title-bar {
+    .widget-inner {
         padding: 1rem 1.5rem;
         word-break: break-word;
     }
 
-    .h1, h1,
-    .h2, h2,
-    .h3, h3
-    {
-        margin: 0.5rem auto;
+    .h1,
+    h1,
+    .h2,
+    h2,
+    .h3,
+    h3 {
+        display: block;
+        margin: .5rem auto;
         font-size: 2.5rem;
         letter-spacing: 1.25px;
-        display: block;
     }
 
-    .h2, h2
-    {
-        margin: 0.4rem 0;
+    .h2,
+    h2 {
+        margin: .4rem 0;
         font-size: 2.25rem;
     }
 
-    .h3, h3
-    {
-        margin: 0.25rem 0;
+    .h3,
+    h3 {
+        margin: .25rem 0;
         font-size: 2rem;
     }
 }

@@ -12,7 +12,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <shipping-privacy-hint-check>
         {% if isPreview %}
-            <div class="widget-placeholder">
+            <div class="widget-placeholder p-0">
                 <div>
                     <p class="title">{{ Twig.trans("Ceres::Widget.shippingPrivacyCheckLabel") }}</p>
                     <p class="description">{{ Twig.trans("Ceres::Widget.shippingPrivacyCheckPlaceholderDescription") }}</p>

@@ -37,7 +37,8 @@
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
                     "price"         : "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
-                    {% if itemData.prices.default.baseLot > 0 %}
+                    "url"           : "{{ requestedVariationUrl }},
+{% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification": {
                         "@type": "UnitPriceSpecification",
                         "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
@@ -48,7 +49,7 @@
                             "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
                         }
                     },
-                    {% endif %}
+{% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ itemData.item.condition.names.name }}",
                     "serialNumber"  : "{{ itemData.variation.number }}"
@@ -76,14 +77,12 @@
 
 {% block PageBody %}
     {{ set_item_data_base(item.documents[0].data) }}
-    {{ component("Ceres::Item.Components.SingleItem") }}
 
     {% set shopBuilderTemplate = "" %}
     {% set currentCategory = services.category.getCurrentCategory() %}
 
     {% if currentCategory is defined %}
-        {# Check for item template for specific category first #}
-        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, "singleitem") %}
+        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, isItemSet ? "itemset" : "singleitem") %}
     {% endif %}
 
     {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
@@ -110,6 +109,9 @@
                         variations="{{ variations | json_data }}"
                         :please-select-option-variation-id="{{ dynamicVariationId }}"
                         :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"
+                        :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
+                        :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"
+                        :item-id="{{ item.documents[0].data.item.id }}"
                         v-slot="slotProps">
                         {{ shopBuilderTemplate | raw }}
                     </single-item>

@@ -1,7 +1,5 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{{ Twig.component( "Ceres::Item.Components.ItemImageCarousel" ) }}
-
 {% set customClass = widget.settings.customClass.mobile %}
 {% set appearance = widget.settings.appearance.mobile %}
 {% set maxQuantity = widget.settings.maxQuantity.mobile %}
@@ -16,7 +14,7 @@
 <div class="widget widget-item-image widget-{{ appearance | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     {{ Twig.if("ImageCarouselOverride | trim is empty") }}
-        <item-image-carousel v-if="!!$store && !!$store.state.item.variation && !!$store.state.item.variation.documents && !!$store.state.item.variation.documents.length"
+        <item-image-carousel
             :max-quantity="{{ maxQuantity }}"
             image-url-accessor="{{ imageSize }}"
             :show-thumbs="{{ showThumbs | json_encode }}"

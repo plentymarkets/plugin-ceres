@@ -3,7 +3,9 @@ import { isDefined } from "./utils";
 function _readElement(inputElement)
 {
     let name   = inputElement.name;
+
     let label  = getLabel(inputElement);
+
     let value  = inputElement.value;
 
     if (inputElement.type === "checkbox")
