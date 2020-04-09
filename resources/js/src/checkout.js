@@ -25,5 +25,6 @@ import "./app/components/myAccount/OrderDocuments";
 import "./app/components/myAccount/History";
 
 // new shopbuilder-only component
+Vue.component("edit-coupon-overlay", () => import("./app/components/myAccount/EditCouponOverlay.vue"));
 import "./app/components/myAccount/OrderHistoryList";
 import "./app/components/myAccount/OrderReturnHistoryList";
