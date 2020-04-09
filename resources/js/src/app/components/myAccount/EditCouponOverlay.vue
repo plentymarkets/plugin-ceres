@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <div class="pb-3">
         <div class="row">
-            <div class="col-12 col-sm-6 mb-2">
+            <div class="col-12 col-sm-6">
                 <button type="button" class="btn btn-primary btn-appearance btn-block" data-toggle="modal" data-target="#edit-coupon-overlay">
                     <span>{{ $translate("Ceres::Template.couponEdit") }}</span>
                     <i class="fa fa-gift default-float" aria-hidden="true"></i> 
                 </button>
             </div>
-            <div class="col-12 col-sm-6 mb-2">
+            <div class="col-12 col-sm-6">
                 <button v-if="!isFinalized" 
                         type="button" 
                         class="btn btn-primary btn-appearance btn-block"
@@ -15,10 +15,9 @@
                         v-tooltip="!isPaid"
                         data-placement="top"
                         :title="$translate('Ceres::Template.couponNotPaid')"
-                        data-toggle="modal"
-                        data-target="#confirm-finalization-overlay">
+                        @click="openConfirmModal()">
                     <span>{{ $translate("Ceres::Template.couponFinalize") }}</span>
-                    <icon icon="check" class="default-float" :loading="isLoading"></icon>
+                    <i class="fa fa-check default-float" aria-hidden="true"></i> 
                 </button>
                 <a v-if="isFinalized && isPaid" 
                     :href="pdfLink"
@@ -129,7 +128,7 @@
         </form>
 
         <div id="confirm-finalization-overlay" class="modal fade" tabindex="-1" role="dialog" ref="confirmFinalizationOverlay">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     
                     <!-- MODAL HEADER -->
@@ -149,21 +148,21 @@
 
                     <!-- MODAL FOOTER -->
                     <div class="modal-footer">
-                        <button type="button"
-                                class="btn btn-primary"
-                                :class="{ 'disabled': isLoading }"
-                                @click="finalize()">
-                            <span>{{ $translate("Ceres::Template.couponFinalizeConfirmYes") }}</span>
-                            <icon icon="check" class="default-float" :loading="isLoading"></icon>
-                        </button>
                         <button type="button" 
                                 class="btn btn-danger"
-                                :disabled="isLoading"
+                                :disabled="isFinalizing"
                                 data-dismiss="modal"
                                 aria-label="Close"
                                 @click="closeConfirmModal()">
                             <span>{{ $translate("Ceres::Template.couponFinalizeConfirmNo") }}</span>
                             <i class="fa fa-times default-float" aria-hidden="true"></i> 
+                        </button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                :class="{ 'disabled': isFinalizing }"
+                                @click="finalize()">
+                            <span>{{ $translate("Ceres::Template.couponFinalizeConfirmYes") }}</span>
+                            <icon icon="check" class="default-float" :loading="isFinalizing"></icon>
                         </button>
                     </div>
                     <!-- ./MODAL FOOTER -->
@@ -201,7 +200,8 @@ export default {
         return {
             couponData: [],
             isFinalized: this.orderItem.giftCard.hasPdf,
-            isLoading: false
+            isLoading: false,
+            isFinalizing : false
         };
     },
 
@@ -255,8 +255,7 @@ export default {
                 {
                     NotificationService.success(
                         this.$translate("Ceres::Template.couponChangeSuccess")
-                    );
-                    this.closeConfirmModal();
+                    ).closeAfter(3000);
                 })
                 .fail(() =>
                 {
@@ -266,26 +265,28 @@ export default {
                 })
                 .always(() =>
                 {
+                    this.closeEditModal();
                     this.isLoading = false;
                 });
         },
 
         finalize()
         {
-            if (!this.isPaid || this.isLoading)
+            if (!this.isPaid || this.isLoading || this.isFinalizing)
             {
                 return;
             }
-
-            this.isLoading = true;
+            
+            this.isFinalizing = true;
 
             ApiService.post("/rest/online_store/gift_card/generate_pdf", { orderId: this.orderItem.orderId, orderItemId: this.orderItem.id, accessKey: this.orderAccessKey})
                 .done(response =>
                 {
                     NotificationService.success(
                         this.$translate("Ceres::Template.couponFinalizeSuccess")
-                    );
-                    this.closeConfirmModal();
+                    ).closeAfter(3000);
+                    
+                    window.open(this.pdfLink, '_blank');
 
                     this.isFinalized = true;
                 })
@@ -297,8 +298,17 @@ export default {
                 })
                 .always(() =>
                 {
-                    this.isLoading = false;
+                    this.closeConfirmModal();
+                    this.isFinalizing = false;
                 });
+        },
+
+        openConfirmModal()
+        {
+            if (this.isPaid)
+            {
+                ModalService.findModal(this.$refs.confirmFinalizationOverlay).show();
+            }
         },
 
         closeEditModal()

@@ -13,13 +13,13 @@ When setting up <b>Ceres</b>, it is essential that the assigned <b>plugin positi
 
 ## Certifying the online store with Trusted Shops
 
-![](https://github.com/plentymarkets/plugin-ceres/tree/stable/meta/images/eTrusted-Partner_Certified_Software.png?raw=true)
+![](https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/meta/images/eTrusted-Partner_Certified_Software.png)
 
 You want to certify your online store with Trusted Shops? Ceres has been pre-certified by Trusted Shops, so your certification will be handled as fast and easy as possible. Find all necessary information [here](https://www.trustedshops.de/shopbetreiber/bestellen.html?shopsoftware=PLENTYMARKETS).
 
 ## Certifying the online store with EHI
 
-![](https://github.com/plentymarkets/plugin-ceres/tree/stable/meta/images/EHI-gepruefter-online-shop.png?raw=true)
+![](https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/meta/images/EHI-gepruefter-online-shop.png)
 
 You want to certify your online store with EHI?
 Since Ceres has been pre-certified by EHI, your certification will be handled as fast and easy as possible. You can find all necessary information

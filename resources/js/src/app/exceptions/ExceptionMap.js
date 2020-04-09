@@ -14,6 +14,7 @@ export const exceptionMap = new Map(
         ["11", "notificationsNoEmailEntered"],
         ["12", "notificationsWarningOverselling"],
         ["13", "consentReCaptchaCookieNotSet"],
+        ["14", "notificationsBasketItemsRemovedForCurrency"],
         ["110", "errorBasketItemVariationNotFound"],
         ["111", "errorBasketItemNotEnoughStockForVariation"],
         ["112", "errorBasketItemMaximumQuantityReachedForItem"],

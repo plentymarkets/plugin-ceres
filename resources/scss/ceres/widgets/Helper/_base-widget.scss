@@ -8,6 +8,18 @@
             margin-bottom: 0;
         }
     }
+
+    .widget-fw {
+        position: relative;
+        right: unset !important; // stylelint-disable-line declaration-no-important
+        left: unset !important; // stylelint-disable-line declaration-no-important
+        width: unset !important; // stylelint-disable-line declaration-no-important
+        max-width: unset !important; // stylelint-disable-line declaration-no-important
+
+        &.widget-grid {
+            width: unset !important; // stylelint-disable-line declaration-no-important
+        }
+    }
 }
 
 @include media-breakpoint-down(sm) {
@@ -87,22 +99,15 @@
 
     &.widget-grid {
         width: calc(100vw + 30px) !important; // stylelint-disable-line function-blacklist, declaration-no-important
+        margin-right: -15px;
         margin-left: -15px;
     }
-}
 
-.widget .widget-fw {
-    position: unset;
-    right: unset !important; // stylelint-disable-line declaration-no-important
-    left: unset !important; // stylelint-disable-line declaration-no-important
-    width: unset;
-    max-width: unset !important; // stylelint-disable-line declaration-no-important
-    margin-right: unset;
-    margin-left: unset;
-
-    &.widget-grid {
-        width: unset !important; // stylelint-disable-line declaration-no-important
-        margin-left: unset;
+    .container-max {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
     }
 }
 
