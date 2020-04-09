@@ -1,6 +1,15 @@
 .widget-background {
-    &.widget {
-        width: auto;
+    > .container-max {
+        z-index: 1;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    &.widget-fw {
+        > .container-max {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
     }
 
     &.align-items-end {
@@ -9,8 +18,11 @@
         }
     }
 
-    > .container-max {
-        z-index: 1;
+    .widget-background {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
     }
 
     .parallax-img-container-inner {
@@ -47,7 +59,7 @@
 
 .widget-grid {
     .widget-background {
-        .container-max {
+        > .container-max {
             padding-right: 0 !important; // stylelint-disable-line declaration-no-important
             padding-left: 0 !important; // stylelint-disable-line declaration-no-important
         }
