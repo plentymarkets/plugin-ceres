@@ -17,3 +17,12 @@
         }
     }
 }
+
+.modal-multi-row {
+    .row {
+        background-color: $gray-100;
+        border: 1px solid $gray-300;
+        margin: 0 0 1rem 0;
+        padding-top: 1rem;
+    }
+}
