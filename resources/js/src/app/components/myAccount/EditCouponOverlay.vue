@@ -129,7 +129,7 @@
         </form>
 
         <div id="confirm-finalization-overlay" class="modal fade" tabindex="-1" role="dialog" ref="confirmFinalizationOverlay">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     
                     <!-- MODAL HEADER -->
@@ -149,13 +149,6 @@
 
                     <!-- MODAL FOOTER -->
                     <div class="modal-footer">
-                        <button type="button"
-                                class="btn btn-primary"
-                                :class="{ 'disabled': isLoading }"
-                                @click="finalize()">
-                            <span>{{ $translate("Ceres::Template.couponFinalizeConfirmYes") }}</span>
-                            <icon icon="check" class="default-float" :loading="isLoading"></icon>
-                        </button>
                         <button type="button" 
                                 class="btn btn-danger"
                                 :disabled="isLoading"
@@ -164,6 +157,13 @@
                                 @click="closeConfirmModal()">
                             <span>{{ $translate("Ceres::Template.couponFinalizeConfirmNo") }}</span>
                             <i class="fa fa-times default-float" aria-hidden="true"></i> 
+                        </button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                :class="{ 'disabled': isLoading }"
+                                @click="finalize()">
+                            <span>{{ $translate("Ceres::Template.couponFinalizeConfirmYes") }}</span>
+                            <icon icon="check" class="default-float" :loading="isLoading"></icon>
                         </button>
                     </div>
                     <!-- ./MODAL FOOTER -->
