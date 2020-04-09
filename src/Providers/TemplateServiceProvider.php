@@ -340,6 +340,7 @@ class TemplateServiceProvider extends ServiceProvider
         $templateConfigRepo = pluginApp(TemplateConfigRepositoryContract::class);
 
         $templateConfigRepo
+            ->registerConfigValue('currency.format', $ceresConfig->currency->format)
             ->registerConfigValue('sorting.prioritySearch1', $ceresConfig->sorting->prioritySearch1)
             ->registerConfigValue('sorting.prioritySearch2', $ceresConfig->sorting->prioritySearch2)
             ->registerConfigValue('sorting.prioritySearch3', $ceresConfig->sorting->priorityCategory3)

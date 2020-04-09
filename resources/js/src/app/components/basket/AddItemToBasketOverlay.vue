@@ -42,18 +42,20 @@
                                     <span>{{ attribute.value.names.name }}</span>
                                 </p>
 
-                                <p class="small" v-for="property in variation.properties">
-                                    <template v-if="orderParamValue(property.property.id)">
-                                        <strong>{{ orderParamName(property.property.id) }} (+ {{ variation.properties | propertySurcharge(property.property.id) | currency }} )</strong>
-                                        <span v-if="property.property.valueType === 'file'">
-                                            <a :href="orderParamValue(property.property.id) | fileUploadPath" target="_blank">
-                                                <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                : {{ orderParamValue(property.property.id) | fileName }}
-                                            </a>
-                                        </span>
-                                        <span v-else-if="property.property.valueType !== 'empty'"><b>: </b>{{ orderParamValue(property.property.id) }}</span>
-                                    </template>
-                                </p>
+                                <div class="small" v-if="shownOrderProperties.length">
+                                    <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.singleItemAdditionalOptions") }}:</div>
+                                    <ul class="ml-0 pl-3">
+                                        <li v-for="property in shownOrderProperties" :key="property.propertyId">
+                                            <span class="d-block text-truncate">
+                                                <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.singleItemIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</strong>
+                                                <span>
+                                                    <order-property-value :property="property"></order-property-value>
+                                                </span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -188,6 +190,14 @@ export default {
                 basket: App.urls.basket,
                 checkout: App.urls.checkout
             }
+        },
+
+        shownOrderProperties()
+        {
+            return this.basketItem.basketItemOrderParams.filter(property =>
+            {
+                return !!this.variation.properties.find(prop => prop.propertyId == property.propertyId);
+            });
         }
     },
 
@@ -197,85 +207,12 @@ export default {
         {
             this.basketItem = basketItem;
             this.countAdditionalBasketItems = countAdditionalBasketItems;
-            const isBasketItemSet = basketItem.variation.data.item.itemType === "set";
-
-            if (!isBasketItemSet && this.basketItem && this.variation.prices)
-            {
-                const graduatedPrice = this.$options.filters.graduatedPrice(this.variation, this.basketItem.quantity);
-                const propertySurcharge = this.$options.filters.propertySurchargeSum(this.variation);
-
-                this.price = this.$options.filters.specialOffer(graduatedPrice, this.variation.prices, "price", "value") + propertySurcharge;
-            }
-            else if (isBasketItemSet)
-            {
-                this.price = basketItem.price;
-            }
+            this.price = basketItem.price;
 
             ModalService
                 .findModal(document.getElementById("add-item-to-basket-overlay"))
                 .setTimeout(this.defaultTimeToClose * 1000)
                 .show();
-        },
-
-        orderParamName(propertyId)
-        {
-            if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
-            {
-                return "";
-            }
-
-            const property = this.variation.properties.find(property =>
-            {
-                return parseInt(property.property.id) === parseInt(propertyId);
-            });
-
-            if (isNullOrUndefined(property) || !property.property.isOderProperty)
-            {
-                return "";
-            }
-
-            const orderParam = this.basketItem.basketItemOrderParams.find(param =>
-            {
-                return parseInt(param.propertyId) === parseInt(propertyId);
-            });
-
-            return orderParam.name;
-        },
-
-        orderParamValue(propertyId)
-        {
-            if (isNullOrUndefined(this.basketItem.basketItemOrderParams))
-            {
-                return "";
-            }
-
-            const property = this.variation.properties.find(property =>
-            {
-                return parseInt(property.property.id) === parseInt(propertyId);
-            });
-
-            if (isNullOrUndefined(property) || !property.property.isOderProperty)
-            {
-                return "";
-            }
-
-            const orderParam = this.basketItem.basketItemOrderParams.find(param =>
-            {
-                return parseInt(param.propertyId) === parseInt(propertyId);
-            });
-
-            if (isNullOrUndefined(orderParam))
-            {
-                return "";
-            }
-
-            const orderParamValue = orderParam.value;
-
-            if (property.property.valueType === "selection" && orderParamValue)
-            {
-                return property.property.selectionValues[orderParamValue].name;
-            }
-            return orderParamValue;
         }
     }
 }

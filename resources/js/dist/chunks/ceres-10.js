@@ -207,7 +207,7 @@ var render = function() {
     },
     [
       _vm.isPreview
-        ? _c("div", { staticClass: "widget-placeholder" }, [
+        ? _c("div", { staticClass: "widget-placeholder p-0" }, [
             _c("div", [
               _c("p", { staticClass: "title mb-0" }, [
                 _vm._v(

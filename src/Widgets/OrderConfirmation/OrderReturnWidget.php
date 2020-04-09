@@ -33,7 +33,7 @@ class OrderReturnWidget extends OrderConfirmationBaseWidget
         $settings->createAppearance();
 
         $settings->createCheckboxGroup("itemDetailsData")
-            ->withDefaultValue(["availability"])
+            ->withDefaultValue([])
             ->withName("Widget.basketDetailsDataLabel")
             ->withCheckboxValues(
                 ValueListFactory::make()
