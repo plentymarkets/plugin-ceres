@@ -52,6 +52,14 @@ export default {
         }
     },
 
+    mounted()
+    {
+        if (this.$slots.items && this.$slots.items.length > this.itemsPerPage)
+        {
+            this.initializeCarousel();
+        }
+    },
+
     methods:
     {
         initializeCarousel()
