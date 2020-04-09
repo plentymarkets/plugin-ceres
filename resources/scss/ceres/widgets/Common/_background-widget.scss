@@ -1,5 +1,6 @@
 .widget-background {
     > .container-max {
+        z-index: 1;
         padding-right: 0;
         padding-left: 0;
     }
@@ -22,10 +23,6 @@
             padding-right: 0;
             padding-left: 0;
         }
-    }
-  
-    > .container-max {
-        z-index: 1;
     }
 
     .parallax-img-container-inner {
