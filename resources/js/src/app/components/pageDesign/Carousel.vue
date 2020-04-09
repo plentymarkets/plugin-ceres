@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-12 col-lg-12" v-if="itemCount > itemsPerPage">
+        <div class="col-12 col-lg-12" v-if="$slots.items && $slots.items.length > itemsPerPage">
             <div class="list-item-carousel owl-carousel owl-theme owl-single-item" ref="carouselContainer">
                 <slot-component v-for="(item, index) in $slots.items" :key="index" :vnode="item" />
             </div>
@@ -30,13 +30,6 @@ export default {
         }
     },
 
-    data()
-    {
-        return {
-            itemCount: 0
-        };
-    },
-
     computed:
     {
         columnWidths()
@@ -51,23 +44,12 @@ export default {
         }
     },
 
-    created()
+    updated()
     {
-        if (this.$slots.items)
+        if (this.$slots.items && this.$slots.items.length > this.itemsPerPage)
         {
-            this.itemCount = this.$slots.items.length;
+            this.initializeCarousel();
         }
-    },
-
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            if (this.itemCount > this.itemsPerPage)
-            {
-                this.initializeCarousel();
-            }
-        });
     },
 
     methods:
@@ -111,5 +93,4 @@ export default {
         }
     }
 }
-
 </script>
