@@ -50,7 +50,7 @@
             <!-- ITEM DETAILS -->
             <slot name="item-details">
                 <div class="thumb-content">
-                    <a :href="item | itemURL(urlWithVariationId)" class="thumb-title small stretched-link">
+                    <a :href="item | itemURL(urlWithVariationId)" class="thumb-title small" :class="{ 'stretched-link': $ceres.config.global.shippingCostsCategoryId == 0 }">
                         {{ item | itemName }}<!--
                     --><span v-for="attribute in item.groupedAttributes">{{ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }}</span>
                     </a>
@@ -106,7 +106,7 @@
                         * <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
                         <span v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</span>
                         {{ $translate("Ceres::Template.itemExclusive") }}
-                        <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="text-appearance ml-1 position-absolute" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
+                        <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="text-appearance" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
                         <a v-else :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
                     </div>
                 </div>
