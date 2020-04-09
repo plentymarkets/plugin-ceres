@@ -285,6 +285,8 @@ export default {
                     NotificationService.success(
                         this.$translate("Ceres::Template.couponFinalizeSuccess")
                     ).closeAfter(3000);
+                    
+                    window.open(this.pdfLink, '_blank');
 
                     this.isFinalized = true;
                 })
