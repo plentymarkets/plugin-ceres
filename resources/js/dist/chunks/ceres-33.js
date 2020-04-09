@@ -162,7 +162,7 @@ __webpack_require__.r(__webpack_exports__);
         dots: this.showDots,
         items: 1,
         lazyLoad: true,
-        loop: true,
+        rewind: true,
         margin: 10,
         mouseDrag: imageCount > 1,
         nav: imageCount > 1,
@@ -186,39 +186,6 @@ __webpack_require__.r(__webpack_exports__);
         lightbox.option({
           wrapAround: true
         });
-
-        lightbox.imageCountLabel = function (current, total) {
-          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(imageCount) || imageCount <= 1) {
-            return "";
-          }
-
-          current -= (total - imageCount) / 2;
-
-          while (current <= 0) {
-            current += imageCount;
-          }
-
-          while (current > imageCount) {
-            current -= imageCount;
-          }
-
-          return _this3.$translate("Ceres::Template.singleItemImagePreviewCaption", {
-            current: current,
-            total: imageCount
-          });
-        };
-
-        var originalFn = lightbox.changeImage;
-
-        lightbox.changeImage = function (imageNumber) {
-          if (lightbox.currentImageIndex === 0 && imageNumber === lightbox.album.length - 1) {
-            imageNumber--;
-          } else if (lightbox.currentImageIndex === lightbox.album.length - 1 && imageNumber === 0) {
-            imageNumber++;
-          }
-
-          return originalFn.call(lightbox, imageNumber);
-        };
       }
 
       $(this.$refs.single).on("changed.owl.carousel", function (event) {

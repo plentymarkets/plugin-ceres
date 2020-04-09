@@ -124,8 +124,12 @@ __webpack_require__.r(__webpack_exports__);
         lastName: this.lastName,
         emailFolder: this.emailFolder,
         honeypot: this.honeypot
-      }).done(function () {
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].success(_this2.$translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
+      }).done(function (data) {
+        if (!!data.containsHoneypot) {
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].warn(_this2.$translate("Ceres::Template.newsletterHoneypotWarning"));
+        } else {
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].success(_this2.$translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
+        }
 
         _this2.resetInputs();
       }).fail(function () {
@@ -296,9 +300,9 @@ var render = function() {
               ],
               staticClass: "honey",
               attrs: {
+                autocomplete: "none",
                 type: "text",
                 name: "username",
-                autocomplete: "off",
                 tabindex: "-1"
               },
               domProps: { value: _vm.honeypot },

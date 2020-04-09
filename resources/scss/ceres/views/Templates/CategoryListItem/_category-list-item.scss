@@ -84,6 +84,10 @@
         .btn {
             z-index: 1;
         }
+
+        .vat a {
+            z-index: 1;
+        }
     }
 
     .price {
@@ -125,6 +129,10 @@
         &:hover {
             .img-fluid {
                 transform: scale(1.05);
+            }
+
+            .owl-nav [class*="owl-"] {
+                opacity: 1;
             }
         }
     }
