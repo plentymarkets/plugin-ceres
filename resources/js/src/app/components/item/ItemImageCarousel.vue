@@ -168,7 +168,7 @@ export default {
                 dots             : this.showDots,
                 items            : 1,
                 lazyLoad         : true,
-                loop             : true,
+                rewind           : true,
                 margin           : 10,
                 mouseDrag        : imageCount > 1,
                 nav              : imageCount > 1,
@@ -205,38 +205,6 @@ export default {
                 lightbox.option({
                     wrapAround: true
                 });
-                lightbox.imageCountLabel = (current, total) =>
-                {
-                    if (isNullOrUndefined(imageCount) || imageCount <= 1)
-                    {
-                        return "";
-                    }
-                    current -= ((total - imageCount) / 2);
-                    while (current <= 0)
-                    {
-                        current += imageCount;
-                    }
-                    while (current > imageCount)
-                    {
-                        current -= imageCount;
-                    }
-                    return this.$translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
-                };
-
-                const originalFn = lightbox.changeImage;
-
-                lightbox.changeImage = imageNumber =>
-                {
-                    if (lightbox.currentImageIndex === 0 && imageNumber === lightbox.album.length - 1)
-                    {
-                        imageNumber--;
-                    }
-                    else if (lightbox.currentImageIndex === lightbox.album.length - 1 && imageNumber === 0)
-                    {
-                        imageNumber++;
-                    }
-                    return originalFn.call(lightbox, imageNumber);
-                };
             }
 
             $(this.$refs.single).on("changed.owl.carousel", event =>
