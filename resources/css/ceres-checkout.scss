@@ -12518,8 +12518,17 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 }
 
 .widget-background {
-    &.widget {
-        width: auto;
+    > .container-max {
+        z-index: 1;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    &.widget-fw {
+        > .container-max {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
     }
 
     &.align-items-end {
@@ -12530,8 +12539,11 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         }
     }
 
-    > .container-max {
-        z-index: 1;
+    .widget-background {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
     }
 
     .parallax-img-container-inner {
@@ -12568,7 +12580,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 .widget-grid {
     .widget-background {
-        .container-max {
+        > .container-max {
             padding-right: 0 !important; // stylelint-disable-line declaration-no-important
             padding-left: 0 !important; // stylelint-disable-line declaration-no-important
         }
@@ -13976,6 +13988,18 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
             margin-bottom: 0;
         }
     }
+
+    .widget-fw {
+        position: relative;
+        right: unset !important; // stylelint-disable-line declaration-no-important
+        left: unset !important; // stylelint-disable-line declaration-no-important
+        width: unset !important; // stylelint-disable-line declaration-no-important
+        max-width: unset !important; // stylelint-disable-line declaration-no-important
+
+        &.widget-grid {
+            width: unset !important; // stylelint-disable-line declaration-no-important
+        }
+    }
 }
 
 @include media-breakpoint-down(sm) {
@@ -14055,22 +14079,15 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
 
     &.widget-grid {
         width: calc(100vw + 30px) !important; // stylelint-disable-line function-blacklist, declaration-no-important
+        margin-right: -15px;
         margin-left: -15px;
     }
-}
 
-.widget .widget-fw {
-    position: unset;
-    right: unset !important; // stylelint-disable-line declaration-no-important
-    left: unset !important; // stylelint-disable-line declaration-no-important
-    width: unset;
-    max-width: unset !important; // stylelint-disable-line declaration-no-important
-    margin-right: unset;
-    margin-left: unset;
-
-    &.widget-grid {
-        width: unset !important; // stylelint-disable-line declaration-no-important
-        margin-left: unset;
+    .container-max {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
     }
 }
 
