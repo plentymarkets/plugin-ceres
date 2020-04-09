@@ -36,7 +36,7 @@
     {% if assetName == 'ceres-checkout' %}
         {{ LayoutContainer.show("Ceres::Checkout.Styles") }}
     {% endif %}
-    {% if assetName == 'ceres-item' %}
+    {% if services.template.getCurrentTemplate() == "tpl.item" %}
         {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
     {% endif %}
 </head>
@@ -206,6 +206,7 @@
         propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
         isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
         bundleSetting: {{ webstoreConfig.dontSplitItemBundle }},
+        initialPleaseSelect: {{ webstoreConfig.attributeSelectDefaultOption }},
         publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         initialData: {
             shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
@@ -242,11 +243,15 @@
 {% if assetName == 'ceres-checkout' %}
     {{ LayoutContainer.show("Ceres::Checkout.AfterScriptsLoaded") }}
 {% endif %}
-{% if assetName == 'ceres-item' %}
+{% if services.template.getCurrentTemplate() == "tpl.item" %}
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
 {% endif %}
 
 <script>
+    window.__loadPluginChunk = function(source) {
+        return source += "?v={{ buildHash }}";
+    };
+
     window.vueEventHub = new Vue();
 
     if (App.config.log.checkSyntax)

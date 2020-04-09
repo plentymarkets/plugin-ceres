@@ -9,8 +9,7 @@ module.exports = env =>
         name: "styles",
         mode: env.prod ? "production" : "development",
         entry: {
-            category: "./resources/scss/category.scss",
-            item: "./resources/scss/item.scss",
+            base: "./resources/scss/base.scss",
             checkout: "./resources/scss/checkout.scss",
             icons: "./resources/scss/icons.scss",
             shopbuilder: "./resources/scss/shopbuilder.scss"

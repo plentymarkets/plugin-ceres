@@ -17,6 +17,10 @@ a:active {
     text-decoration: none;
 }
 
+.tooltip {
+    z-index: $zindex-9;
+}
+
 // prevent iOS standard zoom on input elements on focus
 html.ios { // stylelint-disable-line selector-no-qualifying-type
     input,

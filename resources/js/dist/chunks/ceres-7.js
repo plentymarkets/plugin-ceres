@@ -342,10 +342,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     paddingInlineStyles: {
       type: String,
       default: null
-    },
-    urlWithVariationId: {
-      type: Boolean,
-      default: true
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -369,6 +365,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     itemSetPrice: function itemSetPrice() {
       return this.$options.filters.currency(this.item.prices.default.price.value * (1 - this.item.item.rebate / 100), this.item.prices.default.currency);
+    },
+    urlWithVariationId: function urlWithVariationId() {
+      return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     showNetPrices: function showNetPrices(state) {
@@ -682,7 +681,11 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "thumb-title small stretched-link",
+                  staticClass: "thumb-title small",
+                  class: {
+                    "stretched-link":
+                      _vm.$ceres.config.global.shippingCostsCategoryId == 0
+                  },
                   attrs: {
                     href: _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId)
                   }
@@ -842,8 +845,8 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("span", { staticClass: "vat small text-muted" }, [
-                _vm._v("\n                * "),
+              _c("div", { staticClass: "vat small text-muted" }, [
+                _vm._v("\n                    * "),
                 _vm.showNetPrices
                   ? _c("span", [
                       _vm._v(
@@ -856,11 +859,11 @@ var render = function() {
                       )
                     ]),
                 _vm._v(
-                  "\n                " +
+                  "\n                    " +
                     _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
-                    "\n                "
+                    "\n                    "
                 ),
-                _vm.$ceres.config.global.hasShippingCostsCategoryId > 0
+                _vm.$ceres.config.global.shippingCostsCategoryId > 0
                   ? _c(
                       "a",
                       {
