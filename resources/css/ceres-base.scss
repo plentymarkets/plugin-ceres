@@ -8901,6 +8901,11 @@ button:focus {
             line-height: inherit;
         }
     }
+
+    &[disabled],
+    &.disabled {
+        cursor: not-allowed;
+    }
 }
 
 .btn-xs-max-width {
@@ -9082,6 +9087,10 @@ button:focus {
     max-width: 1200px;
 }
 
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
+
 .lozad {
     display: block;
     min-height: 1px;
@@ -9137,6 +9146,15 @@ style2 {
         }
     }
 }
+
+.modal-multi-row {
+    .row {
+        background-color: $gray-100;
+        border: 1px solid $gray-300;
+        margin: 0 0 1rem 0;
+        padding-top: 1rem;
+    }
+}
  // TODO: This would better fit into /components
 [class^="prop-"] {
     position: relative;
@@ -9176,6 +9194,10 @@ a:hover,
 a:focus,
 a:active {
     text-decoration: none;
+}
+
+.tooltip {
+    z-index: $zindex-9;
 }
 
 // prevent iOS standard zoom on input elements on focus
