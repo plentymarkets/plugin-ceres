@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <div class="pb-3">
         <div class="row">
-            <div class="col-12 col-sm-6 mb-2">
+            <div class="col-12 col-sm-6">
                 <button type="button" class="btn btn-primary btn-appearance btn-block" data-toggle="modal" data-target="#edit-coupon-overlay">
                     <span>{{ $translate("Ceres::Template.couponEdit") }}</span>
                     <i class="fa fa-gift default-float" aria-hidden="true"></i> 
                 </button>
             </div>
-            <div class="col-12 col-sm-6 mb-2">
+            <div class="col-12 col-sm-6">
                 <button v-if="!isFinalized" 
                         type="button" 
                         class="btn btn-primary btn-appearance btn-block"
