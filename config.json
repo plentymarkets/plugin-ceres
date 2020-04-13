@@ -2602,11 +2602,54 @@
                         ]
                     }
                 },
+                "sorting.dynamicInherit": {
+                    "type": "multiCheckBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.sortDynamicInheritDataLabel",
+                    "options": {
+                        "defaultValue": "",
+                        "checkBoxValues": [
+                            {
+                                "value": "filter.prices.price_asc",
+                                "caption": "Config.sortDataPriceAsc"
+                            },
+                            {
+                                "value": "filter.prices.price_desc",
+                                "caption": "Config.sortDataPriceDesc"
+                            },
+                            {
+                                "value": "filter.position_asc",
+                                "caption": "Config.sortDataTopsellerAsc"
+                            },
+                            {
+                                "value": "filter.position_desc",
+                                "caption": "Config.sortDataTopsellerDesc"
+                            },
+                            {
+                                "value": "filter.availabilityAverageDays_asc",
+                                "caption": "Config.sortDataAvailabilityAsc"
+                            },
+                            {
+                                "value": "filter.availabilityAverageDays_desc",
+                                "caption": "Config.sortDataAvailabilityDesc"
+                            },
+                            {
+                                "value": "analyzed.number.sorting_asc",
+                                "caption": "Config.sortDataVariationNumberAsc"
+                            },
+                            {
+                                "value": "analyzed.number.sorting_desc",
+                                "caption": "Config.sortDataVariationNumberDesc"
+                            }
+                        ]
+                    }
+                },
                 "sorting.dynamicPrio1": {
                     "type": "selectBox",
                     "required": true,
                     "deprecated": true,
-                    "label": "Config.sortingDynamicPrio1Label",
+                    "label": "Config.sortingDynamicPrioLabel1",
                     "options": {
                         "defaultValue": "filter.prices.price_asc",
                         "selectBoxValues": [
@@ -2661,7 +2704,7 @@
                     "type": "selectBox",
                     "required": true,
                     "deprecated": true,
-                    "label": "Config.sortingDynamicPrio2Label",
+                    "label": "Config.sortingDynamicPrioLabel2",
                     "options": {
                         "defaultValue": "variationId_asc",
                         "selectBoxValues": [
