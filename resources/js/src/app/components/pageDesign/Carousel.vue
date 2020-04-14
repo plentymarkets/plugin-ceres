@@ -30,6 +30,13 @@ export default {
         }
     },
 
+    data()
+    {
+        return {
+            isCarouselInitialized: false
+        };
+    },
+
     computed:
     {
         columnWidths()
@@ -46,58 +53,66 @@ export default {
 
     updated()
     {
-        if (this.$slots.items && this.$slots.items.length > this.itemsPerPage)
-        {
-            this.initializeCarousel();
-        }
+        this.initializeCarousel();
     },
 
     mounted()
     {
-        if (this.$slots.items && this.$slots.items.length > this.itemsPerPage)
-        {
-            this.initializeCarousel();
-        }
+        this.initializeCarousel();
     },
 
     methods:
     {
         initializeCarousel()
         {
-            $(this.$refs.carouselContainer).owlCarousel({
-                autoHeight: true,
-                dots: true,
-                items: this.itemsPerPage,
-                responsive: {
-                    0: {
-                        items: 1
+            if (this.$slots.items && this.$slots.items.length > this.itemsPerPage)
+            {
+                const $owl = $(this.$refs.carouselContainer);
+    
+                if (this.isCarouselInitialized)
+                {
+                    $owl.trigger("destroy.owl.carousel");
+                    $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+                    $owl.find(".owl-item").remove();
+                }
+    
+                this.isCarouselInitialized = true;
+    
+                $owl.owlCarousel({
+                    autoHeight: true,
+                    dots: true,
+                    items: this.itemsPerPage,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        576: {
+                            items: this.itemsPerPage > 1 ? 2 : 1
+                        },
+                        768: {
+                            items: this.itemsPerPage > 3 ? 3 : this.itemsPerPage
+                        },
+                        992: {
+                            items: this.itemsPerPage
+                        }
                     },
-                    576: {
-                        items: this.itemsPerPage > 1 ? 2 : 1
-                    },
-                    768: {
-                        items: this.itemsPerPage > 3 ? 3 : this.itemsPerPage
-                    },
-                    992: {
-                        items: this.itemsPerPage
-                    }
-                },
-                lazyLoad: false,
-                loop: false,
-                margin: 30,
-                mouseDrag: true,
-                nav: true,
-                navClass: [
-                    "owl-single-item-nav left carousel-control list-control-special",
-                    "owl-single-item-nav right carousel-control list-control-special"
-                ],
-                navContainerClass: "",
-                navText: [
-                    "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
-                    "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
-                ],
-                smartSpeed: 350
-            });
+                    lazyLoad: false,
+                    loop: false,
+                    margin: 30,
+                    mouseDrag: true,
+                    nav: true,
+                    navClass: [
+                        "owl-single-item-nav left carousel-control list-control-special",
+                        "owl-single-item-nav right carousel-control list-control-special"
+                    ],
+                    navContainerClass: "",
+                    navText: [
+                        "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                        "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                    ],
+                    smartSpeed: 350
+                });
+            }
         }
     }
 }
