@@ -1192,7 +1192,8 @@ __webpack_require__.r(__webpack_exports__);
     itemId: {
       type: Number,
       required: true
-    }
+    },
+    afterKey: Object
   },
   provide: function provide() {
     return {
@@ -1243,10 +1244,12 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.commit("".concat(this.itemId, "/setPleaseSelectVariationId"), this.pleaseSelectOptionVariationId);
     this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
     this.$store.dispatch("".concat(this.itemId, "/variationSelect/setVariationSelect"), {
+      itemId: this.itemId,
       attributes: this.attributesData,
       variations: this.variations,
       initialVariationId: this.currentVariation.variation.id,
-      isPleaseSelectOption: this.initPleaseSelectOption
+      isPleaseSelectOption: this.initPleaseSelectOption,
+      afterKey: this.afterKey
     });
   },
   methods: {
@@ -1336,7 +1339,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     initialVariationId: Number,
     attributes: Array,
-    variations: Array
+    variations: Array,
+    afterKey: Object
   },
   provide: function provide() {
     return {
@@ -1363,10 +1367,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     ready: function ready() {
       this.$store.dispatch("".concat(this.itemId, "/variationSelect/setVariationSelect"), {
+        itemId: this.itemId,
         attributes: this.attributes,
         variations: this.variations,
         initialVariationId: this.initialVariationId,
-        isPleaseSelectOption: true
+        isPleaseSelectOption: true,
+        afterKey: this.afterKey
       }); // function should only be executed once
 
       this.ready = function () {};
@@ -56634,12 +56640,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12__);
+
 
 
 
@@ -56655,9 +56664,19 @@ __webpack_require__.r(__webpack_exports__);
 
 function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var ApiService = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var state = function state() {
   return {
@@ -56666,7 +56685,8 @@ var state = function state() {
     selectedAttributes: {},
     selectedUnit: null,
     units: [],
-    variations: []
+    variations: [],
+    variationsLoading: false
   };
 };
 
@@ -56691,6 +56711,32 @@ var mutations = {
   setItemVariations: function setItemVariations(state, variations) {
     state.variations = variations;
   },
+  addItemVariations: function addItemVariations(state, variations) {
+    var _state$variations;
+
+    state.variations = state.variations || [];
+
+    (_state$variations = state.variations).push.apply(_state$variations, _toConsumableArray(variations));
+
+    state.units = state.units || [];
+
+    var _iterator = _createForOfIteratorHelper(variations),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var variation = _step.value;
+        state.units[variation.unitCombinationId] = variation.unitName;
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  },
+  setVariationsLoading: function setVariationsLoading(state, loading) {
+    state.variationsLoading = loading;
+  },
   setUnits: function setUnits(state, units) {
     state.units = units;
   }
@@ -56698,7 +56744,8 @@ var mutations = {
 var actions = {
   // eslint-disable-next-line complexity
   setVariationSelect: function setVariationSelect(_ref2, variationSelect) {
-    var commit = _ref2.commit;
+    var commit = _ref2.commit,
+        dispatch = _ref2.dispatch;
     var attributes = variationSelect.attributes;
     var variations = variationSelect.variations;
     var initialVariation = variations.find(function (variation) {
@@ -56708,12 +56755,12 @@ var actions = {
     var selectedAttributes = {};
     var units = {};
 
-    var _iterator = _createForOfIteratorHelper(attributes),
-        _step;
+    var _iterator2 = _createForOfIteratorHelper(attributes),
+        _step2;
 
     try {
       var _loop = function _loop() {
-        var attribute = _step.value;
+        var attribute = _step2.value;
         var variationAttribute = void 0;
 
         if (App.config.item.showPleaseSelect && variationSelect.isPleaseSelectOption || !initialVariation) {
@@ -56726,22 +56773,8 @@ var actions = {
         }
       };
 
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        _loop();
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    var _iterator2 = _createForOfIteratorHelper(variations),
-        _step2;
-
-    try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var variation = _step2.value;
-        units[variation.unitCombinationId] = variation.unitName;
+        _loop();
       }
     } catch (err) {
       _iterator2.e(err);
@@ -56749,11 +56782,61 @@ var actions = {
       _iterator2.f();
     }
 
+    var _iterator3 = _createForOfIteratorHelper(variations),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var variation = _step3.value;
+        units[variation.unitCombinationId] = variation.unitName;
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+
+    if (variationSelect.afterKey) {
+      dispatch("fetchVariations", {
+        itemId: variationSelect.itemId,
+        afterKey: variationSelect.afterKey
+      });
+    }
+
     commit("selectItemUnit", initialUnit);
     commit("setItemAttributes", attributes);
     commit("setItemSelectedAttributes", selectedAttributes);
     commit("setItemVariations", variations);
     commit("setUnits", units);
+  },
+  fetchVariations: function fetchVariations(_ref3, _ref4) {
+    var commit = _ref3.commit,
+        dispatch = _ref3.dispatch;
+    var afterKey = _ref4.afterKey,
+        itemId = _ref4.itemId;
+    return new Promise(function (resolve, reject) {
+      commit("setVariationsLoading", true);
+      ApiService.get("/rest/io/variations/map", {
+        itemId: itemId,
+        afterKey: afterKey
+      }).done(function (response) {
+        commit("addItemVariations", response.variations);
+
+        if (response.afterKey) {
+          dispatch("fetchVariations", {
+            itemId: itemId,
+            afterKey: response.afterKey
+          });
+        } else {
+          commit("setVariationsLoading", false);
+        }
+
+        resolve();
+      }).fail(function (error) {
+        commit("setVariationsLoading", false);
+        reject(error);
+      });
+    });
   }
 };
 var getters = {};
