@@ -201,12 +201,12 @@
         }
     }( typeof global !== "undefined" ? global : this ) );
 
-    if(document.fonts && document.fonts.onloadingdone) {
-        document.fonts.onloadingdone = function(evt) {
+    if(document.fonts && document.fonts.addEventListener) {
+        document.fonts.addEventListener("loadingdone", function(evt) {
             if(evt.target.check("1em FontAwesome")) {
                 document.documentElement.classList.remove('icons-loading');
             }
-        }
+        });
     } else {
         document.documentElement.classList.remove('icons-loading');
     }
