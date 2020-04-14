@@ -1,4 +1,7 @@
+import ExceptionMap from "../../exceptions/ExceptionMap";
+
 const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
 
 const state =
     {
@@ -75,6 +78,15 @@ const actions =
                         })
                         .fail(error =>
                         {
+                            if (error.data)
+                            {
+                                NotificationService.error(
+                                    this.$translate(
+                                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                                        error.data.placeholder
+                                    )
+                                ).closeAfter(5000);
+                            }
                             reject(error);
                         });
                 }

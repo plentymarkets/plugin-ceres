@@ -26,7 +26,9 @@ export const exceptionMap = new Map(
         ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"],
         ["302", "couponNoMatchingItemInBasket"],
         ["401", "notificationsCalculateShippingFailed"],
-        ["501", "couponPromotionRequired"]
+        ["501", "couponPromotionRequired"],
+        ["502", "errorGiftCardReturnQuantity"]
+
 
     ]
 );
