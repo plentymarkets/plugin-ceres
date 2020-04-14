@@ -415,6 +415,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "order-return-item",
@@ -1121,6 +1122,10 @@ var render = function() {
                 _c("quantity-input", {
                   attrs: {
                     value: _vm.returnCount,
+                    interval:
+                      _vm.orderItem.minQuantity > 0
+                        ? _vm.orderItem.minQuantity
+                        : 1,
                     min: 0,
                     max: _vm.orderItem.quantity
                   },

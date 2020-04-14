@@ -194,10 +194,21 @@ class PaginationStep extends Step
         $itemSortingByRules = PaginationConfig::getDynamicSortingRules();
         $itemSortingOptions = StepHelper::generateTranslatedListBoxValues($itemSortingByRules);
 
+        $itemSortingInheritByRules = PaginationConfig::getDynamicInheritSortingRules();
+        $itemSortingInheritOptions = StepHelper::generateTranslatedListBoxValues($itemSortingInheritByRules);
+
         return [
             "title" => "Wizard.dynamicSortingOption",
             "description" => "Wizard.dynamicSortingOptionDescription",
             "form" => [
+                "pagination_sortingDynamicInherit" => [
+                    "type" => "checkboxGroup",
+                    "defaultValue" => [],
+                    "options" => [
+                        "name" => "Wizard.dynamicInherit",
+                        "checkboxValues" => $itemSortingInheritOptions
+                    ]
+                ],
                 "pagination_sortingDynamicPrio1" => [
                     "type" => "select",
                     "defaultValue" => $itemSortingOptions[1]["value"],

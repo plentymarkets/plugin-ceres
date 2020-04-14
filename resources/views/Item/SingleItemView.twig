@@ -1,6 +1,7 @@
 <single-item v-cloak item-data="{{ item | json_data }}"
              attributes-data="{{ attributes | json_data }}"
              variations="{{ variations | json_data }}"
+             :after-key="{{ afterKey | json_encode }}"
              :please-select-option-variation-id="{{ dynamicVariationId }}"
              :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
              :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"

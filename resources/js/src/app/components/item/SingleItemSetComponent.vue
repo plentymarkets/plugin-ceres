@@ -30,7 +30,8 @@ export default {
         },
         initialVariationId: Number,
         attributes: Array,
-        variations: Array
+        variations: Array,
+        afterKey: Object
     },
 
     provide()
@@ -69,10 +70,12 @@ export default {
         ready()
         {
             this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
+                itemId:             this.itemId,
                 attributes:         this.attributes,
                 variations:         this.variations,
                 initialVariationId: this.initialVariationId,
-                isPleaseSelectOption: true
+                isPleaseSelectOption: true,
+                afterKey:           this.afterKey
             });
 
             // function should only be executed once
