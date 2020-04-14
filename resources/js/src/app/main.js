@@ -308,14 +308,21 @@ if ( headerParent )
         scrollHeaderElements();
     }, 50));
 
-    if (document.fonts && document.fonts.addEventListener)
+    window.addEventListener("load", function()
     {
-        document.fonts.addEventListener("loadingdone", function(evt)
+        calculateBodyOffset();
+        getHeaderChildrenHeights();
+        scrollHeaderElements();
+    });
+
+    if (document.fonts)
+    {
+        document.fonts.onloadingdone = function(evt)
         {
             calculateBodyOffset();
             getHeaderChildrenHeights();
             scrollHeaderElements();
-        });
+        };
     }
 
     window.addEventListener("scroll", debounce(function()
