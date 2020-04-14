@@ -77,7 +77,8 @@ class CeresSortingConfig extends PluginConfig
                 'filter.availabilityAverageDays_desc',
                 'analyzed.number.sorting_asc',
                 'analyzed.number.sorting_desc'
-            ]
+            ],
+            []
         );
 
         $this->dynamicPrio1 = $this->getTextValue('sorting.dynamicPrio1', 'filter.prices.price_asc');
