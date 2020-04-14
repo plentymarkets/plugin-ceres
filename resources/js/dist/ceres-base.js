@@ -50956,13 +50956,18 @@ if (headerParent) {
     getHeaderChildrenHeights();
     scrollHeaderElements();
   }, 50));
+  window.addEventListener("load", function () {
+    calculateBodyOffset();
+    getHeaderChildrenHeights();
+    scrollHeaderElements();
+  });
 
-  if (document.fonts && document.fonts.addEventListener) {
-    document.fonts.addEventListener("loadingdone", function (evt) {
+  if (document.fonts) {
+    document.fonts.onloadingdone = function (evt) {
       calculateBodyOffset();
       getHeaderChildrenHeights();
       scrollHeaderElements();
-    });
+    };
   }
 
   window.addEventListener("scroll", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_11__["debounce"])(function () {
