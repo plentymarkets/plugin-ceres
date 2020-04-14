@@ -11,7 +11,7 @@
                 <template v-if="!isVariationSelected || isSetLoading">
                     {{ $translate("Ceres::Template." + dynamicTranslationKey,
                         {
-                            price: $options.filters.currency(dynamicPrice, currentVariation.prices.set.currency)
+                            price: $options.filters.currency(variationTotalPrice, currentVariation.prices.set.currency)
                         }
                     ) }}
                 </template>
