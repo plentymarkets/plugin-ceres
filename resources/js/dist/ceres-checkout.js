@@ -62436,6 +62436,15 @@ if (headerParent) {
     getHeaderChildrenHeights();
     scrollHeaderElements();
   }, 50));
+
+  if (document.fonts && document.fonts.addEventListener) {
+    document.fonts.addEventListener("loadingdone", function (evt) {
+      calculateBodyOffset();
+      getHeaderChildrenHeights();
+      scrollHeaderElements();
+    });
+  }
+
   window.addEventListener("scroll", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_11__["debounce"])(function () {
     scrollHeaderElements();
   }, 10));
