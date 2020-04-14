@@ -308,6 +308,16 @@ if ( headerParent )
         scrollHeaderElements();
     }, 50));
 
+    if (document.fonts && document.fonts.addEventListener)
+    {
+        document.fonts.addEventListener("loadingdone", function(evt)
+        {
+            calculateBodyOffset();
+            getHeaderChildrenHeights();
+            scrollHeaderElements();
+        });
+    }
+
     window.addEventListener("scroll", debounce(function()
     {
         scrollHeaderElements();
