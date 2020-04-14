@@ -310,7 +310,7 @@ if ( headerParent )
 
     if (document.fonts && document.fonts.addEventListener)
     {
-        document.fonts.addEventListener("loadingdone", function(evt)
+        document.fonts.ready.then(function()
         {
             calculateBodyOffset();
             getHeaderChildrenHeights();
