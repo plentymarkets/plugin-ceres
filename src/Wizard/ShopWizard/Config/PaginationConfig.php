@@ -36,19 +36,29 @@ class PaginationConfig
     ];
 
     private static $dynamicSortingByRules = [
-        "isMainDesc"                 => "filter.isMain_desc",
-        "priceAsc"               => "filter.prices.price_asc",
-        "priceDesc"              => "filter.prices.price_desc",
-        "topsellerAsc"           => "filter.position_asc",
-        "topsellerDesc"          => "filter.position_desc",
-        "availabilityAsc"        => "filter.availabilityAverageDays_asc",
-        "availabilityDesc"       => "filter.availabilityAverageDays_desc",
-        "variationNumberAsc"     => "analyzed.number.sorting_asc",
-        "variationNumberDesc"    => "analyzed.number.sorting_desc",
-        "variationIdAsc"         => "variationId_asc",
-        "variationIdDesc"        => "variationId_desc"
+        "isMainDesc" => "filter.isMain_desc",
+        "priceAsc" => "filter.prices.price_asc",
+        "priceDesc" => "filter.prices.price_desc",
+        "sortingPriorityCategoryVariationPositionAsc" => "filter.position_asc",
+        "sortingPriorityCategoryVariationPositionDesc" => "filter.position_desc",
+        "availabilityAsc" => "filter.availabilityAverageDays_asc",
+        "availabilityDesc" => "filter.availabilityAverageDays_desc",
+        "variationNumberAsc" => "analyzed.number.sorting_asc",
+        "variationNumberDesc" => "analyzed.number.sorting_desc",
+        "variationIdAsc" => "variationId_asc",
+        "variationIdDesc" => "variationId_desc"
     ];
 
+    private static $dynamicInheritSortingByRules = [
+        "priceAsc" => "filter.prices.price_asc",
+        "priceDesc" => "filter.prices.price_desc",
+        "sortingPriorityCategoryVariationPositionAsc" => "filter.position_asc",
+        "sortingPriorityCategoryVariationPositionDesc" => "filter.position_desc",
+        "availabilityAsc" => "filter.availabilityAverageDays_asc",
+        "availabilityDesc" => "filter.availabilityAverageDays_desc",
+        "variationNumberAsc" => "analyzed.number.sorting_asc",
+        "variationNumberDesc" => "analyzed.number.sorting_desc",
+    ];
     private static $sortingCategory = [
         "sortingPriorityCategoryItemIdAsc" => "item.id_asc",
         "sortingPriorityCategoryItemIdDesc" => "item.id_desc",
@@ -120,4 +130,13 @@ class PaginationConfig
     {
         return self::$dynamicSortingByRules;
     }
+
+    /**
+     * @return array
+     */
+    public static function getDynamicInheritSortingRules()
+    {
+        return self::$dynamicInheritSortingByRules;
+    }
+
 }
