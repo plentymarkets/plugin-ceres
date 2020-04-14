@@ -4,46 +4,50 @@
 
 ### TODO
 
-- Due to changes to ShopBuilder widgets, it is necessary to re-generate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- Themes and plugins that were compatible with former Ceres versions may need to be updated in order to ensure continued compatibility. You can find additional information on updating themes and plugins in our <a href="https://developers.plentymarkets.com/dev-doc/ceres-5" target="_blank" rel="noopener"><b>developer documentation</b>.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
 - Users who still used the category **Homepage (deprecated) (Ceres)** in the ShopBuilder need to create and link a new homepage category. You should create a plugin set copy of the current state prior to Ceres version 5.0 so that you can duplicate your homepage contents from this plugin set copy to the newly created homepage category in the Ceres 5 plugin set. Otherwise, you will not be able to access your homepage contents without downgrading Ceres to a version below 5.0.
 - In order to use the "Did you mean...?" search, users should create and link a new search results page via the search results ShopBuilder preset.
 - The default white background has been removed from the following contents: **Shopping cart**, **Checkout**, **Contact page**, **My Account**, **Order confirmation**, **Returns page**, and **Wishlist**. Users should integrate a white background image widget in these contents in order to replicate the former appearance.
 
 ### Added
 
-- We added the **Components for item sets** widget to the ShopBuilder. It serves to edit item set contents via the ShopBuilder.
+- This version supports <a href="https://knowledge.plentymarkets.com/en/slp/artikel/anwendungsfaelle/multipacks-pakete-sets#3000" target="_blank">Item sets</a>. We added the **Components for item sets** widget to the ShopBuilder. It serves to edit item set contents via the ShopBuilder. This feature is currently in beta.
+- This version supports <a href="https://knowledge.plentymarkets.com/en/slp/auftraege/gutscheine">Gift cards</a>. Gift cards can be personalised and downloaded as a PDF file on the order confirmation page.
 - We added the three search widgets **Search suggestions**, **Search results: Categories**, and **Search results: Items** to the ShopBuilder. These can be placed in the search area of the top bar widget in the header.
-- We added the two template containers `SingleItem.AfterScriptsLoaded` and `SingleItem.Styles`. These can be used to only integrate scripts and stylesheets on the single item view.
-- We added the two template containers `Checkout.AfterScriptsLoaded` and `Checkout.Styles`. These can be used to only integrate scripts and stylesheets on checkout, shopping cart, My Account, order confirmation, and returns pages.
 - You can now click the search icon in the top bar widget to open a dropzone in which you can place widgets.
 - An additional search is now carried out for misspelled search terms. The search results page now provides an alternative search term in the "Did you mean...?" message.
+- We added the two template containers `SingleItem.AfterScriptsLoaded` and `SingleItem.Styles`. These can be used to only integrate scripts and stylesheets on the single item view.
+- We added the two template containers `Checkout.AfterScriptsLoaded` and `Checkout.Styles`. These can be used to only integrate scripts and stylesheets on checkout, shopping cart, My Account, order confirmation, and returns pages.
 - We added a button to the order history widget via which users can open the order confirmation of an order. This makes it possible to submit a rating for items of an order from the My Account area.
 - The microdata field "url" is now filled in on the single item view.
+- The sorting of variations on item tiles in item lists and the category view can now be configured via the Ceres assistant.
+- The entry **categoryItemFromPrice** has been added to the multilingualism interface. It is used to display a "from" before the price in item lists if the cheapest variation is displayed on the item tile and the item has more than one purchasable variation.
 
 ### Changed
 
-- The behaviour of the canonical tag and the robots information on category and search result pages has been revised.
-- The helper class "widget-fw" no longer affects widgets that are placed within other widgets.
+- In order to improve performance, the online store's JavaScript and CSS have been split into separate files for the checkout and the item/category pages. 
+- In order to optimise the loading times of the variation selection, the variation selection data is loaded at a later stage if the number of variations is exceedingly large.
 - The performance of the sticky container widget has been improved.
+- The Moment.js library has been replaced with Day.js in order to decrease file size.
+- We updated the Bootstrap version to 4.4.1.
+- The design of the online store has been adjusted to the Bootstrap standard in order to reduce the necessity of customised style definitions.
+- We removed or replaced obsolete SCSS variables. You can find a complete list of the changes in [our developer documentation](https://developers.plentymarkets.com/dev-doc/ceres-5#scss).
+- The helper class "widget-fw" no longer affects widgets that are placed within other widgets.
+- The behaviour of the canonical tag and the robots information on category and search result pages has been revised.
 - If a user selects order characteristics for a variation and then changes variations, the order characteristics are now automatically selected when the user returns to the original variation. This does not apply to order characteristics of the type file.
-- The filter toolbar is now visible again after a user clicks on a filter and the page is reloaded.
 - Default presets for online store pages whose background had been styled white via CSS now integrate the background image widget in order to achieve the same effect.
 - Variation properties are now output on the order confirmation page.
 - The settings **Show image carousel dots in category item lists** and **Show image carousel navigation in category item lists** have been marked as deprecated because they can be carried out via the Ceres assistant. In addition, these settings in the assistant have been extended to cover both the category view and item lists.
-- The Moment.js library has been replaced with Day.js in order to decrease file size.
-- In order to improve performance, the online store's JavaScript and CSS have been relocated to separate files for the category, item, and checkout pages.
+- The filter toolbar is now visible again after a user clicks on a filter and the page is reloaded.
 - The top bar widget setting **Display item images in search suggestions** has been moved to the settings of the new widget **Search results: Items**.
 - The top bar widget setting **Search: Forward to single item view** has been removed.
-- We updated the Bootstrap version to 4.4.1.
-- We removed or replaced obsolete SCSS variables. You can find a complete list of the changes in [our developers documentation](https://developers.plentymarkets.com/dev-doc/ceres-5#scss).
 - Country flags and icons in the online store are now loaded at a later stage in order to improve performance.
-- The design of the online store has been adjusted to the Bootstrap standard in order to reduce the necessity of customised style definitions.
 - The component contact-map has been replaced with the google-maps component.
-- The directive `v-waiting-animation` has been marked as deprecated. The new icon component **icon** has been added as an alternative.
+- The directive `v-waiting-animation` has been marked as deprecated. The new icon component `icon` has been added as an alternative.
 - All contents of the ShopBuilder category **Homepage (deprecated) (Ceres)** have been set to inactive.
 - The input field **Name of the online store** has been removed from the Ceres assistant.
 - Properties have been removed from the result fields for item lists and category pages.
-- In order to optimise the loading times of the variation selection, the variation selection data is loaded at a later stage if the number of variations is exceedingly large.
 
 ### Fixed
 
@@ -56,7 +60,7 @@
 - The sticky container widget could cause display errors when users changed the size of the browser window. This has been fixed.
 - The navigation dots of the image carousel widget did not work as intended on the single item view. This has been fixed.
 - Due to an error, certain browsers automatically filled in the invisible input field that serves to deflect bots. This has been fixed.
-- Addresses from non-Ceres sources are now converted to ISO format when upon editing the address.
+- Addresses from non-Ceres sources are now converted to ISO format when editing the address.
 - The navigation arrows of the image carousel did not work as intended in item lists and the category view. This has been fixed.
 - The item availability was displayed on the returns page, even if no option was activated for the **Show item information** setting of the returns widget. This has been fixed.
 - Bold text was not displayed correctly in image box widgets. This has been fixed.
@@ -64,6 +68,7 @@
 - Under certain circumstances, the search results page was displayed incorrectly if the search results stemmed from an external search provider. This behaviour has been fixed.
 - Some combinations of background image widget, grid widgets, and the helper class **widget-fw** could lead to display errors. This behaviour has been fixed.
 - Under certain conditions, the background image widget overlapped and thereby blocked the content of nested widgets. This has been fixed.
+- Under certain circumstances, item lists of the type **Last seen** were displayed incorrectly. This has been fixed.
 
 ## v4.6.0 (2020-02-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.5.2...4.6.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
