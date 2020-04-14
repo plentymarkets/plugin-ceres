@@ -58,7 +58,10 @@ export default {
 
     mounted()
     {
-        this.initializeCarousel();
+        this.$nextTick(() =>
+        {
+            this.initializeCarousel();
+        });
     },
 
     methods:
@@ -74,6 +77,12 @@ export default {
                     $owl.trigger("destroy.owl.carousel");
                     $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
                     $owl.find(".owl-item").remove();
+                }
+
+                // do not render, if no html element is inside of the carousels container
+                if (!$owl.children().length)
+                {
+                    return;
                 }
     
                 this.isCarouselInitialized = true;
