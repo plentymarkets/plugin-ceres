@@ -5,7 +5,7 @@
         </div>
 
         <div class="col-12">
-            <carousel :items-per-page="itemsPerPage">
+            <carousel v-if="items && items.length > 0" :items-per-page="itemsPerPage" ref="carousel">
                 <template slot="items" v-for="item in items">
                     <category-item
                             :key="item.id"
