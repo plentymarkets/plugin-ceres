@@ -51,7 +51,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
   props: {
@@ -122,7 +121,6 @@ var render = function() {
     _c("span", { staticClass: "price h1" }, [
       _c(
         "span",
-        { attrs: { content: _vm.currentVariation.prices.default.price.value } },
         [
           _vm.showDynamicPrice
             ? [
@@ -155,11 +153,7 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c("sup", [_vm._v("*")]),
-      _vm._v(" "),
-      _c("span", {
-        attrs: { content: _vm.currentVariation.prices.default.currency }
-      })
+      _c("sup", [_vm._v("*")])
     ]),
     _vm._v(" "),
     _vm.currentVariation.unit

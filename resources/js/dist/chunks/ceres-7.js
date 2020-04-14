@@ -370,7 +370,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
     },
     itemSetPrice: function itemSetPrice() {
-      return this.$options.filters.currency(this.item.prices.default.price.value * (1 - this.item.item.rebate / 100), this.item.prices.default.currency);
+      return this.$options.filters.currency(this.item.prices.default.price.value, this.item.prices.default.currency);
     },
     urlWithVariationId: function urlWithVariationId() {
       return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0;
