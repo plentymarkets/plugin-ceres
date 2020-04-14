@@ -312,6 +312,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -362,6 +365,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      */
     texts: function texts() {
       return this.item.texts;
+    },
+    itemPrice: function itemPrice() {
+      return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
     },
     itemSetPrice: function itemSetPrice() {
       return this.$options.filters.currency(this.item.prices.default.price.value * (1 - this.item.item.rebate / 100), this.item.prices.default.currency);
@@ -763,6 +769,21 @@ var render = function() {
                                     _vm.$translate(
                                       "Ceres::Template.itemSetPrice",
                                       { price: _vm.itemSetPrice }
+                                    )
+                                  ) +
+                                  " *\n                            "
+                              )
+                            ]
+                          : !!_vm.item.item &&
+                            _vm.item.item.salableVariationCount > 1 &&
+                            _vm.$ceres.isCheapestSorting
+                          ? [
+                              _vm._v(
+                                "\n                                 " +
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.categoryItemFromPrice",
+                                      { price: _vm.itemPrice }
                                     )
                                   ) +
                                   " *\n                            "
