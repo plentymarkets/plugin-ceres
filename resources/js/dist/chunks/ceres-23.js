@@ -132,75 +132,81 @@ var render = function() {
         "div",
         { staticClass: "col-12" },
         [
-          _c(
-            "carousel",
-            { attrs: { "items-per-page": _vm.itemsPerPage } },
-            [
-              _vm._l(_vm.items, function(item) {
-                return _c(
-                  "template",
-                  { slot: "items" },
-                  [
-                    _c("category-item", {
-                      key: item.id,
-                      attrs: {
-                        "item-data": item.data,
-                        "decimal-count": _vm.$ceres.config.item.storeSpecial,
-                        "disable-carousel-on-mobile":
-                          _vm.items.length > _vm.itemsPerPage,
-                        "padding-classes": _vm.paddingClasses,
-                        "padding-inline-styles": _vm.paddingInlineStyles
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "before-prices",
-                            fn: function() {
-                              return [
-                                _c("div", {
-                                  domProps: {
-                                    innerHTML: _vm._s(
-                                      _vm.getContainerContentById(
-                                        item.id,
-                                        "beforePrices"
-                                      )
-                                    )
-                                  }
-                                })
-                              ]
-                            },
-                            proxy: true
+          _vm.items && _vm.items.length > 0
+            ? _c(
+                "carousel",
+                {
+                  ref: "carousel",
+                  attrs: { "items-per-page": _vm.itemsPerPage }
+                },
+                [
+                  _vm._l(_vm.items, function(item) {
+                    return _c(
+                      "template",
+                      { slot: "items" },
+                      [
+                        _c("category-item", {
+                          key: item.id,
+                          attrs: {
+                            "item-data": item.data,
+                            "decimal-count":
+                              _vm.$ceres.config.item.storeSpecial,
+                            "disable-carousel-on-mobile":
+                              _vm.items.length > _vm.itemsPerPage,
+                            "padding-classes": _vm.paddingClasses,
+                            "padding-inline-styles": _vm.paddingInlineStyles
                           },
-                          {
-                            key: "after-prices",
-                            fn: function() {
-                              return [
-                                _c("div", {
-                                  domProps: {
-                                    innerHTML: _vm._s(
-                                      _vm.getContainerContentById(
-                                        item.id,
-                                        "afterPrices"
-                                      )
-                                    )
-                                  }
-                                })
-                              ]
-                            },
-                            proxy: true
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    })
-                  ],
-                  1
-                )
-              })
-            ],
-            2
-          )
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "before-prices",
+                                fn: function() {
+                                  return [
+                                    _c("div", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.getContainerContentById(
+                                            item.id,
+                                            "beforePrices"
+                                          )
+                                        )
+                                      }
+                                    })
+                                  ]
+                                },
+                                proxy: true
+                              },
+                              {
+                                key: "after-prices",
+                                fn: function() {
+                                  return [
+                                    _c("div", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.getContainerContentById(
+                                            item.id,
+                                            "afterPrices"
+                                          )
+                                        )
+                                      }
+                                    })
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        })
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              )
+            : _vm._e()
         ],
         1
       )
