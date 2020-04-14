@@ -2,12 +2,12 @@
     <div class="has-crossprice">
         <div class="crossprice" v-if="showCrossPrice && isSet && this.currentVariation.item.rebate > 0">
             <del class="text-muted small text-appearance">
-                {{ variationTotalPrice | currency(currentVariation.prices.set.currency) | itemCrossPrice }}
+                {{ setNoRebatePrice | currency(currentVariation.prices.set.currency) | itemCrossPrice }}
             </del>
         </div>
 
         <span class="price h1">
-            <span :content="dynamicPrice">
+            <span>
                 <template v-if="!isVariationSelected || isSetLoading">
                     {{ $translate("Ceres::Template." + dynamicTranslationKey,
                         {
@@ -21,7 +21,6 @@
                 </template>
             </span>
             <sup>*</sup>
-            <span :content="currentVariation.prices.set.currency"></span>
         </span>
     </div>
 </template>
@@ -54,8 +53,31 @@ export default {
             return this.$store.getters[`${this.itemId}/variationTotalPrice`];
         },
 
+        setNoRebatePrice() {
+            if(this.isSet)
+            {
+                if(this.isSetLoading)
+                {
+                    return (this.variationTotalPrice / (100 - this.currentVariation.item.rebate)) * 100;
+                }
+                else
+                {
+                    return this.variationTotalPrice;
+                }
+            }
+
+            return null;
+        },
+
         variationSetRebatePrice() {
-            return this.variationTotalPrice * (1 - (this.currentVariation.item.rebate / 100));
+            if(this.isSetLoading)
+            {
+                return this.variationTotalPrice
+            }
+            else
+            {
+                return this.variationTotalPrice * (1 - (this.currentVariation.item.rebate / 100));
+            }
         },
 
         isVariationSelected() {

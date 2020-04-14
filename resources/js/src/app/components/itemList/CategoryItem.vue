@@ -196,7 +196,7 @@ export default {
         itemSetPrice()
         {
             return this.$options.filters.currency(
-                this.item.prices.default.price.value * (1 - (this.item.item.rebate / 100)),
+                this.item.prices.default.price.value,
                 this.item.prices.default.currency
             );
         },
