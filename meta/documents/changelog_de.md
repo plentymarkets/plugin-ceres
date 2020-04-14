@@ -4,46 +4,47 @@
 
 ### TODO
 
+- Themes und Plugins, die mit älteren Ceres-Versionen kompatibel waren, müssen ggf. aktualisiert werden. Weitere Informationen zum Aktualisieren von Themes und Plugins findest du in der <a href="https://developers.plentymarkets.com/dev-doc/ceres-5" target="_blank" rel="noopener"><b>Entwicklerdokumentation</b></a>.
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu bereitstellen** aktualisiert werden.
-- Nutzer, die bisher die Kategorie **Startseite (veraltet) (Ceres)** im ShopBuilder verwendet haben, müssen eine neue Startseiten-Kategorie anlegen und verknüpfen. Vorab sollte eine Plugin-Set-Kopie des aktuellen Ceres-Stands vor dem Update auf Version 5.0 gemacht werden, sodass Inhalte der Kategorie **Startseite (veraltet) (Ceres)** später aus dieser Plugin-Set-Kopie in die neu erstellte Startseiten-Kategorie des Ceres 5 Plugin-Sets dupliziert werden können. Andernfalls ist es nicht möglich, auf die bestehenden Startseiten-Inhalte zuzugreifen, ohne die Ceres-Version herabzusetzen.
+- Nutzer, die bisher die Kategorie **Startseite (veraltet) (Ceres)** im ShopBuilder verwendet haben, müssen eine neue Startseiten-Kategorie anlegen und verknüpfen. Vor dem Update auf Version 5.0 sollte eine Plugin-Set-Kopie gemacht werden, sodass Inhalte der Kategorie **Startseite (veraltet) (Ceres)** später aus dieser Plugin-Set-Kopie in die neu erstellte Startseiten-Kategorie des Ceres 5 Plugin-Sets dupliziert werden können. Andernfalls ist es nicht möglich, auf die bestehenden Startseiten-Inhalte zuzugreifen, ohne die Ceres-Version herabzusetzen.
 - Um die "Meinten Sie...?"-Suche nutzen zu können, sollten Nutzer einen neuen Inhalt für Suchergebnisse mithilfe der **Suchergebnisse-Vorlage** des ShopBuilders erstellen und verknüpfen.
 - In den Inhalten **Warenkorb**, **Checkout**, **Kontaktseite**, **Mein Konto**, **Bestellbestätigung**, **Retourenseite** und **Wunschliste** wurde der weiße Standard-Hintergrund entfernt. Für diese Inhalte sollten Nutzer jeweils ein weißes Hintergrundbild-Widget hinzufügen, um den vorherigen Stand abzubilden.
 
 ### Hinzugefügt
 
-- Das Widget **Bestandteile für Artikelsets** wurde zum ShopBuilder hinzugefügt. Dieses Widget dient dazu, Artikelset-Seiten über den ShopBuilder zu bearbeiten.
+- Diese Version unterstützt <a href="https://knowledge.plentymarkets.com/artikel/anwendungsfaelle/multipacks-pakete-sets#3000" target="_blank">Sets</a>. Das Widget **Bestandteile für Artikelsets** wurde zum ShopBuilder hinzugefügt. Dieses Widget dient dazu, Artikelset-Seiten über den ShopBuilder zu bearbeiten. Die Funktion wird als Beta-Version bereitgestellt.
 - Die drei Widgets **Suchvorschläge**, **Suchergebnisse: Kategorien** und **Suchergebnisse: Artikel** wurden zum ShopBuilder hinzugefügt. Diese können im Suchbereich des Top Bar-Widgets im Header platziert werden.
-- Die beiden Template-Container `SingleItem.AfterScriptsLoaded` und `SingleItem.Styles` wurden hinzugefügt. Diese können dafür genutzt werden, Skripte und Stylesheets nur auf der Artikelansicht einzubinden.
-- Die beiden Template-Container `Checkout.AfterScriptsLoaded` und `Checkout.Styles` wurden hinzugefügt. Diese können dafür genutzt werden, Skripte und Stylesheets nur auf Checkout-, Warenkorb-, Mein Konto-, Bestellbestätigungs- und Retourenseiten einzubinden.
-- Die Schaltfläche für die Suche im Top Bar-Widget kann nun im Shopbuilder geklickt werden, um einen Bereich auszuklappen, in welchem Widgets platziert werden können. 
+- Die Schaltfläche für die Suche im Top Bar-Widget kann nun im ShopBuilder geklickt werden, um einen Bereich auszuklappen, in welchem Widgets platziert werden können.
 - Bei falsch geschriebenen Suchbegriffen wird nun eine zusätzliche Suche ausgeführt. Auf der Suchergebnisseite wird nun ein alternativer Suchbegriff unter "Meinten Sie...?" vorgeschlagen.
+- Die beiden Template-Container `SingleItem.AfterScriptsLoaded` und `SingleItem.Styles` wurden hinzugefügt. Diese können dafür genutzt werden, um Skripte und Stylesheets nur auf der Artikelansicht einzubinden.
+- Die beiden Template-Container `Checkout.AfterScriptsLoaded` und `Checkout.Styles` wurden hinzugefügt. Diese können dafür genutzt werden, um Skripte und Stylesheets nur auf Checkout-, Warenkorb-, Mein Konto-, Bestellbestätigungs- und Retourenseiten einzubinden.
 - Im Auftragshistorie-Widget wurde eine Schaltfläche hinzugefügt, über die man die Bestellbestätigungsseite des jeweiligen Auftrags öffnen kann. Dadurch ist es möglich, Artikel einer Bestellung auch aus dem Mein Konto-Bereich zu bewerten.
 - Auf der Artikeleinzelansicht wird nun das Feld "url" in den Mikrodaten befüllt.
 
 ### Geändert
 
-- Das Verhalten des Canonical-Tags und der Robots-Informationen auf Kategorie- und Suchergebnisseiten wurde überarbeitet.
-- Die Hilfsklasse **widget-fw** hat nun keine Auswirkungen mehr auf Widgets, die sich innerhalb eines anderen Widgets befinden.
+- Das JavaScript und CSS des Webshops wurde in separate Dateien für Kategorie-, Artikel- und Checkout-Seiten aufgeteilt, um die Performance der einzelnen Seiten zu verbessern.
+- Um die Ladezeit der Variantenauswahl zu optimieren, werden die Daten der Variantenauswahl ab einer gewissen Anzahl an Varianten nachträglich geladen.
 - Die Performance des Sticky Container-Widgets wurde verbessert.
-- Wenn eine Variante gewechselt wird, für die bereits Bestellmerkmale ausgewählt wurden, werden diese Bestellmerkmale bei einem erneuten Wechsel zur ursprünglich gewählten Variante wieder automatisch ausgewählt. Dies gilt nicht für Bestellmerkmale des Typs Datei.
+- Die Bibliothek **Moment.js** wurde durch **Day.js** ersetzt, um die Dateigröße zu minimieren.
+- Die verwendete Bootstrap-Version wurde auf Version 4.4.1 angehoben.
+- Das Webshop-Design wurde an den Bootstrap-Standard angeglichen, um eigene Style-Definitionen zu reduzieren.
+- Es wurden veraltete SCSS-Variablen entfernt oder ersetzt. [In unserer Entwicklerdokumentation](https://developers.plentymarkets.com/dev-doc/ceres-5#scss) sind alle Änderungen aufgelistet.
+- Die Hilfsklasse **widget-fw** hat nun keine Auswirkungen mehr auf Widgets, die sich innerhalb eines anderen Widgets befinden.
+- Das Verhalten des Canonical-Tags und der Robots-Informationen auf Kategorie- und Suchergebnisseiten wurde überarbeitet.
+- Wenn eine Variante gewechselt wird, für die bereits Bestellmerkmale ausgewählt wurden, werden diese Bestellmerkmale bei einem erneuten Wechsel zur ursprünglich gewählten Variante wieder automatisch ausgewählt. Dies gilt nicht für Bestellmerkmale des Typs **Datei**.
 - Standard-Vorlagen für Webshop-Seiten, die bisher über CSS mit einem weißen Hintergrund versehen wurden, wurden um ein entsprechendes Hintergrund-Widget erweitert, um das vorherige Erscheinungsbild abzubilden.
 - Varianteneigenschaften werden nun auf der Bestellbestätigungseite ausgegeben.
 - Die Einstellungen **Punkte unterhalb des Bilderkarussells in der Kategorieansicht anzeigen** und **Navigationspfeile im Bilderkarussell in der Kategorieansicht anzeigen** wurden als deprecated markiert, da diese nun über den Ceres-Assistenten vorgenommen werden. Die Einstellungen im Assistenten wurden zusätzlich auf Artikellisten ausgeweitet.
-- Die Bibliothek **Moment.js** wurde durch **Day.js** ersetzt, um die Dateigröße zu minimieren.
 - Die Filter-Toolbar ist nun ausgeklappt, nachdem der Nutzer einen Filter auswählt und die Seite dadurch neu geladen wird.
-- Das JavaScript und CSS des Webshops wurde in separate Dateien für Kategorie-, Artikel- und Checkout-Seiten aufgeteilt, um die Performance der einzelnen Seiten zu verbessern.
 - Die Einstellung **Artikelbilder in Suchvorschlägen anzeigen** des Top Bar-Widgets wurde in die Einstellungen des neuen Widgets **Suchergebnisse: Artikel** ausgelagert.
 - Die Einstellung **Artikelsuche: zur Artikelansicht weiterleiten** des Top Bar-Widgets wurde entfernt.
-- Die verwendete Bootstrap-Version wurde auf Version 4.4.1 angehoben.
-- Es wurden veraltete SCSS-Variablen entfernt oder ersetzt. [In unserer Entwicklerdokumentation](https://developers.plentymarkets.com/dev-doc/ceres-5#scss) sind alle Änderungen aufgelistet.
 - Die Länderflaggen und Icons im Webshop werden jetzt nachträglich geladen, um die Ladezeit des Webshops zu verbessern.
-- Das Webshop-Design wurde an den Bootstrap-Standard angeglichen, um eigene Style-Definitionen zu reduzieren.
 - Die Komponente **contact-map** wurde entfernt und durch die **google-maps** Komponente ersetzt.
-- Die Direktive `v-waiting-animation` wurde als deprecated markiert. Stattdessen wurde die neue Icon-Komponente **icon** zur Verfügung gestellt.
-- Alle Inhalte der ShopBuilder-Kategorie **Startseite (veraltet) (Ceres)** wurden auf inaktiv gesetzt.
+- Die Direktive `v-waiting-animation` wurde als deprecated markiert. Stattdessen wurde die neue Icon-Komponente `icon` zur Verfügung gestellt.
+- Alle Inhalte der ShopBuilder-Kategorie **Startseite (veraltet) (Ceres)** wurden inaktiv gesetzt.
 - Das Feld **Name des Webshops** wurde aus dem Ceres-Assistenten entfernt.
 - Eigenschaften wurden aus den Result Fields für Artikellisten und Kategorieseiten entfernt.
-- Um die Ladezeit der Variantenauswahl zu optimieren, werden die Daten der Variantenauswahl ab einer gewissen Anzahl an Varianten nachträglich geladen.
 
 ### Behoben
 
@@ -53,10 +54,10 @@
 - Bei Artikelbildern in einem Bilderkarussell oder einer Bilderbox kam es unter bestimmten Umständen zu einem Fehlverhalten, sodass Bilder nicht korrekt geladen werden konnten. Dies wurde behoben.
 - Durch einen Fehler wurden die strukturierten Daten nicht richtig ausgegeben. Dies wurde behoben.
 - Die Option **Schriftgröße erhöhen** des Hintergrundbild-Widgets wirkte sich auf alle Widgets aus, die Texte enthielten und in einem Hintergrundbild-Widget platziert wurden. Die Option wurde nun auf das Text- und Code-Widget beschränkt.
-- Das Sticky Container-Widget verursachte Darstellungsfehler beim Ändern der Fenstergröße. Dies wurde behoben. 
+- Das Sticky Container-Widget verursachte Darstellungsfehler beim Ändern der Fenstergröße. Dies wurde behoben.
 - Die Navigationspunkte des Bilderkarussell-Widgets funktionieren auf der Artikelansicht wieder wie beabsichtigt.
 - Durch einen Fehler wurde das unsichtbare Eingabefeld der Newsletter-Anmeldung, welches dazu dient, Bots abzuwehren, von bestimmten Browsern automatisch ausgefüllt. Dies wurde behoben.
-- Adressen, die aus einer anderen Quelle als Cers stammen, werden nun beim Bearbeiten der Adresse in das ISO-Format umgewandelt.
+- Adressen, die aus einer anderen Quelle als Ceres stammen, werden nun beim Bearbeiten der Adresse in das ISO-Format umgewandelt.
 - Die Navigationspfeile des Bilderkarussell-Widgets funktionieren in Artikellisten und in der Kategorieansicht wieder wie beabsichtigt.
 - Wenn im Retouren-Widget keine Option für die Einstellung **Angezeigte Artikelinformationen** aktiviert war, wurde fälschlicherweise die Artikelverfügbarkeit ausgegeben. Dies wurde behoben.
 - Im Bilderbox-Widget wurde fett formatierter Text nicht korrekt ausgegeben. Dies wurde behoben.
@@ -544,7 +545,7 @@
 ### Behoben
 
 - Der Button "E-Mail-Adresse ändern" im Mein Konto-Bereich wird nun ausgeblendet, wenn die Route "/change-mail" in IO nicht aktiv ist.
-- Inhalte eines Titelleisten-Widgets, die vor Ceres 4.0.0 erstellt wurden, wurden im Shopbuilder nicht korrekt ausgelesen. Dadurch wurde der Standardtext angezeigt. Dieses Verhalten wurde behoben.
+- Inhalte eines Titelleisten-Widgets, die vor Ceres 4.0.0 erstellt wurden, wurden im ShopBuilder nicht korrekt ausgelesen. Dadurch wurde der Standardtext angezeigt. Dieses Verhalten wurde behoben.
 
 ## v4.0.0 (2019-05-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/3.2.2...4.0.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
