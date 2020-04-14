@@ -1,3 +1,5 @@
+const ApiService = require("../../../services/ApiService");
+
 const state = () =>
 {
     return {
@@ -6,7 +8,8 @@ const state = () =>
         selectedAttributes: {},
         selectedUnit: null,
         units: [],
-        variations: []
+        variations: [],
+        variationsLoading: false
     };
 };
 
@@ -42,6 +45,23 @@ const mutations =
             state.variations = variations;
         },
 
+        addItemVariations(state, variations)
+        {
+            state.variations = state.variations || [];
+            state.variations.push(...variations);
+
+            state.units = state.units || [];
+            for (const variation of variations)
+            {
+                state.units[variation.unitCombinationId] = variation.unitName;
+            }
+        },
+
+        setVariationsLoading(state, loading)
+        {
+            state.variationsLoading = loading;
+        },
+
         setUnits(state, units)
         {
             state.units = units;
@@ -51,7 +71,7 @@ const mutations =
 const actions =
     {
         // eslint-disable-next-line complexity
-        setVariationSelect({ commit }, variationSelect)
+        setVariationSelect({ commit, dispatch }, variationSelect)
         {
             const attributes         = variationSelect.attributes;
             const variations         = variationSelect.variations;
@@ -81,11 +101,54 @@ const actions =
                 units[variation.unitCombinationId] = variation.unitName;
             }
 
+            if (variationSelect.afterKey)
+            {
+                dispatch("fetchVariations", {
+                    itemId: variationSelect.itemId,
+                    afterKey: variationSelect.afterKey
+                });
+            }
+
             commit("selectItemUnit", initialUnit);
             commit("setItemAttributes", attributes);
             commit("setItemSelectedAttributes", selectedAttributes);
             commit("setItemVariations", variations);
             commit("setUnits", units);
+        },
+
+        fetchVariations({ commit, dispatch }, { afterKey, itemId })
+        {
+            return new Promise((resolve, reject) =>
+            {
+                commit("setVariationsLoading", true);
+                ApiService
+                    .get("/rest/io/variations/map", {
+                        itemId: itemId,
+                        afterKey: afterKey
+                    })
+                    .done(response =>
+                    {
+                        commit("addItemVariations", response.variations);
+                        if (response.afterKey)
+                        {
+                            dispatch("fetchVariations", {
+                                itemId: itemId,
+                                afterKey: response.afterKey
+                            });
+                        }
+                        else
+                        {
+                            commit("setVariationsLoading", false);
+                        }
+
+                        resolve();
+                    })
+                    .fail(error =>
+                    {
+                        commit("setVariationsLoading", false);
+                        reject(error);
+                    });
+            });
         }
     };
 

@@ -27,6 +27,7 @@
                         :initial-variation-id="{{ Twig.print("setComponent.variation.id") }}"
                         :attributes="{{ Twig.print("setAttributeMap[setComponent.item.id].attributes | json_encode") }}"
                         :variations="{{ Twig.print("setAttributeMap[setComponent.item.id].variations | json_encode") }}"
+                        :after-key="{{ Twig.print("setAttributeMap[setComponent.item.id].afterKey | json_encode") }}"
                     {{ Twig.endif() }}
                     v-slot="slotProps">
                 <div>
