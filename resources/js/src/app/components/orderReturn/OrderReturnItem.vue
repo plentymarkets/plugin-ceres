@@ -60,6 +60,7 @@
                             <quantity-input
                                     @quantity-change="updateQuantity"
                                     :value="returnCount"
+                                    :interval="orderItem.minQuantity > 0 ? orderItem.minQuantity :1"
                                     :min="0"
                                     :max="orderItem.quantity"></quantity-input>
                         </div>
@@ -173,7 +174,7 @@ export default {
         {
             return this.$store.getters.getOrderItemVariation(this.orderItem.itemVariationId);
         },
-        
+
         variations()
         {
             return this.$store.state.orderReturn.orderData.variations;

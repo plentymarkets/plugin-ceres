@@ -201,12 +201,18 @@
         }
     }( typeof global !== "undefined" ? global : this ) );
 
-    if(document.fonts && document.fonts.onloadingdone) {
-        document.fonts.onloadingdone = function(evt) {
-            if(evt.target.check("1em FontAwesome")) {
+    if(document.fonts) {
+        document.fonts.addEventListener("loadingdone", function(evt) {
+            if(document.fonts.check("1em FontAwesome")) {
                 document.documentElement.classList.remove('icons-loading');
             }
-        }
+        });
+
+        window.addEventListener("load", function(evt) {
+            if(document.fonts.check("1em FontAwesome")) {
+                document.documentElement.classList.remove('icons-loading');
+            }
+        });
     } else {
         document.documentElement.classList.remove('icons-loading');
     }

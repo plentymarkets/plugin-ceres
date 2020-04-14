@@ -57872,7 +57872,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"]]);
 /* harmony default export */ __webpack_exports__["default"] = (exceptionMap);
 
 /***/ }),
@@ -58704,89 +58704,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("propertySurcharge", function 
   }
 
   return 0;
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/filters/propertySurchargeSum.filter.js":
-/*!*********************************************************************!*\
-  !*** ./resources/js/src/app/filters/propertySurchargeSum.filter.js ***!
-  \*********************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.from */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_12__);
-
-
-
-
-
-
-
-
-
-
-
-
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
-vue__WEBPACK_IMPORTED_MODULE_12___default.a.filter("propertySurchargeSum", function (item) {
-  var sum = 0;
-
-  if (item.properties) {
-    var addedProperties = item.properties.filter(function (property) {
-      return property.property.isOderProperty && property.property.value;
-    });
-
-    var _iterator = _createForOfIteratorHelper(addedProperties),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var property = _step.value;
-        sum += property.property.surcharge;
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-  }
-
-  return sum;
 });
 
 /***/ }),
@@ -60864,6 +60781,20 @@ if (headerParent) {
     getHeaderChildrenHeights();
     scrollHeaderElements();
   }, 50));
+  window.addEventListener("load", function () {
+    calculateBodyOffset();
+    getHeaderChildrenHeights();
+    scrollHeaderElements();
+  });
+
+  if (document.fonts) {
+    document.fonts.onloadingdone = function (evt) {
+      calculateBodyOffset();
+      getHeaderChildrenHeights();
+      scrollHeaderElements();
+    };
+  }
+
   window.addEventListener("scroll", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_11__["debounce"])(function () {
     scrollHeaderElements();
   }, 10));
@@ -65648,6 +65579,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
 /* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../exceptions/ExceptionMap */ "./resources/js/src/app/exceptions/ExceptionMap.js");
+
+
 
 
 
@@ -65655,6 +65591,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+
+var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 var state = {
   orderData: {},
@@ -65705,6 +65643,8 @@ var mutations = {
 };
 var actions = {
   sendOrderReturn: function sendOrderReturn(_ref2) {
+    var _this = this;
+
     var state = _ref2.state;
     return new Promise(function (resolve, reject) {
       if (state.orderReturnItems.length > 0) {
@@ -65722,6 +65662,10 @@ var actions = {
         }).done(function (data) {
           resolve(data);
         }).fail(function (error) {
+          if (error.data) {
+            NotificationService.error(_this.$translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_6__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)).closeAfter(5000);
+          }
+
           reject(error);
         });
       } else {
@@ -66633,12 +66577,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12__);
+
 
 
 
@@ -66654,9 +66601,19 @@ __webpack_require__.r(__webpack_exports__);
 
 function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var ApiService = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var state = function state() {
   return {
@@ -66665,7 +66622,8 @@ var state = function state() {
     selectedAttributes: {},
     selectedUnit: null,
     units: [],
-    variations: []
+    variations: [],
+    variationsLoading: false
   };
 };
 
@@ -66690,6 +66648,32 @@ var mutations = {
   setItemVariations: function setItemVariations(state, variations) {
     state.variations = variations;
   },
+  addItemVariations: function addItemVariations(state, variations) {
+    var _state$variations;
+
+    state.variations = state.variations || [];
+
+    (_state$variations = state.variations).push.apply(_state$variations, _toConsumableArray(variations));
+
+    state.units = state.units || [];
+
+    var _iterator = _createForOfIteratorHelper(variations),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var variation = _step.value;
+        state.units[variation.unitCombinationId] = variation.unitName;
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  },
+  setVariationsLoading: function setVariationsLoading(state, loading) {
+    state.variationsLoading = loading;
+  },
   setUnits: function setUnits(state, units) {
     state.units = units;
   }
@@ -66697,7 +66681,8 @@ var mutations = {
 var actions = {
   // eslint-disable-next-line complexity
   setVariationSelect: function setVariationSelect(_ref2, variationSelect) {
-    var commit = _ref2.commit;
+    var commit = _ref2.commit,
+        dispatch = _ref2.dispatch;
     var attributes = variationSelect.attributes;
     var variations = variationSelect.variations;
     var initialVariation = variations.find(function (variation) {
@@ -66707,12 +66692,12 @@ var actions = {
     var selectedAttributes = {};
     var units = {};
 
-    var _iterator = _createForOfIteratorHelper(attributes),
-        _step;
+    var _iterator2 = _createForOfIteratorHelper(attributes),
+        _step2;
 
     try {
       var _loop = function _loop() {
-        var attribute = _step.value;
+        var attribute = _step2.value;
         var variationAttribute = void 0;
 
         if (App.config.item.showPleaseSelect && variationSelect.isPleaseSelectOption || !initialVariation) {
@@ -66725,22 +66710,8 @@ var actions = {
         }
       };
 
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        _loop();
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    var _iterator2 = _createForOfIteratorHelper(variations),
-        _step2;
-
-    try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var variation = _step2.value;
-        units[variation.unitCombinationId] = variation.unitName;
+        _loop();
       }
     } catch (err) {
       _iterator2.e(err);
@@ -66748,11 +66719,61 @@ var actions = {
       _iterator2.f();
     }
 
+    var _iterator3 = _createForOfIteratorHelper(variations),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var variation = _step3.value;
+        units[variation.unitCombinationId] = variation.unitName;
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+
+    if (variationSelect.afterKey) {
+      dispatch("fetchVariations", {
+        itemId: variationSelect.itemId,
+        afterKey: variationSelect.afterKey
+      });
+    }
+
     commit("selectItemUnit", initialUnit);
     commit("setItemAttributes", attributes);
     commit("setItemSelectedAttributes", selectedAttributes);
     commit("setItemVariations", variations);
     commit("setUnits", units);
+  },
+  fetchVariations: function fetchVariations(_ref3, _ref4) {
+    var commit = _ref3.commit,
+        dispatch = _ref3.dispatch;
+    var afterKey = _ref4.afterKey,
+        itemId = _ref4.itemId;
+    return new Promise(function (resolve, reject) {
+      commit("setVariationsLoading", true);
+      ApiService.get("/rest/io/variations/map", {
+        itemId: itemId,
+        afterKey: afterKey
+      }).done(function (response) {
+        commit("addItemVariations", response.variations);
+
+        if (response.afterKey) {
+          dispatch("fetchVariations", {
+            itemId: itemId,
+            afterKey: response.afterKey
+          });
+        } else {
+          commit("setVariationsLoading", false);
+        }
+
+        resolve();
+      }).fail(function (error) {
+        commit("setVariationsLoading", false);
+        reject(error);
+      });
+    });
   }
 };
 var getters = {};
@@ -66899,15 +66920,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_filters_itemUrl_filter__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./app/filters/itemUrl.filter */ "./resources/js/src/app/filters/itemUrl.filter.js");
 /* harmony import */ var _app_filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./app/filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
 /* harmony import */ var _app_filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./app/filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
-/* harmony import */ var _app_filters_propertySurchargeSum_filter__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./app/filters/propertySurchargeSum.filter */ "./resources/js/src/app/filters/propertySurchargeSum.filter.js");
-/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
-/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
-/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
-/* harmony import */ var _app_mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./app/mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
-/* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
-/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
-/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _app_helper_utils__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./app/helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
+/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
+/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
+/* harmony import */ var _app_mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./app/mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
+/* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
+/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
+/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _app_helper_utils__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./app/helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -66941,7 +66961,7 @@ var mount = vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$mount;
 var componentOverrides = null;
 
 function getComponentOverride(tagName) {
-  if (Object(_app_helper_utils__WEBPACK_IMPORTED_MODULE_75__["isNullOrUndefined"])(componentOverrides)) {
+  if (Object(_app_helper_utils__WEBPACK_IMPORTED_MODULE_74__["isNullOrUndefined"])(componentOverrides)) {
     componentOverrides = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]")).reduce(function (obj, el) {
       return _objectSpread({}, obj, _defineProperty({}, el.dataset.component, el));
     }, {});
@@ -67084,13 +67104,13 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("order-return", function (
   return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./app/components/orderReturn/OrderReturn.vue */ "./resources/js/src/app/components/orderReturn/OrderReturn.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("cookie-bar", function () {
-  return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/CookieBar.vue */ "./resources/js/src/app/components/pageDesign/CookieBar.vue"));
+  return __webpack_require__.e(/*! import() */ 46).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/CookieBar.vue */ "./resources/js/src/app/components/pageDesign/CookieBar.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("privacy-settings", function () {
-  return __webpack_require__.e(/*! import() */ 48).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/PrivacySettings.vue */ "./resources/js/src/app/components/pageDesign/PrivacySettings.vue"));
+  return __webpack_require__.e(/*! import() */ 49).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/PrivacySettings.vue */ "./resources/js/src/app/components/pageDesign/PrivacySettings.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("carousel", function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(44)]).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Carousel.vue */ "./resources/js/src/app/components/pageDesign/Carousel.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(45)]).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Carousel.vue */ "./resources/js/src/app/components/pageDesign/Carousel.vue"));
 });
 
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("icon", _app_components_pageDesign_Icon_vue__WEBPACK_IMPORTED_MODULE_26__["default"]);
@@ -67099,13 +67119,13 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("mobile-navigation", _app_
 
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("notifications", _app_components_pageDesign_Notifications_vue__WEBPACK_IMPORTED_MODULE_28__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("popper", function () {
-  return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Popper.vue */ "./resources/js/src/app/components/pageDesign/Popper.vue"));
+  return __webpack_require__.e(/*! import() */ 48).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Popper.vue */ "./resources/js/src/app/components/pageDesign/Popper.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("shipping-country-select", function () {
-  return __webpack_require__.e(/*! import() */ 49).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/ShippingCountrySelect.vue */ "./resources/js/src/app/components/pageDesign/ShippingCountrySelect.vue"));
+  return __webpack_require__.e(/*! import() */ 50).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/ShippingCountrySelect.vue */ "./resources/js/src/app/components/pageDesign/ShippingCountrySelect.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("loading-animation", function () {
-  return __webpack_require__.e(/*! import() */ 46).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/LoadingAnimation.vue */ "./resources/js/src/app/components/pageDesign/LoadingAnimation.vue"));
+  return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/LoadingAnimation.vue */ "./resources/js/src/app/components/pageDesign/LoadingAnimation.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("wish-list", function () {
   return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./app/components/wishList/WishList.vue */ "./resources/js/src/app/components/wishList/WishList.vue"));
@@ -67158,7 +67178,6 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("lazy-load", _app_componen
 
 
 
-
  // =========================
 // MIXINS
 // =========================
@@ -67171,8 +67190,8 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("lazy-load", _app_componen
 
 
 
-window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_74__["default"].translate;
-vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_74__["default"].translate;
+window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_73__["default"].translate;
+vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_73__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$ceres = App;
 
 /***/ }),
@@ -67186,27 +67205,33 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$ceres = App;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _category__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./category */ "./resources/js/src/category.js");
-/* harmony import */ var _app_components_checkout_AcceptGtcCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app/components/checkout/AcceptGtcCheck */ "./resources/js/src/app/components/checkout/AcceptGtcCheck.js");
-/* harmony import */ var _app_components_checkout_Checkout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/components/checkout/Checkout */ "./resources/js/src/app/components/checkout/Checkout.js");
-/* harmony import */ var _app_components_checkout_ContactWishInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/components/checkout/ContactWishInput */ "./resources/js/src/app/components/checkout/ContactWishInput.js");
-/* harmony import */ var _app_components_checkout_CustomerSignInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/components/checkout/CustomerSignInput */ "./resources/js/src/app/components/checkout/CustomerSignInput.js");
-/* harmony import */ var _app_components_checkout_PaymentProviderSelect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/components/checkout/PaymentProviderSelect */ "./resources/js/src/app/components/checkout/PaymentProviderSelect.js");
-/* harmony import */ var _app_components_checkout_PlaceOrder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app/components/checkout/PlaceOrder */ "./resources/js/src/app/components/checkout/PlaceOrder.js");
-/* harmony import */ var _app_components_checkout_ShippingPrivacyHintCheck__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app/components/checkout/ShippingPrivacyHintCheck */ "./resources/js/src/app/components/checkout/ShippingPrivacyHintCheck.js");
-/* harmony import */ var _app_components_checkout_ShippingProfileSelect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/components/checkout/ShippingProfileSelect */ "./resources/js/src/app/components/checkout/ShippingProfileSelect.js");
-/* harmony import */ var _app_components_checkout_SubscribeNewsletterCheck__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/components/checkout/SubscribeNewsletterCheck */ "./resources/js/src/app/components/checkout/SubscribeNewsletterCheck.js");
-/* harmony import */ var _app_components_customer_AddressSelect_AddressHeader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/AddressHeader */ "./resources/js/src/app/components/customer/AddressSelect/AddressHeader.js");
-/* harmony import */ var _app_components_customer_AddressSelect_InvoiceAddressSelect__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/InvoiceAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/InvoiceAddressSelect.js");
-/* harmony import */ var _app_components_customer_AddressSelect_ShippingAddressSelect__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/ShippingAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/ShippingAddressSelect.js");
-/* harmony import */ var _app_components_myAccount_AccountSettings__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/components/myAccount/AccountSettings */ "./resources/js/src/app/components/myAccount/AccountSettings.js");
-/* harmony import */ var _app_components_myAccount_BankDataSelect__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./app/components/myAccount/BankDataSelect */ "./resources/js/src/app/components/myAccount/BankDataSelect.js");
-/* harmony import */ var _app_components_myAccount_ChangePaymentMethod__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app/components/myAccount/ChangePaymentMethod */ "./resources/js/src/app/components/myAccount/ChangePaymentMethod.js");
-/* harmony import */ var _app_components_myAccount_MyAccount__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app/components/myAccount/MyAccount */ "./resources/js/src/app/components/myAccount/MyAccount.js");
-/* harmony import */ var _app_components_myAccount_OrderDocuments__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app/components/myAccount/OrderDocuments */ "./resources/js/src/app/components/myAccount/OrderDocuments.js");
-/* harmony import */ var _app_components_myAccount_History__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app/components/myAccount/History */ "./resources/js/src/app/components/myAccount/History.js");
-/* harmony import */ var _app_components_myAccount_OrderHistoryList__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app/components/myAccount/OrderHistoryList */ "./resources/js/src/app/components/myAccount/OrderHistoryList.js");
-/* harmony import */ var _app_components_myAccount_OrderReturnHistoryList__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./app/components/myAccount/OrderReturnHistoryList */ "./resources/js/src/app/components/myAccount/OrderReturnHistoryList.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _category__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./category */ "./resources/js/src/category.js");
+/* harmony import */ var _app_components_checkout_AcceptGtcCheck__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/components/checkout/AcceptGtcCheck */ "./resources/js/src/app/components/checkout/AcceptGtcCheck.js");
+/* harmony import */ var _app_components_checkout_Checkout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/components/checkout/Checkout */ "./resources/js/src/app/components/checkout/Checkout.js");
+/* harmony import */ var _app_components_checkout_ContactWishInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/components/checkout/ContactWishInput */ "./resources/js/src/app/components/checkout/ContactWishInput.js");
+/* harmony import */ var _app_components_checkout_CustomerSignInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app/components/checkout/CustomerSignInput */ "./resources/js/src/app/components/checkout/CustomerSignInput.js");
+/* harmony import */ var _app_components_checkout_PaymentProviderSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app/components/checkout/PaymentProviderSelect */ "./resources/js/src/app/components/checkout/PaymentProviderSelect.js");
+/* harmony import */ var _app_components_checkout_PlaceOrder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/components/checkout/PlaceOrder */ "./resources/js/src/app/components/checkout/PlaceOrder.js");
+/* harmony import */ var _app_components_checkout_ShippingPrivacyHintCheck__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/components/checkout/ShippingPrivacyHintCheck */ "./resources/js/src/app/components/checkout/ShippingPrivacyHintCheck.js");
+/* harmony import */ var _app_components_checkout_ShippingProfileSelect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/components/checkout/ShippingProfileSelect */ "./resources/js/src/app/components/checkout/ShippingProfileSelect.js");
+/* harmony import */ var _app_components_checkout_SubscribeNewsletterCheck__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/components/checkout/SubscribeNewsletterCheck */ "./resources/js/src/app/components/checkout/SubscribeNewsletterCheck.js");
+/* harmony import */ var _app_components_customer_AddressSelect_AddressHeader__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/AddressHeader */ "./resources/js/src/app/components/customer/AddressSelect/AddressHeader.js");
+/* harmony import */ var _app_components_customer_AddressSelect_InvoiceAddressSelect__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/InvoiceAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/InvoiceAddressSelect.js");
+/* harmony import */ var _app_components_customer_AddressSelect_ShippingAddressSelect__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./app/components/customer/AddressSelect/ShippingAddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/ShippingAddressSelect.js");
+/* harmony import */ var _app_components_myAccount_AccountSettings__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app/components/myAccount/AccountSettings */ "./resources/js/src/app/components/myAccount/AccountSettings.js");
+/* harmony import */ var _app_components_myAccount_BankDataSelect__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app/components/myAccount/BankDataSelect */ "./resources/js/src/app/components/myAccount/BankDataSelect.js");
+/* harmony import */ var _app_components_myAccount_ChangePaymentMethod__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app/components/myAccount/ChangePaymentMethod */ "./resources/js/src/app/components/myAccount/ChangePaymentMethod.js");
+/* harmony import */ var _app_components_myAccount_MyAccount__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app/components/myAccount/MyAccount */ "./resources/js/src/app/components/myAccount/MyAccount.js");
+/* harmony import */ var _app_components_myAccount_OrderDocuments__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app/components/myAccount/OrderDocuments */ "./resources/js/src/app/components/myAccount/OrderDocuments.js");
+/* harmony import */ var _app_components_myAccount_History__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./app/components/myAccount/History */ "./resources/js/src/app/components/myAccount/History.js");
+/* harmony import */ var _app_components_myAccount_OrderHistoryList__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./app/components/myAccount/OrderHistoryList */ "./resources/js/src/app/components/myAccount/OrderHistoryList.js");
+/* harmony import */ var _app_components_myAccount_OrderReturnHistoryList__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./app/components/myAccount/OrderReturnHistoryList */ "./resources/js/src/app/components/myAccount/OrderReturnHistoryList.js");
+
+
 // checkout script extends category script
 
 
@@ -67229,6 +67254,9 @@ __webpack_require__.r(__webpack_exports__);
 
  // new shopbuilder-only component
 
+Vue.component("edit-coupon-overlay", function () {
+  return __webpack_require__.e(/*! import() */ 44).then(__webpack_require__.bind(null, /*! ./app/components/myAccount/EditCouponOverlay.vue */ "./resources/js/src/app/components/myAccount/EditCouponOverlay.vue"));
+});
 
 
 

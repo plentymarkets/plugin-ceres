@@ -17,6 +17,7 @@ class CeresSortingConfig extends PluginConfig
     public $prioritySearch2;
     public $prioritySearch3;
 
+    public $dynamicInherit;
     public $dynamicPrio1;
     public $dynamicPrio2;
 
@@ -55,6 +56,8 @@ class CeresSortingConfig extends PluginConfig
                 'sorting.price.avg_desc'
             ]
         );
+
+
         $this->defaultSorting = $this->getTextValue('sort.defaultSorting', 'texts.name1_asc');
         $this->priorityCategory1 = $this->getTextValue('sorting.priorityCategory1', 'texts.name_asc');
         $this->priorityCategory2 = $this->getTextValue('sorting.priorityCategory2', 'notSelected');
@@ -63,6 +66,21 @@ class CeresSortingConfig extends PluginConfig
         $this->prioritySearch1 = $this->getTextValue('sorting.prioritySearch1', 'item.score');
         $this->prioritySearch2 = $this->getTextValue('sorting.prioritySearch2', 'notSelected');
         $this->prioritySearch3 = $this->getTextValue('sorting.prioritySearch3', 'notSelected');
+        $this->dynamicInherit = $this->getMultiSelectValue(
+            'sorting.dynamicInherit',
+            [
+                'filter.prices.price_asc',
+                'filter.prices.price_desc',
+                'filter.position_asc',
+                'filter.position_desc',
+                'filter.availabilityAverageDays_asc',
+                'filter.availabilityAverageDays_desc',
+                'analyzed.number.sorting_asc',
+                'analyzed.number.sorting_desc'
+            ],
+            []
+        );
+
         $this->dynamicPrio1 = $this->getTextValue('sorting.dynamicPrio1', 'filter.prices.price_asc');
         $this->dynamicPrio2 = $this->getTextValue('sorting.dynamicPrio2', 'variationId_asc');
     }

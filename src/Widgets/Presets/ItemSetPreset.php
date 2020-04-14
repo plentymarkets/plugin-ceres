@@ -252,9 +252,9 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('customColor', '#FFFFFF')
             ->withSetting('height.top.value', 4)
             ->withSetting('spacing.customPadding', true)
-            ->withSetting('spacing.padding.left.value', 2)
+            ->withSetting('spacing.padding.left.value', 4)
             ->withSetting('spacing.padding.left.unit', null)
-            ->withSetting('spacing.padding.right.value', 2)
+            ->withSetting('spacing.padding.right.value', 4)
             ->withSetting('spacing.padding.right.unit', null)
             ->withSetting('spacing.padding.top.value', 4)
             ->withSetting('spacing.padding.top.unit', null)
@@ -400,8 +400,6 @@ class ItemSetPreset implements ContentPreset
     {
         $this->secondTwoColumnWidget->createChild('second', 'Ceres::AddToBasketWidget')
             ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.top.value', 3)
-            ->withSetting('spacing.margin.top.unit', null)
             ->withSetting('spacing.margin.bottom.value', 3)
             ->withSetting('spacing.margin.bottom.unit', null);
     }

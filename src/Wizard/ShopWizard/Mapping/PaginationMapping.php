@@ -69,6 +69,12 @@ class PaginationMapping
             "global"   => true,
             "optional" => true,
         ],
+        "pagination_sortingDynamicInherit" => [
+            "field"    => "sorting.dynamicInherit",
+            "type"     => "concatenated",
+            "global"   => false,
+            "optional" => true,
+        ],
         "pagination_sortingDynamicPrio1" => [
             "field"    => "sorting.dynamicPrio1",
             "type"     => "string",

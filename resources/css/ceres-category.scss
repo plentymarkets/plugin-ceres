@@ -10622,6 +10622,10 @@ textarea.no-resize {
         color: $footer-color;
     }
 
+    > .container-max {
+        max-width: 1170px;
+    }
+
     .plenty-brand {
         height: 30px;
     }
@@ -11049,6 +11053,10 @@ textarea.no-resize {
 
         /* addToBasket */
         .btn {
+            z-index: 1;
+        }
+
+        .vat a {
             z-index: 1;
         }
     }
@@ -12514,8 +12522,17 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 }
 
 .widget-background {
-    &.widget {
-        width: auto;
+    > .container-max {
+        z-index: 1;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    &.widget-fw {
+        > .container-max {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
     }
 
     &.align-items-end {
@@ -12526,13 +12543,19 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         }
     }
 
+    .widget-background {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+
     .parallax-img-container-inner {
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        z-index: -1;
         height: 100% !important; // stylelint-disable-line declaration-no-important
         background-repeat: no-repeat;
         background-position: center;
@@ -12561,7 +12584,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 .widget-grid {
     .widget-background {
-        .container-max {
+        > .container-max {
             padding-right: 0 !important; // stylelint-disable-line declaration-no-important
             padding-left: 0 !important; // stylelint-disable-line declaration-no-important
         }
@@ -13969,6 +13992,18 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
             margin-bottom: 0;
         }
     }
+
+    .widget-fw {
+        position: relative;
+        right: unset !important; // stylelint-disable-line declaration-no-important
+        left: unset !important; // stylelint-disable-line declaration-no-important
+        width: unset !important; // stylelint-disable-line declaration-no-important
+        max-width: unset !important; // stylelint-disable-line declaration-no-important
+
+        &.widget-grid {
+            width: unset !important; // stylelint-disable-line declaration-no-important
+        }
+    }
 }
 
 @include media-breakpoint-down(sm) {
@@ -14048,22 +14083,15 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
 
     &.widget-grid {
         width: calc(100vw + 30px) !important; // stylelint-disable-line function-blacklist, declaration-no-important
+        margin-right: -15px;
         margin-left: -15px;
     }
-}
 
-.widget .widget-fw {
-    position: unset;
-    right: unset !important; // stylelint-disable-line declaration-no-important
-    left: unset !important; // stylelint-disable-line declaration-no-important
-    width: unset;
-    max-width: unset !important; // stylelint-disable-line declaration-no-important
-    margin-right: unset;
-    margin-left: unset;
-
-    &.widget-grid {
-        width: unset !important; // stylelint-disable-line declaration-no-important
-        margin-left: unset;
+    .container-max {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
     }
 }
 
@@ -14270,7 +14298,6 @@ header .widget {
 }
 
 .widget-placeholder {
-    padding: 0;
     text-align: center;
     background-color: $gray-300;
 

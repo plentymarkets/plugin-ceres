@@ -107,6 +107,7 @@
                         item-data="{{ item | json_data }}"
                         attributes-data="{{ attributes | json_data }}"
                         variations="{{ variations | json_data }}"
+                        :after-key="{{ afterKey | json_encode }}"
                         :please-select-option-variation-id="{{ dynamicVariationId }}"
                         :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"
                         :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"

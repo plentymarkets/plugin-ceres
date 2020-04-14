@@ -36,7 +36,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "set-price",
   props: {
@@ -57,8 +56,23 @@ __webpack_require__.r(__webpack_exports__);
     variationTotalPrice: function variationTotalPrice() {
       return this.$store.getters["".concat(this.itemId, "/variationTotalPrice")];
     },
+    setNoRebatePrice: function setNoRebatePrice() {
+      if (this.isSet) {
+        if (this.isSetLoading) {
+          return this.variationTotalPrice / (100 - this.currentVariation.item.rebate) * 100;
+        } else {
+          return this.variationTotalPrice;
+        }
+      }
+
+      return null;
+    },
     variationSetRebatePrice: function variationSetRebatePrice() {
-      return this.variationTotalPrice * (1 - this.currentVariation.item.rebate / 100);
+      if (this.isSetLoading) {
+        return this.variationTotalPrice;
+      } else {
+        return this.variationTotalPrice * (1 - this.currentVariation.item.rebate / 100);
+      }
     },
     isVariationSelected: function isVariationSelected() {
       if (this.isSet) {
@@ -108,7 +122,7 @@ var render = function() {
                 _vm._s(
                   _vm._f("itemCrossPrice")(
                     _vm._f("currency")(
-                      _vm.variationTotalPrice,
+                      _vm.setNoRebatePrice,
                       _vm.currentVariation.prices.set.currency
                     )
                   )
@@ -122,7 +136,6 @@ var render = function() {
     _c("span", { staticClass: "price h1" }, [
       _c(
         "span",
-        { attrs: { content: _vm.dynamicPrice } },
         [
           !_vm.isVariationSelected || _vm.isSetLoading
             ? [
@@ -158,11 +171,7 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c("sup", [_vm._v("*")]),
-      _vm._v(" "),
-      _c("span", {
-        attrs: { content: _vm.currentVariation.prices.set.currency }
-      })
+      _c("sup", [_vm._v("*")])
     ])
   ])
 }

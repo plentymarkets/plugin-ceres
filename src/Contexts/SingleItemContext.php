@@ -14,6 +14,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $item;
     public $attributes;
     public $variations;
+    public $afterKey;
     public $customerShowNetPrices;
     public $defaultCategory;
     public $assetName = "ceres-item";
@@ -48,6 +49,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->attributes = $params['variationAttributeMap']['attributes'];
         $this->variations = $params['variationAttributeMap']['variations'];
+        $this->afterKey =   $params['variationAttributeMap']['afterKey'];
         $this->customerShowNetPrices = $customerService->showNetPrices();
 
         $this->setComponents = $params['setComponents'];
