@@ -259,7 +259,8 @@ export default {
         itemId: {
             type: Number,
             required: true
-        }
+        },
+        afterKey: Object
     },
 
     provide()
@@ -343,10 +344,12 @@ export default {
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
+            itemId:             this.itemId,
             attributes:         this.attributesData,
             variations:         this.variations,
             initialVariationId: this.currentVariation.variation.id,
-            isPleaseSelectOption: this.initPleaseSelectOption
+            isPleaseSelectOption: this.initPleaseSelectOption,
+            afterKey:           this.afterKey
         });
     },
 
