@@ -95,7 +95,7 @@ __webpack_require__.r(__webpack_exports__);
           // script already injected...
           _this2.scriptBlocked = false;
 
-          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(google)) {
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(window.google)) {
             // ...but not loaded yet
             script.addEventListener("load", function () {
               return resolve(script);

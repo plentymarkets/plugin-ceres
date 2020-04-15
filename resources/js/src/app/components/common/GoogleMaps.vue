@@ -96,7 +96,7 @@ export default {
                 {
                     // script already injected...
                     this.scriptBlocked = false;
-                    if (isNullOrUndefined(google))
+                    if (isNullOrUndefined(window.google))
                     {
                         // ...but not loaded yet
                         script.addEventListener("load", () => resolve(script), false);
