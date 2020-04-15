@@ -183,7 +183,7 @@
                                                     <hr>
                                                 </div>
 
-                                                {% set languageList = services.webstoreConfigurationRepository.getWebstoreConfiguration().getActiveLanguageList() %}
+                                                {% set languageList = services.webstoreConfigurationRepository.getActiveLanguageList() %}
                                                 {% set languageUrls = services.url.getLanguageURLs() %}
                                                 <ul class="row">
                                                     {% for language in languageList %}
