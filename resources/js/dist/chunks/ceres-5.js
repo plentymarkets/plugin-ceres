@@ -458,6 +458,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -488,7 +489,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     var _this = this;
 
     document.addEventListener("onVariationChanged", function (event) {
-      if (event.itemId === _this.itemId) {
+      if (event.detail.itemId === _this.itemId) {
         // clear type specific bindings
         if (_this.property.valueType === "selection") {
           _this.selectionValue = _this.property.value || null;
@@ -1049,7 +1050,10 @@ var render = function() {
                   name: _vm.group ? _vm.group.id : "check" + _vm._uid,
                   id: "check" + _vm._uid
                 },
-                domProps: { value: _vm.property.id },
+                domProps: {
+                  value: _vm.property.id,
+                  checked: _vm.property.value
+                },
                 on: {
                   change: function($event) {
                     return _vm.onInputValueChanged($event.target.value)

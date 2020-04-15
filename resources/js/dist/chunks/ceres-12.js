@@ -647,9 +647,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           document.dispatchEvent(new CustomEvent("onVariationChanged", {
             detail: {
               attributes: variation.attributes,
-              documents: variation.documents
-            },
-            itemId: _this3.itemId
+              documents: variation.documents,
+              itemId: _this3.itemId
+            }
           }));
         });
       }
