@@ -570,9 +570,9 @@ export default {
                             detail:
                                 {
                                     attributes: variation.attributes,
-                                    documents: variation.documents
-                                },
-                            itemId: this.itemId
+                                    documents: variation.documents,
+                                    itemId: this.itemId
+                                }
                         }));
                 });
             }
