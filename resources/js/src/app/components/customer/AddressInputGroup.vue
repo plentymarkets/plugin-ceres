@@ -52,7 +52,7 @@
                                 <label :for="'txtFirstName' + _uid">{{ $translate("Ceres::Template.addressFirstName") }}<template v-if="areNameFieldsRequired('de', 'delivery_address')">*</template></label>
                             </div>
                         </div>
-                
+
                         <!-- Last name -->
                         <div class="col-12 col-sm-4">
                             <div class="input-unit" data-model="name3" v-validate:text="areNameFieldsRequired('de', 'delivery_address')">
@@ -116,8 +116,8 @@
                     <div class="col-12 col-sm-8">
                         <div class="input-unit" data-validate="" data-model="address1">
                             <select class="custom-select" :value="value.address1" @change="emitInputEvent('address1', $event.target.value)">
-                                <option v-if="isParcelBoxAvailable" value="PACKSTATION" :selected="isPickupStation">{{ $translate("Ceres::Template.addressPackingStation") }}</option>
-                                <option v-if="isPostOfficeAvailable" value="POSTFILIALE" :selected="isPostOffice">{{ $translate("Ceres::Template.addressPostOffice") }}</option>
+                                <option v-if="isParcelBoxAvailable || isMyAccount" value="PACKSTATION" :selected="isPickupStation">{{ $translate("Ceres::Template.addressPackingStation") }}</option>
+                                <option v-if="isPostOfficeAvailable || isMyAccount" value="POSTFILIALE" :selected="isPostOffice">{{ $translate("Ceres::Template.addressPostOffice") }}</option>
                             </select>
                             <label>{{ $translate("Ceres::Template.addressPickupLocation") }}</label>
                         </div>
@@ -913,7 +913,7 @@
 
             <slot name="custom-address-fields"></slot>
         </template>
-        
+
         <div class="col-12 col-sm-4">
             <country-select
                 :selected-country-id="value.countryId"

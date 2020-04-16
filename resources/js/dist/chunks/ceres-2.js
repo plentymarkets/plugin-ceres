@@ -2571,7 +2571,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm.isParcelBoxAvailable
+                          _vm.isParcelBoxAvailable || _vm.isMyAccount
                             ? _c(
                                 "option",
                                 {
@@ -2590,7 +2590,7 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm.isPostOfficeAvailable
+                          _vm.isPostOfficeAvailable || _vm.isMyAccount
                             ? _c(
                                 "option",
                                 {
