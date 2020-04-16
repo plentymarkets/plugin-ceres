@@ -20,7 +20,7 @@
 
 <div class="widget widget-item-grid widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if( "itemList is not empty" ) }}
-        <div class="widget-inner row product-list grid">
+        <ul class="widget-inner row product-list grid">
             {{ Twig.for("item", "itemList") }}
                 <li class="col-{{ 12 / numberOfColumnsMobile }} col-md-{{ 12 / numberOfColumnsTablet }} col-lg-{{ 12 / numberOfColumnsDesktop }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
@@ -48,6 +48,6 @@
                     </intersect>
                 </li>
             {{ Twig.endfor() }}
-        </div>
+        </ul>
     {{ Twig.endif() }}
 </div>
