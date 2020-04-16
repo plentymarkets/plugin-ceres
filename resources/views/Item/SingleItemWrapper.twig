@@ -37,7 +37,7 @@
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
                     "price"         : "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
-                    "url"           : "{{ requestedVariationUrl }},
+                    "url"           : "{{ requestedVariationUrl }},"
 {% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification": {
                         "@type": "UnitPriceSpecification",
