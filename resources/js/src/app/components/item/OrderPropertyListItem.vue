@@ -23,7 +23,8 @@
                    :id="'check' + _uid"
                    :value="property.id"
                    @change="onInputValueChanged($event.target.value)"
-                   class="form-check-input">
+                   class="form-check-input"
+                   :checked="property.value">
 
             <label class="form-check-label text-appearance d-flex"
                    :for="'check' + _uid"
@@ -120,7 +121,7 @@ export default {
     {
         document.addEventListener("onVariationChanged", event =>
         {
-            if(event.itemId === this.itemId)
+            if (event.detail.itemId === this.itemId)
             {
                 // clear type specific bindings
                 if (this.property.valueType === "selection")
