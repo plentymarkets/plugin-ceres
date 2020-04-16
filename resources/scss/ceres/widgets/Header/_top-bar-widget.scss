@@ -193,3 +193,11 @@
         }
     }
 }
+
+// fix inconsistent padding
+// stylelint-disable-next-line selector-no-qualifying-type
+html.safari { // stylelint-disable-next-line selector-no-qualifying-type
+    .controls-list i {
+        font-size: 100%;
+    }
+}
