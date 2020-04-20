@@ -65,8 +65,13 @@ export default {
                 {
                     return;
                 }
-    
+
                 $owl.owlCarousel({
+                    onInitialized(){
+                        $owl.find(".owl-carousel.owl-loaded").each(function() {
+                            $(this).trigger("refresh.owl.carousel");
+                        });
+                    },
                     autoHeight: true,
                     dots: true,
                     items: this.itemsPerPage,
