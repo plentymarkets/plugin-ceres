@@ -132,7 +132,7 @@
 }
 
 .basket-open {
-    .header-container {
+    [data-header-offset] {
         > * {
             z-index: auto !important; // stylelint-disable-line declaration-no-important
         }
