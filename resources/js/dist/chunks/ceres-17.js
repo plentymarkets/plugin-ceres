@@ -261,7 +261,7 @@ var render = function() {
                               "span",
                               {
                                 staticClass:
-                                  "text-appearance m-x-auto text-truncate"
+                                  "text-appearance mx-auto text-truncate"
                               },
                               [_vm._v(_vm._s(category.details[0].name))]
                             )
@@ -277,7 +277,7 @@ var render = function() {
           _vm._v(" "),
           _vm.categoryChildren.length &&
           _vm.categoryChildren.length < _vm.childrenCount
-            ? _c("div", { staticClass: "mb-3 m-x-auto" }, [
+            ? _c("div", { staticClass: "mb-3 mx-auto" }, [
                 _c(
                   "button",
                   {
