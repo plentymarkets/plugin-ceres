@@ -212,7 +212,14 @@ class ShopWizardService
             // search fields logic
 
             $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
-            foreach($itemSearchSettings['fields'] as $fieldKey => $fieldSettings) {
+
+            $fields = $itemSearchSettings['fields'];
+
+            usort($fields, function($searchValue1, $searchValue2) {
+                return $searchValue1['boost'] < $searchValue2['boost'] ? 1 : -1;
+            });
+
+            foreach($fields as $fieldKey => $fieldSettings) {
                 $fieldKey += 1;
                 $formFieldPrefix = "search_";
                 switch ($fieldKey) {
