@@ -47,19 +47,11 @@ __webpack_require__.r(__webpack_exports__);
       default: 4
     }
   },
-  data: function data() {
-    return {
-      isCarouselInitialized: false
-    };
-  },
   computed: {
     columnWidths: function columnWidths() {
       var itemsPerPage = Math.min(Math.max(this.itemsPerPage, 1), 4);
       return ["col-12", itemsPerPage === 1 ? "col-sm-12" : "col-sm-6", "col-md-" + 12 / itemsPerPage];
     }
-  },
-  updated: function updated() {
-    this.initializeCarousel();
   },
   mounted: function mounted() {
     var _this = this;
@@ -71,21 +63,18 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     initializeCarousel: function initializeCarousel() {
       if (this.$slots.items && this.$slots.items.length > this.itemsPerPage) {
-        var $owl = $(this.$refs.carouselContainer);
-
-        if (this.isCarouselInitialized) {
-          $owl.trigger("destroy.owl.carousel");
-          $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-          $owl.find(".owl-item").remove();
-        } // do not render, if no html element is inside of the carousels container
-
+        var $owl = $(this.$refs.carouselContainer); // do not render, if no html element is inside of the carousels container
 
         if (!$owl.children().length) {
           return;
         }
 
-        this.isCarouselInitialized = true;
         $owl.owlCarousel({
+          onInitialized: function onInitialized() {
+            $owl.find(".owl-carousel.owl-loaded").each(function () {
+              $(this).trigger("refresh.owl.carousel");
+            });
+          },
           autoHeight: true,
           dots: true,
           items: this.itemsPerPage,
