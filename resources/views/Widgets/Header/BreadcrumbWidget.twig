@@ -81,8 +81,37 @@
                     <li class="breadcrumb-item active">
                         <span>{{ Twig.print("lastCategory.details[0].name") }}</span>
                     </li>
+                        {{ Twig.set('crumb', '
+                                            [
+                                                {
+                                                    "@type": "ListItem",
+                                                    "position": catLevel,
+                                                    "item":
+                                                    {
+                                                        "@id": services.category.getURLById(lastCategory.id),
+                                                        "name": lastCategory.details[0].name
+                                                    }
+                                                }
+                                            ]')
+                        }}
+                        {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
                 {{ Twig.elseif("item.documents[0].data is defined") }}
                     <li class="breadcrumb-item active">
+                        {{ Twig.set("itemUrl", "item.documents[0].data.texts.urlPath | split('/')") }}
+                        {{ Twig.set('crumb', '
+                                [
+                                    {
+                                        "@type": "ListItem",
+                                        "position": catLevel,
+                                        "item":
+                                        {
+                                            "@id": itemUrl | last  ~ "_" ~ item.documents[0].data.item.id ~ "_" ~ item.documents[0].data.variation.id ,
+                                            "name": item.documents[0].data | itemName
+                                        }
+                                    }
+                                ]')
+                        }}
+                        {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
                         <span>{{ Twig.print("item.documents[0].data | itemName") }}</span>
                     </li>
                 {{ Twig.endif() }}
