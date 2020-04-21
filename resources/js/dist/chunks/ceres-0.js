@@ -421,7 +421,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   },
   watch: {
     quantity: function quantity(value) {
-      this.$store.commit("".concat(this.itemId, "/setVariationOrderQuantity"), value);
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNullOrUndefined"])(this.itemId)) {
+        this.$store.commit("".concat(this.itemId, "/setVariationOrderQuantity"), value);
+      }
     },
     variationOrderQuantity: function variationOrderQuantity(value) {
       if (this.quantity !== value) {
