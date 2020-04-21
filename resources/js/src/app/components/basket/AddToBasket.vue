@@ -20,7 +20,8 @@
                                     :min="minimumQuantity"
                                     :max="maximumQuantity"
                                     :interval="intervalQuantity"
-                                    :variation-id="variationId">
+                                    :variation-id="variationId"
+                                    :waiting="isLoading || !isSalable || !allVariationsSelected">
                     </quantity-input>
                 </div>
 
