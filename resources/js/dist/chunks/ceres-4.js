@@ -577,6 +577,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_16__["isNullOrUndefined"])(value) || value.length <= 0) {
           value = null;
         }
+      } else if (this.inputType === "text") {
+        if (value === "") {
+          value = null;
+        }
       }
 
       this.setVariationOrderProperty({

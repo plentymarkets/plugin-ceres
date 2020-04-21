@@ -130,3 +130,11 @@
         }
     }
 }
+
+.basket-open {
+    [data-header-offset] {
+        > * {
+            z-index: auto !important; // stylelint-disable-line declaration-no-important
+        }
+    }
+}

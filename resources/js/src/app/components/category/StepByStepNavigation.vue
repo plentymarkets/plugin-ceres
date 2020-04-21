@@ -8,12 +8,12 @@
                         <div v-if="category.details[0][imageSource]" class="prop-1-1">
                             <img v-if="imageSource !== 'none'" :src="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
                         </div>
-                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto text-truncate">{{ category.details[0].name }}</span></div>
+                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance mx-auto text-truncate">{{ category.details[0].name }}</span></div>
                     </div>
                 </a>
             </div>
 
-            <div class="mb-3 m-x-auto" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
+            <div class="mb-3 mx-auto" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
                 <button type="button" class="btn btn-appearance px-4 py-3" @click="loadChunk()" :class="{ 'disabled': isWaiting }">
                     <span>{{ $translate("Ceres::Template.stepByStepNavigationShowMore") }}</span>
                     <icon icon="plus-circle" class="fa-fw my-1" class-loading="fa-repeat"></icon>

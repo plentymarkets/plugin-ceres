@@ -55,7 +55,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -370,7 +369,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      !_vm.isLoading && !_vm.wishListItems[0]
+      !_vm.isLoading && (!_vm.wishListItems || _vm.wishListItems.length === 0)
         ? _c("p", { staticClass: "h4 text-muted text-center my-5" }, [
             _vm._v(_vm._s(_vm.$translate("Ceres::Template.wishListNoItems")))
           ])
