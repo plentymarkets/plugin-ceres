@@ -72,6 +72,7 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 
 import "bootstrap";
+import "owl.carousel";
 
 // =========================
 // COMPONENTS
