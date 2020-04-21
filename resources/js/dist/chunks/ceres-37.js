@@ -9,8 +9,11 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1__);
+
 
 //
 //
@@ -46,8 +49,14 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    currentVariationId: function currentVariationId() {
-      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].variation.id;
+    currentVariation: function currentVariation() {
+      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
+    },
+    isLoading: function isLoading() {
+      return this.$store.state.items.isAddToBasketLoading === this.currentVariation.variation.id || this.$store.state.items.isSetLoading;
+    },
+    isSalable: function isSalable() {
+      return !!this.currentVariation.filter && this.currentVariation.filter.isSalable;
     },
     currentQuantity: {
       get: function get() {
@@ -83,8 +92,11 @@ var render = function() {
       value: _vm.currentQuantity,
       min: _vm.setComponentConfig.minimumOrderQuantity,
       max: _vm.setComponentConfig.maximumOrderQuantity,
-      "variation-id": _vm.currentVariationId,
-      waiting: !_vm.setComponentConfig.orderQuantityPossible,
+      "variation-id": _vm.currentVariation.variation.id,
+      waiting:
+        !_vm.setComponentConfig.orderQuantityPossible ||
+        _vm.isLoading ||
+        !_vm.isSalable,
       "use-appearance": true
     },
     on: {

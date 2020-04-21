@@ -173,6 +173,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -552,7 +553,11 @@ var render = function() {
                       min: _vm.minimumQuantity,
                       max: _vm.maximumQuantity,
                       interval: _vm.intervalQuantity,
-                      "variation-id": _vm.variationId
+                      "variation-id": _vm.variationId,
+                      waiting:
+                        _vm.isLoading ||
+                        !_vm.isSalable ||
+                        !_vm.allVariationsSelected
                     },
                     on: {
                       "quantity-change": _vm.updateQuantity,
