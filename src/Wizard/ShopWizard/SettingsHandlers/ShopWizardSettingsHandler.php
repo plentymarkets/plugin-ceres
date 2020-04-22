@@ -243,8 +243,9 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                             )) {
                             $itemSearchSettingsData[] = [
                                 "key" => $data[$searchSetting['key']],
-                                "boost" => 2000 - (intval($searchSetting['position']) * 100),
-                                "isActive" => true
+                                "boost" => 2000 - ((int)$searchSetting['position'] * 100),
+                                "isActive" => true,
+                                "position" => $searchSetting['position'] - 1
                             ];
                             $completedSettings[] = $data[$searchSetting['key']];
                         }
@@ -260,6 +261,15 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                                 "isActive" => false
                             ];
                         }
+                    }
+
+                    $splicedSearchSettings = array_splice($itemSearchSettingsData, 0, count($completedSettings));
+
+                    foreach ($splicedSearchSettings as $splicedSearchSetting)
+                    {
+                        $position = $splicedSearchSetting['position'];
+                        unset($splicedSearchSetting['position']);
+                        array_splice($itemSearchSettingsData, $position, 0, [$splicedSearchSetting]);
                     }
 
                     $searchSettingsRepo->saveSearchSettings(["fields" => $itemSearchSettingsData]);
