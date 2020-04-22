@@ -456,13 +456,14 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "fa fa-shield float-none" }),
-                _vm._v(
-                  "\n            " +
+                _vm._v(" "),
+                _c("span", { staticClass: "d-none d-sm-inline-block" }, [
+                  _vm._v(
                     _vm._s(
                       _vm.$translate("Ceres::Template.cookieBarPrivacySettings")
-                    ) +
-                    "\n        "
-                )
+                    )
+                  )
+                ])
               ]
             )
           ])
