@@ -55,7 +55,7 @@
         <div v-else>
             <button class="btn btn-primary btn-appearance" @click.prevent.stop="isCollapsed = false">
                 <i class="fa fa-shield float-none"></i>
-                {{ $translate("Ceres::Template.cookieBarPrivacySettings") }}
+                <span class="d-none d-sm-inline-block">{{ $translate("Ceres::Template.cookieBarPrivacySettings") }}</span>
             </button>
         </div>
     </div>
