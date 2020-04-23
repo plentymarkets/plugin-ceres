@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import { mapMutations } from "vuex";
 
 export default {
@@ -70,7 +69,7 @@ export default {
     {
         styles: String,
         classes: String,
-        consentGroups: Object
+        consentGroups: [Object, Array]
     },
 
     data()
