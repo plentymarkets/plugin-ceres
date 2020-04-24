@@ -126,6 +126,7 @@ class TemplateServiceProvider extends ServiceProvider
             }
         );
 
+        /** @var ResultFieldTemplate $templateContainer */
         $templateContainer = pluginApp(ResultFieldTemplate::class);
 
         $templateContainer->setTemplates(
@@ -136,7 +137,8 @@ class TemplateServiceProvider extends ServiceProvider
                 ResultFieldTemplate::TEMPLATE_AUTOCOMPLETE_ITEM_LIST => 'Ceres::ResultFields.AutoCompleteListItem',
                 ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
                 ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
-            ]
+            ],
+            false
         );
 
         $this->listenToIO(
