@@ -79,8 +79,6 @@
                 {{ Twig.set("lastCategory", "categoryBreadcrumbs | last") }}
                 {{ Twig.if("lastCategory.details is defined") }}
                     <li class="breadcrumb-item active">
-                        <span>{{ Twig.print("lastCategory.details[0].name") }}</span>
-                    </li>
                         {{ Twig.set('crumb', '
                                             [
                                                 {
@@ -95,9 +93,10 @@
                                             ]')
                         }}
                         {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
+                        <span>{{ Twig.print("lastCategory.details[0].name") }}</span>
+                    </li>
                 {{ Twig.elseif("item.documents[0].data is defined") }}
                     <li class="breadcrumb-item active">
-                        {{ Twig.set("itemUrl", 'request.get("plentyMarkets")') }}
                         {{ Twig.set('crumb', '
                                 [
                                     {
@@ -105,7 +104,7 @@
                                         "position": catLevel,
                                         "item":
                                         {
-                                            "@id": "/" ~ itemUrl,
+                                            "@id": requestedVariationUrl,
                                             "name": item.documents[0].data | itemName
                                         }
                                     }
