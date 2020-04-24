@@ -60,9 +60,12 @@ __webpack_require__.r(__webpack_exports__);
       _this.initializeCarousel();
     });
   },
+  updated: function updated() {
+    this.initializeCarousel();
+  },
   methods: {
     initializeCarousel: function initializeCarousel() {
-      if (this.$slots.items && this.$slots.items.length > this.itemsPerPage) {
+      if (this.$slots.items && this.$slots.items[0].tag && this.$slots.items.length > this.itemsPerPage) {
         var $owl = $(this.$refs.carouselContainer); // do not render, if no html element is inside of the carousels container
 
         if (!$owl.children().length) {
