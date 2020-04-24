@@ -54,7 +54,6 @@ export default {
 
     updated()
     {
-
         this.initializeCarousel();
     },
 
