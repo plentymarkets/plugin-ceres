@@ -1,7 +1,7 @@
 <template>
     <div class="privacy-settings d-flex flex-column">
         <div class="privacy-settings-body overflow-auto">
-            <div class="card consent-group" :class="{cardClass, 'mb-3': index < consentGroup.length - 1}" :style="cardStyle" v-for="(consentGroup, index) in consentGroups">
+            <div class="card consent-group" :class="{cardClass, 'mb-3': index < consentGroups.length - 1}" :style="cardStyle" v-for="(consentGroup, index) in consentGroups">
                 <div class="card-body mb-0" @click.stop="toggleConsent(consentGroup.key + '.*')">
                     <p class="card-title h4 d-flex">
                         <span class="flex-fill">
@@ -79,7 +79,7 @@ import { mapMutations } from "vuex";
 export default {
     props: {
         consentGroups: {
-            type: [Object, Array]
+            type: Array
         },
         cardClass: {
             type: String

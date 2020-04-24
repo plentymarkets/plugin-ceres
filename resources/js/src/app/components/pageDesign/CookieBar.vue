@@ -69,7 +69,7 @@ export default {
     {
         styles: String,
         classes: String,
-        consentGroups: [Object, Array]
+        consentGroups: Array
     },
 
     data()
