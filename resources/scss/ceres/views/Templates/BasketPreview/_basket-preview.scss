@@ -64,13 +64,6 @@
     }
 }
 
-.basket-preview-footer {
-    .btn + .btn {
-        margin-top: 0;
-        margin-left: $spacer;
-    }
-}
-
 @include media-breakpoint-between(sm, md) {
     // horizontal view on small devices
     .basket-preview-content {
