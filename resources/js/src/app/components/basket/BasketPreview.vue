@@ -66,17 +66,23 @@
 
                         <slot name="after-basket-totals"></slot>
 
-                        <div class="basket-preview-footer d-flex pb-3">
-                            <a v-waiting-animation-infinite :href="$ceres.urls.basket" rel="nofollow" class="btn btn-outline-primary btn-block" :title="$translate('Ceres::Template.basket')">
-                                <i class="fa fa-shopping-cart"></i>
-                                {{ $translate("Ceres::Template.basket") }}
-                            </a>
+                        <div class="basket-preview-footer row pb-3">
+                            <div class="col-6 col-sm-12 col-md-6 mb-sm-2 mb-md-0">
+                                <a v-waiting-animation-infinite :href="$ceres.urls.basket" rel="nofollow" class="btn btn-outline-primary btn-block" :title="$translate('Ceres::Template.basket')">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    {{ $translate("Ceres::Template.basket") }}
+                                </a>
+                            </div>
 
                             <slot name="before-checkout-button"></slot>
-                            <a v-waiting-animation-infinite :href="$ceres.urls.checkout" rel="nofollow" class="btn btn-primary btn-block" :title="$translate('Ceres::Template.basketCheckout')">
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                {{ $translate("Ceres::Template.basketCheckout") }}
-                            </a>
+
+                            <div class="col-6 col-sm-12 col-md-6 ">
+                                <a v-waiting-animation-infinite :href="$ceres.urls.checkout" rel="nofollow" class="btn btn-primary btn-block" :title="$translate('Ceres::Template.basketCheckout')">
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                    {{ $translate("Ceres::Template.basketCheckout") }}
+                                </a>
+                            </div>
+
                             <slot name="after-checkout-button"></slot>
                         </div>
                     </div>
