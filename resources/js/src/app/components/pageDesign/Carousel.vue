@@ -52,11 +52,16 @@ export default {
         });
     },
 
+    updated()
+    {
+        this.initializeCarousel();
+    },
+
     methods:
     {
         initializeCarousel()
         {
-            if (this.$slots.items && this.$slots.items.length > this.itemsPerPage)
+            if (this.$slots.items && this.$slots.items[0].tag && this.$slots.items.length > this.itemsPerPage)
             {
                 const $owl = $(this.$refs.carouselContainer);
 
