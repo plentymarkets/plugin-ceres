@@ -66113,7 +66113,7 @@ var defaultConfig = {
         }
       }
 
-      element.append(img);
+      element.appendChild(img);
     }
 
     if (element.nodeName.toLowerCase() === "video" && !element.getAttribute("data-src")) {
