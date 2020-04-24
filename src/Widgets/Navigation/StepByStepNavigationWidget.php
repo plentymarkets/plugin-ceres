@@ -76,6 +76,8 @@ class StepByStepNavigationWidget extends BaseWidget
             ->withName("Widget.stepByStepNavigationNumberOfRowsLabel")
             ->withTooltip("Widget.stepByStepNavigationNumberOfRowsTooltip")
             ->withDefaultValue(2);
+
+        $settings->createSpacing(false, true);
         
         return $settings->toArray();
     }
