@@ -35,8 +35,9 @@
             </div>
 
         {% else %}
-
-            {{ Twig.if("category.level <= #{ maxLevel }") }}
+            {{ Twig.set("category", "services.category.getCurrentCategory()") }}
+            
+            {{ Twig.if("category is defined and category.level <= #{ maxLevel }") }}
                 {{ Twig.set("children", Twig.call("services.category.getCurrentCategoryChildren", [Twig.var("category.id")])) }}
                 {{ Twig.set("chunkSize", numberOfColumns * numberOfRows)}}
 
