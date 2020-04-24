@@ -1,5 +1,30 @@
 # Release Notes für Ceres
 
+## v5.0.1 (2020-04-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.0...5.0.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Mengeneingabe auf der Artikeleinzelansicht wird nun deaktiviert, wenn der Artikel nicht verfügbar ist. Die Mengeneingabe ist ebenfalls so lange deaktiviert, bis notwendige Artikeldaten nachgeladen werden.
+- Das JavaScript für das Owl Carousel ist nun wieder im gesamten Webshop verfügbar. 
+
+### Behoben
+
+- Durch einen Fehler wurden Artikellisten vom Typ "Zuletzt angesehen" nicht dargestellt. Dies wurde behoben.
+- Bilderkarussells in Artikellisten wurden nicht korrekt angezeigt. Dies wurde behoben.
+- Der Wert der SCSS-Variable `$yiq-contrasted-threshold` wurde auf 186 zurückgesetzt.
+- Unter gewissen Umständen waren Dialogfenster nicht bedienbar. Dies wurde behoben.
+- Bei leeren Wunschlisten wurde die Ladeanimation durchgängig angezeigt. Dies wurde behoben.
+- Es wurde ein fehlerhaftes Verhalten beim Variantenwechsel behoben. Wenn eine Variante gewechselt wird, für die bereits Bestellmerkmale ausgewählt wurden, werden diese Bestellmerkmale bei einem erneuten Wechsel zur ursprünglich gewählten Variante wieder automatisch ausgewählt. Dies gilt nicht für Bestellmerkmale des Typs **Datei**.
+- Bei der Einbindung mehrerer Google Maps-Widgets auf einer Seite wurde nur das erste Widget korrekt geladen. Dieses Verhalten wurde behoben.
+- Im Mein Konto-Bereich fehlten die Auswahlmöglichkeiten für das Versenden an Packstationen und Postfilialen. Dies wurde behoben.
+- Auf der Auftragsbestätigungsseite wurden bei Aufträgen mit Aktionsgutscheinen teilweise falsche Werte berechnet. Dieses Verhalten wurde behoben.
+- Das Nachladen von Bildern funktionierte nicht im Internet Explorer 11. Dies wurde behoben.
+- In den Daten für Schema.org wurde ein fehlendes Anführungszeichen für den Eintrag "URL" ergänzt.
+- Wenn das Top Bar-Widget an unterster Stelle im Header platziert wurde, wurde die Warenkorbvorschau unter bestimmten Bedingungen von anderen Widgets überlagert. Dieses Verhalten wurde behoben.
+- Texte in der Step-by-Step-Navigation werden jetzt zentriert dargestellt.
+
+
+
 ## v5.0.0 (2020-04-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.6.0...5.0.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO

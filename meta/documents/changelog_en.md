@@ -1,5 +1,28 @@
 # Release Notes for Ceres
 
+## v5.0.1 (2020-04-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.0...5.0.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The quantity input in the single item view is now deactivated if the item is not available. The input is also deactivated until the necessary item data is loaded.
+- The JavaScript for the Owl Carousel is now available in the entire online store.
+
+### Fixed 
+
+- Due to an error, item lists of the type **Last seen** were not displayed in the online store. This has been fixed.
+- Image carousels in items lists were displayed incorrectly. This has been fixed.
+- The value of the SCSS variable `$yiq-contrasted-threshold` was reset to 186.
+- Under certain circumstances, modals could not be edited. This has been fixed.
+- The loading animation was displayed permanently for empty wishlists. This has been fixed.
+- We fixed faulty behaviour of the variation selection. If a user selects order characteristics for a variation and then changes variations, the order characteristics are now automatically selected when the user returns to the original variation. This does not apply to order characteristics of the type **file**.
+- When multiple Google Maps widgets were placed on a single page, only the first widget was loaded correctly. This behaviour has been fixed.
+- The options for shipping to a Packstation or post office were missing in the My Account area. This has been fixed.
+- Under certain circumstances, the order confirmation page displayed incorrect values for orders that included promotional coupons. This behaviour has been fixed.
+- The lazy loading of images was not working properly in the Internet Explorer 11. This has been fixed.
+- A missing quotation mark has been added to the "URL" entry of the Schema.org data.
+- If the top bar widget was placed in the bottommost position in the header, other widgets could overlap the the shopping cart preview under certain circumstances. This behaviour has been fixed. 
+- Texts in the step-by-step navigation are now centred.
+
 ## v5.0.0 (2020-04-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.6.0...5.0.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
