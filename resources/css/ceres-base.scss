@@ -10872,8 +10872,17 @@ textarea.no-resize {
 }
 
 .basket-preview-footer {
-    .btn + .btn {
-        margin-top: 0;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+
+    > * {
+        -webkit-box-flex: 1;
+            -ms-flex: 1 0 40%;
+                flex: 1 0 40%;
+        margin-top: $spacer * .5;
+    }
+
+    > *:nth-child(2n) {
         margin-left: $spacer;
     }
 }
