@@ -1,5 +1,42 @@
 # Release Notes for Ceres
 
+## v5.0.1 (2020-04-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.0...5.0.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Added
+
+- The settings for margins have been added to the step-by-step navigation widget.
+
+### Changed
+
+- The quantity input in the single item view is now deactivated for items that are unavailable. The input is also deactivated until the necessary item data is loaded.
+- The JavaScript for the Owl Carousel is now available in the entire online store.
+
+### Fixed 
+
+- Due to an error, item lists of the type **Last seen** were not displayed in the online store. This has been fixed.
+- Image carousels in items lists were displayed incorrectly. This has been fixed.
+- The value of the SCSS variable `$yiq-contrasted-threshold` was reset to 186.
+- Under certain circumstances, modals could not be edited. This has been fixed.
+- The loading animation was displayed permanently for empty wishlists. This has been fixed.
+- We fixed faulty behaviour of the variation selection. If a user selects order characteristics for a variation and then changes variations, the order characteristics are now automatically selected when the user returns to the original variation. This does not apply to order characteristics of the type **file**.
+- When multiple Google Maps widgets were placed on a single page, only the first Google Maps widget was loaded correctly. This behaviour has been fixed.
+- The options for shipping to a Packstation or post office were missing in the My Account area. This has been fixed.
+- Under certain circumstances, the order confirmation page displayed incorrect values for orders that included promotional coupons. This behaviour has been fixed.
+- The lazy loading of images was not working properly in the Internet Explorer 11. This has been fixed.
+- A missing quotation mark has been added to the "URL" entry of the Schema.org data.
+- Missing data for the Schema.org data structure for breadcrumbs could cause errors for SEO tools. This has been fixed.
+- If the top bar widget was placed in the bottommost position in the header, other widgets could overlap the shopping cart preview under certain circumstances. This behaviour has been fixed. 
+- Texts in the step-by-step navigation are now centred.
+- Due to an error, the step-by-step navigation was not displayed on the single item view. This has been fixed.
+- Invalid colour values in the design settings of the ShopBuilder are now intercepted and replaced by default colour values.
+- Users who were not logged in were unable to create returns on return pages that had not been created with the ShopBuilder. This behaviour has been fixed.
+- The names of order characteristics were not displayed correctly in the return history and the return order form. This behaviour has been fixed.
+- Elements integrated via the two layout containers "BasketPreview.BeforeCheckoutButton" and "BasketPreview.AfterCheckoutButton" were displayed smaller than intended. This has been fixed.
+
 ## v5.0.0 (2020-04-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.6.0...5.0.0" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
@@ -13,7 +50,7 @@
 ### Added
 
 - This version supports <a href="https://knowledge.plentymarkets.com/en/slp/artikel/anwendungsfaelle/multipacks-pakete-sets#3000" target="_blank">Item sets</a>. We added the **Components for item sets** widget to the ShopBuilder. It serves to edit item set contents via the ShopBuilder. This feature is currently in beta.
-- This version supports <a href="https://knowledge.plentymarkets.com/en/slp/auftraege/gutscheine">Gift cards</a>. Gift cards can be personalised and downloaded as a PDF file on the order confirmation page.
+- This version supports <a href="https://knowledge.plentymarkets.com/en/slp/auftraege/gutscheine">Multipurpose coupons</a>. Multipurpose coupons can be personalised and downloaded as a PDF file on the order confirmation page.
 - We added the three search widgets **Search suggestions**, **Search results: Categories**, and **Search results: Items** to the ShopBuilder. These can be placed in the search area of the top bar widget in the header.
 - You can now click the search icon in the top bar widget to open a dropzone in which you can place widgets.
 - An additional search is now carried out for misspelled search terms. The search results page now provides an alternative search term in the "Did you mean...?" message.
