@@ -34,7 +34,7 @@
 
         {% else %}
             {{ Twig.set("category", "services.category.getCurrentCategory()") }}
-            
+
             {{ Twig.if("category is defined and category.level <= #{ maxLevel }") }}
                 {{ Twig.set("children", Twig.call("services.category.getCurrentCategoryChildren", [Twig.var("category.id")])) }}
                 {{ Twig.set("chunkSize", numberOfColumns * numberOfRows)}}
@@ -49,8 +49,8 @@
                     :chunk-size="{{ Twig.print("chunkSize") }}"
                     image-source="{{ source }}"
                     :columns="{{ numberOfColumns }}"
-                    :children-count="{{ Twig.print("children | length")}}">
-
+                    :children-count="{{ Twig.print("children | length")}}"
+                    :include-language="{{ Twig.print(urls.includeLanguage | json_encode) }}">
                     <div class="row">
                         {{ Twig.for("i", "1..children | length") }}
                             {{ Twig.if("loop.index <= chunkSize") }}
