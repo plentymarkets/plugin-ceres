@@ -58,7 +58,7 @@ const actions =
         {
             // register a nested module for the main item
             dispatch("registerItem", variation.documents[0]);
-            commit("setMainItemId", variation.documents[0].item.id);
+            commit("setMainItemId", variation.documents[0].data.item.id);
 
             // rest call for sets if set comps are set
             const setComponentIds = (variation.documents[0].data.setComponents || []).map(component => component.defaultVariationId);
