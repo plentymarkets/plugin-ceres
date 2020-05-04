@@ -57,11 +57,6 @@ export default {
         {
             type: Number,
             required: true
-        },
-        includeLanguage:
-        {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -111,7 +106,7 @@ export default {
         getCategoryUrl(url)
         {
             const trailingSlash = url[0] === "/" ? "" : "/";
-            const prefix = this.includeLanguage ? `/${App.language}${trailingSlash}` : "";
+            const prefix = App.urls.includeLanguage ? `/${ App.language }${ trailingSlash }` : "";
 
             return prefix + url;
         }
