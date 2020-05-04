@@ -70910,7 +70910,8 @@ var state = {
   isSetLoading: false,
   isAddToBasketLoading: 0,
   previewItemId: 0,
-  setComponentIds: []
+  setComponentIds: [],
+  mainItemId: null
 };
 var mutations = {
   setIsSetLoading: function setIsSetLoading(state, isSetLoading) {
@@ -70931,6 +70932,9 @@ var mutations = {
   addComponent: function addComponent(state, itemId) {
     state.setComponentIds = state.setComponentIds || [];
     state.setComponentIds.push(itemId);
+  },
+  setMainItemId: function setMainItemId(state, itemId) {
+    state.mainItemId = itemId;
   }
 };
 var actions = {
@@ -70938,7 +70942,8 @@ var actions = {
     var commit = _ref.commit,
         dispatch = _ref.dispatch;
     // register a nested module for the main item
-    dispatch("registerItem", variation.documents[0]); // rest call for sets if set comps are set
+    dispatch("registerItem", variation.documents[0]);
+    commit("setMainItemId", variation.documents[0].data.item.id); // rest call for sets if set comps are set
 
     var setComponentIds = (variation.documents[0].data.setComponents || []).map(function (component) {
       return component.defaultVariationId;
@@ -71032,6 +71037,9 @@ var getters = {
     }
 
     return allVariationSelected;
+  },
+  currentItemVariation: function currentItemVariation(state, getters) {
+    return getters["".concat(state.mainItemId, "/currentItemVariation")];
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
