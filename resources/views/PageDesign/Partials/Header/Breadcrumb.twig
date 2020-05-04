@@ -53,10 +53,36 @@
             {% set lastCategory = categoryBreadcrumbs | last %}
             {% if lastCategory.details is defined %}
                 <li class="breadcrumb-item active">
+                    {% set crumb =
+                    [
+                        {
+                            "@type": "ListItem",
+                            "position": catLevel,
+                            "item":
+                            {
+                                "@id": services.category.getURLById(lastCategory.id),
+                                "name": lastCategory.details[0].name
+                            }
+                        }
+                    ] %}
+                    {% set crumbs = crumbs | merge(crumb) %}
                     <span>{{ lastCategory.details[0].name }}</span>
                 </li>
             {% elseif item.documents[0].data is defined %}
                 <li class="breadcrumb-item active">
+                    {% set crumb =
+                    [
+                        {
+                            "@type": "ListItem",
+                            "position": catLevel,
+                            "item":
+                            {
+                                "@id": requestedVariationUrl,
+                                "name": item.documents[0].data | itemName
+                            }
+                        }
+                    ] %}
+                    {% set crumbs = crumbs | merge(crumb) %}
                     <span>{{ item.documents[0].data | itemName }}</span>
                 </li>
             {% endif %}

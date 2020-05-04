@@ -4,8 +4,6 @@
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set appearance      = widget.settings.appearance.mobile | default("none") %}
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
-{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
@@ -35,8 +33,9 @@
             </div>
 
         {% else %}
-
-            {{ Twig.if("category.level <= #{ maxLevel }") }}
+            {{ Twig.set("category", "services.category.getCurrentCategory()") }}
+            
+            {{ Twig.if("category is defined and category.level <= #{ maxLevel }") }}
                 {{ Twig.set("children", Twig.call("services.category.getCurrentCategoryChildren", [Twig.var("category.id")])) }}
                 {{ Twig.set("chunkSize", numberOfColumns * numberOfRows)}}
 

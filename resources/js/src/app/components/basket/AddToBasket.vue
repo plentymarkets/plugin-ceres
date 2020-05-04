@@ -20,7 +20,8 @@
                                     :min="minimumQuantity"
                                     :max="maximumQuantity"
                                     :interval="intervalQuantity"
-                                    :variation-id="variationId">
+                                    :variation-id="variationId"
+                                    :waiting="isLoading || !isSalable || !allVariationsSelected">
                     </quantity-input>
                 </div>
 
@@ -396,7 +397,10 @@ export default {
     {
         quantity(value)
         {
-            this.$store.commit(`${this.itemId}/setVariationOrderQuantity`, value);
+            if(!isNullOrUndefined(this.itemId))
+            {
+                this.$store.commit(`${this.itemId}/setVariationOrderQuantity`, value);
+            }
         },
 
         variationOrderQuantity(value)

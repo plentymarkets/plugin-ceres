@@ -4,8 +4,8 @@
         :value="currentQuantity"
         :min="setComponentConfig.minimumOrderQuantity"
         :max="setComponentConfig.maximumOrderQuantity"
-        :variation-id="currentVariationId"
-        :waiting="!setComponentConfig.orderQuantityPossible"
+        :variation-id="currentVariation.variation.id"
+        :waiting="!setComponentConfig.orderQuantityPossible || isLoading || !isSalable"
         :use-appearance="true">
     </quantity-input>
 </template>
@@ -38,9 +38,19 @@ export default {
             }
         },
 
-        currentVariationId()
+        currentVariation()
         {
-            return this.$store.getters[`${this.itemId}/currentItemVariation`].variation.id;
+            return this.$store.getters[`${this.itemId}/currentItemVariation`];
+        },
+
+        isLoading()
+        {
+            return this.$store.state.items.isAddToBasketLoading === this.currentVariation.variation.id || this.$store.state.items.isSetLoading;
+        },
+
+        isSalable()
+        {
+            return !!this.currentVariation.filter && this.currentVariation.filter.isSalable;
         },
 
         currentQuantity:

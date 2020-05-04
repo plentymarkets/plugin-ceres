@@ -38,12 +38,19 @@ $brand-info:                $cyan !default;
 $brand-warning:             $yellow !default;
 $brand-danger:              $red !default;
 
-$primary:                   $brand-primary !default;
-$secondary:                 $brand-secondary !default;
-$success:                   $brand-success !default;
-$info:                      $brand-info !default;
-$warning:                   $brand-warning !default;
-$danger:                    $brand-danger !default;
+@function check-color($color, $fallback) {
+    @if type-of($color) != color {
+        @return $fallback;
+    }
+    @return $color;
+}
+
+$primary:                   check-color($brand-primary, $blue) !default;
+$secondary:                 check-color($brand-secondary, $gray-600) !default;
+$success:                   check-color($brand-success, $green) !default;
+$info:                      check-color($brand-info, $cyan) !default;
+$warning:                   check-color($brand-warning, $yellow) !default;
+$danger:                    check-color($brand-danger, $red) !default;
 $light:                     $gray-100 !default;
 $dark:                      $gray-800 !default;
 
