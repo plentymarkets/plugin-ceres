@@ -131,7 +131,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       expandedGroups: {}
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapMutations"])(["toggleConsent"]), {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapMutations"])(["toggleConsent"])), {}, {
     isConsented: function isConsented(key, defaultValue) {
       return this.$store.getters.isConsented(key, defaultValue);
     },

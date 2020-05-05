@@ -67,7 +67,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemList.selectedFacets;
     }
   }),
-  methods: _objectSpread({
+  methods: _objectSpread(_objectSpread({
     removeTag: function removeTag(tag) {
       this.selectFacet({
         facetValue: tag
@@ -78,7 +78,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.resetAllSelectedFacets();
       this.loadItemList();
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapMutations"])(["resetAllSelectedFacets"]), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapActions"])(["selectFacet", "loadItemList"]))
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapMutations"])(["resetAllSelectedFacets"])), Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapActions"])(["selectFacet", "loadItemList"]))
 });
 
 /***/ }),

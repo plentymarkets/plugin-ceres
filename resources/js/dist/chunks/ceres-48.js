@@ -89,7 +89,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     openBasketPreview: Boolean,
     basketSelect: Boolean
   },
-  computed: _objectSpread({
+  computed: _objectSpread(_objectSpread({
     isDisabled: function isDisabled() {
       return !!this.basket.customerInvoiceAddressId || !!this.basket.customerShippingAddressId || this.disableInput;
     }
@@ -100,7 +100,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     basket: function basket(state) {
       return state.basket.data;
     }
-  }), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapGetters"])(["getCountryName"])),
+  })), Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapGetters"])(["getCountryName"])),
   created: function created() {
     Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_7__["removeUrlParam"])("openBasketPreview");
   },

@@ -169,14 +169,14 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
       });
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
     basketItems: function basketItems(state) {
       return state.basket.items;
     },
     isBasketItemQuantityUpdate: function isBasketItemQuantityUpdate(state) {
       return state.basket.isBasketItemQuantityUpdate;
     }
-  }), {
+  })), {}, {
     isLastBasketEntrySet: function isLastBasketEntrySet() {
       return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isNullOrUndefined"])(this.basketItem);
     },
