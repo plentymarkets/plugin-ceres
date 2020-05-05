@@ -86,13 +86,16 @@ function replaceDelimiters(template)
 
     while ((posStart = template.indexOf("${", offset)) >= 0 && posStart <= template.length)
     {
+        // read delimiter content from template starting behind opening delimiter (= posStart + "${".length)
         content = readDelimiterContent(template, posStart + 2);
 
-        template = template.substr(0, posStart)
-            + "{{"
-            + content
-            + "}}"
-            + template.substr(posStart + content.length + 2);
+        /* eslint-disable */
+        template = template.substr(0, posStart)               // template content before opening delimiter
+            + "{{"                                                  // new opening delimiter
+            + content                                               // content between delimiters
+            + "}}"                                                  // new closing delimiter
+            + template.substr(posStart + content.length + 3); // template content after closing delimiter (skip "${" and "}")
+        /* eslint-enable */
     }
 
     return template;
