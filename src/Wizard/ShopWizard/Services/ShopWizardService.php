@@ -56,14 +56,14 @@ class ShopWizardService
         /** @var PluginRepositoryContract $pluginRepo */
         $pluginRepo = pluginApp(PluginRepositoryContract::class);
         /** @var PluginSetRepositoryContract $pluginSetRepo */
-        $pluginSetRepo  = pluginApp(PluginSetRepositoryContract::class);
-        $pluginSets     = $pluginSetRepo->list();
+        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
+        $pluginSets = $pluginSetRepo->list();
         /** @var ShopWizardConfigRepository $wizardConfRepo */
         $wizardConfRepo = pluginApp(ShopWizardConfigRepository::class);
 
         $plugin = $pluginRepo->getPluginByName("Ceres");
         if ($plugin instanceof Plugin) {
-            foreach($pluginSets as $pluginSet) {
+            foreach ($pluginSets as $pluginSet) {
                 foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
                     $previewConfig = $wizardConfRepo->getConfig($pluginSetEntry->pluginSetId);
                     if (
@@ -84,12 +84,10 @@ class ShopWizardService
         if (count($webstores)) {
             foreach ($webstores as $webstore) {
                 if (!empty($webstore['pluginSetId'])) {
-
                     $pluginSet = $pluginSets->where('id', '=', $webstore['pluginSetId'])->first();
 
-                    if($pluginSet instanceof PluginSet
+                    if ($pluginSet instanceof PluginSet
                         && $pluginRepo->isActiveInPluginSet($plugin->id, $pluginSet)) {
-
                         $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
 
                         $webstoresMapped[$key] = [
@@ -164,9 +162,9 @@ class ShopWizardService
             if ($robotsTxt instanceof Robots) {
                 $robotsTxtData = $robotsTxt->toArray();
                 $globalData['seo_robotsTxt'] =
-                    is_array($robotsTxtData['value'])?
-                    $robotsTxtData['value']['value']:
-                    $robotsTxtData['value'];
+                    is_array($robotsTxtData['value']) ?
+                        $robotsTxtData['value']['value'] :
+                        $robotsTxtData['value'];
             }
 
             // get sitemap data
@@ -190,8 +188,8 @@ class ShopWizardService
 
             //iterate between languages and set the ones enabled
             $enabledLanguages = [];
-            foreach($searchLanguagesSettings['languages'] as $searchLanguage) {
-                if($searchLanguage['isActive']) {
+            foreach ($searchLanguagesSettings['languages'] as $searchLanguage) {
+                if ($searchLanguage['isActive']) {
                     $enabledLanguages[] = $searchLanguage['lang'];
                 }
             }
@@ -200,7 +198,7 @@ class ShopWizardService
                 if (isset($enabledLanguages[0])) {
                     $globalData['languages_secondSearchLanguage'] = $enabledLanguages[0];
                 }
-                if (isset($enabledLanguages[1])){
+                if (isset($enabledLanguages[1])) {
                     $globalData['languages_firstSearchLanguage'] = $enabledLanguages[1];
                 }
 
@@ -215,32 +213,29 @@ class ShopWizardService
             // Sort by solving boost as position and splicing accordingly
             $enabledSearchSettings = [];
             $disabledSearchSettings = [];
-            foreach($itemSearchSettings['fields'] as $fieldSettings)
-            {
-                if($fieldSettings['boost'] > 0)
-                {
+            foreach ($itemSearchSettings['fields'] as $fieldSettings) {
+                if ($fieldSettings['boost'] > 0) {
                     $fieldSettings['position'] = ((2000 - $fieldSettings['boost']) / 100) - 1;
                     $enabledSearchSettings[] = $fieldSettings;
-                }
-                else
-                {
+                } else {
                     $disabledSearchSettings[] = $fieldSettings;
                 }
             }
 
-            usort($enabledSearchSettings, function($sort1, $sort2)
-            {
-                return $sort1['position'] > $sort2['position'];
-            });
+            usort(
+                $enabledSearchSettings,
+                function ($sort1, $sort2) {
+                    return $sort1['position'] > $sort2['position'];
+                }
+            );
 
-            foreach($enabledSearchSettings as $enabledSearchSetting)
-            {
+            foreach ($enabledSearchSettings as $enabledSearchSetting) {
                 $position = $enabledSearchSetting['position'];
                 unset($enabledSearchSetting['position']);
                 array_splice($disabledSearchSettings, $position, 0, [$enabledSearchSetting]);
             }
 
-            foreach($disabledSearchSettings as $fieldKey => $fieldSettings) {
+            foreach ($disabledSearchSettings as $fieldKey => $fieldSettings) {
                 $fieldKey += 1;
                 $formFieldPrefix = "search_";
                 switch ($fieldKey) {
@@ -255,7 +250,6 @@ class ShopWizardService
                         break;
                     default:
                         $formField = "{$formFieldPrefix}{$fieldKey}thSearchField";
-
                 }
                 $formFieldValue = $fieldSettings['isActive'] ? $fieldSettings['key'] : "";
 
@@ -263,54 +257,45 @@ class ShopWizardService
             }
         }
 
-         /** @var PluginRepositoryContract $pluginRepo */
+        /** @var PluginRepositoryContract $pluginRepo */
         $pluginRepo = pluginApp(PluginRepositoryContract::class);
         $plugin = $pluginRepo->getPluginByName("Ceres");
         $pluginConfData = [];
 
-        if ($plugin instanceof Plugin)
-        {
+        if ($plugin instanceof Plugin) {
             /** @var PluginSetRepositoryContract $pluginSetRepo */
             $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
             $pluginSetEntries = $pluginSetRepo->listSetEntries($pluginSetId);
 
-            foreach ($pluginSetEntries as $pluginSetEntry)
-            {
-                if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->id === $plugin->id)
-                {
+            foreach ($pluginSetEntries as $pluginSetEntry) {
+                if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->id === $plugin->id) {
                     $config = $pluginSetEntry->configurations()->getResults();
-                    if (count($config))
-                    {
-                        foreach ($config as $confItem)
-                        {
+                    if (count($config)) {
+                        foreach ($config as $confItem) {
                             $pluginConfData[$confItem->key] = $confItem->value;
                         }
                     }
                 }
             }
-             /** @var ConfigurationRepositoryContract $configurationRepo */
+            /** @var ConfigurationRepositoryContract $configurationRepo */
             $configurationRepo = pluginApp(ConfigurationRepositoryContract::class);
             $pluginConfigJson = $configurationRepo->getConfigurationFile($plugin->id, $pluginSetId);
 
             $pluginConfig = json_decode($pluginConfigJson, true);
 
-            foreach($pluginConfig['menu'] as $tab)
-            {
-                foreach($tab['formFields'] as $configKey => $formField)
-                {
-                    if(!array_key_exists($configKey, $pluginConfData) && isset($formField['options']['defaultValue']))
-                    {
-                        if($formField['type'] === 'multiCheckBox' && $formField['options']['defaultValue'] === 'all')
-                        {
+            foreach ($pluginConfig['menu'] as $tab) {
+                foreach ($tab['formFields'] as $configKey => $formField) {
+                    if (!array_key_exists(
+                            $configKey,
+                            $pluginConfData
+                        ) && isset($formField['options']['defaultValue'])) {
+                        if ($formField['type'] === 'multiCheckBox' && $formField['options']['defaultValue'] === 'all') {
                             $values = [];
-                            foreach($formField['options']['checkBoxValues'] as $checkBoxValue)
-                            {
+                            foreach ($formField['options']['checkBoxValues'] as $checkBoxValue) {
                                 $values[] = $checkBoxValue['value'];
                             }
                             $pluginConfData[$configKey] = implode(', ', $values);
-                        }
-                        else
-                        {
+                        } else {
                             $pluginConfData[$configKey] = $formField['options']['defaultValue'];
                         }
                     }
@@ -345,7 +330,7 @@ class ShopWizardService
 
             if ($shopBooster instanceOf ContentCacheSettings) {
                 $shopBoosterData = $shopBooster->toArray();
-                $data['performance_shopBooster'] = (bool) $shopBoosterData['contentCacheActive'];
+                $data['performance_shopBooster'] = (bool)$shopBoosterData['contentCacheActive'];
             }
         }
 
@@ -353,7 +338,9 @@ class ShopWizardService
             $data['setAllRequiredAssistants'] = 'true';
         }
 
-        $data['onlineStore_enableRecaptcha'] = strlen($data['onlineStore_recaptchaApiKey']) || strlen($data['onlineStore_recaptchaSecret']);
+        $data['onlineStore_enableRecaptcha'] = strlen($data['onlineStore_recaptchaApiKey']) || strlen(
+                $data['onlineStore_recaptchaSecret']
+            );
 
         return $data;
     }
@@ -370,7 +357,7 @@ class ShopWizardService
 
         if (count($keys)) {
             foreach ($keys as $key) {
-                if(strpos($key, $keyPrefix) !== false && !empty($data[$key])) {
+                if (strpos($key, $keyPrefix) !== false && !empty($data[$key])) {
                     $hasData[] = $key;
                 }
             }
