@@ -210,9 +210,37 @@ class ShopWizardService
             }
 
             // search fields logic
-
             $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
-            foreach($itemSearchSettings['fields'] as $fieldKey => $fieldSettings) {
+
+            // Sort by solving boost as position and splicing accordingly
+            $sortedSearchSettings = [];
+            $unsortedSearchSettings = [];
+            foreach($itemSearchSettings['fields'] as $fieldSettings)
+            {
+                if($fieldSettings['boost'] > 0)
+                {
+                    $fieldSettings['position'] = ((2000 - $fieldSettings['boost']) / 100) - 1;
+                    $sortedSearchSettings[] = $fieldSettings;
+                }
+                else
+                {
+                    $unsortedSearchSettings[] = $fieldSettings;
+                }
+            }
+
+            usort($sortedSearchSettings, function($sort1, $sort2)
+            {
+                return $sort1['position'] > $sort2['position'];
+            });
+
+            foreach($sortedSearchSettings as $sortedSearchSetting)
+            {
+                $position = $sortedSearchSetting['position'];
+                unset($sortedSearchSetting['position']);
+                array_splice($unsortedSearchSettings, $position, 0, [$sortedSearchSetting]);
+            }
+
+            foreach($unsortedSearchSettings as $fieldKey => $fieldSettings) {
                 $fieldKey += 1;
                 $formFieldPrefix = "search_";
                 switch ($fieldKey) {
