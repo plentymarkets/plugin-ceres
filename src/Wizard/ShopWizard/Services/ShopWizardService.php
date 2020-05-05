@@ -213,34 +213,34 @@ class ShopWizardService
             $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
 
             // Sort by solving boost as position and splicing accordingly
-            $sortedSearchSettings = [];
-            $unsortedSearchSettings = [];
+            $enabledSearchSettings = [];
+            $disabledSearchSettings = [];
             foreach($itemSearchSettings['fields'] as $fieldSettings)
             {
                 if($fieldSettings['boost'] > 0)
                 {
                     $fieldSettings['position'] = ((2000 - $fieldSettings['boost']) / 100) - 1;
-                    $sortedSearchSettings[] = $fieldSettings;
+                    $enabledSearchSettings[] = $fieldSettings;
                 }
                 else
                 {
-                    $unsortedSearchSettings[] = $fieldSettings;
+                    $disabledSearchSettings[] = $fieldSettings;
                 }
             }
 
-            usort($sortedSearchSettings, function($sort1, $sort2)
+            usort($enabledSearchSettings, function($sort1, $sort2)
             {
                 return $sort1['position'] > $sort2['position'];
             });
 
-            foreach($sortedSearchSettings as $sortedSearchSetting)
+            foreach($enabledSearchSettings as $enabledSearchSetting)
             {
-                $position = $sortedSearchSetting['position'];
-                unset($sortedSearchSetting['position']);
-                array_splice($unsortedSearchSettings, $position, 0, [$sortedSearchSetting]);
+                $position = $enabledSearchSetting['position'];
+                unset($enabledSearchSetting['position']);
+                array_splice($disabledSearchSettings, $position, 0, [$enabledSearchSetting]);
             }
 
-            foreach($unsortedSearchSettings as $fieldKey => $fieldSettings) {
+            foreach($disabledSearchSettings as $fieldKey => $fieldSettings) {
                 $fieldKey += 1;
                 $formFieldPrefix = "search_";
                 switch ($fieldKey) {
