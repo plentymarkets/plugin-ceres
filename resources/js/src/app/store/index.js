@@ -75,6 +75,7 @@ App.initialData.shippingCountries.sort((first, second) =>
 
 store.commit("setShippingCountries", App.initialData.shippingCountries);
 store.commit("setShippingCountryId", App.initialData.shippingCountryId);
+store.commit("setShowNetPrices", App.initialData.showNetPrices);
 store.commit("initConsents");
 
 ApiService.listen("LocalizationChanged",
