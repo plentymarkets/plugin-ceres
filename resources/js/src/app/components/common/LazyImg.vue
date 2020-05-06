@@ -61,7 +61,7 @@ export default {
          *  Determine appropriate image url to use as background source
          */
         backgroundSource() {
-            if(this.mimeType){
+            if(this.imageUrl && this.mimeType){
                 return this.supported ? this.imageUrl : this.fallbackUrl;
             } else {
                 return this.imageUrl || this.fallbackUrl;
