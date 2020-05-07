@@ -379,7 +379,11 @@ __webpack_require__.r(__webpack_exports__);
      *  Determine appropriate image url to use as background source
      */
     backgroundSource: function backgroundSource() {
-      return this.supported ? this.imageUrl : this.fallbackUrl;
+      if (this.imageUrl && this.mimeType) {
+        return this.supported ? this.imageUrl : this.fallbackUrl;
+      } else {
+        return this.imageUrl || this.fallbackUrl;
+      }
     },
 
     /**
