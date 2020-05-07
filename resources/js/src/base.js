@@ -11,55 +11,9 @@ import "custom-event-polyfill";
 
 import Vue from "vue";
 import Vuex from "vuex";
+import mount from "./mount";
 
-const mount = Vue.prototype.$mount;
-
-let componentOverrides = null;
-
-function getComponentOverride(tagName)
-{
-    if (isNullOrUndefined(componentOverrides))
-    {
-        componentOverrides = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"))
-            .reduce(
-                (obj, el) =>
-                {
-                    return {
-                        ...obj,
-                        [el.dataset.component]: el
-                    };
-                },
-                {}
-            );
-    }
-
-    return (componentOverrides && componentOverrides[tagName]) ? componentOverrides[tagName].innerHTML : null;
-}
-
-Vue.prototype.$mount =
-    function(el, hydrating)
-    {
-        let compHtml = null;
-        const templateOverride = this.$props.templateOverride;
-
-        if (this.$props.templateOverride)
-        {
-            compHtml = document.querySelector(templateOverride).innerHTML;
-        }
-        else
-        {
-            compHtml = getComponentOverride(this.$options._componentTag);
-        }
-
-        if (compHtml)
-        {
-            const renderFunctions = Vue.compile(compHtml, { delimiters: Vue.options.delimiters });
-
-            Object.assign(this.$options, renderFunctions);
-        }
-
-        return mount.call(this, el, hydrating);
-    };
+Vue.prototype.$mount = mount;
 
 window.Vue = Vue;
 window.Vuex = Vuex;
@@ -235,7 +189,6 @@ import "./app/mixins/template.mixin";
 import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
-import { isNullOrUndefined } from "./app/helper/utils";
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
