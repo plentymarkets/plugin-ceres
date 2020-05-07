@@ -14157,6 +14157,7 @@ header .widget {
                 }
                 .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
                     height: auto !important; // stylelint-disable-line declaration-no-important
+                    min-height: auto !important; // stylelint-disable-line declaration-no-important
                     padding-bottom: percentage($j / $i) !important; // stylelint-disable-line declaration-no-important
                 }
             }
