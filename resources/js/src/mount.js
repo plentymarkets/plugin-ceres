@@ -80,7 +80,7 @@ function replaceDelimiters(template)
 {
     let posStart = 0;
 
-    let offset = 0;
+    const offset = 0;
 
     let content;
 
