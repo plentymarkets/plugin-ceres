@@ -278,6 +278,8 @@
             store: window.ceresStore
         });
     }
+
+    {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
 </script>
 
 {{ get_filtered_tags() }}
