@@ -1,0 +1,14 @@
+{% extends getPartial('page-design') %}
+
+{% block PageBody %}
+    {% set shopBuilderTemplate = shop_builder_category_template(category.id, "content") %}
+    {% if shopBuilderTemplate | trim is not empty %}
+        <div class="container-max">
+            <div class="row">
+                <div class="col">
+                    {{ shopBuilderTemplate | raw }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
