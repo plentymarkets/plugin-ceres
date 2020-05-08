@@ -15,6 +15,13 @@ class TwigStyleScriptTagFilter extends Twig_Extension
 
     private static $scriptTags = [];
 
+    private static $ignoreLayoutContainer = [
+        'Ceres::Checkout.AfterScriptsLoaded',
+        'Ceres::SingleItem.AfterScriptsLoaded',
+        'Ceres::Checkout.Styles',
+        'Ceres::SingleItem.Styles'
+    ];
+
     /**
      * @var TwigFactory
      */
@@ -26,7 +33,6 @@ class TwigStyleScriptTagFilter extends Twig_Extension
      */
     public function __construct(TwigFactory $twig)
     {
-
         $this->twig = $twig;
     }
 
@@ -60,14 +66,19 @@ class TwigStyleScriptTagFilter extends Twig_Extension
     public function getFunctions(): array
     {
         return [
-            $this->twig->createSimpleFunction('get_filtered_tags', [$this, 'getFilteredTags'], ['is_safe' => array('html')])
+            $this->twig->createSimpleFunction(
+                'get_filtered_tags',
+                [$this, 'getFilteredTags'],
+                ['is_safe' => array('html')]
+            )
         ];
     }
 
     /**
      * @return string
      */
-    public function getFilteredTags(){
+    public function getFilteredTags()
+    {
         $tags = implode("\n", array_unique(self::$scriptTags));
         $tags .= implode("\n", array_unique(self::$styleTags));
         return $tags;
@@ -80,7 +91,10 @@ class TwigStyleScriptTagFilter extends Twig_Extension
      */
     public function filterTags($content, $containerName)
     {
-        if (strpos($containerName, 'Ceres::Template') === 0 || strpos($containerName, 'Ceres::Script') === 0) {
+        if (strpos($containerName, 'Ceres::Template') === 0 ||
+            strpos($containerName, 'Ceres::Script') === 0 ||
+            in_array($containerName, self::$ignoreLayoutContainer)) {
+
             return $content;
         }
 
@@ -91,8 +105,8 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             $doc->loadHTML($content);
             foreach ($doc->getElementsByTagName('style') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-                $cloned = $element->cloneNode(TRUE);
-                $newdoc->appendChild($newdoc->importNode($cloned, TRUE));
+                $cloned = $element->cloneNode(true);
+                $newdoc->appendChild($newdoc->importNode($cloned, true));
                 self::$styleTags[] = $newdoc->saveHTML();
             }
 
@@ -105,10 +119,9 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
             $doc->loadHTML($content);
             foreach ($doc->getElementsByTagName('script') as $element) {
-
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-                $cloned = $element->cloneNode(TRUE);
-                $newdoc->appendChild($newdoc->importNode($cloned, TRUE));
+                $cloned = $element->cloneNode(true);
+                $newdoc->appendChild($newdoc->importNode($cloned, true));
                 self::$scriptTags[] = $newdoc->saveHTML();
             }
 
