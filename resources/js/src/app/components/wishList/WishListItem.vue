@@ -39,6 +39,10 @@
                                     <div v-for="(property, index) in propertyGroup.properties" :key="index">
                                         <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
                                         <span>{{ property.names.name }}</span>
+                                        <span v-if="property.cast === 'file'">
+                                            <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
+                                        </span>
+                                        <span v-else v-html="property.values.value"></span>
                                     </div>
                                 </template>
                             </div>
