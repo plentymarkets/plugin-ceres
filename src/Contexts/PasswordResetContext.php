@@ -8,6 +8,7 @@ class PasswordResetContext extends GlobalContext implements ContextInterface
 {
     public $contactId;
     public $hash;
+    public $category;
 
     public function init($params)
     {
@@ -15,6 +16,6 @@ class PasswordResetContext extends GlobalContext implements ContextInterface
 
         $this->hash = $this->getParam( 'hash');
         $this->contactId = $this->getParam( 'contactId');
-
+        $this->category = $this->getParam('category');
     }
 }
