@@ -944,7 +944,7 @@ var render = function() {
                                     _vm._v(_vm._s(property.names.name))
                                   ]),
                                   _vm._v(" "),
-                                  property.cast == "file"
+                                  property.cast === "file"
                                     ? _c("span", [
                                         _c("a", {
                                           attrs: {
