@@ -98,6 +98,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -179,7 +180,7 @@ var render = function() {
                     staticClass: "autocomplete-suggestion",
                     class: _vm.paddingClasses,
                     style: _vm.paddingInlineStyles,
-                    attrs: { href: _vm.getTargetUrl(item) }
+                    attrs: { href: _vm.getTargetUrl(item), tabindex: "0" }
                   },
                   [
                     _vm.showImages

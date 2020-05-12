@@ -9235,6 +9235,7 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
+    outline: none;
 
     &:hover {
         background: $gray-300;
