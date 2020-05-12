@@ -92,7 +92,9 @@ export default {
                     }
                     else if (validation === "ref")
                     {
-                        NotificationService.error("Ceres::Template.resetPwRepeatNewPassword");
+                        NotificationService.error(
+                            this.$translate("Ceres::Template.resetPwRepeatNewPassword")
+                        );
                     }
                 });
         },
