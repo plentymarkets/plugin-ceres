@@ -1,5 +1,24 @@
 # Release Notes for Ceres
 
+## v5.0.2 (2020-05-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.1...5.0.2" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- We added the getter `currentItemVariation` and the variable `mainItemId` to the BaseItemModule in order to facilitate data access.
+
+### Fixed
+
+- Images of the background image widget were not loaded in the Safari browser. This has been fixed.
+- Under certain circumstances, the height of a widget with the setting **Aspect ratio** was calculated incorrectly if the widget was placed within a grid widget. This behaviour has been fixed.
+- Using the internal links **Return order** and **Shipment tracking** in the link widget could lead to an empty return page. This has been fixed.
+- For non-default online store languages, the step by step navigation did not add the language to the URL. This has been fixed.
+- Using the new layout containers for the checkout and the single item view could lead to JavaScript errors. This has been fixed.
+- When a customer accessed a page for changing their email address or password that had been created with the ShopBuilder, the customer was not automatically logged out. As a result, input fields were not visible. This has been fixed.
+- The values of variation properties were not displayed in the wishlist. This has been fixed.
+- Objects within separating characters in Vue templates could lead to errors during the interpretation of the templates. This has been fixed.
+- Due to an error, search suggestions were closed too quickly in the desktop view, so that the clicked search suggestion was not opened. This has been fixed.
+- Due to an error, a notification on the change password page was not output correctly. This has been changed.
+
 ## v5.0.1 (2020-04-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.0...5.0.1" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
