@@ -1,5 +1,24 @@
 # Release Notes für Ceres
 
+## v5.0.2 (2020-05-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.1...5.0.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Der Getter `currentItemVariation` und die Variable `mainItemId` wurden zum BaseItemModule hinzugefügt, um den Datenzugriff zu vereinfachen.
+
+### Behoben
+
+- Im Safari-Browser wurden Bilder des Hintergrundbild-Widgets nicht geladen. Dies wurde behoben.
+- Die Höhe von Widgets mit der Einstellung **Seitenverhältnis** wurde unter bestimmten Umständen falsch berechnet, wenn sie in einem Raster-Widget platziert wurden. Dieses Verhalten wurde behoben.
+- Das Verwenden der internen Links **Retoure aufgeben** und **Sendungsverfolgung** im Link-Widget konnte dazu führen, dass kein Inhalt auf der Retourenseite angezeigt wurde. Dies wurde behoben.
+- Bei Webshop-Sprachen, die nicht die Standardsprache waren, hat die Step-by-Step-Navigation nicht die Sprache in der URL gesetzt. Dies wurde behoben.
+- Es kam zu JavaScript-Problemen beim Verwenden der neuen Layout-Container für Checkout und Artikelansicht. Dies wurde behoben.
+- Beim Aufrufen einer über den ShopBuilder erstellten Seite zum Ändern der E-Mail-Adresse oder des Passworts wurde der Kunde nicht automatisch ausgeloggt, wodurch Eingabefelder nicht angezeigt wurden. Dies wurde behoben.
+- Die Werte von Varianteneigenschaften wurden nicht in der Wunschliste angezeigt. Dies wurde behoben.
+- Objekte innerhalb der Trennzeichen in Vue-Templates führten zu Fehlern beim Interpretieren der Templates. Dies wurde behoben.
+- Durch einen Fehler wurden Suchvorschläge in der Desktop-Ansicht zu früh geschlossen, sodass angeklickte Suchvorschläge nicht geöffnet wurden. Dies wurde behoben.
+- Durch einen Fehler wurde ein Warnhinweis auf der "Passwort ändern"-Seite nicht korrekt ausgegeben. Dies wurde behoben.
+
 ## v5.0.1 (2020-04-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.0...5.0.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
