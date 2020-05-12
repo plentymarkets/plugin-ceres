@@ -8,7 +8,8 @@
                     :class="paddingClasses"
                     :style="paddingInlineStyles"
                     :key="index"
-                    :href="getTargetUrl(item)">
+                    :href="getTargetUrl(item)"
+                    tabindex="0">
 
                     <div class="image flex-shrink-0 mr-3" v-if="showImages">
                         <img v-if="item.image" :src="item.image">
