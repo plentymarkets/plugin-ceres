@@ -202,8 +202,8 @@
         urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
         propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
         isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
-        bundleSetting: {{ webstoreConfig.dontSplitItemBundle }},
-        initialPleaseSelect: {{ webstoreConfig.attributeSelectDefaultOption }},
+        bundleSetting: {{ webstoreConfig.dontSplitItemBundle | default(1) }},
+        initialPleaseSelect: {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
         publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         isCheapestSorting: "{{ services.template.isCheapestSorting() }}",
         initialData: {
