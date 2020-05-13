@@ -169,7 +169,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
+                        {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId, "content", "defaultDropzone", [], true) %}
                         {% if shopBuilderShippingTemplate | trim is not empty %}
                             {{ shopBuilderShippingTemplate | raw }}
                         {% else %}
