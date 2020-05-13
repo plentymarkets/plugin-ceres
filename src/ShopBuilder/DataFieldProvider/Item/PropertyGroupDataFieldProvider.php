@@ -101,7 +101,7 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
         $propertyOptions->each(
             function ($propertyOption) use ($needle, &$hit) {
                 /** @var PropertyOption $propertyOption */
-                if ($propertyOption->propertyOptionValues->where('value', $needle) > 0) {
+                if ($propertyOption->propertyOptionValues->where('value', $needle)->count() > 0) {
                     $hit = true;
                     return false;
                 }
