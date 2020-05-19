@@ -246,7 +246,7 @@ class TemplateServiceProvider extends ServiceProvider
                 'position' => 100,
                 'description' => 'Ceres::Template.consentConsentDescription',
                 'provider' => 'Ceres::Template.headerCompanyName',
-                'lifespan' => 'Ceres::Template.consentLifespanSession',
+                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
                 'policyUrl' => function () {
                     /** @var ShopUrls $shopUrls */
                     $shopUrls = pluginApp(ShopUrls::class);
