@@ -68,7 +68,9 @@ class TemplateServiceProvider extends ServiceProvider
             'tpl.register' => ['Customer.Register', GlobalContext::class],
             'tpl.guest' => ['Customer.Guest', GlobalContext::class],
             'tpl.password-reset' => ['Customer.ResetPassword', PasswordResetContext::class],
+            'tpl.password-reset.category' => ['Customer.ResetPasswordCategory', PasswordResetContext::class],
             'tpl.change-mail' => ['Customer.ChangeMail', ChangeMailContext::class],
+            'tpl.change-mail.category' => ['Customer.ChangeMailCategory', ChangeMailContext::class],
             'tpl.contact' => ['Customer.Contact', GlobalContext::class],
             'tpl.search' => ['Category.Item.CategoryItem', ItemSearchContext::class],
             'tpl.wish-list' => ['WishList.WishListView', GlobalContext::class],
@@ -244,7 +246,7 @@ class TemplateServiceProvider extends ServiceProvider
                 'position' => 100,
                 'description' => 'Ceres::Template.consentConsentDescription',
                 'provider' => 'Ceres::Template.headerCompanyName',
-                'lifespan' => 'Ceres::Template.consentLifespanSession',
+                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
                 'policyUrl' => function () {
                     /** @var ShopUrls $shopUrls */
                     $shopUrls = pluginApp(ShopUrls::class);

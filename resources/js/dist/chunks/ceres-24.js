@@ -92,7 +92,7 @@ __webpack_require__.r(__webpack_exports__);
         if (validation === "password") {
           _services_NotificationService__WEBPACK_IMPORTED_MODULE_5__["default"].error(_this.$translate("Ceres::Template.resetPwInvalidPassword"));
         } else if (validation === "ref") {
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_5__["default"].error("Ceres::Template.resetPwRepeatNewPassword");
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_5__["default"].error(_this.$translate("Ceres::Template.resetPwRepeatNewPassword"));
         }
       });
     },

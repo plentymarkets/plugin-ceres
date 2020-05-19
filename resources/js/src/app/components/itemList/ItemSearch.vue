@@ -3,7 +3,7 @@
         <div class="position-relative">
             <div class="d-flex flex-grow-1 position-relative my-2">
                 <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" v-model="searchString" @input="onValueChanged($event.target.value)"
-                    @keyup.enter="search()" @focus="isSearchFocused = true" @blur="setIsSearchFocused(false)" :autofocus="isShopBuilder">
+                    @keyup.enter="search()" @focus="isSearchFocused = true" @blur="onBlurSearchField($event)" :autofocus="isShopBuilder">
 
                 <slot name="search-button">
                     <button class="search-submit px-3" type="submit" @click="search()">
@@ -137,13 +137,15 @@ export default {
             }
         },
 
-        // hide autocomplete after 100ms to make clicking on it possible
-        setIsSearchFocused(value)
+        // hide search, if targetElement of the blur event is not a child of components' root element
+        onBlurSearchField(event)
         {
-            setTimeout(() =>
+            const target = event.relatedTarget;
+
+            if (isNullOrUndefined(target) || !isNullOrUndefined(target) && !this.$el.contains(target))
             {
-                this.isSearchFocused = !!value;
-            }, 100);
+                this.isSearchFocused = false;
+            }
         }
     },
 
