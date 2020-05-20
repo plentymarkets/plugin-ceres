@@ -1,5 +1,9 @@
 .widget-background {
 
+    > div:first-child {
+        z-index: 0;
+    }
+
     > .container-max {
         padding-right: 0;
         padding-left: 0;
