@@ -66,7 +66,7 @@ trait ItemListContext
                 $searchResults = $itemSearchService->getResults($externalSearchFactories);
 
                 foreach ($resultVariationIds as $variationId) {
-                    if (!is_null($searchResults[$variationId])) {
+                    if (isset($searchResults[$variationId]['documents']) && count($searchResults[$variationId]['documents'])) {
                         $this->itemList[] = $searchResults[$variationId]['documents'][0];
                     }
                 }
