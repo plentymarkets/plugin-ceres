@@ -84,6 +84,12 @@
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary')  }} widget-proportional{% if aspectRatio != 'auto' %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if("imageUrl | trim is not empty") }}
+
+        {{ Twig.set("fallbackUrl", fallbackImagePath | json_encode ) }}
+        {{ Twig.if("fallbackUrl | trim is empty") }}
+            {{ Twig.set("fallbackUrl", "imageUrl") }}
+        {{ Twig.endif() }}
+
         {% if widget.settings.lazyLoading.mobile %}
             <lazy-img
                 picture-class="img-{{ imageSize }}"
@@ -92,11 +98,13 @@
                 alt="{{ Twig.print("imageAltText") }}"
                 {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </lazy-img>
+            <noscript v-if="false">
+                <img src="{{ Twig.print("fallbackUrl") }}"
+                    class="img-{{ imageSize }}"
+                    alt="{{ Twig.print("imageAltText") }}"
+                    {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
+            </noscript>
         {% else %}
-            {{ Twig.set("fallbackUrl", fallbackImagePath | json_encode ) }}
-            {{ Twig.if("fallbackUrl | trim is empty") }}
-                {{ Twig.set("fallbackUrl", "imageUrl") }}
-            {{ Twig.endif() }}
             <picture>
                 <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                 <img
