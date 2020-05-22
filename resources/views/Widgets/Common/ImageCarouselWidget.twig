@@ -141,7 +141,12 @@
                                 alt="{{ Twig.print("altText") }}"
                                 title="{{ Twig.print("imgTitle") }}">
                             </lazy-img>
-                            <noscript v-if="false"><img src="{{ Twig.print("fallbackUrl") }}"></noscript>
+                            <noscript v-if="false">
+                                <img src="{{ Twig.print("fallbackUrl") }}"
+                                    class="img-cover"
+                                    alt="{{ Twig.print("altText") }}"
+                                    title="{{ Twig.print("imgTitle") }}">
+                            </noscript>
                         {% else %}
                             <picture>
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>

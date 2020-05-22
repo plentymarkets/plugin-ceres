@@ -98,7 +98,12 @@
                 alt="{{ Twig.print("imageAltText") }}"
                 {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </lazy-img>
-            <noscript v-if="false"><img src="{{ Twig.print("fallbackUrl") }}"></noscript>
+            <noscript v-if="false">
+                <img src="{{ Twig.print("fallbackUrl") }}"
+                    class="img-{{ imageSize }}"
+                    alt="{{ Twig.print("imageAltText") }}"
+                    {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
+            </noscript>
         {% else %}
             <picture>
                 <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
