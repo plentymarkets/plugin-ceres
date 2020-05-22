@@ -128,6 +128,11 @@
                             {{ Twig.set("imgTitle", "slide.name") }}
                         {{ Twig.endif() }}
 
+                        {{ Twig.set("fallbackUrl", "slide.fallbackImageUrl") }}
+                        {{ Twig.if("fallbackUrl | trim is empty") }}
+                            {{ Twig.set("fallbackUrl", "slide.imageUrl") }}
+                        {{ Twig.endif() }}
+
                         {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img
                                 picture-class="img-cover"
@@ -136,11 +141,8 @@
                                 alt="{{ Twig.print("altText") }}"
                                 title="{{ Twig.print("imgTitle") }}">
                             </lazy-img>
+                            <noscript v-if="false"><img src="{{ Twig.print("fallbackUrl") }}"></noscript>
                         {% else %}
-                            {{ Twig.set("fallbackUrl", "slide.fallbackImageUrl") }}
-                            {{ Twig.if("fallbackUrl | trim is empty") }}
-                                {{ Twig.set("fallbackUrl", "slide.imageUrl") }}
-                            {{ Twig.endif() }}
                             <picture>
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                                 <img
