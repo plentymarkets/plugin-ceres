@@ -333,7 +333,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -34842,11 +34841,7 @@ var render = function() {
           _vm._v(" "),
           _vm.fallbackUrl
             ? _c("source", { attrs: { srcset: _vm.fallbackUrl } })
-            : _vm._e(),
-          _vm._v(" "),
-          _c("noscript", [
-            _c("img", { attrs: { src: _vm.fallbackUrl || _vm.imageUrl } })
-          ])
+            : _vm._e()
         ]
       )
     : _c(
