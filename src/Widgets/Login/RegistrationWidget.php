@@ -30,6 +30,19 @@ class RegistrationWidget extends BaseWidget
         $settings->createCustomClass();
         $settings->createAppearance();
 
+        $settings->createSelect("addressDefaultSalutation")
+            ->withName("Widget.addressDefaultSalutation")
+            ->withTooltip("Widget.addressDefaultSalutationTooltip")
+            ->withDefaultValue("male")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry("male", "Widget.addressDefaultSalutationValueMale")
+                    ->addEntry("female", "Widget.addressDefaultSalutationValueFemale")
+                    ->addEntry("diverse", "Widget.addressDefaultSalutationValueDiverse")
+                    ->addEntry("company", "Widget.addressDefaultSalutationValueCompany")
+                    ->toArray()
+            );
+
         $settings->createSelect("addressLayout")
             ->withName("Widget.addressLayout")
             ->withTooltip("Widget.addressLayoutTooltip")
