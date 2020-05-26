@@ -3,17 +3,17 @@
         <slot v-if="!isInitiallyLoaded"></slot>
         <div class="row">
             <div class="mb-3" :class="'col-' + columnDivider" v-for="category in categoryChildren">
-                <a :href="category.url" :title="category.details[0].metaTitle || category.details[0].name">
+                <a :href="getCategoryUrl(category.url)" :title="category.details[0].metaTitle || category.details[0].name">
                     <div class="nav-item border d-flex" :class="{ 'no-img': imageSource === 'none' }">
                         <div v-if="category.details[0][imageSource]" class="prop-1-1">
                             <img v-if="imageSource !== 'none'" :src="'/documents/' + category.details[0][imageSource]" :alt="category.details[0].metaTitle || category.details[0].name">
                         </div>
-                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance m-x-auto text-truncate">{{ category.details[0].name }}</span></div>
+                        <div class="nav-text d-flex align-center p-2"><span class="text-appearance mx-auto text-truncate">{{ category.details[0].name }}</span></div>
                     </div>
                 </a>
             </div>
 
-            <div class="mb-3 m-x-auto" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
+            <div class="mb-3 mx-auto" v-if="categoryChildren.length && categoryChildren.length < childrenCount">
                 <button type="button" class="btn btn-appearance px-4 py-3" @click="loadChunk()" :class="{ 'disabled': isWaiting }">
                     <span>{{ $translate("Ceres::Template.stepByStepNavigationShowMore") }}</span>
                     <icon icon="plus-circle" class="fa-fw my-1" class-loading="fa-repeat"></icon>
@@ -101,6 +101,14 @@ export default {
                         this.isInitiallyLoaded = true;
                     });
             }
+        },
+
+        getCategoryUrl(url)
+        {
+            const trailingSlash = url[0] === "/" ? "" : "/";
+            const prefix = App.urls.includeLanguage ? `/${ App.language }${ trailingSlash }` : "";
+
+            return prefix + url;
         }
     }
 }

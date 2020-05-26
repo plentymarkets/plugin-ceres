@@ -2,7 +2,6 @@
     <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass">
         <source :srcset="imageUrl" :type="mimeType">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
-        <noscript><img :src="fallbackUrl || imageUrl"></noscript>
     </picture>
     <div v-else :data-background-image="backgroundSource" :class="pictureClass">
         <slot></slot>
@@ -61,7 +60,11 @@ export default {
          *  Determine appropriate image url to use as background source
          */
         backgroundSource() {
-            return this.supported ? this.imageUrl : this.fallbackUrl;
+            if(this.imageUrl && this.mimeType){
+                return this.supported ? this.imageUrl : this.fallbackUrl;
+            } else {
+                return this.imageUrl || this.fallbackUrl;
+            }
         },
 
         /**

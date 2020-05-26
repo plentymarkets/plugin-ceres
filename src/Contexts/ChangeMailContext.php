@@ -8,8 +8,8 @@ class ChangeMailContext extends GlobalContext implements ContextInterface
 {
     public $contactId;
     public $hash;
-    public $oldMail;
     public $newMail;
+    public $category;
 
     public function init($params)
     {
@@ -18,6 +18,6 @@ class ChangeMailContext extends GlobalContext implements ContextInterface
         $this->hash = $this->getParam( 'hash');
         $this->contactId = $this->getParam( 'contactId');
         $this->newMail = $this->getParam('newMail');
-
+        $this->category = $this->getParam('category');
     }
 }

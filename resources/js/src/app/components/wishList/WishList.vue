@@ -9,8 +9,7 @@
             </wish-list-item>
         </transition-group>
 
-        <p class="h4 text-muted text-center my-5" v-if="!isLoading && !wishListItems[0]">{{ $translate("Ceres::Template.wishListNoItems") }}</p>
-
+        <p class="h4 text-muted text-center my-5" v-if="!isLoading && (!wishListItems || wishListItems.length === 0)">{{ $translate("Ceres::Template.wishListNoItems") }}</p>
         <loading-animation v-if="isLoading"></loading-animation>
     </div>
 </template>

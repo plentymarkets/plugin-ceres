@@ -173,12 +173,19 @@ $brand-info:                $cyan !default;
 $brand-warning:             $yellow !default;
 $brand-danger:              $red !default;
 
-$primary:                   $brand-primary !default;
-$secondary:                 $brand-secondary !default;
-$success:                   $brand-success !default;
-$info:                      $brand-info !default;
-$warning:                   $brand-warning !default;
-$danger:                    $brand-danger !default;
+@function check-color($color, $fallback) {
+    @if type-of($color) != color {
+        @return $fallback;
+    }
+    @return $color;
+}
+
+$primary:                   check-color($brand-primary, $blue) !default;
+$secondary:                 check-color($brand-secondary, $gray-600) !default;
+$success:                   check-color($brand-success, $green) !default;
+$info:                      check-color($brand-info, $cyan) !default;
+$warning:                   check-color($brand-warning, $yellow) !default;
+$danger:                    check-color($brand-danger, $red) !default;
 $light:                     $gray-100 !default;
 $dark:                      $gray-800 !default;
 
@@ -9170,7 +9177,7 @@ style2 {
         @each $i in 1, 2, 3 {
             @each $j in 1, 2, 3 {
                 .prop#{$infix}-#{$i}-#{$j} {
-                    padding-bottom: percentage($j / $i) // stylelint-disable-line declaration-no-important;
+                    padding-bottom: percentage($j / $i);
                 }
             }
         }
@@ -9228,6 +9235,7 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
+    outline: none;
 
     &:hover {
         background: $gray-300;
@@ -10865,8 +10873,17 @@ textarea.no-resize {
 }
 
 .basket-preview-footer {
-    .btn + .btn {
-        margin-top: 0;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+
+    > * {
+        -webkit-box-flex: 1;
+            -ms-flex: 1 0 40%;
+                flex: 1 0 40%;
+        margin-top: $spacer * .5;
+    }
+
+    > *:nth-child(2n) {
         margin-left: $spacer;
     }
 }
@@ -10933,6 +10950,14 @@ textarea.no-resize {
 
         .basket-preview-overlay {
             background-color: transparent;
+        }
+    }
+}
+
+.basket-open {
+    [data-header-offset] {
+        > * {
+            z-index: auto !important; // stylelint-disable-line declaration-no-important
         }
     }
 }
@@ -12522,6 +12547,11 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 }
 
 .widget-background {
+
+    > div:first-child {
+        z-index: 0;
+    }
+
     > .container-max {
         padding-right: 0;
         padding-left: 0;
@@ -12558,7 +12588,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         z-index: -1;
         height: 100% !important; // stylelint-disable-line declaration-no-important
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: center !important; // stylelint-disable-line declaration-no-important
     }
 
     .huge-font {
@@ -12656,8 +12686,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         padding-bottom: 0;
     }
 
-    > picture img,
-    > img {
+    img {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -14125,14 +14154,17 @@ header .widget {
     $infix: breakpoint-infix($breakpoint);
     $next: breakpoint-next($breakpoint);
 
-    @each $i in 1, 2, 3 {
-        @each $j in 1, 2, 3 {
-            .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional {
-                @extend .prop#{$infix}-#{$i}-#{$j};
-            }
-
-            .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
-                padding-bottom: percentage($j / $i) !important; // stylelint-disable-line declaration-no-important
+    @include media-breakpoint-up($breakpoint) {
+        @each $i in 1, 2, 3 {
+            @each $j in 1, 2, 3 {
+                .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional {
+                    padding-bottom: percentage($j / $i);
+                }
+                .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
+                    height: auto !important; // stylelint-disable-line declaration-no-important
+                    min-height: auto !important; // stylelint-disable-line declaration-no-important
+                    padding-bottom: percentage($j / $i) !important; // stylelint-disable-line declaration-no-important
+                }
             }
         }
     }

@@ -133,14 +133,17 @@ header .widget {
     $infix: breakpoint-infix($breakpoint);
     $next: breakpoint-next($breakpoint);
 
-    @each $i in 1, 2, 3 {
-        @each $j in 1, 2, 3 {
-            .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional {
-                @extend .prop#{$infix}-#{$i}-#{$j};
-            }
-
-            .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
-                padding-bottom: percentage($j / $i) !important; // stylelint-disable-line declaration-no-important
+    @include media-breakpoint-up($breakpoint) {
+        @each $i in 1, 2, 3 {
+            @each $j in 1, 2, 3 {
+                .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional {
+                    padding-bottom: percentage($j / $i);
+                }
+                .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
+                    height: auto !important; // stylelint-disable-line declaration-no-important
+                    min-height: auto !important; // stylelint-disable-line declaration-no-important
+                    padding-bottom: percentage($j / $i) !important; // stylelint-disable-line declaration-no-important
+                }
             }
         }
     }

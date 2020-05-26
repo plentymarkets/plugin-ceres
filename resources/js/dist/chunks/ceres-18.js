@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[18],{
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13,23 +13,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.timers */ "./node_modules/core-js/modules/web.timers.js");
+/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
@@ -128,120 +125,75 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
-
-
-var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    defaultTimeToClose: {
-      type: Number,
-      default: 15
+    showNetPrices: {
+      type: Boolean,
+      default: false
     }
   },
-  data: function data() {
-    return {
-      price: 0,
-      basketItem: null,
-      countAdditionalBasketItems: 0
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    if (App.config.basket.addItemToBasketConfirm === "overlay") {
-      ApiService.listen("AfterBasketItemUpdate", function (data) {
-        var updatedBasketItem = data.basketItems[0];
-
-        if (!_this.isBasketItemQuantityUpdate) {
-          var basketItem = _this.basketItems.find(function (item) {
-            return item.id === updatedBasketItem.id;
-          }) || {};
-
-          _this.showItem(basketItem);
-        }
-      });
-      ApiService.listen("AfterBasketItemAdd", function (data) {
-        _this.showItem(data.basketItems[0], data.basketItems.length - 1);
-      });
+  computed: _objectSpread({
+    hover: function hover() {
+      return App.config.basket.previewType === 'hover';
+    },
+    showShippingCountrySelect: function showShippingCountrySelect() {
+      return App.config.basket.showShippingCountrySelect;
     }
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapState"])({
+    basket: function basket(state) {
+      return state.basket.data;
+    },
     basketItems: function basketItems(state) {
       return state.basket.items;
+    },
+    basketNotifications: function basketNotifications(state) {
+      return state.basket.basketNotifications;
     },
     isBasketItemQuantityUpdate: function isBasketItemQuantityUpdate(state) {
       return state.basket.isBasketItemQuantityUpdate;
     }
-  }), {
-    isLastBasketEntrySet: function isLastBasketEntrySet() {
-      return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isNullOrUndefined"])(this.basketItem);
-    },
-    variation: function variation() {
-      if (this.basketItem) {
-        return this.basketItem.variation ? this.basketItem.variation.data : null;
-      }
+  })),
 
-      return null;
-    },
-    itemName: function itemName() {
-      if (this.isLastBasketEntrySet) {
-        return this.$options.filters.itemName(this.variation);
-      }
+  /**
+   * Bind to basket and bind the basket items
+   */
+  mounted: function mounted() {
+    var _this = this;
 
-      return "";
-    },
-    imageUrl: function imageUrl() {
-      if (this.isLastBasketEntrySet) {
-        var images = this.$options.filters.itemImages(this.variation.images, "urlPreview");
-        return this.$options.filters.itemImage(images);
-      }
-
-      return "";
-    },
-    imageAlternativeText: function imageAlternativeText() {
-      if (this.isLastBasketEntrySet) {
-        var images = this.$options.filters.itemImages(this.variation.images, "urlPreview");
-        return this.$options.filters.itemImageAlternativeText(images);
-      }
-
-      return "";
-    },
-    urls: function urls() {
-      return {
-        basket: App.urls.basket,
-        checkout: App.urls.checkout
-      };
-    },
-    shownOrderProperties: function shownOrderProperties() {
-      var _this2 = this;
-
-      return this.basketItem.basketItemOrderParams.filter(function (property) {
-        return !!_this2.variation.properties.find(function (prop) {
-          return prop.propertyId == property.propertyId;
-        });
+    if (App.config.basket.addItemToBasketConfirm === "preview") {
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_8__["default"].listen("AfterBasketItemAdd", function (data) {
+        _this.show();
+      });
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_8__["default"].listen("AfterBasketItemUpdate", function (data) {
+        if (!_this.isBasketItemQuantityUpdate) {
+          _this.show();
+        }
       });
     }
-  }),
+  },
   methods: {
-    showItem: function showItem(basketItem, countAdditionalBasketItems) {
-      this.basketItem = basketItem;
-      this.countAdditionalBasketItems = countAdditionalBasketItems;
-      this.price = basketItem.price;
-      ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).setTimeout(this.defaultTimeToClose * 1000).show();
+    show: function show() {
+      setTimeout(function () {
+        document.body.classList.add("basket-open");
+      }, 1);
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -253,293 +205,300 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "add-item-to-basket-overlay" } }, [
-    _c("div", { staticClass: "modal fade" }, [
-      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
-        _vm.basketItem
-          ? _c(
-              "div",
-              { staticClass: "modal-content" },
+  return _c(
+    "div",
+    {
+      staticClass: "basket-preview-wrapper h-100",
+      class: {
+        empty: !_vm.basketItems.length,
+        "open-hover": _vm.hover,
+        "open-right": !_vm.hover
+      }
+    },
+    [
+      _c("div", { staticClass: "position-relative h-100" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "basket-preview d-flex flex-column flex-nowrap bg-white shadow w-100"
+          },
+          [
+            _c(
+              "header",
+              { staticClass: "basket-preview-header border-bottom p-3" },
               [
-                _c("div", { staticClass: "modal-header" }, [
-                  _c("div", { staticClass: "modal-title h5" }, [
-                    _vm._v(
-                      _vm._s(_vm.$translate("Ceres::Template.singleItemAdded"))
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._m(1)
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c("div", { staticClass: "row is-table-row" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "col-md-4",
-                        staticStyle: { "min-height": "80px" }
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid mx-auto",
-                          staticStyle: { "max-height": "140px" },
-                          attrs: {
-                            src: _vm.imageUrl,
-                            alt: _vm.imageAlternativeText || _vm.itemName,
-                            title: _vm.itemName
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-8" },
-                      [
-                        _c("p", [
-                          _c("strong", [_vm._v(_vm._s(_vm.itemName))]),
-                          _vm._v(" "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _vm.countAdditionalBasketItems > 0
-                            ? _c("span", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.basketItemOverlayAdditionalCount",
-                                      { count: _vm.countAdditionalBasketItems }
-                                    )
-                                  )
-                                )
-                              ])
-                            : _vm._e()
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "small" }, [
-                          _c("strong", [
-                            _c("span", { staticClass: "text-muted" }, [
-                              _vm._v(_vm._s(_vm.basketItem.quantity) + " x ")
-                            ]),
-                            _vm._v(" "),
-                            _c("span", [
-                              _vm._v(_vm._s(_vm._f("currency")(_vm.price)))
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.variation.attributes, function(attribute) {
-                          return _c("p", { staticClass: "small" }, [
-                            _c("strong", [
-                              _vm._v(_vm._s(attribute.attribute.names.name))
-                            ]),
-                            _vm._v(":\n                                "),
-                            _c("span", [
-                              _vm._v(_vm._s(attribute.value.names.name))
-                            ])
-                          ])
-                        }),
-                        _vm._v(" "),
-                        _vm.shownOrderProperties.length
-                          ? _c("div", { staticClass: "small" }, [
-                              _c(
-                                "div",
-                                { staticClass: "font-weight-bold my-1" },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemAdditionalOptions"
-                                      )
-                                    ) + ":"
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "ml-0 pl-3" },
-                                _vm._l(_vm.shownOrderProperties, function(
-                                  property
-                                ) {
-                                  return _c(
-                                    "li",
-                                    { key: property.propertyId },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "d-block text-truncate"
-                                        },
-                                        [
-                                          _c(
-                                            "strong",
-                                            {
-                                              class: {
-                                                colon: property.type.length > 0
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                _vm._s(property.name) +
-                                                  " (" +
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemIncludeAbbr"
-                                                    )
-                                                  ) +
-                                                  " " +
-                                                  _vm._s(
-                                                    _vm._f("currency")(
-                                                      _vm._f(
-                                                        "propertySurcharge"
-                                                      )(
-                                                        _vm.basketItem.variation
-                                                          .data.properties,
-                                                        property.propertyId
-                                                      )
-                                                    )
-                                                  ) +
-                                                  ")"
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            [
-                                              _c("order-property-value", {
-                                                attrs: { property: property }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                }),
-                                0
-                              )
-                            ])
-                          : _vm._e()
-                      ],
-                      2
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "a",
-                    {
-                      directives: [
-                        {
-                          name: "waiting-animation-infinite",
-                          rawName: "v-waiting-animation-infinite"
-                        }
-                      ],
-                      staticClass: "btn btn-outline-primary btn-medium mr-2",
-                      attrs: { href: _vm.urls.basket, rel: "nofollow" }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-shopping-cart",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.singleItemBasket")
-                          ) +
-                          "\n                    "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      directives: [
-                        {
-                          name: "waiting-animation-infinite",
-                          rawName: "v-waiting-animation-infinite"
-                        }
-                      ],
-                      staticClass: "btn btn-primary btn-medium",
-                      attrs: { href: _vm.urls.checkout, rel: "nofollow" }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-arrow-right",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.singleItemCheckout")
-                          ) +
-                          "\n                    "
-                      )
-                    ]
+                _c("span", { staticClass: "h3 mb-0" }, [
+                  _vm._v(
+                    _vm._s(_vm.$translate("Ceres::Template.basketPreview"))
                   )
                 ]),
                 _vm._v(" "),
-                _vm._t("extendOverlayButtons")
+                _c(
+                  "button",
+                  {
+                    directives: [
+                      {
+                        name: "toggle-basket-preview",
+                        rawName: "v-toggle-basket-preview"
+                      }
+                    ],
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm.basketNotifications.length > 0
+              ? _c(
+                  "div",
+                  _vm._l(_vm.basketNotifications, function(notification) {
+                    return _c(
+                      "div",
+                      {
+                        key: notification.id,
+                        staticClass: "w-100 alert alert-danger"
+                      },
+                      [_c("div", [_vm._v(_vm._s(notification.message))])]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "basket-preview-content d-flex flex-fill" },
+              [
+                _c("basket-list", {
+                  staticClass:
+                    "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3",
+                  attrs: { "is-preview": true },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "before-basket-item",
+                        fn: function() {
+                          return [_vm._t("before-basket-item")]
+                        },
+                        proxy: true
+                      },
+                      {
+                        key: "after-basket-item",
+                        fn: function() {
+                          return [_vm._t("after-basket-item")]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "totals d-flex flex-nowrap flex-column px-3 pt-3"
+                  },
+                  [
+                    _vm.showShippingCountrySelect
+                      ? _c("shipping-country-select", {
+                          attrs: {
+                            "basket-select": true,
+                            "open-basket-preview": true
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _vm._t("before-basket-totals"),
+                    _vm._v(" "),
+                    _c("basket-totals", {
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "before-item-sum",
+                            fn: function() {
+                              return [_vm._t("before-item-sum")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-item-sum",
+                            fn: function() {
+                              return [_vm._t("after-item-sum")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "before-shipping-costs",
+                            fn: function() {
+                              return [_vm._t("before-shipping-costs")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-shipping-costs",
+                            fn: function() {
+                              return [_vm._t("after-shipping-costs")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "before-total-sum",
+                            fn: function() {
+                              return [_vm._t("before-total-sum")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "before-vat",
+                            fn: function() {
+                              return [_vm._t("before-vat")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-vat",
+                            fn: function() {
+                              return [_vm._t("after-vat")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "after-total-sum",
+                            fn: function() {
+                              return [_vm._t("after-total-sum")]
+                            },
+                            proxy: true
+                          }
+                        ],
+                        null,
+                        true
+                      )
+                    }),
+                    _vm._v(" "),
+                    _vm._t("after-basket-totals"),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "basket-preview-footer d-flex pb-3" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "waiting-animation-infinite",
+                                rawName: "v-waiting-animation-infinite"
+                              }
+                            ],
+                            staticClass: "btn btn-outline-primary btn-block",
+                            attrs: {
+                              href: _vm.$ceres.urls.basket,
+                              rel: "nofollow",
+                              title: _vm.$translate("Ceres::Template.basket")
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fa fa-shopping-cart" }),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  _vm.$translate("Ceres::Template.basket")
+                                ) +
+                                "\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._t("before-checkout-button"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "waiting-animation-infinite",
+                                rawName: "v-waiting-animation-infinite"
+                              }
+                            ],
+                            staticClass: "btn btn-primary btn-block",
+                            attrs: {
+                              href: _vm.$ceres.urls.checkout,
+                              rel: "nofollow",
+                              title: _vm.$translate(
+                                "Ceres::Template.basketCheckout"
+                              )
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-arrow-right",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.basketCheckout"
+                                  )
+                                ) +
+                                "\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._t("after-checkout-button")
+                      ],
+                      2
+                    )
+                  ],
+                  2
+                )
               ],
-              2
+              1
             )
-          : _vm._e()
-      ])
-    ])
-  ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        directives: [
+          { name: "toggle-basket-preview", rawName: "v-toggle-basket-preview" }
+        ],
+        staticClass: "basket-preview-overlay"
+      })
+    ]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "text-muted ml-auto" }, [
-      _c("span", { staticClass: "timer" }),
-      _vm._v("s")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close ml-0 pl-1",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue":
-/*!***************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue ***!
-  \***************************************************************************/
+/***/ "./resources/js/src/app/components/basket/BasketPreview.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/BasketPreview.vue ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AddItemToBasketOverlay_vue_vue_type_template_id_71cf7942___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942& */ "./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942&");
-/* harmony import */ var _AddItemToBasketOverlay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddItemToBasketOverlay.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=script&lang=js&");
+/* harmony import */ var _BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BasketPreview.vue?vue&type=template&id=614a7aab& */ "./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab&");
+/* harmony import */ var _BasketPreview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BasketPreview.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -549,9 +508,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AddItemToBasketOverlay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AddItemToBasketOverlay_vue_vue_type_template_id_71cf7942___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AddItemToBasketOverlay_vue_vue_type_template_id_71cf7942___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _BasketPreview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -561,38 +520,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/basket/AddItemToBasketOverlay.vue"
+component.options.__file = "resources/js/src/app/components/basket/BasketPreview.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_AddItemToBasketOverlay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddItemToBasketOverlay.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_AddItemToBasketOverlay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BasketPreview.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942&":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942& ***!
-  \**********************************************************************************************************/
+/***/ "./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab& ***!
+  \*************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddItemToBasketOverlay_vue_vue_type_template_id_71cf7942___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddItemToBasketOverlay_vue_vue_type_template_id_71cf7942___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BasketPreview.vue?vue&type=template&id=614a7aab& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketPreview.vue?vue&type=template&id=614a7aab&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddItemToBasketOverlay_vue_vue_type_template_id_71cf7942___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketPreview_vue_vue_type_template_id_614a7aab___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

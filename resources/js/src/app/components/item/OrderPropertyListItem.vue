@@ -246,6 +246,13 @@ export default {
                     value = null;
                 }
             }
+            else if (this.inputType === "text")
+            {
+                if(value === "")
+                {
+                    value = null;
+                }
+            }
 
             this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
         },
@@ -352,7 +359,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

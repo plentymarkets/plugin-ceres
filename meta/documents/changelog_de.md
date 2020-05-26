@@ -1,11 +1,67 @@
 # Release Notes für Ceres
 
+## v5.0.2 (2020-05-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.1...5.0.2" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Der Getter `currentItemVariation` und die Variable `mainItemId` wurden zum BaseItemModule hinzugefügt, um den Datenzugriff zu vereinfachen.
+
+### Behoben
+
+- Im Safari-Browser wurden Bilder des Hintergrundbild-Widgets nicht geladen. Dies wurde behoben.
+- Die Höhe von Widgets mit der Einstellung **Seitenverhältnis** wurde unter bestimmten Umständen falsch berechnet, wenn sie in einem Raster-Widget platziert wurden. Dieses Verhalten wurde behoben.
+- Das Verwenden der internen Links **Retoure aufgeben** und **Sendungsverfolgung** im Link-Widget konnte dazu führen, dass kein Inhalt auf der Retourenseite angezeigt wurde. Dies wurde behoben.
+- Bei Webshop-Sprachen, die nicht die Standardsprache waren, hat die Step-by-Step-Navigation nicht die Sprache in der URL gesetzt. Dies wurde behoben.
+- Es kam zu JavaScript-Problemen beim Verwenden der neuen Layout-Container für Checkout und Artikelansicht. Dies wurde behoben.
+- Beim Aufrufen einer über den ShopBuilder erstellten Seite zum Ändern der E-Mail-Adresse oder des Passworts wurde der Kunde nicht automatisch ausgeloggt, wodurch Eingabefelder nicht angezeigt wurden. Dies wurde behoben.
+- Die Werte von Varianteneigenschaften wurden nicht in der Wunschliste angezeigt. Dies wurde behoben.
+- Objekte innerhalb der Trennzeichen in Vue-Templates führten zu Fehlern beim Interpretieren der Templates. Dies wurde behoben.
+- Durch einen Fehler wurden Suchvorschläge in der Desktop-Ansicht zu früh geschlossen, sodass angeklickte Suchvorschläge nicht geöffnet wurden. Dies wurde behoben.
+- Durch einen Fehler wurde ein Warnhinweis auf der "Passwort ändern"-Seite nicht korrekt ausgegeben. Dies wurde behoben.
+
+## v5.0.1 (2020-04-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.0...5.0.1" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Hinzugefügt
+
+- Die Einstellungen für Abstände wurden zum Widget Step-by-Step-Navigation hinzugefügt.
+
+### Geändert
+
+- Die Mengeneingabe auf der Artikeleinzelansicht wird nun deaktiviert, wenn der Artikel nicht verfügbar ist. Die Mengeneingabe ist ebenfalls so lange deaktiviert, bis notwendige Artikeldaten nachgeladen werden.
+- Das JavaScript für das Owl Carousel ist nun wieder im gesamten Webshop verfügbar. 
+
+### Behoben
+
+- Durch einen Fehler wurden Artikellisten vom Typ **Zuletzt angesehen** nicht dargestellt. Dies wurde behoben.
+- Bilderkarussells in Artikellisten wurden nicht korrekt angezeigt. Dies wurde behoben.
+- Der Wert der SCSS-Variable `$yiq-contrasted-threshold` wurde auf 186 zurückgesetzt.
+- Unter bestimmten Umständen waren Dialogfenster nicht bedienbar. Dies wurde behoben.
+- Bei leeren Wunschlisten wurde die Ladeanimation durchgängig angezeigt. Dies wurde behoben.
+- Es wurde ein fehlerhaftes Verhalten beim Variantenwechsel behoben. Wenn eine Variante gewechselt wird, für die bereits Bestellmerkmale ausgewählt wurden, werden diese Bestellmerkmale bei einem erneuten Wechsel zur ursprünglich gewählten Variante wieder automatisch ausgewählt. Dies gilt nicht für Bestellmerkmale des Typs **Datei**.
+- Bei der Einbindung mehrerer Google Maps-Widgets auf einer Seite wurde nur das erste Google Maps-Widget korrekt geladen. Dieses Verhalten wurde behoben.
+- Im Mein Konto-Bereich fehlten die Auswahlmöglichkeiten für das Versenden an Packstationen und Postfilialen. Dies wurde behoben.
+- Auf der Auftragsbestätigungsseite wurden bei Aufträgen mit eingelösten Aktionsgutscheinen teilweise falsche Werte berechnet. Dieses Verhalten wurde behoben.
+- Das Nachladen von Bildern funktionierte nicht im Internet Explorer 11. Dies wurde behoben.
+- In den Daten für Schema.org wurde ein fehlendes Anführungszeichen für den Eintrag "URL" ergänzt.
+- Durch fehlende Daten für die Schema.org Datenstruktur für Breadcrumbs kam es zu Fehlern bei SEO-Tools. Dies wurde behoben.
+- Wenn das Top Bar-Widget an unterster Stelle im Header platziert wurde, wurde die Warenkorbvorschau unter bestimmten Bedingungen von anderen Widgets überlagert. Dieses Verhalten wurde behoben.
+- Texte in der Step-by-Step-Navigation werden jetzt zentriert dargestellt.
+- Durch einen Fehler wurde die Step-by-Step-Navigation nicht auf der Artikeleinzelansicht angezeigt. Dies wurde behoben.
+- Ungültige Farbwerte in den Design-Einstellungen des ShopBuilders werden jetzt abgefangen und durch Standard-Farbwerte ersetzt.
+- Auf Retourenseiten, die nicht mit dem ShopBuilder erstellt wurden, konnten nicht eingeloggte Benutzer keine Retouren anlegen. Dieses Verhalten wurde behoben.
+- Im Retourenformular und in der Retourenhistorie wurden Namen von Bestellmerkmalen nicht korrekt angezeigt. Dieses Verhalten wurde behoben.
+- Elemente, die über die beiden Layout-Container "BasketPreview.BeforeCheckoutButton" und "BasketPreview.AfterCheckoutButton" eingebunden wurden, wurden zu klein dargestellt. Dies wurde behoben.
+
 ## v5.0.0 (2020-04-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/4.6.0...5.0.0" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
 - Themes und Plugins, die mit älteren Ceres-Versionen kompatibel waren, müssen ggf. aktualisiert werden. Weitere Informationen zum Aktualisieren von Themes und Plugins findest du in der <a href="https://developers.plentymarkets.com/dev-doc/ceres-5" target="_blank" rel="noopener"><b>Entwicklerdokumentation</b></a>.
-- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu bereitstellen** aktualisiert werden.
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 - Nutzer, die bisher die Kategorie **Startseite (veraltet) (Ceres)** im ShopBuilder verwendet haben, müssen eine neue Startseiten-Kategorie anlegen und verknüpfen. Vor dem Update auf Version 5.0 sollte eine Plugin-Set-Kopie gemacht werden, sodass Inhalte der Kategorie **Startseite (veraltet) (Ceres)** später aus dieser Plugin-Set-Kopie in die neu erstellte Startseiten-Kategorie des Ceres 5 Plugin-Sets dupliziert werden können. Andernfalls ist es nicht möglich, auf die bestehenden Startseiten-Inhalte zuzugreifen, ohne die Ceres-Version herabzusetzen.
 - Um die "Meinten Sie...?"-Suche nutzen zu können, sollten Nutzer einen neuen Inhalt für Suchergebnisse mithilfe der **Suchergebnisse-Vorlage** des ShopBuilders erstellen und verknüpfen.
 - In den Inhalten **Warenkorb**, **Checkout**, **Kontaktseite**, **Mein Konto**, **Bestellbestätigung**, **Retourenseite** und **Wunschliste** wurde der weiße Standard-Hintergrund entfernt. Für diese Inhalte sollten Nutzer jeweils ein weißes Hintergrundbild-Widget hinzufügen, um den vorherigen Stand abzubilden.
@@ -13,7 +69,7 @@
 ### Hinzugefügt
 
 - Diese Version unterstützt <a href="https://knowledge.plentymarkets.com/artikel/anwendungsfaelle/multipacks-pakete-sets#3000" target="_blank">Sets</a>. Das Widget **Bestandteile für Artikelsets** wurde zum ShopBuilder hinzugefügt. Dieses Widget dient dazu, Artikelset-Seiten über den ShopBuilder zu bearbeiten. Die Funktion wird als Beta-Version bereitgestellt.
-- Diese Version unterstützt <a href="https://knowledge.plentymarkets.com/auftraege/gutscheine" target="_blank">Verkaufsgutscheine</a>. Verkaufsgutscheine können auf der Bestellbestätigungsseite personalisiert und als PDF-Datei heruntergeladen werden.
+- Diese Version unterstützt <a href="https://knowledge.plentymarkets.com/auftraege/gutscheine" target="_blank">Mehrzweckgutscheine</a>. Mehrzweckgutscheine können auf der Bestellbestätigungsseite personalisiert und als PDF-Datei heruntergeladen werden.
 - Die drei Widgets **Suchvorschläge**, **Suchergebnisse: Kategorien** und **Suchergebnisse: Artikel** wurden zum ShopBuilder hinzugefügt. Diese können im Suchbereich des Top Bar-Widgets im Header platziert werden.
 - Die Schaltfläche für die Suche im Top Bar-Widget kann nun im ShopBuilder geklickt werden, um einen Bereich auszuklappen, in welchem Widgets platziert werden können.
 - Bei falsch geschriebenen Suchbegriffen wird nun eine zusätzliche Suche ausgeführt. Auf der Suchergebnisseite wird nun ein alternativer Suchbegriff unter "Meinten Sie...?" vorgeschlagen.

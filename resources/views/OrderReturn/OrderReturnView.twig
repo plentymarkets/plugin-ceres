@@ -36,7 +36,7 @@
 
             <hr>
 
-            <order-return :init-order-data="{{ orderData | json_encode }}" order-access-key="{{ request.get('orderAccessKey') }}"></order-return>
+            <order-return :init-order-data="{{ orderData | json_encode }}" order-access-key="{{ orderAccessKey }}"></order-return>
         </div>
     {% endif %}
 {% endblock %}

@@ -9,7 +9,8 @@ const state =
         isSetLoading: false,
         isAddToBasketLoading: 0,
         previewItemId: 0,
-        setComponentIds: []
+        setComponentIds: [],
+        mainItemId: null
     };
 
 const mutations =
@@ -43,6 +44,11 @@ const mutations =
         {
             state.setComponentIds = state.setComponentIds || [];
             state.setComponentIds.push(itemId);
+        },
+
+        setMainItemId(state, itemId)
+        {
+            state.mainItemId = itemId;
         }
     };
 
@@ -52,6 +58,7 @@ const actions =
         {
             // register a nested module for the main item
             dispatch("registerItem", variation.documents[0]);
+            commit("setMainItemId", variation.documents[0].data.item.id);
 
             // rest call for sets if set comps are set
             const setComponentIds = (variation.documents[0].data.setComponents || []).map(component => component.defaultVariationId);
@@ -128,6 +135,11 @@ const getters =
             }
 
             return allVariationSelected;
+        },
+
+        currentItemVariation(state, getters)
+        {
+            return getters[`${state.mainItemId}/currentItemVariation`];
         }
     };
 
