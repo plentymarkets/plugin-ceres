@@ -23,8 +23,8 @@ const mutations =
             state.variation = variation;
             if (variation.documents.length > 0 && variation.documents[0].data.variation)
             {
-                // Value needs to be >= 1 to ensure correct price calculations
-                state.variationOrderQuantity = Math.max(variation.documents[0].data.variation.minimumOrderQuantity || 1, 1);
+                // Value needs to be >= 0 to ensure correct price calculations
+                state.variationOrderQuantity = Math.max(variation.documents[0].data.variation.minimumOrderQuantity || 1, 0);
             }
 
             state.variationCache[variation.documents[0].id] = variation;
