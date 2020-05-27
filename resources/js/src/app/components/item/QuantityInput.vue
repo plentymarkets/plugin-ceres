@@ -298,7 +298,7 @@ export default {
 
         fetchQuantityFromBasket()
         {
-            if (!isNullOrUndefined(this.min) && this.variationBasketQuantity >= this.min)
+            if (!isNullOrUndefined(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0)
             {
                 // minimum quantity already in basket
                 this.compMin = this.compInterval;
