@@ -46,3 +46,7 @@
 html.ie .widget-grid .widget-inner-stacked { // stylelint-disable-line selector-no-qualifying-type
     display: block;
 }
+
+html.safari .widget-grid .widget-inner-stacked .widget-inner { // stylelint-disable-line selector-no-qualifying-type
+    flex-basis: auto !important; // stylelint-disable-line declaration-no-important
+}
