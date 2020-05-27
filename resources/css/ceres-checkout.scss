@@ -10170,7 +10170,7 @@ $border-width: 1px;
 
     & > textarea {
         overflow-y: auto;
-        white-space: normal;
+        white-space: pre-wrap;
     }
 
     & > label {
