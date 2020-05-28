@@ -79,6 +79,11 @@ const actions =
                             const itemId      = component.data.item.id;
                             const variationId = component.data.variation.id;
 
+                            const setComponentMeta = variation.documents[0].data.setComponents.find((setComponent) => setComponent.itemId === itemId );
+
+                            component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
+                            component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
+
                             // register a module for every set item
                             dispatch("registerItem", component);
                             commit(`${itemId}/setPleaseSelectVariationId`, variationId);

@@ -120,6 +120,18 @@ const actions =
                         .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem", setPriceOnly: rootState.items.isItemSet })
                         .done(response =>
                         {
+                            // check if set component and replace relevant data
+                            if (rootState.items.itemSetId > 0)
+                            {
+                                const itemSetId = rootState.items.itemSetId;
+                                const setComponentMeta = rootState.items[itemSetId].setComponents.find(
+                                    (setComponent) => setComponent.itemId === response.documents[0].data.item.id
+                                );
+
+                                response.documents[0].data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
+                                response.documents[0].data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
+                            }
+
                             // store received variation data for later reuse
                             commit("setVariation", response);
                             commit("setIsAddToBasketLoading", 0, { root: true });
