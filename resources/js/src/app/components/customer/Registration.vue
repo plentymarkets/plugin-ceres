@@ -112,7 +112,8 @@ export default {
         template: String,
         backlink: String,
         shownFields: Object,
-        requiredFields: Object
+        requiredFields: Object,
+        defaultSalutation: { type: String, default: App.config.addresses.defaultSalutation }
     },
 
     data()
@@ -131,7 +132,6 @@ export default {
             privacyPolicyShowError: false,
             enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
             googleRecaptchaApiKey: App.config.global.googleRecaptchaApiKey,
-            defaultSalutation: App.config.addresses.defaultSalutation,
             modalShown: false,
             honeypot: ""
         };

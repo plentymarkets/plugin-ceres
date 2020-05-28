@@ -7,6 +7,8 @@
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 {% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
+{% set addressDefaultSalutation = widget.settings.addressDefaultSalutation.mobile | default("male") %}
+
 
 {% set shownFields = {
     "de": widget.settings.shownFieldsDe.mobile | default(["billing_address.name1", "billing_address.salutation"]),
@@ -29,7 +31,8 @@
             backlink="{{ Twig.print("request.get('backlink') | url_encode") }}"
             :shown-fields="{{ shownFields | json_encode }}"
             :button-size="{{ buttonSize | json_encode }}"
-            :required-fields="{{ requiredFields | json_encode }}">
+            :required-fields="{{ requiredFields | json_encode }}"
+            default-salutation="{{ addressDefaultSalutation }}">
             <template #extend-overlay-buttons>
                 {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::RegistrationOverlay.ExtendOverlayButtons"])) }}
             </template>
