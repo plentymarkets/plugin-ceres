@@ -23,8 +23,15 @@ const mutations =
             state.variation = variation;
             if (variation.documents.length > 0 && variation.documents[0].data.variation)
             {
-                // Value needs to be >= 0 to ensure correct price calculations
-                state.variationOrderQuantity = Math.max(variation.documents[0].data.variation.minimumOrderQuantity || 1, 0);
+                // Value needs to be > 0 to ensure correct price calculations
+                if ((variation.documents[0].data.variation.minimumOrderQuantity || 1 ) <= 0)
+                {
+                    state.variationOrderQuantity = variation.documents[0].data.variation.intervalOrderQuantity || 1;
+                }
+                else
+                {
+                    state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity;
+                }
             }
 
             state.variationCache[variation.documents[0].id] = variation;
