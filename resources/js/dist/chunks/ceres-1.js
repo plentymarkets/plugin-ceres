@@ -1576,7 +1576,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     template: String,
     backlink: String,
     shownFields: Object,
-    requiredFields: Object
+    requiredFields: Object,
+    defaultSalutation: {
+      type: String,
+      default: App.config.addresses.defaultSalutation
+    }
   },
   data: function data() {
     return {
@@ -1593,7 +1597,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       privacyPolicyShowError: false,
       enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
       googleRecaptchaApiKey: App.config.global.googleRecaptchaApiKey,
-      defaultSalutation: App.config.addresses.defaultSalutation,
       modalShown: false,
       honeypot: ""
     };
