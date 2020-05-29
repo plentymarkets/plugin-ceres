@@ -90,6 +90,8 @@ export default {
                 .filter(word => word.length)
                 .join("|");
 
+            label = (label || "").toString();
+
             return label
                 .replace(new RegExp(search, "ig"), match =>
                 {
