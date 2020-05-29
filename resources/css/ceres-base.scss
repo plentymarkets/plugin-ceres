@@ -11259,6 +11259,9 @@ textarea.no-resize {
     @include border-radius(0 $border-radius $border-radius 0);
 
     .qty-btn {
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center; /* FF */
         background-color: $qty-box-bg;
         border: 1px solid $qty-box-border;
         -webkit-box-shadow: none;
