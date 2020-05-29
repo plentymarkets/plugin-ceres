@@ -25,6 +25,7 @@
     @include border-radius(0 $border-radius $border-radius 0);
 
     .qty-btn {
+        align-items: center; /* FF */
         background-color: $qty-box-bg;
         border: 1px solid $qty-box-border;
         box-shadow: none;
