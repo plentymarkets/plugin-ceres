@@ -23,7 +23,9 @@
             <sup>*</sup>
         </span>
 
-        <div class="base-price text-muted my-3" v-if="currentVariation.unit">
+        <div class="base-price text-muted my-3"
+            v-if="currentVariation.unit"
+            :class="{ 'is-single-c62': currentVariation.unit && currentVariation.unit.content === 1 && currentVariation.unit.unitOfMeasurement === 'C62' }">
             <div>
                 {{ $translate("Ceres::Template.singleItemContent") }}
                 <span>{{ currentVariation.unit.content | numberFormat }} </span>
