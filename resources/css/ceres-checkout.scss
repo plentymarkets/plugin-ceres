@@ -11562,7 +11562,7 @@ html.crios {
     .filter-collapse {
         position: absolute;
         top: 100%;
-        z-index: $zindex-1;
+        z-index: $zindex-3 - 5;
         width: 100%;
         padding-right: 15px;
         margin-left: -15px;
