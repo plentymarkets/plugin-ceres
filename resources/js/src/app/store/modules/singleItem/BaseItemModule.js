@@ -81,6 +81,11 @@ const actions =
 
                             const setComponentMeta = variation.documents[0].data.setComponents.find((setComponent) => setComponent.itemId === itemId );
 
+                            if (setComponentMeta.minimumOrderQuantity <= 0)
+                            {
+                                setComponentMeta.minimumOrderQuantity = 1;
+                            }
+
                             component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
                             component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
 
