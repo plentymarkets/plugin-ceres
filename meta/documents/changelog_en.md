@@ -6,7 +6,7 @@
 
 - The setting **Preselected salutation** has been added to the registration widget.
 - The performance of the ShopBuilder has been optimised for a larger number of properties.
-- The enveloping element for the unit of an item on the single item view now uses the CSS class `.is-single-c62` if the unit is "1 piece".
+- The enveloping element for the unit of an item on the single item view now uses the CSS class `.is-single-piece` if the unit is "1 piece".
 
 ### Fixed
 
