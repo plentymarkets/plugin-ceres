@@ -22,6 +22,8 @@ const mutations =
         {
             variation = normalizeOrderQuantities(variation);
 
+            state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity;
+
             state.variation = variation;
             state.variationCache[variation.documents[0].id] = variation;
 
@@ -354,8 +356,6 @@ function normalizeOrderQuantities(variation)
         {
             variation.documents[0].data.variation.minimumOrderQuantity = 1;
         }
-
-        state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity;
     }
 
     return variation;
