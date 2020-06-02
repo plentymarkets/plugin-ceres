@@ -13311,6 +13311,11 @@ html.ie .widget-grid .widget-inner-stacked { // stylelint-disable-line selector-
     display: block;
 }
 
+html.safari .widget-grid .widget-inner-stacked .widget-inner { // stylelint-disable-line selector-no-qualifying-type
+    -ms-flex-preferred-size: auto !important;
+        flex-basis: auto !important; // stylelint-disable-line declaration-no-important
+}
+
 .nav-link.text-appearance.active {
     color: $nav-tabs-link-active-color !important; // stylelint-disable-line declaration-no-important
 }
