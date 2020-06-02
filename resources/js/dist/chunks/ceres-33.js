@@ -51,6 +51,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
   props: {
@@ -157,49 +160,61 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm.currentVariation.unit
-      ? _c("div", { staticClass: "base-price text-muted my-3" }, [
-          _c("div", [
-            _vm._v(
-              "\n            " +
-                _vm._s(_vm.$translate("Ceres::Template.singleItemContent")) +
-                "\n            "
-            ),
-            _c("span", [
+      ? _c(
+          "div",
+          {
+            staticClass: "base-price text-muted my-3",
+            class: {
+              "is-single-piece":
+                _vm.currentVariation.unit &&
+                _vm.currentVariation.unit.content === 1 &&
+                _vm.currentVariation.unit.unitOfMeasurement === "C62"
+            }
+          },
+          [
+            _c("div", [
               _vm._v(
-                _vm._s(
-                  _vm._f("numberFormat")(_vm.currentVariation.unit.content)
-                ) + " "
-              )
+                "\n            " +
+                  _vm._s(_vm.$translate("Ceres::Template.singleItemContent")) +
+                  "\n            "
+              ),
+              _c("span", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("numberFormat")(_vm.currentVariation.unit.content)
+                  ) + " "
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.currentVariation.unit.names.name))])
             ]),
             _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(_vm.currentVariation.unit.names.name))])
-          ]),
-          _vm._v(" "),
-          _vm.currentVariation.variation.mayShowUnitPrice
-            ? _c("div", [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(
-                      _vm.$translate("Ceres::Template.singleItemUnitPrice")
-                    ) +
-                    "\n            "
-                ),
-                _c("span", { staticClass: "base-price-value" }, [
+            _vm.currentVariation.variation.mayShowUnitPrice
+              ? _c("div", [
                   _vm._v(
-                    "\n                " +
+                    "\n            " +
                       _vm._s(
-                        _vm._f("specialOffer")(
-                          _vm.variationGraduatedPrice.basePrice,
-                          _vm.currentVariation.prices,
-                          "basePrice"
-                        )
+                        _vm.$translate("Ceres::Template.singleItemUnitPrice")
                       ) +
                       "\n            "
-                  )
+                  ),
+                  _c("span", { staticClass: "base-price-value" }, [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(
+                          _vm._f("specialOffer")(
+                            _vm.variationGraduatedPrice.basePrice,
+                            _vm.currentVariation.prices,
+                            "basePrice"
+                          )
+                        ) +
+                        "\n            "
+                    )
+                  ])
                 ])
-              ])
-            : _vm._e()
-        ])
+              : _vm._e()
+          ]
+        )
       : _vm._e()
   ])
 }
