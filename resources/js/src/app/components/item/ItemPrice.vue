@@ -23,7 +23,7 @@
             <sup>*</sup>
         </span>
 
-        {# class .is-single-piece is added for customers to hide the unit if it is C62 #}
+        <!-- class .is-single-piece is added for customers to hide the unit if it is C62 -->
         <div class="base-price text-muted my-3"
             v-if="currentVariation.unit"
             :class="{ 'is-single-piece': currentVariation.unit && currentVariation.unit.content === 1 && currentVariation.unit.unitOfMeasurement === 'C62' }">
