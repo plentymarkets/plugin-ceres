@@ -6,7 +6,7 @@
 
 - Die Einstellung **Vorausgewählte Anrede** wurde dem Registrierungs-Widget hinzugefügt.
 - Die Performance des ShopBuilders wurde für eine größere Anzahl an Eigenschaften optimiert.
-- Auf dem umschließenden Element der Artikeleinheit auf der Artikeleinzelansicht wird nun die CSS-Klasse `.is-single-c62` verwendet, wenn es sich um die Einheit "1 Stück" handelt.
+- Auf dem umschließenden Element der Artikeleinheit auf der Artikeleinzelansicht wird nun die CSS-Klasse `.is-single-piece` verwendet, wenn es sich um die Einheit "1 Stück" handelt.
 
 ### Behoben
 
