@@ -102,35 +102,52 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         if (strpos($content, '<style') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content);
+            $doc->loadHTML($content, LIBXML_HTML_NOIMPLIED);
+            $stylesToRemove = [];
+
             foreach ($doc->getElementsByTagName('style') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
                 $cloned = $element->cloneNode(true);
                 $newdoc->appendChild($newdoc->importNode($cloned, true));
                 self::$styleTags[] = $newdoc->saveHTML();
+
+                $stylesToRemove[] = $element;
             }
 
-            $content = preg_replace("/<style.*?>.*?<\\/style>/s", "", $content);
+            foreach ($stylesToRemove as $item)
+            {
+                $item->parentNode->removeChild($item);
+            }
+
+            $content = $doc->saveHTML();
         }
 
-        //search for style tag
+        //search for script tag
         if (strpos($content, '<script') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content);
+            $doc->loadHTML($content, LIBXML_HTML_NOIMPLIED);
+            $scriptsToRemove = [];
+
             foreach ($doc->getElementsByTagName('script') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
                 $cloned = $element->cloneNode(true);
                 $newdoc->appendChild($newdoc->importNode($cloned, true));
                 self::$scriptTags[] = $newdoc->saveHTML();
+
+                $scriptsToRemove[] = $element;
             }
 
-            $content = preg_replace("/<script.*?>.*?<\\/script>/s", "", $content);
+            foreach ($scriptsToRemove as $item)
+            {
+                $item->parentNode->removeChild($item);
+            }
+
+            $content = $doc->saveHTML();
         }
 
         return $content;
     }
-
 
     /**
      * Return a map of global helper objects to add.
