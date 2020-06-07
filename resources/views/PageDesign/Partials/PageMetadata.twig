@@ -68,7 +68,7 @@
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "url": {{ url | json_encode | raw }}
+    "url": "{{ url | raw }}"
     {% if services.template.isHome() %}
     ,"potentialAction":{
         "@type": "SearchAction",
