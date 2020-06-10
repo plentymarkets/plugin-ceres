@@ -122,7 +122,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
             $doc->loadHTML($content);
 
-            foreach ($doc->getElementsByTagName('script2') as $element) {
+            foreach ($doc->getElementsByTagName('script') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
                 $cloned = $element->cloneNode(true);
                 $newdoc->appendChild($newdoc->importNode($cloned, true));
