@@ -1,5 +1,13 @@
 # Release Notes for Ceres
 
+## v5.0.4 (2020-06-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.3...5.0.4" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed 
+
+- The format of dates was displayed incorrectly in the languages French and Dutch. This behaviour has been fixed.
+- The URL in the structured data was incorrectly encoded. This has been fixed.
+- Due to a faulty CSS adjustment, the PayPal wall was no longer displayed. This has been fixed.
+
 ## v5.0.3 (2020-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.2...5.0.3" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
