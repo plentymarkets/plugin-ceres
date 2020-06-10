@@ -102,7 +102,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         if (strpos($content, '<style') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content, LIBXML_HTML_NOIMPLIED);
+            $doc->loadHTML($content);
             $stylesToRemove = [];
 
             foreach ($doc->getElementsByTagName('style') as $element) {
@@ -126,7 +126,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         if (strpos($content, '<script') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content, LIBXML_HTML_NOIMPLIED);
+            $doc->loadHTML($content);
             $scriptsToRemove = [];
 
             foreach ($doc->getElementsByTagName('script') as $element) {
