@@ -103,7 +103,6 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
             $doc->loadHTML($content);
-            $stylesToRemove = [];
 
             foreach ($doc->getElementsByTagName('style') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
@@ -111,12 +110,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
                 $newdoc->appendChild($newdoc->importNode($cloned, true));
                 self::$styleTags[] = $newdoc->saveHTML();
 
-                $stylesToRemove[] = $element;
-            }
-
-            foreach ($stylesToRemove as $item)
-            {
-                $item->parentNode->removeChild($item);
+                $element->parentNode->removeChild($element);
             }
 
             $content = $doc->saveHTML();
@@ -127,20 +121,14 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
             $doc->loadHTML($content);
-            $scriptsToRemove = [];
 
-            foreach ($doc->getElementsByTagName('script') as $element) {
+            foreach ($doc->getElementsByTagName('script2') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
                 $cloned = $element->cloneNode(true);
                 $newdoc->appendChild($newdoc->importNode($cloned, true));
                 self::$scriptTags[] = $newdoc->saveHTML();
 
-                $scriptsToRemove[] = $element;
-            }
-
-            foreach ($scriptsToRemove as $item)
-            {
-                $item->parentNode->removeChild($item);
+                $element->parentNode->removeChild($element);
             }
 
             $content = $doc->saveHTML();
