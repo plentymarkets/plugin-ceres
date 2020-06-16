@@ -279,17 +279,19 @@ export default {
 
         getTooltip(attribute, attributeValue)
         {
-            if(this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId))
+            if(!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId))
+            {
+                return this.getInvalidOptionTooltip(attribute.attributeId, attributeValue.attributeValueId);
+            }
+            else if(attribute.type === "image")
             {
                 return this.$translate("Ceres::Template.singleItemAttributeTooltip", {
                     attribute: attribute.name,
                     value: attributeValue.name
                 });
             }
-            else
-            {
-                return this.getInvalidOptionTooltip(attribute.attributeId, attributeValue.attributeValueId);
-            }
+
+            return "";
         },
 
         /**
