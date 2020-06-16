@@ -46,7 +46,7 @@
                              v-for="value in attribute.values"
                              @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
                              :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }"
-                             v-tooltip="!isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getInvalidOptionTooltip(attribute.attributeId, value.attributeValueId)">
+                             v-tooltip="true" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getTooltip(attribute, value)">
                             <span class="mx-3" v-if="attribute.type === 'box'">{{ value.name }}</span>
                             <img class="p-1" v-else :src="value.imageUrl" :alt="value.name">
                         </div>
@@ -277,8 +277,23 @@ export default {
             this.correctSelection(invalidSelection);
         },
 
+        getTooltip(attribute, attributeValue)
+        {
+            if(this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId))
+            {
+                return this.$translate("Ceres::Template.singleItemAttributeTooltip", {
+                    attribute: attribute.name,
+                    value: attributeValue.name
+                });
+            }
+            else
+            {
+                return this.getInvalidOptionTooltip(attribute.attributeId, attributeValue.attributeValueId);
+            }
+        },
+
         /**
-         * returns a string for box tooltips, for not availble options
+         * returns a string for box tooltips, for not available options
          * @param {number} attributeId
          * @param {number} attributeValueId
          */
@@ -610,6 +625,11 @@ export default {
         currentSelection(value)
         {
             this.$store.commit(`${this.itemId}/variationSelect/setIsVariationSelected`, !!value);
+        },
+        variations()
+        {
+            // FIX unset variation cache after subsequent variations are loaded
+            this.filteredVariationsCache = {};
         }
     }
 }
