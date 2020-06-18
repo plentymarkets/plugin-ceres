@@ -334,9 +334,21 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       var invalidSelection = this.getInvalidSelectionByVariation(closestVariation);
       this.correctSelection(invalidSelection);
     },
+    getTooltip: function getTooltip(attribute, attributeValue) {
+      if (!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId)) {
+        return this.getInvalidOptionTooltip(attribute.attributeId, attributeValue.attributeValueId);
+      } else if (attribute.type === "image") {
+        return this.$translate("Ceres::Template.singleItemAttributeTooltip", {
+          attribute: attribute.name,
+          value: attributeValue.name
+        });
+      }
+
+      return "";
+    },
 
     /**
-     * returns a string for box tooltips, for not availble options
+     * returns a string for box tooltips, for not available options
      * @param {number} attributeId
      * @param {number} attributeValueId
      */
@@ -679,6 +691,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   watch: {
     currentSelection: function currentSelection(value) {
       this.$store.commit("".concat(this.itemId, "/variationSelect/setIsVariationSelected"), !!value);
+    },
+    variations: function variations() {
+      // FIX unset variation cache after subsequent variations are loaded
+      this.filteredVariationsCache = {};
     }
   }
 });
@@ -1003,12 +1019,8 @@ var render = function() {
                                   {
                                     name: "tooltip",
                                     rawName: "v-tooltip",
-                                    value: !_vm.isAttributeSelectionValid(
-                                      attribute.attributeId,
-                                      value.attributeValueId
-                                    ),
-                                    expression:
-                                      "!isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)"
+                                    value: true,
+                                    expression: "true"
                                   }
                                 ],
                                 staticClass: "v-s-box bg-white",
@@ -1027,9 +1039,9 @@ var render = function() {
                                   "data-html": "true",
                                   "data-toggle": "tooltip",
                                   "data-placement": "top",
-                                  "data-original-title": _vm.getInvalidOptionTooltip(
-                                    attribute.attributeId,
-                                    value.attributeValueId
+                                  "data-original-title": _vm.getTooltip(
+                                    attribute,
+                                    value
                                   )
                                 },
                                 on: {
