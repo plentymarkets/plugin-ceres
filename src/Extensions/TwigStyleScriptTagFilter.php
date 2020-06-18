@@ -102,7 +102,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         if (strpos($content, '<style') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content, LIBXML_HTML_NOIMPLIED);
+            $doc->loadHTML($content);
 
             foreach ($doc->getElementsByTagName('style') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
@@ -114,13 +114,18 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             }
 
             $content = $doc->saveHTML();
+
+            // remove doctype, html and body tags
+            $trim_off_front = strpos($content,'<body>') + 6;
+            $trim_off_end = (strrpos($content,'</body>')) - strlen($content);
+            $content = substr($content, $trim_off_front, $trim_off_end);
         }
 
         //search for script tag
         if (strpos($content, '<script') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content, LIBXML_HTML_NOIMPLIED);
+            $doc->loadHTML($content);
 
             foreach ($doc->getElementsByTagName('script') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
@@ -132,6 +137,11 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             }
 
             $content = $doc->saveHTML();
+
+            // remove doctype, html and body tags
+            $trim_off_front = strpos($content,'<body>') + 6;
+            $trim_off_end = (strrpos($content,'</body>')) - strlen($content);
+            $content = substr($content, $trim_off_front, $trim_off_end);
         }
 
         return $content;
