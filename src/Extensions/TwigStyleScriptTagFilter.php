@@ -102,7 +102,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         if (strpos($content, '<style') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content);
+            $doc->loadHTML('<?xml encoding="utf-8" ?>' . $content);
 
             foreach ($doc->getElementsByTagName('style') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
@@ -125,7 +125,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         if (strpos($content, '<script') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content);
+            $doc->loadHTML('<?xml encoding="utf-8" ?>' . $content);
 
             foreach ($doc->getElementsByTagName('script') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
