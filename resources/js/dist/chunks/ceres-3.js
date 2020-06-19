@@ -1083,7 +1083,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "ul",
-                      { staticClass: "ml-3" },
+                      { staticClass: "ml-1 pl-3" },
                       _vm._l(_vm.basketItem.basketItemOrderParams, function(
                         property
                       ) {
@@ -1104,50 +1104,44 @@ var render = function() {
                             key: property.propertyId
                           },
                           [
-                            _c(
-                              "span",
-                              { staticClass: "d-block text-truncate" },
-                              [
-                                _c(
-                                  "strong",
-                                  {
-                                    class: { colon: property.type.length > 0 }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(property.name) +
-                                        " (" +
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.basketIncludeAbbr"
+                            _c("span", { staticClass: "d-block" }, [
+                              _c(
+                                "strong",
+                                { class: { colon: property.type.length > 0 } },
+                                [
+                                  _vm._v(
+                                    _vm._s(property.name) +
+                                      " (" +
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.basketIncludeAbbr"
+                                        )
+                                      ) +
+                                      " " +
+                                      _vm._s(
+                                        _vm._f("currency")(
+                                          _vm._f("propertySurcharge")(
+                                            _vm.basketItem.variation.data
+                                              .properties,
+                                            property.propertyId
                                           )
-                                        ) +
-                                        " " +
-                                        _vm._s(
-                                          _vm._f("currency")(
-                                            _vm._f("propertySurcharge")(
-                                              _vm.basketItem.variation.data
-                                                .properties,
-                                              property.propertyId
-                                            )
-                                          )
-                                        ) +
-                                        ")"
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "span",
-                                  [
-                                    _c("order-property-value", {
-                                      attrs: { property: property }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ]
-                            )
+                                        )
+                                      ) +
+                                      ")"
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                [
+                                  _c("order-property-value", {
+                                    attrs: { property: property }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
                           ]
                         )
                       }),
@@ -1472,7 +1466,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "ul",
-                { staticClass: "pl-3" },
+                { staticClass: "ml-1 pl-3" },
                 _vm._l(_vm.orderProperties, function(property) {
                   return _c(
                     "li",
@@ -1488,7 +1482,7 @@ var render = function() {
                       key: property.propertyId
                     },
                     [
-                      _c("span", { staticClass: "d-block text-truncate" }, [
+                      _c("span", { staticClass: "d-block" }, [
                         _c(
                           "strong",
                           { class: { colon: property.type.length > 0 } },

@@ -37342,7 +37342,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "ul",
-                { staticClass: "pl-3" },
+                { staticClass: "ml-1 pl-3" },
                 _vm._l(_vm.orderProperties, function(property) {
                   return _c(
                     "li",
@@ -37358,7 +37358,7 @@ var render = function() {
                       key: property.propertyId
                     },
                     [
-                      _c("span", { staticClass: "d-block text-truncate" }, [
+                      _c("span", { staticClass: "d-block" }, [
                         _c(
                           "strong",
                           { class: { colon: property.type.length > 0 } },
