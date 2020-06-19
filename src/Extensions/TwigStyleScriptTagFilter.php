@@ -116,9 +116,9 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             $content = $doc->saveHTML();
 
             // remove doctype, html and body tags
-            $trim_off_front = strpos($content,'<body>') + 6;
-            $trim_off_end = (strrpos($content,'</body>')) - strlen($content);
-            $content = substr($content, $trim_off_front, $trim_off_end);
+            $trimOffFront = strpos($content,'<body>') + 6;
+            $trimOffEnd = (strrpos($content,'</body>')) - strlen($content);
+            $content = substr($content, $trimOffFront, $trimOffEnd);
         }
 
         //search for script tag
@@ -139,9 +139,9 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             $content = $doc->saveHTML();
 
             // remove doctype, html and body tags
-            $trim_off_front = strpos($content,'<body>') + 6;
-            $trim_off_end = (strrpos($content,'</body>')) - strlen($content);
-            $content = substr($content, $trim_off_front, $trim_off_end);
+            $trimOffFront = strpos($content,'<body>') + 6;
+            $trimOffEnd = (strrpos($content,'</body>')) - strlen($content);
+            $content = substr($content, $trimOffFront, $trimOffEnd);
         }
 
         return $content;
