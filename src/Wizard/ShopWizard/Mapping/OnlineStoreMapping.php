@@ -134,6 +134,12 @@ class OnlineStoreMapping
             'type'      => 'integer',
             'global'    => true,
             'optional'  => false
+        ],
+        'onlineStore_useVariationOrderProperties' => [
+            'field'     => 'useVariationOrderProperties',
+            'type'      => 'boolean',
+            'global'    => true,
+            'optional'  => false
         ]
     ];
 

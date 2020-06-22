@@ -36,6 +36,7 @@ class OnlineStoreStep extends Step
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
+                $this->buildVariationOrderPropertiesSettings()
             ]
         ];
     }
@@ -384,6 +385,24 @@ class OnlineStoreStep extends Step
                                 "caption" => "Wizard.inactive"
                             ]
                         ]
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function buildVariationOrderPropertiesSettings()
+    {
+        return [
+            "title" => "Wizard.variationOrderPropertiesTitle",
+            "description" => "Wizard.variationOrderPropertiesDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_useVariationOrderProperties" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.useVariationOrderProperties"
                     ]
                 ]
             ]
