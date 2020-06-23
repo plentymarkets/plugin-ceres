@@ -13131,6 +13131,8 @@ html.ie {
 }
 
 .widget-item-list-caption {
+    word-wrap: break-word;
+
     h1,
     h2,
     h3,
@@ -13155,6 +13157,30 @@ html.ie {
         padding-top: .4rem;
         padding-bottom: .1rem;
         font-size: 1.5rem;
+    }
+
+    @include media-breakpoint-down(sm) {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-align: inherit !important;
+            -ms-flex-align: inherit !important;
+                align-items: inherit !important; // stylelint-disable-line declaration-no-important
+
+        h1 {
+            font-size: 1.4rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+        }
+        h3 {
+            font-size: 1rem;
+        }
+
+        a:last-child {
+            margin-bottom: 5px;
+        }
     }
 
     .widget-item-list-inline-caption * {
