@@ -17,6 +17,8 @@
 }
 
 .widget-item-list-caption {
+    word-wrap: break-word;
+
     h1,
     h2,
     h3,
@@ -41,6 +43,25 @@
         padding-top: .4rem;
         padding-bottom: .1rem;
         font-size: 1.5rem;
+    }
+
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+        align-items: inherit !important; // stylelint-disable-line declaration-no-important
+
+        h1 {
+            font-size: 1.4rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+        }
+        h3 {
+            font-size: 1rem;
+        }
+
+        a:last-child {
+            margin-bottom: 5px;
+        }
     }
 
     .widget-item-list-inline-caption * {
