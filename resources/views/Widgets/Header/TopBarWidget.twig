@@ -294,10 +294,11 @@
                                         {{ Twig.set("languageUrls", Twig.call("services.url.getLanguageURLs")) }}
                                         <ul class="row">
                                             {{ Twig.for("language", "languageList") }}
+                                                {{ Twig.set("languageISO", "services.localizationRepository.getLanguageCode(language)") }}
                                                 <li class="col-6 col-sm-4 px-0{{ Twig.if("lang == language") }} active{{ Twig.endif() }}">
                                                     {{ Twig.set("url", "'/'") }}
-                                                    {{ Twig.if("languageUrls[language] is defined") }}
-                                                        {{ Twig.set("url", "languageUrls[language] ~ queryString") }}
+                                                    {{ Twig.if("languageUrls[languageISO] is defined") }}
+                                                        {{ Twig.set("url", "languageUrls[languageISO] ~ queryString") }}
                                                     {{ Twig.elseif("language != defaultLanguage") }}
                                                         {{ Twig.set("url", "'/' ~ language ~ urls.trailingSlashSuffix") }}
                                                     {{ Twig.endif() }}
