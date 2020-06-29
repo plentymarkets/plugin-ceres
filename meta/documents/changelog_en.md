@@ -2,6 +2,10 @@
 
 ## v5.0.5 (2020-06-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.4...5.0.5" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- Due to changes to the plugin **IO** it is no longer possible for customers to change their contact data in the online store. Sellers should therefore add a text widget to the My Account area to inform their customers that contact data can temporarily only be changed by the owner of the online store and that your customers should contact them if the need arises.
+
 ### Changed
 
 - The build files **ceres.js.map**, **ceres.min.js**, and **ceres.min.js.map** have been removed for reasons of obsolescence.
