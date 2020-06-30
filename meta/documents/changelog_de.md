@@ -2,10 +2,6 @@
 
 ## v5.0.5 (2020-06-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.4...5.0.5" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
-### TODO
-
-- Durch Änderungen im Plugin **IO** ist es für Kunden nicht mehr möglich, ihre Kontakdaten im Webshop selbst zu ändern. Händler sollten über ein Text-Widget im Mein Konto-Bereich einen Hinweis ausgeben, dass Änderungen der Kontakdaten vorübergehend ausschließlich durch den Webshop-Betreiber vorgenommen werden können und dieser bei Bedarf kontaktiert werden sollte.
-
 ### Geändert
 
 - Die nicht mehr benötigten und veralteten Buildfiles **ceres.js.map**, **ceres.min.js** und **ceres.min.js.map** wurden entfernt.
