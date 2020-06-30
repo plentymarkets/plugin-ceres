@@ -1,5 +1,30 @@
 # Release Notes für Ceres
 
+## v5.0.5 (2020-06-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.4...5.0.5" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die nicht mehr benötigten und veralteten Buildfiles **ceres.js.map**, **ceres.min.js** und **ceres.min.js.map** wurden entfernt.
+- Bei der Darstellung von Attributen als Bild kann jetzt ein zusätzlicher Tooltip dargestellt werden. Dazu kann in der Mehrsprachigkeits-Oberfläche unter **Ceres » Artikelansicht » singleItemAttributeTooltip** der Text des Tooltips hinterlegt werden. Hier stehen die Variablen **:attribute** und **:value** zur Verfügung, um den Namen des jeweiligen Attributs bzw. der einzelnen Werte anzuzeigen.
+
+### Behoben
+
+- Die Schriftartdateien von FontAwesome wurden aktualisiert.
+- Bei über 500 Varianten werden die nachträglich geladenen Varianten bei der Berechnung der verfügbaren Kombinationen nun korrekt berücksichtigt.
+- Bestellmerkmale im Warenkorb und in der Warenkorbvorschau werden jetzt vollständig angezeigt.
+- Für einige Sprachen konnte in der Sprachauswahl nicht die korrekte URL ermittelt werden. Dies wurde behoben.
+- Durch einen Fehler in der PrivacySettings-Komponente wurden die Toggle-Schaltflächen für Cookies immer als deaktiviert dargestellt. Dies wurde behoben.
+- Lange Kategorienamen in der Überschrift des Artikellisten-Widgets konnten den Seiteninhalt auf kleineren Display-Größen verschieben und dadurch Darstellungsfehler verursachen. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.5 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/js/src/app/components/basket/AddItemToBasketOverlay.vue](https://github.com/plentymarkets/plugin-ceres/pull/2276/files#diff-70d685498d2b1326481b12a924516e4d)
+- [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2276/files#diff-c2e68222922bdd120e1bb3e918794353)
+- [resources/js/src/app/components/basket/list/SetComponentItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2276/files#diff-dac784083959e603cf52f3496e646b6c)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2279/files#diff-f16a56b62b13bd773d56c1b4d739dfe4)
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/2279/files#diff-19096cb359da1fa955ee575070b6a121)
+
 ## v5.0.4 (2020-06-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.3...5.0.4" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
