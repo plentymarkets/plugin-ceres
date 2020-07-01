@@ -9433,7 +9433,17 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
         -o-object-fit: contain;
            object-fit: contain;
         height: 100%;
+    }
+}
 
+/* FIX rounding issue Card:115218 */
+.single-carousel {
+    .owl-item {
+        img {
+            width: 101%;
+            height: 101%;
+            margin-left: -1px;
+        }
     }
 }
 
