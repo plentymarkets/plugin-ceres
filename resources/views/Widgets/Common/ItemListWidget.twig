@@ -75,7 +75,7 @@
                     {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}
                     v-cloak>
 
-                    {% if not headlineStyle == "no-caption" %}
+                    {% if headlineStyle != "no-caption" %}
                         <template #heading>
                             <div class="widget-caption bg-appearance widget-item-list-caption mb-3">
                                 {% if headlineStyle == "custom-caption" %}
@@ -104,7 +104,7 @@
             {{ Twig.if("itemList.documents is not empty or #{ isPreview | json_encode }") }}
 
                 {# render static item lists #}
-                {% if not headlineStyle == "no-caption" %}
+                {% if headlineStyle != "no-caption" %}
                     <div class="widget-caption widget-item-list-caption mb-3 bg-appearance">
                         {% if headlineStyle == "custom-caption" %}
                             <div class="widget-item-list-inline-caption" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-inline-caption") }}>
