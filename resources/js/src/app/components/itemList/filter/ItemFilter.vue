@@ -78,7 +78,15 @@ export default {
     {
         updateFacet(facetValue)
         {
-            window.localStorage.setItem("openFilterToolbar", true);
+            let toolbarElement = document.getElementsByClassName("widget-toolbar")[0];
+            if(toolbarElement !== undefined)
+            {
+                if(toolbarElement.contains(this.$vnode.elm))
+                {
+                    window.localStorage.setItem("openFilterToolbar", true);
+                }
+            }
+
             this.$store.dispatch("selectFacet", { facetValue });
         },
 
