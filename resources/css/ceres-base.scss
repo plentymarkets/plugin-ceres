@@ -10972,6 +10972,13 @@ textarea.no-resize {
     }
 }
 
+html.safari .basket-preview-content .totals { // stylelint-disable-line selector-no-qualifying-type
+    display: block !important; // stylelint-disable-line declaration-no-important
+}
+html.ios .basket-preview-content .totals { // stylelint-disable-line selector-no-qualifying-type
+    display: block !important; // stylelint-disable-line declaration-no-important
+}
+
 .cmp-totals {
     dt,
     dd {
