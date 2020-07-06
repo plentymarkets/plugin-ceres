@@ -78,15 +78,16 @@ export default {
     {
         updateFacet(facetValue)
         {
-            let toolbarElement = document.getElementsByClassName("widget-toolbar")[0];
-            if(toolbarElement !== undefined)
+            let toolbarElements = document.getElementsByClassName("widget-toolbar");
+
+            for (const toolbarElement of toolbarElements)
             {
-                if(toolbarElement.contains(this.$vnode.elm))
+                if (toolbarElement.contains(this.$vnode.elm))
                 {
                     window.localStorage.setItem("openFilterToolbar", true);
                 }
             }
-
+    
             this.$store.dispatch("selectFacet", { facetValue });
         },
 
