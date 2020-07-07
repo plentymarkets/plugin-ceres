@@ -1,28 +1,28 @@
 <template>
-  	<div>
-		<div class="popper-handle" ref="handle">
-			<slot name="handle">
-				<!--Element to trigger popper -->
+    <div>
+        <div class="popper-handle" ref="handle">
+            <slot name="handle">
+                <!--Element to trigger popper -->
                 <button class="btn btn-icon btn-secondary btn-sm">
                     <i class="fa fa-info"></i>
                 </button>
-			</slot>
-		</div>
+            </slot>
+        </div>
 
-		<div ref="node" class="popover bs-popover-auto" :class="classNames">
-			<h3 class="popover-header">
-				<slot name="title">
-					<!-- {# Title to display in the popper #} -->
-				</slot>
-			</h3>
-			<div class="popover-body" :class="bodyClass" :style="bodyStyle">
-				<slot name="content">
-					<!-- {# Content to display in the popper #} -->
-				</slot>
-			</div>
-			<div class="arrow" ref="arrow"></div>
-		</div>
-	</div>
+        <div ref="node" class="popover bs-popover-auto" :class="classNames">
+            <h3 class="popover-header">
+                <slot name="title">
+                    <!-- {# Title to display in the popper #} -->
+                </slot>
+            </h3>
+            <div class="popover-body" :class="bodyClass" :style="bodyStyle">
+                <slot name="content">
+                    <!-- {# Content to display in the popper #} -->
+                </slot>
+            </div>
+            <div class="popover-arrow" ref="arrow"></div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default {
     props: {
         placement: {
             type: String,
-            default: "auto"
+            default: "left"
         },
         trigger: {
             type: String,
@@ -56,16 +56,12 @@ export default {
         }
     },
 
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            if (!isNullOrUndefined(this.$refs.node) && !isNullOrUndefined(this.$refs.handle))
-            {
+    mounted() {
+        this.$nextTick(() => {
+            if (!isNullOrUndefined(this.$refs.node) && !isNullOrUndefined(this.$refs.handle)) {
                 const node = this.$refs.node;
 
-                if (!App.isShopBuilder)
-                {
+                if (!App.isShopBuilder) {
                     node.parentElement.removeChild(node);
                     document.body.appendChild(node);
                 }
@@ -81,28 +77,43 @@ export default {
                                     element: this.$refs.arrow,
                                 },
                             },
+                            {
+                                name: 'offset',
+                                options: {
+                                    offset: [0, 8],
+                                },
+                            },
+                            {
+                                name: 'flip',
+                                options: {
+                                    rootBoundary: 'body',
+                                },
+                            },
                         ],
                         removeOnDestroy: true
                     }
                 );
 
+                this.eventListener = window.addEventListener("resize", event => {
+                    this.hidePopper();
+
+                    setTimeout(() => {
+                        this.$refs.node.style.transform = "";
+                    }, 0);
+                });
+
                 const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
 
-                if (this.trigger === "focus")
-                {
-                    handle.addEventListener("focus", () =>
-                    {
+                if (this.trigger === "focus") {
+                    handle.addEventListener("focus", () => {
                         this.showPopper();
                     });
-                    handle.addEventListener("blur", () =>
-                    {
+                    handle.addEventListener("blur", () => {
                         this.hidePopper();
                     });
                 }
-                else
-                {
-                    handle.addEventListener(this.trigger, () =>
-                    {
+                else {
+                    handle.addEventListener(this.trigger, () => {
                         this.togglePopper();
                     });
                 }
@@ -110,11 +121,9 @@ export default {
 
             const parentModal = findParent(this.$el, ".modal");
 
-            if (!isNullOrUndefined(parentModal))
-            {
+            if (!isNullOrUndefined(parentModal)) {
                 findModal(parentModal)
-                    .on("hide.bs.modal", () =>
-                    {
+                    .on("hide.bs.modal", () => {
                         this.hidePopper();
                     });
             }
@@ -122,51 +131,45 @@ export default {
         });
     },
 
-    destroyed()
-    {
+    destroyed() {
         this.popper.destroy();
+        window.removeEventListener(this.eventListener);
     },
 
-    data()
-    {
+    data() {
         return {
             isVisible: false,
-            popper: null
+            popper: null,
+            eventListener: null
         };
     },
 
     computed:
     {
-        classNames()
-        {
+        classNames() {
             return this.popoverClass + (!this.isVisible ? " hidden" : "");
         }
     },
 
     methods:
     {
-        togglePopper()
-        {
+        togglePopper() {
             this.isVisible = !this.isVisible;
             this.update();
         },
 
-        showPopper()
-        {
+        showPopper() {
             this.isVisible = true;
             this.update();
         },
 
-        hidePopper()
-        {
+        hidePopper() {
             this.isVisible = false;
             this.update();
         },
 
-        update()
-        {
-            if (!isNullOrUndefined(this.popper))
-            {
+        update() {
+            if (!isNullOrUndefined(this.popper)) {
                 this.popper.update();
             }
         }

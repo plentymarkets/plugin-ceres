@@ -20,7 +20,7 @@
         max-width: $popover-max-width-lg;
     }
 
-    .arrow {
+    .popover-arrow {
         position: absolute;
         z-index: -1;
         width: 8px;
@@ -35,6 +35,19 @@
             background: #333;
             transform: rotate(45deg);
         }
+    }
+
+    &[data-popper-placement^="top"] > .popover-arrow {
+        bottom: -4px;
+    }
+    &[data-popper-placement^="bottom"] > .popover-arrow {
+        top: -4px;
+    }
+    &[data-popper-placement^="left"] > .popover-arrow {
+        right: -4px;
+    }
+    &[data-popper-placement^="right"] > .popover-arrow {
+        left: -4px;
     }
 
     .popover-body > [data-builder-child-container] {
