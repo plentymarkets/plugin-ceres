@@ -17,7 +17,16 @@ export default function(el, hydrating)
     if (this.$props.templateOverride)
     {
         // template element is references from property for current component instance
-        componentTemplate = replaceDelimiters((document.querySelector(this.$props.templateOverride) || {}).innerHTML);
+        const rawTemplate = (document.querySelector(this.$props.templateOverride) || {}).innerHTML;
+
+        if (isNullOrUndefined(rawTemplate))
+        {
+            console.warn("Overriding a component template has failed. Did you import the template into the DOM?");
+        }
+        else
+        {
+            componentTemplate = replaceDelimiters(rawTemplate);
+        }
     }
     else
     {
