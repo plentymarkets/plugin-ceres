@@ -61039,7 +61039,13 @@ var originalMountFn = vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$mou
 
   if (this.$props.templateOverride) {
     // template element is references from property for current component instance
-    componentTemplate = replaceDelimiters((document.querySelector(this.$props.templateOverride) || {}).innerHTML);
+    var rawTemplate = (document.querySelector(this.$props.templateOverride) || {}).innerHTML;
+
+    if (Object(_app_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(rawTemplate)) {
+      console.warn("Overriding a component template has failed. Did you import the template into the DOM?");
+    } else {
+      componentTemplate = replaceDelimiters(rawTemplate);
+    }
   } else {
     // check for global template override
     componentTemplate = getComponentTemplate(this.$options._componentTag);
