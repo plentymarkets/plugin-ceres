@@ -284,7 +284,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
         // minimum quantity already in basket
         this.compMin = this.compInterval;
       } else if (this.variationBasketQuantity === 0) {
