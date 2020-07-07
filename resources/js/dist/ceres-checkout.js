@@ -2459,6 +2459,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2466,6 +2468,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     showRegistration: {
+      type: Boolean,
+      default: true
+    },
+    showLogin: {
       type: Boolean,
       default: true
     }
@@ -42337,69 +42343,81 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     !_vm.isLoggedIn
-      ? _c("div", [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: {
-                href: _vm.isLogin ? "javascript:void(0)" : "#login",
-                "data-toggle": _vm.isLogin ? false : "modal"
-              },
-              on: {
-                click: function($event) {
-                  _vm.createLoginModal()
-                  _vm.unmarkInputFields()
-                }
-              }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-user mr-1",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "d-none d-sm-inline" }, [
-                _vm._v(_vm._s(_vm.$translate("Ceres::Template.login")))
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _vm.showRegistration ? _c("span", { staticClass: "pipe" }) : _vm._e(),
-          _vm._v(" "),
-          _vm.showRegistration
-            ? _c(
-                "a",
-                {
-                  staticClass: "nav-link",
-                  attrs: {
-                    href: _vm.isRegister
-                      ? "javascript:void(0)"
-                      : "#registration",
-                    "data-toggle": _vm.isRegister ? false : "modal"
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.createRegisterModal()
-                      _vm.unmarkInputFields()
+      ? _c(
+          "div",
+          [
+            _vm.showLogin
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: {
+                      href: _vm.isLogin ? "javascript:void(0)" : "#login",
+                      "data-toggle": _vm.isLogin ? false : "modal"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.createLoginModal()
+                        _vm.unmarkInputFields()
+                      }
                     }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fa fa-user-plus mr-1",
-                    attrs: { "aria-hidden": "true" }
-                  }),
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-user mr-1",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "d-none d-sm-inline" }, [
+                      _vm._v(_vm._s(_vm.$translate("Ceres::Template.login")))
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.showRegistration
+              ? [
+                  !_vm.showLogin
+                    ? _c("span", { staticClass: "pipe" })
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("span", { staticClass: "d-none d-sm-inline" }, [
-                    _vm._v(
-                      _vm._s(_vm.$translate("Ceres::Template.loginRegister"))
-                    )
-                  ])
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        href: _vm.isRegister
+                          ? "javascript:void(0)"
+                          : "#registration",
+                        "data-toggle": _vm.isRegister ? false : "modal"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.createRegisterModal()
+                          _vm.unmarkInputFields()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-user-plus mr-1",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "d-none d-sm-inline" }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.loginRegister")
+                          )
+                        )
+                      ])
+                    ]
+                  )
                 ]
-              )
-            : _vm._e()
-        ])
+              : _vm._e()
+          ],
+          2
+        )
       : _vm._e()
   ])
 }
