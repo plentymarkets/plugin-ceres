@@ -90,7 +90,8 @@
                                         <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
                                     </a>
-                                    {% elseif enableRegistration %}
+                                    {% endif %}
+                                    {% if enableRegistration %}
                                     <a class="nav-link" data-toggle="modal">
                                         <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
