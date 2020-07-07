@@ -30,7 +30,7 @@ import { isNullOrUndefined } from "../../helper/utils";
 import { findParent } from "../../helper/dom";
 import { findModal } from "../../services/ModalService";
 import Vue from "vue";
-import Popper from "popper.js";
+import { createPopper } from '@popperjs/core';
 
 export default {
     props: {
@@ -69,17 +69,19 @@ export default {
                     node.parentElement.removeChild(node);
                     document.body.appendChild(node);
                 }
-
-                this.popper = new Popper(
+                this.popper = createPopper(
                     (this.$refs.handle.firstElementChild || this.$refs.handle),
                     node,
                     {
                         placement: this.placement,
-                        modifiers: {
-                            arrow: {
-                                element: this.$refs.arrow
-                            }
-                        },
+                        modifiers: [
+                            {
+                                name: 'arrow',
+                                options: {
+                                    element: this.$refs.arrow,
+                                },
+                            },
+                        ],
                         removeOnDestroy: true
                     }
                 );
@@ -137,7 +139,7 @@ export default {
     {
         classNames()
         {
-            return this.popoverClass + (!this.isVisible ? " d-none" : "");
+            return this.popoverClass + (!this.isVisible ? " hidden" : "");
         }
     },
 
@@ -165,7 +167,7 @@ export default {
         {
             if (!isNullOrUndefined(this.popper))
             {
-                this.popper.scheduleUpdate();
+                this.popper.update();
             }
         }
     }
