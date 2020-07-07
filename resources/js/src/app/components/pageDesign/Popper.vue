@@ -36,7 +36,7 @@ export default {
     props: {
         placement: {
             type: String,
-            default: "left"
+            default: "auto"
         },
         trigger: {
             type: String,
