@@ -2,6 +2,9 @@ const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const WebpackRequireFrom = require("webpack-require-from");
 
+const isModern = process.env.BROWSERSLIST_ENV === "modern";
+const distFolderName = isModern ? "modern" : "legacy";
+
 module.exports = env =>
 {
     env = env || {};
@@ -15,7 +18,7 @@ module.exports = env =>
         output: {
             filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
             chunkFilename: "chunks/ceres-[name]"+ (env.prod ? ".min" : "") + ".js",
-            path: path.resolve(__dirname, "..", "..", "resources/js/dist/")
+            path: path.resolve(__dirname, "..", "..", `resources/js/dist/${distFolderName}`)
         },
         resolve: {
             alias: {

@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start": "webpack --watch --progress",
-    "build": "npm run build:prod && npm run build:dev",
+    "build": "npm run build:modern && npm run build:legacy",
+    "build:modern": "BROWSERSLIST_ENV=modern npm run build:prod && BROWSERSLIST_ENV=modern npm run build:dev",
+    "build:legacy": "BROWSERSLIST_ENV=legacy npm run build:prod && BROWSERSLIST_ENV=legacy npm run build:dev",
     "build:dev": "webpack --progress",
     "build:prod": "webpack --env.prod --progress",
     "build:js": "npm run build:js:dev && npm run build:js:prod",
@@ -29,24 +31,24 @@
   },
   "browserslist": {
     "modern": [
-        "Firefox >= 53",
-        "Edge >= 15",
-        "Chrome >= 58",
-        "iOS >= 10.1"
+      "last 2 Firefox version",
+      "last 2 Edge version",
+      "last 2 Chrome version",
+      "last 2 iOS version"
     ],
     "legacy": [
-        "> 1%"
+      "> 1%"
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-env": "^7.10.4",
     "autoprefixer": "^8.6.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
-    "css-loader": "^3.5.3",
+    "css-loader": "^3.6.0",
     "del": "^2.2.0",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.13.0",
@@ -64,10 +66,10 @@
     "sass-loader": "^7.3.1",
     "stylelint": "^12.0.1",
     "stylelint-config-twbs-bootstrap": "^1.1.0",
-    "vue-loader": "^15.9.2",
+    "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "webpack-fix-style-only-entries": "^0.3.1",
     "webpack-require-from": "^1.8.1"
   },
@@ -75,15 +77,15 @@
     "bootstrap": "4.4.1",
     "core-js": "^3.6.5",
     "custom-event-polyfill": "^0.3.0",
-    "dayjs": "^1.8.26",
+    "dayjs": "^1.8.29",
     "detect-browser": "^4.8.0",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
     "jquery": "^3.5.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.17",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.16.1",
     "vue": "^2.6.11",
-    "vuex": "^3.3.0"
+    "vuex": "^3.5.1"
   }
 }
