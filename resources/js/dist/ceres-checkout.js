@@ -3116,7 +3116,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     timeout: {
       type: Number,
-      default: 500
+      default: 200
     }
   },
   data: function data() {
@@ -3131,7 +3131,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_16__["debounce"])(function (searchString) {
       _this.autocomplete(searchString);
-    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.timeout, 500));
+    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.timeout, 200));
   },
   computed: _objectSpread({
     hasAutocompleteResults: function hasAutocompleteResults() {
