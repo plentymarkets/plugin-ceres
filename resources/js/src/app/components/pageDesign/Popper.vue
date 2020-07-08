@@ -98,7 +98,10 @@ export default {
     {
         classNames()
         {
-            return this.popoverClass + (!this.isVisible ? " invisible" : "");
+            // in the shopbuilder we need to hide the popper completely, to hide the dropzone
+            const hideClass = App.isShopBuilder ? "d-none" : "invisible";
+
+            return this.popoverClass + (!this.isVisible ? hideClass : "");
         }
     },
 
