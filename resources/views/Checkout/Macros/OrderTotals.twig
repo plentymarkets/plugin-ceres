@@ -83,7 +83,11 @@
                     {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutGross") }})
                 </dt><!--
                 --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                    {{ totals.shippingGross | formatMonetary( totals.currency ) }}
+                    {% if totals.isNet %}
+                        {{ totals.shippingNet | formatMonetary( totals.currency ) }}
+                    {% else %}
+                        {{ totals.shippingGross | formatMonetary( totals.currency ) }}
+                    {% endif %}
                 </dd>
             {% endif %}
 
