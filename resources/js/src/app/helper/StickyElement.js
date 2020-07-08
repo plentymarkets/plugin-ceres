@@ -14,7 +14,9 @@ const STICKY_EVENTS = [
 ];
 
 const STICKY_EVENTS_PASSIVE = [
-    "scroll"
+    "scroll",
+    "touchstart",
+    "touchmove"
 ];
 
 export class StickyElement
