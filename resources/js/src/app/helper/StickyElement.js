@@ -1,5 +1,6 @@
 import { isNullOrUndefined } from "./utils";
 import { applyStyles } from "./dom";
+import { detectPassiveEvents } from "./featureDetect";
 
 const STICKY_EVENTS = [
     "resize",
@@ -10,6 +11,10 @@ const STICKY_EVENTS = [
     "pageshow",
     "load",
     "move-sticky"
+];
+
+const STICKY_EVENTS_PASSIVE = [
+    "scroll"
 ];
 
 export class StickyElement
@@ -67,10 +72,13 @@ export class StickyElement
                 }
             };
 
+            const isPassiveEventSupported = detectPassiveEvents();
+
             document.addEventListener("storeChanged", this.eventListener);
             STICKY_EVENTS.forEach(event =>
             {
-                window.addEventListener(event, this.eventListener);
+                window.addEventListener(event, this.eventListener,
+                    isPassiveEventSupported && !!STICKY_EVENTS_PASSIVE.includes(event) ? { passive: true } : false);
             });
 
             this.enabled = true;
