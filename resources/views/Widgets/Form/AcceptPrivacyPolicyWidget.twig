@@ -14,8 +14,8 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    <div class="select-unit required" data-validate="">
-        <div class="form-check">
+    <div class="select-unit required">
+        <div class="form-check" data-validate>
             <input class="form-check-input"
                    type="checkbox"
                    name="{{ formFieldId }}"

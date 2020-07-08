@@ -20,12 +20,11 @@ const mutations =
     {
         setVariation(state, variation)
         {
-            state.variation = variation;
-            if (variation.documents.length > 0 && variation.documents[0].data.variation)
-            {
-                state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
-            }
+            variation = normalizeOrderQuantities(variation);
 
+            state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity;
+
+            state.variation = variation;
             state.variationCache[variation.documents[0].id] = variation;
 
             if (state.initialVariationId <= 0)
@@ -120,6 +119,18 @@ const actions =
                         .get(`/rest/io/variations/${variationId}`, { template: "Ceres::Item.SingleItem", setPriceOnly: rootState.items.isItemSet })
                         .done(response =>
                         {
+                            // check if set component and replace relevant data
+                            if (rootState.items.itemSetId > 0)
+                            {
+                                const itemSetId = rootState.items.itemSetId;
+                                const setComponentMeta = rootState.items[itemSetId].setComponents.find(
+                                    (setComponent) => setComponent.itemId === response.documents[0].data.item.id
+                                );
+
+                                response.documents[0].data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
+                                response.documents[0].data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
+                            }
+
                             // store received variation data for later reuse
                             commit("setVariation", response);
                             commit("setIsAddToBasketLoading", 0, { root: true });
@@ -329,6 +340,26 @@ const getters =
             return state.variation.documents && state.variation.documents[0] && state.variation.documents[0].data;
         }
     };
+
+function normalizeOrderQuantities(variation)
+{
+    if (variation.documents.length > 0 && variation.documents[0].data.variation)
+    {
+        if (isNullOrUndefined(variation.documents[0].data.variation.intervalOrderQuantity)
+            || variation.documents[0].data.variation.intervalOrderQuantity <= 0)
+        {
+            variation.documents[0].data.variation.intervalOrderQuantity = 1;
+        }
+
+        if (isNullOrUndefined(variation.documents[0].data.variation.minimumOrderQuantity)
+            || variation.documents[0].data.variation.minimumOrderQuantity <= 0)
+        {
+            variation.documents[0].data.variation.minimumOrderQuantity = 1;
+        }
+    }
+
+    return variation;
+}
 
 export default
 {

@@ -44,9 +44,9 @@
 
                                 <div class="small" v-if="shownOrderProperties.length">
                                     <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.singleItemAdditionalOptions") }}:</div>
-                                    <ul class="ml-0 pl-3">
+                                    <ul class="ml-1 pl-3">
                                         <li v-for="property in shownOrderProperties" :key="property.propertyId">
-                                            <span class="d-block text-truncate">
+                                            <span class="d-block">
                                                 <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.singleItemIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</strong>
                                                 <span>
                                                     <order-property-value :property="property"></order-property-value>

@@ -13,15 +13,17 @@
             </div>
         </div>
         <div v-if="!isLoggedIn">
-            <a class="nav-link" :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="createLoginModal(); unmarkInputFields();">
+            <a class="nav-link" v-if="showLogin" :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="createLoginModal(); unmarkInputFields();">
                 <i class="fa fa-user mr-1" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.login") }}</span>
             </a>
-            <span class="pipe" v-if="showRegistration"></span>
-            <a class="nav-link" :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="createRegisterModal(); unmarkInputFields();" v-if="showRegistration">
-                <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
-                <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginRegister") }}</span>
-            </a>
+            <template v-if="showRegistration">
+                <span class="pipe" v-if="!showLogin"></span>
+                <a class="nav-link" :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="createRegisterModal(); unmarkInputFields();" >
+                    <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
+                    <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginRegister") }}</span>
+                </a>
+            </template>
         </div>
     </div>
 </template>
@@ -37,7 +39,11 @@ export default {
         showRegistration: {
             type: Boolean,
             default: true
-        }
+        },
+        showLogin: {
+            type: Boolean,
+            default: true
+        } 
     },
 
     computed: {

@@ -93,6 +93,11 @@ export default {
     {
         isCheckedAndNotEmpty(path)
         {
+            if (path === "item.ageRestriction")
+            {
+                // remove check for the age restriction to be greater than zero (0 means 'No age restriction')
+                return true;
+            }
             if (path !== "item.variationDimensions")
             {
                 const value = get(this.currentVariation, path);
