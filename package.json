@@ -27,9 +27,17 @@
     "test": "npm run test:monetaryFormatter",
     "test:monetaryFormatter": "node -r esm tools/testMonetaryFormatter.js"
   },
-  "browserslist": [
-    "> .25%"
-  ],
+  "browserslist": {
+    "modern": [
+        "Firefox >= 53",
+        "Edge >= 15",
+        "Chrome >= 58",
+        "iOS >= 10.1"
+    ],
+    "legacy": [
+        "> 1%"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
