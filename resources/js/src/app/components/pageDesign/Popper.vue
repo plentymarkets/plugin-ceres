@@ -62,48 +62,7 @@ export default {
         {
             if (!isNullOrUndefined(this.$refs.node) && !isNullOrUndefined(this.$refs.handle))
             {
-                const node = this.$refs.node;
-
-                if (!App.isShopBuilder)
-                {
-                    node.parentElement.removeChild(node);
-                    document.body.appendChild(node);
-                }
-
-                this.popper = new Popper(
-                    (this.$refs.handle.firstElementChild || this.$refs.handle),
-                    node,
-                    {
-                        placement: this.placement,
-                        modifiers: {
-                            arrow: {
-                                element: this.$refs.arrow
-                            }
-                        },
-                        removeOnDestroy: true
-                    }
-                );
-
-                const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
-
-                if (this.trigger === "focus")
-                {
-                    handle.addEventListener("focus", () =>
-                    {
-                        this.showPopper();
-                    });
-                    handle.addEventListener("blur", () =>
-                    {
-                        this.hidePopper();
-                    });
-                }
-                else
-                {
-                    handle.addEventListener(this.trigger, () =>
-                    {
-                        this.togglePopper();
-                    });
-                }
+                this.initializePopper();
             }
 
             const parentModal = findParent(this.$el, ".modal");
@@ -123,13 +82,15 @@ export default {
     destroyed()
     {
         this.popper.destroy();
+        window.removeEventListener(this.eventListener);
     },
 
     data()
     {
         return {
             isVisible: false,
-            popper: null
+            popper: null,
+            eventListener: null
         };
     },
 
@@ -137,12 +98,73 @@ export default {
     {
         classNames()
         {
-            return this.popoverClass + (!this.isVisible ? " d-none" : "");
+            return this.popoverClass + (!this.isVisible ? " invisible" : "");
         }
     },
 
     methods:
     {
+        initializePopper()
+        {
+            const node = this.$refs.node;
+
+            if (!App.isShopBuilder)
+            {
+                node.parentElement.removeChild(node);
+                document.body.appendChild(node);
+            }
+
+            this.popper = new Popper(
+                (this.$refs.handle.firstElementChild || this.$refs.handle),
+                node,
+                {
+                    placement: this.placement,
+                    modifiers: {
+                        arrow: {
+                            element: this.$refs.arrow
+                        }
+                    },
+                    removeOnDestroy: true
+                }
+            );
+
+            this.addEventListeners();
+        },
+        
+        addEventListeners()
+        {
+            this.eventListener = window.addEventListener("resize", () =>
+            {
+            // popper's position needs to be reset after a resize, to prevent the overflow, after switching from landscape to normal
+                this.hidePopper();
+
+                setTimeout(() => {
+                    this.$refs.node.style.transform = "";
+                }, 0);
+            });
+
+            const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
+
+            if (this.trigger === "focus")
+            {
+                handle.addEventListener("focus", () =>
+                {
+                    this.showPopper();
+                });
+                handle.addEventListener("blur", () =>
+                {
+                    this.hidePopper();
+                });
+            }
+            else
+            {
+                handle.addEventListener(this.trigger, () =>
+                {
+                    this.togglePopper();
+                });
+            }
+        },
+
         togglePopper()
         {
             this.isVisible = !this.isVisible;

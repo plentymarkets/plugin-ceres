@@ -9,6 +9,11 @@
 }
 
 .popover {
+    &.hidden {
+        pointer-events: none;
+        visibility: hidden;
+    }
+
     &.popover-md {
         width: $popover-max-width-md;
         max-width: $popover-max-width-md;
