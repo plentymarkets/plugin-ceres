@@ -193,3 +193,6 @@ window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
 Vue.prototype.$ceres = App;
+
+// create and dispatch the event
+document.dispatchEvent(new CustomEvent("scriptsReady"));

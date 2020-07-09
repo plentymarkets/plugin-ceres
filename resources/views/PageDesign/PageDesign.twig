@@ -227,12 +227,12 @@
     {# Browsers with ES module support load this file. #}
     <script type="module" src="{{ plugin_path('Ceres') }}/js/dist/modern/{{ assetName }}.js?v={{ buildHash }}"></script>
     {# Older browsers load this file (and module-supporting browsers know *not* to load this file). #}
-    <script nomodule type="module" src="{{ plugin_path('Ceres') }}/js/dist/legacy/{{ assetName }}.js?v={{ buildHash }}"></script>
+    <script nomodule src="{{ plugin_path('Ceres') }}/js/dist/legacy/{{ assetName }}.js?v={{ buildHash }}"></script>
 {% else %}
     {# Browsers with ES module support load this file. #}
     <script type="module" src="{{ plugin_path('Ceres') }}/js/dist/modern/{{ assetName }}.min.js?v={{ buildHash }}"></script>
     {# Older browsers load this file (and module-supporting browsers know *not* to load this file). #}
-    <script nomodule type="module" src="{{ plugin_path('Ceres') }}/js/dist/legacy/{{ assetName }}.min.js?v={{ buildHash }}"></script>
+    <script nomodule src="{{ plugin_path('Ceres') }}/js/dist/legacy/{{ assetName }}.min.js?v={{ buildHash }}"></script>
 {% endif %}
 
 {% for scriptTemplate in get_additional_scripts() %}
@@ -252,40 +252,43 @@
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
 {% endif %}
 
-<script>
-    window.__loadPluginChunk = function(source) {
-        return source += "?v={{ buildHash }}";
-    };
-
-    window.vueEventHub = new Vue();
-
-    if (App.config.log.checkSyntax)
+<script defer>
+    document.addEventListener("scriptsReady", function()
     {
-        var rootElement = document.getElementById("vue-app");
+        window.__loadPluginChunk = function(source) {
+            return source += "?v={{ buildHash }}";
+        };
 
-        rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
+        window.vueEventHub = new Vue();
 
-        window.vueApp = new Vue({
-            store: window.ceresStore
-        });
-
-        vueApp.$mount( rootElement.cloneNode(true) );
-
-        if (vueApp.$el.id === "vue-app")
+        if (App.config.log.checkSyntax)
         {
-            document.body.replaceChild( vueApp.$el, rootElement );
-        }
-    }
-    else
-    {
-        // eslint-disable-next-line no-unused-vars
-        window.vueApp = new Vue({
-            el: "#vue-app",
-            store: window.ceresStore
-        });
-    }
+            var rootElement = document.getElementById("vue-app");
 
-    {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
+            rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
+
+            window.vueApp = new Vue({
+                store: window.ceresStore
+            });
+
+            vueApp.$mount( rootElement.cloneNode(true) );
+
+            if (vueApp.$el.id === "vue-app")
+            {
+                document.body.replaceChild( vueApp.$el, rootElement );
+            }
+        }
+        else
+        {
+            // eslint-disable-next-line no-unused-vars
+            window.vueApp = new Vue({
+                el: "#vue-app",
+                store: window.ceresStore
+            });
+        }
+
+        {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
+    });
 </script>
 
 {{ get_filtered_tags() }}

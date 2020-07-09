@@ -18,7 +18,7 @@ module.exports = env =>
         output: {
             filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
             chunkFilename: "chunks/ceres-[name]"+ (env.prod ? ".min" : "") + ".js",
-            path: path.resolve(__dirname, "..", "..", `resources/js/dist/${distFolderName}`)
+            path: path.resolve(__dirname, "..", "..", `resources/js/dist/${distFolderName}/`)
         },
         resolve: {
             alias: {
