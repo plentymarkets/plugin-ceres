@@ -224,9 +224,15 @@
 {{ get_json_data() }}
 
 {% if ceresConfig.log.performanceLevel  == 'development' %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
+    {# Browsers with ES module support load this file. #}
+    <script type="module" src="{{ plugin_path('Ceres') }}/js/dist/modern/{{ assetName }}.js?v={{ buildHash }}"></script>
+    {# Older browsers load this file (and module-supporting browsers know *not* to load this file). #}
+    <script nomodule type="module" src="{{ plugin_path('Ceres') }}/js/dist/legacy/{{ assetName }}.js?v={{ buildHash }}"></script>
 {% else %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
+    {# Browsers with ES module support load this file. #}
+    <script type="module" src="{{ plugin_path('Ceres') }}/js/dist/modern/{{ assetName }}.min.js?v={{ buildHash }}"></script>
+    {# Older browsers load this file (and module-supporting browsers know *not* to load this file). #}
+    <script nomodule type="module" src="{{ plugin_path('Ceres') }}/js/dist/legacy/{{ assetName }}.min.js?v={{ buildHash }}"></script>
 {% endif %}
 
 {% for scriptTemplate in get_additional_scripts() %}
