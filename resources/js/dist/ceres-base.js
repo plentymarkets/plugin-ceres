@@ -54404,6 +54404,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./helper/dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
 
 
 
@@ -54421,6 +54422,7 @@ var browserDetect = __webpack_require__(/*! detect-browser */ "./node_modules/de
 var NotificationService = __webpack_require__(/*! ./services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 var AutoFocusService = __webpack_require__(/*! ./services/AutoFocusService */ "./resources/js/src/app/services/AutoFocusService.js");
+
 
 
 
@@ -54670,7 +54672,9 @@ if (headerParent) {
 
   window.addEventListener("scroll", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_11__["debounce"])(function () {
     scrollHeaderElements();
-  }, 10));
+  }, 10), Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_14__["detectPassiveEvents"])() ? {
+    passive: true
+  } : false);
   $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
     calculateBodyOffset();
   });
