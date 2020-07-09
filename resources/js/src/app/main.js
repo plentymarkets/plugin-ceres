@@ -329,7 +329,7 @@ if ( headerParent )
     window.addEventListener("scroll", debounce(function()
     {
         scrollHeaderElements();
-    }, 10), detectPassiveEvents ? { passive: true } : false);
+    }, 10), detectPassiveEvents() ? { passive: true } : false);
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
