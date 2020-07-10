@@ -262,8 +262,12 @@
         }
     }
     var scriptTag = document.getElementById(scriptToLoad+"-ceres-bundle");
-    scriptTag.src = scriptTag.dataset.src;
+    var newScriptTag = document.createElement("script");
+    newScriptTag.src = scriptTag.dataset.src;
+    scriptTag.parentNode.append(newScriptTag);
 </script>
+
+{# <script src="/documents/plugins/Ceres/resources/js/dist/modern/ceres-base.js?v=5f49fd8b3c069fd18900d23b032e0346e0378476"></script> #}
 
 {% for scriptTemplate in get_additional_scripts() %}
     {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
