@@ -107,7 +107,7 @@
 
         <hr>
 
-        {{ Twig.if("data.order.typeId == 1") }}
+        {{ Twig.if("data.order.typeId == 1 or data.order.typeId == 8") }}
             <div class="row">
                 <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>
                 <span class="col-6 col-sm-7" id="payment_name_{{ Twig.print("data.order.id") }}">{{ Twig.print("data.paymentMethodName") }}</span>

@@ -5,6 +5,7 @@ const AutoFocusService = require("./services/AutoFocusService");
 import { debounce } from "./helper/debounce";
 import Vue from "vue";
 import { getStyle } from "./helper/dom";
+import { detectPassiveEvents } from "./helper/featureDetect";
 
 // Frontend end scripts
 // eslint-disable-next-line
@@ -328,7 +329,7 @@ if ( headerParent )
     window.addEventListener("scroll", debounce(function()
     {
         scrollHeaderElements();
-    }, 10));
+    }, 10), detectPassiveEvents() ? { passive: true } : false);
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {

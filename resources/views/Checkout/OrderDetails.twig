@@ -75,7 +75,7 @@
 
                 <hr>
 
-                {% if orderData.order.typeId == 1 %}
+                {% if orderData.order.typeId == 1 or orderData.order.typeId == 8 %}
                     <div>
                         <div class="row">
                             <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>

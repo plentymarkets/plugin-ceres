@@ -80,13 +80,17 @@
                 {% endif %}
                 <div class="controls">
                     <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
-                        {% if enableLogin %}
+                        {% if enableLogin or enableRegistration %}
                             <li class="list-inline-item control-user">
-                                <user-login-handler :show-registration="{{ enableRegistration | json_encode }}">
+                                <user-login-handler
+                                    :show-login="{{ enableLogin | json_encode }}"
+                                    :show-registration="{{ enableRegistration | json_encode }}">
+                                    {% if enableLogin %}
                                     <a class="nav-link" data-toggle="modal">
                                         <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
                                     </a>
+                                    {% endif %}
                                     {% if enableRegistration %}
                                     <a class="nav-link" data-toggle="modal">
                                         <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
@@ -94,13 +98,6 @@
                                     </a>
                                     {% endif %}
                                 </user-login-handler>
-                            </li>
-                        {% elseif enableRegistration %}
-                            <li class="list-inline-item control-user">
-                                <a class="nav-link" data-toggle="modal">
-                                    <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
-                                    <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
-                                </a>
                             </li>
                         {% endif %}
 
@@ -294,10 +291,11 @@
                                         {{ Twig.set("languageUrls", Twig.call("services.url.getLanguageURLs")) }}
                                         <ul class="row">
                                             {{ Twig.for("language", "languageList") }}
+                                                {{ Twig.set("languageISO", "services.localizationRepository.getLanguageCode(language)") }}
                                                 <li class="col-6 col-sm-4 px-0{{ Twig.if("lang == language") }} active{{ Twig.endif() }}">
                                                     {{ Twig.set("url", "'/'") }}
-                                                    {{ Twig.if("languageUrls[language] is defined") }}
-                                                        {{ Twig.set("url", "languageUrls[language] ~ queryString") }}
+                                                    {{ Twig.if("languageUrls[languageISO] is defined") }}
+                                                        {{ Twig.set("url", "languageUrls[languageISO] ~ queryString") }}
                                                     {{ Twig.elseif("language != defaultLanguage") }}
                                                         {{ Twig.set("url", "'/' ~ language ~ urls.trailingSlashSuffix") }}
                                                     {{ Twig.endif() }}

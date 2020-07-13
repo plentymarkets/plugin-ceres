@@ -9433,7 +9433,17 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
         -o-object-fit: contain;
            object-fit: contain;
         height: 100%;
+    }
+}
 
+/* FIX rounding issue Card:115218 */
+.single-carousel {
+    .owl-item {
+        img {
+            width: 101%;
+            height: 101%;
+            margin-left: -1px;
+        }
     }
 }
 
@@ -10120,6 +10130,11 @@ html.ie {
 }
 
 .popover {
+    &.hidden {
+        pointer-events: none;
+        visibility: hidden;
+    }
+
     &.popover-md {
         width: $popover-max-width-md;
         max-width: $popover-max-width-md;
@@ -10960,6 +10975,13 @@ textarea.no-resize {
             z-index: auto !important; // stylelint-disable-line declaration-no-important
         }
     }
+}
+
+html.safari .basket-preview-content .totals { // stylelint-disable-line selector-no-qualifying-type
+    display: block !important; // stylelint-disable-line declaration-no-important
+}
+html.ios .basket-preview-content .totals { // stylelint-disable-line selector-no-qualifying-type
+    display: block !important; // stylelint-disable-line declaration-no-important
 }
 
 .cmp-totals {

@@ -99,6 +99,11 @@ __webpack_require__.r(__webpack_exports__);
     isCheckedAndNotEmpty: function isCheckedAndNotEmpty(path) {
       var _this = this;
 
+      if (path === "item.ageRestriction") {
+        // remove check for the age restriction to be greater than zero (0 means 'No age restriction')
+        return true;
+      }
+
       if (path !== "item.variationDimensions") {
         var value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, path);
         return value !== "" && value !== 0;

@@ -1,4 +1,6 @@
-import { isNullOrUndefined } from "./utils";
+import { isNullOrUndefined, isDefined } from "./utils";
+
+let _supportsPassive;
 
 /**
  * Asynchronous function to detect webP support
@@ -60,4 +62,34 @@ function _detectWebPSupport(uri, resolve)
     };
 
     img.src = "data:image/webp;base64," + uri;
+}
+
+/**
+ * Detect if the parameter passive is supported for the method addEventListener (MSIE is not)
+ */
+export function detectPassiveEvents()
+{
+    if (isDefined(_supportsPassive))
+    {
+        return _supportsPassive;
+    }
+
+    _supportsPassive = false;
+
+    try
+    {
+        const opts = Object.defineProperty({}, "passive", {
+            get()
+            {
+                _supportsPassive = true;
+            }
+        });
+
+        window.addEventListener("testPassive", null, opts);
+        window.removeEventListener("testPassive", null, opts);
+    }
+    catch (error)
+    {}
+
+    return _supportsPassive;
 }
