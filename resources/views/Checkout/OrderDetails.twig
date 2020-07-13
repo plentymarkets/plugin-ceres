@@ -215,7 +215,7 @@
                                                 {% if property.cast == "file" %}
                                                     <a :href="'{{ property.values.value }}' | propertyFileUrl" v-html="'{{ property.values.value }}'" target="_blank"></a>
                                                 {% else %}
-                                                    {{ property.values.value }}
+                                                    {{ property.values.value | raw }}
                                                 {% endif %}
                                             </span>
                                         </div>
