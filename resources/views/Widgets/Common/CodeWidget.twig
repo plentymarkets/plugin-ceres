@@ -9,7 +9,7 @@
 {% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-code {% if isPreview %}widget-editable-min-height {% endif %}widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if hasSpacing %} m-0{% endif %}">
+<div class="widget widget-code {% if isPreview %}widget-editable-min-height {% endif %}widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if hasSpacing %} m-0{% endif %}{% if isSafeMode %} is-safe-mode overflow-hidden{% endif %}">
     <div class="widget-inner bg-appearance{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{{ WidgetHelper.makeCodeEditable('text', 'Ceres::Widget.textLabel', isPreview) }}>
         {% if isPreview and isSafeMode %}
             {{ Twig.do("verbatim") }}<pre v-text="{{ text | json_encode }}"></pre>{{ Twig.do("endverbatim") }}
