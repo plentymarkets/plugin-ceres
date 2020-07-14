@@ -51,7 +51,11 @@
                      aria-labelledby="heading_{{ collapseId }}_{{ loop.index }}"
                      data-parent="#accordion_{{ collapseId }}">
                     <div class="card-body">
-                        {{ collapseBox.text | raw }}
+                        {% if isPreview and isSafeMode %}
+                            {{ Twig.do("verbatim") }}<pre v-text="{{ collapseBox.text | json_encode }}"></pre>{{ Twig.do("endverbatim") }}
+                        {% else %}
+                            {{ collapseBox.text | raw }}
+                        {% endif %}
                     </div>
                 </div>
             </div>
