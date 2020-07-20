@@ -1,9 +1,5 @@
 import Vue from "vue";
-
-const toggleTooltip = (el, disable) =>
-{
-    $(el).tooltip(disable ? "disable" : "enable");
-};
+import { isUndefined } from "../../helper/utils";
 
 Vue.directive("tooltip", {
 
@@ -14,7 +10,13 @@ Vue.directive("tooltip", {
 
     update(el, binding)
     {
-        toggleTooltip(el, binding.value === false);
+        if (binding.newValue !== binding.oldValue)
+        {
+            if (window.matchMedia("(min-width: 768px)").matches)
+            {
+                $(el).tooltip(binding.value || isUndefined(binding.value) ? "enable" : "disable");
+            }
+        }
     },
 
     bind(el, binding)
@@ -23,10 +25,8 @@ Vue.directive("tooltip", {
         {
             setTimeout(() =>
             {
-                $(el).tooltip();
-                toggleTooltip(el, binding.value === false);
+                $(el).tooltip(binding.value || isUndefined(binding.value) ? "enable" : "disable");
             }, 1);
         }
-
     }
 });
