@@ -1,15 +1,12 @@
 <template>
     <ul class="row" v-if="!basketSelect">
-        <li class="col-6 col-sm-4 px-0" :class="{'active': basket.shippingCountryId == shippingCountry.id}" v-for="shippingCountry in localization.shippingCountries" :key="shippingCountry.id">
+        <li class="col-6 col-sm-4 px-0" :class="{'active': basket.shippingCountryId == shippingCountry.id, 'is-disabled': isDisabled}" v-for="shippingCountry in localization.shippingCountries" :key="shippingCountry.id">
             <a class="nav-link"
                 data-toggle="collapse"
                 href="#countrySettings"
                 @click="setShippingCountry(shippingCountry.id)"
-                :class="{'is-disabled': isDisabled}"
                 :disabled="isDisabled"
                 v-tooltip="isDisabled"
-                data-placement="top"
-                data-trigger="hover"
                 data-boundary="window"
                 :data-title="$translate('Ceres::Template.headerChangeDeliveryCountry')">
 
@@ -23,9 +20,7 @@
         <select v-if="localization.shippingCountries.length > 1" class="form-control" @change="setShippingCountry($event.target.value)">
             <option v-for="shippingCountry in localization.shippingCountries"
                     :value="shippingCountry.id"
-                    :class="{'is-disabled': isDisabled}"
                     :disabled="isDisabled"
-                    v-tooltip="isDisabled"
                     :selected="basket.shippingCountryId == shippingCountry.id"
                     :key="shippingCountry.id">
                 {{shippingCountry.currLangName}}
