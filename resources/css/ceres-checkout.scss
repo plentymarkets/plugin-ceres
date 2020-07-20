@@ -12644,12 +12644,10 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 .widget-accordion {
     .card {
-        &:first-of-type {
-            border-bottom: $card-border-width solid $card-border-color;
-        }
+        border-bottom: 0;
 
-        &:nth-of-type(2) {
-            border-top: 0;
+        &:last-child {
+            border-bottom: $card-border-width solid $card-border-color;
         }
 
         button {
@@ -14139,6 +14137,10 @@ html.safari { // stylelint-disable-next-line selector-no-qualifying-type
             min-width: inherit;
             max-width: 1170px;
         }
+    }
+
+    .widget-code.is-safe-mode {
+        max-height: 120px;
     }
 }
 

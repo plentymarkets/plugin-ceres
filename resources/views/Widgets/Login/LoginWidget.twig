@@ -19,7 +19,7 @@
                     :has-to-forward="true"
                     :button-size="{{ buttonSize | json_encode }}">
                         <template #extend-overlay-buttons>
-                            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::LoginOverlay.ExtendOverlayButtons"])) }}
                         </template>
                 </login>
             </div>
