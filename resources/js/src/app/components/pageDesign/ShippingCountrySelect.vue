@@ -20,7 +20,6 @@
         <select v-if="localization.shippingCountries.length > 1" class="form-control" @change="setShippingCountry($event.target.value)">
             <option v-for="shippingCountry in localization.shippingCountries"
                     :value="shippingCountry.id"
-                    :class="{'is-disabled': isDisabled}"
                     :disabled="isDisabled"
                     :selected="basket.shippingCountryId == shippingCountry.id"
                     :key="shippingCountry.id">
