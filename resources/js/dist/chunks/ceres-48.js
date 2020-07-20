@@ -75,11 +75,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -144,7 +139,8 @@ var render = function() {
               key: shippingCountry.id,
               staticClass: "col-6 col-sm-4 px-0",
               class: {
-                active: _vm.basket.shippingCountryId == shippingCountry.id
+                active: _vm.basket.shippingCountryId == shippingCountry.id,
+                "is-disabled": _vm.isDisabled
               }
             },
             [
@@ -160,13 +156,10 @@ var render = function() {
                     }
                   ],
                   staticClass: "nav-link",
-                  class: { "is-disabled": _vm.isDisabled },
                   attrs: {
                     "data-toggle": "collapse",
                     href: "#countrySettings",
                     disabled: _vm.isDisabled,
-                    "data-placement": "top",
-                    "data-trigger": "hover",
                     "data-boundary": "window",
                     "data-title": _vm.$translate(
                       "Ceres::Template.headerChangeDeliveryCountry"
@@ -222,16 +215,7 @@ var render = function() {
                 return _c(
                   "option",
                   {
-                    directives: [
-                      {
-                        name: "tooltip",
-                        rawName: "v-tooltip",
-                        value: _vm.isDisabled,
-                        expression: "isDisabled"
-                      }
-                    ],
                     key: shippingCountry.id,
-                    class: { "is-disabled": _vm.isDisabled },
                     attrs: { disabled: _vm.isDisabled },
                     domProps: {
                       value: shippingCountry.id,
