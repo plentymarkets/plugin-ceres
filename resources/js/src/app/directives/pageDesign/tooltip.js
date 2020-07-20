@@ -12,21 +12,15 @@ Vue.directive("tooltip", {
     {
         if (binding.newValue !== binding.oldValue)
         {
-            if (window.matchMedia("(min-width: 768px)").matches)
-            {
-                $(el).tooltip(binding.value || isUndefined(binding.value) ? "enable" : "disable");
-            }
+            $(el).tooltip(binding.value || isUndefined(binding.value) ? "enable" : "disable");
         }
     },
 
     bind(el, binding)
     {
-        if (window.matchMedia("(min-width: 768px)").matches)
+        setTimeout(() =>
         {
-            setTimeout(() =>
-            {
-                $(el).tooltip(binding.value || isUndefined(binding.value) ? "enable" : "disable");
-            }, 1);
-        }
+            $(el).tooltip(binding.value || isUndefined(binding.value) ? "enable" : "disable");
+        }, 1);
     }
 });
