@@ -91,7 +91,7 @@ class MappingService
     private function matchDataByType($type, $value, $scope = "display")
     {
         $matchedValue = '';
-        
+
         switch($type){
             case "string":
                 $matchedValue = $value;
@@ -109,7 +109,7 @@ class MappingService
                 if ( $scope == 'display') {
                     $matchedValue = $value != "" ? explode(", ", $value) : [];
                 } else {
-                    $matchedValue = implode($value, ", ");
+                    $matchedValue = is_null($value) ? '' : implode(', ', $value);
                 }
                 break;
         }
