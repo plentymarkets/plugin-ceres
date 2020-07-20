@@ -62408,7 +62408,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("open-filter-toolbar", {
 
     if (openFilterToolbar) {
       window.localStorage.removeItem("openFilterToolbar");
-      $(el).collapse("show");
+      vue__WEBPACK_IMPORTED_MODULE_0___default.a.nextTick(function () {
+        $(el).collapse("show");
+      });
     }
   }
 });
