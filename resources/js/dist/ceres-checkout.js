@@ -71715,7 +71715,7 @@ var actions = {
           // check if set component and replace relevant data
           if (rootState.items.itemSetId > 0) {
             var itemSetId = rootState.items.itemSetId;
-            var setComponentMeta = rootState.items[itemSetId].setComponents.find(function (setComponent) {
+            var setComponentMeta = rootState.items[itemSetId].variation.documents[0].data.setComponents.find(function (setComponent) {
               return setComponent.itemId === response.documents[0].data.item.id;
             });
             response.documents[0].data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
