@@ -9,7 +9,7 @@
         <div v-else class="form-check-wrapper" v-for="value in facets" :key="value.id">
             <div class="form-check mb-0 pl-0">
                 <input :id="'option-' + value.id + '-' + _uid" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
-                <label :for="'option-' + value.id + '-' + _uid" class="form-check-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '']" :style="paddingInlineStyles">
+                <label :for="'option-' + value.id + '-' + _uid" class="form-check-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '', 'option-' + value.id]" :style="paddingInlineStyles">
                     <div class="d-flex">
                         <span class="flex-grow-1">{{ value.name }}</span>
                         <div class="filter-badge">{{ value.count }}</div>
@@ -87,7 +87,7 @@ export default {
                     window.localStorage.setItem("openFilterToolbar", true);
                 }
             }
-    
+
             this.$store.dispatch("selectFacet", { facetValue });
         },
 
