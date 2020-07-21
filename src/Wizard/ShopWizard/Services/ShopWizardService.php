@@ -141,7 +141,6 @@ class ShopWizardService
             }
 
             if (count($globalData['languages_defaultBrowserLang'])) {
-                $globalData['languages_setLinkedStoreLanguage'] = true;
                 $browserLanguage = $globalData['languages_defaultBrowserLang'];
 
                 //now we extract data related from browser language
@@ -319,10 +318,6 @@ class ShopWizardService
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
             $data['setAllRequiredAssistants'] = 'true';
         }
-
-        $data['onlineStore_enableRecaptcha'] = strlen($data['onlineStore_recaptchaApiKey']) || strlen(
-                $data['onlineStore_recaptchaSecret']
-            );
 
         return $data;
     }
