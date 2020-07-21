@@ -6,7 +6,7 @@
 
 - If faulty code was entered into the FAQ widget, the FAQ widget and subsequent widgets could no longer be edited. In this case, you can now use the ShopBuilder's safe mode to correct the faulty code.
 - The event listeners for scrolling have been set to passive for the sticky container widget. This improves client-side performance.
-- The time until search suggestions are queried has been reduced from 500 milliseconds to 200 milliseconds in order to reduce the number of queries and to make the search more responsive.
+- The time until search suggestions are queried has been reduced from 500 milliseconds to 200 milliseconds in order to make the search more responsive.
 - The two toggles "Do you want to integrate Google reCAPTCHA?" and "I want the online store language to adjust to the browser language." have been removed from the Ceres assistant. The toggles served to display additional settings. These settings are now displayed by default.
 
 ### Fixed
