@@ -114,32 +114,14 @@ export default {
                 return 0;
             }
 
-            if (this.itemSetVariationId > 0 && this.variationId !== this.itemSetVariationId)
-            {
-                let totalQuantity = 0;
-
-                this.$store.state.basket.items.forEach((basketItem) =>
-                {
-                    if (basketItem.variationId === this.itemSetVariationId)
-                    {
-                        basketItem.setComponents.forEach((setComponent) =>
-                        {
-                            if (setComponent.variationId === this.variationId)
-                            {
-                                totalQuantity += setComponent.quantity;
-                            }
-                        });
-                    }
-                });
-
-                return totalQuantity;
-            }
-            else
+            if(this.itemSetVariationId <= 0 || this.variationId === this.itemSetVariationId)
             {
                 const basketObject = this.$store.state.basket.items.find(variations => variations.variationId === this.variationId);
 
                 return basketObject ? basketObject.quantity : 0;
             }
+
+            return 0;
         },
 
         isMinimum()
