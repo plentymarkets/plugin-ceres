@@ -1,5 +1,46 @@
 # Release Notes für Ceres
 
+## v5.0.6 (2020-07-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.5...5.0.6" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Wenn fehlerhafter Code im FAQ-Widget hinterlegt wurde, konnten das FAQ-Widget und ggf. nachfolgende Widgets nicht mehr bearbeitet werden. In diesem Fall kann jetzt der abgesicherte Modus genutzt werden, um den Code zu korrigieren.
+- Die Event-Listener für Scrollen wurden beim Sticky Container-Widget auf passiv gesetzt, wodurch die clientseitige Performance verbessert wurde.
+- Die Zeit bis eine Anfrage für Suchvorschläge gesendet wird wurde von 500 Millisekunden auf 200 Millisekunden gesenkt, um die Suche reaktionsschneller zu machen.
+- Im Ceres-Assistenten wurden die beiden Schalter "Möchtest du Google reCAPTCHA verwenden?" und "Ich möchte, dass sich die Sprache im Webshop der Browsersprache anpasst." entfernt, da diese lediglich weitere Einstellungen im Assistenten sichtbar schalteten. Die betreffenden Einstellungen sind nun automatisch sichtbar.
+
+### Behoben
+
+- Die dynamische Berechnung eines Set-Preises wurde unter bestimmten Umständen inkorrekt ausgeführt. Dies wurde behoben.
+- Im Top Bar-Widget funktionierte die Einstellung **Kunden-Registrierung anzeigen** nicht, wenn die Einstellung **Kunden-Login anzeigen** nicht ebenfalls aktiv war. Dies wurde behoben.
+- Im Artikellisten-Widget hatte die Option **Keine Überschrift** für die Einstellung **Art der Überschrift** keine Auswirkung. Dies wurde behoben.
+- Im Safari-Browser konnten die Warenkorb- und Kasse-Schaltflächen in der Warenkorbvorschau abgeschnitten werden. Dies wurde behoben.
+- Das im Bilderkarussell verwendete Owl Carousel hat einen bekannten Darstellungsfehler, der dazu führt, dass ein weiße Linie auf der linken Seite der Bilder sichtbar sein kann. Dies wurde in Ceres behoben.
+- Bei Ausfuhrlieferungen wurden auf der Bestellbestätigung unterschiedliche Versandkosten für Brutto- und Nettosummen angezeigt. Dies wurde behoben.
+- In dem Widget Artikeldaten-Tabelle wurde der Eintrag **Ohne Altersbeschränkung** nicht ausgegeben. Dies wurde behoben.
+- Für Aufträge, die per Vorkasse abgeschlossen wurden und für die der Auftragstyp **Vorbestellung** eingestellt war, wurden keine Bankdaten in der Bestellbestätigung angezeigt. Dies wurde behoben.
+- Das HTML-Markup im Textfeld für Varianteneigenschaften wurde in der Bestellbestätigung nicht korrekt ausgegeben. Dies wurde behoben.
+- Der Layout-Container `LoginOverlay.ExtendOverlayButtons` funktionierte im Login-Widget nicht wie beabsichtigt. Dies wurde behoben.
+- Der Tooltip-Popper auf der Registrierungsseite, der über das Informations-Icon geöffnet werden kann, wurde in der mobilen Ansicht außerhalb des sichtbaren Bereichs dargestellt. Dies wurde behoben.
+- Deaktivierte Länder in der Lieferlandauswahl im Top Bar-Widget wurden nicht als inaktiv dargestellt. Dies wurde behoben.
+- Wenn die Toolbar für ausgewählte Filter nach dem Neuladen automatisch geöffnet wurde, wurden beim manuellen Schließen und erneutem Öffnen die jQuery-Klassen `class="collapsed"` und `aria-espanded="true"` nicht richtig umgeschaltet. Dies wurde behoben.
+- Im Ceres-Assistenten konnten Optionen, die per Checkbox-Gruppe auswählbar sind, nicht leer gespeichert werden. Das wurde behoben.
+- Das Label-Tag der Facetten aus der Komponente `ItemFilter.vue` wurden um eine CSS-Klasse erweitert, die sich aus dem String "option-" und der ID der Facette zusammensetzt. Dies stellt erweiterte Styling-Möglichkeiten wieder her, die durch eine frühere Version entfernt wurden.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.6 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/js/src/app/components/customer/login/UserLoginHandler.vue](https://github.com/plentymarkets/plugin-ceres/pull/2288/files#diff-2ebcb5967c7916456a856707903d3e9e)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2288/files#diff-f16a56b62b13bd773d56c1b4d739dfe4)
+- [resources/views/Checkout/Macros/OrderTotals.twig](https://github.com/plentymarkets/plugin-ceres/pull/2293/files#diff-b38340ae49c1aec8f7f5c17e150d35f8)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2289/files#diff-b71a6feed738cf93712cc1a55102b6d6)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2298/files#diff-b71a6feed738cf93712cc1a55102b6d6)
+- [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2289/files#diff-fce7fd292bcaa8f8d9b62bd5d19557c7)
+- [resources/views/Widgets/Login/LoginWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2302/files#diff-03fa829aa8eb859e9c0be49e489497d5)
+- [resources/views/Widgets/Common/CollapseWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2303/files#diff-7e8dd5f9ec03fca667d172a097ecd5e4)
+- [resources/js/src/app/components/pageDesign/ShippingCountrySelect.vue](https://github.com/plentymarkets/plugin-ceres/pull/2306/files#diff-1b041b3611e8e3f27f418054f87356c2)
+
+
 ## v5.0.5 (2020-06-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.4...5.0.5" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
