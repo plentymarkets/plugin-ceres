@@ -43,6 +43,21 @@ function CeresMain()
         $("html").addClass("unkown-os");
     }
 
+    $(window).scroll(function()
+    {
+        if ($(".wrapper-main").hasClass("isSticky"))
+        {
+            if ($(this).scrollTop() > 1)
+            {
+                $(".wrapper-main").addClass("sticky");
+            }
+            else
+            {
+                $(".wrapper-main").removeClass("sticky");
+            }
+        }
+    });
+
     window.onpopstate = function(event)
     {
         if (event.state && event.state.requireReload)
