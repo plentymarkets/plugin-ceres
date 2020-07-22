@@ -43,21 +43,6 @@ function CeresMain()
         $("html").addClass("unkown-os");
     }
 
-    $(window).scroll(function()
-    {
-        if ($(".wrapper-main").hasClass("isSticky"))
-        {
-            if ($(this).scrollTop() > 1)
-            {
-                $(".wrapper-main").addClass("sticky");
-            }
-            else
-            {
-                $(".wrapper-main").removeClass("sticky");
-            }
-        }
-    });
-
     window.onpopstate = function(event)
     {
         if (event.state && event.state.requireReload)
@@ -127,11 +112,11 @@ function CeresMain()
             }
         });
 
-        $(window).scroll(function()
+        window.addEventListener("scroll", function()
         {
             if (isDesktop)
             {
-                if ($(this).scrollTop() > offset)
+                if ($(window).scrollTop() > offset)
                 {
                     $(".back-to-top").fadeIn(duration);
                     $(".back-to-top-center").fadeIn(duration);
@@ -142,7 +127,7 @@ function CeresMain()
                     $(".back-to-top-center").fadeOut(duration);
                 }
             }
-        });
+        }, detectPassiveEvents() ? { passive: true } : false );
 
         window.addEventListener("resize", function()
         {
