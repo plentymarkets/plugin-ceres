@@ -2415,8 +2415,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 /* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
@@ -2464,7 +2463,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     showRegistration: {
@@ -2476,45 +2474,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: true
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapGetters"])(["username", "isLoggedIn"])),
-  created: function created() {
-    var _this = this;
-
-    _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].get("/rest/io/customer", {}, {
-      keepOriginalResponse: true
-    }).done(function (response) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(response.data)) {
-        _this.$store.commit("setUserData", response.data);
-      }
-    });
-    this.isLogin = App.templateType === "login";
-    this.isRegister = App.templateType === "register";
-  },
-
-  /**
-   * Add the global event listener for login and logout
-   */
-  mounted: function mounted() {
-    var _this2 = this;
-
-    this.$nextTick(function () {
-      _this2.addEventListeners();
-    });
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapGetters"])(["username", "isLoggedIn"])),
+  data: function data() {
+    return {
+      isLogin: App.templateType === "login",
+      isRegister: App.templateType === "register"
+    };
   },
   methods: _objectSpread({
-    /**
-     * Adds login/logout event listeners
-     */
-    addEventListeners: function addEventListeners() {
-      var _this3 = this;
-
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].listen("AfterAccountAuthentication", function (userData) {
-        _this3.$store.commit("setUserData", userData.accountContact);
-      });
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].listen("AfterAccountContactLogout", function () {
-        _this3.$store.commit("setUserData", null);
-      });
-    },
     unmarkInputFields: function unmarkInputFields() {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_8__["default"].unmarkAllFields($("#login"));
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_8__["default"].unmarkAllFields($("#registration"));
@@ -2525,7 +2492,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     createRegisterModal: function createRegisterModal() {
       this.loadComponent("register-modal");
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapActions"])(["loadComponent"]))
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapActions"])(["loadComponent"]))
 });
 
 /***/ }),
@@ -68387,6 +68354,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_WishListModule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/WishListModule */ "./resources/js/src/app/store/modules/WishListModule.js");
 /* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
 /* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
 
 
 
@@ -68464,6 +68433,27 @@ _services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterBasket
   store.commit("setWishListIds", data.basket.itemWishListIds);
 });
 store.dispatch("loadBasketData");
+/**
+ * Loads user data after pageload
+ */
+
+_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].get("/rest/io/customer", {}, {
+  keepOriginalResponse: true
+}).done(function (response) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(response.data)) {
+    store.commit("setUserData", response.data);
+  }
+});
+/**
+ * Adds login/logout event listeners
+ */
+
+_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterAccountAuthentication", function (userData) {
+  store.commit("setUserData", userData.accountContact);
+});
+_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterAccountContactLogout", function () {
+  store.commit("setUserData", null);
+});
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
 /***/ }),
