@@ -219,7 +219,7 @@ export default {
             this.removeWishListItem(item)
                 .then(() => NotificationService.success(
                     this.$translate("Ceres::Template.wishListRemoved")
-                ));
+                ).closeAfter(3000););
         },
 
         ...mapActions([
