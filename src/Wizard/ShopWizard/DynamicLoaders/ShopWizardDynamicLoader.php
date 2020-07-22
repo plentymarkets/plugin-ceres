@@ -150,7 +150,6 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
         $formFieldStructure = [
             "type" => "select",
             "defaultValue" => $defaultValue,
-            "isVisible" => "typeof languages_setLinkedStoreLanguage ==='undefined' ||languages_setLinkedStoreLanguage === true",
             "options" => [
                 "name" => $this->translator->trans("Ceres::Wizard.{$translationKey}"),
                 'listBoxValues' => $activeList

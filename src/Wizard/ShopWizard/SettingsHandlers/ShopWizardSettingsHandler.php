@@ -131,7 +131,8 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 ];
                 foreach ($data as $dataKey => $dataValue) {
                     if (strpos($dataKey, "languages_browserLang_") !== false) {
-                        $key = end(explode("_", $dataKey));
+                        $exploded = explode("_", $dataKey);
+                        $key = end($exploded);
                         $globalData['browserLanguage'][$key] = $dataValue;
                     }
                 }

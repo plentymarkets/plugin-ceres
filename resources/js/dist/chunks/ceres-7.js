@@ -536,7 +536,8 @@ var render = function() {
                           staticClass: "form-check-label",
                           class: [
                             _vm.paddingClasses,
-                            _vm.isSelected(value.id) ? "bg-appearance" : ""
+                            _vm.isSelected(value.id) ? "bg-appearance" : "",
+                            "option-" + value.id
                           ],
                           style: _vm.paddingInlineStyles,
                           attrs: { for: "option-" + value.id + "-" + _vm._uid }

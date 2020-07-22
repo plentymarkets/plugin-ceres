@@ -123,7 +123,7 @@ const actions =
                             if (rootState.items.itemSetId > 0)
                             {
                                 const itemSetId = rootState.items.itemSetId;
-                                const setComponentMeta = rootState.items[itemSetId].setComponents.find(
+                                const setComponentMeta = rootState.items[itemSetId].variation.documents[0].data.setComponents.find(
                                     (setComponent) => setComponent.itemId === response.documents[0].data.item.id
                                 );
 

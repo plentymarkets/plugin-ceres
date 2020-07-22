@@ -102,50 +102,35 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         if (strpos($content, '<style') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML('<?xml encoding="utf-8" ?>' . $content);
-
+            $doc->loadHTML($content);
             foreach ($doc->getElementsByTagName('style') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
                 $cloned = $element->cloneNode(true);
                 $newdoc->appendChild($newdoc->importNode($cloned, true));
                 self::$styleTags[] = $newdoc->saveHTML();
-
-                $element->parentNode->removeChild($element);
             }
 
-            $content = $doc->saveHTML();
-
-            // remove doctype, html and body tags
-            $trimOffFront = strpos($content,'<body>') + 6;
-            $trimOffEnd = (strrpos($content,'</body>')) - strlen($content);
-            $content = substr($content, $trimOffFront, $trimOffEnd);
+            $content = preg_replace("/<style.*?>.*?<\\/style>/s", "", $content);
         }
 
-        //search for script tag
+        //search for style tag
         if (strpos($content, '<script') !== false) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML('<?xml encoding="utf-8" ?>' . $content);
-
+            $doc->loadHTML($content);
             foreach ($doc->getElementsByTagName('script') as $element) {
                 $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
                 $cloned = $element->cloneNode(true);
                 $newdoc->appendChild($newdoc->importNode($cloned, true));
                 self::$scriptTags[] = $newdoc->saveHTML();
-
-                $element->parentNode->removeChild($element);
             }
 
-            $content = $doc->saveHTML();
-
-            // remove doctype, html and body tags
-            $trimOffFront = strpos($content,'<body>') + 6;
-            $trimOffEnd = (strrpos($content,'</body>')) - strlen($content);
-            $content = substr($content, $trimOffFront, $trimOffEnd);
+            $content = preg_replace("/<script.*?>.*?<\\/script>/s", "", $content);
         }
 
         return $content;
     }
+
 
     /**
      * Return a map of global helper objects to add.

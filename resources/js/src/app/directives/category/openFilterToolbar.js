@@ -10,8 +10,10 @@ Vue.directive("open-filter-toolbar",
             {
                 window.localStorage.removeItem("openFilterToolbar");
 
-                $(el).collapse("show");
+                Vue.nextTick(() =>
+                {
+                    $(el).collapse("show");
+                });
             }
-
         }
     });

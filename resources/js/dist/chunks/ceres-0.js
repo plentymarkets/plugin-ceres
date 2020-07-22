@@ -304,7 +304,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       if (this.isSet) {
         return this.$store.getters["itemSetAllVariationSelected"];
       } else {
-        return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationSelect && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
+        // FIX return true if module is not registered. This equals the default value from the module
+        // and is required to use this component in other contexts, e.g. the category view
+        return !this.$store.state.items[this.itemId] || this.$store.state.items[this.itemId].variationSelect && this.$store.state.items[this.itemId].variationSelect.isVariationSelected;
       }
     },
     isLoading: function isLoading() {
