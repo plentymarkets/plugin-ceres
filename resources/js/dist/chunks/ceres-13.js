@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
         supressNotifications: true
       }).done(function (response) {
         _services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].setToken(response);
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].success(_this3.$translate("Ceres::Template.loginSuccessful")).closeAfter(10000);
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].success(_this3.$translate("Ceres::Template.loginSuccessful")).closeAfter(3000);
 
         if (_this3.backlink !== null && _this3.backlink) {
           location.assign(decodeURIComponent(_this3.backlink));
