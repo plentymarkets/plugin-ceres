@@ -3,7 +3,7 @@
     right: 0;
     bottom: -17px;
     left: 0;
-    z-index: 1000;
+    z-index: $zindex-5;
     display: none;
     width: 94px;
     height: 50px;
@@ -14,13 +14,17 @@
     &:hover {
         opacity: 1;
     }
+
+    @include media-breakpoint-down(sm) {
+        display: none !important; // stylelint-disable-line declaration-no-important
+    }
 }
 
 .back-to-top {
     position: fixed;
     right: 2rem;
     bottom: 2rem;
-    z-index: 100;
+    z-index: $zindex-5;
     display: none;
     width: 40px;
     height: 42px;
@@ -29,6 +33,10 @@
 
     &:hover {
         opacity: 1;
+    }
+
+    @include media-breakpoint-down(sm) {
+        display: none !important; // stylelint-disable-line declaration-no-important
     }
 }
 

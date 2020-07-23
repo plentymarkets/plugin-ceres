@@ -127,11 +127,11 @@ function CeresMain()
             }
         });
 
-        $(window).scroll(function()
+        window.addEventListener("scroll", function()
         {
             if (isDesktop)
             {
-                if ($(this).scrollTop() > offset)
+                if ($(window).scrollTop() > offset)
                 {
                     $(".back-to-top").fadeIn(duration);
                     $(".back-to-top-center").fadeIn(duration);
@@ -142,7 +142,7 @@ function CeresMain()
                     $(".back-to-top-center").fadeOut(duration);
                 }
             }
-        });
+        }, detectPassiveEvents() ? { passive: true } : false );
 
         window.addEventListener("resize", function()
         {
