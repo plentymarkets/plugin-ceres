@@ -54480,9 +54480,9 @@ function CeresMain() {
         searchInput.focus();
       }
     });
-    $(window).scroll(function () {
+    window.addEventListener("scroll", function () {
       if (isDesktop) {
-        if ($(this).scrollTop() > offset) {
+        if ($(window).scrollTop() > offset) {
           $(".back-to-top").fadeIn(duration);
           $(".back-to-top-center").fadeIn(duration);
         } else {
@@ -54490,7 +54490,9 @@ function CeresMain() {
           $(".back-to-top-center").fadeOut(duration);
         }
       }
-    });
+    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_14__["detectPassiveEvents"])() ? {
+      passive: true
+    } : false);
     window.addEventListener("resize", function () {
       isDesktop = window.matchMedia("(min-width: 768px)").matches;
     });
