@@ -131,7 +131,7 @@ export default {
 
                     NotificationService.success(
                         this.$translate("Ceres::Template.loginSuccessful")
-                    ).closeAfter(10000);
+                    ).closeAfter(3000);
 
                     if (this.backlink !== null && this.backlink)
                     {
