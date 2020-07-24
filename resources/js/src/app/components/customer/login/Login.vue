@@ -178,31 +178,27 @@ export default {
 
             this.$store.dispatch("loadComponent", "forgot-password-modal");
 
-            if (this.modalElement)
+            Vue.nextTick(() =>
             {
-                ModalService
-                    .findModal(document.getElementById(this.modalElement))
-                    .hide()
-                    .then(() =>
-                    {
-                        ModalService.findModal(document.getElementById("resetPwd")).show();
-                    });
-            }
-            else
-            {
-                Vue.nextTick(() =>
+                let modalDOM = document.querySelector('#resetPwd');
+                let modalVue = getContainingComponent(modalDOM);
+
+                modalVue.$data.username = this.username;
+
+                let showModal = () => ModalService.findModal(modalDOM).show();
+
+                if(this.modalElement)
                 {
-                    // find component and write data into it
-                    let modalDOM = document.querySelector('#resetPwd');
-                    let modalVue = getContainingComponent(modalDOM);
-
-                    modalVue.$data.username = this.username;
-
-                    // show modal
-                    ModalService.findModal(modalDOM).show();
-                });
-            }
-
+                    ModalService
+                        .findModal(document.getElementById(this.modalElement))
+                        .hide()
+                        .then(showModal);
+                }
+                else
+                {
+                    showModal();
+                }
+            });
         },
 
         resetError()
