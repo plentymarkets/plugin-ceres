@@ -189,7 +189,10 @@ export default {
             }
             else
             {
-                ModalService.findModal(document.getElementById("resetPwd")).show();
+                Vue.nextTick(function()
+                {
+                    ModalService.findModal(document.getElementById("resetPwd")).show();
+                });
             }
 
         },
