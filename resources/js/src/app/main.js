@@ -1,3 +1,5 @@
+import { getContainingComponent } from "./helper/utils";
+
 const browserDetect = require("detect-browser");
 const NotificationService = require("./services/NotificationService");
 const AutoFocusService = require("./services/AutoFocusService");
@@ -374,19 +376,9 @@ if ( headerParent )
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
 {
-    let parent = widgetElement[1];
+    const parent = widgetElement[1];
 
-    let parentComponent = null;
-
-    while (parent)
-    {
-        if (parent.__vue__)
-        {
-            parentComponent = parent.__vue__;
-            break;
-        }
-        parent = parent.parentElement;
-    }
+    const parentComponent = getContainingComponent(parent);
 
     const compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
     const component = new Vue({

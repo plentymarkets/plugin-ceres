@@ -43,6 +43,7 @@ import NotificationService from "../../../services/NotificationService";
 import ModalService from "../../../services/ModalService";
 import AutoFocusService from "../../../services/AutoFocusService";
 import ValidationService from "../../../services/ValidationService";
+import { getContainingComponent } from "../../../helper/utils";
 
 export default {
     mixins: [ButtonSizePropertyMixin],
@@ -189,7 +190,17 @@ export default {
             }
             else
             {
-                Vue.nextTick(() => ModalService.findModal(document.getElementById("resetPwd")).show());
+                Vue.nextTick(() =>
+                {
+                    // find component and write data into it
+                    let modalDOM = document.querySelector('#resetPwd');
+                    let modalVue = getContainingComponent(modalDOM);
+
+                    modalVue.$data.username = this.username;
+
+                    // show modal
+                    ModalService.findModal(modalDOM).show();
+                });
             }
 
         },
