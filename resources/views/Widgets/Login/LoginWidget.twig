@@ -1,5 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 
 {% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -11,8 +12,6 @@
 {{ Twig.set("backlink", "request.get('backlink')") }}
 
 {{ Twig.if("not services.customer.getContactId() > 0 or #{ isPreview | json_encode }") }}
-    {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
-
     <div class="widget widget-login widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
         {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
             <div class="widget-inner">
