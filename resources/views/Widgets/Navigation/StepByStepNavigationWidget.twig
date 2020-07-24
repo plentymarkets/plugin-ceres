@@ -52,7 +52,7 @@
                     <div class="row">
                         {{ Twig.for("i", "1..children | length") }}
                             {{ Twig.if("loop.index <= chunkSize") }}
-                                <div class="col-{{ 12 / numberOfColumns }} mb-3">
+                                <div class="col-6 col-md-{{ 12 / numberOfColumns }} mb-3">
                                     <div class="nav-item border d-flex is-loading refreshing with-icon component-loading">
                                         {{ Twig.if("hasImg") }}
                                             <div class="prop-1-1"></div>
