@@ -2,7 +2,7 @@
     <div>
         <slot v-if="!isInitiallyLoaded"></slot>
         <div class="row">
-            <div class="mb-3" :class="'col-' + columnDivider" v-for="category in categoryChildren">
+            <div class="mb-3 col-6" :class="'col-md-' + columnDivider" v-for="category in categoryChildren">
                 <a :href="getCategoryUrl(category.url)" :title="category.details[0].metaTitle || category.details[0].name">
                     <div class="nav-item border d-flex" :class="{ 'no-img': imageSource === 'none' }">
                         <div v-if="category.details[0][imageSource]" class="prop-1-1">

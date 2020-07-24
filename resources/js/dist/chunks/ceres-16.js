@@ -224,7 +224,10 @@ var render = function() {
           _vm._l(_vm.categoryChildren, function(category) {
             return _c(
               "div",
-              { staticClass: "mb-3", class: "col-" + _vm.columnDivider },
+              {
+                staticClass: "mb-3 col-6",
+                class: "col-md-" + _vm.columnDivider
+              },
               [
                 _c(
                   "a",
