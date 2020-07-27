@@ -9,7 +9,7 @@
 
 ### Behoben
 
-- Durch einen Fehler wurde der ShopBuilder-Header unter bestimmten Umständen nicht korrekt ausgegeben. Die wurde behoben.
+- Durch einen Fehler wurde der ShopBuilder-Header unter bestimmten Umständen nicht korrekt ausgegeben. Dies wurde behoben.
 - Die "Nach oben"-Schaltfläche wurde angezeigt, selbst wenn sich der Nutzer am oberen Ende der Seite befand. Dies wurde behoben.
 - Das "Passwort vergessen"-Modal wurde erst beim zweiten Aufruf angezeigt, wenn sich der Nutzer auf der Login-Route befand. Dies wurde behoben.
 - Beim Login-Widget konnte es im Zusammenhang mit dem `layoutContainer`-Makro zu einem Fehler kommen. Dies wurde behoben.
