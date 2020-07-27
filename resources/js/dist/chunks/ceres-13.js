@@ -19,6 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_ModalService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
 /* harmony import */ var _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/AutoFocusService */ "./resources/js/src/app/services/AutoFocusService.js");
 /* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 //
@@ -58,6 +59,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -166,16 +168,25 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     showResetPwdView: function showResetPwdView() {
+      var _this4 = this;
+
       this.resetError();
       this.$store.dispatch("loadComponent", "forgot-password-modal");
+      Vue.nextTick(function () {
+        var modalDOM = document.querySelector('#resetPwd');
+        var modalVue = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_8__["getContainingComponent"])(modalDOM);
+        modalVue.$data.username = _this4.username;
 
-      if (this.modalElement) {
-        _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(document.getElementById(this.modalElement)).hide().then(function () {
-          _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(document.getElementById("resetPwd")).show();
-        });
-      } else {
-        _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(document.getElementById("resetPwd")).show();
-      }
+        var showModal = function showModal() {
+          return _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(modalDOM).show();
+        };
+
+        if (_this4.modalElement) {
+          _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(document.getElementById(_this4.modalElement)).hide().then(showModal);
+        } else {
+          showModal();
+        }
+      });
     },
     resetError: function resetError() {
       this.loginFields.forEach(function (element) {
