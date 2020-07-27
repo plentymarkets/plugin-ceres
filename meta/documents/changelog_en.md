@@ -1,5 +1,26 @@
 # Release Notes for Ceres
 
+## v5.0.7 (2020-07-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...5.0.7" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Overlong links could negatively impact the online store layout. Overlong links will now wrap by default.
+- The media breakpoints of the CSS class `.alert` now only apply to the parent class `.notification-wrapper` since they could negatively impact the layout of the online store.
+
+### Fixed
+
+- Due to an error, the ShopBuilder header was not displayed correctly under certain circumstances. This has been fixed.
+- The "Back to top" button was displayed even if the user had not scrolled down yet. This has been fixed.
+- The "Forgot your password" modal only opened upon the second access if the user was on the page linked to the login route. This has been fixed.
+- The login widget led to an error in combination with the `LayoutContainer` macro. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.7 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/main.js](https://github.com/plentymarkets/plugin-ceres/pull/2323/files#diff-2d3b163fb3dbf5ee6e271d094272bf51)
+- [resources/scss/ceres/views/PageDesign/_footer.scss](https://github.com/plentymarkets/plugin-ceres/pull/2323/files#diff-6244a5657b552ea344635d81a2d11a1a)
+- [resources/views/PageDesign/Partials/Footer.twig](https://github.com/plentymarkets/plugin-ceres/pull/2323/files#diff-47994aea903bc5cda6db336417059b47)
+
 ## v5.0.6 (2020-07-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.5...5.0.6" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
