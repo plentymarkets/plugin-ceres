@@ -1,12 +1,7 @@
 .widget-background {
-    z-index: auto;
-
-    > div:first-child {
-        z-index: 0;
-    }
 
     > .container-max {
-        z-index: 1;
+        position: relative;
         padding-right: 0;
         padding-left: 0;
     }
