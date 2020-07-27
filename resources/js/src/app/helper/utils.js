@@ -80,7 +80,14 @@ export function orderArrayByKey(array, key, desc)
         return 0;
     });
 }
-
+/**
+ * Traverse the DOM upward starting from the input element until a DOM node with a vue component is found.
+ * Returns the vue component, if found, else returns null.
+ *
+ * @param {Element}   element
+ *
+ * @returns {Vue}
+ */
 export function getContainingComponent(element)
 {
     let parentComponent = null;
