@@ -1,25 +1,29 @@
 # Release Notes für Ceres
 
-## v5.0.7 (2020-07-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...5.0.7" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.7 (2020-07-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...5.0.7" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
 
 - Sehr lange Links konnten das Layout des Webshops beeinflussen. Diese brechen jetzt standardmäßig um.
 - Die Media-Breakpoints für die CSS-Klasse `.alert` gelten nun nur noch für die Eltern-Klasse `.notification-wrapper`, da sie das Layout des Webshops beeinflussen konnten.
+- Das Widget Step-By-Step-Navigation zeigt nun zur besseren Lesbarkeit auf mobilen Geräten standardmäßig maximal 2 Kategorien an.
+- Die Option **Auto** für die Einstellung **Mindesthöhe** im Hintergrundbild-Widget wurde überarbeitet. Wenn dieses Widget in ein Raster-Widget eingebettet ist, sorgt die Option **Auto** dafür, dass das Hintergrundbild-Widget auf die Höhe des höchsten Widgets im gleichen Raster skaliert.
 
 ### Behoben
 
-- Durch einen Fehler wurde der ShopBuilder-Header unter bestimmten Umständen nicht korrekt ausgegeben. Die wurde behoben.
+- Durch einen Fehler wurde der ShopBuilder-Header unter bestimmten Umständen nicht korrekt ausgegeben. Dies wurde behoben.
 - Die "Nach oben"-Schaltfläche wurde angezeigt, selbst wenn sich der Nutzer am oberen Ende der Seite befand. Dies wurde behoben.
 - Das "Passwort vergessen"-Modal wurde erst beim zweiten Aufruf angezeigt, wenn sich der Nutzer auf der Login-Route befand. Dies wurde behoben.
 - Beim Login-Widget konnte es im Zusammenhang mit dem `layoutContainer`-Makro zu einem Fehler kommen. Dies wurde behoben.
+- Das Hintergrundbild-Widget konnte unter bestimmten Umständen von eigenem CSS überdeckt werden. Dies wurde behoben.
 
 ### Angepasste Templates
 
 - Im Zuge des Releases von Ceres 5.0.7 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
-- [resources/js/src/app/main.js](https://github.com/plentymarkets/plugin-ceres/pull/2323/files#diff-2d3b163fb3dbf5ee6e271d094272bf51)
-- [resources/scss/ceres/views/PageDesign/_footer.scss](https://github.com/plentymarkets/plugin-ceres/pull/2323/files#diff-6244a5657b552ea344635d81a2d11a1a)
 - [resources/views/PageDesign/Partials/Footer.twig](https://github.com/plentymarkets/plugin-ceres/pull/2323/files#diff-47994aea903bc5cda6db336417059b47)
+- [resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...stable#diff-2043824c28b2ea46b69dc85c42439175)
+- [resources/views/Widgets/Login/LoginWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...stable#diff-03fa829aa8eb859e9c0be49e489497d5)
+- [resources/views/Widgets/Navigation/StepByStepNavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...stable#diff-d3ea59b4c6ebb4395ce978e00fc64e0b)
 
 ## v5.0.6 (2020-07-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.5...5.0.6" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
