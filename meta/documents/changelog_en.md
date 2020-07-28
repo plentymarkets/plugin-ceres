@@ -1,11 +1,13 @@
 # Release Notes for Ceres
 
-## v5.0.7 (2020-07-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...5.0.7" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.7 (2020-07-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...5.0.7" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
 
 - Overlong links could negatively impact the online store layout. Overlong links will now wrap by default.
 - The media breakpoints of the CSS class `.alert` now only apply to the parent class `.notification-wrapper` since they could negatively impact the layout of the online store.
+- The widget step-by-step navigation now displays a maximum of 2 categories on mobile devices per default in order to improve readability.
+- The option **Auto** for the **Minimum height** setting of the background image widget has been reworked. If the background image widget is placed in a grid widget, the option **Auto** scales the background image to the height of the highest widget in the same grid.
 
 ### Fixed
 
@@ -13,6 +15,7 @@
 - The "Back to top" button was displayed even if the user had not scrolled down yet. This has been fixed.
 - The "Forgot your password" modal only opened upon the second access if the user was on the page linked to the login route. This has been fixed.
 - The login widget led to an error in combination with the `LayoutContainer` macro. This has been fixed.
+- Under certain circumstances, custom CSS could override the background image widget. This has been fixed.
 
 ### Changed templates
 
