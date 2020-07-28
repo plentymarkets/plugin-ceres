@@ -1,11 +1,9 @@
 .widget-accordion {
     .card {
-        &:first-of-type {
-            border-bottom: $card-border-width solid $card-border-color;
-        }
+        border-bottom: 0;
 
-        &:nth-of-type(2) {
-            border-top: 0;
+        &:last-child {
+            border-bottom: $card-border-width solid $card-border-color;
         }
 
         button {

@@ -92,7 +92,7 @@ export default {
 
                         NotificationService.success(
                             this.$translate("Ceres::Template.singleItemWishListAdded")
-                        );
+                        ).closeAfter(3000);
                     },
                     error =>
                     {
@@ -112,7 +112,7 @@ export default {
 
                         NotificationService.success(
                             this.$translate("Ceres::Template.singleItemWishListRemoved")
-                        );
+                        ).closeAfter(3000);
                     },
                     error =>
                     {

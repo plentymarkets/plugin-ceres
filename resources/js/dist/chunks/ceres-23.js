@@ -68,7 +68,7 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password,
         hash: this.hash
       }).done(function (response) {
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].success(_this.$translate("Ceres::Template.myAccountChangeEmailSuccessful"));
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].success(_this.$translate("Ceres::Template.myAccountChangeEmailSuccessful")).closeAfter(3000);
         window.location.assign(window.location.origin);
       }).fail(function () {
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].error(_this.$translate("Ceres::Template.myAccountChangeEmailFailed")).closeAfter(10000);

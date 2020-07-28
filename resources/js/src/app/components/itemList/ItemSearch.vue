@@ -53,7 +53,7 @@ export default {
         timeout:
         {
             type: Number,
-            default: 500
+            default: 200
         }
     },
 
@@ -71,7 +71,7 @@ export default {
         this.onValueChanged = debounce(searchString =>
         {
             this.autocomplete(searchString);
-        }, defaultValue(this.timeout, 500));
+        }, defaultValue(this.timeout, 200));
     },
 
     computed:

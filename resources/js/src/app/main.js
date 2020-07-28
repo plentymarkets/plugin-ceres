@@ -1,3 +1,5 @@
+import { getContainingComponent } from "./helper/utils";
+
 const browserDetect = require("detect-browser");
 const NotificationService = require("./services/NotificationService");
 const AutoFocusService = require("./services/AutoFocusService");
@@ -5,6 +7,7 @@ const AutoFocusService = require("./services/AutoFocusService");
 import { debounce } from "./helper/debounce";
 import Vue from "vue";
 import { getStyle } from "./helper/dom";
+import { detectPassiveEvents } from "./helper/featureDetect";
 
 // Frontend end scripts
 // eslint-disable-next-line
@@ -126,11 +129,11 @@ function CeresMain()
             }
         });
 
-        $(window).scroll(function()
+        window.addEventListener("scroll", function()
         {
             if (isDesktop)
             {
-                if ($(this).scrollTop() > offset)
+                if ($(window).scrollTop() > offset)
                 {
                     $(".back-to-top").fadeIn(duration);
                     $(".back-to-top-center").fadeIn(duration);
@@ -141,7 +144,7 @@ function CeresMain()
                     $(".back-to-top-center").fadeOut(duration);
                 }
             }
-        });
+        }, detectPassiveEvents() ? { passive: true } : false );
 
         window.addEventListener("resize", function()
         {
@@ -328,7 +331,7 @@ if ( headerParent )
     window.addEventListener("scroll", debounce(function()
     {
         scrollHeaderElements();
-    }, 10));
+    }, 10), detectPassiveEvents() ? { passive: true } : false);
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
@@ -373,19 +376,9 @@ if ( headerParent )
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
 {
-    let parent = widgetElement[1];
+    const parent = widgetElement[1];
 
-    let parentComponent = null;
-
-    while (parent)
-    {
-        if (parent.__vue__)
-        {
-            parentComponent = parent.__vue__;
-            break;
-        }
-        parent = parent.parentElement;
-    }
+    const parentComponent = getContainingComponent(parent);
 
     const compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
     const component = new Vue({

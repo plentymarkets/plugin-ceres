@@ -9,12 +9,15 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/dom */ "./resources/js/src/app/helper/dom.js");
-/* harmony import */ var _services_ModalService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var popper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js");
+/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.timers */ "./node_modules/core-js/modules/web.timers.js");
+/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _services_ModalService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var popper_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js");
+
 //
 //
 //
@@ -74,43 +77,14 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.$nextTick(function () {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(_this.$refs.node) && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(_this.$refs.handle)) {
-        var node = _this.$refs.node;
-
-        if (!App.isShopBuilder) {
-          node.parentElement.removeChild(node);
-          document.body.appendChild(node);
-        }
-
-        _this.popper = new popper_js__WEBPACK_IMPORTED_MODULE_4__["default"](_this.$refs.handle.firstElementChild || _this.$refs.handle, node, {
-          placement: _this.placement,
-          modifiers: {
-            arrow: {
-              element: _this.$refs.arrow
-            }
-          },
-          removeOnDestroy: true
-        });
-        var handle = _this.$refs.handle.firstElementChild || _this.$refs.handle;
-
-        if (_this.trigger === "focus") {
-          handle.addEventListener("focus", function () {
-            _this.showPopper();
-          });
-          handle.addEventListener("blur", function () {
-            _this.hidePopper();
-          });
-        } else {
-          handle.addEventListener(_this.trigger, function () {
-            _this.togglePopper();
-          });
-        }
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(_this.$refs.node) && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(_this.$refs.handle)) {
+        _this.initializePopper();
       }
 
-      var parentModal = Object(_helper_dom__WEBPACK_IMPORTED_MODULE_1__["findParent"])(_this.$el, ".modal");
+      var parentModal = Object(_helper_dom__WEBPACK_IMPORTED_MODULE_2__["findParent"])(_this.$el, ".modal");
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(parentModal)) {
-        Object(_services_ModalService__WEBPACK_IMPORTED_MODULE_2__["findModal"])(parentModal).on("hide.bs.modal", function () {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(parentModal)) {
+        Object(_services_ModalService__WEBPACK_IMPORTED_MODULE_3__["findModal"])(parentModal).on("hide.bs.modal", function () {
           _this.hidePopper();
         });
       }
@@ -118,19 +92,68 @@ __webpack_require__.r(__webpack_exports__);
   },
   destroyed: function destroyed() {
     this.popper.destroy();
+    window.removeEventListener(this.eventListener);
   },
   data: function data() {
     return {
       isVisible: false,
-      popper: null
+      popper: null,
+      eventListener: null
     };
   },
   computed: {
     classNames: function classNames() {
-      return this.popoverClass + (!this.isVisible ? " d-none" : "");
+      // in the shopbuilder we need to hide the popper completely, to hide the dropzone
+      var hideClass = App.isShopBuilder ? "d-none" : "hidden";
+      return this.popoverClass + (!this.isVisible ? hideClass : "");
     }
   },
   methods: {
+    initializePopper: function initializePopper() {
+      var node = this.$refs.node;
+
+      if (!App.isShopBuilder) {
+        node.parentElement.removeChild(node);
+        document.body.appendChild(node);
+      }
+
+      this.popper = new popper_js__WEBPACK_IMPORTED_MODULE_5__["default"](this.$refs.handle.firstElementChild || this.$refs.handle, node, {
+        placement: this.placement,
+        modifiers: {
+          arrow: {
+            element: this.$refs.arrow
+          }
+        },
+        removeOnDestroy: true
+      });
+      this.addEventListeners();
+    },
+    addEventListeners: function addEventListeners() {
+      var _this2 = this;
+
+      this.eventListener = window.addEventListener("resize", function () {
+        // popper's position needs to be reset after a resize, to prevent the overflow, after switching from landscape to normal
+        _this2.hidePopper();
+
+        setTimeout(function () {
+          _this2.$refs.node.style.transform = "";
+        }, 0);
+      });
+      var handle = this.$refs.handle.firstElementChild || this.$refs.handle;
+
+      if (this.trigger === "focus") {
+        handle.addEventListener("focus", function () {
+          _this2.showPopper();
+        });
+        handle.addEventListener("blur", function () {
+          _this2.hidePopper();
+        });
+      } else {
+        handle.addEventListener(this.trigger, function () {
+          _this2.togglePopper();
+        });
+      }
+    },
     togglePopper: function togglePopper() {
       this.isVisible = !this.isVisible;
       this.update();
@@ -144,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
       this.update();
     },
     update: function update() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(this.popper)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(this.popper)) {
         this.popper.scheduleUpdate();
       }
     }

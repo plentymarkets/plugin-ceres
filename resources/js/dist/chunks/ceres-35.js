@@ -158,24 +158,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return 0;
       }
 
-      if (this.itemSetVariationId > 0 && this.variationId !== this.itemSetVariationId) {
-        var totalQuantity = 0;
-        this.$store.state.basket.items.forEach(function (basketItem) {
-          if (basketItem.variationId === _this2.itemSetVariationId) {
-            basketItem.setComponents.forEach(function (setComponent) {
-              if (setComponent.variationId === _this2.variationId) {
-                totalQuantity += setComponent.quantity;
-              }
-            });
-          }
-        });
-        return totalQuantity;
-      } else {
+      if (this.itemSetVariationId <= 0 || this.variationId === this.itemSetVariationId) {
         var basketObject = this.$store.state.basket.items.find(function (variations) {
           return variations.variationId === _this2.variationId;
         });
         return basketObject ? basketObject.quantity : 0;
       }
+
+      return 0;
     },
     isMinimum: function isMinimum() {
       return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.compMin) && this.compValue - this.compInterval < this.compMin;
@@ -284,7 +274,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
         // minimum quantity already in basket
         this.compMin = this.compInterval;
       } else if (this.variationBasketQuantity === 0) {

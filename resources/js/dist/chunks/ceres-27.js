@@ -116,7 +116,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         this.isLoading = true;
         this.$store.dispatch("addToWishList", parseInt(this.currentVariationId)).then(function (response) {
           _this.isLoading = false;
-          NotificationService.success(_this.$translate("Ceres::Template.singleItemWishListAdded"));
+          NotificationService.success(_this.$translate("Ceres::Template.singleItemWishListAdded")).closeAfter(3000);
         }, function (error) {
           _this.isLoading = false;
         });
@@ -131,7 +131,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           id: parseInt(this.currentVariationId)
         }).then(function (response) {
           _this2.isLoading = false;
-          NotificationService.success(_this2.$translate("Ceres::Template.singleItemWishListRemoved"));
+          NotificationService.success(_this2.$translate("Ceres::Template.singleItemWishListRemoved")).closeAfter(3000);
         }, function (error) {
           _this2.isLoading = false;
         });

@@ -21,6 +21,7 @@ import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
 import eventPropagation from "./plugins/EventPropagationPlugin";
+import { isDefined } from "../helper/utils";
 
 
 // =========================
@@ -97,5 +98,29 @@ ApiService.listen("AfterBasketChanged",
     });
 
 store.dispatch("loadBasketData");
+
+/**
+ * Loads user data after pageload
+ */
+ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
+    .done(response =>
+    {
+        if (isDefined(response.data))
+        {
+            store.commit("setUserData", response.data);
+        }
+    });
+
+/**
+ * Adds login/logout event listeners
+ */
+ApiService.listen("AfterAccountAuthentication", userData =>
+{
+    store.commit("setUserData", userData.accountContact);
+});
+ApiService.listen("AfterAccountContactLogout", () =>
+{
+    store.commit("setUserData", null);
+});
 
 export default store;
