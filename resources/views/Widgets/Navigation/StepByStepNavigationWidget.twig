@@ -33,8 +33,12 @@
             </div>
 
         {% else %}
-            {{ Twig.set("category", "services.category.getCurrentCategory()") }}
-            {{ Twig.if("category is defined and category.level <= #{ maxLevel }") }}
+
+            {{ Twig.if("category is not defined or category is null") }}
+                {{ Twig.set("category", "services.category.getCurrentCategory()") }}
+            {{ Twig.endif() }}
+
+            {{ Twig.if("category is defined and category is not null and category.level <= #{ maxLevel }") }}
                 {{ Twig.set("children", Twig.call("services.category.getCurrentCategoryChildren", [Twig.var("category.id")])) }}
                 {{ Twig.set("chunkSize", numberOfColumns * numberOfRows)}}
 
