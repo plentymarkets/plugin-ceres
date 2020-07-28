@@ -9098,6 +9098,10 @@ button:focus {
     overflow-x: hidden;
 }
 
+a {
+    overflow-wrap: break-word;
+}
+
 .lozad {
     display: block;
     min-height: 1px;
@@ -9784,7 +9788,7 @@ html.ie {
 
 
 // Components
-.alert {
+.notification-wrapper .alert {
     @include media-breakpoint-up(sm) {
         width: 400px;
     }
@@ -10609,7 +10613,7 @@ textarea.no-resize {
     right: 0;
     bottom: -17px;
     left: 0;
-    z-index: 1000;
+    z-index: $zindex-5;
     display: none;
     width: 94px;
     height: 50px;
@@ -10620,13 +10624,17 @@ textarea.no-resize {
     &:hover {
         opacity: 1;
     }
+
+    @include media-breakpoint-down(sm) {
+        display: none !important; // stylelint-disable-line declaration-no-important
+    }
 }
 
 .back-to-top {
     position: fixed;
     right: 2rem;
     bottom: 2rem;
-    z-index: 100;
+    z-index: $zindex-5;
     display: none;
     width: 40px;
     height: 42px;
@@ -10635,6 +10643,10 @@ textarea.no-resize {
 
     &:hover {
         opacity: 1;
+    }
+
+    @include media-breakpoint-down(sm) {
+        display: none !important; // stylelint-disable-line declaration-no-important
     }
 }
 
@@ -12574,6 +12586,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 .widget-background {
 
     > .container-max {
+        position: relative;
         padding-right: 0;
         padding-left: 0;
     }
@@ -12606,7 +12619,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         right: 0;
         bottom: 0;
         left: 0;
-        z-index: -1;
         height: 100% !important; // stylelint-disable-line declaration-no-important
         background-repeat: no-repeat;
         background-position: center !important; // stylelint-disable-line declaration-no-important
@@ -12635,6 +12647,11 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 .widget-grid {
     .widget-background {
+
+        &.mh-auto {
+            height: 100%;
+        }
+
         > .container-max {
             padding-right: 0 !important; // stylelint-disable-line declaration-no-important
             padding-left: 0 !important; // stylelint-disable-line declaration-no-important

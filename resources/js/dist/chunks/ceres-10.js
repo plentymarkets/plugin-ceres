@@ -332,7 +332,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       };
       this.removeWishListItem(item).then(function () {
-        return _services_NotificationService__WEBPACK_IMPORTED_MODULE_10__["default"].success(_this.$translate("Ceres::Template.wishListRemoved"));
+        return _services_NotificationService__WEBPACK_IMPORTED_MODULE_10__["default"].success(_this.$translate("Ceres::Template.wishListRemoved")).closeAfter(3000);
       });
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapActions"])(["removeWishListItem"]))

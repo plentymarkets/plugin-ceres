@@ -31,7 +31,7 @@
 
 - Wenn fehlerhafter Code im FAQ-Widget hinterlegt wurde, konnten das FAQ-Widget und ggf. nachfolgende Widgets nicht mehr bearbeitet werden. In diesem Fall kann jetzt der abgesicherte Modus genutzt werden, um den Code zu korrigieren.
 - Die Event-Listener für Scrollen wurden beim Sticky Container-Widget auf passiv gesetzt, wodurch die clientseitige Performance verbessert wurde.
-- Die Zeit bis eine Anfrage für Suchvorschläge gesendet wird wurde von 500 Millisekunden auf 200 Millisekunden gesenkt, um die Zahl der Anfragen zu reduzieren und die Suche reaktionsschneller zu machen.
+- Die Zeit bis eine Anfrage für Suchvorschläge gesendet wird wurde von 500 Millisekunden auf 200 Millisekunden gesenkt, um die Suche reaktionsschneller zu machen.
 - Im Ceres-Assistenten wurden die beiden Schalter "Möchtest du Google reCAPTCHA verwenden?" und "Ich möchte, dass sich die Sprache im Webshop der Browsersprache anpasst." entfernt, da diese lediglich weitere Einstellungen im Assistenten sichtbar schalteten. Die betreffenden Einstellungen sind nun automatisch sichtbar.
 
 ### Behoben
