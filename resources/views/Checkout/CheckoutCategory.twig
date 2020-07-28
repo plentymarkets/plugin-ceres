@@ -6,7 +6,7 @@
     {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
     {% set shopBuilderTemplate = shop_builder_category_template(category.id, "checkout") %}
 
-    {% if isShopbuilder == false and overrideCheckout | trim is not empty %}
+    {% if isShopBuilder == false and overrideCheckout | trim is not empty %}
         {{ overrideCheckout }}
     {% elseif shopBuilderTemplate | trim is not empty %}
         <div class="container-max checkout">
