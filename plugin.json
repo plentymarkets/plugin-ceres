@@ -368,7 +368,7 @@
         },
         {
             "key"           : "Checkout",
-            "name"          : "Checkout: Override checkout (deprecated)",
+            "name"          : "Checkout: Override checkout",
             "description"   : "Override the complete checkout page.",
             "multiple"      : false
         },
