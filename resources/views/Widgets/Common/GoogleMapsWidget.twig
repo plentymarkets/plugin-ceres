@@ -12,7 +12,7 @@
     <div class="widget widget-google-maps{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlinePadding | length > 0 %} {{ inlinePadding }}{% endif %}">
         {% if not isPreview %}
         <div class="widget-inner{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
-            <google-maps-widget address="{{ widget.settings.address.mobile | replace({"\n": " ", "\r": "", "\t", " "}) }}"
+            <google-maps-widget address="{{ widget.settings.address.mobile | replace({"\n": " ", "\r": "", "\t": " "}) }}"
                                 :zoom="{{ widget.settings.zoom.mobile | default(16) }}"
                                 maptype="{{ widget.settings.maptype.mobile }}"
                                 aspect-ratio="{{ widget.settings.aspectRatio.mobile }}">
