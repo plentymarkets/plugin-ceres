@@ -1,6 +1,7 @@
 .widget-background {
 
     > .container-max {
+        position: relative;
         padding-right: 0;
         padding-left: 0;
     }
@@ -31,7 +32,6 @@
         right: 0;
         bottom: 0;
         left: 0;
-        z-index: -1;
         height: 100% !important; // stylelint-disable-line declaration-no-important
         background-repeat: no-repeat;
         background-position: center !important; // stylelint-disable-line declaration-no-important
@@ -60,6 +60,11 @@
 
 .widget-grid {
     .widget-background {
+
+        &.mh-auto {
+            height: 100%;
+        }
+
         > .container-max {
             padding-right: 0 !important; // stylelint-disable-line declaration-no-important
             padding-left: 0 !important; // stylelint-disable-line declaration-no-important

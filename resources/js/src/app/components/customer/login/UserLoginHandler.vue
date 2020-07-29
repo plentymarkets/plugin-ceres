@@ -31,7 +31,6 @@
 <script>
 import ApiService from "../../../services/ApiService";
 import ValidationService from "../../../services/ValidationService";
-import { isDefined } from "../../../helper/utils";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -53,49 +52,15 @@ export default {
         ])
     },
 
-    created()
+    data()
     {
-        ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
-            .done(response =>
-            {
-                if (isDefined(response.data))
-                {
-                    this.$store.commit("setUserData", response.data);
-                }
-            });
-
-        this.isLogin = App.templateType === "login";
-        this.isRegister = App.templateType === "register";
-    },
-
-    /**
-     * Add the global event listener for login and logout
-     */
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            this.addEventListeners();
-        });
+        return {
+            isLogin: App.templateType === "login",
+            isRegister: App.templateType === "register"
+        };
     },
 
     methods: {
-        /**
-         * Adds login/logout event listeners
-         */
-        addEventListeners()
-        {
-            ApiService.listen("AfterAccountAuthentication", userData =>
-            {
-                this.$store.commit("setUserData", userData.accountContact);
-            });
-
-            ApiService.listen("AfterAccountContactLogout", () =>
-            {
-                this.$store.commit("setUserData", null);
-            });
-        },
-
         unmarkInputFields()
         {
             ValidationService.unmarkAllFields($("#login"));

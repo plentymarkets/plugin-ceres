@@ -33,8 +33,12 @@
             </div>
 
         {% else %}
-            {{ Twig.set("category", "services.category.getCurrentCategory()") }}
-            {{ Twig.if("category is defined and category.level <= #{ maxLevel }") }}
+
+            {{ Twig.if("category is not defined or category is null") }}
+                {{ Twig.set("category", "services.category.getCurrentCategory()") }}
+            {{ Twig.endif() }}
+
+            {{ Twig.if("category is defined and category is not null and category.level <= #{ maxLevel }") }}
                 {{ Twig.set("children", Twig.call("services.category.getCurrentCategoryChildren", [Twig.var("category.id")])) }}
                 {{ Twig.set("chunkSize", numberOfColumns * numberOfRows)}}
 
@@ -52,7 +56,7 @@
                     <div class="row">
                         {{ Twig.for("i", "1..children | length") }}
                             {{ Twig.if("loop.index <= chunkSize") }}
-                                <div class="col-{{ 12 / numberOfColumns }} mb-3">
+                                <div class="col-6 col-md-{{ 12 / numberOfColumns }} mb-3">
                                     <div class="nav-item border d-flex is-loading refreshing with-icon component-loading">
                                         {{ Twig.if("hasImg") }}
                                             <div class="prop-1-1"></div>

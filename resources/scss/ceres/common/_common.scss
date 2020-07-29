@@ -25,6 +25,10 @@
     overflow-x: hidden;
 }
 
+a {
+    overflow-wrap: break-word;
+}
+
 .lozad {
     display: block;
     min-height: 1px;

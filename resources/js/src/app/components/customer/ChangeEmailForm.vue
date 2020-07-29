@@ -61,7 +61,7 @@ export default {
                 {
                     NotificationService.success(
                         this.$translate("Ceres::Template.myAccountChangeEmailSuccessful")
-                    );
+                    ).closeAfter(3000);
                     window.location.assign(window.location.origin);
                 })
                 .fail(() =>

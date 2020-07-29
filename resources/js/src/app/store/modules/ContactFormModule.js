@@ -161,7 +161,7 @@ const actions =
                                     disableForm(event.target, false);
                                     NotificationService.success(
                                         TranslationService.translate("Ceres::Template.contactSendSuccess")
-                                    );
+                                    ).closeAfter(3000);
                                 })
                                 .fail(response =>
                                 {
