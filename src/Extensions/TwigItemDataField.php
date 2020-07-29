@@ -167,7 +167,7 @@ class TwigItemDataField extends Twig_Extension
         $translator = pluginApp(Translator::class);
         if ($age === 0) {
             return $translator->trans('Ceres::Template.singleItemAgeRestrictionNone', ['age' => $age]);
-        } elseif ($age > 0 && $age < 18) {
+        } elseif ($age > 0 && $age <= 18) {
             return $translator->trans('Ceres::Template.singleItemAgeRestriction', ['age' => $age]);
         } elseif ($age === 50) {
             return $translator->trans('Ceres::Template.singleItemAgeRestrictionNotFlagged', ['age' => $age]);
