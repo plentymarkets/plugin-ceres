@@ -176,7 +176,7 @@ function _validateGroup($formControl, validationKey)
 
 function _validateSelect($formControl, validationKey)
 {
-    const selectedOption = $formControl.children("option:selected").val();
+    const selectedOption = $formControl.children("option:selected").text();
 
     return $.trim(selectedOption) != "";
 }
