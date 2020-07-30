@@ -32,11 +32,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    address: {
+      type: String,
+      required: false
+    },
     lat: {
-      type: Number
+      type: Number,
+      required: false
     },
     lng: {
-      type: Number
+      type: Number,
+      required: false
     },
     zoom: {
       type: Number,
@@ -57,19 +63,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    coordinates: function coordinates() {
-      var isLatValid = !isNaN(this.lat) && this.lat > -90 && this.lat < 90;
-      var isLngValid = !isNaN(this.lng) && this.lng > -180 && this.lng < 180;
-
-      if (isLatValid && isLngValid) {
-        return {
-          lat: this.lat,
-          lng: this.lng
-        };
-      }
-
-      return null;
-    },
     aspectClass: function aspectClass() {
       return "prop-" + this.aspectRatio;
     }
@@ -125,18 +118,48 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    getCoordinates: function getCoordinates() {
+      var _this3 = this;
+
+      var isLatValid = !isNaN(this.lat) && this.lat > -90 && this.lat < 90;
+      var isLngValid = !isNaN(this.lng) && this.lng > -180 && this.lng < 180;
+
+      if (isLatValid && isLngValid) {
+        return Promise.resolve({
+          lat: this.lat,
+          lng: this.lng
+        });
+      } else if (!!this.address && !!window.google) {
+        return new Promise(function (resolve, reject) {
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({
+            address: _this3.address
+          }, function (result, status) {
+            if (!!result && result.length > 0 && !!result[0].geometry) {
+              resolve(result[0].geometry.location);
+            } else {
+              reject();
+            }
+          });
+        });
+      }
+
+      return Promise.reject();
+    },
     initializeMap: function initializeMap() {
-      if (this.coordinates) {
-        var map = new google.maps.Map(this.$refs.googleMapsContainer, {
-          center: this.coordinates,
-          zoom: this.zoom,
-          mapTypeId: this.maptype
+      var _this4 = this;
+
+      this.getCoordinates().then(function (coordinates) {
+        var map = new google.maps.Map(_this4.$refs.googleMapsContainer, {
+          center: coordinates,
+          zoom: _this4.zoom,
+          mapTypeId: _this4.maptype
         });
         new google.maps.Marker({
           map: map,
-          position: this.coordinates
+          position: coordinates
         });
-      }
+      });
     }
   }
 });
