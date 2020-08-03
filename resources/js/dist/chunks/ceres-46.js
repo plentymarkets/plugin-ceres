@@ -92,7 +92,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   destroyed: function destroyed() {
     this.popper.destroy();
-    window.removeEventListener(this.eventListener);
+    window.removeEventListener("resize", this.eventListener);
   },
   data: function data() {
     return {

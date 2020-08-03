@@ -56640,7 +56640,8 @@ function _validateGroup($formControl, validationKey) {
 }
 
 function _validateSelect($formControl, validationKey) {
-  return $.trim($formControl.val()) !== validationKey;
+  var selectedOption = $formControl.children("option:selected").text();
+  return $.trim(selectedOption) != "";
 }
 
 function _validateInput($formControl, validationKey) {
