@@ -50,7 +50,7 @@
     {{ Twig.if("overrideSearchFilters | trim is empty") }}
     <div v-open-filter-toolbar id="filter-collapse_{{ uid }}" class="filter-collapse collapse p-0 m-0{% if isPreview %} position-static sb-no-animation{% endif %}">
         <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-            <div class="collapse-container card-columns" data-translation-empty="{{ trans("Ceres::Template.itemFilterNoContentMessage") }}" {% if isPreview %}data-builder-child-container="collapsable"{% endif %}>
+            <div class="collapse-container card-columns" data-translation-empty="{{ trans("Ceres::Template.itemFilterNoContentMessage") }}" {% if isPreview %}data-builder-child-container="collapsable" style="min-height:100px !important;"{% endif %}>
                 {{ children.collapsable | raw }}
             </div>
             <div class="text-right mt-3 widget-{{ appearance }}">
