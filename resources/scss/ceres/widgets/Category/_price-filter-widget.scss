@@ -1,7 +1,4 @@
-.widget-grid .col-md-3,
-.widget-grid .col-lg-3,
-.widget-grid .col-md-4,
-.widget-grid .widget-grid {
+.widget-grid {
     .widget-filter-price {
         .item-filter-price {
             display: block;
@@ -10,6 +7,21 @@
 
         .input-group {
             margin-bottom: 1rem;
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .filter-collapse {
+        .widget-filter-price {
+            .item-filter-price {
+                display: block;
+                text-align: right;
+            }
+
+            .input-group {
+                margin-bottom: 1rem;
+            }
         }
     }
 }
