@@ -49,7 +49,7 @@ class ToolbarWidget extends BaseWidget
                  ->withTooltip('Widget.toolbarTextTooltip');
         
         $settings->createCheckbox('autoFormat')
-                 ->withDefaultValue(true)
+                 ->withDefaultValue(false)
                  ->withName('Widget.toolbarAutoFormatLabel')
                  ->withTooltip('Widget.toolbarAutoFormatTooltip');
 
