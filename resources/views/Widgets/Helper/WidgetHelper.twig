@@ -92,8 +92,8 @@
 
     {%- if heightValue is defined and heightUnit is null and heightValue is not null %}
         {{- classPrefix }}-{{ heightValue -}}
-    {% else -%}
-        {{- classPrefix }}-auto
+    {% elseif heightUnit is null and heightValue is null %}
+        {{- classPrefix -}}-auto
     {% endif -%}
 
 {% endmacro %}
