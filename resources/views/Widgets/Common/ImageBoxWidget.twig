@@ -120,7 +120,7 @@
     <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}{% if openInNewTab == true %} target="_blank"{% endif %}{% if urlType == 'external' %} rel="noopener"{% endif %} class="widget-inner">
         <div class="widget-caption widget-image-box-caption {{ style }}">
             {% if customCaption %}
-                <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-image-box-caption " ~ style ~ "widget-" ~ appearance) }}>
+                <div {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-image-box widget-image-box-caption" ~ style ~ " widget-" ~ appearance) }}>
                     {{ headline | striptags('<p><strong><em><br><span><h1><h2><h3><h4><h5><h6>') | raw }}
                 </div>
             {% else %}
