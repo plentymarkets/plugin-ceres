@@ -82,7 +82,7 @@ export default {
     destroyed()
     {
         this.popper.destroy();
-        window.removeEventListener(this.eventListener);
+        window.removeEventListener("resize", this.eventListener);
     },
 
     data()

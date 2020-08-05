@@ -64,7 +64,7 @@ class AdditionalInformationWidget extends BaseWidget
 
         $settings->createIcon()->withDefaultValue("fa-info");
         $settings->createButtonSize();
-        $settings->createSpacing(true, false);
+        $settings->createSpacing();
 
         return $settings->toArray();
     }

@@ -1,6 +1,40 @@
 # Release Notes for Ceres
 
+## v5.0.8 (2020-08-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.7...5.0.8" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Added
+
+- The settings for margins have been added to the Additional information widget.
+
+### Changed
+
+- The layout container `Checkout` for overriding the checkout can now be used for ShopBuilder contents.
+- The change regarding the **Minimum height** of the background image widget that was included in version 5.0.7 has been reverted because it could negatively impact the layout of the online store.
+
+### Fixed
+
+- If the **age restriction** was displayed via a data field in the ShopBuilder, a wrong value was output for the entry **Ages 18 and up**. This behaviour has been fixed.
+- The widget step by step navigation no longer renders placeholders if no child categories exist for the current category.
+- The validation of the selected value was not carried out for the option **Drop-down list** of the selection widget. This has been fixed.
+- The address for the Google Maps widget is now encoded on the client side, so that the Google API key can be limited to the online store domain when it is generated. 
+
+### Changed templates
+
+- In Ceres 5.0.8 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+-[resources/views/Checkout/CheckoutCategory.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.7...stable#diff-500f84701cb3bec84b3253ca4fc12310)
+- [resources/views/Widgets/Common/GoogleMapsWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.7...stable#diff-34a9c4fdd67b5eafe0fe676146a2d341)
+- [resources/views/Widgets/Grid/AdditionalInformationWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.7...stable#diff-ce1d0ae261c2326eb512546452d84cce)
+- [resources/views/Widgets/Helper/WidgetHelper.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.7...stable#diff-fe76ce66af52961ed5cbcd984b98681e)
+- [resources/views/Widgets/Navigation/StepByStepNavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.7...stable#diff-d3ea59b4c6ebb4395ce978e00fc64e0b)
+
 ## v5.0.7 (2020-07-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.6...5.0.7" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- Changes to the background image widget can lead to shifts in the online store layout. Inspect your layout and, if necessary, change the setting **Minimum height** of the background image widgets you are employing to the option **None**.
 
 ### Changed
 
