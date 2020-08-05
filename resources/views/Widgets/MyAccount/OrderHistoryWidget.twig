@@ -16,7 +16,7 @@
 
 <div class="widget widget-order-history widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview, "widget-order-history widget-" ~ appearance) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.orderHistory")) }}</h3>
         {% else %}

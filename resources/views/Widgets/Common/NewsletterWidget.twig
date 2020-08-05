@@ -2,7 +2,7 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set customClass = widget.settings.customClass.mobile %}
-{% set appearance = widget.settings.appearance.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
 {% set showNameInputs = widget.settings.showNameInputs.mobile | json_encode %}
 {% set showPrivacyPolicyCheckbox = widget.settings.showPrivacyPolicyCheckbox.mobile | json_encode %}
 {% set emailFolder = widget.settings.emailFolder.mobile %}
@@ -11,12 +11,12 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-newsletter widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-newsletter widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         <div class="row">
             {# The 'hintText' variable gets filled at src/Widgets/Common/NewsletterWidget.php to migrate widget settings #}
-            <div class="col-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            <div class="col-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview, "widget-newsletter widget-" ~ appearance) }}>
                 {{ hintText | raw }}
             </div>
         </div>

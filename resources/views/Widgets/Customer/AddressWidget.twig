@@ -7,20 +7,21 @@
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set appearance      = widget.settings.appearance.mobile | default('primary') %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.component("Ceres::Customer.Components.AddressSelect.AddressSelect") }}
 
 {% set hintText = widget.settings.hintText.mobile %}
 
-<div class="widget widget-address widget-{{ widget.settings.appearance.mobile | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+<div class="widget widget-address widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
     {% if widget.settings.addressType.mobile == "1" %}
         {{ Twig.set("overrideBillingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.BillingAddress"])) }}
         {{ Twig.if("overrideBillingAddress | trim is empty") }}
 
-            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview, "widget-address widget-" ~ appearance) }}>
                 {% if hintText is empty %}
                     {{ Twig.if("services.template.isCurrentTemplate('tpl.checkout')") }}
                         <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutInvoiceAddress")) }}</h3>
@@ -59,7 +60,7 @@
         {{ Twig.set("overrideShippingAddress", Twig.call("LayoutContainer.show", ["Ceres::Checkout.ShippingAddress"])) }}
         {{ Twig.if("overrideShippingAddress | trim is empty") }}
 
-            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview, "widget-address widget-" ~ appearance) }}>
                 {% if hintText is empty %}
                     {{ Twig.if("services.template.isCurrentTemplate('tpl.checkout')") }}
                         <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.checkoutShippingAddress")) }}</h3>

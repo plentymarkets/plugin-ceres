@@ -13,12 +13,12 @@
 {{ Twig.component("Ceres::MyAccount.Components.AccountSettings") }}
 
 {{ Twig.set("userObject", Twig.call("services.customer.getContact")) }}
-{% set appearance = widget.settings.appearance.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
 {% set hintText = widget.settings.text.mobile %}
 
-<div class="widget widget-account-settings widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+<div class="widget widget-account-settings widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+    <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-account-settings widget-" ~ appearance) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountSettings")) }}</h3>
             <p><em>{{ Twig.trans("Ceres::Template.myAccountChangeLoginData") }}</em></p>

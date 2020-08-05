@@ -12,12 +12,12 @@
 {{ Twig.component("Ceres::MyAccount.Components.BankDataSelect") }}
 
 {{ Twig.set("userBankData", Twig.call("services.contactBank.getBanksOfContact", ["$frontend.Account.AccountContactId"])) }}
-{% set appearance = widget.settings.appearance.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
 {% set hintText = widget.settings.text.mobile %}
 
-<div class="widget widget-bank-details widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-bank-details widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+    <div {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-bank-details widget-" ~ appearance) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.myAccountBankDetails")) }}</h3>
             <p><em>{{ Twig.trans("Ceres::Template.myAccountChangePaymentInformation") }}</em></p>

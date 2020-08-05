@@ -2,14 +2,15 @@
 
 {% set customClass = widget.settings.customClass.mobile %}
 {% set text         = widget.settings.text.mobile %}
-{% set appearance   = widget.settings.appearance.mobile %}
+{% set appearance   = widget.settings.appearance.mobile | default('none') %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set hasSpacing = spacingSettings.customMargin.mobile or spacingSettings.customPadding.mobile %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if hasSpacing %} m-0{% endif %}">
-    <div class="widget-inner bg-appearance{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+<div class="widget widget-text widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if hasSpacing %} m-0{% endif %}">
+    <div class="widget-inner bg-appearance{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}
+    {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-text widget-" ~ appearance) }}>
         {{ WidgetHelper.editableTwig(isPreview, text | raw) }}
     </div>
 </div>

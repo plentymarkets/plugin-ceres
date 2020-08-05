@@ -19,7 +19,7 @@
 
 <div class="widget widget-search-suggestion-item {{ widgetClasses }}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {% if isPreview or hasHeadline %}
-        <div class="px-3 pt-3 border-bottom" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+        <div class="px-3 pt-3 border-bottom" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview, "widget-search-suggestion-item widget-" ~ appearance) }}>
             {% if headline is empty %}
                 <h4 class="m-0">{{ WidgetHelper.editableTwig(isPreview, Twig.trans(defaultHeadline)) }}</h4>
             {% else %}

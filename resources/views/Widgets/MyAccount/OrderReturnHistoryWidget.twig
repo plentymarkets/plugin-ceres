@@ -9,12 +9,12 @@
 {{ Twig.component( "Ceres::MyAccount.Components.OrderReturnHistoryList" ) }}
 
 {% set hintText = widget.settings.hintText.mobile %}
-{% set appearance = widget.settings.appearance.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default('primary') %}
 {% set returnsPerPage = widget.settings.returnsPerPage.mobile %}
 
-<div class="widget widget-order-return-history widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+<div class="widget widget-order-return-history widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+    <div {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview, "widget-order-return-history widget-" ~ appearance) }}>
         {% if hintText is empty %}
             <h3>{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.returnHistory")) }}</h3>
         {% else %}
