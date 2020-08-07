@@ -17,7 +17,7 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 {% set hasCollapsableContent = false %}
-{% set autoFormat      = widget.settings.autoFormat.mobile | default(true) %}
+{% set autoFormat      = widget.settings.autoFormat.mobile %}
 
 {% if children is defined and children.collapsable | trim is not empty %}
     {% set hasCollapsableContent = true %}
