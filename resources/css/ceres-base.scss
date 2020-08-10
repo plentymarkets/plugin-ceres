@@ -12433,17 +12433,18 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     }
 }
 
-@include media-breakpoint-down(md) {
-    .filter-collapse {
-        .widget-filter-price {
-            .item-filter-price {
-                display: block;
-                text-align: right;
-            }
+.widget-grid .col-md-3,
+.widget-grid .col-lg-3,
+.widget-grid .col-md-4,
+.widget-grid .widget-grid {
+    .widget-filter-price {
+        .item-filter-price {
+            display: block;
+            text-align: right;
+        }
 
-            .input-group {
-                margin-bottom: 1rem;
-            }
+        .input-group {
+            margin-bottom: 1rem;
         }
     }
 }
@@ -12567,14 +12568,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
             color: $gray-700;
             text-align: center;
             content: attr(data-translation-empty);
-        }
-    }
-
-    .collapse-container {
-        .widget-grid {
-            -webkit-column-span: all;
-               -moz-column-span: all;
-                    column-span: all;
         }
     }
 }
