@@ -20,7 +20,7 @@
             :show-thumbs="{{ showThumbs | json_encode }}"
             :show-dots="{{ showDots | json_encode }}"
             animation-style="{{ animationStyle }}"
-            plugin-path="{{ plugin_path('Ceres') }}">
+            plugin-path="{{ Twig.print("plugin_path('Ceres')") }}">
         </item-image-carousel>
     {{ Twig.else() }}
         {{ Twig.print("ImageCarouselOverride") }}
