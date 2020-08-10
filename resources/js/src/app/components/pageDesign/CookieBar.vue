@@ -36,7 +36,7 @@
                 </div>
 
             </div>
-            <div class="row py-3" v-show="isExpanded" :class="classes" :style="styles">
+            <div class="row py-3" v-if="isExpanded" :class="classes" :style="styles">
                 <div class="col-12 mb-3">
                     <privacy-settings :consent-groups="consentGroups"></privacy-settings>
                 </div>
