@@ -24,7 +24,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $setComponents;
     public $setAttributeMap = [];
     public $requestedVariationUrl;
-
+    public $metaTitle;
 
     public function init($params)
     {
@@ -55,6 +55,10 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->setComponents = $params['setComponents'];
         $this->setAttributeMap = $params['setAttributeMap'];
         $this->requestedVariationUrl = explode('?', $this->request->getUri())[0];
+
+        $metaTitle = $this->webstoreConfig->urlTitleItemName - 1;
+        $this->metaTitle = (string)$metaTitle;
+
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
         foreach ($this->item['documents'][0]['data']['defaultCategories'] as $category) {
