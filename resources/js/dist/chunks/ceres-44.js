@@ -347,99 +347,100 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.isExpanded,
-                    expression: "isExpanded"
-                  }
-                ],
-                staticClass: "row py-3",
-                class: _vm.classes,
-                style: _vm.styles
-              },
-              [
-                _c(
+            _vm.isExpanded
+              ? _c(
                   "div",
-                  { staticClass: "col-12 mb-3" },
+                  {
+                    staticClass: "row py-3",
+                    class: _vm.classes,
+                    style: _vm.styles
+                  },
                   [
-                    _c("privacy-settings", {
-                      attrs: { "consent-groups": _vm.consentGroups }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-md-6" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "text-primary text-appearance d-inline-block mb-3",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          $event.stopPropagation()
-                          _vm.isExpanded = false
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.cookieBarBack"))
+                    _c(
+                      "div",
+                      { staticClass: "col-12 mb-3" },
+                      [
+                        _c("privacy-settings", {
+                          attrs: { "consent-groups": _vm.consentGroups }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 col-md-6" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "text-primary text-appearance d-inline-block mb-3",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              $event.stopPropagation()
+                              _vm.isExpanded = false
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.cookieBarBack")
+                            )
+                          )
+                        ]
                       )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-6 col-md-3" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-primary btn-appearance",
-                      on: {
-                        click: function($event) {
-                          _vm.acceptAll()
-                          _vm.close()
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(
-                          _vm.$translate("Ceres::Template.cookieBarAcceptAll")
-                        )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6 col-md-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-block btn-primary btn-appearance",
+                          on: {
+                            click: function($event) {
+                              _vm.acceptAll()
+                              _vm.close()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.cookieBarAcceptAll"
+                              )
+                            )
+                          )
+                        ]
                       )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-6 col-md-3" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-block btn-default",
-                      on: {
-                        click: function($event) {
-                          _vm.storeConsents()
-                          _vm.close()
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.cookieBarSave"))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6 col-md-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-block btn-block btn-default",
+                          on: {
+                            click: function($event) {
+                              _vm.storeConsents()
+                              _vm.close()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.cookieBarSave")
+                            )
+                          )
+                        ]
                       )
-                    ]
-                  )
-                ])
-              ]
-            )
+                    ])
+                  ]
+                )
+              : _vm._e()
           ])
         : _c("div", [
             _c(
