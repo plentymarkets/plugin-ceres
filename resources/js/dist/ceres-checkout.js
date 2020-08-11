@@ -60559,13 +60559,13 @@ var ValidationService = __webpack_require__(/*! ../../services/ValidationService
       return this.newMail2.length <= 0 || this.newMail === this.newMail2;
     },
     matchOldEmail: function matchOldEmail() {
-      return this.newMail === this.newMail2 && this.newMail === this.userData.email;
+      return this.newMail === this.newMail2 && this.userData && this.newMail === this.userData.email;
     },
     matchPassword: function matchPassword() {
       return this.confirmPassword.length <= 0 || this.newPassword === this.confirmPassword;
     },
     isValidEmail: function isValidEmail() {
-      return this.newMail.length > 0 && this.newMail === this.newMail2 && this.newMail !== this.userData.email;
+      return this.newMail.length > 0 && this.newMail === this.newMail2 && this.userData && this.newMail !== this.userData.email;
     },
     isValidPassword: function isValidPassword() {
       return this.oldPassword.length > 0 && this.newPassword.length > 0 && this.newPassword === this.confirmPassword;
