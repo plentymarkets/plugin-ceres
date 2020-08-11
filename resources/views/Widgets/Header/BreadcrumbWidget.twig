@@ -1,11 +1,13 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set customClass             = widget.settings.customClass.mobile %}
-{% set isFixed                 = widget.settings.isFixed.mobile %}
-{% set showOnHomepage          = widget.settings.showOnHomepage.mobile %}
-{% set showOnMyAccount         = widget.settings.showOnMyAccount.mobile %}
-{% set showOnCheckout          = widget.settings.showOnCheckout.mobile %}
-{% set showOnContentCategory   = widget.settings.showOnContentCategory.mobile %}
+{% set customClass           = widget.settings.customClass.mobile %}
+{% set isFixed               = widget.settings.isFixed.mobile %}
+{% set showOnHomepage        = widget.settings.showOnHomepage.mobile %}
+{% set showOnMyAccount       = widget.settings.showOnMyAccount.mobile %}
+{% set showOnCheckout        = widget.settings.showOnCheckout.mobile %}
+{% set showOnContentCategory = widget.settings.showOnContentCategory.mobile %}
+{% set showOnLegalPages      = widget.settings.showOnLegalPages.mobile %}
+
 
 {% if not showOnHomepage %}
     {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
@@ -21,6 +23,10 @@
 
 {% if not showOnContentCategory %}
     {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
+{% endif %}
+
+{% if not showOnLegalPages %}
+    {{ Twig.if("not services.template.isLegalPage()") }}
 {% endif %}
 
 <div class="breadcrumbs header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
@@ -139,5 +145,9 @@
 {% endif %}
 
 {% if not showOnContentCategory %}
+    {{ Twig.endif() }}
+{% endif %}
+
+{% if not showOnLegalPages %}
     {{ Twig.endif() }}
 {% endif %}
