@@ -25,6 +25,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $setAttributeMap = [];
     public $requestedVariationUrl;
 
+
     public function init($params)
     {
         parent::init($params);
