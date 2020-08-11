@@ -14,5 +14,6 @@ class VariationGlobalDataFieldProvider extends DataFieldProvider
         $this->addField("numberExternal", "Ceres::Widget.dataFieldVariationGlobalNumberExternal", "item_data_field('variation.externalId')"); // TODO check
         $this->addField("model", "Ceres::Widget.dataFieldVariationGlobalModel", "item_data_field('variation.model')");
         $this->addField("position", "Ceres::Widget.dataFieldVariationGlobalPosition", "item_data_field('variation.position')");
+        $this->addField("customTariffNumber", "Ceres::Widget.dataFieldVariationGlobalCustomsTariffNumber", "item_data_field('variation.customsTariffNumber')");
     }
 }

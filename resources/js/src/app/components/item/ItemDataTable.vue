@@ -70,7 +70,7 @@ export default {
                 "variation.weightG"               : "singleItemWeight",
                 "variation.weightNetG"            : "singleItemNetWeight",
                 "item.variationDimensions"        : "singleItemDimensions",
-                "item.customsTariffNumber"        : "singleItemCustomsTariffNumber"
+                "variation.customsTariffNumber"   : "singleItemCustomsTariffNumber"
             },
             formatMap: {
                 "item.ageRestriction": {
