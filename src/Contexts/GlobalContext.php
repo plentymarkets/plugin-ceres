@@ -109,7 +109,7 @@ class GlobalContext implements ContextInterface
 
         $this->forceNoIndex = $templateService->isNoIndexForced();
 
-        if($templateService->isCategory() || $templateService->isItem())
+        if (!is_null($categoryService->getCurrentCategory()))
         {
             $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
         }
