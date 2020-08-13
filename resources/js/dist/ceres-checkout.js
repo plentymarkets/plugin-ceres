@@ -43252,10 +43252,10 @@ var render = function() {
                                         ])
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.currentVariation.item
+                                    _vm.currentVariation.variation
                                       .customsTariffNumber !== "" &&
                                     (_vm.itemConfig.includes(
-                                      "item.customs_tariff_number"
+                                      "variation.customs_tariff_number"
                                     ) ||
                                       _vm.itemConfig.includes("all"))
                                       ? _c("tr", [
@@ -43272,7 +43272,7 @@ var render = function() {
                                           _c("td", [
                                             _vm._v(
                                               _vm._s(
-                                                _vm.currentVariation.item
+                                                _vm.currentVariation.variation
                                                   .customsTariffNumber
                                               )
                                             )
