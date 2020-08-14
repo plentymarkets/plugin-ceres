@@ -55652,9 +55652,9 @@ function getItemListUrlParams(searchParams) {
   urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
 
   if (App.isSearch) {
-    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
+    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch && searchParams.sorting.length > 0 ? searchParams.sorting : null;
   } else {
-    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
+    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting && searchParams.sorting.length > 0 ? searchParams.sorting : null;
   }
 
   var newUrlParams = _UrlService__WEBPACK_IMPORTED_MODULE_2__["default"].getUrlParams(document.location.search);
@@ -58455,7 +58455,7 @@ var state = {
   facets: [],
   selectedFacets: [],
   page: null,
-  sorting: "texts.name1_asc",
+  sorting: "",
   isLoading: false,
   itemsPerPage: null,
   searchString: null,
