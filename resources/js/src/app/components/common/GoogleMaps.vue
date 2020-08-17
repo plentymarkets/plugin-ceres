@@ -12,13 +12,20 @@ import { isNullOrUndefined } from "../../helper/utils";
 
 export default {
     props: {
+        address:
+        {
+            type: String,
+            required: false
+        },
         lat:
         {
-            type: Number
+            type: Number,
+            required: false
         },
         lng:
         {
-            type: Number
+            type: Number,
+            required: false
         },
         zoom:
         {
@@ -45,28 +52,12 @@ export default {
     },
 
     computed:
+    {
+        aspectClass()
         {
-            coordinates()
-            {
-                const isLatValid = !isNaN(this.lat) && this.lat > -90 && this.lat < 90;
-                const isLngValid = !isNaN(this.lng) && this.lng > -180 && this.lng < 180;
-
-                if (isLatValid && isLngValid)
-                {
-                    return {
-                        lat: this.lat,
-                        lng: this.lng
-                    };
-                }
-
-                return null;
-            },
-
-            aspectClass()
-            {
-                return "prop-" + this.aspectRatio;
-            }
-        },
+            return "prop-" + this.aspectRatio;
+        }
+    },
 
     mounted()
     {
@@ -134,23 +125,64 @@ export default {
             });
         },
 
+        getCoordinates()
+        {
+            const isLatValid = !isNaN(this.lat) && this.lat > -90 && this.lat < 90;
+            const isLngValid = !isNaN(this.lng) && this.lng > -180 && this.lng < 180;
+
+            if (isLatValid && isLngValid)
+            {
+                return Promise.resolve({
+                    lat: this.lat,
+                    lng: this.lng
+                });
+            }
+            else if(!!this.address && !!window.google)
+            {
+                return new Promise((resolve, reject) =>
+                {
+                    const geocoder = new google.maps.Geocoder();
+                    geocoder.geocode(
+                        {
+                            address: this.address
+                        },
+                        (result, status) =>
+                        {
+                            if(!!result && result.length > 0 && !!result[0].geometry)
+                            {
+                                resolve(result[0].geometry.location);
+                            }
+                            else
+                            {
+                                reject();
+                            }
+                        }
+                    );
+                });
+            }
+
+            return Promise.reject();
+        },
+
         initializeMap()
         {
-            if (this.coordinates)
-            {
-                const map = new google.maps.Map(this.$refs.googleMapsContainer,
-                    {
-                        center: this.coordinates,
-                        zoom  : this.zoom,
-                        mapTypeId: this.maptype
-                    });
+            this.getCoordinates()
+                .then((coordinates) =>
+                {
+                    const map = new google.maps.Map(this.$refs.googleMapsContainer,
+                        {
+                            center: coordinates,
+                            zoom  : this.zoom,
+                            mapTypeId: this.maptype
+                        });
 
-                new google.maps.Marker(
-                    {
-                        map: map,
-                        position: this.coordinates
-                    });
-            }
+                    new google.maps.Marker(
+                        {
+                            map: map,
+                            position: coordinates
+                        });
+
+                });
         }
     }
 }

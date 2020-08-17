@@ -60,11 +60,6 @@
 
 .widget-grid {
     .widget-background {
-
-        &.mh-auto {
-            height: 100%;
-        }
-
         > .container-max {
             padding-right: 0 !important; // stylelint-disable-line declaration-no-important
             padding-left: 0 !important; // stylelint-disable-line declaration-no-important

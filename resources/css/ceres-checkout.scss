@@ -12433,18 +12433,17 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     }
 }
 
-.widget-grid .col-md-3,
-.widget-grid .col-lg-3,
-.widget-grid .col-md-4,
-.widget-grid .widget-grid {
-    .widget-filter-price {
-        .item-filter-price {
-            display: block;
-            text-align: right;
-        }
+@include media-breakpoint-down(md) {
+    .filter-collapse {
+        .widget-filter-price {
+            .item-filter-price {
+                display: block;
+                text-align: right;
+            }
 
-        .input-group {
-            margin-bottom: 1rem;
+            .input-group {
+                margin-bottom: 1rem;
+            }
         }
     }
 }
@@ -12570,6 +12569,14 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
             content: attr(data-translation-empty);
         }
     }
+
+    .collapse-container {
+        .widget-grid {
+            -webkit-column-span: all;
+               -moz-column-span: all;
+                    column-span: all;
+        }
+    }
 }
 
 .widget-provider-select {
@@ -12647,11 +12654,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 .widget-grid {
     .widget-background {
-
-        &.mh-auto {
-            height: 100%;
-        }
-
         > .container-max {
             padding-right: 0 !important; // stylelint-disable-line declaration-no-important
             padding-left: 0 !important; // stylelint-disable-line declaration-no-important

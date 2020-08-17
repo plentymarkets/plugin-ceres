@@ -64,7 +64,7 @@ export default Vue.component("account-settings", {
         },
         matchOldEmail()
         {
-            return this.newMail === this.newMail2 && this.newMail === this.userData.email;
+            return this.newMail === this.newMail2 && (this.userData && this.newMail === this.userData.email);
         },
         matchPassword()
         {
@@ -72,7 +72,7 @@ export default Vue.component("account-settings", {
         },
         isValidEmail()
         {
-            return this.newMail.length > 0 && (this.newMail === this.newMail2) && this.newMail !== this.userData.email;
+            return this.newMail.length > 0 && (this.newMail === this.newMail2) && (this.userData && this.newMail !== this.userData.email);
         },
         isValidPassword()
         {
