@@ -426,7 +426,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     getClosestVariation: function getClosestVariation(qualifiedVariations) {
       var closestVariation;
       var numberOfRequiredChanges;
-      var selectedAttributes = this.currentVariationSelect.attributes; // Check if attribute combination exists as unitCombination
+      var selectedAttributes = this.currentVariationSelect.selectedAttributes; // Check if attribute combination exists as unitCombination
 
       var _iterator3 = _createForOfIteratorHelper(qualifiedVariations),
           _step3;

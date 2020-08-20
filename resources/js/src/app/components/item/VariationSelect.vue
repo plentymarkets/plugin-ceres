@@ -368,7 +368,7 @@ export default {
             let closestVariation;
             let numberOfRequiredChanges;
 
-            const selectedAttributes = this.currentVariationSelect.attributes;
+            const selectedAttributes = this.currentVariationSelect.selectedAttributes;
 
             // Check if attribute combination exists as unitCombination
             for (const variation of qualifiedVariations)
