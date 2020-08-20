@@ -86,6 +86,7 @@
 <script>
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
+const _isEqual = require("lodash/isEqual");
 
 const NotificationService = require("../../services/NotificationService");
 
@@ -366,6 +367,19 @@ export default {
         {
             let closestVariation;
             let numberOfRequiredChanges;
+
+            const selectedAttributes = this.currentVariationSelect.attributes;
+
+            // Check if attribute combination exists as unitCombination
+            for (const variation of qualifiedVariations)
+            {
+                if (_isEqual(variation.attributes, selectedAttributes))
+                {
+                    closestVariation = variation;
+                    
+                    return closestVariation;
+                }
+            }
 
             for (const variation of qualifiedVariations)
             {
