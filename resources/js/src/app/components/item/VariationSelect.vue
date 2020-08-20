@@ -86,7 +86,6 @@
 <script>
 import { textWidth } from "../../helper/dom";
 import { isDefined, isNull, isNullOrUndefined } from "../../helper/utils";
-const _isEqual = require("lodash/isEqual");
 
 const NotificationService = require("../../services/NotificationService");
 
