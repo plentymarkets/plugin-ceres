@@ -373,7 +373,7 @@ export default {
             // Check if attribute combination exists as unitCombination
             for (const variation of qualifiedVariations)
             {
-                if (_isEqual(variation.attributes, selectedAttributes))
+                if(this.unitCombinationExists(variation.attributes, selectedAttributes))
                 {
                     closestVariation = variation;
                     
@@ -406,6 +406,22 @@ export default {
             }
 
             return closestVariation;
+        },
+
+        unitCombinationExists(variationAttributes, selectedAttributes)
+        {
+            let isEqual = true;
+
+            for(let key in variationAttributes)
+            {
+                isEqual = selectedAttributes[variationAttributes[key].attributeId] == variationAttributes[key].attributeValueId;
+
+                if(!isEqual){
+                    break;
+                }
+            }
+
+            return isEqual;
         },
 
         /**

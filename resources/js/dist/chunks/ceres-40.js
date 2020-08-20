@@ -435,7 +435,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
           var variation = _step3.value;
 
-          if (_isEqual(variation.attributes, selectedAttributes)) {
+          if (this.unitCombinationExists(variation.attributes, selectedAttributes)) {
             closestVariation = variation;
             return closestVariation;
           }
@@ -487,6 +487,19 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
 
       return closestVariation;
+    },
+    unitCombinationExists: function unitCombinationExists(variationAttributes, selectedAttributes) {
+      var isEqual = true;
+
+      for (var key in variationAttributes) {
+        isEqual = selectedAttributes[variationAttributes[key].attributeId] == variationAttributes[key].attributeValueId;
+
+        if (!isEqual) {
+          break;
+        }
+      }
+
+      return isEqual;
     },
 
     /**
