@@ -426,7 +426,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     getClosestVariation: function getClosestVariation(qualifiedVariations) {
       var closestVariation;
       var numberOfRequiredChanges;
-      var selectedAttributes = this.currentVariationSelect.selectedAttributes; // Check if attribute combination exists as unitCombination
+      var newlySelectedAttributes = this.currentVariationSelect.selectedAttributes; // First check if attribute combination exists as unitCombination
 
       var _iterator3 = _createForOfIteratorHelper(qualifiedVariations),
           _step3;
@@ -435,7 +435,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
           var variation = _step3.value;
 
-          if (this.unitCombinationExists(variation.attributes, selectedAttributes)) {
+          if (this.unitCombinationExists(variation.attributes, newlySelectedAttributes)) {
             closestVariation = variation;
             return closestVariation;
           }
@@ -488,15 +488,31 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
       return closestVariation;
     },
-    unitCombinationExists: function unitCombinationExists(variationAttributes, selectedAttributes) {
+
+    /**
+     * returns true if a unitCombination exists with the newly selected attributes
+     * @param {array} variationAttributes
+     * @param {Object} newlySelectedAttributes
+     */
+    unitCombinationExists: function unitCombinationExists(variationAttributes, newlySelectedAttributes) {
       var isEqual = true;
 
-      for (var key in variationAttributes) {
-        isEqual = selectedAttributes[variationAttributes[key].attributeId] == variationAttributes[key].attributeValueId;
+      var _iterator6 = _createForOfIteratorHelper(variationAttributes),
+          _step6;
 
-        if (!isEqual) {
-          break;
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var variationAttribute = _step6.value;
+          isEqual = newlySelectedAttributes[variationAttribute.attributeId] == variationAttribute.attributeValueId;
+
+          if (!isEqual) {
+            break;
+          }
         }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
       }
 
       return isEqual;
@@ -553,21 +569,21 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       var messages = [];
       var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
 
-      var _iterator6 = _createForOfIteratorHelper(invalidSelection.attributesToReset),
-          _step6;
+      var _iterator7 = _createForOfIteratorHelper(invalidSelection.attributesToReset),
+          _step7;
 
       try {
-        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-          var attributeToReset = _step6.value;
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var attributeToReset = _step7.value;
           messages.push(this.$translate("Ceres::Template.singleItemNotAvailable", {
             name: attributeToReset.name
           }));
           attributes[attributeToReset.attributeId] = !this.hasEmptyOption && App.config.item.showPleaseSelect ? -1 : null;
         }
       } catch (err) {
-        _iterator6.e(err);
+        _iterator7.e(err);
       } finally {
-        _iterator6.f();
+        _iterator7.f();
       }
 
       if (invalidSelection.newUnit) {

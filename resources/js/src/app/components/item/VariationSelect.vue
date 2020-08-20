@@ -368,12 +368,12 @@ export default {
             let closestVariation;
             let numberOfRequiredChanges;
 
-            const selectedAttributes = this.currentVariationSelect.selectedAttributes;
+            const newlySelectedAttributes = this.currentVariationSelect.selectedAttributes;
 
-            // Check if attribute combination exists as unitCombination
+            // First check if attribute combination exists as unitCombination
             for (const variation of qualifiedVariations)
             {
-                if(this.unitCombinationExists(variation.attributes, selectedAttributes))
+                if(this.unitCombinationExists(variation.attributes, newlySelectedAttributes))
                 {
                     closestVariation = variation;
                     
@@ -408,15 +408,20 @@ export default {
             return closestVariation;
         },
 
-        unitCombinationExists(variationAttributes, selectedAttributes)
+        /**
+         * returns true if a unitCombination exists with the newly selected attributes
+         * @param {array} variationAttributes
+         * @param {Object} newlySelectedAttributes
+         */
+        unitCombinationExists(variationAttributes, newlySelectedAttributes)
         {
             let isEqual = true;
 
-            for(let key in variationAttributes)
+            for (let variationAttribute of variationAttributes)
             {
-                isEqual = selectedAttributes[variationAttributes[key].attributeId] == variationAttributes[key].attributeValueId;
+                isEqual = newlySelectedAttributes[variationAttribute.attributeId] == variationAttribute.attributeValueId;
 
-                if(!isEqual){
+                if (!isEqual){
                     break;
                 }
             }
