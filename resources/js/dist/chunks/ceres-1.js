@@ -1626,8 +1626,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             _services_NotificationService__WEBPACK_IMPORTED_MODULE_22__["default"].error(_this2.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", {
               hyphen: "&shy;"
             }));
+
+            _this2.resetRecaptcha();
           }
         }).fail(function (invalidFields) {
+          _this2.resetRecaptcha();
+
           if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(_this2.$refs.passwordHint) && invalidFields.indexOf(_this2.$refs.passwordInput) >= 0) {
             _this2.$refs.passwordHint.showPopper();
           }
@@ -1703,13 +1707,28 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           }
         } else {
           _services_NotificationService__WEBPACK_IMPORTED_MODULE_22__["default"].error(_this3.$translate("Ceres::Template.regError")).closeAfter(10000);
+
+          _this3.resetRecaptcha();
         }
 
         _this3.isDisabled = false;
       }).fail(function (error) {
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_22__["default"].error(error.error).closeAfter(10000);
+
+        _this3.resetRecaptcha();
+
         _this3.isDisabled = false;
       });
+    },
+
+    /** 
+     * Resets recaptcha v2 to make it capable of executing again.
+    */
+    resetRecaptcha: function resetRecaptcha() {
+      if (App.config.global.googleRecaptchaVersion === 2) {
+        var recaptchaId = this.$refs.registrationForm.querySelector("[data-recaptcha]");
+        window.grecaptcha.reset(recaptchaId);
+      }
     },
     setAddressDataField: function setAddressDataField(_ref) {
       var field = _ref.field,
