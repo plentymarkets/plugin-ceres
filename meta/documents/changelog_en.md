@@ -14,7 +14,7 @@
 - Widgets within the drop zone of the filter toolbar widget can now be distributed automatically.
 - The meta title for the item view can now be set to one of the 3 item names using a new setting in the Ceres assistant. This setting also controls which of the item names is used when generating the item URL.
 
-### Behoben
+### Fixed
 
 - Filters were not displayed in the tag search and the sorting did not work correctly. This has been fixed.
 - Meta description and keywords of the homepage are now used from the category settings when a category is linked as the homepage in the ShopBuilder.
