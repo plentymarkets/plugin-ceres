@@ -43252,10 +43252,10 @@ var render = function() {
                                         ])
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.currentVariation.item
+                                    _vm.currentVariation.variation
                                       .customsTariffNumber !== "" &&
                                     (_vm.itemConfig.includes(
-                                      "item.customs_tariff_number"
+                                      "variation.customs_tariff_number"
                                     ) ||
                                       _vm.itemConfig.includes("all"))
                                       ? _c("tr", [
@@ -43272,7 +43272,7 @@ var render = function() {
                                           _c("td", [
                                             _vm._v(
                                               _vm._s(
-                                                _vm.currentVariation.item
+                                                _vm.currentVariation.variation
                                                   .customsTariffNumber
                                               )
                                             )
@@ -67233,9 +67233,9 @@ function getItemListUrlParams(searchParams) {
   urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
 
   if (App.isSearch) {
-    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
+    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch && searchParams.sorting.length > 0 ? searchParams.sorting : null;
   } else {
-    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
+    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting && searchParams.sorting.length > 0 ? searchParams.sorting : null;
   }
 
   var newUrlParams = _UrlService__WEBPACK_IMPORTED_MODULE_2__["default"].getUrlParams(document.location.search);
@@ -70047,7 +70047,7 @@ var state = {
   facets: [],
   selectedFacets: [],
   page: null,
-  sorting: "texts.name1_asc",
+  sorting: "",
   isLoading: false,
   itemsPerPage: null,
   searchString: null,

@@ -14,11 +14,11 @@ export function getItemListUrlParams(searchParams)
 
     if (App.isSearch)
     {
-        urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSortingSearch) ? searchParams.sorting : null;
+        urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSortingSearch) && searchParams.sorting.length > 0 ? searchParams.sorting : null;
     }
     else
     {
-        urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSorting) ? searchParams.sorting : null;
+        urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSorting) && searchParams.sorting.length > 0? searchParams.sorting : null;
     }
 
     const newUrlParams = UrlService.getUrlParams(document.location.search);

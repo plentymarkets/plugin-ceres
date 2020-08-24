@@ -82,7 +82,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     showDynamicPrice: function showDynamicPrice() {
       var state = this.$store.state.items[this.itemId];
-      return App.config.item.showPleaseSelect && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
+      return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
     }
   }
 });
