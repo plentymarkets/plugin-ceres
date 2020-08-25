@@ -10,22 +10,22 @@
 
 ### Changed
 
-- The component for the privacy settings in the cookie bar is now loaded lazy.
+- The component for the privacy settings in the cookie bar is now lazy-loaded.
 - Widgets within the drop zone of the filter toolbar widget can now be distributed automatically.
 - The meta title for the item view can now be set to one of the 3 item names using a new setting in the Ceres assistant. This setting also controls which of the item names is used when generating the item URL.
 
 ### Fixed
 
 - Filters were not displayed in the tag search and the sorting did not work correctly. This has been fixed.
-- Meta description and keywords of the homepage are now used from the category settings when a category is linked as the homepage in the ShopBuilder.
-- For the item image widget, the path was not loaded at runtime. This is fixed now. 
-- User's data were not available if no top bar widget was used or the "Show customer login" setting was not active. This was fixed.
-- The Step-by-Step navigation widget can now be used correctly on the category for the homepage.
-- In the order data widget, the customer number was not displayed despite the setting being set on the widget. This has been fixed.
-- The customs tariff number was not displayed correctly in the table data widget and as a placeholder in text widgets. The behavior was fixed.
-- If there was no sorting widget on the category page, the sorting was set to "Name A-Z" when changing the number of items. The behavior was fixed.
-- On the item page, when "Please select" was selected, the translation for "From price" was also taken, even if the cheapest variation was not displayed. This behavior has been fixed.
-- Due to an error, Google reCAPTCHA v2 was not reset correctly on the contact page and the registration. This has been fixed.
+- The meta description and keywords of the homepage are now used from the category settings when a category is linked as the homepage in the ShopBuilder.
+- For the **Item image** widget, the path was not loaded at runtime. This is fixed now. 
+- User's data were not available if no top bar widget was used or the **Show customer login** setting was not active. This was fixed.
+- The **Step-by-Step navigation** widget can now be used correctly on the category for the homepage.
+- In the **Order data** widget, the customer number was not displayed despite the setting being set on the widget. This has been fixed.
+- The customs tariff number was not displayed correctly in the **Table data** widget and as a placeholder in text widgets. The behavior was fixed.
+- If there was no sorting widget on the category page, the sorting was set to **Name A-Z** when changing the number of items. The behavior was fixed.
+- On the item page, when **Please select** was selected, the translation of **From price** was also used, even if the cheapest variation was not displayed. This behavior has been fixed.
+- Due to an error, Google reCAPTCHA v2 was not reset correctly on the contact page and on registration. This has been fixed.
 
 ### Changed templates
 

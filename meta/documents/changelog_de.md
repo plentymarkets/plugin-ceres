@@ -3,28 +3,28 @@
 ## v5.0.9 (2020-08-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.8...5.0.9" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
-- Die Einstellungen der Startseiten-Kategorie für die Meta-Beschreibung und -Keywords werden jetzt berücksichtigt und müssen ggf. aus dem Bereich **CMS » Mehrsprachigkeit** übernommen werden.
+- Die Einstellungen der Kategorie Startseite für die Meta-Beschreibung und -Keywords werden jetzt berücksichtigt und müssen ggf. aus dem Bereich **CMS » Mehrsprachigkeit** übernommen werden.
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 - Wenn der Platzhalter für die Zolltarifnummer auf der Artikelansicht im ShopBuilder verwendet wird, muss dieser einmal entfernt und erneut eignefügt werden.
 
 ### Geändert
 
-- Die Komponente für die Privatsphäre-Einstellungen in der Cookie-Bar wird nun nachträglich geladen.
+- Die Komponente für die Einstellungen in der Cookiebar zur Privatsphäre wird nun nachträglich geladen.
 - Widgets innerhalb der aufklappbaren Dropzone des Filter-Toolbar-Widgets können sich jetzt automatisch verteilen lassen.
 - Der Meta-Titel für die Artikelansicht kann jetzt mit einer neuen Einstellung im Ceres-Assistenten auf einen der 3 Artikelnamen festgelegt werden. Diese Einstellung steuert auch, welcher der Artikelnamen beim Generieren der Artikel-URL verwendet wird.
 
 ### Behoben
 
 - Bei der Tag-Suche wurden die Filter nicht angezeigt. Zudem hat die Sortierung nicht korrekt funktioniert. Dies wurde behoben.
-- Meta-Beschreibung und -Keywords der Startseite werden jetzt aus den Kategorie-Einstellungen verwendet, wenn eine Kategorie im Shop-Builder als Startseite verknüpft ist.
-- Bei dem Widget Artikelbild wurde der Pfad nicht zur Laufzeit geladen. Dies wurde behoben. 
-- Die Daten eines Benutzers waren nicht verfügbar, wenn kein Top Bar-Widget verwendet wurde oder die Einstellung "Kunden-Login anzeigen" nicht aktiv war. Dies wurde behoben.
-- Das Widget Step-by-Step-Navigation kann jetzt fehlerfrei auf der Kategorie für die Startseite verwendet werden.
-- Im Widget Auftragsdaten wurde trotz gesetzter Einstellung am Widget die Kundennummer nicht ausgegeben. Dies wurde behoben.
-- Die Zolltarifnummer wurde im Widget Tabellendaten und als Platzhalter in Text Widgets nicht korrekt angezeigt. Das Verhalten wurde behoben.
-- Wenn auf der Kategorieseite kein Sortierungs-Widget hinterlegt war, wurde beim Wechsel der Anzahl der Artikel die Sortierung auf "Name A-Z" gesetzt. Das Verhalten wurde behoben.
-- Auf der Artikelseite wurde bei "Bitte wählen" auch die Übersetzung für den "Ab Preis" genommen, auch wenn nicht die billigste Variante angezeigt wurde. Das Verhalten wurde behoben.
-- Durch einen Fehler wurde auf der Kontaktseite und der Registrierung Google reCAPTCHA v2 nicht richtig zurückgesetzt. Dies wurde behoben.
+- Die Meta-Beschreibung und -Keywords der Startseite werden jetzt aus den Kategorie-Einstellungen verwendet, wenn eine Kategorie im Shop-Builder als Startseite verknüpft ist.
+- Bei dem Widget **Artikelbild** wurde der Pfad nicht zur Laufzeit geladen. Dies wurde behoben. 
+- Die Daten eines Benutzers waren nicht verfügbar, wenn kein Top Bar-Widget verwendet wurde oder die Einstellung **Kunden-Login anzeigen** nicht aktiv war. Dies wurde behoben.
+- Das Widget **Step-by-Step-Navigation** kann jetzt fehlerfrei auf der Kategorie für die Startseite verwendet werden.
+- Im Widget **Auftragsdaten** wurde trotz gesetzter Einstellung am Widget die Kundennummer nicht ausgegeben. Dies wurde behoben.
+- Die Zolltarifnummer wurde im Widget **Tabellendaten** und als Platzhalter in Text-Widgets nicht korrekt angezeigt. Das Verhalten wurde behoben.
+- Wenn auf der Kategorieseite kein Sortierungs-Widget hinterlegt war, wurde beim Wechsel der Anzahl der Artikel die Sortierung auf **Name A-Z** gesetzt. Das Verhalten wurde behoben.
+- Auf der Artikelseite wurde bei **Bitte wählen** auch die Übersetzung für **Ab Preis** verwendet, auch wenn nicht die billigste Variante angezeigt wurde. Das Verhalten wurde behoben.
+- Durch einen Fehler wurde auf der Kontaktseite und bei der Registrierung Google reCAPTCHA v2 nicht richtig zurückgesetzt. Dies wurde behoben.
 
 ### Angepasste Templates
 
