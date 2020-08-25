@@ -207,9 +207,9 @@
                                                 </td>
                                             </tr>
 
-                                            <tr v-if="currentVariation.item.customsTariffNumber !== '' && (itemConfig.includes('item.customs_tariff_number') || itemConfig.includes('all'))">
+                                            <tr v-if="currentVariation.variation.customsTariffNumber !== '' && (itemConfig.includes('variation.customs_tariff_number') || itemConfig.includes('all'))">
                                                 <td>{{ $translate("Ceres::Template.singleItemCustomsTariffNumber") }}</td>
-                                                <td>{{ currentVariation.item.customsTariffNumber }}</td>
+                                                <td>{{ currentVariation.variation.customsTariffNumber }}</td>
                                             </tr>
                                             </tbody>
                                         </table>

@@ -77,7 +77,7 @@ __webpack_require__.r(__webpack_exports__);
         "variation.weightG": "singleItemWeight",
         "variation.weightNetG": "singleItemNetWeight",
         "item.variationDimensions": "singleItemDimensions",
-        "item.customsTariffNumber": "singleItemCustomsTariffNumber"
+        "variation.customsTariffNumber": "singleItemCustomsTariffNumber"
       },
       formatMap: {
         "item.ageRestriction": {

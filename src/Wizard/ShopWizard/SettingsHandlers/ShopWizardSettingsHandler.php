@@ -166,6 +166,10 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     }
                 }
 
+                if (isset($data['seo_itemMetaTitle'])) {
+                    $webstoreData['urlTitleItemName'] = $data['seo_itemMetaTitle'];
+                }
+
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
 
                 // we save robotsTxt

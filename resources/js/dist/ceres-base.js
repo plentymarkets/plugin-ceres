@@ -35918,10 +35918,10 @@ var render = function() {
                                         ])
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.currentVariation.item
+                                    _vm.currentVariation.variation
                                       .customsTariffNumber !== "" &&
                                     (_vm.itemConfig.includes(
-                                      "item.customs_tariff_number"
+                                      "variation.customs_tariff_number"
                                     ) ||
                                       _vm.itemConfig.includes("all"))
                                       ? _c("tr", [
@@ -35938,7 +35938,7 @@ var render = function() {
                                           _c("td", [
                                             _vm._v(
                                               _vm._s(
-                                                _vm.currentVariation.item
+                                                _vm.currentVariation.variation
                                                   .customsTariffNumber
                                               )
                                             )
@@ -53484,6 +53484,7 @@ function executeReCaptcha(form) {
           if (evt.target.value) {
             resolve(evt.target.value);
           } else {
+            window.grecaptcha.reset(recaptchaElement.dataset.recaptcha);
             reject();
           }
         });
@@ -55652,9 +55653,9 @@ function getItemListUrlParams(searchParams) {
   urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
 
   if (App.isSearch) {
-    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
+    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch && searchParams.sorting.length > 0 ? searchParams.sorting : null;
   } else {
-    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
+    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting && searchParams.sorting.length > 0 ? searchParams.sorting : null;
   }
 
   var newUrlParams = _UrlService__WEBPACK_IMPORTED_MODULE_2__["default"].getUrlParams(document.location.search);
@@ -58324,6 +58325,7 @@ var actions = {
       return;
     }
 
+    var recaptchaEl = event.target.querySelector("[data-recaptcha]");
     Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_19__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_14__["default"].validate(event.target).done(function () {
         disableForm(event.target, true);
@@ -58337,15 +58339,18 @@ var actions = {
           replyTo: formOptions.replyTo,
           recaptchaToken: recaptchaResponse
         }).done(function (reponse) {
+          resetRecaptcha(recaptchaEl);
           event.target.reset();
           disableForm(event.target, false);
           _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
         }).fail(function (response) {
+          resetRecaptcha(recaptchaEl);
           disableForm(event.target, false);
           response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactSendFail");
           _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(response.error);
         });
       }).fail(function (invalidFields) {
+        resetRecaptcha(recaptchaEl);
         var fieldNames = [];
 
         var _iterator2 = _createForOfIteratorHelper(invalidFields),
@@ -58372,6 +58377,13 @@ var actions = {
     });
   }
 };
+
+function resetRecaptcha(recaptchaEl) {
+  if (App.config.global.googleRecaptchaVersion === 2) {
+    window.grecaptcha.reset(recaptchaEl);
+  }
+}
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   actions: actions
 });
@@ -58455,7 +58467,7 @@ var state = {
   facets: [],
   selectedFacets: [],
   page: null,
-  sorting: "texts.name1_asc",
+  sorting: "",
   isLoading: false,
   itemsPerPage: null,
   searchString: null,

@@ -6,11 +6,17 @@
     {% embed getPartial('page-metadata') %}
         {% if category is defined and category is not null %}
             {# Override default behaviour: Use empty title if no explicit meta title is defined #}
-            {% block title          category.details[0].metaTitle | default('') %}
+            {% block title category.details[0].metaTitle | default('') %}
+            {% set metaDescription = category.details[0].metaDescription | default('') %}
+            {% set metaRobots = category.details[0].robots %}
         {% else %}
-            {% block description    trans('Ceres::Template.homepageMetaDescription') %}
-            {% block robots         ceresConfig.meta.robotsHome %}
+            {% set metaDescription = trans('Ceres::Template.homepageMetaDescription') %}
+            {% set metaRobots = ceresConfig.meta.robotsHome %}
         {% endif %}
+
+        {% block description metaDescription %}
+        {% block robots metaRobots %}
+
     {% endembed %}
 {% endblock %}
 

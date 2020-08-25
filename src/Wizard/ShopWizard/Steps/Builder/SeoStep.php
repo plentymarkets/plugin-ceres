@@ -26,7 +26,8 @@ class SeoStep extends Step
                 $this->generateRobotSettingsSection(),
                 $this->generateRobotsTxtSection(),
                 $this->generateSiteMapSection(),
-                $this->generateAvailabilitiesSection()
+                $this->generateAvailabilitiesSection(),
+                $this->generateItemMetaTitleSection()
             ]
         ];
     }
@@ -163,6 +164,37 @@ class SeoStep extends Step
                         "checkboxValues" => $siteMapOptions
                     ]
                 ]
+            ]
+        ];
+    }
+
+    private function generateItemMetaTitleSection()
+    {
+        return [
+            "title" => "Wizard.itemMetaTitle",
+            "description" => "Wizard.itemMetaTitleDescription",
+            "form" => [
+                "seo_itemMetaTitle" => [
+                    "type" => "select",
+                    "defaultValue" => 1,
+                    "options" => [
+                        "name" => "Wizard.itemMetaTitle",
+                        "listBoxValues" => [
+                            [
+                                "value" => 1,
+                                "caption" => "Wizard.itemName0"
+                            ],
+                            [
+                                "value" => 2,
+                                "caption" => "Wizard.itemName1"
+                            ],
+                            [
+                                "value" => 3,
+                                "caption" => "Wizard.itemName2"
+                            ],
+                        ]
+                    ]
+                ],
             ]
         ];
     }
