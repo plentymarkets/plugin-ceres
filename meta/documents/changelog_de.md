@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v5.0.10 (2020-08-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.9...5.0.10" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Auf der Startseite wurde durch einen Fehler immer der Wert "NOINDEX, NOFOLLOW" für das Meta-Attribut "robots" ausgegeben. Dies wurde behoben.
+
 ## v5.0.9 (2020-08-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.8...5.0.9" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO

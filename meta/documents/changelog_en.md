@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v5.0.10 (2020-08-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.9...5.0.10" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the value "NOINDEX, NOFOLLOW" for the meta-attribute "robots" was always displayed on the home page. This has been fixed.
+
 ## v5.0.9 (2020-08-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.8...5.0.9" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
