@@ -8,7 +8,7 @@
             {# Override default behaviour: Use empty title if no explicit meta title is defined #}
             {% block title category.details[0].metaTitle | default('') %}
             {% set metaDescription = category.details[0].metaDescription | default('') %}
-            {% set metaRobots = category.details[0].robots %}
+            {% set metaRobots = metaRobots %}
         {% else %}
             {% set metaDescription = trans('Ceres::Template.homepageMetaDescription') %}
             {% set metaRobots = ceresConfig.meta.robotsHome %}
