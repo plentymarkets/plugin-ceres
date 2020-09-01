@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v5.0.11 (2020-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.10...5.0.11" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die ShopBuilder-Vorlage für Artikelsets enthält nun die Hinweistexte zur Mehrwertsteuer und zu den Versandkosten.
+
 ## v5.0.10 (2020-08-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.9...5.0.10" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
