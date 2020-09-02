@@ -19,7 +19,7 @@ export default Vue.component("contact-wish-input", {
     methods: {
         updateContactWish(event)
         {
-            this.$store.commit("setContactWish", event.srcElement.value);
+            this.$store.commit("setContactWish", event.target.value);
         }
     }
 });
