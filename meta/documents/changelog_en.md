@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v5.0.11 (2020-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.10...5.0.11" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The ShopBuilder preset for item sets now includes information on value-added tax and shipping costs.
+
 ## v5.0.10 (2020-08-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.9...5.0.10" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
