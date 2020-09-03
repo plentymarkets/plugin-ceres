@@ -22,7 +22,7 @@
                         {% set currentVariationId = item.itemVariationId | trimNewlines %}
 
                         {% set itemAmount = item.amounts[0] %}
-                        {% for amount in item.amouts if not amout.isSystemCurrency %}
+                        {% for amount in item.amouts if not amount.isSystemCurrency %}
                             {% set itemAmount = amount %}
                         {% endfor %}
 
