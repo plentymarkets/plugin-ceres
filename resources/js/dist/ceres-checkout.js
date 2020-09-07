@@ -57740,7 +57740,7 @@ __webpack_require__.r(__webpack_exports__);
   }),
   methods: {
     updateContactWish: function updateContactWish(event) {
-      this.$store.commit("setContactWish", event.srcElement.value);
+      this.$store.commit("setContactWish", event.target.value);
     }
   }
 }));
@@ -63218,11 +63218,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var formatter = new _helper_MonetaryFormatter__WEBPACK_IMPORTED_MODULE_1__["default"]();
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("currency", function (price) {
+  var currency = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : App.activeCurrency;
+
   if (price === "N / A") {
     return price;
   }
 
-  return formatter.format(parseFloat(price), App.activeCurrency);
+  return formatter.format(parseFloat(price), currency);
 });
 
 /***/ }),
@@ -69471,6 +69473,7 @@ var actions = {
     commit("setMethodOfPaymentList", checkout.paymentDataList);
     commit("setMethodOfPayment", checkout.methodOfPaymentId);
     commit("setIsCheckoutReadonly", checkout.readOnly);
+    commit("setContactWish", checkout.contactWish);
     dispatch("setShippingProfileById", checkout.shippingProfileId);
     dispatch("initProfileAvailabilities");
   },
