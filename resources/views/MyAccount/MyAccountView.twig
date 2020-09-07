@@ -15,7 +15,7 @@
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
-    {% set isReturnActive = config("Ceres.my_account.order_return_active") %}
+    {% set isReturnActive = ceresConfig.myAccount.orderReturnActive %}
     {% set contactHasReturns = services.customer.hasReturns() %}
 
     {% set optionalInvoiceAddressFields = {
