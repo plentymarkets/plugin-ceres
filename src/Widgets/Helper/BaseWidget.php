@@ -83,6 +83,9 @@ class BaseWidget implements DynamicWidget
 
         try
         {
+            // set isAdminPreview to true, to provide e.g. items without prices
+            config(['isAdminPreview' => true]);
+
             $previewData = $this->getPreviewData($widgetSettings);
             return $this->twig->renderString($template, $previewData);
         }
