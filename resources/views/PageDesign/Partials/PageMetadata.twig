@@ -28,9 +28,9 @@
 {% endif %}
 
 {% if block('image') is defined %}
-    {% set image = block('image') | default(ceresConfig.header.companyLogo) %}
+    {% set image = block('image') | default(ceresConfig.meta.defaultImage) %}
 {% elseif details is not null %}
-    {% set image = details.imagePath | default(ceresConfig.header.companyLogo) %}
+    {% set image = details.imagePath | default(ceresConfig.meta.defaultImage) %}
 {% endif %}
 
 {% if block('title') is defined %}
@@ -47,8 +47,18 @@
 {% endif %}
 {% set title = title ~ trans("Ceres::Template.headerCompanyName") %}
 
+{% if image is null %}
+    {% set image = default(ceresConfig.header.companyLogo) %}
+{% elseif image starts with 'category/' %}
+    {% set image = webstoreConfig.domainSsl ~ "/documents/" ~ image %}
+{% endif %}
+
 {% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'layout/') %}
     {% set image = plugin_path('Ceres') ~ "/" ~ image %}
+{% endif %}
+
+{% if image starts with 'http://' %}
+    {% set image = image | replace({'http://': 'https://'}) %}
 {% endif %}
 
 <meta name="robots" content="{% if forceNoIndex %}NOINDEX{% else %}{{ robots }}{% endif %}">
