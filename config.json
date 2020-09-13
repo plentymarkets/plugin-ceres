@@ -3581,6 +3581,15 @@
         "Config.SEOTab": {
             "label": "Config.seoTab",
             "formFields": {
+                "meta.defaultImage": {
+                    "type": "inputFile",
+                    "required": false,
+                    "label": "Config.metaDefaultImage",
+                    "options": {
+                        "tooltip": "Config.metaDefaultImageTooltip",
+                        "defaultValue": ""
+                   }
+                },
                 "meta.robots_home": {
                     "type": "selectBox",
                     "required": false,
