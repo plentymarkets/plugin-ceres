@@ -14,6 +14,7 @@ class CeresMetaConfig extends PluginConfig
     public $robotsPrivacyPolicy;
     public $robotsTermsAndConditions;
     public $robotsSearchResult;
+    public $defaultImage;
     
     protected function getPluginName()
     {
@@ -30,5 +31,6 @@ class CeresMetaConfig extends PluginConfig
         $this->robotsPrivacyPolicy                  = $this->getTextValue( 'meta.robots_privacy_policy' , 'all' );
         $this->robotsTermsAndConditions             = $this->getTextValue( 'meta.robots_terms_and_conditions' , 'all' );
         $this->robotsSearchResult                   = $this->getTextValue( 'meta.robots_search_result' , 'all' );
+        $this->defaultImage                         = $this->getTextValue( 'meta.defaultImage' , '' );
     }
 }
