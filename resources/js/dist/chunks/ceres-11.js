@@ -435,7 +435,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
           if (variation.unitCombinationId !== this.selectedUnit && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNull"])(this.selectedUnit)) {
             // when the unit dropdown isn't visible, it should have a lower weight for reset investigations
-            var unitWeight = Object.keys(this.possibleUnits).length > 1 && this.isContentVisible ? 1 : 0.9;
+            var unitWeight = Object.keys(this.possibleUnits).length > 1 && this.isContentVisible ? 0.9 : 0.1;
             changes += unitWeight;
           }
 
