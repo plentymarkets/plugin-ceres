@@ -125,7 +125,7 @@ export default {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                gender: "male"
+                gender: this.defaultSalutation
             },
             isDisabled: false,
             privacyPolicyAccepted : false,

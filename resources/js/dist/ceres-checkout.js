@@ -1798,7 +1798,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     }
   },
   computed: _objectSpread({
@@ -2281,7 +2281,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     }
   },
   data: function data() {
@@ -59161,7 +59161,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     },
     paddingClasses: {
       type: String,
@@ -59842,7 +59842,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     },
     hasToValidate: {
       type: Boolean,
@@ -59967,7 +59967,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     },
     paddingClasses: {
       type: String,
@@ -63104,7 +63104,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"]]);
 /* harmony default export */ __webpack_exports__["default"] = (exceptionMap);
 
 /***/ }),
