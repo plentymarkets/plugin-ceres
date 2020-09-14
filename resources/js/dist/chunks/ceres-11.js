@@ -434,7 +434,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           var changes = 0;
 
           if (variation.unitCombinationId !== this.selectedUnit && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNull"])(this.selectedUnit)) {
-            changes += 0.9;
+            changes++;
           }
 
           var _iterator4 = _createForOfIteratorHelper(variation.attributes),
