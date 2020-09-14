@@ -1798,7 +1798,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     }
   },
   computed: _objectSpread({
@@ -2281,7 +2281,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     }
   },
   data: function data() {
@@ -59161,7 +59161,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     },
     paddingClasses: {
       type: String,
@@ -59842,7 +59842,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     },
     hasToValidate: {
       type: Boolean,
@@ -59967,7 +59967,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     },
     paddingClasses: {
       type: String,
