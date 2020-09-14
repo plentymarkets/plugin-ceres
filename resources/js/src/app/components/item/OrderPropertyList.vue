@@ -73,6 +73,13 @@ export default {
         };
     },
 
+    mounted()
+    {
+        document.addEventListener("onVariationChanged", event => {
+            this.activeSlide = 0;
+        });
+    },
+
     computed:
     {
         sortedGroupedProperties()
