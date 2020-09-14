@@ -374,7 +374,7 @@ export default {
                 if (variation.unitCombinationId !== this.selectedUnit && !isNull(this.selectedUnit))
                 {
                     // when the unit dropdown isn't visible, it should have a lower weight for reset investigations
-                    const unitWeight = Object.keys(possibleUnits).length > 1 && this.isContentVisible ? 1 : 0.9;
+                    const unitWeight = Object.keys(this.possibleUnits).length > 1 && this.isContentVisible ? 1 : 0.9;
 
                     changes += unitWeight;
                 }
