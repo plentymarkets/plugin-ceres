@@ -1,5 +1,30 @@
 # Release Notes for Ceres
 
+## v5.0.12 (2020-09-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.11...5.0.12" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed 
+
+- The selection of the variation content now impacts the variation selection to a lesser degree, so that the attribute selection can no longer be blocked by the content selection.
+
+### Fixed
+
+- Under certain circumstances, the order history did not display the correct currency for orders with non-standard currencies. This behaviour has been fixed.
+- During the creation of an order, the customer wish was not passed on correctly if the customer had aborted the PayPal payment procedure. This behaviour has been fixed.
+- A notification is now displayed when an invalid gift card is removed from the shopping cart.
+- Under certain circumstances, the SingleItem template could not be detected, which could lead to display errors. This has been fixed.
+- Due to an error, the preselected salutation in the address input was not working as intended. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.12 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/checkout/ContactWishInput.js](https://github.com/plentymarkets/plugin-ceres/pull/2365/files#diff-37b747947d823f75ad5cb175e3859af1)
+- [resources/js/src/app/store/modules/CheckoutModule.js](https://github.com/plentymarkets/plugin-ceres/pull/2365/files#diff-02fceefaae66ccd08f2719a2a46c5a8d)
+- [resources/views/Checkout/Components/ContactWishInput.twig](https://github.com/plentymarkets/plugin-ceres/pull/2365/files#diff-2e1a9880a29ff28bfdedc4293681a690)
+- [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/2368/files#diff-63ac11bb178e21fa2fb744ce21e2cf5f)
+- [resources/views/PageDesign/Partials/Header/Header.twig](https://github.com/plentymarkets/plugin-ceres/pull/2368/files#diff-3184d75e16637b83c7f23fae7d39854d)
+- [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2368/files#diff-15057fa07b52305012c24a8812db234e)
+
+
 ## v5.0.11 (2020-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.10...5.0.11" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
