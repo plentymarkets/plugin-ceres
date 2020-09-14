@@ -373,7 +373,7 @@ export default {
 
                 if (variation.unitCombinationId !== this.selectedUnit && !isNull(this.selectedUnit))
                 {
-                    changes++;
+                    changes += 0.9;
                 }
 
                 for (const attribute of variation.attributes)
