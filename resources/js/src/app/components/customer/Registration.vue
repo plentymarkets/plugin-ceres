@@ -285,7 +285,7 @@ export default {
         */
         resetRecaptcha()
         {
-            if(App.config.global.googleRecaptchaVersion === 2)
+            if(App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha)
             {
                 const recaptchaId = this.$refs.registrationForm.querySelector("[data-recaptcha]");
 
