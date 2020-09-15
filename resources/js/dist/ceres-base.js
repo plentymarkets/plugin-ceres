@@ -54167,7 +54167,7 @@ function normalizeUrl(url) {
   if (App.urlTrailingSlash && urlPath.substr(-1, 1) !== "/") {
     urlPath += "/";
   } else if (!App.urlTrailingSlash && urlPath.substr(-1, 1) === "/") {
-    urlPath = url.substr(0, url.length - 1);
+    urlPath = urlPath.substr(0, urlPath.length - 1);
   }
 
   var targetUrl = urlPath;
