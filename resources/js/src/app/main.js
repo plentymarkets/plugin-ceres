@@ -311,13 +311,14 @@ if ( headerParent )
                     {
                         elem.style.top = 0;
                     }
-                    else if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
-                    {
-                        elem.style.top = fixedElementsHeight + "px";
-                    }
                     else
                     {
                         elem.style.top = offset + "px";
+                    }
+
+                    if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
+                    {
+                        elem.style.top = fixedElementsHeight + "px";
                     }
 
                     fixedElementsHeight = fixedElementsHeight + elemHeight;
@@ -355,7 +356,7 @@ if ( headerParent )
 
     window.addEventListener("scroll", debounce(function()
     {
-        scrollHeaderElements();
+        window.requestAnimationFrame(scrollHeaderElements);
     }, 10), detectPassiveEvents() ? { passive: true } : false);
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
