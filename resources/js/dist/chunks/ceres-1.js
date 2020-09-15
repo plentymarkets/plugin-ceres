@@ -1070,7 +1070,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     }
   },
   computed: _objectSpread({
@@ -1590,7 +1590,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       billingAddress: {
         countryId: null,
         stateId: null,
-        gender: "male"
+        gender: this.defaultSalutation
       },
       isDisabled: false,
       privacyPolicyAccepted: false,
@@ -1854,7 +1854,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultSalutation: {
       type: String,
-      default: "male"
+      default: App.config.addresses.defaultSalutation
     }
   },
   data: function data() {
