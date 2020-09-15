@@ -45,7 +45,7 @@
                 :title="property.names.description">
                 <select v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select">
                     <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
-                    <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id">{{ value.name }}</option>
+                    <option :selected="property.id === value.id" :value="value.id" v-for="(value, id) in property.selectionValues" :key="value.id">{{ value.name }}</option>
                 </select>
                 <label class="d-flex w-100">
                     <span class="text-truncate">{{ property.names.name }}</span>
