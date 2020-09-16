@@ -219,10 +219,6 @@ let headerLoaded = false;
 
 let allHeaderChildrenHeights = [];
 
-let headerHeight = 0;
-
-let isUnfixedElement = [];
-
 if ( headerParent )
 {
     function calculateBodyOffset()
@@ -235,30 +231,12 @@ if ( headerParent )
 
             let bodyOffset = 0;
 
-            vueApp.style.marginTop = headerHeight + "px";
-            vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
-        }
-    }
-
-    function prepareHeaderElements()
-    {
-        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
-        if (headerLoaded && !App.isShopBuilder)
-        {
-            headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
-            let zIndex = 100;
-
-            for (let i = 0; i < headerParent.children.length; i++)
+            for ( let i = 0; i < headerParent.children.length; i++ )
             {
-                const elem = headerParent.children[i];
-
-                elem.style.zIndex = zIndex;
-                zIndex--;
-
-                isUnfixedElement.push(elem.classList.contains("unfixed"));
+                bodyOffset += headerParent.children[i].getBoundingClientRect().height;
             }
+            vueApp.style.marginTop = bodyOffset + "px";
+            vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
         }
     }
 
@@ -270,10 +248,7 @@ if ( headerParent )
 
         for (let i = 0; i < headerParent.children.length; i++)
         {
-            let elementHeight = headerParent.children[i].getBoundingClientRect().height;
-
-            allHeaderChildrenHeights.push(elementHeight);
-            headerHeight = headerHeight + allHeaderChildrenHeights;
+            allHeaderChildrenHeights.push(headerParent.children[i].getBoundingClientRect().height);
         }
     }
 
@@ -288,8 +263,9 @@ if ( headerParent )
             let fixedElementsHeight = 0;
 
             let offset = 0;
-
             const scrollTop = window.pageYOffset;
+
+            let zIndex = 100;
 
             for (let i = 0; i < headerParent.children.length; i++)
             {
@@ -298,29 +274,30 @@ if ( headerParent )
 
                 offset = absolutePos - scrollTop;
                 elem.style.position = "absolute";
+                elem.style.zIndex = zIndex;
+                zIndex--;
 
-                // Element is unfixed and should scroll indefinetly
-                if (isUnfixedElement[i])
-                {
-                    elem.style.top = offset + "px";
-                }
-                // Element is fixed and should scroll until it hits top of header or next fixed element
-                else
+                if (!elem.classList.contains("unfixed"))
                 {
                     if (offset < 0)
                     {
                         elem.style.top = 0;
-                    }
-                    else if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
-                    {
-                        elem.style.top = fixedElementsHeight + "px";
                     }
                     else
                     {
                         elem.style.top = offset + "px";
                     }
 
+                    if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
+                    {
+                        elem.style.top = fixedElementsHeight + "px";
+                    }
+
                     fixedElementsHeight = fixedElementsHeight + elemHeight;
+                }
+                else
+                {
+                    elem.style.top = offset + "px";
                 }
                 absolutePos = absolutePos + elemHeight;
             }
@@ -329,16 +306,15 @@ if ( headerParent )
 
     window.addEventListener("resize", debounce(function()
     {
-        getHeaderChildrenHeights();
         calculateBodyOffset();
+        getHeaderChildrenHeights();
         scrollHeaderElements();
     }, 50));
 
     window.addEventListener("load", function()
     {
-        getHeaderChildrenHeights();
         calculateBodyOffset();
-        prepareHeaderElements();
+        getHeaderChildrenHeights();
         scrollHeaderElements();
     });
 
@@ -348,7 +324,6 @@ if ( headerParent )
         {
             calculateBodyOffset();
             getHeaderChildrenHeights();
-            prepareHeaderElements();
             scrollHeaderElements();
         };
     }
