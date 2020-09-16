@@ -11,10 +11,9 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
 /* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/AutoFocusService */ "./resources/js/src/app/services/AutoFocusService.js");
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 //
 //
 //
@@ -34,7 +33,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
@@ -58,7 +56,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(this.initialEmail) && this.initialEmail.length > 0) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.initialEmail) && this.initialEmail.length > 0) {
       this.email = this.initialEmail;
     }
   },
@@ -67,24 +65,22 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$nextTick(function () {
       // for old login view only (input in modal)
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(_this.$parent.$refs.guestModal)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(_this.$parent.$refs.guestModal)) {
         _this.$parent.$refs.guestModal.addEventListener("hidden.bs.modal", function () {
           _this.email = "";
-          _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].unmarkAllFields(_this.$refs.form);
+          _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__["default"].unmarkAllFields(_this.$refs.form);
         });
       }
-
-      _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_2__["default"].triggerAutoFocus();
     });
   },
   methods: {
     validate: function validate() {
       var _this2 = this;
 
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].validate(this.$refs.form).done(function () {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__["default"].validate(this.$refs.form).done(function () {
         _this2.authGuest();
       }).fail(function (invalidFields) {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].markInvalidFields(invalidFields, "error");
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_2__["default"].markInvalidFields(invalidFields, "error");
       });
     },
     authGuest: function authGuest() {
@@ -94,7 +90,7 @@ __webpack_require__.r(__webpack_exports__);
       _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].post("/rest/io/guest", {
         email: this.email
       }).done(function () {
-        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_4__["navigateTo"])(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isDefined"])(_this3.backlink) && _this3.backlink.length ? decodeURIComponent(_this3.backlink) : window.location.origin);
+        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_3__["navigateTo"])(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isDefined"])(_this3.backlink) && _this3.backlink.length ? decodeURIComponent(_this3.backlink) : window.location.origin);
       }).fail(function () {
         _this3.isDisabled = false;
       });
