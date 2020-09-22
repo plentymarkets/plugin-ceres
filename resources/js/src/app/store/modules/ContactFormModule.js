@@ -202,7 +202,7 @@ const actions =
 
 function resetRecaptcha(recaptchaEl)
 {
-    if (App.config.global.googleRecaptchaVersion === 2)
+    if (App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha)
     {
         window.grecaptcha.reset(recaptchaEl);
     }
