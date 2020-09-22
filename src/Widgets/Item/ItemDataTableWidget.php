@@ -48,7 +48,7 @@ class ItemDataTableWidget extends BaseWidget
                     ->addEntry("variation.weightG", "Widget.itemDataTableItemWeightG")
                     ->addEntry("variation.weightNetG", "Widget.itemDataTableItemWeightNetG")
                     ->addEntry("item.variationDimensions", "Widget.itemDataTableItemVariationDimensions")
-                    ->addEntry("item.customsTariffNumber", "Widget.itemDataTableItemCustomsTariffNumber")
+                    ->addEntry("variation.customsTariffNumber", "Widget.itemDataTableItemCustomsTariffNumber")
                     ->toArray()
             );
 

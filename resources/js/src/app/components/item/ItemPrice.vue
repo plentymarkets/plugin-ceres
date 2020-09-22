@@ -84,7 +84,7 @@ export default {
 
         showDynamicPrice() {
             const state = this.$store.state.items[this.itemId];
-            return App.config.item.showPleaseSelect
+            return App.config.item.showPleaseSelect && App.isCheapestSorting
                 && (state.variationSelect && !state.variationSelect.isVariationSelected)
                 && (state.pleaseSelectVariationId === this.currentVariation.variation.id
                     || state.pleaseSelectVariationId === 0);

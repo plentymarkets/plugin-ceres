@@ -74,7 +74,7 @@
             {{ Twig.if("customerId or #{ isPreview | json_encode }") }}
                 <div class="row mb-3">
                     <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationCustomerID") }}</strong>
-                    <span class="col-6 col-sm-7">{{ Twig.print(Twig.call("services.customer.getContactNumber", [Twig.var("customerID")])) }}</span>
+                    <span class="col-6 col-sm-7">{{ Twig.print(Twig.call("services.customer.getContactNumber", [Twig.var("customerId")])) }}</span>
                 </div>
             {{ Twig.endif() }}
         {% endif %}

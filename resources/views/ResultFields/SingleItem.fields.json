@@ -30,7 +30,7 @@
     "item.ageRestriction",
     "item.condition.names.*",
     "item.conditionApi.names.*",
-    "item.customsTariffNumber",
+    "variation.customsTariffNumber",
     "item.id",
     "item.manufacturer.externalName",
     "item.manufacturer.name",

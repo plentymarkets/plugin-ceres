@@ -45,7 +45,7 @@ export default Vue.component("invoice-address-select", {
         defaultSalutation:
         {
             type: String,
-            default: "male"
+            default: App.config.addresses.defaultSalutation
         },
         hasToValidate:
         {

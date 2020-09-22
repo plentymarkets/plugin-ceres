@@ -75,6 +75,7 @@ class ItemSetPreset implements ContentPreset
 
         $this->createSecondTwoColumnWidget();
         $this->createSecondSetPriceWidget();
+        $this->createLegalInformation();
         $this->createAddToBasketWidget();
 
         return $this->preset->toArray();
@@ -393,6 +394,16 @@ class ItemSetPreset implements ContentPreset
     {
         $this->secondTwoColumnWidget->createChild('first', 'Ceres::ItemPriceWidget')
             ->withSetting('showCrossPrice', false)
+            ->withSetting('appearance', 'none');
+    }
+
+    private function createLegalInformation()
+    {
+        $text ="* {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }}";
+        $text .="<a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %} title=\"{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}\"> {{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a>";
+        $this->secondTwoColumnWidget->createChild('first', 'Ceres::CodeWidget')
+            ->withSetting('customClass', 'vat small text-muted')
+            ->withSetting('text', "<span>$text</span>")
             ->withSetting('appearance', 'none');
     }
 

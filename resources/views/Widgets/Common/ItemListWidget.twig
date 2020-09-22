@@ -123,7 +123,7 @@
                         {{ Twig.endif() }}
                     </div>
                 {% endif %}
-                {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isCurrentTemplate('tpl.item')") }}
+                {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isItem() == '1'") }}
                     <intersect>
                         <carousel :items-per-page="{{ itemsPerPage }}">
                             {{ Twig.for("item", "itemList.documents") }}

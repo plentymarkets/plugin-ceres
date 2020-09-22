@@ -15,7 +15,7 @@
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
-    {% set isReturnActive = services.order.isReturnActive() %}
+    {% set isReturnActive = ceresConfig.myAccount.orderReturnActive %}
     {% set contactHasReturns = services.customer.hasReturns() %}
 
     {% set optionalInvoiceAddressFields = {
@@ -120,7 +120,7 @@
                             {{ trans("Ceres::Template.myAccountBankDetails") }}
                         </h4>
 
-    
+
                         <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountChangePaymentInformation") }}</p>
                         <bank-data-select template="#vue-bank-data-select" :user-bank-data="{{ userBankData }}"
                                         contact-id="{{ frontend.Account.AccountContactId }}"></bank-data-select>
@@ -128,9 +128,9 @@
                     </div>
                 </div>
                 <!-- ./ACCOUNT SETTINGS AREA -->
-    
+
             </div>
-    
+
             {% set ordersPerPage = config("Ceres.my_account.orders_per_page") %}
             {% if not (ordersPerPage matches '/^\\d+$/') %}
                 {# config value is not a valid number #}
@@ -138,7 +138,7 @@
             {% endif %}
 
             <!-- HISTORY -->
-            <history template="#vue-history" 
+            <history template="#vue-history"
                     :orders-per-page="{{ ordersPerPage }}"
                     :is-return-active="{{ isReturnActive | json_encode }}"
                     :contact-has-returns="{{ contactHasReturns | json_encode }}">

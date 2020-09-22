@@ -125,7 +125,7 @@ export default {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                gender: "male"
+                gender: this.defaultSalutation
             },
             isDisabled: false,
             privacyPolicyAccepted : false,
@@ -171,10 +171,13 @@ export default {
                                 NotificationService.error(
                                     this.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
                                 );
+                                this.resetRecaptcha();
                             }
                         })
                         .fail(invalidFields =>
                         {
+                            this.resetRecaptcha();
+
                             if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
                             {
                                 this.$refs.passwordHint.showPopper();
@@ -261,6 +264,8 @@ export default {
                         NotificationService.error(
                             this.$translate("Ceres::Template.regError")
                         ).closeAfter(10000);
+
+                        this.resetRecaptcha();
                     }
 
                     this.isDisabled = false;
@@ -269,8 +274,23 @@ export default {
                 {
                     NotificationService.error(error.error).closeAfter(10000);
 
+                    this.resetRecaptcha();
+
                     this.isDisabled = false;
                 });
+        },
+
+        /** 
+         * Resets recaptcha v2 to make it capable of executing again.
+        */
+        resetRecaptcha()
+        {
+            if(App.config.global.googleRecaptchaVersion === 2)
+            {
+                const recaptchaId = this.$refs.registrationForm.querySelector("[data-recaptcha]");
+
+                window.grecaptcha.reset(recaptchaId);
+            }
         },
 
         setAddressDataField({ field, value })

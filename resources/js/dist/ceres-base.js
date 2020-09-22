@@ -35918,10 +35918,10 @@ var render = function() {
                                         ])
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.currentVariation.item
+                                    _vm.currentVariation.variation
                                       .customsTariffNumber !== "" &&
                                     (_vm.itemConfig.includes(
-                                      "item.customs_tariff_number"
+                                      "variation.customs_tariff_number"
                                     ) ||
                                       _vm.itemConfig.includes("all"))
                                       ? _c("tr", [
@@ -35938,7 +35938,7 @@ var render = function() {
                                           _c("td", [
                                             _vm._v(
                                               _vm._s(
-                                                _vm.currentVariation.item
+                                                _vm.currentVariation.variation
                                                   .customsTariffNumber
                                               )
                                             )
@@ -51618,7 +51618,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"]]);
 /* harmony default export */ __webpack_exports__["default"] = (exceptionMap);
 
 /***/ }),
@@ -51732,11 +51732,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var formatter = new _helper_MonetaryFormatter__WEBPACK_IMPORTED_MODULE_1__["default"]();
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("currency", function (price) {
+  var currency = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : App.activeCurrency;
+
   if (price === "N / A") {
     return price;
   }
 
-  return formatter.format(parseFloat(price), App.activeCurrency);
+  return formatter.format(parseFloat(price), currency);
 });
 
 /***/ }),
@@ -53484,6 +53486,7 @@ function executeReCaptcha(form) {
           if (evt.target.value) {
             resolve(evt.target.value);
           } else {
+            window.grecaptcha.reset(recaptchaElement.dataset.recaptcha);
             reject();
           }
         });
@@ -54164,7 +54167,7 @@ function normalizeUrl(url) {
   if (App.urlTrailingSlash && urlPath.substr(-1, 1) !== "/") {
     urlPath += "/";
   } else if (!App.urlTrailingSlash && urlPath.substr(-1, 1) === "/") {
-    urlPath = url.substr(0, url.length - 1);
+    urlPath = urlPath.substr(0, urlPath.length - 1);
   }
 
   var targetUrl = urlPath;
@@ -55652,9 +55655,9 @@ function getItemListUrlParams(searchParams) {
   urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
 
   if (App.isSearch) {
-    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
+    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch && searchParams.sorting.length > 0 ? searchParams.sorting : null;
   } else {
-    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
+    urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting && searchParams.sorting.length > 0 ? searchParams.sorting : null;
   }
 
   var newUrlParams = _UrlService__WEBPACK_IMPORTED_MODULE_2__["default"].getUrlParams(document.location.search);
@@ -57890,6 +57893,7 @@ var actions = {
     commit("setMethodOfPaymentList", checkout.paymentDataList);
     commit("setMethodOfPayment", checkout.methodOfPaymentId);
     commit("setIsCheckoutReadonly", checkout.readOnly);
+    commit("setContactWish", checkout.contactWish);
     dispatch("setShippingProfileById", checkout.shippingProfileId);
     dispatch("initProfileAvailabilities");
   },
@@ -58324,6 +58328,7 @@ var actions = {
       return;
     }
 
+    var recaptchaEl = event.target.querySelector("[data-recaptcha]");
     Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_19__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_14__["default"].validate(event.target).done(function () {
         disableForm(event.target, true);
@@ -58337,15 +58342,18 @@ var actions = {
           replyTo: formOptions.replyTo,
           recaptchaToken: recaptchaResponse
         }).done(function (reponse) {
+          resetRecaptcha(recaptchaEl);
           event.target.reset();
           disableForm(event.target, false);
           _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
         }).fail(function (response) {
+          resetRecaptcha(recaptchaEl);
           disableForm(event.target, false);
           response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactSendFail");
           _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(response.error);
         });
       }).fail(function (invalidFields) {
+        resetRecaptcha(recaptchaEl);
         var fieldNames = [];
 
         var _iterator2 = _createForOfIteratorHelper(invalidFields),
@@ -58372,6 +58380,13 @@ var actions = {
     });
   }
 };
+
+function resetRecaptcha(recaptchaEl) {
+  if (App.config.global.googleRecaptchaVersion === 2) {
+    window.grecaptcha.reset(recaptchaEl);
+  }
+}
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   actions: actions
 });
@@ -58455,7 +58470,7 @@ var state = {
   facets: [],
   selectedFacets: [],
   page: null,
-  sorting: "texts.name1_asc",
+  sorting: "",
   isLoading: false,
   itemsPerPage: null,
   searchString: null,
