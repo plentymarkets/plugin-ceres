@@ -115,7 +115,9 @@ export default {
     {
         currentOffer()
         {
-            return this.liveShoppingOffers[this.liveShoppingId];
+            const ls = this.$store.state.liveShopping.liveShoppingOffers[this._uid];
+            console.log(ls);
+            return ls;
         },
 
         isActive()
@@ -197,16 +199,12 @@ export default {
             }
 
             return prices;
-        },
-
-        ...mapState({
-            liveShoppingOffers: state => state.liveShopping.liveShoppingOffers
-        })
+        }
     },
 
     created()
     {
-        this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting });
+        this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting, uid: this._uid });
     },
 
     methods:
@@ -232,7 +230,7 @@ export default {
 
         reloadOffer()
         {
-            this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting });
+            this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting, uid: this._uid });
         }
     }
 }
