@@ -1725,7 +1725,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
      * Resets recaptcha v2 to make it capable of executing again.
     */
     resetRecaptcha: function resetRecaptcha() {
-      if (App.config.global.googleRecaptchaVersion === 2) {
+      if (App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha) {
         var recaptchaId = this.$refs.registrationForm.querySelector("[data-recaptcha]");
         window.grecaptcha.reset(recaptchaId);
       }
