@@ -150,6 +150,10 @@ class GlobalContext implements ContextInterface
 
         $this->bodyClasses[] = $templateClass;
 
+        if(Utils::isContactLoggedIn()){
+            $this->bodyClasses[] = "logged-in";
+        }
+
         $this->buildHash = BuildHash::get();
     }
 
