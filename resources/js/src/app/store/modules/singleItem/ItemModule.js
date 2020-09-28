@@ -237,7 +237,7 @@ const getters =
             return null;
         },
 
-        variationTotalPrice(state, getters, rootState, rootGetters)
+        variationTotalPrice(state, getters)
         {
             return getters.variationBasePrice + getters.variationPropertySurcharge;
         },
