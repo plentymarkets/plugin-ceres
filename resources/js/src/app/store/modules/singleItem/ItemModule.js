@@ -149,7 +149,7 @@ const actions =
 
 const getters =
     {
-        variationPropertySurcharge(state)
+        variationPropertySurcharge(state, getters)
         {
             if (!state || !state.variation.documents)
             {
@@ -167,7 +167,18 @@ const getters =
 
                 for (const property of addedProperties)
                 {
-                    sum += (property.surcharge || property.property.surcharge);
+                    const percentage = property.percentage || property.property.percentage;
+
+                    if (!isNullOrUndefined(percentage))
+                    {
+                        const surcharge = getters.variationBasePrice * percentage / 100;
+
+                        sum += surcharge;
+                    }
+                    else
+                    {
+                        sum += (property.surcharge || property.property.surcharge);
+                    }
                 }
             }
 
@@ -203,7 +214,7 @@ const getters =
             return returnPrice || calculatedPrices.default;
         },
 
-        variationTotalPrice(state, getters, rootState, rootGetters)
+        variationBasePrice(state, getters, rootState, rootGetters)
         {
             if (getters.currentItemVariation.item.itemType === "set")
             {
@@ -211,7 +222,7 @@ const getters =
             }
             else if (getters.currentItemVariation.item.itemType !== "set" && rootState.items.isItemSet)
             {
-                return state.variation.documents[0].data.prices.set.price.value + getters.variationPropertySurcharge;
+                return state.variation.documents[0].data.prices.set.price.value;
             }
             else
             {
@@ -219,13 +230,16 @@ const getters =
 
                 if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
                 {
-                    const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
-
-                    return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+                    return Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
                 }
             }
 
             return null;
+        },
+
+        variationTotalPrice(state, getters, rootState, rootGetters)
+        {
+            return getters.variationBasePrice + getters.variationPropertySurcharge;
         },
 
         variationGroupedProperties(state)
