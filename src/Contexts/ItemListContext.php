@@ -52,12 +52,7 @@ trait ItemListContext
             ExternalSearch::getExternalResults($externalSearch);
 
             if ($externalSearch->hasResults()) {
-                $resultVariationIds = $externalSearch->getResults();
-                $variationIds = [];
-
-                foreach ($resultVariationIds as $variationId) {
-                    $variationIds[] = $variationId;
-                }
+                $variationIds = $externalSearch->getResults();
 
                 $externalSearchFactory = VariationList::getSearchFactory(
                     [
@@ -70,7 +65,7 @@ trait ItemListContext
                         $searchResults['documents']
                     )) {
 
-                    foreach ($resultVariationIds as $variationId) {
+                    foreach ($variationIds as $variationId) {
                         $variation = array_filter($searchResults['documents'], function($document) use ($variationId) {
                             return $document['id'] == $variationId;
                         });
@@ -81,7 +76,7 @@ trait ItemListContext
                     }
                 }
                 $this->pageMax        = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
-                $this->itemCountPage  = count($resultVariationIds);
+                $this->itemCountPage  = count($variationIds);
                 $this->itemCountTotal = $externalSearch->getCountTotal();
                 $this->facets         = [];
 
