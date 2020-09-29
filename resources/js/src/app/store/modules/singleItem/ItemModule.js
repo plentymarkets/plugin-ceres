@@ -77,6 +77,22 @@ const mutations =
         setVariationMarkInvalidProps(state, markFields)
         {
             state.variationMarkInvalidProperties = !!markFields;
+        },
+
+        setVariationPropertySurcharges(state, basePrice )
+        {
+            if (state.variation.documents[0].data.properties)
+            {
+                for (const property of state.variation.documents[0].data.properties)
+                {
+                    const percentage = property.percentage || property.property.percentage;
+
+                    if (!isNullOrUndefined(percentage))
+                    {
+                        property.property.surcharge = basePrice * percentage / 100;
+                    }
+                }
+            }
         }
     };
 
