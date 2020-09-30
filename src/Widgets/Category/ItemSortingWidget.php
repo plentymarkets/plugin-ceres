@@ -10,12 +10,13 @@ use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use IO\Services\ItemService;
 use Plenty\Plugin\Http\Request;
 
 class ItemSortingWidget extends BaseWidget
 {
     protected $template = 'Ceres::Widgets.Category.ItemSortingWidget';
-    
+
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemSortingWidget')
@@ -26,14 +27,14 @@ class ItemSortingWidget extends BaseWidget
                                 ->withPosition(300)
                                 ->toArray();
     }
-    
+
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
-        
+
         $settings->createCustomClass();
-        
+
         $settings->createCheckboxGroup('itemSortOptions')
                  ->withDefaultValue(
                      [
@@ -48,42 +49,53 @@ class ItemSortingWidget extends BaseWidget
                  ->withCheckboxValues(
                      ItemSortValueListFactory::make()->toArray()
                  );
-        
+
         $settings->createSpacing(false, true);
-        
+
         return $settings->toArray();
     }
-    
+
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $itemSortOptions = [];
         $result          = [];
         $translationMap  = SearchOptions::TRANSLATION_MAP;
+        $translationMap = array_map(function($value) { return 'Ceres::Template.'.$value; }, $translationMap);
+
         /**
          * @var CeresSortingConfig $ceresSortingConfig
          */
         $ceresSortingConfig = pluginApp(CeresSortingConfig::class);
-        
+
         if (array_key_exists('itemSortOptions', $widgetSettings)) {
             $temp = $widgetSettings['itemSortOptions']['mobile'];
-            
+
             // add default from ceres config
             if (!in_array($ceresSortingConfig->defaultSorting, $temp)) {
                 array_push($temp, $ceresSortingConfig->defaultSorting);
             }
-            
+
             foreach ($translationMap as $key => $value) {
                 if (in_array($key, $temp)) {
                     array_push($itemSortOptions, $key);
                 }
             }
         }
-        
+
+        /** @var ItemService $itemService */
+        $itemService = pluginApp(ItemService::class);
+        $additionalItemSortings = $itemService->getAdditionalItemSorting();
+        foreach($additionalItemSortings as $additionalItemSortingKey => $additionalItemSortingTranslation) {
+            $itemSortOptions[] = $additionalItemSortingKey;
+            $translationMap[$additionalItemSortingKey] = $additionalItemSortingTranslation;
+        }
+
         $result['itemSortOptions'] = $itemSortOptions;
         $result['translations']    = $translationMap;
+
         return $result;
     }
-    
+
     protected function getPreviewData($widgetSettings)
     {
         /**
