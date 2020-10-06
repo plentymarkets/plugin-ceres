@@ -15394,6 +15394,12 @@ html.ie .confirmation-order-list .cmp-order-item {
         .icon {
             display: inline-block;
             vertical-align: middle;
+
+            // fix image proportions for safari of the payment/shipping icons
+            > img {
+                -o-object-fit: contain;
+                   object-fit: contain;
+            }
         }
 
         .content {
