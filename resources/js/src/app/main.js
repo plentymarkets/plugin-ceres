@@ -1,3 +1,5 @@
+import { getContainingComponent } from "./helper/utils";
+
 const browserDetect = require("detect-browser");
 const NotificationService = require("./services/NotificationService");
 const AutoFocusService = require("./services/AutoFocusService");
@@ -5,6 +7,7 @@ const AutoFocusService = require("./services/AutoFocusService");
 import { debounce } from "./helper/debounce";
 import Vue from "vue";
 import { getStyle } from "./helper/dom";
+import { detectPassiveEvents } from "./helper/featureDetect";
 
 // Frontend end scripts
 // eslint-disable-next-line
@@ -42,12 +45,6 @@ function CeresMain()
         $("html").addClass("unkown-os");
     }
 
-    // Detect Facebook integrated Browser
-    if (typeof navigator !== "undefined" && /FBA[NV]\/([0-9\.]+)/.test(navigator.userAgent))
-    {
-        document.body.classList.add("facebook");
-    }
-
     $(window).scroll(function()
     {
         if ($(".wrapper-main").hasClass("isSticky"))
@@ -78,44 +75,22 @@ function CeresMain()
     HeaderCollapse("#currencySelect");
     HeaderCollapse("#searchBox");
 
-    const $toggleListView = $(".toggle-list-view");
     const $mainNavbarCollapse = $("#mainNavbarCollapse");
 
-    $(document).on("click", function(evt)
+    // prevent hidding collapses in the shopbuilder, for editing search bar results
+    if (!App.isShopBuilder)
     {
-        const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
-
-        if ($("#vue-app").hasClass(basketOpenClass))
+        $(document).on("click", function(evt)
         {
-            if ((evt.target != $(".basket-preview")) &&
-                (evt.target != document.querySelector(".basket-preview-hover")) &&
-                (evt.target.classList[0] != "message") &&
-                ($(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0))
+            headerCollapses.forEach(element =>
             {
-                evt.preventDefault();
-                $("#vue-app").toggleClass(basketOpenClass || "open-hover");
-            }
-        }
-
-        headerCollapses.forEach(element =>
-        {
-            if (evt.target !== element && $(evt.target).parents(element).length <= 0)
-            {
-                $(element).collapse("hide");
-            }
+                if (evt.target !== element && $(evt.target).parents(element).length <= 0)
+                {
+                    $(element).collapse("hide");
+                }
+            });
         });
-    });
-
-    $toggleListView.on("click", function(evt)
-    {
-        evt.preventDefault();
-
-        // toggle it's own state
-        $toggleListView.toggleClass("grid");
-
-        // toggle internal style of thumbs
-        $(".product-list, .cmp-product-thumb").toggleClass("grid");
-    });
+    }
 
     $mainNavbarCollapse.collapse("hide");
 
@@ -154,11 +129,11 @@ function CeresMain()
             }
         });
 
-        $(window).scroll(function()
+        window.addEventListener("scroll", function()
         {
             if (isDesktop)
             {
-                if ($(this).scrollTop() > offset)
+                if ($(window).scrollTop() > offset)
                 {
                     $(".back-to-top").fadeIn(duration);
                     $(".back-to-top-center").fadeIn(duration);
@@ -169,7 +144,7 @@ function CeresMain()
                     $(".back-to-top-center").fadeOut(duration);
                 }
             }
-        });
+        }, detectPassiveEvents() ? { passive: true } : false );
 
         window.addEventListener("resize", function()
         {
@@ -239,7 +214,9 @@ const showShopNotification = function(event)
 document.addEventListener("showShopNotification", showShopNotification);
 
 let headerParent = document.querySelector("[data-header-offset]");
+
 let headerLoaded = false;
+
 let allHeaderChildrenHeights = [];
 
 if ( headerParent )
@@ -251,6 +228,7 @@ if ( headerParent )
         if (headerLoaded && headerParent)
         {
             const vueApp = document.getElementById("vue-app");
+
             let bodyOffset = 0;
 
             for ( let i = 0; i < headerParent.children.length; i++ )
@@ -281,9 +259,12 @@ if ( headerParent )
         if (headerLoaded && !App.isShopBuilder)
         {
             let absolutePos = 0;
+
             let fixedElementsHeight = 0;
+
             let offset = 0;
             const scrollTop = window.pageYOffset;
+
             let zIndex = 100;
 
             for (let i = 0; i < headerParent.children.length; i++)
@@ -330,10 +311,27 @@ if ( headerParent )
         scrollHeaderElements();
     }, 50));
 
+    window.addEventListener("load", function()
+    {
+        calculateBodyOffset();
+        getHeaderChildrenHeights();
+        scrollHeaderElements();
+    });
+
+    if (document.fonts)
+    {
+        document.fonts.onloadingdone = function(evt)
+        {
+            calculateBodyOffset();
+            getHeaderChildrenHeights();
+            scrollHeaderElements();
+        };
+    }
+
     window.addEventListener("scroll", debounce(function()
     {
         scrollHeaderElements();
-    }, 10));
+    }, 10), detectPassiveEvents() ? { passive: true } : false);
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
@@ -378,11 +376,16 @@ if ( headerParent )
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
 {
+    const parent = widgetElement[1];
+
+    const parentComponent = getContainingComponent(parent);
+
     const compiled = Vue.compile(widgetElement[0].outerHTML, { delimiters: ["${", "}"] } );
     const component = new Vue({
         store: window.ceresStore,
         render: compiled.render,
-        staticRenderFns: compiled.staticRenderFns
+        staticRenderFns: compiled.staticRenderFns,
+        parent: parentComponent
     });
 
     component.$mount( widgetElement[0] );
@@ -403,6 +406,7 @@ $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", functi
 function fixPopperZIndexes()
 {
     const elements = document.querySelectorAll(".popover.d-none");
+
     let counter = elements.length;
 
     elements.forEach(el =>

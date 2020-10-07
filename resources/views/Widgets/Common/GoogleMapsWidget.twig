@@ -10,21 +10,20 @@
 
 {{ Twig.if("ceresConfig.global.googleMapsApiKey | trim is not empty or #{ isPreview | json_encode }") }}
     <div class="widget widget-google-maps{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}{% if inlinePadding | length > 0 %} {{ inlinePadding }}{% endif %}">
-        {% if location is not empty %}
+        {% if not isPreview %}
         <div class="widget-inner{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
-            <google-maps-widget :lat="{{ location.lat }}"
-                                :lng="{{ location.lng }}"
+            <google-maps-widget address="{{ widget.settings.address.mobile | replace({"\n": " ", "\r": "", "\t": " "}) }}"
                                 :zoom="{{ widget.settings.zoom.mobile | default(16) }}"
                                 maptype="{{ widget.settings.maptype.mobile }}"
                                 aspect-ratio="{{ widget.settings.aspectRatio.mobile }}">
-                <div class="d-flex flex-center h-100 position-absolute w-100 text-muted">
+                <div class="d-flex align-items-center justify-content-center h-100 position-absolute w-100 text-muted">
                     <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
                 </div>
             </google-maps-widget>
         </div>
 
         {% elseif isPreview %}
-            <div class="widget-placeholder {{ widget.settings.aspectRatio.mobile }}">
+            <div class="widget-placeholder prop-{{ widget.settings.aspectRatio.mobile }}">
                 <div>
                     <p class="title">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderTitle") }}</p>
                     <p class="description">{{ Twig.trans("Ceres::Widget.googleMapsPlaceholderDescription") }}</p>

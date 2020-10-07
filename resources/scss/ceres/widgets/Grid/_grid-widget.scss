@@ -1,116 +1,52 @@
-.widget-grid
-{
-    > .widget-inner
-    {
+.widget-grid {
+    > .widget-inner {
         display: flex;
 
-        > div
-        {
+        > div {
             flex: 1;
             max-width: 100%;
         }
     }
 
-    .widget-inner-stacked
-    {
+    .widget-fw {
+        right: unset !important; // stylelint-disable-line declaration-no-important
+        left: unset !important; // stylelint-disable-line declaration-no-important
+        width: unset !important; // stylelint-disable-line declaration-no-important
+        max-width: unset !important; // stylelint-disable-line declaration-no-important
+        margin-right: unset;
+        margin-left: unset;
+    }
+
+    .widget-inner-stacked {
         display: flex;
         flex-direction: column;
 
-        > .widget-inner
-        {
+        > .widget-inner {
             max-width: none;
 
-            [data-builder-child-container]
-            {
+            [data-builder-child-container] {
                 min-height: 100px;
             }
 
-            @include media-breakpoint-up(md)
-            {
-                .widget-proportional
-                {
+            @include media-breakpoint-up(md) {
+                .widget-proportional {
                     height: 100%;
                 }
             }
         }
     }
 
-    @include media-breakpoint-up(md)
-    {
-        .widget-inner-stacked > .widget-inner:first-child
-        {
+    @include media-breakpoint-up(md) {
+        .widget-inner-stacked > .widget-inner:first-child {
             padding-bottom: 2rem;
         }
     }
 }
 
-
-// a list widget in the footer needs the grey background for store feature colors
-.footer {
-    .widget-grid {
-        .widget-inner {
-            .widget-list {
-                position: relative;
-                height: 100%;
-                color: $footer-features-color;
-                background-color: $footer-features-bg;
-                box-sizing: content-box;
-                margin-bottom: 0;
-
-                .widget-inner
-                {
-                    padding: 1rem;
-                }
-            }
-
-            @include media-breakpoint-up(md)
-            {
-                .widget-list
-                {
-                    margin-left: -15px;
-                    margin-right: -15px;
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-
-                &:first-child {
-                    .widget-list {
-                        margin-left: 0;
-                        padding-left: 0;
-                    }
-                }
-
-                &:last-child {
-                    .widget-list {
-                        margin-right: 0;
-                        padding-right: 0;
-                    }
-                }
-            }
-
-
-            @include media-breakpoint-down(sm) {
-                &:not(:last-child) {
-                    .widget-list {
-                        .widget-inner {
-                            padding-bottom: 0;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.checkout
-{
-    .widget-grid > .widget-inner > div
-    {
-        background-color: $white;
-        padding: $spacer;
-    }
-}
-
-html.ie .widget-grid .widget-inner-stacked {
+html.ie .widget-grid .widget-inner-stacked { // stylelint-disable-line selector-no-qualifying-type
     display: block;
+}
+
+html.safari .widget-grid .widget-inner-stacked .widget-inner { // stylelint-disable-line selector-no-qualifying-type
+    flex-basis: auto !important; // stylelint-disable-line declaration-no-important
 }

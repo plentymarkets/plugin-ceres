@@ -5,7 +5,6 @@
 {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets ) %}
 
 {% block PageBody %}
-
     {% set listType = isSearch ? "itemsearch" : "categoryitem" %}
     {% set shopBuilderTemplate = shop_builder_category_template(category.id, listType) %}
 
@@ -21,10 +20,6 @@
 
     {% else %}
 
-        {{ component( "Ceres::ItemList.Components.CategoryItem") }}
-        {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
-        {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
-
         {% if category is defined and ceresConfig.item.showCategoryImage %}
             {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
         {% endif %}
@@ -34,7 +29,7 @@
             {% if isSearch %}
                 <div class="row mt-3">
                     <div class="col-12">
-                        <h1 class="h2" id="searchPageTitle">
+                        <h1 class="h2">
                             {% if isTag %}
                                 {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
                             {% else %}
@@ -91,7 +86,7 @@
             {% if ceresConfig.pagination.position in ['top', 'top_bottom'] %}
                 <div class="list-controls mb-5 row">
                     <div class="col-12">
-                        <div class="float-right row">
+                        <div class="float-right">
                             {% include "Ceres::Category.Item.Partials.Pagination" %}
                         </div>
                     </div>
@@ -101,7 +96,7 @@
             <div class="row">
 
                 {% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}
-                    <div class="col-3 hidden-md-down">
+                    <div class="col-3 d-none d-lg-block">
                         <div class="sidebar-categories">
                             <div class="category-title">{{ trans("Ceres::Template.itemCategories") }}</div>
                             {{ include('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
@@ -142,7 +137,7 @@
             {% if ceresConfig.pagination.position in ['bottom', 'top_bottom'] %}
                 <div class="list-controls mb-5 row">
                     <div class="col-12">
-                        <div class="float-right row">
+                        <div class="float-right">
                             {% include "Ceres::Category.Item.Partials.Pagination" %}
                         </div>
                     </div>
@@ -165,7 +160,7 @@
 {% endblock %}
 
 {% block PartialHead %}
-    {% set canonicalUrl = services.url.getCanonicalURL() %}
+    {% set canonicalUrl = services.url.getCanonicalURL(null, true) %}
     {% if currentPage - 1 > 0 %}
         <link rel="prev" href="{{ canonicalUrl ~ queryString({'page': currentPage - 1}) }}" />
     {% endif %}
@@ -174,10 +169,16 @@
         <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}" />
     {% endif %}
 
-    {% if category is not defined %}
+    {% if category is null %}
+        {% if '&' in queryString() %}
+            {% set robotsValue = 'NOINDEX' %}
+        {% else %}
+             {% set robotsValue = ceresConfig.meta.robotsSearchResult %}
+        {% endif %}
+
       {% embed getPartial('page-metadata') %}
               {% block title      trans("Ceres::Template.itemSearchResults") ~ " " ~ searchString %}
-              {% block robots     ceresConfig.meta.robotsSearchResult %}
+              {% block robots     robotsValue %}
       {% endembed %}
     {% else %}
       {% embed getPartial('page-metadata') %}

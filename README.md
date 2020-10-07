@@ -1,6 +1,6 @@
 ![plentymarkets Logo](http://www.plentymarkets.eu/layout/pm/images/logo/plentymarkets-logo.jpg)
 
-# Ceres
+# Ceres ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build)
 
 This is the official **Ceres** plugin developed by plentymarkets. **Ceres** is the default template plugin for [plentymarkets 7](https://www.plentymarkets.eu/tour/) online stores.
 

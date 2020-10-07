@@ -10,23 +10,30 @@ class PropertyDataFieldProvider extends DataFieldProvider
     /** @var Property */
     private $property;
 
-    public function __construct(Property $property)
+    private $propertyGroupId;
+
+    public function __construct(Property $property, $propertyGroupId)
     {
         $this->property = $property;
+        $this->propertyGroupId = $propertyGroupId;
     }
 
     function register()
     {
+        if (is_null($this->propertyGroupId)) {
+            $this->propertyGroupId = 'undefined';
+        }
+
         $propertyId = $this->property->id;
-        $this->addField("name_$propertyId", "Ceres::Widget.dataFieldPropertyName", "item_data_field('variationProperties.{property.id, $propertyId}.property.names.name')");
+        $this->addField("name_$propertyId", "Ceres::Widget.dataFieldPropertyName", "item_data_field('variationProperties.{id, $this->propertyGroupId}.properties.{id, $propertyId}.names.name')");
 
         if($this->property->cast === 'file')
         {
-            $this->addField("value_$propertyId", "Ceres::Widget.dataFieldPropertyValue", "item_data_field('variationProperties.{propertyId, $propertyId}.values.value', null, 'href', 'a', 'file')");
+            $this->addField("value_$propertyId", "Ceres::Widget.dataFieldPropertyValue", "item_data_field('variationProperties.{id, $this->propertyGroupId}.properties.{id, $propertyId}.values.value', null, 'href', 'a', 'file')");
         }
         else
         {
-            $this->addField("value_$propertyId", "Ceres::Widget.dataFieldPropertyValue", "item_data_field_html('variationProperties.{propertyId, $propertyId}.values.value', 'escape')");
+            $this->addField("value_$propertyId", "Ceres::Widget.dataFieldPropertyValue", "item_data_field_html('variationProperties.{id, $this->propertyGroupId}.properties.{id, $propertyId}.values.value', 'escape')");
         }
     }
 }

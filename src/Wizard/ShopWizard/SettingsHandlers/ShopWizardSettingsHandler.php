@@ -132,7 +132,8 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 ];
                 foreach ($data as $dataKey => $dataValue) {
                     if (strpos($dataKey, "languages_browserLang_") !== false) {
-                        $key = end(explode("_", $dataKey));
+                        $exploded = explode("_", $dataKey);
+                        $key = end($exploded);
                         $globalData['browserLanguage'][$key] = $dataValue;
                     }
                 }
@@ -147,11 +148,23 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['externalVatCheckInactive'] = $data['onlineStore_externalVatIdCheck'];
                 }
 
+                if (isset($data['pagination_sortingMonthlySales'])) {
+                    $webstoreData['itemSortByMonthlySales'] = $data['pagination_sortingMonthlySales'];
+                }
+
+                if (isset($data['onlineStore_minimumOrderValue'])) {
+                    $webstoreData['minimumOrderValue'] = $data['onlineStore_minimumOrderValue'];
+                }
+
                 if (isset($data['displayInfo_attributeSelectDefaultOption'])) {
                     $webstoreData['attributeSelectDefaultOption'] = 0;
                     if ($data['displayInfo_attributeSelectDefaultOption'] !== false) {
                         $webstoreData['attributeSelectDefaultOption'] = 1;
                     }
+                }
+
+                if (isset($data['seo_itemMetaTitle'])) {
+                    $webstoreData['urlTitleItemName'] = $data['seo_itemMetaTitle'];
                 }
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);

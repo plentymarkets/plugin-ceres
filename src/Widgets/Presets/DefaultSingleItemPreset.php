@@ -291,7 +291,7 @@ class DefaultSingleItemPreset implements ContentPreset
                                 "variation.weightG",
                                 "variation.weightNetG",
                                 "item.variationDimensions",
-                                "item.customsTariffNumber"));
+                                "variation.customsTariffNumber"));
     }
 
     private function createAttributeWidget()

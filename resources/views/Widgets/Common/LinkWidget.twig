@@ -18,10 +18,16 @@
 {% if not isPreview %}
     {% if url.type.mobile == 'internalLink' %}
         {% if url.value.mobile == 'tracking' %}
-            {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
+            {{ Twig.if("data") }}
+                {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
+            {{ Twig.elseif("orderData") }}
+                {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('orderData.order.id')])) }}
+            {{ Twig.endif() }}
         {% elseif url.value.mobile == 'return' %}
             {{ Twig.if("data.isReturnable") }}
                 {{ Twig.set('real_url', Twig.call("urls.returns", [Twig.var('data.order.id')])) }}
+            {{ Twig.elseif("orderData.isReturnable") }}
+                {{ Twig.set('real_url', Twig.call("urls.returns", [Twig.var('orderData.order.id')])) }}
             {{ Twig.endif() }}
         {% endif %}
     {% else %}

@@ -6,7 +6,7 @@ import ValidationService from "../../services/ValidationService";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("bank-data-select", {
+export default Vue.component("bank-data-select", {
 
     props: {
         template:

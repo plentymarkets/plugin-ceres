@@ -3,153 +3,175 @@
 namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 
 use IO\Helper\Utils;
-use IO\Services\SessionStorageService;
 use Plenty\Modules\Authorization\Services\AuthHelper;
-use Plenty\Modules\Property\Contracts\PropertyGroupRepositoryContract;
-use Plenty\Modules\Item\Property\Models\Property;
 use Plenty\Modules\Property\Contracts\PropertyRepositoryContract;
+use Plenty\Modules\Property\Models\Property;
+use Plenty\Modules\Property\Models\PropertyGroup;
+use Plenty\Modules\Property\Models\PropertyGroupName;
 use Plenty\Modules\Property\Models\PropertyOption;
 use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
-use Plenty\Plugin\Application;
 use Plenty\Plugin\Translation\Translator;
 
 class PropertyGroupDataFieldProvider extends DataFieldProvider
 {
+    static $noneGroupId = -1;
+    static $properties = null;
+    static $groupNames = [];
+
     function register()
     {
-        /** @var Translator $translator */
-        $translator = pluginApp(Translator::class);
+        if (is_null(self::$properties)) {
+            /** @var AuthHelper $authHelper */
+            $authHelper = pluginApp(AuthHelper::class);
+            $filters = ['typeIdentifier' => 'item', 'lang' => Utils::getLang()];
 
-        $propertiesWithoutGroup = $this->getPropertiesByGroup(null);
-        if(count($propertiesWithoutGroup))
-        {
-            $this->addChildProvider(
-                $translator->trans('Ceres::Widget.dataFieldPropertyGroupWithoutName'),
-                PropertyListDataFieldProvider::class,
-                ['properties' => $propertiesWithoutGroup, 'propertyGroupId' => null]
-            );
-        }
-
-        /** @var PropertyGroupRepositoryContract $propertyRepo */
-        $propertyGroupRepo = pluginApp(PropertyGroupRepositoryContract::class);
-        /** @var AuthHelper $authHelper */
-        $authHelper = pluginApp(AuthHelper::class);
-
-        $propertyGroupsList = $authHelper->processUnguarded(function() use ($propertyGroupRepo) {
-            return $propertyGroupRepo->listGroups(1, 200, [], []);
-        });
-
-        $propertyGroups = $propertyGroupsList->getResult();
-        if(count($propertyGroups))
-        {
-            $propertyGroups = $propertyGroups->sortBy('id');
-            /** @var Property $property */
-            foreach ($propertyGroups as $propertyGroup)
-            {
-                $properties = $this->getPropertiesByGroup($propertyGroup);
-
-                if(count($properties))
-                {
-                    $this->addChildProvider(
-                        $propertyGroup->names->first()->name,
-                        PropertyListDataFieldProvider::class,
-                        ['properties' => $properties, 'propertyGroupId' => $propertyGroup->id]
-                    );
+            $propertyList = $authHelper->processUnguarded(
+                function () use ($filters) {
+                    /** @var PropertyRepositoryContract $propertyRepo */
+                    $propertyRepo = pluginApp(PropertyRepositoryContract::class);
+                    return $propertyRepo->listProperties(1, 1000, ['names', 'options'], $filters, 0, ['id' => 'asc']);
                 }
-            }
-        }
-    }
+            );
 
-    private function getPropertiesByGroup($propertyGroup)
-    {
-        $types = ['empty', 'int', 'float', 'selection', 'shortText', 'longText', 'date', 'file'];
+            if (!is_null($propertyList)) {
+                $plentyId = Utils::getPlentyId();
+                $types = ['empty', 'int', 'float', 'selection', 'shortText', 'longText', 'date', 'file'];
+                $propertyList->filter(
+                    function ($property) use ($types, $plentyId) {
+                        /** @var Property $property */
+                        if (!in_array($property->cast, $types)) {
+                            return false;
+                        }
 
-        $propertyGroupId = null;
-        if(!is_null($propertyGroup))
-        {
-            $propertyGroupId = $propertyGroup->id;
-        }
+                        if (count($property->options) === 0) {
+                            return false;
+                        }
 
-        /** @var AuthHelper $authHelper */
-        $authHelper = pluginApp(AuthHelper::class);
+                        $propertyOptions = $property->options;
+                        $clientOptions = $propertyOptions->where('typeOptionIdentifier', 'clients');
+                        if (count($clientOptions) === 0 || !$this->hasOptionValue($clientOptions, $plentyId)) {
+                            return false;
+                        }
 
-        $properties = [];
+                        $displayOptions = $propertyOptions->where('typeOptionIdentifier', 'display');
+                        if (count($displayOptions) === 0 || !$this->hasOptionValue(
+                                $displayOptions,
+                                'showOnItemsPage'
+                            )) {
+                            return false;
+                        }
 
-        $filters = ['typeIdentifier' => 'item', 'lang' => Utils::getLang()];
-        if(!is_null($propertyGroupId))
-        {
-            $filters['group'] = $propertyGroupId;
-        }
-
-        $propertyList = $authHelper->processUnguarded(function() use ($propertyGroupId, $filters) {
-            /** @var PropertyRepositoryContract $propertyRepo */
-            $propertyRepo = pluginApp(PropertyRepositoryContract::class);
-            return $propertyRepo->listProperties(1, 200, ['names', 'options'], $filters, 0, ['id' => 'asc']);
-        });
-
-        if(!is_null($propertyList))
-        {
-            /** @var Application $app */
-            $app = pluginApp(Application::class);
-            $plentyId = $app->getPlentyId();
-            $referrer = 1;
-
-            if(is_null($propertyGroupId))
-            {
-                $propertyList = $propertyList->filter(function($property) {
-                    return count($property->groups) == 0;
-                });
-            }
-
-            /** @var Property $property */
-            foreach($propertyList as $property)
-            {
-                if(in_array($property->cast, $types))
-                {
-                    $propertyOptions = $property->options;
-                    if(count($propertyOptions))
-                    {
-                        $clientOptions =   $propertyOptions->where('typeOptionIdentifier', 'clients');
-                        $displayOptions =  $propertyOptions->where('typeOptionIdentifier', 'display');
                         $referrerOptions = $propertyOptions->where('typeOptionIdentifier', 'referrers');
+                        if (count($referrerOptions) === 0 || !$this->hasOptionValue($referrerOptions, 1)) {
+                            return false;
+                        }
 
-                        if(count($clientOptions) && count($displayOptions) && count($referrerOptions))
-                        {
-                            $hasDisplayOptionItemPage = $this->hasOptionValue($displayOptions, 'showOnItemsPage');
-                            $isVisibleForClient       = $this->hasOptionValue($clientOptions, $plentyId);
-                            $hasReferrer              = $this->hasOptionValue($referrerOptions, $referrer);
-
-                            if($hasDisplayOptionItemPage && $isVisibleForClient && $hasReferrer)
-                            {
-                                $properties[] = $property;
-                            }
+                        return true;
+                    }
+                )->each(
+                    function ($property) {
+                        /** @var Property $property */
+                        if (is_null($property->propertyGroupId)) {
+                            $this->addPropertyToGroup($property, self::$noneGroupId);
+                        } else {
+                            $property->groups->each(
+                                function ($group) use ($property) {
+                                    /** @var PropertyGroup $group */
+                                    $this->addPropertyToGroup($property, $group->id);
+                                }
+                            );
                         }
                     }
-                }
+                );
             }
         }
 
-        return $properties;
+        $this->addProvider();
     }
 
     /**
-     * @param $options
-     * @param $value
+     * Check conditions
+     *
+     * @param $propertyOptions
+     * @param $needle
      * @return bool
      */
-    private function hasOptionValue($options, $value)
-    {
-        /** @var PropertyOption $clientOption */
-        foreach($options as $option)
-        {
-            $optionValues = $option->propertyOptionValues;
-            $hasValue = count($optionValues->where('value', $value)) > 0;
-            if($hasValue)
-            {
-                return true;
+    private function hasOptionValue($propertyOptions, $needle) {
+        $hit = false;
+        $propertyOptions->each(
+            function ($propertyOption) use ($needle, &$hit) {
+                /** @var PropertyOption $propertyOption */
+                if ($propertyOption->propertyOptionValues->where('value', $needle)->count() > 0) {
+                    $hit = true;
+                    return false;
+                }
             }
+        );
+
+        return $hit;
+    }
+
+    /**
+     * Add properties to a property group
+     *
+     * @param Property $property
+     * @param int $groupId
+     */
+    private function addPropertyToGroup(Property $property, int $groupId)
+    {
+        if (isset(self::$properties[$groupId])) {
+            self::$properties[$groupId][] = $property;
+        } else {
+            self::$properties[$groupId] = [$property];
+        }
+    }
+
+    /**
+     * Add properties and group to provider
+     */
+    private function addProvider()
+    {
+        $properties = self::$properties;
+
+        if (isset($properties[self::$noneGroupId])) {
+            /** @var Translator $translator */
+            $translator = pluginApp(Translator::class);
+
+            $this->addChildProvider(
+                $translator->trans('Ceres::Widget.dataFieldPropertyGroupWithoutName'),
+                PropertyListDataFieldProvider::class,
+                ['properties' => $properties[self::$noneGroupId], 'propertyGroupId' => null]
+            );
+            unset($properties[self::$noneGroupId]);
         }
 
-        return false;
+        if (count($properties)) {
+            ksort($properties);
+            foreach ($properties as $propertyGroupId => $propertiesFromGroup) {
+                if (isset(self::$groupNames[$propertyGroupId])) {
+                    $groupName = self::$groupNames[$propertyGroupId];
+                } else {
+                    $groupName = $propertiesFromGroup[0]->groups->where('id', $propertyGroupId)->first()->names->where(
+                        'lang',
+                        Utils::getLang()
+                    )->first();
+
+                    if (is_null($groupName)) {
+                        $groupName = $propertiesFromGroup[0]->groups->where('id', $propertyGroupId)->first(
+                        )->names->first();
+                    }
+
+                    /** @var PropertyGroupName $groupName */
+                    $groupName = $groupName->name;
+                    self::$groupNames[$propertyGroupId] = $groupName;
+                }
+
+                $this->addChildProvider(
+                    $groupName,
+                    PropertyListDataFieldProvider::class,
+                    ['properties' => $propertiesFromGroup, 'propertyGroupId' => $propertyGroupId]
+                );
+            }
+        }
     }
 }

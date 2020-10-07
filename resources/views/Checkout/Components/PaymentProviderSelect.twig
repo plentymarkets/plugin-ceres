@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-payment-provider-select">
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
-        <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading || isCheckoutReadonly }">
+        <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
             <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
                 <input
                         type="radio"
@@ -19,11 +19,7 @@
                        data-placement="top"
                        data-title="{{ trans("Ceres::Template.checkoutChangeShippingProfileHint") }}">
                     <div class="icon">
-                        <div class="square-container">
-                            <div class="square-inner center-xy">
-                              <img :src="paymentProvider.icon" :alt="paymentProvider.name" :title="paymentProvider.name" >
-                            </div>
-                        </div>
+                        <img class="img-fluid" :src="paymentProvider.icon" :alt="paymentProvider.name" :title="paymentProvider.name">
                     </div><!--
                     --><div class="content">
                     ${ paymentProvider.name }

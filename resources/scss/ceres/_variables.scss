@@ -1,0 +1,296 @@
+//
+// Variables
+// --------------------------------------------------
+$enable-deprecation-messages: false !default;
+
+//
+// Colors
+//
+$white:                     #fff !default;
+$gray-100:                  #f8f9fa !default;
+$gray-200:                  #e9ecef !default;
+$gray-300:                  #dee2e6 !default;
+$gray-400:                  #ced4da !default;
+$gray-500:                  #adb5bd !default;
+$gray-600:                  #6c757d !default;
+$gray-700:                  #495057 !default;
+$gray-800:                  #343a40 !default;
+$gray-900:                  #212529 !default;
+$black:                     #000 !default;
+
+$blue:                      #008ebd !default;
+$indigo:                    #6610f2 !default;
+$purple:                    #6f42c1 !default;
+$pink:                      #e83e8c !default;
+$red:                       #d4021d !default;
+$orange:                    #fd7e14 !default;
+$yellow:                    #ffc107 !default;
+$green:                     #28a745 !default;
+$teal:                      #20c997 !default;
+$cyan:                      #17a2b8 !default;
+
+// Legacy: Do not remove!
+// This variables are filled with the values from the plugin config
+$brand-primary:             $blue !default;
+$brand-secondary:           $gray-600 !default;
+$brand-success:             $green !default;
+$brand-info:                $cyan !default;
+$brand-warning:             $yellow !default;
+$brand-danger:              $red !default;
+
+@function check-color($color, $fallback) {
+    @if type-of($color) != color {
+        @return $fallback;
+    }
+    @return $color;
+}
+
+$primary:                   check-color($brand-primary, $blue) !default;
+$secondary:                 check-color($brand-secondary, $gray-600) !default;
+$success:                   check-color($brand-success, $green) !default;
+$info:                      check-color($brand-info, $cyan) !default;
+$warning:                   check-color($brand-warning, $yellow) !default;
+$danger:                    check-color($brand-danger, $red) !default;
+$light:                     $gray-100 !default;
+$dark:                      $gray-800 !default;
+
+$yiq-text-dark:             $gray-900 !default;
+$yiq-text-light:            $white !default;
+$yiq-contrasted-threshold:  186 !default;
+
+$body-bg:                   $gray-100 !default;
+
+//
+// Sizes
+//
+$heights: (
+    1: (xs: 36px, sm: 48px, md: 64px, lg: 72px, xl: 80px),
+    2: (xs: 72px, sm: 90px, md: 128px, lg: 144px, xl: 160px),
+    3: (xs: 128px, sm: 160px, md: 192px, lg: 224px, xl: 256px),
+    4: (xs: 200px, sm: 244px, md: 288px, lg: 332px, xl: 376px),
+    5: (xs: 272px, sm: 328px, md: 384px, lg: 440px, xl: 496px)
+) !default;
+//
+// Fonts
+//
+$root-directory:            ".." !default;
+
+$flag-icon-css-path:        "#{$root-directory}/images/flags" !default;
+$flag-icon-rect-path:       "/4x3" !default;
+$flag-icon-square-path:     "/1x1" !default;
+
+$fa-font-path:              "#{$root-directory}/documents/fonts" !default;
+
+//
+// Top Bar
+//
+$top-bar-bg:                $gray-700 !default;
+$top-bar-color:             color-yiq($top-bar-bg) !default;
+$top-bar-basket-btn:        $primary !default;
+$top-bar-basket-color:      color-yiq($top-bar-basket-btn) !default;
+
+//
+// Footer
+//
+$footer-bg:                 $gray-100 !default;
+$footer-color:              $gray-900 !default;
+
+$footer-features-bg:        darken($gray-100, 10%) !default;
+$footer-features-color:     $gray-900 !default;
+
+
+//
+// Typography
+//
+$font-family-sans-serif:    custom-font, helvetica, arial, sans-serif !default;
+$font-family-serif:         georgia, "Times New Roman", times, serif !default;
+$font-family-heading:       $font-family-sans-serif !default;
+
+// Pixel value used to responsively scale all typography. Applied to the `<html>` element.
+$font-size-root:            14px !default;
+
+$h1-font-size:              2rem !default;
+$h2-font-size:              1.8rem !default;
+$h3-font-size:              1.5rem !default;
+$h4-font-size:              1.25rem !default;
+$h5-font-size:              1rem !default;
+$h6-font-size:              .8rem !default;
+
+$display1-size:             4rem !default;
+$display2-size:             3.5rem !default;
+$display3-size:             2.5rem !default;
+$display4-size:             1.5rem !default;
+
+$headings-line-height:      1.1 !default;
+
+$hr-border-color:           $gray-300 !default;
+
+$list-inline-padding:       5px !default;
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+
+$line-height-lg:            (4 / 3) !default;
+
+$border-radius:             .1rem !default;
+$border-radius-sm:          .15rem !default;
+$border-radius-lg:          .2rem !default;
+
+$progress-border-radius:    .25rem !default;
+
+//Ceres variables
+$aside-columns-width: 30rem !default;
+$autocomplete-max-items: 10 !default;
+
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background and border color.
+
+$btn-padding-x:             1rem !default;
+$btn-padding-y:             .5rem !default;
+$btn-line-height:           1.25 !default;
+
+$btn-padding-x-lg:          1.5rem !default;
+$btn-padding-y-lg:          .75rem !default;
+
+$btn-block-spacing-y:       .5rem !default;
+$btn-toolbar-margin:        .5rem !default;
+
+// Forms
+
+$input-padding-y:           .5rem !default;
+$input-line-height:         1.25 !default;
+
+$input-border-color:        rgba(0, 0, 0, .15) !default;
+
+$input-focus-border-color:  #66afe9 !default;
+$input-focus-box-shadow:    rgba(102, 175, 233, .6) !default;
+
+$input-placeholder-color:   #999 !default;
+
+$input-padding-y-lg:        .75rem !default;
+$input-padding-x-lg:        1.5rem !default;
+
+$custom-control-indicator-disabled-bg:          #eee !default;
+$custom-control-label-disabled-color:           #767676 !default;
+
+$custom-control-checked-indicator-color:        #fff !default;
+$custom-control-checked-indicator-bg:           #0074d9 !default;
+
+$custom-control-indicator-focus-box-shadow:     0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
+
+$custom-control-indicator-active-color:         #fff !default;
+$custom-control-indicator-active-bg:            #84c6ff !default;
+
+$custom-checkbox-indicator-indeterminate-bg:    #0074d9 !default;
+
+$custom-select-padding-y:                       .8rem !default;
+$custom-select-padding-x:                       1rem !default;
+$custom-select-height:                          auto !default;
+$custom-select-line-height:                     1.2 !default;
+$custom-select-border-width:                    0 !default;
+
+$custom-file-height:                            2.5rem !default;
+$custom-file-focus-box-shadow:                  0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9 !default;
+
+$custom-file-padding-x:                         .5rem !default;
+$custom-file-padding-y:                         1rem !default;
+$custom-file-color:                             #555 !default;
+$custom-file-bg:                                #fff !default;
+$custom-file-border-color:                      #ddd !default;
+$custom-file-box-shadow:                        inset 0 .2rem .4rem rgba(0, 0, 0, .05) !default;
+$custom-file-button-bg:                         #eee !default;
+
+$form-check-input-margin-y:                     .2rem !default;
+
+// This allows us to at a glance determine relative layers of our application and prevents bugs
+// arrising from arbitrary z-index values. Do not edit the z-index scale! Only add application
+// scoped z-index values.
+
+
+// Z-Index Scale
+// --------------------------------------------------
+$zindex-0:                          990 !default;
+$zindex-1:                          1000 !default;
+$zindex-2:                          1020 !default;
+$zindex-3:                          1030 !default;
+$zindex-4:                          1040 !default;
+$zindex-5:                          1050 !default;
+$zindex-6:                          1060 !default;
+$zindex-7:                          1070 !default;
+$zindex-8:                          1080 !default;
+$zindex-9:                          1090 !default;
+$zindex-10:                         10000 !default;
+
+// Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+
+$zindex-dropdown:                   $zindex-1 !default;
+$zindex-fixed:                      $zindex-3 !default;
+$zindex-modal-backdrop:             $zindex-7 !default;
+$zindex-modal:                      $zindex-8 !default;
+$zindex-popover:                    $zindex-10 !default;
+$zindex-sticky:                     $zindex-2 !default;
+$zindex-tooltip:                    $zindex-7 !default;
+$zindex-wrapper:                    $zindex-10 !default;
+
+// Navbar
+$navbar-background-color:           $gray-100 !default;
+$navbar-dark-color:                 $gray-600 !default;
+$navbar-dark-disabled-color:        $gray-500 !default;
+
+// Navs
+$nav-link-padding-y:                1.3rem !default;
+$nav-link-hover-bg:                 $primary !default;
+$nav-tabs-border-color:             #ddd !default;
+
+// Sidenavigation
+$nav-link-expandable-margin:        1.25rem !default;
+
+// Popovers
+$popover-max-width:                 276px !default;
+$popover-max-width-md:              414px !default;
+$popover-max-width-lg:              552px !default;
+$popover-inner-padding:             1px !default;
+
+// Padding applied to the modal body
+$modal-dialog-margin:               0 !default;
+
+$modal-lg:                          900px !default;
+$modal-md:                          600px !default;
+$modal-sm:                          300px !default;
+
+// Breadcrumbs
+$breadcrumb-padding-y:              .5rem !default;
+$breadcrumb-bg:                     darken($gray-200, 2%) !default;
+
+// Category
+$category-text-color:               #fff !default;
+
+// Liveshopping
+$live-shopping-padding-x:           .8rem !default;
+$live-shopping-padding-y:           1rem !default;
+
+$component-active-bg:               $primary !default;
+$component-active-color:            color-yiq($component-active-bg) !default;
+
+// quantity input
+$qty-box-width: 48px !default;
+$qty-box-btn-width: 24px !default;
+$qty-box-padding-x: 0 !default;
+$qty-box-padding-y: 10px !default;
+$qty-box-border: $gray-400 !default;
+$qty-box-bg: $gray-200 !default;
+
+// Shopbuilder
+$shop-builder-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger
+) !default;

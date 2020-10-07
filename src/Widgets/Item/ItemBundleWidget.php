@@ -17,7 +17,7 @@ class ItemBundleWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::ItemBundleWidget")
             ->withLabel("Widget.itemBundleLabel")
             ->withPreviewImageUrl("/images/widgets/item-bundle.svg")
-            ->withType(WidgetTypes::ITEM)
+            ->withType(WidgetTypes::SINGLE_ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(400)
             ->toArray();

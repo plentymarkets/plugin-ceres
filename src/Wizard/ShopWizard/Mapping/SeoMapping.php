@@ -80,6 +80,12 @@ class SeoMapping
             'type'     => 'string',
             'global'   => false,
             'optional' => true
+        ],
+        'seo_itemMetaTitle' => [
+            'field'    => 'urlTitleItemName',
+            'type'     => 'integer',
+            'global'   => true,
+            'optional' => true
         ]
     ];
     

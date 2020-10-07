@@ -14,6 +14,7 @@ export const exceptionMap = new Map(
         ["11", "notificationsNoEmailEntered"],
         ["12", "notificationsWarningOverselling"],
         ["13", "consentReCaptchaCookieNotSet"],
+        ["14", "notificationsBasketItemsRemovedForCurrency"],
         ["110", "errorBasketItemVariationNotFound"],
         ["111", "errorBasketItemNotEnoughStockForVariation"],
         ["112", "errorBasketItemMaximumQuantityReachedForItem"],
@@ -25,8 +26,27 @@ export const exceptionMap = new Map(
         ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"],
         ["302", "couponNoMatchingItemInBasket"],
         ["401", "notificationsCalculateShippingFailed"],
-        ["501", "couponPromotionRequired"]
-
+        ["501", "couponPromotionRequired"],
+        ["502", "errorGiftCardReturnQuantity"],
+        ["1018", "couponMinOrderValueNotReached"],
+        ["1051", "couponnotUsableForSpecialOffer"],
+        ["1070", "couponAlreadyUsedOrInvalidCouponCode"],
+        ["1078", "couponCampaignExpired"],
+        ["1126", "couponNoMatchingItemInBasket"],
+        ["1329", "couponOnlySubscription"],
+        ["1330", "couponOnlySingleUsage"],
+        ["1331", "couponNoOpenAmount"],
+        ["1332", "couponExpired"],
+        ["1334", "couponOnlyForNewCustomers"],
+        ["1335", "couponOnlyForExistingCustomers"],
+        ["1336", "couponWrongCustomerGroup"],
+        ["1337", "couponWrongCustomerType"],
+        ["1338", "couponNoCustomerTypeProvided"],
+        ["1339", "couponNoCustomerTypeActivated"],
+        ["1340", "couponNoCustomerGroupActivated"],
+        ["1341", "couponCampaignNoWebstoreActivated"],
+        ["1342", "couponCampaignWrongWebstoreId"],
+        ["1343", "couponCampaignNoWebstoreIdGiven"]
     ]
 );
 

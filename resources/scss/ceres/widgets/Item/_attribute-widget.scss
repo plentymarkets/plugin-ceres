@@ -1,13 +1,9 @@
-.widget-attribute
-{
-    @each $color, $value in $shop-builder-colors
-    {
-        &.widget-#{$color}
-        {
-            .v-s-boxes .v-s-box.active
-            {
-                color: $value !important;
-                border-color: $value !important;
+.widget-attribute {
+    @each $color, $value in $shop-builder-colors {
+        &.widget-#{$color} {
+            .v-s-box.active {
+                color: $value !important; // stylelint-disable-line declaration-no-important
+                border-color: $value !important; // stylelint-disable-line declaration-no-important
             }
         }
     }

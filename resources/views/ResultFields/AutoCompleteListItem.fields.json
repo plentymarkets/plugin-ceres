@@ -1,17 +1,18 @@
 [
-  "images.all.urlPreview",
-  "images.all.position",
-  "images.all.path",
+  "defaultCategories*",
   "images.all.names.alternate",
   "images.all.names.lang",
-  "images.variation.urlPreview",
-  "images.variation.position",
-  "images.variation.path",
+  "images.all.path",
+  "images.all.position",
+  "images.all.urlPreview",
   "images.variation.names.alternate",
   "images.variation.names.lang",
+  "images.variation.path",
+  "images.variation.position",
+  "images.variation.urlPreview",
   "item.id",
+  "texts*",
   "variation.id",
-  "variation.name",
   "variation.itemId",
-  "texts*"
+  "variation.name"
 ]

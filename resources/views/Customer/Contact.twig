@@ -7,6 +7,8 @@
 {% set mapZoom          = config("Ceres.contact.map_zoom") %}
 {% set showMapInMobile  = config("Ceres.contact.map_show_in_mobile") %}
 
+{% set coordinates = services.contactMap.getMapCoordinates(googleApiKey, street, zip) %}
+
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
         {% block title          trans('Ceres::Template.contact') %}
@@ -16,10 +18,7 @@
 {% endblock %}
 
 {% block PageBody %}
-
-    {{ component("Ceres::Customer.Components.Contact.ContactMap") }}
-
-    <div class="page-content container-max contact">
+    <div class="page-content container-max contact pt-3 bg-white">
 
         <div class="row cmp-contact">
             <div class="col-12">
@@ -39,8 +38,14 @@
             {% endif %}
 
             {% if googleApiKey and contactConfigSet %}
-                <div class="col-12 col-md-6 pb-5 pt-4{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
-                    <contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+                <div class="col-12 col-md-6 pb-5 pt-4{% if showMapInMobile == "false" %} d-none d-md-block{% endif %}">
+                    <google-maps-widget :lat="{{ coordinates.location.lat }}"
+                                        :lng="{{ coordinates.location.lng }}"
+                                        :zoom="{{ mapZoom | default(16) }}">
+                        <div class="d-flex align-items-center justify-content-center h-100 position-absolute w-100 text-muted">
+                            <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
+                        </div>
+                    </google-maps-widget>
                 </div>
             {% endif %}
 
@@ -90,7 +95,7 @@
 
                     <div class="col-12 text-sm-right">* {{ trans("Ceres::Template.contactRequiredField") }}</div>
 
-                    <div class="col-12 re-captcha-container">
+                    <div class="col-12">
                         {% if ceresConfig.global.googleRecaptchaApiKey | trim is not empty %}
                             <recaptcha></recaptcha>
                         {% endif %}
@@ -131,9 +136,8 @@
                         </div>
                     {% endif %}
 
+                    <div class="col-12 col-md-3 offset-md-9">
                     <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1">
-
-                    <div class="col-12 col-md-3 offset-md-9 send-mail">
                         <button type="submit" class="btn btn-primary btn-block">
                             <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.contactSend") }}
@@ -143,8 +147,14 @@
             </form>
 
             {% if googleApiKey and not contactConfigSet %}
-                <div class="col-12 mt-5{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
-                    <contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+                <div class="col-12 mt-5{% if showMapInMobile == "false" %} d-none d-md-block{% endif %}">
+                    <google-maps-widget :lat="{{ coordinates.location.lat }}"
+                                        :lng="{{ coordinates.location.lng }}"
+                                        :zoom="{{ mapZoom | default(16) }}">
+                        <div class="d-flex align-items-center justify-content-center h-100 position-absolute w-100 text-muted">
+                            <span>{{ Twig.trans("Ceres::Template.consentGoogleMapsBlockedHint") }}</span>
+                        </div>
+                    </google-maps-widget>
                 </div>
             {% endif %}
 

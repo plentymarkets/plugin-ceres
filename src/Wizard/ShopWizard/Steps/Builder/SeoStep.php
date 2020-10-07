@@ -4,8 +4,6 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 use Ceres\Wizard\ShopWizard\Config\SeoConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
-use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
-use Plenty\Plugin\Application;
 
 /**
  * Class SeoStep
@@ -28,7 +26,8 @@ class SeoStep extends Step
                 $this->generateRobotSettingsSection(),
                 $this->generateRobotsTxtSection(),
                 $this->generateSiteMapSection(),
-                $this->generateAvailabilitiesSection()
+                $this->generateAvailabilitiesSection(),
+                $this->generateItemMetaTitleSection()
             ]
         ];
     }
@@ -40,7 +39,7 @@ class SeoStep extends Step
     {
         $metaRobotsOptions = SeoConfig::getMetaRobotsOptions();
         $metaOptions       = StepHelper::generateTranslatedListBoxValues($metaRobotsOptions);
-        
+
         return [
             "title" => "Wizard.robotSettings",
             "description" => "Wizard.robotSettingsDescription",
@@ -98,7 +97,7 @@ class SeoStep extends Step
     private function generateAvailabilitiesFormFields($availabilities):array
     {
         $formFields = [];
-        
+
         $availabilitiesOptions     = SeoConfig::getAvailabilitiesOptions();
         $availabilitiesListOptions = StepHelper::generateTranslatedListBoxValues($availabilitiesOptions);
 
@@ -113,7 +112,7 @@ class SeoStep extends Step
                 ]
             ];
         }
-        
+
         return $formFields;
     }
 
@@ -146,7 +145,7 @@ class SeoStep extends Step
     {
         $siteMapData    = SeoConfig::getSiteMapOptions();
         $siteMapOptions = StepHelper::generateTranslatedListBoxValues($siteMapData);
-        
+
         return [
             "title" => "Wizard.siteMapXml",
             "description" => "Wizard.siteMapXmlDescription",
@@ -165,6 +164,37 @@ class SeoStep extends Step
                         "checkboxValues" => $siteMapOptions
                     ]
                 ]
+            ]
+        ];
+    }
+
+    private function generateItemMetaTitleSection()
+    {
+        return [
+            "title" => "Wizard.itemMetaTitle",
+            "description" => "Wizard.itemMetaTitleDescription",
+            "form" => [
+                "seo_itemMetaTitle" => [
+                    "type" => "select",
+                    "defaultValue" => 1,
+                    "options" => [
+                        "name" => "Wizard.itemMetaTitle",
+                        "listBoxValues" => [
+                            [
+                                "value" => 1,
+                                "caption" => "Wizard.itemName0"
+                            ],
+                            [
+                                "value" => 2,
+                                "caption" => "Wizard.itemName1"
+                            ],
+                            [
+                                "value" => 3,
+                                "caption" => "Wizard.itemName2"
+                            ],
+                        ]
+                    ]
+                ],
             ]
         ];
     }

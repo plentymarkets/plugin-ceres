@@ -11,14 +11,12 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-{{ Twig.component( "Ceres::Newsletter.Components.NewsletterInput" ) }}
-
 <div class="widget widget-newsletter widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner">
         <div class="row">
             {# The 'hintText' variable gets filled at src/Widgets/Common/NewsletterWidget.php to migrate widget settings #}
-            <div class="col-xs-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            <div class="col-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
                 {{ hintText | raw }}
             </div>
         </div>

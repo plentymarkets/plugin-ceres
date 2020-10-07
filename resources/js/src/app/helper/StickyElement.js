@@ -1,5 +1,6 @@
 import { isNullOrUndefined } from "./utils";
 import { applyStyles } from "./dom";
+import { detectPassiveEvents } from "./featureDetect";
 
 const STICKY_EVENTS = [
     "resize",
@@ -10,6 +11,12 @@ const STICKY_EVENTS = [
     "pageshow",
     "load",
     "move-sticky"
+];
+
+const STICKY_EVENTS_PASSIVE = [
+    "scroll",
+    "touchstart",
+    "touchmove"
 ];
 
 export class StickyElement
@@ -43,7 +50,7 @@ export class StickyElement
     {
         this.vm.$nextTick(() =>
         {
-            if (this.enabled || this.isMinWidth || App.isShopBuilder)
+            if (this.enabled || App.isShopBuilder)
             {
                 return;
             }
@@ -55,19 +62,29 @@ export class StickyElement
             {
                 if (this.shouldUpdate())
                 {
-                    this.checkElement();
+                    if (this.checkElement())
+                    {
+                        if (this.animationFrame > 0)
+                        {
+                            cancelAnimationFrame(this.animationFrame);
+                            this.animationFrame = 0;
+                        }
+                        this.animationFrame = requestAnimationFrame(this.updateStyles.bind(this));
+                    }
                 }
             };
+
+            const isPassiveEventSupported = detectPassiveEvents();
 
             document.addEventListener("storeChanged", this.eventListener);
             STICKY_EVENTS.forEach(event =>
             {
-                window.addEventListener(event, this.eventListener);
+                window.addEventListener(event, this.eventListener,
+                    isPassiveEventSupported && !!STICKY_EVENTS_PASSIVE.includes(event) ? { passive: true } : false);
             });
 
             this.enabled = true;
             this.calculateOffset();
-            this.tick();
         });
     }
 
@@ -102,21 +119,11 @@ export class StickyElement
         }
         this.animationFrame = 0;
         this.enabled = false;
-
-    }
-
-    tick()
-    {
-        if (this.shouldUpdate())
-        {
-            this.updateStyles();
-        }
-        this.animationFrame = requestAnimationFrame(this.tick.bind(this));
     }
 
     shouldUpdate()
     {
-        return (this.enabled && !this.isMinWidth) || (this.position || {}).isSticky;
+        return (this.enabled && this.isMinWidth) || (this.position || {}).isSticky;
     }
 
     checkElement(skipOffsetCalculation)
@@ -142,6 +149,10 @@ export class StickyElement
             origY: placeholderRect.top,
             isSticky: elementRect.height < containerRect.height && placeholderRect.top <= this.offsetTop
         };
+
+        // check if any property has changed
+        return ["width", "height", "x", "y", "origY", "isSticky"]
+            .some(property => oldValue[property] !== this.position[property]);
     }
 
     calculateOffset()
@@ -241,7 +252,7 @@ export class StickyElement
 
     checkMinWidth()
     {
-        this.isMinWidth = !window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
+        this.isMinWidth = window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
     }
 
     getSiblingStickies()

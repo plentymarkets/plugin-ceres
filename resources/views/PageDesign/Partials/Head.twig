@@ -1,11 +1,9 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="plentymarkets" />
-
-{% set lang = services.sessionStorage.getLang() %}
-
-{% set defaultCSS = plugin_path('Ceres') ~ "/css/ceres-legacy.css?v=" ~ buildHash %}
 
 {% if ceresConfig.global.favicon is empty %}
     {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
@@ -19,7 +17,7 @@
 {% set languageUrls = services.url.getLanguageURLs() %}
 
 {% if canonicalUrl is not null %}
-    <link rel="canonical" href="{{ canonicalUrl }}">
+    <link rel="canonical" href="{{ canonicalUrl  ~ services.url.getCanonicalQueryString() }}">
 {% endif %}
 
 {% if services.url.isCanonical() %}
@@ -39,51 +37,186 @@
     %}
 
     {% if customFont.regular %}
-        @font-face {
-            font-family: "Custom-Font";
-            src: url("{{ customFont.regular }}");
-        }
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.regular }}");
+    }
     {% endif %}
     {% if customFont.bold %}
-        @font-face {
-            font-family: "Custom-Font";
-            src: url("{{ customFont.bold }}");
-            font-weight: bold;
-        }
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.bold }}");
+        font-weight: bold;
+    }
     {% endif %}
     {% if customFont.italic %}
-        @font-face {
-            font-family: "Custom-Font";
-            src: url("{{ customFont.italic }}");
-            font-style: italic;
-        }
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.italic }}");
+        font-style: italic;
+    }
     {% endif %}
     {% if customFont.boldItalic %}
-        @font-face {
-            font-family: "Custom-Font";
-            src: url("{{ customFont.boldItalic }}");
-            font-weight: bold;
-            font-style: italic;
-        }
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.boldItalic }}");
+        font-weight: bold;
+        font-style: italic;
+    }
     {% endif %}
+
+    {# FIX: do not display icons until fontawesome is loaded #}
+    .icons-loading .fa { visibility: hidden !important; }
 </style>
 
-{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% set iconCSS = plugin_path("Ceres") ~ "/css/ceres-icons.css" %}
+{# asynchronously load icons.css #}
+<link rel="preload" href="{{ iconCSS }}" as="style" onload="this.onload=null;this.rel='stylesheet';">
+{# fallback for disabled javascript #}
+<noscript><link rel="stylesheet" href="{{ iconCSS }}"></noscript>
 
-{% set logData = config("Ceres.log.data")|split(', ') %}
-{% set sortValues = config("Ceres.sort.data")|split(', ') %}
-{% set defaultSorting = config('Ceres.sort.defaultSorting') %}
-{% set defaultSortingSearch = config('Ceres.sort.defaultSortingSearch') %}
-{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
-{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
-{% set itemsPerPage = config('Ceres.pagination.itemsPerPage') %}
-{% set performanceLevel = config('Ceres.log.performance.level') %}
-{% set itemName = config('Ceres.item.name') %}
+{% set defaultCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".css?v=" ~ buildHash %}
+{% set defaultSCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".scss?v=" ~ buildHash %}
 
 <link rel="preload" as="style" href="{{ defaultCSS }}">
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
-    <link data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ plugin_path('Ceres') }}/css/ceres-legacy.scss" rel="stylesheet" href="{{ defaultCSS }}">
+    <link rel="stylesheet" href="{{ defaultCSS }}"{% if isShopBuilder %} data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ defaultSCSS }}"{% endif %}>
 {% endif %}
+
+{% if isShopBuilder %}
+    <link rel="stylesheet" href="{{ plugin_path("Ceres") }}/css/ceres-shopbuilder.css?v={{ buildHash }}">
+{% endif %}
+
+{# add preload polyfill #}
+<script type="application/javascript">
+    /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+    /* This file is meant as a standalone workflow for
+    - testing support for link[rel=preload]
+    - enabling async CSS loading in browsers that do not support rel=preload
+    - applying rel preload css once loaded, whether supported or not.
+    */
+    (function( w ){
+        "use strict";
+        // rel=preload support test
+        if( !w.loadCSS ){
+            w.loadCSS = function(){};
+        }
+        // define on the loadCSS obj
+        var rp = loadCSS.relpreload = {};
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function(){
+            var ret;
+            try {
+                ret = w.document.createElement( "link" ).relList.supports( "preload" );
+            } catch (e) {
+                ret = false;
+            }
+            return function(){
+                return ret;
+            };
+        })();
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function( link ){
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || "all";
+
+            function enableStylesheet(){
+                // unbind listeners
+                if( link.addEventListener ){
+                    link.removeEventListener( "load", enableStylesheet );
+                } else if( link.attachEvent ){
+                    link.detachEvent( "onload", enableStylesheet );
+                }
+                link.setAttribute( "onload", null );
+                link.media = finalMedia;
+            }
+
+            // bind load handlers to enable media
+            if( link.addEventListener ){
+                link.addEventListener( "load", enableStylesheet );
+            } else if( link.attachEvent ){
+                link.attachEvent( "onload", enableStylesheet );
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function(){
+                link.rel = "stylesheet";
+                link.media = "only x";
+            });
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout( enableStylesheet, 3000 );
+        };
+
+        // loop through link elements in DOM
+        rp.poly = function(){
+            // double check this to prevent external calls from running
+            if( rp.support() ){
+                return;
+            }
+            var links = w.document.getElementsByTagName( "link" );
+            for( var i = 0; i < links.length; i++ ){
+                var link = links[ i ];
+                // qualify links to those with rel=preload and as=style attrs
+                if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+                    // prevent rerunning on link
+                    link.setAttribute( "data-loadcss", true );
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle( link );
+                }
+            }
+        };
+
+        // if unsupported, run the polyfill
+        if( !rp.support() ){
+            // run once at least
+            rp.poly();
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval( rp.poly, 500 );
+            if( w.addEventListener ){
+                w.addEventListener( "load", function(){
+                    rp.poly();
+                    w.clearInterval( run );
+                } );
+            } else if( w.attachEvent ){
+                w.attachEvent( "onload", function(){
+                    rp.poly();
+                    w.clearInterval( run );
+                } );
+            }
+        }
+
+
+        // commonjs
+        if( typeof exports !== "undefined" ){
+            exports.loadCSS = loadCSS;
+        }
+        else {
+            w.loadCSS = loadCSS;
+        }
+    }( typeof global !== "undefined" ? global : this ) );
+
+    if(document.fonts) {
+        document.fonts.addEventListener("loadingdone", function(evt) {
+            if(document.fonts.check("1em FontAwesome")) {
+                document.documentElement.classList.remove('icons-loading');
+            }
+        });
+
+        window.addEventListener("load", function(evt) {
+            if(document.fonts.check("1em FontAwesome")) {
+                document.documentElement.classList.remove('icons-loading');
+            }
+        });
+    } else {
+        document.documentElement.classList.remove('icons-loading');
+    }
+</script>
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
 

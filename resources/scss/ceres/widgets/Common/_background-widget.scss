@@ -1,6 +1,16 @@
 .widget-background {
-    &.widget {
-        width: auto;
+
+    > .container-max {
+        position: relative;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    &.widget-fw {
+        > .container-max {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
     }
 
     &.align-items-end {
@@ -9,32 +19,50 @@
         }
     }
 
+    .widget-background {
+        .container-max {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+
     .parallax-img-container-inner {
         position: absolute;
-        left: 0;
-        right: 0;
         top: 0;
+        right: 0;
         bottom: 0;
-        height: 100% !important;
+        left: 0;
+        height: 100% !important; // stylelint-disable-line declaration-no-important
+        background-repeat: no-repeat;
+        background-position: center !important; // stylelint-disable-line declaration-no-important
     }
 
     .huge-font {
-        font-size: $font-size-base;
-
-        @include media-breakpoint-up(sm) {
-            font-size: 28px;
-        }
-        @include media-breakpoint-up(md) {
-            font-size: 35px;
-        }
-
         .widget-text,
         .widget-code {
-            h1 { font-size: 2em };
-            h2 { font-size: 1.8em };
-            h3 { font-size: 1.5em };
-            h4 { font-size: 1.25em };
-            * { font-size: 1em };
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.5em; }
+            h4 { font-size: 1.25em; }
+            * { font-size: 1em; }
+
+            font-size: $font-size-base;
+
+            @include media-breakpoint-up(sm) {
+                font-size: 28px;
+            }
+            @include media-breakpoint-up(md) {
+                font-size: 35px;
+            }
+        }
+    }
+}
+
+.widget-grid {
+    .widget-background {
+        > .container-max {
+            padding-right: 0 !important; // stylelint-disable-line declaration-no-important
+            padding-left: 0 !important; // stylelint-disable-line declaration-no-important
         }
     }
 }

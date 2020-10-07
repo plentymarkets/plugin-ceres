@@ -39,7 +39,7 @@
         {{ Twig.if("legalInformation.htmlText") }}
             {{ Twig.print("legalInformation.htmlText | raw") }}
         {{ Twig.else() }}
-            <p class="static-page-plain-text">{{ Twig.print("legalInformation.plainText") }}</p>
+            <p>{{ Twig.print("legalInformation.plainText") }}</p>
         {{ Twig.endif() }}
 
         {{ Twig.print("layoutContainerContent") }}
@@ -47,7 +47,7 @@
 
     {{ Twig.if("legalInformation.htmlText | trim is empty and legalInformation.plainText | trim is empty and layoutContainerContent | trim is empty") }}
         {% if isPreview %}
-            <div class="widget-placeholder">
+            <div class="widget-placeholder p-0">
                 <div>
                     <p class="title mb-0">{{ Twig.trans("Ceres::Widget.legalTextsPlaceholderTitle") }}</p>
                     <p class="description mt-3">{{ Twig.trans("Ceres::Widget.legalTextsPlaceholderDescription") }}</p>

@@ -1,11 +1,13 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set customClass = widget.settings.customClass.mobile %}
-{% set isFixed                 = widget.settings.isFixed.mobile %}
-{% set showOnHomepage          = widget.settings.showOnHomepage.mobile %}
-{% set showOnMyAccount         = widget.settings.showOnMyAccount.mobile %}
-{% set showOnCheckout          = widget.settings.showOnCheckout.mobile %}
-{% set showOnContentCategory   = widget.settings.showOnContentCategory.mobile %}
+{% set customClass           = widget.settings.customClass.mobile %}
+{% set isFixed               = widget.settings.isFixed.mobile %}
+{% set showOnHomepage        = widget.settings.showOnHomepage.mobile %}
+{% set showOnMyAccount       = widget.settings.showOnMyAccount.mobile %}
+{% set showOnCheckout        = widget.settings.showOnCheckout.mobile %}
+{% set showOnContentCategory = widget.settings.showOnContentCategory.mobile %}
+{% set showOnLegalPages      = widget.settings.showOnLegalPages.mobile %}
+
 
 {% if not showOnHomepage %}
     {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
@@ -23,10 +25,14 @@
     {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
 {% endif %}
 
+{% if not showOnLegalPages %}
+    {{ Twig.if("not urls.isLegalPage()") }}
+{% endif %}
+
 <div class="breadcrumbs header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
-    <nav class="small hidden-sm-down px-0" data-component="breadcrumbs" data-renderer="twig">
+    <nav class="small d-none d-md-block px-0" data-component="breadcrumbs" data-renderer="twig">
         {{ Twig.set('crumbs', '[]') }}
-        <ul class="breadcrumb container-max">
+        <ul class="breadcrumb container-max px-3 py-2 my-0 mx-auto">
             <li class="breadcrumb-item">
                 <a href="{{ Twig.print('urls.home') }}">
                     <i class="fa fa-home" aria-hidden="true"></i>
@@ -78,21 +84,51 @@
 
                 {{ Twig.set("lastCategory", "categoryBreadcrumbs | last") }}
                 {{ Twig.if("lastCategory.details is defined") }}
-                    <li class="breadcrumb-item active"><span>{{ Twig.print("lastCategory.details[0].name") }}</span></li>
+                    <li class="breadcrumb-item active">
+                        {{ Twig.set('crumb', '
+                                            [
+                                                {
+                                                    "@type": "ListItem",
+                                                    "position": catLevel,
+                                                    "item":
+                                                    {
+                                                        "@id": services.category.getURLById(lastCategory.id),
+                                                        "name": lastCategory.details[0].name
+                                                    }
+                                                }
+                                            ]')
+                        }}
+                        {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
+                        <span>{{ Twig.print("lastCategory.details[0].name") }}</span>
+                    </li>
                 {{ Twig.elseif("item.documents[0].data is defined") }}
                     <li class="breadcrumb-item active">
+                        {{ Twig.set('crumb', '
+                                [
+                                    {
+                                        "@type": "ListItem",
+                                        "position": catLevel,
+                                        "item":
+                                        {
+                                            "@id": requestedVariationUrl,
+                                            "name": item.documents[0].data | itemName
+                                        }
+                                    }
+                                ]')
+                        }}
+                        {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
                         <span>{{ Twig.print("item.documents[0].data | itemName") }}</span>
                     </li>
                 {{ Twig.endif() }}
             {{ Twig.endif() }}
         </ul>
-        <script type="application/ld+json">
+        <script2 type="application/ld+json">
         {
             "@context":"http://schema.org/",
             "@type":"BreadcrumbList",
             "itemListElement": {{ Twig.print('crumbs | json_encode | raw') }}
         }
-        </script>
+        </script2>
     </nav>
 </div>
 
@@ -109,5 +145,9 @@
 {% endif %}
 
 {% if not showOnContentCategory %}
+    {{ Twig.endif() }}
+{% endif %}
+
+{% if not showOnLegalPages %}
     {{ Twig.endif() }}
 {% endif %}

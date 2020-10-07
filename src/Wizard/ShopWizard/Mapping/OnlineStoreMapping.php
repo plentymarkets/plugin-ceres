@@ -15,12 +15,6 @@ class OnlineStoreMapping
             'global'   => true,
             'optional' => false,
         ],
-        'onlineStore_storeName' => [
-            'field'    => 'header.company_name',
-            'type'     => 'string',
-            'global'   => false,
-            'optional' => false,
-        ],
         'onlineStore_storeFavicon' => [
             'field'    => 'global.favicon',
             'type'     => 'string',
@@ -73,6 +67,12 @@ class OnlineStoreMapping
             'field'    => 'my_account.order_return_initial_status',
             'type'     => 'string',
             'global'   => false,
+            'optional' => false,
+        ],
+        'onlineStore_minimumOrderAmount' => [
+            'field'    => 'minimumOrderValue',
+            'type'     => 'integer',
+            'global'   => true,
             'optional' => false,
         ],
         'onlineStore_enableCallisto' => [

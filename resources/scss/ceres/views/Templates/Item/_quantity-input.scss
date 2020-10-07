@@ -1,66 +1,47 @@
 .qty-box {
-    display: flex;
-    height: 100%;
     width: fit-content;
+    margin-left: auto;
 
     .qty-input {
+        width: $qty-box-width;
+        padding: $qty-box-padding-y $qty-box-padding-x;
+        border: 1px solid $qty-box-border;
+        border-right: 0;
         outline: none;
-        height: 100%;
-        min-height: 27px;
-        width: 48px;
-        padding: 0;
-        text-align: center;
-        transition: all .2s cubic-bezier(0,0,.26,1);
-        border: 1px solid $gray-lighter;
-        border-radius: $border-radius 0 0 $border-radius;
-        
+        @include transition(all .2s cubic-bezier(0, 0, .26, 1));
+
         &:focus {
-            background: $gray-lightest;
+            background-color: $qty-box-bg;
         }
     }
-    
-    .qty-btn-container {
-        width: 25px;
-        position: relative;
-        background: $gray-lighter2;
-        border: 1px solid $gray-lighter;
-        border-left: none;
-        border-radius: 0 $border-radius $border-radius 0;
-        overflow: hidden;
-        height: 100%;
 
-        .qty-btn {
-            width: 100%;
-            height: calc(50% - .5px);
-            min-height: 12px;
-            text-align: center;
-            transition: all .2s cubic-bezier(0,0,.26,1);
-            border-radius: $border-radius;
-            cursor: pointer;
-            position: relative;
+    &.qty-set {
+        width: auto;
+    }
+}
 
-            &.disabled {
-                cursor: not-allowed;
-                opacity: .5;
-            }
+.qty-btn-container {
+    width: $qty-box-btn-width;
+    @include border-radius(0 $border-radius $border-radius 0);
 
-            &:not(.disabled):hover {
-                background: darken($gray-lighter, 10%);
-            }
+    .qty-btn {
+        align-items: center; /* FF */
+        background-color: $qty-box-bg;
+        border: 1px solid $qty-box-border;
+        box-shadow: none;
+        @include border-radius(0 $border-radius 0 0);
 
-            & > .qty-sign {
-                color: $gray;
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: 50%;
-                transform: translateY(-50%);
-            }
+        + .qty-btn {
+            border-top: 0;
+            @include border-radius(0 0 $border-radius 0);
         }
 
-        .qty-btn-seperator {
-            height: 1px;
-            background: $gray-lighter;
+        &.disabled {
+            cursor: not-allowed;
+        }
+
+        &:not(.disabled):hover {
+            background: darken($qty-box-bg, 10%);
         }
     }
 }

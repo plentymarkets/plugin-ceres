@@ -65,6 +65,9 @@ use Ceres\Widgets\Grid\ThreeColumnWidget;
 use Ceres\Widgets\Grid\TwoColumnWidget;
 use Ceres\Widgets\Header\BreadcrumbWidget;
 use Ceres\Widgets\Header\NavigationWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionCategoryWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionItemWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionSuggestionWidget;
 use Ceres\Widgets\Header\TopBarWidget;
 use Ceres\Widgets\Item\AddToBasketWidget;
 use Ceres\Widgets\Item\AddToWishListWidget;
@@ -75,7 +78,9 @@ use Ceres\Widgets\Item\ItemBundleWidget;
 use Ceres\Widgets\Item\ItemDataTableWidget;
 use Ceres\Widgets\Item\ItemImageWidget;
 use Ceres\Widgets\Item\ItemPriceWidget;
+use Ceres\Widgets\Item\ItemSetWidget;
 use Ceres\Widgets\Item\OrderPropertyWidget;
+use Ceres\Widgets\Item\QuantityInputWidget;
 use Ceres\Widgets\Item\TagsWidget;
 use Ceres\Widgets\Item\WishListWidget;
 use Ceres\Widgets\Legal\LegalTextsWidget;
@@ -175,6 +180,9 @@ class WidgetCollection
     const HEADER_WIDGETS = [
         BreadcrumbWidget::class,
         NavigationWidget::class,
+        SearchSuggestionCategoryWidget::class,
+        SearchSuggestionItemWidget::class,
+        SearchSuggestionSuggestionWidget::class,
         TopBarWidget::class
     ];
 
@@ -191,6 +199,11 @@ class WidgetCollection
         OrderPropertyWidget::class,
         WishListWidget::class,
         TagsWidget::class
+    ];
+
+    const ITEM_SET_WIDGETS = [
+        ItemSetWidget::class,
+        QuantityInputWidget::class
     ];
 
     const LEGAL_WIDGETS = [
@@ -249,6 +262,7 @@ class WidgetCollection
             self::GRID_WIDGETS,
             self::HEADER_WIDGETS,
             self::ITEM_WIDGETS,
+            self::ITEM_SET_WIDGETS,
             self::LEGAL_WIDGETS,
             self::LOGIN_WIDGETS,
             self::MY_ACCOUNT_WIDGETS,

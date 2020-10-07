@@ -12,7 +12,7 @@
 {% if block('robots') is defined %}
     {% set robots = block('robots') | default('NOINDEX, NOFOLLOW') %}
 {% elseif details is not null %}
-    {% set robots = details.metaRobots | replace({'_': ', '}) %}
+    {% set robots = services.SEO.getRobotsInformation() %}
 {% endif %}
 
 {% if block('description') is defined %}
@@ -31,6 +31,9 @@
     {% set image = block('image') | default(ceresConfig.header.companyLogo) %}
 {% elseif details is not null %}
     {% set image = details.imagePath | default(ceresConfig.header.companyLogo) %}
+    {% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'images/')  %}
+        {%  set image = '/documents/' ~ image %}
+    {% endif %}
 {% endif %}
 
 {% if block('title') is defined %}
@@ -47,7 +50,7 @@
 {% endif %}
 {% set title = title ~ trans("Ceres::Template.headerCompanyName") %}
 
-{% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'layout/') %}
+{% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'layout/'or image starts with '/documents/') %}
     {% set image = plugin_path('Ceres') ~ "/" ~ image %}
 {% endif %}
 
@@ -68,14 +71,14 @@
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "url": {{ url | json_encode | raw }}
+    "url": "{{ url | raw }}"
     {% if services.template.isHome() %}
     ,"potentialAction":{
         "@type": "SearchAction",
-        "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl ~ urls.search }}?query={search_term}",
+        "target": "{{ webstoreConfig.domainSsl ~ urls.search }}?query={search_term}",
         "query-input": "required name=search_term"
-    {% endif %}
     }
+    {% endif %}
 }
 {% endblock %}
 </script>

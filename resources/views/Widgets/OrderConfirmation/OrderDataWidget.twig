@@ -74,7 +74,7 @@
             {{ Twig.if("customerId or #{ isPreview | json_encode }") }}
                 <div class="row mb-3">
                     <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationCustomerID") }}</strong>
-                    <span class="col-6 col-sm-7">{{ Twig.print(Twig.call("services.customer.getContactNumber", [Twig.var("customerID")])) }}</span>
+                    <span class="col-6 col-sm-7">{{ Twig.print(Twig.call("services.customer.getContactNumber", [Twig.var("customerId")])) }}</span>
                 </div>
             {{ Twig.endif() }}
         {% endif %}
@@ -107,7 +107,7 @@
 
         <hr>
 
-        {{ Twig.if("data.order.typeId == 1") }}
+        {{ Twig.if("data.order.typeId == 1 or data.order.typeId == 8") }}
             <div class="row">
                 <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>
                 <span class="col-6 col-sm-7" id="payment_name_{{ Twig.print("data.order.id") }}">{{ Twig.print("data.paymentMethodName") }}</span>

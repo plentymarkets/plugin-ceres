@@ -1,18 +1,10 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ component( "Ceres::Customer.Components.UserLoginHandler" ) }}
-{{ component( "Ceres::PageDesign.Components.ShippingCountrySelect" ) }}
-{{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
-{{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
-{{ component( "Ceres::WishList.Components.WishListCount" ) }}
-{{ component( "Ceres::Basket.Components.BasketPreviewHover" ) }}
-
-{% set lang = services.sessionStorage.getLang() %}
+{% set lang = services.localizationRepository.getLanguage() %}
 {% set activeCurrencies = config("Ceres.currency.available_currencies") | split(', ') %}
 {% set enableCurrencySelect = config("Ceres.currency.enable_selection") == "true" and activeCurrencies | length > 0 %}
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
-
 
 {% set headerContainer = LayoutContainer.show("Ceres::Header") | trim %}
 {% if headerContainer is empty %}
@@ -20,8 +12,8 @@
 {% else %}
 <header id="page-header" class="fixed-top">
     <div class="container-max">
-        <div class="row">
-            <div id="page-header-parent" class="col-12" data-header-offset>
+        <div class="row flex-row-reverse position-relative">
+            <div id="page-header-parent" class="col-12 header-container" data-header-offset>
                 {{ headerContainer | raw }}
             </div>
         </div>
@@ -51,7 +43,7 @@
     {% endif %}
 
     {# set the initialCategory to the default category of the current item #}
-    {% if services.template.isCurrentTemplate("tpl.item") and defaultCategory is not null %}
+    {% if services.template.isItem() == "1" and defaultCategory is not null %}
         {% set initialCategory = defaultCategory %}
     {% elseif services.template.isCurrentTemplate('tpl.home.category') %}
         {% set initialCategory = null %}

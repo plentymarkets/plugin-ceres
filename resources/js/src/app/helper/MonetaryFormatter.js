@@ -91,7 +91,14 @@ const MonetaryFormatter = (function()
     MonetaryFormatter.prototype.format = function(value, currency)
     {
         let patternIndex = 0;
+
         let prefix = "";
+
+        const displayCurrency = App.config.currency.format === "symbol"
+            ? App.currencyPattern.symbols[currency]
+            : Object.keys(App.currencyPattern.symbols).find(isoCode => App.currencyPattern.symbols[isoCode] === currency);
+
+        currency = displayCurrency || currency;
 
         if (isNullOrUndefined(value) || Number.isNaN(parseFloat(value)))
         {

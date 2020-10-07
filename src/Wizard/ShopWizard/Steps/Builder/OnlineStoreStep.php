@@ -25,7 +25,6 @@ class OnlineStoreStep extends Step
             "description" => "Wizard.onlineStoreSettingsDescription",
             "condition" => $this->hasRequiredSettings(),
             "sections" => [
-                $this->buildStoreNameStructure(),
                 $this->buildStoreFaviconStructure(),
                 $this->buildStoreCategoryTypesStructure(),
                 $this->buildStoreBack2Top(),
@@ -37,24 +36,6 @@ class OnlineStoreStep extends Step
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
-            ]
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    private function buildStoreNameStructure(): array
-    {
-        return [
-            "title" => "Wizard.storeName",
-            "form" => [
-                "onlineStore_storeName" => [
-                    "type" => "text",
-                    "options" => [
-                        "name" => "Wizard.storeNameLabel"
-                    ]
-                ]
             ]
         ];
     }
@@ -211,6 +192,13 @@ class OnlineStoreStep extends Step
                         "listBoxValues" => $this->getOrderStatusListBoxValues()
                     ]
                 ],
+                "onlineStore_minimumOrderAmount" => [
+                    "type" => "number",
+                    "defaultValue" => "0",
+                    "options" => [
+                        "name" => "Wizard.minimumOrderAmount"
+                    ]
+                ]
             ]
         ];
     }
@@ -263,17 +251,9 @@ class OnlineStoreStep extends Step
             "title" => "Wizard.settingsRecaptcha",
             "description" => "Wizard.settingsRecaptchaDescription",
             "form" => [
-                "onlineStore_enableRecaptcha" => [
-                    "type" => "toggle",
-                    "defaultValue" => false,
-                    "options" => [
-                        "name" => "Wizard.enableRecaptcha"
-                    ]
-                ],
                 "onlineStore_recaptchaVersion" => [
                     "type" => "select",
                     "defaultValue" => 2,
-                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
                     "options" => [
                         "name" => "Wizard.recaptchaVersion",
                         "listBoxValues" => [
@@ -290,14 +270,12 @@ class OnlineStoreStep extends Step
                 ],
                 "onlineStore_recaptchaApiKey" => [
                     "type" => "text",
-                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
                     "options" => [
                         "name" => "Wizard.recaptchaApiKey"
                     ]
                 ],
                 "onlineStore_recaptchaSecret" => [
                     "type" => "text",
-                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
                     "options" => [
                         "name" => "Wizard.recaptchaSecret"
                     ]
@@ -305,7 +283,6 @@ class OnlineStoreStep extends Step
                 "onlineStore_recaptchaThreshold" => [
                     "type" => "number",
                     "defaultValue" => 0.5,
-                    "isVisible" => "(typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true) && onlineStore_recaptchaVersion === 3",
                     "options" => [
                         "name" => "Wizard.recaptchaThreshold"
                     ]

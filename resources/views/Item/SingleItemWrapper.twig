@@ -5,12 +5,18 @@
 {% block PartialHead %}
 
     {% set itemData = item.documents[0].data %}
+
+    {% if queryString() | length > 0 %}
+        {% set robotsValue = 'NOINDEX' %}
+    {% else %}
+        {% set robotsValue = 'ALL' %}
+    {% endif %}
     {% embed getPartial('page-metadata') %}
-        {% block title          ItemName.get(itemData | itemName, itemData.variation.bundleType) %}
+        {% block title          ItemName.get(itemData | itemName(webstoreConfig.urlTitleItemName - 1), itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
         {% block keywords       itemData.texts.keywords %}
         {% block image          itemData.images.all[0].url %}
-        {% block robots         "ALL" %}
+        {% block robots         robotsValue %}
         {% block schemaOrg %}
             {
                 "@context"      : "http://schema.org/",
@@ -31,7 +37,8 @@
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
                     "price"         : "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
-                    {% if itemData.prices.default.baseLot > 0 %}
+                    "url"           : "{{ requestedVariationUrl }}",
+{% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification": {
                         "@type": "UnitPriceSpecification",
                         "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
@@ -42,7 +49,7 @@
                             "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
                         }
                     },
-                    {% endif %}
+{% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ itemData.item.condition.names.name }}",
                     "serialNumber"  : "{{ itemData.variation.number }}"
@@ -70,14 +77,12 @@
 
 {% block PageBody %}
     {{ set_item_data_base(item.documents[0].data) }}
-    {{ component("Ceres::Item.Components.SingleItem") }}
 
     {% set shopBuilderTemplate = "" %}
     {% set currentCategory = services.category.getCurrentCategory() %}
 
     {% if currentCategory is defined %}
-        {# Check for item template for specific category first #}
-        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, "singleitem") %}
+        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, isItemSet ? "itemset" : "singleitem") %}
     {% endif %}
 
     {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
@@ -102,8 +107,12 @@
                         item-data="{{ item | json_data }}"
                         attributes-data="{{ attributes | json_data }}"
                         variations="{{ variations | json_data }}"
+                        :after-key="{{ afterKey | json_encode }}"
                         :please-select-option-variation-id="{{ dynamicVariationId }}"
                         :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"
+                        :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
+                        :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"
+                        :item-id="{{ item.documents[0].data.item.id }}"
                         v-slot="slotProps">
                         {{ shopBuilderTemplate | raw }}
                     </single-item>

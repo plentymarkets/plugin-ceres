@@ -7,8 +7,10 @@ use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
 use Ceres\Contexts\ChangeMailContext;
 use Ceres\Contexts\CheckoutContext;
+use Ceres\Contexts\ContactContext;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
+use Ceres\Contexts\MyAccountContext;
 use Ceres\Contexts\OrderConfirmationContext;
 use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\PasswordResetContext;
@@ -26,12 +28,13 @@ use IO\Extensions\Constants\ShopUrls;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
-use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
-use IO\Services\UrlBuilder\UrlQuery;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Modules\ShopBuilder\Contracts\ContentWidgetRepositoryContract;
-use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\Webshop\Helpers\UrlQuery;
+use Plenty\Modules\Webshop\ItemSearch\Helpers\ResultFieldTemplate;
+use Plenty\Modules\Webshop\Template\Contracts\TemplateConfigRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
@@ -49,7 +52,7 @@ class TemplateServiceProvider extends ServiceProvider
     private static $templateKeyToViewMap =
         [
             'tpl.home' => ['Homepage.Homepage', GlobalContext::class],
-            'tpl.home.category' => ['Homepage.HomepageCategory', CategoryContext::class],
+            'tpl.home.category' => ['Homepage.Homepage', CategoryContext::class],
             'tpl.category.content' => ['Category.Content.CategoryContent', CategoryContext::class],
             'tpl.category.item' => ['Category.Item.CategoryItem', CategoryItemContext::class],
             'tpl.category.blog' => ['PageDesign.PageDesign', GlobalContext::class],
@@ -59,13 +62,15 @@ class TemplateServiceProvider extends ServiceProvider
             'tpl.checkout' => ['Checkout.CheckoutView', CheckoutContext::class],
             'tpl.checkout.category' => ['Checkout.CheckoutCategory', CheckoutContext::class],
             'tpl.my-account' => ['MyAccount.MyAccountView', GlobalContext::class],
-            'tpl.my-account.category' => ['MyAccount.MyAccountCategory', CategoryContext::class],
+            'tpl.my-account.category' => ['MyAccount.MyAccountCategory', MyAccountContext::class],
             'tpl.confirmation' => ['Checkout.OrderConfirmation', OrderConfirmationContext::class],
             'tpl.login' => ['Customer.Login', GlobalContext::class],
             'tpl.register' => ['Customer.Register', GlobalContext::class],
             'tpl.guest' => ['Customer.Guest', GlobalContext::class],
             'tpl.password-reset' => ['Customer.ResetPassword', PasswordResetContext::class],
+            'tpl.password-reset.category' => ['Customer.ResetPasswordCategory', PasswordResetContext::class],
             'tpl.change-mail' => ['Customer.ChangeMail', ChangeMailContext::class],
+            'tpl.change-mail.category' => ['Customer.ChangeMailCategory', ChangeMailContext::class],
             'tpl.contact' => ['Customer.Contact', GlobalContext::class],
             'tpl.search' => ['Category.Item.CategoryItem', ItemSearchContext::class],
             'tpl.wish-list' => ['WishList.WishListView', GlobalContext::class],
@@ -104,6 +109,7 @@ class TemplateServiceProvider extends ServiceProvider
             $widgetRepository->registerWidget($widgetClass);
         }
 
+        $this->registerConfigValues();
         $this->registerConsents();
 
         // Register Twig String Loader to use function: template_from_string
@@ -122,26 +128,25 @@ class TemplateServiceProvider extends ServiceProvider
             }
         );
 
+        /** @var ResultFieldTemplate $templateContainer */
+        $templateContainer = pluginApp(ResultFieldTemplate::class);
+
+        $templateContainer->setTemplates(
+            [
+                ResultFieldTemplate::TEMPLATE_LIST_ITEM => 'Ceres::ResultFields.ListItem',
+                ResultFieldTemplate::TEMPLATE_SINGLE_ITEM => 'Ceres::ResultFields.SingleItem',
+                ResultFieldTemplate::TEMPLATE_BASKET_ITEM => 'Ceres::ResultFields.BasketItem',
+                ResultFieldTemplate::TEMPLATE_AUTOCOMPLETE_ITEM_LIST => 'Ceres::ResultFields.AutoCompleteListItem',
+                ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
+                ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
+            ],
+            false
+        );
+
         $this->listenToIO(
             'ctx.*',
             function (TemplateContainer $templateContainer, $templateData = []) {
                 $this->setTemplateAndContext($templateContainer);
-            }
-        );
-
-        $this->listenToIO(
-            'ResultFields.*',
-            function (ResultFieldTemplate $templateContainer) {
-                $templateContainer->setTemplates(
-                    [
-                        ResultFieldTemplate::TEMPLATE_LIST_ITEM => 'Ceres::ResultFields.ListItem',
-                        ResultFieldTemplate::TEMPLATE_SINGLE_ITEM => 'Ceres::ResultFields.SingleItem',
-                        ResultFieldTemplate::TEMPLATE_BASKET_ITEM => 'Ceres::ResultFields.BasketItem',
-                        ResultFieldTemplate::TEMPLATE_AUTOCOMPLETE_ITEM_LIST => 'Ceres::ResultFields.AutoCompleteListItem',
-                        ResultFieldTemplate::TEMPLATE_CATEGORY_TREE => 'Ceres::ResultFields.CategoryTree',
-                        ResultFieldTemplate::TEMPLATE_VARIATION_ATTRIBUTE_MAP => 'Ceres::ResultFields.VariationAttributeMap'
-                    ]
-                );
             }
         );
 
@@ -231,7 +236,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
         $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
-        $webstoreConfig = $webstoreRepository->findByPlentyId($this->getApplication()->getPlentyId());
+        $webstoreConfig = $webstoreRepository->getWebstoreConfiguration();
 
         $consentRepository->registerConsent(
             'consent',
@@ -241,7 +246,7 @@ class TemplateServiceProvider extends ServiceProvider
                 'position' => 100,
                 'description' => 'Ceres::Template.consentConsentDescription',
                 'provider' => 'Ceres::Template.headerCompanyName',
-                'lifespan' => 'Ceres::Template.consentLifespanSession',
+                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
                 'policyUrl' => function () {
                     /** @var ShopUrls $shopUrls */
                     $shopUrls = pluginApp(ShopUrls::class);
@@ -299,7 +304,7 @@ class TemplateServiceProvider extends ServiceProvider
          * Cannot use CeresConfig since it depends on IO helper class
          */
         $config = pluginApp(ConfigRepository::class);
-        if (strlen($config->get('Ceres.contact.apiKey'))) {
+        if (strlen($config->get('Ceres.contact.api_key'))) {
             $consentRepository->registerConsent(
                 'googleMaps',
                 'Ceres::Template.consentGoogleMapsLabel',
@@ -328,5 +333,31 @@ class TemplateServiceProvider extends ServiceProvider
                 ]
             );
         }
+    }
+
+    private function registerConfigValues()
+    {
+        /** @var CeresConfig $ceresConfig */
+        $ceresConfig = pluginApp(CeresConfig::class);
+
+        /** @var TemplateConfigRepositoryContract $templateConfigRepo */
+        $templateConfigRepo = pluginApp(TemplateConfigRepositoryContract::class);
+
+        $templateConfigRepo
+            ->registerConfigValue('currency.format', $ceresConfig->currency->format)
+            ->registerConfigValue('sort.defaultSorting', $ceresConfig->sorting->defaultSorting)
+            ->registerConfigValue('sort.defaultSortingSearch', $ceresConfig->sorting->defaultSortingSearch)
+            ->registerConfigValue('sorting.prioritySearch1', $ceresConfig->sorting->prioritySearch1)
+            ->registerConfigValue('sorting.prioritySearch2', $ceresConfig->sorting->prioritySearch2)
+            ->registerConfigValue('sorting.prioritySearch3', $ceresConfig->sorting->priorityCategory3)
+            ->registerConfigValue('sorting.priorityCategory1', $ceresConfig->sorting->priorityCategory1)
+            ->registerConfigValue('sorting.priorityCategory2', $ceresConfig->sorting->priorityCategory2)
+            ->registerConfigValue('sorting.priorityCategory3', $ceresConfig->sorting->priorityCategory3)
+            ->registerConfigValue('sorting.dynamicInherit', $ceresConfig->sorting->dynamicInherit)
+            ->registerConfigValue('sorting.dynamicPrio1', $ceresConfig->sorting->dynamicPrio1)
+            ->registerConfigValue('sorting.dynamicPrio2', $ceresConfig->sorting->dynamicPrio2)
+            ->registerConfigValue('item.name', $ceresConfig->item->itemName)
+            ->registerConfigValue('global.enableOldUrlPattern', $ceresConfig->global->enableOldUrlPattern)
+            ->registerConfigValue('language.activeLanguages', $ceresConfig->language->activeLanguages);
     }
 }

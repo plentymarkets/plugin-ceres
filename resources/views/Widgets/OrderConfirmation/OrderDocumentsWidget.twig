@@ -19,7 +19,8 @@
         delivery_note:      "Ceres::Template.orderConfirmationOrderDocumentsDeliveryNote",
         order_confirmation: "Ceres::Template.orderConfirmationOrderDocumentsOrderConfirmation",
         pickup_delivery:    "Ceres::Template.orderConfirmationOrderDocumentsPickupDelivery",
-        reversal_document:  "Ceres::Template.orderConfirmationOrderDocumentsReversalDocument"
+        reversal_document:  "Ceres::Template.orderConfirmationOrderDocumentsReversalDocument",
+        return_note:        "Ceres::Template.orderConfirmationOrderDocumentsReturnNote"
     } | json_encode)
 }}
 
@@ -73,7 +74,7 @@
 
 {{ Twig.elseif("#{ isPreview | json_encode }") }}
 
-    <div class="widget-placeholder">
+    <div class="widget-placeholder p-0">
         <div>
             <p class="title">{{ Twig.trans("Ceres::Widget.orderDocumentsLabel") }}</p>
             <p class="description">{{ Twig.trans("Ceres::Widget.orderDocumentsPlaceholderDescription") }}</p>

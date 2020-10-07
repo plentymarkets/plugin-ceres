@@ -5,10 +5,14 @@ const NotificationService = require("../../../../services/NotificationService");
 import ValidationService from "../../../../services/ValidationService";
 import TranslationService from "../../../../services/TranslationService";
 import Vue from "vue";
+import AddressInputGroup from "../../AddressInputGroup.vue";
 
-Vue.component("create-update-address", {
+export default Vue.component("create-update-address", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        AddressInputGroup
+    },
 
     props: {
         addressData: {
@@ -59,7 +63,7 @@ Vue.component("create-update-address", {
     {
         addressList()
         {
-            this.$store.getters.getAddressList(this.addressType);
+            return this.$store.getters.getAddressList(this.addressType);
         }
     },
 
@@ -118,7 +122,7 @@ Vue.component("create-update-address", {
 
             this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
-                    resolve =>
+                    () =>
                     {
                         this.addressModal.hide();
                         this.waiting = false;
@@ -149,7 +153,7 @@ Vue.component("create-update-address", {
 
             this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
-                    response =>
+                    () =>
                     {
                         this.addressModal.hide();
                         this.waiting = false;

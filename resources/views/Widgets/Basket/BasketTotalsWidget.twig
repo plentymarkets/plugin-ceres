@@ -8,7 +8,6 @@
 
 {% set visibleFields = widget.settings.visibleFields.mobile | default([]) %}
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
-{{ Twig.component("Ceres::Basket.Components.BasketTotals") }}
 
 {{ Twig.set("currentTemplate", Twig.call("services.template.getCurrentTemplate")) }}
 
@@ -22,13 +21,38 @@
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Basket.BeforeBasketTotals"])) }}
     {{ Twig.endif() }}
 
-    <basket-totals :visible-fields="{{ visibleFields | json_encode }}"></basket-totals>
+    <basket-totals :visible-fields="{{ visibleFields | json_encode }}">
+        <template #before-item-sum>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeItemSum"])) }}
+        </template>
+        <template #after-item-sum>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterItemSum"])) }}
+        </template>
+        <template #before-shipping-costs>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeShippingCosts"])) }}
+        </template>
+        <template #after-shipping-costs>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterShippingCosts"])) }}
+        </template>
+        <template #before-total-sum>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeTotalSum"])) }}
+        </template>
+        <template #before-vat>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeVat"])) }}
+        </template>
+        <template #after-vat>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterVat"])) }}
+        </template>
+        <template #after-total-sum>
+            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterTotalSum"])) }}
+        </template>
+    </basket-totals>
 
     {{ Twig.if("currentTemplate == 'tpl.checkout' or currentTemplate == 'tpl.checkout.category'") }}
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBasketTotals"])) }}
     {{ Twig.else() }}
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Basket.AfterBasketTotals"])) }}
     {{ Twig.endif() }}
-    
+
 </div>
 {% endif %}

@@ -144,7 +144,6 @@ class ShopWizardService
             }
 
             if (count($globalData['languages_defaultBrowserLang'])) {
-                $globalData['languages_setLinkedStoreLanguage'] = true;
                 $browserLanguage = $globalData['languages_defaultBrowserLang'];
 
                 //now we extract data related from browser language
@@ -211,9 +210,17 @@ class ShopWizardService
             }
 
             // search fields logic
-
             $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
-            foreach ($itemSearchSettings['fields'] as $fieldKey => $fieldSettings) {
+
+            $searchFields = $itemSearchSettings['fields'];
+            usort(
+                $searchFields,
+                function ($sort1, $sort2) {
+                    return ($sort1['boost'] <=> $sort2['boost']) * -1;
+                }
+            );
+
+            foreach ($searchFields as $fieldKey => $fieldSettings) {
                 $fieldKey += 1;
                 $formFieldPrefix = "search_";
                 switch ($fieldKey) {
@@ -315,10 +322,6 @@ class ShopWizardService
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
             $data['setAllRequiredAssistants'] = 'true';
         }
-
-        $data['onlineStore_enableRecaptcha'] = strlen($data['onlineStore_recaptchaApiKey']) || strlen(
-                $data['onlineStore_recaptchaSecret']
-            );
 
         return $data;
     }

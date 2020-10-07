@@ -6,7 +6,7 @@ const ValidationService   = require("../../services/ValidationService");
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("account-settings", {
+export default Vue.component("account-settings", {
 
     props: {
         template:
@@ -64,7 +64,7 @@ Vue.component("account-settings", {
         },
         matchOldEmail()
         {
-            return this.newMail === this.newMail2 && this.newMail === this.userData.email;
+            return this.newMail === this.newMail2 && (this.userData && this.newMail === this.userData.email);
         },
         matchPassword()
         {
@@ -72,7 +72,7 @@ Vue.component("account-settings", {
         },
         isValidEmail()
         {
-            return this.newMail.length > 0 && (this.newMail === this.newMail2) && this.newMail !== this.userData.email;
+            return this.newMail.length > 0 && (this.newMail === this.newMail2) && (this.userData && this.newMail !== this.userData.email);
         },
         isValidPassword()
         {
