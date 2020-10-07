@@ -1,5 +1,37 @@
 # Release Notes for Ceres
 
+## v5.0.13 (2020-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.12...5.0.13" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- We added the option **Display on legal pages** to the settings of the breadcrumbs widget. This setting only applies to legal pages that have been created with the ShopBuilder.
+- The data for breadcrumbs is now always loaded if a user is on an item or content category page that is linked with the ShopBuilder. Therefore, the breadcrumbs widget is always able to display the path to the current category.
+- Performance has been improved for online stores that use an external search provider.
+- We removed an obsolete setting from the item data table widget.
+
+### Fixed
+
+- The field `addressFieldName1` appeared twice in the multilingualism interface. This has been fixed. We would like to thank @Lauflust for the contribution.
+- Under certain circumstances, the sticky container widget reset to its original position while scrolling, which led to a shaky display of the widget. This behaviour has been fixed.
+- The input field of the guest order widget was not automatically selected. This has been fixed.
+- The `normalizeUrl` function could lead to errors if the setting **Trailing slash** was inactive, but the page was accessed via a URL with a trailing slash. This behaviour has been fixed.
+- The loading animation was not displayed while the step-by-step navigation loaded additional categories. This has been fixed.
+- The navigation tree now checks if subcategories exist, even if the next level of the category tree has not been loaded.
+- Under certain circumstances, an error could occur if no API key had been stored for Google reCAPTCHA. This has been fixed.
+- The meta tag `og:image` was not correctly filled in in the category view. This behaviour has been fixed.
+- In a standard My Account area, it was possible to create returns, even though the corresponding setting in the Ceres configuration was inactive. This setting now applies as intended.
+
+### Changed templates
+
+- In Ceres 5.0.13 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/scss/ceres/components/_sticky-element.scss](https://github.com/plentymarkets/plugin-ceres/pull/2378/files#diff-5e661ae82cc538fe6612799243d943ad)
+- [resources/js/src/app/components/category/StepByStepNavigation.vue](https://github.com/plentymarkets/plugin-ceres/pull/2374/files#diff-50c90a6655c0e7cbcf03de0a7b2c1e66)
+- [resources/views/Widgets/Navigation/StepByStepNavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2374/files#diff-d3ea59b4c6ebb4395ce978e00fc64e0b)
+- [resources/views/Widgets/Item/ItemDataTableWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2380/files#diff-be40dbd506648d6e32e18e5b8c819461)
+- [resources/views/Category/Macros/CategoryTree.twig](https://github.com/plentymarkets/plugin-ceres/pull/2356/files#diff-09d849cf28f22de603fc51c7165ab279)
+- [resources/views/ResultFields/CategoryTree.fields.json](https://github.com/plentymarkets/plugin-ceres/pull/2356/files#diff-aadbcb4d0f3fe3e283b2f032903fb518)
+
+
 ## v5.0.12 (2020-09-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.11...5.0.12" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed 
