@@ -17,7 +17,7 @@
                 @change="$store.dispatch('selectItemListSorting', $event.target.value)"
                 v-populate-store:mutation="{ name: 'setItemListSorting', data: {{ Twig.print("itemSorting | json_encode") }} }">
                 {{ Twig.for("value", "itemSortOptions") }}
-                    <option value="{{ Twig.print('value') }}"{{ Twig.if("value == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans('Ceres::Template.' ~ translations[value])") }}</option>
+                    <option value="{{ Twig.print('value') }}"{{ Twig.if("value == itemSorting") }} selected{{ Twig.endif() }}>{{ Twig.print("trans(translations[value])") }}</option>
                 {{ Twig.endfor() }}
             </select>
         </div>
