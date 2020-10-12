@@ -1,6 +1,8 @@
 <?php
+
 namespace Ceres\Extensions;
 
+use Plenty\Modules\Webshop\Helpers\DomHelper;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
 
@@ -27,13 +29,18 @@ class TwigStyleScriptTagFilter extends Twig_Extension
      */
     private $twig;
 
+    /** @var DomHelper */
+    private $domHelper;
+
     /**
      * TwigStyleScriptTagFilter constructor.
      * @param TwigFactory $twig
+     * @param DomHelper $domHelper
      */
-    public function __construct(TwigFactory $twig)
+    public function __construct(TwigFactory $twig, DomHelper $domHelper)
     {
         $this->twig = $twig;
+        $this->domHelper = $domHelper;
     }
 
     /**
@@ -79,8 +86,9 @@ class TwigStyleScriptTagFilter extends Twig_Extension
      */
     public function getFilteredTags()
     {
-        $tags = implode("\n", array_unique(self::$scriptTags));
-        $tags .= implode("\n", array_unique(self::$styleTags));
+        $tags = $this->domHelper->getFilteredTags('script');
+        $tags .= $this->domHelper->getFilteredTags('style');
+
         return $tags;
     }
 
@@ -98,35 +106,8 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             return $content;
         }
 
-        //search for style tag
-        if (strpos($content, '<style') !== false) {
-            /** @var \DOMDocument $doc */
-            $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content);
-            foreach ($doc->getElementsByTagName('style') as $element) {
-                $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-                $cloned = $element->cloneNode(true);
-                $newdoc->appendChild($newdoc->importNode($cloned, true));
-                self::$styleTags[] = $newdoc->saveHTML();
-            }
-
-            $content = preg_replace("/<style.*?>.*?<\\/style>/s", "", $content);
-        }
-
-        //search for style tag
-        if (strpos($content, '<script') !== false) {
-            /** @var \DOMDocument $doc */
-            $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-            $doc->loadHTML($content);
-            foreach ($doc->getElementsByTagName('script') as $element) {
-                $newdoc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
-                $cloned = $element->cloneNode(true);
-                $newdoc->appendChild($newdoc->importNode($cloned, true));
-                self::$scriptTags[] = $newdoc->saveHTML();
-            }
-
-            $content = preg_replace("/<script.*?>.*?<\\/script>/s", "", $content);
-        }
+        $content = $this->domHelper->filterTags($content, 'script');
+        $content = $this->domHelper->filterTags($content, 'style');
 
         return $content;
     }
