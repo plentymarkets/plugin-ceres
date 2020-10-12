@@ -99,7 +99,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         }
 
         //search for style tag
-        if (strpos($content, '<style') !== false) {
+        if (preg_match("/<style(|\s.*?)>/s", $content) === 1) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
             $doc->loadHTML($content);
@@ -110,11 +110,17 @@ class TwigStyleScriptTagFilter extends Twig_Extension
                 self::$styleTags[] = $newdoc->saveHTML();
             }
 
-            $content = preg_replace("/<style.*?>.*?<\\/style>/s", "", $content);
+            // replace <style>..</style>, <style foo="bar">..</style>; ignore <style2>..</style2>
+            $try = preg_replace("/<style(|\s.*?)>.*?<\\/style>/s", "", $content);
+
+            // if the preg_replace returns null (in case of PREG_BACKTRACK_LIMIT_ERROR) do nothing
+            if (!is_null($try)) {
+                $content = $try;
+            }
         }
 
-        //search for style tag
-        if (strpos($content, '<script') !== false) {
+        //search for script tag
+        if (preg_match("/<script(|\s.*?)>/s", $content) === 1) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
             $doc->loadHTML($content);
@@ -125,7 +131,13 @@ class TwigStyleScriptTagFilter extends Twig_Extension
                 self::$scriptTags[] = $newdoc->saveHTML();
             }
 
-            $content = preg_replace("/<script.*?>.*?<\\/script>/s", "", $content);
+            // replace <script>..</script>, <script foo="bar">..</script>; ignore <script2>..</script2>
+            $try = preg_replace("/<script(|\s.*?)>.*?<\\/script>/s", "", $content);
+
+            // if the preg_replace returns null (in case of PREG_BACKTRACK_LIMIT_ERROR) do nothing
+            if (!is_null($try)) {
+                $content = $try;
+            }
         }
 
         return $content;
