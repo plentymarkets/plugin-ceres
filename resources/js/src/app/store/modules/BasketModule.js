@@ -35,7 +35,7 @@ const mutations =
 
         updateBasketItems(state, basketItems)
         {
-            if (basketItems && state.items.length > 0)
+            if (basketItems && state.items.length)
             {
                 const newItems = [];
 
