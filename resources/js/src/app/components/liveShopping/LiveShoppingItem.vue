@@ -115,9 +115,7 @@ export default {
     {
         currentOffer()
         {
-            const ls = this.$store.state.liveShopping.liveShoppingOffers[this._uid];
-            console.log(ls);
-            return ls;
+            return this.$store.state.liveShopping.liveShoppingOffers[this._uid];
         },
 
         isActive()
