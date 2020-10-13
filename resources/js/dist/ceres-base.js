@@ -57430,7 +57430,7 @@ var mutations = {
     state.items = basketItems;
   },
   updateBasketItems: function updateBasketItems(state, basketItems) {
-    if (basketItems) {
+    if (basketItems && state.items.length) {
       var newItems = [];
 
       var _iterator = _createForOfIteratorHelper(basketItems),
@@ -57529,16 +57529,21 @@ var actions = {
 
     if (!state.isBasketInitiallyLoaded) {
       jQuery.when(ApiService.get("/rest/io/basket", {}, {
-        cache: false
+        cache: false,
+        keepOriginalResponse: true
       }), ApiService.get("/rest/io/basket/items", {
         template: "Ceres::Basket.Basket"
       }, {
-        cache: false
+        cache: false,
+        keepOriginalResponse: true
       })).then(function (basket, basketItems) {
-        commit("setBasket", basket);
-        commit("setBasketItems", basketItems);
+        if (!basket.events.hasOwnProperty("AfterBasketChanged") && !basketItems.events.hasOwnProperty("AfterBasketChanged")) {
+          commit("setBasket", basket.data);
+          commit("setWishListIds", basket.data.itemWishListIds);
+        }
+
         commit("setIsBasketInitiallyLoaded");
-        commit("setWishListIds", basket.itemWishListIds);
+        commit("setBasketItems", basketItems.data);
       }).catch(function (error, status) {
         console.log(error, status);
 
