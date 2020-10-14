@@ -58052,27 +58052,29 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     placeOrder: function placeOrder() {
       var _this = this;
 
-      this.waiting = true;
-      var url = "/rest/io/order/additional_information";
-      var params = {
-        orderContactWish: this.contactWish,
-        orderCustomerSign: this.customerSign,
-        shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
-        newsletterSubscriptions: this.activeNewsletterSubscriptions
-      };
-      var options = {
-        supressNotifications: true
-      };
-      ApiService.post(url, params, options).always(function () {
-        _this.preparePayment();
-      });
+      if (this.validateCheckout()) {
+        this.waiting = true;
+        var url = "/rest/io/order/additional_information";
+        var params = {
+          orderContactWish: this.contactWish,
+          orderCustomerSign: this.customerSign,
+          shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
+          newsletterSubscriptions: this.activeNewsletterSubscriptions
+        };
+        var options = {
+          supressNotifications: true
+        };
+        ApiService.post(url, params, options).always(function () {
+          _this.preparePayment();
+        });
+      }
     },
     preparePayment: function preparePayment() {
       var _this2 = this;
 
       this.waiting = true;
 
-      if (this.validateCheckout() && this.basketItemQuantity > 0) {
+      if (this.basketItemQuantity > 0) {
         ApiService.post("/rest/io/checkout/payment").done(function (response) {
           _this2.afterPreparePayment(response);
         }).fail(function (error) {
@@ -58103,10 +58105,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
       switch (paymentType) {
         case "continue":
-          var target = this.targetContinue;
-
-          if (target) {
-            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_10__["navigateTo"])(target);
+          if (this.targetContinue) {
+            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_10__["navigateTo"])(this.targetContinue);
           }
 
           break;
@@ -69010,7 +69010,7 @@ var mutations = {
     state.items = basketItems;
   },
   updateBasketItems: function updateBasketItems(state, basketItems) {
-    if (basketItems) {
+    if (basketItems && state.items.length) {
       var newItems = [];
 
       var _iterator = _createForOfIteratorHelper(basketItems),
@@ -69109,16 +69109,21 @@ var actions = {
 
     if (!state.isBasketInitiallyLoaded) {
       jQuery.when(ApiService.get("/rest/io/basket", {}, {
-        cache: false
+        cache: false,
+        keepOriginalResponse: true
       }), ApiService.get("/rest/io/basket/items", {
         template: "Ceres::Basket.Basket"
       }, {
-        cache: false
+        cache: false,
+        keepOriginalResponse: true
       })).then(function (basket, basketItems) {
-        commit("setBasket", basket);
-        commit("setBasketItems", basketItems);
+        if (!basket.events.hasOwnProperty("AfterBasketChanged") && !basketItems.events.hasOwnProperty("AfterBasketChanged")) {
+          commit("setBasket", basket.data);
+          commit("setWishListIds", basket.data.itemWishListIds);
+        }
+
         commit("setIsBasketInitiallyLoaded");
-        commit("setWishListIds", basket.itemWishListIds);
+        commit("setBasketItems", basketItems.data);
       }).catch(function (error, status) {
         console.log(error, status);
 
@@ -70586,41 +70591,31 @@ __webpack_require__.r(__webpack_exports__);
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var state = {
-  liveShoppingOffers: {
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-    7: null,
-    8: null,
-    9: null,
-    10: null
-  }
+  liveShoppingOffers: {}
 };
 var mutations = {
   setLiveShoppingOffer: function setLiveShoppingOffer(state, _ref) {
-    var liveShoppingId = _ref.liveShoppingId,
+    var uid = _ref.uid,
         liveShoppingOffer = _ref.liveShoppingOffer;
-    state.liveShoppingOffers[liveShoppingId] = liveShoppingOffer;
+    Vue.set(state.liveShoppingOffers, uid, liveShoppingOffer);
   }
 };
 var actions = {
-  retrieveLiveShoppingOffer: function retrieveLiveShoppingOffer(_ref2, params) {
+  retrieveLiveShoppingOffer: function retrieveLiveShoppingOffer(_ref2, _ref3) {
     var commit = _ref2.commit;
-    var liveShoppingId = params.liveShoppingId;
-    var sorting = params.sorting;
+    var liveShoppingId = _ref3.liveShoppingId,
+        sorting = _ref3.sorting,
+        uid = _ref3.uid;
     return new Promise(function (resolve, reject) {
       ApiService.get("/rest/io/live-shopping/" + liveShoppingId + "?sorting=" + sorting).done(function (liveShoppingOffer) {
         if (liveShoppingOffer.item) {
           commit("setLiveShoppingOffer", {
-            liveShoppingId: liveShoppingId,
+            uid: uid,
             liveShoppingOffer: liveShoppingOffer
           });
         } else {
           commit("setLiveShoppingOffer", {
-            liveShoppingId: liveShoppingId,
+            uid: uid,
             liveShoppingOffer: null
           });
         }
@@ -70632,12 +70627,10 @@ var actions = {
     });
   }
 };
-var getters = {};
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   actions: actions,
-  mutations: mutations,
-  getters: getters
+  mutations: mutations
 });
 
 /***/ }),
