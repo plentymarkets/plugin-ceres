@@ -73,10 +73,12 @@ class ShopWizardService
                     $pluginSetEntry instanceof PluginSetEntry &&
                     $pluginSetEntry->pluginId == $plugin->id
                 ) {
-                    $previewConfigs = $wizardConfRepo->getConfigsForPluginSet($pluginSetEntry->pluginSetId); //TODO webstoreId
-                    if(is_array($previewConfigs) && count($previewConfigs)) {
+                    $previewConfigs = $wizardConfRepo->getConfigsForPluginSet(
+                        $pluginSetEntry->pluginSetId
+                    );
+                    if (is_array($previewConfigs) && count($previewConfigs)) {
                         foreach ($previewConfigs as $previewConfig) {
-                            if($previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted) {
+                            if ($previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted) {
                                 if (is_null($previewConfig->webstoreId)) {
                                     $webstores[] = [
                                         'id' => 'preview',
@@ -99,7 +101,7 @@ class ShopWizardService
             foreach ($webstores as $webstore) {
                 if ($pluginSet instanceof PluginSet
                     && $pluginRepo->isActiveInPluginSet($plugin->id, $pluginSet)
-                    && (!empty($webstore['pluginSetId']) && $webstore['pluginSetId'] == $pluginSetId )) { //|| in_array($webstore['id'].'_'.$pluginSetId, $previews)) {
+                    && (!empty($webstore['pluginSetId']) && $webstore['pluginSetId'] == $pluginSetId)) {
                     $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $pluginSetId;
 
                     $webstoresMapped[$key] = [

@@ -81,7 +81,7 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
 
             $database->save($config);
 
-            unset($this->configList[$webstoreId.'_'.$pluginSetId]);
+            unset($this->configList[$webstoreId . '_' . $pluginSetId]);
 
             return $config;
         } catch (\Exception $ex) {
@@ -113,7 +113,7 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
 
             $database->save($config);
 
-            unset($this->configList[$webstoreId.'_'.$pluginSetId]);
+            unset($this->configList[$webstoreId . '_' . $pluginSetId]);
         } catch (\Exception $ex) {
             $this->getLogger(__FUNCTION__)
                 ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
@@ -129,8 +129,8 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
      */
     public function getConfig($pluginSetId, $webstoreId = null)
     {
-        if (array_key_exists($webstoreId.'_'.$pluginSetId, $this->configList)) {
-            return $this->configList[$webstoreId.'_'.$pluginSetId];
+        if (array_key_exists($webstoreId . '_' . $pluginSetId, $this->configList)) {
+            return $this->configList[$webstoreId . '_' . $pluginSetId];
         }
 
         try {
@@ -148,9 +148,9 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
             $config = false;
         }
 
-        $this->configList[$webstoreId.'_'.$pluginSetId] = $config;
+        $this->configList[$webstoreId . '_' . $pluginSetId] = $config;
 
-        return $this->configList[$webstoreId.'_'.$pluginSetId];
+        return $this->configList[$webstoreId . '_' . $pluginSetId];
     }
 
     /**
@@ -166,7 +166,6 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
             $configs = $database->query(ShopWizardPreviewConfiguration::class)
                 ->where('pluginSetId', '=', $pluginSetId)
                 ->get();
-
         } catch (\Exception $ex) {
             $this->getLogger(__FUNCTION__)
                 ->error('Ceres::Wizard.exceptionError', $ex->getMessage());
