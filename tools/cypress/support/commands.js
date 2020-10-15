@@ -19,7 +19,10 @@
 //
 // -- This is a dual command --
 // Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+// Override visit to add our testing env
+Cypress.Commands.overwrite("visit", (originalFn, url, options = {}) =>
+{
+    options.qs = { env: "testing", ...options.qs };
+    return originalFn(url, options);
+});
