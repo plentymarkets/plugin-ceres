@@ -47,6 +47,11 @@ export default {
 
     props:
     {
+        useVariationOrderProperties:
+        {
+            type: Boolean,
+            default: false
+        },
         paddingClasses:
         {
             type: String,
@@ -71,6 +76,16 @@ export default {
             activeSlide: 0,
             touchedSlides: { 0: true }
         };
+    },
+
+    mounted()
+    {
+        if(this.useVariationOrderProperties)
+        {
+            document.addEventListener("onVariationChanged", event => {
+                this.activeSlide = 0;
+            });
+        }
     },
 
     computed:
