@@ -1,14 +1,14 @@
 // / <reference types="cypress" />
-
-context("Actions", () =>
+context("Homepage", () =>
 {
     beforeEach(() =>
     {
-        cy.visit("http://master.plentymarkets.com/");
+        cy.visit("/");
     });
 
     it("loads the homepage", () =>
     {
+        // checks if the logo exists
         cy.get(".brand-wrapper").should("exist");
     });
 });
