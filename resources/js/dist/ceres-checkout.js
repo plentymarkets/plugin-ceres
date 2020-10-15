@@ -58052,27 +58052,29 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     placeOrder: function placeOrder() {
       var _this = this;
 
-      this.waiting = true;
-      var url = "/rest/io/order/additional_information";
-      var params = {
-        orderContactWish: this.contactWish,
-        orderCustomerSign: this.customerSign,
-        shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
-        newsletterSubscriptions: this.activeNewsletterSubscriptions
-      };
-      var options = {
-        supressNotifications: true
-      };
-      ApiService.post(url, params, options).always(function () {
-        _this.preparePayment();
-      });
+      if (this.validateCheckout()) {
+        this.waiting = true;
+        var url = "/rest/io/order/additional_information";
+        var params = {
+          orderContactWish: this.contactWish,
+          orderCustomerSign: this.customerSign,
+          shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
+          newsletterSubscriptions: this.activeNewsletterSubscriptions
+        };
+        var options = {
+          supressNotifications: true
+        };
+        ApiService.post(url, params, options).always(function () {
+          _this.preparePayment();
+        });
+      }
     },
     preparePayment: function preparePayment() {
       var _this2 = this;
 
       this.waiting = true;
 
-      if (this.validateCheckout() && this.basketItemQuantity > 0) {
+      if (this.basketItemQuantity > 0) {
         ApiService.post("/rest/io/checkout/payment").done(function (response) {
           _this2.afterPreparePayment(response);
         }).fail(function (error) {
@@ -58103,10 +58105,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
       switch (paymentType) {
         case "continue":
-          var target = this.targetContinue;
-
-          if (target) {
-            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_10__["navigateTo"])(target);
+          if (this.targetContinue) {
+            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_10__["navigateTo"])(this.targetContinue);
           }
 
           break;
