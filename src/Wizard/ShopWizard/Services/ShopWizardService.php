@@ -67,28 +67,31 @@ class ShopWizardService
 
         $plugin = $pluginRepo->getPluginByName("Ceres");
 
-        //$previews = [];
         if ($plugin instanceof Plugin) {
             foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
                 if (
                     $pluginSetEntry instanceof PluginSetEntry &&
                     $pluginSetEntry->pluginId == $plugin->id
                 ) {
-                    $previewConfig = $wizardConfRepo->getConfig($pluginSetEntry->pluginSetId);
-                    if($previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted) {
-                        if (is_null($previewConfig->webstoreId)) {
-                            $webstores[] = [
-                                'id' => 'preview',
-                                'pluginSetId' => (int)$pluginSetEntry->pluginSetId
-                            ];
-                        } else {
-                            $webstores[] = [
-                                'id' => (int)$previewConfig->webstoreId,
-                                'pluginSetId' => (int)$pluginSetEntry->pluginSetId
-                            ];
+                    $previewConfigs = $wizardConfRepo->getConfigsForPluginSet($pluginSetEntry->pluginSetId); //TODO webstoreId
+                    if(is_array($previewConfigs) && count($previewConfigs)) {
+                        foreach ($previewConfigs as $previewConfig) {
+                            if($previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted) {
+                                if (is_null($previewConfig->webstoreId)) {
+                                    $webstores[] = [
+                                        'id' => 'preview',
+                                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId
+                                    ];
+                                } else {
+                                    $webstores[] = [
+                                        'id' => (int)$previewConfig->webstoreId,
+                                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId
+                                    ];
+                                }
+                            }
                         }
-                        //$previews[] = $previewConfig->webstoreId.'_'.$pluginSetId;
                     }
+                    break;
                 }
             }
         }
