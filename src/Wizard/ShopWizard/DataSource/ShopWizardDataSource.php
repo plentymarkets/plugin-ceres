@@ -110,8 +110,13 @@ class ShopWizardDataSource extends BaseWizardDataSource
         $webstoreId = explode('_', $webstore)[1];
         $pluginSetId = explode('_', $pluginSet)[1];
 
+        if ($webstoreId === 'preview') {
+            $webstoreId = null;
+        }
+
+        /** @var ShopWizardConfigRepository $previewConfRepo */
         $previewConfRepo = pluginApp(ShopWizardConfigRepository::class);
-        $confToDelete = $previewConfRepo->getConfig($pluginSetId);
+        $confToDelete = $previewConfRepo->getConfig($pluginSetId, $webstoreId);
 
         if ($confToDelete instanceof ShopWizardPreviewConfiguration) {
             $previewConfRepo->deleteConfig($pluginSetId, $webstoreId, true);
