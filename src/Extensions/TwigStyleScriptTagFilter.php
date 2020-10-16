@@ -120,6 +120,14 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             if (!is_null($try)) {
                 $content = $try;
             }
+            else {
+                $this->getLogger(__CLASS__)->error(
+                    "IO::Debug.LayoutContainer_backtrackLimitError",
+                    [
+                        "content" => $content
+                    ]
+                );
+            }
         }
 
         //search for script tag
