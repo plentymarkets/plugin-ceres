@@ -26,3 +26,8 @@ Cypress.Commands.overwrite("visit", (originalFn, url, options = {}) =>
     options.qs = { env: "testing", ...options.qs };
     return originalFn(url, options);
 });
+
+Cypress.Commands.add("getByTestingAttr", (attr) =>
+{
+    return cy.get(`[data-testing='${attr}']`);
+});
