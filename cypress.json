@@ -1,10 +1,10 @@
 {
     "baseUrl": "http://master.plentymarkets.com/",
-    "fixturesFolder": "tools/cypress/fixtures",
-    "integrationFolder": "tools/cypress/integration",
-    "pluginsFile": "tools/cypress/plugins/index.js",
-    "supportFile": "tools/cypress/support/index.js",
-    "screenshotsFolder": "tools/cypress/screenshots",
-    "videosFolder": "tools/cypress/videos",
+    "fixturesFolder": "testing/cypress/fixtures",
+    "integrationFolder": "testing/cypress/integration",
+    "pluginsFile": "testing/cypress/plugins/index.js",
+    "supportFile": "testing/cypress/support/index.js",
+    "screenshotsFolder": "testing/cypress/screenshots",
+    "videosFolder": "testing/cypress/videos",
     "projectId": "a1vvhz"
 }
