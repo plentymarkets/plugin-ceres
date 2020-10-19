@@ -31,3 +31,8 @@ Cypress.Commands.add("getByTestingAttr", (attr) =>
 {
     return cy.get(`[data-testing='${attr}']`);
 });
+
+Cypress.Commands.add("getStore", (attr) =>
+{
+    return cy.window().its("vueApp.$store");
+});
