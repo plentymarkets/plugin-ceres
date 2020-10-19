@@ -79,7 +79,7 @@ const mutations =
             state.variationMarkInvalidProperties = !!markFields;
         },
 
-        setVariationPropertySurcharges(state, basePrice )
+        setVariationPropertySurcharges(state, basePrice)
         {
             if (state.variation.documents[0].data.properties)
             {
