@@ -5,5 +5,6 @@
     "pluginsFile": "tools/cypress/plugins/index.js",
     "supportFile": "tools/cypress/support/index.js",
     "screenshotsFolder": "tools/cypress/screenshots",
-    "videosFolder": "tools/cypress/videos"
+    "videosFolder": "tools/cypress/videos",
+    "projectId": "a1vvhz"
 }
