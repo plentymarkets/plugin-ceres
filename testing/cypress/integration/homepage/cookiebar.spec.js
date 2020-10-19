@@ -1,4 +1,4 @@
-// / <reference types="cypress" />
+/ <reference types="cypress" />
 context("Cookiebar", () =>
 {
     beforeEach(() =>
@@ -44,5 +44,58 @@ context("Cookiebar", () =>
         cy.reload();
         cy.getByTestingAttr("cookieBar").should("have.class", "cookie-bar");
         cy.getByTestingAttr("cookieBar").should("have.class", "out");
+    });
+
+    it("Should show more information", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookieBarShowMoreInformation").click();
+        cy.getByTestingAttr("cookieBar").get(".privacy-settings").should("exist");
+    });
+
+    it("Should hide more information", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookieBarShowMoreInformation").click();
+        cy.getByTestingAttr("cookieBarHideMoreInformation").should("exist");
+        cy.getByTestingAttr("cookieBarHideMoreInformation").click();
+        cy.getByTestingAttr("cookieBarShowMoreInformation").should("exist");
+    });
+
+    it.only("Should consent all on accept all", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookieBarAcceptAll").click();
+
+        let allConsent = false;
+
+        // iterate over the constent store module to check if everything is consented
+        cy.getStore().then(store =>
+        {
+            for (const constent in store.state.consents.consents)
+            {
+                for (const key in store.state.consents.consents[constent])
+                {
+                    if (!store.state.consents.consents[constent][key])
+                    {
+                        allConsent = false;
+                        return;
+                    }
+                    allConsent = true;
+                }
+                if (!allConsent)
+                {
+                    return;
+                }
+            }
+            expect(allConsent).to.be.true;
+        });
+    });
+
+    it("Should display toggles for the optional cookies", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookieBarAcceptAll").click();
+
     });
 });
