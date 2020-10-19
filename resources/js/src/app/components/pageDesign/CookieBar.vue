@@ -31,8 +31,8 @@
 
                 </div>
                 <div class="col-12 col-md-4 pt-3 pt-md-0">
-                    <button class="btn btn-primary btn-block btn-appearance" @click="acceptAll(); close()" data-testing="cookieBarAcceptAll">{{ $translate("Ceres::Template.cookieBarAcceptAll") }}</button>
-                    <button class="btn btn-default btn-block" @click="storeConsents(); close()" data-testing="cookieBarSave">{{ $translate("Ceres::Template.cookieBarSave") }}</button>
+                    <button class="btn btn-primary btn-block btn-appearance" @click="acceptAll(); close()" v-testing-attr:data-testing="'cookieBarAcceptAll'">{{ $translate("Ceres::Template.cookieBarAcceptAll") }}</button>
+                    <button class="btn btn-default btn-block" @click="storeConsents(); close()" v-testing-attr:data-testing="'cookieBarSave'">{{ $translate("Ceres::Template.cookieBarSave") }}</button>
                 </div>
 
             </div>
