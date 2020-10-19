@@ -193,7 +193,7 @@ const getters =
                     }
                     else
                     {
-                        sum += (property.surcharge || property.property.surcharge);
+                        sum += property.surcharge || property.property.surcharge;
                     }
                 }
             }
