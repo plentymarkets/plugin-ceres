@@ -98,4 +98,27 @@ context("Cookiebar", () =>
         cy.getByTestingAttr("cookieBarShowMoreInformation").click();
         cy.getByTestingAttr("cookieBar").get(".privacy-settings .custom-control").should("have.length", 2);
     });
+
+    it("Should consent group on toggle", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookieBarShowMoreInformation").click();
+        cy.getByTestingAttr("cookieBar").get(".privacy-settings .custom-control").first().click();
+
+        cy.getStore().then((store) =>
+        {
+            let isConsented = false;
+
+            for (const key in store.state.consents.consents.tracking)
+            {
+                isConsented = store.state.consents.consents.tracking[key];
+                if (!isConsented)
+                {
+                    break;
+                }
+            }
+
+            expect(isConsented).to.be.true;
+        });
+    });
 });
