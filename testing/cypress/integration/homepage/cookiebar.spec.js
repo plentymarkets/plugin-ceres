@@ -50,7 +50,7 @@ context("Cookiebar", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookieBarShowMoreInformation").click();
-        cy.getByTestingAttr("cookieBar").get(".privacy-settings").should("exist");
+        cy.getByTestingAttr("cookieBar").find(".privacy-settings").should("exist");
     });
 
     it("Should hide more information", () =>
@@ -96,14 +96,14 @@ context("Cookiebar", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookieBarShowMoreInformation").click();
-        cy.getByTestingAttr("cookieBar").get(".privacy-settings .custom-control").should("have.length", 2);
+        cy.getByTestingAttr("cookieBar").find(".privacy-settings .custom-control").should("have.length", 2);
     });
 
     it("Should consent group on toggle", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookieBarShowMoreInformation").click();
-        cy.getByTestingAttr("cookieBar").get(".privacy-settings .custom-control").first().click();
+        cy.getByTestingAttr("cookieBar").find(".privacy-settings .custom-control").first().click();
 
         cy.getStore().then((store) =>
         {
@@ -119,6 +119,31 @@ context("Cookiebar", () =>
             }
 
             expect(isConsented).to.be.true;
+        });
+    });
+
+    it("Should open more information for privacy settings and hide them again", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookieBarShowMoreInformation").click();
+
+        cy.get(".consent-group").first().find("[data-testing=privacySettingsShowMoreInformation]").should("exist");
+        cy.get(".consent-group").first().find("[data-testing=privacySettingsShowMoreInformation]").click();
+        cy.get(".consent-group").first().find("[data-testing=privacySettingsHideMoreInformation]").should("exist");
+        cy.get(".consent-group").first().find("[data-testing=privacySettingsHideMoreInformation]").click();
+        cy.get(".consent-group").first().find("[data-testing=privacySettingsShowMoreInformation]").should("exist");
+    });
+
+    it("Should consent a single privacy setting entry", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookieBarShowMoreInformation").click();
+        cy.get(".consent-group").eq(1).find("[data-testing=privacySettingsShowMoreInformation]").click();
+        cy.get(".consent-group").eq(1).find(".consent .custom-control").click();
+
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.consents.consents.tracking.googleAnalytics).to.be.true;
         });
     });
 });
