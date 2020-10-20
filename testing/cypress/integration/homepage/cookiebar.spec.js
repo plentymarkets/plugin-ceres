@@ -62,7 +62,7 @@ context("Cookiebar", () =>
         cy.getByTestingAttr("cookieBarShowMoreInformation").should("exist");
     });
 
-    it.only("Should consent all on accept all", () =>
+    it("Should consent all on accept all", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookieBarAcceptAll").click();
@@ -95,7 +95,7 @@ context("Cookiebar", () =>
     it("Should display toggles for the optional cookies", () =>
     {
         cy.location("pathname").should("eq", "/");
-        cy.getByTestingAttr("cookieBarAcceptAll").click();
-
+        cy.getByTestingAttr("cookieBarShowMoreInformation").click();
+        cy.getByTestingAttr("cookieBar").get(".privacy-settings .custom-control").should("have.length", 2);
     });
 });
