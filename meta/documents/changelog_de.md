@@ -1,5 +1,36 @@
 # Release Notes für Ceres
 
+## v5.0.14 (2020-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.13...5.0.14" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Benutzer, die das Text-Widget angepasst haben (beispielsweise durch eigenes CSS), sollten die Darstellung von Text-Widgets hinsichtlich der Abstände überprüfen.
+
+### Geändert
+
+- Es wurde überflüssiges JavaScript für die Bildersortierung aus den Komponenten `CategoryImageCarousel.vue` und `ItemImageCarousel.vue` entfernt.
+- Die Währung KES (Kenia-Schilling) wurde für die verfügbaren Währungen ergänzt.
+- Zusätzliche Sortierungen aus externen Plugins werden nun im Sortierungs-Widget angezeigt.
+- Bei Klick auf die "Kaufen"-Schaltfläche im Checkout werden die Eingaben des Nutzers nun sofort geprüft, bevor der Client mit dem Server interagiert.
+
+### Behoben
+
+- Die Darstellung von Währungen als Währungssymbol wurde an einigen Stellen nicht berücksichtigt. Dies wurde behoben.
+- Icons für Zahlungsarten und Versandarten wurden im Safari-Browser verzerrt dargestellt. Dies wurde behoben.
+- In der Kategorieansicht wurde das Meta-Tag `og:image` nicht korrekt befüllt. Dieses Verhalten wurde behoben.
+- Es kam zu einer falschen Darstellung der Summen, wenn sich ein inaktiver Artikel im Warenkorb befand. Dieses Verhalten wurde behoben.
+- Durch einen Fehler wurden bei verschiedenen Sortierungen im Live-Shopping-Widget immer die selben Daten angezeigt. Dies wurde behoben.
+- In der ShopBuilder-Vorlage für die Artikelansicht wurde für den mehrsprachigen Eintrag "Technische Daten" der Schlüssel `Ceres::Widget.dataFieldTextsTechnicalData` anstatt `Ceres::Template.singleItemTechnicalData` genutzt. Dies wurde behoben.
+- Die einstellbaren Außenabstände des Text-Widgets wurden auf den inneren Container des Widgets angewendet. Hierdurch verhielten sich Außen- und Innenabstände identisch. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.14 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/Widgets/Category/ItemSortingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2418/files#diff-457d3c37f4e91ce7e9b896280e97de47)
+- [src/Widgets/Category/ItemSortingWidget.php](https://github.com/plentymarkets/plugin-ceres/pull/2418/files#diff-b29141ef191aa2121e0995f64cf05edc)
+- [resources/views/Widgets/Common/InlineTextWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2445/files#diff-e7dc3611e423358f168f99f3a60b6bfa3d2af686cfee952aca2e93ca91a3be62)
+
 ## v5.0.13 (2020-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.12...5.0.13" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert

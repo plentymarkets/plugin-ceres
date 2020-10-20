@@ -1,5 +1,36 @@
 # Release Notes for Ceres
 
+## v5.0.14 (2020-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.13...5.0.14" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### ToDo
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- Users who have made changes to the text widget (i.e. through CSS) should check whether the margins of their text widgets need to be adjusted.
+
+### Changed
+
+- Redundant JavaScript for sorting images has been removed from the components `CategoryImageCarousel.vue` and `ItemImageCarousel.vue`.
+- The currency Kenyan Shilling (KES) has been added to the available currencies.
+- The sorting widget now also displays additional sorting provided by external plugins.
+- Upon clicking the "Purchase" button in the checkout, the user input is now checked immediately, before the client interacts with the server.
+
+### Fixed
+
+- Several places in the online store did not consider currency icons for displaying currencies.
+- In the Safari browser, the icons for payment providers and shipping service providers were contorted. This has been fixed.
+- The meta tag `og:image` was not correctly filled in in the category view. This behaviour has been fixed.
+- If the shopping cart contained an inactive item, incorrect totals were displayed. This behaviour has been fixed.
+- Due to an error, different sortings in live shopping widgets always displayed the same data. This has been fixed.
+- In the ShopBuilder preset for the item view, the translation key `Ceres::Widget.dataFieldTextsTechnicalData` was used for the multilingual entry "Technical Data" instead of `Ceres::Template.singleItemTechnicalData`. This has been fixed.
+- The adjustable margins of the text widget were applied to the inner container of the widget. Therefore, paddings and margins behaved identically. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.14 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/views/Widgets/Category/ItemSortingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2418/files#diff-457d3c37f4e91ce7e9b896280e97de47)
+- [src/Widgets/Category/ItemSortingWidget.php](https://github.com/plentymarkets/plugin-ceres/pull/2418/files#diff-b29141ef191aa2121e0995f64cf05edc)
+- [resources/views/Widgets/Common/InlineTextWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2445/files#diff-e7dc3611e423358f168f99f3a60b6bfa3d2af686cfee952aca2e93ca91a3be62)
+
 ## v5.0.13 (2020-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.12...5.0.13" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
