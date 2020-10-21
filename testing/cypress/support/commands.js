@@ -26,3 +26,13 @@ Cypress.Commands.overwrite("visit", (originalFn, url, options = {}) =>
     options.qs = { env: "testing", ...options.qs };
     return originalFn(url, options);
 });
+
+Cypress.Commands.add("getByTestingAttr", (attr) =>
+{
+    return cy.get(`[data-testing='${attr}']`);
+});
+
+Cypress.Commands.add("getStore", (attr) =>
+{
+    return cy.window().its("vueApp.$store");
+});
