@@ -36,3 +36,9 @@ Cypress.Commands.add("getStore", (attr) =>
 {
     return cy.window().its("vueApp.$store");
 });
+
+Cypress.Commands.add("clickElement", (attr) =>
+{
+    cy.getByTestingAttr(attr).should("exist");
+    return cy.getByTestingAttr(attr).click();
+});
