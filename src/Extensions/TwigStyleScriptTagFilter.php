@@ -114,7 +114,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             }
 
             // replace <style>..</style>, <style foo="bar">..</style>; ignore <style2>..</style2>
-            $try = preg_replace("/<style[^2]*>.*?<\\/script>/s", "", $content);
+            $try = preg_replace("/<style[^2]*>.*?<\\/style>/s", "", $content);
 
             // if the preg_replace returns null (in case of PREG_BACKTRACK_LIMIT_ERROR) do nothing
             if (!is_null($try)) {
