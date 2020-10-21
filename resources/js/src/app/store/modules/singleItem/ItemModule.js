@@ -87,7 +87,7 @@ const mutations =
                 {
                     if (!isNullOrUndefined(property.property.percentage) && (property.surcharge <= 0))
                     {
-                        property.property.surcharge = basePrice * percentage / 100;
+                        property.property.surcharge = basePrice * property.property.percentage / 100;
                     }
                 }
             }
@@ -181,9 +181,9 @@ const getters =
 
                 for (const property of addedProperties)
                 {
-                    if (!isNullOrUndefined(property.property.percentage))
+                    if (!isNullOrUndefined(property.property.percentage) && (property.surcharge <= 0))
                     {
-                        const surcharge = getters.variationBasePrice * percentage / 100;
+                        const surcharge = getters.variationBasePrice * property.property.percentage / 100;
 
                         sum += surcharge;
                     }
