@@ -31,8 +31,9 @@ context("Header topbar search", () =>
         
     });
 
-    it.only("should search for item by id", () => 
+    it("should search for item by id", () => 
     {
+        let itemName = 'Zweisitzer Amsterdam at Dawn';
         let search = 131;
 
         cy.clickElement("searchboxButton");
@@ -47,7 +48,7 @@ context("Header topbar search", () =>
         cy.location("pathname").should("eq", "/search");
 
         cy.get('.product-list').should('exist');
-        cy.get('.product-list').find('.thumb-title').should('contain', 'Zweisitzer Amsterdam at Dawn');
+        cy.get('.product-list').find('.thumb-title').should('contain', itemName);
         
     });
 
@@ -62,7 +63,6 @@ context("Header topbar search", () =>
 
         // wait for autosuggestion
         cy.server().route('GET', '/rest/io/item/search/autocomplete**').as('autocomplete');
-
 
         cy.wait('@autocomplete').then((xhr) => {
 
