@@ -64,9 +64,22 @@
                         </div>
                     </div>
 
-                    <a href="#" class="card-link text-primary text-appearance" @click="setGroupVisibility(consentGroup.key, true, $event)" v-if="!expandedGroups[consentGroup.key]">{{ $translate("Ceres::Template.privacySettingsMoreInformation") }}</a>
-                    <a href="#" class="card-link text-primary text-appearance" @click="setGroupVisibility(consentGroup.key, false, $event)" v-else>{{ $translate("Ceres::Template.privacySettingsLessInformation") }}</a>
-
+                    <a
+                        href="#"
+                        class="card-link text-primary text-appearance"
+                        @click="setGroupVisibility(consentGroup.key, true, $event)"
+                        v-if="!expandedGroups[consentGroup.key]"
+                        data-testing="privacySettingsShowMoreInformation">
+                        {{ $translate("Ceres::Template.privacySettingsMoreInformation") }}
+                    </a>
+                    <a
+                        href="#"
+                        class="card-link text-primary text-appearance"
+                        @click="setGroupVisibility(consentGroup.key, false, $event)"
+                        v-else
+                        data-testing="privacySettingsHideMoreInformation">>
+                        {{ $translate("Ceres::Template.privacySettingsLessInformation") }}
+                    </a>
                 </div>
             </div>
         </div>

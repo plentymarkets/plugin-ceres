@@ -28,6 +28,9 @@ window.$ = jQuery;
 import "bootstrap";
 import "owl.carousel";
 
+import { getUrlParams } from "./app/services/UrlService";
+window.ceresEnv = getUrlParams()["env"];
+
 // =========================
 // COMPONENTS
 // =========================
@@ -135,6 +138,7 @@ import "./app/directives/common/truncateTooltip";
 
 import "./app/directives/customer/logout";
 
+import "./app/directives/helper/testingAttr";
 import "./app/directives/helper/populateStore";
 import "./app/directives/helper/validate";
 import "./app/directives/helper/waitingAnimation";
