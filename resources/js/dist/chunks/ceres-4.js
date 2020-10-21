@@ -583,6 +583,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         }
       }
 
+      this.$store.commit("".concat(this.itemId, "/setVariationPropertySurcharges"), this.$store.getters["".concat(this.itemId, "/variationBasePrice")]);
       this.setVariationOrderProperty({
         propertyId: this.property.id,
         value: value
