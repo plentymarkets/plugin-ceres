@@ -309,7 +309,7 @@ var render = function() {
                             "text-primary text-appearance d-block d-md-inline-block",
                           attrs: {
                             href: "#",
-                            "data-testing": "'cookieBarShowMoreInformation'"
+                            "data-testing": "cookieBarShowMoreInformation"
                           },
                           on: {
                             click: function($event) {
@@ -339,7 +339,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary btn-block btn-appearance",
-                      attrs: { "data-testing": "'cookieBarAcceptAll'" },
+                      attrs: { "data-testing": "cookieBarAcceptAll" },
                       on: {
                         click: function($event) {
                           _vm.acceptAll()
@@ -362,7 +362,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-default btn-block",
-                      attrs: { "data-testing": "'cookieBarSave'" },
+                      attrs: { "data-testing": "cookieBarSave" },
                       on: {
                         click: function($event) {
                           _vm.storeConsents()
@@ -412,7 +412,7 @@ var render = function() {
                             "text-primary text-appearance d-inline-block mb-3",
                           attrs: {
                             href: "#",
-                            "data-testing": "'cookieBarHideMoreInformation'"
+                            "data-testing": "cookieBarHideMoreInformation"
                           },
                           on: {
                             click: function($event) {
@@ -441,7 +441,7 @@ var render = function() {
                           staticClass:
                             "btn btn-block btn-primary btn-appearance",
                           attrs: {
-                            "data-testing": "'cookieBarExpandedAcceptAll'"
+                            "data-testing": "cookieBarExpandedAcceptAll"
                           },
                           on: {
                             click: function($event) {
@@ -469,7 +469,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-block btn-block btn-default",
-                          attrs: { "data-testing": "'cookieBarExpandedSave'" },
+                          attrs: { "data-testing": "cookieBarExpandedSave" },
                           on: {
                             click: function($event) {
                               _vm.storeConsents()
