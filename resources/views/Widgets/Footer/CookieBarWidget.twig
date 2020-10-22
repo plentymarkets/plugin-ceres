@@ -15,7 +15,7 @@
                 :consent-groups="{{ Twig.print('get_consent_groups() | json_encode') }}"
                 {%- if spacingClasses | length > 0 %} classes="{{ spacingClasses }}"{% endif %}
                 {%- if inlineSpacings | length > 0 %} styles="{{ inlineSpacings }}"{% endif %}
-                {{ set_testing_attr("data-testing", "cookieBar") }}>
+                data-testing="cookieBar">
         </cookie-bar>
     </div>
 </div>
