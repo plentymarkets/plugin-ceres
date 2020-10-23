@@ -143,7 +143,7 @@ context("Cookiebar", () =>
 
         cy.getStore().then((store) =>
         {
-            expect(store.state.consents.consents.paypal["paypal-cookies"]).to.be.false;
+            expect(store.state.consents.consents.paypal["paypal-cookiesss"]).to.be.false;
         });
     });
 });
