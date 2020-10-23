@@ -1,6 +1,6 @@
-name: Parallel Cypress Tests
+# name: Parallel Cypress Tests
 
-on: [push]
+# on: [push]
 
 # jobs:
 #   test:
