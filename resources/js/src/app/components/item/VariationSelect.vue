@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="attributes.length || (Object.keys(possibleUnits).length > 1 && isContentVisible)" class="row">
+        <div v-if="attributes.length || (possibleUnitCombinationIds.length > 1 && isContentVisible)" class="row">
             <div class="col-12 variation-select" v-for="attribute in attributes">
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
@@ -60,18 +60,18 @@
             </div>
 
             <!-- units -->
-            <div class="col-12 variation-select" v-if="Object.keys(possibleUnits).length > 1 && isContentVisible">
+            <div class="col-12 variation-select" v-if="possibleUnitCombinationIds.length > 1 && isContentVisible">
                 <div class="input-unit">
                     <select class="custom-select" @change="selectUnit($event.target.value)">
                         <option
-                                v-for="(unit, unitId) in possibleUnits"
-                                :value="unitId"
-                                :selected="parseInt(unitId) === selectedUnit">
-                            <template v-if="isUnitSelectionValid(unitId)">
-                                {{ unit }}
+                                v-for="unitCombinationId in possibleUnitCombinationIds"
+                                :value="unitCombinationId"
+                                :selected="parseInt(unitCombinationId) === selectedUnit">
+                            <template v-if="isUnitSelectionValid(unitCombinationId)">
+                                {{ possibleUnits[unitCombinationId] }}
                             </template>
                             <template v-else>
-                                {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": unit }) }}
+                                {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": possibleUnits[unitCombinationId] }) }}
                             </template>
                         </option>
                     </select>
@@ -170,6 +170,7 @@ export default {
          */
         possibleUnits()
         {
+            // use an object, to make the entries unique
             const possibleUnits = {};
             const variations = this.forceContent ? this.variations : this.filterVariations(null, null, null, true);
 
@@ -179,6 +180,11 @@ export default {
             }
 
             return possibleUnits;
+        },
+
+        possibleUnitCombinationIds()
+        {
+            return this.transformPossibleUnits(this.possibleUnits).map(value => value[0]);
         },
 
         isContentVisible()
@@ -193,10 +199,6 @@ export default {
 
         attributes() {
             return this.currentVariationSelect && this.currentVariationSelect.attributes;
-        },
-
-        units() {
-            return this.currentVariationSelect && this.currentVariationSelect.units;
         },
 
         selectedAttributes() {
@@ -257,7 +259,7 @@ export default {
                 this.unsetInvalidSelection(attributeId, attributeValueId, unitId);
             }
 
-            this.lastContentCount = Object.keys(this.possibleUnits).length;
+            this.lastContentCount = this.possibleUnitCombinationIds.length;
         },
 
         /**
@@ -391,7 +393,7 @@ export default {
                 if (variation.unitCombinationId !== this.selectedUnit && !isNull(this.selectedUnit))
                 {
                     // when the unit dropdown isn't visible, it should have a lower weight for reset investigations
-                    const unitWeight = Object.keys(this.possibleUnits).length > 1 && this.isContentVisible ? 0.9 : 0.1;
+                    const unitWeight = this.possibleUnitCombinationIds.length > 1 && this.isContentVisible ? 0.9 : 0.1;
 
                     changes += unitWeight;
                 }
@@ -472,7 +474,7 @@ export default {
 
             if (invalidSelection.newUnit)
             {
-                if (this.lastContentCount > 1 && Object.keys(this.possibleUnits).length > 1 && !isNull(this.selectedUnit))
+                if (this.lastContentCount > 1 && this.possibleUnitCombinationIds.length > 1 && !isNull(this.selectedUnit))
                 {
                     messages.push(
                         this.$translate("Ceres::Template.singleItemNotAvailable", { name:
@@ -654,6 +656,39 @@ export default {
                 return this.$translate("Ceres::Template.singleItemPleaseSelect");
             }
             return this.$translate("Ceres::Template.singleItemNoSelection");
+        },
+
+        transformPossibleUnits(possibleUnits)
+        {
+            return Object.entries(possibleUnits).sort((unitA, unitB) => {
+                unitA = this.splitUnitName(unitA[1]);
+                unitB = this.splitUnitName(unitB[1]);
+                // order by unit
+                if (unitA[1] < unitB[1]) {
+                    return -1;
+                }
+                if (unitA[1] > unitB[1]) {
+                    return 1;
+                }
+                // order by content (count)
+                if (unitA[0] < unitB[0]) {
+                    return -1;
+                }
+                if (unitA[0] > unitB[0]) {
+                    return 1;
+                }
+                return 0;
+            });
+        },
+        splitUnitName(unitName) {
+            const unitNameSplit = unitName.split(" ");
+
+            if (!isNaN(unitNameSplit[0])) {
+                unitNameSplit[0] = unitNameSplit[0].replace(App.currencyPattern.separator_thousands, "");
+                unitNameSplit[0] = parseInt(unitNameSplit[0]);
+            }
+
+            return unitNameSplit;
         }
     },
 
