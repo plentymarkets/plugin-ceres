@@ -16,7 +16,7 @@ context("Header topbar currencies", () =>
         cy.clickElement("currency-select");
         cy.getByTestingAttr("USD").should("exist");
         cy.getByTestingAttr("USD").click();
-        cy.url().should('include', 'currency=USD');
+        cy.url().should("include", "currency=USD");
     });
 
 });

@@ -9,11 +9,11 @@ context("Header topbar languages", () =>
     it("should open languages and list languages", () =>
     {
         cy.clickElement("language-select");
-        cy.get('#countrySettings').should("have.class", "show");
-        cy.getByTestingAttr("lang-select-de").should("exist")
+        cy.get("#countrySettings").should("have.class", "show");
+        cy.getByTestingAttr("lang-select-de").should("exist");
     });
 
-    it("should change language to 'en'", () => 
+    it("should change language to 'en'", () =>
     {
         cy.clickElement("language-select");
 
