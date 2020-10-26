@@ -1984,7 +1984,11 @@ var render = function() {
     [
       _c("input", {
         staticClass: "form-check-input",
-        attrs: { type: "checkbox", id: "privacy-policy-accept" + _vm._uid },
+        attrs: {
+          type: "checkbox",
+          id: "privacy-policy-accept" + _vm._uid,
+          "data-testing": "privacy-policy-accept-register"
+        },
         domProps: { checked: _vm.value },
         on: {
           change: function($event) {
@@ -6738,6 +6742,7 @@ var render = function() {
                   }
                 ],
                 attrs: {
+                  "data-testing": "mailRegister",
                   type: "email",
                   name: "email",
                   autocomplete: "email",
@@ -6792,6 +6797,7 @@ var render = function() {
                                   }
                                 ],
                                 attrs: {
+                                  "data-testing": "passwordRegister",
                                   type: "password",
                                   name: "password",
                                   autocomplete: "new-password",
@@ -6872,7 +6878,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      4086647824
+                      686897883
                     )
                   }),
                   _vm._v(" "),
@@ -6912,7 +6918,8 @@ var render = function() {
                       name: "password-repeat",
                       autocomplete: "new-password",
                       id: "new-password-repeat-" + _vm._uid,
-                      "data-validate-ref": "#new-password-" + _vm._uid
+                      "data-validate-ref": "#new-password-" + _vm._uid,
+                      "data-testing": "repeatPasswordRegister"
                     },
                     domProps: { value: _vm.passwordRepeat },
                     on: {
@@ -7044,7 +7051,10 @@ var render = function() {
             {
               staticClass: "btn btn-appearance btn-primary btn-medium mt-3",
               class: _vm.buttonSizeClass,
-              attrs: { disabled: _vm.isDisabled }
+              attrs: {
+                disabled: _vm.isDisabled,
+                "data-testing": "register-submit"
+              }
             },
             [
               _vm._v(
