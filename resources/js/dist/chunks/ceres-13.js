@@ -233,7 +233,6 @@ var render = function() {
                     }
                   ],
                   attrs: {
-                    "data-testing": "email-login",
                     type: "email",
                     name: "email",
                     autocomplete: "email",
@@ -285,7 +284,6 @@ var render = function() {
                     }
                   ],
                   attrs: {
-                    "data-testing": "password-login",
                     type: "password",
                     name: "password",
                     autocomplete: "current-password",
@@ -361,10 +359,7 @@ var render = function() {
                     { "float-right": !_vm.modalElement },
                     _vm.buttonSizeClass
                   ],
-                  attrs: {
-                    "data-testing": "submit-login",
-                    disabled: _vm.isDisabled
-                  },
+                  attrs: { disabled: _vm.isDisabled },
                   on: {
                     click: function($event) {
                       $event.preventDefault()

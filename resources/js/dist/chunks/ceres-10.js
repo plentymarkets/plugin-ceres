@@ -600,7 +600,6 @@ var render = function() {
                   "div",
                   {
                     staticClass: "btn btn-sm text-danger p-0",
-                    attrs: { "data-testing": "remove-wlist-item" },
                     on: {
                       click: function($event) {
                         return _vm.removeItem()

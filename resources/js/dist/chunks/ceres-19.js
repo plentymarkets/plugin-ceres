@@ -356,10 +356,7 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    {
-                      class: { "font-weight-bold": !_vm.showNetPrices },
-                      attrs: { "data-testing": "totals-price" }
-                    },
+                    { class: { "font-weight-bold": !_vm.showNetPrices } },
                     [
                       _vm._v(
                         "\n                    " +
