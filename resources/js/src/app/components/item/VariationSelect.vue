@@ -285,7 +285,7 @@ export default {
 
         getTooltip(attribute, attributeValue)
         {
-            if(!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId))
+            if(!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId, true))
             {
                 return this.getInvalidOptionTooltip(attribute.attributeId, attributeValue.attributeValueId);
             }
