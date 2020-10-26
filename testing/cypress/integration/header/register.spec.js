@@ -8,19 +8,19 @@ context("Header topbar registration", () =>
 
     it("should open quick registration modal", () => 
     {
-        cy.clickElement("registerSelect");
+        cy.clickElement("register-select");
     });
 
     it("should register a new user successfuly", () => 
     {
 
-        cy.clickElement("registerSelect");
+        cy.clickElement("register-select");
 
         let mail = `user${new Date().valueOf()}@plentye2etest.de`;
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type(mail, {delay: 40});
-        cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
-        cy.getByTestingAttr('repeatPasswordRegister').type(password, {delay: 30});
+        cy.getByTestingAttr('mail-register').type(mail, {delay: 40});
+        cy.getByTestingAttr('password-register').type(password, {delay: 30});
+        cy.getByTestingAttr('repeat-password-register').type(password, {delay: 30});
         cy.getByTestingAttr('privacy-policy-accept-register').click();
 
         // add alias to register function
@@ -45,12 +45,12 @@ context("Header topbar registration", () =>
     it("should fail to register a new user | mail already in use", () => 
     {
 
-        cy.clickElement("registerSelect");
+        cy.clickElement("register-select");
 
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type('plentytest@plenty.de', {delay: 40});
-        cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
-        cy.getByTestingAttr('repeatPasswordRegister').type(password, {delay: 30});
+        cy.getByTestingAttr('mail-register').type('plentytest@plenty.de', {delay: 40});
+        cy.getByTestingAttr('password-register').type(password, {delay: 30});
+        cy.getByTestingAttr('repeat-password-register').type(password, {delay: 30});
         cy.getByTestingAttr('privacy-policy-accept-register').click();
 
         // add alias to register function
@@ -77,30 +77,30 @@ context("Header topbar registration", () =>
     it("should fail to register a new user | passwords dont match", () => 
     {
 
-        cy.clickElement("registerSelect");
+        cy.clickElement("register-select");
 
         let mail = 'plentytest@plenty.de';
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type(mail, {delay: 40});
-        cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
-        cy.getByTestingAttr('repeatPasswordRegister').type('wrongPassword1337', {delay: 30});
+        cy.getByTestingAttr('mail-register').type(mail, {delay: 40});
+        cy.getByTestingAttr('password-register').type(password, {delay: 30});
+        cy.getByTestingAttr('repeat-password-register').type('wrongPassword1337', {delay: 30});
         cy.getByTestingAttr('privacy-policy-accept-register').click();
         cy.getByTestingAttr('register-submit').click();
 
-        cy.getByTestingAttr('repeatPasswordRegister').parent().should("have.class", "error");
+        cy.getByTestingAttr('repeat-password-register').parent().should("have.class", "error");
         
     });
 
     it("should fail to register a new user | privacy policy not accepted", () => 
     {
 
-        cy.clickElement("registerSelect");
+        cy.clickElement("register-select");
 
         let mail = 'plentytest@plenty.de';
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type(mail, {delay: 30});
-        cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
-        cy.getByTestingAttr('repeatPasswordRegister').type(password, {delay: 30});
+        cy.getByTestingAttr('mail-register').type(mail, {delay: 30});
+        cy.getByTestingAttr('password-register').type(password, {delay: 30});
+        cy.getByTestingAttr('repeat-password-register').type(password, {delay: 30});
         cy.getByTestingAttr('register-submit').click();
 
         cy.getByTestingAttr('privacy-policy-accept-register').parent().should("have.class", "error");
@@ -110,18 +110,18 @@ context("Header topbar registration", () =>
     it("should fail to register a new user | no vaild mail pattern", () => 
     {
 
-        cy.clickElement("registerSelect");
+        cy.clickElement("register-select");
 
         let mail = 'plentytest@plenty';
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type(mail, {delay: 40});
-        cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
-        cy.getByTestingAttr('repeatPasswordRegister').type(password, {delay: 30});
+        cy.getByTestingAttr('mail-register').type(mail, {delay: 40});
+        cy.getByTestingAttr('password-register').type(password, {delay: 30});
+        cy.getByTestingAttr('repeat-password-register').type(password, {delay: 30});
         cy.getByTestingAttr('privacy-policy-accept-register').click();
 
         cy.getByTestingAttr('register-submit').click();
 
-        cy.getByTestingAttr('mailRegister').parent().should("have.class", "error");
+        cy.getByTestingAttr('mail-register').parent().should("have.class", "error");
         
     });
 });

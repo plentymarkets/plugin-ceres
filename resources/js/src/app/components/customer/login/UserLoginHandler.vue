@@ -19,7 +19,7 @@
             </a>
             <template v-if="showRegistration">
                 <span class="pipe" v-if="!showLogin"></span>
-                <a class="nav-link" data-testing="registerSelect" :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="createRegisterModal(); unmarkInputFields();" >
+                <a class="nav-link" data-testing="register-select" :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="createRegisterModal(); unmarkInputFields();" >
                     <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
                     <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginRegister") }}</span>
                 </a>

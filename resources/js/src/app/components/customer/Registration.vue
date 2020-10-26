@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="input-unit" data-validate="mail">
-                    <input data-testing="mailRegister" type="email" name="email" autocomplete="email" :id="'email'+_uid" v-model="username" data-autofocus>
+                    <input data-testing="mail-register" type="email" name="email" autocomplete="email" :id="'email'+_uid" v-model="username" data-autofocus>
                     <label :for="'email'+_uid">{{ $translate("Ceres::Template.regEmail") }}*</label>
                 </div>
             </div>
@@ -12,7 +12,7 @@
                 <div class="input-unit" :class="{'no-bottom media-xs-d': modalElement}" data-validate="password" ref="passwordInput">
                     <popper v-cloak trigger="focus" placement="bottom" ref="passwordHint">
                         <template #handle>
-                            <input data-testing="passwordRegister" type="password" name="password" autocomplete="new-password" :id="'new-password-' + _uid" v-model="password">
+                            <input data-testing="password-register" type="password" name="password" autocomplete="new-password" :id="'new-password-' + _uid" v-model="password">
                         </template>
 
                         <template #title>
@@ -36,7 +36,7 @@
 
             <div class="col-sm-6 input-unit-group" v-if="!guestMode">
                 <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="ref">
-                    <input type="password" name="password-repeat" autocomplete="new-password" :id="'new-password-repeat-' + _uid" v-model="passwordRepeat" :data-validate-ref="'#new-password-' + _uid" data-testing="repeatPasswordRegister">
+                    <input type="password" name="password-repeat" autocomplete="new-password" :id="'new-password-repeat-' + _uid" v-model="passwordRepeat" :data-validate-ref="'#new-password-' + _uid" data-testing="repeat-password-register">
                     <label :for="'new-password-repeat' + _uid">{{ $translate("Ceres::Template.regRepeatPassword") }}*</label>
                 </div>
             </div>
