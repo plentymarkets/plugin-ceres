@@ -8,7 +8,7 @@ context("Header topbar search", () =>
 
     it("should check for search bar", () => 
     {
-        cy.clickElement("searchboxButton");
+        cy.clickElement("searchbox-select");
     });
 
     it("should search for item by name", () => 
@@ -16,7 +16,7 @@ context("Header topbar search", () =>
         let search = 'Loungesessel Herkules';
 
 
-        cy.clickElement("searchboxButton");
+        cy.clickElement("searchbox-select");
         cy.get('.search-input').should('exist');
 
         cy.get('.search-input').type(search, {delay: 35});
@@ -37,7 +37,7 @@ context("Header topbar search", () =>
         let itemName = 'Loungesessel Herkules';
         let search = 116;
 
-        cy.clickElement("searchboxButton");
+        cy.clickElement("searchbox-select");
         cy.get('.search-input').should('exist');
 
         cy.get('.search-input').type(search, {delay: 35});
@@ -58,7 +58,7 @@ context("Header topbar search", () =>
         let itemName = 'Loungesessel Herkules';
         let itemUrl = '/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/'
 
-        cy.clickElement("searchboxButton");
+        cy.clickElement("searchbox-select");
         cy.get('.search-input').should('exist');
 
         cy.get('.search-input').type(itemName, {delay: 35});

@@ -8,12 +8,12 @@ context("Header topbar currencies", () =>
 
     it("should open currencies on click", () =>
     {
-        cy.clickElement("currencySelect");
+        cy.clickElement("currency-select");
     });
 
     it("should open currencies and select USD as currency", () =>
     {
-        cy.clickElement("currencySelect");
+        cy.clickElement("currency-select");
         cy.getByTestingAttr("USD").should("exist");
         cy.getByTestingAttr("USD").click();
         cy.url().should('include', 'currency=USD');

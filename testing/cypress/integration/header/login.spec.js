@@ -8,20 +8,20 @@ context("Header topbar login", () =>
 
     it("should open login modal", () =>
     {
-        cy.clickElement("loginSelect");
+        cy.clickElement("login-select");
     });
 
     it("should login successfuly", () =>
     {
-        cy.clickElement("loginSelect");
+        cy.clickElement("login-select");
 
         // set login data into inputs and submit form
-        cy.getByTestingAttr('emailLogin').type('plentytest@plenty.de', {delay: 30});
-        cy.getByTestingAttr('passwordLogin').type('Testuser1234', {delay: 30});
+        cy.getByTestingAttr('email-login').type('plentytest@plenty.de', {delay: 30});
+        cy.getByTestingAttr('password-login').type('Testuser1234', {delay: 30});
 
         cy.server().route('POST', '/rest/io/customer/login').as('loginUser');
 
-        cy.getByTestingAttr('submitLogin').click();
+        cy.getByTestingAttr('submit-login').click();
 
         // wait for login call
         cy.wait('@loginUser').then((xhr) => {
@@ -39,15 +39,15 @@ context("Header topbar login", () =>
 
     it("should fail to login", () =>
     {
-        cy.clickElement("loginSelect");
+        cy.clickElement("login-select");
 
         // set login data into inputs and submit form
-        cy.getByTestingAttr('emailLogin').type('plentytest@plenty.de', {delay: 30});
-        cy.getByTestingAttr('passwordLogin').type('wrongpassword', {delay: 30});
+        cy.getByTestingAttr('email-login').type('plentytest@plenty.de', {delay: 30});
+        cy.getByTestingAttr('password-login').type('wrongpassword', {delay: 30});
 
         cy.server().route('POST', '/rest/io/customer/login').as('loginUser');
 
-        cy.getByTestingAttr('submitLogin').click();
+        cy.getByTestingAttr('submit-login').click();
 
         // wait for login call
         cy.wait('@loginUser').then((xhr) => {
