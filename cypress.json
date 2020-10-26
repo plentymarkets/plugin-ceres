@@ -1,5 +1,5 @@
 {
-    "baseUrl": "http://master.plentymarkets.com/",
+    "baseUrl": "https://2x3z2pucy2z9.c01-16.plentymarkets.com/",
     "fixturesFolder": "testing/cypress/fixtures",
     "integrationFolder": "testing/cypress/integration",
     "pluginsFile": "testing/cypress/plugins/index.js",

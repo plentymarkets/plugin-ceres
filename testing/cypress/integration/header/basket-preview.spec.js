@@ -19,7 +19,7 @@ context("Header topbar currencies", () =>
 
     it("should add item to basket preview", () =>
     {
-        let itemUrl = "/wohnzimmer/ronny_1339";
+        let itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
         cy.visit(itemUrl);
 
         // wait for page to load
@@ -36,9 +36,9 @@ context("Header topbar currencies", () =>
         cy.get('.basket-item').should('exist');
     });
 
-    it.only("should add item to basket and show correct price in header", () =>
+    it("should add item to basket and show correct price in header", () =>
     {
-        let itemUrl = "/wohnzimmer/ronny_1339";
+        let itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
         cy.visit(itemUrl);
 
         // wait for page to load

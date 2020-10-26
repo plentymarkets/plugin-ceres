@@ -13,7 +13,7 @@ context("Header topbar search", () =>
 
     it("should search for item by name", () => 
     {
-        let search = 'Zweisitzer Amsterdam at Dawn';
+        let search = 'Loungesessel Herkules';
 
         cy.clickElement("searchboxButton");
         cy.get('.search-input').should('exist');
@@ -33,8 +33,8 @@ context("Header topbar search", () =>
 
     it("should search for item by id", () => 
     {
-        let itemName = 'Zweisitzer Amsterdam at Dawn';
-        let search = 131;
+        let itemName = 'Loungesessel Herkules';
+        let search = 116;
 
         cy.clickElement("searchboxButton");
         cy.get('.search-input').should('exist');
@@ -54,8 +54,8 @@ context("Header topbar search", () =>
 
     it("should search for item with autosuggestion", () => 
     {
-        let itemName = 'Zweisitzer Amsterdam at Dawn';
-        let itemUrl = '/wohnzimmer/sofas/zweisitzer-amsterdam-at-dawn_131'
+        let itemName = 'Loungesessel Herkules';
+        let itemUrl = '/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/'
 
         cy.clickElement("searchboxButton");
         cy.get('.search-input').should('exist');

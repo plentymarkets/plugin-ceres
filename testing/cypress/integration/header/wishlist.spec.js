@@ -10,13 +10,13 @@ context("Header topbar wishlist", () =>
     {
         cy.get('.control-wish-list > a').should('exist');
         cy.get('.control-wish-list > a').click();
-        cy.location("pathname").should("eq", "/wish-list");
+        cy.location("pathname").should("eq", "/wish-list/");
     });
 
     function addItemToWishList()
     {
-        let itemUrl = "/wohnzimmer/ronny_1339";
-        let wishlistUrl = "/wish-list";
+        let itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
+        let wishlistUrl = "/wish-list/";
         cy.visit(itemUrl);
 
         // wait for page to load

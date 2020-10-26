@@ -19,7 +19,7 @@ context("Header topbar languages", () =>
 
         // select en as shop language
         cy.getByTestingAttr("lang-select-en").click();
-        cy.location("pathname").should("eq", "/en");
+        cy.location("pathname").should("eq", "/en/");
 
         // lang icon in topbar should be en
         cy.getByTestingAttr("languageToggle").children().first().should("have.class", "flag-icon-en");
