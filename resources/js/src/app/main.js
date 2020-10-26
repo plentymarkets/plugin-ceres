@@ -223,8 +223,6 @@ if ( headerParent )
 
     let headerHeight = 0;
 
-    const isUnfixedElement = [];
-
     // Calculate top offset for vue-app node because header is not part of document flow
     function calculateBodyOffset()
     {
@@ -254,8 +252,6 @@ if ( headerParent )
 
                 elem.style.zIndex = zIndex;
                 zIndex--;
-
-                isUnfixedElement.push(elem.classList.contains("unfixed"));
             }
         }
     }
@@ -302,7 +298,7 @@ if ( headerParent )
                 elem.style.position = "absolute";
 
                 // Element is unfixed and should scroll indefinetly
-                if (isUnfixedElement[i])
+                if (elem.classList.contains("unfixed"))
                 {
                     elem.style.top = offset + "px";
                 }
@@ -344,22 +340,18 @@ if ( headerParent )
         prepareHeaderElements();
         scrollHeaderElements();
 
-        // Attach scroll handler only if unfixed header elements exist
-        if (isUnfixedElement.indexOf(true) != -1)
+        let timeout;
+
+        window.addEventListener("scroll", function()
         {
-            window.addEventListener("scroll", function()
+            if (timeout)
             {
-                let timeout;
+                window.cancelAnimationFrame(timeout);
+            }
 
-                if (timeout)
-                {
-                    window.cancelAnimationFrame(timeout);
-                }
+            timeout = window.requestAnimationFrame(scrollHeaderElements);
 
-                timeout = window.requestAnimationFrame(scrollHeaderElements);
-
-            }, detectPassiveEvents() ? { passive: true } : false);
-        }
+        }, detectPassiveEvents() ? { passive: true } : false);
     });
 
     if (document.fonts)
