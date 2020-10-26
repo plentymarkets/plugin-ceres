@@ -21,7 +21,7 @@
                     <dt :class="{ 'font-weight-bold': !showNetPrices }">
                         {{ $translate("Ceres::Template.basketValue") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': !showNetPrices }">
+                    --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="totals-price">
                         {{ calculateBaseValue(basket.itemSum, basket.basketRebate)| currency  }}
                     </dd>
                 </template>

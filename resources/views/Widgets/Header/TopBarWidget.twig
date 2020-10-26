@@ -105,6 +105,7 @@
                             <li class="list-inline-item dropdown control-languages">
                                 <a class="nav-link"
                                    data-toggle="collapse"
+                                   data-testing="language-select"
                                    href="#countrySettings"
                                    aria-expanded="false"
                                    aria-controls="countrySettings"
@@ -121,7 +122,8 @@
                                    href="#currencySelect"
                                    aria-expanded="false"
                                    aria-controls="currencySelect"
-                                   data-parent="#controlsList">
+                                   data-parent="#controlsList"
+                                   data-testing="currency-select">
                                     <span>{{ Twig.print("currencyData") }}</span>
                                 </a>
                             </li>
@@ -136,6 +138,7 @@
                                     href="#searchBox"
                                     aria-expanded="false"
                                     aria-controls="searchBox"
+                                    data-testing="searchbox-select"
                                     data-parent="#controlsList">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
                                 </a>
@@ -258,7 +261,7 @@
                                     {{ Twig.for("currency", Twig.call("services.checkout.getCurrencyList")) }}
                                     {{ Twig.if("currency.name in activeCurrencies or \"all\" in activeCurrencies or currency.name == activeCurrency.name") }}
                                         <li class="col-2 px-0{{ Twig.if("currency.name == activeCurrency.name") }} active{{ Twig.endif() }}">
-                                            <a class="nav-link" href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
+                                            <a class="nav-link" data-testing="{{ Twig.print("currency.name") }}" href="{{ Twig.print("queryString({currency: currency.name})") }}" rel="nofollow">
                                                 {{ Twig.if("currencyFormatSelect == 'all'") }}
                                                     {{ Twig.print("currency.name") }} <br class="d-block d-sm-none" />({{ Twig.print("currency.symbol") }})
                                                 {{ Twig.else() }}
@@ -299,7 +302,8 @@
                                                     {{ Twig.elseif("language != defaultLanguage") }}
                                                         {{ Twig.set("url", "'/' ~ language ~ urls.trailingSlashSuffix") }}
                                                     {{ Twig.endif() }}
-                                                    <a class="nav-link" href="{{ Twig.print("url") }}" data-update-url>
+                                                    <a class="nav-link" href="{{ Twig.print("url") }}" 
+                                                        data-testing="lang-select-{{ Twig.print("language") }}" data-update-url>
                                                         <i class="flag-icon flag-icon-{{ Twig.print("language") }}"></i>
                                                         {{ Twig.print('trans("Ceres::Template.header" ~ language | capitalize)') }}
                                                     </a>

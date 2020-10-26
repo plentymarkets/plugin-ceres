@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="autocompleteResult && autocompleteResult.length">
-            <div>
+            <div data-testing="autocomplete-list">
                 <a
                     v-for="(item, index) in autocompleteResult"
                     class="autocomplete-suggestion"
