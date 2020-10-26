@@ -127,23 +127,23 @@ context("Cookiebar", () =>
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookieBarShowMoreInformation").click();
 
-        cy.get(".consent-group").first().find("[data-testing=privacySettingsShowMoreInformation]").should("exist");
-        cy.get(".consent-group").first().find("[data-testing=privacySettingsShowMoreInformation]").click();
-        cy.get(".consent-group").first().find("[data-testing=privacySettingsHideMoreInformation]").should("exist");
-        cy.get(".consent-group").first().find("[data-testing=privacySettingsHideMoreInformation]").click();
-        cy.get(".consent-group").first().find("[data-testing=privacySettingsShowMoreInformation]").should("exist");
+        cy.get(".consent-group").first().find("[data-testing=privacy-settings-show-more-information]").should("exist");
+        cy.get(".consent-group").first().find("[data-testing=privacy-settings-show-more-information]").click();
+        cy.get(".consent-group").first().find("[data-testing=privacy-settings-hide-more-information]").should("exist");
+        cy.get(".consent-group").first().find("[data-testing=privacy-settings-hide-more-information]").click();
+        cy.get(".consent-group").first().find("[data-testing=privacy-settings-show-more-information]").should("exist");
     });
 
     it("Should consent a single privacy setting entry", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookieBarShowMoreInformation").click();
-        cy.get(".consent-group").eq(0).find("[data-testing=privacySettingsShowMoreInformation]").click();
+        cy.get(".consent-group").eq(0).find("[data-testing=privacy-settings-show-more-information]").click();
         cy.get(".consent-group").eq(0).find(".consent .custom-control").click();
 
         cy.getStore().then((store) =>
         {
-            expect(store.state.consents.consents.paypal["paypal-cookiesss"]).to.be.false;
+            expect(store.state.consents.consents.paypal["paypal-cookies"]).to.be.false;
         });
     });
 });
