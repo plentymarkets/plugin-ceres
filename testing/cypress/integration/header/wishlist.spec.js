@@ -29,14 +29,14 @@ context("Header topbar wishlist", () =>
 
         cy.wait('@addToWishlist');
 
-        cy.server().route('GET', '/rest/io/itemWishList?templateType=wish-list').as('wishlistItems');
-
         cy.get('.control-wish-list > a').should('exist');
         cy.get('.control-wish-list > a').click();
 
+        // wait for page to load
+        cy.wait(2000);
+        
         cy.location("pathname").should("eq", wishlistUrl);
 
-        cy.wait('@wishlistItems');
 
         // check if there is an item in the wishlist
         cy.get('.basket-item').should('exist');

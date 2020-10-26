@@ -15,16 +15,17 @@ context("Header topbar search", () =>
     {
         let search = 'Loungesessel Herkules';
 
+
         cy.clickElement("searchboxButton");
         cy.get('.search-input').should('exist');
-        cy.get('.search-input').type(search, {delay: 15});
 
-        // wait for autosuggestion
-        cy.server().route('GET', '/rest/io/item/search/autocomplete**').as('autocomplete');
+        cy.get('.search-input').type(search, {delay: 35});
+
+        cy.server().route('GET', '/rest/io/item/search/autocomplete/**').as('autocomplete');
         cy.wait('@autocomplete');
 
         cy.get('.search-input').type('{enter}', {delay: 15});
-        cy.location("pathname").should("eq", "/search");
+        cy.location("pathname").should("eq", "/search/");
 
         cy.get('.product-list').should('exist');
         cy.get('.product-list').find('.thumb-title').should('contain',search);
@@ -38,14 +39,14 @@ context("Header topbar search", () =>
 
         cy.clickElement("searchboxButton");
         cy.get('.search-input').should('exist');
-        cy.get('.search-input').type(search, {delay: 15});
 
-        // wait for autosuggestion
-        cy.server().route('GET', '/rest/io/item/search/autocomplete**').as('autocomplete');
+        cy.get('.search-input').type(search, {delay: 35});
+
+        cy.server().route('GET', '/rest/io/item/search/autocomplete/**').as('autocomplete');
         cy.wait('@autocomplete');
 
-        cy.get('.search-input').type('{enter}', {delay: 15});
-        cy.location("pathname").should("eq", "/search");
+        cy.get('.search-input').type('{enter}', {delay: 35});
+        cy.location("pathname").should("eq", "/search/");
 
         cy.get('.product-list').should('exist');
         cy.get('.product-list').find('.thumb-title').should('contain', itemName);
@@ -59,10 +60,10 @@ context("Header topbar search", () =>
 
         cy.clickElement("searchboxButton");
         cy.get('.search-input').should('exist');
-        cy.get('.search-input').type(itemName, {delay: 15});
 
-        // wait for autosuggestion
-        cy.server().route('GET', '/rest/io/item/search/autocomplete**').as('autocomplete');
+        cy.get('.search-input').type(itemName, {delay: 35});
+
+        cy.server().route('GET', '/rest/io/item/search/autocomplete/**').as('autocomplete');
 
         cy.wait('@autocomplete').then((xhr) => {
 

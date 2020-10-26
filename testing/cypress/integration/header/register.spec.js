@@ -18,7 +18,7 @@ context("Header topbar registration", () =>
 
         let mail = `user${new Date().valueOf()}@plentye2etest.de`;
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type(mail, {delay: 30});
+        cy.getByTestingAttr('mailRegister').type(mail, {delay: 40});
         cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
         cy.getByTestingAttr('repeatPasswordRegister').type(password, {delay: 30});
         cy.getByTestingAttr('privacy-policy-accept-register').click();
@@ -48,7 +48,7 @@ context("Header topbar registration", () =>
         cy.clickElement("registerSelect");
 
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type('plentytest@plenty.de', {delay: 30});
+        cy.getByTestingAttr('mailRegister').type('plentytest@plenty.de', {delay: 40});
         cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
         cy.getByTestingAttr('repeatPasswordRegister').type(password, {delay: 30});
         cy.getByTestingAttr('privacy-policy-accept-register').click();
@@ -81,7 +81,7 @@ context("Header topbar registration", () =>
 
         let mail = 'plentytest@plenty.de';
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type(mail, {delay: 30});
+        cy.getByTestingAttr('mailRegister').type(mail, {delay: 40});
         cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
         cy.getByTestingAttr('repeatPasswordRegister').type('wrongPassword1337', {delay: 30});
         cy.getByTestingAttr('privacy-policy-accept-register').click();
@@ -114,7 +114,7 @@ context("Header topbar registration", () =>
 
         let mail = 'plentytest@plenty';
         let password = 'Testuser1234';
-        cy.getByTestingAttr('mailRegister').type(mail, {delay: 30});
+        cy.getByTestingAttr('mailRegister').type(mail, {delay: 40});
         cy.getByTestingAttr('passwordRegister').type(password, {delay: 30});
         cy.getByTestingAttr('repeatPasswordRegister').type(password, {delay: 30});
         cy.getByTestingAttr('privacy-policy-accept-register').click();
