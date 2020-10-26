@@ -254,6 +254,7 @@ export default {
                 }
             }
 
+            this.$store.commit(`${this.itemId}/setVariationPropertySurcharges`, this.$store.getters[`${this.itemId}/variationBasePrice`]);
             this.setVariationOrderProperty({ propertyId: this.property.id, value: value });
         },
 

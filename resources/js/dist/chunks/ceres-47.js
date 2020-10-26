@@ -464,7 +464,7 @@ var render = function() {
                       staticClass: "card-link text-primary text-appearance",
                       attrs: {
                         href: "#",
-                        "data-testing": "privacySettingsShowMoreInformation"
+                        "data-testing": "privacy-settings-show-more-information"
                       },
                       on: {
                         click: function($event) {
@@ -494,7 +494,7 @@ var render = function() {
                       staticClass: "card-link text-primary text-appearance",
                       attrs: {
                         href: "#",
-                        "data-testing": "privacySettingsHideMoreInformation"
+                        "data-testing": "privacy-settings-hide-more-information"
                       },
                       on: {
                         click: function($event) {
