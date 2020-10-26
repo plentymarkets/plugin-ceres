@@ -26,11 +26,10 @@ context("Header topbar login", () =>
         // wait for login call
         cy.wait("@loginUser").then((xhr) =>
         {
-
             expect(xhr.status).to.eql(200);
 
             // wait for vue store to init after page reload
-            cy.wait(5000);
+            cy.wait(1000);
             cy.getStore().then((store) =>
             {
                 expect(store.getters.isLoggedIn).to.be.true;
@@ -53,16 +52,7 @@ context("Header topbar login", () =>
         // wait for login call
         cy.wait("@loginUser").then((xhr) =>
         {
-
             expect(xhr.status).to.eql(401);
-
-            // wait for vue store to init after page reload
-            cy.wait(5000);
-            cy.getStore().then((store) =>
-            {
-                expect(store.getters.isLoggedIn).to.be.false;
-            });
         });
     });
-
 });

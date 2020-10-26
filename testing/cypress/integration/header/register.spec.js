@@ -36,7 +36,7 @@ context("Header topbar registration", () =>
             expect(xhr.status).to.eql(200);
 
             // wait for vue store to init after page reload
-            cy.wait(5000);
+            cy.wait(1500);
             cy.getStore().then((store) =>
             {
                 expect(store.getters.isLoggedIn).to.be.true;
@@ -64,17 +64,8 @@ context("Header topbar registration", () =>
 
         cy.wait("@registerUser").then((xhr) =>
         {
-
-
             // email already in use
             expect(xhr.status).to.eql(226);
-
-            // wait for vue store to init after page reload
-            cy.wait(5000);
-            cy.getStore().then((store) =>
-            {
-                expect(store.getters.isLoggedIn).to.be.false;
-            });
         });
 
     });

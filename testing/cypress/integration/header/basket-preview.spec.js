@@ -23,8 +23,6 @@ context("Header topbar currencies", () =>
 
         cy.visit(itemUrl);
 
-        // wait for page to load
-        cy.wait(2000);
 
         cy.get(".add-to-basket-container > button").should("exist");
         cy.get(".add-to-basket-container > button").click();
@@ -43,8 +41,6 @@ context("Header topbar currencies", () =>
 
         cy.visit(itemUrl);
 
-        // wait for page to load
-        cy.wait(2000);
 
         cy.get(".add-to-basket-container > button").should("exist");
         cy.get(".add-to-basket-container > button").click();
@@ -53,8 +49,6 @@ context("Header topbar currencies", () =>
         cy.get(".control-basket > a").click();
 
         cy.get("body").should("have.class", "basket-open");
-
-        cy.wait(2000);
 
         cy.get(".basket-item").should("exist");
 

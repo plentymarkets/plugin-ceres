@@ -21,9 +21,6 @@ context("Header topbar wishlist", () =>
 
         cy.visit(itemUrl);
 
-        // wait for page to load
-        cy.wait(2000);
-
         cy.server().route("POST", "/rest/io/itemWishList").as("addToWishlist");
 
         cy.get(".widget-add-to-wish-list > a").should("exist");
@@ -33,9 +30,6 @@ context("Header topbar wishlist", () =>
 
         cy.get(".control-wish-list > a").should("exist");
         cy.get(".control-wish-list > a").click();
-
-        // wait for page to load
-        cy.wait(2000);
 
         cy.location("pathname").should("eq", wishlistUrl);
 
