@@ -103,32 +103,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -307,10 +281,7 @@ var render = function() {
                         {
                           staticClass:
                             "text-primary text-appearance d-block d-md-inline-block",
-                          attrs: {
-                            href: "#",
-                            "data-testing": "'cookieBarShowMoreInformation'"
-                          },
+                          attrs: { href: "#" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -339,7 +310,6 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary btn-block btn-appearance",
-                      attrs: { "data-testing": "'cookieBarAcceptAll'" },
                       on: {
                         click: function($event) {
                           _vm.acceptAll()
@@ -349,11 +319,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.cookieBarAcceptAll")
-                          ) +
-                          "\n                "
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.cookieBarAcceptAll")
+                        )
                       )
                     ]
                   ),
@@ -362,7 +330,6 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-default btn-block",
-                      attrs: { "data-testing": "'cookieBarSave'" },
                       on: {
                         click: function($event) {
                           _vm.storeConsents()
@@ -372,11 +339,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.cookieBarSave")
-                          ) +
-                          "\n                "
+                        _vm._s(_vm.$translate("Ceres::Template.cookieBarSave"))
                       )
                     ]
                   )
@@ -410,10 +373,7 @@ var render = function() {
                         {
                           staticClass:
                             "text-primary text-appearance d-inline-block mb-3",
-                          attrs: {
-                            href: "#",
-                            "data-testing": "'cookieBarHideMoreInformation'"
-                          },
+                          attrs: { href: "#" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -424,11 +384,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.cookieBarBack")
-                              ) +
-                              "\n                "
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.cookieBarBack")
+                            )
                           )
                         ]
                       )
@@ -440,9 +398,6 @@ var render = function() {
                         {
                           staticClass:
                             "btn btn-block btn-primary btn-appearance",
-                          attrs: {
-                            "data-testing": "'cookieBarExpandedAcceptAll'"
-                          },
                           on: {
                             click: function($event) {
                               _vm.acceptAll()
@@ -452,13 +407,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
-                              _vm._s(
-                                _vm.$translate(
-                                  "Ceres::Template.cookieBarAcceptAll"
-                                )
-                              ) +
-                              "\n                "
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.cookieBarAcceptAll"
+                              )
+                            )
                           )
                         ]
                       )
@@ -469,7 +422,6 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-block btn-block btn-default",
-                          attrs: { "data-testing": "'cookieBarExpandedSave'" },
                           on: {
                             click: function($event) {
                               _vm.storeConsents()
@@ -479,11 +431,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.cookieBarSave")
-                              ) +
-                              "\n                "
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.cookieBarSave")
+                            )
                           )
                         ]
                       )

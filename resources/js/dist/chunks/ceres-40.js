@@ -176,7 +176,6 @@ var render = function() {
         ? [
             _c(
               "div",
-              { attrs: { "data-testing": "autocomplete-list" } },
               _vm._l(_vm.autocompleteResult, function(item, index) {
                 return _c(
                   "a",
