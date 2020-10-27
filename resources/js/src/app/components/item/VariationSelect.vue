@@ -13,12 +13,16 @@
                                 v-for="value in attribute.values"
                                 :value="value.attributeValueId"
                                 :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]">
-                            <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)">
+                            <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true)">
                                 {{ value.name }}
+                            </template>
+                            <template v-else-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, false)">
+                                {{ $translate("Ceres::Template.singleItemNotSalableAttribute", { "name": value.name }) }}
                             </template>
                             <template v-else>
                                 {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": value.name }) }}
                             </template>
+
                         </option>
                     </select>
                     <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name">{{ attribute.name }}</label>
@@ -38,14 +42,14 @@
                         <div class="v-s-box bg-white empty-option"
                              v-if="hasEmptyOption"
                              @click="selectAttribute(attribute.attributeId, null)"
-                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null) }">
+                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null, true) }">
                             <span class="mx-3">{{ $translate("Ceres::Template.singleItemNoSelection") }}</span>
                         </div>
 
                         <div class="v-s-box bg-white"
                              v-for="value in attribute.values"
                              @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
-                             :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }"
+                             :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true) }"
                              v-tooltip="true" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getTooltip(attribute, value)">
                             <span class="mx-3" v-if="attribute.type === 'box'">{{ value.name }}</span>
                             <img class="p-1" v-else :src="value.imageUrl" :alt="value.name">
@@ -267,7 +271,7 @@ export default {
         unsetInvalidSelection(attributeId, attributeValueId, unitId)
         {
             const qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
-            const closestVariation    = this.getClosestVariation(qualifiedVariations);
+            const closestVariation    = this.getClosestVariations(qualifiedVariations)[0];
 
             if (!closestVariation)
             {
@@ -281,7 +285,7 @@ export default {
 
         getTooltip(attribute, attributeValue)
         {
-            if(!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId))
+            if(!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId, true))
             {
                 return this.getInvalidOptionTooltip(attribute.attributeId, attributeValue.attributeValueId);
             }
@@ -304,14 +308,27 @@ export default {
         getInvalidOptionTooltip(attributeId, attributeValueId)
         {
             const qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId);
-            const closestVariation    = this.getClosestVariation(qualifiedVariations);
+            const closestVariations   = this.getClosestVariations(qualifiedVariations);
 
-            if (!closestVariation)
+            if (!closestVariations || closestVariations.length <= 0)
             {
                 return "";
             }
 
-            const invalidSelection = this.getInvalidSelectionByVariation(closestVariation);
+            const invalidSelections = [
+                !!closestVariations[0] ? this.getInvalidSelectionByVariation(closestVariations[0]) : null,
+                !!closestVariations[1] ? this.getInvalidSelectionByVariation(closestVariations[1]) : null
+            ];
+
+            if (!!invalidSelections[0]
+                && !!invalidSelections[1]
+                && invalidSelections[0].attributesToReset.length > invalidSelections[1].attributesToReset.length)
+            {
+                // there is a non-salable variation with less changes
+                return this.$translate("Ceres::Template.singleItemNotSalable");
+            }
+
+            const invalidSelection = invalidSelections[0] || invalidSelections[1];
             const names = [];
 
             for (const attribute of invalidSelection.attributesToReset)
@@ -361,13 +378,13 @@ export default {
         },
 
         /**
-         * returns a variation, where a minimum of changes in the selection is required to archive
+         * return a salable and a non-salable variation with the minimum number of changes on attributes compared to the current selection.
          * @param {array} qualifiedVariations
          */
-        getClosestVariation(qualifiedVariations)
+        getClosestVariations(qualifiedVariations)
         {
-            let closestVariation;
-            let numberOfRequiredChanges;
+            let closestSalableVariation, numberOfSalableChanges;
+            let closestNonSalableVariation, numberOfNonSalableChanges;
 
             for (const variation of qualifiedVariations)
             {
@@ -389,14 +406,19 @@ export default {
                     }
                 }
 
-                if (!numberOfRequiredChanges || changes < numberOfRequiredChanges)
+                if(variation.isSalable && (!numberOfSalableChanges || changes < numberOfSalableChanges))
                 {
-                    closestVariation = variation;
-                    numberOfRequiredChanges = changes;
+                    closestSalableVariation = variation;
+                    numberOfSalableChanges = changes;
+                }
+                else if (!variation.isSalable && (!numberOfNonSalableChanges || changes < numberOfNonSalableChanges))
+                {
+                    closestNonSalableVariation = variation;
+                    numberOfNonSalableChanges = changes;
                 }
             }
 
-            return closestVariation;
+            return [closestSalableVariation, closestNonSalableVariation];
         },
 
         /**
@@ -538,8 +560,9 @@ export default {
          * returns true, if the selection with a new attribute value would be valid
          * @param {number} attributeId
          * @param {[number, string, null]} attributeValueId
+         * @param {boolean} filterSalableVariations
          */
-        isAttributeSelectionValid(attributeId, attributeValueId)
+        isAttributeSelectionValid(attributeId, attributeValueId, filterSalableVariations)
         {
             attributeValueId = parseInt(attributeValueId) || null;
             if (this.selectedAttributes[attributeId] === attributeValueId)
@@ -551,9 +574,15 @@ export default {
 
             selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
 
-            const ignoreUnit = !(this.possibleUnitCombinationIds.length > 1 && this.isContentVisible);
+            const ignoreUnit = !(Object.keys(this.possibleUnits).length > 1 && this.isContentVisible);
+            let variations = this.filterVariations(selectedAttributes, null, null, ignoreUnit);
 
-            return !!this.filterVariations(selectedAttributes, null, null, ignoreUnit).length;
+            if (filterSalableVariations)
+            {
+                variations = variations.filter(variation => variation.isSalable)
+            }
+
+            return variations.length > 0;
         },
 
         /**
@@ -568,7 +597,10 @@ export default {
                 return true;
             }
 
-            return !!this.filterVariations(null, unitId).length;
+            return this
+                .filterVariations(null, unitId)
+                .filter(variation => variation.isSalable)
+                .length > 0
         },
 
         /**
