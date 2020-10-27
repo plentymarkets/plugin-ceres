@@ -31,7 +31,7 @@
 
                     <div class="item-details mt-0">
                         <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="clearfix">
-                            <div class="item-name text-appearance">
+                            <div class="font-weight-bold mb-1 text-appearance">
                                 {{ Twig.print(Twig.call("ItemName.get", ["$item.orderItemName", "$item.bundleType"])) }}
                             </div>
                         </a>
