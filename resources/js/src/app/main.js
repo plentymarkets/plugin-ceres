@@ -215,12 +215,15 @@ document.addEventListener("showShopNotification", showShopNotification);
 
 let headerParent = document.querySelector("[data-header-offset]");
 
-let headerLoaded = false;
-
-let allHeaderChildrenHeights = [];
-
 if ( headerParent )
 {
+    let headerLoaded = false;
+
+    let allHeaderChildrenHeights = [];
+
+    let headerHeight = 0;
+
+    // Calculate top offset for vue-app node because header is not part of document flow
     function calculateBodyOffset()
     {
         headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
@@ -229,43 +232,62 @@ if ( headerParent )
         {
             const vueApp = document.getElementById("vue-app");
 
-            let bodyOffset = 0;
-
-            for ( let i = 0; i < headerParent.children.length; i++ )
-            {
-                bodyOffset += headerParent.children[i].getBoundingClientRect().height;
-            }
-            vueApp.style.marginTop = bodyOffset + "px";
-            vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
+            vueApp.style.marginTop = headerHeight + "px";
+            vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
         }
     }
 
-    function getHeaderChildrenHeights()
+    // Set descending z-index for all header elements and create list of elements with unfixed class for later use
+    function prepareHeaderElements()
+    {
+        if (headerLoaded && !App.isShopBuilder)
+        {
+            headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
+            let zIndex = 100;
+
+            for (let i = 0; i < headerParent.children.length; i++)
+            {
+                const elem = headerParent.children[i];
+
+                elem.style.zIndex = zIndex;
+                zIndex--;
+            }
+        }
+    }
+
+    // Collect heights of header elements for later use
+    function getHeaderHeights()
     {
         headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
 
         allHeaderChildrenHeights = [];
 
+        headerHeight = 0;
+
         for (let i = 0; i < headerParent.children.length; i++)
         {
-            allHeaderChildrenHeights.push(headerParent.children[i].getBoundingClientRect().height);
+            const elementHeight = headerParent.children[i].getBoundingClientRect().height;
+
+            allHeaderChildrenHeights.push(elementHeight);
+            headerHeight += elementHeight;
         }
     }
 
+    // Scroll header elements depending on if they are unfixed or not
     function scrollHeaderElements()
     {
-        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
         if (headerLoaded && !App.isShopBuilder)
         {
+            headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
             let absolutePos = 0;
 
             let fixedElementsHeight = 0;
 
             let offset = 0;
-            const scrollTop = window.pageYOffset;
 
-            let zIndex = 100;
+            const scrollTop = window.pageYOffset;
 
             for (let i = 0; i < headerParent.children.length; i++)
             {
@@ -274,10 +296,14 @@ if ( headerParent )
 
                 offset = absolutePos - scrollTop;
                 elem.style.position = "absolute";
-                elem.style.zIndex = zIndex;
-                zIndex--;
 
-                if (!elem.classList.contains("unfixed"))
+                // Element is unfixed and should scroll indefinetly
+                if (elem.classList.contains("unfixed"))
+                {
+                    elem.style.top = offset + "px";
+                }
+                // Element is fixed and should scroll until it hits top of header or next fixed element
+                else
                 {
                     if (offset < 0)
                     {
@@ -295,10 +321,6 @@ if ( headerParent )
 
                     fixedElementsHeight = fixedElementsHeight + elemHeight;
                 }
-                else
-                {
-                    elem.style.top = offset + "px";
-                }
                 absolutePos = absolutePos + elemHeight;
             }
         }
@@ -306,32 +328,42 @@ if ( headerParent )
 
     window.addEventListener("resize", debounce(function()
     {
+        getHeaderHeights();
         calculateBodyOffset();
-        getHeaderChildrenHeights();
         scrollHeaderElements();
     }, 50));
 
     window.addEventListener("load", function()
     {
+        getHeaderHeights();
         calculateBodyOffset();
-        getHeaderChildrenHeights();
+        prepareHeaderElements();
         scrollHeaderElements();
+
+        let timeout;
+
+        window.addEventListener("scroll", function()
+        {
+            if (timeout)
+            {
+                window.cancelAnimationFrame(timeout);
+            }
+
+            timeout = window.requestAnimationFrame(scrollHeaderElements);
+
+        }, detectPassiveEvents() ? { passive: true } : false);
     });
 
     if (document.fonts)
     {
         document.fonts.onloadingdone = function(evt)
         {
+            getHeaderHeights();
             calculateBodyOffset();
-            getHeaderChildrenHeights();
+            prepareHeaderElements();
             scrollHeaderElements();
         };
     }
-
-    window.addEventListener("scroll", debounce(function()
-    {
-        scrollHeaderElements();
-    }, 10), detectPassiveEvents() ? { passive: true } : false);
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
@@ -366,9 +398,9 @@ if ( headerParent )
     {
         // Initialize
         headerLoaded = true;
-        getHeaderChildrenHeights();
-        scrollHeaderElements();
+        getHeaderHeights();
         calculateBodyOffset();
+        scrollHeaderElements();
     });
 
     calculateBodyOffset();
