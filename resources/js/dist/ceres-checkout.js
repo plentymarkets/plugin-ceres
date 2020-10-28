@@ -66079,98 +66079,117 @@ var showShopNotification = function showShopNotification(event) {
 
 document.addEventListener("showShopNotification", showShopNotification);
 var headerParent = document.querySelector("[data-header-offset]");
-var headerLoaded = false;
-var allHeaderChildrenHeights = [];
 
 if (headerParent) {
+  // Calculate top offset for vue-app node because header is not part of document flow
   var calculateBodyOffset = function calculateBodyOffset() {
     headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
 
     if (headerLoaded && headerParent) {
       var vueApp = document.getElementById("vue-app");
-      var bodyOffset = 0;
+      vueApp.style.marginTop = headerHeight + "px";
+      vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
+    }
+  }; // Set descending z-index for all header elements and create list of elements with unfixed class for later use
+
+
+  var prepareHeaderElements = function prepareHeaderElements() {
+    if (headerLoaded && !App.isShopBuilder) {
+      headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+      var zIndex = 100;
 
       for (var i = 0; i < headerParent.children.length; i++) {
-        bodyOffset += headerParent.children[i].getBoundingClientRect().height;
+        var elem = headerParent.children[i];
+        elem.style.zIndex = zIndex;
+        zIndex--;
       }
-
-      vueApp.style.marginTop = bodyOffset + "px";
-      vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
     }
-  };
+  }; // Collect heights of header elements for later use
 
-  var getHeaderChildrenHeights = function getHeaderChildrenHeights() {
+
+  var getHeaderHeights = function getHeaderHeights() {
     headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
     allHeaderChildrenHeights = [];
+    headerHeight = 0;
 
     for (var i = 0; i < headerParent.children.length; i++) {
-      allHeaderChildrenHeights.push(headerParent.children[i].getBoundingClientRect().height);
+      var elementHeight = headerParent.children[i].getBoundingClientRect().height;
+      allHeaderChildrenHeights.push(elementHeight);
+      headerHeight += elementHeight;
     }
-  };
+  }; // Scroll header elements depending on if they are unfixed or not
+
 
   var scrollHeaderElements = function scrollHeaderElements() {
-    headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
     if (headerLoaded && !App.isShopBuilder) {
+      headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
       var absolutePos = 0;
       var fixedElementsHeight = 0;
       var offset = 0;
       var scrollTop = window.pageYOffset;
-      var zIndex = 100;
 
       for (var i = 0; i < headerParent.children.length; i++) {
         var elem = headerParent.children[i];
         var elemHeight = allHeaderChildrenHeights[i];
         offset = absolutePos - scrollTop;
-        elem.style.position = "absolute";
-        elem.style.zIndex = zIndex;
-        zIndex--;
+        elem.style.position = "absolute"; // Element is unfixed and should scroll indefinetly
 
-        if (!elem.classList.contains("unfixed")) {
-          if (offset < 0) {
-            elem.style.top = 0;
-          } else {
-            elem.style.top = offset + "px";
-          }
-
-          if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
-            elem.style.top = fixedElementsHeight + "px";
-          }
-
-          fixedElementsHeight = fixedElementsHeight + elemHeight;
-        } else {
+        if (elem.classList.contains("unfixed")) {
           elem.style.top = offset + "px";
-        }
+        } // Element is fixed and should scroll until it hits top of header or next fixed element
+        else {
+            if (offset < 0) {
+              elem.style.top = 0;
+            } else {
+              elem.style.top = offset + "px";
+            }
+
+            if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
+              elem.style.top = fixedElementsHeight + "px";
+            }
+
+            fixedElementsHeight = fixedElementsHeight + elemHeight;
+          }
 
         absolutePos = absolutePos + elemHeight;
       }
     }
   };
 
+  var headerLoaded = false;
+  var allHeaderChildrenHeights = [];
+  var headerHeight = 0;
   window.addEventListener("resize", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_12__["debounce"])(function () {
+    getHeaderHeights();
     calculateBodyOffset();
-    getHeaderChildrenHeights();
     scrollHeaderElements();
   }, 50));
   window.addEventListener("load", function () {
+    getHeaderHeights();
     calculateBodyOffset();
-    getHeaderChildrenHeights();
+    prepareHeaderElements();
     scrollHeaderElements();
+    var timeout;
+    window.addEventListener("scroll", function () {
+      if (timeout) {
+        window.cancelAnimationFrame(timeout);
+      }
+
+      timeout = window.requestAnimationFrame(scrollHeaderElements);
+    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_15__["detectPassiveEvents"])() ? {
+      passive: true
+    } : false);
   });
 
   if (document.fonts) {
     document.fonts.onloadingdone = function (evt) {
+      getHeaderHeights();
       calculateBodyOffset();
-      getHeaderChildrenHeights();
+      prepareHeaderElements();
       scrollHeaderElements();
     };
   }
 
-  window.addEventListener("scroll", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_12__["debounce"])(function () {
-    scrollHeaderElements();
-  }, 10), Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_15__["detectPassiveEvents"])() ? {
-    passive: true
-  } : false);
   $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
     calculateBodyOffset();
   });
@@ -66192,9 +66211,9 @@ if (headerParent) {
   })).then(function () {
     // Initialize
     headerLoaded = true;
-    getHeaderChildrenHeights();
-    scrollHeaderElements();
+    getHeaderHeights();
     calculateBodyOffset();
+    scrollHeaderElements();
   });
   calculateBodyOffset();
 }
