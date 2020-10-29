@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="attributes.length || (Object.keys(possibleUnits).length > 1 && isContentVisible)" class="row">
+        <div v-if="attributes.length || (possibleUnitCombinationIds.length > 1 && isContentVisible)" class="row">
             <div class="col-12 variation-select" v-for="attribute in attributes">
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
@@ -13,12 +13,16 @@
                                 v-for="value in attribute.values"
                                 :value="value.attributeValueId"
                                 :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]">
-                            <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)">
+                            <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true)">
                                 {{ value.name }}
+                            </template>
+                            <template v-else-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, false)">
+                                {{ $translate("Ceres::Template.singleItemNotSalableAttribute", { "name": value.name }) }}
                             </template>
                             <template v-else>
                                 {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": value.name }) }}
                             </template>
+
                         </option>
                     </select>
                     <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name">{{ attribute.name }}</label>
@@ -38,14 +42,14 @@
                         <div class="v-s-box bg-white empty-option"
                              v-if="hasEmptyOption"
                              @click="selectAttribute(attribute.attributeId, null)"
-                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null) }">
+                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null, true) }">
                             <span class="mx-3">{{ $translate("Ceres::Template.singleItemNoSelection") }}</span>
                         </div>
 
                         <div class="v-s-box bg-white"
                              v-for="value in attribute.values"
                              @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
-                             :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }"
+                             :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true) }"
                              v-tooltip="true" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getTooltip(attribute, value)">
                             <span class="mx-3" v-if="attribute.type === 'box'">{{ value.name }}</span>
                             <img class="p-1" v-else :src="value.imageUrl" :alt="value.name">
@@ -56,18 +60,18 @@
             </div>
 
             <!-- units -->
-            <div class="col-12 variation-select" v-if="Object.keys(possibleUnits).length > 1 && isContentVisible">
+            <div class="col-12 variation-select" v-if="possibleUnitCombinationIds.length > 1 && isContentVisible">
                 <div class="input-unit">
                     <select class="custom-select" @change="selectUnit($event.target.value)">
                         <option
-                                v-for="(unit, unitId) in possibleUnits"
-                                :value="unitId"
-                                :selected="parseInt(unitId) === selectedUnit">
-                            <template v-if="isUnitSelectionValid(unitId)">
-                                {{ unit }}
+                                v-for="unitCombinationId in possibleUnitCombinationIds"
+                                :value="unitCombinationId"
+                                :selected="parseInt(unitCombinationId) === selectedUnit">
+                            <template v-if="isUnitSelectionValid(unitCombinationId)">
+                                {{ possibleUnits[unitCombinationId] }}
                             </template>
                             <template v-else>
-                                {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": unit }) }}
+                                {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": possibleUnits[unitCombinationId] }) }}
                             </template>
                         </option>
                     </select>
@@ -166,6 +170,7 @@ export default {
          */
         possibleUnits()
         {
+            // use an object, to make the entries unique
             const possibleUnits = {};
             const variations = this.forceContent ? this.variations : this.filterVariations(null, null, null, true);
 
@@ -175,6 +180,11 @@ export default {
             }
 
             return possibleUnits;
+        },
+
+        possibleUnitCombinationIds()
+        {
+            return this.transformPossibleUnits(this.possibleUnits).map(value => value[0]);
         },
 
         isContentVisible()
@@ -189,10 +199,6 @@ export default {
 
         attributes() {
             return this.currentVariationSelect && this.currentVariationSelect.attributes;
-        },
-
-        units() {
-            return this.currentVariationSelect && this.currentVariationSelect.units;
         },
 
         selectedAttributes() {
@@ -253,7 +259,7 @@ export default {
                 this.unsetInvalidSelection(attributeId, attributeValueId, unitId);
             }
 
-            this.lastContentCount = Object.keys(this.possibleUnits).length;
+            this.lastContentCount = this.possibleUnitCombinationIds.length;
         },
 
         /**
@@ -265,7 +271,7 @@ export default {
         unsetInvalidSelection(attributeId, attributeValueId, unitId)
         {
             const qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
-            const closestVariation    = this.getClosestVariation(qualifiedVariations);
+            const closestVariation    = this.getClosestVariations(qualifiedVariations)[0];
 
             if (!closestVariation)
             {
@@ -279,7 +285,7 @@ export default {
 
         getTooltip(attribute, attributeValue)
         {
-            if(!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId))
+            if(!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId, true))
             {
                 return this.getInvalidOptionTooltip(attribute.attributeId, attributeValue.attributeValueId);
             }
@@ -302,14 +308,27 @@ export default {
         getInvalidOptionTooltip(attributeId, attributeValueId)
         {
             const qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId);
-            const closestVariation    = this.getClosestVariation(qualifiedVariations);
+            const closestVariations   = this.getClosestVariations(qualifiedVariations);
 
-            if (!closestVariation)
+            if (!closestVariations || closestVariations.length <= 0)
             {
                 return "";
             }
 
-            const invalidSelection = this.getInvalidSelectionByVariation(closestVariation);
+            const invalidSelections = [
+                !!closestVariations[0] ? this.getInvalidSelectionByVariation(closestVariations[0]) : null,
+                !!closestVariations[1] ? this.getInvalidSelectionByVariation(closestVariations[1]) : null
+            ];
+
+            if (!!invalidSelections[0]
+                && !!invalidSelections[1]
+                && invalidSelections[0].attributesToReset.length > invalidSelections[1].attributesToReset.length)
+            {
+                // there is a non-salable variation with less changes
+                return this.$translate("Ceres::Template.singleItemNotSalable");
+            }
+
+            const invalidSelection = invalidSelections[0] || invalidSelections[1];
             const names = [];
 
             for (const attribute of invalidSelection.attributesToReset)
@@ -359,13 +378,13 @@ export default {
         },
 
         /**
-         * returns a variation, where a minimum of changes in the selection is required to archive
+         * return a salable and a non-salable variation with the minimum number of changes on attributes compared to the current selection.
          * @param {array} qualifiedVariations
          */
-        getClosestVariation(qualifiedVariations)
+        getClosestVariations(qualifiedVariations)
         {
-            let closestVariation;
-            let numberOfRequiredChanges;
+            let closestSalableVariation, numberOfSalableChanges;
+            let closestNonSalableVariation, numberOfNonSalableChanges;
 
             for (const variation of qualifiedVariations)
             {
@@ -374,7 +393,7 @@ export default {
                 if (variation.unitCombinationId !== this.selectedUnit && !isNull(this.selectedUnit))
                 {
                     // when the unit dropdown isn't visible, it should have a lower weight for reset investigations
-                    const unitWeight = Object.keys(this.possibleUnits).length > 1 && this.isContentVisible ? 0.9 : 0.1;
+                    const unitWeight = this.possibleUnitCombinationIds.length > 1 && this.isContentVisible ? 0.9 : 0.1;
 
                     changes += unitWeight;
                 }
@@ -387,14 +406,19 @@ export default {
                     }
                 }
 
-                if (!numberOfRequiredChanges || changes < numberOfRequiredChanges)
+                if(variation.isSalable && (!numberOfSalableChanges || changes < numberOfSalableChanges))
                 {
-                    closestVariation = variation;
-                    numberOfRequiredChanges = changes;
+                    closestSalableVariation = variation;
+                    numberOfSalableChanges = changes;
+                }
+                else if (!variation.isSalable && (!numberOfNonSalableChanges || changes < numberOfNonSalableChanges))
+                {
+                    closestNonSalableVariation = variation;
+                    numberOfNonSalableChanges = changes;
                 }
             }
 
-            return closestVariation;
+            return [closestSalableVariation, closestNonSalableVariation];
         },
 
         /**
@@ -450,7 +474,7 @@ export default {
 
             if (invalidSelection.newUnit)
             {
-                if (this.lastContentCount > 1 && Object.keys(this.possibleUnits).length > 1 && !isNull(this.selectedUnit))
+                if (this.lastContentCount > 1 && this.possibleUnitCombinationIds.length > 1 && !isNull(this.selectedUnit))
                 {
                     messages.push(
                         this.$translate("Ceres::Template.singleItemNotAvailable", { name:
@@ -536,8 +560,9 @@ export default {
          * returns true, if the selection with a new attribute value would be valid
          * @param {number} attributeId
          * @param {[number, string, null]} attributeValueId
+         * @param {boolean} filterSalableVariations
          */
-        isAttributeSelectionValid(attributeId, attributeValueId)
+        isAttributeSelectionValid(attributeId, attributeValueId, filterSalableVariations)
         {
             attributeValueId = parseInt(attributeValueId) || null;
             if (this.selectedAttributes[attributeId] === attributeValueId)
@@ -550,8 +575,14 @@ export default {
             selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
 
             const ignoreUnit = !(Object.keys(this.possibleUnits).length > 1 && this.isContentVisible);
+            let variations = this.filterVariations(selectedAttributes, null, null, ignoreUnit);
 
-            return !!this.filterVariations(selectedAttributes, null, null, ignoreUnit).length;
+            if (filterSalableVariations)
+            {
+                variations = variations.filter(variation => variation.isSalable)
+            }
+
+            return variations.length > 0;
         },
 
         /**
@@ -566,7 +597,10 @@ export default {
                 return true;
             }
 
-            return !!this.filterVariations(null, unitId).length;
+            return this
+                .filterVariations(null, unitId)
+                .filter(variation => variation.isSalable)
+                .length > 0
         },
 
         /**
@@ -622,6 +656,39 @@ export default {
                 return this.$translate("Ceres::Template.singleItemPleaseSelect");
             }
             return this.$translate("Ceres::Template.singleItemNoSelection");
+        },
+
+        transformPossibleUnits(possibleUnits)
+        {
+            return Object.entries(possibleUnits).sort((unitA, unitB) => {
+                unitA = this.splitUnitName(unitA[1]);
+                unitB = this.splitUnitName(unitB[1]);
+                // order by unit
+                if (unitA[1] < unitB[1]) {
+                    return -1;
+                }
+                if (unitA[1] > unitB[1]) {
+                    return 1;
+                }
+                // order by content (count)
+                if (unitA[0] < unitB[0]) {
+                    return -1;
+                }
+                if (unitA[0] > unitB[0]) {
+                    return 1;
+                }
+                return 0;
+            });
+        },
+        splitUnitName(unitName) {
+            const unitNameSplit = unitName.split(" ");
+
+            if (!isNaN(unitNameSplit[0])) {
+                unitNameSplit[0] = unitNameSplit[0].replace(App.currencyPattern.separator_thousands, "");
+                unitNameSplit[0] = parseInt(unitNameSplit[0]);
+            }
+
+            return unitNameSplit;
         }
     },
 

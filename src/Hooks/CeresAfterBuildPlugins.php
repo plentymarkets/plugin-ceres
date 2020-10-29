@@ -13,25 +13,20 @@ class CeresAfterBuildPlugins
 {
     public function handle(AfterBuildPlugins $afterBuildPlugins)
     {
-        $hasCodeChanges = $afterBuildPlugins->sourceHasChanged('Ceres');
-        $hasResourceChanges = $afterBuildPlugins->resourcesHasChanged('Ceres');
         $pluginSet = $afterBuildPlugins->getPluginSet();
 
-        if ($hasCodeChanges || $hasResourceChanges) {
-            if ($pluginSet instanceof PluginSet) {
-                foreach ($pluginSet->webstores as $webstore) {
-                    /** @var ContentCacheInvalidationRepositoryContract $contentCacheInvalidationRepo */
-                    $contentCacheInvalidationRepo = pluginApp(ContentCacheInvalidationRepositoryContract::class);
-                    $contentCacheInvalidationRepo->invalidateAll($webstore->storeIdentifier);
-                }
+        if ($pluginSet instanceof PluginSet) {
+            foreach ($pluginSet->webstores as $webstore) {
+                /** @var ContentCacheInvalidationRepositoryContract $contentCacheInvalidationRepo */
+                $contentCacheInvalidationRepo = pluginApp(ContentCacheInvalidationRepositoryContract::class);
+                $contentCacheInvalidationRepo->invalidateAll($webstore->storeIdentifier);
             }
         }
 
-        if ($hasResourceChanges) {
-            BuildHash::unset();
-        }
+        // cache busting for js and css files
+        BuildHash::unset();
 
-        //deactivate all content links for the deprecated shopbuilder homepage
+        // deactivate all content links for the deprecated shopbuilder homepage
         /** @var ContentLinkRepositoryContract $contentLinkRepository */
         $contentLinkRepository = pluginApp(ContentLinkRepositoryContract::class);
         $homepageContentLinks = $contentLinkRepository->getContentLinksForContainer(

@@ -66079,98 +66079,117 @@ var showShopNotification = function showShopNotification(event) {
 
 document.addEventListener("showShopNotification", showShopNotification);
 var headerParent = document.querySelector("[data-header-offset]");
-var headerLoaded = false;
-var allHeaderChildrenHeights = [];
 
 if (headerParent) {
+  // Calculate top offset for vue-app node because header is not part of document flow
   var calculateBodyOffset = function calculateBodyOffset() {
     headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
 
     if (headerLoaded && headerParent) {
       var vueApp = document.getElementById("vue-app");
-      var bodyOffset = 0;
+      vueApp.style.marginTop = headerHeight + "px";
+      vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
+    }
+  }; // Set descending z-index for all header elements and create list of elements with unfixed class for later use
+
+
+  var prepareHeaderElements = function prepareHeaderElements() {
+    if (headerLoaded && !App.isShopBuilder) {
+      headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+      var zIndex = 100;
 
       for (var i = 0; i < headerParent.children.length; i++) {
-        bodyOffset += headerParent.children[i].getBoundingClientRect().height;
+        var elem = headerParent.children[i];
+        elem.style.zIndex = zIndex;
+        zIndex--;
       }
-
-      vueApp.style.marginTop = bodyOffset + "px";
-      vueApp.style.minHeight = "calc(100vh - " + bodyOffset + "px)";
     }
-  };
+  }; // Collect heights of header elements for later use
 
-  var getHeaderChildrenHeights = function getHeaderChildrenHeights() {
+
+  var getHeaderHeights = function getHeaderHeights() {
     headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
     allHeaderChildrenHeights = [];
+    headerHeight = 0;
 
     for (var i = 0; i < headerParent.children.length; i++) {
-      allHeaderChildrenHeights.push(headerParent.children[i].getBoundingClientRect().height);
+      var elementHeight = headerParent.children[i].getBoundingClientRect().height;
+      allHeaderChildrenHeights.push(elementHeight);
+      headerHeight += elementHeight;
     }
-  };
+  }; // Scroll header elements depending on if they are unfixed or not
+
 
   var scrollHeaderElements = function scrollHeaderElements() {
-    headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
     if (headerLoaded && !App.isShopBuilder) {
+      headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
       var absolutePos = 0;
       var fixedElementsHeight = 0;
       var offset = 0;
       var scrollTop = window.pageYOffset;
-      var zIndex = 100;
 
       for (var i = 0; i < headerParent.children.length; i++) {
         var elem = headerParent.children[i];
         var elemHeight = allHeaderChildrenHeights[i];
         offset = absolutePos - scrollTop;
-        elem.style.position = "absolute";
-        elem.style.zIndex = zIndex;
-        zIndex--;
+        elem.style.position = "absolute"; // Element is unfixed and should scroll indefinetly
 
-        if (!elem.classList.contains("unfixed")) {
-          if (offset < 0) {
-            elem.style.top = 0;
-          } else {
-            elem.style.top = offset + "px";
-          }
-
-          if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
-            elem.style.top = fixedElementsHeight + "px";
-          }
-
-          fixedElementsHeight = fixedElementsHeight + elemHeight;
-        } else {
+        if (elem.classList.contains("unfixed")) {
           elem.style.top = offset + "px";
-        }
+        } // Element is fixed and should scroll until it hits top of header or next fixed element
+        else {
+            if (offset < 0) {
+              elem.style.top = 0;
+            } else {
+              elem.style.top = offset + "px";
+            }
+
+            if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
+              elem.style.top = fixedElementsHeight + "px";
+            }
+
+            fixedElementsHeight = fixedElementsHeight + elemHeight;
+          }
 
         absolutePos = absolutePos + elemHeight;
       }
     }
   };
 
+  var headerLoaded = false;
+  var allHeaderChildrenHeights = [];
+  var headerHeight = 0;
   window.addEventListener("resize", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_12__["debounce"])(function () {
+    getHeaderHeights();
     calculateBodyOffset();
-    getHeaderChildrenHeights();
     scrollHeaderElements();
   }, 50));
   window.addEventListener("load", function () {
+    getHeaderHeights();
     calculateBodyOffset();
-    getHeaderChildrenHeights();
+    prepareHeaderElements();
     scrollHeaderElements();
+    var timeout;
+    window.addEventListener("scroll", function () {
+      if (timeout) {
+        window.cancelAnimationFrame(timeout);
+      }
+
+      timeout = window.requestAnimationFrame(scrollHeaderElements);
+    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_15__["detectPassiveEvents"])() ? {
+      passive: true
+    } : false);
   });
 
   if (document.fonts) {
     document.fonts.onloadingdone = function (evt) {
+      getHeaderHeights();
       calculateBodyOffset();
-      getHeaderChildrenHeights();
+      prepareHeaderElements();
       scrollHeaderElements();
     };
   }
 
-  window.addEventListener("scroll", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_12__["debounce"])(function () {
-    scrollHeaderElements();
-  }, 10), Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_15__["detectPassiveEvents"])() ? {
-    passive: true
-  } : false);
   $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
     calculateBodyOffset();
   });
@@ -66192,9 +66211,9 @@ if (headerParent) {
   })).then(function () {
     // Initialize
     headerLoaded = true;
-    getHeaderChildrenHeights();
-    scrollHeaderElements();
+    getHeaderHeights();
     calculateBodyOffset();
+    scrollHeaderElements();
   });
   calculateBodyOffset();
 }
@@ -71703,6 +71722,26 @@ var mutations = {
   },
   setVariationMarkInvalidProps: function setVariationMarkInvalidProps(state, markFields) {
     state.variationMarkInvalidProperties = !!markFields;
+  },
+  setVariationPropertySurcharges: function setVariationPropertySurcharges(state, basePrice) {
+    if (state.variation.documents[0].data.properties) {
+      var _iterator = _createForOfIteratorHelper(state.variation.documents[0].data.properties),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var property = _step.value;
+
+          if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNullOrUndefined"])(property.property.percentage) && property.surcharge <= 0) {
+            property.property.surcharge = basePrice * property.property.percentage / 100;
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
   }
 };
 var actions = {
@@ -71766,7 +71805,7 @@ var actions = {
   }
 };
 var getters = {
-  variationPropertySurcharge: function variationPropertySurcharge(state) {
+  variationPropertySurcharge: function variationPropertySurcharge(state, getters) {
     if (!state || !state.variation.documents) {
       return 0;
     }
@@ -71778,18 +71817,24 @@ var getters = {
         return !!property.property.value;
       });
 
-      var _iterator = _createForOfIteratorHelper(addedProperties),
-          _step;
+      var _iterator2 = _createForOfIteratorHelper(addedProperties),
+          _step2;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var property = _step.value;
-          sum += property.surcharge || property.property.surcharge;
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var property = _step2.value;
+
+          if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNullOrUndefined"])(property.property.percentage) && property.surcharge <= 0) {
+            var surcharge = getters.variationBasePrice * property.property.percentage / 100;
+            sum += surcharge;
+          } else {
+            sum += property.surcharge || property.property.surcharge;
+          }
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
     }
 
@@ -71818,21 +71863,23 @@ var getters = {
 
     return returnPrice || calculatedPrices.default;
   },
-  variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
+  variationBasePrice: function variationBasePrice(state, getters, rootState, rootGetters) {
     if (getters.currentItemVariation.item.itemType === "set") {
       return rootGetters.itemSetTotalPrice;
     } else if (getters.currentItemVariation.item.itemType !== "set" && rootState.items.isItemSet) {
-      return state.variation.documents[0].data.prices.set.price.value + getters.variationPropertySurcharge;
+      return state.variation.documents[0].data.prices.set.price.value;
     } else {
       var graduatedPrice = getters.variationGraduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0;
 
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNullOrUndefined"])(graduatedPrice) && state.variation.documents) {
-        var specialOfferPrice = vue__WEBPACK_IMPORTED_MODULE_27___default.a.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
-        return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
+        return vue__WEBPACK_IMPORTED_MODULE_27___default.a.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
       }
     }
 
     return null;
+  },
+  variationTotalPrice: function variationTotalPrice(state, getters) {
+    return getters.variationBasePrice + getters.variationPropertySurcharge;
   },
   variationGroupedProperties: function variationGroupedProperties(state) {
     if (!state || !state.variation.documents) {
@@ -71850,12 +71897,12 @@ var getters = {
 
       var groups = [];
 
-      var _iterator2 = _createForOfIteratorHelper(groupIds),
-          _step2;
+      var _iterator3 = _createForOfIteratorHelper(groupIds),
+          _step3;
 
       try {
         var _loop = function _loop() {
-          var id = _step2.value;
+          var id = _step3.value;
           var groupProperties = orderPropertyList.filter(function (property) {
             return property.group === id || property.group && property.group.id === id;
           });
@@ -71870,13 +71917,13 @@ var getters = {
           });
         };
 
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
           _loop();
         }
       } catch (err) {
-        _iterator2.e(err);
+        _iterator3.e(err);
       } finally {
-        _iterator2.f();
+        _iterator3.f();
       }
 
       return groups;
@@ -71889,19 +71936,19 @@ var getters = {
       if (getters.currentItemVariation.item.itemType === "set") {
         var setMissingProperties = [];
 
-        var _iterator3 = _createForOfIteratorHelper(rootState.items.setComponentIds),
-            _step3;
+        var _iterator4 = _createForOfIteratorHelper(rootState.items.setComponentIds),
+            _step4;
 
         try {
-          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-            var itemId = _step3.value;
+          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+            var itemId = _step4.value;
             var componentMissingProperties = rootGetters["".concat(itemId, "/variationMissingProperties")];
             setMissingProperties = [].concat(_toConsumableArray(setMissingProperties), _toConsumableArray(componentMissingProperties));
           }
         } catch (err) {
-          _iterator3.e(err);
+          _iterator4.e(err);
         } finally {
-          _iterator3.f();
+          _iterator4.f();
         }
 
         return setMissingProperties;
@@ -71935,20 +71982,20 @@ var getters = {
               });
 
               if (radioGroupToClean) {
-                var _iterator4 = _createForOfIteratorHelper(radioInformation.filter(function (radio) {
+                var _iterator5 = _createForOfIteratorHelper(radioInformation.filter(function (radio) {
                   return radio.groupId === radioGroupToClean.groupId && !radio.hasValue;
                 })),
-                    _step4;
+                    _step5;
 
                 try {
-                  for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-                    var radio = _step4.value;
+                  for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                    var radio = _step5.value;
                     radioIdsToRemove.push(radio.propertyId);
                   }
                 } catch (err) {
-                  _iterator4.e(err);
+                  _iterator5.e(err);
                 } finally {
-                  _iterator4.f();
+                  _iterator5.f();
                 }
               }
             };
