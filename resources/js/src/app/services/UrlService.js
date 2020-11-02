@@ -1,6 +1,5 @@
 import { isDefined, isNullOrUndefined } from "../helper/utils";
 import { normalizeUrl } from "../helper/url";
-import store from "../store/index";
 import { set } from "../helper/set";
 
 function _parseUrlParam(paramKey, paramValue, result)
