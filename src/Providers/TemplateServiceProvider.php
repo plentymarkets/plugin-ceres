@@ -349,7 +349,7 @@ class TemplateServiceProvider extends ServiceProvider
             ->registerConfigValue('sort.defaultSortingSearch', $ceresConfig->sorting->defaultSortingSearch)
             ->registerConfigValue('sorting.prioritySearch1', $ceresConfig->sorting->prioritySearch1)
             ->registerConfigValue('sorting.prioritySearch2', $ceresConfig->sorting->prioritySearch2)
-            ->registerConfigValue('sorting.prioritySearch3', $ceresConfig->sorting->priorityCategory3)
+            ->registerConfigValue('sorting.prioritySearch3', $ceresConfig->sorting->prioritySearch3)
             ->registerConfigValue('sorting.priorityCategory1', $ceresConfig->sorting->priorityCategory1)
             ->registerConfigValue('sorting.priorityCategory2', $ceresConfig->sorting->priorityCategory2)
             ->registerConfigValue('sorting.priorityCategory3', $ceresConfig->sorting->priorityCategory3)

@@ -23,11 +23,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.timers */ "./node_modules/core-js/modules/web.timers.js");
-/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
@@ -147,7 +144,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     showShippingCountrySelect: function showShippingCountrySelect() {
       return App.config.basket.showShippingCountrySelect;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     basket: function basket(state) {
       return state.basket.data;
     },
@@ -169,10 +166,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     if (App.config.basket.addItemToBasketConfirm === "preview") {
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_8__["default"].listen("AfterBasketItemAdd", function (data) {
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].listen("AfterBasketItemAdd", function (data) {
         _this.show();
       });
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_8__["default"].listen("AfterBasketItemUpdate", function (data) {
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_7__["default"].listen("AfterBasketItemUpdate", function (data) {
         if (!_this.isBasketItemQuantityUpdate) {
           _this.show();
         }
