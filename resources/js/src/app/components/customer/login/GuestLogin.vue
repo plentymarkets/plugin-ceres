@@ -2,13 +2,13 @@
     <div>
         <form ref="form" method="post" class="mb-3 login-pwd-reset">
             <div class="input-unit" data-validate="mail">
-                <input type="email" name="email" autocomplete="email" :id="_uid" v-model="email" data-autofocus>
+                <input type="email" name="email" autocomplete="email" data-testing="guest-login-input" :id="_uid" v-model="email" data-autofocus>
                 <label :for="_uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
             </div>
             <span class="error-msg">{{ $translate("Ceres::Template.loginEnterConfirmEmail") }}</span>
 
             <div class="text-right">
-                <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium btn-appearance" :class="buttonSizeClass">
+                <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium btn-appearance" :class="buttonSizeClass" data-testing="guest-login-button">
                     {{ $translate("Ceres::Template.loginNext") }}
                     <icon icon="arrow-right" :loading="isDisabled"></icon>
                 </button>
