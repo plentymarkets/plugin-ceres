@@ -34,7 +34,7 @@
 
             <div class="col-12 mt-3">
                 <div class="input-group-btn">
-                    <button type="button" data-testing="submit-button" class="btn btn-block btn-primary btn-appearance" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
+                    <button type="button" class="btn btn-block btn-primary btn-appearance" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
                         <icon icon="paper-plane-o" :loading="isDisabled"></icon>
                         {{ $translate("Ceres::Template.newsletterSubscribeButtonLabel") }}
                     </button>
