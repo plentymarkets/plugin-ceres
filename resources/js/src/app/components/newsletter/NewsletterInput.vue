@@ -98,9 +98,6 @@ export default {
             return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {"policy": link});
         }
     },
-    created() {
-         //setTimeout(() => this.loadRecapcha = true, 3000);
-    },
 
     methods: {
         validateData()
