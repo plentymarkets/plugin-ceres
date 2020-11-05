@@ -236,24 +236,30 @@
                                         <strong class="col-6 col-sm-3 col-md-5 item-word-break">{{ property | propertyName }}</strong>
                                         {% if property.type == 'file' %}
                                             <span class="col-6 col-sm-9 item-word-break">
-                                                {% set splitPath = property.value |split('/') %}
-                                                {% set filename = '' %}
-                                                {% set path = '' %}
+                                                {% if webstoreConfig.useVariationOrderProperties %}
+                                                    <a href="{{ property.fileUrl }}" target="_blank">
+                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                        {{ property.value }}
+                                                    </a>
+                                                {% else %}
+                                                    {% set splitPath = property.value |split('/') %}
+                                                    {% set filename = '' %}
+                                                    {% set path = '' %}
+                                                    {% for temp in splitPath %}
+                                                        {% if loop.first %}
+                                                            {% set path =  temp %}
+                                                        {% elseif loop.last %}
+                                                            {% set filename = temp %}
+                                                        {% else %}
+                                                            {% set path =  path ~ '/' ~ temp %}
+                                                        {% endif %}
+                                                    {% endfor %}
 
-                                                {% for temp in splitPath %}
-                                                    {% if loop.first %}
-                                                        {% set path =  temp %}
-                                                    {% elseif loop.last %}
-                                                        {% set filename = temp %}
-                                                    {% else %}
-                                                        {% set path =  path ~ '/' ~ temp %}
-                                                    {% endif %}
-                                                {% endfor %}
-
-                                                <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}" target="_blank">
-                                                    <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                    {{ splitPath | last }}
-                                                </a>
+                                                    <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}" target="_blank">
+                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                        {{ splitPath | last }}
+                                                    </a>
+                                                {% endif %}
                                             </span>
                                         {% elseif property.type == "selection" %}
                                             <span class="col-6 col-sm-9 col-md-7 item-word-break">

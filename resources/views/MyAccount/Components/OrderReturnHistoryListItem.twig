@@ -46,7 +46,11 @@
                                 <div v-for="property in orderItem.orderProperties">
                                     <b>${ property.name }</b>
                                     <span v-if="property.type === 'file'">
-                                        <a :href="property.value | fileUploadPath" target="_blank" class="text-primary text-appearance">
+                                        <a v-if="App.useVariationOrderProperties === 1" :href="property.fileUrl" target="_blank" class="text-primary text-appearance">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            ${ property.value | fileName }
+                                        </a>
+                                        <a v-else :href="property.value | fileUploadPath" target="_blank" class="text-primary text-appearance">
                                             <i class="fa fa-external-link" aria-hidden="true"></i>
                                             ${ property.value | fileName }
                                         </a>

@@ -72,28 +72,35 @@
                                                         <div>
                                                             <strong class="item-word-break">{{ Twig.print('property | propertyName') }}</strong>
                                                             {{ Twig.if("property.type == 'file'") }}
-                                                                <span class="item-word-break">
-                                                                    {{ Twig.set("splitPath", "property.value | split('/')") }}
-                                                                    {{ Twig.set("filename", "''") }}
-                                                                    {{ Twig.set("path", "''") }}
-
-                                                                    {{ Twig.for("temp", "splitPath") }}
-                                                                        {{ Twig.if("loop.first") }}
-                                                                            {{ Twig.set("path", "temp") }}
-                                                                        {{ Twig.elseif("loop.last") }}
-                                                                            {{ Twig.set("filename", "temp") }}
-                                                                        {{ Twig.else() }}
-                                                                            {{ Twig.set("path", "path ~ '/' ~ temp") }}
-                                                                        {{ Twig.endif() }}
-                                                                    {{ Twig.endfor() }}
-
-                                                                    <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
-                                                                    target="_blank">
+                                                                {{ Twig.if("webstoreConfig.useVariationOrderProperties") }}
+                                                                    <a class="text-appearance" href="{{ Twig.print('property.fileUrl') }}" target="_blank">
                                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                                        {{ Twig.print('splitPath | last') }}
+                                                                        {{ Twig.print('property.value') }}
                                                                     </a>
-                                                                </span>
-                                                                {{ Twig.elseif("property.type == 'selection'") }}
+                                                                {{ Twig.else() }}
+                                                                    <span class="item-word-break">
+                                                                            {{ Twig.set("splitPath", "property.value | split('/')") }}
+                                                                        {{ Twig.set("filename", "''") }}
+                                                                        {{ Twig.set("path", "''") }}
+
+                                                                        {{ Twig.for("temp", "splitPath") }}
+                                                                        {{ Twig.if("loop.first") }}
+                                                                        {{ Twig.set("path", "temp") }}
+                                                                        {{ Twig.elseif("loop.last") }}
+                                                                        {{ Twig.set("filename", "temp") }}
+                                                                        {{ Twig.else() }}
+                                                                        {{ Twig.set("path", "path ~ '/' ~ temp") }}
+                                                                        {{ Twig.endif() }}
+                                                                        {{ Twig.endfor() }}
+
+                                                                            <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
+                                                                               target="_blank">
+                                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                                {{ Twig.print('splitPath | last') }}
+                                                                            </a>
+                                                                        </span>
+                                                                {{ Twig.endif() }}
+                                                            {{ Twig.elseif("property.type == 'selection'") }}
                                                                 <span class="item-word-break">
                                                                     {{ Twig.print('property | propertySelectionValueName') }}
                                                                 </span>
@@ -200,29 +207,36 @@
                             {{ Twig.set("uid", "uid()") }}
                             <div id="collapse-{{ Twig.print('uid') }}" class="collapse row pl-4{% if isPreview %} show{% endif %}">
                                 {{ Twig.for("property", "item.orderProperties") }}
-                                <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }}</strong>
+                                    <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }}</strong>
                                     {{ Twig.if("property.type == 'file'") }}
-                                    <span class="col-12 item-word-break">
-                                        {{ Twig.set("splitPath", "property.value | split('/')") }}
-                                        {{ Twig.set("filename", "''") }}
-                                        {{ Twig.set("path", "''") }}
+                                        {{ Twig.if("webstoreConfig.useVariationOrderProperties") }}
+                                            <a class="text-appearance" href="{{ Twig.print('property.fileUrl') }}" target="_blank">
+                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                {{ Twig.print('property.value') }}
+                                            </a>
+                                        {{ Twig.else() }}
+                                            <span class="col-12 item-word-break">
+                                                {{ Twig.set("splitPath", "property.value | split('/')") }}
+                                                {{ Twig.set("filename", "''") }}
+                                                {{ Twig.set("path", "''") }}
 
-                                        {{ Twig.for("temp", "splitPath") }}
-                                            {{ Twig.if("loop.first") }}
-                                                {{ Twig.set("path", "temp") }}
-                                            {{ Twig.elseif("loop.last") }}
-                                                {{ Twig.set("filename", "temp") }}
-                                            {{ Twig.else() }}
-                                                {{ Twig.set("path", "path ~ '/' ~ temp") }}
-                                            {{ Twig.endif() }}
-                                        {{ Twig.endfor() }}
+                                                {{ Twig.for("temp", "splitPath") }}
+                                                    {{ Twig.if("loop.first") }}
+                                                        {{ Twig.set("path", "temp") }}
+                                                    {{ Twig.elseif("loop.last") }}
+                                                        {{ Twig.set("filename", "temp") }}
+                                                    {{ Twig.else() }}
+                                                        {{ Twig.set("path", "path ~ '/' ~ temp") }}
+                                                    {{ Twig.endif() }}
+                                                {{ Twig.endfor() }}
 
-                                        <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
-                                        target="_blank">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i>
-                                            {{ Twig.print('splitPath | last') }}
-                                        </a>
-                                    </span>
+                                                <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
+                                                target="_blank">
+                                                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                    {{ Twig.print('splitPath | last') }}
+                                                </a>
+                                            </span>
+                                        {{ Twig.endif() }}
                                     {{ Twig.elseif("property.type == 'selection'") }}
                                     <span class="col-12 item-word-break">
                                         {{ Twig.print('property | propertySelectionValueName') }}

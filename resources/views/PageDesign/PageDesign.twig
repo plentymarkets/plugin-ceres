@@ -207,6 +207,7 @@
         initialPleaseSelect: {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
         publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         isCheapestSorting: "{{ services.template.isCheapestSorting() }}",
+        useVariationOrderProperties: {{ webstoreConfig.useVariationOrderProperties | default(0) }},
         initialData: {
             shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
             shippingCountryId: {{ services.checkout.getShippingCountryId() }},
