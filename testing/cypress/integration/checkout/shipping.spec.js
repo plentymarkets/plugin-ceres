@@ -38,38 +38,6 @@ context("Checkout shipping", () =>
         });
     }
 
-    function visitCheckoutAsGuest()
-    {
-        const itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
-
-        cy.visit(itemUrl);
-        cy.wait(500);
-
-        cy.get(".add-to-basket-container > button").should("exist");
-        cy.get(".add-to-basket-container > button").click();
-
-        cy.visit("/checkout");
-        cy.wait(100);
-        cy.getByTestingAttr("guest-login-input").type(`user${new Date().valueOf()}@plentye2etest.de`);
-        cy.getByTestingAttr("guest-login-button").click();
-        cy.wait(100);
-        editAddress();
-    }
-
-    function editAddress()
-    {
-        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty");
-        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
-
-        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="street"]`).type("Abby Road");
-        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="housenumber"]`).type("1337");
-
-        cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
-
-        cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
-        cy.getByTestingAttr("modal-submit").first().click();
-    }
-
     function getShippingProfile(id)
     {
         return cy.get(`[data-id='${id}']`);
@@ -89,7 +57,7 @@ context("Checkout shipping", () =>
 
     it.only("should verify that GLS profile and DHL profile exist as Guest", () =>
     {
-        visitCheckoutAsGuest();
+        cy.loginAsGuest();
         getShippingProfile(DHLID).should("exist");
         getShippingProfile(GLSID).should("exist");
     });
