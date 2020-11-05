@@ -52,15 +52,19 @@ context("Checkout shipping", () =>
         cy.wait(100);
         cy.getByTestingAttr("guest-login-input").type(`user${new Date().valueOf()}@plentye2etest.de`);
         cy.getByTestingAttr("guest-login-button").click();
-
+        cy.wait(100);
         editAddress();
     }
 
     function editAddress()
     {
-        cy.getByTestingAttr("invoice-addresses-select-de").find(`input[name="firstName"]`).type("Test");
-        cy.getByTestingAttr("invoice-addresses-select-de").find(`input[name="lastName"]`).type("Test");
-
+        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty");
+        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
+        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="street"]`).type("Abby Road");
+        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="housenumber"]`).type("1337");
+        cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
+        cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
+        cy.get(".modal-content").find("button[type='submit']").click();
     }
 
     function getShippingProfile(id)
