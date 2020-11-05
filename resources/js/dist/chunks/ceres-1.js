@@ -1027,8 +1027,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -2892,13 +2890,218 @@ var render = function() {
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "1"
         ? [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "billing_address.salutation")
+                  ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "billing_address.salutation"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'billing_address.salutation')"
+                            }
+                          ],
+                          staticClass: "input-unit"
+                        },
+                        [
+                          _c("salutation-select", {
+                            attrs: {
+                              "address-type": _vm.addressType,
+                              "address-data": _vm.value,
+                              "enabled-address-fields":
+                                _vm.optionalAddressFields,
+                              "default-salutation": _vm.defaultSalutation
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  $event.field,
+                                  $event.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "txtSalutation" + _vm._uid } },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressSalutation",
+                                      "de",
+                                      "billing_address.salutation"
+                                    )
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
             _c(
               "div",
-              { attrs: { "data-testing": "invoice-addresses-select-de" } },
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "invoice-addresses-company-select-de" }
+              },
               [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _vm.isInOptionalFields("de", "billing_address.salutation")
+                _c("div", { staticClass: "row" }, [
+                  (_vm.isInOptionalFields("de", "billing_address.salutation") &&
+                    _vm.value.gender === "company") ||
+                  (_vm.isInOptionalFields("de", "billing_address.name1") &&
+                    !_vm.isInOptionalFields("de", "billing_address.salutation"))
+                    ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "input-unit",
+                            attrs: {
+                              "data-validate": "text",
+                              "data-model": "name1"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "text",
+                                name: "company",
+                                id: "txtCompany" + _vm._uid,
+                                "data-autofocus": ""
+                              },
+                              domProps: { value: _vm.value.name1 },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "name1",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              { attrs: { for: "txtCompany" + _vm._uid } },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.addressCompany"
+                                    )
+                                  ) + "*"
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  (_vm.isInOptionalFields("de", "billing_address.salutation") &&
+                    _vm.value.gender === "company" &&
+                    _vm.isInOptionalFields(
+                      "de",
+                      "billing_address.vatNumber"
+                    )) ||
+                  (!_vm.isInOptionalFields(
+                    "de",
+                    "billing_address.salutation"
+                  ) &&
+                    _vm.isInOptionalFields("de", "billing_address.name1") &&
+                    _vm.isInOptionalFields("de", "billing_address.vatNumber"))
+                    ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "billing_address.vatNumber"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'billing_address.vatNumber')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "vatNumber" }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "text",
+                                name: "vatNumber",
+                                id: "txtVatNumber" + _vm._uid,
+                                "data-autofocus": ""
+                              },
+                              domProps: { value: _vm.value.vatNumber },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "vatNumber",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              { attrs: { for: "txtVatNumber" + _vm._uid } },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressVatNumber",
+                                        "de",
+                                        "billing_address.vatNumber"
+                                      )
+                                    ) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "invoice-addresses-name-select-de" }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  [
+                    _vm.isInOptionalFields("de", "billing_address.title")
                       ? _c("div", { staticClass: "col-12 col-sm-4" }, [
                           _c(
                             "div",
@@ -2906,96 +3109,32 @@ var render = function() {
                               directives: [
                                 {
                                   name: "validate",
-                                  rawName: "v-validate",
+                                  rawName: "v-validate:text",
                                   value: _vm.isInRequiredFields(
                                     "de",
-                                    "billing_address.salutation"
+                                    "billing_address.title"
                                   ),
                                   expression:
-                                    "isInRequiredFields('de', 'billing_address.salutation')"
+                                    "isInRequiredFields('de', 'billing_address.title')",
+                                  arg: "text"
                                 }
                               ],
-                              staticClass: "input-unit"
-                            },
-                            [
-                              _c("salutation-select", {
-                                attrs: {
-                                  "address-type": _vm.addressType,
-                                  "address-data": _vm.value,
-                                  "enabled-address-fields":
-                                    _vm.optionalAddressFields,
-                                  "default-salutation": _vm.defaultSalutation
-                                },
-                                on: {
-                                  input: function($event) {
-                                    return _vm.emitInputEvent(
-                                      $event.field,
-                                      $event.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                { attrs: { for: "txtSalutation" + _vm._uid } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm.transformTranslation(
-                                          "Ceres::Template.addressSalutation",
-                                          "de",
-                                          "billing_address.salutation"
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      : _vm._e()
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12" }, [
-                  _c("div", { staticClass: "row" }, [
-                    (_vm.isInOptionalFields(
-                      "de",
-                      "billing_address.salutation"
-                    ) &&
-                      _vm.value.gender === "company") ||
-                    (_vm.isInOptionalFields("de", "billing_address.name1") &&
-                      !_vm.isInOptionalFields(
-                        "de",
-                        "billing_address.salutation"
-                      ))
-                      ? _c("div", { staticClass: "col-12 col-sm-6" }, [
-                          _c(
-                            "div",
-                            {
                               staticClass: "input-unit",
-                              attrs: {
-                                "data-validate": "text",
-                                "data-model": "name1"
-                              }
+                              attrs: { "data-model": "title" }
                             },
                             [
                               _c("input", {
                                 attrs: {
                                   type: "text",
-                                  name: "company",
-                                  id: "txtCompany" + _vm._uid,
+                                  name: "title",
+                                  id: "txtTitle" + _vm._uid,
                                   "data-autofocus": ""
                                 },
-                                domProps: { value: _vm.value.name1 },
+                                domProps: { value: _vm.value.title },
                                 on: {
                                   input: function($event) {
                                     return _vm.emitInputEvent(
-                                      "name1",
+                                      "title",
                                       $event.target.value
                                     )
                                   }
@@ -3004,14 +3143,18 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "label",
-                                { attrs: { for: "txtCompany" + _vm._uid } },
+                                { attrs: { for: "txtTitle" + _vm._uid } },
                                 [
                                   _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.addressCompany"
-                                      )
-                                    ) + "*"
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressTitle",
+                                          "de",
+                                          "billing_address.title"
+                                        )
+                                      ) +
+                                      "\n                        "
                                   )
                                 ]
                               )
@@ -3020,91 +3163,9 @@ var render = function() {
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    (_vm.isInOptionalFields(
-                      "de",
-                      "billing_address.salutation"
-                    ) &&
-                      _vm.value.gender === "company" &&
-                      _vm.isInOptionalFields(
-                        "de",
-                        "billing_address.vatNumber"
-                      )) ||
-                    (!_vm.isInOptionalFields(
-                      "de",
-                      "billing_address.salutation"
-                    ) &&
-                      _vm.isInOptionalFields("de", "billing_address.name1") &&
-                      _vm.isInOptionalFields("de", "billing_address.vatNumber"))
-                      ? _c("div", { staticClass: "col-12 col-sm-6" }, [
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate:text",
-                                  value: _vm.isInRequiredFields(
-                                    "de",
-                                    "billing_address.vatNumber"
-                                  ),
-                                  expression:
-                                    "isInRequiredFields('de', 'billing_address.vatNumber')",
-                                  arg: "text"
-                                }
-                              ],
-                              staticClass: "input-unit",
-                              attrs: { "data-model": "vatNumber" }
-                            },
-                            [
-                              _c("input", {
-                                attrs: {
-                                  type: "text",
-                                  name: "vatNumber",
-                                  id: "txtVatNumber" + _vm._uid,
-                                  "data-autofocus": ""
-                                },
-                                domProps: { value: _vm.value.vatNumber },
-                                on: {
-                                  input: function($event) {
-                                    return _vm.emitInputEvent(
-                                      "vatNumber",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                { attrs: { for: "txtVatNumber" + _vm._uid } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm.transformTranslation(
-                                          "Ceres::Template.addressVatNumber",
-                                          "de",
-                                          "billing_address.vatNumber"
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ])
-                      : _vm._e()
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12" }, [
-                  _c(
-                    "div",
-                    { staticClass: "row" },
-                    [
-                      _vm.isInOptionalFields("de", "billing_address.title")
-                        ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                    _vm.areNameFieldsShown("de", "billing_address")
+                      ? [
+                          _c("div", { staticClass: "col-12 col-sm-4" }, [
                             _c(
                               "div",
                               {
@@ -3112,31 +3173,31 @@ var render = function() {
                                   {
                                     name: "validate",
                                     rawName: "v-validate:text",
-                                    value: _vm.isInRequiredFields(
+                                    value: _vm.areNameFieldsRequired(
                                       "de",
-                                      "billing_address.title"
+                                      "billing_address"
                                     ),
                                     expression:
-                                      "isInRequiredFields('de', 'billing_address.title')",
+                                      "areNameFieldsRequired('de', 'billing_address')",
                                     arg: "text"
                                   }
                                 ],
                                 staticClass: "input-unit",
-                                attrs: { "data-model": "title" }
+                                attrs: { "data-model": "name2" }
                               },
                               [
                                 _c("input", {
                                   attrs: {
                                     type: "text",
-                                    name: "title",
-                                    id: "txtTitle" + _vm._uid,
+                                    name: "firstName",
+                                    id: "txtFirstName" + _vm._uid,
                                     "data-autofocus": ""
                                   },
-                                  domProps: { value: _vm.value.title },
+                                  domProps: { value: _vm.value.name2 },
                                   on: {
                                     input: function($event) {
                                       return _vm.emitInputEvent(
-                                        "title",
+                                        "name2",
                                         $event.target.value
                                       )
                                     }
@@ -3145,158 +3206,29 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "label",
-                                  { attrs: { for: "txtTitle" + _vm._uid } },
+                                  { attrs: { for: "txtFirstName" + _vm._uid } },
                                   [
                                     _vm._v(
-                                      "\n                                " +
-                                        _vm._s(
-                                          _vm.transformTranslation(
-                                            "Ceres::Template.addressTitle",
-                                            "de",
-                                            "billing_address.title"
-                                          )
-                                        ) +
-                                        "\n                            "
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.addressFirstName"
+                                        )
+                                      )
+                                    ),
+                                    _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
                                     )
-                                  ]
+                                      ? [_vm._v("*")]
+                                      : _vm._e()
+                                  ],
+                                  2
                                 )
                               ]
                             )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.areNameFieldsShown("de", "billing_address")
-                        ? [
-                            _c("div", { staticClass: "col-12 col-sm-4" }, [
-                              _c(
-                                "div",
-                                {
-                                  directives: [
-                                    {
-                                      name: "validate",
-                                      rawName: "v-validate:text",
-                                      value: _vm.areNameFieldsRequired(
-                                        "de",
-                                        "billing_address"
-                                      ),
-                                      expression:
-                                        "areNameFieldsRequired('de', 'billing_address')",
-                                      arg: "text"
-                                    }
-                                  ],
-                                  staticClass: "input-unit",
-                                  attrs: { "data-model": "name2" }
-                                },
-                                [
-                                  _c("input", {
-                                    attrs: {
-                                      type: "text",
-                                      name: "firstName",
-                                      id: "txtFirstName" + _vm._uid,
-                                      "data-autofocus": ""
-                                    },
-                                    domProps: { value: _vm.value.name2 },
-                                    on: {
-                                      input: function($event) {
-                                        return _vm.emitInputEvent(
-                                          "name2",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      attrs: { for: "txtFirstName" + _vm._uid }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.addressFirstName"
-                                          )
-                                        )
-                                      ),
-                                      _vm.areNameFieldsRequired(
-                                        "de",
-                                        "billing_address"
-                                      )
-                                        ? [_vm._v("*")]
-                                        : _vm._e()
-                                    ],
-                                    2
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-12 col-sm-4" }, [
-                              _c(
-                                "div",
-                                {
-                                  directives: [
-                                    {
-                                      name: "validate",
-                                      rawName: "v-validate:text",
-                                      value: _vm.areNameFieldsRequired(
-                                        "de",
-                                        "billing_address"
-                                      ),
-                                      expression:
-                                        "areNameFieldsRequired('de', 'billing_address')",
-                                      arg: "text"
-                                    }
-                                  ],
-                                  staticClass: "input-unit",
-                                  attrs: { "data-model": "name3" }
-                                },
-                                [
-                                  _c("input", {
-                                    attrs: {
-                                      type: "text",
-                                      name: "lastName",
-                                      id: "txtLastName" + _vm._uid
-                                    },
-                                    domProps: { value: _vm.value.name3 },
-                                    on: {
-                                      input: function($event) {
-                                        return _vm.emitInputEvent(
-                                          "name3",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      attrs: { for: "txtLastName" + _vm._uid }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.addressLastName"
-                                          )
-                                        )
-                                      ),
-                                      _vm.areNameFieldsRequired(
-                                        "de",
-                                        "billing_address"
-                                      )
-                                        ? [_vm._v("*")]
-                                        : _vm._e()
-                                    ],
-                                    2
-                                  )
-                                ]
-                              )
-                            ])
-                          ]
-                        : _c("div", { staticClass: "col-12 col-sm-8" }, [
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 col-sm-4" }, [
                             _c(
                               "div",
                               {
@@ -3304,30 +3236,30 @@ var render = function() {
                                   {
                                     name: "validate",
                                     rawName: "v-validate:text",
-                                    value: _vm.isInRequiredFields(
+                                    value: _vm.areNameFieldsRequired(
                                       "de",
-                                      "billing_address.contactPerson"
+                                      "billing_address"
                                     ),
                                     expression:
-                                      "isInRequiredFields('de', 'billing_address.contactPerson')",
+                                      "areNameFieldsRequired('de', 'billing_address')",
                                     arg: "text"
                                   }
                                 ],
                                 staticClass: "input-unit",
-                                attrs: { "data-model": "contactPerson" }
+                                attrs: { "data-model": "name3" }
                               },
                               [
                                 _c("input", {
                                   attrs: {
                                     type: "text",
                                     name: "lastName",
-                                    id: "txtContactPerson" + _vm._uid
+                                    id: "txtLastName" + _vm._uid
                                   },
-                                  domProps: { value: _vm.value.contactPerson },
+                                  domProps: { value: _vm.value.name3 },
                                   on: {
                                     input: function($event) {
                                       return _vm.emitInputEvent(
-                                        "contactPerson",
+                                        "name3",
                                         $event.target.value
                                       )
                                     }
@@ -3336,331 +3268,29 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "label",
-                                  {
-                                    attrs: {
-                                      for: "txtContactPerson" + _vm._uid
-                                    }
-                                  },
+                                  { attrs: { for: "txtLastName" + _vm._uid } },
                                   [
                                     _vm._v(
-                                      "\n                                " +
-                                        _vm._s(
-                                          _vm.transformTranslation(
-                                            "Ceres::Template.addressContactPerson",
-                                            "de",
-                                            "billing_address.contactPerson"
-                                          )
-                                        ) +
-                                        "\n                            "
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ]),
-                      _vm._v(" "),
-                      _vm.isInOptionalFields("de", "billing_address.name4")
-                        ? _c("div", { staticClass: "col-12 col-sm-4" }, [
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate:text",
-                                    value: _vm.isInRequiredFields(
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.addressLastName"
+                                        )
+                                      )
+                                    ),
+                                    _vm.areNameFieldsRequired(
                                       "de",
-                                      "billing_address.name4"
-                                    ),
-                                    expression:
-                                      "isInRequiredFields('de', 'billing_address.name4')",
-                                    arg: "text"
-                                  }
-                                ],
-                                staticClass: "input-unit",
-                                attrs: { "data-model": "name4" }
-                              },
-                              [
-                                _c("input", {
-                                  attrs: {
-                                    type: "text",
-                                    name: "decorateName",
-                                    id: "txtAdditionalName" + _vm._uid
-                                  },
-                                  domProps: { value: _vm.value.name4 },
-                                  on: {
-                                    input: function($event) {
-                                      return _vm.emitInputEvent(
-                                        "name4",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    attrs: {
-                                      for: "txtAdditionalName" + _vm._uid
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(
-                                          _vm.transformTranslation(
-                                            "Ceres::Template.addressAdditionalName",
-                                            "de",
-                                            "billing_address.name4"
-                                          )
-                                        ) +
-                                        "\n                            "
+                                      "billing_address"
                                     )
-                                  ]
+                                      ? [_vm._v("*")]
+                                      : _vm._e()
+                                  ],
+                                  2
                                 )
                               ]
                             )
                           ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.isInOptionalFields("de", "billing_address.birthday")
-                        ? _c("div", { staticClass: "col-12 col-sm-4" }, [
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate:date",
-                                    value:
-                                      _vm.isInRequiredFields(
-                                        "de",
-                                        "billing_address.birthday"
-                                      ) ||
-                                      (!!_vm.value.birthday &&
-                                        !!_vm.value.birthday.length),
-                                    expression:
-                                      "isInRequiredFields('de', 'billing_address.birthday') || !!value.birthday && !!value.birthday.length",
-                                    arg: "date"
-                                  }
-                                ],
-                                staticClass: "input-unit",
-                                attrs: { "data-model": "birthday" }
-                              },
-                              [
-                                _c("input", {
-                                  attrs: {
-                                    type: "date",
-                                    min: "1901-12-14",
-                                    max: new Date().toISOString().split("T")[0],
-                                    name: "birthday",
-                                    placeholder: _vm.$translate(
-                                      "Ceres::Template.addressBirthdatePlaceholder"
-                                    ),
-                                    id: "txtBirthdate" + _vm._uid
-                                  },
-                                  domProps: { value: _vm.value.birthday },
-                                  on: {
-                                    input: function($event) {
-                                      return _vm.emitInputEvent(
-                                        "birthday",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  { attrs: { for: "txtBirthdate" + _vm._uid } },
-                                  [
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(
-                                          _vm.transformTranslation(
-                                            "Ceres::Template.addressBirthdate",
-                                            "de",
-                                            "billing_address.birthday"
-                                          )
-                                        ) +
-                                        "\n                            "
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.isInOptionalFields(
-                        "de",
-                        "billing_address.phoneNumber"
-                      )
-                        ? _c("div", { staticClass: "col-12 col-sm-4" }, [
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate:text",
-                                    value: _vm.isInRequiredFields(
-                                      "de",
-                                      "billing_address.phoneNumber"
-                                    ),
-                                    expression:
-                                      "isInRequiredFields('de', 'billing_address.phoneNumber')",
-                                    arg: "text"
-                                  }
-                                ],
-                                staticClass: "input-unit",
-                                attrs: { "data-model": "telephone" }
-                              },
-                              [
-                                _c("input", {
-                                  attrs: {
-                                    type: "text",
-                                    name: "telephone",
-                                    id: "txtTelephone" + _vm._uid
-                                  },
-                                  domProps: { value: _vm.value.telephone },
-                                  on: {
-                                    input: function($event) {
-                                      return _vm.emitInputEvent(
-                                        "telephone",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  { attrs: { for: "txtTelephone" + _vm._uid } },
-                                  [
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(
-                                          _vm.transformTranslation(
-                                            "Ceres::Template.addressTelephone",
-                                            "de",
-                                            "billing_address.phoneNumber"
-                                          )
-                                        ) +
-                                        "\n                            "
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
-                        : _vm._e()
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12 col-sm-8" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "input-unit",
-                          attrs: {
-                            "data-validate": "text",
-                            "data-model": "address1"
-                          }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "text",
-                              name: "street",
-                              autocomplete: "address-line1",
-                              id: "txtStreet" + _vm._uid
-                            },
-                            domProps: { value: _vm.value.address1 },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "address1",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "txtStreet" + _vm._uid } },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.addressStreet"
-                                  )
-                                ) + "*"
-                              )
-                            ]
-                          )
                         ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-sm-4" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "input-unit",
-                          attrs: {
-                            "data-validate": "text",
-                            "data-model": "address2"
-                          }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "text",
-                              name: "housenumber",
-                              autocomplete: "address-line2",
-                              id: "txtNumber" + _vm._uid
-                            },
-                            domProps: { value: _vm.value.address2 },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "address2",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "txtNumber" + _vm._uid } },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.addressNumber"
-                                  )
-                                ) + "*"
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _vm.isInOptionalFields("de", "billing_address.address3")
-                      ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                      : _c("div", { staticClass: "col-12 col-sm-8" }, [
                           _c(
                             "div",
                             {
@@ -3670,28 +3300,28 @@ var render = function() {
                                   rawName: "v-validate:text",
                                   value: _vm.isInRequiredFields(
                                     "de",
-                                    "billing_address.address3"
+                                    "billing_address.contactPerson"
                                   ),
                                   expression:
-                                    "isInRequiredFields('de', 'billing_address.address3')",
+                                    "isInRequiredFields('de', 'billing_address.contactPerson')",
                                   arg: "text"
                                 }
                               ],
                               staticClass: "input-unit",
-                              attrs: { "data-model": "address3" }
+                              attrs: { "data-model": "contactPerson" }
                             },
                             [
                               _c("input", {
                                 attrs: {
                                   type: "text",
-                                  name: "decorateAddress",
-                                  id: "decorateAddress0" + _vm._uid
+                                  name: "lastName",
+                                  id: "txtContactPerson" + _vm._uid
                                 },
-                                domProps: { value: _vm.value.address3 },
+                                domProps: { value: _vm.value.contactPerson },
                                 on: {
                                   input: function($event) {
                                     return _vm.emitInputEvent(
-                                      "address3",
+                                      "contactPerson",
                                       $event.target.value
                                     )
                                   }
@@ -3701,19 +3331,81 @@ var render = function() {
                               _c(
                                 "label",
                                 {
-                                  attrs: { for: "decorateAddress0" + _vm._uid }
+                                  attrs: { for: "txtContactPerson" + _vm._uid }
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                " +
+                                    "\n                            " +
                                       _vm._s(
                                         _vm.transformTranslation(
-                                          "Ceres::Template.addressAdditionalAddress1",
+                                          "Ceres::Template.addressContactPerson",
                                           "de",
-                                          "billing_address.address3"
+                                          "billing_address.contactPerson"
                                         )
                                       ) +
-                                      "\n                            "
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]),
+                    _vm._v(" "),
+                    _vm.isInOptionalFields("de", "billing_address.name4")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.isInRequiredFields(
+                                    "de",
+                                    "billing_address.name4"
+                                  ),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.name4')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "name4" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "decorateName",
+                                  id: "txtAdditionalName" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.name4 },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "name4",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  attrs: { for: "txtAdditionalName" + _vm._uid }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressAdditionalName",
+                                          "de",
+                                          "billing_address.name4"
+                                        )
+                                      ) +
+                                      "\n                        "
                                   )
                                 ]
                               )
@@ -3722,8 +3414,77 @@ var render = function() {
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.isInOptionalFields("de", "billing_address.address4")
-                      ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                    _vm.isInOptionalFields("de", "billing_address.birthday")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:date",
+                                  value:
+                                    _vm.isInRequiredFields(
+                                      "de",
+                                      "billing_address.birthday"
+                                    ) ||
+                                    (!!_vm.value.birthday &&
+                                      !!_vm.value.birthday.length),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.birthday') || !!value.birthday && !!value.birthday.length",
+                                  arg: "date"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "birthday" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "date",
+                                  min: "1901-12-14",
+                                  max: new Date().toISOString().split("T")[0],
+                                  name: "birthday",
+                                  placeholder: _vm.$translate(
+                                    "Ceres::Template.addressBirthdatePlaceholder"
+                                  ),
+                                  id: "txtBirthdate" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.birthday },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "birthday",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "txtBirthdate" + _vm._uid } },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressBirthdate",
+                                          "de",
+                                          "billing_address.birthday"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isInOptionalFields("de", "billing_address.phoneNumber")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
                           _c(
                             "div",
                             {
@@ -3733,28 +3494,28 @@ var render = function() {
                                   rawName: "v-validate:text",
                                   value: _vm.isInRequiredFields(
                                     "de",
-                                    "billing_address.address4"
+                                    "billing_address.phoneNumber"
                                   ),
                                   expression:
-                                    "isInRequiredFields('de', 'billing_address.address4')",
+                                    "isInRequiredFields('de', 'billing_address.phoneNumber')",
                                   arg: "text"
                                 }
                               ],
                               staticClass: "input-unit",
-                              attrs: { "data-model": "address4" }
+                              attrs: { "data-model": "telephone" }
                             },
                             [
                               _c("input", {
                                 attrs: {
                                   type: "text",
-                                  name: "decorateAddress",
-                                  id: "decorateAddress1" + _vm._uid
+                                  name: "telephone",
+                                  id: "txtTelephone" + _vm._uid
                                 },
-                                domProps: { value: _vm.value.address4 },
+                                domProps: { value: _vm.value.telephone },
                                 on: {
                                   input: function($event) {
                                     return _vm.emitInputEvent(
-                                      "address4",
+                                      "telephone",
                                       $event.target.value
                                     )
                                   }
@@ -3763,20 +3524,18 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "label",
-                                {
-                                  attrs: { for: "decorateAddress1" + _vm._uid }
-                                },
+                                { attrs: { for: "txtTelephone" + _vm._uid } },
                                 [
                                   _vm._v(
-                                    "\n                                " +
+                                    "\n                            " +
                                       _vm._s(
                                         _vm.transformTranslation(
-                                          "Ceres::Template.addressAdditionalAddress2",
+                                          "Ceres::Template.addressTelephone",
                                           "de",
-                                          "billing_address.address4"
+                                          "billing_address.phoneNumber"
                                         )
                                       ) +
-                                      "\n                            "
+                                      "\n                        "
                                   )
                                 ]
                               )
@@ -3784,87 +3543,322 @@ var render = function() {
                           )
                         ])
                       : _vm._e()
+                  ],
+                  2
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "invoice-addresses-street-select-de" }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-sm-8" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
+                        attrs: {
+                          "data-validate": "text",
+                          "data-model": "address1"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "street",
+                            autocomplete: "address-line1",
+                            id: "txtStreet" + _vm._uid
+                          },
+                          domProps: { value: _vm.value.address1 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address1",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtStreet" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.addressStreet")
+                              ) + "*"
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 col-sm-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
+                        attrs: {
+                          "data-validate": "text",
+                          "data-model": "address2"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "housenumber",
+                            autocomplete: "address-line2",
+                            id: "txtNumber" + _vm._uid
+                          },
+                          domProps: { value: _vm.value.address2 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address2",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtNumber" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.addressNumber")
+                              ) + "*"
+                            )
+                          ]
+                        )
+                      ]
+                    )
                   ])
-                ]),
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "billing_address.address3")
+                  ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "billing_address.address3"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'billing_address.address3')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "address3" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              name: "decorateAddress",
+                              id: "decorateAddress0" + _vm._uid
+                            },
+                            domProps: { value: _vm.value.address3 },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "address3",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "decorateAddress0" + _vm._uid } },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressAdditionalAddress1",
+                                      "de",
+                                      "billing_address.address3"
+                                    )
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-sm-4" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
+                _vm.isInOptionalFields("de", "billing_address.address4")
+                  ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "billing_address.address4"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'billing_address.address4')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "address4" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              name: "decorateAddress",
+                              id: "decorateAddress1" + _vm._uid
+                            },
+                            domProps: { value: _vm.value.address4 },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "address4",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "decorateAddress1" + _vm._uid } },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressAdditionalAddress2",
+                                      "de",
+                                      "billing_address.address4"
+                                    )
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-12 col-sm-4",
+                attrs: { "data-testing": "invoice-addresses-zip-select-de" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "input-unit",
+                    attrs: {
+                      "data-validate": "text",
+                      "data-model": "postalCode"
+                    }
+                  },
+                  [
+                    _c("input", {
                       attrs: {
-                        "data-validate": "text",
-                        "data-model": "postalCode"
+                        type: "text",
+                        name: "zip",
+                        id: "txtZip" + _vm._uid
+                      },
+                      domProps: { value: _vm.value.postalCode },
+                      on: {
+                        input: function($event) {
+                          return _vm.emitInputEvent(
+                            "postalCode",
+                            $event.target.value
+                          )
+                        }
                       }
-                    },
-                    [
-                      _c("input", {
-                        attrs: {
-                          type: "text",
-                          name: "zip",
-                          id: "txtZip" + _vm._uid
-                        },
-                        domProps: { value: _vm.value.postalCode },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent(
-                              "postalCode",
-                              $event.target.value
-                            )
-                          }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { attrs: { for: "txtZip" + _vm._uid } }, [
+                      _vm._v(
+                        _vm._s(_vm.$translate("Ceres::Template.addressZip")) +
+                          "*"
+                      )
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-12 col-sm-4",
+                attrs: { "data-testing": "invoice-addresses-town-select-de" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "input-unit",
+                    attrs: { "data-validate": "text", "data-model": "town" }
+                  },
+                  [
+                    _c("input", {
+                      attrs: {
+                        type: "text",
+                        name: "town",
+                        id: "txtPlace" + _vm._uid
+                      },
+                      domProps: { value: _vm.value.town },
+                      on: {
+                        input: function($event) {
+                          return _vm.emitInputEvent("town", $event.target.value)
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "txtZip" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(_vm.$translate("Ceres::Template.addressZip")) +
-                            "*"
-                        )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-sm-4" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
-                      attrs: { "data-validate": "text", "data-model": "town" }
-                    },
-                    [
-                      _c("input", {
-                        attrs: {
-                          type: "text",
-                          name: "town",
-                          id: "txtPlace" + _vm._uid
-                        },
-                        domProps: { value: _vm.value.town },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent(
-                              "town",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "txtPlace" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.addressPlace")
-                          ) + "*"
-                        )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._t("custom-address-fields")
-              ],
-              2
-            )
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { attrs: { for: "txtPlace" + _vm._uid } }, [
+                      _vm._v(
+                        _vm._s(_vm.$translate("Ceres::Template.addressPlace")) +
+                          "*"
+                      )
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._t("custom-address-fields")
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "1"
         ? [
