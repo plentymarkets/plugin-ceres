@@ -58,7 +58,9 @@ context("Checkout shipping", () =>
 
     function editAddress()
     {
-        cy.getByTestingAttr("invoice-addresses-select-de").find(`input[name="street"]`).type("Abbey Road");
+        cy.getByTestingAttr("invoice-addresses-select-de").find(`input[name="firstName"]`).type("Test");
+        cy.getByTestingAttr("invoice-addresses-select-de").find(`input[name="lastName"]`).type("Test");
+
     }
 
     function getShippingProfile(id)
