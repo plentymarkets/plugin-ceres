@@ -26,6 +26,7 @@ context("Homepage", () =>
         cy.wait(500);
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
+        // TODO add paypal here
     });
 
     it("Should change payment providers as guest", () =>
@@ -39,6 +40,7 @@ context("Homepage", () =>
         cy.get(`[data-id='${INVOICE_ID}']`).should("exist");
         cy.get(`[data-id='${PRE_PAYMENT_ID}']`).should("exist");
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).should("exist");
+        // TODO add paypal here
     });
 
     it("Should have every payment provider visible as guest", () =>
@@ -48,7 +50,10 @@ context("Homepage", () =>
 
     it("Should pay with cash on delivery as user", () =>
     {
-
+        visitCheckoutAsUser();
+        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
+        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
+        completeOrder();
     });
 
     it("Should pay with cash on delivery as guest", () =>
@@ -120,5 +125,11 @@ context("Homepage", () =>
             cy.visit("/checkout");
             cy.location("pathname").should("eq", "/checkout/");
         });
+    }
+
+    function completeOrder()
+    {
+        // TODO click agb
+        // TODO click pay
     }
 });
