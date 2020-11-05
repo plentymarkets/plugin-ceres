@@ -29,14 +29,14 @@ class OnlineStoreStep extends Step
                 $this->buildStoreCategoryTypesStructure(),
                 $this->buildStoreBack2Top(),
                 $this->buildStoreEmailSettings(),
+                $this->buildVariationOrderPropertiesSettings(),
                 $this->buildStoreOrderSettings(),
                 $this->buildStoreShippingSettings(),
                 $this->buildGoogleMapsSettings(),
                 $this->buildGoogleRecaptchaSettings(),
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
-                $this->buildExternalVatIdCheckSettings(),
-                $this->buildVariationOrderPropertiesSettings()
+                $this->buildExternalVatIdCheckSettings()
             ]
         ];
     }
