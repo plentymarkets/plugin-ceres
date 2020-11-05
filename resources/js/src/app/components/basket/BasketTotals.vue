@@ -74,7 +74,7 @@
                     <dt :class="{ 'font-weight-bold': !showNetPrices }">
                         {{ $translate("Ceres::Template.basketShippingCosts") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': !showNetPrices }">
+                    --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="shipping-gross">
                         {{ basket.shippingAmount | currency }}
                     </dd>
                 </template>

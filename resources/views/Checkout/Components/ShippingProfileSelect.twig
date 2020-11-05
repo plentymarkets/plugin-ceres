@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-shipping-profile-select">
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
         <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
-            <li v-for="shippingProfile in shippingProfileList" class="method-list-item" :data-id="shippingProfile.parcelServicePresetId">
+            <li v-for="shippingProfile in shippingProfileList" class="method-list-item"  :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
                         :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
