@@ -1,7 +1,11 @@
 // / <reference types="cypress" />
 context("Homepage", () =>
 {
-    it.only("Should visit the checkout as user", () =>
+    const CASH_ON_DELIVERY = 1;
+    const INVOICE_ID = 2;
+    const PRE_PAYMENT_ID = 6000;
+
+    it("Should visit the checkout as user", () =>
     {
         visitCheckoutAsUser();
     });
@@ -11,12 +15,95 @@ context("Homepage", () =>
     //     visitCheckoutAsUser(true);
     // });
 
+    it("Should change payment providers as user", () =>
+    {
+        visitCheckoutAsUser();
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).find("input").should("have.be.checked");
+        cy.wait(500);
+        cy.get(`[data-id='${INVOICE_ID}']`).click();
+        cy.get(`[data-id='${INVOICE_ID}']`).find("input").should("have.be.checked");
+        cy.wait(500);
+        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
+        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
+    });
+
+    it("Should change payment providers as guest", () =>
+    {
+
+    });
+
+    it.only("Should have every payment provider visible as user", () =>
+    {
+        visitCheckoutAsUser();
+        cy.get(`[data-id='${INVOICE_ID}']`).should("exist");
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).should("exist");
+        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).should("exist");
+    });
+
+    it("Should have every payment provider visible as guest", () =>
+    {
+
+    });
+
+    it("Should pay with cash on delivery as user", () =>
+    {
+
+    });
+
+    it("Should pay with cash on delivery as guest", () =>
+    {
+
+    });
+
+    it("Should pay with invoice as user", () =>
+    {
+
+    });
+
+    it("Should pay with invoice as guest", () =>
+    {
+
+    });
+
+    it("Should pay with pre payment as user", () =>
+    {
+
+    });
+
+    it("Should pay with pre payment as guest", () =>
+    {
+
+    });
+
+    it("Should pay with paypal as user", () =>
+    {
+
+    });
+
+    it("Should pay with paypal as guest", () =>
+    {
+
+    });
+
+    // Alle Test-Cases 1x als Gast und 1x als angemeldeter Benutzer
+
+    // Wird die Kasse korrekt im Frontend angezeigt?
+    // Kann [ohne Fehler] die Zahlungsart gewechselt werden?
+    // Sind die Zahlungsarten Barzahlung, Vorkasse, Rechnung und Paypal vorhanden?
+    // Kann ich mit jeder Zahlungsart bezahlen, wird diese dann am Auftrag hinterlegt? (Prüfen, was auf der Bestellbestätigung steht) (Bei PayPalzahlung kann ruhig abgebrochen werden, wichtig ist was am Auftrag steht)
+
     function visitCheckoutAsUser()
     {
         cy.visit("/");
 
+        cy.clickElement("login-select");
+
+        // set login data into inputs and submit form
+        cy.getByTestingAttr("email-login").type("plentytest@plenty.de", { delay: 30 });
+        cy.getByTestingAttr("password-login").type("Testuser1234", { delay: 30 });
+
         cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
-        cy.login();
 
         cy.getByTestingAttr("submit-login").click();
 
