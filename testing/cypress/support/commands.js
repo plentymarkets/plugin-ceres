@@ -42,3 +42,18 @@ Cypress.Commands.add("clickElement", (attr) =>
     cy.getByTestingAttr(attr).should("exist");
     return cy.getByTestingAttr(attr).click();
 });
+
+Cypress.Commands.add("login", (attr) =>
+{
+    cy.request(
+        "POST",
+        "/rest/io/customer/login",
+        {
+            body:
+            {
+                email: "plentytest@plenty.de",
+                password: "Testuser1234"
+            }
+        }
+    );
+});
