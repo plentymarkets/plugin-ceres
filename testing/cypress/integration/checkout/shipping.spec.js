@@ -38,6 +38,29 @@ context("Checkout shipping", () =>
         });
     }
 
+    function visitCheckoutAsGuest()
+    {
+        const itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
+
+        cy.visit(itemUrl);
+        cy.wait(500);
+
+        cy.get(".add-to-basket-container > button").should("exist");
+        cy.get(".add-to-basket-container > button").click();
+
+        cy.visit("/checkout");
+        cy.wait(100);
+        cy.getByTestingAttr("guest-login-input").type(`user${new Date().valueOf()}@plentye2etest.de`);
+        cy.getByTestingAttr("guest-login-button").click();
+
+        editAddress();
+    }
+
+    function editAddress()
+    {
+        cy.getByTestingAttr("invoice-addresses-select-de").find(`input[name="street"]`).type("Abbey Road");
+    }
+
     function getShippingProfile(id)
     {
         return cy.get(`[data-id='${id}']`);
@@ -48,12 +71,20 @@ context("Checkout shipping", () =>
         cy.visit("/");
     });
 
-    it("should verify that GLS profile and DHL profile exist", () =>
+    it("should verify that GLS profile and DHL profile exist as User", () =>
     {
         visitCheckoutAsUser();
         getShippingProfile(DHLID).should("exist");
         getShippingProfile(GLSID).should("exist");
     });
+
+    it.only("should verify that GLS profile and DHL profile exist as Guest", () =>
+    {
+        visitCheckoutAsGuest();
+        getShippingProfile(DHLID).should("exist");
+        getShippingProfile(GLSID).should("exist");
+    });
+
 
     it("should switch between shipping profiles", () =>
     {
@@ -74,11 +105,30 @@ context("Checkout shipping", () =>
 
         getShippingProfile(GLSID).click();
 
+        cy.wait(500);
         cy.getByTestingAttr("shipping-gross").invoke("text").then((text) =>
         {
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 
             expect(shippingGross).to.eql("2,99EUR");
         });
+    });
+
+    it("should change shipping profile when address changes", () =>
+    {
+        visitCheckoutAsUser();
+        cy.get("#addressMultiSelect14 > .item-inner").click();
+        cy.wait(100);
+        cy.get(":nth-child(2) > .item-inner").click();
+        cy.wait(500);
+        getShippingProfile(DHLID).should("not.exist");
+        getShippingProfile(GLSID).should("exist");
+        cy.getByTestingAttr("shipping-gross").invoke("text").then((text) =>
+        {
+            const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
+
+            expect(shippingGross).to.eql("10,00EUR");
+        });
+
     });
 });

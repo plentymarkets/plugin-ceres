@@ -177,7 +177,7 @@
             <slot name="custom-address-fields"></slot>
         </template>
         <!-- BillingAddressDE -->
-        <template v-else-if="localeToShow == 'DE' && addressType === '1'">
+        <template data-testing="invoice-addresses-select-de" v-else-if="localeToShow == 'DE' && addressType === '1'">
             <div class="col-12">
                 <div class="row">
                     <div v-if="isInOptionalFields('de', 'billing_address.salutation')" class="col-12 col-sm-4">
