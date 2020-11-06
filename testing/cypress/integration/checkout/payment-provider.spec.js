@@ -34,7 +34,7 @@ context("Homepage", () =>
 
     });
 
-    it.only("Should have every payment provider visible as user", () =>
+    it("Should have every payment provider visible as user", () =>
     {
         visitCheckoutAsUser();
         cy.get(`[data-id='${INVOICE_ID}']`).should("exist");
@@ -51,9 +51,10 @@ context("Homepage", () =>
     it("Should pay with cash on delivery as user", () =>
     {
         visitCheckoutAsUser();
-        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
-        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).find("input").should("have.be.checked");
         completeOrder();
+        cy.get(`[id*=payment_name]`).should("contain", "Vorkasse");
     });
 
     it("Should pay with cash on delivery as guest", () =>
@@ -61,9 +62,13 @@ context("Homepage", () =>
 
     });
 
-    it("Should pay with invoice as user", () =>
+    it.only("Should pay with invoice as user", () =>
     {
-
+        visitCheckoutAsUser();
+        cy.get(`[data-id='${INVOICE_ID}']`).click();
+        cy.get(`[data-id='${INVOICE_ID}']`).find("input").should("have.be.checked");
+        completeOrder();
+        cy.get(`[id*=payment_name]`).should("contain", "Rechnung");
     });
 
     it("Should pay with invoice as guest", () =>
@@ -129,7 +134,8 @@ context("Homepage", () =>
 
     function completeOrder()
     {
-        // TODO click agb
-        // TODO click pay
+        cy.get("input[id^=gtc-accept]").click();
+        cy.getByTestingAttr("place-order").click();
+        cy.location("pathname").should("eq", "/bestellbestaetigung/");
     }
 });
