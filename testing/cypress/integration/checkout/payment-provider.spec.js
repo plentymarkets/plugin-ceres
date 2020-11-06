@@ -51,8 +51,9 @@ context("Homepage", () =>
     it("Should pay with cash on delivery as user", () =>
     {
         visitCheckoutAsUser();
-        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
-        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).find("input").should("have.be.checked");
+        cy.wait(5000);
+        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
+        cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
         completeOrder();
         cy.get(`[id*=payment_name]`).should("contain", "Vorkasse");
     });
@@ -62,7 +63,7 @@ context("Homepage", () =>
 
     });
 
-    it.only("Should pay with invoice as user", () =>
+    it("Should pay with invoice as user", () =>
     {
         visitCheckoutAsUser();
         cy.get(`[data-id='${INVOICE_ID}']`).click();
@@ -78,7 +79,11 @@ context("Homepage", () =>
 
     it("Should pay with pre payment as user", () =>
     {
-
+        visitCheckoutAsUser();
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).find("input").should("have.be.checked");
+        completeOrder();
+        cy.get(`[id*=payment_name]`).should("contain", "Vorkasse");
     });
 
     it("Should pay with pre payment as guest", () =>
@@ -95,13 +100,6 @@ context("Homepage", () =>
     {
 
     });
-
-    // Alle Test-Cases 1x als Gast und 1x als angemeldeter Benutzer
-
-    // Wird die Kasse korrekt im Frontend angezeigt?
-    // Kann [ohne Fehler] die Zahlungsart gewechselt werden?
-    // Sind die Zahlungsarten Barzahlung, Vorkasse, Rechnung und Paypal vorhanden?
-    // Kann ich mit jeder Zahlungsart bezahlen, wird diese dann am Auftrag hinterlegt? (Prüfen, was auf der Bestellbestätigung steht) (Bei PayPalzahlung kann ruhig abgebrochen werden, wichtig ist was am Auftrag steht)
 
     function visitCheckoutAsUser()
     {
