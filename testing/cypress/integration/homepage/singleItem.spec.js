@@ -21,18 +21,31 @@ context("Single Item", () =>
         });
     });
 
-    it("should check for the item price", () =>
+    it("should check for the RRP", () =>
     {
-        cy.get(".has-crossprice").then(($crossPrice) => {
-            const crossPrice = text("0,70"); // Als Zahlenformat vergleichen?
-            expect($crossPrice).to.eql(crossPrice);
+        cy.get(".crossprice").then(($crossPrice) => {
+            expect($crossPrice).to.contain("0,80");
         });
     });
 
-
-    it("should check for breadcrumbs", () =>
+    it("should check for the price", () =>
     {
-        cy.get(".breadcrumbs").should("exist");
+        cy.get(".price").then(($price) => {
+            expect($price).to.contain("0,70");
+        });
+    });
+
+    it("should check for base price", () =>
+    {
+        cy.get(".base-price-value").then(($basePrice) => {
+            expect($basePrice).to.contain("0,70");
+        });
+    });
+
+    it("should check for lowest breadcrumb level", () =>
+    {
+        cy.get(".breadcrumb-item.active").then(($breadcrumbItem) => {
+            expect($breadcrumbItem).to.contain("Loungesessel Herkules");
+        });
     });
 });
-
