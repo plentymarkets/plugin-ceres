@@ -4,18 +4,19 @@ context("Homepage", () =>
     const CASH_ON_DELIVERY = 1;
     const INVOICE_ID = 2;
     const PRE_PAYMENT_ID = 6000;
+    const PAY_PAL_ID = 6001;
 
     it("Should visit the checkout as user", () =>
     {
         visitCheckoutAsUser();
     });
 
-    // it.only("Should visit the checkout as guest", () =>
-    // {
-    //     visitCheckoutAsUser(true);
-    // });
+    it("Should visit the checkout as guest", () =>
+    {
+        cy.login();
+    });
 
-    it("Should change payment providers as user", () =>
+    it.only("Should change payment providers as user", () =>
     {
         visitCheckoutAsUser();
         cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
@@ -26,7 +27,9 @@ context("Homepage", () =>
         cy.wait(500);
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
-        // TODO add paypal here
+        cy.wait(500);
+        cy.get(`[data-id='${PAY_PAL_ID}']`).click();
+        cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
     });
 
     it("Should change payment providers as guest", () =>
@@ -40,7 +43,7 @@ context("Homepage", () =>
         cy.get(`[data-id='${INVOICE_ID}']`).should("exist");
         cy.get(`[data-id='${PRE_PAYMENT_ID}']`).should("exist");
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).should("exist");
-        // TODO add paypal here
+        cy.get(`[data-id='${PAY_PAL_ID}']`).should("exist");
     });
 
     it("Should have every payment provider visible as guest", () =>
@@ -93,7 +96,11 @@ context("Homepage", () =>
 
     it("Should pay with paypal as user", () =>
     {
-
+        visitCheckoutAsUser();
+        cy.get(`[data-id='${PAY_PAL_ID}']`).click();
+        cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
+        completeOrder();
+        cy.get(`[id*=payment_name]`).should("contain", "PayPal");
     });
 
     it("Should pay with paypal as guest", () =>
@@ -103,31 +110,16 @@ context("Homepage", () =>
 
     function visitCheckoutAsUser()
     {
-        cy.visit("/");
-
-        cy.clickElement("login-select");
-
-        // set login data into inputs and submit form
-        cy.getByTestingAttr("email-login").type("plentytest@plenty.de", { delay: 30 });
-        cy.getByTestingAttr("password-login").type("Testuser1234", { delay: 30 });
+        cy.visit("/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
 
         cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
+        cy.login();
 
-        cy.getByTestingAttr("submit-login").click();
+        cy.get(".add-to-basket-container > button").should("exist");
+        cy.get(".add-to-basket-container > button").click();
 
-        // wait for login call
-        cy.wait("@loginUser").then((xhr) =>
-        {
-            const itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
-
-            cy.visit(itemUrl);
-
-            cy.get(".add-to-basket-container > button").should("exist");
-            cy.get(".add-to-basket-container > button").click();
-
-            cy.visit("/checkout");
-            cy.location("pathname").should("eq", "/checkout/");
-        });
+        cy.visit("/checkout");
+        cy.location("pathname").should("eq", "/checkout/");
     }
 
     function completeOrder()

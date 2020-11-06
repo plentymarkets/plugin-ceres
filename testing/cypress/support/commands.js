@@ -49,11 +49,8 @@ Cypress.Commands.add("login", (attr) =>
         "POST",
         "/rest/io/customer/login",
         {
-            body:
-            {
-                email: "plentytest@plenty.de",
-                password: "Testuser1234"
-            }
+            email: "plentytest@plenty.de",
+            password: "Testuser1234"
         }
     );
 });
