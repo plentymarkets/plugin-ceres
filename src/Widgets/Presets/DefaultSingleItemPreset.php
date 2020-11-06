@@ -118,7 +118,7 @@ class DefaultSingleItemPreset implements ContentPreset
         }
         $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
-            ->withSetting('customClass', 'title-outer')
+            ->withSetting('customClass', 'title-outer item-name')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)

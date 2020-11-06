@@ -3,22 +3,23 @@ context("Single Item", () =>
 {
     beforeEach(() =>
     {
-        cy.visit("/");
+        cy.visit("/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+
     });
 
     it("should check for article name", () =>
     {
-        cy.get("widget widget-text widget-none title-outer").should("exist");
+        cy.get(".title-outer").should("exist");
     });
 
     it("should check for article producer", () =>
     {
-        cy.get("producertag h6 producer text-muted").should("exist");
+        cy.get(".producertag").should("exist");
     });
 
     it("should check for seperator between article name and article number", () =>
     {
-        cy.get("widget-separator").should("exist");
+        cy.get(".widget-separator").should("exist");
     });
 
 });
