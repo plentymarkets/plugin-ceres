@@ -42001,7 +42001,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "col-12 col-sm-4" },
+        {
+          staticClass: "col-12 col-sm-4",
+          attrs: { "data-testing": "address-country-select" }
+        },
         [
           _c("country-select", {
             attrs: {
@@ -42516,15 +42519,24 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("h1", { staticClass: "h2 title" }, [
-                        _c("span", [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm._f("itemName")(_vm.currentVariation)) +
-                              "\n                            "
-                          )
-                        ])
-                      ]),
+                      _c(
+                        "h1",
+                        {
+                          staticClass: "h2 title",
+                          attrs: { "data-testing": "item-name" }
+                        },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm._f("itemName")(_vm.currentVariation)
+                                ) +
+                                "\n                            "
+                            )
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm._t("tag-list"),
                       _vm._v(" "),
