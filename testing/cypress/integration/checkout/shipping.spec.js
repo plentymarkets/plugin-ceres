@@ -103,7 +103,7 @@ context("Checkout shipping", () =>
 
     });
 
-    it.only("should change shipping profile when address changes as Guest", () =>
+    it("should change shipping profile when address changes as Guest", () =>
     {
         const itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
 
@@ -117,7 +117,7 @@ context("Checkout shipping", () =>
         cy.wait(100);
         cy.getByTestingAttr("guest-login-input").type(`user${new Date().valueOf()}@plentye2etest.de`);
         cy.getByTestingAttr("guest-login-button").click();
-        cy.wait(500);
+        cy.wait(1000);
         cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
         cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
 
@@ -128,15 +128,10 @@ context("Checkout shipping", () =>
 
         cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
 
-        cy.getByTestingAttr("address-country-select").first().click();
+        cy.getByTestingAttr("address-country-select").first().find(".custom-select").select("United Kingdom");
 
         cy.getByTestingAttr("modal-submit").first().click();
 
-        /* cy.getByTestingAttr("add-address").click();
-        cy.get("#addressMultiSelect14 > .item-inner").click();
-        cy.wait(100);
-        cy.get(":nth-child(2) > .item-inner").click();
-        cy.wait(500);
         getShippingProfile(DHLID).should("not.exist");
         getShippingProfile(GLSID).should("exist");
         cy.getByTestingAttr("shipping-gross").invoke("text").then((text) =>
@@ -144,7 +139,6 @@ context("Checkout shipping", () =>
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 
             expect(shippingGross).to.eql("10,00EUR");
-        }); */
-
+        });
     });
 });

@@ -57,7 +57,6 @@ Cypress.Commands.add("loginAsGuest", () =>
     cy.wait(100);
     cy.getByTestingAttr("guest-login-input").type(`user${new Date().valueOf()}@plentye2etest.de`);
     cy.getByTestingAttr("guest-login-button").click();
-    cy.wait(500);
     editAddress();
 });
 
@@ -87,13 +86,14 @@ Cypress.Commands.add("loginAsUser", () =>
 
         cy.visit("/checkout");
 
-        cy.wait(500);
+        cy.wait(1000);
         cy.location("pathname").should("eq", "/checkout/");
     });
 });
 
 function editAddress()
 {
+    cy.wait(1000);
     cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
     cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
 
