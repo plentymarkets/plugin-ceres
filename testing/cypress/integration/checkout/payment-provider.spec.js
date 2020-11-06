@@ -16,7 +16,7 @@ context("Homepage", () =>
         cy.login();
     });
 
-    it.only("Should change payment providers as user", () =>
+    it("Should change payment providers as user", () =>
     {
         visitCheckoutAsUser();
         cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
@@ -54,11 +54,10 @@ context("Homepage", () =>
     it("Should pay with cash on delivery as user", () =>
     {
         visitCheckoutAsUser();
-        cy.wait(5000);
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
         completeOrder();
-        cy.get(`[id*=payment_name]`).should("contain", "Vorkasse");
+        cy.get(`[id*=payment_name]`).should("contain", "Nachnahme");
     });
 
     it("Should pay with cash on delivery as guest", () =>
@@ -94,14 +93,14 @@ context("Homepage", () =>
 
     });
 
-    it("Should pay with paypal as user", () =>
-    {
-        visitCheckoutAsUser();
-        cy.get(`[data-id='${PAY_PAL_ID}']`).click();
-        cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
-        completeOrder();
-        cy.get(`[id*=payment_name]`).should("contain", "PayPal");
-    });
+    // it("Should pay with paypal as user", () =>
+    // {
+    //     visitCheckoutAsUser();
+    //     cy.get(`[data-id='${PAY_PAL_ID}']`).click();
+    //     cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
+    //     completeOrder();
+    //     cy.get(`[id*=payment_name]`).should("contain", "PayPal");
+    // });
 
     it("Should pay with paypal as guest", () =>
     {
@@ -110,14 +109,8 @@ context("Homepage", () =>
 
     function visitCheckoutAsUser()
     {
-        cy.visit("/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
-
-        cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
         cy.login();
-
-        cy.get(".add-to-basket-container > button").should("exist");
-        cy.get(".add-to-basket-container > button").click();
-
+        cy.addBasketItem(1014);
         cy.visit("/checkout");
         cy.location("pathname").should("eq", "/checkout/");
     }

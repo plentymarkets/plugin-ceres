@@ -54,3 +54,15 @@ Cypress.Commands.add("login", (attr) =>
         }
     );
 });
+
+Cypress.Commands.add("addBasketItem", (variationId, quantity = 1) =>
+{
+    cy.request(
+        "POST",
+        "/rest/io/basket/items/",
+        {
+            variationId,
+            quantity
+        }
+    );
+});
