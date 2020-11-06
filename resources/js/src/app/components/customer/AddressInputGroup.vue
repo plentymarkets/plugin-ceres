@@ -914,7 +914,7 @@
             <slot name="custom-address-fields"></slot>
         </template>
 
-        <div class="col-12 col-sm-4">
+        <div class="col-12 col-sm-4" data-testing="address-country-select">
             <country-select
                 :selected-country-id="value.countryId"
                 :selected-state-id="value.stateId"

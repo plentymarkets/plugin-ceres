@@ -42001,7 +42001,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "col-12 col-sm-4" },
+        {
+          staticClass: "col-12 col-sm-4",
+          attrs: { "data-testing": "address-country-select" }
+        },
         [
           _c("country-select", {
             attrs: {

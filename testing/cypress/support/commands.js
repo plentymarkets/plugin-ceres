@@ -57,13 +57,44 @@ Cypress.Commands.add("loginAsGuest", () =>
     cy.wait(100);
     cy.getByTestingAttr("guest-login-input").type(`user${new Date().valueOf()}@plentye2etest.de`);
     cy.getByTestingAttr("guest-login-button").click();
-    cy.wait(100);
+    cy.wait(500);
     editAddress();
+});
+
+Cypress.Commands.add("loginAsUser", () =>
+{
+    cy.clickElement("login-select");
+
+    // set login data into inputs and submit form
+    cy.getByTestingAttr("email-login").type("plentytest@plenty.de", { delay: 30 });
+    cy.getByTestingAttr("password-login").type("Testuser1234", { delay: 30 });
+
+    cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
+
+    cy.getByTestingAttr("submit-login").click();
+
+    // wait for login call
+    cy.wait("@loginUser").then((xhr) =>
+    {
+        const itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
+
+        cy.visit(itemUrl);
+
+        cy.wait(500);
+
+        cy.get(".add-to-basket-container > button").should("exist");
+        cy.get(".add-to-basket-container > button").click();
+
+        cy.visit("/checkout");
+
+        cy.wait(500);
+        cy.location("pathname").should("eq", "/checkout/");
+    });
 });
 
 function editAddress()
 {
-    cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty");
+    cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
     cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
 
     cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="street"]`).type("Abby Road");
@@ -72,5 +103,6 @@ function editAddress()
     cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
 
     cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
+
     cy.getByTestingAttr("modal-submit").first().click();
 }
