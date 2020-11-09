@@ -43,6 +43,30 @@ Cypress.Commands.add("clickElement", (attr) =>
     return cy.getByTestingAttr(attr).click();
 });
 
+Cypress.Commands.add("login", () =>
+{
+    cy.request(
+        "POST",
+        "/rest/io/customer/login",
+        {
+            email: "plentytest@plenty.de",
+            password: "Testuser1234"
+        }
+    );
+});
+
+Cypress.Commands.add("addBasketItem", (variationId, quantity = 1) =>
+{
+    cy.request(
+        "POST",
+        "/rest/io/basket/items/",
+        {
+            variationId,
+            quantity
+        }
+    );
+});
+
 Cypress.Commands.add("loginAsGuest", () =>
 {
     const itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
