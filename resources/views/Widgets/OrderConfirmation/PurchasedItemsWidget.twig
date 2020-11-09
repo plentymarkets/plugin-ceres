@@ -104,7 +104,7 @@
                                                                 <span class="item-word-break">
                                                                     {{ Twig.print('property | propertySelectionValueName') }}
                                                                 </span>
-                                                                {{ Twig.elseif("property.type | length > 0") }}
+                                                            {{ Twig.elseif("property.type | length > 0") }}
                                                                 <span class="item-word-break">
                                                                     {{ Twig.print('property.value') }}
                                                                 </span>
@@ -207,7 +207,7 @@
                             {{ Twig.set("uid", "uid()") }}
                             <div id="collapse-{{ Twig.print('uid') }}" class="collapse row pl-4{% if isPreview %} show{% endif %}">
                                 {{ Twig.for("property", "item.orderProperties") }}
-                                    <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }}</strong>
+                                    <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }} {{ Twig.if("webstoreConfig.useVariationOrderProperties and property.surcharge > 0") }} ({{ Twig.trans("Ceres::Template.basketIncludeAbbr") }} {{ Twig.print("property.surcharge | formatMonetary(itemAmount.currency)") }}) {{ Twig.endif() }}</strong>
                                     {{ Twig.if("property.type == 'file'") }}
                                         {{ Twig.if("webstoreConfig.useVariationOrderProperties") }}
                                             <a class="text-appearance" href="{{ Twig.print('property.fileUrl') }}" target="_blank">
