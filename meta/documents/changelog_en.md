@@ -1,5 +1,29 @@
 # Release Notes for Ceres
 
+
+## v5.0.15 (2020-11-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.14...5.0.15" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+
+### Changed
+
+- The contents in the variation selection are now displayed in an ordered fashion.
+
+### Fixed
+
+- The scrolling performance for widgets in the header has been improved.
+- If the option **Medium** or **Large** had been selected for the **Size** setting of the additional information widget, the corresponding widget overlay could no longer be closed. This has been fixed.
+- Due to an error, the default header was sometimes displayed on item category pages instead of the ShopBuilder header. This has been fixed.
+- Attributes of unavailable variations are now displayed as greyed out and struck through in the variation selection, analogously to attributes of non existent combinations.
+- A wrong value was used for the third priority of the recommended sorting for the search results page. This behaviour has been fixed.
+- Item names on the order confirmation were limited to two lines, which could lead to the truncation of item names. This has been fixed.
+- Due to an error, the order quantity was not correctly updated when a variation had been changed. This has been fixed.
+- Percentage surcharges for order characteristics did not consider graduated prices correctly. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.15 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/item/VariationSelect.vue](https://github.com/plentymarkets/plugin-ceres/pull/2432/files#diff-3bf7e50898b2d79d717300fe7c276487aea49cb917f014bf3f8ea27c6b392149)
+
 ## v5.0.14 (2020-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.13...5.0.14" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### ToDo
