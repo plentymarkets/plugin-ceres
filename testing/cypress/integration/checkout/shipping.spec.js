@@ -16,14 +16,14 @@ context("Checkout shipping", () =>
 
     it("should verify that GLS profile and DHL profile exist as User", () =>
     {
-        cy.loginAsUser();
+        loginAsUser();
         getShippingProfile(DHLID).should("exist");
         getShippingProfile(GLSID).should("exist");
     });
 
     it("should verify that GLS profile and DHL profile exist as Guest", () =>
     {
-        cy.loginAsGuest();
+        loginAsGuest();
         getShippingProfile(DHLID).should("exist");
         getShippingProfile(GLSID).should("exist");
     });
@@ -31,9 +31,8 @@ context("Checkout shipping", () =>
 
     it("should switch between shipping profiles", () =>
     {
-        cy.loginAsUser();
+        loginAsUser();
         getShippingProfile(DHLID).scrollIntoView();
-
         getShippingProfile(GLSID).click();
         cy.wait(500);
         getShippingProfile(DHLID).click();
@@ -43,9 +42,8 @@ context("Checkout shipping", () =>
 
     it("should switch between shipping profiles as Guest", () =>
     {
-        cy.loginAsGuest();
+        loginAsGuest();
         getShippingProfile(DHLID).scrollIntoView();
-
         getShippingProfile(GLSID).click();
         cy.wait(500);
         getShippingProfile(DHLID).click();
@@ -55,9 +53,8 @@ context("Checkout shipping", () =>
 
     it("should change the shipping costs", () =>
     {
-        cy.loginAsUser();
+        loginAsUser();
         getShippingProfile(DHLID).scrollIntoView();
-
         getShippingProfile(GLSID).click();
 
         cy.wait(500);
@@ -71,12 +68,11 @@ context("Checkout shipping", () =>
 
     it("should change the shipping costs as Guest", () =>
     {
-        cy.loginAsGuest();
+        loginAsGuest();
         getShippingProfile(DHLID).scrollIntoView();
-
         getShippingProfile(GLSID).click();
 
-        cy.wait(500);
+        cy.wait(1000);
         cy.getByTestingAttr("shipping-gross").invoke("text").then((text) =>
         {
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
@@ -87,7 +83,7 @@ context("Checkout shipping", () =>
 
     it("should change shipping profile when address changes", () =>
     {
-        cy.loginAsUser();
+        loginAsUser();
         cy.get("#addressMultiSelect14 > .item-inner").click();
         cy.wait(100);
         cy.get(":nth-child(2) > .item-inner").click();
@@ -105,18 +101,9 @@ context("Checkout shipping", () =>
 
     it("should change shipping profile when address changes as Guest", () =>
     {
-        const itemUrl = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
-
-        cy.visit(itemUrl);
-        cy.wait(500);
-
-        cy.get(".add-to-basket-container > button").should("exist");
-        cy.get(".add-to-basket-container > button").click();
-
-        cy.visit("/checkout");
-        cy.wait(100);
-        cy.getByTestingAttr("guest-login-input").type(`user${new Date().valueOf()}@plentye2etest.de`);
-        cy.getByTestingAttr("guest-login-button").click();
+        cy.login(true);
+        cy.addBasketItem(1014);
+        cy.visit("/checkout/");
         cy.wait(1000);
         cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
         cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
@@ -141,4 +128,31 @@ context("Checkout shipping", () =>
             expect(shippingGross).to.eql("10,00EUR");
         });
     });
+
+    function loginAsUser()
+    {
+        cy.login();
+        cy.addBasketItem(1014);
+        cy.visit("/checkout/");
+    }
+
+    function loginAsGuest()
+    {
+        cy.login(true);
+        cy.addBasketItem(1014);
+        cy.visit("/checkout/");
+        addAddress();
+    }
+
+    function addAddress()
+    {
+        cy.wait(1000);
+        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
+        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
+        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="street"]`).type("Abby Road");
+        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="housenumber"]`).type("1337");
+        cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
+        cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
+        cy.getByTestingAttr("modal-submit").first().click();
+    }
 });
