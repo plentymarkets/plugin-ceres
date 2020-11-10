@@ -1,5 +1,5 @@
 // / <reference types="cypress" />
-context("Homepage", () =>
+context("Checkout payment provider", () =>
 {
     const CASH_ON_DELIVERY = 1;
     const INVOICE_ID = 2;

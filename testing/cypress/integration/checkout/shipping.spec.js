@@ -101,7 +101,7 @@ context("Checkout shipping", () =>
 
     it("should change shipping profile when address changes as Guest", () =>
     {
-        cy.login(true);
+        cy.loginAsGuest();
         cy.addBasketItem(1014);
         cy.visit("/checkout/");
         cy.wait(1000);
@@ -129,7 +129,7 @@ context("Checkout shipping", () =>
 
     function loginAsGuest()
     {
-        cy.login(true);
+        cy.loginAsGuest();
         cy.addBasketItem(1014);
         cy.visit("/checkout/");
         addAddress();
