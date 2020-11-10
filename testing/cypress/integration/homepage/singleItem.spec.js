@@ -37,15 +37,54 @@ context("Single Item", () =>
 
     it("should check for base price", () =>
     {
-        cy.get(".base-price-value").then(($basePrice) => {
+        cy.get(".base-price-value").then(($basePrice) =>
+        {
             expect($basePrice).to.contain("0,70");
         });
     });
 
     it("should check for lowest breadcrumb level", () =>
     {
-        cy.get(".breadcrumb-item.active").then(($breadcrumbItem) => {
+        cy.get(".breadcrumb-item.active").then(($breadcrumbItem) =>
+        {
             expect($breadcrumbItem).to.contain("Loungesessel Herkules");
         });
+    });
+
+    it("should display correct item availability", () =>
+    {
+        cy.get(".availability").then( (availability) =>
+        {
+            expect(availability).to.contain("Sofort versandfertig, Lieferzeit 48h");
+        });
+    });
+
+    it("should display correct description", () =>
+    {
+        cy.get(".tab-pane.active").then((descText) =>
+        {
+            expect(descText).to.contain("In seinem Cremeweiss wirkt dieses Sitzmöbel äußerst edel und luxuriös. Die Standfüße aus echtem Holz gliedern sich unauffällig und dezent in das Gesamtbild des Sessels ein. Für die Herstellung werden ausnahmslos nur die besten Ressourcen verwendet. Bestes Buchenholz aus heimischen Wäldern und feinstes Kalbsleder machen dieses Möbelstück zu einem einzigartigen Schmuckstück.");
+        });
+    });
+
+    it("should display correct details", () =>
+    {
+        const content = [
+            "Art.-ID", "116", "Zustand", "Neu", "Altersfreigabe", "Ohne Altersbeschränkung", "Hersteller", "A & C Design", "Herstellungsland", "Deutschland", "Inhalt", "1 Stück", "Zolltarifnummer"
+        ];
+
+        cy.get(".nav-tabs").children().last().click();
+        cy.get(".tab-pane.active").then((descText) =>
+        {
+            content.forEach((text) =>
+            {
+                expect(descText).to.contain(text);
+            });
+        });
+    });
+
+    it.only("should display scale prices", () =>
+    {
+        cy.get(".graduated-prices-table").should("exist");
     });
 });
