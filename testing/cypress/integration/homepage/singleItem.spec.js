@@ -87,7 +87,7 @@ context("Single Item", () =>
         });
     });
 
-    it.only("should display scale prices", () =>
+    it("should display scale prices and apply marker on quantity change", () =>
     {
         cy.getByTestingAttr("quantity-btn-add").click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
@@ -97,5 +97,15 @@ context("Single Item", () =>
 
         cy.get(".graduated-prices-table").children().last().children().last().children().first().should("have.class", "fa-check-circle-o");
 
+    });
+
+    it("should display tags and open in search on click", () =>
+    {
+        cy.get(".tag-widget").should("exist");
+        // click on first tag
+        cy.get(".tag-widget").children().first().children().first().click();
+
+        cy.wait(1000);
+        cy.location("pathname").should("eq", "/neu_t1/");
     });
 });
