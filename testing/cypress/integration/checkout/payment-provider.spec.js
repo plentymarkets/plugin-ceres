@@ -122,17 +122,21 @@ context("Homepage", () =>
 
     // it("Should pay with paypal as user", () =>
     // {
-    //     visitCheckoutAsUser();
-    //     cy.get(`[data-id='${PAY_PAL_ID}']`).click();
-    //     cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
-    //     completeOrder();
-    //     cy.get(`[id*=payment_name]`).should("contain", "PayPal");
+    // TODO
+    // visitCheckoutAsUser();
+    // cy.get(`[data-id='${PAY_PAL_ID}']`).click();
+    // cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
+    // cy.get("input[id^=gtc-accept]").click();
+    // cy.getByTestingAttr("place-order").click();
+    // cy.visit("/bestellbestaetigung");
+    // cy.location("pathname").should("eq", "/bestellbestaetigung/");
+    // cy.get(`[id*=payment_name]`).should("contain", "PayPal");
     // });
 
-    it("Should pay with paypal as guest", () =>
-    {
+    // it.only("Should pay with paypal as guest", () =>
+    // {
 
-    });
+    // });
 
     function visitCheckoutAsUser()
     {
