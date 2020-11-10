@@ -28,11 +28,9 @@ context("Header topbar wishlist", () =>
 
         cy.wait("@addToWishlist");
 
-        cy.get(".control-wish-list > a").should("exist");
-        cy.get(".control-wish-list > a").click();
+        cy.get(".control-wish-list > a").scrollIntoView().should("exist").click();
 
         cy.location("pathname").should("eq", wishlistUrl);
-
 
         // check if there is an item in the wishlist
         cy.get(".basket-item").should("exist");
