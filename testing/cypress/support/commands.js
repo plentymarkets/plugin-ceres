@@ -43,16 +43,25 @@ Cypress.Commands.add("clickElement", (attr) =>
     return cy.getByTestingAttr(attr).click();
 });
 
-Cypress.Commands.add("login", (guest = false) =>
+Cypress.Commands.add("login", () =>
 {
-    const url = guest ? "/rest/io/guest" : "/rest/io/customer/login";
-
     cy.request(
         "POST",
-        url,
+        "/rest/io/customer/login",
         {
             email: "plentytest@plenty.de",
             password: "Testuser1234"
+        }
+    );
+});
+
+Cypress.Commands.add("loginAsGuest", () =>
+{
+    cy.request(
+        "POST",
+        "/rest/io/guest",
+        {
+            email: `pentyguest${new Date().getTime()}@plenty.de`
         }
     );
 });
