@@ -105,18 +105,9 @@ context("Checkout shipping", () =>
         cy.addBasketItem(1014);
         cy.visit("/checkout/");
         cy.wait(1000);
-        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
-        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
 
-        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="street"]`).type("Abby Road");
-        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="housenumber"]`).type("1337");
-
-        cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
-
-        cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
-
+        addAddress(false);
         cy.getByTestingAttr("address-country-select").first().find(".custom-select").select("United Kingdom");
-
         cy.getByTestingAttr("modal-submit").first().click();
 
         getShippingProfile(DHLID).should("not.exist");
@@ -144,7 +135,7 @@ context("Checkout shipping", () =>
         addAddress();
     }
 
-    function addAddress()
+    function addAddress(submit = true)
     {
         cy.wait(1000);
         cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
@@ -153,6 +144,9 @@ context("Checkout shipping", () =>
         cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="housenumber"]`).type("1337");
         cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
         cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
-        cy.getByTestingAttr("modal-submit").first().click();
+        if (submit)
+        {
+            cy.getByTestingAttr("modal-submit").first().click();
+        }
     }
 });
