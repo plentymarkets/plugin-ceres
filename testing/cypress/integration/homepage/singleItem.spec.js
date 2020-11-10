@@ -9,28 +9,32 @@ context("Single Item", () =>
 
     it("should check for article name", () =>
     {
-        cy.get(".item-name").then(($itemName) => {
+        cy.get(".item-name").then(($itemName) =>
+        {
             expect($itemName).to.contain("Loungesessel Herkules");
         });
     });
 
     it("should check for article producer", () =>
     {
-        cy.get(".producertag").then(($producerName) => {
+        cy.get(".producertag").then(($producerName) =>
+        {
             expect($producerName).to.contain("A & C Design");
         });
     });
 
     it("should check for the RRP", () =>
     {
-        cy.get(".crossprice").then(($crossPrice) => {
+        cy.get(".crossprice").then(($crossPrice) =>
+        {
             expect($crossPrice).to.contain("0,80");
         });
     });
 
     it("should check for the price", () =>
     {
-        cy.get(".price").then(($price) => {
+        cy.get(".price").then(($price) =>
+        {
             expect($price).to.contain("0,70");
         });
     });
@@ -85,6 +89,13 @@ context("Single Item", () =>
 
     it.only("should display scale prices", () =>
     {
+        cy.getByTestingAttr("quantity-btn-add").click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
+
+        cy.get(".graduated-prices-table").children().first().children().last().children().first().should("have.class", "fa-check-circle-o");
+        cy.getByTestingAttr("quantity-btn-add").click().click().click().click().click();
+
+        cy.get(".graduated-prices-table").children().last().children().last().children().first().should("have.class", "fa-check-circle-o");
+
     });
 });
