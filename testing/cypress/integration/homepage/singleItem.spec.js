@@ -79,8 +79,12 @@ context("Single Item", () =>
             content.forEach((text) =>
             {
                 expect(descText).to.contain(text);
-
             });
         });
+    });
+
+    it.only("should display scale prices", () =>
+    {
+        cy.get(".graduated-prices-table").should("exist");
     });
 });
