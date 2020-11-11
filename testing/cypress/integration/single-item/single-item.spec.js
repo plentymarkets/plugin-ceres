@@ -9,66 +9,42 @@ context("Single Item", () =>
 
     it("should check for article name", () =>
     {
-        cy.get(".item-name").then(($itemName) =>
-        {
-            expect($itemName).to.contain("Loungesessel Herkules");
-        });
+        cy.get(".item-name").should("contain", "Loungesessel Herkules");
     });
 
     it("should check for article producer", () =>
     {
-        cy.get(".producertag").then(($producerName) =>
-        {
-            expect($producerName).to.contain("A & C Design");
-        });
+        cy.get(".producertag").should("contain", "A & C Design");
     });
 
     it("should check for the RRP", () =>
     {
-        cy.get(".crossprice").then(($crossPrice) =>
-        {
-            expect($crossPrice).to.contain("0,80");
-        });
+        cy.get(".crossprice").should("contain", "0,80");
     });
 
     it("should check for the price", () =>
     {
-        cy.get(".price").then(($price) =>
-        {
-            expect($price).to.contain("0,70");
-        });
+        cy.get(".price").should("contain", "0,70");
     });
 
     it("should check for base price", () =>
     {
-        cy.get(".base-price-value").then(($basePrice) =>
-        {
-            expect($basePrice).to.contain("0,70");
-        });
+        cy.get(".base-price-value").should("contain", "0,70");
     });
 
     it("should check for lowest breadcrumb level", () =>
     {
-        cy.get(".breadcrumb-item.active").then(($breadcrumbItem) =>
-        {
-            expect($breadcrumbItem).to.contain("Loungesessel Herkules");
-        });
+        cy.get(".breadcrumb-item.active").should("contain", "Loungesessel Herkules");
     });
 
     it("should display correct item availability", () =>
     {
-        cy.get(".availability").then( (availability) =>
-        {
-            expect(availability).to.contain("Sofort versandfertig, Lieferzeit 48h");
-        });
+        cy.get(".availability").should("contain", "Sofort versandfertig, Lieferzeit 48h");
     });
 
     it("should display correct description", () =>
     {
-        cy.get(".tab-pane.active").then((descText) =>
-        {
-            expect(descText).to.contain("In seinem Cremeweiss wirkt dieses Sitzmöbel äußerst edel und luxuriös. Die Standfüße aus echtem Holz gliedern sich unauffällig und dezent in das Gesamtbild des Sessels ein. Für die Herstellung werden ausnahmslos nur die besten Ressourcen verwendet. Bestes Buchenholz aus heimischen Wäldern und feinstes Kalbsleder machen dieses Möbelstück zu einem einzigartigen Schmuckstück.");
-        });
+        cy.get(".tab-pane.active").should("contain", "In seinem Cremeweiss wirkt dieses Sitzmöbel äußerst edel und luxuriös. Die Standfüße aus echtem Holz gliedern sich unauffällig und dezent in das Gesamtbild des Sessels ein. Für die Herstellung werden ausnahmslos nur die besten Ressourcen verwendet. Bestes Buchenholz aus heimischen Wäldern und feinstes Kalbsleder machen dieses Möbelstück zu einem einzigartigen Schmuckstück.");
     });
 
     it("should display correct details", () =>
@@ -132,5 +108,21 @@ context("Single Item", () =>
         {
             expect(resp.status).to.eq(200);
         });
+    });
+
+    // enable when system supports the oversellWarning flag from old php ui
+    it.skip("should display notification for overselling", () =>
+    {
+        cy.visit("/wohnzimmer/sofas/zweisitzer-paradise-now_132_1066/");
+        const addButton = cy.getByTestingAttr("quantity-btn-add");
+
+        for (let i = 0; i < 19; i++)
+        {
+            addButton.click();
+        }
+
+        cy.get(".add-to-basket-container > button").click();
+        cy.get(".notification-wrapper").children().should("exist");
+        cy.get(".notification-wrapper").children().first().should("contain", "Die gewählte Menge übersteigt den verfügbaren Warenbestand.");
     });
 });
