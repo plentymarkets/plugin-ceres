@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="add-item">
-                    <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressAddAddress") }}" class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly" data-testing="add-address">
+                    <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressAddAddress") }}" class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly" {{ set_testing_attr("data-testing", "add-address") }} >
                         <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </button>
