@@ -121,7 +121,7 @@ context("Single Item", () =>
         });
     });
 
-    it.only("Should display item as logged in user with b2b customer class", () =>
+    it("Should display item as logged in user with b2b customer class", () =>
     {
         cy.login("plentyb2b@plenty.de");
 
