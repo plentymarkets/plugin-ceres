@@ -43,14 +43,14 @@ Cypress.Commands.add("clickElement", (attr) =>
     return cy.getByTestingAttr(attr).click();
 });
 
-Cypress.Commands.add("login", () =>
+Cypress.Commands.add("login", (email = "plentytest@plenty.de", password = "Testuser1234") =>
 {
     cy.request(
         "POST",
         "/rest/io/customer/login",
         {
-            email: "plentytest@plenty.de",
-            password: "Testuser1234"
+            email,
+            password
         }
     );
 });

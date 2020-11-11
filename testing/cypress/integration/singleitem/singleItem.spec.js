@@ -108,4 +108,29 @@ context("Single Item", () =>
         cy.wait(1000);
         cy.location("pathname").should("eq", "/neu_t1/");
     });
+
+    it("Shouldn't display the item as guest", () =>
+    {
+        cy.request({
+            method: "GET",
+            url: "/wohnzimmer/sessel-hocker/sessel-afterwork_122_1020/",
+            failOnStatusCode: false
+        }).then((resp) =>
+        {
+            expect(resp.status).to.eq(404);
+        });
+    });
+
+    it.only("Should display item as logged in user with b2b customer class", () =>
+    {
+        cy.login("plentyb2b@plenty.de");
+
+        cy.request({
+            method: "GET",
+            url: "/wohnzimmer/sessel-hocker/sessel-afterwork_122_1020/"
+        }).then((resp) =>
+        {
+            expect(resp.status).to.eq(200);
+        });
+    });
 });
