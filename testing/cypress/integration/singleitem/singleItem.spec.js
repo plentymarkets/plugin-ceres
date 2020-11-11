@@ -74,7 +74,7 @@ context("Single Item", () =>
     it("should display correct details", () =>
     {
         const content = [
-            "Art.-ID", "116", "Zustand", "Neu", "Altersfreigabe", "Ohne Altersbeschränkung", "Hersteller", "A & C Design", "Herstellungsland", "Deutschland", "Inhalt", "1 Stück", "Zolltarifnummer"
+            "Art.-ID", "116", "Zustand", "Neu", "Altersfreigabe", "Ohne Altersbeschränkung", "Hersteller", "A & C Design", "Herstellungsland", "Deutschland", "Inhalt", "1 Stück"
         ];
 
         cy.get(".nav-tabs").children().last().click();
