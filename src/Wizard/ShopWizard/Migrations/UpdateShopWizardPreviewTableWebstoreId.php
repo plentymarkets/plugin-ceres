@@ -7,10 +7,10 @@ use Plenty\Modules\Plugin\DataBase\Contracts\Migrate;
 use Plenty\Plugin\Log\Loggable;
 
 /**
- * Class CreateShopWizardPreviewConfigTable
+ * Class UpdateShopWizardPreviewTableWebstoreId
  * @package Ceres\Wizard\ShopWizard\Migrations
  */
-class CreateShopWizardPreviewConfigTable
+class UpdateShopWizardPreviewTableWebstoreId
 {
     use Loggable;
 
@@ -19,9 +19,9 @@ class CreateShopWizardPreviewConfigTable
      */
     public function run(Migrate $migrate)
     {
-        $migrate->createTable(ShopWizardPreviewConfiguration::class);
+        $migrate->updateTable(ShopWizardPreviewConfiguration::class);
         $this->getLogger(__CLASS__)->debug(
-            'Ceres::Wizard.tableCreated',
+            'Ceres::Wizard.tableUpdated',
             ['tableName' => 'ShopWizardPreviewConfigurations']
         );
     }
