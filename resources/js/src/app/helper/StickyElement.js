@@ -46,6 +46,7 @@ export class StickyElement
 
         el.classList.add("sticky-element");
 
+        // Update if height changes
         if ("ResizeObserver" in window)
         {
             const resizeObserver = new ResizeObserver(() =>
@@ -56,24 +57,21 @@ export class StickyElement
 
             resizeObserver.observe(this.el);
         }
+        // IE11 + Safari < 13.0
         else
         {
-            document.addEventListener("updateStickyContainer", (event) =>
+            document.addEventListener("updateStickyContainer", () =>
             {
-                let animateChange = setInterval(function()
+                const animateChange = setInterval(() =>
                 {
-                    console.log("boi");
                     this.checkElement();
                     this.updateStyles();
-                }, 10);
+                }, 20);
 
-                console.log(event.detail.type);
-
-                if (event.detail.type != "startChange")
+                setTimeout(() =>
                 {
-                    console.log("clear");
                     clearInterval(animateChange);
-                }
+                }, 350);
             });
         }
     }
