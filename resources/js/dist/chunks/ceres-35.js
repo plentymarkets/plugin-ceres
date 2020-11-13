@@ -86,6 +86,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -350,6 +352,7 @@ var render = function() {
           attrs: {
             "data-toggle": "tooltip",
             "data-placement": "top",
+            "data-testing": "quantity-btn-add",
             title: _vm.maximumHint
           },
           on: {
@@ -386,6 +389,7 @@ var render = function() {
           attrs: {
             "data-toggle": "tooltip",
             "data-placement": "bottom",
+            "data-testing": "quantity-btn-remove",
             title: _vm.minimumHint
           },
           on: {

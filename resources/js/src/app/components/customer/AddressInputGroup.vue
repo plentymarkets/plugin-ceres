@@ -192,7 +192,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12" data-testing="invoice-addresses-company-select-de">
                 <div class="row">
                     <div
                         class="col-12 col-sm-6"
@@ -220,7 +220,7 @@
                 </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-12" data-testing="invoice-addresses-name-select-de">
                 <div class="row">
                     <div v-if="isInOptionalFields('de', 'billing_address.title')" class="col-12 col-sm-4">
                         <div
@@ -298,7 +298,7 @@
                 </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-12" data-testing="invoice-addresses-street-select-de">
                 <div class="row">
                     <div class="col-12 col-sm-8">
                         <div class="input-unit" data-validate="text" data-model="address1">
@@ -344,14 +344,14 @@
                 </div>
             </div>
 
-            <div class="col-12 col-sm-4">
+            <div class="col-12 col-sm-4" data-testing="invoice-addresses-zip-select-de">
                 <div class="input-unit" data-validate="text" data-model="postalCode">
                     <input type="text" name="zip" :id="'txtZip' + _uid" :value="value.postalCode" @input="emitInputEvent('postalCode', $event.target.value)">
                     <label :for="'txtZip' + _uid">{{ $translate("Ceres::Template.addressZip") }}*</label>
                 </div>
             </div>
 
-            <div class="col-12 col-sm-4">
+            <div class="col-12 col-sm-4" data-testing="invoice-addresses-town-select-de">
                 <div class="input-unit" data-validate="text" data-model="town">
                     <input type="text" name="town" :id="'txtPlace' + _uid" :value="value.town" @input="emitInputEvent('town', $event.target.value)">
                     <label :for="'txtPlace' + _uid">{{ $translate("Ceres::Template.addressPlace") }}*</label>
@@ -914,7 +914,7 @@
             <slot name="custom-address-fields"></slot>
         </template>
 
-        <div class="col-12 col-sm-4">
+        <div class="col-12 col-sm-4" data-testing="address-country-select">
             <country-select
                 :selected-country-id="value.countryId"
                 :selected-state-id="value.stateId"

@@ -1,25 +1,3 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-
 // Override visit to add our testing env
 Cypress.Commands.overwrite("visit", (originalFn, url, options = {}) =>
 {
@@ -41,4 +19,39 @@ Cypress.Commands.add("clickElement", (attr) =>
 {
     cy.getByTestingAttr(attr).should("exist");
     return cy.getByTestingAttr(attr).click();
+});
+
+Cypress.Commands.add("login", (email = "plentytest@plenty.de", password = "Testuser1234") =>
+{
+    cy.request(
+        "POST",
+        "/rest/io/customer/login",
+        {
+            email,
+            password
+        }
+    );
+});
+
+Cypress.Commands.add("loginAsGuest", () =>
+{
+    cy.request(
+        "POST",
+        "/rest/io/guest",
+        {
+            email: `pentyguest${new Date().getTime()}@plenty.de`
+        }
+    );
+});
+
+Cypress.Commands.add("addBasketItem", (variationId, quantity = 1) =>
+{
+    cy.request(
+        "POST",
+        "/rest/io/basket/items/",
+        {
+            variationId,
+            quantity
+        }
+    );
 });

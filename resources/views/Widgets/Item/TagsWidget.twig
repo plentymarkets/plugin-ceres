@@ -11,7 +11,7 @@
 
 {{ Twig.set("enabledRoutes", Twig.call("config", ["IO.routing.enabled_routes"]) ~ " | split(\", \")") }}
 
-<div class="widget {% if buttonSize | length > 0 %} {{ buttonSize }}{% endif %} {% if customClass | length > 0 %}
+<div class="widget tag-widget {% if buttonSize | length > 0 %} {{ buttonSize }}{% endif %} {% if customClass | length > 0 %}
     {{ customClass }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <tag-list
         tag-appearance="{{ tagAppearance }}"

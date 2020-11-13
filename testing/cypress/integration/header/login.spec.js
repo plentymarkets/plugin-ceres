@@ -37,22 +37,22 @@ context("Header topbar login", () =>
         });
     });
 
-    it("should fail to login", () =>
-    {
-        cy.clickElement("login-select");
+    // it("should fail to login", () =>
+    // {
+    //     cy.clickElement("login-select");
 
-        // set login data into inputs and submit form
-        cy.getByTestingAttr("email-login").type("plentytest@plenty.de", { delay: 30 });
-        cy.getByTestingAttr("password-login").type("wrongpassword", { delay: 30 });
+    //     // set login data into inputs and submit form
+    //     cy.getByTestingAttr("email-login").type("plentytest@plenty.de", { delay: 30 });
+    //     cy.getByTestingAttr("password-login").type("wrongpassword", { delay: 30 });
 
-        cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
+    //     cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
 
-        cy.getByTestingAttr("submit-login").click();
+    //     cy.getByTestingAttr("submit-login").click();
 
-        // wait for login call
-        cy.wait("@loginUser").then((xhr) =>
-        {
-            expect(xhr.status).to.eql(401);
-        });
-    });
+    //     // wait for login call
+    //     cy.wait("@loginUser").then((xhr) =>
+    //     {
+    //         expect(xhr.status).to.eql(401);
+    //     });
+    // });
 });

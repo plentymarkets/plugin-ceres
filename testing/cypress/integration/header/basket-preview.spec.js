@@ -8,8 +8,7 @@ context("Header topbar currencies", () =>
 
     it("should open and close basket preview on click", () =>
     {
-        cy.get(".control-basket > a").should("exist");
-        cy.get(".control-basket > a").click();
+        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
 
         cy.get("body").should("have.class", "basket-open");
 
@@ -27,8 +26,7 @@ context("Header topbar currencies", () =>
         cy.get(".add-to-basket-container > button").should("exist");
         cy.get(".add-to-basket-container > button").click();
 
-        cy.get(".control-basket > a").should("exist");
-        cy.get(".control-basket > a").click();
+        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
 
         cy.get("body").should("have.class", "basket-open");
 
@@ -41,12 +39,10 @@ context("Header topbar currencies", () =>
 
         cy.visit(itemUrl);
 
-
         cy.get(".add-to-basket-container > button").should("exist");
         cy.get(".add-to-basket-container > button").click();
 
-        cy.get(".control-basket > a").should("exist");
-        cy.get(".control-basket > a").click();
+        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
 
         cy.get("body").should("have.class", "basket-open");
 
