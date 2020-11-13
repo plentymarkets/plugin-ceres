@@ -71,7 +71,7 @@ export class StickyElement
                 setTimeout(() =>
                 {
                     clearInterval(animateChange);
-                }, 350);
+                }, 500);
             });
         }
     }
