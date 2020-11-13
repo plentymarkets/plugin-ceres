@@ -28,6 +28,7 @@ export class StickyElement
         this.offsetTop = 0;
         this.minWidth = minWidth;
         this.isMinWidth = true;
+        this.hasHeightChanged = false;
         this.checkMinWidth();
 
         this.resizeListener = this.checkMinWidth.bind(this);
@@ -44,6 +45,37 @@ export class StickyElement
         });
 
         el.classList.add("sticky-element");
+
+        if ("ResizeObserver" in window)
+        {
+            const resizeObserver = new ResizeObserver(() =>
+            {
+                this.checkElement();
+                this.updateStyles();
+            });
+
+            resizeObserver.observe(this.el);
+        }
+        else
+        {
+            document.addEventListener("updateStickyContainer", (event) =>
+            {
+                let animateChange = setInterval(function()
+                {
+                    console.log("boi");
+                    this.checkElement();
+                    this.updateStyles();
+                }, 10);
+
+                console.log(event.detail.type);
+
+                if (event.detail.type != "startChange")
+                {
+                    console.log("clear");
+                    clearInterval(animateChange);
+                }
+            });
+        }
     }
 
     enable()
@@ -295,6 +327,8 @@ export class StickyElement
         {
             this.getContainerElement().__stickyElements.splice(idx, 1);
         }
+
+        resizeObserver.unobserve(this.el);
 
         this.el.classList.remove("sticky-element");
     }
