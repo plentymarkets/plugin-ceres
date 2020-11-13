@@ -46,7 +46,7 @@ export class StickyElement
 
         el.classList.add("sticky-element");
 
-        // Update if height changes
+        // Update if height of sticky element changes
         if ("ResizeObserver" in window)
         {
             const resizeObserver = new ResizeObserver(() =>

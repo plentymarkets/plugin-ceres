@@ -59,12 +59,16 @@
                     </div>
                 </div>
                 <script2>
-                    $("#collapse_{{ collapseId }}_{{ loop.index }}").on("show.bs.collapse", function() {
-                        document.dispatchEvent(new CustomEvent("updateStickyContainer"));
-                    });
-                    $("#collapse_{{ collapseId }}_{{ loop.index }}").on("hide.bs.collapse", function() {
-                        document.dispatchEvent(new CustomEvent("updateStickyContainer"));
-                    });
+                    var elm = "#collapse_{{ collapseId }}_{{ loop.index }}";
+
+                    if ($(elm).parents(".widget-sticky").length) {
+                        $(elm).on("show.bs.collapse", function() {
+                            document.dispatchEvent(new CustomEvent("updateStickyContainer"));
+                        });
+                        $(elm).on("hide.bs.collapse", function() {
+                            document.dispatchEvent(new CustomEvent("updateStickyContainer"));
+                        });
+                    }
                 </script2>
             </div>
         {% endfor %}
