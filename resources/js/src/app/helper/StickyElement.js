@@ -28,7 +28,6 @@ export class StickyElement
         this.offsetTop = 0;
         this.minWidth = minWidth;
         this.isMinWidth = true;
-        this.hasHeightChanged = false;
         this.checkMinWidth();
 
         this.resizeListener = this.checkMinWidth.bind(this);
