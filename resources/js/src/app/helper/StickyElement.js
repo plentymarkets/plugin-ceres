@@ -50,8 +50,8 @@ export class StickyElement
         {
             const resizeObserver = new ResizeObserver(() =>
             {
-                this.checkElement();
-                this.updateStyles();
+                requestAnimationFrame(this.checkElement.bind(this));
+                requestAnimationFrame(this.updateStyles.bind(this));
             });
 
             resizeObserver.observe(this.el);
