@@ -63,9 +63,9 @@ export class StickyElement
             {
                 const animateChange = setInterval(() =>
                 {
-                    this.checkElement();
-                    this.updateStyles();
-                }, 20);
+                    requestAnimationFrame(this.checkElement.bind(this));
+                    requestAnimationFrame(this.updateStyles.bind(this));
+                }, 10);
 
                 setTimeout(() =>
                 {
