@@ -58,16 +58,6 @@
                         {% endif %}
                     </div>
                 </div>
-                <script2>
-                    var elm = "#collapse_{{ collapseId }}_{{ loop.index }}";
-
-                    $(elm).on("show.bs.collapse", function() {
-                        this.dispatchEvent(new CustomEvent("updateStickyContainer", {bubbles: true}));
-                    });
-                    $(elm).on("hide.bs.collapse", function() {
-                        this.dispatchEvent(new CustomEvent("updateStickyContainer", {bubbles: true}));
-                    });
-                </script2>
             </div>
         {% endfor %}
     </div>

@@ -48,13 +48,13 @@ export class StickyElement
         // Update if height of sticky element changes
         if ("ResizeObserver" in window)
         {
-            const resizeObserver = new ResizeObserver(() =>
+            this.resizeObserver = new ResizeObserver(() =>
             {
                 requestAnimationFrame(this.checkElement.bind(this));
                 requestAnimationFrame(this.updateStyles.bind(this));
             });
 
-            resizeObserver.observe(this.el);
+            this.resizeObserver.observe(this.el);
         }
         // IE11 + Safari < 13.0
         else
@@ -325,7 +325,10 @@ export class StickyElement
             this.getContainerElement().__stickyElements.splice(idx, 1);
         }
 
-        resizeObserver.unobserve(this.el);
+        if (this.resizeObserver)
+        {
+            this.resizeObserver.unobserve(this.el);
+        }
 
         this.el.classList.remove("sticky-element");
     }
