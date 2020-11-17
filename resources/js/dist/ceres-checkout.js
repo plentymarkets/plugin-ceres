@@ -67848,8 +67848,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_19__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../store/index */ "./resources/js/src/app/store/index.js");
-/* harmony import */ var _helper_set__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../helper/set */ "./resources/js/src/app/helper/set.js");
+/* harmony import */ var _helper_set__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../helper/set */ "./resources/js/src/app/helper/set.js");
 
 
 
@@ -67883,7 +67882,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
 
-
 function _parseUrlParam(paramKey, paramValue, result) {
   if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isNullOrUndefined"])(result)) {
     result = {};
@@ -67901,7 +67899,7 @@ function _parseUrlParam(paramKey, paramValue, result) {
     keyList.push(match[2] || match[3]);
   }
 
-  return Object(_helper_set__WEBPACK_IMPORTED_MODULE_23__["set"])(result, keyList, paramValue);
+  return Object(_helper_set__WEBPACK_IMPORTED_MODULE_22__["set"])(result, keyList, paramValue);
 }
 
 function _createQueryString(params) {
@@ -67955,7 +67953,7 @@ function getUrlParams(urlParams) {
 }
 function setUrlParams(urlParams) {
   var pushState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  var pathName = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(_store_index__WEBPACK_IMPORTED_MODULE_22__["default"].state.navigation.currentCategory) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(_store_index__WEBPACK_IMPORTED_MODULE_22__["default"].state.navigation.currentCategory.url) ? _store_index__WEBPACK_IMPORTED_MODULE_22__["default"].state.navigation.currentCategory.url : window.location.pathname;
+  var pathName = window.location.pathname;
 
   var params = _createQueryString(urlParams);
 
