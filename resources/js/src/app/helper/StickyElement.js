@@ -59,7 +59,7 @@ export class StickyElement
         // IE11 + Safari < 13.0
         else
         {
-            document.addEventListener("updateStickyContainer", () =>
+            this.el.addEventListener("updateStickyContainer", () =>
             {
                 const animateChange = setInterval(() =>
                 {

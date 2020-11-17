@@ -61,14 +61,12 @@
                 <script2>
                     var elm = "#collapse_{{ collapseId }}_{{ loop.index }}";
 
-                    if ($(elm).parents(".widget-sticky").length) {
-                        $(elm).on("show.bs.collapse", function() {
-                            document.dispatchEvent(new CustomEvent("updateStickyContainer"));
-                        });
-                        $(elm).on("hide.bs.collapse", function() {
-                            document.dispatchEvent(new CustomEvent("updateStickyContainer"));
-                        });
-                    }
+                    $(elm).on("show.bs.collapse", function() {
+                        this.dispatchEvent(new CustomEvent("updateStickyContainer", {bubbles: true}));
+                    });
+                    $(elm).on("hide.bs.collapse", function() {
+                        this.dispatchEvent(new CustomEvent("updateStickyContainer", {bubbles: true}));
+                    });
                 </script2>
             </div>
         {% endfor %}
