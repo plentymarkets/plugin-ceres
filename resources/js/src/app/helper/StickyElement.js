@@ -1,6 +1,7 @@
 import { isNullOrUndefined } from "./utils";
 import { applyStyles } from "./dom";
 import { detectPassiveEvents } from "./featureDetect";
+import { repeatAnimationFrame } from "./repeatAnimationFrame";
 
 const STICKY_EVENTS = [
     "resize",
@@ -45,15 +46,16 @@ export class StickyElement
 
         el.classList.add("sticky-element");
 
+        const updateHandler = () =>
+        {
+            this.checkElement();
+            this.updateStyles();
+        };
+
         // Update if height of sticky element changes
         if ("ResizeObserver" in window)
         {
-            this.resizeObserver = new ResizeObserver(() =>
-            {
-                requestAnimationFrame(this.checkElement.bind(this));
-                requestAnimationFrame(this.updateStyles.bind(this));
-            });
-
+            this.resizeObserver = new ResizeObserver(updateHandler.bind(this));
             this.resizeObserver.observe(this.el);
         }
         // IE11 + Safari < 13.0
@@ -61,16 +63,9 @@ export class StickyElement
         {
             this.el.addEventListener("updateStickyContainer", () =>
             {
-                const animateChange = setInterval(() =>
-                {
-                    requestAnimationFrame(this.checkElement.bind(this));
-                    requestAnimationFrame(this.updateStyles.bind(this));
-                }, 10);
+                const stop = repeatAnimationFrame(updateHandler.bind(this));
 
-                setTimeout(() =>
-                {
-                    clearInterval(animateChange);
-                }, 500);
+                setTimeout(stop, 500);
             });
         }
     }
