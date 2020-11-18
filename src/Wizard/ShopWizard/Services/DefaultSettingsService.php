@@ -12,6 +12,7 @@ use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Plugin\Models\Plugin;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
+use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 
 /**
@@ -83,7 +84,33 @@ class DefaultSettingsService
         $pluginPaymentMethodsRegistered = $this->getPluginPaymentMethodsRegistered();
         return count($pluginPaymentMethodsRegistered) ? true : false;
     }
-
+    
+    /**
+     * @param int $pluginSetId
+     * @return bool
+     */
+    public function hasIncativePaymentMethod($pluginSetId): bool
+    {
+        /** @var PluginSetRepositoryContract $pluginSetRepo */
+        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
+        /** @var PluginSet $pluginSet */
+        $pluginSet = $pluginSetRepo->get($pluginSetId);
+        
+        $paymentMethods = $this->paymentRepository->all();
+        if (count($paymentMethods)) {
+            foreach ($paymentMethods as $paymentMethod) {
+                /** @var PluginSetEntry $pluginSetEntry */
+                foreach ($pluginSet->pluginSetEntriesWithTrashed as $pluginSetEntry) {
+                    if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === $paymentMethod->pluginKey) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+    
     /**
      * @return array
      */
