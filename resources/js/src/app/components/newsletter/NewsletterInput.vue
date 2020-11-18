@@ -18,7 +18,7 @@
                 <div class="input-group">
                     <div class="input-unit" data-validate="mail">
                         <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} *</label>
-                        <input @focus="loadRecapcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
+                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
                     </div>
                     <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
                 </div>
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <recaptcha v-if="!!App.config.global.googleRecaptchaApiKey && loadRecapcha"></recaptcha>
+        <recaptcha v-if="!!App.config.global.googleRecaptchaApiKey && loadRecaptcha"></recaptcha>
     </form>
 </template>
 
@@ -83,7 +83,7 @@ export default {
             privacyPolicyValue: false,
             honeypot: "",
             googleRecaptchaApiKey: App.config.global.googleRecaptchaApiKey,
-            loadRecapcha: true
+            loadRecaptcha: false
         };
     },
 
@@ -119,7 +119,7 @@ export default {
 
         save()
         {
-            executeReCaptcha(this.$refs.newsletterForm)
+            executeReCaptcha(this.$el)
             .then((recaptchaToken) =>
             {
                 ApiService.post("/rest/io/customer/newsletter", { email: this.email, firstName: this.firstName, lastName: this.lastName, emailFolder: this.emailFolder, honeypot: this.honeypot, recaptcha: recaptchaToken})
