@@ -341,7 +341,6 @@ export default {
     {
         this.$store.dispatch("initVariation", this.itemData);
         this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
-        this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
 
         this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
             itemId:             this.itemId,
