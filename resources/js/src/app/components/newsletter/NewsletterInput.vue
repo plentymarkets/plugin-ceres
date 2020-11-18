@@ -165,7 +165,7 @@ export default {
         {
             if(App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha)
             {
-                const recaptchaId = this.$refs.newsletterForm.querySelector("[data-recaptcha]");
+                const recaptchaId = this.$el.querySelector("[data-recaptcha]");
 
                 window.grecaptcha.reset(recaptchaId);
             }
