@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <recaptcha v-if="!!googleRecaptchaApiKey && loadRecapcha"></recaptcha>
+        <recaptcha v-if="!!App.config.global.googleRecaptchaApiKey && loadRecapcha"></recaptcha>
     </form>
 </template>
 
