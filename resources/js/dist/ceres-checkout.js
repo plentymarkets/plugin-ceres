@@ -37409,7 +37409,8 @@ var render = function() {
         {
           attrs: {
             "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
-            "data-picture-class": _vm.pictureClass
+            "data-picture-class": _vm.pictureClass,
+            "data-alt": _vm.$attrs.alt
           }
         },
         [
