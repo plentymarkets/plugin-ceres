@@ -1,6 +1,7 @@
 import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
 import VariationSelectModule from "./VariationSelectModule";
+import { isNullOrUndefined } from "../../../helper/utils";
 
 const state =
     {
@@ -107,6 +108,45 @@ const actions =
             ceresStore.registerModule(["items", itemId], ItemModule);
             ceresStore.registerModule(["items", itemId, "variationSelect"], VariationSelectModule);
             commit(`${itemId}/setVariation`, extendedData);
+        },
+
+        addLastSeenItem({ commit, state }, variationId)
+        {
+            let lastSeen = window.localStorage.getItem("lastSeen");
+
+            const now = new Date();
+
+            if (isNullOrUndefined(lastSeen))
+            {
+                lastSeen = {
+                    value: [variationId],
+                    expire: now.getTime()
+                };
+            }
+            else
+            {
+                lastSeen = JSON.parse(lastSeen);
+
+                let lastSeenItems = lastSeen.value;
+                let diff = (now.getTime() - lastSeen.expire) / 1000;
+                diff = diff / 60;
+                if (diff > 60)
+                {
+                    window.localStorage.removeItem("lastSeen");
+                    lastSeen = null;
+                    lastSeenItems = [];
+                }
+
+                if (lastSeenItems.indexOf(variationId) === -1)
+                {
+                    lastSeenItems.push(variationId);
+                }
+                lastSeen = {
+                    value: lastSeenItems,
+                    expire: now.getTime()
+                };
+            }
+            window.localStorage.setItem("lastSeen", JSON.stringify(lastSeen));
         }
     };
 

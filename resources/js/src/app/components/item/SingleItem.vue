@@ -341,7 +341,6 @@ export default {
     {
         this.$store.dispatch("initVariation", this.itemData);
         this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
-
         this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
             itemId:             this.itemId,
             attributes:         this.attributesData,
@@ -350,6 +349,8 @@ export default {
             isPleaseSelectOption: this.initPleaseSelectOption,
             afterKey:           this.afterKey
         });
+
+      this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
     },
 
     methods:
