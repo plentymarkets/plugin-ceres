@@ -30,7 +30,7 @@ class RequiredSettingsStep extends Step
         $hasShippingMethod  = $shopWizardService->hasShippingMethods();
         $hasShippingProfile = $shopWizardService->hasShippingProfiles();
         $hasPaymentMethod   = $shopWizardService->hasPaymentMethods();
-        $hasInactivePaymentMethod   = $shopWizardService->hasIncativePaymentMethod($pluginSetId);
+        $hasInactivePaymentMethod   = $shopWizardService->hasInactivePaymentMethod($pluginSetId);
         $hasShippingCountry = $shopWizardService->hasShippingCountries();
         $hasLocation        = $shopWizardService->hasLocations();
 
