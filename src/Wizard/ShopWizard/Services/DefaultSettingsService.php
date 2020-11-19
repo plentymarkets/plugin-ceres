@@ -89,7 +89,7 @@ class DefaultSettingsService
      * @param int $pluginSetId
      * @return bool
      */
-    public function hasIncativePaymentMethod($pluginSetId): bool
+    public function hasInactivePaymentMethod($pluginSetId): bool
     {
         /** @var PluginSetRepositoryContract $pluginSetRepo */
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
