@@ -135,7 +135,12 @@ export function send(url, data = {}, config)
     config.supressNotifications = !!config.supressNotifications;
     config.keepOriginalResponse = !!config.keepOriginalResponse;
     config.headers = config.headers || { "Accept-Language": App.language };
-    config.headers["X-CSRF-TOKEN"] = config.headers["X-CSRF-TOKEN"] || (document.getElementById('csrf-token') || {}).value;
+
+    const csrfToken = config.headers["X-CSRF-TOKEN"] || (document.getElementById('csrf-token') || {}).value;
+    if(csrfToken)
+    {
+        config.headers["X-CSRF-TOKEN"] = csrfToken;
+    }
 
     data.templateType = App.templateType;
     config.data = data;
