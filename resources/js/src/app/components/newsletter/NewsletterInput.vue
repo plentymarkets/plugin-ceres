@@ -82,7 +82,6 @@ export default {
             isDisabled: false,
             privacyPolicyValue: false,
             honeypot: "",
-            googleRecaptchaApiKey: App.config.global.googleRecaptchaApiKey,
             loadRecaptcha: false
         };
     },
