@@ -55550,6 +55550,12 @@ function send(url) {
   config.headers = config.headers || {
     "Accept-Language": App.language
   };
+  var csrfToken = config.headers["X-CSRF-TOKEN"] || (document.getElementById("csrf-token") || {}).value;
+
+  if (csrfToken) {
+    config.headers["X-CSRF-TOKEN"] = csrfToken;
+  }
+
   data.templateType = App.templateType;
   config.data = data;
   var request = $.ajax(url, config).done(function (response) {
