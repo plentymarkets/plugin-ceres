@@ -136,8 +136,9 @@ export function send(url, data = {}, config)
     config.keepOriginalResponse = !!config.keepOriginalResponse;
     config.headers = config.headers || { "Accept-Language": App.language };
 
-    const csrfToken = config.headers["X-CSRF-TOKEN"] || (document.getElementById('csrf-token') || {}).value;
-    if(csrfToken)
+    const csrfToken = config.headers["X-CSRF-TOKEN"] || (document.getElementById("csrf-token") || {}).value;
+
+    if (csrfToken)
     {
         config.headers["X-CSRF-TOKEN"] = csrfToken;
     }
