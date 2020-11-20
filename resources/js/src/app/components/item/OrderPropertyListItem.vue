@@ -352,6 +352,13 @@ export default {
                     NotificationService.error(err[0]);
                 }
             }
+
+            if (error.error.message && error.error.message === "Post too large")
+            {
+                NotificationService.error(
+                    this.$translate("Ceres::Template.errorPostTooLarge")
+                );
+            }
         },
 
         ...mapMutations([
