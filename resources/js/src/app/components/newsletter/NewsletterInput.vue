@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <recaptcha v-if="!!App.config.global.googleRecaptchaApiKey && loadRecaptcha"></recaptcha>
+        <recaptcha v-if="!!$ceres.config.global.googleRecaptchaApiKey && loadRecaptcha"></recaptcha>
     </form>
 </template>
 
