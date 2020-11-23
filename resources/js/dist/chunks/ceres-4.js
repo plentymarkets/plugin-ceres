@@ -669,12 +669,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           NotificationService.error(err[0]);
         }
       }
-
-      if (error.error.message && error.error.message === "Post too large") {
-        NotificationService.error(this.$translate("Ceres::Template.errorPostTooLarge", {
-          maxSize: error.error.maxSize
-        }));
-      }
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_17__["mapMutations"])(["setIsBasketLoading"]))
 });
