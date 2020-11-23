@@ -356,7 +356,7 @@ export default {
             if (error.error.message && error.error.message === "Post too large")
             {
                 NotificationService.error(
-                    this.$translate("Ceres::Template.errorPostTooLarge")
+                    this.$translate("Ceres::Template.errorPostTooLarge" , { maxSize: error.error.maxSize })
                 );
             }
         },
