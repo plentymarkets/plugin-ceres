@@ -35,10 +35,9 @@
         <ul class="breadcrumb container-max px-3 py-2 my-0 mx-auto">
             <li class="breadcrumb-item">
                 <a href="{{ Twig.print('urls.home') }}">
-                    <i class="fa fa-home" aria-hidden="true">
-                        {{ Twig.set("breadcrumbHome", "trans('Ceres::Template.headerBreadcrumbHome')") }}
-                        <span class="breadcrumb-home">{{ Twig.print("breadcrumbHome") }}</span>
-                    </i>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    {{ Twig.set("breadcrumbHome", "trans('Ceres::Template.headerBreadcrumbHome')") }}
+                    <span class="breadcrumb-home">{{ Twig.print("breadcrumbHome") }}</span>
                     {{ Twig.set('crumb', '
                         [
                             {
