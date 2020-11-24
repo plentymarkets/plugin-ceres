@@ -12,30 +12,20 @@ context("Contact Page", () =>
         cy.get("h1").should("contain", "Kontakt");
     });
 
-    it("should check for address icon", () =>
+    it("should check for contact data", () =>
     {
-        cy.get(".address").should("exist");
+        cy.get(".contact-card").should("exist");
     });
 
-    it("should check for phone icon", () =>
+    it("should check for Google Maps iFrame", () =>
     {
-        cy.get(".fa-phone").should("exist");
+        cy.get(".widget-google-maps").should("exist");
     });
 
-    it("should check for fax icon", () =>
-    {
-        cy.get(".fa-fax").should("exist");
-    });
 
-    it("should check for envelope icon", () =>
-    {
-        cy.get(".fa-envelope").should("exist");
-    });
 
-    it("should check for clock icon", () =>
-    {
-        cy.get(".fa-clock-o").should("exist");
-    });
+
+
 });
 
 
