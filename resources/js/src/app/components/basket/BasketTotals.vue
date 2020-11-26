@@ -124,6 +124,19 @@
 
                 <div class="totalSum">
                     <hr>
+                    <!-- AdditionalCosts -->
+                    <template v-if="visibleFields.includes('additionalCosts') && propertiesWithAdditionalCosts.length">
+                        <template v-for="property in propertiesWithAdditionalCosts">
+                            <dt class="font-weight-bold" :key="'property-name-' + property.propertyId">
+                                {{ property.name }}
+                            </dt><!--
+                            --><dd class="font-weight-bold" :key="'property-price-' + property.propertyId">
+                                {{ property.price | currency }}
+                            </dd>
+                        </template>
+                    </template>
+                    <!-- AdditionalCosts -->
+
                     <!-- Total sum (gross) -->
                     <template v-if="visibleFields.includes('totalSumGross')">
                         <dt :class="{ 'font-weight-bold': !showNetPrices }">
@@ -219,8 +232,42 @@ export default {
             return this.$translate("Ceres::Template.basketExportDeliveryWarning", { from: shopCountry, to: currentShippingCountry });
         },
 
+        propertiesWithAdditionalCosts()
+        {
+            const entries = [];
+
+            for (const basketItem of this.basketItems) {
+                const matchingProperties = basketItem.variation.data.properties.filter(property =>
+                    property.property.isShownAsAdditionalCosts && !property.property.isOrderProperty
+                );
+
+                for (const property of matchingProperties) {
+                    const existingEntry = entries.find(entry => entry.propertyId === property.propertyId)
+
+                    if (!existingEntry) {
+                        entries.push({
+                            propertyId: property.propertyId,
+                            name: property.property.names.name,
+                            quantity: basketItem.quantity,
+                            surcharge: this.$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId)
+                        });
+                    }
+                    else {
+                        existingEntry.quantity += basketItem.quantity
+                    }
+                }
+            }
+
+            for (const entry of entries) {
+                entry.price = entry.quantity * entry.surcharge;
+            }
+
+            return entries;
+        },
+
         ...mapState({
             basket: state => state.basket.data,
+            basketItems: state => state.basket.items,
             isBasketLoading: state => state.basket.isBasketLoading,
             shippingCountries: state => state.localization.shippingCountries,
             showNetPrices: state => state.basket.showNetPrices
