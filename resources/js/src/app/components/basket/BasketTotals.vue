@@ -187,6 +187,7 @@ export default {
                 "promotionCoupon",
                 "totalSumNet",
                 "vats",
+                "additionalCosts",
                 "totalSumGross",
                 "salesCoupon",
                 "openAmount"
