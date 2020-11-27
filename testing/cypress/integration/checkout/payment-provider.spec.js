@@ -16,6 +16,7 @@ context("Checkout payment provider", () =>
         cy.login();
     });
 
+    // TODO check vuex store after every change
     it("Should change payment providers as user", () =>
     {
         visitCheckoutAsUser();
@@ -32,6 +33,7 @@ context("Checkout payment provider", () =>
         cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
     });
 
+    // TODO check vuex store after every change
     it("Should change payment providers as guest", () =>
     {
         visitCheckoutAsGuest();
