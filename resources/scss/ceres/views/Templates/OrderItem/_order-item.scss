@@ -243,6 +243,12 @@
     }
 }
 
+.confirmation-order-list {
+    .item-name {
+        max-height: none !important; // stylelint-disable-line declaration-no-important
+    }
+}
+
 /* Compatibility for IE */
 // stylelint-disable
 html.ie .confirmation-order-list .cmp-order-item {

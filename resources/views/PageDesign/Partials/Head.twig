@@ -201,21 +201,19 @@
         }
     }( typeof global !== "undefined" ? global : this ) );
 
-    if(document.fonts) {
-        document.fonts.addEventListener("loadingdone", function(evt) {
-            if(document.fonts.check("1em FontAwesome")) {
+    (function() {
+        var checkIconFont = function() {
+            if(!document.fonts || document.fonts.check("1em FontAwesome")) {
                 document.documentElement.classList.remove('icons-loading');
             }
-        });
+        };
 
-        window.addEventListener("load", function(evt) {
-            if(document.fonts.check("1em FontAwesome")) {
-                document.documentElement.classList.remove('icons-loading');
-            }
-        });
-    } else {
-        document.documentElement.classList.remove('icons-loading');
-    }
+        if(document.fonts) {
+            document.fonts.addEventListener("loadingdone", checkIconFont);
+            window.addEventListener("load", checkIconFont);
+        }
+        checkIconFont();
+    })();
 </script>
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}

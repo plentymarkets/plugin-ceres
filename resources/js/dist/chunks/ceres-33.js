@@ -54,6 +54,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
   props: {
@@ -72,7 +77,12 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
     hasCrossPrice: function hasCrossPrice() {
-      return !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp.unitPrice.value > 0 && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
+      var hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
+      var hasBeforePrice = this.hasSpecialOffer && !!this.currentVariation.prices.default && this.currentVariation.prices.default.unitPrice.value > this.currentVariation.prices.specialOffer.unitPrice.value;
+      return hasRrpPrice || hasBeforePrice;
+    },
+    hasSpecialOffer: function hasSpecialOffer() {
+      return !!this.currentVariation.prices.specialOffer;
     },
     variationGraduatedPrice: function variationGraduatedPrice() {
       return this.$store.getters["".concat(this.itemId, "/variationGraduatedPrice")];
@@ -106,58 +116,97 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { class: { "has-crossprice": _vm.hasCrossPrice } }, [
     _vm.showCrossPrice && _vm.hasCrossPrice
-      ? _c("div", { staticClass: "crossprice" }, [
-          _c("del", { staticClass: "text-muted small text-appearance" }, [
-            _vm._v(
-              "\n            " +
-                _vm._s(
-                  _vm._f("itemCrossPrice")(
-                    _vm.currentVariation.prices.rrp.unitPrice.formatted
-                  )
-                ) +
-                "\n        "
+      ? _c(
+          "div",
+          {
+            staticClass: "crossprice",
+            class: { "is-special-offer": _vm.hasSpecialOffer }
+          },
+          [
+            _c(
+              "del",
+              { staticClass: "text-muted small text-appearance" },
+              [
+                _vm.hasSpecialOffer
+                  ? [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(
+                            _vm._f("itemCrossPrice")(
+                              _vm.currentVariation.prices.default.unitPrice
+                                .formatted,
+                              true
+                            )
+                          ) +
+                          "\n            "
+                      )
+                    ]
+                  : [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(
+                            _vm._f("itemCrossPrice")(
+                              _vm.currentVariation.prices.rrp.unitPrice
+                                .formatted
+                            )
+                          ) +
+                          "\n            "
+                      )
+                    ]
+              ],
+              2
             )
-          ])
-        ])
+          ]
+        )
       : _vm._e(),
     _vm._v(" "),
-    _c("span", { staticClass: "price h1" }, [
-      _c(
-        "span",
-        [
-          _vm.showDynamicPrice
-            ? [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(
-                      _vm.$translate("Ceres::Template.dynamicVariationPrice", {
-                        price: _vm.$options.filters.currency(
+    _c(
+      "span",
+      {
+        staticClass: "price h1",
+        class: { "is-special-offer": _vm.hasSpecialOffer }
+      },
+      [
+        _c(
+          "span",
+          [
+            _vm.showDynamicPrice
+              ? [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm.$translate(
+                          "Ceres::Template.dynamicVariationPrice",
+                          {
+                            price: _vm.$options.filters.currency(
+                              _vm.variationTotalPrice,
+                              _vm.currentVariation.prices.default.currency
+                            )
+                          }
+                        )
+                      ) +
+                      "\n            "
+                  )
+                ]
+              : [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm._f("currency")(
                           _vm.variationTotalPrice,
                           _vm.currentVariation.prices.default.currency
                         )
-                      })
-                    ) +
-                    "\n            "
-                )
-              ]
-            : [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(
-                      _vm._f("currency")(
-                        _vm.variationTotalPrice,
-                        _vm.currentVariation.prices.default.currency
-                      )
-                    ) +
-                    "\n            "
-                )
-              ]
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c("sup", [_vm._v("*")])
-    ]),
+                      ) +
+                      "\n            "
+                  )
+                ]
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c("sup", [_vm._v("*")])
+      ]
+    ),
     _vm._v(" "),
     _vm.currentVariation.unit
       ? _c(

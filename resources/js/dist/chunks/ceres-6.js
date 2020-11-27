@@ -332,6 +332,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     paddingInlineStyles: {
       type: String,
       default: null
+    },
+    forceUrlWithVariationId: {
+      type: Boolean,
+      default: false
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -360,7 +364,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$options.filters.currency(this.item.prices.default.price.value, this.item.prices.default.currency);
     },
     urlWithVariationId: function urlWithVariationId() {
-      return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0;
+      return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0 || this.forceUrlWithVariationId;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     showNetPrices: function showNetPrices(state) {
