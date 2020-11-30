@@ -8,7 +8,9 @@ context("Basket", () =>
     });
 
     it("Should add an item to the basket", () =>
-    {});
+    {
+        
+    });
     it("Should update the basket item quantity", () =>
     {});
     it("Should delete the basket item", () =>
@@ -20,4 +22,9 @@ context("Basket", () =>
     {});
     it("Should display the correct shipping costs", () =>
     {});
+
+    function checkSums(itemQuantity)
+    {
+        return true;
+    }
 });
