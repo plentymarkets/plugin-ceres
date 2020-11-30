@@ -28,6 +28,6 @@ context("Contact Page", () =>
         //cy.get(".contact-form-subject").type("g");
         //cy.get(".contact-form-message").type("g");
         //
-        cy.get(".btn-primary").click();
+        cy.get(".widget-contact-form .btn-primary").click();
     });
 });
