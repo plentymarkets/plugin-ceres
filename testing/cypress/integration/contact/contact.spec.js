@@ -23,10 +23,11 @@ context("Contact Page", () =>
 
     it("should check form for error if recquired fields are empty and privacy policy isn't checked", () =>
     {
-        cy.getByTestingAttr("contact-form-mail").type("");
-        cy.getByTestingAttr("contact-form-subject").type("");
-        cy.getByTestingAttr("contact-form-message").type("");
-        cy.getByTestingAttr("contact-form-prpol-check").uncheck();
+        cy.scrollTo(0, 400);
+        //cy.get(".contact-form-mail").type("g");
+        //cy.get(".contact-form-subject").type("g");
+        //cy.get(".contact-form-message").type("g");
+        //
         cy.get(".btn-primary").click();
     });
 });
