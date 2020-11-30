@@ -23,11 +23,12 @@ context("Contact Page", () =>
 
     it("should check form for error if recquired fields are empty and privacy policy isn't checked", () =>
     {
-        cy.get(".widget-contact-form .btn-primary").click();
+        cy.get(".widget-contact-form .btn-primary").click().wait(500);
 
-        cy.get(".widget-mail-input.contact-form-mail .input-unit").should('have.class','error');
-        cy.get(".widget-text-input.contact-form-subject .input-unit").should('have.class','error');
-        cy.get(".widget-text-area.contact-form-message .input-unit").should('have.class','error');
-        cy.get(".widget-accept-privacy-policy.contact-form-pp-check .form-check").should('have.class','error');
+        cy.get(".widget-mail-input.contact-form-mail .input-unit").should('have.class','error').and('have.class','required');
+        cy.get(".widget-text-input.contact-form-subject .input-unit").should('have.class','error').and('have.class','required');
+        cy.get(".widget-text-area.contact-form-message .input-unit").should('have.class','error').and('have.class','required');
+        cy.get(".widget-accept-privacy-policy .select-unit").should('have.class','required');
+        cy.get(".widget-accept-privacy-policy .form-check").should('have.class','error');
     });
 });
