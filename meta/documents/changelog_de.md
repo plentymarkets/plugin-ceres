@@ -25,6 +25,7 @@
 - Es wurde eine eigene Gruppe für Zahlungsanbieter-Cookies in der Cookie Bar ergänzt.
 - Die Übersicht der Konfigurationen des Assistenten zeigt nun auch die Einträge für inaktive Plugin-Sets an.
 - In einem mehrsprachigen Webshop wurden Gast-Accounts auf die Startseite der Standardsprache weitergeleitet, wenn sie zum Checkout navigierten, ohne dass sich Artikel im Warenkorb befanden. Nun werden Gast-Accounts auf die Startseite der ausgewählten Sprache weitergeleitet.
+- Die Einstellung **CSS-Klasse** des Widgets Datenschutzerklärungs-Checkbox hatte keine Funktion. Dies wurde behoben.
 
 ### Angepasste Templates
 
@@ -34,7 +35,7 @@
 - [resources/js/src/app/components/item/ItemPrice.vue](https://github.com/plentymarkets/plugin-ceres/pull/2533/files#diff-eed3a26bc24bb9bbfd91d04e54f17d682022d8a9b1918fe760fe93d366beed22)
 - [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2521/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
 - [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2521/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
-
+- [resources/views/Widgets/Form/AcceptPrivacyPolicyWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2548/files#diff-accd1ccbc275c3ac061bf4ac777378fe335097303db30e1d9594c514d7c143b4)
 
 ## v5.0.15 (2020-11-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.14...5.0.15" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
