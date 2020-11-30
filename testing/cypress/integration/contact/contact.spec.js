@@ -4,7 +4,6 @@ context("Contact Page", () =>
     beforeEach(() =>
     {
         cy.visit("/kontakt/");
-
     });
 
     it("should check for page title", () =>
@@ -22,15 +21,4 @@ context("Contact Page", () =>
         cy.get(".widget-google-maps").should("exist");
     });
 
-    it("should check for form-button", () =>
-    {
-        cy.getByTestingAttr("labelSubmit").should("exist");
-    });
-
-
-
-
 });
-
-
-

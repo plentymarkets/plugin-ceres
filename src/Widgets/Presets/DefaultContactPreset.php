@@ -147,10 +147,12 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting('layout', 'oneToOne');
 
         $row_1->createChild('first', 'Ceres::TextInputWidget')
+            ->withSetting('customClass','contact-form-name')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactName'))
             ->withSetting('isReplyToName', true);
 
         $row_1->createChild('second', 'Ceres::MailInputWidget')
+            ->withSetting('customClass','contact-form-mail')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactMail'))
             ->withSetting('isRequired', true)
             ->withSetting('replyToMail', true)
@@ -163,17 +165,20 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting('layout', 'oneToOne');
 
         $row_2->createChild('first', 'Ceres::TextInputWidget')
+            ->withSetting('customClass','contact-form-subject')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactSubject'))
             ->withSetting('isRequired', true)
             ->withSetting('isMailSubject', true);
 
         $row_2->createChild('second', 'Ceres::TextInputWidget')
+            ->withSetting('customClass','contact-form-orderID')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactOrderId'));
 
         //
         // ROW 3: Message
         //
         $formWidget->createChild('formFields', 'Ceres::TextAreaWidget')
+            ->withSetting('customClass','contact-form-message')
             ->withSetting('rows', 15)
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactMessage'))
             ->withSetting('fixedHeight', true)
