@@ -98,7 +98,7 @@ export default {
                 .done(() =>
                 {
                     navigateTo(
-                        isDefined(this.backlink) && this.backlink.length ? decodeURIComponent(this.backlink) : window.location.origin
+                        isDefined(this.backlink) && this.backlink.length ? decodeURIComponent(this.backlink) : window.location.origin + (App.urls.includeLanguage ? "/" + App.language : "")
                     );
                 })
                 .fail(() =>
