@@ -84,7 +84,7 @@
                         <div class="price-box text-right ml-2 mt-1">
                             <div class="item-total-price font-weight-bold text-nowrap">{{ basketItem.quantity * unitPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
 
-                            <button class="btn btn-sm text-danger p-0" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
+                            <button class="btn btn-sm text-danger p-0" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem" data-testing="basket-item-delete">
                                 {{ $translate("Ceres::Template.basketDelete") }}
                                 <icon icon="trash-o" class="default-float" :loading="waitingForDelete"></icon>
                             </button>
