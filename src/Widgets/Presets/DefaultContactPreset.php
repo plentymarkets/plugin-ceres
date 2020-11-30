@@ -195,7 +195,7 @@ class DefaultContactPreset implements ContentPreset
                 ->withSetting('layout', 'oneToOne');
 
             $row_3->createChild('first', 'Ceres::AcceptPrivacyPolicyWidget')
-                ->withSetting('customClass', 'contact-form-prpol-check');
+                ->withSetting('customClass', 'contact-form-pp-check');
 
             $textWidget = $row_3->createChild('second', 'Ceres::InlineTextWidget');
         } else {
