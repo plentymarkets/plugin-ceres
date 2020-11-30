@@ -25,6 +25,7 @@
 - A group for payment provider cookies has been added to the consent tool.
 - The overview of the assistant configurations now also shows the entries for inactive plugin sets.
 - In a multilingual online store, guest accounts were redirected to the homepage in the default language if they accessed the checkout without items in the shopping cart. Now, guest accounts are redirected to the homepage in the selected language.
+- The setting **CSS class** of the widget privacy policy checkox did not work as intended. This has been fixed.
 
 ### Changed templates
 
@@ -34,6 +35,7 @@
 - [resources/js/src/app/components/item/ItemPrice.vue](https://github.com/plentymarkets/plugin-ceres/pull/2533/files#diff-eed3a26bc24bb9bbfd91d04e54f17d682022d8a9b1918fe760fe93d366beed22)
 - [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2521/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
 - [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2521/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+- [resources/views/Widgets/Form/AcceptPrivacyPolicyWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2548/files#diff-accd1ccbc275c3ac061bf4ac777378fe335097303db30e1d9594c514d7c143b4)
 
 ## v5.0.15 (2020-11-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.14...5.0.15" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
