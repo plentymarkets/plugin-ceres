@@ -25,8 +25,8 @@ context("Contact Page", () =>
     {
         cy.get(".widget-contact-form .btn-primary").click();
         cy.get(".widget-mail-input .input-unit").should("have.class","error").and("have.class","required");
-        // cy.get(".contact-form-subject .input-unit").should("have.class","error").and("have.class","required");
-        // cy.get(".contact-form-message .input-unit").should("have.class","error").and("have.class","required");
+        cy.get(".contact-form-subject .input-unit").should("have.class","error").and("have.class","required");
+        cy.get(".contact-form-message .input-unit").should("have.class","error").and("have.class","required");
         cy.get(".widget-accept-privacy-policy .select-unit").should("have.class","required");
         cy.get(".widget-accept-privacy-policy .form-check").should("have.class","error");
         cy.get(".notification-wrapper").children().should("exist");
@@ -35,10 +35,10 @@ context("Contact Page", () =>
 
     it("check for notification after successful sending of form", () =>
     {
-        cy.get(".widget-mail-input .input-unit input").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
-        // cy.get(".contact-form-subject .input-unit input").type("g", { delay: 40 });
-        // cy.get(".contact-form-message .input-unit input").type("g", { delay: 40 });
-        cy.get(".widget-accept-privacy-policy .form-check-input").click();
+        cy.get(".widget-mail-input").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
+        cy.get(".contact-form-subject").type("g", { delay: 40 });
+        cy.get(".contact-form-message").type("g", { delay: 40 });
+        cy.get(".widget-accept-privacy-policy").click();
         cy.get(".widget-contact-form .btn-primary").click();
         cy.get(".notification-wrapper").children().should("exist");
         cy.get(".notification-wrapper").children().first().should("contain", "Deine Anfrage wurde erfolgreich gesendet.");
