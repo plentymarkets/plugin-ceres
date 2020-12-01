@@ -30,7 +30,6 @@ context("Basket", () =>
     });
     it("Should link to the correct single item", () =>
     {
-        
     });
     // TODO move to own spec
     it("Should add coupon", () =>
@@ -40,6 +39,15 @@ context("Basket", () =>
 
     function checkSums(itemQuantity = 1)
     {
-        return true;
+        cy.getByTestingAttr("item-sum-net").should("contain", ITEM_PRICE_NET * itemQuantity);
+        cy.getByTestingAttr("item-sum");
+        cy.getByTestingAttr("shipping-amount-net");
+        cy.getByTestingAttr("shipping-amount");
+        cy.getByTestingAttr("promotion-coupon");
+        cy.getByTestingAttr("basket-amount-net");
+        cy.getByTestingAttr("vat-amount");
+        cy.getByTestingAttr("basket-amount");
+        cy.getByTestingAttr("sales-coupon");
+        cy.getByTestingAttr("open-amount");
     }
 });
