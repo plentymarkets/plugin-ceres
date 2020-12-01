@@ -147,12 +147,10 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting('layout', 'oneToOne');
 
         $row_1->createChild('first', 'Ceres::TextInputWidget')
-            ->withSetting('customClass','contact-form-name')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactName'))
             ->withSetting('isReplyToName', true);
 
         $row_1->createChild('second', 'Ceres::MailInputWidget')
-            ->withSetting('customClass','contact-form-mail')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactMail'))
             ->withSetting('isRequired', true)
             ->withSetting('replyToMail', true)
@@ -171,7 +169,6 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting('isMailSubject', true);
 
         $row_2->createChild('second', 'Ceres::TextInputWidget')
-            ->withSetting('customClass','contact-form-orderID')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactOrderId'));
 
         //
@@ -194,8 +191,7 @@ class DefaultContactPreset implements ContentPreset
 
                 ->withSetting('layout', 'oneToOne');
 
-            $row_3->createChild('first', 'Ceres::AcceptPrivacyPolicyWidget')
-                ->withSetting('customClass', 'contact-form-pp-check');
+            $row_3->createChild('first', 'Ceres::AcceptPrivacyPolicyWidget');
 
             $textWidget = $row_3->createChild('second', 'Ceres::InlineTextWidget');
         } else {
