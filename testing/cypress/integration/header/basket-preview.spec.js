@@ -48,7 +48,7 @@ context("Header topbar currencies", () =>
 
         cy.get(".basket-item").should("exist");
 
-        cy.getByTestingAttr("totals-price").invoke("text").then((text) =>
+        cy.getByTestingAttr("item-sum").invoke("text").then((text) =>
         {
             const priceTotals = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 

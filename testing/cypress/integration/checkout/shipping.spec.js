@@ -58,7 +58,7 @@ context("Checkout shipping", () =>
         getShippingProfile(GLSID).click();
 
         cy.wait(500);
-        cy.getByTestingAttr("shipping-gross").invoke("text").then((text) =>
+        cy.getByTestingAttr("shipping-amount").invoke("text").then((text) =>
         {
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 
@@ -73,7 +73,7 @@ context("Checkout shipping", () =>
         getShippingProfile(GLSID).click();
 
         cy.wait(1000);
-        cy.getByTestingAttr("shipping-gross").invoke("text").then((text) =>
+        cy.getByTestingAttr("shipping-amount").invoke("text").then((text) =>
         {
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 
@@ -90,7 +90,7 @@ context("Checkout shipping", () =>
         cy.wait(500);
         getShippingProfile(DHLID).should("not.exist");
         getShippingProfile(GLSID).should("exist");
-        cy.getByTestingAttr("shipping-gross").invoke("text").then((text) =>
+        cy.getByTestingAttr("shipping-amount").invoke("text").then((text) =>
         {
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 
@@ -112,7 +112,7 @@ context("Checkout shipping", () =>
 
         getShippingProfile(DHLID).should("not.exist");
         getShippingProfile(GLSID).should("exist");
-        cy.getByTestingAttr("shipping-gross").invoke("text").then((text) =>
+        cy.getByTestingAttr("shipping-amount").invoke("text").then((text) =>
         {
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 

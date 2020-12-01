@@ -10,7 +10,7 @@
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
                         {{ $translate("Ceres::Template.basketValue") }} ({{ $translate("Ceres::Template.basketNet") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': showNetPrices }">
+                    --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="item-sum-net">
                         {{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) | currency }}
                     </dd>
                 </template>
@@ -21,7 +21,7 @@
                     <dt :class="{ 'font-weight-bold': !showNetPrices }">
                         {{ $translate("Ceres::Template.basketValue") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="totals-price">
+                    --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="item-sum">
                         {{ calculateBaseValue(basket.itemSum, basket.basketRebate)| currency  }}
                     </dd>
                 </template>
@@ -63,7 +63,7 @@
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
                         {{ $translate("Ceres::Template.basketShippingCosts") }} ({{ $translate("Ceres::Template.basketNet") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': showNetPrices }">
+                    --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="shipping-amount-net">
                         {{ basket.shippingAmountNet | currency }}
                     </dd>
                 </template>
@@ -74,7 +74,7 @@
                     <dt :class="{ 'font-weight-bold': !showNetPrices }">
                         {{ $translate("Ceres::Template.basketShippingCosts") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="shipping-gross">
+                    --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="shipping-amount">
                         {{ basket.shippingAmount | currency }}
                     </dd>
                 </template>
@@ -87,7 +87,7 @@
                     <dt class="font-weight-bold">
                         {{ $translate("Ceres::Template.basketCoupon") }}
                     </dt><!--
-                --><dd class="font-weight-bold">
+                --><dd class="font-weight-bold" data-testing="promotion-coupon">
                         {{ basket.couponDiscount | currency }}
                     </dd>
                 </template>
@@ -101,7 +101,7 @@
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
                         {{ $translate("Ceres::Template.basketTotalSum") }} ({{ $translate("Ceres::Template.basketNet") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': showNetPrices }">
+                    --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="basket-amount-net">
                         {{ basket.basketAmountNet | currency }}
                     </dd>
                 </template>
@@ -114,7 +114,7 @@
                     <dt>
                         {{ $translate("Ceres::Template.basketVAT") }} {{ totalVat.vatValue }}%
                     </dt><!--
-                    --><dd>
+                    --><dd data-testing="vat-amount">
                         {{ totalVat.vatAmount | currency }}
                     </dd>
                 </div>
@@ -129,7 +129,7 @@
                         <dt :class="{ 'font-weight-bold': !showNetPrices }">
                             {{ $translate("Ceres::Template.basketTotalSum") }} ({{ $translate("Ceres::Template.basketGross") }})
                         </dt><!--
-                        --><dd :class="{ 'font-weight-bold': !showNetPrices }">
+                        --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="basket-amount">
                             {{ basket.basketAmount | currency }}
                         </dd>
                     </template>
@@ -140,7 +140,7 @@
                         <dt class="font-weight-bold">
                             {{ $translate("Ceres::Template.basketCoupon") }}
                         </dt><!--
-                     --><dd class="font-weight-bold">
+                     --><dd class="font-weight-bold" data-testing="sales-coupon">
                             {{ basket.couponDiscount | currency }}
                         </dd>
                     </template>
@@ -151,7 +151,7 @@
                         <dt class="font-weight-bold">
                             {{ $translate("Ceres::Template.basketOpenAmount") }}
                         </dt><!--
-                    --><dd class="font-weight-bold">
+                    --><dd class="font-weight-bold" data-testing="open-amount">
                             {{ basket.openAmount | currency }}
                         </dd>
                     </template>
