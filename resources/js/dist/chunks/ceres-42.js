@@ -322,7 +322,7 @@ var render = function() {
             attrs: {
               type: "button",
               "data-toggle": "modal",
-              "data-target": "#edit-coupon-overlay"
+              "data-target": "#edit-coupon-overlay-" + _vm._uid
             }
           },
           [
@@ -424,7 +424,11 @@ var render = function() {
           {
             ref: "editCouponOverlay",
             staticClass: "modal fade",
-            attrs: { id: "edit-coupon-overlay", tabindex: "-1", role: "dialog" }
+            attrs: {
+              id: "edit-coupon-overlay-" + _vm._uid,
+              tabindex: "-1",
+              role: "dialog"
+            }
           },
           [
             _c(

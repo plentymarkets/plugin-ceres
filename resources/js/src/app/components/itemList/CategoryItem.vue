@@ -158,6 +158,11 @@ export default {
         {
             type: String,
             default: null
+        },
+        forceUrlWithVariationId:
+        {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -203,7 +208,7 @@ export default {
 
         urlWithVariationId()
         {
-            return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0;
+            return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0 || this.forceUrlWithVariationId;
         },
 
         ...mapState({

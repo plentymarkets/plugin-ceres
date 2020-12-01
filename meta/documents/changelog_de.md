@@ -1,5 +1,27 @@
 # Release Notes für Ceres
 
+## v5.0.15 (2020-11-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.14...5.0.15" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Inhalte in der Variantenauswahl werden nun sortiert dargestellt.
+
+### Behoben
+
+- Die Performanz des Scrollens von Widgets im Header wurde verbessert.
+- Wenn im **Weitere Informationen**-Widget die Option **Mittel** oder **Groß** für die Einstellung **Größe** gewählt wurde, konnte das dazugehörige Overlay des Widgets nicht mehr geschlossen werden. Dies wurde behoben.
+- Durch einen Fehler wurde auf Artikelkategorieseiten in seltenen Fällen der Standard-Header anstatt des Shopbuilder-Headers ausgegeben. Dies wurde behoben.
+- In der Variantenauswahl werden Attribute von nicht verfügbaren Varianten nun analog zu Attributen von nicht existierenden Kombinationen ausgegraut und durchgestrichen dargestellt.
+- Die Empfohlen-Sortierung für die Suchergebnisseite hat als dritte Priorität einen falschen Wert genutzt. Dieses Verhalten wurde behoben.
+- Artikelnamen auf der Bestellbestätigung wurden auf maximal zwei Zeilen begrenzt. Dadurch wurden lange Artikelnamen abgeschnitten dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurden die Bestellmengen beim Variantenwechsel nicht korrekt aktualisiert. Dies wurde behoben.
+- Prozentuale Aufpreise von Bestellmerkmalen haben Staffelpreise nicht korrekt berücksichtigt. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.15 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/js/src/app/components/item/VariationSelect.vue](https://github.com/plentymarkets/plugin-ceres/pull/2432/files#diff-3bf7e50898b2d79d717300fe7c276487aea49cb917f014bf3f8ea27c6b392149)
+
 ## v5.0.14 (2020-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.13...5.0.14" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### ToDo

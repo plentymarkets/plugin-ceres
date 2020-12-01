@@ -473,6 +473,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -1237,7 +1238,8 @@ var render = function() {
               "decimal-count": _vm.$ceres.config.item.storeSpecial,
               "image-url-accessor": "urlMiddle",
               "padding-classes": _vm.paddingClasses,
-              "padding-inline-styles": _vm.paddingInlineStyles
+              "padding-inline-styles": _vm.paddingInlineStyles,
+              "force-url-with-variation-id": true
             },
             scopedSlots: _vm._u(
               [

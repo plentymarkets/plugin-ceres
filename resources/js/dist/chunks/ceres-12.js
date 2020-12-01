@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
       _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].post("/rest/io/guest", {
         email: this.email
       }).done(function () {
-        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_4__["navigateTo"])(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isDefined"])(_this3.backlink) && _this3.backlink.length ? decodeURIComponent(_this3.backlink) : window.location.origin);
+        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_4__["navigateTo"])(Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isDefined"])(_this3.backlink) && _this3.backlink.length ? decodeURIComponent(_this3.backlink) : window.location.origin + (App.urls.includeLanguage ? "/" + App.language : ""));
       }).fail(function () {
         _this3.isDisabled = false;
       });

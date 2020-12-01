@@ -6,7 +6,8 @@
                 :decimal-count="$ceres.config.item.storeSpecial"
                 image-url-accessor="urlMiddle"
                 :padding-classes="paddingClasses"
-                :padding-inline-styles="paddingInlineStyles">
+                :padding-inline-styles="paddingInlineStyles"
+                :force-url-with-variation-id="true">
             <template #store-special>
                 <item-store-special v-if="!!storeSpecial"
                                     :store-special="storeSpecial"
