@@ -163,6 +163,7 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting('layout', 'oneToOne');
 
         $row_2->createChild('first', 'Ceres::TextInputWidget')
+            ->withSetting('customClass','contact-form-subject')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactSubject'))
             ->withSetting('isRequired', true)
             ->withSetting('isMailSubject', true);
@@ -174,6 +175,7 @@ class DefaultContactPreset implements ContentPreset
         // ROW 3: Message
         //
         $formWidget->createChild('formFields', 'Ceres::TextAreaWidget')
+            ->withSetting('customClass','contact-form-message')
             ->withSetting('rows', 15)
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactMessage'))
             ->withSetting('fixedHeight', true)
@@ -186,10 +188,10 @@ class DefaultContactPreset implements ContentPreset
 
         if ($this->config->contact->enableConfirmingPrivacyPolicy) {
             $row_3 = $formWidget->createChild('formFields', 'Ceres::TwoColumnWidget')
+
                 ->withSetting('layout', 'oneToOne');
 
-            $row_3->createChild('first', 'Ceres::AcceptPrivacyPolicyWidget')
-                ->withSetting('customClass', '');
+            $row_3->createChild('first', 'Ceres::AcceptPrivacyPolicyWidget');
 
             $textWidget = $row_3->createChild('second', 'Ceres::InlineTextWidget');
         } else {
