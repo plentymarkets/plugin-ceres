@@ -15,18 +15,18 @@ context("Basket", () =>
 
     it("Should add an item to the basket", () =>
     {
-        checkSums();
+        checkTotals();
     });
     it("Should update the basket item quantity", () =>
     {
         cy.getByTestingAttr("quantity-btn-increase").click().click();
         cy.getByTestingAttr("quantity-btn-decrease").click();
-        checkSums(2);
+        checkTotals(2);
     });
     it("Should delete the basket item", () =>
     {
         cy.get("basket-item-delete").click();
-        checkSums(0);
+        checkTotals(0);
     });
     it("Should link to the correct single item", () =>
     {
@@ -34,10 +34,8 @@ context("Basket", () =>
     // TODO move to own spec
     it("Should add coupon", () =>
     {});
-    it("Should display the correct shipping costs", () =>
-    {});
 
-    function checkSums(itemQuantity = 1)
+    function checkTotals(itemQuantity = 1)
     {
         cy.getByTestingAttr("item-sum-net").should("contain", (ITEM_PRICE_NET * itemQuantity).toLocaleString("de"));
         cy.getByTestingAttr("item-sum").should("contain", (ITEM_PRICE * itemQuantity).toLocaleString("de"));
