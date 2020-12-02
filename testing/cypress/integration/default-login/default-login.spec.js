@@ -50,6 +50,14 @@ context("Default Login Page", () =>
         cy.get(".error-msg").should("contain", "Bitte geben Sie eine gültige E-Mail-Adresse an.");
     });
 
+    it("should check if link to guest login page works", () =>
+    {
+        cy.getByTestingAttr("guest-login-input").type("ceres-testing@opentrash.com", { delay: 30 });
+        cy.getByTestingAttr("guest-login-button").click();
+
+        cy.server().route("POST", "/");
+    });
+
     // it("should check for valid email at guest login", () =>
     // {
     //     const $input = cy.get(".login-pwd-reset input")
