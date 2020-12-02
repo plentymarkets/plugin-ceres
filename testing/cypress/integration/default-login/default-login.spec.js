@@ -22,6 +22,16 @@ context("Default Login Page", () =>
         cy.get(".error-msg").should("contain", "Bitte geben Sie Ihr Passwort ein.");
     });
 
+    it("check for notification after failed login", () =>
+    {
+        cy.getByTestingAttr("email-login").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
+        cy.getByTestingAttr("password-login").type("Test", { delay: 30 });
+        cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
+        cy.getByTestingAttr("submit-login").click();
+        cy.get(".notification-wrapper").children().should("exist");
+        cy.get(".notification-wrapper").children().first().should("contain", "Die Anmeldedaten sind ungültig.");
+    });
+
     it("should login successfully", () =>
     {
         cy.getByTestingAttr("email-login").type("ceres-testing@opentrash.com", { delay: 30 });
@@ -56,6 +66,12 @@ context("Default Login Page", () =>
         cy.getByTestingAttr("guest-login-button").click();
 
         cy.server().route("POST", "/");
+    });
+
+    it("should check if registration button works", () =>
+    {
+        cy.get(".widget-link").click();
+        cy.url().should("include", "/register");
     });
 
     // it("should check for valid email at guest login", () =>
