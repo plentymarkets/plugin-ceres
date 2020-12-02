@@ -269,7 +269,7 @@ var render = function() {
                   attrs: {
                     type: "button",
                     disabled: _vm.waiting || _vm.isCheckoutReadonly,
-                    "data-tesing": "coupon-redeem"
+                    "data-testing": "coupon-redeem"
                   },
                   on: {
                     click: function($event) {
