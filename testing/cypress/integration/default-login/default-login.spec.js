@@ -15,11 +15,32 @@ context("Default Login Page", () =>
 
     it("should check login form for error if required fields are empty", () =>
     {
-        cy.get(".btn.btn-primary.btn-appearance.btn-medium.float-right").click();
+        cy.getByTestingAttr("submit-login").click();
         cy.getByTestingAttr("email-login").parent().should("have.class", "error");
         cy.get(".error-msg").should("contain", "Bitte geben Sie eine gültige E-Mail-Adresse an.");
         cy.getByTestingAttr("password-login").parent().should("have.class","error");
         cy.get(".error-msg").should("contain", "Bitte geben Sie Ihr Passwort ein.");
+    });
+
+    it("should login successfully", () =>
+    {
+        cy.getByTestingAttr("email-login").type("ceres-testing@opentrash.com", { delay: 30 });
+        cy.getByTestingAttr("password-login").type("8#TfhMB@QVd668T", { delay: 30 });
+
+        cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
+
+        cy.getByTestingAttr("submit-login").click();
+
+        cy.wait("@loginUser").then((xhr) =>
+        {
+            expect(xhr.status).to.eql(200);
+
+            cy.wait(1000);
+            cy.getStore().then((store) =>
+            {
+                expect(store.getters.isLoggedIn).to.be.true;
+            });
+        });
     });
 
     it("should check guest login form for error if required fields are empty", () =>
