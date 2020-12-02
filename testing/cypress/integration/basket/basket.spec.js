@@ -23,13 +23,18 @@ context("Basket", () =>
         cy.getByTestingAttr("quantity-btn-decrease").click();
         checkTotals(2);
     });
-    it("Should delete the basket item", () =>
+    it.only("Should delete the basket item", () =>
     {
-        cy.getByTestingAttr("basket-item-delete").click();
-        checkTotals(0);
+        cy.addBasketItem(1007);
+        cy.reload();
+        cy.getByTestingAttr("basket-item-delete").eq(1).click();
+        checkTotals();
     });
     it("Should link to the correct single item", () =>
     {
+        cy.getByTestingAttr("basket-item-name")
+            .should("have.attr", "href")
+            .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
     });
     // TODO move to own spec
     it("Should add coupon", () =>
