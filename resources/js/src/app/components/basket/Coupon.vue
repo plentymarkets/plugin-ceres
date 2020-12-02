@@ -19,7 +19,7 @@
                     type="button"
                     @click="redeemCode()"
                     :disabled="waiting || isCheckoutReadonly" v-if="!disabled"
-                    data-tesing="coupon-redeem"
+                    data-testing="coupon-redeem"
                 >
                     <icon icon="gift" :loading="waiting"></icon>
                     {{ $translate("Ceres::Template.couponRedeem") }}
