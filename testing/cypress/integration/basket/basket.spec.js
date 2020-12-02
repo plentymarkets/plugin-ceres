@@ -25,7 +25,7 @@ context("Basket", () =>
     });
     it("Should delete the basket item", () =>
     {
-        cy.get("basket-item-delete").click();
+        cy.getByTestingAttr("basket-item-delete").click();
         checkTotals(0);
     });
     it("Should link to the correct single item", () =>
