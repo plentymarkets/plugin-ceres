@@ -17,12 +17,14 @@ context("Basket", () =>
     {
         checkTotals();
     });
+
     it("Should update the basket item quantity", () =>
     {
         cy.getByTestingAttr("quantity-btn-increase").click().click();
         cy.getByTestingAttr("quantity-btn-decrease").click();
         checkTotals(2);
     });
+
     it.only("Should delete the basket item", () =>
     {
         cy.addBasketItem(1007);
@@ -30,15 +32,13 @@ context("Basket", () =>
         cy.getByTestingAttr("basket-item-delete").eq(1).click();
         checkTotals();
     });
+
     it("Should link to the correct single item", () =>
     {
         cy.getByTestingAttr("basket-item-name")
             .should("have.attr", "href")
             .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
     });
-    // TODO move to own spec
-    it("Should add coupon", () =>
-    {});
 
     function checkTotals(itemQuantity = 1)
     {
@@ -46,11 +46,8 @@ context("Basket", () =>
         cy.getByTestingAttr("item-sum").should("contain", (ITEM_PRICE * itemQuantity).toLocaleString("de"));
         cy.getByTestingAttr("shipping-amount-net").should("contain", SHIPPING_COST_NET.toLocaleString("de"));
         cy.getByTestingAttr("shipping-amount").should("contain", SHIPPING_COST.toLocaleString("de"));
-        // cy.getByTestingAttr("promotion-coupon");
         cy.getByTestingAttr("basket-amount-net").should("contain", (SHIPPING_COST_NET + ITEM_PRICE_NET * itemQuantity).toLocaleString("de"));
         cy.getByTestingAttr("vat-amount");
         cy.getByTestingAttr("basket-amount").should("contain", (SHIPPING_COST + ITEM_PRICE * itemQuantity).toLocaleString("de"));
-        // cy.getByTestingAttr("sales-coupon");
-        // cy.getByTestingAttr("open-amount");
     }
 });
