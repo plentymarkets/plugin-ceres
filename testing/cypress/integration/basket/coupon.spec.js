@@ -35,7 +35,7 @@ context("Basket", () =>
         checkTotals();
     });
 
-    it.only("Should fail on invalid coupon code", () =>
+    it("Should fail on invalid coupon code", () =>
     {
         cy.getByTestingAttr("coupon-input").type("INVALID", { delay: 30 });
         cy.getByTestingAttr("coupon-redeem").click();
