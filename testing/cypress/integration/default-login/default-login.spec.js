@@ -28,7 +28,7 @@ context("Default Login Page", () =>
         cy.getByTestingAttr("password-login").type("Test", { delay: 30 });
         cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
         cy.getByTestingAttr("submit-login").click();
-        cy.get(".notification-wrapper").children().should("exist");
+        cy.get(".notification-wrapper").children().should("exist").should("have.class", "show");
         cy.get(".notification-wrapper").children().first().should("contain", "Die Anmeldedaten sind ungültig.");
     });
 
@@ -51,6 +51,8 @@ context("Default Login Page", () =>
                 expect(store.getters.isLoggedIn).to.be.true;
             });
         });
+
+        cy.url().should('eq', Cypress.config().baseUrl);
     });
 
     it("should check guest login form for error if required fields are empty", () =>
@@ -74,6 +76,8 @@ context("Default Login Page", () =>
         cy.getByTestingAttr("guest-login-button").click();
 
         cy.server().route("POST", "/");
+        cy.wait(1000);
+        cy.url().should('eq', Cypress.config().baseUrl);
     });
 
     it("should check if registration button is working", () =>
@@ -87,6 +91,7 @@ context("Default Login Page", () =>
         cy.get(".small.text-appearance").click();
         cy.get(".modal-content .input-unit").type("ceres-testing@opentrash.com", { delay: -80 });
         cy.get(".modal-content .btn-primary").click();
-        cy.get(".notification-wrapper").should("exist");
+        cy.get(".notification-wrapper").should("exist").children().should("have.class", "show");
+        cy.get(".notification-wrapper").children().first().should("contain", "E-Mail versendet.");
     });
 });
