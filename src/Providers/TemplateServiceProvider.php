@@ -217,10 +217,19 @@ class TemplateServiceProvider extends ServiceProvider
         );
 
         $consentRepository->registerConsentGroup(
+            'payment',
+            'Ceres::Template.consentGroupPayment',
+            [
+                'position' => 200,
+                'description' => 'Ceres::Template.consentGroupPaymentDescription'
+            ]
+        );
+
+        $consentRepository->registerConsentGroup(
             'marketing',
             'Ceres::Template.consentGroupMarketingLabel',
             [
-                'position' => 200,
+                'position' => 300,
                 'description' => 'Ceres::Template.consentGroupMarketingDescription'
             ]
         );
@@ -229,10 +238,11 @@ class TemplateServiceProvider extends ServiceProvider
             'media',
             'Ceres::Template.consentGroupMediaLabel',
             [
-                'position' => 300,
+                'position' => 400,
                 'description' => 'Ceres::Template.consentGroupMediaDescription'
             ]
         );
+
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
         $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
