@@ -30,12 +30,19 @@ class RequiredSettingsStep extends Step
         $hasShippingMethod  = $shopWizardService->hasShippingMethods();
         $hasShippingProfile = $shopWizardService->hasShippingProfiles();
         $hasPaymentMethod   = $shopWizardService->hasPaymentMethods();
-        $hasInactivePaymentMethod   = $shopWizardService->hasInactivePaymentMethod($pluginSetId);
+        $hasInactivePaymentMethod   = $shopWizardService->hasInactivePaymentMethod();
         $hasShippingCountry = $shopWizardService->hasShippingCountries();
         $hasLocation        = $shopWizardService->hasLocations();
-
-        $paymentCondition1 = !(!$hasPaymentMethod && !$hasInactivePaymentMethod);
-        $paymentCondition2 = !(!$hasPaymentMethod && $hasInactivePaymentMethod);
+    
+        $paymentCondition1 = true;
+        if(!$hasPaymentMethod && !$hasInactivePaymentMethod) {
+            $paymentCondition1 = false;
+        }
+        
+        $paymentCondition2 = true;
+        if($hasPaymentMethod && $hasInactivePaymentMethod) {
+            $paymentCondition2 = false;
+        }
         
         return [
             "title" => "Wizard.reqSettings",

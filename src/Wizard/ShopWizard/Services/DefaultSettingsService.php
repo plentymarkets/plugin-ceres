@@ -14,6 +14,7 @@ use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
+use Plenty\Plugin\Http\Request;
 
 /**
  * Class DefaultSettingsService
@@ -45,6 +46,12 @@ class DefaultSettingsService
      * @var array
      */
     private $pluginSetList;
+    
+    /** @var int */
+    private $pluginSetId;
+    
+    /** @var PluginSetRepositoryContract */
+    private $pluginSetRepository;
 
     /**
      * ShopWizardService constructor.
@@ -58,13 +65,19 @@ class DefaultSettingsService
         ParcelServicePresetRepositoryContract $parcelServicePresetRepo,
         PaymentMethodRepositoryContract $paymentRepository,
         CountryRepositoryContract $countryRepository,
-        AccountingLocationRepositoryContract $accountingLocationRepo
+        AccountingLocationRepositoryContract $accountingLocationRepo,
+        PluginSetRepositoryContract $pluginSetRepository
     )
     {
         $this->parcelServicePresetRepo = $parcelServicePresetRepo;
         $this->paymentRepository = $paymentRepository;
         $this->countryRepository = $countryRepository;
         $this->accountingLocationRepo = $accountingLocationRepo;
+        $this->pluginSetRepository = $pluginSetRepository;
+    
+        /** @var Request $request */
+        $request = pluginApp(Request::class);
+        $this->pluginSetId = $this->pluginSetRepository->getPluginSetIdFromHash($request->get('bootPluginSetHash'));
     }
 
     /**
@@ -81,34 +94,39 @@ class DefaultSettingsService
      */
     public function hasPaymentMethods(): bool
     {
-        $pluginPaymentMethodsRegistered = $this->getPluginPaymentMethodsRegistered();
-        return count($pluginPaymentMethodsRegistered) ? true : false;
+        /** @var PluginSet $pluginSet */
+        $pluginSet = $this->pluginSetRepository->get($this->pluginSetId);
+    
+        $paymentPlugins = $pluginSet->pluginSetEntriesWithTrashed->filter(function(PluginSetEntry $pluginSetEntry) {
+            return $pluginSetEntry->plugin->type === Plugin::TYPE_PAYMENT;
+        });
+    
+        return $paymentPlugins->count() > 0;
     }
     
     /**
-     * @param int $pluginSetId
      * @return bool
      */
-    public function hasInactivePaymentMethod($pluginSetId): bool
+    public function hasInactivePaymentMethod(): bool
     {
-        /** @var PluginSetRepositoryContract $pluginSetRepo */
-        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
+        $pluginSetId = $this->pluginSetId;
+        $pluginSetRepo = $this->pluginSetRepository;
+        
         /** @var PluginSet $pluginSet */
         $pluginSet = $pluginSetRepo->get($pluginSetId);
         
-        $paymentMethods = $this->paymentRepository->all();
-        if (count($paymentMethods)) {
-            foreach ($paymentMethods as $paymentMethod) {
-                /** @var PluginSetEntry $pluginSetEntry */
-                foreach ($pluginSet->pluginSetEntriesWithTrashed as $pluginSetEntry) {
-                    if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === $paymentMethod->pluginKey) {
-                        return true;
-                    }
-                }
-            }
-        }
+        $paymentPlugins = $pluginSet->pluginSetEntriesWithTrashed->filter(function(PluginSetEntry $pluginSetEntry) {
+            return $pluginSetEntry->plugin->type === Plugin::TYPE_PAYMENT && $pluginSetEntry->plugin->activeProductive;
+        });
+    
+        /** @var PluginRepositoryContract $pluginRepository */
+        $pluginRepository = pluginApp(PluginRepositoryContract::class);
         
-        return false;
+        $activePaymentPlugins = $paymentPlugins->filter(function(PluginSetEntry $pluginSetEntry) use ($pluginSetId, $pluginRepository) {
+            return $pluginRepository->isActiveInPluginSet($pluginSetEntry->plugin->id, $pluginSetId);
+        });
+        
+        return $paymentPlugins->count() > 0 && $activePaymentPlugins->count() === 0;
     }
     
     /**
@@ -196,9 +214,8 @@ class DefaultSettingsService
             return $this->pluginSetList;
         }
 
-        $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
         $pluginRepo = pluginApp(PluginRepositoryContract::class);
-        $pluginSets = $pluginSetRepo->list();
+        $pluginSets = $this->pluginSetRepository->list();
         $pluginSetsData = $pluginSets->toArray();
         $pluginSetList = [];
         if (count($pluginSetsData)) {
