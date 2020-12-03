@@ -60,6 +60,14 @@ context("Default Login Page", () =>
         cy.get(".error-msg").should("contain", "Bitte geben Sie eine gültige E-Mail-Adresse an.");
     });
 
+    it("should check for valid email at guest login", () =>
+    {
+        cy.getByTestingAttr("guest-login-input").type("ceres-testingopentrash.com", { delay: 30 });
+        cy.getByTestingAttr("guest-login-button").click();
+        cy.getByTestingAttr("guest-login-input").parent().should("have.class", "error");
+        cy.get(".error-msg").should("contain", "Bitte geben Sie eine gültige E-Mail-Adresse an.");
+    });
+
     it("should check if link to guest login page works", () =>
     {
         cy.getByTestingAttr("guest-login-input").type("ceres-testing@opentrash.com", { delay: 30 });
@@ -73,23 +81,6 @@ context("Default Login Page", () =>
         cy.get(".widget-link").click();
         cy.url().should("include", "/register");
     });
-
-    // it("should check for valid email at guest login", () =>
-    // {
-    //     const $input = cy.get(".login-pwd-reset input")
-    //     cy.get($input).type("blablabla");
-    //     cy.get(".btn.btn-primary.btn-appearance.btn-medium.float-right").click(); =>
-    //     {
-    //         if ($btn.hasClass('active'))
-    //         {
-    //             cy.get
-    //         }
-    //         else
-    //         {
-    //             cy.get(".error-msg").should("contain", "Bitte geben Sie eine gültige E-Mail-Adresse an.");
-    //         }
-    //     }
-    // });
 
     //'Passwort vergessen' ist ein Overlay Fenster. Test muss noch angepasst werden
     // it("should check if forgotten password link works", () =>
