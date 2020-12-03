@@ -25,7 +25,7 @@ context("Basket", () =>
         checkTotals(2);
     });
 
-    it.only("Should delete the basket item", () =>
+    it("Should delete the basket item", () =>
     {
         cy.addBasketItem(1007);
         cy.reload();
