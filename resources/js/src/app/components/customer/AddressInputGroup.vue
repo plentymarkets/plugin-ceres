@@ -486,7 +486,7 @@
                 </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-12" data-testing="invoice-addresses-street-select-gb">>
                 <div class="row">
                     <div class="col-12 col-sm-12">
                         <div class="input-unit" data-validate="text" data-model="address1">
