@@ -1,5 +1,5 @@
 // / <reference types="cypress" />
-context("Header topbar currencies", () =>
+context("Basket preview", () =>
 {
     const ITEM_PRICE_NET = 0.59;
     const ITEM_PRICE = 0.70;
