@@ -1,5 +1,5 @@
 // / <reference types="cypress" />
-context("register / registrierung", () =>
+context("register/registrierung", () =>
 {
     const VALID_PW = "qwe123QWE";
 
@@ -20,7 +20,7 @@ context("register / registrierung", () =>
         cy.get("[data-model='address2']").should("have.class", "error");
         cy.get("[data-model='postalCode']").should("have.class", "error");
         cy.get("[data-model='town']").should("have.class", "error");
-        
+
         cy.get(".notification-wrapper").children().should("exist").should("have.class", "show");
         cy.get(".notification-wrapper").children().first().should("contain", "Bitte folgende Felder überprüfen: E-Mail, Passwort, Vorname, Nachname, Straße, Nr., PLZ, Ort.");
 
@@ -64,7 +64,7 @@ context("register / registrierung", () =>
         cy.getByTestingAttr("privacy-policy-accept-register").click();
 
         cy.server().route("POST", "/rest/io/customer").as("registerUser");
-        
+
         cy.getByTestingAttr("register-submit").click();
 
         cy.wait("@registerUser").then((xhr) =>
@@ -159,9 +159,9 @@ context("register / registrierung", () =>
     {
         cy.get("[data-model='countryId'] .custom-select").select("12");
         cy.getByTestingAttr("invoice-addresses-street-select-gb").should("exist");
-    
+
         const MAIL = `user${new Date().valueOf()}@plentye2etest.de`;
-        
+
         cy.getByTestingAttr("mail-register").type(MAIL);
         cy.getByTestingAttr("password-register").type(VALID_PW);
         cy.getByTestingAttr("repeat-password-register").type(VALID_PW);
