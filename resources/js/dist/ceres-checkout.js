@@ -39944,113 +39944,124 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12 col-sm-12" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
-                      attrs: {
-                        "data-validate": "text",
-                        "data-model": "address1"
-                      }
-                    },
-                    [
-                      _c("input", {
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "invoice-addresses-street-select-gb" }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-sm-12" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
                         attrs: {
-                          type: "text",
-                          name: "street",
-                          autocomplete: "address-line1",
-                          id: "txtStreet" + _vm._uid
-                        },
-                        domProps: { value: _vm.value.address1 },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent(
-                              "address1",
-                              $event.target.value
-                            )
-                          }
+                          "data-validate": "text",
+                          "data-model": "address1"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "txtStreet" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressENAddressLine1"
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "street",
+                            autocomplete: "address-line1",
+                            id: "txtStreet" + _vm._uid
+                          },
+                          domProps: { value: _vm.value.address1 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address1",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtStreet" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.addressENAddressLine1"
+                                )
+                              ) + "*"
                             )
-                          ) + "*"
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.isInOptionalFields("gb", "billing_address.address2")
+                    ? _c("div", { staticClass: "col-12 col-sm-12" }, [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "billing_address.address2"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'billing_address.address2')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "address2" }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "text",
+                                name: "housenumber",
+                                autocomplete: "address-line2",
+                                id: "txtNumber" + _vm._uid
+                              },
+                              domProps: { value: _vm.value.address2 },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "address2",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              { attrs: { for: "txtNumber" + _vm._uid } },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressENAddressLine2",
+                                        "gb",
+                                        "billing_address.address2"
+                                      )
+                                    ) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          ]
                         )
                       ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.isInOptionalFields("gb", "billing_address.address2")
-                  ? _c("div", { staticClass: "col-12 col-sm-12" }, [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
-                                "gb",
-                                "billing_address.address2"
-                              ),
-                              expression:
-                                "isInRequiredFields('gb', 'billing_address.address2')",
-                              arg: "text"
-                            }
-                          ],
-                          staticClass: "input-unit",
-                          attrs: { "data-model": "address2" }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "text",
-                              name: "housenumber",
-                              autocomplete: "address-line2",
-                              id: "txtNumber" + _vm._uid
-                            },
-                            domProps: { value: _vm.value.address2 },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "address2",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "txtNumber" + _vm._uid } },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressENAddressLine2",
-                                      "gb",
-                                      "billing_address.address2"
-                                    )
-                                  ) +
-                                  "\n                        "
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ]),
+                    : _vm._e()
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
@@ -42242,7 +42253,7 @@ var render = function() {
     "select",
     {
       staticClass: "custom-select",
-      attrs: { "data-autofocus": "" },
+      attrs: { "data-testing": "salutation-select", "data-autofocus": "" },
       domProps: { value: _vm.addressData.gender },
       on: {
         change: function($event) {
