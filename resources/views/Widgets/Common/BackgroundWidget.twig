@@ -23,7 +23,7 @@
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("hasUrl", "false") }}
 {{ Twig.set("hasColor", "false") }}
-{{ Twig.set("imageAltText", "") }}
+{{ Twig.set("imageAltText", "" | json_encode) }}
 
 {% if sourceType == "category-image1" %}
     {{ Twig.set("url", "category.details[0].imagePath") }}
