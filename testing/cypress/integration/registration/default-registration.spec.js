@@ -9,7 +9,7 @@ context("register / registrierung", () =>
         cy.visit("/registrierung");
     });
 
-    it("empty input fields should be marked as invalid", () =>
+    it("Should check if empty input fields are marked as invalid", () =>
     {
         cy.getByTestingAttr("register-submit").click();
 
@@ -31,7 +31,7 @@ context("register / registrierung", () =>
         cy.get(".notification-wrapper").children().eq( 1 ).should("contain", "Bitte akzeptieren Sie die Daten­schutz­erklärung.");
     });
 
-    it("information popper exists, has correct text and is closable", () =>
+    it("Should check if information popper exists, has correct text and is closable", () =>
     {
         cy.get(".btn.btn-icon.btn-secondary.btn-sm").click();
         cy.get(".popover.bs-popover-auto").not('.hidden').find(".popover-body").contains("Durch die Registrierung werden Ihre Adressdaten gespeichert.");
@@ -39,7 +39,7 @@ context("register / registrierung", () =>
         cy.get(".popover.bs-popover-auto").not('.hidden').should('not.exist');
     });
 
-    it("privacy policy page should be linked and can be opened", () =>
+    it("Should check if privacy policy page is linked and can be opened", () =>
     {
         cy.get(".form-check-label a")
             .should('have.attr', 'href')
@@ -51,7 +51,7 @@ context("register / registrierung", () =>
         cy.url().should("include", "/privacy-policy/");
     });
 
-    it("registering an existing account should be denied", () =>
+    it("Should check if registering an existing account is denied", () =>
     {
         cy.getByTestingAttr("mail-register").type("ceres-testing@opentrash.com");
         cy.getByTestingAttr("password-register").type(VALID_PW);
@@ -69,7 +69,7 @@ context("register / registrierung", () =>
         cy.get(".notification-wrapper").children().should("contain", "Für diese E-Mail-Adresse existiert bereits ein Konto.");
     });
 
-    it.only("registering should be succesfull", () =>
+    it("Should check if registering as a person is succesfull", () =>
     {
         cy.getByTestingAttr("mail-register").type(MAIL);
         cy.getByTestingAttr("password-register").type(VALID_PW);
@@ -81,8 +81,67 @@ context("register / registrierung", () =>
         cy.get("[data-model='postalCode']").type("g");
         cy.get("[data-model='town']").type("g");
         cy.getByTestingAttr("privacy-policy-accept-register").click();
+
+        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+
+        // add alias to register function
+
         cy.getByTestingAttr("register-submit").click();
 
+        cy.wait("@registerUser").then((xhr) =>
+        {
+            expect(xhr.status).to.eql(200);
+
+            // wait for vue store to init after page reload
+            cy.wait(1500);
+            cy.getStore().then((store) =>
+            {
+                expect(store.getters.isLoggedIn).to.be.true;
+            });
+        });
+
         cy.location("pathname").should("eq", "/");
+    });
+
+    it("Should check if registering as a company is succesfull", () =>
+    {
+        cy.getByTestingAttr("mail-register").type(MAIL);
+        cy.getByTestingAttr("password-register").type(VALID_PW);
+        cy.getByTestingAttr("repeat-password-register").type(VALID_PW);
+        cy.getByTestingAttr("salutation-select").select("company");
+        cy.get("[data-model='name1']").type("g");
+        cy.get("[data-model='address1']").type("g");
+        cy.get("[data-model='address2']").type("g");
+        cy.get("[data-model='postalCode']").type("g");
+        cy.get("[data-model='town']").type("g");
+        cy.getByTestingAttr("privacy-policy-accept-register").click();
+
+        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+
+        // add alias to register function
+
+        cy.getByTestingAttr("register-submit").click();
+
+        cy.wait("@registerUser").then((xhr) =>
+        {
+            expect(xhr.status).to.eql(200);
+
+            // wait for vue store to init after page reload
+            cy.wait(1500);
+            cy.getStore().then((store) =>
+            {
+                expect(store.getters.isLoggedIn).to.be.true;
+            });
+        });
+
+        cy.location("pathname").should("eq", "/");
+    });
+
+    it("Should check if form fields are changing after select country to United Kingdom", () =>
+    {
+        cy.get("[data-model='countryId'] .custom-select").select("12");
+        cy.get("[data-model='address1'] input").should("exist");
+        // cy.get 
+        // cy.get(".popover.bs-popover-auto").not('.hidden').should('not.exist');
     });
 });

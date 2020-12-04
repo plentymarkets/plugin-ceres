@@ -1,5 +1,5 @@
 <template>
-    <select :value="addressData.gender" class="custom-select" @change="emitInputEvent($event.target.value)" data-autofocus>
+    <select :value="addressData.gender" data-testing="salutation-select" class="custom-select" @change="emitInputEvent($event.target.value)" data-autofocus>
         <option
             :value="salutation.key"
             :selected="addressData.gender === salutation.key && checkGenderCompany(salutation.key)"
