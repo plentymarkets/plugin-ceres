@@ -39951,7 +39951,6 @@ var render = function() {
                 attrs: { "data-testing": "invoice-addresses-street-select-gb" }
               },
               [
-                _vm._v(">\n            "),
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12 col-sm-12" }, [
                     _c(
