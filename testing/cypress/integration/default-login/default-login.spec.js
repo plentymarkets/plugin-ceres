@@ -87,6 +87,7 @@ context("Default Login Page", () =>
     it("should check if forgotten password link is working", () =>
     {
         cy.get(".small.text-appearance").click();
+        cy.wait(500);
         cy.get(".modal-content .input-unit").type("ceres-testing@opentrash.com");
         cy.get(".modal-content .btn-primary").click();
         cy.get(".notification-wrapper").should("exist").children().should("have.class", "show");
