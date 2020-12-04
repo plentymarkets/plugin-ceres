@@ -18,17 +18,17 @@ context("Contact Page", () =>
 
     it("should check for Google Maps iFrame", () =>
     {
-        cy.get(".widget-google-maps iframe").its('0.contentDocument').should('exist');
+        cy.get(".widget-google-maps iframe").its("0.contentDocument").should("exist");
     });
 
     it("should check form for error if recquired fields are empty and privacy policy is not checked", () =>
     {
         cy.get(".widget-contact-form .btn-primary").click();
-        cy.get(".widget-mail-input .input-unit").should("have.class","error").and("have.class","required");
-        cy.get(".contact-form-subject .input-unit").should("have.class","error").and("have.class","required");
-        cy.get(".contact-form-message .input-unit").should("have.class","error").and("have.class","required");
-        cy.get(".widget-accept-privacy-policy .select-unit").should("have.class","required");
-        cy.get(".widget-accept-privacy-policy .form-check").should("have.class","error");
+        cy.get(".widget-mail-input .input-unit").should("have.class", "error").and("have.class", "required");
+        cy.get(".contact-form-subject .input-unit").should("have.class", "error").and("have.class", "required");
+        cy.get(".contact-form-message .input-unit").should("have.class", "error").and("have.class", "required");
+        cy.get(".widget-accept-privacy-policy .select-unit").should("have.class", "required");
+        cy.get(".widget-accept-privacy-policy .form-check").should("have.class", "error");
         cy.get(".notification-wrapper").children().should("exist");
         cy.get(".notification-wrapper").children().first().should("contain", "Bitte folgende Felder überprüfen: E-Mail, Betreff, Nachricht, Hiermit bestätige ich, dass ich die Daten­schutz­erklärung gelesen habe..");
     });
@@ -47,10 +47,11 @@ context("Contact Page", () =>
     it("privacy policy page should be linked and can be opened", () =>
     {
         cy.get(".widget-accept-privacy-policy a")
-            .should('have.attr', 'href')
-            .and('include', '/privacy-policy/')
-            .then((href) => {
-                cy.visit(href)
-            })
+            .should("have.attr", "href")
+            .and("include", "/privacy-policy/")
+            .then((href) =>
+            {
+                cy.visit(href);
+            });
     });
 });
