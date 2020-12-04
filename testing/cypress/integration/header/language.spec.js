@@ -25,4 +25,49 @@ context("Header topbar languages", () =>
         cy.getByTestingAttr("language-select").children().first().should("have.class", "flag-icon-en");
     });
 
+    it("should change language text for content at start page to en", () =>
+    {
+        cy.visit("/en");
+        cy.get("#page-body").should("contain", "It is a period of civil war.")
+    });
+
+    it("should change language text on single item to en", () =>
+    {
+        cy.visit("/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014");
+        cy.get(".tab-content").should("contain", "The feet made of real wood are inconspicuously and discreetly integrated into the overall appearance of the armchair. ")
+    });
+
+    it("should change language text for order properties", () =>
+    {
+        cy.visit("/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014");
+        cy.get(".widget-order-property").should("contain", "Genuine leather");
+    });
+
+    it("should display correct category lang in breadcrumbs", () =>
+    {
+        cy.visit("/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014");
+        cy.get(".breadcrumbs").should("contain", "Livingroom")
+                              .should("contain", "Armchair & stool")
+                              .should("contain", "Loungesessel Herkules");
+    });
+
+    it("should display correct translation for add to basket button", () =>
+    {
+        cy.visit("/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014");
+        cy.get(".add-to-basket-container").should("contain", "Add to shopping cart");
+    });
+
+    it("should display correct availability translation", () =>
+    {
+        cy.visit("/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014");
+        cy.get(".availability").should("contain", "Ready for shipping, delivery in 48h");
+    });
+
+    it("should display correct item url after lang change", () =>
+    {
+        cy.visit("/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+        cy.clickElement("language-select");
+        cy.getByTestingAttr("lang-select-en").click();
+        cy.location("pathname").should("eq", "/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014/");
+    });
 });
