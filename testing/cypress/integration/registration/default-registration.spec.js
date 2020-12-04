@@ -103,7 +103,7 @@ context("register / registrierung", () =>
         cy.location("pathname").should("eq", "/");
     });
 
-    it("Should check if registering as a company is succesfull", () =>
+    it.only("Should check if registering as a company is succesfull", () =>
     {
         cy.getByTestingAttr("mail-register").type(MAIL);
         cy.getByTestingAttr("password-register").type(VALID_PW);
@@ -135,12 +135,14 @@ context("register / registrierung", () =>
         });
 
         cy.location("pathname").should("eq", "/");
+        cy.get("#accountMenuList")
     });
 
     it("Should check if form fields are changing after select country to United Kingdom", () =>
     {
+        
         cy.get("[data-model='countryId'] .custom-select").select("12");
-        cy.get("[data-model='address1'] input").should("exist");
+        cy.getByTestingAttr("addresses").should("exist");
         // cy.get 
         // cy.get(".popover.bs-popover-auto").not('.hidden').should('not.exist');
     });
