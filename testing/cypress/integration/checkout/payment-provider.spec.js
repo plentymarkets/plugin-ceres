@@ -16,38 +16,68 @@ context("Checkout payment provider", () =>
         cy.login();
     });
 
-    // TODO check vuex store after every change
     it("Should change payment providers as user", () =>
     {
         visitCheckoutAsUser();
         cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
         cy.get(`[data-id='${PRE_PAYMENT_ID}']`).find("input").should("have.be.checked");
         cy.wait(500);
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.checkout.payment.methodOfPaymentId).to.be.equal(PRE_PAYMENT_ID);
+        });
         cy.get(`[data-id='${INVOICE_ID}']`).click();
         cy.get(`[data-id='${INVOICE_ID}']`).find("input").should("have.be.checked");
         cy.wait(500);
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.checkout.payment.methodOfPaymentId).to.be.equal(INVOICE_ID);
+        });
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
         cy.wait(500);
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.checkout.payment.methodOfPaymentId).to.be.equal(CASH_ON_DELIVERY);
+        });
         cy.get(`[data-id='${PAY_PAL_ID}']`).click();
         cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.checkout.payment.methodOfPaymentId).to.be.equal(PAY_PAL_ID);
+        });
     });
 
-    // TODO check vuex store after every change
     it("Should change payment providers as guest", () =>
     {
         visitCheckoutAsGuest();
         cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
         cy.get(`[data-id='${PRE_PAYMENT_ID}']`).find("input").should("have.be.checked");
         cy.wait(500);
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.checkout.payment.methodOfPaymentId).to.be.equal(PRE_PAYMENT_ID);
+        });
         cy.get(`[data-id='${INVOICE_ID}']`).click();
         cy.get(`[data-id='${INVOICE_ID}']`).find("input").should("have.be.checked");
         cy.wait(500);
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.checkout.payment.methodOfPaymentId).to.be.equal(INVOICE_ID);
+        });
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).click();
         cy.get(`[data-id='${CASH_ON_DELIVERY}']`).find("input").should("have.be.checked");
         cy.wait(500);
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.checkout.payment.methodOfPaymentId).to.be.equal(CASH_ON_DELIVERY);
+        });
         cy.get(`[data-id='${PAY_PAL_ID}']`).click();
         cy.get(`[data-id='${PAY_PAL_ID}']`).find("input").should("have.be.checked");
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.checkout.payment.methodOfPaymentId).to.be.equal(PAY_PAL_ID);
+        });
     });
 
     it("Should have every payment provider visible as user", () =>
