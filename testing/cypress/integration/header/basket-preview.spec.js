@@ -27,7 +27,6 @@ context("Basket preview", () =>
 
         cy.visit(itemUrl);
 
-        cy.get(".add-to-basket-container > button").should("exist");
         cy.get(".add-to-basket-container > button").click();
 
         cy.get(".control-basket > a").should("exist").scrollIntoView().click();
@@ -43,7 +42,6 @@ context("Basket preview", () =>
 
         cy.visit(itemUrl);
 
-        cy.get(".add-to-basket-container > button").should("exist");
         cy.get(".add-to-basket-container > button").click();
 
         cy.get(".control-basket > a").should("exist").scrollIntoView().click();
@@ -69,7 +67,7 @@ context("Basket preview", () =>
     {
         cy.addBasketItem(1014);
         cy.reload();
-        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
+        cy.get(".control-basket > a").scrollIntoView().click();
         checkTotals();
     });
 
@@ -77,7 +75,7 @@ context("Basket preview", () =>
     {
         cy.addBasketItem(1014);
         cy.reload();
-        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
+        cy.get(".control-basket > a").scrollIntoView().click();
         cy.getByTestingAttr("quantity-btn-increase").click().click();
         cy.getByTestingAttr("quantity-btn-decrease").click();
         checkTotals(2);
@@ -88,7 +86,7 @@ context("Basket preview", () =>
         cy.addBasketItem(1014);
         cy.addBasketItem(1007);
         cy.reload();
-        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
+        cy.get(".control-basket > a").scrollIntoView().click();
         cy.getByTestingAttr("basket-item-delete").eq(1).click();
         checkTotals();
     });
@@ -97,10 +95,12 @@ context("Basket preview", () =>
     {
         cy.addBasketItem(1014);
         cy.reload();
-        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
+        cy.get(".control-basket > a").scrollIntoView().click();
         cy.getByTestingAttr("basket-item-name")
             .should("have.attr", "href")
             .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+        cy.getByTestingAttr("basket-item-name").click();
+        cy.location("pathname").should("eq", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
     });
 
     function checkTotals(itemQuantity = 1)
