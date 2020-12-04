@@ -70,4 +70,16 @@ context("Header topbar languages", () =>
         cy.getByTestingAttr("lang-select-en").click();
         cy.location("pathname").should("eq", "/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014/");
     });
+
+    it("should display correct category name in menu", () =>
+    {
+        cy.visit("/en");
+        cy.get(".mainmenu").should("contain", "Livingroom");
+    });
+
+    it("should display correct category name at category page", () =>
+    {
+        cy.visit("/en/livingroom");
+        cy.get(".category-title").should("contain", "Livingroom");
+    });
 });
