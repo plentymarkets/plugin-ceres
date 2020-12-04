@@ -2,7 +2,6 @@
 context("register / registrierung", () =>
 {
     const VALID_PW = "qwe123QWE";
-    const MAIL = `user${new Date().valueOf()}@plentye2etest.de`;
 
     beforeEach(() =>
     {
@@ -63,7 +62,22 @@ context("register / registrierung", () =>
         cy.get("[data-model='postalCode']").type("g");
         cy.get("[data-model='town']").type("g");
         cy.getByTestingAttr("privacy-policy-accept-register").click();
+
+        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+        
         cy.getByTestingAttr("register-submit").click();
+
+        cy.wait("@registerUser").then((xhr) =>
+        {
+            expect(xhr.status).to.eql(226);
+
+            // wait for vue store to init after page reload
+            cy.wait(1500);
+            cy.getStore().then((store) =>
+            {
+                expect(store.getters.isLoggedIn).to.be.false;
+            });
+        });
 
         cy.get(".notification-wrapper").children().should("exist").should("have.class", "show");
         cy.get(".notification-wrapper").children().should("contain", "Für diese E-Mail-Adresse existiert bereits ein Konto.");
@@ -71,6 +85,8 @@ context("register / registrierung", () =>
 
     it("Should check if registering as a person is succesfull", () =>
     {
+        const MAIL = `user${new Date().valueOf()}@plentye2etest.de`;
+
         cy.getByTestingAttr("mail-register").type(MAIL);
         cy.getByTestingAttr("password-register").type(VALID_PW);
         cy.getByTestingAttr("repeat-password-register").type(VALID_PW);
@@ -82,9 +98,8 @@ context("register / registrierung", () =>
         cy.get("[data-model='town']").type("g");
         cy.getByTestingAttr("privacy-policy-accept-register").click();
 
-        cy.server().route("POST", "/rest/io/customer").as("registerUser");
-
         // add alias to register function
+        cy.server().route("POST", "/rest/io/customer").as("registerUser");
 
         cy.getByTestingAttr("register-submit").click();
 
@@ -101,10 +116,13 @@ context("register / registrierung", () =>
         });
 
         cy.location("pathname").should("eq", "/");
+        cy.get("#accountMenuList span").should("contain", "Hallo, g g");
     });
 
-    it.only("Should check if registering as a company is succesfull", () =>
+    it("Should check if registering as a company is succesfull", () =>
     {
+        const MAIL = `user${new Date().valueOf()}@plentye2etest.de`;
+
         cy.getByTestingAttr("mail-register").type(MAIL);
         cy.getByTestingAttr("password-register").type(VALID_PW);
         cy.getByTestingAttr("repeat-password-register").type(VALID_PW);
@@ -135,15 +153,42 @@ context("register / registrierung", () =>
         });
 
         cy.location("pathname").should("eq", "/");
-        cy.get("#accountMenuList")
     });
 
-    it("Should check if form fields are changing after select country to United Kingdom", () =>
+    it("Should check if registering as a person from the United Kingdom is succesfull", () =>
     {
-        
         cy.get("[data-model='countryId'] .custom-select").select("12");
-        cy.getByTestingAttr("addresses").should("exist");
-        // cy.get 
-        // cy.get(".popover.bs-popover-auto").not('.hidden').should('not.exist');
+        cy.getByTestingAttr("invoice-addresses-street-select-gb").should("exist");
+    
+        const MAIL = `user${new Date().valueOf()}@plentye2etest.de`;
+        
+        cy.getByTestingAttr("mail-register").type(MAIL);
+        cy.getByTestingAttr("password-register").type(VALID_PW);
+        cy.getByTestingAttr("repeat-password-register").type(VALID_PW);
+        cy.get("[data-model='name2'].input-unit").type("e");
+        cy.get("[data-model='name3'].input-unit").type("e");
+        cy.get("[data-model='address1']").type("e");
+        cy.get("[data-model='address2']").type("e");
+        cy.get("[data-model='town']").type("e");
+        cy.get("[data-model='postalCode']").type("e");
+        cy.getByTestingAttr("privacy-policy-accept-register").click();
+
+        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+
+        cy.getByTestingAttr("register-submit").click();
+
+        cy.wait("@registerUser").then((xhr) =>
+        {
+            expect(xhr.status).to.eql(200);
+
+            // wait for vue store to init after page reload
+            cy.wait(1500);
+            cy.getStore().then((store) =>
+            {
+                expect(store.getters.isLoggedIn).to.be.true;
+            });
+        });
+
+        cy.location("pathname").should("eq", "/");
     });
 });
