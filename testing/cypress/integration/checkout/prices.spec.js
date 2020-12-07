@@ -1,6 +1,9 @@
 // / <reference types="cypress" />
 context("prices", () =>
 {
+
+    const url = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
+
     beforeEach(() =>
     {
         cy.visit("/");
@@ -8,7 +11,7 @@ context("prices", () =>
 
     it("should change the item price for b2b class", () =>
     {
-        cy.visit("/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+        cy.visit(url);
         cy.get(".price").should("contain", "0,70");
         cy.get(".crossprice").should("contain", "0,80");
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
@@ -21,7 +24,7 @@ context("prices", () =>
     it("should change graduated prices for b2b customer", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
-        cy.visit("/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+        cy.visit(url);
         cy.get(".graduated-prices-table").children().first().children().last().should("contain", "0,38");
         cy.get(".graduated-prices-table").children().last().children().last().should("contain", "0,08");
     });
@@ -29,7 +32,7 @@ context("prices", () =>
     it("should display netto price for b2b class", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
-        cy.visit("/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+        cy.visit(url);
         cy.get(".price").should("contain", "0,53");
         cy.get(".crossprice").should("contain", "0,61");
     });
@@ -37,7 +40,7 @@ context("prices", () =>
     it("should display brutto price for b2c class", () =>
     {
         cy.login("stefan.standard@plentye2etest.de", "Testuser1234");
-        cy.visit("/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+        cy.visit(url);
         cy.get(".price").should("contain", "0,70");
         cy.get(".crossprice").should("contain", "0,80");
     });
@@ -69,7 +72,8 @@ context("prices", () =>
     it("should apply correct shipping price for item with postage (porto) for b2c", () =>
     {
         cy.login("stefan.standard@plentye2etest.de", "Testuser1234");
-        cy.addBasketItem("1031"); // item with 10€ postage
+        // item with 10€ postage
+        cy.addBasketItem("1031");
         cy.visit("/checkout");
         cy.get(`[data-id="${7}"]`).should("contain", "10,00");
 
@@ -78,7 +82,8 @@ context("prices", () =>
     it("should apply correct shipping price for item with postage (porto) for b2b", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
-        cy.addBasketItem("1031"); // item with 10€ postage
+        // item with 10€ postage
+        cy.addBasketItem("1031");
         cy.visit("/checkout");
         cy.get(`[data-id="${7}"]`).should("contain", "8,40");
 
