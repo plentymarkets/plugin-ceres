@@ -4,11 +4,6 @@ context("prices", () =>
 
     const url = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
 
-    beforeEach(() =>
-    {
-        cy.visit("/");
-    });
-
     it("should change the item price for b2b class", () =>
     {
         cy.visit(url);
