@@ -2,7 +2,7 @@
     <div class="pb-3">
         <div class="row">
             <div class="col-12 col-sm-6">
-                <button type="button" class="btn btn-primary btn-appearance btn-block" data-toggle="modal" :data-target="'#edit-coupon-overlay-' + _uid">
+                <button type="button" class="btn btn-primary btn-appearance btn-block coupon-edit" data-toggle="modal" :data-target="'#edit-coupon-overlay-' + _uid">
                     <span>{{ $translate("Ceres::Template.couponEdit") }}</span>
                     <i class="fa fa-gift default-float" aria-hidden="true"></i> 
                 </button>
@@ -10,7 +10,7 @@
             <div class="col-12 col-sm-6">
                 <button v-if="!isFinalized" 
                         type="button" 
-                        class="btn btn-primary btn-appearance btn-block"
+                        class="btn btn-primary btn-appearance btn-block coupon-create"
                         :class="{ 'disabled': isLoading || !isPaid }"
                         v-tooltip="!isPaid"
                         data-placement="top"
@@ -21,7 +21,7 @@
                 </button>
                 <a v-if="isFinalized && isPaid" 
                     :href="pdfLink"
-                    class="btn btn-primary btn-appearance btn-block"
+                    class="btn btn-primary btn-appearance btn-block coupon-download"
                     target="_blank"
                     :title="$translate('Ceres::Template.couponDownload')">
                     <span>{{ $translate("Ceres::Template.couponDownload") }}</span>
