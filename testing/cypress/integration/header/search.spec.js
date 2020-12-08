@@ -80,7 +80,7 @@ context("Header topbar search", () =>
         cy.get(".categoriegrid").should("contain", "Meinten Sie \"braun\"?");
     });
 
-    it.only("Should link to the suggested search", () =>
+    it("Should link to the suggested search", () =>
     {
         const search = "baum";
 
