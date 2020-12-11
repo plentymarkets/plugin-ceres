@@ -3,6 +3,7 @@
         <div :class="paddingClasses" :style="paddingInlineStyles">
 
             <add-to-basket
+                    data-testing="item-add-to-basket"
                     :variation-id="item.variation.id"
                     :is-salable="!!item.filter && item.filter.isSalable"
                     :has-children="!!item.item && item.item.salableVariationCount > 1"
