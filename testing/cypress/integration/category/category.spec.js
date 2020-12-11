@@ -52,12 +52,13 @@ context("category", () =>
         cy.get(".product-list").find("li").should("have.length.gt", 0);
     });
 
-    it.only("should remove applied attribute filter at category toolbar", () =>
+    it("should remove applied attribute filter at category toolbar", () =>
     {
         cy.getByTestingAttr("category-toolbar-filter").click();
         cy.get(".widget-filter-attributes-properties-characteristics").find(".option-1").click();
+        cy.getByTestingAttr("category-toolbar-close").click();
         cy.get(".widget-selected-filter").find(".selected-filters").children().first().click();
-        cy.get(".product-list").find("li").should("have.length.eq", 20);
+        cy.get(".product-list").find("li").should("have.length", 20);
     });
 
     it("should list items for category", () =>
