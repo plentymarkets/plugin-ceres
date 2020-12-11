@@ -318,7 +318,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary btn-appearance btn-block",
+            staticClass: "btn btn-primary btn-appearance btn-block coupon-edit",
             attrs: {
               type: "button",
               "data-toggle": "modal",
@@ -351,7 +351,8 @@ var render = function() {
                     expression: "!isPaid"
                   }
                 ],
-                staticClass: "btn btn-primary btn-appearance btn-block",
+                staticClass:
+                  "btn btn-primary btn-appearance btn-block coupon-create",
                 class: { disabled: _vm.isLoading || !_vm.isPaid },
                 attrs: {
                   type: "button",
@@ -383,7 +384,8 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "btn btn-primary btn-appearance btn-block",
+                staticClass:
+                  "btn btn-primary btn-appearance btn-block coupon-download",
                 attrs: {
                   href: _vm.pdfLink,
                   target: "_blank",

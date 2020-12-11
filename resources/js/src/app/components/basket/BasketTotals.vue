@@ -4,7 +4,7 @@
         <div class="component-loading with-icon refreshing" :class="{ 'is-loading': isBasketLoading }">
             <dl>
                 <slot name="before-item-sum"></slot>
-                
+
                 <!-- Basket value (net) -->
                 <template v-if="visibleFields.includes('basketValueNet')">
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
@@ -33,10 +33,10 @@
                         {{ $translate("Ceres::Template.basketRebate") }}
                     </dt><!--
                 --><dd class="rebate-hint" v-if="!showNetPrices">
-                        {{ calculateBaseValue(basket.itemSum, basket.basketRebate) - basket.itemSum | currency  }}
+                        {{ $translate("Ceres::Template.basketRebateSign") }}{{calculateBaseValue(basket.itemSum, basket.basketRebate) - basket.itemSum | currency }}
                     </dd><!--
                 --><dd class="rebate-hint" v-else>
-                        {{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) - basket.itemSumNet | currency  }}
+                        {{ $translate("Ceres::Template.basketRebateSign") }}{{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) - basket.itemSumNet | currency  }}
                     </dd>
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
                         {{ $translate("Ceres::Template.basketSubTotal") }} ({{ $translate("Ceres::Template.basketNet") }})
@@ -53,9 +53,9 @@
                 </template>
                 <!-- Rebate -->
 
-                
+
                 <slot name="after-item-sum"></slot>
-                
+
                 <slot name="before-shipping-costs"></slot>
 
                 <!-- Shipping (net) -->
@@ -79,7 +79,7 @@
                     </dd>
                 </template>
                 <!-- Shipping (gross) -->
-                
+
                 <slot name="after-shipping-costs"></slot>
 
                 <!-- Coupon -->
@@ -92,7 +92,7 @@
                     </dd>
                 </template>
                 <!-- Coupon -->
-                
+
                 <hr>
                 <slot name="before-total-sum"></slot>
 
@@ -170,7 +170,7 @@
                     </template>
                     <!-- Coupon open amount -->
                 </div>
-                
+
                 <slot name="after-total-sum"></slot>
             </dl>
         </div>
