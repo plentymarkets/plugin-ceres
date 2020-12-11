@@ -26,9 +26,38 @@ context("category", () =>
         cy.location("pathname").should("eq", "/arbeitszimmer-buero/");
     });
 
-    it("should be able to apply filter at category toolbar", () =>
+    it("should be able to apply min price filter at category toolbar", () =>
     {
-        cy.get(".lol").should("exist");
+        cy.getByTestingAttr("category-toolbar-filter").click();
+        cy.get(".widget-filter-price").find("input").first().type("400", { delay: 30 });
+        cy.get(".widget-filter-price").find("button").click();
+        cy.get(".product-list").children().first()
+            .find(".thumb-content").find(".price").should("contain", "400,00");
+    });
+
+    it("should be able to apply max price filter at category toolbar", () =>
+    {
+        cy.getByTestingAttr("category-toolbar-filter").click();
+        cy.get(".widget-filter-price").find("input").last().type("0.01", { delay: 30 });
+        cy.get(".widget-filter-price").find("button").click();
+        cy.get(".product-list").children().first()
+            .find(".thumb-content").find(".price").should("contain", "0,01");
+    });
+
+    it("should be able to apply attribute filter at category toolbar", () =>
+    {
+        cy.getByTestingAttr("category-toolbar-filter").click();
+        cy.get(".widget-filter-attributes-properties-characteristics").find(".option-1").click();
+        cy.get(".widget-selected-filter").find(".selected-filters").children().first().should("exist");
+        cy.get(".product-list").find("li").should("have.length.gt", 0);
+    });
+
+    it.only("should remove applied attribute filter at category toolbar", () =>
+    {
+        cy.getByTestingAttr("category-toolbar-filter").click();
+        cy.get(".widget-filter-attributes-properties-characteristics").find(".option-1").click();
+        cy.get(".widget-selected-filter").find(".selected-filters").children().first().click();
+        cy.get(".product-list").find("li").should("have.length.eq", 20);
     });
 
     it("should list items for category", () =>
@@ -36,7 +65,7 @@ context("category", () =>
         cy.get(".product-list").find("li").should("have.length", 20);
     });
 
-    it.only("should click card and open item on single item", () =>
+    it("should click card and open item on single item", () =>
     {
         cy.get(".product-list").find("li").first().scrollIntoView().find(".thumb-title").click();
         cy.location("pathname").should("eq", "/wohnzimmer/sessel-hocker/barhocker-white-sanfrancisco_109_1007/");
