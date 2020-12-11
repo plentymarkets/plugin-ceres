@@ -36,16 +36,18 @@ context("category", () =>
         cy.get(".product-list").find("li").should("have.length", 20);
     });
 
-    it("should click card and open item on single item", () =>
+    it.only("should click card and open item on single item", () =>
     {
-        cy.get(".lol").should("exist");
-
+        cy.get(".product-list").find("li").first().scrollIntoView().find(".thumb-title").click();
+        cy.location("pathname").should("eq", "/wohnzimmer/sessel-hocker/barhocker-white-sanfrancisco_109_1007/");
     });
 
     it("should add item to basket when button is clicked on page item", () =>
     {
-        cy.get(".lol").should("exist");
-
+        cy.get(".product-list").find("li").first().find(".add-to-basket-lg-container").click();
+        cy.get(".control-basket > a").scrollIntoView().click();
+        cy.get("body").should("have.class", "basket-open");
+        cy.get(".basket-item").should("exist");
     });
 
     it("should sort by price up", () =>
@@ -70,7 +72,7 @@ context("category", () =>
 
     });
 
-    it.only("should sort by alphabet desc", () =>
+    it("should sort by alphabet desc", () =>
     {
         cy.get(".widget-item-sorting .custom-select").select("Name Z-A");
         cy.get(".product-list").children().first()
@@ -86,7 +88,7 @@ context("category", () =>
 
     it("should show category item image for card", () =>
     {
-        const imgUrl = "https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/109/middle/109-Barhocker-White-SanFrancisco.jpg"
+        const imgUrl = "https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/109/middle/109-Barhocker-White-SanFrancisco.jpg";
 
         cy.get(".product-list").children().first().find("picture")
             .invoke("attr", "data-iesrc", imgUrl)

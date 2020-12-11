@@ -34,7 +34,7 @@
             {{ Twig.if("overrideSearchFilters | trim is empty") }}
                 {% if isPreview or hasCollapsableContent %}
                 <div class="d-flex widget-{{ appearance }}">
-                    <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}">
+                    <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}" {{ set_testing_attr("data-testing", "category-toolbar-filter") }}>
                         {%- if icon != "none" -%}
                             <i class="fa {{ icon }} default-float mr-1" aria-hidden="true" style="line-height: inherit"></i>
                         {%- endif -%}
