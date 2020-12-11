@@ -302,6 +302,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -605,6 +606,7 @@ var render = function() {
         [
           _c("add-to-basket", {
             attrs: {
+              "data-testing": "item-add-to-basket",
               "variation-id": _vm.item.variation.id,
               "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
               "has-children":
