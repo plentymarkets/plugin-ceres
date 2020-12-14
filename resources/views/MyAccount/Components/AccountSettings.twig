@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn-appearance btn-block" @click="validatePassword" :class="{'disabled': !isValidPassword || isLoading}">
+                            <button type="submit" class="btn btn-primary btn-appearance btn-block" @click="validatePassword" :class="{'disabled': !isValidPassword || isLoading}" {{ set_testing_attr("data-testing", "new-password-submit") }}>
                                     <i class="fa fa-check" aria-hidden="true"></i> 
                                     <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
                             </button>
