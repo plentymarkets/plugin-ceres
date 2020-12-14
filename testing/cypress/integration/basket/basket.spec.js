@@ -38,6 +38,8 @@ context("Basket", () =>
         cy.getByTestingAttr("basket-item-name")
             .should("have.attr", "href")
             .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+        cy.getByTestingAttr("basket-item-name").click();
+        cy.location("pathname").should("eq", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
     });
 
     function checkTotals(itemQuantity = 1)

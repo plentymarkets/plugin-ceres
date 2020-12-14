@@ -10171,6 +10171,10 @@ html.ie {
 
 .sticky-element {
     padding-bottom: .1px; // force disable margin collapse
+
+    p:empty {
+        margin-bottom: 0; // remove margin of empty paragraph for correct height detection
+    }
 }
 
 .sticky-element.is-sticky {

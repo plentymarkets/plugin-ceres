@@ -395,6 +395,9 @@ var render = function() {
                         _vm._v(
                           "\n                    " +
                             _vm._s(
+                              _vm.$translate("Ceres::Template.basketRebateSign")
+                            ) +
+                            _vm._s(
                               _vm._f("currency")(
                                 _vm.calculateBaseValue(
                                   _vm.basket.itemSum,
@@ -408,6 +411,9 @@ var render = function() {
                     : _c("dd", { staticClass: "rebate-hint" }, [
                         _vm._v(
                           "\n                    " +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.basketRebateSign")
+                            ) +
                             _vm._s(
                               _vm._f("currency")(
                                 _vm.calculateBaseValue(

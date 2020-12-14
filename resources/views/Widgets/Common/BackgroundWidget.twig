@@ -23,6 +23,7 @@
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("hasUrl", "false") }}
 {{ Twig.set("hasColor", "false") }}
+{{ Twig.set("imageAltText", "" | json_encode) }}
 
 {% if sourceType == "category-image1" %}
     {{ Twig.set("url", "category.details[0].imagePath") }}
@@ -30,6 +31,8 @@
     {{ Twig.set("url", "category.details[0].image2Path") }}
 {% elseif sourceType == "custom-image" %}
     {{ Twig.set("url", customImagePath | json_encode) }}
+    {{ Twig.set("imageAltText", "cdn_metadata(url, 'alttext')") }}
+
 {% endif %}
 
 {{ Twig.if("url | trim is not empty") }}
@@ -62,6 +65,9 @@
             {{ Twig.if("hasUrl") }}
                 image-url="{{ Twig.print("url") }}"
                 fallback-url="{{ fallbackImagePath }}"
+            {{ Twig.endif() }}
+            {{ Twig.if("imageAltText is not empty ") }}
+                alt="{{ Twig.print("imageAltText") }}"
             {{ Twig.endif() }}
             :is-background-image="true"
 

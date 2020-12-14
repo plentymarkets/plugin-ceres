@@ -96,7 +96,7 @@ context("Cookiebar", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookie-bar-show-more-information").click();
-        cy.getByTestingAttr("cookie-bar").find(".privacy-settings .custom-control").should("have.length", 1);
+        cy.getByTestingAttr("cookie-bar").find(".privacy-settings .custom-control").should("have.length", 2);
     });
 
     it("Should consent group on toggle", () =>
