@@ -1,5 +1,5 @@
 // / <reference types="cypress" />
-context("register/registrierung", () =>
+context("register/ registrierung", () =>
 {
     const VALID_PW = "qwe123QWE";
 
