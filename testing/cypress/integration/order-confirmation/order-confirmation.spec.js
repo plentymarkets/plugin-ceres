@@ -17,5 +17,4 @@ context("register/ registrierung", () =>
     {
         cy.get(".h2").should("contain", "Vielen Dank!");
     });
-
 });
