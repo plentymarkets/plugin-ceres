@@ -13,4 +13,9 @@ context("register/ registrierung", () =>
         cy.get(".h3").should("contain", "439");
     });
 
+    it("Should check for Vielen Dank", () =>
+    {
+        cy.get(".h2").should("contain", "Vielen Dank!");
+    });
+
 });
