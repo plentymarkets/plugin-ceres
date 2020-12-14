@@ -44,11 +44,27 @@ context("Myaccount", () =>
         cy.get(".widget-account-settings").find(".add-item").children().first().click();
     });
 
-    it("should change password address", () =>
+    it.only("should change password address", () =>
     {
         cy.login("stefan.standard@plentye2etest.de");
         cy.visit("/myaccount");
+
+        cy.server().route("POST", "/rest/io/customer/password/").as("resetPassword");
+
         cy.get(".widget-account-settings").find(".add-item").children().last().click();
+        cy.getByTestingAttr("old-password").type("Testuser1234", { delay: 40 });
+        cy.getByTestingAttr("new-password").type("Testuser1234", { delay: 40 });
+        cy.getByTestingAttr("new-password-repeat").focus();
+        cy.getByTestingAttr("new-password-repeat").type("Testuser1234", { delay: 40 });
+        cy.getByTestingAttr("new-password-submit").click();
+        cy.get(".widget-logout-button").click();
+
+        cy.get(".notification-wrapper").children().first().should("contain", "Das Passwort wurde erfolgreich geändert.");
+
+        cy.wait("@resetPassword").then((xhr) =>
+        {
+            expect(xhr.status).to.eql(200);
+        });
     });
 
 
