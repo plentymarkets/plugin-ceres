@@ -41,7 +41,7 @@ context("category", () =>
         });
     });
 
-    it.only("should be able to apply max price filter at category toolbar", () =>
+    it("should be able to apply max price filter at category toolbar", () =>
     {
         cy.getByTestingAttr("category-toolbar-filter").click();
         cy.get(".widget-filter-price").find("input").last().type("0.01", { delay: 30 });
@@ -80,13 +80,13 @@ context("category", () =>
 
     it("should click card and open item on single item", () =>
     {
-        cy.get(".product-list").find("li").first().scrollIntoView().find(".thumb-title").click();
+        cy.getByTestingAttr("1007").click();
         cy.location("pathname").should("eq", "/wohnzimmer/sessel-hocker/barhocker-white-sanfrancisco_109_1007/");
     });
 
     it("should add item to basket when button is clicked on page item", () =>
     {
-        cy.get(".product-list").find("li").first().find(".add-to-basket-lg-container").click();
+        cy.getByTestingAttr("1007").find(".add-to-basket-lg-container").click();
         cy.get(".control-basket > a").scrollIntoView().click();
         cy.get("body").should("have.class", "basket-open");
         cy.get(".basket-item").should("exist");
