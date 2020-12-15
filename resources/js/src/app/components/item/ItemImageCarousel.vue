@@ -270,6 +270,7 @@ export default {
 
                     script.type = "text/javascript";
                     script.id = "lightboxscript";
+                    // If lightbox is updated fix translation again - https://stackoverflow.com/questions/20759499/lightbox-how-to-translate-image-x-of-x-text
                     script.src = `${ this.pluginPath }/js/dist/lightbox.min.js`;
 
                     script.addEventListener("load", () => resolve(), false);
