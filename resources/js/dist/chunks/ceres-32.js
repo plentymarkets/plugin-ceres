@@ -184,7 +184,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(window.lightbox)) {
         lightbox.option({
-          wrapAround: true
+          wrapAround: true,
+          albumLabel: this.$translate("Ceres::Template.singleItemLightboxImageShown")
         });
       }
 
