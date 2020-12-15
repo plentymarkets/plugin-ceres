@@ -232,8 +232,7 @@ __webpack_require__.r(__webpack_exports__);
           var _script = document.createElement("script");
 
           _script.type = "text/javascript";
-          _script.id = "lightboxscript"; // If lightbox is updated fix translation again - https://stackoverflow.com/questions/20759499/lightbox-how-to-translate-image-x-of-x-text
-
+          _script.id = "lightboxscript";
           _script.src = "".concat(_this4.pluginPath, "/js/dist/lightbox.min.js");
 
           _script.addEventListener("load", function () {
