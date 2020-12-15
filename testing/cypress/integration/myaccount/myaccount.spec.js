@@ -100,7 +100,7 @@ context("Myaccount", () =>
         cy.wait("@resetPassword").its("response.statusCode").should("eq", 401);
     });
 
-    it.only("should add new address", () =>
+    it("should add new address", () =>
     {
         cy.login("stefan.standard@plentye2etest.de");
         cy.visit("/myaccount");
@@ -116,7 +116,7 @@ context("Myaccount", () =>
         cy.getByTestingAttr("modal-submit").first().click();
     });
 
-    it.only("should add new address", () =>
+    it("should add new address", () =>
     {
         cy.login("stefan.standard@plentye2etest.de");
         cy.visit("/myaccount");
@@ -130,6 +130,12 @@ context("Myaccount", () =>
         cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
         cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
         cy.getByTestingAttr("modal-submit").last().click();
+    });
+
+    it.only("should add bank information", () =>
+    {
+        cy.login("stefan.standard@plentye2etest.de");
+        cy.visit("/myaccount");
     });
 
 

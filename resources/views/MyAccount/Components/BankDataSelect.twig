@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="add-item">
-                <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountBankAddDataTitle") }}" class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down" @click.prevent="openAddBank()">
+                <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountBankAddDataTitle") }}" class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down" @click.prevent="openAddBank()" {{ set_testing_attr("data-testing", "add-bank-data") }}>
                     <span>{{ trans("Ceres::Template.myAccountBankAddDataTitle") }}</span>
                     <i class="fa fa-plus-square" aria-hidden="true"></i>
                 </button>
@@ -87,19 +87,19 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="input-unit">
-                                                <input type="text" name="kreditInstitut" v-model="updateBankData.bankName" data-testing="address-bank-name">
+                                                <input type="text" name="kreditInstitut" v-model="updateBankData.bankName" {{ set_testing_attr("data-testing", "address-bank-name") }}>
                                                 <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.myAccountBank") }}</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="input-unit iban" data-validate="regex">
-                                                <input type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban" data-testing="address-iban">
+                                                <input type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban" {{ set_testing_attr("data-testing", "address-iban") }}>
                                                 <label :for="'txt_firma' + _uid">IBAN*</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="input-unit no-bottom" data-validate="regex">
-                                                <input type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic"  data-testing="address-bic">
+                                                <input type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic" {{ set_testing_attr("data-testing", "address-bic") }}>
                                                 <label :for="'txt_firma' + _uid">BIC* - {{ trans("Ceres::Template.myAccountBankBicNotification") }}</label>
                                             </div>
                                         </div>
@@ -108,7 +108,7 @@
                                 <div class="modal-footer">
                                     <div class="row">
                                         <div class="col-12">
-                                            <button type="submit" class="btn btn-primary btn-block" @click="validateInput()" :disabled="waiting" data-testing="address-bank-submit">
+                                            <button type="submit" class="btn btn-primary btn-block" @click="validateInput()" :disabled="waiting" {{ set_testing_attr("data-testing", "address-bank-submit") }}>
                                                 <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
                                                 <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                             </button>
