@@ -37570,7 +37570,8 @@ var render = function() {
                             attrs: {
                               type: "text",
                               name: "company",
-                              id: "txtCompany" + _vm._uid
+                              id: "txtCompany" + _vm._uid,
+                              "data-testing": "address-company"
                             },
                             domProps: { value: _vm.value.name1 },
                             on: {
@@ -37696,7 +37697,8 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   name: "firstName",
-                                  id: "txtFirstName" + _vm._uid
+                                  id: "txtFirstName" + _vm._uid,
+                                  "data-testing": "address-firstname"
                                 },
                                 domProps: { value: _vm.value.name2 },
                                 on: {
@@ -37758,7 +37760,8 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   name: "lastName",
-                                  id: "txtLastName" + _vm._uid
+                                  id: "txtLastName" + _vm._uid,
+                                  "data-testing": "address-lastname"
                                 },
                                 domProps: { value: _vm.value.name3 },
                                 on: {
@@ -38177,7 +38180,8 @@ var render = function() {
                         attrs: {
                           type: "text",
                           name: "postnumber",
-                          id: "postnumber" + _vm._uid
+                          id: "postnumber" + _vm._uid,
+                          "data-testing": "address-postnumber"
                         },
                         domProps: { value: _vm.value.postNumber },
                         on: {
@@ -38276,7 +38280,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "zip",
-                      id: "txtZip" + _vm._uid
+                      id: "txtZip" + _vm._uid,
+                      "data-testing": "address-postalcode"
                     },
                     domProps: { value: _vm.value.postalCode },
                     on: {
@@ -38310,7 +38315,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "town",
-                      id: "txtPlace" + _vm._uid
+                      id: "txtPlace" + _vm._uid,
+                      "data-testing": "address-town"
                     },
                     domProps: { value: _vm.value.town },
                     on: {
@@ -39017,7 +39023,8 @@ var render = function() {
                             type: "text",
                             name: "street",
                             autocomplete: "address-line1",
-                            id: "txtStreet" + _vm._uid
+                            id: "txtStreet" + _vm._uid,
+                            "data-testing": "address-street"
                           },
                           domProps: { value: _vm.value.address1 },
                           on: {
@@ -39061,7 +39068,8 @@ var render = function() {
                             type: "text",
                             name: "housenumber",
                             autocomplete: "address-line2",
-                            id: "txtNumber" + _vm._uid
+                            id: "txtNumber" + _vm._uid,
+                            "data-testing": "address-house-nr"
                           },
                           domProps: { value: _vm.value.address2 },
                           on: {
