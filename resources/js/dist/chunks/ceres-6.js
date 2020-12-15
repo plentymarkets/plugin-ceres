@@ -597,7 +597,7 @@ var render = function() {
     "article",
     {
       staticClass: "cmp cmp-product-thumb",
-      attrs: { "data-testing": "product-thumb" }
+      attrs: { "data-testing": _vm.item.variation.id }
     },
     [
       _c(

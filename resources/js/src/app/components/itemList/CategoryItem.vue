@@ -1,5 +1,5 @@
 <template>
-    <article class="cmp cmp-product-thumb" data-testing="product-thumb">
+    <article class="cmp cmp-product-thumb" :data-testing="item.variation.id">
         <div :class="paddingClasses" :style="paddingInlineStyles">
 
             <add-to-basket

@@ -31,17 +31,29 @@ context("category", () =>
         cy.getByTestingAttr("category-toolbar-filter").click();
         cy.get(".widget-filter-price").find("input").first().type("400", { delay: 30 });
         cy.get(".widget-filter-price").find("button").click();
-        cy.get(".product-list").children().first()
-            .find(".thumb-content").find(".price").should("contain", "400,00");
+        cy.get(".product-list").children().each((product) => 
+        {
+            cy.get(product).find(".price").invoke("text").then((text) => 
+            {
+                let priceTotals = +text.replace(/[^0-9\,\.]+/g, "").replace(",", ".");
+                expect(priceTotals >= 400).to.be.true;
+            });
+        });
     });
 
-    it("should be able to apply max price filter at category toolbar", () =>
+    it.only("should be able to apply max price filter at category toolbar", () =>
     {
         cy.getByTestingAttr("category-toolbar-filter").click();
         cy.get(".widget-filter-price").find("input").last().type("0.01", { delay: 30 });
         cy.get(".widget-filter-price").find("button").click();
-        cy.get(".product-list").children().first()
-            .find(".thumb-content").find(".price").should("contain", "0,01");
+        cy.get(".product-list").children().each((product) => 
+        {
+            cy.get(product).find(".price").invoke("text").then((text) => 
+            {
+                let priceTotals = +text.replace(/[^0-9\,\.]+/g, "").replace(",", ".");
+                expect(priceTotals <= 0.01).to.be.true;
+            });
+        });
     });
 
     it("should be able to apply attribute filter at category toolbar", () =>
