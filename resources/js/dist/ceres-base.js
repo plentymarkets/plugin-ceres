@@ -58484,6 +58484,7 @@ var actions = {
           recipient: formOptions.recipient,
           subject: formOptions.subject || "",
           cc: formOptions.cc,
+          bcc: formOptions.bcc,
           replyTo: formOptions.replyTo,
           recaptchaToken: recaptchaResponse
         }).done(function (reponse) {
