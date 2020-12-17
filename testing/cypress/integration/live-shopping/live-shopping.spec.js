@@ -31,8 +31,18 @@ context("Live shopping", () =>
         cy.get(".live-shopping-countdown-heading").eq(1).should("contain", "Angebot startet in:");
     });
 
-    it("Should link to the correct variation", () =>
+    it.only("Should link to the correct variation", () =>
     {
+        // check if item name links correctly
+        cy.get(".live-shopping-item-name > a")
+            .first()
+            .should("have.attr", "href")
+            .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
 
+        // check if image links correctly
+        cy.get(".widget-live-shopping .thumb-image a")
+            .first()
+            .should("have.attr", "href")
+            .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
     });
 });
