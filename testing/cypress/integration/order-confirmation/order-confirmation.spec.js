@@ -5,12 +5,12 @@ context("register/ registrierung", () =>
     {
         cy.visit("/");
         cy.login();
-        cy.visit("/bestellbestaetigung/?orderID=439");
+        cy.visit("/bestellbestaetigung/?orderId=437");
     });
 
     it("Should check for order ID", () =>
     {
-        cy.get(".h3").should("contain", "439");
+        cy.get(".h3").should("contain", "437");
     });
 
     it("Should check for Vielen Dank", () =>
