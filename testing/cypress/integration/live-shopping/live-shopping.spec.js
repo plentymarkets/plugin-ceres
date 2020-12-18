@@ -4,6 +4,8 @@ context("Live shopping", () =>
     beforeEach(() =>
     {
         cy.visit("/live-shopping");
+        // to prevent timing problems with accessing not yet rendered vue comps
+        cy.wait(300);
     });
 
     it("Should show the live shopping widgets", () =>
@@ -31,7 +33,7 @@ context("Live shopping", () =>
         cy.get(".live-shopping-countdown-heading").eq(1).should("contain", "Angebot startet in:");
     });
 
-    it.only("Should link to the correct variation", () =>
+    it("Should link to the correct variation", () =>
     {
         // check if item name links correctly
         cy.get(".live-shopping-item-name > a")
@@ -44,5 +46,11 @@ context("Live shopping", () =>
             .first()
             .should("have.attr", "href")
             .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+    });
+
+    it("Should show the correct price in the basket", () =>
+    {
+        cy.get(".add-to-basket-lg-container").first().click();
+        cy.get(".toggle-basket-preview").should("contain", "0,60");
     });
 });
