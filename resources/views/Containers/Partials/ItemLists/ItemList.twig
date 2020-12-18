@@ -6,10 +6,10 @@
 
 {% if listType == "cross_selling" %}
     {% set sorting = config("Ceres.item.lists.cross_selling_sorting") %}
-    {% set itemList = services.itemList.getItemList( listType, item.documents[0].data.item.id, sorting, 20 ).documents %}
+    {% set itemList = services.itemList.getItemList( listType, item.documents[0].data.item.id, sorting, 50 ).documents %}
 {% elseif listType == "tag_list" %}
     {% set sorting = config("Ceres.item.lists.tag_sorting") %}
-    {% set itemList = services.itemList.getItemList( listType, tagIds, tagSorting, 20 ).documents %}
+    {% set itemList = services.itemList.getItemList( listType, tagIds, tagSorting, 50 ).documents %}
 {% endif %}
 
 <div class="row">
