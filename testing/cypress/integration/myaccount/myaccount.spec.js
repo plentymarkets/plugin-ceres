@@ -7,7 +7,7 @@ context("Myaccount", () =>
 
     });
 
-    it("should logut", () =>
+    it("should logout", () =>
     {
         cy.login("stefan.standard@plentye2etest.de");
         cy.visit("/myaccount");
@@ -132,7 +132,7 @@ context("Myaccount", () =>
         cy.getByTestingAttr("modal-submit").last().click();
     });
 
-    it.only("should add bank information", () =>
+    it("should add bank information", () =>
     {
         cy.login("stefan.standard@plentye2etest.de");
         cy.visit("/myaccount");
