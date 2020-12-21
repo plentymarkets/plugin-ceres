@@ -22,7 +22,7 @@ context("Live shopping", () =>
         cy.get(".widget-live-shopping").should("have.length", 2);
     });
 
-    it("Should show the live shopping widgets", () =>
+    it("Should show the active live shopping widget", () =>
     {
         cy.get(".live-shopping-countdown-heading").first().should("contain", "Angebot endet in:");
     });
