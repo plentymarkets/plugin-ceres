@@ -1,12 +1,6 @@
 // / <reference types="cypress" />
-context("Myaccount", () =>
+context("my-account", () =>
 {
-
-    beforeEach(() =>
-    {
-
-    });
-
     it("should logout", () =>
     {
         cy.login("stefan.standard@plentye2etest.de");
@@ -20,7 +14,7 @@ context("Myaccount", () =>
             expect(res.response.statusCode).to.eql(200);
 
             // wait for vue store to init after page reload
-            cy.wait(1000);
+            cy.wait(500);
             cy.getStore().then((store) =>
             {
                 expect(store.getters.isLoggedIn).to.be.false;
@@ -100,37 +94,6 @@ context("Myaccount", () =>
         cy.wait("@resetPassword").its("response.statusCode").should("eq", 401);
     });
 
-    it("should add new address", () =>
-    {
-        cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
-        cy.getByTestingAttr("add-address").first().click();
-
-        cy.wait(1000);
-        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
-        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
-        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="street"]`).type("Abby Road");
-        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="housenumber"]`).type("1337");
-        cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
-        cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
-        cy.getByTestingAttr("modal-submit").first().click();
-    });
-
-    it("should add new address", () =>
-    {
-        cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
-        cy.getByTestingAttr("add-address").last().click();
-
-        cy.wait(1000);
-        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
-        cy.getByTestingAttr("invoice-addresses-name-select-de").find(`input[name="lastName"]`).type("Test");
-        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="street"]`).type("Abby Road");
-        cy.getByTestingAttr("invoice-addresses-street-select-de").find(`input[name="housenumber"]`).type("1337");
-        cy.getByTestingAttr("invoice-addresses-zip-select-de").find(`input[name="zip"]`).type("12345");
-        cy.getByTestingAttr("invoice-addresses-town-select-de").find(`input[name="town"]`).type("Kassel");
-        cy.getByTestingAttr("modal-submit").last().click();
-    });
 
     it("should add bank information", () =>
     {
