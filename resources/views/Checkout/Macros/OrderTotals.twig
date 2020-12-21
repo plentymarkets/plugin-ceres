@@ -82,13 +82,12 @@
                 <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutGross") }})
                 </dt><!--
-                -->
                 {% if totals.isNet %}
-                <dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount-net">
+                --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount-net">
                     {{ totals.shippingNet | formatMonetary( totals.currency ) }}
                 </dd>
                 {% else %}
-                <dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount">
+                --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount">
                     {{ totals.shippingGross | formatMonetary( totals.currency ) }}
                 </dd>
                 {% endif %}
