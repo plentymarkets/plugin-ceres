@@ -2,15 +2,17 @@
 context("Live shopping", () =>
 {
     const ACTIVE_LIVE_SHOPPING_PRICE = "50,00";
-    const ACTIVE_LIVE_SHOPPING_UVP = "80,00";
+    const ACTIVE_LIVE_SHOPPING_RRP = "80,00";
     const ACTIVE_LIVE_SHOPPING_REBATE = "38%";
     const ACTIVE_LIVE_SHOPPING_URL = "/live-shopping_136_1071/";
+    const NEXT_LIVE_SHOPPING_PRICE = "80,00";
+    const NEXT_LIVE_SHOPPING_RRP = "100,00";
 
     beforeEach(() =>
     {
         cy.visit("/live-shopping");
-        // to prevent timing problems with accessing not yet rendered vue comps
-        cy.wait(300);
+        // to prevent timing problems with accessing not yet rendered vue comps - fix this with a better data-attribute wich contains item or variation id
+        cy.wait(500);
     });
 
     it("Should show the live shopping widgets", () =>
@@ -34,9 +36,29 @@ context("Live shopping", () =>
         cy.get(".live-shopping-prices-rebate").first().should("contain", ACTIVE_LIVE_SHOPPING_REBATE);
     });
 
+    it("Should display correct rrp", () =>
+    {
+        cy.get(".live-shopping-prices-container").first().should("contain", ACTIVE_LIVE_SHOPPING_RRP);
+    });
+
     it("Should display next live shopping item", () =>
     {
         cy.get(".live-shopping-countdown-heading").eq(1).should("contain", "Angebot startet in:");
+    });
+
+    it("Should display next live shopping item tag", () =>
+    {
+        cy.get(".widget-live-shopping [data-testing='product-thumb'] .special-tags").eq(1).should("contain", "Nächstes Angebot");
+    });
+
+    it("Should display next live shopping item price", () =>
+    {
+        cy.get(".live-shopping-price").eq(1).should("contain", NEXT_LIVE_SHOPPING_PRICE);
+    });
+
+    it("Should display next live shopping item rrp", () =>
+    {
+        cy.get(".live-shopping-prices-container").eq(1).should("contain", NEXT_LIVE_SHOPPING_RRP);
     });
 
     it("Should link to the correct variation", () =>
