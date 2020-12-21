@@ -7,6 +7,7 @@ context("Live shopping", () =>
     const ACTIVE_LIVE_SHOPPING_URL = "/live-shopping_136_1071/";
     const NEXT_LIVE_SHOPPING_PRICE = "80,00";
     const NEXT_LIVE_SHOPPING_RRP = "100,00";
+    const NEXT_LIVE_SHOPPING_VARIATION_ID = 1072;
 
     beforeEach(() =>
     {
@@ -48,17 +49,17 @@ context("Live shopping", () =>
 
     it("Should display next live shopping item tag", () =>
     {
-        cy.get(".widget-live-shopping [data-testing='product-thumb'] .special-tags").eq(1).should("contain", "Nächstes Angebot");
+        cy.get(`.widget-live-shopping [data-testing='${NEXT_LIVE_SHOPPING_VARIATION_ID}'] .special-tags`).should("contain", "Nächstes Angebot");
     });
 
     it("Should display next live shopping item price", () =>
     {
-        cy.get(".live-shopping-price").eq(1).should("contain", NEXT_LIVE_SHOPPING_PRICE);
+        cy.get(".thumb-content .price").should("contain", NEXT_LIVE_SHOPPING_PRICE);
     });
 
     it("Should display next live shopping item rrp", () =>
     {
-        cy.get(".live-shopping-prices-container").eq(1).should("contain", NEXT_LIVE_SHOPPING_RRP);
+        cy.get(".thumb-content .crossprice").should("contain", NEXT_LIVE_SHOPPING_RRP);
     });
 
     it("Should link to the correct variation", () =>
