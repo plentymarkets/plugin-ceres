@@ -27,11 +27,12 @@ class Step
     {
         $hasSettings = false;
 
+        /** @var DefaultSettingsService $shopWizardService */
         $shopWizardService = pluginApp(DefaultSettingsService::class);
 
         $hasShippingMethod  = $shopWizardService->hasShippingMethods();
         $hasShippingProfile = $shopWizardService->hasShippingProfiles();
-        $hasPaymentMethod   = $shopWizardService->hasPaymentMethods();
+        $hasPaymentMethod   = $shopWizardService->hasPaymentMethods() && !$shopWizardService->hasInactivePaymentMethod();
         $hasShippingCountry = $shopWizardService->hasShippingCountries();
         $hasLocation        = $shopWizardService->hasLocations();
 
