@@ -1,6 +1,11 @@
 // / <reference types="cypress" />
 context("Live shopping", () =>
 {
+    const ACTIVE_LIVE_SHOPPING_PRICE = "50,00";
+    const ACTIVE_LIVE_SHOPPING_UVP = "80,00";
+    const ACTIVE_LIVE_SHOPPING_REBATE = "38%";
+    const ACTIVE_LIVE_SHOPPING_URL = "/live-shopping_136_1071/";
+
     beforeEach(() =>
     {
         cy.visit("/live-shopping");
@@ -21,11 +26,12 @@ context("Live shopping", () =>
 
     it("Should display the correct live shopping price", () =>
     {
-        cy.get(".live-shopping-price").first().should("contain", "0,60");
+        cy.get(".live-shopping-price").first().should("contain", ACTIVE_LIVE_SHOPPING_PRICE);
     });
+
     it("Should display rebate", () =>
     {
-        cy.get(".live-shopping-price").first().should("contain", "0,60");
+        cy.get(".live-shopping-prices-rebate").first().should("contain", ACTIVE_LIVE_SHOPPING_REBATE);
     });
 
     it("Should display next live shopping item", () =>
@@ -39,18 +45,18 @@ context("Live shopping", () =>
         cy.get(".live-shopping-item-name > a")
             .first()
             .should("have.attr", "href")
-            .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+            .and("include", ACTIVE_LIVE_SHOPPING_URL);
 
         // check if image links correctly
         cy.get(".widget-live-shopping .thumb-image a")
             .first()
             .should("have.attr", "href")
-            .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+            .and("include", ACTIVE_LIVE_SHOPPING_URL);
     });
 
-    it("Should show the correct price in the basket", () =>
+    it("Should add the live shopping item to the basket and show the correct price in the basket preview", () =>
     {
         cy.get(".add-to-basket-lg-container").first().click();
-        cy.get(".toggle-basket-preview").should("contain", "0,60");
+        cy.get(".toggle-basket-preview").should("contain", ACTIVE_LIVE_SHOPPING_PRICE);
     });
 });
