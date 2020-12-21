@@ -199,7 +199,8 @@ export default {
             if (!isNullOrUndefined(window.lightbox))
             {
                 lightbox.option({
-                    wrapAround: true
+                    wrapAround: true,
+                    albumLabel: this.$translate("Ceres::Template.singleItemLightboxImageShown")
                 });
             }
 
