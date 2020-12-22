@@ -1,5 +1,22 @@
 # Release Notes für Ceres
 
+## v5.0.17 (2020-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.16...5.0.17" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Artikellisten, die über die Plugin-Einstellungen konfiguriert und über Layout-Container in die Seite eingebunden sind, sind jetzt auf maximal 50 Artikel beschränkt.
+
+### Behoben
+
+- Wenn beim Hochladen eines Bildes als Bestelleigenschaft die maximale Dateigröße überschritten wurde, wurde keine Fehlermeldung ausgeben. Dies wurde behoben. Der Text dieser Fehlermeldung kann in der Mehrsprachigkeitsoberfläche unter dem Eintrag **errorPostTooLarge** angepasst werden.
+- Im Hintergrundbild-Widget wird jetzt der Alternativtext eines Bildes genutzt, wenn das Bild aus dem Webspace geladen wird.
+- Über den Übersetzungsschlüssel **basketRebateSign** kann jetzt ein Vorzeichen vor den Rabattwert in der Warenkorbvorschau platziert werden.
+- Im Navigationsbaum-Widget wurden benutzerdefinierte Einträge nicht richtig kodiert, wenn diese Umlaute enthielten. Das Verhalten wurde behoben.
+- Im Kontaktformular wurde das Feld für Blindkopien nicht gesetzt. Dies wurde behoben.
+- Die fehlenden Übersetzungen der Lightbox wurden hinzugefügt.
+- Der Ceres-Assistent leitet nun in das Plugin-Set und nicht mehr in den Einrichtungsassistenten, wenn eine Zahlungsart bereits installiert, aber noch inaktiv ist.
+- Artikellisten laufen nicht mehr über die Begrenzung der Seite hinaus.
+
 ## v5.0.16 (2020-12-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.15...5.0.16" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
