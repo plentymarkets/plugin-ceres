@@ -38,7 +38,7 @@ context("Address", () =>
         });
     });
 
-    it.only("should add new delivery address", () =>
+    it("should add new delivery address", () =>
     {
         cy.get(".shipping-addresses-select [data-testing='add-address']").click();
 
@@ -46,13 +46,13 @@ context("Address", () =>
         // Random delay because last name was often not filled
         cy.wait(50);
         cy.getByTestingAttr("delivery-address-de-lastname").type("Test", { delay: 15 });
-        cy.getByTestingAttr("delivery-address-de-street-inputs").find(`input[name="street"]`).type("Abby Road", { delay: 15 });
-        cy.getByTestingAttr("delivery-address-de-street-inputs").find(`input[name="housenumber"]`).type("1337", { delay: 15 });
-        cy.getByTestingAttr("delivery-address-de-postalcode").type("12345", { delay: 15 });
+        cy.getByTestingAttr("delivery-address-de-street").type("Abby Road", { delay: 15 });
+        cy.getByTestingAttr("delivery-address-de-housenumber").type("1337", { delay: 15 });
+        cy.getByTestingAttr("delivery-address-de-zip").type("12345", { delay: 15 });
         cy.getByTestingAttr("delivery-address-de-town").type("Kassel", { delay: 15 });
 
-        cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("createAddress");
-        cy.getByTestingAttr("modal-submit").first().click();
+        cy.intercept("POST", "/rest/io/customer/address/?typeId=2").as("createAddress");
+        cy.getByTestingAttr("modal-submit").eq(1).click();
 
         cy.wait("@createAddress").then((res) =>
         {
@@ -62,7 +62,7 @@ context("Address", () =>
             // check if address added correctly
             cy.getStore().then((store) =>
             {
-                expect(store.state.address.billingAddressId).to.be.equals(addrId);
+                expect(store.state.address.deliveryAddressId).to.be.equals(addrId);
             });
         });
     });
