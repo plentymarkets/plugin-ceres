@@ -82,10 +82,10 @@ context("Order confirmation", () =>
     {
         cy.get(".homepage a")
             .should("have.attr", "href")
-            .and("eq", "/startseite/").then((href) =>
+            .and("eq", "/").then((href) =>
             {
                 cy.visit(href);
-                cy.location("pathname").should("eq", "/startseite/");
+                cy.location("pathname").should("eq", "/");
             });
     });
 
@@ -117,5 +117,18 @@ context("Order confirmation", () =>
                 cy.visit("/returns/437/");
                 cy.location("pathname").should("eq", "/returns/437/");
             });
+    });
+
+    it("Should check for possible change of payment", () =>
+    {
+        cy.login();
+        cy.visit("/bestellbestaetigung/?orderId=461");
+        cy.get(".payment-link-style")
+            .should("contain", "hier klicken")
+            .click();
+
+        cy.get(".current-payment-text").should("contain", "Vorkasse");
+        cy.get(`[data-id='2']`).should("exist"); // prepayment
+        cy.get(`[data-id='6001']`).should("exist"); // paypal
     });
 });
