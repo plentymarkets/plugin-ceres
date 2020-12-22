@@ -41,12 +41,12 @@
                                 -->
                                 <div class="item-controls">
                                     <span class="item-edit" @click.prevent="openUpdateBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary" @click.prevent="openUpdateBank(index, bankData)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary" @click.prevent="openUpdateBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-delete-set") }}>
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove" @click.prevent="openDeleteBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-open-set") }}>
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>
