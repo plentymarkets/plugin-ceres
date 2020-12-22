@@ -127,6 +127,7 @@ context("Order confirmation", () =>
             .should("contain", "hier klicken")
             .click();
 
+        cy.get(".modal.show").should("exist");
         cy.get(".current-payment-text").should("contain", "Vorkasse");
         cy.get(`[data-id='2']`).should("exist"); // prepayment
         cy.get(`[data-id='6001']`).should("exist"); // paypal
