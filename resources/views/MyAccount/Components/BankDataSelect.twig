@@ -145,7 +145,7 @@
                                         <button type="button" class="btn btn-primary btn-block" @click="closeDeleteModal">{{ trans("Ceres::Template.myAccountCancel") }}</button>
                                     </div>
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-primary btn-block" @click="removeBankInfo">{{ trans("Ceres::Template.myAccountDelete") }}</button>
+                                        <button type="button" class="btn btn-primary btn-block" @click="removeBankInfo" {{ set_testing_attr("data-testing", "bank-data-delete-confirm") }}>{{ trans("Ceres::Template.myAccountDelete") }}</button>
                                     </div>
                                 </div>
                             </fieldset>
