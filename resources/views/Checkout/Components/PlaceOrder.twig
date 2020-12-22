@@ -12,7 +12,7 @@
                 :style="paddingInlineStyles"
                 @click="placeOrder()"
                 :disabled="waiting || isBasketLoading || !isBasketInitiallyLoaded"
-                {{ set_testing_attr("data-testing", "place-order") }} >
+                {{ set_testing_attr("data-testing", "place-order") }}>
                 <icon icon="arrow-right" :loading="waiting"></icon>
                 {{ trans("Ceres::Template.checkoutBuyNow") }}
             </button>
