@@ -7,7 +7,7 @@
             <div class="col-md-10">
                 <div class="row">
                     <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    <div class="col-md-2">
+                    <div class="col-md-2" {{ set_testing_attr("data-testing", "order-history-id") }}>
                         <span>{{ trans("Ceres::Template.orderHistoryOrderId") }}: </span>
                         <span>${ order.id }</span>
                         <template v-if="order.type === 5">
@@ -22,19 +22,19 @@
                             <span class="d-md-none">({{ trans("Ceres::Template.orderHistoryWarranty", {id: "${ order.parentOrderId }" }) }})</span>
                         </template>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" {{ set_testing_attr("data-testing", "order-history-sum") }}>
                         <span>{{ trans("Ceres::Template.orderHistoryTotal") }}: </span>
                         <span>${ order.total | currency(order.total.currency) }</span>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" {{ set_testing_attr("data-testing", "order-history-date1") }}>
                         <span>{{ trans("Ceres::Template.orderHistoryOrderDate") }}: </span>
                         <span>${ order.creationDate | moment("{{ trans("Ceres::Template.devDateFormatMoment") }}") }</span>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" {{ set_testing_attr("data-testing", "order-history-date2") }}>
                         <span>{{ trans("Ceres::Template.orderHistoryShippingDate") }}: </span>
                         <span>${ order.shippingDate | moment("{{ trans("Ceres::Template.devDateFormatMoment") }}") }</span>
                     </div>
-                    <div class="col-md-4" v-if="order.status.trim().length > 0">
+                    <div class="col-md-4" {{ set_testing_attr("data-testing", "order-history-status") }} v-if="order.status.trim().length > 0">
                         <span>{{ trans("Ceres::Template.orderHistoryStatus") }}: </span>
                         <span>${ order.status }</span>
                     </div>
