@@ -1,10 +1,14 @@
 // / <reference types="cypress" />
 context("my-account", () =>
 {
-    it("should logout", () =>
+    beforeEach(() =>
     {
         cy.login("stefan.standard@plentye2etest.de");
         cy.visit("/myaccount");
+    });
+
+    it("should logout", () =>
+    {
         cy.intercept("POST", "/rest/io/customer/logout").as("logoutUser");
 
         cy.get(".widget-logout-button").click();
@@ -24,15 +28,11 @@ context("my-account", () =>
 
     it("should display user name", () =>
     {
-        cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
         cy.get(".widget-greeting").should("contain", "Hallo, Stefan Standard");
     });
 
     it("should change mail address", () =>
     {
-        cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
         cy.get(".widget-account-settings").find(".add-item").children().first().click();
         cy.intercept("POST", "/rest/io/customer/mail/").as("resetMail");
 
@@ -47,9 +47,6 @@ context("my-account", () =>
 
     it("should NOT change mail address if it already exists", () =>
     {
-        cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
-
         cy.get(".widget-account-settings").find(".add-item").children().first().click();
         cy.intercept("POST", "/rest/io/customer/mail/").as("resetMail");
         cy.getByTestingAttr("change-mail").type("bernd.business@plentye2etest.de", { delay: 40 });
@@ -60,11 +57,8 @@ context("my-account", () =>
         cy.wait("@resetMail").its("response.statusCode").should("eq", 400);
     });
 
-    it("should change password address", () =>
+    it("should change password", () =>
     {
-        cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
-
         cy.intercept("POST", "/rest/io/customer/password/").as("resetPassword");
         cy.get(".widget-account-settings").find(".add-item").children().last().click();
         cy.getByTestingAttr("old-password").type("Testuser1234", { delay: 40 });
@@ -79,9 +73,6 @@ context("my-account", () =>
 
     it("should NOT change password address if old password is wrong", () =>
     {
-        cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
-
         cy.intercept("POST", "/rest/io/customer/password/").as("resetPassword");
         cy.get(".widget-account-settings").find(".add-item").children().last().click();
         cy.getByTestingAttr("old-password").type("TestuserWrong", { delay: 40 });
@@ -95,10 +86,42 @@ context("my-account", () =>
     });
 
 
-    it("should add bank information", () =>
+
+    it.only("should add bank information", () =>
     {
-        cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
+        cy.getByTestingAttr("add-bank-data").click();
+        cy.get(".modal.show").should("exist");
+        cy.getByTestingAttr("address-account-owner").type("g");
+        cy.getByTestingAttr("address-bank-name").type("g", { delay: 40 });
+        cy.getByTestingAttr("address-iban").type("NL06INGB7948612920", { delay: 40 });
+        cy.getByTestingAttr("address-bic").type("GENODE51KS1", { delay: 40 });
+
+        cy.intercept("POST", "/rest/io/customer/bank_data/").as("addBankData");
+        cy.getByTestingAttr("address-bank-submit").click();
+        cy.get(".notification-wrapper").children().first().should("contain", "Bankdaten hinzugefügt");
+        cy.wait("@addBankData").its("response.statusCode").should("eq", 201);
+    });
+
+    it("should open modal of bank information selection", () =>
+    {
+        cy.get("#bankData").click();
+        // cy.get(".modal.show").should("exist");
+        // cy.getByTestingAttr("address-account-owner").type("g");
+        // cy.getByTestingAttr("address-bank-name").type("g", { delay: 40 });
+        // cy.getByTestingAttr("address-iban").type("NL06INGB7948612920", { delay: 40 });
+        // cy.getByTestingAttr("address-bic").type("GENODE51KS1", { delay: 40 });
+        // cy.getByTestingAttr("address-bank-submit").click();
+    });
+
+    it("should validate bank information", () =>
+    {
+        cy.getByTestingAttr("add-bank-data").click();
+        cy.getByTestingAttr("address-bank-submit").click();
+        cy.getByTestingAttr("address-account-owner").parent().should("have.class", "error");
+        cy.getByTestingAttr("address-iban").type("g", { delay: 40 });
+        cy.getByTestingAttr("address-iban").parent().should("have.class", "error");
+        cy.getByTestingAttr("address-bic").type("g", { delay: 40 });
+        cy.getByTestingAttr("address-bic").parent().should("have.class", "error");
     });
 
 
