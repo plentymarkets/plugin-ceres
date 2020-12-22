@@ -105,6 +105,26 @@ context("my-account", () =>
     it("should open modal of bank information selection", () =>
     {
         cy.get("#bankData").click();
+        cy.getByTestingAttr("bank-data-set").should("exist");
+
+        // cy.get(".modal.show").should("exist");
+        // cy.getByTestingAttr("address-account-owner").type("g");
+        // cy.getByTestingAttr("address-bank-name").type("g", { delay: 40 });
+        // cy.getByTestingAttr("address-iban").type("NL06INGB7948612920", { delay: 40 });
+        // cy.getByTestingAttr("address-bic").type("GENODE51KS1", { delay: 40 });
+        // cy.getByTestingAttr("address-bank-submit").click();
+    });
+
+    it.only("should delete bank data", () =>
+    {
+        cy.get("#bankData").click();
+
+        cy.intercept("POST", "/rest/io/customer/bank_data/").as("deleteBankData");
+
+        cy.getByTestingAttr("bank-data-set").find(".item-remove").click();
+
+        cy.wait("@deleteBankData").its("response.statusCode").should("eq", 200);
+        
         // cy.get(".modal.show").should("exist");
         // cy.getByTestingAttr("address-account-owner").type("g");
         // cy.getByTestingAttr("address-bank-name").type("g", { delay: 40 });
