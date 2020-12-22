@@ -534,7 +534,7 @@ class WidgetSettingsFactory
         return $this;
     }
 
-    protected function addSetting($key, $setting)
+    private function addSetting($key, $setting)
     {
         if (is_null($this->pointer) || $this->pointer < 0) {
             $this->pointer = count($this->settings);
