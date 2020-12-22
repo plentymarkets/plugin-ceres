@@ -1,6 +1,12 @@
 // / <reference types="cypress" />
 context("my-account", () =>
 {
+    const ITEM_PRICE_NET = 0.59;
+    const ITEM_PRICE = 0.70;
+    const SHIPPING_COST_NET = 5.03;
+    const SHIPPING_COST = 5.99;
+    const ITEMQUANTITY = 1;
+
     beforeEach(() =>
     {
         cy.login("stefan.standard@plentye2etest.de");
@@ -128,9 +134,81 @@ context("my-account", () =>
         cy.getByTestingAttr("address-bic").parent().should("have.class", "error");
     });
 
-
     it("should have correct order history data", () =>
     {
+        cy.getByTestingAttr("order-history-id").eq(0).should("contain", "469");
+        cy.getByTestingAttr("order-history-id").eq(1).should("contain", "468");
+        cy.getByTestingAttr("order-history-sum").eq(0).should("contain", "6,05");
+        cy.getByTestingAttr("order-history-sum").eq(1).should("contain", "6,69");
+        cy.getByTestingAttr("order-history-date1").eq(0).should("contain", "22.12.2020");
+        cy.getByTestingAttr("order-history-date1").eq(1).should("contain", "22.12.2020");
+        cy.getByTestingAttr("order-history-date2").eq(1).should("contain", "22.12.2020");
+        cy.getByTestingAttr("order-history-status").eq(0).should("contain", "Warten auf Zahlung");
+        cy.getByTestingAttr("order-history-status").eq(1).should("contain", "Warenausgang gebucht");
+    });
 
+    it("should open order confirmation", () =>
+    {
+        cy.get(".container-clickable").eq(1).find(".icons a").eq(1)
+            .should("have.attr", "href")
+            .and("eq", "/bestellbestaetigung/?orderId=468").then((href) =>
+            {
+                cy.visit(href);
+                cy.location("pathname").should("eq", "/bestellbestaetigung/");
+            });
+    });
+
+    it("should have tracking link", () =>
+    {
+        cy.get(".container-clickable").eq(1).find(".icons a").eq(0)
+            .should("have.attr", "href")
+            .should("eq", "http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=34117&idc=123456");
+    });
+
+    it("should open order-history", () =>
+    {
+        cy.get(".container-clickable").eq(0).should("have.class", "collapsed");
+        cy.get(".container-clickable").eq(0).click().wait(100);
+        cy.get(".container-clickable").eq(0).not('.collapsed');
+    });
+
+    it("should check sums", () =>
+    {
+        cy.get(".container-clickable").eq(1).click();
+
+        cy.getByTestingAttr("item-sum-net").wait(100).should("contain", (ITEM_PRICE_NET * ITEMQUANTITY).toLocaleString("de"));
+        cy.getByTestingAttr("item-sum").should("contain", (ITEM_PRICE * ITEMQUANTITY).toLocaleString("de"));
+        cy.getByTestingAttr("shipping-amount-net").should("contain", SHIPPING_COST_NET.toLocaleString("de"));
+        cy.getByTestingAttr("shipping-amount").should("contain", SHIPPING_COST.toLocaleString("de"));
+        cy.getByTestingAttr("basket-amount-net").should("contain", (SHIPPING_COST_NET + ITEM_PRICE_NET * ITEMQUANTITY).toLocaleString("de"));
+        cy.getByTestingAttr("vat-amount");
+        cy.getByTestingAttr("basket-amount").should("contain", (SHIPPING_COST + ITEM_PRICE * ITEMQUANTITY).toLocaleString("de"));
+    });
+
+    it("Should have attached delivery note", () =>
+    {
+        cy.get(".container-clickable").eq(1).click();
+        cy.getByTestingAttr("order-history-document").eq(0).find("a")
+            .wait(100)
+            .should("have.attr", "href")
+            .and("include", "/order-document/preview/15");
+    });
+
+    it("Should have attached invoice", () =>
+    {
+        cy.get(".container-clickable").eq(1).click();
+        cy.getByTestingAttr("order-history-document").eq(1).find("a")
+            .wait(100)
+            .should("have.attr", "href")
+            .and("include", "/order-document/preview/16");
+    });
+
+    it("Should have attached order confirmation document", () =>
+    {
+        cy.get(".container-clickable").eq(1).click();
+        cy.getByTestingAttr("order-history-document").eq(2).find("a")
+            .wait(100)
+            .should("have.attr", "href")
+            .and("include", "/order-document/preview/17");
     });
 });
