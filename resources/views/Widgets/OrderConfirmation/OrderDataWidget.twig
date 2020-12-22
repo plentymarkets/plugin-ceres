@@ -143,7 +143,7 @@
             <hr>
         {{ Twig.endif() }}
 
-        <div class="row">
+        <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-shipping-profile")') }}>
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
             <span class="col-6 col-sm-7">{{ Twig.print("data.shippingProvider") }} - {{ Twig.print("data.shippingProfileName") }}</span>
         </div>
@@ -154,7 +154,7 @@
         {{ Twig.endfor() }}
 
         {{ Twig.if("shippingDate") }}
-            <div class="row">
+            <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-shipping-date")') }}>
                 <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationEstimatedShippingDate") }}</strong>
                 <span class="col-6 col-sm-7">{{ Twig.print("shippingDate | date(Twig.trans('Ceres::Template.devDateFormat'))") }}</span>
             </div>
