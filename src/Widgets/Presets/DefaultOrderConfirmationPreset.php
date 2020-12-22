@@ -17,7 +17,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
 
     /** @var PresetHelper */
     private $preset;
-    
+
     /** @var CeresConfig */
     private $ceresConfig;
 
@@ -26,16 +26,16 @@ class DefaultOrderConfirmationPreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
-    
+
     /** @var PresetWidgetFactory */
     private $twoColumnWidget;
-    
+
     /** @var PresetWidgetFactory */
     private $threeColumnWidget;
-    
+
     /** @var PresetWidgetFactory */
     private $fourColumnWidget;
-    
+
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
@@ -43,13 +43,13 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->translator = pluginApp(Translator::class);
 
         $this->shopUrls = pluginApp(ShopUrls::class);
-        
+
         $this->createBackground($this->preset);
 
         $this->createHeadline();
-        
+
         $this->createTwoColumnWidget();
-        
+
         $this->createOrderDataWidget();
         $this->createThreeColumnWidget();
 
@@ -64,10 +64,10 @@ class DefaultOrderConfirmationPreset implements ContentPreset
 
         $this->createFourColumnWidget();
         $this->createBottomNavigation();
-        
+
         return $this->preset->toArray();
     }
-    
+
     private function createHeadline()
     {
         $this->createWidget("Ceres::InlineTextWidget")
@@ -100,10 +100,11 @@ class DefaultOrderConfirmationPreset implements ContentPreset
              ->withSetting("spacing.padding.right.value", 0)
              ->withSetting("spacing.padding.right.unit", null);
     }
-    
+
     private function createOrderDataWidget()
     {
         $this->twoColumnWidget->createChild("first", "Ceres::OrderDataWidget")
+                              ->withSetting("customClass", "order-data")
                               ->withSetting("addressFields", ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"])
                               ->withSetting("spacing.customMargin", true)
                               ->withSetting("spacing.margin.bottom.value", 4)
@@ -113,7 +114,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createPurchasedItemsWidget()
     {
         $this->twoColumnWidget->createChild("second", "Ceres::PurchasedItemsWidget")
-                              ->withSetting("customClass","")
+                              ->withSetting("customClass","item-data")
                               ->withSetting("spacing.customMargin", true)
                               ->withSetting("spacing.margin.bottom.value", 4)
                               ->withSetting("spacing.margin.bottom.unit", null);
@@ -122,6 +123,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createTrackingLinkWidget()
     {
         $this->threeColumnWidget->createChild("first", "Ceres::LinkWidget")
+                                ->withSetting("customClass", "order-tracking")
                                 ->withSetting("block", "true")
                                 ->withSetting("text", $this->translator->trans("Ceres::Widget.urlTrackingLabel"))
                                 ->withSetting("url.value", "tracking")
@@ -132,12 +134,13 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createOrderDocumentsWidget()
     {
         $this->threeColumnWidget->createChild("second", "Ceres::OrderDocumentsWidget")
-                                ->withSetting("customClass","");
+                                ->withSetting("customClass","order-documents");
     }
 
     private function createRetourLinkWidget()
     {
         $this->threeColumnWidget->createChild("third", "Ceres::LinkWidget")
+                                ->withSetting("customClass","order-return")
                                 ->withSetting("block", "true")
                                 ->withSetting("text", $this->translator->trans("Ceres::Widget.urlReturnLabel"))
                                 ->withSetting("url.value", "return")
@@ -148,6 +151,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createOrderTotalsWidget()
     {
         $this->twoColumnWidget->createChild("second", "Ceres::OrderTotalsWidget")
+                              ->withSetting("customClass","order-total")
                               ->withSetting("visibleFields", ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
     }
 
@@ -181,13 +185,13 @@ class DefaultOrderConfirmationPreset implements ContentPreset
             $homepageLinkWidget->withSetting("url.type", "external")
                                ->withSetting("url.value", $this->shopUrls->home);
         }
-        
+
         $myAccountLinkWidget = null;
         $myAccountLinkWidget = $this->fourColumnWidget->createChild("third", "Ceres::LinkWidget")
                                ->withSetting("appearance", "primary")
                                ->withSetting("block", "true")
                                ->withSetting("text", $this->translator->trans("Ceres::Template.orderConfirmationMyAccount"));
-        
+
         if ( in_array(RouteConfig::MY_ACCOUNT, RouteConfig::getEnabledRoutes())
             && RouteConfig::getCategoryId(RouteConfig::MY_ACCOUNT) > 0
             && !$this->shopUrls->equals($this->shopUrls->myAccount,'/my-account') )
@@ -207,7 +211,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
         $this->twoColumnWidget = $this->createWidget('Ceres::TwoColumnWidget')
                                       ->withSetting("layout", "oneToOne");
     }
-    
+
     private function createThreeColumnWidget()
     {
         $this->threeColumnWidget = $this->twoColumnWidget->createChild("first", "Ceres::ThreeColumnWidget")
