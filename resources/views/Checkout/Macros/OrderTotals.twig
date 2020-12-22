@@ -157,6 +157,18 @@
                         <hr>
                     {% endif %}
 
+                    {% if 'additionalCosts' in shownFields or shownFields == null %}
+                        {# ADDITIONAL COSTS #}
+                        {% for cost in totals.additionalCosts %}
+                            <dt class="font-weight-bold">
+                                {{ cost.name }}
+                            </dt><!--
+                            --><dd class="font-weight-bold">
+                                {{ cost.formattedTotalPrice }}
+                            </dd>
+                        {% endfor %}
+                    {% endif %}
+
                     {% if 'totalSumGross' in shownFields or shownFields == null %}
                         {# TOTAL SUM GROSS #}
                         <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>

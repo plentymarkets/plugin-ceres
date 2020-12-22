@@ -31,7 +31,7 @@
                     <ul>
                         <li class="item" v-for="(bankData, index) in userBankData">
                             <input type="radio" :id="bankData.id" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
-                            <label :for="bankData.id" class="item-inner">
+                            <label :for="bankData.id" class="item-inner" {{ set_testing_attr("data-testing", "bank-data-set") }}>
                                 <span class="item-content small">
                                     <strong>Kontoinh.: ${ bankData.accountOwner }</strong>
                                     <span>Bank:        ${ bankData.bankName }</span>
@@ -41,12 +41,12 @@
                                 -->
                                 <div class="item-controls">
                                     <span class="item-edit" @click.prevent="openUpdateBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary" @click.prevent="openUpdateBank(index, bankData)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary" @click.prevent="openUpdateBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-delete-set") }}>
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove" @click.prevent="openDeleteBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-open-set") }}>
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>
@@ -145,7 +145,7 @@
                                         <button type="button" class="btn btn-primary btn-block" @click="closeDeleteModal">{{ trans("Ceres::Template.myAccountCancel") }}</button>
                                     </div>
                                     <div class="col-sm-3">
-                                        <button type="button" class="btn btn-primary btn-block" @click="removeBankInfo">{{ trans("Ceres::Template.myAccountDelete") }}</button>
+                                        <button type="button" class="btn btn-primary btn-block" @click="removeBankInfo" {{ set_testing_attr("data-testing", "bank-data-delete-confirm") }}>{{ trans("Ceres::Template.myAccountDelete") }}</button>
                                     </div>
                                 </div>
                             </fieldset>
