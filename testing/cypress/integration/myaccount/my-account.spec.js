@@ -85,13 +85,11 @@ context("my-account", () =>
         cy.wait("@resetPassword").its("response.statusCode").should("eq", 401);
     });
 
-
-
-    it.only("should add bank information", () =>
+    it("should add bank information", () =>
     {
         cy.getByTestingAttr("add-bank-data").click();
         cy.get(".modal.show").should("exist");
-        cy.getByTestingAttr("address-account-owner").type("g");
+        cy.getByTestingAttr("address-account-owner").type("g", { delay: 40 });
         cy.getByTestingAttr("address-bank-name").type("g", { delay: 40 });
         cy.getByTestingAttr("address-iban").type("NL06INGB7948612920", { delay: 40 });
         cy.getByTestingAttr("address-bic").type("GENODE51KS1", { delay: 40 });
@@ -102,35 +100,21 @@ context("my-account", () =>
         cy.wait("@addBankData").its("response.statusCode").should("eq", 201);
     });
 
-    it("should open modal of bank information selection", () =>
-    {
-        cy.get("#bankData").click();
-        cy.getByTestingAttr("bank-data-set").should("exist");
-
-        // cy.get(".modal.show").should("exist");
-        // cy.getByTestingAttr("address-account-owner").type("g");
-        // cy.getByTestingAttr("address-bank-name").type("g", { delay: 40 });
-        // cy.getByTestingAttr("address-iban").type("NL06INGB7948612920", { delay: 40 });
-        // cy.getByTestingAttr("address-bic").type("GENODE51KS1", { delay: 40 });
-        // cy.getByTestingAttr("address-bank-submit").click();
-    });
-
-    it.only("should delete bank data", () =>
+    it("should delete bank data", () =>
     {
         cy.get("#bankData").click();
 
-        cy.intercept("POST", "/rest/io/customer/bank_data/").as("deleteBankData");
+        cy.getByTestingAttr("bank-data-set").invoke("attr", "for").then(($for) => {
+            cy.intercept("POST", "/rest/io/customer/bank_data/" + $for).as("deleteBankData");
 
-        cy.getByTestingAttr("bank-data-set").find(".item-remove").click();
-
-        cy.wait("@deleteBankData").its("response.statusCode").should("eq", 200);
-        
-        // cy.get(".modal.show").should("exist");
-        // cy.getByTestingAttr("address-account-owner").type("g");
-        // cy.getByTestingAttr("address-bank-name").type("g", { delay: 40 });
-        // cy.getByTestingAttr("address-iban").type("NL06INGB7948612920", { delay: 40 });
-        // cy.getByTestingAttr("address-bic").type("GENODE51KS1", { delay: 40 });
-        // cy.getByTestingAttr("address-bank-submit").click();
+            cy.getByTestingAttr("bank-data-set").find(".item-remove").click();
+    
+            cy.get(".modal.show").should("exist");
+            cy.getByTestingAttr("bank-data-delete-confirm").wait(100).click();
+            cy.wait("@deleteBankData").its("response.statusCode").should("eq", 200);
+    
+            cy.get(".notification-wrapper").children().first().should("contain", "Bankdaten gelöscht");
+        })
     });
 
     it("should validate bank information", () =>
@@ -145,4 +129,8 @@ context("my-account", () =>
     });
 
 
+    it("should have correct order history data", () =>
+    {
+
+    });
 });
