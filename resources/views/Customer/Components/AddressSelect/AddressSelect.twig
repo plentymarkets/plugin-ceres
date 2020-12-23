@@ -39,7 +39,7 @@
                         title="{{ trans("Ceres::Template.addressAddAddress") }}"
                         class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down"
                         v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly"
-                        {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-add'") }}
+                        {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-add'") | raw }}
                     >
                         <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
@@ -50,7 +50,7 @@
                     class="dropdown-menu"
                     :aria-labelledby="'addressMultiSelect' + _uid"
                     v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)"
-                    {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-dropdown'") }}
+                    {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-dropdown'") | raw }}
                 >
                     <ul>
                         <li class="item" v-for="(address, index) in addressList">
@@ -78,7 +78,7 @@
                                             title="{{ trans("Ceres::Template.addressEdit") }}"
                                             class="btn btn-primary btn-appearance"
                                             @click.prevent="showEditModal(address)"
-                                            {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-edit'") }}
+                                            {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-edit'") | raw }}
                                         >
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
@@ -91,7 +91,7 @@
                                             title="{{ trans("Ceres::Template.addressDelete") }}"
                                             class="btn btn-danger"
                                             @click.prevent="showDeleteModal(address)"
-                                            {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-remove'") }}
+                                            {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-remove'") | raw }}
                                         >
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
