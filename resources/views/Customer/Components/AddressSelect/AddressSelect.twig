@@ -32,13 +32,26 @@
                 </div>
 
                 <div class="add-item">
-                    <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressAddAddress") }}" class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly" {{ set_testing_attr("data-testing", "add-address") }} >
+                    <button
+                        v-tooltip
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="{{ trans("Ceres::Template.addressAddAddress") }}"
+                        class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down"
+                        v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly"
+                        {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-add'") }}
+                    >
                         <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </button>
                 </div>
 
-                <div class="dropdown-menu" :aria-labelledby="'addressMultiSelect' + _uid" v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
+                <div
+                    class="dropdown-menu"
+                    :aria-labelledby="'addressMultiSelect' + _uid"
+                    v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)"
+                    {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-dropdown'") }}
+                >
                     <ul>
                         <li class="item" v-for="(address, index) in addressList">
                             <input
@@ -58,12 +71,28 @@
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
                                     <span class="item-edit">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressEdit") }}" class="btn btn-primary btn-appearance" @click.prevent="showEditModal(address)">
+                                        <button
+                                            v-tooltip
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="{{ trans("Ceres::Template.addressEdit") }}"
+                                            class="btn btn-primary btn-appearance"
+                                            @click.prevent="showEditModal(address)"
+                                            {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-edit'") }}
+                                        >
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressDelete") }}" class="btn btn-danger" @click.prevent="showDeleteModal(address)">
+                                        <button
+                                            v-tooltip
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="{{ trans("Ceres::Template.addressDelete") }}"
+                                            class="btn btn-danger"
+                                            @click.prevent="showDeleteModal(address)"
+                                            {{ set_testing_attr(":data-testing", "addressTypePrefix + 'address-select-remove'") }}
+                                        >
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>
