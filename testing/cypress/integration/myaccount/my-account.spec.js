@@ -136,20 +136,20 @@ context("my-account", () =>
 
     it("should have correct order history data", () =>
     {
-        cy.getByTestingAttr("order-history-id").eq(0).should("contain", "469");
-        cy.getByTestingAttr("order-history-id").eq(1).should("contain", "468");
-        cy.getByTestingAttr("order-history-sum").eq(0).should("contain", "6,05");
-        cy.getByTestingAttr("order-history-sum").eq(1).should("contain", "6,69");
-        cy.getByTestingAttr("order-history-date1").eq(0).should("contain", "22.12.2020");
+        cy.getByTestingAttr("order-history-id").eq(1).should("contain", "469");
+        cy.getByTestingAttr("order-history-id").eq(2).should("contain", "468");
+        cy.getByTestingAttr("order-history-sum").eq(1).should("contain", "6,05");
+        cy.getByTestingAttr("order-history-sum").eq(2).should("contain", "6,69");
         cy.getByTestingAttr("order-history-date1").eq(1).should("contain", "22.12.2020");
-        cy.getByTestingAttr("order-history-date2").eq(1).should("contain", "22.12.2020");
-        cy.getByTestingAttr("order-history-status").eq(0).should("contain", "Warten auf Zahlung");
-        cy.getByTestingAttr("order-history-status").eq(1).should("contain", "Warenausgang gebucht");
+        cy.getByTestingAttr("order-history-date1").eq(2).should("contain", "22.12.2020");
+        cy.getByTestingAttr("order-history-date2").eq(2).should("contain", "22.12.2020");
+        cy.getByTestingAttr("order-history-status").eq(1).should("contain", "Warten auf Zahlung");
+        cy.getByTestingAttr("order-history-status").eq(2).should("contain", "Warenausgang gebucht");
     });
 
     it("should open order confirmation", () =>
     {
-        cy.get(".container-clickable").eq(1).find(".icons a").eq(1)
+        cy.get(".container-clickable").eq(2).find(".icons a").eq(1)
             .should("have.attr", "href")
             .and("eq", "/bestellbestaetigung/?orderId=468").then((href) =>
             {
@@ -160,7 +160,7 @@ context("my-account", () =>
 
     it("should have tracking link", () =>
     {
-        cy.get(".container-clickable").eq(1).find(".icons a").eq(0)
+        cy.get(".container-clickable").eq(2).find(".icons a").eq(0)
             .should("have.attr", "href")
             .should("eq", "http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=34117&idc=123456");
     });
@@ -174,7 +174,7 @@ context("my-account", () =>
 
     it("should check sums", () =>
     {
-        cy.get(".container-clickable").eq(1).click();
+        cy.get(".container-clickable").eq(2).click();
 
         cy.getByTestingAttr("item-sum-net").wait(100).should("contain", (ITEM_PRICE_NET * ITEMQUANTITY).toLocaleString("de"));
         cy.getByTestingAttr("item-sum").should("contain", (ITEM_PRICE * ITEMQUANTITY).toLocaleString("de"));
@@ -187,7 +187,7 @@ context("my-account", () =>
 
     it("Should have attached order documents", () =>
     {
-        cy.get(".container-clickable").eq(1).click();
+        cy.get(".container-clickable").eq(2).click();
         cy.getByTestingAttr("order-history-document").eq(0).find("a")
             .wait(100)
             .should("have.attr", "href")
@@ -202,14 +202,51 @@ context("my-account", () =>
             .and("include", "/order-document/preview/17");
     });
 
-    it.only("Should check for possible return", () =>
+    it("Should check for possible payment change", () =>
     {
-        cy.get(".container-clickable").eq(0).click();
+        cy.get(".container-clickable").eq(1).click();
         cy.getByTestingAttr("change-payment-my-account").click()
 
         cy.get(".modal.show").should("exist");
         cy.get(".current-payment-text").should("contain", "Vorkasse");
         cy.get(`[data-id='2']`).should("exist"); // prepayment
         cy.get(`[data-id='6001']`).should("exist"); // paypal
+    });
+
+    it("Should check for possible return", () =>
+    {
+        cy.get(".container-clickable").eq(2).click();
+        cy.getByTestingAttr("order-history-return")
+            .wait(100)
+            .should("have.attr", "href")
+            .and("include", "/returns/468/").then((href) =>
+            {
+                cy.visit(href);
+                cy.login();
+                cy.visit("/returns/468/");
+                cy.location("pathname").should("eq", "/returns/468/");
+            });
+    });
+
+    it("should have correct return history data", () =>
+    {
+        cy.getByTestingAttr("return-history-id1").should("contain", "471");
+        cy.getByTestingAttr("return-history-id2").should("contain", "470");
+        cy.getByTestingAttr("return-history-date").should("contain", "23.12.2020");
+        cy.getByTestingAttr("return-history-payment").should("contain", "Vorkasse");
+    });
+
+    it("should have return documents", () =>
+    {
+        cy.get(".order-return-history-list .container-clickable").find(".icons a")
+            .should("have.attr", "href")
+            .and("eq", "/order-document/preview/18");
+    });
+
+    it("should open return-history", () =>
+    {
+        cy.get(".order-return-history-list .container-clickable").should("have.class", "collapsed");
+        cy.get(".order-return-history-list .container-clickable").click().wait(100);
+        cy.get(".order-return-history-list .container-clickable").not('.collapsed');
     });
 });
