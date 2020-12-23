@@ -9,7 +9,7 @@ context("Address", () =>
         cy.visit("/myaccount");
     });
 
-    it.only("should add new billing address", () =>
+    it("should add new billing address", () =>
     {
         cy.getByTestingAttr("billing-address-select-add").click();
 
@@ -69,13 +69,32 @@ context("Address", () =>
 
     // update addresses
     // delete addresses
-    it.only("should remove billing address", () =>
+    it("should remove billing address", () =>
     {
+        cy.intercept("DELETE", "/rest/io/customer/address/**/?typeId=1").as("removeAddress");
+
         cy.getByTestingAttr("billing-address-select").click();
         cy.getByTestingAttr("billing-address-select-remove").first().click();
+        cy.getByTestingAttr("billing-address-select-remove-modal-remove").click();
 
-        cy.intercept("POST", "/rest/io/customer/address/?typeId=2").as("createAddress");
-        cy.getByTestingAttr("modal-submit").eq(1).click();
+        cy.wait("@removeAddress").then((res) =>
+        {
+            expect(res.response.statusCode).to.eql(200);
+        });
+    });
+
+    it("should remove delivery address", () =>
+    {
+        cy.intercept("DELETE", "/rest/io/customer/address/**/?typeId=2").as("removeAddress");
+
+        cy.getByTestingAttr("delivery-address-select").click();
+        cy.getByTestingAttr("delivery-address-select-remove").first().click();
+        cy.getByTestingAttr("delivery-address-select-remove-modal-remove").click();
+
+        cy.wait("@removeAddress").then((res) =>
+        {
+            expect(res.response.statusCode).to.eql(200);
+        });
     });
 
     // TODO cleanup addresses
