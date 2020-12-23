@@ -9,9 +9,9 @@ context("Address", () =>
         cy.visit("/myaccount");
     });
 
-    it("should add new billing address", () =>
+    it.only("should add new billing address", () =>
     {
-        cy.get(".invoice-addresses-select [data-testing='add-address']").click();
+        cy.getByTestingAttr("billing-address-select-add").click();
 
         cy.getByTestingAttr("billing-address-de-name-inputs").find(`input[name="firstName"]`).type("Plenty", { delay: 15 });
         // Random delay because last name was often not filled
@@ -40,7 +40,7 @@ context("Address", () =>
 
     it("should add new delivery address", () =>
     {
-        cy.get(".shipping-addresses-select [data-testing='add-address']").click();
+        cy.getByTestingAttr("delivery-address-select-add").click();
 
         cy.getByTestingAttr("delivery-address-de-firstname").type("Plenty", { delay: 15 });
         // Random delay because last name was often not filled
@@ -69,8 +69,14 @@ context("Address", () =>
 
     // update addresses
     // delete addresses
+    it.only("should remove billing address", () =>
+    {
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-remove").first().click();
 
-    // company, country?
+        cy.intercept("POST", "/rest/io/customer/address/?typeId=2").as("createAddress");
+        cy.getByTestingAttr("modal-submit").eq(1).click();
+    });
 
     // TODO cleanup addresses
 });
