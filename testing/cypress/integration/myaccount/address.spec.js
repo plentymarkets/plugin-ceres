@@ -68,6 +68,37 @@ context("Address", () =>
     });
 
     // update addresses
+    it("should update a billing address", () =>
+    {
+        cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("updateAddress");
+
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-edit").first().click();
+        cy.getByTestingAttr("billing-address-de-firstname").clear().type("UPDATE");
+        cy.get("[data-testing='billing-address-select'] [data-testing='modal-submit']").click();
+
+        cy.wait("@updateAddress").then((res) =>
+        {
+            expect(res.response.statusCode).to.eql(201);
+        });
+    });
+
+    it("should update a deliver address", () =>
+    {
+        cy.intercept("POST", "/rest/io/customer/address/?typeId=2").as("updateAddress");
+
+        cy.getByTestingAttr("delivery-address-select").click();
+        cy.getByTestingAttr("delivery-address-select-edit").first().click();
+        cy.getByTestingAttr("delivery-address-de-firstname").clear().type("UPDATE");
+        cy.get("[data-testing='delivery-address-select'] [data-testing='modal-submit']").click();
+
+        cy.wait("@updateAddress").then((res) =>
+        {
+            expect(res.response.statusCode).to.eql(201);
+        });
+    });
+
+    // select addresses
     // delete addresses
     it("should remove billing address", () =>
     {
@@ -96,6 +127,23 @@ context("Address", () =>
             expect(res.response.statusCode).to.eql(200);
         });
     });
+
+    function deleteFirstAddress(addressType)
+    {
+        cy.getByTestingAttr(`${addressType}-address-select`).click();
+        cy.getByTestingAttr(`${addressType}-address-select-remove`).first().click();
+        cy.getByTestingAttr(`${addressType}-address-select-remove-modal-remove`).click();
+    }
+
+    function deleteAllAddresses()
+    {
+        // todo read vuex store and fire dispatch fore every address id
+    }
+
+    function createNewAddress()
+    {
+
+    }
 
     // TODO cleanup addresses
 });
