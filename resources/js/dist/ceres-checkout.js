@@ -59292,6 +59292,9 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
       var addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
       var countryKey = countryId === 12 ? "gb" : "de";
       return this.optionalAddressFields[countryKey].includes("".concat(addressKey, ".salutation"));
+    },
+    addressTypePrefix: function addressTypePrefix() {
+      return parseInt(this.addressType) === 1 ? "billing-" : "delivery-";
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_24__["mapState"])({
     countryList: function countryList(state) {
