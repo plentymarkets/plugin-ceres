@@ -111,7 +111,7 @@ context("my-account", () =>
         cy.get("#bankData").click();
 
         cy.getByTestingAttr("bank-data-set").invoke("attr", "for").then(($for) => {
-            cy.intercept("POST", "/rest/io/customer/bank_data/" + $for).as("deleteBankData");
+            cy.intercept("DELETE", "/rest/io/customer/bank_data/" + $for).as("deleteBankData");
 
             cy.getByTestingAttr("bank-data-set").find(".item-remove").click();
     
@@ -185,30 +185,31 @@ context("my-account", () =>
         cy.getByTestingAttr("basket-amount").should("contain", (SHIPPING_COST + ITEM_PRICE * ITEMQUANTITY).toLocaleString("de"));
     });
 
-    it("Should have attached delivery note", () =>
+    it("Should have attached order documents", () =>
     {
         cy.get(".container-clickable").eq(1).click();
         cy.getByTestingAttr("order-history-document").eq(0).find("a")
             .wait(100)
             .should("have.attr", "href")
             .and("include", "/order-document/preview/15");
-    });
-
-    it("Should have attached invoice", () =>
-    {
-        cy.get(".container-clickable").eq(1).click();
         cy.getByTestingAttr("order-history-document").eq(1).find("a")
             .wait(100)
             .should("have.attr", "href")
             .and("include", "/order-document/preview/16");
-    });
-
-    it("Should have attached order confirmation document", () =>
-    {
-        cy.get(".container-clickable").eq(1).click();
         cy.getByTestingAttr("order-history-document").eq(2).find("a")
             .wait(100)
             .should("have.attr", "href")
             .and("include", "/order-document/preview/17");
+    });
+
+    it.only("Should check for possible return", () =>
+    {
+        cy.get(".container-clickable").eq(0).click();
+        cy.getByTestingAttr("change-payment-my-account").click()
+
+        cy.get(".modal.show").should("exist");
+        cy.get(".current-payment-text").should("contain", "Vorkasse");
+        cy.get(`[data-id='2']`).should("exist"); // prepayment
+        cy.get(`[data-id='6001']`).should("exist"); // paypal
     });
 });
