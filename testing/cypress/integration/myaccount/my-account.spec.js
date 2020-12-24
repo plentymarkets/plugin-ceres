@@ -172,6 +172,15 @@ context("my-account", () =>
         cy.get(".container-clickable").eq(0).not('.collapsed');
     });
 
+    it.only("should have correct data in order-history", () =>
+    {
+        cy.get(".order-history-list .container-clickable").click();
+        // cy.getByTestingAttr("return-history-quantity").eq(0).should("contain", "Stückzahl: 1");
+        // cy.getByTestingAttr("return-history-quantity").eq(1).should("contain", "Stückzahl: 1");
+        // cy.get(".order-return-history-list .item img").eq(0)
+        //     .should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg');
+    });
+
     it("should check sums", () =>
     {
         cy.get(".container-clickable").eq(2).click();
@@ -249,4 +258,26 @@ context("my-account", () =>
         cy.get(".order-return-history-list .container-clickable").click().wait(100);
         cy.get(".order-return-history-list .container-clickable").not('.collapsed');
     });
+
+    it("should have correct itemlink in return-history", () =>
+    {
+        cy.get(".order-return-history-list .container-clickable").click();
+        cy.getByTestingAttr("return-history-link")
+            .should("have.attr", "href")
+            .and("eq", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/").then((href) =>
+                {
+                    cy.visit(href);
+                    cy.location("pathname").should("eq", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+                });
+    });
+
+    it("should have correct data in return-history", () =>
+    {
+        cy.get(".order-return-history-list .container-clickable").click();
+        cy.getByTestingAttr("return-history-quantity").eq(0).should("contain", "Stückzahl: 1");
+        cy.getByTestingAttr("return-history-quantity").eq(1).should("contain", "Stückzahl: 1");
+        cy.get(".order-return-history-list .item img").eq(0)
+            .should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg');
+    });
+    
 });
