@@ -2,11 +2,17 @@
 context("Address", () =>
 {
     const ADDRESS_TEST_USER_EMAIL = "plenty-address-test@plenty.com";
+    const NEW_ADDRESS_TEST_DATA = { "gender":"male", "name1":"", "name2":"Vorname", "name3":"Nachname", "address1":"Straße", "address2":"Nr", "postalCode":"Plz", "town":"Ort", "countryId":1 };
 
     beforeEach(() =>
     {
         cy.login(ADDRESS_TEST_USER_EMAIL);
         cy.visit("/myaccount");
+    });
+
+    afterEach(() =>
+    {
+        deleteAllAddresses();
     });
 
     it("should add new billing address", () =>
@@ -70,6 +76,8 @@ context("Address", () =>
     // update addresses
     it("should update a billing address", () =>
     {
+        createNewAddress(1);
+        cy.reload();
         cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("updateAddress");
 
         cy.getByTestingAttr("billing-address-select").click();
@@ -85,6 +93,8 @@ context("Address", () =>
 
     it("should update a deliver address", () =>
     {
+        createNewAddress(2);
+        cy.reload();
         cy.intercept("POST", "/rest/io/customer/address/?typeId=2").as("updateAddress");
 
         cy.getByTestingAttr("delivery-address-select").click();
@@ -99,9 +109,12 @@ context("Address", () =>
     });
 
     // select addresses
-    // delete addresses
+
     it("should remove billing address", () =>
     {
+        createNewAddress(1);
+        cy.reload();
+
         cy.intercept("DELETE", "/rest/io/customer/address/**/?typeId=1").as("removeAddress");
 
         cy.getByTestingAttr("billing-address-select").click();
@@ -116,6 +129,9 @@ context("Address", () =>
 
     it("should remove delivery address", () =>
     {
+        createNewAddress(2);
+        cy.reload();
+
         cy.intercept("DELETE", "/rest/io/customer/address/**/?typeId=2").as("removeAddress");
 
         cy.getByTestingAttr("delivery-address-select").click();
@@ -128,22 +144,28 @@ context("Address", () =>
         });
     });
 
-    function deleteFirstAddress(addressType)
-    {
-        cy.getByTestingAttr(`${addressType}-address-select`).click();
-        cy.getByTestingAttr(`${addressType}-address-select-remove`).first().click();
-        cy.getByTestingAttr(`${addressType}-address-select-remove-modal-remove`).click();
-    }
-
     function deleteAllAddresses()
     {
         // todo read vuex store and fire dispatch fore every address id
+        cy.getStore().then((store) =>
+        {
+            store.state.address.billingAddressList.forEach(address =>
+            {
+                store.dispatch("deleteAddress", { address, addressType: 1 });
+            });
+
+            store.state.address.deliveryAddressList.forEach(address =>
+            {
+                store.dispatch("deleteAddress", { address, addressType: 2 });
+            });
+        });
     }
 
-    function createNewAddress()
+    function createNewAddress(addressType)
     {
-
+        cy.getStore().then((store) =>
+        {
+            store.dispatch("createAddress", { address: NEW_ADDRESS_TEST_DATA, addressType });
+        });
     }
-
-    // TODO cleanup addresses
 });
