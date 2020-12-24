@@ -156,7 +156,10 @@ context("Address", () =>
 
             store.state.address.deliveryAddressList.forEach(address =>
             {
-                store.dispatch("deleteAddress", { address, addressType: 2 });
+                if (address.id !== -99)
+                {
+                    store.dispatch("deleteAddress", { address, addressType: 2 });
+                }
             });
         });
     }
