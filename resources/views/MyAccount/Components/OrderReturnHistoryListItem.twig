@@ -34,7 +34,7 @@
                             <img :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName " :title="orderItem | itemBundleName">
                         </a>
                         <div class="d-inline-block item-description pl-3">
-                            <div {{ set_testing_attr("data-testing", "return-history-link") }}><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]">${ orderItem | itemBundleName }</a></div>
+                            <div><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]" {{ set_testing_attr("data-testing", "return-history-link") }}>${ orderItem | itemBundleName }</a></div>
                             <div {{ set_testing_attr("data-testing", "return-history-quantity") }}>{{ trans("Ceres::Template.returnHistoryQuantity") }}: ${ orderItem.quantity}</div>
 
                             <div v-for="attribute in orderItem.attributes" {{ set_testing_attr("data-testing", "return-history-attribute") }}>
