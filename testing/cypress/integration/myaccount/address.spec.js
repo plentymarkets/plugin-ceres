@@ -199,7 +199,6 @@ context("Address", () =>
 
     function deleteAllAddresses()
     {
-        // todo read vuex store and fire dispatch fore every address id
         cy.getStore().then((store) =>
         {
             store.state.address.billingAddressList.forEach(address =>
