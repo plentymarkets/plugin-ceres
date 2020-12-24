@@ -90,7 +90,7 @@ context("Address", () =>
         });
     });
 
-    it("should update a deliver address", () =>
+    it("should update a delivery address", () =>
     {
         createNewAddress(2);
         cy.reload();
