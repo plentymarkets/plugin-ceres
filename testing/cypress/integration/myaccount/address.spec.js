@@ -2,7 +2,6 @@
 context("Address", () =>
 {
     const ADDRESS_TEST_USER_EMAIL = "plenty-address-test@plenty.com";
-    const NEW_ADDRESS_TEST_DATA = { "gender":"male", "name1":"", "name2":"Vorname", "name3":"Nachname", "address1":"Straße", "address2":"Nr", "postalCode":"Plz", "town":"Ort", "countryId":1 };
 
     beforeEach(() =>
     {
@@ -108,7 +107,61 @@ context("Address", () =>
         });
     });
 
-    // select addresses
+    it("should select another billing address", () =>
+    {
+        createNewAddress(1);
+        createNewAddress(1);
+        cy.reload();
+
+        let selectedAddressId = -1;
+
+        cy.getStore().then((store) =>
+        {
+            selectedAddressId = store.state.address.billingAddressId;
+        });
+
+        cy.intercept("PUT", "/rest/io/customer/address/**/?typeId=1").as("selectAddress");
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-dropdown").find("li").eq(1).click();
+
+        cy.wait("@selectAddress").then((res) =>
+        {
+            expect(res.response.statusCode).to.eql(200);
+
+            cy.getStore().then((store) =>
+            {
+                expect(store.state.address.billingAddressId).to.not.eql(selectedAddressId);
+            });
+        });
+    });
+
+    it("should select another delivery address", () =>
+    {
+        createNewAddress(2);
+        createNewAddress(2);
+        cy.reload();
+
+        let selectedAddressId = -1;
+
+        cy.getStore().then((store) =>
+        {
+            selectedAddressId = store.state.address.deliveryAddressId;
+        });
+
+        cy.intercept("PUT", "/rest/io/customer/address/**/?typeId=2").as("selectAddress");
+        cy.getByTestingAttr("delivery-address-select").click();
+        cy.getByTestingAttr("delivery-address-select-dropdown").find("li").eq(1).click();
+
+        cy.wait("@selectAddress").then((res) =>
+        {
+            expect(res.response.statusCode).to.eql(200);
+
+            cy.getStore().then((store) =>
+            {
+                expect(store.state.address.deliveryAddressId).to.not.eql(selectedAddressId);
+            });
+        });
+    });
 
     it("should remove billing address", () =>
     {
@@ -168,7 +221,22 @@ context("Address", () =>
     {
         cy.getStore().then((store) =>
         {
-            store.dispatch("createAddress", { address: NEW_ADDRESS_TEST_DATA, addressType });
+            store.dispatch("createAddress", { address: getAddress(), addressType });
         });
+    }
+
+    function getAddress()
+    {
+        return {
+            "gender":"male",
+            "name1":"",
+            "name2": Date.now(),
+            "name3": Date.now(),
+            "address1": Date.now(),
+            "address2": Date.now(),
+            "postalCode": Date.now(),
+            "town": Date.now(),
+            "countryId": 1
+        };
     }
 });
