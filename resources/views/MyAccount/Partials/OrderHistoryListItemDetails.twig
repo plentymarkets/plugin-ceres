@@ -44,7 +44,7 @@
                                 </a>
 
                                 <div class="flex-fill item-description pl-3">
-                                    <div><a class="text-primary text-appearance" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}">{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
+                                    <div><a class="text-primary text-appearance" href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}" {{ set_testing_attr("data-testing", "order-history-link") }}>{{ ItemName.get(item.orderItemName, item.bundleType) }}</a></div>
 
                                     {% if item.setComponents %}
                                         <div class="set-data small">
@@ -163,22 +163,22 @@
                                         </div>
                                     {% endif %}
 
-                                    <div class="d-flex">
+                                    <div class="d-flex" {{ set_testing_attr("data-testing", "order-history-price") }}>
                                         <span class="flex-fill font-weight-bold">{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}</span>
                                         <span class="flex-fill text-right">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
                                     </div>
                                     {% if discountAmount > 0 %}
-                                        <div class="d-flex">
+                                        <div class="d-flex" {{ set_testing_attr("data-testing", "order-history-discount") }}>
                                             <span class="flex-fill font-weight-bold">{{ trans("Ceres::Template.orderHistoryItemDiscount") }}</span>
                                             <span class="flex-fill text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>
                                         </div>
                                     {% endif %}
-                                    <div class="d-flex">
+                                    <div class="d-flex" {{ set_testing_attr("data-testing", "order-history-quantity") }}>
                                         <span class="flex-fill font-weight-bold">{{ trans("Ceres::Template.orderHistoryQuantity") }}</span>
                                         <span class="flex-fill text-right">{{ item.quantity }}</span>
                                     </div>
                                     {% for attribute in item.attributes %}
-                                        <div class="d-flex">
+                                        <div class="d-flex" {{ set_testing_attr("data-testing", "order-history-attribute") }}>
                                             <span class="flex-fill font-weight-bold">{{ attribute.name }}:</span>
                                             <span class="flex-fill text-right">{{ attribute.value }}</span>
                                         </div>
@@ -189,7 +189,7 @@
                                                 <strong> {{ trans("Ceres::Template.orderConfirmationProperties") }}</strong>
                                             </div>
                                             {% for property in item.orderProperties %}
-                                                <div class="pl-4">
+                                                <div class="pl-4" {{ set_testing_attr("data-testing", "order-history-property") }}>
                                                     <strong>{{ property | propertyName }}</strong>
                                                     {% if property.type == 'file' %}
                                                         <span>
@@ -207,11 +207,11 @@
                                                                 {% endif %}
                                                             {% endfor %}
 
-                                                        <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
-                                                            <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                            {{ splitPath | last }}
-                                                        </a>
-                                                    </span>
+                                                            <a href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}" target="_blank" class="text-primary text-appearance">
+                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                {{ splitPath | last }}
+                                                            </a>
+                                                        </span>
                                                     {% elseif property.type == "selection" %}
                                                         <br>
                                                         <span> {{ property | propertySelectionValueName }}</span>
@@ -223,7 +223,7 @@
                                             {% endfor %}
                                         </div>
                                     {% endif %}
-                                    <div class="d-flex font-weight-bold">
+                                    <div class="d-flex font-weight-bold" {{ set_testing_attr("data-testing", "order-history-total") }}>
                                         <span class="flex-fill">{{ trans("Ceres::Template.orderHistoryTotal") }}</span>
                                         <span class="flex-fill text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</span>
                                     </div>
@@ -314,7 +314,7 @@
             {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", orderData.order) }}
 
             {% if orderData.isReturnable %}
-                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance btn-appearance mb-2" href="{{ urls.returns(orderData.order.id) }}">
+                <a v-if="allowReturn" v-waiting-animation-infinite class="btn btn-block btn-appearance mb-2" href="{{ urls.returns(orderData.order.id) }}" {{ set_testing_attr("data-testing", "order-history-return") }}>
                     <i class="fa fa-repeat fa-flip-horizontal" aria-hidden="true"></i>
                     {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
                 </a>
