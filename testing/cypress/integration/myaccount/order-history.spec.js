@@ -1,5 +1,5 @@
 // / <reference types="cypress" />
-context("my-account order-return", () =>
+context("my-account order-history", () =>
 {
     const ITEM_PRICE_NET = 0.59;
     const ITEM_PRICE = 0.70;
