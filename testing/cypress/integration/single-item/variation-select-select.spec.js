@@ -1,5 +1,5 @@
 // / <reference types="cypress" />
-context("Variation Select", () =>
+context("Variation Select - Box", () =>
 {
     /*
     Artikel-ID 138: Ein Attribut - Dropdown - Nicht kaufbar ausgeblendet
