@@ -14,7 +14,7 @@
                 </template>
                 <template v-else> <!-- Returnhistory -->
                     <div class="icons d-none d-sm-block">
-                        <a class="text-appearance" :href="'/order-document/preview/' + document.id" target="_blank" v-tooltip data-toggle="tooltip" data-placement="top" :title="getDownloadTooltip(document.type)" @click.stop {{ set_testing_attr("data-testing", "order-history-document") }}>
+                        <a class="text-appearance" :href="'/order-document/preview/' + document.id" target="_blank" v-tooltip data-toggle="tooltip" data-placement="top" :title="getDownloadTooltip(document.type)" @click.stop {{ set_testing_attr("data-testing", "return-history-document") }}>
                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
                         </a>
                     </div>
