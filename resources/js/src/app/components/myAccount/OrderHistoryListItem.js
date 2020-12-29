@@ -50,8 +50,10 @@ export default Vue.component("order-history-list-item", {
             {
                 this.waiting = true;
 
+                const testing = window.ceresEnv !== "testing" ? "" : "&env=testing";
+
                 ApiService
-                    .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id)
+                    .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id + testing)
                     .done(orderDetails =>
                     {
                         const compiled = Vue.compile(orderDetails);

@@ -61602,7 +61602,8 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 
       if (!this.waiting && !this.isDataLoaded) {
         this.waiting = true;
-        ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
+        var testing = window.ceresEnv !== "testing" ? "" : "&env=testing";
+        ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id + testing).done(function (orderDetails) {
           var compiled = vue__WEBPACK_IMPORTED_MODULE_0___default.a.compile(orderDetails);
           var component = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
             data: {
