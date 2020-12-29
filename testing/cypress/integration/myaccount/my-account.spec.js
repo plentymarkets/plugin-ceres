@@ -145,11 +145,29 @@ context("my-account", () =>
         cy.getByTestingAttr("order-history-date2").eq(2).should("contain", "22.12.2020");
         cy.getByTestingAttr("order-history-status").eq(1).should("contain", "Warten auf Zahlung");
         cy.getByTestingAttr("order-history-status").eq(2).should("contain", "Warenausgang gebucht");
+        
+        cy.get(".order-history-list .container-clickable").eq(0).click();
+
+        cy.getByTestingAttr("order-history-price").should("contain", (ITEM_PRICE * ITEMQUANTITY).toLocaleString("de"));
+        cy.getByTestingAttr("order-history-quantity").should("contain", (ITEMQUANTITY).toLocaleString("de"));
+        cy.getByTestingAttr("order-history-total").should("contain", (ITEM_PRICE * ITEMQUANTITY).toLocaleString("de"));
+    });
+
+    it("should have correct itemlink in order-history", () =>
+    {
+        cy.get(".order-history-list .container-clickable").eq(0).click();
+
+        cy.getByTestingAttr("order-history-link").should("have.attr", "href")
+            .and("eq", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/").then((href) =>
+            {
+                cy.visit(href);
+                cy.location("pathname").should("eq", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");
+            });
     });
 
     it("should open order confirmation", () =>
     {
-        cy.get(".container-clickable").eq(2).find(".icons a").eq(1)
+        cy.get(".order-history-list .container-clickable").eq(2).find(".icons a").eq(1)
             .should("have.attr", "href")
             .and("eq", "/bestellbestaetigung/?orderId=468").then((href) =>
             {
@@ -160,16 +178,16 @@ context("my-account", () =>
 
     it("should have tracking link", () =>
     {
-        cy.get(".container-clickable").eq(2).find(".icons a").eq(0)
+        cy.get(".order-history-list .container-clickable").eq(2).find(".icons a").eq(0)
             .should("have.attr", "href")
             .should("eq", "http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=34117&idc=123456");
     });
 
     it("should open order-history", () =>
     {
-        cy.get(".container-clickable").eq(0).should("have.class", "collapsed");
-        cy.get(".container-clickable").eq(0).click().wait(100);
-        cy.get(".container-clickable").eq(0).not('.collapsed');
+        cy.get(".order-history-list .container-clickable").eq(0).should("have.class", "collapsed");
+        cy.get(".order-history-list .container-clickable").eq(0).click().wait(100);
+        cy.get(".order-history-list .container-clickable").eq(0).not('.collapsed');
     });
 
     it("should have correct data in order-history", () =>
@@ -183,7 +201,7 @@ context("my-account", () =>
 
     it("should check sums", () =>
     {
-        cy.get(".container-clickable").eq(2).click();
+        cy.get(".order-history-list .container-clickable").eq(2).click();
 
         cy.getByTestingAttr("item-sum-net").wait(100).should("contain", (ITEM_PRICE_NET * ITEMQUANTITY).toLocaleString("de"));
         cy.getByTestingAttr("item-sum").should("contain", (ITEM_PRICE * ITEMQUANTITY).toLocaleString("de"));
@@ -196,24 +214,21 @@ context("my-account", () =>
 
     it("Should have attached order documents", () =>
     {
-        cy.get(".container-clickable").eq(2).click();
+        cy.get(".widget-order-history .container-clickable").eq(2).click().wait(100);
         cy.getByTestingAttr("order-history-document").eq(0).find("a")
-            .wait(100)
             .should("have.attr", "href")
             .and("include", "/order-document/preview/15");
         cy.getByTestingAttr("order-history-document").eq(1).find("a")
-            .wait(100)
             .should("have.attr", "href")
             .and("include", "/order-document/preview/16");
         cy.getByTestingAttr("order-history-document").eq(2).find("a")
-            .wait(100)
             .should("have.attr", "href")
             .and("include", "/order-document/preview/17");
     });
 
     it("Should check for possible payment change", () =>
     {
-        cy.get(".container-clickable").eq(1).click();
+        cy.get(".order-history-list .container-clickable").eq(1).click();
         cy.getByTestingAttr("change-payment-my-account").click()
 
         cy.get(".modal.show").should("exist");
@@ -224,14 +239,13 @@ context("my-account", () =>
 
     it("Should check for possible return", () =>
     {
-        cy.get(".container-clickable").eq(2).click();
+        cy.get(".order-history-list .container-clickable").eq(2).click().wait(100);
         cy.getByTestingAttr("order-history-return")
             .wait(100)
             .should("have.attr", "href")
             .and("include", "/returns/468/").then((href) =>
             {
                 cy.visit(href);
-                cy.login();
                 cy.visit("/returns/468/");
                 cy.location("pathname").should("eq", "/returns/468/");
             });
@@ -247,7 +261,7 @@ context("my-account", () =>
 
     it("should have return documents", () =>
     {
-        cy.get(".order-return-history-list .container-clickable").find(".icons a")
+        cy.getByTestingAttr("return-history-document").eq(0)
             .should("have.attr", "href")
             .and("eq", "/order-document/preview/18");
     });
