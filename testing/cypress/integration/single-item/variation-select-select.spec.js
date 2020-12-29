@@ -17,21 +17,21 @@ context("Variation Select - Box", () =>
         cy.get(".custom-select").find("option[value='5']").should("contain", "rot");
         cy.get(".custom-select").find("option[value='6']").should("contain", "schwarz");
         cy.get(".custom-select").find("option[value='7']").should("contain", "lila");
-        cy.get(".custom-select").find("option[value='8']").should('not.exist');
+        cy.get(".custom-select").find("option[value='8']").should("not.exist");
     });
 
     it("should be able to add all selectable variations for item 138 to basket", () =>
     {
         cy.visit("/variantenauswahl/ein-attribut-dropdown_138_1078/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
 
         cy.get(".custom-select").select("schwarz");
         cy.location("pathname").should("eq", "/variantenauswahl/ein-attribut-dropdown_138_1079/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
 
         cy.get(".custom-select").select("lila");
         cy.location("pathname").should("eq", "/variantenauswahl/ein-attribut-dropdown_138_1080/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
     });
 
     /*
@@ -56,19 +56,19 @@ context("Variation Select - Box", () =>
     it("should be able to add all selectable variations for item 139 to basket", () =>
     {
         cy.visit("/ein-attribut-dropdown-nicht-verfuegbar-angezeigt_139_1083/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
         
         cy.get(".custom-select").select("schwarz");
         cy.location("pathname").should("eq", "/variantenauswahl/ein-attribut-dropdown-nicht-verfuegbar-angezeigt_139_1084/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
 
         cy.get(".custom-select").select("lila");
         cy.location("pathname").should("eq", "/variantenauswahl/ein-attribut-dropdown-nicht-verfuegbar-angezeigt_139_1085/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
 
         cy.get(".custom-select").select("blau (Ausverkauft)");
         cy.location("pathname").should("eq", "/variantenauswahl/ein-attribut-dropdown-nicht-verfuegbar-angezeigt_139_1086/");
-        cy.get(".add-to-basket-container > button").should("have.class", "disabled");
+        isNotSaleable();
     });
 
     /*
@@ -102,19 +102,19 @@ context("Variation Select - Box", () =>
     it("should be able to add all selectable variations for item 140 to basket", () =>
     {
         cy.visit("variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140_1093/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
         
         cy.get(".custom-select").eq(0).select("lila");
         cy.location("pathname").should("eq", "/variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140_1094/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
 
         cy.get(".custom-select").eq(0).select("blau");
         cy.location("pathname").should("eq", "/variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140_1095/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
 
         cy.get(".custom-select").eq(0).select("rot");
         cy.location("pathname").should("eq", "/variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140_1092/");
-        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+        isSaleable();
     });
 
     it("should not be possible to buy soldout variant", () =>
@@ -123,7 +123,7 @@ context("Variation Select - Box", () =>
 
         cy.get(".custom-select").eq(1).select("xs (Ausverkauft)");
         cy.location("pathname").should("eq", "/variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140_1089/");
-        cy.get(".add-to-basket-container > button").should("have.class", "disabled");
+        isNotSaleable();
     });
 
     it("should deselect attribute combination that is not selectable (not available)", () =>
@@ -132,7 +132,7 @@ context("Variation Select - Box", () =>
 
         cy.get(".custom-select").eq(0).select("rot (nicht verfügbar)");
         cy.location("pathname").should("eq", "/variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140/");
-        cy.get(".add-to-basket-container > button").should("have.class", "disabled");
+        isNotSaleable();
         cy.get(".custom-select").eq(1).find("option[value]").should("contain", "Keine Auswahl");
 
         cy.get(".notification-wrapper").children().first().should("have.class", "alert-warning").should("contain", "Größe - Dropdown - Nicht Gruppiert nicht verfügbar.");
@@ -140,7 +140,16 @@ context("Variation Select - Box", () =>
 
         cy.get(".custom-select").eq(1).select("xs (nicht verfügbar)");
         cy.location("pathname").should("eq", "/variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140/");
-        cy.get(".add-to-basket-container > button").should("have.class", "disabled");
+        isNotSaleable();
         cy.get(".notification-wrapper").children().first().should("have.class", "alert-warning").should("contain", "Farbe - Dropdown - Nicht Gruppiert nicht verfügbar.");
     });
+
+    function isSaleable()
+    {
+        cy.get(".add-to-basket-container > button").should("not.have.class", "disabled");
+    }
+    function isNotSaleable()
+    {
+        cy.get(".add-to-basket-container > button").should("have.class", "disabled");
+    }
 });
