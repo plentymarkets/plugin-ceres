@@ -1,7 +1,14 @@
 <template>
     <div>
         <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }" data-validate="text">
-            <input type="text" @input="onInputValueChanged($event.target.value)" v-model="inputValue" v-tooltip data-toggle="tooltip" :title="property.names.description">
+            <input
+                type="text"
+                @input="onInputValueChanged($event.target.value)"
+                v-model="inputValue"
+                v-tooltip
+                data-toggle="tooltip"
+                :title="property.names.description"
+                :data-testing="'order-property-input-' + inputType">
             <label class="d-flex">
                 <span class="text-truncate">{{ property.names.name }}</span>
                 <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
@@ -16,7 +23,8 @@
                    :value="property.id"
                    :checked="property.value"
                    @change="onInputValueChanged($event.target.checked)"
-                   class="form-check-input">
+                   class="form-check-input"
+                   data-testing="order-property-input-checkbox">
             <input v-else
                    type="radio"
                    :name="group ? group.id : 'check' + _uid"
@@ -24,7 +32,8 @@
                    :value="property.id"
                    @change="onInputValueChanged($event.target.value)"
                    class="form-check-input"
-                   :checked="property.value">
+                   :checked="property.value"
+                   data-testing="order-property-input-radio">
 
             <label class="form-check-label text-appearance d-flex"
                    :for="'check' + _uid"
@@ -43,9 +52,9 @@
                 v-tooltip
                 data-toggle="tooltip"
                 :title="property.names.description">
-                <select v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select">
+                <select v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select" data-testing="order-property-selection">
                     <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
-                    <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id">{{ value.name }}</option>
+                    <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">{{ value.name }}</option>
                 </select>
                 <label class="d-flex w-100">
                     <span class="text-truncate">{{ property.names.name }}</span>
@@ -77,7 +86,7 @@
                 <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
                     <i class="fa fa-times"></i>
                 </span>
-                <input :disabled="waiting" ref="fileInput" type="file" size="50" accept="image/*" @change="setPropertyFile($event)">
+                <input :disabled="waiting" ref="fileInput" type="file" size="50" accept="image/*" @change="setPropertyFile($event)" data-testing="order-property-input-file">
             </label>
         </div>
     </div>
