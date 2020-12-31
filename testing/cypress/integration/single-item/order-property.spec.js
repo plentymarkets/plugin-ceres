@@ -125,27 +125,54 @@ context("Single Item", () =>
 
     it("should fill file upload input with extra costs", () =>
     {
-
+        // TODO
     });
 
     it("should fill selection input with extra costs", () =>
     {
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-selection").click();
+        cy.getByTestingAttr("order-property-selection-option").click();
 
+        cy.getByTestingAttr("single-add-to-basket-button").click();
+        cy.get("#add-item-to-basket-overlay").should("contain", "Auswahl +5€ (inkl. 5,00 EUR)");
+        cy.get("#add-item-to-basket-overlay").should("contain", "Option 1");
     });
 
     it("should fill text input with extra costs", () =>
     {
+        const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
 
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-text").type(value);
+
+        cy.getByTestingAttr("single-add-to-basket-button").click();
+        cy.get("#add-item-to-basket-overlay").should("contain", "Text +5€ (inkl. 5,00 EUR)");
+        cy.get("#add-item-to-basket-overlay").should("contain", value);
     });
 
     it("should fill float number input with extra costs", () =>
     {
+        const value = 1.23;
 
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-float").type(value);
+
+        cy.getByTestingAttr("single-add-to-basket-button").click();
+        cy.get("#add-item-to-basket-overlay").should("contain", "Kommazahl +5€ (inkl. 5,00 EUR)");
+        cy.get("#add-item-to-basket-overlay").should("contain", value);
     });
 
     it("should fill int input with extra costs", () =>
     {
+        const value = 123;
 
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-int").type(value);
+
+        cy.getByTestingAttr("single-add-to-basket-button").click();
+        cy.get("#add-item-to-basket-overlay").should("contain", "Ganze Zahl +5€");
+        cy.get("#add-item-to-basket-overlay").should("contain", value);
     });
 
     // should i18n
