@@ -25,7 +25,8 @@ class ItemSearchContext extends CategoryContext implements ContextInterface
             'facets'       => $this->getParam('facets', ''),
             'query'        => $this->getParam('query', ''),
             'priceMin'     => $this->request->get('priceMin', 0),
-            'priceMax'     => $this->request->get('priceMax', 0)
+            'priceMax'     => $this->request->get('priceMax', 0),
+            'searchOperator' => $this->webstoreConfig->itemSearchOperator
         ];
 
         $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, SearchOptions::SCOPE_SEARCH);
