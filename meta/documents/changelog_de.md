@@ -1,5 +1,20 @@
 # Release Notes für Ceres
 
+## v5.0.18 (2021-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.17...5.0.18" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt 
+
+- Im Schritt **Suche** des Assistenten kann nun eingestellt werden, ob die Webshop-Suche einen **Und**- oder einen **Oder**-Suchoperator verwendet.
+
+### Geändert 
+
+- Die Summen im Warenkorb und auf der Auftragsbestätigung zeigen nun Zusatzkosten an. Die Darstellung von Zusatzkosten kann in den Einstellungen des Summen-Widgets aktiviert werden.
+
+### Behoben
+
+- Das Sticky Container-Widget wurde unter gewissen Umständen beim Scrollen direkt wieder auf seine ursprüngliche Position zurückgesetzt, was zu einer zitternden Darstellung geführt hat. Dies wurde behoben.
+- Bilder, die über ein Datenfeld innerhalb eines Text-Widgets ausgegeben werden, haben jetzt eine maximale Breite.
+
 ## v5.0.17 (2020-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.16...5.0.17" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
