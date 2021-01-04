@@ -34806,7 +34806,8 @@ var render = function() {
         {
           attrs: {
             "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
-            "data-picture-class": _vm.pictureClass
+            "data-picture-class": _vm.pictureClass,
+            "data-alt": _vm.$attrs.alt
           }
         },
         [
@@ -52912,9 +52913,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dom */ "./resources/js/src/app/helper/dom.js");
-/* harmony import */ var _featureDetect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
+/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.timers */ "./node_modules/core-js/modules/web.timers.js");
+/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _featureDetect__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
+/* harmony import */ var _repeatAnimationFrame__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./repeatAnimationFrame */ "./resources/js/src/app/helper/repeatAnimationFrame.js");
+
 
 
 
@@ -52927,6 +52932,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -52959,6 +52965,24 @@ var StickyElement = /*#__PURE__*/function () {
       });
     });
     el.classList.add("sticky-element");
+
+    var updateHandler = function updateHandler() {
+      _this.checkElement();
+
+      _this.updateStyles();
+    }; // Update if height of sticky element changes
+
+
+    if ("ResizeObserver" in window) {
+      this.resizeObserver = new ResizeObserver(updateHandler.bind(this));
+      this.resizeObserver.observe(this.el);
+    } // IE11 + Safari < 13.0
+    else {
+        this.el.addEventListener("updateStickyContainer", function () {
+          var stop = Object(_repeatAnimationFrame__WEBPACK_IMPORTED_MODULE_10__["repeatAnimationFrame"])(updateHandler.bind(_this));
+          setTimeout(stop, 500);
+        });
+      }
   }
 
   _createClass(StickyElement, [{
@@ -52989,7 +53013,7 @@ var StickyElement = /*#__PURE__*/function () {
           }
         };
 
-        var isPassiveEventSupported = Object(_featureDetect__WEBPACK_IMPORTED_MODULE_8__["detectPassiveEvents"])();
+        var isPassiveEventSupported = Object(_featureDetect__WEBPACK_IMPORTED_MODULE_9__["detectPassiveEvents"])();
         document.addEventListener("storeChanged", _this2.eventListener);
         STICKY_EVENTS.forEach(function (event) {
           window.addEventListener(event, _this2.eventListener, isPassiveEventSupported && !!STICKY_EVENTS_PASSIVE.includes(event) ? {
@@ -53007,13 +53031,13 @@ var StickyElement = /*#__PURE__*/function () {
       var _this3 = this;
 
       this.vm.$nextTick(function () {
-        if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(_this3.placeholder)) {
+        if (!Object(_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(_this3.placeholder)) {
           _this3.getContainerElement().removeChild(_this3.placeholder);
         }
 
         _this3.placeholder = null;
       });
-      Object(_dom__WEBPACK_IMPORTED_MODULE_7__["applyStyles"])(this.el, {
+      Object(_dom__WEBPACK_IMPORTED_MODULE_8__["applyStyles"])(this.el, {
         position: null,
         top: null,
         left: null,
@@ -53093,12 +53117,12 @@ var StickyElement = /*#__PURE__*/function () {
 
       this.offsetBottom = 0;
 
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(this.position)) {
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(this.position)) {
         this.checkElement(true);
       }
 
       this.getSiblingStickies().forEach(function (stickyElement) {
-        if (Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(stickyElement.position)) {
+        if (Object(_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(stickyElement.position)) {
           stickyElement.checkElement(true);
         }
 
@@ -53142,8 +53166,8 @@ var StickyElement = /*#__PURE__*/function () {
         this.el.classList.remove("is-sticky");
       }
 
-      Object(_dom__WEBPACK_IMPORTED_MODULE_7__["applyStyles"])(this.el, styles);
-      Object(_dom__WEBPACK_IMPORTED_MODULE_7__["applyStyles"])(this.placeholder, placeholderStyles);
+      Object(_dom__WEBPACK_IMPORTED_MODULE_8__["applyStyles"])(this.el, styles);
+      Object(_dom__WEBPACK_IMPORTED_MODULE_8__["applyStyles"])(this.placeholder, placeholderStyles);
     }
   }, {
     key: "checkMinWidth",
@@ -53155,11 +53179,11 @@ var StickyElement = /*#__PURE__*/function () {
     value: function getSiblingStickies() {
       var container = this.getContainerElement();
 
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(container)) {
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(container)) {
         return [];
       }
 
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(container.__stickyElements)) {
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(container.__stickyElements)) {
         container.__stickyElements = [];
       }
 
@@ -53171,7 +53195,7 @@ var StickyElement = /*#__PURE__*/function () {
       if (this.el.dataset.hasOwnProperty("stickyContainer")) {
         var container = document.querySelector(this.el.dataset.stickyContainer);
 
-        if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(container)) {
+        if (!Object(_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(container)) {
           return container;
         }
       }
@@ -53186,6 +53210,10 @@ var StickyElement = /*#__PURE__*/function () {
 
       if (idx >= 0) {
         this.getContainerElement().__stickyElements.splice(idx, 1);
+      }
+
+      if (this.resizeObserver) {
+        this.resizeObserver.unobserve(this.el);
       }
 
       this.el.classList.remove("sticky-element");
@@ -53806,6 +53834,42 @@ function formatFloat(value, decimals, round) {
   }
 
   return parseFloat(value.toFixed(decimals));
+}
+
+/***/ }),
+
+/***/ "./resources/js/src/app/helper/repeatAnimationFrame.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/src/app/helper/repeatAnimationFrame.js ***!
+  \*************************************************************/
+/*! exports provided: repeatAnimationFrame */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "repeatAnimationFrame", function() { return repeatAnimationFrame; });
+/**
+ * Request animation frames calling a handler function repeatingly until the returned callback is called.
+ *
+ * @param {function} handler    The handler to be executed when running each animation frame
+ * @returns {function(): void}  Callback function to stop execution of animation frames.
+ */
+function repeatAnimationFrame(handler) {
+  var currentAnimationFrame;
+
+  var next = function next() {
+    currentAnimationFrame = requestAnimationFrame(animationFrameHandler);
+  };
+
+  var animationFrameHandler = function animationFrameHandler() {
+    handler();
+    next();
+  };
+
+  next();
+  return function () {
+    cancelAnimationFrame(currentAnimationFrame);
+  };
 }
 
 /***/ }),
@@ -54554,7 +54618,13 @@ function CeresMain() {
       $("#searchBox").collapse("hide");
       $("#currencySelect").collapse("hide");
     });
-    fixPopperZIndexes();
+    fixPopperZIndexes(); // Emit event for Sticky Containers to update
+
+    $(".collapse").on("show.bs.collapse hide.bs.collapse", function () {
+      this.dispatchEvent(new CustomEvent("updateStickyContainer", {
+        bubbles: true
+      }));
+    });
   });
 }
 
@@ -55480,6 +55550,12 @@ function send(url) {
   config.headers = config.headers || {
     "Accept-Language": App.language
   };
+  var csrfToken = config.headers["X-CSRF-TOKEN"] || (document.getElementById("csrf-token") || {}).value;
+
+  if (csrfToken) {
+    config.headers["X-CSRF-TOKEN"] = csrfToken;
+  }
+
   data.templateType = App.templateType;
   config.data = data;
   var request = $.ajax(url, config).done(function (response) {
@@ -56268,8 +56344,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_19__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../store/index */ "./resources/js/src/app/store/index.js");
-/* harmony import */ var _helper_set__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../helper/set */ "./resources/js/src/app/helper/set.js");
+/* harmony import */ var _helper_set__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../helper/set */ "./resources/js/src/app/helper/set.js");
 
 
 
@@ -56303,7 +56378,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
 
-
 function _parseUrlParam(paramKey, paramValue, result) {
   if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isNullOrUndefined"])(result)) {
     result = {};
@@ -56321,7 +56395,7 @@ function _parseUrlParam(paramKey, paramValue, result) {
     keyList.push(match[2] || match[3]);
   }
 
-  return Object(_helper_set__WEBPACK_IMPORTED_MODULE_23__["set"])(result, keyList, paramValue);
+  return Object(_helper_set__WEBPACK_IMPORTED_MODULE_22__["set"])(result, keyList, paramValue);
 }
 
 function _createQueryString(params) {
@@ -56375,7 +56449,7 @@ function getUrlParams(urlParams) {
 }
 function setUrlParams(urlParams) {
   var pushState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  var pathName = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(_store_index__WEBPACK_IMPORTED_MODULE_22__["default"].state.navigation.currentCategory) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(_store_index__WEBPACK_IMPORTED_MODULE_22__["default"].state.navigation.currentCategory.url) ? _store_index__WEBPACK_IMPORTED_MODULE_22__["default"].state.navigation.currentCategory.url : window.location.pathname;
+  var pathName = window.location.pathname;
 
   var params = _createQueryString(urlParams);
 
@@ -58373,6 +58447,7 @@ var actions = {
           recipient: formOptions.recipient,
           subject: formOptions.subject || "",
           cc: formOptions.cc,
+          bcc: formOptions.bcc,
           replyTo: formOptions.replyTo,
           recaptchaToken: recaptchaResponse
         }).done(function (reponse) {

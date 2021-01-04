@@ -1,12 +1,17 @@
 <template>
     <div :class="{ 'has-crossprice': hasCrossPrice }">
-        <div class="crossprice" v-if="showCrossPrice && hasCrossPrice">
+        <div class="crossprice" v-if="showCrossPrice && hasCrossPrice" :class="{ 'is-special-offer': hasSpecialOffer }">
             <del class="text-muted small text-appearance">
-                {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
+                <template v-if="hasSpecialOffer">
+                    {{ currentVariation.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
+                </template>
+                <template v-else>
+                    {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
+                </template>
             </del>
         </div>
 
-        <span class="price h1">
+        <span class="price h1" :class="{ 'is-special-offer': hasSpecialOffer }">
             <span>
                 <template v-if="showDynamicPrice">
                     {{ $translate("Ceres::Template.dynamicVariationPrice",
@@ -69,9 +74,18 @@ export default {
         },
 
         hasCrossPrice() {
-            return !!this.currentVariation.prices.rrp &&
-                this.currentVariation.prices.rrp.unitPrice.value > 0 &&
+            const hasRrpPrice = !!this.currentVariation.prices.rrp &&
                 this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
+
+            const hasBeforePrice = this.hasSpecialOffer &&
+                !!this.currentVariation.prices.default &&
+                this.currentVariation.prices.default.unitPrice.value > this.currentVariation.prices.specialOffer.unitPrice.value;
+
+            return hasRrpPrice || hasBeforePrice;
+        },
+
+        hasSpecialOffer() {
+            return !!this.currentVariation.prices.specialOffer;
         },
 
         variationGraduatedPrice() {

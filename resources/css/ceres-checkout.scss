@@ -10171,6 +10171,10 @@ html.ie {
 
 .sticky-element {
     padding-bottom: .1px; // force disable margin collapse
+
+    p:empty {
+        margin-bottom: 0; // remove margin of empty paragraph for correct height detection
+    }
 }
 
 .sticky-element.is-sticky {
@@ -13289,6 +13293,11 @@ html.ie {
     .widget-inner {
         padding: 1rem 1.5rem;
     }
+
+    // images from data-fields
+    img {
+        max-width: 100%;
+    }
 }
 
 .widget-title-bar {
@@ -14578,27 +14587,6 @@ header .widget {
         width: 300px;
     }
 
-    .item-name {
-        display: -webkit-box; // stylelint-disable-line value-no-vendor-prefix
-        max-height: 3em;
-        margin-bottom: .25rem;
-        overflow: hidden;
-        font-weight: 700;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical; // stylelint-disable-line property-no-vendor-prefix
-
-        &::after {
-            position: absolute;
-            right: .25em;
-            bottom: 0;
-            display: inline-block;
-            height: 50%;
-            content: "…";
-            background-color: $white;
-        }
-    }
-
     .item-total-price {
         font-size: 1.5em;
         font-weight: 700;
@@ -15252,6 +15240,12 @@ header .widget {
 
     .rebate-hint {
         color: $gray-600;
+    }
+}
+
+.confirmation-order-list {
+    .item-name {
+        max-height: none !important; // stylelint-disable-line declaration-no-important
     }
 }
 

@@ -1,5 +1,81 @@
 # Release Notes for Ceres
 
+## v5.0.17 (2020-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.16...5.0.17" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Item lists that have been set up via the Ceres configuration and have been integrated into the online shop via layout containers are now limited to a maximum of 50 items.
+
+### Fixed 
+
+- If the image uploaded as an order proporty exceeded the allowed file size, no error message was displayed. This has been fixed. The text of the corresponding error message can be customised in the entry **errorPostTooLarge** in the multilingualism interface. 
+- The alternative text of images used in the background image widget now works as intended for images loaded from the webspace. 
+- You can now use the translation entry **basketRebateSign** to display a sign, such as plus/minus, before the discount value.
+- The customised entries of the navigation tree widget that included umlauts were not displayed correctly. This behaviour has been fixed.
+- Due to an error, the contact form did not consider the input field for blind copies. This has been fixed.
+- The missing translations of the lightbox have been added.
+- The Ceres assistent now directs the user to the plugin set instead of the setup assistent if a payment method has been installed but is still inactive.
+- Item lists no longer extend beyond the confines of the page.
+
+## v5.0.16 (2020-12-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.15...5.0.16" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- In order to display text, such as "instead of", next to the strikethrough price for live shopping offers on the single item view, the translation key **crossPriceSpecialOffer** has to be filled in in the multilingualism interface.
+
+### Added 
+
+- The newsletter widget now uses Google reCAPTCHA.
+
+### Fixed
+
+- If the shopping cart contained multiple customisable gift cards, only of these could be edited. This has been fixed.
+- No link text was stored for the homepage symbol in the breadcrumb widget. The link text can now be entered for the translation key **headerBreadcrumbHome** in the multilingualism interface.
+- For live shopping offers, the single item view now uses the normal sales prices as the strikethrough price.
+- Under certain circumstances, the order confirmation could contain rounding errors. This behaviour has been fixed.
+- Changes to the height of the sticky container widget were only effected by changing the window size or scrolling the page. This behaviour has been fixed.
+- Under certain circumstances, icons could not be displayed in the online shop. This has been fixed.
+- The Twig function `queryString` now uses query parameters in the format of the RFC 3986 standard.
+- Due to an error, the correct URL was not always stored for the displayed image of a live shopping widget. This has been fixed.
+- Due to an error, refreshing the URL parameters sometimes did not set the correct URL. This has been fixed.
+- Under certain circumstances that involved third-party plugins, the CSRF token was not sent correctly. This has been fixed.
+- A group for payment provider cookies has been added to the consent tool.
+- The overview of the assistant configurations now also shows the entries for inactive plugin sets.
+- In a multilingual online store, guest accounts were redirected to the homepage in the default language if they accessed the checkout without items in the shopping cart. Now, guest accounts are redirected to the homepage in the selected language.
+- The setting **CSS class** of the widget privacy policy checkox did not work as intended. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.16 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/myAccount/EditCouponOverlay.vue](https://github.com/plentymarkets/plugin-ceres/pull/2537/files#diff-3385c5d0e4771710be00b0a70811ac5b8018e23b7da889cb9923959dbb8a9a29)
+- [resources/views/Widgets/Header/BreadcrumbWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2528/files#diff-130e6f2327939a6da964755351a1ae84298251d3c24de27e53214e91775dca4e)
+- [resources/js/src/app/components/item/ItemPrice.vue](https://github.com/plentymarkets/plugin-ceres/pull/2533/files#diff-eed3a26bc24bb9bbfd91d04e54f17d682022d8a9b1918fe760fe93d366beed22)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2521/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2521/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+- [resources/views/Widgets/Form/AcceptPrivacyPolicyWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2548/files#diff-accd1ccbc275c3ac061bf4ac777378fe335097303db30e1d9594c514d7c143b4)
+
+## v5.0.15 (2020-11-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.14...5.0.15" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The contents in the variation selection are now displayed in an ordered fashion.
+
+### Fixed
+
+- The scrolling performance for widgets in the header has been improved.
+- If the option **Medium** or **Large** had been selected for the **Size** setting of the additional information widget, the corresponding widget overlay could no longer be closed. This has been fixed.
+- Due to an error, the default header was sometimes displayed on item category pages instead of the ShopBuilder header. This has been fixed.
+- Attributes of unavailable variations are now displayed as greyed out and struck through in the variation selection, analogously to attributes of non existent combinations.
+- A wrong value was used for the third priority of the recommended sorting for the search results page. This behaviour has been fixed.
+- Item names on the order confirmation were limited to two lines, which could lead to the truncation of item names. This has been fixed.
+- Due to an error, the order quantity was not correctly updated when a variation had been changed. This has been fixed.
+- Percentage surcharges for order characteristics did not consider graduated prices correctly. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.15 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/item/VariationSelect.vue](https://github.com/plentymarkets/plugin-ceres/pull/2432/files#diff-3bf7e50898b2d79d717300fe7c276487aea49cb917f014bf3f8ea27c6b392149)
+
 ## v5.0.14 (2020-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.13...5.0.14" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### ToDo

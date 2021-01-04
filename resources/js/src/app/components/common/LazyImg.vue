@@ -1,5 +1,5 @@
 <template>
-    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass">
+    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass" :data-alt="$attrs.alt">
         <source :srcset="imageUrl" :type="mimeType">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>

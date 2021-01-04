@@ -10171,6 +10171,10 @@ html.ie {
 
 .sticky-element {
     padding-bottom: .1px; // force disable margin collapse
+
+    p:empty {
+        margin-bottom: 0; // remove margin of empty paragraph for correct height detection
+    }
 }
 
 .sticky-element.is-sticky {
@@ -13288,6 +13292,11 @@ html.ie {
 
     .widget-inner {
         padding: 1rem 1.5rem;
+    }
+
+    // images from data-fields
+    img {
+        max-width: 100%;
     }
 }
 

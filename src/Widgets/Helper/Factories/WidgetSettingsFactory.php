@@ -34,7 +34,7 @@ class WidgetSettingsFactory
 {
     private $settings = [];
     private $pointer = null;
-    
+
     /**
      * Create a new factory instance and initialize values from given widget class.
      *
@@ -50,7 +50,7 @@ class WidgetSettingsFactory
         }
         return self::create($parentSettings);
     }
-    
+
     /**
      * Create a new factory instance with initial values.
      *
@@ -68,10 +68,10 @@ class WidgetSettingsFactory
                 $instance->settings[$key] = BaseSettingFactory::create($settingData);
             }
         }
-        
+
         return $instance;
     }
-    
+
     /**
      * Create a generic widget settings entry.
      *
@@ -86,7 +86,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a container entry which may contain nested settings.
      * @param string $key
@@ -99,7 +99,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a vertical container
      *
@@ -114,7 +114,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a horizontal container
      *
@@ -129,7 +129,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a text input setting
      *
@@ -143,7 +143,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a checkbox setting
      *
@@ -157,7 +157,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a color setting
      *
@@ -184,7 +184,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a file picker setting
      *
@@ -198,7 +198,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a textarea input setting
      *
@@ -212,7 +212,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * @param string $key
      * @return BaseSettingFactory
@@ -224,7 +224,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a double input setting
      *
@@ -238,7 +238,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a dropdown setting
      *
@@ -252,7 +252,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a dropdown setting
      *
@@ -266,7 +266,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a category select setting
      *
@@ -280,7 +280,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * @param string $key
      * @return BaseSettingFactory
@@ -292,7 +292,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a slider setting
      *
@@ -306,7 +306,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a checkbox group setting
      *
@@ -320,7 +320,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a checkbox group setting
      *
@@ -334,7 +334,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a url picker
      *
@@ -348,7 +348,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * @param string $key
      * @return EditorSettingFactory
@@ -361,7 +361,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * @param string $key
      * @return EditorSettingFactory
@@ -374,7 +374,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create an UUID setting
      *
@@ -388,7 +388,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * Create a manufacturer picker
      *
@@ -402,7 +402,7 @@ class WidgetSettingsFactory
         $this->addSetting($key, $setting);
         return $setting;
     }
-    
+
     /**
      * @return CustomClassSettingFactory
      */
@@ -413,7 +413,7 @@ class WidgetSettingsFactory
         $this->addSetting('customClass', $setting);
         return $setting;
     }
-    
+
     /**
      * @param $optional
      * @return AppearanceSettingFactory
@@ -425,7 +425,7 @@ class WidgetSettingsFactory
         $this->addSetting('appearance', $setting);
         return $setting;
     }
-    
+
     /**
      * @return IconSettingFactory
      */
@@ -436,7 +436,7 @@ class WidgetSettingsFactory
         $this->addSetting('icon', $setting);
         return $setting;
     }
-    
+
     /**
      * @param $usePadding
      * @param $useMargin
@@ -449,7 +449,7 @@ class WidgetSettingsFactory
         $this->addSetting('spacing', $setting);
         return $setting;
     }
-    
+
     /**
      * @return HeightSettingFactory
      */
@@ -458,10 +458,10 @@ class WidgetSettingsFactory
         /** @var HeightSettingFactory $setting */
         $setting = pluginApp(HeightSettingFactory::class);
         $this->addSetting('height', $setting);
-        
+
         return $setting;
     }
-    
+
     /**
      * @return ButtonSizeSettingFactory
      */
@@ -472,7 +472,7 @@ class WidgetSettingsFactory
         $this->addSetting('buttonSize', $setting);
         return $setting;
     }
-    
+
     /**
      * @return AlignmentSettingFactory
      */
@@ -483,7 +483,7 @@ class WidgetSettingsFactory
         $this->addSetting('alignment', $setting);
         return $setting;
     }
-    
+
     public function toArray()
     {
         $result = [];
@@ -496,7 +496,7 @@ class WidgetSettingsFactory
         }
         return $result;
     }
-    
+
     /**
      * Set a settings key to insert new settings after.
      * The key might be a path to nested setting entries.
@@ -517,7 +517,7 @@ class WidgetSettingsFactory
                 // continue resolving path in child factory instance
                 return $setting->children->withPointer(implode(".", $keyPath));
             }
-            
+
             // key not found or references setting has no nested children => reset pointer
             $this->pointer = -1;
         } else {
@@ -529,21 +529,21 @@ class WidgetSettingsFactory
                 $this->pointer = -1;
             }
         }
-        
+
         // pointer has
         return $this;
     }
-    
+
     private function addSetting($key, $setting)
     {
         if (is_null($this->pointer) || $this->pointer < 0) {
             $this->pointer = count($this->settings);
         }
-        
+
         $settings = array_slice($this->settings, 0, $this->pointer, true)
             + [$key => $setting]
             + array_slice($this->settings, $this->pointer, null, true);
-        
+
         $this->pointer++;
         $this->settings = $settings;
     }

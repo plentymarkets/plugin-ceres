@@ -318,11 +318,11 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary btn-appearance btn-block",
+            staticClass: "btn btn-primary btn-appearance btn-block coupon-edit",
             attrs: {
               type: "button",
               "data-toggle": "modal",
-              "data-target": "#edit-coupon-overlay"
+              "data-target": "#edit-coupon-overlay-" + _vm._uid
             }
           },
           [
@@ -351,7 +351,8 @@ var render = function() {
                     expression: "!isPaid"
                   }
                 ],
-                staticClass: "btn btn-primary btn-appearance btn-block",
+                staticClass:
+                  "btn btn-primary btn-appearance btn-block coupon-create",
                 class: { disabled: _vm.isLoading || !_vm.isPaid },
                 attrs: {
                   type: "button",
@@ -383,7 +384,8 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "btn btn-primary btn-appearance btn-block",
+                staticClass:
+                  "btn btn-primary btn-appearance btn-block coupon-download",
                 attrs: {
                   href: _vm.pdfLink,
                   target: "_blank",
@@ -424,7 +426,11 @@ var render = function() {
           {
             ref: "editCouponOverlay",
             staticClass: "modal fade",
-            attrs: { id: "edit-coupon-overlay", tabindex: "-1", role: "dialog" }
+            attrs: {
+              id: "edit-coupon-overlay-" + _vm._uid,
+              tabindex: "-1",
+              role: "dialog"
+            }
           },
           [
             _c(
