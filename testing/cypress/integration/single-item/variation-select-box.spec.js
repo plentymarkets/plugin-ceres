@@ -118,7 +118,7 @@ context("Variation Select - Box", () =>
         isSaleable();
     });
 
-    it.only("should not be possible to buy variation with color black and basic box", () =>
+    it("should not be possible to buy variation with color black and basic box", () =>
     {
         cy.visit("/variantenauswahl/zwei-attribute-dropdown-box-nicht-gruppiert_143_1118/");
 
