@@ -65,7 +65,8 @@ context("Single Item", () =>
     it("should select label", () =>
     {
         cy.getByTestingAttr("order-property-next-slide").click().click();
-        cy.getByTestingAttr("order-property-input-checkbox").click();
+        // there are 4 elements whats the best way to identify?
+        cy.getByTestingAttr("order-property-input-checkbox").last().click();
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Label ohne Aufpreis");
@@ -88,8 +89,7 @@ context("Single Item", () =>
     it("should fill selection input", () =>
     {
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
-        cy.getByTestingAttr("order-property-selection").click();
-        cy.getByTestingAttr("order-property-selection-option").click();
+        cy.getByTestingAttr("order-property-selection").first().select("Option 1");
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Auswahl");
@@ -101,7 +101,7 @@ context("Single Item", () =>
         const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
-        cy.getByTestingAttr("order-property-input-text").type(value);
+        cy.getByTestingAttr("order-property-input-text").first().type(value);
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Text");
@@ -113,11 +113,11 @@ context("Single Item", () =>
         const value = 1.23;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
-        cy.getByTestingAttr("order-property-input-float").type(value);
+        cy.getByTestingAttr("order-property-input-float").first().type(value);
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Kommazahl");
-        cy.get("#add-item-to-basket-overlay").should("contain", value);
+        cy.get("#add-item-to-basket-overlay").should("contain", "1,23");
     });
 
     it("should fill int input", () =>
@@ -125,7 +125,7 @@ context("Single Item", () =>
         const value = 123;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
-        cy.getByTestingAttr("order-property-input-int").type(value);
+        cy.getByTestingAttr("order-property-input-int").first().type(value);
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Ganze Zahl");
@@ -151,8 +151,7 @@ context("Single Item", () =>
     it("should fill selection input with extra costs", () =>
     {
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
-        cy.getByTestingAttr("order-property-selection").click();
-        cy.getByTestingAttr("order-property-selection-option").click();
+        cy.getByTestingAttr("order-property-selection").last().select("Option 1");
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Auswahl +5€ (inkl. 5,00 EUR)");
@@ -164,7 +163,7 @@ context("Single Item", () =>
         const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
-        cy.getByTestingAttr("order-property-input-text").type(value);
+        cy.getByTestingAttr("order-property-input-text").last().type(value);
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Text +5€ (inkl. 5,00 EUR)");
@@ -176,11 +175,12 @@ context("Single Item", () =>
         const value = 1.23;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
-        cy.getByTestingAttr("order-property-input-float").type(value);
+        cy.getByTestingAttr("order-property-input-float").last().type(value);
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Kommazahl +5€ (inkl. 5,00 EUR)");
-        cy.get("#add-item-to-basket-overlay").should("contain", value);
+        cy.get("#add-item-to-basket-overlay").should("contain", "1,23");
+
     });
 
     it("should fill int input with extra costs", () =>
@@ -188,7 +188,7 @@ context("Single Item", () =>
         const value = 123;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
-        cy.getByTestingAttr("order-property-input-int").type(value);
+        cy.getByTestingAttr("order-property-input-int").last().type(value);
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Ganze Zahl +5€");
