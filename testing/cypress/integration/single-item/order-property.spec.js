@@ -73,7 +73,16 @@ context("Single Item", () =>
 
     it("should fill file upload input", () =>
     {
-        // TODO
+        cy.getByTestingAttr("order-property-next-slide").click().click().click();
+
+        cy.fixture("test.png").then(fileContent =>
+        {
+            cy.getByTestingAttr("order-property-input-file").attachFile({
+                fileContent: fileContent.toString(),
+                fileName: "test.png",
+                mimeType: "image/png"
+            });
+        });
     });
 
     it("should fill selection input", () =>
@@ -125,7 +134,18 @@ context("Single Item", () =>
 
     it("should fill file upload input with extra costs", () =>
     {
-        // TODO
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+
+        cy.fixture("test.png").then(fileContent =>
+        {
+            cy.getByTestingAttr("order-property-input-file").last().attachFile({
+                fileContent: fileContent.toString(),
+                fileName: "test.png",
+                mimeType: "image/png"
+            });
+        });
+
+        cy.get(".price").should("contain", "95");
     });
 
     it("should fill selection input with extra costs", () =>
