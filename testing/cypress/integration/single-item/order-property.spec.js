@@ -166,7 +166,7 @@ context("Single Item", () =>
         cy.getByTestingAttr("order-property-input-text").last().type(value);
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
-        cy.get("#add-item-to-basket-overlay").should("contain", "Text +5€ (inkl. 5,00 EUR)");
+        cy.get("#add-item-to-basket-overlay").should("contain", "Text +5€");
         cy.get("#add-item-to-basket-overlay").should("contain", value);
     });
 
@@ -176,9 +176,8 @@ context("Single Item", () =>
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
         cy.getByTestingAttr("order-property-input-float").last().type(value);
-
         cy.getByTestingAttr("single-add-to-basket-button").click();
-        cy.get("#add-item-to-basket-overlay").should("contain", "Kommazahl +5€ (inkl. 5,00 EUR)");
+        cy.get("#add-item-to-basket-overlay").should("contain", "Kommazahl +5€");
         cy.get("#add-item-to-basket-overlay").should("contain", "1,23");
 
     });
