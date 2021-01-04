@@ -116,6 +116,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -374,6 +384,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -805,7 +824,10 @@ var render = function() {
                       "btn-primary": _vm.activeSlide > 0,
                       "btn-secondary disabled": _vm.activeSlide === 0
                     },
-                    attrs: { tabindex: "0" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-testing": "order-property-previous-slide"
+                    },
                     on: {
                       click: function($event) {
                         return _vm.slideTo(_vm.activeSlide - 1)
@@ -861,7 +883,10 @@ var render = function() {
                         _vm.activeSlide >=
                         _vm.sortedGroupedProperties.length - 1
                     },
-                    attrs: { tabindex: "0" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-testing": "order-property-next-slide"
+                    },
                     on: {
                       click: function($event) {
                         return _vm.slideTo(_vm.activeSlide + 1)
@@ -1001,7 +1026,8 @@ var render = function() {
               attrs: {
                 type: "text",
                 "data-toggle": "tooltip",
-                title: _vm.property.names.description
+                title: _vm.property.names.description,
+                "data-testing": "order-property-input-" + _vm.inputType
               },
               domProps: { value: _vm.inputValue },
               on: {
@@ -1042,7 +1068,8 @@ var render = function() {
                 attrs: {
                   type: "checkbox",
                   name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                  id: "check" + _vm._uid
+                  id: "check" + _vm._uid,
+                  "data-testing": "order-property-input-checkbox"
                 },
                 domProps: {
                   value: _vm.property.id,
@@ -1059,7 +1086,8 @@ var render = function() {
                 attrs: {
                   type: "radio",
                   name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                  id: "check" + _vm._uid
+                  id: "check" + _vm._uid,
+                  "data-testing": "order-property-input-radio"
                 },
                 domProps: {
                   value: _vm.property.id,
@@ -1128,6 +1156,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "custom-select",
+                    attrs: { "data-testing": "order-property-selection" },
                     on: {
                       change: [
                         function($event) {
@@ -1169,6 +1198,9 @@ var render = function() {
                         "option",
                         {
                           key: id,
+                          attrs: {
+                            "data-testing": "order-property-selection-option"
+                          },
                           domProps: {
                             selected: _vm.property.id === id,
                             value: id
@@ -1317,7 +1349,8 @@ var render = function() {
                   disabled: _vm.waiting,
                   type: "file",
                   size: "50",
-                  accept: "image/*"
+                  accept: "image/*",
+                  "data-testing": "order-property-input-file"
                 },
                 on: {
                   change: function($event) {

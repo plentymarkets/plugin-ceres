@@ -13293,6 +13293,11 @@ html.ie {
     .widget-inner {
         padding: 1rem 1.5rem;
     }
+
+    // images from data-fields
+    img {
+        max-width: 100%;
+    }
 }
 
 .widget-title-bar {

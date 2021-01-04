@@ -14,7 +14,8 @@
         :has-price="currentVariation | hasItemDefaultPrice"
         :button-size="buttonSize"
         :padding-classes="paddingClasses"
-        :padding-inline-styles="paddingStyles">
+        :padding-inline-styles="paddingStyles"
+        data-testing="single-add-to-basket-button">
     </add-to-basket>
 </template>
 
