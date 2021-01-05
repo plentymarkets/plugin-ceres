@@ -2,11 +2,12 @@
 context("prices", () =>
 {
 
-    const url = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
+    const url1 = "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/";
+    const url2 = "/testartikel/merkmale_145_1134/";
 
     it("should change the item price for b2b class", () =>
     {
-        cy.visit(url);
+        cy.visit(url1);
         cy.get(".price").should("contain", "0,70");
         cy.get(".crossprice").should("contain", "0,80");
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
@@ -19,7 +20,7 @@ context("prices", () =>
     it("should change graduated prices for b2b customer", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
-        cy.visit(url);
+        cy.visit(url1);
         cy.get(".graduated-prices-table").children().first().children().last().should("contain", "0,38");
         cy.get(".graduated-prices-table").children().last().children().last().should("contain", "0,08");
     });
@@ -27,7 +28,7 @@ context("prices", () =>
     it("should display netto price for b2b class", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
-        cy.visit(url);
+        cy.visit(url1);
         cy.get(".price").should("contain", "0,53");
         cy.get(".crossprice").should("contain", "0,61");
     });
@@ -35,7 +36,7 @@ context("prices", () =>
     it("should display brutto price for b2c class", () =>
     {
         cy.login("stefan.standard@plentye2etest.de", "Testuser1234");
-        cy.visit(url);
+        cy.visit(url1);
         cy.get(".price").should("contain", "0,70");
         cy.get(".crossprice").should("contain", "0,80");
     });
@@ -96,7 +97,7 @@ context("prices", () =>
 
     it("should add correct price for radio button order property", () =>
     {
-        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.visit(url2);
         cy.getByTestingAttr("order-property-input-radio").eq(0).click();
         cy.get(".price").should("contain", "90,00");
         cy.getByTestingAttr("order-property-input-radio").eq(1).click();
@@ -107,7 +108,7 @@ context("prices", () =>
 
     it("should add correct price for multi checkbox button order property", () =>
     {
-        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.visit(url2);
         cy.getByTestingAttr("order-property-next-slide").click();
         cy.getByTestingAttr("order-property-input-checkbox").eq(0).click();
         cy.getByTestingAttr("order-property-input-checkbox").eq(1).click();
@@ -120,7 +121,7 @@ context("prices", () =>
 
     it("should add correct price for file upload order property", () =>
     {
-        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.visit(url2);
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
         cy.fixture("test.png").then(fileContent =>
         {
@@ -135,7 +136,7 @@ context("prices", () =>
 
     it("should add correct price for selectbox order property", () =>
     {
-        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.visit(url2);
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
         cy.getByTestingAttr("order-property-selection").eq(1).select("Option 1");
         cy.getByTestingAttr("order-property-selection").eq(1).should("contain", "Option 1");
@@ -144,7 +145,7 @@ context("prices", () =>
 
     it("should add correct price for text order property", () =>
     {
-        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.visit(url2);
         const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
@@ -154,7 +155,7 @@ context("prices", () =>
 
     it("should add correct price for integer order property", () =>
     {
-        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.visit(url2);
         const value = 123;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
@@ -164,7 +165,7 @@ context("prices", () =>
 
     it("should add correct price for float order property", () =>
     {
-        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.visit(url2);
         const value = 1.23;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
