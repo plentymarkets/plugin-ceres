@@ -13,6 +13,7 @@ import TestApp from "./app/TestApp.vue";
 import LazyLoad from "./app/components/common/LazyLoad.vue";
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
+import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
 
 import consents from "./app/store/modules/ConsentModule";
 import navigation from "./app/store/modules/NavigationModule";
@@ -27,6 +28,7 @@ import "./app/directives/basket/basketItemQuantity";
 import "./app/directives/basket/basketItemSum";
 import "./app/directives/basket/toggleBasketPreview";
 import "./app/directives/navigation/openMobileNavigation";
+import "./app/directives/pageDesign/scrollToTop";
 
 Vue.component("test-app", TestApp);
 
@@ -37,6 +39,7 @@ export function createApp(options)
     Vue.component("user-login-handler", UserLoginHandler);
     Vue.component("lazy-img", LazyImg);
     Vue.component("cookie-bar", CookieBar);
+    Vue.component("privacy-settings", PrivacySettings);
     Vue.component("mobile-navigation", MobileNavigation);
     Vue.component("loading-animation", LoadingAnimation);
     Vue.component("recaptcha", ReCaptcha);

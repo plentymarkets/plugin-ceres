@@ -20,7 +20,10 @@ process.stdin.on("readable", () =>
 process.stdin.on("end", () =>
 {
     const virtualDom = new JSDOM(
-        domInline.toString()
+        domInline.toString(),
+        {
+            runScripts: "dangerously"
+        }
     );
 
     global.document = virtualDom.window.document;
