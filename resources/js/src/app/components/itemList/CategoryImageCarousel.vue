@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import "owl.carousel";
 
 export default {
 

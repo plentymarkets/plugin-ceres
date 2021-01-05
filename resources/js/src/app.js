@@ -18,6 +18,10 @@ import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
 import BasketPreview from "./app/components/basket/BasketPreview.vue";
 import BasketTotals from "./app/components/basket/BasketTotals.vue";
 import BasketList from "./app/components/basket/list/BasketList.vue";
+import Intersect from "./app/components/common/Intersect.vue";
+import Carousel from "./app/components/pageDesign/Carousel.vue";
+import CategoryItem from "./app/components/itemList/CategoryItem.vue";
+import AddToBasket from "./app/components/basket/AddToBasket.vue";
 
 
 import consents from "./app/store/modules/ConsentModule";
@@ -39,7 +43,29 @@ import "./app/directives/navigation/openMobileNavigation";
 import "./app/directives/pageDesign/scrollToTop";
 import "./app/directives/helper/waitingAnimationInfinite";
 
+import "./app/filters/ageRestriction.filter";
+import "./app/filters/arrayFirst.filter";
+import "./app/filters/attachText.filter";
 import "./app/filters/currency.filter";
+import "./app/filters/date.filter";
+import "./app/filters/fileName.filter";
+import "./app/filters/fileUploadPath.filter";
+import "./app/filters/graduatedPrice.filter";
+import "./app/filters/hasItemDefaultPrice.filter";
+import "./app/filters/inputUnit.filter";
+import "./app/filters/itemBundleName.filter";
+import "./app/filters/itemCrossPrice.filter";
+import "./app/filters/itemImage.filter";
+import "./app/filters/itemImageAlternativeText.filter";
+import "./app/filters/itemImages.filter";
+import "./app/filters/itemName.filter";
+import "./app/filters/itemPrice.filter";
+import "./app/filters/itemUrl.filter";
+import "./app/filters/numberFormat.filter";
+import "./app/filters/propertySurcharge.filter";
+import "./app/filters/propertyFileUrl.filter";
+import "./app/filters/translate.filter";
+import "./app/filters/truncate.filter";
 
 Vue.component("test-app", TestApp);
 
@@ -62,6 +88,10 @@ export function createApp(options)
     Vue.component("basket-preview", BasketPreview);
     Vue.component("basket-totals", BasketTotals);
     Vue.component("basket-list", BasketList);
+    Vue.component("intersect", Intersect);
+    Vue.component("carousel", Carousel);
+    Vue.component("category-item", CategoryItem);
+    Vue.component("add-to-basket", AddToBasket);
 
     window.ceresTranslate = TranslationService.translate;
 

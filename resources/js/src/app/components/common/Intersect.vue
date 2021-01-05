@@ -17,8 +17,8 @@
         data()
         {
             return {
-                isVisible: false,
-                mayObserve: false
+                isVisible: false
+                // mayObserve: false
             }
         },
 
@@ -49,20 +49,22 @@
             if(FEATURE_ENABLED && !App.isShopBuilder)
             {
                 this.$nextTick(() => {
-                    this.mayObserve = true;
+                    // this.mayObserve = true;
+                    this.observer.observe(this.$el);
                 });
             }
 
         },
 
+        /*
         updated()
         {
             if(FEATURE_ENABLED && this.mayObserve && !App.isShopBuilder)
             {
                 this.mayObserve = false;
-                this.observer.observe(this.$el);
             }
         },
+        */
 
         destroyed()
         {
@@ -74,7 +76,7 @@
 
         render()
         {
-            if( this.isVisible)
+            if( this.isVisible && !this.$isSSR )
             {
                 return this.$slots.default ? this.$slots.default : null;
             }

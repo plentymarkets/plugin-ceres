@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import "owl.carousel";
 
 export default {
     components: {
@@ -46,10 +45,6 @@ export default {
 
     mounted()
     {
-        this.$nextTick(() =>
-        {
-            this.initializeCarousel();
-        });
     },
 
     updated()

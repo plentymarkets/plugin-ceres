@@ -44,14 +44,13 @@
 <div id="vue-app" class="app">
     <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
 
-    {% include getPartial('header') %}
+{#    {% include getPartial('header') %}#}
 
     <div id="page-body" class="main">
         {% block PageBody %}{% endblock %}
     </div>
-    <test-app></test-app>
 
-    {# {% include getPartial('footer') %} #}
+    {% include getPartial('footer') %}
 </div>
 
 <script>
@@ -87,6 +86,8 @@
 
 {{ Translations.add( "Ceres", "Template" ) }}
 
+{{ get_json_data() }}
+
 <script type="x-template" id="ssr-script-container"></script>
 <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client.js?v={{ buildHash }}"></script>
 
@@ -99,6 +100,14 @@
 
     {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
 </script>
+
+{{ get_filtered_tags() }}
+
+{{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
+
+{% if not services.template.shouldBeCached() %}
+    <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+{% endif %}
 
 </body>
 </html>
