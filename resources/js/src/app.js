@@ -22,7 +22,9 @@ import Intersect from "./app/components/common/Intersect.vue";
 import Carousel from "./app/components/pageDesign/Carousel.vue";
 import CategoryItem from "./app/components/itemList/CategoryItem.vue";
 import AddToBasket from "./app/components/basket/AddToBasket.vue";
-
+import Login from "./app/components/customer/login/Login.vue";
+import Popper from "./app/components/pageDesign/Popper.vue";
+import Registration from "./app/components/customer/Registration.vue";
 
 import consents from "./app/store/modules/ConsentModule";
 import navigation from "./app/store/modules/NavigationModule";
@@ -92,6 +94,9 @@ export function createApp(options)
     Vue.component("carousel", Carousel);
     Vue.component("category-item", CategoryItem);
     Vue.component("add-to-basket", AddToBasket);
+    Vue.component("login", Login);
+    Vue.component("popper", Popper);
+    Vue.component("registration", Registration);
 
     window.ceresTranslate = TranslationService.translate;
 
