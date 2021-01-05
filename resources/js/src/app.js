@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+
 import Notifications from "./app/components/pageDesign/Notifications.vue";
 import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
 import LazyImg from "./app/components/common/LazyImg.vue";
@@ -14,12 +15,19 @@ import LazyLoad from "./app/components/common/LazyLoad.vue";
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
 import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
+import BasketPreview from "./app/components/basket/BasketPreview.vue";
+import BasketTotals from "./app/components/basket/BasketTotals.vue";
+import BasketList from "./app/components/basket/list/BasketList.vue";
+
 
 import consents from "./app/store/modules/ConsentModule";
 import navigation from "./app/store/modules/NavigationModule";
 import user from "./app/store/modules/UserModule";
 import lazyComponent from "./app/store/modules/LazyComponentModule";
 import wishList from "./app/store/modules/WishListModule";
+import itemList from "./app/store/modules/ItemListModule";
+import itemSearch from "./app/store/modules/ItemSearchModule";
+import localization from "./app/store/modules/LocalizationModule";
 
 
 import TranslationService from "./app/services/TranslationService";
@@ -29,6 +37,9 @@ import "./app/directives/basket/basketItemSum";
 import "./app/directives/basket/toggleBasketPreview";
 import "./app/directives/navigation/openMobileNavigation";
 import "./app/directives/pageDesign/scrollToTop";
+import "./app/directives/helper/waitingAnimationInfinite";
+
+import "./app/filters/currency.filter";
 
 Vue.component("test-app", TestApp);
 
@@ -48,7 +59,9 @@ export function createApp(options)
     Vue.component("lazy-load", LazyLoad);
     Vue.component("item-search", ItemSearch);
     Vue.component("shipping-country-select", ShippingCountrySelect);
-
+    Vue.component("basket-preview", BasketPreview);
+    Vue.component("basket-totals", BasketTotals);
+    Vue.component("basket-list", BasketList);
 
     window.ceresTranslate = TranslationService.translate;
 
@@ -73,6 +86,9 @@ export function createApp(options)
                 consents,
                 user,
                 wishList,
+                itemList,
+                itemSearch,
+                localization,
                 lazyComponent
             }
         }),
