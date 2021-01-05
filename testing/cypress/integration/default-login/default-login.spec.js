@@ -36,7 +36,7 @@ context("Default Login Page", () =>
         cy.getByTestingAttr("email-login").type("ceres-testing@opentrash.com", { delay: 30 });
         cy.getByTestingAttr("password-login").type("8#TfhMB@QVd668T", { delay: 30 });
 
-        cy.server().route("POST", "/rest/io/customer/login").as("loginUser");
+        cy.server().route("POST", "/rest/io/customer/login/").as("loginUser");
 
         cy.getByTestingAttr("submit-login").click();
 

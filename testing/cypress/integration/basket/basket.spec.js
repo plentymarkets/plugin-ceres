@@ -9,7 +9,7 @@ context("Basket", () =>
     beforeEach(() =>
     {
         cy.addBasketItem(1014);
-        cy.visit("/warenkorb");
+        cy.visit("/warenkorb/");
         cy.location("pathname").should("eq", "/warenkorb/");
     });
 

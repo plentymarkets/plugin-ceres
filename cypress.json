@@ -7,5 +7,6 @@
     "screenshotsFolder": "testing/cypress/screenshots",
     "videosFolder": "testing/cypress/videos",
     "projectId": "a1vvhz",
-    "videoUploadOnPasses": false
+    "videoUploadOnPasses": false,
+    "defaultCommandTimeout": 10000
 }

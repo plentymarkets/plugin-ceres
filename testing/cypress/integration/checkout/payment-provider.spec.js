@@ -174,7 +174,7 @@ context("Checkout payment provider", () =>
     {
         cy.login();
         cy.addBasketItem(1014);
-        cy.visit("/checkout");
+        cy.visit("/checkout/");
         cy.location("pathname").should("eq", "/checkout/");
     }
 
@@ -182,7 +182,7 @@ context("Checkout payment provider", () =>
     {
         cy.loginAsGuest();
         cy.addBasketItem(1014);
-        cy.visit("/checkout");
+        cy.visit("/checkout/");
         cy.location("pathname").should("eq", "/checkout/");
         addAddress();
     }
