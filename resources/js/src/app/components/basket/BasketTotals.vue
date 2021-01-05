@@ -238,7 +238,7 @@ export default {
 
             for (const basketItem of this.basketItems) {
                 const matchingProperties = basketItem.variation.data.properties.filter(property =>
-                    property.property.isShownAsAdditionalCosts && !property.property.isOrderProperty
+                    property.property.isShownAsAdditionalCosts && property.property.isOderProperty === false
                 );
 
                 for (const property of matchingProperties) {
