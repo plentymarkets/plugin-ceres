@@ -207,8 +207,8 @@ context("Single Item", () =>
     {
         cy.visit("/en/testarticle/properties_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
-        cy.getByTestingAttr("order-property-selection").eq(0).select("Option One");
-        cy.getByTestingAttr("order-property-selection").eq(0).should("contain", "Option One");
+        cy.getByTestingAttr("order-property-selection").eq(0).select("Option one");
+        cy.getByTestingAttr("order-property-selection").eq(0).should("contain", "Option one");
 
     });
 
