@@ -225,9 +225,4 @@ context("Single Item", () =>
         cy.visit("/en/testarticle/properties_145_1134/");
         cy.getByTestingAttr("order-property-input-radio").eq(0).parent().find("label").should("contain", "Single choice +€0");
     });
-
-    function checkPrices(surcharge)
-    {
-        // TODO implement price check on single item and in basket
-    }
 });
