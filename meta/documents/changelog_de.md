@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v5.0.19 (2021-01-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.18...5.0.19" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden auch Bestellmerkmale mit der Option **Als Zusatzkosten darstellen** in den Summen im Warenkorb und auf der Bestellbestätigung angezeigt. Dies wurde behoben.
+
 ## v5.0.18 (2021-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.17...5.0.18" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt 
