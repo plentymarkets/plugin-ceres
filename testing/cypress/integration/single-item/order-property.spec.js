@@ -1,13 +1,10 @@
 // / <reference types="cypress" />
 context("Single Item", () =>
 {
-    beforeEach(() =>
-    {
-        cy.visit("/testartikel/merkmale_145_1134/");
-    });
 
     it("should display order properties", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-previous-slide").should("be.visible");
         cy.getByTestingAttr("order-property-next-slide").should("be.visible");
         cy.getByTestingAttr("order-property-input-radio").should("be.visible");
@@ -15,6 +12,7 @@ context("Single Item", () =>
 
     it("should go to next order property page", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click();
         cy.getByTestingAttr("order-property-input-checkbox").should("be.visible").should("have.attr", "value").and("include", "8");
 
@@ -38,6 +36,7 @@ context("Single Item", () =>
 
     it("should go to previous order property page", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click();
         cy.getByTestingAttr("order-property-previous-slide").click();
         cy.getByTestingAttr("order-property-input-checkbox").should("be.visible").should("have.attr", "value").and("include", "8");
@@ -45,8 +44,8 @@ context("Single Item", () =>
 
     it("should select single choice", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-input-radio").first().click();
-
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Einfachauswahl +0€");
         checkPrices(0);
@@ -54,6 +53,7 @@ context("Single Item", () =>
 
     it("should select multiple choice", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         // TODO implement more reliable way to navigate?
         cy.getByTestingAttr("order-property-next-slide").click();
         cy.getByTestingAttr("order-property-input-checkbox").first().click();
@@ -64,8 +64,8 @@ context("Single Item", () =>
 
     it("should select label", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click();
-        // there are 4 elements whats the best way to identify?
         cy.getByTestingAttr("order-property-input-checkbox").last().click();
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
@@ -74,6 +74,7 @@ context("Single Item", () =>
 
     it("should fill file upload input", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
 
         cy.fixture("test.png").then(fileContent =>
@@ -88,6 +89,7 @@ context("Single Item", () =>
 
     it("should fill selection input", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
         cy.getByTestingAttr("order-property-selection").first().select("Option 1");
 
@@ -98,6 +100,7 @@ context("Single Item", () =>
 
     it("should fill text input", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
@@ -110,6 +113,7 @@ context("Single Item", () =>
 
     it("should fill float number input", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         const value = 1.23;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
@@ -122,6 +126,7 @@ context("Single Item", () =>
 
     it("should fill int input", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         const value = 123;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click();
@@ -134,6 +139,7 @@ context("Single Item", () =>
 
     it("should fill file upload input with extra costs", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
 
         cy.fixture("test.png").then(fileContent =>
@@ -150,16 +156,18 @@ context("Single Item", () =>
 
     it("should fill selection input with extra costs", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
         cy.getByTestingAttr("order-property-selection").last().select("Option 1");
 
         cy.getByTestingAttr("single-add-to-basket-button").click();
-        cy.get("#add-item-to-basket-overlay").should("contain", "Auswahl +5€ (inkl. 5,00 EUR)");
+        cy.get("#add-item-to-basket-overlay").should("contain", "Auswahl +5€");
         cy.get("#add-item-to-basket-overlay").should("contain", "Option 1");
     });
 
     it("should fill text input with extra costs", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
@@ -172,6 +180,7 @@ context("Single Item", () =>
 
     it("should fill float number input with extra costs", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         const value = 1.23;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
@@ -184,6 +193,7 @@ context("Single Item", () =>
 
     it("should fill int input with extra costs", () =>
     {
+        cy.visit("/testartikel/merkmale_145_1134/");
         const value = 123;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
@@ -194,7 +204,27 @@ context("Single Item", () =>
         cy.get("#add-item-to-basket-overlay").should("contain", value);
     });
 
-    // should i18n
+    it("should translate selectbox property name", () =>
+    {
+        cy.visit("/en/testarticle/properties_145_1134/");
+        cy.getByTestingAttr("order-property-next-slide").click().click().click();
+        cy.getByTestingAttr("order-property-selection").eq(0).select("Option One");
+        cy.getByTestingAttr("order-property-selection").eq(0).should("contain", "Option One");
+
+    });
+
+    it("should translate multiple checkbox property name", () =>
+    {
+        cy.visit("/en/testarticle/properties_145_1134/");
+        cy.getByTestingAttr("order-property-next-slide").click();
+        cy.getByTestingAttr("order-property-input-checkbox").eq(0).parent().find("label").should("contain", "Multiplechoice +0€");
+    });
+
+    it("should translate radio checkbox property name", () =>
+    {
+        cy.visit("/en/testarticle/properties_145_1134/");
+        cy.getByTestingAttr("order-property-input-radio").eq(0).parent().find("label").should("contain", "Single choice +€0");
+    });
 
     function checkPrices(surcharge)
     {

@@ -91,4 +91,82 @@ context("prices", () =>
         cy.get(".control-basket > a").should("exist").scrollIntoView().click();
         cy.getByTestingAttr("item-sum").should("contain", "2,50");
     });
+
+    it("should add correct price for radio button", () =>
+    {
+        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.getByTestingAttr("order-property-input-radio").eq(0).click();
+        cy.get(".price").should("contain", "90,00");
+        cy.getByTestingAttr("order-property-input-radio").eq(1).click();
+        cy.get(".price").should("contain", "100,00");
+        cy.getByTestingAttr("order-property-input-radio").eq(2).click();
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for multi checkbox button", () =>
+    {
+        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.getByTestingAttr("order-property-next-slide").click();
+        cy.getByTestingAttr("order-property-input-checkbox").eq(0).click();
+        cy.getByTestingAttr("order-property-input-checkbox").eq(1).click();
+        cy.getByTestingAttr("order-property-input-checkbox").eq(2).click();
+        cy.get(".price").should("contain", "105,00");
+        cy.getByTestingAttr("order-property-input-checkbox").eq(1).click();
+        cy.get(".price").should("contain", "100,00");
+
+    });
+
+    it("should add correct price for file upload", () =>
+    {
+        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.fixture("test.png").then(fileContent =>
+        {
+            cy.getByTestingAttr("order-property-input-file").last().attachFile({
+                fileContent: fileContent.toString(),
+                fileName: "test.png",
+                mimeType: "image/png"
+            });
+        });
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for selectbox", () =>
+    {
+        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-selection").eq(1).select("Option 1");
+        cy.getByTestingAttr("order-property-selection").eq(1).should("contain", "Option 1");
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for text property", () =>
+    {
+        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
+
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-text").last().type(value);
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for integer property", () =>
+    {
+        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        const value = 123;
+
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-int").last().type(value);
+
+        cy.getByTestingAttr("single-add-to-basket-button").click();
+    });
+
+    it("should add correct price for float property", () =>
+    {
+        cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
+        const value = 1.23;
+
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-float").last().type(value);
+    });
 });
