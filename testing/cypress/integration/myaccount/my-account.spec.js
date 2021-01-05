@@ -4,7 +4,7 @@ context("my-account", () =>
     beforeEach(() =>
     {
         cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
+        cy.visit("/myaccount/");
     });
 
     it("should logout", () =>
@@ -108,11 +108,11 @@ context("my-account", () =>
             cy.intercept("DELETE", "/rest/io/customer/bank_data/" + $for).as("deleteBankData");
 
             cy.getByTestingAttr("bank-data-set").find(".item-remove").click();
-    
+
             cy.get(".modal.show").should("exist");
             cy.getByTestingAttr("bank-data-delete-confirm").wait(100).click();
             cy.wait("@deleteBankData").its("response.statusCode").should("eq", 200);
-    
+
             cy.get(".notification-wrapper").children().first().should("contain", "Bankdaten gelöscht");
         })
     });

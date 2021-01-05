@@ -26,7 +26,7 @@ context("Header topbar registration", () =>
         cy.getByTestingAttr("privacy-policy-accept-register").click();
 
         // add alias to register function
-        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+        cy.server().route("POST", "/rest/io/customer/").as("registerUser");
 
         cy.getByTestingAttr("register-submit").click();
 
@@ -58,7 +58,7 @@ context("Header topbar registration", () =>
         cy.getByTestingAttr("privacy-policy-accept-register").click();
 
         // add alias to register function
-        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+        cy.server().route("POST", "/rest/io/customer/").as("registerUser");
 
         cy.getByTestingAttr("register-submit").click();
 

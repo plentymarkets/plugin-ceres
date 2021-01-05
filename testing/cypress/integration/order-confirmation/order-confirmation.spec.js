@@ -108,6 +108,7 @@ context("Order confirmation", () =>
         cy.login();
         cy.visit("/bestellbestaetigung/?orderId=437");
 
+        // config value is set to 5000 days after order date
         cy.get(".order-return a")
             .should("have.attr", "href")
             .and("include", "/returns/437/").then((href) =>

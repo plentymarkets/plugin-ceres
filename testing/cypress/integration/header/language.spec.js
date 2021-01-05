@@ -1,7 +1,7 @@
 // / <reference types="cypress" />
 context("Header topbar languages", () =>
 {
-    const URL = "/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014";
+    const URL = "/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014/";
 
     beforeEach(() =>
     {
@@ -29,7 +29,7 @@ context("Header topbar languages", () =>
 
     it("should change language text for content at start page to en", () =>
     {
-        cy.visit("/en");
+        cy.visit("/en/");
         cy.get("#page-body").should("contain", "It is a period of civil war.")
     });
 
@@ -75,13 +75,13 @@ context("Header topbar languages", () =>
 
     it("should display correct category name in menu", () =>
     {
-        cy.visit("/en");
+        cy.visit("/en/");
         cy.get(".mainmenu").should("contain", "Livingroom");
     });
 
     it("should display correct category name at category page", () =>
     {
-        cy.visit("/en/livingroom");
+        cy.visit("/en/livingroom/");
         cy.get(".category-title").should("contain", "Livingroom");
     });
 });

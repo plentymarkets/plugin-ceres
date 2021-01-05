@@ -21,7 +21,7 @@ context("Header topbar wishlist", () =>
 
         cy.visit(itemUrl);
 
-        cy.server().route("POST", "/rest/io/itemWishList").as("addToWishlist");
+        cy.server().route("POST", "/rest/io/itemWishList/").as("addToWishlist");
 
         cy.get(".widget-add-to-wish-list > a").should("exist");
         cy.get(".widget-add-to-wish-list > a").click();

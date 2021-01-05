@@ -25,7 +25,7 @@ Cypress.Commands.add("login", (email = "plentytest@plenty.de", password = "Testu
 {
     cy.request(
         "POST",
-        "/rest/io/customer/login",
+        "/rest/io/customer/login/",
         {
             email,
             password
@@ -37,7 +37,7 @@ Cypress.Commands.add("loginAsGuest", () =>
 {
     cy.request(
         "POST",
-        "/rest/io/guest",
+        "/rest/io/guest/",
         {
             email: `pentyguest${new Date().getTime()}@plenty.de`
         }

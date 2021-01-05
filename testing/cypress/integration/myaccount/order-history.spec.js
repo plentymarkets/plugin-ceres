@@ -10,7 +10,7 @@ context("my-account order-history", () =>
     beforeEach(() =>
     {
         cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
+        cy.visit("/myaccount/");
     });
 
     it("should have correct order history data", () =>
@@ -24,7 +24,7 @@ context("my-account order-history", () =>
         cy.getByTestingAttr("order-history-date2").eq(2).should("contain", "22.12.2020");
         cy.getByTestingAttr("order-history-status").eq(1).should("contain", "Warten auf Zahlung");
         cy.getByTestingAttr("order-history-status").eq(2).should("contain", "Warenausgang gebucht");
-        
+
         cy.get(".order-history-list .container-clickable").eq(0).click();
 
         cy.getByTestingAttr("order-history-price").should("contain", (ITEM_PRICE * ITEMQUANTITY).toLocaleString("de"));

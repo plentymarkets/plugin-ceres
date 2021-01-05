@@ -44,7 +44,7 @@ context("prices", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
         cy.addBasketItem("1014");
-        cy.visit("/checkout");
+        cy.visit("/checkout/");
         cy.get(`[data-id="${8}"]`).should("exist");
     });
 
@@ -52,7 +52,7 @@ context("prices", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
         cy.addBasketItem("1014");
-        cy.visit("/checkout");
+        cy.visit("/checkout/");
         cy.get(`[data-id="${8}"]`).find(".content").should("contain", "1,68");
     });
 
@@ -60,7 +60,7 @@ context("prices", () =>
     {
         cy.login("stefan.standard@plentye2etest.de", "Testuser1234");
         cy.addBasketItem("1014");
-        cy.visit("/checkout");
+        cy.visit("/checkout/");
         cy.get(`[data-id="${8}"]`).should("not.exist");
     });
 
@@ -69,7 +69,7 @@ context("prices", () =>
         cy.login("stefan.standard@plentye2etest.de", "Testuser1234");
         // item with 10€ postage
         cy.addBasketItem("1031");
-        cy.visit("/checkout");
+        cy.visit("/checkout/");
         cy.get(`[data-id="${7}"]`).should("contain", "10,00");
 
     });
@@ -79,7 +79,7 @@ context("prices", () =>
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
         // item with 10€ postage
         cy.addBasketItem("1031");
-        cy.visit("/checkout");
+        cy.visit("/checkout/");
         cy.get(`[data-id="${7}"]`).should("contain", "8,40");
 
     });
