@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v5.0.19 (2021-01-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.18...5.0.19" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the totals in the shopping cart and the order confirmation also listed order characteristics for which the setting **Display as additional costs** was active. This has been fixed.
+
 ## v5.0.18 (2021-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.17...5.0.18" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added 
