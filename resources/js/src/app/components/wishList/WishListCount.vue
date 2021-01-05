@@ -16,7 +16,8 @@ export default {
 
         urlWishList()
         {
-            return App.urls.wishList;
+            // TODO app accesses dont work?  return App.urls.wishList;
+            return "google.de";
         }
     }
 }

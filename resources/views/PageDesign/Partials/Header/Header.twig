@@ -6,8 +6,19 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
 
-
-
+{% if headerContainer is empty %}
+    {% include "Ceres::PageDesign.Partials.Header.DefaultHeader" %}
+{% else %}
+<header id="page-header" class="fixed-top">
+    <div class="container-max">
+        <div class="row flex-row-reverse position-relative">
+            <div id="page-header-parent" class="col-12 header-container" data-header-offset>
+                {{ headerContainer | raw }}
+            </div>
+        </div>
+    </div>
+</header>
+{% endif %}
 
 
 <div>

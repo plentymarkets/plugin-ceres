@@ -48,7 +48,7 @@ export default {
         forwardToSingleItem:
         {
             type: Boolean,
-            default: App.config.search.forwardToSingleItem
+            default: false
         },
         timeout:
         {
@@ -60,7 +60,7 @@ export default {
     data()
     {
         return {
-            isSearchFocused: App.isShopBuilder,
+            isSearchFocused: false,
             onValueChanged: null,
             searchString: ""
         };
@@ -82,12 +82,12 @@ export default {
             const category   = this.autocompleteResult.category;
             const suggestion = this.autocompleteResult.suggestion;
 
-            return App.isShopBuilder || (item && item.length) || (category && category.length) || (suggestion && suggestion.length);
+            return false || (item && item.length) || (category && category.length) || (suggestion && suggestion.length);
         },
 
         isShopBuilder()
         {
-            return App.isShopBuilder;
+            return false;
         },
 
         ...mapState({
@@ -114,14 +114,14 @@ export default {
         {
             if (this.$refs.searchInput.value.length)
             {
-                if (pathnameEquals(App.urls.search))
-                {
-                    this.$store.dispatch("searchItems", this.$refs.searchInput.value);
-                }
-                else
-                {
-                    window.open(`${App.urls.search}?query=${ this.searchString }`, "_self", false);
-                }
+                // if (pathnameEquals(App.urls.search))
+                // {
+                //     this.$store.dispatch("searchItems", this.$refs.searchInput.value);
+                // }
+                // else
+                // {
+                //     window.open(`${App.urls.search}?query=${ this.searchString }`, "_self", false);
+                // }
             }
         },
 

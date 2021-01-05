@@ -87,13 +87,6 @@
                 </li>
             {% endif %}
         </ul>
-         <script type="application/ld+json">
-        {
-            "@context":"http://schema.org/",
-            "@type":"BreadcrumbList",
-            "itemListElement": {{ crumbs | json_encode | raw }}
-        }
-        </script>
     </nav>
 </div>
 {% endif %}
