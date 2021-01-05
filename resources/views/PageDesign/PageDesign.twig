@@ -52,6 +52,78 @@
     <test-app></test-app>
 
     {# {% include getPartial('footer') %} #}
+
+    <!-- LOGIN MODAL -->
+    <div id="login-modal-wrapper">
+        <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <lazy-load component="login-modal">
+                        <login modal-element="login-modal-wrapper">
+                            <template #extend-overlay-buttons>
+                                {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                            </template>
+                        </login>
+                    </lazy-load>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./LOGIN MODAL -->
+
+    <!-- REGISTRATION MODAL -->
+    <div id="simple-registration-modal-wrapper">
+        <div class="modal fade" id="registration" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <lazy-load component="register-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title h3">
+                                {{ trans("Ceres::Template.regCreateAccount") }}
+
+                            </div>
+
+                            <popper v-cloak class="ml-auto">
+                                <template #handle>
+                                    <button class="btn btn-icon btn-secondary btn-sm">
+                                        <i class="fa fa-info"></i>
+                                    </button>
+                                </template>
+                                <template #title>
+                                    {{ trans("Ceres::Template.regContactInformations") }}
+                                </template>
+                                <template #content>
+                                    <ul class='pl-3'>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                    </ul>
+                                </template>
+                            </popper>
+
+                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
+                                <template #extend-overlay-buttons>
+                                    {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+                                </template>
+                                <template #custom-address-fields>
+                                    {{ LayoutContainer.show("Ceres::Checkout.CustomAddressField") }}
+                                </template>
+                            </registration>
+                        </div>
+                    </div>
+                </lazy-load>
+            </div>
+        </div>
+    </div>
+    <!-- ./REGISTRATION MODAL -->
 </div>
 
 <script>

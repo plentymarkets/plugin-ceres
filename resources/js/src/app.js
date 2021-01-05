@@ -18,7 +18,9 @@ import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
 import BasketPreview from "./app/components/basket/BasketPreview.vue";
 import BasketTotals from "./app/components/basket/BasketTotals.vue";
 import BasketList from "./app/components/basket/list/BasketList.vue";
-
+import Login from "./app/components/customer/login/Login.vue";
+import Popper from "./app/components/pageDesign/Popper.vue";
+import Registration from "./app/components/customer/Registration.vue";
 
 import consents from "./app/store/modules/ConsentModule";
 import navigation from "./app/store/modules/NavigationModule";
@@ -62,6 +64,9 @@ export function createApp(options)
     Vue.component("basket-preview", BasketPreview);
     Vue.component("basket-totals", BasketTotals);
     Vue.component("basket-list", BasketList);
+    Vue.component("login", Login);
+    Vue.component("popper", Popper);
+    Vue.component("registration", Registration);
 
     window.ceresTranslate = TranslationService.translate;
 
