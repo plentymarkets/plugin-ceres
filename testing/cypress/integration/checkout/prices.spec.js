@@ -92,7 +92,9 @@ context("prices", () =>
         cy.getByTestingAttr("item-sum").should("contain", "2,50");
     });
 
-    it("should add correct price for radio button", () =>
+    // Eigenschaften / Merkmale / Order Properties
+
+    it("should add correct price for radio button order property", () =>
     {
         cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-input-radio").eq(0).click();
@@ -103,7 +105,7 @@ context("prices", () =>
         cy.get(".price").should("contain", "95,00");
     });
 
-    it("should add correct price for multi checkbox button", () =>
+    it("should add correct price for multi checkbox button order property", () =>
     {
         cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click();
@@ -116,7 +118,7 @@ context("prices", () =>
 
     });
 
-    it("should add correct price for file upload", () =>
+    it("should add correct price for file upload order property", () =>
     {
         cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
@@ -131,7 +133,7 @@ context("prices", () =>
         cy.get(".price").should("contain", "95,00");
     });
 
-    it("should add correct price for selectbox", () =>
+    it("should add correct price for selectbox order property", () =>
     {
         cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
@@ -140,7 +142,7 @@ context("prices", () =>
         cy.get(".price").should("contain", "95,00");
     });
 
-    it("should add correct price for text property", () =>
+    it("should add correct price for text order property", () =>
     {
         cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
         const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
@@ -150,23 +152,23 @@ context("prices", () =>
         cy.get(".price").should("contain", "95,00");
     });
 
-    it("should add correct price for integer property", () =>
+    it("should add correct price for integer order property", () =>
     {
         cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
         const value = 123;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
         cy.getByTestingAttr("order-property-input-int").last().type(value);
-
-        cy.getByTestingAttr("single-add-to-basket-button").click();
+        cy.get(".price").should("contain", "95,00");
     });
 
-    it("should add correct price for float property", () =>
+    it("should add correct price for float order property", () =>
     {
         cy.visit("https://2x3z2pucy2z9.c01-16.plentymarkets.com/testartikel/merkmale_145_1134/");
         const value = 1.23;
 
         cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
         cy.getByTestingAttr("order-property-input-float").last().type(value);
+        cy.get(".price").should("contain", "95,00");
     });
 });
