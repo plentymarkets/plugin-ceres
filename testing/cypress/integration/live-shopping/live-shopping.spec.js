@@ -11,7 +11,7 @@ context("Live shopping", () =>
 
     beforeEach(() =>
     {
-        cy.visit("/live-shopping");
+        cy.visit("/live-shopping/");
         // to prevent timing problems with accessing not yet rendered vue comps - fix this with a better data-attribute wich contains item or variation id
         cy.wait(500);
     });

@@ -4,7 +4,7 @@ context("my-account return-history", () =>
     beforeEach(() =>
     {
         cy.login("stefan.standard@plentye2etest.de");
-        cy.visit("/myaccount");
+        cy.visit("/myaccount/");
     });
 
     it("should have correct return history data", () =>

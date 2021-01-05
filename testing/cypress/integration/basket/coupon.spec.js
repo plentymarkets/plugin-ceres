@@ -10,13 +10,13 @@ context("Coupon", () =>
     beforeEach(() =>
     {
         cy.addBasketItem(1014);
-        cy.visit("/warenkorb");
+        cy.visit("/warenkorb/");
         cy.location("pathname").should("eq", "/warenkorb/");
     });
 
     it("Should add coupon", () =>
     {
-        cy.server().route("POST", "/rest/io/coupon").as("redeemCoupon");
+        cy.server().route("POST", "/rest/io/coupon/").as("redeemCoupon");
         cy.getByTestingAttr("coupon-input").type(COUPON_CODE, { delay: 30 });
         cy.getByTestingAttr("coupon-redeem").click();
         cy.wait("@redeemCoupon");
@@ -25,7 +25,7 @@ context("Coupon", () =>
 
     it("Should remove coupon code", () =>
     {
-        cy.server().route("POST", "/rest/io/coupon").as("redeemCoupon");
+        cy.server().route("POST", "/rest/io/coupon/").as("redeemCoupon");
         cy.server().route("DELETE", "/rest/io/coupon/4CDSQS/").as("deleteCoupon");
         cy.getByTestingAttr("coupon-input").type(COUPON_CODE, { delay: 30 });
         cy.getByTestingAttr("coupon-redeem").click();

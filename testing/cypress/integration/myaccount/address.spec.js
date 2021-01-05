@@ -6,7 +6,7 @@ context("Address", () =>
     beforeEach(() =>
     {
         cy.login(ADDRESS_TEST_USER_EMAIL);
-        cy.visit("/myaccount");
+        cy.visit("/myaccount/");
     });
 
     afterEach(() =>

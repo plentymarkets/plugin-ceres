@@ -5,7 +5,7 @@ context("register/ registrierung", () =>
 
     beforeEach(() =>
     {
-        cy.visit("/registrierung");
+        cy.visit("/registrierung/");
     });
 
     it("Should check if empty input fields are marked as invalid", () =>
@@ -63,7 +63,7 @@ context("register/ registrierung", () =>
         cy.get("[data-model='town']").type("g");
         cy.getByTestingAttr("privacy-policy-accept-register").click();
 
-        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+        cy.server().route("POST", "/rest/io/customer/").as("registerUser");
 
         cy.getByTestingAttr("register-submit").click();
 
@@ -99,7 +99,7 @@ context("register/ registrierung", () =>
         cy.getByTestingAttr("privacy-policy-accept-register").click();
 
         // add alias to register function
-        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+        cy.server().route("POST", "/rest/io/customer/").as("registerUser");
 
         cy.getByTestingAttr("register-submit").click();
 
@@ -134,7 +134,7 @@ context("register/ registrierung", () =>
         cy.get("[data-model='town']").type("g");
         cy.getByTestingAttr("privacy-policy-accept-register").click();
 
-        cy.server().route("POST", "/rest/io/customer").as("registerUser");
+        cy.server().route("POST", "/rest/io/customer/").as("registerUser");
 
         // add alias to register function
 

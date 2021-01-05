@@ -4,7 +4,7 @@ context("category", () =>
 
     beforeEach(() =>
     {
-        cy.visit("/wohnzimmer");
+        cy.visit("/wohnzimmer/");
     });
 
 
@@ -23,7 +23,7 @@ context("category", () =>
     it("should be able to navigate by sidebar", () =>
     {
         cy.get(".widget-inner > :nth-child(3) > .nav-item > .nav-link > .d-flex > .flex-grow-1").click();
-        cy.location("pathname").should("eq", "/arbeitszimmer-buero/");
+        cy.location("pathname").should("eq", "/variantenauswahl/");
     });
 
     it("should be able to apply min price filter at category toolbar", () =>
@@ -31,9 +31,9 @@ context("category", () =>
         cy.getByTestingAttr("category-toolbar-filter").click();
         cy.get(".widget-filter-price").find("input").first().type("400", { delay: 30 });
         cy.get(".widget-filter-price").find("button").click();
-        cy.get(".product-list").children().each((product) => 
+        cy.get(".product-list").children().each((product) =>
         {
-            cy.get(product).find(".price").invoke("text").then((text) => 
+            cy.get(product).find(".price").invoke("text").then((text) =>
             {
                 let priceTotals = +text.replace(/[^0-9\,\.]+/g, "").replace(",", ".");
                 expect(priceTotals >= 400).to.be.true;
@@ -46,9 +46,9 @@ context("category", () =>
         cy.getByTestingAttr("category-toolbar-filter").click();
         cy.get(".widget-filter-price").find("input").last().type("0.01", { delay: 30 });
         cy.get(".widget-filter-price").find("button").click();
-        cy.get(".product-list").children().each((product) => 
+        cy.get(".product-list").children().each((product) =>
         {
-            cy.get(product).find(".price").invoke("text").then((text) => 
+            cy.get(product).find(".price").invoke("text").then((text) =>
             {
                 let priceTotals = +text.replace(/[^0-9\,\.]+/g, "").replace(",", ".");
                 expect(priceTotals <= 0.01).to.be.true;
