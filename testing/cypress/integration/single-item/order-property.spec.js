@@ -48,7 +48,6 @@ context("Single Item", () =>
         cy.getByTestingAttr("order-property-input-radio").first().click();
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "Einfachauswahl +0€");
-        checkPrices(0);
     });
 
     it("should select multiple choice", () =>
