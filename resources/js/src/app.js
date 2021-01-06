@@ -1,5 +1,4 @@
 import Vue from "vue";
-import Vuex from "vuex";
 
 import Notifications from "./app/components/pageDesign/Notifications.vue";
 import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
@@ -26,6 +25,7 @@ import Login from "./app/components/customer/login/Login.vue";
 import Popper from "./app/components/pageDesign/Popper.vue";
 import Registration from "./app/components/customer/Registration.vue";
 
+/*
 import consents from "./app/store/modules/ConsentModule";
 import navigation from "./app/store/modules/NavigationModule";
 import user from "./app/store/modules/UserModule";
@@ -34,16 +34,31 @@ import wishList from "./app/store/modules/WishListModule";
 import itemList from "./app/store/modules/ItemListModule";
 import itemSearch from "./app/store/modules/ItemSearchModule";
 import localization from "./app/store/modules/LocalizationModule";
+ */
 
 
 import TranslationService from "./app/services/TranslationService";
 
+// =========================
+// DIRECTIVES
+// =========================
 import "./app/directives/basket/basketItemQuantity";
 import "./app/directives/basket/basketItemSum";
 import "./app/directives/basket/toggleBasketPreview";
+import "./app/directives/category/openFilterToolbar";
+import "./app/directives/common/truncateTooltip";
+import "./app/directives/customer/logout";
+import "./app/directives/helper/populateStore";
+import "./app/directives/helper/validate";
+import "./app/directives/helper/waitingAnimation";
+import "./app/directives/helper/waitingAnimationInfinite";
+import "./app/directives/navigation/navigationTouchHandler";
 import "./app/directives/navigation/openMobileNavigation";
 import "./app/directives/pageDesign/scrollToTop";
-import "./app/directives/helper/waitingAnimationInfinite";
+import "./app/directives/pageDesign/stickInParent";
+import "./app/directives/navigation/sidenavigationChildrenLoader";
+import "./app/directives/pageDesign/tooltip";
+
 
 import "./app/filters/ageRestriction.filter";
 import "./app/filters/arrayFirst.filter";
@@ -69,11 +84,12 @@ import "./app/filters/propertyFileUrl.filter";
 import "./app/filters/translate.filter";
 import "./app/filters/truncate.filter";
 
+import store from "./app/store/index";
+
 Vue.component("test-app", TestApp);
 
 export function createApp(options)
 {
-    Vue.use(Vuex);
     Vue.component("notifications", Notifications);
     Vue.component("user-login-handler", UserLoginHandler);
     Vue.component("lazy-img", LazyImg);
@@ -104,29 +120,7 @@ export function createApp(options)
     Vue.prototype.$ceres = App;
 
     const defaultOptions = {
-        store: new Vuex.Store({
-            modules: {
-                basket: {
-                    state: {
-                        data: {},
-                        items: [],
-                        showNetPrices: false,
-                        isBasketLoading: false,
-                        isBasketInitiallyLoaded: false,
-                        isBasketItemQuantityUpdate: false,
-                        basketNotifications: []
-                    }
-                },
-                navigation,
-                consents,
-                user,
-                wishList,
-                itemList,
-                itemSearch,
-                localization,
-                lazyComponent
-            }
-        }),
+        store,
         ...options
     };
 

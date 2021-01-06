@@ -19,10 +19,11 @@ process.stdin.on("readable", () =>
 
 process.stdin.on("end", () =>
 {
+    const virtualConsole = new VirtualConsole().sendTo(console);
     const virtualDom = new JSDOM(
         domInline.toString(),
         {
-            runScripts: "dangerously"
+            runScripts: "dangerously",
         }
     );
 

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import ApiService from "../services/ApiService";
+// import ApiService from "../services/ApiService";
 
 import address from "./modules/AddressModule";
 import basket from "./modules/BasketModule";
@@ -20,8 +20,8 @@ import user from "./modules/UserModule";
 import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
-import eventPropagation from "./plugins/EventPropagationPlugin";
-import { isDefined } from "../helper/utils";
+// import eventPropagation from "./plugins/EventPropagationPlugin";
+// import { isDefined } from "../helper/utils";
 
 
 // =========================
@@ -52,15 +52,15 @@ const store = new Vuex.Store(
             orderReturn,
             user,
             wishList
-        },
+        }
 
-        plugins: [eventPropagation]
+        // plugins: [eventPropagation]
     });
 
 // =========================
 // Fill initial vuex data
 // =========================
-
+/*
 App.initialData.shippingCountries.sort((first, second) =>
 {
     if (first.currLangName < second.currLangName)
@@ -98,10 +98,11 @@ ApiService.listen("AfterBasketChanged",
     });
 
 store.dispatch("loadBasketData");
-
+*/
 /**
  * Loads user data after pageload
  */
+/*
 ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
     .done(response =>
     {
@@ -110,10 +111,11 @@ ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
             store.commit("setUserData", response.data);
         }
     });
-
+*/
 /**
  * Adds login/logout event listeners
  */
+/*
 ApiService.listen("AfterAccountAuthentication", userData =>
 {
     store.commit("setUserData", userData.accountContact);
@@ -122,5 +124,5 @@ ApiService.listen("AfterAccountContactLogout", () =>
 {
     store.commit("setUserData", null);
 });
-
+ */
 export default store;
