@@ -1,3 +1,6 @@
+// Import file upload commands to use attachFile
+import "cypress-file-upload";
+
 // Override visit to add our testing env
 Cypress.Commands.overwrite("visit", (originalFn, url, options = {}) =>
 {
