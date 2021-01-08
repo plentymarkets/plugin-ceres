@@ -160,7 +160,7 @@
 
                         {% if enableBasketPreview %}
                             <li class="list-inline-item control-basket position-relative" @mouseover.once="$store.dispatch('loadComponent', 'basket-preview')">
-                                <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link">
+                                <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link" {{ set_testing_attr("data-testing", "basket-preview-button") }}>
                                     {% if basketValues != "sum" %}
                                         <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
                                     {% endif %}
