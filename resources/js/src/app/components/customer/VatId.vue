@@ -18,6 +18,7 @@ export default
     props:
     {
         selectedCountryId: Number,
+        initialValue: String,
         isRequired: Boolean
     },
 
@@ -54,8 +55,22 @@ export default
     {
         vatId(newvatId, oldvatId)
         {
-            this.$emit('input', vatId);
+            this.$emit('input', newvatId);
         }
+    },
+
+    created()
+    {
+        if (this.initialValue && this.initialValue.length > 0)
+        {
+            const initialPrefix = this.initialValue.slice(0, 2);
+            const initialValue = this.initialValue.slice(2);
+
+            if(initialPrefix === this.vatPrefix)
+            {
+                this.vatValue = initialValue;
+            }
+        } 
     },
 
     methods:

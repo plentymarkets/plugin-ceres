@@ -207,7 +207,13 @@
                         class="col-12 col-sm-6"
                         v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'billing_address.vatNumber')) ||
                         (!isInOptionalFields('de', 'billing_address.salutation') && isInOptionalFields('de', 'billing_address.name1') && isInOptionalFields('de', 'billing_address.vatNumber'))">
-                        <vat-id v-validate:text="isInRequiredFields('de', 'billing_address.vatNumber')" :is-required="isInRequiredFields('de', 'billing_address.vatNumber')" :selected-country-id="value.countryId" @input="emitInputEvent('vatNumber', $event)"></vat-id>
+                        <vat-id
+                            v-validate:text="isInRequiredFields('de', 'billing_address.vatNumber')"
+                            :is-required="isInRequiredFields('de', 'billing_address.vatNumber')"
+                            :selected-country-id="value.countryId"
+                            @input="emitInputEvent('vatNumber', $event)"
+                            :initial-value="value.vatNumber">
+                        </vat-id>
                     </div>
                 </div>
             </div>
