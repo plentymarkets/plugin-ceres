@@ -2,7 +2,7 @@
     <div
         class="input-unit"
         data-model="vatNumber"
-        v-if="vatPrefix && vatPrefix.length > 0">
+        v-if="isEU">
         <input aria-describedby="basic-addon1" type="text" name="vatNumber" :id="'txtVatNumber' + _uid" v-model="vatValue" data-autofocus>
         <label :for="'txtVatNumber' + _uid">
             {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }} {{ vatPrefix }}
@@ -28,10 +28,12 @@ export default
         }
     },
 
-    computed: {
+    computed:
+    {
         vatId()
         {
-            const vatId = this.vatPrefix && this.vatPrefix.length > 0 ? this.vatPrefix + this.vatValue : "";
+            const vatId = this.isEU ? this.vatPrefix + this.vatValue : "";
+
             return vatId;
         },
 
@@ -40,13 +42,18 @@ export default
             const selectedCountry = this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
             
             return selectedCountry.vatCode;
+        },
+
+        isEU()
+        {
+            return !!this.vatPrefix && this.vatPrefix.length > 0;
         }
     },
 
-    watch: {
+    watch:
+    {
         vatId(newvatId, oldvatId)
         {
-            const vatId = this.vatPrefix && this.vatPrefix.length > 0 ? newvatId : "";
             this.$emit('input', vatId);
         }
     },
