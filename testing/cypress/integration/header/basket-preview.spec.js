@@ -13,7 +13,7 @@ context("Basket preview", () =>
 
     it("Should open and close basket preview on click", () =>
     {
-        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
+        cy.getByTestingAttr("basket-preview-button").should("exist").scrollIntoView().click();
 
         cy.get("body").should("have.class", "basket-open");
 
@@ -29,7 +29,7 @@ context("Basket preview", () =>
 
         cy.get(".add-to-basket-container > button").click();
 
-        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
+        cy.getByTestingAttr("basket-preview-button").click({ force: true });
 
         cy.get("body").should("have.class", "basket-open");
 
@@ -44,7 +44,7 @@ context("Basket preview", () =>
 
         cy.get(".add-to-basket-container > button").click();
 
-        cy.get(".control-basket > a").should("exist").scrollIntoView().click();
+        cy.getByTestingAttr("basket-preview-button").click({ force: true });
 
         cy.get("body").should("have.class", "basket-open");
 
@@ -67,7 +67,7 @@ context("Basket preview", () =>
     {
         cy.addBasketItem(1014);
         cy.reload();
-        cy.get(".control-basket > a").scrollIntoView().click();
+        cy.getByTestingAttr("basket-preview-button").click();
         checkTotals();
     });
 
@@ -75,7 +75,7 @@ context("Basket preview", () =>
     {
         cy.addBasketItem(1014);
         cy.reload();
-        cy.get(".control-basket > a").scrollIntoView().click();
+        cy.getByTestingAttr("basket-preview-button").click();
         cy.getByTestingAttr("quantity-btn-increase").click().click();
         cy.getByTestingAttr("quantity-btn-decrease").click();
         checkTotals(2);
@@ -86,7 +86,7 @@ context("Basket preview", () =>
         cy.addBasketItem(1014);
         cy.addBasketItem(1007);
         cy.reload();
-        cy.get(".control-basket > a").scrollIntoView().click();
+        cy.getByTestingAttr("basket-preview-button").click();
         cy.getByTestingAttr("basket-item-delete").eq(1).click();
         checkTotals();
     });
@@ -95,7 +95,7 @@ context("Basket preview", () =>
     {
         cy.addBasketItem(1014);
         cy.reload();
-        cy.get(".control-basket > a").scrollIntoView().click();
+        cy.getByTestingAttr("basket-preview-button").click();
         cy.getByTestingAttr("basket-item-name")
             .should("have.attr", "href")
             .and("include", "/wohnzimmer/sessel-sofas/loungesessel-herkules_116_1014/");

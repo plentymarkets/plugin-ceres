@@ -80,6 +80,6 @@ context("Live shopping", () =>
     it("Should add the live shopping item to the basket and show the correct price in the basket preview", () =>
     {
         cy.get(".add-to-basket-lg-container").first().click();
-        cy.get(".toggle-basket-preview").should("contain", ACTIVE_LIVE_SHOPPING_PRICE);
+        cy.getByTestingAttr("basket-preview-button").should("contain", ACTIVE_LIVE_SHOPPING_PRICE);
     });
 });

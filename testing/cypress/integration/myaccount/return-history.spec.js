@@ -26,7 +26,7 @@ context("my-account return-history", () =>
     {
         cy.get(".order-return-history-list .container-clickable").should("have.class", "collapsed");
         cy.get(".order-return-history-list .container-clickable").click().wait(100);
-        cy.get(".order-return-history-list .container-clickable").not('.collapsed');
+        cy.get(".order-return-history-list .container-clickable").not(".collapsed");
     });
 
     it("should have correct itemlink in return-history", () =>
@@ -40,8 +40,7 @@ context("my-account return-history", () =>
     {
         cy.get(".order-return-history-list .container-clickable").click();
         cy.getByTestingAttr("return-history-quantity").eq(0).should("contain", "Stückzahl: 1");
-        cy.getByTestingAttr("return-history-quantity").eq(1).should("contain", "Stückzahl: 1");
         cy.get(".order-return-history-list .item img").eq(0)
-            .should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg');
+            .should("have.attr", "src", "https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg");
     });
 });
