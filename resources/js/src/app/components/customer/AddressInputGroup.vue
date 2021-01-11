@@ -207,15 +207,7 @@
                         class="col-12 col-sm-6"
                         v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'billing_address.vatNumber')) ||
                         (!isInOptionalFields('de', 'billing_address.salutation') && isInOptionalFields('de', 'billing_address.name1') && isInOptionalFields('de', 'billing_address.vatNumber'))">
-                        <div
-                            class="input-unit"
-                            data-model="vatNumber"
-                            v-validate:text="isInRequiredFields('de', 'billing_address.vatNumber')">
-                            <input type="text" name="vatNumber" :id="'txtVatNumber' + _uid" :value="value.vatNumber"  @input="emitInputEvent('vatNumber', $event.target.value)" data-autofocus>
-                            <label :for="'txtVatNumber' + _uid">
-                                {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
-                            </label>
-                        </div>
+                        <vat-id v-validate:text="isInRequiredFields('de', 'billing_address.vatNumber')" :is-required="isInRequiredFields('de', 'billing_address.vatNumber')" :selected-country-id="value.countryId" @input="emitInputEvent('vatNumber', $event)"></vat-id>
                     </div>
                 </div>
             </div>
@@ -932,6 +924,7 @@
 import { mapState } from "vuex";
 import SalutationSelect from "./SalutationSelect.vue";
 import CountrySelect from "../customer/CountrySelect.vue";
+import VatId from "./VatId.vue";
 
 export default {
 
@@ -940,7 +933,8 @@ export default {
     components:
     {
         SalutationSelect,
-        CountrySelect
+        CountrySelect,
+        VatId
     },
 
     props:
