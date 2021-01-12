@@ -46,8 +46,8 @@ export default
         vatPrefix()
         {
             const selectedCountry = this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
-            
-            return selectedCountry.vatCode;
+
+            return selectedCountry ? selectedCountry.vatCode : "";
         },
 
         isEU()
