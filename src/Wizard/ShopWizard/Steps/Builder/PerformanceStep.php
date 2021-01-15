@@ -30,7 +30,7 @@ class PerformanceStep extends Step
             ]
         ];
         
-        if($this->isModuleS3Active()) {
+        if ($this->isModuleS3Active()) {
             array_unshift($step["sections"], $this->generateShopBoosterSection());
         }
         
