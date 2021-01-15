@@ -119,13 +119,8 @@ class PerformanceStep extends Step
     
     private function isModuleS3Active()
     {
-        if ((int)config('plentyId') > 0) {
-            /** @var PlentyModuleRepositoryContract $moduleRepo */
-            $moduleRepo = app()->make(PlentyModuleRepositoryContract::class);
-            
-            return $moduleRepo->isActive('cdn.contentCache.s3');
-        }
-        
-        return false;
+        /** @var PlentyModuleRepositoryContract $moduleRepo */
+        $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
+        return $moduleRepo->isActive('cdn.contentCache.s3');
     }
 }
