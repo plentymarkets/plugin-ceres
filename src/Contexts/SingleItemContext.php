@@ -83,14 +83,6 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $requestedVariationUrl;
 
     /**
-     * Get the URL of the return form for a specific order.
-     *
-     * @param string|int $orderId The id of the order to return items for.
-     * @param string $orderAccessKey Access key to authorize accessing the order. Required for guest accounts.
-     * @return string
-     */
-
-    /**
      * @inheritdoc
      */
     public function init($params)
