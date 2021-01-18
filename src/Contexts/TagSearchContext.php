@@ -9,13 +9,26 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 
 class TagSearchContext extends CategoryContext implements ContextInterface
 {
-
     use ItemListContext;
 
+    /**
+     * @var bool Defines that the user has executed a shop search.
+     */
     public $isSearch;
+
+    /**
+     * @var string The name of the tag.
+     */
     public $searchString;
+
+    /**
+     * @var bool Defines that the user is on a page with items, filtered for the current tag.
+     */
     public $isTag = true;
 
+    /**
+     * @inheritdoc
+     */
     public function init($params)
     {
         parent::init($params);
@@ -46,4 +59,3 @@ class TagSearchContext extends CategoryContext implements ContextInterface
         $this->searchString = $itemListOptions['tagName'];
     }
 }
-
