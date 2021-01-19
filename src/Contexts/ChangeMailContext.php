@@ -6,11 +6,30 @@ use IO\Helper\ContextInterface;
 
 class ChangeMailContext extends GlobalContext implements ContextInterface
 {
+    /**
+     * @var int The contact's ID for changing the mail.
+     */
     public $contactId;
+
+    /**
+     * @var string The Hash used to authenticate the mail change.
+     */
     public $hash;
+
+    /**
+     * @var string The new email address, to change.
+     */
     public $newMail;
+
+    /**
+     * @var \Plenty\Modules\Category\Models\Category
+     * Category data of the current category, linked to this context.
+     */
     public $category;
 
+    /**
+     * @inheritdoc
+     */
     public function init($params)
     {
         parent::init($params);

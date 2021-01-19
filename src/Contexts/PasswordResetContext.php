@@ -18,7 +18,7 @@ class PasswordResetContext extends GlobalContext implements ContextInterface
 
     /**
      * @var \Plenty\Modules\Category\Models\Category
-     * Category data of the current category, linked to this class.
+     * Category data of the current category, linked to this context.
      */
     public $category;
 
