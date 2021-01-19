@@ -1,5 +1,26 @@
 # Release Notes für Ceres
 
+## v5.0.20 (2021-01-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.19...5.0.20" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Bilder im Hintergrund-Widget haben jetzt barrierefreie Alternativtexte.
+- Der vertikale Overflow wird im `.app` Container jetzt durch `overflow-x: hidden` verhindert.
+
+### Behoben 
+
+- Durch eine fehlerhafte Einstellung bezüglich der Anzahl der Artikel pro Seite kam es zu einer falschen Darstellung. Dieses Verhalten wurde behoben.
+- Im Mein-Konto-Bereich und auf der Bestellbestätigung wurden Artikel und Summen in unterschiedlichen Währungen dargestellt, wenn eine Währung ausgewählt war, die nicht der Systemwährung entspricht. Dieses Verhalten wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.20 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2606/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2611/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2613/files#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2613/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
+
 ## v5.0.19 (2021-01-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.18...5.0.19" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
