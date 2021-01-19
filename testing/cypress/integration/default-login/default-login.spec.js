@@ -75,7 +75,7 @@ context("Default Login Page", () =>
         cy.getByTestingAttr("guest-login-button").click();
 
         cy.wait(1000);
-        cy.location("pathname").should("eq", "/login/");
+        cy.location("pathname").should("eq", "/");
     });
 
     it("should check if registration button is working", () =>

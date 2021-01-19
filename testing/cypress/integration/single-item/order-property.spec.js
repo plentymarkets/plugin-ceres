@@ -1,5 +1,5 @@
 // / <reference types="cypress" />
-context("Single Item", () =>
+context("Order Property", () =>
 {
 
     it("should display order properties", () =>
