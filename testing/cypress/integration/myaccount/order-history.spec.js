@@ -62,7 +62,7 @@ context("my-account order-history", () =>
     {
         cy.get(".order-history-list .container-clickable").eq(0).should("have.class", "collapsed");
         cy.get(".order-history-list .container-clickable").eq(0).click().wait(100);
-        cy.get(".order-history-list .container-clickable").eq(0).not('.collapsed');
+        cy.get(".order-history-list .container-clickable").eq(0).not(".collapsed");
     });
 
     it("should have correct data in order-history", () =>
@@ -70,7 +70,7 @@ context("my-account order-history", () =>
         cy.get(".order-history-list .container-clickable").eq(0).click();
         cy.getByTestingAttr("order-history-quantity").eq(0).should("contain", "1");
         cy.get(".order-history-list .item img").eq(0)
-            .should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg');
+            .should("have.attr", "src", "https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg");
     });
 
     it("should check sums", () =>
@@ -103,12 +103,14 @@ context("my-account order-history", () =>
     it("Should check for possible payment change", () =>
     {
         cy.get(".order-history-list .container-clickable").eq(1).click();
-        cy.getByTestingAttr("change-payment-my-account").click()
+        cy.getByTestingAttr("change-payment-my-account").click();
 
         cy.get(".modal.show").should("exist");
         cy.get(".current-payment-text").should("contain", "Vorkasse");
-        cy.get(`[data-id='2']`).should("exist"); // prepayment
-        cy.get(`[data-id='6001']`).should("exist"); // paypal
+        // prepayment
+        cy.get(`[data-id='2']`).should("exist");
+        // paypal
+        cy.get(`[data-id='6001']`).should("exist");
     });
 
     it("Should check for possible return", () =>
