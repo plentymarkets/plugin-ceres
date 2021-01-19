@@ -8,13 +8,25 @@ use Plenty\Modules\Category\Models\Category;
 
 class CategoryContext extends GlobalContext implements ContextInterface
 {
-    /** @var Category */
+    /**
+     * @var \Plenty\Modules\Category\Models\Category
+     * Category data of the current category.
+     */
     public $category = null;
 
+    /**
+     * @var string Page meta data of the current category.
+     */
     public $metaRobots;
 
+    /**
+     * @inheritdoc
+     */
     public $assetName = "ceres-base";
 
+    /**
+     * @inheritdoc
+     */
     public function init($params)
     {
         parent::init($params);
