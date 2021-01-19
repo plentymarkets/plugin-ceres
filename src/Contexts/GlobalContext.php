@@ -25,90 +25,92 @@ use Plenty\Modules\System\Models\WebstoreConfiguration;
 class GlobalContext implements ContextInterface
 {
     /**
-     * @var array Passthrough variables from the controller.
+     * @var array $params Passthrough variables from the controller.
      */
     protected $params = [];
 
     /**
-     * @var CeresConfig The configuration for the shop.
+     * @var CeresConfig $ceresConfig The configuration for the shop.
      */
     public $ceresConfig = null;
 
     /**
-     * @var Request The http request.
+     * @var Request $request The http request.
      */
     protected $request;
 
     /**
-     * @var string The language code of the current language.
+     * @var string $lang The language code of the current language.
      */
     public $lang;
 
     /**
-     * @var string
+     * @var string $metaLang
      * @deprecated since 5.0.20 will be removed in 6.0.0
      */
     public $metaLang;
 
     /**
-     * @var bool Defines if the meta data should have the attrribute content set to "NOINDEX".
+     * @var bool $forceNoIndex Defines if the meta data should have the attrribute content set to "NOINDEX".
      */
     public $forceNoIndex;
 
     /**
-     * @var array
+     * @var array $template
      * @deprecated since 5.0.20 will be removed in 6.0.0
      */
     public $template = [];
 
     /**
+     * @var string $templateName
      * @deprecated since 5.0.20 will be removed in 6.0.0
      */
     public $templateName;
 
     /**
-     * @var array Categories for the navigation.
+     * @var array $categories Categories for the navigation.
      */
     public $categories;
 
     /**
-     * @var array List of all parent categories including current category.
+     * @var array $categoryBreadcrumbs List of all parent categories including current category.
      */
     public $categoryBreadcrumbs;
 
     /**
-     * @var array List of all notifications store in the session.
+     * @var array $notifications List of all notifications store in the session.
      */
     public $notifications;
 
     /**
-     * @var array The basket object.
+     * @var array $basket The basket object.
      */
     public $basket;
 
     /**
-     * @var WebstoreConfiguration The webstore configuration.
+     * @var WebstoreConfiguration $webstoreConfig The webstore configuration.
      */
     public $webstoreConfig;
 
     /**
-     * @var array The name and the symbol for the currently selected currency.
+     * @var array $currencyData The name and the symbol for the currently selected currency.
      */
     public $currencyData;
 
     /**
-     * @var bool Defines if net prices should be shown.
+     * @var bool $showNetPrices Defines if net prices should be shown.
      */
     public $showNetPrices;
 
     /**
+     * @var string $homepageURL
      * @deprecated since 4.3
      * Use ShopUrls::$home instead
      */
     public $homepageURL;
 
     /**
-     * @var string Represents the system setting for splitting bundles.
+     * @var string $splitItemBundle Represents the system setting for splitting bundles.
      */
     public $splitItemBundle;
 
@@ -119,27 +121,27 @@ class GlobalContext implements ContextInterface
     public $templateEvent;
 
     /**
-     * @var bool Defines if the shop is opened in shop builder mode.
+     * @var bool $isShopBuilder Defines if the shop is opened in shop builder mode.
      */
     public $isShopBuilder;
 
     /**
-     * @var bool Defines if the shop is load in safe mode.
+     * @var bool $isSafeMode Defines if the shop is load in safe mode.
      */
     public $isSafeMode;
 
     /**
-     * @var array Array of CSS classes to apply to the body.
+     * @var array $bodyClasses Array of CSS classes to apply to the body.
      */
     public $bodyClasses;
 
     /**
-     * @var string Hash of the latest plugin deployment.
+     * @var string $buildHash Hash of the latest plugin deployment.
      */
     public $buildHash;
 
     /**
-     * @var string Key for the assets to be load.
+     * @var string $assetName Key for the assets to be load.
      */
     public $assetName = "ceres-checkout";
 
