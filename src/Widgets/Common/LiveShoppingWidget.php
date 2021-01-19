@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class LiveShoppingWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.LiveShoppingWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::LiveShoppingWidget")
@@ -23,7 +27,10 @@ class LiveShoppingWidget extends BaseWidget
             ->withPosition(800)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -103,7 +110,10 @@ class LiveShoppingWidget extends BaseWidget
 
         return $settings->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         return [

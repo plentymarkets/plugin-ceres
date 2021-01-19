@@ -25,11 +25,7 @@ class BaseWidget implements DynamicWidget
         'checkout'      => 'tpl.checkout'
     ];
 
-    /**
-     * The template to be used for this widget
-     *
-     * @var string
-     */
+    /** @var string $template The template to be used for this widget */
     protected $template = "";
 
     /**
@@ -166,8 +162,8 @@ class BaseWidget implements DynamicWidget
     /**
      * Get additional data to be passed to the template while rendering
      *
-     * @param $widgetSettings
-     * @param $isPreview
+     * @param array $widgetSettings asfsafafs
+     * @param bool $isPreview sdfdsfdsf
      * @return array
      */
     protected function getTemplateData($widgetSettings, $isPreview)
@@ -185,7 +181,16 @@ class BaseWidget implements DynamicWidget
     {
         return [];
     }
-
+    
+    /**
+     * Mock a paginated result
+     *
+     * @param \Closure $factory
+     * @param int $itemsPerPage
+     * @param int $currentPage
+     * @param int $pages
+     * @return array
+     */
     protected function mockPaginatedResult( \Closure $factory, $itemsPerPage = 10, $currentPage = 1, $pages = 5 )
     {
         $entries = [];

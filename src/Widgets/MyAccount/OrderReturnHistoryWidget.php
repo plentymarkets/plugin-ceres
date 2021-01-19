@@ -12,8 +12,12 @@ use Plenty\Plugin\Translation\Translator;
 
 class OrderReturnHistoryWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.OrderReturnHistoryWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::OrderReturnHistoryWidget")
@@ -25,7 +29,10 @@ class OrderReturnHistoryWidget extends BaseWidget
             ->withMaxPerPage(1)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -51,7 +58,10 @@ class OrderReturnHistoryWidget extends BaseWidget
 
         return $settings->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $previewData = null;

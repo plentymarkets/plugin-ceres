@@ -12,8 +12,12 @@ use IO\Services\ItemListService;
 
 class ItemGridWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Category.ItemGridWidget";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemGridWidget')
@@ -25,6 +29,9 @@ class ItemGridWidget extends BaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

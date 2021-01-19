@@ -9,8 +9,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class TabWidget extends GridWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Grid.TabWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::TabWidget")
@@ -21,7 +25,10 @@ class TabWidget extends GridWidget
             ->withPosition(500)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

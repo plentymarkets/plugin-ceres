@@ -8,6 +8,7 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use Illuminate\Database\Eloquent\Collection;
 use IO\Helper\Utils;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
@@ -15,11 +16,18 @@ use Plenty\Modules\Order\Status\Models\OrderStatus;
 
 class OrderHistoryWidget extends BaseWidget
 {
+    /** @var Collection $statuses A collection of all order status */
     private $statuses = null;
+    
+    /** @var null|string $lang The currently selected shop language */
     private $lang = null;
-
+    
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.OrderHistoryWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::OrderHistoryWidget")
@@ -31,7 +39,10 @@ class OrderHistoryWidget extends BaseWidget
             ->withMaxPerPage(1)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -72,7 +83,10 @@ class OrderHistoryWidget extends BaseWidget
     {
         return $widgetSettings["ordersPerPage"]["mobile"] ?? 5;
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $previewData = null;

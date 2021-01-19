@@ -11,8 +11,12 @@ use IO\Services\ItemListService;
 
 class ItemSetWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.ItemSetWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ItemSetWidget")
@@ -33,7 +37,10 @@ class ItemSetWidget extends BaseWidget
             )
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

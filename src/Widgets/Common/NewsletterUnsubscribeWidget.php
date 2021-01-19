@@ -9,8 +9,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class NewsletterUnsubscribeWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.NewsletterUnsubscribeWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::NewsletterUnsubscribeWidget")
@@ -20,7 +24,10 @@ class NewsletterUnsubscribeWidget extends BaseWidget
             ->withPosition(600)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
