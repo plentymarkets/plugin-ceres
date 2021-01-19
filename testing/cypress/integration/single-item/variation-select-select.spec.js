@@ -1,5 +1,5 @@
 // / <reference types="cypress" />
-context("Variation Select - Box", () =>
+context("Variation Select - Dropdown", () =>
 {
     /*
     Artikel-ID 138: Ein Attribut - Dropdown - Nicht kaufbar ausgeblendet
@@ -57,7 +57,7 @@ context("Variation Select - Box", () =>
     {
         cy.visit("/ein-attribut-dropdown-nicht-verfuegbar-angezeigt_139_1083/");
         isSaleable();
-        
+
         cy.getByTestingAttr("variation-select-dropdown").select("schwarz");
         cy.location("pathname").should("eq", "/variantenauswahl/ein-attribut-dropdown-nicht-verfuegbar-angezeigt_139_1084/");
         isSaleable();
@@ -103,7 +103,7 @@ context("Variation Select - Box", () =>
     {
         cy.visit("variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140_1093/");
         isSaleable();
-        
+
         cy.getByTestingAttr("variation-select-dropdown").eq(0).select("lila");
         cy.location("pathname").should("eq", "/variantenauswahl/zwei-attribute-dropdown-nicht-kaufbar-angezeigt-nicht-verfuegbar-angezeigt_140_1094/");
         isSaleable();
