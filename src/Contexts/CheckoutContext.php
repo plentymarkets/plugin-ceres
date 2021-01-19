@@ -20,6 +20,9 @@ class CheckoutContext extends CategoryContext implements ContextInterface
      */
     public $assetName = "ceres-checkout";
 
+    /**
+     * @inheritdoc
+     */
     public function init($params)
     {
         parent::init($params);
