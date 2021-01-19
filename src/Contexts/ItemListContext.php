@@ -75,7 +75,11 @@ trait ItemListContext
                         }
                     }
                 }
-                $this->pageMax        = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                if($options['itemsPerPage'] == 0) {
+                    $this->pageMax = 1;
+                } else {
+                    $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                }
                 $this->itemCountPage  = count($variationIds);
                 $this->itemCountTotal = $externalSearch->getCountTotal();
                 $this->facets         = [];
@@ -110,7 +114,12 @@ trait ItemListContext
         $this->itemCountTotal = $searchResults['itemList']['total'];
         $this->itemCountTotal = $this->itemCountTotal > 10000 ? 10000 : $this->itemCountTotal;
 
-        $this->pageMax = ceil($this->itemCountTotal / $options['itemsPerPage']);
+        if($options['itemsPerPage'] == 0) {
+                $this->pageMax = 1;
+        } else {
+            $this->pageMax = ceil($this->itemCountTotal / $options['itemsPerPage']);
+        }
+
         $this->itemCountPage = count($searchResults['itemList']['documents']);
         $this->itemList = $searchResults['itemList']['documents'];
         $this->facets = $searchResults['facets'];
