@@ -7,13 +7,26 @@ use IO\Helper\ContextInterface;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 
+/**
+ * Context class with additional data, required for the search view.
+ */
 class ItemSearchContext extends CategoryContext implements ContextInterface
 {
     use ItemListContext;
 
+    /**
+     * @var bool Defines that the user has executed a shop search.
+     */
     public $isSearch;
+
+    /**
+     * @var string The query that was searched for.
+     */
     public $searchString;
 
+    /**
+     * @inheritDoc
+     */
     public function init($params)
     {
         parent::init($params);

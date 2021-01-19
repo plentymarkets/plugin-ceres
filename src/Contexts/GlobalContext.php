@@ -6,7 +6,6 @@ use Ceres\Config\CeresConfig;
 use Ceres\Helper\BuildHash;
 use IO\Extensions\Constants\ShopUrls;
 use IO\Helper\ContextInterface;
-use IO\Helper\RouteConfig;
 use IO\Helper\Utils;
 use IO\Services\BasketService;
 use IO\Services\CategoryService;
@@ -18,48 +17,137 @@ use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Http\Request;
+use Plenty\Modules\System\Models\WebstoreConfiguration;
 
+/**
+ * Context class with data, required on all views in the shop.
+ */
 class GlobalContext implements ContextInterface
 {
+    /**
+     * @var array $params Passthrough variables from the controller.
+     */
     protected $params = [];
 
-    /** @var CeresConfig $ceresConfig  */
+    /**
+     * @var CeresConfig $ceresConfig The configuration for the shop.
+     */
     public $ceresConfig = null;
 
-    /** @var Request $request */
+    /**
+     * @var Request $request The http request.
+     */
     protected $request;
 
+    /**
+     * @var string $lang The language code of the current language.
+     */
     public $lang;
+
+    /**
+     * @var string $metaLang
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $metaLang;
+
+    /**
+     * @var bool $forceNoIndex Defines if the meta data should have the attrribute content set to "NOINDEX".
+     */
     public $forceNoIndex;
+
+    /**
+     * @var array $template
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $template = [];
+
+    /**
+     * @var string $templateName
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $templateName;
+
+    /**
+     * @var array $categories Categories for the navigation.
+     */
     public $categories;
+
+    /**
+     * @var array $categoryBreadcrumbs List of all parent categories including current category.
+     */
     public $categoryBreadcrumbs;
+
+    /**
+     * @var array $notifications List of all notifications store in the session.
+     */
     public $notifications;
+
+    /**
+     * @var array $basket The basket object.
+     */
     public $basket;
+
+    /**
+     * @var WebstoreConfiguration $webstoreConfig The webstore configuration.
+     */
     public $webstoreConfig;
+
+    /**
+     * @var array $currencyData The name and the symbol for the currently selected currency.
+     */
     public $currencyData;
+
+    /**
+     * @var bool $showNetPrices Defines if net prices should be shown.
+     */
     public $showNetPrices;
 
     /**
+     * @var string $homepageURL
      * @deprecated since 4.3
-     * Use IO\Extensions\Constants\ShopUrls::$home instead
+     * Use ShopUrls::$home instead
      */
     public $homepageURL;
+
+    /**
+     * @var string $splitItemBundle Represents the system setting for splitting bundles.
+     */
     public $splitItemBundle;
 
     /**
      * @deprecated since 4.5
-     * Use IO\Extensions\Constants\ShopUrls::getTemplateType() instead
+     * Use ShopUrls::getTemplateType() instead
      */
     public $templateEvent;
+
+    /**
+     * @var bool $isShopBuilder Defines if the shop is opened in shop builder mode.
+     */
     public $isShopBuilder;
+
+    /**
+     * @var bool $isSafeMode Defines if the shop is load in safe mode.
+     */
     public $isSafeMode;
+
+    /**
+     * @var array $bodyClasses Array of CSS classes to apply to the body.
+     */
     public $bodyClasses;
+
+    /**
+     * @var string $buildHash Hash of the latest plugin deployment.
+     */
     public $buildHash;
+
+    /**
+     * @var string $assetName Key for the assets to be load.
+     */
     public $assetName = "ceres-checkout";
 
+    /**
+     * @inheritDoc
+     */
     public function init($params)
     {
         $this->params = $params;
@@ -153,6 +241,12 @@ class GlobalContext implements ContextInterface
         $this->buildHash = BuildHash::get();
     }
 
+    /**
+     * Get value from $params, filtered by the key.
+     * @param string|int $key Key to search for in the $params.
+     * @param mixed $defaultValue Optional: If set, the method will return the $defaultValue, when there is no value for the given $key. (Default: null)
+     * @return string|null
+     */
     protected function getParam($key, $defaultValue = null)
     {
         if(is_null($this->params[$key]))

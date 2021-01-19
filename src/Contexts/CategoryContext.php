@@ -6,15 +6,30 @@ use IO\Helper\ContextInterface;
 use IO\Helper\RouteConfig;
 use Plenty\Modules\Category\Models\Category;
 
+/**
+ * Context class with additional data, required for all content category views.
+ */
 class CategoryContext extends GlobalContext implements ContextInterface
 {
-    /** @var Category */
+    /**
+     * @var Category
+     * Category data of the current category.
+     */
     public $category = null;
 
+    /**
+     * @var string Page meta data of the current category.
+     */
     public $metaRobots;
 
+    /**
+     * @inheritDoc
+     */
     public $assetName = "ceres-base";
 
+    /**
+     * @inheritDoc
+     */
     public function init($params)
     {
         parent::init($params);

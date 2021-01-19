@@ -7,10 +7,16 @@ use IO\Helper\ContextInterface;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\CategoryItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 
+/**
+ * Context class with additional data, required for all item category views.
+ */
 class CategoryItemContext extends CategoryContext implements ContextInterface
 {
     use ItemListContext;
 
+    /**
+     * @inheritDoc
+     */
     public function init($params)
     {
         parent::init($params);
