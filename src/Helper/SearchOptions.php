@@ -6,11 +6,19 @@ use Ceres\Config\CeresConfig;
 use IO\Services\ItemService;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class SearchOptions
+ * Helper class for getting item search options
+ * @package Ceres\Helper
+ */
 class SearchOptions
 {
+    /** @var string */
     const SCOPE_SEARCH      = 'search';
+    /** @var string  */
     const SCOPE_CATEGORY    = 'category';
 
+    /** @var string[] A translation map for the sorting options */
     const TRANSLATION_MAP   = [
         "default.recommended_sorting"               => "itemRecommendedSorting",
         "texts.name1_asc"                           => "itemName_asc",
@@ -33,11 +41,21 @@ class SearchOptions
         "variation.position_desc"                   => "itemVariationTopseller_desc",
     ];
 
+    /** @var array $itemsPerPage Get all itemsPerPage settings */
     public $itemsPerPage        = [];
+    /** @var int $defaultItemsPerPage Get the default itemsPerPage setting */
     public $defaultItemsPerPage = 0;
+    /** @var array $sorting Get all sorting settings */
     public $sorting             = [];
+    /** @var string $defaultSorting Get the default sorting setting */
     public $defaultSorting      = '';
 
+    /**
+     * Get an instance of the class containing item search options for the scope
+     * @param string $scope Either 'category' or 'search'
+     *
+     * @return SearchOptions
+     */
     public static function get( $scope )
     {
         /** @var SearchOptions $instance */
@@ -106,6 +124,11 @@ class SearchOptions
         return $instance;
     }
 
+    /**
+     * @param $itemListOptions
+     * @param $scope
+     * @return mixed
+     */
     public static function validateItemListOptions($itemListOptions, $scope)
     {
 
