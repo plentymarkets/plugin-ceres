@@ -3,6 +3,7 @@
 namespace Ceres\Contexts;
 
 use IO\Helper\ContextInterface;
+use Plenty\Modules\Category\Models\Category;
 
 class ChangeMailContext extends GlobalContext implements ContextInterface
 {
@@ -22,7 +23,7 @@ class ChangeMailContext extends GlobalContext implements ContextInterface
     public $newMail;
 
     /**
-     * @var \Plenty\Modules\Category\Models\Category
+     * @var Category
      * Category data of the current category, linked to this context.
      */
     public $category;
@@ -34,8 +35,8 @@ class ChangeMailContext extends GlobalContext implements ContextInterface
     {
         parent::init($params);
 
-        $this->hash = $this->getParam( 'hash');
-        $this->contactId = $this->getParam( 'contactId');
+        $this->hash = $this->getParam('hash');
+        $this->contactId = $this->getParam('contactId');
         $this->newMail = $this->getParam('newMail');
         $this->category = $this->getParam('category');
     }

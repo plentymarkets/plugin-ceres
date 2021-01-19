@@ -6,7 +6,6 @@ use Ceres\Config\CeresConfig;
 use Ceres\Helper\BuildHash;
 use IO\Extensions\Constants\ShopUrls;
 use IO\Helper\ContextInterface;
-use IO\Helper\RouteConfig;
 use IO\Helper\Utils;
 use IO\Services\BasketService;
 use IO\Services\CategoryService;
@@ -18,6 +17,7 @@ use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Http\Request;
+use Plenty\Modules\System\Models\WebstoreConfiguration;
 
 class GlobalContext implements ContextInterface
 {
@@ -82,7 +82,7 @@ class GlobalContext implements ContextInterface
     public $basket;
 
     /**
-     * @var \Plenty\Modules\System\Models\WebstoreConfiguration The webstore configuration.
+     * @var WebstoreConfiguration The webstore configuration.
      */
     public $webstoreConfig;
 
@@ -98,7 +98,7 @@ class GlobalContext implements ContextInterface
 
     /**
      * @deprecated since 4.3
-     * Use IO\Extensions\Constants\ShopUrls::$home instead
+     * Use ShopUrls::$home instead
      */
     public $homepageURL;
 
@@ -109,7 +109,7 @@ class GlobalContext implements ContextInterface
 
     /**
      * @deprecated since 4.5
-     * Use IO\Extensions\Constants\ShopUrls::getTemplateType() instead
+     * Use ShopUrls::getTemplateType() instead
      */
     public $templateEvent;
 

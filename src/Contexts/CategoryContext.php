@@ -9,7 +9,7 @@ use Plenty\Modules\Category\Models\Category;
 class CategoryContext extends GlobalContext implements ContextInterface
 {
     /**
-     * @var \Plenty\Modules\Category\Models\Category
+     * @var Category
      * Category data of the current category.
      */
     public $category = null;

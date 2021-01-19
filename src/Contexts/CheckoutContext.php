@@ -5,7 +5,6 @@ namespace Ceres\Contexts;
 use IO\Helper\ContextInterface;
 use IO\Services\CheckoutService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
-use Plenty\Modules\Webshop\Contracts\SessionStorageRepositoryContract;
 use Plenty\Plugin\Translation\Translator;
 
 class CheckoutContext extends CategoryContext implements ContextInterface

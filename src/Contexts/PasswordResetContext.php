@@ -3,6 +3,7 @@
 namespace Ceres\Contexts;
 
 use IO\Helper\ContextInterface;
+use Plenty\Modules\Category\Models\Category;
 
 class PasswordResetContext extends GlobalContext implements ContextInterface
 {
@@ -17,7 +18,7 @@ class PasswordResetContext extends GlobalContext implements ContextInterface
     public $hash;
 
     /**
-     * @var \Plenty\Modules\Category\Models\Category
+     * @var Category
      * Category data of the current category, linked to this context.
      */
     public $category;

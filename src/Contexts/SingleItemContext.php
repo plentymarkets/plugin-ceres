@@ -7,6 +7,8 @@ use IO\Helper\ContextInterface;
 use IO\Services\CategoryService;
 use IO\Services\CustomerService;
 use Plenty\Plugin\ConfigRepository;
+use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
+use Plenty\Modules\Category\Models\Category;
 
 
 class SingleItemContext extends GlobalContext implements ContextInterface
@@ -35,18 +37,17 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     /**
      * @var array Check if net prices should be shown.
      * @deprecated since 5.0.0 will be removed in 6.0.0
-     * @see \Plenty\Modules\Webshop\Contracts\ContactRepositoryContract::showNetPrices()
+     * @see ContactRepositoryContract::showNetPrices()
      */
     public $customerShowNetPrices;
     
     /**
-     * @var \Plenty\Modules\Category\Models\Category
+     * @var Category
      * Category data of the default category of the current item.
      */
     public $defaultCategory;
 
     /**
-     * // TODO: check how to inherit from parent
      * @inheritdoc
      */
     public $assetName = "ceres-base";
