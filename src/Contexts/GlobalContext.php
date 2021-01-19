@@ -45,6 +45,7 @@ class GlobalContext implements ContextInterface
     public $lang;
 
     /**
+     * @var string
      * @deprecated since 5.0.20 will be removed in 6.0.0
      */
     public $metaLang;
@@ -55,6 +56,7 @@ class GlobalContext implements ContextInterface
     public $forceNoIndex;
 
     /**
+     * @var array
      * @deprecated since 5.0.20 will be removed in 6.0.0
      */
     public $template = [];
@@ -237,6 +239,12 @@ class GlobalContext implements ContextInterface
         $this->buildHash = BuildHash::get();
     }
 
+    /**
+     * Get value from $params, filtered by the key.
+     * @param string|int $key Key to search for in the $params.
+     * @param mixed $defaultValue Optional: If set, the method will return the $defaultValue, when there is no value for the given $key. (Default: null)
+     * @return string|null
+     */
     protected function getParam($key, $defaultValue = null)
     {
         if(is_null($this->params[$key]))

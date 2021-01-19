@@ -31,6 +31,7 @@ trait ItemListContext
     public $itemsPerPage;
 
     /**
+     * @var int
      * @deprecated since 5.0.20 will be removed in 6.0.0
      */
     public $itemCountPage;
