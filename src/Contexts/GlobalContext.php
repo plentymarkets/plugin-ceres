@@ -21,25 +21,79 @@ use Plenty\Plugin\Http\Request;
 
 class GlobalContext implements ContextInterface
 {
+    /**
+     * @var array Passthrough variables from the controller.
+     */
     protected $params = [];
 
-    /** @var CeresConfig $ceresConfig  */
+    /**
+     * @var CeresConfig The configuration for the shop.
+     */
     public $ceresConfig = null;
 
-    /** @var Request $request */
+    /**
+     * @var Request The http request.
+     */
     protected $request;
 
+    /**
+     * @var string The language code of the current language.
+     */
     public $lang;
+
+    /**
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $metaLang;
+
+    /**
+     * @var bool Defines if the meta data should have the attrribute content set to "NOINDEX".
+     */
     public $forceNoIndex;
+
+    /**
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $template = [];
+
+    /**
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $templateName;
+
+    /**
+     * @var array Categories for the navigation.
+     */
     public $categories;
+
+    /**
+     * @var array List of all parent categories including current category.
+     */
     public $categoryBreadcrumbs;
+
+    /**
+     * @var array List of all notifications store in the session.
+     */
     public $notifications;
+
+    /**
+     * @var array The basket object.
+     */
     public $basket;
+
+    /**
+     * @var \Plenty\Modules\System\Models\WebstoreConfiguration The webstore configuration.
+     */
     public $webstoreConfig;
+
+    /**
+     * @var array The name and the symbol for the currently selected currency.
+     */
     public $currencyData;
+
+    /**
+     * @var bool Defines if net prices should be shown.
+     */
     public $showNetPrices;
 
     /**
@@ -47,6 +101,10 @@ class GlobalContext implements ContextInterface
      * Use IO\Extensions\Constants\ShopUrls::$home instead
      */
     public $homepageURL;
+
+    /**
+     * @var string Represents the system setting for splitting bundles.
+     */
     public $splitItemBundle;
 
     /**
@@ -54,12 +112,35 @@ class GlobalContext implements ContextInterface
      * Use IO\Extensions\Constants\ShopUrls::getTemplateType() instead
      */
     public $templateEvent;
+
+    /**
+     * @var bool Defines if the shop is opened in shop builder mode.
+     */
     public $isShopBuilder;
+
+    /**
+     * @var bool Defines if the shop is load in safe mode.
+     */
     public $isSafeMode;
+
+    /**
+     * @var array Array of CSS classes to apply to the body.
+     */
     public $bodyClasses;
+
+    /**
+     * @var string Hash of the latest plugin deployment.
+     */
     public $buildHash;
+
+    /**
+     * @var string Key for the assets to be load.
+     */
     public $assetName = "ceres-checkout";
 
+    /**
+     * @inheritdoc
+     */
     public function init($params)
     {
         $this->params = $params;
