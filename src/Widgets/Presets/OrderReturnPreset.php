@@ -12,7 +12,10 @@ class OrderReturnPreset implements ContentPreset
     private $preset;
 
     use HasWhiteBackground;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);

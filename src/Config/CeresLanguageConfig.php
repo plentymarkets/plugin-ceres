@@ -8,11 +8,17 @@ class CeresLanguageConfig extends PluginConfig
 {
     public $activeLanguages;
     
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->activeLanguages = $this->getMultiSelectValue(

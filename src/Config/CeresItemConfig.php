@@ -23,12 +23,18 @@ class CeresItemConfig extends PluginConfig
     public $requireOrderProperties;
     public $loadingAnimationType;
     public $showCategoryFilter;
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->displayName      = $this->getTextValue( 'item.displayName', 'itemName' );

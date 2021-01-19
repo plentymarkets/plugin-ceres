@@ -20,12 +20,18 @@ class CeresContactConfig extends PluginConfig
     public $mapZoom;
     public $mapShowInMobile;
     public $enableConfirmingPrivacyPolicy;
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->shopMail = $this->getTextValue('contact.shop_mail', '', 'your@email.com');

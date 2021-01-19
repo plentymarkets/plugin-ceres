@@ -10,11 +10,17 @@ class CeresLogConfig extends PluginConfig
     public $performanceLevel;
     public $checkSyntax;
     
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->data = $this->getMultiSelectValue(

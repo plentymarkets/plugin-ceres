@@ -15,11 +15,17 @@ class CeresFooterConfig extends PluginConfig
     public $cancellationUsePdf;
     public $cancellationPdfPath;
     
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->toTopButton          = $this->getTextValue( 'footer.to_top_button', 'right' );

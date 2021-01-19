@@ -2,7 +2,6 @@
 
 namespace Ceres\Widgets\Presets;
 
-use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Ceres\Widgets\Presets\Helper\HasWhiteBackground;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
@@ -10,7 +9,10 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 class WishListPreset implements ContentPreset
 {
     use HasWhiteBackground;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         /** @var PresetHelper */

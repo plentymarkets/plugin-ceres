@@ -14,11 +14,17 @@ class CeresPaginationConfig extends PluginConfig
     public $itemsPerPage;
     public $noIndex;
     
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->position         = $this->getTextValue( 'pagination.position', 'top' );

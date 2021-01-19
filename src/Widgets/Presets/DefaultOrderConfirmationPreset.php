@@ -36,6 +36,9 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     /** @var PresetWidgetFactory */
     private $fourColumnWidget;
     
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);

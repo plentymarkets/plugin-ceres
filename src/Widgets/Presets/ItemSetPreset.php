@@ -36,7 +36,10 @@ class ItemSetPreset implements ContentPreset
 
     /** @var PresetWidgetFactory */
     private $setComponentBackgroundWidget;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);

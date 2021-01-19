@@ -34,11 +34,17 @@ class CeresHomepageConfig extends PluginConfig
     public $homepageCategory5;
     public $homepageCategory6;
     
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->showShopBuilderContent = $this->getBooleanValue( 'homepage.showShopBuilderContent', false );

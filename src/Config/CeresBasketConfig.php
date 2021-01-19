@@ -14,12 +14,18 @@ class CeresBasketConfig extends PluginConfig
     public $previewType;
     public $showShippingCountrySelect;
     public $splitBundles;
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->itemData = $this->getMultiSelectValue(

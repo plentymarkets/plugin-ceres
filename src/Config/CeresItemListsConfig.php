@@ -17,11 +17,17 @@ class CeresItemListsConfig extends PluginConfig
     public $list3Type;
     public $list3TagIds;
     
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->lastSeenNumber       = $this->getIntegerValue( 'item.lists.last_seen_number', 4 );

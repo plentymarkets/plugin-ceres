@@ -9,6 +9,9 @@ use Plenty\Plugin\Translation\Translator;
 
 class DefaultPageNotFoundPreset implements ContentPreset
 {
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         /** @var PresetHelper */

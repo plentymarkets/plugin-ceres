@@ -10,12 +10,18 @@ class CeresCurrencyConfig extends PluginConfig
     public $enableSelection;
     public $formatSelection;
     public $availableCurrencies;
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->format = $this->getTextValue('currency.format', 'name');

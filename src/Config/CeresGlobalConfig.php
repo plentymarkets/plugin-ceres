@@ -18,12 +18,18 @@ class CeresGlobalConfig extends PluginConfig
     public $registrationRequirePrivacyPolicyConfirmation;
     public $blockCookies;
     public $userDataHashMaxAge;
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->favicon                  = $this->getTextValue( 'global.favicon', '' );

@@ -15,11 +15,17 @@ class CeresMetaConfig extends PluginConfig
     public $robotsTermsAndConditions;
     public $robotsSearchResult;
     
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->robotsHome                           = $this->getTextValue( 'meta.robots_home' , 'all' );

@@ -19,7 +19,10 @@ class ItemSearchPreset implements ContentPreset
 
     /** @var PresetWidgetFactory */
     private $twoColumnWidget;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);

@@ -20,12 +20,18 @@ class CeresSortingConfig extends PluginConfig
     public $dynamicInherit;
     public $dynamicPrio1;
     public $dynamicPrio2;
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->data = $this->getMultiSelectValue(

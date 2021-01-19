@@ -15,12 +15,18 @@ class CeresAddressConfig extends PluginConfig
     public $deliveryAddressShow_en;
     public $deliveryAddressRequire;
     public $deliveryAddressRequire_en;
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->defaultSalutation = $this->getTextValue('addresses.defaultSalutation');

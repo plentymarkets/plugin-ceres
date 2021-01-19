@@ -10,7 +10,10 @@ class DefaultPrivacyPolicyPreset implements ContentPreset
 {
     /** @var PresetHelper $preset */
     private $preset;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);

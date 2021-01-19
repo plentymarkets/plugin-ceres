@@ -14,11 +14,17 @@ class CeresMyAccountConfig extends PluginConfig
     public $confirmationLinkLoginRedirect;
     public $confirmationLinkExpiration;
     
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->ordersPerPage                = $this->getIntegerValue( 'my_account.orders_per_page', 5 );

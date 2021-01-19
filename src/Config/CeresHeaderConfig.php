@@ -17,12 +17,18 @@ class CeresHeaderConfig extends PluginConfig
     public $megamenuItemsStage1;
     public $megamenuItemsStage2;
     public $megamenuItemsStage3;
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPluginName()
     {
         return 'Ceres';
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->companyName          = $this->getTextValue('header.company_name', 'Ceres Webshop' );
