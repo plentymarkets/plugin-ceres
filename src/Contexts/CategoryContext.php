@@ -6,6 +6,9 @@ use IO\Helper\ContextInterface;
 use IO\Helper\RouteConfig;
 use Plenty\Modules\Category\Models\Category;
 
+/**
+ * Context class with additional data, required for all content category views.
+ */
 class CategoryContext extends GlobalContext implements ContextInterface
 {
     /**

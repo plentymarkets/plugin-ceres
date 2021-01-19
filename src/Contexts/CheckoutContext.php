@@ -7,6 +7,9 @@ use IO\Services\CheckoutService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Context class with additional data, required for the checkout view.
+ */
 class CheckoutContext extends CategoryContext implements ContextInterface
 {
     /**

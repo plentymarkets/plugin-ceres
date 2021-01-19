@@ -19,6 +19,9 @@ use Plenty\Plugin\Application;
 use Plenty\Plugin\Http\Request;
 use Plenty\Modules\System\Models\WebstoreConfiguration;
 
+/**
+ * Context class with data, required on all views in the shop.
+ */
 class GlobalContext implements ContextInterface
 {
     /**

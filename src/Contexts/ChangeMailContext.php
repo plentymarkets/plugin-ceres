@@ -5,6 +5,9 @@ namespace Ceres\Contexts;
 use IO\Helper\ContextInterface;
 use Plenty\Modules\Category\Models\Category;
 
+/**
+ * Context class with additional data, required for the change mail view.
+ */
 class ChangeMailContext extends GlobalContext implements ContextInterface
 {
     /**

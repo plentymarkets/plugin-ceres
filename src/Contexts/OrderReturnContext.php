@@ -4,6 +4,9 @@ namespace Ceres\Contexts;
 
 use IO\Helper\ContextInterface;
 
+/**
+ * Context class with additional data, required for the order return view.
+ */
 class OrderReturnContext extends CategoryContext implements ContextInterface
 {
     /**

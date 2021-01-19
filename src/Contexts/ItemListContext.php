@@ -10,6 +10,9 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\VariationList;
 use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
 
+/**
+ * Trait to extend a context, including all properties to handle item data.
+ */
 trait ItemListContext
 {
     /**

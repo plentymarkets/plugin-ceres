@@ -11,6 +11,9 @@ use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Category\Models\Category;
 
 
+/**
+ * Context class with additional data, required for the single item view.
+ */
 class SingleItemContext extends GlobalContext implements ContextInterface
 {
     /**
