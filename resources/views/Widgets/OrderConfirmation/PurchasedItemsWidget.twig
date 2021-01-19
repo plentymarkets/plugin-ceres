@@ -155,7 +155,7 @@
 
                         {{ Twig.set("itemAmount", "item.amounts[0]") }}
 
-                        {{ Twig.for("amount", "item.amouts if not amout.isSystemCurrency") }}
+                        {{ Twig.for("amount", "item.amounts if not amount.isSystemCurrency") }}
                             {{ Twig.set("itemAmount", "amount") }}
                         {{ Twig.endfor() }}
 

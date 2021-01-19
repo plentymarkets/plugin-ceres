@@ -303,7 +303,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var basketItem = _step.value;
           var matchingProperties = basketItem.variation.data.properties.filter(function (property) {
-            return property.property.isShownAsAdditionalCosts && !property.property.isOrderProperty;
+            return property.property.isShownAsAdditionalCosts && property.property.isOderProperty === false;
           });
 
           var _iterator2 = _createForOfIteratorHelper(matchingProperties),
