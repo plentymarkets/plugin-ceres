@@ -11,22 +11,22 @@ use Plenty\Modules\Category\Models\Category;
 class ChangeMailContext extends GlobalContext implements ContextInterface
 {
     /**
-     * @var int The contact's ID for changing the mail.
+     * @var int $contactId The contact's ID for changing the mail.
      */
     public $contactId;
 
     /**
-     * @var string The Hash used to authenticate the mail change.
+     * @var string $hash The Hash used to authenticate the mail change.
      */
     public $hash;
 
     /**
-     * @var string The new email address, to change.
+     * @var string $newMail The new email address, to change.
      */
     public $newMail;
 
     /**
-     * @var Category
+     * @var Category $category
      * Category data of the current category, linked to this context.
      */
     public $category;

@@ -12,13 +12,13 @@ use Plenty\Modules\Category\Models\Category;
 class CategoryContext extends GlobalContext implements ContextInterface
 {
     /**
-     * @var Category
+     * @var Category $category
      * Category data of the current category.
      */
     public $category = null;
 
     /**
-     * @var string Page meta data of the current category.
+     * @var string $metaRobots Page meta data of the current category.
      */
     public $metaRobots;
 

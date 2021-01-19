@@ -16,58 +16,58 @@ use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
 trait ItemListContext
 {
     /**
-     * @var int Current page of items.
+     * @var int $currentPage Current page of items.
      */
     public $currentPage;
 
     /**
-     * @var int Last page for items.
+     * @var int $pageMax Last page for items.
      */
     public $pageMax;
 
     /**
-     * @var int How many items are included in one page.
+     * @var int $itemsPerPage How many items are included in one page.
      */
     public $itemsPerPage;
 
     /**
-     * @var int
+     * @var int $itemCountPage
      * @deprecated since 5.0.20 will be removed in 6.0.0
      */
     public $itemCountPage;
 
     /**
-     * @var int Count of all items in the item result.
+     * @var int $itemCountTotal Count of all items in the item result.
      */
     public $itemCountTotal;
 
     /**
-     * @var string Sorting key for the item result.
+     * @var string $itemSorting Sorting key for the item result.
      */
     public $itemSorting;
 
     /**
-     * @var array Contains items per page count and the sorting key for the item result.
+     * @var array $query Contains items per page count and the sorting key for the item result.
      */
     public $query;
 
     /**
-     * @var string Suggestion for the shop search.
+     * @var string $suggestionString Suggestion for the shop search.
      */
     public $suggestionString;
 
     /**
-     * @var array Item result.
+     * @var array $itemList Item result.
      */
     public $itemList = [];
 
     /**
-     * @var array Facets that were selected to filter the item result.
+     * @var array $facets Facets that were selected to filter the item result.
      */
     public $facets;
 
     /**
-     * @var SearchOptions
+     * @var SearchOptions $searchOptions
      */
     public $searchOptions;
 

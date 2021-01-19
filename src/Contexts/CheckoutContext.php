@@ -13,7 +13,7 @@ use Plenty\Plugin\Translation\Translator;
 class CheckoutContext extends CategoryContext implements ContextInterface
 {
     /**
-     * @var array Contains data for the checkout, including payment methods, shipping profiles, currencies and other data.
+     * @var array $checkout Contains data for the checkout, including payment methods, shipping profiles, currencies and other data.
      */
     public $checkout = [];
 

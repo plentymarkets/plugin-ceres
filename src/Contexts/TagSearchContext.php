@@ -15,17 +15,17 @@ class TagSearchContext extends CategoryContext implements ContextInterface
     use ItemListContext;
 
     /**
-     * @var bool Defines that the user has executed a shop search.
+     * @var bool $isSearch Defines that the user has executed a shop search.
      */
     public $isSearch;
 
     /**
-     * @var string The name of the tag.
+     * @var string $searchString The name of the tag.
      */
     public $searchString;
 
     /**
-     * @var bool Defines that the user is on a page with items, filtered for the current tag.
+     * @var bool $isTag Defines that the user is on a page with items, filtered for the current tag.
      */
     public $isTag = true;
 

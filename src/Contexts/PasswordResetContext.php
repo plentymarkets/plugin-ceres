@@ -11,17 +11,17 @@ use Plenty\Modules\Category\Models\Category;
 class PasswordResetContext extends GlobalContext implements ContextInterface
 {
     /**
-     * @var int The contact's ID for reset the password.
+     * @var int $contactId The contact's ID for reset the password.
      */
     public $contactId;
 
     /**
-     * @var string The Hash used to authenticate the password reset.
+     * @var string $hash The Hash used to authenticate the password reset.
      */
     public $hash;
 
     /**
-     * @var Category
+     * @var Category $category
      * Category data of the current category, linked to this context.
      */
     public $category;

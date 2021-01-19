@@ -15,12 +15,12 @@ class ItemSearchContext extends CategoryContext implements ContextInterface
     use ItemListContext;
 
     /**
-     * @var bool Defines that the user has executed a shop search.
+     * @var bool $isSearch Defines that the user has executed a shop search.
      */
     public $isSearch;
 
     /**
-     * @var string The query that was searched for.
+     * @var string $searchString The query that was searched for.
      */
     public $searchString;
 
