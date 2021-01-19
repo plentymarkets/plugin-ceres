@@ -30,7 +30,7 @@ class TagSearchContext extends CategoryContext implements ContextInterface
     public $isTag = true;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

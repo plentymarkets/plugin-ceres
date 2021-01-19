@@ -23,12 +23,12 @@ class CategoryContext extends GlobalContext implements ContextInterface
     public $metaRobots;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public $assetName = "ceres-base";
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

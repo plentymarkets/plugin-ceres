@@ -25,12 +25,12 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
     public $showAdditionalPaymentInformation;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public $assetName = "ceres-checkout";
     
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

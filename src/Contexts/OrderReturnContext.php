@@ -20,7 +20,7 @@ class OrderReturnContext extends CategoryContext implements ContextInterface
     public $orderAccessKey;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

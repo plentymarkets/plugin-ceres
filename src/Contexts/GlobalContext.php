@@ -142,7 +142,7 @@ class GlobalContext implements ContextInterface
     public $assetName = "ceres-checkout";
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

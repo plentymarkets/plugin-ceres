@@ -51,7 +51,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $defaultCategory;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public $assetName = "ceres-base";
 
@@ -87,7 +87,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $requestedVariationUrl;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

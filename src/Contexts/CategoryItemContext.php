@@ -15,7 +15,7 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
     use ItemListContext;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

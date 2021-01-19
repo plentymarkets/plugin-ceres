@@ -25,7 +25,7 @@ class ItemSearchContext extends CategoryContext implements ContextInterface
     public $searchString;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

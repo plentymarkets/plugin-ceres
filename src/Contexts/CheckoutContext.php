@@ -18,12 +18,12 @@ class CheckoutContext extends CategoryContext implements ContextInterface
     public $checkout = [];
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public $assetName = "ceres-checkout";
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {

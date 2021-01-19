@@ -32,7 +32,7 @@ class ChangeMailContext extends GlobalContext implements ContextInterface
     public $category;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function init($params)
     {
