@@ -68,8 +68,8 @@ context("my-account order-history", () =>
     it("should have correct data in order-history", () =>
     {
         cy.get(".order-history-list .container-clickable").eq(0).click();
-        cy.getByTestingAttr("return-history-quantity").eq(0).should("contain", "Stückzahl: 1");
-        cy.get(".order-return-history-list .item img").eq(0)
+        cy.getByTestingAttr("order-history-quantity").eq(0).should("contain", "1");
+        cy.get(".order-history-list .item img").eq(0)
             .should("have.attr", "src", "https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg");
     });
 
