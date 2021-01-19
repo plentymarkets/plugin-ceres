@@ -10,7 +10,14 @@ use Plenty\Plugin\Translation\Translator;
 
 class CheckoutContext extends CategoryContext implements ContextInterface
 {
+    /**
+     * @var array Contains data for the checkout, including payment methods, shipping profiles, currencies and other data.
+     */
     public $checkout = [];
+
+    /**
+     * @inheritdoc
+     */
     public $assetName = "ceres-checkout";
 
     public function init($params)
