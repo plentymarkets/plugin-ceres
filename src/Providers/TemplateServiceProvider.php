@@ -368,10 +368,7 @@ class TemplateServiceProvider extends ServiceProvider
             );
         }
     }
-
-    /**
-     *
-     */
+    
     private function registerConfigValues()
     {
         /** @var CeresConfig $ceresConfig */
