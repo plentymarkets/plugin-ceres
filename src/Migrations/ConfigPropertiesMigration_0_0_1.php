@@ -2,6 +2,7 @@
 
 namespace Ceres\Migrations;
 
+use Plenty\Modules\Plugin\Models\Configuration;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
@@ -9,10 +10,13 @@ use Plenty\Modules\PluginMultilingualism\Contracts\PluginTranslationRepositoryCo
 
 /**
  * Class ConfigPropertiesMigration_0_0_1
+ * This migration is used for migrating a config property into the translation.
+ * Migrations are referenced in the 'runOnBuild' section of the plugin.json and run exactly once.
  * @package Ceres\Migrations
  */
 class ConfigPropertiesMigration_0_0_1
 {
+    /** @var \string[][] $translationMap Translation map */
     private $translationMap =
     [
         'headerCompanyName' => [
@@ -21,7 +25,9 @@ class ConfigPropertiesMigration_0_0_1
         ]
     ];
 
-
+    /**
+     * Hook for running the migration.
+     */
     public function run()
     {
         /** @var PluginSetRepositoryContract $pluginSetRepo */
@@ -44,6 +50,11 @@ class ConfigPropertiesMigration_0_0_1
         }
     }
 
+    /**
+     * This function contains the main logic of this migration
+     * @param int $pluginSetId The pluginset id
+     * @param Configuration $config The Ceres config
+     */
     public function migrate($pluginSetId, $config)
     {
 		/** @var PluginTranslationRepositoryContract $translationRepo */
