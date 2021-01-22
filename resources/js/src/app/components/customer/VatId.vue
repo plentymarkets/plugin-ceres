@@ -1,11 +1,11 @@
 <template>
     <div
-        class="input-group"
+        class="input-group flex-nowrap"
         data-model="vatNumber"
         v-if="isEU">
-        <div class="input-unit border-0 w-auto input-group-prepend">
+        <div class="input-unit w-auto input-group-prepend">
             <span class="input-group-text h-100" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0].vatCode }}</span>
-            <select v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
+            <select class="custom-select" v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
                 <option v-for="(vatCode, index) in vatCodes" :value="vatCode.vatCode">{{ vatCode.vatCode }}</option>
             </select>
         </div>
