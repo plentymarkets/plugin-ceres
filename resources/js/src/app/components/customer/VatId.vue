@@ -4,7 +4,7 @@
         data-model="vatNumber"
         v-if="isEU">
         <div class="input-unit border-0 w-auto input-group-prepend">
-            <span class="input-group-text h-100" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatPrefix }}</span>
+            <span class="input-group-text h-100" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0].vatCode }}</span>
             <select v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
                 <option v-for="(vatCode, index) in vatCodes" :value="vatCode.vatCode">{{ vatCode.vatCode }}</option>
             </select>
@@ -97,9 +97,19 @@ export default
                 // Splits value in numbers and letters
                 const regex = new RegExp(/([^\d]*)(\d*)/);
                 const values = regex.exec(value);
+                const isPrefixValid = this.vatCodes.find(code => code.vatCode === values[1]);
 
-                this.vatPrefix = values[1];
-                this.vatNumber = values[2];
+                if (isPrefixValid)
+                {
+                    this.vatPrefix = values[1];
+                    this.vatNumber = values[2];
+                }
+                else
+                {
+                    // if vat prefix isn't included in this.vatCodes it's an invalid input
+                    // and we fill the whole vat id to make the wrong input visible for the customer.
+                    this.vatNumber = value;
+                }
             } 
         }
     }
