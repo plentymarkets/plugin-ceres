@@ -31,7 +31,7 @@ class TwigItemDataField extends Twig_Extension
 
     /**
      * TwigItemDataField constructor.
-     * @param TwigFactory $twig
+     * @param TwigFactory $twig The factory to render TWIG.
      */
     public function __construct(TwigFactory $twig)
     {
