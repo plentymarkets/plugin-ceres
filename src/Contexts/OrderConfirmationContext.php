@@ -5,7 +5,10 @@ namespace Ceres\Contexts;
 use IO\Helper\ContextInterface;
 
 /**
+ * Class OrderConfirmationContext
  * Context class with additional data, required for the order confirmation view.
+ *
+ * @package Ceres\Contexts
  */
 class OrderConfirmationContext extends CategoryContext implements ContextInterface
 {
@@ -28,14 +31,14 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
      * @inheritDoc
      */
     public $assetName = "ceres-checkout";
-    
+
     /**
      * @inheritDoc
      */
     public function init($params)
     {
         parent::init($params);
-        
+
         $this->data = $params['data'];
         $this->totals = $this->data['totals'];
         $this->showAdditionalPaymentInformation = $params['showAdditionalPaymentInformation'];

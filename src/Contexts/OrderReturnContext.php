@@ -5,7 +5,10 @@ namespace Ceres\Contexts;
 use IO\Helper\ContextInterface;
 
 /**
+ * Class OrderReturnContext
  * Context class with additional data, required for the order return view.
+ *
+ * @package Ceres\Contexts
  */
 class OrderReturnContext extends CategoryContext implements ContextInterface
 {
@@ -25,7 +28,7 @@ class OrderReturnContext extends CategoryContext implements ContextInterface
     public function init($params)
     {
         parent::init($params);
-        
+
         $this->orderData = $params['orderData'];
         $this->orderAccessKey = $params['orderAccessKey'];
     }

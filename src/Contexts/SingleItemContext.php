@@ -12,7 +12,10 @@ use Plenty\Modules\Category\Models\Category;
 
 
 /**
+ * Class SingleItemContext
  * Context class with additional data, required for the single item view.
+ *
+ * @package Ceres\Contexts
  */
 class SingleItemContext extends GlobalContext implements ContextInterface
 {
@@ -43,7 +46,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      * @see ContactRepositoryContract::showNetPrices()
      */
     public $customerShowNetPrices;
-    
+
     /**
      * @var Category $defaultCategory
      * Category data of the default category of the current item.

@@ -8,7 +8,10 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\TagItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 
 /**
+ * Class TagSearchContext
  * Context class with additional data, required for the tag item view.
+ *
+ * @package Ceres\Contexts
  */
 class TagSearchContext extends CategoryContext implements ContextInterface
 {
