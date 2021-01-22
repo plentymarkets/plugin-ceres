@@ -5,6 +5,15 @@ namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 use Plenty\Modules\Property\Models\Property;
 use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 
+/**
+ * Class PropertyDataFieldProvider
+ * This class is a data field provider centered about the topic of properties.
+ * It is used to enable placeholders for dynamic data in the shop builders text widget.
+ * Please refer to the parent class for more information about DataFieldProviders.
+ * Please refer to https://developers.plentymarkets.com/dev-doc/result-fields-ceres for more information about
+ * the data fields.
+ * @package Ceres\ShopBuilder\DataFieldProvider\Item
+ */
 class PropertyDataFieldProvider extends DataFieldProvider
 {
     /** @var Property */
@@ -18,6 +27,9 @@ class PropertyDataFieldProvider extends DataFieldProvider
         $this->propertyGroupId = $propertyGroupId;
     }
 
+    /**
+     * Registers item data fields for use in the shop builder.
+     */
     function register()
     {
         if (is_null($this->propertyGroupId)) {

@@ -12,12 +12,25 @@ use Plenty\Modules\Property\Models\PropertyOption;
 use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class PropertyGroupDataFieldProvider
+ * This class is a data field provider centered about the topic of property groups.
+ * It divides it's data into groups and single properties and delegates to child providers.
+ * It is used to enable placeholders for dynamic data in the shop builders text widget.
+ * Please refer to the parent class for more information about DataFieldProviders.
+ * Please refer to https://developers.plentymarkets.com/dev-doc/result-fields-ceres for more information about
+ * the data fields.
+ * @package Ceres\ShopBuilder\DataFieldProvider\Item
+ */
 class PropertyGroupDataFieldProvider extends DataFieldProvider
 {
     static $noneGroupId = -1;
     static $properties = null;
     static $groupNames = [];
 
+    /**
+     * Registers item data fields for use in the shop builder.
+     */
     function register()
     {
         if (is_null(self::$properties)) {
