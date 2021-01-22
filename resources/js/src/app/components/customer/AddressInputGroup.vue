@@ -208,7 +208,6 @@
                         v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'billing_address.vatNumber')) ||
                         (!isInOptionalFields('de', 'billing_address.salutation') && isInOptionalFields('de', 'billing_address.name1') && isInOptionalFields('de', 'billing_address.vatNumber'))">
                         <vat-id
-                            v-validate:text="isInRequiredFields('de', 'billing_address.vatNumber')"
                             :is-required="isInRequiredFields('de', 'billing_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
@@ -391,11 +390,10 @@
                         v-if="(isInOptionalFields('gb', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('gb', 'billing_address.vatNumber')) ||
                         (!isInOptionalFields('gb', 'billing_address.salutation') && isInOptionalFields('gb', 'billing_address.name1') && isInOptionalFields('gb', 'billing_address.vatNumber'))">
                         <vat-id
-                            v-validate:text="isInRequiredFields('gb', 'billing_address.vatNumber')"
                             :is-required="isInRequiredFields('gb', 'billing_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :initial-value="value.vatNumber">
+                            :value="value.vatNumber">
                         </vat-id>
                     </div>
                 </div>
@@ -580,11 +578,10 @@
                         v-if="(isInOptionalFields('de', 'delivery_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'delivery_address.vatNumber')) ||
                         (!isInOptionalFields('de', 'delivery_address.salutation') && isInOptionalFields('de', 'delivery_address.name1') && isInOptionalFields('de', 'delivery_address.vatNumber'))">
                         <vat-id
-                            v-validate:text="isInRequiredFields('de', 'delivery_address.vatNumber')"
                             :is-required="isInRequiredFields('de', 'delivery_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :initial-value="value.vatNumber">
+                            :value="value.vatNumber">
                         </vat-id>
                     </div>
                 </div>
@@ -760,11 +757,10 @@
                         v-if="(isInOptionalFields('gb', 'delivery_address.salutation') && value.gender === 'company' &&  isInOptionalFields('gb', 'delivery_address.vatNumber')) ||
                         (!isInOptionalFields('gb', 'delivery_address.salutation') && isInOptionalFields('gb', 'delivery_address.name1') && isInOptionalFields('gb', 'delivery_address.vatNumber'))">
                         <vat-id
-                            v-validate:text="isInRequiredFields('gb', 'delivery_address.vatNumber')"
                             :is-required="isInRequiredFields('gb', 'delivery_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :initial-value="value.vatNumber">
+                            :value="value.vatNumber">
                         </vat-id>
                     </div>
                 </div>
