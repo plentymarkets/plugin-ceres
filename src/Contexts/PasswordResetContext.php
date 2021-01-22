@@ -6,7 +6,10 @@ use IO\Helper\ContextInterface;
 use Plenty\Modules\Category\Models\Category;
 
 /**
+ * Class PasswordResetContext
  * Context class with additional data, required for the password reset view.
+ *
+ * @package Ceres\Contexts
  */
 class PasswordResetContext extends GlobalContext implements ContextInterface
 {

@@ -7,7 +7,10 @@ use IO\Helper\RouteConfig;
 use Plenty\Modules\Category\Models\Category;
 
 /**
+ * Class CategoryContext
  * Context class with additional data, required for all content category views.
+ *
+ * @package Ceres\Contexts
  */
 class CategoryContext extends GlobalContext implements ContextInterface
 {

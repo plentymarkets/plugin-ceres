@@ -20,7 +20,10 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Modules\System\Models\WebstoreConfiguration;
 
 /**
+ * Class GlobalContext
  * Context class with data, required on all views in the shop.
+ *
+ * @package Ceres\Contexts
  */
 class GlobalContext implements ContextInterface
 {
