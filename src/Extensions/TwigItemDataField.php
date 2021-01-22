@@ -20,7 +20,7 @@ use Plenty\Plugin\Translation\Translator;
 class TwigItemDataField extends Twig_Extension
 {
     /**
-     * @var TwigFactory $twig
+     * @var TwigFactory $twig The factory to render TWIG.
      */
     private $twig;
 
