@@ -5,7 +5,7 @@
         v-if="isEU">
         <div class="input-unit border-0 w-auto input-group-prepend">
             <span class="input-group-text h-100" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatPrefix }}</span>
-            <select v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange($event)">
+            <select v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
                 <option v-for="(vatCode, index) in vatCodes" :value="vatCode.vatCode">{{ vatCode.vatCode }}</option>
             </select>
         </div>
@@ -18,7 +18,7 @@
                 v-model="vatNumber"
                 data-autofocus
                 data-testing="vat-id"
-                @input="emitChange($event)"
+                @input="emitChange()"
             >
             <label :for="'txtVatNumber' + _uid">
                 {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
@@ -94,11 +94,12 @@ export default
         {
             if (value && value.length > 0)
             {
-                const prefix = value.slice(0, 2);
-                const number = value.slice(2);
+                // Splits value in numbers and letters
+                const regex = new RegExp(/([^\d]*)(\d*)/);
+                const values = regex.exec(value);
 
-                this.vatPrefix = prefix;
-                this.vatNumber = number;
+                this.vatPrefix = values[1];
+                this.vatNumber = values[2];
             } 
         }
     }
