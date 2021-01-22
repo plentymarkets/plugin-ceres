@@ -212,7 +212,7 @@
                             :is-required="isInRequiredFields('de', 'billing_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :initial-value="value.vatNumber">
+                            :value="value.vatNumber">
                         </vat-id>
                     </div>
                 </div>

@@ -4,10 +4,22 @@
         data-model="vatNumber"
         v-if="isEU">
         <div class="input-unit border-0 w-auto input-group-prepend">
-            <span class="input-group-text h-100" id="basic-addon1">{{ vatPrefix }}</span>
+            <span class="input-group-text h-100" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatPrefix }}</span>
+            <select v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange($event)">
+                <option v-for="(vatCode, index) in vatCodes" :value="vatCode.vatCode">{{ vatCode.vatCode }}</option>
+            </select>
         </div>
-        <div class="input-unit flex-fill w-auto">
-            <input aria-describedby="basic-addon1" type="text" name="vatNumber" :id="'txtVatNumber' + _uid" v-model="vatValue" data-autofocus>
+        <div class="input-unit flex-fill w-auto" v-validate:text="isRequired">
+            <input
+                aria-describedby="basic-addon1"
+                type="text"
+                name="vatNumber"
+                :id="'txtVatNumber' + _uid"
+                v-model="vatNumber"
+                data-autofocus
+                data-testing="vat-id"
+                @input="emitChange($event)"
+            >
             <label :for="'txtVatNumber' + _uid">
                 {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
             </label>
@@ -23,59 +35,45 @@ export default
     props:
     {
         selectedCountryId: Number,
-        initialValue: String,
+        value: String,
         isRequired: Boolean
     },
 
     data()
     {
         return {
-            vatValue: ""
+            vatNumber: "",
+            vatPrefix: ""
         }
     },
 
     computed:
     {
-        vatId()
-        {
-            const vatId = this.isEU ? this.vatPrefix + this.vatValue : "";
-
-            return vatId;
-        },
-
-        vatPrefix()
+        vatCodes()
         {
             const selectedCountry = this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
-
-            return selectedCountry ? selectedCountry.vatCode : "";
+            
+            this.vatPrefix = selectedCountry.vatCodes && selectedCountry.vatCodes[0] ? selectedCountry.vatCodes[0].vatCode : "";
+            return selectedCountry.vatCodes;
         },
 
         isEU()
         {
-            return !!this.vatPrefix && this.vatPrefix.length > 0;
+            return this.vatCodes?.length > 0;
         }
     },
 
     watch:
     {
-        vatId(newvatId, oldvatId)
+        value(newValue)
         {
-            this.$emit('input', newvatId);
+            this.setValues(newValue);
         }
     },
 
     created()
     {
-        if (this.initialValue && this.initialValue.length > 0)
-        {
-            const initialPrefix = this.initialValue.slice(0, 2);
-            const initialValue = this.initialValue.slice(2);
-
-            if(initialPrefix === this.vatPrefix)
-            {
-                this.vatValue = initialValue;
-            }
-        } 
+        this.setValues(this.value);
     },
 
     methods:
@@ -85,6 +83,23 @@ export default
             const translation = this.$translate(translationKey);
 
             return translation + (this.isRequired ? "*" : "");
+        },
+        
+        emitChange(event)
+        {
+            this.$emit('input', this.vatPrefix + this.vatNumber);
+        },
+
+        setValues(value)
+        {
+            if (value && value.length > 0)
+            {
+                const prefix = value.slice(0, 2);
+                const number = value.slice(2);
+
+                this.vatPrefix = prefix;
+                this.vatNumber = number;
+            } 
         }
     }
 }
