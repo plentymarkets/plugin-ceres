@@ -245,18 +245,6 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                let oldAddress = {};
-
-                if (addressType === "1")
-                {
-                    oldAddress = state.billingAddress;
-                    commit("selectBillingAddress", selectedAddress);
-                }
-                else if (addressType === "2")
-                {
-                    oldAddress = state.deliveryAddress;
-                    commit("selectDeliveryAddress", selectedAddress);
-                }
 
                 commit("setIsBasketLoading", true);
 
@@ -264,19 +252,18 @@ const actions =
                     .done(response =>
                     {
                         commit("setIsBasketLoading", false);
+                        if (addressType === "1")
+                        {
+                            commit("selectBillingAddress", selectedAddress);
+                        }
+                        else if (addressType === "2")
+                        {
+                            commit("selectDeliveryAddress", selectedAddress);
+                        }
                         return resolve(response);
                     })
                     .fail(error =>
                     {
-                        if (addressType === "1")
-                        {
-                            commit("selectBillingAddress", oldAddress);
-                        }
-                        else if (addressType === "2")
-                        {
-                            commit("selectDeliveryAddress", oldAddress);
-                        }
-
                         commit("setIsBasketLoading", false);
                         reject(error);
                     });
