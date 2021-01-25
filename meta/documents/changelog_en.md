@@ -1,5 +1,47 @@
 # Release Notes for Ceres
 
+## v5.0.20 (2021-01-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.19...5.0.20" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Images in the background image widget now have accessible alternative text attributes.
+- Vertical overflow in the `.app` container is now prevented through the inclusion of `overflow-x: hidden`.
+
+### Fixed 
+
+- Due to a faulty setting pertaining to the number of items per page, items could be displayed incorrectly. This behaviour has been fixed.
+- In the My Acount area and the order confirmation, different currencies were displayed for items and totals if the selected currency was not the system currency. This behaviour has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.20 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2606/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2611/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2613/files#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2613/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
+
+## v5.0.19 (2021-01-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.18...5.0.19" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the totals in the shopping cart and the order confirmation also listed order characteristics for which the setting **Display as additional costs** was active. This has been fixed.
+
+## v5.0.18 (2021-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.17...5.0.18" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added 
+
+- You can now determine the search operator of the online shop search in the Ceres assistant. You can either select an **And** or an **Or** operator.
+
+### Changed
+
+- The totals in the shopping cart and the order confirmation can now display the additional costs of characteristics. The option can be activated in the settings of the price information widget.
+
+### Fixed
+
+- Under certain circumstances, the sticky container widget reset to its original position while scrolling, which led to a shaky display of the widget. This behaviour has been fixed.
+- Images that are integrated into text widgets via data fields now have a maximum width.
+
 ## v5.0.17 (2020-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.16...5.0.17" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed

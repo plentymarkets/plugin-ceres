@@ -9063,6 +9063,10 @@ button:focus {
     }
 }
 
+.app {
+    overflow-x: hidden;
+}
+
 .center-xy {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -11467,9 +11471,13 @@ category-item,
             margin-bottom: 0;
             word-wrap: break-word;
         }
+    }
 
-        .category-description {
-            word-wrap: break-word;
+    .category-description {
+        word-wrap: break-word;
+
+        img {
+            max-width: 100%;
         }
     }
 
@@ -13292,6 +13300,11 @@ html.ie {
 
     .widget-inner {
         padding: 1rem 1.5rem;
+    }
+
+    // images from data-fields
+    img {
+        max-width: 100%;
     }
 }
 
