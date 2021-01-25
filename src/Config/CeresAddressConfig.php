@@ -6,7 +6,16 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 class CeresAddressConfig extends PluginConfig
 {
+    /**
+     * @var string $defaultSalutation The preselected salutation in the address modal.
+     * 
+     * @deprecated
+     */
     public $defaultSalutation;
+
+    /**
+     * 
+     */
     public $billingAddressShow;
     public $billingAddressShow_en;
     public $billingAddressRequire;
