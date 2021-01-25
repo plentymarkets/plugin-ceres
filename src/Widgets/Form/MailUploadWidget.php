@@ -4,6 +4,7 @@ namespace Ceres\Widgets\Form;
 
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
+use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
@@ -36,9 +37,32 @@ class MailUploadWidget extends BaseWidget
             ->withTooltip("Widget.mailFormFieldKeyTooltip");
 
         $settingsFactory->createText("label")
-            ->withDefaultValue("")
+            ->withDefaultValue("Widget.mailFormUploadLabel")
             ->withName("Widget.mailFormFieldLabelLabel")
             ->withTooltip("Widget.mailFormFieldLabelTooltip");
+
+        $settingsFactory->createCheckboxGroup("allowedFileTypes")
+            ->withDefaultValue(
+                [
+                    "image/*",
+                    "audio/*",
+                    "video/*"
+                ]
+            )
+            ->withName("Widget.mailFormUploadAllowedFileTypes")
+            ->withTooltip("Widget.mailFormUploadAllowedFileTypesTooltips")
+            ->withCheckboxValues(
+                ValueListFactory::make()
+                    ->addEntry("image/*", "Widget.mailFormUploadAllowedFileTypesImages")
+                    ->addEntry("audio/*", "Widget.mailFormUploadAllowedFileTypesAudio")
+                    ->addEntry("video/*", "Widget.mailFormUploadAllowedFileTypesVideo")
+                    ->toArray()
+        );
+        
+        $settingsFactory->createText("allowedFileExtensions")
+            ->withDefaultValue("pdf,zip")
+            ->withName("Widget.mailFormUploadAllowedFileExtensions")
+            ->withTooltip("Widget.mailFormUploadAllowedFileExtensionsTooltip");
 
         $settingsFactory->createCheckbox("isRequired")
             ->withDefaultValue(false)

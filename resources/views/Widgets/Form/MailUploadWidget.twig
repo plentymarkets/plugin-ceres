@@ -1,6 +1,7 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set formFieldId     = widget.settings.key.mobile | default(uid()) %}
+
 {% set isRequired      = widget.settings.isRequired.mobile %}
 {% set label           = widget.settings.label.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -8,20 +9,17 @@
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set customClass     = widget.settings.customClass.mobile %}
 
-{% set uid_check = uid() %}
+{% set allowedFileTypes = widget.settings.allowedFileTypes.mobile | join(',') | default(["allowedFileTypes.images", "allowedFileTypes.audio", "allowedFileTypes.video"]) %}
+{% set allowedFileExtensions = widget.settings.allowedFileExtensions.mobile | replace({",": ",."}) %}
+{% set acceptedFiles = allowedFileTypes ~ ",." ~ allowedFileExtensions %}
 
 <div class="widget widget-mail-upload
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     
-    <div class="input-unit{% if isRequired %} required{% endif %}{% if allowMailCC %} m-b-0{% endif %}" {% if isRequired %}data-validate="file"{% endif %}>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <input type="file" name="{{ formFieldId }}" id="{{ formFieldId }}">
-                {# <span class="input-group-text">Dateiauswahl</span> #}
-            </div>
-        </div>
+    <div class="widget-inner input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="file"{% endif %}>
+        <input type="file" multiple name="{{ formFieldId }}" id="{{ formFieldId }}" accept="{{ acceptedFiles }}">
 
         <label for="{{ formFieldId }}">
             {{ label }}{% if isRequired %}*{% endif %}
