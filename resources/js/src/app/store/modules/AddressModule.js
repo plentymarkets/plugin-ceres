@@ -27,7 +27,6 @@ const mutations =
             {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         },
 
@@ -80,7 +79,6 @@ const mutations =
             {
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         },
 
@@ -227,6 +225,7 @@ const actions =
 
             commit("setBillingAddressList", addressList);
             commit("selectBillingAddress", addressList.find(address => address.id === id));
+            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
         },
 
         initDeliveryAddress({ commit }, { id, addressList })
@@ -239,12 +238,25 @@ const actions =
 
             commit("setDeliveryAddressList", addressList);
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         },
 
         selectAddress({ commit, state, rootState, dispatch }, { selectedAddress, addressType })
         {
             return new Promise((resolve, reject) =>
             {
+                let oldAddress = {};
+
+                if (addressType === "1")
+                {
+                    oldAddress = state.billingAddress;
+                    commit("selectBillingAddress", selectedAddress);
+                }
+                else if (addressType === "2")
+                {
+                    oldAddress = state.deliveryAddress;
+                    commit("selectDeliveryAddress", selectedAddress);
+                }
 
                 commit("setIsBasketLoading", true);
 
@@ -254,16 +266,25 @@ const actions =
                         commit("setIsBasketLoading", false);
                         if (addressType === "1")
                         {
-                            commit("selectBillingAddress", selectedAddress);
+                            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
                         }
                         else if (addressType === "2")
                         {
-                            commit("selectDeliveryAddress", selectedAddress);
+                            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
                         }
                         return resolve(response);
                     })
                     .fail(error =>
                     {
+                        if (addressType === "1")
+                        {
+                            commit("selectBillingAddress", oldAddress);
+                        }
+                        else if (addressType === "2")
+                        {
+                            commit("selectDeliveryAddress", oldAddress);
+                        }
+
                         commit("setIsBasketLoading", false);
                         reject(error);
                     });
