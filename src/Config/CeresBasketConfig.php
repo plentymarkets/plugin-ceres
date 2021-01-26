@@ -6,15 +6,53 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 class CeresBasketConfig extends PluginConfig
 {
+    /**
+     * @var array $itemData Visible fields of the basket list items.
+     */
     public $itemData;
+
+    /**
+     * @var array $data Visible entries of the basket totals.
+     *
+     * @deprecated
+     */
     public $data;
+
+    /**
+     * @var array $previewData Visible entries of the basket (preview) totals.
+     *
+     * @deprecated
+     */
     public $previewData;
+
+
+    /**
+     * @var null $variations No usage.
+     *
+     * @deprecated
+     */
     public $variations;
+
+    /**
+     * @var string $addItemToBasketConfirm Type to display the basket addition. Possible values: 'overlay', 'preview', 'no_information'
+     */
     public $addItemToBasketConfirm;
+
+    /**
+     * @var string $previewType Type to display the basket preview. Possible values: 'hover', 'right'
+     */
     public $previewType;
+
+    /**
+     * @var boolean $showShippingCountrySelect Defines if the country select is shown in the basket.
+     */
     public $showShippingCountrySelect;
+
+    /**
+     * @var null $splitBundles No usage.
+     */
     public $splitBundles;
-    
+
     /**
      * @inheritDoc
      */
@@ -22,7 +60,7 @@ class CeresBasketConfig extends PluginConfig
     {
         return 'Ceres';
     }
-    
+
     /**
      * @inheritDoc
      */
