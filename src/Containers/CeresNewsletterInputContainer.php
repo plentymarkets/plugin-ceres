@@ -15,7 +15,7 @@ class CeresNewsletterInputContainer
     /**
      * Does nothing, as the underlying template does no longer exist.
      * @deprecated
-     * @param Twig $twig
+     * @param Twig $twig The twig instance
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime

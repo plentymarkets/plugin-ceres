@@ -16,8 +16,8 @@ class CeresItemListContainer2
 {
     /**
      * Renders the template.
-     * @param Twig $twig
-     * @param $arg
+     * @param Twig $twig The twig instance
+     * @param array $arg A list of items
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
