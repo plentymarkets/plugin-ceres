@@ -7,24 +7,68 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 class CeresAddressConfig extends PluginConfig
 {
     /**
-     * @var string $defaultSalutation The preselected salutation in the address modal.
-     * 
+     * @var string $defaultSalutation Preselected salutation in the address modal.
+     *
      * @deprecated
      */
     public $defaultSalutation;
 
     /**
-     * 
+     * @var array $billingAddressShow Visible input fields of the billing address.
+     *
+     * @deprecated
      */
     public $billingAddressShow;
+
+    /**
+     * @var array $billingAddressShow_en Visible input fields of the billing address in the english format.
+     *
+     * @deprecated
+     */
     public $billingAddressShow_en;
+
+    /**
+     * @var array $billingAddressRequire Required input fields of the billing address.
+     *
+     * @deprecated
+     */
     public $billingAddressRequire;
+
+    /**
+     * @var array $billingAddressRequire_en Required input fields of the billing address in the english format.
+     *
+     * @deprecated
+     */
     public $billingAddressRequire_en;
+
+    /**
+     * @var array $deliveryAddressShow Visible input fields of the delivery address.
+     *
+     * @deprecated
+     */
     public $deliveryAddressShow;
+
+    /**
+     * @var array $deliveryAddressShow_en Visible input fields of the delivery address in the english format.
+     *
+     * @deprecated
+     */
     public $deliveryAddressShow_en;
+
+    /**
+     * @var array $deliveryAddressRequire Required input fields of the delivery address.
+     *
+     * @deprecated
+     */
     public $deliveryAddressRequire;
+
+    /**
+     * @var array $billingAddressRequire_en Required input fields of the delivery address in the english format.
+     *
+     * @deprecated
+     */
     public $deliveryAddressRequire_en;
-    
+
     /**
      * @inheritDoc
      */
@@ -32,7 +76,7 @@ class CeresAddressConfig extends PluginConfig
     {
         return 'Ceres';
     }
-    
+
     /**
      * @inheritDoc
      */
