@@ -4,60 +4,101 @@ namespace Ceres\Config;
 
 class CeresConfig
 {
-    /** @var CeresAddressConfig  */
+    /**
+     * @var CeresAddressConfig $addresses Address configuration.
+     */
     public $addresses;
 
-    /** @var CeresBasketConfig */
+    /**
+     * @var CeresBasketConfig $basket Basket configuration.
+     */
     public $basket;
 
-    /** @var CeresContactConfig */
+    /**
+     * @var CeresContactConfig $contact Contact configurations.
+     *
+     * @deprecated since 4.4.0. Will be removed in 6.0.0.
+     */
     public $contact;
 
-    /** @var CeresCurrencyConfig  */
+    /**
+     * @var CeresCurrencyConfig $currency Currency configuration.
+     */
     public $currency;
 
-    /** @var CeresFooterConfig  */
+    /**
+     * @var CeresFooterConfig $footer Footer configuration.
+     */
     public $footer;
 
-    /** @var CeresGlobalConfig */
+    /**
+     * @var CeresGlobalConfig $global Global configuration.
+     */
     public $global;
 
-    /** @var CeresHeaderConfig */
+    /**
+     * @var CeresHeaderConfig $header Header configuration.
+     */
     public $header;
 
-    /** @var CeresHomepageConfig  */
+    /**
+     * @var CeresHomepageConfig $homepage Homepage configuration.
+     */
     public $homepage;
 
-    /** @var CeresItemConfig  */
+    /**
+     * @var CeresItemConfig $item Item view configuration.
+     */
     public $item;
 
-    /** @var CeresItemListsConfig  */
+    /**
+     * @var CeresItemListsConfig $itemLists Item lists configuration.
+     */
     public $itemLists;
 
-    /** @var CeresLanguageConfig  */
+    /**
+     * @var CeresLanguageConfig $language Language configuration.
+     */
     public $language;
 
-    /** @var CeresLogConfig  */
+    /**
+     * @var CeresLogConfig $log Log configuration.
+     */
     public $log;
 
-    /** @var CeresMetaConfig  */
+    /**
+     * @var CeresMetaConfig $meta Meta configuration.
+     */
     public $meta;
 
-    /** @var CeresCheckoutConfig */
+    /**
+     * @var CeresCheckoutConfig $checkout Checkout configuration.
+     */
     public $checkout;
 
-    /** @var CeresMyAccountConfig  */
+    /**
+     * @var CeresMyAccountConfig $myAccount My account configuration.
+     */
     public $myAccount;
 
-    /** @var CeresPaginationConfig  */
+    /**
+     * @var CeresPaginationConfig $pagination Pagination configuration.
+     */
     public $pagination;
 
-    /** @var CeresSearchConfig */
+    /**
+     * @var CeresSearchConfig $search Search configuration.
+     */
     public $search;
 
-    /** @var CeresSortingConfig  */
+    /**
+     * @var CeresSortingConfig $sorting Sorting configuration.
+     */
     public $sorting;
 
+    /**
+     * CeresConfig constructor.
+     */
     public function __construct()
     {
         $this->addresses    = pluginApp( CeresAddressConfig::class );

@@ -71,7 +71,7 @@ class CeresContactConfig extends PluginConfig
     /**
      * @inheritDoc
      */
-    protected function getPluginName():string
+    protected function getPluginName(): string
     {
         return 'Ceres';
     }

@@ -56,7 +56,7 @@ class CeresBasketConfig extends PluginConfig
     /**
      * @inheritDoc
      */
-    protected function getPluginName()
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
