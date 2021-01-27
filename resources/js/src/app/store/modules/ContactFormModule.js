@@ -156,7 +156,8 @@ const actions =
                                     bcc:        formOptions.bcc,
                                     replyTo:    formOptions.replyTo,
                                     recaptchaToken: recaptchaResponse
-                                }
+                                },
+                                { processData: false, contentType: false }
                             )
                                 .done(reponse =>
                                 {
