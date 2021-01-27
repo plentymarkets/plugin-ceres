@@ -14,49 +14,49 @@ class CeresFooterConfig extends PluginConfig
     /**
      * @var int $numberOfFeatures Number of store features.
      *
-     * @deprecated Will be removed in 6.0.0.
+     * @deprecated will be removed in 6.0.0.
      */
     public $numberOfFeatures;
 
     /**
      * @var int $numberOfCols Number of columns.
      *
-     * @deprecated Will be removed in 6.0.0.
+     * @deprecated will be removed in 6.0.0.
      */
     public $numberOfCols;
 
     /**
      * @var string $col1Categories List of IDs of categories to display in first column.
      *
-     * @deprecated Will be removed in 6.0.0.
+     * @deprecated will be removed in 6.0.0.
      */
     public $col1Categories;
 
     /**
      * @var string $col2Categories List of IDs of categories to display in second column.
      *
-     * @deprecated Will be removed in 6.0.0.
+     * @deprecated will be removed in 6.0.0.
      */
     public $col2Categories;
 
     /**
      * @var string $col3Categories List of IDs of categories to display in third column.
      *
-     * @deprecated Will be removed in 6.0.0.
+     * @deprecated will be removed in 6.0.0.
      */
     public $col3Categories;
 
     /**
      * @var bool $cancellationUsePdf Use PDF cancellation form.
      *
-     * @deprecated Will be removed in 6.0.0.
+     * @deprecated will be removed in 6.0.0.
      */
     public $cancellationUsePdf;
 
     /**
      * @var string $cancellationPdfPath URL to PDF file.
      *
-     * @deprecated Will be removed in 6.0.0.
+     * @deprecated will be removed in 6.0.0.
      */
     public $cancellationPdfPath;
 

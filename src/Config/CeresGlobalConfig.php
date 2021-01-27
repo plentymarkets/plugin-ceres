@@ -6,27 +6,78 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 class CeresGlobalConfig extends PluginConfig
 {
+    /**
+     * @var string $favicon Favicon of the online store
+     */
     public $favicon;
+
+    /**
+     * @var int $shippingCostsCategoryId Category to display shipping information.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $shippingCostsCategoryId;
+
+    /**
+     * @var int $defaultContactClassB2B Default customer class B2B.
+     */
     public $defaultContactClassB2B;
+
+    /**
+     * @var bool Enable Callisto route pattern for items.
+     */
     public $enableOldUrlPattern;
+
+    /**
+     * @var int $googleRecaptchaVersion Google reCAPTCHA version.
+     */
     public $googleRecaptchaVersion;
+
+    /**
+     * @var string $googleRecaptchaApiKey Google reCAPTCHA website key.
+     */
     public $googleRecaptchaApiKey;
+
+    /**
+     * @var string $googleRecaptchaSecret Google reCAPTCHA secret key.
+     */
     public $googleRecaptchaSecret;
+
+    /**
+     * @var float $googleRecaptchaThreshold Google reCAPTCHA v3 threshold.
+     */
     public $googleRecaptchaThreshold;
+
+    /**
+     * @var string $googleMapsApiKey Google Maps API key.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $googleMapsApiKey;
+
+    /**
+     * @var bool $registrationRequirePrivacyPolicyConfirmation Require acceptance of privacy policy for customer registration.
+     */
     public $registrationRequirePrivacyPolicyConfirmation;
+
+    /**
+     * @var bool $blockCookies Block unaccepted cookies.
+     */
     public $blockCookies;
+
+    /**
+     * @var int $userDataHashMaxAge Validity of URLs to change password and email address
+     */
     public $userDataHashMaxAge;
-    
+
     /**
      * @inheritDoc
      */
-    protected function getPluginName()
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
-    
+
     /**
      * @inheritDoc
      */
