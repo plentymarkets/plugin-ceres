@@ -4,9 +4,9 @@
         data-model="vatNumber"
         v-if="isEU">
         <div class="input-unit w-auto input-group-prepend">
-            <span class="input-group-text h-100" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0].vatCode }}</span>
+            <span class="input-group-text h-100" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0] }}</span>
             <select class="custom-select" v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
-                <option v-for="(vatCode, index) in vatCodes" :value="vatCode.vatCode">{{ vatCode.vatCode }}</option>
+                <option v-for="(vatCode, index) in vatCodes" :value="vatCode">{{ vatCode }}</option>
             </select>
         </div>
         <div class="input-unit flex-fill w-auto" v-validate:text="isRequired">
@@ -53,7 +53,7 @@ export default
         {
             const selectedCountry = this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
             
-            this.vatPrefix = selectedCountry.vatCodes && selectedCountry.vatCodes[0] ? selectedCountry.vatCodes[0].vatCode : "";
+            this.vatPrefix = selectedCountry.vatCodes && selectedCountry.vatCodes[0] ? selectedCountry.vatCodes[0] : "";
             return selectedCountry.vatCodes;
         },
 
@@ -97,7 +97,7 @@ export default
                 // Splits value in numbers and letters
                 const regex = new RegExp(/([^\d]*)(\d*)/);
                 const values = regex.exec(value);
-                const isPrefixValid = this.vatCodes.find(code => code.vatCode === values[1]);
+                const isPrefixValid = this.vatCodes.find(code => code === values[1]);
 
                 if (isPrefixValid)
                 {
