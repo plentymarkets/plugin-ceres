@@ -4,6 +4,12 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresSortingConfig
+ * PluginConfig class, including all plugin settings for the item sorting.
+ *
+ * @package Ceres\Config
+ */
 class CeresSortingConfig extends PluginConfig
 {
     /**
@@ -55,6 +61,8 @@ class CeresSortingConfig extends PluginConfig
 
     /**
      * @var array $dynamicInherit Adopt item sorting for sorting variations on the item tile.
+     *
+     * @deprecated will be removed in 6.0.0.
      */
     public $dynamicInherit;
 

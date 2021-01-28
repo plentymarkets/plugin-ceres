@@ -4,6 +4,12 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresCurrencyConfig
+ * PluginConfig class, including all plugin settings for the currencies.
+ *
+ * @package Ceres\Config
+ */
 class CeresCurrencyConfig extends PluginConfig
 {
     /**

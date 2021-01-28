@@ -4,6 +4,13 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresItemListsConfig
+ * PluginConfig class, including all plugin settings for the item lists.
+ *
+ * @deprecated will be removed in 6.0.0.
+ * @package Ceres\Config
+ */
 class CeresItemListsConfig extends PluginConfig
 {
     /**

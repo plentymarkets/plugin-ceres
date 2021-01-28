@@ -4,6 +4,12 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresItemConfig
+ * PluginConfig class, including all plugin settings for the single item view.
+ *
+ * @package Ceres\Config
+ */
 class CeresItemConfig extends PluginConfig
 {
     /**

@@ -4,6 +4,12 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresHeaderConfig
+ * PluginConfig class, including all plugin settings for the header.
+ *
+ * @package Ceres\Config
+ */
 class CeresHeaderConfig extends PluginConfig
 {
     /**

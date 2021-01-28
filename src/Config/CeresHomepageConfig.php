@@ -5,10 +5,11 @@ namespace Ceres\Config;
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
- * Class CeresContactConfig
- * @package Ceres\Config
+ * Class CeresHomepageConfig
+ * PluginConfig class, including all plugin settings for the homepage.
  *
  * @deprecated since 5.0.0. This class will be removed in 6.0.0
+ * @package Ceres\Config
  */
 class CeresHomepageConfig extends PluginConfig
 {

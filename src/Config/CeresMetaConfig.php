@@ -4,6 +4,12 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresMetaConfig
+ * PluginConfig class, including all plugin settings for the meta data.
+ *
+ * @package Ceres\Config
+ */
 class CeresMetaConfig extends PluginConfig
 {
     /**

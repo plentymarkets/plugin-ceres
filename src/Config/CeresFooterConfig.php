@@ -4,6 +4,12 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresFooterConfig
+ * PluginConfig class, including all plugin settings for the footer.
+ *
+ * @package Ceres\Config
+ */
 class CeresFooterConfig extends PluginConfig
 {
     /**

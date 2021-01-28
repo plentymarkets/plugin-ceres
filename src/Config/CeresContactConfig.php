@@ -6,9 +6,10 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
  * Class CeresContactConfig
- * @package Ceres\Config
+ * PluginConfig class, including all plugin settings for contact view.
  *
  * @deprecated since 4.4.0. This class will be removed in 6.0.0.
+ * @package Ceres\Config
  */
 class CeresContactConfig extends PluginConfig
 {

@@ -2,6 +2,12 @@
 
 namespace Ceres\Config;
 
+/**
+ * Class CeresConfig
+ * Config class, containing all PluginConfig classes of Ceres.
+ *
+ * @package Ceres\Config
+ */
 class CeresConfig
 {
     /**
@@ -43,6 +49,8 @@ class CeresConfig
 
     /**
      * @var CeresHomepageConfig $homepage Homepage configuration.
+     *
+     * @deprecated will be removed in 6.0.0.
      */
     public $homepage;
 
@@ -53,6 +61,8 @@ class CeresConfig
 
     /**
      * @var CeresItemListsConfig $itemLists Item lists configuration.
+     *
+     * @deprecated will be removed in 6.0.0.
      */
     public $itemLists;
 
@@ -73,6 +83,8 @@ class CeresConfig
 
     /**
      * @var CeresCheckoutConfig $checkout Checkout configuration.
+     *
+     * @deprecated will be removed in 6.0.0.
      */
     public $checkout;
 
@@ -88,6 +100,8 @@ class CeresConfig
 
     /**
      * @var CeresSearchConfig $search Search configuration.
+     *
+     * @deprecated will be removed in 6.0.0.
      */
     public $search;
 
