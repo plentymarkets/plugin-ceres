@@ -6,32 +6,121 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 class CeresItemConfig extends PluginConfig
 {
+    /**
+     * @var string $displayName Name of an item to display. Possible values are 'itemName', 'variationName' and 'itemNameVariationName'.
+     */
     public $displayName;
+
+    /**
+     * @var int $itemName Item name.
+     */
     public $itemName;
+
+    /**
+     * @var array $itemData Show item information.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $itemData;
+
+    /**
+     * @var int $storeSpecial Number of decimal places for discounts.
+     */
     public $storeSpecial;
+
+    /**
+     * @var bool $showVariationOverDropdown Defines if the selection of variations without stock in the variation dropdown is enabled.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $showVariationOverDropdown;
+
+    /**
+     * @var string Show variations by type. Possible values are 'all', 'main', 'child' and 'combined'.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $variationShowType;
+
+    /**
+     * @var bool $showPleaseSelect Defines if the "Please select" option is displayed.
+     */
     public $showPleaseSelect;
+
+    /**
+     * @var bool $enableImageCarousel Defines if the image carousel for category item list is enabled.
+     */
     public $enableImageCarousel;
+
+    /**
+     * @var bool $categoryShowDots Show image carousel dots in category item list and item lists.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $categoryShowDots;
+
+    /**
+     * @var bool $categoryShowNav Show image carousel navigation in category item list and item lists.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $categoryShowNav;
+
+    /**
+     * @var bool $showCategoryImage Show category image in category view.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $showCategoryImage;
+
+    /**
+     * @var bool $showCategoryDescription Show category description in category view.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $showCategoryDescription;
+
+    /**
+     * @var string $showCategoryDescriptionTop Show category description above item list. Possible values are 'none', 'description1', 'description2' and 'both'.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $showCategoryDescriptionTop;
+
+    /**
+     * @var string $showCategoryDescriptionBottom Show category description below item list. Possible values are 'none', 'description1', 'description2' and 'both'.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $showCategoryDescriptionBottom;
+
+    /**
+     * @var bool $requireOrderProperties Defines if all order properties are required before adding an item to shopping cart.
+     */
     public $requireOrderProperties;
+
+    /**
+     * @var string $loadingAnimationType Loading animation. Possible values are 'bars' and 'spinner'.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $loadingAnimationType;
+
+    /**
+     * @var bool $showCategoryFilter Show categories as filter options for search results.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $showCategoryFilter;
-    
+
     /**
      * @inheritDoc
      */
-    protected function getPluginName()
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
-    
+
     /**
      * @inheritDoc
      */
