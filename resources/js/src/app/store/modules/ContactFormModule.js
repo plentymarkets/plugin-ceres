@@ -157,9 +157,9 @@ const actions =
                                     replyTo:    formOptions.replyTo,
                                     recaptchaToken: recaptchaResponse
                                 },
-                                { processData: false, contentType: false }
+                                { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }
                             )
-                                .done(reponse =>
+                                .done(response =>
                                 {
                                     resetRecaptcha(recaptchaEl);
                                     event.target.reset();

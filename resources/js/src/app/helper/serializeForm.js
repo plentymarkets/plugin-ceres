@@ -36,7 +36,7 @@ function _readElement(inputElement)
     }
     else if (inputElement.type === "file")
     {
-        value = inputElement.files ? inputElement.files : "";
+        value = inputElement.files ? inputElement.files[0] : "";
     }
 
     return {
