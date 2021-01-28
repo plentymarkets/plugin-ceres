@@ -6,22 +6,53 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 class CeresMyAccountConfig extends PluginConfig
 {
+    /**
+     * @var int $ordersPerPage Number of orders to show per page in order history.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $ordersPerPage;
+
+    /**
+     * @var bool $orderReturnActive Defines if returns are allowed in my account.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $orderReturnActive;
+
+    /**
+     * @var int $orderReturnDays Number of days to return items of an order
+     */
     public $orderReturnDays;
+
+    /**
+     * @var string $orderReturnInitialStatus Default status for return.
+     */
     public $orderReturnInitialStatus;
+
+    /**
+     * @var bool $changePayment Allow customer to change the payment method.
+     */
     public $changePayment;
+
+    /**
+     * @var bool $confirmationLinkLoginRedirect Forward to login page after clicking link in order confirmation.
+     */
     public $confirmationLinkLoginRedirect;
+
+    /**
+     * @var string $confirmationLinkExpiration Validity of checkout URL.
+     */
     public $confirmationLinkExpiration;
-    
+
     /**
      * @inheritDoc
      */
-    protected function getPluginName()
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
-    
+
     /**
      * @inheritDoc
      */

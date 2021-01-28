@@ -6,16 +6,19 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 class CeresLanguageConfig extends PluginConfig
 {
+    /**
+     * @var array $activeLanguages Active languages.
+     */
     public $activeLanguages;
-    
+
     /**
      * @inheritDoc
      */
-    protected function getPluginName()
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
-    
+
     /**
      * @inheritDoc
      */
