@@ -33,7 +33,7 @@ class CeresBasketConfig extends PluginConfig
 
 
     /**
-     * @var null $variations No usage.
+     * @var mixed $variations No usage.
      *
      * @deprecated will be removed in 6.0.0.
      */
@@ -55,7 +55,7 @@ class CeresBasketConfig extends PluginConfig
     public $showShippingCountrySelect;
 
     /**
-     * @var null $splitBundles No usage.
+     * @var mixed $splitBundles No usage.
      */
     public $splitBundles;
 

@@ -13,7 +13,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 class CeresGlobalConfig extends PluginConfig
 {
     /**
-     * @var string $favicon Favicon of the online store
+     * @var string $favicon Favicon of the online store.
      */
     public $favicon;
 
@@ -72,7 +72,7 @@ class CeresGlobalConfig extends PluginConfig
     public $blockCookies;
 
     /**
-     * @var int $userDataHashMaxAge Validity of URLs to change password and email address
+     * @var int $userDataHashMaxAge Validity of URLs to change password and email address.
      */
     public $userDataHashMaxAge;
 
