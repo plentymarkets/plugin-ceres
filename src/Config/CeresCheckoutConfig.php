@@ -16,7 +16,7 @@ class CeresCheckoutConfig extends PluginConfig
     /**
      * @var bool $showAllShippingProfiles Defines if all available shipping profiles are displayed in the checkout.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $showAllShippingProfiles;
 

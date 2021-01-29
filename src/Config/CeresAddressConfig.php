@@ -15,63 +15,63 @@ class CeresAddressConfig extends PluginConfig
     /**
      * @var string $defaultSalutation Preselected salutation in the address modal.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $defaultSalutation;
 
     /**
      * @var array $billingAddressShow Visible input fields of the billing address.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $billingAddressShow;
 
     /**
      * @var array $billingAddressShow_en Visible input fields of the billing address in the english format.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $billingAddressShow_en;
 
     /**
      * @var array $billingAddressRequire Required input fields of the billing address.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $billingAddressRequire;
 
     /**
      * @var array $billingAddressRequire_en Required input fields of the billing address in the english format.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $billingAddressRequire_en;
 
     /**
      * @var array $deliveryAddressShow Visible input fields of the delivery address.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $deliveryAddressShow;
 
     /**
      * @var array $deliveryAddressShow_en Visible input fields of the delivery address in the english format.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $deliveryAddressShow_en;
 
     /**
      * @var array $deliveryAddressRequire Required input fields of the delivery address.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $deliveryAddressRequire;
 
     /**
      * @var array $billingAddressRequire_en Required input fields of the delivery address in the english format.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $deliveryAddressRequire_en;
 

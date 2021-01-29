@@ -20,14 +20,14 @@ class CeresBasketConfig extends PluginConfig
     /**
      * @var array $data Visible entries of the basket totals.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $data;
 
     /**
      * @var array $previewData Visible entries of the basket (preview) totals.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $previewData;
 
@@ -35,7 +35,7 @@ class CeresBasketConfig extends PluginConfig
     /**
      * @var null $variations No usage.
      *
-     * @deprecated
+     * @deprecated will be removed in 6.0.0.
      */
     public $variations;
 
