@@ -6,18 +6,29 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 class CeresLogConfig extends PluginConfig
 {
+    /**
+     * @var array $data Enable logging options.
+     */
     public $data;
+
+    /**
+     * @var string $performanceLevel Performance level. Possible values are 'live' and 'development'.
+     */
     public $performanceLevel;
+
+    /**
+     * @var bool $checkSyntax Check for errors in markup before initialization.
+     */
     public $checkSyntax;
-    
+
     /**
      * @inheritDoc
      */
-    protected function getPluginName()
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
-    
+
     /**
      * @inheritDoc
      */

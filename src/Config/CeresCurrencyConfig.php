@@ -4,21 +4,42 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresCurrencyConfig
+ * PluginConfig class, including all plugin settings for the currencies.
+ *
+ * @package Ceres\Config
+ */
 class CeresCurrencyConfig extends PluginConfig
 {
+    /**
+     * @var string $format Format of currencies. Possible values are 'name' and 'symbol'.
+     */
     public $format;
+
+    /**
+     * @var bool $enableSelection Allow customer to change the currency.
+     */
     public $enableSelection;
+
+    /**
+     * @var string $formatSelection Format of currencies in header.
+     */
     public $formatSelection;
+
+    /**
+     * @var array Available currencies.
+     */
     public $availableCurrencies;
-    
+
     /**
      * @inheritDoc
      */
-    protected function getPluginName()
+    protected function getPluginName(): string
     {
         return 'Ceres';
     }
-    
+
     /**
      * @inheritDoc
      */
