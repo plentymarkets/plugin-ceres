@@ -27,7 +27,6 @@ const mutations =
             {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         },
 
@@ -80,7 +79,6 @@ const mutations =
             {
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         },
 
@@ -227,6 +225,7 @@ const actions =
 
             commit("setBillingAddressList", addressList);
             commit("selectBillingAddress", addressList.find(address => address.id === id));
+            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
         },
 
         initDeliveryAddress({ commit }, { id, addressList })
@@ -239,6 +238,7 @@ const actions =
 
             commit("setDeliveryAddressList", addressList);
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         },
 
         selectAddress({ commit, state, rootState, dispatch }, { selectedAddress, addressType })
@@ -264,6 +264,14 @@ const actions =
                     .done(response =>
                     {
                         commit("setIsBasketLoading", false);
+                        if (addressType === "1")
+                        {
+                            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
+                        }
+                        else if (addressType === "2")
+                        {
+                            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
+                        }
                         return resolve(response);
                     })
                     .fail(error =>
