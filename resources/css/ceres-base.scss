@@ -11471,9 +11471,13 @@ category-item,
             margin-bottom: 0;
             word-wrap: break-word;
         }
+    }
 
-        .category-description {
-            word-wrap: break-word;
+    .category-description {
+        word-wrap: break-word;
+
+        img {
+            max-width: 100%;
         }
     }
 
@@ -13437,10 +13441,7 @@ $normalmenu-color: $primary !default;
 }
 
 .navbar-toggler {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    margin-left: auto;
 }
 
 // When mobile navigation is open

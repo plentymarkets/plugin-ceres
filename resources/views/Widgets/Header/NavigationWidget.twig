@@ -33,7 +33,7 @@
     <div class="container-max d-block{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
-            <div class="brand-wrapper px-lg-3">
+            <div class="brand-wrapper px-lg-3 d-flex flex-fill">
                 <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                     <picture>
                         <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
