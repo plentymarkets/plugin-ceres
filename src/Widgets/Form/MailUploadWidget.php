@@ -50,7 +50,7 @@ class MailUploadWidget extends BaseWidget
                 ]
             )
             ->withName("Widget.mailFormUploadAllowedFileTypes")
-            ->withTooltip("Widget.mailFormUploadAllowedFileTypesTooltips")
+            ->withTooltip("Widget.mailFormUploadAllowedFileTypesTooltip")
             ->withCheckboxValues(
                 ValueListFactory::make()
                     ->addEntry("image/*", "Widget.mailFormUploadAllowedFileTypesImages")
@@ -63,6 +63,11 @@ class MailUploadWidget extends BaseWidget
             ->withDefaultValue("pdf,zip")
             ->withName("Widget.mailFormUploadAllowedFileExtensions")
             ->withTooltip("Widget.mailFormUploadAllowedFileExtensionsTooltip");
+
+        $settingsFactory->createCheckbox("allowMultiple")
+            ->withDefaultValue(false)
+            ->withName("Widget.mailFormUploadAllowMultiple")
+            ->withTooltip("Widget.mailFormUploadAllowMultipleTooltip");
 
         $settingsFactory->createCheckbox("isRequired")
             ->withDefaultValue(false)
