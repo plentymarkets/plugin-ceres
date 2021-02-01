@@ -141,7 +141,7 @@ const actions =
                     ValidationService.validate(event.target)
                         .done(() =>
                         {
-                            disableForm(event.target, true);
+                            // disableForm(event.target, true);
 
                             const formData    = serializeForm(event.target);
                             const formOptions = readFormOptions(event.target, formData);
@@ -210,16 +210,24 @@ function sendFile(event, recaptchaToken)
     return new Promise((resolve, reject) =>
     {
         const formData = new FormData();
-        const fileData = event.target.querySelector("input[type=file]").files[0];
+        const fileInputs = event.target.querySelectorAll("input[type=file]");
 
-        formData.append("fileData", fileData);
+        for (const fileInput of fileInputs)
+        {
+            fileInput.files.forEach((file) =>
+            {
+                formData.append("fileData[]", file);
+            });
+        }
+
+        formData.append("rcaptchaToken", recaptchaToken);
 
         ApiService.post("/rest/io/customer/contact/mail/file",
             formData,
             { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true })
             .done((response) =>
             {
-                console.log(response);
+                resolve(response);
             });
     });
 }
