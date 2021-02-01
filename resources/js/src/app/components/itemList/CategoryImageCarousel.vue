@@ -8,8 +8,8 @@
     </a>
 
     <a v-else :href="itemUrl">
-        <lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getImageName(imageUrls[0])"></lazy-img>
-        <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getImageName(imageUrls[0])">
+        <lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])"></lazy-img>
+        <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])">
     </a>
 </template>
 
@@ -29,11 +29,11 @@ export default {
         {
             type: String
         },
-        altText:
+        alt:
         {
             type: String
         },
-        titleText:
+        title:
         {
             type: String
         },
@@ -138,16 +138,16 @@ export default {
 
         getAltText(image)
         {
-            const altText = image && image.alternate ? image.alternate : this.altText;
+            const alt = image && image.alternate ? image.alternate : this.alt;
 
-            return altText;
+            return alt;
         },
 
-        getImageName(image)
+        getTitleText(image)
         {
-            const altText = image && image.name ? image.name : this.titleText;
+            const title = image && image.name ? image.name : this.title;
 
-            return altText;
+            return title;
         }
     }
 }
