@@ -3,7 +3,8 @@
 <div class="parallax-img-container">
     <lazy-img class="parallax-img-container-inner"
         {% if category.details[0].imagePath is not empty %}image-url="/documents/{{ category.details[0].imagePath }}"{% endif %}
-        :is-background-image="true">
+        :is-background-image="true"
+        role="img">
         <div class="container-max">
             <div>
                 <div class="parallax-text-container">
