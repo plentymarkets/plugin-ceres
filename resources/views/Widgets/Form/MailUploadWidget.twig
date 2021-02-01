@@ -9,6 +9,7 @@
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set customClass     = widget.settings.customClass.mobile %}
 
+{% set allowMultiple = widget.settings.allowMultiple.mobile %}
 {% set allowedFileTypes = widget.settings.allowedFileTypes.mobile | join(',') | default(["allowedFileTypes.images", "allowedFileTypes.audio", "allowedFileTypes.video"]) %}
 {% set allowedFileExtensions = widget.settings.allowedFileExtensions.mobile | replace({",": ",."}) %}
 {% set acceptedFiles = allowedFileTypes ~ ",." ~ allowedFileExtensions %}
@@ -19,7 +20,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     
     <div class="widget-inner input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="file"{% endif %}>
-        <input type="file" multiple name="{{ formFieldId }}" id="{{ formFieldId }}" accept="{{ acceptedFiles }}">
+        <input type="file"{% if allowMultiple %} multiple{% endif %} name="{{ formFieldId }}" id="{{ formFieldId }}" accept="{{ acceptedFiles }}">
 
         <label for="{{ formFieldId }}">
             {{ label }}{% if isRequired %}*{% endif %}
