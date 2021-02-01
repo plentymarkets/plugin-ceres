@@ -111,10 +111,10 @@
 <div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide{% if animationStyle == 'fade' %} carousel-fade{% endif %}" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
+        <div class="carousel-inner" role="listbox" aria-label="{{ trans("Ceres::Template.itemImageCarousel") }}">
             {{ Twig.for("slide", "slides") }}
 
-            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}" role="option">
+            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}
                     {{ Twig.if("slide.openInNewTab is not empty") }} target="_blank" {{ Twig.endif() }}>
                     {{ Twig.if("slide.imageUrl is not empty") }}
@@ -139,7 +139,8 @@
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
                                 fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
-                                title="{{ Twig.print("imgTitle") }}">
+                                title="{{ Twig.print("imgTitle") }}"
+                                role="option">
                             </lazy-img>
                             <noscript v-if="false">
                                 <img src="{{ Twig.print("fallbackUrl") }}"
@@ -155,6 +156,7 @@
                                     src="{{ Twig.print("fallbackUrl") }}"
                                     alt="{{ Twig.print("altText") }}"
                                     title="{{ Twig.print("imgTitle") }}"
+                                    role="option"
                                 />
                             </picture>
                         {% endif %}
