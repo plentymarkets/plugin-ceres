@@ -17,7 +17,7 @@ class MailUploadWidget extends BaseWidget
     {
         return WidgetDataFactory::make("Ceres::MailUploadWidget")
             ->withLabel("Widget.mailFormUploadLabel")
-            ->withPreviewImageUrl("/images/widgets/input-upload.svg")
+            ->withPreviewImageUrl("/images/widgets/mail-upload.svg")
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(200)
