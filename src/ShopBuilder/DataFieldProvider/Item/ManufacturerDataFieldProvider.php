@@ -6,6 +6,7 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 
 /**
  * Class ManufacturerDataFieldProvider
+ *
  * This class is a data field provider centered about the topic of manufacturers.
  * It is used to enable placeholders for dynamic data in the shop builders text widget.
  * Please refer to the parent class for more information about DataFieldProviders.

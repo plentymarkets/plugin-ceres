@@ -9,6 +9,7 @@ use Plenty\Plugin\Templates\Twig;
 
 /**
  * Class CeresItemListContainer1
+ *
  * This class is a DataProvider. It is used to display a configurable list of items in your online store.
  * @package Ceres\Containers
  */

@@ -6,6 +6,7 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 
 /**
  * Class ItemGlobalDataFieldProvider
+ *
  * This class is a data field provider centered about the topic of basic item data.
  * It is used to enable placeholders for dynamic data in the shop builders text widget.
  * Please refer to the parent class for more information about DataFieldProviders.

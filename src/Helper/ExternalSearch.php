@@ -6,6 +6,7 @@ use Plenty\Plugin\Events\Dispatcher;
 
 /**
  * Class ExternalSearch
+ *
  * Helper class to allow searches form external plugins
  *
  * @package Ceres\Helper

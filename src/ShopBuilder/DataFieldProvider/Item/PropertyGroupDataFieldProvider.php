@@ -14,6 +14,7 @@ use Plenty\Plugin\Translation\Translator;
 
 /**
  * Class PropertyGroupDataFieldProvider
+ *
  * This class is a data field provider centered about the topic of property groups.
  * It divides it's data into groups and single properties and delegates to child providers.
  * It is used to enable placeholders for dynamic data in the shop builders text widget.

@@ -7,6 +7,7 @@ use Plenty\Plugin\Events\Dispatcher;
 
 /**
  * Class LayoutContainer
+ *
  * Helper class for working with layout containers
  * @package Ceres\Helper
  */

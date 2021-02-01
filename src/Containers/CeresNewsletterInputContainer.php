@@ -6,6 +6,7 @@ use Plenty\Plugin\Templates\Twig;
 
 /**
  * Class CeresNewsletterInputContainer
+ *
  * This class was previously a DataProvider. It is now a stub.
  * @package Ceres\Containers
  * @deprecated

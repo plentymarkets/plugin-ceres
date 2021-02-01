@@ -7,6 +7,9 @@ use Plenty\Modules\ShopBuilder\Helper\MappableSettingsHandler;
 
 /**
  * Class ShopBuilderSettingsHandler
+ *
+ * Maps the routing settings from IO to Ceres. This allows us to set routing settings in the shop builder.
+ *
  * @package Ceres\ShopBuilder\Handler
  */
 class ShopBuilderSettingsHandler extends MappableSettingsHandler

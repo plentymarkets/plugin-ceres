@@ -43,6 +43,7 @@ use Plenty\Plugin\ConfigRepository;
 
 /**
  * Class TemplateServiceProvider
+ *
  * This class is the Laravel Service Provider for Ceres.
  * The service provider runs on every request and bootstraps the application.
  * See https://laravel.com/docs/6.x/providers for further information.

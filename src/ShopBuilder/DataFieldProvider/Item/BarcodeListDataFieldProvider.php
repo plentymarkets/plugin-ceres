@@ -8,6 +8,7 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 
 /**
  * Class BarcodeListDataFieldProvider
+ *
  * This class is a data field provider centered about the topic of bar codes.
  * It is used to enable placeholders for dynamic data in the shop builders text widget.
  * Please refer to the parent class for more information about DataFieldProviders.

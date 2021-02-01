@@ -11,6 +11,7 @@ use Plenty\Modules\ShopBuilder\Models\ContentLink;
 
 /**
  * Class CeresAfterBuildPlugins
+ *
  * This class is a hook, which runs after the plugin build.
  * It handles the invalidation of the content cache, the generation of a new build hash and the deactivation for deprecated content links.
  * @package Ceres\Hooks

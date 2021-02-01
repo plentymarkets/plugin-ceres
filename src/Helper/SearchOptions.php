@@ -8,6 +8,7 @@ use Plenty\Plugin\Translation\Translator;
 
 /**
  * Class SearchOptions
+ *
  * Helper class for getting item search options
  * @package Ceres\Helper
  */
