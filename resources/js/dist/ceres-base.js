@@ -340,7 +340,9 @@ __webpack_require__.r(__webpack_exports__);
     imageUrl: String,
     fallbackUrl: String,
     isBackgroundImage: Boolean,
-    pictureClass: String
+    pictureClass: String,
+    alt: String,
+    title: String
   },
   data: function data() {
     return {
@@ -34807,7 +34809,8 @@ var render = function() {
           attrs: {
             "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
             "data-picture-class": _vm.pictureClass,
-            "data-alt": _vm.$attrs.alt
+            "data-alt": _vm.alt,
+            "data-title": _vm.title
           }
         },
         [
@@ -55019,6 +55022,10 @@ var defaultConfig = {
 
       if (element.getAttribute("data-alt")) {
         img.alt = element.getAttribute("data-alt");
+      }
+
+      if (element.getAttribute("data-title")) {
+        img.title = element.getAttribute("data-title");
       }
 
       if (element.getAttribute("data-picture-class")) {
