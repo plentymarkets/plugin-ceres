@@ -31,6 +31,11 @@ const defaultConfig = {
                 img.alt = element.getAttribute("data-alt");
             }
 
+            if (element.getAttribute("data-title"))
+            {
+                img.title = element.getAttribute("data-title");
+            }
+
             if (element.getAttribute("data-picture-class"))
             {
                 let classes = element.getAttribute("data-picture-class");
