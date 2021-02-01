@@ -42,6 +42,7 @@
 
 
 <div id="vue-app" class="app">
+    {{ context.renderState() }}
     <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
 
     {% include getPartial('header') %}

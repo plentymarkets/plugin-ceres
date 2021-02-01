@@ -20,10 +20,29 @@ process.stdin.on("readable", () =>
 process.stdin.on("end", () =>
 {
     const virtualConsole = new VirtualConsole().sendTo(console);
+
+    virtualConsole.on("error", () =>
+    {
+        process.stdout.write("error");
+    });
+    virtualConsole.on("warn", () =>
+    {
+        process.stdout.write("warn");
+    });
+    virtualConsole.on("info", () =>
+    {
+        process.stdout.write("info");
+    });
+    virtualConsole.on("dir", () =>
+    {
+        process.stdout.write("dir");
+    });
+
     const virtualDom = new JSDOM(
         domInline.toString(),
         {
             runScripts: "dangerously",
+            virtualConsole
         }
     );
 
@@ -52,13 +71,15 @@ process.stdin.on("end", () =>
                 if(err)
                 {
                     console.log(err);
+                    process.stdout.write(err);
                     return 0;
                 }
 
                 process.stdout.write(renderedHTML);
             });
     } catch (e) {
-        // console.log(e);
+        console.log(e);
+        process.stdout.write("ERROR: ", e);
     }
 });
 

@@ -339,6 +339,11 @@ export default {
 
     created()
     {
+        
+    },
+
+    mounted()
+    {
         this.$store.dispatch("initVariation", this.itemData);
         this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
         this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
