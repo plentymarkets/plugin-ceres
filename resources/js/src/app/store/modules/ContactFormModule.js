@@ -214,10 +214,10 @@ function sendFile(event, recaptchaToken)
 
         for (const fileInput of fileInputs)
         {
-            fileInput.files.forEach((file) =>
+            for (const file of fileInput.files)
             {
                 formData.append("fileData[]", file);
-            });
+            }
         }
 
         formData.append("rcaptchaToken", recaptchaToken);
