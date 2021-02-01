@@ -75,7 +75,7 @@ class DefaultFooterPreset implements ContentPreset
                 'layout',
                 $numberOfFeatures === 2 ? 'onToOne' : 'oneToOneToOne'
             )
-            ->withSetting("customClass", "my-3");
+            ->withSetting("customClass", "my-1");
 
         for ($i = 1; $i <= $numberOfFeatures && $i <= 3; $i++) {
             $storeFeatureTranslation = $this->translator->trans('Ceres::Template.footerStoreFeature' . $i);
@@ -88,7 +88,16 @@ class DefaultFooterPreset implements ContentPreset
                         ['text' => $storeFeatureTranslation, 'url' => '']
                     ]
                 )
-                ->withSetting('centered', true);
+                ->withSetting('centered', true)
+                ->withSetting('spacing.customPadding', true)
+                ->withSetting('spacing.padding.top.value', 2)
+                ->withSetting('spacing.padding.top.unit', null)
+                ->withSetting('spacing.padding.bottom.value', 2)
+                ->withSetting('spacing.padding.bottom.unit', null)
+                ->withSetting('spacing.padding.left.value', 0)
+                ->withSetting('spacing.padding.left.unit', null)
+                ->withSetting('spacing.padding.right.value', 0)
+                ->withSetting('spacing.padding.right.unit', null);
         }
     }
 
@@ -152,11 +161,10 @@ class DefaultFooterPreset implements ContentPreset
     {
         $defaultText = '';
         $defaultText .= '<div class="copyright text-center">';
-        $defaultText .= '<a rel="nofollow" href="https://www.plentymarkets.eu">';
+        $defaultText .= '<a class="d-inline-block" rel="nofollow" href="https://www.plentymarkets.eu">';
         $defaultText .= '<img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path("Ceres") }}/images/plentymarkets-logo.svg" rel="nofollow">';
         $defaultText .= '</a>';
-        $defaultText .= '<br>';
-        $defaultText .= '<small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>';
+        $defaultText .= '<small class="d-block">&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>';
         $defaultText .= '</div>';
 
         $this->preset->createWidget('Ceres::CodeWidget')

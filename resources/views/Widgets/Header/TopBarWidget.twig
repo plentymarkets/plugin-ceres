@@ -50,8 +50,8 @@
                         <div class="always-visible-search flex-grow-1">
                             <item-search>
                                 <div class="position-relative d-flex flex-grow-1">
-                                    <input type="search" class="search-input px-3 py-2 flex-grow-1">
-                                    <button class="search-submit px-3" type="submit">
+                                    <input type="search" class="search-input px-3 py-2 flex-grow-1" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearchTerm")') }}">
+                                    <button class="search-submit px-3" type="submit" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -86,13 +86,13 @@
                                     :show-login="{{ enableLogin | json_encode }}"
                                     :show-registration="{{ enableRegistration | json_encode }}">
                                     {% if enableLogin %}
-                                    <a class="nav-link" data-toggle="modal">
+                                    <a class="nav-link" data-toggle="modal" aria-label="{{ Twig.print('trans("Ceres::Template.login")') }}">
                                         <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
                                     </a>
                                     {% endif %}
                                     {% if enableRegistration %}
-                                    <a class="nav-link" data-toggle="modal">
+                                    <a class="nav-link" data-toggle="modal" aria-label="{{ Twig.print('trans("Ceres::Template.loginRegister")') }}">
                                         <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
                                         <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
                                     </a>
@@ -108,7 +108,8 @@
                                    href="#countrySettings"
                                    aria-expanded="false"
                                    aria-controls="countrySettings"
-                                   data-parent="#controlsList">
+                                   data-parent="#controlsList"
+                                   aria-label="{{ Twig.print('trans("Ceres::Template.headerCountry")') }}">
                                     <i class="flag-icon flag-icon-{{ Twig.print('lang') }}"></i>
                                 </a>
                             </li>
@@ -121,7 +122,8 @@
                                    href="#currencySelect"
                                    aria-expanded="false"
                                    aria-controls="currencySelect"
-                                   data-parent="#controlsList">
+                                   data-parent="#controlsList"
+                                   aria-label="{{ Twig.print('trans("Ceres::Template.headerCurrency")') }}">
                                     <span>{{ Twig.print("currencyData") }}</span>
                                 </a>
                             </li>
@@ -146,7 +148,7 @@
                             {{ Twig.if("services.url.isRouteEnabled(\"wish-list\")") }}
                             <li class="list-inline-item control-wish-list">
                                 <wish-list-count>
-                                    <a class="nav-link">
+                                    <a class="nav-link" aria-label="{{ Twig.print('trans("Ceres::Template.wishList")') }}">
                                         <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
