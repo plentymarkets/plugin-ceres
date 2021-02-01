@@ -146,7 +146,7 @@ const actions =
                             const formData    = serializeForm(event.target);
                             const formOptions = readFormOptions(event.target, formData);
 
-                            sendFile(event, recaptchaResponse).then((value) =>
+                            sendFile(event, recaptchaResponse).then((response) =>
                             {
                                 ApiService.post(
                                     "/rest/io/customer/contact/mail",
@@ -158,7 +158,7 @@ const actions =
                                         bcc:        formOptions.bcc,
                                         replyTo:    formOptions.replyTo,
                                         recaptchaToken: recaptchaResponse,
-                                        fileKey: value
+                                        fileKeys: response.fileKeys
                                     }
                                 )
                                     .done(response =>
