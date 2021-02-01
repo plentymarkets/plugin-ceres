@@ -25,6 +25,10 @@
             </label>
         </div>
     </div>
+    <div v-else-if="!isEU && value">
+        {{ value }}
+        <button @click="deleteValue()">Delete</button>
+    </div>
 </template>
 
 <script>
@@ -85,9 +89,15 @@ export default
             return translation + (this.isRequired ? "*" : "");
         },
         
-        emitChange(event)
+        emitChange()
         {
             this.$emit('input', this.vatPrefix + this.vatNumber);
+        },
+
+        deleteValue()
+        {
+            this.vatNumber = "";
+            this.emitChange();
         },
 
         setValues(value)
