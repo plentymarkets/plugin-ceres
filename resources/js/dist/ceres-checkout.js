@@ -439,7 +439,9 @@ __webpack_require__.r(__webpack_exports__);
     imageUrl: String,
     fallbackUrl: String,
     isBackgroundImage: Boolean,
-    pictureClass: String
+    pictureClass: String,
+    alt: String,
+    title: String
   },
   data: function data() {
     return {
@@ -37410,7 +37412,8 @@ var render = function() {
           attrs: {
             "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
             "data-picture-class": _vm.pictureClass,
-            "data-alt": _vm.$attrs.alt
+            "data-alt": _vm.alt,
+            "data-title": _vm.title
           }
         },
         [
@@ -66601,6 +66604,10 @@ var defaultConfig = {
         img.alt = element.getAttribute("data-alt");
       }
 
+      if (element.getAttribute("data-title")) {
+        img.title = element.getAttribute("data-title");
+      }
+
       if (element.getAttribute("data-picture-class")) {
         var classes = element.getAttribute("data-picture-class");
         classes = classes.split(" ");
@@ -68643,7 +68650,6 @@ var mutations = {
     if (billingAddress) {
       state.billingAddressId = billingAddress.id;
       state.billingAddress = billingAddress;
-      document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
     }
   },
   selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
@@ -68685,7 +68691,6 @@ var mutations = {
     if (deliveryAddress) {
       state.deliveryAddressId = deliveryAddress.id;
       state.deliveryAddress = deliveryAddress;
-      document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
     }
   },
   removeBillingAddress: function removeBillingAddress(state, billingAddress) {
@@ -68811,6 +68816,7 @@ var actions = {
     commit("selectBillingAddress", addressList.find(function (address) {
       return address.id === id;
     }));
+    document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
   },
   initDeliveryAddress: function initDeliveryAddress(_ref5, _ref6) {
     var commit = _ref5.commit;
@@ -68830,6 +68836,7 @@ var actions = {
     commit("selectDeliveryAddress", addressList.find(function (address) {
       return address.id === id;
     }));
+    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
   },
   selectAddress: function selectAddress(_ref7, _ref8) {
     var commit = _ref7.commit,
@@ -68854,6 +68861,13 @@ var actions = {
         supressNotifications: true
       }).done(function (response) {
         commit("setIsBasketLoading", false);
+
+        if (addressType === "1") {
+          document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
+        } else if (addressType === "2") {
+          document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
+        }
+
         return resolve(response);
       }).fail(function (error) {
         if (addressType === "1") {
