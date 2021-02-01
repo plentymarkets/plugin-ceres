@@ -34,10 +34,6 @@ function _readElement(inputElement)
 
         value = optionElement ? optionElement.textContent : "";
     }
-    else if (inputElement.type === "file")
-    {
-        value = inputElement.files ? inputElement.files[0] : "";
-    }
 
     return {
         name:  name,

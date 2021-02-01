@@ -146,35 +146,38 @@ const actions =
                             const formData    = serializeForm(event.target);
                             const formOptions = readFormOptions(event.target, formData);
 
-                            ApiService.post(
-                                "/rest/io/customer/contact/mail",
-                                {
-                                    data:       formData,
-                                    recipient:  formOptions.recipient,
-                                    subject:    formOptions.subject || "",
-                                    cc:         formOptions.cc,
-                                    bcc:        formOptions.bcc,
-                                    replyTo:    formOptions.replyTo,
-                                    recaptchaToken: recaptchaResponse
-                                },
-                                { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true }
-                            )
-                                .done(response =>
-                                {
-                                    resetRecaptcha(recaptchaEl);
-                                    event.target.reset();
-                                    disableForm(event.target, false);
-                                    NotificationService.success(
-                                        TranslationService.translate("Ceres::Template.contactSendSuccess")
-                                    ).closeAfter(3000);
-                                })
-                                .fail(response =>
-                                {
-                                    resetRecaptcha(recaptchaEl);
-                                    disableForm(event.target, false);
-                                    response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
-                                    NotificationService.error(response.error);
-                                });
+                            sendFile(event, recaptchaResponse).then((value) =>
+                            {
+                                ApiService.post(
+                                    "/rest/io/customer/contact/mail",
+                                    {
+                                        data:       formData,
+                                        recipient:  formOptions.recipient,
+                                        subject:    formOptions.subject || "",
+                                        cc:         formOptions.cc,
+                                        bcc:        formOptions.bcc,
+                                        replyTo:    formOptions.replyTo,
+                                        recaptchaToken: recaptchaResponse,
+                                        fileKey: value
+                                    }
+                                )
+                                    .done(response =>
+                                    {
+                                        resetRecaptcha(recaptchaEl);
+                                        event.target.reset();
+                                        disableForm(event.target, false);
+                                        NotificationService.success(
+                                            TranslationService.translate("Ceres::Template.contactSendSuccess")
+                                        ).closeAfter(3000);
+                                    })
+                                    .fail(response =>
+                                    {
+                                        resetRecaptcha(recaptchaEl);
+                                        disableForm(event.target, false);
+                                        response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
+                                        NotificationService.error(response.error);
+                                    });
+                            });
                         })
                         .fail(invalidFields =>
                         {
@@ -201,6 +204,25 @@ const actions =
                 });
         }
     };
+
+function sendFile(event, recaptchaToken)
+{
+    return new Promise((resolve, reject) =>
+    {
+        const formData = new FormData();
+        const fileData = event.target.querySelector("input[type=file]").files[0];
+
+        formData.append("fileData", fileData);
+
+        ApiService.post("/rest/io/customer/contact/mail/file",
+            formData,
+            { processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true })
+            .done((response) =>
+            {
+                console.log(response);
+            });
+    });
+}
 
 function resetRecaptcha(recaptchaEl)
 {
