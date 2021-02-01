@@ -6,6 +6,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
  * Class CeresSortingConfig
+ *
  * PluginConfig class, including all plugin settings for the item sorting.
  *
  * @package Ceres\Config

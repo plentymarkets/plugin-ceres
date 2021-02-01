@@ -6,6 +6,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
  * Class CeresLanguageConfig
+ *
  * PluginConfig class, including all plugin settings for the active languages.
  *
  * @package Ceres\Config

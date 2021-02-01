@@ -6,6 +6,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
  * Class CeresAddressConfig
+ *
  * PluginConfig class, including all plugin settings for the addresses.
  *
  * @package Ceres\Config

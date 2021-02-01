@@ -12,6 +12,7 @@ use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
 
 /**
  * Trait ItemListContext
+ *
  * Trait to extend a context, including all properties to handle item data.
  *
  * @package Ceres\Contexts

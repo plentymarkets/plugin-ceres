@@ -4,6 +4,13 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresLogConfig
+ *
+ * PluginConfig class, including all plugin settings for the log.
+ *
+ * @package Ceres\Config
+ */
 class CeresLogConfig extends PluginConfig
 {
     /**

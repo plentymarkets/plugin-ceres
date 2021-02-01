@@ -4,6 +4,7 @@ namespace Ceres\Config;
 
 /**
  * Class CeresConfig
+ *
  * Config class, containing all PluginConfig classes of Ceres.
  *
  * @package Ceres\Config

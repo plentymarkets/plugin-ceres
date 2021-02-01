@@ -9,6 +9,7 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 
 /**
  * Class CategoryItemContext
+ *
  * Context class with additional data, required for all item category views.
  *
  * @package Ceres\Contexts

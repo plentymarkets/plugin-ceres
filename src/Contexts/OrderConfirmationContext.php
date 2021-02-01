@@ -6,6 +6,7 @@ use IO\Helper\ContextInterface;
 
 /**
  * Class OrderConfirmationContext
+ *
  * Context class with additional data, required for the order confirmation view.
  *
  * @package Ceres\Contexts

@@ -7,6 +7,7 @@ use Plenty\Modules\Category\Models\Category;
 
 /**
  * Class ChangeMailContext
+ *
  * Context class with additional data, required for the change mail view.
  *
  * @package Ceres\Contexts

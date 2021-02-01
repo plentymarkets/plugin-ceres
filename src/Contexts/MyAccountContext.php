@@ -6,6 +6,7 @@ use IO\Helper\ContextInterface;
 
 /**
  * Class MyAccountContext
+ *
  * Context class with additional data, required for my account view.
  *
  * @package Ceres\Contexts

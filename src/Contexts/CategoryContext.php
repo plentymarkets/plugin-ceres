@@ -8,6 +8,7 @@ use Plenty\Modules\Category\Models\Category;
 
 /**
  * Class CategoryContext
+ *
  * Context class with additional data, required for all content category views.
  *
  * @package Ceres\Contexts

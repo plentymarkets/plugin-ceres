@@ -6,6 +6,7 @@ use IO\Helper\ContextInterface;
 
 /**
  * Class OrderReturnContext
+ *
  * Context class with additional data, required for the order return view.
  *
  * @package Ceres\Contexts

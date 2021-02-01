@@ -6,6 +6,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
  * Class CeresBasketConfig
+ *
  * PluginConfig class, including all plugin settings for the basket.
  *
  * @package Ceres\Config

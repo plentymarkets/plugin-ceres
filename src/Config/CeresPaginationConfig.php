@@ -6,6 +6,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
  * Class CeresPaginationConfig
+ *
  * PluginConfig class, including all plugin settings for the pagination.
  *
  * @package Ceres\Config

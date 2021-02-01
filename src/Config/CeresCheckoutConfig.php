@@ -6,6 +6,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
  * Class CeresCheckoutConfig
+ *
  * PluginConfig class, including all plugin settings for checkout.
  *
  * @deprecated will be removed in 6.0.0.

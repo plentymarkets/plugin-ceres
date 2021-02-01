@@ -9,6 +9,7 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 
 /**
  * Class ItemSearchContext
+ *
  * Context class with additional data, required for the search view.
  *
  * @package Ceres\Contexts

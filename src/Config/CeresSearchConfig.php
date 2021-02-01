@@ -6,6 +6,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
  * Class CeresSearchConfig
+ *
  * PluginConfig class, including all plugin settings for the shop search.
  *
  * @deprecated will be removed in 6.0.0
