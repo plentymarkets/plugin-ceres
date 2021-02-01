@@ -75,6 +75,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -162,6 +163,9 @@ var render = function() {
                     disabled: _vm.isDisabled,
                     "data-boundary": "window",
                     "data-title": _vm.$translate(
+                      "Ceres::Template.headerChangeDeliveryCountry"
+                    ),
+                    "aria-label": _vm.$translate(
                       "Ceres::Template.headerChangeDeliveryCountry"
                     )
                   },
