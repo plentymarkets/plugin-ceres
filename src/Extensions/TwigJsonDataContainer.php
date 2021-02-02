@@ -6,7 +6,7 @@ use Plenty\Plugin\Templates\Factories\TwigFactory;
 
 /**
  * Class TwigJsonDataContainer
- * This TWIG extension help to minimize inline JSON data in the markup.
+ * This TWIG extension helps minimise inline JSON data in the markup.
  * It creates script tags for each provided item, at one point.
  *
  * @package Ceres\Extensions
@@ -19,7 +19,7 @@ class TwigJsonDataContainer extends Twig_Extension
     private $twig;
 
     /**
-     * @var array Stored data, to create script tags of.
+     * @var array Stored data used to create script tags.
      */
     private $dataStorage = [];
 
