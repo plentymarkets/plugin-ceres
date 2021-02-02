@@ -8,8 +8,8 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
  * Class ItemDataFieldProvider
  *
  * This class is the main data provider for Ceres. All other data providers are registered as child providers of this one.
- * To use a DataFieldProvider in the shopBuilder, it is referenced in the shopBuilder.json
- * It is used to enable placeholders for dynamic data in the shop builders text widget.
+ * To use a DataFieldProvider in the ShopBuilder, it is referenced in the shopBuilder.json
+ * It is used to enable placeholders for dynamic data in the ShopBuilder's text widget.
  * Please refer to the parent class for more information about DataFieldProviders.
  * Please refer to https://developers.plentymarkets.com/dev-doc/result-fields-ceres for more information about
  * the data fields.
@@ -18,7 +18,7 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 class ItemDataFieldProvider extends DataFieldProvider
 {
     /**
-     * Registers item data fields for use in the shop builder.
+     * Registers item data fields for use in the ShopBuilder.
      */
     function register()
     {
