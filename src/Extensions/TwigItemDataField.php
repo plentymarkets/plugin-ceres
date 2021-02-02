@@ -13,7 +13,7 @@ use Plenty\Plugin\Translation\Translator;
 /**
  * Class TwigItemDataField
  * This TWIG extension provides several functions and filters for accessing item data.
- * Created for the shop builder text widget.
+ * Created for the ShopBuilder text widget.
  *
  * @package Ceres\Extensions
  */
@@ -25,7 +25,7 @@ class TwigItemDataField extends Twig_Extension
     private $twig;
 
     /**
-     * @var array $itemData This array acts as a stack (LIFO). The last element is used for datafield fetches.
+     * @var array $itemData This array acts as a stack (LIFO). The last element is used for data field fetches.
      */
     private $itemData = [];
 
@@ -104,7 +104,7 @@ class TwigItemDataField extends Twig_Extension
     }
 
     /**
-     * Return a created HTML element. The content of the element is a TWIG statement, to print a field from the item data.
+     * Return a created HTML element. The content of the element is a TWIG statement to print a field from the item data.
      *
      * @param string $field The accessor for the field in the item data.
      * @param string $filter Add a filter in the TWIG string.
