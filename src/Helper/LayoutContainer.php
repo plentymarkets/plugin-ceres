@@ -8,22 +8,22 @@ use Plenty\Plugin\Events\Dispatcher;
 /**
  * Class LayoutContainer
  *
- * Helper class for working with layout containers
+ * Helper class for working with layout containers.
  * @package Ceres\Helper
  */
 class LayoutContainer
 {
     /**
-     * Get a rendered layout container, normally used in the twig template renderer
-     * @param string $containerWithPluginName For example: "Ceres::Basket.BeforeBasketTotals"
-     * @param array $arguments Context for the rendering of the layout container
+     * Get a rendered layout container, normally used in the twig template renderer.
+     * @param string $containerWithPluginName For example: "Ceres::Basket.BeforeBasketTotals".
+     * @param array $arguments Context for the rendering of the layout container.
      * @return array
      */
     public static function getContents( $containerWithPluginName, $arguments )
     {
         /** @var Application $app */
         $app = pluginApp(Application::class);
-        if($app->isTemplateSafeMode()) // Do not render layout containers in template safe mode
+        if($app->isTemplateSafeMode()) // Do not render layout containers in template safe mode.
         {
             return [];
         }
@@ -46,7 +46,7 @@ class LayoutContainer
         return $instance->contents;
     }
 
-    /** @var string $pluginName The plugin, to which the layout container belongs */
+    /** @var string $pluginName The plugin to which the layout container belongs */
     private $pluginName = "";
     /** @var string $containerName The container name for the layout container*/
     private $containerName = "";
@@ -54,7 +54,7 @@ class LayoutContainer
     private $contents = [];
 
     /**
-     * Get the plugin name of the layout container
+     * Get the plugin name of the layout container.
      * @return string
      */
     public function getPluginName()
@@ -63,7 +63,7 @@ class LayoutContainer
     }
 
     /**
-     * Get the container name for the layout container
+     * Get the container name for the layout container.
      * @return string
      */
     public function getContainerName()
@@ -72,7 +72,7 @@ class LayoutContainer
     }
 
     /**
-     * Add content for the layout container
+     * Add content for the layout container.
      * @param $content
      * @return $this
      */
