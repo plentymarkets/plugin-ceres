@@ -10,17 +10,15 @@
 {% set customClass     = widget.settings.customClass.mobile %}
 
 {% set allowMultiple = widget.settings.allowMultiple.mobile %}
-{% set allowedFileTypes = widget.settings.allowedFileTypes.mobile | join(',') | default(["allowedFileTypes.images", "allowedFileTypes.audio", "allowedFileTypes.video"]) %}
-{% set allowedFileExtensions = widget.settings.allowedFileExtensions.mobile | replace({",": ",."}) %}
-{% set acceptedFiles = allowedFileTypes ~ ",." ~ allowedFileExtensions %}
+{% set allowedFileExtensions = widget.settings.allowedFileExtensions.mobile | join %}
 
-<div class="widget widget-mail-upload
+<div class="widget widget-mail-attachment
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     
     <div class="widget-inner input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="file"{% endif %}>
-        <input type="file"{% if allowMultiple %} multiple{% endif %} name="{{ formFieldId }}" id="{{ formFieldId }}" accept="{{ acceptedFiles }}">
+        <input type="file"{% if allowMultiple %} multiple{% endif %} name="{{ formFieldId }}" id="{{ formFieldId }}" accept="{{ allowedFileExtensions }}">
 
         <label for="{{ formFieldId }}">
             {{ label }}{% if isRequired %}*{% endif %}

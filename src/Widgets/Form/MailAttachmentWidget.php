@@ -9,18 +9,18 @@ use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
-class MailUploadWidget extends BaseWidget
+class MailAttachmentWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Form.MailUploadWidget";
+    protected $template = "Ceres::Widgets.Form.MailAttachmentWidget";
 
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::MailUploadWidget")
-            ->withLabel("Widget.mailFormUploadLabel")
-            ->withPreviewImageUrl("/images/widgets/mail-upload.svg")
+        return WidgetDataFactory::make("Ceres::MailAttachmentWidget")
+            ->withLabel("Widget.mailFormAttachmentLabel")
+            ->withPreviewImageUrl("/images/widgets/mail-attachment.svg")
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
-            ->withPosition(200)
+            ->withPosition(600)
             ->toArray();
     }
 
@@ -37,37 +37,32 @@ class MailUploadWidget extends BaseWidget
             ->withTooltip("Widget.mailFormFieldKeyTooltip");
 
         $settingsFactory->createText("label")
-            ->withDefaultValue("Widget.mailFormUploadLabel")
+            ->withDefaultValue("")
             ->withName("Widget.mailFormFieldLabelLabel")
             ->withTooltip("Widget.mailFormFieldLabelTooltip");
 
-        $settingsFactory->createCheckboxGroup("allowedFileTypes")
+        $settingsFactory->createCheckboxGroup("allowedFileExtensions")
             ->withDefaultValue(
                 [
-                    "image/*",
-                    "audio/*",
-                    "video/*"
+                    ",.pdf,.docx,.doc,.odt,.txt",
+                    ",.jpg,.png,.svg,.psd,.ps",
+                    ",.zip",
                 ]
             )
-            ->withName("Widget.mailFormUploadAllowedFileTypes")
-            ->withTooltip("Widget.mailFormUploadAllowedFileTypesTooltip")
+            ->withName("Widget.mailFormAttachmentAllowedFileExtensions")
+            ->withTooltip("Widget.mailFormAttachmentAllowedFileExtensionsTooltip")
             ->withCheckboxValues(
                 ValueListFactory::make()
-                    ->addEntry("image/*", "Widget.mailFormUploadAllowedFileTypesImages")
-                    ->addEntry("audio/*", "Widget.mailFormUploadAllowedFileTypesAudio")
-                    ->addEntry("video/*", "Widget.mailFormUploadAllowedFileTypesVideo")
+                    ->addEntry(",.pdf,.docx,.doc,.odt,.txt", "Widget.mailFormAttachmentAllowedFileExtensionsDocuments")
+                    ->addEntry(",.jpg,.png,.svg,.psd,.ps", "Widget.mailFormAttachmentAllowedFileExtensionsImages")
+                    ->addEntry(",.zip", "Widget.mailFormAttachmentAllowedFileExtensionsZip")
                     ->toArray()
         );
         
-        $settingsFactory->createText("allowedFileExtensions")
-            ->withDefaultValue("pdf,zip")
-            ->withName("Widget.mailFormUploadAllowedFileExtensions")
-            ->withTooltip("Widget.mailFormUploadAllowedFileExtensionsTooltip");
-
         $settingsFactory->createCheckbox("allowMultiple")
             ->withDefaultValue(false)
-            ->withName("Widget.mailFormUploadAllowMultiple")
-            ->withTooltip("Widget.mailFormUploadAllowMultipleTooltip");
+            ->withName("Widget.mailFormAttachmentAllowMultiple")
+            ->withTooltip("Widget.mailFormAttachmentAllowMultipleTooltip");
 
         $settingsFactory->createCheckbox("isRequired")
             ->withDefaultValue(false)

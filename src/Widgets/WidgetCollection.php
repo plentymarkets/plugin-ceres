@@ -54,7 +54,7 @@ use Ceres\Widgets\Footer\LegalInformationWidget;
 use Ceres\Widgets\Form\AcceptPrivacyPolicyWidget;
 use Ceres\Widgets\Form\MailFormWidget;
 use Ceres\Widgets\Form\MailInputWidget;
-use Ceres\Widgets\Form\MailUploadWidget;
+use Ceres\Widgets\Form\MailAttachmentWidget;
 use Ceres\Widgets\Form\SelectionWidget;
 use Ceres\Widgets\Form\TextAreaWidget;
 use Ceres\Widgets\Form\TextInputWidget;
@@ -164,7 +164,7 @@ class WidgetCollection
         AcceptPrivacyPolicyWidget::class,
         MailFormWidget::class,
         MailInputWidget::class,
-        MailUploadWidget::class,
+        MailAttachmentWidget::class,
         SelectionWidget::class,
         TextAreaWidget::class,
         TextInputWidget::class
