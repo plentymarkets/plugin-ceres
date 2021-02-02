@@ -15,7 +15,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 class CeresHomepageConfig extends PluginConfig
 {
     /**
-     * @var bool $showShopBuilderContent Show Shop Builder homepage.
+     * @var bool $showShopBuilderContent Show ShopBuilder homepage.
      *
      * @deprecated will be removed in 6.0.0.
      */
