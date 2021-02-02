@@ -114,9 +114,9 @@ class SearchOptions
     }
 
     /**
-     * Validate an array of user inputted item search options
-     * @param array $itemListOptions User inputted item search options
-     * @param string $scope The scope of the item search options
+     * Validate an array of item search options inputted by user.
+     * @param array $itemListOptions User inputted item search options.
+     * @param string $scope The scope of the item search options.
      * @return mixed
      */
     public static function validateItemListOptions($itemListOptions, $scope)
