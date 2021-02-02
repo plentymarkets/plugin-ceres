@@ -16,7 +16,7 @@ use Plenty\Modules\Order\Status\Models\OrderStatus;
 
 class OrderHistoryWidget extends BaseWidget
 {
-    /** @var Collection $statuses A collection of all order status */
+    /** @var Collection $statuses A collection of all order statuses */
     private $statuses = null;
     
     /** @var null|string $lang The currently selected shop language */
