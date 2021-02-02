@@ -31,7 +31,10 @@ class DefaultSingleItemPreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);

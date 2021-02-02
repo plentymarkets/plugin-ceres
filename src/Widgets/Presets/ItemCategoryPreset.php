@@ -30,6 +30,9 @@ class ItemCategoryPreset implements ContentPreset
     /** @var PresetWidgetFactory */
     private $twoColumnWidget;
     
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->ceresConfig        = pluginApp(CeresConfig::class);

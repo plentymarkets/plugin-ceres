@@ -33,11 +33,9 @@ class DefaultFooterPreset implements ContentPreset
         3 => 'third',
         4 => 'fourth'
     ];
-
+    
     /**
-     * Get the widget configurations of the presets to be assigned to the created content.
-     *
-     * @return mixed
+     * @inheritDoc
      */
     public function getWidgets()
     {

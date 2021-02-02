@@ -7,15 +7,35 @@ use IO\Helper\ContextInterface;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\TagItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 
+/**
+ * Class TagSearchContext
+ *
+ * Context class with additional data, required for the tag item view.
+ *
+ * @package Ceres\Contexts
+ */
 class TagSearchContext extends CategoryContext implements ContextInterface
 {
-
     use ItemListContext;
 
+    /**
+     * @var bool $isSearch Defines that the user has executed a shop search.
+     */
     public $isSearch;
+
+    /**
+     * @var string $searchString The name of the tag.
+     */
     public $searchString;
+
+    /**
+     * @var bool $isTag Defines that the user is on a page with items, filtered for the current tag.
+     */
     public $isTag = true;
 
+    /**
+     * @inheritDoc
+     */
     public function init($params)
     {
         parent::init($params);
@@ -46,4 +66,3 @@ class TagSearchContext extends CategoryContext implements ContextInterface
         $this->searchString = $itemListOptions['tagName'];
     }
 }
-

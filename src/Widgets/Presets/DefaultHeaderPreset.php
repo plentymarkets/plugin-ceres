@@ -10,15 +10,12 @@ use Plenty\Plugin\Application;
 
 class DefaultHeaderPreset implements ContentPreset
 {
-    /**
-     * Get the widget configurations of the presets to be assigned to the created content.
-     *
-     * @return mixed
-     */
-
     /** @var PresetWidgetFactory */
     private $topBarWidget;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         /** @var CeresConfig $config */

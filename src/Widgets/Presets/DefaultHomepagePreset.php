@@ -20,10 +20,9 @@ class DefaultHomepagePreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
+    
     /**
-     * Get the widget configurations of the presets to be assigned to the created content.
-     *
-     * @return mixed
+     * @inheritDoc
      */
     public function getWidgets()
     {

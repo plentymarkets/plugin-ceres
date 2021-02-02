@@ -8,6 +8,9 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
 class DefaultNewsletterUnsubscribePreset implements ContentPreset
 {
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         /** @var PresetHelper */

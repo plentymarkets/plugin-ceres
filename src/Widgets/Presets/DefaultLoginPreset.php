@@ -21,9 +21,9 @@ class DefaultLoginPreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
-
+    
     /**
-     * @return array
+     * @inheritDoc
      */
     public function getWidgets(): array
     {
