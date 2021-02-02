@@ -1,31 +1,15 @@
 <?php
 
-
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
+use Plenty\Modules\ShopBuilder\Factories\Settings\TextareaSettingFactory as CoreTextareaSettingFactory;
 
-class TextareaSettingFactory extends BaseSettingFactory
+/**
+ * Class TextareaSettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.22
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\TextareaSettingFactory
+ */
+class TextareaSettingFactory extends CoreTextareaSettingFactory
 {
-    public function __construct()
-    {
-        $this->withType('textarea');
-    }
-
-    /**
-     * @param boolean $isFixedHeight
-     * @return TextareaSettingFactory
-     */
-    public function withFixedHeight($isFixedHeight)
-    {
-        return $this->withOption('hasFixedHeight', $isFixedHeight);
-    }
-
-    /**
-     * @param integer $maxRows
-     * @return TextareaSettingFactory
-     */
-    public function withMaxRows($maxRows)
-    {
-        return $this->withOption('maxRows', $maxRows);
-    }
 }

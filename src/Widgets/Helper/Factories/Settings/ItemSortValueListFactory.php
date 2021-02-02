@@ -3,6 +3,7 @@
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\ShopBuilder\Factories\Settings\ValueListFactory;
 
 class ItemSortValueListFactory extends ValueListFactory
 {

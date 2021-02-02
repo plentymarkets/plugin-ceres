@@ -1,31 +1,15 @@
 <?php
 
-
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
+use Plenty\Modules\ShopBuilder\Factories\Settings\DoubleSettingFactory as CoreDoubleSettingFactory;
 
-class DoubleSettingFactory extends BaseSettingFactory
+/**
+ * Class DoubleSettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.22
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\DoubleSettingFactory
+ */
+class DoubleSettingFactory extends CoreDoubleSettingFactory
 {
-    public function __construct()
-    {
-        $this->withType('double');
-    }
-
-    /**
-     * @param $isPriceInput
-     * @return DoubleSettingFactory
-     */
-    public function withPriceInput($isPriceInput)
-    {
-        return $this->withOption('isPriceInput', $isPriceInput);
-    }
-
-    /**
-     * @param integer $decimalCount
-     * @return DoubleSettingFactory
-     */
-    public function withDecimalCount($decimalCount)
-    {
-        return  $this->withOption('decimalCount', $decimalCount);
-    }
 }
