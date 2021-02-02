@@ -41,17 +41,17 @@ class CeresBasketConfig extends PluginConfig
     public $variations;
 
     /**
-     * @var string $addItemToBasketConfirm Type to display the basket addition. Possible values: 'overlay', 'preview', 'no_information'
+     * @var string $addItemToBasketConfirm Type to display the basket addition. Possible values: 'overlay', 'preview', 'no_information'.
      */
     public $addItemToBasketConfirm;
 
     /**
-     * @var string $previewType Type to display the basket preview. Possible values: 'hover', 'right'
+     * @var string $previewType Type to display the basket preview. Possible values: 'hover', 'right'.
      */
     public $previewType;
 
     /**
-     * @var boolean $showShippingCountrySelect Defines if the country select is shown in the basket.
+     * @var boolean $showShippingCountrySelect Defines if the country selection is shown in the basket.
      */
     public $showShippingCountrySelect;
 
