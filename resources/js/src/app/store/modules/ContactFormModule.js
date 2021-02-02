@@ -177,6 +177,13 @@ const actions =
                                         response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
                                         NotificationService.error(response.error);
                                     });
+                            },
+                            (error) =>
+                            {
+                                resetRecaptcha(recaptchaEl);
+                                disableForm(event.target, false);
+                                response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactFileUploadFail");
+                                NotificationService.error(response.error);
                             });
                         })
                         .fail(invalidFields =>
@@ -228,6 +235,10 @@ function sendFile(event, recaptchaToken)
             .done((response) =>
             {
                 resolve(response);
+            })
+            .fail((error) =>
+            {
+                reject(error);
             });
     });
 }
