@@ -25,9 +25,22 @@
             </label>
         </div>
     </div>
-    <div v-else-if="!isEU && value">
-        {{ value }}
-        <button @click="deleteValue()">Delete</button>
+    <div v-else-if="!isEU && value" class="input-group flex-nowrap">
+        <div class="input-unit flex-fill w-auto error">
+            <input
+                type="text"
+                name="vatNumber"
+                :id="'txtVatNumber' + _uid"
+                v-model="value"
+                disabled
+            >
+            <label :for="'txtVatNumber' + _uid">
+                {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
+            </label>
+        </div>
+        <button @click="deleteValue()" class="input-unit w-auto">
+            <span>{{ $translate("Ceres::Template.addressDelete") }}</span>
+        </button>
     </div>
 </template>
 
