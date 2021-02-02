@@ -54,7 +54,7 @@ class TemplateServiceProvider extends ServiceProvider
     /** @var int Default priority of events */
     const EVENT_LISTENER_PRIORITY = 100;
 
-    /** @var \string[][] $templateKeyToViewMap This property maps templateKeys to their view and their used contexz */
+    /** @var \string[][] $templateKeyToViewMap This property maps templateKeys to their view and their used context */
     private static $templateKeyToViewMap =
         [
             'tpl.home' => ['Homepage.Homepage', GlobalContext::class],
@@ -336,7 +336,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         /**
          * @var ConfigRepository $config
-         * Cannot use CeresConfig since it depends on IO helper class
+         * Cannot use CeresConfig since it depends on IO helper class.
          */
         $config = pluginApp(ConfigRepository::class);
         if (strlen($config->get('Ceres.contact.api_key'))) {
