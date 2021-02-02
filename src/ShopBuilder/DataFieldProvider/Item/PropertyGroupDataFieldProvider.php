@@ -15,9 +15,9 @@ use Plenty\Plugin\Translation\Translator;
 /**
  * Class PropertyGroupDataFieldProvider
  *
- * This class is a data field provider centered about the topic of property groups.
- * It divides it's data into groups and single properties and delegates to child providers.
- * It is used to enable placeholders for dynamic data in the shop builders text widget.
+ * This class is a data field provider centered on the topic of property groups.
+ * It divides its data into groups and single properties and delegates to child providers.
+ * It is used to enable placeholders for dynamic data in the ShopBuilder's text widget.
  * Please refer to the parent class for more information about DataFieldProviders.
  * Please refer to https://developers.plentymarkets.com/dev-doc/result-fields-ceres for more information about
  * the data fields.
@@ -30,7 +30,7 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
     static $groupNames = [];
 
     /**
-     * Registers item data fields for use in the shop builder.
+     * Registers item data fields for use in the ShopBuilder.
      */
     function register()
     {
