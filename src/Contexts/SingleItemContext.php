@@ -37,7 +37,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
     /**
      * @var array $afterKey Contains the next variation ID and some data of the next item, to be used to continue fetching variations (@see $variations).
-     * The afterKey is only set, when the variation select requires more data, than is already loaded in the client.
+     * The afterKey is only set when the variation selection requires more data than is already loaded in the client.
      */
     public $afterKey;
 
@@ -70,23 +70,23 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $initPleaseSelectOption;
 
     /**
-     * @var bool $isItemSet Defines if an item is of the type "set"
+     * @var bool $isItemSet Defines if an item is of the type "set".
      */
     public $isItemSet;
 
     /**
-     * @var array $setComponents Some data of the variations, contained as component for the current item, if the item is of the type "set".
+     * @var array $setComponents Some data of the variations contained as a component for the current item if the item is of the type "set".
      */
     public $setComponents;
 
     /**
-     * @var array $setAttributeMap Contains arrays with attributes, variations and the afterKey for all set components, if the item is of the type "set".
+     * @var array $setAttributeMap Contains arrays with attributes, variations and the afterKey for all set components if the item is of the type "set".
      * @see $attributes, $variations, $afterKey
      */
     public $setAttributeMap = [];
 
     /**
-     * @var string $requestedVariationUrl Represents the current URL without the parameters
+     * @var string $requestedVariationUrl Represents the current URL without the parameters.
      */
     public $requestedVariationUrl;
 
