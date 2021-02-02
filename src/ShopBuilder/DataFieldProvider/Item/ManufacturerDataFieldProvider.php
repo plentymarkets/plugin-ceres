@@ -17,7 +17,7 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 class ManufacturerDataFieldProvider extends DataFieldProvider
 {
     /**
-     * Registers item data fields for use in the ShopBuilder's.
+     * Registers item data fields for use in the ShopBuilder.
      */
     function register()
     {
