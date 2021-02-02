@@ -2,7 +2,7 @@
     <div
         class="input-group flex-nowrap"
         data-model="vatNumber"
-        v-if="isEU">
+        v-if="isEU && isPrefixValid">
         <div class="input-unit w-auto input-group-prepend">
             <span class="input-group-text h-100 border-0" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0] }}</span>
             <select class="custom-select" v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
@@ -18,6 +18,7 @@
                 v-model="vatNumber"
                 data-autofocus
                 data-testing="vat-id"
+                @keypress="isNumber($event)"
                 @input="emitChange()"
             >
             <label :for="'txtVatNumber' + _uid">
@@ -25,7 +26,7 @@
             </label>
         </div>
     </div>
-    <div v-else-if="!isEU && value" class="input-group flex-nowrap">
+    <div v-else-if="value && !isPrefixValid" class="input-group flex-nowrap">
         <div class="input-unit flex-fill w-auto error">
             <input
                 type="text"
@@ -61,7 +62,8 @@ export default
     {
         return {
             vatNumber: "",
-            vatPrefix: ""
+            vatPrefix: "",
+            isPrefixValid: true
         }
     },
 
@@ -114,6 +116,18 @@ export default
             this.emitChange();
         },
 
+        isNumber(evt)
+        {
+            evt = (evt) ? evt : window.event;
+            const charCode = (evt.which) ? evt.which : evt.keyCode;
+
+            if (charCode < 48 || charCode > 57) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        },
+
         setValues(value)
         {
             if (value && value.length > 0)
@@ -121,9 +135,10 @@ export default
                 // Splits value in numbers and letters
                 const regex = new RegExp(/([^\d]*)(\d*)/);
                 const values = regex.exec(value);
-                const isPrefixValid = this.vatCodes.find(code => code === values[1]);
 
-                if (isPrefixValid)
+                this.isPrefixValid = !!this.vatCodes.find(code => code === values[1]);
+
+                if (this.isPrefixValid)
                 {
                     this.vatPrefix = values[1];
                     this.vatNumber = values[2];
@@ -134,7 +149,11 @@ export default
                     // and we fill the whole vat id to make the wrong input visible for the customer.
                     this.vatNumber = value;
                 }
-            } 
+            }
+            else
+            {
+                this.isPrefixValid = true;
+            }
         }
     }
 }
