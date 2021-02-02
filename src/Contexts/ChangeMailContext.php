@@ -20,18 +20,18 @@ class ChangeMailContext extends GlobalContext implements ContextInterface
     public $contactId;
 
     /**
-     * @var string $hash The Hash used to authenticate the mail change.
+     * @var string $hash The hash used to authenticate the mail change.
      */
     public $hash;
 
     /**
-     * @var string $newMail The new email address, to change.
+     * @var string $newMail The new email address the customer entered.
      */
     public $newMail;
 
     /**
      * @var Category $category
-     * Category data of the current category, linked to this context.
+     * Category data of the current category linked to this context.
      */
     public $category;
 
