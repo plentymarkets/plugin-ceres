@@ -64,7 +64,7 @@ class CeresItemListsConfig extends PluginConfig
     public $list2Type;
 
     /**
-     * @var string $list2TagIds List of IDs of tags to display in the second item list
+     * @var string $list2TagIds List of IDs of tags to display in the second item list.
      *
      * @deprecated will be removed in 6.0.0.
      */
@@ -78,7 +78,7 @@ class CeresItemListsConfig extends PluginConfig
     public $list3Type;
 
     /**
-     * @var string $list3TagIds List of IDs of tags to display in the third item list
+     * @var string $list3TagIds List of IDs of tags to display in the third item list.
      *
      * @deprecated will be removed in 6.0.0.
      */
