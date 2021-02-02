@@ -8,14 +8,14 @@ use Plenty\Modules\ShopBuilder\Helper\MappableSettingsHandler;
 /**
  * Class ShopBuilderSettingsHandler
  *
- * Maps the routing settings from IO to Ceres. This allows us to set routing settings in the shop builder.
+ * Maps the routing settings from IO to Ceres. This allows us to set routing settings in the ShopBuilder.
  *
  * @package Ceres\ShopBuilder\Handler
  */
 class ShopBuilderSettingsHandler extends MappableSettingsHandler
 {
     /**
-     * @var string[] Maps the Ceres settings to the IO settings
+     * @var string[] Maps the Ceres settings to the IO settings.
      */
     protected $mappings = [
         'routing.homeCategory'                  => 'IO.routing.category_home',
@@ -68,7 +68,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     ];
 
     /**
-     * @var string[] Decides what datatype the settings should be casted as
+     * @var string[] Decides what datatype the settings should be casted as.
      */
     protected $casts = [
         'routing.home'                          => 'int',
@@ -99,7 +99,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     ];
 
     /**
-     * @var array|null $enabledRoutes Contains all enabled routes from the plugin config
+     * @var array|null $enabledRoutes Contains all enabled routes from the plugin config.
      */
     private $enabledRoutes = null;
 
@@ -114,7 +114,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableHomeRoute If true, enable the route
+     * @param bool $enableHomeRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_HomeEnableRoute($enableHomeRoute)
@@ -133,7 +133,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableBasketRoute If true, enable the route
+     * @param bool $enableBasketRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_BasketEnableRoute($enableBasketRoute)
@@ -152,7 +152,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableCheckoutRoute If true, enable the route
+     * @param bool $enableCheckoutRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_CheckoutEnableRoute($enableCheckoutRoute)
@@ -171,7 +171,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableMyAccountRoute If true, enable the route
+     * @param bool $enableMyAccountRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_MyAccountEnableRoute($enableMyAccountRoute)
@@ -190,7 +190,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableSearchRoute If true, enable the route
+     * @param bool $enableSearchRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_searchEnableRoute($enableSearchRoute): string
@@ -209,7 +209,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableConfirmationRoute If true, enable the route
+     * @param bool $enableConfirmationRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_ConfirmationEnableRoute($enableConfirmationRoute)
@@ -228,7 +228,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableLoginRoute If true, enable the route
+     * @param bool $enableLoginRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_LoginEnableRoute($enableLoginRoute)
@@ -247,7 +247,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableRegisterRoute If true, enable the route
+     * @param bool $enableRegisterRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_RegisterEnableRoute($enableRegisterRoute)
@@ -266,7 +266,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableCancellationRightsRoute If true, enable the route
+     * @param bool $enableCancellationRightsRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_CancellationRightsEnableRoute($enableCancellationRightsRoute)
@@ -285,7 +285,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableCancellationFormRoute If true, enable the route
+     * @param bool $enableCancellationFormRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_CancellationFormEnableRoute($enableCancellationFormRoute)
@@ -304,7 +304,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableLegalDisclosureRoute If true, enable the route
+     * @param bool $enableLegalDisclosureRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_LegalDisclosureEnableRoute($enableLegalDisclosureRoute)
@@ -323,7 +323,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enablePrivacyPolicyRoute If true, enable the route
+     * @param bool $enablePrivacyPolicyRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_PrivacyPolicyEnableRoute($enablePrivacyPolicyRoute)
@@ -342,7 +342,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableGtcRoute If true, enable the route
+     * @param bool $enableGtcRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_GtcEnableRoute($enableGtcRoute)
@@ -361,7 +361,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableContactRoute If true, enable the route
+     * @param bool $enableContactRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_ContactEnableRoute($enableContactRoute)
@@ -380,7 +380,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableWishListRoute If true, enable the route
+     * @param bool $enableWishListRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_WishListEnableRoute($enableWishListRoute)
@@ -399,7 +399,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableWishListRoute If true, enable the route
+     * @param bool $enableWishListRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_ChangeMailEnableRoute($enableWishListRoute)
@@ -418,7 +418,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableWishListRoute If true, enable the route
+     * @param bool $enableWishListRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_PasswordResetEnableRoute($enableWishListRoute)
@@ -437,7 +437,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableWishListRoute If true, enable the route
+     * @param bool $enableWishListRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_NewsletterOptOutEnableRoute($enableWishListRoute)
@@ -456,7 +456,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enableWishListRoute If true, enable the route
+     * @param bool $enableWishListRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_OrderReturnEnableRoute($enableWishListRoute)
@@ -475,7 +475,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Enable or disable the route.
-     * @param bool $enablePageNotFoundRoute If true, enable the route
+     * @param bool $enablePageNotFoundRoute If true, enable the route.
      * @return string
      */
     public function writeRouting_PageNotFoundEnableRoute($enablePageNotFoundRoute)
@@ -485,8 +485,8 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
 
     /**
      * Setter logic for the enabled routes.
-     * @param string $key The key of the route (See RouteConfig)
-     * @param bool $value The state of the route
+     * @param string $key The key of the route (See RouteConfig).
+     * @param bool $value The state of the route.
      * @return string
      */
     private function setEnabledRoute($key, $value)
