@@ -15,11 +15,10 @@
                 type="text"
                 name="vatNumber"
                 :id="'txtVatNumber' + _uid"
-                v-model="vatNumber"
+                :value="vatNumber"
                 data-autofocus
                 data-testing="vat-id"
-                @keypress="isNumber($event)"
-                @input="emitChange()"
+                @input="onVatNumberChange($event)"
             >
             <label :for="'txtVatNumber' + _uid">
                 {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
@@ -32,7 +31,7 @@
                 type="text"
                 name="vatNumber"
                 :id="'txtVatNumber' + _uid"
-                v-model="value"
+                :value="value"
                 disabled
             >
             <label :for="'txtVatNumber' + _uid">
@@ -71,10 +70,13 @@ export default
     {
         vatCodes()
         {
-            const selectedCountry = this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
-            
-            this.vatPrefix = selectedCountry.vatCodes && selectedCountry.vatCodes[0] ? selectedCountry.vatCodes[0] : "";
-            return selectedCountry.vatCodes;
+            this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+            return this.selectedCountry.vatCodes;
+        },
+
+        selectedCountry()
+        {
+            return this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
         },
 
         isEU()
@@ -88,7 +90,18 @@ export default
         value(newValue)
         {
             this.setValues(newValue);
-        }
+        },
+
+        selectedCountryId(countryId)
+        {
+            const regex = new RegExp(/([^\d]*)(\d*)/);
+            const values = regex.exec(this.value);
+
+            if (!this.selectedCountry.vatCodes.find(vatCode => vatCode === values[1]))
+            {
+                this.deleteValue();
+            }
+        },
     },
 
     created()
@@ -113,19 +126,17 @@ export default
         deleteValue()
         {
             this.vatNumber = "";
+            this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+
             this.emitChange();
         },
 
-        isNumber(evt)
+        onVatNumberChange(event)
         {
-            evt = (evt) ? evt : window.event;
-            const charCode = (evt.which) ? evt.which : evt.keyCode;
+            // Remove letters from value
+            event.target.value = event.target.value.replace(/[^\d]/g,'')
 
-            if (charCode < 48 || charCode > 57) {
-                evt.preventDefault();;
-            } else {
-                return true;
-            }
+            this.$emit('input', this.vatPrefix + event.target.value);
         },
 
         setValues(value)
