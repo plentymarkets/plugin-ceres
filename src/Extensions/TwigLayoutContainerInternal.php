@@ -61,11 +61,11 @@ class TwigLayoutContainerInternal extends Twig_Extension
     }
 
     /**
-     * Get a list of rendered layout containers, normally used in the twig template renderer
+     * Get a list of rendered layout containers, normally used in the twig template renderer.
      *
      * @param string $containerName The name of the container.
      * @param string $arguments Optional arguments.
-     * @return array List of rendered layout containers
+     * @return array List of rendered layout containers.
      */
     public function getInternalContainer($containerName, $arguments)
     {
