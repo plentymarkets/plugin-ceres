@@ -54,7 +54,7 @@ class CeresPaginationConfig extends PluginConfig
     public $itemsPerPage;
 
     /**
-     * @var int $noIndex SEO: Set the value noindex beginning at page.
+     * @var int $noIndex SEO: Define the page number starting from which the value noindex is set.
      */
     public $noIndex;
 
