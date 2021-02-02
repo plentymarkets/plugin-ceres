@@ -22,7 +22,7 @@ class CeresConfig
     public $basket;
 
     /**
-     * @var CeresContactConfig $contact Contact configurations.
+     * @var CeresContactConfig $contact Contact configuration.
      *
      * @deprecated since 4.4.0. Will be removed in 6.0.0.
      */
