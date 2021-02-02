@@ -38,8 +38,8 @@ class BaseWidget implements DynamicWidget
     
     /**
      * BaseWidget constructor.
-     * @param Twig $twig Class to render twig templates
-     * @param Application $app Helper class to retrieve information from the application
+     * @param Twig $twig Class to render twig templates.
+     * @param Application $app Helper class to retrieve information from the application.
      */
     public function __construct(Twig $twig, Application $app)
     {
@@ -66,8 +66,8 @@ class BaseWidget implements DynamicWidget
     /**
      * Get the html representation of the widget.
      *
-     * @param array $widgetSettings The settings provided by the widget
-     * @param array $children The child widgets of the widget
+     * @param array $widgetSettings The settings provided by the widget.
+     * @param array $children The child widgets of the widget.
      *
      * @return string
      */
@@ -100,10 +100,10 @@ class BaseWidget implements DynamicWidget
     /**
      * Render the template of the widget.
      * Returns a twig-template which will be included in the frontend
-     * or rendered again for generating the preview
+     * or rendered again for generating the preview.
      *
-     * @param array $widgetSettings The settings provided by the widget
-     * @param array $children The child widgets of the widget
+     * @param array $widgetSettings The settings provided by the widget.
+     * @param array $children The child widgets of the widget.
      *
      * @return string
      */
@@ -165,10 +165,10 @@ class BaseWidget implements DynamicWidget
     }
 
     /**
-     * Get additional data to be passed to the template while rendering
+     * Get additional data to be passed to the template while rendering.
      *
-     * @param array $widgetSettings The settings provided by the widget
-     * @param bool $isPreview A Flag provided to determine if the widget is currently shown in preview
+     * @param array $widgetSettings The settings provided by the widget.
+     * @param bool $isPreview A flag provided to determine if the widget is currently shown in preview.
      * @return array
      */
     protected function getTemplateData($widgetSettings, $isPreview)
@@ -177,9 +177,9 @@ class BaseWidget implements DynamicWidget
     }
 
     /**
-     * Get additional data to be passed to the template while rendering the preview markup
+     * Get additional data to be passed to the template while rendering the preview markup.
      *
-     * @param array $widgetSettings The settings provided by the widget
+     * @param array $widgetSettings The settings provided by the widget.
      * @return array
      */
     protected function getPreviewData($widgetSettings)
@@ -190,10 +190,10 @@ class BaseWidget implements DynamicWidget
     /**
      * Mock a paginated result
      *
-     * @param \Closure $factory The widget factory which should be mocked
-     * @param int $itemsPerPage The number of items which should be mocked
-     * @param int $currentPage The current page of the result
-     * @param int $pages The total count of pages
+     * @param \Closure $factory The widget factory which should be mocked.
+     * @param int $itemsPerPage The number of items which should be mocked.
+     * @param int $currentPage The current page of the result.
+     * @param int $pages The total count of pages.
      * @return array
      */
     protected function mockPaginatedResult( \Closure $factory, $itemsPerPage = 10, $currentPage = 1, $pages = 5 )
