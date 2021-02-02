@@ -28,7 +28,7 @@ class CeresAddressConfig extends PluginConfig
     public $billingAddressShow;
 
     /**
-     * @var array $billingAddressShow_en Visible input fields of the billing address in the english format.
+     * @var array $billingAddressShow_en Visible input fields of the billing address in UK format.
      *
      * @deprecated will be removed in 6.0.0.
      */
@@ -42,7 +42,7 @@ class CeresAddressConfig extends PluginConfig
     public $billingAddressRequire;
 
     /**
-     * @var array $billingAddressRequire_en Required input fields of the billing address in the english format.
+     * @var array $billingAddressRequire_en Required input fields of the billing address in UK format.
      *
      * @deprecated will be removed in 6.0.0.
      */
@@ -56,7 +56,7 @@ class CeresAddressConfig extends PluginConfig
     public $deliveryAddressShow;
 
     /**
-     * @var array $deliveryAddressShow_en Visible input fields of the delivery address in the english format.
+     * @var array $deliveryAddressShow_en Visible input fields of the delivery address in UK format.
      *
      * @deprecated will be removed in 6.0.0.
      */
@@ -70,7 +70,7 @@ class CeresAddressConfig extends PluginConfig
     public $deliveryAddressRequire;
 
     /**
-     * @var array $billingAddressRequire_en Required input fields of the delivery address in the english format.
+     * @var array $billingAddressRequire_en Required input fields of the delivery address in UK format.
      *
      * @deprecated will be removed in 6.0.0.
      */
