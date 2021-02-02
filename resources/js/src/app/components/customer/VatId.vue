@@ -4,7 +4,7 @@
         data-model="vatNumber"
         v-if="isEU">
         <div class="input-unit w-auto input-group-prepend">
-            <span class="input-group-text h-100" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0] }}</span>
+            <span class="input-group-text h-100 border-0" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0] }}</span>
             <select class="custom-select" v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
                 <option v-for="(vatCode, index) in vatCodes" :value="vatCode">{{ vatCode }}</option>
             </select>
@@ -40,6 +40,7 @@
         </div>
         <button @click="deleteValue()" class="input-unit w-auto">
             <span>{{ $translate("Ceres::Template.addressDelete") }}</span>
+            <span class="fa fa-trash-o ml-1"></span>
         </button>
     </div>
 </template>
