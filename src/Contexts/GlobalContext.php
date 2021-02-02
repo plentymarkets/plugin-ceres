@@ -82,7 +82,7 @@ class GlobalContext implements ContextInterface
     public $categoryBreadcrumbs;
 
     /**
-     * @var array $notifications List of all notifications store in the session.
+     * @var array $notifications List of all notifications stored in the session.
      */
     public $notifications;
 
@@ -125,12 +125,12 @@ class GlobalContext implements ContextInterface
     public $templateEvent;
 
     /**
-     * @var bool $isShopBuilder Defines if the shop is opened in shop builder mode.
+     * @var bool $isShopBuilder Defines if the shop is opened in ShopBuilder mode.
      */
     public $isShopBuilder;
 
     /**
-     * @var bool $isSafeMode Defines if the shop is load in safe mode.
+     * @var bool $isSafeMode Defines if the shop is loaded in safe mode.
      */
     public $isSafeMode;
 
@@ -145,7 +145,7 @@ class GlobalContext implements ContextInterface
     public $buildHash;
 
     /**
-     * @var string $assetName Key for the assets to be load.
+     * @var string $assetName Key for the assets to be loaded.
      */
     public $assetName = "ceres-checkout";
 
