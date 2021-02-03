@@ -44,18 +44,18 @@ class MailAttachmentWidget extends BaseWidget
         $settingsFactory->createCheckboxGroup("allowedFileExtensions")
             ->withDefaultValue(
                 [
-                    ",.pdf,.docx,.doc,.odt,.txt",
-                    ",.jpg,.png,.svg,.psd,.ps",
-                    ",.zip",
+                    ",application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/pdf,application/vnd.oasis.opendocument.text",
+                    ",image/vnd.adobe.photoshop,image/svg+xml,image/psd,image/png,image/jpeg,application/psd,application/x-photoshop",
+                    ",application/zip",
                 ]
             )
             ->withName("Widget.mailFormAttachmentAllowedFileExtensions")
             ->withTooltip("Widget.mailFormAttachmentAllowedFileExtensionsTooltip")
             ->withCheckboxValues(
                 ValueListFactory::make()
-                    ->addEntry(",.pdf,.docx,.doc,.odt,.txt", "Widget.mailFormAttachmentAllowedFileExtensionsDocuments")
-                    ->addEntry(",.jpg,.png,.svg,.psd,.ps", "Widget.mailFormAttachmentAllowedFileExtensionsImages")
-                    ->addEntry(",.zip", "Widget.mailFormAttachmentAllowedFileExtensionsZip")
+                    ->addEntry(",application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/pdf,application/vnd.oasis.opendocument.text", "Widget.mailFormAttachmentAllowedFileExtensionsDocuments")
+                    ->addEntry(",image/vnd.adobe.photoshop,image/svg+xml,image/psd,image/png,image/jpeg,application/psd,application/x-photoshop", "Widget.mailFormAttachmentAllowedFileExtensionsImages")
+                    ->addEntry(",application/zip", "Widget.mailFormAttachmentAllowedFileExtensionsZip")
                     ->toArray()
         );
         
