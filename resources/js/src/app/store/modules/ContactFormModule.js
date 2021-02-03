@@ -141,7 +141,7 @@ const actions =
                     ValidationService.validate(event.target)
                         .done(() =>
                         {
-                            // disableForm(event.target, true);
+                            disableForm(event.target, true);
 
                             const formData    = serializeForm(event.target);
                             const formOptions = readFormOptions(event.target, formData);
@@ -227,7 +227,7 @@ function sendFile(event, recaptchaToken)
             }
         }
 
-        formData.append("rcaptchaToken", recaptchaToken);
+        formData.append("recaptchaToken", recaptchaToken);
 
         ApiService.post("/rest/io/customer/contact/mail/file",
             formData,
