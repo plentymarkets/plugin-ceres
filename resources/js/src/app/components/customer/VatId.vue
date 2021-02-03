@@ -94,10 +94,8 @@ export default
 
         selectedCountryId(countryId)
         {
-            const regex = new RegExp(/([^\d]*)(\d*)/);
-            const values = regex.exec(this.value);
-
-            if (!this.selectedCountry.vatCodes.find(vatCode => vatCode === values[1]))
+            // only delete values if vatPrefix is not valid for country
+            if (!this.vatCodes.find(vatCode => this.value.startsWith(vatCode)))
             {
                 this.deleteValue();
             }
@@ -133,37 +131,19 @@ export default
 
         onVatNumberChange(event)
         {
-            // Remove letters from value
-            event.target.value = event.target.value.replace(/[^\d]/g,'')
-
             this.$emit('input', this.vatPrefix + event.target.value);
         },
 
         setValues(value)
         {
-            if (value && value.length > 0)
-            {
-                // Splits value in numbers and letters
-                const regex = new RegExp(/([^\d]*)(\d*)/);
-                const values = regex.exec(value);
+            const vatPrefix = this.vatCodes.find(vatCode => value.startsWith(vatCode));
+            this.isPrefixValid = !!vatPrefix;
 
-                this.isPrefixValid = !!this.vatCodes.find(code => code === values[1]);
-
-                if (this.isPrefixValid)
-                {
-                    this.vatPrefix = values[1];
-                    this.vatNumber = values[2];
-                }
-                else
-                {
-                    // if vat prefix isn't included in this.vatCodes it's an invalid input
-                    // and we fill the whole vat id to make the wrong input visible for the customer.
-                    this.vatNumber = value;
-                }
-            }
-            else
+            if (this.isPrefixValid)
             {
                 this.isPrefixValid = true;
+                this.vatPrefix = vatPrefix;
+                this.vatNumber = value.slice(vatPrefix.length);
             }
         }
     }
