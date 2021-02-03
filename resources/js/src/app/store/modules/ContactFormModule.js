@@ -178,7 +178,7 @@ const actions =
                                         NotificationService.error(response.error);
                                     });
                             },
-                            (error) =>
+                            (response) =>
                             {
                                 resetRecaptcha(recaptchaEl);
                                 disableForm(event.target, false);
