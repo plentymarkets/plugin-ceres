@@ -14,7 +14,7 @@ use Plenty\Plugin\Translation\Translator;
  * Class DefaultBasketPreset
  *
  * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
- * This particular preset generates a page for viewing and manipulating the basket. It contains:
+ * This particular preset generates a page for viewing and interacting with the basket. It contains:
  * - InlineTextWidget
  * - SeparatorWidget
  * - TwoColumnWidget
