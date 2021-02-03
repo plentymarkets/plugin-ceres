@@ -12,7 +12,7 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
  * Class DefaultMyAccountPreset
  *
  * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
- * This particular preset generates a page for viewing the customers contact data, past orders, and returns. It contains:
+ * This particular preset generates a page where customers can view and interact with their contact data, orders, and returns. It contains:
  * - TwoColumnWidget
  * - BackgroundWidget
  * - SeparatorWidget
