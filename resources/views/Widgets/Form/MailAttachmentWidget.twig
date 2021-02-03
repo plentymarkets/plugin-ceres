@@ -18,7 +18,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     
     <div class="widget-inner input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="file"{% endif %}>
-        <input type="file"{% if allowMultiple %} multiple{% endif %} name="{{ formFieldId }}" id="{{ formFieldId }}" accept="{{ allowedFileExtensions }}">
+        <input type="file"{% if allowMultiple %} multiple{% endif %} name="{{ formFieldId }}" id="{{ formFieldId }}"{% if allowedFileExtensions | trim is empty %} disabled{% else %} accept="{{ allowedFileExtensions }}"{% endif %}>
 
         <label for="{{ formFieldId }}">
             {{ label }}{% if isRequired %}*{% endif %}

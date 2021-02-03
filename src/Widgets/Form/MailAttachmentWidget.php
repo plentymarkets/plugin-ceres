@@ -44,7 +44,7 @@ class MailAttachmentWidget extends BaseWidget
         $settingsFactory->createCheckboxGroup("allowedFileExtensions")
             ->withDefaultValue(
                 [
-                    ",application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/pdf,application/vnd.oasis.opendocument.text",
+                    ",application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,application/vnd.oasis.opendocument.text",
                     ",image/vnd.adobe.photoshop,image/svg+xml,image/psd,image/png,image/jpeg,application/psd,application/x-photoshop",
                     ",application/zip",
                 ]
@@ -53,7 +53,7 @@ class MailAttachmentWidget extends BaseWidget
             ->withTooltip("Widget.mailFormAttachmentAllowedFileExtensionsTooltip")
             ->withCheckboxValues(
                 ValueListFactory::make()
-                    ->addEntry(",application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/pdf,application/vnd.oasis.opendocument.text", "Widget.mailFormAttachmentAllowedFileExtensionsDocuments")
+                    ->addEntry(",application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,application/vnd.oasis.opendocument.text", "Widget.mailFormAttachmentAllowedFileExtensionsDocuments")
                     ->addEntry(",image/vnd.adobe.photoshop,image/svg+xml,image/psd,image/png,image/jpeg,application/psd,application/x-photoshop", "Widget.mailFormAttachmentAllowedFileExtensionsImages")
                     ->addEntry(",application/zip", "Widget.mailFormAttachmentAllowedFileExtensionsZip")
                     ->toArray()
