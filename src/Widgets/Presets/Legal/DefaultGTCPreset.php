@@ -10,7 +10,7 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
  * Class DefaultGTCPreset
  *
  * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
- * This particular preset generates a page for viewing the shops general terms and conditions. It contains:
+ * This particular preset generates a page for viewing the shop's general terms and conditions. It contains:
  * - CodeWidget
  * - SeparatorWidget
  * - LegalTextsWidget
