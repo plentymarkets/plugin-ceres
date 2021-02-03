@@ -10,7 +10,7 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
  * Class WishListPreset
  *
  * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
- * This particular preset generates a page for viewing the customers wishlist. It contains:
+ * This particular preset generates a page for viewing the customer's wishlist. It contains:
  * - InlineTextWidget
  * - BackgroundWidget
  * - SeparatorWidget
