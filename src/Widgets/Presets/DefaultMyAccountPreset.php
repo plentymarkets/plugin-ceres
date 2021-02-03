@@ -27,6 +27,9 @@ class DefaultMyAccountPreset implements ContentPreset
     /** @var PresetWidgetFactory */
     private $twoColumnWidgetAccountSettings;
     
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);

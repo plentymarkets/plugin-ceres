@@ -17,7 +17,10 @@ class DefaultCheckoutPreset implements ContentPreset
 
     /** @var CeresConfig */
     private $ceresConfig;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);

@@ -15,8 +15,12 @@ use Plenty\Plugin\Http\Request;
 
 class ItemSortingWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Category.ItemSortingWidget';
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemSortingWidget')
@@ -27,7 +31,10 @@ class ItemSortingWidget extends BaseWidget
                                 ->withPosition(300)
                                 ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -54,7 +61,10 @@ class ItemSortingWidget extends BaseWidget
 
         return $settings->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $itemSortOptions = [];
@@ -95,7 +105,10 @@ class ItemSortingWidget extends BaseWidget
 
         return $result;
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPreviewData($widgetSettings)
     {
         /**

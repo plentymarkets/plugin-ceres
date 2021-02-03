@@ -8,7 +8,8 @@
                 :disabled="isDisabled"
                 v-tooltip="isDisabled"
                 data-boundary="window"
-                :data-title="$translate('Ceres::Template.headerChangeDeliveryCountry')">
+                :data-title="$translate('Ceres::Template.headerChangeDeliveryCountry')"
+                :aria-label="$translate('Ceres::Template.headerChangeDeliveryCountry')">
 
                 <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()"></i>
                 {{ shippingCountry.currLangName }}

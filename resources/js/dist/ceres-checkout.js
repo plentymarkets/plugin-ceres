@@ -439,7 +439,9 @@ __webpack_require__.r(__webpack_exports__);
     imageUrl: String,
     fallbackUrl: String,
     isBackgroundImage: Boolean,
-    pictureClass: String
+    pictureClass: String,
+    alt: String,
+    title: String
   },
   data: function data() {
     return {
@@ -37410,7 +37412,8 @@ var render = function() {
           attrs: {
             "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
             "data-picture-class": _vm.pictureClass,
-            "data-alt": _vm.$attrs.alt
+            "data-alt": _vm.alt,
+            "data-title": _vm.title
           }
         },
         [
@@ -42321,7 +42324,8 @@ var render = function() {
                     staticClass: "nav-link",
                     attrs: {
                       href: _vm.isLogin ? "javascript:void(0)" : "#login",
-                      "data-toggle": _vm.isLogin ? false : "modal"
+                      "data-toggle": _vm.isLogin ? false : "modal",
+                      "aria-label": _vm.$translate("Ceres::Template.login")
                     },
                     on: {
                       click: function($event) {
@@ -42357,7 +42361,10 @@ var render = function() {
                         href: _vm.isRegister
                           ? "javascript:void(0)"
                           : "#registration",
-                        "data-toggle": _vm.isRegister ? false : "modal"
+                        "data-toggle": _vm.isRegister ? false : "modal",
+                        "aria-label": _vm.$translate(
+                          "Ceres::Template.loginRegister"
+                        )
                       },
                       on: {
                         click: function($event) {
@@ -43399,7 +43406,13 @@ var render = function() {
                 ],
                 ref: "searchInput",
                 staticClass: "search-input flex-grow-1 px-3 py-2",
-                attrs: { type: "search", autofocus: _vm.isShopBuilder },
+                attrs: {
+                  type: "search",
+                  autofocus: _vm.isShopBuilder,
+                  "aria-label": _vm.$translate(
+                    "Ceres::Template.headerSearchTerm"
+                  )
+                },
                 domProps: { value: _vm.searchString },
                 on: {
                   input: [
@@ -43436,7 +43449,12 @@ var render = function() {
                   "button",
                   {
                     staticClass: "search-submit px-3",
-                    attrs: { type: "submit" },
+                    attrs: {
+                      type: "submit",
+                      "aria-label": _vm.$translate(
+                        "Ceres::Template.headerSearch"
+                      )
+                    },
                     on: {
                       click: function($event) {
                         return _vm.search()
@@ -43988,7 +44006,11 @@ var render = function() {
     "a",
     {
       staticClass: "nav-link",
-      attrs: { href: _vm.urlWishList, rel: "nofollow" }
+      attrs: {
+        href: _vm.urlWishList,
+        rel: "nofollow",
+        "aria-label": _vm.$translate("Ceres::Template.wishList")
+      }
     },
     [
       _c("span", { staticClass: "badge-right mr-1 d-none d-sm-inline" }, [
@@ -66601,6 +66623,10 @@ var defaultConfig = {
         img.alt = element.getAttribute("data-alt");
       }
 
+      if (element.getAttribute("data-title")) {
+        img.title = element.getAttribute("data-title");
+      }
+
       if (element.getAttribute("data-picture-class")) {
         var classes = element.getAttribute("data-picture-class");
         classes = classes.split(" ");
@@ -68643,7 +68669,6 @@ var mutations = {
     if (billingAddress) {
       state.billingAddressId = billingAddress.id;
       state.billingAddress = billingAddress;
-      document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
     }
   },
   selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
@@ -68685,7 +68710,6 @@ var mutations = {
     if (deliveryAddress) {
       state.deliveryAddressId = deliveryAddress.id;
       state.deliveryAddress = deliveryAddress;
-      document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
     }
   },
   removeBillingAddress: function removeBillingAddress(state, billingAddress) {
@@ -68811,6 +68835,7 @@ var actions = {
     commit("selectBillingAddress", addressList.find(function (address) {
       return address.id === id;
     }));
+    document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
   },
   initDeliveryAddress: function initDeliveryAddress(_ref5, _ref6) {
     var commit = _ref5.commit;
@@ -68830,6 +68855,7 @@ var actions = {
     commit("selectDeliveryAddress", addressList.find(function (address) {
       return address.id === id;
     }));
+    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
   },
   selectAddress: function selectAddress(_ref7, _ref8) {
     var commit = _ref7.commit,
@@ -68854,6 +68880,13 @@ var actions = {
         supressNotifications: true
       }).done(function (response) {
         commit("setIsBasketLoading", false);
+
+        if (addressType === "1") {
+          document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
+        } else if (addressType === "2") {
+          document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
+        }
+
         return resolve(response);
       }).fail(function (error) {
         if (addressType === "1") {

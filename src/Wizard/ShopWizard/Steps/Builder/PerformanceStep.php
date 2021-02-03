@@ -5,6 +5,7 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 use Ceres\Wizard\ShopWizard\Config\LogConfig;
 use Ceres\Wizard\ShopWizard\Config\PerformanceConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 
 /**
  * Class PerformanceStep
@@ -17,18 +18,23 @@ class PerformanceStep extends Step
      */
     public function generateStep():array
     {
-        return [
+        $step = [
             "title" => "Wizard.performanceSettings",
             "description" => "Wizard.performanceSettingsDescription",
             "condition" => " (typeof settingsSelection_performance === 'undefined' ||"
                           ." settingsSelection_performance === true) && "
                           . $this->hasRequiredSettings(),
             "sections" => [
-                $this->generateShopBoosterSection(),
                 $this->generateLoggingOptionsSection(),
                 $this->generatePerformanceSection()
             ]
         ];
+        
+        if ($this->isModuleS3Active()) {
+            array_unshift($step["sections"], $this->generateShopBoosterSection());
+        }
+        
+        return $step;
     }
 
     /**
@@ -109,5 +115,12 @@ class PerformanceStep extends Step
                 ]
             ]
         ];
+    }
+    
+    private function isModuleS3Active()
+    {
+        /** @var PlentyModuleRepositoryContract $moduleRepo */
+        $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
+        return $moduleRepo->isActive('cdn.contentCache.s3');
     }
 }

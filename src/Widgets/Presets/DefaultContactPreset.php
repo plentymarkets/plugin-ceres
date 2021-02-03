@@ -18,7 +18,10 @@ class DefaultContactPreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->config = pluginApp(CeresConfig::class);

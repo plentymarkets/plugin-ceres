@@ -8,6 +8,9 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
 class ChangePasswordPreset implements ContentPreset
 {
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         /** @var PresetHelper */
