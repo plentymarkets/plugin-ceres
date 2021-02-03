@@ -9,6 +9,24 @@ use Ceres\Widgets\Presets\Helper\HasWhiteBackground;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultContactPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing the shop's contact information and location. It contains:
+ * - InlineTextWidget
+ * - SeparatorWidget
+ * - TwoColumnWidget
+ * - ContactDetailsWidget
+ * - GoogleMapsWidget
+ * - MailFormWidget
+ * - TextInputWidget
+ * - MailInputWidget
+ * - TextAreaWidget
+ * - AcceptPrivacyPolicyWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultContactPreset implements ContentPreset
 {
     use HasWhiteBackground;

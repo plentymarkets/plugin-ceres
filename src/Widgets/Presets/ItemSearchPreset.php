@@ -6,6 +6,26 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class ItemSearchPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing item search results. It contains:
+ * - ThreeColumnWidget
+ * - CodeWidget
+ * - ToolbarWidget
+ * - ItemSortingWidget
+ * - ItemsPerPageWidget
+ * - AttributesPropertiesCharacteristicsFilterWidget
+ * - PriceFilterWidget
+ * - AvailabilityFilterWidget
+ * - ManufacturerFilterWidget
+ * - SelectedFilterWidget
+ * - PaginationWidget
+ * - ItemGridWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class ItemSearchPreset implements ContentPreset
 {
     /** @var PresetHelper */
