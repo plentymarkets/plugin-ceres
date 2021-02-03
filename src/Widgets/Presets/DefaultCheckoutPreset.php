@@ -12,7 +12,7 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
  * Class DefaultCheckoutPreset
  *
  * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
- * This particular preset generates a page for viewing and manipulating the checkout. It contains:
+ * This particular preset generates a page for viewing and interacting with the checkout. It contains:
  * - TwoColumnWidget
  * - BackgroundWidget
  * - AddressWidget
