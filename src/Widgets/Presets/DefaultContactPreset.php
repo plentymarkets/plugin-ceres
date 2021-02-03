@@ -13,7 +13,7 @@ use Plenty\Plugin\Translation\Translator;
  * Class DefaultContactPreset
  *
  * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
- * This particular preset generates a page for viewing the shops contact information and location. It contains:
+ * This particular preset generates a page for viewing the shop's contact information and location. It contains:
  * - InlineTextWidget
  * - SeparatorWidget
  * - TwoColumnWidget
