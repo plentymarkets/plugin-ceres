@@ -6,6 +6,16 @@ use Ceres\Widgets\Helper\PresetHelper;
 use Ceres\Widgets\Presets\Helper\HasWhiteBackground;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class OrderReturnPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing the order return form. It contains:
+ * - InlineTextWidget
+ * - OrderReturnWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class OrderReturnPreset implements ContentPreset
 {
     /** @var PresetHelper */

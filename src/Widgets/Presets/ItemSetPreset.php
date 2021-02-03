@@ -8,6 +8,27 @@ use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class ItemSetPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing single item sets. It contains:
+ * - TwoColumnWidget
+ * - ItemImageWidget
+ * - BackgroundWidget
+ * - InlineTextWidget
+ * - SeparatorWidget
+ * - ItemPriceWidget
+ * - ItemAvailabilityWidget
+ * - AddToWishListWidget
+ * - ItemSetWidget
+ * - ThreeColumnWidget
+ * - AttributeWidget
+ * - OrderPropertyWidget
+ * - AddToBasketWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class ItemSetPreset implements ContentPreset
 {
     /** @var PresetHelper */

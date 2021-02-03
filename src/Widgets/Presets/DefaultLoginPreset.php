@@ -8,6 +8,19 @@ use IO\Helper\RouteConfig;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultLoginPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for signing in customers. It contains:
+ * - TwoColumnWidget
+ * - InlineTextWidget
+ * - LoginWidget
+ * - GuestLoginWidget
+ * - LinkWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultLoginPreset implements ContentPreset
 {
     /** @var PresetHelper */

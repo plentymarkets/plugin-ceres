@@ -6,6 +6,17 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class DefaultChangeMailPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for changing the customer's email. It contains:
+ * - ThreeColumnWidget
+ * - InlineTextWidget
+ * - ChangeMailWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultChangeMailPreset implements ContentPreset
 {
     /**
