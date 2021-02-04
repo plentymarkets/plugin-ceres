@@ -15,10 +15,10 @@
                 type="text"
                 name="vatNumber"
                 :id="'txtVatNumber' + _uid"
-                :value="vatNumber"
+                v-model="vatNumber"
                 data-autofocus
                 data-testing="vat-id"
-                @input="onVatNumberChange($event)"
+                @input="emitChange()"
             >
             <label :for="'txtVatNumber' + _uid">
                 {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
@@ -118,7 +118,9 @@ export default
         
         emitChange()
         {
-            this.$emit('input', this.vatPrefix + this.vatNumber);
+            const value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
+
+            this.$emit('input', value);
         },
 
         deleteValue()
@@ -129,11 +131,6 @@ export default
             this.emitChange();
         },
 
-        onVatNumberChange(event)
-        {
-            this.$emit('input', this.vatPrefix + event.target.value);
-        },
-
         setValues(value)
         {
             const vatPrefix = this.vatCodes.find(vatCode => value.startsWith(vatCode));
@@ -141,9 +138,15 @@ export default
 
             if (this.isPrefixValid)
             {
-                this.isPrefixValid = true;
                 this.vatPrefix = vatPrefix;
                 this.vatNumber = value.slice(vatPrefix.length);
+            }
+            else if (value.length <= 0 && this.isEU)
+            {
+                // this case is here so the value can be empty but the input is still shown
+                this.isPrefixValid = true;
+                this.vatPrefix = this.vatCodes[0];
+                this.vatNumber = "";
             }
         }
     }
