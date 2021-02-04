@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { isNullOrUndefined } from '../../helper/utils';
 export default
 {
     name: "vat-id",
@@ -95,7 +96,7 @@ export default
         selectedCountryId(countryId)
         {
             // only delete values if vatPrefix is not valid for country
-            if (!this.vatCodes.find(vatCode => this.value.startsWith(vatCode)))
+            if (!this.vatCodes.find(vatCode => this.value?.startsWith(vatCode)))
             {
                 this.deleteValue();
             }
@@ -133,7 +134,7 @@ export default
 
         setValues(value)
         {
-            const vatPrefix = this.vatCodes.find(vatCode => value.startsWith(vatCode));
+            const vatPrefix = this.vatCodes.find(vatCode => value?.startsWith(vatCode));
             this.isPrefixValid = !!vatPrefix;
 
             if (this.isPrefixValid)
@@ -141,7 +142,7 @@ export default
                 this.vatPrefix = vatPrefix;
                 this.vatNumber = value.slice(vatPrefix.length);
             }
-            else if (value.length <= 0 && this.isEU)
+            else if ((isNullOrUndefined(value) || value.length <= 0) && this.isEU)
             {
                 // this case is here so the value can be empty but the input is still shown
                 this.isPrefixValid = true;

@@ -211,7 +211,7 @@
                             :is-required="isInRequiredFields('de', 'billing_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :value="value.vatNumber">
+                            :value="value.vatNumber || ''">
                         </vat-id>
                     </div>
                 </div>
@@ -393,7 +393,7 @@
                             :is-required="isInRequiredFields('gb', 'billing_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :value="value.vatNumber">
+                            :value="value.vatNumber || ''">
                         </vat-id>
                     </div>
                 </div>
@@ -581,7 +581,7 @@
                             :is-required="isInRequiredFields('de', 'delivery_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :value="value.vatNumber">
+                            :value="value.vatNumber || ''">
                         </vat-id>
                     </div>
                 </div>
@@ -760,7 +760,7 @@
                             :is-required="isInRequiredFields('gb', 'delivery_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :value="value.vatNumber">
+                            :value="value.vatNumber || ''">
                         </vat-id>
                     </div>
                 </div>
