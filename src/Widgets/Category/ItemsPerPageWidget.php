@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ItemsPerPageWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Category.ItemsPerPageWidget";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemsPerPageWidget')
@@ -23,6 +27,9 @@ class ItemsPerPageWidget extends BaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -44,6 +51,9 @@ class ItemsPerPageWidget extends BaseWidget
         return $settings->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $listEntries  = [];
@@ -63,6 +73,9 @@ class ItemsPerPageWidget extends BaseWidget
         return $result;
     }
     
+    /**
+     * @inheritDoc
+     */
     protected function getPreviewData($widgetSettings)
     {
         /**

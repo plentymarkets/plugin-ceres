@@ -4,28 +4,90 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresSortingConfig
+ *
+ * PluginConfig class, including all plugin settings for the item sorting.
+ *
+ * @package Ceres\Config
+ */
 class CeresSortingConfig extends PluginConfig
 {
+    /**
+     * @var array $data Enable item sorting by.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $data;
+
+    /**
+     * @var string $defaultSorting Default sorting value for category view.
+     */
     public $defaultSorting;
+
+    /**
+     * @var string $priorityCategory1 Recommended item sorting: First sorting value.
+     */
     public $priorityCategory1;
+
+    /**
+     * @var string $priorityCategory2 Recommended item sorting: Second sorting value.
+     */
     public $priorityCategory2;
+
+    /**
+     * @var string $priorityCategory3 Recommended item sorting: Third sorting value.
+     */
     public $priorityCategory3;
 
+    /**
+     * @var string $defaultSortingSearch Default sorting value for search results.
+     */
     public $defaultSortingSearch;
+
+    /**
+     * @var string $prioritySearch1 Recommended search results: First search value.
+     */
     public $prioritySearch1;
+
+    /**
+     * @var string $prioritySearch2 Recommended search results: Second search value.
+     */
     public $prioritySearch2;
+
+    /**
+     * @var string $prioritySearch3 Recommended search results: Third search value.
+     */
     public $prioritySearch3;
 
+    /**
+     * @var array $dynamicInherit Adopt item sorting for sorting variations on the item tile.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $dynamicInherit;
+
+    /**
+     * @var string $dynamicPrio1 Variation on item tile: First sorting value.
+     */
     public $dynamicPrio1;
+
+    /**
+     * @var string $dynamicPrio2 Variation on item tile: Second sorting value.
+     */
     public $dynamicPrio2;
 
-    protected function getPluginName()
+    /**
+     * @inheritDoc
+     */
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->data = $this->getMultiSelectValue(

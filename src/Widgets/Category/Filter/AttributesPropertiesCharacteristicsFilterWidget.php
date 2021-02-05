@@ -7,9 +7,15 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AttributesPropertiesCharacteristicsFilterWidget extends FilterBaseWidget
 {
+    /** @inheritDoc */
     protected $allowedFacetTypes = ["dynamic"];
+    
+    /** @inheritDoc */
     protected $className = "attributes-properties-characteristics";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::AttributesPropertiesCharacteristicsFilterWidget')
@@ -21,6 +27,9 @@ class AttributesPropertiesCharacteristicsFilterWidget extends FilterBaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         return parent::getSettings();

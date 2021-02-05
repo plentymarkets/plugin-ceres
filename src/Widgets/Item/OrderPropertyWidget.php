@@ -11,8 +11,12 @@ use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 
 class OrderPropertyWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.OrderPropertyWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::OrderPropertyWidget")
@@ -23,7 +27,10 @@ class OrderPropertyWidget extends BaseWidget
             ->withPosition(300)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

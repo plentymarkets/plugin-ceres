@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class QuantityInputWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Item.QuantityInputWidget';
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::QuantityInputWidget')
@@ -22,7 +26,10 @@ class QuantityInputWidget extends BaseWidget
             ->withPosition(200)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

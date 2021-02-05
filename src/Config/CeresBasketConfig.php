@@ -4,22 +4,73 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresBasketConfig
+ *
+ * PluginConfig class, including all plugin settings for the basket.
+ *
+ * @package Ceres\Config
+ */
 class CeresBasketConfig extends PluginConfig
 {
+    /**
+     * @var array $itemData Visible fields of the basket list items.
+     */
     public $itemData;
+
+    /**
+     * @var array $data Visible entries of the basket totals.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $data;
+
+    /**
+     * @var array $previewData Visible entries of the basket (preview) totals.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $previewData;
+
+
+    /**
+     * @var mixed $variations No usage.
+     *
+     * @deprecated will be removed in 6.0.0.
+     */
     public $variations;
+
+    /**
+     * @var string $addItemToBasketConfirm Type to display the basket addition. Possible values: 'overlay', 'preview', 'no_information'.
+     */
     public $addItemToBasketConfirm;
+
+    /**
+     * @var string $previewType Type to display the basket preview. Possible values: 'hover', 'right'.
+     */
     public $previewType;
+
+    /**
+     * @var boolean $showShippingCountrySelect Defines if the country selection is shown in the basket.
+     */
     public $showShippingCountrySelect;
+
+    /**
+     * @var mixed $splitBundles No usage.
+     */
     public $splitBundles;
 
-    protected function getPluginName()
+    /**
+     * @inheritDoc
+     */
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->itemData = $this->getMultiSelectValue(

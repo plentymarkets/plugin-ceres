@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ShippingPrivacyCheckWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.ShippingPrivacyCheckWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ShippingPrivacyCheckWidget")
@@ -22,7 +26,10 @@ class ShippingPrivacyCheckWidget extends BaseWidget
             ->withPosition(500)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
