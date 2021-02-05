@@ -14,7 +14,7 @@ class ItemListWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.ItemListWidget';
-    
+
     /**
      * @inheritDoc
      */
@@ -28,7 +28,7 @@ class ItemListWidget extends BaseWidget
             ->withPosition(700)
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -58,6 +58,7 @@ class ItemListWidget extends BaseWidget
             ->withTooltip('Widget.itemListListTypeTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
+                    ->addEntry('all', 'Widget.itemListListTypeAllItems')
                     ->addEntry('category', 'Widget.itemListListTypeCategory')
                     ->addEntry('last_seen', 'Widget.itemListListTypeLastseen')
                     ->addEntry('tag_list', 'Widget.itemListListTypeTaglist')
