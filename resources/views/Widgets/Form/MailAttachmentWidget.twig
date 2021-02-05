@@ -17,11 +17,11 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
-    <mail-attachment
+    <form-attachment
         :allow-multiple"{{ allowMultiple }}"
         allowed-file-extensions="{{ allowedFileExtensions }}"
         is-required="{{ isRequired }}"
         form-field-id="{{ formFieldId }}"
         label="{{ label }}">
-    </mail-attachment>
+    </form-attachment>
 </div>

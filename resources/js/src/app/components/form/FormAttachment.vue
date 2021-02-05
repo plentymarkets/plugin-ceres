@@ -1,13 +1,13 @@
 <template>
-    <label class="input-unit file-input order-property-input" v-tooltip data-toggle="tooltip" :title="showFileNames">
+    <label class="input-unit file-input" v-tooltip data-toggle="tooltip" :title="fileNames">
         <label :for="formFieldId">
             {{ label }}<span v-if="isRequired">*</span>
         </label>
-        <span class="input-unit-preview">{{showFileNames}}</span>
+        <span class="input-unit-preview">{{fileNames}}</span>
         <span class="input-unit-btn">
             <i class="fa fa-ellipsis-h"></i>
         </span>
-        <input ref="fileInput" type="file"
+        <input type="file"
                 :multiple="allowMultiple"
                 :name="formFieldId" :id="formFieldId"
                 :disabled="allowedFileExtensions.trim().length === 0"
@@ -20,7 +20,7 @@
 
 export default {
 
-    name: "mail-attachment",
+    name: "form-attachment",
 
     data()
     {
@@ -50,6 +50,8 @@ export default {
     methods:
     {
         collectFiles(e) {
+            this.filesChanged(e.target.files);
+            
             let fileNames = "";
 
             for (var i = 0; i < e.target.files.length; i++)
@@ -63,12 +65,18 @@ export default {
             }
             
             this.selectedFiles = fileNames;
+            
+        },
+
+        filesChanged(fileList)
+        {
+            this.$emit('files-changed', fileList);
         }
     },
 
     computed:
     {
-        showFileNames()
+        fileNames()
         {
             return this.selectedFiles;
         }
