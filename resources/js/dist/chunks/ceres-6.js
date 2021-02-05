@@ -503,7 +503,12 @@ var render = function() {
         "a",
         {
           staticClass: "owl-carousel owl-theme",
-          attrs: { id: "owl-carousel-" + _vm._uid, href: _vm.itemUrl }
+          attrs: {
+            id: "owl-carousel-" + _vm._uid,
+            href: _vm.itemUrl,
+            role: "listbox",
+            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel")
+          }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
           return _c(
@@ -518,7 +523,8 @@ var render = function() {
                       "picture-class": "img-fluid",
                       "image-url": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getTitleText(imageUrl)
+                      title: _vm.getTitleText(imageUrl),
+                      role: "option"
                     }
                   })
                 : index !== 0 && !_vm.disableLazyLoad
@@ -527,7 +533,8 @@ var render = function() {
                     attrs: {
                       "data-src": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getTitleText(imageUrl)
+                      title: _vm.getTitleText(imageUrl),
+                      role: "option"
                     }
                   })
                 : _c("img", {
@@ -535,7 +542,8 @@ var render = function() {
                     attrs: {
                       src: imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getAltText(imageUrl)
+                      title: _vm.getAltText(imageUrl),
+                      role: "option"
                     }
                   })
             ],

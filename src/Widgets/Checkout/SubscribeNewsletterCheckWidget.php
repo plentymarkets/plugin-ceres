@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class SubscribeNewsletterCheckWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.SubscribeNewsletterCheckWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::SubscribeNewsletterCheckWidget")
@@ -22,7 +26,10 @@ class SubscribeNewsletterCheckWidget extends BaseWidget
             ->withPosition(600)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

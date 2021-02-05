@@ -9,8 +9,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class FourColumnWidget extends GridWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Grid.FourColumnWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::FourColumnWidget")
@@ -21,7 +25,10 @@ class FourColumnWidget extends GridWidget
             ->withPosition(100)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

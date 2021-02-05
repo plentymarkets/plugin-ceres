@@ -447,6 +447,11 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-primary btn-appearance",
+                attrs: {
+                  "aria-label": _vm.$translate(
+                    "Ceres::Template.cookieBarPrivacySettings"
+                  )
+                },
                 on: {
                   click: function($event) {
                     $event.preventDefault()

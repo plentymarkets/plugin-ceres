@@ -4,22 +4,66 @@ namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
+/**
+ * Class CeresMetaConfig
+ *
+ * PluginConfig class, including all plugin settings for the meta data.
+ *
+ * @package Ceres\Config
+ */
 class CeresMetaConfig extends PluginConfig
 {
+    /**
+     * @var string $robotsHome Robots for homepage.
+     */
     public $robotsHome;
+
+    /**
+     * @var string $robotsContact Robots for contact page.
+     */
     public $robotsContact;
+
+    /**
+     * @var string $robotsCancellationRights Robots for cancellation rights.
+     */
     public $robotsCancellationRights;
+
+    /**
+     * @var string $robotsCancellationForm Robots for cancellation form.
+     */
     public $robotsCancellationForm;
+
+    /**
+     * @var string $robotsLegalDisclosure Robots for legal disclosure.
+     */
     public $robotsLegalDisclosure;
+
+    /**
+     * @var string $robotsPrivacyPolicy Robots for privacy policy.
+     */
     public $robotsPrivacyPolicy;
+
+    /**
+     * @var string $robotsTermsAndConditions Robots for terms and conditions.
+     */
     public $robotsTermsAndConditions;
+
+    /**
+     * @var string $robotsSearchResult Robots for search result.
+     */
     public $robotsSearchResult;
-    
-    protected function getPluginName()
+
+    /**
+     * @inheritDoc
+     */
+    protected function getPluginName() :string
     {
         return 'Ceres';
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function load()
     {
         $this->robotsHome                           = $this->getTextValue( 'meta.robots_home' , 'all' );

@@ -7,9 +7,15 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class CategoryFilterWidget extends FilterBaseWidget
 {
+    /** @inheritDoc */
     protected $allowedFacetTypes = ["category"];
+    
+    /** @inheritDoc */
     protected $className = "category";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::CategoryFilterWidget')
@@ -21,6 +27,9 @@ class CategoryFilterWidget extends FilterBaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         return parent::getSettings();

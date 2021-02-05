@@ -5,14 +5,22 @@ namespace Ceres\Widgets\Presets\Helper;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 
+/**
+ * Trait HasWhiteBackground
+ *
+ * This is a helper trait for presets for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular helper provides a preconfigured white background widget.
+ *
+ * @package Ceres\Widgets\Presets\Helper
+ */
 trait HasWhiteBackground
 {
-    /** @var PresetWidgetFactory */
+    /** @var PresetWidgetFactory $backgroundWidget The background widget */
     protected $backgroundWidget;
 
     /**
+     * Creates a preconfigured white background widget
      * @param PresetHelper $preset
-     *
      * @return PresetWidgetFactory
      */
     public function createBackground($preset)
@@ -24,6 +32,7 @@ trait HasWhiteBackground
     }
 
     /**
+     * Configures a background widget
      * @param PresetWidgetFactory $widget
      * @return PresetWidgetFactory
      */
@@ -49,8 +58,8 @@ trait HasWhiteBackground
     }
 
     /**
+     * Creates the background widget with an identifier
      * @param string $identifier
-     *
      * @return PresetWidgetFactory
      */
     public function createWidget($identifier)
