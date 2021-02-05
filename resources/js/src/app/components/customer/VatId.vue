@@ -62,8 +62,7 @@ export default
     {
         return {
             vatNumber: "",
-            vatPrefix: "",
-            isPrefixValid: true
+            vatPrefix: ""
         }
     },
 
@@ -83,6 +82,25 @@ export default
         isEU()
         {
             return this.vatCodes?.length > 0;
+        },
+
+        isPrefixValid()
+        {
+            const isPrefixValid = false;
+            const validPrefix = this.vatCodes.find(vatCode => this.value?.startsWith(vatCode));
+
+            if (validPrefix)
+            {
+                isPrefixValid = true;
+            }
+            else if ((isNullOrUndefined(this.value) || this.value.length <= 0) && this.isEU)
+            {
+                this.vatPrefix = this.vatCodes[0];
+                this.vatNumber = "";
+                isPrefixValid = true;
+            }
+
+            return isPrefixValid;
         }
     },
 
@@ -90,16 +108,14 @@ export default
     {
         value(newValue)
         {
+            console.log("watch value");
             this.setValues(newValue);
         },
 
         selectedCountryId(countryId)
         {
-            // only delete values if vatPrefix is not valid for country
-            if (!this.vatCodes.find(vatCode => this.value?.startsWith(vatCode)))
-            {
-                this.deleteValue();
-            }
+            console.log("watch countryId");
+            this.deleteValue();
         },
     },
 
@@ -121,11 +137,13 @@ export default
         {
             const value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
 
+            console.log("emit: ", value);
             this.$emit('input', value);
         },
 
         deleteValue()
         {
+            console.log("delete");
             this.vatNumber = "";
             this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
 
@@ -134,20 +152,13 @@ export default
 
         setValues(value)
         {
+            console.log("setValues: ", value);
             const vatPrefix = this.vatCodes.find(vatCode => value?.startsWith(vatCode));
-            this.isPrefixValid = !!vatPrefix;
 
-            if (this.isPrefixValid)
+            if (!!vatPrefix)
             {
                 this.vatPrefix = vatPrefix;
                 this.vatNumber = value.slice(vatPrefix.length);
-            }
-            else if ((isNullOrUndefined(value) || value.length <= 0) && this.isEU)
-            {
-                // this case is here so the value can be empty but the input is still shown
-                this.isPrefixValid = true;
-                this.vatPrefix = this.vatCodes[0];
-                this.vatNumber = "";
             }
         }
     }
