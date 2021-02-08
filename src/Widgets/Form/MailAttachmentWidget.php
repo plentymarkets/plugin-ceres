@@ -60,14 +60,14 @@ class MailAttachmentWidget extends BaseWidget
         );
         
         $settingsFactory->createCheckbox("allowMultiple")
-            ->withDefaultValue(false)
             ->withName("Widget.mailFormAttachmentAllowMultiple")
-            ->withTooltip("Widget.mailFormAttachmentAllowMultipleTooltip");
+            ->withTooltip("Widget.mailFormAttachmentAllowMultipleTooltip")
+            ->withDefaultValue(false);
 
         $settingsFactory->createCheckbox("isRequired")
-            ->withDefaultValue(false)
             ->withName("Widget.mailFormFieldIsRequiredLabel")
-            ->withTooltip("Widget.mailFormFieldIsRequiredTooltip");
+            ->withTooltip("Widget.mailFormFieldIsRequiredTooltip")
+            ->withDefaultValue(false);
 
         $settingsFactory->createSpacing(false, true);
 

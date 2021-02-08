@@ -8,6 +8,7 @@
             <i class="fa fa-ellipsis-h"></i>
         </span>
         <input type="file"
+                ref="fileInput"
                 :multiple="allowMultiple"
                 :name="formFieldId" :id="formFieldId"
                 :disabled="allowedFileExtensions.trim().length === 0"
@@ -45,6 +46,17 @@ export default {
         label: {
             type: String
         }
+    },
+
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            if (this.isRequired)
+            {
+                this.$refs.fileInput.setAttribute("data-validate", "file");
+            }
+        });
     },
 
     methods:

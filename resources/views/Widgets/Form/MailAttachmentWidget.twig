@@ -18,9 +18,9 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
     <form-attachment
-        :allow-multiple"{{ allowMultiple }}"
+        :allow-multiple="{{ allowMultiple | json_encode }}"
         allowed-file-extensions="{{ allowedFileExtensions }}"
-        is-required="{{ isRequired }}"
+        :is-required="{{ isRequired | json_encode }}"
         form-field-id="{{ formFieldId }}"
         label="{{ label }}">
     </form-attachment>
