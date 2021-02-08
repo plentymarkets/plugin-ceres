@@ -8,16 +8,28 @@ use Plenty\Plugin\Templates\Factories\TwigFactory;
 /**
  * Created by ptopczewski, 28.11.17 21:57
  * Class TwigStyleScriptTagFilter
+ * This TWIG extension provides a function and a filter to filter markup
+ * for script and style tags and place them to another position in the document.
+ *
  * @package Ceres\Extensions
  */
 class TwigStyleScriptTagFilter extends Twig_Extension
 {
     use Loggable;
 
+    /**
+     * @var array $styleTags Filtered out style tags.
+     */
     private static $styleTags = [];
 
+    /**
+     * @var array $scriptTags Filtered out script tags.
+     */
     private static $scriptTags = [];
 
+    /**
+     * @var array $ignoreLayoutContainer Black list of layout container to filter.
+     */
     private static $ignoreLayoutContainer = [
         'Ceres::Checkout.AfterScriptsLoaded',
         'Ceres::SingleItem.AfterScriptsLoaded',
@@ -26,13 +38,13 @@ class TwigStyleScriptTagFilter extends Twig_Extension
     ];
 
     /**
-     * @var TwigFactory
+     * @var TwigFactory $twig The factory to render TWIG.
      */
     private $twig;
 
     /**
      * TwigStyleScriptTagFilter constructor.
-     * @param TwigFactory $twig
+     * @param TwigFactory $twig The factory to render TWIG.
      */
     public function __construct(TwigFactory $twig)
     {
@@ -40,13 +52,29 @@ class TwigStyleScriptTagFilter extends Twig_Extension
     }
 
     /**
-     * Return the name of the extension. The name must be unique.
+     * Return the name of the extension.
      *
-     * @return string The name of the extension
+     * @return string The name of the extension.
      */
     public function getName(): string
     {
         return "Ceres_Extension_TwigStyleScriptTagFilter";
+    }
+
+    /**
+     * Return a list of functions to add.
+     *
+     * @return array The list of functions to add.
+     */
+    public function getFunctions(): array
+    {
+        return [
+            $this->twig->createSimpleFunction(
+                'get_filtered_tags',
+                [$this, 'getFilteredTags'],
+                ['is_safe' => array('html')]
+            )
+        ];
     }
 
     /**
@@ -62,23 +90,9 @@ class TwigStyleScriptTagFilter extends Twig_Extension
     }
 
     /**
-     * Return a list of functions to add.
+     * Get all filtered out script and style tags.
      *
-     * @return array the list of functions to add.
-     */
-    public function getFunctions(): array
-    {
-        return [
-            $this->twig->createSimpleFunction(
-                'get_filtered_tags',
-                [$this, 'getFilteredTags'],
-                ['is_safe' => array('html')]
-            )
-        ];
-    }
-
-    /**
-     * @return string
+     * @return string All tags in one string concatenated.
      */
     public function getFilteredTags()
     {
@@ -88,9 +102,12 @@ class TwigStyleScriptTagFilter extends Twig_Extension
     }
 
     /**
-     * @param $content
-     * @param $containerName
-     * @return mixed
+     * Filter content for script and style tags.
+     * These filtered tags will be stored in properties for later usage.
+     *
+     * @param string $content The content to filter.
+     * @param string $containerName The name of the layout container.
+     * @return string Filtered markup.
      */
     public function filterTags($content, $containerName)
     {
@@ -166,7 +183,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
     /**
      * Return a map of global helper objects to add.
      *
-     * @return array the map of helper objects to add.
+     * @return array The map of helper objects to add.
      */
     public function getGlobals(): array
     {

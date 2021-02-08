@@ -1,15 +1,15 @@
 <template>
-    <a :id="'owl-carousel-' + _uid" v-if="$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl">
+    <a :id="'owl-carousel-' + _uid" v-if="$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl" role="listbox" :aria-label="$translate('Ceres::Template.itemImageCarousel')">
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
-            <lazy-img v-if="index === 0 && !disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getImageName(imageUrl)"></lazy-img>
-            <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getImageName(imageUrl)">
-            <img v-else class="img-fluid" :src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getAltText(imageUrl)">
+            <lazy-img v-if="index === 0 && !disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option"></lazy-img>
+            <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option">
+            <img v-else class="img-fluid" :src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getAltText(imageUrl)" role="option">
         </div>
     </a>
 
     <a v-else :href="itemUrl">
-        <lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getImageName(imageUrls[0])"></lazy-img>
-        <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getImageName(imageUrls[0])">
+        <lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])"></lazy-img>
+        <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])">
     </a>
 </template>
 
@@ -29,11 +29,11 @@ export default {
         {
             type: String
         },
-        altText:
+        alt:
         {
             type: String
         },
-        titleText:
+        title:
         {
             type: String
         },
@@ -138,16 +138,16 @@ export default {
 
         getAltText(image)
         {
-            const altText = image && image.alternate ? image.alternate : this.altText;
+            const alt = image && image.alternate ? image.alternate : this.alt;
 
-            return altText;
+            return alt;
         },
 
-        getImageName(image)
+        getTitleText(image)
         {
-            const altText = image && image.name ? image.name : this.titleText;
+            const title = image && image.name ? image.name : this.title;
 
-            return altText;
+            return title;
         }
     }
 }

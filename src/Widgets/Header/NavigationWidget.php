@@ -17,8 +17,12 @@ use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 
 class NavigationWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Header.NavigationWidget';
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getPreviewData($widgetSettings)
     {
         /** @var CategoryService $categoryService */
@@ -47,7 +51,10 @@ class NavigationWidget extends BaseWidget
             'categories' => $categories
         ];
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::NavigationWidget')
@@ -58,7 +65,10 @@ class NavigationWidget extends BaseWidget
             ->withPosition(0)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

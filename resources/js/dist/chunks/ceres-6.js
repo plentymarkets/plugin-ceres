@@ -39,10 +39,10 @@ __webpack_require__.r(__webpack_exports__);
     itemUrl: {
       type: String
     },
-    altText: {
+    alt: {
       type: String
     },
-    titleText: {
+    title: {
       type: String
     },
     showDots: {
@@ -126,12 +126,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getAltText: function getAltText(image) {
-      var altText = image && image.alternate ? image.alternate : this.altText;
-      return altText;
+      var alt = image && image.alternate ? image.alternate : this.alt;
+      return alt;
     },
-    getImageName: function getImageName(image) {
-      var altText = image && image.name ? image.name : this.titleText;
-      return altText;
+    getTitleText: function getTitleText(image) {
+      var title = image && image.name ? image.name : this.title;
+      return title;
     }
   }
 });
@@ -504,7 +504,12 @@ var render = function() {
         "a",
         {
           staticClass: "owl-carousel owl-theme",
-          attrs: { id: "owl-carousel-" + _vm._uid, href: _vm.itemUrl }
+          attrs: {
+            id: "owl-carousel-" + _vm._uid,
+            href: _vm.itemUrl,
+            role: "listbox",
+            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel")
+          }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
           return _c(
@@ -519,7 +524,8 @@ var render = function() {
                       "picture-class": "img-fluid",
                       "image-url": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getImageName(imageUrl)
+                      title: _vm.getTitleText(imageUrl),
+                      role: "option"
                     }
                   })
                 : index !== 0 && !_vm.disableLazyLoad
@@ -528,7 +534,8 @@ var render = function() {
                     attrs: {
                       "data-src": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getImageName(imageUrl)
+                      title: _vm.getTitleText(imageUrl),
+                      role: "option"
                     }
                   })
                 : _c("img", {
@@ -536,7 +543,8 @@ var render = function() {
                     attrs: {
                       src: imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getAltText(imageUrl)
+                      title: _vm.getAltText(imageUrl),
+                      role: "option"
                     }
                   })
             ],
@@ -556,7 +564,7 @@ var render = function() {
                   "picture-class": "img-fluid",
                   "image-url": _vm._f("itemImage")(_vm.imageUrls),
                   alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getImageName(_vm.imageUrls[0])
+                  title: _vm.getTitleText(_vm.imageUrls[0])
                 }
               })
             : _c("img", {
@@ -564,7 +572,7 @@ var render = function() {
                 attrs: {
                   src: _vm._f("itemImage")(_vm.imageUrls),
                   alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getImageName(_vm.imageUrls[0])
+                  title: _vm.getTitleText(_vm.imageUrls[0])
                 }
               })
         ],
@@ -644,8 +652,8 @@ var render = function() {
                         _vm.item.images,
                         _vm.imageUrlAccessor
                       ),
-                      "alt-text": _vm._f("itemName")(_vm.item),
-                      "title-text": _vm._f("itemName")(_vm.item),
+                      alt: _vm._f("itemName")(_vm.item),
+                      title: _vm._f("itemName")(_vm.item),
                       "item-url": _vm._f("itemURL")(
                         _vm.item,
                         _vm.urlWithVariationId

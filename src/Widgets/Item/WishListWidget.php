@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class WishListWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.WishListWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::WishListWidget")
@@ -23,7 +27,10 @@ class WishListWidget extends BaseWidget
             ->withPosition(700)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

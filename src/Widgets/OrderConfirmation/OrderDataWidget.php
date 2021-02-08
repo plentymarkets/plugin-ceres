@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class OrderDataWidget extends OrderConfirmationBaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.OrderConfirmation.OrderDataWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::OrderDataWidget")
@@ -22,7 +26,10 @@ class OrderDataWidget extends OrderConfirmationBaseWidget
             ->withPosition(100)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

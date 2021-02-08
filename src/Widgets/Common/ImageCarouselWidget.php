@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ImageCarouselWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.ImageCarouselWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ImageCarouselWidget")
@@ -23,7 +27,10 @@ class ImageCarouselWidget extends BaseWidget
             ->withPosition(500)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -106,7 +113,10 @@ class ImageCarouselWidget extends BaseWidget
         $settings->createSpacing(false, true);
         return $settings->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $sliderParams = [];

@@ -7,9 +7,15 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PriceFilterWidget extends FilterBaseWidget
 {
+    /** @inheritDoc */
     protected $allowedFacetTypes = ["price"];
+    
+    /** @inheritDoc */
     protected $className = "price";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::PriceFilterWidget')
@@ -21,6 +27,9 @@ class PriceFilterWidget extends FilterBaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         return parent::getSettings();

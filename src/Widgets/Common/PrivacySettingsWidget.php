@@ -9,8 +9,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PrivacySettingsWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.PrivacySettingsWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::PrivacySettingsWidget")
@@ -20,7 +24,10 @@ class PrivacySettingsWidget extends BaseWidget
             ->withPosition(1200)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
