@@ -9,6 +9,29 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 use IO\Extensions\Functions\UniqueId;
 
+/**
+ * Class DefaultSingleItemPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing single items. It contains:
+ * - TwoColumnWidget
+ * - StickyContainerWidget
+ * - InlineTextWidget
+ * - AddToBasketWidget
+ * - ItemAvailabilityWidget
+ * - AddToWishListWidget
+ * - ItemPriceWidget
+ * - ItemImageWidget
+ * - GraduatedPriceWidget
+ * - OrderPropertyWidget
+ * - ItemBundleWidget
+ * - TabWidget
+ * - ItemDataTableWidget
+ * - AttributeWidget
+ * - TagsWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultSingleItemPreset implements ContentPreset
 {
     /** @var PresetHelper */

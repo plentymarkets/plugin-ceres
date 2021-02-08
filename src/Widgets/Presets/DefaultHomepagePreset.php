@@ -10,6 +10,15 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultHomepagePreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a basic homepage based on settings in the ceres config.
+ *
+ * @package Ceres\Widgets\Presets
+ * @depreacted since 5.0
+ */
 class DefaultHomepagePreset implements ContentPreset
 {
     /** @var PresetHelper */

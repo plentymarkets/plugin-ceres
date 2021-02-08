@@ -11,6 +11,23 @@ use IO\Helper\RouteConfig;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultOrderConfirmationPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing the customer's order confirmation. It contains:
+ * - InlineTextWidget
+ * - OrderDataWidget
+ * - PurchasedItemsWidget
+ * - LinkWidget
+ * - OrderDocumentsWidget
+ * - OrderTotalsWidget
+ * - FourColumnWidget
+ * - ThreeColumnWidget
+ * - TwoColumnWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultOrderConfirmationPreset implements ContentPreset
 {
     use HasWhiteBackground;

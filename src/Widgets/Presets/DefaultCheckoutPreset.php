@@ -8,6 +8,27 @@ use Ceres\Widgets\Helper\PresetHelper;
 use Ceres\Widgets\Presets\Helper\HasWhiteBackground;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class DefaultCheckoutPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing and interacting with the checkout. It contains:
+ * - TwoColumnWidget
+ * - BackgroundWidget
+ * - AddressWidget
+ * - ShippingProfileWidget
+ * - PaymentProviderWidget
+ * - ContactWishWidget
+ * - ShippingPrivacyCheckWidget
+ * - GtcCheckWidget
+ * - BasketWidget
+ * - BasketTotalsWidget
+ * - CouponWidget
+ * - PlaceOrderWidget
+ * - CancelPaymentWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultCheckoutPreset implements ContentPreset
 {
     use HasWhiteBackground;

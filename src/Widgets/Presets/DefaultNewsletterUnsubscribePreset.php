@@ -6,6 +6,17 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class DefaultNewsletterUnsubscribePreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for unsubscribing the customer from a newsletter. It contains:
+ * - ThreeColumnWidget
+ * - InlineTextWidget
+ * - NewsletterUnsubscribeWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultNewsletterUnsubscribePreset implements ContentPreset
 {
     /**

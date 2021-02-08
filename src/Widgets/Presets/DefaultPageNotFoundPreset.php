@@ -7,6 +7,18 @@ use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultPageNotFoundPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing the 404 errors. It contains:
+ * - TwoColumnWidget
+ * - InlineTextWidget
+ * - SeparatorWidget
+ * - LinkWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultPageNotFoundPreset implements ContentPreset
 {
     /**

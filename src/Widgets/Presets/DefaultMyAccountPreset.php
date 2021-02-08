@@ -8,6 +8,25 @@ use Ceres\Widgets\Helper\PresetHelper;
 use Ceres\Widgets\Presets\Helper\HasWhiteBackground;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class DefaultMyAccountPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page where customers can view and interact with their contact data, orders, and returns. It contains:
+ * - TwoColumnWidget
+ * - BackgroundWidget
+ * - SeparatorWidget
+ * - GreetingWidget
+ * - AddressWidget
+ * - LogoutButtonWidget
+ * - AccountSettingsWidget
+ * - BankDataSelectWidget
+ * - OrderHistoryWidget
+ * - OrderReturnHistoryWidget
+ * - TextWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultMyAccountPreset implements ContentPreset
 {
     use HasWhiteBackground;

@@ -6,6 +6,17 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class DefaultPrivacyPolicyPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing the shop's privacy policy. It contains:
+ * - CodeWidget
+ * - SeparatorWidget
+ * - LegalTextsWidget
+ *
+ * @package Ceres\Widgets\Presets\Legal
+ */
 class DefaultPrivacyPolicyPreset implements ContentPreset
 {
     /** @var PresetHelper $preset */

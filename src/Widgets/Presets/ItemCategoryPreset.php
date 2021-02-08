@@ -7,6 +7,30 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class ItemCategoryPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing item categories. It contains:
+ * - ThreeColumnWidget
+ * - BackgroundWidget
+ * - InlineTextWidget
+ * - CodeWidget
+ * - ToolbarWidget
+ * - ItemSortingWidget
+ * - ItemsPerPageWidget
+ * - AttributesPropertiesCharacteristicsFilterWidget
+ * - PriceFilterWidget
+ * - AvailabilityFilterWidget
+ * - ManufacturerFilterWidget
+ * - SelectedFilterWidget
+ * - PaginationWidget
+ * - TwoColumnWidget
+ * - NavigationTreeWidget
+ * - ItemGridWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class ItemCategoryPreset implements ContentPreset
 {
     /** @var CeresConfig */

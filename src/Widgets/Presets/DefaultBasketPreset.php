@@ -10,6 +10,24 @@ use IO\Helper\RouteConfig;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultBasketPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing and interacting with the basket. It contains:
+ * - InlineTextWidget
+ * - SeparatorWidget
+ * - TwoColumnWidget
+ * - BackgroundWidget
+ * - BasketWidget
+ * - StickyContainerWidget
+ * - ShippingCountryWidget
+ * - BasketTotalsWidget
+ * - CouponWidget
+ * - LinkWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultBasketPreset implements ContentPreset
 {
     use HasWhiteBackground;

@@ -46,11 +46,6 @@ class CeresGlobalConfig extends PluginConfig
     public $googleRecaptchaApiKey;
 
     /**
-     * @var string $googleRecaptchaSecret Google reCAPTCHA secret key.
-     */
-    public $googleRecaptchaSecret;
-
-    /**
      * @var float $googleRecaptchaThreshold Google reCAPTCHA v3 threshold.
      */
     public $googleRecaptchaThreshold;
@@ -100,7 +95,6 @@ class CeresGlobalConfig extends PluginConfig
         $this->googleMapsApiKey         = $this->getTextValue( 'contact.api_key', '', 'API key' );
         $this->googleRecaptchaVersion   = $this->getIntegerValue( 'global.google_recaptcha_version', 2 );
         $this->googleRecaptchaApiKey    = $this->getTextValue( 'global.google_recaptcha_api_key', '' );
-        $this->googleRecaptchaSecret    = $this->getTextValue('global.google_recaptcha_secret', '');
         $this->googleRecaptchaThreshold = $this->getConfigValue('google_recaptcha_threshold', 0.5);
         $this->registrationRequirePrivacyPolicyConfirmation = $this->getBooleanValue( 'global.registration_require_privacy_policy_confirmation', true );
         $this->blockCookies             = $this->getBooleanValue( 'global.block_cookies', false );

@@ -10,6 +10,23 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Modules\Category\Models\Category;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultFooterPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a default footer. It contains:
+ * - ThreeColumnWidget / TwoColumnWidget
+ * - BackgroundWidget
+ * - SeparatorWidget
+ * - ListWidget
+ * - LinkListWidget
+ * - FourColumnWidget
+ * - LegalInformationWidget
+ * - CodeWidget
+ * - CookieBarWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultFooterPreset implements ContentPreset
 {
     /** @var PresetHelper $preset */
