@@ -276,10 +276,12 @@ export default {
         {
             const lastChar = value.slice(-1);
 
-            let toFixedLength = 0;
             const str = String(value.replace(App.decimalSeparator, "."));
-
+            
             const arr = str.split(".");
+
+            let toFixedLength = 0;
+
             if( arr.length === 2 ){
                 toFixedLength = arr[1].length;
             }
