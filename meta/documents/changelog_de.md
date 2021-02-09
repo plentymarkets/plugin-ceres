@@ -37,6 +37,10 @@
 
 ## v5.0.20 (2021-01-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.19...5.0.20" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### TODO
+
+- Falls dein Theme die CSS-Eigenschaft `position:sticky` verwendet, musst du die `overflow-x: hidden` Eigenschaft im `.app` Container überschreiben um die Funktion der Stickys-Eigenschaft zu erhalten. plentyShops ohne eigenes Theme sind hiervon nicht betroffen.
+
 ### Geändert
 
 - Bilder im Hintergrund-Widget haben jetzt barrierefreie Alternativtexte.
