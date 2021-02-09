@@ -40,7 +40,7 @@
 
 ### TODO
 
-- If your theme uses the CSS property `position:sticky`, you need to overwrite the `overflow-x: hidden` property in the `.app` container in order to ensure the correct functioning of the sticky behaviour.
+- If your theme uses the CSS property `position:sticky`, you need to overwrite the `overflow-x: hidden` property in the `.app` container in order to ensure the correct functioning of the sticky behaviour. plentyShops without a theme are not affected by this.
 
 ### Changed
 
