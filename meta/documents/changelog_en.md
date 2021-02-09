@@ -41,7 +41,7 @@
 ### Changed
 
 - Images in the background image widget now have accessible alternative text attributes.
-- Vertical overflow in the `.app` container is now prevented through the inclusion of `overflow-x: hidden`.
+- Horizontal overflow in the `.app` container is now prevented through the inclusion of `overflow-x: hidden`.
 
 ### Fixed 
 
