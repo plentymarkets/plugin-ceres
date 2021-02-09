@@ -9,7 +9,7 @@
                 <option v-for="(vatCode, index) in vatCodes" :value="vatCode">{{ vatCode }}</option>
             </select>
         </div>
-        <div class="input-unit flex-fill w-auto" v-validate:text="isRequired">
+        <div class="input-unit flex-fill w-auto" v-validate:text="true">
             <input
                 aria-describedby="basic-addon1"
                 type="text"
@@ -86,7 +86,7 @@ export default
 
         isPrefixValid()
         {
-            const isPrefixValid = false;
+            let isPrefixValid = false;
             const validPrefix = this.vatCodes.find(vatCode => this.value?.startsWith(vatCode));
 
             if (validPrefix)
