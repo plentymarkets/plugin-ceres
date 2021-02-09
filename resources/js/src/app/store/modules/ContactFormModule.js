@@ -158,7 +158,7 @@ const actions =
                                         bcc:        formOptions.bcc,
                                         replyTo:    formOptions.replyTo,
                                         recaptchaToken: recaptchaResponse,
-                                        fileKeys: response.fileKeys
+                                        fileKeys: response.fileKeys || ""
                                     }
                                 )
                                     .done(response =>
@@ -232,7 +232,7 @@ function sendFile(event, recaptchaToken)
 
         if (!containsFiles)
         {
-            resolve();
+            resolve({});
             return;
         }
 

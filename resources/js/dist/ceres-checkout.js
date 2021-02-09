@@ -70070,7 +70070,7 @@ var actions = {
             bcc: formOptions.bcc,
             replyTo: formOptions.replyTo,
             recaptchaToken: recaptchaResponse,
-            fileKeys: response.fileKeys
+            fileKeys: response.fileKeys || ""
           }).done(function (response) {
             resetRecaptcha(recaptchaEl);
             event.target.reset();
@@ -70152,7 +70152,7 @@ function sendFile(event, recaptchaToken) {
     }
 
     if (!containsFiles) {
-      resolve();
+      resolve({});
       return;
     }
 
