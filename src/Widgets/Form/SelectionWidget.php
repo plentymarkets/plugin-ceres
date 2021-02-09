@@ -24,7 +24,7 @@ class SelectionWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/input-select.svg")
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
-            ->withPosition(500)
+            ->withPosition(700)
             ->toArray();
     }
     

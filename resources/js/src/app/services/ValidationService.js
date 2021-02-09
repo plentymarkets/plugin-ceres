@@ -198,6 +198,8 @@ function _validateInput($formControl, validationKey)
         return _isMail($formControl);
     case "password":
         return _isPassword($formControl);
+    case "file":
+        return _hasValue($formControl);
     case "regex":
     {
         const ref = $formControl.attr("data-validate-ref");
