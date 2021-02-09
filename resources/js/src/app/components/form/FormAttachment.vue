@@ -21,42 +21,37 @@
 
 export default {
     name: "form-attachment",
-
-    data() {
+    data()
+    {
         return {
             selectedFiles: ""
         };
     },
 
-    props: {
-        allowMultiple: {
-            type: Boolean
-        },
-        allowedFileExtensions: {
-            type: String
-        },
-        isRequired: {
-            type: Boolean
-        },
-        formFieldId: {
-            type: String 
-        },
-        label: {
-            type: String
-        }
+    props:
+    {
+        allowMultiple: Boolean,
+        allowedFileExtensions: String,
+        isRequired: Boolean,
+        formFieldId: String,
+        label: String
     },
 
-    mounted() {
+    mounted()
+    {
         this.$nextTick(() =>
         {
-            if (this.isRequired) {
+            if (this.isRequired)
+            {
                 this.$refs.fileInput.setAttribute("data-validate", "file");
             }
         });
     },
 
-    methods: {
-        collectFiles(event) {
+    methods:
+    {
+        collectFiles(event)
+        {
             const fileList = event.target.files;
 
             this.selectedFiles = Array.from(fileList)
