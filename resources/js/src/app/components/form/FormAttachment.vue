@@ -1,20 +1,26 @@
 <template>
-    <label class="input-unit file-input" v-tooltip data-toggle="tooltip" :title="selectedFiles">
+    <div class="input-unit file-input"
+         ref="inputUnit"
+         v-tooltip
+         data-toggle="tooltip"
+         :title="selectedFiles">
         <label :for="formFieldId">
             {{ label }}<span v-if="isRequired">*</span>
         </label>
+
         <span class="input-unit-preview">{{ selectedFiles }}</span>
+
         <span class="input-unit-btn">
             <i class="fa fa-ellipsis-h"></i>
         </span>
+        
         <input type="file"
-                ref="fileInput"
-                :multiple="allowMultiple"
-                :name="formFieldId" :id="formFieldId"
-                :disabled="allowedFileExtensions.trim().length === 0"
-                :accept="allowedFileExtensions"
-                @change="collectFiles">
-    </label>
+            :multiple="allowMultiple"
+            :name="formFieldId" :id="formFieldId"
+            :disabled="allowedFileExtensions.trim().length === 0"
+            :accept="allowedFileExtensions"
+            @change="collectFiles">
+    </div>
 </template>
 
 <script>
@@ -43,7 +49,7 @@ export default {
         {
             if (this.isRequired)
             {
-                this.$refs.fileInput.setAttribute("data-validate", "file");
+                this.$refs.inputUnit.setAttribute("data-validate", "file");
             }
         });
     },
