@@ -1,9 +1,9 @@
 <template>
-    <label class="input-unit file-input" v-tooltip data-toggle="tooltip" :title="fileNames">
+    <label class="input-unit file-input" v-tooltip data-toggle="tooltip" :title="selectedFiles">
         <label :for="formFieldId">
             {{ label }}<span v-if="isRequired">*</span>
         </label>
-        <span class="input-unit-preview">{{fileNames}}</span>
+        <span class="input-unit-preview">{{ selectedFiles }}</span>
         <span class="input-unit-btn">
             <i class="fa fa-ellipsis-h"></i>
         </span>
@@ -20,11 +20,9 @@
 <script>
 
 export default {
-
     name: "form-attachment",
 
-    data()
-    {
+    data() {
         return {
             selectedFiles: ""
         };
@@ -48,51 +46,25 @@ export default {
         }
     },
 
-    mounted()
-    {
+    mounted() {
         this.$nextTick(() =>
         {
-            if (this.isRequired)
-            {
+            if (this.isRequired) {
                 this.$refs.fileInput.setAttribute("data-validate", "file");
             }
         });
     },
 
-    methods:
-    {
-        collectFiles(e) {
-            this.filesChanged(e.target.files);
-            
-            let fileNames = "";
+    methods: {
+        collectFiles(event) {
+            const fileList = event.target.files;
 
-            for (var i = 0; i < e.target.files.length; i++)
-            {
-                if (i>0)
-                {
-                    fileNames += ", "
-                }
+            this.selectedFiles = Array.from(fileList)
+                .map(file => file.name)
+                .join(", ");
 
-                fileNames = fileNames + e.target.files[i].name;
-            }
-            
-            this.selectedFiles = fileNames;
-            
-        },
-
-        filesChanged(fileList)
-        {
             this.$emit('files-changed', fileList);
         }
-    },
-
-    computed:
-    {
-        fileNames()
-        {
-            return this.selectedFiles;
-        }
     }
-
 }
 </script>
