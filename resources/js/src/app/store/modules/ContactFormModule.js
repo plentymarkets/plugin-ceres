@@ -219,12 +219,21 @@ function sendFile(event, recaptchaToken)
         const formData = new FormData();
         const fileInputs = event.target.querySelectorAll("input[type=file]");
 
+        let containsFiles = false;
+
         for (const fileInput of fileInputs)
         {
             for (const file of fileInput.files)
             {
+                containsFiles = true;
                 formData.append("fileData[]", file);
             }
+        }
+
+        if (!containsFiles)
+        {
+            resolve({});
+            return;
         }
 
         formData.append("recaptchaToken", recaptchaToken);

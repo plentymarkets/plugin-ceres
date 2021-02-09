@@ -58541,6 +58541,7 @@ function sendFile(event, recaptchaToken) {
   return new Promise(function (resolve, reject) {
     var formData = new FormData();
     var fileInputs = event.target.querySelectorAll("input[type=file]");
+    var containsFiles = false;
 
     var _iterator3 = _createForOfIteratorHelper(fileInputs),
         _step3;
@@ -58555,6 +58556,7 @@ function sendFile(event, recaptchaToken) {
         try {
           for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
             var file = _step4.value;
+            containsFiles = true;
             formData.append("fileData[]", file);
           }
         } catch (err) {
@@ -58567,6 +58569,11 @@ function sendFile(event, recaptchaToken) {
       _iterator3.e(err);
     } finally {
       _iterator3.f();
+    }
+
+    if (!containsFiles) {
+      resolve({});
+      return;
     }
 
     formData.append("recaptchaToken", recaptchaToken);
