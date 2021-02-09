@@ -276,7 +276,15 @@ export default {
         {
             const lastChar = value.slice(-1);
 
-            value = parseFloat(value.replace(App.decimalSeparator, "."));
+            let toFixedLength = 0;
+            const str = String(value.replace(App.decimalSeparator, "."));
+
+            const arr = str.split(".");
+            if( arr.length === 2 ){
+                toFixedLength = arr[1].length;
+            }
+
+            value = parseFloat(str).toFixed(toFixedLength);
 
             if (isNaN(value))
             {
