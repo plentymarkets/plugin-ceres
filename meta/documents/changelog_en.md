@@ -38,10 +38,14 @@
 
 ## v5.0.20 (2021-01-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.19...5.0.20" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- If your theme uses the CSS property `position:sticky`, you need to overwrite the `overflow-x: hidden` property in the `.app` container in order to ensure the correct functioning of the sticky behaviour.
+
 ### Changed
 
 - Images in the background image widget now have accessible alternative text attributes.
-- Horizontal overflow in the `.app` container is now prevented through the inclusion of `overflow-x: hidden`.
+- Horizontal overflow in the `.app` container is now prevented through the inclusion of `overflow-x: hidden`. This inhibits the sticky behaviour of the CSS property `position:sticky`.
 
 ### Fixed 
 
