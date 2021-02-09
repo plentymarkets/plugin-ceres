@@ -63,6 +63,7 @@ Vue.component("login", () => import("./app/components/customer/login/Login.vue")
 Vue.component("login-view", () => import("./app/components/customer/login/LoginView.vue"));
 import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
 Vue.component("user-login-handler", UserLoginHandler);
+Vue.component("form-attachment", () => import("./app/components/form/FormAttachment.vue"));
 
 Vue.component("item-bundle", () => import("./app/components/item/ItemBundle.vue"));
 Vue.component("order-property-value", () => import("./app/components/item/OrderPropertyValue.vue"));
