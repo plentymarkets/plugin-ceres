@@ -40,7 +40,7 @@
 ### Geändert
 
 - Bilder im Hintergrund-Widget haben jetzt barrierefreie Alternativtexte.
-- Der horizontale Overflow wird im `.app` Container jetzt durch `overflow-x: hidden` verhindert.
+- Der horizontale Overflow wird im `.app` Container jetzt durch `overflow-x: hidden` verhindert. Dadurch verliert die CSS-Eigenschaft `position:sticky`ihre Funktion.
 
 ### Behoben 
 
