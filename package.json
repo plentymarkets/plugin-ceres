@@ -70,6 +70,7 @@
     "custom-event-polyfill": "^0.3.0",
     "dayjs": "^1.8.26",
     "detect-browser": "^4.8.0",
+    "dompurify": "^2.2.6",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
     "jquery": "^3.5.1",

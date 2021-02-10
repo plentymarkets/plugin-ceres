@@ -84,6 +84,7 @@
 <script>
 import ValidationService from "../../services/ValidationService";
 import { navigateTo } from "../../services/UrlService";
+import { sanitizeString, sanatizeObject } from "../../services/SanatizeService";
 import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
@@ -314,7 +315,7 @@ export default {
                             typeId: {
                                 typeId   : 2,
                                 subTypeId: 4,
-                                value    : this.username,
+                                value    : sanitizeString(this.username),
                                 priority : 0
                             }
                         }
@@ -324,12 +325,12 @@ export default {
 
             if (!this.guestMode)
             {
-                userObject.contact.password = this.password;
+                userObject.contact.password = sanitizeString(this.password);
             }
 
             if (!this.isSimpleRegistration)
             {
-                userObject.billingAddress = this.billingAddress;
+                userObject.billingAddress = sanatizeObject(this.billingAddress);
             }
 
             return userObject;

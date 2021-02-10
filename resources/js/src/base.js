@@ -25,6 +25,9 @@ import jQuery from "jquery";
 window.jQuery = jQuery;
 window.$ = jQuery;
 
+import DOMPurify from "dompurify";
+window.DOMPurify = DOMPurify;
+
 import "bootstrap";
 import "owl.carousel";
 
