@@ -82,6 +82,7 @@ import { navigateTo } from "../../services/UrlService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { mapState } from "vuex";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
+import { sanitizeObject } from '../../services/SanatizeService';
 
 const NotificationService = require("../../services/NotificationService");
 
@@ -310,7 +311,7 @@ export default {
                     {
                         variationId             :   this.variationId,
                         quantity                :   this.quantity,
-                        basketItemOrderParams   :   orderParamsAndSurcharge.orderParams,
+                        basketItemOrderParams   :   sanitizeObject(orderParamsAndSurcharge.orderParams),
                         totalOrderParamsMarkup  :   orderParamsAndSurcharge.totalSurcharge
                     };
 

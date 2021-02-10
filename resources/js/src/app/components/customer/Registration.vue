@@ -84,7 +84,7 @@
 <script>
 import ValidationService from "../../services/ValidationService";
 import { navigateTo } from "../../services/UrlService";
-import { sanitizeString, sanatizeObject } from "../../services/SanatizeService";
+import { sanitizeString, sanitizeObject } from "../../services/SanatizeService";
 import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
@@ -330,7 +330,7 @@ export default {
 
             if (!this.isSimpleRegistration)
             {
-                userObject.billingAddress = sanatizeObject(this.billingAddress);
+                userObject.billingAddress = sanitizeObject(this.billingAddress);
             }
 
             return userObject;

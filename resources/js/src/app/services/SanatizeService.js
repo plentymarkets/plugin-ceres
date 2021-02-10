@@ -9,9 +9,10 @@ export function sanitizeString(input)
     return DOMPurify.sanitize(input);
 }
 
-export function sanatizeObject(input)
+export function sanitizeObject(input)
 {
-    // iterate object
+    // iterate object and sani
+    return input;
 }
 
-export default { sanitizeString };
+export default { sanitizeString, sanitizeObject };
