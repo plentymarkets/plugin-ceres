@@ -148,35 +148,39 @@ const actions =
 
                             sendFile(event, recaptchaResponse).then((response) =>
                             {
-                                ApiService.post(
-                                    "/rest/io/customer/contact/mail",
-                                    {
-                                        data:       formData,
-                                        recipient:  formOptions.recipient,
-                                        subject:    formOptions.subject || "",
-                                        cc:         formOptions.cc,
-                                        bcc:        formOptions.bcc,
-                                        replyTo:    formOptions.replyTo,
-                                        recaptchaToken: recaptchaResponse,
-                                        fileKeys: response.fileKeys
-                                    }
-                                )
-                                    .done(response =>
-                                    {
-                                        resetRecaptcha(recaptchaEl);
-                                        event.target.reset();
-                                        disableForm(event.target, false);
-                                        NotificationService.success(
-                                            TranslationService.translate("Ceres::Template.contactSendSuccess")
-                                        ).closeAfter(3000);
-                                    })
-                                    .fail(response =>
-                                    {
-                                        resetRecaptcha(recaptchaEl);
-                                        disableForm(event.target, false);
-                                        response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
-                                        NotificationService.error(response.error);
-                                    });
+                                resetRecaptcha();
+                                executeReCaptcha(event.target).then((recaptchaToken2) =>
+                                {
+                                    ApiService.post(
+                                        "/rest/io/customer/contact/mail",
+                                        {
+                                            data:       formData,
+                                            recipient:  formOptions.recipient,
+                                            subject:    formOptions.subject || "",
+                                            cc:         formOptions.cc,
+                                            bcc:        formOptions.bcc,
+                                            replyTo:    formOptions.replyTo,
+                                            recaptchaToken: recaptchaToken2,
+                                            fileKeys: response.fileKeys
+                                        }
+                                    )
+                                        .done(response =>
+                                        {
+                                            resetRecaptcha(recaptchaEl);
+                                            event.target.reset();
+                                            disableForm(event.target, false);
+                                            NotificationService.success(
+                                                TranslationService.translate("Ceres::Template.contactSendSuccess")
+                                            ).closeAfter(3000);
+                                        })
+                                        .fail(response =>
+                                        {
+                                            resetRecaptcha(recaptchaEl);
+                                            disableForm(event.target, false);
+                                            response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
+                                            NotificationService.error(response.error);
+                                        });
+                                });
                             },
                             (response) =>
                             {
