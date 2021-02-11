@@ -279,7 +279,6 @@ export default {
             const str = String(value.replace(App.decimalSeparator, "."));
             
             const arr = str.split(".");
-
             let toFixedLength = 0;
 
             if( arr.length === 2 ){
