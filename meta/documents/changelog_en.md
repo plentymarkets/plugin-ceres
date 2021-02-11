@@ -1,5 +1,14 @@
 # Release Notes for Ceres
 
+## v5.0.22 (2021-02-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.21...5.0.22" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed 
+
+- Due to an error, Google reCAPTCHA prevented the sending of contact forms that included an attached file. This has been fixed.
+- The file selection of the email attachment widget can now be opened by clicking the input field.
+- Selected files in the email attachment widget can now be deleted.
+- Under certain circumstances, autocompletion could fill out several honeypots in Chrome. This has been fixed.
+
 ## v5.0.21 (2021-02-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.20...5.0.21" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added 

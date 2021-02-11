@@ -1,5 +1,14 @@
 # Release Notes für Ceres
 
+## v5.0.22 (2021-02-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.21...5.0.22" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler verhinderte reCAPTCHA das Absenden eines Kontaktformulars mit Dateianhang. Dies wurde behoben.
+- Die Dateiauswahl des Widgets E-Mail-Anhang kann nun durch Klick auf das Eingabefeld geöffnet werden.
+- Ausgewählte Dateien im Widget E-Mail-Anhang können nun wieder gelöscht werden.
+- Unter bestimmten Umständen konnten manche Honeypots in Chrome durch Autovervollständigung befüllt werden. Dies wurde behoben.
+
 ## v5.0.21 (2021-02-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.20...5.0.21" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
