@@ -6,6 +6,7 @@ use Ceres\Widgets\Helper\Factories\Settings\AlignmentSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\AppearanceSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\ButtonSizeSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\ColorPaletteSettingFactory;
+use Ceres\Widgets\Helper\Factories\Settings\ContainerSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\CustomClassSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\EditorSettingFactory;
 use Ceres\Widgets\Helper\Factories\Settings\HeightSettingFactory;
@@ -18,7 +19,6 @@ use Plenty\Modules\ShopBuilder\Factories\Settings\BaseSettingFactory;
 use Plenty\Modules\ShopBuilder\Factories\Settings\CategorySettingFactory;
 use Plenty\Modules\ShopBuilder\Factories\Settings\CheckboxGroupSettingFactory;
 use Plenty\Modules\ShopBuilder\Factories\Settings\CheckboxSettingFactory;
-use Plenty\Modules\ShopBuilder\Factories\Settings\ContainerSettingFactory;
 use Plenty\Modules\ShopBuilder\Factories\Settings\DateSettingFactory;
 use Plenty\Modules\ShopBuilder\Factories\Settings\DoubleSettingFactory;
 use Plenty\Modules\ShopBuilder\Factories\Settings\FileSettingFactory;
@@ -82,6 +82,11 @@ class WidgetSettingsFactory
         $instance = pluginApp(WidgetSettingsFactory::class);
         $instance->coreFactory = CoreWidgetSettingsFactory::create($data);
         return $instance;
+    }
+
+    public function __construct()
+    {
+        $this->coreFactory = pluginApp(CoreWidgetSettingsFactory::class);
     }
 
     /**

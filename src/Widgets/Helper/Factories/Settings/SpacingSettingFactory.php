@@ -2,8 +2,6 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-use Plenty\Modules\ShopBuilder\Factories\Settings\ContainerSettingFactory;
-
 class SpacingSettingFactory extends ContainerSettingFactory
 {
     public function __construct($usePadding, $useMargin)

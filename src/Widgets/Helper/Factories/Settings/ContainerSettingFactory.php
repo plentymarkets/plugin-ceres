@@ -2,18 +2,55 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-use Plenty\Modules\ShopBuilder\Factories\Settings\ContainerSettingFactory as CoreContainerSettingFactory;
 
+use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
+use Plenty\Modules\Plugin\Annotations\Service;
 
 /**
  * Class ContainerSettingFactory
  *
- * This class extends the GenericSettingsFactory by adding child settings.
+ * This class extends the BaseSettingFactory by adding child settings.
  *
- * @package Ceres\Widgets\Helper\Factories\Settings
- * @deprecated since 5.0.22
- * @see \Plenty\Modules\ShopBuilder\Factories\Settings\ContainerSettingFactory
+ * @package Plenty\Modules\ShopBuilder\Factories\Settings
+ * @Service(description="Factory to define a container for nested settings.")
  */
-class ContainerSettingFactory extends CoreContainerSettingFactory
+class ContainerSettingFactory extends BaseSettingFactory
 {
+    /**
+     * @var WidgetSettingsFactory
+     */
+    public $children;
+
+    /**
+     * Create a new factory instance with initial value.
+     *
+     * @param array $data
+     * @return $this
+     */
+    public static function create($data = [])
+    {
+        /** @var ContainerSettingFactory $instance */
+        $instance = app(ContainerSettingFactory::class);
+        $instance->children = WidgetSettingsFactory::create($data['children']);
+        unset($data['children']);
+        $instance->data = $data;
+        return $instance;
+    }
+
+    public function __construct()
+    {
+        $this->children = app(WidgetSettingsFactory::class);
+    }
+
+    /**
+     * Get all children as a native array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = parent::toArray();
+        $data['children'] = $this->children->toArray();
+        return $data;
+    }
 }
