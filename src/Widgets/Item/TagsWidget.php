@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class TagsWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.TagsWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::TagsWidget")
@@ -23,7 +27,10 @@ class TagsWidget extends BaseWidget
             ->withPosition(600)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

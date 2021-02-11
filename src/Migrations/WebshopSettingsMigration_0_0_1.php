@@ -10,11 +10,15 @@ use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 
 /**
  * Class WebshopSettingsMigration_0_0_1
+ *
+ * This migration is used for transferring settings from the webstore configuration into the Ceres configuration.
+ * Migrations are referenced in the 'runOnBuild' section of the plugin.json and run exactly once.
  * @package Ceres\Migrations
  */
 class WebshopSettingsMigration_0_0_1
 {
     /**
+     * Hook for running the migration.
      * @throws \ErrorException
      */
     public function run()

@@ -7,9 +7,15 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ManufacturerFilterWidget extends FilterBaseWidget
 {
+    /** @inheritDoc */
     protected $allowedFacetTypes = ["producer"];
+    
+    /** @inheritDoc */
     protected $className = "manufacturer";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ManufacturerFilterWidget')
@@ -21,6 +27,9 @@ class ManufacturerFilterWidget extends FilterBaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         return parent::getSettings();
