@@ -7,7 +7,7 @@ use Plenty\Modules\ShopBuilder\Factories\Settings\SelectSettingFactory as CoreSe
 /**
  * Class SelectSettingFactory
  * @package Ceres\Widgets\Helper\Factories\Settings
- * @deprecated since 5.0.22
+ * @deprecated since 5.0.23
  * @see \Plenty\Modules\ShopBuilder\Factories\Settings\SelectSettingFactory
  */
 class SelectSettingFactory extends CoreSelectSettingFactory

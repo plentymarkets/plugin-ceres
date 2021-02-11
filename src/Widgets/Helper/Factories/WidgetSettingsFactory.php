@@ -37,7 +37,7 @@ use Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory as CoreWidgetSett
  * Factory to create different types of settings for a widget.
  *
  * @package Ceres\Widgets\Helper\Factories
- * @deprecated since 5.0.22
+ * @deprecated since 5.0.23
  * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory
  */
 class WidgetSettingsFactory
@@ -55,7 +55,7 @@ class WidgetSettingsFactory
      *
      * @param string $parentWidgetClass Class name of a widget to inherit settings from
      * @return WidgetSettingsFactory
-     * @deprecated since 5.0.22
+     * @deprecated since 5.0.23
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::inherit()
      */
     public static function inherit($parentWidgetClass)
@@ -73,7 +73,7 @@ class WidgetSettingsFactory
      *
      * @param array $data Raw data describing some settings. This will be the same when calling toArray() on a factory instance.
      * @return WidgetSettingsFactory
-     * @deprecated since 5.0.22
+     * @deprecated since 5.0.23
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::create()
      */
     public static function create($data = [])
@@ -95,7 +95,7 @@ class WidgetSettingsFactory
      * @param string $key The key of the new settings entry. If key already exists, previous entry will be overridden.
      *
      * @return BaseSettingFactory
-     * @deprecated since 5.0.22
+     * @deprecated since 5.0.23
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      */
     public function createSetting($key)
@@ -109,7 +109,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the container setting.
      * @return ContainerSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\ContainerSettingFactory
      */
@@ -122,7 +122,7 @@ class WidgetSettingsFactory
      * Create a vertical container to group nested settings below to each other.
      * @param string $key The key of the container.
      * @return ContainerSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\ContainerSettingFactory
      */
@@ -137,7 +137,7 @@ class WidgetSettingsFactory
      * Create a horizontal container to group nested settings next to each other.
      * @param string $key The key of the container.
      * @return ContainerSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\ContainerSettingFactory
      */
@@ -153,7 +153,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return TextSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\TextSettingFactory
      */
@@ -167,7 +167,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return CheckboxSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\CheckboxSettingFactory
      */
@@ -181,7 +181,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return ColorPaletteSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\ColorPaletteSettingFactory
      */
@@ -195,7 +195,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return DateSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\DateSettingFactory
      */
@@ -209,7 +209,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return FileSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\FileSettingFactory
      */
@@ -223,7 +223,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return TextareaSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\TextareaSettingFactory
      */
@@ -237,7 +237,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return BaseSettingFactory
-     * @deprecated since 5.0.22
+     * @deprecated since 5.0.23
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      */
     public function createNumber($key)
@@ -252,7 +252,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return DoubleSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\DoubleSettingFactory
      */
@@ -266,7 +266,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return SelectSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\SelectSettingFactory
      */
@@ -280,7 +280,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return SuggestionSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\SuggestionSettingFactory
      */
@@ -294,7 +294,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return CategorySettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\CategorySettingFactory
      */
@@ -308,7 +308,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return BaseSettingFactory
-     * @deprecated since 5.0.22
+     * @deprecated since 5.0.23
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      */
     public function createColor($key)
@@ -323,7 +323,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return SliderSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\SliderSettingFactory
      */
@@ -337,7 +337,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return CheckboxGroupSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\CheckboxGroupSettingFactory
      */
@@ -351,7 +351,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return RadioGroupSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\RadioGroupSettingFactory
      */
@@ -365,7 +365,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return UrlSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Plenty\Modules\ShopBuilder\Factories\Settings\UrlSettingFactory
      */
@@ -407,7 +407,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return UUIDSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\UUIDSettingFactory
      */
@@ -421,7 +421,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return ManufacturerSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\ManufacturerSettingFactory
      */
@@ -435,7 +435,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return CustomClassSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\CustomClassSettingFactory
      */
@@ -450,7 +450,7 @@ class WidgetSettingsFactory
      * @param bool $optional If true, a 'none' value is added to the value list.
      * @param string $key The key of the setting.
      * @return AppearanceSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\AppearanceSettingFactory
      */
@@ -470,7 +470,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return IconSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\IconSettingFactory
      */
@@ -486,7 +486,7 @@ class WidgetSettingsFactory
      * @param bool $useMargin Set true to create a container for margins.
      * @param string $key The key of the setting.
      * @return SpacingSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\SpacingSettingFactory
      */
@@ -507,7 +507,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return HeightSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\HeightSettingFactory
      */
@@ -521,7 +521,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return ButtonSizeSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\ButtonSizeSettingFactory
      */
@@ -535,7 +535,7 @@ class WidgetSettingsFactory
      *
      * @param string $key The key of the setting.
      * @return AlignmentSettingFactory
-     * @deprecated since 5.0.22 Use createSetting() and pass required factory class.
+     * @deprecated since 5.0.23 Use createSetting() and pass required factory class.
      * @see \Plenty\Modules\ShopBuilder\Factories\WidgetSettingsFactory::createSetting()
      * @see \Ceres\Widgets\Helper\Factories\Settings\AlignmentSettingFactory
      */

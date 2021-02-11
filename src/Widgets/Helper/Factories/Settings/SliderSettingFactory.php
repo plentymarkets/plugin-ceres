@@ -7,7 +7,7 @@ use Plenty\Modules\ShopBuilder\Factories\Settings\SliderSettingFactory as CoreSl
 /**
  * Class SliderSettingFactory
  * @package Ceres\Widgets\Helper\Factories\Settings
- * @deprecated since 5.0.22
+ * @deprecated since 5.0.23
  * @see \Plenty\Modules\ShopBuilder\Factories\Settings\SliderSettingFactory
  */
 class SliderSettingFactory extends CoreSliderSettingFactory

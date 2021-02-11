@@ -11,7 +11,7 @@ use Plenty\Modules\ShopBuilder\Factories\Settings\BaseSettingFactory as CoreBase
  * Contains interfaces for all common properties of a setting.
  *
  * @package Ceres\Widgets\Helper\Factories\Settings
- * @deprecated since 5.0.22
+ * @deprecated since 5.0.23
  * @see \Plenty\Modules\ShopBuilder\Factories\Settings\BaseSettingFactory
  */
 class BaseSettingFactory extends CoreBaseSettingFactory

@@ -7,7 +7,7 @@ use Plenty\Modules\ShopBuilder\Factories\Settings\TextareaSettingFactory as Core
 /**
  * Class TextareaSettingFactory
  * @package Ceres\Widgets\Helper\Factories\Settings
- * @deprecated since 5.0.22
+ * @deprecated since 5.0.23
  * @see \Plenty\Modules\ShopBuilder\Factories\Settings\TextareaSettingFactory
  */
 class TextareaSettingFactory extends CoreTextareaSettingFactory
