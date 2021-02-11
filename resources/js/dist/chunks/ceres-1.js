@@ -7022,7 +7022,7 @@ var render = function() {
           attrs: {
             type: "text",
             name: "username",
-            autocomplete: "off",
+            autocomplete: "new-password",
             tabindex: "-1"
           },
           domProps: { value: _vm.honeypot },

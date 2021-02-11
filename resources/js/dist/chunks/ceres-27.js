@@ -49,6 +49,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "form-attachment",
   data: function data() {
@@ -79,6 +87,10 @@ __webpack_require__.r(__webpack_exports__);
         return file.name;
       }).join(", ");
       this.$emit('files-changed', fileList);
+    },
+    clearSelectedFiles: function clearSelectedFiles() {
+      this.selectedFiles = null;
+      this.$refs.fileInput.value = "";
     }
   }
 });
@@ -101,7 +113,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "label",
     {
       directives: [{ name: "tooltip", rawName: "v-tooltip" }],
       ref: "inputUnit",
@@ -114,19 +126,43 @@ var render = function() {
         _vm.isRequired ? _c("span", [_vm._v("*")]) : _vm._e()
       ]),
       _vm._v(" "),
-      _c("span", { staticClass: "input-unit-preview" }, [
-        _vm._v(_vm._s(_vm.selectedFiles))
-      ]),
+      _c(
+        "span",
+        {
+          staticClass: "input-unit-preview",
+          class: { disabled: !!_vm.selectedFiles }
+        },
+        [_vm._v(_vm._s(_vm.selectedFiles))]
+      ),
       _vm._v(" "),
-      _vm._m(0),
+      !_vm.selectedFiles
+        ? _c("span", { staticClass: "input-unit-btn" }, [
+            _c("i", { staticClass: "fa fa-ellipsis-h" })
+          ])
+        : _c(
+            "span",
+            {
+              staticClass: "input-unit-btn",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.clearSelectedFiles()
+                }
+              }
+            },
+            [_c("i", { staticClass: "fa fa-times" })]
+          ),
       _vm._v(" "),
       _c("input", {
+        ref: "fileInput",
         attrs: {
           type: "file",
           multiple: _vm.allowMultiple,
           name: _vm.formFieldId,
           id: _vm.formFieldId,
-          disabled: _vm.allowedFileExtensions.trim().length === 0,
+          disabled:
+            _vm.allowedFileExtensions.trim().length === 0 ||
+            !!_vm.selectedFiles,
           accept: _vm.allowedFileExtensions
         },
         on: { change: _vm.collectFiles }
@@ -134,16 +170,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-unit-btn" }, [
-      _c("i", { staticClass: "fa fa-ellipsis-h" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

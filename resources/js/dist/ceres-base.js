@@ -58519,25 +58519,28 @@ var actions = {
         var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["serializeForm"])(event.target);
         var formOptions = readFormOptions(event.target, formData);
         sendFile(event, recaptchaResponse).then(function (response) {
-          ApiService.post("/rest/io/customer/contact/mail", {
-            data: formData,
-            recipient: formOptions.recipient,
-            subject: formOptions.subject || "",
-            cc: formOptions.cc,
-            bcc: formOptions.bcc,
-            replyTo: formOptions.replyTo,
-            recaptchaToken: recaptchaResponse,
-            fileKeys: response.fileKeys
-          }).done(function (response) {
-            resetRecaptcha(recaptchaEl);
-            event.target.reset();
-            disableForm(event.target, false);
-            _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
-          }).fail(function (response) {
-            resetRecaptcha(recaptchaEl);
-            disableForm(event.target, false);
-            response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail");
-            _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
+          resetRecaptcha();
+          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
+            ApiService.post("/rest/io/customer/contact/mail", {
+              data: formData,
+              recipient: formOptions.recipient,
+              subject: formOptions.subject || "",
+              cc: formOptions.cc,
+              bcc: formOptions.bcc,
+              replyTo: formOptions.replyTo,
+              recaptchaToken: recaptchaToken2,
+              fileKeys: response.fileKeys
+            }).done(function (response) {
+              resetRecaptcha(recaptchaEl);
+              event.target.reset();
+              disableForm(event.target, false);
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+            }).fail(function (response) {
+              resetRecaptcha(recaptchaEl);
+              disableForm(event.target, false);
+              response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail");
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
+            });
           });
         }, function (response) {
           resetRecaptcha(recaptchaEl);
@@ -58578,6 +58581,7 @@ function sendFile(event, recaptchaToken) {
   return new Promise(function (resolve, reject) {
     var formData = new FormData();
     var fileInputs = event.target.querySelectorAll("input[type=file]");
+    var containsFiles = false;
 
     var _iterator3 = _createForOfIteratorHelper(fileInputs),
         _step3;
@@ -58592,6 +58596,7 @@ function sendFile(event, recaptchaToken) {
         try {
           for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
             var file = _step4.value;
+            containsFiles = true;
             formData.append("fileData[]", file);
           }
         } catch (err) {
@@ -58604,6 +58609,11 @@ function sendFile(event, recaptchaToken) {
       _iterator3.e(err);
     } finally {
       _iterator3.f();
+    }
+
+    if (!containsFiles) {
+      resolve({});
+      return;
     }
 
     formData.append("recaptchaToken", recaptchaToken);

@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1" v-model="honeypot">
+            <input class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1" v-model="honeypot">
 
             <div class="col-12">
                 <address-input-group

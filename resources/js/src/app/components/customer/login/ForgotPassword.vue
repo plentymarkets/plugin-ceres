@@ -13,7 +13,7 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-                                <input class="honey" type="text" name="username" autocomplete="off" tabindex="-1" v-model="honeypot">
+                                <input class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1" v-model="honeypot">
 								<div class="input-unit no-bottom" data-validate="mail">
 									<input type="email" name="email" autocomplete="email" :id="'mail' + _uid" v-model="username" data-autofocus>
 									<label :for="'mail' + _uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
