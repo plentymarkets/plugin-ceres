@@ -28,6 +28,10 @@ window.$ = jQuery;
 import DOMPurify from "dompurify";
 window.DOMPurify = DOMPurify;
 
+// TODO remove after testing?
+import Sanitize from "./app/services/SanitizeService";
+window.ceresSanitize = Sanitize;
+
 import "bootstrap";
 import "owl.carousel";
 

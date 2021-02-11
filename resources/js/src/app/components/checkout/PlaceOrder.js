@@ -3,6 +3,7 @@ import { navigateTo } from "../../services/UrlService";
 import Vue from "vue";
 import { mapState } from "vuex";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
+import { sanitize } from "../../services/SanitizeService";
 
 const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
@@ -98,7 +99,7 @@ export default Vue.component("place-order", {
 
                 const url = "/rest/io/order/additional_information";
                 const params = {
-                    orderContactWish: this.contactWish,
+                    orderContactWish: sanitize(this.contactWish),
                     orderCustomerSign: this.customerSign,
                     shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
                     newsletterSubscriptions: this.activeNewsletterSubscriptions

@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { sanitize } from "../../services/SanitizeService";
 const ApiService = require("../../services/ApiService");
 
 const state =
@@ -339,7 +340,7 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true })
+                ApiService.post("/rest/io/customer/address?typeId=" + addressType, sanitize(address), { supressNotifications: true })
                     .done(response =>
                     {
                         if (addressType === "1")
@@ -364,7 +365,7 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true, keepOriginalResponse: true })
+                ApiService.post("/rest/io/customer/address?typeId=" + addressType, sanitize(address), { supressNotifications: true, keepOriginalResponse: true })
                     .done(response =>
                     {
                         if (addressType === "1")

@@ -1,4 +1,5 @@
 import ExceptionMap from "../../exceptions/ExceptionMap";
+import { sanitize } from "../../services/SanitizeService";
 
 const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
@@ -52,7 +53,7 @@ const mutations =
 
         updateOrderReturnNote(state, orderReturnNote)
         {
-            state.orderReturnNote = orderReturnNote;
+            state.orderReturnNote = sanitize(orderReturnNote);
         }
     };
 

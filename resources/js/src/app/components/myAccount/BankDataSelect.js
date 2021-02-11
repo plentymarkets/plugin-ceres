@@ -5,6 +5,7 @@ import ApiService from "../../services/ApiService";
 import ValidationService from "../../services/ValidationService";
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
+import { sanitize } from "../../services/SanitizeService";
 
 export default Vue.component("bank-data-select", {
 
@@ -156,7 +157,7 @@ export default Vue.component("bank-data-select", {
         {
             this.updateBankData.lastUpdateBy = "customer";
 
-            ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData)
+            ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, sanitize(this.updateBankData))
                 .done(response =>
                 {
                     this.userBankData.splice(this.updateBankIndex, 1, response);
@@ -189,7 +190,7 @@ export default Vue.component("bank-data-select", {
             this.updateBankData.lastUpdateBy = "customer";
             this.updateBankData.contactId = this.contactId;
 
-            ApiService.post("/rest/io/customer/bank_data", this.updateBankData)
+            ApiService.post("/rest/io/customer/bank_data", sanitize(this.updateBankData))
                 .done(response =>
                 {
                     this.userBankData.push(response);
