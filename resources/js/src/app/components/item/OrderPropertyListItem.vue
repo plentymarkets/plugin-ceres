@@ -281,7 +281,8 @@ export default {
             const arr = str.split(".");
             let toFixedLength = 0;
 
-            if( arr.length === 2 ){
+            if (arr.length === 2)
+            {
                 toFixedLength = arr[1].length;
             }
 
