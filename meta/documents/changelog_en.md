@@ -7,7 +7,7 @@
 - Due to an error, Google reCAPTCHA prevented the sending of contact forms that included an attached file. This has been fixed.
 - The file selection of the email attachment widget can now be opened by clicking the input field.
 - Selected files in the email attachment widget can now be deleted.
-- Due to an error, autocompletion filled out several honeypots in Chrome. This has been fixed. 
+- Under certain circumstances, autocompletion could fill out several honeypots in Chrome. This has been fixed.
 
 ## v5.0.21 (2021-02-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.20...5.0.21" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
