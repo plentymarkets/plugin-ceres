@@ -73,6 +73,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
@@ -216,7 +237,8 @@ var render = function() {
           attrs: {
             type: "text",
             placeholder: _vm.$translate("Ceres::Template.couponEnterCoupon"),
-            disabled: _vm.disabled || _vm.isCheckoutReadonly
+            disabled: _vm.disabled || _vm.isCheckoutReadonly,
+            "data-testing": "coupon-input"
           },
           domProps: { value: _vm.couponCode },
           on: {
@@ -246,7 +268,8 @@ var render = function() {
                   staticClass: "btn btn-medium btn-primary btn-appearance",
                   attrs: {
                     type: "button",
-                    disabled: _vm.waiting || _vm.isCheckoutReadonly
+                    disabled: _vm.waiting || _vm.isCheckoutReadonly,
+                    "data-testing": "coupon-redeem"
                   },
                   on: {
                     click: function($event) {
@@ -270,7 +293,8 @@ var render = function() {
                   staticClass: "btn btn-medium btn-danger",
                   attrs: {
                     type: "button",
-                    disabled: _vm.waiting || _vm.isCheckoutReadonly
+                    disabled: _vm.waiting || _vm.isCheckoutReadonly,
+                    "data-testing": "coupon-remove"
                   },
                   on: {
                     click: function($event) {

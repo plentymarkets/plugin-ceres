@@ -322,6 +322,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -774,7 +779,8 @@ var render = function() {
                       "picture-class": "d-block mw-100 mh-100",
                       "image-url": _vm.image,
                       alt: _vm.altText,
-                      title: _vm.itemName
+                      title: _vm.itemName,
+                      "data-testing": "basket-item-img"
                     }
                   })
                 : _vm._e()
@@ -800,7 +806,8 @@ var render = function() {
                           attrs: {
                             href: _vm._f("itemURL")(
                               _vm.basketItem.variation.data
-                            )
+                            ),
+                            "data-testing": "basket-item-name"
                           }
                         },
                         [
@@ -1035,6 +1042,7 @@ var render = function() {
                             _vm.isCheckoutReadonly ||
                             _vm.waitingForDelete
                         },
+                        attrs: { "data-testing": "basket-item-delete" },
                         on: { click: _vm.deleteItem }
                       },
                       [

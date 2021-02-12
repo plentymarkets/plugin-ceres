@@ -103,6 +103,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -281,7 +308,10 @@ var render = function() {
                         {
                           staticClass:
                             "text-primary text-appearance d-block d-md-inline-block",
-                          attrs: { href: "#" },
+                          attrs: {
+                            href: "#",
+                            "data-testing": "cookie-bar-show-more-information"
+                          },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -299,6 +329,15 @@ var render = function() {
                             )
                           )
                         ]
+                      ),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.cookieBarMoreSettings"
+                            )
+                          ) +
+                          "\n                "
                       )
                     ],
                     2
@@ -310,6 +349,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary btn-block btn-appearance",
+                      attrs: { "data-testing": "cookie-bar-accept-all" },
                       on: {
                         click: function($event) {
                           _vm.acceptAll()
@@ -319,9 +359,11 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(
-                          _vm.$translate("Ceres::Template.cookieBarAcceptAll")
-                        )
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarAcceptAll")
+                          ) +
+                          "\n                "
                       )
                     ]
                   ),
@@ -330,6 +372,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-default btn-block",
+                      attrs: { "data-testing": "cookie-bar-save" },
                       on: {
                         click: function($event) {
                           _vm.storeConsents()
@@ -339,7 +382,11 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.cookieBarSave"))
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarSave")
+                          ) +
+                          "\n                "
                       )
                     ]
                   )
@@ -373,7 +420,10 @@ var render = function() {
                         {
                           staticClass:
                             "text-primary text-appearance d-inline-block mb-3",
-                          attrs: { href: "#" },
+                          attrs: {
+                            href: "#",
+                            "data-testing": "cookie-bar-hide-more-information"
+                          },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -384,9 +434,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.cookieBarBack")
-                            )
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.cookieBarBack")
+                              ) +
+                              "\n                "
                           )
                         ]
                       )
@@ -398,6 +450,9 @@ var render = function() {
                         {
                           staticClass:
                             "btn btn-block btn-primary btn-appearance",
+                          attrs: {
+                            "data-testing": "cookie-bar-expanded-accept-all"
+                          },
                           on: {
                             click: function($event) {
                               _vm.acceptAll()
@@ -407,11 +462,13 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.cookieBarAcceptAll"
-                              )
-                            )
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.cookieBarAcceptAll"
+                                )
+                              ) +
+                              "\n                "
                           )
                         ]
                       )
@@ -422,6 +479,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-block btn-block btn-default",
+                          attrs: { "data-testing": "cookie-bar-expanded-save" },
                           on: {
                             click: function($event) {
                               _vm.storeConsents()
@@ -431,9 +489,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.cookieBarSave")
-                            )
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.cookieBarSave")
+                              ) +
+                              "\n                "
                           )
                         ]
                       )

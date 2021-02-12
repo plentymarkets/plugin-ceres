@@ -5,14 +5,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="input-unit" data-validate="mail">
-                            <input type="email" name="email" autocomplete="email" :id="'email' + _uid" v-model="username" data-autofocus>
+                            <input data-testing="email-login" type="email" name="email" autocomplete="email" :id="'email' + _uid" v-model="username" data-autofocus>
                             <label :for="'email' + _uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ $translate("Ceres::Template.loginEnterConfirmEmail") }}</span>
                     </div>
                     <div class="col-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
-                            <input type="password" name="password" autocomplete="current-password" :id="'password' + _uid" v-model="password">
+                            <input data-testing="password-login" type="password" name="password" autocomplete="current-password" :id="'password' + _uid" v-model="password">
                             <label :for="'password' + _uid">{{ $translate("Ceres::Template.loginPassword") }}*</label>
                         </div>
                         <span class="error-msg">{{ $translate("Ceres::Template.loginEmptyPassword") }}</span>
@@ -25,7 +25,7 @@
                 </div>
                 <div :class="{'col-5 col-sm-8 text-sm-right': !modalElement}">
                     <slot name="extend-overlay-buttons"></slot>
-                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
+                    <button data-testing="submit-login" @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
                         {{ $translate("Ceres::Template.login") }}
                         <icon icon="user" :loading="isDisabled"></icon>
                     </button>

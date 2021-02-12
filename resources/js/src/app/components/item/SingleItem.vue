@@ -15,7 +15,7 @@
                                 {{ currentVariation.item.manufacturer.externalName }}
                             </div>
 
-                            <h1 class="h2 title">
+                            <h1 class="h2 title" data-testing="item-name">
                                 <span>
                                     {{ currentVariation | itemName }}
                                 </span>
