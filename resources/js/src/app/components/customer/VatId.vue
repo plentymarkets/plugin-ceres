@@ -9,7 +9,7 @@
                 <option v-for="(vatCode, index) in vatCodes" :value="vatCode">{{ vatCode }}</option>
             </select>
         </div>
-        <div class="input-unit flex-fill w-auto" v-validate:text="true">
+        <div class="input-unit flex-fill w-auto" v-validate:text="isRequired">
             <input
                 aria-describedby="basic-addon1"
                 type="text"
@@ -130,7 +130,7 @@ export default
 
             return translation + (this.isRequired ? "*" : "");
         },
-        
+
         emitChange()
         {
             const value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
