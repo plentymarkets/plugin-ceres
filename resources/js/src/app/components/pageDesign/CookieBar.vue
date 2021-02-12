@@ -27,7 +27,6 @@
                         </template>
                         
                         <a href="#" class="text-primary text-appearance d-block d-md-inline-block" data-testing="cookie-bar-show-more-information" @click.prevent.stop="isExpanded=true">{{ $translate("Ceres::Template.cookieBarMoreSettings") }}</a>
-                        {{ $translate("Ceres::Template.cookieBarMoreSettings") }}
                     </div>
 
                 </div>

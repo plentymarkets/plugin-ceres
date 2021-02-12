@@ -77,9 +77,9 @@ context("Single Item", () =>
 
     it("should display tags and open in search on click", () =>
     {
-        cy.get(".tag-widget").should("exist");
+        cy.get(".widget-tag").should("exist");
         // click on first tag
-        cy.get(".tag-widget").children().first().children().first().click();
+        cy.get(".widget-tag").children().first().children().first().click();
 
         cy.wait(1000);
         cy.location("pathname").should("eq", "/neu_t1/");
