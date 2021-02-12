@@ -108,13 +108,11 @@ export default
     {
         value(newValue)
         {
-            console.log("watch value");
             this.setValues(newValue);
         },
 
         selectedCountryId(countryId)
         {
-            console.log("watch countryId");
             this.deleteValue();
         },
     },
@@ -137,13 +135,11 @@ export default
         {
             const value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
 
-            console.log("emit: ", value);
             this.$emit('input', value);
         },
 
         deleteValue()
         {
-            console.log("delete");
             this.vatNumber = "";
             this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
 
@@ -152,7 +148,6 @@ export default
 
         setValues(value)
         {
-            console.log("setValues: ", value);
             const vatPrefix = this.vatCodes.find(vatCode => value?.startsWith(vatCode));
 
             if (!!vatPrefix)
