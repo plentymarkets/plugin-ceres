@@ -276,7 +276,7 @@ export default {
         {
             const lastChar = value.slice(-1);
 
-            const str = String(value.replace(App.decimalSeparator, "."));
+            const str = value.replace(App.decimalSeparator, ".");
             const arr = str.split(".");
             let toFixedLength = 0;
 
