@@ -124,7 +124,7 @@
                                    aria-expanded="false"
                                    aria-controls="currencySelect"
                                    data-parent="#controlsList"
-                                   data-testing="currency-select">
+                                   data-testing="currency-select"
                                    aria-label="{{ Twig.print('trans("Ceres::Template.headerCurrency")') }}">
                                     <span>{{ Twig.print("currencyData") }}</span>
                                 </a>
@@ -135,13 +135,13 @@
                             <li class="list-inline-item control-search">
                                 <a class="anicon anicon-search-xcross nav-link"
                                     {{ WidgetHelper.makeClickable(isPreview) }}
-                                    aria-label="toggle search"
                                     data-toggle="collapse"
                                     href="#searchBox"
                                     aria-expanded="false"
                                     aria-controls="searchBox"
                                     data-testing="searchbox-select"
-                                    data-parent="#controlsList">
+                                    data-parent="#controlsList"
+                                    aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
                                 </a>
                             </li>
