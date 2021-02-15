@@ -170,13 +170,13 @@
                             {{ Twig.set("itemPriceTotal", "item.quantity * itemAmount.priceGross") }}
                         {{ Twig.endif() }}
 
-                        <div class="row">
+                        <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-price-per-piece")') }}>
                             <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPrice | formatMonetary( itemAmount.currency )') }}</span>
                         </div>
 
 
-                        <div class="row">
+                        <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-quantity")') }}>
                             <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('item.quantity') }}</span>
                         </div>
@@ -250,7 +250,7 @@
 
                         {{ Twig.endif() }}
 
-                        <div class="row">
+                        <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-total")') }}>
                             <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationTotal") }}</strong>
                             <strong class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPriceTotal | formatMonetary( itemAmount.currency )') }}</strong>
                         </div>

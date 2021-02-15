@@ -12,7 +12,7 @@
                 <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutNet") }})
                 </dt><!--
-                --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="item-sum-net">
                     {{ totals.itemSumNet | formatMonetary( totals.currency ) }}
                 </dd>
             {% endif %}
@@ -22,7 +22,7 @@
                 <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutGross") }})
                 </dt><!--
-                --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                --><dd{% if not highlightNetPrices %} class="font-weight-bold" data-testing="item-sum"{% endif %}>
                     {% if totals.isNet %}
                         {{ totals.itemSumNet | formatMonetary( totals.currency ) }}
                     {% else %}
@@ -72,7 +72,7 @@
                 <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutNet") }})
                 </dt><!--
-                --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount-net">
                     {{ totals.shippingNet | formatMonetary( totals.currency ) }}
                 </dd>
             {% endif %}
@@ -82,13 +82,15 @@
                 <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutGross") }})
                 </dt><!--
-                --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                    {% if totals.isNet %}
-                        {{ totals.shippingNet | formatMonetary( totals.currency ) }}
-                    {% else %}
-                        {{ totals.shippingGross | formatMonetary( totals.currency ) }}
-                    {% endif %}
+                {% if totals.isNet %}
+                --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount-net">
+                    {{ totals.shippingNet | formatMonetary( totals.currency ) }}
                 </dd>
+                {% else %}
+                --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount">
+                    {{ totals.shippingGross | formatMonetary( totals.currency ) }}
+                </dd>
+                {% endif %}
             {% endif %}
 
             {% if 'promotionCoupon' in shownFields or shownFields == null %}
@@ -97,7 +99,7 @@
                     <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                         {{ trans("Ceres::Template.checkoutCoupon") }}
                     </dt><!--
-                    --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                    --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="promotion-coupon">
                         {{ totals.couponValue | formatMonetary( totals.currency ) }}
                     </dd>
                 {% endif %}
@@ -124,7 +126,7 @@
                     <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
                         {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutNet") }})
                     </dt><!--
-                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-amount-net">
                         {{ totals.totalNet | formatMonetary( totals.currency ) }}
                     </dd>
                 {% endif %}
@@ -137,7 +139,7 @@
                                 <dt>
                                     {{ trans("Ceres::Template.orderConfirmationVAT") }} {{ vat.rate }}%
                                 </dt><!--
-                                --><dd>
+                                --><dd data-testing="vat-amount">
                                     {{ vat.value | formatMonetary( totals.currency ) }}
                                 </dd>
                             {% endfor %}
@@ -172,7 +174,7 @@
                         <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                             {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutGross") }})
                         </dt><!--
-                        --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                        --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-amount">
                             {{ totals.totalGross | formatMonetary( totals.currency ) }}
                         </dd>
                     {% endif %}
@@ -185,7 +187,7 @@
                     <dt>
                         {{ trans("Ceres::Template.checkoutCoupon") }}
                     </dt><!--
-                    --><dd>
+                    --><dd data-testing="sales-coupon">
                         {{ totals.couponValue | formatMonetary( totals.currency ) }}
                     </dd>
                 {% endif %}
@@ -196,7 +198,7 @@
                         <strong>{{ trans("Ceres::Template.checkoutOpenAmount") }}</strong>
                     </dt><!--
                     --><dd>
-                        <strong>{{ totals.openAmount | formatMonetary( totals.currency ) }}</strong>
+                        <strong data-testing="open-amount">{{ totals.openAmount | formatMonetary( totals.currency ) }}</strong>
                     </dd>
                 {% endif %}
             {% endif %}

@@ -66,7 +66,7 @@
                                 {{ quantity * unitPrice | currency }}
                             </div>
 
-                            <div class="btn btn-sm text-danger p-0" @click="removeItem()">
+                            <div class="btn btn-sm text-danger p-0" @click="removeItem()" data-testing="remove-wlist-item">
                                 {{ $translate("Ceres::Template.wishListDelete") }}
                                 <i v-waiting-animation-infinite class="fa fa-trash-o default-float" aria-hidden="true"></i>
                             </div>
