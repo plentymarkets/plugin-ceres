@@ -139,7 +139,7 @@ const actions =
                 .then((recaptchaResponse) =>
                 {
                     ValidationService.validate(event.target)
-                        .done(() =>
+                        .then(() =>
                         {
                             disableForm(event.target, true);
 
@@ -206,6 +206,9 @@ const actions =
                                 TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
                             );
                         });
+                })
+                .then({
+
                 })
                 .catch(() =>
                 {
