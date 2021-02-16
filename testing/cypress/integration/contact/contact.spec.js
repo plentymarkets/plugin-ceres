@@ -33,11 +33,37 @@ context("Contact Page", () =>
         cy.get(".notification-wrapper").children().first().should("contain", "Bitte folgende Felder überprüfen: E-Mail, Betreff, Nachricht, Hiermit bestätige ich, dass ich die Daten­schutz­erklärung gelesen habe..");
     });
 
+    it("should fill file upload input", () =>
+    {
+        cy.fixture("test.png").then(fileContent =>
+        {
+            cy.get(".widget-mail-attachment input").attachFile({
+                fileContent: fileContent.toString(),
+                fileName: "test.png",
+                mimeType: "image/png"
+            });
+        });
+
+        cy.get(".widget-mail-attachment .input-unit-preview.disabled").should("contain", "test.png");
+        
+        cy.get(".widget-mail-attachment .fa.fa-times").should("exist");
+        cy.get(".widget-mail-attachment .input-unit-btn").click();
+        cy.get(".widget-mail-attachment .input-unit-preview").should("not.have.class", "disabled").should('be.empty');
+    });
+
     it("check for notification after successful sending of form", () =>
     {
         cy.get(".widget-mail-input").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
         cy.get(".contact-form-subject").type("g", { delay: 40 });
         cy.get(".contact-form-message").type("g", { delay: 40 });
+        cy.fixture("test.png").then(fileContent =>
+        {
+            cy.get(".widget-mail-attachment input").attachFile({
+                fileContent: fileContent.toString(),
+                fileName: "test.png",
+                mimeType: "image/png"
+            });
+        });
         cy.get(".widget-accept-privacy-policy").click();
         cy.get(".widget-contact-form .btn-primary").click();
         cy.get(".notification-wrapper").children().should("exist");
