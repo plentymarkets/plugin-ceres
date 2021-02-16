@@ -137,7 +137,7 @@ class OnlineStoreMapping
         ],
         'onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus' => [
             'field'     => 'externalVatCheckServiceUnavailableFallbackStatus',
-            'type'      => 'string',
+            'type'      => 'float',
             'global'    => true,
             'optional'  => false
         ]
