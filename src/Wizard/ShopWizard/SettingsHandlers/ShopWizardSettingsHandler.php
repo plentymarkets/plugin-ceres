@@ -143,9 +143,13 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 if (!empty($activeLanguagesList)) {
                     $webstoreData['languageList'] = $activeLanguagesList;
                 }
-                
+
                 if (isset($data['onlineStore_externalVatIdCheck'])) {
                     $webstoreData['externalVatCheckInactive'] = $data['onlineStore_externalVatIdCheck'];
+                }
+
+                if (isset($data['onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus'])) {
+                    $webstoreData['externalVatCheckServiceUnavailableFallbackStatus'] = (float)$data['onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus'];
                 }
 
                 if (isset($data['pagination_sortingMonthlySales'])) {

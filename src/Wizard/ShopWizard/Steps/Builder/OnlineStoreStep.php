@@ -374,6 +374,14 @@ class OnlineStoreStep extends Step
                             ]
                         ]
                     ]
+                ],
+                "onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus" => [
+                    "type" => "select",
+                    "defaultValue" => "9",
+                    "options" => [
+                        "name" => "Wizard.externalVatIdCheckServiceUnavailableFallbackStatus",
+                        "listBoxValues" => $this->getOrderStatusListBoxValues()
+                    ]
                 ]
             ]
         ];
