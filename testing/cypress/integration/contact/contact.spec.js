@@ -131,7 +131,7 @@ context("Contact Page", () =>
         cy.intercept("POST", "/rest/io/customer/contact/mail/file/").as("uploadFile");
         cy.get(".widget-contact-form .btn-primary").click();
 
-        cy.get(".notification-wrapper").children().should("have.class", "show");
+        cy.get(".notification-wrapper").children().should("have.class", "show").and("have.class", "alert-success");
         cy.get(".notification-wrapper").children().first().should("contain", "Deine Anfrage wurde erfolgreich gesendet.");
 
         cy.wait("@uploadFile").its("response.statusCode").should("eq", 201);
