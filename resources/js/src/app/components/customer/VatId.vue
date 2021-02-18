@@ -86,6 +86,7 @@ export default
 
         isPrefixValid()
         {
+            console.log("isPrefixValid update");
             let isPrefixValid = false;
             const validPrefix = this.vatCodes.find(vatCode => this.value?.startsWith(vatCode));
 
@@ -108,12 +109,15 @@ export default
     {
         value(newValue)
         {
+            console.log("watch value");
             this.setValues(newValue);
         },
 
         selectedCountryId(countryId)
         {
-            this.deleteValue();
+            console.log("watch countryId");
+            // dont delete value after country change
+            // this.deleteValue();
         },
     },
 
@@ -133,6 +137,7 @@ export default
 
         emitChange()
         {
+            console.log("emit: ", value);
             const value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
 
             this.$emit('input', value);
@@ -140,6 +145,7 @@ export default
 
         deleteValue()
         {
+            console.log("delete");
             this.vatNumber = "";
             this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
 
@@ -148,6 +154,7 @@ export default
 
         setValues(value)
         {
+            console.log("setValues: ", value);
             const vatPrefix = this.vatCodes.find(vatCode => value?.startsWith(vatCode));
 
             if (!!vatPrefix)
