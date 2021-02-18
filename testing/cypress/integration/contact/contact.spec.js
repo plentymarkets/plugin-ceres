@@ -46,7 +46,8 @@ context("Contact Page", () =>
 
         cy.getByTestingAttr("form-attachment-file-name").should("have.class", "disabled").should("contain", "test.png");
         cy.getByTestingAttr("form-attachment-button").click();
-        cy.getByTestingAttr("form-attachment-file-name").should("not.have.class", "disabled").should("be.empty");
+        cy.getByTestingAttr("form-attachment-file-name").should("not.have.class", "disabled");
+        cy.getByTestingAttr("form-attachment-input").should("be.empty");
     });
 
     it("check for error notification after sending form with file attachment that exceeds the upload size limit", () =>
