@@ -30,7 +30,7 @@ class ContainerSettingFactory extends BaseSettingFactory
     public static function create($data = [])
     {
         /** @var ContainerSettingFactory $instance */
-        $instance = app(ContainerSettingFactory::class);
+        $instance = pluginApp(ContainerSettingFactory::class);
         $instance->children = WidgetSettingsFactory::create($data['children']);
         unset($data['children']);
         $instance->data = $data;
@@ -39,7 +39,7 @@ class ContainerSettingFactory extends BaseSettingFactory
 
     public function __construct()
     {
-        $this->children = app(WidgetSettingsFactory::class);
+        $this->children = pluginApp(WidgetSettingsFactory::class);
     }
 
     /**
