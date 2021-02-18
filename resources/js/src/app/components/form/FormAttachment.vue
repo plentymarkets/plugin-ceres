@@ -9,14 +9,21 @@
         </label>
 
         <span class="input-unit-preview"
-                :class="{ 'disabled': !!selectedFiles }">{{ selectedFiles }}</span>
+                :class="{ 'disabled': !!selectedFiles }"
+                data-testing="form-attachment-file-name">
+            {{ selectedFiles }}
+        </span>
 
-        <span class="input-unit-btn" v-if="!selectedFiles">
+        <span class="input-unit-btn"
+                v-if="!selectedFiles"
+                data-testing="form-attachment-button">
             <i class="fa fa-ellipsis-h"></i>
         </span>
 
-        <span class="input-unit-btn" v-else
-            @click.prevent="clearSelectedFiles()">
+        <span class="input-unit-btn"
+                v-else
+                @click.prevent="clearSelectedFiles()"
+                data-testing="form-attachment-button">
             <i class="fa fa-times"></i>
         </span>
         
@@ -26,8 +33,8 @@
             :name="formFieldId" :id="formFieldId"
             :disabled="allowedFileExtensions.trim().length === 0 || !!selectedFiles"
             :accept="allowedFileExtensions"
-            @change="collectFiles">
-
+            @change="collectFiles"
+            data-testing="form-attachment-input">
     </label>
 </template>
 
