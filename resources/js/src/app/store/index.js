@@ -61,19 +61,6 @@ const store = new Vuex.Store(
 // Fill initial vuex data
 // =========================
 
-App.initialData.shippingCountries.sort((first, second) =>
-{
-    if (first.currLangName < second.currLangName)
-    {
-        return -1;
-    }
-    if (first.currLangName > second.currLangName)
-    {
-        return 1;
-    }
-    return 0;
-});
-
 store.commit("setShippingCountries", App.initialData.shippingCountries);
 store.commit("setShippingCountryId", App.initialData.shippingCountryId);
 store.commit("setShowNetPrices", App.initialData.showNetPrices);
