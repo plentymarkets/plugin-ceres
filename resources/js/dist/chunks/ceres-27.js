@@ -63,7 +63,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "form-attachment",
   data: function data() {
@@ -144,19 +143,14 @@ var render = function() {
       ),
       _vm._v(" "),
       !_vm.selectedFiles
-        ? _c(
-            "span",
-            {
-              staticClass: "input-unit-btn",
-              attrs: { "data-testing": "form-attachment-button" }
-            },
-            [_c("i", { staticClass: "fa fa-ellipsis-h" })]
-          )
+        ? _c("span", { staticClass: "input-unit-btn" }, [
+            _c("i", { staticClass: "fa fa-ellipsis-h" })
+          ])
         : _c(
             "span",
             {
               staticClass: "input-unit-btn",
-              attrs: { "data-testing": "form-attachment-button" },
+              attrs: { "data-testing": "remove-attached-file" },
               on: {
                 click: function($event) {
                   $event.preventDefault()

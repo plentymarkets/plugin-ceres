@@ -15,15 +15,14 @@
         </span>
 
         <span class="input-unit-btn"
-                v-if="!selectedFiles"
-                data-testing="form-attachment-button">
+                v-if="!selectedFiles">
             <i class="fa fa-ellipsis-h"></i>
         </span>
 
         <span class="input-unit-btn"
                 v-else
                 @click.prevent="clearSelectedFiles()"
-                data-testing="form-attachment-button">
+                data-testing="remove-attached-file">
             <i class="fa fa-times"></i>
         </span>
         

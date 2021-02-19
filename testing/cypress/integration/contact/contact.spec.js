@@ -45,7 +45,7 @@ context("Contact Page", () =>
         });
 
         cy.getByTestingAttr("form-attachment-file-name").should("have.class", "disabled").should("contain", "test.png");
-        cy.getByTestingAttr("form-attachment-button").click();
+        cy.getByTestingAttr("remove-attached-file").click();
         cy.getByTestingAttr("form-attachment-file-name").should("not.have.class", "disabled");
         cy.getByTestingAttr("form-attachment-input").should("be.empty");
     });
