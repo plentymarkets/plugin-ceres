@@ -19,5 +19,10 @@
                 {% if paddingClasses | length > 0 %} card-class="{{ paddingClasses }}"{% endif %}
                 {% if inlinePadding | length > 0 %} card-style="{{ inlinePadding }}"{% endif %}>
         </privacy-settings>
+
+        <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn-primary btn-appearance" @click="$store.commit('acceptAll')">{{ Twig.trans("Ceres::Template.cookieBarAcceptAll") }}</button>
+            <button class="btn btn-default ml-3" @click="$store.commit('storeConsents')">{{ Twig.trans("Ceres::Template.cookieBarSave") }}</button>
+        </div>
     </div>
 </div>

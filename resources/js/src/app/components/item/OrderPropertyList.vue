@@ -12,7 +12,12 @@
         </div>
 
         <div class="order-property-slider-controls" :class="paddingClasses" :style="paddingInlineStyles" v-if="sortedGroupedProperties.length > 1">
-            <div class="btn shadow-none" @click="slideTo(activeSlide - 1)" :class="{'btn-primary': activeSlide > 0, 'btn-secondary disabled': activeSlide === 0}" tabindex="0">
+            <div
+                class="btn shadow-none"
+                @click="slideTo(activeSlide - 1)"
+                :class="{'btn-primary': activeSlide > 0, 'btn-secondary disabled': activeSlide === 0}"
+                tabindex="0"
+                data-testing="order-property-previous-slide">
                 <span class="fa fa-chevron-left"></span>
             </div>
 
@@ -28,7 +33,12 @@
                 </span>
             </div>
 
-            <div class="btn float-right shadow-none" @click="slideTo(activeSlide + 1)" :class="{'btn-primary': activeSlide < sortedGroupedProperties.length - 1, 'btn-secondary disabled': activeSlide >= sortedGroupedProperties.length - 1 }" tabindex="0">
+            <div
+                class="btn float-right shadow-none"
+                @click="slideTo(activeSlide + 1)"
+                :class="{'btn-primary': activeSlide < sortedGroupedProperties.length - 1, 'btn-secondary disabled': activeSlide >= sortedGroupedProperties.length - 1 }"
+                tabindex="0"
+                data-testing="order-property-next-slide">
                 <span class="fa fa-chevron-right"></span>
             </div>
         </div>

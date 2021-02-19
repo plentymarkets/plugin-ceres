@@ -38,7 +38,7 @@
 
         {{ Twig.if("orderDocuments | length > 1 or #{ isPreview | json_encode }") }}
         {# dropdown for multiple documents #}
-            <div class="btn-group">
+            <div class="btn-group" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-order-documents")') }}>
                 <button type="button"
                     class="btn btn-appearance dropdown-toggle {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                     {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}

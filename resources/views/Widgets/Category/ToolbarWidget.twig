@@ -34,7 +34,7 @@
             {{ Twig.if("overrideSearchFilters | trim is empty") }}
                 {% if isPreview or hasCollapsableContent %}
                 <div class="d-flex widget-{{ appearance }}">
-                    <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}">
+                    <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}" {{ Twig.print('set_testing_attr("data-testing", "category-toolbar-filter")') }}>
                         {%- if icon != "none" -%}
                             <i class="fa {{ icon }} default-float mr-1" aria-hidden="true" style="line-height: inherit"></i>
                         {%- endif -%}
@@ -55,7 +55,7 @@
                 {{ children.collapsable | raw }}
             </div>
             <div class="text-right mt-3 widget-{{ appearance }}">
-                <button class="btn btn-appearance btn-medium-large" type="button" data-toggle="collapse" href="#filter-collapse_{{ uid }}" aria-controls="filter-collapse_{{ uid }}" aria-expanded="true"><i aria-hidden="true" class="fa fa-times"></i><span>{{ Twig.trans("Ceres::Template.itemClose") }}</span></button>
+                <button class="btn btn-appearance btn-medium-large" type="button" data-toggle="collapse" href="#filter-collapse_{{ uid }}" aria-controls="filter-collapse_{{ uid }}" aria-expanded="true" {{ Twig.print('set_testing_attr("data-testing", "category-toolbar-close")') }}><i aria-hidden="true" class="fa fa-times"></i><span>{{ Twig.trans("Ceres::Template.itemClose") }}</span></button>
             </div>
         </div>
     </div>

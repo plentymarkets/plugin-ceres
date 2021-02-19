@@ -4,13 +4,34 @@
             {{ couponReadonlyInfoText }}
         </p>
         <div :class="{'input-group':true, 'component-loading':isCheckoutReadonly, 'is-loading':isCheckoutReadonly}">
-            <input type="text" class="form-control" v-model="couponCode" :placeholder="$translate('Ceres::Template.couponEnterCoupon')" @keyup.enter="redeemCode()" :disabled="disabled || isCheckoutReadonly">
+            <input
+                type="text"
+                class="form-control"
+                v-model="couponCode"
+                :placeholder="$translate('Ceres::Template.couponEnterCoupon')"
+                @keyup.enter="redeemCode()"
+                :disabled="disabled || isCheckoutReadonly"
+                data-testing="coupon-input"
+            >
             <span class="input-group-btn">
-                <button class="btn btn-medium btn-primary btn-appearance" type="button" @click="redeemCode()" :disabled="waiting || isCheckoutReadonly" v-if="!disabled">
+                <button
+                    class="btn btn-medium btn-primary btn-appearance"
+                    type="button"
+                    @click="redeemCode()"
+                    :disabled="waiting || isCheckoutReadonly" v-if="!disabled"
+                    data-testing="coupon-redeem"
+                >
                     <icon icon="gift" :loading="waiting"></icon>
                     {{ $translate("Ceres::Template.couponRedeem") }}
                 </button>
-                <button class="btn btn-medium btn-danger" type="button" @click="removeCode()" :disabled="waiting || isCheckoutReadonly" v-else>
+                <button
+                    class="btn btn-medium btn-danger"
+                    type="button"
+                    @click="removeCode()"
+                    :disabled="waiting || isCheckoutReadonly"
+                    v-else
+                    data-testing="coupon-remove"
+                >
                     <icon icon="trash" :loading="waiting"></icon>
                     {{ $translate("Ceres::Template.couponRemove") }}
                 </button>

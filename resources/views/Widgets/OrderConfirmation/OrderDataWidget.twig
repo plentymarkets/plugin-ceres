@@ -51,13 +51,13 @@
             </div>
         {{ Twig.endfor() }}
 
-        <div class="row">
+        <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-date")') }}>
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationDate") }}</strong>
             <span class="col-6 col-sm-7">{{ Twig.print("data.order.createdAt | formatDateTime | date(trans('Ceres::Template.devDateTimeFormat'))") }}</span>
         </div>
 
         {{ Twig.if("data.status is defined and data.status is not empty") }}
-            <div class="row">
+            <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-status")') }}>
                 <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationStatus") }}</strong>
                 <span class="col-6 col-sm-7">{{ Twig.print("data.status") }}</span>
             </div>
@@ -79,7 +79,7 @@
             {{ Twig.endif() }}
         {% endif %}
 
-        <div class="row">
+        <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-invoice-address")') }}>
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
             <span class="col-6 col-sm-7">
                 <address-header
@@ -88,7 +88,7 @@
             </span>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-3" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-shipping-address")') }}>
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationShippingAddress") }}</strong>
             <span class="col-6 col-sm-7">
                 {{ Twig.if("data.order.billingAddress.id == data.order.deliveryAddress.id") }}
@@ -108,11 +108,11 @@
         <hr>
 
         {{ Twig.if("data.order.typeId == 1 or data.order.typeId == 8") }}
-            <div class="row">
+            <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-payment-method")') }}>
                 <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationPaymentMethod") }}</strong>
                 <span class="col-6 col-sm-7" id="payment_name_{{ Twig.print("data.order.id") }}">{{ Twig.print("data.paymentMethodName") }}</span>
             </div>
-            <div class="row">
+            <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-payment-status")') }}>
                 <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationPaymentStatus") }}</strong>
                 {{ Twig.set("paymentMethodId", "-1") }}
                 {{ Twig.for("propertyKey", "data.order.properties") }}
@@ -143,7 +143,7 @@
             <hr>
         {{ Twig.endif() }}
 
-        <div class="row">
+        <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-shipping-profile")') }}>
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationShippingProfile") }}</strong>
             <span class="col-6 col-sm-7">{{ Twig.print("data.shippingProvider") }} - {{ Twig.print("data.shippingProfileName") }}</span>
         </div>
@@ -154,7 +154,7 @@
         {{ Twig.endfor() }}
 
         {{ Twig.if("shippingDate") }}
-            <div class="row">
+            <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-shipping-date")') }}>
                 <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationEstimatedShippingDate") }}</strong>
                 <span class="col-6 col-sm-7">{{ Twig.print("shippingDate | date(Twig.trans('Ceres::Template.devDateFormat'))") }}</span>
             </div>
