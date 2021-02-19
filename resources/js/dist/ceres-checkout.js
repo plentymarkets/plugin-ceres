@@ -68587,31 +68587,28 @@ function _eval(input) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.sort */ "./node_modules/core-js/modules/es.array.sort.js");
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _modules_AddressModule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/AddressModule */ "./resources/js/src/app/store/modules/AddressModule.js");
-/* harmony import */ var _modules_BasketModule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/BasketModule */ "./resources/js/src/app/store/modules/BasketModule.js");
-/* harmony import */ var _modules_CheckoutModule__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/CheckoutModule */ "./resources/js/src/app/store/modules/CheckoutModule.js");
-/* harmony import */ var _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/ConsentModule */ "./resources/js/src/app/store/modules/ConsentModule.js");
-/* harmony import */ var _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/ContactFormModule */ "./resources/js/src/app/store/modules/ContactFormModule.js");
-/* harmony import */ var _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/ItemListModule */ "./resources/js/src/app/store/modules/ItemListModule.js");
-/* harmony import */ var _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/ItemSearchModule */ "./resources/js/src/app/store/modules/ItemSearchModule.js");
-/* harmony import */ var _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/LastSeenModule */ "./resources/js/src/app/store/modules/LastSeenModule.js");
-/* harmony import */ var _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/LazyComponentModule */ "./resources/js/src/app/store/modules/LazyComponentModule.js");
-/* harmony import */ var _modules_LiveShoppingModule__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/LiveShoppingModule */ "./resources/js/src/app/store/modules/LiveShoppingModule.js");
-/* harmony import */ var _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/LocalizationModule */ "./resources/js/src/app/store/modules/LocalizationModule.js");
-/* harmony import */ var _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/NavigationModule */ "./resources/js/src/app/store/modules/NavigationModule.js");
-/* harmony import */ var _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/OrderReturnModule */ "./resources/js/src/app/store/modules/OrderReturnModule.js");
-/* harmony import */ var _modules_UserModule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/UserModule */ "./resources/js/src/app/store/modules/UserModule.js");
-/* harmony import */ var _modules_WishListModule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/WishListModule */ "./resources/js/src/app/store/modules/WishListModule.js");
-/* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
-/* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _modules_AddressModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/AddressModule */ "./resources/js/src/app/store/modules/AddressModule.js");
+/* harmony import */ var _modules_BasketModule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/BasketModule */ "./resources/js/src/app/store/modules/BasketModule.js");
+/* harmony import */ var _modules_CheckoutModule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/CheckoutModule */ "./resources/js/src/app/store/modules/CheckoutModule.js");
+/* harmony import */ var _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/ConsentModule */ "./resources/js/src/app/store/modules/ConsentModule.js");
+/* harmony import */ var _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/ContactFormModule */ "./resources/js/src/app/store/modules/ContactFormModule.js");
+/* harmony import */ var _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/ItemListModule */ "./resources/js/src/app/store/modules/ItemListModule.js");
+/* harmony import */ var _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/ItemSearchModule */ "./resources/js/src/app/store/modules/ItemSearchModule.js");
+/* harmony import */ var _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/LastSeenModule */ "./resources/js/src/app/store/modules/LastSeenModule.js");
+/* harmony import */ var _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/LazyComponentModule */ "./resources/js/src/app/store/modules/LazyComponentModule.js");
+/* harmony import */ var _modules_LiveShoppingModule__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/LiveShoppingModule */ "./resources/js/src/app/store/modules/LiveShoppingModule.js");
+/* harmony import */ var _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/LocalizationModule */ "./resources/js/src/app/store/modules/LocalizationModule.js");
+/* harmony import */ var _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/NavigationModule */ "./resources/js/src/app/store/modules/NavigationModule.js");
+/* harmony import */ var _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/OrderReturnModule */ "./resources/js/src/app/store/modules/OrderReturnModule.js");
+/* harmony import */ var _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/UserModule */ "./resources/js/src/app/store/modules/UserModule.js");
+/* harmony import */ var _modules_WishListModule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/WishListModule */ "./resources/js/src/app/store/modules/WishListModule.js");
+/* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
+/* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -68636,54 +68633,43 @@ __webpack_require__.r(__webpack_exports__);
 // init vuex store
 // =========================
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.options.delimiters = ["${", "}"];
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]); // eslint-disable-next-line
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.options.delimiters = ["${", "}"];
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); // eslint-disable-next-line
 
-var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
+var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    address: _modules_AddressModule__WEBPACK_IMPORTED_MODULE_4__["default"],
-    basket: _modules_BasketModule__WEBPACK_IMPORTED_MODULE_5__["default"],
-    checkout: _modules_CheckoutModule__WEBPACK_IMPORTED_MODULE_6__["default"],
-    consents: _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_7__["default"],
-    contactForm: _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_8__["default"],
-    itemList: _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_9__["default"],
-    items: _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_19__["default"],
-    itemSearch: _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_10__["default"],
-    lastSeen: _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_11__["default"],
-    lazyComponent: _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_12__["default"],
-    liveShopping: _modules_LiveShoppingModule__WEBPACK_IMPORTED_MODULE_13__["default"],
-    localization: _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_14__["default"],
-    navigation: _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_15__["default"],
-    orderReturn: _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_16__["default"],
-    user: _modules_UserModule__WEBPACK_IMPORTED_MODULE_17__["default"],
-    wishList: _modules_WishListModule__WEBPACK_IMPORTED_MODULE_18__["default"]
+    address: _modules_AddressModule__WEBPACK_IMPORTED_MODULE_3__["default"],
+    basket: _modules_BasketModule__WEBPACK_IMPORTED_MODULE_4__["default"],
+    checkout: _modules_CheckoutModule__WEBPACK_IMPORTED_MODULE_5__["default"],
+    consents: _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_6__["default"],
+    contactForm: _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_7__["default"],
+    itemList: _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_8__["default"],
+    items: _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__["default"],
+    itemSearch: _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_9__["default"],
+    lastSeen: _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_10__["default"],
+    lazyComponent: _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_11__["default"],
+    liveShopping: _modules_LiveShoppingModule__WEBPACK_IMPORTED_MODULE_12__["default"],
+    localization: _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_13__["default"],
+    navigation: _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_14__["default"],
+    orderReturn: _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_15__["default"],
+    user: _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__["default"],
+    wishList: _modules_WishListModule__WEBPACK_IMPORTED_MODULE_17__["default"]
   },
-  plugins: [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_20__["default"]]
+  plugins: [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__["default"]]
 }); // =========================
 // Fill initial vuex data
 // =========================
 
-App.initialData.shippingCountries.sort(function (first, second) {
-  if (first.currLangName < second.currLangName) {
-    return -1;
-  }
-
-  if (first.currLangName > second.currLangName) {
-    return 1;
-  }
-
-  return 0;
-});
 store.commit("setShippingCountries", App.initialData.shippingCountries);
 store.commit("setShippingCountryId", App.initialData.shippingCountryId);
 store.commit("setShowNetPrices", App.initialData.showNetPrices);
 store.commit("initConsents");
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("LocalizationChanged", function (data) {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("LocalizationChanged", function (data) {
   store.commit("setShippingCountries", data.localization.activeShippingCountries);
   store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
 });
 window.ceresStore = store;
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterBasketChanged", function (data) {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketChanged", function (data) {
   store.commit("setBasket", data.basket);
   store.commit("setShowNetPrices", data.showNetPrices);
   store.commit("setWishListIds", data.basket.itemWishListIds);
@@ -68693,10 +68679,10 @@ store.dispatch("loadBasketData");
  * Loads user data after pageload
  */
 
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].get("/rest/io/customer", {}, {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].get("/rest/io/customer", {}, {
   keepOriginalResponse: true
 }).done(function (response) {
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(response.data)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(response.data)) {
     store.commit("setUserData", response.data);
   }
 });
@@ -68704,10 +68690,10 @@ _services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].get("/rest/io/custo
  * Adds login/logout event listeners
  */
 
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterAccountAuthentication", function (userData) {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterAccountAuthentication", function (userData) {
   store.commit("setUserData", userData.accountContact);
 });
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterAccountContactLogout", function () {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterAccountContactLogout", function () {
   store.commit("setUserData", null);
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
