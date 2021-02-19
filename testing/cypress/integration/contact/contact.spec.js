@@ -53,8 +53,8 @@ context("Contact Page", () =>
     it("check for error notification after sending form with file attachment that exceeds the upload size limit", () =>
     {
         cy.get(".widget-mail-input").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
-        cy.get(".contact-form-subject").type("g", { delay: 40 });
-        cy.get(".contact-form-message").type("g", { delay: 40 });
+        cy.get(".contact-form-subject").type("g");
+        cy.get(".contact-form-message").type("g");
 
         cy.fixture("xl.jpg").then(fileContent =>
         {
@@ -81,8 +81,8 @@ context("Contact Page", () =>
     it("check for error notification after sending form with file attachment with forbidden MIME type", () =>
     {
         cy.get(".widget-mail-input").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
-        cy.get(".contact-form-subject").type("g", { delay: 40 });
-        cy.get(".contact-form-message").type("g", { delay: 40 });
+        cy.get(".contact-form-subject").type("g");
+        cy.get(".contact-form-message").type("g");
         cy.get(".widget-accept-privacy-policy").click();
 
         cy.fixture("test.php").then(fileContent =>
@@ -108,8 +108,8 @@ context("Contact Page", () =>
     it("check for notification after successful sending of form", () =>
     {
         cy.get(".widget-mail-input").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
-        cy.get(".contact-form-subject").type("g", { delay: 40 });
-        cy.get(".contact-form-message").type("g", { delay: 40 });
+        cy.get(".contact-form-subject").type("g");
+        cy.get(".contact-form-message").type("g");
         cy.get(".widget-accept-privacy-policy").click();
 
         cy.intercept("POST", "/rest/io/customer/contact/mail/").as("sendForm");
@@ -126,8 +126,8 @@ context("Contact Page", () =>
     it("check for notification after successful sending of form with file attached", () =>
     {
         cy.get(".widget-mail-input").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
-        cy.get(".contact-form-subject").type("g", { delay: 40 });
-        cy.get(".contact-form-message").type("g", { delay: 40 });
+        cy.get(".contact-form-subject").type("g");
+        cy.get(".contact-form-message").type("g");
         cy.get(".widget-accept-privacy-policy").click();
 
         cy.fixture("test.png").then(fileContent =>
