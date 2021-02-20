@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class StickyContainerWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Grid.StickyContainerWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::StickyContainerWidget")
@@ -23,7 +27,10 @@ class StickyContainerWidget extends BaseWidget
             ->withPosition(400)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

@@ -11,8 +11,12 @@ use IO\Services\Order\Factories\OrderResultFactory;
 
 class OrderReturnWidget extends OrderConfirmationBaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.OrderConfirmation.OrderReturnWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::OrderReturnWidget")
@@ -23,7 +27,10 @@ class OrderReturnWidget extends OrderConfirmationBaseWidget
             ->withPosition(500)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

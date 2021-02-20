@@ -7,9 +7,15 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AvailabilityFilterWidget extends FilterBaseWidget
 {
+    /** @inheritDoc */
     protected $allowedFacetTypes = ["availability"];
+    
+    /** @inheritDoc */
     protected $className = "availability";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::AvailabilityFilterWidget')
@@ -21,6 +27,9 @@ class AvailabilityFilterWidget extends FilterBaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         return parent::getSettings();

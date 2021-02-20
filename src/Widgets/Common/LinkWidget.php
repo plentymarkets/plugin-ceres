@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class LinkWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.LinkWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::LinkWidget")
@@ -23,7 +27,10 @@ class LinkWidget extends BaseWidget
             ->withPosition(900)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

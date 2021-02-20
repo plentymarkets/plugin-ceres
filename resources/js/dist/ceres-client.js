@@ -1454,6 +1454,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
@@ -1718,6 +1739,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2633,7 +2659,9 @@ __webpack_require__.r(__webpack_exports__);
     imageUrl: String,
     fallbackUrl: String,
     isBackgroundImage: Boolean,
-    pictureClass: String
+    pictureClass: String,
+    alt: String,
+    title: String
   },
   data: function data() {
     return {
@@ -6667,6 +6695,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     reInitialize: function reInitialize() {
       var $owl = $(this.$refs.single);
+      var scrollPos = document.documentElement.scrollTop;
       $owl.trigger("destroy.owl.carousel");
       $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
       $owl.find(".owl-item").remove();
@@ -6675,7 +6704,9 @@ __webpack_require__.r(__webpack_exports__);
       $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
       $thumbs.find(".owl-item").remove();
       this.initCarousel();
-      this.initThumbCarousel();
+      this.initThumbCarousel(); // Avoid reset of scrollTop
+
+      document.documentElement.scrollTop = scrollPos;
     },
     initCarousel: function initCarousel() {
       var _this2 = this;
@@ -6991,6 +7022,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -7205,27 +7246,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.values */ "./node_modules/core-js/modules/es.object.values.js");
-/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.number.to-fixed */ "./node_modules/core-js/modules/es.number.to-fixed.js");
+/* harmony import */ var core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.values */ "./node_modules/core-js/modules/es.object.values.js");
+/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+
+
 
 
 
@@ -7249,6 +7296,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7370,7 +7426,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           _this.selectionValue = _this.property.value || null;
         } else if (_this.property.valueType === "file") {
           if (_this.property.value && _this.property.value.length) {
-            NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.singleItemOrderPropertyFileHasReset", {
+            NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_20__["default"].translate("Ceres::Template.singleItemOrderPropertyFileHasReset", {
               propertyName: _this.property.names.name
             })).closeAfter(5000);
           }
@@ -7419,7 +7475,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.property.itemSurcharge || this.property.surcharge;
     },
     selectedDescription: function selectedDescription() {
-      if (this.inputType !== "selection" || Object(_helper_utils__WEBPACK_IMPORTED_MODULE_16__["isNullOrUndefined"])(this.selectionValue)) {
+      if (this.inputType !== "selection" || Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(this.selectionValue)) {
         return null;
       }
 
@@ -7433,7 +7489,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       var currentVariation = this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
       return currentVariation && currentVariation.variationMarkInvalidProperties;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_17__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_19__["mapState"])({
     isBasketLoading: function isBasketLoading(state) {
       return state.basket.isBasketLoading;
     }
@@ -7449,7 +7505,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           value = null;
         }
       } else if (this.inputType === "selection") {
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_16__["isNullOrUndefined"])(value) || value.length <= 0) {
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(value) || value.length <= 0) {
           value = null;
         }
       } else if (this.inputType === "text") {
@@ -7476,7 +7532,15 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     },
     validateFloat: function validateFloat(value) {
       var lastChar = value.slice(-1);
-      value = parseFloat(value.replace(App.decimalSeparator, "."));
+      var str = value.replace(App.decimalSeparator, ".");
+      var arr = str.split(".");
+      var toFixedLength = 0;
+
+      if (arr.length === 2) {
+        toFixedLength = arr[1].length;
+      }
+
+      value = parseFloat(str).toFixed(toFixedLength);
 
       if (isNaN(value)) {
         value = null;
@@ -7551,7 +7615,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         }));
       }
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_17__["mapMutations"])(["setIsBasketLoading"]))
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_19__["mapMutations"])(["setIsBasketLoading"]))
 });
 
 /***/ }),
@@ -7709,6 +7773,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -8138,6 +8204,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _basket_AddToBasket_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../basket/AddToBasket.vue */ "./resources/js/src/app/components/basket/AddToBasket.vue");
+//
 //
 //
 //
@@ -9024,6 +9091,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
 
 
 
@@ -9657,10 +9727,10 @@ __webpack_require__.r(__webpack_exports__);
     itemUrl: {
       type: String
     },
-    altText: {
+    alt: {
       type: String
     },
-    titleText: {
+    title: {
       type: String
     },
     showDots: {
@@ -9744,12 +9814,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getAltText: function getAltText(image) {
-      var altText = image && image.alternate ? image.alternate : this.altText;
-      return altText;
+      var alt = image && image.alternate ? image.alternate : this.alt;
+      return alt;
     },
-    getImageName: function getImageName(image) {
-      var altText = image && image.name ? image.name : this.titleText;
-      return altText;
+    getTitleText: function getTitleText(image) {
+      var title = image && image.name ? image.name : this.title;
+      return title;
     }
   }
 });
@@ -9799,6 +9869,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -12431,6 +12502,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -13367,6 +13464,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -13440,6 +13550,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -45541,7 +45652,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": _vm.showNetPrices },
+                      attrs: { "data-testing": "item-sum-net" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -45581,7 +45695,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": !_vm.showNetPrices },
+                      attrs: { "data-testing": "item-sum" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -45728,7 +45845,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": _vm.showNetPrices },
+                      attrs: { "data-testing": "shipping-amount-net" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -45765,7 +45885,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": !_vm.showNetPrices },
+                      attrs: { "data-testing": "shipping-amount" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -45792,13 +45915,22 @@ var render = function() {
                         "\n                "
                     )
                   ]),
-                  _c("dd", { staticClass: "font-weight-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm._f("currency")(_vm.basket.couponDiscount)) +
-                        "\n                "
-                    )
-                  ])
+                  _c(
+                    "dd",
+                    {
+                      staticClass: "font-weight-bold",
+                      attrs: { "data-testing": "promotion-coupon" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm._f("currency")(_vm.basket.couponDiscount)
+                          ) +
+                          "\n                "
+                      )
+                    ]
+                  )
                 ]
               : _vm._e(),
             _vm._v(" "),
@@ -45825,7 +45957,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": _vm.showNetPrices },
+                      attrs: { "data-testing": "basket-amount-net" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -45853,7 +45988,7 @@ var render = function() {
                           "%\n                "
                       )
                     ]),
-                    _c("dd", [
+                    _c("dd", { attrs: { "data-testing": "vat-amount" } }, [
                       _vm._v(
                         "\n                    " +
                           _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
@@ -45933,7 +46068,10 @@ var render = function() {
                       ),
                       _c(
                         "dd",
-                        { class: { "font-weight-bold": !_vm.showNetPrices } },
+                        {
+                          class: { "font-weight-bold": !_vm.showNetPrices },
+                          attrs: { "data-testing": "basket-amount" }
+                        },
                         [
                           _vm._v(
                             "\n                        " +
@@ -45960,15 +46098,22 @@ var render = function() {
                             "\n                    "
                         )
                       ]),
-                      _c("dd", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm._f("currency")(_vm.basket.couponDiscount)
-                            ) +
-                            "\n                    "
-                        )
-                      ])
+                      _c(
+                        "dd",
+                        {
+                          staticClass: "font-weight-bold",
+                          attrs: { "data-testing": "sales-coupon" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.couponDiscount)
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      )
                     ]
                   : _vm._e(),
                 _vm._v(" "),
@@ -45984,13 +46129,22 @@ var render = function() {
                             "\n                    "
                         )
                       ]),
-                      _c("dd", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm._f("currency")(_vm.basket.openAmount)) +
-                            "\n                    "
-                        )
-                      ])
+                      _c(
+                        "dd",
+                        {
+                          staticClass: "font-weight-bold",
+                          attrs: { "data-testing": "open-amount" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.openAmount)
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      )
                     ]
                   : _vm._e()
               ],
@@ -46066,7 +46220,8 @@ var render = function() {
           attrs: {
             type: "text",
             placeholder: _vm.$translate("Ceres::Template.couponEnterCoupon"),
-            disabled: _vm.disabled || _vm.isCheckoutReadonly
+            disabled: _vm.disabled || _vm.isCheckoutReadonly,
+            "data-testing": "coupon-input"
           },
           domProps: { value: _vm.couponCode },
           on: {
@@ -46096,7 +46251,8 @@ var render = function() {
                   staticClass: "btn btn-medium btn-primary btn-appearance",
                   attrs: {
                     type: "button",
-                    disabled: _vm.waiting || _vm.isCheckoutReadonly
+                    disabled: _vm.waiting || _vm.isCheckoutReadonly,
+                    "data-testing": "coupon-redeem"
                   },
                   on: {
                     click: function($event) {
@@ -46120,7 +46276,8 @@ var render = function() {
                   staticClass: "btn btn-medium btn-danger",
                   attrs: {
                     type: "button",
-                    disabled: _vm.waiting || _vm.isCheckoutReadonly
+                    disabled: _vm.waiting || _vm.isCheckoutReadonly,
+                    "data-testing": "coupon-remove"
                   },
                   on: {
                     click: function($event) {
@@ -46281,7 +46438,8 @@ var render = function() {
                       "picture-class": "d-block mw-100 mh-100",
                       "image-url": _vm.image,
                       alt: _vm.altText,
-                      title: _vm.itemName
+                      title: _vm.itemName,
+                      "data-testing": "basket-item-img"
                     }
                   })
                 : _vm._e()
@@ -46307,7 +46465,8 @@ var render = function() {
                           attrs: {
                             href: _vm._f("itemURL")(
                               _vm.basketItem.variation.data
-                            )
+                            ),
+                            "data-testing": "basket-item-name"
                           }
                         },
                         [
@@ -46542,6 +46701,7 @@ var render = function() {
                             _vm.isCheckoutReadonly ||
                             _vm.waitingForDelete
                         },
+                        attrs: { "data-testing": "basket-item-delete" },
                         on: { click: _vm.deleteItem }
                       },
                       [
@@ -47242,7 +47402,8 @@ var render = function() {
           attrs: {
             "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
             "data-picture-class": _vm.pictureClass,
-            "data-alt": _vm.$attrs.alt
+            "data-alt": _vm.alt,
+            "data-title": _vm.title
           }
         },
         [
@@ -47438,7 +47599,11 @@ var render = function() {
     [
       _c("input", {
         staticClass: "form-check-input",
-        attrs: { type: "checkbox", id: "privacy-policy-accept" + _vm._uid },
+        attrs: {
+          type: "checkbox",
+          id: "privacy-policy-accept" + _vm._uid,
+          "data-testing": "privacy-policy-accept-register"
+        },
         domProps: { checked: _vm.value },
         on: {
           change: function($event) {
@@ -47576,7 +47741,8 @@ var render = function() {
                             attrs: {
                               type: "text",
                               name: "company",
-                              id: "txtCompany" + _vm._uid
+                              id: "txtCompany" + _vm._uid,
+                              "data-testing": "packing-station-de-company"
                             },
                             domProps: { value: _vm.value.name1 },
                             on: {
@@ -47702,7 +47868,8 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   name: "firstName",
-                                  id: "txtFirstName" + _vm._uid
+                                  id: "txtFirstName" + _vm._uid,
+                                  "data-testing": "packing-station-de-firstname"
                                 },
                                 domProps: { value: _vm.value.name2 },
                                 on: {
@@ -47764,7 +47931,8 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   name: "lastName",
-                                  id: "txtLastName" + _vm._uid
+                                  id: "txtLastName" + _vm._uid,
+                                  "data-testing": "packing-station-de-lastname"
                                 },
                                 domProps: { value: _vm.value.name3 },
                                 on: {
@@ -48183,7 +48351,8 @@ var render = function() {
                         attrs: {
                           type: "text",
                           name: "postnumber",
-                          id: "postnumber" + _vm._uid
+                          id: "postnumber" + _vm._uid,
+                          "data-testing": "packing-station-de-postnumber"
                         },
                         domProps: { value: _vm.value.postNumber },
                         on: {
@@ -48282,7 +48451,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "zip",
-                      id: "txtZip" + _vm._uid
+                      id: "txtZip" + _vm._uid,
+                      "data-testing": "packing-station-de-postalcode"
                     },
                     domProps: { value: _vm.value.postalCode },
                     on: {
@@ -48316,7 +48486,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "town",
-                      id: "txtPlace" + _vm._uid
+                      id: "txtPlace" + _vm._uid,
+                      "data-testing": "packing-station-de-town"
                     },
                     domProps: { value: _vm.value.town },
                     on: {
@@ -48427,7 +48598,8 @@ var render = function() {
                               type: "text",
                               name: "company",
                               id: "txtCompany" + _vm._uid,
-                              "data-autofocus": ""
+                              "data-autofocus": "",
+                              "data-testing": "billing-address-de-company"
                             },
                             domProps: { value: _vm.value.name1 },
                             on: {
@@ -48527,76 +48699,19 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c(
-                "div",
-                { staticClass: "row" },
-                [
-                  _vm.isInOptionalFields("de", "billing_address.title")
-                    ? _c("div", { staticClass: "col-12 col-sm-4" }, [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "billing_address.title"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'billing_address.title')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "title" }
-                          },
-                          [
-                            _c("input", {
-                              attrs: {
-                                type: "text",
-                                name: "title",
-                                id: "txtTitle" + _vm._uid,
-                                "data-autofocus": ""
-                              },
-                              domProps: { value: _vm.value.title },
-                              on: {
-                                input: function($event) {
-                                  return _vm.emitInputEvent(
-                                    "title",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              { attrs: { for: "txtTitle" + _vm._uid } },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressTitle",
-                                        "de",
-                                        "billing_address.title"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.areNameFieldsShown("de", "billing_address")
-                    ? [
-                        _c("div", { staticClass: "col-12 col-sm-4" }, [
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "billing-address-de-name-inputs" }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  [
+                    _vm.isInOptionalFields("de", "billing_address.title")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
                           _c(
                             "div",
                             {
@@ -48604,31 +48719,32 @@ var render = function() {
                                 {
                                   name: "validate",
                                   rawName: "v-validate:text",
-                                  value: _vm.areNameFieldsRequired(
+                                  value: _vm.isInRequiredFields(
                                     "de",
-                                    "billing_address"
+                                    "billing_address.title"
                                   ),
                                   expression:
-                                    "areNameFieldsRequired('de', 'billing_address')",
+                                    "isInRequiredFields('de', 'billing_address.title')",
                                   arg: "text"
                                 }
                               ],
                               staticClass: "input-unit",
-                              attrs: { "data-model": "name2" }
+                              attrs: { "data-model": "title" }
                             },
                             [
                               _c("input", {
                                 attrs: {
                                   type: "text",
-                                  name: "firstName",
-                                  id: "txtFirstName" + _vm._uid,
-                                  "data-autofocus": ""
+                                  name: "title",
+                                  id: "txtTitle" + _vm._uid,
+                                  "data-autofocus": "",
+                                  "data-testing": "billing-address-de-title"
                                 },
-                                domProps: { value: _vm.value.name2 },
+                                domProps: { value: _vm.value.title },
                                 on: {
                                   input: function($event) {
                                     return _vm.emitInputEvent(
-                                      "name2",
+                                      "title",
                                       $event.target.value
                                     )
                                   }
@@ -48637,29 +48753,158 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "label",
-                                { attrs: { for: "txtFirstName" + _vm._uid } },
+                                { attrs: { for: "txtTitle" + _vm._uid } },
                                 [
                                   _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.addressFirstName"
-                                      )
-                                    )
-                                  ),
-                                  _vm.areNameFieldsRequired(
-                                    "de",
-                                    "billing_address"
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressTitle",
+                                          "de",
+                                          "billing_address.title"
+                                        )
+                                      ) +
+                                      "\n                        "
                                   )
-                                    ? [_vm._v("*")]
-                                    : _vm._e()
-                                ],
-                                2
+                                ]
                               )
                             ]
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12 col-sm-4" }, [
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.areNameFieldsShown("de", "billing_address")
+                      ? [
+                          _c("div", { staticClass: "col-12 col-sm-4" }, [
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate:text",
+                                    value: _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
+                                    ),
+                                    expression:
+                                      "areNameFieldsRequired('de', 'billing_address')",
+                                    arg: "text"
+                                  }
+                                ],
+                                staticClass: "input-unit",
+                                attrs: { "data-model": "name2" }
+                              },
+                              [
+                                _c("input", {
+                                  attrs: {
+                                    type: "text",
+                                    name: "firstName",
+                                    id: "txtFirstName" + _vm._uid,
+                                    "data-autofocus": "",
+                                    "data-testing":
+                                      "billing-address-de-firstname"
+                                  },
+                                  domProps: { value: _vm.value.name2 },
+                                  on: {
+                                    input: function($event) {
+                                      return _vm.emitInputEvent(
+                                        "name2",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  { attrs: { for: "txtFirstName" + _vm._uid } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.addressFirstName"
+                                        )
+                                      )
+                                    ),
+                                    _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
+                                    )
+                                      ? [_vm._v("*")]
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 col-sm-4" }, [
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate:text",
+                                    value: _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
+                                    ),
+                                    expression:
+                                      "areNameFieldsRequired('de', 'billing_address')",
+                                    arg: "text"
+                                  }
+                                ],
+                                staticClass: "input-unit",
+                                attrs: { "data-model": "name3" }
+                              },
+                              [
+                                _c("input", {
+                                  attrs: {
+                                    type: "text",
+                                    name: "lastName",
+                                    id: "txtLastName" + _vm._uid,
+                                    "data-testing":
+                                      "billing-address-de-lastname"
+                                  },
+                                  domProps: { value: _vm.value.name3 },
+                                  on: {
+                                    input: function($event) {
+                                      return _vm.emitInputEvent(
+                                        "name3",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  { attrs: { for: "txtLastName" + _vm._uid } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.addressLastName"
+                                        )
+                                      )
+                                    ),
+                                    _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
+                                    )
+                                      ? [_vm._v("*")]
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ])
+                        ]
+                      : _c("div", { staticClass: "col-12 col-sm-8" }, [
                           _c(
                             "div",
                             {
@@ -48667,30 +48912,30 @@ var render = function() {
                                 {
                                   name: "validate",
                                   rawName: "v-validate:text",
-                                  value: _vm.areNameFieldsRequired(
+                                  value: _vm.isInRequiredFields(
                                     "de",
-                                    "billing_address"
+                                    "billing_address.contactPerson"
                                   ),
                                   expression:
-                                    "areNameFieldsRequired('de', 'billing_address')",
+                                    "isInRequiredFields('de', 'billing_address.contactPerson')",
                                   arg: "text"
                                 }
                               ],
                               staticClass: "input-unit",
-                              attrs: { "data-model": "name3" }
+                              attrs: { "data-model": "contactPerson" }
                             },
                             [
                               _c("input", {
                                 attrs: {
                                   type: "text",
                                   name: "lastName",
-                                  id: "txtLastName" + _vm._uid
+                                  id: "txtContactPerson" + _vm._uid
                                 },
-                                domProps: { value: _vm.value.name3 },
+                                domProps: { value: _vm.value.contactPerson },
                                 on: {
                                   input: function($event) {
                                     return _vm.emitInputEvent(
-                                      "name3",
+                                      "contactPerson",
                                       $event.target.value
                                     )
                                   }
@@ -48699,367 +48944,325 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "label",
-                                { attrs: { for: "txtLastName" + _vm._uid } },
+                                {
+                                  attrs: { for: "txtContactPerson" + _vm._uid }
+                                },
                                 [
                                   _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.addressLastName"
-                                      )
-                                    )
-                                  ),
-                                  _vm.areNameFieldsRequired(
-                                    "de",
-                                    "billing_address"
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressContactPerson",
+                                          "de",
+                                          "billing_address.contactPerson"
+                                        )
+                                      ) +
+                                      "\n                        "
                                   )
-                                    ? [_vm._v("*")]
-                                    : _vm._e()
-                                ],
-                                2
+                                ]
+                              )
+                            ]
+                          )
+                        ]),
+                    _vm._v(" "),
+                    _vm.isInOptionalFields("de", "billing_address.name4")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.isInRequiredFields(
+                                    "de",
+                                    "billing_address.name4"
+                                  ),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.name4')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "name4" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "decorateName",
+                                  id: "txtAdditionalName" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.name4 },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "name4",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  attrs: { for: "txtAdditionalName" + _vm._uid }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressAdditionalName",
+                                          "de",
+                                          "billing_address.name4"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
                               )
                             ]
                           )
                         ])
-                      ]
-                    : _c("div", { staticClass: "col-12 col-sm-8" }, [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "billing_address.contactPerson"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'billing_address.contactPerson')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "contactPerson" }
-                          },
-                          [
-                            _c("input", {
-                              attrs: {
-                                type: "text",
-                                name: "lastName",
-                                id: "txtContactPerson" + _vm._uid
-                              },
-                              domProps: { value: _vm.value.contactPerson },
-                              on: {
-                                input: function($event) {
-                                  return _vm.emitInputEvent(
-                                    "contactPerson",
-                                    $event.target.value
-                                  )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isInOptionalFields("de", "billing_address.birthday")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:date",
+                                  value:
+                                    _vm.isInRequiredFields(
+                                      "de",
+                                      "billing_address.birthday"
+                                    ) ||
+                                    (!!_vm.value.birthday &&
+                                      !!_vm.value.birthday.length),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.birthday') || !!value.birthday && !!value.birthday.length",
+                                  arg: "date"
                                 }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              { attrs: { for: "txtContactPerson" + _vm._uid } },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressContactPerson",
-                                        "de",
-                                        "billing_address.contactPerson"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ]),
-                  _vm._v(" "),
-                  _vm.isInOptionalFields("de", "billing_address.name4")
-                    ? _c("div", { staticClass: "col-12 col-sm-4" }, [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "billing_address.name4"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'billing_address.name4')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "name4" }
-                          },
-                          [
-                            _c("input", {
-                              attrs: {
-                                type: "text",
-                                name: "decorateName",
-                                id: "txtAdditionalName" + _vm._uid
-                              },
-                              domProps: { value: _vm.value.name4 },
-                              on: {
-                                input: function($event) {
-                                  return _vm.emitInputEvent(
-                                    "name4",
-                                    $event.target.value
-                                  )
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "birthday" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "date",
+                                  min: "1901-12-14",
+                                  max: new Date().toISOString().split("T")[0],
+                                  name: "birthday",
+                                  placeholder: _vm.$translate(
+                                    "Ceres::Template.addressBirthdatePlaceholder"
+                                  ),
+                                  id: "txtBirthdate" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.birthday },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "birthday",
+                                      $event.target.value
+                                    )
+                                  }
                                 }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                attrs: { for: "txtAdditionalName" + _vm._uid }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressAdditionalName",
-                                        "de",
-                                        "billing_address.name4"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isInOptionalFields("de", "billing_address.birthday")
-                    ? _c("div", { staticClass: "col-12 col-sm-4" }, [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:date",
-                                value:
-                                  _vm.isInRequiredFields(
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "txtBirthdate" + _vm._uid } },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressBirthdate",
+                                          "de",
+                                          "billing_address.birthday"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isInOptionalFields("de", "billing_address.phoneNumber")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.isInRequiredFields(
                                     "de",
-                                    "billing_address.birthday"
-                                  ) ||
-                                  (!!_vm.value.birthday &&
-                                    !!_vm.value.birthday.length),
-                                expression:
-                                  "isInRequiredFields('de', 'billing_address.birthday') || !!value.birthday && !!value.birthday.length",
-                                arg: "date"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "birthday" }
-                          },
-                          [
-                            _c("input", {
-                              attrs: {
-                                type: "date",
-                                min: "1901-12-14",
-                                max: new Date().toISOString().split("T")[0],
-                                name: "birthday",
-                                placeholder: _vm.$translate(
-                                  "Ceres::Template.addressBirthdatePlaceholder"
-                                ),
-                                id: "txtBirthdate" + _vm._uid
-                              },
-                              domProps: { value: _vm.value.birthday },
-                              on: {
-                                input: function($event) {
-                                  return _vm.emitInputEvent(
-                                    "birthday",
-                                    $event.target.value
-                                  )
+                                    "billing_address.phoneNumber"
+                                  ),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.phoneNumber')",
+                                  arg: "text"
                                 }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              { attrs: { for: "txtBirthdate" + _vm._uid } },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressBirthdate",
-                                        "de",
-                                        "billing_address.birthday"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isInOptionalFields("de", "billing_address.phoneNumber")
-                    ? _c("div", { staticClass: "col-12 col-sm-4" }, [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "billing_address.phoneNumber"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'billing_address.phoneNumber')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "telephone" }
-                          },
-                          [
-                            _c("input", {
-                              attrs: {
-                                type: "text",
-                                name: "telephone",
-                                id: "txtTelephone" + _vm._uid
-                              },
-                              domProps: { value: _vm.value.telephone },
-                              on: {
-                                input: function($event) {
-                                  return _vm.emitInputEvent(
-                                    "telephone",
-                                    $event.target.value
-                                  )
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "telephone" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "telephone",
+                                  id: "txtTelephone" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.telephone },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "telephone",
+                                      $event.target.value
+                                    )
+                                  }
                                 }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              { attrs: { for: "txtTelephone" + _vm._uid } },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressTelephone",
-                                        "de",
-                                        "billing_address.phoneNumber"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                2
-              )
-            ]),
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "txtTelephone" + _vm._uid } },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressTelephone",
+                                          "de",
+                                          "billing_address.phoneNumber"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12 col-sm-8" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
-                      attrs: {
-                        "data-validate": "text",
-                        "data-model": "address1"
-                      }
-                    },
-                    [
-                      _c("input", {
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "billing-address-de-street-inputs" }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-sm-8" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
                         attrs: {
-                          type: "text",
-                          name: "street",
-                          autocomplete: "address-line1",
-                          id: "txtStreet" + _vm._uid
-                        },
-                        domProps: { value: _vm.value.address1 },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent(
-                              "address1",
-                              $event.target.value
-                            )
-                          }
+                          "data-validate": "text",
+                          "data-model": "address1"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "txtStreet" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.addressStreet")
-                          ) + "*"
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "street",
+                            autocomplete: "address-line1",
+                            id: "txtStreet" + _vm._uid,
+                            "data-testing": "billing-address-de-street"
+                          },
+                          domProps: { value: _vm.value.address1 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address1",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtStreet" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.addressStreet")
+                              ) + "*"
+                            )
+                          ]
                         )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-sm-4" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
-                      attrs: {
-                        "data-validate": "text",
-                        "data-model": "address2"
-                      }
-                    },
-                    [
-                      _c("input", {
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 col-sm-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
                         attrs: {
-                          type: "text",
-                          name: "housenumber",
-                          autocomplete: "address-line2",
-                          id: "txtNumber" + _vm._uid
-                        },
-                        domProps: { value: _vm.value.address2 },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent(
-                              "address2",
-                              $event.target.value
-                            )
-                          }
+                          "data-validate": "text",
+                          "data-model": "address2"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "txtNumber" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.addressNumber")
-                          ) + "*"
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "housenumber",
+                            autocomplete: "address-line2",
+                            id: "txtNumber" + _vm._uid,
+                            "data-testing": "billing-address-de-house-number"
+                          },
+                          domProps: { value: _vm.value.address2 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address2",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtNumber" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.addressNumber")
+                              ) + "*"
+                            )
+                          ]
                         )
-                      ])
-                    ]
-                  )
+                      ]
+                    )
+                  ])
                 ])
-              ])
-            ]),
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
@@ -49199,7 +49402,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "zip",
-                      id: "txtZip" + _vm._uid
+                      id: "txtZip" + _vm._uid,
+                      "data-testing": "billing-address-de-zip"
                     },
                     domProps: { value: _vm.value.postalCode },
                     on: {
@@ -49233,7 +49437,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "town",
-                      id: "txtPlace" + _vm._uid
+                      id: "txtPlace" + _vm._uid,
+                      "data-testing": "billing-address-de-town"
                     },
                     domProps: { value: _vm.value.town },
                     on: {
@@ -49895,113 +50100,124 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12 col-sm-12" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
-                      attrs: {
-                        "data-validate": "text",
-                        "data-model": "address1"
-                      }
-                    },
-                    [
-                      _c("input", {
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "invoice-addresses-street-select-gb" }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-sm-12" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
                         attrs: {
-                          type: "text",
-                          name: "street",
-                          autocomplete: "address-line1",
-                          id: "txtStreet" + _vm._uid
-                        },
-                        domProps: { value: _vm.value.address1 },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent(
-                              "address1",
-                              $event.target.value
-                            )
-                          }
+                          "data-validate": "text",
+                          "data-model": "address1"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "txtStreet" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressENAddressLine1"
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "street",
+                            autocomplete: "address-line1",
+                            id: "txtStreet" + _vm._uid
+                          },
+                          domProps: { value: _vm.value.address1 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address1",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtStreet" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.addressENAddressLine1"
+                                )
+                              ) + "*"
                             )
-                          ) + "*"
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.isInOptionalFields("gb", "billing_address.address2")
+                    ? _c("div", { staticClass: "col-12 col-sm-12" }, [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "billing_address.address2"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'billing_address.address2')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "address2" }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "text",
+                                name: "housenumber",
+                                autocomplete: "address-line2",
+                                id: "txtNumber" + _vm._uid
+                              },
+                              domProps: { value: _vm.value.address2 },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "address2",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              { attrs: { for: "txtNumber" + _vm._uid } },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressENAddressLine2",
+                                        "gb",
+                                        "billing_address.address2"
+                                      )
+                                    ) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          ]
                         )
                       ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.isInOptionalFields("gb", "billing_address.address2")
-                  ? _c("div", { staticClass: "col-12 col-sm-12" }, [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
-                                "gb",
-                                "billing_address.address2"
-                              ),
-                              expression:
-                                "isInRequiredFields('gb', 'billing_address.address2')",
-                              arg: "text"
-                            }
-                          ],
-                          staticClass: "input-unit",
-                          attrs: { "data-model": "address2" }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "text",
-                              name: "housenumber",
-                              autocomplete: "address-line2",
-                              id: "txtNumber" + _vm._uid
-                            },
-                            domProps: { value: _vm.value.address2 },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "address2",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "txtNumber" + _vm._uid } },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressENAddressLine2",
-                                      "gb",
-                                      "billing_address.address2"
-                                    )
-                                  ) +
-                                  "\n                        "
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ]),
+                    : _vm._e()
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
@@ -50480,7 +50696,9 @@ var render = function() {
                                   type: "text",
                                   name: "firstName",
                                   id: "txtFirstName" + _vm._uid,
-                                  "data-autofocus": ""
+                                  "data-autofocus": "",
+                                  "data-testing":
+                                    "delivery-address-de-firstname"
                                 },
                                 domProps: { value: _vm.value.name2 },
                                 on: {
@@ -50542,7 +50760,8 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   name: "lastName",
-                                  id: "txtLastName" + _vm._uid
+                                  id: "txtLastName" + _vm._uid,
+                                  "data-testing": "delivery-address-de-lastname"
                                 },
                                 domProps: { value: _vm.value.name3 },
                                 on: {
@@ -50818,7 +51037,8 @@ var render = function() {
                           type: "text",
                           name: "street",
                           autocomplete: "address-line1",
-                          id: "txtStreet" + _vm._uid
+                          id: "txtStreet" + _vm._uid,
+                          "data-testing": "delivery-address-de-street"
                         },
                         domProps: { value: _vm.value.address1 },
                         on: {
@@ -50858,7 +51078,8 @@ var render = function() {
                           type: "text",
                           name: "housenumber",
                           autocomplete: "address-line2",
-                          id: "txtNumber" + _vm._uid
+                          id: "txtNumber" + _vm._uid,
+                          "data-testing": "delivery-address-de-housenumber"
                         },
                         domProps: { value: _vm.value.address2 },
                         on: {
@@ -51022,7 +51243,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "zip",
-                      id: "txtZip" + _vm._uid
+                      id: "txtZip" + _vm._uid,
+                      "data-testing": "delivery-address-de-zip"
                     },
                     domProps: { value: _vm.value.postalCode },
                     on: {
@@ -51056,7 +51278,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "town",
-                      id: "txtPlace" + _vm._uid
+                      id: "txtPlace" + _vm._uid,
+                      "data-testing": "delivery-address-de-town"
                     },
                     domProps: { value: _vm.value.town },
                     on: {
@@ -51953,7 +52176,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "col-12 col-sm-4" },
+        {
+          staticClass: "col-12 col-sm-4",
+          attrs: { "data-testing": "address-country-select" }
+        },
         [
           _c("country-select", {
             attrs: {
@@ -52324,6 +52550,7 @@ var render = function() {
                   }
                 ],
                 attrs: {
+                  "data-testing": "mail-register",
                   type: "email",
                   name: "email",
                   autocomplete: "email",
@@ -52378,6 +52605,7 @@ var render = function() {
                                   }
                                 ],
                                 attrs: {
+                                  "data-testing": "password-register",
                                   type: "password",
                                   name: "password",
                                   autocomplete: "new-password",
@@ -52458,7 +52686,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      4086647824
+                      303377206
                     )
                   }),
                   _vm._v(" "),
@@ -52498,7 +52726,8 @@ var render = function() {
                       name: "password-repeat",
                       autocomplete: "new-password",
                       id: "new-password-repeat-" + _vm._uid,
-                      "data-validate-ref": "#new-password-" + _vm._uid
+                      "data-validate-ref": "#new-password-" + _vm._uid,
+                      "data-testing": "repeat-password-register"
                     },
                     domProps: { value: _vm.passwordRepeat },
                     on: {
@@ -52540,7 +52769,7 @@ var render = function() {
           attrs: {
             type: "text",
             name: "username",
-            autocomplete: "off",
+            autocomplete: "new-password",
             tabindex: "-1"
           },
           domProps: { value: _vm.honeypot },
@@ -52630,7 +52859,10 @@ var render = function() {
             {
               staticClass: "btn btn-appearance btn-primary btn-medium mt-3",
               class: _vm.buttonSizeClass,
-              attrs: { disabled: _vm.isDisabled }
+              attrs: {
+                disabled: _vm.isDisabled,
+                "data-testing": "register-submit"
+              }
             },
             [
               _vm._v(
@@ -52904,7 +53136,7 @@ var render = function() {
     "select",
     {
       staticClass: "custom-select",
-      attrs: { "data-autofocus": "" },
+      attrs: { "data-testing": "salutation-select", "data-autofocus": "" },
       domProps: { value: _vm.addressData.gender },
       on: {
         change: function($event) {
@@ -53024,7 +53256,7 @@ var render = function() {
                       attrs: {
                         type: "text",
                         name: "username",
-                        autocomplete: "off",
+                        autocomplete: "new-password",
                         tabindex: "-1"
                       },
                       domProps: { value: _vm.honeypot },
@@ -53220,6 +53452,7 @@ var render = function() {
                 type: "email",
                 name: "email",
                 autocomplete: "email",
+                "data-testing": "guest-login-input",
                 id: _vm._uid,
                 "data-autofocus": ""
               },
@@ -53252,7 +53485,10 @@ var render = function() {
             {
               staticClass: "btn btn-primary btn-medium btn-appearance",
               class: _vm.buttonSizeClass,
-              attrs: { disabled: _vm.isDisabled },
+              attrs: {
+                disabled: _vm.isDisabled,
+                "data-testing": "guest-login-button"
+              },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -53318,6 +53554,7 @@ var render = function() {
                     }
                   ],
                   attrs: {
+                    "data-testing": "email-login",
                     type: "email",
                     name: "email",
                     autocomplete: "email",
@@ -53369,6 +53606,7 @@ var render = function() {
                     }
                   ],
                   attrs: {
+                    "data-testing": "password-login",
                     type: "password",
                     name: "password",
                     autocomplete: "current-password",
@@ -53444,7 +53682,10 @@ var render = function() {
                     { "float-right": !_vm.modalElement },
                     _vm.buttonSizeClass
                   ],
-                  attrs: { disabled: _vm.isDisabled },
+                  attrs: {
+                    "data-testing": "submit-login",
+                    disabled: _vm.isDisabled
+                  },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -53626,6 +53867,7 @@ var render = function() {
                   staticClass: "close",
                   attrs: {
                     type: "button",
+                    "data-testing": "guest-login-modal",
                     "data-dismiss": "modal",
                     "aria-hidden": "true"
                   }
@@ -53763,8 +54005,10 @@ var render = function() {
                   {
                     staticClass: "nav-link",
                     attrs: {
+                      "data-testing": "login-select",
                       href: _vm.isLogin ? "javascript:void(0)" : "#login",
-                      "data-toggle": _vm.isLogin ? false : "modal"
+                      "data-toggle": _vm.isLogin ? false : "modal",
+                      "aria-label": _vm.$translate("Ceres::Template.login")
                     },
                     on: {
                       click: function($event) {
@@ -53797,10 +54041,14 @@ var render = function() {
                     {
                       staticClass: "nav-link",
                       attrs: {
+                        "data-testing": "register-select",
                         href: _vm.isRegister
                           ? "javascript:void(0)"
                           : "#registration",
-                        "data-toggle": _vm.isRegister ? false : "modal"
+                        "data-toggle": _vm.isRegister ? false : "modal",
+                        "aria-label": _vm.$translate(
+                          "Ceres::Template.loginRegister"
+                        )
                       },
                       on: {
                         click: function($event) {
@@ -54475,7 +54723,10 @@ var render = function() {
                       "btn-primary": _vm.activeSlide > 0,
                       "btn-secondary disabled": _vm.activeSlide === 0
                     },
-                    attrs: { tabindex: "0" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-testing": "order-property-previous-slide"
+                    },
                     on: {
                       click: function($event) {
                         return _vm.slideTo(_vm.activeSlide - 1)
@@ -54531,7 +54782,10 @@ var render = function() {
                         _vm.activeSlide >=
                         _vm.sortedGroupedProperties.length - 1
                     },
-                    attrs: { tabindex: "0" },
+                    attrs: {
+                      tabindex: "0",
+                      "data-testing": "order-property-next-slide"
+                    },
                     on: {
                       click: function($event) {
                         return _vm.slideTo(_vm.activeSlide + 1)
@@ -54671,7 +54925,8 @@ var render = function() {
               attrs: {
                 type: "text",
                 "data-toggle": "tooltip",
-                title: _vm.property.names.description
+                title: _vm.property.names.description,
+                "data-testing": "order-property-input-" + _vm.inputType
               },
               domProps: { value: _vm.inputValue },
               on: {
@@ -54712,7 +54967,8 @@ var render = function() {
                 attrs: {
                   type: "checkbox",
                   name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                  id: "check" + _vm._uid
+                  id: "check" + _vm._uid,
+                  "data-testing": "order-property-input-checkbox"
                 },
                 domProps: {
                   value: _vm.property.id,
@@ -54729,7 +54985,8 @@ var render = function() {
                 attrs: {
                   type: "radio",
                   name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                  id: "check" + _vm._uid
+                  id: "check" + _vm._uid,
+                  "data-testing": "order-property-input-radio"
                 },
                 domProps: {
                   value: _vm.property.id,
@@ -54798,6 +55055,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "custom-select",
+                    attrs: { "data-testing": "order-property-selection" },
                     on: {
                       change: [
                         function($event) {
@@ -54839,6 +55097,9 @@ var render = function() {
                         "option",
                         {
                           key: id,
+                          attrs: {
+                            "data-testing": "order-property-selection-option"
+                          },
                           domProps: {
                             selected: _vm.property.id === id,
                             value: id
@@ -54987,7 +55248,8 @@ var render = function() {
                   disabled: _vm.waiting,
                   type: "file",
                   size: "50",
-                  accept: "image/*"
+                  accept: "image/*",
+                  "data-testing": "order-property-input-file"
                 },
                 on: {
                   change: function($event) {
@@ -55104,6 +55366,7 @@ var render = function() {
           attrs: {
             "data-toggle": "tooltip",
             "data-placement": "top",
+            "data-testing": "quantity-btn-increase",
             title: _vm.maximumHint
           },
           on: {
@@ -55140,6 +55403,7 @@ var render = function() {
           attrs: {
             "data-toggle": "tooltip",
             "data-placement": "bottom",
+            "data-testing": "quantity-btn-decrease",
             title: _vm.minimumHint
           },
           on: {
@@ -55337,7 +55601,8 @@ var render = function() {
           "has-price": _vm._f("hasItemDefaultPrice")(_vm.currentVariation),
           "button-size": _vm.buttonSize,
           "padding-classes": _vm.paddingClasses,
-          "padding-inline-styles": _vm.paddingStyles
+          "padding-inline-styles": _vm.paddingStyles,
+          "data-testing": "single-add-to-basket-button"
         }
       })
     : _vm._e()
@@ -55413,15 +55678,24 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("h1", { staticClass: "h2 title" }, [
-                        _c("span", [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm._f("itemName")(_vm.currentVariation)) +
-                              "\n                            "
-                          )
-                        ])
-                      ]),
+                      _c(
+                        "h1",
+                        {
+                          staticClass: "h2 title",
+                          attrs: { "data-testing": "item-name" }
+                        },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm._f("itemName")(_vm.currentVariation)
+                                ) +
+                                "\n                            "
+                            )
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm._t("tag-list"),
                       _vm._v(" "),
@@ -56473,6 +56747,9 @@ var render = function() {
                           "select",
                           {
                             staticClass: "custom-select",
+                            attrs: {
+                              "data-testing": "variation-select-dropdown"
+                            },
                             on: {
                               change: function($event) {
                                 return _vm.selectAttribute(
@@ -56598,7 +56875,8 @@ var render = function() {
                             attrs: {
                               "data-toggle": "tooltip",
                               "data-placement": "top",
-                              title: attribute.name
+                              title: attribute.name,
+                              "data-testing": "variation-select-dropdown-label"
                             }
                           },
                           [_vm._v(_vm._s(attribute.name))]
@@ -56607,15 +56885,24 @@ var render = function() {
                     )
                   : attribute.type === "box" || attribute.type === "image"
                   ? _c("div", [
-                      _c("span", { staticClass: "text-muted" }, [
-                        _vm._v(_vm._s(attribute.name) + ":")
-                      ]),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "text-muted",
+                          attrs: { "data-testing": "attribute-name" }
+                        },
+                        [_vm._v(_vm._s(attribute.name) + ":")]
+                      ),
                       _vm._v(" "),
-                      _c("b", [
-                        _vm._v(
-                          _vm._s(_vm.getSelectedAttributeValueName(attribute))
-                        )
-                      ]),
+                      _c(
+                        "b",
+                        { attrs: { "data-testing": "attribute-value" } },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.getSelectedAttributeValueName(attribute))
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -56638,6 +56925,9 @@ var render = function() {
                                       attribute.attributeId,
                                       -1
                                     )
+                                  },
+                                  attrs: {
+                                    "data-testing": "variation-select-box"
                                   },
                                   on: {
                                     click: function($event) {
@@ -56677,6 +56967,9 @@ var render = function() {
                                       null,
                                       true
                                     )
+                                  },
+                                  attrs: {
+                                    "data-testing": "variation-select-box"
                                   },
                                   on: {
                                     click: function($event) {
@@ -56727,6 +57020,7 @@ var render = function() {
                                   )
                                 },
                                 attrs: {
+                                  "data-testing": "variation-select-box",
                                   "data-html": "true",
                                   "data-toggle": "tooltip",
                                   "data-placement": "top",
@@ -56774,6 +57068,7 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
+                        attrs: { "data-testing": "variation-select-unit" },
                         on: {
                           change: function($event) {
                             return _vm.selectUnit($event.target.value)
@@ -56827,13 +57122,19 @@ var render = function() {
                       0
                     ),
                     _vm._v(" "),
-                    _c("label", [
-                      _vm._v(
-                        _vm._s(
-                          _vm.$translate("Ceres::Template.singleItemContent")
+                    _c(
+                      "label",
+                      {
+                        attrs: { "data-testing": "variation-select-unit-label" }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.singleItemContent")
+                          )
                         )
-                      )
-                    ])
+                      ]
+                    )
                   ])
                 ])
               : _vm._e()
@@ -56870,7 +57171,12 @@ var render = function() {
         "a",
         {
           staticClass: "owl-carousel owl-theme",
-          attrs: { id: "owl-carousel-" + _vm._uid, href: _vm.itemUrl }
+          attrs: {
+            id: "owl-carousel-" + _vm._uid,
+            href: _vm.itemUrl,
+            role: "listbox",
+            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel")
+          }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
           return _c(
@@ -56885,7 +57191,8 @@ var render = function() {
                       "picture-class": "img-fluid",
                       "image-url": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getImageName(imageUrl)
+                      title: _vm.getTitleText(imageUrl),
+                      role: "option"
                     }
                   })
                 : index !== 0 && !_vm.disableLazyLoad
@@ -56894,7 +57201,8 @@ var render = function() {
                     attrs: {
                       "data-src": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getImageName(imageUrl)
+                      title: _vm.getTitleText(imageUrl),
+                      role: "option"
                     }
                   })
                 : _c("img", {
@@ -56902,7 +57210,8 @@ var render = function() {
                     attrs: {
                       src: imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getAltText(imageUrl)
+                      title: _vm.getAltText(imageUrl),
+                      role: "option"
                     }
                   })
             ],
@@ -56922,7 +57231,7 @@ var render = function() {
                   "picture-class": "img-fluid",
                   "image-url": _vm._f("itemImage")(_vm.imageUrls),
                   alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getImageName(_vm.imageUrls[0])
+                  title: _vm.getTitleText(_vm.imageUrls[0])
                 }
               })
             : _c("img", {
@@ -56930,7 +57239,7 @@ var render = function() {
                 attrs: {
                   src: _vm._f("itemImage")(_vm.imageUrls),
                   alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getImageName(_vm.imageUrls[0])
+                  title: _vm.getTitleText(_vm.imageUrls[0])
                 }
               })
         ],
@@ -56959,336 +57268,352 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("article", { staticClass: "cmp cmp-product-thumb" }, [
-    _c(
-      "div",
-      { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
-      [
-        _c("add-to-basket", {
-          attrs: {
-            "variation-id": _vm.item.variation.id,
-            "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
-            "has-children":
-              !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
-            "interval-quantity": _vm.item.variation.intervalOrderQuantity || 1,
-            "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
-            "maximum-quantity":
-              !!_vm.item.variation.maximumOrderQuantity &&
-              _vm.item.variation.maximumOrderQuantity > 0
-                ? _vm.item.variation.maximumOrderQuantity
-                : null,
-            "order-properties": _vm.item.properties.filter(function(prop) {
-              return prop.property.isOderProperty
-            }),
-            "has-order-properties": _vm.item.hasOrderProperties,
-            "use-large-scale": true,
-            "show-quantity": false,
-            "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
-            "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
-            "item-type": _vm.item.item.itemType
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "thumb-image" }, [
-          _c(
-            "div",
-            { staticClass: "prop-1-1" },
-            [
-              _vm._t("item-image", [
-                _c("category-image-carousel", {
-                  ref: "categoryImageCarousel",
+  return _c(
+    "article",
+    {
+      staticClass: "cmp cmp-product-thumb",
+      attrs: { "data-testing": _vm.item.variation.id }
+    },
+    [
+      _c(
+        "div",
+        { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
+        [
+          _c("add-to-basket", {
+            attrs: {
+              "data-testing": "item-add-to-basket",
+              "variation-id": _vm.item.variation.id,
+              "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
+              "has-children":
+                !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
+              "interval-quantity":
+                _vm.item.variation.intervalOrderQuantity || 1,
+              "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
+              "maximum-quantity":
+                !!_vm.item.variation.maximumOrderQuantity &&
+                _vm.item.variation.maximumOrderQuantity > 0
+                  ? _vm.item.variation.maximumOrderQuantity
+                  : null,
+              "order-properties": _vm.item.properties.filter(function(prop) {
+                return prop.property.isOderProperty
+              }),
+              "has-order-properties": _vm.item.hasOrderProperties,
+              "use-large-scale": true,
+              "show-quantity": false,
+              "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
+              "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+              "item-type": _vm.item.item.itemType
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "thumb-image" }, [
+            _c(
+              "div",
+              { staticClass: "prop-1-1" },
+              [
+                _vm._t("item-image", [
+                  _c("category-image-carousel", {
+                    ref: "categoryImageCarousel",
+                    attrs: {
+                      "image-urls-data": _vm._f("itemImages")(
+                        _vm.item.images,
+                        _vm.imageUrlAccessor
+                      ),
+                      alt: _vm._f("itemName")(_vm.item),
+                      title: _vm._f("itemName")(_vm.item),
+                      "item-url": _vm._f("itemURL")(
+                        _vm.item,
+                        _vm.urlWithVariationId
+                      ),
+                      "enable-carousel":
+                        _vm.$ceres.config.item.enableImageCarousel,
+                      "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
+                    }
+                  })
+                ])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _vm._t("store-special", [
+            _vm.storeSpecial ||
+            _vm.item.variation.bundleType === "bundle" ||
+            _vm.item.item.itemType === "set"
+              ? _c("item-store-special", {
                   attrs: {
-                    "image-urls-data": _vm._f("itemImages")(
-                      _vm.item.images,
-                      _vm.imageUrlAccessor
+                    "store-special": _vm.storeSpecial,
+                    "recommended-retail-price": _vm.item.prices.rrp,
+                    "variation-retail-price": _vm.item.prices.default,
+                    "special-offer-price": _vm.item.prices.specialOffer,
+                    "decimal-count": _vm.decimalCount,
+                    "bundle-type": _vm.item.variation.bundleType,
+                    "item-type": _vm.item.item.itemType
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm._t("item-details", [
+            _c(
+              "div",
+              { staticClass: "thumb-content" },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "thumb-title small",
+                    class: {
+                      "stretched-link":
+                        _vm.$ceres.config.global.shippingCostsCategoryId == 0
+                    },
+                    attrs: {
+                      href: _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId)
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm._f("itemName")(_vm.item))
                     ),
-                    "alt-text": _vm._f("itemName")(_vm.item),
-                    "title-text": _vm._f("itemName")(_vm.item),
+                    _vm._l(_vm.item.groupedAttributes, function(attribute) {
+                      return _c("span", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("translate")(
+                              "Ceres::Template.itemGroupedAttribute",
+                              attribute
+                            )
+                          )
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "thumb-meta mt-2" },
+                  [
+                    _vm._t("before-prices"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "prices" }, [
+                      _vm.item.prices.rrp &&
+                      _vm.item.prices.rrp.price.value > 0 &&
+                      _vm.item.prices.rrp.price.value >
+                        _vm.item.prices.default.unitPrice.value
+                        ? _c("div", { staticClass: "price-view-port" }, [
+                            _vm.item.prices.specialOffer
+                              ? _c("del", { staticClass: "crossprice" }, [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(
+                                        _vm._f("itemCrossPrice")(
+                                          _vm.item.prices.default.unitPrice
+                                            .formatted,
+                                          true
+                                        )
+                                      ) +
+                                      "\n                            "
+                                  )
+                                ])
+                              : _c("del", { staticClass: "crossprice" }, [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(
+                                        _vm._f("itemCrossPrice")(
+                                          _vm.item.prices.rrp.unitPrice
+                                            .formatted
+                                        )
+                                      ) +
+                                      "\n                            "
+                                  )
+                                ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "price" },
+                        [
+                          _vm.item.item.itemType === "set"
+                            ? [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.itemSetPrice",
+                                        { price: _vm.itemSetPrice }
+                                      )
+                                    ) +
+                                    " *\n                            "
+                                )
+                              ]
+                            : !!_vm.item.item &&
+                              _vm.item.item.salableVariationCount > 1 &&
+                              _vm.$ceres.isCheapestSorting
+                            ? [
+                                _vm._v(
+                                  "\n                                 " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFromPrice",
+                                        { price: _vm.itemPrice }
+                                      )
+                                    ) +
+                                    " *\n                            "
+                                )
+                              ]
+                            : [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm._f("specialOffer")(
+                                        _vm.item.prices.default.unitPrice
+                                          .formatted,
+                                        _vm.item.prices,
+                                        "unitPrice",
+                                        "formatted"
+                                      )
+                                    ) +
+                                    " *\n                            "
+                                )
+                              ]
+                        ],
+                        2
+                      )
+                    ])
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm._t("after-prices"),
+                _vm._v(" "),
+                !(
+                  _vm.item.unit.unitOfMeasurement === "C62" &&
+                  _vm.item.unit.content === 1
+                )
+                  ? _c("div", { staticClass: "category-unit-price small" }, [
+                      _c("span", [_vm._v(_vm._s(_vm.item.unit.content))]),
+                      _vm._v(" "),
+                      _c("span", [
+                        _vm._v(" " + _vm._s(_vm.item.unit.names.name))
+                      ]),
+                      _vm._v(" "),
+                      _vm.item.variation.mayShowUnitPrice
+                        ? _c("span", [
+                            _vm._v(
+                              " | " + _vm._s(_vm.item.prices.default.basePrice)
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("add-to-basket", {
+                  attrs: {
+                    "variation-id": _vm.item.variation.id,
+                    "is-salable":
+                      !!_vm.item.filter && _vm.item.filter.isSalable,
+                    "has-children":
+                      !!_vm.item.item &&
+                      _vm.item.item.salableVariationCount > 1,
+                    "interval-quantity":
+                      _vm.item.variation.intervalOrderQuantity || 1,
+                    "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
+                    "maximum-quantity":
+                      !!_vm.item.variation.maximumOrderQuantity &&
+                      _vm.item.variation.maximumOrderQuantity > 0
+                        ? _vm.item.variation.maximumOrderQuantity
+                        : null,
+                    "order-properties": _vm.item.properties.filter(function(
+                      prop
+                    ) {
+                      return prop.property.isOderProperty
+                    }),
+                    "has-order-properties": _vm.item.hasOrderProperties,
+                    "use-large-scale": false,
+                    "show-quantity": false,
                     "item-url": _vm._f("itemURL")(
                       _vm.item,
                       _vm.urlWithVariationId
                     ),
-                    "enable-carousel":
-                      _vm.$ceres.config.item.enableImageCarousel,
-                    "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
+                    "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+                    "item-type": _vm.item.item.itemType
                   }
-                })
-              ])
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _vm._t("store-special", [
-          _vm.storeSpecial ||
-          _vm.item.variation.bundleType === "bundle" ||
-          _vm.item.item.itemType === "set"
-            ? _c("item-store-special", {
-                attrs: {
-                  "store-special": _vm.storeSpecial,
-                  "recommended-retail-price": _vm.item.prices.rrp,
-                  "variation-retail-price": _vm.item.prices.default,
-                  "special-offer-price": _vm.item.prices.specialOffer,
-                  "decimal-count": _vm.decimalCount,
-                  "bundle-type": _vm.item.variation.bundleType,
-                  "item-type": _vm.item.item.itemType
-                }
-              })
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _vm._t("item-details", [
-          _c(
-            "div",
-            { staticClass: "thumb-content" },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "thumb-title small",
-                  class: {
-                    "stretched-link":
-                      _vm.$ceres.config.global.shippingCostsCategoryId == 0
-                  },
-                  attrs: {
-                    href: _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId)
-                  }
-                },
-                [
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "vat small text-muted" }, [
+                  _vm._v("\n                    * "),
+                  _vm.showNetPrices
+                    ? _c("span", [
+                        _vm._v(
+                          _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
+                        )
+                      ])
+                    : _c("span", [
+                        _vm._v(
+                          _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
+                        )
+                      ]),
                   _vm._v(
                     "\n                    " +
-                      _vm._s(_vm._f("itemName")(_vm.item))
+                      _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
+                      "\n                    "
                   ),
-                  _vm._l(_vm.item.groupedAttributes, function(attribute) {
-                    return _c("span", [
-                      _vm._v(
-                        _vm._s(
-                          _vm._f("translate")(
-                            "Ceres::Template.itemGroupedAttribute",
-                            attribute
-                          )
-                        )
-                      )
-                    ])
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "thumb-meta mt-2" },
-                [
-                  _vm._t("before-prices"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "prices" }, [
-                    _vm.item.prices.rrp &&
-                    _vm.item.prices.rrp.price.value > 0 &&
-                    _vm.item.prices.rrp.price.value >
-                      _vm.item.prices.default.unitPrice.value
-                      ? _c("div", { staticClass: "price-view-port" }, [
-                          _vm.item.prices.specialOffer
-                            ? _c("del", { staticClass: "crossprice" }, [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm._f("itemCrossPrice")(
-                                        _vm.item.prices.default.unitPrice
-                                          .formatted,
-                                        true
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ])
-                            : _c("del", { staticClass: "crossprice" }, [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm._f("itemCrossPrice")(
-                                        _vm.item.prices.rrp.unitPrice.formatted
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ])
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "price" },
-                      [
-                        _vm.item.item.itemType === "set"
-                          ? [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.itemSetPrice",
-                                      { price: _vm.itemSetPrice }
-                                    )
-                                  ) +
-                                  " *\n                            "
-                              )
-                            ]
-                          : !!_vm.item.item &&
-                            _vm.item.item.salableVariationCount > 1 &&
-                            _vm.$ceres.isCheapestSorting
-                          ? [
-                              _vm._v(
-                                "\n                                 " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.categoryItemFromPrice",
-                                      { price: _vm.itemPrice }
-                                    )
-                                  ) +
-                                  " *\n                            "
-                              )
-                            ]
-                          : [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(
-                                    _vm._f("specialOffer")(
-                                      _vm.item.prices.default.unitPrice
-                                        .formatted,
-                                      _vm.item.prices,
-                                      "unitPrice",
-                                      "formatted"
-                                    )
-                                  ) +
-                                  " *\n                            "
-                              )
-                            ]
-                      ],
-                      2
-                    )
-                  ])
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _vm._t("after-prices"),
-              _vm._v(" "),
-              !(
-                _vm.item.unit.unitOfMeasurement === "C62" &&
-                _vm.item.unit.content === 1
-              )
-                ? _c("div", { staticClass: "category-unit-price small" }, [
-                    _c("span", [_vm._v(_vm._s(_vm.item.unit.content))]),
-                    _vm._v(" "),
-                    _c("span", [
-                      _vm._v(" " + _vm._s(_vm.item.unit.names.name))
-                    ]),
-                    _vm._v(" "),
-                    _vm.item.variation.mayShowUnitPrice
-                      ? _c("span", [
+                  _vm.$ceres.config.global.shippingCostsCategoryId > 0
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "text-appearance",
+                          attrs: {
+                            "data-toggle": "modal",
+                            href: "#shippingscosts",
+                            title: _vm.$translate(
+                              "Ceres::Template.itemShippingCosts"
+                            )
+                          }
+                        },
+                        [
                           _vm._v(
-                            " | " + _vm._s(_vm.item.prices.default.basePrice)
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.itemShippingCosts"
+                              )
+                            )
                           )
-                        ])
-                      : _vm._e()
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("add-to-basket", {
-                attrs: {
-                  "variation-id": _vm.item.variation.id,
-                  "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
-                  "has-children":
-                    !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
-                  "interval-quantity":
-                    _vm.item.variation.intervalOrderQuantity || 1,
-                  "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
-                  "maximum-quantity":
-                    !!_vm.item.variation.maximumOrderQuantity &&
-                    _vm.item.variation.maximumOrderQuantity > 0
-                      ? _vm.item.variation.maximumOrderQuantity
-                      : null,
-                  "order-properties": _vm.item.properties.filter(function(
-                    prop
-                  ) {
-                    return prop.property.isOderProperty
-                  }),
-                  "has-order-properties": _vm.item.hasOrderProperties,
-                  "use-large-scale": false,
-                  "show-quantity": false,
-                  "item-url": _vm._f("itemURL")(
-                    _vm.item,
-                    _vm.urlWithVariationId
-                  ),
-                  "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
-                  "item-type": _vm.item.item.itemType
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "vat small text-muted" }, [
-                _vm._v("\n                    * "),
-                _vm.showNetPrices
-                  ? _c("span", [
-                      _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
+                        ]
                       )
-                    ])
-                  : _c("span", [
-                      _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
+                    : _c(
+                        "a",
+                        {
+                          attrs: {
+                            title: _vm.$translate(
+                              "Ceres::Template.itemShippingCosts"
+                            )
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.itemShippingCosts"
+                              )
+                            )
+                          )
+                        ]
                       )
-                    ]),
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
-                    "\n                    "
-                ),
-                _vm.$ceres.config.global.shippingCostsCategoryId > 0
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "text-appearance",
-                        attrs: {
-                          "data-toggle": "modal",
-                          href: "#shippingscosts",
-                          title: _vm.$translate(
-                            "Ceres::Template.itemShippingCosts"
-                          )
-                        }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.itemShippingCosts")
-                          )
-                        )
-                      ]
-                    )
-                  : _c(
-                      "a",
-                      {
-                        attrs: {
-                          title: _vm.$translate(
-                            "Ceres::Template.itemShippingCosts"
-                          )
-                        }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.itemShippingCosts")
-                          )
-                        )
-                      ]
-                    )
-              ])
-            ],
-            2
-          )
-        ])
-      ],
-      2
-    )
-  ])
+                ])
+              ],
+              2
+            )
+          ])
+        ],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -57338,7 +57663,13 @@ var render = function() {
                 ],
                 ref: "searchInput",
                 staticClass: "search-input flex-grow-1 px-3 py-2",
-                attrs: { type: "search", autofocus: _vm.isShopBuilder },
+                attrs: {
+                  type: "search",
+                  autofocus: _vm.isShopBuilder,
+                  "aria-label": _vm.$translate(
+                    "Ceres::Template.headerSearchTerm"
+                  )
+                },
                 domProps: { value: _vm.searchString },
                 on: {
                   input: [
@@ -57375,7 +57706,12 @@ var render = function() {
                   "button",
                   {
                     staticClass: "search-submit px-3",
-                    attrs: { type: "submit" },
+                    attrs: {
+                      type: "submit",
+                      "aria-label": _vm.$translate(
+                        "Ceres::Template.headerSearch"
+                      )
+                    },
                     on: {
                       click: function($event) {
                         return _vm.search()
@@ -57512,6 +57848,7 @@ var render = function() {
         ? [
             _c(
               "div",
+              { attrs: { "data-testing": "autocomplete-list" } },
               _vm._l(_vm.autocompleteResult, function(item, index) {
                 return _c(
                   "a",
@@ -59118,7 +59455,7 @@ var render = function() {
             attrs: {
               type: "text",
               name: "username",
-              autocomplete: "off",
+              autocomplete: "new-password",
               tabindex: "-1"
             },
             domProps: { value: _vm.honeypot },
@@ -59987,7 +60324,10 @@ var render = function() {
                         {
                           staticClass:
                             "text-primary text-appearance d-block d-md-inline-block",
-                          attrs: { href: "#" },
+                          attrs: {
+                            href: "#",
+                            "data-testing": "cookie-bar-show-more-information"
+                          },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -60016,6 +60356,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary btn-block btn-appearance",
+                      attrs: { "data-testing": "cookie-bar-accept-all" },
                       on: {
                         click: function($event) {
                           _vm.acceptAll()
@@ -60025,9 +60366,11 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(
-                          _vm.$translate("Ceres::Template.cookieBarAcceptAll")
-                        )
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarAcceptAll")
+                          ) +
+                          "\n                "
                       )
                     ]
                   ),
@@ -60036,6 +60379,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-default btn-block",
+                      attrs: { "data-testing": "cookie-bar-save" },
                       on: {
                         click: function($event) {
                           _vm.storeConsents()
@@ -60045,7 +60389,11 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.cookieBarSave"))
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarSave")
+                          ) +
+                          "\n                "
                       )
                     ]
                   )
@@ -60079,7 +60427,10 @@ var render = function() {
                         {
                           staticClass:
                             "text-primary text-appearance d-inline-block mb-3",
-                          attrs: { href: "#" },
+                          attrs: {
+                            href: "#",
+                            "data-testing": "cookie-bar-hide-more-information"
+                          },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -60090,9 +60441,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.cookieBarBack")
-                            )
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.cookieBarBack")
+                              ) +
+                              "\n                "
                           )
                         ]
                       )
@@ -60104,6 +60457,9 @@ var render = function() {
                         {
                           staticClass:
                             "btn btn-block btn-primary btn-appearance",
+                          attrs: {
+                            "data-testing": "cookie-bar-expanded-accept-all"
+                          },
                           on: {
                             click: function($event) {
                               _vm.acceptAll()
@@ -60113,11 +60469,13 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.cookieBarAcceptAll"
-                              )
-                            )
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.cookieBarAcceptAll"
+                                )
+                              ) +
+                              "\n                "
                           )
                         ]
                       )
@@ -60128,6 +60486,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-block btn-block btn-default",
+                          attrs: { "data-testing": "cookie-bar-expanded-save" },
                           on: {
                             click: function($event) {
                               _vm.storeConsents()
@@ -60137,9 +60496,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.cookieBarSave")
-                            )
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.cookieBarSave")
+                              ) +
+                              "\n                "
                           )
                         ]
                       )
@@ -60153,6 +60514,11 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-primary btn-appearance",
+                attrs: {
+                  "aria-label": _vm.$translate(
+                    "Ceres::Template.cookieBarPrivacySettings"
+                  )
+                },
                 on: {
                   click: function($event) {
                     $event.preventDefault()
@@ -61015,7 +61381,10 @@ var render = function() {
                     "a",
                     {
                       staticClass: "card-link text-primary text-appearance",
-                      attrs: { href: "#" },
+                      attrs: {
+                        href: "#",
+                        "data-testing": "privacy-settings-show-more-information"
+                      },
                       on: {
                         click: function($event) {
                           return _vm.setGroupVisibility(
@@ -61028,11 +61397,13 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.privacySettingsMoreInformation"
-                          )
-                        )
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.privacySettingsMoreInformation"
+                            )
+                          ) +
+                          "\n                "
                       )
                     ]
                   )
@@ -61040,7 +61411,10 @@ var render = function() {
                     "a",
                     {
                       staticClass: "card-link text-primary text-appearance",
-                      attrs: { href: "#" },
+                      attrs: {
+                        href: "#",
+                        "data-testing": "privacy-settings-hide-more-information"
+                      },
                       on: {
                         click: function($event) {
                           return _vm.setGroupVisibility(
@@ -61053,11 +61427,13 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.privacySettingsLessInformation"
-                          )
-                        )
+                        ">\n                    " +
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.privacySettingsLessInformation"
+                            )
+                          ) +
+                          "\n                "
                       )
                     ]
                   )
@@ -61125,6 +61501,9 @@ var render = function() {
                     disabled: _vm.isDisabled,
                     "data-boundary": "window",
                     "data-title": _vm.$translate(
+                      "Ceres::Template.headerChangeDeliveryCountry"
+                    ),
+                    "aria-label": _vm.$translate(
                       "Ceres::Template.headerChangeDeliveryCountry"
                     )
                   },
@@ -61285,7 +61664,11 @@ var render = function() {
     "a",
     {
       staticClass: "nav-link",
-      attrs: { href: _vm.urlWishList, rel: "nofollow" }
+      attrs: {
+        href: _vm.urlWishList,
+        rel: "nofollow",
+        "aria-label": _vm.$translate("Ceres::Template.wishList")
+      }
     },
     [
       _c("span", { staticClass: "badge-right mr-1 d-none d-sm-inline" }, [
@@ -61519,6 +61902,7 @@ var render = function() {
                   "div",
                   {
                     staticClass: "btn btn-sm text-danger p-0",
+                    attrs: { "data-testing": "remove-wlist-item" },
                     on: {
                       click: function($event) {
                         return _vm.removeItem()
@@ -83874,7 +84258,7 @@ function getLabelForId(id) {
 }
 function serializeForm(form) {
   var formData = {};
-  var formElements = form.querySelectorAll("[name]:not(.g-recaptcha-response)");
+  var formElements = form.querySelectorAll("[name]:not(.g-recaptcha-response):not([type=file])");
 
   var _iterator2 = _createForOfIteratorHelper(formElements),
       _step2;
@@ -84892,6 +85276,10 @@ var defaultConfig = {
 
       if (element.getAttribute("data-alt")) {
         img.alt = element.getAttribute("data-alt");
+      }
+
+      if (element.getAttribute("data-title")) {
+        img.title = element.getAttribute("data-title");
       }
 
       if (element.getAttribute("data-picture-class")) {
@@ -86421,6 +86809,9 @@ function _validateInput($formControl, validationKey) {
     case "password":
       return _isPassword($formControl);
 
+    case "file":
+      return _hasValue($formControl);
+
     case "regex":
       {
         var ref = $formControl.attr("data-validate-ref");
@@ -86731,7 +87122,6 @@ var mutations = {
     if (billingAddress) {
       state.billingAddressId = billingAddress.id;
       state.billingAddress = billingAddress;
-      document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
     }
   },
   selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
@@ -86773,7 +87163,6 @@ var mutations = {
     if (deliveryAddress) {
       state.deliveryAddressId = deliveryAddress.id;
       state.deliveryAddress = deliveryAddress;
-      document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
     }
   },
   removeBillingAddress: function removeBillingAddress(state, billingAddress) {
@@ -86899,6 +87288,7 @@ var actions = {
     commit("selectBillingAddress", addressList.find(function (address) {
       return address.id === id;
     }));
+    document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
   },
   initDeliveryAddress: function initDeliveryAddress(_ref5, _ref6) {
     var commit = _ref5.commit;
@@ -86918,6 +87308,7 @@ var actions = {
     commit("selectDeliveryAddress", addressList.find(function (address) {
       return address.id === id;
     }));
+    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
   },
   selectAddress: function selectAddress(_ref7, _ref8) {
     var commit = _ref7.commit,
@@ -86942,6 +87333,13 @@ var actions = {
         supressNotifications: true
       }).done(function (response) {
         commit("setIsBasketLoading", false);
+
+        if (addressType === "1") {
+          document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
+        } else if (addressType === "2") {
+          document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
+        }
+
         return resolve(response);
       }).fail(function (error) {
         if (addressType === "1") {
@@ -87943,20 +88341,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
-/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
+/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
+/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+
 
 
 
@@ -88011,9 +88412,9 @@ function readFormOptions(form, formData) {
         switch (element.dataset.mail) {
           case "cc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.cc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.cc.push(formData[element.value].value);
               }
             }
@@ -88022,9 +88423,9 @@ function readFormOptions(form, formData) {
 
           case "bcc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.bcc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.bcc.push(formData[element.value].value);
               }
             }
@@ -88033,9 +88434,9 @@ function readFormOptions(form, formData) {
 
           case "reply-to-address":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.replyTo.mail = element.value;
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.replyTo.mail = formData[element.value].value;
               }
             }
@@ -88105,29 +88506,40 @@ var actions = {
     }
 
     var recaptchaEl = event.target.querySelector("[data-recaptcha]");
-    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_19__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_14__["default"].validate(event.target).done(function () {
+    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(event.target).done(function () {
         disableForm(event.target, true);
-        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_17__["serializeForm"])(event.target);
+        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["serializeForm"])(event.target);
         var formOptions = readFormOptions(event.target, formData);
-        ApiService.post("/rest/io/customer/contact/mail", {
-          data: formData,
-          recipient: formOptions.recipient,
-          subject: formOptions.subject || "",
-          cc: formOptions.cc,
-          bcc: formOptions.bcc,
-          replyTo: formOptions.replyTo,
-          recaptchaToken: recaptchaResponse
-        }).done(function (reponse) {
+        sendFile(event, recaptchaResponse).then(function (response) {
+          resetRecaptcha();
+          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
+            ApiService.post("/rest/io/customer/contact/mail", {
+              data: formData,
+              recipient: formOptions.recipient,
+              subject: formOptions.subject || "",
+              cc: formOptions.cc,
+              bcc: formOptions.bcc,
+              replyTo: formOptions.replyTo,
+              recaptchaToken: recaptchaToken2,
+              fileKeys: response.fileKeys
+            }).done(function (response) {
+              resetRecaptcha(recaptchaEl);
+              event.target.reset();
+              disableForm(event.target, false);
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+            }).fail(function (response) {
+              resetRecaptcha(recaptchaEl);
+              disableForm(event.target, false);
+              response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail");
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
+            });
+          });
+        }, function (response) {
           resetRecaptcha(recaptchaEl);
-          event.target.reset();
           disableForm(event.target, false);
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
-        }).fail(function (response) {
-          resetRecaptcha(recaptchaEl);
-          disableForm(event.target, false);
-          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactSendFail");
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(response.error);
+          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactFileUploadFail");
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
         });
       }).fail(function (invalidFields) {
         resetRecaptcha(recaptchaEl);
@@ -88139,7 +88551,7 @@ var actions = {
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var field = _step2.value;
-            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_17__["getLabel"])(field));
+            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["getLabel"])(field));
           }
         } catch (err) {
           _iterator2.e(err);
@@ -88147,16 +88559,71 @@ var actions = {
           _iterator2.f();
         }
 
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_14__["default"].markInvalidFields(invalidFields, "error");
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
           fields: fieldNames.join(", ")
         }));
       });
     }).catch(function () {
-      _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
     });
   }
 };
+
+function sendFile(event, recaptchaToken) {
+  return new Promise(function (resolve, reject) {
+    var formData = new FormData();
+    var fileInputs = event.target.querySelectorAll("input[type=file]");
+    var containsFiles = false;
+
+    var _iterator3 = _createForOfIteratorHelper(fileInputs),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var fileInput = _step3.value;
+
+        var _iterator4 = _createForOfIteratorHelper(fileInput.files),
+            _step4;
+
+        try {
+          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+            var file = _step4.value;
+            containsFiles = true;
+            formData.append("fileData[]", file);
+          }
+        } catch (err) {
+          _iterator4.e(err);
+        } finally {
+          _iterator4.f();
+        }
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+
+    if (!containsFiles) {
+      resolve({});
+      return;
+    }
+
+    formData.append("recaptchaToken", recaptchaToken);
+    ApiService.post("/rest/io/customer/contact/mail/file", formData, {
+      processData: false,
+      contentType: false,
+      cache: false,
+      async: true,
+      timeout: 60000,
+      supressNotifications: true
+    }).done(function (response) {
+      resolve(response);
+    }).fail(function (error) {
+      reject(error);
+    });
+  });
+}
 
 function resetRecaptcha(recaptchaEl) {
   if (App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha) {

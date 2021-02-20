@@ -14,6 +14,7 @@
                  v-tooltip="isMaximum && compMax !== 0"
                  data-toggle="tooltip"
                  data-placement="top"
+                 data-testing="quantity-btn-increase"
                  :title="maximumHint">
                 <i class="fa fa-plus default-float" aria-hidden="true"></i>
             </button>
@@ -24,6 +25,7 @@
                  v-tooltip="isMinimum && compMax !== 0"
                  data-toggle="tooltip"
                  data-placement="bottom"
+                 data-testing="quantity-btn-decrease"
                  :title="minimumHint">
                 <i class="fa fa-minus default-float" aria-hidden="true"></i>
             </button>

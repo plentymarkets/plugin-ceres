@@ -9,8 +9,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class SelectedFilterWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Category.Filter.SelectedFilterWidget";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::SelectedFilterWidget')
@@ -22,6 +26,9 @@ class SelectedFilterWidget extends BaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

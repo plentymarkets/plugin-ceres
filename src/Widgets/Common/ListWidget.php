@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ListWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.ListWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ListWidget")
@@ -22,7 +26,10 @@ class ListWidget extends BaseWidget
             ->withPosition(900)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -57,7 +64,10 @@ class ListWidget extends BaseWidget
 
         return $settings->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $listEntries = [];

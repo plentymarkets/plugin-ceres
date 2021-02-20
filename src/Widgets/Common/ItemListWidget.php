@@ -12,8 +12,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ItemListWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.ItemListWidget';
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemListWidget')
@@ -25,6 +29,9 @@ class ItemListWidget extends BaseWidget
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -51,6 +58,7 @@ class ItemListWidget extends BaseWidget
             ->withTooltip('Widget.itemListListTypeTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
+                    ->addEntry('all', 'Widget.itemListListTypeAllItems')
                     ->addEntry('category', 'Widget.itemListListTypeCategory')
                     ->addEntry('last_seen', 'Widget.itemListListTypeLastseen')
                     ->addEntry('tag_list', 'Widget.itemListListTypeTaglist')

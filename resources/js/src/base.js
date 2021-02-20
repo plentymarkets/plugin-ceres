@@ -28,6 +28,9 @@ window.$ = jQuery;
 import "bootstrap";
 import "owl.carousel";
 
+import { getUrlParams } from "./app/services/UrlService";
+window.ceresEnv = getUrlParams()["env"];
+
 // =========================
 // COMPONENTS
 // =========================
@@ -79,6 +82,7 @@ import LoginView from "./app/components/customer/login/LoginView.vue";
 Vue.component("login-view", LoginView);
 import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
 Vue.component("user-login-handler", UserLoginHandler);
+Vue.component("form-attachment", () => import("./app/components/form/FormAttachment.vue"));
 
 import ItemBundle from "./app/components/item/ItemBundle.vue";
 Vue.component("item-bundle", ItemBundle);
@@ -182,6 +186,7 @@ import "./app/directives/common/truncateTooltip";
 
 import "./app/directives/customer/logout";
 
+import "./app/directives/helper/testingAttr";
 import "./app/directives/helper/populateStore";
 import "./app/directives/helper/validate";
 import "./app/directives/helper/waitingAnimation";

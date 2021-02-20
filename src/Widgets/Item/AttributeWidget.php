@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AttributeWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.AttributeWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::AttributeWidget")
@@ -22,7 +26,10 @@ class AttributeWidget extends BaseWidget
             ->withPosition(100)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

@@ -9,6 +9,24 @@ use Ceres\Widgets\Presets\Helper\HasWhiteBackground;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultContactPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing the shop's contact information and location. It contains:
+ * - InlineTextWidget
+ * - SeparatorWidget
+ * - TwoColumnWidget
+ * - ContactDetailsWidget
+ * - GoogleMapsWidget
+ * - MailFormWidget
+ * - TextInputWidget
+ * - MailInputWidget
+ * - TextAreaWidget
+ * - AcceptPrivacyPolicyWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultContactPreset implements ContentPreset
 {
     use HasWhiteBackground;
@@ -18,7 +36,10 @@ class DefaultContactPreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->config = pluginApp(CeresConfig::class);
@@ -163,6 +184,7 @@ class DefaultContactPreset implements ContentPreset
             ->withSetting('layout', 'oneToOne');
 
         $row_2->createChild('first', 'Ceres::TextInputWidget')
+            ->withSetting('customClass','contact-form-subject')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactSubject'))
             ->withSetting('isRequired', true)
             ->withSetting('isMailSubject', true);
@@ -174,6 +196,7 @@ class DefaultContactPreset implements ContentPreset
         // ROW 3: Message
         //
         $formWidget->createChild('formFields', 'Ceres::TextAreaWidget')
+            ->withSetting('customClass','contact-form-message')
             ->withSetting('rows', 15)
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactMessage'))
             ->withSetting('fixedHeight', true)
@@ -186,10 +209,10 @@ class DefaultContactPreset implements ContentPreset
 
         if ($this->config->contact->enableConfirmingPrivacyPolicy) {
             $row_3 = $formWidget->createChild('formFields', 'Ceres::TwoColumnWidget')
+
                 ->withSetting('layout', 'oneToOne');
 
-            $row_3->createChild('first', 'Ceres::AcceptPrivacyPolicyWidget')
-                ->withSetting('customClass', '');
+            $row_3->createChild('first', 'Ceres::AcceptPrivacyPolicyWidget');
 
             $textWidget = $row_3->createChild('second', 'Ceres::InlineTextWidget');
         } else {

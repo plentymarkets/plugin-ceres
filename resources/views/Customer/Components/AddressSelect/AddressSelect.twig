@@ -32,13 +32,26 @@
                 </div>
 
                 <div class="add-item">
-                    <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressAddAddress") }}" class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down" v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly">
+                    <button
+                        v-tooltip
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="{{ trans("Ceres::Template.addressAddAddress") }}"
+                        class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down"
+                        v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly"
+                        {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-add'\"") | raw }}
+                    >
                         <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </button>
                 </div>
 
-                <div class="dropdown-menu" :aria-labelledby="'addressMultiSelect' + _uid" v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
+                <div
+                    class="dropdown-menu"
+                    :aria-labelledby="'addressMultiSelect' + _uid"
+                    v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)"
+                    {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-dropdown'\"") | raw }}
+                >
                     <ul>
                         <li class="item" v-for="(address, index) in addressList">
                             <input
@@ -58,13 +71,29 @@
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
                                     <span class="item-edit">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressEdit") }}" class="btn btn-primary btn-appearance" @click.prevent="showEditModal(address)">
+                                        <button
+                                            v-tooltip
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="{{ trans("Ceres::Template.addressEdit") }}"
+                                            class="btn btn-primary btn-appearance"
+                                            @click.prevent="showEditModal(address)"
+                                            {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-edit'\"") | raw }}
+                                        >
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addressDelete") }}" class="btn btn-danger" @click.prevent="showDeleteModal(address)">
-                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        <button
+                                            v-tooltip
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="{{ trans("Ceres::Template.addressDelete") }}"
+                                            class="btn btn-danger"
+                                            @click.prevent="showDeleteModal(address)"
+                                            {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove'\"") | raw }}
+                                        >
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                 </div>
@@ -106,7 +135,7 @@
             </div>
         </div>
 
-        <div ref="deleteModal">
+        <div ref="deleteModal" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal'\"") | raw }}>
             <div class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -117,7 +146,7 @@
                             </button>
                         </div>
 
-                        <div class="modal-body">
+                        <div class="modal-body" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-body'\"") | raw }}>
                             <fieldset>
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -142,12 +171,20 @@
                             </fieldset>
                         </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-medium mr-2 btn-outline-primary" @click="closeDeleteModal">
+                        <div class="modal-footer" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-footer'\"") | raw }}>
+                            <button
+                                type="button"
+                                class="btn btn-medium mr-2 btn-outline-primary"
+                                @click="closeDeleteModal"
+                                {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-cancel'\"") | raw }}>
                                 <span>{{ trans("Ceres::Template.addressCancel") }}</span>
                                 <i class="fa fa-times" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-primary btn-appearance btn-medium" :disabled="deleteModalWaiting" @click="deleteAddress">
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-appearance btn-medium"
+                                :disabled="deleteModalWaiting" @click="deleteAddress"
+                                {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-remove'\"") | raw }}>
                                 <span>{{ trans("Ceres::Template.addressDelete") }}</span>
                                 <icon icon="trash" :loading="deleteModalWaiting"></icon>
                             </button>

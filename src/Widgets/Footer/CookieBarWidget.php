@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class CookieBarWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Footer.CookieBarWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::CookieBarWidget")
@@ -22,7 +26,10 @@ class CookieBarWidget extends BaseWidget
             ->withPosition(100)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingFactory */

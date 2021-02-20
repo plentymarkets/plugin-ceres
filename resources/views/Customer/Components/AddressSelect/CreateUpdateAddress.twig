@@ -16,6 +16,7 @@
             </template>
         </address-input-group>
         <button
+            {{ set_testing_attr("data-testing", "modal-submit") }} 
             type="submit"
             class="btn btn-primary btn-appearance btn-block"
             @click="validate"

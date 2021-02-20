@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class MailInputWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.MailInputWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::MailInputWidget")
@@ -22,7 +26,10 @@ class MailInputWidget extends BaseWidget
             ->withPosition(200)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

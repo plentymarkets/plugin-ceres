@@ -410,6 +410,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+<<<<<<< HEAD
+=======
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    imageUrl: String,
+    fallbackUrl: String,
+    isBackgroundImage: Boolean,
+    pictureClass: String,
+    alt: String,
+    title: String
+  },
+  data: function data() {
+    return {
+      supported: undefined
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+>>>>>>> stable
 
 
 
@@ -57655,12 +57674,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c(
     "table",
     { staticClass: "table table-striped table-hover table-sm" },
     [
       _c(
         "tbody",
+=======
+  return !_vm.isBackgroundImage
+    ? _c(
+        "picture",
+        {
+          attrs: {
+            "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
+            "data-picture-class": _vm.pictureClass,
+            "data-alt": _vm.alt,
+            "data-title": _vm.title
+          }
+        },
+>>>>>>> stable
         [
           _vm._l(_vm.itemInformation, function(itemDataAccessor) {
             return [
@@ -57827,6 +57860,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c("div", { class: { "has-crossprice": _vm.hasCrossPrice } }, [
     _vm.showCrossPrice && _vm.hasCrossPrice
       ? _c(
@@ -57849,6 +57883,383 @@ var render = function() {
                               _vm.currentVariation.prices.default.unitPrice
                                 .formatted,
                               true
+=======
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _vm.value.showPickupStation &&
+      _vm.selectedCountry.isoCode2 === "DE" &&
+      _vm.addressType === "2"
+        ? [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "delivery_address.salutation")
+                  ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "delivery_address.salutation"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'delivery_address.salutation')"
+                            }
+                          ],
+                          staticClass: "input-unit"
+                        },
+                        [
+                          _c("salutation-select", {
+                            attrs: {
+                              "address-type": _vm.addressType,
+                              "address-data": _vm.value,
+                              "enabled-address-fields":
+                                _vm.optionalAddressFields
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  $event.field,
+                                  $event.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "txtSalutation" + _vm._uid } },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressSalutation",
+                                      "de",
+                                      "delivery_address.salutation"
+                                    )
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                (_vm.isInOptionalFields("de", "delivery_address.salutation") &&
+                  _vm.value.gender === "company") ||
+                (_vm.isInOptionalFields("de", "delivery_address.name1") &&
+                  !_vm.isInOptionalFields("de", "delivery_address.salutation"))
+                  ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "input-unit",
+                          attrs: {
+                            "data-model": "name1",
+                            "data-validate": "text"
+                          }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              name: "company",
+                              id: "txtCompany" + _vm._uid,
+                              "data-testing": "packing-station-de-company"
+                            },
+                            domProps: { value: _vm.value.name1 },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "name1",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "txtCompany" + _vm._uid } },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.addressCompany"
+                                  )
+                                ) + "*"
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "div",
+                { staticClass: "row" },
+                [
+                  _vm.isInOptionalFields("de", "delivery_address.title")
+                    ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "delivery_address.title"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'delivery_address.title')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "title" }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "text",
+                                name: "title",
+                                id: "txtTitle" + _vm._uid
+                              },
+                              domProps: { value: _vm.value.title },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "title",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              { attrs: { for: "txtTitle" + _vm._uid } },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressTitle",
+                                        "de",
+                                        "delivery_address.title"
+                                      )
+                                    ) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.areNameFieldsShown("de", "delivery_address")
+                    ? [
+                        _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.areNameFieldsRequired(
+                                    "de",
+                                    "delivery_address"
+                                  ),
+                                  expression:
+                                    "areNameFieldsRequired('de', 'delivery_address')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "name2" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "firstName",
+                                  id: "txtFirstName" + _vm._uid,
+                                  "data-testing": "packing-station-de-firstname"
+                                },
+                                domProps: { value: _vm.value.name2 },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "name2",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "txtFirstName" + _vm._uid } },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.addressFirstName"
+                                      )
+                                    )
+                                  ),
+                                  _vm.areNameFieldsRequired(
+                                    "de",
+                                    "delivery_address"
+                                  )
+                                    ? [_vm._v("*")]
+                                    : _vm._e()
+                                ],
+                                2
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.areNameFieldsRequired(
+                                    "de",
+                                    "delivery_address"
+                                  ),
+                                  expression:
+                                    "areNameFieldsRequired('de', 'delivery_address')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "name3" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "lastName",
+                                  id: "txtLastName" + _vm._uid,
+                                  "data-testing": "packing-station-de-lastname"
+                                },
+                                domProps: { value: _vm.value.name3 },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "name3",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "txtLastName" + _vm._uid } },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.addressLastName"
+                                      )
+                                    )
+                                  ),
+                                  _vm.areNameFieldsRequired(
+                                    "de",
+                                    "delivery_address"
+                                  )
+                                    ? [_vm._v("*")]
+                                    : _vm._e()
+                                ],
+                                2
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    : _c("div", { staticClass: "col-12 col-sm-8" }, [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "delivery_address.contactPerson"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'delivery_address.contactPerson')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "contactPerson" }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "text",
+                                name: "lastName",
+                                id: "txtContactPerson" + _vm._uid
+                              },
+                              domProps: { value: _vm.value.contactPerson },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "contactPerson",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              { attrs: { for: "txtContactPerson" + _vm._uid } },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressContactPerson",
+                                        "de",
+                                        "delivery_address.contactPerson"
+                                      )
+                                    ) +
+                                    "\n                        "
+                                )
+                              ]
+>>>>>>> stable
                             )
                           ) +
                           "\n            "
@@ -58368,6 +58779,7 @@ var render = function() {
                         value: _vm.selectionValue,
                         expression: "selectionValue"
                       }
+<<<<<<< HEAD
                     ],
                     staticClass: "custom-select",
                     on: {
@@ -58384,6 +58796,16 @@ var render = function() {
                           _vm.selectionValue = $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
+=======
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "text",
+                          name: "postnumber",
+                          id: "postnumber" + _vm._uid,
+                          "data-testing": "packing-station-de-postnumber"
+>>>>>>> stable
                         },
                         function($event) {
                           return _vm.onInputValueChanged($event.target.value)
@@ -58418,6 +58840,7 @@ var render = function() {
                         },
                         [_vm._v(_vm._s(value.name))]
                       )
+<<<<<<< HEAD
                     })
                   ],
                   2
@@ -58427,6 +58850,38 @@ var render = function() {
                   _c("span", { staticClass: "text-truncate" }, [
                     _vm._v(_vm._s(_vm.property.names.name))
                   ]),
+=======
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12 col-sm-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-unit",
+                  attrs: { "data-validate": "text", "data-model": "postalCode" }
+                },
+                [
+                  _c("input", {
+                    attrs: {
+                      type: "text",
+                      name: "zip",
+                      id: "txtZip" + _vm._uid,
+                      "data-testing": "packing-station-de-postalcode"
+                    },
+                    domProps: { value: _vm.value.postalCode },
+                    on: {
+                      input: function($event) {
+                        return _vm.emitInputEvent(
+                          "postalCode",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+>>>>>>> stable
                   _vm._v(" "),
                   _vm.surcharge > 0
                     ? _c("strong", { staticClass: "ml-1" }, [
@@ -58515,6 +58970,7 @@ var render = function() {
                   staticClass: "input-unit-preview",
                   class: { disabled: _vm.waiting }
                 },
+<<<<<<< HEAD
                 [_vm._v(_vm._s(_vm.selectedFileName))]
               ),
               _vm._v(" "),
@@ -58529,6 +58985,97 @@ var render = function() {
                         "(+ " +
                           _vm._s(_vm._f("currency")(_vm.surcharge)) +
                           ") *"
+=======
+                [
+                  _c("input", {
+                    attrs: {
+                      type: "text",
+                      name: "town",
+                      id: "txtPlace" + _vm._uid,
+                      "data-testing": "packing-station-de-town"
+                    },
+                    domProps: { value: _vm.value.town },
+                    on: {
+                      input: function($event) {
+                        return _vm.emitInputEvent("town", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "txtPlace" + _vm._uid } }, [
+                    _vm._v(
+                      _vm._s(_vm.$translate("Ceres::Template.addressPlace")) +
+                        "*"
+                    )
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._t("custom-address-fields")
+          ]
+        : _vm.localeToShow == "DE" && _vm.addressType === "1"
+        ? [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "billing_address.salutation")
+                  ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "billing_address.salutation"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'billing_address.salutation')"
+                            }
+                          ],
+                          staticClass: "input-unit"
+                        },
+                        [
+                          _c("salutation-select", {
+                            attrs: {
+                              "address-type": _vm.addressType,
+                              "address-data": _vm.value,
+                              "enabled-address-fields":
+                                _vm.optionalAddressFields,
+                              "default-salutation": _vm.defaultSalutation
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  $event.field,
+                                  $event.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "txtSalutation" + _vm._uid } },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressSalutation",
+                                      "de",
+                                      "billing_address.salutation"
+                                    )
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+>>>>>>> stable
                       )
                     ])
                   : _vm._e()
@@ -58784,9 +59331,50 @@ var render = function() {
                       _vm.$translate(
                         "Ceres::Template." + _vm.dynamicTranslationKey,
                         {
+<<<<<<< HEAD
                           price: _vm.$options.filters.currency(
                             _vm.dynamicPrice,
                             _vm.currentVariation.prices.set.currency
+=======
+                          staticClass: "input-unit",
+                          attrs: {
+                            "data-validate": "text",
+                            "data-model": "name1"
+                          }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              name: "company",
+                              id: "txtCompany" + _vm._uid,
+                              "data-autofocus": "",
+                              "data-testing": "billing-address-de-company"
+                            },
+                            domProps: { value: _vm.value.name1 },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "name1",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "txtCompany" + _vm._uid } },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.addressCompany"
+                                  )
+                                ) + "*"
+                              )
+                            ]
+>>>>>>> stable
                           )
                         }
                       )
@@ -58983,6 +59571,7 @@ var render = function() {
                               )
                             ]
                           )
+<<<<<<< HEAD
                         : _vm._e(),
                       _vm._v(" "),
                       _c("h1", { staticClass: "h2 title" }, [
@@ -59335,6 +59924,621 @@ var render = function() {
                           : _vm._e(),
                         _vm._v(" "),
                         _c("li", { staticClass: "nav-item" }, [
+=======
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "billing-address-de-name-inputs" }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  [
+                    _vm.isInOptionalFields("de", "billing_address.title")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.isInRequiredFields(
+                                    "de",
+                                    "billing_address.title"
+                                  ),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.title')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "title" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "title",
+                                  id: "txtTitle" + _vm._uid,
+                                  "data-autofocus": "",
+                                  "data-testing": "billing-address-de-title"
+                                },
+                                domProps: { value: _vm.value.title },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "title",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "txtTitle" + _vm._uid } },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressTitle",
+                                          "de",
+                                          "billing_address.title"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.areNameFieldsShown("de", "billing_address")
+                      ? [
+                          _c("div", { staticClass: "col-12 col-sm-4" }, [
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate:text",
+                                    value: _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
+                                    ),
+                                    expression:
+                                      "areNameFieldsRequired('de', 'billing_address')",
+                                    arg: "text"
+                                  }
+                                ],
+                                staticClass: "input-unit",
+                                attrs: { "data-model": "name2" }
+                              },
+                              [
+                                _c("input", {
+                                  attrs: {
+                                    type: "text",
+                                    name: "firstName",
+                                    id: "txtFirstName" + _vm._uid,
+                                    "data-autofocus": "",
+                                    "data-testing":
+                                      "billing-address-de-firstname"
+                                  },
+                                  domProps: { value: _vm.value.name2 },
+                                  on: {
+                                    input: function($event) {
+                                      return _vm.emitInputEvent(
+                                        "name2",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  { attrs: { for: "txtFirstName" + _vm._uid } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.addressFirstName"
+                                        )
+                                      )
+                                    ),
+                                    _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
+                                    )
+                                      ? [_vm._v("*")]
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 col-sm-4" }, [
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate:text",
+                                    value: _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
+                                    ),
+                                    expression:
+                                      "areNameFieldsRequired('de', 'billing_address')",
+                                    arg: "text"
+                                  }
+                                ],
+                                staticClass: "input-unit",
+                                attrs: { "data-model": "name3" }
+                              },
+                              [
+                                _c("input", {
+                                  attrs: {
+                                    type: "text",
+                                    name: "lastName",
+                                    id: "txtLastName" + _vm._uid,
+                                    "data-testing":
+                                      "billing-address-de-lastname"
+                                  },
+                                  domProps: { value: _vm.value.name3 },
+                                  on: {
+                                    input: function($event) {
+                                      return _vm.emitInputEvent(
+                                        "name3",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  { attrs: { for: "txtLastName" + _vm._uid } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.addressLastName"
+                                        )
+                                      )
+                                    ),
+                                    _vm.areNameFieldsRequired(
+                                      "de",
+                                      "billing_address"
+                                    )
+                                      ? [_vm._v("*")]
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ])
+                        ]
+                      : _c("div", { staticClass: "col-12 col-sm-8" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.isInRequiredFields(
+                                    "de",
+                                    "billing_address.contactPerson"
+                                  ),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.contactPerson')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "contactPerson" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "lastName",
+                                  id: "txtContactPerson" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.contactPerson },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "contactPerson",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  attrs: { for: "txtContactPerson" + _vm._uid }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressContactPerson",
+                                          "de",
+                                          "billing_address.contactPerson"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]),
+                    _vm._v(" "),
+                    _vm.isInOptionalFields("de", "billing_address.name4")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.isInRequiredFields(
+                                    "de",
+                                    "billing_address.name4"
+                                  ),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.name4')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "name4" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "decorateName",
+                                  id: "txtAdditionalName" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.name4 },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "name4",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  attrs: { for: "txtAdditionalName" + _vm._uid }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressAdditionalName",
+                                          "de",
+                                          "billing_address.name4"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isInOptionalFields("de", "billing_address.birthday")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:date",
+                                  value:
+                                    _vm.isInRequiredFields(
+                                      "de",
+                                      "billing_address.birthday"
+                                    ) ||
+                                    (!!_vm.value.birthday &&
+                                      !!_vm.value.birthday.length),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.birthday') || !!value.birthday && !!value.birthday.length",
+                                  arg: "date"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "birthday" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "date",
+                                  min: "1901-12-14",
+                                  max: new Date().toISOString().split("T")[0],
+                                  name: "birthday",
+                                  placeholder: _vm.$translate(
+                                    "Ceres::Template.addressBirthdatePlaceholder"
+                                  ),
+                                  id: "txtBirthdate" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.birthday },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "birthday",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "txtBirthdate" + _vm._uid } },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressBirthdate",
+                                          "de",
+                                          "billing_address.birthday"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isInOptionalFields("de", "billing_address.phoneNumber")
+                      ? _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.isInRequiredFields(
+                                    "de",
+                                    "billing_address.phoneNumber"
+                                  ),
+                                  expression:
+                                    "isInRequiredFields('de', 'billing_address.phoneNumber')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "telephone" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "telephone",
+                                  id: "txtTelephone" + _vm._uid
+                                },
+                                domProps: { value: _vm.value.telephone },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "telephone",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                { attrs: { for: "txtTelephone" + _vm._uid } },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.transformTranslation(
+                                          "Ceres::Template.addressTelephone",
+                                          "de",
+                                          "billing_address.phoneNumber"
+                                        )
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "billing-address-de-street-inputs" }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-sm-8" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
+                        attrs: {
+                          "data-validate": "text",
+                          "data-model": "address1"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "street",
+                            autocomplete: "address-line1",
+                            id: "txtStreet" + _vm._uid,
+                            "data-testing": "billing-address-de-street"
+                          },
+                          domProps: { value: _vm.value.address1 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address1",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtStreet" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.addressStreet")
+                              ) + "*"
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 col-sm-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
+                        attrs: {
+                          "data-validate": "text",
+                          "data-model": "address2"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "housenumber",
+                            autocomplete: "address-line2",
+                            id: "txtNumber" + _vm._uid,
+                            "data-testing": "billing-address-de-house-number"
+                          },
+                          domProps: { value: _vm.value.address2 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address2",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtNumber" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.addressNumber")
+                              ) + "*"
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "billing_address.address3")
+                  ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "billing_address.address3"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'billing_address.address3')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "address3" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              name: "decorateAddress",
+                              id: "decorateAddress0" + _vm._uid
+                            },
+                            domProps: { value: _vm.value.address3 },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "address3",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+>>>>>>> stable
                           _c(
                             "a",
                             {
@@ -59808,6 +61012,7 @@ var render = function() {
                                   ])
                                 ]
                               )
+<<<<<<< HEAD
                             ])
                           ]
                         ),
@@ -59885,6 +61090,79 @@ var render = function() {
                   _vm._s(
                     _vm.$translate(
                       "Ceres::Widget.itemBundlePlaceholderDescription"
+=======
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12 col-sm-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-unit",
+                  attrs: { "data-validate": "text", "data-model": "postalCode" }
+                },
+                [
+                  _c("input", {
+                    attrs: {
+                      type: "text",
+                      name: "zip",
+                      id: "txtZip" + _vm._uid,
+                      "data-testing": "billing-address-de-zip"
+                    },
+                    domProps: { value: _vm.value.postalCode },
+                    on: {
+                      input: function($event) {
+                        return _vm.emitInputEvent(
+                          "postalCode",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "txtZip" + _vm._uid } }, [
+                    _vm._v(
+                      _vm._s(_vm.$translate("Ceres::Template.addressZip")) + "*"
+                    )
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12 col-sm-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-unit",
+                  attrs: { "data-validate": "text", "data-model": "town" }
+                },
+                [
+                  _c("input", {
+                    attrs: {
+                      type: "text",
+                      name: "town",
+                      id: "txtPlace" + _vm._uid,
+                      "data-testing": "billing-address-de-town"
+                    },
+                    domProps: { value: _vm.value.town },
+                    on: {
+                      input: function($event) {
+                        return _vm.emitInputEvent("town", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "txtPlace" + _vm._uid } }, [
+                    _vm._v(
+                      _vm._s(_vm.$translate("Ceres::Template.addressPlace")) +
+                        "*"
+>>>>>>> stable
                     )
                   )
                 )
@@ -60748,6 +62026,7 @@ var render = function() {
                 _vm.item.unit.unitOfMeasurement === "C62" &&
                 _vm.item.unit.content === 1
               )
+<<<<<<< HEAD
                 ? _c("div", { staticClass: "category-unit-price small" }, [
                     _c("span", [_vm._v(_vm._s(_vm.item.unit.content))]),
                     _vm._v(" "),
@@ -61232,6 +62511,133 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
+=======
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-12",
+                attrs: { "data-testing": "invoice-addresses-street-select-gb" }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 col-sm-12" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit",
+                        attrs: {
+                          "data-validate": "text",
+                          "data-model": "address1"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            name: "street",
+                            autocomplete: "address-line1",
+                            id: "txtStreet" + _vm._uid
+                          },
+                          domProps: { value: _vm.value.address1 },
+                          on: {
+                            input: function($event) {
+                              return _vm.emitInputEvent(
+                                "address1",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "txtStreet" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.addressENAddressLine1"
+                                )
+                              ) + "*"
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.isInOptionalFields("gb", "billing_address.address2")
+                    ? _c("div", { staticClass: "col-12 col-sm-12" }, [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "billing_address.address2"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'billing_address.address2')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "address2" }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "text",
+                                name: "housenumber",
+                                autocomplete: "address-line2",
+                                id: "txtNumber" + _vm._uid
+                              },
+                              domProps: { value: _vm.value.address2 },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    "address2",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              { attrs: { for: "txtNumber" + _vm._uid } },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressENAddressLine2",
+                                        "gb",
+                                        "billing_address.address2"
+                                      )
+                                    ) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("gb", "billing_address.address3")
+                  ? _c("div", { staticClass: "col-12 col-sm-12" }, [
+>>>>>>> stable
                       _c(
                         "label",
                         {
@@ -62559,7 +63965,59 @@ var render = function() {
                                         "sender",
                                         $event.target.value
                                       )
+<<<<<<< HEAD
                                     }
+=======
+                                    ) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.areNameFieldsShown("de", "delivery_address")
+                    ? [
+                        _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.areNameFieldsRequired(
+                                    "de",
+                                    "delivery_address"
+                                  ),
+                                  expression:
+                                    "areNameFieldsRequired('de', 'delivery_address')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "name2" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "firstName",
+                                  id: "txtFirstName" + _vm._uid,
+                                  "data-autofocus": "",
+                                  "data-testing":
+                                    "delivery-address-de-firstname"
+                                },
+                                domProps: { value: _vm.value.name2 },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "name2",
+                                      $event.target.value
+                                    )
+>>>>>>> stable
                                   }
                                 }),
                                 _vm._v(" "),
@@ -62571,6 +64029,7 @@ var render = function() {
                                       )
                                     ) + "*"
                                   )
+<<<<<<< HEAD
                                 ])
                               ])
                             ]),
@@ -62618,6 +64077,52 @@ var render = function() {
                                         $event.target.value
                                       )
                                     }
+=======
+                                    ? [_vm._v("*")]
+                                    : _vm._e()
+                                ],
+                                2
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 col-sm-4" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate:text",
+                                  value: _vm.areNameFieldsRequired(
+                                    "de",
+                                    "delivery_address"
+                                  ),
+                                  expression:
+                                    "areNameFieldsRequired('de', 'delivery_address')",
+                                  arg: "text"
+                                }
+                              ],
+                              staticClass: "input-unit",
+                              attrs: { "data-model": "name3" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "text",
+                                  name: "lastName",
+                                  id: "txtLastName" + _vm._uid,
+                                  "data-testing": "delivery-address-de-lastname"
+                                },
+                                domProps: { value: _vm.value.name3 },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.emitInputEvent(
+                                      "name3",
+                                      $event.target.value
+                                    )
+>>>>>>> stable
                                   }
                                 }),
                                 _vm._v(" "),
@@ -62970,6 +64475,7 @@ var render = function() {
                       if ($event.target.composing) {
                         return
                       }
+<<<<<<< HEAD
                       _vm.firstName = $event.target.value
                     }
                   }
@@ -62984,6 +64490,37 @@ var render = function() {
                 _c("label", { attrs: { for: "last-name-input_" + _vm._uid } }, [
                   _vm._v(
                     _vm._s(_vm.$translate("Ceres::Template.newsletterLastName"))
+=======
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "text",
+                          name: "street",
+                          autocomplete: "address-line1",
+                          id: "txtStreet" + _vm._uid,
+                          "data-testing": "delivery-address-de-street"
+                        },
+                        domProps: { value: _vm.value.address1 },
+                        on: {
+                          input: function($event) {
+                            return _vm.emitInputEvent(
+                              "address1",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "txtStreet" + _vm._uid } }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.addressStreet")
+                          ) + "*"
+                        )
+                      ])
+                    ]
+>>>>>>> stable
                   )
                 ]),
                 _vm._v(" "),
@@ -63003,10 +64540,44 @@ var render = function() {
                       if ($event.target.composing) {
                         return
                       }
+<<<<<<< HEAD
                       _vm.lastName = $event.target.value
                     }
                   }
                 })
+=======
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "text",
+                          name: "housenumber",
+                          autocomplete: "address-line2",
+                          id: "txtNumber" + _vm._uid,
+                          "data-testing": "delivery-address-de-housenumber"
+                        },
+                        domProps: { value: _vm.value.address2 },
+                        on: {
+                          input: function($event) {
+                            return _vm.emitInputEvent(
+                              "address2",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "txtNumber" + _vm._uid } }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.addressNumber")
+                          ) + "*"
+                        )
+                      ])
+                    ]
+                  )
+                ])
+>>>>>>> stable
               ])
             ])
           : _vm._e(),
@@ -63103,6 +64674,7 @@ var render = function() {
                     ],
                     staticClass: "form-check-input",
                     attrs: {
+<<<<<<< HEAD
                       type: "checkbox",
                       id: "privacy-policy-accept-id_" + _vm._uid,
                       name: "privacy-policy-accept"
@@ -63111,6 +64683,12 @@ var render = function() {
                       checked: Array.isArray(_vm.privacyPolicyValue)
                         ? _vm._i(_vm.privacyPolicyValue, null) > -1
                         : _vm.privacyPolicyValue
+=======
+                      type: "text",
+                      name: "zip",
+                      id: "txtZip" + _vm._uid,
+                      "data-testing": "delivery-address-de-zip"
+>>>>>>> stable
                     },
                     on: {
                       change: function($event) {
@@ -63440,6 +65018,7 @@ var render = function() {
                   {
                     staticClass: "close",
                     attrs: {
+<<<<<<< HEAD
                       type: "button",
                       "data-dismiss": "modal",
                       "aria-hidden": "true"
@@ -63518,6 +65097,14 @@ var render = function() {
                     staticClass: "btn btn-primary btn-appearance btn-medium",
                     class: _vm.buttonSizeClass,
                     attrs: { disabled: _vm.isLoading, type: "button" },
+=======
+                      type: "text",
+                      name: "town",
+                      id: "txtPlace" + _vm._uid,
+                      "data-testing": "delivery-address-de-town"
+                    },
+                    domProps: { value: _vm.value.town },
+>>>>>>> stable
                     on: {
                       click: function($event) {
                         return _vm.sendReturnItems()
@@ -64694,7 +66281,39 @@ var render = function() {
             _vm._v(" "),
             _c("loading-animation")
           ]
+<<<<<<< HEAD
         : _vm._e()
+=======
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "col-12 col-sm-4",
+          attrs: { "data-testing": "address-country-select" }
+        },
+        [
+          _c("country-select", {
+            attrs: {
+              "selected-country-id": _vm.value.countryId,
+              "selected-state-id": _vm.value.stateId,
+              "address-type": _vm.addressType,
+              "optional-address-fields": _vm.optionalAddressFields,
+              "required-address-fields": _vm.requiredAddressFields
+            },
+            on: {
+              "country-changed": function($event) {
+                return _vm.onSelectedCountryChanged($event)
+              },
+              "state-changed": function($event) {
+                return _vm.emitInputEvent("stateId", $event)
+              }
+            }
+          })
+        ],
+        1
+      )
+>>>>>>> stable
     ],
     2
   )
@@ -64780,6 +66399,7 @@ var render = function() {
             [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
           ),
           _vm._v(" "),
+<<<<<<< HEAD
           _vm.showErrorCode
             ? _c("strong", [_vm._v(_vm._s(notification.code))])
             : _vm._e(),
@@ -64793,6 +66413,175 @@ var render = function() {
           })
         ],
         2
+=======
+          _c("label", [
+            _vm._v(_vm._s(_vm.$translate("Ceres::Template.headerCountry")))
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _vm.isInOptionalFields("stateId")
+        ? [
+            _vm.stateList && _vm.stateList.length > 0
+              ? _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "validate",
+                        rawName: "v-validate",
+                        value: _vm.isInRequiredFields("stateId"),
+                        expression: "isInRequiredFields('stateId')"
+                      }
+                    ],
+                    staticClass: "input-unit",
+                    attrs: { "data-model": "stateId" }
+                  },
+                  [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "custom-select",
+                        domProps: { value: _vm.selectedStateId },
+                        on: {
+                          change: function($event) {
+                            return _vm.stateChanged($event.target.value)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            domProps: { selected: _vm.selectedStateId === null }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.addressPleaseSelect"
+                                )
+                              )
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.stateList, function(state) {
+                          return _c(
+                            "option",
+                            {
+                              key: state.id,
+                              domProps: {
+                                value: state.id,
+                                selected: state.id === _vm.selectedStateId
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(state.name) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("label", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(
+                            _vm.transformTranslation(
+                              "Ceres::Template.headerState",
+                              "stateId"
+                            )
+                          ) +
+                          "\n            "
+                      )
+                    ])
+                  ]
+                )
+              : _vm._e()
+          ]
+        : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/ReCaptcha.vue?vue&type=template&id=4424f830&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/ReCaptcha.vue?vue&type=template&id=4424f830& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { "data-recaptcha": "" } })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/SalutationSelect.vue?vue&type=template&id=0e49b1a3&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/SalutationSelect.vue?vue&type=template&id=0e49b1a3& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "select",
+    {
+      staticClass: "custom-select",
+      attrs: { "data-testing": "salutation-select", "data-autofocus": "" },
+      domProps: { value: _vm.addressData.gender },
+      on: {
+        change: function($event) {
+          return _vm.emitInputEvent($event.target.value)
+        }
+      }
+    },
+    _vm._l(_vm.currentSalutation, function(salutation, index) {
+      return _c(
+        "option",
+        {
+          key: index,
+          domProps: {
+            value: salutation.key,
+            selected:
+              _vm.addressData.gender === salutation.key &&
+              _vm.checkGenderCompany(salutation.key)
+          }
+        },
+        [_vm._v("\n        " + _vm._s(salutation.name) + "\n    ")]
+>>>>>>> stable
       )
     }),
     0
@@ -64805,10 +66594,17 @@ render._withStripped = true
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/pageDesign/Popper.vue?vue&type=template&id=00b0102c&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/pageDesign/Popper.vue?vue&type=template&id=00b0102c& ***!
   \****************************************************************************************************************************************************************************************************************************/
+=======
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/login/UserLoginHandler.vue?vue&type=template&id=166fadbe&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/login/UserLoginHandler.vue?vue&type=template&id=166fadbe& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+>>>>>>> stable
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -64820,6 +66616,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c("div", [
     _c(
       "div",
@@ -64846,6 +66643,166 @@ var render = function() {
             style: _vm.bodyStyle
           },
           [_vm._t("content")],
+=======
+  return _c("div", { staticClass: "position-relative" }, [
+    _vm.isLoggedIn
+      ? _c("div", { staticClass: "dropdown" }, [
+          _c(
+            "a",
+            {
+              staticClass: "dropdown-toggle nav-link",
+              attrs: {
+                href: "#",
+                id: "accountMenuList",
+                "data-toggle": "dropdown",
+                "aria-haspopup": "true",
+                "aria-expanded": "false",
+                "data-boundary": "window"
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-user mr-1 d-sm-none",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "d-none d-sm-inline" }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.loginHello", {
+                      username: _vm.username
+                    })
+                  )
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "dropdown-menu small m-0 p-0 mw-100" }, [
+            _c(
+              "div",
+              {
+                staticClass: "list-group",
+                attrs: { "aria-labelledby": "accountMenuList" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item small",
+                    attrs: { href: _vm.$ceres.urls.myAccount }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-user" }),
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.$translate("Ceres::Template.loginMyAccount"))
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    directives: [{ name: "logout", rawName: "v-logout" }],
+                    staticClass: "list-group-item small",
+                    attrs: { href: "#" }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-sign-out" }),
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.$translate("Ceres::Template.loginLogout"))
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.isLoggedIn
+      ? _c(
+          "div",
+          [
+            _vm.showLogin
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: {
+                      "data-testing": "login-select",
+                      href: _vm.isLogin ? "javascript:void(0)" : "#login",
+                      "data-toggle": _vm.isLogin ? false : "modal",
+                      "aria-label": _vm.$translate("Ceres::Template.login")
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.createLoginModal()
+                        _vm.unmarkInputFields()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-user mr-1",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "d-none d-sm-inline" }, [
+                      _vm._v(_vm._s(_vm.$translate("Ceres::Template.login")))
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.showRegistration
+              ? [
+                  !_vm.showLogin
+                    ? _c("span", { staticClass: "pipe" })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        "data-testing": "register-select",
+                        href: _vm.isRegister
+                          ? "javascript:void(0)"
+                          : "#registration",
+                        "data-toggle": _vm.isRegister ? false : "modal",
+                        "aria-label": _vm.$translate(
+                          "Ceres::Template.loginRegister"
+                        )
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.createRegisterModal()
+                          _vm.unmarkInputFields()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-user-plus mr-1",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "d-none d-sm-inline" }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.loginRegister")
+                          )
+                        )
+                      ])
+                    ]
+                  )
+                ]
+              : _vm._e()
+          ],
+>>>>>>> stable
           2
         ),
         _vm._v(" "),
@@ -64918,6 +66875,7 @@ var render = function() {
                     "span",
                     { staticClass: "flex-fill" },
                     [
+<<<<<<< HEAD
                       consentGroup.label.length > 0
                         ? [
                             _vm._v(
@@ -64929,6 +66887,69 @@ var render = function() {
                         : [
                             _vm._v(
                               "\n                            " +
+=======
+                      _vm.currentVariation.filter.hasManufacturer
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "producertag h6 producer text-muted"
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.currentVariation.item.manufacturer
+                                      .externalName
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "h1",
+                        {
+                          staticClass: "h2 title",
+                          attrs: { "data-testing": "item-name" }
+                        },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm._f("itemName")(_vm.currentVariation)
+                                ) +
+                                "\n                            "
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._t("tag-list"),
+                      _vm._v(" "),
+                      _vm.isShortDescriptionActive &&
+                      _vm.currentVariation.texts.shortDescription !== ""
+                        ? _c("p", {
+                            staticClass: "single-description",
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.currentVariation.texts.shortDescription
+                              )
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("hr"),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-5" }, [
+                        _c(
+                          "span",
+                          { staticClass: "articlenumber small text-muted" },
+                          [
+                            _c("b", [
+                              _vm._v(
+>>>>>>> stable
                                 _vm._s(
                                   _vm.$translate(
                                     "Ceres::Template.privacySettingsDefaultGroup"
@@ -72334,6 +74355,7 @@ function normalizeComponent (
       }
     }
 
+<<<<<<< HEAD
     var hydrationBailed = false;
     // list of modules that can skip create hook during hydration because they
     // are already rendered on the client or has no need for initialization
@@ -72560,6 +74582,150 @@ function normalizeComponent (
       updateDirectives(vnode, emptyNode);
     }
   };
+=======
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "container-max",
+      class: { "p-0": _vm.$ceres.isShopBuilder }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "position-relative" },
+        [
+          _c(
+            "div",
+            { staticClass: "d-flex flex-grow-1 position-relative my-2" },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchString,
+                    expression: "searchString"
+                  }
+                ],
+                ref: "searchInput",
+                staticClass: "search-input flex-grow-1 px-3 py-2",
+                attrs: {
+                  type: "search",
+                  autofocus: _vm.isShopBuilder,
+                  "aria-label": _vm.$translate(
+                    "Ceres::Template.headerSearchTerm"
+                  )
+                },
+                domProps: { value: _vm.searchString },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.searchString = $event.target.value
+                    },
+                    function($event) {
+                      return _vm.onValueChanged($event.target.value)
+                    }
+                  ],
+                  keyup: function($event) {
+                    if (
+                      !$event.type.indexOf("key") &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.search()
+                  },
+                  focus: function($event) {
+                    _vm.isSearchFocused = true
+                  },
+                  blur: function($event) {
+                    return _vm.onBlurSearchField($event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm._t("search-button", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "search-submit px-3",
+                    attrs: {
+                      type: "submit",
+                      "aria-label": _vm.$translate(
+                        "Ceres::Template.headerSearch"
+                      )
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.search()
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-search" })]
+                )
+              ])
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _vm.isSearchFocused
+            ? [
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.hasAutocompleteResults,
+                        expression: "hasAutocompleteResults"
+                      }
+                    ]
+                  },
+                  [
+                    _vm._t("autocomplete-suggestions", [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "autocomplete-suggestions shadow bg-white w-100 "
+                        },
+                        [
+                          _c("search-suggestion-item", {
+                            attrs: {
+                              "show-images": _vm.showItemImages,
+                              "suggestion-type": "item"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ],
+                  2
+                )
+              ]
+            : _vm._e()
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+>>>>>>> stable
 
   function updateDirectives (oldVnode, vnode) {
     if (oldVnode.data.directives || vnode.data.directives) {
@@ -72813,7 +74979,46 @@ function normalizeComponent (
     update: updateClass
   };
 
+<<<<<<< HEAD
   /*  */
+=======
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "a",
+    {
+      staticClass: "nav-link",
+      attrs: {
+        href: _vm.urlWishList,
+        rel: "nofollow",
+        "aria-label": _vm.$translate("Ceres::Template.wishList")
+      }
+    },
+    [
+      _c("span", { staticClass: "badge-right mr-1 d-none d-sm-inline" }, [
+        _vm._v(_vm._s(_vm.wishListCount))
+      ]),
+      _vm._v(" "),
+      _c("i", {
+        staticClass: "fa",
+        class: {
+          "fa-heart-o": !_vm.wishListCount,
+          "fa-heart": _vm.wishListCount
+        },
+        attrs: { "aria-hidden": "true" }
+      })
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+>>>>>>> stable
 
   var validDivisionCharRE = /[\w).+\-_$\]]/;
 
@@ -84693,12 +86898,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/js/src/app/components/item/TagList.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/src/app/components/item/TagList.vue ***!
   \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
+=======
+      return this.$store.getters.isLoggedIn || this.addressList.length < 2;
+    },
+    isAddressListEmpty: function isAddressListEmpty() {
+      return !(this.addressList && this.addressList.length > 0);
+    },
+    isSalutationEnabled: function isSalutationEnabled() {
+      var countryId = parseInt(this.addressToEdit.countryId) || 1;
+      var addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
+      var countryKey = countryId === 12 ? "gb" : "de";
+      return this.optionalAddressFields[countryKey].includes("".concat(addressKey, ".salutation"));
+    },
+    addressTypePrefix: function addressTypePrefix() {
+      return parseInt(this.addressType) === 1 ? "billing-" : "delivery-";
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_24__["mapState"])({
+    countryList: function countryList(state) {
+      return state.localization.shippingCountries;
+    },
+    isBasketLoading: function isBasketLoading(state) {
+      return state.basket.isBasketLoading;
+    },
+    isCheckoutReadonly: function isCheckoutReadonly(state) {
+      return state.checkout.readOnly;
+    }
+  })),
+>>>>>>> stable
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -85054,6 +87287,55 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+<<<<<<< HEAD
+=======
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("invoice-address-select", {
+  components: {
+    AddressSelect: _AddressSelect__WEBPACK_IMPORTED_MODULE_4__["default"]
+  },
+  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\"\n            data-testing=\"billing-address-select\">\n        </address-select>\n    ",
+  props: {
+    optionalAddressFields: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    requiredAddressFields: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    defaultSalutation: {
+      type: String,
+      default: App.config.addresses.defaultSalutation
+    },
+    hasToValidate: {
+      type: Boolean,
+      default: false
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
+    }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
+    billingAddressId: function billingAddressId(state) {
+      return state.address.billingAddressId;
+    },
+    billingAddressList: function billingAddressList(state) {
+      return state.address.billingAddressList;
+    },
+    showError: function showError(state) {
+      return state.checkout.validation.invoiceAddress.showError;
+    }
+  }),
+>>>>>>> stable
 
 /* normalize component */
 
@@ -85104,6 +87386,64 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemStoreSpecial_vue_vue_type_template_id_9410a8b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+<<<<<<< HEAD
+=======
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("shipping-address-select", {
+  components: {
+    AddressSelect: _AddressSelect__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\"\n            data-testing=\"delivery-address-select\">\n        </address-select>\n    ",
+  props: {
+    optionalAddressFields: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    requiredAddressFields: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    defaultSalutation: {
+      type: String,
+      default: App.config.addresses.defaultSalutation
+    },
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
+    }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+    deliveryAddressId: function deliveryAddressId(state) {
+      return state.address.deliveryAddressId;
+    }
+  }),
+  methods: {
+    /**
+     * Update the delivery address
+     * @param selectedAddress
+     */
+    addressChanged: function addressChanged(selectedAddress) {
+      var _this = this;
+
+      this.$store.dispatch("selectAddress", {
+        selectedAddress: selectedAddress,
+        addressType: "2"
+      }).then(function (response) {
+        document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", {
+          detail: _this.deliveryAddressId
+        }));
+      }, function (error) {});
+    }
+  }
+}));
+>>>>>>> stable
 
 /***/ }),
 
@@ -86697,7 +89037,8 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 
       if (!this.waiting && !this.isDataLoaded) {
         this.waiting = true;
-        ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id).done(function (orderDetails) {
+        var testing = window.ceresEnv !== "testing" ? "" : "&env=testing";
+        ApiService.get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id + testing).done(function (orderDetails) {
           var compiled = vue__WEBPACK_IMPORTED_MODULE_0___default.a.compile(orderDetails);
           var component = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
             data: {
@@ -88499,6 +90840,32 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.directive("populate-store", {
         _store_index__WEBPACK_IMPORTED_MODULE_1__["default"].commit(name, data);
       }
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/app/directives/helper/testingAttr.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/src/app/directives/helper/testingAttr.js ***!
+  \***************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("testing-attr", {
+  bind: function bind(el, binding) {
+    if (window.ceresEnv !== "testing") {
+      return;
+    }
+
+    var attr = binding.arg;
+    var attrValue = binding.value;
+    el.setAttribute(attr, attrValue);
   }
 });
 
@@ -91499,7 +93866,7 @@ function getLabelForId(id) {
 }
 function serializeForm(form) {
   var formData = {};
-  var formElements = form.querySelectorAll("[name]:not(.g-recaptcha-response)");
+  var formElements = form.querySelectorAll("[name]:not(.g-recaptcha-response):not([type=file])");
 
   var _iterator2 = _createForOfIteratorHelper(formElements),
       _step2;
@@ -92597,6 +94964,10 @@ var defaultConfig = {
 
       if (element.getAttribute("data-alt")) {
         img.alt = element.getAttribute("data-alt");
+      }
+
+      if (element.getAttribute("data-title")) {
+        img.title = element.getAttribute("data-title");
       }
 
       if (element.getAttribute("data-picture-class")) {
@@ -94348,6 +96719,9 @@ function _validateInput($formControl, validationKey) {
     case "password":
       return _isPassword($formControl);
 
+    case "file":
+      return _hasValue($formControl);
+
     case "regex":
       {
         var ref = $formControl.attr("data-validate-ref");
@@ -94454,31 +96828,28 @@ function _eval(input) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.sort */ "./node_modules/core-js/modules/es.array.sort.js");
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _modules_AddressModule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/AddressModule */ "./resources/js/src/app/store/modules/AddressModule.js");
-/* harmony import */ var _modules_BasketModule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/BasketModule */ "./resources/js/src/app/store/modules/BasketModule.js");
-/* harmony import */ var _modules_CheckoutModule__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/CheckoutModule */ "./resources/js/src/app/store/modules/CheckoutModule.js");
-/* harmony import */ var _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/ConsentModule */ "./resources/js/src/app/store/modules/ConsentModule.js");
-/* harmony import */ var _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/ContactFormModule */ "./resources/js/src/app/store/modules/ContactFormModule.js");
-/* harmony import */ var _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/ItemListModule */ "./resources/js/src/app/store/modules/ItemListModule.js");
-/* harmony import */ var _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/ItemSearchModule */ "./resources/js/src/app/store/modules/ItemSearchModule.js");
-/* harmony import */ var _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/LastSeenModule */ "./resources/js/src/app/store/modules/LastSeenModule.js");
-/* harmony import */ var _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/LazyComponentModule */ "./resources/js/src/app/store/modules/LazyComponentModule.js");
-/* harmony import */ var _modules_LiveShoppingModule__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/LiveShoppingModule */ "./resources/js/src/app/store/modules/LiveShoppingModule.js");
-/* harmony import */ var _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/LocalizationModule */ "./resources/js/src/app/store/modules/LocalizationModule.js");
-/* harmony import */ var _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/NavigationModule */ "./resources/js/src/app/store/modules/NavigationModule.js");
-/* harmony import */ var _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/OrderReturnModule */ "./resources/js/src/app/store/modules/OrderReturnModule.js");
-/* harmony import */ var _modules_UserModule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/UserModule */ "./resources/js/src/app/store/modules/UserModule.js");
-/* harmony import */ var _modules_WishListModule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/WishListModule */ "./resources/js/src/app/store/modules/WishListModule.js");
-/* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
-/* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _modules_AddressModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/AddressModule */ "./resources/js/src/app/store/modules/AddressModule.js");
+/* harmony import */ var _modules_BasketModule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/BasketModule */ "./resources/js/src/app/store/modules/BasketModule.js");
+/* harmony import */ var _modules_CheckoutModule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/CheckoutModule */ "./resources/js/src/app/store/modules/CheckoutModule.js");
+/* harmony import */ var _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/ConsentModule */ "./resources/js/src/app/store/modules/ConsentModule.js");
+/* harmony import */ var _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/ContactFormModule */ "./resources/js/src/app/store/modules/ContactFormModule.js");
+/* harmony import */ var _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/ItemListModule */ "./resources/js/src/app/store/modules/ItemListModule.js");
+/* harmony import */ var _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/ItemSearchModule */ "./resources/js/src/app/store/modules/ItemSearchModule.js");
+/* harmony import */ var _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/LastSeenModule */ "./resources/js/src/app/store/modules/LastSeenModule.js");
+/* harmony import */ var _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/LazyComponentModule */ "./resources/js/src/app/store/modules/LazyComponentModule.js");
+/* harmony import */ var _modules_LiveShoppingModule__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/LiveShoppingModule */ "./resources/js/src/app/store/modules/LiveShoppingModule.js");
+/* harmony import */ var _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/LocalizationModule */ "./resources/js/src/app/store/modules/LocalizationModule.js");
+/* harmony import */ var _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/NavigationModule */ "./resources/js/src/app/store/modules/NavigationModule.js");
+/* harmony import */ var _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/OrderReturnModule */ "./resources/js/src/app/store/modules/OrderReturnModule.js");
+/* harmony import */ var _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/UserModule */ "./resources/js/src/app/store/modules/UserModule.js");
+/* harmony import */ var _modules_WishListModule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/WishListModule */ "./resources/js/src/app/store/modules/WishListModule.js");
+/* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
+/* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -94503,54 +96874,43 @@ __webpack_require__.r(__webpack_exports__);
 // init vuex store
 // =========================
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.options.delimiters = ["${", "}"];
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]); // eslint-disable-next-line
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.options.delimiters = ["${", "}"];
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); // eslint-disable-next-line
 
-var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
+var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    address: _modules_AddressModule__WEBPACK_IMPORTED_MODULE_4__["default"],
-    basket: _modules_BasketModule__WEBPACK_IMPORTED_MODULE_5__["default"],
-    checkout: _modules_CheckoutModule__WEBPACK_IMPORTED_MODULE_6__["default"],
-    consents: _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_7__["default"],
-    contactForm: _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_8__["default"],
-    itemList: _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_9__["default"],
-    items: _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_19__["default"],
-    itemSearch: _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_10__["default"],
-    lastSeen: _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_11__["default"],
-    lazyComponent: _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_12__["default"],
-    liveShopping: _modules_LiveShoppingModule__WEBPACK_IMPORTED_MODULE_13__["default"],
-    localization: _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_14__["default"],
-    navigation: _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_15__["default"],
-    orderReturn: _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_16__["default"],
-    user: _modules_UserModule__WEBPACK_IMPORTED_MODULE_17__["default"],
-    wishList: _modules_WishListModule__WEBPACK_IMPORTED_MODULE_18__["default"]
+    address: _modules_AddressModule__WEBPACK_IMPORTED_MODULE_3__["default"],
+    basket: _modules_BasketModule__WEBPACK_IMPORTED_MODULE_4__["default"],
+    checkout: _modules_CheckoutModule__WEBPACK_IMPORTED_MODULE_5__["default"],
+    consents: _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_6__["default"],
+    contactForm: _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_7__["default"],
+    itemList: _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_8__["default"],
+    items: _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__["default"],
+    itemSearch: _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_9__["default"],
+    lastSeen: _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_10__["default"],
+    lazyComponent: _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_11__["default"],
+    liveShopping: _modules_LiveShoppingModule__WEBPACK_IMPORTED_MODULE_12__["default"],
+    localization: _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_13__["default"],
+    navigation: _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_14__["default"],
+    orderReturn: _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_15__["default"],
+    user: _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__["default"],
+    wishList: _modules_WishListModule__WEBPACK_IMPORTED_MODULE_17__["default"]
   },
-  plugins: [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_20__["default"]]
+  plugins: [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__["default"]]
 }); // =========================
 // Fill initial vuex data
 // =========================
 
-App.initialData.shippingCountries.sort(function (first, second) {
-  if (first.currLangName < second.currLangName) {
-    return -1;
-  }
-
-  if (first.currLangName > second.currLangName) {
-    return 1;
-  }
-
-  return 0;
-});
 store.commit("setShippingCountries", App.initialData.shippingCountries);
 store.commit("setShippingCountryId", App.initialData.shippingCountryId);
 store.commit("setShowNetPrices", App.initialData.showNetPrices);
 store.commit("initConsents");
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("LocalizationChanged", function (data) {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("LocalizationChanged", function (data) {
   store.commit("setShippingCountries", data.localization.activeShippingCountries);
   store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
 });
 window.ceresStore = store;
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterBasketChanged", function (data) {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketChanged", function (data) {
   store.commit("setBasket", data.basket);
   store.commit("setShowNetPrices", data.showNetPrices);
   store.commit("setWishListIds", data.basket.itemWishListIds);
@@ -94560,10 +96920,10 @@ store.dispatch("loadBasketData");
  * Loads user data after pageload
  */
 
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].get("/rest/io/customer", {}, {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].get("/rest/io/customer", {}, {
   keepOriginalResponse: true
 }).done(function (response) {
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(response.data)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(response.data)) {
     store.commit("setUserData", response.data);
   }
 });
@@ -94571,10 +96931,10 @@ _services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].get("/rest/io/custo
  * Adds login/logout event listeners
  */
 
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterAccountAuthentication", function (userData) {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterAccountAuthentication", function (userData) {
   store.commit("setUserData", userData.accountContact);
 });
-_services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].listen("AfterAccountContactLogout", function () {
+_services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterAccountContactLogout", function () {
   store.commit("setUserData", null);
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
@@ -94641,7 +97001,6 @@ var mutations = {
     if (billingAddress) {
       state.billingAddressId = billingAddress.id;
       state.billingAddress = billingAddress;
-      document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
     }
   },
   selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
@@ -94683,7 +97042,6 @@ var mutations = {
     if (deliveryAddress) {
       state.deliveryAddressId = deliveryAddress.id;
       state.deliveryAddress = deliveryAddress;
-      document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
     }
   },
   removeBillingAddress: function removeBillingAddress(state, billingAddress) {
@@ -94809,6 +97167,7 @@ var actions = {
     commit("selectBillingAddress", addressList.find(function (address) {
       return address.id === id;
     }));
+    document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
   },
   initDeliveryAddress: function initDeliveryAddress(_ref5, _ref6) {
     var commit = _ref5.commit;
@@ -94828,6 +97187,7 @@ var actions = {
     commit("selectDeliveryAddress", addressList.find(function (address) {
       return address.id === id;
     }));
+    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
   },
   selectAddress: function selectAddress(_ref7, _ref8) {
     var commit = _ref7.commit,
@@ -94852,6 +97212,13 @@ var actions = {
         supressNotifications: true
       }).done(function (response) {
         commit("setIsBasketLoading", false);
+
+        if (addressType === "1") {
+          document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
+        } else if (addressType === "2") {
+          document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
+        }
+
         return resolve(response);
       }).fail(function (error) {
         if (addressType === "1") {
@@ -95853,20 +98220,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
-/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
+/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
+/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+
 
 
 
@@ -95921,9 +98291,9 @@ function readFormOptions(form, formData) {
         switch (element.dataset.mail) {
           case "cc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.cc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.cc.push(formData[element.value].value);
               }
             }
@@ -95932,9 +98302,9 @@ function readFormOptions(form, formData) {
 
           case "bcc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.bcc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.bcc.push(formData[element.value].value);
               }
             }
@@ -95943,9 +98313,9 @@ function readFormOptions(form, formData) {
 
           case "reply-to-address":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.replyTo.mail = element.value;
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_18__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.replyTo.mail = formData[element.value].value;
               }
             }
@@ -96015,29 +98385,40 @@ var actions = {
     }
 
     var recaptchaEl = event.target.querySelector("[data-recaptcha]");
-    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_19__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_14__["default"].validate(event.target).done(function () {
+    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(event.target).done(function () {
         disableForm(event.target, true);
-        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_17__["serializeForm"])(event.target);
+        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["serializeForm"])(event.target);
         var formOptions = readFormOptions(event.target, formData);
-        ApiService.post("/rest/io/customer/contact/mail", {
-          data: formData,
-          recipient: formOptions.recipient,
-          subject: formOptions.subject || "",
-          cc: formOptions.cc,
-          bcc: formOptions.bcc,
-          replyTo: formOptions.replyTo,
-          recaptchaToken: recaptchaResponse
-        }).done(function (reponse) {
+        sendFile(event, recaptchaResponse).then(function (response) {
+          resetRecaptcha();
+          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
+            ApiService.post("/rest/io/customer/contact/mail", {
+              data: formData,
+              recipient: formOptions.recipient,
+              subject: formOptions.subject || "",
+              cc: formOptions.cc,
+              bcc: formOptions.bcc,
+              replyTo: formOptions.replyTo,
+              recaptchaToken: recaptchaToken2,
+              fileKeys: response.fileKeys
+            }).done(function (response) {
+              resetRecaptcha(recaptchaEl);
+              event.target.reset();
+              disableForm(event.target, false);
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+            }).fail(function (response) {
+              resetRecaptcha(recaptchaEl);
+              disableForm(event.target, false);
+              response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail");
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
+            });
+          });
+        }, function (response) {
           resetRecaptcha(recaptchaEl);
-          event.target.reset();
           disableForm(event.target, false);
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
-        }).fail(function (response) {
-          resetRecaptcha(recaptchaEl);
-          disableForm(event.target, false);
-          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactSendFail");
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(response.error);
+          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactFileUploadFail");
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
         });
       }).fail(function (invalidFields) {
         resetRecaptcha(recaptchaEl);
@@ -96049,7 +98430,7 @@ var actions = {
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var field = _step2.value;
-            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_17__["getLabel"])(field));
+            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["getLabel"])(field));
           }
         } catch (err) {
           _iterator2.e(err);
@@ -96057,16 +98438,71 @@ var actions = {
           _iterator2.f();
         }
 
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_14__["default"].markInvalidFields(invalidFields, "error");
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
           fields: fieldNames.join(", ")
         }));
       });
     }).catch(function () {
-      _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
     });
   }
 };
+
+function sendFile(event, recaptchaToken) {
+  return new Promise(function (resolve, reject) {
+    var formData = new FormData();
+    var fileInputs = event.target.querySelectorAll("input[type=file]");
+    var containsFiles = false;
+
+    var _iterator3 = _createForOfIteratorHelper(fileInputs),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var fileInput = _step3.value;
+
+        var _iterator4 = _createForOfIteratorHelper(fileInput.files),
+            _step4;
+
+        try {
+          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+            var file = _step4.value;
+            containsFiles = true;
+            formData.append("fileData[]", file);
+          }
+        } catch (err) {
+          _iterator4.e(err);
+        } finally {
+          _iterator4.f();
+        }
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+
+    if (!containsFiles) {
+      resolve({});
+      return;
+    }
+
+    formData.append("recaptchaToken", recaptchaToken);
+    ApiService.post("/rest/io/customer/contact/mail/file", formData, {
+      processData: false,
+      contentType: false,
+      cache: false,
+      async: true,
+      timeout: 60000,
+      supressNotifications: true
+    }).done(function (response) {
+      resolve(response);
+    }).fail(function (error) {
+      reject(error);
+    });
+  });
+}
 
 function resetRecaptcha(recaptchaEl) {
   if (App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha) {
@@ -98408,6 +100844,7 @@ var cloneDeep = __webpack_require__(/*! lodash/cloneDeep */ "./node_modules/loda
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< HEAD
 /* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/publicPath */ "./resources/js/src/app/publicPath.js");
 /* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_app_publicPath__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var custom_event_polyfill__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! custom-event-polyfill */ "./node_modules/custom-event-polyfill/custom-event-polyfill.js");
@@ -98527,6 +100964,88 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
 /* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
 /* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+=======
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/publicPath */ "./resources/js/src/app/publicPath.js");
+/* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_app_publicPath__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var custom_event_polyfill__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! custom-event-polyfill */ "./node_modules/custom-event-polyfill/custom-event-polyfill.js");
+/* harmony import */ var custom_event_polyfill__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(custom_event_polyfill__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
+/* harmony import */ var _app_plugins_script2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app/plugins/script2 */ "./resources/js/src/app/plugins/script2.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _app_services_UrlService__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _app_components_common_LazyImg_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/components/common/LazyImg.vue */ "./resources/js/src/app/components/common/LazyImg.vue");
+/* harmony import */ var _app_components_common_Intersect_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/components/common/Intersect.vue */ "./resources/js/src/app/components/common/Intersect.vue");
+/* harmony import */ var _app_components_common_TabList_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./app/components/common/TabList.vue */ "./resources/js/src/app/components/common/TabList.vue");
+/* harmony import */ var _app_components_common_TabItem_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app/components/common/TabItem.vue */ "./resources/js/src/app/components/common/TabItem.vue");
+/* harmony import */ var _app_components_customer_ReCaptcha_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app/components/customer/ReCaptcha.vue */ "./resources/js/src/app/components/customer/ReCaptcha.vue");
+/* harmony import */ var _app_components_customer_login_UserLoginHandler_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app/components/customer/login/UserLoginHandler.vue */ "./resources/js/src/app/components/customer/login/UserLoginHandler.vue");
+/* harmony import */ var _app_components_itemList_ItemSearch_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app/components/itemList/ItemSearch.vue */ "./resources/js/src/app/components/itemList/ItemSearch.vue");
+/* harmony import */ var _app_components_pageDesign_Icon_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app/components/pageDesign/Icon.vue */ "./resources/js/src/app/components/pageDesign/Icon.vue");
+/* harmony import */ var _app_components_pageDesign_MobileNavigation_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./app/components/pageDesign/MobileNavigation.vue */ "./resources/js/src/app/components/pageDesign/MobileNavigation.vue");
+/* harmony import */ var _app_components_pageDesign_Notifications_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./app/components/pageDesign/Notifications.vue */ "./resources/js/src/app/components/pageDesign/Notifications.vue");
+/* harmony import */ var _app_components_wishList_WishListCount_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./app/components/wishList/WishListCount.vue */ "./resources/js/src/app/components/wishList/WishListCount.vue");
+/* harmony import */ var _app_components_common_LazyLoad_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./app/components/common/LazyLoad.vue */ "./resources/js/src/app/components/common/LazyLoad.vue");
+/* harmony import */ var _app_components_item_SingleItem_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./app/components/item/SingleItem.vue */ "./resources/js/src/app/components/item/SingleItem.vue");
+/* harmony import */ var _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./app/components/item/SingleItemSetComponent.vue */ "./resources/js/src/app/components/item/SingleItemSetComponent.vue");
+/* harmony import */ var _app_directives_basket_basketItemQuantity__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./app/directives/basket/basketItemQuantity */ "./resources/js/src/app/directives/basket/basketItemQuantity.js");
+/* harmony import */ var _app_directives_basket_basketItemSum__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./app/directives/basket/basketItemSum */ "./resources/js/src/app/directives/basket/basketItemSum.js");
+/* harmony import */ var _app_directives_basket_toggleBasketPreview__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./app/directives/basket/toggleBasketPreview */ "./resources/js/src/app/directives/basket/toggleBasketPreview.js");
+/* harmony import */ var _app_directives_category_openFilterToolbar__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./app/directives/category/openFilterToolbar */ "./resources/js/src/app/directives/category/openFilterToolbar.js");
+/* harmony import */ var _app_directives_common_truncateTooltip__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./app/directives/common/truncateTooltip */ "./resources/js/src/app/directives/common/truncateTooltip.js");
+/* harmony import */ var _app_directives_customer_logout__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./app/directives/customer/logout */ "./resources/js/src/app/directives/customer/logout.js");
+/* harmony import */ var _app_directives_helper_testingAttr__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./app/directives/helper/testingAttr */ "./resources/js/src/app/directives/helper/testingAttr.js");
+/* harmony import */ var _app_directives_helper_populateStore__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./app/directives/helper/populateStore */ "./resources/js/src/app/directives/helper/populateStore.js");
+/* harmony import */ var _app_directives_helper_validate__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./app/directives/helper/validate */ "./resources/js/src/app/directives/helper/validate.js");
+/* harmony import */ var _app_directives_helper_waitingAnimation__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimation */ "./resources/js/src/app/directives/helper/waitingAnimation.js");
+/* harmony import */ var _app_directives_helper_waitingAnimationInfinite__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimationInfinite */ "./resources/js/src/app/directives/helper/waitingAnimationInfinite.js");
+/* harmony import */ var _app_directives_navigation_navigationTouchHandler__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./app/directives/navigation/navigationTouchHandler */ "./resources/js/src/app/directives/navigation/navigationTouchHandler.js");
+/* harmony import */ var _app_directives_navigation_openMobileNavigation__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./app/directives/navigation/openMobileNavigation */ "./resources/js/src/app/directives/navigation/openMobileNavigation.js");
+/* harmony import */ var _app_directives_pageDesign_scrollToTop__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./app/directives/pageDesign/scrollToTop */ "./resources/js/src/app/directives/pageDesign/scrollToTop.js");
+/* harmony import */ var _app_directives_pageDesign_stickInParent__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./app/directives/pageDesign/stickInParent */ "./resources/js/src/app/directives/pageDesign/stickInParent.js");
+/* harmony import */ var _app_directives_navigation_sidenavigationChildrenLoader__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./app/directives/navigation/sidenavigationChildrenLoader */ "./resources/js/src/app/directives/navigation/sidenavigationChildrenLoader.js");
+/* harmony import */ var _app_directives_pageDesign_tooltip__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./app/directives/pageDesign/tooltip */ "./resources/js/src/app/directives/pageDesign/tooltip.js");
+/* harmony import */ var _app_filters_ageRestriction_filter__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./app/filters/ageRestriction.filter */ "./resources/js/src/app/filters/ageRestriction.filter.js");
+/* harmony import */ var _app_filters_arrayFirst_filter__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./app/filters/arrayFirst.filter */ "./resources/js/src/app/filters/arrayFirst.filter.js");
+/* harmony import */ var _app_filters_attachText_filter__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./app/filters/attachText.filter */ "./resources/js/src/app/filters/attachText.filter.js");
+/* harmony import */ var _app_filters_currency_filter__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./app/filters/currency.filter */ "./resources/js/src/app/filters/currency.filter.js");
+/* harmony import */ var _app_filters_date_filter__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./app/filters/date.filter */ "./resources/js/src/app/filters/date.filter.js");
+/* harmony import */ var _app_filters_fileName_filter__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./app/filters/fileName.filter */ "./resources/js/src/app/filters/fileName.filter.js");
+/* harmony import */ var _app_filters_fileUploadPath_filter__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./app/filters/fileUploadPath.filter */ "./resources/js/src/app/filters/fileUploadPath.filter.js");
+/* harmony import */ var _app_filters_graduatedPrice_filter__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./app/filters/graduatedPrice.filter */ "./resources/js/src/app/filters/graduatedPrice.filter.js");
+/* harmony import */ var _app_filters_hasItemDefaultPrice_filter__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./app/filters/hasItemDefaultPrice.filter */ "./resources/js/src/app/filters/hasItemDefaultPrice.filter.js");
+/* harmony import */ var _app_filters_inputUnit_filter__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./app/filters/inputUnit.filter */ "./resources/js/src/app/filters/inputUnit.filter.js");
+/* harmony import */ var _app_filters_itemBundleName_filter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./app/filters/itemBundleName.filter */ "./resources/js/src/app/filters/itemBundleName.filter.js");
+/* harmony import */ var _app_filters_itemCrossPrice_filter__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./app/filters/itemCrossPrice.filter */ "./resources/js/src/app/filters/itemCrossPrice.filter.js");
+/* harmony import */ var _app_filters_itemImage_filter__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./app/filters/itemImage.filter */ "./resources/js/src/app/filters/itemImage.filter.js");
+/* harmony import */ var _app_filters_itemImageAlternativeText_filter__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./app/filters/itemImageAlternativeText.filter */ "./resources/js/src/app/filters/itemImageAlternativeText.filter.js");
+/* harmony import */ var _app_filters_itemImages_filter__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./app/filters/itemImages.filter */ "./resources/js/src/app/filters/itemImages.filter.js");
+/* harmony import */ var _app_filters_itemName_filter__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./app/filters/itemName.filter */ "./resources/js/src/app/filters/itemName.filter.js");
+/* harmony import */ var _app_filters_itemPrice_filter__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./app/filters/itemPrice.filter */ "./resources/js/src/app/filters/itemPrice.filter.js");
+/* harmony import */ var _app_filters_itemUrl_filter__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./app/filters/itemUrl.filter */ "./resources/js/src/app/filters/itemUrl.filter.js");
+/* harmony import */ var _app_filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./app/filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
+/* harmony import */ var _app_filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./app/filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
+/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
+/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
+/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
+/* harmony import */ var _app_mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./app/mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
+/* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
+/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
+/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+
+
+>>>>>>> stable
  // =========================
 // Polyfill's
 // =========================
@@ -98547,11 +101066,14 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(_app_plugins_script2__WEBPACK_IMP
 window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_6___default.a;
 window.$ = jquery__WEBPACK_IMPORTED_MODULE_6___default.a;
 
- // =========================
+
+
+window.ceresEnv = Object(_app_services_UrlService__WEBPACK_IMPORTED_MODULE_11__["getUrlParams"])()["env"]; // =========================
 // COMPONENTS
 // =========================
 
 
+<<<<<<< HEAD
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("add-item-to-basket-overlay", _app_components_basket_AddItemToBasketOverlay_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("add-to-basket", _app_components_basket_AddToBasket_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
@@ -98561,9 +101083,42 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("basket-preview", _app_comp
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("basket-totals", _app_components_basket_BasketTotals_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("coupon", _app_components_basket_Coupon_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
+=======
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("lazy-img", _app_components_common_LazyImg_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("intersect", _app_components_common_Intersect_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("tab-list", _app_components_common_TabList_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("tab-item", _app_components_common_TabItem_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("last-seen-item-list", function () {
+  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./app/components/containers/LastSeenItemList.vue */ "./resources/js/src/app/components/containers/LastSeenItemList.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("change-email-form", function () {
+  return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./app/components/customer/ChangeEmailForm.vue */ "./resources/js/src/app/components/customer/ChangeEmailForm.vue"));
+});
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("recaptcha", _app_components_customer_ReCaptcha_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("registration", function () {
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./app/components/customer/Registration.vue */ "./resources/js/src/app/components/customer/Registration.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("reset-password-form", function () {
+  return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./app/components/customer/ResetPasswordForm.vue */ "./resources/js/src/app/components/customer/ResetPasswordForm.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("forgot-password-modal", function () {
+  return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./app/components/customer/login/ForgotPassword.vue */ "./resources/js/src/app/components/customer/login/ForgotPassword.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("guest-login", function () {
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./app/components/customer/login/GuestLogin.vue */ "./resources/js/src/app/components/customer/login/GuestLogin.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("login", function () {
+  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./app/components/customer/login/Login.vue */ "./resources/js/src/app/components/customer/login/Login.vue"));
+}); // legacy non-shopbuilder component
+>>>>>>> stable
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("basket-list", _app_components_basket_list_BasketList_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
 
+<<<<<<< HEAD
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("step-by-step-navigation", _app_components_category_StepByStepNavigation_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("google-maps-widget", _app_components_common_GoogleMaps_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
@@ -98674,8 +101229,124 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("set-quantity-input", _app_
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("single-item", _app_components_item_SingleItem_vue__WEBPACK_IMPORTED_MODULE_68__["default"]);
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("single-item-set-component", _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_69__["default"]); // =========================
+=======
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("user-login-handler", _app_components_customer_login_UserLoginHandler_vue__WEBPACK_IMPORTED_MODULE_17__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("form-attachment", function () {
+  return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./app/components/form/FormAttachment.vue */ "./resources/js/src/app/components/form/FormAttachment.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-bundle", function () {
+  return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemBundle.vue */ "./resources/js/src/app/components/item/ItemBundle.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-property-value", function () {
+  return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./app/components/item/OrderPropertyValue.vue */ "./resources/js/src/app/components/item/OrderPropertyValue.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("quantity-input", function () {
+  return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./app/components/item/QuantityInput.vue */ "./resources/js/src/app/components/item/QuantityInput.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("tag-list", function () {
+  return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./app/components/item/TagList.vue */ "./resources/js/src/app/components/item/TagList.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("category-item", function () {
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./app/components/itemList/CategoryItem.vue */ "./resources/js/src/app/components/itemList/CategoryItem.vue"));
+});
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-search", _app_components_itemList_ItemSearch_vue__WEBPACK_IMPORTED_MODULE_18__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("search-suggestion-item", function () {
+  return __webpack_require__.e(/*! import() */ 41).then(__webpack_require__.bind(null, /*! ./app/components/itemList/SearchSuggestionItem.vue */ "./resources/js/src/app/components/itemList/SearchSuggestionItem.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-filter-list", function () {
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./app/components/itemList/filter/ItemFilterList.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilterList.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-filter-tag-list", function () {
+  return __webpack_require__.e(/*! import() */ 42).then(__webpack_require__.bind(null, /*! ./app/components/itemList/filter/ItemFilterTagList.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilterTagList.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("live-shopping-item", function () {
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./app/components/liveShopping/LiveShoppingItem.vue */ "./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("newsletter-input", function () {
+  return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./app/components/newsletter/NewsletterInput.vue */ "./resources/js/src/app/components/newsletter/NewsletterInput.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("newsletter-unsubscribe-input", function () {
+  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./app/components/newsletter/NewsletterUnsubscribeInput.vue */ "./resources/js/src/app/components/newsletter/NewsletterUnsubscribeInput.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-return", function () {
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./app/components/orderReturn/OrderReturn.vue */ "./resources/js/src/app/components/orderReturn/OrderReturn.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("cookie-bar", function () {
+  return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/CookieBar.vue */ "./resources/js/src/app/components/pageDesign/CookieBar.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("privacy-settings", function () {
+  return __webpack_require__.e(/*! import() */ 48).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/PrivacySettings.vue */ "./resources/js/src/app/components/pageDesign/PrivacySettings.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("carousel", function () {
+  return __webpack_require__.e(/*! import() */ 44).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Carousel.vue */ "./resources/js/src/app/components/pageDesign/Carousel.vue"));
+});
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("icon", _app_components_pageDesign_Icon_vue__WEBPACK_IMPORTED_MODULE_19__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("mobile-navigation", _app_components_pageDesign_MobileNavigation_vue__WEBPACK_IMPORTED_MODULE_20__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("notifications", _app_components_pageDesign_Notifications_vue__WEBPACK_IMPORTED_MODULE_21__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("popper", function () {
+  return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Popper.vue */ "./resources/js/src/app/components/pageDesign/Popper.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("shipping-country-select", function () {
+  return __webpack_require__.e(/*! import() */ 49).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/ShippingCountrySelect.vue */ "./resources/js/src/app/components/pageDesign/ShippingCountrySelect.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("loading-animation", function () {
+  return __webpack_require__.e(/*! import() */ 46).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/LoadingAnimation.vue */ "./resources/js/src/app/components/pageDesign/LoadingAnimation.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("wish-list", function () {
+  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./app/components/wishList/WishList.vue */ "./resources/js/src/app/components/wishList/WishList.vue"));
+});
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("wish-list-count", _app_components_wishList_WishListCount_vue__WEBPACK_IMPORTED_MODULE_22__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("lazy-load", _app_components_common_LazyLoad_vue__WEBPACK_IMPORTED_MODULE_23__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("add-to-wish-list", function () {
+  return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ./app/components/item/AddToWishList.vue */ "./resources/js/src/app/components/item/AddToWishList.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("graduated-prices", function () {
+  return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ./app/components/item/GraduatedPrices.vue */ "./resources/js/src/app/components/item/GraduatedPrices.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-data-table", function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(8), __webpack_require__.e(32)]).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemDataTable.vue */ "./resources/js/src/app/components/item/ItemDataTable.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-image-carousel", function () {
+  return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemImageCarousel.vue */ "./resources/js/src/app/components/item/ItemImageCarousel.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-price", function () {
+  return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemPrice.vue */ "./resources/js/src/app/components/item/ItemPrice.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("set-price", function () {
+  return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./app/components/item/SetPrice.vue */ "./resources/js/src/app/components/item/SetPrice.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("order-property-list", function () {
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./app/components/item/OrderPropertyList.vue */ "./resources/js/src/app/components/item/OrderPropertyList.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("variation-select", function () {
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./app/components/item/VariationSelect.vue */ "./resources/js/src/app/components/item/VariationSelect.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("item-availability", function () {
+  return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemAvailability.vue */ "./resources/js/src/app/components/item/ItemAvailability.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("single-item-bundle", function () {
+  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleItemBundle.vue */ "./resources/js/src/app/components/item/SingleItemBundle.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("single-add-to-basket", function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(39)]).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleAddToBasket.vue */ "./resources/js/src/app/components/item/SingleAddToBasket.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("set-quantity-input", function () {
+  return __webpack_require__.e(/*! import() */ 38).then(__webpack_require__.bind(null, /*! ./app/components/item/SetQuantityInput.vue */ "./resources/js/src/app/components/item/SetQuantityInput.vue"));
+});
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("single-item", _app_components_item_SingleItem_vue__WEBPACK_IMPORTED_MODULE_24__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component("single-item-set-component", _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_25__["default"]); // =========================
+>>>>>>> stable
 // DIRECTIVES
 // =========================
+
 
 
 
@@ -98729,9 +101400,15 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("single-item-set-component"
 
 
 
+<<<<<<< HEAD
 window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_112__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_112__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.prototype.$ceres = App;
+=======
+window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_69__["default"].translate;
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_69__["default"].translate;
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.prototype.$ceres = App;
+>>>>>>> stable
 
 /***/ }),
 
@@ -98788,8 +101465,14 @@ __webpack_require__.r(__webpack_exports__);
 
  // new shopbuilder-only component
 
+<<<<<<< HEAD
 
 Vue.component("edit-coupon-overlay", _app_components_myAccount_EditCouponOverlay_vue__WEBPACK_IMPORTED_MODULE_19__["default"]);
+=======
+Vue.component("edit-coupon-overlay", function () {
+  return __webpack_require__.e(/*! import() */ 43).then(__webpack_require__.bind(null, /*! ./app/components/myAccount/EditCouponOverlay.vue */ "./resources/js/src/app/components/myAccount/EditCouponOverlay.vue"));
+});
+>>>>>>> stable
 
 
 

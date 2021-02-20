@@ -13,11 +13,11 @@
                                     <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
                                         <li class="list-inline-item control-user">
                                             <user-login-handler>
-                                                <a class="nav-link" data-toggle="modal">
+                                                <a class="nav-link" data-toggle="modal" aria-label="{{ trans('Ceres::Template.login') }}">
                                                     <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
                                                     <span class="d-none d-sm-inline">{{ trans("Ceres::Template.login") }}</span>
                                                 </a>
-                                                <a class="nav-link" data-toggle="modal">
+                                                <a class="nav-link" data-toggle="modal" aria-label="{{ trans('Ceres::Template.loginRegister') }}">
                                                     <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
                                                     <span class="d-none d-sm-inline">{{ trans("Ceres::Template.loginRegister") }}</span>
                                                 </a>
@@ -29,7 +29,8 @@
                                                href="#countrySettings"
                                                aria-expanded="false"
                                                aria-controls="countrySettings"
-                                               data-parent="#controlsList">
+                                               data-parent="#controlsList"
+                                               aria-label="{{ trans('Ceres::Template.headerCountry') }}">
                                                 <i class="flag-icon flag-icon-{{ lang }}"></i>
                                             </a>
                                         </li>
@@ -41,26 +42,27 @@
                                                    href="#currencySelect"
                                                    aria-expanded="false"
                                                    aria-controls="currencySelect"
-                                                   data-parent="#controlsList">
+                                                   data-parent="#controlsList"
+                                                   aria-label="{{ trans('Ceres::Template.headerCurrency') }}">
                                                     <span>{{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
                                                 </a>
                                             </li>
                                         {% endif %}
                                         <li class="list-inline-item control-search">
                                             <a class="anicon anicon-search-xcross nav-link"
-                                                aria-label="toggle search"
                                                 data-toggle="collapse"
                                                 href="#searchBox"
                                                 aria-expanded="false"
                                                 aria-controls="searchBox"
-                                                data-parent="#controlsList">
+                                                data-parent="#controlsList"
+                                                aria-label="{{ trans('trans("Ceres::Template.headerSearch') }}">
                                                 <span class="anicon-search-item" aria-hidden="true"></span>
                                             </a>
                                         </li>
                                         {% if services.url.isRouteEnabled("wish-list") %}
                                             <li class="list-inline-item control-wish-list">
                                                 <wish-list-count>
-                                                    <a class="nav-link">
+                                                    <a class="nav-link" aria-label="{{ trans('trans("Ceres::Template.wishList') }}">
                                                         <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                     </a>
@@ -68,7 +70,7 @@
                                             </li>
                                         {% endif %}
                                         <li class="list-inline-item control-basket position-relative" @mouseover.once="$store.dispatch('loadComponent', 'basket-preview')">
-                                            <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link">
+                                            <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link" {{ set_testing_attr("data-testing", "basket-preview-button") }}>
                                                 {% if config("Ceres.header.basket_values") != "sum" %}
                                                     <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
                                                 {% endif %}

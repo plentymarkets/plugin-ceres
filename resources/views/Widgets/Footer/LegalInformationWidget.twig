@@ -22,31 +22,31 @@
         {{ Twig.do('autoescape false') }}
 
         {% if configuration.showCancellationRights %}
-            <a href="{{ Twig.print('urls.cancellationRights') }}">{{ Twig.trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
+            <a class="py-4 px-2" href="{{ Twig.print('urls.cancellationRights') }}">{{ Twig.trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
 
         {% if configuration.showCancellationForm %}
             {% if not configuration.useCancellationPdfUpload %}
-                <a href="{{ Twig.print('urls.cancellationForm') }}">{{ Twig.trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
+                <a class="py-4 px-2" href="{{ Twig.print('urls.cancellationForm') }}">{{ Twig.trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
             {% elseif configuration.cancellationPdfPath is not empty %}
-                <a href="{{ configuration.cancellationPdfPath }}" target="_blank">{{ Twig.trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
+                <a class="py-4 px-2" href="{{ configuration.cancellationPdfPath }}" target="_blank">{{ Twig.trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
             {% endif %}
         {% endif %}
 
         {% if configuration.showLegalDisclosure %}
-            <a href="{{ Twig.print('urls.legalDisclosure') }}">{{ Twig.trans("Ceres::Template.footerLegalDisclosure", {"hyphen": "&shy;"}) }}</a>
+            <a class="py-4 px-2" href="{{ Twig.print('urls.legalDisclosure') }}">{{ Twig.trans("Ceres::Template.footerLegalDisclosure", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
 
         {% if configuration.showPrivacyPolicy %}
-            <a href="{{ Twig.print('urls.privacyPolicy') }}">{{ Twig.trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
+            <a class="py-4 px-2" href="{{ Twig.print('urls.privacyPolicy') }}">{{ Twig.trans("Ceres::Template.footerPrivacyPolicy", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
 
         {% if configuration.showGtc %}
-            <a href="{{ Twig.print('urls.gtc') }}">{{ Twig.trans("Ceres::Template.footerGtc", {"hyphen": "&shy;"}) }}</a>
+            <a class="py-4 px-2" href="{{ Twig.print('urls.gtc') }}">{{ Twig.trans("Ceres::Template.footerGtc", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
 
         {{ Twig.if('(config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com") or config("IO.routing.category_contact") > 0') }}
-            <a href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
+            <a class="py-4 px-2" href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
         {{ Twig.endif() }}
         {{ Twig.do('endautoescape') }}
     </div>
