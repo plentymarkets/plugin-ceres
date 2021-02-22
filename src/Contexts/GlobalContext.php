@@ -228,6 +228,12 @@ class GlobalContext implements ContextInterface
 
         $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
 
+        // Always use whole scss for shopBuilder
+        if($this->isShopBuilder)
+        {
+            $this->assetName = "ceres-checkout";
+        }
+
         $this->isSafeMode = $app->isTemplateSafeMode();
 
         $this->bodyClasses = [];
