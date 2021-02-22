@@ -1,5 +1,27 @@
 # Release Notes for Ceres
 
+## v5.0.23 (2021-02-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.22...5.0.23" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added 
+
+- The item list widget now contains the option to create a list that contains items from the entire range of products.
+- The correct flag icon is now displayed if Northern Ireland is selected as the country of delivery.
+
+### Changed
+
+- The factory classes for generating widget settings have been relocated to the ShopBuilder module. The classes in Ceres have been marked as **deprecated**.
+- The sorting of countries of delivery is now rendered server-side.
+
+### Fixed 
+
+- Due to a syntax error in the top bar widget, the button for the currency selection was not always displayed correctly. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.23 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/2664/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2664/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+
 ## v5.0.22 (2021-02-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.21...5.0.22" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed 
