@@ -137,7 +137,7 @@ const actions =
 
             let sendFileResponse = null;
 
-            validateForm(event)
+            validateForm(event, recaptchaEl)
                 .then(executeReCaptcha(event.target))
                 .then((recaptchaResponse) =>
                 {
@@ -239,7 +239,7 @@ function sendFile(event, recaptchaToken)
     });
 }
 
-function validateForm(event)
+function validateForm(event, recaptchaEl)
 {
     return ValidationService.validate(event.target)
         .fail(invalidFields =>
