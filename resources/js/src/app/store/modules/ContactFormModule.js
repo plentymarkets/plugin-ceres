@@ -134,8 +134,66 @@ const actions =
             }
 
             const recaptchaEl = event.target.querySelector("[data-recaptcha]");
+            let sendFileResponse = undefined;
 
-            executeReCaptcha(event.target)
+            validateForm(event)
+                .then(executeReCaptcha(event.target))
+                .then((recaptchaResponse) => {
+                    disableForm(event.target, true);
+                    return sendFile(event, recaptchaResponse);
+                })
+                .then((response) => {
+                    sendFileResponse = response;
+                    resetRecaptcha();
+                    return executeReCaptcha(event.target);
+                },
+                (response) => {
+                    resetRecaptcha(recaptchaEl);
+                    disableForm(event.target, false);
+                    response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactFileUploadFail");
+                    NotificationService.error(response.error);
+                })
+                .then((recaptchaResponse) => {
+                    const formData    = serializeForm(event.target);
+                    const formOptions = readFormOptions(event.target, formData);
+
+                    ApiService.post(
+                        "/rest/io/customer/contact/mail",
+                        {
+                            data:       formData,
+                            recipient:  formOptions.recipient,
+                            subject:    formOptions.subject || "",
+                            cc:         formOptions.cc,
+                            bcc:        formOptions.bcc,
+                            replyTo:    formOptions.replyTo,
+                            recaptchaToken: recaptchaResponse,
+                            fileKeys: sendFileResponse.fileKeys
+                        }
+                    )
+                        .done(response =>
+                        {
+                            resetRecaptcha(recaptchaEl);
+                            event.target.reset();
+                            disableForm(event.target, false);
+                            NotificationService.success(
+                                TranslationService.translate("Ceres::Template.contactSendSuccess")
+                            ).closeAfter(3000);
+                        })
+                        .fail(response =>
+                        {
+                            resetRecaptcha(recaptchaEl);
+                            disableForm(event.target, false);
+                            response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
+                            NotificationService.error(response.error);
+                        });
+                }).catch(() =>
+                {
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.contactReCaptchaFailed")
+                    );
+                });
+
+            /*executeReCaptcha(event.target)
                 .then((recaptchaResponse) =>
                 {
                     ValidationService.validate(event.target)
@@ -206,16 +264,12 @@ const actions =
                                 TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
                             );
                         });
-                })
-                .then({
-
-                })
-                .catch(() =>
+                }).catch(() =>
                 {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.contactReCaptchaFailed")
                     );
-                });
+                });*/
         }
     };
 
@@ -257,6 +311,27 @@ function sendFile(event, recaptchaToken)
                 reject(error);
             });
     });
+}
+
+function validateForm(event)
+{
+    return ValidationService.validate(event.target)
+        .fail(invalidFields =>
+        {
+            resetRecaptcha(recaptchaEl);
+
+            const fieldNames = [];
+
+            for (const field of invalidFields)
+            {
+                fieldNames.push(getLabel(field));
+            }
+
+            ValidationService.markInvalidFields(invalidFields, "error");
+            NotificationService.error(
+                TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
+            );
+        });
 }
 
 function resetRecaptcha(recaptchaEl)
