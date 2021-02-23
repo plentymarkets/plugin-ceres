@@ -190,7 +190,7 @@ const actions =
                             disableForm(event.target, false);
                             NotificationService.error(TranslationService.translate("Ceres::Template.contactSendFail"));
                         });
-                }).catch(() =>
+                }).catch((error) =>
                 {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.contactReCaptchaFailed")
