@@ -70056,67 +70056,117 @@ var actions = {
     }
 
     var recaptchaEl = event.target.querySelector("[data-recaptcha]");
-    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(event.target).done(function () {
-        disableForm(event.target, true);
-        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["serializeForm"])(event.target);
-        var formOptions = readFormOptions(event.target, formData);
-        sendFile(event, recaptchaResponse).then(function (response) {
-          resetRecaptcha();
-          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
-            ApiService.post("/rest/io/customer/contact/mail", {
-              data: formData,
-              recipient: formOptions.recipient,
-              subject: formOptions.subject || "",
-              cc: formOptions.cc,
-              bcc: formOptions.bcc,
-              replyTo: formOptions.replyTo,
-              recaptchaToken: recaptchaToken2,
-              fileKeys: response.fileKeys
-            }).done(function (response) {
-              resetRecaptcha(recaptchaEl);
-              event.target.reset();
-              disableForm(event.target, false);
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
-            }).fail(function (response) {
-              resetRecaptcha(recaptchaEl);
-              disableForm(event.target, false);
-              response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail");
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
-            });
-          });
-        }, function (response) {
-          resetRecaptcha(recaptchaEl);
-          disableForm(event.target, false);
-          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactFileUploadFail");
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
-        });
-      }).fail(function (invalidFields) {
+    var sendFileResponse = null;
+    validateForm(event).then(Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target)).then(function (recaptchaResponse) {
+      disableForm(event.target, true);
+      return sendFile(event, recaptchaResponse);
+    }).then(function (response) {
+      sendFileResponse = response;
+      resetRecaptcha();
+      return Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target);
+    }, function (response) {
+      resetRecaptcha(recaptchaEl);
+      disableForm(event.target, false);
+      response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactFileUploadFail");
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
+    }).then(function (recaptchaResponse) {
+      var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["serializeForm"])(event.target);
+      var formOptions = readFormOptions(event.target, formData);
+      ApiService.post("/rest/io/customer/contact/mail", {
+        data: formData,
+        recipient: formOptions.recipient,
+        subject: formOptions.subject || "",
+        cc: formOptions.cc,
+        bcc: formOptions.bcc,
+        replyTo: formOptions.replyTo,
+        recaptchaToken: recaptchaResponse,
+        fileKeys: sendFileResponse.fileKeys
+      }).done(function (response) {
         resetRecaptcha(recaptchaEl);
-        var fieldNames = [];
-
-        var _iterator2 = _createForOfIteratorHelper(invalidFields),
-            _step2;
-
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var field = _step2.value;
-            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["getLabel"])(field));
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
-
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
-          fields: fieldNames.join(", ")
-        }));
+        event.target.reset();
+        disableForm(event.target, false);
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+      }).fail(function (response) {
+        resetRecaptcha(recaptchaEl);
+        disableForm(event.target, false);
+        response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail");
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
       });
     }).catch(function () {
       _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
     });
+    /* executeReCaptcha(event.target)
+        .then((recaptchaResponse) =>
+        {
+            ValidationService.validate(event.target)
+                .then(() =>
+                {
+                    disableForm(event.target, true);
+                     const formData    = serializeForm(event.target);
+                    const formOptions = readFormOptions(event.target, formData);
+                     sendFile(event, recaptchaResponse).then((response) =>
+                    {
+                        resetRecaptcha();
+                        executeReCaptcha(event.target).then((recaptchaToken2) =>
+                        {
+                            ApiService.post(
+                                "/rest/io/customer/contact/mail",
+                                {
+                                    data:       formData,
+                                    recipient:  formOptions.recipient,
+                                    subject:    formOptions.subject || "",
+                                    cc:         formOptions.cc,
+                                    bcc:        formOptions.bcc,
+                                    replyTo:    formOptions.replyTo,
+                                    recaptchaToken: recaptchaToken2,
+                                    fileKeys: response.fileKeys
+                                }
+                            )
+                                .done(response =>
+                                {
+                                    resetRecaptcha(recaptchaEl);
+                                    event.target.reset();
+                                    disableForm(event.target, false);
+                                    NotificationService.success(
+                                        TranslationService.translate("Ceres::Template.contactSendSuccess")
+                                    ).closeAfter(3000);
+                                })
+                                .fail(response =>
+                                {
+                                    resetRecaptcha(recaptchaEl);
+                                    disableForm(event.target, false);
+                                    response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
+                                    NotificationService.error(response.error);
+                                });
+                        });
+                    },
+                    (response) =>
+                    {
+                        resetRecaptcha(recaptchaEl);
+                        disableForm(event.target, false);
+                        response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactFileUploadFail");
+                        NotificationService.error(response.error);
+                    });
+                })
+                .fail(invalidFields =>
+                {
+                    resetRecaptcha(recaptchaEl);
+                     const fieldNames = [];
+                     for (const field of invalidFields)
+                    {
+                        fieldNames.push(getLabel(field));
+                    }
+                     ValidationService.markInvalidFields(invalidFields, "error");
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
+                    );
+                });
+        }).catch(() =>
+        {
+            NotificationService.error(
+                TranslationService.translate("Ceres::Template.contactReCaptchaFailed")
+            );
+        });*/
   }
 };
 
@@ -70126,32 +70176,32 @@ function sendFile(event, recaptchaToken) {
     var fileInputs = event.target.querySelectorAll("input[type=file]");
     var containsFiles = false;
 
-    var _iterator3 = _createForOfIteratorHelper(fileInputs),
-        _step3;
+    var _iterator2 = _createForOfIteratorHelper(fileInputs),
+        _step2;
 
     try {
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        var fileInput = _step3.value;
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var fileInput = _step2.value;
 
-        var _iterator4 = _createForOfIteratorHelper(fileInput.files),
-            _step4;
+        var _iterator3 = _createForOfIteratorHelper(fileInput.files),
+            _step3;
 
         try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var file = _step4.value;
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var file = _step3.value;
             containsFiles = true;
             formData.append("fileData[]", file);
           }
         } catch (err) {
-          _iterator4.e(err);
+          _iterator3.e(err);
         } finally {
-          _iterator4.f();
+          _iterator3.f();
         }
       }
     } catch (err) {
-      _iterator3.e(err);
+      _iterator2.e(err);
     } finally {
-      _iterator3.f();
+      _iterator2.f();
     }
 
     if (!containsFiles) {
@@ -70172,6 +70222,32 @@ function sendFile(event, recaptchaToken) {
     }).fail(function (error) {
       reject(error);
     });
+  });
+}
+
+function validateForm(event) {
+  return _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(event.target).fail(function (invalidFields) {
+    resetRecaptcha(recaptchaEl);
+    var fieldNames = [];
+
+    var _iterator4 = _createForOfIteratorHelper(invalidFields),
+        _step4;
+
+    try {
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var field = _step4.value;
+        fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["getLabel"])(field));
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+
+    _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
+    _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+      fields: fieldNames.join(", ")
+    }));
   });
 }
 

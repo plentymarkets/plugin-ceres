@@ -134,26 +134,31 @@ const actions =
             }
 
             const recaptchaEl = event.target.querySelector("[data-recaptcha]");
-            let sendFileResponse = undefined;
+
+            let sendFileResponse = null;
 
             validateForm(event)
                 .then(executeReCaptcha(event.target))
-                .then((recaptchaResponse) => {
+                .then((recaptchaResponse) =>
+                {
                     disableForm(event.target, true);
                     return sendFile(event, recaptchaResponse);
                 })
-                .then((response) => {
+                .then((response) =>
+                {
                     sendFileResponse = response;
                     resetRecaptcha();
                     return executeReCaptcha(event.target);
                 },
-                (response) => {
+                (response) =>
+                {
                     resetRecaptcha(recaptchaEl);
                     disableForm(event.target, false);
                     response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactFileUploadFail");
                     NotificationService.error(response.error);
                 })
-                .then((recaptchaResponse) => {
+                .then((recaptchaResponse) =>
+                {
                     const formData    = serializeForm(event.target);
                     const formOptions = readFormOptions(event.target, formData);
 
@@ -193,7 +198,7 @@ const actions =
                     );
                 });
 
-            /*executeReCaptcha(event.target)
+            /* executeReCaptcha(event.target)
                 .then((recaptchaResponse) =>
                 {
                     ValidationService.validate(event.target)
