@@ -113,6 +113,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -449,7 +462,10 @@ var render = function() {
                     "a",
                     {
                       staticClass: "card-link text-primary text-appearance",
-                      attrs: { href: "#" },
+                      attrs: {
+                        href: "#",
+                        "data-testing": "privacy-settings-show-more-information"
+                      },
                       on: {
                         click: function($event) {
                           return _vm.setGroupVisibility(
@@ -462,11 +478,13 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.privacySettingsMoreInformation"
-                          )
-                        )
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.privacySettingsMoreInformation"
+                            )
+                          ) +
+                          "\n                "
                       )
                     ]
                   )
@@ -474,7 +492,10 @@ var render = function() {
                     "a",
                     {
                       staticClass: "card-link text-primary text-appearance",
-                      attrs: { href: "#" },
+                      attrs: {
+                        href: "#",
+                        "data-testing": "privacy-settings-hide-more-information"
+                      },
                       on: {
                         click: function($event) {
                           return _vm.setGroupVisibility(
@@ -487,11 +508,13 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.privacySettingsLessInformation"
-                          )
-                        )
+                        ">\n                    " +
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.privacySettingsLessInformation"
+                            )
+                          ) +
+                          "\n                "
                       )
                     ]
                   )

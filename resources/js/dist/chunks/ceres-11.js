@@ -189,6 +189,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
 
 
 
@@ -908,6 +911,9 @@ var render = function() {
                           "select",
                           {
                             staticClass: "custom-select",
+                            attrs: {
+                              "data-testing": "variation-select-dropdown"
+                            },
                             on: {
                               change: function($event) {
                                 return _vm.selectAttribute(
@@ -1033,7 +1039,8 @@ var render = function() {
                             attrs: {
                               "data-toggle": "tooltip",
                               "data-placement": "top",
-                              title: attribute.name
+                              title: attribute.name,
+                              "data-testing": "variation-select-dropdown-label"
                             }
                           },
                           [_vm._v(_vm._s(attribute.name))]
@@ -1042,15 +1049,24 @@ var render = function() {
                     )
                   : attribute.type === "box" || attribute.type === "image"
                   ? _c("div", [
-                      _c("span", { staticClass: "text-muted" }, [
-                        _vm._v(_vm._s(attribute.name) + ":")
-                      ]),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "text-muted",
+                          attrs: { "data-testing": "attribute-name" }
+                        },
+                        [_vm._v(_vm._s(attribute.name) + ":")]
+                      ),
                       _vm._v(" "),
-                      _c("b", [
-                        _vm._v(
-                          _vm._s(_vm.getSelectedAttributeValueName(attribute))
-                        )
-                      ]),
+                      _c(
+                        "b",
+                        { attrs: { "data-testing": "attribute-value" } },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.getSelectedAttributeValueName(attribute))
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -1073,6 +1089,9 @@ var render = function() {
                                       attribute.attributeId,
                                       -1
                                     )
+                                  },
+                                  attrs: {
+                                    "data-testing": "variation-select-box"
                                   },
                                   on: {
                                     click: function($event) {
@@ -1112,6 +1131,9 @@ var render = function() {
                                       null,
                                       true
                                     )
+                                  },
+                                  attrs: {
+                                    "data-testing": "variation-select-box"
                                   },
                                   on: {
                                     click: function($event) {
@@ -1162,6 +1184,7 @@ var render = function() {
                                   )
                                 },
                                 attrs: {
+                                  "data-testing": "variation-select-box",
                                   "data-html": "true",
                                   "data-toggle": "tooltip",
                                   "data-placement": "top",
@@ -1209,6 +1232,7 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
+                        attrs: { "data-testing": "variation-select-unit" },
                         on: {
                           change: function($event) {
                             return _vm.selectUnit($event.target.value)
@@ -1262,13 +1286,19 @@ var render = function() {
                       0
                     ),
                     _vm._v(" "),
-                    _c("label", [
-                      _vm._v(
-                        _vm._s(
-                          _vm.$translate("Ceres::Template.singleItemContent")
+                    _c(
+                      "label",
+                      {
+                        attrs: { "data-testing": "variation-select-unit-label" }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.singleItemContent")
+                          )
                         )
-                      )
-                    ])
+                      ]
+                    )
                   ])
                 ])
               : _vm._e()

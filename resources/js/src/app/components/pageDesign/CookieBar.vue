@@ -25,14 +25,24 @@
                                 </label>
                             </span>
                         </template>
-
-                        <a href="#" class="text-primary text-appearance d-block d-md-inline-block" @click.prevent.stop="isExpanded=true">{{ $translate("Ceres::Template.cookieBarMoreSettings") }}</a>
+                        
+                        <a href="#" class="text-primary text-appearance d-block d-md-inline-block" data-testing="cookie-bar-show-more-information" @click.prevent.stop="isExpanded=true">{{ $translate("Ceres::Template.cookieBarMoreSettings") }}</a>
                     </div>
 
                 </div>
                 <div class="col-12 col-md-4 pt-3 pt-md-0">
-                    <button class="btn btn-primary btn-block btn-appearance" @click="acceptAll(); close()">{{ $translate("Ceres::Template.cookieBarAcceptAll") }}</button>
-                    <button class="btn btn-default btn-block" @click="storeConsents(); close()">{{ $translate("Ceres::Template.cookieBarSave") }}</button>
+                    <button
+                        class="btn btn-primary btn-block btn-appearance"
+                        @click="acceptAll(); close()"
+                        data-testing="cookie-bar-accept-all">
+                        {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
+                    </button>
+                    <button
+                        class="btn btn-default btn-block"
+                        @click="storeConsents(); close()"
+                        data-testing="cookie-bar-save">
+                        {{ $translate("Ceres::Template.cookieBarSave") }}
+                    </button>
                 </div>
 
             </div>
@@ -41,13 +51,29 @@
                     <privacy-settings :consent-groups="consentGroups"></privacy-settings>
                 </div>
                 <div class="col-12 col-md-6">
-                    <a href="#" class="text-primary text-appearance d-inline-block mb-3" @click.prevent.stop="isExpanded = false">{{ $translate("Ceres::Template.cookieBarBack") }}</a>
+                    <a
+                        href="#"
+                        class="text-primary text-appearance d-inline-block mb-3"
+                        data-testing="cookie-bar-hide-more-information"
+                        @click.prevent.stop="isExpanded = false">
+                        {{ $translate("Ceres::Template.cookieBarBack") }}
+                    </a>
                 </div>
                 <div class="col-6 col-md-3">
-                    <button class="btn btn-block btn-primary btn-appearance" @click="acceptAll(); close()">{{ $translate("Ceres::Template.cookieBarAcceptAll") }}</button>
+                    <button
+                        class="btn btn-block btn-primary btn-appearance"
+                        @click="acceptAll(); close()"
+                        data-testing="cookie-bar-expanded-accept-all">
+                        {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
+                    </button>
                 </div>
                 <div class="col-6 col-md-3">
-                    <button class="btn btn-block btn-block btn-default" @click="storeConsents(); close()">{{ $translate("Ceres::Template.cookieBarSave") }}</button>
+                    <button
+                        class="btn btn-block btn-block btn-default"
+                        @click="storeConsents(); close()"
+                        data-testing="cookie-bar-expanded-save">
+                        {{ $translate("Ceres::Template.cookieBarSave") }}
+                    </button>
                 </div>
             </div>
         </div>

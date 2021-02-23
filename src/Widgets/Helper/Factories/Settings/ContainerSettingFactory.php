@@ -2,21 +2,22 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
+
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
+use Plenty\Modules\Plugin\Annotations\Service;
 
 /**
  * Class ContainerSettingFactory
  *
- * This class extends the GenericSettingsFactory by adding child settings.
+ * This class extends the BaseSettingFactory by adding child settings.
  *
- * @package Ceres\Widgets\Helper\Factories\Settings
+ * @package Plenty\Modules\ShopBuilder\Factories\Settings
+ * @Service(description="Factory to define a container for nested settings.")
  */
 class ContainerSettingFactory extends BaseSettingFactory
 {
     /**
-     * @var WidgetSettingsFactory $children
-     *
-     * Nested settings which are grouped inside a container.
+     * @var WidgetSettingsFactory
      */
     public $children;
 
@@ -24,7 +25,7 @@ class ContainerSettingFactory extends BaseSettingFactory
      * Create a new factory instance with initial value.
      *
      * @param array $data
-     * @return ContainerSettingFactory
+     * @return $this
      */
     public static function create($data = [])
     {

@@ -30,6 +30,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "single-add-to-basket",
@@ -101,7 +102,8 @@ var render = function() {
           "has-price": _vm._f("hasItemDefaultPrice")(_vm.currentVariation),
           "button-size": _vm.buttonSize,
           "padding-classes": _vm.paddingClasses,
-          "padding-inline-styles": _vm.paddingStyles
+          "padding-inline-styles": _vm.paddingStyles,
+          "data-testing": "single-add-to-basket-button"
         }
       })
     : _vm._e()

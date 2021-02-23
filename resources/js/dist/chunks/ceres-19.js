@@ -427,7 +427,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": _vm.showNetPrices },
+                      attrs: { "data-testing": "item-sum-net" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -467,7 +470,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": !_vm.showNetPrices },
+                      attrs: { "data-testing": "item-sum" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -614,7 +620,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": _vm.showNetPrices },
+                      attrs: { "data-testing": "shipping-amount-net" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -651,7 +660,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": !_vm.showNetPrices },
+                      attrs: { "data-testing": "shipping-amount" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -678,13 +690,22 @@ var render = function() {
                         "\n                "
                     )
                   ]),
-                  _c("dd", { staticClass: "font-weight-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm._f("currency")(_vm.basket.couponDiscount)) +
-                        "\n                "
-                    )
-                  ])
+                  _c(
+                    "dd",
+                    {
+                      staticClass: "font-weight-bold",
+                      attrs: { "data-testing": "promotion-coupon" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm._f("currency")(_vm.basket.couponDiscount)
+                          ) +
+                          "\n                "
+                      )
+                    ]
+                  )
                 ]
               : _vm._e(),
             _vm._v(" "),
@@ -711,7 +732,10 @@ var render = function() {
                   ),
                   _c(
                     "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
+                    {
+                      class: { "font-weight-bold": _vm.showNetPrices },
+                      attrs: { "data-testing": "basket-amount-net" }
+                    },
                     [
                       _vm._v(
                         "\n                    " +
@@ -739,7 +763,7 @@ var render = function() {
                           "%\n                "
                       )
                     ]),
-                    _c("dd", [
+                    _c("dd", { attrs: { "data-testing": "vat-amount" } }, [
                       _vm._v(
                         "\n                    " +
                           _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
@@ -819,7 +843,10 @@ var render = function() {
                       ),
                       _c(
                         "dd",
-                        { class: { "font-weight-bold": !_vm.showNetPrices } },
+                        {
+                          class: { "font-weight-bold": !_vm.showNetPrices },
+                          attrs: { "data-testing": "basket-amount" }
+                        },
                         [
                           _vm._v(
                             "\n                        " +
@@ -846,15 +873,22 @@ var render = function() {
                             "\n                    "
                         )
                       ]),
-                      _c("dd", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm._f("currency")(_vm.basket.couponDiscount)
-                            ) +
-                            "\n                    "
-                        )
-                      ])
+                      _c(
+                        "dd",
+                        {
+                          staticClass: "font-weight-bold",
+                          attrs: { "data-testing": "sales-coupon" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.couponDiscount)
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      )
                     ]
                   : _vm._e(),
                 _vm._v(" "),
@@ -870,13 +904,22 @@ var render = function() {
                             "\n                    "
                         )
                       ]),
-                      _c("dd", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm._f("currency")(_vm.basket.openAmount)) +
-                            "\n                    "
-                        )
-                      ])
+                      _c(
+                        "dd",
+                        {
+                          staticClass: "font-weight-bold",
+                          attrs: { "data-testing": "open-amount" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.openAmount)
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      )
                     ]
                   : _vm._e()
               ],

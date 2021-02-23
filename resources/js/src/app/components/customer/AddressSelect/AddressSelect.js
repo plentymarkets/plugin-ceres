@@ -130,6 +130,11 @@ export default Vue.component("address-select", {
             return this.optionalAddressFields[countryKey].includes(`${addressKey}.salutation`);
         },
 
+        addressTypePrefix()
+        {
+            return parseInt(this.addressType) === 1 ? "billing-" : "delivery-";
+        },
+
         ...mapState({
             countryList: state => state.localization.shippingCountries,
             isBasketLoading: state => state.basket.isBasketLoading,
