@@ -48,7 +48,7 @@
                         <!-- First name -->
                         <div class="col-12 col-sm-4">
                             <div class="input-unit" data-model="name2" v-validate:text="areNameFieldsRequired('de', 'delivery_address')">
-                                <input type="text" name="firstName" :id="'txtFirstName' + _uid" :value="value.name2" @input="emitInputEvent('name2', $event.target.value)"  data-testing="packing-station-de-firstname">
+                                <input type="text" name="firstName" :id="'txtFirstName' + _uid" :value="value.name2" @input="emitInputEvent('name2', $event.target.value)" data-testing="packing-station-de-firstname">
                                 <label :for="'txtFirstName' + _uid">{{ $translate("Ceres::Template.addressFirstName") }}<template v-if="areNameFieldsRequired('de', 'delivery_address')">*</template></label>
                             </div>
                         </div>
