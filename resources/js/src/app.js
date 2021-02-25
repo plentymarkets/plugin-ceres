@@ -104,6 +104,7 @@ import SingleAddToBasket from "./app/components/item/SingleAddToBasket.vue";
 import SetQuantityInput from "./app/components/item/SetQuantityInput.vue";
 import SingleItem from "./app/components/item/SingleItem.vue";
 import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
+import FormAttachment from "./app/components/form/FormAttachment.vue";
 
 /*
 import consents from "./app/store/modules/ConsentModule";
@@ -259,6 +260,7 @@ export function createApp(options)
     Vue.component("set-quantity-input", SetQuantityInput);
     Vue.component("single-item", SingleItem);
     Vue.component("single-item-set-component", SingleItemSetComponent);
+    Vue.component("form-attachment", FormAttachment);
 
     window.ceresTranslate = TranslationService.translate;
 
