@@ -195,6 +195,7 @@ import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
 window.ceresTranslate = TranslationService.translate;
+window.ceresReadTranslations = TranslationService.readTranslations;
 
 Vue.prototype.$translate = TranslationService.translate;
 Vue.prototype.$ceres = App;

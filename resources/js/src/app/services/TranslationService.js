@@ -10,7 +10,8 @@ const TranslationService = (function($)
     _readTranslations();
 
     return {
-        translate: _translate
+        translate: _translate,
+        readTranslations: _readTranslations
     };
 
     function _readTranslations()
