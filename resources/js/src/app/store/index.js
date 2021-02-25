@@ -23,6 +23,8 @@ import items from "./modules/singleItem/BaseItemModule";
 // import eventPropagation from "./plugins/EventPropagationPlugin";
 import { isDefined } from "../helper/utils";
 
+export let store;
+
 // TODO: find better method name
 export function createStore()
 {
@@ -34,7 +36,7 @@ export function createStore()
     Vue.use(Vuex);
 
     // eslint-disable-next-line
-    const store = new Vuex.Store(
+    store = new Vuex.Store(
         {
             modules:
             {
@@ -137,4 +139,4 @@ export function initClientStore(store)
         });
 }
 
-export default { createStore, initServerStore, initClientListeners, initClientStore };
+export default { createStore, initServerStore, initClientListeners, initClientStore, store };
