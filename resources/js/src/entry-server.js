@@ -1,6 +1,6 @@
 import { createApp } from "./app";
 import Vue from "vue";
-import { fillStore } from "./app/store";
+import { initServerStore } from "./app/store";
 
 // export default options =>
 // {
@@ -38,7 +38,7 @@ export default context =>
 
         const { app, store } = createApp(context);
 
-        fillStore(store);
+        initServerStore(store);
 
         // NOT working in our solution
         // context.rendered = () =>

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-// import ApiService from "../services/ApiService";
+import ApiService from "../services/ApiService";
 
 import address from "./modules/AddressModule";
 import basket from "./modules/BasketModule";
@@ -21,8 +21,9 @@ import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
 // import eventPropagation from "./plugins/EventPropagationPlugin";
-// import { isDefined } from "../helper/utils";
+import { isDefined } from "../helper/utils";
 
+// TODO: find better method name
 export function createStore()
 {
     // =========================
@@ -58,58 +59,11 @@ export function createStore()
             // plugins: [eventPropagation]
         });
 
-    /*
-    ApiService.listen("LocalizationChanged",
-        data =>
-        {
-            store.commit("setShippingCountries", data.localization.activeShippingCountries);
-            store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
-        });
-
-
-    window.ceresStore = store;
-
-    ApiService.listen("AfterBasketChanged",
-        data =>
-        {
-            store.commit("setBasket", data.basket);
-            store.commit("setShowNetPrices", data.showNetPrices);
-            store.commit("setWishListIds", data.basket.itemWishListIds);
-        });
-
-    store.dispatch("loadBasketData");
-    */
-    /**
-     * Loads user data after pageload
-     */
-    /*
-    ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
-        .done(response =>
-        {
-            if (isDefined(response.data))
-            {
-                store.commit("setUserData", response.data);
-            }
-        });
-    */
-    /**
-     * Adds login/logout event listeners
-     */
-    /*
-    ApiService.listen("AfterAccountAuthentication", userData =>
-    {
-        store.commit("setUserData", userData.accountContact);
-    });
-    ApiService.listen("AfterAccountContactLogout", () =>
-    {
-        store.commit("setUserData", null);
-    });
-    */
-
     return store;
 }
 
-export function fillStore(store)
+// TODO: find better method name
+export function initServerStore(store)
 {
     // =========================
     // Fill initial vuex data
@@ -133,4 +87,54 @@ export function fillStore(store)
     store.commit("initConsents");
 }
 
-export default { createStore, fillStore };
+// TODO: find better method name
+export function initClientListeners(store)
+{
+    ApiService.listen("LocalizationChanged",
+        data =>
+        {
+            store.commit("setShippingCountries", data.localization.activeShippingCountries);
+            store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
+        });
+
+    ApiService.listen("AfterBasketChanged",
+        data =>
+        {
+            store.commit("setBasket", data.basket);
+            store.commit("setShowNetPrices", data.showNetPrices);
+            store.commit("setWishListIds", data.basket.itemWishListIds);
+        });
+
+    /**
+     * Adds login/logout event listeners
+     */
+    ApiService.listen("AfterAccountAuthentication", userData =>
+    {
+        store.commit("setUserData", userData.accountContact);
+    });
+    ApiService.listen("AfterAccountContactLogout", () =>
+    {
+        store.commit("setUserData", null);
+    });
+}
+
+// TODO: find better method name
+export function initClientStore(store)
+{
+    window.ceresStore = store;
+
+    store.dispatch("loadBasketData");
+    /**
+     * Loads user data after pageload
+     */
+    ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
+        .done(response =>
+        {
+            if (isDefined(response.data))
+            {
+                store.commit("setUserData", response.data);
+            }
+        });
+}
+
+export default { createStore, initServerStore, initClientListeners, initClientStore };
