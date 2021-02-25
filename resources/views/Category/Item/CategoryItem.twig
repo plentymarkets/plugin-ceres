@@ -113,7 +113,7 @@
                             {% for item in itemList %}
                                 <li class="col-12 col-sm-6 col-md-4 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}4{% else %}3{% endif %}">
                                     <category-item
-                                        item-data-ref="{{ item.data | json_data }}"
+                                        :item-data-ref="{{ item.data | json_encode }}"
                                         :decimal-count="{{ ceresConfig.item.storeSpecial }}">
                                         <template #before-prices>{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
                                         <template #after-prices>{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
