@@ -23,106 +23,114 @@ import items from "./modules/singleItem/BaseItemModule";
 // import eventPropagation from "./plugins/EventPropagationPlugin";
 // import { isDefined } from "../helper/utils";
 
+export function createStore()
+{
+    // =========================
+    // init vuex store
+    // =========================
 
-// =========================
-// init vuex store
-// =========================
+    Vue.options.delimiters = ["${", "}"];
+    Vue.use(Vuex);
 
-Vue.options.delimiters = ["${", "}"];
-Vue.use(Vuex);
-
-// eslint-disable-next-line
-const store = new Vuex.Store(
-    {
-        modules:
+    // eslint-disable-next-line
+    const store = new Vuex.Store(
         {
-            address,
-            basket,
-            checkout,
-            consents,
-            contactForm,
-            itemList,
-            items,
-            itemSearch,
-            lastSeen,
-            lazyComponent,
-            liveShopping,
-            localization,
-            navigation,
-            orderReturn,
-            user,
-            wishList
-        }
+            modules:
+            {
+                address,
+                basket,
+                checkout,
+                consents,
+                contactForm,
+                itemList,
+                items,
+                itemSearch,
+                lastSeen,
+                lazyComponent,
+                liveShopping,
+                localization,
+                navigation,
+                orderReturn,
+                user,
+                wishList
+            }
 
-        // plugins: [eventPropagation]
-    });
+            // plugins: [eventPropagation]
+        });
 
-// =========================
-// Fill initial vuex data
-// =========================
-/*
-App.initialData.shippingCountries.sort((first, second) =>
-{
-    if (first.currLangName < second.currLangName)
-    {
-        return -1;
-    }
-    if (first.currLangName > second.currLangName)
-    {
-        return 1;
-    }
-    return 0;
-});
-
-store.commit("setShippingCountries", App.initialData.shippingCountries);
-store.commit("setShippingCountryId", App.initialData.shippingCountryId);
-store.commit("setShowNetPrices", App.initialData.showNetPrices);
-store.commit("initConsents");
-
-ApiService.listen("LocalizationChanged",
-    data =>
-    {
-        store.commit("setShippingCountries", data.localization.activeShippingCountries);
-        store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
-    });
-
-
-window.ceresStore = store;
-
-ApiService.listen("AfterBasketChanged",
-    data =>
-    {
-        store.commit("setBasket", data.basket);
-        store.commit("setShowNetPrices", data.showNetPrices);
-        store.commit("setWishListIds", data.basket.itemWishListIds);
-    });
-
-store.dispatch("loadBasketData");
-*/
-/**
- * Loads user data after pageload
- */
-/*
-ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
-    .done(response =>
-    {
-        if (isDefined(response.data))
+    /*
+    ApiService.listen("LocalizationChanged",
+        data =>
         {
-            store.commit("setUserData", response.data);
-        }
+            store.commit("setShippingCountries", data.localization.activeShippingCountries);
+            store.commit("setShippingCountryId", data.localization.currentShippingCountryId);
+        });
+
+
+    window.ceresStore = store;
+
+    ApiService.listen("AfterBasketChanged",
+        data =>
+        {
+            store.commit("setBasket", data.basket);
+            store.commit("setShowNetPrices", data.showNetPrices);
+            store.commit("setWishListIds", data.basket.itemWishListIds);
+        });
+
+    store.dispatch("loadBasketData");
+    */
+    /**
+     * Loads user data after pageload
+     */
+    /*
+    ApiService.get("/rest/io/customer", {}, { keepOriginalResponse: true })
+        .done(response =>
+        {
+            if (isDefined(response.data))
+            {
+                store.commit("setUserData", response.data);
+            }
+        });
+    */
+    /**
+     * Adds login/logout event listeners
+     */
+    /*
+    ApiService.listen("AfterAccountAuthentication", userData =>
+    {
+        store.commit("setUserData", userData.accountContact);
     });
-*/
-/**
- * Adds login/logout event listeners
- */
-/*
-ApiService.listen("AfterAccountAuthentication", userData =>
+    ApiService.listen("AfterAccountContactLogout", () =>
+    {
+        store.commit("setUserData", null);
+    });
+    */
+
+    return store;
+}
+
+export function fillStore(store)
 {
-    store.commit("setUserData", userData.accountContact);
-});
-ApiService.listen("AfterAccountContactLogout", () =>
-{
-    store.commit("setUserData", null);
-});
- */
-export default store;
+    // =========================
+    // Fill initial vuex data
+    // =========================
+    App.initialData.shippingCountries.sort((first, second) =>
+    {
+        if (first.currLangName < second.currLangName)
+        {
+            return -1;
+        }
+        if (first.currLangName > second.currLangName)
+        {
+            return 1;
+        }
+        return 0;
+    });
+
+    store.commit("setShippingCountries", App.initialData.shippingCountries);
+    store.commit("setShippingCountryId", App.initialData.shippingCountryId);
+    store.commit("setShowNetPrices", App.initialData.showNetPrices);
+    store.commit("initConsents");
+}
+
+export default { createStore, fillStore };

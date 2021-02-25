@@ -18,9 +18,10 @@ const mutations =
 
         setShippingCountryId(state, shippingCountryId)
         {
-            if (shippingCountryId !== state.shippingCountryId)
+            if (shippingCountryId !== state.shippingCountryId )
             {
-                document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: shippingCountryId }));
+                // TODO customevent is not defined in node. only fire if !isSSR.
+                // document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: shippingCountryId }));
             }
 
             state.shippingCountryId = shippingCountryId;

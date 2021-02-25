@@ -167,7 +167,7 @@ import "./app/filters/propertyFileUrl.filter";
 import "./app/filters/translate.filter";
 import "./app/filters/truncate.filter";
 
-import store from "./app/store/index";
+import { createStore } from "./app/store/index";
 
 export function createApp(options)
 {
@@ -265,13 +265,14 @@ export function createApp(options)
     Vue.prototype.$translate = TranslationService.translate;
     Vue.prototype.$ceres = App;
 
+    const store = createStore();
+
     const defaultOptions = {
         store,
         ...options
     };
 
-
     const app = new Vue(defaultOptions);
 
-    return { app };
+    return { app, store };
 }

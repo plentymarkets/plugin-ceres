@@ -4,9 +4,14 @@ import { createApp } from "./app";
 
 // client-specific bootstrapping logic...
 
-const { app } = createApp({
+const { app, store } = createApp({
     template: "#ssr-script-container"
 });
+
+if (window.__INITIAL_STATE__)
+{
+    store.replaceState(window.__INITIAL_STATE__);
+}
 
 app.$mount("#vue-app", true);
 
