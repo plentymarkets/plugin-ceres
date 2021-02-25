@@ -104,9 +104,9 @@
                 <div class="col">
                     <single-item
                         v-cloak
-                        item-data="{{ item | json_data }}"
-                        attributes-data="{{ attributes | json_data }}"
-                        variations="{{ variations | json_data }}"
+                        :item-data="{{ item | json_encode }}"
+                        :attributes-data="{{ attributes | json_encode }}"
+                        :variations="{{ variations | json_encode }}"
                         :after-key="{{ afterKey | json_encode }}"
                         :please-select-option-variation-id="{{ dynamicVariationId }}"
                         :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"

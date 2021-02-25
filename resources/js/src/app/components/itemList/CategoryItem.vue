@@ -165,11 +165,7 @@ export default {
             type: Boolean,
             default: false
         },
-        itemDataRef:
-        {
-            type: Object,
-            default: null
-        }
+        itemDataRef: Object
     },
 
     computed:

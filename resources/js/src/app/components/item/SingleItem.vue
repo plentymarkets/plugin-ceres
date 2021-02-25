@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="currentVariation">
         <slot :getDataField="getDataField" :getFilteredDataField="getFilteredDataField">
             <div class="single container-max page-content">
                 <div class="row position-relative">
@@ -260,7 +260,10 @@ export default {
             type: Number,
             required: true
         },
-        afterKey: Object
+        afterKey: Object,
+        itemData: Object,
+        attributesData: Array,
+        variations: Array
     },
 
     provide()
@@ -269,12 +272,6 @@ export default {
             itemId: this.$props.itemId
         }
     },
-
-    jsonDataFields: [
-        "itemData",
-        "attributesData",
-        "variations"
-    ],
 
     computed:
     {
@@ -344,18 +341,21 @@ export default {
 
     mounted()
     {
-        this.$store.dispatch("initVariation", this.itemData);
-        this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
-        this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
-
-        this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
-            itemId:             this.itemId,
-            attributes:         this.attributesData,
-            variations:         this.variations,
-            initialVariationId: this.currentVariation.variation.id,
-            isPleaseSelectOption: this.initPleaseSelectOption,
-            afterKey:           this.afterKey
-        });
+        this.$nextTick(() =>
+        {
+            this.$store.dispatch("initVariation", this.itemData);
+            this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
+            this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+    
+            this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
+                itemId:             this.itemId,
+                attributes:         this.attributesData,
+                variations:         this.variations,
+                initialVariationId: this.currentVariation.variation.id,
+                isPleaseSelectOption: this.initPleaseSelectOption,
+                afterKey:           this.afterKey
+            });
+        })
     },
 
     methods:
