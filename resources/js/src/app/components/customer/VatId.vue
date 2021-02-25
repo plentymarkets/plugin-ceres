@@ -32,6 +32,7 @@
                 name="vatNumber"
                 :id="'txtVatNumber' + _uid"
                 :value="value"
+                data-testing="wrong-vat-id"
                 disabled
             >
             <label :for="'txtVatNumber' + _uid">

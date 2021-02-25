@@ -43,6 +43,13 @@ context("Address", () =>
         });
     });
 
+    it.only("should add new billing address for company with uid", () =>
+    {
+        cy.getByTestingAttr("billing-address-select-add").click();
+        cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
+        cy.getByTestingAttr("vat-id").should("exist");
+    });
+
     it("should add new delivery address", () =>
     {
         cy.getByTestingAttr("delivery-address-select-add").click();
