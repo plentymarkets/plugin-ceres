@@ -20,13 +20,13 @@
 
 <div class="widget widget-search-suggestion-item {{ widgetClasses }}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {% if showHeadline %}
-    <div class="px-3 pt-3 border-bottom" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview) }}>
-        {% if headline is empty %}
-            <h4 class="mb-2">{{ WidgetHelper.editableTwig(isPreview, Twig.trans(defaultHeadline)) }}</h4>
-        {% else %}
-            {{ WidgetHelper.editableTwig(isPreview, headline) }}
-        {% endif %}
-    </div>
+        <div class="px-3 pt-3 border-bottom" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            {% if headline is empty %}
+                <h4 class="mb-2">{{ WidgetHelper.editableTwig(isPreview, Twig.trans(defaultHeadline)) }}</h4>
+            {% else %}
+                {{ WidgetHelper.editableTwig(isPreview, headline) }}
+            {% endif %}
+        </div>
     {% endif %}
 
     <search-suggestion-item
