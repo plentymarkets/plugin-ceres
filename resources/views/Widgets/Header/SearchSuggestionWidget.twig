@@ -16,8 +16,10 @@
 {% set widgetClasses = WidgetHelper.concatClasses(["widget-#{ appearance }", customClass, spacingMargin]) %}
 
 {% set headline = widget.settings.headline.mobile %}
+{% set showHeadline = widget.settings.showHeadline.mobile %}
 
 <div class="widget widget-search-suggestion-item {{ widgetClasses }}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    {% if showHeadline %}
     <div class="px-3 pt-3 border-bottom" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview) }}>
         {% if headline is empty %}
             <h4 class="mb-2">{{ WidgetHelper.editableTwig(isPreview, Twig.trans(defaultHeadline)) }}</h4>
@@ -25,6 +27,7 @@
             {{ WidgetHelper.editableTwig(isPreview, headline) }}
         {% endif %}
     </div>
+    {% endif %}
 
     <search-suggestion-item
         :show-images="{{ showImages | json_encode }}"

@@ -31,6 +31,9 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
     /** @var string $headline The headline of the suggestion widget */
     protected $headline = '';
 
+    /** @var string $showHeadline Indicate if the headline should be shown */
+    protected $showHeadline = true;
+
     /** @var bool $hasCountOption Indicate if the suggestion widget has the option to show counts behind the suggestions */
     protected $hasCountOption = false;
     
@@ -65,6 +68,12 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
         $settingsFactory->createCustomClass();
 
         $settingsFactory->createAppearance(true);
+
+        if ($this->showHeadline) {
+            $settingsFactory->createCheckbox('showHeadline')
+                ->withName('Widget.searchSuggestionShowHeadlineLabel')
+                ->withDefaultValue(true);
+        }
 
         if ($this->hasCountOption) {
             $settingsFactory->createCheckbox('showCount')
