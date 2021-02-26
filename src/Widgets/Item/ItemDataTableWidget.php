@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ItemDataTableWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.ItemDataTableWidget";
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ItemDataTableWidget")
@@ -23,7 +27,10 @@ class ItemDataTableWidget extends BaseWidget
             ->withPosition(600)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

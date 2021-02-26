@@ -14,8 +14,12 @@ use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 
 class NavigationTreeWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Navigation.NavigationTreeWidget';
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::NavigationTreeWidget')
@@ -27,6 +31,9 @@ class NavigationTreeWidget extends BaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -97,6 +104,9 @@ class NavigationTreeWidget extends BaseWidget
         return $settings->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     protected function getPreviewData($widgetSettings)
     {
         /** @var CategoryService $categoryService */
@@ -126,6 +136,9 @@ class NavigationTreeWidget extends BaseWidget
         ];
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getTemplateData($widgetSettings, $isPreview)
     {
         $customEntries = $widgetSettings['customEntries']['mobile'];

@@ -13,9 +13,13 @@ use Plenty\Plugin\Log\Loggable;
 class GoogleMapsWidget extends BaseWidget
 {
     use Loggable;
-
+    
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.GoogleMapsWidget';
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData(): array
     {
         return WidgetDataFactory::make('Ceres::GoogleMapsWidget')
@@ -25,7 +29,10 @@ class GoogleMapsWidget extends BaseWidget
             ->withPosition(1050)
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings(): array
     {
         /** @var WidgetSettingsFactory $settings */

@@ -10,6 +10,23 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Modules\Category\Models\Category;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class DefaultFooterPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a default footer. It contains:
+ * - ThreeColumnWidget / TwoColumnWidget
+ * - BackgroundWidget
+ * - SeparatorWidget
+ * - ListWidget
+ * - LinkListWidget
+ * - FourColumnWidget
+ * - LegalInformationWidget
+ * - CodeWidget
+ * - CookieBarWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultFooterPreset implements ContentPreset
 {
     /** @var PresetHelper $preset */
@@ -33,11 +50,9 @@ class DefaultFooterPreset implements ContentPreset
         3 => 'third',
         4 => 'fourth'
     ];
-
+    
     /**
-     * Get the widget configurations of the presets to be assigned to the created content.
-     *
-     * @return mixed
+     * @inheritDoc
      */
     public function getWidgets()
     {
@@ -75,7 +90,7 @@ class DefaultFooterPreset implements ContentPreset
                 'layout',
                 $numberOfFeatures === 2 ? 'onToOne' : 'oneToOneToOne'
             )
-            ->withSetting("customClass", "my-3");
+            ->withSetting("customClass", "my-1");
 
         for ($i = 1; $i <= $numberOfFeatures && $i <= 3; $i++) {
             $storeFeatureTranslation = $this->translator->trans('Ceres::Template.footerStoreFeature' . $i);
@@ -85,10 +100,19 @@ class DefaultFooterPreset implements ContentPreset
                 ->withSetting(
                     'entries',
                     [
-                        ['text' => $storeFeatureTranslation, 'url' => '']
+                        ['text' => $storeFeatureTranslation, 'url' => null]
                     ]
                 )
-                ->withSetting('centered', true);
+                ->withSetting('centered', true)
+                ->withSetting('spacing.customPadding', true)
+                ->withSetting('spacing.padding.top.value', 2)
+                ->withSetting('spacing.padding.top.unit', null)
+                ->withSetting('spacing.padding.bottom.value', 2)
+                ->withSetting('spacing.padding.bottom.unit', null)
+                ->withSetting('spacing.padding.left.value', 0)
+                ->withSetting('spacing.padding.left.unit', null)
+                ->withSetting('spacing.padding.right.value', 0)
+                ->withSetting('spacing.padding.right.unit', null);
         }
     }
 
@@ -152,11 +176,10 @@ class DefaultFooterPreset implements ContentPreset
     {
         $defaultText = '';
         $defaultText .= '<div class="copyright text-center">';
-        $defaultText .= '<a rel="nofollow" href="https://www.plentymarkets.eu">';
+        $defaultText .= '<a class="d-inline-block" rel="nofollow" href="https://www.plentymarkets.eu">';
         $defaultText .= '<img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path("Ceres") }}/images/plentymarkets-logo.svg" rel="nofollow">';
         $defaultText .= '</a>';
-        $defaultText .= '<br>';
-        $defaultText .= '<small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>';
+        $defaultText .= '<small class="d-block">&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>';
         $defaultText .= '</div>';
 
         $this->preset->createWidget('Ceres::CodeWidget')

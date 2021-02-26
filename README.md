@@ -35,6 +35,10 @@ Your Javascript, widget and SCSS changes have now been assembled locally.
 
 Sign up today and become a member of our [forum](https://forum.plentymarkets.com/c/plugin-entwicklung). Discuss the latest trends in plugin development and share your ideas with our community.
 
+## Contribute to the project 
+
+If you want to contribute to our open source projects, you can learn how to open pull requests in our [Contribution guide](https://github.com/plentymarkets/plugin-ceres/blob/stable/contributionGuide.md).
+
 ## Versioning
 
 Visit our forum and find the latest news and updates in our [Changelog](https://forum.plentymarkets.com/c/changelog?order=created).

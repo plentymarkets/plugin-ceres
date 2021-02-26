@@ -9,8 +9,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PaginationWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Category.PaginationWidget";
     
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::PaginationWidget')
@@ -22,6 +26,9 @@ class PaginationWidget extends BaseWidget
                                 ->toArray();
     }
     
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

@@ -9063,6 +9063,10 @@ button:focus {
     }
 }
 
+.app {
+    overflow-x: hidden;
+}
+
 .center-xy {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -10171,6 +10175,10 @@ html.ie {
 
 .sticky-element {
     padding-bottom: .1px; // force disable margin collapse
+
+    p:empty {
+        margin-bottom: 0; // remove margin of empty paragraph for correct height detection
+    }
 }
 
 .sticky-element.is-sticky {
@@ -11463,9 +11471,13 @@ category-item,
             margin-bottom: 0;
             word-wrap: break-word;
         }
+    }
 
-        .category-description {
-            word-wrap: break-word;
+    .category-description {
+        word-wrap: break-word;
+
+        img {
+            max-width: 100%;
         }
     }
 
@@ -13233,6 +13245,7 @@ html.ie {
 
 .widget-legal-information {
     a {
+        display: inline-block;
         margin-right: 10px;
         color: $black;
     }
@@ -13288,6 +13301,11 @@ html.ie {
 
     .widget-inner {
         padding: 1rem 1.5rem;
+    }
+
+    // images from data-fields
+    img {
+        max-width: 100%;
     }
 }
 
@@ -13424,10 +13442,7 @@ $normalmenu-color: $primary !default;
 }
 
 .navbar-toggler {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    margin-left: auto;
 }
 
 // When mobile navigation is open

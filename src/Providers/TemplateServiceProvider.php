@@ -43,12 +43,18 @@ use Plenty\Plugin\ConfigRepository;
 
 /**
  * Class TemplateServiceProvider
+ *
+ * This class is the Laravel Service Provider for Ceres.
+ * The service provider runs on every request and bootstraps the application.
+ * See https://laravel.com/docs/6.x/providers for further information.
  * @package Ceres\Providers
  */
 class TemplateServiceProvider extends ServiceProvider
 {
+    /** @var int Default priority of events */
     const EVENT_LISTENER_PRIORITY = 100;
 
+    /** @var \string[][] $templateKeyToViewMap This property maps templateKeys to their view and their used context */
     private static $templateKeyToViewMap =
         [
             'tpl.home' => ['Homepage.Homepage', GlobalContext::class],
@@ -88,12 +94,23 @@ class TemplateServiceProvider extends ServiceProvider
             'tpl.tags' => ['Category.Item.CategoryItem', TagSearchContext::class]
         ];
 
+    /**
+     * Register any application services.
+     * @throws \ErrorException
+     */
     public function register()
     {
         $this->getApplication()->singleton(CeresConfig::class);
         $this->getApplication()->singleton(DefaultSettingsService::class);
     }
 
+    /**
+     * Bootstrap any application services.
+     * This method is called after every other service provider has been registered.
+     * @param Twig $twig
+     * @param Dispatcher $eventDispatcher
+     * @param ConfigRepository $config
+     */
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
         //register shopCeres assistant
@@ -164,6 +181,11 @@ class TemplateServiceProvider extends ServiceProvider
         $eventDispatcher->listen(AfterBuildPlugins::class, CeresAfterBuildPlugins::class);
     }
 
+    /**
+     * Register event listeners for IO events.
+     * @param $event
+     * @param $listener
+     */
     private function listenToIO($event, $listener)
     {
         /** @var Dispatcher $dispatcher */
@@ -193,6 +215,9 @@ class TemplateServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Register the default consent groups and their consents
+     */
     private function registerConsents()
     {
         /** @var ConsentRepositoryContract $consentRepository */
@@ -217,10 +242,19 @@ class TemplateServiceProvider extends ServiceProvider
         );
 
         $consentRepository->registerConsentGroup(
+            'payment',
+            'Ceres::Template.consentGroupPayment',
+            [
+                'position' => 200,
+                'description' => 'Ceres::Template.consentGroupPaymentDescription'
+            ]
+        );
+
+        $consentRepository->registerConsentGroup(
             'marketing',
             'Ceres::Template.consentGroupMarketingLabel',
             [
-                'position' => 200,
+                'position' => 300,
                 'description' => 'Ceres::Template.consentGroupMarketingDescription'
             ]
         );
@@ -229,10 +263,11 @@ class TemplateServiceProvider extends ServiceProvider
             'media',
             'Ceres::Template.consentGroupMediaLabel',
             [
-                'position' => 300,
+                'position' => 400,
                 'description' => 'Ceres::Template.consentGroupMediaDescription'
             ]
         );
+
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
         $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
@@ -301,7 +336,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         /**
          * @var ConfigRepository $config
-         * Cannot use CeresConfig since it depends on IO helper class
+         * Cannot use CeresConfig since it depends on IO helper class.
          */
         $config = pluginApp(ConfigRepository::class);
         if (strlen($config->get('Ceres.contact.api_key'))) {
@@ -334,7 +369,7 @@ class TemplateServiceProvider extends ServiceProvider
             );
         }
     }
-
+    
     private function registerConfigValues()
     {
         /** @var CeresConfig $ceresConfig */

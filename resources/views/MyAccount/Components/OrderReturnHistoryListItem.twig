@@ -6,19 +6,19 @@
             <div class="col-md-10">
                 <div class="row">
                     <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    <div class="col-md-2">
+                    <div class="col-md-2" {{ set_testing_attr("data-testing", "return-history-id1") }}>
                         <span>{{ trans("Ceres::Template.returnHistoryReturnId") }}: </span>
                         <span>${ returnOrder.order.id }</span>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" {{ set_testing_attr("data-testing", "return-history-id2") }}>
                         <span>{{ trans("Ceres::Template.returnHistoryOrderId") }}: </span>
                         <span>${ getOriginOrderId(returnOrder.order) }</span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" {{ set_testing_attr("data-testing", "return-history-date") }}>
                         <span>{{ trans("Ceres::Template.returnHistoryDate") }}: </span>
                         <span>${ returnOrder.order.createdAt | moment("{{ trans("Ceres::Template.devDateFormatMoment") }}") }</span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" {{ set_testing_attr("data-testing", "return-history-payment") }}>
                         <span>{{ trans("Ceres::Template.returnHistoryPaymentMethod") }}: </span>
                         <span>${ returnOrder.paymentMethodName }</span>
                     </div>
@@ -34,16 +34,16 @@
                             <img :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName " :title="orderItem | itemBundleName">
                         </a>
                         <div class="d-inline-block item-description pl-3">
-                            <div><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]">${ orderItem | itemBundleName }</a></div>
-                            <div>{{ trans("Ceres::Template.returnHistoryQuantity") }}: ${ orderItem.quantity}</div>
+                            <div><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]" {{ set_testing_attr("data-testing", "return-history-link") }}>${ orderItem | itemBundleName }</a></div>
+                            <div {{ set_testing_attr("data-testing", "return-history-quantity") }}>{{ trans("Ceres::Template.returnHistoryQuantity") }}: ${ orderItem.quantity}</div>
 
-                            <div v-for="attribute in orderItem.attributes">
+                            <div v-for="attribute in orderItem.attributes" {{ set_testing_attr("data-testing", "return-history-attribute") }}>
                                 <strong>${ attribute.name }: </strong>
                                 <span>${ attribute.value }</span>
                             </div>
 
                             <template v-if="orderItem.orderProperties && orderItem.orderProperties[0]">
-                                <div v-for="property in orderItem.orderProperties">
+                                <div v-for="property in orderItem.orderProperties" {{ set_testing_attr("data-testing", "return-history-property") }}>
                                     <b>${ property.name }</b>
                                     <span v-if="property.type === 'file'">
                                         <a :href="property.value | fileUploadPath" target="_blank" class="text-primary text-appearance">

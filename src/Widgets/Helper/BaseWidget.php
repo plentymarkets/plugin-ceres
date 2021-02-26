@@ -11,12 +11,14 @@ class BaseWidget implements DynamicWidget
 {
     use Loggable;
 
+    /** @var array The available toolbar layouts */
     const TOOLBAR_LAYOUT = [
         "NONE"   => "",
         "INLINE" => "bold,italic,underline,strike|h1,h2,h3|align|translation",
         "ALL"    => "bold,italic,underline,strike|headline|link|align,ul,ol|color,background|translation"
     ];
 
+    /** @var array A map for types to corresponding templates */
     public static $mapTypeToTemplate = [
         'itemset'       => 'tpl.item',
         'singleitem'    => 'tpl.item',
@@ -25,21 +27,20 @@ class BaseWidget implements DynamicWidget
         'checkout'      => 'tpl.checkout'
     ];
 
-    /**
-     * The template to be used for this widget
-     *
-     * @var string
-     */
+    /** @var string $template The template to be used for this widget */
     protected $template = "";
 
-    /**
-     * @var Twig $twig
-     */
+    /** @var Twig $twig */
     protected $twig = null;
 
     /** @var Application $app  */
     protected $app = null;
-
+    
+    /**
+     * BaseWidget constructor.
+     * @param Twig $twig Class to render twig templates.
+     * @param Application $app Helper class to retrieve information from the application.
+     */
     public function __construct(Twig $twig, Application $app)
     {
         $this->twig = $twig;
@@ -65,8 +66,8 @@ class BaseWidget implements DynamicWidget
     /**
      * Get the html representation of the widget.
      *
-     * @param array $widgetSettings
-     * @param array $children
+     * @param array $widgetSettings The settings provided by the widget.
+     * @param array $children The child widgets of the widget.
      *
      * @return string
      */
@@ -99,10 +100,10 @@ class BaseWidget implements DynamicWidget
     /**
      * Render the template of the widget.
      * Returns a twig-template which will be included in the frontend
-     * or rendered again for generating the preview
+     * or rendered again for generating the preview.
      *
-     * @param array $widgetSettings
-     * @param array $children
+     * @param array $widgetSettings The settings provided by the widget.
+     * @param array $children The child widgets of the widget.
      *
      * @return string
      */
@@ -164,10 +165,10 @@ class BaseWidget implements DynamicWidget
     }
 
     /**
-     * Get additional data to be passed to the template while rendering
+     * Get additional data to be passed to the template while rendering.
      *
-     * @param $widgetSettings
-     * @param $isPreview
+     * @param array $widgetSettings The settings provided by the widget.
+     * @param bool $isPreview A flag provided to determine if the widget is currently shown in preview.
      * @return array
      */
     protected function getTemplateData($widgetSettings, $isPreview)
@@ -176,16 +177,25 @@ class BaseWidget implements DynamicWidget
     }
 
     /**
-     * Get additional data to be passed to the template while rendering the preview markup
+     * Get additional data to be passed to the template while rendering the preview markup.
      *
-     * @param $widgetSettings
+     * @param array $widgetSettings The settings provided by the widget.
      * @return array
      */
     protected function getPreviewData($widgetSettings)
     {
         return [];
     }
-
+    
+    /**
+     * Mock a paginated result
+     *
+     * @param \Closure $factory The widget factory which should be mocked.
+     * @param int $itemsPerPage The number of items which should be mocked.
+     * @param int $currentPage The current page of the result.
+     * @param int $pages The total count of pages.
+     * @return array
+     */
     protected function mockPaginatedResult( \Closure $factory, $itemsPerPage = 10, $currentPage = 1, $pages = 5 )
     {
         $entries = [];

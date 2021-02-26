@@ -21,7 +21,8 @@ export default Vue.component("invoice-address-select", {
             :required-address-fields="requiredAddressFields"
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
-            :padding-inline-styles="paddingInlineStyles">
+            :padding-inline-styles="paddingInlineStyles"
+            data-testing="billing-address-select">
         </address-select>
     `,
 

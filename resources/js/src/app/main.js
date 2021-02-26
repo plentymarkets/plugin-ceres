@@ -177,6 +177,15 @@ function CeresMain()
         });
 
         fixPopperZIndexes();
+
+        // Emit event for Sticky Containers to update
+        $(".collapse").on("show.bs.collapse hide.bs.collapse", function()
+        {
+            this.dispatchEvent(new CustomEvent("updateStickyContainer",
+                {
+                    bubbles: true
+                }));
+        });
     });
 }
 

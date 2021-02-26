@@ -10,23 +10,76 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\VariationList;
 use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
 
+/**
+ * Trait ItemListContext
+ *
+ * Trait to extend a context, including all properties to handle item data.
+ *
+ * @package Ceres\Contexts
+ */
 trait ItemListContext
 {
+    /**
+     * @var int $currentPage Current page of items.
+     */
     public $currentPage;
+
+    /**
+     * @var int $pageMax Last page for items.
+     */
     public $pageMax;
+
+    /**
+     * @var int $itemsPerPage How many items are included in one page.
+     */
     public $itemsPerPage;
+
+    /**
+     * @var int $itemCountPage
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $itemCountPage;
+
+    /**
+     * @var int $itemCountTotal Count of all items in the item result.
+     */
     public $itemCountTotal;
+
+    /**
+     * @var string $itemSorting Sorting key for the item result.
+     */
     public $itemSorting;
+
+    /**
+     * @var array $query Contains items per page count and the sorting key for the item result.
+     */
     public $query;
+
+    /**
+     * @var string $suggestionString Suggestion for the shop search.
+     */
     public $suggestionString;
 
+    /**
+     * @var array $itemList Item result.
+     */
     public $itemList = [];
+
+    /**
+     * @var array $facets Facets that were selected to filter the item result.
+     */
     public $facets;
 
-    /** @var SearchOptions */
+    /**
+     * @var SearchOptions $searchOptions
+     */
     public $searchOptions;
 
+    /**
+     * @param array $defaultSearchFactories Search factories to request the item data.
+     * @param array $options Search options to filter the item data.
+     * @param string $scope The scope where the search is executed from.
+     */
     protected function initItemList($defaultSearchFactories, $options, $scope = SearchOptions::SCOPE_CATEGORY)
     {
         $this->currentPage = intval($options['page']);
@@ -75,7 +128,11 @@ trait ItemListContext
                         }
                     }
                 }
-                $this->pageMax        = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                if($options['itemsPerPage'] == 0) {
+                    $this->pageMax = 1;
+                } else {
+                    $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                }
                 $this->itemCountPage  = count($variationIds);
                 $this->itemCountTotal = $externalSearch->getCountTotal();
                 $this->facets         = [];
@@ -110,7 +167,12 @@ trait ItemListContext
         $this->itemCountTotal = $searchResults['itemList']['total'];
         $this->itemCountTotal = $this->itemCountTotal > 10000 ? 10000 : $this->itemCountTotal;
 
-        $this->pageMax = ceil($this->itemCountTotal / $options['itemsPerPage']);
+        if($options['itemsPerPage'] == 0) {
+                $this->pageMax = 1;
+        } else {
+            $this->pageMax = ceil($this->itemCountTotal / $options['itemsPerPage']);
+        }
+
         $this->itemCountPage = count($searchResults['itemList']['documents']);
         $this->itemList = $searchResults['itemList']['documents'];
         $this->facets = $searchResults['facets'];
