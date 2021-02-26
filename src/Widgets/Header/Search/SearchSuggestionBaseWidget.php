@@ -94,15 +94,9 @@ abstract class SearchSuggestionBaseWidget extends BaseWidget
      */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
-        $hasHeadline = false;
-        if (strlen(trim(strip_tags($widgetSettings['headline']['mobile']))) && strlen($this->headline)) {
-            $hasHeadline = true;
-        }
-
         return [
             'suggestionType' => $this->suggestionType,
             'defaultHeadline' => $this->headline,
-            'hasHeadline' => $hasHeadline
         ];
     }
 }
