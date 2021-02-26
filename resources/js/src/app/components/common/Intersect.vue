@@ -1,5 +1,6 @@
 <script>
-    const FEATURE_ENABLED = 'IntersectionObserver' in window;
+    // const FEATURE_ENABLED = 'IntersectionObserver' in window;
+    const FEATURE_ENABLED = true;
 
     export default {
         props:

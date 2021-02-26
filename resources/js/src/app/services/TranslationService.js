@@ -7,60 +7,60 @@ const TranslationService = (function($)
     const _translations = {};
 
     // initialize translations
-    _readTranslations();
+    // _readTranslations();
 
     return {
         translate: _translate
     };
 
-    function _readTranslations()
-    {
-        const identifierPattern = /^(\w+)::(\w+)$/;
-        const tags = document.querySelectorAll("script[data-translation]");
+    // function _readTranslations()
+    // {
+    //     const identifierPattern = /^(\w+)::(\w+)$/;
+    //     const tags = document.querySelectorAll("script[data-translation]");
 
-        for (let i = 0; i < tags.length; i++)
-        {
-            if (!tags[i].dataset || !tags[i].dataset.translation)
-            {
-                continue;
-            }
+    //     for (let i = 0; i < tags.length; i++)
+    //     {
+    //         if (!tags[i].dataset || !tags[i].dataset.translation)
+    //         {
+    //             continue;
+    //         }
 
-            const identifier = tags[i].dataset.translation;
+    //         const identifier = tags[i].dataset.translation;
 
-            if (!identifier || !identifierPattern.test(identifier))
-            {
-                console.error("Cannot read translations from script tag. Identifier is not valid");
-            }
+    //         if (!identifier || !identifierPattern.test(identifier))
+    //         {
+    //             console.error("Cannot read translations from script tag. Identifier is not valid");
+    //         }
 
-            const match = identifierPattern.exec(identifier);
-            const namespace = match[1];
-            const group = match[2];
+    //         const match = identifierPattern.exec(identifier);
+    //         const namespace = match[1];
+    //         const group = match[2];
 
-            if (_translations.hasOwnProperty(namespace))
-            {
-                console.warn("Cannot override namespace \"" + namespace + "\"");
-                continue;
-            }
+    //         if (_translations.hasOwnProperty(namespace))
+    //         {
+    //             console.warn("Cannot override namespace \"" + namespace + "\"");
+    //             continue;
+    //         }
 
-            _translations[namespace] = {};
+    //         _translations[namespace] = {};
 
-            if (_translations[namespace].hasOwnProperty(group))
-            {
-                console.warn("Cannot override group \"" + namespace + "::" + group);
-                continue;
-            }
+    //         if (_translations[namespace].hasOwnProperty(group))
+    //         {
+    //             console.warn("Cannot override group \"" + namespace + "::" + group);
+    //             continue;
+    //         }
 
-            try
-            {
-                _translations[namespace][group] = JSON.parse(tags[i].innerHTML);
-            }
-            catch (err)
-            {
-                console.error("Error while parsing translations (" + identifier + ")");
-            }
+    //         try
+    //         {
+    //             _translations[namespace][group] = JSON.parse(tags[i].innerHTML);
+    //         }
+    //         catch (err)
+    //         {
+    //             console.error("Error while parsing translations (" + identifier + ")");
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
     function _translate(key, params)
     {

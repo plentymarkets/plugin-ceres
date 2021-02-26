@@ -26,7 +26,7 @@ export default {
         itemId:
         {
             type: Number,
-            required: !App.isShopBuilder
+            // required: !App.isShopBuilder
         },
         initialVariationId: Number,
         attributes: Array,

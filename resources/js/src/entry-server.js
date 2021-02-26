@@ -33,6 +33,7 @@ export default context =>
 {
     return new Promise((resolve, reject) =>
     {
+        console.log("entry-server");
         Vue.config.silent = true;
         Vue.prototype.$isSSR = true;
 

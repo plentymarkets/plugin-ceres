@@ -20,6 +20,14 @@ process.stdin.on("end", () =>
 {
     const virtualConsole = new VirtualConsole().sendTo(console);
 
+    let twigHtml = domInline.toString();
+    const vueAppStartIndex = twigHtml.indexOf("<!-- VUE_APP -->");
+    console.log("vueAppStartIndex: ", vueAppStartIndex);
+    const vueAppEndIndex = twigHtml.lastIndexOf("<!-- VUE_APP -->");
+    console.log("vueAppEndIndex: ", vueAppEndIndex);
+    const vueAppHtml = twigHtml.substring(vueAppStartIndex, vueAppEndIndex);
+
+
     const virtualDom = new JSDOM(
         domInline.toString(),
         {
@@ -28,26 +36,31 @@ process.stdin.on("end", () =>
         }
     );
 
-    global.document = virtualDom.window.document;
-    global.window = virtualDom.window;
-    global.App = virtualDom.window.App;
+    // global.document = virtualDom.window.document;
+    // global.window = virtualDom.window;
+    // global.App = virtualDom.window.App;
 
     try
     {
         const createApp = require("../../dist/ceres-server.js").default;
-        const vueAppElement = document.getElementById("vue-app");
+        // const vueAppElement = document.getElementById("vue-app");
         const vueApp = createApp({
-            template: vueAppElement.outerHTML
+            template: vueAppHtml
         }).then((vueApp) =>
         {
-            vueAppElement.parentElement.replaceChild(
-                document.createComment("vue-ssr-outlet"),
-                vueAppElement
-            );
+            // vueAppElement.parentElement.replaceChild(
+            //     document.createComment("vue-ssr-outlet"),
+            //     vueAppElement
+            // );
+            console.log("app created");
 
-            document.getElementById("ssr-script-container").innerHTML = vueAppElement.outerHTML;
+            twigHtml = twigHtml.replace(vueAppHtml, "<!-- vue-ssr-outlet -->");
+            // TODO cant this be placed inside the renderToString callback
+            twigHtml = twigHtml.replace("<!-- SSR_SCRIPT_CONTAINER -->", `<script type="x-template" id="ssr-script-container">${vueAppHtml}</script>`);
 
-            createRenderer({ template: document.documentElement.outerHTML })
+            // document.getElementById("ssr-script-container").innerHTML = vueAppElement.outerHTML;
+
+            createRenderer({ template: twigHtml })
                 .renderToString(vueApp, (err, renderedHTML) =>
                 {
                     if (err)
@@ -67,7 +80,7 @@ process.stdin.on("end", () =>
     }
     catch (e)
     {
-        console.log(e);
+        console.log("error: ", e);
         process.stdout.write("ERROR: ", e);
     }
 });

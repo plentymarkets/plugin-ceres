@@ -1,33 +1,10 @@
 import Vue from "vue";
 
-// import Notifications from "./app/components/pageDesign/Notifications.vue";
-// import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
-// import LazyImg from "./app/components/common/LazyImg.vue";
-// import CookieBar from "./app/components/pageDesign/CookieBar.vue";
-// import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
-// import LoadingAnimation from "./app/components/pageDesign/LoadingAnimation.vue";
-// import ReCaptcha from "./app/components/customer/ReCaptcha.vue";
-// import WishListCount from "./app/components/wishList/WishListCount.vue";
-// import Icon from "./app/components/pageDesign/Icon.vue";
-// import TestApp from "./app/TestApp.vue";
-// import LazyLoad from "./app/components/common/LazyLoad.vue";
-// import ItemSearch from "./app/components/itemList/ItemSearch.vue";
-// import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
-// import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
-// import BasketPreview from "./app/components/basket/BasketPreview.vue";
-// import BasketTotals from "./app/components/basket/BasketTotals.vue";
-// import BasketList from "./app/components/basket/list/BasketList.vue";
-// import Intersect from "./app/components/common/Intersect.vue";
-// import Carousel from "./app/components/pageDesign/Carousel.vue";
-// import CategoryItem from "./app/components/itemList/CategoryItem.vue";
-// import AddToBasket from "./app/components/basket/AddToBasket.vue";
-// import Login from "./app/components/customer/login/Login.vue";
-// import Popper from "./app/components/pageDesign/Popper.vue";
-// import Registration from "./app/components/customer/Registration.vue";
-
 // =========================
 // COMPONENTS
 // =========================
+
+// BASE
 import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
 
 
@@ -106,18 +83,38 @@ import SingleItem from "./app/components/item/SingleItem.vue";
 import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
 import FormAttachment from "./app/components/form/FormAttachment.vue";
 
-/*
-import consents from "./app/store/modules/ConsentModule";
-import navigation from "./app/store/modules/NavigationModule";
-import user from "./app/store/modules/UserModule";
-import lazyComponent from "./app/store/modules/LazyComponentModule";
-import wishList from "./app/store/modules/WishListModule";
-import itemList from "./app/store/modules/ItemListModule";
-import itemSearch from "./app/store/modules/ItemSearchModule";
-import localization from "./app/store/modules/LocalizationModule";
- */
+// CHECKOUT
+// import "./app/components/checkout/AcceptGtcCheck";
+// import "./app/components/checkout/Checkout";
+// import "./app/components/checkout/ContactWishInput";
+// import "./app/components/checkout/CustomerSignInput";
+// import "./app/components/checkout/PaymentProviderSelect";
+// import "./app/components/checkout/PlaceOrder";
+// import "./app/components/checkout/ShippingPrivacyHintCheck";
+// import "./app/components/checkout/ShippingProfileSelect";
+// import "./app/components/checkout/SubscribeNewsletterCheck";
 
+// import "./app/components/customer/AddressSelect/AddressHeader";
+// import "./app/components/customer/AddressSelect/InvoiceAddressSelect";
+// import "./app/components/customer/AddressSelect/ShippingAddressSelect";
 
+// import "./app/components/myAccount/AccountSettings";
+// import "./app/components/myAccount/BankDataSelect";
+// import "./app/components/myAccount/ChangePaymentMethod";
+// import "./app/components/myAccount/MyAccount";
+// import "./app/components/myAccount/OrderDocuments";
+
+// // legacy non-shopbuilder components
+// import "./app/components/myAccount/History";
+
+// // new shopbuilder-only component
+// import EditCouponOverlay from "./app/components/myAccount/EditCouponOverlay.vue";
+// import "./app/components/myAccount/OrderHistoryList";
+// import "./app/components/myAccount/OrderReturnHistoryList";
+
+// =========================
+// SERVICES
+// =========================
 import TranslationService from "./app/services/TranslationService";
 
 // =========================
@@ -172,33 +169,11 @@ import { createStore } from "./app/store/index";
 
 export function createApp(options)
 {
-    // Vue.component("notifications", Notifications);
-    // Vue.component("user-login-handler", UserLoginHandler);
-    // Vue.component("lazy-img", LazyImg);
-    // Vue.component("cookie-bar", CookieBar);
-    // Vue.component("privacy-settings", PrivacySettings);
-    // Vue.component("mobile-navigation", MobileNavigation);
-    // Vue.component("loading-animation", LoadingAnimation);
-    // Vue.component("recaptcha", ReCaptcha);
-    // Vue.component("wish-list-count", WishListCount);
-    // Vue.component("icon", Icon);
-    // Vue.component("lazy-load", LazyLoad);
-    // Vue.component("item-search", ItemSearch);
-    // Vue.component("shipping-country-select", ShippingCountrySelect);
-    // Vue.component("basket-preview", BasketPreview);
-    // Vue.component("basket-totals", BasketTotals);
-    // Vue.component("basket-list", BasketList);
-    // Vue.component("intersect", Intersect);
-    // Vue.component("carousel", Carousel);
-    // Vue.component("category-item", CategoryItem);
-    // Vue.component("add-to-basket", AddToBasket);
-    // Vue.component("login", Login);
-    // Vue.component("popper", Popper);
-    // Vue.component("registration", Registration);
-
     // =========================
     // COMPONENTS
     // =========================
+
+    // BASE
     Vue.component("add-item-to-basket-overlay", AddItemToBasketOverlay);
     Vue.component("add-to-basket", AddToBasket);
     Vue.component("basket-preview", BasketPreview);
@@ -261,6 +236,9 @@ export function createApp(options)
     Vue.component("single-item", SingleItem);
     Vue.component("single-item-set-component", SingleItemSetComponent);
     Vue.component("form-attachment", FormAttachment);
+
+    // CHECKOUT
+    // Vue.component("edit-coupon-overlay", EditCouponOverlay);
 
     window.ceresTranslate = TranslationService.translate;
 

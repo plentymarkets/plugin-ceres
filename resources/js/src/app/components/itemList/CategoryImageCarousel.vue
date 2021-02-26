@@ -39,12 +39,12 @@ export default {
         showDots:
         {
             type: Boolean,
-            default: App.config.item.categoryShowDots
+            // default: App.config.item.categoryShowDots
         },
         showNav:
         {
             type: Boolean,
-            default: App.config.item.categoryShowNav
+            // default: App.config.item.categoryShowNav
         },
         disableLazyLoad: {
             type: Boolean,
