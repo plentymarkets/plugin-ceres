@@ -134,7 +134,9 @@ $border-width: 1px;
         -moz-osx-font-smoothing: grayscale;
 
         /* Enable click-through */
-        pointer-events: none;
+        &:not([for]){
+            pointer-events: none; 
+        }
 
         &.disabled,
         &:disabled {

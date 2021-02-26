@@ -64,7 +64,7 @@
             <!-- units -->
             <div class="col-12 variation-select" v-if="possibleUnitCombinationIds.length > 1 && isContentVisible">
                 <div class="input-unit">
-                    <select id="custom-select-unitCombinationIds" class="custom-select" @change="selectUnit($event.target.value)" data-testing="variation-select-unit">
+                    <select id="unit-combination-ids-select" class="custom-select" @change="selectUnit($event.target.value)" data-testing="variation-select-unit">
                         <option
                                 v-for="unitCombinationId in possibleUnitCombinationIds"
                                 :value="unitCombinationId"
@@ -77,7 +77,7 @@
                             </template>
                         </option>
                     </select>
-                    <label for="custom-select-unitCombinationIds" data-testing="variation-select-unit-label">{{ $translate("Ceres::Template.singleItemContent") }}</label>
+                    <label for="unit-combination-ids-select" data-testing="variation-select-unit-label">{{ $translate("Ceres::Template.singleItemContent") }}</label>
                 </div>
             </div>
             <!-- /units -->
