@@ -7,7 +7,7 @@ const TranslationService = (function($)
     let _translations = {};
 
     // initialize translations
-    if (translations !== undefined)
+    if (typeof translations !== "undefined")
     {
         _translations = translations;
     }
