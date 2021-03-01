@@ -8301,8 +8301,7 @@ a.close.disabled {
 }
 
 .sticky-top {
-  @supports ((position: -webkit-sticky) or (position: sticky)) {
-    position: -webkit-sticky;
+  @supports (position: sticky) {
     position: sticky;
     top: 0;
     z-index: $zindex-sticky;
