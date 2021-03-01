@@ -34,6 +34,16 @@ process.stdin.on("end", () =>
 
     ceresAppData = ceresAppData.replace("App = ", "").replace(";", "").trim();
 
+    // Translation extraction
+    const ceresTranslationRegex = /<script type="application\/json" data-translation="([^"]*)">(.*)<\/script>/g;
+    const ceresTranslationMatches = twigHtml.matchAll(ceresTranslationRegex);
+    const ceresTranslations = {};
+    
+    for(const match of ceresTranslationMatches)
+    {
+        ceresTranslations[match[1]] = match[2];
+    }
+
     // const virtualDom = new JSDOM(
     //     domInline.toString(),
     //     {
