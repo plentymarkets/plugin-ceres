@@ -71,7 +71,7 @@ import AddToWishList from "./app/components/item/AddToWishList.vue";
 import GraduatedPrices from "./app/components/item/GraduatedPrices.vue";
 import ItemDataTable from "./app/components/item/ItemDataTable.vue";
 import ItemImageCarousel from "./app/components/item/ItemImageCarousel.vue";
-import ItemPrice from "./app/components/item/ItemPrice.vue";
+// import ItemPrice from "./app/components/item/ItemPrice.vue";
 import SetPrice from "./app/components/item/SetPrice.vue";
 import OrderPropertyList from "./app/components/item/OrderPropertyList.vue";
 import VariationSelect from "./app/components/item/VariationSelect.vue";
@@ -225,7 +225,7 @@ export function createApp(options)
     Vue.component("graduated-prices", GraduatedPrices);
     Vue.component("item-data-table", ItemDataTable);
     Vue.component("item-image-carousel", ItemImageCarousel);
-    Vue.component("item-price", ItemPrice);
+    Vue.component("item-price", () => import("./app/components/item/ItemPrice.vue"));
     Vue.component("set-price", SetPrice);
     Vue.component("order-property-list", OrderPropertyList);
     Vue.component("variation-select", VariationSelect);
