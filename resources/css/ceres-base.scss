@@ -10328,6 +10328,9 @@ $border-width: 1px;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
+        /* Enable click-through */
+        pointer-events: none; 
+
         &.disabled,
         &:disabled {
             cursor: not-allowed;
@@ -13245,6 +13248,7 @@ html.ie {
 
 .widget-legal-information {
     a {
+        display: inline-block;
         margin-right: 10px;
         color: $black;
     }

@@ -1,39 +1,18 @@
 <?php
 
-
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
+use Plenty\Modules\ShopBuilder\Factories\Settings\ValueListFactory as CoreValueListFactory;
 
-class ValueListFactory
+/**
+ * Class ValueListFactory
+ *
+ * Create a list of values to be used by settings with multiple predefined values.
+ *
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.21
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\ValueListFactory
+ */
+class ValueListFactory extends CoreValueListFactory
 {
-    private $valueList;
-
-    /**
-     * @return ValueListFactory
-     */
-    public static function make()
-    {
-        /** @var ValueListFactory $instance */
-        $instance = pluginApp(ValueListFactory::class);
-        return $instance;
-    }
-
-    /**
-     * @param $value
-     * @param $caption
-     * @return ValueListFactory
-     */
-    public function addEntry($value, $caption)
-    {
-        $this->valueList[] = [
-            'value' => $value,
-            'caption' => $caption
-        ];
-        return $this;
-    }
-
-    public function toArray()
-    {
-        return $this->valueList;
-    }
 }

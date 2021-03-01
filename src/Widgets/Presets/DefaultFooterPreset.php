@@ -100,7 +100,7 @@ class DefaultFooterPreset implements ContentPreset
                 ->withSetting(
                     'entries',
                     [
-                        ['text' => $storeFeatureTranslation, 'url' => '']
+                        ['text' => $storeFeatureTranslation, 'url' => null]
                     ]
                 )
                 ->withSetting('centered', true)
