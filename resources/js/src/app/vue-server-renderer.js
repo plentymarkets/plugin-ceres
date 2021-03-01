@@ -1,5 +1,4 @@
 const createRenderer = require("vue-server-renderer").createRenderer;
-const { JSDOM, VirtualConsole } = require("jsdom");
 
 process.stdin.setEncoding("utf8");
 process.stdout.setEncoding("utf8");
@@ -18,8 +17,6 @@ process.stdin.on("readable", () =>
 
 process.stdin.on("end", () =>
 {
-    const virtualConsole = new VirtualConsole().sendTo(console);
-
     let twigHtml = domInline.toString();
     const vueAppMarker = "<!-- VUE_APP -->";
     const vueAppStartIndex = twigHtml.indexOf(vueAppMarker);
@@ -34,16 +31,16 @@ process.stdin.on("end", () =>
 
     ceresAppData = ceresAppData.replace("App = ", "").replace(";", "").trim();
 
-    const virtualDom = new JSDOM(
-        domInline.toString(),
-        {
-            runScripts: "dangerously",
-            virtualConsole
-        }
-    );
+    // Translation extraction
+    const ceresTranslationRegex = /<script type="application\/json" data-translation="([^"]*)">(.*)<\/script>/g;
+    const ceresTranslationMatches = twigHtml.matchAll(ceresTranslationRegex);
+    const ceresTranslations = {};
+    
+    for(const match of ceresTranslationMatches)
+    {
+        ceresTranslations[match[1]] = match[2];
+    }
 
-    // global.document = virtualDom.window.document;
-    // global.window = { navigator: { userAgent: "vuessr" } };
     global.App = JSON.parse(ceresAppData);
 
     try
