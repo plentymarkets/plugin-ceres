@@ -128,34 +128,36 @@
 <!-- VUE_APP -->
 
 <script id="ceres-app-data">
+    // CERES_APP_DATA
     App = {
-        config: {{ ceresConfig | json_encode | raw }},
-        urls: {{ urls | json_encode | raw }},
-        activeCurrency: "{{ currencyData[currencyFormat] }}",
-        currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
-        isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
-        isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
-        isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-        isItemView: {% if isItem %}true{% else %}false{% endif %},
-        templateEvent: "{{ templateEvent }}",
-        templateType: "{{ urls.templateType }}",
-        language: "{{ lang }}",
-        defaultLanguage: "{{ defaultLanguage }}",
-        decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
-        urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
-        propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
-        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
-        bundleSetting: {{ webstoreConfig.dontSplitItemBundle | default(1) }},
-        initialPleaseSelect: {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
-        publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
-        isCheapestSorting: "{{ services.template.isCheapestSorting() }}",
-        initialData: {
-            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
-            shippingCountryId: {{ services.checkout.getShippingCountryId() }},
-            showNetPrices: {{ showNetPrices | json_encode }}
+        "config": {{ ceresConfig | json_encode | raw }},
+        "urls": {{ urls | json_encode | raw }},
+        "activeCurrency": "{{ currencyData[currencyFormat] }}",
+        "currencyPattern": {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
+        "isCategoryView": {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
+        "isCheckoutView": {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
+        "isSearch": {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
+        "isItemView": {% if isItem %}true{% else %}false{% endif %},
+        "templateEvent": "{{ templateEvent }}",
+        "templateType": "{{ urls.templateType }}",
+        "language": "{{ lang }}",
+        "defaultLanguage": "{{ defaultLanguage }}",
+        "decimalSeparator": "{{ config("IO.format.separator_decimal") }}",
+        "urlTrailingSlash": {{ urls.appendTrailingSlash | json_encode }},
+        "propertyFileUrl": "{{ services.propertyFile.getPropertyFileUrl() }}",
+        "isShopBuilder": {{ isShopBuilder | default(false) | json_encode }},
+        "bundleSetting": {{ webstoreConfig.dontSplitItemBundle | default(1) }},
+        "initialPleaseSelect": {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
+        "publicPath": "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
+        "isCheapestSorting": "{{ services.template.isCheapestSorting() }}",
+        "initialData": {
+            "shippingCountries": {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
+            "shippingCountryId": {{ services.checkout.getShippingCountryId() }},
+            "showNetPrices": {{ showNetPrices | json_encode }}
         },
-        features: {}
+        "features": {}
     };
+    // CERES_APP_DATA
 </script>
 
 {{ Translations.add( "Ceres", "Template" ) }}

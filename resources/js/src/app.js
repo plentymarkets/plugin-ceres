@@ -240,10 +240,10 @@ export function createApp(options)
     // CHECKOUT
     // Vue.component("edit-coupon-overlay", EditCouponOverlay);
 
-    window.ceresTranslate = TranslationService.translate;
+    // window.ceresTranslate = TranslationService.translate;
 
     Vue.prototype.$translate = TranslationService.translate;
-    Vue.prototype.$ceres = App;
+    // Vue.prototype.$ceres = App;
 
     const store = createStore();
 

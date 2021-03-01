@@ -18,27 +18,33 @@ process.stdin.on("readable", () =>
 
 process.stdin.on("end", () =>
 {
-    const virtualConsole = new VirtualConsole().sendTo(console);
+    // const virtualConsole = new VirtualConsole().sendTo(console);
 
     let twigHtml = domInline.toString();
-    const vueAppStartIndex = twigHtml.indexOf("<!-- VUE_APP -->");
-    console.log("vueAppStartIndex: ", vueAppStartIndex);
-    const vueAppEndIndex = twigHtml.lastIndexOf("<!-- VUE_APP -->");
-    console.log("vueAppEndIndex: ", vueAppEndIndex);
+    const vueAppMarker = "<!-- VUE_APP -->";
+    const vueAppStartIndex = twigHtml.indexOf(vueAppMarker);
+    const vueAppEndIndex = twigHtml.lastIndexOf(vueAppMarker);
     const vueAppHtml = twigHtml.substring(vueAppStartIndex, vueAppEndIndex);
 
+    const ceresAppDateMarker = "// CERES_APP_DATA";
+    const ceresAppDateStart = twigHtml.indexOf(ceresAppDateMarker);
+    const ceresAppDateEnd = twigHtml.lastIndexOf(ceresAppDateMarker);
 
-    const virtualDom = new JSDOM(
-        domInline.toString(),
-        {
-            runScripts: "dangerously",
-            virtualConsole
-        }
-    );
+    let ceresAppData = twigHtml.substring(ceresAppDateStart + ceresAppDateMarker.length, ceresAppDateEnd);
+
+    ceresAppData = ceresAppData.replace("App = ", "").replace(";", "").trim();
+
+    // const virtualDom = new JSDOM(
+    //     domInline.toString(),
+    //     {
+    //         runScripts: "dangerously",
+    //         virtualConsole
+    //     }
+    // );
 
     // global.document = virtualDom.window.document;
-    // global.window = virtualDom.window;
-    // global.App = virtualDom.window.App;
+    global.window = {};
+    global.App = ceresAppData;
 
     try
     {
