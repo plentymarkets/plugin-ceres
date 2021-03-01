@@ -5,47 +5,50 @@ const NotificationService = require("./NotificationService");
 
 const _eventListeners = {};
 
-// $(document).ready(() =>
-// {
-//     $.ajaxSetup({
-//         headers: {
-//             "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
-//         }
-//     });
-// });
+export function initListener()
+{
+    $(document).ready(() =>
+    {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+            }
+        });
+    });
 
-// $(document).ajaxComplete((ajaxEvent, xhr, options) =>
-// {
-//     let response;
+    $(document).ajaxComplete((ajaxEvent, xhr, options) =>
+    {
+        let response;
 
-//     try
-//     {
-//         response = JSON.parse(xhr.responseText);
-//     }
-//     catch (exception)
-//     {
+        try
+        {
+            response = JSON.parse(xhr.responseText);
+        }
+        catch (exception)
+        {
 
-//     }
+        }
 
-//     if (response)
-//     {
-//         triggerEvent("_before", response);
+        if (response)
+        {
+            triggerEvent("_before", response);
 
-//         for (const event in response.events)
-//         {
-//             triggerEvent("_before_" + event, response.events[event]);
-//             triggerEvent(event, response.events[event]);
-//             triggerEvent("_after_" + event, response.events[event]);
-//         }
+            for (const event in response.events)
+            {
+                triggerEvent("_before_" + event, response.events[event]);
+                triggerEvent(event, response.events[event]);
+                triggerEvent("_after_" + event, response.events[event]);
+            }
 
-//         if (!options.supressNotifications)
-//         {
-//             _printMessages(response);
-//         }
+            if (!options.supressNotifications)
+            {
+                _printMessages(response);
+            }
 
-//         triggerEvent("_after", response);
-//     }
-// });
+            triggerEvent("_after", response);
+        }
+    });
+}
 
 export function listen(event, handler)
 {
@@ -170,39 +173,39 @@ export function send(url, data = {}, config)
     return deferred;
 }
 
-// function _printMessages(response)
-// {
-//     let notification;
+function _printMessages(response)
+{
+    let notification;
 
-//     if (response.error && response.error.message.length > 0)
-//     {
-//         notification = NotificationService.error(response.error);
-//     }
+    if (response.error && response.error.message.length > 0)
+    {
+        notification = NotificationService.error(response.error);
+    }
 
-//     if (response.success && response.success.message.length > 0)
-//     {
-//         notification = NotificationService.success(response.success);
-//     }
+    if (response.success && response.success.message.length > 0)
+    {
+        notification = NotificationService.success(response.success);
+    }
 
-//     if (response.warn && response.warn.message.length > 0)
-//     {
-//         notification = NotificationService.warn(response.warn);
-//     }
+    if (response.warn && response.warn.message.length > 0)
+    {
+        notification = NotificationService.warn(response.warn);
+    }
 
-//     if (response.info && response.info.message.length > 0)
-//     {
-//         notification = NotificationService.info(response.info);
-//     }
+    if (response.info && response.info.message.length > 0)
+    {
+        notification = NotificationService.info(response.info);
+    }
 
-//     if (response.debug && response.debug.class.length > 0)
-//     {
-//         notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
-//         for (let i = 0; i < response.debug.trace.length; i++)
-//         {
-//             notification.trace(response.debug.trace[i]);
-//         }
-//     }
-// }
+    if (response.debug && response.debug.class.length > 0)
+    {
+        notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
+        for (let i = 0; i < response.debug.trace.length; i++)
+        {
+            notification.trace(response.debug.trace[i]);
+        }
+    }
+}
 
 export function setToken(token)
 {
@@ -214,4 +217,4 @@ export function getToken()
     return this._token;
 }
 
-export default { get, put, post, del, send, setToken, getToken, listen, before, after };
+export default { get, put, post, del, send, setToken, getToken, listen, before, after, initListener };

@@ -2,6 +2,7 @@ import Vue from "vue";
 import NotificationService from "./app/services/NotificationService";
 import { createApp } from "./app";
 import { initClientListeners, initClientStore } from "./app/store";
+import { initListener } from "./app/services/ApiService";
 
 // client-specific bootstrapping logic...
 
@@ -26,6 +27,8 @@ window.$ = jQuery;
 window.vueApp = app;
 window.Vue = Vue;
 window.NotificationService = NotificationService;
+
+initListener();
 
 initClientListeners(store);
 initClientStore(store);
