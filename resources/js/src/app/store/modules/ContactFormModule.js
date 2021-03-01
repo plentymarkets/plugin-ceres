@@ -177,8 +177,7 @@ const actions =
                                         {
                                             resetRecaptcha(recaptchaEl);
                                             disableForm(event.target, false);
-                                            response.error.message = response.error.message || TranslationService.translate("Ceres::Template.contactSendFail");
-                                            NotificationService.error(response.error);
+                                            NotificationService.error(TranslationService.translate("Ceres::Template.contactSendFail"));
                                         });
                                 });
                             },

@@ -55,7 +55,7 @@
             <input class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1">
 
             <div class="col-12 text-right">
-                <button type="submit" class="btn btn-{{ appearance }} {{ buttonSize }}">
+                <button type="submit" class="btn btn-{{ appearance }} {{ buttonSize }}" {{ Twig.print('set_testing_attr("data-testing", "send-contact-form")') }}>
                     {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}
                     <i class="fa fa-paper-plane-o ml-2" aria-hidden="true"></i>
                 </button>

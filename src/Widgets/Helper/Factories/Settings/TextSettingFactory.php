@@ -2,37 +2,22 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class TextSettingFactory extends BaseSettingFactory
+use Plenty\Modules\ShopBuilder\Factories\Settings\TextSettingFactory as CoreTextSettingFactory;
+
+/**
+ * Class TextSettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.23
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\TextSettingFactory
+ */
+class TextSettingFactory extends CoreTextSettingFactory
 {
-    public function __construct()
-    {
-        $this->withType("text");
-    }
-
-    /**
-     * @param boolean $isPassword
-     * @return TextSettingFactory
-     */
-    public function withPassword($isPassword)
-    {
-        return $this->withOption('isPassword', $isPassword);
-    }
-
     /**
      * @param boolean $isIBAN
-     * @return TextSettingFactory
+     * @return $this
      */
     public function withIBAN($isIBAN)
     {
         return $this->withOption('isIban', $isIBAN);
-    }
-
-    /**
-     * @param boolean $isReadonly
-     * @return TextSettingFactory
-     */
-    public function withReadonly($isReadonly)
-    {
-        return $this->withOption('isReadonly', $isReadonly);
     }
 }
