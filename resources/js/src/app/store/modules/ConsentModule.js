@@ -55,7 +55,7 @@ const mutations =
         },
         initConsents(state)
         {
-            if (ConsentManager)
+            if (window.ConsentManager)
             {
                 state.consents = window.ConsentManager.getConsents();
                 state.hasResponse = window.ConsentManager.hasResponse();
@@ -69,10 +69,6 @@ const mutations =
                 state.hasResponse = true;
             }
         }
-    };
-
-const actions =
-    {
     };
 
 const getters =
@@ -98,6 +94,5 @@ export default
 {
     state,
     mutations,
-    actions,
     getters
 };
