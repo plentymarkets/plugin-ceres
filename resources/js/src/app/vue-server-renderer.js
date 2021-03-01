@@ -46,7 +46,7 @@ process.stdin.on("end", () =>
             ceresTranslations[group] = {};
         }
 
-        ceresTranslations[group][name] = match[2];
+        ceresTranslations[group][name] = JSON.parse(match[2]);
     }
 
     global.App = JSON.parse(ceresAppData);
