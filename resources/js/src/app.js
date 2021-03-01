@@ -8,7 +8,7 @@ import Vue from "vue";
 import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
 
 
-import AddToBasket from "./app/components/basket/AddToBasket.vue";
+// import AddToBasket from "./app/components/basket/AddToBasket.vue";
 import BasketPreview from "./app/components/basket/BasketPreview.vue";
 import BasketTotals from "./app/components/basket/BasketTotals.vue";
 import Coupon from "./app/components/basket/Coupon.vue";
@@ -33,9 +33,9 @@ import Login from "./app/components/customer/login/Login.vue";
 import LoginView from "./app/components/customer/login/LoginView.vue";
 import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
 
-import ItemBundle from "./app/components/item/ItemBundle.vue";
-import OrderPropertyValue from "./app/components/item/OrderPropertyValue.vue";
-import QuantityInput from "./app/components/item/QuantityInput.vue";
+// import ItemBundle from "./app/components/item/ItemBundle.vue";
+// import OrderPropertyValue from "./app/components/item/OrderPropertyValue.vue";
+// import QuantityInput from "./app/components/item/QuantityInput.vue";
 
 import TagList from "./app/components/item/TagList.vue";
 
@@ -62,25 +62,25 @@ import Popper from "./app/components/pageDesign/Popper.vue";
 import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
 import LoadingAnimation from "./app/components/pageDesign/LoadingAnimation.vue";
 
-import WishList from "./app/components/wishList/WishList.vue";
-import WishListCount from "./app/components/wishList/WishListCount.vue";
+// import WishList from "./app/components/wishList/WishList.vue";
+// import WishListCount from "./app/components/wishList/WishListCount.vue";
 
 import LazyLoad from "./app/components/common/LazyLoad.vue";
 
-import AddToWishList from "./app/components/item/AddToWishList.vue";
-import GraduatedPrices from "./app/components/item/GraduatedPrices.vue";
-import ItemDataTable from "./app/components/item/ItemDataTable.vue";
-import ItemImageCarousel from "./app/components/item/ItemImageCarousel.vue";
+// import AddToWishList from "./app/components/item/AddToWishList.vue";
+// import GraduatedPrices from "./app/components/item/GraduatedPrices.vue";
+// import ItemDataTable from "./app/components/item/ItemDataTable.vue";
+// import ItemImageCarousel from "./app/components/item/ItemImageCarousel.vue";
 // import ItemPrice from "./app/components/item/ItemPrice.vue";
-import SetPrice from "./app/components/item/SetPrice.vue";
-import OrderPropertyList from "./app/components/item/OrderPropertyList.vue";
-import VariationSelect from "./app/components/item/VariationSelect.vue";
-import ItemAvailability from "./app/components/item/ItemAvailability.vue";
-import SingleItemBundle from "./app/components/item/SingleItemBundle.vue";
-import SingleAddToBasket from "./app/components/item/SingleAddToBasket.vue";
-import SetQuantityInput from "./app/components/item/SetQuantityInput.vue";
-import SingleItem from "./app/components/item/SingleItem.vue";
-import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
+// import SetPrice from "./app/components/item/SetPrice.vue";
+// import OrderPropertyList from "./app/components/item/OrderPropertyList.vue";
+// import VariationSelect from "./app/components/item/VariationSelect.vue";
+// import ItemAvailability from "./app/components/item/ItemAvailability.vue";
+// import SingleItemBundle from "./app/components/item/SingleItemBundle.vue";
+// import SingleAddToBasket from "./app/components/item/SingleAddToBasket.vue";
+// import SetQuantityInput from "./app/components/item/SetQuantityInput.vue";
+// import SingleItem from "./app/components/item/SingleItem.vue";
+// import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
 import FormAttachment from "./app/components/form/FormAttachment.vue";
 
 // CHECKOUT
@@ -175,7 +175,7 @@ export function createApp(options)
 
     // BASE
     Vue.component("add-item-to-basket-overlay", AddItemToBasketOverlay);
-    Vue.component("add-to-basket", AddToBasket);
+    Vue.component("add-to-basket", () => import("./app/components/basket/AddToBasket.vue"));
     Vue.component("basket-preview", BasketPreview);
     Vue.component("basket-totals", BasketTotals);
     Vue.component("coupon", Coupon);
@@ -196,9 +196,9 @@ export function createApp(options)
     Vue.component("login", Login);
     Vue.component("login-view", LoginView);
     Vue.component("user-login-handler", UserLoginHandler);
-    Vue.component("item-bundle", ItemBundle);
-    Vue.component("order-property-value", OrderPropertyValue);
-    Vue.component("quantity-input", QuantityInput);
+    Vue.component("item-bundle", () => import("./app/components/item/ItemBundle.vue"));
+    Vue.component("order-property-value", () => import("./app/components/item/OrderPropertyValue.vue"));
+    Vue.component("quantity-input", () => import("./app/components/item/QuantityInput.vue"));
     Vue.component("tag-list", TagList);
     Vue.component("category-item", CategoryItem);
     Vue.component("item-search", ItemSearch);
@@ -218,23 +218,23 @@ export function createApp(options)
     Vue.component("popper", Popper);
     Vue.component("shipping-country-select", ShippingCountrySelect);
     Vue.component("loading-animation", LoadingAnimation);
-    Vue.component("wish-list", WishList);
-    Vue.component("wish-list-count", WishListCount);
+    Vue.component("wish-list", () => import("./app/components/wishList/WishList.vue"));
+    Vue.component("wish-list-count", () => import("./app/components/wishList/WishListCount.vue"));
     Vue.component("lazy-load", LazyLoad);
-    Vue.component("add-to-wish-list", AddToWishList);
-    Vue.component("graduated-prices", GraduatedPrices);
-    Vue.component("item-data-table", ItemDataTable);
-    Vue.component("item-image-carousel", ItemImageCarousel);
+    Vue.component("add-to-wish-list", () => import("./app/components/item/AddToWishList.vue"));
+    Vue.component("graduated-prices", () => import("./app/components/item/GraduatedPrices.vue"));
+    Vue.component("item-data-table", () => import("./app/components/item/ItemDataTable.vue"));
+    Vue.component("item-image-carousel", () => import("./app/components/item/ItemImageCarousel.vue"));
     Vue.component("item-price", () => import("./app/components/item/ItemPrice.vue"));
-    Vue.component("set-price", SetPrice);
-    Vue.component("order-property-list", OrderPropertyList);
-    Vue.component("variation-select", VariationSelect);
-    Vue.component("item-availability", ItemAvailability);
-    Vue.component("single-item-bundle", SingleItemBundle);
-    Vue.component("single-add-to-basket", SingleAddToBasket);
-    Vue.component("set-quantity-input", SetQuantityInput);
-    Vue.component("single-item", SingleItem);
-    Vue.component("single-item-set-component", SingleItemSetComponent);
+    Vue.component("set-price", () => import("./app/components/item/SetPrice.vue"));
+    Vue.component("order-property-list", () => import("./app/components/item/OrderPropertyList.vue"));
+    Vue.component("variation-select", () => import("./app/components/item//VariationSelect.vue"));
+    Vue.component("item-availability", () => import("./app/components/item//ItemAvailability.vue"));
+    Vue.component("single-item-bundle", () => import("./app/components/item/SingleItemBundle.vue"));
+    Vue.component("single-add-to-basket", () => import("./app/components/item/SingleAddToBasket.vue"));
+    Vue.component("set-quantity-input", () => import("./app/components/item/SetQuantityInput.vue"));
+    Vue.component("single-item", () => import("./app/components/item/SingleItem.vue"));
+    Vue.component("single-item-set-component", () => import("./app/components/item/SingleItemSetComponent.vue"));
     Vue.component("form-attachment", FormAttachment);
 
     // CHECKOUT
