@@ -48,7 +48,7 @@ export default {
         forwardToSingleItem:
         {
             type: Boolean,
-            // default: App.config.search.forwardToSingleItem
+            default: App.config.search.forwardToSingleItem
         },
         timeout:
         {
