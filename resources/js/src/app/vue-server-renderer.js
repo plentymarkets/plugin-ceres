@@ -62,8 +62,7 @@ process.stdin.on("end", () =>
         global.translations = ceresTranslations;
         const t2 = performance.now();
 
-        const scriptPath = path.resolve(process.env.rootDir, '../plugins/sets/31/productive/Ceres/resources/js/dist/ceres-server.js');
-        const createApp = require(scriptPath).default;
+        const createApp = require("../../dist/ceres-server.js").default;
         const t3 = performance.now();
         const vueApp = createApp({
             template: vueAppHtml
@@ -100,4 +99,4 @@ process.stdin.on("end", () =>
     }
 });
 
-process.exit(0);
+//process.exit(0);
