@@ -1,4 +1,7 @@
 const createRenderer = require("vue-server-renderer").createRenderer;
+const {
+    performance
+  } = require('perf_hooks');
 
 process.stdin.setEncoding("utf8");
 process.stdout.setEncoding("utf8");
@@ -17,6 +20,7 @@ process.stdin.on("readable", () =>
 
 process.stdin.on("end", () =>
 {
+    const t0 = performance.now();
     let twigHtml = domInline.toString();
     const vueAppMarker = "<!-- VUE_APP -->";
     const vueAppStartIndex = twigHtml.indexOf(vueAppMarker);
@@ -31,6 +35,7 @@ process.stdin.on("end", () =>
 
     ceresAppData = ceresAppData.replace("App = ", "").replace(";", "").trim();
 
+    
     // Translation extraction
     const ceresTranslationRegex = /<script type="application\/json" data-translation="([^"]*)">(.*)<\/script>/g;
     const ceresTranslationMatches = twigHtml.matchAll(ceresTranslationRegex);
@@ -48,6 +53,9 @@ process.stdin.on("end", () =>
 
         ceresTranslations[group][name] = JSON.parse(match[2]);
     }
+
+    const t1 = performance.now();
+    console.log("String processing took " + (t1 - t0) + " milliseconds.")
 
     global.App = JSON.parse(ceresAppData);
     global.translations = ceresTranslations;
