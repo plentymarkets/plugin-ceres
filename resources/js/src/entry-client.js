@@ -23,8 +23,6 @@ import jQuery from "jquery";
 window.jQuery = jQuery;
 window.$ = jQuery;
 
-import "./app/main";
-
 window.vueApp = app;
 window.Vue = Vue;
 window.NotificationService = NotificationService;

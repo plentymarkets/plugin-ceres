@@ -115,7 +115,7 @@ export default {
         requiredFields: Object,
         defaultSalutation:  {
             type: String,
-            // default: App.config.addresses.defaultSalutation
+            default: App.config.addresses.defaultSalutation
         }
     },
 

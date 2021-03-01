@@ -53,8 +53,8 @@ process.stdin.on("end", () =>
     // );
 
     // global.document = virtualDom.window.document;
-    global.window = {};
-    global.App = ceresAppData;
+    // global.window = {};
+    global.App = JSON.parse(ceresAppData);
 
     try
     {
