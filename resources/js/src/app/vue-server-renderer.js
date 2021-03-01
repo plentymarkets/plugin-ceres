@@ -38,10 +38,19 @@ process.stdin.on("end", () =>
     
     for(const match of ceresTranslationMatches)
     {
-        ceresTranslations[match[1]] = match[2];
+        const key = match[1].split('::');
+        const group = key[0], name = key[1];
+
+        if(ceresTranslations[group] === undefined)
+        {
+            ceresTranslations[group] = {};
+        }
+
+        ceresTranslations[group][name] = match[2];
     }
 
     global.App = JSON.parse(ceresAppData);
+    global.translations = ceresTranslations;
 
     try
     {
