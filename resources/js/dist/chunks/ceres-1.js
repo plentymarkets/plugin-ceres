@@ -2021,6 +2021,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "vat-id",
@@ -7367,6 +7368,7 @@ var render = function() {
               type: "text",
               name: "vatNumber",
               id: "txtVatNumber" + _vm._uid,
+              "data-testing": "wrong-vat-id",
               disabled: ""
             },
             domProps: { value: _vm.value }
