@@ -141,7 +141,7 @@ export default {
         })
     },
 
-    created()
+    mounted()
     {
         this.addEventListener();
 

@@ -55,7 +55,7 @@ const mutations =
         },
         initConsents(state)
         {
-            if (window.ConsentManager)
+            if (ConsentManager)
             {
                 state.consents = window.ConsentManager.getConsents();
                 state.hasResponse = window.ConsentManager.hasResponse();

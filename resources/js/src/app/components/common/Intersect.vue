@@ -25,7 +25,7 @@
 
         created()
         {
-            if(!FEATURE_ENABLED || App.isShopBuilder)
+            if(!FEATURE_ENABLED || App.isShopBuilder || this.$isSSR)
             {
                 this.isVisible = true;
                 return;

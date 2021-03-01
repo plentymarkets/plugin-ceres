@@ -86,7 +86,6 @@ export function initServerStore(store)
     store.commit("setShippingCountries", App.initialData.shippingCountries);
     store.commit("setShippingCountryId", App.initialData.shippingCountryId);
     store.commit("setShowNetPrices", App.initialData.showNetPrices);
-    store.commit("initConsents");
 }
 
 // TODO: find better method name
@@ -125,6 +124,7 @@ export function initClientStore(store)
 {
     window.ceresStore = store;
 
+    store.commit("initConsents");
     store.dispatch("loadBasketData");
     /**
      * Loads user data after pageload

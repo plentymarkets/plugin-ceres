@@ -18,7 +18,7 @@ process.stdin.on("readable", () =>
 
 process.stdin.on("end", () =>
 {
-    // const virtualConsole = new VirtualConsole().sendTo(console);
+    const virtualConsole = new VirtualConsole().sendTo(console);
 
     let twigHtml = domInline.toString();
     const vueAppMarker = "<!-- VUE_APP -->";
@@ -34,16 +34,16 @@ process.stdin.on("end", () =>
 
     ceresAppData = ceresAppData.replace("App = ", "").replace(";", "").trim();
 
-    // const virtualDom = new JSDOM(
-    //     domInline.toString(),
-    //     {
-    //         runScripts: "dangerously",
-    //         virtualConsole
-    //     }
-    // );
+    const virtualDom = new JSDOM(
+        domInline.toString(),
+        {
+            runScripts: "dangerously",
+            virtualConsole
+        }
+    );
 
     // global.document = virtualDom.window.document;
-    // global.window = {};
+    // global.window = { navigator: { userAgent: "vuessr" } };
     global.App = JSON.parse(ceresAppData);
 
     try
@@ -60,7 +60,7 @@ process.stdin.on("end", () =>
             // );
             console.log("app created");
 
-            twigHtml = twigHtml.replace(vueAppHtml, "<!-- vue-ssr-outlet -->");
+            twigHtml = twigHtml.replace(vueAppHtml, "<!--vue-ssr-outlet-->");
             // TODO cant this be placed inside the renderToString callback
             twigHtml = twigHtml.replace("<!-- SSR_SCRIPT_CONTAINER -->", `<script type="x-template" id="ssr-script-container">${vueAppHtml}</script>`);
 
