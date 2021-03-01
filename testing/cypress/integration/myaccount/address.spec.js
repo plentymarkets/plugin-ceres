@@ -43,11 +43,65 @@ context("Address", () =>
         });
     });
 
-    it.only("should add new billing address for company with uid", () =>
+    it("should add new billing address for company with uid", () =>
     {
         cy.getByTestingAttr("billing-address-select-add").click();
         cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
+        // Random delay because company was often not filled
+        cy.wait(100);
+        cy.getByTestingAttr("billing-address-de-company").type("plentysystems AG");
+        cy.getByTestingAttr("vat-id").type("250560740", { delay: 15 });
+        cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="street"]`).type("Abby Road", { delay: 15 });
+        cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="housenumber"]`).type("1337", { delay: 15 });
+        cy.getByTestingAttr("billing-address-de-zip").type("12345", { delay: 15 });
+        cy.getByTestingAttr("billing-address-de-town").type("Kassel", { delay: 15 });
+
+        cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("createAddress");
+        cy.getByTestingAttr("modal-submit").first().click();
+
+        cy.wait("@createAddress").then((res) =>
+        {
+            const addrId = JSON.parse(res.response.body).data.id;
+
+            expect(res.response.statusCode).to.eql(201);
+            // check if address added correctly
+            cy.getStore().then((store) =>
+            {
+                expect(store.state.address.billingAddressId).to.be.equals(addrId);
+            });
+        });
+    });
+
+    it("should show error message if invalide UID is typed in", () =>
+    {
+        cy.getByTestingAttr("billing-address-select-add").click();
+        cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
+        // Random delay because company was often not filled
+        cy.wait(100);
+        cy.getByTestingAttr("billing-address-de-company").type("plentysystems AG");
+        cy.getByTestingAttr("vat-id").type("abcdefg", { delay: 15 });
+        cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="street"]`).type("Abby Road", { delay: 15 });
+        cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="housenumber"]`).type("1337", { delay: 15 });
+        cy.getByTestingAttr("billing-address-de-zip").type("12345", { delay: 15 });
+        cy.getByTestingAttr("billing-address-de-town").type("Kassel", { delay: 15 });
+
+        cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("createAddress");
+        cy.getByTestingAttr("modal-submit").first().click();
+
+        cy.get(".notification-wrapper").children().should("have.class", "show").should("have.class", "alert");
+        cy.get(".notification-wrapper").children().first().should("contain", "Die Umsatzsteuer-Identifikationsnummer ist ungültig. Bitte entfernen Sie alle Leer- und Sonderzeichen.");
+    });
+
+    it("should not be possible to add vat-id outside of the EU", () =>
+    {
+        cy.getByTestingAttr("billing-address-select-add").click();
+        cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
+
         cy.getByTestingAttr("vat-id").should("exist");
+        cy.getByTestingAttr("address-country-select").eq(0).find(`select.custom-select`).select("Schweiz");
+        cy.getByTestingAttr("vat-id").should("not.exist");
+        cy.getByTestingAttr("address-country-select").eq(0).find(`select.custom-select`).select("United Kingdom");
+        cy.getByTestingAttr("vat-id").should("not.exist");
     });
 
     it("should add new delivery address", () =>
