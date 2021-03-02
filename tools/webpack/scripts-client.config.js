@@ -13,7 +13,7 @@ module.exports = env =>
         },
         output: {
             filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
-            chunkFilename: "chunks/ceres-[name]"+ (env.prod ? ".min" : "") + ".js",
+            chunkFilename: "chunks/ceres-client-[name]"+ (env.prod ? ".min" : "") + ".js",
             path: path.resolve(__dirname, "..", "..", "resources/js/dist/"),
         },
         resolve: {
@@ -63,9 +63,6 @@ module.exports = env =>
         plugins: [
             new VueLoaderPlugin({
                 exposeFilename: true
-            }),
-            new WebpackRequireFrom({
-                replaceSrcMethodName: "__loadPluginChunk"
             })
         ]
     };

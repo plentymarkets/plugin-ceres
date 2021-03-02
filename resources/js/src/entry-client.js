@@ -1,3 +1,4 @@
+import "./app/publicPath";
 import Vue from "vue";
 import NotificationService from "./app/services/NotificationService";
 import { createApp } from "./app";

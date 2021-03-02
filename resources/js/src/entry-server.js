@@ -1,3 +1,4 @@
+import "./app/publicPath";
 import { createApp } from "./app";
 import Vue from "vue";
 import { initServerStore } from "./app/store";
