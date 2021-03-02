@@ -142,7 +142,9 @@
                             <div id="searchBox" class="cmp cmp-search-box collapse">
                                 {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
                                 {% if overrideSearchBar | trim is empty %}
-                                    <item-search></item-search>
+                                    <lazy-hydrate when-visible>
+                                        <item-search></item-search>
+                                    </lazy-hydrate>
                                 {% else %}
                                     {{ overrideSearchBar | raw }}
                                 {% endif %}

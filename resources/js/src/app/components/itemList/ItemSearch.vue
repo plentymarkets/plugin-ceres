@@ -66,14 +66,6 @@ export default {
         };
     },
 
-    created()
-    {
-        this.onValueChanged = debounce(searchString =>
-        {
-            this.autocomplete(searchString);
-        }, defaultValue(this.timeout, 200));
-    },
-
     computed:
     {
         hasAutocompleteResults()
@@ -98,6 +90,13 @@ export default {
 
     mounted()
     {
+        console.log("mnt item search");
+
+        this.onValueChanged = debounce(searchString =>
+        {
+            this.autocomplete(searchString);
+        }, defaultValue(this.timeout, 200));
+
         this.$nextTick(() =>
         {
             const urlParams = UrlService.getUrlParams(document.location.search);
