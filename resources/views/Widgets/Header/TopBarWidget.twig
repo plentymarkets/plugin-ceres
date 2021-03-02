@@ -150,12 +150,14 @@
                         {% if enableWishList %}
                             {{ Twig.if("services.url.isRouteEnabled(\"wish-list\")") }}
                             <li class="list-inline-item control-wish-list">
-                                <wish-list-count>
-                                    <a class="nav-link" aria-label="{{ Twig.print('trans("Ceres::Template.wishList")') }}">
-                                        <span class="badge-right mr-1 d-none d-sm-inline">0</span>
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </a>
-                                </wish-list-count>
+                                <lazy-hydrate when-idle>
+                                    <wish-list-count>
+                                        <a class="nav-link" aria-label="{{ Twig.print('trans("Ceres::Template.wishList")') }}">
+                                            <span class="badge-right mr-1 d-none d-sm-inline">0</span>
+                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        </a>
+                                    </wish-list-count>
+                                </lazy-hydrate>
                             </li>
                             {{ Twig.endif() }}
                         {% endif %}
