@@ -311,7 +311,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemList.selectedFacets;
     }
   })),
-  created: function created() {
+  mounted: function mounted() {
     this.$store.commit("addFacets", this.facetData);
     this.initSelectedFacets();
   },
@@ -438,7 +438,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       currency: App.activeCurrency
     };
   },
-  created: function created() {
+  mounted: function mounted() {
     var urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_8__["default"].getUrlParams(document.location.search);
     this.priceMin = urlParams.priceMin || "";
     this.priceMax = urlParams.priceMax || "";

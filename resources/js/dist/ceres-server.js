@@ -1347,14 +1347,12 @@ __webpack_require__.r(__webpack_exports__);
       return this.imageUrlsData;
     }
   },
-  created: function created() {
-    var isMobile = window.matchMedia("(max-width: 768px)").matches;
-    var shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
-    this.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
-  },
   mounted: function mounted() {
     var _this = this;
 
+    var isMobile = window.matchMedia("(max-width: 768px)").matches;
+    var shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
+    this.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
     this.$nextTick(function () {
       if (_this.$_enableCarousel) {
         _this.initializeCarousel();

@@ -88,7 +88,7 @@ process.stdin.on("end", () =>
                         `<script>window.__INITIAL_STATE__ = ${JSON.stringify(vueApp.$store.state)}</script>`);
 
                     const t5 = performance.now();
-                    process.stdout.write(`<!-- read input: ${t0 - t1}ms - processing string: ${t1 - t2}ms - require script: ${t2 - t3}ms - create app: ${t3 - t4}ms - render: ${t4 - t5}ms - total: ${t0 - t5}} -->` + renderedHTML);
+                    process.stdout.write(`<!-- read input: ${t1 - t0}ms - processing string: ${t2 - t1}ms - require script: ${t3 - t2}ms - create app: ${t4 - t3}ms - render: ${t5 - t4}ms - total: ${t5 - t0}} -->` + renderedHTML);
                 });
         });
     }
