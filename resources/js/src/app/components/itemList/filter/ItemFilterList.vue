@@ -100,7 +100,7 @@ export default {
         })
     },
 
-    created()
+    mounted()
     {
         this.$store.commit("addFacets", this.facetData);
 
