@@ -322,7 +322,9 @@
                                             <strong>{{ Twig.print('trans("Ceres::Template.headerSelectShippingCountry")') }}</strong>
                                             <hr>
                                         </div>
-                                        <shipping-country-select :disable-input="{{ Twig.print(Twig.call('services.template.isCheckout') ~ ' | json_encode') }}"></shipping-country-select>
+                                        <lazy-hydrate when-visible>
+                                            <shipping-country-select :disable-input="{{ Twig.print(Twig.call('services.template.isCheckout') ~ ' | json_encode') }}"></shipping-country-select>
+                                        </lazy-hydrate>
                                     </div>
                                 </div>
                             {% endif %}

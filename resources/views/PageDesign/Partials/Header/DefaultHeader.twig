@@ -206,7 +206,9 @@
                                                     <strong>{{ trans("Ceres::Template.headerSelectShippingCountry") }}</strong>
                                                     <hr>
                                                 </div>
-                                                <shipping-country-select :disable-input="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
+                                                <lazy-hydrate when-visible>
+                                                    <shipping-country-select :disable-input="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
+                                                </lazy-hydrate>
                                             </div>
                                         </div>
                                     </div>
