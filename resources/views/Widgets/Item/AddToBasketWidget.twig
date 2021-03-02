@@ -23,7 +23,7 @@
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.BeforeAddToBasket", Twig.var("item.documents[0].data")])) }}
 
-    <intersect>
+    <lazy-hydrate when-visible>
         <div class="w-100">
             <single-add-to-basket
                     button-size="{{ buttonSize }}"
@@ -31,12 +31,7 @@
                     padding-inline-styles="{{ inlinePadding }}">
             </single-add-to-basket>
         </div>
-        <template #loading>
-            <div class="w-100 invisible">
-                <button class="btn btn-block"></button>
-            </div>
-        </template>
-    </intersect>
+    </lazy-hydrate>
 
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::SingleItem.AfterAddToBasket", Twig.var("item.documents[0].data")])) }}
 </div>

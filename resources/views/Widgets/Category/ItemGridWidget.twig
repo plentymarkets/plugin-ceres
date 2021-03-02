@@ -24,7 +24,7 @@
             {{ Twig.for("item", "itemList") }}
                 <li class="col-{{ 12 / numberOfColumnsMobile }} col-md-{{ 12 / numberOfColumnsTablet }} col-lg-{{ 12 / numberOfColumnsDesktop }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-                    <intersect>
+                    <lazy-hydrate when-visible>
                         <category-item v-cloak
                                        :item-data="{{ Twig.print("item.data | json_encode") }}"
                                        :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}">
@@ -37,15 +37,7 @@
                                 <span>{{ Twig.print("item.data | itemName") }}</span>
                             </a>
                         </category-item>
-                        <template #loading>
-                            <div class="category-item-placeholder w-100 invisible">
-                                <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
-                                    <i class="fa fa-image"></i>
-                                    <span>{{ Twig.print("item.data | itemName") }}</span>
-                                </a>
-                            </div>
-                        </template>
-                    </intersect>
+                    </lazy-hydrate>
                 </li>
             {{ Twig.endfor() }}
         </ul>

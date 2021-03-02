@@ -67,7 +67,7 @@
     <div class="widget-inner">
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
-            <intersect>
+            <lazy-hydrate when-visible>
                 <last-seen-item-list
                     :items-per-page="{{ itemsPerPage }}"
                     :max-items="{{ maxItems }}"
@@ -91,15 +91,7 @@
                         </template>
                     {% endif %}
                 </last-seen-item-list>
-                <template #loading>
-                    <div class="category-item-placeholder w-100 invisible">
-                        <a href="#" class="small">
-                            <i class="fa fa-image"></i>
-                            <span></span>
-                        </a>
-                    </div>
-                </template>
-            </intersect>
+            </lazy-hydrate>
         {% else %}
             {{ Twig.if("itemList.documents is not empty or #{ isPreview | json_encode }") }}
 
@@ -124,7 +116,7 @@
                     </div>
                 {% endif %}
                 {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isItem() == '1'") }}
-                    <intersect>
+                    <lazy-hydrate when-visible>
                         <carousel :items-per-page="{{ itemsPerPage }}">
                             {{ Twig.for("item", "itemList.documents") }}
                                 <template slot="items">
@@ -149,19 +141,7 @@
                                 </template>
                             {{ Twig.endfor() }}
                         </carousel>
-                        <template #loading>
-                            <div class="row flex-nowrap overflow-x-hidden">
-                                {{ Twig.for("item", "itemList.documents") }}
-                                <div class="category-item-placeholder invisible col-12 col-sm-6 col-md-3">
-                                    <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
-                                        <i class="fa fa-image"></i>
-                                        <span>{{ Twig.print("item.data | itemName") }}</span>
-                                    </a>
-                                </div>
-                                {{ Twig.endfor() }}
-                            </div>
-                        </template>
-                    </intersect>
+                    </lazy-hydrate>
                 {{ Twig.elseif("#{ isPreview | json_encode }") }}
                     <div class="widget-placeholder prop-3-1 proportional-placeholder">
                         <div>

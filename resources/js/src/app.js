@@ -83,6 +83,10 @@ import SingleItem from "./app/components/item/SingleItem.vue";
 import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
 import FormAttachment from "./app/components/form/FormAttachment.vue";
 
+
+// EXTERNAL
+import LazyHydrate from "vue-lazy-hydration";
+
 // CHECKOUT
 // import "./app/components/checkout/AcceptGtcCheck";
 // import "./app/components/checkout/Checkout";
@@ -237,6 +241,8 @@ export function createApp(options)
     Vue.component("single-item-set-component", SingleItemSetComponent);
     Vue.component("form-attachment", FormAttachment);
 
+    // EXTERNAL
+    Vue.component("lazy-hydrate", LazyHydrate);
     // CHECKOUT
     // Vue.component("edit-coupon-overlay", EditCouponOverlay);
 
