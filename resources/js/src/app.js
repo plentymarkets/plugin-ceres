@@ -217,7 +217,7 @@ export function createApp(options)
     Vue.component("shipping-country-select", () => import("./app/components/pageDesign/ShippingCountrySelect.vue"));
     Vue.component("loading-animation", LoadingAnimation);
     Vue.component("wish-list", () => import("./app/components/wishList/WishList.vue"));
-    Vue.component("wish-list-count", () => WishListCount);
+    Vue.component("wish-list-count", WishListCount);
     Vue.component("lazy-load", LazyLoad);
     Vue.component("add-to-wish-list", () => import("./app/components/item/AddToWishList.vue"));
     Vue.component("graduated-prices", () => import("./app/components/item/GraduatedPrices.vue"));
