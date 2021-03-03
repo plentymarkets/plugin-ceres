@@ -64,6 +64,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemList.selectedFacets;
     }
   }),
+  mounted: function mounted() {
+    console.log("mnt ifl");
+  },
   methods: _objectSpread(_objectSpread({
     removeTag: function removeTag(tag) {
       this.selectFacet({

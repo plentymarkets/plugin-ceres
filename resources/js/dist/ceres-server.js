@@ -768,6 +768,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isRegister: App.templateType === "register"
     };
   },
+  mounted: function mounted() {
+    console.log("mnt user login handler");
+  },
   methods: _objectSpread({
     unmarkInputFields: function unmarkInputFields() {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__["default"].unmarkAllFields($("#login"));
@@ -1352,9 +1355,9 @@ __webpack_require__.r(__webpack_exports__);
 
     var isMobile = window.matchMedia("(max-width: 768px)").matches;
     var shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
-    this.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
+    this.$data.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
     this.$nextTick(function () {
-      if (_this.$_enableCarousel) {
+      if (_this.$data.$_enableCarousel) {
         _this.initializeCarousel();
       }
     });
@@ -1749,13 +1752,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       searchString: ""
     };
   },
-  created: function created() {
-    var _this = this;
-
-    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_15__["debounce"])(function (searchString) {
-      _this.autocomplete(searchString);
-    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 200));
-  },
   computed: _objectSpread({
     hasAutocompleteResults: function hasAutocompleteResults() {
       var item = this.autocompleteResult.item;
@@ -1775,14 +1771,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
+    console.log("mnt item search");
+    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_15__["debounce"])(function (searchString) {
+      _this.autocomplete(searchString);
+    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 200));
     this.$nextTick(function () {
       var urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_10__["default"].getUrlParams(document.location.search);
 
-      _this2.$store.commit("setItemListSearchString", urlParams.query);
+      _this.$store.commit("setItemListSearchString", urlParams.query);
 
-      _this2.$refs.searchInput.value = !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(urlParams.query) ? urlParams.query : "";
+      _this.$refs.searchInput.value = !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(urlParams.query) ? urlParams.query : "";
     });
   },
   methods: {
@@ -2199,6 +2199,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$translate("Ceres::Template.cookieBarHintText", links);
     }
   },
+  mounted: function mounted() {
+    console.log("mnt cookie bar");
+  },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapMutations"])(["storeConsents", "acceptAll"])), {}, {
     close: function close() {
       this.isCollapsed = true;
@@ -2522,7 +2525,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   mounted: function mounted() {
-    this.addEventListener();
+    this.addEventListener(); // TODO move to general place (lazy hydrating)
+
     this.$store.commit("setCurrentCategory", this.initialCategory);
   },
   methods: {
@@ -3002,6 +3006,9 @@ __webpack_require__.r(__webpack_exports__);
     urlWishList: function urlWishList() {
       return App.urls.wishList;
     }
+  },
+  mounted: function mounted() {
+    console.log("mnt wish list count");
   }
 });
 
@@ -23219,6 +23226,280 @@ Popper.Defaults = Defaults;
 
 /***/ }),
 
+/***/ "./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js ***!
+  \*****************************************************************/
+/*! exports provided: default, hydrateNever, hydrateOnInteraction, hydrateWhenIdle, hydrateWhenVisible */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrateNever", function() { return hydrateNever; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrateOnInteraction", function() { return hydrateOnInteraction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrateWhenIdle", function() { return hydrateWhenIdle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrateWhenVisible", function() { return hydrateWhenVisible; });
+var observers = new Map();
+function makeHydrationObserver(options) {
+  if (typeof IntersectionObserver === "undefined") return null;
+  var optionKey = JSON.stringify(options);
+  if (observers.has(optionKey)) return observers.get(optionKey);
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      // Use `intersectionRatio` because of Edge 15's
+      // lack of support for `isIntersecting`.
+      // See: https://github.com/w3c/IntersectionObserver/issues/211
+      var isIntersecting = entry.isIntersecting || entry.intersectionRatio > 0;
+      if (!isIntersecting || !entry.target.hydrate) return;
+      entry.target.hydrate();
+    });
+  }, options);
+  observers.set(optionKey, observer);
+  return observer;
+}
+
+function makeHydrationPromise() {
+  var hydrate = function hydrate() {};
+
+  var hydrationPromise = new Promise(function (resolve) {
+    hydrate = resolve;
+  });
+  return {
+    hydrate: hydrate,
+    hydrationPromise: hydrationPromise
+  };
+}
+
+var isServer = typeof window === "undefined";
+
+function isAsyncComponentFactory(componentOrFactory) {
+  return typeof componentOrFactory === "function";
+}
+
+function resolveComponent(componentOrFactory) {
+  if (isAsyncComponentFactory(componentOrFactory)) {
+    return componentOrFactory().then(function (componentModule) {
+      return componentModule.default;
+    });
+  }
+
+  return componentOrFactory;
+}
+
+function makeNonce(_ref) {
+  var component = _ref.component,
+      hydrationPromise = _ref.hydrationPromise;
+  if (isServer) return component;
+  return function () {
+    return hydrationPromise.then(function () {
+      return resolveComponent(component);
+    });
+  };
+}
+
+function makeHydrationBlocker(component, options) {
+  return Object.assign({
+    mixins: [{
+      beforeCreate: function beforeCreate() {
+        this.cleanupHandlers = [];
+
+        var _makeHydrationPromise = makeHydrationPromise(),
+            hydrate = _makeHydrationPromise.hydrate,
+            hydrationPromise = _makeHydrationPromise.hydrationPromise;
+
+        this.Nonce = makeNonce({
+          component: component,
+          hydrationPromise: hydrationPromise
+        });
+        this.hydrate = hydrate;
+        this.hydrationPromise = hydrationPromise;
+      },
+      beforeDestroy: function beforeDestroy() {
+        this.cleanup();
+      },
+      mounted: function mounted() {
+        var _this = this;
+
+        if (this.$el.nodeType === Node.COMMENT_NODE) {
+          // No SSR rendered content, hydrate immediately.
+          this.hydrate();
+          return;
+        }
+
+        if (this.never) return;
+
+        if (this.whenVisible) {
+          var observerOptions = this.whenVisible !== true ? this.whenVisible : undefined;
+          var observer = makeHydrationObserver(observerOptions); // If Intersection Observer API is not supported, hydrate immediately.
+
+          if (!observer) {
+            this.hydrate();
+            return;
+          }
+
+          this.$el.hydrate = this.hydrate;
+
+          var cleanup = function cleanup() {
+            return observer.unobserve(_this.$el);
+          };
+
+          this.cleanupHandlers.push(cleanup);
+          this.hydrationPromise.then(cleanup);
+          observer.observe(this.$el);
+          return;
+        }
+
+        if (this.whenIdle) {
+          // If `requestIdleCallback()` or `requestAnimationFrame()`
+          // is not supported, hydrate immediately.
+          if (!("requestIdleCallback" in window) || !("requestAnimationFrame" in window)) {
+            this.hydrate();
+            return;
+          } // @ts-ignore
+
+
+          var id = requestIdleCallback(function () {
+            requestAnimationFrame(_this.hydrate);
+          }, {
+            timeout: this.idleTimeout
+          }); // @ts-ignore
+
+          var _cleanup = function _cleanup() {
+            return cancelIdleCallback(id);
+          };
+
+          this.cleanupHandlers.push(_cleanup);
+          this.hydrationPromise.then(_cleanup);
+        }
+
+        if (this.interactionEvents && this.interactionEvents.length) {
+          var eventListenerOptions = {
+            capture: true,
+            once: true,
+            passive: true
+          };
+          this.interactionEvents.forEach(function (eventName) {
+            _this.$el.addEventListener(eventName, _this.hydrate, eventListenerOptions);
+
+            var cleanup = function cleanup() {
+              _this.$el.removeEventListener(eventName, _this.hydrate, eventListenerOptions);
+            };
+
+            _this.cleanupHandlers.push(cleanup);
+          });
+        }
+      },
+      methods: {
+        cleanup: function cleanup() {
+          this.cleanupHandlers.forEach(function (handler) {
+            return handler();
+          });
+        }
+      },
+      render: function render(h) {
+        return h(this.Nonce, {
+          attrs: this.$attrs,
+          on: this.$listeners,
+          scopedSlots: this.$scopedSlots
+        }, this.$slots.default);
+      }
+    }]
+  }, options);
+}
+
+function hydrateWhenIdle(componentOrFactory) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$timeout = _ref.timeout,
+      timeout = _ref$timeout === void 0 ? 2000 : _ref$timeout;
+
+  return makeHydrationBlocker(componentOrFactory, {
+    beforeCreate: function beforeCreate() {
+      this.whenIdle = true;
+      this.idleTimeout = timeout;
+    }
+  });
+}
+function hydrateWhenVisible(componentOrFactory) {
+  var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref2$observerOptions = _ref2.observerOptions,
+      observerOptions = _ref2$observerOptions === void 0 ? undefined : _ref2$observerOptions;
+
+  return makeHydrationBlocker(componentOrFactory, {
+    beforeCreate: function beforeCreate() {
+      this.whenVisible = observerOptions || true;
+    }
+  });
+}
+function hydrateNever(componentOrFactory) {
+  return makeHydrationBlocker(componentOrFactory, {
+    beforeCreate: function beforeCreate() {
+      this.never = true;
+    }
+  });
+}
+function hydrateOnInteraction(componentOrFactory) {
+  var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref3$event = _ref3.event,
+      event = _ref3$event === void 0 ? "focus" : _ref3$event;
+
+  var events = Array.isArray(event) ? event : [event];
+  return makeHydrationBlocker(componentOrFactory, {
+    beforeCreate: function beforeCreate() {
+      this.interactionEvents = events;
+    }
+  });
+}
+var Placeholder = {
+  render: function render() {
+    return this.$slots.default;
+  }
+};
+var LazyHydrate = makeHydrationBlocker(Placeholder, {
+  props: {
+    idleTimeout: {
+      default: 2000,
+      type: Number
+    },
+    never: {
+      type: Boolean
+    },
+    onInteraction: {
+      type: [Array, Boolean, String]
+    },
+    triggerHydration: {
+      default: false,
+      type: Boolean
+    },
+    whenIdle: {
+      type: Boolean
+    },
+    whenVisible: {
+      type: [Boolean, Object]
+    }
+  },
+  computed: {
+    interactionEvents: function interactionEvents() {
+      if (!this.onInteraction) return [];
+      if (this.onInteraction === true) return ["focus"];
+      return Array.isArray(this.onInteraction) ? this.onInteraction : [this.onInteraction];
+    }
+  },
+  watch: {
+    triggerHydration: {
+      immediate: true,
+      handler: function handler(isTriggered) {
+        if (isTriggered) this.hydrate();
+      }
+    }
+  }
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (LazyHydrate);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/LazyImg.vue?vue&type=template&id=48a7661d&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/common/LazyImg.vue?vue&type=template&id=48a7661d& ***!
@@ -23290,7 +23571,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.isLoaded ? _c("div", [_vm._t("default")], 2) : _vm._e()
+  return _c(
+    "lazy-hydrate",
+    { attrs: { never: "", "trigger-hydration": _vm.isLoaded } },
+    [_vm._t("default")],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -24463,7 +24749,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.$_enableCarousel
+  return _vm.$data.$_enableCarousel
     ? _c(
         "a",
         {
@@ -39140,47 +39426,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_components_common_LazyLoad_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./app/components/common/LazyLoad.vue */ "./resources/js/src/app/components/common/LazyLoad.vue");
 /* harmony import */ var _app_components_item_SingleItem_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./app/components/item/SingleItem.vue */ "./resources/js/src/app/components/item/SingleItem.vue");
 /* harmony import */ var _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./app/components/item/SingleItemSetComponent.vue */ "./resources/js/src/app/components/item/SingleItemSetComponent.vue");
-/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _app_directives_basket_basketItemQuantity__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./app/directives/basket/basketItemQuantity */ "./resources/js/src/app/directives/basket/basketItemQuantity.js");
-/* harmony import */ var _app_directives_basket_basketItemSum__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./app/directives/basket/basketItemSum */ "./resources/js/src/app/directives/basket/basketItemSum.js");
-/* harmony import */ var _app_directives_basket_toggleBasketPreview__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./app/directives/basket/toggleBasketPreview */ "./resources/js/src/app/directives/basket/toggleBasketPreview.js");
-/* harmony import */ var _app_directives_category_openFilterToolbar__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./app/directives/category/openFilterToolbar */ "./resources/js/src/app/directives/category/openFilterToolbar.js");
-/* harmony import */ var _app_directives_common_truncateTooltip__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./app/directives/common/truncateTooltip */ "./resources/js/src/app/directives/common/truncateTooltip.js");
-/* harmony import */ var _app_directives_customer_logout__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./app/directives/customer/logout */ "./resources/js/src/app/directives/customer/logout.js");
-/* harmony import */ var _app_directives_helper_populateStore__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./app/directives/helper/populateStore */ "./resources/js/src/app/directives/helper/populateStore.js");
-/* harmony import */ var _app_directives_helper_validate__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./app/directives/helper/validate */ "./resources/js/src/app/directives/helper/validate.js");
-/* harmony import */ var _app_directives_helper_waitingAnimation__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimation */ "./resources/js/src/app/directives/helper/waitingAnimation.js");
-/* harmony import */ var _app_directives_helper_waitingAnimationInfinite__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimationInfinite */ "./resources/js/src/app/directives/helper/waitingAnimationInfinite.js");
-/* harmony import */ var _app_directives_navigation_navigationTouchHandler__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./app/directives/navigation/navigationTouchHandler */ "./resources/js/src/app/directives/navigation/navigationTouchHandler.js");
-/* harmony import */ var _app_directives_navigation_openMobileNavigation__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./app/directives/navigation/openMobileNavigation */ "./resources/js/src/app/directives/navigation/openMobileNavigation.js");
-/* harmony import */ var _app_directives_pageDesign_scrollToTop__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./app/directives/pageDesign/scrollToTop */ "./resources/js/src/app/directives/pageDesign/scrollToTop.js");
-/* harmony import */ var _app_directives_pageDesign_stickInParent__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./app/directives/pageDesign/stickInParent */ "./resources/js/src/app/directives/pageDesign/stickInParent.js");
-/* harmony import */ var _app_directives_navigation_sidenavigationChildrenLoader__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./app/directives/navigation/sidenavigationChildrenLoader */ "./resources/js/src/app/directives/navigation/sidenavigationChildrenLoader.js");
-/* harmony import */ var _app_directives_pageDesign_tooltip__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./app/directives/pageDesign/tooltip */ "./resources/js/src/app/directives/pageDesign/tooltip.js");
-/* harmony import */ var _app_filters_ageRestriction_filter__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./app/filters/ageRestriction.filter */ "./resources/js/src/app/filters/ageRestriction.filter.js");
-/* harmony import */ var _app_filters_arrayFirst_filter__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./app/filters/arrayFirst.filter */ "./resources/js/src/app/filters/arrayFirst.filter.js");
-/* harmony import */ var _app_filters_attachText_filter__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./app/filters/attachText.filter */ "./resources/js/src/app/filters/attachText.filter.js");
-/* harmony import */ var _app_filters_currency_filter__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./app/filters/currency.filter */ "./resources/js/src/app/filters/currency.filter.js");
-/* harmony import */ var _app_filters_date_filter__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./app/filters/date.filter */ "./resources/js/src/app/filters/date.filter.js");
-/* harmony import */ var _app_filters_fileName_filter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./app/filters/fileName.filter */ "./resources/js/src/app/filters/fileName.filter.js");
-/* harmony import */ var _app_filters_fileUploadPath_filter__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./app/filters/fileUploadPath.filter */ "./resources/js/src/app/filters/fileUploadPath.filter.js");
-/* harmony import */ var _app_filters_graduatedPrice_filter__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./app/filters/graduatedPrice.filter */ "./resources/js/src/app/filters/graduatedPrice.filter.js");
-/* harmony import */ var _app_filters_hasItemDefaultPrice_filter__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./app/filters/hasItemDefaultPrice.filter */ "./resources/js/src/app/filters/hasItemDefaultPrice.filter.js");
-/* harmony import */ var _app_filters_inputUnit_filter__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./app/filters/inputUnit.filter */ "./resources/js/src/app/filters/inputUnit.filter.js");
-/* harmony import */ var _app_filters_itemBundleName_filter__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./app/filters/itemBundleName.filter */ "./resources/js/src/app/filters/itemBundleName.filter.js");
-/* harmony import */ var _app_filters_itemCrossPrice_filter__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./app/filters/itemCrossPrice.filter */ "./resources/js/src/app/filters/itemCrossPrice.filter.js");
-/* harmony import */ var _app_filters_itemImage_filter__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./app/filters/itemImage.filter */ "./resources/js/src/app/filters/itemImage.filter.js");
-/* harmony import */ var _app_filters_itemImageAlternativeText_filter__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./app/filters/itemImageAlternativeText.filter */ "./resources/js/src/app/filters/itemImageAlternativeText.filter.js");
-/* harmony import */ var _app_filters_itemImages_filter__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./app/filters/itemImages.filter */ "./resources/js/src/app/filters/itemImages.filter.js");
-/* harmony import */ var _app_filters_itemName_filter__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./app/filters/itemName.filter */ "./resources/js/src/app/filters/itemName.filter.js");
-/* harmony import */ var _app_filters_itemPrice_filter__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./app/filters/itemPrice.filter */ "./resources/js/src/app/filters/itemPrice.filter.js");
-/* harmony import */ var _app_filters_itemUrl_filter__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./app/filters/itemUrl.filter */ "./resources/js/src/app/filters/itemUrl.filter.js");
-/* harmony import */ var _app_filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./app/filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
-/* harmony import */ var _app_filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./app/filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
-/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
-/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
-/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
-/* harmony import */ var _app_store_index__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./app/store/index */ "./resources/js/src/app/store/index.js");
+/* harmony import */ var vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! vue-lazy-hydration */ "./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js");
+/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _app_directives_basket_basketItemQuantity__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./app/directives/basket/basketItemQuantity */ "./resources/js/src/app/directives/basket/basketItemQuantity.js");
+/* harmony import */ var _app_directives_basket_basketItemSum__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./app/directives/basket/basketItemSum */ "./resources/js/src/app/directives/basket/basketItemSum.js");
+/* harmony import */ var _app_directives_basket_toggleBasketPreview__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./app/directives/basket/toggleBasketPreview */ "./resources/js/src/app/directives/basket/toggleBasketPreview.js");
+/* harmony import */ var _app_directives_category_openFilterToolbar__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./app/directives/category/openFilterToolbar */ "./resources/js/src/app/directives/category/openFilterToolbar.js");
+/* harmony import */ var _app_directives_common_truncateTooltip__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./app/directives/common/truncateTooltip */ "./resources/js/src/app/directives/common/truncateTooltip.js");
+/* harmony import */ var _app_directives_customer_logout__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./app/directives/customer/logout */ "./resources/js/src/app/directives/customer/logout.js");
+/* harmony import */ var _app_directives_helper_populateStore__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./app/directives/helper/populateStore */ "./resources/js/src/app/directives/helper/populateStore.js");
+/* harmony import */ var _app_directives_helper_validate__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./app/directives/helper/validate */ "./resources/js/src/app/directives/helper/validate.js");
+/* harmony import */ var _app_directives_helper_waitingAnimation__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimation */ "./resources/js/src/app/directives/helper/waitingAnimation.js");
+/* harmony import */ var _app_directives_helper_waitingAnimationInfinite__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimationInfinite */ "./resources/js/src/app/directives/helper/waitingAnimationInfinite.js");
+/* harmony import */ var _app_directives_navigation_navigationTouchHandler__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./app/directives/navigation/navigationTouchHandler */ "./resources/js/src/app/directives/navigation/navigationTouchHandler.js");
+/* harmony import */ var _app_directives_navigation_openMobileNavigation__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./app/directives/navigation/openMobileNavigation */ "./resources/js/src/app/directives/navigation/openMobileNavigation.js");
+/* harmony import */ var _app_directives_pageDesign_scrollToTop__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./app/directives/pageDesign/scrollToTop */ "./resources/js/src/app/directives/pageDesign/scrollToTop.js");
+/* harmony import */ var _app_directives_pageDesign_stickInParent__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./app/directives/pageDesign/stickInParent */ "./resources/js/src/app/directives/pageDesign/stickInParent.js");
+/* harmony import */ var _app_directives_navigation_sidenavigationChildrenLoader__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./app/directives/navigation/sidenavigationChildrenLoader */ "./resources/js/src/app/directives/navigation/sidenavigationChildrenLoader.js");
+/* harmony import */ var _app_directives_pageDesign_tooltip__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./app/directives/pageDesign/tooltip */ "./resources/js/src/app/directives/pageDesign/tooltip.js");
+/* harmony import */ var _app_filters_ageRestriction_filter__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./app/filters/ageRestriction.filter */ "./resources/js/src/app/filters/ageRestriction.filter.js");
+/* harmony import */ var _app_filters_arrayFirst_filter__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./app/filters/arrayFirst.filter */ "./resources/js/src/app/filters/arrayFirst.filter.js");
+/* harmony import */ var _app_filters_attachText_filter__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./app/filters/attachText.filter */ "./resources/js/src/app/filters/attachText.filter.js");
+/* harmony import */ var _app_filters_currency_filter__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./app/filters/currency.filter */ "./resources/js/src/app/filters/currency.filter.js");
+/* harmony import */ var _app_filters_date_filter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./app/filters/date.filter */ "./resources/js/src/app/filters/date.filter.js");
+/* harmony import */ var _app_filters_fileName_filter__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./app/filters/fileName.filter */ "./resources/js/src/app/filters/fileName.filter.js");
+/* harmony import */ var _app_filters_fileUploadPath_filter__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./app/filters/fileUploadPath.filter */ "./resources/js/src/app/filters/fileUploadPath.filter.js");
+/* harmony import */ var _app_filters_graduatedPrice_filter__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./app/filters/graduatedPrice.filter */ "./resources/js/src/app/filters/graduatedPrice.filter.js");
+/* harmony import */ var _app_filters_hasItemDefaultPrice_filter__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./app/filters/hasItemDefaultPrice.filter */ "./resources/js/src/app/filters/hasItemDefaultPrice.filter.js");
+/* harmony import */ var _app_filters_inputUnit_filter__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./app/filters/inputUnit.filter */ "./resources/js/src/app/filters/inputUnit.filter.js");
+/* harmony import */ var _app_filters_itemBundleName_filter__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./app/filters/itemBundleName.filter */ "./resources/js/src/app/filters/itemBundleName.filter.js");
+/* harmony import */ var _app_filters_itemCrossPrice_filter__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./app/filters/itemCrossPrice.filter */ "./resources/js/src/app/filters/itemCrossPrice.filter.js");
+/* harmony import */ var _app_filters_itemImage_filter__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./app/filters/itemImage.filter */ "./resources/js/src/app/filters/itemImage.filter.js");
+/* harmony import */ var _app_filters_itemImageAlternativeText_filter__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./app/filters/itemImageAlternativeText.filter */ "./resources/js/src/app/filters/itemImageAlternativeText.filter.js");
+/* harmony import */ var _app_filters_itemImages_filter__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./app/filters/itemImages.filter */ "./resources/js/src/app/filters/itemImages.filter.js");
+/* harmony import */ var _app_filters_itemName_filter__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./app/filters/itemName.filter */ "./resources/js/src/app/filters/itemName.filter.js");
+/* harmony import */ var _app_filters_itemPrice_filter__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./app/filters/itemPrice.filter */ "./resources/js/src/app/filters/itemPrice.filter.js");
+/* harmony import */ var _app_filters_itemUrl_filter__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./app/filters/itemUrl.filter */ "./resources/js/src/app/filters/itemUrl.filter.js");
+/* harmony import */ var _app_filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./app/filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
+/* harmony import */ var _app_filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./app/filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
+/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
+/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
+/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
+/* harmony import */ var _app_store_index__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./app/store/index */ "./resources/js/src/app/store/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -39265,7 +39552,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
  // import FormAttachment from "./app/components/form/FormAttachment.vue";
-// CHECKOUT
+// EXTERNAL
+
+ // CHECKOUT
 // import "./app/components/checkout/AcceptGtcCheck";
 // import "./app/components/checkout/Checkout";
 // import "./app/components/checkout/ContactWishInput";
@@ -39492,13 +39781,15 @@ function createApp(options) {
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("single-item-set-component", _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_30__["default"]);
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("form-attachment", function () {
     return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./app/components/form/FormAttachment.vue */ "./resources/js/src/app/components/form/FormAttachment.vue"));
-  }); // CHECKOUT
+  }); // EXTERNAL
+
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("lazy-hydrate", vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__["default"]); // CHECKOUT
   // Vue.component("edit-coupon-overlay", EditCouponOverlay);
   // window.ceresTranslate = TranslationService.translate;
 
-  vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_31__["default"].translate;
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_32__["default"].translate;
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$ceres = App;
-  var store = Object(_app_store_index__WEBPACK_IMPORTED_MODULE_71__["createStore"])();
+  var store = Object(_app_store_index__WEBPACK_IMPORTED_MODULE_72__["createStore"])();
 
   var defaultOptions = _objectSpread({
     store: store
@@ -39538,7 +39829,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d3aecc5c"
+  "15bb8fd8"
   
 )
 
@@ -39587,7 +39878,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b5f901bc"
+  "82187438"
   
 )
 
@@ -39654,7 +39945,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d510e1d2"
+  "8cdfbed6"
   
 )
 
@@ -39720,7 +40011,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7e40018a"
+  "4a5f7406"
   
 )
 
@@ -39768,7 +40059,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a351174"
+  "365483f0"
   
 )
 
@@ -39817,7 +40108,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0cdb926d"
+  "d832afa2"
   
 )
 
@@ -39884,7 +40175,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "71da9abc"
+  "504c703a"
   
 )
 
@@ -39951,7 +40242,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3993c720"
+  "074eadee"
   
 )
 
@@ -40018,7 +40309,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a712546a"
+  "07bb1a49"
   
 )
 
@@ -40085,7 +40376,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ce8edd6"
+  "2b711ed0"
   
 )
 
@@ -40152,7 +40443,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "039113e8"
+  "268a0ee6"
   
 )
 
@@ -40219,7 +40510,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a0423fdc"
+  "0a368290"
   
 )
 
@@ -40286,7 +40577,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "708ba4fc"
+  "7fa17980"
   
 )
 
@@ -40353,7 +40644,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1fae6e7b"
+  "7a0610f9"
   
 )
 
@@ -40420,7 +40711,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7449eff8"
+  "93109574"
   
 )
 
@@ -40487,7 +40778,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1c05ce94"
+  "401e6012"
   
 )
 
@@ -40554,7 +40845,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "665573c3"
+  "7ccc8f7e"
   
 )
 
@@ -40621,7 +40912,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "67660371"
+  "7aab7022"
   
 )
 
@@ -40688,7 +40979,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66eea2dd"
+  "330edf1f"
   
 )
 
@@ -40755,7 +41046,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "02339d07"
+  "fb2471f6"
   
 )
 
@@ -40822,7 +41113,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "215c6997"
+  "5d82ce59"
   
 )
 

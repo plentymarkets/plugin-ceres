@@ -65,6 +65,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemList.selectedFacets;
     }
   }),
+  mounted: function mounted() {
+    console.log("mnt ifl");
+  },
   methods: _objectSpread(_objectSpread({
     removeTag: function removeTag(tag) {
       this.selectFacet({
@@ -168,7 +171,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2034e9e6"
+  "0d900dea"
   
 )
 

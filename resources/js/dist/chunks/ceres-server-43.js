@@ -96,6 +96,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })), Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(["getCountryName"])),
   mounted: function mounted() {
+    // TODO move out of here because of lazy hydration
+    console.log("mnt country select");
     Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_6__["removeUrlParam"])("openBasketPreview");
   },
   methods: {
@@ -270,7 +272,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bf635fce"
+  "dfd1ab4a"
   
 )
 

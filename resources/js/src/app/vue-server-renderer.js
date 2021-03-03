@@ -70,7 +70,7 @@ process.stdin.on("end", () =>
         {
             twigHtml = twigHtml.replace(vueAppHtml, "<!--vue-ssr-outlet-->");
             // TODO cant this be placed inside the renderToString callback
-            twigHtml = twigHtml.replace("<!-- SSR_SCRIPT_CONTAINER -->", `<script type="x-template" id="ssr-script-container">${vueAppHtml}</script>`);
+            // twigHtml = twigHtml.replace("<!-- SSR_SCRIPT_CONTAINER -->", `<script type="x-template" id="ssr-script-container">${vueAppHtml}</script>`);
 
             const t4 = performance.now();
             createRenderer({ template: twigHtml })
@@ -82,11 +82,12 @@ process.stdin.on("end", () =>
                         process.exit(-3);
                         return;
                     }
+                    renderedHTML = renderedHTML.replace("<!-- SSR_SCRIPT_CONTAINER -->", `<script type="x-template" id="ssr-script-container">${vueAppHtml}</script>`);
 
                     renderedHTML = renderedHTML.replace(
                         "<!-- INITIAL_STATE -->",
                         `<script>window.__INITIAL_STATE__ = ${JSON.stringify(vueApp.$store.state)}</script>`);
-
+                    
                     const t5 = performance.now();
                     process.stdout.write(`<!-- read input: ${t1 - t0}ms - processing string: ${t2 - t1}ms - require script: ${t3 - t2}ms - create app: ${t4 - t3}ms - render: ${t5 - t4}ms - total: ${t5 - t0}} -->` + renderedHTML);
                 });
