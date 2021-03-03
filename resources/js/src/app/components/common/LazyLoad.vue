@@ -1,7 +1,7 @@
 <template>
-    <div v-if="isLoaded">
+    <lazy-hydrate never :trigger-hydration="isLoaded">
         <slot></slot>
-    </div>
+    </lazy-hydrate>
 </template>
 
 <script>

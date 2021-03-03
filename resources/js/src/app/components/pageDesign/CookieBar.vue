@@ -132,6 +132,11 @@ export default {
         }
     },
 
+    mounted()
+    {
+        console.log("mnt cookie bar");
+    },
+
     methods:
     {
         ...mapMutations([

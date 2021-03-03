@@ -145,6 +145,7 @@ export default {
     {
         this.addEventListener();
 
+        // TODO move to general place (lazy hydrating)
         this.$store.commit("setCurrentCategory", this.initialCategory);
     },
 

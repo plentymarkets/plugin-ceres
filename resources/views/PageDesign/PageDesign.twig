@@ -43,7 +43,9 @@
 <!-- VUE_APP -->
 <div id="vue-app" class="app">
     {{ context.renderState() }}
-    <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+    <lazy-hydrate when-idle>
+        <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+    </lazy-hydrate>
 
     {% include getPartial('header') %}
 
@@ -167,7 +169,7 @@
 <!-- SSR_SCRIPT_CONTAINER -->
 <!-- INITIAL_STATE -->
 
-<script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client.min.js?v={{ buildHash }}"></script>
+<script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client.js?v={{ buildHash }}"></script>
 <!-- VUE_SSR_ENTRY: {{ plugin_path('Ceres') }}/js/dist/ceres-server.js -->
 
 

@@ -60,6 +60,11 @@ export default {
         };
     },
 
+    mounted()
+    {
+        console.log("mnt user login handler");
+    },
+
     methods: {
         unmarkInputFields()
         {
@@ -70,7 +75,6 @@ export default {
         createLoginModal()
         {
             this.loadComponent("login-modal");
-
         },
 
         createRegisterModal()

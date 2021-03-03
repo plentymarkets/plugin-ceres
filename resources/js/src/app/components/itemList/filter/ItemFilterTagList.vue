@@ -31,6 +31,11 @@ export default {
         tagList: state => state.itemList.selectedFacets
     }),
 
+    mounted()
+    {
+        console.log("mnt ifl");
+    },
+
     methods:
     {
         removeTag(tag)

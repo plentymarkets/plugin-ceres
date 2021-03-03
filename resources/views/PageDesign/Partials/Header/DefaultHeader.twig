@@ -12,16 +12,18 @@
                                 <div class="controls">
                                     <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
                                         <li class="list-inline-item control-user">
-                                            <user-login-handler>
-                                                <a class="nav-link" data-toggle="modal" aria-label="{{ trans('Ceres::Template.login') }}">
-                                                    <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
-                                                    <span class="d-none d-sm-inline">{{ trans("Ceres::Template.login") }}</span>
-                                                </a>
-                                                <a class="nav-link" data-toggle="modal" aria-label="{{ trans('Ceres::Template.loginRegister') }}">
-                                                    <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
-                                                    <span class="d-none d-sm-inline">{{ trans("Ceres::Template.loginRegister") }}</span>
-                                                </a>
-                                            </user-login-handler>
+                                            <lazy-hydrate when-idle>
+                                                <user-login-handler>
+                                                    <a class="nav-link" data-toggle="modal" aria-label="{{ trans('Ceres::Template.login') }}">
+                                                        <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
+                                                        <span class="d-none d-sm-inline">{{ trans("Ceres::Template.login") }}</span>
+                                                    </a>
+                                                    <a class="nav-link" data-toggle="modal" aria-label="{{ trans('Ceres::Template.loginRegister') }}">
+                                                        <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
+                                                        <span class="d-none d-sm-inline">{{ trans("Ceres::Template.loginRegister") }}</span>
+                                                    </a>
+                                                </user-login-handler>
+                                            </lazy-hydrate>
                                         </li>
                                         <li class="list-inline-item dropdown control-languages">
                                             <a class="nav-link"
