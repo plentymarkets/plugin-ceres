@@ -2056,7 +2056,6 @@ __webpack_require__.r(__webpack_exports__);
     isPrefixValid: function isPrefixValid() {
       var _this2 = this;
 
-      console.log("isPrefixValid update");
       var isPrefixValid = false;
       var validPrefix = this.vatCodes.find(function (vatCode) {
         var _this2$value;
@@ -2077,12 +2076,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     value: function value(newValue) {
-      console.log("watch value");
       this.setValues(newValue);
-    },
-    selectedCountryId: function selectedCountryId(countryId) {
-      console.log("watch countryId"); // dont delete value after country change
-      // this.deleteValue();
     }
   },
   created: function created() {
@@ -2094,18 +2088,15 @@ __webpack_require__.r(__webpack_exports__);
       return translation + (this.isRequired ? "*" : "");
     },
     emitChange: function emitChange() {
-      console.log("emit: ", value);
       var value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
       this.$emit('input', value);
     },
     deleteValue: function deleteValue() {
-      console.log("delete");
       this.vatNumber = "";
       this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
       this.emitChange();
     },
     setValues: function setValues(value) {
-      console.log("setValues: ", value);
       var vatPrefix = this.vatCodes.find(function (vatCode) {
         return value === null || value === void 0 ? void 0 : value.startsWith(vatCode);
       });
