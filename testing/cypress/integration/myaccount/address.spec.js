@@ -77,7 +77,7 @@ context("Address", () =>
         cy.getByTestingAttr("billing-address-select-add").click();
         cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
         // Random delay because company was often not filled
-        cy.wait(100);
+        cy.wait(150);
         cy.getByTestingAttr("billing-address-de-company").type("plentysystems AG");
         cy.getByTestingAttr("vat-id").type("abcdefg", { delay: 15 });
         cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="street"]`).type("Abby Road", { delay: 15 });
