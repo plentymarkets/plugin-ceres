@@ -41,7 +41,7 @@
 
 <body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
 
-<!-- VUE_APP -->
+<!-- SRR:app() -->
 <div id="vue-app" class="app">
     {{ context.renderState() }}
     <lazy-hydrate when-idle>
@@ -128,11 +128,11 @@
     </div>
     <!-- ./REGISTRATION MODAL -->
 </div>
-<!-- VUE_APP -->
+<!-- /SSR -->
 
-<script id="ceres-app-data">
-    // CERES_APP_DATA
-    App = {
+<script id="app-data" type="application/json">
+    <!-- SSR:global(App) -->
+    {
         "config": {{ ceresConfig | json_encode | raw }},
         "urls": {{ urls | json_encode | raw }},
         "activeCurrency": "{{ currencyData[currencyFormat] }}",
@@ -159,19 +159,21 @@
             "showNetPrices": {{ showNetPrices | json_encode }}
         },
         "features": {}
-    };
-    // CERES_APP_DATA
+    }
+    <!-- /SSR -->
 </script>
 
 {{ Translations.add( "Ceres", "Template" ) }}
 
 {{ get_json_data() }}
 
-<!-- SSR_SCRIPT_CONTAINER -->
-<!-- INITIAL_STATE -->
-
+<!-- SSR:entry('/plugins/sets/31/productive/Ceres/resources/js/dist/ceres-server.min.js') -->
+<!-- SSR:on() -->
 <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client.min.js?v={{ buildHash }}"></script>
-<!-- VUE_SSR_ENTRY: {{ plugin_path('Ceres') }}/js/dist/ceres-server.js -->
+<!-- /SSR -->
+<!-- SSR:off() -->
+<script src="{{ plugin_path('Ceres') }}/js/dist/ceres-base.min.js?v={{ buildHash }}"></script>
+<!-- /SSR -->
 
 
 
