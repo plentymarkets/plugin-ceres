@@ -39,7 +39,7 @@
                 {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
             </label>
         </div>
-        <button @click="deleteValue()" class="input-unit w-auto">
+        <button @click="deleteValue()" class="input-unit w-auto" data-testing="delete-wrong-vat-id">
             <span>{{ $translate("Ceres::Template.addressDelete") }}</span>
             <span class="fa fa-trash-o ml-1"></span>
         </button>

@@ -42464,6 +42464,7 @@ var render = function() {
           "button",
           {
             staticClass: "input-unit w-auto",
+            attrs: { "data-testing": "delete-wrong-vat-id" },
             on: {
               click: function($event) {
                 return _vm.deleteValue()

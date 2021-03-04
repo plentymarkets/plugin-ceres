@@ -48,7 +48,7 @@ context("Address", () =>
         cy.getByTestingAttr("billing-address-select-add").click();
         cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
         // Random delay because company was often not filled
-        cy.wait(100);
+        cy.wait(150);
         cy.getByTestingAttr("billing-address-de-company").type("plentysystems AG");
         cy.getByTestingAttr("vat-id").type("250560740", { delay: 15 });
         cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="street"]`).type("Abby Road", { delay: 15 });
@@ -102,6 +102,15 @@ context("Address", () =>
         cy.getByTestingAttr("vat-id").should("not.exist");
         cy.getByTestingAttr("address-country-select").eq(0).find(`select.custom-select`).select("United Kingdom");
         cy.getByTestingAttr("vat-id").should("not.exist");
+    });
+
+    it("should show vat-id with wrong prefix only as deletable", () =>
+    {
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-edit").first().click();
+        cy.getByTestingAttr("wrong-vat-id").parent().should("have.class", "error");
+        cy.getByTestingAttr("wrong-vat-id").invoke("val").should("eq", "D250560740");
+        cy.getByTestingAttr("delete-wrong-vat-id").should("exist");
     });
 
     it("should add new delivery address", () =>
@@ -232,7 +241,7 @@ context("Address", () =>
         cy.intercept("DELETE", "/rest/io/customer/address/**/?typeId=1").as("removeAddress");
 
         cy.getByTestingAttr("billing-address-select").click();
-        cy.getByTestingAttr("billing-address-select-remove").first().click();
+        cy.getByTestingAttr("billing-address-select-remove").eq(1).click();
         cy.getByTestingAttr("billing-address-select-remove-modal-remove").click();
 
         cy.wait("@removeAddress").then((res) =>
@@ -264,7 +273,11 @@ context("Address", () =>
         {
             store.state.address.billingAddressList.forEach(address =>
             {
-                store.dispatch("deleteAddress", { address, addressType: 1 });
+                // Address with wrong vat-id needed for special test case
+                if (address.id !== 2429)
+                {
+                    store.dispatch("deleteAddress", { address, addressType: 1 });
+                }
             });
 
             store.state.address.deliveryAddressList.forEach(address =>
