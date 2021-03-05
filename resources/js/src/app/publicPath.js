@@ -2,4 +2,4 @@
 (function(global)
 {
     global.__webpack_public_path__ = global.App.publicPath;
-})(window || global);
+})(typeof window === "undefined" ? global : window);

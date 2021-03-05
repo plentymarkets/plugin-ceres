@@ -53889,7 +53889,7 @@ var getElements = function getElements(selector) {
 /* WEBPACK VAR INJECTION */(function(global) {// eslint-disable-next-line camelcase
 (function (global) {
   global.__webpack_public_path__ = global.App.publicPath;
-})(window || global);
+})(typeof window === "undefined" ? global : window);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
