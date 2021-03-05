@@ -148,7 +148,7 @@ const actions =
 
                             sendFile(event, recaptchaResponse).then((response) =>
                             {
-                                resetRecaptcha();
+                                resetRecaptcha(recaptchaEl);
                                 executeReCaptcha(event.target).then((recaptchaToken2) =>
                                 {
                                     ApiService.post(
