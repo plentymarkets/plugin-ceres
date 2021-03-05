@@ -39629,7 +39629,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-function createApp(options, App) {
+function createApp(options) {
   // =========================
   // COMPONENTS
   // =========================
@@ -45027,20 +45027,6 @@ var getElements = function getElements(selector) {
 
 /***/ }),
 
-/***/ "./resources/js/src/app/publicPath.js":
-/*!********************************************!*\
-  !*** ./resources/js/src/app/publicPath.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function (global) {
-  // eslint-disable-next-line camelcase
-  global.__webpack_public_path__ = global.App.publicPath;
-})(typeof window === "undefined" ? global : window);
-
-/***/ }),
-
 /***/ "./resources/js/src/app/services/ApiService.js":
 /*!*****************************************************!*\
   !*** ./resources/js/src/app/services/ApiService.js ***!
@@ -45675,11 +45661,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var TranslationService = function ($, global) {
+var TranslationService = function ($) {
   var _translations = {}; // initialize translations
 
-  if (global.translations) {
-    _translations = global.translations;
+  if (translations) {
+    _translations = translations;
   } else {
     _readTranslations();
   }
@@ -45782,7 +45768,7 @@ var TranslationService = function ($, global) {
 
     return null;
   }
-}(jquery__WEBPACK_IMPORTED_MODULE_6___default.a, typeof window === "undefined" ? global : window);
+}(jquery__WEBPACK_IMPORTED_MODULE_6___default.a);
 
 /* harmony default export */ __webpack_exports__["default"] = (TranslationService);
 
@@ -46459,7 +46445,7 @@ function createStore() {
   return store;
 } // TODO: find better method name
 
-function initServerStore(store, App) {
+function initServerStore(store) {
   // =========================
   // Fill initial vuex data
   // =========================
@@ -50339,13 +50325,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/publicPath */ "./resources/js/src/app/publicPath.js");
-/* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_app_publicPath__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
-
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
 
 
 
@@ -50373,14 +50356,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   return new Promise(function (resolve, reject) {
-    vue__WEBPACK_IMPORTED_MODULE_4___default.a.config.silent = true;
-    vue__WEBPACK_IMPORTED_MODULE_4___default.a.prototype.$isSSR = true;
+    vue__WEBPACK_IMPORTED_MODULE_3___default.a.config.silent = true;
+    vue__WEBPACK_IMPORTED_MODULE_3___default.a.prototype.$isSSR = true;
 
-    var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_3__["createApp"])(context, global.App),
+    var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_2__["createApp"])(context),
         app = _createApp.app,
         store = _createApp.store;
 
-    Object(_app_store__WEBPACK_IMPORTED_MODULE_5__["initServerStore"])(store, global.App); // NOT working in our solution
+    Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initServerStore"])(store); // NOT working in our solution
     // context.rendered = () =>
     // {
     //     // After the app is rendered, our store is now

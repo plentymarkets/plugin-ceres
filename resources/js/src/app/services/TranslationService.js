@@ -2,14 +2,14 @@ import { defaultValue, isNullOrUndefined } from "../helper/utils";
 import { replaceAll, capitalize } from "../helper/strings";
 import jQuery from "jquery";
 
-const TranslationService = (function($, global)
+const TranslationService = (function($)
 {
     let _translations = {};
 
     // initialize translations
-    if (global.translations)
+    if (translations)
     {
-        _translations = global.translations;
+        _translations = translations;
     }
     else
     {
@@ -153,6 +153,6 @@ const TranslationService = (function($, global)
         return null;
 
     }
-})(jQuery, typeof window === "undefined" ? global : window);
+})(jQuery);
 
 export default TranslationService;

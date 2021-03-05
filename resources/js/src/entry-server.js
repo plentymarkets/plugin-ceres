@@ -1,4 +1,3 @@
-import "./app/publicPath";
 import { createApp } from "./app";
 import Vue from "vue";
 import { initServerStore } from "./app/store";
@@ -37,9 +36,9 @@ export default context =>
         Vue.config.silent = true;
         Vue.prototype.$isSSR = true;
 
-        const { app, store } = createApp(context, global.App);
+        const { app, store } = createApp(context);
 
-        initServerStore(store, global.App);
+        initServerStore(store);
 
         // NOT working in our solution
         // context.rendered = () =>

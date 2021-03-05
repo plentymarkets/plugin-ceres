@@ -1,6 +1,5 @@
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const WebpackRequireFrom = require("webpack-require-from");
 
 module.exports = env =>
 {
@@ -16,8 +15,7 @@ module.exports = env =>
             filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
             chunkFilename: "chunks/ceres-server-[name]"+ (env.prod ? ".min" : "") + ".js",
             path: path.resolve(__dirname, "..", "..", "resources/js/dist/"),
-            libraryTarget: "commonjs2",
-            globalObject: "global"
+            libraryTarget: "commonjs2"
         },
         resolve: {
             alias: {

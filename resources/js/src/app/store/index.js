@@ -65,7 +65,7 @@ export function createStore()
 }
 
 // TODO: find better method name
-export function initServerStore(store, App)
+export function initServerStore(store)
 {
     // =========================
     // Fill initial vuex data

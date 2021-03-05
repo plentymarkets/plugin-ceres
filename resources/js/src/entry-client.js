@@ -8,7 +8,7 @@ import { initListener } from "./app/services/ApiService";
 // client-specific bootstrapping logic...
 const { app, store } = createApp({
     template: "#ssr-script-container"
-}, window.App);
+});
 
 if (window.__INITIAL_STATE__)
 {

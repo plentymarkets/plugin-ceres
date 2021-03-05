@@ -48439,7 +48439,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-function createApp(options, App) {
+function createApp(options) {
   // =========================
   // COMPONENTS
   // =========================
@@ -53886,11 +53886,8 @@ var getElements = function getElements(selector) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {(function (global) {
-  // eslint-disable-next-line camelcase
-  global.__webpack_public_path__ = global.App.publicPath;
-})(typeof window === "undefined" ? global : window);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+// eslint-disable-next-line camelcase
+__webpack_require__.p = App.publicPath;
 
 /***/ }),
 
@@ -54508,7 +54505,7 @@ function NotificationList() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
@@ -54528,11 +54525,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var TranslationService = function ($, global) {
+var TranslationService = function ($) {
   var _translations = {}; // initialize translations
 
-  if (global.translations) {
-    _translations = global.translations;
+  if (translations) {
+    _translations = translations;
   } else {
     _readTranslations();
   }
@@ -54635,10 +54632,9 @@ var TranslationService = function ($, global) {
 
     return null;
   }
-}(jquery__WEBPACK_IMPORTED_MODULE_6___default.a, typeof window === "undefined" ? global : window);
+}(jquery__WEBPACK_IMPORTED_MODULE_6___default.a);
 
 /* harmony default export */ __webpack_exports__["default"] = (TranslationService);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -55313,7 +55309,7 @@ function createStore() {
   return store;
 } // TODO: find better method name
 
-function initServerStore(store, App) {
+function initServerStore(store) {
   // =========================
   // Fill initial vuex data
   // =========================
@@ -59212,7 +59208,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_3__["createApp"])({
   template: "#ssr-script-container"
-}, window.App),
+}),
     app = _createApp.app,
     store = _createApp.store;
 

@@ -169,7 +169,7 @@ import "./app/filters/truncate.filter";
 
 import { createStore } from "./app/store/index";
 
-export function createApp(options, App)
+export function createApp(options)
 {
     // =========================
     // COMPONENTS
