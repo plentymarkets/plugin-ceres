@@ -59204,7 +59204,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // client-specific bootstrapping logic...
+
+window.App = JSON.parse(document.getElementById("app-data").innerText); // client-specific bootstrapping logic...
 
 var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_3__["createApp"])({
   template: "#ssr-script-container"
