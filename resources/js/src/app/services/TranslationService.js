@@ -1,13 +1,14 @@
 import { defaultValue, isNullOrUndefined } from "../helper/utils";
 import { replaceAll, capitalize } from "../helper/strings";
 import jQuery from "jquery";
+import { getGlobal } from "../../getGlobal";
 
 const TranslationService = (function($)
 {
     let _translations = {};
 
     // initialize translations
-    if (typeof translations !== "undefined")
+    if (getGlobal().translations)
     {
         _translations = translations;
     }

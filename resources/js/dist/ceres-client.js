@@ -53883,14 +53883,15 @@ var getElements = function getElements(selector) {
 /*!********************************************!*\
   !*** ./resources/js/src/app/publicPath.js ***!
   \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {// eslint-disable-next-line camelcase
-(function (global) {
-  global.__webpack_public_path__ = global.App.publicPath;
-})(typeof window === "undefined" ? global : window);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _getGlobal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../getGlobal */ "./resources/js/src/getGlobal.js");
+ // eslint-disable-next-line camelcase
+
+Object(_getGlobal__WEBPACK_IMPORTED_MODULE_0__["getGlobal"])().__webpack_public_path__ = Object(_getGlobal__WEBPACK_IMPORTED_MODULE_0__["getGlobal"])().App.publicPath;
 
 /***/ }),
 
@@ -54520,6 +54521,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper/strings */ "./resources/js/src/app/helper/strings.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _getGlobal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../getGlobal */ "./resources/js/src/getGlobal.js");
+
 
 
 
@@ -54531,7 +54534,7 @@ __webpack_require__.r(__webpack_exports__);
 var TranslationService = function ($) {
   var _translations = {}; // initialize translations
 
-  if (typeof translations !== "undefined") {
+  if (Object(_getGlobal__WEBPACK_IMPORTED_MODULE_7__["getGlobal"])().translations) {
     _translations = translations;
   } else {
     _readTranslations();
@@ -59189,7 +59192,6 @@ var getters = {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/publicPath */ "./resources/js/src/app/publicPath.js");
-/* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_app_publicPath__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -59231,6 +59233,25 @@ window.NotificationService = _app_services_NotificationService__WEBPACK_IMPORTED
 Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_5__["initListener"])();
 Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initClientListeners"])(store);
 Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initClientStore"])(store);
+
+/***/ }),
+
+/***/ "./resources/js/src/getGlobal.js":
+/*!***************************************!*\
+  !*** ./resources/js/src/getGlobal.js ***!
+  \***************************************/
+/*! exports provided: getGlobal */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGlobal", function() { return getGlobal; });
+function getGlobal() {
+  if (typeof window !== "undefined") return window;
+  if (typeof global !== "undefined") return global;
+  return null;
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ })
 
