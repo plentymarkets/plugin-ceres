@@ -54528,7 +54528,7 @@ __webpack_require__.r(__webpack_exports__);
 var TranslationService = function ($) {
   var _translations = {}; // initialize translations
 
-  if (translations) {
+  if (typeof translations !== "undefined") {
     _translations = translations;
   } else {
     _readTranslations();
