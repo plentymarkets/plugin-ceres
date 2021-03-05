@@ -41,7 +41,7 @@
 
 <body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
 
-<!-- SRR:app() -->
+<!-- SSR:app() -->
 <div id="vue-app" class="app">
     {{ context.renderState() }}
     <lazy-hydrate when-idle>
@@ -167,7 +167,7 @@
 
 {{ get_json_data() }}
 
-<!-- SSR:entry('/plugins/sets/31/productive/Ceres/resources/js/dist/ceres-server.min.js') -->
+<!-- SSR:entry(/plugins/sets/31/productive/Ceres/resources/js/dist/ceres-server.min.js) -->
 <!-- SSR:on() -->
 <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client.min.js?v={{ buildHash }}"></script>
 <!-- /SSR -->
