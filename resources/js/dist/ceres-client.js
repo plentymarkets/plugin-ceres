@@ -53886,7 +53886,8 @@ var getElements = function getElements(selector) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// eslint-disable-next-line camelcase
+window.App = JSON.parse(document.getElementById("app-data").innerText); // eslint-disable-next-line camelcase
+
 __webpack_require__.p = App.publicPath;
 
 /***/ }),
@@ -59199,7 +59200,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_8__);
-window.App = JSON.parse(document.getElementById("app-data").innerText);
 
 
 

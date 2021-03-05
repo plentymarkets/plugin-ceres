@@ -1,5 +1,3 @@
-window.App = JSON.parse(document.getElementById("app-data").innerText);
-
 import "./app/publicPath";
 import Vue from "vue";
 import NotificationService from "./app/services/NotificationService";

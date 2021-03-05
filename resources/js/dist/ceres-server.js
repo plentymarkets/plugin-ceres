@@ -45034,7 +45034,8 @@ var getElements = function getElements(selector) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// eslint-disable-next-line camelcase
+window.App = JSON.parse(document.getElementById("app-data").innerText); // eslint-disable-next-line camelcase
+
 __webpack_require__.p = App.publicPath;
 
 /***/ }),
