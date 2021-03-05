@@ -1,3 +1,5 @@
+window.App = JSON.parse(document.getElementById("app-data").innerText);
+
 import "./app/publicPath";
 import Vue from "vue";
 import NotificationService from "./app/services/NotificationService";
@@ -5,7 +7,6 @@ import { createApp } from "./app";
 import { initClientListeners, initClientStore } from "./app/store";
 import { initListener } from "./app/services/ApiService";
 
-window.App = JSON.parse(document.getElementById("app-data").innerText);
 
 // client-specific bootstrapping logic...
 const { app, store } = createApp({

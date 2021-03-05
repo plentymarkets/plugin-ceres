@@ -1,7 +1,7 @@
 {% macro add( plugin, group ) %}
+<!-- SSR:global(translations.{{ plugin }}.{{ group }}) -->
 <script type="application/json" data-translation="{{ plugin }}::{{ group }}">
-    <!-- SSR:global(translations.{{ plugin }}.{{ group }}) -->
     {{ services.localization.getTranslations( plugin, group ) | json_encode | raw }}
-    <!-- /SSR -->
 </script>
+<!-- /SSR -->
 {% endmacro %}

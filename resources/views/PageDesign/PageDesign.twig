@@ -130,8 +130,8 @@
 </div>
 <!-- /SSR -->
 
+<!-- SSR:global(App) -->
 <script id="app-data" type="application/json">
-    <!-- SSR:global(App) -->
     {
         "config": {{ ceresConfig | json_encode | raw }},
         "urls": {{ urls | json_encode | raw }},
@@ -160,8 +160,8 @@
         },
         "features": {}
     }
-    <!-- /SSR -->
 </script>
+<!-- /SSR -->
 
 {{ Translations.add( "Ceres", "Template" ) }}
 
