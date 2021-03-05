@@ -1,5 +1,6 @@
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const webpack = require("webpack");
 
 module.exports = env =>
 {
@@ -13,7 +14,6 @@ module.exports = env =>
         target: "node",
         output: {
             filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
-            chunkFilename: "chunks/ceres-server-[name]"+ (env.prod ? ".min" : "") + ".js",
             path: path.resolve(__dirname, "..", "..", "resources/js/dist/"),
             libraryTarget: "commonjs2"
         },
@@ -64,6 +64,9 @@ module.exports = env =>
         plugins: [
             new VueLoaderPlugin({
                 exposeFilename: true
+            }),
+            new webpack.optimize.LimitChunkCountPlugin({
+                maxChunks: 1
             })
         ]
     };
