@@ -39629,7 +39629,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-function createApp(options) {
+function createApp(options, App) {
   // =========================
   // COMPONENTS
   // =========================
@@ -45032,10 +45032,12 @@ var getElements = function getElements(selector) {
   !*** ./resources/js/src/app/publicPath.js ***!
   \********************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // eslint-disable-next-line camelcase
-__webpack_require__.p = App.publicPath;
+(function (global) {
+  global.__webpack_public_path__ = global.App.publicPath;
+})(window || global);
 
 /***/ }),
 
@@ -46457,7 +46459,7 @@ function createStore() {
   return store;
 } // TODO: find better method name
 
-function initServerStore(store) {
+function initServerStore(store, App) {
   // =========================
   // Fill initial vuex data
   // =========================
@@ -50371,15 +50373,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   return new Promise(function (resolve, reject) {
-    console.log("entry-server");
     vue__WEBPACK_IMPORTED_MODULE_4___default.a.config.silent = true;
     vue__WEBPACK_IMPORTED_MODULE_4___default.a.prototype.$isSSR = true;
 
-    var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_3__["createApp"])(context),
+    var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_3__["createApp"])(context, global.App),
         app = _createApp.app,
         store = _createApp.store;
 
-    Object(_app_store__WEBPACK_IMPORTED_MODULE_5__["initServerStore"])(store); // NOT working in our solution
+    Object(_app_store__WEBPACK_IMPORTED_MODULE_5__["initServerStore"])(store, global.App); // NOT working in our solution
     // context.rendered = () =>
     // {
     //     // After the app is rendered, our store is now

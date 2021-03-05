@@ -1,2 +1,5 @@
 // eslint-disable-next-line camelcase
-__webpack_public_path__ = App.publicPath;
+(function(global)
+{
+    global.__webpack_public_path__ = global.App.publicPath;
+})(window || global);

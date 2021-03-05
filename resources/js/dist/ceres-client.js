@@ -48439,7 +48439,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-function createApp(options) {
+function createApp(options, App) {
   // =========================
   // COMPONENTS
   // =========================
@@ -53886,8 +53886,11 @@ var getElements = function getElements(selector) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// eslint-disable-next-line camelcase
-__webpack_require__.p = App.publicPath;
+/* WEBPACK VAR INJECTION */(function(global) {// eslint-disable-next-line camelcase
+(function (global) {
+  global.__webpack_public_path__ = global.App.publicPath;
+})(window || global);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -55309,7 +55312,7 @@ function createStore() {
   return store;
 } // TODO: find better method name
 
-function initServerStore(store) {
+function initServerStore(store, App) {
   // =========================
   // Fill initial vuex data
   // =========================
@@ -59208,7 +59211,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_3__["createApp"])({
   template: "#ssr-script-container"
-}),
+}, window.App),
     app = _createApp.app,
     store = _createApp.store;
 

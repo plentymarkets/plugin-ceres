@@ -34,13 +34,12 @@ export default context =>
 {
     return new Promise((resolve, reject) =>
     {
-        console.log("entry-server");
         Vue.config.silent = true;
         Vue.prototype.$isSSR = true;
 
-        const { app, store } = createApp(context);
+        const { app, store } = createApp(context, global.App);
 
-        initServerStore(store);
+        initServerStore(store, global.App);
 
         // NOT working in our solution
         // context.rendered = () =>
