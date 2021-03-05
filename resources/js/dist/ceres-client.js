@@ -53883,15 +53883,14 @@ var getElements = function getElements(selector) {
 /*!********************************************!*\
   !*** ./resources/js/src/app/publicPath.js ***!
   \********************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _getGlobal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../getGlobal */ "./resources/js/src/getGlobal.js");
- // eslint-disable-next-line camelcase
-
-Object(_getGlobal__WEBPACK_IMPORTED_MODULE_0__["getGlobal"])().__webpack_public_path__ = Object(_getGlobal__WEBPACK_IMPORTED_MODULE_0__["getGlobal"])().App.publicPath;
+/* WEBPACK VAR INJECTION */(function(global) {(function (global) {
+  // eslint-disable-next-line camelcase
+  global.__webpack_public_path__ = global.App.publicPath;
+})(typeof window === "undefined" ? global : window);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -54509,7 +54508,7 @@ function NotificationList() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
@@ -54521,7 +54520,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper/strings */ "./resources/js/src/app/helper/strings.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _getGlobal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../getGlobal */ "./resources/js/src/getGlobal.js");
 
 
 
@@ -54530,12 +54528,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var TranslationService = function ($) {
+var TranslationService = function ($, global) {
   var _translations = {}; // initialize translations
 
-  if (Object(_getGlobal__WEBPACK_IMPORTED_MODULE_7__["getGlobal"])().translations) {
-    _translations = translations;
+  if (global.translations) {
+    _translations = global.translations;
   } else {
     _readTranslations();
   }
@@ -54638,9 +54635,10 @@ var TranslationService = function ($) {
 
     return null;
   }
-}(jquery__WEBPACK_IMPORTED_MODULE_6___default.a);
+}(jquery__WEBPACK_IMPORTED_MODULE_6___default.a, typeof window === "undefined" ? global : window);
 
 /* harmony default export */ __webpack_exports__["default"] = (TranslationService);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -59192,6 +59190,7 @@ var getters = {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/publicPath */ "./resources/js/src/app/publicPath.js");
+/* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_app_publicPath__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -59233,25 +59232,6 @@ window.NotificationService = _app_services_NotificationService__WEBPACK_IMPORTED
 Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_5__["initListener"])();
 Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initClientListeners"])(store);
 Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initClientStore"])(store);
-
-/***/ }),
-
-/***/ "./resources/js/src/getGlobal.js":
-/*!***************************************!*\
-  !*** ./resources/js/src/getGlobal.js ***!
-  \***************************************/
-/*! exports provided: getGlobal */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGlobal", function() { return getGlobal; });
-function getGlobal() {
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  return null;
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ })
 

@@ -1,4 +1,5 @@
-import { getGlobal } from "../getGlobal";
-
-// eslint-disable-next-line camelcase
-getGlobal().__webpack_public_path__ = getGlobal().App.publicPath;
+(function(global)
+{
+    // eslint-disable-next-line camelcase
+    global.__webpack_public_path__ = global.App.publicPath;
+})(typeof window === "undefined" ? global : window);

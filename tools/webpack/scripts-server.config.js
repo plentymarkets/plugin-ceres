@@ -16,7 +16,8 @@ module.exports = env =>
             filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
             chunkFilename: "chunks/ceres-server-[name]"+ (env.prod ? ".min" : "") + ".js",
             path: path.resolve(__dirname, "..", "..", "resources/js/dist/"),
-            libraryTarget: "commonjs2"
+            libraryTarget: "commonjs2",
+            globalObject: "global"
         },
         resolve: {
             alias: {

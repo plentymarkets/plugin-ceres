@@ -5,7 +5,6 @@ import { createApp } from "./app";
 import { initClientListeners, initClientStore } from "./app/store";
 import { initListener } from "./app/services/ApiService";
 
-
 // client-specific bootstrapping logic...
 const { app, store } = createApp({
     template: "#ssr-script-container"
