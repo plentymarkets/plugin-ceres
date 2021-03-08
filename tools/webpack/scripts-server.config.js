@@ -41,7 +41,7 @@ module.exports = env =>
                 exposeFilename: true
             }),
             new webpack.optimize.LimitChunkCountPlugin({
-                maxChunks: 5
+                maxChunks: 1
             })
         ]
     };
