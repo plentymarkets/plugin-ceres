@@ -8,9 +8,7 @@ module.exports = env =>
     return {
         name: "server",
         mode: env.prod ? "production" : "development",
-        entry:  {
-            server: "./resources/js/src/entry-server.js"
-        },
+        entry: "./resources/js/src/entry-server.js",
         target: "node",
         output: {
             filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
@@ -22,32 +20,9 @@ module.exports = env =>
                 vue: "vue/dist/vue" + (env.prod ? ".min" : "") + ".js"
             }
         },
-        devtool: "source-map",
+        devtool: false,
         module: {
             rules: [
-                {
-                    enforce: "pre",
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    loader: "eslint-loader",
-                    options: {
-                        cache: true,
-                        fix: env.prod
-                    }
-                },
-                {
-                    test: require.resolve("jquery"),
-                    use: [
-                        {
-                            loader: "expose-loader",
-                            options: "$"
-                        },
-                        {
-                            loader: "expose-loader",
-                            options: "jQuery"
-                        }
-                    ]
-                },
                 {
                     test: /\.vue$/,
                     loader: "vue-loader"
@@ -66,7 +41,7 @@ module.exports = env =>
                 exposeFilename: true
             }),
             new webpack.optimize.LimitChunkCountPlugin({
-                maxChunks: 1
+                maxChunks: 5
             })
         ]
     };

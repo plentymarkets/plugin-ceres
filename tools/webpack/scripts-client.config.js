@@ -7,9 +7,7 @@ module.exports = env =>
     return {
         name: "client",
         mode: env.prod ? "production" : "development",
-        entry: {
-            client: "./resources/js/src/entry-client.js"
-        },
+        entry: "./resources/js/src/entry-client.js",
         output: {
             filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
             chunkFilename: "chunks/ceres-client-[name]"+ (env.prod ? ".min" : "") + ".js",
@@ -23,16 +21,6 @@ module.exports = env =>
         devtool: "source-map",
         module: {
             rules: [
-                {
-                    enforce: "pre",
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    loader: "eslint-loader",
-                    options: {
-                        cache: true,
-                        fix: env.prod
-                    }
-                },
                 {
                     test: require.resolve("jquery"),
                     use: [
