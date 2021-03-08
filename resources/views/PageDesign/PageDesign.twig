@@ -168,15 +168,18 @@
 
 {{ get_json_data() }}
 
-<!-- SSR:entry(/plugins/sets/31/productive/Ceres/resources/js/dist/ceres-server.min.js) -->
+{% set minSuffix = '' %}
+{% if ceresConfig.log.performanceLevel  == 'development' %}
+    {% set minSuffix = '.min' %}
+{% endif %}
+
+<!-- SSR:entry(/plugins/sets/31/productive/Ceres/resources/js/dist/ceres-server{{ minSuffix }}.js) -->
 <!-- SSR:on() -->
-<script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client.min.js?v={{ buildHash }}"></script>
+<script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client{{ minSuffix }}.js?v={{ buildHash }}"></script>
 <!-- /SSR -->
 <!-- SSR:off() -->
-<script src="{{ plugin_path('Ceres') }}/js/dist/ceres-base.min.js?v={{ buildHash }}"></script>
+<script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}{{ minSuffix }}.js?v={{ buildHash }}"></script>
 <!-- /SSR -->
-
-
 
 <script>
     window.__loadPluginChunk = function(source) {
