@@ -11,7 +11,7 @@ import "custom-event-polyfill";
 
 import Vue from "vue";
 import Vuex from "vuex";
-import mount from "./mount";
+import { mount } from "./mount";
 
 Vue.prototype.$mount = mount;
 

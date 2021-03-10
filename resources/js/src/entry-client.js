@@ -7,6 +7,9 @@ import jQuery from "jquery";
 import { createApp } from "./app";
 import { initClientListeners, initClientStore } from "./app/store";
 import { initListener } from "./app/services/ApiService";
+import { mount } from "./mount";
+
+Vue.prototype.$mount = mount;
 
 window.createApp = (selector) => {
     // client-specific bootstrapping logic...

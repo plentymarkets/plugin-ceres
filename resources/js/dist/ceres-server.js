@@ -5948,9 +5948,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isRegister: App.templateType === "register"
     };
   },
-  mounted: function mounted() {
-    console.log("mnt user login handler");
-  },
   methods: _objectSpread({
     unmarkInputFields: function unmarkInputFields() {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__["default"].unmarkAllFields($("#login"));
@@ -10212,7 +10209,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     var _this = this;
 
-    console.log("mnt item search");
     this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_15__["debounce"])(function (searchString) {
       _this.autocomplete(searchString);
     }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 200));
@@ -11059,9 +11055,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemList.selectedFacets;
     }
   }),
-  mounted: function mounted() {
-    console.log("mnt ifl");
-  },
   methods: _objectSpread(_objectSpread({
     removeTag: function removeTag(tag) {
       this.selectFacet({
@@ -12549,9 +12542,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$translate("Ceres::Template.cookieBarHintText", links);
     }
   },
-  mounted: function mounted() {
-    console.log("mnt cookie bar");
-  },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapMutations"])(["storeConsents", "acceptAll"])), {}, {
     close: function close() {
       this.isCollapsed = true;
@@ -13707,9 +13697,6 @@ __webpack_require__.r(__webpack_exports__);
     urlWishList: function urlWishList() {
       return App.urls.wishList;
     }
-  },
-  mounted: function mounted() {
-    console.log("mnt wish list count");
   }
 });
 
@@ -79074,14 +79061,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
+/* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
 
 
 
 
 
+
+ // Override global component function to allow overriding templates
+
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component = _mount__WEBPACK_IMPORTED_MODULE_6__["component"];
 var globals = {
-  Vue: vue__WEBPACK_IMPORTED_MODULE_3___default.a
+  Vue: vue__WEBPACK_IMPORTED_MODULE_3___default.a,
+  Vuex: vuex__WEBPACK_IMPORTED_MODULE_4__["default"]
 };
 
 function createApp(context) {
@@ -79093,9 +79087,255 @@ function createApp(context) {
         app = _createAppInternal.app,
         store = _createAppInternal.store;
 
-    Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initServerStore"])(store);
+    Object(_app_store__WEBPACK_IMPORTED_MODULE_5__["initServerStore"])(store);
     resolve(app);
   });
+}
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/mount.js":
+/*!***********************************!*\
+  !*** ./resources/js/src/mount.js ***!
+  \***********************************/
+/*! exports provided: mount, component */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mount", function() { return mount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "component", function() { return component; });
+/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
+/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.reduce.js */ "./node_modules/core-js/modules/es.array.reduce.js");
+/* harmony import */ var core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.index-of.js */ "./node_modules/core-js/modules/es.array.index-of.js");
+/* harmony import */ var core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _app_helper_utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app/helper/utils */ "./resources/js/src/app/helper/utils.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var originalMountFn = vue__WEBPACK_IMPORTED_MODULE_17___default.a.prototype.$mount;
+var originalComponentFn = vue__WEBPACK_IMPORTED_MODULE_17___default.a.component;
+/**
+ * Custom mount function to inject component template from theme plugins before mounting vue components.
+ *
+ * @param {Element} el
+ * @param {boolean} hydrating
+ * @returns {Vue}
+ */
+
+function mount(el, hydrating) {
+  var componentTemplate;
+
+  if (this.$props && this.$props.templateOverride) {
+    // template element is references from property for current component instance
+    var rawTemplate = getTemplateOverride(this.$props.templateOverride);
+
+    if (Object(_app_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(rawTemplate)) {
+      console.warn("Overriding a component template has failed. Did you import the template into the DOM?");
+    } else {
+      componentTemplate = replaceDelimiters(rawTemplate);
+    }
+  } else if (this.$options && this.$options._componentTag) {
+    // check for global template override
+    componentTemplate = getComponentTemplate(this.$options._componentTag);
+  }
+
+  if (componentTemplate) {
+    Object.assign(this.$options, vue__WEBPACK_IMPORTED_MODULE_17___default.a.compile(componentTemplate));
+  }
+
+  return originalMountFn.call(this, el, hydrating);
+}
+/**
+ * Custom component function the override template before registering the component.
+ * @param {string}          id          Id/selector of the component
+ * @param {object|function} definition  Component definition or async load callback.
+ * @return {*}
+ */
+
+
+function component(id, definition) {
+  var customTemplate = getComponentTemplate(id);
+  var newDefinition = definition;
+
+  if (customTemplate) {
+    if (_typeof(definition) === "object") {
+      newDefinition = Object.assign(definition, vue__WEBPACK_IMPORTED_MODULE_17___default.a.compile(customTemplate));
+    } else if (typeof definition === "function") {
+      newDefinition = function newDefinition() {
+        var asyncComponent = definition();
+
+        if (asyncComponent instanceof Promise) {
+          return asyncComponent.then(function (module) {
+            delete module.default.render;
+            module.default.template = replaceDelimiters(customTemplate);
+            return module;
+          });
+        } else {
+          Object.assign(asyncComponent, vue__WEBPACK_IMPORTED_MODULE_17___default.a.compile(customTemplate));
+          return asyncComponent;
+        }
+      };
+    }
+  }
+
+  return originalComponentFn.call(this, id, newDefinition);
+}
+
+function getTemplateOverride(templateOverride) {
+  if (typeof document !== "undefined") {
+    return (document.querySelector(this.$props.templateOverride) || {}).innerHTML;
+  } else if (typeof templates !== "undefined") {
+    return templates[templateOverride];
+  }
+
+  return "";
+}
+/**
+ * Collection of custom vue component templates read from script elements on first mount.
+ *
+ * @type {?Object<string,string>}
+ */
+
+
+var componentTemplates = null;
+/**
+ * Read component templates from script elements.
+ * Query elements only once on first component mount
+ *
+ * @param {string} tagName
+ * @returns {string}
+ */
+
+function getComponentTemplate(tagName) {
+  if (Object(_app_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(componentTemplates)) {
+    if (typeof document !== "undefined") {
+      componentTemplates = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]")).reduce(function (obj, el) {
+        return _objectSpread(_objectSpread({}, obj), {}, _defineProperty({}, el.dataset.component, replaceDelimiters(el.innerHTML)));
+      }, {});
+    } else if (typeof templates !== "undefined") {
+      componentTemplates = templates;
+    }
+  }
+
+  return componentTemplates[tagName];
+}
+/**
+ * Replace ES2015 delimiters ['${', '}'] with default vue delimiters ['{{', '}}']
+ *
+ * @param {string} template
+ * @returns {string}
+ */
+
+
+function replaceDelimiters(template) {
+  var posStart = 0;
+  var offset = 0;
+  var content;
+
+  while ((posStart = template.indexOf("${", offset)) >= 0 && posStart <= template.length) {
+    // read delimiter content from template starting behind opening delimiter (= posStart + "${".length)
+    content = readDelimiterContent(template, posStart + 2);
+    /* eslint-disable */
+
+    template = template.substr(0, posStart) // template content before opening delimiter
+    + "{{" // new opening delimiter
+    + content // content between delimiters
+    + "}}" // new closing delimiter
+    + template.substr(posStart + content.length + 3); // template content after closing delimiter (skip "${" and "}")
+
+    /* eslint-enable */
+  }
+
+  return template;
+}
+/**
+ * Read string until closing delimiter occurs.
+ *
+ * @param {string} input
+ * @param {number} offset
+ * @returns string
+ */
+
+
+function readDelimiterContent(input, offset) {
+  var count = 0;
+  var i = offset;
+  var current;
+
+  while ((current = input.charAt(i)) !== "") {
+    if (current === "}" && count === 0) {
+      return input.substr(offset, i - offset);
+    }
+
+    if (current === "{") {
+      count++;
+    } else if (current === "}") {
+      count--;
+    }
+
+    i++;
+  }
+
+  return "";
 }
 
 

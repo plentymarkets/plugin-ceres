@@ -18,11 +18,6 @@ export default {
         {
             return App.urls.wishList;
         }
-    },
-
-    mounted()
-    {
-        console.log("mnt wish list count");
     }
 }
 </script>

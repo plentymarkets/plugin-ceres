@@ -1,8 +1,13 @@
 import { createApp as createAppInternal } from "./app";
 import Vue from "vue";
+import Vuex from "vuex";
 import { initServerStore } from "./app/store";
+import { component } from "./mount";
 
-const globals = { Vue };
+// Override global component function to allow overriding templates
+Vue.component = component;
+
+const globals = { Vue, Vuex };
 
 function createApp(context)
 {

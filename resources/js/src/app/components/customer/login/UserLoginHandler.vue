@@ -60,11 +60,6 @@ export default {
         };
     },
 
-    mounted()
-    {
-        console.log("mnt user login handler");
-    },
-
     methods: {
         unmarkInputFields()
         {
