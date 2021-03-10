@@ -177,7 +177,7 @@
     {% set minSuffix = '' %}
 {% endif %}
 
-<!-- SSR:entry(/plugins/sets/31/productive/Ceres/resources/js/dist/ceres-server{{ minSuffix }}.js) -->
+<!-- SSR:entry(/plugins/sets/1/productive/Ceres/resources/js/dist/ceres-server{{ minSuffix }}.js) -->
 <!-- SSR:on() -->
 <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client{{ minSuffix }}.js?v={{ buildHash }}"></script>
 <!-- /SSR -->
@@ -207,6 +207,7 @@
     window.__loadPluginChunk = function(source) {
         return source += "?v={{ buildHash }}";
     };
+    window.createApp("#vue-app");
 
     {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
     {% if request.get("show") == "forgotPassword" %}window.ceresStore.dispatch("loadComponent", "forgot-password-modal"){% endif %}

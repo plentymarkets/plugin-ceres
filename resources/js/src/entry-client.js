@@ -8,16 +8,7 @@ import { createApp } from "./app";
 import { initClientListeners, initClientStore } from "./app/store";
 import { initListener } from "./app/services/ApiService";
 
-
-function onReady(ready) {
-    if(document.readyState === "complete" || document.readyState === "interactive") {
-        setTimeout(ready, 1);
-    } else {
-        document.addEventListener("DOMContentLoaded", ready);
-    }
-}
-
-onReady(() => {
+window.createApp = (selector) => {
     // client-specific bootstrapping logic...
     const { app, store } = createApp({
         template: "#ssr-script-container"
@@ -28,14 +19,14 @@ onReady(() => {
         store.replaceState(window.__INITIAL_STATE__);
     }
 
-    app.$mount("#vue-app", true);
+    app.$mount(selector, true);
     window.vueApp = app;
 
     initListener();
 
     initClientListeners(store);
     initClientStore(store);
-});
+};
 
 window.jQuery = jQuery;
 window.$ = jQuery;

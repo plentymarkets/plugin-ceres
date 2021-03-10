@@ -59209,15 +59209,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function onReady(ready) {
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-    setTimeout(ready, 1);
-  } else {
-    document.addEventListener("DOMContentLoaded", ready);
-  }
-}
-
-onReady(function () {
+window.createApp = function (selector) {
   // client-specific bootstrapping logic...
   var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_6__["createApp"])({
     template: "#ssr-script-container"
@@ -59229,12 +59221,13 @@ onReady(function () {
     store.replaceState(window.__INITIAL_STATE__);
   }
 
-  app.$mount("#vue-app", true);
+  app.$mount(selector, true);
   window.vueApp = app;
   Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_8__["initListener"])();
   Object(_app_store__WEBPACK_IMPORTED_MODULE_7__["initClientListeners"])(store);
   Object(_app_store__WEBPACK_IMPORTED_MODULE_7__["initClientStore"])(store);
-});
+};
+
 window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_5___default.a;
 window.$ = jquery__WEBPACK_IMPORTED_MODULE_5___default.a;
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_1___default.a;
