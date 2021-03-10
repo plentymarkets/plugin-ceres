@@ -36,7 +36,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"client": 0
+/******/ 		"main": 0
 /******/ 	};
 /******/
 /******/
@@ -48463,7 +48463,7 @@ function createApp(options) {
     return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./app/components/basket/list/BasketList.vue */ "./resources/js/src/app/components/basket/list/BasketList.vue"));
   });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("step-by-step-navigation", function () {
-    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./app/components/category/StepByStepNavigation.vue */ "./resources/js/src/app/components/category/StepByStepNavigation.vue"));
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./app/components/category/StepByStepNavigation.vue */ "./resources/js/src/app/components/category/StepByStepNavigation.vue"));
   });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("google-maps-widget", function () {
     return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./app/components/common/GoogleMaps.vue */ "./resources/js/src/app/components/common/GoogleMaps.vue"));
@@ -48525,10 +48525,10 @@ function createApp(options) {
     return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./app/components/liveShopping/LiveShoppingItem.vue */ "./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue"));
   });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("newsletter-input", function () {
-    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./app/components/newsletter/NewsletterInput.vue */ "./resources/js/src/app/components/newsletter/NewsletterInput.vue"));
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./app/components/newsletter/NewsletterInput.vue */ "./resources/js/src/app/components/newsletter/NewsletterInput.vue"));
   });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("newsletter-unsubscribe-input", function () {
-    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./app/components/newsletter/NewsletterUnsubscribeInput.vue */ "./resources/js/src/app/components/newsletter/NewsletterUnsubscribeInput.vue"));
+    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./app/components/newsletter/NewsletterUnsubscribeInput.vue */ "./resources/js/src/app/components/newsletter/NewsletterUnsubscribeInput.vue"));
   });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("order-return", function () {
     return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./app/components/orderReturn/OrderReturn.vue */ "./resources/js/src/app/components/orderReturn/OrderReturn.vue"));
@@ -59190,44 +59190,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
-/* harmony import */ var _app_services_ApiService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
+/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
+/* harmony import */ var _app_services_ApiService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 
 
 
 
- // client-specific bootstrapping logic...
 
-var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_3__["createApp"])({
-  template: "#ssr-script-container"
-}),
-    app = _createApp.app,
-    store = _createApp.store;
 
-if (window.__INITIAL_STATE__) {
-  store.replaceState(window.__INITIAL_STATE__);
+
+
+
+function onReady(ready) {
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    setTimeout(ready, 1);
+  } else {
+    document.addEventListener("DOMContentLoaded", ready);
+  }
 }
 
-app.$mount("#vue-app", true);
+onReady(function () {
+  // client-specific bootstrapping logic...
+  var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_6__["createApp"])({
+    template: "#ssr-script-container"
+  }),
+      app = _createApp.app,
+      store = _createApp.store;
 
+  if (window.__INITIAL_STATE__) {
+    store.replaceState(window.__INITIAL_STATE__);
+  }
 
-
-window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_8___default.a;
-window.$ = jquery__WEBPACK_IMPORTED_MODULE_8___default.a;
-window.vueApp = app;
+  app.$mount("#vue-app", true);
+  window.vueApp = app;
+  Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_8__["initListener"])();
+  Object(_app_store__WEBPACK_IMPORTED_MODULE_7__["initClientListeners"])(store);
+  Object(_app_store__WEBPACK_IMPORTED_MODULE_7__["initClientStore"])(store);
+});
+window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_5___default.a;
+window.$ = jquery__WEBPACK_IMPORTED_MODULE_5___default.a;
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_1___default.a;
 window.NotificationService = _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"];
-Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_5__["initListener"])();
-Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initClientListeners"])(store);
-Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initClientStore"])(store);
 
 /***/ })
 

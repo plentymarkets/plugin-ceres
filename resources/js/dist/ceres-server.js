@@ -6,7 +6,7 @@ module.exports =
 /******/ 	// object to store loaded chunks
 /******/ 	// "0" means "already loaded"
 /******/ 	var installedChunks = {
-/******/ 		"server": 0
+/******/ 		"main": 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -20803,17 +20803,6 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 /***/ }),
 
-/***/ "./node_modules/expose-loader/index.js?jQuery!./node_modules/jquery/dist/jquery.js-exposed":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/expose-loader?jQuery!./node_modules/jquery/dist/jquery.js-exposed ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = global["jQuery"] = __webpack_require__(/*! -!./jquery.js */ "./node_modules/jquery/dist/jquery.js");
-
-/***/ }),
-
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
@@ -31695,17 +31684,6 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-
-/***/ }),
-
-/***/ "./node_modules/jquery/dist/jquery.js-exposed":
-/*!****************************************************!*\
-  !*** ./node_modules/jquery/dist/jquery.js-exposed ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = global["$"] = __webpack_require__(/*! -!./node_modules/expose-loader?jQuery!./jquery.js */ "./node_modules/expose-loader/index.js?jQuery!./node_modules/jquery/dist/jquery.js-exposed");
 
 /***/ }),
 
@@ -74417,7 +74395,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
 
 
@@ -79082,11 +79060,13 @@ var getters = {};
 /*!******************************************!*\
   !*** ./resources/js/src/entry-server.js ***!
   \******************************************/
-/*! exports provided: default */
+/*! exports provided: createApp, globals */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createApp", function() { return createApp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "globals", function() { return globals; });
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
@@ -79099,52 +79079,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // export default options =>
-// {
-//     console.log("entry-server");
-//     Vue.config.silent = true;
-//     Vue.prototype.$isSSR = true;
-//     const { app, store } = createApp(options);
-//     window.__TEST__ = "Hello there.";
-//     options.state = store.state;
-//     options.rendered = () =>
-//     {
-//         // After the app is rendered, our store is now
-//         // filled with the state from our components.
-//         // When we attach the state to the context, and t he `template` option
-//         // is used for the renderer, the state will automatically be
-//         // serialized and injected into the HTML as `window.__INITIAL_STATE__`.
-//         console.log("entry-server: rendered");
-//         options.state = store.state;
-//     };
-//     return app;
-// };
 
-/* harmony default export */ __webpack_exports__["default"] = (function (context) {
+var globals = {
+  Vue: vue__WEBPACK_IMPORTED_MODULE_3___default.a
+};
+
+function createApp(context) {
   return new Promise(function (resolve, reject) {
     vue__WEBPACK_IMPORTED_MODULE_3___default.a.config.silent = true;
     vue__WEBPACK_IMPORTED_MODULE_3___default.a.prototype.$isSSR = true;
 
-    var _createApp = Object(_app__WEBPACK_IMPORTED_MODULE_2__["createApp"])(context),
-        app = _createApp.app,
-        store = _createApp.store;
+    var _createAppInternal = Object(_app__WEBPACK_IMPORTED_MODULE_2__["createApp"])(context),
+        app = _createAppInternal.app,
+        store = _createAppInternal.store;
 
-    Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initServerStore"])(store); // NOT working in our solution
-    // context.rendered = () =>
-    // {
-    //     // After the app is rendered, our store is now
-    //     // filled with the state from our components.
-    //     // When we attach the state to the context, and the `template` option
-    //     // is used for the renderer, the state will automatically be
-    //     // serialized and injected into the HTML as `window.__INITIAL_STATE__`.
-    //     context.state = store.state;
-    // };
-
+    Object(_app_store__WEBPACK_IMPORTED_MODULE_4__["initServerStore"])(store);
     resolve(app);
   });
-});
+}
+
+
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=ceres-server.js.map

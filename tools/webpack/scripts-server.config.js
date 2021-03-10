@@ -11,7 +11,7 @@ module.exports = env =>
         entry: "./resources/js/src/entry-server.js",
         target: "node",
         output: {
-            filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
+            filename: "ceres-server" + (env.prod ? ".min" : "") + ".js",
             path: path.resolve(__dirname, "..", "..", "resources/js/dist/"),
             libraryTarget: "commonjs2"
         },
