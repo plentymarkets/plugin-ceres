@@ -241,7 +241,15 @@ import "./app/mixins/template.mixin";
 import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
+import { createStore, initClientListeners, initClientStore, initServerStore } from "./app/store";
+
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
 Vue.prototype.$ceres = App;
+
+const store = createStore();
+
+initServerStore(store);
+initClientStore(store);
+initClientListeners(store);
