@@ -176,7 +176,7 @@
     {% set minSuffix = '' %}
 {% endif %}
 
-<!-- SSR:entry({{ ssr_entry('Ceres', 'resources/js/dist/ceres-server' ~ minSuffix ~ '.js') }}) -->
+<!-- SSR:entry(/plugins/sets/31/productive/Ceres/resources/js/dist/ceres-server{{ minSuffix }}.js) -->
 <!-- SSR:on() -->
 <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client{{ minSuffix }}.js?v={{ buildHash }}"></script>
 <!-- /SSR -->
