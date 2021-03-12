@@ -29,6 +29,11 @@ function mount(el, hydrating)
             componentTemplate = replaceDelimiters(rawTemplate);
         }
     }
+    else if (this.$options && !this.$options.render && this.template)
+    {
+        // SSR case, where we need to render a component on client
+        componentTemplate = replaceDelimiters(document.querySelector(this.template).innerHTML);
+    }
     else if (this.$options && this.$options._componentTag)
     {
         // check for global template override

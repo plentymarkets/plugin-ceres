@@ -174,6 +174,8 @@ Vue.component("single-item-set-component", SingleItemSetComponent);
 
 import LazyHydrate from "vue-lazy-hydration";
 Vue.component("lazy-hydrate", LazyHydrate);
+import ClientOnly from "vue-client-only";
+Vue.component("client-only", ClientOnly);
 
 // =========================
 // DIRECTIVES
