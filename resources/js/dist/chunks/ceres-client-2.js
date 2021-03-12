@@ -1259,8 +1259,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -2054,6 +2052,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -2578,6 +2577,7 @@ var render = function() {
                         "select",
                         {
                           staticClass: "custom-select",
+                          attrs: { id: "address1" + _vm._uid },
                           domProps: { value: _vm.value.address1 },
                           on: {
                             change: function($event) {
@@ -2629,7 +2629,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("label", [
+                      _c("label", { attrs: { for: "'address1' + _uid" } }, [
                         _vm._v(
                           _vm._s(
                             _vm.$translate(
@@ -2909,6 +2909,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -3860,6 +3861,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -4813,6 +4815,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -5701,6 +5704,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -6615,6 +6619,7 @@ var render = function() {
             "select",
             {
               staticClass: "custom-select",
+              attrs: { id: "country-id-select" },
               domProps: { value: _vm.selectedCountryId },
               on: {
                 change: function($event) {
@@ -6644,7 +6649,7 @@ var render = function() {
             0
           ),
           _vm._v(" "),
-          _c("label", [
+          _c("label", { attrs: { for: "country-id-select" } }, [
             _vm._v(_vm._s(_vm.$translate("Ceres::Template.headerCountry")))
           ])
         ]
@@ -6672,6 +6677,7 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
+                        attrs: { id: "state-id-select" },
                         domProps: { value: _vm.selectedStateId },
                         on: {
                           change: function($event) {
@@ -6719,16 +6725,14 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("label", [
+                    _c("label", { attrs: { for: "state-id-select" } }, [
                       _vm._v(
-                        "\n                " +
-                          _vm._s(
-                            _vm.transformTranslation(
-                              "Ceres::Template.headerState",
-                              "stateId"
-                            )
-                          ) +
-                          "\n            "
+                        _vm._s(
+                          _vm.transformTranslation(
+                            "Ceres::Template.headerState",
+                            "stateId"
+                          )
+                        )
                       )
                     ])
                   ]
@@ -6984,7 +6988,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "label",
-                    { attrs: { for: "new-password-repeat" + _vm._uid } },
+                    { attrs: { for: "new-password-repeat-" + _vm._uid } },
                     [
                       _vm._v(
                         _vm._s(

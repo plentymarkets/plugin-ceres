@@ -185,7 +185,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
 
 
 
@@ -906,6 +905,7 @@ var render = function() {
                           {
                             staticClass: "custom-select",
                             attrs: {
+                              id: "custom-select_" + attribute.name,
                               "data-testing": "variation-select-dropdown"
                             },
                             on: {
@@ -1031,6 +1031,7 @@ var render = function() {
                               }
                             ],
                             attrs: {
+                              for: "custom-select_" + attribute.name,
                               "data-toggle": "tooltip",
                               "data-placement": "top",
                               title: attribute.name,
@@ -1226,7 +1227,10 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
-                        attrs: { "data-testing": "variation-select-unit" },
+                        attrs: {
+                          id: "unit-combination-ids-select",
+                          "data-testing": "variation-select-unit"
+                        },
                         on: {
                           change: function($event) {
                             return _vm.selectUnit($event.target.value)
@@ -1283,7 +1287,10 @@ var render = function() {
                     _c(
                       "label",
                       {
-                        attrs: { "data-testing": "variation-select-unit-label" }
+                        attrs: {
+                          for: "unit-combination-ids-select",
+                          "data-testing": "variation-select-unit-label"
+                        }
                       },
                       [
                         _vm._v(

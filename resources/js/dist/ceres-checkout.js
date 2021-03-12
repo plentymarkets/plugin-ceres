@@ -4515,8 +4515,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -9037,7 +9035,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//
 //
 //
 //
@@ -47863,9 +47860,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -47904,11 +47901,11 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -47990,9 +47987,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -48017,11 +48014,11 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -48056,9 +48053,9 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -48094,11 +48091,11 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -48168,9 +48165,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketTotalSum")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -48277,11 +48274,11 @@ var render = function() {
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketTotalSum")
                               ) +
-                              " (" +
+                              " " +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketGross")
                               ) +
-                              ")\n                    "
+                              "\n                    "
                           )
                         ]
                       ),
@@ -49904,6 +49901,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -50428,6 +50426,7 @@ var render = function() {
                         "select",
                         {
                           staticClass: "custom-select",
+                          attrs: { id: "address1" + _vm._uid },
                           domProps: { value: _vm.value.address1 },
                           on: {
                             change: function($event) {
@@ -50479,7 +50478,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("label", [
+                      _c("label", { attrs: { for: "'address1' + _uid" } }, [
                         _vm._v(
                           _vm._s(
                             _vm.$translate(
@@ -50759,6 +50758,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -51710,6 +51710,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -52663,6 +52664,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -53551,6 +53553,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -54573,6 +54576,7 @@ var render = function() {
             "select",
             {
               staticClass: "custom-select",
+              attrs: { id: "country-id-select" },
               domProps: { value: _vm.selectedCountryId },
               on: {
                 change: function($event) {
@@ -54602,7 +54606,7 @@ var render = function() {
             0
           ),
           _vm._v(" "),
-          _c("label", [
+          _c("label", { attrs: { for: "country-id-select" } }, [
             _vm._v(_vm._s(_vm.$translate("Ceres::Template.headerCountry")))
           ])
         ]
@@ -54630,6 +54634,7 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
+                        attrs: { id: "state-id-select" },
                         domProps: { value: _vm.selectedStateId },
                         on: {
                           change: function($event) {
@@ -54677,16 +54682,14 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("label", [
+                    _c("label", { attrs: { for: "state-id-select" } }, [
                       _vm._v(
-                        "\n                " +
-                          _vm._s(
-                            _vm.transformTranslation(
-                              "Ceres::Template.headerState",
-                              "stateId"
-                            )
-                          ) +
-                          "\n            "
+                        _vm._s(
+                          _vm.transformTranslation(
+                            "Ceres::Template.headerState",
+                            "stateId"
+                          )
+                        )
                       )
                     ])
                   ]
@@ -54966,7 +54969,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "label",
-                    { attrs: { for: "new-password-repeat" + _vm._uid } },
+                    { attrs: { for: "new-password-repeat-" + _vm._uid } },
                     [
                       _vm._v(
                         _vm._s(
@@ -57279,7 +57282,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "custom-select",
-                    attrs: { "data-testing": "order-property-selection" },
+                    attrs: {
+                      id: "order-property-input-select",
+                      "data-testing": "order-property-selection"
+                    },
                     on: {
                       change: [
                         function($event) {
@@ -57336,21 +57342,28 @@ var render = function() {
                   2
                 ),
                 _vm._v(" "),
-                _c("label", { staticClass: "d-flex w-100" }, [
-                  _c("span", { staticClass: "text-truncate" }, [
-                    _vm._v(_vm._s(_vm.property.names.name))
-                  ]),
-                  _vm._v(" "),
-                  _vm.surcharge > 0
-                    ? _c("strong", { staticClass: "ml-1" }, [
-                        _vm._v(
-                          "(+ " +
-                            _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                            ") *"
-                        )
-                      ])
-                    : _vm._e()
-                ])
+                _c(
+                  "label",
+                  {
+                    staticClass: "d-flex w-100",
+                    attrs: { for: "order-property-input-select" }
+                  },
+                  [
+                    _c("span", { staticClass: "text-truncate" }, [
+                      _vm._v(_vm._s(_vm.property.names.name))
+                    ]),
+                    _vm._v(" "),
+                    _vm.surcharge > 0
+                      ? _c("strong", { staticClass: "ml-1" }, [
+                          _vm._v(
+                            "(+ " +
+                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                              ") *"
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                )
               ]
             ),
             _vm._v(" "),
@@ -58984,6 +58997,7 @@ var render = function() {
                           {
                             staticClass: "custom-select",
                             attrs: {
+                              id: "custom-select_" + attribute.name,
                               "data-testing": "variation-select-dropdown"
                             },
                             on: {
@@ -59109,6 +59123,7 @@ var render = function() {
                               }
                             ],
                             attrs: {
+                              for: "custom-select_" + attribute.name,
                               "data-toggle": "tooltip",
                               "data-placement": "top",
                               title: attribute.name,
@@ -59304,7 +59319,10 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
-                        attrs: { "data-testing": "variation-select-unit" },
+                        attrs: {
+                          id: "unit-combination-ids-select",
+                          "data-testing": "variation-select-unit"
+                        },
                         on: {
                           change: function($event) {
                             return _vm.selectUnit($event.target.value)
@@ -59361,7 +59379,10 @@ var render = function() {
                     _c(
                       "label",
                       {
-                        attrs: { "data-testing": "variation-select-unit-label" }
+                        attrs: {
+                          for: "unit-combination-ids-select",
+                          "data-testing": "variation-select-unit-label"
+                        }
                       },
                       [
                         _vm._v(
@@ -94215,6 +94236,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
@@ -94340,7 +94362,7 @@ var actions = {
         commit = _ref2.commit;
 
     if (!state.isBasketInitiallyLoaded) {
-      jQuery.when(ApiService.get("/rest/io/basket", {}, {
+      jQuery.when(ApiService.get("/rest/io/basket", Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_16__["getUrlParams"])(), {
         cache: false,
         keepOriginalResponse: true
       }), ApiService.get("/rest/io/basket/items", {
@@ -95170,8 +95192,7 @@ var actions = {
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
-              response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendFail");
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(response.error);
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendFail"));
             });
           });
         }, function (response) {

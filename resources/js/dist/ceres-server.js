@@ -4398,8 +4398,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -9023,7 +9021,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//
 //
 //
 //
@@ -37302,9 +37299,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       ) +
                       '</dt><dd data-testing="item-sum-net"' +
                       _vm._ssrClass(null, {
@@ -37337,11 +37334,11 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       ) +
                       '</dt><dd data-testing="item-sum"' +
                       _vm._ssrClass(null, {
@@ -37423,9 +37420,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       ) +
                       "</dt><dd" +
                       _vm._ssrClass(null, {
@@ -37447,11 +37444,11 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       ) +
                       "</dt><dd" +
                       _vm._ssrClass(null, {
@@ -37485,9 +37482,9 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       ) +
                       '</dt><dd data-testing="shipping-amount-net"' +
                       _vm._ssrClass(null, {
@@ -37517,11 +37514,11 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       ) +
                       '</dt><dd data-testing="shipping-amount"' +
                       _vm._ssrClass(null, {
@@ -37579,9 +37576,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketTotalSum")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       ) +
                       '</dt><dd data-testing="basket-amount-net"' +
                       _vm._ssrClass(null, {
@@ -37662,11 +37659,11 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketTotalSum")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                    "
+                          "\n                    "
                       ) +
                       '</dt><dd data-testing="basket-amount"' +
                       _vm._ssrClass(null, {
@@ -39175,6 +39172,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -39575,6 +39573,7 @@ var render = function() {
                     "</label></div></div></div>"
                   : "<!---->") +
                 ' <div class="col-12"><div class="row"><div class="col-12 col-sm-8"><div data-validate data-model="address1" class="input-unit"><select' +
+                _vm._ssrAttr("id", "address1" + _vm._uid) +
                 _vm._ssrAttr("value", _vm.value.address1) +
                 ' class="custom-select">' +
                 (_vm.isParcelBoxAvailable || _vm.isMyAccount
@@ -39600,7 +39599,7 @@ var render = function() {
                     ) +
                     "</option>"
                   : "<!---->") +
-                "</select> <label>" +
+                "</select> <label for=\"'address1' + _uid\">" +
                 _vm._ssrEscape(
                   _vm._s(
                     _vm.$translate("Ceres::Template.addressPickupLocation")
@@ -39766,6 +39765,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -40513,6 +40513,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -41279,6 +41280,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -41943,6 +41945,7 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
+                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -42747,7 +42750,7 @@ var render = function() {
     "div",
     [
       _vm._ssrNode(
-        '<div data-validate data-model="countryId" class="input-unit"><select' +
+        '<div data-validate data-model="countryId" class="input-unit"><select id="country-id-select"' +
           _vm._ssrAttr("value", _vm.selectedCountryId) +
           ' class="custom-select">' +
           _vm._ssrList(_vm.countryList, function(country) {
@@ -42764,7 +42767,7 @@ var render = function() {
               "</option>"
             )
           }) +
-          "</select> <label>" +
+          '</select> <label for="country-id-select">' +
           _vm._ssrEscape(
             _vm._s(_vm.$translate("Ceres::Template.headerCountry"))
           ) +
@@ -42789,7 +42792,7 @@ var render = function() {
                   },
                   [
                     _vm._ssrNode(
-                      "<select" +
+                      '<select id="state-id-select"' +
                         _vm._ssrAttr("value", _vm.selectedStateId) +
                         ' class="custom-select"><option' +
                         _vm._ssrAttr("selected", _vm.selectedStateId === null) +
@@ -42819,16 +42822,14 @@ var render = function() {
                             "</option>"
                           )
                         }) +
-                        "</select> <label>" +
+                        '</select> <label for="state-id-select">' +
                         _vm._ssrEscape(
-                          "\n                " +
-                            _vm._s(
-                              _vm.transformTranslation(
-                                "Ceres::Template.headerState",
-                                "stateId"
-                              )
-                            ) +
-                            "\n            "
+                          _vm._s(
+                            _vm.transformTranslation(
+                              "Ceres::Template.headerState",
+                              "stateId"
+                            )
+                          )
                         ) +
                         "</label>"
                     )
@@ -43063,7 +43064,7 @@ var render = function() {
                   ' data-testing="repeat-password-register"' +
                   _vm._ssrAttr("value", _vm.passwordRepeat) +
                   "> <label" +
-                  _vm._ssrAttr("for", "new-password-repeat" + _vm._uid) +
+                  _vm._ssrAttr("for", "new-password-repeat-" + _vm._uid) +
                   ">" +
                   _vm._ssrEscape(
                     _vm._s(
@@ -44982,7 +44983,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "custom-select",
-                    attrs: { "data-testing": "order-property-selection" },
+                    attrs: {
+                      id: "order-property-input-select",
+                      "data-testing": "order-property-selection"
+                    },
                     on: {
                       change: [
                         function($event) {
@@ -45039,7 +45043,7 @@ var render = function() {
                   2
                 ),
                 _vm._ssrNode(
-                  ' <label class="d-flex w-100"><span class="text-truncate">' +
+                  ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate">' +
                     _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                     "</span> " +
                     (_vm.surcharge > 0
@@ -46640,7 +46644,12 @@ var render = function() {
                         "</div>",
                         [
                           _vm._ssrNode(
-                            '<select data-testing="variation-select-dropdown" class="custom-select">' +
+                            "<select" +
+                              _vm._ssrAttr(
+                                "id",
+                                "custom-select_" + attribute.name
+                              ) +
+                              ' data-testing="variation-select-dropdown" class="custom-select">' +
                               (_vm.addPleaseSelectOption || !_vm.hasSelection
                                 ? "<option" +
                                   _vm._ssrAttr("value", -1) +
@@ -46744,6 +46753,7 @@ var render = function() {
                                 }
                               ],
                               attrs: {
+                                for: "custom-select_" + attribute.name,
                                 "data-toggle": "tooltip",
                                 "data-placement": "top",
                                 title: attribute.name,
@@ -46914,7 +46924,7 @@ var render = function() {
               " " +
                 (_vm.possibleUnitCombinationIds.length > 1 &&
                 _vm.isContentVisible
-                  ? '<div class="col-12 variation-select"><div class="input-unit"><select data-testing="variation-select-unit" class="custom-select">' +
+                  ? '<div class="col-12 variation-select"><div class="input-unit"><select id="unit-combination-ids-select" data-testing="variation-select-unit" class="custom-select">' +
                     _vm._ssrList(_vm.possibleUnitCombinationIds, function(
                       unitCombinationId
                     ) {
@@ -46947,7 +46957,7 @@ var render = function() {
                         "</option>"
                       )
                     }) +
-                    '</select> <label data-testing="variation-select-unit-label">' +
+                    '</select> <label for="unit-combination-ids-select" data-testing="variation-select-unit-label">' +
                     _vm._ssrEscape(
                       _vm._s(
                         _vm.$translate("Ceres::Template.singleItemContent")
@@ -64478,7 +64488,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "46fa2499"
+  "5313c5bf"
   
 )
 
@@ -64545,7 +64555,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3f8ee8b4"
+  "7f22f964"
   
 )
 
@@ -64612,7 +64622,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a2e73d18"
+  "75efbd8e"
   
 )
 
@@ -64679,7 +64689,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0856af33"
+  "b92b304e"
   
 )
 
@@ -64746,7 +64756,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "58776778"
+  "53a0f96a"
   
 )
 
@@ -64813,7 +64823,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2c79d7b2"
+  "65bfd1c1"
   
 )
 
@@ -64880,7 +64890,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "47285b4c"
+  "6a3c32f4"
   
 )
 
@@ -64947,7 +64957,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "22710afc"
+  "f13abdc8"
   
 )
 
@@ -65014,7 +65024,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6c6a105e"
+  "250599eb"
   
 )
 
@@ -65081,7 +65091,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1c893e6e"
+  "0455fc22"
   
 )
 
@@ -65148,7 +65158,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "100041c9"
+  "6c542822"
   
 )
 
@@ -65214,7 +65224,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "33853d54"
+  "5796da70"
   
 )
 
@@ -65263,7 +65273,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0bec57a6"
+  "f0b56180"
   
 )
 
@@ -65330,7 +65340,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ba9c713"
+  "070fc2b9"
   
 )
 
@@ -65396,7 +65406,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "27c8d7bf"
+  "b8fc614e"
   
 )
 
@@ -65444,7 +65454,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "31ce4fca"
+  "a4f17138"
   
 )
 
@@ -65493,7 +65503,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8a168e18"
+  "319f28cc"
   
 )
 
@@ -65560,7 +65570,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "44e929bc"
+  "7b61c7e2"
   
 )
 
@@ -65627,7 +65637,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "294665da"
+  "792d2dad"
   
 )
 
@@ -65694,7 +65704,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "730d6ada"
+  "3a5dac18"
   
 )
 
@@ -65761,7 +65771,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "73729448"
+  "42437376"
   
 )
 
@@ -65828,7 +65838,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "aa46ee1e"
+  "2bbc238b"
   
 )
 
@@ -65895,7 +65905,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7deb5f02"
+  "33db10b6"
   
 )
 
@@ -65965,7 +65975,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "821bd0d0"
+  "4cc27832"
   
 )
 
@@ -66032,7 +66042,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9974bf0c"
+  "3bf9c4a0"
   
 )
 
@@ -66099,7 +66109,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "54bf968a"
+  "60d937b0"
   
 )
 
@@ -66166,7 +66176,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3fc16ec6"
+  "68d36cc3"
   
 )
 
@@ -66233,7 +66243,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "45bacaed"
+  "0d1e2707"
   
 )
 
@@ -66300,7 +66310,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "75965cb2"
+  "354bc868"
   
 )
 
@@ -66367,7 +66377,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "29f55ab8"
+  "d3a96b44"
   
 )
 
@@ -66434,7 +66444,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "351b2e27"
+  "5fa23266"
   
 )
 
@@ -66501,7 +66511,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b2530ec0"
+  "27b6133a"
   
 )
 
@@ -66568,7 +66578,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4561d302"
+  "0cc52f1c"
   
 )
 
@@ -66635,7 +66645,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "cbf6c682"
+  "81e67836"
   
 )
 
@@ -66702,7 +66712,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "213f1534"
+  "2a731de8"
   
 )
 
@@ -66769,7 +66779,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d722dfe0"
+  "154e2aaa"
   
 )
 
@@ -66836,7 +66846,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "56e88027"
+  "5a35847e"
   
 )
 
@@ -66903,7 +66913,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a0cf4ad6"
+  "2b51522f"
   
 )
 
@@ -66970,7 +66980,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f5c35ac0"
+  "011b103a"
   
 )
 
@@ -67037,7 +67047,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8940d322"
+  "30c96dd6"
   
 )
 
@@ -67104,7 +67114,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7abda75a"
+  "50718ced"
   
 )
 
@@ -67171,7 +67181,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3c9e825f"
+  "40397805"
   
 )
 
@@ -67238,7 +67248,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2f053a9e"
+  "a0365590"
   
 )
 
@@ -67305,7 +67315,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6cec9990"
+  "4966605e"
   
 )
 
@@ -67372,7 +67382,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "194511ee"
+  "3e4d3914"
   
 )
 
@@ -67439,7 +67449,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1a3073ce"
+  "6ee483b3"
   
 )
 
@@ -67506,7 +67516,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5968546c"
+  "54ce5012"
   
 )
 
@@ -67573,7 +67583,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8954bde4"
+  "3f446f98"
   
 )
 
@@ -67640,7 +67650,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5708f3c7"
+  "f976b326"
   
 )
 
@@ -67707,7 +67717,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "446bbcb7"
+  "6151d2d1"
   
 )
 
@@ -67774,7 +67784,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d054f864"
+  "5f38dfe8"
   
 )
 
@@ -67841,7 +67851,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c28f834c"
+  "15d2c1f4"
   
 )
 
@@ -67908,7 +67918,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "15a05ee4"
+  "3aa8860a"
   
 )
 
@@ -67975,7 +67985,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c068be4"
+  "6d1072b4"
   
 )
 
@@ -68042,7 +68052,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5af39a7e"
+  "38b082b8"
   
 )
 
@@ -68109,7 +68119,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a5a37a9c"
+  "8d703850"
   
 )
 
@@ -68176,7 +68186,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "eee8eb02"
+  "165beb19"
   
 )
 
@@ -68243,7 +68253,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "64e6d4bd"
+  "47fd4f52"
   
 )
 
@@ -68310,7 +68320,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "04d5b7ba"
+  "710ba760"
   
 )
 
@@ -68377,7 +68387,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0c503c09"
+  "42c8da2f"
   
 )
 
@@ -68444,7 +68454,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0cc8a66e"
+  "2750ab88"
   
 )
 
@@ -68511,7 +68521,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "11c1a217"
+  "1ddb433d"
   
 )
 
@@ -68578,7 +68588,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6e686cd6"
+  "078e6520"
   
 )
 
@@ -68645,7 +68655,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "991244c6"
+  "baf00e7a"
   
 )
 
@@ -68712,7 +68722,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "58d937e2"
+  "5c742d88"
   
 )
 
@@ -68779,7 +68789,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6ff8bed6"
+  "1781598a"
   
 )
 
@@ -68846,7 +68856,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6615917b"
+  "556709be"
   
 )
 
@@ -68913,7 +68923,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "41cc4877"
+  "463ffdc6"
   
 )
 
@@ -68980,7 +68990,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "310f24f0"
+  "a2486cbc"
   
 )
 
@@ -69047,7 +69057,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "db8ff2e0"
+  "e4c3fb94"
   
 )
 
@@ -69114,7 +69124,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "10e791bf"
+  "3d234465"
   
 )
 
@@ -69181,7 +69191,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "11f8216d"
+  "3e33d413"
   
 )
 
@@ -69248,7 +69258,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0895a661"
+  "7859657b"
   
 )
 
@@ -69315,7 +69325,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "969073fa"
+  "6e8d7029"
   
 )
 
@@ -69382,7 +69392,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2327ef84"
+  "9e0f5fc4"
   
 )
 
@@ -69449,7 +69459,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "28e8e0c6"
+  "061394b7"
   
 )
 
@@ -69516,7 +69526,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3c2c3c04"
+  "13fc33ac"
   
 )
 
@@ -69583,7 +69593,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "51367e1b"
+  "65998896"
   
 )
 
@@ -69650,7 +69660,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0413c3b7"
+  "291beadd"
   
 )
 
@@ -75732,6 +75742,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
@@ -75857,7 +75868,7 @@ var actions = {
         commit = _ref2.commit;
 
     if (!state.isBasketInitiallyLoaded) {
-      jQuery.when(ApiService.get("/rest/io/basket", {}, {
+      jQuery.when(ApiService.get("/rest/io/basket", Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_16__["getUrlParams"])(), {
         cache: false,
         keepOriginalResponse: true
       }), ApiService.get("/rest/io/basket/items", {
@@ -76687,8 +76698,7 @@ var actions = {
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
-              response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendFail");
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(response.error);
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendFail"));
             });
           });
         }, function (response) {

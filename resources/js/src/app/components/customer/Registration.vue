@@ -37,7 +37,7 @@
             <div class="col-sm-6 input-unit-group" v-if="!guestMode">
                 <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="ref">
                     <input type="password" name="password-repeat" autocomplete="new-password" :id="'new-password-repeat-' + _uid" v-model="passwordRepeat" :data-validate-ref="'#new-password-' + _uid" data-testing="repeat-password-register">
-                    <label :for="'new-password-repeat' + _uid">{{ $translate("Ceres::Template.regRepeatPassword") }}*</label>
+                    <label :for="'new-password-repeat-' + _uid">{{ $translate("Ceres::Template.regRepeatPassword") }}*</label>
                 </div>
             </div>
 
