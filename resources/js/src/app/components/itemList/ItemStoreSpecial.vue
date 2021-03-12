@@ -1,6 +1,6 @@
 <template>
-    <div class="special-tags p-2" v-if="label.length || bundleType === 'bundle' || itemType === 'set'">
-        <span v-if="label.length" class="badge" :class="tagClass">
+    <div class="special-tags p-2" v-if="label || bundleType === 'bundle' || itemType === 'set'">
+        <span v-if="label" class="badge" :class="tagClass">
             {{ label }}
         </span>
         <span v-else-if="bundleType === 'bundle'" :class="tagClasses.itemBundle">
