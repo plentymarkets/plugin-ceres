@@ -42,14 +42,16 @@
                     "de": widget.settings.addressRequiredFieldsInvoiceDE.mobile | default([]),
                     "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile | default([])
                 } %}
-                <invoice-address-select
-                    :has-to-validate="{{ Twig.print("services.template.isCurrentTemplate('tpl.checkout') | json_encode") }}"
-                    :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                    :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
-                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
-                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
-                </invoice-address-select>
+                <client-only>
+                    <invoice-address-select
+                            :has-to-validate="{{ Twig.print("services.template.isCurrentTemplate('tpl.checkout') | json_encode") }}"
+                            :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                            :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                            default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
+                            {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                            {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                    </invoice-address-select>
+                </client-only>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBillingAddress"])) }}
         {{ Twig.else() }}
@@ -82,13 +84,15 @@
                     "gb": widget.settings.addressRequiredFieldsShippingGB.mobile | default([])
                 } %}
 
-                <shipping-address-select
-                    :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
-                    :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
-                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
-                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
-                </shipping-address-select>
+                <client-only>
+                    <shipping-address-select
+                            :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
+                            :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
+                            default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
+                            {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                            {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                    </shipping-address-select>
+                </client-only>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingAddress"])) }}
         {{ Twig.else() }}

@@ -29,6 +29,8 @@
 
     <div class="card {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
-        <account-settings :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
+        <client-only>
+            <account-settings :user-data="{{ Twig.print("userObject | json_encode") }}"></account-settings>
+        </client-only>
     </div>
 </div>

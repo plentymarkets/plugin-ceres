@@ -84,6 +84,8 @@ import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent
 
 // EXTERNAL
 import LazyHydrate from "vue-lazy-hydration";
+import ClientOnly from "vue-client-only";
+Vue.component("client-only", ClientOnly);
 
 // CHECKOUT
 import "./app/components/checkout/AcceptGtcCheck";

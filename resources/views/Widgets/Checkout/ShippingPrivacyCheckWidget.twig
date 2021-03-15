@@ -10,14 +10,16 @@
 
 <div class="widget widget-shipping-privacy-check{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <shipping-privacy-hint-check>
-        {% if isPreview %}
-            <div class="widget-placeholder p-0">
-                <div>
-                    <p class="title">{{ Twig.trans("Ceres::Widget.shippingPrivacyCheckLabel") }}</p>
-                    <p class="description">{{ Twig.trans("Ceres::Widget.shippingPrivacyCheckPlaceholderDescription") }}</p>
+    <client-only>
+        <shipping-privacy-hint-check>
+            {% if isPreview %}
+                <div class="widget-placeholder p-0">
+                    <div>
+                        <p class="title">{{ Twig.trans("Ceres::Widget.shippingPrivacyCheckLabel") }}</p>
+                        <p class="description">{{ Twig.trans("Ceres::Widget.shippingPrivacyCheckPlaceholderDescription") }}</p>
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-    </shipping-privacy-hint-check>
+            {% endif %}
+        </shipping-privacy-hint-check>
+    </client-only>
 </div>
