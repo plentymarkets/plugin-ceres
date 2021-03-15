@@ -4,7 +4,7 @@
             <div class="col-12 variation-select" v-for="attribute in attributes">
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
-                    <select class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)" data-testing="variation-select-dropdown">
+                    <select :id="'custom-select_' + attribute.name" class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)" data-testing="variation-select-dropdown">
                         <option :value="-1" v-if="addPleaseSelectOption || !hasSelection">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
                         <option
                                 :value="null" v-if="hasEmptyOption || selectedAttributes[attribute.attributeId] === null"
@@ -22,10 +22,9 @@
                             <template v-else>
                                 {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": value.name }) }}
                             </template>
-
                         </option>
                     </select>
-                    <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name" data-testing="variation-select-dropdown-label">{{ attribute.name }}</label>
+                    <label :for="'custom-select_' + attribute.name" v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name" data-testing="variation-select-dropdown-label">{{ attribute.name }}</label>
                 </div>
                 <!-- /dropdown -->
 
@@ -65,7 +64,7 @@
             <!-- units -->
             <div class="col-12 variation-select" v-if="possibleUnitCombinationIds.length > 1 && isContentVisible">
                 <div class="input-unit">
-                    <select class="custom-select" @change="selectUnit($event.target.value)" data-testing="variation-select-unit">
+                    <select id="unit-combination-ids-select" class="custom-select" @change="selectUnit($event.target.value)" data-testing="variation-select-unit">
                         <option
                                 v-for="unitCombinationId in possibleUnitCombinationIds"
                                 :value="unitCombinationId"
@@ -78,7 +77,7 @@
                             </template>
                         </option>
                     </select>
-                    <label data-testing="variation-select-unit-label">{{ $translate("Ceres::Template.singleItemContent") }}</label>
+                    <label for="unit-combination-ids-select" data-testing="variation-select-unit-label">{{ $translate("Ceres::Template.singleItemContent") }}</label>
                 </div>
             </div>
             <!-- /units -->

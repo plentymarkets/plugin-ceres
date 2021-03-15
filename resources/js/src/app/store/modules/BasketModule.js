@@ -1,5 +1,6 @@
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
+import { getUrlParams } from "../../services/UrlService";
 import { pathnameEquals } from "../../helper/url";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
@@ -138,7 +139,7 @@ const actions =
             {
                 jQuery
                     .when(
-                        ApiService.get("/rest/io/basket", {}, { cache: false, keepOriginalResponse: true }),
+                        ApiService.get("/rest/io/basket", getUrlParams(), { cache: false, keepOriginalResponse: true }),
                         ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false, keepOriginalResponse: true })
                     )
                     .then((basket, basketItems) =>

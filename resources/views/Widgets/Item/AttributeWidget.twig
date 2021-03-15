@@ -17,10 +17,10 @@
     <variation-select :force-content="{{ forceContent | json_encode }}">
         {% if isPreview %}
             <div class="input-unit">
-                <select class="custom-select">
+                <select id="attribute-select" class="custom-select">
                     <option>{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
                 </select>
-                <label>{{ trans("Ceres::Widget.attributeLabel") }}</label>
+                <label for="attribute-select">{{ trans("Ceres::Widget.attributeLabel") }}</label>
             </div>
         {% endif %}
     </variation-select>
