@@ -35,11 +35,13 @@
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.BeforeShippingProfileList"])) }}
     {{ Twig.if("overrideShippingProfiles | trim is empty") }}
         <div class="shipping-method-select">
-            <shipping-profile-select
-                    :payment-container-is-overwritten="{{ Twig.print("isOverwritten | json_encode") }}"
-                {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
-            </shipping-profile-select>
+            <client-only>
+                <shipping-profile-select
+                        :payment-container-is-overwritten="{{ Twig.print("isOverwritten | json_encode") }}"
+                        {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                        {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                </shipping-profile-select>
+            </client-only>
         </div>
     {{ Twig.else() }}
         {{ Twig.print("overrideShippingProfiles") }}

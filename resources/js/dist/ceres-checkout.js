@@ -46941,6 +46941,343 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-client-only/dist/vue-client-only.common.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/vue-client-only/dist/vue-client-only.common.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * vue-client-only v2.0.0
+ * (c) 2019-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+
+var index = {
+  name: 'ClientOnly',
+  functional: true,
+  props: {
+    placeholder: String,
+    placeholderTag: {
+      type: String,
+      default: 'div'
+    }
+  },
+  render: function render(h, ref) {
+    var parent = ref.parent;
+    var slots = ref.slots;
+    var props = ref.props;
+
+    var ref$1 = slots();
+    var defaultSlot = ref$1.default; if ( defaultSlot === void 0 ) defaultSlot = [];
+    var placeholderSlot = ref$1.placeholder;
+
+    if (parent._isMounted) {
+      return defaultSlot
+    }
+
+    parent.$once('hook:mounted', function () {
+      parent.$forceUpdate();
+    });
+
+    if (props.placeholderTag && (props.placeholder || placeholderSlot)) {
+      return h(
+        props.placeholderTag,
+        {
+          class: ['client-only-placeholder']
+        },
+        props.placeholder || placeholderSlot
+      )
+    }
+
+    // Return a placeholder element for each child in the default slot
+    // Or if no children return a single placeholder
+    return defaultSlot.length > 0 ? defaultSlot.map(function () { return h(false); }) : h(false)
+  }
+};
+
+module.exports = index;
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js ***!
+  \*****************************************************************/
+/*! exports provided: default, hydrateNever, hydrateOnInteraction, hydrateWhenIdle, hydrateWhenVisible */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrateNever", function() { return hydrateNever; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrateOnInteraction", function() { return hydrateOnInteraction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrateWhenIdle", function() { return hydrateWhenIdle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrateWhenVisible", function() { return hydrateWhenVisible; });
+var observers = new Map();
+function makeHydrationObserver(options) {
+  if (typeof IntersectionObserver === "undefined") return null;
+  var optionKey = JSON.stringify(options);
+  if (observers.has(optionKey)) return observers.get(optionKey);
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      // Use `intersectionRatio` because of Edge 15's
+      // lack of support for `isIntersecting`.
+      // See: https://github.com/w3c/IntersectionObserver/issues/211
+      var isIntersecting = entry.isIntersecting || entry.intersectionRatio > 0;
+      if (!isIntersecting || !entry.target.hydrate) return;
+      entry.target.hydrate();
+    });
+  }, options);
+  observers.set(optionKey, observer);
+  return observer;
+}
+
+function makeHydrationPromise() {
+  var hydrate = function hydrate() {};
+
+  var hydrationPromise = new Promise(function (resolve) {
+    hydrate = resolve;
+  });
+  return {
+    hydrate: hydrate,
+    hydrationPromise: hydrationPromise
+  };
+}
+
+var isServer = typeof window === "undefined";
+
+function isAsyncComponentFactory(componentOrFactory) {
+  return typeof componentOrFactory === "function";
+}
+
+function resolveComponent(componentOrFactory) {
+  if (isAsyncComponentFactory(componentOrFactory)) {
+    return componentOrFactory().then(function (componentModule) {
+      return componentModule.default;
+    });
+  }
+
+  return componentOrFactory;
+}
+
+function makeNonce(_ref) {
+  var component = _ref.component,
+      hydrationPromise = _ref.hydrationPromise;
+  if (isServer) return component;
+  return function () {
+    return hydrationPromise.then(function () {
+      return resolveComponent(component);
+    });
+  };
+}
+
+function makeHydrationBlocker(component, options) {
+  return Object.assign({
+    mixins: [{
+      beforeCreate: function beforeCreate() {
+        this.cleanupHandlers = [];
+
+        var _makeHydrationPromise = makeHydrationPromise(),
+            hydrate = _makeHydrationPromise.hydrate,
+            hydrationPromise = _makeHydrationPromise.hydrationPromise;
+
+        this.Nonce = makeNonce({
+          component: component,
+          hydrationPromise: hydrationPromise
+        });
+        this.hydrate = hydrate;
+        this.hydrationPromise = hydrationPromise;
+      },
+      beforeDestroy: function beforeDestroy() {
+        this.cleanup();
+      },
+      mounted: function mounted() {
+        var _this = this;
+
+        if (this.$el.nodeType === Node.COMMENT_NODE) {
+          // No SSR rendered content, hydrate immediately.
+          this.hydrate();
+          return;
+        }
+
+        if (this.never) return;
+
+        if (this.whenVisible) {
+          var observerOptions = this.whenVisible !== true ? this.whenVisible : undefined;
+          var observer = makeHydrationObserver(observerOptions); // If Intersection Observer API is not supported, hydrate immediately.
+
+          if (!observer) {
+            this.hydrate();
+            return;
+          }
+
+          this.$el.hydrate = this.hydrate;
+
+          var cleanup = function cleanup() {
+            return observer.unobserve(_this.$el);
+          };
+
+          this.cleanupHandlers.push(cleanup);
+          this.hydrationPromise.then(cleanup);
+          observer.observe(this.$el);
+          return;
+        }
+
+        if (this.whenIdle) {
+          // If `requestIdleCallback()` or `requestAnimationFrame()`
+          // is not supported, hydrate immediately.
+          if (!("requestIdleCallback" in window) || !("requestAnimationFrame" in window)) {
+            this.hydrate();
+            return;
+          } // @ts-ignore
+
+
+          var id = requestIdleCallback(function () {
+            requestAnimationFrame(_this.hydrate);
+          }, {
+            timeout: this.idleTimeout
+          }); // @ts-ignore
+
+          var _cleanup = function _cleanup() {
+            return cancelIdleCallback(id);
+          };
+
+          this.cleanupHandlers.push(_cleanup);
+          this.hydrationPromise.then(_cleanup);
+        }
+
+        if (this.interactionEvents && this.interactionEvents.length) {
+          var eventListenerOptions = {
+            capture: true,
+            once: true,
+            passive: true
+          };
+          this.interactionEvents.forEach(function (eventName) {
+            _this.$el.addEventListener(eventName, _this.hydrate, eventListenerOptions);
+
+            var cleanup = function cleanup() {
+              _this.$el.removeEventListener(eventName, _this.hydrate, eventListenerOptions);
+            };
+
+            _this.cleanupHandlers.push(cleanup);
+          });
+        }
+      },
+      methods: {
+        cleanup: function cleanup() {
+          this.cleanupHandlers.forEach(function (handler) {
+            return handler();
+          });
+        }
+      },
+      render: function render(h) {
+        return h(this.Nonce, {
+          attrs: this.$attrs,
+          on: this.$listeners,
+          scopedSlots: this.$scopedSlots
+        }, this.$slots.default);
+      }
+    }]
+  }, options);
+}
+
+function hydrateWhenIdle(componentOrFactory) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$timeout = _ref.timeout,
+      timeout = _ref$timeout === void 0 ? 2000 : _ref$timeout;
+
+  return makeHydrationBlocker(componentOrFactory, {
+    beforeCreate: function beforeCreate() {
+      this.whenIdle = true;
+      this.idleTimeout = timeout;
+    }
+  });
+}
+function hydrateWhenVisible(componentOrFactory) {
+  var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref2$observerOptions = _ref2.observerOptions,
+      observerOptions = _ref2$observerOptions === void 0 ? undefined : _ref2$observerOptions;
+
+  return makeHydrationBlocker(componentOrFactory, {
+    beforeCreate: function beforeCreate() {
+      this.whenVisible = observerOptions || true;
+    }
+  });
+}
+function hydrateNever(componentOrFactory) {
+  return makeHydrationBlocker(componentOrFactory, {
+    beforeCreate: function beforeCreate() {
+      this.never = true;
+    }
+  });
+}
+function hydrateOnInteraction(componentOrFactory) {
+  var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref3$event = _ref3.event,
+      event = _ref3$event === void 0 ? "focus" : _ref3$event;
+
+  var events = Array.isArray(event) ? event : [event];
+  return makeHydrationBlocker(componentOrFactory, {
+    beforeCreate: function beforeCreate() {
+      this.interactionEvents = events;
+    }
+  });
+}
+var Placeholder = {
+  render: function render() {
+    return this.$slots.default;
+  }
+};
+var LazyHydrate = makeHydrationBlocker(Placeholder, {
+  props: {
+    idleTimeout: {
+      default: 2000,
+      type: Number
+    },
+    never: {
+      type: Boolean
+    },
+    onInteraction: {
+      type: [Array, Boolean, String]
+    },
+    triggerHydration: {
+      default: false,
+      type: Boolean
+    },
+    whenIdle: {
+      type: Boolean
+    },
+    whenVisible: {
+      type: [Boolean, Object]
+    }
+  },
+  computed: {
+    interactionEvents: function interactionEvents() {
+      if (!this.onInteraction) return [];
+      if (this.onInteraction === true) return ["focus"];
+      return Array.isArray(this.onInteraction) ? this.onInteraction : [this.onInteraction];
+    }
+  },
+  watch: {
+    triggerHydration: {
+      immediate: true,
+      handler: function handler(isTriggered) {
+        if (isTriggered) this.hydrate();
+      }
+    }
+  }
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (LazyHydrate);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942&":
 /*!****************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/AddItemToBasketOverlay.vue?vue&type=template&id=71cf7942& ***!
@@ -97643,50 +97980,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_components_item_SetQuantityInput_vue__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./app/components/item/SetQuantityInput.vue */ "./resources/js/src/app/components/item/SetQuantityInput.vue");
 /* harmony import */ var _app_components_item_SingleItem_vue__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./app/components/item/SingleItem.vue */ "./resources/js/src/app/components/item/SingleItem.vue");
 /* harmony import */ var _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./app/components/item/SingleItemSetComponent.vue */ "./resources/js/src/app/components/item/SingleItemSetComponent.vue");
-/* harmony import */ var _app_directives_basket_basketItemQuantity__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./app/directives/basket/basketItemQuantity */ "./resources/js/src/app/directives/basket/basketItemQuantity.js");
-/* harmony import */ var _app_directives_basket_basketItemSum__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./app/directives/basket/basketItemSum */ "./resources/js/src/app/directives/basket/basketItemSum.js");
-/* harmony import */ var _app_directives_basket_toggleBasketPreview__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./app/directives/basket/toggleBasketPreview */ "./resources/js/src/app/directives/basket/toggleBasketPreview.js");
-/* harmony import */ var _app_directives_category_openFilterToolbar__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./app/directives/category/openFilterToolbar */ "./resources/js/src/app/directives/category/openFilterToolbar.js");
-/* harmony import */ var _app_directives_common_truncateTooltip__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./app/directives/common/truncateTooltip */ "./resources/js/src/app/directives/common/truncateTooltip.js");
-/* harmony import */ var _app_directives_customer_logout__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./app/directives/customer/logout */ "./resources/js/src/app/directives/customer/logout.js");
-/* harmony import */ var _app_directives_helper_testingAttr__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./app/directives/helper/testingAttr */ "./resources/js/src/app/directives/helper/testingAttr.js");
-/* harmony import */ var _app_directives_helper_populateStore__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./app/directives/helper/populateStore */ "./resources/js/src/app/directives/helper/populateStore.js");
-/* harmony import */ var _app_directives_helper_validate__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./app/directives/helper/validate */ "./resources/js/src/app/directives/helper/validate.js");
-/* harmony import */ var _app_directives_helper_waitingAnimation__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimation */ "./resources/js/src/app/directives/helper/waitingAnimation.js");
-/* harmony import */ var _app_directives_helper_waitingAnimationInfinite__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimationInfinite */ "./resources/js/src/app/directives/helper/waitingAnimationInfinite.js");
-/* harmony import */ var _app_directives_navigation_navigationTouchHandler__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./app/directives/navigation/navigationTouchHandler */ "./resources/js/src/app/directives/navigation/navigationTouchHandler.js");
-/* harmony import */ var _app_directives_navigation_openMobileNavigation__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./app/directives/navigation/openMobileNavigation */ "./resources/js/src/app/directives/navigation/openMobileNavigation.js");
-/* harmony import */ var _app_directives_pageDesign_scrollToTop__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./app/directives/pageDesign/scrollToTop */ "./resources/js/src/app/directives/pageDesign/scrollToTop.js");
-/* harmony import */ var _app_directives_pageDesign_stickInParent__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./app/directives/pageDesign/stickInParent */ "./resources/js/src/app/directives/pageDesign/stickInParent.js");
-/* harmony import */ var _app_directives_navigation_sidenavigationChildrenLoader__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./app/directives/navigation/sidenavigationChildrenLoader */ "./resources/js/src/app/directives/navigation/sidenavigationChildrenLoader.js");
-/* harmony import */ var _app_directives_pageDesign_tooltip__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./app/directives/pageDesign/tooltip */ "./resources/js/src/app/directives/pageDesign/tooltip.js");
-/* harmony import */ var _app_filters_ageRestriction_filter__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./app/filters/ageRestriction.filter */ "./resources/js/src/app/filters/ageRestriction.filter.js");
-/* harmony import */ var _app_filters_arrayFirst_filter__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./app/filters/arrayFirst.filter */ "./resources/js/src/app/filters/arrayFirst.filter.js");
-/* harmony import */ var _app_filters_attachText_filter__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./app/filters/attachText.filter */ "./resources/js/src/app/filters/attachText.filter.js");
-/* harmony import */ var _app_filters_currency_filter__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./app/filters/currency.filter */ "./resources/js/src/app/filters/currency.filter.js");
-/* harmony import */ var _app_filters_date_filter__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! ./app/filters/date.filter */ "./resources/js/src/app/filters/date.filter.js");
-/* harmony import */ var _app_filters_fileName_filter__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! ./app/filters/fileName.filter */ "./resources/js/src/app/filters/fileName.filter.js");
-/* harmony import */ var _app_filters_fileUploadPath_filter__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! ./app/filters/fileUploadPath.filter */ "./resources/js/src/app/filters/fileUploadPath.filter.js");
-/* harmony import */ var _app_filters_graduatedPrice_filter__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! ./app/filters/graduatedPrice.filter */ "./resources/js/src/app/filters/graduatedPrice.filter.js");
-/* harmony import */ var _app_filters_hasItemDefaultPrice_filter__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! ./app/filters/hasItemDefaultPrice.filter */ "./resources/js/src/app/filters/hasItemDefaultPrice.filter.js");
-/* harmony import */ var _app_filters_inputUnit_filter__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! ./app/filters/inputUnit.filter */ "./resources/js/src/app/filters/inputUnit.filter.js");
-/* harmony import */ var _app_filters_itemBundleName_filter__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! ./app/filters/itemBundleName.filter */ "./resources/js/src/app/filters/itemBundleName.filter.js");
-/* harmony import */ var _app_filters_itemCrossPrice_filter__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! ./app/filters/itemCrossPrice.filter */ "./resources/js/src/app/filters/itemCrossPrice.filter.js");
-/* harmony import */ var _app_filters_itemImage_filter__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! ./app/filters/itemImage.filter */ "./resources/js/src/app/filters/itemImage.filter.js");
-/* harmony import */ var _app_filters_itemImageAlternativeText_filter__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! ./app/filters/itemImageAlternativeText.filter */ "./resources/js/src/app/filters/itemImageAlternativeText.filter.js");
-/* harmony import */ var _app_filters_itemImages_filter__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! ./app/filters/itemImages.filter */ "./resources/js/src/app/filters/itemImages.filter.js");
-/* harmony import */ var _app_filters_itemName_filter__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! ./app/filters/itemName.filter */ "./resources/js/src/app/filters/itemName.filter.js");
-/* harmony import */ var _app_filters_itemPrice_filter__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! ./app/filters/itemPrice.filter */ "./resources/js/src/app/filters/itemPrice.filter.js");
-/* harmony import */ var _app_filters_itemUrl_filter__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! ./app/filters/itemUrl.filter */ "./resources/js/src/app/filters/itemUrl.filter.js");
-/* harmony import */ var _app_filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! ./app/filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
-/* harmony import */ var _app_filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! ./app/filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
-/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
-/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
-/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
-/* harmony import */ var _app_mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! ./app/mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
-/* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
-/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
-/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! vue-lazy-hydration */ "./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js");
+/* harmony import */ var vue_client_only__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! vue-client-only */ "./node_modules/vue-client-only/dist/vue-client-only.common.js");
+/* harmony import */ var vue_client_only__WEBPACK_IMPORTED_MODULE_77___default = /*#__PURE__*/__webpack_require__.n(vue_client_only__WEBPACK_IMPORTED_MODULE_77__);
+/* harmony import */ var _app_directives_basket_basketItemQuantity__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./app/directives/basket/basketItemQuantity */ "./resources/js/src/app/directives/basket/basketItemQuantity.js");
+/* harmony import */ var _app_directives_basket_basketItemSum__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./app/directives/basket/basketItemSum */ "./resources/js/src/app/directives/basket/basketItemSum.js");
+/* harmony import */ var _app_directives_basket_toggleBasketPreview__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./app/directives/basket/toggleBasketPreview */ "./resources/js/src/app/directives/basket/toggleBasketPreview.js");
+/* harmony import */ var _app_directives_category_openFilterToolbar__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./app/directives/category/openFilterToolbar */ "./resources/js/src/app/directives/category/openFilterToolbar.js");
+/* harmony import */ var _app_directives_common_truncateTooltip__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./app/directives/common/truncateTooltip */ "./resources/js/src/app/directives/common/truncateTooltip.js");
+/* harmony import */ var _app_directives_customer_logout__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./app/directives/customer/logout */ "./resources/js/src/app/directives/customer/logout.js");
+/* harmony import */ var _app_directives_helper_testingAttr__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./app/directives/helper/testingAttr */ "./resources/js/src/app/directives/helper/testingAttr.js");
+/* harmony import */ var _app_directives_helper_populateStore__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./app/directives/helper/populateStore */ "./resources/js/src/app/directives/helper/populateStore.js");
+/* harmony import */ var _app_directives_helper_validate__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./app/directives/helper/validate */ "./resources/js/src/app/directives/helper/validate.js");
+/* harmony import */ var _app_directives_helper_waitingAnimation__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimation */ "./resources/js/src/app/directives/helper/waitingAnimation.js");
+/* harmony import */ var _app_directives_helper_waitingAnimationInfinite__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./app/directives/helper/waitingAnimationInfinite */ "./resources/js/src/app/directives/helper/waitingAnimationInfinite.js");
+/* harmony import */ var _app_directives_navigation_navigationTouchHandler__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./app/directives/navigation/navigationTouchHandler */ "./resources/js/src/app/directives/navigation/navigationTouchHandler.js");
+/* harmony import */ var _app_directives_navigation_openMobileNavigation__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./app/directives/navigation/openMobileNavigation */ "./resources/js/src/app/directives/navigation/openMobileNavigation.js");
+/* harmony import */ var _app_directives_pageDesign_scrollToTop__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./app/directives/pageDesign/scrollToTop */ "./resources/js/src/app/directives/pageDesign/scrollToTop.js");
+/* harmony import */ var _app_directives_pageDesign_stickInParent__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./app/directives/pageDesign/stickInParent */ "./resources/js/src/app/directives/pageDesign/stickInParent.js");
+/* harmony import */ var _app_directives_navigation_sidenavigationChildrenLoader__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./app/directives/navigation/sidenavigationChildrenLoader */ "./resources/js/src/app/directives/navigation/sidenavigationChildrenLoader.js");
+/* harmony import */ var _app_directives_pageDesign_tooltip__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./app/directives/pageDesign/tooltip */ "./resources/js/src/app/directives/pageDesign/tooltip.js");
+/* harmony import */ var _app_filters_ageRestriction_filter__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./app/filters/ageRestriction.filter */ "./resources/js/src/app/filters/ageRestriction.filter.js");
+/* harmony import */ var _app_filters_arrayFirst_filter__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./app/filters/arrayFirst.filter */ "./resources/js/src/app/filters/arrayFirst.filter.js");
+/* harmony import */ var _app_filters_attachText_filter__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! ./app/filters/attachText.filter */ "./resources/js/src/app/filters/attachText.filter.js");
+/* harmony import */ var _app_filters_currency_filter__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! ./app/filters/currency.filter */ "./resources/js/src/app/filters/currency.filter.js");
+/* harmony import */ var _app_filters_date_filter__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! ./app/filters/date.filter */ "./resources/js/src/app/filters/date.filter.js");
+/* harmony import */ var _app_filters_fileName_filter__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! ./app/filters/fileName.filter */ "./resources/js/src/app/filters/fileName.filter.js");
+/* harmony import */ var _app_filters_fileUploadPath_filter__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! ./app/filters/fileUploadPath.filter */ "./resources/js/src/app/filters/fileUploadPath.filter.js");
+/* harmony import */ var _app_filters_graduatedPrice_filter__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! ./app/filters/graduatedPrice.filter */ "./resources/js/src/app/filters/graduatedPrice.filter.js");
+/* harmony import */ var _app_filters_hasItemDefaultPrice_filter__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! ./app/filters/hasItemDefaultPrice.filter */ "./resources/js/src/app/filters/hasItemDefaultPrice.filter.js");
+/* harmony import */ var _app_filters_inputUnit_filter__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! ./app/filters/inputUnit.filter */ "./resources/js/src/app/filters/inputUnit.filter.js");
+/* harmony import */ var _app_filters_itemBundleName_filter__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! ./app/filters/itemBundleName.filter */ "./resources/js/src/app/filters/itemBundleName.filter.js");
+/* harmony import */ var _app_filters_itemCrossPrice_filter__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! ./app/filters/itemCrossPrice.filter */ "./resources/js/src/app/filters/itemCrossPrice.filter.js");
+/* harmony import */ var _app_filters_itemImage_filter__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! ./app/filters/itemImage.filter */ "./resources/js/src/app/filters/itemImage.filter.js");
+/* harmony import */ var _app_filters_itemImageAlternativeText_filter__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! ./app/filters/itemImageAlternativeText.filter */ "./resources/js/src/app/filters/itemImageAlternativeText.filter.js");
+/* harmony import */ var _app_filters_itemImages_filter__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! ./app/filters/itemImages.filter */ "./resources/js/src/app/filters/itemImages.filter.js");
+/* harmony import */ var _app_filters_itemName_filter__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! ./app/filters/itemName.filter */ "./resources/js/src/app/filters/itemName.filter.js");
+/* harmony import */ var _app_filters_itemPrice_filter__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! ./app/filters/itemPrice.filter */ "./resources/js/src/app/filters/itemPrice.filter.js");
+/* harmony import */ var _app_filters_itemUrl_filter__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! ./app/filters/itemUrl.filter */ "./resources/js/src/app/filters/itemUrl.filter.js");
+/* harmony import */ var _app_filters_numberFormat_filter__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! ./app/filters/numberFormat.filter */ "./resources/js/src/app/filters/numberFormat.filter.js");
+/* harmony import */ var _app_filters_propertySurcharge_filter__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! ./app/filters/propertySurcharge.filter */ "./resources/js/src/app/filters/propertySurcharge.filter.js");
+/* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
+/* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
+/* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
+/* harmony import */ var _app_mixins_getJsonData_mixin__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(/*! ./app/mixins/getJsonData.mixin */ "./resources/js/src/app/mixins/getJsonData.mixin.js");
+/* harmony import */ var _app_mixins_template_mixin__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! ./app/mixins/template.mixin */ "./resources/js/src/app/mixins/template.mixin.js");
+/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_120__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
+/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_121__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_122__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
 
 
 
@@ -97843,7 +98184,11 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("set-quantity-input", _app_
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-item", _app_components_item_SingleItem_vue__WEBPACK_IMPORTED_MODULE_74__["default"]);
 
-vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-item-set-component", _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_75__["default"]); // =========================
+vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-item-set-component", _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_75__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("lazy-hydrate", vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_76__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("client-only", vue_client_only__WEBPACK_IMPORTED_MODULE_77___default.a); // =========================
 // DIRECTIVES
 // =========================
 
@@ -97900,9 +98245,14 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-item-set-component"
 
 
 
-window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_119__["default"].translate;
-vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_119__["default"].translate;
+
+window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_121__["default"].translate;
+vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_121__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$ceres = App;
+var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_122__["createStore"])();
+Object(_app_store__WEBPACK_IMPORTED_MODULE_122__["initServerStore"])(store);
+Object(_app_store__WEBPACK_IMPORTED_MODULE_122__["initClientStore"])(store);
+Object(_app_store__WEBPACK_IMPORTED_MODULE_122__["initClientListeners"])(store);
 
 /***/ }),
 

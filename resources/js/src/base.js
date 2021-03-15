@@ -172,6 +172,10 @@ Vue.component("single-item", SingleItem);
 import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
 Vue.component("single-item-set-component", SingleItemSetComponent);
 
+import LazyHydrate from "vue-lazy-hydration";
+Vue.component("lazy-hydrate", LazyHydrate);
+import ClientOnly from "vue-client-only";
+Vue.component("client-only", ClientOnly);
 
 // =========================
 // DIRECTIVES
@@ -241,7 +245,15 @@ import "./app/mixins/template.mixin";
 import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
+import { createStore, initClientListeners, initClientStore, initServerStore } from "./app/store";
+
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
 Vue.prototype.$ceres = App;
+
+const store = createStore();
+
+initServerStore(store);
+initClientStore(store);
+initClientListeners(store);

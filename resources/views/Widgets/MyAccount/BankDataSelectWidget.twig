@@ -26,5 +26,7 @@
         {% endif %}
     </div>
 
-    <bank-data-select :user-bank-data="{{ Twig.print("userBankData | json_encode") }}" contact-id="{{ Twig.print("frontend.Account.AccountContactId | json_encode") }}"></bank-data-select>
+    <client-only>
+        <bank-data-select :user-bank-data="{{ Twig.print("userBankData | json_encode") }}" contact-id="{{ Twig.print("frontend.Account.AccountContactId | json_encode") }}"></bank-data-select>
+    </client-only>
 </div>

@@ -84,40 +84,47 @@ import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent
 
 // EXTERNAL
 import LazyHydrate from "vue-lazy-hydration";
+import ClientOnly from "vue-client-only";
+Vue.component("client-only", ClientOnly);
 
 // CHECKOUT
-// import "./app/components/checkout/AcceptGtcCheck";
-// import "./app/components/checkout/Checkout";
-// import "./app/components/checkout/ContactWishInput";
-// import "./app/components/checkout/CustomerSignInput";
-// import "./app/components/checkout/PaymentProviderSelect";
-// import "./app/components/checkout/PlaceOrder";
-// import "./app/components/checkout/ShippingPrivacyHintCheck";
-// import "./app/components/checkout/ShippingProfileSelect";
-// import "./app/components/checkout/SubscribeNewsletterCheck";
+import "./app/components/checkout/AcceptGtcCheck";
+import "./app/components/checkout/Checkout";
+import "./app/components/checkout/ContactWishInput";
+import "./app/components/checkout/CustomerSignInput";
+import "./app/components/checkout/PaymentProviderSelect";
+import "./app/components/checkout/PlaceOrder";
+import "./app/components/checkout/ShippingPrivacyHintCheck";
+import "./app/components/checkout/ShippingProfileSelect";
+import "./app/components/checkout/SubscribeNewsletterCheck";
 
-// import "./app/components/customer/AddressSelect/AddressHeader";
-// import "./app/components/customer/AddressSelect/InvoiceAddressSelect";
-// import "./app/components/customer/AddressSelect/ShippingAddressSelect";
+import "./app/components/customer/AddressSelect/AddressHeader";
+import "./app/components/customer/AddressSelect/InvoiceAddressSelect";
+import "./app/components/customer/AddressSelect/ShippingAddressSelect";
 
-// import "./app/components/myAccount/AccountSettings";
-// import "./app/components/myAccount/BankDataSelect";
-// import "./app/components/myAccount/ChangePaymentMethod";
-// import "./app/components/myAccount/MyAccount";
-// import "./app/components/myAccount/OrderDocuments";
+import "./app/components/myAccount/AccountSettings";
+import "./app/components/myAccount/BankDataSelect";
+import "./app/components/myAccount/ChangePaymentMethod";
+import "./app/components/myAccount/MyAccount";
+import "./app/components/myAccount/OrderDocuments";
 
 // // legacy non-shopbuilder components
-// import "./app/components/myAccount/History";
+import "./app/components/myAccount/History";
 
 // // new shopbuilder-only component
-// import EditCouponOverlay from "./app/components/myAccount/EditCouponOverlay.vue";
-// import "./app/components/myAccount/OrderHistoryList";
-// import "./app/components/myAccount/OrderReturnHistoryList";
+import "./app/components/myAccount/OrderHistoryList";
+import "./app/components/myAccount/OrderReturnHistoryList";
 
 // =========================
 // SERVICES
 // =========================
 import TranslationService from "./app/services/TranslationService";
+
+// =========================
+// MIXINS
+// =========================
+import "./app/mixins/template.mixin";
+import "./app/mixins/getJsonData.mixin";
 
 // =========================
 // DIRECTIVES
@@ -230,8 +237,8 @@ export function createApp(options)
     Vue.component("item-price", () => import("./app/components/item/ItemPrice.vue"));
     Vue.component("set-price", () => import("./app/components/item/SetPrice.vue"));
     Vue.component("order-property-list", () => import("./app/components/item/OrderPropertyList.vue"));
-    Vue.component("variation-select", () => import("./app/components/item//VariationSelect.vue"));
-    Vue.component("item-availability", () => import("./app/components/item//ItemAvailability.vue"));
+    Vue.component("variation-select", () => import("./app/components/item/VariationSelect.vue"));
+    Vue.component("item-availability", () => import("./app/components/item/ItemAvailability.vue"));
     Vue.component("single-item-bundle", () => import("./app/components/item/SingleItemBundle.vue"));
     Vue.component("single-add-to-basket", () => import("./app/components/item/SingleAddToBasket.vue"));
     Vue.component("set-quantity-input", () => import("./app/components/item/SetQuantityInput.vue"));
@@ -242,7 +249,7 @@ export function createApp(options)
     // EXTERNAL
     Vue.component("lazy-hydrate", LazyHydrate);
     // CHECKOUT
-    // Vue.component("edit-coupon-overlay", EditCouponOverlay);
+    Vue.component("edit-coupon-overlay", () => import("./app/components/myAccount/EditCouponOverlay.vue"));
 
     // window.ceresTranslate = TranslationService.translate;
 
