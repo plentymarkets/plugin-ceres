@@ -1183,7 +1183,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "custom-select",
-                    attrs: { "data-testing": "order-property-selection" },
+                    attrs: {
+                      id: "order-property-input-select",
+                      "data-testing": "order-property-selection"
+                    },
                     on: {
                       change: [
                         function($event) {
@@ -1240,21 +1243,28 @@ var render = function() {
                   2
                 ),
                 _vm._v(" "),
-                _c("label", { staticClass: "d-flex w-100" }, [
-                  _c("span", { staticClass: "text-truncate" }, [
-                    _vm._v(_vm._s(_vm.property.names.name))
-                  ]),
-                  _vm._v(" "),
-                  _vm.surcharge > 0
-                    ? _c("strong", { staticClass: "ml-1" }, [
-                        _vm._v(
-                          "(+ " +
-                            _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                            ") *"
-                        )
-                      ])
-                    : _vm._e()
-                ])
+                _c(
+                  "label",
+                  {
+                    staticClass: "d-flex w-100",
+                    attrs: { for: "order-property-input-select" }
+                  },
+                  [
+                    _c("span", { staticClass: "text-truncate" }, [
+                      _vm._v(_vm._s(_vm.property.names.name))
+                    ]),
+                    _vm._v(" "),
+                    _vm.surcharge > 0
+                      ? _c("strong", { staticClass: "ml-1" }, [
+                          _vm._v(
+                            "(+ " +
+                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                              ") *"
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                )
               ]
             ),
             _vm._v(" "),

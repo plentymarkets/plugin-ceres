@@ -195,15 +195,13 @@ class GlobalContext implements ContextInterface
 
         $this->homepageURL = $shopUrls->home;
         $this->metaLang = 'de';
-        if($this->lang == 'en')
-        {
+        if ($this->lang == 'en') {
             $this->metaLang = $this->lang;
         }
 
         $this->forceNoIndex = $templateService->isNoIndexForced();
 
-        if (!is_null($categoryService->getCurrentCategory()))
-        {
+        if (!is_null($categoryService->getCurrentCategory())) {
             $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
         }
 
@@ -228,6 +226,11 @@ class GlobalContext implements ContextInterface
 
         $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
 
+        // Always use whole scss for shopBuilder
+        if ($this->isShopBuilder) {
+            $this->assetName = "ceres-checkout";
+        }
+
         $this->isSafeMode = $app->isTemplateSafeMode();
 
         $this->bodyClasses = [];
@@ -235,8 +238,7 @@ class GlobalContext implements ContextInterface
         $templateClass = str_replace('.', '-', $templateClass);
 
         /* page-item is a bootstrap class */
-        if($templateClass === "page-item")
-        {
+        if ($templateClass === "page-item") {
             $templateClass = "page-singleitem";
         }
 
@@ -253,8 +255,7 @@ class GlobalContext implements ContextInterface
      */
     protected function getParam($key, $defaultValue = null)
     {
-        if(is_null($this->params[$key]))
-        {
+        if (is_null($this->params[$key])) {
             return $defaultValue;
         }
 

@@ -419,9 +419,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -460,11 +460,11 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -546,9 +546,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -573,11 +573,11 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -612,9 +612,9 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -650,11 +650,11 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -724,9 +724,9 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketTotalSum")
                           ) +
-                          " (" +
+                          " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          ")\n                "
+                          "\n                "
                       )
                     ]
                   ),
@@ -833,11 +833,11 @@ var render = function() {
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketTotalSum")
                               ) +
-                              " (" +
+                              " " +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketGross")
                               ) +
-                              ")\n                    "
+                              "\n                    "
                           )
                         ]
                       ),

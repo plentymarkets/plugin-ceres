@@ -107,36 +107,45 @@ trait ItemListContext
             if ($externalSearch->hasResults()) {
                 $variationIds = $externalSearch->getResults();
 
-                $externalSearchFactory = VariationList::getSearchFactory(
-                    [
-                        'variationIds' => $variationIds,
-                        'excludeFromCache' => $scope === SearchOptions::SCOPE_SEARCH
-                    ]
-                );
-                $searchResults = $itemSearchService->getResults($externalSearchFactory);
-                if (isset($searchResults['documents']) && count(
-                        $searchResults['documents']
-                    )) {
+                // only search when external search returns an result
+                if (count($variationIds)) {
+                    $externalSearchFactory = VariationList::getSearchFactory(
+                        [
+                            'variationIds' => $variationIds,
+                            'excludeFromCache' => $scope === SearchOptions::SCOPE_SEARCH
+                        ]
+                    );
+                    $searchResults = $itemSearchService->getResults($externalSearchFactory);
+                    if (isset($searchResults['documents']) && count(
+                            $searchResults['documents']
+                        )) {
+                        foreach ($variationIds as $variationId) {
+                            $variation = array_filter(
+                                $searchResults['documents'],
+                                function ($document) use ($variationId) {
+                                    return $document['id'] == $variationId;
+                                }
+                            );
 
-                    foreach ($variationIds as $variationId) {
-                        $variation = array_filter($searchResults['documents'], function($document) use ($variationId) {
-                            return $document['id'] == $variationId;
-                        });
-
-                        if(count($variation) == 1) {
-                            $this->itemList[] = array_pop($variation);
+                            if (count($variation) == 1) {
+                                $this->itemList[] = array_pop($variation);
+                            }
                         }
                     }
-                }
-                if($options['itemsPerPage'] == 0) {
-                    $this->pageMax = 1;
+                    if ($options['itemsPerPage'] == 0) {
+                        $this->pageMax = 1;
+                    } else {
+                        $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                    }
+                    $this->itemCountPage = count($variationIds);
+                    $this->itemCountTotal = $externalSearch->getCountTotal();
+                    $this->facets = [];
                 } else {
-                    $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                    $this->pageMax = 1;
+                    $this->itemCountPage = 0;
+                    $this->itemCountTotal = 0;
+                    $this->facets = [];
                 }
-                $this->itemCountPage  = count($variationIds);
-                $this->itemCountTotal = $externalSearch->getCountTotal();
-                $this->facets         = [];
-
                 return;
             }
         }

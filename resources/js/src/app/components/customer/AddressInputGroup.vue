@@ -8,7 +8,7 @@
                         <div
                             class="input-unit"
                             v-validate="isInRequiredFields('de', 'delivery_address.salutation')">
-                            <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
+                            <salutation-select :id="'txtSalutation' + _uid" :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                             <label :for="'txtSalutation' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressSalutation", "de", "delivery_address.salutation") }}
                             </label>
@@ -115,11 +115,11 @@
                     <!-- Packstation, Postfiliale -->
                     <div class="col-12 col-sm-8">
                         <div class="input-unit" data-validate="" data-model="address1">
-                            <select class="custom-select" :value="value.address1" @change="emitInputEvent('address1', $event.target.value)">
+                            <select :id="'address1' + _uid" class="custom-select" :value="value.address1" @change="emitInputEvent('address1', $event.target.value)">
                                 <option v-if="isParcelBoxAvailable || isMyAccount" value="PACKSTATION" :selected="isPickupStation">{{ $translate("Ceres::Template.addressPackingStation") }}</option>
                                 <option v-if="isPostOfficeAvailable || isMyAccount" value="POSTFILIALE" :selected="isPostOffice">{{ $translate("Ceres::Template.addressPostOffice") }}</option>
                             </select>
-                            <label>{{ $translate("Ceres::Template.addressPickupLocation") }}</label>
+                            <label for="'address1' + _uid">{{ $translate("Ceres::Template.addressPickupLocation") }}</label>
                         </div>
                     </div>
 
@@ -184,7 +184,7 @@
                         <div
                             class="input-unit"
                             v-validate="isInRequiredFields('de', 'billing_address.salutation')">
-                            <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" :default-salutation="defaultSalutation" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
+                            <salutation-select :id="'txtSalutation' + _uid" :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" :default-salutation="defaultSalutation" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                             <label :for="'txtSalutation' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressSalutation", "de", "billing_address.salutation") }}
                             </label>
@@ -368,7 +368,7 @@
                         <div
                             class="input-unit"
                             v-validate="isInRequiredFields('gb', 'billing_address.salutation')">
-                            <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
+                            <salutation-select :id="'txtSalutation' + _uid" :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                             <label :for="'txtSalutation' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressSalutation", "gb", "billing_address.salutation") }}
                             </label>
@@ -561,7 +561,7 @@
                 <div class="row">
                     <div v-if="isInOptionalFields('de', 'delivery_address.salutation')" class="col-12 col-sm-4">
                         <div class="input-unit" v-validate="isInRequiredFields('de', 'delivery_address.salutation')">
-                            <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
+                            <salutation-select :id="'txtSalutation' + _uid" :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                             <label :for="'txtSalutation' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressSalutation", "de", "delivery_address.salutation") }}
                             </label>
@@ -743,7 +743,7 @@
                 <div class="row">
                     <div v-if="isInOptionalFields('gb', 'delivery_address.salutation')" class="col-12 col-sm-4">
                         <div class="input-unit" v-validate="isInRequiredFields('gb', 'delivery_address.salutation')">
-                            <salutation-select :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
+                            <salutation-select :id="'txtSalutation' + _uid" :address-type="addressType" :address-data="value" :enabled-address-fields="optionalAddressFields" @input="emitInputEvent($event.field, $event.value)"></salutation-select>
                             <label :for="'txtSalutation' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressSalutation", "gb", "delivery_address.salutation") }}
                             </label>
