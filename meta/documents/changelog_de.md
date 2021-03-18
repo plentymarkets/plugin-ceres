@@ -1,5 +1,35 @@
 # Release Notes für Ceres
 
+## v5.0.24 (2021-03-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.23...5.0.24" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt 
+
+- In Widgets für die Suchergebnisse ist es jetzt möglich, die Überschrift auszublenden.
+
+### Geändert
+
+- Bei der Ausgabe der Übersetzungen für "Brutto" `(Ceres::Template.basketGross)` und "Netto" `(Ceres::Template.basketNet)` in den Summen wurden Klammern angezeigt, die sich nicht entfernen ließen. Die Klammern wurden in die Übersetzung überführt und können zukünftig entfernt werden.
+- Im ShopBuilder wird jetzt aus Kompatibilitätsgründen unabhängig von der Route die `ceres-checkout.scss` geladen.
+
+### Behoben
+
+- Die Einstellungen im Navigations-Widget für Darstellungstyp "MegaMenu" hatten fälschlicherweise einen Einfluss auf den Darstellungstyp "Normal". Dies wurde behoben.
+- In der Vorlage für Footer konnte für den ersten Eintrag des hinterlegten Listen-Widgets keine URL eingegeben werden. Dies wurde behoben.
+- Das Overlay zum Ändern des Passworts wird beim Aufruf des Passwort-Vergessen-Links aus E-Mails wieder direkt geöffnet.
+- Wurde das "Rechtliche Texte"-Widget als letztes Element im Footer platziert, wurde eine zweite Scrollbar angezeigt. Dies wurde behoben.
+- Die klickbare Fläche von Select-Boxen wurde vergrößert. Diese kann man nun über das Label öffnen. Des Weiteren wurden fehlende for-Attribute für diese hinzugefügt.
+- Die Route auf der Seite zur Bestellbestätigung für hinterlegte Bestellmerkmale vom Typ Datei war fehlerhaft. Das Verhalten wurde behoben.
+- Im Kontaktformular wurde eine Fehlermeldung nicht ausgegeben, wenn der E-Mail-Versand nicht eingerichtet war.
+- Ein leeres Ergebnis bei der Nutzung von externen Suchen hat zur Erhöhung der TTFB geführt. Das Problem wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.24 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/Widgets/Header/NavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2687/files#diff-d9d8d5418b1e74986dcb27dfa315d297f65a5f90efed0734e8ab495651cab594)
+- [resources/js/src/app/components/basket/BasketTotals.vue](https://github.com/plentymarkets/plugin-ceres/pull/2698/files#diff-74c12ada105a013f79bbea3a162d3e4358d1afa3f38c3e9e00894a3ab6ad01c1)
+- [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/2682/files#diff-6103acda40fc331c6f5ba92faab9976e92848d8fde0e9af7fe34abd593885128)
+- [resources/views/Widgets/Header/SearchSuggestionWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2695/files#diff-4213d7ceb8c8a526388dda36535e762c171c37147183856d9801b5f8b18f6c34)
+
 ## v5.0.23 (2021-02-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.22...5.0.23" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt 

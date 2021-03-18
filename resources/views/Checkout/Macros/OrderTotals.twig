@@ -10,7 +10,7 @@
             {% if 'orderValueNet' in shownFields or shownFields == null %}
                 {# ORDER VALUE NET #}
                 <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                    {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutNet") }})
+                    {{ trans("Ceres::Template.checkoutValue") }} {{ trans("Ceres::Template.checkoutNet") }}
                 </dt><!--
                 --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="item-sum-net">
                     {{ totals.itemSumNet | formatMonetary( totals.currency ) }}
@@ -20,7 +20,7 @@
             {% if 'orderValueGross' in shownFields or shownFields == null %}
                 {# ORDER VALUE GROSS #}
                 <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                    {{ trans("Ceres::Template.checkoutValue") }} ({{ trans("Ceres::Template.checkoutGross") }})
+                    {{ trans("Ceres::Template.checkoutValue") }} {{ trans("Ceres::Template.checkoutGross") }}
                 </dt><!--
                 --><dd{% if not highlightNetPrices %} class="font-weight-bold" data-testing="item-sum"{% endif %}>
                     {% if totals.isNet %}
@@ -47,7 +47,7 @@
 
                     {# SUB TOTAL NET #}
                     <dt {% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                        {{ trans("Ceres::Template.orderConfirmationSubTotal") }} ({{ trans("Ceres::Template.checkoutNet") }})
+                        {{ trans("Ceres::Template.orderConfirmationSubTotal") }} {{ trans("Ceres::Template.checkoutNet") }}
                     </dt><!--
                     --><dd {% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
                         {{ (totals.itemSumNet - totals.itemSumRebateNet ) | formatMonetary( totals.currency ) }}
@@ -55,7 +55,7 @@
 
                     {# SUB TOTAL GROSS #}
                     <dt {% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                        {{ trans("Ceres::Template.orderConfirmationSubTotal") }} ({{ trans("Ceres::Template.checkoutGross") }})
+                        {{ trans("Ceres::Template.orderConfirmationSubTotal") }} {{ trans("Ceres::Template.checkoutGross") }}
                     </dt><!--
                     --><dd {% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {% if totals.isNet %}
@@ -70,7 +70,7 @@
             {% if 'shippingCostsNet' in shownFields or shownFields == null %}
                 {# SHIPPING COSTS NET #}
                 <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                    {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutNet") }})
+                    {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} {{ trans("Ceres::Template.checkoutNet") }}
                 </dt><!--
                 --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount-net">
                     {{ totals.shippingNet | formatMonetary( totals.currency ) }}
@@ -80,7 +80,7 @@
             {% if 'shippingCostsGross' in shownFields or shownFields == null %}
                 {# SHIPPING COSTS GROSS #}
                 <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                    {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} ({{ trans("Ceres::Template.checkoutGross") }})
+                    {{ trans("Ceres::Template.orderConfirmationShippingCosts") }} {{ trans("Ceres::Template.checkoutGross") }}
                 </dt><!--
                 {% if totals.isNet %}
                 --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="shipping-amount-net">
@@ -124,7 +124,7 @@
                 {% if 'totalSumNet' in shownFields or shownFields == null %}
                     {# TOTAL SUM NET #}
                     <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                        {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutNet") }})
+                        {{ trans("Ceres::Template.checkoutTotalSum") }} {{ trans("Ceres::Template.checkoutNet") }}
                     </dt><!--
                     --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-amount-net">
                         {{ totals.totalNet | formatMonetary( totals.currency ) }}
@@ -172,7 +172,7 @@
                     {% if 'totalSumGross' in shownFields or shownFields == null %}
                         {# TOTAL SUM GROSS #}
                         <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                            {{ trans("Ceres::Template.checkoutTotalSum") }} ({{ trans("Ceres::Template.checkoutGross") }})
+                            {{ trans("Ceres::Template.checkoutTotalSum") }} {{ trans("Ceres::Template.checkoutGross") }}
                         </dt><!--
                         --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-amount">
                             {{ totals.totalGross | formatMonetary( totals.currency ) }}
