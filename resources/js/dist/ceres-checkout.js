@@ -2340,30 +2340,35 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     emitInputEvent: function emitInputEvent(value) {
+      var isNewGenderPersonal = this.getIsGenderPersonal(value);
+      var isOldGenderPersonal = this.getIsGenderPersonal(this.addressData.gender);
       this.$emit("input", {
         field: "gender",
         value: value
-      });
-      this.$emit("input", {
-        field: "name1",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "name2",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "name3",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "vatNumber",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "contactPerson",
-        value: ""
-      });
+      }); // just reset the input fields, when switching the gender between a personal one and company
+
+      if (isNewGenderPersonal !== isOldGenderPersonal) {
+        this.$emit("input", {
+          field: "name1",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "name2",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "name3",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "vatNumber",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "contactPerson",
+          value: ""
+        });
+      }
     },
     checkGenderCompany: function checkGenderCompany(gender) {
       if (gender === "company") {
@@ -2371,6 +2376,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    getIsGenderPersonal: function getIsGenderPersonal(gender) {
+      return ["male", "female", "diverse"].includes(gender);
     }
   },
   watch: {
