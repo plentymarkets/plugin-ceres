@@ -27,6 +27,9 @@ class GoogleMapsWidget extends BaseWidget
             ->withPreviewImageUrl('/images/widgets/google-maps.svg')
             ->withType(WidgetTypes::DEFAULT)
             ->withPosition(1050)
+            ->withSearchKeyWords([
+                "google", "maps", "karte",
+            ])
             ->toArray();
     }
     
