@@ -126,6 +126,51 @@
         </div>
     </div>
     <!-- ./REGISTRATION MODAL -->
+
+    <!-- BASKET MODAL -->
+    <lazy-load component="add-item-to-basket-overlay">
+        <add-item-to-basket-overlay>
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
+            </template>
+        </add-item-to-basket-overlay>
+    </lazy-load>
+    <!-- ./BASKET MODAL -->
+
+    <!-- PASSWORD RESET MODAL -->
+    <lazy-load component="forgot-password-modal">
+        <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}">
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+            </template>
+        </forgot-password-modal>
+    </lazy-load>
+    <!-- ./PASSWORD RESET MODAL -->
+
+    <!-- SHIPPINGCOSTS MODAL -->
+    {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
+        <div id="shippingscosts-modal-wrapper">
+            <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
+                            {% if shopBuilderShippingTemplate | trim is not empty %}
+                                {{ shopBuilderShippingTemplate | raw }}
+                            {% else %}
+                                {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- ./SHIPPINGCOSTS MODAL -->
 </div>
 <!-- /SSR -->
 

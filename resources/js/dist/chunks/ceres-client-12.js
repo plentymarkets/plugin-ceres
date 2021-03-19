@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.$nextTick(function () {
-      _this.loginFields = document.querySelector("#login-form-" + _this._uid).querySelectorAll(".input-unit");
+      _this.loginFields = _this.$refs.loginForm.querySelectorAll(".input-unit");
       _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_5__["default"].triggerAutoFocus();
     });
   },
@@ -212,7 +212,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "login-pwd-reset" }, [
-    _c("form", { attrs: { id: "login-form-" + _vm._uid, method: "post" } }, [
+    _c("form", { ref: "loginForm", attrs: { method: "post" } }, [
       _c("div", { class: { "modal-body": _vm.modalElement } }, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-12" }, [
