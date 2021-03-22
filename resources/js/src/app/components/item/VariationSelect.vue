@@ -273,7 +273,8 @@ export default {
         unsetInvalidSelection(attributeId, attributeValueId, unitId)
         {
             const qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
-            const closestVariation    = this.getClosestVariations(qualifiedVariations)[0];
+            const closestVariations = this.getClosestVariations(qualifiedVariations);
+            const closestVariation = closestVariations[0] || closestVariations[1]
 
             if (!closestVariation)
             {
