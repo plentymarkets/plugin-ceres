@@ -1,5 +1,16 @@
 # Release Notes für Ceres
 
+## v5.0.25 (2021-03-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.24...5.0.25" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+-Der letzte Paragraph des Text-Widgets zum Inline-Editing besaß einen Außenabstand nach unten. Hierdurch war es nicht möglich, ein Text-Widget ohne unteren Abstand zu platzieren. Dieser wurde daher entfernt.
+- Bei der Ausgabe der Übersetzungen für "Brutto" (Ceres::Template.checkoutGross) und "Netto" (Ceres::Template.checkoutNet) wurden in den Summen Klammern angezeigt, die sich nicht entfernen ließen. Die Klammern wurden in die Übersetzung überführt und können zukünftig entfernt werden.
+-Beim Wechsel der Anrede in der Adressauswahl werden die Felder nur noch geleert, wenn man zwischen einer Personen-Anrede und einer Firma wechselt.
+
+### Behoben
+- Die Variantenauswahl reagierte nicht auf Nutzereingaben, wenn alle wählbaren Varianten nicht kaufbar sind.
+- Auf den Standardseiten der Rechtstexte haben Abstände gefehlt. Diese wurden ergänzt.
+
 ## v5.0.24 (2021-03-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.23...5.0.24" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt 
