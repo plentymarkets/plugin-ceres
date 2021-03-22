@@ -71,7 +71,7 @@ export default Vue.component("change-payment-method", {
                     // TODO: research - if response should be false, it returns an object
                     this.changePossible = typeof response === "object" ? response.data : response;
 
-                    //Reload page because the order amounts could have changed because of payment method rebates or surcharges
+                    // Reload page because the order amounts could have changed because of payment method rebates or surcharges
                     window.location.reload();
                 })
                 .fail(() =>
