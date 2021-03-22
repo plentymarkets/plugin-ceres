@@ -276,9 +276,9 @@ export default {
             const closestVariations = this.getClosestVariations(qualifiedVariations);
             
             // if the salable 'closestVariations' is undefined, take the not-salable one
-            const closestVariation = closestVariations[0] || closestVariations[1]
+            const closestVariation = closestVariations[0] || closestVariations[1];
 
-            if (!closestVariations || closestVariations.length <= 0)
+            if (!closestVariation)
             {
                 return;
             }
