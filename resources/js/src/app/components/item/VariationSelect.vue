@@ -278,7 +278,7 @@ export default {
             // if the salable 'closestVariations' is undefined, take the not-salable one
             const closestVariation = closestVariations[0] || closestVariations[1]
 
-            if (!closestVariation)
+            if (!closestVariations || closestVariations.length <= 0)
             {
                 return;
             }
