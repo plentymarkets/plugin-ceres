@@ -8,6 +8,7 @@ use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Order\Shipping\ParcelService\Models\ParcelService;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodContainer;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
+use Plenty\Modules\Payment\Method\Models\PaymentMethod;
 use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Plugin\Models\Plugin;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
@@ -135,6 +136,14 @@ class DefaultSettingsService
     public function getPluginPaymentMethodsRegistered():array
     {
         $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
+        
+        foreach ($this->paymentRepository->listAllActive('en') as $paymentMethodId => $paymentMethodId)
+        {
+            if (!$this->paymentMethodExists($paymentMethods, $paymentMethodId)) {
+                $paymentMethods[] = $this->paymentRepository->findByPaymentMethodId($paymentMethodId);
+            }
+        }
+        
         $paymentMethodContainer = pluginApp(PaymentMethodContainer::class);
 
         $pluginPaymentMethodsRegistered = [];
@@ -254,5 +263,17 @@ class DefaultSettingsService
             }
         }
         return $webstores;
+    }
+    
+    private function paymentMethodExists($paymentMethods, $paymentMethodId)
+    {
+        /** @var PaymentMethod $paymentMetho */
+        foreach ($paymentMethods as $paymentMethod) {
+            if ($paymentMethod->id == $paymentMethodId) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
