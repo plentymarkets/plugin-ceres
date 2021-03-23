@@ -136,10 +136,15 @@ class DefaultSettingsService
     public function getPluginPaymentMethodsRegistered():array
     {
         $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
+    
+        $paymentMethodIds = [];
+        foreach ($paymentMethods as $paymentMethod) {
+            $paymentMethodIds[] = $paymentMethod->id;
+        }
         
         foreach ($this->paymentRepository->listAllActive('en') as $paymentMethodId => $paymentMethodId)
         {
-            if (!$this->paymentMethodExists($paymentMethods, $paymentMethodId)) {
+            if (!in_array($paymentMethodId, $paymentMethodIds)) {
                 $paymentMethods[] = $this->paymentRepository->findByPaymentMethodId($paymentMethodId);
             }
         }
@@ -263,17 +268,5 @@ class DefaultSettingsService
             }
         }
         return $webstores;
-    }
-    
-    private function paymentMethodExists($paymentMethods, $paymentMethodId)
-    {
-        /** @var PaymentMethod $paymentMetho */
-        foreach ($paymentMethods as $paymentMethod) {
-            if ($paymentMethod->id == $paymentMethodId) {
-                return true;
-            }
-        }
-        
-        return false;
     }
 }
