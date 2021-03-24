@@ -75,6 +75,15 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
             }
         }
     }
+
+    .bt-more {
+        text-transform: lowercase;
+        padding: 1rem;
+
+        &:hover {
+            background: darken($normalmenu-color, 10%);
+        }
+    }
 }
 
 .megamenu {
@@ -125,12 +134,6 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         a {
             color: $black;
         }
-        .bt-more {
-            a {
-                color: $gray-600;
-                text-transform: lowercase;
-            }
-        }
     }
 
     .level1 {
@@ -144,6 +147,13 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     }
     .level3 {
         padding-left: 2.5em !important; // stylelint-disable-line declaration-no-important
+    }
+
+    .bt-more {
+        a {
+            color: $gray-600 !important;
+            text-transform: lowercase;
+        }
     }
 }
 
