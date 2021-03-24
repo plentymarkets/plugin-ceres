@@ -1,9 +1,28 @@
 <template>
+    <div v-if="value && !isPrefixValid && isEU" class="input-group flex-nowrap">
+        <div class="input-unit flex-fill w-auto error">
+            <input
+                type="text"
+                name="vatNumber"
+                :id="'txtVatNumber' + _uid"
+                :value="value"
+                data-testing="wrong-vat-id"
+                disabled
+            >
+            <label :for="'txtVatNumber' + _uid">
+                {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
+            </label>
+        </div>
+        <button @click="deleteValue()" class="input-unit w-auto" data-testing="delete-wrong-vat-id">
+            <span>{{ $translate("Ceres::Template.addressDelete") }}</span>
+            <span class="fa fa-trash-o ml-1"></span>
+        </button>
+    </div>
     <div
         class="input-group flex-nowrap"
         data-model="vatNumber"
-        v-if="isEU && isPrefixValid">
-        <div class="input-unit w-auto input-group-prepend">
+        v-else>
+        <div class="input-unit w-auto input-group-prepend" v-if="isEU">
             <span class="input-group-text h-100 border-0" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0] }}</span>
             <select class="custom-select" v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
                 <option v-for="(vatCode, index) in vatCodes" :value="vatCode">{{ vatCode }}</option>
@@ -24,25 +43,6 @@
                 {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
             </label>
         </div>
-    </div>
-    <div v-else-if="value && !isPrefixValid" class="input-group flex-nowrap">
-        <div class="input-unit flex-fill w-auto error">
-            <input
-                type="text"
-                name="vatNumber"
-                :id="'txtVatNumber' + _uid"
-                :value="value"
-                data-testing="wrong-vat-id"
-                disabled
-            >
-            <label :for="'txtVatNumber' + _uid">
-                {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
-            </label>
-        </div>
-        <button @click="deleteValue()" class="input-unit w-auto" data-testing="delete-wrong-vat-id">
-            <span>{{ $translate("Ceres::Template.addressDelete") }}</span>
-            <span class="fa fa-trash-o ml-1"></span>
-        </button>
     </div>
 </template>
 
@@ -87,18 +87,14 @@ export default
 
         isPrefixValid()
         {
-            let isPrefixValid = false;
             const validPrefix = this.vatCodes.find(vatCode => this.value?.startsWith(vatCode));
 
-            if (validPrefix)
-            {
-                isPrefixValid = true;
-            }
-            else if ((isNullOrUndefined(this.value) || this.value.length <= 0) && this.isEU)
+            let isPrefixValid = !!validPrefix;
+
+            if ((isNullOrUndefined(this.value) || this.value.length <= 0) && this.isEU)
             {
                 this.vatPrefix = this.vatCodes[0];
                 this.vatNumber = "";
-                isPrefixValid = true;
             }
 
             return isPrefixValid;
@@ -150,6 +146,10 @@ export default
             {
                 this.vatPrefix = vatPrefix;
                 this.vatNumber = value.slice(vatPrefix.length);
+            }
+            else
+            {
+                this.vatNumber = value;
             }
         }
     }
