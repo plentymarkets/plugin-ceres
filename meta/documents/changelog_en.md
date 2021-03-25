@@ -1,5 +1,16 @@
 # Release Notes for Ceres
 
+## v5.0.25 (2021-03-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.24...5.0.25" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+- The last paragraph of the text widget for inline editing had a spacing at the bottom, which made it impossible to use a text widget without this spacing. Thus, this was removed.
+- In the output for the translations of "Brutto" (Ceres::Template.checkourtGross) and "Netto" (Ceres::Template.checkoutNet), parentheses were shown in the sums and could not be removed. Thus, the parentheses were transferred to the translations and can now be removed.
+- When changing the salutation in the address selection, the fields are now only cleared when switching between a person's salutation and a company.
+
+### Fixed
+- The variation selection did not respond to user input if all selectable variations weren't purchasable.
+- Spacings were missing on the standard pages of the legal texts. These have been added.
+
 ## v5.0.24 (2021-03-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.23...5.0.24" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added 
