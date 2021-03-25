@@ -13476,6 +13476,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         min-width: 100%;
         max-height: 80vh;
         overflow: hidden;
+        overflow-y: auto;
         word-wrap: break-word;
         visibility: hidden;
         background: $normalmenu-color;
@@ -13624,7 +13625,6 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
                 > ul {
                     visibility: visible;
                     opacity: 1;
-                    overflow-y: auto;
                 }
             }
         }
