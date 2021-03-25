@@ -5,13 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="plentymarkets" />
 
-{% if ceresConfig.global.favicon is empty %}
-    {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
-{% else %}
-    {% set favicon = ceresConfig.global.favicon %}
-{% endif %}
-
-<link rel="icon" type="img/ico" href="{{ favicon }}">
+<link rel="icon" type="img/ico" href="{{ webstoreConfig.faviconPath }}">
 
 {% set canonicalUrl = services.url.getCanonicalURL() %}
 {% set languageUrls = services.url.getLanguageURLs() %}
