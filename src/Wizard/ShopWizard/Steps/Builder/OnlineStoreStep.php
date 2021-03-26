@@ -47,6 +47,7 @@ class OnlineStoreStep extends Step
     {
         return [
             "title" => "Wizard.storeFavicon",
+            "description" => "Wizard.storeFaviconDescription",
             "form" => [
                 "onlineStore_storeFavicon" => [
                     "type" => "file",
