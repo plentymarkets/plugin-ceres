@@ -147,6 +147,10 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 if (isset($data['onlineStore_externalVatIdCheck'])) {
                     $webstoreData['externalVatCheckInactive'] = $data['onlineStore_externalVatIdCheck'];
                 }
+    
+                if (isset($data['onlineStore_loginMode'])) {
+                    $webstoreData['loginMode'] = $data['onlineStore_loginMode'];
+                }
 
                 if (isset($data['pagination_sortingMonthlySales'])) {
                     $webstoreData['itemSortByMonthlySales'] = $data['pagination_sortingMonthlySales'];
