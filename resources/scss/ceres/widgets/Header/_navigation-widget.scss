@@ -185,10 +185,11 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
                 }
 
                 > ul {
-                    visibility: visible;
-                    opacity: 1;
                     // show the overflow-y only when the menu is visible / required for safari (desktop)
                     overflow-y: auto;
+
+                    visibility: visible;
+                    opacity: 1;
                 }
             }
         }
