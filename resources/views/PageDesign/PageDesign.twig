@@ -233,10 +233,6 @@
     {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
 {% endfor %}
 
-{% if isShopBuilder %}
-    {% include "Ceres::Widgets.ShopBuilderDataStore" %}
-{% endif %}
-
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
 {% if assetName == 'ceres-checkout' %}
@@ -283,6 +279,10 @@
     }
 </script>
 <!-- /SSR -->
+
+{% if isShopBuilder %}
+    {% include "Ceres::Widgets.ShopBuilderDataStore" %}
+{% endif %}
 
 <script>
     {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}

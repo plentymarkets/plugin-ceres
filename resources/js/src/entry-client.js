@@ -36,3 +36,5 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 window.Vue = Vue;
 window.NotificationService = NotificationService;
+
+import "./app/main";
