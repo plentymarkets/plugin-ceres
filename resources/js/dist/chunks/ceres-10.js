@@ -562,11 +562,12 @@ var render = function() {
                 [
                   _c("quantity-input", {
                     attrs: {
-                      value: _vm.quantity,
+                      value: _vm.wishListItem.variation.intervalOrderQuantity,
                       min: _vm.wishListItem.variation.minimumOrderQuantity,
                       max: _vm.wishListItem.variation.maximumOrderQuantity,
                       timeout: 0,
-                      interval: _vm.wishListItem.variation.intervalQuantity,
+                      interval:
+                        _vm.wishListItem.variation.intervalOrderQuantity,
                       "variation-id": _vm.wishListItem.variation.id
                     },
                     on: {
