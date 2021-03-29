@@ -37,6 +37,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
 
 .normalmenu {
     a {
+        padding: 1rem;
         color: inherit;
     }
 
@@ -69,15 +70,10 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
             &:hover {
                 background: darken($normalmenu-color, 10%);
             }
-
-            a {
-                padding: 1rem;
-            }
         }
     }
 
     .bt-more {
-        padding: 1rem;
         text-transform: lowercase;
 
         &:hover {
