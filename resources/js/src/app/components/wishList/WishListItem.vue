@@ -52,11 +52,11 @@
                         <div class="qty-box-container ml-3">
                             <quantity-input
                                 @quantity-change="quantity = $event"
-                                :value="quantity"
+                                :value="wishListItem.variation.intervalOrderQuantity"
                                 :min="wishListItem.variation.minimumOrderQuantity"
                                 :max="wishListItem.variation.maximumOrderQuantity"
                                 :timeout="0"
-                                :interval="wishListItem.variation.intervalQuantity"
+                                :interval="wishListItem.variation.intervalOrderQuantity"
                                 :variation-id="wishListItem.variation.id">
                             </quantity-input>
                         </div>
