@@ -77,8 +77,8 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     }
 
     .bt-more {
-        text-transform: lowercase;
         padding: 1rem;
+        text-transform: lowercase;
 
         &:hover {
             background: darken($normalmenu-color, 10%);
@@ -151,7 +151,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
 
     .bt-more {
         a {
-            color: $gray-600 !important;
+            color: $gray-600 !important; // stylelint-disable-line declaration-no-important
             text-transform: lowercase;
         }
     }
