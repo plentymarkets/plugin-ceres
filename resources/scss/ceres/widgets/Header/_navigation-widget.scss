@@ -54,7 +54,6 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         min-width: 100%;
         max-height: 80vh;
         overflow: hidden;
-        overflow-y: auto;
         word-wrap: break-word;
         visibility: hidden;
         background: $normalmenu-color;
@@ -194,6 +193,9 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
                 }
 
                 > ul {
+                    // show the overflow-y only when the menu is visible / required for safari (desktop)
+                    overflow-y: auto;
+
                     visibility: visible;
                     opacity: 1;
                 }
