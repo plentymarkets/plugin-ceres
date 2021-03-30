@@ -37,6 +37,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
 
 .normalmenu {
     a {
+        padding: 1rem;
         color: inherit;
     }
 
@@ -69,10 +70,14 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
             &:hover {
                 background: darken($normalmenu-color, 10%);
             }
+        }
+    }
 
-            a {
-                padding: 1rem;
-            }
+    .bt-more {
+        text-transform: lowercase;
+
+        &:hover {
+            background: darken($normalmenu-color, 10%);
         }
     }
 }
@@ -107,29 +112,25 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         column-rule: 1px solid $gray-300;
         word-wrap: break-word;
         background-color: color-yiq($megamenu-color);
-    }
-
-    .collapse-inner {
-        padding-bottom: 1em;
 
         li {
             // 0.1px for rendering fix
             padding: .1px 1.5em;
             line-height: 170%;
             text-align: left;
+        }
+    }
 
+    .collapse-inner {
+        padding-bottom: 1em;
+
+        li {
             &:hover a {
                 color: $megamenu-color;
             }
         }
         a {
             color: $black;
-        }
-        .bt-more {
-            a {
-                color: $gray-600;
-                text-transform: lowercase;
-            }
         }
     }
 
@@ -144,6 +145,13 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     }
     .level3 {
         padding-left: 2.5em !important; // stylelint-disable-line declaration-no-important
+    }
+
+    .bt-more {
+        a {
+            color: $gray-600 !important; // stylelint-disable-line declaration-no-important
+            text-transform: lowercase;
+        }
     }
 }
 
