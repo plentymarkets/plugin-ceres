@@ -266,6 +266,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -412,15 +414,17 @@ var render = function() {
       { staticClass: "basket-item component-loading with-icon d-flex" },
       [
         _c("div", { staticClass: "image-container" }, [
-          _vm.image
-            ? _c("img", {
-                staticClass: "d-block mw-100 mh-100",
-                attrs: {
-                  src: _vm.image,
-                  title: _vm._f("itemName")(_vm.wishListItem)
-                }
-              })
-            : _vm._e()
+          _c("a", { attrs: { href: _vm._f("itemURL")(_vm.wishListItem) } }, [
+            _vm.image
+              ? _c("img", {
+                  staticClass: "d-block mw-100 mh-100",
+                  attrs: {
+                    src: _vm.image,
+                    title: _vm._f("itemName")(_vm.wishListItem)
+                  }
+                })
+              : _vm._e()
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "meta-container-wrapper" }, [
