@@ -6,6 +6,9 @@ import { isNullOrUndefined, isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
 const ApiService = require("../../services/ApiService");
 
+// cache updated base prices for performance purposes
+const updatedItemBasePriceCache = {};
+
 const state =
     {
         data: {},
@@ -85,6 +88,7 @@ const mutations =
                 if (!isNullOrUndefined(basketItem.basePrice))
                 {
                     Vue.set(entry, "updatedBasePrice", basketItem.basePrice)
+                    updatedItemBasePriceCache[basketItem.id] = basketItem.basePrice;
                 }
             }
         },
@@ -372,6 +376,12 @@ function _fillMissingData(item)
                 }
             }
         }
+    }
+
+    if (updatedItemBasePriceCache.hasOwnProperty(item.id))
+    {
+        item.updatedBasePrice = updatedItemBasePriceCache[item.id];
+        delete updatedItemBasePriceCache[item.id];
     }
 }
 
