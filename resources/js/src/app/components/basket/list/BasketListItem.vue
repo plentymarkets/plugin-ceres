@@ -263,6 +263,12 @@ export default {
 
         basePrice()
         {
+            // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
+            if (!isNullOrUndefined(this.basketItem.updatedBasePrice)) 
+            {
+                return this.basketItem.updatedBasePrice;
+            }
+
             if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
             {
                 return this.basketItem.variation.data.prices.specialOffer.basePrice;

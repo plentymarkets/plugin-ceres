@@ -1,3 +1,4 @@
+import Vue from "vue";
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
 import { pathnameEquals } from "../../helper/url";
@@ -79,6 +80,12 @@ const mutations =
             {
                 entry.price = basketItem.price;
                 entry.quantity = basketItem.quantity;
+
+                // check if the 'AfterBasketItemUpdate' contains a new base price for the item (graduated prices)
+                if (!isNullOrUndefined(basketItem.basePrice))
+                {
+                    Vue.set(entry, "updatedBasePrice", basketItem.basePrice)
+                }
             }
         },
 
@@ -331,17 +338,15 @@ const actions =
 
 function _fillMissingData(item)
 {
-    let oldBasketItem = null;
+    let oldBasketItem = state.items.find(i => i.id === item.id);
 
     if (isNullOrUndefined(item.variation))
     {
-        oldBasketItem = state.items.find(i => i.id === item.id);
         item.variation = oldBasketItem.variation;
     }
 
     if (isNullOrUndefined(item.basketItemOrderParams))
     {
-        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
         item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
     }
 
@@ -349,8 +354,6 @@ function _fillMissingData(item)
         item.setComponents.length > 0 &&
         isNullOrUndefined(item.setComponents[0].variation))
     {
-        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
-
         if (oldBasketItem.setComponents && oldBasketItem.setComponents.length > 0)
         {
             for (const setComponent of item.setComponents)
@@ -365,6 +368,12 @@ function _fillMissingData(item)
                 }
             }
         }
+    }
+
+    // fill updatedBasePrice from the 'AfterBasketItemUpdate' event into the new basket item
+    if (!isNullOrUndefined(oldBasketItem.updatedBasePrice))
+    {
+        item.updatedBasePrice = oldBasketItem.updatedBasePrice;
     }
 }
 
