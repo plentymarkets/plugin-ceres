@@ -1,9 +1,8 @@
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        liveShoppingOffers: {}
-    };
+const state = () => ({
+    liveShoppingOffers: {}
+});
 
 const mutations =
     {

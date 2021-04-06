@@ -2,12 +2,11 @@ import { isDefined } from "../../helper/utils";
 
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        containers: {},
-        isLastSeenItemsLoading: false,
-        lastSeenItems: []
-    };
+const state = () => ({
+    containers: {},
+    isLastSeenItemsLoading: false,
+    lastSeenItems: []
+});
 
 const mutations =
     {

@@ -6,16 +6,15 @@ import { isNullOrUndefined, isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        data: {},
-        items: [],
-        showNetPrices: false,
-        isBasketLoading: false,
-        isBasketInitiallyLoaded: false,
-        isBasketItemQuantityUpdate: false,
-        basketNotifications: []
-    };
+const state = () => ({
+    data: {},
+    items: [],
+    showNetPrices: false,
+    isBasketLoading: false,
+    isBasketInitiallyLoaded: false,
+    isBasketItemQuantityUpdate: false,
+    basketNotifications: []
+});
 
 const mutations =
     {

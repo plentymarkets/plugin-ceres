@@ -2,44 +2,43 @@ import { isNullOrUndefined } from "../../helper/utils";
 
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        shipping: {
-            isParcelBoxAvailable: false,
-            isPostOfficeAvailable: false,
-            selectedShippingProfile: null,
-            shippingProfileId: null,
-            shippingProfileList: [],
-            maxDeliveryDays: null
+const state = () => ({
+    shipping: {
+        isParcelBoxAvailable: false,
+        isPostOfficeAvailable: false,
+        selectedShippingProfile: null,
+        shippingProfileId: null,
+        shippingProfileList: [],
+        maxDeliveryDays: null
+    },
+    payment: {
+        methodOfPaymentId: null,
+        methodOfPaymentList: []
+    },
+    contactWish: null,
+    customerSign: null,
+    shippingPrivacyHintAccepted: false,
+    validation: {
+        gtc: {
+            showError: false,
+            validate: null
         },
-        payment: {
-            methodOfPaymentId: null,
-            methodOfPaymentList: []
+        invoiceAddress: {
+            showError: false,
+            validate: null
         },
-        contactWish: null,
-        customerSign: null,
-        shippingPrivacyHintAccepted: false,
-        validation: {
-            gtc: {
-                showError: false,
-                validate: null
-            },
-            invoiceAddress: {
-                showError: false,
-                validate: null
-            },
-            paymentProvider: {
-                showError: false,
-                validate: null
-            },
-            shippingProfile: {
-                showError: false,
-                validate: null
-            }
+        paymentProvider: {
+            showError: false,
+            validate: null
         },
-        newsletterSubscription: {},
-        readOnly: false
-    };
+        shippingProfile: {
+            showError: false,
+            validate: null
+        }
+    },
+    newsletterSubscription: {},
+    readOnly: false
+});
 
 const mutations =
     {

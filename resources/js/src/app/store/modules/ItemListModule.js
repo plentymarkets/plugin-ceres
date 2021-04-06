@@ -2,18 +2,17 @@ import { getItemListUrlParams } from "../../services/ItemListUrlService";
 import { navigateToParams } from "../../services/UrlService";
 import TranslationService from "../../services/TranslationService";
 
-const state =
-    {
-        facets: [],
-        selectedFacets: [],
-        page: null,
-        sorting: "",
-        isLoading: false,
-        itemsPerPage: null,
-        searchString: null,
-        items: [],
-        totalItems: null
-    };
+const state = () => ({
+    facets: [],
+    selectedFacets: [],
+    page: null,
+    sorting: "",
+    isLoading: false,
+    itemsPerPage: null,
+    searchString: null,
+    items: [],
+    totalItems: null
+});
 
 const mutations =
     {

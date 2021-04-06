@@ -3,13 +3,12 @@ import ExceptionMap from "../../exceptions/ExceptionMap";
 const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
-const state =
-    {
-        orderData: {},
-        orderAccessKey: "",
-        orderReturnItems: [],
-        orderReturnNote: ""
-    };
+const state = () => ({
+    orderData: {},
+    orderAccessKey: "",
+    orderReturnItems: [],
+    orderReturnNote: ""
+});
 
 const mutations =
     {
