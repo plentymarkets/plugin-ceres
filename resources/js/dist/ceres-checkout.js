@@ -64689,6 +64689,10 @@ var StickyElement = /*#__PURE__*/function () {
     value: function checkElement(skipOffsetCalculation) {
       var _this4 = this;
 
+      if (!this.enabled) {
+        return false;
+      }
+
       var oldValue = this.position || {};
       var elementRect = this.el.getBoundingClientRect();
       var placeholderRect = this.placeholder.getBoundingClientRect();
