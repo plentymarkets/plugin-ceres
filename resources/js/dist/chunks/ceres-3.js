@@ -420,6 +420,11 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
       return this.basketItem.price + setComponentsParamSurcharge;
     },
     basePrice: function basePrice() {
+      // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(this.basketItem.updatedBasePrice)) {
+        return this.basketItem.updatedBasePrice;
+      }
+
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(this.basketItem.variation.data.prices.specialOffer)) {
         return this.basketItem.variation.data.prices.specialOffer.basePrice;
       }

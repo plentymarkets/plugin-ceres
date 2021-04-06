@@ -87,7 +87,7 @@ const mutations =
                 // check if the 'AfterBasketItemUpdate' contains a new base price for the item (graduated prices)
                 if (!isNullOrUndefined(basketItem.basePrice))
                 {
-                    Vue.set(entry, "updatedBasePrice", basketItem.basePrice)
+                    Vue.set(entry, "updatedBasePrice", basketItem.basePrice);
                     updatedItemBasePriceCache[basketItem.id] = basketItem.basePrice;
                 }
             }
