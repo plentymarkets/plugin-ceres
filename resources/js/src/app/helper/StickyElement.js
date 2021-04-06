@@ -152,6 +152,11 @@ export class StickyElement
 
     checkElement(skipOffsetCalculation)
     {
+        if (!this.enabled)
+        {
+            return;
+        }
+
         const oldValue        = this.position || {};
         const elementRect     = this.el.getBoundingClientRect();
         const placeholderRect = this.placeholder.getBoundingClientRect();
