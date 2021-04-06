@@ -6,7 +6,7 @@
         {% set crumbs = [] %}
         <ul class="breadcrumb container-max px-3 py-2 my-0 mx-auto">
             <li class="breadcrumb-item">
-                <a href="{{ homepageURL }}">
+          <a href="{{ homepageURL }}" aria-label="{{ trans("Ceres::Template.pageNotFoundHomepage") }}">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     {% set crumb =
                         [
@@ -91,6 +91,7 @@
         {
             "@context":"http://schema.org/",
             "@type":"BreadcrumbList",
+            "name":"Breadcrumb Navigation",
             "itemListElement": {{ crumbs | json_encode | raw }}
         }
         </script>
