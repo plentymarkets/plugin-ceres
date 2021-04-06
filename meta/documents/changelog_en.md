@@ -1,10 +1,5 @@
 # Release Notes for Ceres
 
-## v5.0.25
-
-### Fixed
-- JavaScript error in item list widget when label was not defined
-
 ## v5.0.24 (2021-03-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.23...5.0.24" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added 
