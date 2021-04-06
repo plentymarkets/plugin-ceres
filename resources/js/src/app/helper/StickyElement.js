@@ -154,7 +154,7 @@ export class StickyElement
     {
         if (!this.enabled)
         {
-            return;
+            return false;
         }
 
         const oldValue        = this.position || {};
