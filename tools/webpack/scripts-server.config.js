@@ -20,7 +20,7 @@ module.exports = env =>
                 vue: "vue/dist/vue" + (env.prod ? ".min" : "") + ".js"
             }
         },
-        devtool: false,
+        devtool: "source-map",
         module: {
             rules: [
                 {
