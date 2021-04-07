@@ -27,6 +27,12 @@ class PerformanceMapping
             "global"   => false,
             "optional" => true,
         ],
+        "performance_ssr" => [
+            "field"    => "log.performance.ssr",
+            "type"     => "boolean",
+            "global"   => false,
+            "optional" => true,
+        ]
     ];
     
     /**
