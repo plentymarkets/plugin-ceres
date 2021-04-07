@@ -10,8 +10,10 @@
                         <i class="fa fa-lg fa-check-circle-o ml-1 text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
                     </transition>
                 </td>
+                <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles">&nbsp;({{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }})</td>
             </tr>
         </table>
+        <br>
     </div>
 </template>
 
@@ -51,6 +53,15 @@ export default {
                 return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
             });
         },
+
+       showBasePrice()
+       {
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            const mayShowUnitPrice = currentVariation.variation.mayShowUnitPrice;
+            const isSinglePiece = currentVariation.unit && currentVariation.unit.content === 1 && currentVariation.unit.unitOfMeasurement === "C62";
+
+            return mayShowUnitPrice && !isSinglePiece;
+       },
 
         activeGraduationIndex()
         {

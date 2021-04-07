@@ -6,7 +6,7 @@
                     {{ currentVariation.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
                 </template>
                 <template v-else>
-                    {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
+                    {{ currentVariation.prices.rrp.unitPrice.formatted | it3emCrossPrice }}
                 </template>
             </del>
         </div>
