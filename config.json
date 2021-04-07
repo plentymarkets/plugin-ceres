@@ -4500,6 +4500,14 @@
                     "options": {
                         "defaultValue": "true"
                     }
+                },
+                "log.performance.ssr": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.logPerformanceSsr",
+                    "options": {
+                        "defaultValue": "false"
+                    }
                 }
             }
         }

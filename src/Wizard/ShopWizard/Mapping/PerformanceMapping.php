@@ -9,6 +9,12 @@ namespace Ceres\Wizard\ShopWizard\Mapping;
 class PerformanceMapping
 {
     private static $fieldsMapped = [
+        "performance_ssr" => [
+            "field"    => "log.performance.ssr",
+            "type"     => "boolean",
+            "global"   => false,
+            "optional" => true,
+        ],
         "performance_loggingOptions" => [
             "field"    => "log.data",
             "type"     => "concatenated",
