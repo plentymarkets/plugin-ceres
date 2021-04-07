@@ -11,10 +11,11 @@ const globals = { Vue, Vuex };
 
 function createApp(context)
 {
+    console.log("entry server")
     return new Promise((resolve, reject) =>
     {
-        Vue.config.silent = true;
         Vue.prototype.$isSSR = true;
+        App.isSSR = true;
 
         const { app, store } = createAppInternal(context);
 
