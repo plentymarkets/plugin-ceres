@@ -16,7 +16,6 @@
                                     :decimal-count="$ceres.config.item.storeSpecial ">
                 </item-store-special>
             </template>
-
             <template #item-image>
                 <a v-if="!!displaySettings.customImagePath" :href="currentOffer.item | itemURL">
                     <lazy-img   :image-url="displaySettings.customImagePath"
@@ -201,9 +200,9 @@ export default {
         }
     },
 
-    created()
+    mounted()
     {
-        this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting, uid: this._uid });
+        this.reloadOffer();
     },
 
     methods:
