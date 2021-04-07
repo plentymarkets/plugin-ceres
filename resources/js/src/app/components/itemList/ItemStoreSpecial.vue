@@ -1,14 +1,18 @@
 <template>
-    <div class="special-tags p-2" v-if="(label && label !== '') || bundleType === 'bundle' || itemType === 'set'">
-        <span v-if="(label && label !== '')" class="badge" :class="tagClass">
+    <div v-if="hasLabel || isBundle || isSet" class="special-tags p-2">
+        
+        <span v-if="hasLabel" class="badge" :class="tagClass">
             {{ label }}
         </span>
-        <span v-else-if="bundleType === 'bundle'" :class="tagClasses.itemBundle">
+
+        <span v-else-if="isBundle" :class="tagClasses.itemBundle">
             {{ $translate("Ceres::Template.itemBundle") }}
         </span>
-        <span v-else-if="itemType === 'set'" :class="tagClasses.itemSet">
+
+        <span v-else-if="isSet" :class="tagClasses.itemSet">
             {{ $translate("Ceres::Template.itemSet") }}
         </span>
+
     </div>
 </template>
 
@@ -50,6 +54,21 @@ export default {
                 3: this.$translate("Ceres::Template.storeSpecialTop")
             }
         };
+    },
+
+    computed:
+    {
+        hasLabel() {
+            return this.label && this.label !== "";
+        },
+
+        isBundle() {
+            return this.bundleType === "bundle";
+        },
+
+        isSet() {
+            return this.itemType === "set";
+        }
     },
 
     created()
