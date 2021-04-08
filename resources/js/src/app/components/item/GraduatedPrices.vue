@@ -1,19 +1,21 @@
 <template>
     <div v-if="graduatedPrices[0]">
         <b>{{ $translate("Ceres::Template.singleItemGraduatedPrices") }}:</b>
-        <table v-for="(price, index) in graduatedPrices" class="graduated-prices-table text-muted">
-            <tr>
-                <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemMinimumQuantity") }} {{ price.minimumOrderQuantity }}</td>
-                <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-price">
-                    {{ price.unitPrice.formatted }}
-                    <transition name="fade">
-                        <i class="fa fa-lg fa-check-circle-o ml-1 text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
-                    </transition>
-                </td>
-            </tr>
-            <tr>
-                <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" colspan="2" class="graduated-base-price">({{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }})</td>
-            </tr>
+        <table class="graduated-prices-table text-muted">
+            <template v-for="(price, index) in graduatedPrices">
+                <tr>
+                    <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemMinimumQuantity") }} {{ price.minimumOrderQuantity }}</td>
+                    <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-price">
+                        {{ price.unitPrice.formatted }}
+                        <transition name="fade">
+                            <i class="fa fa-lg fa-check-circle-o ml-1 text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
+                        </transition>
+                    </td>
+                </tr>
+                <tr v-if="showBasePrice">
+                    <td :class="paddingClasses" :style="paddingInlineStyles" colspan="2" class="graduated-base-price">({{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }})</td>
+                </tr>
+            </template>
         </table>
         <br>
     </div>
