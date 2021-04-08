@@ -1,5 +1,12 @@
 # Release Notes for Ceres
 
+## v5.0.27 (2021-04-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.26...5.0.27" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- The favicon from the plugin config is displayed as long as no favicon is uploaded to the internal webspace.
+- In some cases the store special component produced JavaScript errors in the console. This has been fixed.
+
 ## v5.0.26 (2021-04-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.25...5.0.26" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added 
