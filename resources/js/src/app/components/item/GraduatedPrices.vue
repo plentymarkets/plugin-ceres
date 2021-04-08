@@ -1,8 +1,8 @@
 <template>
     <div v-if="graduatedPrices[0]">
         <b>{{ $translate("Ceres::Template.singleItemGraduatedPrices") }}:</b>
-        <table class="graduated-prices-table text-muted">
-            <tr v-for="(price, index) in graduatedPrices">
+        <table v-for="(price, index) in graduatedPrices" class="graduated-prices-table text-muted">
+            <tr>
                 <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemMinimumQuantity") }} {{ price.minimumOrderQuantity }}</td>
                 <td :class="paddingClasses" :style="paddingInlineStyles">
                     {{ price.unitPrice.formatted }}
@@ -10,7 +10,9 @@
                         <i class="fa fa-lg fa-check-circle-o ml-1 text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
                     </transition>
                 </td>
-                <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles">&nbsp;({{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }})</td>
+            </tr>
+            <tr>
+                <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" colspan="2">({{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }})</td>
             </tr>
         </table>
         <br>
