@@ -4,7 +4,7 @@
         <table v-for="(price, index) in graduatedPrices" class="graduated-prices-table text-muted">
             <tr>
                 <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemMinimumQuantity") }} {{ price.minimumOrderQuantity }}</td>
-                <td :class="paddingClasses" :style="paddingInlineStyles">
+                <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-price">
                     {{ price.unitPrice.formatted }}
                     <transition name="fade">
                         <i class="fa fa-lg fa-check-circle-o ml-1 text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
@@ -12,7 +12,7 @@
                 </td>
             </tr>
             <tr>
-                <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" colspan="2">({{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }})</td>
+                <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" colspan="2" class="graduated-base-price">({{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }})</td>
             </tr>
         </table>
         <br>
