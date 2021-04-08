@@ -2,13 +2,12 @@ import { isNullOrUndefined } from "../../helper/utils";
 
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        tree: [],
-        cachedTrees: {},
-        currentCategory: null,
-        categoryChildren: []
-    };
+const state = () => ({
+    tree: [],
+    cachedTrees: {},
+    currentCategory: null,
+    categoryChildren: []
+});
 
 const mutations =
     {

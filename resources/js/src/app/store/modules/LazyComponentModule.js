@@ -1,10 +1,8 @@
-const state =
-    {
-        components:
-        {
-            // comp tag -> loaded bool
-        }
-    };
+const state = () => ({
+    components: {
+        // comp tag -> loaded bool
+    }
+});
 
 const mutations =
     {

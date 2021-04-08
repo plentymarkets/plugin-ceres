@@ -2,13 +2,12 @@ import { isNullOrUndefined } from "../../helper/utils";
 import ApiService from "../../services/ApiService";
 import Vue from "vue";
 
-const state =
-    {
-        autocompleteRequest: null,
-        autocompleteResult: { item: [], category: [], suggestion: [] },
-        autocompleteSearchString: "",
-        autocompleteTypes: new Set()
-    };
+const state = () => ({
+    autocompleteRequest: null,
+    autocompleteResult: { item: [], category: [], suggestion: [] },
+    autocompleteSearchString: "",
+    autocompleteTypes: new Set()
+});
 
 const mutations =
     {

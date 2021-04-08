@@ -3,11 +3,10 @@ import { setUrlParam } from "../../services/UrlService";
 
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        shippingCountries: [],
-        shippingCountryId: null
-    };
+const state = () => ({
+    shippingCountries: [],
+    shippingCountryId: null
+});
 
 const mutations =
     {

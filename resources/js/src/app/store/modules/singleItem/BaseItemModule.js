@@ -2,16 +2,15 @@ import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
 import VariationSelectModule from "./VariationSelectModule";
 
-const state =
-    {
-        isItemSet: false,
-        itemSetId: 0,
-        isSetLoading: false,
-        isAddToBasketLoading: 0,
-        previewItemId: 0,
-        setComponentIds: [],
-        mainItemId: null
-    };
+const state = () => ({
+    isItemSet: false,
+    itemSetId: 0,
+    isSetLoading: false,
+    isAddToBasketLoading: 0,
+    previewItemId: 0,
+    setComponentIds: [],
+    mainItemId: null
+});
 
 const mutations =
     {

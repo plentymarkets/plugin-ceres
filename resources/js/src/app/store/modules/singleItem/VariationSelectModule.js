@@ -1,17 +1,14 @@
 const ApiService = require("../../../services/ApiService");
 
-const state = () =>
-{
-    return {
-        attributes: [],
-        isVariationSelected: true,
-        selectedAttributes: {},
-        selectedUnit: null,
-        units: [],
-        variations: [],
-        variationsLoading: false
-    };
-};
+const state = () => ({
+    attributes: [],
+    isVariationSelected: true,
+    selectedAttributes: {},
+    selectedUnit: null,
+    units: [],
+    variations: [],
+    variationsLoading: false
+});
 
 const mutations =
     {

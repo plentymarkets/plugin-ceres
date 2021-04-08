@@ -17,11 +17,10 @@ function _setConsent(state, { key, value })
     }
 }
 
-const state =
-    {
-        consents: {},
-        hasResponse: false
-    };
+const state = () => ({
+    consents: {},
+    hasResponse: false
+});
 
 const mutations =
     {
