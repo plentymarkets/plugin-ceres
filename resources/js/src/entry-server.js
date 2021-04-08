@@ -11,7 +11,6 @@ const globals = { Vue, Vuex };
 
 function createApp(context)
 {
-    console.log("entry server")
     return new Promise((resolve, reject) =>
     {
         Vue.prototype.$isSSR = true;
