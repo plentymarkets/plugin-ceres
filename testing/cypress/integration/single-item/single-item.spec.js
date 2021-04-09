@@ -73,15 +73,15 @@ context("Single Item", () =>
         });
     });
 
-    it("should display scale prices and apply marker on quantity change", () =>
+    it.only("should display scale prices and apply marker on quantity change", () =>
     {
-        cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
+        cy.getByTestingAttr("quantity-btn-increase").scrollIntoView().click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
 
         cy.get(".graduated-prices-table").children().first().children().last().children().first().should("have.class", "fa-check-circle-o");
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click().click();
 
-        cy.get(".graduated-prices-table").children().last().children().last().children().first().should("have.class", "fa-check-circle-o");
+        cy.get(".graduated-prices-table").children().eq(2).children().last().children().first().should("have.class", "fa-check-circle-o");
 
     });
 
