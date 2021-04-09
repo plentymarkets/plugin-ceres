@@ -28,7 +28,7 @@
                     {{ trans("Ceres::Template.addressPostNummer") }}:
                     ${address | optionType(6)}
                 </template>
-                <template v-else-if="address.address1 === 'POSTFILIALE' && address.postNumber">
+                <template v-else-if="address.address1 === 'POSTFILIALE' && address.address3">
                     {{ trans("Ecomsilio::Template.addressPostNummerEmail") }}:
                     ${address | optionType(6)}
                 </template> 
