@@ -137,17 +137,12 @@
             <div class="col-12">
                 <div class="row">
                     <!-- PostNummer -->
-                    <div class="col-12 col-sm-6" v-if="isPickupStation || value.address1 == 'PACKSTATION'">
-                        <div class="input-unit" data-validate="text" data-model="postNumber">
+                    <div class="col-12 col-sm-6">
+                        <div class="input-unit" :data-validate="{'text': isPickupStation}" data-model="postNumber">
                             <input type="text" name="postnumber" :id="'postnumber' + _uid"
-                                    :value="value.postNumber" @input="emitInputEvent('postNumber', $event.target.value)" data-testing="packing-station-de-postnumber">
-                            <label :for="'postnumber' + _uid">{{ $translate("Ceres::Template.addressPostNummer") }}*</label>
-                        </div>
-                    </div>
-                      <div class="col-12 col-sm-6" v-if="isPostOffice || value.address1 == 'POSTFILIALE'">
-                        <div class="input-unit" data-model="postNumber">
-                          <input type="text" name="postnumber" :id="'postnumber' + _uid" :value="value.postNumber" @input="emitInputEvent('postNumber', $event.target.value)">
-                          <label :for="'postnumber' + _uid">{{ $translate("Ceres::Template.addressPostNummerEmail") }}</label>
+                                   :value="value.postNumber" @input="emitInputEvent('postNumber', $event.target.value)" data-testing="packing-station-de-postnumber">
+                            <label v-if="isPickupStation" :for="'postnumber' + _uid">{{ $translate("Ceres::Template.addressPostNummer") }}*</label>
+                            <label v-else-if="isPostOffice" :for="'postnumber' + _uid">{{ $translate("Ceres::Template.addressPostNummerEmail") }}</label>
                         </div>
                     </div>
 
