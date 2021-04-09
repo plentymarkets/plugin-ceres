@@ -73,7 +73,7 @@ context("Single Item", () =>
         });
     });
 
-    it.only("should display scale prices and apply marker on quantity change", () =>
+    it("should display scale prices and apply marker on quantity change", () =>
     {
         cy.getByTestingAttr("quantity-btn-increase").scrollIntoView().click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
