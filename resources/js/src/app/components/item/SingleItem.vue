@@ -1,5 +1,5 @@
 <template>
-    <div v-if="currentVariation">
+    <div>
         <slot :getDataField="getDataField" :getFilteredDataField="getFilteredDataField">
             <div class="single container-max page-content">
                 <div class="row position-relative">
@@ -70,19 +70,19 @@
                                 </div>
                                 <div v-else class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
                                     <add-to-basket
-                                            :variation-id="currentVariation.variation.id"
-                                            :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"
-                                            :has-children="!!currentVariation.filter && currentVariation.filter.hasActiveChildren"
-                                            :interval-quantity="currentVariation.variation.intervalOrderQuantity || 1"
-                                            :minimum-quantity="currentVariation.variation.minimumOrderQuantity"
-                                            :maximum-quantity="!!currentVariation.variation.maximumOrderQuantity && currentVariation.variation.maximumOrderQuantity > 0 ? currentVariation.variation.maximumOrderQuantity : null"
-                                            :order-properties="currentVariation.properties.filter(function(prop) { return prop.property.isOderProperty })"
-                                            :use-large-scale="false"
-                                            :show-quantity="true"
-                                            :item-url="currentVariation | itemURL"
-                                            :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
-                                            :has-price="currentVariation | hasItemDefaultPrice"
-                                        >
+                                        :variation-id="currentVariation.variation.id"
+                                        :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"
+                                        :has-children="!!currentVariation.filter && currentVariation.filter.hasActiveChildren"
+                                        :interval-quantity="currentVariation.variation.intervalOrderQuantity || 1"
+                                        :minimum-quantity="currentVariation.variation.minimumOrderQuantity"
+                                        :maximum-quantity="!!currentVariation.variation.maximumOrderQuantity && currentVariation.variation.maximumOrderQuantity > 0 ? currentVariation.variation.maximumOrderQuantity : null"
+                                        :order-properties="currentVariation.properties.filter(function(prop) { return prop.property.isOderProperty })"
+                                        :use-large-scale="false"
+                                        :show-quantity="true"
+                                        :item-url="currentVariation | itemURL"
+                                        :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
+                                        :has-price="currentVariation | hasItemDefaultPrice"
+                                    >
                                     </add-to-basket>
                                 </div>
 
@@ -336,17 +336,15 @@ export default {
 
     created()
     {
-        
+        this.$store.dispatch("initVariation", this.itemData);
+        this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
     },
 
     mounted()
     {
         this.$nextTick(() =>
         {
-            this.$store.dispatch("initVariation", this.itemData);
-            this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
             this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
-    
             this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
                 itemId:             this.itemId,
                 attributes:         this.attributesData,

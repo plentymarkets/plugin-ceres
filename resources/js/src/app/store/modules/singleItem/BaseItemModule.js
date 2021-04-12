@@ -1,6 +1,7 @@
 import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
 import VariationSelectModule from "./VariationSelectModule";
+import { store } from "../../index";
 
 const state = () => ({
     isItemSet: false,
@@ -103,8 +104,8 @@ const actions =
             // extend the structur of the object to match the old objects
             const extendedData = { documents: [item] };
 
-            ceresStore.registerModule(["items", itemId], ItemModule);
-            ceresStore.registerModule(["items", itemId, "variationSelect"], VariationSelectModule);
+            store.registerModule(["items", itemId], ItemModule, { preserveState: !App.isSSR });
+            store.registerModule(["items", itemId, "variationSelect"], VariationSelectModule, { preserveState: !App.isSSR });
             commit(`${itemId}/setVariation`, extendedData);
         }
     };
