@@ -180,52 +180,50 @@
                                     {% endif %}
                                 </a>
 
-                                <lazy-load component="basket-preview">
-                                    <basket-preview :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
-                                        <template #before-basket-item>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
-                                        </template>
-                                        <template #after-basket-item>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.AfterItem"])) }}
-                                        </template>
-                                        <template #before-basket-totals>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.BeforeBasketTotals"])) }}
-                                        </template>
-                                        <template #before-item-sum>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeItemSum"])) }}
-                                        </template>
-                                        <template #after-item-sum>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterItemSum"])) }}
-                                        </template>
-                                        <template #before-shipping-costs>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeShippingCosts"])) }}
-                                        </template>
-                                        <template #after-shipping-costs>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterShippingCosts"])) }}
-                                        </template>
-                                        <template #before-total-sum>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeTotalSum"])) }}
-                                        </template>
-                                        <template #before-vat>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeVat"])) }}
-                                        </template>
-                                        <template #after-vat>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterVat"])) }}
-                                        </template>
-                                        <template #after-total-sum>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterTotalSum"])) }}
-                                        </template>
-                                        <template #after-basket-totals>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.AfterBasketTotals"])) }}
-                                        </template>
-                                        <template #before-checkout-button>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.BeforeCheckoutButton"])) }}
-                                        </template>
-                                        <template #after-checkout-button>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.AfterCheckoutButton"])) }}
-                                        </template>
-                                    </basket-preview>
-                                </lazy-load>
+                                <basket-preview :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
+                                    <template #before-basket-item>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
+                                    </template>
+                                    <template #after-basket-item>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.AfterItem"])) }}
+                                    </template>
+                                    <template #before-basket-totals>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.BeforeBasketTotals"])) }}
+                                    </template>
+                                    <template #before-item-sum>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeItemSum"])) }}
+                                    </template>
+                                    <template #after-item-sum>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterItemSum"])) }}
+                                    </template>
+                                    <template #before-shipping-costs>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeShippingCosts"])) }}
+                                    </template>
+                                    <template #after-shipping-costs>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterShippingCosts"])) }}
+                                    </template>
+                                    <template #before-total-sum>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeTotalSum"])) }}
+                                    </template>
+                                    <template #before-vat>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeVat"])) }}
+                                    </template>
+                                    <template #after-vat>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterVat"])) }}
+                                    </template>
+                                    <template #after-total-sum>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterTotalSum"])) }}
+                                    </template>
+                                    <template #after-basket-totals>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.AfterBasketTotals"])) }}
+                                    </template>
+                                    <template #before-checkout-button>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.BeforeCheckoutButton"])) }}
+                                    </template>
+                                    <template #after-checkout-button>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.AfterCheckoutButton"])) }}
+                                    </template>
+                                </basket-preview>
                             </li>
                         {% endif %}
                     </ul>
