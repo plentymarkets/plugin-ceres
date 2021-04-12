@@ -230,7 +230,7 @@ var render = function() {
                         "td",
                         {
                           staticClass:
-                            "graduated-base-price pl-2 d-none d-xl-block",
+                            "graduated-base-price pl-3 d-none d-xl-block",
                           class: _vm.paddingClasses,
                           style: _vm.paddingInlineStyles
                         },
