@@ -36,6 +36,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-store-special",
@@ -58,6 +62,17 @@ __webpack_require__.r(__webpack_exports__);
         3: this.$translate("Ceres::Template.storeSpecialTop")
       }
     };
+  },
+  computed: {
+    hasLabel: function hasLabel() {
+      return this.label && this.label !== "";
+    },
+    isBundle: function isBundle() {
+      return this.bundleType === "bundle";
+    },
+    isSet: function isSet() {
+      return this.itemType === "set";
+    }
   },
   created: function created() {
     this.initializeStoreSpecial();
@@ -663,15 +678,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.label.length ||
-    _vm.bundleType === "bundle" ||
-    _vm.itemType === "set"
+  return _vm.hasLabel || _vm.isBundle || _vm.isSet
     ? _c("div", { staticClass: "special-tags p-2" }, [
-        _vm.label.length
+        _vm.hasLabel
           ? _c("span", { staticClass: "badge", class: _vm.tagClass }, [
               _vm._v("\n        " + _vm._s(_vm.label) + "\n    ")
             ])
-          : _vm.bundleType === "bundle"
+          : _vm.isBundle
           ? _c("span", { class: _vm.tagClasses.itemBundle }, [
               _vm._v(
                 "\n        " +
@@ -679,7 +692,7 @@ var render = function() {
                   "\n    "
               )
             ])
-          : _vm.itemType === "set"
+          : _vm.isSet
           ? _c("span", { class: _vm.tagClasses.itemSet }, [
               _vm._v(
                 "\n        " +
