@@ -2331,30 +2331,35 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     emitInputEvent: function emitInputEvent(value) {
+      var isNewGenderPersonal = this.getIsGenderPersonal(value);
+      var isOldGenderPersonal = this.getIsGenderPersonal(this.addressData.gender);
       this.$emit("input", {
         field: "gender",
         value: value
-      });
-      this.$emit("input", {
-        field: "name1",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "name2",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "name3",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "vatNumber",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "contactPerson",
-        value: ""
-      });
+      }); // just reset the input fields, when switching the gender between a personal one and company
+
+      if (isNewGenderPersonal !== isOldGenderPersonal) {
+        this.$emit("input", {
+          field: "name1",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "name2",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "name3",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "vatNumber",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "contactPerson",
+          value: ""
+        });
+      }
     },
     checkGenderCompany: function checkGenderCompany(gender) {
       if (gender === "company") {
@@ -2362,6 +2367,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    getIsGenderPersonal: function getIsGenderPersonal(gender) {
+      return ["male", "female", "diverse"].includes(gender);
     }
   },
   watch: {
@@ -2485,19 +2493,16 @@ __webpack_require__.r(__webpack_exports__);
     isPrefixValid: function isPrefixValid() {
       var _this2 = this;
 
-      var isPrefixValid = false;
       var validPrefix = this.vatCodes.find(function (vatCode) {
         var _this2$value;
 
         return (_this2$value = _this2.value) === null || _this2$value === void 0 ? void 0 : _this2$value.startsWith(vatCode);
       });
+      var isPrefixValid = !!validPrefix;
 
-      if (validPrefix) {
-        isPrefixValid = true;
-      } else if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.value) || this.value.length <= 0) && this.isEU) {
+      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.value) || this.value.length <= 0) && this.isEU) {
         this.vatPrefix = this.vatCodes[0];
         this.vatNumber = "";
-        isPrefixValid = true;
       }
 
       return isPrefixValid;
@@ -2533,6 +2538,8 @@ __webpack_require__.r(__webpack_exports__);
       if (!!vatPrefix) {
         this.vatPrefix = vatPrefix;
         this.vatNumber = value.slice(vatPrefix.length);
+      } else {
+        this.vatNumber = value;
       }
     }
   }
@@ -42302,69 +42309,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.isEU && _vm.isPrefixValid
-    ? _c(
+  return _vm.value && !_vm.isPrefixValid && _vm.isEU
+    ? _c("div", { staticClass: "input-group flex-nowrap" }, [
+        _c("div", { staticClass: "input-unit flex-fill w-auto error" }, [
+          _c("input", {
+            attrs: {
+              type: "text",
+              name: "vatNumber",
+              id: "txtVatNumber" + _vm._uid,
+              "data-testing": "wrong-vat-id",
+              disabled: ""
+            },
+            domProps: { value: _vm.value }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "txtVatNumber" + _vm._uid } }, [
+            _vm._v(
+              "\n            " +
+                _vm._s(
+                  _vm.transformTranslation(
+                    "Ceres::Template.addressVatNumber",
+                    "de",
+                    "billing_address.vatNumber"
+                  )
+                ) +
+                "\n        "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "input-unit w-auto",
+            attrs: { "data-testing": "delete-wrong-vat-id" },
+            on: {
+              click: function($event) {
+                return _vm.deleteValue()
+              }
+            }
+          },
+          [
+            _c("span", [
+              _vm._v(_vm._s(_vm.$translate("Ceres::Template.addressDelete")))
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "fa fa-trash-o ml-1" })
+          ]
+        )
+      ])
+    : _c(
         "div",
         {
           staticClass: "input-group flex-nowrap",
           attrs: { "data-model": "vatNumber" }
         },
         [
-          _c("div", { staticClass: "input-unit w-auto input-group-prepend" }, [
-            _vm.vatCodes.length === 1
-              ? _c(
-                  "span",
-                  {
-                    staticClass: "input-group-text h-100 border-0",
-                    attrs: { id: "basic-addon1" }
-                  },
-                  [_vm._v(_vm._s(_vm.vatCodes[0]))]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.vatCodes.length > 1
-              ? _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.vatPrefix,
-                        expression: "vatPrefix"
-                      }
-                    ],
-                    staticClass: "custom-select",
-                    on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.vatPrefix = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
+          _vm.isEU
+            ? _c(
+                "div",
+                { staticClass: "input-unit w-auto input-group-prepend" },
+                [
+                  _vm.vatCodes.length === 1
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "input-group-text h-100 border-0",
+                          attrs: { id: "basic-addon1" }
                         },
-                        function($event) {
-                          return _vm.emitChange()
-                        }
-                      ]
-                    }
-                  },
-                  _vm._l(_vm.vatCodes, function(vatCode, index) {
-                    return _c("option", { domProps: { value: vatCode } }, [
-                      _vm._v(_vm._s(vatCode))
-                    ])
-                  }),
-                  0
-                )
-              : _vm._e()
-          ]),
+                        [_vm._v(_vm._s(_vm.vatCodes[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.vatCodes.length > 1
+                    ? _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.vatPrefix,
+                              expression: "vatPrefix"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.vatPrefix = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.emitChange()
+                              }
+                            ]
+                          }
+                        },
+                        _vm._l(_vm.vatCodes, function(vatCode, index) {
+                          return _c(
+                            "option",
+                            { domProps: { value: vatCode } },
+                            [_vm._v(_vm._s(vatCode))]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e()
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "div",
@@ -42431,56 +42494,6 @@ var render = function() {
           )
         ]
       )
-    : _vm.value && !_vm.isPrefixValid
-    ? _c("div", { staticClass: "input-group flex-nowrap" }, [
-        _c("div", { staticClass: "input-unit flex-fill w-auto error" }, [
-          _c("input", {
-            attrs: {
-              type: "text",
-              name: "vatNumber",
-              id: "txtVatNumber" + _vm._uid,
-              "data-testing": "wrong-vat-id",
-              disabled: ""
-            },
-            domProps: { value: _vm.value }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "txtVatNumber" + _vm._uid } }, [
-            _vm._v(
-              "\n            " +
-                _vm._s(
-                  _vm.transformTranslation(
-                    "Ceres::Template.addressVatNumber",
-                    "de",
-                    "billing_address.vatNumber"
-                  )
-                ) +
-                "\n        "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "input-unit w-auto",
-            attrs: { "data-testing": "delete-wrong-vat-id" },
-            on: {
-              click: function($event) {
-                return _vm.deleteValue()
-              }
-            }
-          },
-          [
-            _c("span", [
-              _vm._v(_vm._s(_vm.$translate("Ceres::Template.addressDelete")))
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "fa fa-trash-o ml-1" })
-          ]
-        )
-      ])
-    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -64954,6 +64967,10 @@ var StickyElement = /*#__PURE__*/function () {
     value: function checkElement(skipOffsetCalculation) {
       var _this4 = this;
 
+      if (!this.enabled) {
+        return false;
+      }
+
       var oldValue = this.position || {};
       var elementRect = this.el.getBoundingClientRect();
       var placeholderRect = this.placeholder.getBoundingClientRect();
@@ -69444,10 +69461,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/web.timers */ "./node_modules/core-js/modules/web.timers.js");
 /* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -69477,10 +69496,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js"); // cache updated base prices for performance purposes
 
+
+var updatedItemBasePriceCache = {};
 var state = {
   data: {},
   items: [],
@@ -69553,9 +69575,14 @@ var mutations = {
       return item.id === basketItem.id;
     });
 
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isNullOrUndefined"])(entry)) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isNullOrUndefined"])(entry)) {
       entry.price = basketItem.price;
-      entry.quantity = basketItem.quantity;
+      entry.quantity = basketItem.quantity; // check if the 'AfterBasketItemUpdate' contains a new base price for the item (graduated prices)
+
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isNullOrUndefined"])(basketItem.basePrice)) {
+        vue__WEBPACK_IMPORTED_MODULE_17___default.a.set(entry, "updatedBasePrice", basketItem.basePrice);
+        updatedItemBasePriceCache[basketItem.id] = basketItem.basePrice;
+      }
     }
   },
   addBasketNotification: function addBasketNotification(state, _ref) {
@@ -69622,7 +69649,7 @@ var actions = {
         console.log(error, status);
 
         if (status > 0) {
-          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
+          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
         }
       });
     }
@@ -69697,8 +69724,8 @@ var actions = {
         commit("removeBasketItem", basketItemId);
         resolve(response);
 
-        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_19__["pathnameEquals"])(App.urls.checkout) && state.items.length === 0) {
-          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_18__["navigateTo"])(App.urls.basket);
+        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_20__["pathnameEquals"])(App.urls.checkout) && state.items.length === 0) {
+          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_19__["navigateTo"])(App.urls.basket);
         }
       }).fail(function (error) {
         commit("setIsBasketLoading", false);
@@ -69756,21 +69783,21 @@ var actions = {
 function _fillMissingData(item) {
   var oldBasketItem = null;
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isNullOrUndefined"])(item.variation)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isNullOrUndefined"])(item.variation)) {
     oldBasketItem = state.items.find(function (i) {
       return i.id === item.id;
     });
     item.variation = oldBasketItem.variation;
   }
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isNullOrUndefined"])(item.basketItemOrderParams)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isNullOrUndefined"])(item.basketItemOrderParams)) {
     oldBasketItem = oldBasketItem || state.items.find(function (i) {
       return i.id === item.id;
     });
     item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
   }
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(item.setComponents) && item.setComponents.length > 0 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isNullOrUndefined"])(item.setComponents[0].variation)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isDefined"])(item.setComponents) && item.setComponents.length > 0 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isNullOrUndefined"])(item.setComponents[0].variation)) {
     oldBasketItem = oldBasketItem || state.items.find(function (i) {
       return i.id === item.id;
     });
@@ -69787,7 +69814,7 @@ function _fillMissingData(item) {
           });
           setComponent.variation = oldComp.variation;
 
-          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isNullOrUndefined"])(setComponent.basketItemOrderParams)) {
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_21__["isNullOrUndefined"])(setComponent.basketItemOrderParams)) {
             setComponent.basketItemOrderParams = oldComp.basketItemOrderParams;
           }
         };
@@ -69801,6 +69828,11 @@ function _fillMissingData(item) {
         _iterator2.f();
       }
     }
+  }
+
+  if (updatedItemBasePriceCache.hasOwnProperty(item.id)) {
+    item.updatedBasePrice = updatedItemBasePriceCache[item.id];
+    delete updatedItemBasePriceCache[item.id];
   }
 }
 

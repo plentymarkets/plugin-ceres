@@ -1902,30 +1902,35 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     emitInputEvent: function emitInputEvent(value) {
+      var isNewGenderPersonal = this.getIsGenderPersonal(value);
+      var isOldGenderPersonal = this.getIsGenderPersonal(this.addressData.gender);
       this.$emit("input", {
         field: "gender",
         value: value
-      });
-      this.$emit("input", {
-        field: "name1",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "name2",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "name3",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "vatNumber",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "contactPerson",
-        value: ""
-      });
+      }); // just reset the input fields, when switching the gender between a personal one and company
+
+      if (isNewGenderPersonal !== isOldGenderPersonal) {
+        this.$emit("input", {
+          field: "name1",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "name2",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "name3",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "vatNumber",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "contactPerson",
+          value: ""
+        });
+      }
     },
     checkGenderCompany: function checkGenderCompany(gender) {
       if (gender === "company") {
@@ -1933,6 +1938,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    getIsGenderPersonal: function getIsGenderPersonal(gender) {
+      return ["male", "female", "diverse"].includes(gender);
     }
   },
   watch: {
@@ -2056,19 +2064,16 @@ __webpack_require__.r(__webpack_exports__);
     isPrefixValid: function isPrefixValid() {
       var _this2 = this;
 
-      var isPrefixValid = false;
       var validPrefix = this.vatCodes.find(function (vatCode) {
         var _this2$value;
 
         return (_this2$value = _this2.value) === null || _this2$value === void 0 ? void 0 : _this2$value.startsWith(vatCode);
       });
+      var isPrefixValid = !!validPrefix;
 
-      if (validPrefix) {
-        isPrefixValid = true;
-      } else if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.value) || this.value.length <= 0) && this.isEU) {
+      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.value) || this.value.length <= 0) && this.isEU) {
         this.vatPrefix = this.vatCodes[0];
         this.vatNumber = "";
-        isPrefixValid = true;
       }
 
       return isPrefixValid;
@@ -2104,6 +2109,8 @@ __webpack_require__.r(__webpack_exports__);
       if (!!vatPrefix) {
         this.vatPrefix = vatPrefix;
         this.vatNumber = value.slice(vatPrefix.length);
+      } else {
+        this.vatNumber = value;
       }
     }
   }
@@ -7222,69 +7229,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.isEU && _vm.isPrefixValid
-    ? _c(
+  return _vm.value && !_vm.isPrefixValid && _vm.isEU
+    ? _c("div", { staticClass: "input-group flex-nowrap" }, [
+        _c("div", { staticClass: "input-unit flex-fill w-auto error" }, [
+          _c("input", {
+            attrs: {
+              type: "text",
+              name: "vatNumber",
+              id: "txtVatNumber" + _vm._uid,
+              "data-testing": "wrong-vat-id",
+              disabled: ""
+            },
+            domProps: { value: _vm.value }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "txtVatNumber" + _vm._uid } }, [
+            _vm._v(
+              "\n            " +
+                _vm._s(
+                  _vm.transformTranslation(
+                    "Ceres::Template.addressVatNumber",
+                    "de",
+                    "billing_address.vatNumber"
+                  )
+                ) +
+                "\n        "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "input-unit w-auto",
+            attrs: { "data-testing": "delete-wrong-vat-id" },
+            on: {
+              click: function($event) {
+                return _vm.deleteValue()
+              }
+            }
+          },
+          [
+            _c("span", [
+              _vm._v(_vm._s(_vm.$translate("Ceres::Template.addressDelete")))
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "fa fa-trash-o ml-1" })
+          ]
+        )
+      ])
+    : _c(
         "div",
         {
           staticClass: "input-group flex-nowrap",
           attrs: { "data-model": "vatNumber" }
         },
         [
-          _c("div", { staticClass: "input-unit w-auto input-group-prepend" }, [
-            _vm.vatCodes.length === 1
-              ? _c(
-                  "span",
-                  {
-                    staticClass: "input-group-text h-100 border-0",
-                    attrs: { id: "basic-addon1" }
-                  },
-                  [_vm._v(_vm._s(_vm.vatCodes[0]))]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.vatCodes.length > 1
-              ? _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.vatPrefix,
-                        expression: "vatPrefix"
-                      }
-                    ],
-                    staticClass: "custom-select",
-                    on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.vatPrefix = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
+          _vm.isEU
+            ? _c(
+                "div",
+                { staticClass: "input-unit w-auto input-group-prepend" },
+                [
+                  _vm.vatCodes.length === 1
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "input-group-text h-100 border-0",
+                          attrs: { id: "basic-addon1" }
                         },
-                        function($event) {
-                          return _vm.emitChange()
-                        }
-                      ]
-                    }
-                  },
-                  _vm._l(_vm.vatCodes, function(vatCode, index) {
-                    return _c("option", { domProps: { value: vatCode } }, [
-                      _vm._v(_vm._s(vatCode))
-                    ])
-                  }),
-                  0
-                )
-              : _vm._e()
-          ]),
+                        [_vm._v(_vm._s(_vm.vatCodes[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.vatCodes.length > 1
+                    ? _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.vatPrefix,
+                              expression: "vatPrefix"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.vatPrefix = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.emitChange()
+                              }
+                            ]
+                          }
+                        },
+                        _vm._l(_vm.vatCodes, function(vatCode, index) {
+                          return _c(
+                            "option",
+                            { domProps: { value: vatCode } },
+                            [_vm._v(_vm._s(vatCode))]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e()
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "div",
@@ -7351,56 +7414,6 @@ var render = function() {
           )
         ]
       )
-    : _vm.value && !_vm.isPrefixValid
-    ? _c("div", { staticClass: "input-group flex-nowrap" }, [
-        _c("div", { staticClass: "input-unit flex-fill w-auto error" }, [
-          _c("input", {
-            attrs: {
-              type: "text",
-              name: "vatNumber",
-              id: "txtVatNumber" + _vm._uid,
-              "data-testing": "wrong-vat-id",
-              disabled: ""
-            },
-            domProps: { value: _vm.value }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "txtVatNumber" + _vm._uid } }, [
-            _vm._v(
-              "\n            " +
-                _vm._s(
-                  _vm.transformTranslation(
-                    "Ceres::Template.addressVatNumber",
-                    "de",
-                    "billing_address.vatNumber"
-                  )
-                ) +
-                "\n        "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "input-unit w-auto",
-            attrs: { "data-testing": "delete-wrong-vat-id" },
-            on: {
-              click: function($event) {
-                return _vm.deleteValue()
-              }
-            }
-          },
-          [
-            _c("span", [
-              _vm._v(_vm._s(_vm.$translate("Ceres::Template.addressDelete")))
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "fa fa-trash-o ml-1" })
-          ]
-        )
-      ])
-    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
