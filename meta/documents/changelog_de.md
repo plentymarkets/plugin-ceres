@@ -1,5 +1,54 @@
 # Release Notes für Ceres
 
+## v5.0.27 (2021-04-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.26...5.0.27" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Das Favicon aus den Plugin-Einstellungen wird angezeigt, solange kein Favicon in den internen Webspace hochgeladen wurde.
+- Unter bestimmten Umständen erzeugte die Store Special-Komponente einen JavaScript-Fehler in der Konsole. Dies wurde behoben.
+
+## v5.0.26 (2021-04-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.25...5.0.26" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Der plentyShop-Assistent enthält nun eine Einstellung, mit der bestimmt werden kann, wie sich der Kund:innen-Login bei Systemen mit mehreren Mandanten verhalten soll. Weitere Informationen dazu findet ihr in [diesem Forenbeitrag](https://forum.plentymarkets.com/t/mehrere-kontakte-mit-der-selben-e-mail-adresse-koennen-sich-bei-unterschiedlichen-mandanten-einloggen-multiple-contacts-with-the-same-email-address-can-log-into-different-clients/630567).
+
+### Geändert
+
+- Die eingestellte CSS-Klasse für Facetten und Facettenwerte wird jetzt im Frontend ausgegeben.
+- Die Anzahl der maximal ausgegebenen Kategorien der zweiten Ebene können nun auch für das normale Menü in den Widget-Einstellungen im ShopBuilder festgelegt werden.
+- Das hinterlegte Favicon wird nach dem Bereitstellen des Plugin-Sets unter der jeweiligen Webshop-Domain hochgeladen und wird somit nun auch von der mobilen Google-Suche berücksichtigt. **Hinweis** Änderungen am Favicon werden dadurch erst nach erneutem Bereitstellen des Plugin-Sets wirksam!
+- Im Warenkorb sowie in der Wunschliste verlinken Artikelbilder jetzt auf die jeweilige Variantenseite. Wir möchten uns bei @cerwantes für den Beitrag bedanken!
+- Für externe Suchanbieter besteht jetzt die Möglichkeit, direkt die gesamten Artikeldaten zurückzugeben, um die Performance der externen Suche zu verbessern. Dafür müssen die Artikeldaten in der richtigen Datenstruktur zurückgegeben werden.
+- Die Berechnung von fixierten Elementen erfolgt nicht mehr, wenn diese deaktiviert sind.
+
+### Behoben
+
+- In der Desktop-Ansicht des Safari-Browsers wurden bei bestimmten Cursor-Bewegungen Einträge aus der Navigation fälschlicherweise ausgeklappt. Dies wurde behoben.
+- Die "mehr..."-Schaltfläche in der Navigation wurde nicht korrekt angezeigt. Dies wurde behoben.
+- Im plentyShop-Assistenten wurden im Schritt **Standardeinstellungen** bei der Einstellung **Standardzahlungsart** nicht alle Plugin-Zahlungsarten angezeigt. Dies wurde behoben.
+- Artikel auf der Wunschliste, die eine Intervallbestellmenge über oder unter 1 oder eine Mindestbestellmenge von 0 hatten, konnten nicht direkt in den Warenkorb gelegt werden. Dies wurde behoben.
+- Beim Aktualisieren eines Warenkorbartikels wird nun der Grundpreis ebenfalls aktualisiert.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.26 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/js/src/app/components/itemList/filter/ItemFilter.vue](https://github.com/plentymarkets/plugin-ceres/pull/2753/files#diff-eab69464064e5200e309de7a80e4fa43773919c60a5f31d5997058b8f7e2f478
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/2697/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2754/files#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
+- [resources/js/src/app/components/wishList/WishListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2754/files#diff-be8788b59e5887730f9bb4aa5a12d093908265ff19c26bb5ddca99485e7d7621)
+
+## v5.0.25 (2021-03-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.24...5.0.25" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+-Der letzte Paragraph des Text-Widgets zum Inline-Editing besaß einen Außenabstand nach unten. Hierdurch war es nicht möglich, ein Text-Widget ohne unteren Abstand zu platzieren. Dieser wurde daher entfernt.
+- Bei der Ausgabe der Übersetzungen für "Brutto" (Ceres::Template.checkoutGross) und "Netto" (Ceres::Template.checkoutNet) wurden in den Summen Klammern angezeigt, die sich nicht entfernen ließen. Die Klammern wurden in die Übersetzung überführt und können zukünftig entfernt werden.
+-Beim Wechsel der Anrede in der Adressauswahl werden die Felder nur noch geleert, wenn man zwischen einer Personen-Anrede und einer Firma wechselt.
+
+### Behoben
+- Die Variantenauswahl reagierte nicht auf Nutzereingaben, wenn alle wählbaren Varianten nicht kaufbar sind.
+- Auf den Standardseiten der Rechtstexte haben Abstände gefehlt. Diese wurden ergänzt.
+
 ## v5.0.24 (2021-03-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.23...5.0.24" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt 

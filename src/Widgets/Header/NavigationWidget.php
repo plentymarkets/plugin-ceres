@@ -106,26 +106,24 @@ class NavigationWidget extends BaseWidget
 
         $maxItemsContainer = $settingsFactory->createVerticalContainer('megaMenuMaxItems')
             ->withName('Widget.navigationMegaMenuMaxItemsLabel')
-            ->withCondition("navigationStyle === 'megaMenu'")
             ->children;
 
         $maxItemsContainer->createNumber('stage1')
             ->withName('Widget.navigationMegaMenuMaxItemsStage1Label')
             ->withTooltip('Widget.navigationMegaMenuMaxItemsStage1Tooltip')
-            ->withDefaultValue(30)
-            ->withCondition('megaMenuLevels >= 2');
-
+            ->withDefaultValue(30);
+            
         $maxItemsContainer->createNumber('stage2')
             ->withName('Widget.navigationMegaMenuMaxItemsStage2Label')
             ->withTooltip('Widget.navigationMegaMenuMaxItemsStage2Tooltip')
             ->withDefaultValue(3)
-            ->withCondition('megaMenuLevels >= 3');
+            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 3');
 
         $maxItemsContainer->createNumber('stage3')
             ->withName('Widget.navigationMegaMenuMaxItemsStage3Label')
             ->withTooltip('Widget.navigationMegaMenuMaxItemsStage3Tooltip')
             ->withDefaultValue(2)
-            ->withCondition('megaMenuLevels >= 4');
+            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
 
         $settingsFactory->createFile('companyLogoUrl')
             ->withName('Widget.navigationCompanyLogoUrlLabel')

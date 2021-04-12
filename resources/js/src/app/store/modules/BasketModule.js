@@ -1,3 +1,4 @@
+import Vue from "vue";
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
 import { getUrlParams } from "../../services/UrlService";
@@ -6,6 +7,8 @@ import { isNullOrUndefined, isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
 const ApiService = require("../../services/ApiService");
 
+// cache updated base prices for performance purposes
+const updatedItemBasePriceCache = {};
 const state = () => ({
     data: {},
     items: [],
@@ -79,6 +82,13 @@ const mutations =
             {
                 entry.price = basketItem.price;
                 entry.quantity = basketItem.quantity;
+
+                // check if the 'AfterBasketItemUpdate' contains a new base price for the item (graduated prices)
+                if (!isNullOrUndefined(basketItem.basePrice))
+                {
+                    Vue.set(entry, "updatedBasePrice", basketItem.basePrice);
+                    updatedItemBasePriceCache[basketItem.id] = basketItem.basePrice;
+                }
             }
         },
 
@@ -365,6 +375,12 @@ function _fillMissingData(item)
                 }
             }
         }
+    }
+
+    if (updatedItemBasePriceCache.hasOwnProperty(item.id))
+    {
+        item.updatedBasePrice = updatedItemBasePriceCache[item.id];
+        delete updatedItemBasePriceCache[item.id];
     }
 }
 

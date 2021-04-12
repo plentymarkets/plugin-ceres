@@ -324,6 +324,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -415,6 +417,11 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
       return this.basketItem.price + setComponentsParamSurcharge;
     },
     basePrice: function basePrice() {
+      // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(this.basketItem.updatedBasePrice)) {
+        return this.basketItem.updatedBasePrice;
+      }
+
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(this.basketItem.variation.data.prices.specialOffer)) {
         return this.basketItem.variation.data.prices.specialOffer.basePrice;
       }
@@ -667,24 +674,30 @@ var render = function() {
           }
         },
         [
-          _c(
-            "div",
-            { staticClass: "image-container" },
-            [
-              _vm.image
-                ? _c("lazy-img", {
-                    attrs: {
-                      "picture-class": "d-block mw-100 mh-100",
-                      "image-url": _vm.image,
-                      alt: _vm.altText,
-                      title: _vm.itemName,
-                      "data-testing": "basket-item-img"
-                    }
-                  })
-                : _vm._e()
-            ],
-            1
-          ),
+          _c("div", { staticClass: "image-container" }, [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: _vm._f("itemURL")(_vm.basketItem.variation.data)
+                }
+              },
+              [
+                _vm.image
+                  ? _c("lazy-img", {
+                      attrs: {
+                        "picture-class": "d-block mw-100 mh-100",
+                        "image-url": _vm.image,
+                        alt: _vm.altText,
+                        title: _vm.itemName,
+                        "data-testing": "basket-item-img"
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
           _c(
             "div",

@@ -362,7 +362,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -475,12 +474,8 @@ var TimeEnum = Object.freeze({
       return prices;
     }
   },
-  created: function created() {
-    this.$store.dispatch("retrieveLiveShoppingOffer", {
-      liveShoppingId: this.liveShoppingId,
-      sorting: this.sorting,
-      uid: this._uid
-    });
+  mounted: function mounted() {
+    this.reloadOffer();
   },
   methods: {
     whenIsCurrentOffer: function whenIsCurrentOffer() {

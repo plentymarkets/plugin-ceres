@@ -2314,30 +2314,35 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     emitInputEvent: function emitInputEvent(value) {
+      var isNewGenderPersonal = this.getIsGenderPersonal(value);
+      var isOldGenderPersonal = this.getIsGenderPersonal(this.addressData.gender);
       this.$emit("input", {
         field: "gender",
         value: value
-      });
-      this.$emit("input", {
-        field: "name1",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "name2",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "name3",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "vatNumber",
-        value: ""
-      });
-      this.$emit("input", {
-        field: "contactPerson",
-        value: ""
-      });
+      }); // just reset the input fields, when switching the gender between a personal one and company
+
+      if (isNewGenderPersonal !== isOldGenderPersonal) {
+        this.$emit("input", {
+          field: "name1",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "name2",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "name3",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "vatNumber",
+          value: ""
+        });
+        this.$emit("input", {
+          field: "contactPerson",
+          value: ""
+        });
+      }
     },
     checkGenderCompany: function checkGenderCompany(gender) {
       if (gender === "company") {
@@ -2345,6 +2350,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return true;
+    },
+    getIsGenderPersonal: function getIsGenderPersonal(gender) {
+      return ["male", "female", "diverse"].includes(gender);
     }
   },
   watch: {
@@ -2800,15 +2808,14 @@ __webpack_require__.r(__webpack_exports__);
       return Object(_helper_get__WEBPACK_IMPORTED_MODULE_5__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.units"));
     }
   },
-  created: function created() {},
+  created: function created() {
+    this.$store.dispatch("initVariation", this.itemData);
+    this.$store.commit("".concat(this.itemId, "/setPleaseSelectVariationId"), this.pleaseSelectOptionVariationId);
+  },
   mounted: function mounted() {
     var _this = this;
 
     this.$nextTick(function () {
-      _this.$store.dispatch("initVariation", _this.itemData);
-
-      _this.$store.commit("".concat(_this.itemId, "/setPleaseSelectVariationId"), _this.pleaseSelectOptionVariationId);
-
       _this.$store.dispatch("addLastSeenItem", _this.currentVariation.variation.id);
 
       _this.$store.dispatch("".concat(_this.itemId, "/variationSelect/setVariationSelect"), {
@@ -3543,6 +3550,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-store-special",
@@ -3565,6 +3576,17 @@ __webpack_require__.r(__webpack_exports__);
         3: this.$translate("Ceres::Template.storeSpecialTop")
       }
     };
+  },
+  computed: {
+    hasLabel: function hasLabel() {
+      return this.label && this.label !== "";
+    },
+    isBundle: function isBundle() {
+      return this.bundleType === "bundle";
+    },
+    isSet: function isSet() {
+      return this.itemType === "set";
+    }
   },
   created: function created() {
     this.initializeStoreSpecial();
@@ -42377,430 +42399,365 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.currentVariation
-    ? _c(
-        "div",
+  return _c(
+    "div",
+    [
+      _vm._t(
+        "default",
         [
-          _vm._t(
-            "default",
+          _c(
+            "div",
+            { staticClass: "single container-max page-content" },
             [
-              _c(
-                "div",
-                { staticClass: "single container-max page-content" },
-                [
-                  _c("div", { staticClass: "row position-relative" }, [
-                    _c(
-                      "div",
-                      { staticClass: "col-12 col-md-7 mt-5" },
-                      [_vm._t("image-carousel")],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-md-5 mt-md-5" }, [
-                      _c(
-                        "div",
+              _c("div", { staticClass: "row position-relative" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-12 col-md-7 mt-5" },
+                  [_vm._t("image-carousel")],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-5 mt-md-5" }, [
+                  _c(
+                    "div",
+                    {
+                      directives: [
                         {
-                          directives: [
+                          name: "stick-in-parent",
+                          rawName: "v-stick-in-parent"
+                        }
+                      ]
+                    },
+                    [
+                      _vm.currentVariation.filter.hasManufacturer
+                        ? _c(
+                            "div",
                             {
-                              name: "stick-in-parent",
-                              rawName: "v-stick-in-parent"
-                            }
-                          ]
-                        },
-                        [
-                          _vm.currentVariation.filter.hasManufacturer
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "producertag h6 producer text-muted"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(
-                                        _vm.currentVariation.item.manufacturer
-                                          .externalName
-                                      ) +
-                                      "\n                        "
-                                  )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c(
-                            "h1",
-                            {
-                              staticClass: "h2 title",
-                              attrs: { "data-testing": "item-name" }
+                              staticClass: "producertag h6 producer text-muted"
                             },
                             [
-                              _c("span", [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.currentVariation.item.manufacturer
+                                      .externalName
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "h1",
+                        {
+                          staticClass: "h2 title",
+                          attrs: { "data-testing": "item-name" }
+                        },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm._f("itemName")(_vm.currentVariation)
+                                ) +
+                                "\n                            "
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._t("tag-list"),
+                      _vm._v(" "),
+                      _vm.isShortDescriptionActive &&
+                      _vm.currentVariation.texts.shortDescription !== ""
+                        ? _c("p", {
+                            staticClass: "single-description",
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.currentVariation.texts.shortDescription
+                              )
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("hr"),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-5" }, [
+                        _c(
+                          "span",
+                          { staticClass: "articlenumber small text-muted" },
+                          [
+                            _c("b", [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.singleItemNumber"
+                                  )
+                                ) + " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("span", [
+                              _vm._v(
+                                _vm._s(_vm.currentVariation.variation.number)
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.attributes.length || Object.keys(_vm.units).length
+                        ? _c(
+                            "div",
+                            { staticClass: "mb-3" },
+                            [_c("variation-select")],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.currentVariation.variation.bundleType === "bundle"
+                        ? _c("item-bundle", {
+                            attrs: {
+                              "bundle-type":
+                                _vm.currentVariation.variation.bundleType,
+                              "bundle-components":
+                                _vm.currentVariation.bundleComponents
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._t("before-price"),
+                      _vm._v(" "),
+                      _vm.currentVariation.filter.isSalable &&
+                      _vm.variationGroupedProperties.length
+                        ? _c("div", [_c("order-property-list")], 1)
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("graduated-prices"),
+                      _vm._v(" "),
+                      _c("item-price", {
+                        attrs: {
+                          "show-cross-price": _vm.isRecommendedPriceActive
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._t("after-price"),
+                      _vm._v(" "),
+                      _c("item-availability"),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "my-3" }, [
+                        _c(
+                          "div",
+                          { staticClass: "w-100" },
+                          [_vm._t("before-add-to-basket")],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _vm.currentVariation.item.itemType === "set"
+                          ? _c(
+                              "div",
+                              { staticClass: "alert alert-info w-100" },
+                              [
                                 _vm._v(
                                   "\n                                " +
                                     _vm._s(
-                                      _vm._f("itemName")(_vm.currentVariation)
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemSetInfo"
+                                      )
                                     ) +
                                     "\n                            "
                                 )
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm._t("tag-list"),
-                          _vm._v(" "),
-                          _vm.isShortDescriptionActive &&
-                          _vm.currentVariation.texts.shortDescription !== ""
-                            ? _c("p", {
-                                staticClass: "single-description",
-                                domProps: {
-                                  innerHTML: _vm._s(
-                                    _vm.currentVariation.texts.shortDescription
-                                  )
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("hr"),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-5" }, [
-                            _c(
-                              "span",
-                              { staticClass: "articlenumber small text-muted" },
+                              ]
+                            )
+                          : _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col-12 col-sm-7 col-md-12 col-lg-8 my-3"
+                              },
                               [
-                                _c("b", [
+                                _c("add-to-basket", {
+                                  attrs: {
+                                    "variation-id":
+                                      _vm.currentVariation.variation.id,
+                                    "is-salable":
+                                      !!_vm.currentVariation.filter &&
+                                      _vm.currentVariation.filter.isSalable,
+                                    "has-children":
+                                      !!_vm.currentVariation.filter &&
+                                      _vm.currentVariation.filter
+                                        .hasActiveChildren,
+                                    "interval-quantity":
+                                      _vm.currentVariation.variation
+                                        .intervalOrderQuantity || 1,
+                                    "minimum-quantity":
+                                      _vm.currentVariation.variation
+                                        .minimumOrderQuantity,
+                                    "maximum-quantity":
+                                      !!_vm.currentVariation.variation
+                                        .maximumOrderQuantity &&
+                                      _vm.currentVariation.variation
+                                        .maximumOrderQuantity > 0
+                                        ? _vm.currentVariation.variation
+                                            .maximumOrderQuantity
+                                        : null,
+                                    "order-properties": _vm.currentVariation.properties.filter(
+                                      function(prop) {
+                                        return prop.property.isOderProperty
+                                      }
+                                    ),
+                                    "use-large-scale": false,
+                                    "show-quantity": true,
+                                    "item-url": _vm._f("itemURL")(
+                                      _vm.currentVariation
+                                    ),
+                                    "is-variation-selected":
+                                      _vm.isVariationSelected &&
+                                      _vm.currentVariation.filter.isSalable,
+                                    "has-price": _vm._f("hasItemDefaultPrice")(
+                                      _vm.currentVariation
+                                    )
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "w-100" },
+                          [_vm._t("after-add-to-basket")],
+                          2
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.isWishListEnabled
+                        ? _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-12" },
+                              [
+                                _c("add-to-wish-list", {
+                                  attrs: {
+                                    "variation-id":
+                                      _vm.currentVariation.variation.id
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._t("additional-content-after-add-to-basket"),
+                      _vm._v(" "),
+                      _c("hr"),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        { staticClass: "vat small text-muted" },
+                        [
+                          _vm._v("\n                            * "),
+                          _vm.showNetPrices
+                            ? [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.singleItemExclVAT"
+                                    )
+                                  )
+                                )
+                              ]
+                            : [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.singleItemInclVAT"
+                                    )
+                                  )
+                                )
+                              ],
+                          _vm._v(
+                            " " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.singleItemExclusive"
+                                )
+                              ) +
+                              "\n                        "
+                          ),
+                          _vm.hasShippingCostsCategoryId
+                            ? _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    "data-toggle": "modal",
+                                    href: "#shippingscosts",
+                                    title: _vm.$translate(
+                                      "Ceres::Template.singleItemShippingCosts"
+                                    )
+                                  }
+                                },
+                                [
                                   _vm._v(
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.singleItemNumber"
+                                        "Ceres::Template.singleItemShippingCosts"
                                       )
-                                    ) + " "
+                                    )
                                   )
-                                ]),
-                                _vm._v(" "),
-                                _c("span", [
+                                ]
+                              )
+                            : _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    title: _vm.$translate(
+                                      "Ceres::Template.singleItemShippingCosts"
+                                    )
+                                  }
+                                },
+                                [
                                   _vm._v(
                                     _vm._s(
-                                      _vm.currentVariation.variation.number
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemShippingCosts"
+                                      )
                                     )
                                   )
-                                ])
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _vm.attributes.length || Object.keys(_vm.units).length
-                            ? _c(
-                                "div",
-                                { staticClass: "mb-3" },
-                                [_c("variation-select")],
-                                1
+                                ]
                               )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.currentVariation.variation.bundleType === "bundle"
-                            ? _c("item-bundle", {
-                                attrs: {
-                                  "bundle-type":
-                                    _vm.currentVariation.variation.bundleType,
-                                  "bundle-components":
-                                    _vm.currentVariation.bundleComponents
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm._t("before-price"),
-                          _vm._v(" "),
-                          _vm.currentVariation.filter.isSalable &&
-                          _vm.variationGroupedProperties.length
-                            ? _c("div", [_c("order-property-list")], 1)
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("graduated-prices"),
-                          _vm._v(" "),
-                          _c("item-price", {
-                            attrs: {
-                              "show-cross-price": _vm.isRecommendedPriceActive
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm._t("after-price"),
-                          _vm._v(" "),
-                          _c("item-availability"),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "my-3" }, [
-                            _c(
-                              "div",
-                              { staticClass: "w-100" },
-                              [_vm._t("before-add-to-basket")],
-                              2
-                            ),
-                            _vm._v(" "),
-                            _vm.currentVariation.item.itemType === "set"
-                              ? _c(
-                                  "div",
-                                  { staticClass: "alert alert-info w-100" },
-                                  [
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.singleItemSetInfo"
-                                          )
-                                        ) +
-                                        "\n                            "
-                                    )
-                                  ]
-                                )
-                              : _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "col-12 col-sm-7 col-md-12 col-lg-8 my-3"
-                                  },
-                                  [
-                                    _c("add-to-basket", {
-                                      attrs: {
-                                        "variation-id":
-                                          _vm.currentVariation.variation.id,
-                                        "is-salable":
-                                          !!_vm.currentVariation.filter &&
-                                          _vm.currentVariation.filter.isSalable,
-                                        "has-children":
-                                          !!_vm.currentVariation.filter &&
-                                          _vm.currentVariation.filter
-                                            .hasActiveChildren,
-                                        "interval-quantity":
-                                          _vm.currentVariation.variation
-                                            .intervalOrderQuantity || 1,
-                                        "minimum-quantity":
-                                          _vm.currentVariation.variation
-                                            .minimumOrderQuantity,
-                                        "maximum-quantity":
-                                          !!_vm.currentVariation.variation
-                                            .maximumOrderQuantity &&
-                                          _vm.currentVariation.variation
-                                            .maximumOrderQuantity > 0
-                                            ? _vm.currentVariation.variation
-                                                .maximumOrderQuantity
-                                            : null,
-                                        "order-properties": _vm.currentVariation.properties.filter(
-                                          function(prop) {
-                                            return prop.property.isOderProperty
-                                          }
-                                        ),
-                                        "use-large-scale": false,
-                                        "show-quantity": true,
-                                        "item-url": _vm._f("itemURL")(
-                                          _vm.currentVariation
-                                        ),
-                                        "is-variation-selected":
-                                          _vm.isVariationSelected &&
-                                          _vm.currentVariation.filter.isSalable,
-                                        "has-price": _vm._f(
-                                          "hasItemDefaultPrice"
-                                        )(_vm.currentVariation)
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "w-100" },
-                              [_vm._t("after-add-to-basket")],
-                              2
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _vm.isWishListEnabled
-                            ? _c("div", { staticClass: "row" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-12" },
-                                  [
-                                    _c("add-to-wish-list", {
-                                      attrs: {
-                                        "variation-id":
-                                          _vm.currentVariation.variation.id
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm._t("additional-content-after-add-to-basket"),
-                          _vm._v(" "),
-                          _c("hr"),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            { staticClass: "vat small text-muted" },
-                            [
-                              _vm._v("\n                            * "),
-                              _vm.showNetPrices
-                                ? [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.$translate(
-                                          "Ceres::Template.singleItemExclVAT"
-                                        )
-                                      )
-                                    )
-                                  ]
-                                : [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.$translate(
-                                          "Ceres::Template.singleItemInclVAT"
-                                        )
-                                      )
-                                    )
-                                  ],
-                              _vm._v(
-                                " " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.singleItemExclusive"
-                                    )
-                                  ) +
-                                  "\n                        "
-                              ),
-                              _vm.hasShippingCostsCategoryId
-                                ? _c(
-                                    "a",
-                                    {
-                                      attrs: {
-                                        "data-toggle": "modal",
-                                        href: "#shippingscosts",
-                                        title: _vm.$translate(
-                                          "Ceres::Template.singleItemShippingCosts"
-                                        )
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.singleItemShippingCosts"
-                                          )
-                                        )
-                                      )
-                                    ]
-                                  )
-                                : _c(
-                                    "a",
-                                    {
-                                      attrs: {
-                                        title: _vm.$translate(
-                                          "Ceres::Template.singleItemShippingCosts"
-                                        )
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.singleItemShippingCosts"
-                                          )
-                                        )
-                                      )
-                                    ]
-                                  )
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _vm._t("additional-content-after-vat")
                         ],
                         2
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-md-7" }, [
-                      _c("div", { staticClass: "my-5" }, [
-                        _c(
-                          "ul",
-                          {
-                            staticClass: "nav nav-tabs",
-                            attrs: { role: "tablist" }
-                          },
-                          [
-                            _vm.isDescriptionTabActive
-                              ? _c("li", { staticClass: "nav-item" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "nav-link active",
-                                      attrs: {
-                                        "data-toggle": "tab",
-                                        href:
-                                          "#details-" +
-                                          _vm.currentVariation.variation.id,
-                                        role: "tab"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.singleItemDescription"
-                                          )
-                                        )
-                                      )
-                                    ]
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.isTechnicalDataTabActive
-                              ? _c("li", { staticClass: "nav-item" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "nav-link",
-                                      class: {
-                                        active:
-                                          !_vm.isDescriptionTabActive &&
-                                          _vm.isTechnicalDataTabActive
-                                      },
-                                      attrs: {
-                                        "data-toggle": "tab",
-                                        href:
-                                          "#data-" +
-                                          _vm.currentVariation.variation.id,
-                                        role: "tab"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.singleItemTechnicalData"
-                                          )
-                                        )
-                                      )
-                                    ]
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "nav-item" }, [
+                      ),
+                      _vm._v(" "),
+                      _vm._t("additional-content-after-vat")
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-md-7" }, [
+                  _c("div", { staticClass: "my-5" }, [
+                    _c(
+                      "ul",
+                      {
+                        staticClass: "nav nav-tabs",
+                        attrs: { role: "tablist" }
+                      },
+                      [
+                        _vm.isDescriptionTabActive
+                          ? _c("li", { staticClass: "nav-item" }, [
                               _c(
                                 "a",
                                 {
-                                  staticClass: "nav-link",
-                                  class: {
-                                    active:
-                                      !_vm.isDescriptionTabActive &&
-                                      !_vm.isTechnicalDataTabActive
-                                  },
+                                  staticClass: "nav-link active",
                                   attrs: {
                                     "data-toggle": "tab",
-                                    href: "#assessments-details",
+                                    href:
+                                      "#details-" +
+                                      _vm.currentVariation.variation.id,
                                     role: "tab"
                                   }
                                 },
@@ -42808,495 +42765,548 @@ var render = function() {
                                   _vm._v(
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.singleItemMoreDetails"
+                                        "Ceres::Template.singleItemDescription"
                                       )
                                     )
                                   )
                                 ]
                               )
-                            ]),
-                            _vm._v(" "),
-                            _vm._t("add-detail-tabs")
-                          ],
-                          2
-                        ),
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "tab-content overflow-hidden" },
-                          [
-                            _vm.isDescriptionTabActive
-                              ? _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "tab-pane active overflow-auto",
-                                    attrs: {
-                                      id:
-                                        "details-" +
-                                        _vm.currentVariation.variation.id,
-                                      role: "tabpanel"
-                                    }
+                        _vm.isTechnicalDataTabActive
+                          ? _c("li", { staticClass: "nav-item" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "nav-link",
+                                  class: {
+                                    active:
+                                      !_vm.isDescriptionTabActive &&
+                                      _vm.isTechnicalDataTabActive
                                   },
-                                  [
-                                    _c("div", {
-                                      staticClass: "my-4",
-                                      domProps: {
-                                        innerHTML: _vm._s(
-                                          _vm.currentVariation.texts.description
-                                        )
-                                      }
-                                    })
-                                  ]
+                                  attrs: {
+                                    "data-toggle": "tab",
+                                    href:
+                                      "#data-" +
+                                      _vm.currentVariation.variation.id,
+                                    role: "tab"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemTechnicalData"
+                                      )
+                                    )
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "nav-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              class: {
+                                active:
+                                  !_vm.isDescriptionTabActive &&
+                                  !_vm.isTechnicalDataTabActive
+                              },
+                              attrs: {
+                                "data-toggle": "tab",
+                                href: "#assessments-details",
+                                role: "tab"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.singleItemMoreDetails"
+                                  )
                                 )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.isTechnicalDataTabActive
-                              ? _c(
-                                  "div",
-                                  {
-                                    staticClass: "tab-pane overflow-auto",
-                                    class: {
-                                      active:
-                                        !_vm.isDescriptionTabActive &&
-                                        _vm.isTechnicalDataTabActive
-                                    },
-                                    attrs: {
-                                      id:
-                                        "data-" +
-                                        _vm.currentVariation.variation.id,
-                                      role: "tabpanel"
-                                    }
-                                  },
-                                  [
-                                    _c("div", {
-                                      staticClass: "my-4",
-                                      domProps: {
-                                        innerHTML: _vm._s(
-                                          _vm.currentVariation.texts
-                                            .technicalData
-                                        )
-                                      }
-                                    })
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._t("add-detail-tabs")
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "tab-content overflow-hidden" },
+                      [
+                        _vm.isDescriptionTabActive
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane active overflow-auto",
+                                attrs: {
+                                  id:
+                                    "details-" +
+                                    _vm.currentVariation.variation.id,
+                                  role: "tabpanel"
+                                }
+                              },
+                              [
+                                _c("div", {
+                                  staticClass: "my-4",
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      _vm.currentVariation.texts.description
+                                    )
+                                  }
+                                })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.isTechnicalDataTabActive
+                          ? _c(
                               "div",
                               {
                                 staticClass: "tab-pane overflow-auto",
                                 class: {
                                   active:
                                     !_vm.isDescriptionTabActive &&
-                                    !_vm.isTechnicalDataTabActive
+                                    _vm.isTechnicalDataTabActive
                                 },
                                 attrs: {
-                                  id: "assessments-details",
+                                  id:
+                                    "data-" + _vm.currentVariation.variation.id,
                                   role: "tabpanel"
                                 }
                               },
                               [
-                                _c("div", { staticClass: "my-4" }, [
-                                  _c(
-                                    "table",
-                                    {
-                                      staticClass:
-                                        "table table-striped table-hover table-sm"
-                                    },
-                                    [
-                                      _c("tbody", [
-                                        _vm.itemConfig.includes("item.id") ||
-                                        _vm.itemConfig.includes("all")
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemId"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation.item.id
-                                                  )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.item.condition &&
-                                        _vm.currentVariation.item.condition
-                                          .names.name !== "" &&
-                                        (_vm.itemConfig.includes(
-                                          "item.condition"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemCondition"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation.item
-                                                      .condition.names.name
-                                                  )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.itemConfig.includes(
-                                          "item.age_rating"
-                                        ) || _vm.itemConfig.includes("all")
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemAge"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm._f("ageRestriction")(
-                                                      _vm.currentVariation.item
-                                                        .ageRestriction
-                                                    )
-                                                  )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.variation
-                                          .externalId !== "" &&
-                                        (_vm.itemConfig.includes(
-                                          "item.external_id"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemExternalVariationId"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation
-                                                      .variation.externalId
-                                                  )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.variation.model !==
-                                          "" &&
-                                        (_vm.itemConfig.includes(
-                                          "item.variation_model"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemModel"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation
-                                                      .variation.model
-                                                  )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.filter
-                                          .hasManufacturer &&
-                                        _vm.currentVariation.item.manufacturer
-                                          .externalName !== "" &&
-                                        (_vm.itemConfig.includes(
-                                          "item.manufacturer"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemManufacturer"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation.item
-                                                      .manufacturer.externalName
-                                                  )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.item
-                                          .producingCountry &&
-                                        _vm.currentVariation.item
-                                          .producingCountry.names.name !== "" &&
-                                        (_vm.itemConfig.includes(
-                                          "item.producerCountry"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemManufacturingCountry"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation.item
-                                                      .producingCountry.names
-                                                      .name
-                                                  )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.unit &&
-                                        (_vm.itemConfig.includes(
-                                          "item.variationBase_content"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemContent"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation.unit
-                                                      .content
-                                                  ) +
-                                                    " " +
-                                                    _vm._s(
-                                                      _vm.currentVariation.unit
-                                                        .names.name
-                                                    )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.variation
-                                          .weightG !== "" &&
-                                        (_vm.itemConfig.includes(
-                                          "item.weightG"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemWeight"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation
-                                                      .variation.weightG
-                                                  ) + " g"
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.variation
-                                          .weightNetG !== "" &&
-                                        (_vm.itemConfig.includes(
-                                          "item.weightNetG"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemNetWeight"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation
-                                                      .variation.weightNetG
-                                                  ) + " g"
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.itemConfig.includes(
-                                          "item.variation_dimensions"
-                                        ) || _vm.itemConfig.includes("all")
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemDimensions"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _c("span", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm.currentVariation
-                                                        .variation.lengthMM
-                                                    )
-                                                  )
-                                                ]),
-                                                _vm._v("×"),
-                                                _c("span", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm.currentVariation
-                                                        .variation.widthMM
-                                                    )
-                                                  )
-                                                ]),
-                                                _vm._v("×"),
-                                                _c("span", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm.currentVariation
-                                                        .variation.heightMM
-                                                    )
-                                                  )
-                                                ]),
-                                                _vm._v(
-                                                  " mm\n                                            "
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.currentVariation.variation
-                                          .customsTariffNumber !== "" &&
-                                        (_vm.itemConfig.includes(
-                                          "variation.customs_tariff_number"
-                                        ) ||
-                                          _vm.itemConfig.includes("all"))
-                                          ? _c("tr", [
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.$translate(
-                                                      "Ceres::Template.singleItemCustomsTariffNumber"
-                                                    )
-                                                  )
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.currentVariation
-                                                      .variation
-                                                      .customsTariffNumber
-                                                  )
-                                                )
-                                              ])
-                                            ])
-                                          : _vm._e()
-                                      ])
-                                    ]
-                                  )
-                                ])
+                                _c("div", {
+                                  staticClass: "my-4",
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      _vm.currentVariation.texts.technicalData
+                                    )
+                                  }
+                                })
                               ]
-                            ),
-                            _vm._v(" "),
-                            _vm._t("add-detail-tabs-content")
-                          ],
-                          2
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._t("item-list-container"),
-                  _vm._v(" "),
-                  _vm._t("feedback-container")
-                ],
-                2
-              )
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "tab-pane overflow-auto",
+                            class: {
+                              active:
+                                !_vm.isDescriptionTabActive &&
+                                !_vm.isTechnicalDataTabActive
+                            },
+                            attrs: {
+                              id: "assessments-details",
+                              role: "tabpanel"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "my-4" }, [
+                              _c(
+                                "table",
+                                {
+                                  staticClass:
+                                    "table table-striped table-hover table-sm"
+                                },
+                                [
+                                  _c("tbody", [
+                                    _vm.itemConfig.includes("item.id") ||
+                                    _vm.itemConfig.includes("all")
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemId"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.item.id
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.item.condition &&
+                                    _vm.currentVariation.item.condition.names
+                                      .name !== "" &&
+                                    (_vm.itemConfig.includes(
+                                      "item.condition"
+                                    ) ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemCondition"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.item
+                                                  .condition.names.name
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.itemConfig.includes(
+                                      "item.age_rating"
+                                    ) || _vm.itemConfig.includes("all")
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemAge"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("ageRestriction")(
+                                                  _vm.currentVariation.item
+                                                    .ageRestriction
+                                                )
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.variation
+                                      .externalId !== "" &&
+                                    (_vm.itemConfig.includes(
+                                      "item.external_id"
+                                    ) ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemExternalVariationId"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.variation
+                                                  .externalId
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.variation.model !==
+                                      "" &&
+                                    (_vm.itemConfig.includes(
+                                      "item.variation_model"
+                                    ) ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemModel"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.variation
+                                                  .model
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.filter
+                                      .hasManufacturer &&
+                                    _vm.currentVariation.item.manufacturer
+                                      .externalName !== "" &&
+                                    (_vm.itemConfig.includes(
+                                      "item.manufacturer"
+                                    ) ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemManufacturer"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.item
+                                                  .manufacturer.externalName
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.item
+                                      .producingCountry &&
+                                    _vm.currentVariation.item.producingCountry
+                                      .names.name !== "" &&
+                                    (_vm.itemConfig.includes(
+                                      "item.producerCountry"
+                                    ) ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemManufacturingCountry"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.item
+                                                  .producingCountry.names.name
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.unit &&
+                                    (_vm.itemConfig.includes(
+                                      "item.variationBase_content"
+                                    ) ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemContent"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.unit
+                                                  .content
+                                              ) +
+                                                " " +
+                                                _vm._s(
+                                                  _vm.currentVariation.unit
+                                                    .names.name
+                                                )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.variation.weightG !==
+                                      "" &&
+                                    (_vm.itemConfig.includes("item.weightG") ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemWeight"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.variation
+                                                  .weightG
+                                              ) + " g"
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.variation
+                                      .weightNetG !== "" &&
+                                    (_vm.itemConfig.includes(
+                                      "item.weightNetG"
+                                    ) ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemNetWeight"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.variation
+                                                  .weightNetG
+                                              ) + " g"
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.itemConfig.includes(
+                                      "item.variation_dimensions"
+                                    ) || _vm.itemConfig.includes("all")
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemDimensions"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _c("span", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.currentVariation.variation
+                                                    .lengthMM
+                                                )
+                                              )
+                                            ]),
+                                            _vm._v("×"),
+                                            _c("span", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.currentVariation.variation
+                                                    .widthMM
+                                                )
+                                              )
+                                            ]),
+                                            _vm._v("×"),
+                                            _c("span", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.currentVariation.variation
+                                                    .heightMM
+                                                )
+                                              )
+                                            ]),
+                                            _vm._v(
+                                              " mm\n                                            "
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.variation
+                                      .customsTariffNumber !== "" &&
+                                    (_vm.itemConfig.includes(
+                                      "variation.customs_tariff_number"
+                                    ) ||
+                                      _vm.itemConfig.includes("all"))
+                                      ? _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemCustomsTariffNumber"
+                                                )
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.variation
+                                                  .customsTariffNumber
+                                              )
+                                            )
+                                          ])
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._t("add-detail-tabs-content")
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._t("item-list-container"),
+              _vm._v(" "),
+              _vm._t("feedback-container")
             ],
-            {
-              getDataField: _vm.getDataField,
-              getFilteredDataField: _vm.getFilteredDataField
-            }
+            2
           )
         ],
-        2
+        {
+          getDataField: _vm.getDataField,
+          getFilteredDataField: _vm.getFilteredDataField
+        }
       )
-    : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43985,15 +43995,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.label.length ||
-    _vm.bundleType === "bundle" ||
-    _vm.itemType === "set"
+  return _vm.hasLabel || _vm.isBundle || _vm.isSet
     ? _c("div", { staticClass: "special-tags p-2" }, [
-        _vm.label.length
+        _vm.hasLabel
           ? _c("span", { staticClass: "badge", class: _vm.tagClass }, [
               _vm._v("\n        " + _vm._s(_vm.label) + "\n    ")
             ])
-          : _vm.bundleType === "bundle"
+          : _vm.isBundle
           ? _c("span", { class: _vm.tagClasses.itemBundle }, [
               _vm._v(
                 "\n        " +
@@ -44001,7 +44009,7 @@ var render = function() {
                   "\n    "
               )
             ])
-          : _vm.itemType === "set"
+          : _vm.isSet
           ? _c("span", { class: _vm.tagClasses.itemSet }, [
               _vm._v(
                 "\n        " +
@@ -66638,6 +66646,10 @@ var StickyElement = /*#__PURE__*/function () {
     value: function checkElement(skipOffsetCalculation) {
       var _this4 = this;
 
+      if (!this.enabled) {
+        return false;
+      }
+
       var oldValue = this.position || {};
       var elementRect = this.el.getBoundingClientRect();
       var placeholderRect = this.placeholder.getBoundingClientRect();
@@ -70470,14 +70482,17 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-var state = {
-  billingAddressId: null,
-  billingAddress: null,
-  billingAddressList: [],
-  deliveryAddressId: null,
-  deliveryAddress: null,
-  deliveryAddressList: []
+var state = function state() {
+  return {
+    billingAddressId: null,
+    billingAddress: null,
+    billingAddressList: [],
+    deliveryAddressId: null,
+    deliveryAddress: null,
+    deliveryAddressList: []
+  };
 };
+
 var mutations = {
   setBillingAddressList: function setBillingAddressList(state, billingAddressList) {
     if (Array.isArray(billingAddressList)) {
@@ -70891,10 +70906,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
 /* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -70923,19 +70940,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js"); // cache updated base prices for performance purposes
 
-var state = {
-  data: {},
-  items: [],
-  showNetPrices: false,
-  isBasketLoading: false,
-  isBasketInitiallyLoaded: false,
-  isBasketItemQuantityUpdate: false,
-  basketNotifications: []
+
+var updatedItemBasePriceCache = {};
+
+var state = function state() {
+  return {
+    data: {},
+    items: [],
+    showNetPrices: false,
+    isBasketLoading: false,
+    isBasketInitiallyLoaded: false,
+    isBasketItemQuantityUpdate: false,
+    basketNotifications: []
+  };
 };
+
 var mutations = {
   setBasket: function setBasket(state, basket) {
     if (state.data.id && JSON.stringify(basket) !== JSON.stringify(state.data)) {
@@ -70999,9 +71023,14 @@ var mutations = {
       return item.id === basketItem.id;
     });
 
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(entry)) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(entry)) {
       entry.price = basketItem.price;
-      entry.quantity = basketItem.quantity;
+      entry.quantity = basketItem.quantity; // check if the 'AfterBasketItemUpdate' contains a new base price for the item (graduated prices)
+
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(basketItem.basePrice)) {
+        vue__WEBPACK_IMPORTED_MODULE_15___default.a.set(entry, "updatedBasePrice", basketItem.basePrice);
+        updatedItemBasePriceCache[basketItem.id] = basketItem.basePrice;
+      }
     }
   },
   addBasketNotification: function addBasketNotification(state, _ref) {
@@ -71048,7 +71077,7 @@ var actions = {
         commit = _ref2.commit;
 
     if (!state.isBasketInitiallyLoaded) {
-      jQuery.when(ApiService.get("/rest/io/basket", Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_16__["getUrlParams"])(), {
+      jQuery.when(ApiService.get("/rest/io/basket", Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_17__["getUrlParams"])(), {
         cache: false,
         keepOriginalResponse: true
       }), ApiService.get("/rest/io/basket/items", {
@@ -71068,7 +71097,7 @@ var actions = {
         console.log(error, status);
 
         if (status > 0) {
-          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
+          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
         }
       });
     }
@@ -71143,8 +71172,8 @@ var actions = {
         commit("removeBasketItem", basketItemId);
         resolve(response);
 
-        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_17__["pathnameEquals"])(App.urls.checkout) && state.items.length === 0) {
-          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_16__["navigateTo"])(App.urls.basket);
+        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_18__["pathnameEquals"])(App.urls.checkout) && state.items.length === 0) {
+          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_17__["navigateTo"])(App.urls.basket);
         }
       }).fail(function (error) {
         commit("setIsBasketLoading", false);
@@ -71202,21 +71231,21 @@ var actions = {
 function _fillMissingData(item) {
   var oldBasketItem = null;
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(item.variation)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.variation)) {
     oldBasketItem = state.items.find(function (i) {
       return i.id === item.id;
     });
     item.variation = oldBasketItem.variation;
   }
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(item.basketItemOrderParams)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.basketItemOrderParams)) {
     oldBasketItem = oldBasketItem || state.items.find(function (i) {
       return i.id === item.id;
     });
     item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
   }
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isDefined"])(item.setComponents) && item.setComponents.length > 0 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(item.setComponents[0].variation)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(item.setComponents) && item.setComponents.length > 0 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.setComponents[0].variation)) {
     oldBasketItem = oldBasketItem || state.items.find(function (i) {
       return i.id === item.id;
     });
@@ -71233,7 +71262,7 @@ function _fillMissingData(item) {
           });
           setComponent.variation = oldComp.variation;
 
-          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(setComponent.basketItemOrderParams)) {
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(setComponent.basketItemOrderParams)) {
             setComponent.basketItemOrderParams = oldComp.basketItemOrderParams;
           }
         };
@@ -71247,6 +71276,11 @@ function _fillMissingData(item) {
         _iterator2.f();
       }
     }
+  }
+
+  if (updatedItemBasePriceCache.hasOwnProperty(item.id)) {
+    item.updatedBasePrice = updatedItemBasePriceCache[item.id];
+    delete updatedItemBasePriceCache[item.id];
   }
 }
 
@@ -71287,43 +71321,46 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-var state = {
-  shipping: {
-    isParcelBoxAvailable: false,
-    isPostOfficeAvailable: false,
-    selectedShippingProfile: null,
-    shippingProfileId: null,
-    shippingProfileList: [],
-    maxDeliveryDays: null
-  },
-  payment: {
-    methodOfPaymentId: null,
-    methodOfPaymentList: []
-  },
-  contactWish: null,
-  customerSign: null,
-  shippingPrivacyHintAccepted: false,
-  validation: {
-    gtc: {
-      showError: false,
-      validate: null
+var state = function state() {
+  return {
+    shipping: {
+      isParcelBoxAvailable: false,
+      isPostOfficeAvailable: false,
+      selectedShippingProfile: null,
+      shippingProfileId: null,
+      shippingProfileList: [],
+      maxDeliveryDays: null
     },
-    invoiceAddress: {
-      showError: false,
-      validate: null
+    payment: {
+      methodOfPaymentId: null,
+      methodOfPaymentList: []
     },
-    paymentProvider: {
-      showError: false,
-      validate: null
+    contactWish: null,
+    customerSign: null,
+    shippingPrivacyHintAccepted: false,
+    validation: {
+      gtc: {
+        showError: false,
+        validate: null
+      },
+      invoiceAddress: {
+        showError: false,
+        validate: null
+      },
+      paymentProvider: {
+        showError: false,
+        validate: null
+      },
+      shippingProfile: {
+        showError: false,
+        validate: null
+      }
     },
-    shippingProfile: {
-      showError: false,
-      validate: null
-    }
-  },
-  newsletterSubscription: {},
-  readOnly: false
+    newsletterSubscription: {},
+    readOnly: false
+  };
 };
+
 var mutations = {
   setShippingProfile: function setShippingProfile(state, shippingProfileId) {
     if (shippingProfileId) {
@@ -71596,10 +71633,13 @@ function _setConsent(state, _ref) {
   }
 }
 
-var state = {
-  consents: {},
-  hasResponse: false
+var state = function state() {
+  return {
+    consents: {},
+    hasResponse: false
+  };
 };
+
 var mutations = {
   toggleConsent: function toggleConsent(state, key) {
     _setConsent(state, {
@@ -72050,17 +72090,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-var state = {
-  facets: [],
-  selectedFacets: [],
-  page: null,
-  sorting: "",
-  isLoading: false,
-  itemsPerPage: null,
-  searchString: null,
-  items: [],
-  totalItems: null
+
+var state = function state() {
+  return {
+    facets: [],
+    selectedFacets: [],
+    page: null,
+    sorting: "",
+    isLoading: false,
+    itemsPerPage: null,
+    searchString: null,
+    items: [],
+    totalItems: null
+  };
 };
+
 var mutations = {
   addFacets: function addFacets(state, facets) {
     var stateFacets = state.facets;
@@ -72364,16 +72408,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-var state = {
-  autocompleteRequest: null,
-  autocompleteResult: {
-    item: [],
-    category: [],
-    suggestion: []
-  },
-  autocompleteSearchString: "",
-  autocompleteTypes: new Set()
+
+var state = function state() {
+  return {
+    autocompleteRequest: null,
+    autocompleteResult: {
+      item: [],
+      category: [],
+      suggestion: []
+    },
+    autocompleteSearchString: "",
+    autocompleteTypes: new Set()
+  };
 };
+
 var mutations = {
   setAutocompleteRequest: function setAutocompleteRequest(state, request) {
     state.autocompleteRequest = request;
@@ -72438,11 +72486,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-var state = {
-  containers: {},
-  isLastSeenItemsLoading: false,
-  lastSeenItems: []
+var state = function state() {
+  return {
+    containers: {},
+    isLastSeenItemsLoading: false,
+    lastSeenItems: []
+  };
 };
+
 var mutations = {
   setLastSeenItems: function setLastSeenItems(state, lastSeenItems) {
     state.lastSeenItems = lastSeenItems;
@@ -72522,10 +72573,13 @@ var actions = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var state = {
-  components: {// comp tag -> loaded bool
-  }
+var state = function state() {
+  return {
+    components: {// comp tag -> loaded bool
+    }
+  };
 };
+
 var mutations = {
   setComponent: function setComponent(state, _ref) {
     var component = _ref.component,
@@ -72575,9 +72629,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-var state = {
-  liveShoppingOffers: {}
+var state = function state() {
+  return {
+    liveShoppingOffers: {}
+  };
 };
+
 var mutations = {
   setLiveShoppingOffer: function setLiveShoppingOffer(state, _ref) {
     var uid = _ref.uid,
@@ -72645,10 +72702,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-var state = {
-  shippingCountries: [],
-  shippingCountryId: null
+var state = function state() {
+  return {
+    shippingCountries: [],
+    shippingCountryId: null
+  };
 };
+
 var mutations = {
   setShippingCountries: function setShippingCountries(state, shippingCountries) {
     state.shippingCountries = shippingCountries;
@@ -72774,12 +72834,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-var state = {
-  tree: [],
-  cachedTrees: {},
-  currentCategory: null,
-  categoryChildren: []
+var state = function state() {
+  return {
+    tree: [],
+    cachedTrees: {},
+    currentCategory: null,
+    categoryChildren: []
+  };
 };
+
 var mutations = {
   setNavigationTree: function setNavigationTree(state, navigationTree) {
     state.tree = navigationTree;
@@ -72979,12 +73042,15 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
-var state = {
-  orderData: {},
-  orderAccessKey: "",
-  orderReturnItems: [],
-  orderReturnNote: ""
+var state = function state() {
+  return {
+    orderData: {},
+    orderAccessKey: "",
+    orderReturnItems: [],
+    orderReturnNote: ""
+  };
 };
+
 var mutations = {
   setOrderReturnData: function setOrderReturnData(state, orderData) {
     orderData.order.orderItems = orderData.order.orderItems.filter(function (orderItem) {
@@ -73102,9 +73168,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var state = {
-  userData: null
+
+var state = function state() {
+  return {
+    userData: null
+  };
 };
+
 var mutations = {
   setUserData: function setUserData(state, userData) {
     state.userData = userData;
@@ -73178,12 +73248,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
-var state = {
-  wishListIds: [],
-  wishListItems: [],
-  isWishListInitiallyLoading: false,
-  isLoading: false
+var state = function state() {
+  return {
+    wishListIds: [],
+    wishListItems: [],
+    isWishListInitiallyLoading: false,
+    isLoading: false
+  };
 };
+
 var mutations = {
   setWishListItems: function setWishListItems(state, wishListItems) {
     state.wishListItems = wishListItems;
@@ -73322,6 +73395,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 /* harmony import */ var _ItemModule__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ItemModule */ "./resources/js/src/app/store/modules/singleItem/ItemModule.js");
 /* harmony import */ var _VariationSelectModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./VariationSelectModule */ "./resources/js/src/app/store/modules/singleItem/VariationSelectModule.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../index */ "./resources/js/src/app/store/index.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -73343,15 +73417,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-var state = {
-  isItemSet: false,
-  itemSetId: 0,
-  isSetLoading: false,
-  isAddToBasketLoading: 0,
-  previewItemId: 0,
-  setComponentIds: [],
-  mainItemId: null
+
+
+var state = function state() {
+  return {
+    isItemSet: false,
+    itemSetId: 0,
+    isSetLoading: false,
+    isAddToBasketLoading: 0,
+    previewItemId: 0,
+    setComponentIds: [],
+    mainItemId: null
+  };
 };
+
 var mutations = {
   setIsSetLoading: function setIsSetLoading(state, isSetLoading) {
     state.isSetLoading = isSetLoading;
@@ -73441,8 +73520,12 @@ var actions = {
     var extendedData = {
       documents: [item]
     };
-    ceresStore.registerModule(["items", itemId], _ItemModule__WEBPACK_IMPORTED_MODULE_13__["default"]);
-    ceresStore.registerModule(["items", itemId, "variationSelect"], _VariationSelectModule__WEBPACK_IMPORTED_MODULE_14__["default"]);
+    _index__WEBPACK_IMPORTED_MODULE_15__["store"].registerModule(["items", itemId], _ItemModule__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      preserveState: !App.isSSR
+    });
+    _index__WEBPACK_IMPORTED_MODULE_15__["store"].registerModule(["items", itemId, "variationSelect"], _VariationSelectModule__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      preserveState: !App.isSSR
+    });
     commit("".concat(itemId, "/setVariation"), extendedData);
   }
 };

@@ -346,7 +346,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      */
     unsetInvalidSelection: function unsetInvalidSelection(attributeId, attributeValueId, unitId) {
       var qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
-      var closestVariation = this.getClosestVariations(qualifiedVariations)[0];
+      var closestVariations = this.getClosestVariations(qualifiedVariations); // if the salable 'closestVariations' is undefined, take the not-salable one
+
+      var closestVariation = closestVariations[0] || closestVariations[1];
 
       if (!closestVariation) {
         return;
