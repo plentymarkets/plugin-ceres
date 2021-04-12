@@ -11,7 +11,10 @@
                             <i class="fa fa-lg fa-check-circle-o text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
                         </transition>
                     </td>
-                    <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price pl-2 ">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
+                    <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price pl-2 d-none d-xl-block">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
+                </tr>
+                <tr v-if="showBasePrice">
+                    <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price d-xl-none" colspan="2">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
                 </tr>
             </template>
         </table>
