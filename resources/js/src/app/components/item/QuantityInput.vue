@@ -81,7 +81,7 @@ export default {
     {
         return {
             compValue:      this.value,
-            compMin:        this.min,
+            compMin:        this.getReassessedMin(),
             compMax:        this.max,
             compInterval:   this.interval,
             compDecimals:   0,
@@ -141,7 +141,7 @@ export default {
             return this.$translate(
                 "Ceres::Template.singleItemQuantityMin",
                 {
-                    min: this.min
+                    min: this.getReassessedMin()
                 }
             );
         },
@@ -192,7 +192,7 @@ export default {
 
         min(newValue)
         {
-            this.compMin = newValue;
+            this.compMin = this.getReassessedMin();
             this.fetchQuantityFromBasket();
         },
 
@@ -289,7 +289,7 @@ export default {
             }
             else if (this.variationBasketQuantity === 0)
             {
-                this.compMin = this.min;
+                this.compMin = this.getReassessedMin();
             }
 
             if (!isNullOrUndefined(this.max))
@@ -314,6 +314,12 @@ export default {
             }
 
             this.setValue(this.compMin);
+        },
+
+        // return min (prop) if the value is is greater / equal to the interval
+        getReassessedMin()
+        {
+            return this.min >= this.compInterval ? this.min : this.compInterval;
         }
     }
 }
