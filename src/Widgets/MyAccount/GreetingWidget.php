@@ -13,7 +13,7 @@ class GreetingWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.GreetingWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -27,7 +27,7 @@ class GreetingWidget extends BaseWidget
             ->withPosition(100)
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -52,6 +52,8 @@ class GreetingWidget extends BaseWidget
             );
 
         $settings->createSpacing(false, true);
+
+        $settings->createAlignment()->withDefaultValue("left");
 
         return $settings->toArray();
     }
