@@ -1,30 +1,11 @@
 <template>
-    <div v-if="value && !isPrefixValid && isEU" class="input-group flex-nowrap">
-        <div class="input-unit flex-fill w-auto error">
-            <input
-                type="text"
-                name="vatNumber"
-                :id="'txtVatNumber' + _uid"
-                :value="value"
-                data-testing="wrong-vat-id"
-                disabled
-            >
-            <label :for="'txtVatNumber' + _uid">
-                {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
-            </label>
-        </div>
-        <button @click="deleteValue()" class="input-unit w-auto" data-testing="delete-wrong-vat-id">
-            <span>{{ $translate("Ceres::Template.addressDelete") }}</span>
-            <span class="fa fa-trash-o ml-1"></span>
-        </button>
-    </div>
     <div
         class="input-group flex-nowrap"
         data-model="vatNumber"
-        v-else>
+    >
         <div class="input-unit w-auto input-group-prepend" v-if="isEU">
             <span class="input-group-text h-100 border-0" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0] }}</span>
-            <select class="custom-select" v-if="vatCodes.length > 1" v-model="vatPrefix" @change="emitChange()">
+            <select class="custom-select" v-if="vatCodes.length > 1" v-model="vatPrefix">
                 <option v-for="(vatCode, index) in vatCodes" :value="vatCode">{{ vatCode }}</option>
             </select>
         </div>
@@ -37,7 +18,6 @@
                 v-model="vatNumber"
                 data-autofocus
                 data-testing="vat-id"
-                @input="emitChange()"
             >
             <label :for="'txtVatNumber' + _uid">
                 {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
@@ -47,7 +27,6 @@
 </template>
 
 <script>
-import { isNullOrUndefined } from '../../helper/utils';
 export default
 {
     name: "vat-id",
@@ -72,20 +51,21 @@ export default
     {
         vatCodes()
         {
+            console.log("vatPrefix")
             this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
             return this.selectedCountry.vatCodes;
-        },
-
-        selectedCountry()
-        {
-            return this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
         },
 
         isEU()
         {
             return this.vatCodes?.length > 0;
-        }
+        },
 
+        selectedCountry()
+        {
+            console.log("selectedCountryId comp")
+            return this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
+        }
     },
 
     watch:
@@ -93,6 +73,18 @@ export default
         value(newValue)
         {
             this.setValues(newValue);
+        },
+
+        vatNumber()
+        {
+            console.log("vatNumber watch")
+            this.emitChange();
+        },
+
+        vatPrefix()
+        {
+          console.log("vatPrefix watch")
+          this.emitChange();
         }
     },
 
@@ -106,23 +98,13 @@ export default
         transformTranslation(translationKey)
         {
             const translation = this.$translate(translationKey);
-
             return translation + (this.isRequired ? "*" : "");
         },
 
         emitChange()
         {
             const value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
-
             this.$emit('input', value);
-        },
-
-        deleteValue()
-        {
-            this.vatNumber = "";
-            this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
-
-            this.emitChange();
         },
 
         setValues(value)
@@ -149,7 +131,7 @@ export default
         {
             let result = "";
 
-            this.vatCodes.forEach(vatCode => {
+            this.vatCodes?.forEach(vatCode => {
                 if (value.startsWith(vatCode) && vatCode.length > result.length) {
                     result = vatCode;
                 }

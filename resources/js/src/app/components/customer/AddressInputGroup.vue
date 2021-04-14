@@ -1022,7 +1022,8 @@ export default {
         onSelectedCountryChanged(shippingCountry)
         {
             this.selectedCountry = shippingCountry;
-
+            let oldSelectedCountry = this.selectedCountry;
+            let oldLocaleValue = this.localeToShow;
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
             {
                 this.localeToShow = shippingCountry.isoCode2;
@@ -1030,6 +1031,13 @@ export default {
             else
             {
                 this.localeToShow = this.defaultCountry;
+            }
+
+
+            console.log('onSelectedCountryChanged')
+            if (this.defaultCountry  !== shippingCountry.isoCode2 && oldLocaleValue !== this.localeToShow)
+            {
+                this.emitInputEvent("vatNumber", "");
             }
 
             this.emitInputEvent("countryId", shippingCountry.id);

@@ -1100,11 +1100,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      */
     onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
       this.selectedCountry = shippingCountry;
+      var oldSelectedCountry = this.selectedCountry;
+      var oldLocaleValue = this.localeToShow;
 
       if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
         this.localeToShow = shippingCountry.isoCode2;
       } else {
         this.localeToShow = this.defaultCountry;
+      }
+
+      console.log('onSelectedCountryChanged');
+
+      if (this.defaultCountry !== shippingCountry.isoCode2 && oldLocaleValue !== this.localeToShow) {
+        this.emitInputEvent("vatNumber", "");
       }
 
       this.emitInputEvent("countryId", shippingCountry.id);
@@ -1971,66 +1979,50 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_starts_with__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.starts-with */ "./node_modules/core-js/modules/es.string.starts-with.js");
-/* harmony import */ var core_js_modules_es_string_starts_with__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_starts_with__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_starts_with__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.starts-with */ "./node_modules/core-js/modules/es.string.starts-with.js");
+/* harmony import */ var core_js_modules_es_string_starts_with__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_starts_with__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "vat-id",
   props: {
@@ -2041,54 +2033,48 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       vatNumber: "",
-      vatPrefix: ""
+      vatPrefix: "",
+      isPrefixValid: false
     };
   },
   computed: {
     vatCodes: function vatCodes() {
+      console.log("vatPrefix");
       this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
       return this.selectedCountry.vatCodes;
-    },
-    selectedCountry: function selectedCountry() {
-      var _this = this;
-
-      return this.$store.state.localization.shippingCountries.find(function (country) {
-        return country.id === _this.selectedCountryId;
-      });
     },
     isEU: function isEU() {
       var _this$vatCodes;
 
       return ((_this$vatCodes = this.vatCodes) === null || _this$vatCodes === void 0 ? void 0 : _this$vatCodes.length) > 0;
     },
-    isPrefixValid: function isPrefixValid() {
-      var _this2 = this;
+    selectedCountry: function selectedCountry() {
+      var _this = this;
 
-      var validPrefix = this.vatCodes.find(function (vatCode) {
-        var _this2$value;
-
-        return (_this2$value = _this2.value) === null || _this2$value === void 0 ? void 0 : _this2$value.startsWith(vatCode);
+      console.log("selectedCountryId comp");
+      return this.$store.state.localization.shippingCountries.find(function (country) {
+        return country.id === _this.selectedCountryId;
       });
-      var isPrefixValid = !!validPrefix;
-
-      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.value) || this.value.length <= 0) && this.isEU) {
-        this.vatPrefix = this.vatCodes[0];
-        this.vatNumber = "";
-      }
-
-      return isPrefixValid;
     }
   },
   watch: {
     value: function value(newValue) {
       this.setValues(newValue);
+    },
+    vatNumber: function vatNumber() {
+      console.log("vatNumber watch");
+      this.emitChange();
+    },
+    vatPrefix: function vatPrefix() {
+      console.log("vatPrefix watch");
+      this.emitChange();
     }
   },
   created: function created() {
     this.setValues(this.value);
   },
   methods: {
-    transformTranslation: function transformTranslation(translationKey, locale, addressKey) {
+    transformTranslation: function transformTranslation(translationKey) {
       var translation = this.$translate(translationKey);
       return translation + (this.isRequired ? "*" : "");
     },
@@ -2096,22 +2082,32 @@ __webpack_require__.r(__webpack_exports__);
       var value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
       this.$emit('input', value);
     },
-    deleteValue: function deleteValue() {
-      this.vatNumber = "";
-      this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
-      this.emitChange();
-    },
     setValues: function setValues(value) {
-      var vatPrefix = this.vatCodes.find(function (vatCode) {
-        return value === null || value === void 0 ? void 0 : value.startsWith(vatCode);
-      });
+      var vatPrefix = this.getVatPrefix(value);
+      this.isPrefixValid = !!vatPrefix;
 
-      if (!!vatPrefix) {
+      if (this.isPrefixValid) {
         this.vatPrefix = vatPrefix;
         this.vatNumber = value.slice(vatPrefix.length);
       } else {
         this.vatNumber = value;
       }
+    },
+
+    /**
+     * @param value
+     * @returns {string} - Returns the best matching vat code
+     */
+    getVatPrefix: function getVatPrefix(value) {
+      var _this$vatCodes2;
+
+      var result = "";
+      (_this$vatCodes2 = this.vatCodes) === null || _this$vatCodes2 === void 0 ? void 0 : _this$vatCodes2.forEach(function (vatCode) {
+        if (value.startsWith(vatCode) && vatCode.length > result.length) {
+          result = vatCode;
+        }
+      });
+      return result;
     }
   }
 });
@@ -7229,18 +7225,107 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.value && !_vm.isPrefixValid && _vm.isEU
-    ? _c("div", { staticClass: "input-group flex-nowrap" }, [
-        _c("div", { staticClass: "input-unit flex-fill w-auto error" }, [
+  return _c(
+    "div",
+    {
+      staticClass: "input-group flex-nowrap",
+      attrs: { "data-model": "vatNumber" }
+    },
+    [
+      _vm.isEU
+        ? _c("div", { staticClass: "input-unit w-auto input-group-prepend" }, [
+            _vm.vatCodes.length === 1
+              ? _c(
+                  "span",
+                  {
+                    staticClass: "input-group-text h-100 border-0",
+                    attrs: { id: "basic-addon1" }
+                  },
+                  [_vm._v(_vm._s(_vm.vatCodes[0]))]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.vatCodes.length > 1
+              ? _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vatPrefix,
+                        expression: "vatPrefix"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.vatPrefix = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  _vm._l(_vm.vatCodes, function(vatCode, index) {
+                    return _c("option", { domProps: { value: vatCode } }, [
+                      _vm._v(_vm._s(vatCode))
+                    ])
+                  }),
+                  0
+                )
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "validate",
+              rawName: "v-validate:text",
+              value: _vm.isRequired,
+              expression: "isRequired",
+              arg: "text"
+            }
+          ],
+          staticClass: "input-unit flex-fill w-auto"
+        },
+        [
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.vatNumber,
+                expression: "vatNumber"
+              }
+            ],
             attrs: {
+              "aria-describedby": "basic-addon1",
               type: "text",
               name: "vatNumber",
               id: "txtVatNumber" + _vm._uid,
-              "data-testing": "wrong-vat-id",
-              disabled: ""
+              "data-autofocus": "",
+              "data-testing": "vat-id"
             },
-            domProps: { value: _vm.value }
+            domProps: { value: _vm.vatNumber },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.vatNumber = $event.target.value
+              }
+            }
           }),
           _vm._v(" "),
           _c("label", { attrs: { for: "txtVatNumber" + _vm._uid } }, [
@@ -7256,164 +7341,10 @@ var render = function() {
                 "\n        "
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "input-unit w-auto",
-            attrs: { "data-testing": "delete-wrong-vat-id" },
-            on: {
-              click: function($event) {
-                return _vm.deleteValue()
-              }
-            }
-          },
-          [
-            _c("span", [
-              _vm._v(_vm._s(_vm.$translate("Ceres::Template.addressDelete")))
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "fa fa-trash-o ml-1" })
-          ]
-        )
-      ])
-    : _c(
-        "div",
-        {
-          staticClass: "input-group flex-nowrap",
-          attrs: { "data-model": "vatNumber" }
-        },
-        [
-          _vm.isEU
-            ? _c(
-                "div",
-                { staticClass: "input-unit w-auto input-group-prepend" },
-                [
-                  _vm.vatCodes.length === 1
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "input-group-text h-100 border-0",
-                          attrs: { id: "basic-addon1" }
-                        },
-                        [_vm._v(_vm._s(_vm.vatCodes[0]))]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.vatCodes.length > 1
-                    ? _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.vatPrefix,
-                              expression: "vatPrefix"
-                            }
-                          ],
-                          staticClass: "custom-select",
-                          on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.vatPrefix = $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              },
-                              function($event) {
-                                return _vm.emitChange()
-                              }
-                            ]
-                          }
-                        },
-                        _vm._l(_vm.vatCodes, function(vatCode, index) {
-                          return _c(
-                            "option",
-                            { domProps: { value: vatCode } },
-                            [_vm._v(_vm._s(vatCode))]
-                          )
-                        }),
-                        0
-                      )
-                    : _vm._e()
-                ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "validate",
-                  rawName: "v-validate:text",
-                  value: _vm.isRequired,
-                  expression: "isRequired",
-                  arg: "text"
-                }
-              ],
-              staticClass: "input-unit flex-fill w-auto"
-            },
-            [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.vatNumber,
-                    expression: "vatNumber"
-                  }
-                ],
-                attrs: {
-                  "aria-describedby": "basic-addon1",
-                  type: "text",
-                  name: "vatNumber",
-                  id: "txtVatNumber" + _vm._uid,
-                  "data-autofocus": "",
-                  "data-testing": "vat-id"
-                },
-                domProps: { value: _vm.vatNumber },
-                on: {
-                  input: [
-                    function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.vatNumber = $event.target.value
-                    },
-                    function($event) {
-                      return _vm.emitChange()
-                    }
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "txtVatNumber" + _vm._uid } }, [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(
-                      _vm.transformTranslation(
-                        "Ceres::Template.addressVatNumber",
-                        "de",
-                        "billing_address.vatNumber"
-                      )
-                    ) +
-                    "\n        "
-                )
-              ])
-            ]
-          )
         ]
       )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
