@@ -55,7 +55,7 @@
         {% endif %}
 
         {% if isPreview %}
-            <div>{{ Twig.set( "name", "previewText[pattern]" ) }}</div>
+            {{ Twig.set( "name", "previewText[pattern]" ) }}
         {% endif %}
 
         <span class="text-muted widget-alignment">{{ Twig.trans("Ceres::Template.myAccountHello", {"username": Twig.var("name")}) }}</span>
