@@ -63,7 +63,8 @@ export default
     {
         return {
             vatNumber: "",
-            vatPrefix: ""
+            vatPrefix: "",
+            isPrefixValid: false
         }
     },
 
@@ -83,22 +84,8 @@ export default
         isEU()
         {
             return this.vatCodes?.length > 0;
-        },
-
-        isPrefixValid()
-        {
-            const validPrefix = this.vatCodes.find(vatCode => this.value?.startsWith(vatCode));
-
-            let isPrefixValid = !!validPrefix;
-
-            if ((isNullOrUndefined(this.value) || this.value.length <= 0) && this.isEU)
-            {
-                this.vatPrefix = this.vatCodes[0];
-                this.vatNumber = "";
-            }
-
-            return isPrefixValid;
         }
+
     },
 
     watch:
@@ -116,7 +103,7 @@ export default
 
     methods:
     {
-        transformTranslation(translationKey, locale, addressKey)
+        transformTranslation(translationKey)
         {
             const translation = this.$translate(translationKey);
 
@@ -140,9 +127,10 @@ export default
 
         setValues(value)
         {
-            const vatPrefix = this.vatCodes.find(vatCode => value?.startsWith(vatCode));
+            const vatPrefix = this.getVatPrefix(value);
+            this.isPrefixValid = !!vatPrefix;
 
-            if (!!vatPrefix)
+            if (this.isPrefixValid)
             {
                 this.vatPrefix = vatPrefix;
                 this.vatNumber = value.slice(vatPrefix.length);
@@ -151,6 +139,23 @@ export default
             {
                 this.vatNumber = value;
             }
+        },
+
+        /**
+         * @param value
+         * @returns {string} - Returns the best matching vat code
+         */
+        getVatPrefix(value)
+        {
+            let result = "";
+
+            this.vatCodes.forEach(vatCode => {
+                if (value.startsWith(vatCode) && vatCode.length > result.length) {
+                    result = vatCode;
+                }
+            });
+
+            return result;
         }
     }
 }
