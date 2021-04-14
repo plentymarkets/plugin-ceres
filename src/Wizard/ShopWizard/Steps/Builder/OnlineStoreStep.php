@@ -41,6 +41,7 @@ class OnlineStoreStep extends Step
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
+                $this->buildLoginModeSettings()
             ]
         ];
     }
@@ -52,6 +53,7 @@ class OnlineStoreStep extends Step
     {
         return [
             "title" => "Wizard.storeFavicon",
+            "description" => "Wizard.storeFaviconDescription",
             "form" => [
                 "onlineStore_storeFavicon" => [
                     "type" => "file",
@@ -445,5 +447,31 @@ class OnlineStoreStep extends Step
         return $orderStatusList;
     }
 
-
+    private function buildLoginModeSettings()
+    {
+        return [
+            "title" => "Wizard.loginModeTitle",
+            "description" => "Wizard.loginModeDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_loginMode" => [
+                    "type" => "select",
+                    "defaultValue" => 0,
+                    "options" => [
+                        "name" => "Wizard.loginMode",
+                        "listBoxValues" => [
+                            [
+                                "value" => 0,
+                                "caption" => "Wizard.loginMode1"
+                            ],
+                            [
+                                "value" => 1,
+                                "caption" => "Wizard.loginMode2"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+    }
 }
