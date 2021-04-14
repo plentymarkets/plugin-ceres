@@ -2,6 +2,7 @@
     <div
         class="input-group flex-nowrap"
         data-model="vatNumber"
+        v-if="showInput"
     >
         <div class="input-unit w-auto input-group-prepend" v-if="isEU">
             <span class="input-group-text h-100 border-0" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0] }}</span>
@@ -35,7 +36,8 @@ export default
     {
         selectedCountryId: Number,
         value: String,
-        isRequired: Boolean
+        isRequired: Boolean,
+        showInput: Boolean
     },
 
     data()
@@ -51,7 +53,6 @@ export default
     {
         vatCodes()
         {
-            console.log("vatPrefix")
             this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
             return this.selectedCountry.vatCodes;
         },
@@ -63,7 +64,6 @@ export default
 
         selectedCountry()
         {
-            console.log("selectedCountryId comp")
             return this.$store.state.localization.shippingCountries.find(country => country.id === this.selectedCountryId);
         }
     },
@@ -77,13 +77,11 @@ export default
 
         vatNumber()
         {
-            console.log("vatNumber watch")
             this.emitChange();
         },
 
         vatPrefix()
         {
-          console.log("vatPrefix watch")
           this.emitChange();
         }
     },
@@ -101,6 +99,12 @@ export default
             return translation + (this.isRequired ? "*" : "");
         },
 
+        deleteValue()
+        {
+            this.vatNumber = "";
+            this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+        },
+
         emitChange()
         {
             const value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
@@ -109,6 +113,12 @@ export default
 
         setValues(value)
         {
+            if (!this.showInput)
+            {
+                this.deleteValue();
+                return;
+            }
+
             const vatPrefix = this.getVatPrefix(value);
             this.isPrefixValid = !!vatPrefix;
 

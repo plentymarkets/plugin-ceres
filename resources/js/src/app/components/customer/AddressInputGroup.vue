@@ -203,15 +203,14 @@
                         </div>
                     </div>
 
-                    <div
-                        class="col-12 col-sm-6"
-                        v-if="(isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'billing_address.vatNumber')) ||
-                        (!isInOptionalFields('de', 'billing_address.salutation') && isInOptionalFields('de', 'billing_address.name1') && isInOptionalFields('de', 'billing_address.vatNumber'))">
+                    <div class="col-12 col-sm-6">
                         <vat-id
                             :is-required="isInRequiredFields('de', 'billing_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :value="value.vatNumber || ''">
+                            :value="value.vatNumber || ''"
+                            :show-input="(isInOptionalFields('de', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'billing_address.vatNumber')) ||
+                            (!isInOptionalFields('de', 'billing_address.salutation') && isInOptionalFields('de', 'billing_address.name1') && isInOptionalFields('de', 'billing_address.vatNumber'))">
                         </vat-id>
                     </div>
                 </div>
@@ -385,15 +384,14 @@
                         </div>
                     </div>
 
-                    <div
-                        class="col-12 col-sm-6"
-                        v-if="(isInOptionalFields('gb', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('gb', 'billing_address.vatNumber')) ||
-                        (!isInOptionalFields('gb', 'billing_address.salutation') && isInOptionalFields('gb', 'billing_address.name1') && isInOptionalFields('gb', 'billing_address.vatNumber'))">
+                    <div class="col-12 col-sm-6">
                         <vat-id
                             :is-required="isInRequiredFields('gb', 'billing_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :value="value.vatNumber || ''">
+                            :value="value.vatNumber || ''"
+                            :show-input="(isInOptionalFields('gb', 'billing_address.salutation') && value.gender === 'company' &&  isInOptionalFields('gb', 'billing_address.vatNumber')) ||
+                            (!isInOptionalFields('gb', 'billing_address.salutation') && isInOptionalFields('gb', 'billing_address.name1') && isInOptionalFields('gb', 'billing_address.vatNumber'))">
                         </vat-id>
                     </div>
                 </div>
@@ -573,15 +571,14 @@
                             <label :for="'txtCompany' + _uid">{{ $translate("Ceres::Template.addressCompany") }}*</label>
                         </div>
                     </div>
-                    <div
-                        class="col-12 col-sm-6"
-                        v-if="(isInOptionalFields('de', 'delivery_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'delivery_address.vatNumber')) ||
-                        (!isInOptionalFields('de', 'delivery_address.salutation') && isInOptionalFields('de', 'delivery_address.name1') && isInOptionalFields('de', 'delivery_address.vatNumber'))">
+                    <div class="col-12 col-sm-6">
                         <vat-id
                             :is-required="isInRequiredFields('de', 'delivery_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :value="value.vatNumber || ''">
+                            :value="value.vatNumber || ''"
+                            :show-input="(isInOptionalFields('de', 'delivery_address.salutation') && value.gender === 'company' &&  isInOptionalFields('de', 'delivery_address.vatNumber')) ||
+                            (!isInOptionalFields('de', 'delivery_address.salutation') && isInOptionalFields('de', 'delivery_address.name1') && isInOptionalFields('de', 'delivery_address.vatNumber'))">
                         </vat-id>
                     </div>
                 </div>
@@ -752,15 +749,14 @@
                             <label :for="'txtCompany' + _uid">{{ $translate("Ceres::Template.addressCompany") }}*</label>
                         </div>
                     </div>
-                    <div
-                        class="col-12 col-sm-6"
-                        v-if="(isInOptionalFields('gb', 'delivery_address.salutation') && value.gender === 'company' &&  isInOptionalFields('gb', 'delivery_address.vatNumber')) ||
-                        (!isInOptionalFields('gb', 'delivery_address.salutation') && isInOptionalFields('gb', 'delivery_address.name1') && isInOptionalFields('gb', 'delivery_address.vatNumber'))">
+                    <div class="col-12 col-sm-6">
                         <vat-id
                             :is-required="isInRequiredFields('gb', 'delivery_address.vatNumber')"
                             :selected-country-id="value.countryId"
                             @input="emitInputEvent('vatNumber', $event)"
-                            :value="value.vatNumber || ''">
+                            :value="value.vatNumber || ''"
+                            :show-input="(isInOptionalFields('gb', 'delivery_address.salutation') && value.gender === 'company' &&  isInOptionalFields('gb', 'delivery_address.vatNumber')) ||
+                            (!isInOptionalFields('gb', 'delivery_address.salutation') && isInOptionalFields('gb', 'delivery_address.name1') && isInOptionalFields('gb', 'delivery_address.vatNumber'))">
                         </vat-id>
                     </div>
                 </div>
@@ -1022,8 +1018,6 @@ export default {
         onSelectedCountryChanged(shippingCountry)
         {
             this.selectedCountry = shippingCountry;
-            let oldSelectedCountry = this.selectedCountry;
-            let oldLocaleValue = this.localeToShow;
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
             {
                 this.localeToShow = shippingCountry.isoCode2;
@@ -1031,13 +1025,6 @@ export default {
             else
             {
                 this.localeToShow = this.defaultCountry;
-            }
-
-
-            console.log('onSelectedCountryChanged')
-            if (this.defaultCountry  !== shippingCountry.isoCode2 && oldLocaleValue !== this.localeToShow)
-            {
-                this.emitInputEvent("vatNumber", "");
             }
 
             this.emitInputEvent("countryId", shippingCountry.id);
