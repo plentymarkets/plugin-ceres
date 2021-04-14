@@ -1742,10 +1742,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -1830,19 +1826,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      */
     onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
       this.selectedCountry = shippingCountry;
-      var oldSelectedCountry = this.selectedCountry;
-      var oldLocaleValue = this.localeToShow;
 
       if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
         this.localeToShow = shippingCountry.isoCode2;
       } else {
         this.localeToShow = this.defaultCountry;
-      }
-
-      console.log('onSelectedCountryChanged');
-
-      if (this.defaultCountry !== shippingCountry.isoCode2 && oldLocaleValue !== this.localeToShow) {
-        this.emitInputEvent("vatNumber", "");
       }
 
       this.emitInputEvent("countryId", shippingCountry.id);
@@ -2452,12 +2440,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "vat-id",
   props: {
     selectedCountryId: Number,
     value: String,
-    isRequired: Boolean
+    isRequired: Boolean,
+    showInput: Boolean
   },
   data: function data() {
     return {
@@ -2468,7 +2458,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     vatCodes: function vatCodes() {
-      console.log("vatPrefix");
       this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
       return this.selectedCountry.vatCodes;
     },
@@ -2480,7 +2469,6 @@ __webpack_require__.r(__webpack_exports__);
     selectedCountry: function selectedCountry() {
       var _this = this;
 
-      console.log("selectedCountryId comp");
       return this.$store.state.localization.shippingCountries.find(function (country) {
         return country.id === _this.selectedCountryId;
       });
@@ -2491,11 +2479,9 @@ __webpack_require__.r(__webpack_exports__);
       this.setValues(newValue);
     },
     vatNumber: function vatNumber() {
-      console.log("vatNumber watch");
       this.emitChange();
     },
     vatPrefix: function vatPrefix() {
-      console.log("vatPrefix watch");
       this.emitChange();
     }
   },
@@ -2507,11 +2493,20 @@ __webpack_require__.r(__webpack_exports__);
       var translation = this.$translate(translationKey);
       return translation + (this.isRequired ? "*" : "");
     },
+    deleteValue: function deleteValue() {
+      this.vatNumber = "";
+      this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+    },
     emitChange: function emitChange() {
       var value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
       this.$emit('input', value);
     },
     setValues: function setValues(value) {
+      if (!this.showInput) {
+        this.deleteValue();
+        return;
+      }
+
       var vatPrefix = this.getVatPrefix(value);
       this.isPrefixValid = !!vatPrefix;
 
@@ -38616,35 +38611,50 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                (_vm.isInOptionalFields("de", "billing_address.salutation") &&
-                  _vm.value.gender === "company" &&
-                  _vm.isInOptionalFields("de", "billing_address.vatNumber")) ||
-                (!_vm.isInOptionalFields("de", "billing_address.salutation") &&
-                  _vm.isInOptionalFields("de", "billing_address.name1") &&
-                  _vm.isInOptionalFields("de", "billing_address.vatNumber"))
-                  ? _c(
-                      "div",
-                      { staticClass: "col-12 col-sm-6" },
-                      [
-                        _c("vat-id", {
-                          attrs: {
-                            "is-required": _vm.isInRequiredFields(
+                _c(
+                  "div",
+                  { staticClass: "col-12 col-sm-6" },
+                  [
+                    _c("vat-id", {
+                      attrs: {
+                        "is-required": _vm.isInRequiredFields(
+                          "de",
+                          "billing_address.vatNumber"
+                        ),
+                        "selected-country-id": _vm.value.countryId,
+                        value: _vm.value.vatNumber || "",
+                        "show-input":
+                          (_vm.isInOptionalFields(
+                            "de",
+                            "billing_address.salutation"
+                          ) &&
+                            _vm.value.gender === "company" &&
+                            _vm.isInOptionalFields(
                               "de",
                               "billing_address.vatNumber"
-                            ),
-                            "selected-country-id": _vm.value.countryId,
-                            value: _vm.value.vatNumber || ""
-                          },
-                          on: {
-                            input: function($event) {
-                              return _vm.emitInputEvent("vatNumber", $event)
-                            }
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e()
+                            )) ||
+                          (!_vm.isInOptionalFields(
+                            "de",
+                            "billing_address.salutation"
+                          ) &&
+                            _vm.isInOptionalFields(
+                              "de",
+                              "billing_address.name1"
+                            ) &&
+                            _vm.isInOptionalFields(
+                              "de",
+                              "billing_address.vatNumber"
+                            ))
+                      },
+                      on: {
+                        input: function($event) {
+                          return _vm.emitInputEvent("vatNumber", $event)
+                        }
+                      }
+                    })
+                  ],
+                  1
+                )
               ])
             ]),
             _vm._v(" "),
@@ -39529,35 +39539,50 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                (_vm.isInOptionalFields("gb", "billing_address.salutation") &&
-                  _vm.value.gender === "company" &&
-                  _vm.isInOptionalFields("gb", "billing_address.vatNumber")) ||
-                (!_vm.isInOptionalFields("gb", "billing_address.salutation") &&
-                  _vm.isInOptionalFields("gb", "billing_address.name1") &&
-                  _vm.isInOptionalFields("gb", "billing_address.vatNumber"))
-                  ? _c(
-                      "div",
-                      { staticClass: "col-12 col-sm-6" },
-                      [
-                        _c("vat-id", {
-                          attrs: {
-                            "is-required": _vm.isInRequiredFields(
+                _c(
+                  "div",
+                  { staticClass: "col-12 col-sm-6" },
+                  [
+                    _c("vat-id", {
+                      attrs: {
+                        "is-required": _vm.isInRequiredFields(
+                          "gb",
+                          "billing_address.vatNumber"
+                        ),
+                        "selected-country-id": _vm.value.countryId,
+                        value: _vm.value.vatNumber || "",
+                        "show-input":
+                          (_vm.isInOptionalFields(
+                            "gb",
+                            "billing_address.salutation"
+                          ) &&
+                            _vm.value.gender === "company" &&
+                            _vm.isInOptionalFields(
                               "gb",
                               "billing_address.vatNumber"
-                            ),
-                            "selected-country-id": _vm.value.countryId,
-                            value: _vm.value.vatNumber || ""
-                          },
-                          on: {
-                            input: function($event) {
-                              return _vm.emitInputEvent("vatNumber", $event)
-                            }
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e()
+                            )) ||
+                          (!_vm.isInOptionalFields(
+                            "gb",
+                            "billing_address.salutation"
+                          ) &&
+                            _vm.isInOptionalFields(
+                              "gb",
+                              "billing_address.name1"
+                            ) &&
+                            _vm.isInOptionalFields(
+                              "gb",
+                              "billing_address.vatNumber"
+                            ))
+                      },
+                      on: {
+                        input: function($event) {
+                          return _vm.emitInputEvent("vatNumber", $event)
+                        }
+                      }
+                    })
+                  ],
+                  1
+                )
               ])
             ]),
             _vm._v(" "),
@@ -40446,35 +40471,50 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                (_vm.isInOptionalFields("de", "delivery_address.salutation") &&
-                  _vm.value.gender === "company" &&
-                  _vm.isInOptionalFields("de", "delivery_address.vatNumber")) ||
-                (!_vm.isInOptionalFields("de", "delivery_address.salutation") &&
-                  _vm.isInOptionalFields("de", "delivery_address.name1") &&
-                  _vm.isInOptionalFields("de", "delivery_address.vatNumber"))
-                  ? _c(
-                      "div",
-                      { staticClass: "col-12 col-sm-6" },
-                      [
-                        _c("vat-id", {
-                          attrs: {
-                            "is-required": _vm.isInRequiredFields(
+                _c(
+                  "div",
+                  { staticClass: "col-12 col-sm-6" },
+                  [
+                    _c("vat-id", {
+                      attrs: {
+                        "is-required": _vm.isInRequiredFields(
+                          "de",
+                          "delivery_address.vatNumber"
+                        ),
+                        "selected-country-id": _vm.value.countryId,
+                        value: _vm.value.vatNumber || "",
+                        "show-input":
+                          (_vm.isInOptionalFields(
+                            "de",
+                            "delivery_address.salutation"
+                          ) &&
+                            _vm.value.gender === "company" &&
+                            _vm.isInOptionalFields(
                               "de",
                               "delivery_address.vatNumber"
-                            ),
-                            "selected-country-id": _vm.value.countryId,
-                            value: _vm.value.vatNumber || ""
-                          },
-                          on: {
-                            input: function($event) {
-                              return _vm.emitInputEvent("vatNumber", $event)
-                            }
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e()
+                            )) ||
+                          (!_vm.isInOptionalFields(
+                            "de",
+                            "delivery_address.salutation"
+                          ) &&
+                            _vm.isInOptionalFields(
+                              "de",
+                              "delivery_address.name1"
+                            ) &&
+                            _vm.isInOptionalFields(
+                              "de",
+                              "delivery_address.vatNumber"
+                            ))
+                      },
+                      on: {
+                        input: function($event) {
+                          return _vm.emitInputEvent("vatNumber", $event)
+                        }
+                      }
+                    })
+                  ],
+                  1
+                )
               ])
             ]),
             _vm._v(" "),
@@ -41298,35 +41338,50 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                (_vm.isInOptionalFields("gb", "delivery_address.salutation") &&
-                  _vm.value.gender === "company" &&
-                  _vm.isInOptionalFields("gb", "delivery_address.vatNumber")) ||
-                (!_vm.isInOptionalFields("gb", "delivery_address.salutation") &&
-                  _vm.isInOptionalFields("gb", "delivery_address.name1") &&
-                  _vm.isInOptionalFields("gb", "delivery_address.vatNumber"))
-                  ? _c(
-                      "div",
-                      { staticClass: "col-12 col-sm-6" },
-                      [
-                        _c("vat-id", {
-                          attrs: {
-                            "is-required": _vm.isInRequiredFields(
+                _c(
+                  "div",
+                  { staticClass: "col-12 col-sm-6" },
+                  [
+                    _c("vat-id", {
+                      attrs: {
+                        "is-required": _vm.isInRequiredFields(
+                          "gb",
+                          "delivery_address.vatNumber"
+                        ),
+                        "selected-country-id": _vm.value.countryId,
+                        value: _vm.value.vatNumber || "",
+                        "show-input":
+                          (_vm.isInOptionalFields(
+                            "gb",
+                            "delivery_address.salutation"
+                          ) &&
+                            _vm.value.gender === "company" &&
+                            _vm.isInOptionalFields(
                               "gb",
                               "delivery_address.vatNumber"
-                            ),
-                            "selected-country-id": _vm.value.countryId,
-                            value: _vm.value.vatNumber || ""
-                          },
-                          on: {
-                            input: function($event) {
-                              return _vm.emitInputEvent("vatNumber", $event)
-                            }
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e()
+                            )) ||
+                          (!_vm.isInOptionalFields(
+                            "gb",
+                            "delivery_address.salutation"
+                          ) &&
+                            _vm.isInOptionalFields(
+                              "gb",
+                              "delivery_address.name1"
+                            ) &&
+                            _vm.isInOptionalFields(
+                              "gb",
+                              "delivery_address.vatNumber"
+                            ))
+                      },
+                      on: {
+                        input: function($event) {
+                          return _vm.emitInputEvent("vatNumber", $event)
+                        }
+                      }
+                    })
+                  ],
+                  1
+                )
               ])
             ]),
             _vm._v(" "),
@@ -42305,126 +42360,134 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "input-group flex-nowrap",
-      attrs: { "data-model": "vatNumber" }
-    },
-    [
-      _vm.isEU
-        ? _c("div", { staticClass: "input-unit w-auto input-group-prepend" }, [
-            _vm.vatCodes.length === 1
-              ? _c(
-                  "span",
-                  {
-                    staticClass: "input-group-text h-100 border-0",
-                    attrs: { id: "basic-addon1" }
-                  },
-                  [_vm._v(_vm._s(_vm.vatCodes[0]))]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.vatCodes.length > 1
-              ? _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.vatPrefix,
-                        expression: "vatPrefix"
-                      }
-                    ],
-                    staticClass: "custom-select",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.vatPrefix = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  _vm._l(_vm.vatCodes, function(vatCode, index) {
-                    return _c("option", { domProps: { value: vatCode } }, [
-                      _vm._v(_vm._s(vatCode))
-                    ])
-                  }),
-                  0
-                )
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
+  return _vm.showInput
+    ? _c(
         "div",
         {
-          directives: [
-            {
-              name: "validate",
-              rawName: "v-validate:text",
-              value: _vm.isRequired,
-              expression: "isRequired",
-              arg: "text"
-            }
-          ],
-          staticClass: "input-unit flex-fill w-auto"
+          staticClass: "input-group flex-nowrap",
+          attrs: { "data-model": "vatNumber" }
         },
         [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.vatNumber,
-                expression: "vatNumber"
-              }
-            ],
-            attrs: {
-              "aria-describedby": "basic-addon1",
-              type: "text",
-              name: "vatNumber",
-              id: "txtVatNumber" + _vm._uid,
-              "data-autofocus": "",
-              "data-testing": "vat-id"
-            },
-            domProps: { value: _vm.vatNumber },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.vatNumber = $event.target.value
-              }
-            }
-          }),
+          _vm.isEU
+            ? _c(
+                "div",
+                { staticClass: "input-unit w-auto input-group-prepend" },
+                [
+                  _vm.vatCodes.length === 1
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "input-group-text h-100 border-0",
+                          attrs: { id: "basic-addon1" }
+                        },
+                        [_vm._v(_vm._s(_vm.vatCodes[0]))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.vatCodes.length > 1
+                    ? _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.vatPrefix,
+                              expression: "vatPrefix"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.vatPrefix = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.vatCodes, function(vatCode, index) {
+                          return _c(
+                            "option",
+                            { domProps: { value: vatCode } },
+                            [_vm._v(_vm._s(vatCode))]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e()
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c("label", { attrs: { for: "txtVatNumber" + _vm._uid } }, [
-            _vm._v(
-              "\n            " +
-                _vm._s(
-                  _vm.transformTranslation(
-                    "Ceres::Template.addressVatNumber",
-                    "de",
-                    "billing_address.vatNumber"
-                  )
-                ) +
-                "\n        "
-            )
-          ])
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "validate",
+                  rawName: "v-validate:text",
+                  value: _vm.isRequired,
+                  expression: "isRequired",
+                  arg: "text"
+                }
+              ],
+              staticClass: "input-unit flex-fill w-auto"
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.vatNumber,
+                    expression: "vatNumber"
+                  }
+                ],
+                attrs: {
+                  "aria-describedby": "basic-addon1",
+                  type: "text",
+                  name: "vatNumber",
+                  id: "txtVatNumber" + _vm._uid,
+                  "data-autofocus": "",
+                  "data-testing": "vat-id"
+                },
+                domProps: { value: _vm.vatNumber },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.vatNumber = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "txtVatNumber" + _vm._uid } }, [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(
+                      _vm.transformTranslation(
+                        "Ceres::Template.addressVatNumber",
+                        "de",
+                        "billing_address.vatNumber"
+                      )
+                    ) +
+                    "\n        "
+                )
+              ])
+            ]
+          )
         ]
       )
-    ]
-  )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
