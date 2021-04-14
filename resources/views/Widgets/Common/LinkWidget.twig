@@ -5,6 +5,7 @@
 {% set buttonSize      = widget.settings.buttonSize.mobile %}
 {% set block           = widget.settings.block.mobile %}
 {% set text            = widget.settings.text.mobile %}
+{% set linkTitle       = widget.settings.linkTitle.mobile %}
 {% set url             = widget.settings.url %}
 
 {% set customClass     = widget.settings.customClass.mobile %}
@@ -41,7 +42,7 @@
     href="{{ Twig.print("real_url") }}"
     {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
-    data-toggle="tooltip" title="">
+    data-toggle="tooltip" title="{{ linkTitle }}">
         {%- if icon != "none" -%}
             <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
         {%- endif -%}
