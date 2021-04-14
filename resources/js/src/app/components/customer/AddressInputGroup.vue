@@ -116,8 +116,8 @@
                     <div class="col-12 col-sm-8">
                         <div class="input-unit" data-validate="" data-model="address1">
                             <select :id="'address1' + _uid" class="custom-select" :value="value.address1" @change="emitInputEvent('address1', $event.target.value)">
-                                <option v-if="isParcelBoxAvailable || isMyAccount" value="PACKSTATION" :selected="isPickupStation">{{ $translate("Ceres::Template.addressPackingStation") }}</option>
-                                <option v-if="isPostOfficeAvailable || isMyAccount" value="POSTFILIALE" :selected="isPostOffice">{{ $translate("Ceres::Template.addressPostOffice") }}</option>
+                                <option v-if="isParcelBoxAvailable" value="PACKSTATION" :selected="isPickupStation">{{ $translate("Ceres::Template.addressPackingStation") }}</option>
+                                <option v-if="isPostOfficeAvailable" value="POSTFILIALE" :selected="isPostOffice">{{ $translate("Ceres::Template.addressPostOffice") }}</option>
                             </select>
                             <label for="'address1' + _uid">{{ $translate("Ceres::Template.addressPickupLocation") }}</label>
                         </div>
@@ -987,11 +987,6 @@ export default {
 
     computed:
     {
-        isMyAccount()
-        {
-            return App.templateType === "my-account";
-        },
-
         isPickupStation()
         {
             return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
@@ -1004,7 +999,7 @@ export default {
 
         isParcelOrOfficeAvailable()
         {
-            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable || this.isMyAccount) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+            return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
         },
 
         ...mapState({
