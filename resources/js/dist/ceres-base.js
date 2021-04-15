@@ -521,7 +521,6 @@ var TabNavItem = {
     var _this = this;
 
     var anchorAttrs = {
-      role: "tab",
       href: ""
     };
 
@@ -544,6 +543,9 @@ var TabNavItem = {
       }
     }, [this.tab.$slots.title || this.tab.title]);
     return createElement("li", {
+      attrs: {
+        role: "tab"
+      },
       staticClass: "nav-item"
     }, [anchor]);
   },
