@@ -5,7 +5,7 @@
         {% if config('Ceres.pagination.showFirstPage') == "true" %}
             <li class="page-item" v-if="{{ page }} > 2">
                 <a class="page-link" @click="{{ setPage }}(1)">
-                    <i class="fa fa-angle-double-left" aria-label="{{ trans('Ceres::Widget.paginationFirstPage') }}"></i>
+                    <i class="fa fa-angle-double-left" aria-label="{{ trans('Ceres::Template.paginationFirstPage') }}"></i>
                 </a>
             </li>
         {% endif %}
@@ -14,7 +14,7 @@
         <!-- PREV LINK -->
         <li class="page-item" :class="{'disabled': {{ page }} <= 1}">
             <a class="page-link" @click="{{ setPage }}({{ page }}-1)">
-                <i class="fa fa-angle-left" aria-label="{{ trans('Ceres::Widget.paginationPrevPage') }}"></i>
+                <i class="fa fa-angle-left" aria-label="{{ trans('Ceres::Template.paginationPrevPage') }}"></i>
             </a>
         </li>
         <!-- ./PREV LINK -->
@@ -44,7 +44,7 @@
         <!-- NEXT LINK -->
         <li class="page-item" :class="{'disabled': {{ page }} >= {{ pageMax }}}">
             <a class="page-link" @click="{{ setPage }}({{ page }} + 1)">
-                <i class="fa fa-angle-right" aria-label="{{ trans('Ceres::Widget.paginationNextPage') }}"></i>
+                <i class="fa fa-angle-right" aria-label="{{ trans('Ceres::Template.paginationNextPage') }}"></i>
             </a>
         </li>
         <!-- ./NEXT LINK -->
@@ -53,7 +53,7 @@
         {% if config('Ceres.pagination.showLastPage') == "true" %}
             <li class="page-item" v-if="{{ pageMax }} > 3 && {{ page }} < {{ pageMax }} - 1">
                 <a class="page-link" @click="{{ setPage }}({{ pageMax }})">
-                    <i class="fa fa-angle-double-right" aria-label="{{ trans('Ceres::Widget.paginationLastPage') }}"></i>
+                    <i class="fa fa-angle-double-right" aria-label="{{ trans('Ceres::Template.paginationLastPage') }}"></i>
                 </a>
             </li>
         {% endif %}
