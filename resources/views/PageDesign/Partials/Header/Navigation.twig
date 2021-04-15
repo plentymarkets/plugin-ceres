@@ -7,6 +7,7 @@
     <div class="container-max d-block">
         <div class="row mx-0 position-relative d-flex">
             <div class="brand-wrapper px-lg-3 d-flex flex-fill{% if showHeaderNavBar == "side" %} position-relative{% endif %}">
+                {% if companyLogo | trim | length > 0 %}
                 <a class="navbar-brand py-2" href="{{ homepageURL }}">
                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
@@ -14,6 +15,7 @@
                         <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid" />
                     {% endif %}
                 </a>
+                {% endif %}
 
                 <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
                     &#9776;

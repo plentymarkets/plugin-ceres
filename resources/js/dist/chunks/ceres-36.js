@@ -88,6 +88,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -324,7 +325,11 @@ var render = function() {
     _c("input", {
       ref: "quantityInputField",
       staticClass: "qty-input text-center",
-      attrs: { type: "text", disabled: _vm.waiting },
+      attrs: {
+        type: "text",
+        disabled: _vm.waiting,
+        "aria-label": _vm.$translate("Ceres::Template.itemQuantityInput")
+      },
       domProps: { value: _vm.displayValue },
       on: {
         change: function($event) {
