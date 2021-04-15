@@ -73521,10 +73521,10 @@ var actions = {
       documents: [item]
     };
     _index__WEBPACK_IMPORTED_MODULE_15__["store"].registerModule(["items", itemId], _ItemModule__WEBPACK_IMPORTED_MODULE_13__["default"], {
-      preserveState: !App.isSSR
+      preserveState: !!this.state.items[itemId]
     });
     _index__WEBPACK_IMPORTED_MODULE_15__["store"].registerModule(["items", itemId, "variationSelect"], _VariationSelectModule__WEBPACK_IMPORTED_MODULE_14__["default"], {
-      preserveState: !App.isSSR
+      preserveState: !!this.state.items[itemId]["variationSelect"]
     });
     commit("".concat(itemId, "/setVariation"), extendedData);
   }

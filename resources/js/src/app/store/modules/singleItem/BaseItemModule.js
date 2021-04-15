@@ -104,8 +104,8 @@ const actions =
             // extend the structur of the object to match the old objects
             const extendedData = { documents: [item] };
 
-            store.registerModule(["items", itemId], ItemModule, { preserveState: !App.isSSR });
-            store.registerModule(["items", itemId, "variationSelect"], VariationSelectModule, { preserveState: !App.isSSR });
+            store.registerModule(["items", itemId], ItemModule, { preserveState: !!this.state.items[itemId] });
+            store.registerModule(["items", itemId, "variationSelect"], VariationSelectModule, { preserveState: !!this.state.items[itemId]["variationSelect"] });
             commit(`${itemId}/setVariation`, extendedData);
         }
     };
