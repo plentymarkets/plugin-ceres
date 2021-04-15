@@ -2029,8 +2029,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     vatCodes: function vatCodes() {
-      this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
-      return this.selectedCountry.vatCodes;
+      var _this$selectedCountry, _this$selectedCountry2, _this$selectedCountry3;
+
+      this.vatPrefix = ((_this$selectedCountry = this.selectedCountry) === null || _this$selectedCountry === void 0 ? void 0 : _this$selectedCountry.vatCodes) && ((_this$selectedCountry2 = this.selectedCountry) === null || _this$selectedCountry2 === void 0 ? void 0 : _this$selectedCountry2.vatCodes[0]) ? this.selectedCountry.vatCodes[0] : "";
+      return ((_this$selectedCountry3 = this.selectedCountry) === null || _this$selectedCountry3 === void 0 ? void 0 : _this$selectedCountry3.vatCodes) ? this.selectedCountry.vatCodes : [];
     },
     isEU: function isEU() {
       var _this$vatCodes;
@@ -2049,9 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
     value: function value(newValue) {
       this.setValues(newValue);
     },
-    showInput: function showInput(newShowInput) {
-      console.log("showInput watch ", this.showInput, newShowInput);
-
+    showInput: function showInput() {
       if (!this.showInput) {
         this.deleteValue();
       }
@@ -2072,15 +2072,16 @@ __webpack_require__.r(__webpack_exports__);
       return translation + (this.isRequired ? "*" : "");
     },
     deleteValue: function deleteValue() {
+      var _this$selectedCountry4, _this$selectedCountry5;
+
       this.vatNumber = "";
-      this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+      this.vatPrefix = ((_this$selectedCountry4 = this.selectedCountry) === null || _this$selectedCountry4 === void 0 ? void 0 : _this$selectedCountry4.vatCodes) && ((_this$selectedCountry5 = this.selectedCountry) === null || _this$selectedCountry5 === void 0 ? void 0 : _this$selectedCountry5.vatCodes[0]) ? this.selectedCountry.vatCodes[0] : "";
     },
     emitChange: function emitChange() {
       var value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
       this.$emit('input', value);
     },
     setValues: function setValues(value) {
-      console.log("setVal ", this.showInput);
       var vatPrefix = this.getVatPrefix(value);
       this.isPrefixValid = !!vatPrefix;
 

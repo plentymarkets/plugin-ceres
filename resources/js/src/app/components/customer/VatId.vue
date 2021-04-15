@@ -53,8 +53,8 @@ export default
     {
         vatCodes()
         {
-            this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
-            return this.selectedCountry.vatCodes;
+            this.vatPrefix = this.selectedCountry?.vatCodes && this.selectedCountry?.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+            return this.selectedCountry?.vatCodes ? this.selectedCountry.vatCodes : [];
         },
 
         isEU()
@@ -110,7 +110,7 @@ export default
         deleteValue()
         {
             this.vatNumber = "";
-            this.vatPrefix = this.selectedCountry.vatCodes && this.selectedCountry.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+            this.vatPrefix = this.selectedCountry?.vatCodes && this.selectedCountry?.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
         },
 
         emitChange()
