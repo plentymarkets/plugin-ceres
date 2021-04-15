@@ -10,7 +10,7 @@
                    @focus="selectAll($event)"
                    placeholder="Min"
                    v-model="priceMin"
-                   :aria-label="$translate('Ceres::Template.ItemFilterPriceMin')">
+                   :aria-label="$translate('Ceres::Template.itemFilterPriceMin')">
         </div>
 
         <div class="input-group">
@@ -23,7 +23,7 @@
                    @focus="selectAll($event)"
                    placeholder="Max"
                    v-model="priceMax"
-                   :aria-label="$translate('Ceres::Template.ItemFilterPriceMax')">
+                   :aria-label="$translate('Ceres::Template.itemFilterPriceMax')">
         </div>
 
         <button type="button" class="btn btn-primary btn-appearance" :class="{'disabled': isDisabled}" v-tooltip
