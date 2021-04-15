@@ -24,8 +24,8 @@
 
 {% if companyLogoUrl is empty %}
     {% set companyLogoUrl = ceresConfig.header.companyLogo %}
-    {% if not (companyLogoUrl starts with 'https://' or companyLogoUrl starts with 'http://' or companyLogoUrl starts with 'layout/') %}
-        {% set companyLogoUrl = plugin_path('Ceres') ~ "/" ~ image %}
+    {% if not (companyLogoUrl starts with 'https://' or companyLogoUrl starts with 'http://' or companyLogoUrl starts with 'layout/') and companyLogoUrl | trim | length > 0 %}
+        {% set companyLogoUrl = plugin_path('Ceres') ~ "/" ~ companyLogoUrl %}
     {% endif %}
 {% endif %}
 
@@ -40,6 +40,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
             <div class="brand-wrapper px-lg-3 d-flex flex-fill">
+                {% if companyLogoUrl | trim | length > 0 %}
                 <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                     <picture>
                         <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
@@ -50,6 +51,7 @@
                         />
                     </picture>
                 </a>
+                {% endif %}
 
                 <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
                     &#9776;
