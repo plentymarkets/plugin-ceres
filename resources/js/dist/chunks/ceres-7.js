@@ -501,7 +501,7 @@ var render = function() {
   return _vm.facet.name
     ? _c(
         "div",
-        { staticClass: "card pt-4 border-0" },
+        { staticClass: "card pt-4 border-0", class: _vm.facet.cssClass },
         [
           _c("div", { staticClass: "h3 title py-0" }, [
             _vm._v(_vm._s(_vm.facetName))
@@ -512,7 +512,11 @@ var render = function() {
             : _vm._l(_vm.facets, function(value) {
                 return _c(
                   "div",
-                  { key: value.id, staticClass: "form-check-wrapper" },
+                  {
+                    key: value.id,
+                    staticClass: "form-check-wrapper",
+                    class: value.cssClass
+                  },
                   [
                     _c("div", { staticClass: "form-check mb-0 pl-0" }, [
                       _c("input", {

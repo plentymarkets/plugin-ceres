@@ -1,5 +1,42 @@
 # Release Notes for Ceres
 
+## v5.0.27 (2021-04-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.26...5.0.27" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- The favicon from the plugin settings is displayed as long as no favicon is uploaded to the internal webspace.
+- Under certain circumstances the store special component produced JavaScript errors in the console. This has been fixed.
+
+## v5.0.26 (2021-04-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.25...5.0.26" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added 
+- The plentyShop assistant now includes a setting with which you can determine how the customer login should work for systems that use multiple clients. Please refer to [this changelog thread in the forum](https://forum.plentymarkets.com/t/mehrere-kontakte-mit-der-selben-e-mail-adresse-koennen-sich-bei-unterschiedlichen-mandanten-einloggen-multiple-contacts-with-the-same-email-address-can-log-into-different-clients/630567) for further information.
+
+### Changed 
+
+- The entered CSS class for facets and facet values is now output in the frontend.
+- You can now set the maximum number of displayed categories of the second level for the normal menu in the widget settings in the ShopBuilder.
+- The stored favicon is now uploaded to the respective webshop domain after saving and deploying the plugin set. It is thereby also taken into account by the mobile Google search. **Important** Due to this change, changes to the favicon only become effective after saving and deploying the plugin set!
+- Item images in the basket and the wish list now link to the variation page. We would like to thank @cerwantes for their contribution!
+- External search providers can now directly submit the entire item data in order to improve the performance of the external search. This requires that the item data is submitted in the appropriate data structure.
+- Fixed elements are no longer calculated if they are deactivated.
+
+### Fixed 
+
+- In the desktop view of the Safari browser, certain cursor movements erroneously triggered the expansion of drop-down menues in the navigation. This has been fixed.
+- The "More..." button in the navigation was not displayed correctly. This has been fixed.
+- In the plentyShop assistant, the setting **Default payment method** in the step **Defaul settings** did not list all plugin payment methods. This has been fixed.
+- Wish list items with a minimum order value of 0 or an interval order value of either more than or less than 1 could not be moved directly to the basket. This has been fixed.
+- Updating an item in the basket now also updates the base price.
+
+### Changed templates
+
+- In Ceres 5.0.26 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/itemList/filter/ItemFilter.vue](https://github.com/plentymarkets/plugin-ceres/pull/2753/files#diff-eab69464064e5200e309de7a80e4fa43773919c60a5f31d5997058b8f7e2f478
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/2697/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2754/files#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
+- [resources/js/src/app/components/wishList/WishListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2754/files#diff-be8788b59e5887730f9bb4aa5a12d093908265ff19c26bb5ddca99485e7d7621)
+
 ## v5.0.25 (2021-03-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.24...5.0.25" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed

@@ -29,6 +29,9 @@ class ExternalSearch
 
     /** @var array $results The result of the search, an array of variation ids */
     private $results = [];
+    /** @var array $documents The result of the search, an array of variations */
+    private $documents = [];
+
     /** @var int|null $countTotal Amount of results */
     private $countTotal = null;
     /** @var bool $hasResults Is there a result? */
@@ -76,6 +79,23 @@ class ExternalSearch
     }
 
     /**
+     * Set the documents of the external search
+     *
+     * @param array $documents The variations found by the search
+     * @param int|null $countTotal Optional: The amount of found variations
+     */
+    public function setDocuments($documents, $countTotal = null)
+    {
+        $this->hasResults = true;
+        $this->documents = $documents;
+        if ($countTotal === null) {
+            $this->countTotal = count($documents);
+        } else {
+            $this->countTotal = $countTotal;
+        }
+    }
+
+    /**
      * Return true if the search has a result
      * @return bool
      */
@@ -91,6 +111,15 @@ class ExternalSearch
     public function getResults()
     {
         return $this->results;
+    }
+
+    /**
+     * Return the results of the search
+     * @return array
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
     }
 
     /**

@@ -134,6 +134,12 @@ class OnlineStoreMapping
             'type'      => 'integer',
             'global'    => true,
             'optional'  => false
+        ],
+        'onlineStore_loginMode' => [
+            'field'     => 'loginMode',
+            'type'      => 'integer',
+            'global'    => true,
+            'optional'  => false
         ]
     ];
 
