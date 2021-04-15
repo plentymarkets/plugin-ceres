@@ -6,7 +6,7 @@
                @change="setValue($event.target.value)"
                :disabled="waiting"
                ref="quantityInputField"
-               :aria-label="$translate('Ceres::Widget.quantityInputLabel')">
+               :aria-label="$translate('Ceres::Template.ItemQuantityInput')">
 
         <div class="qty-btn-container d-flex flex-column">
             <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
