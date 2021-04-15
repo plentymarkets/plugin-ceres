@@ -75,9 +75,8 @@ export default
             this.setValues(newValue);
         },
 
-        showInput(newShowInput)
+        showInput()
         {
-            console.log("showInput watch ", this.showInput, newShowInput);
             if (!this.showInput)
             {
                 this.deleteValue();
@@ -122,7 +121,6 @@ export default
 
         setValues(value)
         {
-            console.log("setVal ", this.showInput)
             const vatPrefix = this.getVatPrefix(value);
             this.isPrefixValid = !!vatPrefix;
 
