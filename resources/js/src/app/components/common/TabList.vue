@@ -38,7 +38,7 @@ const TabNavItem = {
         return createElement(
             "li",
             {
-                role: "tab",
+                attrs: {role: "tab"},
                 staticClass: "nav-item"
             },
             [anchor]
