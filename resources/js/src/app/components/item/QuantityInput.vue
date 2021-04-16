@@ -144,7 +144,7 @@ export default {
             return this.$translate(
                 "Ceres::Template.singleItemQuantityMin",
                 {
-                    min: this.min
+                    min: this.$options.filters.numberFormat(this.compMin)
                 }
             );
         },
@@ -154,7 +154,7 @@ export default {
             return this.$translate(
                 "Ceres::Template.singleItemQuantityMax",
                 {
-                    max: this.max
+                    max: this.$options.filters.numberFormat(this.Max)
                 }
             );
         },
@@ -287,8 +287,14 @@ export default {
         {
             if (!isNullOrUndefined(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0)
             {
-                // minimum quantity already in basket
-                this.compMin = this.compInterval;
+                let newMin = this.min;
+
+                // decrease the minimum until it reaches lowed possible value
+                while (newMin > 0 && newMin - this.compInterval > 0) {
+                    newMin -= this.compInterval;
+                }
+
+                this.compMin = newMin;
             }
             else if (this.variationBasketQuantity === 0)
             {
