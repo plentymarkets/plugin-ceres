@@ -15,6 +15,10 @@ Vue.directive("tooltip", {
     update(el, binding)
     {
         toggleTooltip(el, binding.value === false);
+        
+        // reinitialize tooltip, to update the title value
+        $(el).tooltip("dispose");
+        $(el).tooltip();
     },
 
     bind(el, binding)
