@@ -61434,7 +61434,9 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
         paymentMethodId: this.paymentMethod
       }).done(function (response) {
         // TODO: research - if response should be false, it returns an object
-        _this2.changePossible = _typeof(response) === "object" ? response.data : response;
+        _this2.changePossible = _typeof(response) === "object" ? response.data : response; // Reload page because the order amounts could have changed because of payment method rebates or surcharges
+
+        window.location.reload();
       }).fail(function () {
         _this2.changePossible = false;
       });
