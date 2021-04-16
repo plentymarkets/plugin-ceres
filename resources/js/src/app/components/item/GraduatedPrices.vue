@@ -14,7 +14,7 @@
                     <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price pl-3 d-none d-xl-block">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
                 </tr>
                 <tr v-if="showBasePrice">
-                    <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price d-xl-none" colspan="2">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
+                    <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price d-xl-none pb-2" colspan="2">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
                 </tr>
             </template>
         </table>
