@@ -176,8 +176,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['urlTitleItemName'] = $data['seo_itemMetaTitle'];
                 }
 
-                $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
-
                 if(!empty($data["onlineStore_storeFavicon"])) {
                     /** @var WebshopWebstoreConfigurationRepositoryContract $webshopConfigRepository */
                     $webshopConfigRepository = pluginApp(WebshopWebstoreConfigurationRepositoryContract::class);
@@ -185,6 +183,8 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 } else {
                     $webstoreData['faviconPath'] = '';
                 }
+
+                $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
 
                 // we save robotsTxt
                 if (!empty($data["seo_robotsTxt"])) {
