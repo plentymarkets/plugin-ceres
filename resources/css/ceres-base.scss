@@ -10398,6 +10398,13 @@ $border-width: 1px;
     }
 }
 
+.input-group-prepend {
+    .custom-select {
+        padding: 0.8rem 2rem 0.8rem 1rem;
+        background-position: calc(100% - 1rem) center;
+    }
+}
+
 .file-input {
     height: 38px;
     cursor: pointer;
@@ -11991,6 +11998,10 @@ html.crios {
         & i {
             color: $success;
         }
+    }
+
+    .graduated-base-price {
+        font-style: normal !important; // stylelint-disable-line declaration-no-important
     }
 
     .fade-enter-active,

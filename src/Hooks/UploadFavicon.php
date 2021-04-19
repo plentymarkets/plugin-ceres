@@ -38,7 +38,7 @@ class UploadFavicon
             // search for ceres plugin
             if($pluginSetEntry->plugin->name === 'Ceres') {
                 /** @var Configuration $configuration */
-                foreach ($pluginSetEntry->plugin->configurations as $configuration) {
+                foreach ($pluginSetEntry->configurations()->getResults() as $configuration) {
                     // search for favicon config
                     if($configuration->key === 'global.favicon' && strlen($configuration->value)) {
                         /** @var WebstoreConfigurationRepositoryContract $webstoreConfigRepository */

@@ -23,6 +23,7 @@ export const exceptionMap = new Map(
         ["115", "errorCreateOrderRetryTimeNotReached"],
         ["210", "errorVatService"],
         ["211", "errorVatNumberValidation"],
+        ["212", "errorVatServiceFallback"],
         ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"],
         ["302", "couponNoMatchingItemInBasket"],
         ["401", "notificationsCalculateShippingFailed"],
