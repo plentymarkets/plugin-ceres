@@ -92,27 +92,6 @@ context("Address", () =>
         cy.get(".notification-wrapper").children().first().should("contain", "Die Umsatzsteuer-Identifikationsnummer ist ungültig. Bitte entfernen Sie alle Leer- und Sonderzeichen.");
     });
 
-    it("should not be possible to add vat-id outside of the EU", () =>
-    {
-        cy.getByTestingAttr("billing-address-select-add").click();
-        cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
-
-        cy.getByTestingAttr("vat-id").should("exist");
-        cy.getByTestingAttr("address-country-select").eq(0).find(`select.custom-select`).select("Schweiz");
-        cy.getByTestingAttr("vat-id").should("not.exist");
-        cy.getByTestingAttr("address-country-select").eq(0).find(`select.custom-select`).select("United Kingdom");
-        cy.getByTestingAttr("vat-id").should("not.exist");
-    });
-
-    it("should show vat-id with wrong prefix only as deletable", () =>
-    {
-        cy.getByTestingAttr("billing-address-select").click();
-        cy.getByTestingAttr("billing-address-select-edit").first().click();
-        cy.getByTestingAttr("wrong-vat-id").parent().should("have.class", "error");
-        cy.getByTestingAttr("wrong-vat-id").invoke("val").should("eq", "D250560740");
-        cy.getByTestingAttr("delete-wrong-vat-id").should("exist");
-    });
-
     it("should add new delivery address", () =>
     {
         cy.getByTestingAttr("delivery-address-select-add").click();
@@ -241,7 +220,7 @@ context("Address", () =>
         cy.intercept("DELETE", "/rest/io/customer/address/**/?typeId=1").as("removeAddress");
 
         cy.getByTestingAttr("billing-address-select").click();
-        cy.getByTestingAttr("billing-address-select-remove").eq(1).click();
+        cy.getByTestingAttr("billing-address-select-remove").first().click();
         cy.getByTestingAttr("billing-address-select-remove-modal-remove").click();
 
         cy.wait("@removeAddress").then((res) =>
