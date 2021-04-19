@@ -17,6 +17,7 @@ use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract as WebshopWebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
@@ -176,6 +177,12 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 }
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
+
+                if(!empty($data["onlineStore_storeFavicon"])) {
+                    /** @var WebshopWebstoreConfigurationRepositoryContract $webshopConfigRepository */
+                    $webshopConfigRepository = pluginApp(WebshopWebstoreConfigurationRepositoryContract::class);
+                    $webshopConfigRepository->setFaviconFromWebspace($plentyId, $data["onlineStore_storeFavicon"]);
+                }
 
                 // we save robotsTxt
                 if (!empty($data["seo_robotsTxt"])) {
