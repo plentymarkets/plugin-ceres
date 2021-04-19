@@ -2,10 +2,12 @@ import Vue from "vue";
 
 const toggleTooltip = (el, disable) =>
 {
-    if (disable) {
+    if (disable)
+    {
         $(el).tooltip("disable");
     }
-    else {
+    else
+    {
         // reinitialize tooltip, to update the title value
         $(el).tooltip("dispose");
         $(el).tooltip();
