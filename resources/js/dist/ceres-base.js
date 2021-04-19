@@ -51633,7 +51633,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var toggleTooltip = function toggleTooltip(el, disable) {
-  $(el).tooltip(disable ? "disable" : "enable");
+  if (disable) {
+    $(el).tooltip("disable");
+  } else {
+    // reinitialize tooltip, to update the title value
+    $(el).tooltip("dispose");
+    $(el).tooltip();
+  }
 };
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.directive("tooltip", {
@@ -56272,12 +56278,9 @@ var TranslationService = function ($) {
       var namespace = match[1];
       var group = match[2];
 
-      if (_translations.hasOwnProperty(namespace)) {
-        console.warn("Cannot override namespace \"" + namespace + "\"");
-        continue;
+      if (!_translations.hasOwnProperty(namespace)) {
+        _translations[namespace] = {};
       }
-
-      _translations[namespace] = {};
 
       if (_translations[namespace].hasOwnProperty(group)) {
         console.warn("Cannot override group \"" + namespace + "::" + group);

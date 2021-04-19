@@ -95,7 +95,10 @@ export default {
         this.compInterval = defaultValue(this.compInterval, 1);
         this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
 
-        this.compDecimals = floatLength(this.compInterval);
+        const minDecimals = floatLength(this.min);
+        const intervalDecimals = floatLength(this.compInterval);
+
+        this.compDecimals = Math.max(minDecimals, intervalDecimals);
 
         this.onValueChanged = debounce(() =>
         {
@@ -142,7 +145,7 @@ export default {
             return this.$translate(
                 "Ceres::Template.singleItemQuantityMin",
                 {
-                    min: this.min
+                    min: this.$options.filters.numberFormat(this.compMin)
                 }
             );
         },
@@ -152,7 +155,7 @@ export default {
             return this.$translate(
                 "Ceres::Template.singleItemQuantityMax",
                 {
-                    max: this.max
+                    max: this.$options.filters.numberFormat(this.Max)
                 }
             );
         },
@@ -252,7 +255,7 @@ export default {
             value = limit(value, this.compMin, this.compMax);
 
             // make sure, new value is an even multiple of interval
-            const diff = formatFloat(value % this.compInterval, this.compDecimals, true);
+            const diff = formatFloat((value - this.min) % this.compInterval, this.compDecimals, true);
 
             if (diff > 0 && diff !== this.compInterval)
             {
@@ -277,7 +280,7 @@ export default {
             }
             else if (!isNullOrUndefined(this.$refs.quantityInputField))
             {
-                this.$refs.quantityInputField.value = value;
+                this.$refs.quantityInputField.value = this.displayValue;
             }
         },
 
@@ -285,8 +288,7 @@ export default {
         {
             if (!isNullOrUndefined(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0)
             {
-                // minimum quantity already in basket
-                this.compMin = this.compInterval;
+                this.compMin = this.min % this.compInterval  || this.compInterval;
             }
             else if (this.variationBasketQuantity === 0)
             {
