@@ -1,7 +1,6 @@
 # Release Notes for Ceres
 
-
-## v5.0.28 (2021-04-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
@@ -10,12 +9,14 @@
 ### Added
 
 - The alignment of the text in the greeting widget can now be determined in the widget settings.
+- In the Online store step of the plentyShop asisstant, you can now determine which status should be set for orders for which the VAT identification number validation could not be completed. 
 
 ### Changed
 
 - A number of user elements have been equipped with ARIA attributes. We would like to thank user @cerwantes for their contribution!
 - The favicon is now uploaded to the internal webspace when changes in the plentyShop assistant are saved. It is therefore no longer necessary to save and publish the plugin set in order to effect changes to the favicon.
 - The stability of the contact form has been improved.
+- The input field for the VAT identification number now contains the country-specific prefix.
 
 ### Fixed
 

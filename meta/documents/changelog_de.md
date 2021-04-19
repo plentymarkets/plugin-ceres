@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v5.0.28 (2021-04-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
@@ -9,12 +9,14 @@
 ### Hinzugefügt
 
 - Die Ausrichtung des Textes im Begrüßung-Widget kann jetzt über die Widget-Einstellungen bestimmt werden.
+- Im Schritt Webshop des plentyShop-Assistenten kannst du nun wählen, mit welchem Status Aufträge angelegt werden, für die die Prüfung der Umsatzsteuer-Identifikationsnummer nicht abgeschlossen werden konnte.
 
 ### Geändert
 
 - Einige Bedienelemente wurden um ARIA-Attribute erweitert. Wir möchten uns bei @cerwantes für diesen Beitrag bedanken!
 - Das Favicon wird nun beim Speichern des plentyShop-Assistenten in den internen Webspace hochgeladen. Es ist somit nicht mehr notwendig, das Plugin-Set bereitzustellen, damit Änderungen am Favicon wirksam werden.
 - Die Stabilität des Kontaktformulares wurde verbessert.
+- Das Eingabefeld für die Umsatzsteuer-Identifikationsnummer enthält nun das länderspezifische Präfix.
 
 ### Behoben
 
