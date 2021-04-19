@@ -279,7 +279,7 @@ export default {
             }
             else if (!isNullOrUndefined(this.$refs.quantityInputField))
             {
-                this.$refs.quantityInputField.value = value;
+                this.$refs.quantityInputField.value = this.displayValue;
             }
         },
 
@@ -287,14 +287,7 @@ export default {
         {
             if (!isNullOrUndefined(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0)
             {
-                let newMin = this.min;
-
-                // decrease the minimum until it reaches lowed possible value
-                while (newMin > 0 && newMin - this.compInterval > 0) {
-                    newMin -= this.compInterval;
-                }
-
-                this.compMin = newMin;
+                this.compMin = this.min % this.compInterval  || this.compInterval;
             }
             else if (this.variationBasketQuantity === 0)
             {

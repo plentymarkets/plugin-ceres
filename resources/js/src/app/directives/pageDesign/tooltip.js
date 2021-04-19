@@ -2,7 +2,14 @@ import Vue from "vue";
 
 const toggleTooltip = (el, disable) =>
 {
-    $(el).tooltip(disable ? "disable" : "enable");
+    if (disable) {
+        $(el).tooltip("disable");
+    }
+    else {
+        // reinitialize tooltip, to update the title value
+        $(el).tooltip("dispose");
+        $(el).tooltip();
+    }
 };
 
 Vue.directive("tooltip", {
@@ -15,10 +22,6 @@ Vue.directive("tooltip", {
     update(el, binding)
     {
         toggleTooltip(el, binding.value === false);
-        
-        // reinitialize tooltip, to update the title value
-        $(el).tooltip("dispose");
-        $(el).tooltip();
     },
 
     bind(el, binding)
