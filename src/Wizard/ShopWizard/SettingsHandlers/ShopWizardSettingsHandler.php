@@ -182,6 +182,8 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     /** @var WebshopWebstoreConfigurationRepositoryContract $webshopConfigRepository */
                     $webshopConfigRepository = pluginApp(WebshopWebstoreConfigurationRepositoryContract::class);
                     $webshopConfigRepository->setFaviconFromWebspace($plentyId, $data["onlineStore_storeFavicon"]);
+                } else {
+                    $webstoreData['faviconPath'] = '';
                 }
 
                 // we save robotsTxt
