@@ -2,10 +2,6 @@
 
 ## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
-### TODO
-
-- Graduated prices in the single item view now also include the base price. If you don't want to display the base price, please deactive the option **Display base price** in the item settings of the corresponding item.
-
 ### Added
 
 - The alignment of the text in the greeting widget can now be determined in the widget settings.
@@ -22,7 +18,7 @@
 
 - If no favicon is stored in the Ceres settings, the favicon from the client's obsolete settings is now used as a fallback.
 - An aria-label has been added to the home icon in the breadcrumbs. You can change the label via the `headerBreadcrumbHome` entry in the multilingualism interface. We would like to thank user @cerwantes for their contribution!
-- The list of graduated prices in the single item view now also includes the base price if the display of the base price is activated for this item.
+- Due to legal reasons, the list of graduated prices in the single item view now also includes the base price if the display of the base price is activated for this item.
 - A defective `<img>` tag was displayed in the header if no company logo had been stored in the Ceres settings. This behaviour has been fixed.
 - Payment method dependent surcharges and rebates are now taken into account if the payment method of an already existing order is changed.  
 - Under certain circumstances, the currency was displayed incorrectly in the order overview in the My Account section. This behaviour has been fixed.

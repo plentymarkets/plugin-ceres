@@ -2,10 +2,6 @@
 
 ## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
-### TODO
-
-- Angezeigte Staffelpreise auf der Artikelansicht beinhalten nun auch den Grundpreis. Falls du nicht willst, dass der Grundpreis in der Liste der Staffelpreise ausgegeben wird, deaktiviere bitte die Option **Grundpreisanzeige** am jeweiligen Artikel.
-
 ### Hinzugefügt
 
 - Die Ausrichtung des Textes im Begrüßung-Widget kann jetzt über die Widget-Einstellungen bestimmt werden.
@@ -22,7 +18,7 @@
 
 - Solange kein Favicon in den Ceres-Einstellungen hinterlegt ist, wird nun das Favicon aus den veralteten Einstellungen des Mandanten verwendet.
 - Das Home-Icon in den Breadcrumbs wurde zusätzlich mit einem aria-label versehen. Dessen Wert kann über die Mehrsprachigkeitsoberfläche über den Eintrag `headerBreadcrumbHome` angegeben werden. Wir möchten uns bei @cerwantes für den Beitrag bedanken!
-- In der Auflistung der Staffelpreise auf der Artikelansicht werden nun auch Grundpreise angezeigt, falls die Grundpreisanzeige am Artikel aktiviert ist.
+- Aus Gründen der Rechtssicherheit wird nun in der Auflistung der Staffelpreise auf der Artikelansicht auch der Grundpreis angezeigt, falls die Grundpreisanzeige am Artikel aktiviert ist.
 - Im Header wurde ein fehlerhaftes `<img>`-Tag angezeigt, wenn kein Firmenlogo in den Ceres-Einstellungen hinterlegt war. Dieses Verhalten wurde behoben.
 - Zahlungsartenrabatte und -aufschläge werden jetzt bei einer nachträglichen Änderung der Zahlungsart eines bestehenden Auftrags berücksichtigt.
 - Unter bestimmten Umständen wurde die Währung in der Auftragsübersicht im Mein Konto-Bereich falsch angezeigt. Dieses Verhalten wurde behoben.
