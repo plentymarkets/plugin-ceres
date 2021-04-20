@@ -13,7 +13,7 @@ class BackgroundWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.BackgroundWidget';
-    
+
     /**
      * @inheritDoc
      */
@@ -27,7 +27,7 @@ class BackgroundWidget extends BaseWidget
             ->withPosition(700)
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -79,6 +79,9 @@ class BackgroundWidget extends BaseWidget
      */
     private function createImageSettings($settings)
     {
+
+            $settings->createCheckbox('lazyloadImage')->withName('widget.backgroundLazyloadLabel');
+
         $settings->createSelect('sourceType')
             ->withDefaultValue('none')
             ->withName('Widget.backgroundSourceTypeLabel')
@@ -130,7 +133,7 @@ class BackgroundWidget extends BaseWidget
             ->withName('Widget.backgroundRepeatLabel')
             ->withTooltip('Widget.backgroundRepeatTooltip');
     }
-    
+
     /**
      * @inheritDoc
      */
