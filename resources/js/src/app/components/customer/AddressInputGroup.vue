@@ -973,6 +973,11 @@ export default {
 
     computed:
     {
+        isMyAccount()
+        {
+            return App.templateType === "my-account";
+        },
+
         isPickupStation()
         {
             return this.value && this.value.address1 === "PACKSTATION" && this.isParcelBoxAvailable;
