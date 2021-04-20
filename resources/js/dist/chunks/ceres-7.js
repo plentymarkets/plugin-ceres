@@ -441,6 +441,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -751,7 +753,11 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "number", placeholder: "Min" },
+        attrs: {
+          type: "number",
+          placeholder: "Min",
+          "aria-label": _vm.$translate("Ceres::Template.itemFilterPriceMin")
+        },
         domProps: { value: _vm.priceMin },
         on: {
           focus: function($event) {
@@ -784,7 +790,11 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "number", placeholder: "Max" },
+        attrs: {
+          type: "number",
+          placeholder: "Max",
+          "aria-label": _vm.$translate("Ceres::Template.itemFilterPriceMax")
+        },
         domProps: { value: _vm.priceMax },
         on: {
           focus: function($event) {
@@ -810,7 +820,8 @@ var render = function() {
           type: "button",
           "data-toggle": "tooltip",
           "data-placement": "top",
-          title: _vm.$translate("Ceres::Template.itemApply")
+          title: _vm.$translate("Ceres::Template.itemApply"),
+          "aria-label": _vm.$translate("Ceres::Template.itemFilterButton")
         },
         on: {
           click: function($event) {

@@ -8,7 +8,6 @@ const TabNavItem = {
     render(createElement)
     {
         const anchorAttrs = {
-            role: "tab",
             href: ""
         };
 
@@ -39,6 +38,7 @@ const TabNavItem = {
         return createElement(
             "li",
             {
+                attrs: {role: "tab"},
                 staticClass: "nav-item"
             },
             [anchor]

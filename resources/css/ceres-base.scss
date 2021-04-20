@@ -10398,6 +10398,13 @@ $border-width: 1px;
     }
 }
 
+.input-group-prepend {
+    .custom-select {
+        padding: 0.8rem 2rem 0.8rem 1rem;
+        background-position: calc(100% - 1rem) center;
+    }
+}
+
 .file-input {
     height: 38px;
     cursor: pointer;
