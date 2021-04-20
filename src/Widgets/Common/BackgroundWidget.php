@@ -80,8 +80,7 @@ class BackgroundWidget extends BaseWidget
     private function createImageSettings($settings)
     {
 
-            $settings->createCheckbox('lazyloadImage')->withName('widget.backgroundLazyloadLabel');
-
+        $settings->createCheckbox('lazyloadImage')->withName('widget.backgroundLazyloadLabel');
         $settings->createSelect('sourceType')
             ->withDefaultValue('none')
             ->withName('Widget.backgroundSourceTypeLabel')
