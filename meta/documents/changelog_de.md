@@ -1,5 +1,41 @@
 # Release Notes für Ceres
 
+## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Angezeigte Staffelpreise auf der Artikelansicht beinhalten nun auch den Grundpreis. Falls du nicht willst, dass der Grundpreis in der Liste der Staffelpreise ausgegeben wird, deaktiviere bitte die Option **Grundpreisanzeige** am jeweiligen Artikel.
+
+### Hinzugefügt
+
+- Die Ausrichtung des Textes im Begrüßung-Widget kann jetzt über die Widget-Einstellungen bestimmt werden.
+- Im Schritt Webshop des plentyShop-Assistenten kannst du nun wählen, mit welchem Status Aufträge angelegt werden, für die die Prüfung der Umsatzsteuer-Identifikationsnummer nicht abgeschlossen werden konnte.
+
+### Geändert
+
+- Einige Bedienelemente wurden um ARIA-Attribute erweitert. Wir möchten uns bei @cerwantes für diesen Beitrag bedanken!
+- Das Favicon wird nun beim Speichern des plentyShop-Assistenten in den internen Webspace hochgeladen. Es ist somit nicht mehr notwendig, das Plugin-Set bereitzustellen, damit Änderungen am Favicon wirksam werden.
+- Die Stabilität des Kontaktformulares wurde verbessert.
+- Das Eingabefeld für die Umsatzsteuer-Identifikationsnummer enthält nun das länderspezifische Präfix.
+
+### Behoben
+
+- Solange kein Favicon in den Ceres-Einstellungen hinterlegt ist, wird nun das Favicon aus den veralteten Einstellungen des Mandanten verwendet.
+- Das Home-Icon in den Breadcrumbs wurde zusätzlich mit einem aria-label versehen. Dessen Wert kann über die Mehrsprachigkeitsoberfläche über den Eintrag `headerBreadcrumbHome` angegeben werden. Wir möchten uns bei @cerwantes für den Beitrag bedanken!
+- In der Auflistung der Staffelpreise auf der Artikelansicht werden nun auch Grundpreise angezeigt, falls die Grundpreisanzeige am Artikel aktiviert ist.
+- Im Header wurde ein fehlerhaftes `<img>`-Tag angezeigt, wenn kein Firmenlogo in den Ceres-Einstellungen hinterlegt war. Dieses Verhalten wurde behoben.
+- Zahlungsartenrabatte und -aufschläge werden jetzt bei einer nachträglichen Änderung der Zahlungsart eines bestehenden Auftrags berücksichtigt.
+- Unter bestimmten Umständen wurde die Währung in der Auftragsübersicht im Mein Konto-Bereich falsch angezeigt. Dieses Verhalten wurde behoben.
+- Durch einen Fehler konnte pro Plugin nur eine Übersetzungsdatei im Frontend verwendet werden. Dies wurde behoben.
+- Die Mindestbestellmenge eines Artikels oder eines Preises wird nun bei der Mengeneingabe berücksichtigt.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.28 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/Widgets/MyAccount/GreetingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2779/files#diff-c428531b614621aa7ec1fe56507582fcd923aeae8342bfb3c0d2bbbe650c69be)
+- [resources/js/src/app/components/item/GraduatedPrices.vue](https://github.com/plentymarkets/plugin-ceres/pull/2765/files#diff-57df8453013ee1dd0821c871b25d89e42eb2ff2ed7d491f2141aacb299ada6b9)
+
+
 ## v5.0.27 (2021-04-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.26...5.0.27" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
