@@ -4,6 +4,7 @@
 
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
             <div class="image-container">
+              <a :href="basketItem.variation.data | itemURL">
                 <lazy-img
                     picture-class="d-block mw-100 mh-100"
                     v-if="image"
@@ -12,6 +13,7 @@
                     :title="itemName"
                     data-testing="basket-item-img">
                 </lazy-img>
+              </a>
             </div>
 
             <div class="meta-container-wrapper">
@@ -261,6 +263,12 @@ export default {
 
         basePrice()
         {
+            // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
+            if (!isNullOrUndefined(this.basketItem.updatedBasePrice)) 
+            {
+                return this.basketItem.updatedBasePrice;
+            }
+
             if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
             {
                 return this.basketItem.variation.data.prices.specialOffer.basePrice;

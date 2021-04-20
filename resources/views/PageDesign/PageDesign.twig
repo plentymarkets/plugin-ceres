@@ -209,7 +209,7 @@
         isCheapestSorting: "{{ services.template.isCheapestSorting() }}",
         useVariationOrderProperties: {{ webstoreConfig.useVariationOrderProperties | default(0) }},
         initialData: {
-            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
+            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
             shippingCountryId: {{ services.checkout.getShippingCountryId() }},
             showNetPrices: {{ showNetPrices | json_encode }}
         },

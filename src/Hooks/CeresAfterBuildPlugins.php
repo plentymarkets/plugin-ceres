@@ -3,11 +3,17 @@
 namespace Ceres\Hooks;
 
 use Ceres\Helper\BuildHash;
+use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheInvalidationRepositoryContract;
+use Plenty\Modules\Plugin\Models\Configuration;
+use Plenty\Modules\Plugin\Models\Plugin;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
+use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\ShopBuilder\Contracts\ContentLinkRepositoryContract;
 use Plenty\Modules\ShopBuilder\Models\ContentLink;
+use Plenty\Modules\System\Models\Webstore;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 
 /**
  * Class CeresAfterBuildPlugins
@@ -50,6 +56,11 @@ class CeresAfterBuildPlugins
         /** @var ContentLink $homepageContentLink */
         foreach ($homepageContentLinks as $homepageContentLink) {
             $contentLinkRepository->updateContentLink($homepageContentLink->id, ['active' => false]);
+        }
+
+        // Upload favicon from plugin config to internal storage for all linked webstores
+        if(count($pluginSet->webstores)) {
+            UploadFavicon::upload($pluginSet);
         }
     }
 }

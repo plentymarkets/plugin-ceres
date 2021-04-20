@@ -145,6 +145,11 @@ export default {
             this.isExpanded = false;
         },
 
+        open()
+        {
+            this.isCollapsed = false;
+        },
+
         isConsented(groupKey)
         {
             return this.$store.getters.isConsented(groupKey + ".*");
