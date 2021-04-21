@@ -11,6 +11,8 @@
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.set("ImageCarouselOverride", Twig.call("LayoutContainer.show", ["Ceres::SingleItem.ImageCarousel"])) }}
 
+{{ dump(item) }}
+
 <div class="widget widget-item-image widget-{{ appearance | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     {{ Twig.if("ImageCarouselOverride | trim is empty") }}
