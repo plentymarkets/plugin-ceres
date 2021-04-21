@@ -13,7 +13,7 @@ class ItemImageWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.ItemImageWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -27,7 +27,7 @@ class ItemImageWidget extends BaseWidget
             ->withPosition(200)
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -66,6 +66,9 @@ class ItemImageWidget extends BaseWidget
                     ->addEntry("url", "Widget.itemImageSizeFull")
                     ->toArray()
             );
+
+        $settingsFactory->createCheckbox('preloadImage')
+            ->withName('Widget.backgroundImagePreloadLabel');
 
         $settingsFactory->createCheckbox("showThumbs")
             ->withName("Widget.itemImageShowThumbsLabel")
