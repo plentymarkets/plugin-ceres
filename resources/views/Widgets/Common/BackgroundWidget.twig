@@ -63,7 +63,6 @@
         {% if preloadImage %}
             {{ Twig.if("hasUrl") }}
                 {{ Twig.print("add_asset(url,'image')") }}
-                <span class="preloaded"></span>
             {{ Twig.endif() }}
         {% endif %}
 
