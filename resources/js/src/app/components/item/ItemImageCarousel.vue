@@ -1,6 +1,6 @@
 <template>
     <div itemscope itemtype="http://schema.org/Thing">
-        <template v-if="initialized">
+        <template>
             <div class="single-carousel owl-carousel owl-theme owl-single-item mt-0" ref="single">
                 <div v-for="image in singleImages" class="prop-1-1">
                     <a :href="image.url" :data-lightbox="'single-item-image' + _uid">
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </template>
-        <div v-else class="single-carousel owl-carousel owl-theme owl-single-item mt-0">
+        <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
             <img :src="singleImages[0].url" alt="test">
         </div>
     </div>
@@ -81,7 +81,8 @@ export default {
 
     computed:
     {
-        currentVariation() {
+        currentVariation()
+        {
             return this.$store.getters[`${this.itemId}/currentItemVariation`]
         },
 
@@ -195,6 +196,10 @@ export default {
                         event.page.index,
                         350
                     ]);
+                },
+                onInitialized: event =>
+                {
+                    this.initialized = true;
                 }
             };
 
@@ -216,11 +221,6 @@ export default {
             $(this.$refs.single).on("changed.owl.carousel", event =>
             {
                 this.currentItem = event.page.index;
-            });
-
-            $(this.$refs.single).on("initialized.owl.carousel", event =>
-            {
-                this.initialized = true;
             });
         },
 
