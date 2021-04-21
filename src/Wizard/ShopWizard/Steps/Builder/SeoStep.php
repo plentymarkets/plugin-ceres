@@ -27,7 +27,8 @@ class SeoStep extends Step
                 $this->generateRobotsTxtSection(),
                 $this->generateSiteMapSection(),
                 $this->generateAvailabilitiesSection(),
-                $this->generateItemMetaTitleSection()
+                $this->generateItemMetaTitleSection(),
+                $this->generateBrandMappingSection()
             ]
         ];
     }
@@ -195,6 +196,39 @@ class SeoStep extends Step
                         ]
                     ]
                 ],
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateBrandMappingSection():array
+    {
+        //$availableCurrenciesList = $this->getCurrenciesListValues();
+        $brandOptions = SeoConfig::getBrandOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($brandOptions);
+
+        return [
+            "title"       => "Wizard.brandMapping",
+            "description" => "Wizard.brandMappingDescription",
+            "form"        => [
+                "seo_chooseBrandDisplay" => [
+                    "type"         => "select",
+                    "defaultValue" => " ",
+                    "options"      => [
+                        "name" => "Wizard.brandNotSet",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_brandPropertyIdOnArticle" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_chooseBrandDisplay === '3'",
+                    "defaultValue" => " ",
+                    "options"      => [
+                        "name"          => "Wizard.brandPropertyIdOnArticle",
+                    ]
+                ]
             ]
         ];
     }

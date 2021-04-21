@@ -15,7 +15,7 @@ class SeoConfig
         "robotsNoindex"         => "noindex",
         "robotsNoindexNofollow" => "noindex, nofollow"
     ];
-    
+
     private static $availabilitiesOptions = [
         "availabilityNotSet"               => "",
         "availabilityInStock"              => "http://schema.org/InStock",
@@ -28,14 +28,20 @@ class SeoConfig
         "availabilityPreSale"              => "http://schema.org/PreSale",
         "availabilitySoldOut"              => "http://schema.org/SoldOut",
     ];
-    
+
     private static $siteMapOptions = [
         "siteMapContentCategory" => "contentCategory",
         "siteMapItemCategory"    => "itemCategory",
         "siteMapItem"            => "item",
         "siteMapBlog"            => "blog",
     ];
-    
+
+    private static $brandOptions = [
+        "brandNotSet"               => "",
+        "manufacturerExtern"        => "2",
+        "brandSetPropertyOnArticle" => "3",
+    ];
+
     /**
      * @return array
      */
@@ -43,7 +49,7 @@ class SeoConfig
     {
         return self::$metaRobotsOptions;
     }
-    
+
     /**
      * @return array
      */
@@ -51,12 +57,20 @@ class SeoConfig
     {
         return self::$availabilitiesOptions;
     }
-    
+
     /**
      * @return array
      */
     public static function getSiteMapOptions()
     {
         return self::$siteMapOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getBrandOptions()
+    {
+        return self::$brandOptions;
     }
 }

@@ -4332,6 +4332,44 @@
                             }
                         }
                     }
+                },
+                "brand.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.brandMapping",
+                    "options": {
+                        "containerEntries": {
+                            "brand.mapping.brand": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.brand",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "",
+                                            "caption": "Config.brandNotSet"
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.manufacturerExtern"
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.brandSetPropertyOnArticle"
+                                        }
+                                    ]
+                                }
+                            },
+                            "brand.mapping.brandID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.brandID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
