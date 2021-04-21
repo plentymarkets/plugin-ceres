@@ -13,9 +13,10 @@
 {{ Twig.set("ImageCarouselOverride", Twig.call("LayoutContainer.show", ["Ceres::SingleItem.ImageCarousel"])) }}
 
 {% if preloadImage %}
-    {{ Twig.set("imageSizes", imageSize) }}
+    {{ Twig.set("_imageSize", imageSize | json_encode) }}
     {{ Twig.set("itemData", "item.documents[0].data") }}
-    {{ Twig.set("itemImage", "itemData.images | itemImages(imageSizes) | orderByKey('position') | first") }}
+    {{ Twig.set("itemImage", "itemData.images | itemImages(_imageSize) | orderByKey('position') | first") }}
+
     {{ Twig.print("add_asset(itemImage.url,'image')") }}
 {% endif %}
 
