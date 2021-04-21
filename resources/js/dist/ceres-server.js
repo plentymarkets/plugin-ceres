@@ -6640,7 +6640,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
@@ -6672,7 +6671,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -6708,7 +6711,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentItem: 0
+      currentItem: 0,
+      initialized: false
     };
   },
   computed: {
@@ -6788,6 +6792,9 @@ __webpack_require__.r(__webpack_exports__);
         onChanged: function onChanged(event) {
           var $thumb = $(_this3.$refs.thumbs);
           $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+        },
+        onInitialized: function onInitialized(event) {
+          _this3.initialized = true;
         }
       };
 
@@ -46808,49 +46815,59 @@ var render = function() {
     "div",
     { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
     [
-      _vm._ssrNode(
-        '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">' +
-          _vm._ssrList(_vm.singleImages, function(image) {
-            return (
-              '<div class="prop-1-1"><a' +
-              _vm._ssrAttr("href", image.url) +
-              _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
-              "><img" +
-              _vm._ssrAttr("data-src", image.url) +
-              _vm._ssrAttr("alt", _vm.getAltText(image)) +
-              _vm._ssrAttr("title", _vm.getImageName(image)) +
-              ' class="owl-lazy"></a></div>'
+      [
+        _vm._ssrNode(
+          '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">' +
+            _vm._ssrList(_vm.singleImages, function(image) {
+              return (
+                '<div class="prop-1-1"><a' +
+                _vm._ssrAttr("href", image.url) +
+                _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
+                "><img" +
+                _vm._ssrAttr("data-src", image.url) +
+                _vm._ssrAttr("alt", _vm.getAltText(image)) +
+                _vm._ssrAttr("title", _vm.getImageName(image)) +
+                ' class="owl-lazy"></a></div>'
+              )
+            }) +
+            "</div> "
+        ),
+        _vm.showThumbs
+          ? _vm._ssrNode(
+              '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
+              "</div>",
+              _vm._l(_vm.carouselImages, function(imagePreview, index) {
+                return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
+                  _vm._ssrNode(
+                    '<div class="image-container">',
+                    "</div>",
+                    [
+                      _c("lazy-img", {
+                        class: { active: _vm.currentItem === index },
+                        attrs: {
+                          "picture-class": "owl-thumb border-appearance",
+                          "image-url": imagePreview.url,
+                          alt: _vm.getAltText(imagePreview),
+                          title: _vm.getImageName(imagePreview)
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              }),
+              0
             )
-          }) +
-          "</div> "
-      ),
-      _vm.showThumbs
-        ? _vm._ssrNode(
-            '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
-            "</div>",
-            _vm._l(_vm.carouselImages, function(imagePreview, index) {
-              return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
-                _vm._ssrNode(
-                  '<div class="image-container">',
-                  "</div>",
-                  [
-                    _c("lazy-img", {
-                      class: { active: _vm.currentItem === index },
-                      attrs: {
-                        "picture-class": "owl-thumb border-appearance",
-                        "image-url": imagePreview.url,
-                        alt: _vm.getAltText(imagePreview),
-                        title: _vm.getImageName(imagePreview)
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            }),
-            0
-          )
-        : _vm._e()
+          : _vm._e()
+      ],
+      _vm._ssrNode(
+        " " +
+          (!_vm.initialized
+            ? '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"><img' +
+              _vm._ssrAttr("src", _vm.singleImages[0].url) +
+              ' alt="test"></div>'
+            : "<!---->")
+      )
     ],
     2
   )
