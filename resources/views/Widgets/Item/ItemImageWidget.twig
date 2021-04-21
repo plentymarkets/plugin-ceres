@@ -14,7 +14,7 @@
 
 {% if preloadImage %}
     {{ Twig.set("itemData", "item.documents[0].data") }}
-    {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
+    {{ Twig.set("itemImage", "itemData.images | itemImages(imageSize) | orderByKey('position') | first") }}
     {{ Twig.print("add_asset(itemImage.url,'image')") }}
 {% endif %}
 
