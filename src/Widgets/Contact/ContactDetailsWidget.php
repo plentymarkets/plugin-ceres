@@ -12,7 +12,7 @@ class ContactDetailsWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Contact.ContactDetailsWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class ContactDetailsWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::CONTACT)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "contact", "kontakt", "mail", "telefon", "phone", "details", "kontaktdaten"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
