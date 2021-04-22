@@ -6654,7 +6654,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
@@ -6686,7 +6685,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -6722,7 +6725,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentItem: 0
+      currentItem: 0,
+      initialized: false
     };
   },
   computed: {
@@ -6802,6 +6806,9 @@ __webpack_require__.r(__webpack_exports__);
         onChanged: function onChanged(event) {
           var $thumb = $(_this3.$refs.thumbs);
           $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+        },
+        onInitialized: function onInitialized(event) {
+          _this3.initialized = true;
         }
       };
 
@@ -57052,78 +57059,97 @@ var render = function() {
     "div",
     { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
     [
-      _c(
-        "div",
-        {
-          ref: "single",
-          staticClass:
-            "single-carousel owl-carousel owl-theme owl-single-item mt-0"
-        },
-        _vm._l(_vm.singleImages, function(image) {
-          return _c("div", { staticClass: "prop-1-1" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: image.url,
-                  "data-lightbox": "single-item-image" + _vm._uid
-                }
-              },
-              [
-                _c("img", {
-                  staticClass: "owl-lazy",
+      [
+        _c(
+          "div",
+          {
+            ref: "single",
+            staticClass:
+              "single-carousel owl-carousel owl-theme owl-single-item mt-0"
+          },
+          _vm._l(_vm.singleImages, function(image) {
+            return _c("div", { staticClass: "prop-1-1" }, [
+              _c(
+                "a",
+                {
                   attrs: {
-                    "data-src": image.url,
-                    alt: _vm.getAltText(image),
-                    title: _vm.getImageName(image)
+                    href: image.url,
+                    "data-lightbox": "single-item-image" + _vm._uid
                   }
-                })
-              ]
+                },
+                [
+                  _c("img", {
+                    staticClass: "owl-lazy",
+                    attrs: {
+                      "data-src": image.url,
+                      alt: _vm.getAltText(image),
+                      title: _vm.getImageName(image)
+                    }
+                  })
+                ]
+              )
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _vm.showThumbs
+          ? _c(
+              "div",
+              {
+                ref: "thumbs",
+                staticClass:
+                  "owl-thumbs owl-carousel owl-theme owl-single-item",
+                attrs: { id: "thumb-carousel" }
+              },
+              _vm._l(_vm.carouselImages, function(imagePreview, index) {
+                return _c("div", { staticClass: "prop-1-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "image-container",
+                      on: {
+                        click: function($event) {
+                          return _vm.goTo(index)
+                        }
+                      }
+                    },
+                    [
+                      _c("lazy-img", {
+                        class: { active: _vm.currentItem === index },
+                        attrs: {
+                          "picture-class": "owl-thumb border-appearance",
+                          "image-url": imagePreview.url,
+                          alt: _vm.getAltText(imagePreview),
+                          title: _vm.getImageName(imagePreview)
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              }),
+              0
             )
-          ])
-        }),
-        0
-      ),
+          : _vm._e()
+      ],
       _vm._v(" "),
-      _vm.showThumbs
+      !_vm.initialized
         ? _c(
             "div",
             {
-              ref: "thumbs",
-              staticClass: "owl-thumbs owl-carousel owl-theme owl-single-item",
-              attrs: { id: "thumb-carousel" }
+              staticClass:
+                "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
             },
-            _vm._l(_vm.carouselImages, function(imagePreview, index) {
-              return _c("div", { staticClass: "prop-1-1" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "image-container",
-                    on: {
-                      click: function($event) {
-                        return _vm.goTo(index)
-                      }
-                    }
-                  },
-                  [
-                    _c("lazy-img", {
-                      class: { active: _vm.currentItem === index },
-                      attrs: {
-                        "picture-class": "owl-thumb border-appearance",
-                        "image-url": imagePreview.url,
-                        alt: _vm.getAltText(imagePreview),
-                        title: _vm.getImageName(imagePreview)
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            }),
-            0
+            [
+              _c("img", {
+                attrs: { src: _vm.singleImages[0].url, alt: "test" }
+              })
+            ]
           )
         : _vm._e()
-    ]
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -94701,7 +94727,7 @@ var mutations = {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var item = _step.value;
 
-          _fillMissingData(item);
+          _fillMissingData(state, item);
 
           newItems.push(item);
         }
@@ -94945,7 +94971,7 @@ var actions = {
   }
 };
 
-function _fillMissingData(item) {
+function _fillMissingData(state, item) {
   var oldBasketItem = null;
 
   if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.variation)) {

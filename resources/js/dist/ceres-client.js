@@ -70984,7 +70984,7 @@ var mutations = {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var item = _step.value;
 
-          _fillMissingData(item);
+          _fillMissingData(state, item);
 
           newItems.push(item);
         }
@@ -71228,7 +71228,7 @@ var actions = {
   }
 };
 
-function _fillMissingData(item) {
+function _fillMissingData(state, item) {
   var oldBasketItem = null;
 
   if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.variation)) {
