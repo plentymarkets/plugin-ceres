@@ -13,7 +13,7 @@ class LiveShoppingWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.LiveShoppingWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class LiveShoppingWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(800)
+            ->withSearchKeyWords([
+                "live", "shopping", "liveshopping", "angebot", "angebote", "sell"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -110,7 +113,7 @@ class LiveShoppingWidget extends BaseWidget
 
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

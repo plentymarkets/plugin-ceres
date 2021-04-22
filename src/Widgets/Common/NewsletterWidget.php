@@ -11,7 +11,7 @@ class NewsletterWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.NewsletterWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -22,9 +22,12 @@ class NewsletterWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/newsletter.svg")
             ->withType(WidgetTypes::STATIC)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "newsletter"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -54,7 +57,7 @@ class NewsletterWidget extends BaseWidget
 
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

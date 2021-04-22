@@ -12,7 +12,7 @@ class ListWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.ListWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class ListWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(900)
+            ->withSearchKeyWords([
+                "liste", "list", "listen", "auflistung", "stichpunkte"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -64,7 +67,7 @@ class ListWidget extends BaseWidget
 
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

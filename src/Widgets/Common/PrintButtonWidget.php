@@ -11,7 +11,7 @@ class PrintButtonWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.PrintButtonWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -22,9 +22,12 @@ class PrintButtonWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/print-button.svg")
             ->withType(WidgetTypes::STATIC)
             ->withPosition(300)
+            ->withSearchKeyWords([
+                "drucken", "print", "button", "knopf", "feld", "schaltfläche"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
