@@ -235,14 +235,19 @@ if ( headerParent )
     // Calculate top offset for vue-app node because header is not part of document flow
     function calculateBodyOffset()
     {
+        const scrollTop = window.pageYOffset;
+        const vueApp = document.getElementById("vue-app");
+
         headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
 
-        if (headerLoaded && headerParent)
+        if (scrollTop > 0 && headerLoaded && headerParent)
         {
-            const vueApp = document.getElementById("vue-app");
-
             vueApp.style.marginTop = headerHeight + "px";
             vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
+        }
+        else if (scrollTop <= 0)
+        {
+            vueApp.style.marginTop = null;
         }
     }
 
@@ -297,11 +302,25 @@ if ( headerParent )
             let offset = 0;
 
             const scrollTop = window.pageYOffset;
+            const header = document.querySelector("#page-header");
+
+            if (scrollTop > 0) {
+                header.classList.add("realy-fixed");
+            }
+            else {
+                header.classList.remove("realy-fixed");
+            }
 
             for (let i = 0; i < headerParent.children.length; i++)
             {
                 const elem = headerParent.children[i];
                 const elemHeight = allHeaderChildrenHeights[i];
+
+                if (scrollTop <= 0) {
+                    elem.style.top = null;
+                    elem.style.position = "relative";
+                    continue;
+                }
 
                 offset = absolutePos - scrollTop;
                 elem.style.position = "absolute";
@@ -332,6 +351,8 @@ if ( headerParent )
                 }
                 absolutePos = absolutePos + elemHeight;
             }
+
+            calculateBodyOffset();
         }
     }
 
