@@ -33,6 +33,9 @@
     {% set fallbackImagePath = companyLogoUrl %}
 {% endif %}
 
+{{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
+{{ Twig.print("add_asset(logoUrl,'image')") }}
+
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
 <nav class="navbar header-fw p-0 border-bottom{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{% else %} normalmenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
