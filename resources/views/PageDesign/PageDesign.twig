@@ -20,6 +20,8 @@
 <head>
     {{ get_consent_scripts(ceresConfig.global.blockCookies) }}
 
+    {{ add_asset('https://cdn02.plentymarkets.com/jpx0tvae1136/plugin/31/ceres/documents/fonts/fontawesome-webfont.woff2?v=4.7.0','font') }}
+
     {% include getPartial('head') %}
 
     {% block PartialHead %}
