@@ -4341,6 +4341,7 @@
                             "brand.mapping.brand": {
                                 "type": "selectBox",
                                 "required": false,
+                                "deprecated": true,
                                 "label": "Config.brand",
                                 "options": {
                                     "defaultValue": "",
@@ -4363,6 +4364,7 @@
                             "brand.mapping.brandID": {
                                 "type": "inputText",
                                 "required": false,
+                                "deprecated": true,
                                 "label": "Config.brandID",
                                 "options": {
                                     "defaultValue": ""
