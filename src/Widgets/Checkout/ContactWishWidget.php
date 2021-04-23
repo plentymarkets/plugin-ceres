@@ -12,7 +12,7 @@ class ContactWishWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.ContactWishWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class ContactWishWidget extends BaseWidget
             ->withType(WidgetTypes::CHECKOUT)
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(300)
+            ->withSearchKeyWords([
+                "checkout", "bestellvorgang", "bestellung", "wishlist", "wunschzettel"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

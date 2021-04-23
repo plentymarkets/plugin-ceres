@@ -13,7 +13,7 @@ class GreetingWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.GreetingWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class GreetingWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::CUSTOMER)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "begrüßung", "greeting"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
