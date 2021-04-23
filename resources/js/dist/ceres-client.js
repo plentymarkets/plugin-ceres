@@ -58684,8 +58684,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 // EXTERNAL
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("client-only", vue_client_only__WEBPACK_IMPORTED_MODULE_32___default.a); // CHECKOUT
+ // CHECKOUT
 
 
 
@@ -58918,7 +58917,8 @@ function createApp(options) {
     return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./app/components/form/FormAttachment.vue */ "./resources/js/src/app/components/form/FormAttachment.vue"));
   }); // EXTERNAL
 
-  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("lazy-hydrate", vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__["default"]); // CHECKOUT
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("lazy-hydrate", vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("client-only", vue_client_only__WEBPACK_IMPORTED_MODULE_32___default.a); // CHECKOUT
 
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("edit-coupon-overlay", function () {
     return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./app/components/myAccount/EditCouponOverlay.vue */ "./resources/js/src/app/components/myAccount/EditCouponOverlay.vue"));

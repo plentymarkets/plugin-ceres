@@ -85,7 +85,6 @@ import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent
 // EXTERNAL
 import LazyHydrate from "vue-lazy-hydration";
 import ClientOnly from "vue-client-only";
-Vue.component("client-only", ClientOnly);
 
 // CHECKOUT
 import "./app/components/checkout/AcceptGtcCheck";
@@ -248,6 +247,8 @@ export function createApp(options)
 
     // EXTERNAL
     Vue.component("lazy-hydrate", LazyHydrate);
+    Vue.component("client-only", ClientOnly);
+
     // CHECKOUT
     Vue.component("edit-coupon-overlay", () => import("./app/components/myAccount/EditCouponOverlay.vue"));
 
