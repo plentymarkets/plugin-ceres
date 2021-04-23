@@ -74,7 +74,8 @@ class ImageCarouselWidget extends BaseWidget
             ->withDefaultValue(true);
 
         $settings->createCheckbox('preloadImage')
-            ->withName('Widget.backgroundImagePreloadLabel')
+            ->withName('Widget.preloadImageLabel')
+            ->withTooltip('Widget.preloadImageTooltip')
             ->withCondition("!lazyLoading");
 
         $container = $settings->createVerticalContainer("slides")

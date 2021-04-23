@@ -68,7 +68,8 @@ class ItemImageWidget extends BaseWidget
             );
 
         $settingsFactory->createCheckbox('preloadImage')
-            ->withName('Widget.backgroundImagePreloadLabel');
+            ->withTooltip('Widget.preloadImageTooltip')
+            ->withName('Widget.preloadImageLabel');
 
         $settingsFactory->createCheckbox("showThumbs")
             ->withName("Widget.itemImageShowThumbsLabel")

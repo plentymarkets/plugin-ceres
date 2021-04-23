@@ -121,7 +121,8 @@ class ImageBoxWidget extends BaseWidget
             ->withDefaultValue(true);
 
         $settings->createCheckbox('preloadImage')
-            ->withName('Widget.backgroundImagePreloadLabel')
+            ->withName('Widget.preloadImageLabel')
+            ->withTooltip('Widget.preloadImageTooltip')
             ->withCondition("!lazyLoading");
 
         $settings->createSpacing(false, true);
