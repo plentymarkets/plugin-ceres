@@ -20,8 +20,6 @@
 <head>
     {{ get_consent_scripts(ceresConfig.global.blockCookies) }}
 
-    <link rel="preload" href="https://cdn02.plentymarkets.com/jpx0tvae1136/plugin/31/ceres/documents/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin>
-
     {% include getPartial('head') %}
 
     {% block PartialHead %}
@@ -43,13 +41,6 @@
     {% if ceresConfig.log.performanceLevel  == 'development' %}
         {% set minSuffix = '' %}
     {% endif %}
-    
-    <!-- SSR:on() -->
-    <link rel="preload" href="{{ plugin_path('Ceres') }}/js/dist/ceres-client{{ minSuffix }}.js?v={{ buildHash }}" as="script">
-    <!-- /SSR -->
-    <!-- SSR:off() -->
-    <link rel="preload" href="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}{{ minSuffix }}.js?v={{ buildHash }}" as="script">
-    <!-- /SSR -->
 </head>
 
 <body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
