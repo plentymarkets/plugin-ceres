@@ -38,6 +38,13 @@
     {% if isItem %}
         {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
     {% endif %}
+
+    <!-- SSR:on() -->
+    <link rel="preload" href="{{ plugin_path('Ceres') }}/js/dist/ceres-client{{ minSuffix }}.js?v={{ buildHash }}" as="script">
+    <!-- /SSR -->
+    <!-- SSR:off() -->
+    <link rel="preload" href="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}{{ minSuffix }}.js?v={{ buildHash }}" as="script">
+    <!-- /SSR -->
 </head>
 
 <body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
