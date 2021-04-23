@@ -232,22 +232,33 @@ if ( headerParent )
 
     let headerHeight = 0;
 
+    let hasCalculatedBodyOffset = false;
+
     // Calculate top offset for vue-app node because header is not part of document flow
-    function calculateBodyOffset()
+    function calculateBodyOffset(isScrollTop = false)
     {
-        const scrollTop = window.pageYOffset;
         const vueApp = document.getElementById("vue-app");
 
-        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
-        if (scrollTop > 0 && headerLoaded && headerParent)
-        {
-            vueApp.style.marginTop = headerHeight + "px";
-            vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
-        }
-        else if (scrollTop <= 0)
+        // if the page is at the top, unset the margin-top and min-height
+        if (isScrollTop)
         {
             vueApp.style.marginTop = null;
+            vueApp.style.minHeight = null;
+            hasCalculatedBodyOffset = false;
+
+            return;
+        }
+        else if (!hasCalculatedBodyOffset)
+        {
+            headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+    
+            if (headerLoaded && headerParent)
+            {
+                vueApp.style.marginTop = headerHeight + "px";
+                vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
+            }
+
+            hasCalculatedBodyOffset = true;
         }
     }
 
@@ -302,23 +313,18 @@ if ( headerParent )
             let offset = 0;
 
             const scrollTop = window.pageYOffset;
+            const isScrollTop = scrollTop <= 0;
             const header = document.querySelector("#page-header");
-
-            if (scrollTop > 0) {
-                header.classList.add("realy-fixed");
-            }
-            else {
-                header.classList.remove("realy-fixed");
-            }
 
             for (let i = 0; i < headerParent.children.length; i++)
             {
                 const elem = headerParent.children[i];
                 const elemHeight = allHeaderChildrenHeights[i];
 
-                if (scrollTop <= 0) {
+                if (scrollTop <= 0)
+                {
                     elem.style.top = null;
-                    elem.style.position = "relative";
+                    elem.style.position = null;
                     continue;
                 }
 
@@ -352,7 +358,17 @@ if ( headerParent )
                 absolutePos = absolutePos + elemHeight;
             }
 
-            calculateBodyOffset();
+            // fixate the header only, if the user scrolls down
+            if (isScrollTop)
+            {
+                header.classList.remove("fixed-top");
+            }
+            else
+            {
+                header.classList.add("fixed-top");
+            }
+
+            calculateBodyOffset(isScrollTop);
         }
     }
 
