@@ -36,11 +36,6 @@
     {% if isItem %}
         {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
     {% endif %}
-
-    {% set minSuffix = '.min' %}
-    {% if ceresConfig.log.performanceLevel  == 'development' %}
-        {% set minSuffix = '' %}
-    {% endif %}
 </head>
 
 <body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
@@ -220,6 +215,11 @@
 {{ Translations.add( "Ceres", "Template" ) }}
 
 {{ get_json_data() }}
+
+{% set minSuffix = '.min' %}
+{% if ceresConfig.log.performanceLevel  == 'development' %}
+    {% set minSuffix = '' %}
+{% endif %}
 
 <!-- SSR:entry({{ ssr_entry('Ceres', 'resources/js/dist/ceres-server' ~ minSuffix ~ '.js') }}) -->
 <!-- SSR:on() -->
