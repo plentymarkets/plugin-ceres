@@ -74,7 +74,9 @@ const actions =
         {
             commit("setIsSetLoading", true);
 
-            ApiService.get("/rest/io/variations", { variationIds: state.setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
+            const setComponentIds = getters.currentItemVariation.setComponents.map(component => component.itemId);
+
+            ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
                 .done(components =>
                 {
                     commit("setIsSetLoading", false);
