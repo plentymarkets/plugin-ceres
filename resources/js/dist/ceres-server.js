@@ -6676,6 +6676,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -46863,9 +46870,11 @@ var render = function() {
       _vm._ssrNode(
         " " +
           (!_vm.initialized
-            ? '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"><img' +
+            ? '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"><div class="prop-1-1"><img' +
               _vm._ssrAttr("src", _vm.singleImages[0].url) +
-              ' alt="test"></div>'
+              _vm._ssrAttr("alt", _vm.getAltText(_vm.singleImages[0].url)) +
+              _vm._ssrAttr("title", _vm.getImageName(_vm.singleImages[0].url)) +
+              ' class="owl-placeholder"></div></div>'
             : "<!---->")
       )
     ],
