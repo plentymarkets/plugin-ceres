@@ -70,7 +70,7 @@ const actions =
             }
         },
 
-        initSetComponents({ commit, dispatch, state })
+        initSetComponents({ commit, dispatch, state, getters })
         {
             commit("setIsSetLoading", true);
 
@@ -84,7 +84,7 @@ const actions =
                         const itemId      = component.data.item.id;
                         const variationId = component.data.variation.id;
 
-                        const setComponentMeta = variation.documents[0].data.setComponents.find((setComponent) => setComponent.itemId === itemId );
+                        const setComponentMeta = getters.currentItemVariation.setComponents.find((setComponent) => setComponent.itemId === itemId );
 
                         if (setComponentMeta.minimumOrderQuantity <= 0)
                         {
