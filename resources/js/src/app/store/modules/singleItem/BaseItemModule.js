@@ -67,35 +67,39 @@ const actions =
             {
                 commit("setIsItemSet", true);
                 commit("setItemSetId", variation.documents[0].data.item.id);
-                commit("setIsSetLoading", true);
-
-                ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
-                    .done(components =>
-                    {
-                        commit("setIsSetLoading", false);
-
-                        for (const component of components.documents)
-                        {
-                            const itemId      = component.data.item.id;
-                            const variationId = component.data.variation.id;
-
-                            const setComponentMeta = variation.documents[0].data.setComponents.find((setComponent) => setComponent.itemId === itemId );
-
-                            if (setComponentMeta.minimumOrderQuantity <= 0)
-                            {
-                                setComponentMeta.minimumOrderQuantity = 1;
-                            }
-
-                            component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
-                            component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
-
-                            // register a module for every set item
-                            dispatch("registerItem", component);
-                            commit(`${itemId}/setPleaseSelectVariationId`, variationId);
-                            commit("addComponent", itemId);
-                        }
-                    });
             }
+        },
+
+        initSetComponents()
+        {
+            commit("setIsSetLoading", true);
+
+            ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
+                .done(components =>
+                {
+                    commit("setIsSetLoading", false);
+
+                    for (const component of components.documents)
+                    {
+                        const itemId      = component.data.item.id;
+                        const variationId = component.data.variation.id;
+
+                        const setComponentMeta = variation.documents[0].data.setComponents.find((setComponent) => setComponent.itemId === itemId );
+
+                        if (setComponentMeta.minimumOrderQuantity <= 0)
+                        {
+                            setComponentMeta.minimumOrderQuantity = 1;
+                        }
+
+                        component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
+                        component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
+
+                        // register a module for every set item
+                        dispatch("registerItem", component);
+                        commit(`${itemId}/setPleaseSelectVariationId`, variationId);
+                        commit("addComponent", itemId);
+                    }
+                });
         },
 
         registerItem({ commit }, item)

@@ -331,6 +331,10 @@ export default {
 
         units() {
             return get(this.$store.state, `items[${this.itemId}].variationSelect.units`);
+        },
+
+        isItemSet() {
+            return this.$store.state.items.isItemSet;
         }
     },
 
@@ -353,6 +357,11 @@ export default {
                 isPleaseSelectOption: this.initPleaseSelectOption,
                 afterKey:           this.afterKey
             });
+
+            if (this.isItemSet)
+            {
+                this.$store.dispatch("initSetComponents", this.itemData);   
+            }
         })
     },
 
