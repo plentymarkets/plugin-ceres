@@ -10,6 +10,8 @@
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 {% set margin = WidgetHelper.getSpacingClasses(spacingSettings,"", spacingSettings.customMargin.mobile) %}
+{% set preloadImage    = widget.settings.preloadImage.mobile %}
+
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
@@ -132,6 +134,12 @@
                         {{ Twig.if("fallbackUrl | trim is empty") }}
                             {{ Twig.set("fallbackUrl", "slide.imageUrl") }}
                         {{ Twig.endif() }}
+
+                        {% if preloadImage %}
+                            {{ Twig.if("loop.first") }}
+                                {{ Twig.print("add_asset(slide.imageUrl,'image')") }}
+                            {{ Twig.endif() }}
+                        {% endif %}
 
                         {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img

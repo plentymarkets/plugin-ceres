@@ -58,6 +58,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -358,9 +365,16 @@ var render = function() {
                 "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
             },
             [
-              _c("img", {
-                attrs: { src: _vm.singleImages[0].url, alt: "test" }
-              })
+              _c("div", { staticClass: "prop-1-1" }, [
+                _c("img", {
+                  staticClass: "owl-placeholder",
+                  attrs: {
+                    src: _vm.singleImages[0].url,
+                    alt: _vm.getAltText(_vm.singleImages[0].url),
+                    title: _vm.getImageName(_vm.singleImages[0].url)
+                  }
+                })
+              ])
             ]
           )
         : _vm._e()

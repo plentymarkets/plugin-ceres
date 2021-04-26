@@ -13,7 +13,7 @@ class ImageCarouselWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.ImageCarouselWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -27,7 +27,7 @@ class ImageCarouselWidget extends BaseWidget
             ->withPosition(500)
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -70,7 +70,13 @@ class ImageCarouselWidget extends BaseWidget
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageCarouselLazyLoadingName")
             ->withTooltip("Widget.imageCarouselLazyLoadingTooltip")
+            ->withCondition("!preloadImage")
             ->withDefaultValue(true);
+
+        $settings->createCheckbox('preloadImage')
+            ->withName('Widget.preloadImageLabel')
+            ->withTooltip('Widget.preloadImageTooltip')
+            ->withCondition("!lazyLoading");
 
         $container = $settings->createVerticalContainer("slides")
             ->withList(1)
@@ -102,7 +108,7 @@ class ImageCarouselWidget extends BaseWidget
             ->withName("Widget.imageCarouselCustomImagePathLabel")
             ->withTooltip("Widget.imageCarouselCustomImagePathTooltip")
             ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
-        
+
         $container->children->createFile("fallbackImagePath")
             ->withDefaultValue("")
             ->withName("Widget.imageCarouselFallbackImagePathLabel")
@@ -113,7 +119,7 @@ class ImageCarouselWidget extends BaseWidget
         $settings->createSpacing(false, true);
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

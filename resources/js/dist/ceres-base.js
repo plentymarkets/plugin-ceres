@@ -6690,6 +6690,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -54883,9 +54890,16 @@ var render = function() {
                 "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
             },
             [
-              _c("img", {
-                attrs: { src: _vm.singleImages[0].url, alt: "test" }
-              })
+              _c("div", { staticClass: "prop-1-1" }, [
+                _c("img", {
+                  staticClass: "owl-placeholder",
+                  attrs: {
+                    src: _vm.singleImages[0].url,
+                    alt: _vm.getAltText(_vm.singleImages[0].url),
+                    title: _vm.getImageName(_vm.singleImages[0].url)
+                  }
+                })
+              ])
             ]
           )
         : _vm._e()
@@ -89453,6 +89467,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_13__);
+
+
+
+
+
+
+
+
+
+
+
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -89469,17 +89495,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 var state = function state() {
   return {
     autocompleteRequest: null,
@@ -89489,7 +89504,7 @@ var state = function state() {
       suggestion: []
     },
     autocompleteSearchString: "",
-    autocompleteTypes: new Set()
+    autocompleteTypes: []
   };
 };
 
@@ -89504,7 +89519,7 @@ var mutations = {
     state.autocompleteSearchString = searchString;
   },
   addAutocompleteType: function addAutocompleteType(state, type) {
-    state.autocompleteTypes.add(type);
+    state.autocompleteTypes.push(type);
   }
 };
 var actions = {
@@ -89520,7 +89535,7 @@ var actions = {
     var newRequest = _services_ApiService__WEBPACK_IMPORTED_MODULE_12__["default"].get("/rest/io/item/search/autocomplete", {
       template: "Ceres::ItemList.Components.ItemSearch",
       query: searchString,
-      types: _toConsumableArray(state.autocompleteTypes)
+      types: _toConsumableArray(new Set(state.autocompleteTypes))
     });
     commit("setAutocompleteRequest", newRequest);
     newRequest.done(function (response) {
