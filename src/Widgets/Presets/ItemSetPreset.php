@@ -57,7 +57,7 @@ class ItemSetPreset implements ContentPreset
 
     /** @var PresetWidgetFactory */
     private $setComponentBackgroundWidget;
-    
+
     /**
      * @inheritDoc
      */
@@ -119,7 +119,8 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('maxQuantity', 10)
             ->withSetting('imageSize', 'urlMiddle')
             ->withSetting('showThumbs', true)
-            ->withSetting('showDots', true);
+            ->withSetting('showDots', true)
+            ->withSetting('preloadImage', true);
     }
 
     private function createSetItemBackgroundWidget()
