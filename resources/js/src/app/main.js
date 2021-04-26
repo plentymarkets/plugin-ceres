@@ -245,8 +245,6 @@ if ( headerParent )
             vueApp.style.marginTop = null;
             vueApp.style.minHeight = null;
             hasCalculatedBodyOffset = false;
-
-            return;
         }
         else if (!hasCalculatedBodyOffset)
         {
