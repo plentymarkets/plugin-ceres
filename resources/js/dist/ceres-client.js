@@ -58684,8 +58684,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 // EXTERNAL
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("client-only", vue_client_only__WEBPACK_IMPORTED_MODULE_32___default.a); // CHECKOUT
+ // CHECKOUT
 
 
 
@@ -58918,7 +58917,8 @@ function createApp(options) {
     return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./app/components/form/FormAttachment.vue */ "./resources/js/src/app/components/form/FormAttachment.vue"));
   }); // EXTERNAL
 
-  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("lazy-hydrate", vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__["default"]); // CHECKOUT
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("lazy-hydrate", vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("client-only", vue_client_only__WEBPACK_IMPORTED_MODULE_32___default.a); // CHECKOUT
 
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("edit-coupon-overlay", function () {
     return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./app/components/myAccount/EditCouponOverlay.vue */ "./resources/js/src/app/components/myAccount/EditCouponOverlay.vue"));
@@ -70984,7 +70984,7 @@ var mutations = {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var item = _step.value;
 
-          _fillMissingData(item);
+          _fillMissingData(state, item);
 
           newItems.push(item);
         }
@@ -71228,7 +71228,7 @@ var actions = {
   }
 };
 
-function _fillMissingData(item) {
+function _fillMissingData(state, item) {
   var oldBasketItem = null;
 
   if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.variation)) {
@@ -72382,6 +72382,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_13__);
+
+
+
+
+
+
+
+
+
+
+
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -72398,17 +72410,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 var state = function state() {
   return {
     autocompleteRequest: null,
@@ -72418,7 +72419,7 @@ var state = function state() {
       suggestion: []
     },
     autocompleteSearchString: "",
-    autocompleteTypes: new Set()
+    autocompleteTypes: []
   };
 };
 
@@ -72433,7 +72434,7 @@ var mutations = {
     state.autocompleteSearchString = searchString;
   },
   addAutocompleteType: function addAutocompleteType(state, type) {
-    state.autocompleteTypes.add(type);
+    state.autocompleteTypes.push(type);
   }
 };
 var actions = {
@@ -72449,7 +72450,7 @@ var actions = {
     var newRequest = _services_ApiService__WEBPACK_IMPORTED_MODULE_12__["default"].get("/rest/io/item/search/autocomplete", {
       template: "Ceres::ItemList.Components.ItemSearch",
       query: searchString,
-      types: _toConsumableArray(state.autocompleteTypes)
+      types: _toConsumableArray(new Set(state.autocompleteTypes))
     });
     commit("setAutocompleteRequest", newRequest);
     newRequest.done(function (response) {

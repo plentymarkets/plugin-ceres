@@ -44,7 +44,7 @@ const mutations =
 
                 for (const item of basketItems)
                 {
-                    _fillMissingData(item);
+                    _fillMissingData(state, item);
                     newItems.push(item);
                 }
 
@@ -339,7 +339,7 @@ const actions =
         }
     };
 
-function _fillMissingData(item)
+function _fillMissingData(state, item)
 {
     let oldBasketItem = null;
 
