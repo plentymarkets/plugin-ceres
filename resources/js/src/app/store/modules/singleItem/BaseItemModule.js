@@ -70,11 +70,11 @@ const actions =
             }
         },
 
-        initSetComponents({ commit, dispatch })
+        initSetComponents({ commit, dispatch, state })
         {
             commit("setIsSetLoading", true);
 
-            ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
+            ApiService.get("/rest/io/variations", { variationIds: state.setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
                 .done(components =>
                 {
                     commit("setIsSetLoading", false);
