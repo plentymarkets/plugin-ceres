@@ -48,7 +48,7 @@ const actions =
                 {
                     template: "Ceres::ItemList.Components.ItemSearch",
                     query: searchString,
-                    types: [...state.autocompleteTypes]
+                    types: [...new Set(state.autocompleteTypes)]
                 }
             );
 
