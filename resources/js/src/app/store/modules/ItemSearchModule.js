@@ -6,7 +6,7 @@ const state = () => ({
     autocompleteRequest: null,
     autocompleteResult: { item: [], category: [], suggestion: [] },
     autocompleteSearchString: "",
-    autocompleteTypes: new Set()
+    autocompleteTypes: []
 });
 
 const mutations =
@@ -28,7 +28,7 @@ const mutations =
 
         addAutocompleteType(state, type)
         {
-            state.autocompleteTypes.add(type);
+            state.autocompleteTypes.push(type);
         }
     };
 
