@@ -10900,7 +10900,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemList.selectedFacets;
     }
   })),
-  mounted: function mounted() {
+  created: function created() {
     this.$store.commit("addFacets", this.facetData);
     this.initSelectedFacets();
   },
