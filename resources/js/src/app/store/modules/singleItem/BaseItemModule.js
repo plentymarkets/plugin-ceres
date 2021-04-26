@@ -70,7 +70,7 @@ const actions =
             }
         },
 
-        initSetComponents()
+        initSetComponents({ commit, dispatch })
         {
             commit("setIsSetLoading", true);
 
