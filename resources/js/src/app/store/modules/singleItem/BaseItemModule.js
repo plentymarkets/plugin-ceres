@@ -60,7 +60,7 @@ const actions =
             dispatch("registerItem", variation.documents[0]);
             commit("setMainItemId", variation.documents[0].data.item.id);
 
-            const setComponents = variation.documents[0].data.setComponents
+            const setComponents = variation.documents[0].data.setComponents;
 
             if (!App.isShopBuilder && setComponents && setComponents.length)
             {
@@ -72,6 +72,7 @@ const actions =
         initSetComponents({ commit, dispatch, state, getters })
         {
             const setComponentIds = (getters.currentItemVariation.setComponents || []).map(component => component.defaultVariationId);
+
             commit("setIsSetLoading", true);
 
             ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
