@@ -60,10 +60,9 @@ const actions =
             dispatch("registerItem", variation.documents[0]);
             commit("setMainItemId", variation.documents[0].data.item.id);
 
-            // rest call for sets if set comps are set
-            const setComponentIds = (variation.documents[0].data.setComponents || []).map(component => component.defaultVariationId);
+            const setComponents = variation.documents[0].data.setComponents
 
-            if (!App.isShopBuilder && setComponentIds && setComponentIds.length)
+            if (!App.isShopBuilder && setComponents && setComponents.length)
             {
                 commit("setIsItemSet", true);
                 commit("setItemSetId", variation.documents[0].data.item.id);
@@ -72,9 +71,8 @@ const actions =
 
         initSetComponents({ commit, dispatch, state, getters })
         {
+            const setComponentIds = (getters.currentItemVariation.setComponents || []).map(component => component.defaultVariationId);
             commit("setIsSetLoading", true);
-
-            const setComponentIds = getters.currentItemVariation.setComponents.map(component => component.itemId);
 
             ApiService.get("/rest/io/variations", { variationIds: setComponentIds, resultFieldTemplate: "SingleItem", setPriceOnly: true })
                 .done(components =>

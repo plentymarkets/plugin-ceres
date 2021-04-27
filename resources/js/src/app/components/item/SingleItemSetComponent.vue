@@ -17,7 +17,6 @@
 <script>
 import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
-import { mapState } from 'vuex'
 export default {
     name: "single-item-set-component",
 
@@ -48,21 +47,27 @@ export default {
             return this.variation && this.variation.variation.id;
         },
 
-        ...mapState({
-            variation(state)
-            {
-                const itemModule = state.items[this.itemId];
+        variation()
+        {
+            const itemModule = this.$store.state.items[this.itemId];
 
+            if (itemModule)
+            {
                 this.ready();
+            }
 
-                return itemModule && itemModule.variation.documents[0].data;
-            },
-            isSetLoading(state)
-            {
-                return state.items.isSetLoading;
-            },
-            previewItemId : state => state.items.previewItemId
-        })
+            return itemModule && itemModule.variation.documents[0].data;
+        },
+
+        isSetLoading()
+        {
+            return this.$store.state.items.isSetLoading;
+        },
+
+        previewItemId()
+        {
+            return this.$store.state.items.previewItemId;
+        }
     },
 
     methods:
