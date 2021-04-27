@@ -249,7 +249,7 @@ if ( headerParent )
         else if (!hasCalculatedBodyOffset)
         {
             headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-    
+
             if (headerLoaded && headerParent)
             {
                 vueApp.style.marginTop = headerHeight + "px";
