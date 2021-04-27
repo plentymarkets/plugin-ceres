@@ -1,8 +1,8 @@
 <template>
     <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
+        <slot name="additionalimages"></slot>
         <source :srcset="imageUrl" :type="mimeType">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
-        <slot name="additionalImages"></slot>
     </picture>
     <div v-else :data-background-image="backgroundSource" :class="pictureClass">
         <slot></slot>
