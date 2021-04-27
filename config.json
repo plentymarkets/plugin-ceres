@@ -4341,22 +4341,24 @@
                             "brand.mapping.brand": {
                                 "type": "selectBox",
                                 "required": false,
-                                "deprecated": true,
                                 "label": "Config.brand",
                                 "options": {
                                     "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "",
-                                            "caption": "Config.brandNotSet"
+                                            "caption": "Config.brandNotSet",
+                                            "position": 0
                                         },
                                         {
                                             "value": "2",
-                                            "caption": "Config.manufacturerExtern"
+                                            "caption": "Config.manufacturerExtern",
+                                            "position": 1
                                         },
                                         {
                                             "value": "3",
-                                            "caption": "Config.brandSetPropertyOnArticle"
+                                            "caption": "Config.brandSetPropertyOnArticle",
+                                            "position": 2
                                         }
                                     ]
                                 }
@@ -4364,7 +4366,6 @@
                             "brand.mapping.brandID": {
                                 "type": "inputText",
                                 "required": false,
-                                "deprecated": true,
                                 "label": "Config.brandID",
                                 "options": {
                                     "defaultValue": ""

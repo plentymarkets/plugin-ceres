@@ -205,7 +205,6 @@ class SeoStep extends Step
      */
     private function generateBrandMappingSection():array
     {
-        //$availableCurrenciesList = $this->getCurrenciesListValues();
         $brandOptions = SeoConfig::getBrandOptions();
         $options       = StepHelper::generateTranslatedListBoxValues($brandOptions);
 
@@ -213,18 +212,18 @@ class SeoStep extends Step
             "title"       => "Wizard.brandMapping",
             "description" => "Wizard.brandMappingDescription",
             "form"        => [
-                "seo_chooseBrandDisplay" => [
+                "seo_brand" => [
                     "type"         => "select",
-                    "defaultValue" => " ",
+                    "defaultValue" => "",
                     "options"      => [
                         "name" => "Wizard.brandNotSet",
                         "listBoxValues" => $options,
                     ]
                 ],
-                "seo_brandPropertyIdOnArticle" => [
+                "seo_brandId" => [
                     "type"         => "text",
-                    "isVisible"    => "seo_chooseBrandDisplay === '3'",
-                    "defaultValue" => " ",
+                    "isVisible"    => "seo_brand === '3'",
+                    "defaultValue" => "",
                     "options"      => [
                         "name"          => "Wizard.brandPropertyIdOnArticle",
                     ]

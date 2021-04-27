@@ -91,6 +91,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $requestedVariationUrl;
 
     /**
+     * @var string $brand // TODO write documentation
+     */
+    public $brand = '';
+
+    /**
      * @inheritDoc
      */
     public function init($params)
@@ -108,9 +113,24 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
 
-        $availabiltyId = $itemData['variation']['availability']['id'];
-        $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabiltyId);
+        $availabilityId = $itemData['variation']['availability']['id'];
+        $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabilityId);
         $this->item['documents'][0]['data']['variation']['availability']['mappedAvailability'] = $mappedAvailability;
+
+        $brandMapping = $this->ceresConfig->seo->brandMapping;
+        $brandMappingId = $this->ceresConfig->seo->brandMappingId;
+        if ($brandMapping == 2) {
+            $this->brand = $itemData['item']['manufacturer']['externalName'];
+        } elseif ($brandMapping == 3) {
+            $propertyBrand = '';
+            foreach ($itemData['variationProperties'][0]['properties'] as $property) {
+                if ($property['id'] == $brandMappingId) {
+                    $propertyBrand = $property['values']['value'];
+                    break;
+                }
+            }
+            $this->brand = $propertyBrand;
+        }
 
         $this->isItemSet = $params['isItemSet'];
 

@@ -92,6 +92,12 @@ class SeoMapping
             'type'     => 'string',
             'global'   => false,
             'optional' => true
+        ],
+        'seo_brandId' => [
+            'field'    => 'brand.mapping.brandID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
         ]
     ];
 
