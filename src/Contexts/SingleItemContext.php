@@ -91,7 +91,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $requestedVariationUrl;
 
     /**
-     * @var string $brand // TODO write documentation
+     * @var string $brand Contains the "brand" name for SEO attribute.
      */
     public $brand = '';
 
