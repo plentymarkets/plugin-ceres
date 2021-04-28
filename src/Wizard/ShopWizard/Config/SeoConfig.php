@@ -42,6 +42,11 @@ class SeoConfig
         "brandSetPropertyOnArticle" => "3",
     ];
 
+    private static $manufacturerOptions = [
+        "manufacturerNotSet"        => "",
+        "manufacturerExtern"        => "2",
+    ];
+
     /**
      * @return array
      */
@@ -72,5 +77,13 @@ class SeoConfig
     public static function getBrandOptions()
     {
         return self::$brandOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getmanufacturerOptions()
+    {
+        return self::$manufacturerOptions;
     }
 }

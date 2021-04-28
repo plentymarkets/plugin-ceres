@@ -28,7 +28,8 @@ class SeoStep extends Step
                 $this->generateSiteMapSection(),
                 $this->generateAvailabilitiesSection(),
                 $this->generateItemMetaTitleSection(),
-                $this->generateBrandMappingSection()
+                $this->generateBrandMappingSection(),
+                $this->generateManufacturerMappingSection()
             ]
         ];
     }
@@ -226,6 +227,30 @@ class SeoStep extends Step
                     "defaultValue" => "",
                     "options"      => [
                         "name"          => "Wizard.brandPropertyIdOnArticle",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateManufacturerMappingSection():array
+    {
+        $manufacturerOptions = SeoConfig::getManufacturerOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($manufacturerOptions);
+
+        return [
+            "title"       => "Wizard.manufacturerMapping",
+            "description" => "Wizard.manufacturerMappingDescription",
+            "form"        => [
+                "seo_manufacturer" => [
+                    "type"         => "select",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name" => "Wizard.manufacturerNotSet",
+                        "listBoxValues" => $options,
                     ]
                 ]
             ]

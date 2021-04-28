@@ -23,6 +23,11 @@ class CeresSeoConfig extends PluginConfig
      */
     public $brandMappingId;
 
+    /**
+     * @var string $manufacturerMapping
+     */
+    public $manufacturerMapping;
+
 
     /**
      * @inheritDoc
@@ -39,5 +44,6 @@ class CeresSeoConfig extends PluginConfig
     {
         $this->brandMapping                         = $this->getTextValue( 'brand.mapping.brand' , '' );
         $this->brandMappingId                       = $this->getTextValue( 'brand.mapping.brandID', '');
+        $this->manufacturerMapping                  = $this->getTextValue( 'manufacturer.mapping.manufacturer', '');
     }
 }

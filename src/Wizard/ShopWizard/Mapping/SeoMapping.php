@@ -98,6 +98,12 @@ class SeoMapping
             'type'     => 'integer',
             'global'   => false,
             'optional' => true
+        ],
+        'seo_manufacturer' => [
+            'field'    => 'manufacturer.mapping.manufacturer',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
         ]
     ];
 

@@ -96,6 +96,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $brand = '';
 
     /**
+     * @var string $manufacturer Contains the "manufacturer" name for SEO attribute.
+     */
+    public $manufacturer = '';
+
+    /**
      * @inheritDoc
      */
     public function init($params)
@@ -130,6 +135,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 }
             }
             $this->brand = $propertyBrand;
+        }
+
+        $manufacturerMapping = $this->ceresConfig->seo->manufacturerMapping;
+        if ($manufacturerMapping ==2) {
+            $this->manufacturer = $itemData['item']['manufacturer']['externalName'];
         }
 
         $this->isItemSet = $params['isItemSet'];
