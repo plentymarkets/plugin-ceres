@@ -25,7 +25,7 @@
             </transition-group>
         </div>
 
-        <loading-animation v-if="!(isBasketInitiallyLoaded && isMounted)" class="d-table w-100"></loading-animation>
+        <loading-animation v-if="!isBasketInitiallyLoaded" class="d-table w-100"></loading-animation>
     </div>
 </template>
 
@@ -67,12 +67,6 @@ export default {
         return {
             isMounted: false
         }
-    },
-
-    mounted() {
-        this.$nextTick(() => {
-            this.isMounted = true;
-        });
     }
 }
 </script>
