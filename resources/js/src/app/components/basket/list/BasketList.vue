@@ -1,5 +1,7 @@
 <template>
     <div>
+
+
         <div>
             <div v-if="!basketItems.length > 0">
                 <div class="h5 py-3">{{ $translate("Ceres::Template.basketNoItems") }}</div>
@@ -23,7 +25,7 @@
             </transition-group>
         </div>
 
-        <loading-animation v-if="!isBasketInitiallyLoaded" class="d-table w-100"></loading-animation>
+        <loading-animation v-if="!isBasketInitiallyLoaded && !isMounted" class="d-table w-100"></loading-animation>
     </div>
 </template>
 
@@ -59,6 +61,16 @@ export default {
     computed: mapState({
         basketItems: state => state.basket.items,
         isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded
-    })
+    }),
+
+    data() {
+        return {
+            isMounted: false
+        }
+    },
+
+    mounted() {
+        this.isMounted = true;
+    }
 }
 </script>
