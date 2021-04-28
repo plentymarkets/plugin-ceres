@@ -70,7 +70,9 @@ export default {
     },
 
     mounted() {
-        this.isMounted = true;
+        this.$nextTick(() => {
+            this.isMounted = true;
+        });
     }
 }
 </script>
