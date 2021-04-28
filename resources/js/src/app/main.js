@@ -317,6 +317,16 @@ if ( headerParent )
             const isScrollTop = scrollTop <= 0;
             const header = document.querySelector("#page-header");
 
+            // fixate the header only, if the user scrolls down
+            if (isScrollTop)
+            {
+                header.classList.remove("fixed-top");
+            }
+            else
+            {
+                header.classList.add("fixed-top");
+            }
+
             for (let i = 0; i < headerParent.children.length; i++)
             {
                 const elem = headerParent.children[i];
@@ -357,16 +367,6 @@ if ( headerParent )
                     fixedElementsHeight = fixedElementsHeight + elemHeight;
                 }
                 absolutePos = absolutePos + elemHeight;
-            }
-
-            // fixate the header only, if the user scrolls down
-            if (isScrollTop)
-            {
-                header.classList.remove("fixed-top");
-            }
-            else
-            {
-                header.classList.add("fixed-top");
             }
 
             calculateBodyOffset(isScrollTop);
