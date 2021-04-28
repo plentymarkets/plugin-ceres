@@ -8802,9 +8802,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     units: function units() {
       return Object(_helper_get__WEBPACK_IMPORTED_MODULE_5__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.units"));
-    },
-    isItemSet: function isItemSet() {
-      return this.$store.state.items.isItemSet;
     }
   },
   created: function created() {
@@ -8825,10 +8822,6 @@ __webpack_require__.r(__webpack_exports__);
         isPleaseSelectOption: _this.initPleaseSelectOption,
         afterKey: _this.afterKey
       });
-
-      if (_this.isItemSet) {
-        _this.$store.dispatch("initSetComponents", _this.itemData);
-      }
     });
   },
   methods: {
@@ -8917,8 +8910,33 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
 
 //
 //
@@ -8936,6 +8954,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8955,26 +8974,23 @@ __webpack_require__.r(__webpack_exports__);
       itemId: App.isShopBuilder ? this.previewItemId : this.itemId
     };
   },
-  computed: {
+  computed: _objectSpread({
     variationId: function variationId() {
       return this.variation && this.variation.variation.id;
-    },
-    variation: function variation() {
-      var itemModule = this.$store.state.items[this.itemId];
-
-      if (itemModule) {
-        this.ready();
-      }
-
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapState"])({
+    variation: function variation(state) {
+      var itemModule = state.items[this.itemId];
+      this.ready();
       return itemModule && itemModule.variation.documents[0].data;
     },
-    isSetLoading: function isSetLoading() {
-      return this.$store.state.items.isSetLoading;
+    isSetLoading: function isSetLoading(state) {
+      return state.items.isSetLoading;
     },
-    previewItemId: function previewItemId() {
-      return this.$store.state.items.previewItemId;
+    previewItemId: function previewItemId(state) {
+      return state.items.previewItemId;
     }
-  },
+  })),
   methods: {
     ready: function ready() {
       this.$store.dispatch("".concat(this.itemId, "/variationSelect/setVariationSelect"), {
@@ -8989,10 +9005,10 @@ __webpack_require__.r(__webpack_exports__);
       this.ready = function () {};
     },
     getDataField: function getDataField(field) {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_1__["get"])(this.variation, field);
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.variation, field);
     },
     getFilteredDataField: function getFilteredDataField(field, filter) {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(this.$options.filters[filter])) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_8__["isNullOrUndefined"])(this.$options.filters[filter])) {
         return this.$options.filters[filter](this.getDataField(field));
       }
 
@@ -85424,26 +85440,15 @@ var headerParent = document.querySelector("[data-header-offset]");
 if (headerParent) {
   var headerLoaded = false;
   var allHeaderChildrenHeights = [];
-  var headerHeight = 0;
-  var hasCalculatedBodyOffset = false; // Calculate top offset for vue-app node because header is not part of document flow
+  var headerHeight = 0; // Calculate top offset for vue-app node because header is not part of document flow
 
   function calculateBodyOffset() {
-    var isScrollTop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-    var vueApp = document.getElementById("vue-app"); // if the page is at the top, unset the margin-top and min-height
+    headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
 
-    if (isScrollTop) {
-      vueApp.style.marginTop = null;
-      vueApp.style.minHeight = null;
-      hasCalculatedBodyOffset = false;
-    } else if (!hasCalculatedBodyOffset) {
-      headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
-      if (headerLoaded && headerParent) {
-        vueApp.style.marginTop = headerHeight + "px";
-        vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
-      }
-
-      hasCalculatedBodyOffset = true;
+    if (headerLoaded && headerParent) {
+      var vueApp = document.getElementById("vue-app");
+      vueApp.style.marginTop = headerHeight + "px";
+      vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
     }
   } // Set descending z-index for all header elements and create list of elements with unfixed class for later use
 
@@ -85482,19 +85487,10 @@ if (headerParent) {
       var fixedElementsHeight = 0;
       var offset = 0;
       var scrollTop = window.pageYOffset;
-      var isScrollTop = scrollTop <= 0;
-      var header = document.querySelector("#page-header");
 
       for (var i = 0; i < headerParent.children.length; i++) {
         var elem = headerParent.children[i];
         var elemHeight = allHeaderChildrenHeights[i];
-
-        if (scrollTop <= 0) {
-          elem.style.top = null;
-          elem.style.position = null;
-          continue;
-        }
-
         offset = absolutePos - scrollTop;
         elem.style.position = "absolute"; // Element is unfixed and should scroll indefinetly
 
@@ -85516,16 +85512,7 @@ if (headerParent) {
           }
 
         absolutePos = absolutePos + elemHeight;
-      } // fixate the header only, if the user scrolls down
-
-
-      if (isScrollTop) {
-        header.classList.remove("fixed-top");
-      } else {
-        header.classList.add("fixed-top");
       }
-
-      calculateBodyOffset(isScrollTop);
     }
   }
 
@@ -90896,66 +90883,60 @@ var actions = {
         dispatch = _ref.dispatch;
     // register a nested module for the main item
     dispatch("registerItem", variation.documents[0]);
-    commit("setMainItemId", variation.documents[0].data.item.id);
-    var setComponents = variation.documents[0].data.setComponents;
+    commit("setMainItemId", variation.documents[0].data.item.id); // rest call for sets if set comps are set
 
-    if (!App.isShopBuilder && setComponents && setComponents.length) {
-      commit("setIsItemSet", true);
-      commit("setItemSetId", variation.documents[0].data.item.id);
-    }
-  },
-  initSetComponents: function initSetComponents(_ref2) {
-    var commit = _ref2.commit,
-        dispatch = _ref2.dispatch,
-        state = _ref2.state,
-        getters = _ref2.getters;
-    var setComponentIds = (getters.currentItemVariation.setComponents || []).map(function (component) {
+    var setComponentIds = (variation.documents[0].data.setComponents || []).map(function (component) {
       return component.defaultVariationId;
     });
-    commit("setIsSetLoading", true);
-    _services_ApiService__WEBPACK_IMPORTED_MODULE_12__["default"].get("/rest/io/variations", {
-      variationIds: setComponentIds,
-      resultFieldTemplate: "SingleItem",
-      setPriceOnly: true
-    }).done(function (components) {
-      commit("setIsSetLoading", false);
 
-      var _iterator = _createForOfIteratorHelper(components.documents),
-          _step;
+    if (!App.isShopBuilder && setComponentIds && setComponentIds.length) {
+      commit("setIsItemSet", true);
+      commit("setItemSetId", variation.documents[0].data.item.id);
+      commit("setIsSetLoading", true);
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_12__["default"].get("/rest/io/variations", {
+        variationIds: setComponentIds,
+        resultFieldTemplate: "SingleItem",
+        setPriceOnly: true
+      }).done(function (components) {
+        commit("setIsSetLoading", false);
 
-      try {
-        var _loop = function _loop() {
-          var component = _step.value;
-          var itemId = component.data.item.id;
-          var variationId = component.data.variation.id;
-          var setComponentMeta = getters.currentItemVariation.setComponents.find(function (setComponent) {
-            return setComponent.itemId === itemId;
-          });
+        var _iterator = _createForOfIteratorHelper(components.documents),
+            _step;
 
-          if (setComponentMeta.minimumOrderQuantity <= 0) {
-            setComponentMeta.minimumOrderQuantity = 1;
+        try {
+          var _loop = function _loop() {
+            var component = _step.value;
+            var itemId = component.data.item.id;
+            var variationId = component.data.variation.id;
+            var setComponentMeta = variation.documents[0].data.setComponents.find(function (setComponent) {
+              return setComponent.itemId === itemId;
+            });
+
+            if (setComponentMeta.minimumOrderQuantity <= 0) {
+              setComponentMeta.minimumOrderQuantity = 1;
+            }
+
+            component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
+            component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity; // register a module for every set item
+
+            dispatch("registerItem", component);
+            commit("".concat(itemId, "/setPleaseSelectVariationId"), variationId);
+            commit("addComponent", itemId);
+          };
+
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            _loop();
           }
-
-          component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
-          component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity; // register a module for every set item
-
-          dispatch("registerItem", component);
-          commit("".concat(itemId, "/setPleaseSelectVariationId"), variationId);
-          commit("addComponent", itemId);
-        };
-
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          _loop();
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
         }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    });
+      });
+    }
   },
-  registerItem: function registerItem(_ref3, item) {
-    var commit = _ref3.commit;
+  registerItem: function registerItem(_ref2, item) {
+    var commit = _ref2.commit;
     var itemId = item.data.item.id; // extend the structur of the object to match the old objects
 
     var extendedData = {
