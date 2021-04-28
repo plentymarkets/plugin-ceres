@@ -61,12 +61,6 @@ export default {
     computed: mapState({
         basketItems: state => state.basket.items,
         isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded
-    }),
-
-    data() {
-        return {
-            isMounted: false
-        }
-    }
+    })
 }
 </script>
