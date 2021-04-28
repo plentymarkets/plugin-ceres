@@ -25,7 +25,7 @@
             </transition-group>
         </div>
 
-        <loading-animation v-if="!isBasketInitiallyLoaded && !isMounted" class="d-table w-100"></loading-animation>
+        <loading-animation v-if="!(isBasketInitiallyLoaded && isMounted)" class="d-table w-100"></loading-animation>
     </div>
 </template>
 
