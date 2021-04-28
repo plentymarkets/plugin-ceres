@@ -13,7 +13,7 @@ class AdditionalInformationWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Grid.AdditionalInformationWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,10 +24,13 @@ class AdditionalInformationWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/additional-information.svg")
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
-            ->withPosition(600)
+            ->withPosition(600
+            ->withSearchKeyWords([
+                "grid", "struktur", "information", "additional", "weitere", "informationen"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

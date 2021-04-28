@@ -12,7 +12,7 @@ class QuantityInputWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Item.QuantityInputWidget';
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class QuantityInputWidget extends BaseWidget
             ->withType(WidgetTypes::SET_COMPONENT_ONLY)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "menge", "quantity"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

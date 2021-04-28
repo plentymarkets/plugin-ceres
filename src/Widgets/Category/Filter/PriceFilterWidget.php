@@ -9,10 +9,10 @@ class PriceFilterWidget extends FilterBaseWidget
 {
     /** @inheritDoc */
     protected $allowedFacetTypes = ["price"];
-    
+
     /** @inheritDoc */
     protected $className = "price";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class PriceFilterWidget extends FilterBaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(900)
+                                ->withSearchKeyWords([
+                                    "filter", "preis", "price"
+                                ])
                                 ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

@@ -12,7 +12,7 @@ class ChangePasswordWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Customer.ChangePasswordWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class ChangePasswordWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::CUSTOMER)
             ->withPosition(400)
+            ->withSearchKeyWords([
+                "login", "data", "change", "password", "passwort", "ändern", "customer", "kunde", "kundendaten"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

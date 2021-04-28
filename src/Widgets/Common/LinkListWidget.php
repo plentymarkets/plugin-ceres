@@ -20,9 +20,12 @@ class LinkListWidget extends ListWidget
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(1000)
             ->withDeprecated()
+            ->withSearchKeyWords([
+                "link", "links", "linkliste", "list"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -30,7 +33,7 @@ class LinkListWidget extends ListWidget
     {
         return parent::getSettings();
     }
-    
+
     /**
      * @inheritDoc
      */

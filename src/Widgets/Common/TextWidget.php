@@ -12,7 +12,7 @@ class TextWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.TextWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class TextWidget extends BaseWidget
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(800)
             ->withDeprecated()
+            ->withSearchKeyWords([
+                "text", "schrift"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

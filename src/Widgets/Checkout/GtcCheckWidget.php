@@ -12,7 +12,7 @@ class GtcCheckWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.GtcCheckWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class GtcCheckWidget extends BaseWidget
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(400)
             ->withMaxPerPage(1)
+            ->withSearchKeyWords([
+                "checkout", "bestellvorgang", "bestellung", "zahlungsmittel", "zahlung", "payment"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

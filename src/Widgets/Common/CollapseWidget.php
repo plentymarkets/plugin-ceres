@@ -12,7 +12,7 @@ class CollapseWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.CollapseWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class CollapseWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(1300)
+            ->withSearchKeyWords([
+                "faq", "fragen", "questions"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
