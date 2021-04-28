@@ -40,8 +40,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -71,15 +69,7 @@ __webpack_require__.r(__webpack_exports__);
     isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
       return state.basket.isBasketInitiallyLoaded;
     }
-  }),
-  data: function data() {
-    return {
-      isMounted: false
-    };
-  },
-  mounted: function mounted() {
-    this.isMounted = true;
-  }
+  })
 });
 
 /***/ }),
@@ -639,7 +629,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      !_vm.isBasketInitiallyLoaded && !_vm.isMounted
+      !_vm.isBasketInitiallyLoaded
         ? _c("loading-animation", { staticClass: "d-table w-100" })
         : _vm._e()
     ],
