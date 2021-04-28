@@ -1,5 +1,84 @@
 # Release Notes for Ceres
 
+## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- The alignment of the text in the greeting widget can now be determined in the widget settings.
+- In the Online store step of the plentyShop asisstant, you can now determine which status should be set for orders for which the VAT identification number validation could not be completed. 
+
+### Changed
+
+- A number of user elements have been equipped with ARIA attributes. We would like to thank user @cerwantes for their contribution!
+- The favicon is now uploaded to the internal webspace when changes in the plentyShop assistant are saved. It is therefore no longer necessary to save and publish the plugin set in order to effect changes to the favicon.
+- The stability of the contact form has been improved.
+- The input field for the VAT identification number now contains the country-specific prefix.
+
+### Fixed
+
+- If no favicon is stored in the Ceres settings, the favicon from the client's obsolete settings is now used as a fallback.
+- An aria-label has been added to the home icon in the breadcrumbs. You can change the label via the `headerBreadcrumbHome` entry in the multilingualism interface. We would like to thank user @cerwantes for their contribution!
+- Due to legal reasons, the list of graduated prices in the single item view now also includes the base price if the display of the base price is activated for this item.
+- A defective `<img>` tag was displayed in the header if no company logo had been stored in the Ceres settings. This behaviour has been fixed.
+- Payment method dependent surcharges and rebates are now taken into account if the payment method of an already existing order is changed.  
+- Under certain circumstances, the currency was displayed incorrectly in the order overview in the My Account section. This behaviour has been fixed.
+- Due to an error, only one translation file per plugin could be used in the frontend. This has been fixed.
+- The minimum order quantity of an item or a price is now taken into account in the quantity input.
+
+### Changed templates
+
+- In Ceres 5.0.28 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/views/Widgets/MyAccount/GreetingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2779/files#diff-c428531b614621aa7ec1fe56507582fcd923aeae8342bfb3c0d2bbbe650c69be)
+- [resources/js/src/app/components/item/GraduatedPrices.vue](https://github.com/plentymarkets/plugin-ceres/pull/2765/files#diff-57df8453013ee1dd0821c871b25d89e42eb2ff2ed7d491f2141aacb299ada6b9)
+
+## v5.0.27 (2021-04-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.26...5.0.27" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- The favicon from the plugin settings is displayed as long as no favicon is uploaded to the internal webspace.
+- Under certain circumstances the store special component produced JavaScript errors in the console. This has been fixed.
+
+## v5.0.26 (2021-04-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.25...5.0.26" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added 
+- The plentyShop assistant now includes a setting with which you can determine how the customer login should work for systems that use multiple clients. Please refer to [this changelog thread in the forum](https://forum.plentymarkets.com/t/mehrere-kontakte-mit-der-selben-e-mail-adresse-koennen-sich-bei-unterschiedlichen-mandanten-einloggen-multiple-contacts-with-the-same-email-address-can-log-into-different-clients/630567) for further information.
+
+### Changed 
+
+- The entered CSS class for facets and facet values is now output in the frontend.
+- You can now set the maximum number of displayed categories of the second level for the normal menu in the widget settings in the ShopBuilder.
+- The stored favicon is now uploaded to the respective webshop domain after saving and deploying the plugin set. It is thereby also taken into account by the mobile Google search. **Important** Due to this change, changes to the favicon only become effective after saving and deploying the plugin set!
+- Item images in the basket and the wish list now link to the variation page. We would like to thank @cerwantes for their contribution!
+- External search providers can now directly submit the entire item data in order to improve the performance of the external search. This requires that the item data is submitted in the appropriate data structure.
+- Fixed elements are no longer calculated if they are deactivated.
+
+### Fixed 
+
+- In the desktop view of the Safari browser, certain cursor movements erroneously triggered the expansion of drop-down menues in the navigation. This has been fixed.
+- The "More..." button in the navigation was not displayed correctly. This has been fixed.
+- In the plentyShop assistant, the setting **Default payment method** in the step **Defaul settings** did not list all plugin payment methods. This has been fixed.
+- Wish list items with a minimum order value of 0 or an interval order value of either more than or less than 1 could not be moved directly to the basket. This has been fixed.
+- Updating an item in the basket now also updates the base price.
+
+### Changed templates
+
+- In Ceres 5.0.26 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/itemList/filter/ItemFilter.vue](https://github.com/plentymarkets/plugin-ceres/pull/2753/files#diff-eab69464064e5200e309de7a80e4fa43773919c60a5f31d5997058b8f7e2f478
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/2697/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2754/files#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
+- [resources/js/src/app/components/wishList/WishListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2754/files#diff-be8788b59e5887730f9bb4aa5a12d093908265ff19c26bb5ddca99485e7d7621)
+
+## v5.0.25 (2021-03-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.24...5.0.25" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+- The last paragraph of the text widget for inline editing had a spacing at the bottom, which made it impossible to use a text widget without this spacing. Thus, this was removed.
+- In the output for the translations of "Brutto" (Ceres::Template.checkourtGross) and "Netto" (Ceres::Template.checkoutNet), parentheses were shown in the sums and could not be removed. Thus, the parentheses were transferred to the translations and can now be removed.
+- When changing the salutation in the address selection, the fields are now only cleared when switching between a person's salutation and a company.
+
+### Fixed
+- The variation selection did not respond to user input if all selectable variations weren't purchasable.
+- Spacings were missing on the standard pages of the legal texts. These have been added.
+
 ## v5.0.24 (2021-03-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.23...5.0.24" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added 

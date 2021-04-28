@@ -169,6 +169,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.isCollapsed = true;
       this.isExpanded = false;
     },
+    open: function open() {
+      this.isCollapsed = false;
+    },
     isConsented: function isConsented(groupKey) {
       return this.$store.getters.isConsented(groupKey + ".*");
     },

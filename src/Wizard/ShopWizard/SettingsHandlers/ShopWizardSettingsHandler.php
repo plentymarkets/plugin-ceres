@@ -17,6 +17,7 @@ use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract as WebshopWebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
@@ -143,9 +144,17 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 if (!empty($activeLanguagesList)) {
                     $webstoreData['languageList'] = $activeLanguagesList;
                 }
-                
+
                 if (isset($data['onlineStore_externalVatIdCheck'])) {
                     $webstoreData['externalVatCheckInactive'] = $data['onlineStore_externalVatIdCheck'];
+                }
+    
+                if (isset($data['onlineStore_loginMode'])) {
+                    $webstoreData['loginMode'] = $data['onlineStore_loginMode'];
+                }
+
+                if (isset($data['onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus'])) {
+                    $webstoreData['externalVatCheckServiceUnavailableFallbackStatus'] = (float)$data['onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus'];
                 }
 
                 if (isset($data['pagination_sortingMonthlySales'])) {
@@ -165,6 +174,14 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
                 if (isset($data['seo_itemMetaTitle'])) {
                     $webstoreData['urlTitleItemName'] = $data['seo_itemMetaTitle'];
+                }
+
+                if(!empty($data["onlineStore_storeFavicon"])) {
+                    /** @var WebshopWebstoreConfigurationRepositoryContract $webshopConfigRepository */
+                    $webshopConfigRepository = pluginApp(WebshopWebstoreConfigurationRepositoryContract::class);
+                    $webshopConfigRepository->setFaviconFromWebspace($plentyId, $data["onlineStore_storeFavicon"]);
+                } else {
+                    $webstoreData['faviconPath'] = '';
                 }
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);

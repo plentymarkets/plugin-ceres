@@ -29,7 +29,17 @@ context("Single Item", () =>
 
     it("should check for base price", () =>
     {
-        cy.get(".base-price-value").should("contain", "0,70");
+        cy.get(".base-price-value").should("contain", "0,28");
+    });
+
+    it("should check if graduated prices are displayed", () =>
+    {
+        cy.get(".graduated-price").should("contain", "0,50");
+    });
+
+    it("should check if graduated base prices are displayed", () =>
+    {
+        cy.get(".graduated-base-price").should("contain", "0,20");
     });
 
     it("should check for lowest breadcrumb level", () =>
@@ -50,7 +60,7 @@ context("Single Item", () =>
     it("should display correct details", () =>
     {
         const content = [
-            "Art.-ID", "116", "Zustand", "Neu", "Altersfreigabe", "Ohne Altersbeschränkung", "Hersteller", "A & C Design", "Herstellungsland", "Deutschland", "Inhalt", "1 Stück"
+            "Art.-ID", "116", "Zustand", "Neu", "Altersfreigabe", "Ohne Altersbeschränkung", "Hersteller", "A & C Design", "Herstellungsland", "Deutschland", "Inhalt", "250 Gramm"
         ];
 
         cy.get(".nav-tabs").children().last().click();
@@ -65,14 +75,21 @@ context("Single Item", () =>
 
     it("should display scale prices and apply marker on quantity change", () =>
     {
+        cy.scrollTo(0, 300);
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
 
-        cy.get(".graduated-prices-table").children().first().children().last().children().first().should("have.class", "fa-check-circle-o");
+        cy.get(".graduated-prices-table").children().first().children().eq(1).children().first().should("have.class", "fa-check-circle-o");
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click().click();
 
-        cy.get(".graduated-prices-table").children().last().children().last().children().first().should("have.class", "fa-check-circle-o");
+        cy.get(".graduated-prices-table").children().eq(2).children().eq(1).children().first().should("have.class", "fa-check-circle-o");
 
+    });
+
+    it.only("should display scaled price after quantity change", () =>
+    {
+        cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
+        cy.get(".price").should("contain", "0,50");
     });
 
     it("should display tags and open in search on click", () =>

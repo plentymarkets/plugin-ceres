@@ -5,8 +5,11 @@
 {% set buttonSize      = widget.settings.buttonSize.mobile %}
 {% set block           = widget.settings.block.mobile %}
 {% set text            = widget.settings.text.mobile %}
+{% set linkTitle       = widget.settings.linkTitle.mobile %}
 {% set url             = widget.settings.url %}
-
+{% if linkTitle is empty %}
+    {% set linkTitle = text %}
+{% endif %}
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set appearance      = widget.settings.appearance.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -36,12 +39,13 @@
 {% endif %}
 
 {{ Twig.if("real_url or #{ isPreview | json_encode }") }}
-<div v-truncate-tooltip class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
+<div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
     <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
     href="{{ Twig.print("real_url") }}"
     {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
-    data-toggle="tooltip" title="">
+    v-tooltip
+    title="{{ linkTitle }}">
         {%- if icon != "none" -%}
             <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
         {%- endif -%}

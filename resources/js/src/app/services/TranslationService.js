@@ -36,13 +36,10 @@ const TranslationService = (function($)
             const namespace = match[1];
             const group = match[2];
 
-            if (_translations.hasOwnProperty(namespace))
+            if (!_translations.hasOwnProperty(namespace))
             {
-                console.warn("Cannot override namespace \"" + namespace + "\"");
-                continue;
+                _translations[namespace] = {};
             }
-
-            _translations[namespace] = {};
 
             if (_translations[namespace].hasOwnProperty(group))
             {

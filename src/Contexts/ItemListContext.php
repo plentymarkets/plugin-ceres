@@ -105,8 +105,25 @@ trait ItemListContext
             ExternalSearch::getExternalResults($externalSearch);
 
             if ($externalSearch->hasResults()) {
-                $variationIds = $externalSearch->getResults();
+                $this->pageMax = 1;
+                $this->itemCountTotal = 0;
+                $this->itemCountPage = 0;
+                $this->facets = [];
 
+                $documents = $externalSearch->getDocuments();
+                if (count($documents)) {
+                    $this->itemList = $documents;
+                    $this->itemCountTotal = $externalSearch->getCountTotal();
+                    $this->itemCountPage = count($documents);
+                    if ($options['itemsPerPage'] == 0) {
+                        $this->pageMax = 1;
+                    } else {
+                        $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                    }
+                    return;
+                }
+
+                $variationIds = $externalSearch->getResults();
                 // only search when external search returns an result
                 if (count($variationIds)) {
                     $externalSearchFactory = VariationList::getSearchFactory(
@@ -139,11 +156,6 @@ trait ItemListContext
                     }
                     $this->itemCountPage = count($variationIds);
                     $this->itemCountTotal = $externalSearch->getCountTotal();
-                    $this->facets = [];
-                } else {
-                    $this->pageMax = 1;
-                    $this->itemCountPage = 0;
-                    $this->itemCountTotal = 0;
                     $this->facets = [];
                 }
                 return;

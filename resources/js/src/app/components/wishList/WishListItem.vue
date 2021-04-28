@@ -2,7 +2,9 @@
     <div class="basket-list-item py-3">
         <div class="basket-item component-loading with-icon d-flex">
             <div class="image-container">
+              <a :href="wishListItem | itemURL">
                 <img class="d-block mw-100 mh-100" v-if="image" :src="image" :title="wishListItem | itemName">
+              </a>
             </div>
 
             <div class="meta-container-wrapper">
@@ -52,11 +54,11 @@
                         <div class="qty-box-container ml-3">
                             <quantity-input
                                 @quantity-change="quantity = $event"
-                                :value="quantity"
+                                :value="wishListItem.variation.intervalOrderQuantity"
                                 :min="wishListItem.variation.minimumOrderQuantity"
                                 :max="wishListItem.variation.maximumOrderQuantity"
                                 :timeout="0"
-                                :interval="wishListItem.variation.intervalQuantity"
+                                :interval="wishListItem.variation.intervalOrderQuantity"
                                 :variation-id="wishListItem.variation.id">
                             </quantity-input>
                         </div>

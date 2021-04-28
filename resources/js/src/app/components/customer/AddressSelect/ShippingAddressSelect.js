@@ -47,6 +47,16 @@ export default Vue.component("shipping-address-select", {
             type: String,
             default: App.config.addresses.defaultSalutation
         },
+        hasAnyPostOfficePreset:
+        {
+            type: Boolean,
+            default: false
+        },
+        hasAnyParcelBoxPreset:
+        {
+            type: Boolean,
+            default: false
+        },
         paddingClasses:
         {
             type: String,
@@ -62,6 +72,21 @@ export default Vue.component("shipping-address-select", {
     computed: mapState({
         deliveryAddressId: state => state.address.deliveryAddressId
     }),
+
+    mounted()
+    {
+        if (App.templateType === "my-account")
+        {
+            if (this.hasAnyParcelBoxPreset)
+            {
+                this.$store.commit("setParcelBoxAvailability", true);
+            }
+            if (this.hasAnyPostOfficePreset)
+            {
+                this.$store.commit("setPostOfficeAvailability", true);
+            }
+        }
+    },
 
     methods:
     {

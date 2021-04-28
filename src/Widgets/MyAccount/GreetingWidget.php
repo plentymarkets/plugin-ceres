@@ -56,6 +56,8 @@ class GreetingWidget extends BaseWidget
 
         $settings->createSpacing(false, true);
 
+        $settings->createAlignment()->withDefaultValue("left");
+
         return $settings->toArray();
     }
 }

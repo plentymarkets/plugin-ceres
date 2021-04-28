@@ -134,6 +134,18 @@ class OnlineStoreMapping
             'type'      => 'integer',
             'global'    => true,
             'optional'  => false
+        ],
+        'onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus' => [
+            'field'     => 'externalVatCheckServiceUnavailableFallbackStatus',
+            'type'      => 'float',
+            'global'    => true,
+            'optional'  => false
+        ],
+        'onlineStore_loginMode' => [
+            'field'     => 'loginMode',
+            'type'      => 'integer',
+            'global'    => true,
+            'optional'  => false
         ]
     ];
 

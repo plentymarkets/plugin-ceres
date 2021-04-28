@@ -37,10 +37,11 @@ class SelectedFilterWidget extends BaseWidget
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
 
-        $settings->createCustomClass();
-
         $settings->createCustomClass()
                  ->withDefaultValue('none');
+
+        $settings->createAppearance()
+                 ->withDefaultValue('primary');
 
         $settings->createAlignment();
 

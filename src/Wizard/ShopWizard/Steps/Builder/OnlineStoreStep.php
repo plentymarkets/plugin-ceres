@@ -16,6 +16,11 @@ use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 class OnlineStoreStep extends Step
 {
     /**
+     * @var array Collection of order status.
+     */
+    private static $orderStatusList = null;
+
+    /**
      * @return array
      */
     public function generateStep(): array
@@ -36,6 +41,7 @@ class OnlineStoreStep extends Step
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
+                $this->buildLoginModeSettings()
             ]
         ];
     }
@@ -189,7 +195,7 @@ class OnlineStoreStep extends Step
                     "defaultValue" => "9",
                     "options" => [
                         "name" => "Wizard.statusReturn",
-                        "listBoxValues" => $this->getOrderStatusListBoxValues()
+                        "listBoxValues" => $this->getReturnOrderStatusListBoxValues()
                     ]
                 ],
                 "onlineStore_minimumOrderAmount" => [
@@ -374,6 +380,17 @@ class OnlineStoreStep extends Step
                             ]
                         ]
                     ]
+                ],
+                "onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus" => [
+                    "type" => "select",
+                    "defaultValue" => 0.0,
+                    "options" => [
+                        "name" => "Wizard.externalVatIdCheckServiceUnavailableFallbackStatus",
+                        "listBoxValues" => array_merge([                            [
+                                "value" => 0.0,
+                                "caption" => "Wizard.serviceUnavailableFallbackStatus"
+                            ],], $this->getOrderStatusListBoxValues())
+                    ]
                 ]
             ]
         ];
@@ -382,8 +399,30 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
+    private function getReturnOrderStatusListBoxValues()
+    {
+        $orderStatusList = [];
+        $all = $this->getOrderStatusListBoxValues();
+        foreach ($all as $status) {
+            if ($status['value'] >= 9 && $status['value'] < 10) {
+                $orderStatusList[] = [
+                    "value" => (string)$status['value'],
+                    "caption" => $status['caption']
+                ];
+            }
+        }
+        return $orderStatusList;
+    }
+
+
+    /**
+     * @return array
+     */
     private function getOrderStatusListBoxValues()
     {
+        if(isset(self::$orderStatusList) && count(self::$orderStatusList)) {
+            return self::$orderStatusList;
+        }
         $currentLang = LanguagesHelper::getUserLang();
 
         /** @var OrderStatusRepositoryContract $orderStatusRepo */
@@ -392,7 +431,6 @@ class OnlineStoreStep extends Step
 
         $orderStatusList = [];
         foreach ($orderStatusCollection as $status) {
-            if ($status->statusId >= 9 && $status->statusId < 10) {
                 $statusName = $status->names[$currentLang] ?? '';
                 $prefix = '[' . $status->statusId . ']';
                 if (substr($statusName, 0, strlen($prefix)) !== $prefix) {
@@ -400,14 +438,39 @@ class OnlineStoreStep extends Step
                 }
 
                 $orderStatusList[] = [
-                    "value" => "$status->statusId",
+                    "value" => $status->statusId,
                     "caption" => $statusName
                 ];
-            }
         }
-
+        self::$orderStatusList = $orderStatusList;
         return $orderStatusList;
     }
 
-
+    private function buildLoginModeSettings()
+    {
+        return [
+            "title" => "Wizard.loginModeTitle",
+            "description" => "Wizard.loginModeDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_loginMode" => [
+                    "type" => "select",
+                    "defaultValue" => 0,
+                    "options" => [
+                        "name" => "Wizard.loginMode",
+                        "listBoxValues" => [
+                            [
+                                "value" => 0,
+                                "caption" => "Wizard.loginMode1"
+                            ],
+                            [
+                                "value" => 1,
+                                "caption" => "Wizard.loginMode2"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+    }
 }

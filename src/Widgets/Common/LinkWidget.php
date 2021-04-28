@@ -54,6 +54,10 @@ class LinkWidget extends BaseWidget
             ->withName("Widget.linkTextLabel")
             ->withTooltip("Widget.linkTextTooltip");
 
+        $settings->createText("linkTitle")
+            ->withName("Widget.linkTitleTextLabel")
+            ->withTooltip("Widget.linkTitleTextTooltip");
+
         $settings->createUrl("url")
             ->withName("Widget.linkUrlLabel")
             ->withTooltip("Widget.linkUrlTooltip")
