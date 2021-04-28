@@ -86,6 +86,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "graduated-prices",
   props: {
@@ -211,40 +213,67 @@ var render = function() {
                         index === _vm.activeGraduationIndex
                           ? _c("i", {
                               staticClass:
-                                "fa fa-lg fa-check-circle-o ml-1 text-appearance",
+                                "fa fa-lg fa-check-circle-o text-appearance",
                               attrs: { "aria-hidden": "true" }
                             })
                           : _vm._e()
                       ])
                     ],
                     1
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.showBasePrice
-                  ? _c("tr", [
-                      _c(
+                  ),
+                  _vm._v(" "),
+                  _vm.showBasePrice
+                    ? _c(
                         "td",
                         {
-                          staticClass: "graduated-base-price",
+                          staticClass:
+                            "graduated-base-price pl-3 d-none d-xl-block",
                           class: _vm.paddingClasses,
-                          style: _vm.paddingInlineStyles,
-                          attrs: { colspan: "2" }
+                          style: _vm.paddingInlineStyles
                         },
                         [
                           _vm._v(
-                            "(" +
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.singleItemGraduatedBasePrice",
+                                { price: price.basePrice }
+                              )
+                            )
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _vm.showBasePrice
+                  ? _c(
+                      "tr",
+                      { staticClass: "graduated-base-price d-xl-none" },
+                      [
+                        _c("td", {
+                          class: _vm.paddingClasses,
+                          style: _vm.paddingInlineStyles
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            class: _vm.paddingClasses,
+                            style: _vm.paddingInlineStyles
+                          },
+                          [
+                            _vm._v(
                               _vm._s(
                                 _vm.$translate(
                                   "Ceres::Template.singleItemGraduatedBasePrice",
                                   { price: price.basePrice }
                                 )
-                              ) +
-                              ")"
-                          )
-                        ]
-                      )
-                    ])
+                              )
+                            )
+                          ]
+                        )
+                      ]
+                    )
                   : _vm._e()
               ]
             })

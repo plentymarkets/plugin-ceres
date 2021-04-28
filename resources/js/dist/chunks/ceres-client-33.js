@@ -84,6 +84,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -139,7 +140,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.compInterval, 1);
     this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
-    this.compDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["floatLength"])(this.compInterval);
+    var minDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["floatLength"])(this.min);
+    var intervalDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["floatLength"])(this.compInterval);
+    this.compDecimals = Math.max(minDecimals, intervalDecimals);
     this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_12__["debounce"])(function () {
       _this.$emit("quantity-change", _this.compValue);
     }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 500));
@@ -173,12 +176,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     minimumHint: function minimumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMin", {
-        min: this.min
+        min: this.$options.filters.numberFormat(this.compMin)
       });
     },
     maximumHint: function maximumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMax", {
-        max: this.max
+        max: this.$options.filters.numberFormat(this.Max)
       });
     },
     displayValue: function displayValue() {
@@ -249,7 +252,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["limit"])(value, this.compMin, this.compMax); // make sure, new value is an even multiple of interval
 
-      var diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["formatFloat"])(value % this.compInterval, this.compDecimals, true);
+      var diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["formatFloat"])((value - this.min) % this.compInterval, this.compDecimals, true);
 
       if (diff > 0 && diff !== this.compInterval) {
         if (diff < this.compInterval / 2) {
@@ -268,13 +271,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.compValue = value;
         this.onValueChanged();
       } else if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.$refs.quantityInputField)) {
-        this.$refs.quantityInputField.value = value;
+        this.$refs.quantityInputField.value = this.displayValue;
       }
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
-        // minimum quantity already in basket
-        this.compMin = this.compInterval;
+        this.compMin = this.min % this.compInterval || this.compInterval;
       } else if (this.variationBasketQuantity === 0) {
         this.compMin = this.min;
       }
@@ -320,7 +322,11 @@ var render = function() {
     _c("input", {
       ref: "quantityInputField",
       staticClass: "qty-input text-center",
-      attrs: { type: "text", disabled: _vm.waiting },
+      attrs: {
+        type: "text",
+        disabled: _vm.waiting,
+        "aria-label": _vm.$translate("Ceres::Template.itemQuantityInput")
+      },
       domProps: { value: _vm.displayValue },
       on: {
         change: function($event) {

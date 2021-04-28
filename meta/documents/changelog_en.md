@@ -1,5 +1,36 @@
 # Release Notes for Ceres
 
+## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- The alignment of the text in the greeting widget can now be determined in the widget settings.
+- In the Online store step of the plentyShop asisstant, you can now determine which status should be set for orders for which the VAT identification number validation could not be completed. 
+
+### Changed
+
+- A number of user elements have been equipped with ARIA attributes. We would like to thank user @cerwantes for their contribution!
+- The favicon is now uploaded to the internal webspace when changes in the plentyShop assistant are saved. It is therefore no longer necessary to save and publish the plugin set in order to effect changes to the favicon.
+- The stability of the contact form has been improved.
+- The input field for the VAT identification number now contains the country-specific prefix.
+
+### Fixed
+
+- If no favicon is stored in the Ceres settings, the favicon from the client's obsolete settings is now used as a fallback.
+- An aria-label has been added to the home icon in the breadcrumbs. You can change the label via the `headerBreadcrumbHome` entry in the multilingualism interface. We would like to thank user @cerwantes for their contribution!
+- Due to legal reasons, the list of graduated prices in the single item view now also includes the base price if the display of the base price is activated for this item.
+- A defective `<img>` tag was displayed in the header if no company logo had been stored in the Ceres settings. This behaviour has been fixed.
+- Payment method dependent surcharges and rebates are now taken into account if the payment method of an already existing order is changed.  
+- Under certain circumstances, the currency was displayed incorrectly in the order overview in the My Account section. This behaviour has been fixed.
+- Due to an error, only one translation file per plugin could be used in the frontend. This has been fixed.
+- The minimum order quantity of an item or a price is now taken into account in the quantity input.
+
+### Changed templates
+
+- In Ceres 5.0.28 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/views/Widgets/MyAccount/GreetingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2779/files#diff-c428531b614621aa7ec1fe56507582fcd923aeae8342bfb3c0d2bbbe650c69be)
+- [resources/js/src/app/components/item/GraduatedPrices.vue](https://github.com/plentymarkets/plugin-ceres/pull/2765/files#diff-57df8453013ee1dd0821c871b25d89e42eb2ff2ed7d491f2141aacb299ada6b9)
+
 ## v5.0.27 (2021-04-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.26...5.0.27" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed

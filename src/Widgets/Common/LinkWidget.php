@@ -13,7 +13,7 @@ class LinkWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.LinkWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -27,7 +27,7 @@ class LinkWidget extends BaseWidget
             ->withPosition(900)
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -50,6 +50,10 @@ class LinkWidget extends BaseWidget
         $settings->createText("text")
             ->withName("Widget.linkTextLabel")
             ->withTooltip("Widget.linkTextTooltip");
+
+        $settings->createText("linkTitle")
+            ->withName("Widget.linkTitleTextLabel")
+            ->withTooltip("Widget.linkTitleTextTooltip");
 
         $settings->createUrl("url")
             ->withName("Widget.linkUrlLabel")

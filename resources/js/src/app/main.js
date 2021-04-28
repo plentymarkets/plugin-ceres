@@ -69,7 +69,10 @@ function CeresMain()
     };
 
     // init bootstrap tooltips
-    $("[data-toggle=\"tooltip\"]").tooltip();
+    document.querySelectorAll("[data-toggle=\"tooltip\"]").forEach(el =>
+    {
+        $(el).tooltip();
+    });
 
     HeaderCollapse("#countrySettings");
     HeaderCollapse("#currencySelect");

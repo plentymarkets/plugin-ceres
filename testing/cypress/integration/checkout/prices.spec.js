@@ -21,8 +21,8 @@ context("prices", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
         cy.visit(url1);
-        cy.get(".graduated-prices-table").children().first().children().last().should("contain", "0,38");
-        cy.get(".graduated-prices-table").children().last().children().last().should("contain", "0,08");
+        cy.get(".graduated-prices-table").children().first().children().last().should("contain", "0,15");
+        cy.get(".graduated-prices-table").children().last().children().last().should("contain", "0,03");
     });
 
     it("should display netto price for b2b class", () =>
