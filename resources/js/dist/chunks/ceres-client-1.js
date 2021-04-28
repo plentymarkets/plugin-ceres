@@ -76,6 +76,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isMounted: false
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      _this.isMounted = true;
+    });
   }
 });
 
@@ -636,7 +643,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      !_vm.isBasketInitiallyLoaded
+      !(_vm.isBasketInitiallyLoaded && _vm.isMounted)
         ? _c("loading-animation", { staticClass: "d-table w-100" })
         : _vm._e()
     ],
