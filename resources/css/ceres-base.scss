@@ -9454,6 +9454,15 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     }
 }
 
+.owl-placeholder {
+    width: 101%;
+    height: 101%;
+    margin-left: -1px;
+    position: absolute;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
 .single-carousel,
 .owl-thumbs {
     &.owl-single-item {
@@ -10394,6 +10403,13 @@ $border-width: 1px;
     .custom-select {
         padding: 1.2rem 2rem .4rem 1rem;
         background-position: calc(100% - 1rem) 1.2rem;
+    }
+}
+
+.input-group-prepend {
+    .custom-select {
+        padding: 0.8rem 2rem 0.8rem 1rem;
+        background-position: calc(100% - 1rem) center;
     }
 }
 
@@ -11990,6 +12006,10 @@ html.crios {
         & i {
             color: $success;
         }
+    }
+
+    .graduated-base-price {
+        font-style: normal !important; // stylelint-disable-line declaration-no-important
     }
 
     .fade-enter-active,

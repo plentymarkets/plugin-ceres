@@ -23,7 +23,14 @@
             </div>
         </template>
         <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
-            <img :src="singleImages[0].url" alt="test">
+            <div class="prop-1-1">
+                <img
+                    class="owl-placeholder"
+                    :src="singleImages[0].url"
+                    :alt="getAltText(singleImages[0].url)"
+                    :title="getImageName(singleImages[0].url)"
+                >
+            </div>
         </div>
     </div>
 </template>

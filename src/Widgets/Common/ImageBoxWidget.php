@@ -13,7 +13,7 @@ class ImageBoxWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.ImageBoxWidget';
-    
+
     /** @const string[] IMAGE_EXTENSION */
     const IMAGE_EXTENSIONS = [
         'jpg',
@@ -23,12 +23,12 @@ class ImageBoxWidget extends BaseWidget
         'svg',
         'apng'
     ];
-    
+
     /** @const string[] MODERN_IMAGE_EXTENSIONS */
     const MODERN_IMAGE_EXTENSIONS = [
         'webp'
     ];
-    
+
     /**
      * @inheritDoc
      */
@@ -42,7 +42,7 @@ class ImageBoxWidget extends BaseWidget
             ->withPosition(600)
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -117,13 +117,19 @@ class ImageBoxWidget extends BaseWidget
         $settings->createCheckbox('lazyLoading')
             ->withName('Widget.imageBoxLazyLoadingName')
             ->withTooltip('Widget.imageBoxLazyLoadingTooltip')
+            ->withCondition("!preloadImage")
             ->withDefaultValue(true);
+
+        $settings->createCheckbox('preloadImage')
+            ->withName('Widget.preloadImageLabel')
+            ->withTooltip('Widget.preloadImageTooltip')
+            ->withCondition("!lazyLoading");
 
         $settings->createSpacing(false, true);
 
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

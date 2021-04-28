@@ -76,7 +76,7 @@ export default Vue.component("payment-provider-select", {
 
         isPaymentMethodExcluded(paymentMethodId)
         {
-            if (isDefined(this.selectedShippingProfile.excludedPaymentMethodIds))
+            if (isDefined(this.selectedShippingProfile?.excludedPaymentMethodIds))
             {
                 return this.selectedShippingProfile.excludedPaymentMethodIds.includes(paymentMethodId);
             }

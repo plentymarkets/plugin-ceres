@@ -36,8 +36,8 @@ class SelectedFilterWidget extends BaseWidget
         
         $settings->createCustomClass();
         
-        $settings->createCustomClass()
-                 ->withDefaultValue('none');
+        $settings->createAppearance()
+                 ->withDefaultValue('primary');
         
         $settings->createAlignment();
         

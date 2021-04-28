@@ -8,12 +8,14 @@
                     <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-price">
                         {{ price.unitPrice.formatted }}
                         <transition name="fade">
-                            <i class="fa fa-lg fa-check-circle-o ml-1 text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
+                            <i class="fa fa-lg fa-check-circle-o text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
                         </transition>
                     </td>
+                    <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price pl-3 d-none d-xl-block">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
                 </tr>
-                <tr v-if="showBasePrice">
-                    <td :class="paddingClasses" :style="paddingInlineStyles" colspan="2" class="graduated-base-price">({{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }})</td>
+                <tr v-if="showBasePrice" class="graduated-base-price d-xl-none">
+                    <td :class="paddingClasses" :style="paddingInlineStyles"></td>
+                    <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
                 </tr>
             </template>
         </table>
