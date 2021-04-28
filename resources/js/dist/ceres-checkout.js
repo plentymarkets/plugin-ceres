@@ -1803,7 +1803,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
     },
     isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable() {
-      return (this.isParcelBoxAvailable || this.isPostOfficeAvailable || this.isMyAccount) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+      return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
     isParcelBoxAvailable: function isParcelBoxAvailable(state) {
@@ -38201,7 +38201,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm.isParcelBoxAvailable || _vm.isMyAccount
+                          _vm.isParcelBoxAvailable
                             ? _c(
                                 "option",
                                 {
@@ -38220,7 +38220,7 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm.isPostOfficeAvailable || _vm.isMyAccount
+                          _vm.isPostOfficeAvailable
                             ? _c(
                                 "option",
                                 {
@@ -60290,6 +60290,14 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       default: App.config.addresses.defaultSalutation
     },
+    hasAnyPostOfficePreset: {
+      type: Boolean,
+      default: false
+    },
+    hasAnyParcelBoxPreset: {
+      type: Boolean,
+      default: false
+    },
     paddingClasses: {
       type: String,
       default: null
@@ -60304,6 +60312,17 @@ __webpack_require__.r(__webpack_exports__);
       return state.address.deliveryAddressId;
     }
   }),
+  mounted: function mounted() {
+    if (App.templateType === "my-account") {
+      if (this.hasAnyParcelBoxPreset) {
+        this.$store.commit("setParcelBoxAvailability", true);
+      }
+
+      if (this.hasAnyPostOfficePreset) {
+        this.$store.commit("setPostOfficeAvailability", true);
+      }
+    }
+  },
   methods: {
     /**
      * Update the delivery address
