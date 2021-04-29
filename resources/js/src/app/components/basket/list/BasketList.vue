@@ -1,5 +1,7 @@
 <template>
     <div>
+
+
         <div>
             <div v-if="!basketItems.length > 0">
                 <div class="h5 py-3">{{ $translate("Ceres::Template.basketNoItems") }}</div>
