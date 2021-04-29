@@ -2,6 +2,7 @@ import ApiService from "../../../services/ApiService";
 import ItemModule from "./ItemModule";
 import VariationSelectModule from "./VariationSelectModule";
 import { store } from "../../index";
+import { isNullOrUndefined } from "../../../helper/utils";
 
 const state = () => ({
     isItemSet: false,
@@ -54,10 +55,13 @@ const mutations =
 
 const actions =
     {
-        initVariation({ commit, dispatch }, variation)
+        initVariation({ commit, dispatch, state }, variation)
         {
             // register a nested module for the main item
-            dispatch("registerItem", variation.documents[0]);
+            if (isNullOrUndefined(state[variation.documents[0].data.item.id]))
+            {
+                dispatch("registerItem", variation.documents[0]);
+            }
             commit("setMainItemId", variation.documents[0].data.item.id);
 
             const setComponents = variation.documents[0].data.setComponents;
@@ -105,6 +109,7 @@ const actions =
 
         registerItem({ commit }, item)
         {
+            console.log("registerModule");
             const itemId = item.data.item.id;
             // extend the structur of the object to match the old objects
             const extendedData = { documents: [item] };

@@ -122,8 +122,6 @@ export function initClientListeners(store)
 // TODO: find better method name
 export function initClientStore(store)
 {
-    window.ceresStore = store;
-
     store.commit("initConsents");
     store.dispatch("loadBasketData");
     /**

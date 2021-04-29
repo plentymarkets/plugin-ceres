@@ -23,12 +23,21 @@ window.createApp = (selector) => {
         store.replaceState(window.__INITIAL_STATE__);
     }
 
+    window.ceresStore = store;
+
+    initListener();
+    initClientListeners(store);
+
+    if (store.state.items[store.state.items.mainItemId])
+    {
+        store.dispatch("registerItem", store.state.items[store.state.items.mainItemId].variation.documents[0]);
+    }
+
+    window.dispatchEvent(new CustomEvent("ceresBeforeMount", { store, app }));
+
     app.$mount(selector, true);
     window.vueApp = app;
 
-    initListener();
-
-    initClientListeners(store);
     initClientStore(store);
 };
 
