@@ -62791,13 +62791,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 
 
+/**
+ * @deprecated since version 5.0.29
+ */
+
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.directive("truncate-tooltip", {
   inserted: function inserted(element) {
     var tooltip = function tooltip() {
       var outer = element.offsetWidth;
       var inner = element.children[0].scrollWidth;
+      var title = element.children[0].title;
 
-      if (inner > outer) {
+      if (title) {
+        element.children[0].dataset.originalTitle = title;
+      } else if (inner > outer) {
         element.children[0].dataset.originalTitle = element.children[0].text;
       } else {
         element.children[0].dataset.originalTitle = "";
@@ -66456,7 +66463,9 @@ function CeresMain() {
   }; // init bootstrap tooltips
 
 
-  $("[data-toggle=\"tooltip\"]").tooltip();
+  document.querySelectorAll("[data-toggle=\"tooltip\"]").forEach(function (el) {
+    $(el).tooltip();
+  });
   HeaderCollapse("#countrySettings");
   HeaderCollapse("#currencySelect");
   HeaderCollapse("#searchBox");
