@@ -1584,6 +1584,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2810,7 +2812,6 @@ var TabNavItem = {
     var _this = this;
 
     var anchorAttrs = {
-      role: "tab",
       href: ""
     };
 
@@ -2833,6 +2834,9 @@ var TabNavItem = {
       }
     }, [this.tab.$slots.title || this.tab.title]);
     return createElement("li", {
+      attrs: {
+        role: "tab"
+      },
       staticClass: "nav-item"
     }, [anchor]);
   },
@@ -3143,6 +3147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _SalutationSelect_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./SalutationSelect.vue */ "./resources/js/src/app/components/customer/SalutationSelect.vue");
 /* harmony import */ var _customer_CountrySelect_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../customer/CountrySelect.vue */ "./resources/js/src/app/components/customer/CountrySelect.vue");
+/* harmony import */ var _VatId_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./VatId.vue */ "./resources/js/src/app/components/customer/VatId.vue");
 
 
 
@@ -4073,22 +4078,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -4096,7 +4086,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "address-input-group",
   components: {
     SalutationSelect: _SalutationSelect_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-    CountrySelect: _customer_CountrySelect_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+    CountrySelect: _customer_CountrySelect_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+    VatId: _VatId_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   },
   props: {
     defaultCountry: {
@@ -4574,7 +4565,7 @@ var gRecaptchaApiLoaded;
     createScript: function createScript() {
       var _this2 = this;
 
-      if (!this.apiKey) {
+      if (!this.apiKey || window.grecaptcha) {
         return Promise.resolve();
       }
 
@@ -5317,6 +5308,160 @@ __webpack_require__.r(__webpack_exports__);
           this.emitInputEvent(newVal[0].key);
         }
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/VatId.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/VatId.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.starts-with.js */ "./node_modules/core-js/modules/es.string.starts-with.js");
+/* harmony import */ var core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "vat-id",
+  props: {
+    selectedCountryId: Number,
+    value: String,
+    isRequired: Boolean,
+    showInput: Boolean
+  },
+  data: function data() {
+    return {
+      vatNumber: "",
+      vatPrefix: "",
+      isPrefixValid: false
+    };
+  },
+  computed: {
+    vatCodes: function vatCodes() {
+      var _this$selectedCountry, _this$selectedCountry2, _this$selectedCountry3;
+
+      this.vatPrefix = (_this$selectedCountry = this.selectedCountry) !== null && _this$selectedCountry !== void 0 && _this$selectedCountry.vatCodes && (_this$selectedCountry2 = this.selectedCountry) !== null && _this$selectedCountry2 !== void 0 && _this$selectedCountry2.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+      return (_this$selectedCountry3 = this.selectedCountry) !== null && _this$selectedCountry3 !== void 0 && _this$selectedCountry3.vatCodes ? this.selectedCountry.vatCodes : [];
+    },
+    isEU: function isEU() {
+      var _this$vatCodes;
+
+      return ((_this$vatCodes = this.vatCodes) === null || _this$vatCodes === void 0 ? void 0 : _this$vatCodes.length) > 0;
+    },
+    selectedCountry: function selectedCountry() {
+      var _this = this;
+
+      return this.$store.state.localization.shippingCountries.find(function (country) {
+        return country.id === _this.selectedCountryId;
+      });
+    }
+  },
+  watch: {
+    value: function value(newValue) {
+      this.setValues(newValue);
+    },
+    showInput: function showInput() {
+      if (!this.showInput) {
+        this.deleteValue();
+      }
+    },
+    vatNumber: function vatNumber() {
+      this.emitChange();
+    },
+    vatPrefix: function vatPrefix() {
+      this.emitChange();
+    }
+  },
+  created: function created() {
+    this.setValues(this.value);
+  },
+  methods: {
+    transformTranslation: function transformTranslation(translationKey) {
+      var translation = this.$translate(translationKey);
+      return translation + (this.isRequired ? "*" : "");
+    },
+    deleteValue: function deleteValue() {
+      var _this$selectedCountry4, _this$selectedCountry5;
+
+      this.vatNumber = "";
+      this.vatPrefix = (_this$selectedCountry4 = this.selectedCountry) !== null && _this$selectedCountry4 !== void 0 && _this$selectedCountry4.vatCodes && (_this$selectedCountry5 = this.selectedCountry) !== null && _this$selectedCountry5 !== void 0 && _this$selectedCountry5.vatCodes[0] ? this.selectedCountry.vatCodes[0] : "";
+    },
+    emitChange: function emitChange() {
+      var value = !!this.vatNumber ? this.vatPrefix + this.vatNumber : "";
+      this.$emit('input', value);
+    },
+    setValues: function setValues(value) {
+      var vatPrefix = this.getVatPrefix(value);
+      this.isPrefixValid = !!vatPrefix;
+
+      if (this.isPrefixValid) {
+        this.vatPrefix = vatPrefix;
+        this.vatNumber = value.slice(vatPrefix.length);
+      } else {
+        this.vatNumber = value;
+      }
+    },
+
+    /**
+     * @param value
+     * @returns {string} - Returns the best matching vat code
+     */
+    getVatPrefix: function getVatPrefix(value) {
+      var _this$vatCodes2;
+
+      var result = "";
+      (_this$vatCodes2 = this.vatCodes) === null || _this$vatCodes2 === void 0 ? void 0 : _this$vatCodes2.forEach(function (vatCode) {
+        if (value.startsWith(vatCode) && vatCode.length > result.length) {
+          result = vatCode;
+        }
+      });
+      return result;
     }
   }
 });
@@ -6290,6 +6435,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+//
+//
 //
 //
 //
@@ -7869,6 +8016,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -7924,7 +8072,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.compInterval, 1);
     this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
-    this.compDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["floatLength"])(this.compInterval);
+    var minDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["floatLength"])(this.min);
+    var intervalDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["floatLength"])(this.compInterval);
+    this.compDecimals = Math.max(minDecimals, intervalDecimals);
     this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_12__["debounce"])(function () {
       _this.$emit("quantity-change", _this.compValue);
     }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 500));
@@ -7958,12 +8108,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     minimumHint: function minimumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMin", {
-        min: this.min
+        min: this.$options.filters.numberFormat(this.compMin)
       });
     },
     maximumHint: function maximumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMax", {
-        max: this.max
+        max: this.$options.filters.numberFormat(this.Max)
       });
     },
     displayValue: function displayValue() {
@@ -8034,7 +8184,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["limit"])(value, this.compMin, this.compMax); // make sure, new value is an even multiple of interval
 
-      var diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["formatFloat"])(value % this.compInterval, this.compDecimals, true);
+      var diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["formatFloat"])((value - this.min) % this.compInterval, this.compDecimals, true);
 
       if (diff > 0 && diff !== this.compInterval) {
         if (diff < this.compInterval / 2) {
@@ -8053,13 +8203,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.compValue = value;
         this.onValueChanged();
       } else if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.$refs.quantityInputField)) {
-        this.$refs.quantityInputField.value = value;
+        this.$refs.quantityInputField.value = this.displayValue;
       }
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
-        // minimum quantity already in basket
-        this.compMin = this.compInterval;
+        this.compMin = this.min % this.compInterval || this.compInterval;
       } else if (this.variationBasketQuantity === 0) {
         this.compMin = this.min;
       }
@@ -8641,6 +8790,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     units: function units() {
       return Object(_helper_get__WEBPACK_IMPORTED_MODULE_5__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.units"));
+    },
+    isItemSet: function isItemSet() {
+      return this.$store.state.items.isItemSet;
     }
   },
   created: function created() {
@@ -8661,6 +8813,10 @@ __webpack_require__.r(__webpack_exports__);
         isPleaseSelectOption: _this.initPleaseSelectOption,
         afterKey: _this.afterKey
       });
+
+      if (_this.isItemSet) {
+        _this.$store.dispatch("initSetComponents", _this.itemData);
+      }
     });
   },
   methods: {
@@ -8749,33 +8905,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
+/* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 //
 //
@@ -8793,7 +8924,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8813,23 +8943,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       itemId: App.isShopBuilder ? this.previewItemId : this.itemId
     };
   },
-  computed: _objectSpread({
+  computed: {
     variationId: function variationId() {
       return this.variation && this.variation.variation.id;
-    }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapState"])({
-    variation: function variation(state) {
-      var itemModule = state.items[this.itemId];
-      this.ready();
+    },
+    variation: function variation() {
+      var itemModule = this.$store.state.items[this.itemId];
+
+      if (itemModule) {
+        this.ready();
+      }
+
       return itemModule && itemModule.variation.documents[0].data;
     },
-    isSetLoading: function isSetLoading(state) {
-      return state.items.isSetLoading;
+    isSetLoading: function isSetLoading() {
+      return this.$store.state.items.isSetLoading;
     },
-    previewItemId: function previewItemId(state) {
-      return state.items.previewItemId;
+    previewItemId: function previewItemId() {
+      return this.$store.state.items.previewItemId;
     }
-  })),
+  },
   methods: {
     ready: function ready() {
       this.$store.dispatch("".concat(this.itemId, "/variationSelect/setVariationSelect"), {
@@ -8844,10 +8977,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.ready = function () {};
     },
     getDataField: function getDataField(field) {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.variation, field);
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_1__["get"])(this.variation, field);
     },
     getFilteredDataField: function getFilteredDataField(field, filter) {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_8__["isNullOrUndefined"])(this.$options.filters[filter])) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(this.$options.filters[filter])) {
         return this.$options.filters[filter](this.getDataField(field));
       }
 
@@ -11003,6 +11136,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -12892,6 +13027,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     close: function close() {
       this.isCollapsed = true;
       this.isExpanded = false;
+    },
+    open: function open() {
+      this.isCollapsed = false;
     },
     isConsented: function isConsented(groupKey) {
       return this.$store.getters.isConsented(groupKey + ".*");
@@ -42215,64 +42353,50 @@ var render = function() {
                         "</label></div></div>"
                       : "<!---->") + " "
                   ),
-                  (_vm.isInOptionalFields("de", "billing_address.salutation") &&
-                    _vm.value.gender === "company" &&
-                    _vm.isInOptionalFields(
-                      "de",
-                      "billing_address.vatNumber"
-                    )) ||
-                  (!_vm.isInOptionalFields(
-                    "de",
-                    "billing_address.salutation"
-                  ) &&
-                    _vm.isInOptionalFields("de", "billing_address.name1") &&
-                    _vm.isInOptionalFields("de", "billing_address.vatNumber"))
-                    ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "billing_address.vatNumber"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'billing_address.vatNumber')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "vatNumber" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="text" name="vatNumber"' +
-                                _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
-                                " data-autofocus" +
-                                _vm._ssrAttr("value", _vm.value.vatNumber) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressVatNumber",
-                                        "de",
-                                        "billing_address.vatNumber"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
+                  _vm._ssrNode(
+                    '<div class="col-12 col-sm-6">',
+                    "</div>",
+                    [
+                      _c("vat-id", {
+                        attrs: {
+                          "is-required": _vm.isInRequiredFields(
+                            "de",
+                            "billing_address.vatNumber"
+                          ),
+                          "selected-country-id": _vm.value.countryId,
+                          value: _vm.value.vatNumber || "",
+                          "show-input":
+                            (_vm.isInOptionalFields(
+                              "de",
+                              "billing_address.salutation"
+                            ) &&
+                              _vm.value.gender === "company" &&
+                              _vm.isInOptionalFields(
+                                "de",
+                                "billing_address.vatNumber"
+                              )) ||
+                            (!_vm.isInOptionalFields(
+                              "de",
+                              "billing_address.salutation"
+                            ) &&
+                              _vm.isInOptionalFields(
+                                "de",
+                                "billing_address.name1"
+                              ) &&
+                              _vm.isInOptionalFields(
+                                "de",
+                                "billing_address.vatNumber"
+                              ))
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.emitInputEvent("vatNumber", $event)
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 2
               )
@@ -42962,64 +43086,50 @@ var render = function() {
                         "</label></div></div>"
                       : "<!---->") + " "
                   ),
-                  (_vm.isInOptionalFields("gb", "billing_address.salutation") &&
-                    _vm.value.gender === "company" &&
-                    _vm.isInOptionalFields(
-                      "gb",
-                      "billing_address.vatNumber"
-                    )) ||
-                  (!_vm.isInOptionalFields(
-                    "gb",
-                    "billing_address.salutation"
-                  ) &&
-                    _vm.isInOptionalFields("gb", "billing_address.name1") &&
-                    _vm.isInOptionalFields("gb", "billing_address.vatNumber"))
-                    ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "gb",
-                                  "billing_address.vatNumber"
-                                ),
-                                expression:
-                                  "isInRequiredFields('gb', 'billing_address.vatNumber')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "vatNumber" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="text" name="vatNumber"' +
-                                _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
-                                " data-autofocus" +
-                                _vm._ssrAttr("value", _vm.value.vatNumber) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressVatNumber",
-                                        "gb",
-                                        "billing_address.vatNumber"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
+                  _vm._ssrNode(
+                    '<div class="col-12 col-sm-6">',
+                    "</div>",
+                    [
+                      _c("vat-id", {
+                        attrs: {
+                          "is-required": _vm.isInRequiredFields(
+                            "gb",
+                            "billing_address.vatNumber"
+                          ),
+                          "selected-country-id": _vm.value.countryId,
+                          value: _vm.value.vatNumber || "",
+                          "show-input":
+                            (_vm.isInOptionalFields(
+                              "gb",
+                              "billing_address.salutation"
+                            ) &&
+                              _vm.value.gender === "company" &&
+                              _vm.isInOptionalFields(
+                                "gb",
+                                "billing_address.vatNumber"
+                              )) ||
+                            (!_vm.isInOptionalFields(
+                              "gb",
+                              "billing_address.salutation"
+                            ) &&
+                              _vm.isInOptionalFields(
+                                "gb",
+                                "billing_address.name1"
+                              ) &&
+                              _vm.isInOptionalFields(
+                                "gb",
+                                "billing_address.vatNumber"
+                              ))
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.emitInputEvent("vatNumber", $event)
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 2
               )
@@ -43729,67 +43839,50 @@ var render = function() {
                         "</label></div></div>"
                       : "<!---->") + " "
                   ),
-                  (_vm.isInOptionalFields(
-                    "de",
-                    "delivery_address.salutation"
-                  ) &&
-                    _vm.value.gender === "company" &&
-                    _vm.isInOptionalFields(
-                      "de",
-                      "delivery_address.vatNumber"
-                    )) ||
-                  (!_vm.isInOptionalFields(
-                    "de",
-                    "delivery_address.salutation"
-                  ) &&
-                    _vm.isInOptionalFields("de", "delivery_address.name1") &&
-                    _vm.isInOptionalFields("de", "delivery_address.vatNumber"))
-                    ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "delivery_address.vatNumber"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'delivery_address.vatNumber')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "vatNumber" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="text" name="vatNumber"' +
-                                _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
-                                " data-autofocus" +
-                                _vm._ssrAttr("value", _vm.value.vatNumber) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressVatNumber",
-                                        "de",
-                                        "delivery_address.vatNumber"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
+                  _vm._ssrNode(
+                    '<div class="col-12 col-sm-6">',
+                    "</div>",
+                    [
+                      _c("vat-id", {
+                        attrs: {
+                          "is-required": _vm.isInRequiredFields(
+                            "de",
+                            "delivery_address.vatNumber"
+                          ),
+                          "selected-country-id": _vm.value.countryId,
+                          value: _vm.value.vatNumber || "",
+                          "show-input":
+                            (_vm.isInOptionalFields(
+                              "de",
+                              "delivery_address.salutation"
+                            ) &&
+                              _vm.value.gender === "company" &&
+                              _vm.isInOptionalFields(
+                                "de",
+                                "delivery_address.vatNumber"
+                              )) ||
+                            (!_vm.isInOptionalFields(
+                              "de",
+                              "delivery_address.salutation"
+                            ) &&
+                              _vm.isInOptionalFields(
+                                "de",
+                                "delivery_address.name1"
+                              ) &&
+                              _vm.isInOptionalFields(
+                                "de",
+                                "delivery_address.vatNumber"
+                              ))
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.emitInputEvent("vatNumber", $event)
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 2
               )
@@ -44394,67 +44487,50 @@ var render = function() {
                         "</label></div></div>"
                       : "<!---->") + " "
                   ),
-                  (_vm.isInOptionalFields(
-                    "gb",
-                    "delivery_address.salutation"
-                  ) &&
-                    _vm.value.gender === "company" &&
-                    _vm.isInOptionalFields(
-                      "gb",
-                      "delivery_address.vatNumber"
-                    )) ||
-                  (!_vm.isInOptionalFields(
-                    "gb",
-                    "delivery_address.salutation"
-                  ) &&
-                    _vm.isInOptionalFields("gb", "delivery_address.name1") &&
-                    _vm.isInOptionalFields("gb", "delivery_address.vatNumber"))
-                    ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "gb",
-                                  "delivery_address.vatNumber"
-                                ),
-                                expression:
-                                  "isInRequiredFields('gb', 'delivery_address.vatNumber')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "vatNumber" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="text" name="vatNumber"' +
-                                _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
-                                " data-autofocus" +
-                                _vm._ssrAttr("value", _vm.value.vatNumber) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressVatNumber",
-                                        "gb",
-                                        "delivery_address.vatNumber"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
+                  _vm._ssrNode(
+                    '<div class="col-12 col-sm-6">',
+                    "</div>",
+                    [
+                      _c("vat-id", {
+                        attrs: {
+                          "is-required": _vm.isInRequiredFields(
+                            "gb",
+                            "delivery_address.vatNumber"
+                          ),
+                          "selected-country-id": _vm.value.countryId,
+                          value: _vm.value.vatNumber || "",
+                          "show-input":
+                            (_vm.isInOptionalFields(
+                              "gb",
+                              "delivery_address.salutation"
+                            ) &&
+                              _vm.value.gender === "company" &&
+                              _vm.isInOptionalFields(
+                                "gb",
+                                "delivery_address.vatNumber"
+                              )) ||
+                            (!_vm.isInOptionalFields(
+                              "gb",
+                              "delivery_address.salutation"
+                            ) &&
+                              _vm.isInOptionalFields(
+                                "gb",
+                                "delivery_address.name1"
+                              ) &&
+                              _vm.isInOptionalFields(
+                                "gb",
+                                "delivery_address.vatNumber"
+                              ))
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.emitInputEvent("vatNumber", $event)
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 2
               )
@@ -45799,6 +45875,135 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/VatId.vue?vue&type=template&id=0df56745&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/VatId.vue?vue&type=template&id=0df56745& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.showInput
+    ? _c(
+        "div",
+        {
+          staticClass: "input-group flex-nowrap",
+          attrs: { "data-model": "vatNumber" }
+        },
+        [
+          _vm.isEU
+            ? _vm._ssrNode(
+                '<div class="input-unit w-auto input-group-prepend">',
+                "</div>",
+                [
+                  _vm._ssrNode(
+                    (_vm.vatCodes.length === 1
+                      ? '<span id="basic-addon1" class="input-group-text h-100 border-0">' +
+                        _vm._ssrEscape(_vm._s(_vm.vatCodes[0])) +
+                        "</span>"
+                      : "<!---->") + " "
+                  ),
+                  _vm.vatCodes.length > 1
+                    ? _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.vatPrefix,
+                              expression: "vatPrefix"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.vatPrefix = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.vatCodes, function(vatCode, index) {
+                          return _c(
+                            "option",
+                            { key: index, domProps: { value: vatCode } },
+                            [_vm._v(_vm._s(vatCode))]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e()
+                ],
+                2
+              )
+            : _vm._e(),
+          _vm._ssrNode(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "validate",
+                  rawName: "v-validate:text",
+                  value: _vm.isRequired,
+                  expression: "isRequired",
+                  arg: "text"
+                }
+              ],
+              staticClass: "input-unit flex-fill w-auto"
+            },
+            [
+              _vm._ssrNode(
+                '<input aria-describedby="basic-addon1" type="text" name="vatNumber"' +
+                  _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
+                  ' data-autofocus data-testing="vat-id"' +
+                  _vm._ssrAttr("value", _vm.vatNumber) +
+                  "> <label" +
+                  _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
+                  ">" +
+                  _vm._ssrEscape(
+                    "\n            " +
+                      _vm._s(
+                        _vm.transformTranslation(
+                          "Ceres::Template.addressVatNumber",
+                          "de",
+                          "billing_address.vatNumber"
+                        )
+                      ) +
+                      "\n        "
+                  ) +
+                  "</label>"
+              )
+            ]
+          )
+        ],
+        2
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&":
 /*!****************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33& ***!
@@ -46602,13 +46807,38 @@ var render = function() {
                             index === _vm.activeGraduationIndex
                               ? _c("i", {
                                   staticClass:
-                                    "fa fa-lg fa-check-circle-o ml-1 text-appearance",
+                                    "fa fa-lg fa-check-circle-o text-appearance",
                                   attrs: { "aria-hidden": "true" }
                                 })
                               : _vm._e()
                           ])
                         ],
                         2
+                      ),
+                      _vm._ssrNode(
+                        " " +
+                          (_vm.showBasePrice
+                            ? "<td" +
+                              _vm._ssrClass(
+                                "graduated-base-price pl-3 d-none d-xl-block",
+                                _vm.paddingClasses
+                              ) +
+                              _vm._ssrStyle(
+                                null,
+                                _vm.paddingInlineStyles,
+                                null
+                              ) +
+                              ">" +
+                              _vm._ssrEscape(
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.singleItemGraduatedBasePrice",
+                                    { price: price.basePrice }
+                                  )
+                                )
+                              ) +
+                              "</td>"
+                            : "<!---->")
                       )
                     ],
                     2
@@ -46616,22 +46846,20 @@ var render = function() {
                   _vm._ssrNode(
                     " " +
                       (_vm.showBasePrice
-                        ? '<tr><td colspan="2"' +
-                          _vm._ssrClass(
-                            "graduated-base-price",
-                            _vm.paddingClasses
-                          ) +
+                        ? '<tr class="graduated-base-price d-xl-none"><td' +
+                          _vm._ssrClass(null, _vm.paddingClasses) +
+                          _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+                          "></td> <td" +
+                          _vm._ssrClass(null, _vm.paddingClasses) +
                           _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
                           ">" +
                           _vm._ssrEscape(
-                            "(" +
-                              _vm._s(
-                                _vm.$translate(
-                                  "Ceres::Template.singleItemGraduatedBasePrice",
-                                  { price: price.basePrice }
-                                )
-                              ) +
-                              ")"
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.singleItemGraduatedBasePrice",
+                                { price: price.basePrice }
+                              )
+                            )
                           ) +
                           "</td></tr>"
                         : "<!---->")
@@ -47654,6 +47882,10 @@ var render = function() {
       _vm._ssrNode(
         '<input type="text"' +
           _vm._ssrAttr("disabled", _vm.waiting) +
+          _vm._ssrAttr(
+            "aria-label",
+            _vm.$translate("Ceres::Template.itemQuantityInput")
+          ) +
           _vm._ssrAttr("value", _vm.displayValue) +
           ' class="qty-input text-center"> '
       ),
@@ -50321,10 +50553,18 @@ var render = function() {
         '<div class="input-group"><div class="input-group-prepend"><span class="input-group-text">' +
           _vm._ssrEscape(_vm._s(_vm.currency)) +
           '</span></div> <input type="number" placeholder="Min"' +
+          _vm._ssrAttr(
+            "aria-label",
+            _vm.$translate("Ceres::Template.itemFilterPriceMin")
+          ) +
           _vm._ssrAttr("value", _vm.priceMin) +
           ' class="form-control"></div> <div class="input-group"><div class="input-group-prepend"><span class="input-group-text">' +
           _vm._ssrEscape(_vm._s(_vm.currency)) +
           '</span></div> <input type="number" placeholder="Max"' +
+          _vm._ssrAttr(
+            "aria-label",
+            _vm.$translate("Ceres::Template.itemFilterPriceMax")
+          ) +
           _vm._ssrAttr("value", _vm.priceMax) +
           ' class="form-control"></div> '
       ),
@@ -50338,7 +50578,8 @@ var render = function() {
             type: "button",
             "data-toggle": "tooltip",
             "data-placement": "top",
-            title: _vm.$translate("Ceres::Template.itemApply")
+            title: _vm.$translate("Ceres::Template.itemApply"),
+            "aria-label": _vm.$translate("Ceres::Template.itemFilterButton")
           },
           on: {
             click: function($event) {
@@ -67479,7 +67720,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d8869aca"
+  "ad7ed1ba"
   
 )
 
@@ -67546,7 +67787,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "289907f2"
+  "b4d2af2c"
   
 )
 
@@ -67613,7 +67854,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7d8ba932"
+  "9cb9e8ac"
   
 )
 
@@ -67680,7 +67921,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "409077b5"
+  "6346e63d"
   
 )
 
@@ -67747,7 +67988,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0b171e46"
+  "58c512ce"
   
 )
 
@@ -67814,7 +68055,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13e13736"
+  "fc4fee46"
   
 )
 
@@ -67881,7 +68122,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4d79d398"
+  "7a2907e0"
   
 )
 
@@ -67948,7 +68189,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c2514480"
+  "7c350e38"
   
 )
 
@@ -68015,7 +68256,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2f5da18f"
+  "0f070c07"
   
 )
 
@@ -68082,7 +68323,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3e7deecb"
+  "5401d353"
   
 )
 
@@ -68684,7 +68925,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
     },
     isPaymentMethodExcluded: function isPaymentMethodExcluded(paymentMethodId) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isDefined"])(this.selectedShippingProfile.excludedPaymentMethodIds)) {
+      var _this$selectedShippin;
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isDefined"])((_this$selectedShippin = this.selectedShippingProfile) === null || _this$selectedShippin === void 0 ? void 0 : _this$selectedShippin.excludedPaymentMethodIds)) {
         return this.selectedShippingProfile.excludedPaymentMethodIds.includes(paymentMethodId);
       } else {
         return false;
@@ -69361,7 +69604,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "44937a6a"
+  "02c6b353"
   
 )
 
@@ -69427,7 +69670,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "15bb8fd8"
+  "c904d2e8"
   
 )
 
@@ -69476,7 +69719,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "82187438"
+  "2704625c"
   
 )
 
@@ -69543,7 +69786,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8cdfbed6"
+  "5393131d"
   
 )
 
@@ -69609,7 +69852,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4a5f7406"
+  "42e0e275"
   
 )
 
@@ -69657,7 +69900,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "365483f0"
+  "4ce65a80"
   
 )
 
@@ -69706,7 +69949,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6ba6df76"
+  "b72b7404"
   
 )
 
@@ -69773,7 +70016,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "31d0e6be"
+  "623f4746"
   
 )
 
@@ -69840,7 +70083,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c6ace51"
+  "5c47126e"
   
 )
 
@@ -70984,7 +71227,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c4f2b8d0"
+  "59b80a10"
   
 )
 
@@ -71051,7 +71294,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5ad9f3cc"
+  "5e5baa92"
   
 )
 
@@ -71118,7 +71361,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d832afa2"
+  "10e448a7"
   
 )
 
@@ -71185,7 +71428,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c17fefe"
+  "20c8ed09"
   
 )
 
@@ -71255,7 +71498,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "300018d6"
+  "b51c7d64"
   
 )
 
@@ -71322,7 +71565,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "50190108"
+  "bc222ff8"
   
 )
 
@@ -71363,6 +71606,73 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/src/app/components/customer/VatId.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/VatId.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VatId_vue_vue_type_template_id_0df56745___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VatId.vue?vue&type=template&id=0df56745& */ "./resources/js/src/app/components/customer/VatId.vue?vue&type=template&id=0df56745&");
+/* harmony import */ var _VatId_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VatId.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/customer/VatId.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VatId_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VatId_vue_vue_type_template_id_0df56745___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VatId_vue_vue_type_template_id_0df56745___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  "275b38f8"
+  
+)
+
+component.options.__file = "resources/js/src/app/components/customer/VatId.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/customer/VatId.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/VatId.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_VatId_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./VatId.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/VatId.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_VatId_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/customer/VatId.vue?vue&type=template&id=0df56745&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/VatId.vue?vue&type=template&id=0df56745& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VatId_vue_vue_type_template_id_0df56745___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./VatId.vue?vue&type=template&id=0df56745& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/VatId.vue?vue&type=template&id=0df56745&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VatId_vue_vue_type_template_id_0df56745___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VatId_vue_vue_type_template_id_0df56745___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/src/app/components/customer/login/ForgotPassword.vue":
 /*!***************************************************************************!*\
   !*** ./resources/js/src/app/components/customer/login/ForgotPassword.vue ***!
@@ -71389,7 +71699,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bcfbb6e8"
+  "91f3edd8"
   
 )
 
@@ -71456,7 +71766,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "04cd279f"
+  "626edfb2"
   
 )
 
@@ -71523,7 +71833,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14ba12ab"
+  "48d17523"
   
 )
 
@@ -71590,7 +71900,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bfe0d520"
+  "5c40fbe8"
   
 )
 
@@ -71657,7 +71967,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "504c703a"
+  "146952c2"
   
 )
 
@@ -71724,7 +72034,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6d54f6a9"
+  "dfe9359e"
   
 )
 
@@ -71791,7 +72101,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e03ed044"
+  "0cde3856"
   
 )
 
@@ -71858,7 +72168,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14611ac0"
+  "48787d38"
   
 )
 
@@ -71925,7 +72235,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "aa23667e"
+  "0c798d6e"
   
 )
 
@@ -71992,7 +72302,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c5726230"
+  "3749c170"
   
 )
 
@@ -72059,7 +72369,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7d78af4e"
+  "0b136074"
   
 )
 
@@ -72126,7 +72436,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6334d065"
+  "22051646"
   
 )
 
@@ -72193,7 +72503,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "629fc8d3"
+  "6a9f356a"
   
 )
 
@@ -72260,7 +72570,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "dd2aba44"
+  "1d334756"
   
 )
 
@@ -72327,7 +72637,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6c11bcf1"
+  "b655b90e"
   
 )
 
@@ -72394,7 +72704,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "33af2d91"
+  "adbe53ee"
   
 )
 
@@ -72461,7 +72771,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8c478c3e"
+  "b1afb72e"
   
 )
 
@@ -72528,7 +72838,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "180f59dc"
+  "d5e60b58"
   
 )
 
@@ -72595,7 +72905,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "00dc853a"
+  "4e8a79c2"
   
 )
 
@@ -72662,7 +72972,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a2ec1f0"
+  "7903ae78"
   
 )
 
@@ -72729,7 +73039,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0197d352"
+  "ea068a62"
   
 )
 
@@ -72796,7 +73106,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "074eadee"
+  "bd5cbf14"
   
 )
 
@@ -72863,7 +73173,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "67815de0"
+  "1b143d98"
   
 )
 
@@ -72930,7 +73240,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "07bb1a49"
+  "407e80d1"
   
 )
 
@@ -72997,7 +73307,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6b54bb16"
+  "875a0626"
   
 )
 
@@ -73064,7 +73374,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66d4cb8c"
+  "ca27a3f8"
   
 )
 
@@ -73131,7 +73441,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2b711ed0"
+  "f57fc5e0"
   
 )
 
@@ -73198,7 +73508,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "268a0ee6"
+  "755efb6e"
   
 )
 
@@ -73265,7 +73575,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0a368290"
+  "2cecf118"
   
 )
 
@@ -73332,7 +73642,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7fa17980"
+  "499ce208"
   
 )
 
@@ -73399,7 +73709,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0c1e5e98"
+  "0f74b53c"
   
 )
 
@@ -73466,7 +73776,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ccce886"
+  "6f0b3435"
   
 )
 
@@ -73533,7 +73843,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9f13f20a"
+  "4b6eb373"
   
 )
 
@@ -73600,7 +73910,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2b2ccd3c"
+  "216ca078"
   
 )
 
@@ -73667,7 +73977,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0d900dea"
+  "29a65993"
   
 )
 
@@ -73734,7 +74044,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9d577da8"
+  "70d3afa4"
   
 )
 
@@ -73801,7 +74111,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5e843019"
+  "740814a1"
   
 )
 
@@ -74398,7 +74708,9 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
         paymentMethodId: this.paymentMethod
       }).done(function (response) {
         // TODO: research - if response should be false, it returns an object
-        _this2.changePossible = _typeof(response) === "object" ? response.data : response;
+        _this2.changePossible = _typeof(response) === "object" ? response.data : response; // Reload page because the order amounts could have changed because of payment method rebates or surcharges
+
+        window.location.reload();
       }).fail(function () {
         _this2.changePossible = false;
       });
@@ -74510,7 +74822,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66fb8169"
+  "c082301e"
   
 )
 
@@ -75370,7 +75682,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "411323d8"
+  "54e8168c"
   
 )
 
@@ -75437,7 +75749,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3c54499f"
+  "53e1b3b2"
   
 )
 
@@ -75504,7 +75816,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "53d22138"
+  "793a4c28"
   
 )
 
@@ -75571,7 +75883,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78b5c717"
+  "9d0da4c2"
   
 )
 
@@ -75638,7 +75950,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2d4804fd"
+  "43bddf85"
   
 )
 
@@ -75705,7 +76017,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7a0610f9"
+  "c68700fe"
   
 )
 
@@ -75772,7 +76084,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "93109574"
+  "2ae1d084"
   
 )
 
@@ -75839,7 +76151,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "401e6012"
+  "4bbd5acc"
   
 )
 
@@ -75906,7 +76218,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7ccc8f7e"
+  "0b45c26e"
   
 )
 
@@ -75973,7 +76285,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7aab7022"
+  "0924a312"
   
 )
 
@@ -76040,7 +76352,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "330edf1f"
+  "217f74d2"
   
 )
 
@@ -76107,7 +76419,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fb2471f6"
+  "b10390e6"
   
 )
 
@@ -76174,7 +76486,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d7941e7c"
+  "09a7993a"
   
 )
 
@@ -76241,7 +76553,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "dfd1ab4a"
+  "4f9698d3"
   
 )
 
@@ -76308,7 +76620,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "09e23d06"
+  "2ef2ad8e"
   
 )
 
@@ -76375,7 +76687,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5d82ce59"
+  "2d691a5e"
   
 )
 
@@ -76442,7 +76754,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14fd73b9"
+  "63d26041"
   
 )
 
@@ -76606,13 +76918,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 
 
+/**
+ * @deprecated since version 5.0.29
+ */
+
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.directive("truncate-tooltip", {
   inserted: function inserted(element) {
     var tooltip = function tooltip() {
       var outer = element.offsetWidth;
       var inner = element.children[0].scrollWidth;
+      var title = element.children[0].title;
 
-      if (inner > outer) {
+      if (title) {
+        element.children[0].dataset.originalTitle = title;
+      } else if (inner > outer) {
         element.children[0].dataset.originalTitle = element.children[0].text;
       } else {
         element.children[0].dataset.originalTitle = "";
@@ -77253,7 +77572,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var toggleTooltip = function toggleTooltip(el, disable) {
-  $(el).tooltip(disable ? "disable" : "enable");
+  if (disable) {
+    $(el).tooltip("disable");
+  } else {
+    // reinitialize tooltip, to update the title value
+    $(el).tooltip("dispose");
+    $(el).tooltip();
+  }
 };
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("tooltip", {
@@ -77300,7 +77625,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["212", "errorVatServiceFallback"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"]]);
 /* harmony default export */ __webpack_exports__["default"] = (exceptionMap);
 
 /***/ }),
@@ -81297,12 +81622,9 @@ var TranslationService = function ($) {
       var namespace = match[1];
       var group = match[2];
 
-      if (_translations.hasOwnProperty(namespace)) {
-        console.warn("Cannot override namespace \"" + namespace + "\"");
-        continue;
+      if (!_translations.hasOwnProperty(namespace)) {
+        _translations[namespace] = {};
       }
-
-      _translations[namespace] = {};
 
       if (_translations[namespace].hasOwnProperty(group)) {
         console.warn("Cannot override group \"" + namespace + "::" + group);
@@ -83570,7 +83892,7 @@ var actions = {
         var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_16__["serializeForm"])(event.target);
         var formOptions = readFormOptions(event.target, formData);
         sendFile(event, recaptchaResponse).then(function (response) {
-          resetRecaptcha();
+          resetRecaptcha(recaptchaEl);
           Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_18__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
             ApiService.post("/rest/io/customer/contact/mail", {
               data: formData,
@@ -83621,7 +83943,7 @@ var actions = {
           fields: fieldNames.join(", ")
         }));
       });
-    }).catch(function () {
+    }).catch(function (error) {
       _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
     });
   }
@@ -85133,60 +85455,66 @@ var actions = {
         dispatch = _ref.dispatch;
     // register a nested module for the main item
     dispatch("registerItem", variation.documents[0]);
-    commit("setMainItemId", variation.documents[0].data.item.id); // rest call for sets if set comps are set
+    commit("setMainItemId", variation.documents[0].data.item.id);
+    var setComponents = variation.documents[0].data.setComponents;
 
-    var setComponentIds = (variation.documents[0].data.setComponents || []).map(function (component) {
-      return component.defaultVariationId;
-    });
-
-    if (!App.isShopBuilder && setComponentIds && setComponentIds.length) {
+    if (!App.isShopBuilder && setComponents && setComponents.length) {
       commit("setIsItemSet", true);
       commit("setItemSetId", variation.documents[0].data.item.id);
-      commit("setIsSetLoading", true);
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_12__["default"].get("/rest/io/variations", {
-        variationIds: setComponentIds,
-        resultFieldTemplate: "SingleItem",
-        setPriceOnly: true
-      }).done(function (components) {
-        commit("setIsSetLoading", false);
-
-        var _iterator = _createForOfIteratorHelper(components.documents),
-            _step;
-
-        try {
-          var _loop = function _loop() {
-            var component = _step.value;
-            var itemId = component.data.item.id;
-            var variationId = component.data.variation.id;
-            var setComponentMeta = variation.documents[0].data.setComponents.find(function (setComponent) {
-              return setComponent.itemId === itemId;
-            });
-
-            if (setComponentMeta.minimumOrderQuantity <= 0) {
-              setComponentMeta.minimumOrderQuantity = 1;
-            }
-
-            component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
-            component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity; // register a module for every set item
-
-            dispatch("registerItem", component);
-            commit("".concat(itemId, "/setPleaseSelectVariationId"), variationId);
-            commit("addComponent", itemId);
-          };
-
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            _loop();
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-      });
     }
   },
-  registerItem: function registerItem(_ref2, item) {
-    var commit = _ref2.commit;
+  initSetComponents: function initSetComponents(_ref2) {
+    var commit = _ref2.commit,
+        dispatch = _ref2.dispatch,
+        state = _ref2.state,
+        getters = _ref2.getters;
+    var setComponentIds = (getters.currentItemVariation.setComponents || []).map(function (component) {
+      return component.defaultVariationId;
+    });
+    commit("setIsSetLoading", true);
+    _services_ApiService__WEBPACK_IMPORTED_MODULE_12__["default"].get("/rest/io/variations", {
+      variationIds: setComponentIds,
+      resultFieldTemplate: "SingleItem",
+      setPriceOnly: true
+    }).done(function (components) {
+      commit("setIsSetLoading", false);
+
+      var _iterator = _createForOfIteratorHelper(components.documents),
+          _step;
+
+      try {
+        var _loop = function _loop() {
+          var component = _step.value;
+          var itemId = component.data.item.id;
+          var variationId = component.data.variation.id;
+          var setComponentMeta = getters.currentItemVariation.setComponents.find(function (setComponent) {
+            return setComponent.itemId === itemId;
+          });
+
+          if (setComponentMeta.minimumOrderQuantity <= 0) {
+            setComponentMeta.minimumOrderQuantity = 1;
+          }
+
+          component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
+          component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity; // register a module for every set item
+
+          dispatch("registerItem", component);
+          commit("".concat(itemId, "/setPleaseSelectVariationId"), variationId);
+          commit("addComponent", itemId);
+        };
+
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          _loop();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    });
+  },
+  registerItem: function registerItem(_ref3, item) {
+    var commit = _ref3.commit;
     var itemId = item.data.item.id; // extend the structur of the object to match the old objects
 
     var extendedData = {

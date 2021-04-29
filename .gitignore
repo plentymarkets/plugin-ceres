@@ -1,8 +1,9 @@
 .idea/
+.legacySyncTrace
+.vscode
 *.iml
-node_modules
 home.html
-sftp-config.json
+node_modules
 resources/css/*.css
 resources/css/*.css.map
-.vscode
+sftp-config.json

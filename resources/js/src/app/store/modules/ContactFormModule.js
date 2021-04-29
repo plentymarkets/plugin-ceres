@@ -148,7 +148,7 @@ const actions =
 
                             sendFile(event, recaptchaResponse).then((response) =>
                             {
-                                resetRecaptcha();
+                                resetRecaptcha(recaptchaEl);
                                 executeReCaptcha(event.target).then((recaptchaToken2) =>
                                 {
                                     ApiService.post(
@@ -206,7 +206,7 @@ const actions =
                             );
                         });
                 })
-                .catch(() =>
+                .catch((error) =>
                 {
                     NotificationService.error(
                         TranslationService.translate("Ceres::Template.contactReCaptchaFailed")

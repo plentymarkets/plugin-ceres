@@ -86,7 +86,7 @@
                                                 {% endif %}
                                             </a>
 
-                                            <basket-preview :show-net-prices="{{ showNetPrices | json_encode }}">
+                                            <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ showNetPrices | json_encode }}">
                                                 <template #before-basket-item>
                                                     {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
                                                 </template>

@@ -180,7 +180,7 @@
                                     {% endif %}
                                 </a>
 
-                                <basket-preview :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
+                                <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
                                     <template #before-basket-item>
                                         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
                                     </template>

@@ -39,7 +39,7 @@ export default {
     {
         createScript()
         {
-            if (!this.apiKey)
+            if (!this.apiKey || window.grecaptcha)
             {
                 return Promise.resolve();
             }

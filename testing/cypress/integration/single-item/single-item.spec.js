@@ -34,12 +34,12 @@ context("Single Item", () =>
 
     it("should check if graduated prices are displayed", () =>
     {
-        cy.get(".graduated-price").should("contain", "1.800,00");
+        cy.get(".graduated-price").should("contain", "0,50");
     });
 
     it("should check if graduated base prices are displayed", () =>
     {
-        cy.get(".graduated-base-price").should("contain", "720,00");
+        cy.get(".graduated-base-price").should("contain", "0,20");
     });
 
     it("should check for lowest breadcrumb level", () =>
@@ -75,20 +75,21 @@ context("Single Item", () =>
 
     it("should display scale prices and apply marker on quantity change", () =>
     {
-        cy.getByTestingAttr("quantity-btn-increase").scrollIntoView().click().click().click().click();
+        cy.scrollTo(0, 300);
+        cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
 
-        cy.get(".graduated-prices-table").children().first().children().last().children().first().should("have.class", "fa-check-circle-o");
+        cy.get(".graduated-prices-table").children().first().children().eq(1).children().first().should("have.class", "fa-check-circle-o");
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click().click();
 
-        cy.get(".graduated-prices-table").children().eq(2).children().last().children().first().should("have.class", "fa-check-circle-o");
+        cy.get(".graduated-prices-table").children().eq(2).children().eq(1).children().first().should("have.class", "fa-check-circle-o");
 
     });
 
-    it("should display scaled price after quantity change", () =>
+    it.only("should display scaled price after quantity change", () =>
     {
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
-        cy.get(".price").should("contain", "1.800,00");
+        cy.get(".price").should("contain", "0,50");
     });
 
     it("should display tags and open in search on click", () =>
