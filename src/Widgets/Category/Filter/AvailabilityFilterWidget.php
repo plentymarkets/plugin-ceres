@@ -9,10 +9,10 @@ class AvailabilityFilterWidget extends FilterBaseWidget
 {
     /** @inheritDoc */
     protected $allowedFacetTypes = ["availability"];
-    
+
     /** @inheritDoc */
     protected $className = "availability";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class AvailabilityFilterWidget extends FilterBaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(800)
+                                ->withSearchKeyWords([
+                                    "filter", "availability", "verfügbar", "verfügbarkeit"
+                                ])
                                 ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

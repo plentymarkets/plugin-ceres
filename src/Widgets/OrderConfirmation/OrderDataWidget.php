@@ -12,7 +12,7 @@ class OrderDataWidget extends OrderConfirmationBaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.OrderConfirmation.OrderDataWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class OrderDataWidget extends OrderConfirmationBaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::ORDER_CONFIRMATION)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "order", "data", "bestelldaten", "bestellinformationen"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

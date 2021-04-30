@@ -9,10 +9,10 @@ class AttributesPropertiesCharacteristicsFilterWidget extends FilterBaseWidget
 {
     /** @inheritDoc */
     protected $allowedFacetTypes = ["dynamic"];
-    
+
     /** @inheritDoc */
     protected $className = "attributes-properties-characteristics";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class AttributesPropertiesCharacteristicsFilterWidget extends FilterBaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(700)
+                                ->withSearchKeyWords([
+                                    "filter", "attribut", "atrribute", "einstellung", "property", "properties"
+                                ])
                                 ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

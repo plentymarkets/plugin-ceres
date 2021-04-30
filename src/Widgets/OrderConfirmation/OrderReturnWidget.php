@@ -13,7 +13,7 @@ class OrderReturnWidget extends OrderConfirmationBaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.OrderConfirmation.OrderReturnWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class OrderReturnWidget extends OrderConfirmationBaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::ORDER_CONFIRMATION)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "order", "bestellung", "retoure"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

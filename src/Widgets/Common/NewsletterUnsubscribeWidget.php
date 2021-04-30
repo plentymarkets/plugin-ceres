@@ -11,7 +11,7 @@ class NewsletterUnsubscribeWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.NewsletterUnsubscribeWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -22,9 +22,12 @@ class NewsletterUnsubscribeWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/newsletter-unsubscribe.svg")
             ->withType(WidgetTypes::STATIC)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "newsletter", "unsubscribe", "abbestellen", "kündigen", "cancel"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

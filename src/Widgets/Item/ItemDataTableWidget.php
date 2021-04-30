@@ -13,7 +13,7 @@ class ItemDataTableWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.ItemDataTableWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class ItemDataTableWidget extends BaseWidget
             ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "table", "tabelle"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

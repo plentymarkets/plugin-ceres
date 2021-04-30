@@ -12,7 +12,7 @@ class TitleBarWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.TitleBarWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class TitleBarWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(400)
+            ->withSearchKeyWords([
+                "überschrift", "titel"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -41,7 +44,7 @@ class TitleBarWidget extends BaseWidget
 
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

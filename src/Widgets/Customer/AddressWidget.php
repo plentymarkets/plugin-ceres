@@ -13,7 +13,7 @@ class AddressWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Customer.AddressWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class AddressWidget extends BaseWidget
             ->withType(WidgetTypes::CUSTOMER)
             ->withCategory(WidgetCategories::CUSTOMER)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "adresse", "address", "customer", "kunde", "kundendaten"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

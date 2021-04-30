@@ -246,7 +246,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         $consentRepository->registerConsentGroup(
             'payment',
-            'Ceres::Template.consentGroupPayment',
+            'Ceres::Template.consentGroupPaymentLabel',
             [
                 'position' => 200,
                 'description' => 'Ceres::Template.consentGroupPaymentDescription'
@@ -372,7 +372,7 @@ class TemplateServiceProvider extends ServiceProvider
             );
         }
     }
-    
+
     private function registerConfigValues()
     {
         /** @var CeresConfig $ceresConfig */

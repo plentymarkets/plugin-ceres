@@ -1803,7 +1803,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
     },
     isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable() {
-      return (this.isParcelBoxAvailable || this.isPostOfficeAvailable || this.isMyAccount) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+      return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
     isParcelBoxAvailable: function isParcelBoxAvailable(state) {
@@ -38201,7 +38201,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm.isParcelBoxAvailable || _vm.isMyAccount
+                          _vm.isParcelBoxAvailable
                             ? _c(
                                 "option",
                                 {
@@ -38220,7 +38220,7 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm.isPostOfficeAvailable || _vm.isMyAccount
+                          _vm.isPostOfficeAvailable
                             ? _c(
                                 "option",
                                 {
@@ -60290,6 +60290,14 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       default: App.config.addresses.defaultSalutation
     },
+    hasAnyPostOfficePreset: {
+      type: Boolean,
+      default: false
+    },
+    hasAnyParcelBoxPreset: {
+      type: Boolean,
+      default: false
+    },
     paddingClasses: {
       type: String,
       default: null
@@ -60304,6 +60312,17 @@ __webpack_require__.r(__webpack_exports__);
       return state.address.deliveryAddressId;
     }
   }),
+  mounted: function mounted() {
+    if (App.templateType === "my-account") {
+      if (this.hasAnyParcelBoxPreset) {
+        this.$store.commit("setParcelBoxAvailability", true);
+      }
+
+      if (this.hasAnyPostOfficePreset) {
+        this.$store.commit("setPostOfficeAvailability", true);
+      }
+    }
+  },
   methods: {
     /**
      * Update the delivery address
@@ -62791,13 +62810,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 
 
+/**
+ * @deprecated since version 5.0.29
+ */
+
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.directive("truncate-tooltip", {
   inserted: function inserted(element) {
     var tooltip = function tooltip() {
       var outer = element.offsetWidth;
       var inner = element.children[0].scrollWidth;
+      var title = element.children[0].title;
 
-      if (inner > outer) {
+      if (title) {
+        element.children[0].dataset.originalTitle = title;
+      } else if (inner > outer) {
         element.children[0].dataset.originalTitle = element.children[0].text;
       } else {
         element.children[0].dataset.originalTitle = "";
@@ -66456,7 +66482,9 @@ function CeresMain() {
   }; // init bootstrap tooltips
 
 
-  $("[data-toggle=\"tooltip\"]").tooltip();
+  document.querySelectorAll("[data-toggle=\"tooltip\"]").forEach(function (el) {
+    $(el).tooltip();
+  });
   HeaderCollapse("#countrySettings");
   HeaderCollapse("#currencySelect");
   HeaderCollapse("#searchBox");

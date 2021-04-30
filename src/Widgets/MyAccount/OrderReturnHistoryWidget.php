@@ -14,7 +14,7 @@ class OrderReturnHistoryWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.OrderReturnHistoryWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -26,10 +26,13 @@ class OrderReturnHistoryWidget extends BaseWidget
             ->withType(WidgetTypes::MY_ACCOUNT)
             ->withCategory(WidgetCategories::MY_ACCOUNT)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "order", "return", "history", "retoure", "retourenverlauf"
+            ])
             ->withMaxPerPage(1)
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -58,7 +61,7 @@ class OrderReturnHistoryWidget extends BaseWidget
 
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

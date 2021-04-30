@@ -12,7 +12,7 @@ class ShippingPrivacyCheckWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.ShippingPrivacyCheckWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class ShippingPrivacyCheckWidget extends BaseWidget
             ->withType(WidgetTypes::CHECKOUT)
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "checkout", "bestellvorgang", "bestellung", "shipping", "versand", "privacy"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

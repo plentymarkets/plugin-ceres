@@ -9,7 +9,7 @@
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {% set appearance        = widget.settings.appearance.mobile %}
-{% set basketDetailsData = widget.settings.basketDetailsData.mobile | default(["basket.item.availability"]) %}
+{% set basketDetailsData = widget.settings.basketDetailsData.mobile | default([]) %}
 
 <div class="widget widget-basket widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
