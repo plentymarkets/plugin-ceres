@@ -32,7 +32,7 @@
 {% if manufacturer | length > 0 %}
                 "manufacturer"  : {
                     "@type"         : "Organization",
-                    "name"          : "{{ itemData.item.manufacturer.externalName }}",
+                    "name"          : "{{ manufacturer }}"
                 },
 {%  endif %}
 {% if brand | length  > 0 %}

@@ -138,8 +138,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         }
 
         $manufacturerMapping = $this->ceresConfig->seo->manufacturerMapping;
-        if ($manufacturerMapping ==2) {
-            $this->manufacturer = $itemData['item']['manufacturer']['externalName'];
+        if ($manufacturerMapping == 2) {
+            $this->manufacturer = $itemData['item']['manufacturer']['externalName'] ?? '';
         }
 
         $this->isItemSet = $params['isItemSet'];

@@ -37,13 +37,13 @@ class SeoConfig
     ];
 
     private static $brandOptions = [
-        "brandNotSet"               => "",
+        "brandNotSet"               => "1",
         "manufacturerExtern"        => "2",
         "brandSetPropertyOnArticle" => "3",
     ];
 
     private static $manufacturerOptions = [
-        "manufacturerNotSet"        => "",
+        "manufacturerNotSet"        => "1",
         "manufacturerExtern"        => "2",
     ];
 

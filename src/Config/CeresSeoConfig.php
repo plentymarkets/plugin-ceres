@@ -14,17 +14,17 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 class CeresSeoConfig extends PluginConfig
 {
     /**
-     * @var string $brandMapping
+     * @var string $brandMapping Selected option value for brand in rich snippet.
      */
     public $brandMapping;
 
     /**
-     * @var string $brandMappingId
+     * @var string $brandMappingId Property ID for brand rich snippet.
      */
     public $brandMappingId;
 
     /**
-     * @var string $manufacturerMapping
+     * @var string $manufacturerMapping Selected option value for manufacturer in rich snippet.
      */
     public $manufacturerMapping;
 
@@ -32,7 +32,7 @@ class CeresSeoConfig extends PluginConfig
     /**
      * @inheritDoc
      */
-    protected function getPluginName() :string
+    protected function getPluginName(): string
     {
         return 'Ceres';
     }
@@ -42,8 +42,8 @@ class CeresSeoConfig extends PluginConfig
      */
     protected function load()
     {
-        $this->brandMapping                         = $this->getTextValue( 'brand.mapping.brand' , '' );
-        $this->brandMappingId                       = $this->getTextValue( 'brand.mapping.brandID', '');
-        $this->manufacturerMapping                  = $this->getTextValue( 'manufacturer.mapping.manufacturer', '');
+        $this->brandMapping = $this->getTextValue('brand.mapping.brand', '1');
+        $this->brandMappingId = $this->getTextValue('brand.mapping.brandID', '');
+        $this->manufacturerMapping = $this->getTextValue('manufacturer.mapping.manufacturer', '2');
     }
 }

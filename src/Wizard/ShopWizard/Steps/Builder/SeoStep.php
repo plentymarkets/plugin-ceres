@@ -215,9 +215,9 @@ class SeoStep extends Step
             "form"        => [
                 "seo_brand" => [
                     "type"         => "select",
-                    "defaultValue" => "",
+                    "defaultValue" => "1",
                     "options"      => [
-                        "name" => "Wizard.brandNotSet",
+                        "name" => "Wizard.brandChoose",
                         "listBoxValues" => $options,
                     ]
                 ],
@@ -247,9 +247,9 @@ class SeoStep extends Step
             "form"        => [
                 "seo_manufacturer" => [
                     "type"         => "select",
-                    "defaultValue" => "",
+                    "defaultValue" => "2",
                     "options"      => [
-                        "name" => "Wizard.manufacturerNotSet",
+                        "name" => "Wizard.manufacturerChoose",
                         "listBoxValues" => $options,
                     ]
                 ]

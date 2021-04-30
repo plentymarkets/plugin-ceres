@@ -4346,7 +4346,7 @@
                                     "defaultValue": "",
                                     "selectBoxValues": [
                                         {
-                                            "value": "",
+                                            "value": "1",
                                             "caption": "Config.brandNotSet",
                                             "position": 0
                                         },
@@ -4384,10 +4384,10 @@
                                 "required": false,
                                 "label": "Config.manufacturer",
                                 "options": {
-                                    "defaultValue": "",
+                                    "defaultValue": "2",
                                     "selectBoxValues": [
                                         {
-                                            "value": "",
+                                            "value": "1",
                                             "caption": "Config.manufacturerNotSet",
                                             "position": 0
                                         },
