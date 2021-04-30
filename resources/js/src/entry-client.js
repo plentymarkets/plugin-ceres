@@ -23,6 +23,7 @@ window.createApp = (selector) => {
         store.replaceState(window.__INITIAL_STATE__);
     }
 
+    window.vueApp = app;
     window.ceresStore = store;
 
     initListener();
@@ -36,7 +37,6 @@ window.createApp = (selector) => {
     window.dispatchEvent(new CustomEvent("ceresBeforeMount", { store, app }));
 
     app.$mount(selector, true);
-    window.vueApp = app;
 
     initClientStore(store);
 };
