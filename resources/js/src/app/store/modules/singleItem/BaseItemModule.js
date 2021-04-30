@@ -55,7 +55,7 @@ const mutations =
 
 const actions =
     {
-        initVariation({ commit, dispatch, state }, variation)
+        initVariation({ commit, dispatch }, variation)
         {
             // register a nested module for the main item
             if (isNullOrUndefined(state[variation.documents[0].data.item.id]))
@@ -109,7 +109,6 @@ const actions =
 
         registerItem({ commit }, item)
         {
-            console.log("registerModule");
             const itemId = item.data.item.id;
             // extend the structur of the object to match the old objects
             const extendedData = { documents: [item] };
