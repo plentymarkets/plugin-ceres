@@ -10,6 +10,9 @@
 {% set categoryId      = widget.settings.categoryId.mobile %}
 {% set itemListId      = widget.settings.tagId.mobile %}
 {% set itemsPerPage    = widget.settings.itemsPerPage.mobile %}
+{% set itemsPerPageBase = widget.settings.itemsPerPageBase.mobile %}
+{% set itemsPerPageSmall = widget.settings.itemsPerPageSmall.mobile %}
+{% set itemsPerPageMedium = widget.settings.itemsPerPageMedium.mobile %}
 {% set manufacturerId  = widget.settings.manufacturerId.mobile %}
 {% set crossSellingRelationType  = widget.settings.crossSellingRelationType.mobile %}
 
@@ -24,6 +27,22 @@
 {% elseif itemsPerPage < 1 %}
     {% set itemsPerPage = 1 %}
 {% endif %}
+{% if itemsPerPageBase > 4 %}
+    {% set itemsPerPageBase = 4 %}
+{% elseif itemsPerPageBase is empty or itemsPerPageBase < 1 %}
+    {% set itemsPerPageBase = 1 %}
+{% endif %}
+{% if itemsPerPageSmall > 4 %}
+    {% set itemsPerPageSmall = 4 %}
+{% elseif itemsPerPageSmall < 1 %}
+    {% set itemsPerPageSmall = 1 %}
+{% endif %}
+{% if itemsPerPageMedium > 4 %}
+    {% set itemsPerPageMedium = 4 %}
+{% elseif itemsPerPageMedium < 1 %}
+    {% set itemsPerPageMedium = 1 %}
+{% endif %}
+
 
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
@@ -69,7 +88,7 @@
             {# render vue component for last seen items #}
             <intersect>
                 <last-seen-item-list
-                    :items-per-page="{{ itemsPerPage }}"
+                    :items-per-page="{{ itemsPerPage }}" :items-per-page-base="{{ itemsPerPageBase }}" :items-per-page-small="{{ itemsPerPageSmall }}" :items-per-page-medium="{{ itemsPerPageMedium }}"
                     :max-items="{{ maxItems }}"
                     {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
                     {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}
@@ -125,7 +144,7 @@
                 {% endif %}
                 {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isItem() == '1'") }}
                     <intersect>
-                        <carousel :items-per-page="{{ itemsPerPage }}">
+                        <carousel :items-per-page="{{ itemsPerPage }}" :items-per-page-base="{{ itemsPerPageBase }}" :items-per-page-small="{{ itemsPerPageSmall }}" :items-per-page-medium="{{ itemsPerPageMedium }}">
                             {{ Twig.for("item", "itemList.documents") }}
                                 <template slot="items">
                                     <category-item

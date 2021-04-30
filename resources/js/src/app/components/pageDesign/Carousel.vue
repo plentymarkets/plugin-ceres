@@ -14,6 +14,7 @@
 
 <script>
 import "owl.carousel";
+import { isNullOrUndefined } from "../../helper/utils";
 
 export default {
     components: {
@@ -27,6 +28,19 @@ export default {
         itemsPerPage: {
             type: Number,
             default: 4
+        },
+
+        itemsPerPageMedium: {
+            type: Number
+        },
+
+        itemsPerPageSmall: {
+            type: Number
+        },
+
+        itemsPerPageBase: {
+            type: Number,
+            default: 1
         }
     },
 
@@ -82,13 +96,13 @@ export default {
                     items: this.itemsPerPage,
                     responsive: {
                         0: {
-                            items: 1
+                            items: this.itemsPerPageBase
                         },
                         576: {
-                            items: this.itemsPerPage > 1 ? 2 : 1
+                            items: isNullOrUndefined(this.itemsPerPageSmall) ? (this.itemsPerPage > 1 ? 2 : 1) : this.itemsPerPageSmall
                         },
                         768: {
-                            items: this.itemsPerPage > 3 ? 3 : this.itemsPerPage
+                            items: isNullOrUndefined(this.itemsPerPageMedium) ? (this.itemsPerPage > 3 ? 3 : this.itemsPerPage) : this.itemsPerPageMedium
                         },
                         992: {
                             items: this.itemsPerPage

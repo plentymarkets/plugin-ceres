@@ -5,7 +5,7 @@
         </div>
 
         <div class="col-12">
-            <carousel v-if="items && items.length > 0" :items-per-page="itemsPerPage" ref="carousel">
+            <carousel v-if="items && items.length > 0" :items-per-page="itemsPerPage" :items-per-page-base="itemsPerPageBase" :items-per-page-small="itemsPerPageSmall" :items-per-page-medium="itemsPerPageMedium" ref="carousel">
                 <template slot="items" v-for="item in items">
                     <category-item
                             :key="item.id"
@@ -37,6 +37,19 @@ export default {
         {
             type: Number,
             default: 4
+        },
+
+        itemsPerPageMedium: {
+          type: Number
+        },
+
+        itemsPerPageSmall: {
+          type: Number
+        },
+
+        itemsPerPageBase: {
+          type: Number,
+          default: 1
         },
 
         maxItems:

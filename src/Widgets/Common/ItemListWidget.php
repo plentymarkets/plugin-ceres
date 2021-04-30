@@ -116,6 +116,45 @@ class ItemListWidget extends BaseWidget
             ->withName('Widget.itemListMaxItemsLabel')
             ->withTooltip('Widget.itemListMaxItemsTooltip');
 
+        $settings->createSelect('itemsPerPageBase')
+            ->withDefaultValue(4)
+            ->withName('Widget.itemListItemsPerPageLabelBase')
+            ->withTooltip('Widget.itemListItemsPerPageTooltipBase')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(1, 'Widget.itemListItemsPerPage1')
+                    ->addEntry(2, 'Widget.itemListItemsPerPage2')
+                    ->addEntry(3, 'Widget.itemListItemsPerPage3')
+                    ->addEntry(4, 'Widget.itemListItemsPerPage4')
+                    ->toArray()
+            );
+
+        $settings->createSelect('itemsPerPageSmall')
+            ->withDefaultValue(4)
+            ->withName('Widget.itemListItemsPerPageLabelSmall')
+            ->withTooltip('Widget.itemListItemsPerPageTooltipSmall')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(1, 'Widget.itemListItemsPerPage1')
+                    ->addEntry(2, 'Widget.itemListItemsPerPage2')
+                    ->addEntry(3, 'Widget.itemListItemsPerPage3')
+                    ->addEntry(4, 'Widget.itemListItemsPerPage4')
+                    ->toArray()
+            );
+
+        $settings->createSelect('itemsPerPageMedium')
+            ->withDefaultValue(4)
+            ->withName('Widget.itemListItemsPerPageLabelMedium')
+            ->withTooltip('Widget.itemListItemsPerPageTooltipMedium')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(1, 'Widget.itemListItemsPerPage1')
+                    ->addEntry(2, 'Widget.itemListItemsPerPage2')
+                    ->addEntry(3, 'Widget.itemListItemsPerPage3')
+                    ->addEntry(4, 'Widget.itemListItemsPerPage4')
+                    ->toArray()
+            );
+
         $settings->createSelect('itemsPerPage')
             ->withDefaultValue(4)
             ->withName('Widget.itemListItemsPerPageLabel')
