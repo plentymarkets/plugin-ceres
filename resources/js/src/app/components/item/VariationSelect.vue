@@ -83,7 +83,7 @@
             <!-- /units -->
         </div>
 
-        <div v-else>
+        <div v-else class="row">
             <slot></slot>
         </div>
     </div>
