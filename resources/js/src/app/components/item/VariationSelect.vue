@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div v-if="attributes.length || (possibleUnitCombinationIds.length > 1 && isContentVisible)" class="row">
-            <div class="col-12 variation-select" v-for="attribute in attributes">
+    <div class="row">
+        <template v-if="attributes.length || (possibleUnitCombinationIds.length > 1 && isContentVisible)">
+            <div class="col-12 variation-select" v-for="(attribute, index) in attributes" :key="index">
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
                     <select :id="'custom-select_' + attribute.name" class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)" data-testing="variation-select-dropdown">
@@ -12,7 +12,8 @@
                         <option
                                 v-for="value in attribute.values"
                                 :value="value.attributeValueId"
-                                :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]">
+                                :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]"
+                                :key="value.attributeValueId">
                             <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true)">
                                 {{ value.name }}
                             </template>
@@ -52,7 +53,8 @@
                              v-for="value in attribute.values"
                              @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
                              :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true) }"
-                             v-tooltip="true" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getTooltip(attribute, value)">
+                             v-tooltip="true" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getTooltip(attribute, value)"
+                             :key="value.attributeValueId">
                             <span class="mx-3" v-if="attribute.type === 'box'">{{ value.name }}</span>
                             <img class="p-1" v-else :src="value.imageUrl" :alt="value.name">
                         </div>
@@ -68,7 +70,8 @@
                         <option
                                 v-for="unitCombinationId in possibleUnitCombinationIds"
                                 :value="unitCombinationId"
-                                :selected="parseInt(unitCombinationId) === selectedUnit">
+                                :selected="parseInt(unitCombinationId) === selectedUnit"
+                                :key="unitCombinationId">
                             <template v-if="isUnitSelectionValid(unitCombinationId)">
                                 {{ possibleUnits[unitCombinationId] }}
                             </template>
@@ -81,11 +84,11 @@
                 </div>
             </div>
             <!-- /units -->
-        </div>
+        </template>
 
-        <div v-else class="row">
+        <template v-else>
             <slot></slot>
-        </div>
+        </template>
     </div>
 </template>
 
