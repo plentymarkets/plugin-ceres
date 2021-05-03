@@ -66,7 +66,6 @@ export default {
     mounted()
     {
         // TODO move out of here because of lazy hydration
-        console.log("mnt country select");
         removeUrlParam("openBasketPreview");
     },
 
