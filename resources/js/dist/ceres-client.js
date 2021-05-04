@@ -74781,7 +74781,9 @@ var actions = {
         itemId: itemId,
         afterKey: afterKey
       }).done(function (response) {
-        commit("addItemVariations", response.variations);
+        if (response.variations && response.variations.length) {
+          commit("addItemVariations", response.variations);
+        }
 
         if (response.afterKey) {
           dispatch("fetchVariations", {

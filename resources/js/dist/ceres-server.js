@@ -6460,6 +6460,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "graduated-prices",
   props: {
@@ -9194,6 +9196,9 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//
+//
+//
 //
 //
 //
@@ -14057,7 +14062,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })), Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(["getCountryName"])),
   mounted: function mounted() {
     // TODO move out of here because of lazy hydration
-    console.log("mnt country select");
     Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_6__["removeUrlParam"])("openBasketPreview");
   },
   methods: {
@@ -46767,62 +46771,109 @@ var render = function() {
             '<table class="graduated-prices-table text-muted">',
             "</table>",
             [
-              _vm._l(_vm.graduatedPrices, function(price, index) {
-                return [
-                  _vm._ssrNode(
-                    "<tr>",
-                    "</tr>",
-                    [
+              _vm._ssrNode(
+                "<tbody>",
+                "</tbody>",
+                [
+                  _vm._l(_vm.graduatedPrices, function(price, index) {
+                    return [
                       _vm._ssrNode(
-                        "<td" +
-                          _vm._ssrClass(null, _vm.paddingClasses) +
-                          _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                          ">" +
-                          _vm._ssrEscape(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.singleItemMinimumQuantity"
-                              )
-                            ) +
-                              " " +
-                              _vm._s(price.minimumOrderQuantity)
-                          ) +
-                          "</td> "
-                      ),
-                      _vm._ssrNode(
-                        "<td" +
-                          _vm._ssrClass("graduated-price", _vm.paddingClasses) +
-                          _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                          ">",
-                        "</td>",
+                        "<tr>",
+                        "</tr>",
                         [
                           _vm._ssrNode(
-                            _vm._ssrEscape(
-                              "\n                    " +
-                                _vm._s(price.unitPrice.formatted) +
-                                "\n                    "
-                            )
+                            "<td" +
+                              _vm._ssrClass(null, _vm.paddingClasses) +
+                              _vm._ssrStyle(
+                                null,
+                                _vm.paddingInlineStyles,
+                                null
+                              ) +
+                              ">" +
+                              _vm._ssrEscape(
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.singleItemMinimumQuantity"
+                                  )
+                                ) +
+                                  " " +
+                                  _vm._s(price.minimumOrderQuantity)
+                              ) +
+                              "</td> "
                           ),
-                          _c("transition", { attrs: { name: "fade" } }, [
-                            index === _vm.activeGraduationIndex
-                              ? _c("i", {
-                                  staticClass:
-                                    "fa fa-lg fa-check-circle-o text-appearance",
-                                  attrs: { "aria-hidden": "true" }
-                                })
-                              : _vm._e()
-                          ])
+                          _vm._ssrNode(
+                            "<td" +
+                              _vm._ssrClass(
+                                "graduated-price",
+                                _vm.paddingClasses
+                              ) +
+                              _vm._ssrStyle(
+                                null,
+                                _vm.paddingInlineStyles,
+                                null
+                              ) +
+                              ">",
+                            "</td>",
+                            [
+                              _vm._ssrNode(
+                                _vm._ssrEscape(
+                                  "\n                        " +
+                                    _vm._s(price.unitPrice.formatted) +
+                                    "\n                        "
+                                )
+                              ),
+                              _c("transition", { attrs: { name: "fade" } }, [
+                                index === _vm.activeGraduationIndex
+                                  ? _c("i", {
+                                      staticClass:
+                                        "fa fa-lg fa-check-circle-o text-appearance",
+                                      attrs: { "aria-hidden": "true" }
+                                    })
+                                  : _vm._e()
+                              ])
+                            ],
+                            2
+                          ),
+                          _vm._ssrNode(
+                            " " +
+                              (_vm.showBasePrice
+                                ? "<td" +
+                                  _vm._ssrClass(
+                                    "graduated-base-price pl-3 d-none d-xl-block",
+                                    _vm.paddingClasses
+                                  ) +
+                                  _vm._ssrStyle(
+                                    null,
+                                    _vm.paddingInlineStyles,
+                                    null
+                                  ) +
+                                  ">" +
+                                  _vm._ssrEscape(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemGraduatedBasePrice",
+                                        { price: price.basePrice }
+                                      )
+                                    )
+                                  ) +
+                                  "</td>"
+                                : "<!---->")
+                          )
                         ],
                         2
                       ),
                       _vm._ssrNode(
                         " " +
                           (_vm.showBasePrice
-                            ? "<td" +
-                              _vm._ssrClass(
-                                "graduated-base-price pl-3 d-none d-xl-block",
-                                _vm.paddingClasses
+                            ? '<tr class="graduated-base-price d-xl-none"><td' +
+                              _vm._ssrClass(null, _vm.paddingClasses) +
+                              _vm._ssrStyle(
+                                null,
+                                _vm.paddingInlineStyles,
+                                null
                               ) +
+                              "></td> <td" +
+                              _vm._ssrClass(null, _vm.paddingClasses) +
                               _vm._ssrStyle(
                                 null,
                                 _vm.paddingInlineStyles,
@@ -46837,37 +46888,15 @@ var render = function() {
                                   )
                                 )
                               ) +
-                              "</td>"
+                              "</td></tr>"
                             : "<!---->")
                       )
-                    ],
-                    2
-                  ),
-                  _vm._ssrNode(
-                    " " +
-                      (_vm.showBasePrice
-                        ? '<tr class="graduated-base-price d-xl-none"><td' +
-                          _vm._ssrClass(null, _vm.paddingClasses) +
-                          _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                          "></td> <td" +
-                          _vm._ssrClass(null, _vm.paddingClasses) +
-                          _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                          ">" +
-                          _vm._ssrEscape(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.singleItemGraduatedBasePrice",
-                                { price: price.basePrice }
-                              )
-                            )
-                          ) +
-                          "</td></tr>"
-                        : "<!---->")
-                  )
-                ]
-              })
-            ],
-            2
+                    ]
+                  })
+                ],
+                2
+              )
+            ]
           ),
           _vm._ssrNode(" <br>")
         ],
@@ -49262,14 +49291,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.attributes.length ||
-    (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
-      ? _vm._ssrNode(
-          '<div class="row">',
-          "</div>",
-          [
-            _vm._l(_vm.attributes, function(attribute) {
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _vm.attributes.length ||
+      (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
+        ? [
+            _vm._l(_vm.attributes, function(attribute, index) {
               return _vm._ssrNode(
                 '<div class="col-12 variation-select">',
                 "</div>",
@@ -49497,6 +49526,7 @@ var render = function() {
                                         expression: "true"
                                       }
                                     ],
+                                    key: value.attributeValueId,
                                     staticClass: "v-s-box bg-white",
                                     class: {
                                       active:
@@ -49602,11 +49632,11 @@ var render = function() {
                     "</label></div></div>"
                   : "<!---->")
             )
-          ],
-          2
-        )
-      : _vm._ssrNode("<div>", "</div>", [_vm._t("default")], 2)
-  ])
+          ]
+        : [_vm._t("default")]
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -86496,7 +86526,9 @@ var actions = {
         itemId: itemId,
         afterKey: afterKey
       }).done(function (response) {
-        commit("addItemVariations", response.variations);
+        if (response.variations && response.variations.length) {
+          commit("addItemVariations", response.variations);
+        }
 
         if (response.afterKey) {
           dispatch("fetchVariations", {
