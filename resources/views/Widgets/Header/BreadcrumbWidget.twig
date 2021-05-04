@@ -8,7 +8,7 @@
 {% set showOnContentCategory = widget.settings.showOnContentCategory.mobile %}
 {% set showOnLegalPages      = widget.settings.showOnLegalPages.mobile %}
 
-{% if is not isPreview %}
+{% if not isPreview %}
     {% if not showOnHomepage %}
         {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
     {% endif %}
@@ -129,7 +129,7 @@
 </div>
 
 
-{% if is not isPreview %}
+{% if not isPreview %}
     {% if not showOnHomepage %}
         {{ Twig.endif() }}
     {% endif %}
