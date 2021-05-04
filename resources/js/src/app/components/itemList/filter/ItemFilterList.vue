@@ -76,6 +76,7 @@ export default {
     data()
     {
         return {
+            initialSelectedFacets: [],
             initialPriceMin: "",
             initialPriceMax: ""
         };
@@ -102,6 +103,8 @@ export default {
     created()
     {
         this.$store.commit("addFacets", this.facetData);
+
+        this.initSelectedFacets();
     },
 
     methods:
@@ -126,6 +129,8 @@ export default {
             {
                 this.$store.commit("setSelectedFacetsByIds", selectedFacets);
             }
+
+            this.initialSelectedFacets = selectedFacets;
         },
 
         initPriceFacet(urlParams)

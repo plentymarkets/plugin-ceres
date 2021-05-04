@@ -18,14 +18,17 @@ const mutations =
     {
         addFacets(state, facets)
         {
+            const stateFacets = state.facets;
+
             for (const facet of facets)
             {
-                if (!state.facets.find(fac => fac.id === facet.id))
+                if (!stateFacets.find(fac => fac.id === facet.id))
                 {
-                    state.facets.push(facet);
-                    state.selectedFacets = state.selectedFacets.concat(_getSelectedFacetValues(facet));
+                    stateFacets.push(facet);
                 }
             }
+
+            state.facets = stateFacets;
         },
 
         /**
@@ -252,26 +255,6 @@ const getters =
             return selectedFacetIds.filter(facet => facet !== "price");
         }
     };
-
-function _getSelectedFacetValues(facet)
-{
-    if (!facet.values && facet.values.length <= 0)
-    {
-        return [];
-    }
-
-    const selectedFacets = [];
-
-    facet.values.forEach((value) =>
-    {
-        if (value.selected || value.id === "price")
-        {
-            selectedFacets.push(value);
-        }
-    });
-
-    return selectedFacets;
-}
 
 export default
 {
