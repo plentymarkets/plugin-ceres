@@ -49,6 +49,7 @@ export default {
 
     mounted()
     {
+        // TODO
         const urlParams = UrlService.getUrlParams(document.location.search);
 
         this.priceMin = urlParams.priceMin || "";
