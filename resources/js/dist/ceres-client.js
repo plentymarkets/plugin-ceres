@@ -300,6 +300,33 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/ClientOnly.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/common/ClientOnly.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isMounted: false
+    };
+  },
+  render: function render() {
+    if (this.isMounted) {
+      return this.$slots.default ? this.$slots.default : null;
+    }
+  },
+  mounted: function mounted() {
+    this.isMounted = true;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/Intersect.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/common/Intersect.vue?vue&type=script&lang=js& ***!
@@ -36909,69 +36936,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-client-only/dist/vue-client-only.common.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/vue-client-only/dist/vue-client-only.common.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*!
- * vue-client-only v2.0.0
- * (c) 2019-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-
-var index = {
-  name: 'ClientOnly',
-  functional: true,
-  props: {
-    placeholder: String,
-    placeholderTag: {
-      type: String,
-      default: 'div'
-    }
-  },
-  render: function render(h, ref) {
-    var parent = ref.parent;
-    var slots = ref.slots;
-    var props = ref.props;
-
-    var ref$1 = slots();
-    var defaultSlot = ref$1.default; if ( defaultSlot === void 0 ) defaultSlot = [];
-    var placeholderSlot = ref$1.placeholder;
-
-    if (parent._isMounted) {
-      return defaultSlot
-    }
-
-    parent.$once('hook:mounted', function () {
-      parent.$forceUpdate();
-    });
-
-    if (props.placeholderTag && (props.placeholder || placeholderSlot)) {
-      return h(
-        props.placeholderTag,
-        {
-          class: ['client-only-placeholder']
-        },
-        props.placeholder || placeholderSlot
-      )
-    }
-
-    // Return a placeholder element for each child in the default slot
-    // Or if no children return a single placeholder
-    return defaultSlot.length > 0 ? defaultSlot.map(function () { return h(false); }) : h(false)
-  }
-};
-
-module.exports = index;
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js ***!
@@ -58725,8 +58689,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_components_item_SingleItem_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./app/components/item/SingleItem.vue */ "./resources/js/src/app/components/item/SingleItem.vue");
 /* harmony import */ var _app_components_item_SingleItemSetComponent_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./app/components/item/SingleItemSetComponent.vue */ "./resources/js/src/app/components/item/SingleItemSetComponent.vue");
 /* harmony import */ var vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! vue-lazy-hydration */ "./node_modules/vue-lazy-hydration/dist/LazyHydrate.esm.js");
-/* harmony import */ var vue_client_only__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! vue-client-only */ "./node_modules/vue-client-only/dist/vue-client-only.common.js");
-/* harmony import */ var vue_client_only__WEBPACK_IMPORTED_MODULE_32___default = /*#__PURE__*/__webpack_require__.n(vue_client_only__WEBPACK_IMPORTED_MODULE_32__);
+/* harmony import */ var _app_components_common_ClientOnly_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./app/components/common/ClientOnly.vue */ "./resources/js/src/app/components/common/ClientOnly.vue");
 /* harmony import */ var _app_plugins_script2__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./app/plugins/script2 */ "./resources/js/src/app/plugins/script2.js");
 /* harmony import */ var _app_components_checkout_AcceptGtcCheck__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./app/components/checkout/AcceptGtcCheck */ "./resources/js/src/app/components/checkout/AcceptGtcCheck.js");
 /* harmony import */ var _app_components_checkout_Checkout__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./app/components/checkout/Checkout */ "./resources/js/src/app/components/checkout/Checkout.js");
@@ -59113,7 +59076,7 @@ function createApp(options) {
   }); // EXTERNAL
 
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("lazy-hydrate", vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("client-only", vue_client_only__WEBPACK_IMPORTED_MODULE_32___default.a);
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("client-only", _app_components_common_ClientOnly_vue__WEBPACK_IMPORTED_MODULE_32__["default"]);
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.use(_app_plugins_script2__WEBPACK_IMPORTED_MODULE_33__["default"]); // CHECKOUT
 
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("edit-coupon-overlay", function () {
@@ -60417,6 +60380,56 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/common/ClientOnly.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/src/app/components/common/ClientOnly.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ClientOnly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientOnly.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/common/ClientOnly.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _ClientOnly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/app/components/common/ClientOnly.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/common/ClientOnly.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/src/app/components/common/ClientOnly.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientOnly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ClientOnly.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/ClientOnly.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientOnly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

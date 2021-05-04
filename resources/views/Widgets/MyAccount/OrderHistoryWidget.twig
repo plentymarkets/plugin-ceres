@@ -23,12 +23,10 @@
             {{ WidgetHelper.editableTwig(isPreview, hintText) }}
         {% endif %}
     </div>
-    <client-only>
-        <order-history-list
-                :orders-per-page="{{ ordersPerPage | default(5) | json_encode }}"
-                :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}"
-                {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}
-                :allow-return="{{ allowReturn | json_encode }}">
-        </order-history-list>
-    </client-only>
+    <order-history-list
+            :orders-per-page="{{ ordersPerPage | default(5) | json_encode }}"
+            :allow-payment-provider-change="{{ widget.settings.allowPaymentProviderChange.mobile | default(true) | json_encode }}"
+            {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}
+            :allow-return="{{ allowReturn | json_encode }}">
+    </order-history-list>
 </div>

@@ -16,7 +16,6 @@
 
 <div class="widget widget-newsletter-subscription-checkbox{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <client-only>
         <subscribe-newsletter-check
                 {% if hideCheckbox %}class="pl-0"{% endif %}
                 :email-folder="{% if emailFolder | length > 0 %} {{ emailFolder | json_encode }} {% else %} 0 {% endif %}"
@@ -29,5 +28,4 @@
             custom-text="{{ customText }}"
                 {% endif %}>
         </subscribe-newsletter-check>
-    </client-only>
 </div>
