@@ -8,25 +8,26 @@
 {% set showOnContentCategory = widget.settings.showOnContentCategory.mobile %}
 {% set showOnLegalPages      = widget.settings.showOnLegalPages.mobile %}
 
+{% is not isPreview %}
+    {% if not showOnHomepage %}
+        {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
+    {% endif %}
 
-{% if not showOnHomepage %}
-    {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
-{% endif %}
+    {% if not showOnMyAccount %}
+        {{ Twig.if("not services.template.isCurrentTemplate('tpl.my-account')") }}
+    {% endif %}
 
-{% if not showOnMyAccount %}
-    {{ Twig.if("not services.template.isCurrentTemplate('tpl.my-account')") }}
-{% endif %}
+    {% if not showOnCheckout %}
+        {{ Twig.if("not services.template.isCurrentTemplate('tpl.checkout')") }}
+    {% endif %}
 
-{% if not showOnCheckout %}
-    {{ Twig.if("not services.template.isCurrentTemplate('tpl.checkout')") }}
-{% endif %}
+    {% if not showOnContentCategory %}
+        {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
+    {% endif %}
 
-{% if not showOnContentCategory %}
-    {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
-{% endif %}
-
-{% if not showOnLegalPages %}
-    {{ Twig.if("not urls.isLegalPage()") }}
+    {% if not showOnLegalPages %}
+        {{ Twig.if("not urls.isLegalPage()") }}
+    {% endif %}
 {% endif %}
 
 <div class="breadcrumbs header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
@@ -127,22 +128,25 @@
     </nav>
 </div>
 
-{% if not showOnHomepage %}
-    {{ Twig.endif() }}
-{% endif %}
 
-{% if not showOnMyAccount %}
-    {{ Twig.endif() }}
-{% endif %}
+{% is not isPreview %}
+    {% if not showOnHomepage %}
+        {{ Twig.endif() }}
+    {% endif %}
 
-{% if not showOnCheckout %}
-    {{ Twig.endif() }}
-{% endif %}
+    {% if not showOnMyAccount %}
+        {{ Twig.endif() }}
+    {% endif %}
 
-{% if not showOnContentCategory %}
-    {{ Twig.endif() }}
-{% endif %}
+    {% if not showOnCheckout %}
+        {{ Twig.endif() }}
+    {% endif %}
 
-{% if not showOnLegalPages %}
-    {{ Twig.endif() }}
+    {% if not showOnContentCategory %}
+        {{ Twig.endif() }}
+    {% endif %}
+
+    {% if not showOnLegalPages %}
+        {{ Twig.endif() }}
+    {% endif %}
 {% endif %}
