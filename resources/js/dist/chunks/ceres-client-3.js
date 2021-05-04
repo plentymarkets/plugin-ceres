@@ -287,7 +287,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      initialSelectedFacets: [],
       initialPriceMin: "",
       initialPriceMax: ""
     };
@@ -313,7 +312,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   created: function created() {
     this.$store.commit("addFacets", this.facetData);
-    this.initSelectedFacets();
   },
   methods: {
     initSelectedFacets: function initSelectedFacets() {
@@ -331,8 +329,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (selectedFacets.length > 0) {
         this.$store.commit("setSelectedFacetsByIds", selectedFacets);
       }
-
-      this.initialSelectedFacets = selectedFacets;
     },
     initPriceFacet: function initPriceFacet(urlParams) {
       if (urlParams.priceMin || urlParams.priceMax) {
@@ -441,6 +437,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   mounted: function mounted() {
+    // TODO
     var urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_8__["default"].getUrlParams(document.location.search);
     this.priceMin = urlParams.priceMin || "";
     this.priceMax = urlParams.priceMax || "";
