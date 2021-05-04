@@ -245,10 +245,10 @@ export function createApp(options)
     Vue.component("single-item", SingleItem);
     Vue.component("single-item-set-component", SingleItemSetComponent);
     Vue.component("form-attachment", () => import("./app/components/form/FormAttachment.vue"));
+    Vue.component("client-only", ClientOnly);
 
     // EXTERNAL
     Vue.component("lazy-hydrate", LazyHydrate);
-    Vue.component("client-only", ClientOnly);
     Vue.use(script2);
 
     // CHECKOUT
