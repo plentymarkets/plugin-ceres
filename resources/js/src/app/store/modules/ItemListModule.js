@@ -36,16 +36,17 @@ const mutations =
             state.facets = facets || [];
         },
 
+        // TODO needed?
         setPriceFacet(state, { priceMin, priceMax })
         {
-            const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
-            const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
-
             const priceFacet = {
                 id: "price",
                 priceMin: priceMin,
                 priceMax: priceMax
             };
+
+            const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+            const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
 
             if (!priceMax.length)
             {
@@ -264,13 +265,43 @@ function _getSelectedFacetValues(facet)
 
     facet.values.forEach((value) =>
     {
+        if (value.id === "price")
+        {
+            value.name = _getPriceFacetName(value.minPrice, value.maxPrice);
+        }
+
         if (value.selected || value.id === "price")
         {
             selectedFacets.push(value);
         }
+
+        console.log("test");
     });
 
     return selectedFacets;
+}
+
+function _getPriceFacetName(minPrice, maxPrice)
+{
+    const priceMinFormatted = Vue.filter("currency").apply(Object, [minPrice]);
+    const priceMaxFormatted = Vue.filter("currency").apply(Object, [maxPrice]);
+
+    let priceFacetName = "";
+
+    if (!maxPrice.length && !minPrice.length)
+    {
+        priceFacetName = priceMinFormatted + " - " + priceMaxFormatted;
+    }
+    else if (!minPrice.length)
+    {
+        priceFacetName = TranslationService.translate("Ceres::Template.itemTo") + priceMaxFormatted;
+    }
+    else if (!maxPrice.length)
+    {
+        priceFacetName = TranslationService.translate("Ceres::Template.itemFrom") + priceMinFormatted;
+    }
+
+    return priceFacetName;
 }
 
 export default
