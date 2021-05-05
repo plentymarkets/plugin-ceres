@@ -64911,9 +64911,11 @@ var StickyElement = /*#__PURE__*/function () {
     el.classList.add("sticky-element");
 
     var updateHandler = function updateHandler() {
-      _this.checkElement();
+      if (_this.enabled) {
+        _this.checkElement();
 
-      _this.updateStyles();
+        _this.updateStyles();
+      }
     }; // Update if height of sticky element changes
 
 
