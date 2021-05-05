@@ -9,7 +9,7 @@ export default {
     name: "lazy-load",
 
     props: {
-        component: String,
+        component: String
     },
 
     computed: {
@@ -25,5 +25,5 @@ export default {
             return App.location === "client";
         }
     }
-};
+}
 </script>
