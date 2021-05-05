@@ -27,7 +27,9 @@ class SeoStep extends Step
                 $this->generateRobotsTxtSection(),
                 $this->generateSiteMapSection(),
                 $this->generateAvailabilitiesSection(),
-                $this->generateItemMetaTitleSection()
+                $this->generateItemMetaTitleSection(),
+                $this->generateBrandMappingSection(),
+                $this->generateManufacturerMappingSection()
             ]
         ];
     }
@@ -195,6 +197,62 @@ class SeoStep extends Step
                         ]
                     ]
                 ],
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateBrandMappingSection():array
+    {
+        $brandOptions = SeoConfig::getBrandOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($brandOptions);
+
+        return [
+            "title"       => "Wizard.brandMapping",
+            "description" => "Wizard.brandMappingDescription",
+            "form"        => [
+                "seo_brand" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.brandChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_brandId" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_brand === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.brandPropertyIdOnArticle",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateManufacturerMappingSection():array
+    {
+        $manufacturerOptions = SeoConfig::getManufacturerOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($manufacturerOptions);
+
+        return [
+            "title"       => "Wizard.manufacturerMapping",
+            "description" => "Wizard.manufacturerMappingDescription",
+            "form"        => [
+                "seo_manufacturer" => [
+                    "type"         => "select",
+                    "defaultValue" => "2",
+                    "options"      => [
+                        "name" => "Wizard.manufacturerChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ]
             ]
         ];
     }

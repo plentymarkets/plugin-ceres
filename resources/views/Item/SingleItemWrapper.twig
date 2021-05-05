@@ -29,10 +29,18 @@
                 "identifier"    : "{{ itemData.variation.id }}",
                 "description"   : "{{ itemData.texts.description | striptags | filterTabs }}",
                 "disambiguatingDescription" : "{{ itemData.texts.shortDescription }}",
+{% if manufacturer | length > 0 %}
                 "manufacturer"  : {
                     "@type"         : "Organization",
-                    "name"          : "{{ itemData.item.manufacturer.externalName }}"
+                    "name"          : "{{ manufacturer }}"
                 },
+{%  endif %}
+{% if brand | length  > 0 %}
+                "brand"         : {
+                    "@type"         : "Brand",
+                    "name"          : "{{ brand }}",
+                },
+{% endif %}
                 "offers": {
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",

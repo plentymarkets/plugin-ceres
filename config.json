@@ -4332,6 +4332,75 @@
                             }
                         }
                     }
+                },
+                "brand.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.brandMapping",
+                    "options": {
+                        "containerEntries": {
+                            "brand.mapping.brand": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.brand",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.brandNotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.manufacturerExtern",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.brandSetPropertyOnArticle",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
+                            "brand.mapping.brandID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.brandID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "manufacturer.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.manufacturerMapping",
+                    "options": {
+                        "containerEntries": {
+                            "manufacturer.mapping.manufacturer": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.manufacturer",
+                                "options": {
+                                    "defaultValue": "2",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.manufacturerNotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.manufacturerExtern",
+                                            "position": 1
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
