@@ -175,7 +175,7 @@
 <!-- /SSR -->
 
 <!-- SSR:global(App) -->
-<script id="app-data" type="application/json">
+<script type="application/javascript">
     {
         "config": {{ ceresConfig | json_encode | raw }},
         "urls": {{ urls | json_encode | raw }},
@@ -206,7 +206,6 @@
     }
 </script>
 <!-- /SSR -->
-<script>window.App = JSON.parse(document.getElementById("app-data").innerText);</script>
 
 {{ Loader.include_components() }}
 
