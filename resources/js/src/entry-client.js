@@ -10,7 +10,6 @@ import { initListener } from "./app/services/ApiService";
 import { mount } from "./mount";
 
 Vue.prototype.$mount = mount;
-Vue.prototype.$isSSR = false;
 App.location = "client";
 App.isSSREnabled = App.config.log.performanceSsr;
 
