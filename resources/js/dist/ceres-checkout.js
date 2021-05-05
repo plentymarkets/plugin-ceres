@@ -6910,18 +6910,18 @@ __webpack_require__.r(__webpack_exports__);
       deep: true
     }
   },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    this.$nextTick(function () {
-      _this2.loadLightbox().then(function () {
-        _this2.initCarousel();
-
-        _this2.initThumbCarousel();
-      }).catch(function (event) {
-        console.log("error while loading lightbox", event);
-      });
-    });
+  mounted: function mounted() {// this.$nextTick(() =>
+    // {
+    //     this.loadLightbox().then(() =>
+    //         {
+    //             this.initCarousel();
+    //             this.initThumbCarousel();
+    //         })
+    //         .catch(event =>
+    //         {
+    //             console.log("error while loading lightbox", event);
+    //         });
+    // });
   },
   methods: {
     getImageCount: function getImageCount() {
@@ -6943,7 +6943,7 @@ __webpack_require__.r(__webpack_exports__);
       document.documentElement.scrollTop = scrollPos;
     },
     initCarousel: function initCarousel() {
-      var _this3 = this;
+      var _this2 = this;
 
       var imageCount = this.getImageCount();
       var carouselSettings = {
@@ -6960,11 +6960,11 @@ __webpack_require__.r(__webpack_exports__);
         navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
         smartSpeed: 350,
         onChanged: function onChanged(event) {
-          var $thumb = $(_this3.$refs.thumbs);
+          var $thumb = $(_this2.$refs.thumbs);
           $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
         },
         onInitialized: function onInitialized(event) {
-          _this3.initialized = true;
+          _this2.initialized = true;
         }
       };
 
@@ -6982,7 +6982,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       $(this.$refs.single).on("changed.owl.carousel", function (event) {
-        _this3.currentItem = event.page.index;
+        _this2.currentItem = event.page.index;
       });
     },
     initThumbCarousel: function initThumbCarousel() {
@@ -7013,7 +7013,7 @@ __webpack_require__.r(__webpack_exports__);
       return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
     },
     loadLightbox: function loadLightbox() {
-      var _this4 = this;
+      var _this3 = this;
 
       return new Promise(function (resolve, reject) {
         var script = document.querySelector("script#lightboxscript");
@@ -7025,7 +7025,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _script.type = "text/javascript";
           _script.id = "lightboxscript";
-          _script.src = "".concat(_this4.pluginPath, "/js/dist/lightbox.min.js");
+          _script.src = "".concat(_this3.pluginPath, "/js/dist/lightbox.min.js");
 
           _script.addEventListener("load", function () {
             return resolve();

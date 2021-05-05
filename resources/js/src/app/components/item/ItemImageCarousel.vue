@@ -129,18 +129,18 @@ export default {
 
     mounted()
     {
-        this.$nextTick(() =>
-        {
-            this.loadLightbox().then(() =>
-                {
-                    this.initCarousel();
-                    this.initThumbCarousel();
-                })
-                .catch(event =>
-                {
-                    console.log("error while loading lightbox", event);
-                });
-        });
+        // this.$nextTick(() =>
+        // {
+        //     this.loadLightbox().then(() =>
+        //         {
+        //             this.initCarousel();
+        //             this.initThumbCarousel();
+        //         })
+        //         .catch(event =>
+        //         {
+        //             console.log("error while loading lightbox", event);
+        //         });
+        // });
     },
 
     methods:
