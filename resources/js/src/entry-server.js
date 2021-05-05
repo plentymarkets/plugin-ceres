@@ -14,7 +14,9 @@ function createApp(context)
     return new Promise((resolve, reject) =>
     {
         Vue.prototype.$isSSR = true;
-        App.isSSR = true;
+
+        App.location = "client";
+        App.isSSREnabled = App.config.log.performanceSsr;
 
         const { app, store } = createAppInternal(context);
 

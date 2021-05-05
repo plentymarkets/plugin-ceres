@@ -1,23 +1,29 @@
 <template>
-    <lazy-hydrate never :trigger-hydration="isLoaded">
+    <div v-if="isClient && isLoaded">
         <slot></slot>
-    </lazy-hydrate>
+    </div>
 </template>
 
 <script>
 export default {
-
     name: "lazy-load",
 
     props: {
-        component: String
+        component: String,
     },
 
     computed: {
-        isLoaded()
-        {
+        isLoaded() {
             return !!this.$store.state.lazyComponent.components[this.component];
+        },
+
+        isSSREnabled() {
+            return App.isSSREnabled;
+        },
+
+        isClient() {
+            return App.location === "client";
         }
     }
-}
+};
 </script>
