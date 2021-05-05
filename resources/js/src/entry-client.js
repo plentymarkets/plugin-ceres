@@ -11,7 +11,6 @@ import { mount } from "./mount";
 
 Vue.prototype.$mount = mount;
 App.location = "client";
-App.isSSREnabled = App.config.log.performanceSsr;
 
 window.createApp = (selector) => {
     // client-specific bootstrapping logic...
