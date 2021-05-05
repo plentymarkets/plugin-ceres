@@ -15,10 +15,6 @@ export default {
     computed: {
         isLoaded() {
             return !!this.$store.state.lazyComponent.components[this.component];
-        },
-
-        isClient() {
-            return App.location === "client";
         }
     },
 

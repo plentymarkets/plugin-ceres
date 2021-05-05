@@ -13,8 +13,6 @@ function createApp(context)
 {
     return new Promise((resolve, reject) =>
     {
-        App.location = "server";
-
         const { app, store } = createAppInternal(context);
 
         initServerStore(store);

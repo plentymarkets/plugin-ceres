@@ -10,7 +10,6 @@ import { initListener } from "./app/services/ApiService";
 import { mount } from "./mount";
 
 Vue.prototype.$mount = mount;
-App.location = "client";
 
 window.createApp = (selector) => {
     // client-specific bootstrapping logic...
