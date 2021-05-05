@@ -1,7 +1,13 @@
-<script>
-    // const FEATURE_ENABLED = 'IntersectionObserver' in window;
-    const FEATURE_ENABLED = true;
+<template>
+    <lazy-hydrate :when-visible="intersectionObserverOptions">
+        <slot></slot>
+    </lazy-hydrate>
+</template>
 
+<script>
+    /**
+     * @deprecated since 5.0.29. Use lazy-hydrate instead.
+     */
     export default {
         props:
         {
@@ -15,76 +21,18 @@
             }
         },
 
-        data()
-        {
-            return {
-                isVisible: false
-                // mayObserve: false
-            }
-        },
-
-        created()
-        {
-            if(!FEATURE_ENABLED || App.isShopBuilder || this.$isSSR)
-            {
-                this.isVisible = true;
-                return;
-            }
-
-            this.observer = new IntersectionObserver((entries) => {
-                let quasiIntersecting = Math.abs(entries[0].intersectionRatio - this.threshold) <= 0.05;
-                if(entries[0].intersectionRatio >= this.threshold || quasiIntersecting)
-                {
-                    this.observer.unobserve(this.$el);
-                    this.isVisible = true;
+        computed: {
+            intersectionObserverOptions() {
+                return {
+                    root: null,
+                    rootMargin: this.margin,
+                    threshold: this.threshold
                 }
-            }, {
-                root: null,
-                rootMargin: this.margin,
-                threshold: this.threshold
-            });
-        },
-
-        mounted()
-        {
-            if(FEATURE_ENABLED && !App.isShopBuilder)
-            {
-                this.$nextTick(() => {
-                    // this.mayObserve = true;
-                    this.observer.observe(this.$el);
-                });
-            }
-
-        },
-
-        /*
-        updated()
-        {
-            if(FEATURE_ENABLED && this.mayObserve && !App.isShopBuilder)
-            {
-                this.mayObserve = false;
-            }
-        },
-        */
-
-        destroyed()
-        {
-            if(FEATURE_ENABLED && !App.isShopBuilder)
-            {
-                this.observer.disconnect();
             }
         },
 
-        render()
-        {
-            if( this.isVisible && !this.$isSSR )
-            {
-                return this.$slots.default ? this.$slots.default : null;
-            }
-            else
-            {
-                return this.$slots.loading ? this.$slots.loading : null;
-            }
-        },
+        mounted() {
+            console.warn(`Component "<intersect>" is deprecated. Please use "<lazy-hydrate when-visible" component instead.`);
+        }
     }
 </script>
