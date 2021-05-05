@@ -16,7 +16,8 @@
                  data-toggle="tooltip"
                  data-placement="top"
                  data-testing="quantity-btn-increase"
-                 :title="maximumHint">
+                 :title="maximumHint"
+                 :aria-label="$translate('Ceres::Template.itemQuantityInputIncrease')">
                 <i class="fa fa-plus default-float" aria-hidden="true"></i>
             </button>
 
@@ -27,7 +28,8 @@
                  data-toggle="tooltip"
                  data-placement="bottom"
                  data-testing="quantity-btn-decrease"
-                 :title="minimumHint">
+                 :title="minimumHint"
+                 :aria-label="$translate('Ceres::Template.itemQuantityInputDecrease')">
                 <i class="fa fa-minus default-float" aria-hidden="true"></i>
             </button>
         </div>
