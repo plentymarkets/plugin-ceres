@@ -6694,7 +6694,7 @@ var render = function() {
             "select",
             {
               staticClass: "custom-select",
-              attrs: { id: "country-id-select" },
+              attrs: { id: "country-id-select" + _vm._uid },
               domProps: { value: _vm.selectedCountryId },
               on: {
                 change: function($event) {
@@ -6724,7 +6724,7 @@ var render = function() {
             0
           ),
           _vm._v(" "),
-          _c("label", { attrs: { for: "country-id-select" } }, [
+          _c("label", { attrs: { for: "country-id-select" + _vm._uid } }, [
             _vm._v(_vm._s(_vm.$translate("Ceres::Template.headerCountry")))
           ])
         ]
@@ -6752,7 +6752,7 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
-                        attrs: { id: "state-id-select" },
+                        attrs: { id: "state-id-select" + _vm._uid },
                         domProps: { value: _vm.selectedStateId },
                         on: {
                           change: function($event) {
@@ -6800,16 +6800,20 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("label", { attrs: { for: "state-id-select" } }, [
-                      _vm._v(
-                        _vm._s(
-                          _vm.transformTranslation(
-                            "Ceres::Template.headerState",
-                            "stateId"
+                    _c(
+                      "label",
+                      { attrs: { for: "state-id-select" + _vm._uid } },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.transformTranslation(
+                              "Ceres::Template.headerState",
+                              "stateId"
+                            )
                           )
                         )
-                      )
-                    ])
+                      ]
+                    )
                   ]
                 )
               : _vm._e()
