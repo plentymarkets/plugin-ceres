@@ -13,7 +13,7 @@ function createApp(context)
 {
     return new Promise((resolve, reject) =>
     {
-        App.location = "client";
+        App.location = "server";
         App.isSSREnabled = App.config.log.performanceSsr;
 
         const { app, store } = createAppInternal(context);
