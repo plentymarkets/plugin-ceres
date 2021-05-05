@@ -20,7 +20,7 @@ import user from "./modules/UserModule";
 import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
-// import eventPropagation from "./plugins/EventPropagationPlugin";
+import eventPropagation from "./plugins/EventPropagationPlugin";
 import { isDefined } from "../helper/utils";
 
 export let store;
@@ -34,6 +34,8 @@ export function createStore()
 
     Vue.options.delimiters = ["${", "}"];
     Vue.use(Vuex);
+
+    const plugins = !App.isSSR && App.config.log.performanceEventPropagation ? [eventPropagation] : [];
 
     // eslint-disable-next-line
     store = new Vuex.Store(
@@ -56,9 +58,9 @@ export function createStore()
                 orderReturn,
                 user,
                 wishList
-            }
+            },
 
-            // plugins: [eventPropagation]
+            plugins: plugins
         });
 
     return store;
