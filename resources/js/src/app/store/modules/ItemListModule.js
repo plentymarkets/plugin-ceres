@@ -36,30 +36,15 @@ const mutations =
             state.facets = facets || [];
         },
 
-        // TODO needed?
         setPriceFacet(state, { priceMin, priceMax })
         {
             const priceFacet = {
                 id: "price",
-                priceMin: priceMin,
-                priceMax: priceMax
+                priceMin,
+                priceMax
             };
 
-            const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
-            const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
-
-            if (!priceMax.length)
-            {
-                priceFacet.name = TranslationService.translate("Ceres::Template.itemFrom") + priceMinFormatted;
-            }
-            else if (!priceMin.length)
-            {
-                priceFacet.name = TranslationService.translate("Ceres::Template.itemTo") + priceMaxFormatted;
-            }
-            else
-            {
-                priceFacet.name = priceMinFormatted + " - " + priceMaxFormatted;
-            }
+            priceFacet.name = _getPriceFacetName(priceMin, priceMax);
 
             state.facets.find(facet => facet.type === "price").values[0] = priceFacet;
         },
@@ -267,38 +252,36 @@ function _getSelectedFacetValues(facet)
     {
         if (value.id === "price")
         {
-            value.name = _getPriceFacetName(value.minPrice, value.maxPrice);
+            value.name = _getPriceFacetName(value.priceMin, value.priceMax);
         }
 
         if (value.selected || value.id === "price")
         {
             selectedFacets.push(value);
         }
-
-        console.log("test");
     });
 
     return selectedFacets;
 }
 
-function _getPriceFacetName(minPrice, maxPrice)
+function _getPriceFacetName(priceMin, priceMax)
 {
-    const priceMinFormatted = Vue.filter("currency").apply(Object, [minPrice]);
-    const priceMaxFormatted = Vue.filter("currency").apply(Object, [maxPrice]);
+    const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+    const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
 
     let priceFacetName = "";
 
-    if (!maxPrice.length && !minPrice.length)
+    if (!!priceMax && !!priceMin)
     {
         priceFacetName = priceMinFormatted + " - " + priceMaxFormatted;
     }
-    else if (!minPrice.length)
-    {
-        priceFacetName = TranslationService.translate("Ceres::Template.itemTo") + priceMaxFormatted;
-    }
-    else if (!maxPrice.length)
+    else if (!!priceMin)
     {
         priceFacetName = TranslationService.translate("Ceres::Template.itemFrom") + priceMinFormatted;
+    }
+    else if (!!priceMax)
+    {
+        priceFacetName = TranslationService.translate("Ceres::Template.itemTo") + priceMaxFormatted;
     }
 
     return priceFacetName;
