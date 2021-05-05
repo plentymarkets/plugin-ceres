@@ -12,7 +12,7 @@ class MailInputWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.MailInputWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class MailInputWidget extends BaseWidget
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "mail"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

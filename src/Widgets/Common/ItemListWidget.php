@@ -26,6 +26,9 @@ class ItemListWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(700)
+            ->withSearchKeyWords([
+                "artikel", "artikelliste", "article", "item", "list"
+            ])
             ->toArray();
     }
 

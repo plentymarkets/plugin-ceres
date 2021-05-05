@@ -91,6 +91,16 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $requestedVariationUrl;
 
     /**
+     * @var string $brand Contains the "brand" name for SEO attribute.
+     */
+    public $brand = '';
+
+    /**
+     * @var string $manufacturer Contains the "manufacturer" name for SEO attribute.
+     */
+    public $manufacturer = '';
+
+    /**
      * @inheritDoc
      */
     public function init($params)
@@ -108,9 +118,29 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
 
-        $availabiltyId = $itemData['variation']['availability']['id'];
-        $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabiltyId);
+        $availabilityId = $itemData['variation']['availability']['id'];
+        $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabilityId);
         $this->item['documents'][0]['data']['variation']['availability']['mappedAvailability'] = $mappedAvailability;
+
+        $brandMapping = $this->ceresConfig->seo->brandMapping;
+        $brandMappingId = $this->ceresConfig->seo->brandMappingId;
+        if ($brandMapping == 2) {
+            $this->brand = $itemData['item']['manufacturer']['externalName'];
+        } elseif ($brandMapping == 3) {
+            $propertyBrand = '';
+            foreach ($itemData['variationProperties'][0]['properties'] as $property) {
+                if ($property['id'] == $brandMappingId) {
+                    $propertyBrand = $property['values']['value'];
+                    break;
+                }
+            }
+            $this->brand = $propertyBrand;
+        }
+
+        $manufacturerMapping = $this->ceresConfig->seo->manufacturerMapping;
+        if ($manufacturerMapping == 2) {
+            $this->manufacturer = $itemData['item']['manufacturer']['externalName'] ?? '';
+        }
 
         $this->isItemSet = $params['isItemSet'];
 

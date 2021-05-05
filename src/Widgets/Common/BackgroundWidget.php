@@ -25,6 +25,9 @@ class BackgroundWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(700)
+            ->withSearchKeyWords([
+                "hintergrund", "background",
+            ])
             ->toArray();
     }
     

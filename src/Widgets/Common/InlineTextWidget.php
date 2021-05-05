@@ -24,6 +24,9 @@ class InlineTextWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(800)
+            ->withSearchKeyWords([
+                "text", "inline", "editor",
+            ])
             ->toArray();
     }
     

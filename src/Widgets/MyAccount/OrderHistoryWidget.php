@@ -18,13 +18,13 @@ class OrderHistoryWidget extends BaseWidget
 {
     /** @var Collection $statuses A collection of all order statuses */
     private $statuses = null;
-    
+
     /** @var null|string $lang The currently selected shop language */
     private $lang = null;
-    
+
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.OrderHistoryWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -37,9 +37,12 @@ class OrderHistoryWidget extends BaseWidget
             ->withCategory(WidgetCategories::MY_ACCOUNT)
             ->withPosition(100)
             ->withMaxPerPage(1)
+            ->withSearchKeyWords([
+                "order", "history", "bestellverlauf", "historie"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -83,7 +86,7 @@ class OrderHistoryWidget extends BaseWidget
     {
         return $widgetSettings["ordersPerPage"]["mobile"] ?? 5;
     }
-    
+
     /**
      * @inheritDoc
      */

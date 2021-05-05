@@ -1071,7 +1071,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
     },
     isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable() {
-      return (this.isParcelBoxAvailable || this.isPostOfficeAvailable || this.isMyAccount) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
+      return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
     isParcelBoxAvailable: function isParcelBoxAvailable(state) {
@@ -2752,7 +2752,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm.isParcelBoxAvailable || _vm.isMyAccount
+                          _vm.isParcelBoxAvailable
                             ? _c(
                                 "option",
                                 {
@@ -2771,7 +2771,7 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm.isPostOfficeAvailable || _vm.isMyAccount
+                          _vm.isPostOfficeAvailable
                             ? _c(
                                 "option",
                                 {
@@ -6694,7 +6694,7 @@ var render = function() {
             "select",
             {
               staticClass: "custom-select",
-              attrs: { id: "country-id-select" },
+              attrs: { id: "country-id-select" + _vm._uid },
               domProps: { value: _vm.selectedCountryId },
               on: {
                 change: function($event) {
@@ -6724,7 +6724,7 @@ var render = function() {
             0
           ),
           _vm._v(" "),
-          _c("label", { attrs: { for: "country-id-select" } }, [
+          _c("label", { attrs: { for: "country-id-select" + _vm._uid } }, [
             _vm._v(_vm._s(_vm.$translate("Ceres::Template.headerCountry")))
           ])
         ]
@@ -6752,7 +6752,7 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
-                        attrs: { id: "state-id-select" },
+                        attrs: { id: "state-id-select" + _vm._uid },
                         domProps: { value: _vm.selectedStateId },
                         on: {
                           change: function($event) {
@@ -6800,16 +6800,20 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("label", { attrs: { for: "state-id-select" } }, [
-                      _vm._v(
-                        _vm._s(
-                          _vm.transformTranslation(
-                            "Ceres::Template.headerState",
-                            "stateId"
+                    _c(
+                      "label",
+                      { attrs: { for: "state-id-select" + _vm._uid } },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.transformTranslation(
+                              "Ceres::Template.headerState",
+                              "stateId"
+                            )
                           )
                         )
-                      )
-                    ])
+                      ]
+                    )
                   ]
                 )
               : _vm._e()

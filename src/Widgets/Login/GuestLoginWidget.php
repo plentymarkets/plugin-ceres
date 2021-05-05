@@ -12,7 +12,7 @@ class GuestLoginWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Login.GuestLoginWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class GuestLoginWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::CUSTOMER)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "login", "guest", "gast"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

@@ -11,7 +11,7 @@ class SelectedFilterWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Category.Filter.SelectedFilterWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -23,9 +23,12 @@ class SelectedFilterWidget extends BaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(600)
+                                ->withSearchKeyWords([
+                                    "filter", "active", "aktiviert", "aktiv"
+                                ])
                                 ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -33,16 +36,17 @@ class SelectedFilterWidget extends BaseWidget
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
-        
-        $settings->createCustomClass();
-        
+
+        $settings->createCustomClass()
+                 ->withDefaultValue('none');
+
         $settings->createAppearance()
                  ->withDefaultValue('primary');
-        
+
         $settings->createAlignment();
-        
+
         $settings->createSpacing();
-        
+
         return $settings->toArray();
     }
 }

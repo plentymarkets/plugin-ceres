@@ -112,6 +112,11 @@ class CeresConfig
     public $sorting;
 
     /**
+     * @var CeresSeoConfig $seo Seo configuration.
+     */
+    public $seo;
+
+    /**
      * CeresConfig constructor.
      */
     public function __construct()
@@ -134,5 +139,6 @@ class CeresConfig
         $this->pagination   = pluginApp( CeresPaginationConfig::class );
         $this->search       = pluginApp( CeresSearchConfig::class );
         $this->sorting      = pluginApp( CeresSortingConfig::class );
+        $this->seo          = pluginApp( CeresSeoConfig::class);
     }
 }
