@@ -69670,14 +69670,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getItemListUrlParams(searchParams) {
+  var _searchParams$facets;
+
   var urlParams = {};
   var defaultItemsPerPage = App.config.pagination.itemsPerPage;
   urlParams.query = searchParams.query && searchParams.query.length > 0 ? searchParams.query : null;
   urlParams.items = searchParams.items !== defaultItemsPerPage ? searchParams.items : null;
   urlParams.page = searchParams.page > 1 ? searchParams.page : null;
-  urlParams.facets = searchParams.facets.length > 0 ? searchParams.facets : null;
-  urlParams.priceMin = searchParams.priceMin.length > 0 ? searchParams.priceMin : null;
-  urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
+  urlParams.facets = ((_searchParams$facets = searchParams.facets) === null || _searchParams$facets === void 0 ? void 0 : _searchParams$facets.length) > 0 ? searchParams.facets : null;
+  urlParams.priceMin = searchParams.priceMin ? searchParams.priceMin : null;
+  urlParams.priceMax = searchParams.priceMax ? searchParams.priceMax : null;
 
   if (App.isSearch) {
     urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch && searchParams.sorting.length > 0 ? searchParams.sorting : null;
@@ -72629,7 +72631,6 @@ var mutations = {
   setFacets: function setFacets(state, facets) {
     state.facets = facets || [];
   },
-  // TODO needed?
   setPriceFacet: function setPriceFacet(state, _ref) {
     var priceMin = _ref.priceMin,
         priceMax = _ref.priceMax;
@@ -72826,29 +72827,27 @@ function _getSelectedFacetValues(facet) {
   var selectedFacets = [];
   facet.values.forEach(function (value) {
     if (value.id === "price") {
-      value.name = _getPriceFacetName(value.minPrice, value.maxPrice);
+      value.name = _getPriceFacetName(value.priceMin, value.priceMax);
     }
 
     if (value.selected || value.id === "price") {
       selectedFacets.push(value);
     }
-
-    console.log("test");
   });
   return selectedFacets;
 }
 
-function _getPriceFacetName(minPrice, maxPrice) {
-  var priceMinFormatted = Vue.filter("currency").apply(Object, [minPrice]);
-  var priceMaxFormatted = Vue.filter("currency").apply(Object, [maxPrice]);
+function _getPriceFacetName(priceMin, priceMax) {
+  var priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+  var priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
   var priceFacetName = "";
 
-  if (!maxPrice.length && !minPrice.length) {
+  if (!!priceMax && !!priceMin) {
     priceFacetName = priceMinFormatted + " - " + priceMaxFormatted;
-  } else if (!minPrice.length) {
-    priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemTo") + priceMaxFormatted;
-  } else if (!maxPrice.length) {
+  } else if (priceMin) {
     priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemFrom") + priceMinFormatted;
+  } else if (priceMax) {
+    priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemTo") + priceMaxFormatted;
   }
 
   return priceFacetName;

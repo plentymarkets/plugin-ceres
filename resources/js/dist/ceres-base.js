@@ -10910,28 +10910,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
 /* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.search.js */ "./node_modules/core-js/modules/es.string.search.js");
-/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.split.js */ "./node_modules/core-js/modules/es.string.split.js");
-/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ItemFilter.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilter.vue");
-
-
-
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ItemFilter.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilter.vue");
 
 
 
@@ -10983,11 +10973,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-filter-list",
   components: {
-    ItemFilter: _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
+    ItemFilter: _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   props: {
     filterListBulk: Boolean,
@@ -11012,13 +11001,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: null
     }
   },
-  data: function data() {
-    return {
-      initialPriceMin: "",
-      initialPriceMax: ""
-    };
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_12__["mapState"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     facets: function facets(state) {
       var _this = this;
 
@@ -11039,39 +11022,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   created: function created() {
     this.$store.commit("addFacets", this.facetData);
-  },
-  methods: {
-    initSelectedFacets: function initSelectedFacets() {
-      var urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_11__["default"].getUrlParams(document.location.search);
-      var selectedFacets = [];
-
-      if (urlParams.facets) {
-        selectedFacets = urlParams.facets.split(",");
-      }
-
-      if (this.initPriceFacet(urlParams)) {
-        selectedFacets.push("price");
-      }
-
-      if (selectedFacets.length > 0) {
-        this.$store.commit("setSelectedFacetsByIds", selectedFacets);
-      }
-    },
-    initPriceFacet: function initPriceFacet(urlParams) {
-      if (urlParams.priceMin || urlParams.priceMax) {
-        var priceMin = urlParams.priceMin || "";
-        var priceMax = urlParams.priceMax || "";
-        this.$store.commit("setPriceFacet", {
-          priceMin: priceMin,
-          priceMax: priceMax
-        });
-        this.initialPriceMin = priceMin;
-        this.initialPriceMax = priceMax;
-        return true;
-      }
-
-      return false;
-    }
   }
 });
 
@@ -11164,7 +11114,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   mounted: function mounted() {
-    // TODO
     var urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_8__["default"].getUrlParams(document.location.search);
     this.priceMin = urlParams.priceMin || "";
     this.priceMax = urlParams.priceMax || "";
@@ -86603,14 +86552,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getItemListUrlParams(searchParams) {
+  var _searchParams$facets;
+
   var urlParams = {};
   var defaultItemsPerPage = App.config.pagination.itemsPerPage;
   urlParams.query = searchParams.query && searchParams.query.length > 0 ? searchParams.query : null;
   urlParams.items = searchParams.items !== defaultItemsPerPage ? searchParams.items : null;
   urlParams.page = searchParams.page > 1 ? searchParams.page : null;
-  urlParams.facets = searchParams.facets.length > 0 ? searchParams.facets : null;
-  urlParams.priceMin = searchParams.priceMin.length > 0 ? searchParams.priceMin : null;
-  urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
+  urlParams.facets = ((_searchParams$facets = searchParams.facets) === null || _searchParams$facets === void 0 ? void 0 : _searchParams$facets.length) > 0 ? searchParams.facets : null;
+  urlParams.priceMin = searchParams.priceMin ? searchParams.priceMin : null;
+  urlParams.priceMax = searchParams.priceMax ? searchParams.priceMax : null;
 
   if (App.isSearch) {
     urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch && searchParams.sorting.length > 0 ? searchParams.sorting : null;
@@ -89562,7 +89513,6 @@ var mutations = {
   setFacets: function setFacets(state, facets) {
     state.facets = facets || [];
   },
-  // TODO needed?
   setPriceFacet: function setPriceFacet(state, _ref) {
     var priceMin = _ref.priceMin,
         priceMax = _ref.priceMax;
@@ -89759,29 +89709,27 @@ function _getSelectedFacetValues(facet) {
   var selectedFacets = [];
   facet.values.forEach(function (value) {
     if (value.id === "price") {
-      value.name = _getPriceFacetName(value.minPrice, value.maxPrice);
+      value.name = _getPriceFacetName(value.priceMin, value.priceMax);
     }
 
     if (value.selected || value.id === "price") {
       selectedFacets.push(value);
     }
-
-    console.log("test");
   });
   return selectedFacets;
 }
 
-function _getPriceFacetName(minPrice, maxPrice) {
-  var priceMinFormatted = Vue.filter("currency").apply(Object, [minPrice]);
-  var priceMaxFormatted = Vue.filter("currency").apply(Object, [maxPrice]);
+function _getPriceFacetName(priceMin, priceMax) {
+  var priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+  var priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
   var priceFacetName = "";
 
-  if (!maxPrice.length && !minPrice.length) {
+  if (!!priceMax && !!priceMin) {
     priceFacetName = priceMinFormatted + " - " + priceMaxFormatted;
-  } else if (!minPrice.length) {
-    priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemTo") + priceMaxFormatted;
-  } else if (!maxPrice.length) {
+  } else if (priceMin) {
     priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemFrom") + priceMinFormatted;
+  } else if (priceMax) {
+    priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemTo") + priceMaxFormatted;
   }
 
   return priceFacetName;

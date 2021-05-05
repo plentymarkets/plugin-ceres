@@ -10896,28 +10896,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
 /* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.search.js */ "./node_modules/core-js/modules/es.string.search.js");
-/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.split.js */ "./node_modules/core-js/modules/es.string.split.js");
-/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ItemFilter.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilter.vue");
-
-
-
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ItemFilter.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilter.vue");
 
 
 
@@ -10969,11 +10959,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-filter-list",
   components: {
-    ItemFilter: _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
+    ItemFilter: _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   props: {
     filterListBulk: Boolean,
@@ -10998,13 +10987,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: null
     }
   },
-  data: function data() {
-    return {
-      initialPriceMin: "",
-      initialPriceMax: ""
-    };
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_12__["mapState"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     facets: function facets(state) {
       var _this = this;
 
@@ -11025,39 +11008,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   created: function created() {
     this.$store.commit("addFacets", this.facetData);
-  },
-  methods: {
-    initSelectedFacets: function initSelectedFacets() {
-      var urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_11__["default"].getUrlParams(document.location.search);
-      var selectedFacets = [];
-
-      if (urlParams.facets) {
-        selectedFacets = urlParams.facets.split(",");
-      }
-
-      if (this.initPriceFacet(urlParams)) {
-        selectedFacets.push("price");
-      }
-
-      if (selectedFacets.length > 0) {
-        this.$store.commit("setSelectedFacetsByIds", selectedFacets);
-      }
-    },
-    initPriceFacet: function initPriceFacet(urlParams) {
-      if (urlParams.priceMin || urlParams.priceMax) {
-        var priceMin = urlParams.priceMin || "";
-        var priceMax = urlParams.priceMax || "";
-        this.$store.commit("setPriceFacet", {
-          priceMin: priceMin,
-          priceMax: priceMax
-        });
-        this.initialPriceMin = priceMin;
-        this.initialPriceMax = priceMax;
-        return true;
-      }
-
-      return false;
-    }
   }
 });
 
@@ -11150,7 +11100,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   mounted: function mounted() {
-    // TODO
     var urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_8__["default"].getUrlParams(document.location.search);
     this.priceMin = urlParams.priceMin || "";
     this.priceMax = urlParams.priceMax || "";
@@ -67750,7 +67699,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d8869aca"
+  "73cb7917"
   
 )
 
@@ -67817,7 +67766,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "289907f2"
+  "428576f6"
   
 )
 
@@ -67884,7 +67833,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7d8ba932"
+  "63cf3194"
   
 )
 
@@ -67951,7 +67900,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "409077b5"
+  "6431e931"
   
 )
 
@@ -68018,7 +67967,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0b171e46"
+  "1b1a5cc2"
   
 )
 
@@ -68085,7 +68034,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13e13736"
+  "5664b169"
   
 )
 
@@ -68152,7 +68101,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4d79d398"
+  "8ece02c8"
   
 )
 
@@ -68219,7 +68168,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c2514480"
+  "4aad44c4"
   
 )
 
@@ -68286,7 +68235,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2f5da18f"
+  "4f5e1b93"
   
 )
 
@@ -68353,7 +68302,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3e7deecb"
+  "1e8cb547"
   
 )
 
@@ -69634,7 +69583,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "44937a6a"
+  "b6843972"
   
 )
 
@@ -69700,7 +69649,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "15bb8fd8"
+  "5ea69818"
   
 )
 
@@ -69749,7 +69698,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "82187438"
+  "a14f5230"
   
 )
 
@@ -69816,7 +69765,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8cdfbed6"
+  "54849fde"
   
 )
 
@@ -69882,7 +69831,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4a5f7406"
+  "699651fe"
   
 )
 
@@ -69930,7 +69879,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "365483f0"
+  "558b61e8"
   
 )
 
@@ -69979,7 +69928,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6ba6df76"
+  "646d14f2"
   
 )
 
@@ -70046,7 +69995,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "31d0e6be"
+  "47e00f3a"
   
 )
 
@@ -70113,7 +70062,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c6ace51"
+  "70ec0d56"
   
 )
 
@@ -71257,7 +71206,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c4f2b8d0"
+  "3dbcbf9c"
   
 )
 
@@ -71324,7 +71273,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5ad9f3cc"
+  "32e8531e"
   
 )
 
@@ -71391,7 +71340,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d832afa2"
+  "a459d19a"
   
 )
 
@@ -71458,7 +71407,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c17fefe"
+  "da01fa06"
   
 )
 
@@ -71528,7 +71477,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "300018d6"
+  "c9c1784c"
   
 )
 
@@ -71595,7 +71544,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "50190108"
+  "3e80e3f8"
   
 )
 
@@ -71662,7 +71611,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f77c71e8"
+  "74a65810"
   
 )
 
@@ -71729,7 +71678,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bcfbb6e8"
+  "fcde29f0"
   
 )
 
@@ -71796,7 +71745,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "04cd279f"
+  "6b5a8c1b"
   
 )
 
@@ -71863,7 +71812,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14ba12ab"
+  "6546d0af"
   
 )
 
@@ -71930,7 +71879,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bfe0d520"
+  "4045b174"
   
 )
 
@@ -71997,7 +71946,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "504c703a"
+  "67c387b6"
   
 )
 
@@ -72064,7 +72013,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6d54f6a9"
+  "de132fb6"
   
 )
 
@@ -72131,7 +72080,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e03ed044"
+  "ac65f23c"
   
 )
 
@@ -72198,7 +72147,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14611ac0"
+  "64edd8c4"
   
 )
 
@@ -72265,7 +72214,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "aa23667e"
+  "6bf94f3d"
   
 )
 
@@ -72332,7 +72281,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c5726230"
+  "8d174338"
   
 )
 
@@ -72399,7 +72348,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7d78af4e"
+  "d135c35c"
   
 )
 
@@ -72466,7 +72415,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6334d065"
+  "78ebc52e"
   
 )
 
@@ -72533,7 +72482,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "629fc8d3"
+  "530459d7"
   
 )
 
@@ -72600,7 +72549,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "dd2aba44"
+  "1c80203c"
   
 )
 
@@ -72667,7 +72616,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6c11bcf1"
+  "64d7f26d"
   
 )
 
@@ -72734,7 +72683,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "33af2d91"
+  "c2634ed6"
   
 )
 
@@ -72801,7 +72750,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8c478c3e"
+  "64308d5d"
   
 )
 
@@ -72868,7 +72817,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "180f59dc"
+  "31fbc8e0"
   
 )
 
@@ -72935,7 +72884,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "00dc853a"
+  "10dfc3b6"
   
 )
 
@@ -73002,7 +72951,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a2ec1f0"
+  "298c7728"
   
 )
 
@@ -73069,7 +73018,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0197d352"
+  "5f89635b"
   
 )
 
@@ -73136,7 +73085,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "074eadee"
+  "237c3d6a"
   
 )
 
@@ -73203,7 +73152,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "67815de0"
+  "e56b58e8"
   
 )
 
@@ -73270,7 +73219,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "07bb1a49"
+  "00814fc5"
   
 )
 
@@ -73337,7 +73286,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6b54bb16"
+  "2df2a479"
   
 )
 
@@ -73404,7 +73353,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66d4cb8c"
+  "913cece0"
   
 )
 
@@ -73471,7 +73420,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2b711ed0"
+  "0c11799c"
   
 )
 
@@ -73538,7 +73487,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "268a0ee6"
+  "30d5dd3c"
   
 )
 
@@ -73605,7 +73554,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0a368290"
+  "2dd7f40c"
   
 )
 
@@ -73672,7 +73621,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7fa17980"
+  "33a24408"
   
 )
 
@@ -73739,7 +73688,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0c1e5e98"
+  "4c00d1a0"
   
 )
 
@@ -73806,7 +73755,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ccce886"
+  "64b8b6c1"
   
 )
 
@@ -73873,7 +73822,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9f13f20a"
+  "5b7fe002"
   
 )
 
@@ -73940,7 +73889,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2b2ccd3c"
+  "42a3e4b8"
   
 )
 
@@ -74007,7 +73956,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0d900dea"
+  "0f472187"
   
 )
 
@@ -74074,7 +74023,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9d577da8"
+  "ee7fcda0"
   
 )
 
@@ -74141,7 +74090,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5e843019"
+  "3e92f695"
   
 )
 
@@ -74852,7 +74801,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66fb8169"
+  "5fc1b6e5"
   
 )
 
@@ -75712,7 +75661,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "411323d8"
+  "4a959918"
   
 )
 
@@ -75779,7 +75728,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3c54499f"
+  "253a57ca"
   
 )
 
@@ -75846,7 +75795,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "53d22138"
+  "ff297a40"
   
 )
 
@@ -75913,7 +75862,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78b5c717"
+  "717bfc93"
   
 )
 
@@ -75980,7 +75929,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2d4804fd"
+  "56443f0e"
   
 )
 
@@ -76047,7 +75996,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7a0610f9"
+  "c4b0fb16"
   
 )
 
@@ -76114,7 +76063,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "93109574"
+  "0704734a"
   
 )
 
@@ -76181,7 +76130,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "401e6012"
+  "5c4bef8e"
   
 )
 
@@ -76248,7 +76197,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7ccc8f7e"
+  "8b402486"
   
 )
 
@@ -76315,7 +76264,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7aab7022"
+  "891f052a"
   
 )
 
@@ -76382,7 +76331,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "330edf1f"
+  "597609ba"
   
 )
 
@@ -76449,7 +76398,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fb2471f6"
+  "49756781"
   
 )
 
@@ -76516,7 +76465,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d7941e7c"
+  "0155c874"
   
 )
 
@@ -76583,7 +76532,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "dfd1ab4a"
+  "6783025f"
   
 )
 
@@ -76650,7 +76599,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "09e23d06"
+  "5e2c44fc"
   
 )
 
@@ -76717,7 +76666,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5d82ce59"
+  "844fc946"
   
 )
 
@@ -76784,7 +76733,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14fd73b9"
+  "53ef1396"
   
 )
 
@@ -81412,14 +81361,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getItemListUrlParams(searchParams) {
+  var _searchParams$facets;
+
   var urlParams = {};
   var defaultItemsPerPage = App.config.pagination.itemsPerPage;
   urlParams.query = searchParams.query && searchParams.query.length > 0 ? searchParams.query : null;
   urlParams.items = searchParams.items !== defaultItemsPerPage ? searchParams.items : null;
   urlParams.page = searchParams.page > 1 ? searchParams.page : null;
-  urlParams.facets = searchParams.facets.length > 0 ? searchParams.facets : null;
-  urlParams.priceMin = searchParams.priceMin.length > 0 ? searchParams.priceMin : null;
-  urlParams.priceMax = searchParams.priceMax.length > 0 ? searchParams.priceMax : null;
+  urlParams.facets = ((_searchParams$facets = searchParams.facets) === null || _searchParams$facets === void 0 ? void 0 : _searchParams$facets.length) > 0 ? searchParams.facets : null;
+  urlParams.priceMin = searchParams.priceMin ? searchParams.priceMin : null;
+  urlParams.priceMax = searchParams.priceMax ? searchParams.priceMax : null;
 
   if (App.isSearch) {
     urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch && searchParams.sorting.length > 0 ? searchParams.sorting : null;
@@ -84371,7 +84322,6 @@ var mutations = {
   setFacets: function setFacets(state, facets) {
     state.facets = facets || [];
   },
-  // TODO needed?
   setPriceFacet: function setPriceFacet(state, _ref) {
     var priceMin = _ref.priceMin,
         priceMax = _ref.priceMax;
@@ -84568,29 +84518,27 @@ function _getSelectedFacetValues(facet) {
   var selectedFacets = [];
   facet.values.forEach(function (value) {
     if (value.id === "price") {
-      value.name = _getPriceFacetName(value.minPrice, value.maxPrice);
+      value.name = _getPriceFacetName(value.priceMin, value.priceMax);
     }
 
     if (value.selected || value.id === "price") {
       selectedFacets.push(value);
     }
-
-    console.log("test");
   });
   return selectedFacets;
 }
 
-function _getPriceFacetName(minPrice, maxPrice) {
-  var priceMinFormatted = Vue.filter("currency").apply(Object, [minPrice]);
-  var priceMaxFormatted = Vue.filter("currency").apply(Object, [maxPrice]);
+function _getPriceFacetName(priceMin, priceMax) {
+  var priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+  var priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
   var priceFacetName = "";
 
-  if (!maxPrice.length && !minPrice.length) {
+  if (!!priceMax && !!priceMin) {
     priceFacetName = priceMinFormatted + " - " + priceMaxFormatted;
-  } else if (!minPrice.length) {
-    priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemTo") + priceMaxFormatted;
-  } else if (!maxPrice.length) {
+  } else if (priceMin) {
     priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemFrom") + priceMinFormatted;
+  } else if (priceMax) {
+    priceFacetName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.itemTo") + priceMaxFormatted;
   }
 
   return priceFacetName;
