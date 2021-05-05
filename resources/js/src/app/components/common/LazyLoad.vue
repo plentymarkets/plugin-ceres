@@ -17,10 +17,6 @@ export default {
             return !!this.$store.state.lazyComponent.components[this.component];
         },
 
-        isSSREnabled() {
-            return App.isSSREnabled;
-        },
-
         isClient() {
             return App.location === "client";
         }
