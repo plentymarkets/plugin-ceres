@@ -93,3 +93,11 @@ export function detectPassiveEvents()
 
     return _supportsPassive;
 }
+
+/**
+ * Detect if the IntersectionObserver is supported by the browser
+ */
+export function detectIntersectionObserver()
+{
+    return "IntersectionObserver" in window;
+}
