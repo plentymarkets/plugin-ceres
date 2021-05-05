@@ -1,90 +1,119 @@
+<template>
+    <div>
+        <!-- SSR -->
+        <lazy-hydrate v-if="isSSREnabled" :when-visible="intersectionObserverOptions">
+            <slot></slot>
+        </lazy-hydrate>
+
+        <!-- no SSR && component is mounted -->
+        <intersector v-else-if="isIntersectorEnabled">
+            <slot></slot>
+        </intersector>
+    </div>
+</template>
+
 <script>
-    // const FEATURE_ENABLED = 'IntersectionObserver' in window;
-    const FEATURE_ENABLED = true;
+import { detectIntersectionObserver } from '../../helper/featureDetect';
 
-    export default {
-        props:
-        {
-            threshold: {
-                type: Number,
-                default: 0.1
-            },
-            margin: {
-                type: String,
-                default: "0px"
-            }
-        },
+// the intersector component for not server side rendered views
+const IntersectorComponent = {
+    data()
+    {
+        return {
+            isVisible: false
+        }
+    },
 
-        data()
+    created()
+    {
+        if (App.isShopBuilder)
         {
-            return {
-                isVisible: false
-                // mayObserve: false
-            }
-        },
+            this.isVisible = true;
+            return;
+        }
 
-        created()
-        {
-            if(!FEATURE_ENABLED || App.isShopBuilder || this.$isSSR)
+        this.observer = new IntersectionObserver((entries) => {
+            const quasiIntersecting = Math.abs(entries[0].intersectionRatio - this.$parent.threshold) <= 0.05;
+
+            if (entries[0].intersectionRatio >= this.$parent.threshold || quasiIntersecting)
             {
+                this.observer.unobserve(this.$parent.$el);
                 this.isVisible = true;
-                return;
             }
 
-            this.observer = new IntersectionObserver((entries) => {
-                let quasiIntersecting = Math.abs(entries[0].intersectionRatio - this.threshold) <= 0.05;
-                if(entries[0].intersectionRatio >= this.threshold || quasiIntersecting)
-                {
-                    this.observer.unobserve(this.$el);
-                    this.isVisible = true;
-                }
-            }, {
+        }, this.$parent.intersectionObserverOptions);
+    },
+
+    mounted()
+    {
+        if (!App.isShopBuilder)
+        {
+            this.$nextTick(() => {
+                this.observer.observe(this.$parent.$el);
+            });
+        }
+    },
+
+    destroyed()
+    {
+        if (!App.isShopBuilder)
+        {
+            this.observer.disconnect();
+        }
+    },
+
+    render()
+    {
+        if (this.isVisible)
+        {
+            return this.$slots.default ? this.$slots.default : null;
+        }
+        else
+        {
+            return this.$slots.loading ? this.$slots.loading : null;
+        }
+    }
+};
+
+export default {
+    components: {
+        intersector: IntersectorComponent
+    },
+
+    props: {
+        threshold: {
+            type: Number,
+            default: 0.1
+        },
+        margin: {
+            type: String,
+            default: "0px"
+        }
+    },
+
+    computed: {
+        isSSREnabled() {
+            return App.config.log.performanceSsr;
+        },
+
+        intersectionObserverOptions() {
+            return {
                 root: null,
                 rootMargin: this.margin,
                 threshold: this.threshold
-            });
-        },
+            };
+        }
+    },
 
-        mounted()
-        {
-            if(FEATURE_ENABLED && !App.isShopBuilder)
-            {
-                this.$nextTick(() => {
-                    // this.mayObserve = true;
-                    this.observer.observe(this.$el);
-                });
-            }
+    data() {
+        return {
+            isIntersectorEnabled: false
+        }
+    },
 
-        },
-
-        /*
-        updated()
-        {
-            if(FEATURE_ENABLED && this.mayObserve && !App.isShopBuilder)
-            {
-                this.mayObserve = false;
-            }
-        },
-        */
-
-        destroyed()
-        {
-            if(FEATURE_ENABLED && !App.isShopBuilder)
-            {
-                this.observer.disconnect();
-            }
-        },
-
-        render()
-        {
-            if( this.isVisible && !this.$isSSR )
-            {
-                return this.$slots.default ? this.$slots.default : null;
-            }
-            else
-            {
-                return this.$slots.loading ? this.$slots.loading : null;
-            }
-        },
+    mounted() {
+        // get value in the mounted hook, to ensure that it's only enabled in the client (SSR)
+        this.isIntersectorEnabled = detectIntersectionObserver();
     }
+}
 </script>
