@@ -72,14 +72,6 @@ export default {
         }
     },
 
-    data()
-    {
-        return {
-            initialPriceMin: "",
-            initialPriceMax: ""
-        };
-    },
-
     computed:
     {
         ...mapState({
