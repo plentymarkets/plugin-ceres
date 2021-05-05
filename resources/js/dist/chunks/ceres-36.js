@@ -89,6 +89,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -361,7 +363,10 @@ var render = function() {
             "data-toggle": "tooltip",
             "data-placement": "top",
             "data-testing": "quantity-btn-increase",
-            title: _vm.maximumHint
+            title: _vm.maximumHint,
+            "aria-label": _vm.$translate(
+              "Ceres::Template.itemQuantityInputIncrease"
+            )
           },
           on: {
             click: function($event) {
@@ -398,7 +403,10 @@ var render = function() {
             "data-toggle": "tooltip",
             "data-placement": "bottom",
             "data-testing": "quantity-btn-decrease",
-            title: _vm.minimumHint
+            title: _vm.minimumHint,
+            "aria-label": _vm.$translate(
+              "Ceres::Template.itemQuantityInputDecrease"
+            )
           },
           on: {
             click: function($event) {
