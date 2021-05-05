@@ -141,12 +141,14 @@ export default {
         })
     },
 
+    created()
+    {
+        this.$store.commit("setCurrentCategory", this.initialCategory);
+    },
+
     mounted()
     {
         this.addEventListener();
-
-        // TODO move to general place (lazy hydrating)
-        this.$store.commit("setCurrentCategory", this.initialCategory);
     },
 
     methods:

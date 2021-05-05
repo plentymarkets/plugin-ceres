@@ -18,17 +18,14 @@ const mutations =
     {
         addFacets(state, facets)
         {
-            const stateFacets = state.facets;
-
             for (const facet of facets)
             {
-                if (!stateFacets.find(fac => fac.id === facet.id))
+                if (!state.facets.find(fac => fac.id === facet.id))
                 {
-                    stateFacets.push(facet);
+                    state.facets.push(facet);
+                    state.selectedFacets = state.selectedFacets.concat(_getSelectedFacetValues(facet));
                 }
             }
-
-            state.facets = stateFacets;
         },
 
         /**
@@ -41,27 +38,13 @@ const mutations =
 
         setPriceFacet(state, { priceMin, priceMax })
         {
-            const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
-            const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
-
             const priceFacet = {
                 id: "price",
-                priceMin: priceMin,
-                priceMax: priceMax
+                priceMin,
+                priceMax
             };
 
-            if (!priceMax.length)
-            {
-                priceFacet.name = TranslationService.translate("Ceres::Template.itemFrom") + priceMinFormatted;
-            }
-            else if (!priceMin.length)
-            {
-                priceFacet.name = TranslationService.translate("Ceres::Template.itemTo") + priceMaxFormatted;
-            }
-            else
-            {
-                priceFacet.name = priceMinFormatted + " - " + priceMaxFormatted;
-            }
+            priceFacet.name = _getPriceFacetName(priceMin, priceMax);
 
             state.facets.find(facet => facet.type === "price").values[0] = priceFacet;
         },
@@ -255,6 +238,54 @@ const getters =
             return selectedFacetIds.filter(facet => facet !== "price");
         }
     };
+
+function _getSelectedFacetValues(facet)
+{
+    if (!facet.values && facet.values.length <= 0)
+    {
+        return [];
+    }
+
+    const selectedFacets = [];
+
+    facet.values.forEach((value) =>
+    {
+        if (value.id === "price")
+        {
+            value.name = _getPriceFacetName(value.priceMin, value.priceMax);
+        }
+
+        if (value.selected || value.id === "price")
+        {
+            selectedFacets.push(value);
+        }
+    });
+
+    return selectedFacets;
+}
+
+function _getPriceFacetName(priceMin, priceMax)
+{
+    const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+    const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
+
+    let priceFacetName = "";
+
+    if (!!priceMax && !!priceMin)
+    {
+        priceFacetName = priceMinFormatted + " - " + priceMaxFormatted;
+    }
+    else if (priceMin)
+    {
+        priceFacetName = TranslationService.translate("Ceres::Template.itemFrom") + priceMinFormatted;
+    }
+    else if (priceMax)
+    {
+        priceFacetName = TranslationService.translate("Ceres::Template.itemTo") + priceMaxFormatted;
+    }
+
+    return priceFacetName;
+}
 
 export default
 {
