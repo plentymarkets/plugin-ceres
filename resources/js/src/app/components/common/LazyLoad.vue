@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isClient && isLoaded">
+    <div v-if="enabled && isLoaded">
         <slot></slot>
     </div>
 </template>
@@ -20,6 +20,16 @@ export default {
         isClient() {
             return App.location === "client";
         }
+    },
+
+    data() {
+        return {
+            enabled: false
+        }
+    },
+
+    mounted() {
+        this.enabled = true;
     }
 }
 </script>
