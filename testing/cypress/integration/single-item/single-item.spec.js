@@ -86,7 +86,7 @@ context("Single Item", () =>
 
     });
 
-    it.only("should display scaled price after quantity change", () =>
+    it("should display scaled price after quantity change", () =>
     {
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
         cy.get(".price").should("contain", "0,50");
