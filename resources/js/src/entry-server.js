@@ -13,6 +13,10 @@ function createApp(context)
 {
     return new Promise((resolve, reject) =>
     {
+        // defines if the render location is the server
+        App.isSSR = true;
+        App.isSSREnabled = App.config.log.performanceSsr;
+
         const { app, store } = createAppInternal(context);
 
         initServerStore(store);
