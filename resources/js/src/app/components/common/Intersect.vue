@@ -1,5 +1,4 @@
 <template>
-    <div>
         <!-- SSR -->
         <lazy-hydrate v-if="isSSREnabled" :when-visible="intersectionObserverOptions">
             <slot></slot>
@@ -9,7 +8,6 @@
         <intersector v-else-if="isIntersectorEnabled">
             <slot></slot>
         </intersector>
-    </div>
 </template>
 
 <script>
@@ -66,11 +64,11 @@ const IntersectorComponent = {
     {
         if (this.isVisible)
         {
-            return this.$slots.default ? this.$slots.default : null;
+            return this.$slots.default || null;
         }
         else
         {
-            return this.$slots.loading ? this.$slots.loading : null;
+            return this.$parent.$slots.loading || null;
         }
     }
 };
