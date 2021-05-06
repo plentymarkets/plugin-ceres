@@ -1,12 +1,11 @@
 <template>
-    <lazy-hydrate never :trigger-hydration="isLoaded">
+    <div v-if="enabled && isLoaded">
         <slot></slot>
-    </lazy-hydrate>
+    </div>
 </template>
 
 <script>
 export default {
-
     name: "lazy-load",
 
     props: {
@@ -14,10 +13,19 @@ export default {
     },
 
     computed: {
-        isLoaded()
-        {
+        isLoaded() {
             return !!this.$store.state.lazyComponent.components[this.component];
         }
+    },
+
+    data() {
+        return {
+            enabled: false
+        }
+    },
+
+    mounted() {
+        this.enabled = true;
     }
 }
 </script>

@@ -10,7 +10,10 @@ import { initListener } from "./app/services/ApiService";
 import { mount } from "./mount";
 
 Vue.prototype.$mount = mount;
-Vue.prototype.$isSSR = false;
+
+// defines if the render location is the client
+App.isSSR = false;
+App.isSSREnabled = App.config.log.performanceSsr;
 
 window.createApp = (selector) => {
     // client-specific bootstrapping logic...
