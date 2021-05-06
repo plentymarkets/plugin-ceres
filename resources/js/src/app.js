@@ -246,6 +246,7 @@ export function createApp(options)
     Vue.component("single-item-set-component", SingleItemSetComponent);
     Vue.component("form-attachment", () => import("./app/components/form/FormAttachment.vue"));
     Vue.component("client-only", ClientOnly);
+    Vue.component("bg-img", () => import("./app/components/common/BgImg.vue"));
 
     // EXTERNAL
     Vue.component("lazy-hydrate", LazyHydrate);
