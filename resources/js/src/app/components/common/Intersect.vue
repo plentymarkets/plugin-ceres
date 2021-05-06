@@ -1,13 +1,13 @@
 <template>
-        <!-- SSR -->
-        <lazy-hydrate v-if="isSSREnabled" :when-visible="intersectionObserverOptions">
-            <slot></slot>
-        </lazy-hydrate>
+    <!-- SSR only -->
+    <lazy-hydrate v-if="isSSREnabled" :when-visible="intersectionObserverOptions">
+        <slot></slot>
+    </lazy-hydrate>
 
-        <!-- no SSR && component is mounted -->
-        <intersector v-else-if="isIntersectorEnabled">
-            <slot></slot>
-        </intersector>
+    <!-- no SSR && component is mounted -->
+    <intersector v-else-if="isIntersectorEnabled">
+        <slot></slot>
+    </intersector>
 </template>
 
 <script>
