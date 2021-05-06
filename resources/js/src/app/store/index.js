@@ -35,8 +35,6 @@ export function createStore()
     Vue.options.delimiters = ["${", "}"];
     Vue.use(Vuex);
 
-    const plugins = !App.isSSR && App.config.log.performanceEventPropagation ? [eventPropagation] : [];
-
     // eslint-disable-next-line
     store = new Vuex.Store(
         {
@@ -60,7 +58,7 @@ export function createStore()
                 wishList
             },
 
-            plugins: plugins
+            plugins: !App.isSSR ? [eventPropagation] : []
         });
 
     return store;
