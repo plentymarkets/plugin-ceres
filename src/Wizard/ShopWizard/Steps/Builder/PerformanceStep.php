@@ -27,7 +27,8 @@ class PerformanceStep extends Step
             "sections" => [
                 $this->generateSsrSection(),
                 $this->generateLoggingOptionsSection(),
-                $this->generatePerformanceSection()
+                $this->generatePerformanceSection(),
+                $this->generatePerformanceEventPropagationSection()
             ]
         ];
         
@@ -130,6 +131,26 @@ class PerformanceStep extends Step
                     "default" => true,
                     "options" => [
                         "name" => "Wizard.performanceErrorCheck"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generatePerformanceEventPropagationSection():array
+    {
+        return [
+            "title" => "Wizard.performanceEventPropagationTitle",
+            "description" => "Wizard.performanceEventPropagationDescription",
+            "form" => [
+                "performance_eventPropagation" => [
+                    "type" => "checkbox",
+                    "default" => true,
+                    "options" => [
+                        "name" => "Wizard.performanceEventPropagation"
                     ]
                 ]
             ]

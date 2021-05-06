@@ -34,6 +34,11 @@ class CeresLogConfig extends PluginConfig
     public $performanceSsr;
 
     /**
+     * @var bool $performanceEventPropagation Activate the vueX eventPropagation plugin.
+     */
+    public $performanceEventPropagation;
+
+    /**
      * @inheritDoc
      */
     protected function getPluginName() :string
@@ -65,5 +70,6 @@ class CeresLogConfig extends PluginConfig
         $this->performanceLevel = $this->getTextValue( 'log.performance.level', 'live' );
         $this->checkSyntax = $this->getBooleanValue('log.check_syntax', true);
         $this->performanceSsr = $this->getBooleanValue('log.performance.ssr', false);
+        $this->performanceEventPropagation = $this->getBooleanValue('log.performance.eventPropagation', true);
     }
 }

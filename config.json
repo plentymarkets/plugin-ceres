@@ -4508,6 +4508,14 @@
                     "options": {
                         "defaultValue": "false"
                     }
+                },
+                "log.performance.eventPropagation": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.logPerformanceEventPropagation",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         }

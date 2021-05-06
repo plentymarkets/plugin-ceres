@@ -20,7 +20,7 @@ import user from "./modules/UserModule";
 import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
-// import eventPropagation from "./plugins/EventPropagationPlugin";
+import eventPropagation from "./plugins/EventPropagationPlugin";
 import { isDefined } from "../helper/utils";
 
 export let store;
@@ -56,9 +56,9 @@ export function createStore()
                 orderReturn,
                 user,
                 wishList
-            }
+            },
 
-            // plugins: [eventPropagation]
+            plugins: !App.isSSR ? [eventPropagation] : []
         });
 
     return store;
