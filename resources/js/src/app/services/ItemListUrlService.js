@@ -7,10 +7,10 @@ export function getItemListUrlParams(searchParams)
 
     urlParams.query = (searchParams.query && searchParams.query.length > 0) ? searchParams.query : null;
     urlParams.items = (searchParams.items !== defaultItemsPerPage) ? searchParams.items : null;
-    urlParams.page = (searchParams.page > 1) ? searchParams.page : null;
-    urlParams.facets = (searchParams.facets.length > 0) ? searchParams.facets : null;
-    urlParams.priceMin = (searchParams.priceMin.length > 0) ? searchParams.priceMin : null;
-    urlParams.priceMax = (searchParams.priceMax.length > 0) ? searchParams.priceMax : null;
+    urlParams.page = searchParams.page > 1 ? searchParams.page : null;
+    urlParams.facets = searchParams.facets?.length > 0 ? searchParams.facets : null;
+    urlParams.priceMin = searchParams.priceMin ? searchParams.priceMin : null;
+    urlParams.priceMax = searchParams.priceMax ? searchParams.priceMax : null;
 
     if (App.isSearch)
     {

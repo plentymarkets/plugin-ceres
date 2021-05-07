@@ -48,7 +48,7 @@
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
                         <div class="always-visible-search flex-grow-1">
-                            <lazy-hydrate when-idle>
+                            {% if not isPreview %}<lazy-hydrate when-idle>{% endif %}
                                 <item-search>
                                     <div class="position-relative d-flex flex-grow-1">
                                         <input type="search" class="search-input px-3 py-2 flex-grow-1" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearchTerm")') }}">
@@ -74,7 +74,7 @@
                                         </template>
                                     {% endif %}
                                 </item-search>
-                            </lazy-hydrate>
+                            {% if not isPreview %}</lazy-hydrate>{% endif %}
                         </div>
                     {{ Twig.else() }}
                         {{ Twig.print("overrideSearchBar | raw") }}
@@ -145,7 +145,8 @@
                                     aria-controls="searchBox"
                                     data-testing="searchbox-select"
                                     data-parent="#controlsList"
-                                    aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}">
+                                    aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}"
+                                    @mouseover.once="$store.dispatch('loadComponent', 'item-search')">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
                                 </a>
                             </li>
@@ -237,7 +238,7 @@
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse{% if isPreview %} position-relative{% endif %}">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <lazy-hydrate when-visible>
+                        {% if not isPreview %}<lazy-load component="item-search">{% endif %}
                             <item-search>
                                 {% if isPreview or children is defined and children.suggestions | trim is not empty %}
                                     <template #autocomplete-suggestions>
@@ -248,7 +249,7 @@
                                     </template>
                                 {% endif %}
                             </item-search>
-                        </lazy-hydrate>
+                        {% if not isPreview %}</lazy-load>{% endif %}
                     {{ Twig.else() }}
                         {{ Twig.print("overrideSearchBar | raw") }}
                     {{ Twig.endif() }}

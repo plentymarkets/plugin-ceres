@@ -16,11 +16,13 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <variation-select :force-content="{{ forceContent | json_encode }}">
         {% if isPreview %}
-            <div class="input-unit">
-                <select id="attribute-select" class="custom-select">
-                    <option>{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
-                </select>
-                <label for="attribute-select">{{ trans("Ceres::Widget.attributeLabel") }}</label>
+            <div class="col">
+                <div class="input-unit">
+                    <select id="attribute-select" class="custom-select">
+                        <option>{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
+                    </select>
+                    <label for="attribute-select">{{ trans("Ceres::Widget.attributeLabel") }}</label>
+                </div>
             </div>
         {% endif %}
     </variation-select>

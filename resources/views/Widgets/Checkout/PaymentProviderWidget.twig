@@ -28,12 +28,10 @@
 
     {{ Twig.if("overridePaymentList | trim is empty") }}
         <div class="payment-method-select">
-            <client-only>
-                <payment-provider-select
-                        {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                        {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
-                </payment-provider-select>
-            </client-only>
+            <payment-provider-select
+                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+            </payment-provider-select>
         </div>
     {{ Twig.else() }}
         {{ Twig.print("overridePaymentList") }}

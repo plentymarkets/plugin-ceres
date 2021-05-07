@@ -2,22 +2,24 @@
     <div v-if="graduatedPrices[0]">
         <b>{{ $translate("Ceres::Template.singleItemGraduatedPrices") }}:</b>
         <table class="graduated-prices-table text-muted">
-            <template v-for="(price, index) in graduatedPrices">
-                <tr>
-                    <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemMinimumQuantity") }} {{ price.minimumOrderQuantity }}</td>
-                    <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-price">
-                        {{ price.unitPrice.formatted }}
-                        <transition name="fade">
-                            <i class="fa fa-lg fa-check-circle-o text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
-                        </transition>
-                    </td>
-                    <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price pl-3 d-none d-xl-block">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
-                </tr>
-                <tr v-if="showBasePrice" class="graduated-base-price d-xl-none">
-                    <td :class="paddingClasses" :style="paddingInlineStyles"></td>
-                    <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
-                </tr>
-            </template>
+            <tbody>
+                <template v-for="(price, index) in graduatedPrices">
+                    <tr>
+                        <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemMinimumQuantity") }} {{ price.minimumOrderQuantity }}</td>
+                        <td :class="paddingClasses" :style="paddingInlineStyles" class="graduated-price">
+                            {{ price.unitPrice.formatted }}
+                            <transition name="fade">
+                                <i class="fa fa-lg fa-check-circle-o text-appearance" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
+                            </transition>
+                        </td>
+                        <td v-if="showBasePrice" :class="paddingClasses" :style="paddingInlineStyles" class="graduated-base-price pl-3 d-none d-xl-block">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
+                    </tr>
+                    <tr v-if="showBasePrice" class="graduated-base-price d-xl-none">
+                        <td :class="paddingClasses" :style="paddingInlineStyles"></td>
+                        <td :class="paddingClasses" :style="paddingInlineStyles">{{ $translate("Ceres::Template.singleItemGraduatedBasePrice", { "price": price.basePrice }) }}</td>
+                    </tr>
+                </template>
+            </tbody>
         </table>
         <br>
     </div>
