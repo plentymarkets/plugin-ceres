@@ -85,6 +85,7 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createCheckbox('lazyloadImage')
             ->withName('Widget.backgroundLazyloadLabel')
+            ->withTooltip('Widget.backgroundLazyloadTooltip')
             ->withCondition("!preloadImage");
 
         $settings->createCheckbox('preloadImage')
