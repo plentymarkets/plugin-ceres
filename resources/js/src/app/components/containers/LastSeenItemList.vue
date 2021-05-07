@@ -1,6 +1,6 @@
 <template>
-    <div class="row" v-show="items.length">
-        <div class="col-12">
+    <div class="row">
+        <div class="col-12" v-show="items.length">
             <slot name="heading"></slot>
         </div>
 
