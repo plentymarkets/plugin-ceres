@@ -12,7 +12,7 @@ class AcceptPrivacyPolicyWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.AcceptPrivacyPolicyWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class AcceptPrivacyPolicyWidget extends BaseWidget
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "privacy", "policy", "datenschutz"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

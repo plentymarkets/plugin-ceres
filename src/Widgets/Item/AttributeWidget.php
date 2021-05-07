@@ -12,7 +12,7 @@ class AttributeWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.AttributeWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class AttributeWidget extends BaseWidget
             ->withType(WidgetTypes::SET_COMPONENT)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "attribute", "eigenschaft"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

@@ -12,7 +12,7 @@ class ItemBundleWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.ItemBundleWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class ItemBundleWidget extends BaseWidget
             ->withType(WidgetTypes::SINGLE_ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(400)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "bundle", "artikelliste"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

@@ -86,9 +86,27 @@ class SeoMapping
             'type'     => 'integer',
             'global'   => true,
             'optional' => true
+        ],
+        'seo_brand' => [
+            'field'    => 'brand.mapping.brand',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_brandId' => [
+            'field'    => 'brand.mapping.brandID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_manufacturer' => [
+            'field'    => 'manufacturer.mapping.manufacturer',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
         ]
     ];
-    
+
     /**
      * @return array
      */

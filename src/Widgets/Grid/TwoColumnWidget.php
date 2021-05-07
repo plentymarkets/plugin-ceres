@@ -12,7 +12,7 @@ class TwoColumnWidget extends GridWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Grid.TwoColumnWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class TwoColumnWidget extends GridWidget
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
             ->withPosition(300)
+            ->withSearchKeyWords([
+                "grid", "struktur", "spalten", "columns", "2"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

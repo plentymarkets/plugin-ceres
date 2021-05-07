@@ -9,10 +9,10 @@ class CategoryFilterWidget extends FilterBaseWidget
 {
     /** @inheritDoc */
     protected $allowedFacetTypes = ["category"];
-    
+
     /** @inheritDoc */
     protected $className = "category";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class CategoryFilterWidget extends FilterBaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(1000)
+                                ->withSearchKeyWords([
+                                    "filter", "kategorie", "category"
+                                ])
                                 ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

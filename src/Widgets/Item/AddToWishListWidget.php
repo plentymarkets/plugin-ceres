@@ -12,7 +12,7 @@ class AddToWishListWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.AddToWishListWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class AddToWishListWidget extends BaseWidget
             ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "wishlist", "add", "hinzufügen", "wunschliste"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

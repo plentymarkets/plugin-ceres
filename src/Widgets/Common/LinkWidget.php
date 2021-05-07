@@ -25,6 +25,9 @@ class LinkWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(900)
+            ->withSearchKeyWords([
+                "link", "button", "knopf", "schaltfläche"
+            ])
             ->toArray();
     }
 
