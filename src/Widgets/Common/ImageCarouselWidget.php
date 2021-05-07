@@ -25,6 +25,9 @@ class ImageCarouselWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "bild", "bilder", "image", "picture", "carousel", "bilderkarussel"
+            ])
             ->toArray();
     }
 

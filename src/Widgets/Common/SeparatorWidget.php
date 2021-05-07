@@ -12,7 +12,7 @@ class SeparatorWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.SeparatorWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class SeparatorWidget extends BaseWidget
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
             ->withPosition(1100)
+            ->withSearchKeyWords([
+                "trenner", "separator", "trennstrich", "linie", "line", "divider"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

@@ -11,7 +11,7 @@ class ToolbarWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Category.ToolbarWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -23,6 +23,9 @@ class ToolbarWidget extends BaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(100)
+                                ->withSearchKeyWords([
+                                    "item", "artikel", "article", "produkt", "category", "kategorie", "toolbar"
+                                ])
                                 ->withAllowedNestingTypes(
                                     [
                                         WidgetTypes::STRUCTURE,
@@ -34,7 +37,7 @@ class ToolbarWidget extends BaseWidget
                                 )
                                 ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -42,26 +45,26 @@ class ToolbarWidget extends BaseWidget
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
-        
+
         $settings->createCustomClass();
-        
+
         $settings->createAppearance()
                  ->withDefaultValue('primary');
-        
+
         $settings->createIcon()
                  ->withDefaultValue('fa-sliders');
-        
+
         $settings->createText('text')
                  ->withName('Widget.toolbarTextLabel')
                  ->withTooltip('Widget.toolbarTextTooltip');
-        
+
         $settings->createCheckbox('autoFormat')
                  ->withDefaultValue(false)
                  ->withName('Widget.toolbarAutoFormatLabel')
                  ->withTooltip('Widget.toolbarAutoFormatTooltip');
 
         $settings->createSpacing();
-        
+
         return $settings->toArray();
     }
 }
