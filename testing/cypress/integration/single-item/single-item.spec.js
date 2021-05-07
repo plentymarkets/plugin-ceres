@@ -75,14 +75,13 @@ context("Single Item", () =>
 
     it("should display scale prices and apply marker on quantity change", () =>
     {
-        cy.scrollTo(0, 300);
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
 
-        cy.get(".graduated-prices-table").children().first().children().eq(1).children().first().should("have.class", "fa-check-circle-o");
+        cy.get(".graduated-prices-table").children().first().children().eq(0).children().eq(1).children().first().should("have.class", "fa-check-circle-o");
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click().click();
 
-        cy.get(".graduated-prices-table").children().eq(2).children().eq(1).children().first().should("have.class", "fa-check-circle-o");
+        cy.get(".graduated-prices-table").children().first().children().eq(2).children().eq(1).children().first().should("have.class", "fa-check-circle-o");
 
     });
 
