@@ -13,7 +13,7 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="row clearfix">
         <div class="col-12">
-            {# <intersect>
+            <intersect>
                 <live-shopping-item
                     :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection }}"
                     :display-settings="{{ liveShoppingConfig | json_encode }}"
@@ -30,6 +30,7 @@
                         </div>
                     {% endif %}
                 </live-shopping-item>
+
                 <template #loading>
                     <div class="category-item-placeholder w-100 invisible">
                         <a href="#" class="small">
@@ -38,25 +39,7 @@
                         </a>
                     </div>
                 </template>
-            </intersect> #}
-            <lazy-hydrate when-visible>
-                <live-shopping-item
-                    :live-shopping-id="{{ liveShoppingConfig.liveShoppingSelection }}"
-                    :display-settings="{{ liveShoppingConfig | json_encode }}"
-                    :show-net-prices="{{ Twig.print("services.customer.showNetPrices() | json_encode") }}"
-                    :sorting="{{ sorting | json_encode }}"
-                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
-                    {% if isPreview %}
-                        <div class="widget-placeholder prop-2-3 proportional-placeholder">
-                            <div>
-                                <p class="title">{{ Twig.trans("Ceres::Widget.liveShoppingPlaceholderTitle") }}</p>
-                                <p class="description">{{ Twig.trans("Ceres::Widget.liveShoppingPlaceholderDescription") }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-                </live-shopping-item>
-            </lazy-hydrate>
+            </intersect>
         </div>
     </div>
 </div>
