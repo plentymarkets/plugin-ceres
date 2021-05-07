@@ -21,7 +21,7 @@
     "lint": "npm run lint:js && npm run lint:sass",
     "lint:js": "eslint resources/js/src",
     "lint:sass": "stylelint \"resources/scss/**/*.scss\"",
-    "prebuild": "rm -rf resources/js/dist/chunks && npm run build:sass-vendor",
+    "prebuild": "npm run build:sass-vendor",
     "postbuild": "",
     "compareTranslations": "node tools/compareTranslations.js",
     "test": "npm run test:monetaryFormatter",
