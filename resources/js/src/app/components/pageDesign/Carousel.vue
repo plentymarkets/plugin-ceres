@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import "owl.carousel";
-
 export default {
     components: {
         SlotComponent: {

@@ -17,7 +17,7 @@ const mutations =
 
         setShippingCountryId(state, shippingCountryId)
         {
-            if (shippingCountryId !== state.shippingCountryId && App.isSSR)
+            if (shippingCountryId !== state.shippingCountryId && !App.isSSR)
             {
                 document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: shippingCountryId }));
             }
