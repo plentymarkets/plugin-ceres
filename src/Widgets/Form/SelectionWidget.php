@@ -13,7 +13,7 @@ class SelectionWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.SelectionWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class SelectionWidget extends BaseWidget
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(700)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "mail"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

@@ -12,7 +12,7 @@ class TextInputWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.TextInputWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class TextInputWidget extends BaseWidget
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "mail", "text", "textfeld"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

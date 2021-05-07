@@ -17,7 +17,7 @@ class ItemSortingWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Category.ItemSortingWidget';
-    
+
     /**
      * @inheritDoc
      */
@@ -29,9 +29,12 @@ class ItemSortingWidget extends BaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(300)
+                                ->withSearchKeyWords([
+                                    "item", "artikel", "article", "produkt", "sorting", "sortierung", "category", "kategorie"
+                                ])
                                 ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -61,7 +64,7 @@ class ItemSortingWidget extends BaseWidget
 
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -105,7 +108,7 @@ class ItemSortingWidget extends BaseWidget
 
         return $result;
     }
-    
+
     /**
      * @inheritDoc
      */
