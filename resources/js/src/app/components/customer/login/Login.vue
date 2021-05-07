@@ -1,6 +1,6 @@
 <template>
     <div class="login-pwd-reset">
-        <form ref="loginForm" method="post">
+        <form ref="loginForm" :id="'login-form-' + _uid" method="post">
             <div :class="{'modal-body': modalElement}">
                 <div class="row">
                     <div class="col-12">

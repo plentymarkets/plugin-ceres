@@ -47473,7 +47473,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "login-pwd-reset" }, [
     _vm._ssrNode(
-      '<form method="post">',
+      "<form" +
+        _vm._ssrAttr("id", "login-form-" + _vm._uid) +
+        ' method="post">',
       "</form>",
       [
         _vm._ssrNode(
