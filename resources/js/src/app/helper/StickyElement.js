@@ -48,8 +48,11 @@ export class StickyElement
 
         const updateHandler = () =>
         {
-            this.checkElement();
-            this.updateStyles();
+            if (this.enabled)
+            {
+                this.checkElement();
+                this.updateStyles();
+            }
         };
 
         // Update if height of sticky element changes

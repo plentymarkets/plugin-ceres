@@ -13,7 +13,7 @@ class StepByStepNavigationWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Navigation.StepByStepNavigationWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class StepByStepNavigationWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::NAVIGATION)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "navigation", "step by step", "schrittweise"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -35,10 +38,10 @@ class StepByStepNavigationWidget extends BaseWidget
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
-        
+
         $settings->createCustomClass();
         $settings->createAppearance(true);
-        
+
         $settings->createSelect("source")
             ->withDefaultValue("image2Path")
             ->withName("Widget.stepByStepNavigationSourceLabel")
@@ -85,7 +88,7 @@ class StepByStepNavigationWidget extends BaseWidget
             ->withDefaultValue(2);
 
         $settings->createSpacing(false, true);
-        
+
         return $settings->toArray();
     }
 }

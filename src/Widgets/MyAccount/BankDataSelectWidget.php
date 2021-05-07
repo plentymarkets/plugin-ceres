@@ -12,7 +12,7 @@ class BankDataSelectWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.BankDataSelectWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class BankDataSelectWidget extends BaseWidget
             ->withType(WidgetTypes::MY_ACCOUNT)
             ->withCategory(WidgetCategories::MY_ACCOUNT)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "bank", "bankverbindung", "zahlungsmittel"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

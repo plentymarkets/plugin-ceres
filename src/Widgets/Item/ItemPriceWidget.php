@@ -12,7 +12,7 @@ class ItemPriceWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.ItemPriceWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class ItemPriceWidget extends BaseWidget
             ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(400)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "price", "preis"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

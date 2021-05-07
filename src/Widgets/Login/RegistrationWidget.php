@@ -13,7 +13,7 @@ class RegistrationWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Login.RegistrationWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -25,9 +25,12 @@ class RegistrationWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::CUSTOMER)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "registrierung", "registration"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

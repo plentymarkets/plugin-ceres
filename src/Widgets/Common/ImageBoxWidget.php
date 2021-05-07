@@ -40,6 +40,9 @@ class ImageBoxWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "foto", "picture", "bild", "image", "einzelbild"
+            ])
             ->toArray();
     }
 

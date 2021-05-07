@@ -12,7 +12,7 @@ class BreadcrumbWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Header.BreadcrumbWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class BreadcrumbWidget extends BaseWidget
             ->withType(WidgetTypes::HEADER)
             ->withCategory(WidgetCategories::HEADER)
             ->withPosition(0)
+            ->withSearchKeyWords([
+                "header", "breadcrumb", "brotkrumen"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

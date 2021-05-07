@@ -12,7 +12,7 @@ class AddToBasketWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.AddToBasketWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class AddToBasketWidget extends BaseWidget
             ->withType(WidgetTypes::ITEM_CONTENT)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "basket", "add", "hinzufügen", "warenkorb"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
