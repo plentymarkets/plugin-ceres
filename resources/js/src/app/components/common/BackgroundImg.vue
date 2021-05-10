@@ -1,5 +1,5 @@
 <template>
-  <div :class="pictureClass"  :style="{ backgroundImage: 'url(' + backgroundSource + ')' }">
+  <div :class="pictureClass"  :style="backgroundSource">
   </div>
 </template>
 
@@ -31,13 +31,17 @@ export default {
          *  Determine appropriate image url to use as background source
          */
         backgroundSource() {
+            if (!this.url)
+            {
+                return null;
+            }
             if (isDefined(this.supported))
             {
                 if (!this.supported) {
-                    return this.fallbackUrl;
+                    return { backgroundImage: 'url(' + this.fallbackUrl + ')' };
                 }
             }
-            return this.url;
+            return { backgroundImage: 'url(' + this.url + ')' };
         }
     }
 }
