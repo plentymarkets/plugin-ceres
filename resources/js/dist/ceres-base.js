@@ -264,13 +264,21 @@ __webpack_require__.r(__webpack_exports__);
      *  Determine appropriate image url to use as background source
      */
     backgroundSource: function backgroundSource() {
+      if (!this.url) {
+        return null;
+      }
+
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(this.supported)) {
         if (!this.supported) {
-          return this.fallbackUrl;
+          return {
+            backgroundImage: 'url(' + this.fallbackUrl + ')'
+          };
         }
       }
 
-      return this.url;
+      return {
+        backgroundImage: 'url(' + this.url + ')'
+      };
     }
   }
 });
@@ -35099,10 +35107,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {
-    class: _vm.pictureClass,
-    style: { backgroundImage: "url(" + _vm.backgroundSource + ")" }
-  })
+  return _c("div", { class: _vm.pictureClass, style: _vm.backgroundSource })
 }
 var staticRenderFns = []
 render._withStripped = true
