@@ -68999,8 +68999,7 @@ function createApp(options) {
 
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("edit-coupon-overlay", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/myAccount/EditCouponOverlay.vue */ "./resources/js/src/app/components/myAccount/EditCouponOverlay.vue"));
-  }); // window.ceresTranslate = TranslationService.translate;
-
+  });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_54__["default"].translate;
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$ceres = App;
   var store = Object(_app_store_index__WEBPACK_IMPORTED_MODULE_96__["createStore"])();
