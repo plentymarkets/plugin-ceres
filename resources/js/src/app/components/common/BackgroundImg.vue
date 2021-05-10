@@ -5,14 +5,14 @@
 
 <script>
 import { detectWebP } from "../../helper/featureDetect";
-import { isDefined } from '../../helper/utils';
+import { isDefined } from "../../helper/utils";
 
 export default {
     props:
     {
-        url: '',
-        fallbackUrl: '',
-        pictureClass: ''
+        url: "",
+        fallbackUrl: "",
+        pictureClass: ""
     },
     data(){
         return {
