@@ -205,7 +205,7 @@ const actions =
             }
         },
 
-        selectMethodOfPayment({ commit, dispatch }, methodOfPaymentId)
+        selectMethodOfPayment({ commit, state }, methodOfPaymentId)
         {
             return new Promise((resolve, reject) =>
             {

@@ -75,7 +75,7 @@ context("Single Item", () =>
 
     it("should display scale prices and apply marker on quantity change", () =>
     {
-        cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
+        cy.getByTestingAttr("quantity-btn-increase").click().click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
 
         cy.get(".graduated-prices-table").children().first().children().eq(0).children().eq(1).children().first().should("have.class", "fa-check-circle-o");
@@ -88,7 +88,7 @@ context("Single Item", () =>
     it("should display scaled price after quantity change", () =>
     {
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
-        cy.get(".price").should("contain", "0,50");
+        cy.get(".price").should("contain", "0,70");
     });
 
     it("should display tags and open in search on click", () =>
