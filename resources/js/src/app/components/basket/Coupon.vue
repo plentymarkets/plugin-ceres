@@ -20,10 +20,8 @@
 </template>
 
 <script>
-
 const NotificationService = require("../../services/NotificationService");
 
-import ExceptionMap from "../../exceptions/ExceptionMap";
 import TranslationService from "../../services/TranslationService";
 import { mapState } from "vuex";
 
@@ -105,7 +103,7 @@ export default {
                     error =>
                     {
                         this.waiting = false;
-                        NotificationService.error(this.getCouponRedemptionErrorMessage(error)).closeAfter(10000);
+                        NotificationService.error(this.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
                     });
             }
             else
@@ -137,12 +135,33 @@ export default {
                 });
         },
 
-        getCouponRedemptionErrorMessage(error)
+        getCouponRedemtionErrorMessage(error)
         {
-            const errorCode = error && error.warn && error.warn.code || 0;
-            if (errorCode > 0 && ExceptionMap.has(errorCode.toString()))
+            const errorMessageKeys = {
+                18:     "couponMinOrderValueNotReached",
+                51:     "couponnotUsableForSpecialOffer",
+                70:     "couponAlreadyUsedOrInvalidCouponCode",
+                78:     "couponCampaignExpired",
+                126:    "couponNoMatchingItemInBasket",
+                329:    "couponOnlySubscription",
+                330:    "couponOnlySingleUsage",
+                331:    "couponNoOpenAmount",
+                332:    "couponExpired",
+                334:    "couponOnlyForNewCustomers",
+                335:    "couponOnlyForExistingCustomers",
+                336:    "couponWrongCustomerGroup",
+                337:    "couponWrongCustomerType",
+                338:    "couponNoCustomerTypeProvided",
+                339:    "couponNoCustomerTypeActivated",
+                340:    "couponNoCustomerGroupActivated",
+                341:    "couponCampaignNoWebstoreActivated",
+                342:    "couponCampaignWrongWebstoreId",
+                343:    "couponCampaignNoWebstoreIdGiven"
+            };
+
+            if (error && error.error && error.code && errorMessageKeys[error.code])
             {
-                return TranslationService.translate("Ceres::Template." + ExceptionMap.get(errorCode.toString()));
+                return TranslationService.translate("Ceres::Template." + errorMessageKeys[error.code]);
             }
 
             return TranslationService.translate("Ceres::Template.couponRedeemFailure");

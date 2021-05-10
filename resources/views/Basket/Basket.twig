@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="col-md-7">
-                <div class="py-4 px-3 bg-white">
+                <div class="pt-4 pb-0 px-3 bg-white">
                     <basket-list :basket-details-data="{{ ceresConfig.basket.itemData | json_encode }}">
                         <template #before-basket-item>
                             {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
@@ -32,7 +32,7 @@
             </div>
 
             <div class="col-md-5">
-                <div class="py-4 px-3 bg-white" v-stick-in-parent="$store.state.basket.isBasketInitiallyLoaded">
+                <div class="pb-4 pt-0 px-3 bg-white" v-stick-in-parent="$store.state.basket.isBasketInitiallyLoaded">
 
                     {% if ceresConfig.basket.showShippingCountrySelect %}
                         <shipping-country-select :basket-select="true" :open-basket-preview="false"></shipping-country-select>
@@ -79,7 +79,9 @@
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                         {{ trans("Ceres::Template.basketCheckout") }}
                     </a>
-                    {{ LayoutContainer.show("Ceres::Basket.AfterCheckoutButton") }}
+                    <div class="external-payment-btn">
+                        {{ LayoutContainer.show("Ceres::Basket.AfterCheckoutButton") }}
+                    </div>
                 </div>
             </div>
         </div>

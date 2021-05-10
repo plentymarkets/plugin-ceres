@@ -49,10 +49,6 @@ class BreadcrumbWidget extends BaseWidget
             ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("showOnLegalPages")
-            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
-            ->withDefaultValue(false);
-
         return $settingsFactory->toArray();
     }
 }

@@ -14,8 +14,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 /* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 /* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
-/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
+/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
 
 //
 //
@@ -64,13 +63,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_5__["ButtonSizePropertyMixin"]],
+  mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_4__["ButtonSizePropertyMixin"]],
   props: {
     showNameInputs: {
       type: Boolean,
@@ -92,8 +90,7 @@ __webpack_require__.r(__webpack_exports__);
       email: "",
       isDisabled: false,
       privacyPolicyValue: false,
-      honeypot: "",
-      loadRecaptcha: false
+      honeypot: ""
     };
   },
   computed: {
@@ -121,29 +118,24 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this2 = this;
 
-      Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_4__["executeReCaptcha"])(this.$el).then(function (recaptchaToken) {
-        _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].post("/rest/io/customer/newsletter", {
-          email: _this2.email,
-          firstName: _this2.firstName,
-          lastName: _this2.lastName,
-          emailFolder: _this2.emailFolder,
-          honeypot: _this2.honeypot,
-          recaptcha: recaptchaToken
-        }).done(function (data) {
-          if (!!data.containsHoneypot) {
-            _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].warn(_this2.$translate("Ceres::Template.newsletterHoneypotWarning"));
-          } else {
-            _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].success(_this2.$translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
-          }
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].post("/rest/io/customer/newsletter", {
+        email: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        emailFolder: this.emailFolder,
+        honeypot: this.honeypot
+      }).done(function (data) {
+        if (!!data.containsHoneypot) {
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].warn(_this2.$translate("Ceres::Template.newsletterHoneypotWarning"));
+        } else {
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].success(_this2.$translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
+        }
 
-          _this2.resetInputs();
-        }).fail(function () {
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].error(_this2.$translate("Ceres::Template.newsletterErrorMessage")).closeAfter(5000);
-        }).always(function () {
-          _this2.isDisabled = false;
-
-          _this2.resetRecaptcha();
-        });
+        _this2.resetInputs();
+      }).fail(function () {
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].error(_this2.$translate("Ceres::Template.newsletterErrorMessage")).closeAfter(5000);
+      }).always(function () {
+        _this2.isDisabled = false;
       });
     },
     resetInputs: function resetInputs() {
@@ -151,12 +143,6 @@ __webpack_require__.r(__webpack_exports__);
       this.lastName = "";
       this.email = "";
       this.privacyPolicyValue = false;
-    },
-    resetRecaptcha: function resetRecaptcha() {
-      if (App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha) {
-        var recaptchaId = this.$el.querySelector("[data-recaptcha]");
-        window.grecaptcha.reset(recaptchaId);
-      }
     }
   }
 });
@@ -181,7 +167,6 @@ var render = function() {
   return _c(
     "form",
     {
-      ref: "newsletterForm",
       attrs: { id: "newsletter-input-form_" + _vm._uid, method: "post" },
       on: {
         submit: function($event) {
@@ -293,9 +278,6 @@ var render = function() {
                   },
                   domProps: { value: _vm.email },
                   on: {
-                    focus: function($event) {
-                      _vm.loadRecaptcha = true
-                    },
                     input: function($event) {
                       if ($event.target.composing) {
                         return
@@ -427,13 +409,8 @@ var render = function() {
             )
           ])
         ])
-      ]),
-      _vm._v(" "),
-      !!_vm.$ceres.config.global.googleRecaptchaApiKey && _vm.loadRecaptcha
-        ? _c("recaptcha")
-        : _vm._e()
-    ],
-    1
+      ])
+    ]
   )
 }
 var staticRenderFns = []

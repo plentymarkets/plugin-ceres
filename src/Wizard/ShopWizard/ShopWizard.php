@@ -78,6 +78,7 @@ class ShopWizard extends WizardProvider
             'translationNamespace' => 'Ceres',
             'options' => [
                 'client' => $this->buildClientOptions(),
+                'pluginSet' => $this->buildPluginSetOptions()
             ],
             'undeleteableOptionIds' => $this->getUnDeletableOptions(),
             'steps' => [
@@ -157,6 +158,41 @@ class ShopWizard extends WizardProvider
                 'name' => 'Wizard.clientSelection',
                 'required' => true,
                 'listBoxValues' => $clientsList
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function buildPluginSetOptions(): array
+    {
+        $pluginSets = $this->settingsService->getPluginSets();
+
+        $pluginSetValues = [
+            [
+                'value' => '',
+                'caption' => $this->translator->trans('Ceres::Wizard.selectPluginSet')
+            ]
+
+        ];
+
+        if (count($pluginSets)) {
+            foreach ($pluginSets as $pluginSet) {
+                $pluginSetValues[] = [
+                    'value' => $pluginSet['id'],
+                    'caption' => $pluginSet['name']
+                ];
+            }
+        }
+
+        return [
+            'type' => 'select',
+            'defaultValue' => $pluginSetValues[0]['value'],
+            'options' => [
+                'name' => 'Wizard.pluginSetSelection',
+                'required' => true,
+                'listBoxValues' => $pluginSetValues
             ]
         ];
     }

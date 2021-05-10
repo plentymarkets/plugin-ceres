@@ -21,7 +21,6 @@
 import { ButtonSizePropertyMixin } from "../../../mixins/buttonSizeProperty.mixin";
 
 import ApiService from "../../../services/ApiService";
-import AutoFocusService from "../../../services/AutoFocusService";
 import ValidationService from "../../../services/ValidationService";
 import { navigateTo } from "../../../services/UrlService";
 import { isDefined, isNullOrUndefined } from "../../../helper/utils";
@@ -70,8 +69,6 @@ export default {
                     ValidationService.unmarkAllFields(this.$refs.form);
                 });
             }
-
-            AutoFocusService.triggerAutoFocus();
         });
     },
 
@@ -98,7 +95,7 @@ export default {
                 .done(() =>
                 {
                     navigateTo(
-                        isDefined(this.backlink) && this.backlink.length ? decodeURIComponent(this.backlink) : window.location.origin + (App.urls.includeLanguage ? "/" + App.language : "")
+                        isDefined(this.backlink) && this.backlink.length ? decodeURIComponent(this.backlink) : window.location.origin
                     );
                 })
                 .fail(() =>

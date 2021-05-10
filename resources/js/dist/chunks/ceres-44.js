@@ -172,16 +172,16 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "cookie-bar",
+      staticClass: "cookie-bar flex-style",
       class: {
         out: !_vm.isVisible,
-        "border-top bg-white": _vm.isVisible,
+        "bg-smoke": _vm.isVisible,
         "fixed-bottom": !_vm.isShopBuilder || false
       }
     },
     [
       _vm.isVisible
-        ? _c("div", { staticClass: "container-max" }, [
+        ? _c("div", { staticClass: "container-max bg-white kk-border" }, [
             _c(
               "div",
               {
@@ -198,7 +198,7 @@ var render = function() {
                 style: _vm.styles
               },
               [
-                _c("div", { staticClass: "col-12 col-md-8" }, [
+                _c("div", { staticClass: "p-3" }, [
                   _c("p", { domProps: { innerHTML: _vm._s(_vm.text) } }),
                   _vm._v(" "),
                   _c(
@@ -305,7 +305,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-md-4 pt-3 pt-md-0" }, [
+                _c("div", { staticClass: "p-3 w-100" }, [
                   _c(
                     "button",
                     {
@@ -446,7 +446,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-primary btn-appearance",
+                staticClass: "btn btn-primary btn-appearance d-none",
                 on: {
                   click: function($event) {
                     $event.preventDefault()

@@ -171,18 +171,18 @@
                             {% endif %}
 
                             {% set itemAmount = item.amounts[0] %}
-                            {% for amount in item.amounts if not amount.isSystemCurrency %}
+                            {% for amount in item.amouts if not amout.isSystemCurrency %}
                                 {% set itemAmount = amount %}
                             {% endfor %}
 
                             {% set itemPrice = 0 %}
                             {% if orderData.highlightNetPrices %}
                                 {% set itemPrice = itemAmount.priceOriginalNet %}
-                                {% set discountAmount = item.quantity * (itemAmount.priceOriginalNet - itemAmount.priceNet) %}
+                                {% set discountAmount = itemAmount.priceOriginalNet - itemAmount.priceNet %}
                                 {% set itemPriceTotal = item.quantity * itemAmount.priceNet %}
                             {% else %}
                                 {% set itemPrice = itemAmount.priceOriginalGross %}
-                                {% set discountAmount = item.quantity * (itemAmount.priceOriginalGross - itemAmount.priceGross) %}
+                                {% set discountAmount = itemAmount.priceOriginalGross - itemAmount.priceGross %}
                                 {% set itemPriceTotal = item.quantity * itemAmount.priceGross %}
                             {% endif %}
 
@@ -190,17 +190,16 @@
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationPricePerPiece") }}</strong>
                                 <span class="col-6 col-sm-9 col-md-7 text-right">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
                             </div>
-
-                            <div class="row">
-                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
-                                <span class="col-6 col-sm-9 col-md-7 text-right">{{ item.quantity }}</span>
-                            </div>
                             {% if discountAmount > 0 %}
                                 <div class="row rebate-hint">
                                     <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
                                     <span class="col-6 col-sm-9 col-md-7 text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>
                                 </div>
                             {% endif %}
+                            <div class="row">
+                                <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
+                                <span class="col-6 col-sm-9 col-md-7 text-right">{{ item.quantity }}</span>
+                            </div>
                             <div class="row">
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationTotal") }}</strong>
                                 <strong class="col-6 col-sm-9 col-md-7 text-right">{{ itemPriceTotal | formatMonetary( itemAmount.currency ) }}</strong>

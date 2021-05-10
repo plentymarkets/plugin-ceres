@@ -31,9 +31,6 @@
     {% set image = block('image') | default(ceresConfig.header.companyLogo) %}
 {% elseif details is not null %}
     {% set image = details.imagePath | default(ceresConfig.header.companyLogo) %}
-    {% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'images/')  %}
-        {%  set image = webstoreConfig.domainSsl | trim('/') ~ '/documents/' ~ image %}
-    {% endif %}
 {% endif %}
 
 {% if block('title') is defined %}
@@ -50,7 +47,7 @@
 {% endif %}
 {% set title = title ~ trans("Ceres::Template.headerCompanyName") %}
 
-{% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'layout/'or image starts with '/documents/') %}
+{% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'layout/') %}
     {% set image = plugin_path('Ceres') ~ "/" ~ image %}
 {% endif %}
 

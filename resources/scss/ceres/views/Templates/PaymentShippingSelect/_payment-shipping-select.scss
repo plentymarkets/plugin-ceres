@@ -56,11 +56,6 @@
         .icon {
             display: inline-block;
             vertical-align: middle;
-
-            // fix image proportions for safari of the payment/shipping icons
-            > img {
-                object-fit: contain;
-            }
         }
 
         .content {

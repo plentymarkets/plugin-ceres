@@ -4,8 +4,9 @@ namespace Ceres\Contexts;
 
 use IO\Helper\ContextInterface;
 use IO\Services\CheckoutService;
+use Plenty\Modules\Category\Models\Category;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
-use Plenty\Modules\Webshop\Contracts\SessionStorageRepositoryContract;
+use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Translation\Translator;
 
 class CheckoutContext extends CategoryContext implements ContextInterface
@@ -25,7 +26,8 @@ class CheckoutContext extends CategoryContext implements ContextInterface
 
         $this->checkout = $checkoutService->getCheckout();
 
-        if (empty($this->checkout['shippingProfileList']) && $shopBuilderRequest->isShopBuilder()) {
+        if ( empty($this->checkout['shippingProfileList']) && $shopBuilderRequest->isShopBuilder() )
+        {
             /** @var Translator $translator */
             $translator = pluginApp(Translator::class);
 
@@ -33,19 +35,13 @@ class CheckoutContext extends CategoryContext implements ContextInterface
                 [
                     'parcelServiceName' => $translator->trans('Ceres::Widget.dummyParcelServiceName', ['i' => 'A']),
                     'parcelServicePresetId' => $this->checkout['shippingProfileId'],
-                    'parcelServicePresetName' => $translator->trans(
-                        'Ceres::Widget.dummyParcelServicePresetName',
-                        ['i' => 1]
-                    ),
+                    'parcelServicePresetName' => $translator->trans('Ceres::Widget.dummyParcelServicePresetName', ['i' => 1 ]),
                     'shippingAmount' => 0
                 ],
                 [
                     'parcelServiceName' => $translator->trans('Ceres::Widget.dummyParcelServiceName', ['i' => 'B']),
                     'parcelServicePresetId' => 0,
-                    'parcelServicePresetName' => $translator->trans(
-                        'Ceres::Widget.dummyParcelServicePresetName',
-                        ['i' => 2]
-                    ),
+                    'parcelServicePresetName' => $translator->trans('Ceres::Widget.dummyParcelServicePresetName', ['i' => 2 ]),
                     'shippingAmount' => 4.99
                 ]
             ];

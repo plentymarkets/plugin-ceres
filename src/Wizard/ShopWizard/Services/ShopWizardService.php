@@ -19,7 +19,6 @@ use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Models\Robots;
 use Plenty\Modules\Webshop\Seo\Models\SitemapConfiguration;
-use Plenty\Plugin\Http\Request;
 
 /**
  * Class ShopWizardService
@@ -51,63 +50,51 @@ class ShopWizardService
 
         $webstores = $this->settingsService->getWebstores();
 
+        // we need to check if we have settings for preview mode saved
+        $webstoresPluginSetIds = array_column($webstores, 'pluginSetId');
+
         /** @var PluginRepositoryContract $pluginRepo */
         $pluginRepo = pluginApp(PluginRepositoryContract::class);
         /** @var PluginSetRepositoryContract $pluginSetRepo */
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
-
-        /** @var Request $request */
-        $request = pluginApp(Request::class);
-        $pluginSetHash = $request->get('bootPluginSetHash');
-        $pluginSetId = $pluginSetRepo->getPluginSetIdFromHash($pluginSetHash);
-        $pluginSet = $pluginSetRepo->get($pluginSetId);
-
+        $pluginSets = $pluginSetRepo->list();
         /** @var ShopWizardConfigRepository $wizardConfRepo */
         $wizardConfRepo = pluginApp(ShopWizardConfigRepository::class);
 
         $plugin = $pluginRepo->getPluginByName("Ceres");
-
         if ($plugin instanceof Plugin) {
-            foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
-                if (
-                    $pluginSetEntry instanceof PluginSetEntry &&
-                    $pluginSetEntry->pluginId == $plugin->id
-                ) {
-                    $previewConfigs = $wizardConfRepo->getConfigsForPluginSet(
-                        $pluginSetEntry->pluginSetId
-                    );
-                    if (is_array($previewConfigs) && count($previewConfigs)) {
-                        foreach ($previewConfigs as $previewConfig) {
-                            if ($previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted) {
-                                if (is_null($previewConfig->webstoreId)) {
-                                    $webstores[] = [
-                                        'id' => 'preview',
-                                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId
-                                    ];
-                                } else {
-                                    $webstores[] = [
-                                        'id' => (int)$previewConfig->webstoreId,
-                                        'pluginSetId' => (int)$pluginSetEntry->pluginSetId
-                                    ];
-                                }
-                            }
-                        }
+            foreach ($pluginSets as $pluginSet) {
+                foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
+                    $previewConfig = $wizardConfRepo->getConfig($pluginSetEntry->pluginSetId);
+                    if (
+                        $pluginSetEntry instanceof PluginSetEntry &&
+                        $pluginSetEntry->pluginId == $plugin->id &&
+                        !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
+                        $previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted
+                    ) {
+                        $webstores[] = [
+                            'id' => 'preview',
+                            'pluginSetId' => (int)$pluginSetEntry->pluginSetId
+                        ];
                     }
-                    break;
                 }
             }
         }
-        if ($pluginSetId > 0 && count($webstores)) {
-            foreach ($webstores as $webstore) {
-                if ($pluginSet instanceof PluginSet
-                    && $pluginRepo->isActiveInPluginSet($plugin->id, $pluginSet)
-                    && (!empty($webstore['pluginSetId']) && $webstore['pluginSetId'] == $pluginSetId)) {
-                    $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $pluginSetId;
 
-                    $webstoresMapped[$key] = [
-                        "client" => $webstore['id'],
-                        "pluginSet" => $pluginSetId
-                    ];
+        if (count($webstores)) {
+            foreach ($webstores as $webstore) {
+                if (!empty($webstore['pluginSetId'])) {
+                    $pluginSet = $pluginSets->where('id', '=', $webstore['pluginSetId'])->first();
+
+                    if ($pluginSet instanceof PluginSet
+                        && $pluginRepo->isActiveInPluginSet($plugin->id, $pluginSet)) {
+                        $key = "webstore_" . $webstore['id'] . "." . "pluginSet_" . $webstore['pluginSetId'];
+
+                        $webstoresMapped[$key] = [
+                            "client" => $webstore['id'],
+                            "pluginSet" => $webstore['pluginSetId']
+                        ];
+                    }
                 }
             }
         }
@@ -221,7 +208,6 @@ class ShopWizardService
 
             // search fields logic
             $itemSearchSettings = $searchSettingsRepo->getSearchSettings()->toArray();
-
             $searchFields = $itemSearchSettings['fields'];
             usort(
                 $searchFields,

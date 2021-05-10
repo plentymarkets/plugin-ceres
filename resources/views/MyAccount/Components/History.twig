@@ -7,9 +7,6 @@
 			<li class="nav-item">
 				<a class="nav-link active" data-toggle="tab" href="#order-history-tab" role="tab" aria-expanded="true">{{ trans("Ceres::Template.orderHistory") }}</a>
 			</li>
-			<li class="nav-item" v-if="isReturnActive && contactHasReturns">
-				<a @click="returnsTabsOpened()" class="nav-link" data-toggle="tab" href="#order-return-tab" role="tab" aria-expanded="false">{{ trans("Ceres::Template.returnHistory") }}</a>
-			</li>
 		</ul>	
 
 		<div class="tab-content">
@@ -17,14 +14,6 @@
 				<order-history template="#vue-order-history">
 				</order-history>
 			</div>
-			 <div class="tab-pane" id="order-return-tab" role="tabpanel" aria-expanded="false" v-if="isReturnActive && contactHasReturns">
-                <order-return-history
-                    template="#vue-order-return-history"
-                    :items-per-page="ordersPerPage"
-                    :show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
-                    :show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
-                </order-return-history>
-            </div>
 		</div>
 	</div>
 </script>

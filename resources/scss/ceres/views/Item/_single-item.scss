@@ -144,7 +144,7 @@
 }
 
 .availability-2 {
-    @include context-bg($success);
+    @include context-bg($warning);
 }
 
 .availability-3 {
@@ -152,7 +152,7 @@
 }
 
 .availability-4 {
-    @include context-bg($warning);
+    @include context-bg($info);
 }
 
 .availability-5 {

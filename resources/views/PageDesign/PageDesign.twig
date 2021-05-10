@@ -9,7 +9,6 @@
     {% include "Ceres::Widgets.WidgetComponents" %}
 {% endif %}
 
-{% set isItem = services.template.isItem() == "1" %}
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set defaultLanguage = webstoreConfig.defaultLanguage %}
 
@@ -33,7 +32,7 @@
     {% if assetName == 'ceres-checkout' %}
         {{ LayoutContainer.show("Ceres::Checkout.Styles") }}
     {% endif %}
-    {% if isItem %}
+    {% if services.template.getCurrentTemplate() == "tpl.item" %}
         {{ LayoutContainer.show("Ceres::SingleItem.Styles") }}
     {% endif %}
 </head>
@@ -160,7 +159,7 @@
     <!-- ./PASSWORD RESET MODAL -->
 
     <!-- SHIPPINGCOSTS MODAL -->
-    {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
+    {# {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
     <div id="shippingscosts-modal-wrapper">
         <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
             <div class="modal-dialog">
@@ -181,7 +180,7 @@
             </div>
         </div>
     </div>
-    {% endif %}
+    {% endif %} #}
     <!-- ./SHIPPINGCOSTS MODAL -->
 </div>
 
@@ -194,7 +193,7 @@
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
         isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-        isItemView: {% if isItem %}true{% else %}false{% endif %},
+        isItemView: {% if services.template.getCurrentTemplate() == "tpl.item" %}true{% else %}false{% endif %},
         templateEvent: "{{ templateEvent }}",
         templateType: "{{ urls.templateType }}",
         language: "{{ lang }}",
@@ -243,8 +242,7 @@
 {% if assetName == 'ceres-checkout' %}
     {{ LayoutContainer.show("Ceres::Checkout.AfterScriptsLoaded") }}
 {% endif %}
-
-{% if isItem %}
+{% if services.template.getCurrentTemplate() == "tpl.item" %}
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
 {% endif %}
 

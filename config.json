@@ -3498,10 +3498,6 @@
                                 "caption": "Config.currencyAvailableCurrenciesJPY"
                             },
                             {
-                                "value": "KES",
-                                "caption": "Config.currencyAvailableCurrenciesKES"
-                            },
-                            {
                                 "value": "MXN",
                                 "caption": "Config.currencyAvailableCurrenciesMXN"
                             },

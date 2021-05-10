@@ -292,8 +292,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } else {
           this.$emit("out-of-stock", false);
         }
-      } else {
-        this.$emit("out-of-stock", false);
       }
 
       this.setValue(this.compMin);

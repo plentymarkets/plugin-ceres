@@ -114,9 +114,7 @@ class SearchOptions
         {
             // Get all sorting strings
             $sortingStrings = self::get($scope);
-            if( !array_key_exists($itemListOptions['sorting'], $sortingStrings->sorting)) {
-                $itemListOptions['sorting'] = $sortingStrings->defaultSorting;
-            }
+            $itemListOptions['sorting'] = $sortingStrings->defaultSorting;
         }
 
         if( (int)$itemListOptions['page'] <= 0 )

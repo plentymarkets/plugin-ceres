@@ -2,21 +2,24 @@ const ApiService = require("../../services/ApiService");
 
 const state =
     {
-        liveShoppingOffers: {}
+        liveShoppingOffers: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null, 9: null, 10: null }
     };
 
 const mutations =
     {
-        setLiveShoppingOffer(state, { uid, liveShoppingOffer })
+        setLiveShoppingOffer(state, { liveShoppingId, liveShoppingOffer })
         {
-            Vue.set(state.liveShoppingOffers, uid, liveShoppingOffer);
+            state.liveShoppingOffers[liveShoppingId] = liveShoppingOffer;
         }
     };
 
 const actions =
     {
-        retrieveLiveShoppingOffer({ commit }, { liveShoppingId, sorting, uid })
+        retrieveLiveShoppingOffer({ commit }, params)
         {
+            const liveShoppingId = params.liveShoppingId;
+            const sorting = params.sorting;
+
             return new Promise((resolve, reject) =>
             {
                 ApiService.get("/rest/io/live-shopping/" + liveShoppingId + "?sorting=" + sorting)
@@ -24,11 +27,11 @@ const actions =
                     {
                         if (liveShoppingOffer.item)
                         {
-                            commit("setLiveShoppingOffer", { uid, liveShoppingOffer });
+                            commit("setLiveShoppingOffer", { liveShoppingId, liveShoppingOffer });
                         }
                         else
                         {
-                            commit("setLiveShoppingOffer", { uid, liveShoppingOffer: null });
+                            commit("setLiveShoppingOffer", { liveShoppingId, liveShoppingOffer: null });
                         }
 
                         resolve(liveShoppingOffer);
@@ -41,9 +44,15 @@ const actions =
         }
     };
 
+const getters =
+    {
+
+    };
+
 export default
 {
     state,
     actions,
-    mutations
+    mutations,
+    getters
 };

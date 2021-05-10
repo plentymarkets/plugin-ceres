@@ -13,16 +13,13 @@ use Plenty\Plugin\Log\Loggable;
 class CreateShopWizardPreviewConfigTable
 {
     use Loggable;
-
+    
     /**
      * @param Migrate $migrate
      */
     public function run(Migrate $migrate)
     {
         $migrate->createTable(ShopWizardPreviewConfiguration::class);
-        $this->getLogger(__CLASS__)->debug(
-            'Ceres::Wizard.tableCreated',
-            ['tableName' => 'ShopWizardPreviewConfigurations']
-        );
+        $this->getLogger("CreateAccountsTable_run")->debug('Ceres::Wizard.tableCreated', ['tableName' => 'ShopWizardPreviewConfigurations']);
     }
 }

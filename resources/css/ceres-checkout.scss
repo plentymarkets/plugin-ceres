@@ -9063,10 +9063,6 @@ button:focus {
     }
 }
 
-.app {
-    overflow-x: hidden;
-}
-
 .center-xy {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -10173,14 +10169,6 @@ html.ie {
     pointer-events: none;
 }
 
-.sticky-element {
-    padding-bottom: .1px; // force disable margin collapse
-
-    p:empty {
-        margin-bottom: 0; // remove margin of empty paragraph for correct height detection
-    }
-}
-
 .sticky-element.is-sticky {
     z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
 }
@@ -10483,7 +10471,7 @@ $border-width: 1px;
         padding: .5em 1.75rem;
         color: $white !important;
         background: $danger !important;
-        border-radius: .1rem;
+        // border-radius: .1rem;
         -webkit-transition: all .3s ease;
         transition: all .3s ease;
 
@@ -10645,7 +10633,7 @@ textarea.no-resize {
 .back-to-top {
     position: fixed;
     right: 2rem;
-    bottom: 2rem;
+    bottom: 7rem;
     z-index: $zindex-5;
     display: none;
     width: 40px;
@@ -11471,13 +11459,9 @@ category-item,
             margin-bottom: 0;
             word-wrap: break-word;
         }
-    }
 
-    .category-description {
-        word-wrap: break-word;
-
-        img {
-            max-width: 100%;
+        .category-description {
+            word-wrap: break-word;
         }
     }
 
@@ -12020,7 +12004,7 @@ html.crios {
 }
 
 .availability-2 {
-    @include context-bg($success);
+    @include context-bg($warning);
 }
 
 .availability-3 {
@@ -12028,7 +12012,7 @@ html.crios {
 }
 
 .availability-4 {
-    @include context-bg($warning);
+    @include context-bg($info);
 }
 
 .availability-5 {
@@ -13294,17 +13278,8 @@ html.ie {
 }
 
 .widget-text {
-    &.widget {
-        margin-bottom: 0;
-    }
-
     .widget-inner {
         padding: 1rem 1.5rem;
-    }
-
-    // images from data-fields
-    img {
-        max-width: 100%;
     }
 }
 
@@ -13436,7 +13411,7 @@ $normalmenu-color: $primary !default;
 
 .navbar-brand {
     img {
-        max-height: 3rem;
+        // max-height: 3rem;
     }
 }
 
@@ -14595,6 +14570,27 @@ header .widget {
         width: 300px;
     }
 
+    .item-name {
+        display: -webkit-box; // stylelint-disable-line value-no-vendor-prefix
+        max-height: 3em;
+        margin-bottom: .25rem;
+        overflow: hidden;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical; // stylelint-disable-line property-no-vendor-prefix
+
+        &::after {
+            position: absolute;
+            right: .25em;
+            bottom: 0;
+            display: inline-block;
+            height: 50%;
+            content: "…";
+            background-color: $white;
+        }
+    }
+
     .item-total-price {
         font-size: 1.5em;
         font-weight: 700;
@@ -15251,12 +15247,6 @@ header .widget {
     }
 }
 
-.confirmation-order-list {
-    .item-name {
-        max-height: none !important; // stylelint-disable-line declaration-no-important
-    }
-}
-
 /* Compatibility for IE */
 // stylelint-disable
 html.ie .confirmation-order-list .cmp-order-item {
@@ -15400,12 +15390,6 @@ html.ie .confirmation-order-list .cmp-order-item {
         .icon {
             display: inline-block;
             vertical-align: middle;
-
-            // fix image proportions for safari of the payment/shipping icons
-            > img {
-                -o-object-fit: contain;
-                   object-fit: contain;
-            }
         }
 
         .content {

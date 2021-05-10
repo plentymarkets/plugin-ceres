@@ -21,7 +21,7 @@ trait ItemListContext
     public $query;
     public $suggestionString;
 
-    public $itemList = [];
+    public $itemList;
     public $facets;
 
     /** @var SearchOptions */
@@ -42,45 +42,36 @@ trait ItemListContext
         if (ExternalSearch::hasExternalSearch()) {
             /** @var ExternalSearch $externalSearch */
             $externalSearch = pluginApp(ExternalSearch::class);
-            $externalSearch->page = $this->currentPage;
+            $externalSearch->page         = $this->currentPage;
             $externalSearch->itemsPerPage = $this->itemsPerPage;
             $externalSearch->searchString = $options['query'];
-            $externalSearch->categoryId = $options['categoryId'];
-            $externalSearch->sorting = $this->itemSorting;
+            $externalSearch->categoryId   = $options['categoryId'];
+            $externalSearch->sorting      = $this->itemSorting;
 
             // emit event to perform external search
             ExternalSearch::getExternalResults($externalSearch);
 
             if ($externalSearch->hasResults()) {
-                $variationIds = $externalSearch->getResults();
+                $resultVariationIds = $externalSearch->getResults();
+                $externalSearchFactories = [];
+                foreach ($resultVariationIds as $variationId) {
+                    $externalSearchFactories[$variationId] = VariationList::getSearchFactory(
+                        [
+                            'variationIds' => [$variationId],
+                            'excludeFromCache' => $scope === SearchOptions::SCOPE_SEARCH
+                        ]
+                    );
+                }
 
-                $externalSearchFactory = VariationList::getSearchFactory(
-                    [
-                        'variationIds' => $variationIds,
-                        'excludeFromCache' => $scope === SearchOptions::SCOPE_SEARCH
-                    ]
-                );
-                $searchResults = $itemSearchService->getResults($externalSearchFactory);
-                if (isset($searchResults['documents']) && count(
-                        $searchResults['documents']
-                    )) {
+                $searchResults = $itemSearchService->getResults($externalSearchFactories);
 
-                    foreach ($variationIds as $variationId) {
-                        $variation = array_filter($searchResults['documents'], function($document) use ($variationId) {
-                            return $document['id'] == $variationId;
-                        });
-
-                        if(count($variation) == 1) {
-                            $this->itemList[] = array_pop($variation);
-                        }
+                foreach ($resultVariationIds as $variationId) {
+                    if (isset($searchResults[$variationId]['documents']) && count($searchResults[$variationId]['documents'])) {
+                        $this->itemList[] = $searchResults[$variationId]['documents'][0];
                     }
                 }
-                if($options['itemsPerPage'] == 0) {
-                    $this->pageMax = 1;
-                } else {
-                    $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
-                }
-                $this->itemCountPage  = count($variationIds);
+                $this->pageMax        = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                $this->itemCountPage  = count($resultVariationIds);
                 $this->itemCountTotal = $externalSearch->getCountTotal();
                 $this->facets         = [];
 
@@ -91,7 +82,7 @@ trait ItemListContext
         $searchResults = $itemSearchService->getResults($defaultSearchFactories);
 
         //try to get result for the "did you mean?" search if there is no result for the original search string
-        if ($scope === SearchOptions::SCOPE_SEARCH && (int)$searchResults['itemList']['total'] === 0) {
+        if($scope === SearchOptions::SCOPE_SEARCH && (int)$searchResults['itemList']['total'] === 0) {
             $originalSearchString = $options['query'];
             /** @var ItemSearchAutocompleteService $itemSearchAutocompleteService */
             $itemSearchAutocompleteService = pluginApp(ItemSearchAutocompleteService::class);
@@ -105,7 +96,7 @@ trait ItemListContext
                 $searchResults = $itemSearchService->getResults(
                     [
                         'itemList' => SearchItems::getSearchFactory($options),
-                        'facets' => Facets::getSearchFactory($options)
+                        'facets'   => Facets::getSearchFactory($options)
                     ]
                 );
             }
@@ -114,14 +105,9 @@ trait ItemListContext
         $this->itemCountTotal = $searchResults['itemList']['total'];
         $this->itemCountTotal = $this->itemCountTotal > 10000 ? 10000 : $this->itemCountTotal;
 
-        if($options['itemsPerPage'] == 0) {
-                $this->pageMax = 1;
-        } else {
-            $this->pageMax = ceil($this->itemCountTotal / $options['itemsPerPage']);
-        }
-
+        $this->pageMax       = ceil($this->itemCountTotal / $options['itemsPerPage']);
         $this->itemCountPage = count($searchResults['itemList']['documents']);
-        $this->itemList = $searchResults['itemList']['documents'];
-        $this->facets = $searchResults['facets'];
+        $this->itemList      = $searchResults['itemList']['documents'];
+        $this->facets        = $searchResults['facets'];
     }
 }

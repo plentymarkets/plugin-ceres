@@ -46,7 +46,6 @@ class CeresCurrencyConfig extends PluginConfig
                 'IDR',
                 'INR',
                 'JPY',
-                'KES',
                 'MXN',
                 'MYR',
                 'NOK',

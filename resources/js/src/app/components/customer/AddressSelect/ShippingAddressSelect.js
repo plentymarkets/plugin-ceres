@@ -44,7 +44,7 @@ export default Vue.component("shipping-address-select", {
         defaultSalutation:
         {
             type: String,
-            default: App.config.addresses.defaultSalutation
+            default: "male"
         },
         paddingClasses:
         {

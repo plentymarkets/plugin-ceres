@@ -76,7 +76,19 @@ export default {
     {
         imageUrls()
         {
-            return this.imageUrlsData;
+            return this.imageUrlsData.sort((imageUrlA, imageUrlB) =>
+            {
+                if (imageUrlA.position > imageUrlB.position)
+                {
+                    return 1;
+                }
+                if (imageUrlA.position < imageUrlB.position)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
         }
     },
 

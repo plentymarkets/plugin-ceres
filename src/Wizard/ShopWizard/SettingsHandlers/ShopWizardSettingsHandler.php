@@ -3,7 +3,6 @@
 namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
-use Ceres\Wizard\ShopWizard\Interfaces\ShopWizardPreviewConfigurationInterface;
 use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Ceres\Wizard\ShopWizard\Services\MappingService;
@@ -143,7 +142,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 if (!empty($activeLanguagesList)) {
                     $webstoreData['languageList'] = $activeLanguagesList;
                 }
-                
+
                 if (isset($data['onlineStore_externalVatIdCheck'])) {
                     $webstoreData['externalVatCheckInactive'] = $data['onlineStore_externalVatIdCheck'];
                 }
@@ -270,23 +269,21 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
                     $searchSettingsRepo->saveSearchSettings(["fields" => $itemSearchSettingsData]);
                 }
-
-                $previewConfData = [
-                    'pluginSetId' => $pluginSetId,
-                    'deleted' => false,
-                    'webstoreId' => (int)$webstoreId
-                ];
-
-                $this->savePreviewConfig($pluginSetId, $previewConfData, (int)$webstoreId);
             } else {
                 // we set the preview config entry
 
+                $previewConfigRepo = pluginApp(ShopWizardConfigRepository::class);
                 $previewConfData = [
                     "pluginSetId" => $pluginSetId,
                     "deleted" => false
                 ];
 
-                $this->savePreviewConfig($pluginSet, $previewConfData);
+                $previewConf = $previewConfigRepo->getConfig($pluginSetId);
+                if ($previewConf instanceof ShopWizardPreviewConfiguration) {
+                    $previewConfigRepo->updateConfig($pluginSetId, $previewConfData);
+                } else {
+                    $previewConfigRepo->createConfig($previewConfData);
+                }
             }
 
             $configRepo = pluginApp(ConfigurationRepositoryContract::class);
@@ -371,19 +368,5 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
         }
 
         return $searchKeys;
-    }
-
-
-    private function savePreviewConfig($pluginSetId, $previewConfData, $webstoreId = null)
-    {
-        /** @var ShopWizardConfigRepository $previewConfigRepo */
-        $previewConfigRepo = pluginApp(ShopWizardConfigRepository::class);
-
-        $previewConf = $previewConfigRepo->getConfig($pluginSetId, $webstoreId);
-        if ($previewConf instanceof ShopWizardPreviewConfiguration) {
-            $previewConfigRepo->updateConfig($pluginSetId, $webstoreId, $previewConfData);
-        } else {
-            $previewConfigRepo->createConfig($previewConfData);
-        }
     }
 }

@@ -238,7 +238,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $uuidTabTechData     = $uuidGenerator->generateUniqueId();
         $uuidTabMoreDetails  = $uuidGenerator->generateUniqueId();
         $titleTabDescription = $this->translator->trans("Ceres::Template.singleItemDescription");
-        $titleTabTechData    = $this->translator->trans("Ceres::Template.singleItemTechnicalData");
+        $titleTabTechData    = $this->translator->trans("Ceres::Widget.dataFieldTextsTechnicalData");
         $titleTabMoreDetails = $this->translator->trans("Ceres::Template.singleItemMoreDetails");
         $tabs = array(array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
                       array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),

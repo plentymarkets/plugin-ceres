@@ -125,7 +125,7 @@ export default {
             billingAddress: {
                 countryId: null,
                 stateId: null,
-                gender: this.defaultSalutation
+                gender: "male"
             },
             isDisabled: false,
             privacyPolicyAccepted : false,
@@ -285,7 +285,7 @@ export default {
         */
         resetRecaptcha()
         {
-            if(App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha)
+            if(App.config.global.googleRecaptchaVersion === 2)
             {
                 const recaptchaId = this.$refs.registrationForm.querySelector("[data-recaptcha]");
 

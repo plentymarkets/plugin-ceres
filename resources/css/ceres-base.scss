@@ -8053,7 +8053,9 @@ a.close.disabled {
 .bg-white {
   background-color: $white !important;
 }
-
+.bg-smoke{
+  background-color: rgba(200,200,200, .6);
+}
 .bg-transparent {
   background-color: transparent !important;
 }
@@ -8299,6 +8301,7 @@ a.close.disabled {
   left: 0;
   z-index: $zindex-fixed;
 }
+
 
 .sticky-top {
   @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -9061,10 +9064,6 @@ button:focus {
             }
         }
     }
-}
-
-.app {
-    overflow-x: hidden;
 }
 
 .center-xy {
@@ -10173,14 +10172,6 @@ html.ie {
     pointer-events: none;
 }
 
-.sticky-element {
-    padding-bottom: .1px; // force disable margin collapse
-
-    p:empty {
-        margin-bottom: 0; // remove margin of empty paragraph for correct height detection
-    }
-}
-
 .sticky-element.is-sticky {
     z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
 }
@@ -10483,7 +10474,7 @@ $border-width: 1px;
         padding: .5em 1.75rem;
         color: $white !important;
         background: $danger !important;
-        border-radius: .1rem;
+        // border-radius: .1rem;
         -webkit-transition: all .3s ease;
         transition: all .3s ease;
 
@@ -10645,7 +10636,7 @@ textarea.no-resize {
 .back-to-top {
     position: fixed;
     right: 2rem;
-    bottom: 2rem;
+    bottom: 7rem;
     z-index: $zindex-5;
     display: none;
     width: 40px;
@@ -11471,13 +11462,9 @@ category-item,
             margin-bottom: 0;
             word-wrap: break-word;
         }
-    }
 
-    .category-description {
-        word-wrap: break-word;
-
-        img {
-            max-width: 100%;
+        .category-description {
+            word-wrap: break-word;
         }
     }
 
@@ -12020,7 +12007,7 @@ html.crios {
 }
 
 .availability-2 {
-    @include context-bg($success);
+    @include context-bg($warning);
 }
 
 .availability-3 {
@@ -12028,7 +12015,7 @@ html.crios {
 }
 
 .availability-4 {
-    @include context-bg($warning);
+    @include context-bg($info);
 }
 
 .availability-5 {
@@ -13294,17 +13281,8 @@ html.ie {
 }
 
 .widget-text {
-    &.widget {
-        margin-bottom: 0;
-    }
-
     .widget-inner {
         padding: 1rem 1.5rem;
-    }
-
-    // images from data-fields
-    img {
-        max-width: 100%;
     }
 }
 
@@ -13436,7 +13414,7 @@ $normalmenu-color: $primary !default;
 
 .navbar-brand {
     img {
-        max-height: 3rem;
+        // max-height: 3rem;
     }
 }
 

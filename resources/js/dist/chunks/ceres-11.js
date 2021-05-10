@@ -25,46 +25,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
 /* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.array.sort */ "./node_modules/core-js/modules/es.array.sort.js");
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.entries */ "./node_modules/core-js/modules/es.object.entries.js");
-/* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.object.values */ "./node_modules/core-js/modules/es.object.values.js");
-/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/es.set */ "./node_modules/core-js/modules/es.set.js");
-/* harmony import */ var core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../helper/dom */ "./resources/js/src/app/helper/dom.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
-
-
-
-
-
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
+/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.values */ "./node_modules/core-js/modules/es.object.values.js");
+/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.set */ "./node_modules/core-js/modules/es.set.js");
+/* harmony import */ var core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -100,10 +82,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -256,7 +234,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      * prop 'forceContent' with value true will return all units, without filtering
      */
     possibleUnits: function possibleUnits() {
-      // use an object, to make the entries unique
       var possibleUnits = {};
       var variations = this.forceContent ? this.variations : this.filterVariations(null, null, null, true);
 
@@ -276,21 +253,19 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
       return possibleUnits;
     },
-    possibleUnitCombinationIds: function possibleUnitCombinationIds() {
-      return this.transformPossibleUnits(this.possibleUnits).map(function (value) {
-        return value[0];
-      });
-    },
     isContentVisible: function isContentVisible() {
       return !this.forceContent && !!this.currentSelection || this.forceContent;
     },
     hasSelection: function hasSelection() {
-      return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNullOrUndefined"])(this.selectedAttributes) && !Object.values(this.selectedAttributes).some(function (value) {
+      return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(this.selectedAttributes) && !Object.values(this.selectedAttributes).some(function (value) {
         return value < 0;
       });
     },
     attributes: function attributes() {
       return this.currentVariationSelect && this.currentVariationSelect.attributes;
+    },
+    units: function units() {
+      return this.currentVariationSelect && this.currentVariationSelect.units;
     },
     selectedAttributes: function selectedAttributes() {
       return this.currentVariationSelect && this.currentVariationSelect.selectedAttributes;
@@ -339,7 +314,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         this.unsetInvalidSelection(attributeId, attributeValueId, unitId);
       }
 
-      this.lastContentCount = this.possibleUnitCombinationIds.length;
+      this.lastContentCount = Object.keys(this.possibleUnits).length;
     },
 
     /**
@@ -350,7 +325,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      */
     unsetInvalidSelection: function unsetInvalidSelection(attributeId, attributeValueId, unitId) {
       var qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
-      var closestVariation = this.getClosestVariations(qualifiedVariations)[0];
+      var closestVariation = this.getClosestVariation(qualifiedVariations);
 
       if (!closestVariation) {
         return;
@@ -360,7 +335,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       this.correctSelection(invalidSelection);
     },
     getTooltip: function getTooltip(attribute, attributeValue) {
-      if (!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId, true)) {
+      if (!this.isAttributeSelectionValid(attribute.attributeId, attributeValue.attributeValueId)) {
         return this.getInvalidOptionTooltip(attribute.attributeId, attributeValue.attributeValueId);
       } else if (attribute.type === "image") {
         return this.$translate("Ceres::Template.singleItemAttributeTooltip", {
@@ -379,20 +354,13 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      */
     getInvalidOptionTooltip: function getInvalidOptionTooltip(attributeId, attributeValueId) {
       var qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId);
-      var closestVariations = this.getClosestVariations(qualifiedVariations);
+      var closestVariation = this.getClosestVariation(qualifiedVariations);
 
-      if (!closestVariations || closestVariations.length <= 0) {
+      if (!closestVariation) {
         return "";
       }
 
-      var invalidSelections = [!!closestVariations[0] ? this.getInvalidSelectionByVariation(closestVariations[0]) : null, !!closestVariations[1] ? this.getInvalidSelectionByVariation(closestVariations[1]) : null];
-
-      if (!!invalidSelections[0] && !!invalidSelections[1] && invalidSelections[0].attributesToReset.length > invalidSelections[1].attributesToReset.length) {
-        // there is a non-salable variation with less changes
-        return this.$translate("Ceres::Template.singleItemNotSalable");
-      }
-
-      var invalidSelection = invalidSelections[0] || invalidSelections[1];
+      var invalidSelection = this.getInvalidSelectionByVariation(closestVariation);
       var names = [];
 
       var _iterator2 = _createForOfIteratorHelper(invalidSelection.attributesToReset),
@@ -432,13 +400,13 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      * @param {[number, null]} unitId
      */
     getQualifiedVariations: function getQualifiedVariations(attributeId, attributeValueId, unitId) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(attributeValueId)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(attributeValueId)) {
         return this.variations.filter(function (variation) {
-          return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(variation.attributes.find(function (attribute) {
+          return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(variation.attributes.find(function (attribute) {
             return attribute.attributeId === attributeId && attribute.attributeValueId === attributeValueId;
           }));
         });
-      } else if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(unitId)) {
+      } else if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(unitId)) {
         return this.variations.filter(function (variation) {
           return variation.unitCombinationId === unitId;
         });
@@ -450,12 +418,12 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     },
 
     /**
-     * return a salable and a non-salable variation with the minimum number of changes on attributes compared to the current selection.
+     * returns a variation, where a minimum of changes in the selection is required to archive
      * @param {array} qualifiedVariations
      */
-    getClosestVariations: function getClosestVariations(qualifiedVariations) {
-      var closestSalableVariation, numberOfSalableChanges;
-      var closestNonSalableVariation, numberOfNonSalableChanges;
+    getClosestVariation: function getClosestVariation(qualifiedVariations) {
+      var closestVariation;
+      var numberOfRequiredChanges;
 
       var _iterator3 = _createForOfIteratorHelper(qualifiedVariations),
           _step3;
@@ -465,10 +433,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           var variation = _step3.value;
           var changes = 0;
 
-          if (variation.unitCombinationId !== this.selectedUnit && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(this.selectedUnit)) {
-            // when the unit dropdown isn't visible, it should have a lower weight for reset investigations
-            var unitWeight = this.possibleUnitCombinationIds.length > 1 && this.isContentVisible ? 0.9 : 0.1;
-            changes += unitWeight;
+          if (variation.unitCombinationId !== this.selectedUnit && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNull"])(this.selectedUnit)) {
+            changes++;
           }
 
           var _iterator4 = _createForOfIteratorHelper(variation.attributes),
@@ -488,12 +454,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
             _iterator4.f();
           }
 
-          if (variation.isSalable && (!numberOfSalableChanges || changes < numberOfSalableChanges)) {
-            closestSalableVariation = variation;
-            numberOfSalableChanges = changes;
-          } else if (!variation.isSalable && (!numberOfNonSalableChanges || changes < numberOfNonSalableChanges)) {
-            closestNonSalableVariation = variation;
-            numberOfNonSalableChanges = changes;
+          if (!numberOfRequiredChanges || changes < numberOfRequiredChanges) {
+            closestVariation = variation;
+            numberOfRequiredChanges = changes;
           }
         }
       } catch (err) {
@@ -502,7 +465,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         _iterator3.f();
       }
 
-      return [closestSalableVariation, closestNonSalableVariation];
+      return closestVariation;
     },
 
     /**
@@ -521,7 +484,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           return attribute.attributeId === _selectedAttributeId;
         });
 
-        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(_this.selectedAttributes[_selectedAttributeId])) {
+        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNull"])(_this.selectedAttributes[_selectedAttributeId])) {
           if (variationAttribute && variationAttribute.attributeValueId !== _this.selectedAttributes[_selectedAttributeId] || !variationAttribute) {
             var attributeToReset = _this.attributes.find(function (attr) {
               return attr.attributeId === _selectedAttributeId;
@@ -574,7 +537,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
 
       if (invalidSelection.newUnit) {
-        if (this.lastContentCount > 1 && this.possibleUnitCombinationIds.length > 1 && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(this.selectedUnit)) {
+        if (this.lastContentCount > 1 && Object.keys(this.possibleUnits).length > 1 && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNull"])(this.selectedUnit)) {
           messages.push(this.$translate("Ceres::Template.singleItemNotAvailable", {
             name: this.$translate("Ceres::Template.singleItemContent")
           }));
@@ -604,13 +567,13 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       ignoreUnit = !!ignoreUnit;
       var key = JSON.stringify(attributes) + "_" + unitId + "_" + strict + "_" + ignoreUnit;
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(this.filteredVariationsCache[key])) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(this.filteredVariationsCache[key])) {
         return this.filteredVariationsCache[key];
       }
 
       var uniqueValues = _toConsumableArray(new Set(Object.values(attributes)));
 
-      var isEmptyOptionSelected = uniqueValues.length === 1 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(uniqueValues[0]);
+      var isEmptyOptionSelected = uniqueValues.length === 1 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNull"])(uniqueValues[0]);
       var filteredVariations = this.variations.filter(function (variation) {
         // the selected unit is not matching
         if (!ignoreUnit && variation.unitCombinationId !== unitId) {
@@ -628,7 +591,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
             return variationAttribute.attributeId === parseInt(attributeId);
           }); // an attribute is not matching with selection
 
-          if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && (strict || !strict && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(attributes[attributeId]) && attributes[attributeId] !== -1)) {
+          if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && (strict || !strict && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNull"])(attributes[attributeId]) && attributes[attributeId] !== -1)) {
             return {
               v: false
             };
@@ -651,9 +614,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      * returns true, if the selection with a new attribute value would be valid
      * @param {number} attributeId
      * @param {[number, string, null]} attributeValueId
-     * @param {boolean} filterSalableVariations
      */
-    isAttributeSelectionValid: function isAttributeSelectionValid(attributeId, attributeValueId, filterSalableVariations) {
+    isAttributeSelectionValid: function isAttributeSelectionValid(attributeId, attributeValueId) {
       attributeValueId = parseInt(attributeValueId) || null;
 
       if (this.selectedAttributes[attributeId] === attributeValueId) {
@@ -663,15 +625,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       var selectedAttributes = JSON.parse(JSON.stringify(this.selectedAttributes));
       selectedAttributes[attributeId] = parseInt(attributeValueId) || null;
       var ignoreUnit = !(Object.keys(this.possibleUnits).length > 1 && this.isContentVisible);
-      var variations = this.filterVariations(selectedAttributes, null, null, ignoreUnit);
-
-      if (filterSalableVariations) {
-        variations = variations.filter(function (variation) {
-          return variation.isSalable;
-        });
-      }
-
-      return variations.length > 0;
+      return !!this.filterVariations(selectedAttributes, null, null, ignoreUnit).length;
     },
 
     /**
@@ -685,9 +639,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         return true;
       }
 
-      return this.filterVariations(null, unitId).filter(function (variation) {
-        return variation.isSalable;
-      }).length > 0;
+      return !!this.filterVariations(null, unitId).length;
     },
 
     /**
@@ -698,11 +650,11 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     setVariation: function setVariation(variationId) {
       var _this3 = this;
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(variationId) && this.currentSelection) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(variationId) && this.currentSelection) {
         variationId = this.currentSelection.variationId;
       }
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(variationId)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(variationId)) {
         this.$store.dispatch("".concat(this.itemId, "/loadVariation"), variationId).then(function (variation) {
           document.dispatchEvent(new CustomEvent("onVariationChanged", {
             detail: {
@@ -716,7 +668,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     },
     isTextCut: function isTextCut(content) {
       if (this.$refs.attributesContaner) {
-        return Object(_helper_dom__WEBPACK_IMPORTED_MODULE_24__["textWidth"])(content, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.attributesContaner[0].clientWidth;
+        return Object(_helper_dom__WEBPACK_IMPORTED_MODULE_18__["textWidth"])(content, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.attributesContaner[0].clientWidth;
       }
 
       return false;
@@ -734,43 +686,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
 
       return this.$translate("Ceres::Template.singleItemNoSelection");
-    },
-    transformPossibleUnits: function transformPossibleUnits(possibleUnits) {
-      var _this4 = this;
-
-      return Object.entries(possibleUnits).sort(function (unitA, unitB) {
-        unitA = _this4.splitUnitName(unitA[1]);
-        unitB = _this4.splitUnitName(unitB[1]); // order by unit
-
-        if (unitA[1] < unitB[1]) {
-          return -1;
-        }
-
-        if (unitA[1] > unitB[1]) {
-          return 1;
-        } // order by content (count)
-
-
-        if (unitA[0] < unitB[0]) {
-          return -1;
-        }
-
-        if (unitA[0] > unitB[0]) {
-          return 1;
-        }
-
-        return 0;
-      });
-    },
-    splitUnitName: function splitUnitName(unitName) {
-      var unitNameSplit = unitName.split(" ");
-
-      if (!isNaN(unitNameSplit[0])) {
-        unitNameSplit[0] = unitNameSplit[0].replace(App.currencyPattern.separator_thousands, "");
-        unitNameSplit[0] = parseInt(unitNameSplit[0]);
-      }
-
-      return unitNameSplit;
     }
   },
   watch: {
@@ -829,27 +744,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/es.object.entries.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/core-js/modules/es.object.entries.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
-var $entries = __webpack_require__(/*! ../internals/object-to-array */ "./node_modules/core-js/internals/object-to-array.js").entries;
-
-// `Object.entries` method
-// https://tc39.github.io/ecma262/#sec-object.entries
-$({ target: 'Object', stat: true }, {
-  entries: function entries(O) {
-    return $entries(O);
-  }
-});
-
-
-/***/ }),
-
 /***/ "./node_modules/core-js/modules/es.object.values.js":
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/modules/es.object.values.js ***!
@@ -888,7 +782,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.attributes.length ||
-    (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
+    (Object.keys(_vm.possibleUnits).length > 1 && _vm.isContentVisible)
       ? _c(
           "div",
           { staticClass: "row" },
@@ -972,30 +866,12 @@ var render = function() {
                                 [
                                   _vm.isAttributeSelectionValid(
                                     attribute.attributeId,
-                                    value.attributeValueId,
-                                    true
+                                    value.attributeValueId
                                   )
                                     ? [
                                         _vm._v(
                                           "\n                            " +
                                             _vm._s(value.name) +
-                                            "\n                        "
-                                        )
-                                      ]
-                                    : _vm.isAttributeSelectionValid(
-                                        attribute.attributeId,
-                                        value.attributeValueId,
-                                        false
-                                      )
-                                    ? [
-                                        _vm._v(
-                                          "\n                            " +
-                                            _vm._s(
-                                              _vm.$translate(
-                                                "Ceres::Template.singleItemNotSalableAttribute",
-                                                { name: value.name }
-                                              )
-                                            ) +
                                             "\n                        "
                                         )
                                       ]
@@ -1109,8 +985,7 @@ var render = function() {
                                       ] === null,
                                     invalid: !_vm.isAttributeSelectionValid(
                                       attribute.attributeId,
-                                      null,
-                                      true
+                                      null
                                     )
                                   },
                                   on: {
@@ -1157,8 +1032,7 @@ var render = function() {
                                     ],
                                   invalid: !_vm.isAttributeSelectionValid(
                                     attribute.attributeId,
-                                    value.attributeValueId,
-                                    true
+                                    value.attributeValueId
                                   )
                                 },
                                 attrs: {
@@ -1202,7 +1076,7 @@ var render = function() {
               ])
             }),
             _vm._v(" "),
-            _vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible
+            Object.keys(_vm.possibleUnits).length > 1 && _vm.isContentVisible
               ? _c("div", { staticClass: "col-12 variation-select" }, [
                   _c("div", { staticClass: "input-unit" }, [
                     _c(
@@ -1215,26 +1089,21 @@ var render = function() {
                           }
                         }
                       },
-                      _vm._l(_vm.possibleUnitCombinationIds, function(
-                        unitCombinationId
-                      ) {
+                      _vm._l(_vm.possibleUnits, function(unit, unitId) {
                         return _c(
                           "option",
                           {
                             domProps: {
-                              value: unitCombinationId,
-                              selected:
-                                parseInt(unitCombinationId) === _vm.selectedUnit
+                              value: unitId,
+                              selected: parseInt(unitId) === _vm.selectedUnit
                             }
                           },
                           [
-                            _vm.isUnitSelectionValid(unitCombinationId)
+                            _vm.isUnitSelectionValid(unitId)
                               ? [
                                   _vm._v(
                                     "\n                            " +
-                                      _vm._s(
-                                        _vm.possibleUnits[unitCombinationId]
-                                      ) +
+                                      _vm._s(unit) +
                                       "\n                        "
                                   )
                                 ]
@@ -1244,12 +1113,7 @@ var render = function() {
                                       _vm._s(
                                         _vm.$translate(
                                           "Ceres::Template.singleItemInvalidAttribute",
-                                          {
-                                            name:
-                                              _vm.possibleUnits[
-                                                unitCombinationId
-                                              ]
-                                          }
+                                          { name: unit }
                                         )
                                       ) +
                                       "\n                        "

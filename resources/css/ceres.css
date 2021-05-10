@@ -14130,7 +14130,7 @@ html.ie .single-carousel .owl-item > div {
   .form-check.error {
     background: #d4021d !important;
     color: #fff !important;
-    border-radius: .1rem;
+    /* border-radius: .1rem; */
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
     padding: .5em 1.75rem; }

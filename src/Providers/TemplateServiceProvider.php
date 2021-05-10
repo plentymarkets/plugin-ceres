@@ -217,19 +217,10 @@ class TemplateServiceProvider extends ServiceProvider
         );
 
         $consentRepository->registerConsentGroup(
-            'payment',
-            'Ceres::Template.consentGroupPayment',
-            [
-                'position' => 200,
-                'description' => 'Ceres::Template.consentGroupPaymentDescription'
-            ]
-        );
-
-        $consentRepository->registerConsentGroup(
             'marketing',
             'Ceres::Template.consentGroupMarketingLabel',
             [
-                'position' => 300,
+                'position' => 200,
                 'description' => 'Ceres::Template.consentGroupMarketingDescription'
             ]
         );
@@ -238,11 +229,10 @@ class TemplateServiceProvider extends ServiceProvider
             'media',
             'Ceres::Template.consentGroupMediaLabel',
             [
-                'position' => 400,
+                'position' => 300,
                 'description' => 'Ceres::Template.consentGroupMediaDescription'
             ]
         );
-
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
         $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
@@ -359,7 +349,7 @@ class TemplateServiceProvider extends ServiceProvider
             ->registerConfigValue('sort.defaultSortingSearch', $ceresConfig->sorting->defaultSortingSearch)
             ->registerConfigValue('sorting.prioritySearch1', $ceresConfig->sorting->prioritySearch1)
             ->registerConfigValue('sorting.prioritySearch2', $ceresConfig->sorting->prioritySearch2)
-            ->registerConfigValue('sorting.prioritySearch3', $ceresConfig->sorting->prioritySearch3)
+            ->registerConfigValue('sorting.prioritySearch3', $ceresConfig->sorting->priorityCategory3)
             ->registerConfigValue('sorting.priorityCategory1', $ceresConfig->sorting->priorityCategory1)
             ->registerConfigValue('sorting.priorityCategory2', $ceresConfig->sorting->priorityCategory2)
             ->registerConfigValue('sorting.priorityCategory3', $ceresConfig->sorting->priorityCategory3)
@@ -367,7 +357,6 @@ class TemplateServiceProvider extends ServiceProvider
             ->registerConfigValue('sorting.dynamicPrio1', $ceresConfig->sorting->dynamicPrio1)
             ->registerConfigValue('sorting.dynamicPrio2', $ceresConfig->sorting->dynamicPrio2)
             ->registerConfigValue('item.name', $ceresConfig->item->itemName)
-            ->registerConfigValue('item.displayName', $ceresConfig->item->displayName)
             ->registerConfigValue('global.enableOldUrlPattern', $ceresConfig->global->enableOldUrlPattern)
             ->registerConfigValue('language.activeLanguages', $ceresConfig->language->activeLanguages);
     }

@@ -6,7 +6,6 @@ use Ceres\Config\CeresConfig;
 use Ceres\Helper\BuildHash;
 use IO\Extensions\Constants\ShopUrls;
 use IO\Helper\ContextInterface;
-use IO\Helper\RouteConfig;
 use IO\Helper\Utils;
 use IO\Services\BasketService;
 use IO\Services\CategoryService;
@@ -110,7 +109,7 @@ class GlobalContext implements ContextInterface
 
         $this->forceNoIndex = $templateService->isNoIndexForced();
 
-        if (!is_null($categoryService->getCurrentCategory()))
+        if($templateService->isCategory() || $templateService->isItem())
         {
             $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
         }

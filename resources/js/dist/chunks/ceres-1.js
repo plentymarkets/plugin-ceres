@@ -1070,7 +1070,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     defaultSalutation: {
       type: String,
-      default: App.config.addresses.defaultSalutation
+      default: "male"
     }
   },
   computed: _objectSpread({
@@ -1590,7 +1590,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       billingAddress: {
         countryId: null,
         stateId: null,
-        gender: this.defaultSalutation
+        gender: "male"
       },
       isDisabled: false,
       privacyPolicyAccepted: false,
@@ -1725,7 +1725,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
      * Resets recaptcha v2 to make it capable of executing again.
     */
     resetRecaptcha: function resetRecaptcha() {
-      if (App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha) {
+      if (App.config.global.googleRecaptchaVersion === 2) {
         var recaptchaId = this.$refs.registrationForm.querySelector("[data-recaptcha]");
         window.grecaptcha.reset(recaptchaId);
       }
@@ -1854,7 +1854,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     defaultSalutation: {
       type: String,
-      default: App.config.addresses.defaultSalutation
+      default: "male"
     }
   },
   data: function data() {

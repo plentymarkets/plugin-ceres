@@ -1,5 +1,6 @@
 import { isDefined, isNullOrUndefined } from "../helper/utils";
 import { normalizeUrl } from "../helper/url";
+import store from "../store/index";
 import { set } from "../helper/set";
 
 function _parseUrlParam(paramKey, paramValue, result)
@@ -99,7 +100,12 @@ export function getUrlParams(urlParams)
 
 export function setUrlParams(urlParams, pushState = true)
 {
-    const pathName = window.location.pathname;
+    const pathName =
+        isDefined(store.state.navigation.currentCategory) &&
+        isDefined(store.state.navigation.currentCategory.url) ?
+            store.state.navigation.currentCategory.url :
+            window.location.pathname;
+
     const params = _createQueryString(urlParams);
     const titleElement = document.getElementsByTagName("title")[0];
 

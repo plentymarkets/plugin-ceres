@@ -224,7 +224,6 @@ class DefaultCheckoutPreset implements ContentPreset
                     "promotionCoupon",
                     "totalSumNet",
                     "vats",
-                    "additionalCosts",
                     "totalSumGross",
                     "salesCoupon",
                     "openAmount"

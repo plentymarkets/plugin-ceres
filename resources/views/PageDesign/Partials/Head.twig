@@ -4,6 +4,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="plentymarkets" />
+<meta name="have-i-been-pwned-verification" value="e27d86304c7ad6ddf2b78d4e48268623">
+<meta name="apple-itunes-app" content="app-id=1504088049">
 
 {% if ceresConfig.global.favicon is empty %}
     {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
@@ -201,19 +203,21 @@
         }
     }( typeof global !== "undefined" ? global : this ) );
 
-    (function() {
-        var checkIconFont = function() {
-            if(!document.fonts || document.fonts.check("1em FontAwesome")) {
+    if(document.fonts) {
+        document.fonts.addEventListener("loadingdone", function(evt) {
+            if(document.fonts.check("1em FontAwesome")) {
                 document.documentElement.classList.remove('icons-loading');
             }
-        };
+        });
 
-        if(document.fonts) {
-            document.fonts.addEventListener("loadingdone", checkIconFont);
-            window.addEventListener("load", checkIconFont);
-        }
-        checkIconFont();
-    })();
+        window.addEventListener("load", function(evt) {
+            if(document.fonts.check("1em FontAwesome")) {
+                document.documentElement.classList.remove('icons-loading');
+            }
+        });
+    } else {
+        document.documentElement.classList.remove('icons-loading');
+    }
 </script>
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}

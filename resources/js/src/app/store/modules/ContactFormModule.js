@@ -153,7 +153,6 @@ const actions =
                                     recipient:  formOptions.recipient,
                                     subject:    formOptions.subject || "",
                                     cc:         formOptions.cc,
-                                    bcc:        formOptions.bcc,
                                     replyTo:    formOptions.replyTo,
                                     recaptchaToken: recaptchaResponse
                                 }
@@ -203,7 +202,7 @@ const actions =
 
 function resetRecaptcha(recaptchaEl)
 {
-    if (App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha)
+    if (App.config.global.googleRecaptchaVersion === 2)
     {
         window.grecaptcha.reset(recaptchaEl);
     }

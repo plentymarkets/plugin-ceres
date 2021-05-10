@@ -77,20 +77,6 @@ const mutations =
         setVariationMarkInvalidProps(state, markFields)
         {
             state.variationMarkInvalidProperties = !!markFields;
-        },
-
-        setVariationPropertySurcharges(state, basePrice)
-        {
-            if (state.variation.documents[0].data.properties)
-            {
-                for (const property of state.variation.documents[0].data.properties)
-                {
-                    if (!isNullOrUndefined(property.property.percentage) && (property.surcharge <= 0))
-                    {
-                        property.property.surcharge = basePrice * property.property.percentage / 100;
-                    }
-                }
-            }
         }
     };
 
@@ -163,7 +149,7 @@ const actions =
 
 const getters =
     {
-        variationPropertySurcharge(state, getters)
+        variationPropertySurcharge(state)
         {
             if (!state || !state.variation.documents)
             {
@@ -181,16 +167,7 @@ const getters =
 
                 for (const property of addedProperties)
                 {
-                    if (!isNullOrUndefined(property.property.percentage) && (property.surcharge <= 0))
-                    {
-                        const surcharge = getters.variationBasePrice * property.property.percentage / 100;
-
-                        sum += surcharge;
-                    }
-                    else
-                    {
-                        sum += property.surcharge || property.property.surcharge;
-                    }
+                    sum += (property.surcharge || property.property.surcharge);
                 }
             }
 
@@ -226,7 +203,7 @@ const getters =
             return returnPrice || calculatedPrices.default;
         },
 
-        variationBasePrice(state, getters, rootState, rootGetters)
+        variationTotalPrice(state, getters, rootState, rootGetters)
         {
             if (getters.currentItemVariation.item.itemType === "set")
             {
@@ -234,7 +211,7 @@ const getters =
             }
             else if (getters.currentItemVariation.item.itemType !== "set" && rootState.items.isItemSet)
             {
-                return state.variation.documents[0].data.prices.set.price.value;
+                return state.variation.documents[0].data.prices.set.price.value + getters.variationPropertySurcharge;
             }
             else
             {
@@ -242,16 +219,13 @@ const getters =
 
                 if (!isNullOrUndefined(graduatedPrice) && state.variation.documents)
                 {
-                    return Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+                    const specialOfferPrice = Vue.filter("specialOffer").apply(Object, [graduatedPrice, state.variation.documents[0].data.prices, "price", "value"]);
+
+                    return specialOfferPrice === "N / A" ? specialOfferPrice : getters.variationPropertySurcharge + specialOfferPrice;
                 }
             }
 
             return null;
-        },
-
-        variationTotalPrice(state, getters)
-        {
-            return getters.variationBasePrice + getters.variationPropertySurcharge;
         },
 
         variationGroupedProperties(state)

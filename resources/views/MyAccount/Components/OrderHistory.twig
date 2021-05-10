@@ -94,13 +94,6 @@
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                                 {{ trans("Ceres::Template.orderHistoryOrderDetails") }}
                                             </button>
-                                            {% set returnOrder = entry.toArray() %}
-                                            {% if returnOrder.isReturnable and ceresConfig.myAccount.orderReturnActive %}
-                                                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="{{ urls.returns(returnOrder.order.id) }}">
-                                                    <i class="fa fa-undo" aria-hidden="true"></i>
-                                                    {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
-                                                </a>
-                                            {% endif %}
 
                                             <change-payment-method
                                                 :current-order="{{ entry.order | json_encode() }}"

@@ -28,12 +28,12 @@
             {% endif %}
         </div>
 
-        {{ Twig.include("Ceres::PageDesign.Partials.Header.SideNavigation", {
+        {{ Twig.include("Ceres::PageDesign.Partials.Header.SideNavigation", { 
             spacingPadding: spacingPadding | json_encode,
             inlinePadding : inlinePadding | json_encode,
             expandableChildren: expandableChildren | json_encode,
             showItemCount : showItemCount | json_encode,
-            customEntries : customEntries | json_encode(constant('JSON_UNESCAPED_UNICODE'))})
+            customEntries : customEntries | json_encode })
         }}
 
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.SideNavBarBottom"])) }}

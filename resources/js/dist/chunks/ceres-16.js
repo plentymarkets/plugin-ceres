@@ -313,11 +313,10 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("icon", {
-                      staticClass: "fa-fw",
+                      staticClass: "fa-fw my-1",
                       attrs: {
                         icon: "plus-circle",
-                        "class-loading": "fa-repeat",
-                        loading: _vm.isWaiting
+                        "class-loading": "fa-repeat"
                       }
                     })
                   ],

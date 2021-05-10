@@ -6,8 +6,7 @@
                 :decimal-count="$ceres.config.item.storeSpecial"
                 image-url-accessor="urlMiddle"
                 :padding-classes="paddingClasses"
-                :padding-inline-styles="paddingInlineStyles"
-                :force-url-with-variation-id="true">
+                :padding-inline-styles="paddingInlineStyles">
             <template #store-special>
                 <item-store-special v-if="!!storeSpecial"
                                     :store-special="storeSpecial"
@@ -116,7 +115,7 @@ export default {
     {
         currentOffer()
         {
-            return this.$store.state.liveShopping.liveShoppingOffers[this._uid];
+            return this.liveShoppingOffers[this.liveShoppingId];
         },
 
         isActive()
@@ -198,12 +197,16 @@ export default {
             }
 
             return prices;
-        }
+        },
+
+        ...mapState({
+            liveShoppingOffers: state => state.liveShopping.liveShoppingOffers
+        })
     },
 
     created()
     {
-        this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting, uid: this._uid });
+        this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting });
     },
 
     methods:
@@ -229,7 +232,7 @@ export default {
 
         reloadOffer()
         {
-            this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting, uid: this._uid });
+            this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting });
         }
     }
 }

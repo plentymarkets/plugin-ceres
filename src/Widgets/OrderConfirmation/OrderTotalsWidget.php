@@ -42,8 +42,7 @@ class OrderTotalsWidget extends OrderConfirmationBaseWidget
                 "vats",
                 "totalSumGross",
                 "salesCoupon",
-                "openAmount",
-                "additionalCosts"
+                "openAmount"
             ])
             ->withName("Widget.basketTotalsVisibleFields")
             ->withCheckboxValues(
@@ -56,7 +55,6 @@ class OrderTotalsWidget extends OrderConfirmationBaseWidget
                     ->addEntry("promotionCoupon", "Widget.showBasketPromotionCoupon")
                     ->addEntry("totalSumNet", "Widget.showBasketTotalSumNet")
                     ->addEntry("vats", "Widget.showBasketVats")
-                    ->addEntry("additionalCosts", "Widget.showBasketAdditionalCosts")
                     ->addEntry("totalSumGross", "Widget.showBasketTotalSumGross")
                     ->addEntry("salesCoupon", "Widget.showBasketSalesCoupon")
                     ->addEntry("openAmount", "Widget.showBasketOpenAmount")

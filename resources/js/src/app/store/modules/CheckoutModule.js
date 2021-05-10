@@ -187,7 +187,6 @@ const actions =
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
             commit("setIsCheckoutReadonly", checkout.readOnly);
-            commit("setContactWish", checkout.contactWish);
 
             dispatch("setShippingProfileById", checkout.shippingProfileId);
             dispatch("initProfileAvailabilities");
