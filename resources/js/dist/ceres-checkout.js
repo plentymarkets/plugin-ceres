@@ -71433,7 +71433,7 @@ var actions = {
   },
   selectMethodOfPayment: function selectMethodOfPayment(_ref6, methodOfPaymentId) {
     var commit = _ref6.commit,
-        dispatch = _ref6.dispatch;
+        state = _ref6.state;
     return new Promise(function (resolve, reject) {
       var oldMethodOfPayment = state.payment.methodOfPaymentId;
       commit("setIsBasketLoading", true);
