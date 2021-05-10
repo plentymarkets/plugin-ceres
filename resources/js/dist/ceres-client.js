@@ -73321,7 +73321,8 @@ var actions = {
   },
   selectShippingProfile: function selectShippingProfile(_ref7, shippingProfile) {
     var commit = _ref7.commit,
-        state = _ref7.state;
+        dispatch = _ref7.dispatch,
+        getters = _ref7.getters;
     return new Promise(function (resolve, reject) {
       var oldShippingProfile = state.shipping.shippingProfileId;
       var params = {
