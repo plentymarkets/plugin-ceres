@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class MailFormWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.MailFormWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::MailFormWidget")
@@ -21,10 +25,16 @@ class MailFormWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "mail"
+            ])
             ->withAllowedNestingTypes([WidgetTypes::STRUCTURE, WidgetTypes::STATIC, WidgetTypes::DEFAULT, WidgetTypes::FORM])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

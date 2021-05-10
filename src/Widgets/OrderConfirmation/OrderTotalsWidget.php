@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class OrderTotalsWidget extends OrderConfirmationBaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.OrderConfirmation.OrderTotalsWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::OrderTotalsWidget")
@@ -20,9 +24,15 @@ class OrderTotalsWidget extends OrderConfirmationBaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::ORDER_CONFIRMATION)
             ->withPosition(300)
+            ->withSearchKeyWords([
+                "bestellsumme", "order", "totals", "summe"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

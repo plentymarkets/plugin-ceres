@@ -14,8 +14,12 @@ use Plenty\Plugin\Http\Request;
 
 class ItemSortingWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Category.ItemSortingWidget';
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemSortingWidget')
@@ -24,9 +28,15 @@ class ItemSortingWidget extends BaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(300)
+                                ->withSearchKeyWords([
+                                    "item", "artikel", "article", "produkt", "sorting", "sortierung", "category", "kategorie"
+                                ])
                                 ->toArray();
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -53,7 +63,10 @@ class ItemSortingWidget extends BaseWidget
         
         return $settings->toArray();
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $itemSortOptions = [];
@@ -83,7 +96,10 @@ class ItemSortingWidget extends BaseWidget
         $result['translations']    = $translationMap;
         return $result;
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     protected function getPreviewData($widgetSettings)
     {
         /**

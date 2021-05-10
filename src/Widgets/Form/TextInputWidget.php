@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class TextInputWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.TextInputWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::TextInputWidget")
@@ -20,9 +24,15 @@ class TextInputWidget extends BaseWidget
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "mail", "text", "textfeld"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

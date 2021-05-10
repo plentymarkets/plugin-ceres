@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AdditionalInformationWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Grid.AdditionalInformationWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::AdditionalInformationWidget")
@@ -21,9 +25,15 @@ class AdditionalInformationWidget extends BaseWidget
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "grid", "struktur", "information", "additional", "weitere", "informationen"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

@@ -10,23 +10,76 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\VariationList;
 use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
 
+/**
+ * Trait ItemListContext
+ *
+ * Trait to extend a context, including all properties to handle item data.
+ *
+ * @package Ceres\Contexts
+ */
 trait ItemListContext
 {
+    /**
+     * @var int $currentPage Current page of items.
+     */
     public $currentPage;
+
+    /**
+     * @var int $pageMax Last page for items.
+     */
     public $pageMax;
+
+    /**
+     * @var int $itemsPerPage How many items are included in one page.
+     */
     public $itemsPerPage;
+
+    /**
+     * @var int $itemCountPage
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $itemCountPage;
+
+    /**
+     * @var int $itemCountTotal Count of all items in the item result.
+     */
     public $itemCountTotal;
+
+    /**
+     * @var string $itemSorting Sorting key for the item result.
+     */
     public $itemSorting;
+
+    /**
+     * @var array $query Contains items per page count and the sorting key for the item result.
+     */
     public $query;
+
+    /**
+     * @var string $suggestionString Suggestion for the shop search.
+     */
     public $suggestionString;
 
-    public $itemList;
+    /**
+     * @var array $itemList Item result.
+     */
+    public $itemList = [];
+
+    /**
+     * @var array $facets Facets that were selected to filter the item result.
+     */
     public $facets;
 
-    /** @var SearchOptions */
+    /**
+     * @var SearchOptions $searchOptions
+     */
     public $searchOptions;
 
+    /**
+     * @param array $defaultSearchFactories Search factories to request the item data.
+     * @param array $options Search options to filter the item data.
+     * @param string $scope The scope where the search is executed from.
+     */
     protected function initItemList($defaultSearchFactories, $options, $scope = SearchOptions::SCOPE_CATEGORY)
     {
         $this->currentPage = intval($options['page']);
@@ -52,29 +105,59 @@ trait ItemListContext
             ExternalSearch::getExternalResults($externalSearch);
 
             if ($externalSearch->hasResults()) {
-                $resultVariationIds = $externalSearch->getResults();
-                $externalSearchFactories = [];
-                foreach ($resultVariationIds as $variationId) {
-                    $externalSearchFactories[$variationId] = VariationList::getSearchFactory(
+                $this->pageMax = 1;
+                $this->itemCountTotal = 0;
+                $this->itemCountPage = 0;
+                $this->facets = [];
+
+                $documents = $externalSearch->getDocuments();
+                if (count($documents)) {
+                    $this->itemList = $documents;
+                    $this->itemCountTotal = $externalSearch->getCountTotal();
+                    $this->itemCountPage = count($documents);
+                    if ($options['itemsPerPage'] == 0) {
+                        $this->pageMax = 1;
+                    } else {
+                        $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                    }
+                    return;
+                }
+
+                $variationIds = $externalSearch->getResults();
+                // only search when external search returns an result
+                if (count($variationIds)) {
+                    $externalSearchFactory = VariationList::getSearchFactory(
                         [
-                            'variationIds' => [$variationId],
+                            'variationIds' => $variationIds,
                             'excludeFromCache' => $scope === SearchOptions::SCOPE_SEARCH
                         ]
                     );
-                }
+                    $searchResults = $itemSearchService->getResults($externalSearchFactory);
+                    if (isset($searchResults['documents']) && count(
+                            $searchResults['documents']
+                        )) {
+                        foreach ($variationIds as $variationId) {
+                            $variation = array_filter(
+                                $searchResults['documents'],
+                                function ($document) use ($variationId) {
+                                    return $document['id'] == $variationId;
+                                }
+                            );
 
-                $searchResults = $itemSearchService->getResults($externalSearchFactories);
-
-                foreach ($resultVariationIds as $variationId) {
-                    if (isset($searchResults[$variationId]['documents']) && count($searchResults[$variationId]['documents'])) {
-                        $this->itemList[] = $searchResults[$variationId]['documents'][0];
+                            if (count($variation) == 1) {
+                                $this->itemList[] = array_pop($variation);
+                            }
+                        }
                     }
+                    if ($options['itemsPerPage'] == 0) {
+                        $this->pageMax = 1;
+                    } else {
+                        $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                    }
+                    $this->itemCountPage = count($variationIds);
+                    $this->itemCountTotal = $externalSearch->getCountTotal();
+                    $this->facets = [];
                 }
-                $this->pageMax        = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
-                $this->itemCountPage  = count($resultVariationIds);
-                $this->itemCountTotal = $externalSearch->getCountTotal();
-                $this->facets         = [];
-
                 return;
             }
         }

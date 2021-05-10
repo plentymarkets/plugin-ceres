@@ -9,8 +9,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PrintButtonWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.PrintButtonWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::PrintButtonWidget")
@@ -18,9 +22,15 @@ class PrintButtonWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/print-button.svg")
             ->withType(WidgetTypes::STATIC)
             ->withPosition(300)
+            ->withSearchKeyWords([
+                "drucken", "print", "button", "knopf", "feld", "schaltfläche"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

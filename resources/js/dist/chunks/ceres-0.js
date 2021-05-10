@@ -684,7 +684,7 @@ var render = function() {
                 attrs: { role: "group", "aria-label": "Thumb Control" }
               },
               [
-                _vm.canBeAddedToBasket
+                _vm.canBeAddedToBasket || _vm.isWishList
                   ? _c(
                       "button",
                       {
@@ -718,10 +718,7 @@ var render = function() {
                       ],
                       1
                     )
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.canBeAddedToBasket
-                  ? _c(
+                  : _c(
                       "button",
                       {
                         staticClass:
@@ -748,7 +745,6 @@ var render = function() {
                         )
                       ]
                     )
-                  : _vm._e()
               ]
             )
           ]

@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class RegistrationWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Login.RegistrationWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::RegistrationWidget")
@@ -21,8 +25,15 @@ class RegistrationWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::CUSTOMER)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "registrierung", "registration"
+            ])
             ->toArray();
     }
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

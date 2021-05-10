@@ -20,6 +20,7 @@
             <template v-for="consentGroup in consentGroups">
               <span
                 v-if="consentGroup.consents.length > 0"
+                :key="consentGroup.key"
                 class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
               >
                 <input
@@ -203,8 +204,12 @@ export default {
       this.isExpanded = false;
     },
 
+    open() {
+        this.isCollapsed = false;
+    },
+
     isConsented(groupKey) {
-      return this.$store.getters.isConsented(groupKey + ".*");
+        return this.$store.getters.isConsented(groupKey + ".*");
     },
 
     toggleConsent(groupKey) {

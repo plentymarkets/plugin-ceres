@@ -12,8 +12,12 @@ use IO\Services\ItemListService;
 
 class ItemGridWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Category.ItemGridWidget";
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemGridWidget')
@@ -22,19 +26,25 @@ class ItemGridWidget extends BaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(400)
+                                ->withSearchKeyWords([
+                                    "item", "artikel", "article", "produkt", "ansicht", "category", "kategorie"
+                                ])
                                 ->toArray();
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
-        
+
         $settings->createCustomClass();
-        
+
         $settings->createAppearance()
                  ->withDefaultValue('primary');
-        
+
         $settings->createSelect('numberOfColumnsDesktop')
                  ->withDefaultValue(4)
                  ->withName('Widget.itemGridNumberOfColumnsDesktopLabel')
@@ -47,7 +57,7 @@ class ItemGridWidget extends BaseWidget
                                      ->addEntry(4, 'Widget.widgetNum4')
                                      ->toArray()
                  );
-        
+
         $settings->createSelect('numberOfColumnsTablet')
                  ->withDefaultValue(3)
                  ->withName('Widget.itemGridNumberOfColumnsTabletLabel')
@@ -60,7 +70,7 @@ class ItemGridWidget extends BaseWidget
                                      ->addEntry(4, 'Widget.widgetNum4')
                                      ->toArray()
                  );
-        
+
         $settings->createSelect('numberOfColumnsMobile')
                  ->withDefaultValue(1)
                  ->withName('Widget.itemGridNumberOfColumnsMobileLabel')
@@ -71,24 +81,24 @@ class ItemGridWidget extends BaseWidget
                                      ->addEntry(2, 'Widget.widgetNum2')
                                      ->toArray()
                  );
-        
+
         $settings->createSpacing();
-        
+
         return $settings->toArray();
     }
-    
+
     /**
      * @inheritdoc
      */
     protected function getPreviewData($widgetSettings)
     {
         //TODO load data from context when its possible
-        
+
         /**
          * @var ItemListService $itemListService
          */
         $itemListService = pluginApp(ItemListService::class);
-        
+
         $itemListOptions = [];
         $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, SearchOptions::SCOPE_CATEGORY);
         $itemList        = $itemListService->getItemList(
@@ -97,7 +107,7 @@ class ItemGridWidget extends BaseWidget
             $itemListOptions['sorting'],
             $itemListOptions['itemsPerPage']
         );
-        
+
         return [
             'itemList' => $itemList['documents']
         ];

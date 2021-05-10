@@ -8,17 +8,26 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Application;
 
+/**
+ * Class DefaultHeaderPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a default header. It contains:
+ * - TopBarWidget
+ * - SearchSuggestionItemWidget
+ * - NavigationWidget
+ * - BreadcrumbWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultHeaderPreset implements ContentPreset
 {
-    /**
-     * Get the widget configurations of the presets to be assigned to the created content.
-     *
-     * @return mixed
-     */
-
     /** @var PresetWidgetFactory */
     private $topBarWidget;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         /** @var CeresConfig $config */

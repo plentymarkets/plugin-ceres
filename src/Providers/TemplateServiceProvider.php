@@ -21,6 +21,7 @@ use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
+use Ceres\Hooks\UploadFavicon;
 use Ceres\Widgets\WidgetCollection;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\ShopWizard;
@@ -30,6 +31,7 @@ use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Modules\ShopBuilder\Contracts\ContentWidgetRepositoryContract;
+use Plenty\Modules\System\Events\AfterPluginSetAssociated;
 use Plenty\Modules\Webshop\Consent\Contracts\ConsentRepositoryContract;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Helpers\UrlQuery;
@@ -43,12 +45,18 @@ use Plenty\Plugin\ConfigRepository;
 
 /**
  * Class TemplateServiceProvider
+ *
+ * This class is the Laravel Service Provider for Ceres.
+ * The service provider runs on every request and bootstraps the application.
+ * See https://laravel.com/docs/6.x/providers for further information.
  * @package Ceres\Providers
  */
 class TemplateServiceProvider extends ServiceProvider
 {
+    /** @var int Default priority of events */
     const EVENT_LISTENER_PRIORITY = 100;
 
+    /** @var \string[][] $templateKeyToViewMap This property maps templateKeys to their view and their used context */
     private static $templateKeyToViewMap =
         [
             'tpl.home' => ['Homepage.Homepage', GlobalContext::class],
@@ -88,12 +96,23 @@ class TemplateServiceProvider extends ServiceProvider
             'tpl.tags' => ['Category.Item.CategoryItem', TagSearchContext::class]
         ];
 
+    /**
+     * Register any application services.
+     * @throws \ErrorException
+     */
     public function register()
     {
         $this->getApplication()->singleton(CeresConfig::class);
         $this->getApplication()->singleton(DefaultSettingsService::class);
     }
 
+    /**
+     * Bootstrap any application services.
+     * This method is called after every other service provider has been registered.
+     * @param Twig $twig
+     * @param Dispatcher $eventDispatcher
+     * @param ConfigRepository $config
+     */
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
         //register shopCeres assistant
@@ -162,8 +181,14 @@ class TemplateServiceProvider extends ServiceProvider
         );
 
         $eventDispatcher->listen(AfterBuildPlugins::class, CeresAfterBuildPlugins::class);
+        $eventDispatcher->listen(AfterPluginSetAssociated::class, UploadFavicon::class);
     }
 
+    /**
+     * Register event listeners for IO events.
+     * @param $event
+     * @param $listener
+     */
     private function listenToIO($event, $listener)
     {
         /** @var Dispatcher $dispatcher */
@@ -193,6 +218,9 @@ class TemplateServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Register the default consent groups and their consents
+     */
     private function registerConsents()
     {
         /** @var ConsentRepositoryContract $consentRepository */
@@ -213,6 +241,15 @@ class TemplateServiceProvider extends ServiceProvider
             [
                 'position' => 100,
                 'description' => 'Ceres::Template.consentGroupTrackingDescription'
+            ]
+        );
+
+        $consentRepository->registerConsentGroup(
+            'payment',
+            'Ceres::Template.consentGroupPaymentLabel',
+            [
+                'position' => 200,
+                'description' => 'Ceres::Template.consentGroupPaymentDescription'
             ]
         );
 
@@ -301,7 +338,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         /**
          * @var ConfigRepository $config
-         * Cannot use CeresConfig since it depends on IO helper class
+         * Cannot use CeresConfig since it depends on IO helper class.
          */
         $config = pluginApp(ConfigRepository::class);
         if (strlen($config->get('Ceres.contact.api_key'))) {

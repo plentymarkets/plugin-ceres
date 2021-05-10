@@ -1,5 +1,6 @@
 <template>
-    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass">
+    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
+        <slot name="additionalimages"></slot>
         <source :srcset="imageUrl" :type="mimeType">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
@@ -17,7 +18,9 @@ export default {
         imageUrl: String,
         fallbackUrl: String,
         isBackgroundImage: Boolean,
-        pictureClass: String
+        pictureClass: String,
+        alt: String,
+        title: String
     },
 
     data()

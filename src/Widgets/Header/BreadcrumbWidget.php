@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class BreadcrumbWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Header.BreadcrumbWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::BreadcrumbWidget")
@@ -20,9 +24,15 @@ class BreadcrumbWidget extends BaseWidget
             ->withType(WidgetTypes::HEADER)
             ->withCategory(WidgetCategories::HEADER)
             ->withPosition(0)
+            ->withSearchKeyWords([
+                "header", "breadcrumb", "brotkrumen"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

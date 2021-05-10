@@ -44,6 +44,32 @@ export class StickyElement
         });
 
         el.classList.add("sticky-element");
+
+        const updateHandler = () =>
+        {
+            if (this.enabled)
+            {
+                this.checkElement();
+                this.updateStyles();
+            }
+        };
+
+        // Update if height of sticky element changes
+        if ("ResizeObserver" in window)
+        {
+            this.resizeObserver = new ResizeObserver(updateHandler.bind(this));
+            this.resizeObserver.observe(this.el);
+        }
+        // IE11 + Safari < 13.0
+        else
+        {
+            this.el.addEventListener("updateStickyContainer", () =>
+            {
+                const stop = repeatAnimationFrame(updateHandler.bind(this));
+
+                setTimeout(stop, 500);
+            });
+        }
     }
 
     enable()
@@ -128,6 +154,11 @@ export class StickyElement
 
     checkElement(skipOffsetCalculation)
     {
+        if (!this.enabled)
+        {
+            return false;
+        }
+
         const oldValue        = this.position || {};
         const elementRect     = this.el.getBoundingClientRect();
         const placeholderRect = this.placeholder.getBoundingClientRect();

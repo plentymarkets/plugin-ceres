@@ -2,6 +2,9 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
+use Plenty\Modules\ShopBuilder\Factories\Settings\BaseSettingFactory;
+use Plenty\Modules\ShopBuilder\Factories\Settings\ValueListFactory;
+
 class AppearanceSettingFactory extends BaseSettingFactory
 {
     public function __construct($optional)

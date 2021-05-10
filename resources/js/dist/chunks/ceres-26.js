@@ -249,6 +249,7 @@ var render = function() {
                   staticClass: "close",
                   attrs: {
                     type: "button",
+                    "data-testing": "guest-login-modal",
                     "data-dismiss": "modal",
                     "aria-hidden": "true"
                   }

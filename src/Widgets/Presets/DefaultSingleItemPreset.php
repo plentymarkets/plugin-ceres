@@ -9,6 +9,29 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 use IO\Extensions\Functions\UniqueId;
 
+/**
+ * Class DefaultSingleItemPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing single items. It contains:
+ * - TwoColumnWidget
+ * - StickyContainerWidget
+ * - InlineTextWidget
+ * - AddToBasketWidget
+ * - ItemAvailabilityWidget
+ * - AddToWishListWidget
+ * - ItemPriceWidget
+ * - ItemImageWidget
+ * - GraduatedPriceWidget
+ * - OrderPropertyWidget
+ * - ItemBundleWidget
+ * - TabWidget
+ * - ItemDataTableWidget
+ * - AttributeWidget
+ * - TagsWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultSingleItemPreset implements ContentPreset
 {
     /** @var PresetHelper */
@@ -31,7 +54,10 @@ class DefaultSingleItemPreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
@@ -118,7 +144,7 @@ class DefaultSingleItemPreset implements ContentPreset
         }
         $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
-            ->withSetting('customClass', 'title-outer')
+            ->withSetting('customClass', 'title-outer item-name')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)

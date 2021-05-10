@@ -14,8 +14,12 @@ class GoogleMapsWidget extends BaseWidget
 {
     use Loggable;
 
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.GoogleMapsWidget';
 
+    /**
+     * @inheritDoc
+     */
     public function getData(): array
     {
         return WidgetDataFactory::make('Ceres::GoogleMapsWidget')
@@ -23,9 +27,15 @@ class GoogleMapsWidget extends BaseWidget
             ->withPreviewImageUrl('/images/widgets/google-maps.svg')
             ->withType(WidgetTypes::DEFAULT)
             ->withPosition(1050)
+            ->withSearchKeyWords([
+                "google", "maps", "karte", "location", "anfahrt"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings(): array
     {
         /** @var WidgetSettingsFactory $settings */

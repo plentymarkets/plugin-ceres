@@ -1,5 +1,5 @@
 <template>
-    <select :value="addressData.gender" class="custom-select" @change="emitInputEvent($event.target.value)" data-autofocus>
+    <select :value="addressData.gender" data-testing="salutation-select" class="custom-select" @change="emitInputEvent($event.target.value)" data-autofocus>
         <option
             :value="salutation.key"
             :selected="addressData.gender === salutation.key && checkGenderCompany(salutation.key)"
@@ -110,12 +110,20 @@ export default {
     {
         emitInputEvent(value)
         {
+            const isNewGenderPersonal = this.getIsGenderPersonal(value)
+            const isOldGenderPersonal = this.getIsGenderPersonal(this.addressData.gender)
+            
             this.$emit("input", { field: "gender", value: value });
-            this.$emit("input", { field: "name1", value: "" });
-            this.$emit("input", { field: "name2", value: "" });
-            this.$emit("input", { field: "name3", value: "" });
-            this.$emit("input", { field: "vatNumber", value: "" });
-            this.$emit("input", { field: "contactPerson", value: "" });
+
+            // just reset the input fields, when switching the gender between a personal one and company
+            if (isNewGenderPersonal !== isOldGenderPersonal)
+            {
+                this.$emit("input", { field: "name1", value: "" });
+                this.$emit("input", { field: "name2", value: "" });
+                this.$emit("input", { field: "name3", value: "" });
+                this.$emit("input", { field: "vatNumber", value: "" });
+                this.$emit("input", { field: "contactPerson", value: "" });
+            }
         },
 
         checkGenderCompany(gender)
@@ -125,6 +133,11 @@ export default {
                 return (this.addressData.name1 !== null) || (this.addressData.name1 !== "");
             }
             return true;
+        },
+
+        getIsGenderPersonal(gender)
+        {
+            return ["male", "female", "diverse"].includes(gender);
         }
     },
 

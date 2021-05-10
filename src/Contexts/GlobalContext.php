@@ -17,48 +17,141 @@ use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Http\Request;
+use Plenty\Modules\System\Models\WebstoreConfiguration;
 
+/**
+ * Class GlobalContext
+ *
+ * Context class with data, required on all views in the shop.
+ *
+ * @package Ceres\Contexts
+ */
 class GlobalContext implements ContextInterface
 {
+    /**
+     * @var array $params Passthrough variables from the controller.
+     */
     protected $params = [];
 
-    /** @var CeresConfig $ceresConfig  */
+    /**
+     * @var CeresConfig $ceresConfig The configuration for the shop.
+     */
     public $ceresConfig = null;
 
-    /** @var Request $request */
+    /**
+     * @var Request $request The http request.
+     */
     protected $request;
 
+    /**
+     * @var string $lang The language code of the current language.
+     */
     public $lang;
+
+    /**
+     * @var string $metaLang
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $metaLang;
+
+    /**
+     * @var bool $forceNoIndex Defines if the meta data should have the attrribute content set to "NOINDEX".
+     */
     public $forceNoIndex;
+
+    /**
+     * @var array $template
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $template = [];
+
+    /**
+     * @var string $templateName
+     * @deprecated since 5.0.20 will be removed in 6.0.0
+     */
     public $templateName;
+
+    /**
+     * @var array $categories Categories for the navigation.
+     */
     public $categories;
+
+    /**
+     * @var array $categoryBreadcrumbs List of all parent categories including current category.
+     */
     public $categoryBreadcrumbs;
+
+    /**
+     * @var array $notifications List of all notifications stored in the session.
+     */
     public $notifications;
+
+    /**
+     * @var array $basket The basket object.
+     */
     public $basket;
+
+    /**
+     * @var WebstoreConfiguration $webstoreConfig The webstore configuration.
+     */
     public $webstoreConfig;
+
+    /**
+     * @var array $currencyData The name and the symbol for the currently selected currency.
+     */
     public $currencyData;
+
+    /**
+     * @var bool $showNetPrices Defines if net prices should be shown.
+     */
     public $showNetPrices;
 
     /**
+     * @var string $homepageURL
      * @deprecated since 4.3
-     * Use IO\Extensions\Constants\ShopUrls::$home instead
+     * Use ShopUrls::$home instead
      */
     public $homepageURL;
+
+    /**
+     * @var string $splitItemBundle Represents the system setting for splitting bundles.
+     */
     public $splitItemBundle;
 
     /**
      * @deprecated since 4.5
-     * Use IO\Extensions\Constants\ShopUrls::getTemplateType() instead
+     * Use ShopUrls::getTemplateType() instead
      */
     public $templateEvent;
+
+    /**
+     * @var bool $isShopBuilder Defines if the shop is opened in ShopBuilder mode.
+     */
     public $isShopBuilder;
+
+    /**
+     * @var bool $isSafeMode Defines if the shop is loaded in safe mode.
+     */
     public $isSafeMode;
+
+    /**
+     * @var array $bodyClasses Array of CSS classes to apply to the body.
+     */
     public $bodyClasses;
+
+    /**
+     * @var string $buildHash Hash of the latest plugin deployment.
+     */
     public $buildHash;
+
+    /**
+     * @var string $assetName Key for the assets to be loaded.
+     */
     public $assetName = "ceres-checkout";
 
+    /**
+     * @inheritDoc
+     */
     public function init($params)
     {
         $this->params = $params;
@@ -102,8 +195,7 @@ class GlobalContext implements ContextInterface
 
         $this->homepageURL = $shopUrls->home;
         $this->metaLang = 'de';
-        if($this->lang == 'en')
-        {
+        if ($this->lang == 'en') {
             $this->metaLang = $this->lang;
         }
 
@@ -135,6 +227,11 @@ class GlobalContext implements ContextInterface
 
         $this->isShopBuilder = $shopBuilderRequest->isShopBuilder();
 
+        // Always use whole scss for shopBuilder
+        if ($this->isShopBuilder) {
+            $this->assetName = "ceres-checkout";
+        }
+
         $this->isSafeMode = $app->isTemplateSafeMode();
 
         $this->bodyClasses = [];
@@ -142,8 +239,7 @@ class GlobalContext implements ContextInterface
         $templateClass = str_replace('.', '-', $templateClass);
 
         /* page-item is a bootstrap class */
-        if($templateClass === "page-item")
-        {
+        if ($templateClass === "page-item") {
             $templateClass = "page-singleitem";
         }
 
@@ -152,10 +248,15 @@ class GlobalContext implements ContextInterface
         $this->buildHash = BuildHash::get();
     }
 
+    /**
+     * Get value from $params, filtered by the key.
+     * @param string|int $key Key to search for in the $params.
+     * @param mixed $defaultValue Optional: If set, the method will return the $defaultValue, when there is no value for the given $key. (Default: null)
+     * @return string|null
+     */
     protected function getParam($key, $defaultValue = null)
     {
-        if(is_null($this->params[$key]))
-        {
+        if (is_null($this->params[$key])) {
             return $defaultValue;
         }
 

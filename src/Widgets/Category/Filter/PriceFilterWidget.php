@@ -7,9 +7,15 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PriceFilterWidget extends FilterBaseWidget
 {
+    /** @inheritDoc */
     protected $allowedFacetTypes = ["price"];
+
+    /** @inheritDoc */
     protected $className = "price";
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::PriceFilterWidget')
@@ -18,9 +24,15 @@ class PriceFilterWidget extends FilterBaseWidget
                                 ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(900)
+                                ->withSearchKeyWords([
+                                    "filter", "preis", "price"
+                                ])
                                 ->toArray();
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         return parent::getSettings();

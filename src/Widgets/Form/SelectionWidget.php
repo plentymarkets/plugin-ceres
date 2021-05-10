@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class SelectionWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.SelectionWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::SelectionWidget")
@@ -20,10 +24,16 @@ class SelectionWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/input-select.svg")
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
-            ->withPosition(500)
+            ->withPosition(700)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "mail"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

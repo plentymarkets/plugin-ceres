@@ -1,8 +1,9 @@
 <template>
-    <article class="cmp cmp-product-thumb">
+    <article class="cmp cmp-product-thumb" :data-testing="item.variation.id">
         <div :class="paddingClasses" :style="paddingInlineStyles">
 
             <add-to-basket
+                    data-testing="item-add-to-basket"
                     :variation-id="item.variation.id"
                     :is-salable="!!item.filter && item.filter.isSalable"
                     :has-children="!!item.item && item.item.salableVariationCount > 1"
@@ -22,8 +23,8 @@
                 <div class="prop-1-1">
                     <slot name="item-image">
                         <category-image-carousel :image-urls-data="item.images | itemImages(imageUrlAccessor)"
-                                                :alt-text="item | itemName"
-                                                :title-text="item | itemName"
+                                                :alt="item | itemName"
+                                                :title="item | itemName"
                                                 :item-url="item | itemURL(urlWithVariationId)"
                                                 :enable-carousel="$ceres.config.item.enableImageCarousel"
                                                 :disable-carousel-on-mobile="disableCarouselOnMobile"

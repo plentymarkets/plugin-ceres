@@ -6,14 +6,30 @@ use IO\Helper\ContextInterface;
 use IO\Services\CheckoutService;
 use Plenty\Modules\Category\Models\Category;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
-use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Translation\Translator;
 
+/**
+ * Class CheckoutContext
+ *
+ * Context class with additional data, required for the checkout view.
+ *
+ * @package Ceres\Contexts
+ */
 class CheckoutContext extends CategoryContext implements ContextInterface
 {
+    /**
+     * @var array $checkout Contains data for the checkout, including payment methods, shipping profiles, currencies and other data.
+     */
     public $checkout = [];
+
+    /**
+     * @inheritDoc
+     */
     public $assetName = "ceres-checkout";
 
+    /**
+     * @inheritDoc
+     */
     public function init($params)
     {
         parent::init($params);

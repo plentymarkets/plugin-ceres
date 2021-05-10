@@ -8,12 +8,15 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
-use PayPal\Api\Image;
 
 class BackgroundWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.BackgroundWidget';
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::BackgroundWidget')
@@ -22,9 +25,15 @@ class BackgroundWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(700)
+            ->withSearchKeyWords([
+                "hintergrund", "background",
+            ])
             ->toArray();
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -124,7 +133,10 @@ class BackgroundWidget extends BaseWidget
             ->withName('Widget.backgroundRepeatLabel')
             ->withTooltip('Widget.backgroundRepeatTooltip');
     }
-
+    
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $stylingClasses = '';

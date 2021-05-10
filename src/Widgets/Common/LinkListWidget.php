@@ -8,6 +8,9 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class LinkListWidget extends ListWidget
 {
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::LinkListWidget")
@@ -17,14 +20,23 @@ class LinkListWidget extends ListWidget
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(1000)
             ->withDeprecated()
+            ->withSearchKeyWords([
+                "link", "links", "linkliste", "list"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         return parent::getSettings();
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $templateData = parent::getTemplateData($widgetSettings, $isPreview);

@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class BankDataSelectWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.BankDataSelectWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::BankDataSelectWidget")
@@ -20,8 +24,15 @@ class BankDataSelectWidget extends BaseWidget
             ->withType(WidgetTypes::MY_ACCOUNT)
             ->withCategory(WidgetCategories::MY_ACCOUNT)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "bank", "bankverbindung", "zahlungsmittel"
+            ])
             ->toArray();
     }
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

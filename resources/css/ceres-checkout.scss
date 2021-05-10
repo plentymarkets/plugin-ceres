@@ -10316,6 +10316,9 @@ $border-width: 1px;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
+        /* Enable click-through */
+        pointer-events: none; 
+
         &.disabled,
         &:disabled {
             cursor: not-allowed;
@@ -10380,6 +10383,13 @@ $border-width: 1px;
     .custom-select {
         padding: 1.2rem 2rem .4rem 1rem;
         background-position: calc(100% - 1rem) 1.2rem;
+    }
+}
+
+.input-group-prepend {
+    .custom-select {
+        padding: 0.8rem 2rem 0.8rem 1rem;
+        background-position: calc(100% - 1rem) center;
     }
 }
 
@@ -11974,6 +11984,10 @@ html.crios {
         }
     }
 
+    .graduated-base-price {
+        font-style: normal !important; // stylelint-disable-line declaration-no-important
+    }
+
     .fade-enter-active,
     .fade-leave-active {
         @include transition(opacity .3s ease-out);
@@ -13229,6 +13243,7 @@ html.ie {
 
 .widget-legal-information {
     a {
+        display: inline-block;
         margin-right: 10px;
         color: $black;
     }
@@ -13280,6 +13295,15 @@ html.ie {
 .widget-text {
     .widget-inner {
         padding: 1rem 1.5rem;
+    }
+
+    // images from data-fields
+    img {
+        max-width: 100%;
+    }
+
+    p:last-of-type {
+        margin-bottom: 0;
     }
 }
 
@@ -13416,10 +13440,7 @@ $normalmenu-color: $primary !default;
 }
 
 .navbar-toggler {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    margin-left: auto;
 }
 
 // When mobile navigation is open
@@ -13430,6 +13451,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
 
 .normalmenu {
     a {
+        padding: 1rem;
         color: inherit;
     }
 
@@ -13446,7 +13468,6 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         min-width: 100%;
         max-height: 80vh;
         overflow: hidden;
-        overflow-y: auto;
         word-wrap: break-word;
         visibility: hidden;
         background: $normalmenu-color;
@@ -13462,10 +13483,14 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
             &:hover {
                 background: darken($normalmenu-color, 10%);
             }
+        }
+    }
 
-            a {
-                padding: 1rem;
-            }
+    .bt-more {
+        text-transform: lowercase;
+
+        &:hover {
+            background: darken($normalmenu-color, 10%);
         }
     }
 }
@@ -13508,29 +13533,25 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
                 column-rule: 1px solid $gray-300;
         word-wrap: break-word;
         background-color: color-yiq($megamenu-color);
-    }
-
-    .collapse-inner {
-        padding-bottom: 1em;
 
         li {
             // 0.1px for rendering fix
             padding: .1px 1.5em;
             line-height: 170%;
             text-align: left;
+        }
+    }
 
+    .collapse-inner {
+        padding-bottom: 1em;
+
+        li {
             &:hover a {
                 color: $megamenu-color;
             }
         }
         a {
             color: $black;
-        }
-        .bt-more {
-            a {
-                color: $gray-600;
-                text-transform: lowercase;
-            }
         }
     }
 
@@ -13545,6 +13566,13 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     }
     .level3 {
         padding-left: 2.5em !important; // stylelint-disable-line declaration-no-important
+    }
+
+    .bt-more {
+        a {
+            color: $gray-600 !important; // stylelint-disable-line declaration-no-important
+            text-transform: lowercase;
+        }
     }
 }
 
@@ -13593,6 +13621,9 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
                 }
 
                 > ul {
+                    // show the overflow-y only when the menu is visible / required for safari (desktop)
+                    overflow-y: auto;
+
                     visibility: visible;
                     opacity: 1;
                 }

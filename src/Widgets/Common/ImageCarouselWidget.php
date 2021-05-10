@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ImageCarouselWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.ImageCarouselWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ImageCarouselWidget")
@@ -21,9 +25,15 @@ class ImageCarouselWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "bild", "bilder", "image", "picture", "carousel", "bilderkarussel"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -95,7 +105,7 @@ class ImageCarouselWidget extends BaseWidget
             ->withName("Widget.imageCarouselCustomImagePathLabel")
             ->withTooltip("Widget.imageCarouselCustomImagePathTooltip")
             ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
-        
+
         $container->children->createFile("fallbackImagePath")
             ->withDefaultValue("")
             ->withName("Widget.imageCarouselFallbackImagePathLabel")
@@ -107,6 +117,9 @@ class ImageCarouselWidget extends BaseWidget
         return $settings->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $sliderParams = [];

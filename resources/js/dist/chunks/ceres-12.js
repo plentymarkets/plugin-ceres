@@ -141,6 +141,7 @@ var render = function() {
                 type: "email",
                 name: "email",
                 autocomplete: "email",
+                "data-testing": "guest-login-input",
                 id: _vm._uid,
                 "data-autofocus": ""
               },
@@ -173,7 +174,10 @@ var render = function() {
             {
               staticClass: "btn btn-primary btn-medium btn-appearance",
               class: _vm.buttonSizeClass,
-              attrs: { disabled: _vm.isDisabled },
+              attrs: {
+                disabled: _vm.isDisabled,
+                "data-testing": "guest-login-button"
+              },
               on: {
                 click: function($event) {
                   $event.preventDefault()

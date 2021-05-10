@@ -266,6 +266,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -412,15 +414,17 @@ var render = function() {
       { staticClass: "basket-item component-loading with-icon d-flex" },
       [
         _c("div", { staticClass: "image-container" }, [
-          _vm.image
-            ? _c("img", {
-                staticClass: "d-block mw-100 mh-100",
-                attrs: {
-                  src: _vm.image,
-                  title: _vm._f("itemName")(_vm.wishListItem)
-                }
-              })
-            : _vm._e()
+          _c("a", { attrs: { href: _vm._f("itemURL")(_vm.wishListItem) } }, [
+            _vm.image
+              ? _c("img", {
+                  staticClass: "d-block mw-100 mh-100",
+                  attrs: {
+                    src: _vm.image,
+                    title: _vm._f("itemName")(_vm.wishListItem)
+                  }
+                })
+              : _vm._e()
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "meta-container-wrapper" }, [
@@ -562,11 +566,12 @@ var render = function() {
                 [
                   _c("quantity-input", {
                     attrs: {
-                      value: _vm.quantity,
+                      value: _vm.wishListItem.variation.intervalOrderQuantity,
                       min: _vm.wishListItem.variation.minimumOrderQuantity,
                       max: _vm.wishListItem.variation.maximumOrderQuantity,
                       timeout: 0,
-                      interval: _vm.wishListItem.variation.intervalQuantity,
+                      interval:
+                        _vm.wishListItem.variation.intervalOrderQuantity,
                       "variation-id": _vm.wishListItem.variation.id
                     },
                     on: {
@@ -600,6 +605,7 @@ var render = function() {
                   "div",
                   {
                     staticClass: "btn btn-sm text-danger p-0",
+                    attrs: { "data-testing": "remove-wlist-item" },
                     on: {
                       click: function($event) {
                         return _vm.removeItem()

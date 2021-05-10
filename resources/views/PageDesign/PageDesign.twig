@@ -207,7 +207,7 @@
         publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         isCheapestSorting: "{{ services.template.isCheapestSorting() }}",
         initialData: {
-            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
+            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
             shippingCountryId: {{ services.checkout.getShippingCountryId() }},
             showNetPrices: {{ showNetPrices | json_encode }}
         },
@@ -280,6 +280,7 @@
     }
 
     {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
+    {% if request.get("show") == "forgotPassword" %}window.ceresStore.dispatch("loadComponent", "forgot-password-modal"){% endif %}
 </script>
 
 {{ get_filtered_tags() }}

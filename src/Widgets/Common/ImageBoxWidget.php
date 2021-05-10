@@ -11,7 +11,10 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ImageBoxWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.ImageBoxWidget';
+
+    /** @const string[] IMAGE_EXTENSION */
     const IMAGE_EXTENSIONS = [
         'jpg',
         'jpeg',
@@ -20,10 +23,15 @@ class ImageBoxWidget extends BaseWidget
         'svg',
         'apng'
     ];
+
+    /** @const string[] MODERN_IMAGE_EXTENSIONS */
     const MODERN_IMAGE_EXTENSIONS = [
         'webp'
     ];
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ImageBoxWidget')
@@ -32,9 +40,15 @@ class ImageBoxWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "foto", "picture", "bild", "image", "einzelbild"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -113,6 +127,9 @@ class ImageBoxWidget extends BaseWidget
         return $settings->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $urlType = '';

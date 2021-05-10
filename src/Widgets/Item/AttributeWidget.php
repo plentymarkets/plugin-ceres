@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AttributeWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.AttributeWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::AttributeWidget")
@@ -20,9 +24,15 @@ class AttributeWidget extends BaseWidget
             ->withType(WidgetTypes::SET_COMPONENT)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "attribute", "eigenschaft"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

@@ -2,19 +2,14 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class RadioGroupSettingFactory extends BaseSettingFactory
-{
-    public function __construct()
-    {
-        $this->withType('radioGroup');
-    }
+use Plenty\Modules\ShopBuilder\Factories\Settings\RadioGroupSettingFactory as CoreRadioGroupSettingFactory;
 
-    /**
-     * @param array $radioValues
-     * @return RadioGroupSettingFactory
-     */
-    public function withRadioValues($radioValues)
-    {
-        return $this->withOption('radioValues', $radioValues);
-    }
+/**
+ * Class RadioGroupSettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.23
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\RadioGroupSettingFactory
+ */
+class RadioGroupSettingFactory extends CoreRadioGroupSettingFactory
+{
 }

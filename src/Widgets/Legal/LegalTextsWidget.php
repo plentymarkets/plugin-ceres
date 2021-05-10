@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class LegalTextsWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Legal.LegalTextsWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::LegalTextsWidget")
@@ -20,8 +24,15 @@ class LegalTextsWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/legal-texts.svg")
             ->withType(WidgetTypes::DEFAULT)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "datenschutz", "legal", "privacy"
+            ])
             ->toArray();
     }
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

@@ -4,20 +4,23 @@
 
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
             <div class="image-container">
+              <a :href="basketItem.variation.data | itemURL">
                 <lazy-img
                     picture-class="d-block mw-100 mh-100"
                     v-if="image"
                     :image-url="image"
                     :alt="altText"
-                    :title="itemName">
+                    :title="itemName"
+                    data-testing="basket-item-img">
                 </lazy-img>
+              </a>
             </div>
 
             <div class="meta-container-wrapper">
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
                         <div class="position-relative w-100">
-                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance small font-weight-bold text-break">
+                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance small font-weight-bold text-break" data-testing="basket-item-name">
                                 {{ basketItem.variation.data | itemName }}
                             </a>
 
@@ -84,7 +87,11 @@
                         <div class="price-box text-right ml-2 mt-1">
                             <div class="item-total-price font-weight-bold text-nowrap">{{ basketItem.quantity * unitPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
 
-                            <button class="btn btn-sm text-danger p-0" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
+                            <button
+                                class="btn btn-sm text-danger p-0"
+                                :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }"
+                                @click="deleteItem"
+                                data-testing="basket-item-delete">
                                 {{ $translate("Ceres::Template.basketDelete") }}
                                 <icon icon="trash-o" class="default-float" :loading="waitingForDelete"></icon>
                             </button>
@@ -256,6 +263,12 @@ export default {
 
         basePrice()
         {
+            // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
+            if (!isNullOrUndefined(this.basketItem.updatedBasePrice)) 
+            {
+                return this.basketItem.updatedBasePrice;
+            }
+
             if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
             {
                 return this.basketItem.variation.data.prices.specialOffer.basePrice;

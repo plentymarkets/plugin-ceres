@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AcceptPrivacyPolicyWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Form.AcceptPrivacyPolicyWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::AcceptPrivacyPolicyWidget")
@@ -20,9 +24,15 @@ class AcceptPrivacyPolicyWidget extends BaseWidget
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "privacy", "policy", "datenschutz"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

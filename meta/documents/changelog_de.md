@@ -1,5 +1,390 @@
 # Release Notes für Ceres
 
+## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Ausrichtung des Textes im Begrüßung-Widget kann jetzt über die Widget-Einstellungen bestimmt werden.
+- Im Schritt Webshop des plentyShop-Assistenten kannst du nun wählen, mit welchem Status Aufträge angelegt werden, für die die Prüfung der Umsatzsteuer-Identifikationsnummer nicht abgeschlossen werden konnte.
+
+### Geändert
+
+- Einige Bedienelemente wurden um ARIA-Attribute erweitert. Wir möchten uns bei @cerwantes für diesen Beitrag bedanken!
+- Das Favicon wird nun beim Speichern des plentyShop-Assistenten in den internen Webspace hochgeladen. Es ist somit nicht mehr notwendig, das Plugin-Set bereitzustellen, damit Änderungen am Favicon wirksam werden.
+- Die Stabilität des Kontaktformulares wurde verbessert.
+- Das Eingabefeld für die Umsatzsteuer-Identifikationsnummer enthält nun das länderspezifische Präfix.
+
+### Behoben
+
+- Solange kein Favicon in den Ceres-Einstellungen hinterlegt ist, wird nun das Favicon aus den veralteten Einstellungen des Mandanten verwendet.
+- Das Home-Icon in den Breadcrumbs wurde zusätzlich mit einem aria-label versehen. Dessen Wert kann über die Mehrsprachigkeitsoberfläche über den Eintrag `headerBreadcrumbHome` angegeben werden. Wir möchten uns bei @cerwantes für den Beitrag bedanken!
+- Aus Gründen der Rechtssicherheit wird nun in der Auflistung der Staffelpreise auf der Artikelansicht auch der Grundpreis angezeigt, falls die Grundpreisanzeige am Artikel aktiviert ist.
+- Im Header wurde ein fehlerhaftes `<img>`-Tag angezeigt, wenn kein Firmenlogo in den Ceres-Einstellungen hinterlegt war. Dieses Verhalten wurde behoben.
+- Zahlungsartenrabatte und -aufschläge werden jetzt bei einer nachträglichen Änderung der Zahlungsart eines bestehenden Auftrags berücksichtigt.
+- Unter bestimmten Umständen wurde die Währung in der Auftragsübersicht im Mein Konto-Bereich falsch angezeigt. Dieses Verhalten wurde behoben.
+- Durch einen Fehler konnte pro Plugin nur eine Übersetzungsdatei im Frontend verwendet werden. Dies wurde behoben.
+- Die Mindestbestellmenge eines Artikels oder eines Preises wird nun bei der Mengeneingabe berücksichtigt.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.28 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/Widgets/MyAccount/GreetingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2779/files#diff-c428531b614621aa7ec1fe56507582fcd923aeae8342bfb3c0d2bbbe650c69be)
+- [resources/js/src/app/components/item/GraduatedPrices.vue](https://github.com/plentymarkets/plugin-ceres/pull/2765/files#diff-57df8453013ee1dd0821c871b25d89e42eb2ff2ed7d491f2141aacb299ada6b9)
+
+
+## v5.0.27 (2021-04-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.26...5.0.27" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Das Favicon aus den Plugin-Einstellungen wird angezeigt, solange kein Favicon in den internen Webspace hochgeladen wurde.
+- Unter bestimmten Umständen erzeugte die Store Special-Komponente einen JavaScript-Fehler in der Konsole. Dies wurde behoben.
+
+## v5.0.26 (2021-04-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.25...5.0.26" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Der plentyShop-Assistent enthält nun eine Einstellung, mit der bestimmt werden kann, wie sich der Kund:innen-Login bei Systemen mit mehreren Mandanten verhalten soll. Weitere Informationen dazu findet ihr in [diesem Forenbeitrag](https://forum.plentymarkets.com/t/mehrere-kontakte-mit-der-selben-e-mail-adresse-koennen-sich-bei-unterschiedlichen-mandanten-einloggen-multiple-contacts-with-the-same-email-address-can-log-into-different-clients/630567).
+
+### Geändert
+
+- Die eingestellte CSS-Klasse für Facetten und Facettenwerte wird jetzt im Frontend ausgegeben.
+- Die Anzahl der maximal ausgegebenen Kategorien der zweiten Ebene können nun auch für das normale Menü in den Widget-Einstellungen im ShopBuilder festgelegt werden.
+- Das hinterlegte Favicon wird nach dem Bereitstellen des Plugin-Sets unter der jeweiligen Webshop-Domain hochgeladen und wird somit nun auch von der mobilen Google-Suche berücksichtigt. **Hinweis** Änderungen am Favicon werden dadurch erst nach erneutem Bereitstellen des Plugin-Sets wirksam!
+- Im Warenkorb sowie in der Wunschliste verlinken Artikelbilder jetzt auf die jeweilige Variantenseite. Wir möchten uns bei @cerwantes für den Beitrag bedanken!
+- Für externe Suchanbieter besteht jetzt die Möglichkeit, direkt die gesamten Artikeldaten zurückzugeben, um die Performance der externen Suche zu verbessern. Dafür müssen die Artikeldaten in der richtigen Datenstruktur zurückgegeben werden.
+- Die Berechnung von fixierten Elementen erfolgt nicht mehr, wenn diese deaktiviert sind.
+
+### Behoben
+
+- In der Desktop-Ansicht des Safari-Browsers wurden bei bestimmten Cursor-Bewegungen Einträge aus der Navigation fälschlicherweise ausgeklappt. Dies wurde behoben.
+- Die "mehr..."-Schaltfläche in der Navigation wurde nicht korrekt angezeigt. Dies wurde behoben.
+- Im plentyShop-Assistenten wurden im Schritt **Standardeinstellungen** bei der Einstellung **Standardzahlungsart** nicht alle Plugin-Zahlungsarten angezeigt. Dies wurde behoben.
+- Artikel auf der Wunschliste, die eine Intervallbestellmenge über oder unter 1 oder eine Mindestbestellmenge von 0 hatten, konnten nicht direkt in den Warenkorb gelegt werden. Dies wurde behoben.
+- Beim Aktualisieren eines Warenkorbartikels wird nun der Grundpreis ebenfalls aktualisiert.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.26 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/js/src/app/components/itemList/filter/ItemFilter.vue](https://github.com/plentymarkets/plugin-ceres/pull/2753/files#diff-eab69464064e5200e309de7a80e4fa43773919c60a5f31d5997058b8f7e2f478
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/2697/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2754/files#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
+- [resources/js/src/app/components/wishList/WishListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/2754/files#diff-be8788b59e5887730f9bb4aa5a12d093908265ff19c26bb5ddca99485e7d7621)
+
+## v5.0.25 (2021-03-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.24...5.0.25" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+-Der letzte Paragraph des Text-Widgets zum Inline-Editing besaß einen Außenabstand nach unten. Hierdurch war es nicht möglich, ein Text-Widget ohne unteren Abstand zu platzieren. Dieser wurde daher entfernt.
+- Bei der Ausgabe der Übersetzungen für "Brutto" (Ceres::Template.checkoutGross) und "Netto" (Ceres::Template.checkoutNet) wurden in den Summen Klammern angezeigt, die sich nicht entfernen ließen. Die Klammern wurden in die Übersetzung überführt und können zukünftig entfernt werden.
+-Beim Wechsel der Anrede in der Adressauswahl werden die Felder nur noch geleert, wenn man zwischen einer Personen-Anrede und einer Firma wechselt.
+
+### Behoben
+- Die Variantenauswahl reagierte nicht auf Nutzereingaben, wenn alle wählbaren Varianten nicht kaufbar sind.
+- Auf den Standardseiten der Rechtstexte haben Abstände gefehlt. Diese wurden ergänzt.
+
+## v5.0.24 (2021-03-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.23...5.0.24" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt 
+
+- In Widgets für die Suchergebnisse ist es jetzt möglich, die Überschrift auszublenden.
+
+### Geändert
+
+- Bei der Ausgabe der Übersetzungen für "Brutto" `(Ceres::Template.basketGross)` und "Netto" `(Ceres::Template.basketNet)` in den Summen wurden Klammern angezeigt, die sich nicht entfernen ließen. Die Klammern wurden in die Übersetzung überführt und können zukünftig entfernt werden.
+- Im ShopBuilder wird jetzt aus Kompatibilitätsgründen unabhängig von der Route die `ceres-checkout.scss` geladen.
+
+### Behoben
+
+- Die Einstellungen im Navigations-Widget für Darstellungstyp "MegaMenu" hatten fälschlicherweise einen Einfluss auf den Darstellungstyp "Normal". Dies wurde behoben.
+- In der Vorlage für Footer konnte für den ersten Eintrag des hinterlegten Listen-Widgets keine URL eingegeben werden. Dies wurde behoben.
+- Das Overlay zum Ändern des Passworts wird beim Aufruf des Passwort-Vergessen-Links aus E-Mails wieder direkt geöffnet.
+- Wurde das "Rechtliche Texte"-Widget als letztes Element im Footer platziert, wurde eine zweite Scrollbar angezeigt. Dies wurde behoben.
+- Die klickbare Fläche von Select-Boxen wurde vergrößert. Diese kann man nun über das Label öffnen. Des Weiteren wurden fehlende for-Attribute für diese hinzugefügt.
+- Die Route auf der Seite zur Bestellbestätigung für hinterlegte Bestellmerkmale vom Typ Datei war fehlerhaft. Das Verhalten wurde behoben.
+- Im Kontaktformular wurde eine Fehlermeldung nicht ausgegeben, wenn der E-Mail-Versand nicht eingerichtet war.
+- Ein leeres Ergebnis bei der Nutzung von externen Suchen hat zur Erhöhung der TTFB geführt. Das Problem wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.24 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/Widgets/Header/NavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2687/files#diff-d9d8d5418b1e74986dcb27dfa315d297f65a5f90efed0734e8ab495651cab594)
+- [resources/js/src/app/components/basket/BasketTotals.vue](https://github.com/plentymarkets/plugin-ceres/pull/2698/files#diff-74c12ada105a013f79bbea3a162d3e4358d1afa3f38c3e9e00894a3ab6ad01c1)
+- [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/2682/files#diff-6103acda40fc331c6f5ba92faab9976e92848d8fde0e9af7fe34abd593885128)
+- [resources/views/Widgets/Header/SearchSuggestionWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2695/files#diff-4213d7ceb8c8a526388dda36535e762c171c37147183856d9801b5f8b18f6c34)
+
+## v5.0.23 (2021-02-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.22...5.0.23" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt 
+
+- Das Artikellisten-Widget enthält nun die Option, eine Liste anzulegen, die Artikel des kompletten Sortiments enthält.
+- Für das Lieferland Nordirland wird jetzt die passende Flagge angezeigt.
+
+### Geändert
+
+- Die Factory-Klassen zum Generieren von Widget-Einstellungen wurden in das ShopBuilder-Modul überführt. Die Klassen aus Ceres sind ab sofort als **deprecated** markiert.
+- Die Sortierung der Lieferländer wird nun serverseitig gerendert.
+
+### Behoben
+
+- Durch einen Syntaxfehler im Top-Bar-Widget konnte es beim Anzeigen der Schaltfläche für die Währungsauswahl zu Darstellungsfehlern kommen. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.23 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/2664/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2664/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+
+## v5.0.22 (2021-02-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.21...5.0.22" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler verhinderte reCAPTCHA das Absenden eines Kontaktformulars mit Dateianhang. Dies wurde behoben.
+- Die Dateiauswahl des Widgets E-Mail-Anhang kann nun durch Klick auf das Eingabefeld geöffnet werden.
+- Ausgewählte Dateien im Widget E-Mail-Anhang können nun wieder gelöscht werden.
+- Unter bestimmten Umständen konnten manche Honeypots in Chrome durch Autovervollständigung befüllt werden. Dies wurde behoben.
+
+## v5.0.21 (2021-02-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.20...5.0.21" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Das Widget E-Mail-Anhang wurde zum ShopBuilder hinzugefügt. Es wird damit ermöglicht, Dateien an E-Mails anzuhängen, die über das Kontaktformular versendet werden.
+- Aria-Labels für Barrierefreiheit wurden hinzugefügt.
+
+### Geändert
+
+- Bilder, die in der Kategoriebeschreibung ausgegeben werden, haben nun eine maximale Breite.
+- Auf `<picture>`-Elementen werden nun keine `<alt>`- und `<title>`- Attribute mehr gesetzt. Das `<title>`-Attribut wird jetzt mit auf das `<img>`-Element gesetzt.
+- Der geheime Google reCAPTCHA Schlüssel wurde aus dem globalen Konfigurationsobjekt entfernt.
+- Das Icon für das Löschen von Adressen im ShopBuilder wurde von einem X zu einem Mülleimer geändert. Vielen Dank an @daniel-mannheimer für den Beitrag.
+- Das Widget für Datenschutzeinstellungen wurde um Schaltflächen zum Speichern der Auswahl erweitert.
+
+### Behoben
+
+- Im Checkout konnte es beim Ändern von Adressen zu Fehlern kommen. Dies wurde behoben.
+- Die Schaltfläche für die Kategorienavigation konnte auf mobilen Displaygrößen vom Firmenlogo überlagert werden. Dies wurde behoben.
+- Auf kleinen Displaygrößen konnte ein Klick auf die Attributauswahl eines Artikels dazu führen, dass die Scroll-Position zurückgesetzt wurde. Dies wurde behoben.
+- Durch einen Fehler wurden Nutzer:innen zurück zum Checkout mit leerem Warenkorb geleitet, wenn sie die Bezahlung bei einem externen Zahlungsanbieter (z.B. PayPal) durch Klick auf die Zurück-Schaltfläche im Browser abgebrochen haben. Stattdessen werden sie nun auf die Bestellbestätigung weitergeleitet. Der angelegte Auftrag hat den Status "Nicht bezahlt".
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.21 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/2629/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2629/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+- [resources/views/PageDesign/Partials/Footer.twig](https://github.com/plentymarkets/plugin-ceres/pull/2623/files#diff-8c1bbe12524104daee76bd9f9f8adbfa1e77c0c4bb3c44fc2cf9b762750b1f13)
+- [resources/views/Widgets/Footer/LegalInformationWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2623/files#diff-a517288701fc39e24858ace7b40583eb007661e59be3298d5c4ada425898dcfc)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2622/files#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2621/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+- [resources/views/PageDesign/Partials/Header/Navigation.twig](https://github.com/plentymarkets/plugin-ceres/pull/2625/files#diff-88b04651d27953ff32bd22a1b7764d7a9b470277695ccefb7c9b2fa07ad4aab7)
+- [resources/views/Widgets/Header/NavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2625/files#diff-d9d8d5418b1e74986dcb27dfa315d297f65a5f90efed0734e8ab495651cab594)
+- [resources/views/Widgets/Common/PrivacySettingsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2646/files#diff-75c3277b48fbbac401ca5a942e7bea618e94fcfda96c19d2c5e83375e82f25d7)
+
+## v5.0.20 (2021-01-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.19...5.0.20" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Falls dein Theme die CSS-Eigenschaft `position:sticky` verwendet, musst du die `overflow-x: hidden` Eigenschaft im `.app` Container überschreiben um die Funktion der Stickys-Eigenschaft zu erhalten. plentyShops ohne eigenes Theme sind hiervon nicht betroffen.
+
+### Geändert
+
+- Bilder im Hintergrund-Widget haben jetzt barrierefreie Alternativtexte.
+- Der horizontale Overflow wird im `.app` Container jetzt durch `overflow-x: hidden` verhindert. Dadurch verliert die CSS-Eigenschaft `position:sticky`ihre Funktion.
+
+### Behoben 
+
+- Durch eine fehlerhafte Einstellung bezüglich der Anzahl der Artikel pro Seite kam es zu einer falschen Darstellung. Dieses Verhalten wurde behoben.
+- Im Mein-Konto-Bereich und auf der Bestellbestätigung wurden Artikel und Summen in unterschiedlichen Währungen dargestellt, wenn eine Währung ausgewählt war, die nicht der Systemwährung entspricht. Dieses Verhalten wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.20 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2606/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2611/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2613/files#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2613/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
+
+## v5.0.19 (2021-01-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.18...5.0.19" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden auch Bestellmerkmale mit der Option **Als Zusatzkosten darstellen** in den Summen im Warenkorb und auf der Bestellbestätigung angezeigt. Dies wurde behoben.
+
+## v5.0.18 (2021-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.17...5.0.18" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt 
+
+- Im Schritt **Suche** des Assistenten kann nun eingestellt werden, ob die Webshop-Suche einen **Und**- oder einen **Oder**-Suchoperator verwendet.
+
+### Geändert 
+
+- Die Summen im Warenkorb und auf der Auftragsbestätigung zeigen nun Zusatzkosten an. Die Darstellung von Zusatzkosten kann in den Einstellungen des Summen-Widgets aktiviert werden.
+
+### Behoben
+
+- Das Sticky Container-Widget wurde unter gewissen Umständen beim Scrollen direkt wieder auf seine ursprüngliche Position zurückgesetzt, was zu einer zitternden Darstellung geführt hat. Dies wurde behoben.
+- Bilder, die über ein Datenfeld innerhalb eines Text-Widgets ausgegeben werden, haben jetzt eine maximale Breite.
+
+## v5.0.17 (2020-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.16...5.0.17" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Artikellisten, die über die Plugin-Einstellungen konfiguriert und über Layout-Container in die Seite eingebunden sind, sind jetzt auf maximal 50 Artikel beschränkt.
+
+### Behoben
+
+- Wenn beim Hochladen eines Bildes als Bestelleigenschaft die maximale Dateigröße überschritten wurde, wurde keine Fehlermeldung ausgeben. Dies wurde behoben. Der Text dieser Fehlermeldung kann in der Mehrsprachigkeitsoberfläche unter dem Eintrag **errorPostTooLarge** angepasst werden.
+- Im Hintergrundbild-Widget wird jetzt der Alternativtext eines Bildes genutzt, wenn das Bild aus dem Webspace geladen wird.
+- Über den Übersetzungsschlüssel **basketRebateSign** kann jetzt ein Vorzeichen vor den Rabattwert in der Warenkorbvorschau platziert werden.
+- Im Navigationsbaum-Widget wurden benutzerdefinierte Einträge nicht richtig kodiert, wenn diese Umlaute enthielten. Das Verhalten wurde behoben.
+- Im Kontaktformular wurde das Feld für Blindkopien nicht gesetzt. Dies wurde behoben.
+- Die fehlenden Übersetzungen der Lightbox wurden hinzugefügt.
+- Der Ceres-Assistent leitet nun in das Plugin-Set und nicht mehr in den Einrichtungsassistenten, wenn eine Zahlungsart bereits installiert, aber noch inaktiv ist.
+- Artikellisten laufen nicht mehr über die Begrenzung der Seite hinaus.
+
+## v5.0.16 (2020-12-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.15...5.0.16" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Um bei Live-Shopping-Angeboten auf der Artikelansicht einen Text vor dem Streichpreis anzuzeigen, muss der Übersetzungsschlüssel **crossPriceSpecialOffer** in der Mehrsprachigkeitsoberfläche entsprechend ausgefüllt werden.
+
+### Hinzugefügt
+
+- Das Newsletter-Widget verwendet jetzt Google reCAPTCHA.
+
+### Behoben
+
+- Wenn mehrere personalisierbare Gutscheine im Warenkorb lagen, konnte nur einer dieser Gutscheine bearbeitet werden. Dies wurde behoben.
+- Im Breadbrumb-Widget wurde für das Startseiten-Symbol kein Link-Text erkannt. In der Mehrsprachigkeitsoberfläche kann nun ein Link-Text über den Übersetzungsschlüssel **headerBreadcrumbHome** hinterlegt werden.
+- Bei Live-Shopping-Angeboten wird nun auf der Artikelansicht der normale Verkaufspreis als der Streichpreis dargestellt.
+- Auf der Bestellbestätigung konnte es zu Rundungsfehlern kommen. Dieses Verhalten wurde behoben.
+- Änderungen an der Höhe des Sticky-Container-Widgets wurden nur beim Ändern der Fenstergröße und beim Scrollen aktualisiert. Dieses Verhalten wurde behoben.
+- Unter bestimmten Umständen wurden Icons nicht angezeigt. Dies wurde behoben.
+- Die Twig-Funktion `queryString` formatiert Query-Parameter jetzt nach dem Standard RFC 3986.
+- Durch einen Fehler wurde nicht immer die korrekte URL auf dem Bild des Live-Shopping-Widgets hinterlegt. Dies wurde behoben.
+- Durch einen Fehler wurde beim Aktualisieren der URL-Parameter nicht immer die aktuelle URL gesetzt. Dies wurde behoben.
+- Der CSRF-Token wurde in manchen Kombination mit Drittanbieter-Plugins nicht korrekt gesendet. Dies wurde behoben.
+- Es wurde eine eigene Gruppe für Zahlungsanbieter-Cookies in der Cookie Bar ergänzt.
+- Die Übersicht der Konfigurationen des Assistenten zeigt nun auch die Einträge für inaktive Plugin-Sets an.
+- In einem mehrsprachigen Webshop wurden Gast-Accounts auf die Startseite der Standardsprache weitergeleitet, wenn sie zum Checkout navigierten, ohne dass sich Artikel im Warenkorb befanden. Nun werden Gast-Accounts auf die Startseite der ausgewählten Sprache weitergeleitet.
+- Die Einstellung **CSS-Klasse** des Widgets Datenschutzerklärungs-Checkbox hatte keine Funktion. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.16 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/js/src/app/components/myAccount/EditCouponOverlay.vue](https://github.com/plentymarkets/plugin-ceres/pull/2537/files#diff-3385c5d0e4771710be00b0a70811ac5b8018e23b7da889cb9923959dbb8a9a29)
+- [resources/views/Widgets/Header/BreadcrumbWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2528/files#diff-130e6f2327939a6da964755351a1ae84298251d3c24de27e53214e91775dca4e)
+- [resources/js/src/app/components/item/ItemPrice.vue](https://github.com/plentymarkets/plugin-ceres/pull/2533/files#diff-eed3a26bc24bb9bbfd91d04e54f17d682022d8a9b1918fe760fe93d366beed22)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/2521/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2521/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+- [resources/views/Widgets/Form/AcceptPrivacyPolicyWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2548/files#diff-accd1ccbc275c3ac061bf4ac777378fe335097303db30e1d9594c514d7c143b4)
+
+## v5.0.15 (2020-11-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.14...5.0.15" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Inhalte in der Variantenauswahl werden nun sortiert dargestellt.
+
+### Behoben
+
+- Die Performanz des Scrollens von Widgets im Header wurde verbessert.
+- Wenn im **Weitere Informationen**-Widget die Option **Mittel** oder **Groß** für die Einstellung **Größe** gewählt wurde, konnte das dazugehörige Overlay des Widgets nicht mehr geschlossen werden. Dies wurde behoben.
+- Durch einen Fehler wurde auf Artikelkategorieseiten in seltenen Fällen der Standard-Header anstatt des Shopbuilder-Headers ausgegeben. Dies wurde behoben.
+- In der Variantenauswahl werden Attribute von nicht verfügbaren Varianten nun analog zu Attributen von nicht existierenden Kombinationen ausgegraut und durchgestrichen dargestellt.
+- Die Empfohlen-Sortierung für die Suchergebnisseite hat als dritte Priorität einen falschen Wert genutzt. Dieses Verhalten wurde behoben.
+- Artikelnamen auf der Bestellbestätigung wurden auf maximal zwei Zeilen begrenzt. Dadurch wurden lange Artikelnamen abgeschnitten dargestellt. Dies wurde behoben.
+- Durch einen Fehler wurden die Bestellmengen beim Variantenwechsel nicht korrekt aktualisiert. Dies wurde behoben.
+- Prozentuale Aufpreise von Bestellmerkmalen haben Staffelpreise nicht korrekt berücksichtigt. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.15 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/js/src/app/components/item/VariationSelect.vue](https://github.com/plentymarkets/plugin-ceres/pull/2432/files#diff-3bf7e50898b2d79d717300fe7c276487aea49cb917f014bf3f8ea27c6b392149)
+
+## v5.0.14 (2020-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.13...5.0.14" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Benutzer, die das Text-Widget angepasst haben (beispielsweise durch eigenes CSS), sollten die Darstellung von Text-Widgets hinsichtlich der Abstände überprüfen.
+
+### Geändert
+
+- Es wurde überflüssiges JavaScript für die Bildersortierung aus den Komponenten `CategoryImageCarousel.vue` und `ItemImageCarousel.vue` entfernt.
+- Die Währung KES (Kenia-Schilling) wurde für die verfügbaren Währungen ergänzt.
+- Zusätzliche Sortierungen aus externen Plugins werden nun im Sortierungs-Widget angezeigt.
+- Bei Klick auf die "Kaufen"-Schaltfläche im Checkout werden die Eingaben des Nutzers nun sofort geprüft, bevor der Client mit dem Server interagiert.
+
+### Behoben
+
+- Die Darstellung von Währungen als Währungssymbol wurde an einigen Stellen nicht berücksichtigt. Dies wurde behoben.
+- Icons für Zahlungsarten und Versandarten wurden im Safari-Browser verzerrt dargestellt. Dies wurde behoben.
+- In der Kategorieansicht wurde das Meta-Tag `og:image` nicht korrekt befüllt. Dieses Verhalten wurde behoben.
+- Es kam zu einer falschen Darstellung der Summen, wenn sich ein inaktiver Artikel im Warenkorb befand. Dieses Verhalten wurde behoben.
+- Durch einen Fehler wurden bei verschiedenen Sortierungen im Live-Shopping-Widget immer die selben Daten angezeigt. Dies wurde behoben.
+- In der ShopBuilder-Vorlage für die Artikelansicht wurde für den mehrsprachigen Eintrag "Technische Daten" der Schlüssel `Ceres::Widget.dataFieldTextsTechnicalData` anstatt `Ceres::Template.singleItemTechnicalData` genutzt. Dies wurde behoben.
+- Die einstellbaren Außenabstände des Text-Widgets wurden auf den inneren Container des Widgets angewendet. Hierdurch verhielten sich Außen- und Innenabstände identisch. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.14 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/views/Widgets/Category/ItemSortingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2418/files#diff-457d3c37f4e91ce7e9b896280e97de47)
+- [src/Widgets/Category/ItemSortingWidget.php](https://github.com/plentymarkets/plugin-ceres/pull/2418/files#diff-b29141ef191aa2121e0995f64cf05edc)
+- [resources/views/Widgets/Common/InlineTextWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2445/files#diff-e7dc3611e423358f168f99f3a60b6bfa3d2af686cfee952aca2e93ca91a3be62)
+
+## v5.0.13 (2020-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.12...5.0.13" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Dem Breadcrumb-Widget wurde die Einstellung **Auf rechtlichen Seiten anzeigen** hinzugefügt. Diese Einstellung betrifft nur rechtliche Seiten, die im Shopbuilder erstellt wurden.
+- Die Daten für die Breadcrumbs werden nun immer geladen, wenn man sich auf einer mit dem ShopBuilder verknüften Artikel- oder Content-Kategorieseite befindet. Dadurch kann das Breadcrumb-Widget immer den Pfad zur aktuellen Kategorie anzeigen.
+- Die Performance für Webshops, die eine externe Suche einsetzen, wurde verbessert.
+- Im Widget Artikeldaten-Tabelle wurde eine ungenutzte Einstellung entfernt.
+
+### Behoben
+
+- In der Mehrsprachigkeitsoberfläche war das Feld `addressFieldName1` doppelt vorhanden. Dies wurde behoben. Wir bedanken uns bei @Lauflust für den Beitrag.
+- Das Sticky Container-Widget wurde unter bestimmten Umständen beim Scrollen direkt wieder auf seine ursprüngliche Position zurückgesetzt, was zu einer zitternden Darstellung führte. Dieses Verhalten wurde behoben.
+- Das Eingabefeld im Gastbestellungs-Widget wurde nicht automatisch fokussiert. Dies wurde behoben.
+- Es kam zu Fehlern in der `normalizeUrl` Funktion, wenn die Option **Slash am Ende von URLs** inaktiv war, die Seite aber mit einem Slash am Ende der URL aufgerufen wurde. Dieses Verhalten wurde behoben.
+- Beim Laden weiterer Kategorien in der Step-By-Step-Navigation wurde keine Ladeanimation angezeigt. Dies wurde behoben.
+- Im Navigationsbaum wird jetzt auf die Existenz untergeordneter Kategorien geprüft, auch wenn die nächste Ebene des Kategoriebaums nicht mehr geladen wurde.
+- Unter bestimmten Umständen kam es zu Fehlern, wenn kein API-Schlüssel für Google reCAPTCHA hinterlegt war. Dies wurde behoben.
+- In der Kategorieansicht wurde das Meta-Tag `og:image` nicht korrekt befüllt. Dieses Verhalten wurde behoben.
+- In einem Standard-Mein-Konto-Bereich war es möglich, Retouren anzulegen, obwohl die dazugehörige Einstellung in der Ceres-Konfiguration inaktiv war. Diese Einstellung wird nun wieder korrekt berücksichtigt.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.13 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/scss/ceres/components/_sticky-element.scss](https://github.com/plentymarkets/plugin-ceres/pull/2378/files#diff-5e661ae82cc538fe6612799243d943ad)
+- [resources/js/src/app/components/category/StepByStepNavigation.vue](https://github.com/plentymarkets/plugin-ceres/pull/2374/files#diff-50c90a6655c0e7cbcf03de0a7b2c1e66)
+- [resources/views/Widgets/Navigation/StepByStepNavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2374/files#diff-d3ea59b4c6ebb4395ce978e00fc64e0b)
+- [resources/views/Widgets/Item/ItemDataTableWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2380/files#diff-be40dbd506648d6e32e18e5b8c819461)
+- [resources/views/Category/Macros/CategoryTree.twig](https://github.com/plentymarkets/plugin-ceres/pull/2356/files#diff-09d849cf28f22de603fc51c7165ab279)
+- [resources/views/ResultFields/CategoryTree.fields.json](https://github.com/plentymarkets/plugin-ceres/pull/2356/files#diff-aadbcb4d0f3fe3e283b2f032903fb518)
+
+## v5.0.12 (2020-09-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.11...5.0.12" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Auswahl des Inhalts hat nun in der Variantenauswahl eine geringere Gewichtung, um sicherzustellen, dass die Attributauswahl nicht mehr durch den Inhalt blockiert werden kann.
+
+### Behoben
+
+- Unter bestimmten Umständen wurde bei Aufträgen mit Fremdwährung in der Auftragshistorie nicht die korrekte Währung angezeigt. Das Verhalten wurde behoben.
+- Beim Anlegen eines Auftrags wurde der Kundenwunsch nicht korrekt weitergereicht, wenn die PayPal-Zahlung abgebrochen wurde. Dieses Verhalten wurde behoben.
+- Ab sofort wird ein entsprechender Hinweis eingeblendet, nachdem ein ungültiger Gutschein aus dem Warenkorb entfernt wurde.
+- Unter bestimmten Umständen wurden SingleItem-Templates nicht richtig erkannt, was zu Darstellungsfehlern führen konne. Dies wurde behoben.
+- Die Vorauswahl der Anrede in der Adresseingabe war teilweise fehlerhaft. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.12 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- [resources/js/src/app/components/checkout/ContactWishInput.js](https://github.com/plentymarkets/plugin-ceres/pull/2365/files#diff-37b747947d823f75ad5cb175e3859af1)
+- [resources/js/src/app/store/modules/CheckoutModule.js](https://github.com/plentymarkets/plugin-ceres/pull/2365/files#diff-02fceefaae66ccd08f2719a2a46c5a8d)
+- [resources/views/Checkout/Components/ContactWishInput.twig](https://github.com/plentymarkets/plugin-ceres/pull/2365/files#diff-2e1a9880a29ff28bfdedc4293681a690)
+- [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/2368/files#diff-63ac11bb178e21fa2fb744ce21e2cf5f)
+- [resources/views/PageDesign/Partials/Header/Header.twig](https://github.com/plentymarkets/plugin-ceres/pull/2368/files#diff-3184d75e16637b83c7f23fae7d39854d)
+- [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2368/files#diff-15057fa07b52305012c24a8812db234e)
+
 ## v5.0.11 (2020-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.10...5.0.11" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert

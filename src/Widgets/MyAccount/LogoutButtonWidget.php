@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class LogoutButtonWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.LogoutButtonWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::LogoutButtonWidget")
@@ -20,8 +24,15 @@ class LogoutButtonWidget extends BaseWidget
             ->withType(WidgetTypes::MY_ACCOUNT)
             ->withCategory(WidgetCategories::MY_ACCOUNT)
             ->withPosition(700)
+            ->withSearchKeyWords([
+                "logout", "button", "schaltfläche"
+            ])
             ->toArray();
     }
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

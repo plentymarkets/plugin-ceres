@@ -19,7 +19,8 @@ export default Vue.component("shipping-address-select", {
             :required-address-fields="requiredAddressFields"
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
-            :padding-inline-styles="paddingInlineStyles">
+            :padding-inline-styles="paddingInlineStyles"
+            data-testing="delivery-address-select">
         </address-select>
     `,
 
@@ -46,6 +47,16 @@ export default Vue.component("shipping-address-select", {
             type: String,
             default: "male"
         },
+        hasAnyPostOfficePreset:
+        {
+            type: Boolean,
+            default: false
+        },
+        hasAnyParcelBoxPreset:
+        {
+            type: Boolean,
+            default: false
+        },
         paddingClasses:
         {
             type: String,
@@ -61,6 +72,21 @@ export default Vue.component("shipping-address-select", {
     computed: mapState({
         deliveryAddressId: state => state.address.deliveryAddressId
     }),
+
+    mounted()
+    {
+        if (App.templateType === "my-account")
+        {
+            if (this.hasAnyParcelBoxPreset)
+            {
+                this.$store.commit("setParcelBoxAvailability", true);
+            }
+            if (this.hasAnyPostOfficePreset)
+            {
+                this.$store.commit("setPostOfficeAvailability", true);
+            }
+        }
+    },
 
     methods:
     {

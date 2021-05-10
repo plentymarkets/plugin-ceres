@@ -85,6 +85,8 @@
                 <shipping-address-select
                     :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
                     :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
+                    :has-any-parcel-box-preset="{{ Twig.print("services.shipping.hasAnyParcelBoxPreset() | json_encode") }}"
+                    :has-any-post-office-preset="{{ Twig.print("services.shipping.hasAnyPostOfficePreset() | json_encode") }}"
                     default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
                     {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
                     {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>

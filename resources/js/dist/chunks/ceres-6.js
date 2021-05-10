@@ -42,10 +42,10 @@ __webpack_require__.r(__webpack_exports__);
     itemUrl: {
       type: String
     },
-    altText: {
+    alt: {
       type: String
     },
-    titleText: {
+    title: {
       type: String
     },
     showDots: {
@@ -139,12 +139,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getAltText: function getAltText(image) {
-      var altText = image && image.alternate ? image.alternate : this.altText;
-      return altText;
+      var alt = image && image.alternate ? image.alternate : this.alt;
+      return alt;
     },
-    getImageName: function getImageName(image) {
-      var altText = image && image.name ? image.name : this.titleText;
-      return altText;
+    getTitleText: function getTitleText(image) {
+      var title = image && image.name ? image.name : this.title;
+      return title;
     }
   }
 });
@@ -194,6 +194,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -420,6 +421,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-store-special",
@@ -442,6 +447,17 @@ __webpack_require__.r(__webpack_exports__);
         3: this.$translate("Ceres::Template.storeSpecialTop")
       }
     };
+  },
+  computed: {
+    hasLabel: function hasLabel() {
+      return this.label && this.label !== "";
+    },
+    isBundle: function isBundle() {
+      return this.bundleType === "bundle";
+    },
+    isSet: function isSet() {
+      return this.itemType === "set";
+    }
   },
   created: function created() {
     this.initializeStoreSpecial();
@@ -512,7 +528,12 @@ var render = function() {
         "a",
         {
           staticClass: "owl-carousel owl-theme",
-          attrs: { id: "owl-carousel-" + _vm._uid, href: _vm.itemUrl }
+          attrs: {
+            id: "owl-carousel-" + _vm._uid,
+            href: _vm.itemUrl,
+            role: "listbox",
+            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel")
+          }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
           return _c(
@@ -527,7 +548,8 @@ var render = function() {
                       "picture-class": "img-fluid",
                       "image-url": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getImageName(imageUrl)
+                      title: _vm.getTitleText(imageUrl),
+                      role: "option"
                     }
                   })
                 : index !== 0 && !_vm.disableLazyLoad
@@ -536,7 +558,8 @@ var render = function() {
                     attrs: {
                       "data-src": imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getImageName(imageUrl)
+                      title: _vm.getTitleText(imageUrl),
+                      role: "option"
                     }
                   })
                 : _c("img", {
@@ -544,7 +567,8 @@ var render = function() {
                     attrs: {
                       src: imageUrl.url,
                       alt: _vm.getAltText(imageUrl),
-                      title: _vm.getAltText(imageUrl)
+                      title: _vm.getAltText(imageUrl),
+                      role: "option"
                     }
                   })
             ],
@@ -564,7 +588,7 @@ var render = function() {
                   "picture-class": "img-fluid",
                   "image-url": _vm._f("itemImage")(_vm.imageUrls),
                   alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getImageName(_vm.imageUrls[0])
+                  title: _vm.getTitleText(_vm.imageUrls[0])
                 }
               })
             : _c("img", {
@@ -572,7 +596,7 @@ var render = function() {
                 attrs: {
                   src: _vm._f("itemImage")(_vm.imageUrls),
                   alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getImageName(_vm.imageUrls[0])
+                  title: _vm.getTitleText(_vm.imageUrls[0])
                 }
               })
         ],
@@ -601,336 +625,352 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("article", { staticClass: "cmp cmp-product-thumb" }, [
-    _c(
-      "div",
-      { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
-      [
-        _c("add-to-basket", {
-          attrs: {
-            "variation-id": _vm.item.variation.id,
-            "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
-            "has-children":
-              !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
-            "interval-quantity": _vm.item.variation.intervalOrderQuantity || 1,
-            "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
-            "maximum-quantity":
-              !!_vm.item.variation.maximumOrderQuantity &&
-              _vm.item.variation.maximumOrderQuantity > 0
-                ? _vm.item.variation.maximumOrderQuantity
-                : null,
-            "order-properties": _vm.item.properties.filter(function(prop) {
-              return prop.property.isOderProperty
-            }),
-            "has-order-properties": _vm.item.hasOrderProperties,
-            "use-large-scale": true,
-            "show-quantity": false,
-            "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
-            "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
-            "item-type": _vm.item.item.itemType
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "thumb-image" }, [
-          _c(
-            "div",
-            { staticClass: "prop-1-1" },
-            [
-              _vm._t("item-image", [
-                _c("category-image-carousel", {
-                  ref: "categoryImageCarousel",
+  return _c(
+    "article",
+    {
+      staticClass: "cmp cmp-product-thumb",
+      attrs: { "data-testing": _vm.item.variation.id }
+    },
+    [
+      _c(
+        "div",
+        { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
+        [
+          _c("add-to-basket", {
+            attrs: {
+              "data-testing": "item-add-to-basket",
+              "variation-id": _vm.item.variation.id,
+              "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
+              "has-children":
+                !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
+              "interval-quantity":
+                _vm.item.variation.intervalOrderQuantity || 1,
+              "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
+              "maximum-quantity":
+                !!_vm.item.variation.maximumOrderQuantity &&
+                _vm.item.variation.maximumOrderQuantity > 0
+                  ? _vm.item.variation.maximumOrderQuantity
+                  : null,
+              "order-properties": _vm.item.properties.filter(function(prop) {
+                return prop.property.isOderProperty
+              }),
+              "has-order-properties": _vm.item.hasOrderProperties,
+              "use-large-scale": true,
+              "show-quantity": false,
+              "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
+              "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+              "item-type": _vm.item.item.itemType
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "thumb-image" }, [
+            _c(
+              "div",
+              { staticClass: "prop-1-1" },
+              [
+                _vm._t("item-image", [
+                  _c("category-image-carousel", {
+                    ref: "categoryImageCarousel",
+                    attrs: {
+                      "image-urls-data": _vm._f("itemImages")(
+                        _vm.item.images,
+                        _vm.imageUrlAccessor
+                      ),
+                      alt: _vm._f("itemName")(_vm.item),
+                      title: _vm._f("itemName")(_vm.item),
+                      "item-url": _vm._f("itemURL")(
+                        _vm.item,
+                        _vm.urlWithVariationId
+                      ),
+                      "enable-carousel":
+                        _vm.$ceres.config.item.enableImageCarousel,
+                      "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
+                    }
+                  })
+                ])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _vm._t("store-special", [
+            _vm.storeSpecial ||
+            _vm.item.variation.bundleType === "bundle" ||
+            _vm.item.item.itemType === "set"
+              ? _c("item-store-special", {
                   attrs: {
-                    "image-urls-data": _vm._f("itemImages")(
-                      _vm.item.images,
-                      _vm.imageUrlAccessor
+                    "store-special": _vm.storeSpecial,
+                    "recommended-retail-price": _vm.item.prices.rrp,
+                    "variation-retail-price": _vm.item.prices.default,
+                    "special-offer-price": _vm.item.prices.specialOffer,
+                    "decimal-count": _vm.decimalCount,
+                    "bundle-type": _vm.item.variation.bundleType,
+                    "item-type": _vm.item.item.itemType
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm._t("item-details", [
+            _c(
+              "div",
+              { staticClass: "thumb-content" },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "thumb-title small",
+                    class: {
+                      "stretched-link":
+                        _vm.$ceres.config.global.shippingCostsCategoryId == 0
+                    },
+                    attrs: {
+                      href: _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId)
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm._f("itemName")(_vm.item))
                     ),
-                    "alt-text": _vm._f("itemName")(_vm.item),
-                    "title-text": _vm._f("itemName")(_vm.item),
+                    _vm._l(_vm.item.groupedAttributes, function(attribute) {
+                      return _c("span", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("translate")(
+                              "Ceres::Template.itemGroupedAttribute",
+                              attribute
+                            )
+                          )
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "thumb-meta mt-2" },
+                  [
+                    _vm._t("before-prices"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "prices" }, [
+                      _vm.item.prices.rrp &&
+                      _vm.item.prices.rrp.price.value > 0 &&
+                      _vm.item.prices.rrp.price.value >
+                        _vm.item.prices.default.unitPrice.value
+                        ? _c("div", { staticClass: "price-view-port" }, [
+                            _vm.item.prices.specialOffer
+                              ? _c("del", { staticClass: "crossprice" }, [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(
+                                        _vm._f("itemCrossPrice")(
+                                          _vm.item.prices.default.unitPrice
+                                            .formatted,
+                                          true
+                                        )
+                                      ) +
+                                      "\n                            "
+                                  )
+                                ])
+                              : _c("del", { staticClass: "crossprice" }, [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(
+                                        _vm._f("itemCrossPrice")(
+                                          _vm.item.prices.rrp.unitPrice
+                                            .formatted
+                                        )
+                                      ) +
+                                      "\n                            "
+                                  )
+                                ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "price" },
+                        [
+                          _vm.item.item.itemType === "set"
+                            ? [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.itemSetPrice",
+                                        { price: _vm.itemSetPrice }
+                                      )
+                                    ) +
+                                    " *\n                            "
+                                )
+                              ]
+                            : !!_vm.item.item &&
+                              _vm.item.item.salableVariationCount > 1 &&
+                              _vm.$ceres.isCheapestSorting
+                            ? [
+                                _vm._v(
+                                  "\n                                 " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFromPrice",
+                                        { price: _vm.itemPrice }
+                                      )
+                                    ) +
+                                    " *\n                            "
+                                )
+                              ]
+                            : [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm._f("specialOffer")(
+                                        _vm.item.prices.default.unitPrice
+                                          .formatted,
+                                        _vm.item.prices,
+                                        "unitPrice",
+                                        "formatted"
+                                      )
+                                    ) +
+                                    " *\n                            "
+                                )
+                              ]
+                        ],
+                        2
+                      )
+                    ])
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm._t("after-prices"),
+                _vm._v(" "),
+                !(
+                  _vm.item.unit.unitOfMeasurement === "C62" &&
+                  _vm.item.unit.content === 1
+                )
+                  ? _c("div", { staticClass: "category-unit-price small" }, [
+                      _c("span", [_vm._v(_vm._s(_vm.item.unit.content))]),
+                      _vm._v(" "),
+                      _c("span", [
+                        _vm._v(" " + _vm._s(_vm.item.unit.names.name))
+                      ]),
+                      _vm._v(" "),
+                      _vm.item.variation.mayShowUnitPrice
+                        ? _c("span", [
+                            _vm._v(
+                              " | " + _vm._s(_vm.item.prices.default.basePrice)
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("add-to-basket", {
+                  attrs: {
+                    "variation-id": _vm.item.variation.id,
+                    "is-salable":
+                      !!_vm.item.filter && _vm.item.filter.isSalable,
+                    "has-children":
+                      !!_vm.item.item &&
+                      _vm.item.item.salableVariationCount > 1,
+                    "interval-quantity":
+                      _vm.item.variation.intervalOrderQuantity || 1,
+                    "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
+                    "maximum-quantity":
+                      !!_vm.item.variation.maximumOrderQuantity &&
+                      _vm.item.variation.maximumOrderQuantity > 0
+                        ? _vm.item.variation.maximumOrderQuantity
+                        : null,
+                    "order-properties": _vm.item.properties.filter(function(
+                      prop
+                    ) {
+                      return prop.property.isOderProperty
+                    }),
+                    "has-order-properties": _vm.item.hasOrderProperties,
+                    "use-large-scale": false,
+                    "show-quantity": false,
                     "item-url": _vm._f("itemURL")(
                       _vm.item,
                       _vm.urlWithVariationId
                     ),
-                    "enable-carousel":
-                      _vm.$ceres.config.item.enableImageCarousel,
-                    "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
+                    "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+                    "item-type": _vm.item.item.itemType
                   }
-                })
-              ])
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _vm._t("store-special", [
-          _vm.storeSpecial ||
-          _vm.item.variation.bundleType === "bundle" ||
-          _vm.item.item.itemType === "set"
-            ? _c("item-store-special", {
-                attrs: {
-                  "store-special": _vm.storeSpecial,
-                  "recommended-retail-price": _vm.item.prices.rrp,
-                  "variation-retail-price": _vm.item.prices.default,
-                  "special-offer-price": _vm.item.prices.specialOffer,
-                  "decimal-count": _vm.decimalCount,
-                  "bundle-type": _vm.item.variation.bundleType,
-                  "item-type": _vm.item.item.itemType
-                }
-              })
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _vm._t("item-details", [
-          _c(
-            "div",
-            { staticClass: "thumb-content" },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "thumb-title small",
-                  class: {
-                    "stretched-link":
-                      _vm.$ceres.config.global.shippingCostsCategoryId == 0
-                  },
-                  attrs: {
-                    href: _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId)
-                  }
-                },
-                [
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "vat small text-muted" }, [
+                  _vm._v("\n                    * "),
+                  _vm.showNetPrices
+                    ? _c("span", [
+                        _vm._v(
+                          _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
+                        )
+                      ])
+                    : _c("span", [
+                        _vm._v(
+                          _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
+                        )
+                      ]),
                   _vm._v(
                     "\n                    " +
-                      _vm._s(_vm._f("itemName")(_vm.item))
+                      _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
+                      "\n                    "
                   ),
-                  _vm._l(_vm.item.groupedAttributes, function(attribute) {
-                    return _c("span", [
-                      _vm._v(
-                        _vm._s(
-                          _vm._f("translate")(
-                            "Ceres::Template.itemGroupedAttribute",
-                            attribute
-                          )
-                        )
-                      )
-                    ])
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "thumb-meta mt-2" },
-                [
-                  _vm._t("before-prices"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "prices" }, [
-                    _vm.item.prices.rrp &&
-                    _vm.item.prices.rrp.price.value > 0 &&
-                    _vm.item.prices.rrp.price.value >
-                      _vm.item.prices.default.unitPrice.value
-                      ? _c("div", { staticClass: "price-view-port" }, [
-                          _vm.item.prices.specialOffer
-                            ? _c("del", { staticClass: "crossprice" }, [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm._f("itemCrossPrice")(
-                                        _vm.item.prices.default.unitPrice
-                                          .formatted,
-                                        true
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ])
-                            : _c("del", { staticClass: "crossprice" }, [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm._f("itemCrossPrice")(
-                                        _vm.item.prices.rrp.unitPrice.formatted
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ])
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "price" },
-                      [
-                        _vm.item.item.itemType === "set"
-                          ? [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.itemSetPrice",
-                                      { price: _vm.itemSetPrice }
-                                    )
-                                  ) +
-                                  " *\n                            "
-                              )
-                            ]
-                          : !!_vm.item.item &&
-                            _vm.item.item.salableVariationCount > 1 &&
-                            _vm.$ceres.isCheapestSorting
-                          ? [
-                              _vm._v(
-                                "\n                                 " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.categoryItemFromPrice",
-                                      { price: _vm.itemPrice }
-                                    )
-                                  ) +
-                                  " *\n                            "
-                              )
-                            ]
-                          : [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(
-                                    _vm._f("specialOffer")(
-                                      _vm.item.prices.default.unitPrice
-                                        .formatted,
-                                      _vm.item.prices,
-                                      "unitPrice",
-                                      "formatted"
-                                    )
-                                  ) +
-                                  " *\n                            "
-                              )
-                            ]
-                      ],
-                      2
-                    )
-                  ])
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _vm._t("after-prices"),
-              _vm._v(" "),
-              !(
-                _vm.item.unit.unitOfMeasurement === "C62" &&
-                _vm.item.unit.content === 1
-              )
-                ? _c("div", { staticClass: "category-unit-price small" }, [
-                    _c("span", [_vm._v(_vm._s(_vm.item.unit.content))]),
-                    _vm._v(" "),
-                    _c("span", [
-                      _vm._v(" " + _vm._s(_vm.item.unit.names.name))
-                    ]),
-                    _vm._v(" "),
-                    _vm.item.variation.mayShowUnitPrice
-                      ? _c("span", [
+                  _vm.$ceres.config.global.shippingCostsCategoryId > 0
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "text-appearance",
+                          attrs: {
+                            "data-toggle": "modal",
+                            href: "#shippingscosts",
+                            title: _vm.$translate(
+                              "Ceres::Template.itemShippingCosts"
+                            )
+                          }
+                        },
+                        [
                           _vm._v(
-                            " | " + _vm._s(_vm.item.prices.default.basePrice)
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.itemShippingCosts"
+                              )
+                            )
                           )
-                        ])
-                      : _vm._e()
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("add-to-basket", {
-                attrs: {
-                  "variation-id": _vm.item.variation.id,
-                  "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
-                  "has-children":
-                    !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
-                  "interval-quantity":
-                    _vm.item.variation.intervalOrderQuantity || 1,
-                  "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
-                  "maximum-quantity":
-                    !!_vm.item.variation.maximumOrderQuantity &&
-                    _vm.item.variation.maximumOrderQuantity > 0
-                      ? _vm.item.variation.maximumOrderQuantity
-                      : null,
-                  "order-properties": _vm.item.properties.filter(function(
-                    prop
-                  ) {
-                    return prop.property.isOderProperty
-                  }),
-                  "has-order-properties": _vm.item.hasOrderProperties,
-                  "use-large-scale": false,
-                  "show-quantity": false,
-                  "item-url": _vm._f("itemURL")(
-                    _vm.item,
-                    _vm.urlWithVariationId
-                  ),
-                  "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
-                  "item-type": _vm.item.item.itemType
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "vat small text-muted" }, [
-                _vm._v("\n                    * "),
-                _vm.showNetPrices
-                  ? _c("span", [
-                      _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
+                        ]
                       )
-                    ])
-                  : _c("span", [
-                      _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
+                    : _c(
+                        "a",
+                        {
+                          attrs: {
+                            title: _vm.$translate(
+                              "Ceres::Template.itemShippingCosts"
+                            )
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.itemShippingCosts"
+                              )
+                            )
+                          )
+                        ]
                       )
-                    ]),
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
-                    "\n                    "
-                ),
-                _vm.$ceres.config.global.shippingCostsCategoryId > 0
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "text-appearance",
-                        attrs: {
-                          "data-toggle": "modal",
-                          href: "#shippingscosts",
-                          title: _vm.$translate(
-                            "Ceres::Template.itemShippingCosts"
-                          )
-                        }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.itemShippingCosts")
-                          )
-                        )
-                      ]
-                    )
-                  : _c(
-                      "a",
-                      {
-                        attrs: {
-                          title: _vm.$translate(
-                            "Ceres::Template.itemShippingCosts"
-                          )
-                        }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.itemShippingCosts")
-                          )
-                        )
-                      ]
-                    )
-              ])
-            ],
-            2
-          )
-        ])
-      ],
-      2
-    )
-  ])
+                ])
+              ],
+              2
+            )
+          ])
+        ],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -954,15 +994,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.label.length ||
-    _vm.bundleType === "bundle" ||
-    _vm.itemType === "set"
+  return _vm.hasLabel || _vm.isBundle || _vm.isSet
     ? _c("div", { staticClass: "special-tags p-2" }, [
-        _vm.label.length
+        _vm.hasLabel
           ? _c("span", { staticClass: "badge", class: _vm.tagClass }, [
               _vm._v("\n        " + _vm._s(_vm.label) + "\n    ")
             ])
-          : _vm.bundleType === "bundle"
+          : _vm.isBundle
           ? _c("span", { class: _vm.tagClasses.itemBundle }, [
               _vm._v(
                 "\n        " +
@@ -970,7 +1008,7 @@ var render = function() {
                   "\n    "
               )
             ])
-          : _vm.itemType === "set"
+          : _vm.isSet
           ? _c("span", { class: _vm.tagClasses.itemSet }, [
               _vm._v(
                 "\n        " +

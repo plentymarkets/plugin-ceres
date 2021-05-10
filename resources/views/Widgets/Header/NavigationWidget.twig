@@ -10,16 +10,22 @@
 {% set navigationStyle      = widget.settings.navigationStyle.mobile %}
 {% set companyLogoUrl       = widget.settings.companyLogoUrl.mobile %}
 {% set fallbackImagePath    = widget.settings.fallbackImagePath.mobile %}
-{% set megaMenuLevels       = widget.settings.megaMenuLevels.mobile %}
+
 {% set megaMenuMaxItems1    = widget.settings.megaMenuMaxItems.stage1.mobile | default(30) %}
 {% set megaMenuMaxItems2    = widget.settings.megaMenuMaxItems.stage2.mobile | default(3) %}
 {% set megaMenuMaxItems3    = widget.settings.megaMenuMaxItems.stage3.mobile | default(2) %}
 {% set megaMenuMaxItems     = { "1": megaMenuMaxItems1, "2": megaMenuMaxItems2, "3": megaMenuMaxItems3 } %}
 
+{% if navigationStyle == 'megaMenu' %}
+    {% set megaMenuLevels       = widget.settings.megaMenuLevels.mobile | default(2) %}
+{% else %}
+    {% set megaMenuLevels = 2 %}
+{% endif %}
+
 {% if companyLogoUrl is empty %}
     {% set companyLogoUrl = ceresConfig.header.companyLogo %}
-    {% if not (companyLogoUrl starts with 'https://' or companyLogoUrl starts with 'http://' or companyLogoUrl starts with 'layout/') %}
-        {% set companyLogoUrl = plugin_path('Ceres') ~ "/" ~ image %}
+    {% if not (companyLogoUrl starts with 'https://' or companyLogoUrl starts with 'http://' or companyLogoUrl starts with 'layout/') and companyLogoUrl | trim | length > 0 %}
+        {% set companyLogoUrl = plugin_path('Ceres') ~ "/" ~ companyLogoUrl %}
     {% endif %}
 {% endif %}
 
@@ -33,7 +39,8 @@
     <div class="container-max d-block{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
-            <div class="brand-wrapper px-lg-3">
+            <div class="brand-wrapper px-lg-3 d-flex flex-fill">
+                {% if companyLogoUrl | trim | length > 0 %}
                 <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                     <picture>
                         <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
@@ -44,6 +51,7 @@
                         />
                     </picture>
                 </a>
+                {% endif %}
 
                 <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
                     &#9776;

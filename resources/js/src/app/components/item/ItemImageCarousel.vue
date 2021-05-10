@@ -146,6 +146,8 @@ export default {
         {
             const $owl = $(this.$refs.single);
 
+            const scrollPos = document.documentElement.scrollTop;
+
             $owl.trigger("destroy.owl.carousel");
             $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
             $owl.find(".owl-item").remove();
@@ -158,6 +160,9 @@ export default {
 
             this.initCarousel();
             this.initThumbCarousel();
+
+            // Avoid reset of scrollTop
+            document.documentElement.scrollTop = scrollPos;
         },
 
         initCarousel()
