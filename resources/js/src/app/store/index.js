@@ -25,7 +25,7 @@ import { isDefined } from "../helper/utils";
 
 export let store;
 
-// TODO: find better method name
+// TODO: add code comment
 export function createStore()
 {
     // =========================
@@ -64,7 +64,7 @@ export function createStore()
     return store;
 }
 
-// TODO: find better method name
+// TODO: add code comment
 export function initServerStore(store)
 {
     store.commit("setShippingCountries", App.initialData.shippingCountries);
@@ -72,7 +72,7 @@ export function initServerStore(store)
     store.commit("setShowNetPrices", App.initialData.showNetPrices);
 }
 
-// TODO: find better method name
+// TODO: add code comment
 export function initClientListeners(store)
 {
     ApiService.listen("LocalizationChanged",
@@ -103,7 +103,7 @@ export function initClientListeners(store)
     });
 }
 
-// TODO: find better method name
+// TODO: add code comment
 export function initClientStore(store)
 {
     window.ceresStore = store;
