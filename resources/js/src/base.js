@@ -200,6 +200,7 @@ import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
 import { createStore, initClientListeners, initClientStore, initServerStore } from "./app/store";
+import { initListener } from "./app/services/ApiService";
 
 window.ceresTranslate = TranslationService.translate;
 
@@ -211,3 +212,4 @@ const store = createStore();
 initServerStore(store);
 initClientStore(store);
 initClientListeners(store);
+initListener();

@@ -71452,8 +71452,7 @@ var actions = {
   },
   selectShippingProfile: function selectShippingProfile(_ref7, shippingProfile) {
     var commit = _ref7.commit,
-        dispatch = _ref7.dispatch,
-        getters = _ref7.getters;
+        state = _ref7.state;
     return new Promise(function (resolve, reject) {
       var oldShippingProfile = state.shipping.shippingProfileId;
       var params = {
@@ -74440,6 +74439,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
 /* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
 /* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
+/* harmony import */ var _app_services_ApiService__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./app/services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 
 
@@ -74705,6 +74705,7 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("client-only", _app_compone
 
 
 
+
 window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_74__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_74__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$ceres = App;
@@ -74712,6 +74713,7 @@ var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_75__["createStore"])();
 Object(_app_store__WEBPACK_IMPORTED_MODULE_75__["initServerStore"])(store);
 Object(_app_store__WEBPACK_IMPORTED_MODULE_75__["initClientStore"])(store);
 Object(_app_store__WEBPACK_IMPORTED_MODULE_75__["initClientListeners"])(store);
+Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_76__["initListener"])();
 
 /***/ }),
 

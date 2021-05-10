@@ -229,7 +229,7 @@ const actions =
             });
         },
 
-        selectShippingProfile({ commit, dispatch, getters }, shippingProfile)
+        selectShippingProfile({ commit, state }, shippingProfile)
         {
             return new Promise((resolve, reject) =>
             {
