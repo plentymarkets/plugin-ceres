@@ -1,6 +1,7 @@
 import "./app/publicPath";
 import Vue from "vue";
 import NotificationService from "./app/services/NotificationService";
+import TranslationService from "./app/services/TranslationService";
 import "bootstrap";
 import "owl.carousel";
 import jQuery from "jquery";
@@ -39,5 +40,6 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 window.Vue = Vue;
 window.NotificationService = NotificationService;
+window.ceresTranslate = TranslationService.translate;
 
 import "./app/main";
