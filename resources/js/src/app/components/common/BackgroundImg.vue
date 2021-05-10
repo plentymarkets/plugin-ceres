@@ -38,10 +38,10 @@ export default {
             if (isDefined(this.supported))
             {
                 if (!this.supported) {
-                    return { backgroundImage: 'url(' + this.fallbackUrl + ')' }
+                    return { backgroundImage: 'url(' + this.fallbackUrl + ')' };
                 }
             }
-            return { backgroundImage: 'url(' + this.url + ')' }
+            return { backgroundImage: 'url(' + this.url + ')' };
         }
     }
 }
