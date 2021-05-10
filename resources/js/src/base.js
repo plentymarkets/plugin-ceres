@@ -130,8 +130,8 @@ import LazyHydrate from "vue-lazy-hydration";
 Vue.component("lazy-hydrate", LazyHydrate);
 import ClientOnly from "./app/components/common/ClientOnly.vue";
 Vue.component("client-only", ClientOnly);
-import BgImg from "./app/components/common/BgImg.vue";
-Vue.component("bg-img", BgImg);
+import BackgroundImg from "./app/components/common/BackgroundImg.vue";
+Vue.component("background-img", BackgroundImg);
 
 // =========================
 // DIRECTIVES

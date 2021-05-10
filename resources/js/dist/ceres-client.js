@@ -60360,8 +60360,8 @@ function createApp(options) {
     return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./app/components/form/FormAttachment.vue */ "./resources/js/src/app/components/form/FormAttachment.vue"));
   });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("client-only", _app_components_common_ClientOnly_vue__WEBPACK_IMPORTED_MODULE_32__["default"]);
-  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("bg-img", function () {
-    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./app/components/common/BgImg.vue */ "./resources/js/src/app/components/common/BgImg.vue"));
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("background-img", function () {
+    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./app/components/common/BackgroundImg.vue */ "./resources/js/src/app/components/common/BackgroundImg.vue"));
   }); // EXTERNAL
 
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("lazy-hydrate", vue_lazy_hydration__WEBPACK_IMPORTED_MODULE_31__["default"]);

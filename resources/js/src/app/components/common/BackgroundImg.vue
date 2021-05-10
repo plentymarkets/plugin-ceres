@@ -31,9 +31,9 @@ export default {
          *  Determine appropriate image url to use as background source
          */
         backgroundSource() {
-            if(isDefined(this.supported))
+            if (isDefined(this.supported))
             {
-                if(!this.supported) {
+                if (!this.supported) {
                     return this.fallbackUrl;
                 }
             }
