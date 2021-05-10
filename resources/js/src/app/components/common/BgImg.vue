@@ -5,6 +5,7 @@
 
 <script>
 import { detectWebP } from "../../helper/featureDetect";
+import { isDefined } from '../../helper/utils';
 
 export default {
 
@@ -20,7 +21,7 @@ export default {
             supported: undefined
         }
     },
-    mounted()
+    beforeMount()
     {
         detectWebP(((supported) =>
         {
@@ -32,11 +33,15 @@ export default {
          *  Determine appropriate image url to use as background source
          */
         backgroundSource() {
-            if(this.url && this.mimeType){
-                return this.supported ? this.url : this.fallbackUrl;
-            } else {
-                return this.url || this.fallbackUrl;
+            if(isDefined(this.supported))
+            {
+                 if(this.supported && this.url && this.mimeType){
+                    return this.url;
+                } else {
+                    return this.fallbackUrl;
+                }
             }
+            return '';
         },
 
         /**

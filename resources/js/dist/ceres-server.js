@@ -2359,6 +2359,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 //
@@ -2366,6 +2367,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2378,7 +2380,7 @@ __webpack_require__.r(__webpack_exports__);
       supported: undefined
     };
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     var _this = this;
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_2__["detectWebP"])(function (supported) {
@@ -2390,11 +2392,15 @@ __webpack_require__.r(__webpack_exports__);
      *  Determine appropriate image url to use as background source
      */
     backgroundSource: function backgroundSource() {
-      if (this.url && this.mimeType) {
-        return this.supported ? this.url : this.fallbackUrl;
-      } else {
-        return this.url || this.fallbackUrl;
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isDefined"])(this.supported)) {
+        if (this.supported && this.url && this.mimeType) {
+          return this.url;
+        } else {
+          return this.fallbackUrl;
+        }
       }
+
+      return '';
     },
 
     /**
