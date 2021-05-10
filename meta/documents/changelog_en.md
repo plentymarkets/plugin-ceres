@@ -1,5 +1,41 @@
 # Release Notes for Ceres
 
+## v5.0.29 (2021-05-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.28...5.0.29" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- The Ceres settings and the plentyShop assistant now include the new setting **Use Vue Server-Side Rendering** in the **Performance** section with which you can activate server-side rendering in order to generate markup on the server's side, thereby improving shop performance. This setting is inactive by default.
+- The Ceres settings and the plentyShop assistant now include the new setting **Activate state cloning for event propagation in VueX** in the **Performance** section to activate and deactivate state clonging. Deactivating state cloning improves shop performance, but may lead to errors in combination with external plugins. This setting is active by default.
+- We added the setting **Preload image** to the widgets image box, image carousel, background image, and item image. This setting serves to improve shop performance in combination with Vue Server-Side Rendering. You can find further information on how to use this setting [here](https://knowledge.plentymarkets.com/en/slp/webshop/best-practices#_optimising_image_widgets).
+- `aria-labels` have been added to the quantity input of items in order to increase its accessibility. We would like to thank @MaxBentz for their contribution!
+- You can now activate the mapping of the brand and the manufacturer for item view Rich Snippets in the SEO settings of the Ceres configuration and in the plentyShop assistant.
+- We added the ClientOnly component. This enables external developers to wrap components that are not compatible with Vue Server-Side Rendering, so that these components are only generated on the side of the client.
+
+### Changed
+
+- Images in the background image widget can now be loaded at a later time by activating the widget setting **Lazyload background image**. You can find further information on how to use this setting [here](https://knowledge.plentymarkets.com/en/slp/webshop/best-practices#_optimising_image_widgets).
+- Shipping addresses for post offices or Packstations can no longer be created in the My Account area if no shipping profile exists that includes the corresponding option.
+- A unique ID has been added to the country selection in order to remove two console warnings. We would like to thank @jvolke for their contribution. 
+- We added a slot to the LazyImg component, thereby making it possible to add additional image sources.
+
+### Fixed
+
+- The translation of the consent group for payment providers was not displayed correctly. This has been fixed.
+- You can now hide all additional item data in the shopping cart widget. 
+
+### Changed templates
+
+- In Ceres 5.0.29 we have made changes to a number of template files which are relevant for theme developers. You can find a list of the changed templates below. Each link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/customer/AddressInputGroup.vue](https://github.com/plentymarkets/plugin-ceres/pull/2782/files#diff-5445acdb5dffc6cd08b75fb1bf432147c3f133b8de32af76563a4c97a544474a)
+- [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/2782/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
+- [resources/views/Widgets/Customer/AddressWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2782/files#diff-47efd06234499d9fa52810e58ce5e6d9983e522de814c92e8ff66f4b010f0db5)
+- [resources/views/Widgets/Basket/BasketWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2798/files#diff-a04406229e93c83b77582c9ca6224de6a07407290c3de61766703547c259a9f3)
+- [resources/js/src/app/components/customer/CountrySelect.vue](https://github.com/plentymarkets/plugin-ceres/pull/2821/files#diff-d522167cca732f4be9af95ab75e109d08edeaeda8b145a0f17a97113c67374e9)
+- [resources/js/src/app/components/item/QuantityInput.vue](https://github.com/plentymarkets/plugin-ceres/pull/2828/files#diff-3023cfd864b216b918be19d49ca9b82e9eadb47d5efc185483630cdd3f54c82a)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/2804/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+- [resources/views/Widgets/MyAccount/GreetingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2779/files#diff-c428531b614621aa7ec1fe56507582fcd923aeae8342bfb3c0d2bbbe650c69be)
+
+
 ## v5.0.28 (2021-04-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.27...5.0.28" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
