@@ -84,7 +84,7 @@ context("Checkout shipping", () =>
     it("should change shipping profile when address changes", () =>
     {
         loginAsUser();
-        cy.get("#addressMultiSelect14 > .item-inner").click();
+        cy.get("#addressMultiSelect13 > .item-inner").click();
         cy.wait(100);
         cy.get(":nth-child(2) > .item-inner").click();
         cy.wait(500);
