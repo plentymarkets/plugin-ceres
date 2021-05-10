@@ -25,6 +25,9 @@ class BackgroundWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(700)
+            ->withSearchKeyWords([
+                "hintergrund", "background",
+            ])
             ->toArray();
     }
 
@@ -82,6 +85,7 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createCheckbox('lazyloadImage')
             ->withName('Widget.backgroundLazyloadLabel')
+            ->withTooltip('Widget.backgroundLazyloadTooltip')
             ->withCondition("!preloadImage");
 
         $settings->createCheckbox('preloadImage')

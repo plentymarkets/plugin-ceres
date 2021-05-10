@@ -12,7 +12,7 @@ class LegalInformationWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Footer.LegalInformationWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class LegalInformationWidget extends BaseWidget
             ->withType(WidgetTypes::FOOTER)
             ->withCategory(WidgetCategories::FOOTER)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "datenschutz", "legal", "privacy"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

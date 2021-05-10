@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="input-unit" data-validate="" data-model="countryId">
-            <select id="country-id-select" :value="selectedCountryId" class="custom-select" @change="countryChanged($event.target.value)">
+            <select :id="'country-id-select' + _uid" :value="selectedCountryId" class="custom-select" @change="countryChanged($event.target.value)">
                 <option :value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList" :key="country.id">
                     {{ country.currLangName }}
                 </option>
             </select>
-            <label for="country-id-select">{{ $translate("Ceres::Template.headerCountry") }}</label>
+            <label :for="'country-id-select' + _uid">{{ $translate("Ceres::Template.headerCountry") }}</label>
         </div>
 
         <template v-if="isInOptionalFields('stateId')">
@@ -15,13 +15,13 @@
                 v-if="stateList && stateList.length > 0"
                 v-validate="isInRequiredFields('stateId')"
                 data-model="stateId">
-                <select id="state-id-select" :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
+                <select :id="'state-id-select' + _uid" :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
                     <option :selected="selectedStateId === null">{{ $translate("Ceres::Template.addressPleaseSelect") }}</option>
                     <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList" :key="state.id">
                         {{ state.name }}
                     </option>
                 </select>
-                <label for="state-id-select">{{ transformTranslation("Ceres::Template.headerState", "stateId") }}</label>
+                <label :for="'state-id-select' + _uid">{{ transformTranslation("Ceres::Template.headerState", "stateId") }}</label>
             </div>
         </template>
     </div>

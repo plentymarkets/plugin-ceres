@@ -12,7 +12,7 @@ class CustomerSignWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.CustomerSignWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class CustomerSignWidget extends BaseWidget
             ->withType(WidgetTypes::CHECKOUT)
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(900)
+            ->withSearchKeyWords([
+                "checkout", "bestellvorgang", "bestellung"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

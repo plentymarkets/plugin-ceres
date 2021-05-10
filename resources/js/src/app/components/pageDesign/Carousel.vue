@@ -13,7 +13,6 @@
 </template>
 
 <script>
-
 export default {
     components: {
         SlotComponent: {
@@ -45,6 +44,10 @@ export default {
 
     mounted()
     {
+        this.$nextTick(() =>
+        {
+            this.initializeCarousel();
+        });
     },
 
     updated()

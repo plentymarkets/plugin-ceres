@@ -5,82 +5,31 @@ import Vue from "vue";
 // =========================
 
 // BASE
-// import AddItemToBasketOverlay from "./app/components/basket/AddItemToBasketOverlay.vue";
-// import AddToBasket from "./app/components/basket/AddToBasket.vue";
-// import BasketPreview from "./app/components/basket/BasketPreview.vue";
-// import BasketTotals from "./app/components/basket/BasketTotals.vue";
-// import Coupon from "./app/components/basket/Coupon.vue";
-// import BasketList from "./app/components/basket/list/BasketList.vue";
-
-// import StepByStepNavigation from "./app/components/category/StepByStepNavigation.vue";
-// import GoogleMaps from "./app/components/common/GoogleMaps.vue";
 import LazyImg from "./app/components/common/LazyImg.vue";
 import Intersect from "./app/components/common/Intersect.vue";
 import TabList from "./app/components/common/TabList.vue";
 import TabItem from "./app/components/common/TabItem.vue";
-// import LastSeenItemList from "./app/components/containers/LastSeenItemList.vue";
+import LazyLoad from "./app/components/common/LazyLoad.vue";
 
-// import ChangeEmailForm from "./app/components/customer/ChangeEmailForm.vue";
 import ReCaptcha from "./app/components/customer/ReCaptcha.vue";
-// import Registration from "./app/components/customer/Registration.vue";
-// import ResetPasswordForm from "./app/components/customer/ResetPasswordForm.vue";
-// import ForgotPassword from "./app/components/customer/login/ForgotPassword.vue";
-// import GuestLogin from "./app/components/customer/login/GuestLogin.vue";
-// import Login from "./app/components/customer/login/Login.vue";
 // legacy non-shopbuilder component
-// import LoginView from "./app/components/customer/login/LoginView.vue";
 import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.vue";
-
-// import ItemBundle from "./app/components/item/ItemBundle.vue";
-// import OrderPropertyValue from "./app/components/item/OrderPropertyValue.vue";
-// import QuantityInput from "./app/components/item/QuantityInput.vue";
-
-// import TagList from "./app/components/item/TagList.vue";
 
 import CategoryItem from "./app/components/itemList/CategoryItem.vue";
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
-// import SearchSuggestionItem from "./app/components/itemList/SearchSuggestionItem.vue";
-// import ItemFilterList from "./app/components/itemList/filter/ItemFilterList.vue";
-// import ItemFilterTagList from "./app/components/itemList/filter/ItemFilterTagList.vue";
-
-// import LiveShoppingItem from "./app/components/liveShopping/LiveShoppingItem.vue";
-
-// import NewsletterInput from "./app/components/newsletter/NewsletterInput.vue";
-// import NewsletterUnsubscribeInput from "./app/components/newsletter/NewsletterUnsubscribeInput.vue";
-
-// import OrderReturn from "./app/components/orderReturn/OrderReturn.vue";
 
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
-// import PrivacySettings from "./app/components/pageDesign/PrivacySettings.vue";
 import Carousel from "./app/components/pageDesign/Carousel.vue";
 import Icon from "./app/components/pageDesign/Icon.vue";
 import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
 import Notifications from "./app/components/pageDesign/Notifications.vue";
 import Popper from "./app/components/pageDesign/Popper.vue";
-// import ShippingCountrySelect from "./app/components/pageDesign/ShippingCountrySelect.vue";
 import LoadingAnimation from "./app/components/pageDesign/LoadingAnimation.vue";
 
-// import WishList from "./app/components/wishList/WishList.vue";
 import WishListCount from "./app/components/wishList/WishListCount.vue";
 
-import LazyLoad from "./app/components/common/LazyLoad.vue";
-
-// import AddToWishList from "./app/components/item/AddToWishList.vue";
-// import GraduatedPrices from "./app/components/item/GraduatedPrices.vue";
-// import ItemDataTable from "./app/components/item/ItemDataTable.vue";
-// import ItemImageCarousel from "./app/components/item/ItemImageCarousel.vue";
-// import ItemPrice from "./app/components/item/ItemPrice.vue";
-// import SetPrice from "./app/components/item/SetPrice.vue";
-// import OrderPropertyList from "./app/components/item/OrderPropertyList.vue";
-// import VariationSelect from "./app/components/item/VariationSelect.vue";
-// import ItemAvailability from "./app/components/item/ItemAvailability.vue";
-// import SingleItemBundle from "./app/components/item/SingleItemBundle.vue";
-// import SingleAddToBasket from "./app/components/item/SingleAddToBasket.vue";
-// import SetQuantityInput from "./app/components/item/SetQuantityInput.vue";
 import SingleItem from "./app/components/item/SingleItem.vue";
 import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
-// import FormAttachment from "./app/components/form/FormAttachment.vue";
-
 
 // EXTERNAL
 import LazyHydrate from "vue-lazy-hydration";

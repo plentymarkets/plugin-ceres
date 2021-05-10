@@ -12,7 +12,7 @@ class OrderDocumentsWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.OrderConfirmation.OrderDocumentsWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class OrderDocumentsWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::ORDER_CONFIRMATION)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "order", "documents", "dokumente", "bestellung"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

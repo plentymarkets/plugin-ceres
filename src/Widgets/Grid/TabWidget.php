@@ -11,7 +11,7 @@ class TabWidget extends GridWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Grid.TabWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -23,9 +23,12 @@ class TabWidget extends GridWidget
             ->withType(WidgetTypes::STRUCTURE)
             ->withCategory(WidgetCategories::STRUCTURE)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "grid", "struktur", "tab", "reiter"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

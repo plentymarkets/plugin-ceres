@@ -24,6 +24,9 @@ class CodeWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(800)
+            ->withSearchKeyWords([
+                "code", "text", "html", "twig", "template"
+            ])
             ->toArray();
     }
     

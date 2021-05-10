@@ -13,10 +13,10 @@ use Plenty\Plugin\Log\Loggable;
 class GoogleMapsWidget extends BaseWidget
 {
     use Loggable;
-    
+
     /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.GoogleMapsWidget';
-    
+
     /**
      * @inheritDoc
      */
@@ -27,9 +27,12 @@ class GoogleMapsWidget extends BaseWidget
             ->withPreviewImageUrl('/images/widgets/google-maps.svg')
             ->withType(WidgetTypes::DEFAULT)
             ->withPosition(1050)
+            ->withSearchKeyWords([
+                "google", "maps", "karte", "location", "anfahrt"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */
