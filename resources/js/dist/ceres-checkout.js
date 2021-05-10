@@ -342,9 +342,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    url: '',
-    fallbackUrl: '',
-    pictureClass: ''
+    url: "",
+    fallbackUrl: "",
+    pictureClass: ""
   },
   data: function data() {
     return {
