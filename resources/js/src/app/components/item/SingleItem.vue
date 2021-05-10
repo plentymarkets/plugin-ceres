@@ -260,11 +260,14 @@ export default {
             type: Number,
             required: true
         },
-        afterKey: Object,
-        itemData: Object,
-        attributesData: Array,
-        variations: Array
+        afterKey: Object
     },
+
+    jsonDataFields: [
+        "itemData",
+        "attributesData",
+        "variations"
+    ],
 
     provide()
     {
