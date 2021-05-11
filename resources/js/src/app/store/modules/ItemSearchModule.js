@@ -2,13 +2,12 @@ import { isNullOrUndefined } from "../../helper/utils";
 import ApiService from "../../services/ApiService";
 import Vue from "vue";
 
-const state =
-    {
-        autocompleteRequest: null,
-        autocompleteResult: { item: [], category: [], suggestion: [] },
-        autocompleteSearchString: "",
-        autocompleteTypes: new Set()
-    };
+const state = () => ({
+    autocompleteRequest: null,
+    autocompleteResult: { item: [], category: [], suggestion: [] },
+    autocompleteSearchString: "",
+    autocompleteTypes: []
+});
 
 const mutations =
     {
@@ -29,7 +28,7 @@ const mutations =
 
         addAutocompleteType(state, type)
         {
-            state.autocompleteTypes.add(type);
+            state.autocompleteTypes.push(type);
         }
     };
 
@@ -49,7 +48,7 @@ const actions =
                 {
                     template: "Ceres::ItemList.Components.ItemSearch",
                     query: searchString,
-                    types: [...state.autocompleteTypes]
+                    types: [...new Set(state.autocompleteTypes)]
                 }
             );
 

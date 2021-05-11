@@ -3,11 +3,10 @@ import { setUrlParam } from "../../services/UrlService";
 
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        shippingCountries: [],
-        shippingCountryId: null
-    };
+const state = () => ({
+    shippingCountries: [],
+    shippingCountryId: null
+});
 
 const mutations =
     {
@@ -18,7 +17,7 @@ const mutations =
 
         setShippingCountryId(state, shippingCountryId)
         {
-            if (shippingCountryId !== state.shippingCountryId)
+            if (shippingCountryId !== state.shippingCountryId && !App.isSSR)
             {
                 document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: shippingCountryId }));
             }

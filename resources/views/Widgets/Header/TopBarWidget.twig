@@ -48,31 +48,33 @@
                 {% if searchStyle == "permanent" %}
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
                         <div class="always-visible-search flex-grow-1">
-                            <item-search>
-                                <div class="position-relative d-flex flex-grow-1">
-                                    <input type="search" class="search-input px-3 py-2 flex-grow-1" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearchTerm")') }}">
-                                    <button class="search-submit px-3" type="submit" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-
-                                {% if isPreview %}
-                                    <template #search-button>
-                                        <button class="search-submit px-3" type="submit" {{ WidgetHelper.makeClickable(isPreview) }} data-toggle="collapse" href="#search-suggestions_{{ uid }}" role="button">
+                            {% if not isPreview %}<lazy-hydrate when-idle>{% endif %}
+                                <item-search>
+                                    <div class="position-relative d-flex flex-grow-1">
+                                        <input type="search" class="search-input px-3 py-2 flex-grow-1" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearchTerm")') }}">
+                                        <button class="search-submit px-3" type="submit" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}">
                                             <i class="fa fa-search"></i>
                                         </button>
-                                    </template>
-                                {% endif %}
+                                    </div>
 
-                                {% if isPreview or children is defined and children.suggestions | trim is not empty %}
-                                    <template #autocomplete-suggestions>
-                                        <div class="autocomplete-suggestions shadow bg-white w-100{% if isPreview %} collapse position-relative mh-100{% endif %}"
-                                            {% if isPreview %} data-builder-child-container="suggestions" id="search-suggestions_{{ uid }}"{% endif %}>
-                                            {{ children.suggestions | raw }}
-                                        </div>
-                                    </template>
-                                {% endif %}
-                            </item-search>
+                                    {% if isPreview %}
+                                        <template #search-button>
+                                            <button class="search-submit px-3" type="submit" {{ WidgetHelper.makeClickable(isPreview) }} data-toggle="collapse" href="#search-suggestions_{{ uid }}" role="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </template>
+                                    {% endif %}
+
+                                    {% if isPreview or children is defined and children.suggestions | trim is not empty %}
+                                        <template #autocomplete-suggestions>
+                                            <div class="autocomplete-suggestions shadow bg-white w-100{% if isPreview %} collapse position-relative mh-100{% endif %}"
+                                                {% if isPreview %} data-builder-child-container="suggestions" id="search-suggestions_{{ uid }}"{% endif %}>
+                                                {{ children.suggestions | raw }}
+                                            </div>
+                                        </template>
+                                    {% endif %}
+                                </item-search>
+                            {% if not isPreview %}</lazy-hydrate>{% endif %}
                         </div>
                     {{ Twig.else() }}
                         {{ Twig.print("overrideSearchBar | raw") }}
@@ -82,22 +84,24 @@
                     <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
                         {% if enableLogin or enableRegistration %}
                             <li class="list-inline-item control-user">
-                                <user-login-handler
-                                    :show-login="{{ enableLogin | json_encode }}"
-                                    :show-registration="{{ enableRegistration | json_encode }}">
-                                    {% if enableLogin %}
-                                    <a class="nav-link" data-toggle="modal" aria-label="{{ Twig.print('trans("Ceres::Template.login")') }}">
-                                        <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
-                                        <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
-                                    </a>
-                                    {% endif %}
-                                    {% if enableRegistration %}
-                                    <a class="nav-link" data-toggle="modal" aria-label="{{ Twig.print('trans("Ceres::Template.loginRegister")') }}">
-                                        <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
-                                        <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
-                                    </a>
-                                    {% endif %}
-                                </user-login-handler>
+                                <lazy-hydrate when-idle>
+                                    <user-login-handler
+                                        :show-login="{{ enableLogin | json_encode }}"
+                                        :show-registration="{{ enableRegistration | json_encode }}">
+                                        {% if enableLogin %}
+                                        <a class="nav-link" data-toggle="modal" aria-label="{{ Twig.print('trans("Ceres::Template.login")') }}">
+                                            <i class="fa fa-user mr-0 mr-sm-1" aria-hidden="true"></i>
+                                            <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.login")') }}</span>
+                                        </a>
+                                        {% endif %}
+                                        {% if enableRegistration %}
+                                        <a class="nav-link" data-toggle="modal" aria-label="{{ Twig.print('trans("Ceres::Template.loginRegister")') }}">
+                                            <i class="fa fa-user-plus mr-0 mr-sm-1" aria-hidden="true"></i>
+                                            <span class="d-none d-sm-inline">{{ Twig.print('trans("Ceres::Template.loginRegister")') }}</span>
+                                        </a>
+                                        {% endif %}
+                                    </user-login-handler>
+                                </lazy-hydrate>
                             </li>
                         {% endif %}
 
@@ -141,7 +145,8 @@
                                     aria-controls="searchBox"
                                     data-testing="searchbox-select"
                                     data-parent="#controlsList"
-                                    aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}">
+                                    aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}"
+                                    @mouseover.once="$store.dispatch('loadComponent', 'item-search')">
                                     <span class="anicon-search-item" aria-hidden="true"></span>
                                 </a>
                             </li>
@@ -150,12 +155,14 @@
                         {% if enableWishList %}
                             {{ Twig.if("services.url.isRouteEnabled(\"wish-list\")") }}
                             <li class="list-inline-item control-wish-list">
-                                <wish-list-count>
-                                    <a class="nav-link" aria-label="{{ Twig.print('trans("Ceres::Template.wishList")') }}">
-                                        <span class="badge-right mr-1 d-none d-sm-inline">0</span>
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </a>
-                                </wish-list-count>
+                                <lazy-hydrate when-idle>
+                                    <wish-list-count>
+                                        <a class="nav-link" aria-label="{{ Twig.print('trans("Ceres::Template.wishList")') }}">
+                                            <span class="badge-right mr-1 d-none d-sm-inline">0</span>
+                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        </a>
+                                    </wish-list-count>
+                                </lazy-hydrate>
                             </li>
                             {{ Twig.endif() }}
                         {% endif %}
@@ -174,52 +181,50 @@
                                     {% endif %}
                                 </a>
 
-                                <lazy-load component="basket-preview">
-                                    <basket-preview :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
-                                        <template #before-basket-item>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
-                                        </template>
-                                        <template #after-basket-item>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.AfterItem"])) }}
-                                        </template>
-                                        <template #before-basket-totals>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.BeforeBasketTotals"])) }}
-                                        </template>
-                                        <template #before-item-sum>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeItemSum"])) }}
-                                        </template>
-                                        <template #after-item-sum>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterItemSum"])) }}
-                                        </template>
-                                        <template #before-shipping-costs>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeShippingCosts"])) }}
-                                        </template>
-                                        <template #after-shipping-costs>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterShippingCosts"])) }}
-                                        </template>
-                                        <template #before-total-sum>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeTotalSum"])) }}
-                                        </template>
-                                        <template #before-vat>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeVat"])) }}
-                                        </template>
-                                        <template #after-vat>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterVat"])) }}
-                                        </template>
-                                        <template #after-total-sum>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterTotalSum"])) }}
-                                        </template>
-                                        <template #after-basket-totals>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.AfterBasketTotals"])) }}
-                                        </template>
-                                        <template #before-checkout-button>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.BeforeCheckoutButton"])) }}
-                                        </template>
-                                        <template #after-checkout-button>
-                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.AfterCheckoutButton"])) }}
-                                        </template>
-                                    </basket-preview>
-                                </lazy-load>
+                                <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
+                                    <template #before-basket-item>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
+                                    </template>
+                                    <template #after-basket-item>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.AfterItem"])) }}
+                                    </template>
+                                    <template #before-basket-totals>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.BeforeBasketTotals"])) }}
+                                    </template>
+                                    <template #before-item-sum>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeItemSum"])) }}
+                                    </template>
+                                    <template #after-item-sum>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterItemSum"])) }}
+                                    </template>
+                                    <template #before-shipping-costs>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeShippingCosts"])) }}
+                                    </template>
+                                    <template #after-shipping-costs>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterShippingCosts"])) }}
+                                    </template>
+                                    <template #before-total-sum>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeTotalSum"])) }}
+                                    </template>
+                                    <template #before-vat>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.BeforeVat"])) }}
+                                    </template>
+                                    <template #after-vat>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterVat"])) }}
+                                    </template>
+                                    <template #after-total-sum>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketTotals.AfterTotalSum"])) }}
+                                    </template>
+                                    <template #after-basket-totals>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.AfterBasketTotals"])) }}
+                                    </template>
+                                    <template #before-checkout-button>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.BeforeCheckoutButton"])) }}
+                                    </template>
+                                    <template #after-checkout-button>
+                                        {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketPreview.AfterCheckoutButton"])) }}
+                                    </template>
+                                </basket-preview>
                             </li>
                         {% endif %}
                     </ul>
@@ -233,16 +238,18 @@
             {% if searchStyle == "onDemand" %}
                 <div id="searchBox" class="cmp cmp-search-box collapse{% if isPreview %} position-relative{% endif %}">
                     {{ Twig.if("overrideSearchBar | trim is empty") }}
-                        <item-search>
-                            {% if isPreview or children is defined and children.suggestions | trim is not empty %}
-                                <template #autocomplete-suggestions>
-                                    <div class="autocomplete-suggestions shadow bg-white w-100{% if isPreview %} position-relative mh-100{% endif %}"
-                                        {% if isPreview %} data-builder-child-container="suggestions"{% endif %}>
-                                        {{ children.suggestions | raw }}
-                                    </div>
-                                </template>
-                            {% endif %}
-                        </item-search>
+                        {% if not isPreview %}<lazy-load component="item-search">{% endif %}
+                            <item-search>
+                                {% if isPreview or children is defined and children.suggestions | trim is not empty %}
+                                    <template #autocomplete-suggestions>
+                                        <div class="autocomplete-suggestions shadow bg-white w-100{% if isPreview %} position-relative mh-100{% endif %}"
+                                            {% if isPreview %} data-builder-child-container="suggestions"{% endif %}>
+                                            {{ children.suggestions | raw }}
+                                        </div>
+                                    </template>
+                                {% endif %}
+                            </item-search>
+                        {% if not isPreview %}</lazy-load>{% endif %}
                     {{ Twig.else() }}
                         {{ Twig.print("overrideSearchBar | raw") }}
                     {{ Twig.endif() }}
@@ -322,7 +329,9 @@
                                             <strong>{{ Twig.print('trans("Ceres::Template.headerSelectShippingCountry")') }}</strong>
                                             <hr>
                                         </div>
-                                        <shipping-country-select :disable-input="{{ Twig.print(Twig.call('services.template.isCheckout') ~ ' | json_encode') }}"></shipping-country-select>
+                                        <lazy-hydrate when-visible>
+                                            <shipping-country-select :disable-input="{{ Twig.print(Twig.call('services.template.isCheckout') ~ ' | json_encode') }}"></shipping-country-select>
+                                        </lazy-hydrate>
                                     </div>
                                 </div>
                             {% endif %}

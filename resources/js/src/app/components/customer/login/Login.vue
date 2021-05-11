@@ -1,6 +1,6 @@
 <template>
     <div class="login-pwd-reset">
-        <form :id="'login-form-' + _uid" method="post">
+        <form ref="loginForm" :id="'login-form-' + _uid" method="post">
             <div :class="{'modal-body': modalElement}">
                 <div class="row">
                     <div class="col-12">
@@ -43,7 +43,7 @@ import NotificationService from "../../../services/NotificationService";
 import ModalService from "../../../services/ModalService";
 import AutoFocusService from "../../../services/AutoFocusService";
 import ValidationService from "../../../services/ValidationService";
-import { getContainingComponent } from "../../../helper/utils";
+import {getContainingComponent, isNullOrUndefined} from "../../../helper/utils";
 
 export default {
     mixins: [ButtonSizePropertyMixin],
@@ -76,7 +76,7 @@ export default {
     {
         this.$nextTick(() =>
         {
-            this.loginFields = document.querySelector("#login-form-" + this._uid).querySelectorAll(".input-unit");
+            this.loginFields = this.$refs.loginForm.querySelectorAll(".input-unit");
 
             AutoFocusService.triggerAutoFocus();
         });

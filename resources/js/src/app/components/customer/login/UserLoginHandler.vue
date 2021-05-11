@@ -70,7 +70,6 @@ export default {
         createLoginModal()
         {
             this.loadComponent("login-modal");
-
         },
 
         createRegisterModal()

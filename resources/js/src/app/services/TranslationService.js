@@ -4,10 +4,17 @@ import jQuery from "jquery";
 
 const TranslationService = (function($)
 {
-    const _translations = {};
+    let _translations = {};
 
     // initialize translations
-    _readTranslations();
+    if (typeof translations !== "undefined")
+    {
+        _translations = translations;
+    }
+    else
+    {
+        _readTranslations();
+    }
 
     return {
         translate: _translate

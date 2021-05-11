@@ -54,7 +54,7 @@ class DefaultSingleItemPreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
-    
+
     /**
      * @inheritDoc
      */
@@ -220,6 +220,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('maxQuantity', 10)
             ->withSetting('imageSize', 'urlMiddle')
             ->withSetting('showThumbs', true)
+            ->withSetting('preloadImage', true)
             ->withSetting('showDots', true);
     }
 

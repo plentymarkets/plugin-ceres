@@ -4569,6 +4569,22 @@
                     "options": {
                         "defaultValue": "true"
                     }
+                },
+                "log.performance.ssr": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.logPerformanceSsr",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+                "log.performance.eventPropagation": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.logPerformanceEventPropagation",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         }

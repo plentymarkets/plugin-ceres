@@ -52,7 +52,10 @@ export default Vue.component("checkout", {
         this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });
 
         this.addEventHandler();
+    },
 
+    mounted()
+    {
         removeUrlParam("readonlyCheckout");
     },
 

@@ -9,18 +9,15 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _services_ModalService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
-/* harmony import */ var _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/AutoFocusService */ "./resources/js/src/app/services/AutoFocusService.js");
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_ModalService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
+/* harmony import */ var _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/AutoFocusService */ "./resources/js/src/app/services/AutoFocusService.js");
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 //
 //
@@ -67,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_2__["ButtonSizePropertyMixin"]],
+  mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_1__["ButtonSizePropertyMixin"]],
   props: {
     backlink: {
       type: String
@@ -92,8 +89,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.$nextTick(function () {
-      _this.loginFields = document.querySelector("#login-form-" + _this._uid).querySelectorAll(".input-unit");
-      _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_6__["default"].triggerAutoFocus();
+      _this.loginFields = _this.$refs.loginForm.querySelectorAll(".input-unit");
+      _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_5__["default"].triggerAutoFocus();
     });
   },
   watch: {
@@ -109,15 +106,15 @@ __webpack_require__.r(__webpack_exports__);
      * Open the login modal
      */
     showLogin: function showLogin() {
-      _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(document.getElementById(this.modalElement)).show();
+      _services_ModalService__WEBPACK_IMPORTED_MODULE_4__["default"].findModal(document.getElementById(this.modalElement)).show();
     },
     validateLogin: function validateLogin() {
       var _this2 = this;
 
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__["default"].validate($("#login-form-" + this._uid)).done(function () {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_6__["default"].validate($("#login-form-" + this._uid)).done(function () {
         _this2.sendLogin();
       }).fail(function (invalidFields) {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__["default"].markInvalidFields(invalidFields, "error");
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_6__["default"].markInvalidFields(invalidFields, "error");
       });
     },
 
@@ -128,14 +125,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.isDisabled = true;
-      _services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].post("/rest/io/customer/login", {
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].post("/rest/io/customer/login", {
         email: this.username,
         password: this.password
       }, {
         supressNotifications: true
       }).done(function (response) {
-        _services_ApiService__WEBPACK_IMPORTED_MODULE_3__["default"].setToken(response);
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].success(_this3.$translate("Ceres::Template.loginSuccessful")).closeAfter(3000);
+        _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].setToken(response);
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_3__["default"].success(_this3.$translate("Ceres::Template.loginSuccessful")).closeAfter(3000);
 
         if (_this3.backlink !== null && _this3.backlink) {
           location.assign(decodeURIComponent(_this3.backlink));
@@ -159,7 +156,7 @@ __webpack_require__.r(__webpack_exports__);
               translationKey = "Ceres::Template.loginBlocked";
             }
 
-            _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].error(_this3.$translate(translationKey)).closeAfter(10000);
+            _services_NotificationService__WEBPACK_IMPORTED_MODULE_3__["default"].error(_this3.$translate(translationKey)).closeAfter(10000);
             break;
 
           default:
@@ -174,15 +171,15 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch("loadComponent", "forgot-password-modal");
       Vue.nextTick(function () {
         var modalDOM = document.querySelector('#resetPwd');
-        var modalVue = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_8__["getContainingComponent"])(modalDOM);
+        var modalVue = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["getContainingComponent"])(modalDOM);
         modalVue.$data.username = _this4.username;
 
         var showModal = function showModal() {
-          return _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(modalDOM).show();
+          return _services_ModalService__WEBPACK_IMPORTED_MODULE_4__["default"].findModal(modalDOM).show();
         };
 
         if (_this4.modalElement) {
-          _services_ModalService__WEBPACK_IMPORTED_MODULE_5__["default"].findModal(document.getElementById(_this4.modalElement)).hide().then(showModal);
+          _services_ModalService__WEBPACK_IMPORTED_MODULE_4__["default"].findModal(document.getElementById(_this4.modalElement)).hide().then(showModal);
         } else {
           showModal();
         }
@@ -192,7 +189,7 @@ __webpack_require__.r(__webpack_exports__);
       this.loginFields.forEach(function (element) {
         return element.classList.remove("has-login-error");
       });
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__["default"].unmarkAllFields("#login-form-" + this._uid);
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_6__["default"].unmarkAllFields("#login-form-" + this._uid);
     }
   }
 });
@@ -215,181 +212,193 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "login-pwd-reset" }, [
-    _c("form", { attrs: { id: "login-form-" + _vm._uid, method: "post" } }, [
-      _c("div", { class: { "modal-body": _vm.modalElement } }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c(
-              "div",
-              { staticClass: "input-unit", attrs: { "data-validate": "mail" } },
-              [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.username,
-                      expression: "username"
-                    }
-                  ],
-                  attrs: {
-                    "data-testing": "email-login",
-                    type: "email",
-                    name: "email",
-                    autocomplete: "email",
-                    id: "email" + _vm._uid,
-                    "data-autofocus": ""
-                  },
-                  domProps: { value: _vm.username },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+    _c(
+      "form",
+      {
+        ref: "loginForm",
+        attrs: { id: "login-form-" + _vm._uid, method: "post" }
+      },
+      [
+        _c("div", { class: { "modal-body": _vm.modalElement } }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-unit",
+                  attrs: { "data-validate": "mail" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.username,
+                        expression: "username"
                       }
-                      _vm.username = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "email" + _vm._uid } }, [
-                  _vm._v(
-                    _vm._s(_vm.$translate("Ceres::Template.loginEmail")) + "*"
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "error-msg" }, [
-              _vm._v(
-                _vm._s(_vm.$translate("Ceres::Template.loginEnterConfirmEmail"))
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12" }, [
-            _c(
-              "div",
-              {
-                staticClass: "input-unit",
-                class: { "no-bottom": _vm.modalElement },
-                attrs: { "data-validate": "text" }
-              },
-              [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.password,
-                      expression: "password"
-                    }
-                  ],
-                  attrs: {
-                    "data-testing": "password-login",
-                    type: "password",
-                    name: "password",
-                    autocomplete: "current-password",
-                    id: "password" + _vm._uid
-                  },
-                  domProps: { value: _vm.password },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                    ],
+                    attrs: {
+                      "data-testing": "email-login",
+                      type: "email",
+                      name: "email",
+                      autocomplete: "email",
+                      id: "email" + _vm._uid,
+                      "data-autofocus": ""
+                    },
+                    domProps: { value: _vm.username },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.username = $event.target.value
                       }
-                      _vm.password = $event.target.value
                     }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "password" + _vm._uid } }, [
-                  _vm._v(
-                    _vm._s(_vm.$translate("Ceres::Template.loginPassword")) +
-                      "*"
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "error-msg" }, [
-              _vm._v(
-                _vm._s(_vm.$translate("Ceres::Template.loginEmptyPassword"))
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          class: {
-            "modal-footer justify-content-between": _vm.modalElement,
-            row: !_vm.modalElement
-          }
-        },
-        [
-          _c("div", { class: { "col-7 col-sm-4": !_vm.modalElement } }, [
-            _c(
-              "a",
-              {
-                staticClass: "small text-appearance",
-                attrs: { href: "javascript:void(0)" },
-                on: { click: _vm.showResetPwdView }
-              },
-              [
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                    _vm._v(
+                      _vm._s(_vm.$translate("Ceres::Template.loginEmail")) + "*"
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "error-msg" }, [
                 _vm._v(
                   _vm._s(
-                    _vm.$translate("Ceres::Template.loginForgotPassword")
-                  ) + "?"
+                    _vm.$translate("Ceres::Template.loginEnterConfirmEmail")
+                  )
                 )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { class: { "col-5 col-sm-8 text-sm-right": !_vm.modalElement } },
-            [
-              _vm._t("extend-overlay-buttons"),
-              _vm._v(" "),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
               _c(
-                "button",
+                "div",
                 {
-                  staticClass: "btn btn-primary btn-appearance btn-medium",
-                  class: [
-                    { "float-right": !_vm.modalElement },
-                    _vm.buttonSizeClass
-                  ],
-                  attrs: {
-                    "data-testing": "submit-login",
-                    disabled: _vm.isDisabled
-                  },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.validateLogin($event)
+                  staticClass: "input-unit",
+                  class: { "no-bottom": _vm.modalElement },
+                  attrs: { "data-validate": "text" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.password,
+                        expression: "password"
+                      }
+                    ],
+                    attrs: {
+                      "data-testing": "password-login",
+                      type: "password",
+                      name: "password",
+                      autocomplete: "current-password",
+                      id: "password" + _vm._uid
+                    },
+                    domProps: { value: _vm.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.password = $event.target.value
+                      }
                     }
-                  }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "password" + _vm._uid } }, [
+                    _vm._v(
+                      _vm._s(_vm.$translate("Ceres::Template.loginPassword")) +
+                        "*"
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "error-msg" }, [
+                _vm._v(
+                  _vm._s(_vm.$translate("Ceres::Template.loginEmptyPassword"))
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            class: {
+              "modal-footer justify-content-between": _vm.modalElement,
+              row: !_vm.modalElement
+            }
+          },
+          [
+            _c("div", { class: { "col-7 col-sm-4": !_vm.modalElement } }, [
+              _c(
+                "a",
+                {
+                  staticClass: "small text-appearance",
+                  attrs: { href: "javascript:void(0)" },
+                  on: { click: _vm.showResetPwdView }
                 },
                 [
                   _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.$translate("Ceres::Template.login")) +
-                      "\n                    "
-                  ),
-                  _c("icon", {
-                    attrs: { icon: "user", loading: _vm.isDisabled }
-                  })
-                ],
-                1
+                    _vm._s(
+                      _vm.$translate("Ceres::Template.loginForgotPassword")
+                    ) + "?"
+                  )
+                ]
               )
-            ],
-            2
-          )
-        ]
-      )
-    ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { class: { "col-5 col-sm-8 text-sm-right": !_vm.modalElement } },
+              [
+                _vm._t("extend-overlay-buttons"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-appearance btn-medium",
+                    class: [
+                      { "float-right": !_vm.modalElement },
+                      _vm.buttonSizeClass
+                    ],
+                    attrs: {
+                      "data-testing": "submit-login",
+                      disabled: _vm.isDisabled
+                    },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.validateLogin($event)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.$translate("Ceres::Template.login")) +
+                        "\n                    "
+                    ),
+                    _c("icon", {
+                      attrs: { icon: "user", loading: _vm.isDisabled }
+                    })
+                  ],
+                  1
+                )
+              ],
+              2
+            )
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -478,49 +487,32 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ButtonSizePropertyMixin", function() { return ButtonSizePropertyMixin; });
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.from */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ "./node_modules/core-js/modules/es.array.index-of.js");
-/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* harmony import */ var core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.index-of.js */ "./node_modules/core-js/modules/es.array.index-of.js");
+/* harmony import */ var core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_12__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -532,6 +524,19 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var BUTTON_SIZES = ["btn-sm", "btn-lg"];
 var LEGACY_CLASS_MAP = {

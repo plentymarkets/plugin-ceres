@@ -25,8 +25,10 @@ class PerformanceStep extends Step
                           ." settingsSelection_performance === true) && "
                           . $this->hasRequiredSettings(),
             "sections" => [
+                $this->generateSsrSection(),
                 $this->generateLoggingOptionsSection(),
-                $this->generatePerformanceSection()
+                $this->generatePerformanceSection(),
+                $this->generatePerformanceEventPropagationSection()
             ]
         ];
         
@@ -52,6 +54,24 @@ class PerformanceStep extends Step
                     "defaultValue" => false,
                     "options" => [
                         "name" =>  "Wizard.activateShopBooster"
+                    ]
+                ]
+            ]
+        ];
+    }
+    
+    private function generateSsrSection():array
+    {
+        return [
+            "title" => "Wizard.ssr",
+            "description" => "Wizard.ssrDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "performance_ssr" => [
+                    "type" => "toggle",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" =>  "Wizard.activateSsr"
                     ]
                 ]
             ]
@@ -111,6 +131,26 @@ class PerformanceStep extends Step
                     "default" => true,
                     "options" => [
                         "name" => "Wizard.performanceErrorCheck"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generatePerformanceEventPropagationSection():array
+    {
+        return [
+            "title" => "Wizard.performanceEventPropagationTitle",
+            "description" => "Wizard.performanceEventPropagationDescription",
+            "form" => [
+                "performance_eventPropagation" => [
+                    "type" => "checkbox",
+                    "default" => true,
+                    "options" => [
+                        "name" => "Wizard.performanceEventPropagation"
                     ]
                 ]
             ]

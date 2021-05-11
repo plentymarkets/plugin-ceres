@@ -112,6 +112,14 @@
     }
 }
 
+.owl-placeholder {
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    margin-left: -1px;
+    object-fit: contain;
+}
+
 .single-carousel,
 .owl-thumbs {
     &.owl-single-item {

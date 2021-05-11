@@ -41,7 +41,7 @@ export default {
         isLoading: state => state.wishList.isLoading
     }),
 
-    created()
+    mounted()
     {
         this.initWishListItems();
     },

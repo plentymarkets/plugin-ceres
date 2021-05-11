@@ -13,6 +13,7 @@
 {% set openInNewTab     = widget.settings.url.openInNewTab.mobile %}
 {% set style            = widget.settings.style.mobile %}
 {% set customCaption    = widget.settings.customCaption.mobile %}
+{% set preloadImage     = widget.settings.preloadImage.mobile %}
 
 
 {% set spacingSettings = widget.settings.spacing %}
@@ -89,6 +90,10 @@
         {{ Twig.if("fallbackUrl | trim is empty") }}
             {{ Twig.set("fallbackUrl", "imageUrl") }}
         {{ Twig.endif() }}
+
+        {% if preloadImage %}
+            {{ Twig.print("add_asset(imageUrl,'image')") }}
+        {% endif %}
 
         {% if widget.settings.lazyLoading.mobile %}
             <lazy-img

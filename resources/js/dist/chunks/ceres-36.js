@@ -9,49 +9,45 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _helper_number__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/number */ "./resources/js/src/app/helper/number.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../helper/debounce */ "./resources/js/src/app/helper/debounce.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-
-
-
-
-
-
-
-
-
-
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _helper_number__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../helper/number */ "./resources/js/src/app/helper/number.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helper/debounce */ "./resources/js/src/app/helper/debounce.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
 
 //
 //
@@ -144,16 +140,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     var _this = this;
 
-    this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.compInterval, 1);
+    this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.compInterval, 1);
     this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
-    var minDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["floatLength"])(this.min);
-    var intervalDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["floatLength"])(this.compInterval);
+    var minDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["floatLength"])(this.min);
+    var intervalDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["floatLength"])(this.compInterval);
     this.compDecimals = Math.max(minDecimals, intervalDecimals);
-    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_13__["debounce"])(function () {
+    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_12__["debounce"])(function () {
       _this.$emit("quantity-change", _this.compValue);
-    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.timeout, 500));
+    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 500));
 
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.variationId)) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.variationId)) {
       this.fetchQuantityFromBasket();
     }
   },
@@ -161,7 +157,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     variationBasketQuantity: function variationBasketQuantity() {
       var _this2 = this;
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.variationId)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.variationId)) {
         return 0;
       }
 
@@ -175,10 +171,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return 0;
     },
     isMinimum: function isMinimum() {
-      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.compMin) && this.compValue - this.compInterval < this.compMin;
+      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.compMin) && this.compValue - this.compInterval < this.compMin;
     },
     isMaximum: function isMaximum() {
-      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.compMax) && this.compValue + this.compInterval > this.compMax;
+      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.compMax) && this.compValue + this.compInterval > this.compMax;
     },
     minimumHint: function minimumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMin", {
@@ -200,7 +196,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return 0;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_14__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_13__["mapState"])({
     basketItems: function basketItems(state) {
       return state.basket.items;
     }
@@ -208,7 +204,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     basketItems: {
       handler: function handler(newValue, oldValue) {
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.variationId)) {
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.variationId)) {
           this.fetchQuantityFromBasket();
         }
       },
@@ -230,16 +226,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     increaseValue: function increaseValue() {
-      var newValue = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])(this.compValue + this.compInterval, this.compDecimals);
+      var newValue = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["formatFloat"])(this.compValue + this.compInterval, this.compDecimals);
 
-      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.compMax) || newValue <= this.compMax) && !this.waiting) {
+      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.compMax) || newValue <= this.compMax) && !this.waiting) {
         this.setValue(newValue);
       }
     },
     decreaseValue: function decreaseValue() {
-      var newValue = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])(this.compValue - this.compInterval, this.compDecimals);
+      var newValue = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["formatFloat"])(this.compValue - this.compInterval, this.compDecimals);
 
-      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.compMin) || newValue >= this.compMin) && !this.waiting) {
+      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.compMin) || newValue >= this.compMin) && !this.waiting) {
         this.setValue(newValue);
       }
     },
@@ -252,13 +248,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       value = parseFloat(value);
 
       if (isNaN(value)) {
-        value = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.compMin, 1);
+        value = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.compMin, 1);
       } // limit new value to min/ max value
 
 
-      value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["limit"])(value, this.compMin, this.compMax); // make sure, new value is an even multiple of interval
+      value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["limit"])(value, this.compMin, this.compMax); // make sure, new value is an even multiple of interval
 
-      var diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])((value - this.min) % this.compInterval, this.compDecimals, true);
+      var diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["formatFloat"])((value - this.min) % this.compInterval, this.compDecimals, true);
 
       if (diff > 0 && diff !== this.compInterval) {
         if (diff < this.compInterval / 2) {
@@ -267,27 +263,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           value += this.compInterval - diff;
         }
 
-        value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["limit"])(value, this.compMin, this.compMax);
+        value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["limit"])(value, this.compMin, this.compMax);
       } // cut fraction
 
 
-      value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])(value, this.compDecimals);
+      value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_10__["formatFloat"])(value, this.compDecimals);
 
       if (value !== this.compValue) {
         this.compValue = value;
         this.onValueChanged();
-      } else if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.$refs.quantityInputField)) {
+      } else if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.$refs.quantityInputField)) {
         this.$refs.quantityInputField.value = this.displayValue;
       }
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
         this.compMin = this.min % this.compInterval || this.compInterval;
       } else if (this.variationBasketQuantity === 0) {
         this.compMin = this.min;
       }
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.max)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(this.max)) {
         // decrease maximum quantity by quantity of variations already in basket
         this.compMax = this.max - this.variationBasketQuantity;
 

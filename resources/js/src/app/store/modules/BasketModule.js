@@ -1,6 +1,7 @@
 import Vue from "vue";
 import TranslationService from "../../services/TranslationService";
 import { navigateTo } from "../../services/UrlService";
+import { getUrlParams } from "../../services/UrlService";
 import { pathnameEquals } from "../../helper/url";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
@@ -8,17 +9,15 @@ const ApiService = require("../../services/ApiService");
 
 // cache updated base prices for performance purposes
 const updatedItemBasePriceCache = {};
-
-const state =
-    {
-        data: {},
-        items: [],
-        showNetPrices: false,
-        isBasketLoading: false,
-        isBasketInitiallyLoaded: false,
-        isBasketItemQuantityUpdate: false,
-        basketNotifications: []
-    };
+const state = () => ({
+    data: {},
+    items: [],
+    showNetPrices: false,
+    isBasketLoading: false,
+    isBasketInitiallyLoaded: false,
+    isBasketItemQuantityUpdate: false,
+    basketNotifications: []
+});
 
 const mutations =
     {
@@ -45,7 +44,7 @@ const mutations =
 
                 for (const item of basketItems)
                 {
-                    _fillMissingData(item);
+                    _fillMissingData(state, item);
                     newItems.push(item);
                 }
 
@@ -149,7 +148,7 @@ const actions =
             {
                 jQuery
                     .when(
-                        ApiService.get("/rest/io/basket", {}, { cache: false, keepOriginalResponse: true }),
+                        ApiService.get("/rest/io/basket", getUrlParams(), { cache: false, keepOriginalResponse: true }),
                         ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false, keepOriginalResponse: true })
                     )
                     .then((basket, basketItems) =>
@@ -340,7 +339,7 @@ const actions =
         }
     };
 
-function _fillMissingData(item)
+function _fillMissingData(state, item)
 {
     let oldBasketItem = null;
 

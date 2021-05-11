@@ -8301,8 +8301,7 @@ a.close.disabled {
 }
 
 .sticky-top {
-  @supports ((position: -webkit-sticky) or (position: sticky)) {
-    position: -webkit-sticky;
+  @supports (position: sticky) {
     position: sticky;
     top: 0;
     z-index: $zindex-sticky;
@@ -9453,6 +9452,15 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
             margin-left: -1px;
         }
     }
+}
+
+.owl-placeholder {
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    margin-left: -1px;
+    -o-object-fit: contain;
+       object-fit: contain;
 }
 
 .single-carousel,

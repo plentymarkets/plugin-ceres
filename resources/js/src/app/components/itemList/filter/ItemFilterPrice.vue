@@ -47,7 +47,7 @@ export default {
         };
     },
 
-    created()
+    mounted()
     {
         const urlParams = UrlService.getUrlParams(document.location.search);
 

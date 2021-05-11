@@ -9,12 +9,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
-/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_get__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
+/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
+/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_get__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 //
 //
 //
@@ -105,13 +102,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (path !== "item.variationDimensions") {
-        var value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, path);
+        var value = lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, path);
         return value !== "" && value !== 0;
       } else {
         return ["variation.lengthMM", "variation.widthMM", "variation.heightMM"].some(function (element) {
           var value = _this.getFieldValue(element);
 
-          return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(value) && value !== 0;
+          return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(value) && value !== 0;
         });
       }
     },
@@ -122,11 +119,11 @@ __webpack_require__.r(__webpack_exports__);
       var value;
 
       if (path === "item.variationDimensions") {
-        value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "variation.lengthMM") + "×" + lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "variation.widthMM") + "×" + lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "variation.heightMM") + "mm";
+        value = lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, "variation.lengthMM") + "×" + lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, "variation.widthMM") + "×" + lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, "variation.heightMM") + "mm";
       } else if (path === "unit.names.name") {
-        value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "unit.content") + " " + lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "unit.names.name");
+        value = lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, "unit.content") + " " + lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, "unit.names.name");
       } else {
-        value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, path);
+        value = lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.currentVariation, path);
       }
 
       return this.formatFieldData(value, path);
@@ -134,14 +131,14 @@ __webpack_require__.r(__webpack_exports__);
     formatFieldData: function formatFieldData(value, path) {
       var format = this.formatMap[path];
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(format)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(format)) {
         switch (format.type) {
           case "text":
             return value + format.value;
 
           case "filter":
-            var filterMethod = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.$options.filters, format.value);
-            return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(filterMethod) ? filterMethod(value) : value;
+            var filterMethod = lodash_get__WEBPACK_IMPORTED_MODULE_0___default()(this.$options.filters, format.value);
+            return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(filterMethod) ? filterMethod(value) : value;
         }
       }
 

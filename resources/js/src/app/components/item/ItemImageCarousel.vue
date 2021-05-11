@@ -1,23 +1,35 @@
 <template>
     <div itemscope itemtype="http://schema.org/Thing">
-        <div class="single-carousel owl-carousel owl-theme owl-single-item mt-0" ref="single">
-            <div v-for="image in singleImages" class="prop-1-1">
-                <a :href="image.url" :data-lightbox="'single-item-image' + _uid">
-                    <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)">
-                </a>
-            </div>
-        </div>
-        <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
-            <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
-                <div class="image-container" @click="goTo(index)">
-                    <lazy-img
-                        picture-class="owl-thumb border-appearance"
-                        v-bind:class="{ 'active': currentItem === index}"
-                        :image-url="imagePreview.url"
-                        :alt="getAltText(imagePreview)"
-                        :title="getImageName(imagePreview)">
-                    </lazy-img>
+        <template>
+            <div class="single-carousel owl-carousel owl-theme owl-single-item mt-0" ref="single">
+                <div v-for="image in singleImages" class="prop-1-1">
+                    <a :href="image.url" :data-lightbox="'single-item-image' + _uid">
+                        <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)">
+                    </a>
                 </div>
+            </div>
+            <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
+                <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
+                    <div class="image-container" @click="goTo(index)">
+                        <lazy-img
+                            picture-class="owl-thumb border-appearance"
+                            v-bind:class="{ 'active': currentItem === index}"
+                            :image-url="imagePreview.url"
+                            :alt="getAltText(imagePreview)"
+                            :title="getImageName(imagePreview)">
+                        </lazy-img>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
+            <div class="prop-1-1">
+                <img
+                    class="owl-placeholder"
+                    :src="singleImages[0].url"
+                    :alt="getAltText(singleImages[0].url)"
+                    :title="getImageName(singleImages[0].url)"
+                >
             </div>
         </div>
     </div>
@@ -25,8 +37,6 @@
 
 <script>
 import { isNullOrUndefined } from "../../helper/utils";
-import "owl.carousel";
-import { mapState } from "vuex";
 
 export default {
     props: {
@@ -71,13 +81,15 @@ export default {
     data()
     {
         return {
-            currentItem: 0
+            currentItem: 0,
+            initialized: false
         };
     },
 
     computed:
     {
-        currentVariation() {
+        currentVariation()
+        {
             return this.$store.getters[`${this.itemId}/currentItemVariation`]
         },
 
@@ -191,6 +203,10 @@ export default {
                         event.page.index,
                         350
                     ]);
+                },
+                onInitialized: event =>
+                {
+                    this.initialized = true;
                 }
             };
 
