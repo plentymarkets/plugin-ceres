@@ -328,9 +328,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     forceUrlWithVariationId: {
       type: Boolean,
       default: false
-    },
-    itemDataRef: Object
+    }
   },
+  jsonDataFields: ["itemDataRef"],
   computed: _objectSpread({
     item: function item() {
       return this.itemData || this.itemDataRef;

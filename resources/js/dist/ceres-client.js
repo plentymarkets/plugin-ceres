@@ -2962,11 +2962,9 @@ __webpack_require__.r(__webpack_exports__);
       type: Number,
       required: true
     },
-    afterKey: Object,
-    itemData: Object,
-    attributesData: Array,
-    variations: Array
+    afterKey: Object
   },
+  jsonDataFields: ["itemData", "attributesData", "variations"],
   provide: function provide() {
     return {
       itemId: this.$props.itemId
@@ -3478,9 +3476,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     forceUrlWithVariationId: {
       type: Boolean,
       default: false
-    },
-    itemDataRef: Object
+    }
   },
+  jsonDataFields: ["itemDataRef"],
   computed: _objectSpread({
     item: function item() {
       return this.itemData || this.itemDataRef;
@@ -70154,10 +70152,17 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.mixin({
       this.$options.jsonDataFields.forEach(function (dataField) {
         var attrKey = dataField.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/\s+/g, "-").toLowerCase();
         var uid = _this.$attrs[attrKey];
-        var element = document.getElementById(uid);
 
-        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(element)) {
-          _this[dataField] = JSON.parse(element.textContent);
+        if (typeof document !== "undefined") {
+          // read json data from dom element on client side
+          var element = document.getElementById(uid);
+
+          if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(element)) {
+            _this[dataField] = JSON.parse(element.textContent);
+          }
+        } else if (typeof jsonData !== "undefined") {
+          // read json data from global object during ssr
+          _this[dataField] = jsonData[uid];
         }
       });
     }
