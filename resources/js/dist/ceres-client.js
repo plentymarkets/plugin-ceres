@@ -72186,7 +72186,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var store; // TODO: find better method name
+var store; // TODO: add code comment
 
 function createStore() {
   // =========================
@@ -72217,13 +72217,13 @@ function createStore() {
     plugins: !App.isSSR ? [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__["default"]] : []
   });
   return store;
-} // TODO: find better method name
+} // TODO: add code comment
 
 function initServerStore(store) {
   store.commit("setShippingCountries", App.initialData.shippingCountries);
   store.commit("setShippingCountryId", App.initialData.shippingCountryId);
   store.commit("setShowNetPrices", App.initialData.showNetPrices);
-} // TODO: find better method name
+} // TODO: add code comment
 
 function initClientListeners(store) {
   _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("LocalizationChanged", function (data) {
@@ -72245,7 +72245,7 @@ function initClientListeners(store) {
   _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterAccountContactLogout", function () {
     store.commit("setUserData", null);
   });
-} // TODO: find better method name
+} // TODO: add code comment
 
 function initClientStore(store) {
   window.ceresStore = store;

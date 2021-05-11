@@ -9455,10 +9455,10 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
 }
 
 .owl-placeholder {
+    position: absolute;
     width: 101%;
     height: 101%;
     margin-left: -1px;
-    position: absolute;
     -o-object-fit: contain;
        object-fit: contain;
 }
