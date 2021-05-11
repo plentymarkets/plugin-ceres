@@ -14,8 +14,6 @@ use Plenty\Plugin\Templates\Factories\TwigFactory;
  */
 class TwigStyleScriptTagFilter extends Twig_Extension
 {
-    use Loggable;
-
     /**
      * @var array $styleTags Filtered out style tags.
      */
