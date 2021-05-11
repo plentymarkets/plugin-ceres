@@ -16,7 +16,8 @@ Vue.prototype.$mount = mount;
 App.isSSR = false;
 App.isSSREnabled = App.config.log.performanceSsr;
 
-window.createApp = (selector) => {
+window.createApp = (selector) =>
+{
     // client-specific bootstrapping logic...
     const { app, store } = createApp({
         template: "#ssr-script-container"
