@@ -87,7 +87,7 @@ context("category", () =>
     it("should add item to basket when button is clicked on page item", () =>
     {
         cy.getByTestingAttr("1007").find(".add-to-basket-lg-container").click();
-        cy.getByTestingAttr("basket-preview-button").click({ force: true });
+        cy.get(".toggle-basket-preview").click({ force: true });
         cy.get("body").should("have.class", "basket-open");
         cy.get(".basket-item").should("exist");
     });

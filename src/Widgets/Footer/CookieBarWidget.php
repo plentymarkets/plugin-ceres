@@ -12,7 +12,7 @@ class CookieBarWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Footer.CookieBarWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class CookieBarWidget extends BaseWidget
             ->withType(WidgetTypes::FOOTER)
             ->withCategory(WidgetCategories::FOOTER)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "cookie", "cookies", "datenschutz", "privacy"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

@@ -101,7 +101,7 @@ function getTemplateOverride(templateOverride)
 {
     if (typeof document !== "undefined")
     {
-        return (document.querySelector(this.$props.templateOverride) || {}).innerHTML;
+        return (document.querySelector(templateOverride) || {}).innerHTML;
     }
     else if (typeof templates !== "undefined")
     {

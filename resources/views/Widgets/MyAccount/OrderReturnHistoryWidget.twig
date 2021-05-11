@@ -21,10 +21,8 @@
             {{ WidgetHelper.editableTwig(isPreview, hintText) }}
         {% endif %}
     </div>
-    <client-only>
-        <order-return-history-list
-                :returns-per-page="{{ returnsPerPage | default(5) | json_encode }}"
-                {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}>
-        </order-return-history-list>
-    </client-only>
+    <order-return-history-list
+        :returns-per-page="{{ returnsPerPage | default(5) | json_encode }}"
+        {% if isPreview %}:initial-data="{{ previewData | json_encode }}"{% endif %}>
+    </order-return-history-list>
 </div>

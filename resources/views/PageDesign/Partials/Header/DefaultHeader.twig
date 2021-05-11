@@ -57,7 +57,8 @@
                                                 aria-expanded="false"
                                                 aria-controls="searchBox"
                                                 data-parent="#controlsList"
-                                                aria-label="{{ trans('trans(\'Ceres::Template.headerSearch\')') }}">
+                                                aria-label="{{ trans('Ceres::Template.headerSearch') }}"
+                                                @mouseover.once="$store.dispatch('loadComponent', 'item-search')">
                                                 <span class="anicon-search-item" aria-hidden="true"></span>
                                             </a>
                                         </li>
@@ -65,7 +66,7 @@
                                             <li class="list-inline-item control-wish-list">
                                                 <lazy-hydrate when-idle>
                                                     <wish-list-count>
-                                                        <a class="nav-link" aria-label="{{ trans('trans("Ceres::Template.wishList') }}">
+                                                        <a class="nav-link" aria-label="{{ trans('Ceres::Template.wishList') }}">
                                                             <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                                             <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                         </a>
@@ -142,9 +143,9 @@
                             <div id="searchBox" class="cmp cmp-search-box collapse">
                                 {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
                                 {% if overrideSearchBar | trim is empty %}
-                                    <lazy-hydrate when-visible>
+                                    <lazy-load component="item-search">
                                         <item-search></item-search>
-                                    </lazy-hydrate>
+                                    </lazy-load>
                                 {% else %}
                                     {{ overrideSearchBar | raw }}
                                 {% endif %}

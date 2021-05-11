@@ -33,6 +33,12 @@ class PerformanceMapping
             "global"   => false,
             "optional" => true,
         ],
+        "performance_eventPropagation" => [
+            "field"    => "log.performance.eventPropagation",
+            "type"     => "boolean",
+            "global"   => false,
+            "optional" => true,
+        ],
     ];
     
     /**

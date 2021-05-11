@@ -20,12 +20,12 @@ import user from "./modules/UserModule";
 import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
-// import eventPropagation from "./plugins/EventPropagationPlugin";
+import eventPropagation from "./plugins/EventPropagationPlugin";
 import { isDefined } from "../helper/utils";
 
 export let store;
 
-// TODO: find better method name
+// TODO: add code comment
 export function createStore()
 {
     // =========================
@@ -56,39 +56,23 @@ export function createStore()
                 orderReturn,
                 user,
                 wishList
-            }
+            },
 
-            // plugins: [eventPropagation]
+            plugins: !App.isSSR ? [eventPropagation] : []
         });
 
     return store;
 }
 
-// TODO: find better method name
+// TODO: add code comment
 export function initServerStore(store)
 {
-    // =========================
-    // Fill initial vuex data
-    // =========================
-    App.initialData.shippingCountries.sort((first, second) =>
-    {
-        if (first.currLangName < second.currLangName)
-        {
-            return -1;
-        }
-        if (first.currLangName > second.currLangName)
-        {
-            return 1;
-        }
-        return 0;
-    });
-
     store.commit("setShippingCountries", App.initialData.shippingCountries);
     store.commit("setShippingCountryId", App.initialData.shippingCountryId);
     store.commit("setShowNetPrices", App.initialData.showNetPrices);
 }
 
-// TODO: find better method name
+// TODO: add code comment
 export function initClientListeners(store)
 {
     ApiService.listen("LocalizationChanged",
@@ -119,7 +103,7 @@ export function initClientListeners(store)
     });
 }
 
-// TODO: find better method name
+// TODO: add code comment
 export function initClientStore(store)
 {
     window.ceresStore = store;

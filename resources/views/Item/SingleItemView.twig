@@ -1,7 +1,7 @@
 <single-item v-cloak
-            :item-data="{{ item | json_encode }}"
-            :attributes-data="{{ attributes | json_encode }}"
-            :variations="{{ variations | json_encode }}"
+            item-data="{{ item | json_data }}"
+            attributes-data="{{ attributes | json_data }}"
+            variations="{{ variations | json_data }}"
             :after-key="{{ afterKey | json_encode }}"
             :please-select-option-variation-id="{{ dynamicVariationId }}"
             :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"

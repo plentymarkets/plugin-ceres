@@ -205,7 +205,7 @@ const actions =
             }
         },
 
-        selectMethodOfPayment({ commit, dispatch }, methodOfPaymentId)
+        selectMethodOfPayment({ commit, state }, methodOfPaymentId)
         {
             return new Promise((resolve, reject) =>
             {
@@ -229,7 +229,7 @@ const actions =
             });
         },
 
-        selectShippingProfile({ commit, dispatch, getters }, shippingProfile)
+        selectShippingProfile({ commit, state }, shippingProfile)
         {
             return new Promise((resolve, reject) =>
             {

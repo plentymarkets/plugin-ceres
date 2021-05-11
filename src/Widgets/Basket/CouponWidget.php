@@ -12,7 +12,7 @@ class CouponWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Basket.CouponWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class CouponWidget extends BaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::BASKET)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "coupon", "gutschein", "rabatt"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

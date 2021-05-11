@@ -164,9 +164,12 @@ export default {
         {
             type: Boolean,
             default: false
-        },
-        itemDataRef: Object
+        }
     },
+
+    jsonDataFields: [
+        "itemDataRef"
+    ],
 
     computed:
     {

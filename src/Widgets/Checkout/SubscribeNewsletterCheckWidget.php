@@ -12,7 +12,7 @@ class SubscribeNewsletterCheckWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.SubscribeNewsletterCheckWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class SubscribeNewsletterCheckWidget extends BaseWidget
             ->withType(WidgetTypes::CHECKOUT)
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "checkout", "bestellvorgang", "bestellung", "subscribe", "newsletter"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

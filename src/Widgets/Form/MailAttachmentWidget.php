@@ -21,6 +21,9 @@ class MailAttachmentWidget extends BaseWidget
             ->withType(WidgetTypes::FORM)
             ->withCategory(WidgetCategories::FORM)
             ->withPosition(600)
+            ->withSearchKeyWords([
+                "form", "formular", "kontakt", "contact", "mail", "anhang", "attachment"
+            ])
             ->toArray();
     }
 
@@ -58,7 +61,7 @@ class MailAttachmentWidget extends BaseWidget
                     ->addEntry(",application/zip", "Widget.mailFormAttachmentAllowedFileExtensionsZip")
                     ->toArray()
         );
-        
+
         $settingsFactory->createCheckbox("allowMultiple")
             ->withName("Widget.mailFormAttachmentAllowMultiple")
             ->withTooltip("Widget.mailFormAttachmentAllowMultipleTooltip")

@@ -17,7 +17,6 @@
 
 <div class="widget widget-gtc-check widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <client-only>
         <accept-gtc-check
                 {% if hideCheckbox %}class="pl-0"{% endif %}
                 :hide-checkbox="{{ hideCheckbox | json_encode }}"
@@ -29,7 +28,5 @@
             custom-text="{{ customText }}"
                 {% endif %}>
         </accept-gtc-check>
-    </client-only>
-
     {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.OptIns"])) }}
 </div>

@@ -12,7 +12,7 @@ class OrderPropertyWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.OrderPropertyWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -24,9 +24,12 @@ class OrderPropertyWidget extends BaseWidget
             ->withType(WidgetTypes::SET_COMPONENT)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(300)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "order", "property", "bestellung"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

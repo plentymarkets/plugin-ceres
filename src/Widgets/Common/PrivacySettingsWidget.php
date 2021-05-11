@@ -11,7 +11,7 @@ class PrivacySettingsWidget extends BaseWidget
 {
     /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.PrivacySettingsWidget";
-    
+
     /**
      * @inheritDoc
      */
@@ -22,9 +22,12 @@ class PrivacySettingsWidget extends BaseWidget
             ->withPreviewImageUrl("/images/widgets/privacy-settings.svg")
             ->withType(WidgetTypes::STATIC)
             ->withPosition(1200)
+            ->withSearchKeyWords([
+                "privatsphäre", "einstellungen", "provicy", "policy", "properties"
+            ])
             ->toArray();
     }
-    
+
     /**
      * @inheritDoc
      */

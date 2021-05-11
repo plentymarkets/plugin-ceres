@@ -29,10 +29,18 @@
                 "identifier"    : "{{ itemData.variation.id }}",
                 "description"   : "{{ itemData.texts.description | striptags | filterTabs }}",
                 "disambiguatingDescription" : "{{ itemData.texts.shortDescription }}",
+{% if manufacturer | length > 0 %}
                 "manufacturer"  : {
                     "@type"         : "Organization",
-                    "name"          : "{{ itemData.item.manufacturer.externalName }}"
+                    "name"          : "{{ manufacturer }}"
                 },
+{%  endif %}
+{% if brand | length  > 0 %}
+                "brand"         : {
+                    "@type"         : "Brand",
+                    "name"          : "{{ brand }}",
+                },
+{% endif %}
                 "offers": {
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
@@ -104,9 +112,9 @@
                 <div class="col">
                     <single-item
                         v-cloak
-                        :item-data="{{ item | json_encode }}"
-                        :attributes-data="{{ attributes | json_encode }}"
-                        :variations="{{ variations | json_encode }}"
+                        item-data="{{ item | json_data }}"
+                        attributes-data="{{ attributes | json_data }}"
+                        variations="{{ variations | json_data }}"
                         :after-key="{{ afterKey | json_encode }}"
                         :please-select-option-variation-id="{{ dynamicVariationId }}"
                         :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"

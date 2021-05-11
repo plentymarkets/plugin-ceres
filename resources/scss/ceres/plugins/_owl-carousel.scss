@@ -113,10 +113,10 @@
 }
 
 .owl-placeholder {
+    position: absolute;
     width: 101%;
     height: 101%;
     margin-left: -1px;
-    position: absolute;
     object-fit: contain;
 }
 
