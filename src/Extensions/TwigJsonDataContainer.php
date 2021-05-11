@@ -81,8 +81,8 @@ class TwigJsonDataContainer extends Twig_Extension
             $uid = uniqid();
         }
 
-        $this->dataStorage[$uid] = json_encode($data);
-        return $uid;
+        $this->dataStorage[$uid] = $data;
+        return "__APP_GLOBALS__['" . $uid . "']";
     }
 
     /**
@@ -92,19 +92,7 @@ class TwigJsonDataContainer extends Twig_Extension
      */
     public function getJsonData()
     {
-        $result = [];
-        foreach( $this->dataStorage as $uid => $data )
-        {
-            $script  = "<!-- SSR:global(jsonData.$uid) -->\n";
-            $script .= "<script type=\"application/json\" id=\"$uid\">\n";
-            $script .= $data . "\n";
-            $script .= "</script>\n";
-            $script .= "<!-- /SSR -->";
-
-            $result[] = $script;
-        }
-
-        return implode("\n", $result);
+        return '<!-- SSR:global(__APP_GLOBALS__) --><script type="application/javascript">' . json_encode($this->dataStorage) . '</script><!-- /SSR -->';
     }
 
     /**
