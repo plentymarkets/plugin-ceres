@@ -31,10 +31,12 @@
                     padding-inline-styles="{{ inlinePadding }}">
             </single-add-to-basket>
         </div>
+
         <template #loading>
-            <div class="w-100 invisible">
-                <button class="btn btn-block"></button>
-            </div>
+            <button class="btn btn-block btn-primary btn-appearance">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                {{ Twig.trans("Ceres::Template.singleItemAddToBasket") }}
+            </button>
         </template>
     </intersect>
 

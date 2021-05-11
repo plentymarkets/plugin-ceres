@@ -21,19 +21,6 @@
 </header>
 {% endif %}
 
-{% set scriptId = uid() %}
-<script id="{{ scriptId }}">
-    var vueApp = document.getElementById("vue-app");
-    var pageHeader = document.getElementById("page-header");
-
-    if ( !!vueApp && !!pageHeader )
-    {
-        vueApp.style.marginTop = pageHeader.getBoundingClientRect().height + 'px';
-    }
-
-    var scriptElement = document.getElementById("{{ scriptId }}");
-    scriptElement.parentElement.removeChild(scriptElement);
-</script>
 
 <div>
     {% if category.linklist == "Y" %}
@@ -48,6 +35,7 @@
     {% elseif services.template.isCurrentTemplate('tpl.home.category') %}
         {% set initialCategory = null %}
     {% endif %}
-
-    <mobile-navigation :initial-category="{{ initialCategory | json_encode }}" :include-language="{{ urls.includeLanguage | json_encode }}"></mobile-navigation>
+    <lazy-hydrate when-idle>
+        <mobile-navigation :initial-category="{{ initialCategory | json_encode }}" :include-language="{{ urls.includeLanguage | json_encode }}"></mobile-navigation>
+    </lazy-hydrate>
 </div>

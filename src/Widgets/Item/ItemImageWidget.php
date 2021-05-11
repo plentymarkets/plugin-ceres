@@ -70,6 +70,10 @@ class ItemImageWidget extends BaseWidget
                     ->toArray()
             );
 
+        $settingsFactory->createCheckbox('preloadImage')
+            ->withTooltip('Widget.preloadImageTooltip')
+            ->withName('Widget.preloadImageLabel');
+
         $settingsFactory->createCheckbox("showThumbs")
             ->withName("Widget.itemImageShowThumbsLabel")
             ->withTooltip("Widget.itemImageShowThumbsTooltip")

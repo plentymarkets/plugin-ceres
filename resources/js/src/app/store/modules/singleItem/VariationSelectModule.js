@@ -1,17 +1,14 @@
 const ApiService = require("../../../services/ApiService");
 
-const state = () =>
-{
-    return {
-        attributes: [],
-        isVariationSelected: true,
-        selectedAttributes: {},
-        selectedUnit: null,
-        units: [],
-        variations: [],
-        variationsLoading: false
-    };
-};
+const state = () => ({
+    attributes: [],
+    isVariationSelected: true,
+    selectedAttributes: {},
+    selectedUnit: null,
+    units: [],
+    variations: [],
+    variationsLoading: false
+});
 
 const mutations =
     {
@@ -128,7 +125,10 @@ const actions =
                     })
                     .done(response =>
                     {
-                        commit("addItemVariations", response.variations);
+                        if (response.variations && response.variations.length)
+                        {
+                            commit("addItemVariations", response.variations);
+                        }
                         if (response.afterKey)
                         {
                             dispatch("fetchVariations", {

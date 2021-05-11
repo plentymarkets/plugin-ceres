@@ -113,7 +113,10 @@ export default {
         backlink: String,
         shownFields: Object,
         requiredFields: Object,
-        defaultSalutation: { type: String, default: App.config.addresses.defaultSalutation }
+        defaultSalutation:  {
+            type: String,
+            default: App.config.addresses.defaultSalutation
+        }
     },
 
     data()

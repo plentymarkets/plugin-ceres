@@ -143,9 +143,12 @@ export default {
 
     created()
     {
-        this.addEventListener();
-
         this.$store.commit("setCurrentCategory", this.initialCategory);
+    },
+
+    mounted()
+    {
+        this.addEventListener();
     },
 
     methods:

@@ -11,7 +11,7 @@ import "custom-event-polyfill";
 
 import Vue from "vue";
 import Vuex from "vuex";
-import mount from "./mount";
+import { mount } from "./mount";
 
 Vue.prototype.$mount = mount;
 
@@ -126,6 +126,13 @@ import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent
 Vue.component("single-item-set-component", SingleItemSetComponent);
 
 
+import LazyHydrate from "vue-lazy-hydration";
+Vue.component("lazy-hydrate", LazyHydrate);
+import ClientOnly from "./app/components/common/ClientOnly.vue";
+Vue.component("client-only", ClientOnly);
+import BackgroundImg from "./app/components/common/BackgroundImg.vue";
+Vue.component("background-img", BackgroundImg);
+
 // =========================
 // DIRECTIVES
 // =========================
@@ -194,7 +201,17 @@ import "./app/mixins/template.mixin";
 import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
+import { createStore, initClientListeners, initClientStore, initServerStore } from "./app/store";
+import { initListener } from "./app/services/ApiService";
+
 window.ceresTranslate = TranslationService.translate;
 
 Vue.prototype.$translate = TranslationService.translate;
 Vue.prototype.$ceres = App;
+
+const store = createStore();
+
+initServerStore(store);
+initClientStore(store);
+initClientListeners(store);
+initListener();

@@ -4,17 +4,14 @@ import Vue from "vue";
 
 const ApiService = require("../../../services/ApiService");
 
-const state = () =>
-{
-    return {
-        variation: {},
-        variationCache: {},
-        variationMarkInvalidProperties: false,
-        variationOrderQuantity: 1,
-        initialVariationId: 0,
-        pleaseSelectVariationId: 0
-    };
-};
+const state = () => ({
+    variation: {},
+    variationCache: {},
+    variationMarkInvalidProperties: false,
+    variationOrderQuantity: 1,
+    initialVariationId: 0,
+    pleaseSelectVariationId: 0
+});
 
 const mutations =
     {

@@ -2,6 +2,7 @@ import Vue from "vue";
 import { isNullOrUndefined } from "./app/helper/utils";
 
 const originalMountFn = Vue.prototype.$mount;
+const originalComponentFn = Vue.component;
 
 /**
  * Custom mount function to inject component template from theme plugins before mounting vue components.
@@ -10,14 +11,14 @@ const originalMountFn = Vue.prototype.$mount;
  * @param {boolean} hydrating
  * @returns {Vue}
  */
-export default function(el, hydrating)
+function mount(el, hydrating)
 {
     let componentTemplate;
 
-    if (this.$props.templateOverride)
+    if (this.$props && this.$props.templateOverride)
     {
         // template element is references from property for current component instance
-        const rawTemplate = (document.querySelector(this.$props.templateOverride) || {}).innerHTML;
+        const rawTemplate = getTemplateOverride(this.$props.templateOverride);
 
         if (isNullOrUndefined(rawTemplate))
         {
@@ -28,7 +29,7 @@ export default function(el, hydrating)
             componentTemplate = replaceDelimiters(rawTemplate);
         }
     }
-    else
+    else if (this.$options && this.$options._componentTag)
     {
         // check for global template override
         componentTemplate = getComponentTemplate(this.$options._componentTag);
@@ -43,6 +44,71 @@ export default function(el, hydrating)
     }
 
     return originalMountFn.call(this, el, hydrating);
+}
+
+/**
+ * Custom component function the override template before registering the component.
+ * @param {string}          id          Id/selector of the component
+ * @param {object|function} definition  Component definition or async load callback.
+ * @return {*}
+ */
+function component(id, definition)
+{
+    const customTemplate = getComponentTemplate(id);
+
+    let newDefinition = definition;
+
+    if (customTemplate)
+    {
+        if (typeof definition === "object")
+        {
+            newDefinition = Object.assign(
+                definition,
+                Vue.compile(customTemplate)
+            );
+        }
+        else if (typeof definition === "function")
+        {
+            newDefinition = () =>
+            {
+                const asyncComponent = definition();
+
+                if (asyncComponent instanceof Promise)
+                {
+                    return asyncComponent.then((module) =>
+                    {
+                        delete module.default.render;
+                        module.default.template = replaceDelimiters(customTemplate);
+                        return module;
+                    });
+                }
+                else
+                {
+                    Object.assign(
+                        asyncComponent,
+                        Vue.compile(customTemplate)
+                    );
+                    return asyncComponent;
+                }
+            };
+        }
+    }
+
+    return originalComponentFn.call(this, id, newDefinition);
+}
+
+function getTemplateOverride(templateOverride)
+{
+    if (typeof document !== "undefined")
+    {
+        return (document.querySelector(templateOverride) || {}).innerHTML;
+    }
+    else if (typeof templates !== "undefined")
+    {
+        return templates[templateOverride];
+    }
+
+    return "";
 }
 
 /**
@@ -63,17 +129,24 @@ function getComponentTemplate(tagName)
 {
     if (isNullOrUndefined(componentTemplates))
     {
-        componentTemplates = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"))
-            .reduce(
-                (obj, el) =>
-                {
-                    return {
-                        ...obj,
-                        [el.dataset.component]: replaceDelimiters(el.innerHTML)
-                    };
-                },
-                {}
-            );
+        if (typeof document !== "undefined")
+        {
+            componentTemplates = [].slice.call(document.querySelectorAll("script[data-component], template[data-component]"))
+                .reduce(
+                    (obj, el) =>
+                    {
+                        return {
+                            ...obj,
+                            [el.dataset.component]: replaceDelimiters(el.innerHTML)
+                        };
+                    },
+                    {}
+                );
+        }
+        else if (typeof templates !== "undefined")
+        {
+            componentTemplates = templates;
+        }
     }
 
     return componentTemplates[tagName];
@@ -145,3 +218,5 @@ function readDelimiterContent(input, offset)
 
     return "";
 }
+
+export { mount, component };

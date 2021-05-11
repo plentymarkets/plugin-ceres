@@ -7,7 +7,7 @@
         <div class="input-unit w-auto input-group-prepend" v-if="isEU">
             <span class="input-group-text h-100 border-0" v-if="vatCodes.length === 1" id="basic-addon1">{{ vatCodes[0] }}</span>
             <select class="custom-select" v-if="vatCodes.length > 1" v-model="vatPrefix">
-                <option v-for="(vatCode, index) in vatCodes" :value="vatCode">{{ vatCode }}</option>
+                <option v-for="(vatCode, index) in vatCodes" :value="vatCode" :key="index">{{ vatCode }}</option>
             </select>
         </div>
         <div class="input-unit flex-fill w-auto" v-validate:text="isRequired">

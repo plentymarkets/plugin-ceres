@@ -91,6 +91,7 @@
                         </template>
                     {% endif %}
                 </last-seen-item-list>
+
                 <template #loading>
                     <div class="category-item-placeholder w-100 invisible">
                         <a href="#" class="small">
@@ -149,6 +150,7 @@
                                 </template>
                             {{ Twig.endfor() }}
                         </carousel>
+
                         <template #loading>
                             <div class="row flex-nowrap overflow-x-hidden">
                                 {{ Twig.for("item", "itemList.documents") }}

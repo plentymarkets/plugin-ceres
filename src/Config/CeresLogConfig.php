@@ -27,6 +27,16 @@ class CeresLogConfig extends PluginConfig
      * @var bool $checkSyntax Check for errors in markup before initialization.
      */
     public $checkSyntax;
+    
+    /**
+     * @var bool $performanceSsr Activate vue server side rendering.
+     */
+    public $performanceSsr;
+
+    /**
+     * @var bool $performanceEventPropagation Activate the vueX eventPropagation plugin.
+     */
+    public $performanceEventPropagation;
 
     /**
      * @inheritDoc
@@ -59,5 +69,7 @@ class CeresLogConfig extends PluginConfig
 
         $this->performanceLevel = $this->getTextValue( 'log.performance.level', 'live' );
         $this->checkSyntax = $this->getBooleanValue('log.check_syntax', true);
+        $this->performanceSsr = $this->getBooleanValue('log.performance.ssr', false);
+        $this->performanceEventPropagation = $this->getBooleanValue('log.performance.eventPropagation', true);
     }
 }

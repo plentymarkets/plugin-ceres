@@ -1,15 +1,14 @@
 import dayjs from "dayjs";
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        billingAddressId: null,
-        billingAddress: null,
-        billingAddressList: [],
-        deliveryAddressId: null,
-        deliveryAddress: null,
-        deliveryAddressList: []
-    };
+const state = () => ({
+    billingAddressId: null,
+    billingAddress: null,
+    billingAddressList: [],
+    deliveryAddressId: null,
+    deliveryAddress: null,
+    deliveryAddressList: []
+});
 
 const mutations =
     {

@@ -40,22 +40,12 @@
 
 <body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
 
-{{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
-
-<script>
-    if('ontouchstart' in document.documentElement)
-    {
-        document.body.classList.add("touch");
-    }
-    else
-    {
-        document.body.classList.add("no-touch");
-    }
-</script>
-
+<!-- SSR:app() -->
 <div id="vue-app" class="app">
-    <!-- messages -->
-    <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+    {{ context.renderState() }}
+    <lazy-hydrate when-idle>
+        <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+    </lazy-hydrate>
 
     {% include getPartial('header') %}
 
@@ -64,8 +54,6 @@
     </div>
 
     {% include getPartial('footer') %}
-
-    {% block PartialFooter %}{% endblock %}
 
     <!-- LOGIN MODAL -->
     <div id="login-modal-wrapper">
@@ -161,61 +149,66 @@
 
     <!-- SHIPPINGCOSTS MODAL -->
     {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
-    <div id="shippingscosts-modal-wrapper">
-        <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
-                        {% if shopBuilderShippingTemplate | trim is not empty %}
-                            {{ shopBuilderShippingTemplate | raw }}
-                        {% else %}
-                            {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
-                        {% endif %}
+        <div id="shippingscosts-modal-wrapper">
+            <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
+                            {% if shopBuilderShippingTemplate | trim is not empty %}
+                                {{ shopBuilderShippingTemplate | raw }}
+                            {% else %}
+                                {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endif %}
     <!-- ./SHIPPINGCOSTS MODAL -->
 </div>
+<!-- /SSR -->
 
-<script>
-    App = {
-        config: {{ ceresConfig | json_encode | raw }},
-        urls: {{ urls | json_encode | raw }},
-        activeCurrency: "{{ currencyData[currencyFormat] }}",
-        currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
-        isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
-        isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
-        isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-        isItemView: {% if isItem %}true{% else %}false{% endif %},
-        templateEvent: "{{ templateEvent }}",
-        templateType: "{{ urls.templateType }}",
-        language: "{{ lang }}",
-        defaultLanguage: "{{ defaultLanguage }}",
-        decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
-        urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
-        propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
-        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
-        bundleSetting: {{ webstoreConfig.dontSplitItemBundle | default(1) }},
-        initialPleaseSelect: {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
-        publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
-        isCheapestSorting: "{{ services.template.isCheapestSorting() }}",
-        useVariationOrderProperties: {{ webstoreConfig.useVariationOrderProperties | default(0) }},
-        initialData: {
-            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
-            shippingCountryId: {{ services.checkout.getShippingCountryId() }},
-            showNetPrices: {{ showNetPrices | json_encode }}
+
+<!-- SSR:global(App) -->
+<script id="app-data" type="application/json">
+    {
+        "config": {{ ceresConfig | json_encode | raw }},
+        "urls": {{ urls | json_encode | raw }},
+        "activeCurrency": "{{ currencyData[currencyFormat] }}",
+        "currencyPattern": {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
+        "isCategoryView": {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
+        "isCheckoutView": {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
+        "isSearch": {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
+        "isItemView": {% if isItem %}true{% else %}false{% endif %},
+        "templateEvent": "{{ templateEvent }}",
+        "templateType": "{{ urls.templateType }}",
+        "language": "{{ lang }}",
+        "defaultLanguage": "{{ defaultLanguage }}",
+        "decimalSeparator": "{{ config("IO.format.separator_decimal") }}",
+        "urlTrailingSlash": {{ urls.appendTrailingSlash | json_encode }},
+        "propertyFileUrl": "{{ services.propertyFile.getPropertyFileUrl() }}",
+        "isShopBuilder": {{ isShopBuilder | default(false) | json_encode }},
+        "bundleSetting": {{ webstoreConfig.dontSplitItemBundle | default(1) }},
+        "initialPleaseSelect": {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
+        "publicPath": "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
+        "isCheapestSorting": "{{ services.template.isCheapestSorting() }}",
+        "useVariationOrderProperties": {{ webstoreConfig.useVariationOrderProperties | default(0) }},
+        "initialData": {
+            "shippingCountries": {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
+            "shippingCountryId": {{ services.checkout.getShippingCountryId() }},
+            "showNetPrices": {{ showNetPrices | json_encode }}
         },
-        features: {}
-    };
+        "features": {}
+    }
 </script>
+<!-- /SSR -->
+<script>window.App = JSON.parse(document.getElementById("app-data").innerText);</script>
 
 {{ Loader.include_components() }}
 
@@ -225,19 +218,22 @@
 
 {{ get_json_data() }}
 
+{% set minSuffix = '.min' %}
 {% if ceresConfig.log.performanceLevel  == 'development' %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
-{% else %}
-    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
+    {% set minSuffix = '' %}
 {% endif %}
+
+<!-- SSR:entry({{ ssr_entry('Ceres', 'resources/js/dist/ceres-server' ~ minSuffix ~ '.js') }}) -->
+<!-- SSR:on() -->
+<script src="{{ plugin_path('Ceres') }}/js/dist/ceres-client{{ minSuffix }}.js?v={{ buildHash }}"></script>
+<!-- /SSR -->
+<!-- SSR:off() -->
+<script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}{{ minSuffix }}.js?v={{ buildHash }}"></script>
+<!-- /SSR -->
 
 {% for scriptTemplate in get_additional_scripts() %}
     {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
 {% endfor %}
-
-{% if isShopBuilder %}
-    {% include "Ceres::Widgets.ShopBuilderDataStore" %}
-{% endif %}
 
 {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
@@ -249,25 +245,27 @@
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
 {% endif %}
 
+<!-- SSR:on() -->
+<script>
+    window.createApp("#vue-app");
+</script>
+<!-- /SSR -->
+
+<!-- SSR:off() -->
 <script>
     window.__loadPluginChunk = function(source) {
         return source += "?v={{ buildHash }}";
     };
 
     window.vueEventHub = new Vue();
-
     if (App.config.log.checkSyntax)
     {
         var rootElement = document.getElementById("vue-app");
-
         rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
-
         window.vueApp = new Vue({
             store: window.ceresStore
         });
-
         vueApp.$mount( rootElement.cloneNode(true) );
-
         if (vueApp.$el.id === "vue-app")
         {
             document.body.replaceChild( vueApp.$el, rootElement );
@@ -281,7 +279,14 @@
             store: window.ceresStore
         });
     }
+</script>
+<!-- /SSR -->
 
+{% if isShopBuilder %}
+    {% include "Ceres::Widgets.ShopBuilderDataStore" %}
+{% endif %}
+
+<script>
     {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
     {% if request.get("show") == "forgotPassword" %}window.ceresStore.dispatch("loadComponent", "forgot-password-modal"){% endif %}
 </script>

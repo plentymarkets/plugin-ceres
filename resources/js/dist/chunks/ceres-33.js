@@ -9,31 +9,25 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.timers */ "./node_modules/core-js/modules/web.timers.js");
-/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
 
 
 
-
 //
 //
 //
@@ -59,8 +53,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -96,7 +100,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentItem: 0
+      currentItem: 0,
+      initialized: false
     };
   },
   computed: {
@@ -176,6 +181,9 @@ __webpack_require__.r(__webpack_exports__);
         onChanged: function onChanged(event) {
           var $thumb = $(_this3.$refs.thumbs);
           $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+        },
+        onInitialized: function onInitialized(event) {
+          _this3.initialized = true;
         }
       };
 
@@ -185,7 +193,7 @@ __webpack_require__.r(__webpack_exports__);
 
       $(this.$refs.single).owlCarousel(carouselSettings);
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(window.lightbox)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(window.lightbox)) {
         lightbox.option({
           wrapAround: true,
           albumLabel: this.$translate("Ceres::Template.singleItemLightboxImageShown")
@@ -229,7 +237,7 @@ __webpack_require__.r(__webpack_exports__);
       return new Promise(function (resolve, reject) {
         var script = document.querySelector("script#lightboxscript");
 
-        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_7__["isNullOrUndefined"])(script)) {
+        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(script)) {
           resolve();
         } else {
           var _script = document.createElement("script");
@@ -274,78 +282,104 @@ var render = function() {
     "div",
     { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
     [
-      _c(
-        "div",
-        {
-          ref: "single",
-          staticClass:
-            "single-carousel owl-carousel owl-theme owl-single-item mt-0"
-        },
-        _vm._l(_vm.singleImages, function(image) {
-          return _c("div", { staticClass: "prop-1-1" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: image.url,
-                  "data-lightbox": "single-item-image" + _vm._uid
-                }
-              },
-              [
-                _c("img", {
-                  staticClass: "owl-lazy",
+      [
+        _c(
+          "div",
+          {
+            ref: "single",
+            staticClass:
+              "single-carousel owl-carousel owl-theme owl-single-item mt-0"
+          },
+          _vm._l(_vm.singleImages, function(image) {
+            return _c("div", { staticClass: "prop-1-1" }, [
+              _c(
+                "a",
+                {
                   attrs: {
-                    "data-src": image.url,
-                    alt: _vm.getAltText(image),
-                    title: _vm.getImageName(image)
+                    href: image.url,
+                    "data-lightbox": "single-item-image" + _vm._uid
                   }
-                })
-              ]
+                },
+                [
+                  _c("img", {
+                    staticClass: "owl-lazy",
+                    attrs: {
+                      "data-src": image.url,
+                      alt: _vm.getAltText(image),
+                      title: _vm.getImageName(image)
+                    }
+                  })
+                ]
+              )
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _vm.showThumbs
+          ? _c(
+              "div",
+              {
+                ref: "thumbs",
+                staticClass:
+                  "owl-thumbs owl-carousel owl-theme owl-single-item",
+                attrs: { id: "thumb-carousel" }
+              },
+              _vm._l(_vm.carouselImages, function(imagePreview, index) {
+                return _c("div", { staticClass: "prop-1-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "image-container",
+                      on: {
+                        click: function($event) {
+                          return _vm.goTo(index)
+                        }
+                      }
+                    },
+                    [
+                      _c("lazy-img", {
+                        class: { active: _vm.currentItem === index },
+                        attrs: {
+                          "picture-class": "owl-thumb border-appearance",
+                          "image-url": imagePreview.url,
+                          alt: _vm.getAltText(imagePreview),
+                          title: _vm.getImageName(imagePreview)
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              }),
+              0
             )
-          ])
-        }),
-        0
-      ),
+          : _vm._e()
+      ],
       _vm._v(" "),
-      _vm.showThumbs
+      !_vm.initialized
         ? _c(
             "div",
             {
-              ref: "thumbs",
-              staticClass: "owl-thumbs owl-carousel owl-theme owl-single-item",
-              attrs: { id: "thumb-carousel" }
+              staticClass:
+                "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
             },
-            _vm._l(_vm.carouselImages, function(imagePreview, index) {
-              return _c("div", { staticClass: "prop-1-1" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "image-container",
-                    on: {
-                      click: function($event) {
-                        return _vm.goTo(index)
-                      }
-                    }
-                  },
-                  [
-                    _c("lazy-img", {
-                      class: { active: _vm.currentItem === index },
-                      attrs: {
-                        "picture-class": "owl-thumb border-appearance",
-                        "image-url": imagePreview.url,
-                        alt: _vm.getAltText(imagePreview),
-                        title: _vm.getImageName(imagePreview)
-                      }
-                    })
-                  ],
-                  1
-                )
+            [
+              _c("div", { staticClass: "prop-1-1" }, [
+                _c("img", {
+                  staticClass: "owl-placeholder",
+                  attrs: {
+                    src: _vm.singleImages[0].url,
+                    alt: _vm.getAltText(_vm.singleImages[0].url),
+                    title: _vm.getImageName(_vm.singleImages[0].url)
+                  }
+                })
               ])
-            }),
-            0
+            ]
           )
         : _vm._e()
-    ]
+    ],
+    2
   )
 }
 var staticRenderFns = []

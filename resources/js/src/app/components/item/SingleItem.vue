@@ -70,19 +70,19 @@
                                 </div>
                                 <div v-else class="col-12 col-sm-7 col-md-12 col-lg-8 my-3">
                                     <add-to-basket
-                                            :variation-id="currentVariation.variation.id"
-                                            :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"
-                                            :has-children="!!currentVariation.filter && currentVariation.filter.hasActiveChildren"
-                                            :interval-quantity="currentVariation.variation.intervalOrderQuantity || 1"
-                                            :minimum-quantity="currentVariation.variation.minimumOrderQuantity"
-                                            :maximum-quantity="!!currentVariation.variation.maximumOrderQuantity && currentVariation.variation.maximumOrderQuantity > 0 ? currentVariation.variation.maximumOrderQuantity : null"
-                                            :order-properties="currentVariation.properties.filter(function(prop) { return prop.property.isOderProperty })"
-                                            :use-large-scale="false"
-                                            :show-quantity="true"
-                                            :item-url="currentVariation | itemURL"
-                                            :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
-                                            :has-price="currentVariation | hasItemDefaultPrice"
-                                        >
+                                        :variation-id="currentVariation.variation.id"
+                                        :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"
+                                        :has-children="!!currentVariation.filter && currentVariation.filter.hasActiveChildren"
+                                        :interval-quantity="currentVariation.variation.intervalOrderQuantity || 1"
+                                        :minimum-quantity="currentVariation.variation.minimumOrderQuantity"
+                                        :maximum-quantity="!!currentVariation.variation.maximumOrderQuantity && currentVariation.variation.maximumOrderQuantity > 0 ? currentVariation.variation.maximumOrderQuantity : null"
+                                        :order-properties="currentVariation.properties.filter(function(prop) { return prop.property.isOderProperty })"
+                                        :use-large-scale="false"
+                                        :show-quantity="true"
+                                        :item-url="currentVariation | itemURL"
+                                        :is-variation-selected="isVariationSelected && currentVariation.filter.isSalable"
+                                        :has-price="currentVariation | hasItemDefaultPrice"
+                                    >
                                     </add-to-basket>
                                 </div>
 
@@ -263,18 +263,18 @@ export default {
         afterKey: Object
     },
 
+    jsonDataFields: [
+        "itemData",
+        "attributesData",
+        "variations"
+    ],
+
     provide()
     {
         return {
             itemId: this.$props.itemId
         }
     },
-
-    jsonDataFields: [
-        "itemData",
-        "attributesData",
-        "variations"
-    ],
 
     computed:
     {
@@ -334,6 +334,10 @@ export default {
 
         units() {
             return get(this.$store.state, `items[${this.itemId}].variationSelect.units`);
+        },
+
+        isItemSet() {
+            return this.$store.state.items.isItemSet;
         }
     },
 
@@ -341,16 +345,27 @@ export default {
     {
         this.$store.dispatch("initVariation", this.itemData);
         this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
-        this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+    },
 
-        this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
-            itemId:             this.itemId,
-            attributes:         this.attributesData,
-            variations:         this.variations,
-            initialVariationId: this.currentVariation.variation.id,
-            isPleaseSelectOption: this.initPleaseSelectOption,
-            afterKey:           this.afterKey
-        });
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
+            this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
+                itemId:             this.itemId,
+                attributes:         this.attributesData,
+                variations:         this.variations,
+                initialVariationId: this.currentVariation.variation.id,
+                isPleaseSelectOption: this.initPleaseSelectOption,
+                afterKey:           this.afterKey
+            });
+
+            if (this.isItemSet)
+            {
+                this.$store.dispatch("initSetComponents", this.itemData);   
+            }
+        })
     },
 
     methods:

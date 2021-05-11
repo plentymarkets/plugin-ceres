@@ -22,11 +22,12 @@
         {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
     <div class="list-controls widget-alignment">
-        <item-filter-tag-list
-                template="#vue-item-filter-tag-list"
-                :margin-classes       ="{{ spacingPadding | json_encode }}"
-                :margin-inline-styles ="{{ inlinePadding | json_encode }}">
-        </item-filter-tag-list>
+        <lazy-hydrate when-idle>
+            <item-filter-tag-list
+                    template="#vue-item-filter-tag-list"
+                    :margin-classes       ="{{ spacingPadding | json_encode }}"
+                    :margin-inline-styles ="{{ inlinePadding | json_encode }}">
+            </item-filter-tag-list>
+        </lazy-hydrate>
     </div>
-
 </div>

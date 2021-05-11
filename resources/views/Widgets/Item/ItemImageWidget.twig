@@ -7,9 +7,18 @@
 {% set showThumbs = widget.settings.showThumbs.mobile %}
 {% set showDots = widget.settings.showDots.mobile %}
 {% set animationStyle = widget.settings.animationStyle.mobile %}
+{% set preloadImage = widget.settings.preloadImage.mobile %}
 
 {{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}
 {{ Twig.set("ImageCarouselOverride", Twig.call("LayoutContainer.show", ["Ceres::SingleItem.ImageCarousel"])) }}
+
+{% if preloadImage %}
+    {{ Twig.set("_imageSize", imageSize | json_encode) }}
+    {{ Twig.set("itemData", "item.documents[0].data") }}
+    {{ Twig.set("itemImage", "itemData.images | itemImages(_imageSize) | orderByKey('position') | first") }}
+
+    {{ Twig.print("add_asset(itemImage.url,'image')") }}
+{% endif %}
 
 <div class="widget widget-item-image widget-{{ appearance | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}">

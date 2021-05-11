@@ -9,81 +9,52 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.find */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.from */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
-/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.array.sort */ "./node_modules/core-js/modules/es.array.sort.js");
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.entries */ "./node_modules/core-js/modules/es.object.entries.js");
-/* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.object.values */ "./node_modules/core-js/modules/es.object.values.js");
-/* harmony import */ var core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_values__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/es.set */ "./node_modules/core-js/modules/es.set.js");
-/* harmony import */ var core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_set__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../helper/dom */ "./resources/js/src/app/helper/dom.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_values_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.values.js */ "./node_modules/core-js/modules/es.object.values.js");
+/* harmony import */ var core_js_modules_es_object_values_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_values_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.set.js */ "./node_modules/core-js/modules/es.set.js");
+/* harmony import */ var core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.array.sort.js */ "./node_modules/core-js/modules/es.array.sort.js");
+/* harmony import */ var core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_object_entries_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.entries.js */ "./node_modules/core-js/modules/es.object.entries.js");
+/* harmony import */ var core_js_modules_es_object_entries_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.string.split.js */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../helper/dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -94,12 +65,38 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//
+//
+//
 //
 //
 //
@@ -287,7 +284,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return !this.forceContent && !!this.currentSelection || this.forceContent;
     },
     hasSelection: function hasSelection() {
-      return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNullOrUndefined"])(this.selectedAttributes) && !Object.values(this.selectedAttributes).some(function (value) {
+      return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNullOrUndefined"])(this.selectedAttributes) && !Object.values(this.selectedAttributes).some(function (value) {
         return value < 0;
       });
     },
@@ -436,13 +433,13 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      * @param {[number, null]} unitId
      */
     getQualifiedVariations: function getQualifiedVariations(attributeId, attributeValueId, unitId) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(attributeValueId)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isDefined"])(attributeValueId)) {
         return this.variations.filter(function (variation) {
-          return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(variation.attributes.find(function (attribute) {
+          return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isDefined"])(variation.attributes.find(function (attribute) {
             return attribute.attributeId === attributeId && attribute.attributeValueId === attributeValueId;
           }));
         });
-      } else if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(unitId)) {
+      } else if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isDefined"])(unitId)) {
         return this.variations.filter(function (variation) {
           return variation.unitCombinationId === unitId;
         });
@@ -469,7 +466,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           var variation = _step3.value;
           var changes = 0;
 
-          if (variation.unitCombinationId !== this.selectedUnit && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(this.selectedUnit)) {
+          if (variation.unitCombinationId !== this.selectedUnit && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNull"])(this.selectedUnit)) {
             // when the unit dropdown isn't visible, it should have a lower weight for reset investigations
             var unitWeight = this.possibleUnitCombinationIds.length > 1 && this.isContentVisible ? 0.9 : 0.1;
             changes += unitWeight;
@@ -525,7 +522,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           return attribute.attributeId === _selectedAttributeId;
         });
 
-        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(_this.selectedAttributes[_selectedAttributeId])) {
+        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNull"])(_this.selectedAttributes[_selectedAttributeId])) {
           if (variationAttribute && variationAttribute.attributeValueId !== _this.selectedAttributes[_selectedAttributeId] || !variationAttribute) {
             var attributeToReset = _this.attributes.find(function (attr) {
               return attr.attributeId === _selectedAttributeId;
@@ -578,7 +575,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
 
       if (invalidSelection.newUnit) {
-        if (this.lastContentCount > 1 && this.possibleUnitCombinationIds.length > 1 && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(this.selectedUnit)) {
+        if (this.lastContentCount > 1 && this.possibleUnitCombinationIds.length > 1 && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNull"])(this.selectedUnit)) {
           messages.push(this.$translate("Ceres::Template.singleItemNotAvailable", {
             name: this.$translate("Ceres::Template.singleItemContent")
           }));
@@ -608,13 +605,13 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       ignoreUnit = !!ignoreUnit;
       var key = JSON.stringify(attributes) + "_" + unitId + "_" + strict + "_" + ignoreUnit;
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(this.filteredVariationsCache[key])) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isDefined"])(this.filteredVariationsCache[key])) {
         return this.filteredVariationsCache[key];
       }
 
       var uniqueValues = _toConsumableArray(new Set(Object.values(attributes)));
 
-      var isEmptyOptionSelected = uniqueValues.length === 1 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(uniqueValues[0]);
+      var isEmptyOptionSelected = uniqueValues.length === 1 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNull"])(uniqueValues[0]);
       var filteredVariations = this.variations.filter(function (variation) {
         // the selected unit is not matching
         if (!ignoreUnit && variation.unitCombinationId !== unitId) {
@@ -632,7 +629,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
             return variationAttribute.attributeId === parseInt(attributeId);
           }); // an attribute is not matching with selection
 
-          if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && (strict || !strict && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isNull"])(attributes[attributeId]) && attributes[attributeId] !== -1)) {
+          if (variationAttribute && variationAttribute.attributeValueId !== attributes[attributeId] && (strict || !strict && !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isNull"])(attributes[attributeId]) && attributes[attributeId] !== -1)) {
             return {
               v: false
             };
@@ -702,11 +699,11 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     setVariation: function setVariation(variationId) {
       var _this3 = this;
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(variationId) && this.currentSelection) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isDefined"])(variationId) && this.currentSelection) {
         variationId = this.currentSelection.variationId;
       }
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_25__["isDefined"])(variationId)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_23__["isDefined"])(variationId)) {
         this.$store.dispatch("".concat(this.itemId, "/loadVariation"), variationId).then(function (variation) {
           document.dispatchEvent(new CustomEvent("onVariationChanged", {
             detail: {
@@ -720,7 +717,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     },
     isTextCut: function isTextCut(content) {
       if (this.$refs.attributesContaner) {
-        return Object(_helper_dom__WEBPACK_IMPORTED_MODULE_24__["textWidth"])(content, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.attributesContaner[0].clientWidth;
+        return Object(_helper_dom__WEBPACK_IMPORTED_MODULE_22__["textWidth"])(content, "Custom-Font, Helvetica, Arial, sans-serif") > this.$refs.attributesContaner[0].clientWidth;
       }
 
       return false;
@@ -823,10 +820,10 @@ var createMethod = function (TO_ENTRIES) {
 
 module.exports = {
   // `Object.entries` method
-  // https://tc39.github.io/ecma262/#sec-object.entries
+  // https://tc39.es/ecma262/#sec-object.entries
   entries: createMethod(true),
   // `Object.values` method
-  // https://tc39.github.io/ecma262/#sec-object.values
+  // https://tc39.es/ecma262/#sec-object.values
   values: createMethod(false)
 };
 
@@ -844,7 +841,7 @@ var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/i
 var $entries = __webpack_require__(/*! ../internals/object-to-array */ "./node_modules/core-js/internals/object-to-array.js").entries;
 
 // `Object.entries` method
-// https://tc39.github.io/ecma262/#sec-object.entries
+// https://tc39.es/ecma262/#sec-object.entries
 $({ target: 'Object', stat: true }, {
   entries: function entries(O) {
     return $entries(O);
@@ -865,7 +862,7 @@ var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/i
 var $values = __webpack_require__(/*! ../internals/object-to-array */ "./node_modules/core-js/internals/object-to-array.js").values;
 
 // `Object.values` method
-// https://tc39.github.io/ecma262/#sec-object.values
+// https://tc39.es/ecma262/#sec-object.values
 $({ target: 'Object', stat: true }, {
   values: function values(O) {
     return $values(O);
@@ -890,223 +887,47 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.attributes.length ||
-    (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
-      ? _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _vm._l(_vm.attributes, function(attribute) {
-              return _c("div", { staticClass: "col-12 variation-select" }, [
-                attribute.type === "dropdown"
-                  ? _c(
-                      "div",
-                      {
-                        ref: "attributesContaner",
-                        refInFor: true,
-                        staticClass: "input-unit"
-                      },
-                      [
-                        _c(
-                          "select",
-                          {
-                            staticClass: "custom-select",
-                            attrs: {
-                              id: "custom-select_" + attribute.name,
-                              "data-testing": "variation-select-dropdown"
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.selectAttribute(
-                                  attribute.attributeId,
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _vm.addPleaseSelectOption || !_vm.hasSelection
-                              ? _c("option", { domProps: { value: -1 } }, [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemPleaseSelect"
-                                      )
-                                    )
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.hasEmptyOption ||
-                            _vm.selectedAttributes[attribute.attributeId] ===
-                              null
-                              ? _c(
-                                  "option",
-                                  {
-                                    domProps: {
-                                      value: null,
-                                      selected:
-                                        _vm.selectedAttributes[
-                                          attribute.attributeId
-                                        ] === null
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.$translate(
-                                          "Ceres::Template.singleItemNoSelection"
-                                        )
-                                      )
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm._l(attribute.values, function(value) {
-                              return _c(
-                                "option",
-                                {
-                                  domProps: {
-                                    value: value.attributeValueId,
-                                    selected:
-                                      value.attributeValueId ===
-                                      _vm.selectedAttributes[
-                                        attribute.attributeId
-                                      ]
-                                  }
-                                },
-                                [
-                                  _vm.isAttributeSelectionValid(
-                                    attribute.attributeId,
-                                    value.attributeValueId,
-                                    true
-                                  )
-                                    ? [
-                                        _vm._v(
-                                          "\n                            " +
-                                            _vm._s(value.name) +
-                                            "\n                        "
-                                        )
-                                      ]
-                                    : _vm.isAttributeSelectionValid(
-                                        attribute.attributeId,
-                                        value.attributeValueId,
-                                        false
-                                      )
-                                    ? [
-                                        _vm._v(
-                                          "\n                            " +
-                                            _vm._s(
-                                              _vm.$translate(
-                                                "Ceres::Template.singleItemNotSalableAttribute",
-                                                { name: value.name }
-                                              )
-                                            ) +
-                                            "\n                        "
-                                        )
-                                      ]
-                                    : [
-                                        _vm._v(
-                                          "\n                            " +
-                                            _vm._s(
-                                              _vm.$translate(
-                                                "Ceres::Template.singleItemInvalidAttribute",
-                                                { name: value.name }
-                                              )
-                                            ) +
-                                            "\n                        "
-                                        )
-                                      ]
-                                ],
-                                2
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "tooltip",
-                                rawName: "v-tooltip",
-                                value: _vm.isTextCut(attribute.name),
-                                expression: "isTextCut(attribute.name)"
-                              }
-                            ],
-                            attrs: {
-                              for: "custom-select_" + attribute.name,
-                              "data-toggle": "tooltip",
-                              "data-placement": "top",
-                              title: attribute.name,
-                              "data-testing": "variation-select-dropdown-label"
-                            }
-                          },
-                          [_vm._v(_vm._s(attribute.name))]
-                        )
-                      ]
-                    )
-                  : attribute.type === "box" || attribute.type === "image"
-                  ? _c("div", [
-                      _c(
-                        "span",
-                        {
-                          staticClass: "text-muted",
-                          attrs: { "data-testing": "attribute-name" }
-                        },
-                        [_vm._v(_vm._s(attribute.name) + ":")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b",
-                        { attrs: { "data-testing": "attribute-value" } },
-                        [
-                          _vm._v(
-                            _vm._s(_vm.getSelectedAttributeValueName(attribute))
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _vm.attributes.length ||
+      (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
+        ? [
+            _vm._l(_vm.attributes, function(attribute, index) {
+              return _c(
+                "div",
+                { key: index, staticClass: "col-12 variation-select" },
+                [
+                  attribute.type === "dropdown"
+                    ? _c(
                         "div",
                         {
-                          staticClass: "v-s-boxes py-3",
-                          class: { images: attribute.type === "image" }
+                          ref: "attributesContaner",
+                          refInFor: true,
+                          staticClass: "input-unit"
                         },
                         [
-                          _vm.addPleaseSelectOption
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass: "v-s-box bg-white empty-option",
-                                  class: {
-                                    active:
-                                      _vm.selectedAttributes[
-                                        attribute.attributeId
-                                      ] === -1,
-                                    invalid: !_vm.isAttributeSelectionValid(
-                                      attribute.attributeId,
-                                      -1
-                                    )
-                                  },
-                                  attrs: {
-                                    "data-testing": "variation-select-box"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.selectAttribute(
-                                        attribute.attributeId,
-                                        -1
-                                      )
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("span", { staticClass: "mx-3" }, [
+                          _c(
+                            "select",
+                            {
+                              staticClass: "custom-select",
+                              attrs: {
+                                id: "custom-select_" + attribute.name,
+                                "data-testing": "variation-select-dropdown"
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.selectAttribute(
+                                    attribute.attributeId,
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _vm.addPleaseSelectOption || !_vm.hasSelection
+                                ? _c("option", { domProps: { value: -1 } }, [
                                     _vm._v(
                                       _vm._s(
                                         _vm.$translate(
@@ -1115,117 +936,304 @@ var render = function() {
                                       )
                                     )
                                   ])
-                                ]
-                              )
-                            : _vm._e(),
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.hasEmptyOption ||
+                              _vm.selectedAttributes[attribute.attributeId] ===
+                                null
+                                ? _c(
+                                    "option",
+                                    {
+                                      domProps: {
+                                        value: null,
+                                        selected:
+                                          _vm.selectedAttributes[
+                                            attribute.attributeId
+                                          ] === null
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.singleItemNoSelection"
+                                          )
+                                        )
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm._l(attribute.values, function(value) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: value.attributeValueId,
+                                    domProps: {
+                                      value: value.attributeValueId,
+                                      selected:
+                                        value.attributeValueId ===
+                                        _vm.selectedAttributes[
+                                          attribute.attributeId
+                                        ]
+                                    }
+                                  },
+                                  [
+                                    _vm.isAttributeSelectionValid(
+                                      attribute.attributeId,
+                                      value.attributeValueId,
+                                      true
+                                    )
+                                      ? [
+                                          _vm._v(
+                                            "\n                            " +
+                                              _vm._s(value.name) +
+                                              "\n                        "
+                                          )
+                                        ]
+                                      : _vm.isAttributeSelectionValid(
+                                          attribute.attributeId,
+                                          value.attributeValueId,
+                                          false
+                                        )
+                                      ? [
+                                          _vm._v(
+                                            "\n                            " +
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemNotSalableAttribute",
+                                                  { name: value.name }
+                                                )
+                                              ) +
+                                              "\n                        "
+                                          )
+                                        ]
+                                      : [
+                                          _vm._v(
+                                            "\n                            " +
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.singleItemInvalidAttribute",
+                                                  { name: value.name }
+                                                )
+                                              ) +
+                                              "\n                        "
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              })
+                            ],
+                            2
+                          ),
                           _vm._v(" "),
-                          _vm.hasEmptyOption
-                            ? _c(
+                          _c(
+                            "label",
+                            {
+                              directives: [
+                                {
+                                  name: "tooltip",
+                                  rawName: "v-tooltip",
+                                  value: _vm.isTextCut(attribute.name),
+                                  expression: "isTextCut(attribute.name)"
+                                }
+                              ],
+                              attrs: {
+                                for: "custom-select_" + attribute.name,
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: attribute.name,
+                                "data-testing":
+                                  "variation-select-dropdown-label"
+                              }
+                            },
+                            [_vm._v(_vm._s(attribute.name))]
+                          )
+                        ]
+                      )
+                    : attribute.type === "box" || attribute.type === "image"
+                    ? _c("div", [
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-muted",
+                            attrs: { "data-testing": "attribute-name" }
+                          },
+                          [_vm._v(_vm._s(attribute.name) + ":")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b",
+                          { attrs: { "data-testing": "attribute-value" } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.getSelectedAttributeValueName(attribute)
+                              )
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "v-s-boxes py-3",
+                            class: { images: attribute.type === "image" }
+                          },
+                          [
+                            _vm.addPleaseSelectOption
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "v-s-box bg-white empty-option",
+                                    class: {
+                                      active:
+                                        _vm.selectedAttributes[
+                                          attribute.attributeId
+                                        ] === -1,
+                                      invalid: !_vm.isAttributeSelectionValid(
+                                        attribute.attributeId,
+                                        -1
+                                      )
+                                    },
+                                    attrs: {
+                                      "data-testing": "variation-select-box"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.selectAttribute(
+                                          attribute.attributeId,
+                                          -1
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("span", { staticClass: "mx-3" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.singleItemPleaseSelect"
+                                          )
+                                        )
+                                      )
+                                    ])
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.hasEmptyOption
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "v-s-box bg-white empty-option",
+                                    class: {
+                                      active:
+                                        _vm.selectedAttributes[
+                                          attribute.attributeId
+                                        ] === null,
+                                      invalid: !_vm.isAttributeSelectionValid(
+                                        attribute.attributeId,
+                                        null,
+                                        true
+                                      )
+                                    },
+                                    attrs: {
+                                      "data-testing": "variation-select-box"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.selectAttribute(
+                                          attribute.attributeId,
+                                          null
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("span", { staticClass: "mx-3" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.singleItemNoSelection"
+                                          )
+                                        )
+                                      )
+                                    ])
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm._l(attribute.values, function(value) {
+                              return _c(
                                 "div",
                                 {
-                                  staticClass: "v-s-box bg-white empty-option",
+                                  directives: [
+                                    {
+                                      name: "tooltip",
+                                      rawName: "v-tooltip",
+                                      value: true,
+                                      expression: "true"
+                                    }
+                                  ],
+                                  key: value.attributeValueId,
+                                  staticClass: "v-s-box bg-white",
                                   class: {
                                     active:
+                                      value.attributeValueId ===
                                       _vm.selectedAttributes[
                                         attribute.attributeId
-                                      ] === null,
+                                      ],
                                     invalid: !_vm.isAttributeSelectionValid(
                                       attribute.attributeId,
-                                      null,
+                                      value.attributeValueId,
                                       true
                                     )
                                   },
                                   attrs: {
-                                    "data-testing": "variation-select-box"
+                                    "data-testing": "variation-select-box",
+                                    "data-html": "true",
+                                    "data-toggle": "tooltip",
+                                    "data-placement": "top",
+                                    "data-original-title": _vm.getTooltip(
+                                      attribute,
+                                      value
+                                    )
                                   },
                                   on: {
                                     click: function($event) {
                                       return _vm.selectAttribute(
                                         attribute.attributeId,
-                                        null
+                                        value.attributeValueId
                                       )
                                     }
                                   }
                                 },
                                 [
-                                  _c("span", { staticClass: "mx-3" }, [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.$translate(
-                                          "Ceres::Template.singleItemNoSelection"
-                                        )
-                                      )
-                                    )
-                                  ])
+                                  attribute.type === "box"
+                                    ? _c("span", { staticClass: "mx-3" }, [
+                                        _vm._v(_vm._s(value.name))
+                                      ])
+                                    : _c("img", {
+                                        staticClass: "p-1",
+                                        attrs: {
+                                          src: value.imageUrl,
+                                          alt: value.name
+                                        }
+                                      })
                                 ]
                               )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm._l(attribute.values, function(value) {
-                            return _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "tooltip",
-                                    rawName: "v-tooltip",
-                                    value: true,
-                                    expression: "true"
-                                  }
-                                ],
-                                staticClass: "v-s-box bg-white",
-                                class: {
-                                  active:
-                                    value.attributeValueId ===
-                                    _vm.selectedAttributes[
-                                      attribute.attributeId
-                                    ],
-                                  invalid: !_vm.isAttributeSelectionValid(
-                                    attribute.attributeId,
-                                    value.attributeValueId,
-                                    true
-                                  )
-                                },
-                                attrs: {
-                                  "data-testing": "variation-select-box",
-                                  "data-html": "true",
-                                  "data-toggle": "tooltip",
-                                  "data-placement": "top",
-                                  "data-original-title": _vm.getTooltip(
-                                    attribute,
-                                    value
-                                  )
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.selectAttribute(
-                                      attribute.attributeId,
-                                      value.attributeValueId
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                attribute.type === "box"
-                                  ? _c("span", { staticClass: "mx-3" }, [
-                                      _vm._v(_vm._s(value.name))
-                                    ])
-                                  : _c("img", {
-                                      staticClass: "p-1",
-                                      attrs: {
-                                        src: value.imageUrl,
-                                        alt: value.name
-                                      }
-                                    })
-                              ]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  : _vm._e()
-              ])
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              )
             }),
             _vm._v(" "),
             _vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible
@@ -1251,6 +1259,7 @@ var render = function() {
                         return _c(
                           "option",
                           {
+                            key: unitCombinationId,
                             domProps: {
                               value: unitCombinationId,
                               selected:
@@ -1311,11 +1320,11 @@ var render = function() {
                   ])
                 ])
               : _vm._e()
-          ],
-          2
-        )
-      : _c("div", [_vm._t("default")], 2)
-  ])
+          ]
+        : [_vm._t("default")]
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
