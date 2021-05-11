@@ -25,7 +25,39 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.29 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien.
+- Im Zuge des Releases von Ceres 5.0.29 gab es Änderungen an den im Folgenden aufgelisteten Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkungen führen direkt zu den umgesetzten Änderungen in den entsprechenden Dateien. Diese Version enthält mehr Template-Anpassungen als sonst, um plentyShops auf das Google Core Web Vitals Update vorzubereiten. Wir haben die Template-Änderungen nach Wichtigkeit sortiert im Folgenden aufgelistet.
+
+#### Notwendige Template-Anpassungen
+
+- [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files?diff=split&w=1#diff-6103acda40fc331c6f5ba92faab9976e92848d8fde0e9af7fe34abd593885128)
+- [resources/views/PageDesign/Partials/Header/Breadcrumb.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-1419cc783c69f7d9ffa8a59dfa07c63a77d349711edb01dd573f8119d0a5946d)
+- [resources/js/src/app/components/customer/login/Login.vue](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-2f9c77c26769ad83744b9004d9455b7db47a08d018f960672d2feaa51e1ce476)
+
+#### Wichtige Template-Anpassungen für Performance
+
+- [resources/js/src/app/components/containers/LastSeenItemList.vue](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-19af7c40623f40d850c291ad2b4077e5a6bb4357fd778719bf996871d8739a17)
+- [resources/js/src/app/components/item/ItemImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-78484b68defc6a9839cc69c5f3f9fc8bef2d0641a6db41ab6e68f58665f48912)
+- [resources/js/src/app/components/item/VariationSelect.vue](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-3bf7e50898b2d79d717300fe7c276487aea49cb917f014bf3f8ea27c6b392149)
+- [resources/js/src/app/components/itemList/CategoryImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/pull/2712/files?diff=split&w=1#diff-449e63fc921701c277c047250ed882be5e7039c498efa513e1469dffd8ff818f)
+- [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Widgets/Item/AttributeWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-3e6df11a97d5ae968dcaa110652d41aed6e5098612223d0f18030946b7a58bb9)
+- [resources/views/Widgets/Item/ItemImageWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-e9d44ad6d7ca6325b265745487a158c45e697741e7ec84b86b338ecbfd511e98)
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+
+#### Weitere Template-Anpassungen für Performance
+
+- [resources/views/Widgets/Header/NavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-d9d8d5418b1e74986dcb27dfa315d297f65a5f90efed0734e8ab495651cab594)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+- [resources/views/Widgets/Item/AddToBasketWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files#diff-130e6f2327939a6da964755351a1ae84298251d3c24de27e53214e91775dca4e)
+- [resources/views/Category/Item/CategoryItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files?diff=split&w=1#diff-6e3fe08ffe8086b5176c1c0451cb0c0034b99195843630994e5e79347f8d1158)
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files?diff=split&w=1#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/PageDesign/Partials/Header/Header.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files?diff=split&w=1#diff-f2a11c8bc92192c490363ceeb2b7e9a02819568c77971a10e43eedc93270014f)
+- [resources/views/Widgets/Category/Filter/SelectedFilterWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files?diff=split&w=1#diff-bb4d6cc6416dadd32734558f042315abb70692052e3f4eeda9018bc1b293b375)
+- [resources/views/Widgets/Category/ItemGridWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2712/files?diff=split&w=1#diff-1419cc783c69f7d9ffa8a59dfa07c63a77d349711edb01dd573f8119d0a5946d)
+
+#### Sonstige Änderungen
+
 - [resources/js/src/app/components/customer/AddressInputGroup.vue](https://github.com/plentymarkets/plugin-ceres/pull/2782/files#diff-5445acdb5dffc6cd08b75fb1bf432147c3f133b8de32af76563a4c97a544474a)
 - [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/2782/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
 - [resources/views/Widgets/Customer/AddressWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2782/files#diff-47efd06234499d9fa52810e58ce5e6d9983e522de814c92e8ff66f4b010f0db5)
