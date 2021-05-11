@@ -6,23 +6,17 @@
 
 Wie du Ceres einrichtest und individualisierst, erfährst du auf [plentyKnowledge](https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten).
 
-<div class="alert alert-warning" role="alert">
-Bei der Einrichtung von Ceres ist es notwendig, dass die zugewiesene Positionsnummer von <b>Ceres</b> kleiner ist als die Positionsnummer von <b>IO</b>. Positionsnummern werden in der Plugin-Übersicht mit der Aktion <b>Position festlegen</b> zugewiesen.
-</div>
-
 ## Webshop bei Trusted Shops zertifizieren
 
 ![](https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/meta/images/eTrusted-Partner_Certified_Software.png)
 
 Du möchtest deinen Webshop bei Trusted Shops zertifizieren? Ceres ist bereits durch Trusted Shops vorzertifiziert. Dadurch geht die vollständige Zertifizierung durch Trusted Shops schnellstmöglich vonstatten. Alle dafür nötigen Informationen findest du [hier](https://www.trustedshops.de/shopbetreiber/bestellen.html?shopsoftware=PLENTYMARKETS).
 
-## Webshop bei EHI zertifizieren
+## Geprüft durch IT-Recht Kanzlei
 
-![](https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/meta/images/EHI-gepruefter-online-shop.png)
+![](https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/meta/images/it-recht-kanzlei-gepruefter-shop.png)
 
-Du möchtest deinen Webshop durch EHI zertifizieren lassen?
-Da Ceres bereits durch EHI vorzertifiziert ist, lässt sich die vollständige EHI-Zertifizierung schnell und einfach abwickeln.
-Alle hierfür nötigen Informationen findest du [hier](https://ehi-siegel.de/shopbetreiber/ehi-siegel/antrag-auf-shopzertifizierung/).
+Du möchtest deinen Webshop bei IT-Recht Kanzlei zertifizieren? Dein Standard-plentyShop ist bereits durch [IT-Recht Kanzlei](https://www.it-recht-kanzlei.de/Service/pruefzeichen.php?sid=1e657-d848) vorzertifiziert. Dadurch geht die vollständige Zertifizierung durch IT-Recht Kanzlei schnellstmöglich vonstatten. Alle dafür nötigen Informationen findest du [hier](https://www.it-recht-kanzlei.de/Service/pruefzeichen.php?sid=1e657-d848).
 
 ## Lizenz
 
