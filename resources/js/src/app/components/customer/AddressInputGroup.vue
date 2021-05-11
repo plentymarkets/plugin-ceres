@@ -967,7 +967,7 @@ export default {
         },
         defaultSalutation: {
             type: String,
-            default: "male"
+            default: App.config.addresses.defaultSalutation
         }
     },
 

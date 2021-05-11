@@ -39,7 +39,7 @@ const mutations =
 
         updateBasketItems(state, basketItems)
         {
-            if (basketItems)
+            if (basketItems && state.items.length)
             {
                 const newItems = [];
 
@@ -149,15 +149,19 @@ const actions =
             {
                 jQuery
                     .when(
-                        ApiService.get("/rest/io/basket", {}, { cache: false }),
-                        ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
+                        ApiService.get("/rest/io/basket", {}, { cache: false, keepOriginalResponse: true }),
+                        ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false, keepOriginalResponse: true })
                     )
                     .then((basket, basketItems) =>
                     {
-                        commit("setBasket", basket);
-                        commit("setBasketItems", basketItems);
+                        if (!basket.events.hasOwnProperty("AfterBasketChanged") && !basketItems.events.hasOwnProperty("AfterBasketChanged"))
+                        {
+                            commit("setBasket", basket.data);
+                            commit("setWishListIds", basket.data.itemWishListIds);
+                        }
                         commit("setIsBasketInitiallyLoaded");
-                        commit("setWishListIds", basket.itemWishListIds);
+                        commit("setBasketItems", basketItems.data);
+
                     })
                     .catch((error, status) =>
                     {

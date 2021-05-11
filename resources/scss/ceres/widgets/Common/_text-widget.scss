@@ -1,4 +1,8 @@
 .widget-text {
+    &.widget {
+        margin-bottom: 0;
+    }
+
     .widget-inner {
         padding: 1rem 1.5rem;
     }

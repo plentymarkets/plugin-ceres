@@ -7,8 +7,13 @@
 <meta name="have-i-been-pwned-verification" value="e27d86304c7ad6ddf2b78d4e48268623">
 <meta name="apple-itunes-app" content="app-id=1504088049">
 
-{% set defaultFavicon = '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
-<link rel="icon" type="img/ico" href="{{ webstoreConfig.faviconPath | default(ceresConfig.global.favicon) | default(defaultFavicon) }}">
+{% if ceresConfig.global.favicon is empty %}
+    {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
+{% else %}
+    {% set favicon = ceresConfig.global.favicon %}
+{% endif %}
+
+<link rel="icon" type="img/ico" href="{{ favicon }}">
 
 {% set canonicalUrl = services.url.getCanonicalURL() %}
 {% set languageUrls = services.url.getLanguageURLs() %}

@@ -114,10 +114,6 @@
         }
     }
 
-    .graduated-base-price {
-        font-style: normal !important; // stylelint-disable-line declaration-no-important
-    }
-
     .fade-enter-active,
     .fade-leave-active {
         @include transition(opacity .3s ease-out);

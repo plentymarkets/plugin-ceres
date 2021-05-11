@@ -1,6 +1,7 @@
 .sb-no-animation.collapsing {
   display: none !important;
   -webkit-transition: none !important;
-  transition: none !important;
-}
-/*# sourceMappingURL=ceres-shopbuilder.css.map */
+  transition: none !important; }
+
+/*# sourceMappingURL=shopbuilder.css.map */
+

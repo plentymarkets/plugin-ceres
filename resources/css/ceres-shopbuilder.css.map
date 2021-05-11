@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AACA,AAAA,gBAAgB,AAAA,WAAW,CAAC;EACxB,OAAO,EAAE,eAAe;EACxB,kBAAkB,EAAE,eAAe;EACnC,UAAU,EAAE,eAAe;CAC9B",
-    "sources": [
-        "ceres-shopbuilder.scss"
-    ],
-    "names": [],
-    "file": "ceres-shopbuilder.css"
-}

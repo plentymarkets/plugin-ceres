@@ -83,21 +83,17 @@ export default {
 
         carouselImages()
         {
-            return this.orderByPosition(
-                this.$options.filters.itemImages(
+            return this.$options.filters.itemImages(
                     this.currentVariation.images,
                     "urlPreview"
-                )
-            ).slice(0, this.maxQuantity);
+                ).slice(0, this.maxQuantity);
         },
 
         singleImages()
         {
-            return this.orderByPosition(
-                this.$options.filters.itemImages(
+            return this.$options.filters.itemImages(
                     this.currentVariation.images,
                     this.imageUrlAccessor
-                )
             ).slice(0, this.maxQuantity);
         }
     },
@@ -208,7 +204,8 @@ export default {
             if (!isNullOrUndefined(window.lightbox))
             {
                 lightbox.option({
-                    wrapAround: true
+                    wrapAround: true,
+                    albumLabel: this.$translate("Ceres::Template.singleItemLightboxImageShown")
                 });
             }
 
@@ -253,24 +250,6 @@ export default {
             ]);
         },
 
-        orderByPosition(list)
-        {
-            return list.sort(
-                (entryA, entryB) =>
-                {
-                    if (entryA.position > entryB.position)
-                    {
-                        return 1;
-                    }
-                    if (entryA.position < entryB.position)
-                    {
-                        return -1;
-                    }
-
-                    return 0;
-                });
-        },
-
         getAltText(image)
         {
             return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation);
@@ -286,7 +265,7 @@ export default {
             return new Promise((resolve, reject) =>
             {
                 const script = document.querySelector("script#lightboxscript");
-    
+
                 if (!isNullOrUndefined(script))
                 {
                     resolve();
@@ -294,14 +273,14 @@ export default {
                 else
                 {
                     const script = document.createElement("script");
-    
+
                     script.type = "text/javascript";
                     script.id = "lightboxscript";
                     script.src = `${ this.pluginPath }/js/dist/lightbox.min.js`;
-    
+
                     script.addEventListener("load", () => resolve(), false);
                     script.addEventListener("error", event => reject(event), false);
-    
+
                     document.body.appendChild(script);
                 }
             });

@@ -78,6 +78,7 @@ class DefaultHeaderPreset implements ContentPreset
             ->withSetting("showOnMyAccount", false)
             ->withSetting("showOnCheckout", false)
             ->withSetting("showOnContentCategory", false)
+            ->withSetting("showOnLegalPages", false)
             ->withSetting('customClass', '');
 
         return $preset->toArray();

@@ -155,18 +155,18 @@
 
                         {{ Twig.set("itemAmount", "item.amounts[0]") }}
 
-                        {{ Twig.for("amount", "item.amouts if not amout.isSystemCurrency") }}
+                        {{ Twig.for("amount", "item.amounts if not amount.isSystemCurrency") }}
                             {{ Twig.set("itemAmount", "amount") }}
                         {{ Twig.endfor() }}
 
                         {{ Twig.set("itemPrice", "0") }}
                         {{ Twig.if("data.highlightNetPrices") }}
                             {{ Twig.set("itemPrice", "itemAmount.priceOriginalNet") }}
-                            {{ Twig.set("discountAmount", "itemAmount.priceOriginalNet - itemAmount.priceNet") }}
+                            {{ Twig.set("discountAmount", "item.quantity * (itemAmount.priceOriginalNet - itemAmount.priceNet)") }}
                             {{ Twig.set("itemPriceTotal", "item.quantity * itemAmount.priceNet") }}
                         {{ Twig.else() }}
                             {{ Twig.set("itemPrice", "itemAmount.priceOriginalGross") }}
-                            {{ Twig.set("discountAmount", "itemAmount.priceOriginalGross - itemAmount.priceGross") }}
+                            {{ Twig.set("discountAmount", "item.quantity * (itemAmount.priceOriginalGross - itemAmount.priceGross)") }}
                             {{ Twig.set("itemPriceTotal", "item.quantity * itemAmount.priceGross") }}
                         {{ Twig.endif() }}
 
@@ -175,23 +175,25 @@
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPrice | formatMonetary( itemAmount.currency )') }}</span>
                         </div>
 
-                        {{ Twig.if("discountAmount > 0") }}
-                            <div class="row rebate-hint">
-                                <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
-                                <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('discountAmount | formatMonetary( itemAmount.currency )') }}</span>
-                            </div>
-                        {{ Twig.endif() }}
 
                         <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-quantity")') }}>
                             <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('item.quantity') }}</span>
                         </div>
+
+
                         {{ Twig.for("attribute", "item.attributes") }}
                         <div class="row">
                             <strong class="col-6 col-sm-3 col-md-5">{{ Twig.print("attribute.name") }}: </strong>
                             <span class="col-6 col-sm-7 col-md-7 text-right">{{ Twig.print("attribute.value") }}</span>
                         </div>
                         {{ Twig.endfor() }}
+                        {{ Twig.if("discountAmount > 0") }}
+                            <div class="row rebate-hint">
+                                <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
+                                <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('discountAmount | formatMonetary( itemAmount.currency )') }}</span>
+                            </div>
+                        {{ Twig.endif() }}
                         {{ Twig.if("item.orderProperties") }}
                             <div class="row mb-1">
                                 <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationProperties") }}</strong>
@@ -276,7 +278,7 @@
 
             {{ Twig.if("item.giftCard.isGiftCard") }}
                 <edit-coupon-overlay
-                    :order-item="{{ Twig.print("item | json_encode") }}" 
+                    :order-item="{{ Twig.print("item | json_encode") }}"
                     order-access-key="{{ Twig.print("request.get('accessKey')") }}"
                     payment-status="{{ Twig.print("data.paymentStatus") }}">
                 </edit-coupon-overlay>

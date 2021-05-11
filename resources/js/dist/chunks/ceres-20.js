@@ -21,14 +21,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../exceptions/ExceptionMap */ "./resources/js/src/app/exceptions/ExceptionMap.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
 
 
 
@@ -91,6 +98,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     template: {
@@ -117,7 +125,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
       return false;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_13__["mapState"])({
     redeemedCouponCode: function redeemedCouponCode(state) {
       return state.basket.data.couponCode;
     },
@@ -148,13 +156,13 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         this.waiting = true;
         this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
           _this2.waiting = false;
-          NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.couponRedeemSuccess")).closeAfter(10000);
+          NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.couponRedeemSuccess")).closeAfter(10000);
         }, function (error) {
           _this2.waiting = false;
-          NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
+          NotificationService.error(_this2.getCouponRedemptionErrorMessage(error)).closeAfter(10000);
         });
       } else {
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.couponIsEmpty")).closeAfter(10000);
+        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.couponIsEmpty")).closeAfter(10000);
       }
     },
     removeCode: function removeCode() {
@@ -163,40 +171,20 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       this.waiting = true;
       this.$store.dispatch("removeCouponCode", this.couponCode).then(function (response) {
         _this3.waiting = false;
-        NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.couponRemoveSuccess")).closeAfter(10000);
+        NotificationService.success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.couponRemoveSuccess")).closeAfter(10000);
       }, function (error) {
         _this3.waiting = false;
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.couponRemoveFailure")).closeAfter(10000);
+        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.couponRemoveFailure")).closeAfter(10000);
       });
     },
-    getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
-      var errorMessageKeys = {
-        18: "couponMinOrderValueNotReached",
-        51: "couponnotUsableForSpecialOffer",
-        70: "couponAlreadyUsedOrInvalidCouponCode",
-        78: "couponCampaignExpired",
-        126: "couponNoMatchingItemInBasket",
-        329: "couponOnlySubscription",
-        330: "couponOnlySingleUsage",
-        331: "couponNoOpenAmount",
-        332: "couponExpired",
-        334: "couponOnlyForNewCustomers",
-        335: "couponOnlyForExistingCustomers",
-        336: "couponWrongCustomerGroup",
-        337: "couponWrongCustomerType",
-        338: "couponNoCustomerTypeProvided",
-        339: "couponNoCustomerTypeActivated",
-        340: "couponNoCustomerGroupActivated",
-        341: "couponCampaignNoWebstoreActivated",
-        342: "couponCampaignWrongWebstoreId",
-        343: "couponCampaignNoWebstoreIdGiven"
-      };
+    getCouponRedemptionErrorMessage: function getCouponRedemptionErrorMessage(error) {
+      var errorCode = error && error.warn && error.warn.code || 0;
 
-      if (error && error.error && error.code && errorMessageKeys[error.code]) {
-        return _services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template." + errorMessageKeys[error.code]);
+      if (errorCode > 0 && _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_11__["default"].has(errorCode.toString())) {
+        return _services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_11__["default"].get(errorCode.toString()));
       }
 
-      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.couponRedeemFailure");
+      return _services_TranslationService__WEBPACK_IMPORTED_MODULE_12__["default"].translate("Ceres::Template.couponRedeemFailure");
     }
   }
 });

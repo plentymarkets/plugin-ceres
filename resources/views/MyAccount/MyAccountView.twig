@@ -95,8 +95,6 @@
                             <shipping-address-select
                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
                                 :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
-                                :has-any-parcel-box-preset="{{ services.shipping.hasAnyParcelBoxPreset() | json_encode }}"
-                                :has-any-post-office-preset="{{ services.shipping.hasAnyPostOfficePreset() | json_encode }}"
                                 default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
                             </shipping-address-select>
                         </div>

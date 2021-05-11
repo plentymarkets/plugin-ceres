@@ -1,6 +1,7 @@
 <?php
 namespace Ceres\Extensions;
 
+use Plenty\Plugin\Log\Loggable;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
 
@@ -14,6 +15,8 @@ use Plenty\Plugin\Templates\Factories\TwigFactory;
  */
 class TwigStyleScriptTagFilter extends Twig_Extension
 {
+    use Loggable;
+
     /**
      * @var array $styleTags Filtered out style tags.
      */
@@ -116,7 +119,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
         }
 
         //search for style tag
-        if (strpos($content, '<style') !== false) {
+        if (preg_match("/<style[^2]*>/s", $content) === 1) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
             $doc->loadHTML($content);
@@ -127,11 +130,25 @@ class TwigStyleScriptTagFilter extends Twig_Extension
                 self::$styleTags[] = $newdoc->saveHTML();
             }
 
-            $content = preg_replace("/<style.*?>.*?<\\/style>/s", "", $content);
+            // replace <style>..</style>, <style foo="bar">..</style>; ignore <style2>..</style2>
+            $try = preg_replace("/<style[^2]*>.*?<\\/style>/s", "", $content);
+
+            // if the preg_replace returns null (in case of PREG_BACKTRACK_LIMIT_ERROR) do nothing
+            if (!is_null($try)) {
+                $content = $try;
+            }
+            else {
+                $this->getLogger(__CLASS__)->error(
+                    "IO::Debug.LayoutContainer_backtrackLimitError",
+                    [
+                        "content" => $content
+                    ]
+                );
+            }
         }
 
-        //search for style tag
-        if (strpos($content, '<script') !== false) {
+        //search for script tag
+        if (preg_match("/<script[^2]*>/s", $content) === 1) {
             /** @var \DOMDocument $doc */
             $doc = pluginApp('DOMDocument', ['version' => '1.0', 'encoding' => 'utf-8']);
             $doc->loadHTML($content);
@@ -142,7 +159,21 @@ class TwigStyleScriptTagFilter extends Twig_Extension
                 self::$scriptTags[] = $newdoc->saveHTML();
             }
 
-            $content = preg_replace("/<script.*?>.*?<\\/script>/s", "", $content);
+            // replace <script>..</script>, <script foo="bar">..</script>; ignore <script2>..</script2>
+            $try = preg_replace("/<script[^2]*>.*?<\\/script>/s", "", $content);
+
+            // if the preg_replace returns null (in case of PREG_BACKTRACK_LIMIT_ERROR) do nothing
+            if (!is_null($try)) {
+                $content = $try;
+            }
+            else {
+                $this->getLogger(__CLASS__)->error(
+                    "IO::Debug.LayoutContainer_backtrackLimitError",
+                    [
+                        "content" => $content
+                    ]
+                );
+            }
         }
 
         return $content;

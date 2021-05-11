@@ -1,14 +1,20 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[34],{
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.some */ "./node_modules/core-js/modules/es.array.some.js");
+/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
+/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_get__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
 //
 //
 //
@@ -27,44 +33,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "item-price",
+  name: "item-data-table",
   props: {
-    showCrossPrice: {
-      type: Boolean,
-      default: true
+    paddingClasses: {
+      type: String,
+      default: null
+    },
+    paddingInlineStyles: {
+      type: String,
+      default: null
+    },
+    itemInformation: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
     }
   },
   inject: {
@@ -75,34 +61,101 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     currentVariation: function currentVariation() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
+    }
+  },
+  data: function data() {
+    return {
+      translationMap: {
+        "item.id": "singleItemId",
+        "item.condition.names.name": "singleItemCondition",
+        "item.ageRestriction": "singleItemAge",
+        "variation.externalId": "singleItemExternalVariationId",
+        "variation.model": "singleItemModel",
+        "item.manufacturer.externalName": "singleItemManufacturer",
+        "item.producingCountry.names.name": "singleItemManufacturingCountry",
+        "unit.names.name": "singleItemContent",
+        "variation.weightG": "singleItemWeight",
+        "variation.weightNetG": "singleItemNetWeight",
+        "item.variationDimensions": "singleItemDimensions",
+        "variation.customsTariffNumber": "singleItemCustomsTariffNumber"
+      },
+      formatMap: {
+        "item.ageRestriction": {
+          type: "filter",
+          value: "ageRestriction"
+        },
+        "variation.weightG": {
+          type: "text",
+          value: " g"
+        },
+        "variation.weightNetG": {
+          type: "text",
+          value: " g"
+        }
+      }
+    };
+  },
+  methods: {
+    isCheckedAndNotEmpty: function isCheckedAndNotEmpty(path) {
+      var _this = this;
+
+      if (path === "item.ageRestriction") {
+        // remove check for the age restriction to be greater than zero (0 means 'No age restriction')
+        return true;
+      }
+
+      if (path !== "item.variationDimensions") {
+        var value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, path);
+        return value !== "" && value !== 0;
+      } else {
+        return ["variation.lengthMM", "variation.widthMM", "variation.heightMM"].some(function (element) {
+          var value = _this.getFieldValue(element);
+
+          return !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(value) && value !== 0;
+        });
+      }
     },
-    hasCrossPrice: function hasCrossPrice() {
-      var hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
-      var hasBeforePrice = this.hasSpecialOffer && !!this.currentVariation.prices.default && this.currentVariation.prices.default.unitPrice.value > this.currentVariation.prices.specialOffer.unitPrice.value;
-      return hasRrpPrice || hasBeforePrice;
+    getTranslation: function getTranslation(path) {
+      return this.$translate("Ceres::Template." + this.translationMap[path]);
     },
-    hasSpecialOffer: function hasSpecialOffer() {
-      return !!this.currentVariation.prices.specialOffer;
+    getFieldValue: function getFieldValue(path) {
+      var value;
+
+      if (path === "item.variationDimensions") {
+        value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "variation.lengthMM") + "×" + lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "variation.widthMM") + "×" + lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "variation.heightMM") + "mm";
+      } else if (path === "unit.names.name") {
+        value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "unit.content") + " " + lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, "unit.names.name");
+      } else {
+        value = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.currentVariation, path);
+      }
+
+      return this.formatFieldData(value, path);
     },
-    variationGraduatedPrice: function variationGraduatedPrice() {
-      return this.$store.getters["".concat(this.itemId, "/variationGraduatedPrice")];
-    },
-    variationTotalPrice: function variationTotalPrice() {
-      return this.$store.getters["".concat(this.itemId, "/variationTotalPrice")];
-    },
-    showDynamicPrice: function showDynamicPrice() {
-      var state = this.$store.state.items[this.itemId];
-      return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
+    formatFieldData: function formatFieldData(value, path) {
+      var format = this.formatMap[path];
+
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(format)) {
+        switch (format.type) {
+          case "text":
+            return value + format.value;
+
+          case "filter":
+            var filterMethod = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(this.$options.filters, format.value);
+            return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(filterMethod) ? filterMethod(value) : value;
+        }
+      }
+
+      return value;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=template&id=7100e9f2&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=template&id=7100e9f2& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -114,158 +167,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { class: { "has-crossprice": _vm.hasCrossPrice } }, [
-    _vm.showCrossPrice && _vm.hasCrossPrice
-      ? _c(
-          "div",
-          {
-            staticClass: "crossprice",
-            class: { "is-special-offer": _vm.hasSpecialOffer }
-          },
-          [
-            _c(
-              "del",
-              { staticClass: "text-muted small text-appearance" },
-              [
-                _vm.hasSpecialOffer
-                  ? [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(
-                            _vm._f("itemCrossPrice")(
-                              _vm.currentVariation.prices.default.unitPrice
-                                .formatted,
-                              true
-                            )
-                          ) +
-                          "\n            "
-                      )
-                    ]
-                  : [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(
-                            _vm._f("itemCrossPrice")(
-                              _vm.currentVariation.prices.rrp.unitPrice
-                                .formatted
-                            )
-                          ) +
-                          "\n            "
-                      )
-                    ]
-              ],
-              2
-            )
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "span",
-      {
-        staticClass: "price h1",
-        class: { "is-special-offer": _vm.hasSpecialOffer }
-      },
-      [
-        _c(
-          "span",
-          [
-            _vm.showDynamicPrice
-              ? [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(
-                        _vm.$translate(
-                          "Ceres::Template.dynamicVariationPrice",
-                          {
-                            price: _vm.$options.filters.currency(
-                              _vm.variationTotalPrice,
-                              _vm.currentVariation.prices.default.currency
-                            )
-                          }
+  return _c(
+    "table",
+    { staticClass: "table table-striped table-hover table-sm" },
+    [
+      _c(
+        "tbody",
+        [
+          _vm._l(_vm.itemInformation, function(itemDataAccessor) {
+            return [
+              _vm.isCheckedAndNotEmpty(itemDataAccessor)
+                ? _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        class: _vm.paddingClasses,
+                        style: _vm.paddingInlineStyles
+                      },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.getTranslation(itemDataAccessor)) +
+                            "\n            "
                         )
-                      ) +
-                      "\n            "
-                  )
-                ]
-              : [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(
-                        _vm._f("currency")(
-                          _vm.variationTotalPrice,
-                          _vm.currentVariation.prices.default.currency
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        class: _vm.paddingClasses,
+                        style: _vm.paddingInlineStyles
+                      },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.getFieldValue(itemDataAccessor)) +
+                            "\n            "
                         )
-                      ) +
-                      "\n            "
-                  )
-                ]
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c("sup", [_vm._v("*")])
-      ]
-    ),
-    _vm._v(" "),
-    _vm.currentVariation.unit
-      ? _c(
-          "div",
-          {
-            staticClass: "base-price text-muted my-3",
-            class: {
-              "is-single-piece":
-                _vm.currentVariation.unit &&
-                _vm.currentVariation.unit.content === 1 &&
-                _vm.currentVariation.unit.unitOfMeasurement === "C62"
-            }
-          },
-          [
-            _c("div", [
-              _vm._v(
-                "\n            " +
-                  _vm._s(_vm.$translate("Ceres::Template.singleItemContent")) +
-                  "\n            "
-              ),
-              _c("span", [
-                _vm._v(
-                  _vm._s(
-                    _vm._f("numberFormat")(_vm.currentVariation.unit.content)
-                  ) + " "
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.currentVariation.unit.names.name))])
-            ]),
-            _vm._v(" "),
-            _vm.currentVariation.variation.mayShowUnitPrice
-              ? _c("div", [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.singleItemUnitPrice")
-                      ) +
-                      "\n            "
-                  ),
-                  _c("span", { staticClass: "base-price-value" }, [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(
-                          _vm._f("specialOffer")(
-                            _vm.variationGraduatedPrice.basePrice,
-                            _vm.currentVariation.prices,
-                            "basePrice"
-                          )
-                        ) +
-                        "\n            "
+                      ]
                     )
                   ])
-                ])
-              : _vm._e()
-          ]
-        )
-      : _vm._e()
-  ])
+                : _vm._e()
+            ]
+          })
+        ],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -274,17 +224,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/ItemPrice.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/src/app/components/item/ItemPrice.vue ***!
-  \************************************************************/
+/***/ "./resources/js/src/app/components/item/ItemDataTable.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/src/app/components/item/ItemDataTable.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemPrice.vue?vue&type=template&id=27592de8& */ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&");
-/* harmony import */ var _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemPrice.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ItemDataTable_vue_vue_type_template_id_7100e9f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemDataTable.vue?vue&type=template&id=7100e9f2& */ "./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=template&id=7100e9f2&");
+/* harmony import */ var _ItemDataTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemDataTable.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -294,9 +244,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ItemDataTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ItemDataTable_vue_vue_type_template_id_7100e9f2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ItemDataTable_vue_vue_type_template_id_7100e9f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -306,38 +256,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/item/ItemPrice.vue"
+component.options.__file = "resources/js/src/app/components/item/ItemDataTable.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemPrice.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDataTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemDataTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDataTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=template&id=7100e9f2&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=template&id=7100e9f2& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemPrice.vue?vue&type=template&id=27592de8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDataTable_vue_vue_type_template_id_7100e9f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemDataTable.vue?vue&type=template&id=7100e9f2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemDataTable.vue?vue&type=template&id=7100e9f2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDataTable_vue_vue_type_template_id_7100e9f2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemDataTable_vue_vue_type_template_id_7100e9f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -43,7 +43,7 @@
     {% endif %}
 
     {# set the initialCategory to the default category of the current item #}
-    {% if services.template.isCurrentTemplate("tpl.item") and defaultCategory is not null %}
+    {% if services.template.isItem() == "1" and defaultCategory is not null %}
         {% set initialCategory = defaultCategory %}
     {% elseif services.template.isCurrentTemplate('tpl.home.category') %}
         {% set initialCategory = null %}

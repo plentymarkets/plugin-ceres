@@ -9,13 +9,10 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.sort */ "./node_modules/core-js/modules/es.array.sort.js");
-/* harmony import */ var core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_1__);
 
 //
 //
@@ -77,17 +74,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     imageUrls: function imageUrls() {
-      return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
-        if (imageUrlA.position > imageUrlB.position) {
-          return 1;
-        }
-
-        if (imageUrlA.position < imageUrlB.position) {
-          return -1;
-        }
-
-        return 0;
-      });
+      return this.imageUrlsData;
     }
   },
   created: function created() {
@@ -346,6 +333,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     paddingInlineStyles: {
       type: String,
       default: null
+    },
+    forceUrlWithVariationId: {
+      type: Boolean,
+      default: false
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -374,7 +365,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$options.filters.currency(this.item.prices.default.price.value, this.item.prices.default.currency);
     },
     urlWithVariationId: function urlWithVariationId() {
-      return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0;
+      return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0 || this.forceUrlWithVariationId;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     showNetPrices: function showNetPrices(state) {

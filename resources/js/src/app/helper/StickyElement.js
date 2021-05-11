@@ -1,6 +1,7 @@
 import { isNullOrUndefined } from "./utils";
 import { applyStyles } from "./dom";
 import { detectPassiveEvents } from "./featureDetect";
+import { repeatAnimationFrame } from "./repeatAnimationFrame";
 
 const STICKY_EVENTS = [
     "resize",
@@ -325,6 +326,11 @@ export class StickyElement
         if (idx >= 0)
         {
             this.getContainerElement().__stickyElements.splice(idx, 1);
+        }
+
+        if (this.resizeObserver)
+        {
+            this.resizeObserver.unobserve(this.el);
         }
 
         this.el.classList.remove("sticky-element");

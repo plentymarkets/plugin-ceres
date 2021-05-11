@@ -402,6 +402,7 @@ export default {
             if(!isNullOrUndefined(this.itemId))
             {
                 this.$store.commit(`${this.itemId}/setVariationOrderQuantity`, value);
+                this.$store.commit(`${this.itemId}/setVariationPropertySurcharges`, this.$store.getters[`${this.itemId}/variationBasePrice`]);
             }
         },
 

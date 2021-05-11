@@ -171,7 +171,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     private function createOrderTotalsWidget()
     {
         $this->twoColumnWidget->createChild("second", "Ceres::OrderTotalsWidget")
-                              ->withSetting("visibleFields", ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount"]);
+                              ->withSetting("visibleFields", ["orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "totalSumGross", "salesCoupon", "openAmount", "additionalCosts"]);
     }
 
     private function createSeparatorWidget()
@@ -188,23 +188,13 @@ class DefaultOrderConfirmationPreset implements ContentPreset
 
     private function createBottomNavigation()
     {
-        $homepageLinkWidget = null;
-        $homepageLinkWidget = $this->fourColumnWidget->createChild("second", "Ceres::LinkWidget")
-                                        ->withSetting("appearance", "primary")
-                                        ->withSetting("block", "true")
-                                        ->withSetting("text", $this->translator->trans("Ceres::Template.orderConfirmationHomepage"));
+        $this->fourColumnWidget->createChild("second", "Ceres::LinkWidget")
+                                ->withSetting("appearance", "primary")
+                                ->withSetting("block", "true")
+                                ->withSetting("text", $this->translator->trans("Ceres::Template.orderConfirmationHomepage"))
+                                ->withSetting("url.type", "external")
+                                ->withSetting("url.value", $this->shopUrls->home);
 
-        if ( in_array(RouteConfig::HOME, RouteConfig::getEnabledRoutes()) && RouteConfig::getCategoryId(RouteConfig::HOME) > 0 )
-        {
-            $homepageLinkWidget->withSetting("url.type", "category")
-                               ->withSetting("url.value", RouteConfig::getCategoryId(RouteConfig::HOME));
-        }
-        else
-        {
-            $homepageLinkWidget->withSetting("url.type", "external")
-                               ->withSetting("url.value", $this->shopUrls->home);
-        }
-        
         $myAccountLinkWidget = null;
         $myAccountLinkWidget = $this->fourColumnWidget->createChild("third", "Ceres::LinkWidget")
                                ->withSetting("appearance", "primary")

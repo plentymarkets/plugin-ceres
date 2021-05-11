@@ -313,6 +313,10 @@ export default {
                     this.$emit("out-of-stock", false);
                 }
             }
+            else
+            {
+                this.$emit("out-of-stock", false);
+            }
 
             this.setValue(this.compMin);
         }

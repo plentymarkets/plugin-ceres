@@ -92,29 +92,32 @@ export default Vue.component("place-order", {
     methods: {
         placeOrder()
         {
-            this.waiting = true;
+            if (this.validateCheckout())
+            {
+                this.waiting = true;
 
-            const url = "/rest/io/order/additional_information";
-            const params = {
-                orderContactWish: this.contactWish,
-                orderCustomerSign: this.customerSign,
-                shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
-                newsletterSubscriptions: this.activeNewsletterSubscriptions
-            };
-            const options = { supressNotifications: true };
+                const url = "/rest/io/order/additional_information";
+                const params = {
+                    orderContactWish: this.contactWish,
+                    orderCustomerSign: this.customerSign,
+                    shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
+                    newsletterSubscriptions: this.activeNewsletterSubscriptions
+                };
+                const options = { supressNotifications: true };
 
-            ApiService.post(url, params, options)
-                .always(() =>
-                {
-                    this.preparePayment();
-                });
+                ApiService.post(url, params, options)
+                    .always(() =>
+                    {
+                        this.preparePayment();
+                    });
+            }
         },
 
         preparePayment()
         {
             this.waiting = true;
 
-            if (this.validateCheckout() && this.basketItemQuantity > 0)
+            if (this.basketItemQuantity > 0)
             {
                 ApiService.post("/rest/io/checkout/payment")
                     .done(response =>
@@ -160,11 +163,9 @@ export default Vue.component("place-order", {
             switch (paymentType)
             {
             case "continue":
-                var target = this.targetContinue;
-
-                if (target)
+                if (this.targetContinue)
                 {
-                    navigateTo(target);
+                    navigateTo(this.targetContinue);
                 }
                 break;
             case "redirectUrl":

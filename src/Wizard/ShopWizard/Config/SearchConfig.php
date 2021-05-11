@@ -26,7 +26,7 @@ class SearchConfig
         "searchFieldShortDescription" => "shortDescription",
         "searchFieldTechnicalData"    => "technicalData",
     ];
-    
+
     private static $sortingSearchDefaultOptions = [
         "sortDataItemScore"              => "item.score",
         "sortDataRecommendedSorting"     => "default.recommended_sorting",
@@ -47,8 +47,8 @@ class SearchConfig
         "sortDataManufacturerAsc"        => "item.manufacturer.externalName_asc",
         "sortDataManufacturerDesc"       => "item.manufacturer.externalName_desc",
     ];
-    
-    
+
+
     private static $sortingFirstSearchOptions = [
         "sortDataItemScore"                               => "item.score",
         "sortingPriorityCategoryItemIdAsc"                => "item.id_asc",
@@ -77,7 +77,7 @@ class SearchConfig
         "sortingPriorityCategoryStockDesc"                => "stock.net_desc",
         "sortDataRandom"                                  => "item.random",
     ];
-    
+
     private static $sortingOtherSearchOptions = [
         "sortingPriorityCategoryNotSelected"              => "notSelected",
         "sortDataItemScore"                               => "item.score",
@@ -107,7 +107,12 @@ class SearchConfig
         "sortingPriorityCategoryStockDesc"                => "stock.net_desc",
         "sortDataRandom"                                  => "item.random",
     ];
-    
+
+    private static $sortingOperatorOptions = [
+        "searchOperatorOr" => 'or',
+        "searchOperatorAnd" => 'and'
+    ];
+
     /**
      * @return array
      */
@@ -115,7 +120,7 @@ class SearchConfig
     {
         return self::$searchFieldsOptions;
     }
-    
+
     /**
      * @return array
      */
@@ -123,7 +128,7 @@ class SearchConfig
     {
         return self::$sortingSearchDefaultOptions;
     }
-    
+
     /**
      * @return array
      */
@@ -131,12 +136,17 @@ class SearchConfig
     {
         return self::$sortingFirstSearchOptions;
     }
-    
+
     /**
      * @return array
      */
     public static function getSortingOtherSearchOptions()
     {
         return self::$sortingOtherSearchOptions;
+    }
+
+    public static function getSortingOperatorOptions()
+    {
+        return self::$sortingOperatorOptions;
     }
 }

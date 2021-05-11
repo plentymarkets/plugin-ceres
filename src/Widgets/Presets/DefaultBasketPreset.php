@@ -129,6 +129,7 @@ class DefaultBasketPreset implements ContentPreset
                     'promotionCoupon',
                     'totalSumNet',
                     'vats',
+                    'additionalCosts',
                     'totalSumGross',
                     'salesCoupon',
                     'openAmount'

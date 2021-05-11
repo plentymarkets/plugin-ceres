@@ -67,7 +67,7 @@ class WidgetSettingsFactory
         }
         return self::create($parentSettings);
     }
-    
+
     /**
      * Create a new factory instance with initial values.
      *
@@ -102,7 +102,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key);
     }
-    
+
     /**
      * Create a container entry which may contain nested settings.
      * Values of nested settings will be grouped into an object for the key of this setting.
@@ -117,7 +117,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, ContainerSettingFactory::class);
     }
-    
+
     /**
      * Create a vertical container to group nested settings below to each other.
      * @param string $key The key of the container.
@@ -132,7 +132,7 @@ class WidgetSettingsFactory
             ->createSetting($key, ContainerSettingFactory::class)
             ->withType('vertical');
     }
-    
+
     /**
      * Create a horizontal container to group nested settings next to each other.
      * @param string $key The key of the container.
@@ -147,7 +147,7 @@ class WidgetSettingsFactory
             ->createSetting($key, ContainerSettingFactory::class)
             ->withType('horizontal');
     }
-    
+
     /**
      * Create a text input setting.
      *
@@ -161,7 +161,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, TextSettingFactory::class);
     }
-    
+
     /**
      * Create a checkbox setting.
      *
@@ -175,7 +175,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, CheckboxSettingFactory::class);
     }
-    
+
     /**
      * Create a color setting.
      *
@@ -203,7 +203,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, DateSettingFactory::class);
     }
-    
+
     /**
      * Create a file picker setting.
      *
@@ -217,7 +217,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, FileSettingFactory::class);
     }
-    
+
     /**
      * Create a textarea input setting.
      *
@@ -231,7 +231,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, TextareaSettingFactory::class);
     }
-    
+
     /**
      * Create a number input setting.
      *
@@ -246,7 +246,7 @@ class WidgetSettingsFactory
             ->createSetting($key)
             ->withType('number');
     }
-    
+
     /**
      * Create a double input setting.
      *
@@ -260,7 +260,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, DoubleSettingFactory::class);
     }
-    
+
     /**
      * Create a dropdown setting.
      *
@@ -274,7 +274,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, SelectSettingFactory::class);
     }
-    
+
     /**
      * Create a dropdown with suggestions.
      *
@@ -288,7 +288,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, SuggestionSettingFactory::class);
     }
-    
+
     /**
      * Create a category picker setting.
      *
@@ -302,7 +302,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, CategorySettingFactory::class);
     }
-    
+
     /**
      * Create a color picker setting.
      *
@@ -317,7 +317,7 @@ class WidgetSettingsFactory
             ->createSetting($key)
             ->withType('color');
     }
-    
+
     /**
      * Create a slider setting.
      *
@@ -331,7 +331,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, SliderSettingFactory::class);
     }
-    
+
     /**
      * Create a checkbox group setting.
      *
@@ -345,7 +345,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, CheckboxGroupSettingFactory::class);
     }
-    
+
     /**
      * Create a checkbox group setting.
      *
@@ -359,7 +359,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, RadioGroupSettingFactory::class);
     }
-    
+
     /**
      * Create a url picker.
      *
@@ -373,7 +373,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, UrlSettingFactory::class);
     }
-    
+
     /**
      * Create a note editor.
      *
@@ -387,7 +387,7 @@ class WidgetSettingsFactory
             ->createSetting($key, EditorSettingFactory::class)
             ->withType('noteEditor');
     }
-    
+
     /**
      * Create a code editor.
      *
@@ -401,7 +401,7 @@ class WidgetSettingsFactory
             ->createSetting($key, EditorSettingFactory::class)
             ->withType('codeEditor');
     }
-    
+
     /**
      * Create an UUID setting
      *
@@ -415,7 +415,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, UUIDSettingFactory::class);
     }
-    
+
     /**
      * Create a manufacturer picker.
      *
@@ -429,7 +429,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, ManufacturerSettingFactory::class);
     }
-    
+
     /**
      * Create a text input for a custom css class.
      *
@@ -443,7 +443,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, CustomClassSettingFactory::class);
     }
-    
+
     /**
      * Create a dropdown with appearance colors.
      *
@@ -464,7 +464,7 @@ class WidgetSettingsFactory
             ]
         );
     }
-    
+
     /**
      * Create a dropdown with icons.
      *
@@ -478,7 +478,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, IconSettingFactory::class);
     }
-    
+
     /**
      * Create containers with spacing settings.
      *
@@ -501,7 +501,7 @@ class WidgetSettingsFactory
             ]
         );
     }
-    
+
     /**
      * Create an input for the height.
      *
@@ -515,7 +515,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, HeightSettingFactory::class);
     }
-    
+
     /**
      * Create a dropdown for the button size.
      *
@@ -529,7 +529,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->createSetting($key, ButtonSizeSettingFactory::class);
     }
-    
+
     /**
      * Create a button group with alignment selections.
      *
@@ -554,7 +554,7 @@ class WidgetSettingsFactory
     {
         return $this->coreFactory->toArray();
     }
-    
+
     /**
      * Set a settings key to insert new settings after.
      * The key might be a path to nested setting entries.
