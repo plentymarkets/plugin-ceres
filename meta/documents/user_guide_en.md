@@ -6,24 +6,17 @@
 
 Learn how to set up and customise Ceres on [plentyKnowledge](https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres).
 
-<div class="alert alert-warning" role="alert">
-When setting up <b>Ceres</b>, it is essential that the assigned <b>plugin position</b> of Ceres is lower than the plugin position of <b>IO</b>. Plugin positions are assigned via the <b>Set position</b> action in the plugin overview.
-</div>
-
-
 ## Certifying the online store with Trusted Shops
 
 ![](https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/meta/images/eTrusted-Partner_Certified_Software.png)
 
 You want to certify your online store with Trusted Shops? Ceres has been pre-certified by Trusted Shops, so your certification will be handled as fast and easy as possible. Find all necessary information [here](https://www.trustedshops.de/shopbetreiber/bestellen.html?shopsoftware=PLENTYMARKETS).
 
-## Certifying the online store with EHI
+## Certified by IT-Recht Kanzlei
 
-![](https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/meta/images/EHI-gepruefter-online-shop.png)
+![](https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/meta/images/it-recht-kanzlei-gepruefter-shop.png)
 
-You want to certify your online store with EHI?
-Since Ceres has been pre-certified by EHI, your certification will be handled as fast and easy as possible. You can find all necessary information
-[here](https://ehi-siegel.de/shopbetreiber/ehi-siegel/antrag-auf-shopzertifizierung/).
+You want to certify your online store with IT-Recht Kanzlei? Your standard plentyShop has been [pre-certified by IT-Recht Kanzlei](https://www.it-recht-kanzlei.de/Service/pruefzeichen.php?sid=1e657-d848), so your certification will be handled as fast and easy as possible. Find all necessary information [here](https://www.it-recht-kanzlei.de/Service/pruefzeichen.php?sid=1e657-d848)
 
 ## License
 
