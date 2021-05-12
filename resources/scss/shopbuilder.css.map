@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,AAAA,WAAW,CAAC;EACxB,OAAO,EAAE,eAAe;EACxB,kBAAkB,EAAE,eAAe;EACnC,UAAU,EAAE,eAAe;CAC5B;;AACD,2CAA2C",
+    "sources": [
+        "shopbuilder.scss"
+    ],
+    "names": [],
+    "file": "shopbuilder.css"
+}
