@@ -76285,6 +76285,7 @@ window.$ = jquery__WEBPACK_IMPORTED_MODULE_6___default.a;
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_1___default.a;
 window.NotificationService = _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"];
 window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate;
+window.vueEventHub = new vue__WEBPACK_IMPORTED_MODULE_1___default.a();
 
 
 /***/ }),
