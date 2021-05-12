@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v5.0.30 (2021-05-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.29...5.0.30" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- `vueEventHub` wurde für aktives Server-Side Rendering (SSR) Client-seitig wieder hinzugefügt. Dadurch kann das Blog-Plugin in Version 2.0.0 in Kombination mit SSR fehlerfrei genutzt werden.
+
 ## v5.0.29 (2021-05-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.28...5.0.29" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
