@@ -379,6 +379,7 @@ if ( headerParent )
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
+        getHeaderHeights();
         calculateBodyOffset();
     });
 
