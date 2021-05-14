@@ -89655,6 +89655,7 @@ function _validateElement(elem) {
   var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
     return i.trim();
   }) || ["text"];
+  var requiredCount = $elem.attr("data-required-count");
   var hasError = false;
 
   _findFormControls($elem).each(function (i, formControl) {
@@ -89667,7 +89668,7 @@ function _validateElement(elem) {
     }
 
     if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]")) {
-      if (!_validateGroup($formControl, validationKey)) {
+      if (!_validateGroup($formControl, validationKey, requiredCount)) {
         hasError = true;
       }
 
@@ -89692,13 +89693,27 @@ function _validateElement(elem) {
   return !hasError;
 }
 
-function _validateGroup($formControl, validationKey) {
+function _validateGroup($formControl, validationKey, requiredCount) {
   var groupName = $formControl.attr("name");
   var $group = $form.find("[name=\"" + groupName + "\"]");
-  var range = _eval(validationKey) || {
-    min: 1,
-    max: 1
-  };
+  var range = null;
+  var min = 1;
+  var max = 1; // If no requiredCount is given default to old behaviour
+
+  if (requiredCount) {
+    min = requiredCount.split(",")[0];
+    max = requiredCount.split(",")[1];
+    range = {
+      min: min,
+      max: max
+    };
+  } else {
+    range = _eval(validationKey) || {
+      min: min,
+      max: max
+    };
+  }
+
   var checked = $group.filter(":checked").length;
   return checked >= range.min && checked <= range.max;
 }
