@@ -56,14 +56,16 @@ function mount(el, hydrating)
 function component(id, definition)
 {
     const customTemplate = getComponentTemplate(id);
-    const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
 
     let newDefinition = definition;
 
     if (customTemplate)
     {
+        // use ssr optimized compiler function if document is not defined
+        const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
         if (typeof definition === "object")
         {
+            // overridden component is defined in the common way: Vue.component('...', { ... })
             newDefinition = Object.assign(
                 definition,
                 compileFn(customTemplate)
@@ -71,14 +73,17 @@ function component(id, definition)
         }
         else if (typeof definition === "function")
         {
+            // overridden component is defined asynchronously
             newDefinition = () =>
             {
+                // invoke async loading function
                 const asyncComponent = definition();
 
                 if (asyncComponent instanceof Promise)
                 {
                     return asyncComponent.then((module) =>
                     {
+                        // override template after resolving external chunk
                         delete module.default.render;
                         module.default.template = replaceDelimiters(customTemplate);
                         return module;
@@ -86,6 +91,7 @@ function component(id, definition)
                 }
                 else
                 {
+                    // override component definition of already loaded async component
                     Object.assign(
                         asyncComponent,
                         compileFn(customTemplate)
@@ -99,6 +105,12 @@ function component(id, definition)
     return originalComponentFn.call(this, id, newDefinition);
 }
 
+/**
+ * Get overridden template for a vue component.
+ * During ssr templates are queried from global object, during clientside render related script tags will be queried.
+ * @param {string} templateOverride The component tag to get the override for
+ * @return {string}
+ */
 function getTemplateOverride(templateOverride)
 {
     if (typeof document !== "undefined")
