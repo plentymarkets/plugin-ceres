@@ -1,5 +1,22 @@
 # Release Notes für Ceres
 
+## v5.0.30 (2021-05-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.29...5.0.30" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- `vueEventHub` wurde für aktives Server-Side Rendering (SSR) Client-seitig wieder hinzugefügt. Dadurch kann das Blog-Plugin in Version 2.0.0 in Kombination mit SSR fehlerfrei genutzt werden.
+- Im PageDesign.twig wurden der Layout-Container **AfterOpeningBodyTag** und der Block **PartialFooter** ergänzt.
+
+### Behoben
+
+- Im ShopBuilder wurde die Größe des Bodies bei Änderungen nicht neu berechnet. Dies wurde behoben.
+- Überschriebene Komponenten-Templates können nun serverseitig korrekt gerendert werden.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.30 gab es Änderungen an einer Template-Datei, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/2857/files#diff-6103acda40fc331c6f5ba92faab9976e92848d8fde0e9af7fe34abd593885128)
+
 ## v5.0.29 (2021-05-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.28...5.0.29" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
