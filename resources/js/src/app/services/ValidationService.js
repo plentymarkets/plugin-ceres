@@ -176,6 +176,7 @@ function _validateGroup($formControl, validationKey, requiredCount)
 
     let max = 1;
 
+    // If no requiredCount is given default to old behaviour
     if (requiredCount)
     {
         min = requiredCount.split(",")[0];
