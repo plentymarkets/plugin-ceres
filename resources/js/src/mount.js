@@ -1,5 +1,6 @@
 import Vue from "vue";
 import { isNullOrUndefined } from "./app/helper/utils";
+import { compileToFunctions, ssrCompileToFunctions } from "vue-template-compiler";
 
 const originalMountFn = Vue.prototype.$mount;
 const originalComponentFn = Vue.component;
@@ -55,6 +56,7 @@ function mount(el, hydrating)
 function component(id, definition)
 {
     const customTemplate = getComponentTemplate(id);
+    const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
 
     let newDefinition = definition;
 
@@ -64,7 +66,7 @@ function component(id, definition)
         {
             newDefinition = Object.assign(
                 definition,
-                Vue.compile(customTemplate)
+                compileFn(customTemplate)
             );
         }
         else if (typeof definition === "function")
@@ -86,7 +88,7 @@ function component(id, definition)
                 {
                     Object.assign(
                         asyncComponent,
-                        Vue.compile(customTemplate)
+                        compileFn(customTemplate)
                     );
                     return asyncComponent;
                 }
