@@ -63,7 +63,7 @@ function component(id, definition)
     {
         // use ssr optimized compiler function if document is not defined
         const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
-        
+
         if (typeof definition === "object")
         {
             // overridden component is defined in the common way: Vue.component('...', { ... })
