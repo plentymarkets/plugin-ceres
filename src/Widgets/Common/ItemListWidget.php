@@ -129,6 +129,11 @@ class ItemListWidget extends BaseWidget
                     ->toArray()
             );
 
+        $settings->createCheckbox('preloadImage')
+            ->withName('Widget.preloadImageLabel')
+            ->withTooltip('Widget.preloadImageTooltip')
+            ->withCondition('listType !== "last_seen"');
+
         $settings->createSpacing();
 
         return $settings->toArray();
