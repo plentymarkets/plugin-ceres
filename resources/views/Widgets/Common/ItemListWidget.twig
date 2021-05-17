@@ -134,7 +134,7 @@
                             {{ Twig.if("counter < maxPreload") }}
                                 {{ Twig.set("itemImage", "item.data.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
                                 {{ Twig.print("add_asset(itemImage.url,'image')") }}
-                                {{ Twig.set("counter", Twig.var("counter") + 1) }}
+                                {{ Twig.do("set counter = counter + 1") }}
                             {{ Twig.endif() }}
                         {{ Twig.endfor() }}
                     {% endif %}
