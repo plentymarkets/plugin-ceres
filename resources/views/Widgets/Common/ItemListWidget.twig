@@ -128,7 +128,7 @@
                 {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isItem() == '1'") }}
                     {% if preloadImage %}
                         {{ Twig.set("counter", 0) }}
-                        {{ Twig.set("maxPreload", 3) }}
+                        {{ Twig.set("maxPreload", widget.settings.maxPreload.mobile) }}
 
                         {{ Twig.for("item", "itemList.documents") }}
                             {{ Twig.if("counter < maxPreload") }}

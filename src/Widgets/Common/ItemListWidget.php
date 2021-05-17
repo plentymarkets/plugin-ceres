@@ -134,6 +134,20 @@ class ItemListWidget extends BaseWidget
             ->withTooltip('Widget.preloadImageTooltip')
             ->withCondition('listType !== "last_seen" && listType !== "cross_selling"');
 
+        $settings->createSelect('maxPreload')
+            ->withName('Widget.maxPreloadLabel')
+            ->withTooltip('Widget.maxPreloadTooltip')
+            ->withDefaultValue(3)
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(1, 'Widget.itemListItemsPerPage1')
+                    ->addEntry(2, 'Widget.itemListItemsPerPage2')
+                    ->addEntry(3, 'Widget.itemListItemsPerPage3')
+                    ->addEntry(4, 'Widget.itemListItemsPerPage4')
+                    ->toArray()
+            )
+            ->withCondition("preloadImage");
+
         $settings->createSpacing();
 
         return $settings->toArray();
