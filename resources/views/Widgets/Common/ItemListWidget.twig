@@ -127,9 +127,16 @@
                 {% endif %}
                 {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isItem() == '1'") }}
                     {% if preloadImage %}
-                        {{ Twig.set("itemData", "itemList.documents[0].data") }}
-                        {{ Twig.set("itemImage", "itemData.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
-                        {{ Twig.print("add_asset(itemImage.url,'image')") }}
+                        {{ Twig.set("counter", 0) }}
+                        {{ Twig.set("maxPreload", 3) }}
+
+                        {{ Twig.for("item", "itemList.documents") }}
+                            {{ Twig.if("counter < maxPreload") }}
+                                {{ Twig.set("itemImage", "item.data.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
+                                {{ Twig.print("add_asset(itemImage.url,'image')") }}
+                                {{ Twig.set("counter", Twig.var("counter") + 1) }}
+                            {{ Twig.endif() }}
+                        {{ Twig.endfor() }}
                     {% endif %}
                     <intersect>
                         <carousel :items-per-page="{{ itemsPerPage }}">
