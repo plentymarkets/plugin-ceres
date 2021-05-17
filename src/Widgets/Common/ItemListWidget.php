@@ -132,7 +132,7 @@ class ItemListWidget extends BaseWidget
         $settings->createCheckbox('preloadImage')
             ->withName('Widget.preloadImageLabel')
             ->withTooltip('Widget.preloadImageTooltip')
-            ->withCondition('listType !== "last_seen"');
+            ->withCondition('listType !== "last_seen" && listType !== "cross_selling"');
 
         $settings->createSpacing();
 
