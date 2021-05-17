@@ -12,6 +12,7 @@
 {% set itemsPerPage    = widget.settings.itemsPerPage.mobile %}
 {% set manufacturerId  = widget.settings.manufacturerId.mobile %}
 {% set crossSellingRelationType  = widget.settings.crossSellingRelationType.mobile %}
+{% set preloadImage    = widget.settings.preloadImage.mobile %}
 
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
@@ -125,6 +126,18 @@
                     </div>
                 {% endif %}
                 {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isItem() == '1'") }}
+                    {% if preloadImage %}
+                        {{ Twig.set("counter", 0) }}
+                        {{ Twig.set("maxPreload", widget.settings.maxPreload.mobile) }}
+
+                        {{ Twig.for("item", "itemList.documents") }}
+                            {{ Twig.if("counter < maxPreload") }}
+                                {{ Twig.set("itemImage", "item.data.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
+                                {{ Twig.print("add_asset(itemImage.url,'image')") }}
+                                {{ Twig.do("set counter = counter + 1") }}
+                            {{ Twig.endif() }}
+                        {{ Twig.endfor() }}
+                    {% endif %}
                     <intersect>
                         <carousel :items-per-page="{{ itemsPerPage }}">
                             {{ Twig.for("item", "itemList.documents") }}
