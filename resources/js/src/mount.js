@@ -160,7 +160,13 @@ function getComponentTemplate(tagName)
         }
         else if (typeof templates !== "undefined")
         {
-            componentTemplates = templates;
+            componentTemplates = Object.keys(templates || {}).reduce((result, key) =>
+            {
+                return {
+                    ...result,
+                    [key]: replaceDelimiters(templates[key])
+                };
+            }, {});
         }
     }
 
