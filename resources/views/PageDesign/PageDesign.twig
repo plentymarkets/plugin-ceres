@@ -40,6 +40,8 @@
 
 <body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
 
+{{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
+
 <!-- SSR:app() -->
 <div id="vue-app" class="app">
     {{ context.renderState() }}
@@ -54,6 +56,7 @@
     </div>
 
     {% include getPartial('footer') %}
+    {% block PartialFooter %}{% endblock %}
 
     <!-- LOGIN MODAL -->
     <div id="login-modal-wrapper">

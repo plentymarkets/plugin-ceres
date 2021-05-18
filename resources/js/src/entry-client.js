@@ -42,5 +42,6 @@ window.$ = jQuery;
 window.Vue = Vue;
 window.NotificationService = NotificationService;
 window.ceresTranslate = TranslationService.translate;
+window.vueEventHub = new Vue();
 
 import "./app/main";

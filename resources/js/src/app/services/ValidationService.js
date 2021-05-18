@@ -119,6 +119,8 @@ function _validateElement(elem)
         return i.trim();
     }) || ["text"];
 
+    const requiredCount = $elem.attr("data-required-count");
+
     let hasError       = false;
 
     _findFormControls($elem).each(function(i, formControl)
@@ -134,8 +136,7 @@ function _validateElement(elem)
 
         if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]"))
         {
-
-            if (!_validateGroup($formControl, validationKey))
+            if (!_validateGroup($formControl, validationKey, requiredCount))
             {
                 hasError = true;
             }
@@ -164,11 +165,29 @@ function _validateElement(elem)
     return !hasError;
 }
 
-function _validateGroup($formControl, validationKey)
+function _validateGroup($formControl, validationKey, requiredCount)
 {
     const groupName = $formControl.attr("name");
     const $group    = $form.find("[name=\"" + groupName + "\"]");
-    const range     = _eval(validationKey) || { min: 1, max: 1 };
+
+    let range = null;
+
+    let min = 1;
+
+    let max = 1;
+
+    // If no requiredCount is given default to old behaviour
+    if (requiredCount)
+    {
+        min = requiredCount.split(",")[0];
+        max = requiredCount.split(",")[1];
+        range = { min, max };
+    }
+    else
+    {
+        range = _eval(validationKey) || { min, max };
+    }
+
     const checked   = $group.filter(":checked").length;
 
     return checked >= range.min && checked <= range.max;

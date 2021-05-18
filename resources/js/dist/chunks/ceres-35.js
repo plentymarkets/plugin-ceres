@@ -89,14 +89,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
           });
 
-          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(basketItem)) {
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_8__["isDefined"])(basketItem)) {
             var _properties = basketItem.variation.data.properties;
 
             var _property = _properties.find(function (property) {
               return property.property.id === propertyId;
             });
 
-            if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(_property)) {
+            if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_8__["isDefined"])(_property)) {
               return _property.property.selectionValues.find(function (sv) {
                 return parseInt(sv.id) === parseInt(_this.property.value);
               }).name;

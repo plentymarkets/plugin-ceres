@@ -55,7 +55,7 @@ class SelectionWidget extends BaseWidget
              ->withDefaultValue(false)
              ->withName("Widget.mailFormFieldIsRequiredLabel")
              ->withTooltip("Widget.mailFormFieldIsRequiredTooltip");
-
+ 
         $settingsFactory->createSelect("selectType")
              ->withDefaultValue("dropdown")
              ->withName("Widget.selectionSelectTypeLabel")
@@ -66,6 +66,18 @@ class SelectionWidget extends BaseWidget
                     ->addEntry("radio", "Widget.selectionSelectTypeRadio")
                     ->addEntry("checkbox", "Widget.selectionSelectTypeCheckbox")
                     ->toArray());
+
+        $settingsFactory->createNumber("minRequired")
+            ->withCondition("isRequired && selectType == 'checkbox'")
+            ->withDefaultValue(1)
+            ->withName("Widget.selectionCheckboxMinRequiredLabel")
+            ->withTooltip("Widget.selectionCheckboxMinRequiredTooltip");
+    
+        $settingsFactory->createNumber("maxRequired")
+            ->withCondition("isRequired && selectType == 'checkbox'")
+            ->withDefaultValue(1)
+            ->withName("Widget.selectionCheckboxMaxRequiredLabel")
+            ->withTooltip("Widget.selectionCheckboxMaxRequiredTooltip");
 
         $settingsFactory->createText("selectOptions")
             ->withList(1)
