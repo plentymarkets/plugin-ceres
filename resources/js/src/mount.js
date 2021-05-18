@@ -55,30 +55,51 @@ function mount(el, hydrating)
  */
 function component(id, definition)
 {
-    const customTemplate = getComponentTemplate(id);
+    return originalComponentFn.call(this, id, applyOverride(definition, id));
+}
 
-    let newDefinition = definition;
+/**
+ * Compile and assign custom template to component if defined.
+ * Recursively apply overrides for defined child components.
+ *
+ * @param {Object|Function} component The vue component to apply the override to.
+ * @param {string} name Tag name of the component. Used to query custom templates by. If not defined, the name property of the component object will be used. (Optional)
+ */
+function applyOverride(component, name)
+{
+    if (component && component.components)
+    {
+        component.components = Object.keys(component.components).reduce((components, key) =>
+        {
+            return {
+                ...components,
+                [key]: applyOverride(component.components[key])
+            };
+        }, {});
+    }
+
+    const customTemplate = getComponentTemplate(name || component.name);
 
     if (customTemplate)
     {
         // use ssr optimized compiler function if document is not defined
         const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
 
-        if (typeof definition === "object")
+        if (typeof component === "object")
         {
             // overridden component is defined in the common way: Vue.component('...', { ... })
-            newDefinition = Object.assign(
-                definition,
+            return Object.assign(
+                component,
                 compileFn(customTemplate)
             );
         }
-        else if (typeof definition === "function")
+        else if (typeof component === "function")
         {
             // overridden component is defined asynchronously
-            newDefinition = () =>
+            return () =>
             {
                 // invoke async loading function
-                const asyncComponent = definition();
+                const asyncComponent = component();
 
                 if (asyncComponent instanceof Promise)
                 {
@@ -103,7 +124,7 @@ function component(id, definition)
         }
     }
 
-    return originalComponentFn.call(this, id, newDefinition);
+    return component;
 }
 
 /**
