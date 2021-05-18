@@ -8,6 +8,7 @@ import { debounce } from "./helper/debounce";
 import Vue from "vue";
 import { getStyle } from "./helper/dom";
 import { detectPassiveEvents } from "./helper/featureDetect";
+import HeaderScroller from "./helper/HeaderScroller";
 
 // Frontend end scripts
 // eslint-disable-next-line
@@ -44,21 +45,6 @@ function CeresMain()
     {
         $("html").addClass("unkown-os");
     }
-
-    $(window).scroll(function()
-    {
-        if ($(".wrapper-main").hasClass("isSticky"))
-        {
-            if ($(this).scrollTop() > 1)
-            {
-                $(".wrapper-main").addClass("sticky");
-            }
-            else
-            {
-                $(".wrapper-main").removeClass("sticky");
-            }
-        }
-    });
 
     window.onpopstate = function(event)
     {
@@ -225,198 +211,42 @@ const showShopNotification = function(event)
 
 document.addEventListener("showShopNotification", showShopNotification);
 
-let headerParent = document.querySelector("[data-header-offset]");
+const headerParent = document.querySelector("[data-header-offset]");
 
-if ( headerParent )
+if (headerParent)
 {
-    let headerLoaded = false;
+    const headerScroller = new HeaderScroller(headerParent);
 
-    let allHeaderChildrenHeights = [];
-
-    let headerHeight = 0;
-
-    // Calculate top offset for vue-app node because header is not part of document flow
-    function calculateBodyOffset()
+    window.addEventListener("resize", debounce(() =>
     {
-        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
-        if (headerLoaded && headerParent)
-        {
-            const vueApp = document.getElementById("vue-app");
-
-            vueApp.style.marginTop = headerHeight + "px";
-            vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
-        }
-    }
-
-    // Set descending z-index for all header elements and create list of elements with unfixed class for later use
-    function prepareHeaderElements()
-    {
-        if (headerLoaded && !App.isShopBuilder)
-        {
-            headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
-            let zIndex = 100;
-
-            for (let i = 0; i < headerParent.children.length; i++)
-            {
-                const elem = headerParent.children[i];
-
-                elem.style.zIndex = zIndex;
-                zIndex--;
-            }
-        }
-    }
-
-    // Collect heights of header elements for later use
-    function getHeaderHeights()
-    {
-        headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
-        allHeaderChildrenHeights = [];
-
-        headerHeight = 0;
-
-        for (let i = 0; i < headerParent.children.length; i++)
-        {
-            const elementHeight = headerParent.children[i].getBoundingClientRect().height;
-
-            allHeaderChildrenHeights.push(elementHeight);
-            headerHeight += elementHeight;
-        }
-    }
-
-    // Scroll header elements depending on if they are unfixed or not
-    function scrollHeaderElements()
-    {
-        if (headerLoaded && !App.isShopBuilder)
-        {
-            headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
-
-            let absolutePos = 0;
-
-            let fixedElementsHeight = 0;
-
-            let offset = 0;
-
-            const scrollTop = window.pageYOffset;
-
-            for (let i = 0; i < headerParent.children.length; i++)
-            {
-                const elem = headerParent.children[i];
-                const elemHeight = allHeaderChildrenHeights[i];
-
-                offset = absolutePos - scrollTop;
-                elem.style.position = "absolute";
-
-                // Element is unfixed and should scroll indefinetly
-                if (elem.classList.contains("unfixed"))
-                {
-                    elem.style.top = offset + "px";
-                }
-                // Element is fixed and should scroll until it hits top of header or next fixed element
-                else
-                {
-                    if (offset < 0)
-                    {
-                        elem.style.top = 0;
-                    }
-                    else
-                    {
-                        elem.style.top = offset + "px";
-                    }
-
-                    if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
-                    {
-                        elem.style.top = fixedElementsHeight + "px";
-                    }
-
-                    fixedElementsHeight = fixedElementsHeight + elemHeight;
-                }
-                absolutePos = absolutePos + elemHeight;
-            }
-        }
-    }
-
-    window.addEventListener("resize", debounce(function()
-    {
-        getHeaderHeights();
-        calculateBodyOffset();
-        scrollHeaderElements();
+        headerScroller.move(true, true);
     }, 50));
 
-    window.addEventListener("load", function()
+    window.addEventListener("load", () =>
     {
-        getHeaderHeights();
-        calculateBodyOffset();
-        prepareHeaderElements();
-        scrollHeaderElements();
+        headerScroller.move(true, true, true);
 
-        let timeout;
-
-        window.addEventListener("scroll", function()
+        window.addEventListener("scroll", () =>
         {
-            if (timeout)
-            {
-                window.cancelAnimationFrame(timeout);
-            }
-
-            timeout = window.requestAnimationFrame(scrollHeaderElements);
+            headerScroller.scrollWithAnimationFrame();
 
         }, detectPassiveEvents() ? { passive: true } : false);
     });
 
     if (document.fonts)
     {
-        document.fonts.onloadingdone = function(evt)
+        document.fonts.onloadingdone = () =>
         {
-            getHeaderHeights();
-            calculateBodyOffset();
-            prepareHeaderElements();
-            scrollHeaderElements();
+            headerScroller.move(true, true, true);
         };
     }
 
     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
     {
-        getHeaderHeights();
-        calculateBodyOffset();
+        headerScroller.move(true);
     });
 
-    const headerImages = headerParent.querySelectorAll("img");
-
-    Promise.all(
-        Array.prototype.slice.call(headerImages).map(function(headerImage)
-        {
-            return new Promise(function(resolve)
-            {
-                if (headerImage.complete)
-                {
-                    resolve();
-                }
-                else
-                {
-                    headerImage.onload = function()
-                    {
-                        resolve();
-                    };
-                    headerImage.onerror = function()
-                    {
-                        resolve();
-                    };
-                }
-            });
-        })
-    ).then(function()
-    {
-        // Initialize
-        headerLoaded = true;
-        getHeaderHeights();
-        calculateBodyOffset();
-        scrollHeaderElements();
-    });
-
-    calculateBodyOffset();
+    headerScroller.move();
 }
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
