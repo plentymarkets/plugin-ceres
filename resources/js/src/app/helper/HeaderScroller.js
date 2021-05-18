@@ -4,7 +4,6 @@ export default class HeaderScroller
     {
         this._headerParent = headerParent;
         this.appName = appName;
-
         this.headerLoaded = false;
         this.allHeaderChildrenHeights = [];
         this.headerHeight = 0;
@@ -13,6 +12,7 @@ export default class HeaderScroller
         this.checkForHeaderImages();
     }
 
+    // The header parent element.
     get headerParent()
     {
         if (this._headerParent)
@@ -24,6 +24,7 @@ export default class HeaderScroller
         return this._headerParent;
     }
 
+    // Check all the images present in the header, and recalculate header height, when needed.
     checkForHeaderImages()
     {
         const headerImages = this.headerParent.querySelectorAll("img");
@@ -46,7 +47,6 @@ export default class HeaderScroller
             })
         ).then(() =>
         {
-            // Initialize
             this.headerLoaded = true;
             this.getHeaderHeights();
             this.calculateBodyOffset();
@@ -148,6 +148,7 @@ export default class HeaderScroller
         }
     }
 
+    // Call scrollHeaderElements() via requestAnimationFrame and cancel the old one, if set.
     scrollWithAnimationFrame()
     {
         if (this.timeout)
@@ -160,6 +161,7 @@ export default class HeaderScroller
         );
     }
 
+    // Method to call the internal methods, to realize the scrolling behavior. (Simplify the code)
     move(getHeaderHeights, scrollHeaderElements, prepareHeaderElements)
     {
         if (getHeaderHeights)
