@@ -162,12 +162,12 @@ export default class HeaderScroller
 
     move(getHeaderHeights, scrollHeaderElements, prepareHeaderElements)
     {
-        this.calculateBodyOffset();
-
         if (getHeaderHeights)
         {
             this.getHeaderHeights();
         }
+
+        this.calculateBodyOffset();
 
         if (prepareHeaderElements)
         {
