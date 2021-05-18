@@ -62,6 +62,7 @@ class ImageBoxWidget extends BaseWidget
             ->withTooltip('Widget.imageBoxAspectRatioTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
+                    ->addEntry('retain', 'Widget.imageBoxRetainAspectRatio')
                     ->addEntry('auto', 'Widget.imageBoxAspectRatioAuto')
                     ->addEntry('3-1', 'Widget.imageBoxAspectRatioThreeToOne')
                     ->addEntry('2-1', 'Widget.imageBoxAspectRatioTwoToOne')
@@ -87,6 +88,7 @@ class ImageBoxWidget extends BaseWidget
             );
 
         $settings->createSelect('imageSize')
+            ->withCondition("aspectRatio !== 'retain'")
             ->withDefaultValue('cover')
             ->withName('Widget.imageBoxImageSizeLabel')
             ->withTooltip('Widget.imageBoxImageSizeTooltip')

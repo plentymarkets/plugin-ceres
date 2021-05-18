@@ -40,6 +40,8 @@
 
 <body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
 
+{{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
+
 <!-- SSR:app() -->
 <div id="vue-app" class="app">
     {{ context.renderState() }}
@@ -54,6 +56,7 @@
     </div>
 
     {% include getPartial('footer') %}
+    {% block PartialFooter %}{% endblock %}
 
     <!-- LOGIN MODAL -->
     <div id="login-modal-wrapper">
@@ -198,7 +201,7 @@
         "publicPath": "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         "isCheapestSorting": "{{ services.template.isCheapestSorting() }}",
         "initialData": {
-            "shippingCountries": {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
+            "shippingCountries": {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
             "shippingCountryId": {{ services.checkout.getShippingCountryId() }},
             "showNetPrices": {{ showNetPrices | json_encode }}
         },

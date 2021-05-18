@@ -95,10 +95,16 @@ class TwigJsonDataContainer extends Twig_Extension
         $result = [];
         foreach( $this->dataStorage as $uid => $data )
         {
-            $result[] = "<script type=\"application/json\" id=\"" . $uid . "\">" . $data . "</script>";
+            $script  = "<!-- SSR:global(jsonData.$uid) -->\n";
+            $script .= "<script type=\"application/json\" id=\"$uid\">\n";
+            $script .= $data . "\n";
+            $script .= "</script>\n";
+            $script .= "<!-- /SSR -->";
+
+            $result[] = $script;
         }
 
-        return implode("", $result);
+        return implode("\n", $result);
     }
 
     /**

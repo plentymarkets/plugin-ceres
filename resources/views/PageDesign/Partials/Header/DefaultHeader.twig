@@ -57,7 +57,7 @@
                                                 aria-expanded="false"
                                                 aria-controls="searchBox"
                                                 data-parent="#controlsList"
-                                                aria-label="{{ trans('trans(\'Ceres::Template.headerSearch\')') }}"
+                                                aria-label="{{ trans('Ceres::Template.headerSearch') }}"
                                                 @mouseover.once="$store.dispatch('loadComponent', 'item-search')">
                                                 <span class="anicon-search-item" aria-hidden="true"></span>
                                             </a>
@@ -66,7 +66,7 @@
                                             <li class="list-inline-item control-wish-list">
                                                 <lazy-hydrate when-idle>
                                                     <wish-list-count>
-                                                        <a class="nav-link" aria-label="{{ trans('trans("Ceres::Template.wishList') }}">
+                                                        <a class="nav-link" aria-label="{{ trans('Ceres::Template.wishList') }}">
                                                             <span class="badge-right mr-1 d-none d-sm-inline">0</span>
                                                             <i class="fa fa-heart-o" aria-hidden="true"></i>
                                                         </a>
@@ -211,9 +211,12 @@
                                                     <strong>{{ trans("Ceres::Template.headerSelectShippingCountry") }}</strong>
                                                     <hr>
                                                 </div>
-                                                <lazy-hydrate when-visible>
+                                                <intersect>
                                                     <shipping-country-select :disable-input="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
-                                                </lazy-hydrate>
+                                                    <template #loading>
+                                                        <div class="row" style="height:1px;"></div>
+                                                    </template>
+                                                </intersect>
                                             </div>
                                         </div>
                                     </div>

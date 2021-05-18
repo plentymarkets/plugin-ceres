@@ -129,12 +129,12 @@
 
             {{ Twig.if("paymentMethodId != -1 and showAdditionalPaymentInformation == true") }}
                 <change-payment-method
-                        :current-order="{{ Twig.print("data.order | json_encode") }}"
-                        :change-possible="{{ Twig.print(Twig.call("services.order.allowPaymentMethodSwitchFrom", [Twig.var("paymentMethodId"), Twig.var("data.order.id")]) ~ " | json_encode") }}"
-                        :allowed-payment-methods="{{ Twig.print(Twig.call("services.order.getPaymentMethodListForSwitch", [Twig.var("paymentMethodId"), Twig.var("data.order.id")]) ~ " | json_encode") }}"
-                        :payment-status="{{ Twig.print("paymentStatus | json_encode") }}"
-                        :current-payment-method-name="{{ Twig.print("data.paymentMethodName | json_encode") }}"
-                        :current-template="{{ Twig.print("currentTemplate | json_encode") }}">
+                    :current-order="{{ Twig.print("data.order | json_encode") }}"
+                    :change-possible="{{ Twig.print(Twig.call("services.order.allowPaymentMethodSwitchFrom", [Twig.var("paymentMethodId"), Twig.var("data.order.id")]) ~ " | json_encode") }}"
+                    :allowed-payment-methods="{{ Twig.print(Twig.call("services.order.getPaymentMethodListForSwitch", [Twig.var("paymentMethodId"), Twig.var("data.order.id")]) ~ " | json_encode") }}"
+                    :payment-status="{{ Twig.print("paymentStatus | json_encode") }}"
+                    :current-payment-method-name="{{ Twig.print("data.paymentMethodName | json_encode") }}"
+                    :current-template="{{ Twig.print("currentTemplate | json_encode") }}">
                 </change-payment-method>
             {{ Twig.endif() }}
 

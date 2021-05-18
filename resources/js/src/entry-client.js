@@ -1,6 +1,7 @@
 import "./app/publicPath";
 import Vue from "vue";
 import NotificationService from "./app/services/NotificationService";
+import TranslationService from "./app/services/TranslationService";
 import "bootstrap";
 import "owl.carousel";
 import jQuery from "jquery";
@@ -15,7 +16,8 @@ Vue.prototype.$mount = mount;
 App.isSSR = false;
 App.isSSREnabled = App.config.log.performanceSsr;
 
-window.createApp = (selector) => {
+window.createApp = (selector) =>
+{
     // client-specific bootstrapping logic...
     const { app, store } = createApp({
         template: "#ssr-script-container"
@@ -39,5 +41,7 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 window.Vue = Vue;
 window.NotificationService = NotificationService;
+window.ceresTranslate = TranslationService.translate;
+window.vueEventHub = new Vue();
 
 import "./app/main";

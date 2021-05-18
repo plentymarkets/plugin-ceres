@@ -125,6 +125,13 @@
                 {{ Twig.endif() }}
             {{ Twig.endif() }}
         </ul>
+        <script2 type="application/ld+json">
+        {
+            "@context":"http://schema.org/",
+            "@type":"BreadcrumbList",
+            "itemListElement": {{ Twig.print('crumbs | json_encode | raw') }}
+        }
+        </script2>
     </nav>
 </div>
 

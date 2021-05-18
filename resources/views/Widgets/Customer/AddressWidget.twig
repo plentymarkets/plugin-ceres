@@ -43,12 +43,12 @@
                     "gb": widget.settings.addressRequiredFieldsInvoiceGB.mobile | default([])
                 } %}
                 <invoice-address-select
-                        :has-to-validate="{{ Twig.print("services.template.isCurrentTemplate('tpl.checkout') | json_encode") }}"
-                        :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
-                        :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
-                        default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
-                        {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                        {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                    :has-to-validate="{{ Twig.print("services.template.isCurrentTemplate('tpl.checkout') | json_encode") }}"
+                    :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+                    :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+                    default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
+                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
                 </invoice-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBillingAddress"])) }}

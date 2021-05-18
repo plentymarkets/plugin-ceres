@@ -130,6 +130,8 @@ import LazyHydrate from "vue-lazy-hydration";
 Vue.component("lazy-hydrate", LazyHydrate);
 import ClientOnly from "./app/components/common/ClientOnly.vue";
 Vue.component("client-only", ClientOnly);
+import BackgroundImg from "./app/components/common/BackgroundImg.vue";
+Vue.component("background-img", BackgroundImg);
 
 // =========================
 // DIRECTIVES
@@ -200,6 +202,7 @@ import "./app/main";
 
 import TranslationService from "./app/services/TranslationService";
 import { createStore, initClientListeners, initClientStore, initServerStore } from "./app/store";
+import { initListener } from "./app/services/ApiService";
 
 window.ceresTranslate = TranslationService.translate;
 
@@ -211,3 +214,4 @@ const store = createStore();
 initServerStore(store);
 initClientStore(store);
 initClientListeners(store);
+initListener();

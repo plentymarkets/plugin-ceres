@@ -85,6 +85,26 @@
         }
     }
 
+    &.widget-retain-aspect-ratio {
+        position: relative;
+
+        img {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            object-fit: initial;
+        }
+
+        .widget-inner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
 
     &.widget-primary {
         .widget-caption {

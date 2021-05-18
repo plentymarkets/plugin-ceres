@@ -195,6 +195,7 @@ export function createApp(options)
     Vue.component("single-item-set-component", SingleItemSetComponent);
     Vue.component("form-attachment", () => import("./app/components/form/FormAttachment.vue"));
     Vue.component("client-only", ClientOnly);
+    Vue.component("background-img", () => import("./app/components/common/BackgroundImg.vue"));
 
     // EXTERNAL
     Vue.component("lazy-hydrate", LazyHydrate);
@@ -202,8 +203,6 @@ export function createApp(options)
 
     // CHECKOUT
     Vue.component("edit-coupon-overlay", () => import("./app/components/myAccount/EditCouponOverlay.vue"));
-
-    // window.ceresTranslate = TranslationService.translate;
 
     Vue.prototype.$translate = TranslationService.translate;
     Vue.prototype.$ceres = App;
