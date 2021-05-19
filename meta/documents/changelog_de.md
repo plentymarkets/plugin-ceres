@@ -6,12 +6,12 @@
 
 - Das Bilderbox-Widget besitzt nun eine weitere Option der Einstellung Seitenverhältnis: "Seitenverhältnis beibehalten". Mit dieser Option behält das Widget das Seitenverhältnis des Bildes.
 - Am Auswahlfeld-Widget des Kontaktformulars, beim Auswahltyp "Mehrfachauswahl" in Kombination mit der Option "Pflichtfeld" lässt sich jetzt die Minimal- und Maximalmenge der auszuwählenden Optionen einstellen.
-- Das Artikel-Listen Widget unterstützt nun das Vorladen von Bildern.
+- Das Artikellisten-Widget unterstützt nun das Vorladen von Bildern.
 
 ### Geändert
 
-- Die Mengeneingabe wird nun gemeinsam mit der Komponente des Warenkorbbuttons geladen. Dies verringert die Ladezeit auf der Artikelansicht. Danke an @naturdrogerie
-- ShippingCountrySelect im Header wird nun von Intersect anstatt von Lazy-Hydrate abgedeckt. Danke an @MaxBentz!
+- Die QuantityInput Komponente wird nun gemeinsam mit der AddToBasket Komponente geladen. Dies verringert die Ladezeit auf der Artikelansicht. Danke an @naturdrogerie
+- Die ShippingCountrySelect Komponente im Header wird nun von Intersect anstatt von Lazy-Hydrate abgedeckt. Danke an @MaxBentz!
 
 ### Behoben
 
@@ -28,7 +28,7 @@
 - [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2862/files#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
 - [resources/views/Widgets/Form/SelectionWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2855/files#diff-87084c109a175d99c3284c8dc3de606d3ef045d10aa519da1acf7530c5b36fc0)
 - [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2851/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66) 
-- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2851/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/Widgets/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/2851/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
 
 ## v5.0.30 (2021-05-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.29...5.0.30" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
