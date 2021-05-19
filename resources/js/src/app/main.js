@@ -4,7 +4,6 @@ const browserDetect = require("detect-browser");
 const NotificationService = require("./services/NotificationService");
 const AutoFocusService = require("./services/AutoFocusService");
 
-import { debounce } from "./helper/debounce";
 import Vue from "vue";
 import { getStyle } from "./helper/dom";
 import { detectPassiveEvents } from "./helper/featureDetect";
@@ -215,38 +214,7 @@ const headerParent = document.querySelector("[data-header-offset]");
 
 if (headerParent)
 {
-    const headerScroller = new HeaderScroller(headerParent);
-
-    window.addEventListener("resize", debounce(() =>
-    {
-        headerScroller.move(true, true);
-    }, 50));
-
-    window.addEventListener("load", () =>
-    {
-        headerScroller.move(true, true, true);
-
-        window.addEventListener("scroll", () =>
-        {
-            headerScroller.scrollWithAnimationFrame();
-
-        }, detectPassiveEvents() ? { passive: true } : false);
-    });
-
-    if (document.fonts)
-    {
-        document.fonts.onloadingdone = () =>
-        {
-            headerScroller.move(true, true, true);
-        };
-    }
-
-    $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function()
-    {
-        headerScroller.move(true);
-    });
-
-    headerScroller.move();
+    new HeaderScroller(headerParent);
 }
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
