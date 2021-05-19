@@ -5,7 +5,7 @@
 ### Hinzugefügt
 
 - Das Bilderbox-Widget besitzt nun eine weitere Option der Einstellung Seitenverhältnis: "Seitenverhältnis beibehalten". Mit dieser Option behält das Widget das Seitenverhältnis des Bildes.
-- Am Auswahlfeld-Widget des Kontaktformulars, beim Auswahltyp "Mehrfachauswahl" in Kombination mit der Option "Pflichtfeld" lässt sich jetzt die Minimal- und Maximalmenge der auszuwählenden Optionen einstellen.
+- Am Auswahlfeld-Widget des Kontaktformulars lässt sich jetzt beim Auswahltyp "Mehrfachauswahl" in Kombination mit der Option "Pflichtfeld" die Minimal- und Maximalmenge der auszuwählenden Optionen einstellen.
 - Das Artikellisten-Widget unterstützt nun das Vorladen von Bildern.
 
 ### Geändert
