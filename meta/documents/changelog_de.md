@@ -18,7 +18,7 @@
 - Die Einstellung für das Aktivieren von Vue-SSR im Assistenten konnte in Konfigurationen im Vorschaumodus nicht angezeigt werden. Dies wurde behoben.
 - Templates von verschachtelten Komponenten, die nicht über Vue.component() registriert wurden, werden serverseitig berücksichtigt.
 - Die Trennzeichen in überschriebenen Komponenten-Templates werden von SSR korrekt interpretiert.
-- In der LazyLoad Komponente konnte es zu NullPointer Exceptions kommen. Das Verhalten wurde behoben.
+- In der LazyLoad-Komponente konnte es zu NullPointerExceptions kommen. Das Verhalten wurde behoben.
 
 ### Angepasste Templates
 
