@@ -10,7 +10,7 @@
 
 ### Changed
 
-- The QuantityInput component is now loaded together with the AddToBasket component. This reduces the loading time on the item view. Thanks to @naturdrogerie
+- The QuantityInput component is now loaded together with the AddToBasket component. This reduces the loading time of the item view. Thanks to @naturdrogerie
 - The ShippingCountrySelect component in the header is now covered by Intersect instead of Lazy-Hydrate. Thanks to @MaxBentz!
 
 ### Fixed
