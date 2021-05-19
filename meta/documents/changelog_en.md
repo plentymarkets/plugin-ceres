@@ -4,7 +4,7 @@
 
 ### Added
 
-- The image box widget now has another option of the aspect ratio setting: "Retain aspect ratio". With this option, the widget retains the aspect ratio of the image.
+- The image box widget now has another option for the aspect ratio setting: "Retain aspect ratio". With this option, the widget retains the aspect ratio of the image.
 - At the selection field widget of the contact form, you can now use the selection type "Checkboxes" in combination with the option "Mandatory field" to define the minimum and maximum amount of options to be selected.
 - The item list widget now supports image preloading.
 
