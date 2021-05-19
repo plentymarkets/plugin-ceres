@@ -16,7 +16,7 @@
 ### Fixed
 
 - The setting for enabling Vue SSR in the wizard could not be displayed in preview mode configurations. This has been fixed.
-- Templates of nested components that have not been registered via Vue.component() are taken into account server-side.
+- Templates of nested components that have not been registered via Vue.component() are taken into account on the server-side.
 - The delimiters in overwritten component templates are interpreted correctly by SSR.
 - NullPointerExceptions could occur in the LazyLoad component. The behaviour has been fixed.
 
