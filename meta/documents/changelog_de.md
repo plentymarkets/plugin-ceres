@@ -10,7 +10,7 @@
 
 ### Geändert
 
-- Die QuantityInput Komponente wird nun gemeinsam mit der AddToBasket Komponente geladen. Dies verringert die Ladezeit auf der Artikelansicht. Danke an @naturdrogerie
+- Die QuantityInput-Komponente wird nun gemeinsam mit der AddToBasket-Komponente geladen. Dies verringert die Ladezeit in der Artikelansicht. Danke an @naturdrogerie
 - Die ShippingCountrySelect Komponente im Header wird nun von Intersect anstatt von Lazy-Hydrate abgedeckt. Danke an @MaxBentz!
 
 ### Behoben
