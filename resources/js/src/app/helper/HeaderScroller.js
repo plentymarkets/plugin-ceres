@@ -91,7 +91,7 @@ export default class HeaderScroller
     // Calculate top offset for vue-app node because header is not part of document flow
     calculateBodyOffset()
     {
-        if (this.headerParent)
+        if (!App.isShopBuilder && this.headerParent)
         {
             const app = document.getElementById("vue-app");
 
@@ -103,6 +103,7 @@ export default class HeaderScroller
     // Scroll header elements depending on if they are unfixed or not
     scrollHeaderElements()
     {
+        console.log("scrollHeaderElements()", App.isShopBuilder);
         if (!App.isShopBuilder)
         {
             let absolutePos = 0;
