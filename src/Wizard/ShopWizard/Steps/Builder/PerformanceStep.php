@@ -65,7 +65,6 @@ class PerformanceStep extends Step
         return [
             "title" => "Wizard.ssr",
             "description" => "Wizard.ssrDescription",
-            "condition" => $this->globalsCondition,
             "form" => [
                 "performance_ssr" => [
                     "type" => "toggle",
