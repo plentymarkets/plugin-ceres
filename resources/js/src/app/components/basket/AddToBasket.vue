@@ -82,11 +82,17 @@ import { navigateTo } from "../../services/UrlService";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { mapState } from "vuex";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
+import QuantityInput from "../item/QuantityInput.vue";
 
 const NotificationService = require("../../services/NotificationService");
 
 export default {
     mixins: [ButtonSizePropertyMixin],
+    
+    components:
+    {
+        QuantityInput
+    },
 
     props:
     {

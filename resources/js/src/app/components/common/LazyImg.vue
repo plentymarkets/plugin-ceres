@@ -74,7 +74,7 @@ export default {
          * Check if url points to a .webp image and return appropriate mime-type
          */
         mimeType() {
-            const matches = this.imageUrl.match(/.?(\.\w+)(?:$|\?)/);
+            const matches = this.imageUrl?.match(/.?(\.\w+)(?:$|\?)/);
 
             if(matches)
             {
