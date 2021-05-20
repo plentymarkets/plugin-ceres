@@ -129,7 +129,7 @@ class TwigItemDataField extends Twig_Extension
 
         if (is_null($directiveType)) {
 
-            if(field === 'texts.description' || field === 'texts.technicalData')
+            if($field === "texts.description" || $field === "texts.technicalData")
             { 
                 return "<client-only>$twigPrint</client-only>";
             }
