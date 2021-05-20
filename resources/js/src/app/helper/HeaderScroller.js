@@ -77,21 +77,18 @@ export default class HeaderScroller
     // Set descending z-index for all header elements and create list of elements with unfixed class for later use
     updateZIndexes()
     {
-        if (!App.isShopBuilder)
-        {
-            let zIndex = 100;
+        let zIndex = 100;
 
-            this.headerParent?.children.forEach(element =>
-            {
-                element.style.zIndex = zIndex--;
-            });
-        }
+        this.headerParent?.children.forEach(element =>
+        {
+            element.style.zIndex = zIndex--;
+        });
     }
 
     // Calculate top offset for vue-app node because header is not part of document flow
     calculateBodyOffset()
     {
-        if (!App.isShopBuilder && this.headerParent)
+        if (this.headerParent)
         {
             const app = document.getElementById("vue-app");
 
@@ -103,49 +100,45 @@ export default class HeaderScroller
     // Scroll header elements depending on if they are unfixed or not
     scrollHeaderElements()
     {
-        console.log("scrollHeaderElements()", App.isShopBuilder);
-        if (!App.isShopBuilder)
+        let absolutePos = 0;
+
+        let fixedElementsHeight = 0;
+
+        let offset = 0;
+
+        for (let i = 0; i < this.headerParent.children.length; i++)
         {
-            let absolutePos = 0;
+            const elem = this.headerParent.children[i];
+            const elemHeight = this.allHeaderChildrenHeights[i];
 
-            let fixedElementsHeight = 0;
+            offset = absolutePos - window.pageYOffset;
+            elem.style.position = "absolute";
 
-            let offset = 0;
-
-            for (let i = 0; i < this.headerParent.children.length; i++)
+            // Element is unfixed and should scroll indefinetly
+            if (elem.classList.contains("unfixed"))
             {
-                const elem = this.headerParent.children[i];
-                const elemHeight = this.allHeaderChildrenHeights[i];
-
-                offset = absolutePos - window.pageYOffset;
-                elem.style.position = "absolute";
-
-                // Element is unfixed and should scroll indefinetly
-                if (elem.classList.contains("unfixed"))
+                elem.style.top = offset + "px";
+            }
+            // Element is fixed and should scroll until it hits top of header or next fixed element
+            else
+            {
+                if (offset < 0)
+                {
+                    elem.style.top = 0;
+                }
+                else
                 {
                     elem.style.top = offset + "px";
                 }
-                // Element is fixed and should scroll until it hits top of header or next fixed element
-                else
+
+                if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
                 {
-                    if (offset < 0)
-                    {
-                        elem.style.top = 0;
-                    }
-                    else
-                    {
-                        elem.style.top = offset + "px";
-                    }
-
-                    if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
-                    {
-                        elem.style.top = fixedElementsHeight + "px";
-                    }
-
-                    fixedElementsHeight = fixedElementsHeight + elemHeight;
+                    elem.style.top = fixedElementsHeight + "px";
                 }
-                absolutePos = absolutePos + elemHeight;
+
+                fixedElementsHeight = fixedElementsHeight + elemHeight;
             }
+            absolutePos = absolutePos + elemHeight;
         }
     }
 
@@ -182,16 +175,6 @@ export default class HeaderScroller
                 this.initialize();
             }
         }, detectPassiveEvents() ? { passive: true } : false);
-
-        if (App.isShopBuilder)
-        {
-            $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", () =>
-            {
-                this.collectHeaderElementHeights();
-                this.calculateBodyOffset();
-            });
-        }
-
     }
 
     // Check all the images present in the header, and recalculate header height, when needed.

@@ -212,7 +212,7 @@ document.addEventListener("showShopNotification", showShopNotification);
 
 const headerParent = document.querySelector("[data-header-offset]");
 
-if (headerParent)
+if (!App.isShopBuilder && headerParent)
 {
     new HeaderScroller(headerParent);
 }
