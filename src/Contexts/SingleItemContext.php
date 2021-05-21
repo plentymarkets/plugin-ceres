@@ -101,6 +101,21 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $manufacturer = '';
 
     /**
+     * @var string $gtin Contains the "GTIN" Barcode for SEO attribute.
+     */
+    public $gtin = '';
+
+    /**
+     * @var string $isbn Contains the "ISBN" Barcode for SEO attribute.
+     */
+    public $isbn = '';
+
+    /**
+     * @var string $mpn Contain the "MPN" Barcode for SEO attribute.
+     */
+    public $mpn = '';
+
+    /**
      * @inheritDoc
      */
     public function init($params)
@@ -140,6 +155,45 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $manufacturerMapping = $this->ceresConfig->seo->manufacturerMapping;
         if ($manufacturerMapping == 2) {
             $this->manufacturer = $itemData['item']['manufacturer']['externalName'] ?? '';
+        }
+
+        $gtinMapping = $this->ceresConfig->seo->gtinMapping;
+        $gtinMappingId = $this->ceresConfig->seo->gtinMappingId;
+        if ($gtinMapping == 2) {
+            $propertyGtin = '';
+            foreach ($this->gtin = $itemData['barcodes'] as $property) {
+                if ($property['id'] == $gtinMappingId) {
+                    $propertyGtin = $property['code'];
+                    break;
+                }
+            }
+            $this->gtin = $propertyGtin;
+        }
+
+        $isbnMapping = $this->ceresConfig->seo->isbnMapping;
+        if ($isbnMapping == 2) {
+            $propertyIsbn = '';
+            $valueIsbn = 'ISBN';
+            foreach ($this->isbn = $itemData['barcodes'] as $property) {
+                if ($property['name'] == $valueIsbn) {
+                    $propertyIsbn = $property['code'];
+                    break;
+                }
+            }
+            $this->isbn = $propertyIsbn;
+        }
+
+        $mpnMapping = $this->ceresConfig->seo->mpnMapping;
+        $mpnMappingId = $this->ceresConfig->seo->mpnMappingId;
+        if ($mpnMapping == 2) {
+            $propertyMpn = '';
+            foreach ($itemData['variationProperties'][0]['properties'] as $property) {
+                if ($property['id'] == $mpnMappingId) {
+                    $propertyMpn = $property['values']['value'];
+                    break;
+                }
+            }
+            $this->mpn = $propertyMpn;
         }
 
         $this->isItemSet = $params['isItemSet'];

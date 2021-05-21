@@ -41,6 +41,24 @@
                     "name"          : "{{ brand }}"
                 },
 {% endif %}
+{% if gtin | length  > 0 %}
+                "gtin"         : {
+                    "@type"         : "GTIN",
+                    "name"          : "{{ gtin }}"
+                },
+{% endif %}
+{% if isbn | length  > 0 %}
+                "isbn"         : {
+                    "@type"         : "ISBN",
+                    "name"          : "{{ isbn }}"
+                },
+{% endif %}
+{% if mpn | length  > 0 %}
+                "mpn"         : {
+                    "@type"         : "MPN",
+                    "name"          : "{{ mpn }}"
+                },
+{% endif %}
                 "offers": {
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",

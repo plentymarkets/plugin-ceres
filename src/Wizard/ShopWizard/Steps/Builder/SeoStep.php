@@ -29,7 +29,10 @@ class SeoStep extends Step
                 $this->generateAvailabilitiesSection(),
                 $this->generateItemMetaTitleSection(),
                 $this->generateBrandMappingSection(),
-                $this->generateManufacturerMappingSection()
+                $this->generateManufacturerMappingSection(),
+                $this->generateGtinMappingSection(),
+                $this->generateIsbnMappingSection(),
+                $this->generateMpnMappingSection()
             ]
         ];
     }
@@ -251,6 +254,94 @@ class SeoStep extends Step
                     "options"      => [
                         "name" => "Wizard.manufacturerChoose",
                         "listBoxValues" => $options,
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateGtinMappingSection():array
+    {
+        $gtinOptions = SeoConfig::getGtinOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($gtinOptions);
+
+        return [
+            "title"       => "Wizard.gtinMapping",
+            "description" => "Wizard.gtinMappingDescription",
+            "form"        => [
+                "seo_gtin" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.gtinChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_gtinId" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_gtin === '2'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.gtinID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateIsbnMappingSection():array
+    {
+        $isbnOptions = SeoConfig::getIsbnOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($isbnOptions);
+
+        return [
+            "title"       => "Wizard.isbnMapping",
+            "description" => "Wizard.isbnMappingDescription",
+            "form"        => [
+                "seo_isbn" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.isbnChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateMpnMappingSection():array
+    {
+        $mpnOptions = SeoConfig::getMpnOptions();
+        $options = StepHelper::generateTranslatedListBoxValues($mpnOptions);
+
+        return [
+            "title" => "Wizard.mpnMapping",
+            "description" => "Wizard.mpnMappingDescription",
+            "form" => [
+                "seo_mpn" => [
+                    "type" => "select",
+                    "defaultValue" => "1",
+                    "options" => [
+                        "name" => "Wizard.mpnChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_mpnId" => [
+                    "type" => "text",
+                    "isVisible" => "seo_mpn === '2'",
+                    "defaultValue" => "",
+                    "options" => [
+                        "name" => "Wizard.mpnID",
                     ]
                 ]
             ]

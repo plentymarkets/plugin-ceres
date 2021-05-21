@@ -104,6 +104,30 @@ class SeoMapping
             'type'     => 'string',
             'global'   => false,
             'optional' => true
+        ],
+        'seo_gtinId' => [
+            'field'    => 'gtin.mapping.gtinID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_isbn' => [
+            'field'    => 'isbn.mapping.isbn',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_mpn' => [
+            'field'    => 'mpn.mapping.mpn',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_mpnId' => [
+            'field'    => 'mpn.mapping.mpnID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
         ]
     ];
 
