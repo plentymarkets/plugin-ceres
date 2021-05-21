@@ -51,22 +51,19 @@
         {% set pushCurrentSlide = true %}
 
     {% elseif slideUrlType == 'item' and slideUrlValue | trim is not empty %}
-        {{ Twig.for("item", "items.documents") }}
-            {{ Twig.set("id", slideUrlValue)}}
-            {{ Twig.if("item.data.variation.id == id") }}
-                {{ Twig.set("itemData", "item.data") }}
-                {{ Twig.set("itemImage", "itemData.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
-                {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
-                {{ Twig.set("url", "itemData | itemURL") }}
-                {{ Twig.set("imageUrl", "itemImage.url") }}
+        {{ Twig.set("item", "find_item_variation(#{ slideUrlValue | json_encode }, items.documents)") }}
 
-                {{ Twig.set("slide", "slide | merge({ name: " ~ Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"]) ~ " })") }}
-                {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
-                {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
-                {{ Twig.set("slide", "slide | merge({ imageAltText: itemImage.alternate })") }}
-                {{ Twig.set("slide", "slide | merge({ imageName: itemImage.name })") }}
-            {{ Twig.endif() }}
-        {{ Twig.endfor() }}
+        {{ Twig.set("itemData", "item.data") }}
+        {{ Twig.set("itemImage", "itemData.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
+        {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
+        {{ Twig.set("url", "itemData | itemURL") }}
+        {{ Twig.set("imageUrl", "itemImage.url") }}
+
+        {{ Twig.set("slide", "slide | merge({ name: " ~ Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"]) ~ " })") }}
+        {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
+        {{ Twig.set("slide", "slide | merge({ imageAltText: itemImage.alternate })") }}
+        {{ Twig.set("slide", "slide | merge({ imageName: itemImage.name })") }}
 
         {% set pushCurrentSlide = true %}
 
