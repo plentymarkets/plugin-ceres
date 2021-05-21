@@ -19,14 +19,12 @@ export default class HeaderScroller
         this.initialized = false;
         // last requested animation frame
         this.animationFrameTimeout = null;
+        // TODO
+        this.isShopBuilderHeaderActive = false;
 
         if (isDefined(this.headerParent))
         {
             this.registerEventsListeners();
-        }
-        else
-        {
-            console.warn("No header parent found.");
         }
     }
 
@@ -175,6 +173,36 @@ export default class HeaderScroller
                 this.initialize();
             }
         }, detectPassiveEvents() ? { passive: true } : false);
+
+        if (App.isShopBuilder)
+        {
+            this.registerSBEventsListeners();
+        }
+    }
+
+    // TODO
+    registerSBEventsListeners()
+    {
+        $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", () =>
+        {
+            if (this.isShopBuilderHeaderActive)
+            {
+                this.collectHeaderElementHeights();
+                this.calculateBodyOffset();
+            }
+        });
+
+        $(document).on("shopbuilder.after.activate-container", (event, data) =>
+        {
+            if (data?.container === "Ceres::Header")
+            {
+                this.isShopBuilderHeaderActive = true;
+            }
+            else
+            {
+                this.isShopBuilderHeaderActive = false;
+            }
+        });
     }
 
     // Check all the images present in the header, and recalculate header height, when needed.
