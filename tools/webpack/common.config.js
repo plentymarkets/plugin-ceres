@@ -8,7 +8,7 @@ module.exports = (mode) => {
         output: {
             filename: "ceres-[name]" + (mode === 'production' ? ".min" : "") + ".js",
             chunkFilename: "chunks/ceres-[name]"+ (mode === 'production' ? ".min" : "") + ".js",
-            path: path.resolve(__dirname, "../../resources/js/dist/v5/"),
+            path: path.resolve(__dirname, "../../resources/js/dist/"),
         },
         resolve: {
             alias: {

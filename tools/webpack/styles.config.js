@@ -1,3 +1,4 @@
+const path = require('path');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
@@ -7,6 +8,9 @@ module.exports = (mode) => {
     return merge(
         CommonConfig(mode),
         {
+            output: {
+                path: path.resolve(__dirname, "../../resources/js/dist")
+            },
             module: {
                 rules: [
                     {
@@ -32,7 +36,10 @@ module.exports = (mode) => {
                             {
                                 loader: "sass-loader",
                                 options: {
-                                    sourceMap: mode !== 'production'
+                                    sourceMap: mode !== 'production',
+                                    sassOptions: {
+                                        outputStyle: mode === 'production' ? 'compressed' : 'nested',
+                                    },
                                 }
                             }
                         ]
