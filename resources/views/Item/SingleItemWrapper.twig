@@ -41,10 +41,16 @@
                     "name"          : "{{ brand }}"
                 },
 {% endif %}
-{% if gtin | length  > 0 %}
-                "gtin"         : {
-                    "@type"         : "GTIN",
-                    "name"          : "{{ gtin }}"
+{% if gtin8 | length  > 0 %}
+                "gtin8"         : {
+                    "@type"         : "GTIN 8",
+                    "name"          : "{{ gtin8 }}"
+                },
+{% endif %}
+{% if gtin13 | length  > 0 %}
+                "gtin13"         : {
+                    "@type"         : "GTIN 13",
+                    "name"          : "{{ gtin13 }}"
                 },
 {% endif %}
 {% if isbn | length  > 0 %}

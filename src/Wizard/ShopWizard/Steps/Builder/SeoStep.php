@@ -30,7 +30,8 @@ class SeoStep extends Step
                 $this->generateItemMetaTitleSection(),
                 $this->generateBrandMappingSection(),
                 $this->generateManufacturerMappingSection(),
-                $this->generateGtinMappingSection(),
+                $this->generateGtin8MappingSection(),
+                $this->generateGtin13MappingSection(),
                 $this->generateIsbnMappingSection(),
                 $this->generateMpnMappingSection()
             ]
@@ -263,29 +264,61 @@ class SeoStep extends Step
     /**
      * @return array
      */
-    private function generateGtinMappingSection():array
+    private function generateGtin8MappingSection():array
     {
-        $gtinOptions = SeoConfig::getGtinOptions();
-        $options       = StepHelper::generateTranslatedListBoxValues($gtinOptions);
+        $gtin8Options = SeoConfig::getGtin8Options();
+        $options       = StepHelper::generateTranslatedListBoxValues($gtin8Options);
 
         return [
-            "title"       => "Wizard.gtinMapping",
-            "description" => "Wizard.gtinMappingDescription",
+            "title"       => "Wizard.gtin8Mapping",
+            "description" => "Wizard.gtin8MappingDescription",
             "form"        => [
-                "seo_gtin" => [
+                "seo_gtin8" => [
                     "type"         => "select",
                     "defaultValue" => "1",
                     "options"      => [
-                        "name" => "Wizard.gtinChoose",
+                        "name" => "Wizard.gtin8Choose",
                         "listBoxValues" => $options,
                     ]
                 ],
-                "seo_gtinId" => [
+                "seo_gtin8Id" => [
                     "type"         => "text",
-                    "isVisible"    => "seo_gtin === '2'",
+                    "isVisible"    => "seo_gtin8 === '3'",
                     "defaultValue" => "",
                     "options"      => [
-                        "name"          => "Wizard.gtinID",
+                        "name"          => "Wizard.gtin8ID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateGtin13MappingSection():array
+    {
+        $gtin13Options = SeoConfig::getGtin13Options();
+        $options       = StepHelper::generateTranslatedListBoxValues($gtin13Options);
+
+        return [
+            "title"       => "Wizard.gtin13Mapping",
+            "description" => "Wizard.gtin13MappingDescription",
+            "form"        => [
+                "seo_gtin13" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.gtin13Choose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_gtin13Id" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_gtin13 === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.gtin13ID",
                     ]
                 ]
             ]

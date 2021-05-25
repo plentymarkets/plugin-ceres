@@ -101,9 +101,14 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $manufacturer = '';
 
     /**
-     * @var string $gtin Contains the "GTIN" Barcode for SEO attribute.
+     * @var string $gtin Contains the "GTIN8" Barcode for SEO attribute.
      */
-    public $gtin = '';
+    public $gtin8 = '';
+
+    /**
+     * @var string $gtin Contains the "GTIN13" Barcode for SEO attribute.
+     */
+    public $gtin13 = '';
 
     /**
      * @var string $isbn Contains the "ISBN" Barcode for SEO attribute.
@@ -157,17 +162,48 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $this->manufacturer = $itemData['item']['manufacturer']['externalName'] ?? '';
         }
 
-        $gtinMapping = $this->ceresConfig->seo->gtinMapping;
-        $gtinMappingId = $this->ceresConfig->seo->gtinMappingId;
-        if ($gtinMapping == 2) {
-            $propertyGtin = '';
-            foreach ($this->gtin = $itemData['barcodes'] as $property) {
-                if ($property['id'] == $gtinMappingId) {
-                    $propertyGtin = $property['code'];
+        $gtin8Mapping = $this->ceresConfig->seo->gtin8Mapping;
+        $gtin8MappingId = $this->ceresConfig->seo->gtin8MappingId;
+        $valueGtin8 = 'GTIN 8';
+        $propertyGtin8 = '';
+        if ($gtin8Mapping == 2) {
+            foreach ($this->gtin8 = $itemData['barcodes'] as $property) {
+                if ($property['name'] == $valueGtin8) {
+                    $propertyGtin8 = $property['code'];
                     break;
                 }
             }
-            $this->gtin = $propertyGtin;
+            $this->gtin8 = $propertyGtin8;
+        } elseif ($gtin8Mapping == 3) {
+            foreach ($this->gtin8 = $itemData['barcodes'] as $property) {
+                if ($property['id'] == $gtin8MappingId) {
+                    $propertyGtin8 = $property['code'];
+                    break;
+                }
+            }
+            $this->gtin8 = $propertyGtin8;
+        }
+
+        $gtin13Mapping = $this->ceresConfig->seo->gtin13Mapping;
+        $gtin13MappingId = $this->ceresConfig->seo->gtin13MappingId;
+        $valueGtin13 = 'GTIN 13';
+        $propertyGtin13 = '';
+        if ($gtin13Mapping == 2) {
+            foreach ($this->gtin13 = $itemData['barcodes'] as $property) {
+                if ($property['name'] == $valueGtin13) {
+                    $propertyGtin13 = $property['code'];
+                    break;
+                }
+            }
+            $this->gtin13 = $propertyGtin13;
+        } elseif ($gtin13Mapping == 3) {
+            foreach ($this->gtin13 = $itemData['barcodes'] as $property) {
+                if ($property['id'] == $gtin13MappingId) {
+                    $propertyGtin13 = $property['code'];
+                    break;
+                }
+            }
+            $this->gtin13 = $propertyGtin13;
         }
 
         $isbnMapping = $this->ceresConfig->seo->isbnMapping;

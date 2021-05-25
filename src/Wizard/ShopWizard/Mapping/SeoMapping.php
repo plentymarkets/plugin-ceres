@@ -105,8 +105,26 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
-        'seo_gtinId' => [
-            'field'    => 'gtin.mapping.gtinID',
+        'seo_gtin8' => [
+            'field'    => 'gtin8.mapping.gtin8',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_gtin13' => [
+            'field'    => 'gtin13.mapping.gtin13',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_gtin8Id' => [
+            'field'    => 'gtin8.mapping.gtin8ID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_gtin13Id' => [
+            'field'    => 'gtin13.mapping.gtin13ID',
             'type'     => 'integer',
             'global'   => false,
             'optional' => true

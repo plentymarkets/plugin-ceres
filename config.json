@@ -4402,35 +4402,71 @@
                         }
                     }
                 },
-                "gtin.mapping": {
+                "gtin8.mapping": {
                     "type": "verticalContainer",
-                    "label": "Config.gtinMapping",
+                    "label": "Config.gtin8Mapping",
                     "options": {
                         "containerEntries": {
-                            "gtin.mapping.gtin": {
+                            "gtin8.mapping.gtin8": {
                                 "type": "selectBox",
                                 "required": false,
-                                "label": "Config.gtin",
+                                "label": "Config.gtin8",
                                 "options": {
                                     "defaultValue": "",
                                     "selectBoxValues": [
                                         {
                                             "value": "1",
-                                            "caption": "Config.gtinNotSet",
+                                            "caption": "Config.gtin8NotSet",
                                             "position": 0
                                         },
                                         {
                                             "value": "2",
-                                            "caption": "Config.gtinSet",
+                                            "caption": "Config.gtin8Set",
                                             "position": 1
                                         }
                                     ]
                                 }
                             },
-                            "gtin.mapping.gtinID": {
+                            "gtin8.mapping.gtin8ID": {
                                 "type": "inputText",
                                 "required": false,
-                                "label": "Config.gtinID",
+                                "label": "Config.gtin8ID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "gtin13.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.gtin13Mapping",
+                    "options": {
+                        "containerEntries": {
+                            "gtin13.mapping.gtin13": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.gtin13",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.gtin13NotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.gtin13Set",
+                                            "position": 1
+                                        }
+                                    ]
+                                }
+                            },
+                            "gtin13.mapping.gtin13ID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.gtin13ID",
                                 "options": {
                                     "defaultValue": ""
                                 }
