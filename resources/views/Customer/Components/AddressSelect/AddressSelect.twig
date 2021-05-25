@@ -18,16 +18,16 @@
                     data-flip="false">
 
                     <div class="item-inner" :class="{'error': showError}">
-                        <span v-if="selectedAddress && selectedAddress.id == -99">
+                        <div v-if="selectedAddress && selectedAddress.id == -99">
                             <p class="text-muted small font-italic pt-3 m-0" :class="paddingClasses" :style="paddingInlineStyles">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
-                        </span>
-                        <span v-else class="item-content">
+                        </div>
+                        <div v-else class="item-content">
                             <div v-if="!isAddressListEmpty && selectedAddress">
                                 <address-header :address="selectedAddress" :class="paddingClasses" :style="paddingInlineStyles"></address-header>
                             </div>
                             <p v-if="!isAddressListEmpty && !selectedAddress" class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressPleaseSelect") }}</p>
                             <p v-if="isAddressListEmpty" class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressNoAddress") }}</p>
-                        </span>
+                        </div>
                     </div>
                 </div>
 
@@ -62,12 +62,12 @@
                                 :checked="selectedAddress && selectedAddress.id === address.id"
                                 @change="onAddressChanged(address)">
                             <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
-                            <span v-if="address.id == -99">
+                            <div v-if="address.id == -99">
                                 <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
-                            </span>
-                                <span v-else class="item-content small">
+                            </div>
+                            <div v-else class="item-content small">
                                 <address-header :address="address" :class="paddingClasses" :style="paddingInlineStyles"></address-header>
-                            </span>
+                            </div>
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
                                     <span class="item-edit">
