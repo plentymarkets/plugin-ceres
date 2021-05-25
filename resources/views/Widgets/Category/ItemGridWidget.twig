@@ -26,6 +26,7 @@
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     <intersect>
                         <category-item v-cloak
+                                       {% if isPreview %} item-data="{{ Twig.print("item.data | json_data") }}" {% endif %}
                                        item-data-ref="{{ Twig.print("item.data | json_data") }}"
                                        :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}">
 
