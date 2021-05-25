@@ -1,4 +1,4 @@
-import { getContainingComponent } from "./helper/utils";
+import { getContainingComponent, isDefined } from "./helper/utils";
 
 const browserDetect = require("detect-browser");
 const NotificationService = require("./services/NotificationService");
@@ -212,10 +212,12 @@ document.addEventListener("showShopNotification", showShopNotification);
 
 const headerParent = document.querySelector("[data-header-offset]");
 
-if (!App.isShopBuilder && headerParent)
+if (isDefined(headerParent))
 {
+    // fixate the header elements
     new HeaderScroller(headerParent);
 }
+
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
 {

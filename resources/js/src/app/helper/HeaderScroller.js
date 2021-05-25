@@ -19,8 +19,8 @@ export default class HeaderScroller
         this.initialized = false;
         // last requested animation frame
         this.animationFrameTimeout = null;
-        // TODO
-        this.isShopBuilderHeaderActive = false;
+        // indicates, if the user is in the shopbuilder and the header is fixed
+        this.isShopBuilderHeaderFixated = false;
 
         if (isDefined(this.headerParent))
         {
@@ -40,19 +40,23 @@ export default class HeaderScroller
         return this._headerParent;
     }
 
-    // Initialize the scrolling behavior, collect heights and set indexes.
+    /**
+     * Initialize the fixed header scrolling behavior. Collect the heights of the elements and update their zindexes.
+     * Is called on 'load'; when the fonts have load; when the images in the header have load, on window resize.
+     */
     initialize()
     {
         this.collectHeaderElementHeights();
         this.updateZIndexes();
 
-        // only initialize, if the client is not at the top
-        if (window.pageYOffset > 0)
+        // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
+        if (!App.isShopBuilder && window.pageYOffset > 0)
         {
             this.calculateBodyOffset();
             this.scrollHeaderElements();
+            // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+            this.fixateHeader();
 
-            document.querySelector("#page-header")?.classList.add("fixed-top");
             this.initialized = true;
         }
     }
@@ -72,26 +76,29 @@ export default class HeaderScroller
         });
     }
 
-    // Set descending z-index for all header elements and create list of elements with unfixed class for later use
+    // Set descending z-index for all header elements and create list of elements with unfixed class for later use.
     updateZIndexes()
     {
-        let zIndex = 100;
-
-        this.headerParent?.children.forEach(element =>
+        if (!App.isShopBuilder)
         {
-            element.style.zIndex = zIndex--;
-        });
+            let zIndex = 100;
+
+            this.headerParent?.children.forEach(element =>
+            {
+                element.style.zIndex = zIndex--;
+            });
+        }
     }
 
-    // Calculate top offset for vue-app node because header is not part of document flow
-    calculateBodyOffset()
+    // Calculate top offset for vue-app node because header is not part of document flow.
+    calculateBodyOffset(unset = false)
     {
         if (this.headerParent)
         {
             const app = document.getElementById("vue-app");
 
-            app.style.marginTop = this.headerHeight + "px";
-            app.style.minHeight = window.innerHeight - this.headerHeight + "px";
+            app.style.marginTop = unset ? null : this.headerHeight + "px";
+            app.style.minHeight = unset ? null : window.innerHeight - this.headerHeight + "px";
         }
     }
 
@@ -128,6 +135,8 @@ export default class HeaderScroller
                 {
                     elem.style.top = offset + "px";
                 }
+
+                elem.style.top = offset < 0 ? 0 : offset + "px";
 
                 if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
                 {
@@ -185,7 +194,7 @@ export default class HeaderScroller
     {
         $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", () =>
         {
-            if (this.isShopBuilderHeaderActive)
+            if (this.isShopBuilderHeaderFixated)
             {
                 this.collectHeaderElementHeights();
                 this.calculateBodyOffset();
@@ -196,11 +205,15 @@ export default class HeaderScroller
         {
             if (data?.container === "Ceres::Header")
             {
-                this.isShopBuilderHeaderActive = true;
+                this.fixateHeader();
+                this.calculateBodyOffset();
+                this.isShopBuilderHeaderFixated = true;
             }
             else
             {
-                this.isShopBuilderHeaderActive = false;
+                this.unfixHeader();
+                this.calculateBodyOffset(true);
+                this.isShopBuilderHeaderFixated = false;
             }
         });
     }
@@ -227,5 +240,17 @@ export default class HeaderScroller
                 });
             })
         );
+    }
+
+    // Add the class .fixed-top to the header element.
+    fixateHeader()
+    {
+        document.querySelector("#page-header")?.classList.add("fixed-top");
+    }
+
+    // Remove the class .fixed-top from the header element.
+    unfixHeader()
+    {
+        document.querySelector("#page-header")?.classList.remove("fixed-top");
     }
 }
