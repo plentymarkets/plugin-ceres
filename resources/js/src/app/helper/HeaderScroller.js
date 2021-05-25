@@ -24,7 +24,14 @@ export default class HeaderScroller
 
         if (isDefined(this.headerParent))
         {
-            this.registerEventsListeners();
+            if (!App.isShopBuilder)
+            {
+                this.registerEventsListeners();
+            }
+            else
+            {
+                this.registerSBEventsListeners();
+            }
         }
     }
 
@@ -182,14 +189,9 @@ export default class HeaderScroller
                 this.initialize();
             }
         }, detectPassiveEvents() ? { passive: true } : false);
-
-        if (App.isShopBuilder)
-        {
-            this.registerSBEventsListeners();
-        }
     }
 
-    // TODO
+    // Register event listeners for the shopbuilder environment.
     registerSBEventsListeners()
     {
         $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", () =>
@@ -201,6 +203,7 @@ export default class HeaderScroller
             }
         });
 
+        // when the active dropzone in the shopbuilder changes
         $(document).on("shopbuilder.after.activate-container", (event, data) =>
         {
             if (data?.container === "Ceres::Header")
