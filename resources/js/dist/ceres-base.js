@@ -59009,310 +59009,6 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("truncate", function (string, 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/helper/HeaderScroller.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/src/app/helper/HeaderScroller.js ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HeaderScroller; });
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _debounce__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./debounce */ "./resources/js/src/app/helper/debounce.js");
-/* harmony import */ var _featureDetect__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
-
-
-
-
-
-
-
-
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-/**
- * This class is used to fixate the shop header when scrolling.
- */
-
-var HeaderScroller = /*#__PURE__*/function () {
-  function HeaderScroller() {
-    var headerParent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-    _classCallCheck(this, HeaderScroller);
-
-    // the header element
-    this._headerParent = headerParent; // the height of all header elements
-
-    this.headerHeight = 0; // array of the header element heights
-
-    this.allHeaderChildrenHeights = []; // indicates, if the scrolling behavior has been initialized
-
-    this.initialized = false; // last requested animation frame
-
-    this.animationFrameTimeout = null; // indicates, if the user is in the shopbuilder and the header is fixed
-
-    this.isShopBuilderHeaderFixated = false;
-
-    if (Object(_utils__WEBPACK_IMPORTED_MODULE_10__["isDefined"])(this.headerParent)) {
-      this.registerEventsListeners();
-    }
-  } // The header parent element.
-
-
-  _createClass(HeaderScroller, [{
-    key: "headerParent",
-    get: function get() {
-      var _this$_headerParent;
-
-      if (this._headerParent) {
-        return this._headerParent;
-      }
-
-      this._headerParent = (_this$_headerParent = this._headerParent) !== null && _this$_headerParent !== void 0 && _this$_headerParent.offsetParent ? this._headerParent : document.querySelector("[data-header-offset]");
-      return this._headerParent;
-    }
-    /**
-     * Initialize the fixed header scrolling behavior. Collect the heights of the elements and update their zindexes.
-     * Is called on 'load'; when the fonts have load; when the images in the header have load, on window resize.
-     */
-
-  }, {
-    key: "initialize",
-    value: function initialize() {
-      this.collectHeaderElementHeights();
-      this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
-
-      if (!App.isShopBuilder && window.pageYOffset > 0) {
-        this.calculateBodyOffset();
-        this.scrollHeaderElements(); // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-
-        this.fixateHeader();
-        this.initialized = true;
-      }
-    } // Collect heights of header elements for later use
-
-  }, {
-    key: "collectHeaderElementHeights",
-    value: function collectHeaderElementHeights() {
-      var _this$headerParent,
-          _this = this;
-
-      this.headerHeight = 0;
-      this.allHeaderChildrenHeights = [];
-      (_this$headerParent = this.headerParent) === null || _this$headerParent === void 0 ? void 0 : _this$headerParent.children.forEach(function (element) {
-        var elementHeight = element.getBoundingClientRect().height;
-
-        _this.allHeaderChildrenHeights.push(elementHeight);
-
-        _this.headerHeight += elementHeight;
-      });
-    } // Set descending z-index for all header elements and create list of elements with unfixed class for later use.
-
-  }, {
-    key: "updateZIndexes",
-    value: function updateZIndexes() {
-      if (!App.isShopBuilder) {
-        var _this$headerParent2;
-
-        var zIndex = 100;
-        (_this$headerParent2 = this.headerParent) === null || _this$headerParent2 === void 0 ? void 0 : _this$headerParent2.children.forEach(function (element) {
-          element.style.zIndex = zIndex--;
-        });
-      }
-    } // Calculate top offset for vue-app node because header is not part of document flow.
-
-  }, {
-    key: "calculateBodyOffset",
-    value: function calculateBodyOffset() {
-      var unset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-      if (this.headerParent) {
-        var app = document.getElementById("vue-app");
-        app.style.marginTop = unset ? null : this.headerHeight + "px";
-        app.style.minHeight = unset ? null : window.innerHeight - this.headerHeight + "px";
-      }
-    } // Scroll header elements depending on if they are unfixed or not
-
-  }, {
-    key: "scrollHeaderElements",
-    value: function scrollHeaderElements() {
-      var absolutePos = 0;
-      var fixedElementsHeight = 0;
-      var offset = 0;
-
-      for (var i = 0; i < this.headerParent.children.length; i++) {
-        var elem = this.headerParent.children[i];
-        var elemHeight = this.allHeaderChildrenHeights[i];
-        offset = absolutePos - window.pageYOffset;
-        elem.style.position = "absolute"; // Element is unfixed and should scroll indefinetly
-
-        if (elem.classList.contains("unfixed")) {
-          elem.style.top = offset + "px";
-        } // Element is fixed and should scroll until it hits top of header or next fixed element
-        else {
-            if (offset < 0) {
-              elem.style.top = 0;
-            } else {
-              elem.style.top = offset + "px";
-            }
-
-            elem.style.top = offset < 0 ? 0 : offset + "px";
-
-            if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
-              elem.style.top = fixedElementsHeight + "px";
-            }
-
-            fixedElementsHeight = fixedElementsHeight + elemHeight;
-          }
-
-        absolutePos = absolutePos + elemHeight;
-      }
-    } // Register all the event listeners, to realize the header scrolling behavior.
-
-  }, {
-    key: "registerEventsListeners",
-    value: function registerEventsListeners() {
-      var _this2 = this;
-
-      window.addEventListener("load", function () {
-        return _this2.initialize();
-      });
-
-      if (document.fonts) {
-        document.fonts.onloadingdone = function () {
-          return _this2.initialize();
-        };
-      }
-
-      this.checkForHeaderImages().then(function () {
-        return _this2.initialize();
-      });
-      window.addEventListener("resize", Object(_debounce__WEBPACK_IMPORTED_MODULE_8__["debounce"])(function () {
-        return _this2.initialize();
-      }, 50)); // The listener for user scrolling. If this class is not fully initialized, call the initialize method on scroll.
-
-      window.addEventListener("scroll", function () {
-        if (_this2.initialized) {
-          if (_this2.animationFrameTimeout) {
-            window.cancelAnimationFrame(_this2.animationFrameTimeout);
-          }
-
-          _this2.animationFrameTimeout = window.requestAnimationFrame(_this2.scrollHeaderElements.bind(_this2));
-        } else {
-          _this2.initialize();
-        }
-      }, Object(_featureDetect__WEBPACK_IMPORTED_MODULE_9__["detectPassiveEvents"])() ? {
-        passive: true
-      } : false);
-
-      if (App.isShopBuilder) {
-        this.registerSBEventsListeners();
-      }
-    } // Register additional event listeners for the shopbuilder environment.
-
-  }, {
-    key: "registerSBEventsListeners",
-    value: function registerSBEventsListeners() {
-      var _this3 = this;
-
-      $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
-        console.log("SB EVENT!");
-
-        if (_this3.isShopBuilderHeaderFixated) {
-          _this3.collectHeaderElementHeights();
-
-          _this3.calculateBodyOffset();
-        }
-      }); // when the active dropzone in the shopbuilder changes
-
-      $(document).on("shopbuilder.after.activate-container", function (event, data) {
-        if ((data === null || data === void 0 ? void 0 : data.container) === "Ceres::Header") {
-          _this3.fixateHeader();
-
-          _this3.calculateBodyOffset();
-
-          _this3.isShopBuilderHeaderFixated = true;
-        } else {
-          _this3.unfixHeader();
-
-          _this3.calculateBodyOffset(true);
-
-          _this3.isShopBuilderHeaderFixated = false;
-        }
-      });
-    } // Check all the images present in the header, and recalculate header height, when needed.
-
-  }, {
-    key: "checkForHeaderImages",
-    value: function checkForHeaderImages() {
-      var headerImages = this.headerParent.querySelectorAll("img");
-      return Promise.all(Array.prototype.slice.call(headerImages).map(function (headerImage) {
-        return new Promise(function (resolve) {
-          if (headerImage.complete) {
-            resolve();
-          } else {
-            headerImage.onload = function () {
-              return resolve();
-            };
-
-            headerImage.onerror = function () {
-              return resolve();
-            };
-          }
-        });
-      }));
-    } // Add the class .fixed-top to the header element.
-
-  }, {
-    key: "fixateHeader",
-    value: function fixateHeader() {
-      var _document$querySelect;
-
-      (_document$querySelect = document.querySelector("#page-header")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.classList.add("fixed-top");
-    } // Remove the class .fixed-top from the header element.
-
-  }, {
-    key: "unfixHeader",
-    value: function unfixHeader() {
-      var _document$querySelect2;
-
-      (_document$querySelect2 = document.querySelector("#page-header")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.classList.remove("fixed-top");
-    }
-  }]);
-
-  return HeaderScroller;
-}();
-
-
-
-/***/ }),
-
 /***/ "./resources/js/src/app/helper/MediaQueryHelper.js":
 /*!*********************************************************!*\
   !*** ./resources/js/src/app/helper/MediaQueryHelper.js ***!
@@ -61229,14 +60925,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helper/dom */ "./resources/js/src/app/helper/dom.js");
-/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
-/* harmony import */ var _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helper/HeaderScroller */ "./resources/js/src/app/helper/HeaderScroller.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./helper/debounce */ "./resources/js/src/app/helper/debounce.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./helper/dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
+
+
+
+
+
+
+
 
 
 
@@ -61277,6 +60994,16 @@ function CeresMain() {
   } else {
     $("html").addClass("unkown-os");
   }
+
+  $(window).scroll(function () {
+    if ($(".wrapper-main").hasClass("isSticky")) {
+      if ($(this).scrollTop() > 1) {
+        $(".wrapper-main").addClass("sticky");
+      } else {
+        $(".wrapper-main").removeClass("sticky");
+      }
+    }
+  });
 
   window.onpopstate = function (event) {
     if (event.state && event.state.requireReload) {
@@ -61338,7 +61065,7 @@ function CeresMain() {
           $(".back-to-top-center").fadeOut(duration);
         }
       }
-    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_6__["detectPassiveEvents"])() ? {
+    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_14__["detectPassiveEvents"])() ? {
       passive: true
     } : false);
     window.addEventListener("resize", function () {
@@ -61409,18 +61136,152 @@ var showShopNotification = function showShopNotification(event) {
 document.addEventListener("showShopNotification", showShopNotification);
 var headerParent = document.querySelector("[data-header-offset]");
 
-if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isDefined"])(headerParent)) {
-  // fixate the header elements
-  new _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_7__["default"](headerParent);
+if (headerParent) {
+  var headerLoaded = false;
+  var allHeaderChildrenHeights = [];
+  var headerHeight = 0; // Calculate top offset for vue-app node because header is not part of document flow
+
+  function calculateBodyOffset() {
+    headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+
+    if (headerLoaded && headerParent) {
+      var vueApp = document.getElementById("vue-app");
+      vueApp.style.marginTop = headerHeight + "px";
+      vueApp.style.minHeight = "calc(100vh - " + headerHeight + "px)";
+    }
+  } // Set descending z-index for all header elements and create list of elements with unfixed class for later use
+
+
+  function prepareHeaderElements() {
+    if (headerLoaded && !App.isShopBuilder) {
+      headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+      var zIndex = 100;
+
+      for (var i = 0; i < headerParent.children.length; i++) {
+        var elem = headerParent.children[i];
+        elem.style.zIndex = zIndex;
+        zIndex--;
+      }
+    }
+  } // Collect heights of header elements for later use
+
+
+  function getHeaderHeights() {
+    headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+    allHeaderChildrenHeights = [];
+    headerHeight = 0;
+
+    for (var i = 0; i < headerParent.children.length; i++) {
+      var elementHeight = headerParent.children[i].getBoundingClientRect().height;
+      allHeaderChildrenHeights.push(elementHeight);
+      headerHeight += elementHeight;
+    }
+  } // Scroll header elements depending on if they are unfixed or not
+
+
+  function scrollHeaderElements() {
+    if (headerLoaded && !App.isShopBuilder) {
+      headerParent = headerParent.offsetParent ? headerParent : document.querySelector("[data-header-offset]");
+      var absolutePos = 0;
+      var fixedElementsHeight = 0;
+      var offset = 0;
+      var scrollTop = window.pageYOffset;
+
+      for (var i = 0; i < headerParent.children.length; i++) {
+        var elem = headerParent.children[i];
+        var elemHeight = allHeaderChildrenHeights[i];
+        offset = absolutePos - scrollTop;
+        elem.style.position = "absolute"; // Element is unfixed and should scroll indefinetly
+
+        if (elem.classList.contains("unfixed")) {
+          elem.style.top = offset + "px";
+        } // Element is fixed and should scroll until it hits top of header or next fixed element
+        else {
+            if (offset < 0) {
+              elem.style.top = 0;
+            } else {
+              elem.style.top = offset + "px";
+            }
+
+            if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
+              elem.style.top = fixedElementsHeight + "px";
+            }
+
+            fixedElementsHeight = fixedElementsHeight + elemHeight;
+          }
+
+        absolutePos = absolutePos + elemHeight;
+      }
+    }
+  }
+
+  window.addEventListener("resize", Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_11__["debounce"])(function () {
+    getHeaderHeights();
+    calculateBodyOffset();
+    scrollHeaderElements();
+  }, 50));
+  window.addEventListener("load", function () {
+    getHeaderHeights();
+    calculateBodyOffset();
+    prepareHeaderElements();
+    scrollHeaderElements();
+    var timeout;
+    window.addEventListener("scroll", function () {
+      if (timeout) {
+        window.cancelAnimationFrame(timeout);
+      }
+
+      timeout = window.requestAnimationFrame(scrollHeaderElements);
+    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_14__["detectPassiveEvents"])() ? {
+      passive: true
+    } : false);
+  });
+
+  if (document.fonts) {
+    document.fonts.onloadingdone = function (evt) {
+      getHeaderHeights();
+      calculateBodyOffset();
+      prepareHeaderElements();
+      scrollHeaderElements();
+    };
+  }
+
+  $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
+    getHeaderHeights();
+    calculateBodyOffset();
+  });
+  var headerImages = headerParent.querySelectorAll("img");
+  Promise.all(Array.prototype.slice.call(headerImages).map(function (headerImage) {
+    return new Promise(function (resolve) {
+      if (headerImage.complete) {
+        resolve();
+      } else {
+        headerImage.onload = function () {
+          resolve();
+        };
+
+        headerImage.onerror = function () {
+          resolve();
+        };
+      }
+    });
+  })).then(function () {
+    // Initialize
+    headerLoaded = true;
+    getHeaderHeights();
+    calculateBodyOffset();
+    scrollHeaderElements();
+  });
+  calculateBodyOffset();
 }
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function (event, eventData, widgetElement) {
   var parent = widgetElement[1];
-  var parentComponent = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["getContainingComponent"])(parent);
-  var compiled = vue__WEBPACK_IMPORTED_MODULE_4___default.a.compile(widgetElement[0].outerHTML, {
+  var parentComponent = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["getContainingComponent"])(parent);
+  var compiled = vue__WEBPACK_IMPORTED_MODULE_12___default.a.compile(widgetElement[0].outerHTML, {
     delimiters: ["${", "}"]
   });
-  var component = new vue__WEBPACK_IMPORTED_MODULE_4___default.a({
+  var component = new vue__WEBPACK_IMPORTED_MODULE_12___default.a({
     store: window.ceresStore,
     render: compiled.render,
     staticRenderFns: compiled.staticRenderFns,
@@ -61441,7 +61302,7 @@ function fixPopperZIndexes() {
   var elements = document.querySelectorAll(".popover.d-none");
   var counter = elements.length;
   elements.forEach(function (el) {
-    var zIndex = parseInt(Object(_helper_dom__WEBPACK_IMPORTED_MODULE_5__["getStyle"])(el, "z-index"));
+    var zIndex = parseInt(Object(_helper_dom__WEBPACK_IMPORTED_MODULE_13__["getStyle"])(el, "z-index"));
 
     if (!isNaN(zIndex)) {
       zIndex += --counter;
