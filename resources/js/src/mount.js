@@ -74,7 +74,7 @@ function applyOverride(component, name)
 
     if (typeof component === "object")
     {
-        if (component && component.components)
+        if (component.components)
         {
             applyOverrideToChildren(component);
         }
@@ -141,8 +141,7 @@ function applyOverride(component, name)
 }
 
 /**
- * Calls applyOverride for any entry in the components field.
- *
+ * Check if component has the components field set and calls applyOverride for each entry.
  * @param {Object} component
  * @return {Object}
  */
