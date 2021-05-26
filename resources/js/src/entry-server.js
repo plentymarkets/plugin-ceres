@@ -14,6 +14,7 @@ function createApp(context)
     return new Promise((resolve, reject) =>
     {
         if(process.env.NODE_ENV === "production") {
+            // for minified production bundle, only error handler is available
             Vue.config.errorHandler = (err, vm, info) => {
                 context.throwError({
                     message: `Error in ${ info }: "${ err.toString() }"`,
@@ -21,6 +22,7 @@ function createApp(context)
                 });
             }
         } else {
+            // use more detailed warn handler for development bundles
             Vue.config.warnHandler = (msg, vm, trace) => {
                 context.throwError({
                     message: msg,
