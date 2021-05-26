@@ -13,8 +13,8 @@ export default class HeaderScroller
         this._headerParent = headerParent;
         // the height of all header elements
         this.headerHeight = 0;
-        // object with th header element's heights
-        this.allHeaderChildrenHeights = {};
+        // array of the header element heights
+        this.allHeaderChildrenHeights = [];
         // indicates, if the scrolling behavior has been initialized
         this.initialized = false;
         // last requested animation frame
@@ -72,13 +72,13 @@ export default class HeaderScroller
     collectHeaderElementHeights()
     {
         this.headerHeight = 0;
-        this.allHeaderChildrenHeights = {};
+        this.allHeaderChildrenHeights = [];
 
         this.headerParent?.children.forEach(element =>
         {
             const elementHeight = element.getBoundingClientRect().height;
 
-            this.allHeaderChildrenHeights[element] = elementHeight;
+            this.allHeaderChildrenHeights.push(elementHeight);
             this.headerHeight += elementHeight;
         });
     }
@@ -118,35 +118,42 @@ export default class HeaderScroller
 
         let offset = 0;
 
-        this.headerParent.children.forEach(element =>
+        for (let i = 0; i < this.headerParent.children.length; i++)
         {
-            const elementHeight = this.allHeaderChildrenHeights[element] || 0;
+            const elem = this.headerParent.children[i];
+            const elemHeight = this.allHeaderChildrenHeights[i];
 
             offset = absolutePos - window.pageYOffset;
-            element.style.position = "absolute";
+            elem.style.position = "absolute";
 
             // Element is unfixed and should scroll indefinetly
-            if (element.classList.contains("unfixed"))
+            if (elem.classList.contains("unfixed"))
             {
-                element.style.top = offset + "px";
+                elem.style.top = offset + "px";
             }
             // Element is fixed and should scroll until it hits top of header or next fixed element
             else
             {
-                if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
+                if (offset < 0)
                 {
-                    element.style.top = fixedElementsHeight + "px";
+                    elem.style.top = 0;
                 }
                 else
                 {
-                    // offset should not be lower than 0
-                    element.style.top = offset < 0 ? 0 : offset + "px";
+                    elem.style.top = offset + "px";
                 }
 
-                fixedElementsHeight += elementHeight;
+                elem.style.top = offset < 0 ? 0 : offset + "px";
+
+                if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
+                {
+                    elem.style.top = fixedElementsHeight + "px";
+                }
+
+                fixedElementsHeight = fixedElementsHeight + elemHeight;
             }
-            absolutePos += elementHeight;
-        });
+            absolutePos = absolutePos + elemHeight;
+        }
     }
 
     // Register all the event listeners, to realize the header scrolling behavior.
