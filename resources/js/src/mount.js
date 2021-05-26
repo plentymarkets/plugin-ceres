@@ -1,6 +1,8 @@
 import Vue from "vue";
-import {isDefined, isNullOrUndefined} from "./app/helper/utils";
+import { isNullOrUndefined } from "./app/helper/utils";
 import { compileToFunctions, ssrCompileToFunctions } from "vue-template-compiler";
+
+const kebabCase = require("lodash/kebabCase");
 
 const originalMountFn = Vue.prototype.$mount;
 const originalComponentFn = Vue.component;
@@ -58,32 +60,49 @@ function component(id, definition)
     return originalComponentFn.call(this, id, applyOverride(definition, id));
 }
 
-function applyOverrideNew(component, name)
+/**
+ * Compile and assign custom template to component if defined.
+ * Recursively apply overrides for defined child components.
+ *
+ * @param {Object|Function} component The vue component to apply the override to.
+ * @param {string} name Tag name of the component. Used to query custom templates by. If not defined, the name property of the component object will be used. (Optional)
+ */
+function applyOverride(component, name)
 {
     // use ssr optimized compiler function if document is not defined
     const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
 
     if (typeof component === "object")
     {
+        if (component && component.components)
+        {
+            applyOverrideToChildren(component);
+        }
 
+        const customTemplate = getComponentTemplate(name || component.name);
+
+        // overridden component is defined in the common way: Vue.component('...', { ... })
+        return Object.assign(
+            component,
+            customTemplate ? compileFn(customTemplate) : {}
+        );
     }
     else if (typeof component === "function")
     {
+        // overridden component is defined asynchronously
         return () =>
         {
             // invoke async loading function
             const asyncComponent = component();
+            const customTemplate = getComponentTemplate(name || component.name);
 
             if (asyncComponent instanceof Promise)
             {
                 return asyncComponent.then((module) =>
                 {
-                    const customTemplate = getComponentTemplate(name || component.name);
-
-                    if (isDefined(module.default.components))
+                    if (module.default.components)
                     {
-                        // module.default.components
-                        // call recursively
+                        applyOverrideToChildren(module.default);
                     }
 
                     if (customTemplate)
@@ -98,83 +117,44 @@ function applyOverrideNew(component, name)
             }
             else
             {
-                // override component definition of already loaded async component
-                Object.assign(
-                    asyncComponent,
-                    compileFn(customTemplate)
-                );
-                return asyncComponent;
-            }
-        };
-    }
-}
-
-/**
- * Compile and assign custom template to component if defined.
- * Recursively apply overrides for defined child components.
- *
- * @param {Object|Function} component The vue component to apply the override to.
- * @param {string} name Tag name of the component. Used to query custom templates by. If not defined, the name property of the component object will be used. (Optional)
- */
-function applyOverride(component, name)
-{
-    // return applyOverrideNew(component, name);
-    const customTemplate = getComponentTemplate(name || component.name);
-
-    if (customTemplate)
-    {
-        // use ssr optimized compiler function if document is not defined
-        const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
-
-        if (typeof component === "object")
-        {
-            if (component && component.components)
-            {
-                component.components = Object.keys(component.components).reduce((components, key) =>
+                // may never gets called
+                if (asyncComponent && asyncComponent.components)
                 {
-                    return {
-                        ...components,
-                        [key]: applyOverride(component.components[key])
-                    };
-                }, {});
-            }
-
-            // overridden component is defined in the common way: Vue.component('...', { ... })
-            return Object.assign(
-                component,
-                compileFn(customTemplate)
-            );
-        }
-        else if (typeof component === "function")
-        {
-            // overridden component is defined asynchronously
-            return () =>
-            {
-                // invoke async loading function
-                const asyncComponent = component();
-
-                if (asyncComponent instanceof Promise)
-                {
-                    return asyncComponent.then((module) =>
-                    {
-                        // override template after resolving external chunk
-                        delete module.default.render;
-                        module.default.template = replaceDelimiters(customTemplate);
-                        return module;
-                    });
+                    applyOverrideToChildren(asyncComponent);
                 }
-                else
+
+                if (customTemplate)
                 {
                     // override component definition of already loaded async component
                     Object.assign(
                         asyncComponent,
                         compileFn(customTemplate)
                     );
-                    return asyncComponent;
                 }
-            };
-        }
+
+                return asyncComponent;
+            }
+        };
     }
+
+    return component;
+}
+
+/**
+ * Calls applyOverride for any entry in the components field.
+ *
+ * @param {Object} component
+ * @return {Object}
+ */
+function applyOverrideToChildren(component)
+{
+    component.components = Object.keys(component.components).reduce((components, key) =>
+    {
+        return {
+            ...components,
+            [key]: applyOverride(component.components[key], kebabCase(key))
+        };
+    }, {});
 
     return component;
 }
