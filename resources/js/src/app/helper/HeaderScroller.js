@@ -13,7 +13,7 @@ export default class HeaderScroller
         this._headerParent = headerParent;
         // the height of all header elements
         this.headerHeight = 0;
-        // object with the header element's heights
+        // object with th header element's heights
         this.allHeaderChildrenHeights = {};
         // indicates, if the scrolling behavior has been initialized
         this.initialized = false;
