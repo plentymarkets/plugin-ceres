@@ -134,15 +134,6 @@ export default class HeaderScroller
             // Element is fixed and should scroll until it hits top of header or next fixed element
             else
             {
-                if (offset < 0)
-                {
-                    elem.style.top = 0;
-                }
-                else
-                {
-                    elem.style.top = offset + "px";
-                }
-
                 elem.style.top = offset < 0 ? 0 : offset + "px";
 
                 if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
