@@ -4421,8 +4421,13 @@
                                         },
                                         {
                                             "value": "2",
-                                            "caption": "Config.gtin8Set",
+                                            "caption": "Config.gtin8SetFirst",
                                             "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.gtin8Set",
+                                            "position": 2
                                         }
                                     ]
                                 }
@@ -4457,8 +4462,13 @@
                                         },
                                         {
                                             "value": "2",
-                                            "caption": "Config.gtin13Set",
+                                            "caption": "Config.gtin13SetFirst",
                                             "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.gtin13Set",
+                                            "position": 2
                                         }
                                     ]
                                 }

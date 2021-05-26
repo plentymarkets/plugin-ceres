@@ -29,14 +29,24 @@ class CeresSeoConfig extends PluginConfig
     public $manufacturerMapping;
 
     /**
-     * @var string $gtinMapping Selected option value for gtin barcode in rich snippet.
+     * @var string $gtin8Mapping Selected option value for gtin 8 barcode in rich snippet.
      */
-    public $gtinMapping;
+    public $gtin8Mapping;
 
     /**
-     * @var string $gtinMappingId Selected option value for gtin barcode in rich snippet.
+     * @var string $gtin8MappingId Selected option value for gtin 8 barcode in rich snippet.
      */
-    public $gtinMappingId;
+    public $gtin8MappingId;
+
+    /**
+     * @var string $gtin13Mapping Selected option value for gtin 13 barcode in rich snippet.
+     */
+    public $gtin13Mapping;
+
+    /**
+     * @var string $gtin13MappingId Selected option value for gtin 13 barcode in rich snippet.
+     */
+    public $gtin13MappingId;
 
     /**
      * @var string $isbnMapping Selected option value for isbn barcode in rich snippet.
