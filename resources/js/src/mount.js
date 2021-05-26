@@ -2,6 +2,8 @@ import Vue from "vue";
 import { isNullOrUndefined } from "./app/helper/utils";
 import { compileToFunctions, ssrCompileToFunctions } from "vue-template-compiler";
 
+const kebabCase = require("lodash/kebabCase");
+
 const originalMountFn = Vue.prototype.$mount;
 const originalComponentFn = Vue.component;
 
@@ -67,62 +69,91 @@ function component(id, definition)
  */
 function applyOverride(component, name)
 {
-    if (component && component.components)
+    // use ssr optimized compiler function if document is not defined
+    const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
+
+    if (typeof component === "object")
     {
-        component.components = Object.keys(component.components).reduce((components, key) =>
+        if (component.components)
         {
-            return {
-                ...components,
-                [key]: applyOverride(component.components[key])
-            };
-        }, {});
-    }
-
-    const customTemplate = getComponentTemplate(name || component.name);
-
-    if (customTemplate)
-    {
-        // use ssr optimized compiler function if document is not defined
-        const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
-
-        if (typeof component === "object")
-        {
-            // overridden component is defined in the common way: Vue.component('...', { ... })
-            return Object.assign(
-                component,
-                compileFn(customTemplate)
-            );
+            applyOverrideToChildren(component);
         }
-        else if (typeof component === "function")
-        {
-            // overridden component is defined asynchronously
-            return () =>
-            {
-                // invoke async loading function
-                const asyncComponent = component();
 
-                if (asyncComponent instanceof Promise)
+        const customTemplate = getComponentTemplate(name || component.name);
+
+        // overridden component is defined in the common way: Vue.component('...', { ... })
+        return Object.assign(
+            component,
+            customTemplate ? compileFn(customTemplate) : {}
+        );
+    }
+    else if (typeof component === "function")
+    {
+        // overridden component is defined asynchronously
+        return () =>
+        {
+            // invoke async loading function
+            const asyncComponent = component();
+            const customTemplate = getComponentTemplate(name || component.name);
+
+            if (asyncComponent instanceof Promise)
+            {
+                return asyncComponent.then((module) =>
                 {
-                    return asyncComponent.then((module) =>
+                    if (module.default.components)
+                    {
+                        applyOverrideToChildren(module.default);
+                    }
+
+                    if (customTemplate)
                     {
                         // override template after resolving external chunk
                         delete module.default.render;
                         module.default.template = replaceDelimiters(customTemplate);
-                        return module;
-                    });
+                    }
+
+                    return module;
+                });
+            }
+            else
+            {
+                // may never gets called
+                if (asyncComponent && asyncComponent.components)
+                {
+                    applyOverrideToChildren(asyncComponent);
                 }
-                else
+
+                if (customTemplate)
                 {
                     // override component definition of already loaded async component
                     Object.assign(
                         asyncComponent,
                         compileFn(customTemplate)
                     );
-                    return asyncComponent;
                 }
-            };
-        }
+
+                return asyncComponent;
+            }
+        };
     }
+
+    return component;
+}
+
+/**
+ * Check if component has the components field set and calls applyOverride for each entry.
+ * @param {Object} component
+ * @return {Object}
+ */
+function applyOverrideToChildren(component)
+{
+    component.components = Object.keys(component.components).reduce((components, key) =>
+    {
+        return {
+            ...components,
+            [key]: applyOverride(component.components[key], kebabCase(key))
+        };
+    }, {});
 
     return component;
 }
