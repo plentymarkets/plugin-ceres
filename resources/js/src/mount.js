@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { isNullOrUndefined } from "./app/helper/utils";
+import {isDefined, isNullOrUndefined} from "./app/helper/utils";
 import { compileToFunctions, ssrCompileToFunctions } from "vue-template-compiler";
 
 const originalMountFn = Vue.prototype.$mount;
@@ -58,6 +58,57 @@ function component(id, definition)
     return originalComponentFn.call(this, id, applyOverride(definition, id));
 }
 
+function applyOverrideNew(component, name)
+{
+    // use ssr optimized compiler function if document is not defined
+    const compileFn = typeof document !== "undefined" ? compileToFunctions : ssrCompileToFunctions;
+
+    if (typeof component === "object")
+    {
+
+    }
+    else if (typeof component === "function")
+    {
+        return () =>
+        {
+            // invoke async loading function
+            const asyncComponent = component();
+
+            if (asyncComponent instanceof Promise)
+            {
+                return asyncComponent.then((module) =>
+                {
+                    const customTemplate = getComponentTemplate(name || component.name);
+
+                    if (isDefined(module.default.components))
+                    {
+                        // module.default.components
+                        // call recursively
+                    }
+
+                    if (customTemplate)
+                    {
+                        // override template after resolving external chunk
+                        delete module.default.render;
+                        module.default.template = replaceDelimiters(customTemplate);
+                    }
+
+                    return module;
+                });
+            }
+            else
+            {
+                // override component definition of already loaded async component
+                Object.assign(
+                    asyncComponent,
+                    compileFn(customTemplate)
+                );
+                return asyncComponent;
+            }
+        };
+    }
+}
+
 /**
  * Compile and assign custom template to component if defined.
  * Recursively apply overrides for defined child components.
@@ -67,17 +118,7 @@ function component(id, definition)
  */
 function applyOverride(component, name)
 {
-    if (component && component.components)
-    {
-        component.components = Object.keys(component.components).reduce((components, key) =>
-        {
-            return {
-                ...components,
-                [key]: applyOverride(component.components[key])
-            };
-        }, {});
-    }
-
+    // return applyOverrideNew(component, name);
     const customTemplate = getComponentTemplate(name || component.name);
 
     if (customTemplate)
@@ -87,6 +128,17 @@ function applyOverride(component, name)
 
         if (typeof component === "object")
         {
+            if (component && component.components)
+            {
+                component.components = Object.keys(component.components).reduce((components, key) =>
+                {
+                    return {
+                        ...components,
+                        [key]: applyOverride(component.components[key])
+                    };
+                }, {});
+            }
+
             // overridden component is defined in the common way: Vue.component('...', { ... })
             return Object.assign(
                 component,

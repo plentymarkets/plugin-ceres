@@ -2,6 +2,8 @@
     <div v-if="facet.name" class="card pt-4 border-0" :class="facet.cssClass">
         <div class="h3 title py-0">{{ facetName }}</div>
 
+        <item-filter-tag-list></item-filter-tag-list>
+
         <div v-if="facet.type === 'price'">
             <item-filter-price></item-filter-price>
         </div>
@@ -23,6 +25,8 @@
 <script>
 import { mapState } from "vuex";
 import ItemFilterPrice from "./ItemFilterPrice.vue";
+import ItemFilterTagList from "./ItemFilterTagList.vue";
+
 
 export default {
 
@@ -30,7 +34,8 @@ export default {
 
     components:
     {
-        ItemFilterPrice
+        ItemFilterPrice,
+        ItemFilterTagList
     },
 
     props:

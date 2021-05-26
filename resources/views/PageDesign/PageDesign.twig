@@ -246,8 +246,14 @@
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
 {% endif %}
 
+<!-- SSR:template(item-filter) -->
+<script type="x/template" data-component="item-filter">
+    <h1>Tets</h1>
+</script>
+<!-- /SSR -->
+
 <!-- SSR:on() -->
-<script>
+<script> 
     window.createApp("#vue-app");
 </script>
 <!-- /SSR -->
