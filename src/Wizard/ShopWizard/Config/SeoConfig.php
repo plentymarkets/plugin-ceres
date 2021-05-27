@@ -61,7 +61,8 @@ class SeoConfig
 
     private static $isbnOptions = [
         "isbnNotSet"                => "1",
-        "isbnSet"                   => "2",
+        "isbnSetFirst"              => "2",
+        "isbnSet"                   => "3",
     ];
 
     private static $mpnOptions = [

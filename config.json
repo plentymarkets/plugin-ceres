@@ -4503,10 +4503,23 @@
                                         },
                                         {
                                             "value": "2",
-                                            "caption": "Config.isbnSet",
+                                            "caption": "Config.isbnSetFirst",
                                             "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.isbnSet",
+                                            "position": 2
                                         }
                                     ]
+                                }
+                            },
+                            "isbn.mapping.isbnID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.isbnID",
+                                "options": {
+                                    "defaultValue": ""
                                 }
                             }
                         }

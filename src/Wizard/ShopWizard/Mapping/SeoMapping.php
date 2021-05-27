@@ -135,6 +135,12 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
+        'seo_isbnId' => [
+            'field'    => 'isbn.mapping.isbnID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
+        ],
         'seo_mpn' => [
             'field'    => 'mpn.mapping.mpn',
             'type'     => 'string',

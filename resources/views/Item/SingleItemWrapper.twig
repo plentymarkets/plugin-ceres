@@ -42,28 +42,16 @@
                 },
 {% endif %}
 {% if gtin8 | length  > 0 %}
-                "gtin8"         : {
-                    "@type"         : "GTIN 8",
-                    "name"          : "{{ gtin8 }}"
-                },
+                "gtin8"         : "{{ gtin8 }}",
 {% endif %}
 {% if gtin13 | length  > 0 %}
-                "gtin13"         : {
-                    "@type"         : "GTIN 13",
-                    "name"          : "{{ gtin13 }}"
-                },
+                "gtin13"        : "{{ gtin13 }}",
 {% endif %}
 {% if isbn | length  > 0 %}
-                "isbn"         : {
-                    "@type"         : "ISBN",
-                    "name"          : "{{ isbn }}"
-                },
+                "isbn"          : "{{ isbn }}",
 {% endif %}
 {% if mpn | length  > 0 %}
-                "mpn"         : {
-                    "@type"         : "MPN",
-                    "name"          : "{{ mpn }}"
-                },
+                "mpn"           : "{{ mpn }}",
 {% endif %}
                 "offers": {
                     "@type"         : "Offer",

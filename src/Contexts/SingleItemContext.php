@@ -164,18 +164,18 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $gtin8Mapping = $this->ceresConfig->seo->gtin8Mapping;
         $gtin8MappingId = $this->ceresConfig->seo->gtin8MappingId;
-        $valueGtin8 = 'GTIN 8';
+        $valueGtin8 = 'GTIN_8';
         $propertyGtin8 = '';
         if ($gtin8Mapping == 2) {
-            foreach ($this->gtin8 = $itemData['barcodes'] as $property) {
-                if ($property['name'] == $valueGtin8) {
+            foreach ($itemData['barcodes'] as $property) {
+                if ($property['type'] == $valueGtin8) {
                     $propertyGtin8 = $property['code'];
                     break;
                 }
             }
             $this->gtin8 = $propertyGtin8;
         } elseif ($gtin8Mapping == 3) {
-            foreach ($this->gtin8 = $itemData['barcodes'] as $property) {
+            foreach ($itemData['barcodes'] as $property) {
                 if ($property['id'] == $gtin8MappingId) {
                     $propertyGtin8 = $property['code'];
                     break;
@@ -186,18 +186,18 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $gtin13Mapping = $this->ceresConfig->seo->gtin13Mapping;
         $gtin13MappingId = $this->ceresConfig->seo->gtin13MappingId;
-        $valueGtin13 = 'GTIN 13';
+        $valueGtin13 = 'GTIN_13';
         $propertyGtin13 = '';
         if ($gtin13Mapping == 2) {
-            foreach ($this->gtin13 = $itemData['barcodes'] as $property) {
-                if ($property['name'] == $valueGtin13) {
+            foreach ($itemData['barcodes'] as $property) {
+                if ($property['type'] == $valueGtin13) {
                     $propertyGtin13 = $property['code'];
                     break;
                 }
             }
             $this->gtin13 = $propertyGtin13;
         } elseif ($gtin13Mapping == 3) {
-            foreach ($this->gtin13 = $itemData['barcodes'] as $property) {
+            foreach ($itemData['barcodes'] as $property) {
                 if ($property['id'] == $gtin13MappingId) {
                     $propertyGtin13 = $property['code'];
                     break;
@@ -207,11 +207,20 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         }
 
         $isbnMapping = $this->ceresConfig->seo->isbnMapping;
+        $isbnMappingId = $this->ceresConfig->seo->isbnMappingId;
+        $propertyIsbn = '';
         if ($isbnMapping == 2) {
-            $propertyIsbn = '';
             $valueIsbn = 'ISBN';
-            foreach ($this->isbn = $itemData['barcodes'] as $property) {
-                if ($property['name'] == $valueIsbn) {
+            foreach ($itemData['barcodes'] as $property) {
+                if ($property['type'] == $valueIsbn) {
+                    $propertyIsbn = $property['code'];
+                    break;
+                }
+            }
+            $this->isbn = $propertyIsbn;
+        } elseif ($isbnMapping == 3) {
+            foreach ($itemData['barcodes'] as $property) {
+                if ($property['id'] == $isbnMappingId) {
                     $propertyIsbn = $property['code'];
                     break;
                 }

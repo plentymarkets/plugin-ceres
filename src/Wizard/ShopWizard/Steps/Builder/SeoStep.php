@@ -344,6 +344,14 @@ class SeoStep extends Step
                         "name" => "Wizard.isbnChoose",
                         "listBoxValues" => $options,
                     ]
+                ],
+                "seo_isbnId" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_isbn === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.isbnID",
+                    ]
                 ]
             ]
         ];

@@ -29,37 +29,42 @@ class CeresSeoConfig extends PluginConfig
     public $manufacturerMapping;
 
     /**
-     * @var string $gtin8Mapping Selected option value for gtin 8 barcode in rich snippet.
+     * @var string $gtin8Mapping Selected option value for GTIN 8 barcode in rich snippet.
      */
     public $gtin8Mapping;
 
     /**
-     * @var string $gtin8MappingId Selected option value for gtin 8 barcode in rich snippet.
+     * @var string $gtin8MappingId Property ID for GTIN 8 rich snippet.
      */
     public $gtin8MappingId;
 
     /**
-     * @var string $gtin13Mapping Selected option value for gtin 13 barcode in rich snippet.
+     * @var string $gtin13Mapping Selected option value for GTIN 13 barcode in rich snippet.
      */
     public $gtin13Mapping;
 
     /**
-     * @var string $gtin13MappingId Selected option value for gtin 13 barcode in rich snippet.
+     * @var string $gtin13MappingId Property ID for GTIN 13 rich snippet.
      */
     public $gtin13MappingId;
 
     /**
-     * @var string $isbnMapping Selected option value for isbn barcode in rich snippet.
+     * @var string $isbnMapping Selected option value for ISBN barcode in rich snippet.
      */
     public $isbnMapping;
 
     /**
-     * @var string $mpnMapping;
+     * @var string $isbnMappingId Property ID for ISBN rich snippet.
+     */
+    public $isbnMappingId;
+
+    /**
+     * @var string $mpnMapping Selected option value for MPN barcode in rich snippet.
      */
     public $mpnMapping;
 
     /**
-     * @var string $mpnMappingLabel ?????
+     * @var string $mpnMappingId Property ID for MPN rich snippet.
      */
     public $mpnMappingId;
 
@@ -84,6 +89,7 @@ class CeresSeoConfig extends PluginConfig
         $this->gtin13Mapping = $this->getTextValue('gtin13.mapping.gtin13','1');
         $this->gtin13MappingId = $this->getTextValue('gtin13.mapping.gtin13ID', '');
         $this->isbnMapping = $this->getTextValue('isbn.mapping.isbn','1');
+        $this->isbnMappingId = $this->getTextValue('isbn.mapping.isbnID','');
         $this->mpnMapping = $this->getTextValue('mpn.mapping.mpn','1');
         $this->mpnMappingId = $this->getTextValue('mpn.mapping.mpnID', '');
     }
