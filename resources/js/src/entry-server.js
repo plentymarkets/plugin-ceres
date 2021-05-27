@@ -19,7 +19,7 @@ function createApp(context)
             Vue.config.errorHandler = (err, vm, info) =>
             {
                 context.throwError({
-                    message: `Error in ${ info }: "${ err.toString() }"`,
+                    message: `[Vue error]: Error in ${ info }: "${ err.toString() }"`,
                     stack: err.stack
                 });
             };
@@ -30,7 +30,7 @@ function createApp(context)
             Vue.config.warnHandler = (msg, vm, trace) =>
             {
                 context.throwError({
-                    message: msg,
+                    message: `[Vue error]: ${ msg }`,
                     stack: trace.trim()
                 });
             };
