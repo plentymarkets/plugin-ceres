@@ -152,6 +152,18 @@ class SeoMapping
             'type'     => 'integer',
             'global'   => false,
             'optional' => true
+        ],
+        'seo_priceValidUntil' => [
+            'field'    => 'priceValidUntil.mapping.priceValidUntil',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_priceValidUntilId' => [
+            'field'    => 'priceValidUntil.mapping.priceValidUntilID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
         ]
     ];
 

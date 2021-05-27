@@ -69,6 +69,16 @@ class CeresSeoConfig extends PluginConfig
     public $mpnMappingId;
 
     /**
+     * @var string $priceValidUntilMappingMapping Selected option value for "priceValidUntil" in rich snippet.
+     */
+    public $priceValidUntilMapping;
+
+    /**
+     * @var string $priceValidUntilMappingId Property ID for "priceValidUntil" rich snippet.
+     */
+    public $priceValidUntilMappingId;
+
+    /**
      * @inheritDoc
      */
     protected function getPluginName(): string
@@ -92,5 +102,7 @@ class CeresSeoConfig extends PluginConfig
         $this->isbnMappingId = $this->getTextValue('isbn.mapping.isbnID','');
         $this->mpnMapping = $this->getTextValue('mpn.mapping.mpn','1');
         $this->mpnMappingId = $this->getTextValue('mpn.mapping.mpnID', '');
+        $this->priceValidUntilMapping = $this->getTextValue('priceValidUntil.mapping.priceValidUntil','1');
+        $this->priceValidUntilMappingId = $this->getTextValue('priceValidUntil.mapping.priceValidUntilID','');
     }
 }

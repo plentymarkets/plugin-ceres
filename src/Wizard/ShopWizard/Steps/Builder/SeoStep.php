@@ -33,7 +33,8 @@ class SeoStep extends Step
                 $this->generateGtin8MappingSection(),
                 $this->generateGtin13MappingSection(),
                 $this->generateIsbnMappingSection(),
-                $this->generateMpnMappingSection()
+                $this->generateMpnMappingSection(),
+                $this->generatePriceValidUntilMappingSection()
             ]
         ];
     }
@@ -383,6 +384,38 @@ class SeoStep extends Step
                     "defaultValue" => "",
                     "options" => [
                         "name" => "Wizard.mpnID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generatePriceValidUntilMappingSection():array
+    {
+        $priceValidUntilOptions = SeoConfig::getPriceValidUntilOptions();
+        $options = StepHelper::generateTranslatedListBoxValues($priceValidUntilOptions);
+
+        return [
+            "title" => "Wizard.priceValidUntilMapping",
+            "description" => "Wizard.priceValidUntilMappingDescription",
+            "form" => [
+                "seo_priceValidUntil" => [
+                    "type" => "select",
+                    "defaultValue" => "1",
+                    "options" => [
+                        "name" => "Wizard.priceValidUntilChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_priceValidUntilId" => [
+                    "type" => "text",
+                    "isVisible" => "seo_priceValidUntil === '2'",
+                    "defaultValue" => "",
+                    "options" => [
+                        "name" => "Wizard.priceValidUntilID",
                     ]
                 ]
             ]

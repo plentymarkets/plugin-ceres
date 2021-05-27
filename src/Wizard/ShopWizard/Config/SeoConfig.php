@@ -60,14 +60,19 @@ class SeoConfig
     ];
 
     private static $isbnOptions = [
-        "isbnNotSet"                => "1",
-        "isbnSetFirst"              => "2",
-        "isbnSet"                   => "3",
+        "isbnNotSet"                  => "1",
+        "isbnSetFirst"                => "2",
+        "isbnSet"                     => "3",
     ];
 
     private static $mpnOptions = [
-        "mpnNotSet"                => "1",
-        "mpnSet"                   => "2",
+        "mpnNotSet"                   => "1",
+        "mpnSet"                      => "2",
+    ];
+
+    private static $priceValidUntilOptions = [
+        "priceValidUntilNotSet"       => "1",
+        "priceValidUntilSet"          => "2",
     ];
 
     /**
@@ -140,5 +145,13 @@ class SeoConfig
     public static function getMpnOptions()
     {
         return self::$mpnOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPriceValidUntilOptions()
+    {
+        return self::$priceValidUntilOptions;
     }
 }

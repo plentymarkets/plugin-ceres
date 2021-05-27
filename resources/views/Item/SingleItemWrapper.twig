@@ -57,6 +57,9 @@
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
                     "price"         : "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
+{% if priceValidUntil | length  > 0 %}
+                    "priceValidUntil: "{{ priceValidUntil }}",
+{% endif %}
                     "url"           : "{{ requestedVariationUrl }}",
 {% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification": {

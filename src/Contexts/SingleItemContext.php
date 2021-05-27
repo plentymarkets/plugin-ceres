@@ -116,9 +116,14 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $isbn = '';
 
     /**
-     * @var string $mpn Contain the "MPN" Barcode for SEO attribute.
+     * @var string $mpn Contains the "MPN" Barcode for SEO attribute.
      */
     public $mpn = '';
+
+    /**
+     * @var string $priceValidUntil Contains the date until the price of item is valid for SEO attribute.
+     */
+    public $priceValidUntil = '';
 
     /**
      * @inheritDoc
@@ -239,6 +244,19 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 }
             }
             $this->mpn = $propertyMpn;
+        }
+
+        $priceValidUntilMapping = $this->ceresConfig->seo->priceValidUntilMapping;
+        $priceValidUntilMappingId = $this->ceresConfig->seo->priceValidUntilMappingId;
+        if ($priceValidUntilMapping == 2) {
+            $propertyPriceValidUntil = '';
+            foreach ($itemData['variationProperties'][0]['properties'] as $property) {
+                if ($property['id'] == $priceValidUntilMappingId) {
+                    $propertyPriceValidUntil = $property['values']['value'];
+                    break;
+                }
+            }
+            $this->priceValidUntil = $propertyPriceValidUntil;
         }
 
         $this->isItemSet = $params['isItemSet'];
