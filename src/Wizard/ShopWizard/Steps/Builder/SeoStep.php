@@ -363,24 +363,12 @@ class SeoStep extends Step
      */
     private function generateMpnMappingSection():array
     {
-        $mpnOptions = SeoConfig::getMpnOptions();
-        $options = StepHelper::generateTranslatedListBoxValues($mpnOptions);
-
         return [
             "title" => "Wizard.mpnMapping",
             "description" => "Wizard.mpnMappingDescription",
             "form" => [
-                "seo_mpn" => [
-                    "type" => "select",
-                    "defaultValue" => "1",
-                    "options" => [
-                        "name" => "Wizard.mpnChoose",
-                        "listBoxValues" => $options,
-                    ]
-                ],
                 "seo_mpnId" => [
                     "type" => "text",
-                    "isVisible" => "seo_mpn === '2'",
                     "defaultValue" => "",
                     "options" => [
                         "name" => "Wizard.mpnID",
@@ -395,24 +383,12 @@ class SeoStep extends Step
      */
     private function generatePriceValidUntilMappingSection():array
     {
-        $priceValidUntilOptions = SeoConfig::getPriceValidUntilOptions();
-        $options = StepHelper::generateTranslatedListBoxValues($priceValidUntilOptions);
-
         return [
             "title" => "Wizard.priceValidUntilMapping",
             "description" => "Wizard.priceValidUntilMappingDescription",
             "form" => [
-                "seo_priceValidUntil" => [
-                    "type" => "select",
-                    "defaultValue" => "1",
-                    "options" => [
-                        "name" => "Wizard.priceValidUntilChoose",
-                        "listBoxValues" => $options,
-                    ]
-                ],
                 "seo_priceValidUntilId" => [
                     "type" => "text",
-                    "isVisible" => "seo_priceValidUntil === '2'",
                     "defaultValue" => "",
                     "options" => [
                         "name" => "Wizard.priceValidUntilID",

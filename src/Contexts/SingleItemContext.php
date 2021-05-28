@@ -233,9 +233,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $this->isbn = $propertyIsbn;
         }
 
-        $mpnMapping = $this->ceresConfig->seo->mpnMapping;
         $mpnMappingId = $this->ceresConfig->seo->mpnMappingId;
-        if ($mpnMapping == 2) {
+        if ($mpnMappingId > 0) {
             $propertyMpn = '';
             foreach ($itemData['variationProperties'][0]['properties'] as $property) {
                 if ($property['id'] == $mpnMappingId) {
@@ -246,9 +245,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $this->mpn = $propertyMpn;
         }
 
-        $priceValidUntilMapping = $this->ceresConfig->seo->priceValidUntilMapping;
         $priceValidUntilMappingId = $this->ceresConfig->seo->priceValidUntilMappingId;
-        if ($priceValidUntilMapping == 2) {
+        if ($priceValidUntilMappingId > 0) {
             $propertyPriceValidUntil = '';
             foreach ($itemData['variationProperties'][0]['properties'] as $property) {
                 if ($property['id'] == $priceValidUntilMappingId) {

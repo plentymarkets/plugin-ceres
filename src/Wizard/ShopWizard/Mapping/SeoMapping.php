@@ -141,21 +141,9 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
-        'seo_mpn' => [
-            'field'    => 'mpn.mapping.mpn',
-            'type'     => 'string',
-            'global'   => false,
-            'optional' => true
-        ],
         'seo_mpnId' => [
             'field'    => 'mpn.mapping.mpnID',
             'type'     => 'integer',
-            'global'   => false,
-            'optional' => true
-        ],
-        'seo_priceValidUntil' => [
-            'field'    => 'priceValidUntil.mapping.priceValidUntil',
-            'type'     => 'string',
             'global'   => false,
             'optional' => true
         ],

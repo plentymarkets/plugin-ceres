@@ -4530,26 +4530,6 @@
                     "label": "Config.mpnMapping",
                     "options": {
                         "containerEntries": {
-                            "mpn.mapping.mpn": {
-                                "type": "selectBox",
-                                "required": false,
-                                "label": "Config.mpn",
-                                "options": {
-                                    "defaultValue": "1",
-                                    "selectBoxValues": [
-                                        {
-                                            "value": "1",
-                                            "caption": "Config.mpnNotSet",
-                                            "position": 0
-                                        },
-                                        {
-                                            "value": "2",
-                                            "caption": "Config.mpnSet",
-                                            "position": 1
-                                        }
-                                    ]
-                                }
-                            },
                             "mpn.mapping.mpnID": {
                                 "type": "inputText",
                                 "required": false,
@@ -4566,26 +4546,6 @@
                     "label": "Config.priceValidUntilMapping",
                     "options": {
                         "containerEntries": {
-                            "priceValidUntil.mapping.priceValidUntil": {
-                                "type": "selectBox",
-                                "required": false,
-                                "label": "Config.priceValidUntil",
-                                "options": {
-                                    "defaultValue": "1",
-                                    "selectBoxValues": [
-                                        {
-                                            "value": "1",
-                                            "caption": "Config.priceValidUntilNotSet",
-                                            "position": 0
-                                        },
-                                        {
-                                            "value": "2",
-                                            "caption": "Config.priceValidUntilSet",
-                                            "position": 1
-                                        }
-                                    ]
-                                }
-                            },
                             "priceValidUntil.mapping.priceValidUntilID": {
                                 "type": "inputText",
                                 "required": false,
