@@ -34,7 +34,8 @@ class SeoStep extends Step
                 $this->generateGtin13MappingSection(),
                 $this->generateIsbnMappingSection(),
                 $this->generateMpnMappingSection(),
-                $this->generatePriceValidUntilMappingSection()
+                $this->generatePriceValidUntilMappingSection(),
+                $this->generateSkuMappingSection()
             ]
         ];
     }
@@ -392,6 +393,38 @@ class SeoStep extends Step
                     "defaultValue" => "",
                     "options" => [
                         "name" => "Wizard.priceValidUntilID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateSkuMappingSection():array
+    {
+        $skuOptions = SeoConfig::getSkuOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($skuOptions);
+
+        return [
+            "title"       => "Wizard.skuMapping",
+            "description" => "Wizard.skuMappingDescription",
+            "form"        => [
+                "seo_sku" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.skuChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_skuId" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_sku === '4'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.skuID",
                     ]
                 ]
             ]

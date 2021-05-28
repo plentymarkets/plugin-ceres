@@ -152,7 +152,19 @@ class SeoMapping
             'type'     => 'integer',
             'global'   => false,
             'optional' => true
-        ]
+        ],
+         'seo_sku' => [
+            'field'    => 'sku.mapping.sku',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_skuId' => [
+            'field'    => 'sku.mapping.skuID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
+        ],
     ];
 
     /**

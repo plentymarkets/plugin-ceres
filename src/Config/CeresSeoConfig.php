@@ -69,6 +69,18 @@ class CeresSeoConfig extends PluginConfig
     public $priceValidUntilMappingId;
 
     /**
+     * @var string $skuMapping Selected option value for SKU barcode in rich snippet.
+     */
+    public $skuMapping;
+
+    /**
+     * @var string $skuMappingId Property ID for SKU rich snippet.
+     */
+    public $skuMappingId;
+
+
+
+    /**
      * @inheritDoc
      */
     protected function getPluginName(): string
@@ -92,5 +104,7 @@ class CeresSeoConfig extends PluginConfig
         $this->isbnMappingId = $this->getTextValue('isbn.mapping.isbnID','');
         $this->mpnMappingId = $this->getTextValue('mpn.mapping.mpnID', '');
         $this->priceValidUntilMappingId = $this->getTextValue('priceValidUntil.mapping.priceValidUntilID','');
+        $this->skuMapping = $this->getTextValue('sku.mapping.sku','1');
+        $this->skuMappingId = $this->getTextValue('sku.mapping.skuID','');
     }
 }

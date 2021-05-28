@@ -4556,6 +4556,52 @@
                             }
                         }
                     }
+                },
+                "sku.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.skuMapping",
+                    "options": {
+                        "containerEntries": {
+                            "sku.mapping.sku": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.sku",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.skuVariationID",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.skuVariationNr",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.skuOnArticle",
+                                            "position": 2
+                                        },
+                                        {
+                                            "value": "4",
+                                            "caption": "Config.skuVarPropSet",
+                                            "position": 3
+                                        }
+                                    ]
+                                }
+                            },
+                            "sku.mapping.skuID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.skuID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },

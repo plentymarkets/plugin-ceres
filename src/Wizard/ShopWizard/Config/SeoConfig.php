@@ -65,6 +65,13 @@ class SeoConfig
         "isbnSet"                     => "3",
     ];
 
+    private static $skuOptions = [
+        "skuVariationID"              => "1",
+        "skuVariationNr"              => "2",
+        "skuOnArticle"                => "3",
+        "skuVarPropSet"               => "4",
+    ];
+
     /**
      * @return array
      */
@@ -127,5 +134,13 @@ class SeoConfig
     public static function getIsbnOptions()
     {
         return self::$isbnOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getSkuOptions()
+    {
+        return self::$skuOptions;
     }
 }

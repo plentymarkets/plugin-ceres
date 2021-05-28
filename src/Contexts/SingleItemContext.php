@@ -126,6 +126,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $priceValidUntil = '';
 
     /**
+     * @var string $sku Contains the SKU code for SEO attribute.
+     */
+    public $sku = '';
+
+    /**
      * @inheritDoc
      */
     public function init($params)
@@ -255,6 +260,30 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 }
             }
             $this->priceValidUntil = $propertyPriceValidUntil;
+        }
+
+        $skuMapping = $this->ceresConfig->seo->skuMapping;
+        $skuMappingId = $this->ceresConfig->seo->skuMappingId;
+        switch($skuMapping) {
+            case 1:
+                $this->sku = $itemData['variation']['id'];
+                break;
+            case 2:
+                $this->sku = $itemData['variation']['number'];
+                break;
+            case 3:
+                $this->sku = $itemData['skus']['0']['sku'];
+                break;
+            case 4:
+                $propertySku = '';
+                foreach ($itemData['variationProperties'][0]['properties'] as $property) {
+                    if ($property['id'] == $skuMappingId) {
+                        $propertySku = $property['values']['value'];
+                        break;
+                    }
+                }
+                $this->sku = $propertySku;
+                break;
         }
 
         $this->isItemSet = $params['isItemSet'];
