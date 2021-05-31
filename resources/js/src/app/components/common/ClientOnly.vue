@@ -7,13 +7,19 @@ export default {
         }
     },
 
-    render(){
-        if(this.isMounted)
+    render(createElement) {
+        if (this.isMounted)
         {
+            // if there are multiple nodes in the default slot
+            if (this.$slots.default?.length > 1)
+            {
+                return createElement("div", this.$slots.default);
+            }
+
             return this.$slots.default ? this.$slots.default : null;
         }
     },
-    mounted(){
+    mounted() {
         this.isMounted = true;
     }
 }

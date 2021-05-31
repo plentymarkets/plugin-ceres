@@ -15,10 +15,12 @@
     <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
         {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-title-bar widget-" ~ appearance) }}>
-        {% if text | trim is empty %}
-            <h1 class="align-center">{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.headerCompanyName")) }}</h1>
-        {% else %}
-            {{ WidgetHelper.editableTwig(isPreview, text) }}
-        {% endif %}
+        <client-only>
+            {% if text | trim is empty %}
+                <h1 class="align-center">{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.headerCompanyName")) }}</h1>
+            {% else %}
+                {{ WidgetHelper.editableTwig(isPreview, text) }}
+            {% endif %}
+        </client-only>
     </div>
 </div>
