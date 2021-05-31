@@ -75024,7 +75024,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
 /* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
 /* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
-/* harmony import */ var _app_store_index__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./app/store/index */ "./resources/js/src/app/store/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -75148,8 +75147,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-function createApp(options) {
+function createApp(options, store) {
   // =========================
   // COMPONENTS
   // =========================
@@ -75315,17 +75313,13 @@ function createApp(options) {
   });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_54__["default"].translate;
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$ceres = App;
-  var store = Object(_app_store_index__WEBPACK_IMPORTED_MODULE_96__["createStore"])();
 
   var defaultOptions = _objectSpread({
     store: store
   }, options);
 
   var app = new vue__WEBPACK_IMPORTED_MODULE_11___default.a(defaultOptions);
-  return {
-    app: app,
-    store: store
-  };
+  return app;
 }
 
 /***/ }),
@@ -90428,7 +90422,6 @@ function initClientListeners(store) {
 } // TODO: add code comment
 
 function initClientStore(store) {
-  window.ceresStore = store;
   store.commit("initConsents");
   store.dispatch("loadBasketData");
   /**
@@ -94445,6 +94438,11 @@ var globals = {
 
 function createApp(context) {
   return new Promise(function (resolve, reject) {
+    // defines if the render location is the server
+    App.isSSR = true;
+    App.isSSREnabled = App.config.log.performanceSsr;
+    var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["createStore"])();
+
     if (false) {} else {
       // use more detailed warn handler for development bundles
       vue__WEBPACK_IMPORTED_MODULE_6___default.a.config.warnHandler = function (msg, vm, trace) {
@@ -94453,16 +94451,9 @@ function createApp(context) {
           stack: trace.trim()
         });
       };
-    } // defines if the render location is the server
+    }
 
-
-    App.isSSR = true;
-    App.isSSREnabled = App.config.log.performanceSsr;
-
-    var _createAppInternal = Object(_app__WEBPACK_IMPORTED_MODULE_5__["createApp"])(context),
-        app = _createAppInternal.app,
-        store = _createAppInternal.store;
-
+    var app = Object(_app__WEBPACK_IMPORTED_MODULE_5__["createApp"])(context, store);
     Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["initServerStore"])(store);
     resolve(app);
   });
