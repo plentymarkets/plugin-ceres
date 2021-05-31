@@ -1,5 +1,32 @@
 # Release Notes for Ceres
 
+## v5.0.32 (2021-06-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.31...5.0.32" target="_blank" rel="noopener"><b>ÜOverview of all changes</b></a>
+
+### Added
+
+- In the Ceres Wizard, the validity of the session cookie can now additionally be set to one hour or one day.
+
+### Changed
+
+- Errors in server-side rendering of the Vue.js app can now be caught and the page rendered client-side.
+
+### Fixed
+
+- The content of a text widget is no longer rendered on the server side (SSR) to prevent hydration errors.
+- The logic for scrolling fixed elements in the header has been adjusted. This improves the 'Cumulative Shift Layout' (CLS) value of the Google Core Web Vitals.
+- The item list widget did not display images in ShopBuilder under certain circumstances. This has been fixed.
+- Durch einen Fehler konnten Serverseitig verschachtelte Komponenten nicht über data-component überschrieben werden was zu hydration errors geführt hat. Dies wurde behoben.
+- To run through the Ceres wizard, plentymarkets users no longer require authorisation for the "Accounting" and "Order status" areas.
+- Due to an error, window.ceresStore could no longer be accessed in the AfterScriptsLoaded container. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.32 we have made changes to a template file which are relevant for theme developers. You can find the changed template below. The link directs you to the effected changes in the corresponding file.
+  
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/2874/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/PageDesign/Partials/Header/Header.twig](https://github.com/plentymarkets/plugin-ceres/pull/2874/files#diff-f2a11c8bc92192c490363ceeb2b7e9a02819568c77971a10e43eedc93270014f)
+- [resources/views/Widgets/Category/ItemGridWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2881/files#diff-f0aaf1ea155523f16c664c97d4b8877ad9db66f705f85a59ebffc0a3834f2456)
+
 ## v5.0.31 (2021-05-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.30...5.0.31" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
