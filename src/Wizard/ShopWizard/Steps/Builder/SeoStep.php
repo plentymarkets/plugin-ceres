@@ -405,7 +405,7 @@ class SeoStep extends Step
     private function generateSkuMappingSection():array
     {
         $skuOptions = SeoConfig::getSkuOptions();
-        $options       = StepHelper::generateTranslatedListBoxValues($skuOptions);
+        $options = StepHelper::generateTranslatedListBoxValues($skuOptions);
 
         return [
             "title"       => "Wizard.skuMapping",
@@ -421,7 +421,7 @@ class SeoStep extends Step
                 ],
                 "seo_skuId" => [
                     "type"         => "text",
-                    "isVisible"    => "seo_sku === '4'",
+                    "isVisible"    => "seo_sku === '3'",
                     "defaultValue" => "",
                     "options"      => [
                         "name"          => "Wizard.skuID",
