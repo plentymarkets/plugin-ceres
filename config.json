@@ -4581,13 +4581,8 @@
                                         },
                                         {
                                             "value": "3",
-                                            "caption": "Config.skuOnArticle",
-                                            "position": 2
-                                        },
-                                        {
-                                            "value": "4",
                                             "caption": "Config.skuVarPropSet",
-                                            "position": 3
+                                            "position": 2
                                         }
                                     ]
                                 }

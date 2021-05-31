@@ -68,8 +68,7 @@ class SeoConfig
     private static $skuOptions = [
         "skuVariationID"              => "1",
         "skuVariationNr"              => "2",
-        "skuOnArticle"                => "3",
-        "skuVarPropSet"               => "4",
+        "skuVarPropSet"               => "3",
     ];
 
     /**

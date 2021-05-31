@@ -41,7 +41,9 @@
                     "name"          : "{{ brand }}"
                 },
 {% endif %}
+{% if sku | length  > 0 %}
                 "sku"           : "{{ sku }}",
+{% endif %}
 {% if gtin8 | length  > 0 %}
                 "gtin8"         : "{{ gtin8 }}",
 {% endif %}
@@ -75,8 +77,7 @@
                     },
 {% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
-                    "itemCondition" : "{{ itemData.item.condition.names.name }}",
-                    "serialNumber"  : "{{ itemData.variation.number }}"
+                    "itemCondition" : "{{ itemData.item.condition.names.name }}"
                 },
                 "depth": {
                     "@type"         : "QuantitativeValue",
