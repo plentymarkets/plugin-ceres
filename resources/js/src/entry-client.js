@@ -34,6 +34,11 @@ window.createApp = (selector) =>
 
 const store = createStore();
 
+if (window.__INITIAL_STATE__)
+{
+    store.replaceState(window.__INITIAL_STATE__);
+}
+
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.Vue = Vue;
