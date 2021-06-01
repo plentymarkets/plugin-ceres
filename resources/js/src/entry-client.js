@@ -6,7 +6,7 @@ import "bootstrap";
 import "owl.carousel";
 import jQuery from "jquery";
 import { createApp } from "./app";
-import { initClientListeners, initClientStore } from "./app/store";
+import { initClientListeners, initClientStore, createStore } from "./app/store";
 import { initListener } from "./app/services/ApiService";
 import { mount } from "./mount";
 
@@ -19,14 +19,9 @@ App.isSSREnabled = App.config.log.performanceSsr;
 window.createApp = (selector) =>
 {
     // client-specific bootstrapping logic...
-    const { app, store } = createApp({
+    const app = createApp({
         template: "#ssr-script-container"
-    });
-
-    if (window.__INITIAL_STATE__)
-    {
-        store.replaceState(window.__INITIAL_STATE__);
-    }
+    }, store);
 
     app.$mount(selector, true);
     window.vueApp = app;
@@ -37,11 +32,19 @@ window.createApp = (selector) =>
     initClientStore(store);
 };
 
+const store = createStore();
+
+if (window.__INITIAL_STATE__)
+{
+    store.replaceState(window.__INITIAL_STATE__);
+}
+
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.Vue = Vue;
 window.NotificationService = NotificationService;
 window.ceresTranslate = TranslationService.translate;
 window.vueEventHub = new Vue();
+window.ceresStore = store;
 
 import "./app/main";

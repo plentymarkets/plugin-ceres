@@ -6,6 +6,7 @@ use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Plenty\Modules\Account\Contact\Contracts\ContactClassRepositoryContract;
+use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
@@ -18,6 +19,11 @@ use Plenty\Plugin\Translation\Translator;
  */
 class DefaultSettingsStep extends Step
 {
+    /**
+     * @var AuthHelper
+     */
+    private $authHelper;
+    
     /**
      * @var PaymentRepositoryContract
      */
@@ -44,6 +50,7 @@ class DefaultSettingsStep extends Step
     /**
      * DefaultSettingsStep constructor.
      *
+     * @param AuthHelper $authHelper
      * @param PaymentMethodRepositoryContract $paymentRepository
      * @param CountryRepositoryContract $countryRepository
      * @param ContactClassRepositoryContract $classRepository
@@ -51,6 +58,7 @@ class DefaultSettingsStep extends Step
      * @param Translator $translator
      */
     public function __construct(
+        AuthHelper $authHelper,
         PaymentMethodRepositoryContract $paymentRepository,
         CountryRepositoryContract $countryRepository,
         ContactClassRepositoryContract $classRepository,
@@ -59,6 +67,7 @@ class DefaultSettingsStep extends Step
     ){
         parent::__construct();
         
+        $this->authHelper = $authHelper;
         $this->paymentRepository = $paymentRepository;
         $this->countryRepository = $countryRepository;
         $this->classRepository = $classRepository;
@@ -97,8 +106,11 @@ class DefaultSettingsStep extends Step
         }
         
         $b2bClassesList = StepHelper::buildListBoxData($b2bClasses);
-
-        $locations = $this->locationRepository->getAll()->toArray();
+        
+        $locationRepository = $this->locationRepository;
+        $locations = $this->authHelper->processUnguarded(function() use ($locationRepository) {
+            return $locationRepository->getAll()->toArray();
+        });
         $locationsList = StepHelper::buildListBoxData($locations, 'name', 'id');
         
         return [

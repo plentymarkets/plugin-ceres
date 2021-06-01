@@ -128,6 +128,7 @@ class TwigItemDataField extends Twig_Extension
         }
 
         if (is_null($directiveType)) {
+
             return $twigPrint;
         }
 

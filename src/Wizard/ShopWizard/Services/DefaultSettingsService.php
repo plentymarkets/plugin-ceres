@@ -3,12 +3,12 @@
 namespace Ceres\Wizard\ShopWizard\Services;
 
 use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
+use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Shipping\Contracts\ParcelServicePresetRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Order\Shipping\ParcelService\Models\ParcelService;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodContainer;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
-use Plenty\Modules\Payment\Method\Models\PaymentMethod;
 use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Plugin\Models\Plugin;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
@@ -23,6 +23,11 @@ use Plenty\Plugin\Http\Request;
  */
 class DefaultSettingsService
 {
+    /**
+     * @var AuthHelper
+     */
+    private $authHelper;
+    
     /**
      * @var ParcelServicePresetRepositoryContract
      */
@@ -63,6 +68,7 @@ class DefaultSettingsService
      * @param AccountingLocationRepositoryContract $accountingLocationRepo
      */
     public function __construct(
+        AuthHelper $authHelper,
         ParcelServicePresetRepositoryContract $parcelServicePresetRepo,
         PaymentMethodRepositoryContract $paymentRepository,
         CountryRepositoryContract $countryRepository,
@@ -70,6 +76,7 @@ class DefaultSettingsService
         PluginSetRepositoryContract $pluginSetRepository
     )
     {
+        $this->authHelper = $authHelper;
         $this->parcelServicePresetRepo = $parcelServicePresetRepo;
         $this->paymentRepository = $paymentRepository;
         $this->countryRepository = $countryRepository;
@@ -215,7 +222,11 @@ class DefaultSettingsService
      */
     public function hasLocations(): bool
     {
-        $locations = $this->accountingLocationRepo->getAll()->toArray();
+        $accountingLocationRepo = $this->accountingLocationRepo;
+        $locations = $this->authHelper->processUnguarded(function() use ($accountingLocationRepo) {
+            return $accountingLocationRepo->getAll()->toArray();
+        });
+
         return count($locations) ? true : false;
     }
 
