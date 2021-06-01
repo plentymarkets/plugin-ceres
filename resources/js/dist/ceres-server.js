@@ -2427,8 +2427,15 @@ __webpack_require__.r(__webpack_exports__);
       isMounted: false
     };
   },
-  render: function render() {
+  render: function render(createElement) {
     if (this.isMounted) {
+      var _this$$slots$default;
+
+      // if there are multiple nodes in the default slot
+      if (((_this$$slots$default = this.$slots.default) === null || _this$$slots$default === void 0 ? void 0 : _this$$slots$default.length) > 1) {
+        return createElement("div", this.$slots.default);
+      }
+
       return this.$slots.default ? this.$slots.default : null;
     }
   },
@@ -75017,7 +75024,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_filters_propertyFileUrl_filter__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./app/filters/propertyFileUrl.filter */ "./resources/js/src/app/filters/propertyFileUrl.filter.js");
 /* harmony import */ var _app_filters_translate_filter__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./app/filters/translate.filter */ "./resources/js/src/app/filters/translate.filter.js");
 /* harmony import */ var _app_filters_truncate_filter__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./app/filters/truncate.filter */ "./resources/js/src/app/filters/truncate.filter.js");
-/* harmony import */ var _app_store_index__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./app/store/index */ "./resources/js/src/app/store/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -75141,8 +75147,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-function createApp(options) {
+function createApp(options, store) {
   // =========================
   // COMPONENTS
   // =========================
@@ -75308,17 +75313,13 @@ function createApp(options) {
   });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_54__["default"].translate;
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$ceres = App;
-  var store = Object(_app_store_index__WEBPACK_IMPORTED_MODULE_96__["createStore"])();
 
   var defaultOptions = _objectSpread({
     store: store
   }, options);
 
   var app = new vue__WEBPACK_IMPORTED_MODULE_11___default.a(defaultOptions);
-  return {
-    app: app,
-    store: store
-  };
+  return app;
 }
 
 /***/ }),
@@ -90421,7 +90422,6 @@ function initClientListeners(store) {
 } // TODO: add code comment
 
 function initClientStore(store) {
-  window.ceresStore = store;
   store.commit("initConsents");
   store.dispatch("loadBasketData");
   /**
@@ -94407,12 +94407,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
-/* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.trim.js */ "./node_modules/core-js/modules/es.string.trim.js");
+/* harmony import */ var core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
+/* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
+
+
+
 
 
 
@@ -94421,10 +94430,10 @@ __webpack_require__.r(__webpack_exports__);
 
  // Override global component function to allow overriding templates
 
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component = _mount__WEBPACK_IMPORTED_MODULE_6__["component"];
+vue__WEBPACK_IMPORTED_MODULE_6___default.a.component = _mount__WEBPACK_IMPORTED_MODULE_9__["component"];
 var globals = {
-  Vue: vue__WEBPACK_IMPORTED_MODULE_3___default.a,
-  Vuex: vuex__WEBPACK_IMPORTED_MODULE_4__["default"]
+  Vue: vue__WEBPACK_IMPORTED_MODULE_6___default.a,
+  Vuex: vuex__WEBPACK_IMPORTED_MODULE_7__["default"]
 };
 
 function createApp(context) {
@@ -94432,12 +94441,20 @@ function createApp(context) {
     // defines if the render location is the server
     App.isSSR = true;
     App.isSSREnabled = App.config.log.performanceSsr;
+    var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["createStore"])();
 
-    var _createAppInternal = Object(_app__WEBPACK_IMPORTED_MODULE_2__["createApp"])(context),
-        app = _createAppInternal.app,
-        store = _createAppInternal.store;
+    if (false) {} else {
+      // use more detailed warn handler for development bundles
+      vue__WEBPACK_IMPORTED_MODULE_6___default.a.config.warnHandler = function (msg, vm, trace) {
+        context.throwError({
+          message: "[Vue error]: ".concat(msg, " ").concat(trace),
+          stack: trace.trim()
+        });
+      };
+    }
 
-    Object(_app_store__WEBPACK_IMPORTED_MODULE_5__["initServerStore"])(store);
+    var app = Object(_app__WEBPACK_IMPORTED_MODULE_5__["createApp"])(context, store);
+    Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["initServerStore"])(store);
     resolve(app);
   });
 }

@@ -5,6 +5,7 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 use Ceres\Wizard\ShopWizard\Config\OnlineStoreConfig;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
 use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 
@@ -425,9 +426,13 @@ class OnlineStoreStep extends Step
         }
         $currentLang = LanguagesHelper::getUserLang();
 
+        /** @var AuthHelper $authHelper */
+        $authHelper = pluginApp(AuthHelper::class);
         /** @var OrderStatusRepositoryContract $orderStatusRepo */
         $orderStatusRepo = pluginApp(OrderStatusRepositoryContract::class);
-        $orderStatusCollection = $orderStatusRepo->all();
+        $orderStatusCollection = $authHelper->processUnguarded(function() use ($orderStatusRepo) {
+            return $orderStatusRepo->all();
+        });
 
         $orderStatusList = [];
         foreach ($orderStatusCollection as $status) {

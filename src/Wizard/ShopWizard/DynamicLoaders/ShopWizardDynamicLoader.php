@@ -5,6 +5,7 @@ namespace Ceres\Wizard\ShopWizard\DynamicLoaders;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
+use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Wizard\Contracts\WizardDynamicLoader;
 use Plenty\Plugin\Translation\Translator;
 
@@ -39,9 +40,16 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
     public function getRelatedLocations(array $parameters): array
     {
         $currentFormField = $this->getCurrentFormField($parameters["plentyMarkets"]);
-        $translationKey = end(explode("_", $currentFormField));
+        $formFields = explode("_", $currentFormField);
+        $translationKey = end($formFields);
+        
         $locationsRepo = pluginApp(AccountingLocationRepositoryContract::class);
-        $locations = $locationsRepo->listByPlentyId($parameters['client']);
+        /** @var AuthHelper $authHelper */
+        $authHelper = pluginApp(AuthHelper::class);
+        $locations = $authHelper->processUnguarded(function() use ($locationsRepo, $parameters) {
+            return $locationsRepo->listByPlentyId($parameters['client']);
+        });
+        
         $locationsList = StepHelper::buildListBoxData($locations, "name", "id");
 
         return [

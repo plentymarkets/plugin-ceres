@@ -300,8 +300,15 @@ __webpack_require__.r(__webpack_exports__);
       isMounted: false
     };
   },
-  render: function render() {
+  render: function render(createElement) {
     if (this.isMounted) {
+      var _this$$slots$default;
+
+      // if there are multiple nodes in the default slot
+      if (((_this$$slots$default = this.$slots.default) === null || _this$$slots$default === void 0 ? void 0 : _this$$slots$default.length) > 1) {
+        return createElement("div", this.$slots.default);
+      }
+
       return this.$slots.default ? this.$slots.default : null;
     }
   },
@@ -64199,7 +64206,6 @@ function initClientListeners(store) {
 } // TODO: add code comment
 
 function initClientStore(store) {
-  window.ceresStore = store;
   store.commit("initConsents");
   store.dispatch("loadBasketData");
   /**
@@ -68540,6 +68546,7 @@ window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODUL
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_75__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$ceres = App;
 var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_76__["createStore"])();
+window.ceresStore = store;
 Object(_app_store__WEBPACK_IMPORTED_MODULE_76__["initServerStore"])(store);
 Object(_app_store__WEBPACK_IMPORTED_MODULE_76__["initClientStore"])(store);
 Object(_app_store__WEBPACK_IMPORTED_MODULE_76__["initClientListeners"])(store);

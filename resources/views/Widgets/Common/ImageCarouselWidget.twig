@@ -16,6 +16,18 @@
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
 {{ Twig.set("slides", "[]") }}
+{% set variationIds = [] %}
+
+{% for slideSettings in sliderParams.mobile %}
+    {% if slideSettings.url.type == 'item' and slideSettings.url.value | trim is not empty %}
+        {% set variationIds = variationIds|merge([slideSettings.url.value]) %}
+    {% endif %}
+{% endfor %}
+
+{% if variationIds|length > 0 %}
+    {{ Twig.set("variations", Twig.call("services.item.getVariations",  [variationIds])) }}
+{% endif %}
+
 
 {% for slideSettings in sliderParams.mobile %}
 
@@ -39,11 +51,10 @@
         {% set pushCurrentSlide = true %}
 
     {% elseif slideUrlType == 'item' and slideUrlValue | trim is not empty %}
+        {{ Twig.set("item", "find_item_variation(#{ slideUrlValue | json_encode }, variations.documents)") }}
 
-        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [slideUrlValue])) }}
-        {{ Twig.set("itemData", "itemData.documents[0].data") }}
+        {{ Twig.set("itemData", "item.data") }}
         {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
-
         {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
         {{ Twig.set("url", "itemData | itemURL") }}
         {{ Twig.set("imageUrl", "itemImage.url") }}
@@ -53,7 +64,6 @@
         {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
         {{ Twig.set("slide", "slide | merge({ imageAltText: itemImage.alternate })") }}
         {{ Twig.set("slide", "slide | merge({ imageName: itemImage.name })") }}
-
 
         {% set pushCurrentSlide = true %}
 
