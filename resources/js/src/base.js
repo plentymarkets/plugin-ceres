@@ -211,6 +211,13 @@ Vue.prototype.$ceres = App;
 
 const store = createStore();
 
+if (window.__INITIAL_STATE__)
+{
+    store.replaceState(window.__INITIAL_STATE__);
+}
+
+window.ceresStore = store;
+
 initServerStore(store);
 initClientStore(store);
 initClientListeners(store);
