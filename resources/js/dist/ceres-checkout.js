@@ -72485,13 +72485,11 @@ var HeaderScroller = /*#__PURE__*/function () {
   _createClass(HeaderScroller, [{
     key: "headerParent",
     get: function get() {
-      var _this$_headerParent;
-
-      if (this._headerParent) {
+      if (this._headerParent && document.contains(this._headerParent)) {
         return this._headerParent;
       }
 
-      this._headerParent = (_this$_headerParent = this._headerParent) !== null && _this$_headerParent !== void 0 && _this$_headerParent.offsetParent ? this._headerParent : document.querySelector("[data-header-offset]");
+      this._headerParent = document.querySelector("[data-header-offset]");
       return this._headerParent;
     }
     /**
@@ -72503,17 +72501,14 @@ var HeaderScroller = /*#__PURE__*/function () {
     key: "initialize",
     value: function initialize() {
       this.collectHeaderElementHeights();
-      this.updateZIndexes(); // Do not fixate, if the height of the fixed header elements is greater than 0.
+      this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
 
-      if (this.headerHeight <= 0) {
-        this.initialized = true;
-      } // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
-      else if (!App.isShopBuilder && window.pageYOffset > 0) {
-          this.calculateBodyOffset();
-          this.scrollHeaderElements(); // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+      if (!App.isShopBuilder && window.pageYOffset > 0) {
+        this.calculateBodyOffset();
+        this.scrollHeaderElements(); // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
 
-          this.fixateHeader();
-        }
+        this.fixateHeader();
+      }
     } // Collect heights of header elements for later use
 
   }, {

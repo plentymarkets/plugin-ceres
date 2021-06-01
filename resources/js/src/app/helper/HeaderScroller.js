@@ -38,12 +38,12 @@ export default class HeaderScroller
     // The header parent element.
     get headerParent()
     {
-        if (this._headerParent)
+        if (this._headerParent && document.contains(this._headerParent))
         {
             return this._headerParent;
         }
 
-        this._headerParent = this._headerParent?.offsetParent ? this._headerParent : document.querySelector("[data-header-offset]");
+        this._headerParent = document.querySelector("[data-header-offset]");
         return this._headerParent;
     }
 
@@ -56,14 +56,8 @@ export default class HeaderScroller
         this.collectHeaderElementHeights();
         this.updateZIndexes();
 
-        // Do not fixate, if the height of the fixed header elements is greater than 0.
-        if (this.headerHeight <= 0)
-        {
-            this.initialized = true;
-        }
-
         // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
-        else if (!App.isShopBuilder && window.pageYOffset > 0)
+        if (!App.isShopBuilder && window.pageYOffset > 0)
         {
             this.calculateBodyOffset();
             this.scrollHeaderElements();
