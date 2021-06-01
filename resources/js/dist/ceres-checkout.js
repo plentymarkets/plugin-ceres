@@ -81409,6 +81409,7 @@ window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODUL
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_75__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.prototype.$ceres = App;
 var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_76__["createStore"])();
+window.ceresStore = store;
 Object(_app_store__WEBPACK_IMPORTED_MODULE_76__["initServerStore"])(store);
 Object(_app_store__WEBPACK_IMPORTED_MODULE_76__["initClientStore"])(store);
 Object(_app_store__WEBPACK_IMPORTED_MODULE_76__["initClientListeners"])(store);
