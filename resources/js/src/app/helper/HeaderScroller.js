@@ -60,12 +60,10 @@ export default class HeaderScroller
         if (this.headerHeight <= 0)
         {
             this.initialized = true;
-
-            return;
         }
 
         // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
-        if (!App.isShopBuilder && window.pageYOffset > 0)
+        else if (!App.isShopBuilder && window.pageYOffset > 0)
         {
             this.calculateBodyOffset();
             this.scrollHeaderElements();
