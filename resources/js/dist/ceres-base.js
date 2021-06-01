@@ -59712,13 +59712,12 @@ var HeaderScroller = /*#__PURE__*/function () {
   _createClass(HeaderScroller, [{
     key: "headerParent",
     get: function get() {
-      var _this$_headerParent;
-
-      if (this._headerParent) {
+      // check if the element _headerParent is still a child of the document
+      if (this._headerParent && document.contains(this._headerParent)) {
         return this._headerParent;
       }
 
-      this._headerParent = (_this$_headerParent = this._headerParent) !== null && _this$_headerParent !== void 0 && _this$_headerParent.offsetParent ? this._headerParent : document.querySelector("[data-header-offset]");
+      this._headerParent = document.querySelector("[data-header-offset]");
       return this._headerParent;
     }
     /**
