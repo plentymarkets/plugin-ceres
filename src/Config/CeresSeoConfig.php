@@ -28,6 +28,57 @@ class CeresSeoConfig extends PluginConfig
      */
     public $manufacturerMapping;
 
+    /**
+     * @var string $gtin8Mapping Selected option value for GTIN 8 barcode in rich snippet.
+     */
+    public $gtin8Mapping;
+
+    /**
+     * @var string $gtin8MappingId Property ID for GTIN 8 rich snippet.
+     */
+    public $gtin8MappingId;
+
+    /**
+     * @var string $gtin13Mapping Selected option value for GTIN 13 barcode in rich snippet.
+     */
+    public $gtin13Mapping;
+
+    /**
+     * @var string $gtin13MappingId Property ID for GTIN 13 rich snippet.
+     */
+    public $gtin13MappingId;
+
+    /**
+     * @var string $isbnMapping Selected option value for ISBN barcode in rich snippet.
+     */
+    public $isbnMapping;
+
+    /**
+     * @var string $isbnMappingId Property ID for ISBN rich snippet.
+     */
+    public $isbnMappingId;
+
+    /**
+     * @var string $mpnMappingId Property ID for MPN rich snippet.
+     */
+    public $mpnMappingId;
+
+    /**
+     * @var string $priceValidUntilMappingId Property ID for "priceValidUntil" rich snippet.
+     */
+    public $priceValidUntilMappingId;
+
+    /**
+     * @var string $skuMapping Selected option value for SKU barcode in rich snippet.
+     */
+    public $skuMapping;
+
+    /**
+     * @var string $skuMappingId Property ID for SKU rich snippet.
+     */
+    public $skuMappingId;
+
+
 
     /**
      * @inheritDoc
@@ -45,5 +96,15 @@ class CeresSeoConfig extends PluginConfig
         $this->brandMapping = $this->getTextValue('brand.mapping.brand', '1');
         $this->brandMappingId = $this->getTextValue('brand.mapping.brandID', '');
         $this->manufacturerMapping = $this->getTextValue('manufacturer.mapping.manufacturer', '2');
+        $this->gtin8Mapping = $this->getTextValue('gtin8.mapping.gtin8','1');
+        $this->gtin8MappingId = $this->getTextValue('gtin8.mapping.gtin8ID', '');
+        $this->gtin13Mapping = $this->getTextValue('gtin13.mapping.gtin13','1');
+        $this->gtin13MappingId = $this->getTextValue('gtin13.mapping.gtin13ID', '');
+        $this->isbnMapping = $this->getTextValue('isbn.mapping.isbn','1');
+        $this->isbnMappingId = $this->getTextValue('isbn.mapping.isbnID','');
+        $this->mpnMappingId = $this->getTextValue('mpn.mapping.mpnID', '');
+        $this->priceValidUntilMappingId = $this->getTextValue('priceValidUntil.mapping.priceValidUntilID','');
+        $this->skuMapping = $this->getTextValue('sku.mapping.sku','1');
+        $this->skuMappingId = $this->getTextValue('sku.mapping.skuID','');
     }
 }

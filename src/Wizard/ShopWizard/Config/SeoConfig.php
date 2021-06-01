@@ -47,6 +47,30 @@ class SeoConfig
         "manufacturerExtern"        => "2",
     ];
 
+    private static $gtin8Options = [
+        "gtin8NotSet"                => "1",
+        "gtin8SetFirst"              => "2",
+        "gtin8Set"                   => "3",
+    ];
+
+    private static $gtin13Options = [
+        "gtin13NotSet"                => "1",
+        "gtin13SetFirst"              => "2",
+        "gtin13Set"                   => "3",
+    ];
+
+    private static $isbnOptions = [
+        "isbnNotSet"                  => "1",
+        "isbnSetFirst"                => "2",
+        "isbnSet"                     => "3",
+    ];
+
+    private static $skuOptions = [
+        "skuVariationID"              => "1",
+        "skuVariationNr"              => "2",
+        "skuVarPropSet"               => "3",
+    ];
+
     /**
      * @return array
      */
@@ -85,5 +109,37 @@ class SeoConfig
     public static function getmanufacturerOptions()
     {
         return self::$manufacturerOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getGtin8Options()
+    {
+        return self::$gtin8Options;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getGtin13Options()
+    {
+        return self::$gtin13Options;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getIsbnOptions()
+    {
+        return self::$isbnOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getSkuOptions()
+    {
+        return self::$skuOptions;
     }
 }
