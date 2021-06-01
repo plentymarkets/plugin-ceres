@@ -4,7 +4,8 @@
 
 ### Hinzugefügt
 
-- Im Ceres-Assistenten kann jetzt die Gültigkeit des Session-Cookies zusätzlich auf eine Stunde oder einen Tag eingestellt werden.
+- Im plentyShop-Assistenten kann jetzt die Gültigkeit des Session-Cookies zusätzlich auf eine Stunde oder einen Tag eingestellt werden.
+- In den SEO-Einstellungen des plentyShop-Assistenten und des Ceres-Plugins kann jetzt das Mapping verschiedener Barcodes (GTIN-8, GTIN-13, ISBN und MPN) sowie die Preisgültigkeit (priceValidUntil) und die SKU für die Rich Snippets der Artikelseite aktiviert werden.
 
 ### Geändert
 
@@ -27,6 +28,7 @@
 - [resources/views/PageDesign/Partials/Header/Header.twig](https://github.com/plentymarkets/plugin-ceres/pull/2874/files#diff-f2a11c8bc92192c490363ceeb2b7e9a02819568c77971a10e43eedc93270014f)
 - [resources/views/Widgets/Category/ItemGridWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2881/files#diff-f0aaf1ea155523f16c664c97d4b8877ad9db66f705f85a59ebffc0a3834f2456)
 -[resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2875/files#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/2879/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
 
 ## v5.0.31 (2021-05-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.30...5.0.31" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
