@@ -38,8 +38,8 @@ export default class HeaderScroller
     // The header parent element.
     get headerParent()
     {
-        // check if the element _headerParent is still a child of the document
-        if (this._headerParent && document.contains(this._headerParent))
+        // Check if the element _headerParent is still a child of the document. Also check if document.contains is defined (IE11).
+        if (this._headerParent && document.contains && document.contains(this._headerParent))
         {
             return this._headerParent;
         }
