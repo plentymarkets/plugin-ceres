@@ -57,7 +57,8 @@ export default class HeaderScroller
         this.updateZIndexes();
 
         // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
-        if (!App.isShopBuilder && window.pageYOffset > 0)
+        // Do not fixate, if the height of the fixed header elements is greater than 0.
+        if (!App.isShopBuilder && window.pageYOffset > 0 && this.headerHeight > 0)
         {
             this.calculateBodyOffset();
             this.scrollHeaderElements();
