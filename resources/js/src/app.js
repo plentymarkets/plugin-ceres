@@ -21,6 +21,7 @@ import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
 import Carousel from "./app/components/pageDesign/Carousel.vue";
 import Icon from "./app/components/pageDesign/Icon.vue";
+import LanguageDetection from "./app/components/pageDesign/LanguageDetection.vue";
 import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
 import Notifications from "./app/components/pageDesign/Notifications.vue";
 import Popper from "./app/components/pageDesign/Popper.vue";
@@ -169,6 +170,7 @@ export function createApp(options, store)
     Vue.component("privacy-settings", () => import("./app/components/pageDesign/PrivacySettings.vue"));
     Vue.component("carousel", Carousel);
     Vue.component("icon", Icon);
+    Vue.component("language-detection", LanguageDetection);
     Vue.component("mobile-navigation", MobileNavigation);
     Vue.component("notifications", Notifications);
     Vue.component("popper", Popper);

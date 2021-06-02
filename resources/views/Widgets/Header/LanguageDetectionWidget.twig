@@ -1,0 +1,9 @@
+{% set customClass                  = widget.settings.customClass.mobile %}
+{% set appearance                   = widget.settings.appearance.mobile %}
+
+
+<div class="language-detection header-fw widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+    <div class="container-max px-0 pr-lg-3">
+        <language-detection></language-detection>
+    </div>
+</div>
