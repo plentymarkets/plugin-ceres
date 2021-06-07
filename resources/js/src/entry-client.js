@@ -1,5 +1,6 @@
 import "./app/publicPath";
 import Vue from "vue";
+import Vuex from "vuex";
 import NotificationService from "./app/services/NotificationService";
 import TranslationService from "./app/services/TranslationService";
 import "bootstrap";
@@ -42,6 +43,7 @@ if (window.__INITIAL_STATE__)
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.Vue = Vue;
+window.Vuex = Vuex;
 window.NotificationService = NotificationService;
 window.ceresTranslate = TranslationService.translate;
 window.vueEventHub = new Vue();
