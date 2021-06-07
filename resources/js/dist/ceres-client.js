@@ -82761,19 +82761,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_publicPath__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_app_publicPath__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
-/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
-/* harmony import */ var _app_services_ApiService__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
-/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
+/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
+/* harmony import */ var _app_services_ApiService__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
+/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
 
 
 
@@ -82785,34 +82786,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$mount = _mount__WEBPACK_IMPORTED_MODULE_10__["mount"]; // defines if the render location is the client
+
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$mount = _mount__WEBPACK_IMPORTED_MODULE_11__["mount"]; // defines if the render location is the client
 
 App.isSSR = false;
 App.isSSREnabled = App.config.log.performanceSsr;
 
 window.createApp = function (selector) {
   // client-specific bootstrapping logic...
-  var app = Object(_app__WEBPACK_IMPORTED_MODULE_7__["createApp"])({
+  var app = Object(_app__WEBPACK_IMPORTED_MODULE_8__["createApp"])({
     template: "#ssr-script-container"
   }, store);
   app.$mount(selector, true);
   window.vueApp = app;
-  Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_9__["initListener"])();
-  Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["initClientListeners"])(store);
-  Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["initClientStore"])(store);
+  Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_10__["initListener"])();
+  Object(_app_store__WEBPACK_IMPORTED_MODULE_9__["initClientListeners"])(store);
+  Object(_app_store__WEBPACK_IMPORTED_MODULE_9__["initClientStore"])(store);
 };
 
-var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["createStore"])();
+var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_9__["createStore"])();
 
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__);
 }
 
-window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_6___default.a;
-window.$ = jquery__WEBPACK_IMPORTED_MODULE_6___default.a;
+window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_7___default.a;
+window.$ = jquery__WEBPACK_IMPORTED_MODULE_7___default.a;
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_1___default.a;
-window.NotificationService = _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"];
-window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate;
+window.Vuex = vuex__WEBPACK_IMPORTED_MODULE_2__["default"];
+window.NotificationService = _app_services_NotificationService__WEBPACK_IMPORTED_MODULE_3__["default"];
+window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_4__["default"].translate;
 window.vueEventHub = new vue__WEBPACK_IMPORTED_MODULE_1___default.a();
 window.ceresStore = store;
 
