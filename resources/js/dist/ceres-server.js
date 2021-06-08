@@ -52349,6 +52349,10 @@ var render = function() {
                 '<input type="search"' +
                   _vm._ssrAttr("autofocus", _vm.isShopBuilder) +
                   _vm._ssrAttr(
+                    "placeholder",
+                    _vm.$translate("Ceres::Template.headerSearchPlaceholder")
+                  ) +
+                  _vm._ssrAttr(
                     "aria-label",
                     _vm.$translate("Ceres::Template.headerSearchTerm")
                   ) +
