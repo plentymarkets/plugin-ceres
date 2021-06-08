@@ -84,7 +84,7 @@
                     <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
                         {% if enableLogin or enableRegistration %}
                             <li class="list-inline-item control-user">
-                                <lazy-hydrate when-idle>
+                                <client-only>
                                     <user-login-handler
                                         :show-login="{{ enableLogin | json_encode }}"
                                         :show-registration="{{ enableRegistration | json_encode }}">
@@ -101,7 +101,7 @@
                                         </a>
                                         {% endif %}
                                     </user-login-handler>
-                                </lazy-hydrate>
+                                </client-only>
                             </li>
                         {% endif %}
 
