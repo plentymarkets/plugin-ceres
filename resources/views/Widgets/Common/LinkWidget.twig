@@ -6,6 +6,7 @@
 {% set block           = widget.settings.block.mobile %}
 {% set text            = widget.settings.text.mobile %}
 {% set linkTitle       = widget.settings.linkTitle.mobile %}
+{% set linkRel         = widget.settings.linkRel.mobile %}
 {% set url             = widget.settings.url %}
 {% if linkTitle is empty %}
     {% set linkTitle = text %}
@@ -41,6 +42,7 @@
 {{ Twig.if("real_url or #{ isPreview | json_encode }") }}
 <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
     <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+    {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
     href="{{ Twig.print("real_url") }}"
     {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
     style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
