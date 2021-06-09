@@ -14,9 +14,9 @@
         {% if isPreview %}
             {{ WidgetHelper.editableTwig(isPreview, text | raw) }}
         {% else %}
-            <client-only>
+            <template v-pre>
                 {{ text | raw }}
-            </client-only>
+            </template>
         {% endif %}
     </div>
 </div>
