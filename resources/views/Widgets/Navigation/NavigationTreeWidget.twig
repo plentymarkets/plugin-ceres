@@ -22,15 +22,17 @@
     <div class="widget-inner d-none d-lg-block">
         <div class="category-title" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
             {% if not isPreview %}
-            <client-only>
+                <lazy-hydrate never>
             {% endif %}
-                {% if headline | trim is empty %}
-                    {{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemCategories")) }}
-                {% else %}
-                    {{ WidgetHelper.editableTwig(isPreview, headline) }}
-                {% endif %}
+
+            {% if headline | trim is empty %}
+                {{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemCategories")) }}
+            {% else %}
+                {{ WidgetHelper.editableTwig(isPreview, headline) }}
+            {% endif %}
+
             {% if not isPreview %}
-            </client-only>
+                </lazy-hydrate>
             {% endif %}
         </div>
 
