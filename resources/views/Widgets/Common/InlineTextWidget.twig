@@ -15,7 +15,9 @@
             {{ WidgetHelper.editableTwig(isPreview, text | raw) }}
         {% else %}
             <lazy-hydrate never>
-                {{ text | raw }}
+                <div>
+                    {{ text | raw }}
+                </div>
             </lazy-hydrate>
         {% endif %}
     </div>
