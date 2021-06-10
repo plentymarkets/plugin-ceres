@@ -174,9 +174,6 @@ export function createApp(options)
     Vue.component("lazy-hydrate", LazyHydrate);
     Vue.use(script2);
 
-    // CHECKOUT
-    Vue.component("edit-coupon-overlay", () => import("./app/components/myAccount/EditCouponOverlay.vue"));
-
     Vue.prototype.$translate = TranslationService.translate;
     Vue.prototype.$ceres = App;
 
