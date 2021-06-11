@@ -21,20 +21,10 @@
 <div class="widget widget-navigation-tree widget-{{ appearance }}{% if widgetClasses | length > 0 %} {{ widgetClasses }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner d-none d-lg-block">
         <div class="category-title" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview) }}>
-            {% if not isPreview %}
-                <lazy-hydrate never>
-                    <div>
-            {% endif %}
-
             {% if headline | trim is empty %}
                 {{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.itemCategories")) }}
             {% else %}
                 {{ WidgetHelper.editableTwig(isPreview, headline) }}
-            {% endif %}
-
-            {% if not isPreview %}
-                    </div>
-                </lazy-hydrate>
             {% endif %}
         </div>
 

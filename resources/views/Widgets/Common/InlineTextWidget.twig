@@ -9,16 +9,22 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-<div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div class="widget-inner test bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
-        {% if isPreview %}
-            {{ WidgetHelper.editableTwig(isPreview, text | raw) }}
-        {% else %}
-            <lazy-hydrate never>
-                <div>
-                    {{ text | raw }}
-                </div>
-            </lazy-hydrate>
-        {% endif %}
+{% if not isPreview %}
+    {# prevent hydration errors for invalid HTML (SSR) #}
+    <lazy-hydrate never>
+{% endif %}
+
+    <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+        <div class="widget-inner test bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+            {% if isPreview %}
+                {{ WidgetHelper.editableTwig(isPreview, text | raw) }}
+            {% else %}
+                {{ text | raw }}
+            {% endif %}
+        </div>
     </div>
-</div>
+
+{% if not isPreview %}
+    {# prevent hydration errors for invalid HTML (SSR) #}
+    </lazy-hydrate>
+{% endif %}
