@@ -10,21 +10,26 @@
 
 {% set appearance = widget.settings.appearance.mobile | default('primary') %}
 
-<div class="widget widget-title-bar widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
-    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
-        {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
-        {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-title-bar widget-" ~ appearance) }}>
-        {% if not isPreview %}
-        <client-only>
-        {% endif %}
+{% if not isPreview %}
+    {# prevent hydration errors for invalid HTML (SSR) #}
+    <lazy-hydrate never>
+{% endif %}
+
+    <div class="widget widget-title-bar widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+        {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+            {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
+            {{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-title-bar widget-" ~ appearance) }}>
+
             {% if text | trim is empty %}
                 <h1 class="align-center">{{ WidgetHelper.editableTwig(isPreview, Twig.trans("Ceres::Template.headerCompanyName")) }}</h1>
             {% else %}
                 {{ WidgetHelper.editableTwig(isPreview, text) }}
             {% endif %}
-        {% if not isPreview %}
-        </client-only>
-        {% endif %}
+        </div>
     </div>
-</div>
+
+{% if not isPreview %}
+    {# prevent hydration errors for invalid HTML (SSR) #}
+    </lazy-hydrate>
+{% endif %}
