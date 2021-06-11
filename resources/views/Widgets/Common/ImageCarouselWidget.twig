@@ -54,7 +54,7 @@
         {{ Twig.set("item", "find_item_variation(#{ slideUrlValue | json_encode }, variations.documents)") }}
 
         {{ Twig.set("itemData", "item.data") }}
-        {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
+        {{ Twig.set("itemImage", "itemData.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
         {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
         {{ Twig.set("url", "itemData | itemURL") }}
         {{ Twig.set("imageUrl", "itemImage.url") }}
