@@ -26,7 +26,7 @@
 
 {% if variationIds|length > 0 %}
     {# For result fields see \Plenty\Modules\Webshop\ItemSearch\Helpers\ResultFieldTemplate #}
-    {{ Twig.set("variations", Twig.call("services.item.getVariations",  [variationIds], 'Webshop.ResultFields.SingleItem')) }}
+    {{ Twig.set("variations", Twig.call("services.item.getVariations",  [variationIds, "Webshop.ResultFields.SingleItem"])) }}
 {% endif %}
 
 
