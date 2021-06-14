@@ -18,6 +18,7 @@
 - The image carousel widget did not display images of item variations. This has been fixed.
 - Vuex was not available in the window as long as Server Side Rendering was active. This has been fixed.
 - Due to an error, item lists of the type **Last seen** were incorrectly hydrated when Server-Side Rendering was active. This has been fixed.
+- Due to a missing quote mark, the variable `priceValidUntil` in the structured data was not recognised. This has been fixed.
 
 ### Changed templates
 
