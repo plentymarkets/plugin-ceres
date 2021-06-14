@@ -1,5 +1,29 @@
 # Release Notes für Ceres
 
+## v5.0.33 (2021-06-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.32...5.0.33" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Im Bilderkarussell-Widget ist es nun möglich, die beiden Optionen **Nur sichtbare Inhalte laden** und **Bild vorladen** zu kombinieren.
+- Die Widgets Titelleiste und Text haben den Cumulative Layout Shift (Google Core Web Vitals) negativ beeinflusst, da die enthaltenen Texte erst auf dem Client angezeigt wurden. Dies wurde geändert.
+- Aus dem SSR-Bundle wurden nicht benötigte Komponenten für den Mein-Konto-Bereich und den Checkout entfernt, um die Dateigröße zu minimieren. Vielen Dank an @JVolke für den Beitrag.
+- Die Überschrift vom Navigations-Widget wird nun wieder auf dem Server gerendert (SSR). Dadurch wird der Cumulative Layout Shift-Wert der Google Core Web Vitals verbessert.
+- Die Komponente `user-login-handler` wird nun erst auf dem Client gerendert. Dadurch werden Hydration-Fehler bei aktivem Server-Side Rendering (SSR) verhindert.
+
+### Behoben 
+
+- Im ShopBuilder konnte es dazu kommen, dass bei Änderungen am **Erscheinungsbild** von Text-Widgets der Text nicht mehr angezeigt wurde. Dies wurde behoben.
+- Im Suchfeld kann jetzt ein alternativer Text als Platzhalter gesetzt werden. Dazu kann in der Mehrsprachigkeit der Eintrag "headerSearchPlaceholder" befüllt werden.
+- Im Bilderkarussell-Widget wurden keine Bilder für Artikelvarianten angezeigt. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.33 gab es Änderungen an einer Template-Datei, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- [resources/views/Widgets/Common/InlineTextWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2906/files#diff-e7dc3611e423358f168f99f3a60b6bfa3d2af686cfee952aca2e93ca91a3be62)
+- [resources/views/Widgets/Common/TitleBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2906/files#diff-91d4a3578417267035536ce9c72ca096a438ce5e7936d8edb1e0d3187bb69865)
+- [resources/views/Widgets/Navigation/NavigationTreeWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2906/files#diff-d694b4ace865b8e05bdad90a07c80f0687d865e0d3d1a82f8ffa614bee809157)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2908/files?diff=unified&w=1#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+
 ## v5.0.32 (2021-06-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.31...5.0.32" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
