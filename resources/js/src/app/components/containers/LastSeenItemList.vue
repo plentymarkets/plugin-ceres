@@ -60,7 +60,8 @@ export default {
 
     data() {
         return {
-            mountedItems: []
+            mountedItems: [],
+            isMounted: false
         }
     },
 
@@ -75,6 +76,7 @@ export default {
 
     beforeMount()
     {
+        // SingleItem executes a PUT on the route, which already returns the data fetched here
         if (!App.isItemView)
         {
             this.$store.dispatch("getLastSeenItems");
@@ -84,13 +86,14 @@ export default {
     mounted()
     {
         this.mountedItems = this.items;
+        this.isMounted = true;
     },
 
     watch:
     {
         items()
         {
-            if(this._isMounted)
+            if(this.isMounted)
             {
                 this.mountedItems = this.items;
             }
