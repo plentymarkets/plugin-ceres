@@ -1,7 +1,16 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
 {% set customClass              = widget.settings.customClass.mobile            %}
 {% set appearance               = widget.settings.appearance.mobile             %}
 {% set redirect                 = widget.settings.redirect.mobile               %}
 {% set languageDetectionGroup   = widget.settings.languageDetectionGroup.mobile %}
+
+{{ Twig.do("set texts = []") }}
+{{ Twig.set("languageList", Twig.call("services.webstoreConfigurationRepository.getActiveLanguageList")) }}
+{{ Twig.for("language", "languageList") }}
+    {{ Twig.set("languageISO", "services.localizationRepository.getLanguageCode(language)") }}
+    {{ Twig.do("set texts[languageISO] = trans('...', [], languageISO)") }}
+{{ Twig.endfor() }}
 
 <div class="language-detection header-fw widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     <div class="container-max px-0 pr-lg-3">
@@ -14,6 +23,7 @@
             redirect="{{ redirect }}"
             appearance="{{ appearance }}"
             langtext="{{ languageDetectionGroup | json_encode }}"
+            :translations="{{ Twig.print("texts | json_encode") }}"
         >
         </language-detection>
         {% endif %}
