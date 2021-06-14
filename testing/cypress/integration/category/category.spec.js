@@ -15,7 +15,7 @@ context("category", () =>
 
     it("should check for background image", () =>
     {
-        cy.get(`[data-background-image='/documents/category/16/living-room.jpg']`)
+        cy.get(`.parallax-img-container-inner`).first()
             .invoke("attr", "style", "background-image: url('/documents/category/16/living-room.jpg')")
             .should("have.attr", "style", "background-image: url('/documents/category/16/living-room.jpg')");
     });

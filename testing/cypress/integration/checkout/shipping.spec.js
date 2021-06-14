@@ -84,10 +84,9 @@ context("Checkout shipping", () =>
     it("should change shipping profile when address changes", () =>
     {
         loginAsUser();
-        cy.get("#addressMultiSelect13 > .item-inner").click();
-        cy.wait(100);
-        cy.get(":nth-child(2) > .item-inner").click();
-        cy.wait(500);
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-dropdown").find("li").eq(1).click();
+       
         getShippingProfile(DHLID).should("not.exist");
         getShippingProfile(GLSID).should("exist");
         cy.getByTestingAttr("shipping-amount").invoke("text").then((text) =>
