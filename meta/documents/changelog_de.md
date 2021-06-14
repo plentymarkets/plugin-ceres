@@ -18,6 +18,7 @@
 - Im Bilderkarussell-Widget wurden keine Bilder für Artikelvarianten angezeigt. Dies wurde behoben.
 - Vuex war im Window nicht verfügbar, wenn Server-Side Rendering aktiv war. Dies wurde behoben.
 - Es wurde ein Fehler in der Artikelliste vom Typ **Zuletzt gesehen** behoben, durch den diese Listen bei aktivem Server-Side Rendering nicht korrekt hydriert wurden.
+- Durch ein fehlendes Anführungszeichen wurde die Variable `priceValidUntil` in den strukturierten Daten nicht erkannt. Dies wurde behoben.
 
 ### Angepasste Templates
 
