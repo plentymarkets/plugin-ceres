@@ -1,5 +1,11 @@
 <template>
     <div class="row">
+        <div class="col-12">
+            <div class="input-unit" data-model="name1" data-validate="text">
+                <input type="text" name="email" :id="'email' + _uid" :value="value.name1" @input="emitInputEvent('email', $event.target.value)" data-testing="address-email-input">
+                <label :for="'email' + _uid">email ändern*</label>
+            </div>
+        </div>
         <!-- DHLPackingStationDE -->
         <template v-if="value.showPickupStation && selectedCountry.isoCode2 === 'DE' && addressType === '2'">
             <div class="col-12">
