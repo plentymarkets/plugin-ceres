@@ -2,6 +2,14 @@
 
 <script type="x/template" id="vue-create-update-address">
     <form ref="addressForm" method="post" @submit.prevent>
+        <div class="row">
+            <div class="col-12">
+                <div class="input-unit" data-model="name1" data-validate="text">
+                    <input type="text" name="email" :id="'email' + _uid" :value="addressData.email" @input="emitInputEvent({ field: 'email', value: $event.target.value })" data-testing="address-email-input">
+                    <label :for="'email' + _uid">email ändern*</label>
+                </div>
+            </div>
+        </div>
         <address-input-group
             template="#vue-address-input-group"
             :address-type="addressType"
