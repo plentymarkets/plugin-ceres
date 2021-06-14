@@ -238,9 +238,9 @@ export default {
 
         changedMail()
         {
-          const Mail = this.???; //TODO
+        //   const Mail = this.???; //TODO
 
-          return this.$translate("Ceres::Template.changedMailWarning", { currMail: Mail });
+        //   return this.$translate("Ceres::Template.changedMailWarning", { currMail: Mail });
         },
 
         propertiesWithAdditionalCosts()
