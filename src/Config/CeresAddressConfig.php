@@ -95,7 +95,7 @@ class CeresAddressConfig extends PluginConfig
             'billing_address.show',
             [
                 'billing_address.name1',
-                'billing_address.mail',
+                'billing_address.email',
                 'billing_address.vatNumber',
                 'billing_address.salutation',
                 'billing_address.title',
@@ -116,7 +116,7 @@ class CeresAddressConfig extends PluginConfig
             'billing_address.en.show',
             [
                 'billing_address.name1',
-                'billing_address.mail',
+                'billing_address.email',
                 'billing_address.vatNumber',
                 'billing_address.salutation',
                 'billing_address.title',
@@ -138,7 +138,7 @@ class CeresAddressConfig extends PluginConfig
             'billing_address.require',
             [
                 'billing_address.name1',
-                'billing_address.mail',
+                'billing_address.email',
                 'billing_address.vatNumber',
                 'billing_address.salutation',
                 'billing_address.title',
@@ -156,7 +156,7 @@ class CeresAddressConfig extends PluginConfig
             'billing_address.en.require',
             [
                 'billing_address.name1',
-                'billing_address.mail',
+                'billing_address.email',
                 'billing_address.vatNumber',
                 'billing_address.salutation',
                 'billing_address.title',
@@ -174,7 +174,7 @@ class CeresAddressConfig extends PluginConfig
             'delivery_address.show',
             [
                 'delivery_address.name1',
-                'delivery_address.mail',
+                'delivery_address.email',
                 'delivery_address.salutation',
                 'delivery_address.title',
                 'delivery_address.name4',
@@ -193,7 +193,7 @@ class CeresAddressConfig extends PluginConfig
             'delivery_address.en.show',
             [
                 'delivery_address.name1',
-                'delivery_address.mail',
+                'delivery_address.email',
                 'delivery_address.salutation',
                 'delivery_address.title',
                 'delivery_address.name4',
@@ -212,7 +212,7 @@ class CeresAddressConfig extends PluginConfig
             'delivery_address.require',
             [
                 'delivery_address.name1',
-                'delivery_address.mail',
+                'delivery_address.email',
                 'delivery_address.salutation',
                 'delivery_address.title',
                 'delivery_address.name4',
@@ -228,7 +228,7 @@ class CeresAddressConfig extends PluginConfig
             'delivery_address.en.require',
             [
                 'delivery_address.name1',
-                'delivery_address.mail',
+                'delivery_address.email',
                 'delivery_address.salutation',
                 'delivery_address.title',
                 'delivery_address.name4',

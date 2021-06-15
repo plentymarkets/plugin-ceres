@@ -90,9 +90,9 @@ class AddressWidget extends BaseWidget
                     );
 
                 if($addressLayout === 'DE' || $addressType === '2') {
-                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."salutation", $fieldPrefix."mail"]);
+                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."salutation", $fieldPrefix."email"]);
                 } else {
-                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."address2", $fieldPrefix."salutation", $fieldPrefix."mail"]);
+                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."address2", $fieldPrefix."salutation", $fieldPrefix."email"]);
                 }
 
                 $settingsFactory->createCheckboxGroup("addressRequiredFields".$translationSuffix.$addressLayout)
