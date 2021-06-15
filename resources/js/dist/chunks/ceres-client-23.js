@@ -67,6 +67,12 @@ __webpack_require__.r(__webpack_exports__);
       default: null
     }
   },
+  data: function data() {
+    return {
+      mountedItems: [],
+      isMounted: false
+    };
+  },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])({
     items: function items(state) {
       return state.lastSeen.lastSeenItems.slice(0, this.maxItems);
@@ -76,7 +82,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   beforeMount: function beforeMount() {
-    this.$store.dispatch("getLastSeenItems");
+    // SingleItem executes a PUT on the route, which already returns the data fetched here
+    if (!App.isItemView) {
+      this.$store.dispatch("getLastSeenItems");
+    }
+  },
+  mounted: function mounted() {
+    this.mountedItems = this.items;
+    this.isMounted = true;
+  },
+  watch: {
+    items: function items() {
+      if (this.isMounted) {
+        this.mountedItems = this.items;
+      }
+    }
   },
   methods: {
     getContainerContentById: function getContainerContentById(variationId, containerKey) {
@@ -120,8 +140,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.items.length,
-            expression: "items.length"
+            value: _vm.mountedItems.length,
+            expression: "mountedItems.length"
           }
         ],
         staticClass: "col-12"
@@ -134,7 +154,7 @@ var render = function() {
       "div",
       { staticClass: "col-12" },
       [
-        _vm.items && _vm.items.length > 0
+        _vm.mountedItems && _vm.mountedItems.length > 0
           ? _c(
               "carousel",
               {
@@ -153,7 +173,7 @@ var render = function() {
                           "item-data": item.data,
                           "decimal-count": _vm.$ceres.config.item.storeSpecial,
                           "disable-carousel-on-mobile":
-                            _vm.items.length > _vm.itemsPerPage,
+                            _vm.mountedItems.length > _vm.itemsPerPage,
                           "padding-classes": _vm.paddingClasses,
                           "padding-inline-styles": _vm.paddingInlineStyles
                         },

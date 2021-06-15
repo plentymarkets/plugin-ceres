@@ -79186,14 +79186,17 @@ var actions = {
       return new Promise(function (resolve, reject) {
         commit("setIsLastSeenItemsLoading", true);
         ApiService.put("/rest/io/item/last_seen/".concat(variationId)).done(function (response) {
+          var _response$lastSeenIte;
+
+          commit("setIsLastSeenItemsLoading", false);
+
           if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(response.lastSeenItems)) {
             commit("setLastSeenItems", response.lastSeenItems.documents);
             commit("setLastSeenItemContainers", response.containers);
             commit("setIsLastSeenItemsLoading", false);
-            resolve(response.lastSeenItems.documents);
-          } else {
-            resolve(null);
           }
+
+          resolve(response === null || response === void 0 ? void 0 : (_response$lastSeenIte = response.lastSeenItems) === null || _response$lastSeenIte === void 0 ? void 0 : _response$lastSeenIte.documents);
         }).fail(function (error) {
           commit("setIsLastSeenItemsLoading", false);
           reject(error);
