@@ -116,7 +116,14 @@ export function initClientStore(store)
         {
             if (isDefined(response.data))
             {
-                store.commit("setUserData", response.data);
+                if (!response.data.isGuest)
+                {
+                    store.commit("setUserData", response.data);
+                }
+                else
+                {
+                    store.commit("setGuestData", response.data);
+                }
             }
         });
 }

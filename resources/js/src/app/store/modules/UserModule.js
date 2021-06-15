@@ -1,7 +1,8 @@
 import { isDefined } from "../../helper/utils";
 
 const state = () => ({
-    userData: null
+    userData: null,
+    guestData: null
 });
 
 const mutations =
@@ -9,6 +10,11 @@ const mutations =
         setUserData(state, userData)
         {
             state.userData = userData;
+        },
+
+        setGuestData(state, guestData)
+        {
+            state.guestData = guestData;
         }
     };
 
@@ -45,6 +51,11 @@ const getters =
         isLoggedIn(state)
         {
             return isDefined(state.userData) && state.userData.id > 0;
+        },
+
+        isGuest(state)
+        {
+            return !!state.guestData?.isGuest;
         }
     };
 
