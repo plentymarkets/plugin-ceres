@@ -53,29 +53,6 @@ class LanguageDetectionWidget extends BaseWidget
             ->withDefaultValue(false)
             ->withName("Widget.languageDetectionRedirect");
 
-        $languageDetectionContainer = $settingsFactory->createContainer('languageDetectionGroup');
-        $languageDetectionContainer->withType('vertical')
-            ->withName('Widget.languageDetectionLabel')
-            ->withList(1);
-
-        $languageDetectionContainer->children->createSelect("languageCountry")
-            ->withDefaultValue("de")
-            ->withName("Widget.languageDetectionCountry")
-            ->withListBoxValues(ValueListFactory::make()
-                ->addEntry('de', 'German')
-                ->addEntry('en', 'English')
-                ->addEntry('fr', 'French')
-                ->addEntry('nl', 'Netherlands')
-                ->addEntry('pl', 'Poland')
-                ->toArray()
-            );
-        $languageDetectionContainer->children->createText("languageText")
-            ->withName("Widget.languageDetectionText")
-            ->withDefaultValue("Language Text");
-        $languageDetectionContainer->children->createText("languageButton")
-            ->withName("Widget.languageDetectionButton")
-            ->withDefaultValue("Language Button");
-
         return $settingsFactory->toArray();
     }
 }

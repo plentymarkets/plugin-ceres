@@ -1,7 +1,7 @@
 <template>
   <div v-if="languageText" class="row py-2">
-    <div class="col-sm-8">{{ languageText }}</div>
-    <div class="col-sm-4 text-right">
+    <div class="col-md-8">{{ languageText }}</div>
+    <div class="col-md-4 text-right">
       <a :href="languageRedirect" :class="'btn btn-sm btn-' + appearance">{{ buttonText }}</a>
       <a href="#" @click="deactivateRedirection" class="m-sm-1"><i class="fa fa-close"></i></a>
     </div>
@@ -19,7 +19,7 @@
         textLanguages: ''
       }
     },
-    props: ["redirect", "appearance", "langtext"],
+    props: ["redirect", "appearance", "texttranslations", "buttontranslations"],
     mounted() {
       this.initializeComponent()
     },
@@ -27,7 +27,6 @@
       initializeComponent() {
 
         this.setAppearance();
-        this.setTextLanguages();
 
         for (let i = 0; i < window.navigator.languages.length; i++) {
           const langObject= window.navigator.languages[i].split('-')
@@ -41,12 +40,12 @@
               }
             } else if (!window.localStorage.getItem('redirectDeactivated')) {
               window.localStorage.removeItem('redirectActive');
-              this.setLanguage(langObject[0]);
+              this.setText(langObject[0]);
+              this.setButton(langObject[0]);
               this.languageRedirect = linkTag.getAttribute('href')
               break;
             }
           }
-
         }
       },
       deactivateRedirection() {
@@ -56,18 +55,13 @@
       setAppearance() {
         this.appearance = this.$props.appearance;
       },
-      setTextLanguages() {
-        this.textLanguages = this.$props.langtext
+      setText(lang) {
+        const textLangObj = JSON.parse(JSON.stringify(this.$props.texttranslations));
+        this.languageText = textLangObj[lang];
       },
-      setLanguage(lang) {
-        const langObj = JSON.parse(this.textLanguages);
-        for (let i=0; i < langObj.length; i++){
-          if (langObj[i].languageCountry === lang) {
-            this.languageText = langObj[i].languageText;
-            this.buttonText = langObj[i].languageButton;
-            break
-          }
-        }
+      setButton(lang) {
+        const buttonLangObj = JSON.parse(JSON.stringify(this.$props.buttontranslations));
+        this.buttonText = buttonLangObj[lang];
       }
     }
   }

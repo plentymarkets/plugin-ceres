@@ -1756,14 +1756,13 @@ __webpack_require__.r(__webpack_exports__);
       textLanguages: ''
     };
   },
-  props: ["redirect", "appearance", "langtext"],
+  props: ["redirect", "appearance", "texttranslations", "buttontranslations"],
   mounted: function mounted() {
     this.initializeComponent();
   },
   methods: {
     initializeComponent: function initializeComponent() {
       this.setAppearance();
-      this.setTextLanguages();
 
       for (var i = 0; i < window.navigator.languages.length; i++) {
         var langObject = window.navigator.languages[i].split('-');
@@ -1777,7 +1776,8 @@ __webpack_require__.r(__webpack_exports__);
             }
           } else if (!window.localStorage.getItem('redirectDeactivated')) {
             window.localStorage.removeItem('redirectActive');
-            this.setLanguage(langObject[0]);
+            this.setText(langObject[0]);
+            this.setButton(langObject[0]);
             this.languageRedirect = linkTag.getAttribute('href');
             break;
           }
@@ -1791,19 +1791,13 @@ __webpack_require__.r(__webpack_exports__);
     setAppearance: function setAppearance() {
       this.appearance = this.$props.appearance;
     },
-    setTextLanguages: function setTextLanguages() {
-      this.textLanguages = this.$props.langtext;
+    setText: function setText(lang) {
+      var textLangObj = JSON.parse(JSON.stringify(this.$props.texttranslations));
+      this.languageText = textLangObj[lang];
     },
-    setLanguage: function setLanguage(lang) {
-      var langObj = JSON.parse(this.textLanguages);
-
-      for (var i = 0; i < langObj.length; i++) {
-        if (langObj[i].languageCountry === lang) {
-          this.languageText = langObj[i].languageText;
-          this.buttonText = langObj[i].languageButton;
-          break;
-        }
-      }
+    setButton: function setButton(lang) {
+      var buttonLangObj = JSON.parse(JSON.stringify(this.$props.buttontranslations));
+      this.buttonText = buttonLangObj[lang];
     }
   }
 });

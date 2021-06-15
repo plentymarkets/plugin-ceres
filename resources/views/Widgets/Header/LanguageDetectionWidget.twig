@@ -3,27 +3,28 @@
 {% set customClass              = widget.settings.customClass.mobile            %}
 {% set appearance               = widget.settings.appearance.mobile             %}
 {% set redirect                 = widget.settings.redirect.mobile               %}
-{% set languageDetectionGroup   = widget.settings.languageDetectionGroup.mobile %}
 
-{{ Twig.do("set texts = []") }}
+{{ Twig.do("set textTranslations = {}") }}
+{{ Twig.do("set buttonTranslations = {}") }}
 {{ Twig.set("languageList", Twig.call("services.webstoreConfigurationRepository.getActiveLanguageList")) }}
 {{ Twig.for("language", "languageList") }}
     {{ Twig.set("languageISO", "services.localizationRepository.getLanguageCode(language)") }}
-    {{ Twig.do("set texts[languageISO] = trans('...', [], languageISO)") }}
+    {{ Twig.do("set textTranslations = textTranslations | merge({(languageISO): trans('Ceres::Template.languageDetectionText', [], languageISO ) })") }}
+    {{ Twig.do("set buttonTranslations = buttonTranslations | merge({(languageISO): trans('Ceres::Template.languageDetectionButton', [], languageISO ) })") }}
 {{ Twig.endfor() }}
 
 <div class="language-detection header-fw widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     <div class="container-max px-0 pr-lg-3">
         {% if isPreview %}
-            <div class="widget align-center">
+            <div class="align-center">
                 Language Detection
             </div>
         {% else %}
         <language-detection
             redirect="{{ redirect }}"
             appearance="{{ appearance }}"
-            langtext="{{ languageDetectionGroup | json_encode }}"
-            :translations="{{ Twig.print("texts | json_encode") }}"
+            :texttranslations="{{ Twig.print('textTranslations | json_encode') }}"
+            :buttontranslations="{{ Twig.print('buttonTranslations | json_encode') }}"
         >
         </language-detection>
         {% endif %}
