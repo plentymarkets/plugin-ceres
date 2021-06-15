@@ -2884,11 +2884,15 @@
                     "deprecated": true,
                     "label": "Config.billingAddressShowLabel",
                     "options": {
-                        "defaultValue": "billing_address.name1, billing_address.salutation",
+                        "defaultValue": "billing_address.name1, billing_address.salutation, billing_address.mail",
                         "checkBoxValues": [
                             {
                                 "value": "billing_address.name1",
                                 "caption": "Config.addressFieldName1"
+                            },
+                            {
+                                "value": "billing_address.mail",
+                                "caption": "Config.addressFieldMail"
                             },
                             {
                                 "value": "billing_address.vatNumber",
@@ -2946,6 +2950,10 @@
                                 "caption": "Config.addressFieldVatNumber"
                             },
                             {
+                                "value": "billing_address.mail",
+                                "caption": "Config.addressFieldMail"
+                            },
+                            {
                                 "value": "billing_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
                             },
@@ -2990,7 +2998,7 @@
                     "deprecated": true,
                     "label": "Config.deliveryAddressShowLabel",
                     "options": {
-                        "defaultValue": "delivery_address.name1, delivery_address.salutation",
+                        "defaultValue": "delivery_address.name1, delivery_address.salutation, delivery_address.mail",
                         "checkBoxValues": [
                             {
                                 "value": "delivery_address.name1",
@@ -2999,6 +3007,10 @@
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
+                            },
+                            {
+                                "value": "delivery_address.mail",
+                                "caption": "Config.addressFieldMail"
                             },
                             {
                                 "value": "delivery_address.contactPerson",
@@ -3048,6 +3060,10 @@
                                 "caption": "Config.addressFieldTitle"
                             },
                             {
+                                "value": "delivery_address.mail",
+                                "caption": "Config.addressFieldMail"
+                            },
+                            {
                                 "value": "delivery_address.contactPerson",
                                 "caption": "Config.addressFieldContactPerson"
                             },
@@ -3080,7 +3096,7 @@
                     "deprecated": true,
                     "label": "Config.billingAddressEnShowLabel",
                     "options": {
-                        "defaultValue": "billing_address.name1, billing_address.address2, billing_address.salutation",
+                        "defaultValue": "billing_address.name1, billing_address.address2, billing_address.salutation, billing_address.mail",
                         "checkBoxValues": [
                             {
                                 "value": "billing_address.name1",
@@ -3089,6 +3105,10 @@
                             {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldEnVatNumber"
+                            },
+                            {
+                                "value": "billing_address.mail",
+                                "caption": "Config.addressFieldEnMail"
                             },
                             {
                                 "value": "billing_address.contactPerson",
@@ -3146,6 +3166,10 @@
                                 "caption": "Config.addressFieldEnSalutation"
                             },
                             {
+                                "value": "billing_address.mail",
+                                "caption": "Config.addressFieldEnMail"
+                            },
+                            {
                                 "value": "billing_address.title",
                                 "caption": "Config.addressFieldEnTitle"
                             },
@@ -3186,7 +3210,7 @@
                     "deprecated": true,
                     "label": "Config.deliveryAddressEnShowLabel",
                     "options": {
-                        "defaultValue": "delivery_address.name1, delivery_address.salutation",
+                        "defaultValue": "delivery_address.name1, delivery_address.salutation, delivery_address.mail",
                         "checkBoxValues": [
                             {
                                 "value": "delivery_address.name1",
@@ -3195,6 +3219,10 @@
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldEnSalutation"
+                            },
+                            {
+                                "value": "delivery_address.mail",
+                                "caption": "Config.addressFieldEnMail"
                             },
                             {
                                 "value": "delivery_address.contactPerson",
@@ -3242,6 +3270,10 @@
                             {
                                 "value": "delivery_address.title",
                                 "caption": "Config.addressFieldEnTitle"
+                            },
+                            {
+                                "value": "delivery_address.mail",
+                                "caption": "Config.addressFieldEnMail"
                             },
                             {
                                 "value": "delivery_address.contactPerson",
