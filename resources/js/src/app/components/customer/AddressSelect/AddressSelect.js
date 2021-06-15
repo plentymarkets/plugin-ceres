@@ -61,7 +61,8 @@ export default Vue.component("address-select", {
         {
             type: String,
             default: null
-        }
+        },
+        email: String
     },
 
     data()
@@ -196,12 +197,13 @@ export default Vue.component("address-select", {
                 this.addressToEdit = {
                     gender: this.defaultSalutation,
                     countryId: this.shippingCountryId,
-                    showPickupStation: false
+                    showPickupStation: false,
+                    email: this.email
                 };
             }
             else
             {
-                this.addressToEdit = { countryId: this.shippingCountryId };
+                this.addressToEdit = { countryId: this.shippingCountryId, email: this.email };
             }
 
             this.updateHeadline();

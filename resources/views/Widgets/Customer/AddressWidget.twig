@@ -48,7 +48,8 @@
                     :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
                     default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
                     {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}
+                    email="{{ Twig.print("services.customer.getEmail()") }}">
                 </invoice-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBillingAddress"])) }}
@@ -89,7 +90,8 @@
                     :has-any-post-office-preset="{{ Twig.print("services.shipping.hasAnyPostOfficePreset() | json_encode") }}"
                     default-salutation="{{ widget.settings.addressDefaultSalutation.mobile }}"
                     {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}
+                    email="{{ Twig.print("services.customer.getEmail()") }}">
                 </shipping-address-select>
             </div>
             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterShippingAddress"])) }}

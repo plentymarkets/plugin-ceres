@@ -20,7 +20,8 @@ export default Vue.component("shipping-address-select", {
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
             :padding-inline-styles="paddingInlineStyles"
-            data-testing="delivery-address-select">
+            data-testing="delivery-address-select"
+            :email="email">
         </address-select>
     `,
 
@@ -66,7 +67,8 @@ export default Vue.component("shipping-address-select", {
         {
             type: String,
             default: null
-        }
+        },
+        email: String
     },
 
     computed: mapState({
