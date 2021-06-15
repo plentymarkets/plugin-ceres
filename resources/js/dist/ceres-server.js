@@ -3174,6 +3174,12 @@ __webpack_require__.r(__webpack_exports__);
       default: null
     }
   },
+  data: function data() {
+    return {
+      mountedItems: [],
+      isMounted: false
+    };
+  },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])({
     items: function items(state) {
       return state.lastSeen.lastSeenItems.slice(0, this.maxItems);
@@ -3183,7 +3189,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   beforeMount: function beforeMount() {
-    this.$store.dispatch("getLastSeenItems");
+    // SingleItem executes a PUT on the route, which already returns the data fetched here
+    if (!App.isItemView) {
+      this.$store.dispatch("getLastSeenItems");
+    }
+  },
+  mounted: function mounted() {
+    this.mountedItems = this.items;
+    this.isMounted = true;
+  },
+  watch: {
+    items: function items() {
+      if (this.isMounted) {
+        this.mountedItems = this.items;
+      }
+    }
   },
   methods: {
     getContainerContentById: function getContainerContentById(variationId, containerKey) {
@@ -42682,7 +42702,7 @@ var render = function() {
       _vm._ssrNode(
         '<div class="col-12"' +
           _vm._ssrStyle(null, null, {
-            display: _vm.items.length ? "" : "none"
+            display: _vm.mountedItems.length ? "" : "none"
           }) +
           ">",
         "</div>",
@@ -42694,7 +42714,7 @@ var render = function() {
         '<div class="col-12">',
         "</div>",
         [
-          _vm.items && _vm.items.length > 0
+          _vm.mountedItems && _vm.mountedItems.length > 0
             ? _c(
                 "carousel",
                 {
@@ -42714,7 +42734,7 @@ var render = function() {
                             "decimal-count":
                               _vm.$ceres.config.item.storeSpecial,
                             "disable-carousel-on-mobile":
-                              _vm.items.length > _vm.itemsPerPage,
+                              _vm.mountedItems.length > _vm.itemsPerPage,
                             "padding-classes": _vm.paddingClasses,
                             "padding-inline-styles": _vm.paddingInlineStyles
                           },
@@ -87157,14 +87177,17 @@ var actions = {
       return new Promise(function (resolve, reject) {
         commit("setIsLastSeenItemsLoading", true);
         ApiService.put("/rest/io/item/last_seen/".concat(variationId)).done(function (response) {
+          var _response$lastSeenIte;
+
+          commit("setIsLastSeenItemsLoading", false);
+
           if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(response.lastSeenItems)) {
             commit("setLastSeenItems", response.lastSeenItems.documents);
             commit("setLastSeenItemContainers", response.containers);
             commit("setIsLastSeenItemsLoading", false);
-            resolve(response.lastSeenItems.documents);
-          } else {
-            resolve(null);
           }
+
+          resolve(response === null || response === void 0 ? void 0 : (_response$lastSeenIte = response.lastSeenItems) === null || _response$lastSeenIte === void 0 ? void 0 : _response$lastSeenIte.documents);
         }).fail(function (error) {
           commit("setIsLastSeenItemsLoading", false);
           reject(error);
