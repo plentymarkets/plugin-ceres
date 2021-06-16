@@ -1,5 +1,13 @@
 <template>
-    <div class="cookie-bar" :class="{ 'out': !isVisible, 'border-top bg-white': isVisible, 'fixed-bottom': !isShopBuilder || false }">
+    <div
+        v-show="!isSSR"   
+        class="cookie-bar"
+        :class="{
+            'out': !isVisible,
+            'border-top bg-white': isVisible,
+            'fixed-bottom': !isShopBuilder || false
+        }"
+    >
         <div class="container-max" v-if="isVisible">
             <div class="row py-3" v-show="!isExpanded" :class="classes" :style="styles">
                 <div class="col-12 col-md-8">
@@ -8,7 +16,9 @@
 
                     <div>
                         <template v-for="consentGroup in consentGroups">
-                            <span v-if="consentGroup.consents.length > 0" class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3">
+                            <span v-if="consentGroup.consents.length > 0"
+                                  class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
+                                  :key="consentGroup.key">
                                 <input type="checkbox"
                                        class="custom-control-input"
                                        :id="_uid + '-group-' + consentGroup.key"
@@ -117,6 +127,11 @@ export default {
         isShopBuilder()
         {
             return App.isShopBuilder;
+        },
+
+        isSSR()
+        {
+            return App.isSSR;
         },
 
         text()
