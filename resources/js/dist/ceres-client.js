@@ -2311,6 +2311,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2331,6 +2341,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     isShopBuilder: function isShopBuilder() {
       return App.isShopBuilder;
+    },
+    isSSR: function isSSR() {
+      return App.isSSR;
     },
     text: function text() {
       var links = {
@@ -38596,6 +38609,14 @@ var render = function() {
   return _c(
     "div",
     {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: !_vm.isSSR,
+          expression: "!isSSR"
+        }
+      ],
       staticClass: "cookie-bar",
       class: {
         out: !_vm.isVisible,
@@ -38634,6 +38655,7 @@ var render = function() {
                             ? _c(
                                 "span",
                                 {
+                                  key: consentGroup.key,
                                   staticClass:
                                     "custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
                                 },
