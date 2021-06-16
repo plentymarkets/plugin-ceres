@@ -120,7 +120,7 @@ class AddressWidget extends BaseWidget
         }
 
         $fieldList
-            ->addEntry($fieldPrefix."mail", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Mail")
+            ->addEntry($fieldPrefix."mail", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."EMail")
             ->addEntry($fieldPrefix."vatNumber", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."VatNumber")
             ->addEntry($fieldPrefix."contactPerson", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."ContactPerson")
             ->addEntry($fieldPrefix."salutation", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Salutation")
