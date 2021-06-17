@@ -2,16 +2,6 @@
 
 <script type="x/template" id="vue-create-update-address">
     <form ref="addressForm" method="post" @submit.prevent>
-        <div class="row">
-            <div class="col-12">
-                <div class="input-unit" data-model="name1" data-validate="text">
-                    <input type="text" name="email" :id="'email' + _uid" :value="addressData.email" @input="emitInputEvent({ field: 'email', value: $event.target.value })" data-testing="address-email-input">
-                    <label :for="'email' + _uid">{{ trans("Ceres::Template.addressMail") }}</label>
-                </div>
-                <div class="color-success" style="margin-top: -.75rem;">{{ trans("Ceres::Template.addressMailInfo") }}</div>
-                <hr>
-            </div>
-        </div>
         <address-input-group
             template="#vue-address-input-group"
             :address-type="addressType"
