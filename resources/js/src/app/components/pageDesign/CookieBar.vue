@@ -1,4 +1,5 @@
 <template>
+    <!-- v-show is required to prevent CLS for ssr -->
     <div
         v-show="!$ceres.isSSR"   
         class="cookie-bar"
