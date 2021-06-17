@@ -178,6 +178,10 @@
         <div v-if="basket.isExportDelivery && deliveryExportTranslation" class="alert alert-info w-100">
             {{ deliveryExportTranslation }}
         </div>
+
+        <div v-if="changedMail" class="alert alert-info w-100">
+            {{ changedMail }}
+        </div>
     </div>
 </template>
 
@@ -230,6 +234,13 @@ export default {
             const currentShippingCountry = this.currentShippingCountry && this.currentShippingCountry.currLangName;
 
             return this.$translate("Ceres::Template.basketExportDeliveryWarning", { from: shopCountry, to: currentShippingCountry });
+        },
+
+        changedMail()
+        {
+        //   const Mail = this.???; //TODO
+
+        //   return this.$translate("Ceres::Template.changedMailWarning", { currMail: Mail });
         },
 
         propertiesWithAdditionalCosts()
