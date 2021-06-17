@@ -1,6 +1,6 @@
 <template>
     <div
-        v-show="!isSSR"   
+        v-show="!$ceres.isSSR"   
         class="cookie-bar"
         :class="{
             'out': !isVisible,
@@ -98,7 +98,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import { mapMutations } from "vuex";
 
 export default {
@@ -127,11 +126,6 @@ export default {
         isShopBuilder()
         {
             return App.isShopBuilder;
-        },
-
-        isSSR()
-        {
-            return App.isSSR;
         },
 
         text()
