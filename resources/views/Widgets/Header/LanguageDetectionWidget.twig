@@ -1,8 +1,13 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set customClass              = widget.settings.customClass.mobile            %}
 {% set appearance               = widget.settings.appearance.mobile             %}
 {% set redirect                 = widget.settings.redirect.mobile               %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
 {{ Twig.do("set textTranslations = {}") }}
 {{ Twig.do("set buttonTranslations = {}") }}
@@ -14,19 +19,21 @@
 {{ Twig.endfor() }}
 
 <div class="language-detection header-fw widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
-    <div class="container-max px-0 pr-lg-3">
-        {% if isPreview %}
-            <div class="align-center">
-                Language Detection
-            </div>
-        {% else %}
-        <language-detection
-            redirect="{{ redirect }}"
-            appearance="{{ appearance }}"
-            :texttranslations="{{ Twig.print('textTranslations | json_encode') }}"
-            :buttontranslations="{{ Twig.print('buttonTranslations | json_encode') }}"
-        >
-        </language-detection>
-        {% endif %}
+    <div class="container-max">
+        <div class="{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+            {% if isPreview %}
+                <div class="align-center">
+                    Language Detection
+                </div>
+            {% else %}
+            <language-detection
+                redirect="{{ redirect }}"
+                appearance="{{ appearance }}"
+                :texttranslations="{{ Twig.print('textTranslations | json_encode') }}"
+                :buttontranslations="{{ Twig.print('buttonTranslations | json_encode') }}"
+            >
+            </language-detection>
+            {% endif %}
+        </div>
     </div>
 </div>

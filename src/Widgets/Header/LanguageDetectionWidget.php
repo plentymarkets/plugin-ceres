@@ -53,6 +53,8 @@ class LanguageDetectionWidget extends BaseWidget
             ->withDefaultValue(false)
             ->withName("Widget.languageDetectionRedirect");
 
+        $settingsFactory->createSpacing();
+
         return $settingsFactory->toArray();
     }
 }
