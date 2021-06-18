@@ -15,7 +15,6 @@
         languageText: '',
         buttonText: '',
         languageRedirect: '',
-        appearance: '',
         textLanguages: ''
       }
     },

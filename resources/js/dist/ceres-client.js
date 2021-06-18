@@ -2447,7 +2447,6 @@ __webpack_require__.r(__webpack_exports__);
       languageText: '',
       buttonText: '',
       languageRedirect: '',
-      appearance: '',
       textLanguages: ''
     };
   },
@@ -39059,11 +39058,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.languageText
     ? _c("div", { staticClass: "row py-2" }, [
-        _c("div", { staticClass: "col-sm-8" }, [
+        _c("div", { staticClass: "col-md-8" }, [
           _vm._v(_vm._s(_vm.languageText))
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4 text-right" }, [
+        _c("div", { staticClass: "col-md-4 text-right" }, [
           _c(
             "a",
             {
