@@ -1,6 +1,10 @@
 <script type="x/template" id="vue-address-header">
     <div>
         <template v-if="address">
+            <template v-if="isAddressFieldEnabled('email')">
+                <div>${ address.email }</div>
+            </template>
+
             <template v-if="isAddressFieldEnabled('name1')">
                 <div class="font-bold" v-if="address && address.name1 && address.name1.length > 0">
                     ${ address.name1 }
