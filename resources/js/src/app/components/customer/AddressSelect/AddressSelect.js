@@ -364,6 +364,15 @@ export default Vue.component("address-select", {
                 event.stopPropagation();
                 this.showAddModal();
             }
+        },
+
+        toggleDropdown(event)
+        {
+            event.preventDefault();
+            event.stopPropagation();
+            this.$refs.dropdown.click();
+            event.currentTarget.blur();
+
         }
     },
 
