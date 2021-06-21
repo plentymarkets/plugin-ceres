@@ -10,7 +10,6 @@
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="address-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "de", "delivery_address.email") }}</label>
                         </div>
-                        <div v-if="changedMail" class="color-success">{{ $translate("Ceres::Template.addressMailInfo") }}</div>
                         <hr>
                     </div>
                 </div>
@@ -199,7 +198,6 @@
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="address-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "de", "billing_address.email") }}</label>
                         </div>
-                        <div v-if="changedMail" class="color-success">{{ $translate("Ceres::Template.addressMailInfo") }}</div>
                         <hr>
                     </div>
                 </div>
@@ -392,7 +390,6 @@
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="address-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "gb", "billing_address.email") }}</label>
                         </div>
-                        <div v-if="changedMail" class="color-success">{{ $translate("Ceres::Template.addressMailInfo") }}</div>
                         <hr>
                     </div>
                 </div>
@@ -595,7 +592,6 @@
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="address-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "de", "delivery_address.email") }}</label>
                         </div>
-                        <div v-if="changedMail" class="color-success">{{ $translate("Ceres::Template.addressMailInfo") }}</div>
                         <hr>
                     </div>
                 </div>
@@ -786,7 +782,6 @@
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="address-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "gb", "delivery_address.email") }}</label>
                         </div>
-                        <div v-if="changedMail" class="color-success">{{ $translate("Ceres::Template.addressMailInfo") }}</div>
                         <hr>
                     </div>
                 </div>
@@ -1055,11 +1050,6 @@ export default {
         isParcelOrOfficeAvailable()
         {
             return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
-        },
-
-        changedMail()
-        {
-            return this.$translate("Ceres::Template.changedMailWarning", { currMail: this.value.mail });
         },
 
         ...mapState({
