@@ -158,10 +158,13 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $this->brand = $itemData['item']['manufacturer']['externalName'];
         } elseif ($brandMapping == 3) {
             $propertyBrand = '';
-            foreach ($itemData['variationProperties'][0]['properties'] as $property) {
-                if ($property['id'] == $brandMappingId) {
-                    $propertyBrand = $property['values']['value'];
-                    break;
+            $propertyGroup = '';
+            foreach ($itemData['variationProperties'] as $propertyGroup) {
+                foreach ($propertyGroup['properties'] as $property) {
+                    if ($property['id'] == $brandMappingId) {
+                        $propertyBrand = $property['values']['value'];
+                        break 2;
+                    }
                 }
             }
             $this->brand = $propertyBrand;
@@ -238,10 +241,13 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $mpnMappingId = $this->ceresConfig->seo->mpnMappingId;
         if ($mpnMappingId > 0) {
             $propertyMpn = '';
-            foreach ($itemData['variationProperties'][0]['properties'] as $property) {
-                if ($property['id'] == $mpnMappingId) {
-                    $propertyMpn = $property['values']['value'];
-                    break;
+            $propertyGroup = '';
+            foreach ($itemData['variationProperties'] as $propertyGroup) {
+                foreach ($propertyGroup['properties'] as $property) {
+                    if ($property['id'] == $mpnMappingId) {
+                        $propertyMpn = $property['values']['value'];
+                        break 2;
+                    }
                 }
             }
             $this->mpn = $propertyMpn;
@@ -249,16 +255,19 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $priceValidUntilMappingId = $this->ceresConfig->seo->priceValidUntilMappingId;
         if ($priceValidUntilMappingId > 0) {
             $propertyPriceValidUntil = '';
-            foreach ($itemData['variationProperties'][0]['properties'] as $property) {
-                if ($property['id'] == $priceValidUntilMappingId) {
-                    if ($property['cast'] == 'date') {
-                        $orgDate = $property['values']['value'];
-                        $newDate = date("Y-m-d", strtotime($orgDate));
-                        $propertyPriceValidUntil = $newDate;
-                    } else {
-                        $propertyPriceValidUntil = $property['values']['value'];
+            $propertyGroup = '';
+            foreach ($itemData['variationProperties'] as $propertyGroup) {
+                foreach ($propertyGroup['properties'] as $property) {
+                    if ($property['id'] == $priceValidUntilMappingId) {
+                        if ($property['cast'] == 'date') {
+                            $orgDate = $property['values']['value'];
+                            $newDate = date("Y-m-d", strtotime($orgDate));
+                            $propertyPriceValidUntil = $newDate;
+                        } else {
+                            $propertyPriceValidUntil = $property['values']['value'];
+                        }
+                        break 2;
                     }
-                    break;
                 }
             }
             $this->priceValidUntil = $propertyPriceValidUntil;
@@ -275,10 +284,13 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 break;
             case 3:
                 $propertySku = '';
-                foreach ($itemData['variationProperties'][0]['properties'] as $property) {
-                    if ($property['id'] == $skuMappingId) {
-                        $propertySku = $property['values']['value'];
-                        break;
+                $propertyGroup = '';
+                foreach ($itemData['variationProperties'] as $propertyGroup) {
+                    foreach ($itemData['variationProperties'][0]['properties'] as $property) {
+                        if ($property['id'] == $skuMappingId) {
+                            $propertySku = $property['values']['value'];
+                            break;
+                        }
                     }
                 }
                 $this->sku = $propertySku;
