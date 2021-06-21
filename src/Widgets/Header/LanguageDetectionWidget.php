@@ -21,21 +21,10 @@ class LanguageDetectionWidget extends BaseWidget
     {
         return WidgetDataFactory::make("Ceres::LanguageDetectionWidget")
             ->withLabel("Widget.languageDetectionWidgetLabel")
-            /*
-             * TODO: replace the image with a proper one
-             */
-            ->withPreviewImageUrl("/images/widgets/top-bar.svg")
+            ->withPreviewImageUrl("/images/widgets/language-detection.svg")
             ->withType(WidgetTypes::HEADER)
             ->withCategory(WidgetCategories::HEADER)
-            ->withPosition(0)
-            ->withAllowedNestingTypes(
-                [
-                    WidgetTypes::STRUCTURE,
-                    WidgetTypes::STATIC,
-                    WidgetTypes::DEFAULT,
-                    WidgetTypes::ITEM_SEARCH
-                ]
-            )
+            ->withPosition(100)
             ->toArray();
     }
 
