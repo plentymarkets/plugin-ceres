@@ -1,5 +1,5 @@
 <template>
-  <div class="row py-2">
+  <div v-if="languageText" class="row py-2">
     <div class="col-md-8">{{ languageText }}</div>
     <div class="col-md-4 text-right">
       <a :href="languageRedirect" :class="'btn btn-sm btn-appearance'">{{ buttonText }}</a>
