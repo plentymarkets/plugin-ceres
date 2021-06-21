@@ -1,8 +1,8 @@
 <template>
-  <div v-if="languageText" class="row py-2">
+  <div class="row py-2">
     <div class="col-md-8">{{ languageText }}</div>
     <div class="col-md-4 text-right">
-      <a :href="languageRedirect" :class="'btn btn-sm btn-' + appearance">{{ buttonText }}</a>
+      <a :href="languageRedirect" :class="'btn btn-sm btn-appearance'">{{ buttonText }}</a>
       <a href="#" @click="deactivateRedirection" class="m-sm-1"><i class="fa fa-close"></i></a>
     </div>
   </div>
@@ -18,14 +18,12 @@
         textLanguages: ''
       }
     },
-    props: ["redirect", "appearance", "texttranslations", "buttontranslations"],
+    props: ["redirect", "texttranslations", "buttontranslations"],
     mounted() {
       this.initializeComponent()
     },
     methods: {
       initializeComponent() {
-
-        this.setAppearance();
 
         for (let i = 0; i < window.navigator.languages.length; i++) {
           const langObject= window.navigator.languages[i].split('-')
@@ -50,9 +48,6 @@
       deactivateRedirection() {
         this.languageText = null;
         window.localStorage.setItem('redirectDeactivated', true);
-      },
-      setAppearance() {
-        this.appearance = this.$props.appearance;
       },
       setText(lang) {
         const textLangObj = JSON.parse(JSON.stringify(this.$props.texttranslations));

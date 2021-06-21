@@ -53,7 +53,38 @@ class LanguageDetectionWidget extends BaseWidget
             ->withDefaultValue(false)
             ->withName("Widget.languageDetectionRedirect");
 
-        $settingsFactory->createSpacing();
+        $spacingContainer = $settingsFactory->createVerticalContainer('spacing')
+            ->withName('Widget.widgetSpacing');
+
+        $spacingContainer->children->createCheckbox('customPadding')
+                ->withName('Widget.widgetCustomPadding');
+
+        $spacingContainer->children->createSetting('padding')
+                ->withType('spacing')
+                ->withCondition('!!spacing.customPadding')
+                ->withOption(
+                    'units',
+                    [
+                        'px',
+                        'rem'
+                    ]
+                )
+                ->withOption('direction', 'all');
+
+        $spacingContainer->children->createCheckbox('customMargin')
+                ->withName('Widget.widgetCustomMargin');
+
+        $spacingContainer->children->createSetting('margin')
+                ->withType('spacing')
+                ->withCondition('!!spacing.customMargin')
+                ->withOption(
+                    'units',
+                    [
+                        'px',
+                        'rem'
+                    ]
+                )
+                ->withOption('direction', 'vertical');
 
         return $settingsFactory->toArray();
     }
