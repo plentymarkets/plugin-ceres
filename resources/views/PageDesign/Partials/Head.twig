@@ -32,7 +32,7 @@
     %}
 
     {% if customFont.regular %}
-    {{ add_asset(customFont.regular, 'font', 'preload', ['crossorigin' => true]) }}
+    {{ add_asset(customFont.regular, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
         src: url("{{ customFont.regular }}");
@@ -40,7 +40,7 @@
     }
     {% endif %}
     {% if customFont.bold %}
-    {{ add_asset(customFont.bold, 'font', 'preload', ['crossorigin' => true]) }}
+    {{ add_asset(customFont.bold, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
         src: url("{{ customFont.bold }}");
@@ -49,7 +49,7 @@
     }
     {% endif %}
     {% if customFont.italic %}
-    {{ add_asset(customFont.italic, 'font', 'preload', ['crossorigin' => true]) }}
+    {{ add_asset(customFont.italic, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
         src: url("{{ customFont.italic }}");
@@ -58,7 +58,7 @@
     }
     {% endif %}
     {% if customFont.boldItalic %}
-    {{ add_asset(customFont.boldItalic, 'font', 'preload', ['crossorigin' => true]) }}
+    {{ add_asset(customFont.boldItalic, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
         src: url("{{ customFont.boldItalic }}");
