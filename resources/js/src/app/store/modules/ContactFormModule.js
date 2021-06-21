@@ -179,7 +179,7 @@ const actions =
                                                         detail: formData
                                                     }
                                                 )
-                                            )
+                                            );
                                         })
                                         .fail(response =>
                                         {
