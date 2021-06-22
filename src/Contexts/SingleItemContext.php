@@ -157,17 +157,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         if ($brandMapping == 2) {
             $this->brand = $itemData['item']['manufacturer']['externalName'];
         } elseif ($brandMapping == 3) {
-            $propertyBrand = '';
-            $propertyGroup = '';
-            foreach ($itemData['variationProperties'] as $propertyGroup) {
-                foreach ($propertyGroup['properties'] as $property) {
-                    if ($property['id'] == $brandMappingId) {
-                        $propertyBrand = $property['values']['value'];
-                        break 2;
-                    }
-                }
-            }
-            $this->brand = $propertyBrand;
+            $this->brand = $this->getVariationProperty($itemData['variationProperties'], $brandMappingId);
         }
 
         $manufacturerMapping = $this->ceresConfig->seo->manufacturerMapping;
@@ -240,37 +230,13 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $mpnMappingId = $this->ceresConfig->seo->mpnMappingId;
         if ($mpnMappingId > 0) {
-            $propertyMpn = '';
-            $propertyGroup = '';
-            foreach ($itemData['variationProperties'] as $propertyGroup) {
-                foreach ($propertyGroup['properties'] as $property) {
-                    if ($property['id'] == $mpnMappingId) {
-                        $propertyMpn = $property['values']['value'];
-                        break 2;
-                    }
-                }
-            }
-            $this->mpn = $propertyMpn;
+            $this->mpn = $this->getVariationProperty($itemData['variationProperties'], $mpnMappingId);
         }
+
         $priceValidUntilMappingId = $this->ceresConfig->seo->priceValidUntilMappingId;
         if ($priceValidUntilMappingId > 0) {
-            $propertyPriceValidUntil = '';
-            $propertyGroup = '';
-            foreach ($itemData['variationProperties'] as $propertyGroup) {
-                foreach ($propertyGroup['properties'] as $property) {
-                    if ($property['id'] == $priceValidUntilMappingId) {
-                        if ($property['cast'] == 'date') {
-                            $orgDate = $property['values']['value'];
-                            $newDate = date("Y-m-d", strtotime($orgDate));
-                            $propertyPriceValidUntil = $newDate;
-                        } else {
-                            $propertyPriceValidUntil = $property['values']['value'];
-                        }
-                        break 2;
-                    }
-                }
-            }
-            $this->priceValidUntil = $propertyPriceValidUntil;
+            $orgDate = $this->getVariationProperty($itemData['variationProperties'], $priceValidUntilMappingId);
+            $this->priceValidUntil = date("Y-m-d", strtotime($orgDate));
         }
 
         $skuMapping = $this->ceresConfig->seo->skuMapping;
@@ -283,17 +249,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 $this->sku = $itemData['variation']['number'];
                 break;
             case 3:
-                $propertySku = '';
-                $propertyGroup = '';
-                foreach ($itemData['variationProperties'] as $propertyGroup) {
-                    foreach ($itemData['variationProperties'][0]['properties'] as $property) {
-                        if ($property['id'] == $skuMappingId) {
-                            $propertySku = $property['values']['value'];
-                            break;
-                        }
-                    }
-                }
-                $this->sku = $propertySku;
+                $this->sku = $this->getVariationProperty($itemData['variationProperties'], $skuMappingId);
                 break;
         }
 
@@ -342,5 +298,18 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             }
         }
         return false;
+    }
+
+    private function getVariationProperty($variationPropertyGroups, $mappingPropertyId) {
+        $variationProperty = '';
+        foreach ($variationPropertyGroups as $propertyGroup) {
+            foreach ($propertyGroup['properties'] as $property) {
+                if ($property['id'] == $mappingPropertyId) {
+                    $variationProperty = $property['values']['value'];
+                    break 2;
+                }
+            }
+        }
+        return $variationProperty;
     }
 }
