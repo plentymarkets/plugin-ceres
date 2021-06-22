@@ -1,62 +1,76 @@
 <template>
-  <div v-if="languageText" class="row py-2">
-    <div class="col-md-8">{{ languageText }}</div>
-    <div class="col-md-4 text-right">
-      <a :href="languageRedirect" :class="'btn btn-sm btn-appearance'">{{ buttonText }}</a>
-      <a href="#" @click="deactivateRedirection" class="m-sm-1"><i class="fa fa-close"></i></a>
+    <div v-if="targetLang" class="row py-2">
+        <div class="col-md-8">{{ texttranslations[targetLang] }}</div>
+        <div class="col-md-4 text-right">
+            <a :href="redirectUrl" :class="'btn btn-sm btn-appearance'">
+                {{ buttontranslations[targetLang] }}
+            </a>
+            <a @click="refuseRedirect()" class="m-sm-1">
+                <i class="fa fa-close"></i>
+            </a>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        languageText: '',
-        buttonText: '',
-        languageRedirect: '',
-        textLanguages: ''
-      }
+import { isDefined } from "../../helper/utils";
+import { navigateTo } from "../../services/UrlService";
+export default {
+    data() {
+        return {
+            redirectUrl: null,
+            targetLang: null
+        };
     },
-    props: ["redirect", "texttranslations", "buttontranslations"],
-    mounted() {
-      this.initializeComponent()
+    props:
+    {
+        autoRedirect: Boolean,
+        texttranslations: {
+            type: Object,
+            default: () => {}
+        },
+        buttontranslations: {
+            type: Object,
+            default: () => {}
+        }
+    },
+    mounted()
+    {
+        this.initializeComponent();
     },
     methods: {
-      initializeComponent() {
+        initializeComponent() {
+            window.navigator.languages.forEach((language) => {
+                // values like "de", "en"...
+                const languageAbbreviation = language.split("-")[0];
+                const redirectUrl = document
+                    .querySelector(`link[hreflang="${languageAbbreviation}"]`)
+                    ?.getAttribute("href");
 
-        for (let i = 0; i < window.navigator.languages.length; i++) {
-          const langObject= window.navigator.languages[i].split('-')
-          const linkTag = document.querySelector('link[hreflang="' + langObject[0] +'"]')
-
-          if (App.language !== langObject[0] && linkTag) {
-            if (this.$props.redirect){
-              if (!window.localStorage.getItem('redirectActive')){
-                window.localStorage.setItem('redirectActive', true);
-                window.location.href = linkTag.getAttribute('href')
-              }
-            } else if (!window.localStorage.getItem('redirectDeactivated')) {
-              window.localStorage.removeItem('redirectActive');
-              this.setText(langObject[0]);
-              this.setButton(langObject[0]);
-              this.languageRedirect = linkTag.getAttribute('href')
-              break;
-            }
-          }
+                if (App.language !== languageAbbreviation && isDefined(redirectUrl))
+                {
+                    if (this.autoRedirect)
+                    {
+                        if (!window.localStorage.getItem("redirectActive"))
+                        {
+                            window.localStorage.setItem("redirectActive", true);
+                            navigateTo(redirectUrl);
+                        }
+                    }
+                    else if (!window.localStorage.getItem("redirectDeactivated"))
+                    {
+                        window.localStorage.removeItem("redirectActive");
+                        this.targetLang = languageAbbreviation;
+                        this.redirectUrl = redirectUrl;
+                    }
+                }
+            });
+        },
+        refuseRedirect()
+        {
+            this.targetLang = null;
+            window.localStorage.setItem("redirectDeactivated", true);
         }
-      },
-      deactivateRedirection() {
-        this.languageText = null;
-        window.localStorage.setItem('redirectDeactivated', true);
-      },
-      setText(lang) {
-        const textLangObj = JSON.parse(JSON.stringify(this.$props.texttranslations));
-        this.languageText = textLangObj[lang];
-      },
-      setButton(lang) {
-        const buttonLangObj = JSON.parse(JSON.stringify(this.$props.buttontranslations));
-        this.buttonText = buttonLangObj[lang];
-      }
-    }
-  }
+    },
+};
 </script>
