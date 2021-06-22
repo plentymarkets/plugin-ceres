@@ -65,6 +65,12 @@ class SeoConfig
         "isbnSet"                     => "3",
     ];
 
+    private static $mpnOptions = [
+        "mpnNotSet"                  => "1",
+        "externalVariationId"        => "2",
+        "mpnSet"                     => "3",
+    ];
+
     private static $skuOptions = [
         "skuVariationID"              => "1",
         "skuVariationNr"              => "2",
@@ -133,6 +139,14 @@ class SeoConfig
     public static function getIsbnOptions()
     {
         return self::$isbnOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getMpnOptions()
+    {
+        return self::$mpnOptions;
     }
 
     /**

@@ -59,6 +59,11 @@ class CeresSeoConfig extends PluginConfig
     public $isbnMappingId;
 
     /**
+     * @var string $mpnMapping Selected option value for MPN barcode in rich snippet.
+     */
+    public $mpnMapping;
+
+    /**
      * @var string $mpnMappingId Property ID for MPN rich snippet.
      */
     public $mpnMappingId;
@@ -102,6 +107,7 @@ class CeresSeoConfig extends PluginConfig
         $this->gtin13MappingId = $this->getTextValue('gtin13.mapping.gtin13ID', '');
         $this->isbnMapping = $this->getTextValue('isbn.mapping.isbn','1');
         $this->isbnMappingId = $this->getTextValue('isbn.mapping.isbnID','');
+        $this->mpnMapping = $this->getTextValue('mpn.mapping.mpn','1');
         $this->mpnMappingId = $this->getTextValue('mpn.mapping.mpnID', '');
         $this->priceValidUntilMappingId = $this->getTextValue('priceValidUntil.mapping.priceValidUntilID','');
         $this->skuMapping = $this->getTextValue('sku.mapping.sku','1');

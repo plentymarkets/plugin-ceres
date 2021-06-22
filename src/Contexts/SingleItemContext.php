@@ -228,8 +228,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $this->isbn = $propertyIsbn;
         }
 
+        $mpnMapping = $this->ceresConfig->seo->mpnMapping;
         $mpnMappingId = $this->ceresConfig->seo->mpnMappingId;
-        if ($mpnMappingId > 0) {
+        if ($mpnMapping == 2) {
+            $this->mpn = $itemData['variation']['externalId'];
+        } elseif ($mpnMapping == 3) {
             $this->mpn = $this->getVariationProperty($itemData['variationProperties'], $mpnMappingId);
         }
 

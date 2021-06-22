@@ -364,15 +364,27 @@ class SeoStep extends Step
      */
     private function generateMpnMappingSection():array
     {
+        $mpnOptions = SeoConfig::getMpnOptions();
+        $options    = StepHelper::generateTranslatedListBoxValues($mpnOptions);
+
         return [
-            "title" => "Wizard.mpnMapping",
+            "title"       => "Wizard.mpnMapping",
             "description" => "Wizard.mpnMappingDescription",
-            "form" => [
+            "form"        => [
+                "seo_mpn" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.mpnChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
                 "seo_mpnId" => [
-                    "type" => "text",
+                    "type"         => "text",
+                    "isVisible"    => "seo_mpn === '3'",
                     "defaultValue" => "",
-                    "options" => [
-                        "name" => "Wizard.mpnID",
+                    "options"      => [
+                        "name"          => "Wizard.mpnID",
                     ]
                 ]
             ]

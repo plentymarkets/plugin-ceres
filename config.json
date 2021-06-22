@@ -4530,6 +4530,31 @@
                     "label": "Config.mpnMapping",
                     "options": {
                         "containerEntries": {
+                            "mpn.mapping.mpn": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.mpn",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.mpnNotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.externalVariationId",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.mpnSet",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
                             "mpn.mapping.mpnID": {
                                 "type": "inputText",
                                 "required": false,
