@@ -3845,14 +3845,12 @@ __webpack_require__.r(__webpack_exports__);
       textLanguages: ''
     };
   },
-  props: ["redirect", "appearance", "texttranslations", "buttontranslations"],
+  props: ["redirect", "texttranslations", "buttontranslations"],
   mounted: function mounted() {
     this.initializeComponent();
   },
   methods: {
     initializeComponent: function initializeComponent() {
-      this.setAppearance();
-
       for (var i = 0; i < window.navigator.languages.length; i++) {
         var langObject = window.navigator.languages[i].split('-');
         var linkTag = document.querySelector('link[hreflang="' + langObject[0] + '"]');
@@ -3876,9 +3874,6 @@ __webpack_require__.r(__webpack_exports__);
     deactivateRedirection: function deactivateRedirection() {
       this.languageText = null;
       window.localStorage.setItem('redirectDeactivated', true);
-    },
-    setAppearance: function setAppearance() {
-      this.appearance = this.$props.appearance;
     },
     setText: function setText(lang) {
       var textLangObj = JSON.parse(JSON.stringify(this.$props.texttranslations));
@@ -45860,7 +45855,7 @@ var render = function() {
           _c(
             "a",
             {
-              class: "btn btn-sm btn-" + _vm.appearance,
+              class: "btn btn-sm btn-appearance",
               attrs: { href: _vm.languageRedirect }
             },
             [_vm._v(_vm._s(_vm.buttonText))]
