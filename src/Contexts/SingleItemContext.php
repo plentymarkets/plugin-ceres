@@ -168,6 +168,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $manufacturerMapping = $this->ceresConfig->seo->manufacturerMapping;
         if ($manufacturerMapping == 2) {
             $this->manufacturer = $itemData['item']['manufacturer']['externalName'] ?? '';
+        } elseif ($manufacturerMapping == 3) {
+            $this->manufacturer = $itemData['item']['manufacturer']['name'];
         }
 
         $gtinMapping = $this->ceresConfig->seo->gtinMapping;

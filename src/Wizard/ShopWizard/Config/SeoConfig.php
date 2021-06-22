@@ -45,6 +45,7 @@ class SeoConfig
     private static $manufacturerOptions = [
         "manufacturerNotSet"        => "1",
         "manufacturerExtern"        => "2",
+        "manufacturerName"          => "3",
     ];
 
     private static $gtinOptions = [
@@ -118,9 +119,17 @@ class SeoConfig
     /**
      * @return array
      */
-    public static function getmanufacturerOptions()
+    public static function getManufacturerOptions()
     {
         return self::$manufacturerOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getGtinOptions()
+    {
+        return self::$gtinOptions;
     }
 
     /**

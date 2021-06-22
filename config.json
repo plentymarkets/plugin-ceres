@@ -4395,6 +4395,11 @@
                                             "value": "2",
                                             "caption": "Config.manufacturerExtern",
                                             "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.manufacturerName",
+                                            "position": 2
                                         }
                                     ]
                                 }
