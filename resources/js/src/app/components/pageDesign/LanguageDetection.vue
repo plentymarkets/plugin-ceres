@@ -41,26 +41,33 @@ export default {
     },
     methods: {
         initializeComponent() {
-            window.navigator.languages.forEach((language) => {
-                // values like "de", "en"...
-                const languageAbbreviation = language.split("-")[0];
-                const redirectUrl = document
-                    .querySelector(`link[hreflang="${languageAbbreviation}"]`)
-                    ?.getAttribute("href");
-
-                if (App.language !== languageAbbreviation && isDefined(redirectUrl))
-                {
-                    if (this.autoRedirect)
+            if (App.isShopBuilder)
+            {
+                this.targetLang = App.defaultLanguage;
+            }
+            else
+            {
+                window.navigator.languages.forEach((language) => {
+                    // values like "de", "en"...
+                    const languageAbbreviation = language.split("-")[0];
+                    const redirectUrl = document
+                        .querySelector(`link[hreflang="${languageAbbreviation}"]`)
+                        ?.getAttribute("href");
+    
+                    if (App.language !== languageAbbreviation && isDefined(redirectUrl))
                     {
-                        navigateTo(redirectUrl);
+                        if (this.autoRedirect && !App.isShopBuilder)
+                        {
+                            navigateTo(redirectUrl);
+                        }
+                        else if (!window.localStorage.getItem("redirectDeactivated"))
+                        {
+                            this.targetLang = languageAbbreviation;
+                            this.redirectUrl = redirectUrl;
+                        }
                     }
-                    else if (!window.localStorage.getItem("redirectDeactivated"))
-                    {
-                        this.targetLang = languageAbbreviation;
-                        this.redirectUrl = redirectUrl;
-                    }
-                }
-            });
+                });
+            }
         },
         refuseRedirect()
         {

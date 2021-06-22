@@ -22,18 +22,12 @@
     <div class="bg-appearance">
         <div class="container-max">
             <div class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-                {% if isPreview %}
-                    <div class="align-center">
-                        Language Detection
-                    </div>
-                {% else %}
                 <language-detection
                     :auto-redirect="{{ redirect | json_encode }}"
                     :texttranslations="{{ Twig.print('textTranslations | json_encode') }}"
                     :buttontranslations="{{ Twig.print('buttonTranslations | json_encode') }}"
                 >
                 </language-detection>
-                {% endif %}
             </div>
         </div>
     </div>
