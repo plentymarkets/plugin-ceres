@@ -1,6 +1,6 @@
 context("Checkout misc", () =>
 {
-    it("should show the info that the mail changed for user", () =>
+    it("should show the info that the mail changed for user and hide it again after switching to original address", () =>
     {
         cy.login("mailchange@test.de");
         cy.addBasketItem(1014);
@@ -14,7 +14,17 @@ context("Checkout misc", () =>
         cy.wait("@selectAddress").then((res) =>
         {
             expect(res.response.statusCode).to.eql(200);
-            cy.get(".mail-changed-info").should("exist");
+            cy.get(".mail-changed-info").should("contain", "Alle Informationen zum Auftrag werden an CHANGED@test.de gesendet. Ihr Login erfolgt weiterhin mit mailchange@test.de");
+        });
+
+        cy.intercept("PUT", "/rest/io/customer/address/**/?typeId=1").as("selectAddress");
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-dropdown").find("li").eq(0).click();
+
+        cy.wait("@selectAddress").then((res) =>
+        {
+            expect(res.response.statusCode).to.eql(200);
+            cy.get(".mail-changed-info").should("not.exist");
         });
     });
 
