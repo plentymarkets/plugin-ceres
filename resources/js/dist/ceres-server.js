@@ -43051,7 +43051,7 @@ var render = function() {
                             _vm._ssrNode(
                               '<input type="mail" name="email"' +
                                 _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="delivery-address-de-email-input"' +
+                                ' data-testing="packing-station-de-email-input"' +
                                 _vm._ssrAttr("value", _vm.value.email) +
                                 "> <label" +
                                 _vm._ssrAttr("for", "email" + _vm._uid) +
@@ -43700,7 +43700,7 @@ var render = function() {
                             _vm._ssrNode(
                               '<input type="mail" name="email"' +
                                 _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="packing-station-de-email-input"' +
+                                ' data-testing="billing-address-de-email-input"' +
                                 _vm._ssrAttr("value", _vm.value.email) +
                                 "> <label" +
                                 _vm._ssrAttr("for", "email" + _vm._uid) +
