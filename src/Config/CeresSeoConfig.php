@@ -29,6 +29,16 @@ class CeresSeoConfig extends PluginConfig
     public $manufacturerMapping;
 
     /**
+     * @var string $gtinMapping Selected option value for GTIN barcode in rich snippet.
+     */
+    public $gtinMapping;
+
+    /**
+     * @var string $gtinMappingId Property ID for GTIN rich snippet.
+     */
+    public $gtinMappingId;
+
+    /**
      * @var string $gtin8Mapping Selected option value for GTIN 8 barcode in rich snippet.
      */
     public $gtin8Mapping;
@@ -101,6 +111,8 @@ class CeresSeoConfig extends PluginConfig
         $this->brandMapping = $this->getTextValue('brand.mapping.brand', '1');
         $this->brandMappingId = $this->getTextValue('brand.mapping.brandID', '');
         $this->manufacturerMapping = $this->getTextValue('manufacturer.mapping.manufacturer', '2');
+        $this->gtinMapping = $this->getTextValue('gtin.mapping.gtin','1');
+        $this->gtinMappingId = $this->getTextValue('gtin.mapping.gtinID', '');
         $this->gtin8Mapping = $this->getTextValue('gtin8.mapping.gtin8','1');
         $this->gtin8MappingId = $this->getTextValue('gtin8.mapping.gtin8ID', '');
         $this->gtin13Mapping = $this->getTextValue('gtin13.mapping.gtin13','1');

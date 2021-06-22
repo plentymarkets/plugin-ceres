@@ -4402,6 +4402,47 @@
                         }
                     }
                 },
+                "gtin.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.gtinMapping",
+                    "options": {
+                        "containerEntries": {
+                            "gtin.mapping.gtin": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.gtin",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.gtinNotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.gtinSetFirst",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.gtinSet",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
+                            "gtin.mapping.gtinID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.gtinID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
                 "gtin8.mapping": {
                     "type": "verticalContainer",
                     "label": "Config.gtin8Mapping",

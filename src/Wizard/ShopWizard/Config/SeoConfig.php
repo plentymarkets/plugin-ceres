@@ -47,6 +47,12 @@ class SeoConfig
         "manufacturerExtern"        => "2",
     ];
 
+    private static $gtinOptions = [
+        "gtinNotSet"                => "1",
+        "gtinSetFirst"              => "2",
+        "gtinSet"                   => "3",
+    ];
+
     private static $gtin8Options = [
         "gtin8NotSet"                => "1",
         "gtin8SetFirst"              => "2",

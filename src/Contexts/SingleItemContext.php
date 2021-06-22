@@ -101,12 +101,17 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $manufacturer = '';
 
     /**
-     * @var string $gtin Contains the "GTIN8" Barcode for SEO attribute.
+     * @var string $gtin Contains the "GTIN" Barcode for SEO attribute.
+     */
+    public $gtin = '';
+
+    /**
+     * @var string $gtin8 Contains the "GTIN8" Barcode for SEO attribute.
      */
     public $gtin8 = '';
 
     /**
-     * @var string $gtin Contains the "GTIN13" Barcode for SEO attribute.
+     * @var string $gtin13 Contains the "GTIN13" Barcode for SEO attribute.
      */
     public $gtin13 = '';
 
@@ -163,6 +168,27 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $manufacturerMapping = $this->ceresConfig->seo->manufacturerMapping;
         if ($manufacturerMapping == 2) {
             $this->manufacturer = $itemData['item']['manufacturer']['externalName'] ?? '';
+        }
+
+        $gtinMapping = $this->ceresConfig->seo->gtinMapping;
+        $gtinMappingId = $this->ceresConfig->seo->gtinMappingId;
+        $propertyGtin = '';
+        if ($gtinMapping == 2) {
+            foreach ($itemData['barcodes'] as $property) {
+                if ($property['type'] == 'GTIN' && $this->isWebshopReferrer($property['referrers'])) {
+                    $propertyGtin = $property['code'];
+                    break;
+                }
+            }
+            $this->gtin = $propertyGtin;
+        } elseif ($gtinMapping == 3) {
+            foreach ($itemData['barcodes'] as $property) {
+                if ($property['id'] == $gtinMappingId) {
+                    $propertyGtin = $property['code'];
+                    break;
+                }
+            }
+            $this->gtin = $propertyGtin;
         }
 
         $gtin8Mapping = $this->ceresConfig->seo->gtin8Mapping;

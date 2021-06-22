@@ -30,6 +30,7 @@ class SeoStep extends Step
                 $this->generateItemMetaTitleSection(),
                 $this->generateBrandMappingSection(),
                 $this->generateManufacturerMappingSection(),
+                $this->generateGtinMappingSection(),
                 $this->generateGtin8MappingSection(),
                 $this->generateGtin13MappingSection(),
                 $this->generateIsbnMappingSection(),
@@ -257,6 +258,38 @@ class SeoStep extends Step
                     "options"      => [
                         "name" => "Wizard.manufacturerChoose",
                         "listBoxValues" => $options,
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateGtinMappingSection():array
+    {
+        $gtinOptions = SeoConfig::getGtinOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($gtinOptions);
+
+        return [
+            "title"       => "Wizard.gtinMapping",
+            "description" => "Wizard.gtinMappingDescription",
+            "form"        => [
+                "seo_gtin" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.gtinChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_gtinId" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_gtin === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.gtinID",
                     ]
                 ]
             ]
