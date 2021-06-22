@@ -172,6 +172,14 @@ const actions =
                                             NotificationService.success(
                                                 TranslationService.translate("Ceres::Template.contactSendSuccess")
                                             ).closeAfter(3000);
+                                            document.dispatchEvent(
+                                                new CustomEvent(
+                                                    "contactFormSent",
+                                                    {
+                                                        detail: formData
+                                                    }
+                                                )
+                                            );
                                         })
                                         .fail(response =>
                                         {
