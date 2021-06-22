@@ -157,8 +157,12 @@
                                             <span>${addressToDelete.name4}</span>
                                             <span>${addressToDelete.address1} ${addressToDelete.address2}</span>
                                             <span>
-                                                <template v-if="addressToDelete.address1 === 'PACKSTATION' || addressToDelete.address1 === 'POSTFILIALE'">
+                                                <template v-if="addressToDelete.address1 === 'PACKSTATION'">
                                                     {{ trans("Ceres::Template.addressPostNummer") }}
+                                                    ${addressToDelete | optionType(6)}
+                                                </template>
+                                                <template v-else-if="addressToDelete.address1 === 'POSTFILIALE' && addressToDelete.address3">
+                                                    {{ trans("Ecomsilio::Template.addressPostNummerEmail") }}
                                                     ${addressToDelete | optionType(6)}
                                                 </template> 
                                                 ${ addressToDelete.address3 }
