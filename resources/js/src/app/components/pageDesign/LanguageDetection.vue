@@ -1,7 +1,8 @@
 <template>
-    <div v-if="targetLang" class="row py-2">
-        <div class="col-md-8">{{ texttranslations[targetLang] }}</div>
-        <div class="col-md-4 text-right">
+    <div v-if="targetLang" class="d-flex py-2">
+        <div class="align-self-center mr-auto">{{ texttranslations[targetLang] }}</div>
+
+        <div class="align-self-center text-nowrap">
             <a :href="redirectUrl" :class="'btn btn-sm btn-appearance'">
                 {{ buttontranslations[targetLang] }}
             </a>
