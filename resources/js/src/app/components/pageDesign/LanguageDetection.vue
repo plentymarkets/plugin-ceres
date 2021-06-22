@@ -5,7 +5,7 @@
             <a :href="redirectUrl" :class="'btn btn-sm btn-appearance'">
                 {{ buttontranslations[targetLang] }}
             </a>
-            <a @click="refuseRedirect()" class="m-sm-1">
+            <a href="#" @click="refuseRedirect()" class="m-sm-1">
                 <i class="fa fa-close"></i>
             </a>
         </div>
@@ -51,15 +51,10 @@ export default {
                 {
                     if (this.autoRedirect)
                     {
-                        if (!window.localStorage.getItem("redirectActive"))
-                        {
-                            window.localStorage.setItem("redirectActive", true);
-                            navigateTo(redirectUrl);
-                        }
+                        navigateTo(redirectUrl);
                     }
                     else if (!window.localStorage.getItem("redirectDeactivated"))
                     {
-                        window.localStorage.removeItem("redirectActive");
                         this.targetLang = languageAbbreviation;
                         this.redirectUrl = redirectUrl;
                     }
