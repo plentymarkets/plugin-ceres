@@ -1,5 +1,5 @@
 <template>
-    <div class="mail-changed-info alert alert-info w-100" v-if="showMailChanged">
+    <div class="mail-changed-info alert alert-info w-100" v-if="showMailChanged && !isGuest">
         {{ $translate("Ceres::Template.checkoutChangedMail", { newMail: billingAddressMail, currMail: userMail}) }}
     </div>
 </template>
@@ -9,7 +9,8 @@ const ADDRESS_EMAIL_TYPE_ID = 5;
 export default {
     name: "mail-changed-info",
 
-    props: {
+    props:
+    {
         userMail:
         {
             type: String,
@@ -17,7 +18,8 @@ export default {
         }
     },
     
-    computed: {
+    computed:
+    {
         showMailChanged()
         {
             return this.billingAddressMail !== this.userMail;
@@ -27,7 +29,7 @@ export default {
         {
             let mail = ""
 
-            this.$store.state.address.billingAddress.options.forEach(option =>
+            this.$store.state.address.billingAddress.options?.forEach(option =>
             {
                 if (option.typeId === ADDRESS_EMAIL_TYPE_ID)
                 {
@@ -36,6 +38,11 @@ export default {
             });
 
             return mail;
+        },
+
+        isGuest()
+        {
+            return !this.$store.getters.isLoggedIn;
         }
     }
 }
