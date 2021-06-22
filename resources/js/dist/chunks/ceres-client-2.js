@@ -2265,7 +2265,7 @@ var render = function() {
                               type: "mail",
                               name: "email",
                               id: "email" + _vm._uid,
-                              "data-testing": "address-email-input"
+                              "data-testing": "delivery-address-de-email-input"
                             },
                             domProps: { value: _vm.value.email },
                             on: {
@@ -3184,7 +3184,7 @@ var render = function() {
                               type: "mail",
                               name: "email",
                               id: "email" + _vm._uid,
-                              "data-testing": "address-email-input"
+                              "data-testing": "packing-station-de-email-input"
                             },
                             domProps: { value: _vm.value.email },
                             on: {
@@ -4176,7 +4176,7 @@ var render = function() {
                               type: "mail",
                               name: "email",
                               id: "email" + _vm._uid,
-                              "data-testing": "address-email-input"
+                              "data-testing": "billing-address-gb-email-input"
                             },
                             domProps: { value: _vm.value.email },
                             on: {
@@ -5170,7 +5170,7 @@ var render = function() {
                               type: "mail",
                               name: "email",
                               id: "email" + _vm._uid,
-                              "data-testing": "address-email-input"
+                              "data-testing": "delivery-address-de-email-input"
                             },
                             domProps: { value: _vm.value.email },
                             on: {
@@ -6099,7 +6099,7 @@ var render = function() {
                               type: "mail",
                               name: "email",
                               id: "email" + _vm._uid,
-                              "data-testing": "address-email-input"
+                              "data-testing": "delivery-address-gb-email-input"
                             },
                             domProps: { value: _vm.value.email },
                             on: {
