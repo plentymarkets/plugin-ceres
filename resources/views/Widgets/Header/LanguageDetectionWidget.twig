@@ -24,8 +24,9 @@
             <div class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
                 <language-detection
                     :auto-redirect="{{ redirect | json_encode }}"
-                    :texttranslations="{{ Twig.print('textTranslations | json_encode') }}"
-                    :buttontranslations="{{ Twig.print('buttonTranslations | json_encode') }}"
+                    :text-translations="{{ Twig.print('textTranslations | json_encode') }}"
+                    :button-translations="{{ Twig.print('buttonTranslations | json_encode') }}"
+                    :language-map="{{ Twig.print("webstoreConfig.browserLanguage | json_encode") }}"
                 >
                 </language-detection>
             </div>
