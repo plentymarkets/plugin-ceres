@@ -15,7 +15,7 @@ context("category", () =>
 
     it("should check for background image", () =>
     {
-        cy.get(`[data-background-image='/documents/category/16/living-room.jpg']`)
+        cy.get(`.parallax-img-container-inner`).first()
             .invoke("attr", "style", "background-image: url('/documents/category/16/living-room.jpg')")
             .should("have.attr", "style", "background-image: url('/documents/category/16/living-room.jpg')");
     });
@@ -69,7 +69,7 @@ context("category", () =>
         cy.getByTestingAttr("category-toolbar-filter").click();
         cy.get(".widget-filter-attributes-properties-characteristics").find(".option-1").click();
         cy.getByTestingAttr("category-toolbar-close").click();
-        cy.get(".widget-selected-filter").find(".selected-filters").children().first().click();
+        cy.get(".widget-selected-filter").find(".selected-filters").children().first().click({force: true});
         cy.get(".product-list").find("li").should("have.length", 20);
     });
 

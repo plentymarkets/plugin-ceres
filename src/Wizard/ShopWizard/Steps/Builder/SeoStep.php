@@ -29,7 +29,13 @@ class SeoStep extends Step
                 $this->generateAvailabilitiesSection(),
                 $this->generateItemMetaTitleSection(),
                 $this->generateBrandMappingSection(),
-                $this->generateManufacturerMappingSection()
+                $this->generateManufacturerMappingSection(),
+                $this->generateGtin8MappingSection(),
+                $this->generateGtin13MappingSection(),
+                $this->generateIsbnMappingSection(),
+                $this->generateMpnMappingSection(),
+                $this->generatePriceValidUntilMappingSection(),
+                $this->generateSkuMappingSection()
             ]
         ];
     }
@@ -251,6 +257,174 @@ class SeoStep extends Step
                     "options"      => [
                         "name" => "Wizard.manufacturerChoose",
                         "listBoxValues" => $options,
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateGtin8MappingSection():array
+    {
+        $gtin8Options = SeoConfig::getGtin8Options();
+        $options       = StepHelper::generateTranslatedListBoxValues($gtin8Options);
+
+        return [
+            "title"       => "Wizard.gtin8Mapping",
+            "description" => "Wizard.gtin8MappingDescription",
+            "form"        => [
+                "seo_gtin8" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.gtin8Choose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_gtin8Id" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_gtin8 === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.gtin8ID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateGtin13MappingSection():array
+    {
+        $gtin13Options = SeoConfig::getGtin13Options();
+        $options       = StepHelper::generateTranslatedListBoxValues($gtin13Options);
+
+        return [
+            "title"       => "Wizard.gtin13Mapping",
+            "description" => "Wizard.gtin13MappingDescription",
+            "form"        => [
+                "seo_gtin13" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.gtin13Choose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_gtin13Id" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_gtin13 === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.gtin13ID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateIsbnMappingSection():array
+    {
+        $isbnOptions = SeoConfig::getIsbnOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($isbnOptions);
+
+        return [
+            "title"       => "Wizard.isbnMapping",
+            "description" => "Wizard.isbnMappingDescription",
+            "form"        => [
+                "seo_isbn" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.isbnChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_isbnId" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_isbn === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.isbnID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateMpnMappingSection():array
+    {
+        return [
+            "title" => "Wizard.mpnMapping",
+            "description" => "Wizard.mpnMappingDescription",
+            "form" => [
+                "seo_mpnId" => [
+                    "type" => "text",
+                    "defaultValue" => "",
+                    "options" => [
+                        "name" => "Wizard.mpnID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generatePriceValidUntilMappingSection():array
+    {
+        return [
+            "title" => "Wizard.priceValidUntilMapping",
+            "description" => "Wizard.priceValidUntilMappingDescription",
+            "form" => [
+                "seo_priceValidUntilId" => [
+                    "type" => "text",
+                    "defaultValue" => "",
+                    "options" => [
+                        "name" => "Wizard.priceValidUntilID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateSkuMappingSection():array
+    {
+        $skuOptions = SeoConfig::getSkuOptions();
+        $options = StepHelper::generateTranslatedListBoxValues($skuOptions);
+
+        return [
+            "title"       => "Wizard.skuMapping",
+            "description" => "Wizard.skuMappingDescription",
+            "form"        => [
+                "seo_sku" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.skuChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_skuId" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_sku === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.skuID",
                     ]
                 ]
             ]

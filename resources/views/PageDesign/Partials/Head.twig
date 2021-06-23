@@ -32,29 +32,37 @@
     %}
 
     {% if customFont.regular %}
+    {{ add_asset(customFont.regular, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
         src: url("{{ customFont.regular }}");
+        font-display: optional;
     }
     {% endif %}
     {% if customFont.bold %}
+    {{ add_asset(customFont.bold, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
         src: url("{{ customFont.bold }}");
+        font-display: optional;
         font-weight: bold;
     }
     {% endif %}
     {% if customFont.italic %}
+    {{ add_asset(customFont.italic, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
         src: url("{{ customFont.italic }}");
+        font-display: optional;
         font-style: italic;
     }
     {% endif %}
     {% if customFont.boldItalic %}
+    {{ add_asset(customFont.boldItalic, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
         src: url("{{ customFont.boldItalic }}");
+        font-display: optional;
         font-weight: bold;
         font-style: italic;
     }

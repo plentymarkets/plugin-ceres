@@ -21,9 +21,7 @@ window.Vuex = Vuex;
 import script2 from "./app/plugins/script2";
 Vue.use(script2);
 
-import jQuery from "jquery";
-window.jQuery = jQuery;
-window.$ = jQuery;
+import "./app/jQuery";
 
 import "bootstrap";
 import "owl.carousel";
@@ -210,6 +208,8 @@ Vue.prototype.$translate = TranslationService.translate;
 Vue.prototype.$ceres = App;
 
 const store = createStore();
+
+window.ceresStore = store;
 
 initServerStore(store);
 initClientStore(store);

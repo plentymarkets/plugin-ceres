@@ -58,6 +58,19 @@ class LinkWidget extends BaseWidget
             ->withName("Widget.linkTitleTextLabel")
             ->withTooltip("Widget.linkTitleTextTooltip");
 
+        $settings->createSelect('linkRel')
+            ->withDefaultValue('none')
+            ->withName('Widget.linkRel')
+            ->withTooltip('Widget.linkRelTooltip')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry('none', 'Widget.linkRelNone')
+                    ->addEntry('nofollow', 'Widget.linkRelNofollow')
+                    ->addEntry('sponsored', 'Widget.linkRelSponsored')
+                    ->addEntry('noopener', 'Widget.linkRelNoopener')
+                    ->toArray()
+            );
+
         $settings->createUrl("url")
             ->withName("Widget.linkUrlLabel")
             ->withTooltip("Widget.linkUrlTooltip")

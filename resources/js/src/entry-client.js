@@ -1,14 +1,15 @@
 import "./app/publicPath";
 import Vue from "vue";
+import Vuex from "vuex";
 import NotificationService from "./app/services/NotificationService";
 import TranslationService from "./app/services/TranslationService";
 import "bootstrap";
 import "owl.carousel";
-import jQuery from "jquery";
 import { createApp } from "./app";
-import { initClientListeners, initClientStore } from "./app/store";
+import { initClientListeners, initClientStore, createStore } from "./app/store";
 import { initListener } from "./app/services/ApiService";
 import { mount } from "./mount";
+import "./app/jQuery";
 
 Vue.prototype.$mount = mount;
 
@@ -19,14 +20,9 @@ App.isSSREnabled = App.config.log.performanceSsr;
 window.createApp = (selector) =>
 {
     // client-specific bootstrapping logic...
-    const { app, store } = createApp({
+    const app = createApp({
         template: "#ssr-script-container"
-    });
-
-    if (window.__INITIAL_STATE__)
-    {
-        store.replaceState(window.__INITIAL_STATE__);
-    }
+    }, store);
 
     app.$mount(selector, true);
     window.vueApp = app;
@@ -37,11 +33,18 @@ window.createApp = (selector) =>
     initClientStore(store);
 };
 
-window.jQuery = jQuery;
-window.$ = jQuery;
+const store = createStore();
+
+if (window.__INITIAL_STATE__)
+{
+    store.replaceState(window.__INITIAL_STATE__);
+}
+
 window.Vue = Vue;
+window.Vuex = Vuex;
 window.NotificationService = NotificationService;
 window.ceresTranslate = TranslationService.translate;
 window.vueEventHub = new Vue();
+window.ceresStore = store;
 
 import "./app/main";

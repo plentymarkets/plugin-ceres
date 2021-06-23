@@ -38,12 +38,13 @@ export default class HeaderScroller
     // The header parent element.
     get headerParent()
     {
-        if (this._headerParent)
+        // Check if the element _headerParent is still a child of the document. Also check if document.contains is defined (IE11).
+        if (this._headerParent && document.contains && document.contains(this._headerParent))
         {
             return this._headerParent;
         }
 
-        this._headerParent = this._headerParent?.offsetParent ? this._headerParent : document.querySelector("[data-header-offset]");
+        this._headerParent = document.querySelector("[data-header-offset]");
         return this._headerParent;
     }
 

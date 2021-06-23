@@ -899,13 +899,13 @@
                     }
                 },
                 "item.show_category_filter": {
-                  "type": "checkBox",
-                  "required": false,
-                  "deprecated": true,
-                  "label": "Config.itemShowCategoryFilterLabel",
-                  "options": {
-                    "defaultValue": "false"
-                  }
+                    "type": "checkBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.itemShowCategoryFilterLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
                 }
             }
         },
@@ -962,226 +962,226 @@
                         ]
                     }
                 },
-              "item.lists.cross_selling_sorting": {
-                  "type": "selectBox",
-                  "required": false,
-                  "deprecated": true,
-                  "label": "Config.itemListsCrossSellingSortingLabel",
-                  "options": {
-                    "defaultValue": "texts.name_asc",
-                    "selectBoxValues": [
-                      {
-                        "value": "item.id_asc",
-                        "caption": "Config.sortingPriorityCategoryItemIdAsc"
-                      },
-                      {
-                        "value": "item.id_desc",
-                        "caption": "Config.sortingPriorityCategoryItemIdDesc"
-                      },
-                      {
-                        "value": "texts.name_asc",
-                        "caption": "Config.sortingPriorityCategoryNameAsc"
-                      },
-                      {
-                        "value": "texts.name_desc",
-                        "caption": "Config.sortingPriorityCategoryNameDesc"
-                      },
-                      {
-                        "value": "sorting.price.avg_asc",
-                        "caption": "Config.sortingPriorityCategoryPriceAsc"
-                      },
-                      {
-                        "value": "sorting.price.avg_desc",
-                        "caption": "Config.sortingPriorityCategoryPriceDesc"
-                      },
-                      {
-                        "value": "variation.createdAt_desc",
-                        "caption": "Config.sortingPriorityCategoryVariationCreatedAtDesc"
-                      },
-                      {
-                        "value": "variation.createdAt_asc",
-                        "caption": "Config.sortingPriorityCategoryVariationCreatedAtAsc"
-                      },
-                      {
-                        "value": "variation.id_asc",
-                        "caption": "Config.sortingPriorityCategoryVariationIdAsc"
-                      },
-                      {
-                        "value": "variation.id_desc",
-                        "caption": "Config.sortingPriorityCategoryVariationIdDesc"
-                      },
-                      {
-                        "value": "variation.number_asc",
-                        "caption": "Config.sortingPriorityCategoryVariationNumberAsc"
-                      },
-                      {
-                        "value": "variation.number_desc",
-                        "caption": "Config.sortingPriorityCategoryVariationNumberDesc"
-                      },
-                      {
-                        "value": "variation.availability.averageDays_asc",
-                        "caption": "Config.sortingPriorityCategoryAvailabilityAsc"
-                      },
-                      {
-                        "value": "variation.availability.averageDays_desc",
-                        "caption": "Config.sortingPriorityCategoryAvailabilityDesc"
-                      },
-                      {
-                        "value": "variation.updatedAt_asc",
-                        "caption": "Config.sortingPriorityCategoryVariationUpdatedAtAsc"
-                      },
-                      {
-                        "value": "variation.updatedAt_desc",
-                        "caption": "Config.sortingPriorityCategoryVariationUpdatedAtDesc"
-                      },
-                      {
-                        "value": "variation.position_asc",
-                        "caption": "Config.sortingPriorityCategoryVariationPositionAsc"
-                      },
-                      {
-                        "value": "variation.position_desc",
-                        "caption": "Config.sortingPriorityCategoryVariationPositionDesc"
-                      },
-                      {
-                        "value": "item.manufacturer.externalName_asc",
-                        "caption": "Config.sortingPriorityCategoryManufacturerAsc"
-                      },
-                      {
-                        "value": "item.manufacturer.externalName_desc",
-                        "caption": "Config.sortingPriorityCategoryManufacturerDesc"
-                      },
-                      {
-                        "value": "item.manufacturer.position_asc",
-                        "caption": "Config.sortingPriorityCategoryManufacturerPositionAsc"
-                      },
-                      {
-                        "value": "item.manufacturer.position_desc",
-                        "caption": "Config.sortingPriorityCategoryManufacturerPositionDesc"
-                      },
-                      {
-                        "value": "stock.net_asc",
-                        "caption": "Config.sortingPriorityCategoryStockAsc"
-                      },
-                      {
-                        "value": "stock.net_desc",
-                        "caption": "Config.sortingPriorityCategoryStockDesc"
-                      },
-                      {
-                        "value": "item.random",
-                        "caption": "Config.sortDataRandom"
-                      }
-                    ]
-                  }
-              },
-              "item.lists.tag_sorting": {
-                  "type": "selectBox",
-                  "required": false,
-                  "deprecated": true,
-                  "label": "Config.itemListsTagSortingLabel",
-                  "options": {
-                      "defaultValue": "texts.name_asc",
-                      "selectBoxValues": [
-                        {
-                          "value": "item.id_asc",
-                          "caption": "Config.sortingPriorityCategoryItemIdAsc"
-                        },
-                        {
-                          "value": "item.id_desc",
-                          "caption": "Config.sortingPriorityCategoryItemIdDesc"
-                        },
-                        {
-                          "value": "texts.name_asc",
-                          "caption": "Config.sortingPriorityCategoryNameAsc"
-                        },
-                        {
-                          "value": "texts.name_desc",
-                          "caption": "Config.sortingPriorityCategoryNameDesc"
-                        },
-                        {
-                          "value": "sorting.price.avg_asc",
-                          "caption": "Config.sortingPriorityCategoryPriceAsc"
-                        },
-                        {
-                          "value": "sorting.price.avg_desc",
-                          "caption": "Config.sortingPriorityCategoryPriceDesc"
-                        },
-                        {
-                          "value": "variation.createdAt_desc",
-                          "caption": "Config.sortingPriorityCategoryVariationCreatedAtDesc"
-                        },
-                        {
-                          "value": "variation.createdAt_asc",
-                          "caption": "Config.sortingPriorityCategoryVariationCreatedAtAsc"
-                        },
-                        {
-                          "value": "variation.id_asc",
-                          "caption": "Config.sortingPriorityCategoryVariationIdAsc"
-                        },
-                        {
-                          "value": "variation.id_desc",
-                          "caption": "Config.sortingPriorityCategoryVariationIdDesc"
-                        },
-                        {
-                          "value": "variation.number_asc",
-                          "caption": "Config.sortingPriorityCategoryVariationNumberAsc"
-                        },
-                        {
-                          "value": "variation.number_desc",
-                          "caption": "Config.sortingPriorityCategoryVariationNumberDesc"
-                        },
-                        {
-                          "value": "variation.availability.averageDays_asc",
-                          "caption": "Config.sortingPriorityCategoryAvailabilityAsc"
-                        },
-                        {
-                          "value": "variation.availability.averageDays_desc",
-                          "caption": "Config.sortingPriorityCategoryAvailabilityDesc"
-                        },
-                        {
-                          "value": "variation.updatedAt_asc",
-                          "caption": "Config.sortingPriorityCategoryVariationUpdatedAtAsc"
-                        },
-                        {
-                          "value": "variation.updatedAt_desc",
-                          "caption": "Config.sortingPriorityCategoryVariationUpdatedAtDesc"
-                        },
-                        {
-                          "value": "variation.position_asc",
-                          "caption": "Config.sortingPriorityCategoryVariationPositionAsc"
-                        },
-                        {
-                          "value": "variation.position_desc",
-                          "caption": "Config.sortingPriorityCategoryVariationPositionDesc"
-                        },
-                        {
-                          "value": "item.manufacturer.externalName_asc",
-                          "caption": "Config.sortingPriorityCategoryManufacturerAsc"
-                        },
-                        {
-                          "value": "item.manufacturer.externalName_desc",
-                          "caption": "Config.sortingPriorityCategoryManufacturerDesc"
-                        },
-                        {
-                          "value": "item.manufacturer.position_asc",
-                          "caption": "Config.sortingPriorityCategoryManufacturerPositionAsc"
-                        },
-                        {
-                          "value": "item.manufacturer.position_desc",
-                          "caption": "Config.sortingPriorityCategoryManufacturerPositionDesc"
-                        },
-                        {
-                          "value": "stock.net_asc",
-                          "caption": "Config.sortingPriorityCategoryStockAsc"
-                        },
-                        {
-                          "value": "stock.net_desc",
-                          "caption": "Config.sortingPriorityCategoryStockDesc"
-                        },
-                        {
-                          "value": "item.random",
-                          "caption": "Config.sortDataRandom"
-                        }
-                      ]
+                "item.lists.cross_selling_sorting": {
+                    "type": "selectBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.itemListsCrossSellingSortingLabel",
+                    "options": {
+                        "defaultValue": "texts.name_asc",
+                        "selectBoxValues": [
+                            {
+                                "value": "item.id_asc",
+                                "caption": "Config.sortingPriorityCategoryItemIdAsc"
+                            },
+                            {
+                                "value": "item.id_desc",
+                                "caption": "Config.sortingPriorityCategoryItemIdDesc"
+                            },
+                            {
+                                "value": "texts.name_asc",
+                                "caption": "Config.sortingPriorityCategoryNameAsc"
+                            },
+                            {
+                                "value": "texts.name_desc",
+                                "caption": "Config.sortingPriorityCategoryNameDesc"
+                            },
+                            {
+                                "value": "sorting.price.avg_asc",
+                                "caption": "Config.sortingPriorityCategoryPriceAsc"
+                            },
+                            {
+                                "value": "sorting.price.avg_desc",
+                                "caption": "Config.sortingPriorityCategoryPriceDesc"
+                            },
+                            {
+                                "value": "variation.createdAt_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationCreatedAtDesc"
+                            },
+                            {
+                                "value": "variation.createdAt_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationCreatedAtAsc"
+                            },
+                            {
+                                "value": "variation.id_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationIdAsc"
+                            },
+                            {
+                                "value": "variation.id_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationIdDesc"
+                            },
+                            {
+                                "value": "variation.number_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationNumberAsc"
+                            },
+                            {
+                                "value": "variation.number_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationNumberDesc"
+                            },
+                            {
+                                "value": "variation.availability.averageDays_asc",
+                                "caption": "Config.sortingPriorityCategoryAvailabilityAsc"
+                            },
+                            {
+                                "value": "variation.availability.averageDays_desc",
+                                "caption": "Config.sortingPriorityCategoryAvailabilityDesc"
+                            },
+                            {
+                                "value": "variation.updatedAt_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationUpdatedAtAsc"
+                            },
+                            {
+                                "value": "variation.updatedAt_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationUpdatedAtDesc"
+                            },
+                            {
+                                "value": "variation.position_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationPositionAsc"
+                            },
+                            {
+                                "value": "variation.position_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationPositionDesc"
+                            },
+                            {
+                                "value": "item.manufacturer.externalName_asc",
+                                "caption": "Config.sortingPriorityCategoryManufacturerAsc"
+                            },
+                            {
+                                "value": "item.manufacturer.externalName_desc",
+                                "caption": "Config.sortingPriorityCategoryManufacturerDesc"
+                            },
+                            {
+                                "value": "item.manufacturer.position_asc",
+                                "caption": "Config.sortingPriorityCategoryManufacturerPositionAsc"
+                            },
+                            {
+                                "value": "item.manufacturer.position_desc",
+                                "caption": "Config.sortingPriorityCategoryManufacturerPositionDesc"
+                            },
+                            {
+                                "value": "stock.net_asc",
+                                "caption": "Config.sortingPriorityCategoryStockAsc"
+                            },
+                            {
+                                "value": "stock.net_desc",
+                                "caption": "Config.sortingPriorityCategoryStockDesc"
+                            },
+                            {
+                                "value": "item.random",
+                                "caption": "Config.sortDataRandom"
+                            }
+                        ]
+                    }
+                },
+                "item.lists.tag_sorting": {
+                    "type": "selectBox",
+                    "required": false,
+                    "deprecated": true,
+                    "label": "Config.itemListsTagSortingLabel",
+                    "options": {
+                        "defaultValue": "texts.name_asc",
+                        "selectBoxValues": [
+                            {
+                                "value": "item.id_asc",
+                                "caption": "Config.sortingPriorityCategoryItemIdAsc"
+                            },
+                            {
+                                "value": "item.id_desc",
+                                "caption": "Config.sortingPriorityCategoryItemIdDesc"
+                            },
+                            {
+                                "value": "texts.name_asc",
+                                "caption": "Config.sortingPriorityCategoryNameAsc"
+                            },
+                            {
+                                "value": "texts.name_desc",
+                                "caption": "Config.sortingPriorityCategoryNameDesc"
+                            },
+                            {
+                                "value": "sorting.price.avg_asc",
+                                "caption": "Config.sortingPriorityCategoryPriceAsc"
+                            },
+                            {
+                                "value": "sorting.price.avg_desc",
+                                "caption": "Config.sortingPriorityCategoryPriceDesc"
+                            },
+                            {
+                                "value": "variation.createdAt_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationCreatedAtDesc"
+                            },
+                            {
+                                "value": "variation.createdAt_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationCreatedAtAsc"
+                            },
+                            {
+                                "value": "variation.id_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationIdAsc"
+                            },
+                            {
+                                "value": "variation.id_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationIdDesc"
+                            },
+                            {
+                                "value": "variation.number_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationNumberAsc"
+                            },
+                            {
+                                "value": "variation.number_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationNumberDesc"
+                            },
+                            {
+                                "value": "variation.availability.averageDays_asc",
+                                "caption": "Config.sortingPriorityCategoryAvailabilityAsc"
+                            },
+                            {
+                                "value": "variation.availability.averageDays_desc",
+                                "caption": "Config.sortingPriorityCategoryAvailabilityDesc"
+                            },
+                            {
+                                "value": "variation.updatedAt_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationUpdatedAtAsc"
+                            },
+                            {
+                                "value": "variation.updatedAt_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationUpdatedAtDesc"
+                            },
+                            {
+                                "value": "variation.position_asc",
+                                "caption": "Config.sortingPriorityCategoryVariationPositionAsc"
+                            },
+                            {
+                                "value": "variation.position_desc",
+                                "caption": "Config.sortingPriorityCategoryVariationPositionDesc"
+                            },
+                            {
+                                "value": "item.manufacturer.externalName_asc",
+                                "caption": "Config.sortingPriorityCategoryManufacturerAsc"
+                            },
+                            {
+                                "value": "item.manufacturer.externalName_desc",
+                                "caption": "Config.sortingPriorityCategoryManufacturerDesc"
+                            },
+                            {
+                                "value": "item.manufacturer.position_asc",
+                                "caption": "Config.sortingPriorityCategoryManufacturerPositionAsc"
+                            },
+                            {
+                                "value": "item.manufacturer.position_desc",
+                                "caption": "Config.sortingPriorityCategoryManufacturerPositionDesc"
+                            },
+                            {
+                                "value": "stock.net_asc",
+                                "caption": "Config.sortingPriorityCategoryStockAsc"
+                            },
+                            {
+                                "value": "stock.net_desc",
+                                "caption": "Config.sortingPriorityCategoryStockDesc"
+                            },
+                            {
+                                "value": "item.random",
+                                "caption": "Config.sortDataRandom"
+                            }
+                        ]
                     }
                 },
                 "item.lists.1.list_type": {
@@ -1438,7 +1438,7 @@
                     "required": false,
                     "label": "Config.basketShowShippingCountrySelect",
                     "options": {
-                      "defaultValue": "true"
+                        "defaultValue": "true"
                     }
                 }
             }
@@ -2693,14 +2693,14 @@
                                 "value": "variationId_asc",
                                 "caption": "Config.sortingPriorityCategoryVariationIdAsc"
                             },
-                                                        {
+                            {
                                 "value": "variationId_desc",
                                 "caption": "Config.sortingPriorityCategoryVariationIdDesc"
                             }
                         ]
                     }
                 },
-                 "sorting.dynamicPrio2": {
+                "sorting.dynamicPrio2": {
                     "type": "selectBox",
                     "required": true,
                     "deprecated": true,
@@ -2748,7 +2748,7 @@
                                 "value": "variationId_asc",
                                 "caption": "Config.sortingPriorityCategoryVariationIdAsc"
                             },
-                                                        {
+                            {
                                 "value": "variationId_desc",
                                 "caption": "Config.sortingPriorityCategoryVariationIdDesc"
                             }
@@ -2826,7 +2826,7 @@
                     "deprecated": true,
                     "label": "Config.checkoutShowAllShippingProfiles",
                     "options": {
-                      "defaultValue": "false"
+                        "defaultValue": "false"
                     }
                 },
                 "my_account.confirmation_link_expiration": {
@@ -2837,12 +2837,12 @@
                         "defaultValue": "always",
                         "selectBoxValues": [
                             {
-                              "value": "always",
-                              "caption": "Config.myAccountConfirmationLinkExpirationAlways"
+                                "value": "always",
+                                "caption": "Config.myAccountConfirmationLinkExpirationAlways"
                             },
                             {
-                              "value": "30",
-                              "caption": "Config.myAccountConfirmationLinkExpirationThirtyDays"
+                                "value": "30",
+                                "caption": "Config.myAccountConfirmationLinkExpirationThirtyDays"
                             },
                             {
                                 "value": "90",
@@ -4397,6 +4397,202 @@
                                             "position": 1
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "gtin8.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.gtin8Mapping",
+                    "options": {
+                        "containerEntries": {
+                            "gtin8.mapping.gtin8": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.gtin8",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.gtin8NotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.gtin8SetFirst",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.gtin8Set",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
+                            "gtin8.mapping.gtin8ID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.gtin8ID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "gtin13.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.gtin13Mapping",
+                    "options": {
+                        "containerEntries": {
+                            "gtin13.mapping.gtin13": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.gtin13",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.gtin13NotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.gtin13SetFirst",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.gtin13Set",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
+                            "gtin13.mapping.gtin13ID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.gtin13ID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "isbn.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.isbnMapping",
+                    "options": {
+                        "containerEntries": {
+                            "isbn.mapping.isbn": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.isbn",
+                                "options": {
+                                    "defaultValue": "1",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.isbnNotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.isbnSetFirst",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.isbnSet",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
+                            "isbn.mapping.isbnID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.isbnID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "mpn.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.mpnMapping",
+                    "options": {
+                        "containerEntries": {
+                            "mpn.mapping.mpnID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.mpnID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "priceValidUntil.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.priceValidUntilMapping",
+                    "options": {
+                        "containerEntries": {
+                            "priceValidUntil.mapping.priceValidUntilID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.priceValidUntilID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "sku.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.skuMapping",
+                    "options": {
+                        "containerEntries": {
+                            "sku.mapping.sku": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.sku",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.skuVariationID",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.skuVariationNr",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.skuVarPropSet",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
+                            "sku.mapping.skuID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.skuID",
+                                "options": {
+                                    "defaultValue": ""
                                 }
                             }
                         }

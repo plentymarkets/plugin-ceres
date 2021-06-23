@@ -1,5 +1,65 @@
 # Release Notes for Ceres
 
+## v5.0.33 (2021-06-14) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.32...5.0.33" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- It is now possible to combine the two settings **Only load visible content** and **Preload image** in the image carousel widget.
+- The two widgets title bar and text negatively impacted the Cumulative Layout Shift value (Google Core Web Vitals), because the texts contained in the widgets were only rendered on the client's side. This has been changed.
+- The title of the navigation widget is now again rendered on the server's side (SSR). This improves the value of the Cumulative Layout Shift of the Google Core Web Vitals.
+- Unnecessary components for the My Account and checkout pages have been removed from the SSR bundle in order to decrease file size. We'd like to thank user @JVolke for their contribution.
+- The component `user-login-handler` is now rendered on the client's side. This prevents hydration errors when Server-Side Rendering (SSR) is active.
+- You can now set relationship attributes for links in the settings of the widgets list and link.
+
+### Fixed 
+
+- Changes to the appearance of text widgets could lead to the text no longer being displayed in the ShopBuilder. This has been fixed.
+- The entry "headerSearchPlaceholder" has been added to the multilingualism settings, which serves to add a custom placeholder text to the input field of the item search.
+- The image carousel widget did not display images of item variations. This has been fixed.
+- Vuex was not available in the window as long as Server Side Rendering was active. This has been fixed.
+- Due to an error, item lists of the type **Last seen** were incorrectly hydrated when Server-Side Rendering was active. This has been fixed.
+- Due to a missing quote mark, the variable `priceValidUntil` in the structured data was not recognised. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.33 we have made changes to a template file which are relevant for theme developers. You can find the changed template below. The link directs you to the effected changes in the corresponding file.
+- [resources/views/Widgets/Common/InlineTextWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2906/files#diff-e7dc3611e423358f168f99f3a60b6bfa3d2af686cfee952aca2e93ca91a3be62)
+- [resources/views/Widgets/Common/TitleBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2906/files#diff-91d4a3578417267035536ce9c72ca096a438ce5e7936d8edb1e0d3187bb69865)
+- [resources/views/Widgets/Navigation/NavigationTreeWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2906/files#diff-d694b4ace865b8e05bdad90a07c80f0687d865e0d3d1a82f8ffa614bee809157)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2908/files?diff=unified&w=1#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2903/files#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
+- [resources/views/Widgets/Common/ListWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2903/files#diff-52efec59835d97dc6c2ed6ae7c8b639056ccfaac681c3e425090d53796b13423)
+
+## v5.0.32 (2021-06-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.31...5.0.32" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- In the plentyShop assistant, the validity of the session cookie can now additionally be set to one hour or one day.
+- You can now activate the mapping of various barcodes (GTIN-8, GTIN-13, ISBN, and MPN), the price validity (priceValidUntil), and the SKU for the Rich Snippets of the single item view in the SEO settings of the plentyShop assistant and the Ceres settings.
+
+### Changed
+
+- Errors in server-side rendering of the Vue.js app can now be caught. In this case, the page is rendered client-side.
+- In the image carousel widget, the performance for loading linked item variations has been improved.
+
+### Fixed
+
+- The content of a text widget is no longer rendered on the server side (SSR) to prevent hydration errors.
+- The logic for scrolling fixed elements in the header has been adjusted. This improves the 'Cumulative Shift Layout' (CLS) value of the Google Core Web Vitals.
+- Under certain circumstances, the item list widget did not display images in ShopBuilder. This has been fixed.
+- Due to an error, server-side nested components could not be overwritten via `data-component`, which led to hydration errors. This has been fixed.
+- To run the Ceres assistant, plentymarkets users no longer require the user rights for the "Accounting" and "Order status" sections.
+- Due to an error, `window.ceresStore` could no longer be accessed in the AfterScriptsLoaded container. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.32 we have made changes to a template file which are relevant for theme developers. You can find the changed template below. The link directs you to the effected changes in the corresponding file.
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/2874/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/PageDesign/Partials/Header/Header.twig](https://github.com/plentymarkets/plugin-ceres/pull/2874/files#diff-f2a11c8bc92192c490363ceeb2b7e9a02819568c77971a10e43eedc93270014f)
+- [resources/views/Widgets/Category/ItemGridWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2881/files#diff-f0aaf1ea155523f16c664c97d4b8877ad9db66f705f85a59ebffc0a3834f2456)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2875/files#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/2879/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+  
 ## v5.0.31 (2021-05-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.30...5.0.31" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added

@@ -41,10 +41,28 @@
                     "name"          : "{{ brand }}"
                 },
 {% endif %}
+{% if sku | length  > 0 %}
+                "sku"           : "{{ sku }}",
+{% endif %}
+{% if gtin8 | length  > 0 %}
+                "gtin8"         : "{{ gtin8 }}",
+{% endif %}
+{% if gtin13 | length  > 0 %}
+                "gtin13"        : "{{ gtin13 }}",
+{% endif %}
+{% if isbn | length  > 0 %}
+                "isbn"          : "{{ isbn }}",
+{% endif %}
+{% if mpn | length  > 0 %}
+                "mpn"           : "{{ mpn }}",
+{% endif %}
                 "offers": {
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
                     "price"         : "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
+{% if priceValidUntil | length  > 0 %}
+                    "priceValidUntil": "{{ priceValidUntil }}",
+{% endif %}
                     "url"           : "{{ requestedVariationUrl }}",
 {% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification": {
@@ -59,8 +77,7 @@
                     },
 {% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
-                    "itemCondition" : "{{ itemData.item.condition.names.name }}",
-                    "serialNumber"  : "{{ itemData.variation.number }}"
+                    "itemCondition" : "{{ itemData.item.condition.names.name }}"
                 },
                 "depth": {
                     "@type"         : "QuantitativeValue",
