@@ -29,7 +29,7 @@ export default {
         {
             let mail = ""
 
-            this.$store.state.address.billingAddress.options?.forEach(option =>
+            this.$store.state.address.billingAddress?.options?.forEach(option =>
             {
                 if (option.typeId === ADDRESS_EMAIL_TYPE_ID)
                 {
