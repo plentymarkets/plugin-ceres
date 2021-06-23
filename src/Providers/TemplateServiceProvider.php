@@ -270,7 +270,15 @@ class TemplateServiceProvider extends ServiceProvider
                 'description' => 'Ceres::Template.consentGroupMediaDescription'
             ]
         );
-
+        
+        $consentRepository->registerConsentGroup(
+            'media',
+            'Ceres::Template.consentGroupMediaLabel',
+            [
+                'position' => 400,
+                'description' => 'Ceres::Template.consentGroupMediaDescription'
+            ]
+        );
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
         $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
@@ -371,6 +379,19 @@ class TemplateServiceProvider extends ServiceProvider
                 ]
             );
         }
+
+        $consentRepository->registerConsent(
+            'languageDetection',
+            'Spracherkennung',
+            [
+                'position' => 400,
+                'description' => 'bitte akzeptieren',
+                'provider' => 'wir',
+                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
+                'policyUrl' => 'Ceres::Template.consentReCaptchaPolicyUrl',
+                'group' => 'media'
+            ]
+        );
     }
 
     private function registerConfigValues()

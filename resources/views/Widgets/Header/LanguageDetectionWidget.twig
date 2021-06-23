@@ -3,7 +3,7 @@
 
 {% set customClass = widget.settings.customClass.mobile %}
 {% set appearance = widget.settings.appearance.mobile %}
-{% set redirect = widget.settings.redirect.mobile %}
+{% set redirect = widget.settings.redirect.mobile | default(false) %}
 
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
@@ -19,20 +19,18 @@
 {{ Twig.endfor() }}
 
 <div class="language-detection header-fw widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
-    <div class="container-max">
-        <div class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-            {% if isPreview %}
-                <div class="align-center">
-                    Language Detection
-                </div>
-            {% else %}
+    <div class="bg-appearance">
+        <div class="container-max">
+
             <language-detection
-                redirect="{{ redirect }}"
-                :texttranslations="{{ Twig.print('textTranslations | json_encode') }}"
-                :buttontranslations="{{ Twig.print('buttonTranslations | json_encode') }}"
+                class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"
+                {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}
+                :auto-redirect="{{ redirect | json_encode }}"
+                :text-translations="{{ Twig.print('textTranslations | json_encode') }}"
+                :button-translations="{{ Twig.print('buttonTranslations | json_encode') }}"
+                :language-map="{{ Twig.print("webstoreConfig.browserLanguage | json_encode") }}"
             >
             </language-detection>
-            {% endif %}
         </div>
     </div>
 </div>

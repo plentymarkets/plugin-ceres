@@ -1,62 +1,117 @@
 <template>
-  <div v-if="languageText" class="row py-2">
-    <div class="col-md-8">{{ languageText }}</div>
-    <div class="col-md-4 text-right">
-      <a :href="languageRedirect" :class="'btn btn-sm btn-appearance'">{{ buttonText }}</a>
-      <a href="#" @click="deactivateRedirection" class="m-sm-1"><i class="fa fa-close"></i></a>
+    <div v-if="targetLang" class="d-flex py-2">
+        <div class="align-self-center mr-auto">{{ textTranslations[targetLang] }}</div>
+
+        <div class="align-self-center text-nowrap">
+            <a :href="redirectUrl" :class="'btn btn-sm btn-appearance'">
+                {{ buttonTranslations[targetLang] }}
+            </a>
+            <a href="#" @click="refuseRedirect()" class="m-sm-1">
+                <i class="fa fa-fw fa-close"></i>
+            </a>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        languageText: '',
-        buttonText: '',
-        languageRedirect: '',
-        textLanguages: ''
-      }
-    },
-    props: ["redirect", "texttranslations", "buttontranslations"],
-    mounted() {
-      this.initializeComponent()
-    },
-    methods: {
-      initializeComponent() {
+import { navigateTo } from "../../services/UrlService";
+export default {
+    name: "language-detection",
 
-        for (let i = 0; i < window.navigator.languages.length; i++) {
-          const langObject= window.navigator.languages[i].split('-')
-          const linkTag = document.querySelector('link[hreflang="' + langObject[0] +'"]')
+    data()
+    {
+        return {
+            redirectUrl: null,
+            targetLang: null
+        };
+    },
 
-          if (App.language !== langObject[0] && linkTag) {
-            if (this.$props.redirect){
-              if (!window.localStorage.getItem('redirectActive')){
-                window.localStorage.setItem('redirectActive', true);
-                window.location.href = linkTag.getAttribute('href')
-              }
-            } else if (!window.localStorage.getItem('redirectDeactivated')) {
-              window.localStorage.removeItem('redirectActive');
-              this.setText(langObject[0]);
-              this.setButton(langObject[0]);
-              this.languageRedirect = linkTag.getAttribute('href')
-              break;
-            }
-          }
+    props:
+    {
+        autoRedirect: Boolean,
+        textTranslations: {
+            type: Object,
+            default: () => {}
+        },
+        buttonTranslations: {
+            type: Object,
+            default: () => {}
+        },
+        languageMap: {
+            type: Object,
+            default: () => {}
         }
-      },
-      deactivateRedirection() {
-        this.languageText = null;
-        window.localStorage.setItem('redirectDeactivated', true);
-      },
-      setText(lang) {
-        const textLangObj = JSON.parse(JSON.stringify(this.$props.texttranslations));
-        this.languageText = textLangObj[lang];
-      },
-      setButton(lang) {
-        const buttonLangObj = JSON.parse(JSON.stringify(this.$props.buttontranslations));
-        this.buttonText = buttonLangObj[lang];
-      }
-    }
-  }
+    },
+
+    computed:
+    {
+        browserLanguages()
+        {
+            if (!window)
+            {
+                return [];
+            }
+
+            return [
+                ...new Set(
+                    window.navigator.languages.map(
+                        (language) => language.split("-")[0]
+                    )
+                ),
+            ];
+        },
+    },
+
+    beforeMount()
+    {
+        if (!App.isShopBuilder)
+        {
+            if (!window.localStorage.getItem('redirectDeactivated'))
+            {
+                this.initialize();
+            }
+        }
+    },
+
+    methods: {
+        initialize()
+        {
+            for (const browserLanguage of this.browserLanguages())
+            {
+                // exclude current language and check if the language has a mapped target language
+                if (browserLanguage !== App.language && this.languageMap[browserLanguage])
+                {
+                    this.redirectUrl = this.getLanguageUrl(browserLanguage);
+
+                    if (this.redirectUrl)
+                    {
+                        // if a redirect url was found and the auto redirect is enabled, navigate to the redirectUrl
+                        if (this.autoRedirect)
+                        {
+                            navigateTo(this.redirectUrl);
+                        }
+                        else
+                        {
+                            this.targetLang = browserLanguage;
+                        }
+                        break;
+                    }
+                }
+            }
+        },
+
+        getLanguageUrl(language)
+        {
+            return document
+                .querySelector(`link[hreflang="${language}"]`)
+                ?.getAttribute("href");
+        },
+
+        refuseRedirect()
+        {
+            this.targetLang = null;
+            window.localStorage.setItem("redirectDeactivated", true);
+        }
+    },
+};
 </script>
