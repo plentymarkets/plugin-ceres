@@ -16,6 +16,8 @@
 <script>
 import { navigateTo } from "../../services/UrlService";
 export default {
+    name: "language-detection",
+
     data()
     {
         return {
@@ -23,6 +25,7 @@ export default {
             targetLang: null
         };
     },
+
     props:
     {
         autoRedirect: Boolean,
@@ -59,7 +62,7 @@ export default {
         },
     },
 
-    mounted()
+    beforeMount()
     {
         if (!App.isShopBuilder)
         {
