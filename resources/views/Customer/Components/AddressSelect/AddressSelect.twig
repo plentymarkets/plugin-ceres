@@ -53,7 +53,7 @@
                         @click="toggleDropdown($event)"
                         title="{{ trans("Ceres::Template.addressChangeTooltip") }}"
                         class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down mt-2 d-block"
-                        v-if="!isAddressListEmpty && addressList.length >= 1" :disabled="isBasketLoading || isCheckoutReadonly"
+                        v-if="shouldShowEditAddressButton" :disabled="isBasketLoading || isCheckoutReadonly"
                         {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-open'\"") | raw }}
                     >
                         <span>{{ trans("Ceres::Template.addressChange") }}</span>
