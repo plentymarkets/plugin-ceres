@@ -236,7 +236,10 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $priceValidUntilMappingId = $this->ceresConfig->seo->priceValidUntilMappingId;
         if ($priceValidUntilMappingId > 0) {
             $orgDate = $this->getVariationProperty($itemData['variationProperties'], $priceValidUntilMappingId);
-            $this->priceValidUntil = date("Y-m-d", strtotime($orgDate));
+            if(strlen($orgDate)) {
+                $orgDate = date("Y-m-d", strtotime($orgDate));
+            }
+            $this->priceValidUntil = $orgDate;
         }
 
         $skuMapping = $this->ceresConfig->seo->skuMapping;
