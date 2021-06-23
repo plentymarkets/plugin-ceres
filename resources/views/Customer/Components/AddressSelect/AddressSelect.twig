@@ -37,7 +37,7 @@
                         v-tooltip
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="{{ trans("Ceres::Template.addressAddAddress") }}"
+                        title="{{ trans("Ceres::Template.addressAddAddressTooltip") }}"
                         class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down d-block"
                         v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly"
                         {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-add'\"") | raw }}
@@ -51,9 +51,9 @@
                         data-toggle="tooltip"
                         data-placement="bottom"
                         @click="toggleDropdown($event)"
-                        title="{{ trans("Ceres::Template.addressChange") }}"
+                        title="{{ trans("Ceres::Template.addressChangeTooltip") }}"
                         class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down mt-2 d-block"
-                        v-if="isAddAddressEnabled && !isAddressListEmpty && !(addressType === '2' && addressList.length === 1)" :disabled="isBasketLoading || isCheckoutReadonly"
+                        v-if="!isAddressListEmpty && addressList.length >= 1" :disabled="isBasketLoading || isCheckoutReadonly"
                         {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-open'\"") | raw }}
                     >
                         <span>{{ trans("Ceres::Template.addressChange") }}</span>
