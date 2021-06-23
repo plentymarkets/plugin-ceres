@@ -1549,6 +1549,55 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+var ADDRESS_EMAIL_TYPE_ID = 5;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "mail-changed-info",
+  props: {
+    userMail: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    showMailChanged: function showMailChanged() {
+      return this.billingAddressMail !== this.userMail;
+    },
+    billingAddressMail: function billingAddressMail() {
+      var _this$$store$state$ad, _this$$store$state$ad2;
+
+      var mail = "";
+      (_this$$store$state$ad = this.$store.state.address.billingAddress) === null || _this$$store$state$ad === void 0 ? void 0 : (_this$$store$state$ad2 = _this$$store$state$ad.options) === null || _this$$store$state$ad2 === void 0 ? void 0 : _this$$store$state$ad2.forEach(function (option) {
+        if (option.typeId === ADDRESS_EMAIL_TYPE_ID) {
+          mail = option.value;
+        }
+      });
+      return mail;
+    },
+    isGuest: function isGuest() {
+      return !this.$store.getters.isLoggedIn;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/list/BasketList.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/list/BasketList.vue?vue&type=script&lang=js& ***!
@@ -3319,6 +3368,65 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -41527,6 +41635,45 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.showMailChanged && !_vm.isGuest
+    ? _c("div", { staticClass: "mail-changed-info alert alert-info w-100" }, [
+        _vm._ssrNode(
+          _vm._ssrEscape(
+            "\n    " +
+              _vm._s(
+                _vm.$translate("Ceres::Template.checkoutChangedMail", {
+                  newMail: _vm.billingAddressMail,
+                  currMail: _vm.userMail
+                })
+              ) +
+              "\n"
+          )
+        )
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/list/BasketList.vue?vue&type=template&id=354088c4&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/list/BasketList.vue?vue&type=template&id=354088c4& ***!
@@ -42876,6 +43023,62 @@ var render = function() {
         ? [
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
+                _vm.isInOptionalFields("de", "delivery_address.email")
+                  ? _vm._ssrNode(
+                      '<div class="col-12">',
+                      "</div>",
+                      [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "delivery_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'delivery_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit mb-0",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="packing-station-de-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "de",
+                                      "delivery_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        ),
+                        _vm._ssrNode(" <hr>")
+                      ],
+                      2
+                    )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._ssrNode(" "),
+            _vm._ssrNode('<div class="col-12">', "</div>", [
+              _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("de", "delivery_address.salutation")
                   ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
                       _c(
@@ -43467,6 +43670,62 @@ var render = function() {
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "1"
         ? [
+            _vm._ssrNode('<div class="col-12">', "</div>", [
+              _vm._ssrNode('<div class="row">', "</div>", [
+                _vm.isInOptionalFields("de", "billing_address.email")
+                  ? _vm._ssrNode(
+                      '<div class="col-12">',
+                      "</div>",
+                      [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "billing_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'billing_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit mb-0",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="billing-address-de-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "de",
+                                      "billing_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        ),
+                        _vm._ssrNode(" <hr>")
+                      ],
+                      2
+                    )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._ssrNode(" "),
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("de", "billing_address.salutation")
@@ -44201,6 +44460,62 @@ var render = function() {
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "1"
         ? [
+            _vm._ssrNode('<div class="col-12">', "</div>", [
+              _vm._ssrNode('<div class="row">', "</div>", [
+                _vm.isInOptionalFields("gb", "billing_address.email")
+                  ? _vm._ssrNode(
+                      '<div class="col-12">',
+                      "</div>",
+                      [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "billing_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'billing_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit mb-0",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="billing-address-gb-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "gb",
+                                      "billing_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        ),
+                        _vm._ssrNode(" <hr>")
+                      ],
+                      2
+                    )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._ssrNode(" "),
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("gb", "billing_address.salutation")
@@ -44956,6 +45271,62 @@ var render = function() {
         ? [
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
+                _vm.isInOptionalFields("de", "delivery_address.email")
+                  ? _vm._ssrNode(
+                      '<div class="col-12">',
+                      "</div>",
+                      [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "delivery_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'delivery_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit mb-0",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="delivery-address-de-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "de",
+                                      "delivery_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        ),
+                        _vm._ssrNode(" <hr>")
+                      ],
+                      2
+                    )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._ssrNode(" "),
+            _vm._ssrNode('<div class="col-12">', "</div>", [
+              _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("de", "delivery_address.salutation")
                   ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
                       _c(
@@ -45602,6 +45973,62 @@ var render = function() {
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "2"
         ? [
+            _vm._ssrNode('<div class="col-12">', "</div>", [
+              _vm._ssrNode('<div class="row">', "</div>", [
+                _vm.isInOptionalFields("gb", "delivery_address.email")
+                  ? _vm._ssrNode(
+                      '<div class="col-12">',
+                      "</div>",
+                      [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "delivery_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'delivery_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit mb-0",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="delivery-address-gb-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "gb",
+                                      "delivery_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        ),
+                        _vm._ssrNode(" <hr>")
+                      ],
+                      2
+                    )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._ssrNode(" "),
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("gb", "delivery_address.salutation")
@@ -60142,10 +60569,10 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*!*********************************************************!*\
   !*** ./node_modules/vue-template-compiler/package.json ***!
   \*********************************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
+/*! exports provided: name, version, description, main, unpkg, jsdelivr, browser, types, repository, keywords, author, license, bugs, homepage, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/home/jenkins/workspace/Ceres_Build_Stable\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/home/jenkins/workspace/Ceres_Build_Stable\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
+module.exports = JSON.parse("{\"name\":\"vue-template-compiler\",\"version\":\"2.6.12\",\"description\":\"template compiler for Vue 2.0\",\"main\":\"index.js\",\"unpkg\":\"browser.js\",\"jsdelivr\":\"browser.js\",\"browser\":\"browser.js\",\"types\":\"types/index.d.ts\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"keywords\":[\"vue\",\"compiler\"],\"author\":\"Evan You\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"dependencies\":{\"he\":\"^1.1.0\",\"de-indent\":\"^1.0.2\"},\"devDependencies\":{\"vue\":\"file:../..\"}}");
 
 /***/ }),
 
@@ -73636,6 +74063,9 @@ function createApp(options, store) {
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("basket-totals", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/basket/BasketTotals.vue */ "./resources/js/src/app/components/basket/BasketTotals.vue"));
   });
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("mail-changed-info", function () {
+    return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/basket/MailChangedInfo.vue */ "./resources/js/src/app/components/basket/MailChangedInfo.vue"));
+  });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("coupon", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/basket/Coupon.vue */ "./resources/js/src/app/components/basket/Coupon.vue"));
   });
@@ -73818,7 +74248,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c16c9aae"
+  "e6869f52"
   
 )
 
@@ -73885,7 +74315,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2928f6b8"
+  "2c2e47b6"
   
 )
 
@@ -73952,7 +74382,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "549c7d38"
+  "1e5ff014"
   
 )
 
@@ -74019,7 +74449,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4fe4dd7a"
+  "a0b99f1e"
   
 )
 
@@ -74086,7 +74516,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "32dc0b58"
+  "09e21402"
   
 )
 
@@ -74127,6 +74557,73 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/src/app/components/basket/MailChangedInfo.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/MailChangedInfo.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MailChangedInfo.vue?vue&type=template&id=2e21aa14& */ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&");
+/* harmony import */ var _MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MailChangedInfo.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  "1b0ddec2"
+  
+)
+
+component.options.__file = "resources/js/src/app/components/basket/MailChangedInfo.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MailChangedInfo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MailChangedInfo.vue?vue&type=template&id=2e21aa14& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/src/app/components/basket/list/BasketList.vue":
 /*!********************************************************************!*\
   !*** ./resources/js/src/app/components/basket/list/BasketList.vue ***!
@@ -74153,7 +74650,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "45df8fd2"
+  "ac91bbae"
   
 )
 
@@ -74220,7 +74717,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5ba57e4a"
+  "47c50f5c"
   
 )
 
@@ -74287,7 +74784,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4963931c"
+  "681c9584"
   
 )
 
@@ -74354,7 +74851,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "614967c1"
+  "786e075a"
   
 )
 
@@ -74421,7 +74918,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4a0aeed9"
+  "377dec87"
   
 )
 
@@ -74488,7 +74985,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "79d80d5c"
+  "d6135824"
   
 )
 
@@ -74554,7 +75051,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "20825c00"
+  "54ee64ae"
   
 )
 
@@ -74603,7 +75100,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "edaf304e"
+  "23500af2"
   
 )
 
@@ -74670,7 +75167,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13703946"
+  "79cc98d8"
   
 )
 
@@ -74737,7 +75234,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "52d46b96"
+  "ccf0f0b0"
   
 )
 
@@ -74804,7 +75301,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bc779dba"
+  "31749751"
   
 )
 
@@ -74870,7 +75367,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6eb0ebaf"
+  "9537f07e"
   
 )
 
@@ -74918,7 +75415,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78b663ba"
+  "812d0068"
   
 )
 
@@ -74967,7 +75464,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "22f08b04"
+  "8a79c79c"
   
 )
 
@@ -75034,7 +75531,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a0b9a068"
+  "ea38b30c"
   
 )
 
@@ -75101,7 +75598,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a967903"
+  "56b60a15"
   
 )
 
@@ -75168,7 +75665,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "70bd5a6c"
+  "0636005c"
   
 )
 
@@ -75235,7 +75732,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8cd84c68"
+  "f38a7844"
   
 )
 
@@ -75302,7 +75799,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "56b924e1"
+  "d108301a"
   
 )
 
@@ -75369,7 +75866,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7e90ee8f"
+  "71890b86"
   
 )
 
@@ -75439,7 +75936,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "3e2bc388"
+  "2a4b549a"
   
 )
 
@@ -75506,7 +76003,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1da292ec"
+  "f5a08990"
   
 )
 
@@ -75573,7 +76070,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "18226cbe"
+  "5ed588d0"
   
 )
 
@@ -75640,7 +76137,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a5e1b6cc"
+  "cafbbb70"
   
 )
 
@@ -75707,7 +76204,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1e085ead"
+  "9bed394a"
   
 )
 
@@ -75774,7 +76271,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6ce02add"
+  "f0031d22"
   
 )
 
@@ -75841,7 +76338,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6bab76bc"
+  "08bef234"
   
 )
 
@@ -75908,7 +76405,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a6ccb670"
+  "0943eef6"
   
 )
 
@@ -75975,7 +76472,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "04d21037"
+  "4730a136"
   
 )
 
@@ -76042,7 +76539,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "52b31490"
+  "d91450bc"
   
 )
 
@@ -76109,7 +76606,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6c8732f2"
+  "f0b50cf8"
   
 )
 
@@ -76176,7 +76673,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "578b3acf"
+  "bf947306"
   
 )
 
@@ -76243,7 +76740,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f50a4114"
+  "152b45a4"
   
 )
 
@@ -76310,7 +76807,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "404b2c00"
+  "fde421dc"
   
 )
 
@@ -76377,7 +76874,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4a35a417"
+  "16dc8e29"
   
 )
 
@@ -76444,7 +76941,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "12ff22f6"
+  "3d338a97"
   
 )
 
@@ -76511,7 +77008,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "786b7690"
+  "451260a2"
   
 )
 
@@ -76578,7 +77075,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "235b687f"
+  "89a40ca6"
   
 )
 
@@ -76645,7 +77142,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "41dad843"
+  "2dfa6955"
   
 )
 
@@ -76712,7 +77209,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a144722"
+  "7b2c349d"
   
 )
 
@@ -76779,7 +77276,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4a3c52e4"
+  "1ba499a0"
   
 )
 
@@ -76846,7 +77343,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "47513d70"
+  "00b10a14"
   
 )
 
@@ -76913,7 +77410,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5268a004"
+  "1f763bac"
   
 )
 
@@ -76980,7 +77477,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "33962bee"
+  "9a4857ca"
   
 )
 
@@ -77047,7 +77544,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "20fa8308"
+  "7f3324aa"
   
 )
 
@@ -77114,7 +77611,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78dc3f1e"
+  "7cf26a68"
   
 )
 
@@ -77181,7 +77678,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "81f67452"
+  "56d75705"
   
 )
 
@@ -77248,7 +77745,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6dafe6b2"
+  "77b70539"
   
 )
 
@@ -77315,7 +77812,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "820a3884"
+  "4bcdab60"
   
 )
 
@@ -77382,7 +77879,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "505a724a"
+  "11472a5c"
   
 )
 
@@ -77449,7 +77946,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "59b20618"
+  "1bd188a2"
   
 )
 
@@ -77516,7 +78013,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bc98c7c4"
+  "79493b4c"
   
 )
 
@@ -77583,7 +78080,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "ce469ee4"
+  "2cddb53c"
   
 )
 
@@ -77650,7 +78147,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "057dd0c2"
+  "1a1e6320"
   
 )
 
@@ -77717,7 +78214,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "07c5366f"
+  "183670fe"
   
 )
 
@@ -77784,7 +78281,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "168908ad"
+  "51147e82"
   
 )
 
@@ -77851,7 +78348,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f10bfc6c"
+  "37b76810"
   
 )
 
@@ -77918,7 +78415,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "770a4219"
+  "524ab8c7"
   
 )
 
@@ -77985,7 +78482,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "42a4c344"
+  "174c99f0"
   
 )
 
@@ -78052,7 +78549,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a113027"
+  "57842dd5"
   
 )
 
@@ -78119,7 +78616,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "24bbce74"
+  "4c7cac50"
   
 )
 
@@ -78186,7 +78683,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f2c148a6"
+  "4a48cb5b"
   
 )
 
@@ -78253,7 +78750,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "619edc1c"
+  "d1322bc0"
   
 )
 
@@ -78320,7 +78817,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2fff72a5"
+  "705bf85a"
   
 )
 
@@ -78387,7 +78884,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1116cb8b"
+  "dfb9f08e"
   
 )
 
@@ -78454,7 +78951,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "11832a87"
+  "2dce6c96"
   
 )
 
@@ -78521,7 +79018,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0e9dcd78"
+  "29bc140a"
   
 )
 
@@ -78588,7 +79085,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "285270a0"
+  "8ffa5264"
   
 )
 
@@ -78655,7 +79152,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78e363cf"
+  "10b5f4fd"
   
 )
 
@@ -78722,7 +79219,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "79f3f37d"
+  "11c684ab"
   
 )
 
@@ -78789,7 +79286,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5d298e51"
+  "c883883a"
   
 )
 
@@ -78856,7 +79353,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2ddfec13"
+  "d9e1027e"
   
 )
 
@@ -78923,7 +79420,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bb3cc918"
+  "e2fda6f4"
   
 )
 
@@ -78990,7 +79487,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "851ef0e6"
+  "13e0f9c2"
   
 )
 
@@ -79057,7 +79554,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "95573bd8"
+  "1a83f4c2"
   
 )
 
@@ -79124,7 +79621,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4483a20b"
+  "112a8c1d"
   
 )
 
@@ -79191,7 +79688,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7ccb3c72"
+  "0a44ed75"
   
 )
 

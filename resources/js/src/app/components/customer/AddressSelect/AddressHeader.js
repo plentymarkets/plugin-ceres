@@ -17,6 +17,7 @@ export default Vue.component("address-header", {
             default: () =>
             {
                 return [
+                    "email",
                     "title",
                     "contactPerson",
                     "name1",

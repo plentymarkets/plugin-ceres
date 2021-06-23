@@ -1009,6 +1009,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2179,6 +2238,68 @@ var render = function() {
         ? [
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "delivery_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "delivery_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'delivery_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit mb-0",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "packing-station-de-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "de",
+                                  "delivery_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("hr")
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
                 _vm.isInOptionalFields("de", "delivery_address.salutation")
                   ? _c("div", { staticClass: "col-12 col-sm-4" }, [
                       _c(
@@ -3034,6 +3155,68 @@ var render = function() {
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "1"
         ? [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "billing_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "billing_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'billing_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit mb-0",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "billing-address-de-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "de",
+                                  "billing_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("hr")
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
                 _vm.isInOptionalFields("de", "billing_address.salutation")
@@ -3964,6 +4147,68 @@ var render = function() {
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "1"
         ? [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("gb", "billing_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "gb",
+                                "billing_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('gb', 'billing_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit mb-0",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "billing-address-gb-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "gb",
+                                  "billing_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("hr")
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
                 _vm.isInOptionalFields("gb", "billing_address.salutation")
@@ -4898,6 +5143,68 @@ var render = function() {
         ? [
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "delivery_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "delivery_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'delivery_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit mb-0",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "delivery-address-de-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "de",
+                                  "delivery_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("hr")
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
                 _vm.isInOptionalFields("de", "delivery_address.salutation")
                   ? _c("div", { staticClass: "col-12 col-sm-4" }, [
                       _c(
@@ -5763,6 +6070,68 @@ var render = function() {
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "2"
         ? [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("gb", "delivery_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "gb",
+                                "delivery_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('gb', 'delivery_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit mb-0",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "delivery-address-gb-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "gb",
+                                  "delivery_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("hr")
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
                 _vm.isInOptionalFields("gb", "delivery_address.salutation")
