@@ -132,6 +132,14 @@ export default Vue.component("address-select", {
             return this.optionalAddressFields[countryKey].includes(`${addressKey}.salutation`);
         },
 
+        shouldShowEditAddressButton()
+        {
+            // filters addresses like "Same as billing address"
+            const realAddressList = this.addressList?.filter((address) => address.id >= 0);
+
+            return realAddressList && realAddressList.length > 0;
+        },
+
         addressTypePrefix()
         {
             return parseInt(this.addressType) === 1 ? "billing-" : "delivery-";
