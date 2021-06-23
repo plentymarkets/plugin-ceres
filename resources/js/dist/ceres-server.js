@@ -12970,6 +12970,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "language-detection",
   data: function data() {
     return {
       redirectUrl: null,
@@ -13002,16 +13003,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       })));
     }
   },
-  created: function created() {
-    // maybe not the smarted solution to prevent CLS
-    this.targetLang = "en";
-  },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     if (!App.isShopBuilder) {
       if (!window.localStorage.getItem('redirectDeactivated')) {
         this.initialize();
-      } else {
-        this.targetLang = null;
       }
     }
   },
@@ -53629,7 +53624,7 @@ var render = function() {
                 _vm._s(_vm.buttonTranslations[_vm.targetLang]) +
                 "\n        "
             ) +
-            '</a> <a href="#" class="m-sm-1"><i class="fa fa-close"></i></a></div>'
+            '</a> <a href="#" class="m-sm-1"><i class="fa fa-fw fa-close"></i></a></div>'
         )
       ])
     : _vm._e()
