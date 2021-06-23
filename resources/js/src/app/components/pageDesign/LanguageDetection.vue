@@ -76,7 +76,7 @@ export default {
     methods: {
         initialize()
         {
-            for (const browserLanguage of this.browserLanguages())
+            for (const browserLanguage of this.browserLanguages)
             {
                 // exclude current language and check if the language has a mapped target language
                 if (browserLanguage !== App.language && this.languageMap[browserLanguage])

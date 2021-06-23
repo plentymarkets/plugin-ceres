@@ -3937,7 +3937,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   methods: {
     initialize: function initialize() {
-      var _iterator = _createForOfIteratorHelper(this.browserLanguages()),
+      var _iterator = _createForOfIteratorHelper(this.browserLanguages),
           _step;
 
       try {
