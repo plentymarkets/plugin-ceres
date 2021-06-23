@@ -175,8 +175,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $gtinMapping = $this->ceresConfig->seo->gtinMapping;
         $gtinMappingId = $this->ceresConfig->seo->gtinMappingId;
         if ($gtinMapping == 2) {
-            $barcodeValue = 'GTIN';
-            $this->gtin = $this->getFirstBarcode($barcodeValue,$itemData['barcodes']);
+            $barcodeType = 'GTIN';
+            $this->gtin = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($gtinMapping == 3) {
             $this->gtin = $this->getBarcodeWithId($gtinMappingId, $itemData['barcodes']);
         }
@@ -184,8 +184,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $gtin8Mapping = $this->ceresConfig->seo->gtin8Mapping;
         $gtin8MappingId = $this->ceresConfig->seo->gtin8MappingId;
         if ($gtin8Mapping == 2) {
-            $barcodeValue = "GTIN_8";
-            $this->gtin8 = $this->getFirstBarcode($barcodeValue,$itemData['barcodes']);
+            $barcodeType = "GTIN_8";
+            $this->gtin8 = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($gtin8Mapping == 3) {
             $this->gtin8 = $this->getBarcodeWithId($gtin8MappingId,$itemData['barcodes']);
         }
@@ -193,8 +193,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $gtin13Mapping = $this->ceresConfig->seo->gtin13Mapping;
         $gtin13MappingId = $this->ceresConfig->seo->gtin13MappingId;
         if ($gtin13Mapping == 2) {
-            $barcodeValue = "GTIN_13";
-            $this->gtin13 = $this->getFirstBarcode($barcodeValue,$itemData['barcodes']);
+            $barcodeType = "GTIN_13";
+            $this->gtin13 = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($gtin13Mapping == 3) {
             $this->gtin13 = $this->getBarcodeWithId($gtin13MappingId,$itemData['barcodes']);
         }
@@ -202,8 +202,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $isbnMapping = $this->ceresConfig->seo->isbnMapping;
         $isbnMappingId = $this->ceresConfig->seo->isbnMappingId;
         if ($isbnMapping == 2) {
-            $barcodeValue = "ISBN";
-            $this->isbn = $this->getFirstBarcode($barcodeValue,$itemData['barcodes']);
+            $barcodeType = "ISBN";
+            $this->isbn = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($isbnMapping == 3) {
             $this->isbn = $this->getBarcodeWithId($isbnMappingId,$itemData['barcodes']);
         }
@@ -299,10 +299,10 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         return $variationProperty;
     }
 
-    private function getFirstBarcode($barcodeValue,$barcodes){
+    private function getFirstBarcode($barcodes, $barcodeType){
         $barcode = '';
         foreach ($barcodes as $property) {
-            if ($property['type'] == $barcodeValue && $this->isWebshopReferrer($property['referrers'])) {
+            if ($property['type'] == $barcodeType && $this->isWebshopReferrer($property['referrers'])) {
                 $barcode = $property['code'];
                 break;
             }
@@ -310,7 +310,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         return $barcode;
     }
 
-    private function getBarcodeWithId($barcodeMappingId, $barcodes){
+    private function getBarcodeWithId($barcodes, $barcodeMappingId){
         $barcode = '';
         foreach ($barcodes as $property) {
             if ($property['id'] == $barcodeMappingId) {
