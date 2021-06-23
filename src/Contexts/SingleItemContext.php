@@ -174,86 +174,38 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $gtinMapping = $this->ceresConfig->seo->gtinMapping;
         $gtinMappingId = $this->ceresConfig->seo->gtinMappingId;
-        $propertyGtin = '';
         if ($gtinMapping == 2) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['type'] == 'GTIN' && $this->isWebshopReferrer($property['referrers'])) {
-                    $propertyGtin = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin = $propertyGtin;
+            $barcodeValue = 'GTIN';
+            $this->gtin = $this->getFirstBarcode($barcodeValue,$itemData['barcodes']);
         } elseif ($gtinMapping == 3) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['id'] == $gtinMappingId) {
-                    $propertyGtin = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin = $propertyGtin;
+            $this->gtin = $this->getBarcodeWithId($gtinMappingId, $itemData['barcodes']);
         }
 
         $gtin8Mapping = $this->ceresConfig->seo->gtin8Mapping;
         $gtin8MappingId = $this->ceresConfig->seo->gtin8MappingId;
-        $propertyGtin8 = '';
         if ($gtin8Mapping == 2) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['type'] == 'GTIN_8' && $this->isWebshopReferrer($property['referrers'])) {
-                    $propertyGtin8 = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin8 = $propertyGtin8;
+            $barcodeValue = "GTIN_8";
+            $this->gtin8 = $this->getFirstBarcode($barcodeValue,$itemData['barcodes']);
         } elseif ($gtin8Mapping == 3) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['id'] == $gtin8MappingId) {
-                    $propertyGtin8 = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin8 = $propertyGtin8;
+            $this->gtin8 = $this->getBarcodeWithId($gtin8MappingId,$itemData['barcodes']);
         }
 
         $gtin13Mapping = $this->ceresConfig->seo->gtin13Mapping;
         $gtin13MappingId = $this->ceresConfig->seo->gtin13MappingId;
-        $propertyGtin13 = '';
         if ($gtin13Mapping == 2) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['type'] == 'GTIN_13' && $this->isWebshopReferrer($property['referrers'])) {
-                    $propertyGtin13 = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin13 = $propertyGtin13;
+            $barcodeValue = "GTIN_13";
+            $this->gtin13 = $this->getFirstBarcode($barcodeValue,$itemData['barcodes']);
         } elseif ($gtin13Mapping == 3) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['id'] == $gtin13MappingId) {
-                    $propertyGtin13 = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin13 = $propertyGtin13;
+            $this->gtin13 = $this->getBarcodeWithId($gtin13MappingId,$itemData['barcodes']);
         }
 
         $isbnMapping = $this->ceresConfig->seo->isbnMapping;
         $isbnMappingId = $this->ceresConfig->seo->isbnMappingId;
-        $propertyIsbn = '';
         if ($isbnMapping == 2) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['type'] == 'ISBN' && $this->isWebshopReferrer($property['referrers'])) {
-                    $propertyIsbn = $property['code'];
-                    break;
-                }
-            }
-            $this->isbn = $propertyIsbn;
+            $barcodeValue = "ISBN";
+            $this->isbn = $this->getFirstBarcode($barcodeValue,$itemData['barcodes']);
         } elseif ($isbnMapping == 3) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['id'] == $isbnMappingId) {
-                    $propertyIsbn = $property['code'];
-                    break;
-                }
-            }
-            $this->isbn = $propertyIsbn;
+            $this->isbn = $this->getBarcodeWithId($isbnMappingId,$itemData['barcodes']);
         }
 
         $mpnMapping = $this->ceresConfig->seo->mpnMapping;
@@ -342,5 +294,27 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             }
         }
         return $variationProperty;
+    }
+
+    private function getFirstBarcode($barcodeValue,$barcodes){
+        $barcode = '';
+        foreach ($barcodes as $property) {
+            if ($property['type'] == $barcodeValue && $this->isWebshopReferrer($property['referrers'])) {
+                $barcode = $property['code'];
+                break;
+            }
+        }
+        return $barcode;
+    }
+
+    private function getBarcodeWithId($barcodeMappingId, $barcodes){
+        $barcode = '';
+        foreach ($barcodes as $property) {
+            if ($property['id'] == $barcodeMappingId) {
+                $barcode = $property['code'];
+                break;
+            }
+        }
+        return $barcode;
     }
 }
