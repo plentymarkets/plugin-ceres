@@ -7,7 +7,7 @@
                 {{ buttonTranslations[targetLang] }}
             </a>
             <a href="#" @click="refuseRedirect()" class="m-sm-1">
-                <i class="fa fa-close"></i>
+                <i class="fa fa-fw fa-close"></i>
             </a>
         </div>
     </div>
@@ -59,12 +59,6 @@ export default {
         },
     },
 
-    created()
-    {
-        // maybe not the smarted solution to prevent CLS
-        this.targetLang = "en";
-    },
-
     mounted()
     {
         if (!App.isShopBuilder)
@@ -72,10 +66,6 @@ export default {
             if (!window.localStorage.getItem('redirectDeactivated'))
             {
                 this.initialize();
-            }
-            else
-            {
-                this.targetLang = null;
             }
         }
     },
