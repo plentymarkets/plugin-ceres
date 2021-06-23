@@ -9785,6 +9785,31 @@ exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/object-prototype-accessors-forced.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-prototype-accessors-forced.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var IS_PURE = __webpack_require__(/*! ../internals/is-pure */ "./node_modules/core-js/internals/is-pure.js");
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
+
+// Forced replacement object prototype accessors methods
+module.exports = IS_PURE || !fails(function () {
+  var key = Math.random();
+  // In FF throws only define methods
+  // eslint-disable-next-line no-undef, no-useless-call -- required for testing
+  __defineSetter__.call(null, key, function () { /* empty */ });
+  delete global[key];
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/object-set-prototype-of.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/core-js/internals/object-set-prototype-of.js ***!
@@ -11812,6 +11837,64 @@ var assign = __webpack_require__(/*! ../internals/object-assign */ "./node_modul
 $({ target: 'Object', stat: true, forced: Object.assign !== assign }, {
   assign: assign
 });
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.object.define-getter.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.define-getter.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
+var FORCED = __webpack_require__(/*! ../internals/object-prototype-accessors-forced */ "./node_modules/core-js/internals/object-prototype-accessors-forced.js");
+var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
+var aFunction = __webpack_require__(/*! ../internals/a-function */ "./node_modules/core-js/internals/a-function.js");
+var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js");
+
+// `Object.prototype.__defineGetter__` method
+// https://tc39.es/ecma262/#sec-object.prototype.__defineGetter__
+if (DESCRIPTORS) {
+  $({ target: 'Object', proto: true, forced: FORCED }, {
+    __defineGetter__: function __defineGetter__(P, getter) {
+      definePropertyModule.f(toObject(this), P, { get: aFunction(getter), enumerable: true, configurable: true });
+    }
+  });
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.object.define-setter.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.define-setter.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
+var FORCED = __webpack_require__(/*! ../internals/object-prototype-accessors-forced */ "./node_modules/core-js/internals/object-prototype-accessors-forced.js");
+var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
+var aFunction = __webpack_require__(/*! ../internals/a-function */ "./node_modules/core-js/internals/a-function.js");
+var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js");
+
+// `Object.prototype.__defineSetter__` method
+// https://tc39.es/ecma262/#sec-object.prototype.__defineSetter__
+if (DESCRIPTORS) {
+  $({ target: 'Object', proto: true, forced: FORCED }, {
+    __defineSetter__: function __defineSetter__(P, setter) {
+      definePropertyModule.f(toObject(this), P, { set: aFunction(setter), enumerable: true, configurable: true });
+    }
+  });
+}
 
 
 /***/ }),
@@ -61828,6 +61911,84 @@ function whenConsented(key, onConsent, onDecline) {
 
 /***/ }),
 
+/***/ "./resources/js/src/app/jQuery.js":
+/*!****************************************!*\
+  !*** ./resources/js/src/app/jQuery.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_object_define_getter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.define-getter.js */ "./node_modules/core-js/modules/es.object.define-getter.js");
+/* harmony import */ var core_js_modules_es_object_define_getter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_getter_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.define-setter.js */ "./node_modules/core-js/modules/es.object.define-setter.js");
+/* harmony import */ var core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+var _jQuery;
+
+function setJQuery(newJQuery) {
+  if (_jQuery && _jQuery !== newJQuery) {
+    console.warn("jQuery ".concat(_jQuery.fn.jquery, " is already included in Ceres. It's not recommended to register new instances of jQuery.")); // Copy ajax config to new jQuery instance
+
+    newJQuery.ajaxSetup(_jQuery.ajaxSetup()); // Copy registered jQuery plugins to new jQuery instance
+
+    Object.keys(_jQuery.fn).forEach(function (jQueryFn) {
+      if (!newJQuery.fn.hasOwnProperty(jQueryFn)) {
+        newJQuery.fn[jQueryFn] = _jQuery.fn[jQueryFn];
+      }
+    }); // unset existing setter to avoid endless loop
+
+    delete window.jQuery;
+  } // Store new jQuery instance in global object
+
+
+  _jQuery = newJQuery; // Add new setter to catch new assignments of jQuery instances
+
+  if (!window.__defineGetter__) {
+    Object.defineProperty(window, "jQuery", {
+      get: function get() {
+        return _jQuery;
+      },
+      set: setJQuery
+    });
+    Object.defineProperty(window, "$", {
+      get: function get() {
+        return _jQuery;
+      },
+      set: setJQuery
+    });
+  } else {
+    window.__defineGetter__("jQuery", function () {
+      return _jQuery;
+    });
+
+    window.__defineSetter__("jQuery", setJQuery);
+
+    window.__defineGetter__("$", function () {
+      return _jQuery;
+    });
+
+    window.__defineSetter__("$", setJQuery);
+  }
+} // assign initial jQuery instance
+
+
+setJQuery(jquery__WEBPACK_IMPORTED_MODULE_4___default.a);
+
+/***/ }),
+
 /***/ "./resources/js/src/app/main.js":
 /*!**************************************!*\
   !*** ./resources/js/src/app/main.js ***!
@@ -65698,6 +65859,9 @@ var actions = {
               event.target.reset();
               disableForm(event.target, false);
               _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+              document.dispatchEvent(new CustomEvent("contactFormSent", {
+                detail: formData
+              }));
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
@@ -68207,8 +68371,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
 /* harmony import */ var _app_plugins_script2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/plugins/script2 */ "./resources/js/src/app/plugins/script2.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _app_jQuery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/jQuery */ "./resources/js/src/app/jQuery.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
@@ -68299,8 +68462,6 @@ window.Vuex = vuex__WEBPACK_IMPORTED_MODULE_8__["default"];
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.use(_app_plugins_script2__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
-window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_11___default.a;
-window.$ = jquery__WEBPACK_IMPORTED_MODULE_11___default.a;
 
 
 

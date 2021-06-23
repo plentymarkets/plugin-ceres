@@ -5,11 +5,11 @@ import NotificationService from "./app/services/NotificationService";
 import TranslationService from "./app/services/TranslationService";
 import "bootstrap";
 import "owl.carousel";
-import jQuery from "jquery";
 import { createApp } from "./app";
 import { initClientListeners, initClientStore, createStore } from "./app/store";
 import { initListener } from "./app/services/ApiService";
 import { mount } from "./mount";
+import "./app/jQuery";
 
 Vue.prototype.$mount = mount;
 
@@ -40,8 +40,6 @@ if (window.__INITIAL_STATE__)
     store.replaceState(window.__INITIAL_STATE__);
 }
 
-window.jQuery = jQuery;
-window.$ = jQuery;
 window.Vue = Vue;
 window.Vuex = Vuex;
 window.NotificationService = NotificationService;
