@@ -90,7 +90,7 @@
                                             v-tooltip
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="{{ trans("Ceres::Template.addressEdit") }}"
+                                            title="{{ trans("Ceres::Template.addressEditTooltip") }}"
                                             class="btn btn-primary btn-medium btn-appearance mr-1"
                                             @click.prevent="showEditModal(address)"
                                             {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-edit'\"") | raw }}
@@ -198,7 +198,7 @@
                             </button>
                             <button
                                 type="button"
-                                class="btn btn-primary btn-appearance btn-medium"
+                                class="btn btn-danger btn-appearance btn-medium"
                                 :disabled="deleteModalWaiting" @click="deleteAddress"
                                 {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-remove'\"") | raw }}>
                                 <span>{{ trans("Ceres::Template.addressDelete") }}</span>
