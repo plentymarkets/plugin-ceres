@@ -20,8 +20,7 @@ export default {
     {
         return {
             redirectUrl: null,
-            targetLang: null,
-            isMounted: false
+            targetLang: null
         };
     },
     props:
@@ -40,6 +39,26 @@ export default {
             default: () => {}
         }
     },
+
+    computed:
+    {
+        browserLanguages()
+        {
+            if (!window)
+            {
+                return [];
+            }
+
+            return [
+                ...new Set(
+                    window.navigator.languages.map(
+                        (language) => language.split("-")[0]
+                    )
+                ),
+            ];
+        },
+    },
+
     created()
     {
         // maybe not the smarted solution to prevent CLS
@@ -48,8 +67,6 @@ export default {
 
     mounted()
     {
-        this.isMounted = true;
-
         if (!App.isShopBuilder)
         {
             if (!window.localStorage.getItem('redirectDeactivated'))
@@ -66,15 +83,10 @@ export default {
     methods: {
         initialize()
         {
-            // exclude the current language from the language list
-            const browserLanguages = this.getBrowserLanguages().filter(
-                (language) => language !== App.language
-            );
-
-            for (const browserLanguage of browserLanguages)
+            for (const browserLanguage of this.browserLanguages())
             {
-                // check if the language has a mapped target language
-                if (this.languageMap[browserLanguage])
+                // exclude current language and check if the language has a mapped target language
+                if (browserLanguage !== App.language && this.languageMap[browserLanguage])
                 {
                     this.redirectUrl = this.getLanguageUrl(browserLanguage);
 
@@ -100,17 +112,6 @@ export default {
             return document
                 .querySelector(`link[hreflang="${language}"]`)
                 ?.getAttribute("href");
-        },
-
-        getBrowserLanguages()
-        {
-            return [
-                ...new Set(
-                    window.navigator.languages.map(
-                        (language) => language.split("-")[0]
-                    )
-                ),
-            ];
         },
 
         refuseRedirect()
