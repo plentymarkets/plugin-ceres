@@ -18,15 +18,19 @@
     {{ Twig.do("set buttonTranslations = buttonTranslations | merge({(languageISO): trans('Ceres::Template.languageDetectionButton', [], languageISO ) })") }}
 {{ Twig.endfor() }}
 
-<div class="language-detection {% if not isPreview %}position-absolute {% endif %}header-fw widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}"
-    data-scroll-void>
-    <language-detection
-        class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"
-        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}
-        :auto-redirect="{{ redirect | json_encode }}"
-        :text-translations="{{ Twig.print('textTranslations | json_encode') }}"
-        :button-translations="{{ Twig.print('buttonTranslations | json_encode') }}"
-        :language-map="{{ Twig.print("webstoreConfig.browserLanguage | json_encode") }}"
-    >
-    </language-detection>
+<div class="language-detection header-fw widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+    <div class="bg-appearance">
+        <div class="container-max">
+
+            <language-detection
+                class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"
+                {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}
+                :auto-redirect="{{ redirect | json_encode }}"
+                :text-translations="{{ Twig.print('textTranslations | json_encode') }}"
+                :button-translations="{{ Twig.print('buttonTranslations | json_encode') }}"
+                :language-map="{{ Twig.print("webstoreConfig.browserLanguage | json_encode") }}"
+            >
+            </language-detection>
+        </div>
+    </div>
 </div>

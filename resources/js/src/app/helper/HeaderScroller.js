@@ -77,13 +77,7 @@ export default class HeaderScroller
 
         this.headerParent?.children.forEach(element =>
         {
-            let elementHeight = 0;
-
-            // skip elements with the data attribute "data-scroll-void" and interpret their height as zero
-            if (!element.dataset.hasOwnProperty("scrollVoid"))
-            {
-                elementHeight = element.getBoundingClientRect().height;
-            }
+            const elementHeight = element.getBoundingClientRect().height;
 
             this.allHeaderChildrenHeights.push(elementHeight);
             this.headerHeight += elementHeight;
@@ -133,13 +127,8 @@ export default class HeaderScroller
             offset = absolutePos - window.pageYOffset;
             elem.style.position = "absolute";
 
-            // Element should not be considerd in height calculation of following elements
-            if (elem.dataset.hasOwnProperty("scrollVoid"))
-            {
-                continue;
-            }
             // Element is unfixed and should scroll indefinetly
-            else if (elem.classList.contains("unfixed"))
+            if (elem.classList.contains("unfixed"))
             {
                 elem.style.top = offset + "px";
             }

@@ -1,24 +1,19 @@
 <template>
-    <div class="bg-appearance" v-show="targetLang">
-        <div class="container-max">
-            <div class="d-flex py-2">
-                <div class="align-self-center mr-auto">{{ textTranslations[targetLang] }}</div>
+    <div v-if="targetLang" class="d-flex py-2">
+        <div class="align-self-center mr-auto">{{ textTranslations[targetLang] }}</div>
 
-                <div class="align-self-center text-nowrap">
-                    <a :href="redirectUrl" :class="'btn btn-sm btn-appearance'">
-                        {{ buttonTranslations[targetLang] }}
-                    </a>
-                    <a href="#" @click="refuseRedirect()" class="m-sm-1">
-                        <i class="fa fa-fw fa-close"></i>
-                    </a>
-                </div>
-            </div>
+        <div class="align-self-center text-nowrap">
+            <a :href="redirectUrl" :class="'btn btn-sm btn-appearance'">
+                {{ buttonTranslations[targetLang] }}
+            </a>
+            <a href="#" @click="refuseRedirect()" class="m-sm-1">
+                <i class="fa fa-fw fa-close"></i>
+            </a>
         </div>
     </div>
 </template>
 
 <script>
-import { whenConsented } from "../../helper/whenConsented";
 import { navigateTo } from "../../services/UrlService";
 export default {
     name: "language-detection",
@@ -76,10 +71,6 @@ export default {
                 this.initialize();
             }
         }
-        else
-        {
-            this.targetLang = App.defaultLanguage;
-        }
     },
 
     methods: {
@@ -119,16 +110,7 @@ export default {
         refuseRedirect()
         {
             this.targetLang = null;
-
-            whenConsented(
-                "convenience.languageDetection",
-                () =>
-                {
-                    window.localStorage.setItem("redirectDeactivated", true);
-                },
-                () =>
-                {
-                });
+            window.localStorage.setItem("redirectDeactivated", true);
         }
     },
 };

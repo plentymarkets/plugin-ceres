@@ -271,14 +271,6 @@ class TemplateServiceProvider extends ServiceProvider
             ]
         );
 
-        $consentRepository->registerConsentGroup(
-            'convenience',
-            'Ceres::Template.consentGroupConvenienceLabel',
-            [
-                'position' => 500,
-                'description' => 'Ceres::Template.consentGroupConvenienceDescription'
-            ]
-        );
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreRepository */
         $webstoreRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
@@ -379,25 +371,6 @@ class TemplateServiceProvider extends ServiceProvider
                 ]
             );
         }
-
-        $consentRepository->registerConsent(
-            'languageDetection',
-            'Ceres::Template.consentLanguageDetectionLabel',
-            [
-                'position' => 400,
-                'description' => 'Ceres::Template.consentLanguageDetectionDescription',
-                'provider' => 'Ceres::Template.headerCompanyName',
-                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
-                'policyUrl' => function () {
-                    /** @var ShopUrls $shopUrls */
-                    $shopUrls = pluginApp(ShopUrls::class);
-                    /** @var UrlQuery $urlQuery */
-                    $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
-                    return $urlQuery->toAbsoluteUrl();
-                },
-                'group' => 'convenience'
-            ]
-        );
     }
 
     private function registerConfigValues()
