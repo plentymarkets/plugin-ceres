@@ -28,7 +28,7 @@ var ADDRESS_EMAIL_TYPE_ID = 5;
   },
   computed: {
     showMailChanged: function showMailChanged() {
-      return this.billingAddressMail !== this.userMail;
+      return !!this.billingAddressMail && this.billingAddressMail !== this.userMail;
     },
     billingAddressMail: function billingAddressMail() {
       var _this$$store$state$ad, _this$$store$state$ad2;
