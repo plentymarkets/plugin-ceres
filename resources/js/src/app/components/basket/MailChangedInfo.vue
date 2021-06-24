@@ -22,7 +22,7 @@ export default {
     {
         showMailChanged()
         {
-            return this.billingAddressMail !== this.userMail;
+            return !!this.billingAddressMail && this.billingAddressMail !== this.userMail;
         },
 
         billingAddressMail()
