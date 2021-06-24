@@ -2453,7 +2453,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _helper_whenConsented__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../helper/whenConsented */ "./resources/js/src/app/helper/whenConsented.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 
@@ -2498,6 +2499,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "language-detection",
@@ -2538,6 +2544,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       if (!window.localStorage.getItem('redirectDeactivated')) {
         this.initialize();
       }
+    } else {
+      this.targetLang = App.defaultLanguage;
     }
   },
   methods: {
@@ -2556,7 +2564,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             if (this.redirectUrl) {
               // if a redirect url was found and the auto redirect is enabled, navigate to the redirectUrl
               if (this.autoRedirect) {
-                Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_14__["navigateTo"])(this.redirectUrl);
+                Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_15__["navigateTo"])(this.redirectUrl);
               } else {
                 this.targetLang = browserLanguage;
               }
@@ -2578,7 +2586,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     refuseRedirect: function refuseRedirect() {
       this.targetLang = null;
-      window.localStorage.setItem("redirectDeactivated", true);
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_14__["whenConsented"])("convenience.languageDetection", function () {
+        window.localStorage.setItem("redirectDeactivated", true);
+      }, function () {});
     }
   }
 });
@@ -39143,44 +39153,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.targetLang
-    ? _c("div", { staticClass: "d-flex py-2" }, [
-        _c("div", { staticClass: "align-self-center mr-auto" }, [
-          _vm._v(_vm._s(_vm.textTranslations[_vm.targetLang]))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "align-self-center text-nowrap" }, [
-          _c(
-            "a",
-            {
-              class: "btn btn-sm btn-appearance",
-              attrs: { href: _vm.redirectUrl }
-            },
-            [
-              _vm._v(
-                "\n            " +
-                  _vm._s(_vm.buttonTranslations[_vm.targetLang]) +
-                  "\n        "
-              )
-            ]
-          ),
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.targetLang,
+          expression: "targetLang"
+        }
+      ],
+      staticClass: "bg-appearance"
+    },
+    [
+      _c("div", { staticClass: "container-max" }, [
+        _c("div", { staticClass: "d-flex py-2" }, [
+          _c("div", { staticClass: "align-self-center mr-auto" }, [
+            _vm._v(_vm._s(_vm.textTranslations[_vm.targetLang]))
+          ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "m-sm-1",
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  return _vm.refuseRedirect()
+          _c("div", { staticClass: "align-self-center text-nowrap" }, [
+            _c(
+              "a",
+              {
+                class: "btn btn-sm btn-appearance",
+                attrs: { href: _vm.redirectUrl }
+              },
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.buttonTranslations[_vm.targetLang]) +
+                    "\n                "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "m-sm-1",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    return _vm.refuseRedirect()
+                  }
                 }
-              }
-            },
-            [_c("i", { staticClass: "fa fa-fw fa-close" })]
-          )
+              },
+              [_c("i", { staticClass: "fa fa-fw fa-close" })]
+            )
+          ])
         ])
       ])
-    : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -62668,7 +62694,11 @@ var HeaderScroller = /*#__PURE__*/function () {
       this.headerHeight = 0;
       this.allHeaderChildrenHeights = [];
       (_this$headerParent = this.headerParent) === null || _this$headerParent === void 0 ? void 0 : _this$headerParent.children.forEach(function (element) {
-        var elementHeight = element.getBoundingClientRect().height;
+        var elementHeight = 0; // skip elements with the data attribute "data-scroll-void" and interpret their height as zero
+
+        if (!element.dataset.hasOwnProperty("scrollVoid")) {
+          elementHeight = element.getBoundingClientRect().height;
+        }
 
         _this.allHeaderChildrenHeights.push(elementHeight);
 
@@ -62712,20 +62742,23 @@ var HeaderScroller = /*#__PURE__*/function () {
         var elem = this.headerParent.children[i];
         var elemHeight = this.allHeaderChildrenHeights[i];
         offset = absolutePos - window.pageYOffset;
-        elem.style.position = "absolute"; // Element is unfixed and should scroll indefinetly
+        elem.style.position = "absolute"; // Element should not be considerd in height calculation of following elements
 
-        if (elem.classList.contains("unfixed")) {
-          elem.style.top = offset + "px";
-        } // Element is fixed and should scroll until it hits top of header or next fixed element
-        else {
-            elem.style.top = offset < 0 ? 0 : offset + "px";
+        if (elem.dataset.hasOwnProperty("scrollVoid")) {
+          continue;
+        } // Element is unfixed and should scroll indefinetly
+        else if (elem.classList.contains("unfixed")) {
+            elem.style.top = offset + "px";
+          } // Element is fixed and should scroll until it hits top of header or next fixed element
+          else {
+              elem.style.top = offset < 0 ? 0 : offset + "px";
 
-            if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
-              elem.style.top = fixedElementsHeight + "px";
+              if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
+                elem.style.top = fixedElementsHeight + "px";
+              }
+
+              fixedElementsHeight = fixedElementsHeight + elemHeight;
             }
-
-            fixedElementsHeight = fixedElementsHeight + elemHeight;
-          }
 
         absolutePos = absolutePos + elemHeight;
       }

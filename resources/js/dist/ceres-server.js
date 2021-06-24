@@ -12923,7 +12923,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _helper_whenConsented__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../helper/whenConsented */ "./resources/js/src/app/helper/whenConsented.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 
@@ -12968,6 +12969,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "language-detection",
@@ -13008,6 +13014,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       if (!window.localStorage.getItem('redirectDeactivated')) {
         this.initialize();
       }
+    } else {
+      this.targetLang = App.defaultLanguage;
     }
   },
   methods: {
@@ -13026,7 +13034,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             if (this.redirectUrl) {
               // if a redirect url was found and the auto redirect is enabled, navigate to the redirectUrl
               if (this.autoRedirect) {
-                Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_14__["navigateTo"])(this.redirectUrl);
+                Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_15__["navigateTo"])(this.redirectUrl);
               } else {
                 this.targetLang = browserLanguage;
               }
@@ -13048,7 +13056,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     refuseRedirect: function refuseRedirect() {
       this.targetLang = null;
-      window.localStorage.setItem("redirectDeactivated", true);
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_14__["whenConsented"])("convenience.languageDetection", function () {
+        window.localStorage.setItem("redirectDeactivated", true);
+      }, function () {});
     }
   }
 });
@@ -53610,24 +53620,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.targetLang
-    ? _c("div", { staticClass: "d-flex py-2" }, [
-        _vm._ssrNode(
-          '<div class="align-self-center mr-auto">' +
-            _vm._ssrEscape(_vm._s(_vm.textTranslations[_vm.targetLang])) +
-            '</div> <div class="align-self-center text-nowrap"><a' +
-            _vm._ssrAttr("href", _vm.redirectUrl) +
-            _vm._ssrClass(null, "btn btn-sm btn-appearance") +
-            ">" +
-            _vm._ssrEscape(
-              "\n            " +
-                _vm._s(_vm.buttonTranslations[_vm.targetLang]) +
-                "\n        "
-            ) +
-            '</a> <a href="#" class="m-sm-1"><i class="fa fa-fw fa-close"></i></a></div>'
-        )
-      ])
-    : _vm._e()
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.targetLang,
+          expression: "targetLang"
+        }
+      ],
+      staticClass: "bg-appearance"
+    },
+    [
+      _vm._ssrNode(
+        '<div class="container-max"><div class="d-flex py-2"><div class="align-self-center mr-auto">' +
+          _vm._ssrEscape(_vm._s(_vm.textTranslations[_vm.targetLang])) +
+          '</div> <div class="align-self-center text-nowrap"><a' +
+          _vm._ssrAttr("href", _vm.redirectUrl) +
+          _vm._ssrClass(null, "btn btn-sm btn-appearance") +
+          ">" +
+          _vm._ssrEscape(
+            "\n                    " +
+              _vm._s(_vm.buttonTranslations[_vm.targetLang]) +
+              "\n                "
+          ) +
+          '</a> <a href="#" class="m-sm-1"><i class="fa fa-fw fa-close"></i></a></div></div></div>'
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
