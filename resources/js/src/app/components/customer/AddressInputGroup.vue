@@ -178,10 +178,10 @@
 
             <!-- MailInput -->
             <div class="col-12">
+                <hr class="mt-0">
                 <div class="row">
                     <div class="col-12" v-if="isInOptionalFields('de', 'delivery_address.email')">
-                        <hr>
-                        <div class="input-unit mb-0" data-model="email" v-validate:text="isInRequiredFields('de', 'delivery_address.email')">
+                        <div class="input-unit" data-model="email" v-validate:text="isInRequiredFields('de', 'delivery_address.email')">
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="packing-station-de-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "de", "delivery_address.email") }}</label>
                         </div>
@@ -367,14 +367,26 @@
                 </div>
             </div>
 
+            <div class="col-12 col-sm-4" data-testing="address-country-select">
+                <country-select
+                    :selected-country-id="value.countryId"
+                    :selected-state-id="value.stateId"
+                    @country-changed="onSelectedCountryChanged($event)"
+                    @state-changed="emitInputEvent('stateId', $event)"
+                    :address-type="addressType"
+                    :optional-address-fields="optionalAddressFields"
+                    :required-address-fields="requiredAddressFields">
+                </country-select>
+            </div>
+
             <slot name="custom-address-fields"></slot>
 
             <!-- MailInput -->
             <div class="col-12">
+                <hr class="mt-0">
                 <div class="row">
                     <div class="col-12" v-if="isInOptionalFields('de', 'billing_address.email')">
-                        <hr>
-                        <div class="input-unit mb-0" data-model="email" v-validate:text="isInRequiredFields('de', 'billing_address.email')">
+                        <div class="input-unit" data-model="email" v-validate:text="isInRequiredFields('de', 'billing_address.email')">
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="billing-address-de-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "de", "billing_address.email") }}</label>
                         </div>
@@ -570,14 +582,26 @@
                 </div>
             </div>
 
+            <div class="col-12 col-sm-4" data-testing="address-country-select">
+                <country-select
+                    :selected-country-id="value.countryId"
+                    :selected-state-id="value.stateId"
+                    @country-changed="onSelectedCountryChanged($event)"
+                    @state-changed="emitInputEvent('stateId', $event)"
+                    :address-type="addressType"
+                    :optional-address-fields="optionalAddressFields"
+                    :required-address-fields="requiredAddressFields">
+                </country-select>
+            </div>
+
             <slot name="custom-address-fields"></slot>
 
             <!-- MailInput -->
             <div class="col-12">
+                <hr class="mt-0">
                 <div class="row">
                     <div class="col-12" v-if="isInOptionalFields('gb', 'billing_address.email')">
-                        <hr>
-                        <div class="input-unit mb-0" data-model="email" v-validate:text="isInRequiredFields('gb', 'billing_address.email')">
+                        <div class="input-unit" data-model="email" v-validate:text="isInRequiredFields('gb', 'billing_address.email')">
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="billing-address-gb-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "gb", "billing_address.email") }}</label>
                         </div>
@@ -761,14 +785,26 @@
                 </div>
             </div>
 
+            <div class="col-12 col-sm-4" data-testing="address-country-select">
+                <country-select
+                    :selected-country-id="value.countryId"
+                    :selected-state-id="value.stateId"
+                    @country-changed="onSelectedCountryChanged($event)"
+                    @state-changed="emitInputEvent('stateId', $event)"
+                    :address-type="addressType"
+                    :optional-address-fields="optionalAddressFields"
+                    :required-address-fields="requiredAddressFields">
+                </country-select>
+            </div>
+
             <slot name="custom-address-fields"></slot>
 
             <!-- MailInput -->
             <div class="col-12">
+                <hr class="mt-0">
                 <div class="row">
                     <div class="col-12" v-if="isInOptionalFields('de', 'delivery_address.email')">
-                        <hr>
-                        <div class="input-unit mb-0" data-model="email" v-validate:text="isInRequiredFields('de', 'delivery_address.email')">
+                        <div class="input-unit" data-model="email" v-validate:text="isInRequiredFields('de', 'delivery_address.email')">
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="delivery-address-de-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "de", "delivery_address.email") }}</label>
                         </div>
@@ -946,14 +982,26 @@
                 </div>
             </div>
 
+            <div class="col-12 col-sm-4" data-testing="address-country-select">
+                <country-select
+                    :selected-country-id="value.countryId"
+                    :selected-state-id="value.stateId"
+                    @country-changed="onSelectedCountryChanged($event)"
+                    @state-changed="emitInputEvent('stateId', $event)"
+                    :address-type="addressType"
+                    :optional-address-fields="optionalAddressFields"
+                    :required-address-fields="requiredAddressFields">
+                </country-select>
+            </div>
+
             <slot name="custom-address-fields"></slot>
 
             <!-- MailInput -->
             <div class="col-12">
+                <hr class="mt-0">
                 <div class="row">
                     <div class="col-12" v-if="isInOptionalFields('gb', 'delivery_address.email')">
-                        <hr>
-                        <div class="input-unit mb-0" data-model="email" v-validate:text="isInRequiredFields('gb', 'delivery_address.email')">
+                        <div class="input-unit" data-model="email" v-validate:text="isInRequiredFields('gb', 'delivery_address.email')">
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="delivery-address-gb-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "gb", "delivery_address.email") }}</label>
                         </div>
@@ -961,18 +1009,6 @@
                 </div>
             </div>
         </template>
-
-        <div class="col-12 col-sm-4" data-testing="address-country-select">
-            <country-select
-                :selected-country-id="value.countryId"
-                :selected-state-id="value.stateId"
-                @country-changed="onSelectedCountryChanged($event)"
-                @state-changed="emitInputEvent('stateId', $event)"
-                :address-type="addressType"
-                :optional-address-fields="optionalAddressFields"
-                :required-address-fields="requiredAddressFields">
-            </country-select>
-        </div>
     </div>
 </template>
 
