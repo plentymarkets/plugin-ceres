@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-appearance" v-show="targetLang">
+    <div class="bg-appearance">
         <div class="container-max">
             <div class="d-flex py-2">
                 <div class="align-self-center mr-auto">{{ textTranslations[targetLang] }}</div>
@@ -88,10 +88,11 @@ export default {
             for (const browserLanguage of this.browserLanguages)
             {
                 // exclude current language and check if the language has a mapped target language
-                if (browserLanguage !== App.language && this.languageMap[browserLanguage])
+                if (this.languageMap[browserLanguage] !== App.language)
                 {
                     this.redirectUrl = this.getLanguageUrl(browserLanguage);
 
+                    // if the site is not configured in the language
                     if (this.redirectUrl)
                     {
                         // if a redirect url was found and the auto redirect is enabled, navigate to the redirectUrl
@@ -101,10 +102,16 @@ export default {
                         }
                         else
                         {
+                            // this line enables this component rendering
                             this.targetLang = browserLanguage;
                         }
                         break;
                     }
+                }
+                // if the client is already the wanted language
+                else if (this.languageMap[browserLanguage] === App.language)
+                {
+                    break;
                 }
             }
         },
