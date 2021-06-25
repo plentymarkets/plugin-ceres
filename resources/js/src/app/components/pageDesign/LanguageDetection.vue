@@ -67,7 +67,7 @@ export default {
         },
     },
 
-    beforeMount()
+    mounted()
     {
         if (!App.isShopBuilder)
         {
