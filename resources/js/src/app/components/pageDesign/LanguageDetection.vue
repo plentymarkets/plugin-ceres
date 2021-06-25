@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-appearance">
+    <div class="bg-appearance" v-if="targetLang">
         <div class="container-max">
             <div class="d-flex py-2">
                 <div class="align-self-center mr-auto">{{ textTranslations[targetLang] }}</div>
