@@ -9,13 +9,14 @@
                 <div
                     class="component-loading"
                     :id="'addressMultiSelect' + _uid"
-                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'is-loading disabled': isBasketLoading || isCheckoutReadonly}"
+                    v-bind:class="{'card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'is-loading disabled': isBasketLoading || isCheckoutReadonly}"
                     @click="onDropdownClicked($event)"
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                     data-boundary="window"
-                    data-flip="false">
+                    data-flip="false"
+                    ref="dropdown">
 
                     <div class="item-inner" :class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
@@ -36,13 +37,27 @@
                         v-tooltip
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="{{ trans("Ceres::Template.addressAddAddress") }}"
-                        class="btn btn-primary btn-appearance btn-medium btn-only-icon-xs-down"
+                        title="{{ trans("Ceres::Template.addressAddAddressTooltip") }}"
+                        class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down d-block"
                         v-if="isAddAddressEnabled" @click.prevent="showAddModal()" :disabled="isBasketLoading || isCheckoutReadonly"
                         {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-add'\"") | raw }}
                     >
                         <span>{{ trans("Ceres::Template.addressAddAddress") }}</span>
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+
+                    <button
+                        v-tooltip
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        @click="toggleDropdown($event)"
+                        title="{{ trans("Ceres::Template.addressChangeTooltip") }}"
+                        class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down mt-2 d-block"
+                        v-if="shouldShowEditAddressButton" :disabled="isBasketLoading || isCheckoutReadonly"
+                        {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-open'\"") | raw }}
+                    >
+                        <span>{{ trans("Ceres::Template.addressChange") }}</span>
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
                 </div>
 
@@ -70,16 +85,17 @@
                             </span>
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
-                                    <span class="item-edit">
+                                    <span class="item-edit ml-auto">
                                         <button
                                             v-tooltip
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="{{ trans("Ceres::Template.addressEdit") }}"
-                                            class="btn btn-primary btn-appearance"
+                                            title="{{ trans("Ceres::Template.addressEditTooltip") }}"
+                                            class="btn btn-primary btn-medium btn-appearance mr-1"
                                             @click.prevent="showEditModal(address)"
                                             {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-edit'\"") | raw }}
                                         >
+                                            <span>{{ trans("Ceres::Template.addressEdit") }}</span>
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
@@ -182,7 +198,7 @@
                             </button>
                             <button
                                 type="button"
-                                class="btn btn-primary btn-appearance btn-medium"
+                                class="btn btn-danger btn-appearance btn-medium"
                                 :disabled="deleteModalWaiting" @click="deleteAddress"
                                 {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-remove'\"") | raw }}>
                                 <span>{{ trans("Ceres::Template.addressDelete") }}</span>

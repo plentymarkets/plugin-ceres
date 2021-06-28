@@ -22,7 +22,8 @@ export default Vue.component("invoice-address-select", {
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
             :padding-inline-styles="paddingInlineStyles"
-            data-testing="billing-address-select">
+            data-testing="billing-address-select"
+            :email="email">
         </address-select>
     `,
 
@@ -62,7 +63,8 @@ export default Vue.component("invoice-address-select", {
         {
             type: String,
             default: null
-        }
+        },
+        email: String
     },
 
     computed: mapState({
