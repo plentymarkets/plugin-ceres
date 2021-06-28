@@ -12923,7 +12923,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _helper_whenConsented__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../helper/whenConsented */ "./resources/js/src/app/helper/whenConsented.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 
@@ -12968,6 +12969,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "language-detection",
@@ -13003,11 +13009,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       })));
     }
   },
-  beforeMount: function beforeMount() {
+  mounted: function mounted() {
     if (!App.isShopBuilder) {
       if (!window.localStorage.getItem('redirectDeactivated')) {
         this.initialize();
       }
+    } else {
+      this.targetLang = App.defaultLanguage;
     }
   },
   methods: {
@@ -13018,22 +13026,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var browserLanguage = _step.value;
+          var targetLang = this.languageMap[browserLanguage]; // exclude current language and check if the language has a mapped target language
 
-          // exclude current language and check if the language has a mapped target language
-          if (browserLanguage !== App.language && this.languageMap[browserLanguage]) {
-            this.redirectUrl = this.getLanguageUrl(browserLanguage);
+          if (targetLang !== App.language) {
+            this.redirectUrl = this.getLanguageUrl(targetLang); // if the site is not configured in the language
 
             if (this.redirectUrl) {
               // if a redirect url was found and the auto redirect is enabled, navigate to the redirectUrl
               if (this.autoRedirect) {
-                Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_14__["navigateTo"])(this.redirectUrl);
+                Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_15__["navigateTo"])(this.redirectUrl);
               } else {
-                this.targetLang = browserLanguage;
+                // this line enables this component rendering
+                this.targetLang = targetLang;
               }
 
               break;
             }
-          }
+          } // if the client is already the wanted language
+          else if (targetLang === App.language) {
+              break;
+            }
         }
       } catch (err) {
         _iterator.e(err);
@@ -13048,7 +13060,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     refuseRedirect: function refuseRedirect() {
       this.targetLang = null;
-      window.localStorage.setItem("redirectDeactivated", true);
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_14__["whenConsented"])("convenience.languageDetection", function () {
+        window.localStorage.setItem("redirectDeactivated", true);
+      }, function () {});
     }
   }
 });
@@ -53611,20 +53625,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.targetLang
-    ? _c("div", { staticClass: "d-flex py-2" }, [
+    ? _c("div", { staticClass: "bg-appearance" }, [
         _vm._ssrNode(
-          '<div class="align-self-center mr-auto">' +
+          '<div class="container-max"><div class="d-flex py-2"><div class="align-self-center mr-auto">' +
             _vm._ssrEscape(_vm._s(_vm.textTranslations[_vm.targetLang])) +
             '</div> <div class="align-self-center text-nowrap"><a' +
             _vm._ssrAttr("href", _vm.redirectUrl) +
             _vm._ssrClass(null, "btn btn-sm btn-appearance") +
             ">" +
             _vm._ssrEscape(
-              "\n            " +
+              "\n                    " +
                 _vm._s(_vm.buttonTranslations[_vm.targetLang]) +
-                "\n        "
+                "\n                "
             ) +
-            '</a> <a href="#" class="m-sm-1"><i class="fa fa-fw fa-close"></i></a></div>'
+            '</a> <a href="#" class="m-sm-1"><i class="fa fa-fw fa-close"></i></a></div></div></div>'
         )
       ])
     : _vm._e()
@@ -60316,10 +60330,10 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*!*********************************************************!*\
   !*** ./node_modules/vue-template-compiler/package.json ***!
   \*********************************************************/
-/*! exports provided: name, version, description, main, unpkg, jsdelivr, browser, types, repository, keywords, author, license, bugs, homepage, dependencies, devDependencies, default */
+/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"vue-template-compiler\",\"version\":\"2.6.12\",\"description\":\"template compiler for Vue 2.0\",\"main\":\"index.js\",\"unpkg\":\"browser.js\",\"jsdelivr\":\"browser.js\",\"browser\":\"browser.js\",\"types\":\"types/index.d.ts\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"keywords\":[\"vue\",\"compiler\"],\"author\":\"Evan You\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"dependencies\":{\"he\":\"^1.1.0\",\"de-indent\":\"^1.0.2\"},\"devDependencies\":{\"vue\":\"file:../..\"}}");
+module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/Users/christophjohannsen/workspace/localsystem/plugins/inbox/set_plugins/1/Ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/Users/christophjohannsen/workspace/localsystem/plugins/inbox/set_plugins/1/Ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
 
 /***/ }),
 
