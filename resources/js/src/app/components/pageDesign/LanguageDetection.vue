@@ -87,10 +87,11 @@ export default {
         {
             for (const browserLanguage of this.browserLanguages)
             {
+                const targetLang = this.languageMap[browserLanguage];
                 // exclude current language and check if the language has a mapped target language
-                if (this.languageMap[browserLanguage] !== App.language)
+                if (targetLang !== App.language)
                 {
-                    this.redirectUrl = this.getLanguageUrl(browserLanguage);
+                    this.redirectUrl = this.getLanguageUrl(targetLang);
 
                     // if the site is not configured in the language
                     if (this.redirectUrl)
@@ -103,13 +104,13 @@ export default {
                         else
                         {
                             // this line enables this component rendering
-                            this.targetLang = browserLanguage;
+                            this.targetLang = targetLang;
                         }
                         break;
                     }
                 }
                 // if the client is already the wanted language
-                else if (this.languageMap[browserLanguage] === App.language)
+                else if (targetLang === App.language)
                 {
                     break;
                 }
