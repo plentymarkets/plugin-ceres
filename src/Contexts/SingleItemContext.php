@@ -314,7 +314,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     private function getFirstBarcode($barcodes, $barcodeType){
         $barcode = '';
         foreach ($barcodes as $property) {
-            if (str_starts_with($property['type'], $barcodeType) && $this->isWebshopReferrer($property['referrers'])) {
+            if (strpos($property['type'], $barcodeType) === 0 && $this->isWebshopReferrer($property['referrers'])) {
                 $barcode = $property['code'];
                 break;
             }
