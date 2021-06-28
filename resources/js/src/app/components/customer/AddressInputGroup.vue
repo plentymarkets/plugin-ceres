@@ -174,6 +174,18 @@
                 </div>
             </div>
 
+            <div class="col-12 col-sm-4" data-testing="address-country-select">
+                <country-select
+                    :selected-country-id="value.countryId"
+                    :selected-state-id="value.stateId"
+                    @country-changed="onSelectedCountryChanged($event)"
+                    @state-changed="emitInputEvent('stateId', $event)"
+                    :address-type="addressType"
+                    :optional-address-fields="optionalAddressFields"
+                    :required-address-fields="requiredAddressFields">
+                </country-select>
+            </div>
+
             <slot name="custom-address-fields"></slot>
 
             <!-- MailInput -->
